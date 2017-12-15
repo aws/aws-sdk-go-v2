@@ -12,129 +12,187 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
 )
 
-// DirectConnectAPI provides an interface to enable mocking the
-// directconnect.DirectConnect service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Direct Connect.
-//    func myFunc(svc directconnectiface.DirectConnectAPI) bool {
-//        // Make svc.AllocateConnectionOnInterconnect request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := directconnect.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDirectConnectClient struct {
-//        directconnectiface.DirectConnectAPI
-//    }
-//    func (m *mockDirectConnectClient) AllocateConnectionOnInterconnect(input *directconnect.AllocateConnectionOnInterconnectInput) (*directconnect.DisassociateConnectionFromLagOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDirectConnectClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DirectConnectAPI interface {
+// AllocateConnectionOnInterconnectRequester provides the interface for the AllocateConnectionOnInterconnectRequest API operation.
+type AllocateConnectionOnInterconnectRequester interface {
 	AllocateConnectionOnInterconnectRequest(*directconnect.AllocateConnectionOnInterconnectInput) directconnect.AllocateConnectionOnInterconnectRequest
-
-	AllocateHostedConnectionRequest(*directconnect.AllocateHostedConnectionInput) directconnect.AllocateHostedConnectionRequest
-
-	AllocatePrivateVirtualInterfaceRequest(*directconnect.AllocatePrivateVirtualInterfaceInput) directconnect.AllocatePrivateVirtualInterfaceRequest
-
-	AllocatePublicVirtualInterfaceRequest(*directconnect.AllocatePublicVirtualInterfaceInput) directconnect.AllocatePublicVirtualInterfaceRequest
-
-	AssociateConnectionWithLagRequest(*directconnect.AssociateConnectionWithLagInput) directconnect.AssociateConnectionWithLagRequest
-
-	AssociateHostedConnectionRequest(*directconnect.AssociateHostedConnectionInput) directconnect.AssociateHostedConnectionRequest
-
-	AssociateVirtualInterfaceRequest(*directconnect.AssociateVirtualInterfaceInput) directconnect.AssociateVirtualInterfaceRequest
-
-	ConfirmConnectionRequest(*directconnect.ConfirmConnectionInput) directconnect.ConfirmConnectionRequest
-
-	ConfirmPrivateVirtualInterfaceRequest(*directconnect.ConfirmPrivateVirtualInterfaceInput) directconnect.ConfirmPrivateVirtualInterfaceRequest
-
-	ConfirmPublicVirtualInterfaceRequest(*directconnect.ConfirmPublicVirtualInterfaceInput) directconnect.ConfirmPublicVirtualInterfaceRequest
-
-	CreateBGPPeerRequest(*directconnect.CreateBGPPeerInput) directconnect.CreateBGPPeerRequest
-
-	CreateConnectionRequest(*directconnect.CreateConnectionInput) directconnect.CreateConnectionRequest
-
-	CreateInterconnectRequest(*directconnect.CreateInterconnectInput) directconnect.CreateInterconnectRequest
-
-	CreateLagRequest(*directconnect.CreateLagInput) directconnect.CreateLagRequest
-
-	CreatePrivateVirtualInterfaceRequest(*directconnect.CreatePrivateVirtualInterfaceInput) directconnect.CreatePrivateVirtualInterfaceRequest
-
-	CreatePublicVirtualInterfaceRequest(*directconnect.CreatePublicVirtualInterfaceInput) directconnect.CreatePublicVirtualInterfaceRequest
-
-	DeleteBGPPeerRequest(*directconnect.DeleteBGPPeerInput) directconnect.DeleteBGPPeerRequest
-
-	DeleteConnectionRequest(*directconnect.DeleteConnectionInput) directconnect.DeleteConnectionRequest
-
-	DeleteInterconnectRequest(*directconnect.DeleteInterconnectInput) directconnect.DeleteInterconnectRequest
-
-	DeleteLagRequest(*directconnect.DeleteLagInput) directconnect.DeleteLagRequest
-
-	DeleteVirtualInterfaceRequest(*directconnect.DeleteVirtualInterfaceInput) directconnect.DeleteVirtualInterfaceRequest
-
-	DescribeConnectionLoaRequest(*directconnect.DescribeConnectionLoaInput) directconnect.DescribeConnectionLoaRequest
-
-	DescribeConnectionsRequest(*directconnect.DescribeConnectionsInput) directconnect.DescribeConnectionsRequest
-
-	DescribeConnectionsOnInterconnectRequest(*directconnect.DescribeConnectionsOnInterconnectInput) directconnect.DescribeConnectionsOnInterconnectRequest
-
-	DescribeHostedConnectionsRequest(*directconnect.DescribeHostedConnectionsInput) directconnect.DescribeHostedConnectionsRequest
-
-	DescribeInterconnectLoaRequest(*directconnect.DescribeInterconnectLoaInput) directconnect.DescribeInterconnectLoaRequest
-
-	DescribeInterconnectsRequest(*directconnect.DescribeInterconnectsInput) directconnect.DescribeInterconnectsRequest
-
-	DescribeLagsRequest(*directconnect.DescribeLagsInput) directconnect.DescribeLagsRequest
-
-	DescribeLoaRequest(*directconnect.DescribeLoaInput) directconnect.DescribeLoaRequest
-
-	DescribeLocationsRequest(*directconnect.DescribeLocationsInput) directconnect.DescribeLocationsRequest
-
-	DescribeTagsRequest(*directconnect.DescribeTagsInput) directconnect.DescribeTagsRequest
-
-	DescribeVirtualGatewaysRequest(*directconnect.DescribeVirtualGatewaysInput) directconnect.DescribeVirtualGatewaysRequest
-
-	DescribeVirtualInterfacesRequest(*directconnect.DescribeVirtualInterfacesInput) directconnect.DescribeVirtualInterfacesRequest
-
-	DisassociateConnectionFromLagRequest(*directconnect.DisassociateConnectionFromLagInput) directconnect.DisassociateConnectionFromLagRequest
-
-	TagResourceRequest(*directconnect.TagResourceInput) directconnect.TagResourceRequest
-
-	UntagResourceRequest(*directconnect.UntagResourceInput) directconnect.UntagResourceRequest
-
-	UpdateLagRequest(*directconnect.UpdateLagInput) directconnect.UpdateLagRequest
 }
 
-var _ DirectConnectAPI = (*directconnect.DirectConnect)(nil)
+// AllocateHostedConnectionRequester provides the interface for the AllocateHostedConnectionRequest API operation.
+type AllocateHostedConnectionRequester interface {
+	AllocateHostedConnectionRequest(*directconnect.AllocateHostedConnectionInput) directconnect.AllocateHostedConnectionRequest
+}
+
+// AllocatePrivateVirtualInterfaceRequester provides the interface for the AllocatePrivateVirtualInterfaceRequest API operation.
+type AllocatePrivateVirtualInterfaceRequester interface {
+	AllocatePrivateVirtualInterfaceRequest(*directconnect.AllocatePrivateVirtualInterfaceInput) directconnect.AllocatePrivateVirtualInterfaceRequest
+}
+
+// AllocatePublicVirtualInterfaceRequester provides the interface for the AllocatePublicVirtualInterfaceRequest API operation.
+type AllocatePublicVirtualInterfaceRequester interface {
+	AllocatePublicVirtualInterfaceRequest(*directconnect.AllocatePublicVirtualInterfaceInput) directconnect.AllocatePublicVirtualInterfaceRequest
+}
+
+// AssociateConnectionWithLagRequester provides the interface for the AssociateConnectionWithLagRequest API operation.
+type AssociateConnectionWithLagRequester interface {
+	AssociateConnectionWithLagRequest(*directconnect.AssociateConnectionWithLagInput) directconnect.AssociateConnectionWithLagRequest
+}
+
+// AssociateHostedConnectionRequester provides the interface for the AssociateHostedConnectionRequest API operation.
+type AssociateHostedConnectionRequester interface {
+	AssociateHostedConnectionRequest(*directconnect.AssociateHostedConnectionInput) directconnect.AssociateHostedConnectionRequest
+}
+
+// AssociateVirtualInterfaceRequester provides the interface for the AssociateVirtualInterfaceRequest API operation.
+type AssociateVirtualInterfaceRequester interface {
+	AssociateVirtualInterfaceRequest(*directconnect.AssociateVirtualInterfaceInput) directconnect.AssociateVirtualInterfaceRequest
+}
+
+// ConfirmConnectionRequester provides the interface for the ConfirmConnectionRequest API operation.
+type ConfirmConnectionRequester interface {
+	ConfirmConnectionRequest(*directconnect.ConfirmConnectionInput) directconnect.ConfirmConnectionRequest
+}
+
+// ConfirmPrivateVirtualInterfaceRequester provides the interface for the ConfirmPrivateVirtualInterfaceRequest API operation.
+type ConfirmPrivateVirtualInterfaceRequester interface {
+	ConfirmPrivateVirtualInterfaceRequest(*directconnect.ConfirmPrivateVirtualInterfaceInput) directconnect.ConfirmPrivateVirtualInterfaceRequest
+}
+
+// ConfirmPublicVirtualInterfaceRequester provides the interface for the ConfirmPublicVirtualInterfaceRequest API operation.
+type ConfirmPublicVirtualInterfaceRequester interface {
+	ConfirmPublicVirtualInterfaceRequest(*directconnect.ConfirmPublicVirtualInterfaceInput) directconnect.ConfirmPublicVirtualInterfaceRequest
+}
+
+// CreateBGPPeerRequester provides the interface for the CreateBGPPeerRequest API operation.
+type CreateBGPPeerRequester interface {
+	CreateBGPPeerRequest(*directconnect.CreateBGPPeerInput) directconnect.CreateBGPPeerRequest
+}
+
+// CreateConnectionRequester provides the interface for the CreateConnectionRequest API operation.
+type CreateConnectionRequester interface {
+	CreateConnectionRequest(*directconnect.CreateConnectionInput) directconnect.CreateConnectionRequest
+}
+
+// CreateInterconnectRequester provides the interface for the CreateInterconnectRequest API operation.
+type CreateInterconnectRequester interface {
+	CreateInterconnectRequest(*directconnect.CreateInterconnectInput) directconnect.CreateInterconnectRequest
+}
+
+// CreateLagRequester provides the interface for the CreateLagRequest API operation.
+type CreateLagRequester interface {
+	CreateLagRequest(*directconnect.CreateLagInput) directconnect.CreateLagRequest
+}
+
+// CreatePrivateVirtualInterfaceRequester provides the interface for the CreatePrivateVirtualInterfaceRequest API operation.
+type CreatePrivateVirtualInterfaceRequester interface {
+	CreatePrivateVirtualInterfaceRequest(*directconnect.CreatePrivateVirtualInterfaceInput) directconnect.CreatePrivateVirtualInterfaceRequest
+}
+
+// CreatePublicVirtualInterfaceRequester provides the interface for the CreatePublicVirtualInterfaceRequest API operation.
+type CreatePublicVirtualInterfaceRequester interface {
+	CreatePublicVirtualInterfaceRequest(*directconnect.CreatePublicVirtualInterfaceInput) directconnect.CreatePublicVirtualInterfaceRequest
+}
+
+// DeleteBGPPeerRequester provides the interface for the DeleteBGPPeerRequest API operation.
+type DeleteBGPPeerRequester interface {
+	DeleteBGPPeerRequest(*directconnect.DeleteBGPPeerInput) directconnect.DeleteBGPPeerRequest
+}
+
+// DeleteConnectionRequester provides the interface for the DeleteConnectionRequest API operation.
+type DeleteConnectionRequester interface {
+	DeleteConnectionRequest(*directconnect.DeleteConnectionInput) directconnect.DeleteConnectionRequest
+}
+
+// DeleteInterconnectRequester provides the interface for the DeleteInterconnectRequest API operation.
+type DeleteInterconnectRequester interface {
+	DeleteInterconnectRequest(*directconnect.DeleteInterconnectInput) directconnect.DeleteInterconnectRequest
+}
+
+// DeleteLagRequester provides the interface for the DeleteLagRequest API operation.
+type DeleteLagRequester interface {
+	DeleteLagRequest(*directconnect.DeleteLagInput) directconnect.DeleteLagRequest
+}
+
+// DeleteVirtualInterfaceRequester provides the interface for the DeleteVirtualInterfaceRequest API operation.
+type DeleteVirtualInterfaceRequester interface {
+	DeleteVirtualInterfaceRequest(*directconnect.DeleteVirtualInterfaceInput) directconnect.DeleteVirtualInterfaceRequest
+}
+
+// DescribeConnectionLoaRequester provides the interface for the DescribeConnectionLoaRequest API operation.
+type DescribeConnectionLoaRequester interface {
+	DescribeConnectionLoaRequest(*directconnect.DescribeConnectionLoaInput) directconnect.DescribeConnectionLoaRequest
+}
+
+// DescribeConnectionsRequester provides the interface for the DescribeConnectionsRequest API operation.
+type DescribeConnectionsRequester interface {
+	DescribeConnectionsRequest(*directconnect.DescribeConnectionsInput) directconnect.DescribeConnectionsRequest
+}
+
+// DescribeConnectionsOnInterconnectRequester provides the interface for the DescribeConnectionsOnInterconnectRequest API operation.
+type DescribeConnectionsOnInterconnectRequester interface {
+	DescribeConnectionsOnInterconnectRequest(*directconnect.DescribeConnectionsOnInterconnectInput) directconnect.DescribeConnectionsOnInterconnectRequest
+}
+
+// DescribeHostedConnectionsRequester provides the interface for the DescribeHostedConnectionsRequest API operation.
+type DescribeHostedConnectionsRequester interface {
+	DescribeHostedConnectionsRequest(*directconnect.DescribeHostedConnectionsInput) directconnect.DescribeHostedConnectionsRequest
+}
+
+// DescribeInterconnectLoaRequester provides the interface for the DescribeInterconnectLoaRequest API operation.
+type DescribeInterconnectLoaRequester interface {
+	DescribeInterconnectLoaRequest(*directconnect.DescribeInterconnectLoaInput) directconnect.DescribeInterconnectLoaRequest
+}
+
+// DescribeInterconnectsRequester provides the interface for the DescribeInterconnectsRequest API operation.
+type DescribeInterconnectsRequester interface {
+	DescribeInterconnectsRequest(*directconnect.DescribeInterconnectsInput) directconnect.DescribeInterconnectsRequest
+}
+
+// DescribeLagsRequester provides the interface for the DescribeLagsRequest API operation.
+type DescribeLagsRequester interface {
+	DescribeLagsRequest(*directconnect.DescribeLagsInput) directconnect.DescribeLagsRequest
+}
+
+// DescribeLoaRequester provides the interface for the DescribeLoaRequest API operation.
+type DescribeLoaRequester interface {
+	DescribeLoaRequest(*directconnect.DescribeLoaInput) directconnect.DescribeLoaRequest
+}
+
+// DescribeLocationsRequester provides the interface for the DescribeLocationsRequest API operation.
+type DescribeLocationsRequester interface {
+	DescribeLocationsRequest(*directconnect.DescribeLocationsInput) directconnect.DescribeLocationsRequest
+}
+
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
+	DescribeTagsRequest(*directconnect.DescribeTagsInput) directconnect.DescribeTagsRequest
+}
+
+// DescribeVirtualGatewaysRequester provides the interface for the DescribeVirtualGatewaysRequest API operation.
+type DescribeVirtualGatewaysRequester interface {
+	DescribeVirtualGatewaysRequest(*directconnect.DescribeVirtualGatewaysInput) directconnect.DescribeVirtualGatewaysRequest
+}
+
+// DescribeVirtualInterfacesRequester provides the interface for the DescribeVirtualInterfacesRequest API operation.
+type DescribeVirtualInterfacesRequester interface {
+	DescribeVirtualInterfacesRequest(*directconnect.DescribeVirtualInterfacesInput) directconnect.DescribeVirtualInterfacesRequest
+}
+
+// DisassociateConnectionFromLagRequester provides the interface for the DisassociateConnectionFromLagRequest API operation.
+type DisassociateConnectionFromLagRequester interface {
+	DisassociateConnectionFromLagRequest(*directconnect.DisassociateConnectionFromLagInput) directconnect.DisassociateConnectionFromLagRequest
+}
+
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
+	TagResourceRequest(*directconnect.TagResourceInput) directconnect.TagResourceRequest
+}
+
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
+	UntagResourceRequest(*directconnect.UntagResourceInput) directconnect.UntagResourceRequest
+}
+
+// UpdateLagRequester provides the interface for the UpdateLagRequest API operation.
+type UpdateLagRequester interface {
+	UpdateLagRequest(*directconnect.UpdateLagInput) directconnect.UpdateLagRequest
+}

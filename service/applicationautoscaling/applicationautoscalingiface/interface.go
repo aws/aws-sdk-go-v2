@@ -13,78 +13,37 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 )
 
-// ApplicationAutoScalingAPI provides an interface to enable mocking the
-// applicationautoscaling.ApplicationAutoScaling service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Application Auto Scaling.
-//    func myFunc(svc applicationautoscalingiface.ApplicationAutoScalingAPI) bool {
-//        // Make svc.DeleteScalingPolicy request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := applicationautoscaling.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockApplicationAutoScalingClient struct {
-//        applicationautoscalingiface.ApplicationAutoScalingAPI
-//    }
-//    func (m *mockApplicationAutoScalingClient) DeleteScalingPolicy(input *applicationautoscaling.DeleteScalingPolicyInput) (*applicationautoscaling.DeleteScalingPolicyOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockApplicationAutoScalingClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ApplicationAutoScalingAPI interface {
+// DeleteScalingPolicyRequester provides the interface for the DeleteScalingPolicyRequest API operation.
+type DeleteScalingPolicyRequester interface {
 	DeleteScalingPolicyRequest(*applicationautoscaling.DeleteScalingPolicyInput) applicationautoscaling.DeleteScalingPolicyRequest
-
-	DeregisterScalableTargetRequest(*applicationautoscaling.DeregisterScalableTargetInput) applicationautoscaling.DeregisterScalableTargetRequest
-
-	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) applicationautoscaling.DescribeScalableTargetsRequest
-
-	DescribeScalableTargetsPages(*applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool) error
-	DescribeScalableTargetsPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool, ...aws.Option) error
-
-	DescribeScalingActivitiesRequest(*applicationautoscaling.DescribeScalingActivitiesInput) applicationautoscaling.DescribeScalingActivitiesRequest
-
-	DescribeScalingActivitiesPages(*applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool) error
-	DescribeScalingActivitiesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool, ...aws.Option) error
-
-	DescribeScalingPoliciesRequest(*applicationautoscaling.DescribeScalingPoliciesInput) applicationautoscaling.DescribeScalingPoliciesRequest
-
-	DescribeScalingPoliciesPages(*applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool) error
-	DescribeScalingPoliciesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool, ...aws.Option) error
-
-	PutScalingPolicyRequest(*applicationautoscaling.PutScalingPolicyInput) applicationautoscaling.PutScalingPolicyRequest
-
-	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) applicationautoscaling.RegisterScalableTargetRequest
 }
 
-var _ ApplicationAutoScalingAPI = (*applicationautoscaling.ApplicationAutoScaling)(nil)
+// DeregisterScalableTargetRequester provides the interface for the DeregisterScalableTargetRequest API operation.
+type DeregisterScalableTargetRequester interface {
+	DeregisterScalableTargetRequest(*applicationautoscaling.DeregisterScalableTargetInput) applicationautoscaling.DeregisterScalableTargetRequest
+}
+
+// DescribeScalableTargetsRequester provides the interface for the DescribeScalableTargetsRequest API operation.
+type DescribeScalableTargetsRequester interface {
+	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) applicationautoscaling.DescribeScalableTargetsRequest
+}
+
+// DescribeScalingActivitiesRequester provides the interface for the DescribeScalingActivitiesRequest API operation.
+type DescribeScalingActivitiesRequester interface {
+	DescribeScalingActivitiesRequest(*applicationautoscaling.DescribeScalingActivitiesInput) applicationautoscaling.DescribeScalingActivitiesRequest
+}
+
+// DescribeScalingPoliciesRequester provides the interface for the DescribeScalingPoliciesRequest API operation.
+type DescribeScalingPoliciesRequester interface {
+	DescribeScalingPoliciesRequest(*applicationautoscaling.DescribeScalingPoliciesInput) applicationautoscaling.DescribeScalingPoliciesRequest
+}
+
+// PutScalingPolicyRequester provides the interface for the PutScalingPolicyRequest API operation.
+type PutScalingPolicyRequester interface {
+	PutScalingPolicyRequest(*applicationautoscaling.PutScalingPolicyInput) applicationautoscaling.PutScalingPolicyRequest
+}
+
+// RegisterScalableTargetRequester provides the interface for the RegisterScalableTargetRequest API operation.
+type RegisterScalableTargetRequester interface {
+	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) applicationautoscaling.RegisterScalableTargetRequest
+}

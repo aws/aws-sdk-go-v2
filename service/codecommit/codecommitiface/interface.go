@@ -13,98 +13,87 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codecommit"
 )
 
-// CodeCommitAPI provides an interface to enable mocking the
-// codecommit.CodeCommit service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CodeCommit.
-//    func myFunc(svc codecommitiface.CodeCommitAPI) bool {
-//        // Make svc.BatchGetRepositories request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := codecommit.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodeCommitClient struct {
-//        codecommitiface.CodeCommitAPI
-//    }
-//    func (m *mockCodeCommitClient) BatchGetRepositories(input *codecommit.BatchGetRepositoriesInput) (*codecommit.BatchGetRepositoriesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCodeCommitClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CodeCommitAPI interface {
+// BatchGetRepositoriesRequester provides the interface for the BatchGetRepositoriesRequest API operation.
+type BatchGetRepositoriesRequester interface {
 	BatchGetRepositoriesRequest(*codecommit.BatchGetRepositoriesInput) codecommit.BatchGetRepositoriesRequest
-
-	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest
-
-	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) codecommit.CreateRepositoryRequest
-
-	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) codecommit.DeleteRepositoryRequest
-
-	GetBlobRequest(*codecommit.GetBlobInput) codecommit.GetBlobRequest
-
-	GetBranchRequest(*codecommit.GetBranchInput) codecommit.GetBranchRequest
-
-	GetCommitRequest(*codecommit.GetCommitInput) codecommit.GetCommitRequest
-
-	GetDifferencesRequest(*codecommit.GetDifferencesInput) codecommit.GetDifferencesRequest
-
-	GetDifferencesPages(*codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool) error
-	GetDifferencesPagesWithContext(aws.Context, *codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool, ...aws.Option) error
-
-	GetRepositoryRequest(*codecommit.GetRepositoryInput) codecommit.GetRepositoryRequest
-
-	GetRepositoryTriggersRequest(*codecommit.GetRepositoryTriggersInput) codecommit.GetRepositoryTriggersRequest
-
-	ListBranchesRequest(*codecommit.ListBranchesInput) codecommit.ListBranchesRequest
-
-	ListBranchesPages(*codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool) error
-	ListBranchesPagesWithContext(aws.Context, *codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool, ...aws.Option) error
-
-	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) codecommit.ListRepositoriesRequest
-
-	ListRepositoriesPages(*codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool) error
-	ListRepositoriesPagesWithContext(aws.Context, *codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool, ...aws.Option) error
-
-	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) codecommit.PutRepositoryTriggersRequest
-
-	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) codecommit.TestRepositoryTriggersRequest
-
-	UpdateDefaultBranchRequest(*codecommit.UpdateDefaultBranchInput) codecommit.UpdateDefaultBranchRequest
-
-	UpdateRepositoryDescriptionRequest(*codecommit.UpdateRepositoryDescriptionInput) codecommit.UpdateRepositoryDescriptionRequest
-
-	UpdateRepositoryNameRequest(*codecommit.UpdateRepositoryNameInput) codecommit.UpdateRepositoryNameRequest
 }
 
-var _ CodeCommitAPI = (*codecommit.CodeCommit)(nil)
+// CreateBranchRequester provides the interface for the CreateBranchRequest API operation.
+type CreateBranchRequester interface {
+	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest
+}
+
+// CreateRepositoryRequester provides the interface for the CreateRepositoryRequest API operation.
+type CreateRepositoryRequester interface {
+	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) codecommit.CreateRepositoryRequest
+}
+
+// DeleteRepositoryRequester provides the interface for the DeleteRepositoryRequest API operation.
+type DeleteRepositoryRequester interface {
+	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) codecommit.DeleteRepositoryRequest
+}
+
+// GetBlobRequester provides the interface for the GetBlobRequest API operation.
+type GetBlobRequester interface {
+	GetBlobRequest(*codecommit.GetBlobInput) codecommit.GetBlobRequest
+}
+
+// GetBranchRequester provides the interface for the GetBranchRequest API operation.
+type GetBranchRequester interface {
+	GetBranchRequest(*codecommit.GetBranchInput) codecommit.GetBranchRequest
+}
+
+// GetCommitRequester provides the interface for the GetCommitRequest API operation.
+type GetCommitRequester interface {
+	GetCommitRequest(*codecommit.GetCommitInput) codecommit.GetCommitRequest
+}
+
+// GetDifferencesRequester provides the interface for the GetDifferencesRequest API operation.
+type GetDifferencesRequester interface {
+	GetDifferencesRequest(*codecommit.GetDifferencesInput) codecommit.GetDifferencesRequest
+}
+
+// GetRepositoryRequester provides the interface for the GetRepositoryRequest API operation.
+type GetRepositoryRequester interface {
+	GetRepositoryRequest(*codecommit.GetRepositoryInput) codecommit.GetRepositoryRequest
+}
+
+// GetRepositoryTriggersRequester provides the interface for the GetRepositoryTriggersRequest API operation.
+type GetRepositoryTriggersRequester interface {
+	GetRepositoryTriggersRequest(*codecommit.GetRepositoryTriggersInput) codecommit.GetRepositoryTriggersRequest
+}
+
+// ListBranchesRequester provides the interface for the ListBranchesRequest API operation.
+type ListBranchesRequester interface {
+	ListBranchesRequest(*codecommit.ListBranchesInput) codecommit.ListBranchesRequest
+}
+
+// ListRepositoriesRequester provides the interface for the ListRepositoriesRequest API operation.
+type ListRepositoriesRequester interface {
+	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) codecommit.ListRepositoriesRequest
+}
+
+// PutRepositoryTriggersRequester provides the interface for the PutRepositoryTriggersRequest API operation.
+type PutRepositoryTriggersRequester interface {
+	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) codecommit.PutRepositoryTriggersRequest
+}
+
+// TestRepositoryTriggersRequester provides the interface for the TestRepositoryTriggersRequest API operation.
+type TestRepositoryTriggersRequester interface {
+	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) codecommit.TestRepositoryTriggersRequest
+}
+
+// UpdateDefaultBranchRequester provides the interface for the UpdateDefaultBranchRequest API operation.
+type UpdateDefaultBranchRequester interface {
+	UpdateDefaultBranchRequest(*codecommit.UpdateDefaultBranchInput) codecommit.UpdateDefaultBranchRequest
+}
+
+// UpdateRepositoryDescriptionRequester provides the interface for the UpdateRepositoryDescriptionRequest API operation.
+type UpdateRepositoryDescriptionRequester interface {
+	UpdateRepositoryDescriptionRequest(*codecommit.UpdateRepositoryDescriptionInput) codecommit.UpdateRepositoryDescriptionRequest
+}
+
+// UpdateRepositoryNameRequester provides the interface for the UpdateRepositoryNameRequest API operation.
+type UpdateRepositoryNameRequester interface {
+	UpdateRepositoryNameRequest(*codecommit.UpdateRepositoryNameInput) codecommit.UpdateRepositoryNameRequest
+}

@@ -13,165 +13,268 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 )
 
-// SESAPI provides an interface to enable mocking the
-// ses.SES service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Email Service.
-//    func myFunc(svc sesiface.SESAPI) bool {
-//        // Make svc.CloneReceiptRuleSet request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := ses.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSESClient struct {
-//        sesiface.SESAPI
-//    }
-//    func (m *mockSESClient) CloneReceiptRuleSet(input *ses.CloneReceiptRuleSetInput) (*ses.CloneReceiptRuleSetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSESClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SESAPI interface {
+// CloneReceiptRuleSetRequester provides the interface for the CloneReceiptRuleSetRequest API operation.
+type CloneReceiptRuleSetRequester interface {
 	CloneReceiptRuleSetRequest(*ses.CloneReceiptRuleSetInput) ses.CloneReceiptRuleSetRequest
+}
 
+// CreateConfigurationSetRequester provides the interface for the CreateConfigurationSetRequest API operation.
+type CreateConfigurationSetRequester interface {
 	CreateConfigurationSetRequest(*ses.CreateConfigurationSetInput) ses.CreateConfigurationSetRequest
+}
 
+// CreateConfigurationSetEventDestinationRequester provides the interface for the CreateConfigurationSetEventDestinationRequest API operation.
+type CreateConfigurationSetEventDestinationRequester interface {
 	CreateConfigurationSetEventDestinationRequest(*ses.CreateConfigurationSetEventDestinationInput) ses.CreateConfigurationSetEventDestinationRequest
+}
 
+// CreateConfigurationSetTrackingOptionsRequester provides the interface for the CreateConfigurationSetTrackingOptionsRequest API operation.
+type CreateConfigurationSetTrackingOptionsRequester interface {
 	CreateConfigurationSetTrackingOptionsRequest(*ses.CreateConfigurationSetTrackingOptionsInput) ses.CreateConfigurationSetTrackingOptionsRequest
+}
 
+// CreateReceiptFilterRequester provides the interface for the CreateReceiptFilterRequest API operation.
+type CreateReceiptFilterRequester interface {
 	CreateReceiptFilterRequest(*ses.CreateReceiptFilterInput) ses.CreateReceiptFilterRequest
+}
 
+// CreateReceiptRuleRequester provides the interface for the CreateReceiptRuleRequest API operation.
+type CreateReceiptRuleRequester interface {
 	CreateReceiptRuleRequest(*ses.CreateReceiptRuleInput) ses.CreateReceiptRuleRequest
+}
 
+// CreateReceiptRuleSetRequester provides the interface for the CreateReceiptRuleSetRequest API operation.
+type CreateReceiptRuleSetRequester interface {
 	CreateReceiptRuleSetRequest(*ses.CreateReceiptRuleSetInput) ses.CreateReceiptRuleSetRequest
+}
 
+// DeleteConfigurationSetRequester provides the interface for the DeleteConfigurationSetRequest API operation.
+type DeleteConfigurationSetRequester interface {
 	DeleteConfigurationSetRequest(*ses.DeleteConfigurationSetInput) ses.DeleteConfigurationSetRequest
+}
 
+// DeleteConfigurationSetEventDestinationRequester provides the interface for the DeleteConfigurationSetEventDestinationRequest API operation.
+type DeleteConfigurationSetEventDestinationRequester interface {
 	DeleteConfigurationSetEventDestinationRequest(*ses.DeleteConfigurationSetEventDestinationInput) ses.DeleteConfigurationSetEventDestinationRequest
+}
 
+// DeleteConfigurationSetTrackingOptionsRequester provides the interface for the DeleteConfigurationSetTrackingOptionsRequest API operation.
+type DeleteConfigurationSetTrackingOptionsRequester interface {
 	DeleteConfigurationSetTrackingOptionsRequest(*ses.DeleteConfigurationSetTrackingOptionsInput) ses.DeleteConfigurationSetTrackingOptionsRequest
+}
 
+// DeleteIdentityRequester provides the interface for the DeleteIdentityRequest API operation.
+type DeleteIdentityRequester interface {
 	DeleteIdentityRequest(*ses.DeleteIdentityInput) ses.DeleteIdentityRequest
+}
 
+// DeleteIdentityPolicyRequester provides the interface for the DeleteIdentityPolicyRequest API operation.
+type DeleteIdentityPolicyRequester interface {
 	DeleteIdentityPolicyRequest(*ses.DeleteIdentityPolicyInput) ses.DeleteIdentityPolicyRequest
+}
 
+// DeleteReceiptFilterRequester provides the interface for the DeleteReceiptFilterRequest API operation.
+type DeleteReceiptFilterRequester interface {
 	DeleteReceiptFilterRequest(*ses.DeleteReceiptFilterInput) ses.DeleteReceiptFilterRequest
+}
 
+// DeleteReceiptRuleRequester provides the interface for the DeleteReceiptRuleRequest API operation.
+type DeleteReceiptRuleRequester interface {
 	DeleteReceiptRuleRequest(*ses.DeleteReceiptRuleInput) ses.DeleteReceiptRuleRequest
+}
 
+// DeleteReceiptRuleSetRequester provides the interface for the DeleteReceiptRuleSetRequest API operation.
+type DeleteReceiptRuleSetRequester interface {
 	DeleteReceiptRuleSetRequest(*ses.DeleteReceiptRuleSetInput) ses.DeleteReceiptRuleSetRequest
+}
 
+// DeleteVerifiedEmailAddressRequester provides the interface for the DeleteVerifiedEmailAddressRequest API operation.
+type DeleteVerifiedEmailAddressRequester interface {
 	DeleteVerifiedEmailAddressRequest(*ses.DeleteVerifiedEmailAddressInput) ses.DeleteVerifiedEmailAddressRequest
+}
 
+// DescribeActiveReceiptRuleSetRequester provides the interface for the DescribeActiveReceiptRuleSetRequest API operation.
+type DescribeActiveReceiptRuleSetRequester interface {
 	DescribeActiveReceiptRuleSetRequest(*ses.DescribeActiveReceiptRuleSetInput) ses.DescribeActiveReceiptRuleSetRequest
+}
 
+// DescribeConfigurationSetRequester provides the interface for the DescribeConfigurationSetRequest API operation.
+type DescribeConfigurationSetRequester interface {
 	DescribeConfigurationSetRequest(*ses.DescribeConfigurationSetInput) ses.DescribeConfigurationSetRequest
+}
 
+// DescribeReceiptRuleRequester provides the interface for the DescribeReceiptRuleRequest API operation.
+type DescribeReceiptRuleRequester interface {
 	DescribeReceiptRuleRequest(*ses.DescribeReceiptRuleInput) ses.DescribeReceiptRuleRequest
+}
 
+// DescribeReceiptRuleSetRequester provides the interface for the DescribeReceiptRuleSetRequest API operation.
+type DescribeReceiptRuleSetRequester interface {
 	DescribeReceiptRuleSetRequest(*ses.DescribeReceiptRuleSetInput) ses.DescribeReceiptRuleSetRequest
+}
 
+// GetIdentityDkimAttributesRequester provides the interface for the GetIdentityDkimAttributesRequest API operation.
+type GetIdentityDkimAttributesRequester interface {
 	GetIdentityDkimAttributesRequest(*ses.GetIdentityDkimAttributesInput) ses.GetIdentityDkimAttributesRequest
+}
 
+// GetIdentityMailFromDomainAttributesRequester provides the interface for the GetIdentityMailFromDomainAttributesRequest API operation.
+type GetIdentityMailFromDomainAttributesRequester interface {
 	GetIdentityMailFromDomainAttributesRequest(*ses.GetIdentityMailFromDomainAttributesInput) ses.GetIdentityMailFromDomainAttributesRequest
+}
 
+// GetIdentityNotificationAttributesRequester provides the interface for the GetIdentityNotificationAttributesRequest API operation.
+type GetIdentityNotificationAttributesRequester interface {
 	GetIdentityNotificationAttributesRequest(*ses.GetIdentityNotificationAttributesInput) ses.GetIdentityNotificationAttributesRequest
+}
 
+// GetIdentityPoliciesRequester provides the interface for the GetIdentityPoliciesRequest API operation.
+type GetIdentityPoliciesRequester interface {
 	GetIdentityPoliciesRequest(*ses.GetIdentityPoliciesInput) ses.GetIdentityPoliciesRequest
+}
 
+// GetIdentityVerificationAttributesRequester provides the interface for the GetIdentityVerificationAttributesRequest API operation.
+type GetIdentityVerificationAttributesRequester interface {
 	GetIdentityVerificationAttributesRequest(*ses.GetIdentityVerificationAttributesInput) ses.GetIdentityVerificationAttributesRequest
+}
 
+// GetSendQuotaRequester provides the interface for the GetSendQuotaRequest API operation.
+type GetSendQuotaRequester interface {
 	GetSendQuotaRequest(*ses.GetSendQuotaInput) ses.GetSendQuotaRequest
+}
 
+// GetSendStatisticsRequester provides the interface for the GetSendStatisticsRequest API operation.
+type GetSendStatisticsRequester interface {
 	GetSendStatisticsRequest(*ses.GetSendStatisticsInput) ses.GetSendStatisticsRequest
+}
 
+// ListConfigurationSetsRequester provides the interface for the ListConfigurationSetsRequest API operation.
+type ListConfigurationSetsRequester interface {
 	ListConfigurationSetsRequest(*ses.ListConfigurationSetsInput) ses.ListConfigurationSetsRequest
+}
 
+// ListIdentitiesRequester provides the interface for the ListIdentitiesRequest API operation.
+type ListIdentitiesRequester interface {
 	ListIdentitiesRequest(*ses.ListIdentitiesInput) ses.ListIdentitiesRequest
+}
 
-	ListIdentitiesPages(*ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool) error
-	ListIdentitiesPagesWithContext(aws.Context, *ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool, ...aws.Option) error
-
+// ListIdentityPoliciesRequester provides the interface for the ListIdentityPoliciesRequest API operation.
+type ListIdentityPoliciesRequester interface {
 	ListIdentityPoliciesRequest(*ses.ListIdentityPoliciesInput) ses.ListIdentityPoliciesRequest
+}
 
+// ListReceiptFiltersRequester provides the interface for the ListReceiptFiltersRequest API operation.
+type ListReceiptFiltersRequester interface {
 	ListReceiptFiltersRequest(*ses.ListReceiptFiltersInput) ses.ListReceiptFiltersRequest
+}
 
+// ListReceiptRuleSetsRequester provides the interface for the ListReceiptRuleSetsRequest API operation.
+type ListReceiptRuleSetsRequester interface {
 	ListReceiptRuleSetsRequest(*ses.ListReceiptRuleSetsInput) ses.ListReceiptRuleSetsRequest
+}
 
+// ListVerifiedEmailAddressesRequester provides the interface for the ListVerifiedEmailAddressesRequest API operation.
+type ListVerifiedEmailAddressesRequester interface {
 	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) ses.ListVerifiedEmailAddressesRequest
+}
 
+// PutIdentityPolicyRequester provides the interface for the PutIdentityPolicyRequest API operation.
+type PutIdentityPolicyRequester interface {
 	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) ses.PutIdentityPolicyRequest
+}
 
+// ReorderReceiptRuleSetRequester provides the interface for the ReorderReceiptRuleSetRequest API operation.
+type ReorderReceiptRuleSetRequester interface {
 	ReorderReceiptRuleSetRequest(*ses.ReorderReceiptRuleSetInput) ses.ReorderReceiptRuleSetRequest
+}
 
+// SendBounceRequester provides the interface for the SendBounceRequest API operation.
+type SendBounceRequester interface {
 	SendBounceRequest(*ses.SendBounceInput) ses.SendBounceRequest
+}
 
+// SendEmailRequester provides the interface for the SendEmailRequest API operation.
+type SendEmailRequester interface {
 	SendEmailRequest(*ses.SendEmailInput) ses.SendEmailRequest
+}
 
+// SendRawEmailRequester provides the interface for the SendRawEmailRequest API operation.
+type SendRawEmailRequester interface {
 	SendRawEmailRequest(*ses.SendRawEmailInput) ses.SendRawEmailRequest
+}
 
+// SetActiveReceiptRuleSetRequester provides the interface for the SetActiveReceiptRuleSetRequest API operation.
+type SetActiveReceiptRuleSetRequester interface {
 	SetActiveReceiptRuleSetRequest(*ses.SetActiveReceiptRuleSetInput) ses.SetActiveReceiptRuleSetRequest
+}
 
+// SetIdentityDkimEnabledRequester provides the interface for the SetIdentityDkimEnabledRequest API operation.
+type SetIdentityDkimEnabledRequester interface {
 	SetIdentityDkimEnabledRequest(*ses.SetIdentityDkimEnabledInput) ses.SetIdentityDkimEnabledRequest
+}
 
+// SetIdentityFeedbackForwardingEnabledRequester provides the interface for the SetIdentityFeedbackForwardingEnabledRequest API operation.
+type SetIdentityFeedbackForwardingEnabledRequester interface {
 	SetIdentityFeedbackForwardingEnabledRequest(*ses.SetIdentityFeedbackForwardingEnabledInput) ses.SetIdentityFeedbackForwardingEnabledRequest
+}
 
+// SetIdentityHeadersInNotificationsEnabledRequester provides the interface for the SetIdentityHeadersInNotificationsEnabledRequest API operation.
+type SetIdentityHeadersInNotificationsEnabledRequester interface {
 	SetIdentityHeadersInNotificationsEnabledRequest(*ses.SetIdentityHeadersInNotificationsEnabledInput) ses.SetIdentityHeadersInNotificationsEnabledRequest
+}
 
+// SetIdentityMailFromDomainRequester provides the interface for the SetIdentityMailFromDomainRequest API operation.
+type SetIdentityMailFromDomainRequester interface {
 	SetIdentityMailFromDomainRequest(*ses.SetIdentityMailFromDomainInput) ses.SetIdentityMailFromDomainRequest
+}
 
+// SetIdentityNotificationTopicRequester provides the interface for the SetIdentityNotificationTopicRequest API operation.
+type SetIdentityNotificationTopicRequester interface {
 	SetIdentityNotificationTopicRequest(*ses.SetIdentityNotificationTopicInput) ses.SetIdentityNotificationTopicRequest
+}
 
+// SetReceiptRulePositionRequester provides the interface for the SetReceiptRulePositionRequest API operation.
+type SetReceiptRulePositionRequester interface {
 	SetReceiptRulePositionRequest(*ses.SetReceiptRulePositionInput) ses.SetReceiptRulePositionRequest
+}
 
+// UpdateConfigurationSetEventDestinationRequester provides the interface for the UpdateConfigurationSetEventDestinationRequest API operation.
+type UpdateConfigurationSetEventDestinationRequester interface {
 	UpdateConfigurationSetEventDestinationRequest(*ses.UpdateConfigurationSetEventDestinationInput) ses.UpdateConfigurationSetEventDestinationRequest
+}
 
+// UpdateConfigurationSetTrackingOptionsRequester provides the interface for the UpdateConfigurationSetTrackingOptionsRequest API operation.
+type UpdateConfigurationSetTrackingOptionsRequester interface {
 	UpdateConfigurationSetTrackingOptionsRequest(*ses.UpdateConfigurationSetTrackingOptionsInput) ses.UpdateConfigurationSetTrackingOptionsRequest
+}
 
+// UpdateReceiptRuleRequester provides the interface for the UpdateReceiptRuleRequest API operation.
+type UpdateReceiptRuleRequester interface {
 	UpdateReceiptRuleRequest(*ses.UpdateReceiptRuleInput) ses.UpdateReceiptRuleRequest
+}
 
+// VerifyDomainDkimRequester provides the interface for the VerifyDomainDkimRequest API operation.
+type VerifyDomainDkimRequester interface {
 	VerifyDomainDkimRequest(*ses.VerifyDomainDkimInput) ses.VerifyDomainDkimRequest
+}
 
+// VerifyDomainIdentityRequester provides the interface for the VerifyDomainIdentityRequest API operation.
+type VerifyDomainIdentityRequester interface {
 	VerifyDomainIdentityRequest(*ses.VerifyDomainIdentityInput) ses.VerifyDomainIdentityRequest
+}
 
+// VerifyEmailAddressRequester provides the interface for the VerifyEmailAddressRequest API operation.
+type VerifyEmailAddressRequester interface {
 	VerifyEmailAddressRequest(*ses.VerifyEmailAddressInput) ses.VerifyEmailAddressRequest
+}
 
+// VerifyEmailIdentityRequester provides the interface for the VerifyEmailIdentityRequest API operation.
+type VerifyEmailIdentityRequester interface {
 	VerifyEmailIdentityRequest(*ses.VerifyEmailIdentityInput) ses.VerifyEmailIdentityRequest
+}
 
+// IdentityExistsWaiter provides the interface for the WaitUntilIdentityExists waiter.
+type IdentityExistsWaiter interface {
 	WaitUntilIdentityExists(*ses.GetIdentityVerificationAttributesInput) error
 	WaitUntilIdentityExistsWithContext(aws.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
 }
-
-var _ SESAPI = (*ses.SES)(nil)

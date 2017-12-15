@@ -13,109 +13,122 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 )
 
-// Route53DomainsAPI provides an interface to enable mocking the
-// route53domains.Route53Domains service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Route 53 Domains.
-//    func myFunc(svc route53domainsiface.Route53DomainsAPI) bool {
-//        // Make svc.CheckDomainAvailability request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := route53domains.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRoute53DomainsClient struct {
-//        route53domainsiface.Route53DomainsAPI
-//    }
-//    func (m *mockRoute53DomainsClient) CheckDomainAvailability(input *route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockRoute53DomainsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type Route53DomainsAPI interface {
+// CheckDomainAvailabilityRequester provides the interface for the CheckDomainAvailabilityRequest API operation.
+type CheckDomainAvailabilityRequester interface {
 	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) route53domains.CheckDomainAvailabilityRequest
-
-	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) route53domains.CheckDomainTransferabilityRequest
-
-	DeleteTagsForDomainRequest(*route53domains.DeleteTagsForDomainInput) route53domains.DeleteTagsForDomainRequest
-
-	DisableDomainAutoRenewRequest(*route53domains.DisableDomainAutoRenewInput) route53domains.DisableDomainAutoRenewRequest
-
-	DisableDomainTransferLockRequest(*route53domains.DisableDomainTransferLockInput) route53domains.DisableDomainTransferLockRequest
-
-	EnableDomainAutoRenewRequest(*route53domains.EnableDomainAutoRenewInput) route53domains.EnableDomainAutoRenewRequest
-
-	EnableDomainTransferLockRequest(*route53domains.EnableDomainTransferLockInput) route53domains.EnableDomainTransferLockRequest
-
-	GetContactReachabilityStatusRequest(*route53domains.GetContactReachabilityStatusInput) route53domains.GetContactReachabilityStatusRequest
-
-	GetDomainDetailRequest(*route53domains.GetDomainDetailInput) route53domains.GetDomainDetailRequest
-
-	GetDomainSuggestionsRequest(*route53domains.GetDomainSuggestionsInput) route53domains.GetDomainSuggestionsRequest
-
-	GetOperationDetailRequest(*route53domains.GetOperationDetailInput) route53domains.GetOperationDetailRequest
-
-	ListDomainsRequest(*route53domains.ListDomainsInput) route53domains.ListDomainsRequest
-
-	ListDomainsPages(*route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool, ...aws.Option) error
-
-	ListOperationsRequest(*route53domains.ListOperationsInput) route53domains.ListOperationsRequest
-
-	ListOperationsPages(*route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool) error
-	ListOperationsPagesWithContext(aws.Context, *route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool, ...aws.Option) error
-
-	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) route53domains.ListTagsForDomainRequest
-
-	RegisterDomainRequest(*route53domains.RegisterDomainInput) route53domains.RegisterDomainRequest
-
-	RenewDomainRequest(*route53domains.RenewDomainInput) route53domains.RenewDomainRequest
-
-	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) route53domains.ResendContactReachabilityEmailRequest
-
-	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) route53domains.RetrieveDomainAuthCodeRequest
-
-	TransferDomainRequest(*route53domains.TransferDomainInput) route53domains.TransferDomainRequest
-
-	UpdateDomainContactRequest(*route53domains.UpdateDomainContactInput) route53domains.UpdateDomainContactRequest
-
-	UpdateDomainContactPrivacyRequest(*route53domains.UpdateDomainContactPrivacyInput) route53domains.UpdateDomainContactPrivacyRequest
-
-	UpdateDomainNameserversRequest(*route53domains.UpdateDomainNameserversInput) route53domains.UpdateDomainNameserversRequest
-
-	UpdateTagsForDomainRequest(*route53domains.UpdateTagsForDomainInput) route53domains.UpdateTagsForDomainRequest
-
-	ViewBillingRequest(*route53domains.ViewBillingInput) route53domains.ViewBillingRequest
 }
 
-var _ Route53DomainsAPI = (*route53domains.Route53Domains)(nil)
+// CheckDomainTransferabilityRequester provides the interface for the CheckDomainTransferabilityRequest API operation.
+type CheckDomainTransferabilityRequester interface {
+	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) route53domains.CheckDomainTransferabilityRequest
+}
+
+// DeleteTagsForDomainRequester provides the interface for the DeleteTagsForDomainRequest API operation.
+type DeleteTagsForDomainRequester interface {
+	DeleteTagsForDomainRequest(*route53domains.DeleteTagsForDomainInput) route53domains.DeleteTagsForDomainRequest
+}
+
+// DisableDomainAutoRenewRequester provides the interface for the DisableDomainAutoRenewRequest API operation.
+type DisableDomainAutoRenewRequester interface {
+	DisableDomainAutoRenewRequest(*route53domains.DisableDomainAutoRenewInput) route53domains.DisableDomainAutoRenewRequest
+}
+
+// DisableDomainTransferLockRequester provides the interface for the DisableDomainTransferLockRequest API operation.
+type DisableDomainTransferLockRequester interface {
+	DisableDomainTransferLockRequest(*route53domains.DisableDomainTransferLockInput) route53domains.DisableDomainTransferLockRequest
+}
+
+// EnableDomainAutoRenewRequester provides the interface for the EnableDomainAutoRenewRequest API operation.
+type EnableDomainAutoRenewRequester interface {
+	EnableDomainAutoRenewRequest(*route53domains.EnableDomainAutoRenewInput) route53domains.EnableDomainAutoRenewRequest
+}
+
+// EnableDomainTransferLockRequester provides the interface for the EnableDomainTransferLockRequest API operation.
+type EnableDomainTransferLockRequester interface {
+	EnableDomainTransferLockRequest(*route53domains.EnableDomainTransferLockInput) route53domains.EnableDomainTransferLockRequest
+}
+
+// GetContactReachabilityStatusRequester provides the interface for the GetContactReachabilityStatusRequest API operation.
+type GetContactReachabilityStatusRequester interface {
+	GetContactReachabilityStatusRequest(*route53domains.GetContactReachabilityStatusInput) route53domains.GetContactReachabilityStatusRequest
+}
+
+// GetDomainDetailRequester provides the interface for the GetDomainDetailRequest API operation.
+type GetDomainDetailRequester interface {
+	GetDomainDetailRequest(*route53domains.GetDomainDetailInput) route53domains.GetDomainDetailRequest
+}
+
+// GetDomainSuggestionsRequester provides the interface for the GetDomainSuggestionsRequest API operation.
+type GetDomainSuggestionsRequester interface {
+	GetDomainSuggestionsRequest(*route53domains.GetDomainSuggestionsInput) route53domains.GetDomainSuggestionsRequest
+}
+
+// GetOperationDetailRequester provides the interface for the GetOperationDetailRequest API operation.
+type GetOperationDetailRequester interface {
+	GetOperationDetailRequest(*route53domains.GetOperationDetailInput) route53domains.GetOperationDetailRequest
+}
+
+// ListDomainsRequester provides the interface for the ListDomainsRequest API operation.
+type ListDomainsRequester interface {
+	ListDomainsRequest(*route53domains.ListDomainsInput) route53domains.ListDomainsRequest
+}
+
+// ListOperationsRequester provides the interface for the ListOperationsRequest API operation.
+type ListOperationsRequester interface {
+	ListOperationsRequest(*route53domains.ListOperationsInput) route53domains.ListOperationsRequest
+}
+
+// ListTagsForDomainRequester provides the interface for the ListTagsForDomainRequest API operation.
+type ListTagsForDomainRequester interface {
+	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) route53domains.ListTagsForDomainRequest
+}
+
+// RegisterDomainRequester provides the interface for the RegisterDomainRequest API operation.
+type RegisterDomainRequester interface {
+	RegisterDomainRequest(*route53domains.RegisterDomainInput) route53domains.RegisterDomainRequest
+}
+
+// RenewDomainRequester provides the interface for the RenewDomainRequest API operation.
+type RenewDomainRequester interface {
+	RenewDomainRequest(*route53domains.RenewDomainInput) route53domains.RenewDomainRequest
+}
+
+// ResendContactReachabilityEmailRequester provides the interface for the ResendContactReachabilityEmailRequest API operation.
+type ResendContactReachabilityEmailRequester interface {
+	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) route53domains.ResendContactReachabilityEmailRequest
+}
+
+// RetrieveDomainAuthCodeRequester provides the interface for the RetrieveDomainAuthCodeRequest API operation.
+type RetrieveDomainAuthCodeRequester interface {
+	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) route53domains.RetrieveDomainAuthCodeRequest
+}
+
+// TransferDomainRequester provides the interface for the TransferDomainRequest API operation.
+type TransferDomainRequester interface {
+	TransferDomainRequest(*route53domains.TransferDomainInput) route53domains.TransferDomainRequest
+}
+
+// UpdateDomainContactRequester provides the interface for the UpdateDomainContactRequest API operation.
+type UpdateDomainContactRequester interface {
+	UpdateDomainContactRequest(*route53domains.UpdateDomainContactInput) route53domains.UpdateDomainContactRequest
+}
+
+// UpdateDomainContactPrivacyRequester provides the interface for the UpdateDomainContactPrivacyRequest API operation.
+type UpdateDomainContactPrivacyRequester interface {
+	UpdateDomainContactPrivacyRequest(*route53domains.UpdateDomainContactPrivacyInput) route53domains.UpdateDomainContactPrivacyRequest
+}
+
+// UpdateDomainNameserversRequester provides the interface for the UpdateDomainNameserversRequest API operation.
+type UpdateDomainNameserversRequester interface {
+	UpdateDomainNameserversRequest(*route53domains.UpdateDomainNameserversInput) route53domains.UpdateDomainNameserversRequest
+}
+
+// UpdateTagsForDomainRequester provides the interface for the UpdateTagsForDomainRequest API operation.
+type UpdateTagsForDomainRequester interface {
+	UpdateTagsForDomainRequest(*route53domains.UpdateTagsForDomainInput) route53domains.UpdateTagsForDomainRequest
+}
+
+// ViewBillingRequester provides the interface for the ViewBillingRequest API operation.
+type ViewBillingRequester interface {
+	ViewBillingRequest(*route53domains.ViewBillingInput) route53domains.ViewBillingRequest
+}

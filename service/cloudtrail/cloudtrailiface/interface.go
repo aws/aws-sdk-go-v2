@@ -13,86 +13,72 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail"
 )
 
-// CloudTrailAPI provides an interface to enable mocking the
-// cloudtrail.CloudTrail service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CloudTrail.
-//    func myFunc(svc cloudtrailiface.CloudTrailAPI) bool {
-//        // Make svc.AddTags request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudtrail.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudTrailClient struct {
-//        cloudtrailiface.CloudTrailAPI
-//    }
-//    func (m *mockCloudTrailClient) AddTags(input *cloudtrail.AddTagsInput) (*cloudtrail.AddTagsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudTrailClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudTrailAPI interface {
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
 	AddTagsRequest(*cloudtrail.AddTagsInput) cloudtrail.AddTagsRequest
-
-	CreateTrailRequest(*cloudtrail.CreateTrailInput) cloudtrail.CreateTrailRequest
-
-	DeleteTrailRequest(*cloudtrail.DeleteTrailInput) cloudtrail.DeleteTrailRequest
-
-	DescribeTrailsRequest(*cloudtrail.DescribeTrailsInput) cloudtrail.DescribeTrailsRequest
-
-	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
-
-	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
-
-	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
-
-	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
-
-	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
-
-	LookupEventsPages(*cloudtrail.LookupEventsInput, func(*cloudtrail.LookupEventsOutput, bool) bool) error
-	LookupEventsPagesWithContext(aws.Context, *cloudtrail.LookupEventsInput, func(*cloudtrail.LookupEventsOutput, bool) bool, ...aws.Option) error
-
-	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
-
-	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) cloudtrail.RemoveTagsRequest
-
-	StartLoggingRequest(*cloudtrail.StartLoggingInput) cloudtrail.StartLoggingRequest
-
-	StopLoggingRequest(*cloudtrail.StopLoggingInput) cloudtrail.StopLoggingRequest
-
-	UpdateTrailRequest(*cloudtrail.UpdateTrailInput) cloudtrail.UpdateTrailRequest
 }
 
-var _ CloudTrailAPI = (*cloudtrail.CloudTrail)(nil)
+// CreateTrailRequester provides the interface for the CreateTrailRequest API operation.
+type CreateTrailRequester interface {
+	CreateTrailRequest(*cloudtrail.CreateTrailInput) cloudtrail.CreateTrailRequest
+}
+
+// DeleteTrailRequester provides the interface for the DeleteTrailRequest API operation.
+type DeleteTrailRequester interface {
+	DeleteTrailRequest(*cloudtrail.DeleteTrailInput) cloudtrail.DeleteTrailRequest
+}
+
+// DescribeTrailsRequester provides the interface for the DescribeTrailsRequest API operation.
+type DescribeTrailsRequester interface {
+	DescribeTrailsRequest(*cloudtrail.DescribeTrailsInput) cloudtrail.DescribeTrailsRequest
+}
+
+// GetEventSelectorsRequester provides the interface for the GetEventSelectorsRequest API operation.
+type GetEventSelectorsRequester interface {
+	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
+}
+
+// GetTrailStatusRequester provides the interface for the GetTrailStatusRequest API operation.
+type GetTrailStatusRequester interface {
+	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
+}
+
+// ListPublicKeysRequester provides the interface for the ListPublicKeysRequest API operation.
+type ListPublicKeysRequester interface {
+	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
+}
+
+// ListTagsRequester provides the interface for the ListTagsRequest API operation.
+type ListTagsRequester interface {
+	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
+}
+
+// LookupEventsRequester provides the interface for the LookupEventsRequest API operation.
+type LookupEventsRequester interface {
+	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
+}
+
+// PutEventSelectorsRequester provides the interface for the PutEventSelectorsRequest API operation.
+type PutEventSelectorsRequester interface {
+	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
+}
+
+// RemoveTagsRequester provides the interface for the RemoveTagsRequest API operation.
+type RemoveTagsRequester interface {
+	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) cloudtrail.RemoveTagsRequest
+}
+
+// StartLoggingRequester provides the interface for the StartLoggingRequest API operation.
+type StartLoggingRequester interface {
+	StartLoggingRequest(*cloudtrail.StartLoggingInput) cloudtrail.StartLoggingRequest
+}
+
+// StopLoggingRequester provides the interface for the StopLoggingRequest API operation.
+type StopLoggingRequester interface {
+	StopLoggingRequest(*cloudtrail.StopLoggingInput) cloudtrail.StopLoggingRequest
+}
+
+// UpdateTrailRequester provides the interface for the UpdateTrailRequest API operation.
+type UpdateTrailRequester interface {
+	UpdateTrailRequest(*cloudtrail.UpdateTrailInput) cloudtrail.UpdateTrailRequest
+}

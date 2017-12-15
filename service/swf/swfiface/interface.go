@@ -13,138 +13,157 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/swf"
 )
 
-// SWFAPI provides an interface to enable mocking the
-// swf.SWF service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Workflow Service.
-//    func myFunc(svc swfiface.SWFAPI) bool {
-//        // Make svc.CountClosedWorkflowExecutions request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := swf.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSWFClient struct {
-//        swfiface.SWFAPI
-//    }
-//    func (m *mockSWFClient) CountClosedWorkflowExecutions(input *swf.CountClosedWorkflowExecutionsInput) (*swf.CountOpenWorkflowExecutionsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSWFClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SWFAPI interface {
+// CountClosedWorkflowExecutionsRequester provides the interface for the CountClosedWorkflowExecutionsRequest API operation.
+type CountClosedWorkflowExecutionsRequester interface {
 	CountClosedWorkflowExecutionsRequest(*swf.CountClosedWorkflowExecutionsInput) swf.CountClosedWorkflowExecutionsRequest
-
-	CountOpenWorkflowExecutionsRequest(*swf.CountOpenWorkflowExecutionsInput) swf.CountOpenWorkflowExecutionsRequest
-
-	CountPendingActivityTasksRequest(*swf.CountPendingActivityTasksInput) swf.CountPendingActivityTasksRequest
-
-	CountPendingDecisionTasksRequest(*swf.CountPendingDecisionTasksInput) swf.CountPendingDecisionTasksRequest
-
-	DeprecateActivityTypeRequest(*swf.DeprecateActivityTypeInput) swf.DeprecateActivityTypeRequest
-
-	DeprecateDomainRequest(*swf.DeprecateDomainInput) swf.DeprecateDomainRequest
-
-	DeprecateWorkflowTypeRequest(*swf.DeprecateWorkflowTypeInput) swf.DeprecateWorkflowTypeRequest
-
-	DescribeActivityTypeRequest(*swf.DescribeActivityTypeInput) swf.DescribeActivityTypeRequest
-
-	DescribeDomainRequest(*swf.DescribeDomainInput) swf.DescribeDomainRequest
-
-	DescribeWorkflowExecutionRequest(*swf.DescribeWorkflowExecutionInput) swf.DescribeWorkflowExecutionRequest
-
-	DescribeWorkflowTypeRequest(*swf.DescribeWorkflowTypeInput) swf.DescribeWorkflowTypeRequest
-
-	GetWorkflowExecutionHistoryRequest(*swf.GetWorkflowExecutionHistoryInput) swf.GetWorkflowExecutionHistoryRequest
-
-	GetWorkflowExecutionHistoryPages(*swf.GetWorkflowExecutionHistoryInput, func(*swf.GetWorkflowExecutionHistoryOutput, bool) bool) error
-	GetWorkflowExecutionHistoryPagesWithContext(aws.Context, *swf.GetWorkflowExecutionHistoryInput, func(*swf.GetWorkflowExecutionHistoryOutput, bool) bool, ...aws.Option) error
-
-	ListActivityTypesRequest(*swf.ListActivityTypesInput) swf.ListActivityTypesRequest
-
-	ListActivityTypesPages(*swf.ListActivityTypesInput, func(*swf.ListActivityTypesOutput, bool) bool) error
-	ListActivityTypesPagesWithContext(aws.Context, *swf.ListActivityTypesInput, func(*swf.ListActivityTypesOutput, bool) bool, ...aws.Option) error
-
-	ListClosedWorkflowExecutionsRequest(*swf.ListClosedWorkflowExecutionsInput) swf.ListClosedWorkflowExecutionsRequest
-
-	ListClosedWorkflowExecutionsPages(*swf.ListClosedWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool) error
-	ListClosedWorkflowExecutionsPagesWithContext(aws.Context, *swf.ListClosedWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool, ...aws.Option) error
-
-	ListDomainsRequest(*swf.ListDomainsInput) swf.ListDomainsRequest
-
-	ListDomainsPages(*swf.ListDomainsInput, func(*swf.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *swf.ListDomainsInput, func(*swf.ListDomainsOutput, bool) bool, ...aws.Option) error
-
-	ListOpenWorkflowExecutionsRequest(*swf.ListOpenWorkflowExecutionsInput) swf.ListOpenWorkflowExecutionsRequest
-
-	ListOpenWorkflowExecutionsPages(*swf.ListOpenWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool) error
-	ListOpenWorkflowExecutionsPagesWithContext(aws.Context, *swf.ListOpenWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool, ...aws.Option) error
-
-	ListWorkflowTypesRequest(*swf.ListWorkflowTypesInput) swf.ListWorkflowTypesRequest
-
-	ListWorkflowTypesPages(*swf.ListWorkflowTypesInput, func(*swf.ListWorkflowTypesOutput, bool) bool) error
-	ListWorkflowTypesPagesWithContext(aws.Context, *swf.ListWorkflowTypesInput, func(*swf.ListWorkflowTypesOutput, bool) bool, ...aws.Option) error
-
-	PollForActivityTaskRequest(*swf.PollForActivityTaskInput) swf.PollForActivityTaskRequest
-
-	PollForDecisionTaskRequest(*swf.PollForDecisionTaskInput) swf.PollForDecisionTaskRequest
-
-	PollForDecisionTaskPages(*swf.PollForDecisionTaskInput, func(*swf.PollForDecisionTaskOutput, bool) bool) error
-	PollForDecisionTaskPagesWithContext(aws.Context, *swf.PollForDecisionTaskInput, func(*swf.PollForDecisionTaskOutput, bool) bool, ...aws.Option) error
-
-	RecordActivityTaskHeartbeatRequest(*swf.RecordActivityTaskHeartbeatInput) swf.RecordActivityTaskHeartbeatRequest
-
-	RegisterActivityTypeRequest(*swf.RegisterActivityTypeInput) swf.RegisterActivityTypeRequest
-
-	RegisterDomainRequest(*swf.RegisterDomainInput) swf.RegisterDomainRequest
-
-	RegisterWorkflowTypeRequest(*swf.RegisterWorkflowTypeInput) swf.RegisterWorkflowTypeRequest
-
-	RequestCancelWorkflowExecutionRequest(*swf.RequestCancelWorkflowExecutionInput) swf.RequestCancelWorkflowExecutionRequest
-
-	RespondActivityTaskCanceledRequest(*swf.RespondActivityTaskCanceledInput) swf.RespondActivityTaskCanceledRequest
-
-	RespondActivityTaskCompletedRequest(*swf.RespondActivityTaskCompletedInput) swf.RespondActivityTaskCompletedRequest
-
-	RespondActivityTaskFailedRequest(*swf.RespondActivityTaskFailedInput) swf.RespondActivityTaskFailedRequest
-
-	RespondDecisionTaskCompletedRequest(*swf.RespondDecisionTaskCompletedInput) swf.RespondDecisionTaskCompletedRequest
-
-	SignalWorkflowExecutionRequest(*swf.SignalWorkflowExecutionInput) swf.SignalWorkflowExecutionRequest
-
-	StartWorkflowExecutionRequest(*swf.StartWorkflowExecutionInput) swf.StartWorkflowExecutionRequest
-
-	TerminateWorkflowExecutionRequest(*swf.TerminateWorkflowExecutionInput) swf.TerminateWorkflowExecutionRequest
 }
 
-var _ SWFAPI = (*swf.SWF)(nil)
+// CountOpenWorkflowExecutionsRequester provides the interface for the CountOpenWorkflowExecutionsRequest API operation.
+type CountOpenWorkflowExecutionsRequester interface {
+	CountOpenWorkflowExecutionsRequest(*swf.CountOpenWorkflowExecutionsInput) swf.CountOpenWorkflowExecutionsRequest
+}
+
+// CountPendingActivityTasksRequester provides the interface for the CountPendingActivityTasksRequest API operation.
+type CountPendingActivityTasksRequester interface {
+	CountPendingActivityTasksRequest(*swf.CountPendingActivityTasksInput) swf.CountPendingActivityTasksRequest
+}
+
+// CountPendingDecisionTasksRequester provides the interface for the CountPendingDecisionTasksRequest API operation.
+type CountPendingDecisionTasksRequester interface {
+	CountPendingDecisionTasksRequest(*swf.CountPendingDecisionTasksInput) swf.CountPendingDecisionTasksRequest
+}
+
+// DeprecateActivityTypeRequester provides the interface for the DeprecateActivityTypeRequest API operation.
+type DeprecateActivityTypeRequester interface {
+	DeprecateActivityTypeRequest(*swf.DeprecateActivityTypeInput) swf.DeprecateActivityTypeRequest
+}
+
+// DeprecateDomainRequester provides the interface for the DeprecateDomainRequest API operation.
+type DeprecateDomainRequester interface {
+	DeprecateDomainRequest(*swf.DeprecateDomainInput) swf.DeprecateDomainRequest
+}
+
+// DeprecateWorkflowTypeRequester provides the interface for the DeprecateWorkflowTypeRequest API operation.
+type DeprecateWorkflowTypeRequester interface {
+	DeprecateWorkflowTypeRequest(*swf.DeprecateWorkflowTypeInput) swf.DeprecateWorkflowTypeRequest
+}
+
+// DescribeActivityTypeRequester provides the interface for the DescribeActivityTypeRequest API operation.
+type DescribeActivityTypeRequester interface {
+	DescribeActivityTypeRequest(*swf.DescribeActivityTypeInput) swf.DescribeActivityTypeRequest
+}
+
+// DescribeDomainRequester provides the interface for the DescribeDomainRequest API operation.
+type DescribeDomainRequester interface {
+	DescribeDomainRequest(*swf.DescribeDomainInput) swf.DescribeDomainRequest
+}
+
+// DescribeWorkflowExecutionRequester provides the interface for the DescribeWorkflowExecutionRequest API operation.
+type DescribeWorkflowExecutionRequester interface {
+	DescribeWorkflowExecutionRequest(*swf.DescribeWorkflowExecutionInput) swf.DescribeWorkflowExecutionRequest
+}
+
+// DescribeWorkflowTypeRequester provides the interface for the DescribeWorkflowTypeRequest API operation.
+type DescribeWorkflowTypeRequester interface {
+	DescribeWorkflowTypeRequest(*swf.DescribeWorkflowTypeInput) swf.DescribeWorkflowTypeRequest
+}
+
+// GetWorkflowExecutionHistoryRequester provides the interface for the GetWorkflowExecutionHistoryRequest API operation.
+type GetWorkflowExecutionHistoryRequester interface {
+	GetWorkflowExecutionHistoryRequest(*swf.GetWorkflowExecutionHistoryInput) swf.GetWorkflowExecutionHistoryRequest
+}
+
+// ListActivityTypesRequester provides the interface for the ListActivityTypesRequest API operation.
+type ListActivityTypesRequester interface {
+	ListActivityTypesRequest(*swf.ListActivityTypesInput) swf.ListActivityTypesRequest
+}
+
+// ListClosedWorkflowExecutionsRequester provides the interface for the ListClosedWorkflowExecutionsRequest API operation.
+type ListClosedWorkflowExecutionsRequester interface {
+	ListClosedWorkflowExecutionsRequest(*swf.ListClosedWorkflowExecutionsInput) swf.ListClosedWorkflowExecutionsRequest
+}
+
+// ListDomainsRequester provides the interface for the ListDomainsRequest API operation.
+type ListDomainsRequester interface {
+	ListDomainsRequest(*swf.ListDomainsInput) swf.ListDomainsRequest
+}
+
+// ListOpenWorkflowExecutionsRequester provides the interface for the ListOpenWorkflowExecutionsRequest API operation.
+type ListOpenWorkflowExecutionsRequester interface {
+	ListOpenWorkflowExecutionsRequest(*swf.ListOpenWorkflowExecutionsInput) swf.ListOpenWorkflowExecutionsRequest
+}
+
+// ListWorkflowTypesRequester provides the interface for the ListWorkflowTypesRequest API operation.
+type ListWorkflowTypesRequester interface {
+	ListWorkflowTypesRequest(*swf.ListWorkflowTypesInput) swf.ListWorkflowTypesRequest
+}
+
+// PollForActivityTaskRequester provides the interface for the PollForActivityTaskRequest API operation.
+type PollForActivityTaskRequester interface {
+	PollForActivityTaskRequest(*swf.PollForActivityTaskInput) swf.PollForActivityTaskRequest
+}
+
+// PollForDecisionTaskRequester provides the interface for the PollForDecisionTaskRequest API operation.
+type PollForDecisionTaskRequester interface {
+	PollForDecisionTaskRequest(*swf.PollForDecisionTaskInput) swf.PollForDecisionTaskRequest
+}
+
+// RecordActivityTaskHeartbeatRequester provides the interface for the RecordActivityTaskHeartbeatRequest API operation.
+type RecordActivityTaskHeartbeatRequester interface {
+	RecordActivityTaskHeartbeatRequest(*swf.RecordActivityTaskHeartbeatInput) swf.RecordActivityTaskHeartbeatRequest
+}
+
+// RegisterActivityTypeRequester provides the interface for the RegisterActivityTypeRequest API operation.
+type RegisterActivityTypeRequester interface {
+	RegisterActivityTypeRequest(*swf.RegisterActivityTypeInput) swf.RegisterActivityTypeRequest
+}
+
+// RegisterDomainRequester provides the interface for the RegisterDomainRequest API operation.
+type RegisterDomainRequester interface {
+	RegisterDomainRequest(*swf.RegisterDomainInput) swf.RegisterDomainRequest
+}
+
+// RegisterWorkflowTypeRequester provides the interface for the RegisterWorkflowTypeRequest API operation.
+type RegisterWorkflowTypeRequester interface {
+	RegisterWorkflowTypeRequest(*swf.RegisterWorkflowTypeInput) swf.RegisterWorkflowTypeRequest
+}
+
+// RequestCancelWorkflowExecutionRequester provides the interface for the RequestCancelWorkflowExecutionRequest API operation.
+type RequestCancelWorkflowExecutionRequester interface {
+	RequestCancelWorkflowExecutionRequest(*swf.RequestCancelWorkflowExecutionInput) swf.RequestCancelWorkflowExecutionRequest
+}
+
+// RespondActivityTaskCanceledRequester provides the interface for the RespondActivityTaskCanceledRequest API operation.
+type RespondActivityTaskCanceledRequester interface {
+	RespondActivityTaskCanceledRequest(*swf.RespondActivityTaskCanceledInput) swf.RespondActivityTaskCanceledRequest
+}
+
+// RespondActivityTaskCompletedRequester provides the interface for the RespondActivityTaskCompletedRequest API operation.
+type RespondActivityTaskCompletedRequester interface {
+	RespondActivityTaskCompletedRequest(*swf.RespondActivityTaskCompletedInput) swf.RespondActivityTaskCompletedRequest
+}
+
+// RespondActivityTaskFailedRequester provides the interface for the RespondActivityTaskFailedRequest API operation.
+type RespondActivityTaskFailedRequester interface {
+	RespondActivityTaskFailedRequest(*swf.RespondActivityTaskFailedInput) swf.RespondActivityTaskFailedRequest
+}
+
+// RespondDecisionTaskCompletedRequester provides the interface for the RespondDecisionTaskCompletedRequest API operation.
+type RespondDecisionTaskCompletedRequester interface {
+	RespondDecisionTaskCompletedRequest(*swf.RespondDecisionTaskCompletedInput) swf.RespondDecisionTaskCompletedRequest
+}
+
+// SignalWorkflowExecutionRequester provides the interface for the SignalWorkflowExecutionRequest API operation.
+type SignalWorkflowExecutionRequester interface {
+	SignalWorkflowExecutionRequest(*swf.SignalWorkflowExecutionInput) swf.SignalWorkflowExecutionRequest
+}
+
+// StartWorkflowExecutionRequester provides the interface for the StartWorkflowExecutionRequest API operation.
+type StartWorkflowExecutionRequester interface {
+	StartWorkflowExecutionRequest(*swf.StartWorkflowExecutionInput) swf.StartWorkflowExecutionRequest
+}
+
+// TerminateWorkflowExecutionRequester provides the interface for the TerminateWorkflowExecutionRequest API operation.
+type TerminateWorkflowExecutionRequester interface {
+	TerminateWorkflowExecutionRequest(*swf.TerminateWorkflowExecutionInput) swf.TerminateWorkflowExecutionRequest
+}

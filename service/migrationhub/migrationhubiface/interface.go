@@ -12,87 +12,82 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
 )
 
-// MigrationHubAPI provides an interface to enable mocking the
-// migrationhub.MigrationHub service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Migration Hub.
-//    func myFunc(svc migrationhubiface.MigrationHubAPI) bool {
-//        // Make svc.AssociateCreatedArtifact request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := migrationhub.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMigrationHubClient struct {
-//        migrationhubiface.MigrationHubAPI
-//    }
-//    func (m *mockMigrationHubClient) AssociateCreatedArtifact(input *migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockMigrationHubClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type MigrationHubAPI interface {
+// AssociateCreatedArtifactRequester provides the interface for the AssociateCreatedArtifactRequest API operation.
+type AssociateCreatedArtifactRequester interface {
 	AssociateCreatedArtifactRequest(*migrationhub.AssociateCreatedArtifactInput) migrationhub.AssociateCreatedArtifactRequest
-
-	AssociateDiscoveredResourceRequest(*migrationhub.AssociateDiscoveredResourceInput) migrationhub.AssociateDiscoveredResourceRequest
-
-	CreateProgressUpdateStreamRequest(*migrationhub.CreateProgressUpdateStreamInput) migrationhub.CreateProgressUpdateStreamRequest
-
-	DeleteProgressUpdateStreamRequest(*migrationhub.DeleteProgressUpdateStreamInput) migrationhub.DeleteProgressUpdateStreamRequest
-
-	DescribeApplicationStateRequest(*migrationhub.DescribeApplicationStateInput) migrationhub.DescribeApplicationStateRequest
-
-	DescribeMigrationTaskRequest(*migrationhub.DescribeMigrationTaskInput) migrationhub.DescribeMigrationTaskRequest
-
-	DisassociateCreatedArtifactRequest(*migrationhub.DisassociateCreatedArtifactInput) migrationhub.DisassociateCreatedArtifactRequest
-
-	DisassociateDiscoveredResourceRequest(*migrationhub.DisassociateDiscoveredResourceInput) migrationhub.DisassociateDiscoveredResourceRequest
-
-	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) migrationhub.ImportMigrationTaskRequest
-
-	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) migrationhub.ListCreatedArtifactsRequest
-
-	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) migrationhub.ListDiscoveredResourcesRequest
-
-	ListMigrationTasksRequest(*migrationhub.ListMigrationTasksInput) migrationhub.ListMigrationTasksRequest
-
-	ListProgressUpdateStreamsRequest(*migrationhub.ListProgressUpdateStreamsInput) migrationhub.ListProgressUpdateStreamsRequest
-
-	NotifyApplicationStateRequest(*migrationhub.NotifyApplicationStateInput) migrationhub.NotifyApplicationStateRequest
-
-	NotifyMigrationTaskStateRequest(*migrationhub.NotifyMigrationTaskStateInput) migrationhub.NotifyMigrationTaskStateRequest
-
-	PutResourceAttributesRequest(*migrationhub.PutResourceAttributesInput) migrationhub.PutResourceAttributesRequest
 }
 
-var _ MigrationHubAPI = (*migrationhub.MigrationHub)(nil)
+// AssociateDiscoveredResourceRequester provides the interface for the AssociateDiscoveredResourceRequest API operation.
+type AssociateDiscoveredResourceRequester interface {
+	AssociateDiscoveredResourceRequest(*migrationhub.AssociateDiscoveredResourceInput) migrationhub.AssociateDiscoveredResourceRequest
+}
+
+// CreateProgressUpdateStreamRequester provides the interface for the CreateProgressUpdateStreamRequest API operation.
+type CreateProgressUpdateStreamRequester interface {
+	CreateProgressUpdateStreamRequest(*migrationhub.CreateProgressUpdateStreamInput) migrationhub.CreateProgressUpdateStreamRequest
+}
+
+// DeleteProgressUpdateStreamRequester provides the interface for the DeleteProgressUpdateStreamRequest API operation.
+type DeleteProgressUpdateStreamRequester interface {
+	DeleteProgressUpdateStreamRequest(*migrationhub.DeleteProgressUpdateStreamInput) migrationhub.DeleteProgressUpdateStreamRequest
+}
+
+// DescribeApplicationStateRequester provides the interface for the DescribeApplicationStateRequest API operation.
+type DescribeApplicationStateRequester interface {
+	DescribeApplicationStateRequest(*migrationhub.DescribeApplicationStateInput) migrationhub.DescribeApplicationStateRequest
+}
+
+// DescribeMigrationTaskRequester provides the interface for the DescribeMigrationTaskRequest API operation.
+type DescribeMigrationTaskRequester interface {
+	DescribeMigrationTaskRequest(*migrationhub.DescribeMigrationTaskInput) migrationhub.DescribeMigrationTaskRequest
+}
+
+// DisassociateCreatedArtifactRequester provides the interface for the DisassociateCreatedArtifactRequest API operation.
+type DisassociateCreatedArtifactRequester interface {
+	DisassociateCreatedArtifactRequest(*migrationhub.DisassociateCreatedArtifactInput) migrationhub.DisassociateCreatedArtifactRequest
+}
+
+// DisassociateDiscoveredResourceRequester provides the interface for the DisassociateDiscoveredResourceRequest API operation.
+type DisassociateDiscoveredResourceRequester interface {
+	DisassociateDiscoveredResourceRequest(*migrationhub.DisassociateDiscoveredResourceInput) migrationhub.DisassociateDiscoveredResourceRequest
+}
+
+// ImportMigrationTaskRequester provides the interface for the ImportMigrationTaskRequest API operation.
+type ImportMigrationTaskRequester interface {
+	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) migrationhub.ImportMigrationTaskRequest
+}
+
+// ListCreatedArtifactsRequester provides the interface for the ListCreatedArtifactsRequest API operation.
+type ListCreatedArtifactsRequester interface {
+	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) migrationhub.ListCreatedArtifactsRequest
+}
+
+// ListDiscoveredResourcesRequester provides the interface for the ListDiscoveredResourcesRequest API operation.
+type ListDiscoveredResourcesRequester interface {
+	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) migrationhub.ListDiscoveredResourcesRequest
+}
+
+// ListMigrationTasksRequester provides the interface for the ListMigrationTasksRequest API operation.
+type ListMigrationTasksRequester interface {
+	ListMigrationTasksRequest(*migrationhub.ListMigrationTasksInput) migrationhub.ListMigrationTasksRequest
+}
+
+// ListProgressUpdateStreamsRequester provides the interface for the ListProgressUpdateStreamsRequest API operation.
+type ListProgressUpdateStreamsRequester interface {
+	ListProgressUpdateStreamsRequest(*migrationhub.ListProgressUpdateStreamsInput) migrationhub.ListProgressUpdateStreamsRequest
+}
+
+// NotifyApplicationStateRequester provides the interface for the NotifyApplicationStateRequest API operation.
+type NotifyApplicationStateRequester interface {
+	NotifyApplicationStateRequest(*migrationhub.NotifyApplicationStateInput) migrationhub.NotifyApplicationStateRequest
+}
+
+// NotifyMigrationTaskStateRequester provides the interface for the NotifyMigrationTaskStateRequest API operation.
+type NotifyMigrationTaskStateRequester interface {
+	NotifyMigrationTaskStateRequest(*migrationhub.NotifyMigrationTaskStateInput) migrationhub.NotifyMigrationTaskStateRequest
+}
+
+// PutResourceAttributesRequester provides the interface for the PutResourceAttributesRequest API operation.
+type PutResourceAttributesRequester interface {
+	PutResourceAttributesRequest(*migrationhub.PutResourceAttributesInput) migrationhub.PutResourceAttributesRequest
+}

@@ -13,147 +13,202 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elbv2"
 )
 
-// ELBV2API provides an interface to enable mocking the
-// elbv2.ELBV2 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Elastic Load Balancing.
-//    func myFunc(svc elbv2iface.ELBV2API) bool {
-//        // Make svc.AddListenerCertificates request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := elbv2.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockELBV2Client struct {
-//        elbv2iface.ELBV2API
-//    }
-//    func (m *mockELBV2Client) AddListenerCertificates(input *elbv2.AddListenerCertificatesInput) (*elbv2.AddListenerCertificatesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockELBV2Client{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ELBV2API interface {
+// AddListenerCertificatesRequester provides the interface for the AddListenerCertificatesRequest API operation.
+type AddListenerCertificatesRequester interface {
 	AddListenerCertificatesRequest(*elbv2.AddListenerCertificatesInput) elbv2.AddListenerCertificatesRequest
+}
 
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
 	AddTagsRequest(*elbv2.AddTagsInput) elbv2.AddTagsRequest
+}
 
+// CreateListenerRequester provides the interface for the CreateListenerRequest API operation.
+type CreateListenerRequester interface {
 	CreateListenerRequest(*elbv2.CreateListenerInput) elbv2.CreateListenerRequest
+}
 
+// CreateLoadBalancerRequester provides the interface for the CreateLoadBalancerRequest API operation.
+type CreateLoadBalancerRequester interface {
 	CreateLoadBalancerRequest(*elbv2.CreateLoadBalancerInput) elbv2.CreateLoadBalancerRequest
+}
 
+// CreateRuleRequester provides the interface for the CreateRuleRequest API operation.
+type CreateRuleRequester interface {
 	CreateRuleRequest(*elbv2.CreateRuleInput) elbv2.CreateRuleRequest
+}
 
+// CreateTargetGroupRequester provides the interface for the CreateTargetGroupRequest API operation.
+type CreateTargetGroupRequester interface {
 	CreateTargetGroupRequest(*elbv2.CreateTargetGroupInput) elbv2.CreateTargetGroupRequest
+}
 
+// DeleteListenerRequester provides the interface for the DeleteListenerRequest API operation.
+type DeleteListenerRequester interface {
 	DeleteListenerRequest(*elbv2.DeleteListenerInput) elbv2.DeleteListenerRequest
+}
 
+// DeleteLoadBalancerRequester provides the interface for the DeleteLoadBalancerRequest API operation.
+type DeleteLoadBalancerRequester interface {
 	DeleteLoadBalancerRequest(*elbv2.DeleteLoadBalancerInput) elbv2.DeleteLoadBalancerRequest
+}
 
+// DeleteRuleRequester provides the interface for the DeleteRuleRequest API operation.
+type DeleteRuleRequester interface {
 	DeleteRuleRequest(*elbv2.DeleteRuleInput) elbv2.DeleteRuleRequest
+}
 
+// DeleteTargetGroupRequester provides the interface for the DeleteTargetGroupRequest API operation.
+type DeleteTargetGroupRequester interface {
 	DeleteTargetGroupRequest(*elbv2.DeleteTargetGroupInput) elbv2.DeleteTargetGroupRequest
+}
 
+// DeregisterTargetsRequester provides the interface for the DeregisterTargetsRequest API operation.
+type DeregisterTargetsRequester interface {
 	DeregisterTargetsRequest(*elbv2.DeregisterTargetsInput) elbv2.DeregisterTargetsRequest
+}
 
+// DescribeAccountLimitsRequester provides the interface for the DescribeAccountLimitsRequest API operation.
+type DescribeAccountLimitsRequester interface {
 	DescribeAccountLimitsRequest(*elbv2.DescribeAccountLimitsInput) elbv2.DescribeAccountLimitsRequest
+}
 
+// DescribeListenerCertificatesRequester provides the interface for the DescribeListenerCertificatesRequest API operation.
+type DescribeListenerCertificatesRequester interface {
 	DescribeListenerCertificatesRequest(*elbv2.DescribeListenerCertificatesInput) elbv2.DescribeListenerCertificatesRequest
+}
 
+// DescribeListenersRequester provides the interface for the DescribeListenersRequest API operation.
+type DescribeListenersRequester interface {
 	DescribeListenersRequest(*elbv2.DescribeListenersInput) elbv2.DescribeListenersRequest
+}
 
-	DescribeListenersPages(*elbv2.DescribeListenersInput, func(*elbv2.DescribeListenersOutput, bool) bool) error
-	DescribeListenersPagesWithContext(aws.Context, *elbv2.DescribeListenersInput, func(*elbv2.DescribeListenersOutput, bool) bool, ...aws.Option) error
-
+// DescribeLoadBalancerAttributesRequester provides the interface for the DescribeLoadBalancerAttributesRequest API operation.
+type DescribeLoadBalancerAttributesRequester interface {
 	DescribeLoadBalancerAttributesRequest(*elbv2.DescribeLoadBalancerAttributesInput) elbv2.DescribeLoadBalancerAttributesRequest
+}
 
+// DescribeLoadBalancersRequester provides the interface for the DescribeLoadBalancersRequest API operation.
+type DescribeLoadBalancersRequester interface {
 	DescribeLoadBalancersRequest(*elbv2.DescribeLoadBalancersInput) elbv2.DescribeLoadBalancersRequest
+}
 
-	DescribeLoadBalancersPages(*elbv2.DescribeLoadBalancersInput, func(*elbv2.DescribeLoadBalancersOutput, bool) bool) error
-	DescribeLoadBalancersPagesWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, func(*elbv2.DescribeLoadBalancersOutput, bool) bool, ...aws.Option) error
-
+// DescribeRulesRequester provides the interface for the DescribeRulesRequest API operation.
+type DescribeRulesRequester interface {
 	DescribeRulesRequest(*elbv2.DescribeRulesInput) elbv2.DescribeRulesRequest
+}
 
+// DescribeSSLPoliciesRequester provides the interface for the DescribeSSLPoliciesRequest API operation.
+type DescribeSSLPoliciesRequester interface {
 	DescribeSSLPoliciesRequest(*elbv2.DescribeSSLPoliciesInput) elbv2.DescribeSSLPoliciesRequest
+}
 
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
 	DescribeTagsRequest(*elbv2.DescribeTagsInput) elbv2.DescribeTagsRequest
+}
 
+// DescribeTargetGroupAttributesRequester provides the interface for the DescribeTargetGroupAttributesRequest API operation.
+type DescribeTargetGroupAttributesRequester interface {
 	DescribeTargetGroupAttributesRequest(*elbv2.DescribeTargetGroupAttributesInput) elbv2.DescribeTargetGroupAttributesRequest
+}
 
+// DescribeTargetGroupsRequester provides the interface for the DescribeTargetGroupsRequest API operation.
+type DescribeTargetGroupsRequester interface {
 	DescribeTargetGroupsRequest(*elbv2.DescribeTargetGroupsInput) elbv2.DescribeTargetGroupsRequest
+}
 
-	DescribeTargetGroupsPages(*elbv2.DescribeTargetGroupsInput, func(*elbv2.DescribeTargetGroupsOutput, bool) bool) error
-	DescribeTargetGroupsPagesWithContext(aws.Context, *elbv2.DescribeTargetGroupsInput, func(*elbv2.DescribeTargetGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeTargetHealthRequester provides the interface for the DescribeTargetHealthRequest API operation.
+type DescribeTargetHealthRequester interface {
 	DescribeTargetHealthRequest(*elbv2.DescribeTargetHealthInput) elbv2.DescribeTargetHealthRequest
+}
 
+// ModifyListenerRequester provides the interface for the ModifyListenerRequest API operation.
+type ModifyListenerRequester interface {
 	ModifyListenerRequest(*elbv2.ModifyListenerInput) elbv2.ModifyListenerRequest
+}
 
+// ModifyLoadBalancerAttributesRequester provides the interface for the ModifyLoadBalancerAttributesRequest API operation.
+type ModifyLoadBalancerAttributesRequester interface {
 	ModifyLoadBalancerAttributesRequest(*elbv2.ModifyLoadBalancerAttributesInput) elbv2.ModifyLoadBalancerAttributesRequest
+}
 
+// ModifyRuleRequester provides the interface for the ModifyRuleRequest API operation.
+type ModifyRuleRequester interface {
 	ModifyRuleRequest(*elbv2.ModifyRuleInput) elbv2.ModifyRuleRequest
+}
 
+// ModifyTargetGroupRequester provides the interface for the ModifyTargetGroupRequest API operation.
+type ModifyTargetGroupRequester interface {
 	ModifyTargetGroupRequest(*elbv2.ModifyTargetGroupInput) elbv2.ModifyTargetGroupRequest
+}
 
+// ModifyTargetGroupAttributesRequester provides the interface for the ModifyTargetGroupAttributesRequest API operation.
+type ModifyTargetGroupAttributesRequester interface {
 	ModifyTargetGroupAttributesRequest(*elbv2.ModifyTargetGroupAttributesInput) elbv2.ModifyTargetGroupAttributesRequest
+}
 
+// RegisterTargetsRequester provides the interface for the RegisterTargetsRequest API operation.
+type RegisterTargetsRequester interface {
 	RegisterTargetsRequest(*elbv2.RegisterTargetsInput) elbv2.RegisterTargetsRequest
+}
 
+// RemoveListenerCertificatesRequester provides the interface for the RemoveListenerCertificatesRequest API operation.
+type RemoveListenerCertificatesRequester interface {
 	RemoveListenerCertificatesRequest(*elbv2.RemoveListenerCertificatesInput) elbv2.RemoveListenerCertificatesRequest
+}
 
+// RemoveTagsRequester provides the interface for the RemoveTagsRequest API operation.
+type RemoveTagsRequester interface {
 	RemoveTagsRequest(*elbv2.RemoveTagsInput) elbv2.RemoveTagsRequest
+}
 
+// SetIpAddressTypeRequester provides the interface for the SetIpAddressTypeRequest API operation.
+type SetIpAddressTypeRequester interface {
 	SetIpAddressTypeRequest(*elbv2.SetIpAddressTypeInput) elbv2.SetIpAddressTypeRequest
+}
 
+// SetRulePrioritiesRequester provides the interface for the SetRulePrioritiesRequest API operation.
+type SetRulePrioritiesRequester interface {
 	SetRulePrioritiesRequest(*elbv2.SetRulePrioritiesInput) elbv2.SetRulePrioritiesRequest
+}
 
+// SetSecurityGroupsRequester provides the interface for the SetSecurityGroupsRequest API operation.
+type SetSecurityGroupsRequester interface {
 	SetSecurityGroupsRequest(*elbv2.SetSecurityGroupsInput) elbv2.SetSecurityGroupsRequest
+}
 
+// SetSubnetsRequester provides the interface for the SetSubnetsRequest API operation.
+type SetSubnetsRequester interface {
 	SetSubnetsRequest(*elbv2.SetSubnetsInput) elbv2.SetSubnetsRequest
+}
 
+// LoadBalancerAvailableWaiter provides the interface for the WaitUntilLoadBalancerAvailable waiter.
+type LoadBalancerAvailableWaiter interface {
 	WaitUntilLoadBalancerAvailable(*elbv2.DescribeLoadBalancersInput) error
 	WaitUntilLoadBalancerAvailableWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+}
 
+// LoadBalancerExistsWaiter provides the interface for the WaitUntilLoadBalancerExists waiter.
+type LoadBalancerExistsWaiter interface {
 	WaitUntilLoadBalancerExists(*elbv2.DescribeLoadBalancersInput) error
 	WaitUntilLoadBalancerExistsWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+}
 
+// LoadBalancersDeletedWaiter provides the interface for the WaitUntilLoadBalancersDeleted waiter.
+type LoadBalancersDeletedWaiter interface {
 	WaitUntilLoadBalancersDeleted(*elbv2.DescribeLoadBalancersInput) error
 	WaitUntilLoadBalancersDeletedWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+}
 
+// TargetDeregisteredWaiter provides the interface for the WaitUntilTargetDeregistered waiter.
+type TargetDeregisteredWaiter interface {
 	WaitUntilTargetDeregistered(*elbv2.DescribeTargetHealthInput) error
 	WaitUntilTargetDeregisteredWithContext(aws.Context, *elbv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
+}
 
+// TargetInServiceWaiter provides the interface for the WaitUntilTargetInService waiter.
+type TargetInServiceWaiter interface {
 	WaitUntilTargetInService(*elbv2.DescribeTargetHealthInput) error
 	WaitUntilTargetInServiceWithContext(aws.Context, *elbv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
 }
-
-var _ ELBV2API = (*elbv2.ELBV2)(nil)

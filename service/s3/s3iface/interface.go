@@ -13,230 +13,396 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-// S3API provides an interface to enable mocking the
-// s3.S3 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Storage Service.
-//    func myFunc(svc s3iface.S3API) bool {
-//        // Make svc.AbortMultipartUpload request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := s3.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockS3Client struct {
-//        s3iface.S3API
-//    }
-//    func (m *mockS3Client) AbortMultipartUpload(input *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockS3Client{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type S3API interface {
+// AbortMultipartUploadRequester provides the interface for the AbortMultipartUploadRequest API operation.
+type AbortMultipartUploadRequester interface {
 	AbortMultipartUploadRequest(*s3.AbortMultipartUploadInput) s3.AbortMultipartUploadRequest
+}
 
+// CompleteMultipartUploadRequester provides the interface for the CompleteMultipartUploadRequest API operation.
+type CompleteMultipartUploadRequester interface {
 	CompleteMultipartUploadRequest(*s3.CompleteMultipartUploadInput) s3.CompleteMultipartUploadRequest
+}
 
+// CopyObjectRequester provides the interface for the CopyObjectRequest API operation.
+type CopyObjectRequester interface {
 	CopyObjectRequest(*s3.CopyObjectInput) s3.CopyObjectRequest
+}
 
+// CreateBucketRequester provides the interface for the CreateBucketRequest API operation.
+type CreateBucketRequester interface {
 	CreateBucketRequest(*s3.CreateBucketInput) s3.CreateBucketRequest
+}
 
+// CreateMultipartUploadRequester provides the interface for the CreateMultipartUploadRequest API operation.
+type CreateMultipartUploadRequester interface {
 	CreateMultipartUploadRequest(*s3.CreateMultipartUploadInput) s3.CreateMultipartUploadRequest
+}
 
+// DeleteBucketRequester provides the interface for the DeleteBucketRequest API operation.
+type DeleteBucketRequester interface {
 	DeleteBucketRequest(*s3.DeleteBucketInput) s3.DeleteBucketRequest
+}
 
+// DeleteBucketAnalyticsConfigurationRequester provides the interface for the DeleteBucketAnalyticsConfigurationRequest API operation.
+type DeleteBucketAnalyticsConfigurationRequester interface {
 	DeleteBucketAnalyticsConfigurationRequest(*s3.DeleteBucketAnalyticsConfigurationInput) s3.DeleteBucketAnalyticsConfigurationRequest
+}
 
+// DeleteBucketCorsRequester provides the interface for the DeleteBucketCorsRequest API operation.
+type DeleteBucketCorsRequester interface {
 	DeleteBucketCorsRequest(*s3.DeleteBucketCorsInput) s3.DeleteBucketCorsRequest
+}
 
+// DeleteBucketInventoryConfigurationRequester provides the interface for the DeleteBucketInventoryConfigurationRequest API operation.
+type DeleteBucketInventoryConfigurationRequester interface {
 	DeleteBucketInventoryConfigurationRequest(*s3.DeleteBucketInventoryConfigurationInput) s3.DeleteBucketInventoryConfigurationRequest
+}
 
+// DeleteBucketLifecycleRequester provides the interface for the DeleteBucketLifecycleRequest API operation.
+type DeleteBucketLifecycleRequester interface {
 	DeleteBucketLifecycleRequest(*s3.DeleteBucketLifecycleInput) s3.DeleteBucketLifecycleRequest
+}
 
+// DeleteBucketMetricsConfigurationRequester provides the interface for the DeleteBucketMetricsConfigurationRequest API operation.
+type DeleteBucketMetricsConfigurationRequester interface {
 	DeleteBucketMetricsConfigurationRequest(*s3.DeleteBucketMetricsConfigurationInput) s3.DeleteBucketMetricsConfigurationRequest
+}
 
+// DeleteBucketPolicyRequester provides the interface for the DeleteBucketPolicyRequest API operation.
+type DeleteBucketPolicyRequester interface {
 	DeleteBucketPolicyRequest(*s3.DeleteBucketPolicyInput) s3.DeleteBucketPolicyRequest
+}
 
+// DeleteBucketReplicationRequester provides the interface for the DeleteBucketReplicationRequest API operation.
+type DeleteBucketReplicationRequester interface {
 	DeleteBucketReplicationRequest(*s3.DeleteBucketReplicationInput) s3.DeleteBucketReplicationRequest
+}
 
+// DeleteBucketTaggingRequester provides the interface for the DeleteBucketTaggingRequest API operation.
+type DeleteBucketTaggingRequester interface {
 	DeleteBucketTaggingRequest(*s3.DeleteBucketTaggingInput) s3.DeleteBucketTaggingRequest
+}
 
+// DeleteBucketWebsiteRequester provides the interface for the DeleteBucketWebsiteRequest API operation.
+type DeleteBucketWebsiteRequester interface {
 	DeleteBucketWebsiteRequest(*s3.DeleteBucketWebsiteInput) s3.DeleteBucketWebsiteRequest
+}
 
+// DeleteObjectRequester provides the interface for the DeleteObjectRequest API operation.
+type DeleteObjectRequester interface {
 	DeleteObjectRequest(*s3.DeleteObjectInput) s3.DeleteObjectRequest
+}
 
+// DeleteObjectTaggingRequester provides the interface for the DeleteObjectTaggingRequest API operation.
+type DeleteObjectTaggingRequester interface {
 	DeleteObjectTaggingRequest(*s3.DeleteObjectTaggingInput) s3.DeleteObjectTaggingRequest
+}
 
+// DeleteObjectsRequester provides the interface for the DeleteObjectsRequest API operation.
+type DeleteObjectsRequester interface {
 	DeleteObjectsRequest(*s3.DeleteObjectsInput) s3.DeleteObjectsRequest
+}
 
+// GetBucketAccelerateConfigurationRequester provides the interface for the GetBucketAccelerateConfigurationRequest API operation.
+type GetBucketAccelerateConfigurationRequester interface {
 	GetBucketAccelerateConfigurationRequest(*s3.GetBucketAccelerateConfigurationInput) s3.GetBucketAccelerateConfigurationRequest
+}
 
+// GetBucketAclRequester provides the interface for the GetBucketAclRequest API operation.
+type GetBucketAclRequester interface {
 	GetBucketAclRequest(*s3.GetBucketAclInput) s3.GetBucketAclRequest
+}
 
+// GetBucketAnalyticsConfigurationRequester provides the interface for the GetBucketAnalyticsConfigurationRequest API operation.
+type GetBucketAnalyticsConfigurationRequester interface {
 	GetBucketAnalyticsConfigurationRequest(*s3.GetBucketAnalyticsConfigurationInput) s3.GetBucketAnalyticsConfigurationRequest
+}
 
+// GetBucketCorsRequester provides the interface for the GetBucketCorsRequest API operation.
+type GetBucketCorsRequester interface {
 	GetBucketCorsRequest(*s3.GetBucketCorsInput) s3.GetBucketCorsRequest
+}
 
+// GetBucketInventoryConfigurationRequester provides the interface for the GetBucketInventoryConfigurationRequest API operation.
+type GetBucketInventoryConfigurationRequester interface {
 	GetBucketInventoryConfigurationRequest(*s3.GetBucketInventoryConfigurationInput) s3.GetBucketInventoryConfigurationRequest
+}
 
+// GetBucketLifecycleRequester provides the interface for the GetBucketLifecycleRequest API operation.
+type GetBucketLifecycleRequester interface {
 	GetBucketLifecycleRequest(*s3.GetBucketLifecycleInput) s3.GetBucketLifecycleRequest
+}
 
+// GetBucketLifecycleConfigurationRequester provides the interface for the GetBucketLifecycleConfigurationRequest API operation.
+type GetBucketLifecycleConfigurationRequester interface {
 	GetBucketLifecycleConfigurationRequest(*s3.GetBucketLifecycleConfigurationInput) s3.GetBucketLifecycleConfigurationRequest
+}
 
+// GetBucketLocationRequester provides the interface for the GetBucketLocationRequest API operation.
+type GetBucketLocationRequester interface {
 	GetBucketLocationRequest(*s3.GetBucketLocationInput) s3.GetBucketLocationRequest
+}
 
+// GetBucketLoggingRequester provides the interface for the GetBucketLoggingRequest API operation.
+type GetBucketLoggingRequester interface {
 	GetBucketLoggingRequest(*s3.GetBucketLoggingInput) s3.GetBucketLoggingRequest
+}
 
+// GetBucketMetricsConfigurationRequester provides the interface for the GetBucketMetricsConfigurationRequest API operation.
+type GetBucketMetricsConfigurationRequester interface {
 	GetBucketMetricsConfigurationRequest(*s3.GetBucketMetricsConfigurationInput) s3.GetBucketMetricsConfigurationRequest
+}
 
+// GetBucketNotificationRequester provides the interface for the GetBucketNotificationRequest API operation.
+type GetBucketNotificationRequester interface {
 	GetBucketNotificationRequest(*s3.GetBucketNotificationConfigurationInput) s3.GetBucketNotificationRequest
+}
 
+// GetBucketNotificationConfigurationRequester provides the interface for the GetBucketNotificationConfigurationRequest API operation.
+type GetBucketNotificationConfigurationRequester interface {
 	GetBucketNotificationConfigurationRequest(*s3.GetBucketNotificationConfigurationInput) s3.GetBucketNotificationConfigurationRequest
+}
 
+// GetBucketPolicyRequester provides the interface for the GetBucketPolicyRequest API operation.
+type GetBucketPolicyRequester interface {
 	GetBucketPolicyRequest(*s3.GetBucketPolicyInput) s3.GetBucketPolicyRequest
+}
 
+// GetBucketReplicationRequester provides the interface for the GetBucketReplicationRequest API operation.
+type GetBucketReplicationRequester interface {
 	GetBucketReplicationRequest(*s3.GetBucketReplicationInput) s3.GetBucketReplicationRequest
+}
 
+// GetBucketRequestPaymentRequester provides the interface for the GetBucketRequestPaymentRequest API operation.
+type GetBucketRequestPaymentRequester interface {
 	GetBucketRequestPaymentRequest(*s3.GetBucketRequestPaymentInput) s3.GetBucketRequestPaymentRequest
+}
 
+// GetBucketTaggingRequester provides the interface for the GetBucketTaggingRequest API operation.
+type GetBucketTaggingRequester interface {
 	GetBucketTaggingRequest(*s3.GetBucketTaggingInput) s3.GetBucketTaggingRequest
+}
 
+// GetBucketVersioningRequester provides the interface for the GetBucketVersioningRequest API operation.
+type GetBucketVersioningRequester interface {
 	GetBucketVersioningRequest(*s3.GetBucketVersioningInput) s3.GetBucketVersioningRequest
+}
 
+// GetBucketWebsiteRequester provides the interface for the GetBucketWebsiteRequest API operation.
+type GetBucketWebsiteRequester interface {
 	GetBucketWebsiteRequest(*s3.GetBucketWebsiteInput) s3.GetBucketWebsiteRequest
+}
 
+// GetObjectRequester provides the interface for the GetObjectRequest API operation.
+type GetObjectRequester interface {
 	GetObjectRequest(*s3.GetObjectInput) s3.GetObjectRequest
+}
 
+// GetObjectAclRequester provides the interface for the GetObjectAclRequest API operation.
+type GetObjectAclRequester interface {
 	GetObjectAclRequest(*s3.GetObjectAclInput) s3.GetObjectAclRequest
+}
 
+// GetObjectTaggingRequester provides the interface for the GetObjectTaggingRequest API operation.
+type GetObjectTaggingRequester interface {
 	GetObjectTaggingRequest(*s3.GetObjectTaggingInput) s3.GetObjectTaggingRequest
+}
 
+// GetObjectTorrentRequester provides the interface for the GetObjectTorrentRequest API operation.
+type GetObjectTorrentRequester interface {
 	GetObjectTorrentRequest(*s3.GetObjectTorrentInput) s3.GetObjectTorrentRequest
+}
 
+// HeadBucketRequester provides the interface for the HeadBucketRequest API operation.
+type HeadBucketRequester interface {
 	HeadBucketRequest(*s3.HeadBucketInput) s3.HeadBucketRequest
+}
 
+// HeadObjectRequester provides the interface for the HeadObjectRequest API operation.
+type HeadObjectRequester interface {
 	HeadObjectRequest(*s3.HeadObjectInput) s3.HeadObjectRequest
+}
 
+// ListBucketAnalyticsConfigurationsRequester provides the interface for the ListBucketAnalyticsConfigurationsRequest API operation.
+type ListBucketAnalyticsConfigurationsRequester interface {
 	ListBucketAnalyticsConfigurationsRequest(*s3.ListBucketAnalyticsConfigurationsInput) s3.ListBucketAnalyticsConfigurationsRequest
+}
 
+// ListBucketInventoryConfigurationsRequester provides the interface for the ListBucketInventoryConfigurationsRequest API operation.
+type ListBucketInventoryConfigurationsRequester interface {
 	ListBucketInventoryConfigurationsRequest(*s3.ListBucketInventoryConfigurationsInput) s3.ListBucketInventoryConfigurationsRequest
+}
 
+// ListBucketMetricsConfigurationsRequester provides the interface for the ListBucketMetricsConfigurationsRequest API operation.
+type ListBucketMetricsConfigurationsRequester interface {
 	ListBucketMetricsConfigurationsRequest(*s3.ListBucketMetricsConfigurationsInput) s3.ListBucketMetricsConfigurationsRequest
+}
 
+// ListBucketsRequester provides the interface for the ListBucketsRequest API operation.
+type ListBucketsRequester interface {
 	ListBucketsRequest(*s3.ListBucketsInput) s3.ListBucketsRequest
+}
 
+// ListMultipartUploadsRequester provides the interface for the ListMultipartUploadsRequest API operation.
+type ListMultipartUploadsRequester interface {
 	ListMultipartUploadsRequest(*s3.ListMultipartUploadsInput) s3.ListMultipartUploadsRequest
+}
 
-	ListMultipartUploadsPages(*s3.ListMultipartUploadsInput, func(*s3.ListMultipartUploadsOutput, bool) bool) error
-	ListMultipartUploadsPagesWithContext(aws.Context, *s3.ListMultipartUploadsInput, func(*s3.ListMultipartUploadsOutput, bool) bool, ...aws.Option) error
-
+// ListObjectVersionsRequester provides the interface for the ListObjectVersionsRequest API operation.
+type ListObjectVersionsRequester interface {
 	ListObjectVersionsRequest(*s3.ListObjectVersionsInput) s3.ListObjectVersionsRequest
+}
 
-	ListObjectVersionsPages(*s3.ListObjectVersionsInput, func(*s3.ListObjectVersionsOutput, bool) bool) error
-	ListObjectVersionsPagesWithContext(aws.Context, *s3.ListObjectVersionsInput, func(*s3.ListObjectVersionsOutput, bool) bool, ...aws.Option) error
-
+// ListObjectsRequester provides the interface for the ListObjectsRequest API operation.
+type ListObjectsRequester interface {
 	ListObjectsRequest(*s3.ListObjectsInput) s3.ListObjectsRequest
+}
 
-	ListObjectsPages(*s3.ListObjectsInput, func(*s3.ListObjectsOutput, bool) bool) error
-	ListObjectsPagesWithContext(aws.Context, *s3.ListObjectsInput, func(*s3.ListObjectsOutput, bool) bool, ...aws.Option) error
-
+// ListObjectsV2Requester provides the interface for the ListObjectsV2Request API operation.
+type ListObjectsV2Requester interface {
 	ListObjectsV2Request(*s3.ListObjectsV2Input) s3.ListObjectsV2Request
+}
 
-	ListObjectsV2Pages(*s3.ListObjectsV2Input, func(*s3.ListObjectsV2Output, bool) bool) error
-	ListObjectsV2PagesWithContext(aws.Context, *s3.ListObjectsV2Input, func(*s3.ListObjectsV2Output, bool) bool, ...aws.Option) error
-
+// ListPartsRequester provides the interface for the ListPartsRequest API operation.
+type ListPartsRequester interface {
 	ListPartsRequest(*s3.ListPartsInput) s3.ListPartsRequest
+}
 
-	ListPartsPages(*s3.ListPartsInput, func(*s3.ListPartsOutput, bool) bool) error
-	ListPartsPagesWithContext(aws.Context, *s3.ListPartsInput, func(*s3.ListPartsOutput, bool) bool, ...aws.Option) error
-
+// PutBucketAccelerateConfigurationRequester provides the interface for the PutBucketAccelerateConfigurationRequest API operation.
+type PutBucketAccelerateConfigurationRequester interface {
 	PutBucketAccelerateConfigurationRequest(*s3.PutBucketAccelerateConfigurationInput) s3.PutBucketAccelerateConfigurationRequest
+}
 
+// PutBucketAclRequester provides the interface for the PutBucketAclRequest API operation.
+type PutBucketAclRequester interface {
 	PutBucketAclRequest(*s3.PutBucketAclInput) s3.PutBucketAclRequest
+}
 
+// PutBucketAnalyticsConfigurationRequester provides the interface for the PutBucketAnalyticsConfigurationRequest API operation.
+type PutBucketAnalyticsConfigurationRequester interface {
 	PutBucketAnalyticsConfigurationRequest(*s3.PutBucketAnalyticsConfigurationInput) s3.PutBucketAnalyticsConfigurationRequest
+}
 
+// PutBucketCorsRequester provides the interface for the PutBucketCorsRequest API operation.
+type PutBucketCorsRequester interface {
 	PutBucketCorsRequest(*s3.PutBucketCorsInput) s3.PutBucketCorsRequest
+}
 
+// PutBucketInventoryConfigurationRequester provides the interface for the PutBucketInventoryConfigurationRequest API operation.
+type PutBucketInventoryConfigurationRequester interface {
 	PutBucketInventoryConfigurationRequest(*s3.PutBucketInventoryConfigurationInput) s3.PutBucketInventoryConfigurationRequest
+}
 
+// PutBucketLifecycleRequester provides the interface for the PutBucketLifecycleRequest API operation.
+type PutBucketLifecycleRequester interface {
 	PutBucketLifecycleRequest(*s3.PutBucketLifecycleInput) s3.PutBucketLifecycleRequest
+}
 
+// PutBucketLifecycleConfigurationRequester provides the interface for the PutBucketLifecycleConfigurationRequest API operation.
+type PutBucketLifecycleConfigurationRequester interface {
 	PutBucketLifecycleConfigurationRequest(*s3.PutBucketLifecycleConfigurationInput) s3.PutBucketLifecycleConfigurationRequest
+}
 
+// PutBucketLoggingRequester provides the interface for the PutBucketLoggingRequest API operation.
+type PutBucketLoggingRequester interface {
 	PutBucketLoggingRequest(*s3.PutBucketLoggingInput) s3.PutBucketLoggingRequest
+}
 
+// PutBucketMetricsConfigurationRequester provides the interface for the PutBucketMetricsConfigurationRequest API operation.
+type PutBucketMetricsConfigurationRequester interface {
 	PutBucketMetricsConfigurationRequest(*s3.PutBucketMetricsConfigurationInput) s3.PutBucketMetricsConfigurationRequest
+}
 
+// PutBucketNotificationRequester provides the interface for the PutBucketNotificationRequest API operation.
+type PutBucketNotificationRequester interface {
 	PutBucketNotificationRequest(*s3.PutBucketNotificationInput) s3.PutBucketNotificationRequest
+}
 
+// PutBucketNotificationConfigurationRequester provides the interface for the PutBucketNotificationConfigurationRequest API operation.
+type PutBucketNotificationConfigurationRequester interface {
 	PutBucketNotificationConfigurationRequest(*s3.PutBucketNotificationConfigurationInput) s3.PutBucketNotificationConfigurationRequest
+}
 
+// PutBucketPolicyRequester provides the interface for the PutBucketPolicyRequest API operation.
+type PutBucketPolicyRequester interface {
 	PutBucketPolicyRequest(*s3.PutBucketPolicyInput) s3.PutBucketPolicyRequest
+}
 
+// PutBucketReplicationRequester provides the interface for the PutBucketReplicationRequest API operation.
+type PutBucketReplicationRequester interface {
 	PutBucketReplicationRequest(*s3.PutBucketReplicationInput) s3.PutBucketReplicationRequest
+}
 
+// PutBucketRequestPaymentRequester provides the interface for the PutBucketRequestPaymentRequest API operation.
+type PutBucketRequestPaymentRequester interface {
 	PutBucketRequestPaymentRequest(*s3.PutBucketRequestPaymentInput) s3.PutBucketRequestPaymentRequest
+}
 
+// PutBucketTaggingRequester provides the interface for the PutBucketTaggingRequest API operation.
+type PutBucketTaggingRequester interface {
 	PutBucketTaggingRequest(*s3.PutBucketTaggingInput) s3.PutBucketTaggingRequest
+}
 
+// PutBucketVersioningRequester provides the interface for the PutBucketVersioningRequest API operation.
+type PutBucketVersioningRequester interface {
 	PutBucketVersioningRequest(*s3.PutBucketVersioningInput) s3.PutBucketVersioningRequest
+}
 
+// PutBucketWebsiteRequester provides the interface for the PutBucketWebsiteRequest API operation.
+type PutBucketWebsiteRequester interface {
 	PutBucketWebsiteRequest(*s3.PutBucketWebsiteInput) s3.PutBucketWebsiteRequest
+}
 
+// PutObjectRequester provides the interface for the PutObjectRequest API operation.
+type PutObjectRequester interface {
 	PutObjectRequest(*s3.PutObjectInput) s3.PutObjectRequest
+}
 
+// PutObjectAclRequester provides the interface for the PutObjectAclRequest API operation.
+type PutObjectAclRequester interface {
 	PutObjectAclRequest(*s3.PutObjectAclInput) s3.PutObjectAclRequest
+}
 
+// PutObjectTaggingRequester provides the interface for the PutObjectTaggingRequest API operation.
+type PutObjectTaggingRequester interface {
 	PutObjectTaggingRequest(*s3.PutObjectTaggingInput) s3.PutObjectTaggingRequest
+}
 
+// RestoreObjectRequester provides the interface for the RestoreObjectRequest API operation.
+type RestoreObjectRequester interface {
 	RestoreObjectRequest(*s3.RestoreObjectInput) s3.RestoreObjectRequest
+}
 
+// UploadPartRequester provides the interface for the UploadPartRequest API operation.
+type UploadPartRequester interface {
 	UploadPartRequest(*s3.UploadPartInput) s3.UploadPartRequest
+}
 
+// UploadPartCopyRequester provides the interface for the UploadPartCopyRequest API operation.
+type UploadPartCopyRequester interface {
 	UploadPartCopyRequest(*s3.UploadPartCopyInput) s3.UploadPartCopyRequest
+}
 
+// BucketExistsWaiter provides the interface for the WaitUntilBucketExists waiter.
+type BucketExistsWaiter interface {
 	WaitUntilBucketExists(*s3.HeadBucketInput) error
 	WaitUntilBucketExistsWithContext(aws.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
+}
 
+// BucketNotExistsWaiter provides the interface for the WaitUntilBucketNotExists waiter.
+type BucketNotExistsWaiter interface {
 	WaitUntilBucketNotExists(*s3.HeadBucketInput) error
 	WaitUntilBucketNotExistsWithContext(aws.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
+}
 
+// ObjectExistsWaiter provides the interface for the WaitUntilObjectExists waiter.
+type ObjectExistsWaiter interface {
 	WaitUntilObjectExists(*s3.HeadObjectInput) error
 	WaitUntilObjectExistsWithContext(aws.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
+}
 
+// ObjectNotExistsWaiter provides the interface for the WaitUntilObjectNotExists waiter.
+type ObjectNotExistsWaiter interface {
 	WaitUntilObjectNotExists(*s3.HeadObjectInput) error
 	WaitUntilObjectNotExistsWithContext(aws.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
 }
-
-var _ S3API = (*s3.S3)(nil)

@@ -13,84 +13,52 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
 )
 
-// CloudHSMV2API provides an interface to enable mocking the
-// cloudhsmv2.CloudHSMV2 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CloudHSM V2.
-//    func myFunc(svc cloudhsmv2iface.CloudHSMV2API) bool {
-//        // Make svc.CreateCluster request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudhsmv2.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudHSMV2Client struct {
-//        cloudhsmv2iface.CloudHSMV2API
-//    }
-//    func (m *mockCloudHSMV2Client) CreateCluster(input *cloudhsmv2.CreateClusterInput) (*cloudhsmv2.CreateClusterOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudHSMV2Client{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudHSMV2API interface {
+// CreateClusterRequester provides the interface for the CreateClusterRequest API operation.
+type CreateClusterRequester interface {
 	CreateClusterRequest(*cloudhsmv2.CreateClusterInput) cloudhsmv2.CreateClusterRequest
-
-	CreateHsmRequest(*cloudhsmv2.CreateHsmInput) cloudhsmv2.CreateHsmRequest
-
-	DeleteClusterRequest(*cloudhsmv2.DeleteClusterInput) cloudhsmv2.DeleteClusterRequest
-
-	DeleteHsmRequest(*cloudhsmv2.DeleteHsmInput) cloudhsmv2.DeleteHsmRequest
-
-	DescribeBackupsRequest(*cloudhsmv2.DescribeBackupsInput) cloudhsmv2.DescribeBackupsRequest
-
-	DescribeBackupsPages(*cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool) error
-	DescribeBackupsPagesWithContext(aws.Context, *cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool, ...aws.Option) error
-
-	DescribeClustersRequest(*cloudhsmv2.DescribeClustersInput) cloudhsmv2.DescribeClustersRequest
-
-	DescribeClustersPages(*cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool) error
-	DescribeClustersPagesWithContext(aws.Context, *cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool, ...aws.Option) error
-
-	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) cloudhsmv2.InitializeClusterRequest
-
-	ListTagsRequest(*cloudhsmv2.ListTagsInput) cloudhsmv2.ListTagsRequest
-
-	ListTagsPages(*cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool) error
-	ListTagsPagesWithContext(aws.Context, *cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool, ...aws.Option) error
-
-	TagResourceRequest(*cloudhsmv2.TagResourceInput) cloudhsmv2.TagResourceRequest
-
-	UntagResourceRequest(*cloudhsmv2.UntagResourceInput) cloudhsmv2.UntagResourceRequest
 }
 
-var _ CloudHSMV2API = (*cloudhsmv2.CloudHSMV2)(nil)
+// CreateHsmRequester provides the interface for the CreateHsmRequest API operation.
+type CreateHsmRequester interface {
+	CreateHsmRequest(*cloudhsmv2.CreateHsmInput) cloudhsmv2.CreateHsmRequest
+}
+
+// DeleteClusterRequester provides the interface for the DeleteClusterRequest API operation.
+type DeleteClusterRequester interface {
+	DeleteClusterRequest(*cloudhsmv2.DeleteClusterInput) cloudhsmv2.DeleteClusterRequest
+}
+
+// DeleteHsmRequester provides the interface for the DeleteHsmRequest API operation.
+type DeleteHsmRequester interface {
+	DeleteHsmRequest(*cloudhsmv2.DeleteHsmInput) cloudhsmv2.DeleteHsmRequest
+}
+
+// DescribeBackupsRequester provides the interface for the DescribeBackupsRequest API operation.
+type DescribeBackupsRequester interface {
+	DescribeBackupsRequest(*cloudhsmv2.DescribeBackupsInput) cloudhsmv2.DescribeBackupsRequest
+}
+
+// DescribeClustersRequester provides the interface for the DescribeClustersRequest API operation.
+type DescribeClustersRequester interface {
+	DescribeClustersRequest(*cloudhsmv2.DescribeClustersInput) cloudhsmv2.DescribeClustersRequest
+}
+
+// InitializeClusterRequester provides the interface for the InitializeClusterRequest API operation.
+type InitializeClusterRequester interface {
+	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) cloudhsmv2.InitializeClusterRequest
+}
+
+// ListTagsRequester provides the interface for the ListTagsRequest API operation.
+type ListTagsRequester interface {
+	ListTagsRequest(*cloudhsmv2.ListTagsInput) cloudhsmv2.ListTagsRequest
+}
+
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
+	TagResourceRequest(*cloudhsmv2.TagResourceInput) cloudhsmv2.TagResourceRequest
+}
+
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
+	UntagResourceRequest(*cloudhsmv2.UntagResourceInput) cloudhsmv2.UntagResourceRequest
+}

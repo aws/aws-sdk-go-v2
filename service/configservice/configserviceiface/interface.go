@@ -13,112 +13,137 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
 )
 
-// ConfigServiceAPI provides an interface to enable mocking the
-// configservice.ConfigService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Config.
-//    func myFunc(svc configserviceiface.ConfigServiceAPI) bool {
-//        // Make svc.DeleteConfigRule request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := configservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockConfigServiceClient struct {
-//        configserviceiface.ConfigServiceAPI
-//    }
-//    func (m *mockConfigServiceClient) DeleteConfigRule(input *configservice.DeleteConfigRuleInput) (*configservice.DeleteConfigRuleOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockConfigServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ConfigServiceAPI interface {
+// DeleteConfigRuleRequester provides the interface for the DeleteConfigRuleRequest API operation.
+type DeleteConfigRuleRequester interface {
 	DeleteConfigRuleRequest(*configservice.DeleteConfigRuleInput) configservice.DeleteConfigRuleRequest
-
-	DeleteConfigurationRecorderRequest(*configservice.DeleteConfigurationRecorderInput) configservice.DeleteConfigurationRecorderRequest
-
-	DeleteDeliveryChannelRequest(*configservice.DeleteDeliveryChannelInput) configservice.DeleteDeliveryChannelRequest
-
-	DeleteEvaluationResultsRequest(*configservice.DeleteEvaluationResultsInput) configservice.DeleteEvaluationResultsRequest
-
-	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) configservice.DeliverConfigSnapshotRequest
-
-	DescribeComplianceByConfigRuleRequest(*configservice.DescribeComplianceByConfigRuleInput) configservice.DescribeComplianceByConfigRuleRequest
-
-	DescribeComplianceByResourceRequest(*configservice.DescribeComplianceByResourceInput) configservice.DescribeComplianceByResourceRequest
-
-	DescribeConfigRuleEvaluationStatusRequest(*configservice.DescribeConfigRuleEvaluationStatusInput) configservice.DescribeConfigRuleEvaluationStatusRequest
-
-	DescribeConfigRulesRequest(*configservice.DescribeConfigRulesInput) configservice.DescribeConfigRulesRequest
-
-	DescribeConfigurationRecorderStatusRequest(*configservice.DescribeConfigurationRecorderStatusInput) configservice.DescribeConfigurationRecorderStatusRequest
-
-	DescribeConfigurationRecordersRequest(*configservice.DescribeConfigurationRecordersInput) configservice.DescribeConfigurationRecordersRequest
-
-	DescribeDeliveryChannelStatusRequest(*configservice.DescribeDeliveryChannelStatusInput) configservice.DescribeDeliveryChannelStatusRequest
-
-	DescribeDeliveryChannelsRequest(*configservice.DescribeDeliveryChannelsInput) configservice.DescribeDeliveryChannelsRequest
-
-	GetComplianceDetailsByConfigRuleRequest(*configservice.GetComplianceDetailsByConfigRuleInput) configservice.GetComplianceDetailsByConfigRuleRequest
-
-	GetComplianceDetailsByResourceRequest(*configservice.GetComplianceDetailsByResourceInput) configservice.GetComplianceDetailsByResourceRequest
-
-	GetComplianceSummaryByConfigRuleRequest(*configservice.GetComplianceSummaryByConfigRuleInput) configservice.GetComplianceSummaryByConfigRuleRequest
-
-	GetComplianceSummaryByResourceTypeRequest(*configservice.GetComplianceSummaryByResourceTypeInput) configservice.GetComplianceSummaryByResourceTypeRequest
-
-	GetDiscoveredResourceCountsRequest(*configservice.GetDiscoveredResourceCountsInput) configservice.GetDiscoveredResourceCountsRequest
-
-	GetResourceConfigHistoryRequest(*configservice.GetResourceConfigHistoryInput) configservice.GetResourceConfigHistoryRequest
-
-	GetResourceConfigHistoryPages(*configservice.GetResourceConfigHistoryInput, func(*configservice.GetResourceConfigHistoryOutput, bool) bool) error
-	GetResourceConfigHistoryPagesWithContext(aws.Context, *configservice.GetResourceConfigHistoryInput, func(*configservice.GetResourceConfigHistoryOutput, bool) bool, ...aws.Option) error
-
-	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) configservice.ListDiscoveredResourcesRequest
-
-	PutConfigRuleRequest(*configservice.PutConfigRuleInput) configservice.PutConfigRuleRequest
-
-	PutConfigurationRecorderRequest(*configservice.PutConfigurationRecorderInput) configservice.PutConfigurationRecorderRequest
-
-	PutDeliveryChannelRequest(*configservice.PutDeliveryChannelInput) configservice.PutDeliveryChannelRequest
-
-	PutEvaluationsRequest(*configservice.PutEvaluationsInput) configservice.PutEvaluationsRequest
-
-	StartConfigRulesEvaluationRequest(*configservice.StartConfigRulesEvaluationInput) configservice.StartConfigRulesEvaluationRequest
-
-	StartConfigurationRecorderRequest(*configservice.StartConfigurationRecorderInput) configservice.StartConfigurationRecorderRequest
-
-	StopConfigurationRecorderRequest(*configservice.StopConfigurationRecorderInput) configservice.StopConfigurationRecorderRequest
 }
 
-var _ ConfigServiceAPI = (*configservice.ConfigService)(nil)
+// DeleteConfigurationRecorderRequester provides the interface for the DeleteConfigurationRecorderRequest API operation.
+type DeleteConfigurationRecorderRequester interface {
+	DeleteConfigurationRecorderRequest(*configservice.DeleteConfigurationRecorderInput) configservice.DeleteConfigurationRecorderRequest
+}
+
+// DeleteDeliveryChannelRequester provides the interface for the DeleteDeliveryChannelRequest API operation.
+type DeleteDeliveryChannelRequester interface {
+	DeleteDeliveryChannelRequest(*configservice.DeleteDeliveryChannelInput) configservice.DeleteDeliveryChannelRequest
+}
+
+// DeleteEvaluationResultsRequester provides the interface for the DeleteEvaluationResultsRequest API operation.
+type DeleteEvaluationResultsRequester interface {
+	DeleteEvaluationResultsRequest(*configservice.DeleteEvaluationResultsInput) configservice.DeleteEvaluationResultsRequest
+}
+
+// DeliverConfigSnapshotRequester provides the interface for the DeliverConfigSnapshotRequest API operation.
+type DeliverConfigSnapshotRequester interface {
+	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) configservice.DeliverConfigSnapshotRequest
+}
+
+// DescribeComplianceByConfigRuleRequester provides the interface for the DescribeComplianceByConfigRuleRequest API operation.
+type DescribeComplianceByConfigRuleRequester interface {
+	DescribeComplianceByConfigRuleRequest(*configservice.DescribeComplianceByConfigRuleInput) configservice.DescribeComplianceByConfigRuleRequest
+}
+
+// DescribeComplianceByResourceRequester provides the interface for the DescribeComplianceByResourceRequest API operation.
+type DescribeComplianceByResourceRequester interface {
+	DescribeComplianceByResourceRequest(*configservice.DescribeComplianceByResourceInput) configservice.DescribeComplianceByResourceRequest
+}
+
+// DescribeConfigRuleEvaluationStatusRequester provides the interface for the DescribeConfigRuleEvaluationStatusRequest API operation.
+type DescribeConfigRuleEvaluationStatusRequester interface {
+	DescribeConfigRuleEvaluationStatusRequest(*configservice.DescribeConfigRuleEvaluationStatusInput) configservice.DescribeConfigRuleEvaluationStatusRequest
+}
+
+// DescribeConfigRulesRequester provides the interface for the DescribeConfigRulesRequest API operation.
+type DescribeConfigRulesRequester interface {
+	DescribeConfigRulesRequest(*configservice.DescribeConfigRulesInput) configservice.DescribeConfigRulesRequest
+}
+
+// DescribeConfigurationRecorderStatusRequester provides the interface for the DescribeConfigurationRecorderStatusRequest API operation.
+type DescribeConfigurationRecorderStatusRequester interface {
+	DescribeConfigurationRecorderStatusRequest(*configservice.DescribeConfigurationRecorderStatusInput) configservice.DescribeConfigurationRecorderStatusRequest
+}
+
+// DescribeConfigurationRecordersRequester provides the interface for the DescribeConfigurationRecordersRequest API operation.
+type DescribeConfigurationRecordersRequester interface {
+	DescribeConfigurationRecordersRequest(*configservice.DescribeConfigurationRecordersInput) configservice.DescribeConfigurationRecordersRequest
+}
+
+// DescribeDeliveryChannelStatusRequester provides the interface for the DescribeDeliveryChannelStatusRequest API operation.
+type DescribeDeliveryChannelStatusRequester interface {
+	DescribeDeliveryChannelStatusRequest(*configservice.DescribeDeliveryChannelStatusInput) configservice.DescribeDeliveryChannelStatusRequest
+}
+
+// DescribeDeliveryChannelsRequester provides the interface for the DescribeDeliveryChannelsRequest API operation.
+type DescribeDeliveryChannelsRequester interface {
+	DescribeDeliveryChannelsRequest(*configservice.DescribeDeliveryChannelsInput) configservice.DescribeDeliveryChannelsRequest
+}
+
+// GetComplianceDetailsByConfigRuleRequester provides the interface for the GetComplianceDetailsByConfigRuleRequest API operation.
+type GetComplianceDetailsByConfigRuleRequester interface {
+	GetComplianceDetailsByConfigRuleRequest(*configservice.GetComplianceDetailsByConfigRuleInput) configservice.GetComplianceDetailsByConfigRuleRequest
+}
+
+// GetComplianceDetailsByResourceRequester provides the interface for the GetComplianceDetailsByResourceRequest API operation.
+type GetComplianceDetailsByResourceRequester interface {
+	GetComplianceDetailsByResourceRequest(*configservice.GetComplianceDetailsByResourceInput) configservice.GetComplianceDetailsByResourceRequest
+}
+
+// GetComplianceSummaryByConfigRuleRequester provides the interface for the GetComplianceSummaryByConfigRuleRequest API operation.
+type GetComplianceSummaryByConfigRuleRequester interface {
+	GetComplianceSummaryByConfigRuleRequest(*configservice.GetComplianceSummaryByConfigRuleInput) configservice.GetComplianceSummaryByConfigRuleRequest
+}
+
+// GetComplianceSummaryByResourceTypeRequester provides the interface for the GetComplianceSummaryByResourceTypeRequest API operation.
+type GetComplianceSummaryByResourceTypeRequester interface {
+	GetComplianceSummaryByResourceTypeRequest(*configservice.GetComplianceSummaryByResourceTypeInput) configservice.GetComplianceSummaryByResourceTypeRequest
+}
+
+// GetDiscoveredResourceCountsRequester provides the interface for the GetDiscoveredResourceCountsRequest API operation.
+type GetDiscoveredResourceCountsRequester interface {
+	GetDiscoveredResourceCountsRequest(*configservice.GetDiscoveredResourceCountsInput) configservice.GetDiscoveredResourceCountsRequest
+}
+
+// GetResourceConfigHistoryRequester provides the interface for the GetResourceConfigHistoryRequest API operation.
+type GetResourceConfigHistoryRequester interface {
+	GetResourceConfigHistoryRequest(*configservice.GetResourceConfigHistoryInput) configservice.GetResourceConfigHistoryRequest
+}
+
+// ListDiscoveredResourcesRequester provides the interface for the ListDiscoveredResourcesRequest API operation.
+type ListDiscoveredResourcesRequester interface {
+	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) configservice.ListDiscoveredResourcesRequest
+}
+
+// PutConfigRuleRequester provides the interface for the PutConfigRuleRequest API operation.
+type PutConfigRuleRequester interface {
+	PutConfigRuleRequest(*configservice.PutConfigRuleInput) configservice.PutConfigRuleRequest
+}
+
+// PutConfigurationRecorderRequester provides the interface for the PutConfigurationRecorderRequest API operation.
+type PutConfigurationRecorderRequester interface {
+	PutConfigurationRecorderRequest(*configservice.PutConfigurationRecorderInput) configservice.PutConfigurationRecorderRequest
+}
+
+// PutDeliveryChannelRequester provides the interface for the PutDeliveryChannelRequest API operation.
+type PutDeliveryChannelRequester interface {
+	PutDeliveryChannelRequest(*configservice.PutDeliveryChannelInput) configservice.PutDeliveryChannelRequest
+}
+
+// PutEvaluationsRequester provides the interface for the PutEvaluationsRequest API operation.
+type PutEvaluationsRequester interface {
+	PutEvaluationsRequest(*configservice.PutEvaluationsInput) configservice.PutEvaluationsRequest
+}
+
+// StartConfigRulesEvaluationRequester provides the interface for the StartConfigRulesEvaluationRequest API operation.
+type StartConfigRulesEvaluationRequester interface {
+	StartConfigRulesEvaluationRequest(*configservice.StartConfigRulesEvaluationInput) configservice.StartConfigRulesEvaluationRequest
+}
+
+// StartConfigurationRecorderRequester provides the interface for the StartConfigurationRecorderRequest API operation.
+type StartConfigurationRecorderRequester interface {
+	StartConfigurationRecorderRequest(*configservice.StartConfigurationRecorderInput) configservice.StartConfigurationRecorderRequest
+}
+
+// StopConfigurationRecorderRequester provides the interface for the StopConfigurationRecorderRequest API operation.
+type StopConfigurationRecorderRequester interface {
+	StopConfigurationRecorderRequest(*configservice.StopConfigurationRecorderInput) configservice.StopConfigurationRecorderRequest
+}

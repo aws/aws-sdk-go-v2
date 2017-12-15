@@ -13,79 +13,32 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/health"
 )
 
-// HealthAPI provides an interface to enable mocking the
-// health.Health service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Health APIs and Notifications.
-//    func myFunc(svc healthiface.HealthAPI) bool {
-//        // Make svc.DescribeAffectedEntities request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := health.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockHealthClient struct {
-//        healthiface.HealthAPI
-//    }
-//    func (m *mockHealthClient) DescribeAffectedEntities(input *health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockHealthClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type HealthAPI interface {
+// DescribeAffectedEntitiesRequester provides the interface for the DescribeAffectedEntitiesRequest API operation.
+type DescribeAffectedEntitiesRequester interface {
 	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) health.DescribeAffectedEntitiesRequest
-
-	DescribeAffectedEntitiesPages(*health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool) error
-	DescribeAffectedEntitiesPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool, ...aws.Option) error
-
-	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
-
-	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) health.DescribeEventAggregatesRequest
-
-	DescribeEventAggregatesPages(*health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool) error
-	DescribeEventAggregatesPagesWithContext(aws.Context, *health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool, ...aws.Option) error
-
-	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
-
-	DescribeEventTypesRequest(*health.DescribeEventTypesInput) health.DescribeEventTypesRequest
-
-	DescribeEventTypesPages(*health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool) error
-	DescribeEventTypesPagesWithContext(aws.Context, *health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool, ...aws.Option) error
-
-	DescribeEventsRequest(*health.DescribeEventsInput) health.DescribeEventsRequest
-
-	DescribeEventsPages(*health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool, ...aws.Option) error
 }
 
-var _ HealthAPI = (*health.Health)(nil)
+// DescribeEntityAggregatesRequester provides the interface for the DescribeEntityAggregatesRequest API operation.
+type DescribeEntityAggregatesRequester interface {
+	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
+}
+
+// DescribeEventAggregatesRequester provides the interface for the DescribeEventAggregatesRequest API operation.
+type DescribeEventAggregatesRequester interface {
+	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) health.DescribeEventAggregatesRequest
+}
+
+// DescribeEventDetailsRequester provides the interface for the DescribeEventDetailsRequest API operation.
+type DescribeEventDetailsRequester interface {
+	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
+}
+
+// DescribeEventTypesRequester provides the interface for the DescribeEventTypesRequest API operation.
+type DescribeEventTypesRequester interface {
+	DescribeEventTypesRequest(*health.DescribeEventTypesInput) health.DescribeEventTypesRequest
+}
+
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
+	DescribeEventsRequest(*health.DescribeEventsInput) health.DescribeEventsRequest
+}

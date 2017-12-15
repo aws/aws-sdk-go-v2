@@ -12,97 +12,107 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dax"
 )
 
-// DAXAPI provides an interface to enable mocking the
-// dax.DAX service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon DynamoDB Accelerator (DAX).
-//    func myFunc(svc daxiface.DAXAPI) bool {
-//        // Make svc.CreateCluster request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := dax.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDAXClient struct {
-//        daxiface.DAXAPI
-//    }
-//    func (m *mockDAXClient) CreateCluster(input *dax.CreateClusterInput) (*dax.CreateClusterOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDAXClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DAXAPI interface {
+// CreateClusterRequester provides the interface for the CreateClusterRequest API operation.
+type CreateClusterRequester interface {
 	CreateClusterRequest(*dax.CreateClusterInput) dax.CreateClusterRequest
-
-	CreateParameterGroupRequest(*dax.CreateParameterGroupInput) dax.CreateParameterGroupRequest
-
-	CreateSubnetGroupRequest(*dax.CreateSubnetGroupInput) dax.CreateSubnetGroupRequest
-
-	DecreaseReplicationFactorRequest(*dax.DecreaseReplicationFactorInput) dax.DecreaseReplicationFactorRequest
-
-	DeleteClusterRequest(*dax.DeleteClusterInput) dax.DeleteClusterRequest
-
-	DeleteParameterGroupRequest(*dax.DeleteParameterGroupInput) dax.DeleteParameterGroupRequest
-
-	DeleteSubnetGroupRequest(*dax.DeleteSubnetGroupInput) dax.DeleteSubnetGroupRequest
-
-	DescribeClustersRequest(*dax.DescribeClustersInput) dax.DescribeClustersRequest
-
-	DescribeDefaultParametersRequest(*dax.DescribeDefaultParametersInput) dax.DescribeDefaultParametersRequest
-
-	DescribeEventsRequest(*dax.DescribeEventsInput) dax.DescribeEventsRequest
-
-	DescribeParameterGroupsRequest(*dax.DescribeParameterGroupsInput) dax.DescribeParameterGroupsRequest
-
-	DescribeParametersRequest(*dax.DescribeParametersInput) dax.DescribeParametersRequest
-
-	DescribeSubnetGroupsRequest(*dax.DescribeSubnetGroupsInput) dax.DescribeSubnetGroupsRequest
-
-	IncreaseReplicationFactorRequest(*dax.IncreaseReplicationFactorInput) dax.IncreaseReplicationFactorRequest
-
-	ListTagsRequest(*dax.ListTagsInput) dax.ListTagsRequest
-
-	RebootNodeRequest(*dax.RebootNodeInput) dax.RebootNodeRequest
-
-	TagResourceRequest(*dax.TagResourceInput) dax.TagResourceRequest
-
-	UntagResourceRequest(*dax.UntagResourceInput) dax.UntagResourceRequest
-
-	UpdateClusterRequest(*dax.UpdateClusterInput) dax.UpdateClusterRequest
-
-	UpdateParameterGroupRequest(*dax.UpdateParameterGroupInput) dax.UpdateParameterGroupRequest
-
-	UpdateSubnetGroupRequest(*dax.UpdateSubnetGroupInput) dax.UpdateSubnetGroupRequest
 }
 
-var _ DAXAPI = (*dax.DAX)(nil)
+// CreateParameterGroupRequester provides the interface for the CreateParameterGroupRequest API operation.
+type CreateParameterGroupRequester interface {
+	CreateParameterGroupRequest(*dax.CreateParameterGroupInput) dax.CreateParameterGroupRequest
+}
+
+// CreateSubnetGroupRequester provides the interface for the CreateSubnetGroupRequest API operation.
+type CreateSubnetGroupRequester interface {
+	CreateSubnetGroupRequest(*dax.CreateSubnetGroupInput) dax.CreateSubnetGroupRequest
+}
+
+// DecreaseReplicationFactorRequester provides the interface for the DecreaseReplicationFactorRequest API operation.
+type DecreaseReplicationFactorRequester interface {
+	DecreaseReplicationFactorRequest(*dax.DecreaseReplicationFactorInput) dax.DecreaseReplicationFactorRequest
+}
+
+// DeleteClusterRequester provides the interface for the DeleteClusterRequest API operation.
+type DeleteClusterRequester interface {
+	DeleteClusterRequest(*dax.DeleteClusterInput) dax.DeleteClusterRequest
+}
+
+// DeleteParameterGroupRequester provides the interface for the DeleteParameterGroupRequest API operation.
+type DeleteParameterGroupRequester interface {
+	DeleteParameterGroupRequest(*dax.DeleteParameterGroupInput) dax.DeleteParameterGroupRequest
+}
+
+// DeleteSubnetGroupRequester provides the interface for the DeleteSubnetGroupRequest API operation.
+type DeleteSubnetGroupRequester interface {
+	DeleteSubnetGroupRequest(*dax.DeleteSubnetGroupInput) dax.DeleteSubnetGroupRequest
+}
+
+// DescribeClustersRequester provides the interface for the DescribeClustersRequest API operation.
+type DescribeClustersRequester interface {
+	DescribeClustersRequest(*dax.DescribeClustersInput) dax.DescribeClustersRequest
+}
+
+// DescribeDefaultParametersRequester provides the interface for the DescribeDefaultParametersRequest API operation.
+type DescribeDefaultParametersRequester interface {
+	DescribeDefaultParametersRequest(*dax.DescribeDefaultParametersInput) dax.DescribeDefaultParametersRequest
+}
+
+// DescribeEventsRequester provides the interface for the DescribeEventsRequest API operation.
+type DescribeEventsRequester interface {
+	DescribeEventsRequest(*dax.DescribeEventsInput) dax.DescribeEventsRequest
+}
+
+// DescribeParameterGroupsRequester provides the interface for the DescribeParameterGroupsRequest API operation.
+type DescribeParameterGroupsRequester interface {
+	DescribeParameterGroupsRequest(*dax.DescribeParameterGroupsInput) dax.DescribeParameterGroupsRequest
+}
+
+// DescribeParametersRequester provides the interface for the DescribeParametersRequest API operation.
+type DescribeParametersRequester interface {
+	DescribeParametersRequest(*dax.DescribeParametersInput) dax.DescribeParametersRequest
+}
+
+// DescribeSubnetGroupsRequester provides the interface for the DescribeSubnetGroupsRequest API operation.
+type DescribeSubnetGroupsRequester interface {
+	DescribeSubnetGroupsRequest(*dax.DescribeSubnetGroupsInput) dax.DescribeSubnetGroupsRequest
+}
+
+// IncreaseReplicationFactorRequester provides the interface for the IncreaseReplicationFactorRequest API operation.
+type IncreaseReplicationFactorRequester interface {
+	IncreaseReplicationFactorRequest(*dax.IncreaseReplicationFactorInput) dax.IncreaseReplicationFactorRequest
+}
+
+// ListTagsRequester provides the interface for the ListTagsRequest API operation.
+type ListTagsRequester interface {
+	ListTagsRequest(*dax.ListTagsInput) dax.ListTagsRequest
+}
+
+// RebootNodeRequester provides the interface for the RebootNodeRequest API operation.
+type RebootNodeRequester interface {
+	RebootNodeRequest(*dax.RebootNodeInput) dax.RebootNodeRequest
+}
+
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
+	TagResourceRequest(*dax.TagResourceInput) dax.TagResourceRequest
+}
+
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
+	UntagResourceRequest(*dax.UntagResourceInput) dax.UntagResourceRequest
+}
+
+// UpdateClusterRequester provides the interface for the UpdateClusterRequest API operation.
+type UpdateClusterRequester interface {
+	UpdateClusterRequest(*dax.UpdateClusterInput) dax.UpdateClusterRequest
+}
+
+// UpdateParameterGroupRequester provides the interface for the UpdateParameterGroupRequest API operation.
+type UpdateParameterGroupRequester interface {
+	UpdateParameterGroupRequest(*dax.UpdateParameterGroupInput) dax.UpdateParameterGroupRequest
+}
+
+// UpdateSubnetGroupRequester provides the interface for the UpdateSubnetGroupRequest API operation.
+type UpdateSubnetGroupRequester interface {
+	UpdateSubnetGroupRequest(*dax.UpdateSubnetGroupInput) dax.UpdateSubnetGroupRequest
+}

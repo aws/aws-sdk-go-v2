@@ -13,92 +13,72 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/workspaces"
 )
 
-// WorkSpacesAPI provides an interface to enable mocking the
-// workspaces.WorkSpaces service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon WorkSpaces.
-//    func myFunc(svc workspacesiface.WorkSpacesAPI) bool {
-//        // Make svc.CreateTags request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := workspaces.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockWorkSpacesClient struct {
-//        workspacesiface.WorkSpacesAPI
-//    }
-//    func (m *mockWorkSpacesClient) CreateTags(input *workspaces.CreateTagsInput) (*workspaces.CreateTagsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockWorkSpacesClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type WorkSpacesAPI interface {
+// CreateTagsRequester provides the interface for the CreateTagsRequest API operation.
+type CreateTagsRequester interface {
 	CreateTagsRequest(*workspaces.CreateTagsInput) workspaces.CreateTagsRequest
-
-	CreateWorkspacesRequest(*workspaces.CreateWorkspacesInput) workspaces.CreateWorkspacesRequest
-
-	DeleteTagsRequest(*workspaces.DeleteTagsInput) workspaces.DeleteTagsRequest
-
-	DescribeTagsRequest(*workspaces.DescribeTagsInput) workspaces.DescribeTagsRequest
-
-	DescribeWorkspaceBundlesRequest(*workspaces.DescribeWorkspaceBundlesInput) workspaces.DescribeWorkspaceBundlesRequest
-
-	DescribeWorkspaceBundlesPages(*workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool) error
-	DescribeWorkspaceBundlesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool, ...aws.Option) error
-
-	DescribeWorkspaceDirectoriesRequest(*workspaces.DescribeWorkspaceDirectoriesInput) workspaces.DescribeWorkspaceDirectoriesRequest
-
-	DescribeWorkspaceDirectoriesPages(*workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool) error
-	DescribeWorkspaceDirectoriesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool, ...aws.Option) error
-
-	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) workspaces.DescribeWorkspacesRequest
-
-	DescribeWorkspacesPages(*workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool) error
-	DescribeWorkspacesPagesWithContext(aws.Context, *workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool, ...aws.Option) error
-
-	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) workspaces.DescribeWorkspacesConnectionStatusRequest
-
-	ModifyWorkspacePropertiesRequest(*workspaces.ModifyWorkspacePropertiesInput) workspaces.ModifyWorkspacePropertiesRequest
-
-	RebootWorkspacesRequest(*workspaces.RebootWorkspacesInput) workspaces.RebootWorkspacesRequest
-
-	RebuildWorkspacesRequest(*workspaces.RebuildWorkspacesInput) workspaces.RebuildWorkspacesRequest
-
-	StartWorkspacesRequest(*workspaces.StartWorkspacesInput) workspaces.StartWorkspacesRequest
-
-	StopWorkspacesRequest(*workspaces.StopWorkspacesInput) workspaces.StopWorkspacesRequest
-
-	TerminateWorkspacesRequest(*workspaces.TerminateWorkspacesInput) workspaces.TerminateWorkspacesRequest
 }
 
-var _ WorkSpacesAPI = (*workspaces.WorkSpaces)(nil)
+// CreateWorkspacesRequester provides the interface for the CreateWorkspacesRequest API operation.
+type CreateWorkspacesRequester interface {
+	CreateWorkspacesRequest(*workspaces.CreateWorkspacesInput) workspaces.CreateWorkspacesRequest
+}
+
+// DeleteTagsRequester provides the interface for the DeleteTagsRequest API operation.
+type DeleteTagsRequester interface {
+	DeleteTagsRequest(*workspaces.DeleteTagsInput) workspaces.DeleteTagsRequest
+}
+
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
+	DescribeTagsRequest(*workspaces.DescribeTagsInput) workspaces.DescribeTagsRequest
+}
+
+// DescribeWorkspaceBundlesRequester provides the interface for the DescribeWorkspaceBundlesRequest API operation.
+type DescribeWorkspaceBundlesRequester interface {
+	DescribeWorkspaceBundlesRequest(*workspaces.DescribeWorkspaceBundlesInput) workspaces.DescribeWorkspaceBundlesRequest
+}
+
+// DescribeWorkspaceDirectoriesRequester provides the interface for the DescribeWorkspaceDirectoriesRequest API operation.
+type DescribeWorkspaceDirectoriesRequester interface {
+	DescribeWorkspaceDirectoriesRequest(*workspaces.DescribeWorkspaceDirectoriesInput) workspaces.DescribeWorkspaceDirectoriesRequest
+}
+
+// DescribeWorkspacesRequester provides the interface for the DescribeWorkspacesRequest API operation.
+type DescribeWorkspacesRequester interface {
+	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) workspaces.DescribeWorkspacesRequest
+}
+
+// DescribeWorkspacesConnectionStatusRequester provides the interface for the DescribeWorkspacesConnectionStatusRequest API operation.
+type DescribeWorkspacesConnectionStatusRequester interface {
+	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) workspaces.DescribeWorkspacesConnectionStatusRequest
+}
+
+// ModifyWorkspacePropertiesRequester provides the interface for the ModifyWorkspacePropertiesRequest API operation.
+type ModifyWorkspacePropertiesRequester interface {
+	ModifyWorkspacePropertiesRequest(*workspaces.ModifyWorkspacePropertiesInput) workspaces.ModifyWorkspacePropertiesRequest
+}
+
+// RebootWorkspacesRequester provides the interface for the RebootWorkspacesRequest API operation.
+type RebootWorkspacesRequester interface {
+	RebootWorkspacesRequest(*workspaces.RebootWorkspacesInput) workspaces.RebootWorkspacesRequest
+}
+
+// RebuildWorkspacesRequester provides the interface for the RebuildWorkspacesRequest API operation.
+type RebuildWorkspacesRequester interface {
+	RebuildWorkspacesRequest(*workspaces.RebuildWorkspacesInput) workspaces.RebuildWorkspacesRequest
+}
+
+// StartWorkspacesRequester provides the interface for the StartWorkspacesRequest API operation.
+type StartWorkspacesRequester interface {
+	StartWorkspacesRequest(*workspaces.StartWorkspacesInput) workspaces.StartWorkspacesRequest
+}
+
+// StopWorkspacesRequester provides the interface for the StopWorkspacesRequest API operation.
+type StopWorkspacesRequester interface {
+	StopWorkspacesRequest(*workspaces.StopWorkspacesInput) workspaces.StopWorkspacesRequest
+}
+
+// TerminateWorkspacesRequester provides the interface for the TerminateWorkspacesRequest API operation.
+type TerminateWorkspacesRequester interface {
+	TerminateWorkspacesRequest(*workspaces.TerminateWorkspacesInput) workspaces.TerminateWorkspacesRequest
+}

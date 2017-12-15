@@ -12,169 +12,287 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iot"
 )
 
-// IoTAPI provides an interface to enable mocking the
-// iot.IoT service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS IoT.
-//    func myFunc(svc iotiface.IoTAPI) bool {
-//        // Make svc.AcceptCertificateTransfer request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := iot.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoTClient struct {
-//        iotiface.IoTAPI
-//    }
-//    func (m *mockIoTClient) AcceptCertificateTransfer(input *iot.AcceptCertificateTransferInput) (*iot.AcceptCertificateTransferOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockIoTClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type IoTAPI interface {
+// AcceptCertificateTransferRequester provides the interface for the AcceptCertificateTransferRequest API operation.
+type AcceptCertificateTransferRequester interface {
 	AcceptCertificateTransferRequest(*iot.AcceptCertificateTransferInput) iot.AcceptCertificateTransferRequest
-
-	AttachPrincipalPolicyRequest(*iot.AttachPrincipalPolicyInput) iot.AttachPrincipalPolicyRequest
-
-	AttachThingPrincipalRequest(*iot.AttachThingPrincipalInput) iot.AttachThingPrincipalRequest
-
-	CancelCertificateTransferRequest(*iot.CancelCertificateTransferInput) iot.CancelCertificateTransferRequest
-
-	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) iot.CreateCertificateFromCsrRequest
-
-	CreateKeysAndCertificateRequest(*iot.CreateKeysAndCertificateInput) iot.CreateKeysAndCertificateRequest
-
-	CreatePolicyRequest(*iot.CreatePolicyInput) iot.CreatePolicyRequest
-
-	CreatePolicyVersionRequest(*iot.CreatePolicyVersionInput) iot.CreatePolicyVersionRequest
-
-	CreateThingRequest(*iot.CreateThingInput) iot.CreateThingRequest
-
-	CreateThingTypeRequest(*iot.CreateThingTypeInput) iot.CreateThingTypeRequest
-
-	CreateTopicRuleRequest(*iot.CreateTopicRuleInput) iot.CreateTopicRuleRequest
-
-	DeleteCACertificateRequest(*iot.DeleteCACertificateInput) iot.DeleteCACertificateRequest
-
-	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
-
-	DeletePolicyRequest(*iot.DeletePolicyInput) iot.DeletePolicyRequest
-
-	DeletePolicyVersionRequest(*iot.DeletePolicyVersionInput) iot.DeletePolicyVersionRequest
-
-	DeleteRegistrationCodeRequest(*iot.DeleteRegistrationCodeInput) iot.DeleteRegistrationCodeRequest
-
-	DeleteThingRequest(*iot.DeleteThingInput) iot.DeleteThingRequest
-
-	DeleteThingTypeRequest(*iot.DeleteThingTypeInput) iot.DeleteThingTypeRequest
-
-	DeleteTopicRuleRequest(*iot.DeleteTopicRuleInput) iot.DeleteTopicRuleRequest
-
-	DeprecateThingTypeRequest(*iot.DeprecateThingTypeInput) iot.DeprecateThingTypeRequest
-
-	DescribeCACertificateRequest(*iot.DescribeCACertificateInput) iot.DescribeCACertificateRequest
-
-	DescribeCertificateRequest(*iot.DescribeCertificateInput) iot.DescribeCertificateRequest
-
-	DescribeEndpointRequest(*iot.DescribeEndpointInput) iot.DescribeEndpointRequest
-
-	DescribeThingRequest(*iot.DescribeThingInput) iot.DescribeThingRequest
-
-	DescribeThingTypeRequest(*iot.DescribeThingTypeInput) iot.DescribeThingTypeRequest
-
-	DetachPrincipalPolicyRequest(*iot.DetachPrincipalPolicyInput) iot.DetachPrincipalPolicyRequest
-
-	DetachThingPrincipalRequest(*iot.DetachThingPrincipalInput) iot.DetachThingPrincipalRequest
-
-	DisableTopicRuleRequest(*iot.DisableTopicRuleInput) iot.DisableTopicRuleRequest
-
-	EnableTopicRuleRequest(*iot.EnableTopicRuleInput) iot.EnableTopicRuleRequest
-
-	GetLoggingOptionsRequest(*iot.GetLoggingOptionsInput) iot.GetLoggingOptionsRequest
-
-	GetPolicyRequest(*iot.GetPolicyInput) iot.GetPolicyRequest
-
-	GetPolicyVersionRequest(*iot.GetPolicyVersionInput) iot.GetPolicyVersionRequest
-
-	GetRegistrationCodeRequest(*iot.GetRegistrationCodeInput) iot.GetRegistrationCodeRequest
-
-	GetTopicRuleRequest(*iot.GetTopicRuleInput) iot.GetTopicRuleRequest
-
-	ListCACertificatesRequest(*iot.ListCACertificatesInput) iot.ListCACertificatesRequest
-
-	ListCertificatesRequest(*iot.ListCertificatesInput) iot.ListCertificatesRequest
-
-	ListCertificatesByCARequest(*iot.ListCertificatesByCAInput) iot.ListCertificatesByCARequest
-
-	ListOutgoingCertificatesRequest(*iot.ListOutgoingCertificatesInput) iot.ListOutgoingCertificatesRequest
-
-	ListPoliciesRequest(*iot.ListPoliciesInput) iot.ListPoliciesRequest
-
-	ListPolicyPrincipalsRequest(*iot.ListPolicyPrincipalsInput) iot.ListPolicyPrincipalsRequest
-
-	ListPolicyVersionsRequest(*iot.ListPolicyVersionsInput) iot.ListPolicyVersionsRequest
-
-	ListPrincipalPoliciesRequest(*iot.ListPrincipalPoliciesInput) iot.ListPrincipalPoliciesRequest
-
-	ListPrincipalThingsRequest(*iot.ListPrincipalThingsInput) iot.ListPrincipalThingsRequest
-
-	ListThingPrincipalsRequest(*iot.ListThingPrincipalsInput) iot.ListThingPrincipalsRequest
-
-	ListThingTypesRequest(*iot.ListThingTypesInput) iot.ListThingTypesRequest
-
-	ListThingsRequest(*iot.ListThingsInput) iot.ListThingsRequest
-
-	ListTopicRulesRequest(*iot.ListTopicRulesInput) iot.ListTopicRulesRequest
-
-	RegisterCACertificateRequest(*iot.RegisterCACertificateInput) iot.RegisterCACertificateRequest
-
-	RegisterCertificateRequest(*iot.RegisterCertificateInput) iot.RegisterCertificateRequest
-
-	RejectCertificateTransferRequest(*iot.RejectCertificateTransferInput) iot.RejectCertificateTransferRequest
-
-	ReplaceTopicRuleRequest(*iot.ReplaceTopicRuleInput) iot.ReplaceTopicRuleRequest
-
-	SetDefaultPolicyVersionRequest(*iot.SetDefaultPolicyVersionInput) iot.SetDefaultPolicyVersionRequest
-
-	SetLoggingOptionsRequest(*iot.SetLoggingOptionsInput) iot.SetLoggingOptionsRequest
-
-	TransferCertificateRequest(*iot.TransferCertificateInput) iot.TransferCertificateRequest
-
-	UpdateCACertificateRequest(*iot.UpdateCACertificateInput) iot.UpdateCACertificateRequest
-
-	UpdateCertificateRequest(*iot.UpdateCertificateInput) iot.UpdateCertificateRequest
-
-	UpdateThingRequest(*iot.UpdateThingInput) iot.UpdateThingRequest
 }
 
-var _ IoTAPI = (*iot.IoT)(nil)
+// AttachPrincipalPolicyRequester provides the interface for the AttachPrincipalPolicyRequest API operation.
+type AttachPrincipalPolicyRequester interface {
+	AttachPrincipalPolicyRequest(*iot.AttachPrincipalPolicyInput) iot.AttachPrincipalPolicyRequest
+}
+
+// AttachThingPrincipalRequester provides the interface for the AttachThingPrincipalRequest API operation.
+type AttachThingPrincipalRequester interface {
+	AttachThingPrincipalRequest(*iot.AttachThingPrincipalInput) iot.AttachThingPrincipalRequest
+}
+
+// CancelCertificateTransferRequester provides the interface for the CancelCertificateTransferRequest API operation.
+type CancelCertificateTransferRequester interface {
+	CancelCertificateTransferRequest(*iot.CancelCertificateTransferInput) iot.CancelCertificateTransferRequest
+}
+
+// CreateCertificateFromCsrRequester provides the interface for the CreateCertificateFromCsrRequest API operation.
+type CreateCertificateFromCsrRequester interface {
+	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) iot.CreateCertificateFromCsrRequest
+}
+
+// CreateKeysAndCertificateRequester provides the interface for the CreateKeysAndCertificateRequest API operation.
+type CreateKeysAndCertificateRequester interface {
+	CreateKeysAndCertificateRequest(*iot.CreateKeysAndCertificateInput) iot.CreateKeysAndCertificateRequest
+}
+
+// CreatePolicyRequester provides the interface for the CreatePolicyRequest API operation.
+type CreatePolicyRequester interface {
+	CreatePolicyRequest(*iot.CreatePolicyInput) iot.CreatePolicyRequest
+}
+
+// CreatePolicyVersionRequester provides the interface for the CreatePolicyVersionRequest API operation.
+type CreatePolicyVersionRequester interface {
+	CreatePolicyVersionRequest(*iot.CreatePolicyVersionInput) iot.CreatePolicyVersionRequest
+}
+
+// CreateThingRequester provides the interface for the CreateThingRequest API operation.
+type CreateThingRequester interface {
+	CreateThingRequest(*iot.CreateThingInput) iot.CreateThingRequest
+}
+
+// CreateThingTypeRequester provides the interface for the CreateThingTypeRequest API operation.
+type CreateThingTypeRequester interface {
+	CreateThingTypeRequest(*iot.CreateThingTypeInput) iot.CreateThingTypeRequest
+}
+
+// CreateTopicRuleRequester provides the interface for the CreateTopicRuleRequest API operation.
+type CreateTopicRuleRequester interface {
+	CreateTopicRuleRequest(*iot.CreateTopicRuleInput) iot.CreateTopicRuleRequest
+}
+
+// DeleteCACertificateRequester provides the interface for the DeleteCACertificateRequest API operation.
+type DeleteCACertificateRequester interface {
+	DeleteCACertificateRequest(*iot.DeleteCACertificateInput) iot.DeleteCACertificateRequest
+}
+
+// DeleteCertificateRequester provides the interface for the DeleteCertificateRequest API operation.
+type DeleteCertificateRequester interface {
+	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
+}
+
+// DeletePolicyRequester provides the interface for the DeletePolicyRequest API operation.
+type DeletePolicyRequester interface {
+	DeletePolicyRequest(*iot.DeletePolicyInput) iot.DeletePolicyRequest
+}
+
+// DeletePolicyVersionRequester provides the interface for the DeletePolicyVersionRequest API operation.
+type DeletePolicyVersionRequester interface {
+	DeletePolicyVersionRequest(*iot.DeletePolicyVersionInput) iot.DeletePolicyVersionRequest
+}
+
+// DeleteRegistrationCodeRequester provides the interface for the DeleteRegistrationCodeRequest API operation.
+type DeleteRegistrationCodeRequester interface {
+	DeleteRegistrationCodeRequest(*iot.DeleteRegistrationCodeInput) iot.DeleteRegistrationCodeRequest
+}
+
+// DeleteThingRequester provides the interface for the DeleteThingRequest API operation.
+type DeleteThingRequester interface {
+	DeleteThingRequest(*iot.DeleteThingInput) iot.DeleteThingRequest
+}
+
+// DeleteThingTypeRequester provides the interface for the DeleteThingTypeRequest API operation.
+type DeleteThingTypeRequester interface {
+	DeleteThingTypeRequest(*iot.DeleteThingTypeInput) iot.DeleteThingTypeRequest
+}
+
+// DeleteTopicRuleRequester provides the interface for the DeleteTopicRuleRequest API operation.
+type DeleteTopicRuleRequester interface {
+	DeleteTopicRuleRequest(*iot.DeleteTopicRuleInput) iot.DeleteTopicRuleRequest
+}
+
+// DeprecateThingTypeRequester provides the interface for the DeprecateThingTypeRequest API operation.
+type DeprecateThingTypeRequester interface {
+	DeprecateThingTypeRequest(*iot.DeprecateThingTypeInput) iot.DeprecateThingTypeRequest
+}
+
+// DescribeCACertificateRequester provides the interface for the DescribeCACertificateRequest API operation.
+type DescribeCACertificateRequester interface {
+	DescribeCACertificateRequest(*iot.DescribeCACertificateInput) iot.DescribeCACertificateRequest
+}
+
+// DescribeCertificateRequester provides the interface for the DescribeCertificateRequest API operation.
+type DescribeCertificateRequester interface {
+	DescribeCertificateRequest(*iot.DescribeCertificateInput) iot.DescribeCertificateRequest
+}
+
+// DescribeEndpointRequester provides the interface for the DescribeEndpointRequest API operation.
+type DescribeEndpointRequester interface {
+	DescribeEndpointRequest(*iot.DescribeEndpointInput) iot.DescribeEndpointRequest
+}
+
+// DescribeThingRequester provides the interface for the DescribeThingRequest API operation.
+type DescribeThingRequester interface {
+	DescribeThingRequest(*iot.DescribeThingInput) iot.DescribeThingRequest
+}
+
+// DescribeThingTypeRequester provides the interface for the DescribeThingTypeRequest API operation.
+type DescribeThingTypeRequester interface {
+	DescribeThingTypeRequest(*iot.DescribeThingTypeInput) iot.DescribeThingTypeRequest
+}
+
+// DetachPrincipalPolicyRequester provides the interface for the DetachPrincipalPolicyRequest API operation.
+type DetachPrincipalPolicyRequester interface {
+	DetachPrincipalPolicyRequest(*iot.DetachPrincipalPolicyInput) iot.DetachPrincipalPolicyRequest
+}
+
+// DetachThingPrincipalRequester provides the interface for the DetachThingPrincipalRequest API operation.
+type DetachThingPrincipalRequester interface {
+	DetachThingPrincipalRequest(*iot.DetachThingPrincipalInput) iot.DetachThingPrincipalRequest
+}
+
+// DisableTopicRuleRequester provides the interface for the DisableTopicRuleRequest API operation.
+type DisableTopicRuleRequester interface {
+	DisableTopicRuleRequest(*iot.DisableTopicRuleInput) iot.DisableTopicRuleRequest
+}
+
+// EnableTopicRuleRequester provides the interface for the EnableTopicRuleRequest API operation.
+type EnableTopicRuleRequester interface {
+	EnableTopicRuleRequest(*iot.EnableTopicRuleInput) iot.EnableTopicRuleRequest
+}
+
+// GetLoggingOptionsRequester provides the interface for the GetLoggingOptionsRequest API operation.
+type GetLoggingOptionsRequester interface {
+	GetLoggingOptionsRequest(*iot.GetLoggingOptionsInput) iot.GetLoggingOptionsRequest
+}
+
+// GetPolicyRequester provides the interface for the GetPolicyRequest API operation.
+type GetPolicyRequester interface {
+	GetPolicyRequest(*iot.GetPolicyInput) iot.GetPolicyRequest
+}
+
+// GetPolicyVersionRequester provides the interface for the GetPolicyVersionRequest API operation.
+type GetPolicyVersionRequester interface {
+	GetPolicyVersionRequest(*iot.GetPolicyVersionInput) iot.GetPolicyVersionRequest
+}
+
+// GetRegistrationCodeRequester provides the interface for the GetRegistrationCodeRequest API operation.
+type GetRegistrationCodeRequester interface {
+	GetRegistrationCodeRequest(*iot.GetRegistrationCodeInput) iot.GetRegistrationCodeRequest
+}
+
+// GetTopicRuleRequester provides the interface for the GetTopicRuleRequest API operation.
+type GetTopicRuleRequester interface {
+	GetTopicRuleRequest(*iot.GetTopicRuleInput) iot.GetTopicRuleRequest
+}
+
+// ListCACertificatesRequester provides the interface for the ListCACertificatesRequest API operation.
+type ListCACertificatesRequester interface {
+	ListCACertificatesRequest(*iot.ListCACertificatesInput) iot.ListCACertificatesRequest
+}
+
+// ListCertificatesRequester provides the interface for the ListCertificatesRequest API operation.
+type ListCertificatesRequester interface {
+	ListCertificatesRequest(*iot.ListCertificatesInput) iot.ListCertificatesRequest
+}
+
+// ListCertificatesByCARequester provides the interface for the ListCertificatesByCARequest API operation.
+type ListCertificatesByCARequester interface {
+	ListCertificatesByCARequest(*iot.ListCertificatesByCAInput) iot.ListCertificatesByCARequest
+}
+
+// ListOutgoingCertificatesRequester provides the interface for the ListOutgoingCertificatesRequest API operation.
+type ListOutgoingCertificatesRequester interface {
+	ListOutgoingCertificatesRequest(*iot.ListOutgoingCertificatesInput) iot.ListOutgoingCertificatesRequest
+}
+
+// ListPoliciesRequester provides the interface for the ListPoliciesRequest API operation.
+type ListPoliciesRequester interface {
+	ListPoliciesRequest(*iot.ListPoliciesInput) iot.ListPoliciesRequest
+}
+
+// ListPolicyPrincipalsRequester provides the interface for the ListPolicyPrincipalsRequest API operation.
+type ListPolicyPrincipalsRequester interface {
+	ListPolicyPrincipalsRequest(*iot.ListPolicyPrincipalsInput) iot.ListPolicyPrincipalsRequest
+}
+
+// ListPolicyVersionsRequester provides the interface for the ListPolicyVersionsRequest API operation.
+type ListPolicyVersionsRequester interface {
+	ListPolicyVersionsRequest(*iot.ListPolicyVersionsInput) iot.ListPolicyVersionsRequest
+}
+
+// ListPrincipalPoliciesRequester provides the interface for the ListPrincipalPoliciesRequest API operation.
+type ListPrincipalPoliciesRequester interface {
+	ListPrincipalPoliciesRequest(*iot.ListPrincipalPoliciesInput) iot.ListPrincipalPoliciesRequest
+}
+
+// ListPrincipalThingsRequester provides the interface for the ListPrincipalThingsRequest API operation.
+type ListPrincipalThingsRequester interface {
+	ListPrincipalThingsRequest(*iot.ListPrincipalThingsInput) iot.ListPrincipalThingsRequest
+}
+
+// ListThingPrincipalsRequester provides the interface for the ListThingPrincipalsRequest API operation.
+type ListThingPrincipalsRequester interface {
+	ListThingPrincipalsRequest(*iot.ListThingPrincipalsInput) iot.ListThingPrincipalsRequest
+}
+
+// ListThingTypesRequester provides the interface for the ListThingTypesRequest API operation.
+type ListThingTypesRequester interface {
+	ListThingTypesRequest(*iot.ListThingTypesInput) iot.ListThingTypesRequest
+}
+
+// ListThingsRequester provides the interface for the ListThingsRequest API operation.
+type ListThingsRequester interface {
+	ListThingsRequest(*iot.ListThingsInput) iot.ListThingsRequest
+}
+
+// ListTopicRulesRequester provides the interface for the ListTopicRulesRequest API operation.
+type ListTopicRulesRequester interface {
+	ListTopicRulesRequest(*iot.ListTopicRulesInput) iot.ListTopicRulesRequest
+}
+
+// RegisterCACertificateRequester provides the interface for the RegisterCACertificateRequest API operation.
+type RegisterCACertificateRequester interface {
+	RegisterCACertificateRequest(*iot.RegisterCACertificateInput) iot.RegisterCACertificateRequest
+}
+
+// RegisterCertificateRequester provides the interface for the RegisterCertificateRequest API operation.
+type RegisterCertificateRequester interface {
+	RegisterCertificateRequest(*iot.RegisterCertificateInput) iot.RegisterCertificateRequest
+}
+
+// RejectCertificateTransferRequester provides the interface for the RejectCertificateTransferRequest API operation.
+type RejectCertificateTransferRequester interface {
+	RejectCertificateTransferRequest(*iot.RejectCertificateTransferInput) iot.RejectCertificateTransferRequest
+}
+
+// ReplaceTopicRuleRequester provides the interface for the ReplaceTopicRuleRequest API operation.
+type ReplaceTopicRuleRequester interface {
+	ReplaceTopicRuleRequest(*iot.ReplaceTopicRuleInput) iot.ReplaceTopicRuleRequest
+}
+
+// SetDefaultPolicyVersionRequester provides the interface for the SetDefaultPolicyVersionRequest API operation.
+type SetDefaultPolicyVersionRequester interface {
+	SetDefaultPolicyVersionRequest(*iot.SetDefaultPolicyVersionInput) iot.SetDefaultPolicyVersionRequest
+}
+
+// SetLoggingOptionsRequester provides the interface for the SetLoggingOptionsRequest API operation.
+type SetLoggingOptionsRequester interface {
+	SetLoggingOptionsRequest(*iot.SetLoggingOptionsInput) iot.SetLoggingOptionsRequest
+}
+
+// TransferCertificateRequester provides the interface for the TransferCertificateRequest API operation.
+type TransferCertificateRequester interface {
+	TransferCertificateRequest(*iot.TransferCertificateInput) iot.TransferCertificateRequest
+}
+
+// UpdateCACertificateRequester provides the interface for the UpdateCACertificateRequest API operation.
+type UpdateCACertificateRequester interface {
+	UpdateCACertificateRequest(*iot.UpdateCACertificateInput) iot.UpdateCACertificateRequest
+}
+
+// UpdateCertificateRequester provides the interface for the UpdateCertificateRequest API operation.
+type UpdateCertificateRequester interface {
+	UpdateCertificateRequest(*iot.UpdateCertificateInput) iot.UpdateCertificateRequest
+}
+
+// UpdateThingRequester provides the interface for the UpdateThingRequest API operation.
+type UpdateThingRequester interface {
+	UpdateThingRequest(*iot.UpdateThingInput) iot.UpdateThingRequest
+}

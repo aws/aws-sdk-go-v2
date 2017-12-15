@@ -12,185 +12,327 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/greengrass"
 )
 
-// GreengrassAPI provides an interface to enable mocking the
-// greengrass.Greengrass service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Greengrass.
-//    func myFunc(svc greengrassiface.GreengrassAPI) bool {
-//        // Make svc.AssociateRoleToGroup request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := greengrass.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockGreengrassClient struct {
-//        greengrassiface.GreengrassAPI
-//    }
-//    func (m *mockGreengrassClient) AssociateRoleToGroup(input *greengrass.AssociateRoleToGroupInput) (*greengrass.AssociateRoleToGroupOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockGreengrassClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type GreengrassAPI interface {
+// AssociateRoleToGroupRequester provides the interface for the AssociateRoleToGroupRequest API operation.
+type AssociateRoleToGroupRequester interface {
 	AssociateRoleToGroupRequest(*greengrass.AssociateRoleToGroupInput) greengrass.AssociateRoleToGroupRequest
-
-	AssociateServiceRoleToAccountRequest(*greengrass.AssociateServiceRoleToAccountInput) greengrass.AssociateServiceRoleToAccountRequest
-
-	CreateCoreDefinitionRequest(*greengrass.CreateCoreDefinitionInput) greengrass.CreateCoreDefinitionRequest
-
-	CreateCoreDefinitionVersionRequest(*greengrass.CreateCoreDefinitionVersionInput) greengrass.CreateCoreDefinitionVersionRequest
-
-	CreateDeploymentRequest(*greengrass.CreateDeploymentInput) greengrass.CreateDeploymentRequest
-
-	CreateDeviceDefinitionRequest(*greengrass.CreateDeviceDefinitionInput) greengrass.CreateDeviceDefinitionRequest
-
-	CreateDeviceDefinitionVersionRequest(*greengrass.CreateDeviceDefinitionVersionInput) greengrass.CreateDeviceDefinitionVersionRequest
-
-	CreateFunctionDefinitionRequest(*greengrass.CreateFunctionDefinitionInput) greengrass.CreateFunctionDefinitionRequest
-
-	CreateFunctionDefinitionVersionRequest(*greengrass.CreateFunctionDefinitionVersionInput) greengrass.CreateFunctionDefinitionVersionRequest
-
-	CreateGroupRequest(*greengrass.CreateGroupInput) greengrass.CreateGroupRequest
-
-	CreateGroupCertificateAuthorityRequest(*greengrass.CreateGroupCertificateAuthorityInput) greengrass.CreateGroupCertificateAuthorityRequest
-
-	CreateGroupVersionRequest(*greengrass.CreateGroupVersionInput) greengrass.CreateGroupVersionRequest
-
-	CreateLoggerDefinitionRequest(*greengrass.CreateLoggerDefinitionInput) greengrass.CreateLoggerDefinitionRequest
-
-	CreateLoggerDefinitionVersionRequest(*greengrass.CreateLoggerDefinitionVersionInput) greengrass.CreateLoggerDefinitionVersionRequest
-
-	CreateSubscriptionDefinitionRequest(*greengrass.CreateSubscriptionDefinitionInput) greengrass.CreateSubscriptionDefinitionRequest
-
-	CreateSubscriptionDefinitionVersionRequest(*greengrass.CreateSubscriptionDefinitionVersionInput) greengrass.CreateSubscriptionDefinitionVersionRequest
-
-	DeleteCoreDefinitionRequest(*greengrass.DeleteCoreDefinitionInput) greengrass.DeleteCoreDefinitionRequest
-
-	DeleteDeviceDefinitionRequest(*greengrass.DeleteDeviceDefinitionInput) greengrass.DeleteDeviceDefinitionRequest
-
-	DeleteFunctionDefinitionRequest(*greengrass.DeleteFunctionDefinitionInput) greengrass.DeleteFunctionDefinitionRequest
-
-	DeleteGroupRequest(*greengrass.DeleteGroupInput) greengrass.DeleteGroupRequest
-
-	DeleteLoggerDefinitionRequest(*greengrass.DeleteLoggerDefinitionInput) greengrass.DeleteLoggerDefinitionRequest
-
-	DeleteSubscriptionDefinitionRequest(*greengrass.DeleteSubscriptionDefinitionInput) greengrass.DeleteSubscriptionDefinitionRequest
-
-	DisassociateRoleFromGroupRequest(*greengrass.DisassociateRoleFromGroupInput) greengrass.DisassociateRoleFromGroupRequest
-
-	DisassociateServiceRoleFromAccountRequest(*greengrass.DisassociateServiceRoleFromAccountInput) greengrass.DisassociateServiceRoleFromAccountRequest
-
-	GetAssociatedRoleRequest(*greengrass.GetAssociatedRoleInput) greengrass.GetAssociatedRoleRequest
-
-	GetConnectivityInfoRequest(*greengrass.GetConnectivityInfoInput) greengrass.GetConnectivityInfoRequest
-
-	GetCoreDefinitionRequest(*greengrass.GetCoreDefinitionInput) greengrass.GetCoreDefinitionRequest
-
-	GetCoreDefinitionVersionRequest(*greengrass.GetCoreDefinitionVersionInput) greengrass.GetCoreDefinitionVersionRequest
-
-	GetDeploymentStatusRequest(*greengrass.GetDeploymentStatusInput) greengrass.GetDeploymentStatusRequest
-
-	GetDeviceDefinitionRequest(*greengrass.GetDeviceDefinitionInput) greengrass.GetDeviceDefinitionRequest
-
-	GetDeviceDefinitionVersionRequest(*greengrass.GetDeviceDefinitionVersionInput) greengrass.GetDeviceDefinitionVersionRequest
-
-	GetFunctionDefinitionRequest(*greengrass.GetFunctionDefinitionInput) greengrass.GetFunctionDefinitionRequest
-
-	GetFunctionDefinitionVersionRequest(*greengrass.GetFunctionDefinitionVersionInput) greengrass.GetFunctionDefinitionVersionRequest
-
-	GetGroupRequest(*greengrass.GetGroupInput) greengrass.GetGroupRequest
-
-	GetGroupCertificateAuthorityRequest(*greengrass.GetGroupCertificateAuthorityInput) greengrass.GetGroupCertificateAuthorityRequest
-
-	GetGroupCertificateConfigurationRequest(*greengrass.GetGroupCertificateConfigurationInput) greengrass.GetGroupCertificateConfigurationRequest
-
-	GetGroupVersionRequest(*greengrass.GetGroupVersionInput) greengrass.GetGroupVersionRequest
-
-	GetLoggerDefinitionRequest(*greengrass.GetLoggerDefinitionInput) greengrass.GetLoggerDefinitionRequest
-
-	GetLoggerDefinitionVersionRequest(*greengrass.GetLoggerDefinitionVersionInput) greengrass.GetLoggerDefinitionVersionRequest
-
-	GetServiceRoleForAccountRequest(*greengrass.GetServiceRoleForAccountInput) greengrass.GetServiceRoleForAccountRequest
-
-	GetSubscriptionDefinitionRequest(*greengrass.GetSubscriptionDefinitionInput) greengrass.GetSubscriptionDefinitionRequest
-
-	GetSubscriptionDefinitionVersionRequest(*greengrass.GetSubscriptionDefinitionVersionInput) greengrass.GetSubscriptionDefinitionVersionRequest
-
-	ListCoreDefinitionVersionsRequest(*greengrass.ListCoreDefinitionVersionsInput) greengrass.ListCoreDefinitionVersionsRequest
-
-	ListCoreDefinitionsRequest(*greengrass.ListCoreDefinitionsInput) greengrass.ListCoreDefinitionsRequest
-
-	ListDeploymentsRequest(*greengrass.ListDeploymentsInput) greengrass.ListDeploymentsRequest
-
-	ListDeviceDefinitionVersionsRequest(*greengrass.ListDeviceDefinitionVersionsInput) greengrass.ListDeviceDefinitionVersionsRequest
-
-	ListDeviceDefinitionsRequest(*greengrass.ListDeviceDefinitionsInput) greengrass.ListDeviceDefinitionsRequest
-
-	ListFunctionDefinitionVersionsRequest(*greengrass.ListFunctionDefinitionVersionsInput) greengrass.ListFunctionDefinitionVersionsRequest
-
-	ListFunctionDefinitionsRequest(*greengrass.ListFunctionDefinitionsInput) greengrass.ListFunctionDefinitionsRequest
-
-	ListGroupCertificateAuthoritiesRequest(*greengrass.ListGroupCertificateAuthoritiesInput) greengrass.ListGroupCertificateAuthoritiesRequest
-
-	ListGroupVersionsRequest(*greengrass.ListGroupVersionsInput) greengrass.ListGroupVersionsRequest
-
-	ListGroupsRequest(*greengrass.ListGroupsInput) greengrass.ListGroupsRequest
-
-	ListLoggerDefinitionVersionsRequest(*greengrass.ListLoggerDefinitionVersionsInput) greengrass.ListLoggerDefinitionVersionsRequest
-
-	ListLoggerDefinitionsRequest(*greengrass.ListLoggerDefinitionsInput) greengrass.ListLoggerDefinitionsRequest
-
-	ListSubscriptionDefinitionVersionsRequest(*greengrass.ListSubscriptionDefinitionVersionsInput) greengrass.ListSubscriptionDefinitionVersionsRequest
-
-	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) greengrass.ListSubscriptionDefinitionsRequest
-
-	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) greengrass.ResetDeploymentsRequest
-
-	UpdateConnectivityInfoRequest(*greengrass.UpdateConnectivityInfoInput) greengrass.UpdateConnectivityInfoRequest
-
-	UpdateCoreDefinitionRequest(*greengrass.UpdateCoreDefinitionInput) greengrass.UpdateCoreDefinitionRequest
-
-	UpdateDeviceDefinitionRequest(*greengrass.UpdateDeviceDefinitionInput) greengrass.UpdateDeviceDefinitionRequest
-
-	UpdateFunctionDefinitionRequest(*greengrass.UpdateFunctionDefinitionInput) greengrass.UpdateFunctionDefinitionRequest
-
-	UpdateGroupRequest(*greengrass.UpdateGroupInput) greengrass.UpdateGroupRequest
-
-	UpdateGroupCertificateConfigurationRequest(*greengrass.UpdateGroupCertificateConfigurationInput) greengrass.UpdateGroupCertificateConfigurationRequest
-
-	UpdateLoggerDefinitionRequest(*greengrass.UpdateLoggerDefinitionInput) greengrass.UpdateLoggerDefinitionRequest
-
-	UpdateSubscriptionDefinitionRequest(*greengrass.UpdateSubscriptionDefinitionInput) greengrass.UpdateSubscriptionDefinitionRequest
 }
 
-var _ GreengrassAPI = (*greengrass.Greengrass)(nil)
+// AssociateServiceRoleToAccountRequester provides the interface for the AssociateServiceRoleToAccountRequest API operation.
+type AssociateServiceRoleToAccountRequester interface {
+	AssociateServiceRoleToAccountRequest(*greengrass.AssociateServiceRoleToAccountInput) greengrass.AssociateServiceRoleToAccountRequest
+}
+
+// CreateCoreDefinitionRequester provides the interface for the CreateCoreDefinitionRequest API operation.
+type CreateCoreDefinitionRequester interface {
+	CreateCoreDefinitionRequest(*greengrass.CreateCoreDefinitionInput) greengrass.CreateCoreDefinitionRequest
+}
+
+// CreateCoreDefinitionVersionRequester provides the interface for the CreateCoreDefinitionVersionRequest API operation.
+type CreateCoreDefinitionVersionRequester interface {
+	CreateCoreDefinitionVersionRequest(*greengrass.CreateCoreDefinitionVersionInput) greengrass.CreateCoreDefinitionVersionRequest
+}
+
+// CreateDeploymentRequester provides the interface for the CreateDeploymentRequest API operation.
+type CreateDeploymentRequester interface {
+	CreateDeploymentRequest(*greengrass.CreateDeploymentInput) greengrass.CreateDeploymentRequest
+}
+
+// CreateDeviceDefinitionRequester provides the interface for the CreateDeviceDefinitionRequest API operation.
+type CreateDeviceDefinitionRequester interface {
+	CreateDeviceDefinitionRequest(*greengrass.CreateDeviceDefinitionInput) greengrass.CreateDeviceDefinitionRequest
+}
+
+// CreateDeviceDefinitionVersionRequester provides the interface for the CreateDeviceDefinitionVersionRequest API operation.
+type CreateDeviceDefinitionVersionRequester interface {
+	CreateDeviceDefinitionVersionRequest(*greengrass.CreateDeviceDefinitionVersionInput) greengrass.CreateDeviceDefinitionVersionRequest
+}
+
+// CreateFunctionDefinitionRequester provides the interface for the CreateFunctionDefinitionRequest API operation.
+type CreateFunctionDefinitionRequester interface {
+	CreateFunctionDefinitionRequest(*greengrass.CreateFunctionDefinitionInput) greengrass.CreateFunctionDefinitionRequest
+}
+
+// CreateFunctionDefinitionVersionRequester provides the interface for the CreateFunctionDefinitionVersionRequest API operation.
+type CreateFunctionDefinitionVersionRequester interface {
+	CreateFunctionDefinitionVersionRequest(*greengrass.CreateFunctionDefinitionVersionInput) greengrass.CreateFunctionDefinitionVersionRequest
+}
+
+// CreateGroupRequester provides the interface for the CreateGroupRequest API operation.
+type CreateGroupRequester interface {
+	CreateGroupRequest(*greengrass.CreateGroupInput) greengrass.CreateGroupRequest
+}
+
+// CreateGroupCertificateAuthorityRequester provides the interface for the CreateGroupCertificateAuthorityRequest API operation.
+type CreateGroupCertificateAuthorityRequester interface {
+	CreateGroupCertificateAuthorityRequest(*greengrass.CreateGroupCertificateAuthorityInput) greengrass.CreateGroupCertificateAuthorityRequest
+}
+
+// CreateGroupVersionRequester provides the interface for the CreateGroupVersionRequest API operation.
+type CreateGroupVersionRequester interface {
+	CreateGroupVersionRequest(*greengrass.CreateGroupVersionInput) greengrass.CreateGroupVersionRequest
+}
+
+// CreateLoggerDefinitionRequester provides the interface for the CreateLoggerDefinitionRequest API operation.
+type CreateLoggerDefinitionRequester interface {
+	CreateLoggerDefinitionRequest(*greengrass.CreateLoggerDefinitionInput) greengrass.CreateLoggerDefinitionRequest
+}
+
+// CreateLoggerDefinitionVersionRequester provides the interface for the CreateLoggerDefinitionVersionRequest API operation.
+type CreateLoggerDefinitionVersionRequester interface {
+	CreateLoggerDefinitionVersionRequest(*greengrass.CreateLoggerDefinitionVersionInput) greengrass.CreateLoggerDefinitionVersionRequest
+}
+
+// CreateSubscriptionDefinitionRequester provides the interface for the CreateSubscriptionDefinitionRequest API operation.
+type CreateSubscriptionDefinitionRequester interface {
+	CreateSubscriptionDefinitionRequest(*greengrass.CreateSubscriptionDefinitionInput) greengrass.CreateSubscriptionDefinitionRequest
+}
+
+// CreateSubscriptionDefinitionVersionRequester provides the interface for the CreateSubscriptionDefinitionVersionRequest API operation.
+type CreateSubscriptionDefinitionVersionRequester interface {
+	CreateSubscriptionDefinitionVersionRequest(*greengrass.CreateSubscriptionDefinitionVersionInput) greengrass.CreateSubscriptionDefinitionVersionRequest
+}
+
+// DeleteCoreDefinitionRequester provides the interface for the DeleteCoreDefinitionRequest API operation.
+type DeleteCoreDefinitionRequester interface {
+	DeleteCoreDefinitionRequest(*greengrass.DeleteCoreDefinitionInput) greengrass.DeleteCoreDefinitionRequest
+}
+
+// DeleteDeviceDefinitionRequester provides the interface for the DeleteDeviceDefinitionRequest API operation.
+type DeleteDeviceDefinitionRequester interface {
+	DeleteDeviceDefinitionRequest(*greengrass.DeleteDeviceDefinitionInput) greengrass.DeleteDeviceDefinitionRequest
+}
+
+// DeleteFunctionDefinitionRequester provides the interface for the DeleteFunctionDefinitionRequest API operation.
+type DeleteFunctionDefinitionRequester interface {
+	DeleteFunctionDefinitionRequest(*greengrass.DeleteFunctionDefinitionInput) greengrass.DeleteFunctionDefinitionRequest
+}
+
+// DeleteGroupRequester provides the interface for the DeleteGroupRequest API operation.
+type DeleteGroupRequester interface {
+	DeleteGroupRequest(*greengrass.DeleteGroupInput) greengrass.DeleteGroupRequest
+}
+
+// DeleteLoggerDefinitionRequester provides the interface for the DeleteLoggerDefinitionRequest API operation.
+type DeleteLoggerDefinitionRequester interface {
+	DeleteLoggerDefinitionRequest(*greengrass.DeleteLoggerDefinitionInput) greengrass.DeleteLoggerDefinitionRequest
+}
+
+// DeleteSubscriptionDefinitionRequester provides the interface for the DeleteSubscriptionDefinitionRequest API operation.
+type DeleteSubscriptionDefinitionRequester interface {
+	DeleteSubscriptionDefinitionRequest(*greengrass.DeleteSubscriptionDefinitionInput) greengrass.DeleteSubscriptionDefinitionRequest
+}
+
+// DisassociateRoleFromGroupRequester provides the interface for the DisassociateRoleFromGroupRequest API operation.
+type DisassociateRoleFromGroupRequester interface {
+	DisassociateRoleFromGroupRequest(*greengrass.DisassociateRoleFromGroupInput) greengrass.DisassociateRoleFromGroupRequest
+}
+
+// DisassociateServiceRoleFromAccountRequester provides the interface for the DisassociateServiceRoleFromAccountRequest API operation.
+type DisassociateServiceRoleFromAccountRequester interface {
+	DisassociateServiceRoleFromAccountRequest(*greengrass.DisassociateServiceRoleFromAccountInput) greengrass.DisassociateServiceRoleFromAccountRequest
+}
+
+// GetAssociatedRoleRequester provides the interface for the GetAssociatedRoleRequest API operation.
+type GetAssociatedRoleRequester interface {
+	GetAssociatedRoleRequest(*greengrass.GetAssociatedRoleInput) greengrass.GetAssociatedRoleRequest
+}
+
+// GetConnectivityInfoRequester provides the interface for the GetConnectivityInfoRequest API operation.
+type GetConnectivityInfoRequester interface {
+	GetConnectivityInfoRequest(*greengrass.GetConnectivityInfoInput) greengrass.GetConnectivityInfoRequest
+}
+
+// GetCoreDefinitionRequester provides the interface for the GetCoreDefinitionRequest API operation.
+type GetCoreDefinitionRequester interface {
+	GetCoreDefinitionRequest(*greengrass.GetCoreDefinitionInput) greengrass.GetCoreDefinitionRequest
+}
+
+// GetCoreDefinitionVersionRequester provides the interface for the GetCoreDefinitionVersionRequest API operation.
+type GetCoreDefinitionVersionRequester interface {
+	GetCoreDefinitionVersionRequest(*greengrass.GetCoreDefinitionVersionInput) greengrass.GetCoreDefinitionVersionRequest
+}
+
+// GetDeploymentStatusRequester provides the interface for the GetDeploymentStatusRequest API operation.
+type GetDeploymentStatusRequester interface {
+	GetDeploymentStatusRequest(*greengrass.GetDeploymentStatusInput) greengrass.GetDeploymentStatusRequest
+}
+
+// GetDeviceDefinitionRequester provides the interface for the GetDeviceDefinitionRequest API operation.
+type GetDeviceDefinitionRequester interface {
+	GetDeviceDefinitionRequest(*greengrass.GetDeviceDefinitionInput) greengrass.GetDeviceDefinitionRequest
+}
+
+// GetDeviceDefinitionVersionRequester provides the interface for the GetDeviceDefinitionVersionRequest API operation.
+type GetDeviceDefinitionVersionRequester interface {
+	GetDeviceDefinitionVersionRequest(*greengrass.GetDeviceDefinitionVersionInput) greengrass.GetDeviceDefinitionVersionRequest
+}
+
+// GetFunctionDefinitionRequester provides the interface for the GetFunctionDefinitionRequest API operation.
+type GetFunctionDefinitionRequester interface {
+	GetFunctionDefinitionRequest(*greengrass.GetFunctionDefinitionInput) greengrass.GetFunctionDefinitionRequest
+}
+
+// GetFunctionDefinitionVersionRequester provides the interface for the GetFunctionDefinitionVersionRequest API operation.
+type GetFunctionDefinitionVersionRequester interface {
+	GetFunctionDefinitionVersionRequest(*greengrass.GetFunctionDefinitionVersionInput) greengrass.GetFunctionDefinitionVersionRequest
+}
+
+// GetGroupRequester provides the interface for the GetGroupRequest API operation.
+type GetGroupRequester interface {
+	GetGroupRequest(*greengrass.GetGroupInput) greengrass.GetGroupRequest
+}
+
+// GetGroupCertificateAuthorityRequester provides the interface for the GetGroupCertificateAuthorityRequest API operation.
+type GetGroupCertificateAuthorityRequester interface {
+	GetGroupCertificateAuthorityRequest(*greengrass.GetGroupCertificateAuthorityInput) greengrass.GetGroupCertificateAuthorityRequest
+}
+
+// GetGroupCertificateConfigurationRequester provides the interface for the GetGroupCertificateConfigurationRequest API operation.
+type GetGroupCertificateConfigurationRequester interface {
+	GetGroupCertificateConfigurationRequest(*greengrass.GetGroupCertificateConfigurationInput) greengrass.GetGroupCertificateConfigurationRequest
+}
+
+// GetGroupVersionRequester provides the interface for the GetGroupVersionRequest API operation.
+type GetGroupVersionRequester interface {
+	GetGroupVersionRequest(*greengrass.GetGroupVersionInput) greengrass.GetGroupVersionRequest
+}
+
+// GetLoggerDefinitionRequester provides the interface for the GetLoggerDefinitionRequest API operation.
+type GetLoggerDefinitionRequester interface {
+	GetLoggerDefinitionRequest(*greengrass.GetLoggerDefinitionInput) greengrass.GetLoggerDefinitionRequest
+}
+
+// GetLoggerDefinitionVersionRequester provides the interface for the GetLoggerDefinitionVersionRequest API operation.
+type GetLoggerDefinitionVersionRequester interface {
+	GetLoggerDefinitionVersionRequest(*greengrass.GetLoggerDefinitionVersionInput) greengrass.GetLoggerDefinitionVersionRequest
+}
+
+// GetServiceRoleForAccountRequester provides the interface for the GetServiceRoleForAccountRequest API operation.
+type GetServiceRoleForAccountRequester interface {
+	GetServiceRoleForAccountRequest(*greengrass.GetServiceRoleForAccountInput) greengrass.GetServiceRoleForAccountRequest
+}
+
+// GetSubscriptionDefinitionRequester provides the interface for the GetSubscriptionDefinitionRequest API operation.
+type GetSubscriptionDefinitionRequester interface {
+	GetSubscriptionDefinitionRequest(*greengrass.GetSubscriptionDefinitionInput) greengrass.GetSubscriptionDefinitionRequest
+}
+
+// GetSubscriptionDefinitionVersionRequester provides the interface for the GetSubscriptionDefinitionVersionRequest API operation.
+type GetSubscriptionDefinitionVersionRequester interface {
+	GetSubscriptionDefinitionVersionRequest(*greengrass.GetSubscriptionDefinitionVersionInput) greengrass.GetSubscriptionDefinitionVersionRequest
+}
+
+// ListCoreDefinitionVersionsRequester provides the interface for the ListCoreDefinitionVersionsRequest API operation.
+type ListCoreDefinitionVersionsRequester interface {
+	ListCoreDefinitionVersionsRequest(*greengrass.ListCoreDefinitionVersionsInput) greengrass.ListCoreDefinitionVersionsRequest
+}
+
+// ListCoreDefinitionsRequester provides the interface for the ListCoreDefinitionsRequest API operation.
+type ListCoreDefinitionsRequester interface {
+	ListCoreDefinitionsRequest(*greengrass.ListCoreDefinitionsInput) greengrass.ListCoreDefinitionsRequest
+}
+
+// ListDeploymentsRequester provides the interface for the ListDeploymentsRequest API operation.
+type ListDeploymentsRequester interface {
+	ListDeploymentsRequest(*greengrass.ListDeploymentsInput) greengrass.ListDeploymentsRequest
+}
+
+// ListDeviceDefinitionVersionsRequester provides the interface for the ListDeviceDefinitionVersionsRequest API operation.
+type ListDeviceDefinitionVersionsRequester interface {
+	ListDeviceDefinitionVersionsRequest(*greengrass.ListDeviceDefinitionVersionsInput) greengrass.ListDeviceDefinitionVersionsRequest
+}
+
+// ListDeviceDefinitionsRequester provides the interface for the ListDeviceDefinitionsRequest API operation.
+type ListDeviceDefinitionsRequester interface {
+	ListDeviceDefinitionsRequest(*greengrass.ListDeviceDefinitionsInput) greengrass.ListDeviceDefinitionsRequest
+}
+
+// ListFunctionDefinitionVersionsRequester provides the interface for the ListFunctionDefinitionVersionsRequest API operation.
+type ListFunctionDefinitionVersionsRequester interface {
+	ListFunctionDefinitionVersionsRequest(*greengrass.ListFunctionDefinitionVersionsInput) greengrass.ListFunctionDefinitionVersionsRequest
+}
+
+// ListFunctionDefinitionsRequester provides the interface for the ListFunctionDefinitionsRequest API operation.
+type ListFunctionDefinitionsRequester interface {
+	ListFunctionDefinitionsRequest(*greengrass.ListFunctionDefinitionsInput) greengrass.ListFunctionDefinitionsRequest
+}
+
+// ListGroupCertificateAuthoritiesRequester provides the interface for the ListGroupCertificateAuthoritiesRequest API operation.
+type ListGroupCertificateAuthoritiesRequester interface {
+	ListGroupCertificateAuthoritiesRequest(*greengrass.ListGroupCertificateAuthoritiesInput) greengrass.ListGroupCertificateAuthoritiesRequest
+}
+
+// ListGroupVersionsRequester provides the interface for the ListGroupVersionsRequest API operation.
+type ListGroupVersionsRequester interface {
+	ListGroupVersionsRequest(*greengrass.ListGroupVersionsInput) greengrass.ListGroupVersionsRequest
+}
+
+// ListGroupsRequester provides the interface for the ListGroupsRequest API operation.
+type ListGroupsRequester interface {
+	ListGroupsRequest(*greengrass.ListGroupsInput) greengrass.ListGroupsRequest
+}
+
+// ListLoggerDefinitionVersionsRequester provides the interface for the ListLoggerDefinitionVersionsRequest API operation.
+type ListLoggerDefinitionVersionsRequester interface {
+	ListLoggerDefinitionVersionsRequest(*greengrass.ListLoggerDefinitionVersionsInput) greengrass.ListLoggerDefinitionVersionsRequest
+}
+
+// ListLoggerDefinitionsRequester provides the interface for the ListLoggerDefinitionsRequest API operation.
+type ListLoggerDefinitionsRequester interface {
+	ListLoggerDefinitionsRequest(*greengrass.ListLoggerDefinitionsInput) greengrass.ListLoggerDefinitionsRequest
+}
+
+// ListSubscriptionDefinitionVersionsRequester provides the interface for the ListSubscriptionDefinitionVersionsRequest API operation.
+type ListSubscriptionDefinitionVersionsRequester interface {
+	ListSubscriptionDefinitionVersionsRequest(*greengrass.ListSubscriptionDefinitionVersionsInput) greengrass.ListSubscriptionDefinitionVersionsRequest
+}
+
+// ListSubscriptionDefinitionsRequester provides the interface for the ListSubscriptionDefinitionsRequest API operation.
+type ListSubscriptionDefinitionsRequester interface {
+	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) greengrass.ListSubscriptionDefinitionsRequest
+}
+
+// ResetDeploymentsRequester provides the interface for the ResetDeploymentsRequest API operation.
+type ResetDeploymentsRequester interface {
+	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) greengrass.ResetDeploymentsRequest
+}
+
+// UpdateConnectivityInfoRequester provides the interface for the UpdateConnectivityInfoRequest API operation.
+type UpdateConnectivityInfoRequester interface {
+	UpdateConnectivityInfoRequest(*greengrass.UpdateConnectivityInfoInput) greengrass.UpdateConnectivityInfoRequest
+}
+
+// UpdateCoreDefinitionRequester provides the interface for the UpdateCoreDefinitionRequest API operation.
+type UpdateCoreDefinitionRequester interface {
+	UpdateCoreDefinitionRequest(*greengrass.UpdateCoreDefinitionInput) greengrass.UpdateCoreDefinitionRequest
+}
+
+// UpdateDeviceDefinitionRequester provides the interface for the UpdateDeviceDefinitionRequest API operation.
+type UpdateDeviceDefinitionRequester interface {
+	UpdateDeviceDefinitionRequest(*greengrass.UpdateDeviceDefinitionInput) greengrass.UpdateDeviceDefinitionRequest
+}
+
+// UpdateFunctionDefinitionRequester provides the interface for the UpdateFunctionDefinitionRequest API operation.
+type UpdateFunctionDefinitionRequester interface {
+	UpdateFunctionDefinitionRequest(*greengrass.UpdateFunctionDefinitionInput) greengrass.UpdateFunctionDefinitionRequest
+}
+
+// UpdateGroupRequester provides the interface for the UpdateGroupRequest API operation.
+type UpdateGroupRequester interface {
+	UpdateGroupRequest(*greengrass.UpdateGroupInput) greengrass.UpdateGroupRequest
+}
+
+// UpdateGroupCertificateConfigurationRequester provides the interface for the UpdateGroupCertificateConfigurationRequest API operation.
+type UpdateGroupCertificateConfigurationRequester interface {
+	UpdateGroupCertificateConfigurationRequest(*greengrass.UpdateGroupCertificateConfigurationInput) greengrass.UpdateGroupCertificateConfigurationRequest
+}
+
+// UpdateLoggerDefinitionRequester provides the interface for the UpdateLoggerDefinitionRequest API operation.
+type UpdateLoggerDefinitionRequester interface {
+	UpdateLoggerDefinitionRequest(*greengrass.UpdateLoggerDefinitionInput) greengrass.UpdateLoggerDefinitionRequest
+}
+
+// UpdateSubscriptionDefinitionRequester provides the interface for the UpdateSubscriptionDefinitionRequest API operation.
+type UpdateSubscriptionDefinitionRequester interface {
+	UpdateSubscriptionDefinitionRequest(*greengrass.UpdateSubscriptionDefinitionInput) greengrass.UpdateSubscriptionDefinitionRequest
+}

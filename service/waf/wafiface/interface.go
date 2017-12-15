@@ -12,143 +12,222 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
-// WAFAPI provides an interface to enable mocking the
-// waf.WAF service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS WAF.
-//    func myFunc(svc wafiface.WAFAPI) bool {
-//        // Make svc.CreateByteMatchSet request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := waf.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockWAFClient struct {
-//        wafiface.WAFAPI
-//    }
-//    func (m *mockWAFClient) CreateByteMatchSet(input *waf.CreateByteMatchSetInput) (*waf.CreateByteMatchSetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockWAFClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type WAFAPI interface {
+// CreateByteMatchSetRequester provides the interface for the CreateByteMatchSetRequest API operation.
+type CreateByteMatchSetRequester interface {
 	CreateByteMatchSetRequest(*waf.CreateByteMatchSetInput) waf.CreateByteMatchSetRequest
-
-	CreateIPSetRequest(*waf.CreateIPSetInput) waf.CreateIPSetRequest
-
-	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) waf.CreateRateBasedRuleRequest
-
-	CreateRuleRequest(*waf.CreateRuleInput) waf.CreateRuleRequest
-
-	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) waf.CreateSizeConstraintSetRequest
-
-	CreateSqlInjectionMatchSetRequest(*waf.CreateSqlInjectionMatchSetInput) waf.CreateSqlInjectionMatchSetRequest
-
-	CreateWebACLRequest(*waf.CreateWebACLInput) waf.CreateWebACLRequest
-
-	CreateXssMatchSetRequest(*waf.CreateXssMatchSetInput) waf.CreateXssMatchSetRequest
-
-	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) waf.DeleteByteMatchSetRequest
-
-	DeleteIPSetRequest(*waf.DeleteIPSetInput) waf.DeleteIPSetRequest
-
-	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
-
-	DeleteRuleRequest(*waf.DeleteRuleInput) waf.DeleteRuleRequest
-
-	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) waf.DeleteSizeConstraintSetRequest
-
-	DeleteSqlInjectionMatchSetRequest(*waf.DeleteSqlInjectionMatchSetInput) waf.DeleteSqlInjectionMatchSetRequest
-
-	DeleteWebACLRequest(*waf.DeleteWebACLInput) waf.DeleteWebACLRequest
-
-	DeleteXssMatchSetRequest(*waf.DeleteXssMatchSetInput) waf.DeleteXssMatchSetRequest
-
-	GetByteMatchSetRequest(*waf.GetByteMatchSetInput) waf.GetByteMatchSetRequest
-
-	GetChangeTokenRequest(*waf.GetChangeTokenInput) waf.GetChangeTokenRequest
-
-	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) waf.GetChangeTokenStatusRequest
-
-	GetIPSetRequest(*waf.GetIPSetInput) waf.GetIPSetRequest
-
-	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) waf.GetRateBasedRuleRequest
-
-	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) waf.GetRateBasedRuleManagedKeysRequest
-
-	GetRuleRequest(*waf.GetRuleInput) waf.GetRuleRequest
-
-	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) waf.GetSampledRequestsRequest
-
-	GetSizeConstraintSetRequest(*waf.GetSizeConstraintSetInput) waf.GetSizeConstraintSetRequest
-
-	GetSqlInjectionMatchSetRequest(*waf.GetSqlInjectionMatchSetInput) waf.GetSqlInjectionMatchSetRequest
-
-	GetWebACLRequest(*waf.GetWebACLInput) waf.GetWebACLRequest
-
-	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) waf.GetXssMatchSetRequest
-
-	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) waf.ListByteMatchSetsRequest
-
-	ListIPSetsRequest(*waf.ListIPSetsInput) waf.ListIPSetsRequest
-
-	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
-
-	ListRulesRequest(*waf.ListRulesInput) waf.ListRulesRequest
-
-	ListSizeConstraintSetsRequest(*waf.ListSizeConstraintSetsInput) waf.ListSizeConstraintSetsRequest
-
-	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) waf.ListSqlInjectionMatchSetsRequest
-
-	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
-
-	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
-
-	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
-
-	UpdateIPSetRequest(*waf.UpdateIPSetInput) waf.UpdateIPSetRequest
-
-	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) waf.UpdateRateBasedRuleRequest
-
-	UpdateRuleRequest(*waf.UpdateRuleInput) waf.UpdateRuleRequest
-
-	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) waf.UpdateSizeConstraintSetRequest
-
-	UpdateSqlInjectionMatchSetRequest(*waf.UpdateSqlInjectionMatchSetInput) waf.UpdateSqlInjectionMatchSetRequest
-
-	UpdateWebACLRequest(*waf.UpdateWebACLInput) waf.UpdateWebACLRequest
-
-	UpdateXssMatchSetRequest(*waf.UpdateXssMatchSetInput) waf.UpdateXssMatchSetRequest
 }
 
-var _ WAFAPI = (*waf.WAF)(nil)
+// CreateIPSetRequester provides the interface for the CreateIPSetRequest API operation.
+type CreateIPSetRequester interface {
+	CreateIPSetRequest(*waf.CreateIPSetInput) waf.CreateIPSetRequest
+}
+
+// CreateRateBasedRuleRequester provides the interface for the CreateRateBasedRuleRequest API operation.
+type CreateRateBasedRuleRequester interface {
+	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) waf.CreateRateBasedRuleRequest
+}
+
+// CreateRuleRequester provides the interface for the CreateRuleRequest API operation.
+type CreateRuleRequester interface {
+	CreateRuleRequest(*waf.CreateRuleInput) waf.CreateRuleRequest
+}
+
+// CreateSizeConstraintSetRequester provides the interface for the CreateSizeConstraintSetRequest API operation.
+type CreateSizeConstraintSetRequester interface {
+	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) waf.CreateSizeConstraintSetRequest
+}
+
+// CreateSqlInjectionMatchSetRequester provides the interface for the CreateSqlInjectionMatchSetRequest API operation.
+type CreateSqlInjectionMatchSetRequester interface {
+	CreateSqlInjectionMatchSetRequest(*waf.CreateSqlInjectionMatchSetInput) waf.CreateSqlInjectionMatchSetRequest
+}
+
+// CreateWebACLRequester provides the interface for the CreateWebACLRequest API operation.
+type CreateWebACLRequester interface {
+	CreateWebACLRequest(*waf.CreateWebACLInput) waf.CreateWebACLRequest
+}
+
+// CreateXssMatchSetRequester provides the interface for the CreateXssMatchSetRequest API operation.
+type CreateXssMatchSetRequester interface {
+	CreateXssMatchSetRequest(*waf.CreateXssMatchSetInput) waf.CreateXssMatchSetRequest
+}
+
+// DeleteByteMatchSetRequester provides the interface for the DeleteByteMatchSetRequest API operation.
+type DeleteByteMatchSetRequester interface {
+	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) waf.DeleteByteMatchSetRequest
+}
+
+// DeleteIPSetRequester provides the interface for the DeleteIPSetRequest API operation.
+type DeleteIPSetRequester interface {
+	DeleteIPSetRequest(*waf.DeleteIPSetInput) waf.DeleteIPSetRequest
+}
+
+// DeleteRateBasedRuleRequester provides the interface for the DeleteRateBasedRuleRequest API operation.
+type DeleteRateBasedRuleRequester interface {
+	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
+}
+
+// DeleteRuleRequester provides the interface for the DeleteRuleRequest API operation.
+type DeleteRuleRequester interface {
+	DeleteRuleRequest(*waf.DeleteRuleInput) waf.DeleteRuleRequest
+}
+
+// DeleteSizeConstraintSetRequester provides the interface for the DeleteSizeConstraintSetRequest API operation.
+type DeleteSizeConstraintSetRequester interface {
+	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) waf.DeleteSizeConstraintSetRequest
+}
+
+// DeleteSqlInjectionMatchSetRequester provides the interface for the DeleteSqlInjectionMatchSetRequest API operation.
+type DeleteSqlInjectionMatchSetRequester interface {
+	DeleteSqlInjectionMatchSetRequest(*waf.DeleteSqlInjectionMatchSetInput) waf.DeleteSqlInjectionMatchSetRequest
+}
+
+// DeleteWebACLRequester provides the interface for the DeleteWebACLRequest API operation.
+type DeleteWebACLRequester interface {
+	DeleteWebACLRequest(*waf.DeleteWebACLInput) waf.DeleteWebACLRequest
+}
+
+// DeleteXssMatchSetRequester provides the interface for the DeleteXssMatchSetRequest API operation.
+type DeleteXssMatchSetRequester interface {
+	DeleteXssMatchSetRequest(*waf.DeleteXssMatchSetInput) waf.DeleteXssMatchSetRequest
+}
+
+// GetByteMatchSetRequester provides the interface for the GetByteMatchSetRequest API operation.
+type GetByteMatchSetRequester interface {
+	GetByteMatchSetRequest(*waf.GetByteMatchSetInput) waf.GetByteMatchSetRequest
+}
+
+// GetChangeTokenRequester provides the interface for the GetChangeTokenRequest API operation.
+type GetChangeTokenRequester interface {
+	GetChangeTokenRequest(*waf.GetChangeTokenInput) waf.GetChangeTokenRequest
+}
+
+// GetChangeTokenStatusRequester provides the interface for the GetChangeTokenStatusRequest API operation.
+type GetChangeTokenStatusRequester interface {
+	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) waf.GetChangeTokenStatusRequest
+}
+
+// GetIPSetRequester provides the interface for the GetIPSetRequest API operation.
+type GetIPSetRequester interface {
+	GetIPSetRequest(*waf.GetIPSetInput) waf.GetIPSetRequest
+}
+
+// GetRateBasedRuleRequester provides the interface for the GetRateBasedRuleRequest API operation.
+type GetRateBasedRuleRequester interface {
+	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) waf.GetRateBasedRuleRequest
+}
+
+// GetRateBasedRuleManagedKeysRequester provides the interface for the GetRateBasedRuleManagedKeysRequest API operation.
+type GetRateBasedRuleManagedKeysRequester interface {
+	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) waf.GetRateBasedRuleManagedKeysRequest
+}
+
+// GetRuleRequester provides the interface for the GetRuleRequest API operation.
+type GetRuleRequester interface {
+	GetRuleRequest(*waf.GetRuleInput) waf.GetRuleRequest
+}
+
+// GetSampledRequestsRequester provides the interface for the GetSampledRequestsRequest API operation.
+type GetSampledRequestsRequester interface {
+	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) waf.GetSampledRequestsRequest
+}
+
+// GetSizeConstraintSetRequester provides the interface for the GetSizeConstraintSetRequest API operation.
+type GetSizeConstraintSetRequester interface {
+	GetSizeConstraintSetRequest(*waf.GetSizeConstraintSetInput) waf.GetSizeConstraintSetRequest
+}
+
+// GetSqlInjectionMatchSetRequester provides the interface for the GetSqlInjectionMatchSetRequest API operation.
+type GetSqlInjectionMatchSetRequester interface {
+	GetSqlInjectionMatchSetRequest(*waf.GetSqlInjectionMatchSetInput) waf.GetSqlInjectionMatchSetRequest
+}
+
+// GetWebACLRequester provides the interface for the GetWebACLRequest API operation.
+type GetWebACLRequester interface {
+	GetWebACLRequest(*waf.GetWebACLInput) waf.GetWebACLRequest
+}
+
+// GetXssMatchSetRequester provides the interface for the GetXssMatchSetRequest API operation.
+type GetXssMatchSetRequester interface {
+	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) waf.GetXssMatchSetRequest
+}
+
+// ListByteMatchSetsRequester provides the interface for the ListByteMatchSetsRequest API operation.
+type ListByteMatchSetsRequester interface {
+	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) waf.ListByteMatchSetsRequest
+}
+
+// ListIPSetsRequester provides the interface for the ListIPSetsRequest API operation.
+type ListIPSetsRequester interface {
+	ListIPSetsRequest(*waf.ListIPSetsInput) waf.ListIPSetsRequest
+}
+
+// ListRateBasedRulesRequester provides the interface for the ListRateBasedRulesRequest API operation.
+type ListRateBasedRulesRequester interface {
+	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
+}
+
+// ListRulesRequester provides the interface for the ListRulesRequest API operation.
+type ListRulesRequester interface {
+	ListRulesRequest(*waf.ListRulesInput) waf.ListRulesRequest
+}
+
+// ListSizeConstraintSetsRequester provides the interface for the ListSizeConstraintSetsRequest API operation.
+type ListSizeConstraintSetsRequester interface {
+	ListSizeConstraintSetsRequest(*waf.ListSizeConstraintSetsInput) waf.ListSizeConstraintSetsRequest
+}
+
+// ListSqlInjectionMatchSetsRequester provides the interface for the ListSqlInjectionMatchSetsRequest API operation.
+type ListSqlInjectionMatchSetsRequester interface {
+	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) waf.ListSqlInjectionMatchSetsRequest
+}
+
+// ListWebACLsRequester provides the interface for the ListWebACLsRequest API operation.
+type ListWebACLsRequester interface {
+	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
+}
+
+// ListXssMatchSetsRequester provides the interface for the ListXssMatchSetsRequest API operation.
+type ListXssMatchSetsRequester interface {
+	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
+}
+
+// UpdateByteMatchSetRequester provides the interface for the UpdateByteMatchSetRequest API operation.
+type UpdateByteMatchSetRequester interface {
+	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
+}
+
+// UpdateIPSetRequester provides the interface for the UpdateIPSetRequest API operation.
+type UpdateIPSetRequester interface {
+	UpdateIPSetRequest(*waf.UpdateIPSetInput) waf.UpdateIPSetRequest
+}
+
+// UpdateRateBasedRuleRequester provides the interface for the UpdateRateBasedRuleRequest API operation.
+type UpdateRateBasedRuleRequester interface {
+	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) waf.UpdateRateBasedRuleRequest
+}
+
+// UpdateRuleRequester provides the interface for the UpdateRuleRequest API operation.
+type UpdateRuleRequester interface {
+	UpdateRuleRequest(*waf.UpdateRuleInput) waf.UpdateRuleRequest
+}
+
+// UpdateSizeConstraintSetRequester provides the interface for the UpdateSizeConstraintSetRequest API operation.
+type UpdateSizeConstraintSetRequester interface {
+	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) waf.UpdateSizeConstraintSetRequest
+}
+
+// UpdateSqlInjectionMatchSetRequester provides the interface for the UpdateSqlInjectionMatchSetRequest API operation.
+type UpdateSqlInjectionMatchSetRequester interface {
+	UpdateSqlInjectionMatchSetRequest(*waf.UpdateSqlInjectionMatchSetInput) waf.UpdateSqlInjectionMatchSetRequest
+}
+
+// UpdateWebACLRequester provides the interface for the UpdateWebACLRequest API operation.
+type UpdateWebACLRequester interface {
+	UpdateWebACLRequest(*waf.UpdateWebACLInput) waf.UpdateWebACLRequest
+}
+
+// UpdateXssMatchSetRequester provides the interface for the UpdateXssMatchSetRequest API operation.
+type UpdateXssMatchSetRequester interface {
+	UpdateXssMatchSetRequest(*waf.UpdateXssMatchSetInput) waf.UpdateXssMatchSetRequest
+}

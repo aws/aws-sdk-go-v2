@@ -13,119 +13,159 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
 )
 
-// AppStreamAPI provides an interface to enable mocking the
-// appstream.AppStream service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon AppStream.
-//    func myFunc(svc appstreamiface.AppStreamAPI) bool {
-//        // Make svc.AssociateFleet request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := appstream.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAppStreamClient struct {
-//        appstreamiface.AppStreamAPI
-//    }
-//    func (m *mockAppStreamClient) AssociateFleet(input *appstream.AssociateFleetInput) (*appstream.AssociateFleetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockAppStreamClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type AppStreamAPI interface {
+// AssociateFleetRequester provides the interface for the AssociateFleetRequest API operation.
+type AssociateFleetRequester interface {
 	AssociateFleetRequest(*appstream.AssociateFleetInput) appstream.AssociateFleetRequest
+}
 
+// CreateDirectoryConfigRequester provides the interface for the CreateDirectoryConfigRequest API operation.
+type CreateDirectoryConfigRequester interface {
 	CreateDirectoryConfigRequest(*appstream.CreateDirectoryConfigInput) appstream.CreateDirectoryConfigRequest
+}
 
+// CreateFleetRequester provides the interface for the CreateFleetRequest API operation.
+type CreateFleetRequester interface {
 	CreateFleetRequest(*appstream.CreateFleetInput) appstream.CreateFleetRequest
+}
 
+// CreateImageBuilderRequester provides the interface for the CreateImageBuilderRequest API operation.
+type CreateImageBuilderRequester interface {
 	CreateImageBuilderRequest(*appstream.CreateImageBuilderInput) appstream.CreateImageBuilderRequest
+}
 
+// CreateImageBuilderStreamingURLRequester provides the interface for the CreateImageBuilderStreamingURLRequest API operation.
+type CreateImageBuilderStreamingURLRequester interface {
 	CreateImageBuilderStreamingURLRequest(*appstream.CreateImageBuilderStreamingURLInput) appstream.CreateImageBuilderStreamingURLRequest
+}
 
+// CreateStackRequester provides the interface for the CreateStackRequest API operation.
+type CreateStackRequester interface {
 	CreateStackRequest(*appstream.CreateStackInput) appstream.CreateStackRequest
+}
 
+// CreateStreamingURLRequester provides the interface for the CreateStreamingURLRequest API operation.
+type CreateStreamingURLRequester interface {
 	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) appstream.CreateStreamingURLRequest
+}
 
+// DeleteDirectoryConfigRequester provides the interface for the DeleteDirectoryConfigRequest API operation.
+type DeleteDirectoryConfigRequester interface {
 	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) appstream.DeleteDirectoryConfigRequest
+}
 
+// DeleteFleetRequester provides the interface for the DeleteFleetRequest API operation.
+type DeleteFleetRequester interface {
 	DeleteFleetRequest(*appstream.DeleteFleetInput) appstream.DeleteFleetRequest
+}
 
+// DeleteImageRequester provides the interface for the DeleteImageRequest API operation.
+type DeleteImageRequester interface {
 	DeleteImageRequest(*appstream.DeleteImageInput) appstream.DeleteImageRequest
+}
 
+// DeleteImageBuilderRequester provides the interface for the DeleteImageBuilderRequest API operation.
+type DeleteImageBuilderRequester interface {
 	DeleteImageBuilderRequest(*appstream.DeleteImageBuilderInput) appstream.DeleteImageBuilderRequest
+}
 
+// DeleteStackRequester provides the interface for the DeleteStackRequest API operation.
+type DeleteStackRequester interface {
 	DeleteStackRequest(*appstream.DeleteStackInput) appstream.DeleteStackRequest
+}
 
+// DescribeDirectoryConfigsRequester provides the interface for the DescribeDirectoryConfigsRequest API operation.
+type DescribeDirectoryConfigsRequester interface {
 	DescribeDirectoryConfigsRequest(*appstream.DescribeDirectoryConfigsInput) appstream.DescribeDirectoryConfigsRequest
+}
 
+// DescribeFleetsRequester provides the interface for the DescribeFleetsRequest API operation.
+type DescribeFleetsRequester interface {
 	DescribeFleetsRequest(*appstream.DescribeFleetsInput) appstream.DescribeFleetsRequest
+}
 
+// DescribeImageBuildersRequester provides the interface for the DescribeImageBuildersRequest API operation.
+type DescribeImageBuildersRequester interface {
 	DescribeImageBuildersRequest(*appstream.DescribeImageBuildersInput) appstream.DescribeImageBuildersRequest
+}
 
+// DescribeImagesRequester provides the interface for the DescribeImagesRequest API operation.
+type DescribeImagesRequester interface {
 	DescribeImagesRequest(*appstream.DescribeImagesInput) appstream.DescribeImagesRequest
+}
 
+// DescribeSessionsRequester provides the interface for the DescribeSessionsRequest API operation.
+type DescribeSessionsRequester interface {
 	DescribeSessionsRequest(*appstream.DescribeSessionsInput) appstream.DescribeSessionsRequest
+}
 
+// DescribeStacksRequester provides the interface for the DescribeStacksRequest API operation.
+type DescribeStacksRequester interface {
 	DescribeStacksRequest(*appstream.DescribeStacksInput) appstream.DescribeStacksRequest
+}
 
+// DisassociateFleetRequester provides the interface for the DisassociateFleetRequest API operation.
+type DisassociateFleetRequester interface {
 	DisassociateFleetRequest(*appstream.DisassociateFleetInput) appstream.DisassociateFleetRequest
+}
 
+// ExpireSessionRequester provides the interface for the ExpireSessionRequest API operation.
+type ExpireSessionRequester interface {
 	ExpireSessionRequest(*appstream.ExpireSessionInput) appstream.ExpireSessionRequest
+}
 
+// ListAssociatedFleetsRequester provides the interface for the ListAssociatedFleetsRequest API operation.
+type ListAssociatedFleetsRequester interface {
 	ListAssociatedFleetsRequest(*appstream.ListAssociatedFleetsInput) appstream.ListAssociatedFleetsRequest
+}
 
+// ListAssociatedStacksRequester provides the interface for the ListAssociatedStacksRequest API operation.
+type ListAssociatedStacksRequester interface {
 	ListAssociatedStacksRequest(*appstream.ListAssociatedStacksInput) appstream.ListAssociatedStacksRequest
+}
 
+// StartFleetRequester provides the interface for the StartFleetRequest API operation.
+type StartFleetRequester interface {
 	StartFleetRequest(*appstream.StartFleetInput) appstream.StartFleetRequest
+}
 
+// StartImageBuilderRequester provides the interface for the StartImageBuilderRequest API operation.
+type StartImageBuilderRequester interface {
 	StartImageBuilderRequest(*appstream.StartImageBuilderInput) appstream.StartImageBuilderRequest
+}
 
+// StopFleetRequester provides the interface for the StopFleetRequest API operation.
+type StopFleetRequester interface {
 	StopFleetRequest(*appstream.StopFleetInput) appstream.StopFleetRequest
+}
 
+// StopImageBuilderRequester provides the interface for the StopImageBuilderRequest API operation.
+type StopImageBuilderRequester interface {
 	StopImageBuilderRequest(*appstream.StopImageBuilderInput) appstream.StopImageBuilderRequest
+}
 
+// UpdateDirectoryConfigRequester provides the interface for the UpdateDirectoryConfigRequest API operation.
+type UpdateDirectoryConfigRequester interface {
 	UpdateDirectoryConfigRequest(*appstream.UpdateDirectoryConfigInput) appstream.UpdateDirectoryConfigRequest
+}
 
+// UpdateFleetRequester provides the interface for the UpdateFleetRequest API operation.
+type UpdateFleetRequester interface {
 	UpdateFleetRequest(*appstream.UpdateFleetInput) appstream.UpdateFleetRequest
+}
 
+// UpdateStackRequester provides the interface for the UpdateStackRequest API operation.
+type UpdateStackRequester interface {
 	UpdateStackRequest(*appstream.UpdateStackInput) appstream.UpdateStackRequest
+}
 
+// FleetStartedWaiter provides the interface for the WaitUntilFleetStarted waiter.
+type FleetStartedWaiter interface {
 	WaitUntilFleetStarted(*appstream.DescribeFleetsInput) error
 	WaitUntilFleetStartedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
+}
 
+// FleetStoppedWaiter provides the interface for the WaitUntilFleetStopped waiter.
+type FleetStoppedWaiter interface {
 	WaitUntilFleetStopped(*appstream.DescribeFleetsInput) error
 	WaitUntilFleetStoppedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
 }
-
-var _ AppStreamAPI = (*appstream.AppStream)(nil)

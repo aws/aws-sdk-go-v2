@@ -13,130 +13,155 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
 )
 
-// CloudFrontAPI provides an interface to enable mocking the
-// cloudfront.CloudFront service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon CloudFront.
-//    func myFunc(svc cloudfrontiface.CloudFrontAPI) bool {
-//        // Make svc.CreateCloudFrontOriginAccessIdentity request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudfront.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudFrontClient struct {
-//        cloudfrontiface.CloudFrontAPI
-//    }
-//    func (m *mockCloudFrontClient) CreateCloudFrontOriginAccessIdentity(input *cloudfront.CreateCloudFrontOriginAccessIdentityInput) (*cloudfront.CreateCloudFrontOriginAccessIdentityOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudFrontClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudFrontAPI interface {
+// CreateCloudFrontOriginAccessIdentityRequester provides the interface for the CreateCloudFrontOriginAccessIdentityRequest API operation.
+type CreateCloudFrontOriginAccessIdentityRequester interface {
 	CreateCloudFrontOriginAccessIdentityRequest(*cloudfront.CreateCloudFrontOriginAccessIdentityInput) cloudfront.CreateCloudFrontOriginAccessIdentityRequest
+}
 
+// CreateDistributionRequester provides the interface for the CreateDistributionRequest API operation.
+type CreateDistributionRequester interface {
 	CreateDistributionRequest(*cloudfront.CreateDistributionInput) cloudfront.CreateDistributionRequest
+}
 
+// CreateDistributionWithTagsRequester provides the interface for the CreateDistributionWithTagsRequest API operation.
+type CreateDistributionWithTagsRequester interface {
 	CreateDistributionWithTagsRequest(*cloudfront.CreateDistributionWithTagsInput) cloudfront.CreateDistributionWithTagsRequest
+}
 
+// CreateInvalidationRequester provides the interface for the CreateInvalidationRequest API operation.
+type CreateInvalidationRequester interface {
 	CreateInvalidationRequest(*cloudfront.CreateInvalidationInput) cloudfront.CreateInvalidationRequest
+}
 
+// CreateStreamingDistributionRequester provides the interface for the CreateStreamingDistributionRequest API operation.
+type CreateStreamingDistributionRequester interface {
 	CreateStreamingDistributionRequest(*cloudfront.CreateStreamingDistributionInput) cloudfront.CreateStreamingDistributionRequest
+}
 
+// CreateStreamingDistributionWithTagsRequester provides the interface for the CreateStreamingDistributionWithTagsRequest API operation.
+type CreateStreamingDistributionWithTagsRequester interface {
 	CreateStreamingDistributionWithTagsRequest(*cloudfront.CreateStreamingDistributionWithTagsInput) cloudfront.CreateStreamingDistributionWithTagsRequest
+}
 
+// DeleteCloudFrontOriginAccessIdentityRequester provides the interface for the DeleteCloudFrontOriginAccessIdentityRequest API operation.
+type DeleteCloudFrontOriginAccessIdentityRequester interface {
 	DeleteCloudFrontOriginAccessIdentityRequest(*cloudfront.DeleteCloudFrontOriginAccessIdentityInput) cloudfront.DeleteCloudFrontOriginAccessIdentityRequest
+}
 
+// DeleteDistributionRequester provides the interface for the DeleteDistributionRequest API operation.
+type DeleteDistributionRequester interface {
 	DeleteDistributionRequest(*cloudfront.DeleteDistributionInput) cloudfront.DeleteDistributionRequest
+}
 
+// DeleteStreamingDistributionRequester provides the interface for the DeleteStreamingDistributionRequest API operation.
+type DeleteStreamingDistributionRequester interface {
 	DeleteStreamingDistributionRequest(*cloudfront.DeleteStreamingDistributionInput) cloudfront.DeleteStreamingDistributionRequest
+}
 
+// GetCloudFrontOriginAccessIdentityRequester provides the interface for the GetCloudFrontOriginAccessIdentityRequest API operation.
+type GetCloudFrontOriginAccessIdentityRequester interface {
 	GetCloudFrontOriginAccessIdentityRequest(*cloudfront.GetCloudFrontOriginAccessIdentityInput) cloudfront.GetCloudFrontOriginAccessIdentityRequest
+}
 
+// GetCloudFrontOriginAccessIdentityConfigRequester provides the interface for the GetCloudFrontOriginAccessIdentityConfigRequest API operation.
+type GetCloudFrontOriginAccessIdentityConfigRequester interface {
 	GetCloudFrontOriginAccessIdentityConfigRequest(*cloudfront.GetCloudFrontOriginAccessIdentityConfigInput) cloudfront.GetCloudFrontOriginAccessIdentityConfigRequest
+}
 
+// GetDistributionRequester provides the interface for the GetDistributionRequest API operation.
+type GetDistributionRequester interface {
 	GetDistributionRequest(*cloudfront.GetDistributionInput) cloudfront.GetDistributionRequest
+}
 
+// GetDistributionConfigRequester provides the interface for the GetDistributionConfigRequest API operation.
+type GetDistributionConfigRequester interface {
 	GetDistributionConfigRequest(*cloudfront.GetDistributionConfigInput) cloudfront.GetDistributionConfigRequest
+}
 
+// GetInvalidationRequester provides the interface for the GetInvalidationRequest API operation.
+type GetInvalidationRequester interface {
 	GetInvalidationRequest(*cloudfront.GetInvalidationInput) cloudfront.GetInvalidationRequest
+}
 
+// GetStreamingDistributionRequester provides the interface for the GetStreamingDistributionRequest API operation.
+type GetStreamingDistributionRequester interface {
 	GetStreamingDistributionRequest(*cloudfront.GetStreamingDistributionInput) cloudfront.GetStreamingDistributionRequest
+}
 
+// GetStreamingDistributionConfigRequester provides the interface for the GetStreamingDistributionConfigRequest API operation.
+type GetStreamingDistributionConfigRequester interface {
 	GetStreamingDistributionConfigRequest(*cloudfront.GetStreamingDistributionConfigInput) cloudfront.GetStreamingDistributionConfigRequest
+}
 
+// ListCloudFrontOriginAccessIdentitiesRequester provides the interface for the ListCloudFrontOriginAccessIdentitiesRequest API operation.
+type ListCloudFrontOriginAccessIdentitiesRequester interface {
 	ListCloudFrontOriginAccessIdentitiesRequest(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) cloudfront.ListCloudFrontOriginAccessIdentitiesRequest
+}
 
-	ListCloudFrontOriginAccessIdentitiesPages(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool) error
-	ListCloudFrontOriginAccessIdentitiesPagesWithContext(aws.Context, *cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool, ...aws.Option) error
-
+// ListDistributionsRequester provides the interface for the ListDistributionsRequest API operation.
+type ListDistributionsRequester interface {
 	ListDistributionsRequest(*cloudfront.ListDistributionsInput) cloudfront.ListDistributionsRequest
+}
 
-	ListDistributionsPages(*cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool) error
-	ListDistributionsPagesWithContext(aws.Context, *cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool, ...aws.Option) error
-
+// ListDistributionsByWebACLIdRequester provides the interface for the ListDistributionsByWebACLIdRequest API operation.
+type ListDistributionsByWebACLIdRequester interface {
 	ListDistributionsByWebACLIdRequest(*cloudfront.ListDistributionsByWebACLIdInput) cloudfront.ListDistributionsByWebACLIdRequest
+}
 
+// ListInvalidationsRequester provides the interface for the ListInvalidationsRequest API operation.
+type ListInvalidationsRequester interface {
 	ListInvalidationsRequest(*cloudfront.ListInvalidationsInput) cloudfront.ListInvalidationsRequest
+}
 
-	ListInvalidationsPages(*cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool) error
-	ListInvalidationsPagesWithContext(aws.Context, *cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool, ...aws.Option) error
-
+// ListStreamingDistributionsRequester provides the interface for the ListStreamingDistributionsRequest API operation.
+type ListStreamingDistributionsRequester interface {
 	ListStreamingDistributionsRequest(*cloudfront.ListStreamingDistributionsInput) cloudfront.ListStreamingDistributionsRequest
+}
 
-	ListStreamingDistributionsPages(*cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool) error
-	ListStreamingDistributionsPagesWithContext(aws.Context, *cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool, ...aws.Option) error
-
+// ListTagsForResourceRequester provides the interface for the ListTagsForResourceRequest API operation.
+type ListTagsForResourceRequester interface {
 	ListTagsForResourceRequest(*cloudfront.ListTagsForResourceInput) cloudfront.ListTagsForResourceRequest
+}
 
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
 	TagResourceRequest(*cloudfront.TagResourceInput) cloudfront.TagResourceRequest
+}
 
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
 	UntagResourceRequest(*cloudfront.UntagResourceInput) cloudfront.UntagResourceRequest
+}
 
+// UpdateCloudFrontOriginAccessIdentityRequester provides the interface for the UpdateCloudFrontOriginAccessIdentityRequest API operation.
+type UpdateCloudFrontOriginAccessIdentityRequester interface {
 	UpdateCloudFrontOriginAccessIdentityRequest(*cloudfront.UpdateCloudFrontOriginAccessIdentityInput) cloudfront.UpdateCloudFrontOriginAccessIdentityRequest
+}
 
+// UpdateDistributionRequester provides the interface for the UpdateDistributionRequest API operation.
+type UpdateDistributionRequester interface {
 	UpdateDistributionRequest(*cloudfront.UpdateDistributionInput) cloudfront.UpdateDistributionRequest
+}
 
+// UpdateStreamingDistributionRequester provides the interface for the UpdateStreamingDistributionRequest API operation.
+type UpdateStreamingDistributionRequester interface {
 	UpdateStreamingDistributionRequest(*cloudfront.UpdateStreamingDistributionInput) cloudfront.UpdateStreamingDistributionRequest
+}
 
+// DistributionDeployedWaiter provides the interface for the WaitUntilDistributionDeployed waiter.
+type DistributionDeployedWaiter interface {
 	WaitUntilDistributionDeployed(*cloudfront.GetDistributionInput) error
 	WaitUntilDistributionDeployedWithContext(aws.Context, *cloudfront.GetDistributionInput, ...aws.WaiterOption) error
+}
 
+// InvalidationCompletedWaiter provides the interface for the WaitUntilInvalidationCompleted waiter.
+type InvalidationCompletedWaiter interface {
 	WaitUntilInvalidationCompleted(*cloudfront.GetInvalidationInput) error
 	WaitUntilInvalidationCompletedWithContext(aws.Context, *cloudfront.GetInvalidationInput, ...aws.WaiterOption) error
+}
 
+// StreamingDistributionDeployedWaiter provides the interface for the WaitUntilStreamingDistributionDeployed waiter.
+type StreamingDistributionDeployedWaiter interface {
 	WaitUntilStreamingDistributionDeployed(*cloudfront.GetStreamingDistributionInput) error
 	WaitUntilStreamingDistributionDeployedWithContext(aws.Context, *cloudfront.GetStreamingDistributionInput, ...aws.WaiterOption) error
 }
-
-var _ CloudFrontAPI = (*cloudfront.CloudFront)(nil)

@@ -13,102 +13,97 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
 )
 
-// DataPipelineAPI provides an interface to enable mocking the
-// datapipeline.DataPipeline service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Data Pipeline.
-//    func myFunc(svc datapipelineiface.DataPipelineAPI) bool {
-//        // Make svc.ActivatePipeline request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := datapipeline.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDataPipelineClient struct {
-//        datapipelineiface.DataPipelineAPI
-//    }
-//    func (m *mockDataPipelineClient) ActivatePipeline(input *datapipeline.ActivatePipelineInput) (*datapipeline.ActivatePipelineOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockDataPipelineClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type DataPipelineAPI interface {
+// ActivatePipelineRequester provides the interface for the ActivatePipelineRequest API operation.
+type ActivatePipelineRequester interface {
 	ActivatePipelineRequest(*datapipeline.ActivatePipelineInput) datapipeline.ActivatePipelineRequest
-
-	AddTagsRequest(*datapipeline.AddTagsInput) datapipeline.AddTagsRequest
-
-	CreatePipelineRequest(*datapipeline.CreatePipelineInput) datapipeline.CreatePipelineRequest
-
-	DeactivatePipelineRequest(*datapipeline.DeactivatePipelineInput) datapipeline.DeactivatePipelineRequest
-
-	DeletePipelineRequest(*datapipeline.DeletePipelineInput) datapipeline.DeletePipelineRequest
-
-	DescribeObjectsRequest(*datapipeline.DescribeObjectsInput) datapipeline.DescribeObjectsRequest
-
-	DescribeObjectsPages(*datapipeline.DescribeObjectsInput, func(*datapipeline.DescribeObjectsOutput, bool) bool) error
-	DescribeObjectsPagesWithContext(aws.Context, *datapipeline.DescribeObjectsInput, func(*datapipeline.DescribeObjectsOutput, bool) bool, ...aws.Option) error
-
-	DescribePipelinesRequest(*datapipeline.DescribePipelinesInput) datapipeline.DescribePipelinesRequest
-
-	EvaluateExpressionRequest(*datapipeline.EvaluateExpressionInput) datapipeline.EvaluateExpressionRequest
-
-	GetPipelineDefinitionRequest(*datapipeline.GetPipelineDefinitionInput) datapipeline.GetPipelineDefinitionRequest
-
-	ListPipelinesRequest(*datapipeline.ListPipelinesInput) datapipeline.ListPipelinesRequest
-
-	ListPipelinesPages(*datapipeline.ListPipelinesInput, func(*datapipeline.ListPipelinesOutput, bool) bool) error
-	ListPipelinesPagesWithContext(aws.Context, *datapipeline.ListPipelinesInput, func(*datapipeline.ListPipelinesOutput, bool) bool, ...aws.Option) error
-
-	PollForTaskRequest(*datapipeline.PollForTaskInput) datapipeline.PollForTaskRequest
-
-	PutPipelineDefinitionRequest(*datapipeline.PutPipelineDefinitionInput) datapipeline.PutPipelineDefinitionRequest
-
-	QueryObjectsRequest(*datapipeline.QueryObjectsInput) datapipeline.QueryObjectsRequest
-
-	QueryObjectsPages(*datapipeline.QueryObjectsInput, func(*datapipeline.QueryObjectsOutput, bool) bool) error
-	QueryObjectsPagesWithContext(aws.Context, *datapipeline.QueryObjectsInput, func(*datapipeline.QueryObjectsOutput, bool) bool, ...aws.Option) error
-
-	RemoveTagsRequest(*datapipeline.RemoveTagsInput) datapipeline.RemoveTagsRequest
-
-	ReportTaskProgressRequest(*datapipeline.ReportTaskProgressInput) datapipeline.ReportTaskProgressRequest
-
-	ReportTaskRunnerHeartbeatRequest(*datapipeline.ReportTaskRunnerHeartbeatInput) datapipeline.ReportTaskRunnerHeartbeatRequest
-
-	SetStatusRequest(*datapipeline.SetStatusInput) datapipeline.SetStatusRequest
-
-	SetTaskStatusRequest(*datapipeline.SetTaskStatusInput) datapipeline.SetTaskStatusRequest
-
-	ValidatePipelineDefinitionRequest(*datapipeline.ValidatePipelineDefinitionInput) datapipeline.ValidatePipelineDefinitionRequest
 }
 
-var _ DataPipelineAPI = (*datapipeline.DataPipeline)(nil)
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
+	AddTagsRequest(*datapipeline.AddTagsInput) datapipeline.AddTagsRequest
+}
+
+// CreatePipelineRequester provides the interface for the CreatePipelineRequest API operation.
+type CreatePipelineRequester interface {
+	CreatePipelineRequest(*datapipeline.CreatePipelineInput) datapipeline.CreatePipelineRequest
+}
+
+// DeactivatePipelineRequester provides the interface for the DeactivatePipelineRequest API operation.
+type DeactivatePipelineRequester interface {
+	DeactivatePipelineRequest(*datapipeline.DeactivatePipelineInput) datapipeline.DeactivatePipelineRequest
+}
+
+// DeletePipelineRequester provides the interface for the DeletePipelineRequest API operation.
+type DeletePipelineRequester interface {
+	DeletePipelineRequest(*datapipeline.DeletePipelineInput) datapipeline.DeletePipelineRequest
+}
+
+// DescribeObjectsRequester provides the interface for the DescribeObjectsRequest API operation.
+type DescribeObjectsRequester interface {
+	DescribeObjectsRequest(*datapipeline.DescribeObjectsInput) datapipeline.DescribeObjectsRequest
+}
+
+// DescribePipelinesRequester provides the interface for the DescribePipelinesRequest API operation.
+type DescribePipelinesRequester interface {
+	DescribePipelinesRequest(*datapipeline.DescribePipelinesInput) datapipeline.DescribePipelinesRequest
+}
+
+// EvaluateExpressionRequester provides the interface for the EvaluateExpressionRequest API operation.
+type EvaluateExpressionRequester interface {
+	EvaluateExpressionRequest(*datapipeline.EvaluateExpressionInput) datapipeline.EvaluateExpressionRequest
+}
+
+// GetPipelineDefinitionRequester provides the interface for the GetPipelineDefinitionRequest API operation.
+type GetPipelineDefinitionRequester interface {
+	GetPipelineDefinitionRequest(*datapipeline.GetPipelineDefinitionInput) datapipeline.GetPipelineDefinitionRequest
+}
+
+// ListPipelinesRequester provides the interface for the ListPipelinesRequest API operation.
+type ListPipelinesRequester interface {
+	ListPipelinesRequest(*datapipeline.ListPipelinesInput) datapipeline.ListPipelinesRequest
+}
+
+// PollForTaskRequester provides the interface for the PollForTaskRequest API operation.
+type PollForTaskRequester interface {
+	PollForTaskRequest(*datapipeline.PollForTaskInput) datapipeline.PollForTaskRequest
+}
+
+// PutPipelineDefinitionRequester provides the interface for the PutPipelineDefinitionRequest API operation.
+type PutPipelineDefinitionRequester interface {
+	PutPipelineDefinitionRequest(*datapipeline.PutPipelineDefinitionInput) datapipeline.PutPipelineDefinitionRequest
+}
+
+// QueryObjectsRequester provides the interface for the QueryObjectsRequest API operation.
+type QueryObjectsRequester interface {
+	QueryObjectsRequest(*datapipeline.QueryObjectsInput) datapipeline.QueryObjectsRequest
+}
+
+// RemoveTagsRequester provides the interface for the RemoveTagsRequest API operation.
+type RemoveTagsRequester interface {
+	RemoveTagsRequest(*datapipeline.RemoveTagsInput) datapipeline.RemoveTagsRequest
+}
+
+// ReportTaskProgressRequester provides the interface for the ReportTaskProgressRequest API operation.
+type ReportTaskProgressRequester interface {
+	ReportTaskProgressRequest(*datapipeline.ReportTaskProgressInput) datapipeline.ReportTaskProgressRequest
+}
+
+// ReportTaskRunnerHeartbeatRequester provides the interface for the ReportTaskRunnerHeartbeatRequest API operation.
+type ReportTaskRunnerHeartbeatRequester interface {
+	ReportTaskRunnerHeartbeatRequest(*datapipeline.ReportTaskRunnerHeartbeatInput) datapipeline.ReportTaskRunnerHeartbeatRequest
+}
+
+// SetStatusRequester provides the interface for the SetStatusRequest API operation.
+type SetStatusRequester interface {
+	SetStatusRequest(*datapipeline.SetStatusInput) datapipeline.SetStatusRequest
+}
+
+// SetTaskStatusRequester provides the interface for the SetTaskStatusRequest API operation.
+type SetTaskStatusRequester interface {
+	SetTaskStatusRequest(*datapipeline.SetTaskStatusInput) datapipeline.SetTaskStatusRequest
+}
+
+// ValidatePipelineDefinitionRequester provides the interface for the ValidatePipelineDefinitionRequest API operation.
+type ValidatePipelineDefinitionRequester interface {
+	ValidatePipelineDefinitionRequest(*datapipeline.ValidatePipelineDefinitionInput) datapipeline.ValidatePipelineDefinitionRequest
+}

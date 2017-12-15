@@ -13,137 +13,177 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 )
 
-// KMSAPI provides an interface to enable mocking the
-// kms.KMS service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Key Management Service.
-//    func myFunc(svc kmsiface.KMSAPI) bool {
-//        // Make svc.CancelKeyDeletion request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := kms.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKMSClient struct {
-//        kmsiface.KMSAPI
-//    }
-//    func (m *mockKMSClient) CancelKeyDeletion(input *kms.CancelKeyDeletionInput) (*kms.CancelKeyDeletionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockKMSClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type KMSAPI interface {
+// CancelKeyDeletionRequester provides the interface for the CancelKeyDeletionRequest API operation.
+type CancelKeyDeletionRequester interface {
 	CancelKeyDeletionRequest(*kms.CancelKeyDeletionInput) kms.CancelKeyDeletionRequest
-
-	CreateAliasRequest(*kms.CreateAliasInput) kms.CreateAliasRequest
-
-	CreateGrantRequest(*kms.CreateGrantInput) kms.CreateGrantRequest
-
-	CreateKeyRequest(*kms.CreateKeyInput) kms.CreateKeyRequest
-
-	DecryptRequest(*kms.DecryptInput) kms.DecryptRequest
-
-	DeleteAliasRequest(*kms.DeleteAliasInput) kms.DeleteAliasRequest
-
-	DeleteImportedKeyMaterialRequest(*kms.DeleteImportedKeyMaterialInput) kms.DeleteImportedKeyMaterialRequest
-
-	DescribeKeyRequest(*kms.DescribeKeyInput) kms.DescribeKeyRequest
-
-	DisableKeyRequest(*kms.DisableKeyInput) kms.DisableKeyRequest
-
-	DisableKeyRotationRequest(*kms.DisableKeyRotationInput) kms.DisableKeyRotationRequest
-
-	EnableKeyRequest(*kms.EnableKeyInput) kms.EnableKeyRequest
-
-	EnableKeyRotationRequest(*kms.EnableKeyRotationInput) kms.EnableKeyRotationRequest
-
-	EncryptRequest(*kms.EncryptInput) kms.EncryptRequest
-
-	GenerateDataKeyRequest(*kms.GenerateDataKeyInput) kms.GenerateDataKeyRequest
-
-	GenerateDataKeyWithoutPlaintextRequest(*kms.GenerateDataKeyWithoutPlaintextInput) kms.GenerateDataKeyWithoutPlaintextRequest
-
-	GenerateRandomRequest(*kms.GenerateRandomInput) kms.GenerateRandomRequest
-
-	GetKeyPolicyRequest(*kms.GetKeyPolicyInput) kms.GetKeyPolicyRequest
-
-	GetKeyRotationStatusRequest(*kms.GetKeyRotationStatusInput) kms.GetKeyRotationStatusRequest
-
-	GetParametersForImportRequest(*kms.GetParametersForImportInput) kms.GetParametersForImportRequest
-
-	ImportKeyMaterialRequest(*kms.ImportKeyMaterialInput) kms.ImportKeyMaterialRequest
-
-	ListAliasesRequest(*kms.ListAliasesInput) kms.ListAliasesRequest
-
-	ListAliasesPages(*kms.ListAliasesInput, func(*kms.ListAliasesOutput, bool) bool) error
-	ListAliasesPagesWithContext(aws.Context, *kms.ListAliasesInput, func(*kms.ListAliasesOutput, bool) bool, ...aws.Option) error
-
-	ListGrantsRequest(*kms.ListGrantsInput) kms.ListGrantsRequest
-
-	ListGrantsPages(*kms.ListGrantsInput, func(*kms.ListRetirableGrantsOutput, bool) bool) error
-	ListGrantsPagesWithContext(aws.Context, *kms.ListGrantsInput, func(*kms.ListRetirableGrantsOutput, bool) bool, ...aws.Option) error
-
-	ListKeyPoliciesRequest(*kms.ListKeyPoliciesInput) kms.ListKeyPoliciesRequest
-
-	ListKeyPoliciesPages(*kms.ListKeyPoliciesInput, func(*kms.ListKeyPoliciesOutput, bool) bool) error
-	ListKeyPoliciesPagesWithContext(aws.Context, *kms.ListKeyPoliciesInput, func(*kms.ListKeyPoliciesOutput, bool) bool, ...aws.Option) error
-
-	ListKeysRequest(*kms.ListKeysInput) kms.ListKeysRequest
-
-	ListKeysPages(*kms.ListKeysInput, func(*kms.ListKeysOutput, bool) bool) error
-	ListKeysPagesWithContext(aws.Context, *kms.ListKeysInput, func(*kms.ListKeysOutput, bool) bool, ...aws.Option) error
-
-	ListResourceTagsRequest(*kms.ListResourceTagsInput) kms.ListResourceTagsRequest
-
-	ListRetirableGrantsRequest(*kms.ListRetirableGrantsInput) kms.ListRetirableGrantsRequest
-
-	PutKeyPolicyRequest(*kms.PutKeyPolicyInput) kms.PutKeyPolicyRequest
-
-	ReEncryptRequest(*kms.ReEncryptInput) kms.ReEncryptRequest
-
-	RetireGrantRequest(*kms.RetireGrantInput) kms.RetireGrantRequest
-
-	RevokeGrantRequest(*kms.RevokeGrantInput) kms.RevokeGrantRequest
-
-	ScheduleKeyDeletionRequest(*kms.ScheduleKeyDeletionInput) kms.ScheduleKeyDeletionRequest
-
-	TagResourceRequest(*kms.TagResourceInput) kms.TagResourceRequest
-
-	UntagResourceRequest(*kms.UntagResourceInput) kms.UntagResourceRequest
-
-	UpdateAliasRequest(*kms.UpdateAliasInput) kms.UpdateAliasRequest
-
-	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
 }
 
-var _ KMSAPI = (*kms.KMS)(nil)
+// CreateAliasRequester provides the interface for the CreateAliasRequest API operation.
+type CreateAliasRequester interface {
+	CreateAliasRequest(*kms.CreateAliasInput) kms.CreateAliasRequest
+}
+
+// CreateGrantRequester provides the interface for the CreateGrantRequest API operation.
+type CreateGrantRequester interface {
+	CreateGrantRequest(*kms.CreateGrantInput) kms.CreateGrantRequest
+}
+
+// CreateKeyRequester provides the interface for the CreateKeyRequest API operation.
+type CreateKeyRequester interface {
+	CreateKeyRequest(*kms.CreateKeyInput) kms.CreateKeyRequest
+}
+
+// DecryptRequester provides the interface for the DecryptRequest API operation.
+type DecryptRequester interface {
+	DecryptRequest(*kms.DecryptInput) kms.DecryptRequest
+}
+
+// DeleteAliasRequester provides the interface for the DeleteAliasRequest API operation.
+type DeleteAliasRequester interface {
+	DeleteAliasRequest(*kms.DeleteAliasInput) kms.DeleteAliasRequest
+}
+
+// DeleteImportedKeyMaterialRequester provides the interface for the DeleteImportedKeyMaterialRequest API operation.
+type DeleteImportedKeyMaterialRequester interface {
+	DeleteImportedKeyMaterialRequest(*kms.DeleteImportedKeyMaterialInput) kms.DeleteImportedKeyMaterialRequest
+}
+
+// DescribeKeyRequester provides the interface for the DescribeKeyRequest API operation.
+type DescribeKeyRequester interface {
+	DescribeKeyRequest(*kms.DescribeKeyInput) kms.DescribeKeyRequest
+}
+
+// DisableKeyRequester provides the interface for the DisableKeyRequest API operation.
+type DisableKeyRequester interface {
+	DisableKeyRequest(*kms.DisableKeyInput) kms.DisableKeyRequest
+}
+
+// DisableKeyRotationRequester provides the interface for the DisableKeyRotationRequest API operation.
+type DisableKeyRotationRequester interface {
+	DisableKeyRotationRequest(*kms.DisableKeyRotationInput) kms.DisableKeyRotationRequest
+}
+
+// EnableKeyRequester provides the interface for the EnableKeyRequest API operation.
+type EnableKeyRequester interface {
+	EnableKeyRequest(*kms.EnableKeyInput) kms.EnableKeyRequest
+}
+
+// EnableKeyRotationRequester provides the interface for the EnableKeyRotationRequest API operation.
+type EnableKeyRotationRequester interface {
+	EnableKeyRotationRequest(*kms.EnableKeyRotationInput) kms.EnableKeyRotationRequest
+}
+
+// EncryptRequester provides the interface for the EncryptRequest API operation.
+type EncryptRequester interface {
+	EncryptRequest(*kms.EncryptInput) kms.EncryptRequest
+}
+
+// GenerateDataKeyRequester provides the interface for the GenerateDataKeyRequest API operation.
+type GenerateDataKeyRequester interface {
+	GenerateDataKeyRequest(*kms.GenerateDataKeyInput) kms.GenerateDataKeyRequest
+}
+
+// GenerateDataKeyWithoutPlaintextRequester provides the interface for the GenerateDataKeyWithoutPlaintextRequest API operation.
+type GenerateDataKeyWithoutPlaintextRequester interface {
+	GenerateDataKeyWithoutPlaintextRequest(*kms.GenerateDataKeyWithoutPlaintextInput) kms.GenerateDataKeyWithoutPlaintextRequest
+}
+
+// GenerateRandomRequester provides the interface for the GenerateRandomRequest API operation.
+type GenerateRandomRequester interface {
+	GenerateRandomRequest(*kms.GenerateRandomInput) kms.GenerateRandomRequest
+}
+
+// GetKeyPolicyRequester provides the interface for the GetKeyPolicyRequest API operation.
+type GetKeyPolicyRequester interface {
+	GetKeyPolicyRequest(*kms.GetKeyPolicyInput) kms.GetKeyPolicyRequest
+}
+
+// GetKeyRotationStatusRequester provides the interface for the GetKeyRotationStatusRequest API operation.
+type GetKeyRotationStatusRequester interface {
+	GetKeyRotationStatusRequest(*kms.GetKeyRotationStatusInput) kms.GetKeyRotationStatusRequest
+}
+
+// GetParametersForImportRequester provides the interface for the GetParametersForImportRequest API operation.
+type GetParametersForImportRequester interface {
+	GetParametersForImportRequest(*kms.GetParametersForImportInput) kms.GetParametersForImportRequest
+}
+
+// ImportKeyMaterialRequester provides the interface for the ImportKeyMaterialRequest API operation.
+type ImportKeyMaterialRequester interface {
+	ImportKeyMaterialRequest(*kms.ImportKeyMaterialInput) kms.ImportKeyMaterialRequest
+}
+
+// ListAliasesRequester provides the interface for the ListAliasesRequest API operation.
+type ListAliasesRequester interface {
+	ListAliasesRequest(*kms.ListAliasesInput) kms.ListAliasesRequest
+}
+
+// ListGrantsRequester provides the interface for the ListGrantsRequest API operation.
+type ListGrantsRequester interface {
+	ListGrantsRequest(*kms.ListGrantsInput) kms.ListGrantsRequest
+}
+
+// ListKeyPoliciesRequester provides the interface for the ListKeyPoliciesRequest API operation.
+type ListKeyPoliciesRequester interface {
+	ListKeyPoliciesRequest(*kms.ListKeyPoliciesInput) kms.ListKeyPoliciesRequest
+}
+
+// ListKeysRequester provides the interface for the ListKeysRequest API operation.
+type ListKeysRequester interface {
+	ListKeysRequest(*kms.ListKeysInput) kms.ListKeysRequest
+}
+
+// ListResourceTagsRequester provides the interface for the ListResourceTagsRequest API operation.
+type ListResourceTagsRequester interface {
+	ListResourceTagsRequest(*kms.ListResourceTagsInput) kms.ListResourceTagsRequest
+}
+
+// ListRetirableGrantsRequester provides the interface for the ListRetirableGrantsRequest API operation.
+type ListRetirableGrantsRequester interface {
+	ListRetirableGrantsRequest(*kms.ListRetirableGrantsInput) kms.ListRetirableGrantsRequest
+}
+
+// PutKeyPolicyRequester provides the interface for the PutKeyPolicyRequest API operation.
+type PutKeyPolicyRequester interface {
+	PutKeyPolicyRequest(*kms.PutKeyPolicyInput) kms.PutKeyPolicyRequest
+}
+
+// ReEncryptRequester provides the interface for the ReEncryptRequest API operation.
+type ReEncryptRequester interface {
+	ReEncryptRequest(*kms.ReEncryptInput) kms.ReEncryptRequest
+}
+
+// RetireGrantRequester provides the interface for the RetireGrantRequest API operation.
+type RetireGrantRequester interface {
+	RetireGrantRequest(*kms.RetireGrantInput) kms.RetireGrantRequest
+}
+
+// RevokeGrantRequester provides the interface for the RevokeGrantRequest API operation.
+type RevokeGrantRequester interface {
+	RevokeGrantRequest(*kms.RevokeGrantInput) kms.RevokeGrantRequest
+}
+
+// ScheduleKeyDeletionRequester provides the interface for the ScheduleKeyDeletionRequest API operation.
+type ScheduleKeyDeletionRequester interface {
+	ScheduleKeyDeletionRequest(*kms.ScheduleKeyDeletionInput) kms.ScheduleKeyDeletionRequest
+}
+
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
+	TagResourceRequest(*kms.TagResourceInput) kms.TagResourceRequest
+}
+
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
+	UntagResourceRequest(*kms.UntagResourceInput) kms.UntagResourceRequest
+}
+
+// UpdateAliasRequester provides the interface for the UpdateAliasRequest API operation.
+type UpdateAliasRequester interface {
+	UpdateAliasRequest(*kms.UpdateAliasInput) kms.UpdateAliasRequest
+}
+
+// UpdateKeyDescriptionRequester provides the interface for the UpdateKeyDescriptionRequest API operation.
+type UpdateKeyDescriptionRequester interface {
+	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
+}

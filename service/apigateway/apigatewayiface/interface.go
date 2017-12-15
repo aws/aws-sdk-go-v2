@@ -13,312 +13,562 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 )
 
-// APIGatewayAPI provides an interface to enable mocking the
-// apigateway.APIGateway service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon API Gateway.
-//    func myFunc(svc apigatewayiface.APIGatewayAPI) bool {
-//        // Make svc.CreateApiKey request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := apigateway.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAPIGatewayClient struct {
-//        apigatewayiface.APIGatewayAPI
-//    }
-//    func (m *mockAPIGatewayClient) CreateApiKey(input *apigateway.CreateApiKeyInput) (*apigateway.UpdateApiKeyOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockAPIGatewayClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type APIGatewayAPI interface {
+// CreateApiKeyRequester provides the interface for the CreateApiKeyRequest API operation.
+type CreateApiKeyRequester interface {
 	CreateApiKeyRequest(*apigateway.CreateApiKeyInput) apigateway.CreateApiKeyRequest
-
-	CreateAuthorizerRequest(*apigateway.CreateAuthorizerInput) apigateway.CreateAuthorizerRequest
-
-	CreateBasePathMappingRequest(*apigateway.CreateBasePathMappingInput) apigateway.CreateBasePathMappingRequest
-
-	CreateDeploymentRequest(*apigateway.CreateDeploymentInput) apigateway.CreateDeploymentRequest
-
-	CreateDocumentationPartRequest(*apigateway.CreateDocumentationPartInput) apigateway.CreateDocumentationPartRequest
-
-	CreateDocumentationVersionRequest(*apigateway.CreateDocumentationVersionInput) apigateway.CreateDocumentationVersionRequest
-
-	CreateDomainNameRequest(*apigateway.CreateDomainNameInput) apigateway.CreateDomainNameRequest
-
-	CreateModelRequest(*apigateway.CreateModelInput) apigateway.CreateModelRequest
-
-	CreateRequestValidatorRequest(*apigateway.CreateRequestValidatorInput) apigateway.CreateRequestValidatorRequest
-
-	CreateResourceRequest(*apigateway.CreateResourceInput) apigateway.CreateResourceRequest
-
-	CreateRestApiRequest(*apigateway.CreateRestApiInput) apigateway.CreateRestApiRequest
-
-	CreateStageRequest(*apigateway.CreateStageInput) apigateway.CreateStageRequest
-
-	CreateUsagePlanRequest(*apigateway.CreateUsagePlanInput) apigateway.CreateUsagePlanRequest
-
-	CreateUsagePlanKeyRequest(*apigateway.CreateUsagePlanKeyInput) apigateway.CreateUsagePlanKeyRequest
-
-	DeleteApiKeyRequest(*apigateway.DeleteApiKeyInput) apigateway.DeleteApiKeyRequest
-
-	DeleteAuthorizerRequest(*apigateway.DeleteAuthorizerInput) apigateway.DeleteAuthorizerRequest
-
-	DeleteBasePathMappingRequest(*apigateway.DeleteBasePathMappingInput) apigateway.DeleteBasePathMappingRequest
-
-	DeleteClientCertificateRequest(*apigateway.DeleteClientCertificateInput) apigateway.DeleteClientCertificateRequest
-
-	DeleteDeploymentRequest(*apigateway.DeleteDeploymentInput) apigateway.DeleteDeploymentRequest
-
-	DeleteDocumentationPartRequest(*apigateway.DeleteDocumentationPartInput) apigateway.DeleteDocumentationPartRequest
-
-	DeleteDocumentationVersionRequest(*apigateway.DeleteDocumentationVersionInput) apigateway.DeleteDocumentationVersionRequest
-
-	DeleteDomainNameRequest(*apigateway.DeleteDomainNameInput) apigateway.DeleteDomainNameRequest
-
-	DeleteGatewayResponseRequest(*apigateway.DeleteGatewayResponseInput) apigateway.DeleteGatewayResponseRequest
-
-	DeleteIntegrationRequest(*apigateway.DeleteIntegrationInput) apigateway.DeleteIntegrationRequest
-
-	DeleteIntegrationResponseRequest(*apigateway.DeleteIntegrationResponseInput) apigateway.DeleteIntegrationResponseRequest
-
-	DeleteMethodRequest(*apigateway.DeleteMethodInput) apigateway.DeleteMethodRequest
-
-	DeleteMethodResponseRequest(*apigateway.DeleteMethodResponseInput) apigateway.DeleteMethodResponseRequest
-
-	DeleteModelRequest(*apigateway.DeleteModelInput) apigateway.DeleteModelRequest
-
-	DeleteRequestValidatorRequest(*apigateway.DeleteRequestValidatorInput) apigateway.DeleteRequestValidatorRequest
-
-	DeleteResourceRequest(*apigateway.DeleteResourceInput) apigateway.DeleteResourceRequest
-
-	DeleteRestApiRequest(*apigateway.DeleteRestApiInput) apigateway.DeleteRestApiRequest
-
-	DeleteStageRequest(*apigateway.DeleteStageInput) apigateway.DeleteStageRequest
-
-	DeleteUsagePlanRequest(*apigateway.DeleteUsagePlanInput) apigateway.DeleteUsagePlanRequest
-
-	DeleteUsagePlanKeyRequest(*apigateway.DeleteUsagePlanKeyInput) apigateway.DeleteUsagePlanKeyRequest
-
-	FlushStageAuthorizersCacheRequest(*apigateway.FlushStageAuthorizersCacheInput) apigateway.FlushStageAuthorizersCacheRequest
-
-	FlushStageCacheRequest(*apigateway.FlushStageCacheInput) apigateway.FlushStageCacheRequest
-
-	GenerateClientCertificateRequest(*apigateway.GenerateClientCertificateInput) apigateway.GenerateClientCertificateRequest
-
-	GetAccountRequest(*apigateway.GetAccountInput) apigateway.GetAccountRequest
-
-	GetApiKeyRequest(*apigateway.GetApiKeyInput) apigateway.GetApiKeyRequest
-
-	GetApiKeysRequest(*apigateway.GetApiKeysInput) apigateway.GetApiKeysRequest
-
-	GetApiKeysPages(*apigateway.GetApiKeysInput, func(*apigateway.GetApiKeysOutput, bool) bool) error
-	GetApiKeysPagesWithContext(aws.Context, *apigateway.GetApiKeysInput, func(*apigateway.GetApiKeysOutput, bool) bool, ...aws.Option) error
-
-	GetAuthorizerRequest(*apigateway.GetAuthorizerInput) apigateway.GetAuthorizerRequest
-
-	GetAuthorizersRequest(*apigateway.GetAuthorizersInput) apigateway.GetAuthorizersRequest
-
-	GetBasePathMappingRequest(*apigateway.GetBasePathMappingInput) apigateway.GetBasePathMappingRequest
-
-	GetBasePathMappingsRequest(*apigateway.GetBasePathMappingsInput) apigateway.GetBasePathMappingsRequest
-
-	GetBasePathMappingsPages(*apigateway.GetBasePathMappingsInput, func(*apigateway.GetBasePathMappingsOutput, bool) bool) error
-	GetBasePathMappingsPagesWithContext(aws.Context, *apigateway.GetBasePathMappingsInput, func(*apigateway.GetBasePathMappingsOutput, bool) bool, ...aws.Option) error
-
-	GetClientCertificateRequest(*apigateway.GetClientCertificateInput) apigateway.GetClientCertificateRequest
-
-	GetClientCertificatesRequest(*apigateway.GetClientCertificatesInput) apigateway.GetClientCertificatesRequest
-
-	GetClientCertificatesPages(*apigateway.GetClientCertificatesInput, func(*apigateway.GetClientCertificatesOutput, bool) bool) error
-	GetClientCertificatesPagesWithContext(aws.Context, *apigateway.GetClientCertificatesInput, func(*apigateway.GetClientCertificatesOutput, bool) bool, ...aws.Option) error
-
-	GetDeploymentRequest(*apigateway.GetDeploymentInput) apigateway.GetDeploymentRequest
-
-	GetDeploymentsRequest(*apigateway.GetDeploymentsInput) apigateway.GetDeploymentsRequest
-
-	GetDeploymentsPages(*apigateway.GetDeploymentsInput, func(*apigateway.GetDeploymentsOutput, bool) bool) error
-	GetDeploymentsPagesWithContext(aws.Context, *apigateway.GetDeploymentsInput, func(*apigateway.GetDeploymentsOutput, bool) bool, ...aws.Option) error
-
-	GetDocumentationPartRequest(*apigateway.GetDocumentationPartInput) apigateway.GetDocumentationPartRequest
-
-	GetDocumentationPartsRequest(*apigateway.GetDocumentationPartsInput) apigateway.GetDocumentationPartsRequest
-
-	GetDocumentationVersionRequest(*apigateway.GetDocumentationVersionInput) apigateway.GetDocumentationVersionRequest
-
-	GetDocumentationVersionsRequest(*apigateway.GetDocumentationVersionsInput) apigateway.GetDocumentationVersionsRequest
-
-	GetDomainNameRequest(*apigateway.GetDomainNameInput) apigateway.GetDomainNameRequest
-
-	GetDomainNamesRequest(*apigateway.GetDomainNamesInput) apigateway.GetDomainNamesRequest
-
-	GetDomainNamesPages(*apigateway.GetDomainNamesInput, func(*apigateway.GetDomainNamesOutput, bool) bool) error
-	GetDomainNamesPagesWithContext(aws.Context, *apigateway.GetDomainNamesInput, func(*apigateway.GetDomainNamesOutput, bool) bool, ...aws.Option) error
-
-	GetExportRequest(*apigateway.GetExportInput) apigateway.GetExportRequest
-
-	GetGatewayResponseRequest(*apigateway.GetGatewayResponseInput) apigateway.GetGatewayResponseRequest
-
-	GetGatewayResponsesRequest(*apigateway.GetGatewayResponsesInput) apigateway.GetGatewayResponsesRequest
-
-	GetIntegrationRequest(*apigateway.GetIntegrationInput) apigateway.GetIntegrationRequest
-
-	GetIntegrationResponseRequest(*apigateway.GetIntegrationResponseInput) apigateway.GetIntegrationResponseRequest
-
-	GetMethodRequest(*apigateway.GetMethodInput) apigateway.GetMethodRequest
-
-	GetMethodResponseRequest(*apigateway.GetMethodResponseInput) apigateway.GetMethodResponseRequest
-
-	GetModelRequest(*apigateway.GetModelInput) apigateway.GetModelRequest
-
-	GetModelTemplateRequest(*apigateway.GetModelTemplateInput) apigateway.GetModelTemplateRequest
-
-	GetModelsRequest(*apigateway.GetModelsInput) apigateway.GetModelsRequest
-
-	GetModelsPages(*apigateway.GetModelsInput, func(*apigateway.GetModelsOutput, bool) bool) error
-	GetModelsPagesWithContext(aws.Context, *apigateway.GetModelsInput, func(*apigateway.GetModelsOutput, bool) bool, ...aws.Option) error
-
-	GetRequestValidatorRequest(*apigateway.GetRequestValidatorInput) apigateway.GetRequestValidatorRequest
-
-	GetRequestValidatorsRequest(*apigateway.GetRequestValidatorsInput) apigateway.GetRequestValidatorsRequest
-
-	GetResourceRequest(*apigateway.GetResourceInput) apigateway.GetResourceRequest
-
-	GetResourcesRequest(*apigateway.GetResourcesInput) apigateway.GetResourcesRequest
-
-	GetResourcesPages(*apigateway.GetResourcesInput, func(*apigateway.GetResourcesOutput, bool) bool) error
-	GetResourcesPagesWithContext(aws.Context, *apigateway.GetResourcesInput, func(*apigateway.GetResourcesOutput, bool) bool, ...aws.Option) error
-
-	GetRestApiRequest(*apigateway.GetRestApiInput) apigateway.GetRestApiRequest
-
-	GetRestApisRequest(*apigateway.GetRestApisInput) apigateway.GetRestApisRequest
-
-	GetRestApisPages(*apigateway.GetRestApisInput, func(*apigateway.GetRestApisOutput, bool) bool) error
-	GetRestApisPagesWithContext(aws.Context, *apigateway.GetRestApisInput, func(*apigateway.GetRestApisOutput, bool) bool, ...aws.Option) error
-
-	GetSdkRequest(*apigateway.GetSdkInput) apigateway.GetSdkRequest
-
-	GetSdkTypeRequest(*apigateway.GetSdkTypeInput) apigateway.GetSdkTypeRequest
-
-	GetSdkTypesRequest(*apigateway.GetSdkTypesInput) apigateway.GetSdkTypesRequest
-
-	GetStageRequest(*apigateway.GetStageInput) apigateway.GetStageRequest
-
-	GetStagesRequest(*apigateway.GetStagesInput) apigateway.GetStagesRequest
-
-	GetUsageRequest(*apigateway.GetUsageInput) apigateway.GetUsageRequest
-
-	GetUsagePages(*apigateway.GetUsageInput, func(*apigateway.UpdateUsageOutput, bool) bool) error
-	GetUsagePagesWithContext(aws.Context, *apigateway.GetUsageInput, func(*apigateway.UpdateUsageOutput, bool) bool, ...aws.Option) error
-
-	GetUsagePlanRequest(*apigateway.GetUsagePlanInput) apigateway.GetUsagePlanRequest
-
-	GetUsagePlanKeyRequest(*apigateway.GetUsagePlanKeyInput) apigateway.GetUsagePlanKeyRequest
-
-	GetUsagePlanKeysRequest(*apigateway.GetUsagePlanKeysInput) apigateway.GetUsagePlanKeysRequest
-
-	GetUsagePlanKeysPages(*apigateway.GetUsagePlanKeysInput, func(*apigateway.GetUsagePlanKeysOutput, bool) bool) error
-	GetUsagePlanKeysPagesWithContext(aws.Context, *apigateway.GetUsagePlanKeysInput, func(*apigateway.GetUsagePlanKeysOutput, bool) bool, ...aws.Option) error
-
-	GetUsagePlansRequest(*apigateway.GetUsagePlansInput) apigateway.GetUsagePlansRequest
-
-	GetUsagePlansPages(*apigateway.GetUsagePlansInput, func(*apigateway.GetUsagePlansOutput, bool) bool) error
-	GetUsagePlansPagesWithContext(aws.Context, *apigateway.GetUsagePlansInput, func(*apigateway.GetUsagePlansOutput, bool) bool, ...aws.Option) error
-
-	ImportApiKeysRequest(*apigateway.ImportApiKeysInput) apigateway.ImportApiKeysRequest
-
-	ImportDocumentationPartsRequest(*apigateway.ImportDocumentationPartsInput) apigateway.ImportDocumentationPartsRequest
-
-	ImportRestApiRequest(*apigateway.ImportRestApiInput) apigateway.ImportRestApiRequest
-
-	PutGatewayResponseRequest(*apigateway.PutGatewayResponseInput) apigateway.PutGatewayResponseRequest
-
-	PutIntegrationRequest(*apigateway.PutIntegrationInput) apigateway.PutIntegrationRequest
-
-	PutIntegrationResponseRequest(*apigateway.PutIntegrationResponseInput) apigateway.PutIntegrationResponseRequest
-
-	PutMethodRequest(*apigateway.PutMethodInput) apigateway.PutMethodRequest
-
-	PutMethodResponseRequest(*apigateway.PutMethodResponseInput) apigateway.PutMethodResponseRequest
-
-	PutRestApiRequest(*apigateway.PutRestApiInput) apigateway.PutRestApiRequest
-
-	TestInvokeAuthorizerRequest(*apigateway.TestInvokeAuthorizerInput) apigateway.TestInvokeAuthorizerRequest
-
-	TestInvokeMethodRequest(*apigateway.TestInvokeMethodInput) apigateway.TestInvokeMethodRequest
-
-	UpdateAccountRequest(*apigateway.UpdateAccountInput) apigateway.UpdateAccountRequest
-
-	UpdateApiKeyRequest(*apigateway.UpdateApiKeyInput) apigateway.UpdateApiKeyRequest
-
-	UpdateAuthorizerRequest(*apigateway.UpdateAuthorizerInput) apigateway.UpdateAuthorizerRequest
-
-	UpdateBasePathMappingRequest(*apigateway.UpdateBasePathMappingInput) apigateway.UpdateBasePathMappingRequest
-
-	UpdateClientCertificateRequest(*apigateway.UpdateClientCertificateInput) apigateway.UpdateClientCertificateRequest
-
-	UpdateDeploymentRequest(*apigateway.UpdateDeploymentInput) apigateway.UpdateDeploymentRequest
-
-	UpdateDocumentationPartRequest(*apigateway.UpdateDocumentationPartInput) apigateway.UpdateDocumentationPartRequest
-
-	UpdateDocumentationVersionRequest(*apigateway.UpdateDocumentationVersionInput) apigateway.UpdateDocumentationVersionRequest
-
-	UpdateDomainNameRequest(*apigateway.UpdateDomainNameInput) apigateway.UpdateDomainNameRequest
-
-	UpdateGatewayResponseRequest(*apigateway.UpdateGatewayResponseInput) apigateway.UpdateGatewayResponseRequest
-
-	UpdateIntegrationRequest(*apigateway.UpdateIntegrationInput) apigateway.UpdateIntegrationRequest
-
-	UpdateIntegrationResponseRequest(*apigateway.UpdateIntegrationResponseInput) apigateway.UpdateIntegrationResponseRequest
-
-	UpdateMethodRequest(*apigateway.UpdateMethodInput) apigateway.UpdateMethodRequest
-
-	UpdateMethodResponseRequest(*apigateway.UpdateMethodResponseInput) apigateway.UpdateMethodResponseRequest
-
-	UpdateModelRequest(*apigateway.UpdateModelInput) apigateway.UpdateModelRequest
-
-	UpdateRequestValidatorRequest(*apigateway.UpdateRequestValidatorInput) apigateway.UpdateRequestValidatorRequest
-
-	UpdateResourceRequest(*apigateway.UpdateResourceInput) apigateway.UpdateResourceRequest
-
-	UpdateRestApiRequest(*apigateway.UpdateRestApiInput) apigateway.UpdateRestApiRequest
-
-	UpdateStageRequest(*apigateway.UpdateStageInput) apigateway.UpdateStageRequest
-
-	UpdateUsageRequest(*apigateway.UpdateUsageInput) apigateway.UpdateUsageRequest
-
-	UpdateUsagePlanRequest(*apigateway.UpdateUsagePlanInput) apigateway.UpdateUsagePlanRequest
 }
 
-var _ APIGatewayAPI = (*apigateway.APIGateway)(nil)
+// CreateAuthorizerRequester provides the interface for the CreateAuthorizerRequest API operation.
+type CreateAuthorizerRequester interface {
+	CreateAuthorizerRequest(*apigateway.CreateAuthorizerInput) apigateway.CreateAuthorizerRequest
+}
+
+// CreateBasePathMappingRequester provides the interface for the CreateBasePathMappingRequest API operation.
+type CreateBasePathMappingRequester interface {
+	CreateBasePathMappingRequest(*apigateway.CreateBasePathMappingInput) apigateway.CreateBasePathMappingRequest
+}
+
+// CreateDeploymentRequester provides the interface for the CreateDeploymentRequest API operation.
+type CreateDeploymentRequester interface {
+	CreateDeploymentRequest(*apigateway.CreateDeploymentInput) apigateway.CreateDeploymentRequest
+}
+
+// CreateDocumentationPartRequester provides the interface for the CreateDocumentationPartRequest API operation.
+type CreateDocumentationPartRequester interface {
+	CreateDocumentationPartRequest(*apigateway.CreateDocumentationPartInput) apigateway.CreateDocumentationPartRequest
+}
+
+// CreateDocumentationVersionRequester provides the interface for the CreateDocumentationVersionRequest API operation.
+type CreateDocumentationVersionRequester interface {
+	CreateDocumentationVersionRequest(*apigateway.CreateDocumentationVersionInput) apigateway.CreateDocumentationVersionRequest
+}
+
+// CreateDomainNameRequester provides the interface for the CreateDomainNameRequest API operation.
+type CreateDomainNameRequester interface {
+	CreateDomainNameRequest(*apigateway.CreateDomainNameInput) apigateway.CreateDomainNameRequest
+}
+
+// CreateModelRequester provides the interface for the CreateModelRequest API operation.
+type CreateModelRequester interface {
+	CreateModelRequest(*apigateway.CreateModelInput) apigateway.CreateModelRequest
+}
+
+// CreateRequestValidatorRequester provides the interface for the CreateRequestValidatorRequest API operation.
+type CreateRequestValidatorRequester interface {
+	CreateRequestValidatorRequest(*apigateway.CreateRequestValidatorInput) apigateway.CreateRequestValidatorRequest
+}
+
+// CreateResourceRequester provides the interface for the CreateResourceRequest API operation.
+type CreateResourceRequester interface {
+	CreateResourceRequest(*apigateway.CreateResourceInput) apigateway.CreateResourceRequest
+}
+
+// CreateRestApiRequester provides the interface for the CreateRestApiRequest API operation.
+type CreateRestApiRequester interface {
+	CreateRestApiRequest(*apigateway.CreateRestApiInput) apigateway.CreateRestApiRequest
+}
+
+// CreateStageRequester provides the interface for the CreateStageRequest API operation.
+type CreateStageRequester interface {
+	CreateStageRequest(*apigateway.CreateStageInput) apigateway.CreateStageRequest
+}
+
+// CreateUsagePlanRequester provides the interface for the CreateUsagePlanRequest API operation.
+type CreateUsagePlanRequester interface {
+	CreateUsagePlanRequest(*apigateway.CreateUsagePlanInput) apigateway.CreateUsagePlanRequest
+}
+
+// CreateUsagePlanKeyRequester provides the interface for the CreateUsagePlanKeyRequest API operation.
+type CreateUsagePlanKeyRequester interface {
+	CreateUsagePlanKeyRequest(*apigateway.CreateUsagePlanKeyInput) apigateway.CreateUsagePlanKeyRequest
+}
+
+// DeleteApiKeyRequester provides the interface for the DeleteApiKeyRequest API operation.
+type DeleteApiKeyRequester interface {
+	DeleteApiKeyRequest(*apigateway.DeleteApiKeyInput) apigateway.DeleteApiKeyRequest
+}
+
+// DeleteAuthorizerRequester provides the interface for the DeleteAuthorizerRequest API operation.
+type DeleteAuthorizerRequester interface {
+	DeleteAuthorizerRequest(*apigateway.DeleteAuthorizerInput) apigateway.DeleteAuthorizerRequest
+}
+
+// DeleteBasePathMappingRequester provides the interface for the DeleteBasePathMappingRequest API operation.
+type DeleteBasePathMappingRequester interface {
+	DeleteBasePathMappingRequest(*apigateway.DeleteBasePathMappingInput) apigateway.DeleteBasePathMappingRequest
+}
+
+// DeleteClientCertificateRequester provides the interface for the DeleteClientCertificateRequest API operation.
+type DeleteClientCertificateRequester interface {
+	DeleteClientCertificateRequest(*apigateway.DeleteClientCertificateInput) apigateway.DeleteClientCertificateRequest
+}
+
+// DeleteDeploymentRequester provides the interface for the DeleteDeploymentRequest API operation.
+type DeleteDeploymentRequester interface {
+	DeleteDeploymentRequest(*apigateway.DeleteDeploymentInput) apigateway.DeleteDeploymentRequest
+}
+
+// DeleteDocumentationPartRequester provides the interface for the DeleteDocumentationPartRequest API operation.
+type DeleteDocumentationPartRequester interface {
+	DeleteDocumentationPartRequest(*apigateway.DeleteDocumentationPartInput) apigateway.DeleteDocumentationPartRequest
+}
+
+// DeleteDocumentationVersionRequester provides the interface for the DeleteDocumentationVersionRequest API operation.
+type DeleteDocumentationVersionRequester interface {
+	DeleteDocumentationVersionRequest(*apigateway.DeleteDocumentationVersionInput) apigateway.DeleteDocumentationVersionRequest
+}
+
+// DeleteDomainNameRequester provides the interface for the DeleteDomainNameRequest API operation.
+type DeleteDomainNameRequester interface {
+	DeleteDomainNameRequest(*apigateway.DeleteDomainNameInput) apigateway.DeleteDomainNameRequest
+}
+
+// DeleteGatewayResponseRequester provides the interface for the DeleteGatewayResponseRequest API operation.
+type DeleteGatewayResponseRequester interface {
+	DeleteGatewayResponseRequest(*apigateway.DeleteGatewayResponseInput) apigateway.DeleteGatewayResponseRequest
+}
+
+// DeleteIntegrationRequester provides the interface for the DeleteIntegrationRequest API operation.
+type DeleteIntegrationRequester interface {
+	DeleteIntegrationRequest(*apigateway.DeleteIntegrationInput) apigateway.DeleteIntegrationRequest
+}
+
+// DeleteIntegrationResponseRequester provides the interface for the DeleteIntegrationResponseRequest API operation.
+type DeleteIntegrationResponseRequester interface {
+	DeleteIntegrationResponseRequest(*apigateway.DeleteIntegrationResponseInput) apigateway.DeleteIntegrationResponseRequest
+}
+
+// DeleteMethodRequester provides the interface for the DeleteMethodRequest API operation.
+type DeleteMethodRequester interface {
+	DeleteMethodRequest(*apigateway.DeleteMethodInput) apigateway.DeleteMethodRequest
+}
+
+// DeleteMethodResponseRequester provides the interface for the DeleteMethodResponseRequest API operation.
+type DeleteMethodResponseRequester interface {
+	DeleteMethodResponseRequest(*apigateway.DeleteMethodResponseInput) apigateway.DeleteMethodResponseRequest
+}
+
+// DeleteModelRequester provides the interface for the DeleteModelRequest API operation.
+type DeleteModelRequester interface {
+	DeleteModelRequest(*apigateway.DeleteModelInput) apigateway.DeleteModelRequest
+}
+
+// DeleteRequestValidatorRequester provides the interface for the DeleteRequestValidatorRequest API operation.
+type DeleteRequestValidatorRequester interface {
+	DeleteRequestValidatorRequest(*apigateway.DeleteRequestValidatorInput) apigateway.DeleteRequestValidatorRequest
+}
+
+// DeleteResourceRequester provides the interface for the DeleteResourceRequest API operation.
+type DeleteResourceRequester interface {
+	DeleteResourceRequest(*apigateway.DeleteResourceInput) apigateway.DeleteResourceRequest
+}
+
+// DeleteRestApiRequester provides the interface for the DeleteRestApiRequest API operation.
+type DeleteRestApiRequester interface {
+	DeleteRestApiRequest(*apigateway.DeleteRestApiInput) apigateway.DeleteRestApiRequest
+}
+
+// DeleteStageRequester provides the interface for the DeleteStageRequest API operation.
+type DeleteStageRequester interface {
+	DeleteStageRequest(*apigateway.DeleteStageInput) apigateway.DeleteStageRequest
+}
+
+// DeleteUsagePlanRequester provides the interface for the DeleteUsagePlanRequest API operation.
+type DeleteUsagePlanRequester interface {
+	DeleteUsagePlanRequest(*apigateway.DeleteUsagePlanInput) apigateway.DeleteUsagePlanRequest
+}
+
+// DeleteUsagePlanKeyRequester provides the interface for the DeleteUsagePlanKeyRequest API operation.
+type DeleteUsagePlanKeyRequester interface {
+	DeleteUsagePlanKeyRequest(*apigateway.DeleteUsagePlanKeyInput) apigateway.DeleteUsagePlanKeyRequest
+}
+
+// FlushStageAuthorizersCacheRequester provides the interface for the FlushStageAuthorizersCacheRequest API operation.
+type FlushStageAuthorizersCacheRequester interface {
+	FlushStageAuthorizersCacheRequest(*apigateway.FlushStageAuthorizersCacheInput) apigateway.FlushStageAuthorizersCacheRequest
+}
+
+// FlushStageCacheRequester provides the interface for the FlushStageCacheRequest API operation.
+type FlushStageCacheRequester interface {
+	FlushStageCacheRequest(*apigateway.FlushStageCacheInput) apigateway.FlushStageCacheRequest
+}
+
+// GenerateClientCertificateRequester provides the interface for the GenerateClientCertificateRequest API operation.
+type GenerateClientCertificateRequester interface {
+	GenerateClientCertificateRequest(*apigateway.GenerateClientCertificateInput) apigateway.GenerateClientCertificateRequest
+}
+
+// GetAccountRequester provides the interface for the GetAccountRequest API operation.
+type GetAccountRequester interface {
+	GetAccountRequest(*apigateway.GetAccountInput) apigateway.GetAccountRequest
+}
+
+// GetApiKeyRequester provides the interface for the GetApiKeyRequest API operation.
+type GetApiKeyRequester interface {
+	GetApiKeyRequest(*apigateway.GetApiKeyInput) apigateway.GetApiKeyRequest
+}
+
+// GetApiKeysRequester provides the interface for the GetApiKeysRequest API operation.
+type GetApiKeysRequester interface {
+	GetApiKeysRequest(*apigateway.GetApiKeysInput) apigateway.GetApiKeysRequest
+}
+
+// GetAuthorizerRequester provides the interface for the GetAuthorizerRequest API operation.
+type GetAuthorizerRequester interface {
+	GetAuthorizerRequest(*apigateway.GetAuthorizerInput) apigateway.GetAuthorizerRequest
+}
+
+// GetAuthorizersRequester provides the interface for the GetAuthorizersRequest API operation.
+type GetAuthorizersRequester interface {
+	GetAuthorizersRequest(*apigateway.GetAuthorizersInput) apigateway.GetAuthorizersRequest
+}
+
+// GetBasePathMappingRequester provides the interface for the GetBasePathMappingRequest API operation.
+type GetBasePathMappingRequester interface {
+	GetBasePathMappingRequest(*apigateway.GetBasePathMappingInput) apigateway.GetBasePathMappingRequest
+}
+
+// GetBasePathMappingsRequester provides the interface for the GetBasePathMappingsRequest API operation.
+type GetBasePathMappingsRequester interface {
+	GetBasePathMappingsRequest(*apigateway.GetBasePathMappingsInput) apigateway.GetBasePathMappingsRequest
+}
+
+// GetClientCertificateRequester provides the interface for the GetClientCertificateRequest API operation.
+type GetClientCertificateRequester interface {
+	GetClientCertificateRequest(*apigateway.GetClientCertificateInput) apigateway.GetClientCertificateRequest
+}
+
+// GetClientCertificatesRequester provides the interface for the GetClientCertificatesRequest API operation.
+type GetClientCertificatesRequester interface {
+	GetClientCertificatesRequest(*apigateway.GetClientCertificatesInput) apigateway.GetClientCertificatesRequest
+}
+
+// GetDeploymentRequester provides the interface for the GetDeploymentRequest API operation.
+type GetDeploymentRequester interface {
+	GetDeploymentRequest(*apigateway.GetDeploymentInput) apigateway.GetDeploymentRequest
+}
+
+// GetDeploymentsRequester provides the interface for the GetDeploymentsRequest API operation.
+type GetDeploymentsRequester interface {
+	GetDeploymentsRequest(*apigateway.GetDeploymentsInput) apigateway.GetDeploymentsRequest
+}
+
+// GetDocumentationPartRequester provides the interface for the GetDocumentationPartRequest API operation.
+type GetDocumentationPartRequester interface {
+	GetDocumentationPartRequest(*apigateway.GetDocumentationPartInput) apigateway.GetDocumentationPartRequest
+}
+
+// GetDocumentationPartsRequester provides the interface for the GetDocumentationPartsRequest API operation.
+type GetDocumentationPartsRequester interface {
+	GetDocumentationPartsRequest(*apigateway.GetDocumentationPartsInput) apigateway.GetDocumentationPartsRequest
+}
+
+// GetDocumentationVersionRequester provides the interface for the GetDocumentationVersionRequest API operation.
+type GetDocumentationVersionRequester interface {
+	GetDocumentationVersionRequest(*apigateway.GetDocumentationVersionInput) apigateway.GetDocumentationVersionRequest
+}
+
+// GetDocumentationVersionsRequester provides the interface for the GetDocumentationVersionsRequest API operation.
+type GetDocumentationVersionsRequester interface {
+	GetDocumentationVersionsRequest(*apigateway.GetDocumentationVersionsInput) apigateway.GetDocumentationVersionsRequest
+}
+
+// GetDomainNameRequester provides the interface for the GetDomainNameRequest API operation.
+type GetDomainNameRequester interface {
+	GetDomainNameRequest(*apigateway.GetDomainNameInput) apigateway.GetDomainNameRequest
+}
+
+// GetDomainNamesRequester provides the interface for the GetDomainNamesRequest API operation.
+type GetDomainNamesRequester interface {
+	GetDomainNamesRequest(*apigateway.GetDomainNamesInput) apigateway.GetDomainNamesRequest
+}
+
+// GetExportRequester provides the interface for the GetExportRequest API operation.
+type GetExportRequester interface {
+	GetExportRequest(*apigateway.GetExportInput) apigateway.GetExportRequest
+}
+
+// GetGatewayResponseRequester provides the interface for the GetGatewayResponseRequest API operation.
+type GetGatewayResponseRequester interface {
+	GetGatewayResponseRequest(*apigateway.GetGatewayResponseInput) apigateway.GetGatewayResponseRequest
+}
+
+// GetGatewayResponsesRequester provides the interface for the GetGatewayResponsesRequest API operation.
+type GetGatewayResponsesRequester interface {
+	GetGatewayResponsesRequest(*apigateway.GetGatewayResponsesInput) apigateway.GetGatewayResponsesRequest
+}
+
+// GetIntegrationRequester provides the interface for the GetIntegrationRequest API operation.
+type GetIntegrationRequester interface {
+	GetIntegrationRequest(*apigateway.GetIntegrationInput) apigateway.GetIntegrationRequest
+}
+
+// GetIntegrationResponseRequester provides the interface for the GetIntegrationResponseRequest API operation.
+type GetIntegrationResponseRequester interface {
+	GetIntegrationResponseRequest(*apigateway.GetIntegrationResponseInput) apigateway.GetIntegrationResponseRequest
+}
+
+// GetMethodRequester provides the interface for the GetMethodRequest API operation.
+type GetMethodRequester interface {
+	GetMethodRequest(*apigateway.GetMethodInput) apigateway.GetMethodRequest
+}
+
+// GetMethodResponseRequester provides the interface for the GetMethodResponseRequest API operation.
+type GetMethodResponseRequester interface {
+	GetMethodResponseRequest(*apigateway.GetMethodResponseInput) apigateway.GetMethodResponseRequest
+}
+
+// GetModelRequester provides the interface for the GetModelRequest API operation.
+type GetModelRequester interface {
+	GetModelRequest(*apigateway.GetModelInput) apigateway.GetModelRequest
+}
+
+// GetModelTemplateRequester provides the interface for the GetModelTemplateRequest API operation.
+type GetModelTemplateRequester interface {
+	GetModelTemplateRequest(*apigateway.GetModelTemplateInput) apigateway.GetModelTemplateRequest
+}
+
+// GetModelsRequester provides the interface for the GetModelsRequest API operation.
+type GetModelsRequester interface {
+	GetModelsRequest(*apigateway.GetModelsInput) apigateway.GetModelsRequest
+}
+
+// GetRequestValidatorRequester provides the interface for the GetRequestValidatorRequest API operation.
+type GetRequestValidatorRequester interface {
+	GetRequestValidatorRequest(*apigateway.GetRequestValidatorInput) apigateway.GetRequestValidatorRequest
+}
+
+// GetRequestValidatorsRequester provides the interface for the GetRequestValidatorsRequest API operation.
+type GetRequestValidatorsRequester interface {
+	GetRequestValidatorsRequest(*apigateway.GetRequestValidatorsInput) apigateway.GetRequestValidatorsRequest
+}
+
+// GetResourceRequester provides the interface for the GetResourceRequest API operation.
+type GetResourceRequester interface {
+	GetResourceRequest(*apigateway.GetResourceInput) apigateway.GetResourceRequest
+}
+
+// GetResourcesRequester provides the interface for the GetResourcesRequest API operation.
+type GetResourcesRequester interface {
+	GetResourcesRequest(*apigateway.GetResourcesInput) apigateway.GetResourcesRequest
+}
+
+// GetRestApiRequester provides the interface for the GetRestApiRequest API operation.
+type GetRestApiRequester interface {
+	GetRestApiRequest(*apigateway.GetRestApiInput) apigateway.GetRestApiRequest
+}
+
+// GetRestApisRequester provides the interface for the GetRestApisRequest API operation.
+type GetRestApisRequester interface {
+	GetRestApisRequest(*apigateway.GetRestApisInput) apigateway.GetRestApisRequest
+}
+
+// GetSdkRequester provides the interface for the GetSdkRequest API operation.
+type GetSdkRequester interface {
+	GetSdkRequest(*apigateway.GetSdkInput) apigateway.GetSdkRequest
+}
+
+// GetSdkTypeRequester provides the interface for the GetSdkTypeRequest API operation.
+type GetSdkTypeRequester interface {
+	GetSdkTypeRequest(*apigateway.GetSdkTypeInput) apigateway.GetSdkTypeRequest
+}
+
+// GetSdkTypesRequester provides the interface for the GetSdkTypesRequest API operation.
+type GetSdkTypesRequester interface {
+	GetSdkTypesRequest(*apigateway.GetSdkTypesInput) apigateway.GetSdkTypesRequest
+}
+
+// GetStageRequester provides the interface for the GetStageRequest API operation.
+type GetStageRequester interface {
+	GetStageRequest(*apigateway.GetStageInput) apigateway.GetStageRequest
+}
+
+// GetStagesRequester provides the interface for the GetStagesRequest API operation.
+type GetStagesRequester interface {
+	GetStagesRequest(*apigateway.GetStagesInput) apigateway.GetStagesRequest
+}
+
+// GetUsageRequester provides the interface for the GetUsageRequest API operation.
+type GetUsageRequester interface {
+	GetUsageRequest(*apigateway.GetUsageInput) apigateway.GetUsageRequest
+}
+
+// GetUsagePlanRequester provides the interface for the GetUsagePlanRequest API operation.
+type GetUsagePlanRequester interface {
+	GetUsagePlanRequest(*apigateway.GetUsagePlanInput) apigateway.GetUsagePlanRequest
+}
+
+// GetUsagePlanKeyRequester provides the interface for the GetUsagePlanKeyRequest API operation.
+type GetUsagePlanKeyRequester interface {
+	GetUsagePlanKeyRequest(*apigateway.GetUsagePlanKeyInput) apigateway.GetUsagePlanKeyRequest
+}
+
+// GetUsagePlanKeysRequester provides the interface for the GetUsagePlanKeysRequest API operation.
+type GetUsagePlanKeysRequester interface {
+	GetUsagePlanKeysRequest(*apigateway.GetUsagePlanKeysInput) apigateway.GetUsagePlanKeysRequest
+}
+
+// GetUsagePlansRequester provides the interface for the GetUsagePlansRequest API operation.
+type GetUsagePlansRequester interface {
+	GetUsagePlansRequest(*apigateway.GetUsagePlansInput) apigateway.GetUsagePlansRequest
+}
+
+// ImportApiKeysRequester provides the interface for the ImportApiKeysRequest API operation.
+type ImportApiKeysRequester interface {
+	ImportApiKeysRequest(*apigateway.ImportApiKeysInput) apigateway.ImportApiKeysRequest
+}
+
+// ImportDocumentationPartsRequester provides the interface for the ImportDocumentationPartsRequest API operation.
+type ImportDocumentationPartsRequester interface {
+	ImportDocumentationPartsRequest(*apigateway.ImportDocumentationPartsInput) apigateway.ImportDocumentationPartsRequest
+}
+
+// ImportRestApiRequester provides the interface for the ImportRestApiRequest API operation.
+type ImportRestApiRequester interface {
+	ImportRestApiRequest(*apigateway.ImportRestApiInput) apigateway.ImportRestApiRequest
+}
+
+// PutGatewayResponseRequester provides the interface for the PutGatewayResponseRequest API operation.
+type PutGatewayResponseRequester interface {
+	PutGatewayResponseRequest(*apigateway.PutGatewayResponseInput) apigateway.PutGatewayResponseRequest
+}
+
+// PutIntegrationRequester provides the interface for the PutIntegrationRequest API operation.
+type PutIntegrationRequester interface {
+	PutIntegrationRequest(*apigateway.PutIntegrationInput) apigateway.PutIntegrationRequest
+}
+
+// PutIntegrationResponseRequester provides the interface for the PutIntegrationResponseRequest API operation.
+type PutIntegrationResponseRequester interface {
+	PutIntegrationResponseRequest(*apigateway.PutIntegrationResponseInput) apigateway.PutIntegrationResponseRequest
+}
+
+// PutMethodRequester provides the interface for the PutMethodRequest API operation.
+type PutMethodRequester interface {
+	PutMethodRequest(*apigateway.PutMethodInput) apigateway.PutMethodRequest
+}
+
+// PutMethodResponseRequester provides the interface for the PutMethodResponseRequest API operation.
+type PutMethodResponseRequester interface {
+	PutMethodResponseRequest(*apigateway.PutMethodResponseInput) apigateway.PutMethodResponseRequest
+}
+
+// PutRestApiRequester provides the interface for the PutRestApiRequest API operation.
+type PutRestApiRequester interface {
+	PutRestApiRequest(*apigateway.PutRestApiInput) apigateway.PutRestApiRequest
+}
+
+// TestInvokeAuthorizerRequester provides the interface for the TestInvokeAuthorizerRequest API operation.
+type TestInvokeAuthorizerRequester interface {
+	TestInvokeAuthorizerRequest(*apigateway.TestInvokeAuthorizerInput) apigateway.TestInvokeAuthorizerRequest
+}
+
+// TestInvokeMethodRequester provides the interface for the TestInvokeMethodRequest API operation.
+type TestInvokeMethodRequester interface {
+	TestInvokeMethodRequest(*apigateway.TestInvokeMethodInput) apigateway.TestInvokeMethodRequest
+}
+
+// UpdateAccountRequester provides the interface for the UpdateAccountRequest API operation.
+type UpdateAccountRequester interface {
+	UpdateAccountRequest(*apigateway.UpdateAccountInput) apigateway.UpdateAccountRequest
+}
+
+// UpdateApiKeyRequester provides the interface for the UpdateApiKeyRequest API operation.
+type UpdateApiKeyRequester interface {
+	UpdateApiKeyRequest(*apigateway.UpdateApiKeyInput) apigateway.UpdateApiKeyRequest
+}
+
+// UpdateAuthorizerRequester provides the interface for the UpdateAuthorizerRequest API operation.
+type UpdateAuthorizerRequester interface {
+	UpdateAuthorizerRequest(*apigateway.UpdateAuthorizerInput) apigateway.UpdateAuthorizerRequest
+}
+
+// UpdateBasePathMappingRequester provides the interface for the UpdateBasePathMappingRequest API operation.
+type UpdateBasePathMappingRequester interface {
+	UpdateBasePathMappingRequest(*apigateway.UpdateBasePathMappingInput) apigateway.UpdateBasePathMappingRequest
+}
+
+// UpdateClientCertificateRequester provides the interface for the UpdateClientCertificateRequest API operation.
+type UpdateClientCertificateRequester interface {
+	UpdateClientCertificateRequest(*apigateway.UpdateClientCertificateInput) apigateway.UpdateClientCertificateRequest
+}
+
+// UpdateDeploymentRequester provides the interface for the UpdateDeploymentRequest API operation.
+type UpdateDeploymentRequester interface {
+	UpdateDeploymentRequest(*apigateway.UpdateDeploymentInput) apigateway.UpdateDeploymentRequest
+}
+
+// UpdateDocumentationPartRequester provides the interface for the UpdateDocumentationPartRequest API operation.
+type UpdateDocumentationPartRequester interface {
+	UpdateDocumentationPartRequest(*apigateway.UpdateDocumentationPartInput) apigateway.UpdateDocumentationPartRequest
+}
+
+// UpdateDocumentationVersionRequester provides the interface for the UpdateDocumentationVersionRequest API operation.
+type UpdateDocumentationVersionRequester interface {
+	UpdateDocumentationVersionRequest(*apigateway.UpdateDocumentationVersionInput) apigateway.UpdateDocumentationVersionRequest
+}
+
+// UpdateDomainNameRequester provides the interface for the UpdateDomainNameRequest API operation.
+type UpdateDomainNameRequester interface {
+	UpdateDomainNameRequest(*apigateway.UpdateDomainNameInput) apigateway.UpdateDomainNameRequest
+}
+
+// UpdateGatewayResponseRequester provides the interface for the UpdateGatewayResponseRequest API operation.
+type UpdateGatewayResponseRequester interface {
+	UpdateGatewayResponseRequest(*apigateway.UpdateGatewayResponseInput) apigateway.UpdateGatewayResponseRequest
+}
+
+// UpdateIntegrationRequester provides the interface for the UpdateIntegrationRequest API operation.
+type UpdateIntegrationRequester interface {
+	UpdateIntegrationRequest(*apigateway.UpdateIntegrationInput) apigateway.UpdateIntegrationRequest
+}
+
+// UpdateIntegrationResponseRequester provides the interface for the UpdateIntegrationResponseRequest API operation.
+type UpdateIntegrationResponseRequester interface {
+	UpdateIntegrationResponseRequest(*apigateway.UpdateIntegrationResponseInput) apigateway.UpdateIntegrationResponseRequest
+}
+
+// UpdateMethodRequester provides the interface for the UpdateMethodRequest API operation.
+type UpdateMethodRequester interface {
+	UpdateMethodRequest(*apigateway.UpdateMethodInput) apigateway.UpdateMethodRequest
+}
+
+// UpdateMethodResponseRequester provides the interface for the UpdateMethodResponseRequest API operation.
+type UpdateMethodResponseRequester interface {
+	UpdateMethodResponseRequest(*apigateway.UpdateMethodResponseInput) apigateway.UpdateMethodResponseRequest
+}
+
+// UpdateModelRequester provides the interface for the UpdateModelRequest API operation.
+type UpdateModelRequester interface {
+	UpdateModelRequest(*apigateway.UpdateModelInput) apigateway.UpdateModelRequest
+}
+
+// UpdateRequestValidatorRequester provides the interface for the UpdateRequestValidatorRequest API operation.
+type UpdateRequestValidatorRequester interface {
+	UpdateRequestValidatorRequest(*apigateway.UpdateRequestValidatorInput) apigateway.UpdateRequestValidatorRequest
+}
+
+// UpdateResourceRequester provides the interface for the UpdateResourceRequest API operation.
+type UpdateResourceRequester interface {
+	UpdateResourceRequest(*apigateway.UpdateResourceInput) apigateway.UpdateResourceRequest
+}
+
+// UpdateRestApiRequester provides the interface for the UpdateRestApiRequest API operation.
+type UpdateRestApiRequester interface {
+	UpdateRestApiRequest(*apigateway.UpdateRestApiInput) apigateway.UpdateRestApiRequest
+}
+
+// UpdateStageRequester provides the interface for the UpdateStageRequest API operation.
+type UpdateStageRequester interface {
+	UpdateStageRequest(*apigateway.UpdateStageInput) apigateway.UpdateStageRequest
+}
+
+// UpdateUsageRequester provides the interface for the UpdateUsageRequest API operation.
+type UpdateUsageRequester interface {
+	UpdateUsageRequest(*apigateway.UpdateUsageInput) apigateway.UpdateUsageRequest
+}
+
+// UpdateUsagePlanRequester provides the interface for the UpdateUsagePlanRequest API operation.
+type UpdateUsagePlanRequester interface {
+	UpdateUsagePlanRequest(*apigateway.UpdateUsagePlanInput) apigateway.UpdateUsagePlanRequest
+}

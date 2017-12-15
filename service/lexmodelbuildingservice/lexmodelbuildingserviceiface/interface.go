@@ -13,153 +13,172 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 )
 
-// LexModelBuildingServiceAPI provides an interface to enable mocking the
-// lexmodelbuildingservice.LexModelBuildingService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Lex Model Building Service.
-//    func myFunc(svc lexmodelbuildingserviceiface.LexModelBuildingServiceAPI) bool {
-//        // Make svc.CreateBotVersion request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := lexmodelbuildingservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLexModelBuildingServiceClient struct {
-//        lexmodelbuildingserviceiface.LexModelBuildingServiceAPI
-//    }
-//    func (m *mockLexModelBuildingServiceClient) CreateBotVersion(input *lexmodelbuildingservice.CreateBotVersionInput) (*lexmodelbuildingservice.CreateBotVersionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockLexModelBuildingServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type LexModelBuildingServiceAPI interface {
+// CreateBotVersionRequester provides the interface for the CreateBotVersionRequest API operation.
+type CreateBotVersionRequester interface {
 	CreateBotVersionRequest(*lexmodelbuildingservice.CreateBotVersionInput) lexmodelbuildingservice.CreateBotVersionRequest
-
-	CreateIntentVersionRequest(*lexmodelbuildingservice.CreateIntentVersionInput) lexmodelbuildingservice.CreateIntentVersionRequest
-
-	CreateSlotTypeVersionRequest(*lexmodelbuildingservice.CreateSlotTypeVersionInput) lexmodelbuildingservice.CreateSlotTypeVersionRequest
-
-	DeleteBotRequest(*lexmodelbuildingservice.DeleteBotInput) lexmodelbuildingservice.DeleteBotRequest
-
-	DeleteBotAliasRequest(*lexmodelbuildingservice.DeleteBotAliasInput) lexmodelbuildingservice.DeleteBotAliasRequest
-
-	DeleteBotChannelAssociationRequest(*lexmodelbuildingservice.DeleteBotChannelAssociationInput) lexmodelbuildingservice.DeleteBotChannelAssociationRequest
-
-	DeleteBotVersionRequest(*lexmodelbuildingservice.DeleteBotVersionInput) lexmodelbuildingservice.DeleteBotVersionRequest
-
-	DeleteIntentRequest(*lexmodelbuildingservice.DeleteIntentInput) lexmodelbuildingservice.DeleteIntentRequest
-
-	DeleteIntentVersionRequest(*lexmodelbuildingservice.DeleteIntentVersionInput) lexmodelbuildingservice.DeleteIntentVersionRequest
-
-	DeleteSlotTypeRequest(*lexmodelbuildingservice.DeleteSlotTypeInput) lexmodelbuildingservice.DeleteSlotTypeRequest
-
-	DeleteSlotTypeVersionRequest(*lexmodelbuildingservice.DeleteSlotTypeVersionInput) lexmodelbuildingservice.DeleteSlotTypeVersionRequest
-
-	DeleteUtterancesRequest(*lexmodelbuildingservice.DeleteUtterancesInput) lexmodelbuildingservice.DeleteUtterancesRequest
-
-	GetBotRequest(*lexmodelbuildingservice.GetBotInput) lexmodelbuildingservice.GetBotRequest
-
-	GetBotAliasRequest(*lexmodelbuildingservice.GetBotAliasInput) lexmodelbuildingservice.GetBotAliasRequest
-
-	GetBotAliasesRequest(*lexmodelbuildingservice.GetBotAliasesInput) lexmodelbuildingservice.GetBotAliasesRequest
-
-	GetBotAliasesPages(*lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool) error
-	GetBotAliasesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool, ...aws.Option) error
-
-	GetBotChannelAssociationRequest(*lexmodelbuildingservice.GetBotChannelAssociationInput) lexmodelbuildingservice.GetBotChannelAssociationRequest
-
-	GetBotChannelAssociationsRequest(*lexmodelbuildingservice.GetBotChannelAssociationsInput) lexmodelbuildingservice.GetBotChannelAssociationsRequest
-
-	GetBotChannelAssociationsPages(*lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool) error
-	GetBotChannelAssociationsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool, ...aws.Option) error
-
-	GetBotVersionsRequest(*lexmodelbuildingservice.GetBotVersionsInput) lexmodelbuildingservice.GetBotVersionsRequest
-
-	GetBotVersionsPages(*lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool) error
-	GetBotVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool, ...aws.Option) error
-
-	GetBotsRequest(*lexmodelbuildingservice.GetBotsInput) lexmodelbuildingservice.GetBotsRequest
-
-	GetBotsPages(*lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool) error
-	GetBotsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool, ...aws.Option) error
-
-	GetBuiltinIntentRequest(*lexmodelbuildingservice.GetBuiltinIntentInput) lexmodelbuildingservice.GetBuiltinIntentRequest
-
-	GetBuiltinIntentsRequest(*lexmodelbuildingservice.GetBuiltinIntentsInput) lexmodelbuildingservice.GetBuiltinIntentsRequest
-
-	GetBuiltinIntentsPages(*lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool) error
-	GetBuiltinIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool, ...aws.Option) error
-
-	GetBuiltinSlotTypesRequest(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) lexmodelbuildingservice.GetBuiltinSlotTypesRequest
-
-	GetBuiltinSlotTypesPages(*lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool) error
-	GetBuiltinSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool, ...aws.Option) error
-
-	GetExportRequest(*lexmodelbuildingservice.GetExportInput) lexmodelbuildingservice.GetExportRequest
-
-	GetIntentRequest(*lexmodelbuildingservice.GetIntentInput) lexmodelbuildingservice.GetIntentRequest
-
-	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) lexmodelbuildingservice.GetIntentVersionsRequest
-
-	GetIntentVersionsPages(*lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool) error
-	GetIntentVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool, ...aws.Option) error
-
-	GetIntentsRequest(*lexmodelbuildingservice.GetIntentsInput) lexmodelbuildingservice.GetIntentsRequest
-
-	GetIntentsPages(*lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool) error
-	GetIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool, ...aws.Option) error
-
-	GetSlotTypeRequest(*lexmodelbuildingservice.GetSlotTypeInput) lexmodelbuildingservice.GetSlotTypeRequest
-
-	GetSlotTypeVersionsRequest(*lexmodelbuildingservice.GetSlotTypeVersionsInput) lexmodelbuildingservice.GetSlotTypeVersionsRequest
-
-	GetSlotTypeVersionsPages(*lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool) error
-	GetSlotTypeVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool, ...aws.Option) error
-
-	GetSlotTypesRequest(*lexmodelbuildingservice.GetSlotTypesInput) lexmodelbuildingservice.GetSlotTypesRequest
-
-	GetSlotTypesPages(*lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool) error
-	GetSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool, ...aws.Option) error
-
-	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) lexmodelbuildingservice.GetUtterancesViewRequest
-
-	PutBotRequest(*lexmodelbuildingservice.PutBotInput) lexmodelbuildingservice.PutBotRequest
-
-	PutBotAliasRequest(*lexmodelbuildingservice.PutBotAliasInput) lexmodelbuildingservice.PutBotAliasRequest
-
-	PutIntentRequest(*lexmodelbuildingservice.PutIntentInput) lexmodelbuildingservice.PutIntentRequest
-
-	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) lexmodelbuildingservice.PutSlotTypeRequest
 }
 
-var _ LexModelBuildingServiceAPI = (*lexmodelbuildingservice.LexModelBuildingService)(nil)
+// CreateIntentVersionRequester provides the interface for the CreateIntentVersionRequest API operation.
+type CreateIntentVersionRequester interface {
+	CreateIntentVersionRequest(*lexmodelbuildingservice.CreateIntentVersionInput) lexmodelbuildingservice.CreateIntentVersionRequest
+}
+
+// CreateSlotTypeVersionRequester provides the interface for the CreateSlotTypeVersionRequest API operation.
+type CreateSlotTypeVersionRequester interface {
+	CreateSlotTypeVersionRequest(*lexmodelbuildingservice.CreateSlotTypeVersionInput) lexmodelbuildingservice.CreateSlotTypeVersionRequest
+}
+
+// DeleteBotRequester provides the interface for the DeleteBotRequest API operation.
+type DeleteBotRequester interface {
+	DeleteBotRequest(*lexmodelbuildingservice.DeleteBotInput) lexmodelbuildingservice.DeleteBotRequest
+}
+
+// DeleteBotAliasRequester provides the interface for the DeleteBotAliasRequest API operation.
+type DeleteBotAliasRequester interface {
+	DeleteBotAliasRequest(*lexmodelbuildingservice.DeleteBotAliasInput) lexmodelbuildingservice.DeleteBotAliasRequest
+}
+
+// DeleteBotChannelAssociationRequester provides the interface for the DeleteBotChannelAssociationRequest API operation.
+type DeleteBotChannelAssociationRequester interface {
+	DeleteBotChannelAssociationRequest(*lexmodelbuildingservice.DeleteBotChannelAssociationInput) lexmodelbuildingservice.DeleteBotChannelAssociationRequest
+}
+
+// DeleteBotVersionRequester provides the interface for the DeleteBotVersionRequest API operation.
+type DeleteBotVersionRequester interface {
+	DeleteBotVersionRequest(*lexmodelbuildingservice.DeleteBotVersionInput) lexmodelbuildingservice.DeleteBotVersionRequest
+}
+
+// DeleteIntentRequester provides the interface for the DeleteIntentRequest API operation.
+type DeleteIntentRequester interface {
+	DeleteIntentRequest(*lexmodelbuildingservice.DeleteIntentInput) lexmodelbuildingservice.DeleteIntentRequest
+}
+
+// DeleteIntentVersionRequester provides the interface for the DeleteIntentVersionRequest API operation.
+type DeleteIntentVersionRequester interface {
+	DeleteIntentVersionRequest(*lexmodelbuildingservice.DeleteIntentVersionInput) lexmodelbuildingservice.DeleteIntentVersionRequest
+}
+
+// DeleteSlotTypeRequester provides the interface for the DeleteSlotTypeRequest API operation.
+type DeleteSlotTypeRequester interface {
+	DeleteSlotTypeRequest(*lexmodelbuildingservice.DeleteSlotTypeInput) lexmodelbuildingservice.DeleteSlotTypeRequest
+}
+
+// DeleteSlotTypeVersionRequester provides the interface for the DeleteSlotTypeVersionRequest API operation.
+type DeleteSlotTypeVersionRequester interface {
+	DeleteSlotTypeVersionRequest(*lexmodelbuildingservice.DeleteSlotTypeVersionInput) lexmodelbuildingservice.DeleteSlotTypeVersionRequest
+}
+
+// DeleteUtterancesRequester provides the interface for the DeleteUtterancesRequest API operation.
+type DeleteUtterancesRequester interface {
+	DeleteUtterancesRequest(*lexmodelbuildingservice.DeleteUtterancesInput) lexmodelbuildingservice.DeleteUtterancesRequest
+}
+
+// GetBotRequester provides the interface for the GetBotRequest API operation.
+type GetBotRequester interface {
+	GetBotRequest(*lexmodelbuildingservice.GetBotInput) lexmodelbuildingservice.GetBotRequest
+}
+
+// GetBotAliasRequester provides the interface for the GetBotAliasRequest API operation.
+type GetBotAliasRequester interface {
+	GetBotAliasRequest(*lexmodelbuildingservice.GetBotAliasInput) lexmodelbuildingservice.GetBotAliasRequest
+}
+
+// GetBotAliasesRequester provides the interface for the GetBotAliasesRequest API operation.
+type GetBotAliasesRequester interface {
+	GetBotAliasesRequest(*lexmodelbuildingservice.GetBotAliasesInput) lexmodelbuildingservice.GetBotAliasesRequest
+}
+
+// GetBotChannelAssociationRequester provides the interface for the GetBotChannelAssociationRequest API operation.
+type GetBotChannelAssociationRequester interface {
+	GetBotChannelAssociationRequest(*lexmodelbuildingservice.GetBotChannelAssociationInput) lexmodelbuildingservice.GetBotChannelAssociationRequest
+}
+
+// GetBotChannelAssociationsRequester provides the interface for the GetBotChannelAssociationsRequest API operation.
+type GetBotChannelAssociationsRequester interface {
+	GetBotChannelAssociationsRequest(*lexmodelbuildingservice.GetBotChannelAssociationsInput) lexmodelbuildingservice.GetBotChannelAssociationsRequest
+}
+
+// GetBotVersionsRequester provides the interface for the GetBotVersionsRequest API operation.
+type GetBotVersionsRequester interface {
+	GetBotVersionsRequest(*lexmodelbuildingservice.GetBotVersionsInput) lexmodelbuildingservice.GetBotVersionsRequest
+}
+
+// GetBotsRequester provides the interface for the GetBotsRequest API operation.
+type GetBotsRequester interface {
+	GetBotsRequest(*lexmodelbuildingservice.GetBotsInput) lexmodelbuildingservice.GetBotsRequest
+}
+
+// GetBuiltinIntentRequester provides the interface for the GetBuiltinIntentRequest API operation.
+type GetBuiltinIntentRequester interface {
+	GetBuiltinIntentRequest(*lexmodelbuildingservice.GetBuiltinIntentInput) lexmodelbuildingservice.GetBuiltinIntentRequest
+}
+
+// GetBuiltinIntentsRequester provides the interface for the GetBuiltinIntentsRequest API operation.
+type GetBuiltinIntentsRequester interface {
+	GetBuiltinIntentsRequest(*lexmodelbuildingservice.GetBuiltinIntentsInput) lexmodelbuildingservice.GetBuiltinIntentsRequest
+}
+
+// GetBuiltinSlotTypesRequester provides the interface for the GetBuiltinSlotTypesRequest API operation.
+type GetBuiltinSlotTypesRequester interface {
+	GetBuiltinSlotTypesRequest(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) lexmodelbuildingservice.GetBuiltinSlotTypesRequest
+}
+
+// GetExportRequester provides the interface for the GetExportRequest API operation.
+type GetExportRequester interface {
+	GetExportRequest(*lexmodelbuildingservice.GetExportInput) lexmodelbuildingservice.GetExportRequest
+}
+
+// GetIntentRequester provides the interface for the GetIntentRequest API operation.
+type GetIntentRequester interface {
+	GetIntentRequest(*lexmodelbuildingservice.GetIntentInput) lexmodelbuildingservice.GetIntentRequest
+}
+
+// GetIntentVersionsRequester provides the interface for the GetIntentVersionsRequest API operation.
+type GetIntentVersionsRequester interface {
+	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) lexmodelbuildingservice.GetIntentVersionsRequest
+}
+
+// GetIntentsRequester provides the interface for the GetIntentsRequest API operation.
+type GetIntentsRequester interface {
+	GetIntentsRequest(*lexmodelbuildingservice.GetIntentsInput) lexmodelbuildingservice.GetIntentsRequest
+}
+
+// GetSlotTypeRequester provides the interface for the GetSlotTypeRequest API operation.
+type GetSlotTypeRequester interface {
+	GetSlotTypeRequest(*lexmodelbuildingservice.GetSlotTypeInput) lexmodelbuildingservice.GetSlotTypeRequest
+}
+
+// GetSlotTypeVersionsRequester provides the interface for the GetSlotTypeVersionsRequest API operation.
+type GetSlotTypeVersionsRequester interface {
+	GetSlotTypeVersionsRequest(*lexmodelbuildingservice.GetSlotTypeVersionsInput) lexmodelbuildingservice.GetSlotTypeVersionsRequest
+}
+
+// GetSlotTypesRequester provides the interface for the GetSlotTypesRequest API operation.
+type GetSlotTypesRequester interface {
+	GetSlotTypesRequest(*lexmodelbuildingservice.GetSlotTypesInput) lexmodelbuildingservice.GetSlotTypesRequest
+}
+
+// GetUtterancesViewRequester provides the interface for the GetUtterancesViewRequest API operation.
+type GetUtterancesViewRequester interface {
+	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) lexmodelbuildingservice.GetUtterancesViewRequest
+}
+
+// PutBotRequester provides the interface for the PutBotRequest API operation.
+type PutBotRequester interface {
+	PutBotRequest(*lexmodelbuildingservice.PutBotInput) lexmodelbuildingservice.PutBotRequest
+}
+
+// PutBotAliasRequester provides the interface for the PutBotAliasRequest API operation.
+type PutBotAliasRequester interface {
+	PutBotAliasRequest(*lexmodelbuildingservice.PutBotAliasInput) lexmodelbuildingservice.PutBotAliasRequest
+}
+
+// PutIntentRequester provides the interface for the PutIntentRequest API operation.
+type PutIntentRequester interface {
+	PutIntentRequest(*lexmodelbuildingservice.PutIntentInput) lexmodelbuildingservice.PutIntentRequest
+}
+
+// PutSlotTypeRequester provides the interface for the PutSlotTypeRequest API operation.
+type PutSlotTypeRequester interface {
+	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) lexmodelbuildingservice.PutSlotTypeRequest
+}

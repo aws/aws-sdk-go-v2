@@ -13,89 +13,72 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/support"
 )
 
-// SupportAPI provides an interface to enable mocking the
-// support.Support service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Support.
-//    func myFunc(svc supportiface.SupportAPI) bool {
-//        // Make svc.AddAttachmentsToSet request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := support.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSupportClient struct {
-//        supportiface.SupportAPI
-//    }
-//    func (m *mockSupportClient) AddAttachmentsToSet(input *support.AddAttachmentsToSetInput) (*support.AddAttachmentsToSetOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockSupportClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type SupportAPI interface {
+// AddAttachmentsToSetRequester provides the interface for the AddAttachmentsToSetRequest API operation.
+type AddAttachmentsToSetRequester interface {
 	AddAttachmentsToSetRequest(*support.AddAttachmentsToSetInput) support.AddAttachmentsToSetRequest
-
-	AddCommunicationToCaseRequest(*support.AddCommunicationToCaseInput) support.AddCommunicationToCaseRequest
-
-	CreateCaseRequest(*support.CreateCaseInput) support.CreateCaseRequest
-
-	DescribeAttachmentRequest(*support.DescribeAttachmentInput) support.DescribeAttachmentRequest
-
-	DescribeCasesRequest(*support.DescribeCasesInput) support.DescribeCasesRequest
-
-	DescribeCasesPages(*support.DescribeCasesInput, func(*support.DescribeCasesOutput, bool) bool) error
-	DescribeCasesPagesWithContext(aws.Context, *support.DescribeCasesInput, func(*support.DescribeCasesOutput, bool) bool, ...aws.Option) error
-
-	DescribeCommunicationsRequest(*support.DescribeCommunicationsInput) support.DescribeCommunicationsRequest
-
-	DescribeCommunicationsPages(*support.DescribeCommunicationsInput, func(*support.DescribeCommunicationsOutput, bool) bool) error
-	DescribeCommunicationsPagesWithContext(aws.Context, *support.DescribeCommunicationsInput, func(*support.DescribeCommunicationsOutput, bool) bool, ...aws.Option) error
-
-	DescribeServicesRequest(*support.DescribeServicesInput) support.DescribeServicesRequest
-
-	DescribeSeverityLevelsRequest(*support.DescribeSeverityLevelsInput) support.DescribeSeverityLevelsRequest
-
-	DescribeTrustedAdvisorCheckRefreshStatusesRequest(*support.DescribeTrustedAdvisorCheckRefreshStatusesInput) support.DescribeTrustedAdvisorCheckRefreshStatusesRequest
-
-	DescribeTrustedAdvisorCheckResultRequest(*support.DescribeTrustedAdvisorCheckResultInput) support.DescribeTrustedAdvisorCheckResultRequest
-
-	DescribeTrustedAdvisorCheckSummariesRequest(*support.DescribeTrustedAdvisorCheckSummariesInput) support.DescribeTrustedAdvisorCheckSummariesRequest
-
-	DescribeTrustedAdvisorChecksRequest(*support.DescribeTrustedAdvisorChecksInput) support.DescribeTrustedAdvisorChecksRequest
-
-	RefreshTrustedAdvisorCheckRequest(*support.RefreshTrustedAdvisorCheckInput) support.RefreshTrustedAdvisorCheckRequest
-
-	ResolveCaseRequest(*support.ResolveCaseInput) support.ResolveCaseRequest
 }
 
-var _ SupportAPI = (*support.Support)(nil)
+// AddCommunicationToCaseRequester provides the interface for the AddCommunicationToCaseRequest API operation.
+type AddCommunicationToCaseRequester interface {
+	AddCommunicationToCaseRequest(*support.AddCommunicationToCaseInput) support.AddCommunicationToCaseRequest
+}
+
+// CreateCaseRequester provides the interface for the CreateCaseRequest API operation.
+type CreateCaseRequester interface {
+	CreateCaseRequest(*support.CreateCaseInput) support.CreateCaseRequest
+}
+
+// DescribeAttachmentRequester provides the interface for the DescribeAttachmentRequest API operation.
+type DescribeAttachmentRequester interface {
+	DescribeAttachmentRequest(*support.DescribeAttachmentInput) support.DescribeAttachmentRequest
+}
+
+// DescribeCasesRequester provides the interface for the DescribeCasesRequest API operation.
+type DescribeCasesRequester interface {
+	DescribeCasesRequest(*support.DescribeCasesInput) support.DescribeCasesRequest
+}
+
+// DescribeCommunicationsRequester provides the interface for the DescribeCommunicationsRequest API operation.
+type DescribeCommunicationsRequester interface {
+	DescribeCommunicationsRequest(*support.DescribeCommunicationsInput) support.DescribeCommunicationsRequest
+}
+
+// DescribeServicesRequester provides the interface for the DescribeServicesRequest API operation.
+type DescribeServicesRequester interface {
+	DescribeServicesRequest(*support.DescribeServicesInput) support.DescribeServicesRequest
+}
+
+// DescribeSeverityLevelsRequester provides the interface for the DescribeSeverityLevelsRequest API operation.
+type DescribeSeverityLevelsRequester interface {
+	DescribeSeverityLevelsRequest(*support.DescribeSeverityLevelsInput) support.DescribeSeverityLevelsRequest
+}
+
+// DescribeTrustedAdvisorCheckRefreshStatusesRequester provides the interface for the DescribeTrustedAdvisorCheckRefreshStatusesRequest API operation.
+type DescribeTrustedAdvisorCheckRefreshStatusesRequester interface {
+	DescribeTrustedAdvisorCheckRefreshStatusesRequest(*support.DescribeTrustedAdvisorCheckRefreshStatusesInput) support.DescribeTrustedAdvisorCheckRefreshStatusesRequest
+}
+
+// DescribeTrustedAdvisorCheckResultRequester provides the interface for the DescribeTrustedAdvisorCheckResultRequest API operation.
+type DescribeTrustedAdvisorCheckResultRequester interface {
+	DescribeTrustedAdvisorCheckResultRequest(*support.DescribeTrustedAdvisorCheckResultInput) support.DescribeTrustedAdvisorCheckResultRequest
+}
+
+// DescribeTrustedAdvisorCheckSummariesRequester provides the interface for the DescribeTrustedAdvisorCheckSummariesRequest API operation.
+type DescribeTrustedAdvisorCheckSummariesRequester interface {
+	DescribeTrustedAdvisorCheckSummariesRequest(*support.DescribeTrustedAdvisorCheckSummariesInput) support.DescribeTrustedAdvisorCheckSummariesRequest
+}
+
+// DescribeTrustedAdvisorChecksRequester provides the interface for the DescribeTrustedAdvisorChecksRequest API operation.
+type DescribeTrustedAdvisorChecksRequester interface {
+	DescribeTrustedAdvisorChecksRequest(*support.DescribeTrustedAdvisorChecksInput) support.DescribeTrustedAdvisorChecksRequest
+}
+
+// RefreshTrustedAdvisorCheckRequester provides the interface for the RefreshTrustedAdvisorCheckRequest API operation.
+type RefreshTrustedAdvisorCheckRequester interface {
+	RefreshTrustedAdvisorCheckRequest(*support.RefreshTrustedAdvisorCheckInput) support.RefreshTrustedAdvisorCheckRequest
+}
+
+// ResolveCaseRequester provides the interface for the ResolveCaseRequest API operation.
+type ResolveCaseRequester interface {
+	ResolveCaseRequest(*support.ResolveCaseInput) support.ResolveCaseRequest
+}

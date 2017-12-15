@@ -12,163 +12,272 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 )
 
-// PinpointAPI provides an interface to enable mocking the
-// pinpoint.Pinpoint service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Pinpoint.
-//    func myFunc(svc pinpointiface.PinpointAPI) bool {
-//        // Make svc.CreateApp request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := pinpoint.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPinpointClient struct {
-//        pinpointiface.PinpointAPI
-//    }
-//    func (m *mockPinpointClient) CreateApp(input *pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockPinpointClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type PinpointAPI interface {
+// CreateAppRequester provides the interface for the CreateAppRequest API operation.
+type CreateAppRequester interface {
 	CreateAppRequest(*pinpoint.CreateAppInput) pinpoint.CreateAppRequest
-
-	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
-
-	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
-
-	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
-
-	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
-
-	DeleteApnsChannelRequest(*pinpoint.DeleteApnsChannelInput) pinpoint.DeleteApnsChannelRequest
-
-	DeleteApnsSandboxChannelRequest(*pinpoint.DeleteApnsSandboxChannelInput) pinpoint.DeleteApnsSandboxChannelRequest
-
-	DeleteAppRequest(*pinpoint.DeleteAppInput) pinpoint.DeleteAppRequest
-
-	DeleteBaiduChannelRequest(*pinpoint.DeleteBaiduChannelInput) pinpoint.DeleteBaiduChannelRequest
-
-	DeleteCampaignRequest(*pinpoint.DeleteCampaignInput) pinpoint.DeleteCampaignRequest
-
-	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
-
-	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
-
-	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
-
-	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
-
-	DeleteSmsChannelRequest(*pinpoint.DeleteSmsChannelInput) pinpoint.DeleteSmsChannelRequest
-
-	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
-
-	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
-
-	GetApnsSandboxChannelRequest(*pinpoint.GetApnsSandboxChannelInput) pinpoint.GetApnsSandboxChannelRequest
-
-	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
-
-	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
-
-	GetAppsRequest(*pinpoint.GetAppsInput) pinpoint.GetAppsRequest
-
-	GetBaiduChannelRequest(*pinpoint.GetBaiduChannelInput) pinpoint.GetBaiduChannelRequest
-
-	GetCampaignRequest(*pinpoint.GetCampaignInput) pinpoint.GetCampaignRequest
-
-	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
-
-	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
-
-	GetCampaignVersionsRequest(*pinpoint.GetCampaignVersionsInput) pinpoint.GetCampaignVersionsRequest
-
-	GetCampaignsRequest(*pinpoint.GetCampaignsInput) pinpoint.GetCampaignsRequest
-
-	GetEmailChannelRequest(*pinpoint.GetEmailChannelInput) pinpoint.GetEmailChannelRequest
-
-	GetEndpointRequest(*pinpoint.GetEndpointInput) pinpoint.GetEndpointRequest
-
-	GetEventStreamRequest(*pinpoint.GetEventStreamInput) pinpoint.GetEventStreamRequest
-
-	GetGcmChannelRequest(*pinpoint.GetGcmChannelInput) pinpoint.GetGcmChannelRequest
-
-	GetImportJobRequest(*pinpoint.GetImportJobInput) pinpoint.GetImportJobRequest
-
-	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
-
-	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
-
-	GetSegmentImportJobsRequest(*pinpoint.GetSegmentImportJobsInput) pinpoint.GetSegmentImportJobsRequest
-
-	GetSegmentVersionRequest(*pinpoint.GetSegmentVersionInput) pinpoint.GetSegmentVersionRequest
-
-	GetSegmentVersionsRequest(*pinpoint.GetSegmentVersionsInput) pinpoint.GetSegmentVersionsRequest
-
-	GetSegmentsRequest(*pinpoint.GetSegmentsInput) pinpoint.GetSegmentsRequest
-
-	GetSmsChannelRequest(*pinpoint.GetSmsChannelInput) pinpoint.GetSmsChannelRequest
-
-	PutEventStreamRequest(*pinpoint.PutEventStreamInput) pinpoint.PutEventStreamRequest
-
-	SendMessagesRequest(*pinpoint.SendMessagesInput) pinpoint.SendMessagesRequest
-
-	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
-
-	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
-
-	UpdateApnsChannelRequest(*pinpoint.UpdateApnsChannelInput) pinpoint.UpdateApnsChannelRequest
-
-	UpdateApnsSandboxChannelRequest(*pinpoint.UpdateApnsSandboxChannelInput) pinpoint.UpdateApnsSandboxChannelRequest
-
-	UpdateApplicationSettingsRequest(*pinpoint.UpdateApplicationSettingsInput) pinpoint.UpdateApplicationSettingsRequest
-
-	UpdateBaiduChannelRequest(*pinpoint.UpdateBaiduChannelInput) pinpoint.UpdateBaiduChannelRequest
-
-	UpdateCampaignRequest(*pinpoint.UpdateCampaignInput) pinpoint.UpdateCampaignRequest
-
-	UpdateEmailChannelRequest(*pinpoint.UpdateEmailChannelInput) pinpoint.UpdateEmailChannelRequest
-
-	UpdateEndpointRequest(*pinpoint.UpdateEndpointInput) pinpoint.UpdateEndpointRequest
-
-	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
-
-	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
-
-	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
-
-	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
 }
 
-var _ PinpointAPI = (*pinpoint.Pinpoint)(nil)
+// CreateCampaignRequester provides the interface for the CreateCampaignRequest API operation.
+type CreateCampaignRequester interface {
+	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
+}
+
+// CreateImportJobRequester provides the interface for the CreateImportJobRequest API operation.
+type CreateImportJobRequester interface {
+	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
+}
+
+// CreateSegmentRequester provides the interface for the CreateSegmentRequest API operation.
+type CreateSegmentRequester interface {
+	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
+}
+
+// DeleteAdmChannelRequester provides the interface for the DeleteAdmChannelRequest API operation.
+type DeleteAdmChannelRequester interface {
+	DeleteAdmChannelRequest(*pinpoint.DeleteAdmChannelInput) pinpoint.DeleteAdmChannelRequest
+}
+
+// DeleteApnsChannelRequester provides the interface for the DeleteApnsChannelRequest API operation.
+type DeleteApnsChannelRequester interface {
+	DeleteApnsChannelRequest(*pinpoint.DeleteApnsChannelInput) pinpoint.DeleteApnsChannelRequest
+}
+
+// DeleteApnsSandboxChannelRequester provides the interface for the DeleteApnsSandboxChannelRequest API operation.
+type DeleteApnsSandboxChannelRequester interface {
+	DeleteApnsSandboxChannelRequest(*pinpoint.DeleteApnsSandboxChannelInput) pinpoint.DeleteApnsSandboxChannelRequest
+}
+
+// DeleteAppRequester provides the interface for the DeleteAppRequest API operation.
+type DeleteAppRequester interface {
+	DeleteAppRequest(*pinpoint.DeleteAppInput) pinpoint.DeleteAppRequest
+}
+
+// DeleteBaiduChannelRequester provides the interface for the DeleteBaiduChannelRequest API operation.
+type DeleteBaiduChannelRequester interface {
+	DeleteBaiduChannelRequest(*pinpoint.DeleteBaiduChannelInput) pinpoint.DeleteBaiduChannelRequest
+}
+
+// DeleteCampaignRequester provides the interface for the DeleteCampaignRequest API operation.
+type DeleteCampaignRequester interface {
+	DeleteCampaignRequest(*pinpoint.DeleteCampaignInput) pinpoint.DeleteCampaignRequest
+}
+
+// DeleteEmailChannelRequester provides the interface for the DeleteEmailChannelRequest API operation.
+type DeleteEmailChannelRequester interface {
+	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
+}
+
+// DeleteEventStreamRequester provides the interface for the DeleteEventStreamRequest API operation.
+type DeleteEventStreamRequester interface {
+	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
+}
+
+// DeleteGcmChannelRequester provides the interface for the DeleteGcmChannelRequest API operation.
+type DeleteGcmChannelRequester interface {
+	DeleteGcmChannelRequest(*pinpoint.DeleteGcmChannelInput) pinpoint.DeleteGcmChannelRequest
+}
+
+// DeleteSegmentRequester provides the interface for the DeleteSegmentRequest API operation.
+type DeleteSegmentRequester interface {
+	DeleteSegmentRequest(*pinpoint.DeleteSegmentInput) pinpoint.DeleteSegmentRequest
+}
+
+// DeleteSmsChannelRequester provides the interface for the DeleteSmsChannelRequest API operation.
+type DeleteSmsChannelRequester interface {
+	DeleteSmsChannelRequest(*pinpoint.DeleteSmsChannelInput) pinpoint.DeleteSmsChannelRequest
+}
+
+// GetAdmChannelRequester provides the interface for the GetAdmChannelRequest API operation.
+type GetAdmChannelRequester interface {
+	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
+}
+
+// GetApnsChannelRequester provides the interface for the GetApnsChannelRequest API operation.
+type GetApnsChannelRequester interface {
+	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
+}
+
+// GetApnsSandboxChannelRequester provides the interface for the GetApnsSandboxChannelRequest API operation.
+type GetApnsSandboxChannelRequester interface {
+	GetApnsSandboxChannelRequest(*pinpoint.GetApnsSandboxChannelInput) pinpoint.GetApnsSandboxChannelRequest
+}
+
+// GetAppRequester provides the interface for the GetAppRequest API operation.
+type GetAppRequester interface {
+	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
+}
+
+// GetApplicationSettingsRequester provides the interface for the GetApplicationSettingsRequest API operation.
+type GetApplicationSettingsRequester interface {
+	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
+}
+
+// GetAppsRequester provides the interface for the GetAppsRequest API operation.
+type GetAppsRequester interface {
+	GetAppsRequest(*pinpoint.GetAppsInput) pinpoint.GetAppsRequest
+}
+
+// GetBaiduChannelRequester provides the interface for the GetBaiduChannelRequest API operation.
+type GetBaiduChannelRequester interface {
+	GetBaiduChannelRequest(*pinpoint.GetBaiduChannelInput) pinpoint.GetBaiduChannelRequest
+}
+
+// GetCampaignRequester provides the interface for the GetCampaignRequest API operation.
+type GetCampaignRequester interface {
+	GetCampaignRequest(*pinpoint.GetCampaignInput) pinpoint.GetCampaignRequest
+}
+
+// GetCampaignActivitiesRequester provides the interface for the GetCampaignActivitiesRequest API operation.
+type GetCampaignActivitiesRequester interface {
+	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
+}
+
+// GetCampaignVersionRequester provides the interface for the GetCampaignVersionRequest API operation.
+type GetCampaignVersionRequester interface {
+	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
+}
+
+// GetCampaignVersionsRequester provides the interface for the GetCampaignVersionsRequest API operation.
+type GetCampaignVersionsRequester interface {
+	GetCampaignVersionsRequest(*pinpoint.GetCampaignVersionsInput) pinpoint.GetCampaignVersionsRequest
+}
+
+// GetCampaignsRequester provides the interface for the GetCampaignsRequest API operation.
+type GetCampaignsRequester interface {
+	GetCampaignsRequest(*pinpoint.GetCampaignsInput) pinpoint.GetCampaignsRequest
+}
+
+// GetEmailChannelRequester provides the interface for the GetEmailChannelRequest API operation.
+type GetEmailChannelRequester interface {
+	GetEmailChannelRequest(*pinpoint.GetEmailChannelInput) pinpoint.GetEmailChannelRequest
+}
+
+// GetEndpointRequester provides the interface for the GetEndpointRequest API operation.
+type GetEndpointRequester interface {
+	GetEndpointRequest(*pinpoint.GetEndpointInput) pinpoint.GetEndpointRequest
+}
+
+// GetEventStreamRequester provides the interface for the GetEventStreamRequest API operation.
+type GetEventStreamRequester interface {
+	GetEventStreamRequest(*pinpoint.GetEventStreamInput) pinpoint.GetEventStreamRequest
+}
+
+// GetGcmChannelRequester provides the interface for the GetGcmChannelRequest API operation.
+type GetGcmChannelRequester interface {
+	GetGcmChannelRequest(*pinpoint.GetGcmChannelInput) pinpoint.GetGcmChannelRequest
+}
+
+// GetImportJobRequester provides the interface for the GetImportJobRequest API operation.
+type GetImportJobRequester interface {
+	GetImportJobRequest(*pinpoint.GetImportJobInput) pinpoint.GetImportJobRequest
+}
+
+// GetImportJobsRequester provides the interface for the GetImportJobsRequest API operation.
+type GetImportJobsRequester interface {
+	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
+}
+
+// GetSegmentRequester provides the interface for the GetSegmentRequest API operation.
+type GetSegmentRequester interface {
+	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
+}
+
+// GetSegmentImportJobsRequester provides the interface for the GetSegmentImportJobsRequest API operation.
+type GetSegmentImportJobsRequester interface {
+	GetSegmentImportJobsRequest(*pinpoint.GetSegmentImportJobsInput) pinpoint.GetSegmentImportJobsRequest
+}
+
+// GetSegmentVersionRequester provides the interface for the GetSegmentVersionRequest API operation.
+type GetSegmentVersionRequester interface {
+	GetSegmentVersionRequest(*pinpoint.GetSegmentVersionInput) pinpoint.GetSegmentVersionRequest
+}
+
+// GetSegmentVersionsRequester provides the interface for the GetSegmentVersionsRequest API operation.
+type GetSegmentVersionsRequester interface {
+	GetSegmentVersionsRequest(*pinpoint.GetSegmentVersionsInput) pinpoint.GetSegmentVersionsRequest
+}
+
+// GetSegmentsRequester provides the interface for the GetSegmentsRequest API operation.
+type GetSegmentsRequester interface {
+	GetSegmentsRequest(*pinpoint.GetSegmentsInput) pinpoint.GetSegmentsRequest
+}
+
+// GetSmsChannelRequester provides the interface for the GetSmsChannelRequest API operation.
+type GetSmsChannelRequester interface {
+	GetSmsChannelRequest(*pinpoint.GetSmsChannelInput) pinpoint.GetSmsChannelRequest
+}
+
+// PutEventStreamRequester provides the interface for the PutEventStreamRequest API operation.
+type PutEventStreamRequester interface {
+	PutEventStreamRequest(*pinpoint.PutEventStreamInput) pinpoint.PutEventStreamRequest
+}
+
+// SendMessagesRequester provides the interface for the SendMessagesRequest API operation.
+type SendMessagesRequester interface {
+	SendMessagesRequest(*pinpoint.SendMessagesInput) pinpoint.SendMessagesRequest
+}
+
+// SendUsersMessagesRequester provides the interface for the SendUsersMessagesRequest API operation.
+type SendUsersMessagesRequester interface {
+	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
+}
+
+// UpdateAdmChannelRequester provides the interface for the UpdateAdmChannelRequest API operation.
+type UpdateAdmChannelRequester interface {
+	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
+}
+
+// UpdateApnsChannelRequester provides the interface for the UpdateApnsChannelRequest API operation.
+type UpdateApnsChannelRequester interface {
+	UpdateApnsChannelRequest(*pinpoint.UpdateApnsChannelInput) pinpoint.UpdateApnsChannelRequest
+}
+
+// UpdateApnsSandboxChannelRequester provides the interface for the UpdateApnsSandboxChannelRequest API operation.
+type UpdateApnsSandboxChannelRequester interface {
+	UpdateApnsSandboxChannelRequest(*pinpoint.UpdateApnsSandboxChannelInput) pinpoint.UpdateApnsSandboxChannelRequest
+}
+
+// UpdateApplicationSettingsRequester provides the interface for the UpdateApplicationSettingsRequest API operation.
+type UpdateApplicationSettingsRequester interface {
+	UpdateApplicationSettingsRequest(*pinpoint.UpdateApplicationSettingsInput) pinpoint.UpdateApplicationSettingsRequest
+}
+
+// UpdateBaiduChannelRequester provides the interface for the UpdateBaiduChannelRequest API operation.
+type UpdateBaiduChannelRequester interface {
+	UpdateBaiduChannelRequest(*pinpoint.UpdateBaiduChannelInput) pinpoint.UpdateBaiduChannelRequest
+}
+
+// UpdateCampaignRequester provides the interface for the UpdateCampaignRequest API operation.
+type UpdateCampaignRequester interface {
+	UpdateCampaignRequest(*pinpoint.UpdateCampaignInput) pinpoint.UpdateCampaignRequest
+}
+
+// UpdateEmailChannelRequester provides the interface for the UpdateEmailChannelRequest API operation.
+type UpdateEmailChannelRequester interface {
+	UpdateEmailChannelRequest(*pinpoint.UpdateEmailChannelInput) pinpoint.UpdateEmailChannelRequest
+}
+
+// UpdateEndpointRequester provides the interface for the UpdateEndpointRequest API operation.
+type UpdateEndpointRequester interface {
+	UpdateEndpointRequest(*pinpoint.UpdateEndpointInput) pinpoint.UpdateEndpointRequest
+}
+
+// UpdateEndpointsBatchRequester provides the interface for the UpdateEndpointsBatchRequest API operation.
+type UpdateEndpointsBatchRequester interface {
+	UpdateEndpointsBatchRequest(*pinpoint.UpdateEndpointsBatchInput) pinpoint.UpdateEndpointsBatchRequest
+}
+
+// UpdateGcmChannelRequester provides the interface for the UpdateGcmChannelRequest API operation.
+type UpdateGcmChannelRequester interface {
+	UpdateGcmChannelRequest(*pinpoint.UpdateGcmChannelInput) pinpoint.UpdateGcmChannelRequest
+}
+
+// UpdateSegmentRequester provides the interface for the UpdateSegmentRequest API operation.
+type UpdateSegmentRequester interface {
+	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
+}
+
+// UpdateSmsChannelRequester provides the interface for the UpdateSmsChannelRequest API operation.
+type UpdateSmsChannelRequester interface {
+	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
+}

@@ -13,383 +13,624 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 )
 
-// IAMAPI provides an interface to enable mocking the
-// iam.IAM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Identity and Access Management.
-//    func myFunc(svc iamiface.IAMAPI) bool {
-//        // Make svc.AddClientIDToOpenIDConnectProvider request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := iam.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIAMClient struct {
-//        iamiface.IAMAPI
-//    }
-//    func (m *mockIAMClient) AddClientIDToOpenIDConnectProvider(input *iam.AddClientIDToOpenIDConnectProviderInput) (*iam.AddClientIDToOpenIDConnectProviderOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockIAMClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type IAMAPI interface {
+// AddClientIDToOpenIDConnectProviderRequester provides the interface for the AddClientIDToOpenIDConnectProviderRequest API operation.
+type AddClientIDToOpenIDConnectProviderRequester interface {
 	AddClientIDToOpenIDConnectProviderRequest(*iam.AddClientIDToOpenIDConnectProviderInput) iam.AddClientIDToOpenIDConnectProviderRequest
+}
 
+// AddRoleToInstanceProfileRequester provides the interface for the AddRoleToInstanceProfileRequest API operation.
+type AddRoleToInstanceProfileRequester interface {
 	AddRoleToInstanceProfileRequest(*iam.AddRoleToInstanceProfileInput) iam.AddRoleToInstanceProfileRequest
+}
 
+// AddUserToGroupRequester provides the interface for the AddUserToGroupRequest API operation.
+type AddUserToGroupRequester interface {
 	AddUserToGroupRequest(*iam.AddUserToGroupInput) iam.AddUserToGroupRequest
+}
 
+// AttachGroupPolicyRequester provides the interface for the AttachGroupPolicyRequest API operation.
+type AttachGroupPolicyRequester interface {
 	AttachGroupPolicyRequest(*iam.AttachGroupPolicyInput) iam.AttachGroupPolicyRequest
+}
 
+// AttachRolePolicyRequester provides the interface for the AttachRolePolicyRequest API operation.
+type AttachRolePolicyRequester interface {
 	AttachRolePolicyRequest(*iam.AttachRolePolicyInput) iam.AttachRolePolicyRequest
+}
 
+// AttachUserPolicyRequester provides the interface for the AttachUserPolicyRequest API operation.
+type AttachUserPolicyRequester interface {
 	AttachUserPolicyRequest(*iam.AttachUserPolicyInput) iam.AttachUserPolicyRequest
+}
 
+// ChangePasswordRequester provides the interface for the ChangePasswordRequest API operation.
+type ChangePasswordRequester interface {
 	ChangePasswordRequest(*iam.ChangePasswordInput) iam.ChangePasswordRequest
+}
 
+// CreateAccessKeyRequester provides the interface for the CreateAccessKeyRequest API operation.
+type CreateAccessKeyRequester interface {
 	CreateAccessKeyRequest(*iam.CreateAccessKeyInput) iam.CreateAccessKeyRequest
+}
 
+// CreateAccountAliasRequester provides the interface for the CreateAccountAliasRequest API operation.
+type CreateAccountAliasRequester interface {
 	CreateAccountAliasRequest(*iam.CreateAccountAliasInput) iam.CreateAccountAliasRequest
+}
 
+// CreateGroupRequester provides the interface for the CreateGroupRequest API operation.
+type CreateGroupRequester interface {
 	CreateGroupRequest(*iam.CreateGroupInput) iam.CreateGroupRequest
+}
 
+// CreateInstanceProfileRequester provides the interface for the CreateInstanceProfileRequest API operation.
+type CreateInstanceProfileRequester interface {
 	CreateInstanceProfileRequest(*iam.CreateInstanceProfileInput) iam.CreateInstanceProfileRequest
+}
 
+// CreateLoginProfileRequester provides the interface for the CreateLoginProfileRequest API operation.
+type CreateLoginProfileRequester interface {
 	CreateLoginProfileRequest(*iam.CreateLoginProfileInput) iam.CreateLoginProfileRequest
+}
 
+// CreateOpenIDConnectProviderRequester provides the interface for the CreateOpenIDConnectProviderRequest API operation.
+type CreateOpenIDConnectProviderRequester interface {
 	CreateOpenIDConnectProviderRequest(*iam.CreateOpenIDConnectProviderInput) iam.CreateOpenIDConnectProviderRequest
+}
 
+// CreatePolicyRequester provides the interface for the CreatePolicyRequest API operation.
+type CreatePolicyRequester interface {
 	CreatePolicyRequest(*iam.CreatePolicyInput) iam.CreatePolicyRequest
+}
 
+// CreatePolicyVersionRequester provides the interface for the CreatePolicyVersionRequest API operation.
+type CreatePolicyVersionRequester interface {
 	CreatePolicyVersionRequest(*iam.CreatePolicyVersionInput) iam.CreatePolicyVersionRequest
+}
 
+// CreateRoleRequester provides the interface for the CreateRoleRequest API operation.
+type CreateRoleRequester interface {
 	CreateRoleRequest(*iam.CreateRoleInput) iam.CreateRoleRequest
+}
 
+// CreateSAMLProviderRequester provides the interface for the CreateSAMLProviderRequest API operation.
+type CreateSAMLProviderRequester interface {
 	CreateSAMLProviderRequest(*iam.CreateSAMLProviderInput) iam.CreateSAMLProviderRequest
+}
 
+// CreateServiceLinkedRoleRequester provides the interface for the CreateServiceLinkedRoleRequest API operation.
+type CreateServiceLinkedRoleRequester interface {
 	CreateServiceLinkedRoleRequest(*iam.CreateServiceLinkedRoleInput) iam.CreateServiceLinkedRoleRequest
+}
 
+// CreateServiceSpecificCredentialRequester provides the interface for the CreateServiceSpecificCredentialRequest API operation.
+type CreateServiceSpecificCredentialRequester interface {
 	CreateServiceSpecificCredentialRequest(*iam.CreateServiceSpecificCredentialInput) iam.CreateServiceSpecificCredentialRequest
+}
 
+// CreateUserRequester provides the interface for the CreateUserRequest API operation.
+type CreateUserRequester interface {
 	CreateUserRequest(*iam.CreateUserInput) iam.CreateUserRequest
+}
 
+// CreateVirtualMFADeviceRequester provides the interface for the CreateVirtualMFADeviceRequest API operation.
+type CreateVirtualMFADeviceRequester interface {
 	CreateVirtualMFADeviceRequest(*iam.CreateVirtualMFADeviceInput) iam.CreateVirtualMFADeviceRequest
+}
 
+// DeactivateMFADeviceRequester provides the interface for the DeactivateMFADeviceRequest API operation.
+type DeactivateMFADeviceRequester interface {
 	DeactivateMFADeviceRequest(*iam.DeactivateMFADeviceInput) iam.DeactivateMFADeviceRequest
+}
 
+// DeleteAccessKeyRequester provides the interface for the DeleteAccessKeyRequest API operation.
+type DeleteAccessKeyRequester interface {
 	DeleteAccessKeyRequest(*iam.DeleteAccessKeyInput) iam.DeleteAccessKeyRequest
+}
 
+// DeleteAccountAliasRequester provides the interface for the DeleteAccountAliasRequest API operation.
+type DeleteAccountAliasRequester interface {
 	DeleteAccountAliasRequest(*iam.DeleteAccountAliasInput) iam.DeleteAccountAliasRequest
+}
 
+// DeleteAccountPasswordPolicyRequester provides the interface for the DeleteAccountPasswordPolicyRequest API operation.
+type DeleteAccountPasswordPolicyRequester interface {
 	DeleteAccountPasswordPolicyRequest(*iam.DeleteAccountPasswordPolicyInput) iam.DeleteAccountPasswordPolicyRequest
+}
 
+// DeleteGroupRequester provides the interface for the DeleteGroupRequest API operation.
+type DeleteGroupRequester interface {
 	DeleteGroupRequest(*iam.DeleteGroupInput) iam.DeleteGroupRequest
+}
 
+// DeleteGroupPolicyRequester provides the interface for the DeleteGroupPolicyRequest API operation.
+type DeleteGroupPolicyRequester interface {
 	DeleteGroupPolicyRequest(*iam.DeleteGroupPolicyInput) iam.DeleteGroupPolicyRequest
+}
 
+// DeleteInstanceProfileRequester provides the interface for the DeleteInstanceProfileRequest API operation.
+type DeleteInstanceProfileRequester interface {
 	DeleteInstanceProfileRequest(*iam.DeleteInstanceProfileInput) iam.DeleteInstanceProfileRequest
+}
 
+// DeleteLoginProfileRequester provides the interface for the DeleteLoginProfileRequest API operation.
+type DeleteLoginProfileRequester interface {
 	DeleteLoginProfileRequest(*iam.DeleteLoginProfileInput) iam.DeleteLoginProfileRequest
+}
 
+// DeleteOpenIDConnectProviderRequester provides the interface for the DeleteOpenIDConnectProviderRequest API operation.
+type DeleteOpenIDConnectProviderRequester interface {
 	DeleteOpenIDConnectProviderRequest(*iam.DeleteOpenIDConnectProviderInput) iam.DeleteOpenIDConnectProviderRequest
+}
 
+// DeletePolicyRequester provides the interface for the DeletePolicyRequest API operation.
+type DeletePolicyRequester interface {
 	DeletePolicyRequest(*iam.DeletePolicyInput) iam.DeletePolicyRequest
+}
 
+// DeletePolicyVersionRequester provides the interface for the DeletePolicyVersionRequest API operation.
+type DeletePolicyVersionRequester interface {
 	DeletePolicyVersionRequest(*iam.DeletePolicyVersionInput) iam.DeletePolicyVersionRequest
+}
 
+// DeleteRoleRequester provides the interface for the DeleteRoleRequest API operation.
+type DeleteRoleRequester interface {
 	DeleteRoleRequest(*iam.DeleteRoleInput) iam.DeleteRoleRequest
+}
 
+// DeleteRolePolicyRequester provides the interface for the DeleteRolePolicyRequest API operation.
+type DeleteRolePolicyRequester interface {
 	DeleteRolePolicyRequest(*iam.DeleteRolePolicyInput) iam.DeleteRolePolicyRequest
+}
 
+// DeleteSAMLProviderRequester provides the interface for the DeleteSAMLProviderRequest API operation.
+type DeleteSAMLProviderRequester interface {
 	DeleteSAMLProviderRequest(*iam.DeleteSAMLProviderInput) iam.DeleteSAMLProviderRequest
+}
 
+// DeleteSSHPublicKeyRequester provides the interface for the DeleteSSHPublicKeyRequest API operation.
+type DeleteSSHPublicKeyRequester interface {
 	DeleteSSHPublicKeyRequest(*iam.DeleteSSHPublicKeyInput) iam.DeleteSSHPublicKeyRequest
+}
 
+// DeleteServerCertificateRequester provides the interface for the DeleteServerCertificateRequest API operation.
+type DeleteServerCertificateRequester interface {
 	DeleteServerCertificateRequest(*iam.DeleteServerCertificateInput) iam.DeleteServerCertificateRequest
+}
 
+// DeleteServiceLinkedRoleRequester provides the interface for the DeleteServiceLinkedRoleRequest API operation.
+type DeleteServiceLinkedRoleRequester interface {
 	DeleteServiceLinkedRoleRequest(*iam.DeleteServiceLinkedRoleInput) iam.DeleteServiceLinkedRoleRequest
+}
 
+// DeleteServiceSpecificCredentialRequester provides the interface for the DeleteServiceSpecificCredentialRequest API operation.
+type DeleteServiceSpecificCredentialRequester interface {
 	DeleteServiceSpecificCredentialRequest(*iam.DeleteServiceSpecificCredentialInput) iam.DeleteServiceSpecificCredentialRequest
+}
 
+// DeleteSigningCertificateRequester provides the interface for the DeleteSigningCertificateRequest API operation.
+type DeleteSigningCertificateRequester interface {
 	DeleteSigningCertificateRequest(*iam.DeleteSigningCertificateInput) iam.DeleteSigningCertificateRequest
+}
 
+// DeleteUserRequester provides the interface for the DeleteUserRequest API operation.
+type DeleteUserRequester interface {
 	DeleteUserRequest(*iam.DeleteUserInput) iam.DeleteUserRequest
+}
 
+// DeleteUserPolicyRequester provides the interface for the DeleteUserPolicyRequest API operation.
+type DeleteUserPolicyRequester interface {
 	DeleteUserPolicyRequest(*iam.DeleteUserPolicyInput) iam.DeleteUserPolicyRequest
+}
 
+// DeleteVirtualMFADeviceRequester provides the interface for the DeleteVirtualMFADeviceRequest API operation.
+type DeleteVirtualMFADeviceRequester interface {
 	DeleteVirtualMFADeviceRequest(*iam.DeleteVirtualMFADeviceInput) iam.DeleteVirtualMFADeviceRequest
+}
 
+// DetachGroupPolicyRequester provides the interface for the DetachGroupPolicyRequest API operation.
+type DetachGroupPolicyRequester interface {
 	DetachGroupPolicyRequest(*iam.DetachGroupPolicyInput) iam.DetachGroupPolicyRequest
+}
 
+// DetachRolePolicyRequester provides the interface for the DetachRolePolicyRequest API operation.
+type DetachRolePolicyRequester interface {
 	DetachRolePolicyRequest(*iam.DetachRolePolicyInput) iam.DetachRolePolicyRequest
+}
 
+// DetachUserPolicyRequester provides the interface for the DetachUserPolicyRequest API operation.
+type DetachUserPolicyRequester interface {
 	DetachUserPolicyRequest(*iam.DetachUserPolicyInput) iam.DetachUserPolicyRequest
+}
 
+// EnableMFADeviceRequester provides the interface for the EnableMFADeviceRequest API operation.
+type EnableMFADeviceRequester interface {
 	EnableMFADeviceRequest(*iam.EnableMFADeviceInput) iam.EnableMFADeviceRequest
+}
 
+// GenerateCredentialReportRequester provides the interface for the GenerateCredentialReportRequest API operation.
+type GenerateCredentialReportRequester interface {
 	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
+}
 
+// GetAccessKeyLastUsedRequester provides the interface for the GetAccessKeyLastUsedRequest API operation.
+type GetAccessKeyLastUsedRequester interface {
 	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
+}
 
+// GetAccountAuthorizationDetailsRequester provides the interface for the GetAccountAuthorizationDetailsRequest API operation.
+type GetAccountAuthorizationDetailsRequester interface {
 	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
+}
 
-	GetAccountAuthorizationDetailsPages(*iam.GetAccountAuthorizationDetailsInput, func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool) error
-	GetAccountAuthorizationDetailsPagesWithContext(aws.Context, *iam.GetAccountAuthorizationDetailsInput, func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool, ...aws.Option) error
-
+// GetAccountPasswordPolicyRequester provides the interface for the GetAccountPasswordPolicyRequest API operation.
+type GetAccountPasswordPolicyRequester interface {
 	GetAccountPasswordPolicyRequest(*iam.GetAccountPasswordPolicyInput) iam.GetAccountPasswordPolicyRequest
+}
 
+// GetAccountSummaryRequester provides the interface for the GetAccountSummaryRequest API operation.
+type GetAccountSummaryRequester interface {
 	GetAccountSummaryRequest(*iam.GetAccountSummaryInput) iam.GetAccountSummaryRequest
+}
 
+// GetContextKeysForCustomPolicyRequester provides the interface for the GetContextKeysForCustomPolicyRequest API operation.
+type GetContextKeysForCustomPolicyRequester interface {
 	GetContextKeysForCustomPolicyRequest(*iam.GetContextKeysForCustomPolicyInput) iam.GetContextKeysForCustomPolicyRequest
+}
 
+// GetContextKeysForPrincipalPolicyRequester provides the interface for the GetContextKeysForPrincipalPolicyRequest API operation.
+type GetContextKeysForPrincipalPolicyRequester interface {
 	GetContextKeysForPrincipalPolicyRequest(*iam.GetContextKeysForPrincipalPolicyInput) iam.GetContextKeysForPrincipalPolicyRequest
+}
 
+// GetCredentialReportRequester provides the interface for the GetCredentialReportRequest API operation.
+type GetCredentialReportRequester interface {
 	GetCredentialReportRequest(*iam.GetCredentialReportInput) iam.GetCredentialReportRequest
+}
 
+// GetGroupRequester provides the interface for the GetGroupRequest API operation.
+type GetGroupRequester interface {
 	GetGroupRequest(*iam.GetGroupInput) iam.GetGroupRequest
+}
 
-	GetGroupPages(*iam.GetGroupInput, func(*iam.GetGroupOutput, bool) bool) error
-	GetGroupPagesWithContext(aws.Context, *iam.GetGroupInput, func(*iam.GetGroupOutput, bool) bool, ...aws.Option) error
-
+// GetGroupPolicyRequester provides the interface for the GetGroupPolicyRequest API operation.
+type GetGroupPolicyRequester interface {
 	GetGroupPolicyRequest(*iam.GetGroupPolicyInput) iam.GetGroupPolicyRequest
+}
 
+// GetInstanceProfileRequester provides the interface for the GetInstanceProfileRequest API operation.
+type GetInstanceProfileRequester interface {
 	GetInstanceProfileRequest(*iam.GetInstanceProfileInput) iam.GetInstanceProfileRequest
+}
 
+// GetLoginProfileRequester provides the interface for the GetLoginProfileRequest API operation.
+type GetLoginProfileRequester interface {
 	GetLoginProfileRequest(*iam.GetLoginProfileInput) iam.GetLoginProfileRequest
+}
 
+// GetOpenIDConnectProviderRequester provides the interface for the GetOpenIDConnectProviderRequest API operation.
+type GetOpenIDConnectProviderRequester interface {
 	GetOpenIDConnectProviderRequest(*iam.GetOpenIDConnectProviderInput) iam.GetOpenIDConnectProviderRequest
+}
 
+// GetPolicyRequester provides the interface for the GetPolicyRequest API operation.
+type GetPolicyRequester interface {
 	GetPolicyRequest(*iam.GetPolicyInput) iam.GetPolicyRequest
+}
 
+// GetPolicyVersionRequester provides the interface for the GetPolicyVersionRequest API operation.
+type GetPolicyVersionRequester interface {
 	GetPolicyVersionRequest(*iam.GetPolicyVersionInput) iam.GetPolicyVersionRequest
+}
 
+// GetRoleRequester provides the interface for the GetRoleRequest API operation.
+type GetRoleRequester interface {
 	GetRoleRequest(*iam.GetRoleInput) iam.GetRoleRequest
+}
 
+// GetRolePolicyRequester provides the interface for the GetRolePolicyRequest API operation.
+type GetRolePolicyRequester interface {
 	GetRolePolicyRequest(*iam.GetRolePolicyInput) iam.GetRolePolicyRequest
+}
 
+// GetSAMLProviderRequester provides the interface for the GetSAMLProviderRequest API operation.
+type GetSAMLProviderRequester interface {
 	GetSAMLProviderRequest(*iam.GetSAMLProviderInput) iam.GetSAMLProviderRequest
+}
 
+// GetSSHPublicKeyRequester provides the interface for the GetSSHPublicKeyRequest API operation.
+type GetSSHPublicKeyRequester interface {
 	GetSSHPublicKeyRequest(*iam.GetSSHPublicKeyInput) iam.GetSSHPublicKeyRequest
+}
 
+// GetServerCertificateRequester provides the interface for the GetServerCertificateRequest API operation.
+type GetServerCertificateRequester interface {
 	GetServerCertificateRequest(*iam.GetServerCertificateInput) iam.GetServerCertificateRequest
+}
 
+// GetServiceLinkedRoleDeletionStatusRequester provides the interface for the GetServiceLinkedRoleDeletionStatusRequest API operation.
+type GetServiceLinkedRoleDeletionStatusRequester interface {
 	GetServiceLinkedRoleDeletionStatusRequest(*iam.GetServiceLinkedRoleDeletionStatusInput) iam.GetServiceLinkedRoleDeletionStatusRequest
+}
 
+// GetUserRequester provides the interface for the GetUserRequest API operation.
+type GetUserRequester interface {
 	GetUserRequest(*iam.GetUserInput) iam.GetUserRequest
+}
 
+// GetUserPolicyRequester provides the interface for the GetUserPolicyRequest API operation.
+type GetUserPolicyRequester interface {
 	GetUserPolicyRequest(*iam.GetUserPolicyInput) iam.GetUserPolicyRequest
+}
 
+// ListAccessKeysRequester provides the interface for the ListAccessKeysRequest API operation.
+type ListAccessKeysRequester interface {
 	ListAccessKeysRequest(*iam.ListAccessKeysInput) iam.ListAccessKeysRequest
+}
 
-	ListAccessKeysPages(*iam.ListAccessKeysInput, func(*iam.ListAccessKeysOutput, bool) bool) error
-	ListAccessKeysPagesWithContext(aws.Context, *iam.ListAccessKeysInput, func(*iam.ListAccessKeysOutput, bool) bool, ...aws.Option) error
-
+// ListAccountAliasesRequester provides the interface for the ListAccountAliasesRequest API operation.
+type ListAccountAliasesRequester interface {
 	ListAccountAliasesRequest(*iam.ListAccountAliasesInput) iam.ListAccountAliasesRequest
+}
 
-	ListAccountAliasesPages(*iam.ListAccountAliasesInput, func(*iam.ListAccountAliasesOutput, bool) bool) error
-	ListAccountAliasesPagesWithContext(aws.Context, *iam.ListAccountAliasesInput, func(*iam.ListAccountAliasesOutput, bool) bool, ...aws.Option) error
-
+// ListAttachedGroupPoliciesRequester provides the interface for the ListAttachedGroupPoliciesRequest API operation.
+type ListAttachedGroupPoliciesRequester interface {
 	ListAttachedGroupPoliciesRequest(*iam.ListAttachedGroupPoliciesInput) iam.ListAttachedGroupPoliciesRequest
+}
 
-	ListAttachedGroupPoliciesPages(*iam.ListAttachedGroupPoliciesInput, func(*iam.ListAttachedGroupPoliciesOutput, bool) bool) error
-	ListAttachedGroupPoliciesPagesWithContext(aws.Context, *iam.ListAttachedGroupPoliciesInput, func(*iam.ListAttachedGroupPoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListAttachedRolePoliciesRequester provides the interface for the ListAttachedRolePoliciesRequest API operation.
+type ListAttachedRolePoliciesRequester interface {
 	ListAttachedRolePoliciesRequest(*iam.ListAttachedRolePoliciesInput) iam.ListAttachedRolePoliciesRequest
+}
 
-	ListAttachedRolePoliciesPages(*iam.ListAttachedRolePoliciesInput, func(*iam.ListAttachedRolePoliciesOutput, bool) bool) error
-	ListAttachedRolePoliciesPagesWithContext(aws.Context, *iam.ListAttachedRolePoliciesInput, func(*iam.ListAttachedRolePoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListAttachedUserPoliciesRequester provides the interface for the ListAttachedUserPoliciesRequest API operation.
+type ListAttachedUserPoliciesRequester interface {
 	ListAttachedUserPoliciesRequest(*iam.ListAttachedUserPoliciesInput) iam.ListAttachedUserPoliciesRequest
+}
 
-	ListAttachedUserPoliciesPages(*iam.ListAttachedUserPoliciesInput, func(*iam.ListAttachedUserPoliciesOutput, bool) bool) error
-	ListAttachedUserPoliciesPagesWithContext(aws.Context, *iam.ListAttachedUserPoliciesInput, func(*iam.ListAttachedUserPoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListEntitiesForPolicyRequester provides the interface for the ListEntitiesForPolicyRequest API operation.
+type ListEntitiesForPolicyRequester interface {
 	ListEntitiesForPolicyRequest(*iam.ListEntitiesForPolicyInput) iam.ListEntitiesForPolicyRequest
+}
 
-	ListEntitiesForPolicyPages(*iam.ListEntitiesForPolicyInput, func(*iam.ListEntitiesForPolicyOutput, bool) bool) error
-	ListEntitiesForPolicyPagesWithContext(aws.Context, *iam.ListEntitiesForPolicyInput, func(*iam.ListEntitiesForPolicyOutput, bool) bool, ...aws.Option) error
-
+// ListGroupPoliciesRequester provides the interface for the ListGroupPoliciesRequest API operation.
+type ListGroupPoliciesRequester interface {
 	ListGroupPoliciesRequest(*iam.ListGroupPoliciesInput) iam.ListGroupPoliciesRequest
+}
 
-	ListGroupPoliciesPages(*iam.ListGroupPoliciesInput, func(*iam.ListGroupPoliciesOutput, bool) bool) error
-	ListGroupPoliciesPagesWithContext(aws.Context, *iam.ListGroupPoliciesInput, func(*iam.ListGroupPoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListGroupsRequester provides the interface for the ListGroupsRequest API operation.
+type ListGroupsRequester interface {
 	ListGroupsRequest(*iam.ListGroupsInput) iam.ListGroupsRequest
+}
 
-	ListGroupsPages(*iam.ListGroupsInput, func(*iam.ListGroupsOutput, bool) bool) error
-	ListGroupsPagesWithContext(aws.Context, *iam.ListGroupsInput, func(*iam.ListGroupsOutput, bool) bool, ...aws.Option) error
-
+// ListGroupsForUserRequester provides the interface for the ListGroupsForUserRequest API operation.
+type ListGroupsForUserRequester interface {
 	ListGroupsForUserRequest(*iam.ListGroupsForUserInput) iam.ListGroupsForUserRequest
+}
 
-	ListGroupsForUserPages(*iam.ListGroupsForUserInput, func(*iam.ListGroupsForUserOutput, bool) bool) error
-	ListGroupsForUserPagesWithContext(aws.Context, *iam.ListGroupsForUserInput, func(*iam.ListGroupsForUserOutput, bool) bool, ...aws.Option) error
-
+// ListInstanceProfilesRequester provides the interface for the ListInstanceProfilesRequest API operation.
+type ListInstanceProfilesRequester interface {
 	ListInstanceProfilesRequest(*iam.ListInstanceProfilesInput) iam.ListInstanceProfilesRequest
+}
 
-	ListInstanceProfilesPages(*iam.ListInstanceProfilesInput, func(*iam.ListInstanceProfilesOutput, bool) bool) error
-	ListInstanceProfilesPagesWithContext(aws.Context, *iam.ListInstanceProfilesInput, func(*iam.ListInstanceProfilesOutput, bool) bool, ...aws.Option) error
-
+// ListInstanceProfilesForRoleRequester provides the interface for the ListInstanceProfilesForRoleRequest API operation.
+type ListInstanceProfilesForRoleRequester interface {
 	ListInstanceProfilesForRoleRequest(*iam.ListInstanceProfilesForRoleInput) iam.ListInstanceProfilesForRoleRequest
+}
 
-	ListInstanceProfilesForRolePages(*iam.ListInstanceProfilesForRoleInput, func(*iam.ListInstanceProfilesForRoleOutput, bool) bool) error
-	ListInstanceProfilesForRolePagesWithContext(aws.Context, *iam.ListInstanceProfilesForRoleInput, func(*iam.ListInstanceProfilesForRoleOutput, bool) bool, ...aws.Option) error
-
+// ListMFADevicesRequester provides the interface for the ListMFADevicesRequest API operation.
+type ListMFADevicesRequester interface {
 	ListMFADevicesRequest(*iam.ListMFADevicesInput) iam.ListMFADevicesRequest
+}
 
-	ListMFADevicesPages(*iam.ListMFADevicesInput, func(*iam.ListMFADevicesOutput, bool) bool) error
-	ListMFADevicesPagesWithContext(aws.Context, *iam.ListMFADevicesInput, func(*iam.ListMFADevicesOutput, bool) bool, ...aws.Option) error
-
+// ListOpenIDConnectProvidersRequester provides the interface for the ListOpenIDConnectProvidersRequest API operation.
+type ListOpenIDConnectProvidersRequester interface {
 	ListOpenIDConnectProvidersRequest(*iam.ListOpenIDConnectProvidersInput) iam.ListOpenIDConnectProvidersRequest
+}
 
+// ListPoliciesRequester provides the interface for the ListPoliciesRequest API operation.
+type ListPoliciesRequester interface {
 	ListPoliciesRequest(*iam.ListPoliciesInput) iam.ListPoliciesRequest
+}
 
-	ListPoliciesPages(*iam.ListPoliciesInput, func(*iam.ListPoliciesOutput, bool) bool) error
-	ListPoliciesPagesWithContext(aws.Context, *iam.ListPoliciesInput, func(*iam.ListPoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListPolicyVersionsRequester provides the interface for the ListPolicyVersionsRequest API operation.
+type ListPolicyVersionsRequester interface {
 	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
+}
 
-	ListPolicyVersionsPages(*iam.ListPolicyVersionsInput, func(*iam.ListPolicyVersionsOutput, bool) bool) error
-	ListPolicyVersionsPagesWithContext(aws.Context, *iam.ListPolicyVersionsInput, func(*iam.ListPolicyVersionsOutput, bool) bool, ...aws.Option) error
-
+// ListRolePoliciesRequester provides the interface for the ListRolePoliciesRequest API operation.
+type ListRolePoliciesRequester interface {
 	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) iam.ListRolePoliciesRequest
+}
 
-	ListRolePoliciesPages(*iam.ListRolePoliciesInput, func(*iam.ListRolePoliciesOutput, bool) bool) error
-	ListRolePoliciesPagesWithContext(aws.Context, *iam.ListRolePoliciesInput, func(*iam.ListRolePoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListRolesRequester provides the interface for the ListRolesRequest API operation.
+type ListRolesRequester interface {
 	ListRolesRequest(*iam.ListRolesInput) iam.ListRolesRequest
+}
 
-	ListRolesPages(*iam.ListRolesInput, func(*iam.ListRolesOutput, bool) bool) error
-	ListRolesPagesWithContext(aws.Context, *iam.ListRolesInput, func(*iam.ListRolesOutput, bool) bool, ...aws.Option) error
-
+// ListSAMLProvidersRequester provides the interface for the ListSAMLProvidersRequest API operation.
+type ListSAMLProvidersRequester interface {
 	ListSAMLProvidersRequest(*iam.ListSAMLProvidersInput) iam.ListSAMLProvidersRequest
+}
 
+// ListSSHPublicKeysRequester provides the interface for the ListSSHPublicKeysRequest API operation.
+type ListSSHPublicKeysRequester interface {
 	ListSSHPublicKeysRequest(*iam.ListSSHPublicKeysInput) iam.ListSSHPublicKeysRequest
+}
 
-	ListSSHPublicKeysPages(*iam.ListSSHPublicKeysInput, func(*iam.ListSSHPublicKeysOutput, bool) bool) error
-	ListSSHPublicKeysPagesWithContext(aws.Context, *iam.ListSSHPublicKeysInput, func(*iam.ListSSHPublicKeysOutput, bool) bool, ...aws.Option) error
-
+// ListServerCertificatesRequester provides the interface for the ListServerCertificatesRequest API operation.
+type ListServerCertificatesRequester interface {
 	ListServerCertificatesRequest(*iam.ListServerCertificatesInput) iam.ListServerCertificatesRequest
+}
 
-	ListServerCertificatesPages(*iam.ListServerCertificatesInput, func(*iam.ListServerCertificatesOutput, bool) bool) error
-	ListServerCertificatesPagesWithContext(aws.Context, *iam.ListServerCertificatesInput, func(*iam.ListServerCertificatesOutput, bool) bool, ...aws.Option) error
-
+// ListServiceSpecificCredentialsRequester provides the interface for the ListServiceSpecificCredentialsRequest API operation.
+type ListServiceSpecificCredentialsRequester interface {
 	ListServiceSpecificCredentialsRequest(*iam.ListServiceSpecificCredentialsInput) iam.ListServiceSpecificCredentialsRequest
+}
 
+// ListSigningCertificatesRequester provides the interface for the ListSigningCertificatesRequest API operation.
+type ListSigningCertificatesRequester interface {
 	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
+}
 
-	ListSigningCertificatesPages(*iam.ListSigningCertificatesInput, func(*iam.ListSigningCertificatesOutput, bool) bool) error
-	ListSigningCertificatesPagesWithContext(aws.Context, *iam.ListSigningCertificatesInput, func(*iam.ListSigningCertificatesOutput, bool) bool, ...aws.Option) error
-
+// ListUserPoliciesRequester provides the interface for the ListUserPoliciesRequest API operation.
+type ListUserPoliciesRequester interface {
 	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) iam.ListUserPoliciesRequest
+}
 
-	ListUserPoliciesPages(*iam.ListUserPoliciesInput, func(*iam.ListUserPoliciesOutput, bool) bool) error
-	ListUserPoliciesPagesWithContext(aws.Context, *iam.ListUserPoliciesInput, func(*iam.ListUserPoliciesOutput, bool) bool, ...aws.Option) error
-
+// ListUsersRequester provides the interface for the ListUsersRequest API operation.
+type ListUsersRequester interface {
 	ListUsersRequest(*iam.ListUsersInput) iam.ListUsersRequest
+}
 
-	ListUsersPages(*iam.ListUsersInput, func(*iam.ListUsersOutput, bool) bool) error
-	ListUsersPagesWithContext(aws.Context, *iam.ListUsersInput, func(*iam.ListUsersOutput, bool) bool, ...aws.Option) error
-
+// ListVirtualMFADevicesRequester provides the interface for the ListVirtualMFADevicesRequest API operation.
+type ListVirtualMFADevicesRequester interface {
 	ListVirtualMFADevicesRequest(*iam.ListVirtualMFADevicesInput) iam.ListVirtualMFADevicesRequest
+}
 
-	ListVirtualMFADevicesPages(*iam.ListVirtualMFADevicesInput, func(*iam.ListVirtualMFADevicesOutput, bool) bool) error
-	ListVirtualMFADevicesPagesWithContext(aws.Context, *iam.ListVirtualMFADevicesInput, func(*iam.ListVirtualMFADevicesOutput, bool) bool, ...aws.Option) error
-
+// PutGroupPolicyRequester provides the interface for the PutGroupPolicyRequest API operation.
+type PutGroupPolicyRequester interface {
 	PutGroupPolicyRequest(*iam.PutGroupPolicyInput) iam.PutGroupPolicyRequest
+}
 
+// PutRolePolicyRequester provides the interface for the PutRolePolicyRequest API operation.
+type PutRolePolicyRequester interface {
 	PutRolePolicyRequest(*iam.PutRolePolicyInput) iam.PutRolePolicyRequest
+}
 
+// PutUserPolicyRequester provides the interface for the PutUserPolicyRequest API operation.
+type PutUserPolicyRequester interface {
 	PutUserPolicyRequest(*iam.PutUserPolicyInput) iam.PutUserPolicyRequest
+}
 
+// RemoveClientIDFromOpenIDConnectProviderRequester provides the interface for the RemoveClientIDFromOpenIDConnectProviderRequest API operation.
+type RemoveClientIDFromOpenIDConnectProviderRequester interface {
 	RemoveClientIDFromOpenIDConnectProviderRequest(*iam.RemoveClientIDFromOpenIDConnectProviderInput) iam.RemoveClientIDFromOpenIDConnectProviderRequest
+}
 
+// RemoveRoleFromInstanceProfileRequester provides the interface for the RemoveRoleFromInstanceProfileRequest API operation.
+type RemoveRoleFromInstanceProfileRequester interface {
 	RemoveRoleFromInstanceProfileRequest(*iam.RemoveRoleFromInstanceProfileInput) iam.RemoveRoleFromInstanceProfileRequest
+}
 
+// RemoveUserFromGroupRequester provides the interface for the RemoveUserFromGroupRequest API operation.
+type RemoveUserFromGroupRequester interface {
 	RemoveUserFromGroupRequest(*iam.RemoveUserFromGroupInput) iam.RemoveUserFromGroupRequest
+}
 
+// ResetServiceSpecificCredentialRequester provides the interface for the ResetServiceSpecificCredentialRequest API operation.
+type ResetServiceSpecificCredentialRequester interface {
 	ResetServiceSpecificCredentialRequest(*iam.ResetServiceSpecificCredentialInput) iam.ResetServiceSpecificCredentialRequest
+}
 
+// ResyncMFADeviceRequester provides the interface for the ResyncMFADeviceRequest API operation.
+type ResyncMFADeviceRequester interface {
 	ResyncMFADeviceRequest(*iam.ResyncMFADeviceInput) iam.ResyncMFADeviceRequest
+}
 
+// SetDefaultPolicyVersionRequester provides the interface for the SetDefaultPolicyVersionRequest API operation.
+type SetDefaultPolicyVersionRequester interface {
 	SetDefaultPolicyVersionRequest(*iam.SetDefaultPolicyVersionInput) iam.SetDefaultPolicyVersionRequest
+}
 
+// SimulateCustomPolicyRequester provides the interface for the SimulateCustomPolicyRequest API operation.
+type SimulateCustomPolicyRequester interface {
 	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
+}
 
-	SimulateCustomPolicyPages(*iam.SimulateCustomPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool) error
-	SimulateCustomPolicyPagesWithContext(aws.Context, *iam.SimulateCustomPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool, ...aws.Option) error
-
+// SimulatePrincipalPolicyRequester provides the interface for the SimulatePrincipalPolicyRequest API operation.
+type SimulatePrincipalPolicyRequester interface {
 	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
+}
 
-	SimulatePrincipalPolicyPages(*iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool) error
-	SimulatePrincipalPolicyPagesWithContext(aws.Context, *iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool, ...aws.Option) error
-
+// UpdateAccessKeyRequester provides the interface for the UpdateAccessKeyRequest API operation.
+type UpdateAccessKeyRequester interface {
 	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
+}
 
+// UpdateAccountPasswordPolicyRequester provides the interface for the UpdateAccountPasswordPolicyRequest API operation.
+type UpdateAccountPasswordPolicyRequester interface {
 	UpdateAccountPasswordPolicyRequest(*iam.UpdateAccountPasswordPolicyInput) iam.UpdateAccountPasswordPolicyRequest
+}
 
+// UpdateAssumeRolePolicyRequester provides the interface for the UpdateAssumeRolePolicyRequest API operation.
+type UpdateAssumeRolePolicyRequester interface {
 	UpdateAssumeRolePolicyRequest(*iam.UpdateAssumeRolePolicyInput) iam.UpdateAssumeRolePolicyRequest
+}
 
+// UpdateGroupRequester provides the interface for the UpdateGroupRequest API operation.
+type UpdateGroupRequester interface {
 	UpdateGroupRequest(*iam.UpdateGroupInput) iam.UpdateGroupRequest
+}
 
+// UpdateLoginProfileRequester provides the interface for the UpdateLoginProfileRequest API operation.
+type UpdateLoginProfileRequester interface {
 	UpdateLoginProfileRequest(*iam.UpdateLoginProfileInput) iam.UpdateLoginProfileRequest
+}
 
+// UpdateOpenIDConnectProviderThumbprintRequester provides the interface for the UpdateOpenIDConnectProviderThumbprintRequest API operation.
+type UpdateOpenIDConnectProviderThumbprintRequester interface {
 	UpdateOpenIDConnectProviderThumbprintRequest(*iam.UpdateOpenIDConnectProviderThumbprintInput) iam.UpdateOpenIDConnectProviderThumbprintRequest
+}
 
+// UpdateRoleDescriptionRequester provides the interface for the UpdateRoleDescriptionRequest API operation.
+type UpdateRoleDescriptionRequester interface {
 	UpdateRoleDescriptionRequest(*iam.UpdateRoleDescriptionInput) iam.UpdateRoleDescriptionRequest
+}
 
+// UpdateSAMLProviderRequester provides the interface for the UpdateSAMLProviderRequest API operation.
+type UpdateSAMLProviderRequester interface {
 	UpdateSAMLProviderRequest(*iam.UpdateSAMLProviderInput) iam.UpdateSAMLProviderRequest
+}
 
+// UpdateSSHPublicKeyRequester provides the interface for the UpdateSSHPublicKeyRequest API operation.
+type UpdateSSHPublicKeyRequester interface {
 	UpdateSSHPublicKeyRequest(*iam.UpdateSSHPublicKeyInput) iam.UpdateSSHPublicKeyRequest
+}
 
+// UpdateServerCertificateRequester provides the interface for the UpdateServerCertificateRequest API operation.
+type UpdateServerCertificateRequester interface {
 	UpdateServerCertificateRequest(*iam.UpdateServerCertificateInput) iam.UpdateServerCertificateRequest
+}
 
+// UpdateServiceSpecificCredentialRequester provides the interface for the UpdateServiceSpecificCredentialRequest API operation.
+type UpdateServiceSpecificCredentialRequester interface {
 	UpdateServiceSpecificCredentialRequest(*iam.UpdateServiceSpecificCredentialInput) iam.UpdateServiceSpecificCredentialRequest
+}
 
+// UpdateSigningCertificateRequester provides the interface for the UpdateSigningCertificateRequest API operation.
+type UpdateSigningCertificateRequester interface {
 	UpdateSigningCertificateRequest(*iam.UpdateSigningCertificateInput) iam.UpdateSigningCertificateRequest
+}
 
+// UpdateUserRequester provides the interface for the UpdateUserRequest API operation.
+type UpdateUserRequester interface {
 	UpdateUserRequest(*iam.UpdateUserInput) iam.UpdateUserRequest
+}
 
+// UploadSSHPublicKeyRequester provides the interface for the UploadSSHPublicKeyRequest API operation.
+type UploadSSHPublicKeyRequester interface {
 	UploadSSHPublicKeyRequest(*iam.UploadSSHPublicKeyInput) iam.UploadSSHPublicKeyRequest
+}
 
+// UploadServerCertificateRequester provides the interface for the UploadServerCertificateRequest API operation.
+type UploadServerCertificateRequester interface {
 	UploadServerCertificateRequest(*iam.UploadServerCertificateInput) iam.UploadServerCertificateRequest
+}
 
+// UploadSigningCertificateRequester provides the interface for the UploadSigningCertificateRequest API operation.
+type UploadSigningCertificateRequester interface {
 	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
+}
 
+// InstanceProfileExistsWaiter provides the interface for the WaitUntilInstanceProfileExists waiter.
+type InstanceProfileExistsWaiter interface {
 	WaitUntilInstanceProfileExists(*iam.GetInstanceProfileInput) error
 	WaitUntilInstanceProfileExistsWithContext(aws.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
+}
 
+// UserExistsWaiter provides the interface for the WaitUntilUserExists waiter.
+type UserExistsWaiter interface {
 	WaitUntilUserExists(*iam.GetUserInput) error
 	WaitUntilUserExistsWithContext(aws.Context, *iam.GetUserInput, ...aws.WaiterOption) error
 }
-
-var _ IAMAPI = (*iam.IAM)(nil)

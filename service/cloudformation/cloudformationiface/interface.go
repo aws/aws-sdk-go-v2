@@ -13,168 +13,232 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 )
 
-// CloudFormationAPI provides an interface to enable mocking the
-// cloudformation.CloudFormation service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CloudFormation.
-//    func myFunc(svc cloudformationiface.CloudFormationAPI) bool {
-//        // Make svc.CancelUpdateStack request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cloudformation.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudFormationClient struct {
-//        cloudformationiface.CloudFormationAPI
-//    }
-//    func (m *mockCloudFormationClient) CancelUpdateStack(input *cloudformation.CancelUpdateStackInput) (*cloudformation.CancelUpdateStackOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCloudFormationClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CloudFormationAPI interface {
+// CancelUpdateStackRequester provides the interface for the CancelUpdateStackRequest API operation.
+type CancelUpdateStackRequester interface {
 	CancelUpdateStackRequest(*cloudformation.CancelUpdateStackInput) cloudformation.CancelUpdateStackRequest
+}
 
+// ContinueUpdateRollbackRequester provides the interface for the ContinueUpdateRollbackRequest API operation.
+type ContinueUpdateRollbackRequester interface {
 	ContinueUpdateRollbackRequest(*cloudformation.ContinueUpdateRollbackInput) cloudformation.ContinueUpdateRollbackRequest
+}
 
+// CreateChangeSetRequester provides the interface for the CreateChangeSetRequest API operation.
+type CreateChangeSetRequester interface {
 	CreateChangeSetRequest(*cloudformation.CreateChangeSetInput) cloudformation.CreateChangeSetRequest
+}
 
+// CreateStackRequester provides the interface for the CreateStackRequest API operation.
+type CreateStackRequester interface {
 	CreateStackRequest(*cloudformation.CreateStackInput) cloudformation.CreateStackRequest
+}
 
+// CreateStackInstancesRequester provides the interface for the CreateStackInstancesRequest API operation.
+type CreateStackInstancesRequester interface {
 	CreateStackInstancesRequest(*cloudformation.CreateStackInstancesInput) cloudformation.CreateStackInstancesRequest
+}
 
+// CreateStackSetRequester provides the interface for the CreateStackSetRequest API operation.
+type CreateStackSetRequester interface {
 	CreateStackSetRequest(*cloudformation.CreateStackSetInput) cloudformation.CreateStackSetRequest
+}
 
+// DeleteChangeSetRequester provides the interface for the DeleteChangeSetRequest API operation.
+type DeleteChangeSetRequester interface {
 	DeleteChangeSetRequest(*cloudformation.DeleteChangeSetInput) cloudformation.DeleteChangeSetRequest
+}
 
+// DeleteStackRequester provides the interface for the DeleteStackRequest API operation.
+type DeleteStackRequester interface {
 	DeleteStackRequest(*cloudformation.DeleteStackInput) cloudformation.DeleteStackRequest
+}
 
+// DeleteStackInstancesRequester provides the interface for the DeleteStackInstancesRequest API operation.
+type DeleteStackInstancesRequester interface {
 	DeleteStackInstancesRequest(*cloudformation.DeleteStackInstancesInput) cloudformation.DeleteStackInstancesRequest
+}
 
+// DeleteStackSetRequester provides the interface for the DeleteStackSetRequest API operation.
+type DeleteStackSetRequester interface {
 	DeleteStackSetRequest(*cloudformation.DeleteStackSetInput) cloudformation.DeleteStackSetRequest
+}
 
+// DescribeAccountLimitsRequester provides the interface for the DescribeAccountLimitsRequest API operation.
+type DescribeAccountLimitsRequester interface {
 	DescribeAccountLimitsRequest(*cloudformation.DescribeAccountLimitsInput) cloudformation.DescribeAccountLimitsRequest
+}
 
+// DescribeChangeSetRequester provides the interface for the DescribeChangeSetRequest API operation.
+type DescribeChangeSetRequester interface {
 	DescribeChangeSetRequest(*cloudformation.DescribeChangeSetInput) cloudformation.DescribeChangeSetRequest
+}
 
+// DescribeStackEventsRequester provides the interface for the DescribeStackEventsRequest API operation.
+type DescribeStackEventsRequester interface {
 	DescribeStackEventsRequest(*cloudformation.DescribeStackEventsInput) cloudformation.DescribeStackEventsRequest
+}
 
-	DescribeStackEventsPages(*cloudformation.DescribeStackEventsInput, func(*cloudformation.DescribeStackEventsOutput, bool) bool) error
-	DescribeStackEventsPagesWithContext(aws.Context, *cloudformation.DescribeStackEventsInput, func(*cloudformation.DescribeStackEventsOutput, bool) bool, ...aws.Option) error
-
+// DescribeStackInstanceRequester provides the interface for the DescribeStackInstanceRequest API operation.
+type DescribeStackInstanceRequester interface {
 	DescribeStackInstanceRequest(*cloudformation.DescribeStackInstanceInput) cloudformation.DescribeStackInstanceRequest
+}
 
+// DescribeStackResourceRequester provides the interface for the DescribeStackResourceRequest API operation.
+type DescribeStackResourceRequester interface {
 	DescribeStackResourceRequest(*cloudformation.DescribeStackResourceInput) cloudformation.DescribeStackResourceRequest
+}
 
+// DescribeStackResourcesRequester provides the interface for the DescribeStackResourcesRequest API operation.
+type DescribeStackResourcesRequester interface {
 	DescribeStackResourcesRequest(*cloudformation.DescribeStackResourcesInput) cloudformation.DescribeStackResourcesRequest
+}
 
+// DescribeStackSetRequester provides the interface for the DescribeStackSetRequest API operation.
+type DescribeStackSetRequester interface {
 	DescribeStackSetRequest(*cloudformation.DescribeStackSetInput) cloudformation.DescribeStackSetRequest
+}
 
+// DescribeStackSetOperationRequester provides the interface for the DescribeStackSetOperationRequest API operation.
+type DescribeStackSetOperationRequester interface {
 	DescribeStackSetOperationRequest(*cloudformation.DescribeStackSetOperationInput) cloudformation.DescribeStackSetOperationRequest
+}
 
+// DescribeStacksRequester provides the interface for the DescribeStacksRequest API operation.
+type DescribeStacksRequester interface {
 	DescribeStacksRequest(*cloudformation.DescribeStacksInput) cloudformation.DescribeStacksRequest
+}
 
-	DescribeStacksPages(*cloudformation.DescribeStacksInput, func(*cloudformation.DescribeStacksOutput, bool) bool) error
-	DescribeStacksPagesWithContext(aws.Context, *cloudformation.DescribeStacksInput, func(*cloudformation.DescribeStacksOutput, bool) bool, ...aws.Option) error
-
+// EstimateTemplateCostRequester provides the interface for the EstimateTemplateCostRequest API operation.
+type EstimateTemplateCostRequester interface {
 	EstimateTemplateCostRequest(*cloudformation.EstimateTemplateCostInput) cloudformation.EstimateTemplateCostRequest
+}
 
+// ExecuteChangeSetRequester provides the interface for the ExecuteChangeSetRequest API operation.
+type ExecuteChangeSetRequester interface {
 	ExecuteChangeSetRequest(*cloudformation.ExecuteChangeSetInput) cloudformation.ExecuteChangeSetRequest
+}
 
+// GetStackPolicyRequester provides the interface for the GetStackPolicyRequest API operation.
+type GetStackPolicyRequester interface {
 	GetStackPolicyRequest(*cloudformation.GetStackPolicyInput) cloudformation.GetStackPolicyRequest
+}
 
+// GetTemplateRequester provides the interface for the GetTemplateRequest API operation.
+type GetTemplateRequester interface {
 	GetTemplateRequest(*cloudformation.GetTemplateInput) cloudformation.GetTemplateRequest
+}
 
+// GetTemplateSummaryRequester provides the interface for the GetTemplateSummaryRequest API operation.
+type GetTemplateSummaryRequester interface {
 	GetTemplateSummaryRequest(*cloudformation.GetTemplateSummaryInput) cloudformation.GetTemplateSummaryRequest
+}
 
+// ListChangeSetsRequester provides the interface for the ListChangeSetsRequest API operation.
+type ListChangeSetsRequester interface {
 	ListChangeSetsRequest(*cloudformation.ListChangeSetsInput) cloudformation.ListChangeSetsRequest
+}
 
+// ListExportsRequester provides the interface for the ListExportsRequest API operation.
+type ListExportsRequester interface {
 	ListExportsRequest(*cloudformation.ListExportsInput) cloudformation.ListExportsRequest
+}
 
-	ListExportsPages(*cloudformation.ListExportsInput, func(*cloudformation.ListExportsOutput, bool) bool) error
-	ListExportsPagesWithContext(aws.Context, *cloudformation.ListExportsInput, func(*cloudformation.ListExportsOutput, bool) bool, ...aws.Option) error
-
+// ListImportsRequester provides the interface for the ListImportsRequest API operation.
+type ListImportsRequester interface {
 	ListImportsRequest(*cloudformation.ListImportsInput) cloudformation.ListImportsRequest
+}
 
-	ListImportsPages(*cloudformation.ListImportsInput, func(*cloudformation.ListImportsOutput, bool) bool) error
-	ListImportsPagesWithContext(aws.Context, *cloudformation.ListImportsInput, func(*cloudformation.ListImportsOutput, bool) bool, ...aws.Option) error
-
+// ListStackInstancesRequester provides the interface for the ListStackInstancesRequest API operation.
+type ListStackInstancesRequester interface {
 	ListStackInstancesRequest(*cloudformation.ListStackInstancesInput) cloudformation.ListStackInstancesRequest
+}
 
+// ListStackResourcesRequester provides the interface for the ListStackResourcesRequest API operation.
+type ListStackResourcesRequester interface {
 	ListStackResourcesRequest(*cloudformation.ListStackResourcesInput) cloudformation.ListStackResourcesRequest
+}
 
-	ListStackResourcesPages(*cloudformation.ListStackResourcesInput, func(*cloudformation.ListStackResourcesOutput, bool) bool) error
-	ListStackResourcesPagesWithContext(aws.Context, *cloudformation.ListStackResourcesInput, func(*cloudformation.ListStackResourcesOutput, bool) bool, ...aws.Option) error
-
+// ListStackSetOperationResultsRequester provides the interface for the ListStackSetOperationResultsRequest API operation.
+type ListStackSetOperationResultsRequester interface {
 	ListStackSetOperationResultsRequest(*cloudformation.ListStackSetOperationResultsInput) cloudformation.ListStackSetOperationResultsRequest
+}
 
+// ListStackSetOperationsRequester provides the interface for the ListStackSetOperationsRequest API operation.
+type ListStackSetOperationsRequester interface {
 	ListStackSetOperationsRequest(*cloudformation.ListStackSetOperationsInput) cloudformation.ListStackSetOperationsRequest
+}
 
+// ListStackSetsRequester provides the interface for the ListStackSetsRequest API operation.
+type ListStackSetsRequester interface {
 	ListStackSetsRequest(*cloudformation.ListStackSetsInput) cloudformation.ListStackSetsRequest
+}
 
+// ListStacksRequester provides the interface for the ListStacksRequest API operation.
+type ListStacksRequester interface {
 	ListStacksRequest(*cloudformation.ListStacksInput) cloudformation.ListStacksRequest
+}
 
-	ListStacksPages(*cloudformation.ListStacksInput, func(*cloudformation.ListStacksOutput, bool) bool) error
-	ListStacksPagesWithContext(aws.Context, *cloudformation.ListStacksInput, func(*cloudformation.ListStacksOutput, bool) bool, ...aws.Option) error
-
+// SetStackPolicyRequester provides the interface for the SetStackPolicyRequest API operation.
+type SetStackPolicyRequester interface {
 	SetStackPolicyRequest(*cloudformation.SetStackPolicyInput) cloudformation.SetStackPolicyRequest
+}
 
+// SignalResourceRequester provides the interface for the SignalResourceRequest API operation.
+type SignalResourceRequester interface {
 	SignalResourceRequest(*cloudformation.SignalResourceInput) cloudformation.SignalResourceRequest
+}
 
+// StopStackSetOperationRequester provides the interface for the StopStackSetOperationRequest API operation.
+type StopStackSetOperationRequester interface {
 	StopStackSetOperationRequest(*cloudformation.StopStackSetOperationInput) cloudformation.StopStackSetOperationRequest
+}
 
+// UpdateStackRequester provides the interface for the UpdateStackRequest API operation.
+type UpdateStackRequester interface {
 	UpdateStackRequest(*cloudformation.UpdateStackInput) cloudformation.UpdateStackRequest
+}
 
+// UpdateStackSetRequester provides the interface for the UpdateStackSetRequest API operation.
+type UpdateStackSetRequester interface {
 	UpdateStackSetRequest(*cloudformation.UpdateStackSetInput) cloudformation.UpdateStackSetRequest
+}
 
+// UpdateTerminationProtectionRequester provides the interface for the UpdateTerminationProtectionRequest API operation.
+type UpdateTerminationProtectionRequester interface {
 	UpdateTerminationProtectionRequest(*cloudformation.UpdateTerminationProtectionInput) cloudformation.UpdateTerminationProtectionRequest
+}
 
+// ValidateTemplateRequester provides the interface for the ValidateTemplateRequest API operation.
+type ValidateTemplateRequester interface {
 	ValidateTemplateRequest(*cloudformation.ValidateTemplateInput) cloudformation.ValidateTemplateRequest
+}
 
+// ChangeSetCreateCompleteWaiter provides the interface for the WaitUntilChangeSetCreateComplete waiter.
+type ChangeSetCreateCompleteWaiter interface {
 	WaitUntilChangeSetCreateComplete(*cloudformation.DescribeChangeSetInput) error
 	WaitUntilChangeSetCreateCompleteWithContext(aws.Context, *cloudformation.DescribeChangeSetInput, ...aws.WaiterOption) error
+}
 
+// StackCreateCompleteWaiter provides the interface for the WaitUntilStackCreateComplete waiter.
+type StackCreateCompleteWaiter interface {
 	WaitUntilStackCreateComplete(*cloudformation.DescribeStacksInput) error
 	WaitUntilStackCreateCompleteWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+}
 
+// StackDeleteCompleteWaiter provides the interface for the WaitUntilStackDeleteComplete waiter.
+type StackDeleteCompleteWaiter interface {
 	WaitUntilStackDeleteComplete(*cloudformation.DescribeStacksInput) error
 	WaitUntilStackDeleteCompleteWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+}
 
+// StackExistsWaiter provides the interface for the WaitUntilStackExists waiter.
+type StackExistsWaiter interface {
 	WaitUntilStackExists(*cloudformation.DescribeStacksInput) error
 	WaitUntilStackExistsWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+}
 
+// StackUpdateCompleteWaiter provides the interface for the WaitUntilStackUpdateComplete waiter.
+type StackUpdateCompleteWaiter interface {
 	WaitUntilStackUpdateComplete(*cloudformation.DescribeStacksInput) error
 	WaitUntilStackUpdateCompleteWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 }
-
-var _ CloudFormationAPI = (*cloudformation.CloudFormation)(nil)

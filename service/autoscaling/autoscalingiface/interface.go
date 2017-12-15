@@ -13,192 +13,280 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 )
 
-// AutoScalingAPI provides an interface to enable mocking the
-// autoscaling.AutoScaling service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Auto Scaling.
-//    func myFunc(svc autoscalingiface.AutoScalingAPI) bool {
-//        // Make svc.AttachInstances request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := autoscaling.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAutoScalingClient struct {
-//        autoscalingiface.AutoScalingAPI
-//    }
-//    func (m *mockAutoScalingClient) AttachInstances(input *autoscaling.AttachInstancesInput) (*autoscaling.AttachInstancesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockAutoScalingClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type AutoScalingAPI interface {
+// AttachInstancesRequester provides the interface for the AttachInstancesRequest API operation.
+type AttachInstancesRequester interface {
 	AttachInstancesRequest(*autoscaling.AttachInstancesInput) autoscaling.AttachInstancesRequest
+}
 
+// AttachLoadBalancerTargetGroupsRequester provides the interface for the AttachLoadBalancerTargetGroupsRequest API operation.
+type AttachLoadBalancerTargetGroupsRequester interface {
 	AttachLoadBalancerTargetGroupsRequest(*autoscaling.AttachLoadBalancerTargetGroupsInput) autoscaling.AttachLoadBalancerTargetGroupsRequest
+}
 
+// AttachLoadBalancersRequester provides the interface for the AttachLoadBalancersRequest API operation.
+type AttachLoadBalancersRequester interface {
 	AttachLoadBalancersRequest(*autoscaling.AttachLoadBalancersInput) autoscaling.AttachLoadBalancersRequest
+}
 
+// CompleteLifecycleActionRequester provides the interface for the CompleteLifecycleActionRequest API operation.
+type CompleteLifecycleActionRequester interface {
 	CompleteLifecycleActionRequest(*autoscaling.CompleteLifecycleActionInput) autoscaling.CompleteLifecycleActionRequest
+}
 
+// CreateAutoScalingGroupRequester provides the interface for the CreateAutoScalingGroupRequest API operation.
+type CreateAutoScalingGroupRequester interface {
 	CreateAutoScalingGroupRequest(*autoscaling.CreateAutoScalingGroupInput) autoscaling.CreateAutoScalingGroupRequest
+}
 
+// CreateLaunchConfigurationRequester provides the interface for the CreateLaunchConfigurationRequest API operation.
+type CreateLaunchConfigurationRequester interface {
 	CreateLaunchConfigurationRequest(*autoscaling.CreateLaunchConfigurationInput) autoscaling.CreateLaunchConfigurationRequest
+}
 
+// CreateOrUpdateTagsRequester provides the interface for the CreateOrUpdateTagsRequest API operation.
+type CreateOrUpdateTagsRequester interface {
 	CreateOrUpdateTagsRequest(*autoscaling.CreateOrUpdateTagsInput) autoscaling.CreateOrUpdateTagsRequest
+}
 
+// DeleteAutoScalingGroupRequester provides the interface for the DeleteAutoScalingGroupRequest API operation.
+type DeleteAutoScalingGroupRequester interface {
 	DeleteAutoScalingGroupRequest(*autoscaling.DeleteAutoScalingGroupInput) autoscaling.DeleteAutoScalingGroupRequest
+}
 
+// DeleteLaunchConfigurationRequester provides the interface for the DeleteLaunchConfigurationRequest API operation.
+type DeleteLaunchConfigurationRequester interface {
 	DeleteLaunchConfigurationRequest(*autoscaling.DeleteLaunchConfigurationInput) autoscaling.DeleteLaunchConfigurationRequest
+}
 
+// DeleteLifecycleHookRequester provides the interface for the DeleteLifecycleHookRequest API operation.
+type DeleteLifecycleHookRequester interface {
 	DeleteLifecycleHookRequest(*autoscaling.DeleteLifecycleHookInput) autoscaling.DeleteLifecycleHookRequest
+}
 
+// DeleteNotificationConfigurationRequester provides the interface for the DeleteNotificationConfigurationRequest API operation.
+type DeleteNotificationConfigurationRequester interface {
 	DeleteNotificationConfigurationRequest(*autoscaling.DeleteNotificationConfigurationInput) autoscaling.DeleteNotificationConfigurationRequest
+}
 
+// DeletePolicyRequester provides the interface for the DeletePolicyRequest API operation.
+type DeletePolicyRequester interface {
 	DeletePolicyRequest(*autoscaling.DeletePolicyInput) autoscaling.DeletePolicyRequest
+}
 
+// DeleteScheduledActionRequester provides the interface for the DeleteScheduledActionRequest API operation.
+type DeleteScheduledActionRequester interface {
 	DeleteScheduledActionRequest(*autoscaling.DeleteScheduledActionInput) autoscaling.DeleteScheduledActionRequest
+}
 
+// DeleteTagsRequester provides the interface for the DeleteTagsRequest API operation.
+type DeleteTagsRequester interface {
 	DeleteTagsRequest(*autoscaling.DeleteTagsInput) autoscaling.DeleteTagsRequest
+}
 
+// DescribeAccountLimitsRequester provides the interface for the DescribeAccountLimitsRequest API operation.
+type DescribeAccountLimitsRequester interface {
 	DescribeAccountLimitsRequest(*autoscaling.DescribeAccountLimitsInput) autoscaling.DescribeAccountLimitsRequest
+}
 
+// DescribeAdjustmentTypesRequester provides the interface for the DescribeAdjustmentTypesRequest API operation.
+type DescribeAdjustmentTypesRequester interface {
 	DescribeAdjustmentTypesRequest(*autoscaling.DescribeAdjustmentTypesInput) autoscaling.DescribeAdjustmentTypesRequest
+}
 
+// DescribeAutoScalingGroupsRequester provides the interface for the DescribeAutoScalingGroupsRequest API operation.
+type DescribeAutoScalingGroupsRequester interface {
 	DescribeAutoScalingGroupsRequest(*autoscaling.DescribeAutoScalingGroupsInput) autoscaling.DescribeAutoScalingGroupsRequest
+}
 
-	DescribeAutoScalingGroupsPages(*autoscaling.DescribeAutoScalingGroupsInput, func(*autoscaling.DescribeAutoScalingGroupsOutput, bool) bool) error
-	DescribeAutoScalingGroupsPagesWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, func(*autoscaling.DescribeAutoScalingGroupsOutput, bool) bool, ...aws.Option) error
-
+// DescribeAutoScalingInstancesRequester provides the interface for the DescribeAutoScalingInstancesRequest API operation.
+type DescribeAutoScalingInstancesRequester interface {
 	DescribeAutoScalingInstancesRequest(*autoscaling.DescribeAutoScalingInstancesInput) autoscaling.DescribeAutoScalingInstancesRequest
+}
 
-	DescribeAutoScalingInstancesPages(*autoscaling.DescribeAutoScalingInstancesInput, func(*autoscaling.DescribeAutoScalingInstancesOutput, bool) bool) error
-	DescribeAutoScalingInstancesPagesWithContext(aws.Context, *autoscaling.DescribeAutoScalingInstancesInput, func(*autoscaling.DescribeAutoScalingInstancesOutput, bool) bool, ...aws.Option) error
-
+// DescribeAutoScalingNotificationTypesRequester provides the interface for the DescribeAutoScalingNotificationTypesRequest API operation.
+type DescribeAutoScalingNotificationTypesRequester interface {
 	DescribeAutoScalingNotificationTypesRequest(*autoscaling.DescribeAutoScalingNotificationTypesInput) autoscaling.DescribeAutoScalingNotificationTypesRequest
+}
 
+// DescribeLaunchConfigurationsRequester provides the interface for the DescribeLaunchConfigurationsRequest API operation.
+type DescribeLaunchConfigurationsRequester interface {
 	DescribeLaunchConfigurationsRequest(*autoscaling.DescribeLaunchConfigurationsInput) autoscaling.DescribeLaunchConfigurationsRequest
+}
 
-	DescribeLaunchConfigurationsPages(*autoscaling.DescribeLaunchConfigurationsInput, func(*autoscaling.DescribeLaunchConfigurationsOutput, bool) bool) error
-	DescribeLaunchConfigurationsPagesWithContext(aws.Context, *autoscaling.DescribeLaunchConfigurationsInput, func(*autoscaling.DescribeLaunchConfigurationsOutput, bool) bool, ...aws.Option) error
-
+// DescribeLifecycleHookTypesRequester provides the interface for the DescribeLifecycleHookTypesRequest API operation.
+type DescribeLifecycleHookTypesRequester interface {
 	DescribeLifecycleHookTypesRequest(*autoscaling.DescribeLifecycleHookTypesInput) autoscaling.DescribeLifecycleHookTypesRequest
+}
 
+// DescribeLifecycleHooksRequester provides the interface for the DescribeLifecycleHooksRequest API operation.
+type DescribeLifecycleHooksRequester interface {
 	DescribeLifecycleHooksRequest(*autoscaling.DescribeLifecycleHooksInput) autoscaling.DescribeLifecycleHooksRequest
+}
 
+// DescribeLoadBalancerTargetGroupsRequester provides the interface for the DescribeLoadBalancerTargetGroupsRequest API operation.
+type DescribeLoadBalancerTargetGroupsRequester interface {
 	DescribeLoadBalancerTargetGroupsRequest(*autoscaling.DescribeLoadBalancerTargetGroupsInput) autoscaling.DescribeLoadBalancerTargetGroupsRequest
+}
 
+// DescribeLoadBalancersRequester provides the interface for the DescribeLoadBalancersRequest API operation.
+type DescribeLoadBalancersRequester interface {
 	DescribeLoadBalancersRequest(*autoscaling.DescribeLoadBalancersInput) autoscaling.DescribeLoadBalancersRequest
+}
 
+// DescribeMetricCollectionTypesRequester provides the interface for the DescribeMetricCollectionTypesRequest API operation.
+type DescribeMetricCollectionTypesRequester interface {
 	DescribeMetricCollectionTypesRequest(*autoscaling.DescribeMetricCollectionTypesInput) autoscaling.DescribeMetricCollectionTypesRequest
+}
 
+// DescribeNotificationConfigurationsRequester provides the interface for the DescribeNotificationConfigurationsRequest API operation.
+type DescribeNotificationConfigurationsRequester interface {
 	DescribeNotificationConfigurationsRequest(*autoscaling.DescribeNotificationConfigurationsInput) autoscaling.DescribeNotificationConfigurationsRequest
+}
 
-	DescribeNotificationConfigurationsPages(*autoscaling.DescribeNotificationConfigurationsInput, func(*autoscaling.DescribeNotificationConfigurationsOutput, bool) bool) error
-	DescribeNotificationConfigurationsPagesWithContext(aws.Context, *autoscaling.DescribeNotificationConfigurationsInput, func(*autoscaling.DescribeNotificationConfigurationsOutput, bool) bool, ...aws.Option) error
-
+// DescribePoliciesRequester provides the interface for the DescribePoliciesRequest API operation.
+type DescribePoliciesRequester interface {
 	DescribePoliciesRequest(*autoscaling.DescribePoliciesInput) autoscaling.DescribePoliciesRequest
+}
 
-	DescribePoliciesPages(*autoscaling.DescribePoliciesInput, func(*autoscaling.DescribePoliciesOutput, bool) bool) error
-	DescribePoliciesPagesWithContext(aws.Context, *autoscaling.DescribePoliciesInput, func(*autoscaling.DescribePoliciesOutput, bool) bool, ...aws.Option) error
-
+// DescribeScalingActivitiesRequester provides the interface for the DescribeScalingActivitiesRequest API operation.
+type DescribeScalingActivitiesRequester interface {
 	DescribeScalingActivitiesRequest(*autoscaling.DescribeScalingActivitiesInput) autoscaling.DescribeScalingActivitiesRequest
+}
 
-	DescribeScalingActivitiesPages(*autoscaling.DescribeScalingActivitiesInput, func(*autoscaling.DescribeScalingActivitiesOutput, bool) bool) error
-	DescribeScalingActivitiesPagesWithContext(aws.Context, *autoscaling.DescribeScalingActivitiesInput, func(*autoscaling.DescribeScalingActivitiesOutput, bool) bool, ...aws.Option) error
-
+// DescribeScalingProcessTypesRequester provides the interface for the DescribeScalingProcessTypesRequest API operation.
+type DescribeScalingProcessTypesRequester interface {
 	DescribeScalingProcessTypesRequest(*autoscaling.DescribeScalingProcessTypesInput) autoscaling.DescribeScalingProcessTypesRequest
+}
 
+// DescribeScheduledActionsRequester provides the interface for the DescribeScheduledActionsRequest API operation.
+type DescribeScheduledActionsRequester interface {
 	DescribeScheduledActionsRequest(*autoscaling.DescribeScheduledActionsInput) autoscaling.DescribeScheduledActionsRequest
+}
 
-	DescribeScheduledActionsPages(*autoscaling.DescribeScheduledActionsInput, func(*autoscaling.DescribeScheduledActionsOutput, bool) bool) error
-	DescribeScheduledActionsPagesWithContext(aws.Context, *autoscaling.DescribeScheduledActionsInput, func(*autoscaling.DescribeScheduledActionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
 	DescribeTagsRequest(*autoscaling.DescribeTagsInput) autoscaling.DescribeTagsRequest
+}
 
-	DescribeTagsPages(*autoscaling.DescribeTagsInput, func(*autoscaling.DescribeTagsOutput, bool) bool) error
-	DescribeTagsPagesWithContext(aws.Context, *autoscaling.DescribeTagsInput, func(*autoscaling.DescribeTagsOutput, bool) bool, ...aws.Option) error
-
+// DescribeTerminationPolicyTypesRequester provides the interface for the DescribeTerminationPolicyTypesRequest API operation.
+type DescribeTerminationPolicyTypesRequester interface {
 	DescribeTerminationPolicyTypesRequest(*autoscaling.DescribeTerminationPolicyTypesInput) autoscaling.DescribeTerminationPolicyTypesRequest
+}
 
+// DetachInstancesRequester provides the interface for the DetachInstancesRequest API operation.
+type DetachInstancesRequester interface {
 	DetachInstancesRequest(*autoscaling.DetachInstancesInput) autoscaling.DetachInstancesRequest
+}
 
+// DetachLoadBalancerTargetGroupsRequester provides the interface for the DetachLoadBalancerTargetGroupsRequest API operation.
+type DetachLoadBalancerTargetGroupsRequester interface {
 	DetachLoadBalancerTargetGroupsRequest(*autoscaling.DetachLoadBalancerTargetGroupsInput) autoscaling.DetachLoadBalancerTargetGroupsRequest
+}
 
+// DetachLoadBalancersRequester provides the interface for the DetachLoadBalancersRequest API operation.
+type DetachLoadBalancersRequester interface {
 	DetachLoadBalancersRequest(*autoscaling.DetachLoadBalancersInput) autoscaling.DetachLoadBalancersRequest
+}
 
+// DisableMetricsCollectionRequester provides the interface for the DisableMetricsCollectionRequest API operation.
+type DisableMetricsCollectionRequester interface {
 	DisableMetricsCollectionRequest(*autoscaling.DisableMetricsCollectionInput) autoscaling.DisableMetricsCollectionRequest
+}
 
+// EnableMetricsCollectionRequester provides the interface for the EnableMetricsCollectionRequest API operation.
+type EnableMetricsCollectionRequester interface {
 	EnableMetricsCollectionRequest(*autoscaling.EnableMetricsCollectionInput) autoscaling.EnableMetricsCollectionRequest
+}
 
+// EnterStandbyRequester provides the interface for the EnterStandbyRequest API operation.
+type EnterStandbyRequester interface {
 	EnterStandbyRequest(*autoscaling.EnterStandbyInput) autoscaling.EnterStandbyRequest
+}
 
+// ExecutePolicyRequester provides the interface for the ExecutePolicyRequest API operation.
+type ExecutePolicyRequester interface {
 	ExecutePolicyRequest(*autoscaling.ExecutePolicyInput) autoscaling.ExecutePolicyRequest
+}
 
+// ExitStandbyRequester provides the interface for the ExitStandbyRequest API operation.
+type ExitStandbyRequester interface {
 	ExitStandbyRequest(*autoscaling.ExitStandbyInput) autoscaling.ExitStandbyRequest
+}
 
+// PutLifecycleHookRequester provides the interface for the PutLifecycleHookRequest API operation.
+type PutLifecycleHookRequester interface {
 	PutLifecycleHookRequest(*autoscaling.PutLifecycleHookInput) autoscaling.PutLifecycleHookRequest
+}
 
+// PutNotificationConfigurationRequester provides the interface for the PutNotificationConfigurationRequest API operation.
+type PutNotificationConfigurationRequester interface {
 	PutNotificationConfigurationRequest(*autoscaling.PutNotificationConfigurationInput) autoscaling.PutNotificationConfigurationRequest
+}
 
+// PutScalingPolicyRequester provides the interface for the PutScalingPolicyRequest API operation.
+type PutScalingPolicyRequester interface {
 	PutScalingPolicyRequest(*autoscaling.PutScalingPolicyInput) autoscaling.PutScalingPolicyRequest
+}
 
+// PutScheduledUpdateGroupActionRequester provides the interface for the PutScheduledUpdateGroupActionRequest API operation.
+type PutScheduledUpdateGroupActionRequester interface {
 	PutScheduledUpdateGroupActionRequest(*autoscaling.PutScheduledUpdateGroupActionInput) autoscaling.PutScheduledUpdateGroupActionRequest
+}
 
+// RecordLifecycleActionHeartbeatRequester provides the interface for the RecordLifecycleActionHeartbeatRequest API operation.
+type RecordLifecycleActionHeartbeatRequester interface {
 	RecordLifecycleActionHeartbeatRequest(*autoscaling.RecordLifecycleActionHeartbeatInput) autoscaling.RecordLifecycleActionHeartbeatRequest
+}
 
+// ResumeProcessesRequester provides the interface for the ResumeProcessesRequest API operation.
+type ResumeProcessesRequester interface {
 	ResumeProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.ResumeProcessesRequest
+}
 
+// SetDesiredCapacityRequester provides the interface for the SetDesiredCapacityRequest API operation.
+type SetDesiredCapacityRequester interface {
 	SetDesiredCapacityRequest(*autoscaling.SetDesiredCapacityInput) autoscaling.SetDesiredCapacityRequest
+}
 
+// SetInstanceHealthRequester provides the interface for the SetInstanceHealthRequest API operation.
+type SetInstanceHealthRequester interface {
 	SetInstanceHealthRequest(*autoscaling.SetInstanceHealthInput) autoscaling.SetInstanceHealthRequest
+}
 
+// SetInstanceProtectionRequester provides the interface for the SetInstanceProtectionRequest API operation.
+type SetInstanceProtectionRequester interface {
 	SetInstanceProtectionRequest(*autoscaling.SetInstanceProtectionInput) autoscaling.SetInstanceProtectionRequest
+}
 
+// SuspendProcessesRequester provides the interface for the SuspendProcessesRequest API operation.
+type SuspendProcessesRequester interface {
 	SuspendProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.SuspendProcessesRequest
+}
 
+// TerminateInstanceInAutoScalingGroupRequester provides the interface for the TerminateInstanceInAutoScalingGroupRequest API operation.
+type TerminateInstanceInAutoScalingGroupRequester interface {
 	TerminateInstanceInAutoScalingGroupRequest(*autoscaling.TerminateInstanceInAutoScalingGroupInput) autoscaling.TerminateInstanceInAutoScalingGroupRequest
+}
 
+// UpdateAutoScalingGroupRequester provides the interface for the UpdateAutoScalingGroupRequest API operation.
+type UpdateAutoScalingGroupRequester interface {
 	UpdateAutoScalingGroupRequest(*autoscaling.UpdateAutoScalingGroupInput) autoscaling.UpdateAutoScalingGroupRequest
+}
 
+// GroupExistsWaiter provides the interface for the WaitUntilGroupExists waiter.
+type GroupExistsWaiter interface {
 	WaitUntilGroupExists(*autoscaling.DescribeAutoScalingGroupsInput) error
 	WaitUntilGroupExistsWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+}
 
+// GroupInServiceWaiter provides the interface for the WaitUntilGroupInService waiter.
+type GroupInServiceWaiter interface {
 	WaitUntilGroupInService(*autoscaling.DescribeAutoScalingGroupsInput) error
 	WaitUntilGroupInServiceWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+}
 
+// GroupNotExistsWaiter provides the interface for the WaitUntilGroupNotExists waiter.
+type GroupNotExistsWaiter interface {
 	WaitUntilGroupNotExists(*autoscaling.DescribeAutoScalingGroupsInput) error
 	WaitUntilGroupNotExistsWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 }
-
-var _ AutoScalingAPI = (*autoscaling.AutoScaling)(nil)

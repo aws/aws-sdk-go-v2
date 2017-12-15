@@ -12,67 +12,32 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/polly"
 )
 
-// PollyAPI provides an interface to enable mocking the
-// polly.Polly service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Polly.
-//    func myFunc(svc pollyiface.PollyAPI) bool {
-//        // Make svc.DeleteLexicon request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := polly.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPollyClient struct {
-//        pollyiface.PollyAPI
-//    }
-//    func (m *mockPollyClient) DeleteLexicon(input *polly.DeleteLexiconInput) (*polly.DeleteLexiconOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockPollyClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type PollyAPI interface {
+// DeleteLexiconRequester provides the interface for the DeleteLexiconRequest API operation.
+type DeleteLexiconRequester interface {
 	DeleteLexiconRequest(*polly.DeleteLexiconInput) polly.DeleteLexiconRequest
-
-	DescribeVoicesRequest(*polly.DescribeVoicesInput) polly.DescribeVoicesRequest
-
-	GetLexiconRequest(*polly.GetLexiconInput) polly.GetLexiconRequest
-
-	ListLexiconsRequest(*polly.ListLexiconsInput) polly.ListLexiconsRequest
-
-	PutLexiconRequest(*polly.PutLexiconInput) polly.PutLexiconRequest
-
-	SynthesizeSpeechRequest(*polly.SynthesizeSpeechInput) polly.SynthesizeSpeechRequest
 }
 
-var _ PollyAPI = (*polly.Polly)(nil)
+// DescribeVoicesRequester provides the interface for the DescribeVoicesRequest API operation.
+type DescribeVoicesRequester interface {
+	DescribeVoicesRequest(*polly.DescribeVoicesInput) polly.DescribeVoicesRequest
+}
+
+// GetLexiconRequester provides the interface for the GetLexiconRequest API operation.
+type GetLexiconRequester interface {
+	GetLexiconRequest(*polly.GetLexiconInput) polly.GetLexiconRequest
+}
+
+// ListLexiconsRequester provides the interface for the ListLexiconsRequest API operation.
+type ListLexiconsRequester interface {
+	ListLexiconsRequest(*polly.ListLexiconsInput) polly.ListLexiconsRequest
+}
+
+// PutLexiconRequester provides the interface for the PutLexiconRequest API operation.
+type PutLexiconRequester interface {
+	PutLexiconRequest(*polly.PutLexiconInput) polly.PutLexiconRequest
+}
+
+// SynthesizeSpeechRequester provides the interface for the SynthesizeSpeechRequest API operation.
+type SynthesizeSpeechRequester interface {
+	SynthesizeSpeechRequest(*polly.SynthesizeSpeechInput) polly.SynthesizeSpeechRequest
+}

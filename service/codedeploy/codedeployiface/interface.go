@@ -13,152 +13,198 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
 )
 
-// CodeDeployAPI provides an interface to enable mocking the
-// codedeploy.CodeDeploy service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS CodeDeploy.
-//    func myFunc(svc codedeployiface.CodeDeployAPI) bool {
-//        // Make svc.AddTagsToOnPremisesInstances request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := codedeploy.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodeDeployClient struct {
-//        codedeployiface.CodeDeployAPI
-//    }
-//    func (m *mockCodeDeployClient) AddTagsToOnPremisesInstances(input *codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCodeDeployClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CodeDeployAPI interface {
+// AddTagsToOnPremisesInstancesRequester provides the interface for the AddTagsToOnPremisesInstancesRequest API operation.
+type AddTagsToOnPremisesInstancesRequester interface {
 	AddTagsToOnPremisesInstancesRequest(*codedeploy.AddTagsToOnPremisesInstancesInput) codedeploy.AddTagsToOnPremisesInstancesRequest
+}
 
+// BatchGetApplicationRevisionsRequester provides the interface for the BatchGetApplicationRevisionsRequest API operation.
+type BatchGetApplicationRevisionsRequester interface {
 	BatchGetApplicationRevisionsRequest(*codedeploy.BatchGetApplicationRevisionsInput) codedeploy.BatchGetApplicationRevisionsRequest
+}
 
+// BatchGetApplicationsRequester provides the interface for the BatchGetApplicationsRequest API operation.
+type BatchGetApplicationsRequester interface {
 	BatchGetApplicationsRequest(*codedeploy.BatchGetApplicationsInput) codedeploy.BatchGetApplicationsRequest
+}
 
+// BatchGetDeploymentGroupsRequester provides the interface for the BatchGetDeploymentGroupsRequest API operation.
+type BatchGetDeploymentGroupsRequester interface {
 	BatchGetDeploymentGroupsRequest(*codedeploy.BatchGetDeploymentGroupsInput) codedeploy.BatchGetDeploymentGroupsRequest
+}
 
+// BatchGetDeploymentInstancesRequester provides the interface for the BatchGetDeploymentInstancesRequest API operation.
+type BatchGetDeploymentInstancesRequester interface {
 	BatchGetDeploymentInstancesRequest(*codedeploy.BatchGetDeploymentInstancesInput) codedeploy.BatchGetDeploymentInstancesRequest
+}
 
+// BatchGetDeploymentsRequester provides the interface for the BatchGetDeploymentsRequest API operation.
+type BatchGetDeploymentsRequester interface {
 	BatchGetDeploymentsRequest(*codedeploy.BatchGetDeploymentsInput) codedeploy.BatchGetDeploymentsRequest
+}
 
+// BatchGetOnPremisesInstancesRequester provides the interface for the BatchGetOnPremisesInstancesRequest API operation.
+type BatchGetOnPremisesInstancesRequester interface {
 	BatchGetOnPremisesInstancesRequest(*codedeploy.BatchGetOnPremisesInstancesInput) codedeploy.BatchGetOnPremisesInstancesRequest
+}
 
+// ContinueDeploymentRequester provides the interface for the ContinueDeploymentRequest API operation.
+type ContinueDeploymentRequester interface {
 	ContinueDeploymentRequest(*codedeploy.ContinueDeploymentInput) codedeploy.ContinueDeploymentRequest
+}
 
+// CreateApplicationRequester provides the interface for the CreateApplicationRequest API operation.
+type CreateApplicationRequester interface {
 	CreateApplicationRequest(*codedeploy.CreateApplicationInput) codedeploy.CreateApplicationRequest
+}
 
+// CreateDeploymentRequester provides the interface for the CreateDeploymentRequest API operation.
+type CreateDeploymentRequester interface {
 	CreateDeploymentRequest(*codedeploy.CreateDeploymentInput) codedeploy.CreateDeploymentRequest
+}
 
+// CreateDeploymentConfigRequester provides the interface for the CreateDeploymentConfigRequest API operation.
+type CreateDeploymentConfigRequester interface {
 	CreateDeploymentConfigRequest(*codedeploy.CreateDeploymentConfigInput) codedeploy.CreateDeploymentConfigRequest
+}
 
+// CreateDeploymentGroupRequester provides the interface for the CreateDeploymentGroupRequest API operation.
+type CreateDeploymentGroupRequester interface {
 	CreateDeploymentGroupRequest(*codedeploy.CreateDeploymentGroupInput) codedeploy.CreateDeploymentGroupRequest
+}
 
+// DeleteApplicationRequester provides the interface for the DeleteApplicationRequest API operation.
+type DeleteApplicationRequester interface {
 	DeleteApplicationRequest(*codedeploy.DeleteApplicationInput) codedeploy.DeleteApplicationRequest
+}
 
+// DeleteDeploymentConfigRequester provides the interface for the DeleteDeploymentConfigRequest API operation.
+type DeleteDeploymentConfigRequester interface {
 	DeleteDeploymentConfigRequest(*codedeploy.DeleteDeploymentConfigInput) codedeploy.DeleteDeploymentConfigRequest
+}
 
+// DeleteDeploymentGroupRequester provides the interface for the DeleteDeploymentGroupRequest API operation.
+type DeleteDeploymentGroupRequester interface {
 	DeleteDeploymentGroupRequest(*codedeploy.DeleteDeploymentGroupInput) codedeploy.DeleteDeploymentGroupRequest
+}
 
+// DeregisterOnPremisesInstanceRequester provides the interface for the DeregisterOnPremisesInstanceRequest API operation.
+type DeregisterOnPremisesInstanceRequester interface {
 	DeregisterOnPremisesInstanceRequest(*codedeploy.DeregisterOnPremisesInstanceInput) codedeploy.DeregisterOnPremisesInstanceRequest
+}
 
+// GetApplicationRequester provides the interface for the GetApplicationRequest API operation.
+type GetApplicationRequester interface {
 	GetApplicationRequest(*codedeploy.GetApplicationInput) codedeploy.GetApplicationRequest
+}
 
+// GetApplicationRevisionRequester provides the interface for the GetApplicationRevisionRequest API operation.
+type GetApplicationRevisionRequester interface {
 	GetApplicationRevisionRequest(*codedeploy.GetApplicationRevisionInput) codedeploy.GetApplicationRevisionRequest
+}
 
+// GetDeploymentRequester provides the interface for the GetDeploymentRequest API operation.
+type GetDeploymentRequester interface {
 	GetDeploymentRequest(*codedeploy.GetDeploymentInput) codedeploy.GetDeploymentRequest
+}
 
+// GetDeploymentConfigRequester provides the interface for the GetDeploymentConfigRequest API operation.
+type GetDeploymentConfigRequester interface {
 	GetDeploymentConfigRequest(*codedeploy.GetDeploymentConfigInput) codedeploy.GetDeploymentConfigRequest
+}
 
+// GetDeploymentGroupRequester provides the interface for the GetDeploymentGroupRequest API operation.
+type GetDeploymentGroupRequester interface {
 	GetDeploymentGroupRequest(*codedeploy.GetDeploymentGroupInput) codedeploy.GetDeploymentGroupRequest
+}
 
+// GetDeploymentInstanceRequester provides the interface for the GetDeploymentInstanceRequest API operation.
+type GetDeploymentInstanceRequester interface {
 	GetDeploymentInstanceRequest(*codedeploy.GetDeploymentInstanceInput) codedeploy.GetDeploymentInstanceRequest
+}
 
+// GetOnPremisesInstanceRequester provides the interface for the GetOnPremisesInstanceRequest API operation.
+type GetOnPremisesInstanceRequester interface {
 	GetOnPremisesInstanceRequest(*codedeploy.GetOnPremisesInstanceInput) codedeploy.GetOnPremisesInstanceRequest
+}
 
+// ListApplicationRevisionsRequester provides the interface for the ListApplicationRevisionsRequest API operation.
+type ListApplicationRevisionsRequester interface {
 	ListApplicationRevisionsRequest(*codedeploy.ListApplicationRevisionsInput) codedeploy.ListApplicationRevisionsRequest
+}
 
-	ListApplicationRevisionsPages(*codedeploy.ListApplicationRevisionsInput, func(*codedeploy.ListApplicationRevisionsOutput, bool) bool) error
-	ListApplicationRevisionsPagesWithContext(aws.Context, *codedeploy.ListApplicationRevisionsInput, func(*codedeploy.ListApplicationRevisionsOutput, bool) bool, ...aws.Option) error
-
+// ListApplicationsRequester provides the interface for the ListApplicationsRequest API operation.
+type ListApplicationsRequester interface {
 	ListApplicationsRequest(*codedeploy.ListApplicationsInput) codedeploy.ListApplicationsRequest
+}
 
-	ListApplicationsPages(*codedeploy.ListApplicationsInput, func(*codedeploy.ListApplicationsOutput, bool) bool) error
-	ListApplicationsPagesWithContext(aws.Context, *codedeploy.ListApplicationsInput, func(*codedeploy.ListApplicationsOutput, bool) bool, ...aws.Option) error
-
+// ListDeploymentConfigsRequester provides the interface for the ListDeploymentConfigsRequest API operation.
+type ListDeploymentConfigsRequester interface {
 	ListDeploymentConfigsRequest(*codedeploy.ListDeploymentConfigsInput) codedeploy.ListDeploymentConfigsRequest
+}
 
-	ListDeploymentConfigsPages(*codedeploy.ListDeploymentConfigsInput, func(*codedeploy.ListDeploymentConfigsOutput, bool) bool) error
-	ListDeploymentConfigsPagesWithContext(aws.Context, *codedeploy.ListDeploymentConfigsInput, func(*codedeploy.ListDeploymentConfigsOutput, bool) bool, ...aws.Option) error
-
+// ListDeploymentGroupsRequester provides the interface for the ListDeploymentGroupsRequest API operation.
+type ListDeploymentGroupsRequester interface {
 	ListDeploymentGroupsRequest(*codedeploy.ListDeploymentGroupsInput) codedeploy.ListDeploymentGroupsRequest
+}
 
-	ListDeploymentGroupsPages(*codedeploy.ListDeploymentGroupsInput, func(*codedeploy.ListDeploymentGroupsOutput, bool) bool) error
-	ListDeploymentGroupsPagesWithContext(aws.Context, *codedeploy.ListDeploymentGroupsInput, func(*codedeploy.ListDeploymentGroupsOutput, bool) bool, ...aws.Option) error
-
+// ListDeploymentInstancesRequester provides the interface for the ListDeploymentInstancesRequest API operation.
+type ListDeploymentInstancesRequester interface {
 	ListDeploymentInstancesRequest(*codedeploy.ListDeploymentInstancesInput) codedeploy.ListDeploymentInstancesRequest
+}
 
-	ListDeploymentInstancesPages(*codedeploy.ListDeploymentInstancesInput, func(*codedeploy.ListDeploymentInstancesOutput, bool) bool) error
-	ListDeploymentInstancesPagesWithContext(aws.Context, *codedeploy.ListDeploymentInstancesInput, func(*codedeploy.ListDeploymentInstancesOutput, bool) bool, ...aws.Option) error
-
+// ListDeploymentsRequester provides the interface for the ListDeploymentsRequest API operation.
+type ListDeploymentsRequester interface {
 	ListDeploymentsRequest(*codedeploy.ListDeploymentsInput) codedeploy.ListDeploymentsRequest
+}
 
-	ListDeploymentsPages(*codedeploy.ListDeploymentsInput, func(*codedeploy.ListDeploymentsOutput, bool) bool) error
-	ListDeploymentsPagesWithContext(aws.Context, *codedeploy.ListDeploymentsInput, func(*codedeploy.ListDeploymentsOutput, bool) bool, ...aws.Option) error
-
+// ListGitHubAccountTokenNamesRequester provides the interface for the ListGitHubAccountTokenNamesRequest API operation.
+type ListGitHubAccountTokenNamesRequester interface {
 	ListGitHubAccountTokenNamesRequest(*codedeploy.ListGitHubAccountTokenNamesInput) codedeploy.ListGitHubAccountTokenNamesRequest
+}
 
+// ListOnPremisesInstancesRequester provides the interface for the ListOnPremisesInstancesRequest API operation.
+type ListOnPremisesInstancesRequester interface {
 	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) codedeploy.ListOnPremisesInstancesRequest
+}
 
+// RegisterApplicationRevisionRequester provides the interface for the RegisterApplicationRevisionRequest API operation.
+type RegisterApplicationRevisionRequester interface {
 	RegisterApplicationRevisionRequest(*codedeploy.RegisterApplicationRevisionInput) codedeploy.RegisterApplicationRevisionRequest
+}
 
+// RegisterOnPremisesInstanceRequester provides the interface for the RegisterOnPremisesInstanceRequest API operation.
+type RegisterOnPremisesInstanceRequester interface {
 	RegisterOnPremisesInstanceRequest(*codedeploy.RegisterOnPremisesInstanceInput) codedeploy.RegisterOnPremisesInstanceRequest
+}
 
+// RemoveTagsFromOnPremisesInstancesRequester provides the interface for the RemoveTagsFromOnPremisesInstancesRequest API operation.
+type RemoveTagsFromOnPremisesInstancesRequester interface {
 	RemoveTagsFromOnPremisesInstancesRequest(*codedeploy.RemoveTagsFromOnPremisesInstancesInput) codedeploy.RemoveTagsFromOnPremisesInstancesRequest
+}
 
+// SkipWaitTimeForInstanceTerminationRequester provides the interface for the SkipWaitTimeForInstanceTerminationRequest API operation.
+type SkipWaitTimeForInstanceTerminationRequester interface {
 	SkipWaitTimeForInstanceTerminationRequest(*codedeploy.SkipWaitTimeForInstanceTerminationInput) codedeploy.SkipWaitTimeForInstanceTerminationRequest
+}
 
+// StopDeploymentRequester provides the interface for the StopDeploymentRequest API operation.
+type StopDeploymentRequester interface {
 	StopDeploymentRequest(*codedeploy.StopDeploymentInput) codedeploy.StopDeploymentRequest
+}
 
+// UpdateApplicationRequester provides the interface for the UpdateApplicationRequest API operation.
+type UpdateApplicationRequester interface {
 	UpdateApplicationRequest(*codedeploy.UpdateApplicationInput) codedeploy.UpdateApplicationRequest
+}
 
+// UpdateDeploymentGroupRequester provides the interface for the UpdateDeploymentGroupRequest API operation.
+type UpdateDeploymentGroupRequester interface {
 	UpdateDeploymentGroupRequest(*codedeploy.UpdateDeploymentGroupInput) codedeploy.UpdateDeploymentGroupRequest
+}
 
+// DeploymentSuccessfulWaiter provides the interface for the WaitUntilDeploymentSuccessful waiter.
+type DeploymentSuccessfulWaiter interface {
 	WaitUntilDeploymentSuccessful(*codedeploy.GetDeploymentInput) error
 	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
 }
-
-var _ CodeDeployAPI = (*codedeploy.CodeDeploy)(nil)

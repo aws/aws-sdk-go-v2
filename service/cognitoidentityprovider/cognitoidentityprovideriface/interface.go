@@ -12,221 +12,417 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 )
 
-// CognitoIdentityProviderAPI provides an interface to enable mocking the
-// cognitoidentityprovider.CognitoIdentityProvider service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Cognito Identity Provider.
-//    func myFunc(svc cognitoidentityprovideriface.CognitoIdentityProviderAPI) bool {
-//        // Make svc.AddCustomAttributes request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := cognitoidentityprovider.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCognitoIdentityProviderClient struct {
-//        cognitoidentityprovideriface.CognitoIdentityProviderAPI
-//    }
-//    func (m *mockCognitoIdentityProviderClient) AddCustomAttributes(input *cognitoidentityprovider.AddCustomAttributesInput) (*cognitoidentityprovider.AddCustomAttributesOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCognitoIdentityProviderClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CognitoIdentityProviderAPI interface {
+// AddCustomAttributesRequester provides the interface for the AddCustomAttributesRequest API operation.
+type AddCustomAttributesRequester interface {
 	AddCustomAttributesRequest(*cognitoidentityprovider.AddCustomAttributesInput) cognitoidentityprovider.AddCustomAttributesRequest
-
-	AdminAddUserToGroupRequest(*cognitoidentityprovider.AdminAddUserToGroupInput) cognitoidentityprovider.AdminAddUserToGroupRequest
-
-	AdminConfirmSignUpRequest(*cognitoidentityprovider.AdminConfirmSignUpInput) cognitoidentityprovider.AdminConfirmSignUpRequest
-
-	AdminCreateUserRequest(*cognitoidentityprovider.AdminCreateUserInput) cognitoidentityprovider.AdminCreateUserRequest
-
-	AdminDeleteUserRequest(*cognitoidentityprovider.AdminDeleteUserInput) cognitoidentityprovider.AdminDeleteUserRequest
-
-	AdminDeleteUserAttributesRequest(*cognitoidentityprovider.AdminDeleteUserAttributesInput) cognitoidentityprovider.AdminDeleteUserAttributesRequest
-
-	AdminDisableProviderForUserRequest(*cognitoidentityprovider.AdminDisableProviderForUserInput) cognitoidentityprovider.AdminDisableProviderForUserRequest
-
-	AdminDisableUserRequest(*cognitoidentityprovider.AdminDisableUserInput) cognitoidentityprovider.AdminDisableUserRequest
-
-	AdminEnableUserRequest(*cognitoidentityprovider.AdminEnableUserInput) cognitoidentityprovider.AdminEnableUserRequest
-
-	AdminForgetDeviceRequest(*cognitoidentityprovider.AdminForgetDeviceInput) cognitoidentityprovider.AdminForgetDeviceRequest
-
-	AdminGetDeviceRequest(*cognitoidentityprovider.AdminGetDeviceInput) cognitoidentityprovider.AdminGetDeviceRequest
-
-	AdminGetUserRequest(*cognitoidentityprovider.AdminGetUserInput) cognitoidentityprovider.AdminGetUserRequest
-
-	AdminInitiateAuthRequest(*cognitoidentityprovider.AdminInitiateAuthInput) cognitoidentityprovider.AdminInitiateAuthRequest
-
-	AdminLinkProviderForUserRequest(*cognitoidentityprovider.AdminLinkProviderForUserInput) cognitoidentityprovider.AdminLinkProviderForUserRequest
-
-	AdminListDevicesRequest(*cognitoidentityprovider.AdminListDevicesInput) cognitoidentityprovider.AdminListDevicesRequest
-
-	AdminListGroupsForUserRequest(*cognitoidentityprovider.AdminListGroupsForUserInput) cognitoidentityprovider.AdminListGroupsForUserRequest
-
-	AdminRemoveUserFromGroupRequest(*cognitoidentityprovider.AdminRemoveUserFromGroupInput) cognitoidentityprovider.AdminRemoveUserFromGroupRequest
-
-	AdminResetUserPasswordRequest(*cognitoidentityprovider.AdminResetUserPasswordInput) cognitoidentityprovider.AdminResetUserPasswordRequest
-
-	AdminRespondToAuthChallengeRequest(*cognitoidentityprovider.AdminRespondToAuthChallengeInput) cognitoidentityprovider.AdminRespondToAuthChallengeRequest
-
-	AdminSetUserSettingsRequest(*cognitoidentityprovider.AdminSetUserSettingsInput) cognitoidentityprovider.AdminSetUserSettingsRequest
-
-	AdminUpdateDeviceStatusRequest(*cognitoidentityprovider.AdminUpdateDeviceStatusInput) cognitoidentityprovider.AdminUpdateDeviceStatusRequest
-
-	AdminUpdateUserAttributesRequest(*cognitoidentityprovider.AdminUpdateUserAttributesInput) cognitoidentityprovider.AdminUpdateUserAttributesRequest
-
-	AdminUserGlobalSignOutRequest(*cognitoidentityprovider.AdminUserGlobalSignOutInput) cognitoidentityprovider.AdminUserGlobalSignOutRequest
-
-	ChangePasswordRequest(*cognitoidentityprovider.ChangePasswordInput) cognitoidentityprovider.ChangePasswordRequest
-
-	ConfirmDeviceRequest(*cognitoidentityprovider.ConfirmDeviceInput) cognitoidentityprovider.ConfirmDeviceRequest
-
-	ConfirmForgotPasswordRequest(*cognitoidentityprovider.ConfirmForgotPasswordInput) cognitoidentityprovider.ConfirmForgotPasswordRequest
-
-	ConfirmSignUpRequest(*cognitoidentityprovider.ConfirmSignUpInput) cognitoidentityprovider.ConfirmSignUpRequest
-
-	CreateGroupRequest(*cognitoidentityprovider.CreateGroupInput) cognitoidentityprovider.CreateGroupRequest
-
-	CreateIdentityProviderRequest(*cognitoidentityprovider.CreateIdentityProviderInput) cognitoidentityprovider.CreateIdentityProviderRequest
-
-	CreateResourceServerRequest(*cognitoidentityprovider.CreateResourceServerInput) cognitoidentityprovider.CreateResourceServerRequest
-
-	CreateUserImportJobRequest(*cognitoidentityprovider.CreateUserImportJobInput) cognitoidentityprovider.CreateUserImportJobRequest
-
-	CreateUserPoolRequest(*cognitoidentityprovider.CreateUserPoolInput) cognitoidentityprovider.CreateUserPoolRequest
-
-	CreateUserPoolClientRequest(*cognitoidentityprovider.CreateUserPoolClientInput) cognitoidentityprovider.CreateUserPoolClientRequest
-
-	CreateUserPoolDomainRequest(*cognitoidentityprovider.CreateUserPoolDomainInput) cognitoidentityprovider.CreateUserPoolDomainRequest
-
-	DeleteGroupRequest(*cognitoidentityprovider.DeleteGroupInput) cognitoidentityprovider.DeleteGroupRequest
-
-	DeleteIdentityProviderRequest(*cognitoidentityprovider.DeleteIdentityProviderInput) cognitoidentityprovider.DeleteIdentityProviderRequest
-
-	DeleteResourceServerRequest(*cognitoidentityprovider.DeleteResourceServerInput) cognitoidentityprovider.DeleteResourceServerRequest
-
-	DeleteUserRequest(*cognitoidentityprovider.DeleteUserInput) cognitoidentityprovider.DeleteUserRequest
-
-	DeleteUserAttributesRequest(*cognitoidentityprovider.DeleteUserAttributesInput) cognitoidentityprovider.DeleteUserAttributesRequest
-
-	DeleteUserPoolRequest(*cognitoidentityprovider.DeleteUserPoolInput) cognitoidentityprovider.DeleteUserPoolRequest
-
-	DeleteUserPoolClientRequest(*cognitoidentityprovider.DeleteUserPoolClientInput) cognitoidentityprovider.DeleteUserPoolClientRequest
-
-	DeleteUserPoolDomainRequest(*cognitoidentityprovider.DeleteUserPoolDomainInput) cognitoidentityprovider.DeleteUserPoolDomainRequest
-
-	DescribeIdentityProviderRequest(*cognitoidentityprovider.DescribeIdentityProviderInput) cognitoidentityprovider.DescribeIdentityProviderRequest
-
-	DescribeResourceServerRequest(*cognitoidentityprovider.DescribeResourceServerInput) cognitoidentityprovider.DescribeResourceServerRequest
-
-	DescribeUserImportJobRequest(*cognitoidentityprovider.DescribeUserImportJobInput) cognitoidentityprovider.DescribeUserImportJobRequest
-
-	DescribeUserPoolRequest(*cognitoidentityprovider.DescribeUserPoolInput) cognitoidentityprovider.DescribeUserPoolRequest
-
-	DescribeUserPoolClientRequest(*cognitoidentityprovider.DescribeUserPoolClientInput) cognitoidentityprovider.DescribeUserPoolClientRequest
-
-	DescribeUserPoolDomainRequest(*cognitoidentityprovider.DescribeUserPoolDomainInput) cognitoidentityprovider.DescribeUserPoolDomainRequest
-
-	ForgetDeviceRequest(*cognitoidentityprovider.ForgetDeviceInput) cognitoidentityprovider.ForgetDeviceRequest
-
-	ForgotPasswordRequest(*cognitoidentityprovider.ForgotPasswordInput) cognitoidentityprovider.ForgotPasswordRequest
-
-	GetCSVHeaderRequest(*cognitoidentityprovider.GetCSVHeaderInput) cognitoidentityprovider.GetCSVHeaderRequest
-
-	GetDeviceRequest(*cognitoidentityprovider.GetDeviceInput) cognitoidentityprovider.GetDeviceRequest
-
-	GetGroupRequest(*cognitoidentityprovider.GetGroupInput) cognitoidentityprovider.GetGroupRequest
-
-	GetIdentityProviderByIdentifierRequest(*cognitoidentityprovider.GetIdentityProviderByIdentifierInput) cognitoidentityprovider.GetIdentityProviderByIdentifierRequest
-
-	GetUICustomizationRequest(*cognitoidentityprovider.GetUICustomizationInput) cognitoidentityprovider.GetUICustomizationRequest
-
-	GetUserRequest(*cognitoidentityprovider.GetUserInput) cognitoidentityprovider.GetUserRequest
-
-	GetUserAttributeVerificationCodeRequest(*cognitoidentityprovider.GetUserAttributeVerificationCodeInput) cognitoidentityprovider.GetUserAttributeVerificationCodeRequest
-
-	GlobalSignOutRequest(*cognitoidentityprovider.GlobalSignOutInput) cognitoidentityprovider.GlobalSignOutRequest
-
-	InitiateAuthRequest(*cognitoidentityprovider.InitiateAuthInput) cognitoidentityprovider.InitiateAuthRequest
-
-	ListDevicesRequest(*cognitoidentityprovider.ListDevicesInput) cognitoidentityprovider.ListDevicesRequest
-
-	ListGroupsRequest(*cognitoidentityprovider.ListGroupsInput) cognitoidentityprovider.ListGroupsRequest
-
-	ListIdentityProvidersRequest(*cognitoidentityprovider.ListIdentityProvidersInput) cognitoidentityprovider.ListIdentityProvidersRequest
-
-	ListResourceServersRequest(*cognitoidentityprovider.ListResourceServersInput) cognitoidentityprovider.ListResourceServersRequest
-
-	ListUserImportJobsRequest(*cognitoidentityprovider.ListUserImportJobsInput) cognitoidentityprovider.ListUserImportJobsRequest
-
-	ListUserPoolClientsRequest(*cognitoidentityprovider.ListUserPoolClientsInput) cognitoidentityprovider.ListUserPoolClientsRequest
-
-	ListUserPoolsRequest(*cognitoidentityprovider.ListUserPoolsInput) cognitoidentityprovider.ListUserPoolsRequest
-
-	ListUsersRequest(*cognitoidentityprovider.ListUsersInput) cognitoidentityprovider.ListUsersRequest
-
-	ListUsersInGroupRequest(*cognitoidentityprovider.ListUsersInGroupInput) cognitoidentityprovider.ListUsersInGroupRequest
-
-	ResendConfirmationCodeRequest(*cognitoidentityprovider.ResendConfirmationCodeInput) cognitoidentityprovider.ResendConfirmationCodeRequest
-
-	RespondToAuthChallengeRequest(*cognitoidentityprovider.RespondToAuthChallengeInput) cognitoidentityprovider.RespondToAuthChallengeRequest
-
-	SetUICustomizationRequest(*cognitoidentityprovider.SetUICustomizationInput) cognitoidentityprovider.SetUICustomizationRequest
-
-	SetUserSettingsRequest(*cognitoidentityprovider.SetUserSettingsInput) cognitoidentityprovider.SetUserSettingsRequest
-
-	SignUpRequest(*cognitoidentityprovider.SignUpInput) cognitoidentityprovider.SignUpRequest
-
-	StartUserImportJobRequest(*cognitoidentityprovider.StartUserImportJobInput) cognitoidentityprovider.StartUserImportJobRequest
-
-	StopUserImportJobRequest(*cognitoidentityprovider.StopUserImportJobInput) cognitoidentityprovider.StopUserImportJobRequest
-
-	UpdateDeviceStatusRequest(*cognitoidentityprovider.UpdateDeviceStatusInput) cognitoidentityprovider.UpdateDeviceStatusRequest
-
-	UpdateGroupRequest(*cognitoidentityprovider.UpdateGroupInput) cognitoidentityprovider.UpdateGroupRequest
-
-	UpdateIdentityProviderRequest(*cognitoidentityprovider.UpdateIdentityProviderInput) cognitoidentityprovider.UpdateIdentityProviderRequest
-
-	UpdateResourceServerRequest(*cognitoidentityprovider.UpdateResourceServerInput) cognitoidentityprovider.UpdateResourceServerRequest
-
-	UpdateUserAttributesRequest(*cognitoidentityprovider.UpdateUserAttributesInput) cognitoidentityprovider.UpdateUserAttributesRequest
-
-	UpdateUserPoolRequest(*cognitoidentityprovider.UpdateUserPoolInput) cognitoidentityprovider.UpdateUserPoolRequest
-
-	UpdateUserPoolClientRequest(*cognitoidentityprovider.UpdateUserPoolClientInput) cognitoidentityprovider.UpdateUserPoolClientRequest
-
-	VerifyUserAttributeRequest(*cognitoidentityprovider.VerifyUserAttributeInput) cognitoidentityprovider.VerifyUserAttributeRequest
 }
 
-var _ CognitoIdentityProviderAPI = (*cognitoidentityprovider.CognitoIdentityProvider)(nil)
+// AdminAddUserToGroupRequester provides the interface for the AdminAddUserToGroupRequest API operation.
+type AdminAddUserToGroupRequester interface {
+	AdminAddUserToGroupRequest(*cognitoidentityprovider.AdminAddUserToGroupInput) cognitoidentityprovider.AdminAddUserToGroupRequest
+}
+
+// AdminConfirmSignUpRequester provides the interface for the AdminConfirmSignUpRequest API operation.
+type AdminConfirmSignUpRequester interface {
+	AdminConfirmSignUpRequest(*cognitoidentityprovider.AdminConfirmSignUpInput) cognitoidentityprovider.AdminConfirmSignUpRequest
+}
+
+// AdminCreateUserRequester provides the interface for the AdminCreateUserRequest API operation.
+type AdminCreateUserRequester interface {
+	AdminCreateUserRequest(*cognitoidentityprovider.AdminCreateUserInput) cognitoidentityprovider.AdminCreateUserRequest
+}
+
+// AdminDeleteUserRequester provides the interface for the AdminDeleteUserRequest API operation.
+type AdminDeleteUserRequester interface {
+	AdminDeleteUserRequest(*cognitoidentityprovider.AdminDeleteUserInput) cognitoidentityprovider.AdminDeleteUserRequest
+}
+
+// AdminDeleteUserAttributesRequester provides the interface for the AdminDeleteUserAttributesRequest API operation.
+type AdminDeleteUserAttributesRequester interface {
+	AdminDeleteUserAttributesRequest(*cognitoidentityprovider.AdminDeleteUserAttributesInput) cognitoidentityprovider.AdminDeleteUserAttributesRequest
+}
+
+// AdminDisableProviderForUserRequester provides the interface for the AdminDisableProviderForUserRequest API operation.
+type AdminDisableProviderForUserRequester interface {
+	AdminDisableProviderForUserRequest(*cognitoidentityprovider.AdminDisableProviderForUserInput) cognitoidentityprovider.AdminDisableProviderForUserRequest
+}
+
+// AdminDisableUserRequester provides the interface for the AdminDisableUserRequest API operation.
+type AdminDisableUserRequester interface {
+	AdminDisableUserRequest(*cognitoidentityprovider.AdminDisableUserInput) cognitoidentityprovider.AdminDisableUserRequest
+}
+
+// AdminEnableUserRequester provides the interface for the AdminEnableUserRequest API operation.
+type AdminEnableUserRequester interface {
+	AdminEnableUserRequest(*cognitoidentityprovider.AdminEnableUserInput) cognitoidentityprovider.AdminEnableUserRequest
+}
+
+// AdminForgetDeviceRequester provides the interface for the AdminForgetDeviceRequest API operation.
+type AdminForgetDeviceRequester interface {
+	AdminForgetDeviceRequest(*cognitoidentityprovider.AdminForgetDeviceInput) cognitoidentityprovider.AdminForgetDeviceRequest
+}
+
+// AdminGetDeviceRequester provides the interface for the AdminGetDeviceRequest API operation.
+type AdminGetDeviceRequester interface {
+	AdminGetDeviceRequest(*cognitoidentityprovider.AdminGetDeviceInput) cognitoidentityprovider.AdminGetDeviceRequest
+}
+
+// AdminGetUserRequester provides the interface for the AdminGetUserRequest API operation.
+type AdminGetUserRequester interface {
+	AdminGetUserRequest(*cognitoidentityprovider.AdminGetUserInput) cognitoidentityprovider.AdminGetUserRequest
+}
+
+// AdminInitiateAuthRequester provides the interface for the AdminInitiateAuthRequest API operation.
+type AdminInitiateAuthRequester interface {
+	AdminInitiateAuthRequest(*cognitoidentityprovider.AdminInitiateAuthInput) cognitoidentityprovider.AdminInitiateAuthRequest
+}
+
+// AdminLinkProviderForUserRequester provides the interface for the AdminLinkProviderForUserRequest API operation.
+type AdminLinkProviderForUserRequester interface {
+	AdminLinkProviderForUserRequest(*cognitoidentityprovider.AdminLinkProviderForUserInput) cognitoidentityprovider.AdminLinkProviderForUserRequest
+}
+
+// AdminListDevicesRequester provides the interface for the AdminListDevicesRequest API operation.
+type AdminListDevicesRequester interface {
+	AdminListDevicesRequest(*cognitoidentityprovider.AdminListDevicesInput) cognitoidentityprovider.AdminListDevicesRequest
+}
+
+// AdminListGroupsForUserRequester provides the interface for the AdminListGroupsForUserRequest API operation.
+type AdminListGroupsForUserRequester interface {
+	AdminListGroupsForUserRequest(*cognitoidentityprovider.AdminListGroupsForUserInput) cognitoidentityprovider.AdminListGroupsForUserRequest
+}
+
+// AdminRemoveUserFromGroupRequester provides the interface for the AdminRemoveUserFromGroupRequest API operation.
+type AdminRemoveUserFromGroupRequester interface {
+	AdminRemoveUserFromGroupRequest(*cognitoidentityprovider.AdminRemoveUserFromGroupInput) cognitoidentityprovider.AdminRemoveUserFromGroupRequest
+}
+
+// AdminResetUserPasswordRequester provides the interface for the AdminResetUserPasswordRequest API operation.
+type AdminResetUserPasswordRequester interface {
+	AdminResetUserPasswordRequest(*cognitoidentityprovider.AdminResetUserPasswordInput) cognitoidentityprovider.AdminResetUserPasswordRequest
+}
+
+// AdminRespondToAuthChallengeRequester provides the interface for the AdminRespondToAuthChallengeRequest API operation.
+type AdminRespondToAuthChallengeRequester interface {
+	AdminRespondToAuthChallengeRequest(*cognitoidentityprovider.AdminRespondToAuthChallengeInput) cognitoidentityprovider.AdminRespondToAuthChallengeRequest
+}
+
+// AdminSetUserSettingsRequester provides the interface for the AdminSetUserSettingsRequest API operation.
+type AdminSetUserSettingsRequester interface {
+	AdminSetUserSettingsRequest(*cognitoidentityprovider.AdminSetUserSettingsInput) cognitoidentityprovider.AdminSetUserSettingsRequest
+}
+
+// AdminUpdateDeviceStatusRequester provides the interface for the AdminUpdateDeviceStatusRequest API operation.
+type AdminUpdateDeviceStatusRequester interface {
+	AdminUpdateDeviceStatusRequest(*cognitoidentityprovider.AdminUpdateDeviceStatusInput) cognitoidentityprovider.AdminUpdateDeviceStatusRequest
+}
+
+// AdminUpdateUserAttributesRequester provides the interface for the AdminUpdateUserAttributesRequest API operation.
+type AdminUpdateUserAttributesRequester interface {
+	AdminUpdateUserAttributesRequest(*cognitoidentityprovider.AdminUpdateUserAttributesInput) cognitoidentityprovider.AdminUpdateUserAttributesRequest
+}
+
+// AdminUserGlobalSignOutRequester provides the interface for the AdminUserGlobalSignOutRequest API operation.
+type AdminUserGlobalSignOutRequester interface {
+	AdminUserGlobalSignOutRequest(*cognitoidentityprovider.AdminUserGlobalSignOutInput) cognitoidentityprovider.AdminUserGlobalSignOutRequest
+}
+
+// ChangePasswordRequester provides the interface for the ChangePasswordRequest API operation.
+type ChangePasswordRequester interface {
+	ChangePasswordRequest(*cognitoidentityprovider.ChangePasswordInput) cognitoidentityprovider.ChangePasswordRequest
+}
+
+// ConfirmDeviceRequester provides the interface for the ConfirmDeviceRequest API operation.
+type ConfirmDeviceRequester interface {
+	ConfirmDeviceRequest(*cognitoidentityprovider.ConfirmDeviceInput) cognitoidentityprovider.ConfirmDeviceRequest
+}
+
+// ConfirmForgotPasswordRequester provides the interface for the ConfirmForgotPasswordRequest API operation.
+type ConfirmForgotPasswordRequester interface {
+	ConfirmForgotPasswordRequest(*cognitoidentityprovider.ConfirmForgotPasswordInput) cognitoidentityprovider.ConfirmForgotPasswordRequest
+}
+
+// ConfirmSignUpRequester provides the interface for the ConfirmSignUpRequest API operation.
+type ConfirmSignUpRequester interface {
+	ConfirmSignUpRequest(*cognitoidentityprovider.ConfirmSignUpInput) cognitoidentityprovider.ConfirmSignUpRequest
+}
+
+// CreateGroupRequester provides the interface for the CreateGroupRequest API operation.
+type CreateGroupRequester interface {
+	CreateGroupRequest(*cognitoidentityprovider.CreateGroupInput) cognitoidentityprovider.CreateGroupRequest
+}
+
+// CreateIdentityProviderRequester provides the interface for the CreateIdentityProviderRequest API operation.
+type CreateIdentityProviderRequester interface {
+	CreateIdentityProviderRequest(*cognitoidentityprovider.CreateIdentityProviderInput) cognitoidentityprovider.CreateIdentityProviderRequest
+}
+
+// CreateResourceServerRequester provides the interface for the CreateResourceServerRequest API operation.
+type CreateResourceServerRequester interface {
+	CreateResourceServerRequest(*cognitoidentityprovider.CreateResourceServerInput) cognitoidentityprovider.CreateResourceServerRequest
+}
+
+// CreateUserImportJobRequester provides the interface for the CreateUserImportJobRequest API operation.
+type CreateUserImportJobRequester interface {
+	CreateUserImportJobRequest(*cognitoidentityprovider.CreateUserImportJobInput) cognitoidentityprovider.CreateUserImportJobRequest
+}
+
+// CreateUserPoolRequester provides the interface for the CreateUserPoolRequest API operation.
+type CreateUserPoolRequester interface {
+	CreateUserPoolRequest(*cognitoidentityprovider.CreateUserPoolInput) cognitoidentityprovider.CreateUserPoolRequest
+}
+
+// CreateUserPoolClientRequester provides the interface for the CreateUserPoolClientRequest API operation.
+type CreateUserPoolClientRequester interface {
+	CreateUserPoolClientRequest(*cognitoidentityprovider.CreateUserPoolClientInput) cognitoidentityprovider.CreateUserPoolClientRequest
+}
+
+// CreateUserPoolDomainRequester provides the interface for the CreateUserPoolDomainRequest API operation.
+type CreateUserPoolDomainRequester interface {
+	CreateUserPoolDomainRequest(*cognitoidentityprovider.CreateUserPoolDomainInput) cognitoidentityprovider.CreateUserPoolDomainRequest
+}
+
+// DeleteGroupRequester provides the interface for the DeleteGroupRequest API operation.
+type DeleteGroupRequester interface {
+	DeleteGroupRequest(*cognitoidentityprovider.DeleteGroupInput) cognitoidentityprovider.DeleteGroupRequest
+}
+
+// DeleteIdentityProviderRequester provides the interface for the DeleteIdentityProviderRequest API operation.
+type DeleteIdentityProviderRequester interface {
+	DeleteIdentityProviderRequest(*cognitoidentityprovider.DeleteIdentityProviderInput) cognitoidentityprovider.DeleteIdentityProviderRequest
+}
+
+// DeleteResourceServerRequester provides the interface for the DeleteResourceServerRequest API operation.
+type DeleteResourceServerRequester interface {
+	DeleteResourceServerRequest(*cognitoidentityprovider.DeleteResourceServerInput) cognitoidentityprovider.DeleteResourceServerRequest
+}
+
+// DeleteUserRequester provides the interface for the DeleteUserRequest API operation.
+type DeleteUserRequester interface {
+	DeleteUserRequest(*cognitoidentityprovider.DeleteUserInput) cognitoidentityprovider.DeleteUserRequest
+}
+
+// DeleteUserAttributesRequester provides the interface for the DeleteUserAttributesRequest API operation.
+type DeleteUserAttributesRequester interface {
+	DeleteUserAttributesRequest(*cognitoidentityprovider.DeleteUserAttributesInput) cognitoidentityprovider.DeleteUserAttributesRequest
+}
+
+// DeleteUserPoolRequester provides the interface for the DeleteUserPoolRequest API operation.
+type DeleteUserPoolRequester interface {
+	DeleteUserPoolRequest(*cognitoidentityprovider.DeleteUserPoolInput) cognitoidentityprovider.DeleteUserPoolRequest
+}
+
+// DeleteUserPoolClientRequester provides the interface for the DeleteUserPoolClientRequest API operation.
+type DeleteUserPoolClientRequester interface {
+	DeleteUserPoolClientRequest(*cognitoidentityprovider.DeleteUserPoolClientInput) cognitoidentityprovider.DeleteUserPoolClientRequest
+}
+
+// DeleteUserPoolDomainRequester provides the interface for the DeleteUserPoolDomainRequest API operation.
+type DeleteUserPoolDomainRequester interface {
+	DeleteUserPoolDomainRequest(*cognitoidentityprovider.DeleteUserPoolDomainInput) cognitoidentityprovider.DeleteUserPoolDomainRequest
+}
+
+// DescribeIdentityProviderRequester provides the interface for the DescribeIdentityProviderRequest API operation.
+type DescribeIdentityProviderRequester interface {
+	DescribeIdentityProviderRequest(*cognitoidentityprovider.DescribeIdentityProviderInput) cognitoidentityprovider.DescribeIdentityProviderRequest
+}
+
+// DescribeResourceServerRequester provides the interface for the DescribeResourceServerRequest API operation.
+type DescribeResourceServerRequester interface {
+	DescribeResourceServerRequest(*cognitoidentityprovider.DescribeResourceServerInput) cognitoidentityprovider.DescribeResourceServerRequest
+}
+
+// DescribeUserImportJobRequester provides the interface for the DescribeUserImportJobRequest API operation.
+type DescribeUserImportJobRequester interface {
+	DescribeUserImportJobRequest(*cognitoidentityprovider.DescribeUserImportJobInput) cognitoidentityprovider.DescribeUserImportJobRequest
+}
+
+// DescribeUserPoolRequester provides the interface for the DescribeUserPoolRequest API operation.
+type DescribeUserPoolRequester interface {
+	DescribeUserPoolRequest(*cognitoidentityprovider.DescribeUserPoolInput) cognitoidentityprovider.DescribeUserPoolRequest
+}
+
+// DescribeUserPoolClientRequester provides the interface for the DescribeUserPoolClientRequest API operation.
+type DescribeUserPoolClientRequester interface {
+	DescribeUserPoolClientRequest(*cognitoidentityprovider.DescribeUserPoolClientInput) cognitoidentityprovider.DescribeUserPoolClientRequest
+}
+
+// DescribeUserPoolDomainRequester provides the interface for the DescribeUserPoolDomainRequest API operation.
+type DescribeUserPoolDomainRequester interface {
+	DescribeUserPoolDomainRequest(*cognitoidentityprovider.DescribeUserPoolDomainInput) cognitoidentityprovider.DescribeUserPoolDomainRequest
+}
+
+// ForgetDeviceRequester provides the interface for the ForgetDeviceRequest API operation.
+type ForgetDeviceRequester interface {
+	ForgetDeviceRequest(*cognitoidentityprovider.ForgetDeviceInput) cognitoidentityprovider.ForgetDeviceRequest
+}
+
+// ForgotPasswordRequester provides the interface for the ForgotPasswordRequest API operation.
+type ForgotPasswordRequester interface {
+	ForgotPasswordRequest(*cognitoidentityprovider.ForgotPasswordInput) cognitoidentityprovider.ForgotPasswordRequest
+}
+
+// GetCSVHeaderRequester provides the interface for the GetCSVHeaderRequest API operation.
+type GetCSVHeaderRequester interface {
+	GetCSVHeaderRequest(*cognitoidentityprovider.GetCSVHeaderInput) cognitoidentityprovider.GetCSVHeaderRequest
+}
+
+// GetDeviceRequester provides the interface for the GetDeviceRequest API operation.
+type GetDeviceRequester interface {
+	GetDeviceRequest(*cognitoidentityprovider.GetDeviceInput) cognitoidentityprovider.GetDeviceRequest
+}
+
+// GetGroupRequester provides the interface for the GetGroupRequest API operation.
+type GetGroupRequester interface {
+	GetGroupRequest(*cognitoidentityprovider.GetGroupInput) cognitoidentityprovider.GetGroupRequest
+}
+
+// GetIdentityProviderByIdentifierRequester provides the interface for the GetIdentityProviderByIdentifierRequest API operation.
+type GetIdentityProviderByIdentifierRequester interface {
+	GetIdentityProviderByIdentifierRequest(*cognitoidentityprovider.GetIdentityProviderByIdentifierInput) cognitoidentityprovider.GetIdentityProviderByIdentifierRequest
+}
+
+// GetUICustomizationRequester provides the interface for the GetUICustomizationRequest API operation.
+type GetUICustomizationRequester interface {
+	GetUICustomizationRequest(*cognitoidentityprovider.GetUICustomizationInput) cognitoidentityprovider.GetUICustomizationRequest
+}
+
+// GetUserRequester provides the interface for the GetUserRequest API operation.
+type GetUserRequester interface {
+	GetUserRequest(*cognitoidentityprovider.GetUserInput) cognitoidentityprovider.GetUserRequest
+}
+
+// GetUserAttributeVerificationCodeRequester provides the interface for the GetUserAttributeVerificationCodeRequest API operation.
+type GetUserAttributeVerificationCodeRequester interface {
+	GetUserAttributeVerificationCodeRequest(*cognitoidentityprovider.GetUserAttributeVerificationCodeInput) cognitoidentityprovider.GetUserAttributeVerificationCodeRequest
+}
+
+// GlobalSignOutRequester provides the interface for the GlobalSignOutRequest API operation.
+type GlobalSignOutRequester interface {
+	GlobalSignOutRequest(*cognitoidentityprovider.GlobalSignOutInput) cognitoidentityprovider.GlobalSignOutRequest
+}
+
+// InitiateAuthRequester provides the interface for the InitiateAuthRequest API operation.
+type InitiateAuthRequester interface {
+	InitiateAuthRequest(*cognitoidentityprovider.InitiateAuthInput) cognitoidentityprovider.InitiateAuthRequest
+}
+
+// ListDevicesRequester provides the interface for the ListDevicesRequest API operation.
+type ListDevicesRequester interface {
+	ListDevicesRequest(*cognitoidentityprovider.ListDevicesInput) cognitoidentityprovider.ListDevicesRequest
+}
+
+// ListGroupsRequester provides the interface for the ListGroupsRequest API operation.
+type ListGroupsRequester interface {
+	ListGroupsRequest(*cognitoidentityprovider.ListGroupsInput) cognitoidentityprovider.ListGroupsRequest
+}
+
+// ListIdentityProvidersRequester provides the interface for the ListIdentityProvidersRequest API operation.
+type ListIdentityProvidersRequester interface {
+	ListIdentityProvidersRequest(*cognitoidentityprovider.ListIdentityProvidersInput) cognitoidentityprovider.ListIdentityProvidersRequest
+}
+
+// ListResourceServersRequester provides the interface for the ListResourceServersRequest API operation.
+type ListResourceServersRequester interface {
+	ListResourceServersRequest(*cognitoidentityprovider.ListResourceServersInput) cognitoidentityprovider.ListResourceServersRequest
+}
+
+// ListUserImportJobsRequester provides the interface for the ListUserImportJobsRequest API operation.
+type ListUserImportJobsRequester interface {
+	ListUserImportJobsRequest(*cognitoidentityprovider.ListUserImportJobsInput) cognitoidentityprovider.ListUserImportJobsRequest
+}
+
+// ListUserPoolClientsRequester provides the interface for the ListUserPoolClientsRequest API operation.
+type ListUserPoolClientsRequester interface {
+	ListUserPoolClientsRequest(*cognitoidentityprovider.ListUserPoolClientsInput) cognitoidentityprovider.ListUserPoolClientsRequest
+}
+
+// ListUserPoolsRequester provides the interface for the ListUserPoolsRequest API operation.
+type ListUserPoolsRequester interface {
+	ListUserPoolsRequest(*cognitoidentityprovider.ListUserPoolsInput) cognitoidentityprovider.ListUserPoolsRequest
+}
+
+// ListUsersRequester provides the interface for the ListUsersRequest API operation.
+type ListUsersRequester interface {
+	ListUsersRequest(*cognitoidentityprovider.ListUsersInput) cognitoidentityprovider.ListUsersRequest
+}
+
+// ListUsersInGroupRequester provides the interface for the ListUsersInGroupRequest API operation.
+type ListUsersInGroupRequester interface {
+	ListUsersInGroupRequest(*cognitoidentityprovider.ListUsersInGroupInput) cognitoidentityprovider.ListUsersInGroupRequest
+}
+
+// ResendConfirmationCodeRequester provides the interface for the ResendConfirmationCodeRequest API operation.
+type ResendConfirmationCodeRequester interface {
+	ResendConfirmationCodeRequest(*cognitoidentityprovider.ResendConfirmationCodeInput) cognitoidentityprovider.ResendConfirmationCodeRequest
+}
+
+// RespondToAuthChallengeRequester provides the interface for the RespondToAuthChallengeRequest API operation.
+type RespondToAuthChallengeRequester interface {
+	RespondToAuthChallengeRequest(*cognitoidentityprovider.RespondToAuthChallengeInput) cognitoidentityprovider.RespondToAuthChallengeRequest
+}
+
+// SetUICustomizationRequester provides the interface for the SetUICustomizationRequest API operation.
+type SetUICustomizationRequester interface {
+	SetUICustomizationRequest(*cognitoidentityprovider.SetUICustomizationInput) cognitoidentityprovider.SetUICustomizationRequest
+}
+
+// SetUserSettingsRequester provides the interface for the SetUserSettingsRequest API operation.
+type SetUserSettingsRequester interface {
+	SetUserSettingsRequest(*cognitoidentityprovider.SetUserSettingsInput) cognitoidentityprovider.SetUserSettingsRequest
+}
+
+// SignUpRequester provides the interface for the SignUpRequest API operation.
+type SignUpRequester interface {
+	SignUpRequest(*cognitoidentityprovider.SignUpInput) cognitoidentityprovider.SignUpRequest
+}
+
+// StartUserImportJobRequester provides the interface for the StartUserImportJobRequest API operation.
+type StartUserImportJobRequester interface {
+	StartUserImportJobRequest(*cognitoidentityprovider.StartUserImportJobInput) cognitoidentityprovider.StartUserImportJobRequest
+}
+
+// StopUserImportJobRequester provides the interface for the StopUserImportJobRequest API operation.
+type StopUserImportJobRequester interface {
+	StopUserImportJobRequest(*cognitoidentityprovider.StopUserImportJobInput) cognitoidentityprovider.StopUserImportJobRequest
+}
+
+// UpdateDeviceStatusRequester provides the interface for the UpdateDeviceStatusRequest API operation.
+type UpdateDeviceStatusRequester interface {
+	UpdateDeviceStatusRequest(*cognitoidentityprovider.UpdateDeviceStatusInput) cognitoidentityprovider.UpdateDeviceStatusRequest
+}
+
+// UpdateGroupRequester provides the interface for the UpdateGroupRequest API operation.
+type UpdateGroupRequester interface {
+	UpdateGroupRequest(*cognitoidentityprovider.UpdateGroupInput) cognitoidentityprovider.UpdateGroupRequest
+}
+
+// UpdateIdentityProviderRequester provides the interface for the UpdateIdentityProviderRequest API operation.
+type UpdateIdentityProviderRequester interface {
+	UpdateIdentityProviderRequest(*cognitoidentityprovider.UpdateIdentityProviderInput) cognitoidentityprovider.UpdateIdentityProviderRequest
+}
+
+// UpdateResourceServerRequester provides the interface for the UpdateResourceServerRequest API operation.
+type UpdateResourceServerRequester interface {
+	UpdateResourceServerRequest(*cognitoidentityprovider.UpdateResourceServerInput) cognitoidentityprovider.UpdateResourceServerRequest
+}
+
+// UpdateUserAttributesRequester provides the interface for the UpdateUserAttributesRequest API operation.
+type UpdateUserAttributesRequester interface {
+	UpdateUserAttributesRequest(*cognitoidentityprovider.UpdateUserAttributesInput) cognitoidentityprovider.UpdateUserAttributesRequest
+}
+
+// UpdateUserPoolRequester provides the interface for the UpdateUserPoolRequest API operation.
+type UpdateUserPoolRequester interface {
+	UpdateUserPoolRequest(*cognitoidentityprovider.UpdateUserPoolInput) cognitoidentityprovider.UpdateUserPoolRequest
+}
+
+// UpdateUserPoolClientRequester provides the interface for the UpdateUserPoolClientRequest API operation.
+type UpdateUserPoolClientRequester interface {
+	UpdateUserPoolClientRequest(*cognitoidentityprovider.UpdateUserPoolClientInput) cognitoidentityprovider.UpdateUserPoolClientRequest
+}
+
+// VerifyUserAttributeRequester provides the interface for the VerifyUserAttributeRequest API operation.
+type VerifyUserAttributeRequester interface {
+	VerifyUserAttributeRequest(*cognitoidentityprovider.VerifyUserAttributeInput) cognitoidentityprovider.VerifyUserAttributeRequest
+}

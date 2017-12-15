@@ -13,222 +13,403 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
 )
 
-// OpsWorksAPI provides an interface to enable mocking the
-// opsworks.OpsWorks service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS OpsWorks.
-//    func myFunc(svc opsworksiface.OpsWorksAPI) bool {
-//        // Make svc.AssignInstance request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := opsworks.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockOpsWorksClient struct {
-//        opsworksiface.OpsWorksAPI
-//    }
-//    func (m *mockOpsWorksClient) AssignInstance(input *opsworks.AssignInstanceInput) (*opsworks.AssignInstanceOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockOpsWorksClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type OpsWorksAPI interface {
+// AssignInstanceRequester provides the interface for the AssignInstanceRequest API operation.
+type AssignInstanceRequester interface {
 	AssignInstanceRequest(*opsworks.AssignInstanceInput) opsworks.AssignInstanceRequest
+}
 
+// AssignVolumeRequester provides the interface for the AssignVolumeRequest API operation.
+type AssignVolumeRequester interface {
 	AssignVolumeRequest(*opsworks.AssignVolumeInput) opsworks.AssignVolumeRequest
+}
 
+// AssociateElasticIpRequester provides the interface for the AssociateElasticIpRequest API operation.
+type AssociateElasticIpRequester interface {
 	AssociateElasticIpRequest(*opsworks.AssociateElasticIpInput) opsworks.AssociateElasticIpRequest
+}
 
+// AttachElasticLoadBalancerRequester provides the interface for the AttachElasticLoadBalancerRequest API operation.
+type AttachElasticLoadBalancerRequester interface {
 	AttachElasticLoadBalancerRequest(*opsworks.AttachElasticLoadBalancerInput) opsworks.AttachElasticLoadBalancerRequest
+}
 
+// CloneStackRequester provides the interface for the CloneStackRequest API operation.
+type CloneStackRequester interface {
 	CloneStackRequest(*opsworks.CloneStackInput) opsworks.CloneStackRequest
+}
 
+// CreateAppRequester provides the interface for the CreateAppRequest API operation.
+type CreateAppRequester interface {
 	CreateAppRequest(*opsworks.CreateAppInput) opsworks.CreateAppRequest
+}
 
+// CreateDeploymentRequester provides the interface for the CreateDeploymentRequest API operation.
+type CreateDeploymentRequester interface {
 	CreateDeploymentRequest(*opsworks.CreateDeploymentInput) opsworks.CreateDeploymentRequest
+}
 
+// CreateInstanceRequester provides the interface for the CreateInstanceRequest API operation.
+type CreateInstanceRequester interface {
 	CreateInstanceRequest(*opsworks.CreateInstanceInput) opsworks.CreateInstanceRequest
+}
 
+// CreateLayerRequester provides the interface for the CreateLayerRequest API operation.
+type CreateLayerRequester interface {
 	CreateLayerRequest(*opsworks.CreateLayerInput) opsworks.CreateLayerRequest
+}
 
+// CreateStackRequester provides the interface for the CreateStackRequest API operation.
+type CreateStackRequester interface {
 	CreateStackRequest(*opsworks.CreateStackInput) opsworks.CreateStackRequest
+}
 
+// CreateUserProfileRequester provides the interface for the CreateUserProfileRequest API operation.
+type CreateUserProfileRequester interface {
 	CreateUserProfileRequest(*opsworks.CreateUserProfileInput) opsworks.CreateUserProfileRequest
+}
 
+// DeleteAppRequester provides the interface for the DeleteAppRequest API operation.
+type DeleteAppRequester interface {
 	DeleteAppRequest(*opsworks.DeleteAppInput) opsworks.DeleteAppRequest
+}
 
+// DeleteInstanceRequester provides the interface for the DeleteInstanceRequest API operation.
+type DeleteInstanceRequester interface {
 	DeleteInstanceRequest(*opsworks.DeleteInstanceInput) opsworks.DeleteInstanceRequest
+}
 
+// DeleteLayerRequester provides the interface for the DeleteLayerRequest API operation.
+type DeleteLayerRequester interface {
 	DeleteLayerRequest(*opsworks.DeleteLayerInput) opsworks.DeleteLayerRequest
+}
 
+// DeleteStackRequester provides the interface for the DeleteStackRequest API operation.
+type DeleteStackRequester interface {
 	DeleteStackRequest(*opsworks.DeleteStackInput) opsworks.DeleteStackRequest
+}
 
+// DeleteUserProfileRequester provides the interface for the DeleteUserProfileRequest API operation.
+type DeleteUserProfileRequester interface {
 	DeleteUserProfileRequest(*opsworks.DeleteUserProfileInput) opsworks.DeleteUserProfileRequest
+}
 
+// DeregisterEcsClusterRequester provides the interface for the DeregisterEcsClusterRequest API operation.
+type DeregisterEcsClusterRequester interface {
 	DeregisterEcsClusterRequest(*opsworks.DeregisterEcsClusterInput) opsworks.DeregisterEcsClusterRequest
+}
 
+// DeregisterElasticIpRequester provides the interface for the DeregisterElasticIpRequest API operation.
+type DeregisterElasticIpRequester interface {
 	DeregisterElasticIpRequest(*opsworks.DeregisterElasticIpInput) opsworks.DeregisterElasticIpRequest
+}
 
+// DeregisterInstanceRequester provides the interface for the DeregisterInstanceRequest API operation.
+type DeregisterInstanceRequester interface {
 	DeregisterInstanceRequest(*opsworks.DeregisterInstanceInput) opsworks.DeregisterInstanceRequest
+}
 
+// DeregisterRdsDbInstanceRequester provides the interface for the DeregisterRdsDbInstanceRequest API operation.
+type DeregisterRdsDbInstanceRequester interface {
 	DeregisterRdsDbInstanceRequest(*opsworks.DeregisterRdsDbInstanceInput) opsworks.DeregisterRdsDbInstanceRequest
+}
 
+// DeregisterVolumeRequester provides the interface for the DeregisterVolumeRequest API operation.
+type DeregisterVolumeRequester interface {
 	DeregisterVolumeRequest(*opsworks.DeregisterVolumeInput) opsworks.DeregisterVolumeRequest
+}
 
+// DescribeAgentVersionsRequester provides the interface for the DescribeAgentVersionsRequest API operation.
+type DescribeAgentVersionsRequester interface {
 	DescribeAgentVersionsRequest(*opsworks.DescribeAgentVersionsInput) opsworks.DescribeAgentVersionsRequest
+}
 
+// DescribeAppsRequester provides the interface for the DescribeAppsRequest API operation.
+type DescribeAppsRequester interface {
 	DescribeAppsRequest(*opsworks.DescribeAppsInput) opsworks.DescribeAppsRequest
+}
 
+// DescribeCommandsRequester provides the interface for the DescribeCommandsRequest API operation.
+type DescribeCommandsRequester interface {
 	DescribeCommandsRequest(*opsworks.DescribeCommandsInput) opsworks.DescribeCommandsRequest
+}
 
+// DescribeDeploymentsRequester provides the interface for the DescribeDeploymentsRequest API operation.
+type DescribeDeploymentsRequester interface {
 	DescribeDeploymentsRequest(*opsworks.DescribeDeploymentsInput) opsworks.DescribeDeploymentsRequest
+}
 
+// DescribeEcsClustersRequester provides the interface for the DescribeEcsClustersRequest API operation.
+type DescribeEcsClustersRequester interface {
 	DescribeEcsClustersRequest(*opsworks.DescribeEcsClustersInput) opsworks.DescribeEcsClustersRequest
+}
 
-	DescribeEcsClustersPages(*opsworks.DescribeEcsClustersInput, func(*opsworks.DescribeEcsClustersOutput, bool) bool) error
-	DescribeEcsClustersPagesWithContext(aws.Context, *opsworks.DescribeEcsClustersInput, func(*opsworks.DescribeEcsClustersOutput, bool) bool, ...aws.Option) error
-
+// DescribeElasticIpsRequester provides the interface for the DescribeElasticIpsRequest API operation.
+type DescribeElasticIpsRequester interface {
 	DescribeElasticIpsRequest(*opsworks.DescribeElasticIpsInput) opsworks.DescribeElasticIpsRequest
+}
 
+// DescribeElasticLoadBalancersRequester provides the interface for the DescribeElasticLoadBalancersRequest API operation.
+type DescribeElasticLoadBalancersRequester interface {
 	DescribeElasticLoadBalancersRequest(*opsworks.DescribeElasticLoadBalancersInput) opsworks.DescribeElasticLoadBalancersRequest
+}
 
+// DescribeInstancesRequester provides the interface for the DescribeInstancesRequest API operation.
+type DescribeInstancesRequester interface {
 	DescribeInstancesRequest(*opsworks.DescribeInstancesInput) opsworks.DescribeInstancesRequest
+}
 
+// DescribeLayersRequester provides the interface for the DescribeLayersRequest API operation.
+type DescribeLayersRequester interface {
 	DescribeLayersRequest(*opsworks.DescribeLayersInput) opsworks.DescribeLayersRequest
+}
 
+// DescribeLoadBasedAutoScalingRequester provides the interface for the DescribeLoadBasedAutoScalingRequest API operation.
+type DescribeLoadBasedAutoScalingRequester interface {
 	DescribeLoadBasedAutoScalingRequest(*opsworks.DescribeLoadBasedAutoScalingInput) opsworks.DescribeLoadBasedAutoScalingRequest
+}
 
+// DescribeMyUserProfileRequester provides the interface for the DescribeMyUserProfileRequest API operation.
+type DescribeMyUserProfileRequester interface {
 	DescribeMyUserProfileRequest(*opsworks.DescribeMyUserProfileInput) opsworks.DescribeMyUserProfileRequest
+}
 
+// DescribePermissionsRequester provides the interface for the DescribePermissionsRequest API operation.
+type DescribePermissionsRequester interface {
 	DescribePermissionsRequest(*opsworks.DescribePermissionsInput) opsworks.DescribePermissionsRequest
+}
 
+// DescribeRaidArraysRequester provides the interface for the DescribeRaidArraysRequest API operation.
+type DescribeRaidArraysRequester interface {
 	DescribeRaidArraysRequest(*opsworks.DescribeRaidArraysInput) opsworks.DescribeRaidArraysRequest
+}
 
+// DescribeRdsDbInstancesRequester provides the interface for the DescribeRdsDbInstancesRequest API operation.
+type DescribeRdsDbInstancesRequester interface {
 	DescribeRdsDbInstancesRequest(*opsworks.DescribeRdsDbInstancesInput) opsworks.DescribeRdsDbInstancesRequest
+}
 
+// DescribeServiceErrorsRequester provides the interface for the DescribeServiceErrorsRequest API operation.
+type DescribeServiceErrorsRequester interface {
 	DescribeServiceErrorsRequest(*opsworks.DescribeServiceErrorsInput) opsworks.DescribeServiceErrorsRequest
+}
 
+// DescribeStackProvisioningParametersRequester provides the interface for the DescribeStackProvisioningParametersRequest API operation.
+type DescribeStackProvisioningParametersRequester interface {
 	DescribeStackProvisioningParametersRequest(*opsworks.DescribeStackProvisioningParametersInput) opsworks.DescribeStackProvisioningParametersRequest
+}
 
+// DescribeStackSummaryRequester provides the interface for the DescribeStackSummaryRequest API operation.
+type DescribeStackSummaryRequester interface {
 	DescribeStackSummaryRequest(*opsworks.DescribeStackSummaryInput) opsworks.DescribeStackSummaryRequest
+}
 
+// DescribeStacksRequester provides the interface for the DescribeStacksRequest API operation.
+type DescribeStacksRequester interface {
 	DescribeStacksRequest(*opsworks.DescribeStacksInput) opsworks.DescribeStacksRequest
+}
 
+// DescribeTimeBasedAutoScalingRequester provides the interface for the DescribeTimeBasedAutoScalingRequest API operation.
+type DescribeTimeBasedAutoScalingRequester interface {
 	DescribeTimeBasedAutoScalingRequest(*opsworks.DescribeTimeBasedAutoScalingInput) opsworks.DescribeTimeBasedAutoScalingRequest
+}
 
+// DescribeUserProfilesRequester provides the interface for the DescribeUserProfilesRequest API operation.
+type DescribeUserProfilesRequester interface {
 	DescribeUserProfilesRequest(*opsworks.DescribeUserProfilesInput) opsworks.DescribeUserProfilesRequest
+}
 
+// DescribeVolumesRequester provides the interface for the DescribeVolumesRequest API operation.
+type DescribeVolumesRequester interface {
 	DescribeVolumesRequest(*opsworks.DescribeVolumesInput) opsworks.DescribeVolumesRequest
+}
 
+// DetachElasticLoadBalancerRequester provides the interface for the DetachElasticLoadBalancerRequest API operation.
+type DetachElasticLoadBalancerRequester interface {
 	DetachElasticLoadBalancerRequest(*opsworks.DetachElasticLoadBalancerInput) opsworks.DetachElasticLoadBalancerRequest
+}
 
+// DisassociateElasticIpRequester provides the interface for the DisassociateElasticIpRequest API operation.
+type DisassociateElasticIpRequester interface {
 	DisassociateElasticIpRequest(*opsworks.DisassociateElasticIpInput) opsworks.DisassociateElasticIpRequest
+}
 
+// GetHostnameSuggestionRequester provides the interface for the GetHostnameSuggestionRequest API operation.
+type GetHostnameSuggestionRequester interface {
 	GetHostnameSuggestionRequest(*opsworks.GetHostnameSuggestionInput) opsworks.GetHostnameSuggestionRequest
+}
 
+// GrantAccessRequester provides the interface for the GrantAccessRequest API operation.
+type GrantAccessRequester interface {
 	GrantAccessRequest(*opsworks.GrantAccessInput) opsworks.GrantAccessRequest
+}
 
+// ListTagsRequester provides the interface for the ListTagsRequest API operation.
+type ListTagsRequester interface {
 	ListTagsRequest(*opsworks.ListTagsInput) opsworks.ListTagsRequest
+}
 
+// RebootInstanceRequester provides the interface for the RebootInstanceRequest API operation.
+type RebootInstanceRequester interface {
 	RebootInstanceRequest(*opsworks.RebootInstanceInput) opsworks.RebootInstanceRequest
+}
 
+// RegisterEcsClusterRequester provides the interface for the RegisterEcsClusterRequest API operation.
+type RegisterEcsClusterRequester interface {
 	RegisterEcsClusterRequest(*opsworks.RegisterEcsClusterInput) opsworks.RegisterEcsClusterRequest
+}
 
+// RegisterElasticIpRequester provides the interface for the RegisterElasticIpRequest API operation.
+type RegisterElasticIpRequester interface {
 	RegisterElasticIpRequest(*opsworks.RegisterElasticIpInput) opsworks.RegisterElasticIpRequest
+}
 
+// RegisterInstanceRequester provides the interface for the RegisterInstanceRequest API operation.
+type RegisterInstanceRequester interface {
 	RegisterInstanceRequest(*opsworks.RegisterInstanceInput) opsworks.RegisterInstanceRequest
+}
 
+// RegisterRdsDbInstanceRequester provides the interface for the RegisterRdsDbInstanceRequest API operation.
+type RegisterRdsDbInstanceRequester interface {
 	RegisterRdsDbInstanceRequest(*opsworks.RegisterRdsDbInstanceInput) opsworks.RegisterRdsDbInstanceRequest
+}
 
+// RegisterVolumeRequester provides the interface for the RegisterVolumeRequest API operation.
+type RegisterVolumeRequester interface {
 	RegisterVolumeRequest(*opsworks.RegisterVolumeInput) opsworks.RegisterVolumeRequest
+}
 
+// SetLoadBasedAutoScalingRequester provides the interface for the SetLoadBasedAutoScalingRequest API operation.
+type SetLoadBasedAutoScalingRequester interface {
 	SetLoadBasedAutoScalingRequest(*opsworks.SetLoadBasedAutoScalingInput) opsworks.SetLoadBasedAutoScalingRequest
+}
 
+// SetPermissionRequester provides the interface for the SetPermissionRequest API operation.
+type SetPermissionRequester interface {
 	SetPermissionRequest(*opsworks.SetPermissionInput) opsworks.SetPermissionRequest
+}
 
+// SetTimeBasedAutoScalingRequester provides the interface for the SetTimeBasedAutoScalingRequest API operation.
+type SetTimeBasedAutoScalingRequester interface {
 	SetTimeBasedAutoScalingRequest(*opsworks.SetTimeBasedAutoScalingInput) opsworks.SetTimeBasedAutoScalingRequest
+}
 
+// StartInstanceRequester provides the interface for the StartInstanceRequest API operation.
+type StartInstanceRequester interface {
 	StartInstanceRequest(*opsworks.StartInstanceInput) opsworks.StartInstanceRequest
+}
 
+// StartStackRequester provides the interface for the StartStackRequest API operation.
+type StartStackRequester interface {
 	StartStackRequest(*opsworks.StartStackInput) opsworks.StartStackRequest
+}
 
+// StopInstanceRequester provides the interface for the StopInstanceRequest API operation.
+type StopInstanceRequester interface {
 	StopInstanceRequest(*opsworks.StopInstanceInput) opsworks.StopInstanceRequest
+}
 
+// StopStackRequester provides the interface for the StopStackRequest API operation.
+type StopStackRequester interface {
 	StopStackRequest(*opsworks.StopStackInput) opsworks.StopStackRequest
+}
 
+// TagResourceRequester provides the interface for the TagResourceRequest API operation.
+type TagResourceRequester interface {
 	TagResourceRequest(*opsworks.TagResourceInput) opsworks.TagResourceRequest
+}
 
+// UnassignInstanceRequester provides the interface for the UnassignInstanceRequest API operation.
+type UnassignInstanceRequester interface {
 	UnassignInstanceRequest(*opsworks.UnassignInstanceInput) opsworks.UnassignInstanceRequest
+}
 
+// UnassignVolumeRequester provides the interface for the UnassignVolumeRequest API operation.
+type UnassignVolumeRequester interface {
 	UnassignVolumeRequest(*opsworks.UnassignVolumeInput) opsworks.UnassignVolumeRequest
+}
 
+// UntagResourceRequester provides the interface for the UntagResourceRequest API operation.
+type UntagResourceRequester interface {
 	UntagResourceRequest(*opsworks.UntagResourceInput) opsworks.UntagResourceRequest
+}
 
+// UpdateAppRequester provides the interface for the UpdateAppRequest API operation.
+type UpdateAppRequester interface {
 	UpdateAppRequest(*opsworks.UpdateAppInput) opsworks.UpdateAppRequest
+}
 
+// UpdateElasticIpRequester provides the interface for the UpdateElasticIpRequest API operation.
+type UpdateElasticIpRequester interface {
 	UpdateElasticIpRequest(*opsworks.UpdateElasticIpInput) opsworks.UpdateElasticIpRequest
+}
 
+// UpdateInstanceRequester provides the interface for the UpdateInstanceRequest API operation.
+type UpdateInstanceRequester interface {
 	UpdateInstanceRequest(*opsworks.UpdateInstanceInput) opsworks.UpdateInstanceRequest
+}
 
+// UpdateLayerRequester provides the interface for the UpdateLayerRequest API operation.
+type UpdateLayerRequester interface {
 	UpdateLayerRequest(*opsworks.UpdateLayerInput) opsworks.UpdateLayerRequest
+}
 
+// UpdateMyUserProfileRequester provides the interface for the UpdateMyUserProfileRequest API operation.
+type UpdateMyUserProfileRequester interface {
 	UpdateMyUserProfileRequest(*opsworks.UpdateMyUserProfileInput) opsworks.UpdateMyUserProfileRequest
+}
 
+// UpdateRdsDbInstanceRequester provides the interface for the UpdateRdsDbInstanceRequest API operation.
+type UpdateRdsDbInstanceRequester interface {
 	UpdateRdsDbInstanceRequest(*opsworks.UpdateRdsDbInstanceInput) opsworks.UpdateRdsDbInstanceRequest
+}
 
+// UpdateStackRequester provides the interface for the UpdateStackRequest API operation.
+type UpdateStackRequester interface {
 	UpdateStackRequest(*opsworks.UpdateStackInput) opsworks.UpdateStackRequest
+}
 
+// UpdateUserProfileRequester provides the interface for the UpdateUserProfileRequest API operation.
+type UpdateUserProfileRequester interface {
 	UpdateUserProfileRequest(*opsworks.UpdateUserProfileInput) opsworks.UpdateUserProfileRequest
+}
 
+// UpdateVolumeRequester provides the interface for the UpdateVolumeRequest API operation.
+type UpdateVolumeRequester interface {
 	UpdateVolumeRequest(*opsworks.UpdateVolumeInput) opsworks.UpdateVolumeRequest
+}
 
+// AppExistsWaiter provides the interface for the WaitUntilAppExists waiter.
+type AppExistsWaiter interface {
 	WaitUntilAppExists(*opsworks.DescribeAppsInput) error
 	WaitUntilAppExistsWithContext(aws.Context, *opsworks.DescribeAppsInput, ...aws.WaiterOption) error
+}
 
+// DeploymentSuccessfulWaiter provides the interface for the WaitUntilDeploymentSuccessful waiter.
+type DeploymentSuccessfulWaiter interface {
 	WaitUntilDeploymentSuccessful(*opsworks.DescribeDeploymentsInput) error
 	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *opsworks.DescribeDeploymentsInput, ...aws.WaiterOption) error
+}
 
+// InstanceOnlineWaiter provides the interface for the WaitUntilInstanceOnline waiter.
+type InstanceOnlineWaiter interface {
 	WaitUntilInstanceOnline(*opsworks.DescribeInstancesInput) error
 	WaitUntilInstanceOnlineWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// InstanceRegisteredWaiter provides the interface for the WaitUntilInstanceRegistered waiter.
+type InstanceRegisteredWaiter interface {
 	WaitUntilInstanceRegistered(*opsworks.DescribeInstancesInput) error
 	WaitUntilInstanceRegisteredWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// InstanceStoppedWaiter provides the interface for the WaitUntilInstanceStopped waiter.
+type InstanceStoppedWaiter interface {
 	WaitUntilInstanceStopped(*opsworks.DescribeInstancesInput) error
 	WaitUntilInstanceStoppedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+}
 
+// InstanceTerminatedWaiter provides the interface for the WaitUntilInstanceTerminated waiter.
+type InstanceTerminatedWaiter interface {
 	WaitUntilInstanceTerminated(*opsworks.DescribeInstancesInput) error
 	WaitUntilInstanceTerminatedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 }
-
-var _ OpsWorksAPI = (*opsworks.OpsWorks)(nil)

@@ -13,135 +13,166 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 )
 
-// MachineLearningAPI provides an interface to enable mocking the
-// machinelearning.MachineLearning service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Machine Learning.
-//    func myFunc(svc machinelearningiface.MachineLearningAPI) bool {
-//        // Make svc.AddTags request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := machinelearning.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMachineLearningClient struct {
-//        machinelearningiface.MachineLearningAPI
-//    }
-//    func (m *mockMachineLearningClient) AddTags(input *machinelearning.AddTagsInput) (*machinelearning.AddTagsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockMachineLearningClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type MachineLearningAPI interface {
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
 	AddTagsRequest(*machinelearning.AddTagsInput) machinelearning.AddTagsRequest
+}
 
+// CreateBatchPredictionRequester provides the interface for the CreateBatchPredictionRequest API operation.
+type CreateBatchPredictionRequester interface {
 	CreateBatchPredictionRequest(*machinelearning.CreateBatchPredictionInput) machinelearning.CreateBatchPredictionRequest
+}
 
+// CreateDataSourceFromRDSRequester provides the interface for the CreateDataSourceFromRDSRequest API operation.
+type CreateDataSourceFromRDSRequester interface {
 	CreateDataSourceFromRDSRequest(*machinelearning.CreateDataSourceFromRDSInput) machinelearning.CreateDataSourceFromRDSRequest
+}
 
+// CreateDataSourceFromRedshiftRequester provides the interface for the CreateDataSourceFromRedshiftRequest API operation.
+type CreateDataSourceFromRedshiftRequester interface {
 	CreateDataSourceFromRedshiftRequest(*machinelearning.CreateDataSourceFromRedshiftInput) machinelearning.CreateDataSourceFromRedshiftRequest
+}
 
+// CreateDataSourceFromS3Requester provides the interface for the CreateDataSourceFromS3Request API operation.
+type CreateDataSourceFromS3Requester interface {
 	CreateDataSourceFromS3Request(*machinelearning.CreateDataSourceFromS3Input) machinelearning.CreateDataSourceFromS3Request
+}
 
+// CreateEvaluationRequester provides the interface for the CreateEvaluationRequest API operation.
+type CreateEvaluationRequester interface {
 	CreateEvaluationRequest(*machinelearning.CreateEvaluationInput) machinelearning.CreateEvaluationRequest
+}
 
+// CreateMLModelRequester provides the interface for the CreateMLModelRequest API operation.
+type CreateMLModelRequester interface {
 	CreateMLModelRequest(*machinelearning.CreateMLModelInput) machinelearning.CreateMLModelRequest
+}
 
+// CreateRealtimeEndpointRequester provides the interface for the CreateRealtimeEndpointRequest API operation.
+type CreateRealtimeEndpointRequester interface {
 	CreateRealtimeEndpointRequest(*machinelearning.CreateRealtimeEndpointInput) machinelearning.CreateRealtimeEndpointRequest
+}
 
+// DeleteBatchPredictionRequester provides the interface for the DeleteBatchPredictionRequest API operation.
+type DeleteBatchPredictionRequester interface {
 	DeleteBatchPredictionRequest(*machinelearning.DeleteBatchPredictionInput) machinelearning.DeleteBatchPredictionRequest
+}
 
+// DeleteDataSourceRequester provides the interface for the DeleteDataSourceRequest API operation.
+type DeleteDataSourceRequester interface {
 	DeleteDataSourceRequest(*machinelearning.DeleteDataSourceInput) machinelearning.DeleteDataSourceRequest
+}
 
+// DeleteEvaluationRequester provides the interface for the DeleteEvaluationRequest API operation.
+type DeleteEvaluationRequester interface {
 	DeleteEvaluationRequest(*machinelearning.DeleteEvaluationInput) machinelearning.DeleteEvaluationRequest
+}
 
+// DeleteMLModelRequester provides the interface for the DeleteMLModelRequest API operation.
+type DeleteMLModelRequester interface {
 	DeleteMLModelRequest(*machinelearning.DeleteMLModelInput) machinelearning.DeleteMLModelRequest
+}
 
+// DeleteRealtimeEndpointRequester provides the interface for the DeleteRealtimeEndpointRequest API operation.
+type DeleteRealtimeEndpointRequester interface {
 	DeleteRealtimeEndpointRequest(*machinelearning.DeleteRealtimeEndpointInput) machinelearning.DeleteRealtimeEndpointRequest
+}
 
+// DeleteTagsRequester provides the interface for the DeleteTagsRequest API operation.
+type DeleteTagsRequester interface {
 	DeleteTagsRequest(*machinelearning.DeleteTagsInput) machinelearning.DeleteTagsRequest
+}
 
+// DescribeBatchPredictionsRequester provides the interface for the DescribeBatchPredictionsRequest API operation.
+type DescribeBatchPredictionsRequester interface {
 	DescribeBatchPredictionsRequest(*machinelearning.DescribeBatchPredictionsInput) machinelearning.DescribeBatchPredictionsRequest
+}
 
-	DescribeBatchPredictionsPages(*machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool) error
-	DescribeBatchPredictionsPagesWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool, ...aws.Option) error
-
+// DescribeDataSourcesRequester provides the interface for the DescribeDataSourcesRequest API operation.
+type DescribeDataSourcesRequester interface {
 	DescribeDataSourcesRequest(*machinelearning.DescribeDataSourcesInput) machinelearning.DescribeDataSourcesRequest
+}
 
-	DescribeDataSourcesPages(*machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool) error
-	DescribeDataSourcesPagesWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool, ...aws.Option) error
-
+// DescribeEvaluationsRequester provides the interface for the DescribeEvaluationsRequest API operation.
+type DescribeEvaluationsRequester interface {
 	DescribeEvaluationsRequest(*machinelearning.DescribeEvaluationsInput) machinelearning.DescribeEvaluationsRequest
+}
 
-	DescribeEvaluationsPages(*machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool) error
-	DescribeEvaluationsPagesWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool, ...aws.Option) error
-
+// DescribeMLModelsRequester provides the interface for the DescribeMLModelsRequest API operation.
+type DescribeMLModelsRequester interface {
 	DescribeMLModelsRequest(*machinelearning.DescribeMLModelsInput) machinelearning.DescribeMLModelsRequest
+}
 
-	DescribeMLModelsPages(*machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool) error
-	DescribeMLModelsPagesWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool, ...aws.Option) error
-
+// DescribeTagsRequester provides the interface for the DescribeTagsRequest API operation.
+type DescribeTagsRequester interface {
 	DescribeTagsRequest(*machinelearning.DescribeTagsInput) machinelearning.DescribeTagsRequest
+}
 
+// GetBatchPredictionRequester provides the interface for the GetBatchPredictionRequest API operation.
+type GetBatchPredictionRequester interface {
 	GetBatchPredictionRequest(*machinelearning.GetBatchPredictionInput) machinelearning.GetBatchPredictionRequest
+}
 
+// GetDataSourceRequester provides the interface for the GetDataSourceRequest API operation.
+type GetDataSourceRequester interface {
 	GetDataSourceRequest(*machinelearning.GetDataSourceInput) machinelearning.GetDataSourceRequest
+}
 
+// GetEvaluationRequester provides the interface for the GetEvaluationRequest API operation.
+type GetEvaluationRequester interface {
 	GetEvaluationRequest(*machinelearning.GetEvaluationInput) machinelearning.GetEvaluationRequest
+}
 
+// GetMLModelRequester provides the interface for the GetMLModelRequest API operation.
+type GetMLModelRequester interface {
 	GetMLModelRequest(*machinelearning.GetMLModelInput) machinelearning.GetMLModelRequest
+}
 
+// PredictRequester provides the interface for the PredictRequest API operation.
+type PredictRequester interface {
 	PredictRequest(*machinelearning.PredictInput) machinelearning.PredictRequest
+}
 
+// UpdateBatchPredictionRequester provides the interface for the UpdateBatchPredictionRequest API operation.
+type UpdateBatchPredictionRequester interface {
 	UpdateBatchPredictionRequest(*machinelearning.UpdateBatchPredictionInput) machinelearning.UpdateBatchPredictionRequest
+}
 
+// UpdateDataSourceRequester provides the interface for the UpdateDataSourceRequest API operation.
+type UpdateDataSourceRequester interface {
 	UpdateDataSourceRequest(*machinelearning.UpdateDataSourceInput) machinelearning.UpdateDataSourceRequest
+}
 
+// UpdateEvaluationRequester provides the interface for the UpdateEvaluationRequest API operation.
+type UpdateEvaluationRequester interface {
 	UpdateEvaluationRequest(*machinelearning.UpdateEvaluationInput) machinelearning.UpdateEvaluationRequest
+}
 
+// UpdateMLModelRequester provides the interface for the UpdateMLModelRequest API operation.
+type UpdateMLModelRequester interface {
 	UpdateMLModelRequest(*machinelearning.UpdateMLModelInput) machinelearning.UpdateMLModelRequest
+}
 
+// BatchPredictionAvailableWaiter provides the interface for the WaitUntilBatchPredictionAvailable waiter.
+type BatchPredictionAvailableWaiter interface {
 	WaitUntilBatchPredictionAvailable(*machinelearning.DescribeBatchPredictionsInput) error
 	WaitUntilBatchPredictionAvailableWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, ...aws.WaiterOption) error
+}
 
+// DataSourceAvailableWaiter provides the interface for the WaitUntilDataSourceAvailable waiter.
+type DataSourceAvailableWaiter interface {
 	WaitUntilDataSourceAvailable(*machinelearning.DescribeDataSourcesInput) error
 	WaitUntilDataSourceAvailableWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, ...aws.WaiterOption) error
+}
 
+// EvaluationAvailableWaiter provides the interface for the WaitUntilEvaluationAvailable waiter.
+type EvaluationAvailableWaiter interface {
 	WaitUntilEvaluationAvailable(*machinelearning.DescribeEvaluationsInput) error
 	WaitUntilEvaluationAvailableWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, ...aws.WaiterOption) error
+}
 
+// MLModelAvailableWaiter provides the interface for the WaitUntilMLModelAvailable waiter.
+type MLModelAvailableWaiter interface {
 	WaitUntilMLModelAvailable(*machinelearning.DescribeMLModelsInput) error
 	WaitUntilMLModelAvailableWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, ...aws.WaiterOption) error
 }
-
-var _ MachineLearningAPI = (*machinelearning.MachineLearning)(nil)

@@ -13,169 +13,197 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 )
 
-// OrganizationsAPI provides an interface to enable mocking the
-// organizations.Organizations service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Organizations.
-//    func myFunc(svc organizationsiface.OrganizationsAPI) bool {
-//        // Make svc.AcceptHandshake request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := organizations.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockOrganizationsClient struct {
-//        organizationsiface.OrganizationsAPI
-//    }
-//    func (m *mockOrganizationsClient) AcceptHandshake(input *organizations.AcceptHandshakeInput) (*organizations.AcceptHandshakeOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockOrganizationsClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type OrganizationsAPI interface {
+// AcceptHandshakeRequester provides the interface for the AcceptHandshakeRequest API operation.
+type AcceptHandshakeRequester interface {
 	AcceptHandshakeRequest(*organizations.AcceptHandshakeInput) organizations.AcceptHandshakeRequest
-
-	AttachPolicyRequest(*organizations.AttachPolicyInput) organizations.AttachPolicyRequest
-
-	CancelHandshakeRequest(*organizations.CancelHandshakeInput) organizations.CancelHandshakeRequest
-
-	CreateAccountRequest(*organizations.CreateAccountInput) organizations.CreateAccountRequest
-
-	CreateOrganizationRequest(*organizations.CreateOrganizationInput) organizations.CreateOrganizationRequest
-
-	CreateOrganizationalUnitRequest(*organizations.CreateOrganizationalUnitInput) organizations.CreateOrganizationalUnitRequest
-
-	CreatePolicyRequest(*organizations.CreatePolicyInput) organizations.CreatePolicyRequest
-
-	DeclineHandshakeRequest(*organizations.DeclineHandshakeInput) organizations.DeclineHandshakeRequest
-
-	DeleteOrganizationRequest(*organizations.DeleteOrganizationInput) organizations.DeleteOrganizationRequest
-
-	DeleteOrganizationalUnitRequest(*organizations.DeleteOrganizationalUnitInput) organizations.DeleteOrganizationalUnitRequest
-
-	DeletePolicyRequest(*organizations.DeletePolicyInput) organizations.DeletePolicyRequest
-
-	DescribeAccountRequest(*organizations.DescribeAccountInput) organizations.DescribeAccountRequest
-
-	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
-
-	DescribeHandshakeRequest(*organizations.DescribeHandshakeInput) organizations.DescribeHandshakeRequest
-
-	DescribeOrganizationRequest(*organizations.DescribeOrganizationInput) organizations.DescribeOrganizationRequest
-
-	DescribeOrganizationalUnitRequest(*organizations.DescribeOrganizationalUnitInput) organizations.DescribeOrganizationalUnitRequest
-
-	DescribePolicyRequest(*organizations.DescribePolicyInput) organizations.DescribePolicyRequest
-
-	DetachPolicyRequest(*organizations.DetachPolicyInput) organizations.DetachPolicyRequest
-
-	DisablePolicyTypeRequest(*organizations.DisablePolicyTypeInput) organizations.DisablePolicyTypeRequest
-
-	EnableAllFeaturesRequest(*organizations.EnableAllFeaturesInput) organizations.EnableAllFeaturesRequest
-
-	EnablePolicyTypeRequest(*organizations.EnablePolicyTypeInput) organizations.EnablePolicyTypeRequest
-
-	InviteAccountToOrganizationRequest(*organizations.InviteAccountToOrganizationInput) organizations.InviteAccountToOrganizationRequest
-
-	LeaveOrganizationRequest(*organizations.LeaveOrganizationInput) organizations.LeaveOrganizationRequest
-
-	ListAccountsRequest(*organizations.ListAccountsInput) organizations.ListAccountsRequest
-
-	ListAccountsPages(*organizations.ListAccountsInput, func(*organizations.ListAccountsOutput, bool) bool) error
-	ListAccountsPagesWithContext(aws.Context, *organizations.ListAccountsInput, func(*organizations.ListAccountsOutput, bool) bool, ...aws.Option) error
-
-	ListAccountsForParentRequest(*organizations.ListAccountsForParentInput) organizations.ListAccountsForParentRequest
-
-	ListAccountsForParentPages(*organizations.ListAccountsForParentInput, func(*organizations.ListAccountsForParentOutput, bool) bool) error
-	ListAccountsForParentPagesWithContext(aws.Context, *organizations.ListAccountsForParentInput, func(*organizations.ListAccountsForParentOutput, bool) bool, ...aws.Option) error
-
-	ListChildrenRequest(*organizations.ListChildrenInput) organizations.ListChildrenRequest
-
-	ListChildrenPages(*organizations.ListChildrenInput, func(*organizations.ListChildrenOutput, bool) bool) error
-	ListChildrenPagesWithContext(aws.Context, *organizations.ListChildrenInput, func(*organizations.ListChildrenOutput, bool) bool, ...aws.Option) error
-
-	ListCreateAccountStatusRequest(*organizations.ListCreateAccountStatusInput) organizations.ListCreateAccountStatusRequest
-
-	ListCreateAccountStatusPages(*organizations.ListCreateAccountStatusInput, func(*organizations.ListCreateAccountStatusOutput, bool) bool) error
-	ListCreateAccountStatusPagesWithContext(aws.Context, *organizations.ListCreateAccountStatusInput, func(*organizations.ListCreateAccountStatusOutput, bool) bool, ...aws.Option) error
-
-	ListHandshakesForAccountRequest(*organizations.ListHandshakesForAccountInput) organizations.ListHandshakesForAccountRequest
-
-	ListHandshakesForAccountPages(*organizations.ListHandshakesForAccountInput, func(*organizations.ListHandshakesForAccountOutput, bool) bool) error
-	ListHandshakesForAccountPagesWithContext(aws.Context, *organizations.ListHandshakesForAccountInput, func(*organizations.ListHandshakesForAccountOutput, bool) bool, ...aws.Option) error
-
-	ListHandshakesForOrganizationRequest(*organizations.ListHandshakesForOrganizationInput) organizations.ListHandshakesForOrganizationRequest
-
-	ListHandshakesForOrganizationPages(*organizations.ListHandshakesForOrganizationInput, func(*organizations.ListHandshakesForOrganizationOutput, bool) bool) error
-	ListHandshakesForOrganizationPagesWithContext(aws.Context, *organizations.ListHandshakesForOrganizationInput, func(*organizations.ListHandshakesForOrganizationOutput, bool) bool, ...aws.Option) error
-
-	ListOrganizationalUnitsForParentRequest(*organizations.ListOrganizationalUnitsForParentInput) organizations.ListOrganizationalUnitsForParentRequest
-
-	ListOrganizationalUnitsForParentPages(*organizations.ListOrganizationalUnitsForParentInput, func(*organizations.ListOrganizationalUnitsForParentOutput, bool) bool) error
-	ListOrganizationalUnitsForParentPagesWithContext(aws.Context, *organizations.ListOrganizationalUnitsForParentInput, func(*organizations.ListOrganizationalUnitsForParentOutput, bool) bool, ...aws.Option) error
-
-	ListParentsRequest(*organizations.ListParentsInput) organizations.ListParentsRequest
-
-	ListParentsPages(*organizations.ListParentsInput, func(*organizations.ListParentsOutput, bool) bool) error
-	ListParentsPagesWithContext(aws.Context, *organizations.ListParentsInput, func(*organizations.ListParentsOutput, bool) bool, ...aws.Option) error
-
-	ListPoliciesRequest(*organizations.ListPoliciesInput) organizations.ListPoliciesRequest
-
-	ListPoliciesPages(*organizations.ListPoliciesInput, func(*organizations.ListPoliciesOutput, bool) bool) error
-	ListPoliciesPagesWithContext(aws.Context, *organizations.ListPoliciesInput, func(*organizations.ListPoliciesOutput, bool) bool, ...aws.Option) error
-
-	ListPoliciesForTargetRequest(*organizations.ListPoliciesForTargetInput) organizations.ListPoliciesForTargetRequest
-
-	ListPoliciesForTargetPages(*organizations.ListPoliciesForTargetInput, func(*organizations.ListPoliciesForTargetOutput, bool) bool) error
-	ListPoliciesForTargetPagesWithContext(aws.Context, *organizations.ListPoliciesForTargetInput, func(*organizations.ListPoliciesForTargetOutput, bool) bool, ...aws.Option) error
-
-	ListRootsRequest(*organizations.ListRootsInput) organizations.ListRootsRequest
-
-	ListRootsPages(*organizations.ListRootsInput, func(*organizations.ListRootsOutput, bool) bool) error
-	ListRootsPagesWithContext(aws.Context, *organizations.ListRootsInput, func(*organizations.ListRootsOutput, bool) bool, ...aws.Option) error
-
-	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
-
-	ListTargetsForPolicyPages(*organizations.ListTargetsForPolicyInput, func(*organizations.ListTargetsForPolicyOutput, bool) bool) error
-	ListTargetsForPolicyPagesWithContext(aws.Context, *organizations.ListTargetsForPolicyInput, func(*organizations.ListTargetsForPolicyOutput, bool) bool, ...aws.Option) error
-
-	MoveAccountRequest(*organizations.MoveAccountInput) organizations.MoveAccountRequest
-
-	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
-
-	UpdateOrganizationalUnitRequest(*organizations.UpdateOrganizationalUnitInput) organizations.UpdateOrganizationalUnitRequest
-
-	UpdatePolicyRequest(*organizations.UpdatePolicyInput) organizations.UpdatePolicyRequest
 }
 
-var _ OrganizationsAPI = (*organizations.Organizations)(nil)
+// AttachPolicyRequester provides the interface for the AttachPolicyRequest API operation.
+type AttachPolicyRequester interface {
+	AttachPolicyRequest(*organizations.AttachPolicyInput) organizations.AttachPolicyRequest
+}
+
+// CancelHandshakeRequester provides the interface for the CancelHandshakeRequest API operation.
+type CancelHandshakeRequester interface {
+	CancelHandshakeRequest(*organizations.CancelHandshakeInput) organizations.CancelHandshakeRequest
+}
+
+// CreateAccountRequester provides the interface for the CreateAccountRequest API operation.
+type CreateAccountRequester interface {
+	CreateAccountRequest(*organizations.CreateAccountInput) organizations.CreateAccountRequest
+}
+
+// CreateOrganizationRequester provides the interface for the CreateOrganizationRequest API operation.
+type CreateOrganizationRequester interface {
+	CreateOrganizationRequest(*organizations.CreateOrganizationInput) organizations.CreateOrganizationRequest
+}
+
+// CreateOrganizationalUnitRequester provides the interface for the CreateOrganizationalUnitRequest API operation.
+type CreateOrganizationalUnitRequester interface {
+	CreateOrganizationalUnitRequest(*organizations.CreateOrganizationalUnitInput) organizations.CreateOrganizationalUnitRequest
+}
+
+// CreatePolicyRequester provides the interface for the CreatePolicyRequest API operation.
+type CreatePolicyRequester interface {
+	CreatePolicyRequest(*organizations.CreatePolicyInput) organizations.CreatePolicyRequest
+}
+
+// DeclineHandshakeRequester provides the interface for the DeclineHandshakeRequest API operation.
+type DeclineHandshakeRequester interface {
+	DeclineHandshakeRequest(*organizations.DeclineHandshakeInput) organizations.DeclineHandshakeRequest
+}
+
+// DeleteOrganizationRequester provides the interface for the DeleteOrganizationRequest API operation.
+type DeleteOrganizationRequester interface {
+	DeleteOrganizationRequest(*organizations.DeleteOrganizationInput) organizations.DeleteOrganizationRequest
+}
+
+// DeleteOrganizationalUnitRequester provides the interface for the DeleteOrganizationalUnitRequest API operation.
+type DeleteOrganizationalUnitRequester interface {
+	DeleteOrganizationalUnitRequest(*organizations.DeleteOrganizationalUnitInput) organizations.DeleteOrganizationalUnitRequest
+}
+
+// DeletePolicyRequester provides the interface for the DeletePolicyRequest API operation.
+type DeletePolicyRequester interface {
+	DeletePolicyRequest(*organizations.DeletePolicyInput) organizations.DeletePolicyRequest
+}
+
+// DescribeAccountRequester provides the interface for the DescribeAccountRequest API operation.
+type DescribeAccountRequester interface {
+	DescribeAccountRequest(*organizations.DescribeAccountInput) organizations.DescribeAccountRequest
+}
+
+// DescribeCreateAccountStatusRequester provides the interface for the DescribeCreateAccountStatusRequest API operation.
+type DescribeCreateAccountStatusRequester interface {
+	DescribeCreateAccountStatusRequest(*organizations.DescribeCreateAccountStatusInput) organizations.DescribeCreateAccountStatusRequest
+}
+
+// DescribeHandshakeRequester provides the interface for the DescribeHandshakeRequest API operation.
+type DescribeHandshakeRequester interface {
+	DescribeHandshakeRequest(*organizations.DescribeHandshakeInput) organizations.DescribeHandshakeRequest
+}
+
+// DescribeOrganizationRequester provides the interface for the DescribeOrganizationRequest API operation.
+type DescribeOrganizationRequester interface {
+	DescribeOrganizationRequest(*organizations.DescribeOrganizationInput) organizations.DescribeOrganizationRequest
+}
+
+// DescribeOrganizationalUnitRequester provides the interface for the DescribeOrganizationalUnitRequest API operation.
+type DescribeOrganizationalUnitRequester interface {
+	DescribeOrganizationalUnitRequest(*organizations.DescribeOrganizationalUnitInput) organizations.DescribeOrganizationalUnitRequest
+}
+
+// DescribePolicyRequester provides the interface for the DescribePolicyRequest API operation.
+type DescribePolicyRequester interface {
+	DescribePolicyRequest(*organizations.DescribePolicyInput) organizations.DescribePolicyRequest
+}
+
+// DetachPolicyRequester provides the interface for the DetachPolicyRequest API operation.
+type DetachPolicyRequester interface {
+	DetachPolicyRequest(*organizations.DetachPolicyInput) organizations.DetachPolicyRequest
+}
+
+// DisablePolicyTypeRequester provides the interface for the DisablePolicyTypeRequest API operation.
+type DisablePolicyTypeRequester interface {
+	DisablePolicyTypeRequest(*organizations.DisablePolicyTypeInput) organizations.DisablePolicyTypeRequest
+}
+
+// EnableAllFeaturesRequester provides the interface for the EnableAllFeaturesRequest API operation.
+type EnableAllFeaturesRequester interface {
+	EnableAllFeaturesRequest(*organizations.EnableAllFeaturesInput) organizations.EnableAllFeaturesRequest
+}
+
+// EnablePolicyTypeRequester provides the interface for the EnablePolicyTypeRequest API operation.
+type EnablePolicyTypeRequester interface {
+	EnablePolicyTypeRequest(*organizations.EnablePolicyTypeInput) organizations.EnablePolicyTypeRequest
+}
+
+// InviteAccountToOrganizationRequester provides the interface for the InviteAccountToOrganizationRequest API operation.
+type InviteAccountToOrganizationRequester interface {
+	InviteAccountToOrganizationRequest(*organizations.InviteAccountToOrganizationInput) organizations.InviteAccountToOrganizationRequest
+}
+
+// LeaveOrganizationRequester provides the interface for the LeaveOrganizationRequest API operation.
+type LeaveOrganizationRequester interface {
+	LeaveOrganizationRequest(*organizations.LeaveOrganizationInput) organizations.LeaveOrganizationRequest
+}
+
+// ListAccountsRequester provides the interface for the ListAccountsRequest API operation.
+type ListAccountsRequester interface {
+	ListAccountsRequest(*organizations.ListAccountsInput) organizations.ListAccountsRequest
+}
+
+// ListAccountsForParentRequester provides the interface for the ListAccountsForParentRequest API operation.
+type ListAccountsForParentRequester interface {
+	ListAccountsForParentRequest(*organizations.ListAccountsForParentInput) organizations.ListAccountsForParentRequest
+}
+
+// ListChildrenRequester provides the interface for the ListChildrenRequest API operation.
+type ListChildrenRequester interface {
+	ListChildrenRequest(*organizations.ListChildrenInput) organizations.ListChildrenRequest
+}
+
+// ListCreateAccountStatusRequester provides the interface for the ListCreateAccountStatusRequest API operation.
+type ListCreateAccountStatusRequester interface {
+	ListCreateAccountStatusRequest(*organizations.ListCreateAccountStatusInput) organizations.ListCreateAccountStatusRequest
+}
+
+// ListHandshakesForAccountRequester provides the interface for the ListHandshakesForAccountRequest API operation.
+type ListHandshakesForAccountRequester interface {
+	ListHandshakesForAccountRequest(*organizations.ListHandshakesForAccountInput) organizations.ListHandshakesForAccountRequest
+}
+
+// ListHandshakesForOrganizationRequester provides the interface for the ListHandshakesForOrganizationRequest API operation.
+type ListHandshakesForOrganizationRequester interface {
+	ListHandshakesForOrganizationRequest(*organizations.ListHandshakesForOrganizationInput) organizations.ListHandshakesForOrganizationRequest
+}
+
+// ListOrganizationalUnitsForParentRequester provides the interface for the ListOrganizationalUnitsForParentRequest API operation.
+type ListOrganizationalUnitsForParentRequester interface {
+	ListOrganizationalUnitsForParentRequest(*organizations.ListOrganizationalUnitsForParentInput) organizations.ListOrganizationalUnitsForParentRequest
+}
+
+// ListParentsRequester provides the interface for the ListParentsRequest API operation.
+type ListParentsRequester interface {
+	ListParentsRequest(*organizations.ListParentsInput) organizations.ListParentsRequest
+}
+
+// ListPoliciesRequester provides the interface for the ListPoliciesRequest API operation.
+type ListPoliciesRequester interface {
+	ListPoliciesRequest(*organizations.ListPoliciesInput) organizations.ListPoliciesRequest
+}
+
+// ListPoliciesForTargetRequester provides the interface for the ListPoliciesForTargetRequest API operation.
+type ListPoliciesForTargetRequester interface {
+	ListPoliciesForTargetRequest(*organizations.ListPoliciesForTargetInput) organizations.ListPoliciesForTargetRequest
+}
+
+// ListRootsRequester provides the interface for the ListRootsRequest API operation.
+type ListRootsRequester interface {
+	ListRootsRequest(*organizations.ListRootsInput) organizations.ListRootsRequest
+}
+
+// ListTargetsForPolicyRequester provides the interface for the ListTargetsForPolicyRequest API operation.
+type ListTargetsForPolicyRequester interface {
+	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
+}
+
+// MoveAccountRequester provides the interface for the MoveAccountRequest API operation.
+type MoveAccountRequester interface {
+	MoveAccountRequest(*organizations.MoveAccountInput) organizations.MoveAccountRequest
+}
+
+// RemoveAccountFromOrganizationRequester provides the interface for the RemoveAccountFromOrganizationRequest API operation.
+type RemoveAccountFromOrganizationRequester interface {
+	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
+}
+
+// UpdateOrganizationalUnitRequester provides the interface for the UpdateOrganizationalUnitRequest API operation.
+type UpdateOrganizationalUnitRequester interface {
+	UpdateOrganizationalUnitRequest(*organizations.UpdateOrganizationalUnitInput) organizations.UpdateOrganizationalUnitRequest
+}
+
+// UpdatePolicyRequester provides the interface for the UpdatePolicyRequest API operation.
+type UpdatePolicyRequester interface {
+	UpdatePolicyRequest(*organizations.UpdatePolicyInput) organizations.UpdatePolicyRequest
+}

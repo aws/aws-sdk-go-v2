@@ -13,87 +13,67 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
 )
 
-// ElasticsearchServiceAPI provides an interface to enable mocking the
-// elasticsearchservice.ElasticsearchService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Elasticsearch Service.
-//    func myFunc(svc elasticsearchserviceiface.ElasticsearchServiceAPI) bool {
-//        // Make svc.AddTags request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := elasticsearchservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockElasticsearchServiceClient struct {
-//        elasticsearchserviceiface.ElasticsearchServiceAPI
-//    }
-//    func (m *mockElasticsearchServiceClient) AddTags(input *elasticsearchservice.AddTagsInput) (*elasticsearchservice.AddTagsOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockElasticsearchServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type ElasticsearchServiceAPI interface {
+// AddTagsRequester provides the interface for the AddTagsRequest API operation.
+type AddTagsRequester interface {
 	AddTagsRequest(*elasticsearchservice.AddTagsInput) elasticsearchservice.AddTagsRequest
-
-	CreateElasticsearchDomainRequest(*elasticsearchservice.CreateElasticsearchDomainInput) elasticsearchservice.CreateElasticsearchDomainRequest
-
-	DeleteElasticsearchDomainRequest(*elasticsearchservice.DeleteElasticsearchDomainInput) elasticsearchservice.DeleteElasticsearchDomainRequest
-
-	DescribeElasticsearchDomainRequest(*elasticsearchservice.DescribeElasticsearchDomainInput) elasticsearchservice.DescribeElasticsearchDomainRequest
-
-	DescribeElasticsearchDomainConfigRequest(*elasticsearchservice.DescribeElasticsearchDomainConfigInput) elasticsearchservice.DescribeElasticsearchDomainConfigRequest
-
-	DescribeElasticsearchDomainsRequest(*elasticsearchservice.DescribeElasticsearchDomainsInput) elasticsearchservice.DescribeElasticsearchDomainsRequest
-
-	DescribeElasticsearchInstanceTypeLimitsRequest(*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput) elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsRequest
-
-	ListDomainNamesRequest(*elasticsearchservice.ListDomainNamesInput) elasticsearchservice.ListDomainNamesRequest
-
-	ListElasticsearchInstanceTypesRequest(*elasticsearchservice.ListElasticsearchInstanceTypesInput) elasticsearchservice.ListElasticsearchInstanceTypesRequest
-
-	ListElasticsearchInstanceTypesPages(*elasticsearchservice.ListElasticsearchInstanceTypesInput, func(*elasticsearchservice.ListElasticsearchInstanceTypesOutput, bool) bool) error
-	ListElasticsearchInstanceTypesPagesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchInstanceTypesInput, func(*elasticsearchservice.ListElasticsearchInstanceTypesOutput, bool) bool, ...aws.Option) error
-
-	ListElasticsearchVersionsRequest(*elasticsearchservice.ListElasticsearchVersionsInput) elasticsearchservice.ListElasticsearchVersionsRequest
-
-	ListElasticsearchVersionsPages(*elasticsearchservice.ListElasticsearchVersionsInput, func(*elasticsearchservice.ListElasticsearchVersionsOutput, bool) bool) error
-	ListElasticsearchVersionsPagesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchVersionsInput, func(*elasticsearchservice.ListElasticsearchVersionsOutput, bool) bool, ...aws.Option) error
-
-	ListTagsRequest(*elasticsearchservice.ListTagsInput) elasticsearchservice.ListTagsRequest
-
-	RemoveTagsRequest(*elasticsearchservice.RemoveTagsInput) elasticsearchservice.RemoveTagsRequest
-
-	UpdateElasticsearchDomainConfigRequest(*elasticsearchservice.UpdateElasticsearchDomainConfigInput) elasticsearchservice.UpdateElasticsearchDomainConfigRequest
 }
 
-var _ ElasticsearchServiceAPI = (*elasticsearchservice.ElasticsearchService)(nil)
+// CreateElasticsearchDomainRequester provides the interface for the CreateElasticsearchDomainRequest API operation.
+type CreateElasticsearchDomainRequester interface {
+	CreateElasticsearchDomainRequest(*elasticsearchservice.CreateElasticsearchDomainInput) elasticsearchservice.CreateElasticsearchDomainRequest
+}
+
+// DeleteElasticsearchDomainRequester provides the interface for the DeleteElasticsearchDomainRequest API operation.
+type DeleteElasticsearchDomainRequester interface {
+	DeleteElasticsearchDomainRequest(*elasticsearchservice.DeleteElasticsearchDomainInput) elasticsearchservice.DeleteElasticsearchDomainRequest
+}
+
+// DescribeElasticsearchDomainRequester provides the interface for the DescribeElasticsearchDomainRequest API operation.
+type DescribeElasticsearchDomainRequester interface {
+	DescribeElasticsearchDomainRequest(*elasticsearchservice.DescribeElasticsearchDomainInput) elasticsearchservice.DescribeElasticsearchDomainRequest
+}
+
+// DescribeElasticsearchDomainConfigRequester provides the interface for the DescribeElasticsearchDomainConfigRequest API operation.
+type DescribeElasticsearchDomainConfigRequester interface {
+	DescribeElasticsearchDomainConfigRequest(*elasticsearchservice.DescribeElasticsearchDomainConfigInput) elasticsearchservice.DescribeElasticsearchDomainConfigRequest
+}
+
+// DescribeElasticsearchDomainsRequester provides the interface for the DescribeElasticsearchDomainsRequest API operation.
+type DescribeElasticsearchDomainsRequester interface {
+	DescribeElasticsearchDomainsRequest(*elasticsearchservice.DescribeElasticsearchDomainsInput) elasticsearchservice.DescribeElasticsearchDomainsRequest
+}
+
+// DescribeElasticsearchInstanceTypeLimitsRequester provides the interface for the DescribeElasticsearchInstanceTypeLimitsRequest API operation.
+type DescribeElasticsearchInstanceTypeLimitsRequester interface {
+	DescribeElasticsearchInstanceTypeLimitsRequest(*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput) elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsRequest
+}
+
+// ListDomainNamesRequester provides the interface for the ListDomainNamesRequest API operation.
+type ListDomainNamesRequester interface {
+	ListDomainNamesRequest(*elasticsearchservice.ListDomainNamesInput) elasticsearchservice.ListDomainNamesRequest
+}
+
+// ListElasticsearchInstanceTypesRequester provides the interface for the ListElasticsearchInstanceTypesRequest API operation.
+type ListElasticsearchInstanceTypesRequester interface {
+	ListElasticsearchInstanceTypesRequest(*elasticsearchservice.ListElasticsearchInstanceTypesInput) elasticsearchservice.ListElasticsearchInstanceTypesRequest
+}
+
+// ListElasticsearchVersionsRequester provides the interface for the ListElasticsearchVersionsRequest API operation.
+type ListElasticsearchVersionsRequester interface {
+	ListElasticsearchVersionsRequest(*elasticsearchservice.ListElasticsearchVersionsInput) elasticsearchservice.ListElasticsearchVersionsRequest
+}
+
+// ListTagsRequester provides the interface for the ListTagsRequest API operation.
+type ListTagsRequester interface {
+	ListTagsRequest(*elasticsearchservice.ListTagsInput) elasticsearchservice.ListTagsRequest
+}
+
+// RemoveTagsRequester provides the interface for the RemoveTagsRequest API operation.
+type RemoveTagsRequester interface {
+	RemoveTagsRequest(*elasticsearchservice.RemoveTagsInput) elasticsearchservice.RemoveTagsRequest
+}
+
+// UpdateElasticsearchDomainConfigRequester provides the interface for the UpdateElasticsearchDomainConfigRequest API operation.
+type UpdateElasticsearchDomainConfigRequester interface {
+	UpdateElasticsearchDomainConfigRequest(*elasticsearchservice.UpdateElasticsearchDomainConfigInput) elasticsearchservice.UpdateElasticsearchDomainConfigRequest
+}

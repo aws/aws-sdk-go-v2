@@ -13,64 +13,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 )
 
-// CostAndUsageReportServiceAPI provides an interface to enable mocking the
-// costandusagereportservice.CostAndUsageReportService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // AWS Cost and Usage Report Service.
-//    func myFunc(svc costandusagereportserviceiface.CostAndUsageReportServiceAPI) bool {
-//        // Make svc.DeleteReportDefinition request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := costandusagereportservice.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCostAndUsageReportServiceClient struct {
-//        costandusagereportserviceiface.CostAndUsageReportServiceAPI
-//    }
-//    func (m *mockCostAndUsageReportServiceClient) DeleteReportDefinition(input *costandusagereportservice.DeleteReportDefinitionInput) (*costandusagereportservice.DeleteReportDefinitionOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockCostAndUsageReportServiceClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type CostAndUsageReportServiceAPI interface {
+// DeleteReportDefinitionRequester provides the interface for the DeleteReportDefinitionRequest API operation.
+type DeleteReportDefinitionRequester interface {
 	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) costandusagereportservice.DeleteReportDefinitionRequest
-
-	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
-
-	DescribeReportDefinitionsPages(*costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool) error
-	DescribeReportDefinitionsPagesWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool, ...aws.Option) error
-
-	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
 }
 
-var _ CostAndUsageReportServiceAPI = (*costandusagereportservice.CostAndUsageReportService)(nil)
+// DescribeReportDefinitionsRequester provides the interface for the DescribeReportDefinitionsRequest API operation.
+type DescribeReportDefinitionsRequester interface {
+	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
+}
+
+// PutReportDefinitionRequester provides the interface for the PutReportDefinitionRequest API operation.
+type PutReportDefinitionRequester interface {
+	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
+}

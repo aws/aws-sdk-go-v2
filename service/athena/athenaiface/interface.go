@@ -13,86 +13,57 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/athena"
 )
 
-// AthenaAPI provides an interface to enable mocking the
-// athena.Athena service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
-//
-// The best way to use this interface is so the SDK's service client's calls
-// can be stubbed out for unit testing your code with the SDK without needing
-// to inject custom request handlers into the SDK's request pipeline.
-//
-//    // myFunc uses an SDK service client to make a request to
-//    // Amazon Athena.
-//    func myFunc(svc athenaiface.AthenaAPI) bool {
-//        // Make svc.BatchGetNamedQuery request
-//    }
-//
-//    func main() {
-//        cfg, err := external.LoadDefaultAWSConfig()
-//        if err != nil {
-//            panic("failed to load config, " + err.Error())
-//        }
-//
-//        svc := athena.New(cfg)
-//
-//        myFunc(svc)
-//    }
-//
-// In your _test.go file:
-//
-//    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAthenaClient struct {
-//        athenaiface.AthenaAPI
-//    }
-//    func (m *mockAthenaClient) BatchGetNamedQuery(input *athena.BatchGetNamedQueryInput) (*athena.BatchGetNamedQueryOutput, error) {
-//        // mock response/functionality
-//    }
-//
-//    func TestMyFunc(t *testing.T) {
-//        // Setup Test
-//        mockSvc := &mockAthenaClient{}
-//
-//        myfunc(mockSvc)
-//
-//        // Verify myFunc's functionality
-//    }
-//
-// It is important to note that this interface will have breaking changes
-// when the service model is updated and adds new API operations, paginators,
-// and waiters. Its suggested to use the pattern above for testing, or using
-// tooling to generate mocks to satisfy the interfaces.
-type AthenaAPI interface {
+// BatchGetNamedQueryRequester provides the interface for the BatchGetNamedQueryRequest API operation.
+type BatchGetNamedQueryRequester interface {
 	BatchGetNamedQueryRequest(*athena.BatchGetNamedQueryInput) athena.BatchGetNamedQueryRequest
-
-	BatchGetQueryExecutionRequest(*athena.BatchGetQueryExecutionInput) athena.BatchGetQueryExecutionRequest
-
-	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) athena.CreateNamedQueryRequest
-
-	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
-
-	GetNamedQueryRequest(*athena.GetNamedQueryInput) athena.GetNamedQueryRequest
-
-	GetQueryExecutionRequest(*athena.GetQueryExecutionInput) athena.GetQueryExecutionRequest
-
-	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
-
-	GetQueryResultsPages(*athena.GetQueryResultsInput, func(*athena.GetQueryResultsOutput, bool) bool) error
-	GetQueryResultsPagesWithContext(aws.Context, *athena.GetQueryResultsInput, func(*athena.GetQueryResultsOutput, bool) bool, ...aws.Option) error
-
-	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
-
-	ListNamedQueriesPages(*athena.ListNamedQueriesInput, func(*athena.ListNamedQueriesOutput, bool) bool) error
-	ListNamedQueriesPagesWithContext(aws.Context, *athena.ListNamedQueriesInput, func(*athena.ListNamedQueriesOutput, bool) bool, ...aws.Option) error
-
-	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
-
-	ListQueryExecutionsPages(*athena.ListQueryExecutionsInput, func(*athena.ListQueryExecutionsOutput, bool) bool) error
-	ListQueryExecutionsPagesWithContext(aws.Context, *athena.ListQueryExecutionsInput, func(*athena.ListQueryExecutionsOutput, bool) bool, ...aws.Option) error
-
-	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) athena.StartQueryExecutionRequest
-
-	StopQueryExecutionRequest(*athena.StopQueryExecutionInput) athena.StopQueryExecutionRequest
 }
 
-var _ AthenaAPI = (*athena.Athena)(nil)
+// BatchGetQueryExecutionRequester provides the interface for the BatchGetQueryExecutionRequest API operation.
+type BatchGetQueryExecutionRequester interface {
+	BatchGetQueryExecutionRequest(*athena.BatchGetQueryExecutionInput) athena.BatchGetQueryExecutionRequest
+}
+
+// CreateNamedQueryRequester provides the interface for the CreateNamedQueryRequest API operation.
+type CreateNamedQueryRequester interface {
+	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) athena.CreateNamedQueryRequest
+}
+
+// DeleteNamedQueryRequester provides the interface for the DeleteNamedQueryRequest API operation.
+type DeleteNamedQueryRequester interface {
+	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
+}
+
+// GetNamedQueryRequester provides the interface for the GetNamedQueryRequest API operation.
+type GetNamedQueryRequester interface {
+	GetNamedQueryRequest(*athena.GetNamedQueryInput) athena.GetNamedQueryRequest
+}
+
+// GetQueryExecutionRequester provides the interface for the GetQueryExecutionRequest API operation.
+type GetQueryExecutionRequester interface {
+	GetQueryExecutionRequest(*athena.GetQueryExecutionInput) athena.GetQueryExecutionRequest
+}
+
+// GetQueryResultsRequester provides the interface for the GetQueryResultsRequest API operation.
+type GetQueryResultsRequester interface {
+	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
+}
+
+// ListNamedQueriesRequester provides the interface for the ListNamedQueriesRequest API operation.
+type ListNamedQueriesRequester interface {
+	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
+}
+
+// ListQueryExecutionsRequester provides the interface for the ListQueryExecutionsRequest API operation.
+type ListQueryExecutionsRequester interface {
+	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
+}
+
+// StartQueryExecutionRequester provides the interface for the StartQueryExecutionRequest API operation.
+type StartQueryExecutionRequester interface {
+	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) athena.StartQueryExecutionRequest
+}
+
+// StopQueryExecutionRequester provides the interface for the StopQueryExecutionRequest API operation.
+type StopQueryExecutionRequester interface {
+	StopQueryExecutionRequest(*athena.StopQueryExecutionInput) athena.StopQueryExecutionRequest
+}
