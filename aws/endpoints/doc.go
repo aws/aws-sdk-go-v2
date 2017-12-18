@@ -1,4 +1,4 @@
-// Package modeledendpoints provides the types and functionality for defining regions
+// Package endpoints provides the types and functionality for defining regions
 // and endpoints, as well as querying those definitions.
 //
 // The SDK's Regions and Endpoints metadata is code generated into the endpoints
@@ -17,7 +17,7 @@
 // resolving to a single partition, or enumerate regions, services, and endpoints
 // in the partition.
 //
-//     resolver := modeledendpoints.NewDefaultResolver()
+//     resolver := endpoints.NewDefaultResolver()
 //     partitions := resolver.Partitions()
 //
 //     for _, p := range partitions {
@@ -48,9 +48,9 @@
 // Resolver interface.
 //
 //
-//     defaultResolver := modeledendpoints.NewDefaultResolver()
+//     defaultResolver := endpoints.NewDefaultResolver()
 //     myCustomResolver := func(service, region string) (aws.Endpoint, error) {
-//         if service == modeledendpoints.S3ServiceID {
+//         if service == endpoints.S3ServiceID {
 //             return aws.Endpoint{
 //                 URL:           "s3.custom.endpoint.com",
 //                 SigningRegion: "custom-signing-region",
@@ -66,4 +66,4 @@
 //     }
 //     cfg.Region = "us-west-2"
 //     cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
-package modeledendpoints
+package endpoints

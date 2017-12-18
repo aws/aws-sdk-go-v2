@@ -1,4 +1,4 @@
-package modeledendpoints
+package endpoints
 
 import (
 	"encoding/json"

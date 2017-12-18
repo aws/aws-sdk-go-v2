@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -33,7 +33,7 @@ var standaloneSignCases = []struct {
 
 func TestPresignHandler(t *testing.T) {
 	cfg := unit.Config()
-	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
 	req := svc.PutObjectRequest(&s3.PutObjectInput{
@@ -86,7 +86,7 @@ func TestPresignHandler(t *testing.T) {
 
 func TestPresignRequest(t *testing.T) {
 	cfg := unit.Config()
-	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
 	req := svc.PutObjectRequest(&s3.PutObjectInput{

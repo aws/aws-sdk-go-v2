@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 // Generates the endpoints from json description
@@ -45,7 +45,7 @@ func main() {
 		}
 	}()
 
-	if err := modeledendpoints.CodeGenModel(modelFile, outFile); err != nil {
+	if err := endpoints.CodeGenModel(modelFile, outFile); err != nil {
 		exitErrorf("failed to codegen model, %v", err)
 	}
 }

@@ -6,7 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -14,7 +14,7 @@ import (
 func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
 
-	resolver := modeledendpoints.NewDefaultResolver()
+	resolver := endpoints.NewDefaultResolver()
 	resolver.DisableSSL = true
 	cfg.EndpointResolver = resolver
 
@@ -41,7 +41,7 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
 
-	resolver := modeledendpoints.NewDefaultResolver()
+	resolver := endpoints.NewDefaultResolver()
 	resolver.DisableSSL = true
 	cfg.EndpointResolver = resolver
 

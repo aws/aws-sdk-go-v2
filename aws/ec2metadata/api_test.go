@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
@@ -62,7 +62,7 @@ func initTestServer(path string, resp string) *httptest.Server {
 
 func TestEndpoint(t *testing.T) {
 	cfg := unit.Config()
-	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	c := ec2metadata.New(cfg)
 	op := &aws.Operation{
