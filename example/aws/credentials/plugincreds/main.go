@@ -9,7 +9,7 @@ import (
 	"plugin"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/plugincreds"
 	"github.com/aws/aws-sdk-go-v2/aws/session"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -62,7 +62,7 @@ func main() {
 	// from a query to S3 for the bucket's metadata
 	region := aws.StringValue(sess.Config.Region)
 	if len(region) == 0 {
-		region, err = s3manager.GetBucketRegion(context.Background(), sess, bucket, modeledendpoints.UsEast1RegionID)
+		region, err = s3manager.GetBucketRegion(context.Background(), sess, bucket, endpoints.UsEast1RegionID)
 		if err != nil {
 			exitErrorf("failed to get bucket region, %v", err)
 		}

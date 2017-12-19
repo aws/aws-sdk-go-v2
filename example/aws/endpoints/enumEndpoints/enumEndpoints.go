@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 // Demostrates how the SDK's endpoints can be enumerated over to discover
@@ -43,7 +43,7 @@ func main() {
 	flag.BoolVar(&cmdServices, "services", false, "Lists services for a partition. Requires partition ID to be provided. Will filter by a region if '-r' is set.")
 	flag.Parse()
 
-	partitions := modeledendpoints.NewDefaultResolver().Partitions()
+	partitions := endpoints.NewDefaultResolver().Partitions()
 
 	if cmdPartitions {
 		printPartitions(partitions)
@@ -68,14 +68,14 @@ func main() {
 	}
 }
 
-func printPartitions(ps []modeledendpoints.Partition) {
+func printPartitions(ps []endpoints.Partition) {
 	fmt.Println("Partitions:")
 	for _, p := range ps {
 		fmt.Println(p.ID())
 	}
 }
 
-func printRegions(p modeledendpoints.Partition, serviceID string) {
+func printRegions(p endpoints.Partition, serviceID string) {
 	if len(serviceID) != 0 {
 		s, ok := p.Services()[serviceID]
 		if !ok {
@@ -85,7 +85,7 @@ func printRegions(p modeledendpoints.Partition, serviceID string) {
 		es := s.Endpoints()
 		fmt.Printf("Endpoints for %s in %s:\n", serviceID, p.ID())
 		for _, e := range es {
-			r, _ := e.Resolve(modeledendpoints.ResolveOptions{})
+			r, _ := e.Resolve(endpoints.ResolveOptions{})
 			fmt.Printf("%s: %s\n", e.ID(), r.URL)
 		}
 
@@ -98,7 +98,7 @@ func printRegions(p modeledendpoints.Partition, serviceID string) {
 	}
 }
 
-func printServices(p modeledendpoints.Partition, endpointID string) {
+func printServices(p endpoints.Partition, endpointID string) {
 	ss := p.Services()
 
 	if len(endpointID) > 0 {
@@ -115,12 +115,12 @@ func printServices(p modeledendpoints.Partition, endpointID string) {
 	}
 }
 
-func findPartition(ps []modeledendpoints.Partition, partitionID string) (modeledendpoints.Partition, bool) {
+func findPartition(ps []endpoints.Partition, partitionID string) (endpoints.Partition, bool) {
 	for _, p := range ps {
 		if p.ID() == partitionID {
 			return p, true
 		}
 	}
 
-	return modeledendpoints.Partition{}, false
+	return endpoints.Partition{}, false
 }

@@ -21,7 +21,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 func main() {
@@ -47,7 +47,7 @@ func main() {
 		panic("failed to load config " + err.Error())
 	}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.Region = modeledendpoints.UsWest2RegionID
+	cfg.Region = endpoints.UsWest2RegionID
 	cfg.Credentials = aws.AnonymousCredentials
 	cfg.Handlers.Validate.Remove(defaults.ValidateParametersHandler)
 

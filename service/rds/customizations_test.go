@@ -11,7 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
@@ -21,7 +21,7 @@ func TestPresignWithPresignNotSet(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Region = "us-west-2"
-	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := New(cfg)
 

@@ -1,4 +1,4 @@
-package modeledendpoints
+package endpoints
 
 import (
 	"encoding/json"
@@ -31,7 +31,7 @@ func (d *DecodeModelOptions) Set(optFns ...func(*DecodeModelOptions)) {
 // allow you to get a list of the partitions in the order the endpoints
 // will be resolved in.
 //
-//    resolver, err := modeledendpoints.DecodeModel(reader)
+//    resolver, err := endpoints.DecodeModel(reader)
 //
 //    partitions := resolver.Partitions()
 //    for _, p := range partitions {
