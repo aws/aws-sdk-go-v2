@@ -86,6 +86,20 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "BatchStopJobRun":{
+      "name":"BatchStopJobRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchStopJobRunRequest"},
+      "output":{"shape":"BatchStopJobRunResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ]
+    },
     "CreateClassifier":{
       "name":"CreateClassifier",
       "http":{
@@ -650,7 +664,8 @@
       "errors":[
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"EntityNotFoundException"}
       ]
     },
     "GetPartition":{
@@ -1247,6 +1262,53 @@
       "max":1000,
       "min":0
     },
+    "BatchStopJobRunError":{
+      "type":"structure",
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "JobRunId":{"shape":"IdString"},
+        "ErrorDetail":{"shape":"ErrorDetail"}
+      }
+    },
+    "BatchStopJobRunErrorList":{
+      "type":"list",
+      "member":{"shape":"BatchStopJobRunError"}
+    },
+    "BatchStopJobRunJobRunIdList":{
+      "type":"list",
+      "member":{"shape":"IdString"},
+      "max":25,
+      "min":1
+    },
+    "BatchStopJobRunRequest":{
+      "type":"structure",
+      "required":[
+        "JobName",
+        "JobRunIds"
+      ],
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "JobRunIds":{"shape":"BatchStopJobRunJobRunIdList"}
+      }
+    },
+    "BatchStopJobRunResponse":{
+      "type":"structure",
+      "members":{
+        "SuccessfulSubmissions":{"shape":"BatchStopJobRunSuccessfulSubmissionList"},
+        "Errors":{"shape":"BatchStopJobRunErrorList"}
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmission":{
+      "type":"structure",
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "JobRunId":{"shape":"IdString"}
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmissionList":{
+      "type":"list",
+      "member":{"shape":"BatchStopJobRunSuccessfulSubmission"}
+    },
     "Boolean":{"type":"boolean"},
     "BooleanValue":{"type":"boolean"},
     "BoundedPartitionValueList":{
@@ -1288,7 +1350,8 @@
     "Classifier":{
       "type":"structure",
       "members":{
-        "GrokClassifier":{"shape":"GrokClassifier"}
+        "GrokClassifier":{"shape":"GrokClassifier"},
+        "XMLClassifier":{"shape":"XMLClassifier"}
       }
     },
     "ClassifierList":{
@@ -1478,7 +1541,7 @@
       "type":"structure",
       "members":{
         "Name":{"shape":"NameString"},
-        "Role":{"shape":"RoleArn"},
+        "Role":{"shape":"Role"},
         "Targets":{"shape":"CrawlerTargets"},
         "DatabaseName":{"shape":"DatabaseName"},
         "Description":{"shape":"DescriptionString"},
@@ -1491,9 +1554,11 @@
         "CreationTime":{"shape":"Timestamp"},
         "LastUpdated":{"shape":"Timestamp"},
         "LastCrawl":{"shape":"LastCrawlInfo"},
-        "Version":{"shape":"VersionId"}
+        "Version":{"shape":"VersionId"},
+        "Configuration":{"shape":"CrawlerConfiguration"}
       }
     },
+    "CrawlerConfiguration":{"type":"string"},
     "CrawlerList":{
       "type":"list",
       "member":{"shape":"Crawler"}
@@ -1560,7 +1625,8 @@
     "CreateClassifierRequest":{
       "type":"structure",
       "members":{
-        "GrokClassifier":{"shape":"CreateGrokClassifierRequest"}
+        "GrokClassifier":{"shape":"CreateGrokClassifierRequest"},
+        "XMLClassifier":{"shape":"CreateXMLClassifierRequest"}
       }
     },
     "CreateClassifierResponse":{
@@ -1591,14 +1657,15 @@
       ],
       "members":{
         "Name":{"shape":"NameString"},
-        "Role":{"shape":"RoleArn"},
+        "Role":{"shape":"Role"},
         "DatabaseName":{"shape":"DatabaseName"},
         "Description":{"shape":"DescriptionString"},
         "Targets":{"shape":"CrawlerTargets"},
         "Schedule":{"shape":"CronExpression"},
         "Classifiers":{"shape":"ClassifierNameList"},
         "TablePrefix":{"shape":"TablePrefix"},
-        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"}
+        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"},
+        "Configuration":{"shape":"CrawlerConfiguration"}
       }
     },
     "CreateCrawlerResponse":{
@@ -1624,8 +1691,7 @@
       "required":[
         "EndpointName",
         "RoleArn",
-        "SecurityGroupIds",
-        "SubnetId"
+        "PublicKey"
       ],
       "members":{
         "EndpointName":{"shape":"GenericString"},
@@ -1647,6 +1713,7 @@
         "SubnetId":{"shape":"GenericString"},
         "RoleArn":{"shape":"RoleArn"},
         "YarnEndpointAddress":{"shape":"GenericString"},
+        "ZeppelinRemoteSparkInterpreterPort":{"shape":"IntegerValue"},
         "NumberOfNodes":{"shape":"IntegerValue"},
         "AvailabilityZone":{"shape":"GenericString"},
         "VpcId":{"shape":"GenericString"},
@@ -1782,6 +1849,18 @@
     "CreateUserDefinedFunctionResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "CreateXMLClassifierRequest":{
+      "type":"structure",
+      "required":[
+        "Classification",
+        "Name"
+      ],
+      "members":{
+        "Classification":{"shape":"Classification"},
+        "Name":{"shape":"NameString"},
+        "RowTag":{"shape":"RowTag"}
       }
     },
     "CronExpression":{"type":"string"},
@@ -2000,6 +2079,7 @@
         "SecurityGroupIds":{"shape":"StringList"},
         "SubnetId":{"shape":"GenericString"},
         "YarnEndpointAddress":{"shape":"GenericString"},
+        "ZeppelinRemoteSparkInterpreterPort":{"shape":"IntegerValue"},
         "PublicAddress":{"shape":"GenericString"},
         "Status":{"shape":"GenericString"},
         "NumberOfNodes":{"shape":"IntegerValue"},
@@ -2985,11 +3065,13 @@
       "max":1000,
       "min":0
     },
+    "Role":{"type":"string"},
     "RoleArn":{
       "type":"string",
       "pattern":"arn:aws:iam::\\d{12}:role/.*"
     },
     "RoleString":{"type":"string"},
+    "RowTag":{"type":"string"},
     "S3Target":{
       "type":"structure",
       "members":{
@@ -3334,7 +3416,8 @@
     "UpdateClassifierRequest":{
       "type":"structure",
       "members":{
-        "GrokClassifier":{"shape":"UpdateGrokClassifierRequest"}
+        "GrokClassifier":{"shape":"UpdateGrokClassifierRequest"},
+        "XMLClassifier":{"shape":"UpdateXMLClassifierRequest"}
       }
     },
     "UpdateClassifierResponse":{
@@ -3364,14 +3447,15 @@
       "required":["Name"],
       "members":{
         "Name":{"shape":"NameString"},
-        "Role":{"shape":"RoleArn"},
+        "Role":{"shape":"Role"},
         "DatabaseName":{"shape":"DatabaseName"},
         "Description":{"shape":"DescriptionStringRemovable"},
         "Targets":{"shape":"CrawlerTargets"},
         "Schedule":{"shape":"CronExpression"},
         "Classifiers":{"shape":"ClassifierNameList"},
         "TablePrefix":{"shape":"TablePrefix"},
-        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"}
+        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"},
+        "Configuration":{"shape":"CrawlerConfiguration"}
       }
     },
     "UpdateCrawlerResponse":{
@@ -3415,7 +3499,8 @@
       "members":{
         "EndpointName":{"shape":"GenericString"},
         "PublicKey":{"shape":"GenericString"},
-        "CustomLibraries":{"shape":"DevEndpointCustomLibraries"}
+        "CustomLibraries":{"shape":"DevEndpointCustomLibraries"},
+        "UpdateEtlLibraries":{"shape":"BooleanValue"}
       }
     },
     "UpdateDevEndpointResponse":{
@@ -3524,6 +3609,15 @@
       "members":{
       }
     },
+    "UpdateXMLClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Classification":{"shape":"Classification"},
+        "RowTag":{"shape":"RowTag"}
+      }
+    },
     "UriString":{"type":"string"},
     "UserDefinedFunction":{
       "type":"structure",
@@ -3582,6 +3676,21 @@
     "ViewTextString":{
       "type":"string",
       "max":2048
+    },
+    "XMLClassifier":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Classification"
+      ],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Classification":{"shape":"Classification"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastUpdated":{"shape":"Timestamp"},
+        "Version":{"shape":"VersionId"},
+        "RowTag":{"shape":"RowTag"}
+      }
     }
   }
 }
