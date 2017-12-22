@@ -68,8 +68,6 @@ type FirehoseAPI interface {
 
 	DescribeDeliveryStreamRequest(*firehose.DescribeDeliveryStreamInput) firehose.DescribeDeliveryStreamRequest
 
-	GetKinesisStreamRequest(*firehose.GetKinesisStreamInput) firehose.GetKinesisStreamRequest
-
 	ListDeliveryStreamsRequest(*firehose.ListDeliveryStreamsInput) firehose.ListDeliveryStreamsRequest
 
 	PutRecordRequest(*firehose.PutRecordInput) firehose.PutRecordRequest

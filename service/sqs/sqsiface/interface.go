@@ -82,6 +82,8 @@ type SQSAPI interface {
 
 	ListDeadLetterSourceQueuesRequest(*sqs.ListDeadLetterSourceQueuesInput) sqs.ListDeadLetterSourceQueuesRequest
 
+	ListQueueTagsRequest(*sqs.ListQueueTagsInput) sqs.ListQueueTagsRequest
+
 	ListQueuesRequest(*sqs.ListQueuesInput) sqs.ListQueuesRequest
 
 	PurgeQueueRequest(*sqs.PurgeQueueInput) sqs.PurgeQueueRequest
@@ -95,6 +97,10 @@ type SQSAPI interface {
 	SendMessageBatchRequest(*sqs.SendMessageBatchInput) sqs.SendMessageBatchRequest
 
 	SetQueueAttributesRequest(*sqs.SetQueueAttributesInput) sqs.SetQueueAttributesRequest
+
+	TagQueueRequest(*sqs.TagQueueInput) sqs.TagQueueRequest
+
+	UntagQueueRequest(*sqs.UntagQueueInput) sqs.UntagQueueRequest
 }
 
 var _ SQSAPI = (*sqs.SQS)(nil)

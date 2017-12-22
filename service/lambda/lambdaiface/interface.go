@@ -77,6 +77,8 @@ type LambdaAPI interface {
 
 	DeleteFunctionRequest(*lambda.DeleteFunctionInput) lambda.DeleteFunctionRequest
 
+	DeleteFunctionConcurrencyRequest(*lambda.DeleteFunctionConcurrencyInput) lambda.DeleteFunctionConcurrencyRequest
+
 	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
 
 	GetAliasRequest(*lambda.GetAliasInput) lambda.GetAliasRequest
@@ -110,6 +112,8 @@ type LambdaAPI interface {
 	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) lambda.ListVersionsByFunctionRequest
 
 	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
+
+	PutFunctionConcurrencyRequest(*lambda.PutFunctionConcurrencyInput) lambda.PutFunctionConcurrencyRequest
 
 	RemovePermissionRequest(*lambda.RemovePermissionInput) lambda.RemovePermissionRequest
 

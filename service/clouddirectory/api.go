@@ -82,8 +82,8 @@ func (r ApplySchemaRequest) Send() (*ApplySchemaOutput, error) {
 // ApplySchemaRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Copies the input published schema into the Directory with the same name and
-// version as that of the published schema .
+// Copies the input published schema, at the specified version, into the Directory
+// with the same name and version as that of the published schema.
 //
 //    // Example sending a request using the ApplySchemaRequest method.
 //    req := client.ApplySchemaRequest(params)
@@ -385,7 +385,7 @@ func (r BatchWriteRequest) Send() (*BatchWriteOutput, error) {
 // Amazon CloudDirectory.
 //
 // Performs all the write operations in a batch. Either all the operations succeed
-// or none. Batch writes supports only object-related operations.
+// or none.
 //
 //    // Example sending a request using the BatchWriteRequest method.
 //    req := client.BatchWriteRequest(params)
@@ -1275,6 +1275,56 @@ func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) Ena
 	return EnableDirectoryRequest{Request: req, Input: input}
 }
 
+const opGetAppliedSchemaVersion = "GetAppliedSchemaVersion"
+
+// GetAppliedSchemaVersionRequest is a API request type for the GetAppliedSchemaVersion API operation.
+type GetAppliedSchemaVersionRequest struct {
+	*aws.Request
+	Input *GetAppliedSchemaVersionInput
+}
+
+// Send marshals and sends the GetAppliedSchemaVersion API request.
+func (r GetAppliedSchemaVersionRequest) Send() (*GetAppliedSchemaVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAppliedSchemaVersionOutput), nil
+}
+
+// GetAppliedSchemaVersionRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Returns current applied schema version ARN, including the minor version in
+// use.
+//
+//    // Example sending a request using the GetAppliedSchemaVersionRequest method.
+//    req := client.GetAppliedSchemaVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersion
+func (c *CloudDirectory) GetAppliedSchemaVersionRequest(input *GetAppliedSchemaVersionInput) GetAppliedSchemaVersionRequest {
+	op := &aws.Operation{
+		Name:       opGetAppliedSchemaVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/getappliedschema",
+	}
+
+	if input == nil {
+		input = &GetAppliedSchemaVersionInput{}
+	}
+
+	output := &GetAppliedSchemaVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAppliedSchemaVersionRequest{Request: req, Input: input}
+}
+
 const opGetDirectory = "GetDirectory"
 
 // GetDirectoryRequest is a API request type for the GetDirectory API operation.
@@ -1545,7 +1595,8 @@ func (r ListAppliedSchemaArnsRequest) Send() (*ListAppliedSchemaArnsOutput, erro
 // ListAppliedSchemaArnsRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Lists schemas applied to a directory.
+// Lists schema major versions applied to a directory. If SchemaArn is provided,
+// lists the minor version.
 //
 //    // Example sending a request using the ListAppliedSchemaArnsRequest method.
 //    req := client.ListAppliedSchemaArnsRequest(params)
@@ -1650,7 +1701,7 @@ func (r ListAttachedIndicesRequest) Send() (*ListAttachedIndicesOutput, error) {
 // ListAttachedIndicesRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Lists indices attached to an object.
+// Lists indices attached to the specified object.
 //
 //    // Example sending a request using the ListAttachedIndicesRequest method.
 //    req := client.ListAttachedIndicesRequest(params)
@@ -2226,7 +2277,7 @@ func (r ListIndexRequest) Send() (*ListIndexOutput, error) {
 // ListIndexRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Lists objects attached to the specified index.
+// Lists objects and indexed values attached to the index.
 //
 //    // Example sending a request using the ListIndexRequest method.
 //    req := client.ListIndexRequest(params)
@@ -3024,7 +3075,8 @@ func (r ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, 
 // ListPublishedSchemaArnsRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Retrieves each published schema Amazon Resource Name (ARN).
+// Lists schema major versions for a published schema. If SchemaArn is provided,
+// lists the minor version.
 //
 //    // Example sending a request using the ListPublishedSchemaArnsRequest method.
 //    req := client.ListPublishedSchemaArnsRequest(params)
@@ -3559,10 +3611,8 @@ func (r PublishSchemaRequest) Send() (*PublishSchemaOutput, error) {
 // PublishSchemaRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Publishes a development schema with a version. If description and attributes
-// are specified, PublishSchema overrides the development schema description
-// and attributes. If not, the development schema description and attributes
-// are used.
+// Publishes a development schema with a major version and a recommended minor
+// version.
 //
 //    // Example sending a request using the PublishSchemaRequest method.
 //    req := client.PublishSchemaRequest(params)
@@ -3991,6 +4041,110 @@ func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacet
 	return UpdateTypedLinkFacetRequest{Request: req, Input: input}
 }
 
+const opUpgradeAppliedSchema = "UpgradeAppliedSchema"
+
+// UpgradeAppliedSchemaRequest is a API request type for the UpgradeAppliedSchema API operation.
+type UpgradeAppliedSchemaRequest struct {
+	*aws.Request
+	Input *UpgradeAppliedSchemaInput
+}
+
+// Send marshals and sends the UpgradeAppliedSchema API request.
+func (r UpgradeAppliedSchemaRequest) Send() (*UpgradeAppliedSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpgradeAppliedSchemaOutput), nil
+}
+
+// UpgradeAppliedSchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Upgrades a single directory in-place using the PublishedSchemaArn with schema
+// updates found in MinorVersion. Backwards-compatible minor version upgrades
+// are instantaneously available for readers on all objects in the directory.
+// Note: This is a synchronous API call and upgrades only one schema on a given
+// directory per call. To upgrade multiple directories from one schema, you
+// would need to call this API on each directory.
+//
+//    // Example sending a request using the UpgradeAppliedSchemaRequest method.
+//    req := client.UpgradeAppliedSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchema
+func (c *CloudDirectory) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest {
+	op := &aws.Operation{
+		Name:       opUpgradeAppliedSchema,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/upgradeapplied",
+	}
+
+	if input == nil {
+		input = &UpgradeAppliedSchemaInput{}
+	}
+
+	output := &UpgradeAppliedSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpgradeAppliedSchemaRequest{Request: req, Input: input}
+}
+
+const opUpgradePublishedSchema = "UpgradePublishedSchema"
+
+// UpgradePublishedSchemaRequest is a API request type for the UpgradePublishedSchema API operation.
+type UpgradePublishedSchemaRequest struct {
+	*aws.Request
+	Input *UpgradePublishedSchemaInput
+}
+
+// Send marshals and sends the UpgradePublishedSchema API request.
+func (r UpgradePublishedSchemaRequest) Send() (*UpgradePublishedSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpgradePublishedSchemaOutput), nil
+}
+
+// UpgradePublishedSchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Upgrades a published schema under a new minor version revision using the
+// current contents of DevelopmentSchemaArn.
+//
+//    // Example sending a request using the UpgradePublishedSchemaRequest method.
+//    req := client.UpgradePublishedSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchema
+func (c *CloudDirectory) UpgradePublishedSchemaRequest(input *UpgradePublishedSchemaInput) UpgradePublishedSchemaRequest {
+	op := &aws.Operation{
+		Name:       opUpgradePublishedSchema,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/upgradepublished",
+	}
+
+	if input == nil {
+		input = &UpgradePublishedSchemaInput{}
+	}
+
+	output := &UpgradePublishedSchemaOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpgradePublishedSchemaRequest{Request: req, Input: input}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectRequest
 type AddFacetToObjectInput struct {
 	_ struct{} `type:"structure"`
@@ -4009,7 +4163,8 @@ type AddFacetToObjectInput struct {
 	// ObjectReference is a required field
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 
-	// Identifiers for the facet that you are adding to the object.
+	// Identifiers for the facet that you are adding to the object. See SchemaFacet
+	// for details.
 	//
 	// SchemaFacet is a required field
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
@@ -5840,8 +5995,8 @@ func (s *BatchDetachObjectResponse) SetDetachedObjectIdentifier(v string) *Batch
 	return s
 }
 
-// Detaches the specified policy from the specified directory inside a BatchRead
-// operation. For more information, see DetachPolicy and BatchReadRequest$Operations.
+// Detaches the specified policy from the specified directory inside a BatchWrite
+// operation. For more information, see DetachPolicy and BatchWriteRequest$Operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachPolicy
 type BatchDetachPolicy struct {
 	_ struct{} `type:"structure"`
@@ -8654,8 +8809,8 @@ type CreateObjectInput struct {
 	// If specified, the parent reference to which this object will be attached.
 	ParentReference *ObjectReference `type:"structure"`
 
-	// A list of schema facets to be associated with the object that contains SchemaArn
-	// and facet name. For more information, see arns.
+	// A list of schema facets to be associated with the object. Do not provide
+	// minor version components. See SchemaFacet for details.
 	//
 	// SchemaFacets is a required field
 	SchemaFacets []SchemaFacet `type:"list" required:"true"`
@@ -10196,6 +10351,78 @@ func (s *FacetAttributeUpdate) SetAttribute(v *FacetAttribute) *FacetAttributeUp
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionRequest
+type GetAppliedSchemaVersionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the applied schema.
+	//
+	// SchemaArn is a required field
+	SchemaArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetAppliedSchemaVersionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppliedSchemaVersionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetAppliedSchemaVersionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetAppliedSchemaVersionInput"}
+
+	if s.SchemaArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSchemaArn sets the SchemaArn field's value.
+func (s *GetAppliedSchemaVersionInput) SetSchemaArn(v string) *GetAppliedSchemaVersionInput {
+	s.SchemaArn = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionResponse
+type GetAppliedSchemaVersionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Current applied schema ARN, including the minor version in use if one was
+	// provided.
+	AppliedSchemaArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetAppliedSchemaVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppliedSchemaVersionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAppliedSchemaVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetAppliedSchemaArn sets the AppliedSchemaArn field's value.
+func (s *GetAppliedSchemaVersionOutput) SetAppliedSchemaArn(v string) *GetAppliedSchemaVersionOutput {
+	s.AppliedSchemaArn = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectoryRequest
 type GetDirectoryInput struct {
 	_ struct{} `type:"structure"`
@@ -10432,7 +10659,9 @@ type GetObjectInformationOutput struct {
 	// The ObjectIdentifier of the specified object.
 	ObjectIdentifier *string `type:"string"`
 
-	// The facets attached to the specified object.
+	// The facets attached to the specified object. Although the response does not
+	// include minor version information, the most recently applied minor version
+	// of each Facet is in effect. See GetAppliedSchemaVersion for details.
 	SchemaFacets []SchemaFacet `type:"list"`
 }
 
@@ -10645,7 +10874,10 @@ type IndexAttachment struct {
 	// The indexed attribute values.
 	IndexedAttributes []AttributeKeyAndValue `type:"list"`
 
-	// The ObjectIdentifier of the object attached to the index.
+	// In response to ListIndex, the ObjectIdentifier of the object attached to
+	// the index. In response to ListAttachedIndices, the ObjectIdentifier of the
+	// index attached to the object. This field will always contain the ObjectIdentifier
+	// of the object on the opposite side of the attachment specified in the query.
 	ObjectIdentifier *string `type:"string"`
 }
 
@@ -10685,6 +10917,10 @@ type ListAppliedSchemaArnsInput struct {
 
 	// The pagination token.
 	NextToken *string `type:"string"`
+
+	// The response for ListAppliedSchemaArns when this parameter is used will list
+	// all minor version ARNs for a major version.
+	SchemaArn *string `type:"string"`
 }
 
 // String returns the string representation
@@ -10729,6 +10965,12 @@ func (s *ListAppliedSchemaArnsInput) SetMaxResults(v int64) *ListAppliedSchemaAr
 // SetNextToken sets the NextToken field's value.
 func (s *ListAppliedSchemaArnsInput) SetNextToken(v string) *ListAppliedSchemaArnsInput {
 	s.NextToken = &v
+	return s
+}
+
+// SetSchemaArn sets the SchemaArn field's value.
+func (s *ListAppliedSchemaArnsInput) SetSchemaArn(v string) *ListAppliedSchemaArnsInput {
+	s.SchemaArn = &v
 	return s
 }
 
@@ -11479,7 +11721,9 @@ type ListIndexInput struct {
 	// IndexReference is a required field
 	IndexReference *ObjectReference `type:"structure" required:"true"`
 
-	// The maximum number of results to retrieve from the index.
+	// The maximum number of objects in a single page to retrieve from the index
+	// during a request. For more information, see AWS Directory Service Limits
+	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd).
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The pagination token.
@@ -12549,6 +12793,10 @@ type ListPublishedSchemaArnsInput struct {
 
 	// The pagination token.
 	NextToken *string `type:"string"`
+
+	// The response for ListPublishedSchemaArns when this parameter is used will
+	// list all minor version ARNs for a major version.
+	SchemaArn *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12583,6 +12831,12 @@ func (s *ListPublishedSchemaArnsInput) SetMaxResults(v int64) *ListPublishedSche
 // SetNextToken sets the NextToken field's value.
 func (s *ListPublishedSchemaArnsInput) SetNextToken(v string) *ListPublishedSchemaArnsInput {
 	s.NextToken = &v
+	return s
+}
+
+// SetSchemaArn sets the SchemaArn field's value.
+func (s *ListPublishedSchemaArnsInput) SetSchemaArn(v string) *ListPublishedSchemaArnsInput {
+	s.SchemaArn = &v
 	return s
 }
 
@@ -13370,11 +13624,17 @@ type PublishSchemaInput struct {
 	// DevelopmentSchemaArn is a required field
 	DevelopmentSchemaArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 
+	// The minor version under which the schema will be published. This parameter
+	// is recommended. Schemas have both a major and minor version associated with
+	// them.
+	MinorVersion *string `min:"1" type:"string"`
+
 	// The new name under which the schema will be published. If this is not provided,
 	// the development schema is considered.
 	Name *string `min:"1" type:"string"`
 
-	// The version under which the schema will be published.
+	// The major version under which the schema will be published. Schemas have
+	// both a major and minor version associated with them.
 	//
 	// Version is a required field
 	Version *string `min:"1" type:"string" required:"true"`
@@ -13397,6 +13657,9 @@ func (s *PublishSchemaInput) Validate() error {
 	if s.DevelopmentSchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DevelopmentSchemaArn"))
 	}
+	if s.MinorVersion != nil && len(*s.MinorVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MinorVersion", 1))
+	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
@@ -13417,6 +13680,12 @@ func (s *PublishSchemaInput) Validate() error {
 // SetDevelopmentSchemaArn sets the DevelopmentSchemaArn field's value.
 func (s *PublishSchemaInput) SetDevelopmentSchemaArn(v string) *PublishSchemaInput {
 	s.DevelopmentSchemaArn = &v
+	return s
+}
+
+// SetMinorVersion sets the MinorVersion field's value.
+func (s *PublishSchemaInput) SetMinorVersion(v string) *PublishSchemaInput {
+	s.MinorVersion = &v
 	return s
 }
 
@@ -13564,7 +13833,7 @@ type RemoveFacetFromObjectInput struct {
 	// ObjectReference is a required field
 	ObjectReference *ObjectReference `type:"structure" required:"true"`
 
-	// The facet to remove.
+	// The facet to remove. See SchemaFacet for details.
 	//
 	// SchemaFacet is a required field
 	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
@@ -13690,7 +13959,9 @@ type SchemaFacet struct {
 	// The name of the facet.
 	FacetName *string `min:"1" type:"string"`
 
-	// The ARN of the schema that contains the facet.
+	// The ARN of the schema that contains the facet with no minor component. See
+	// arns and In-Place Schema Upgrade (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html)
+	// for a description of when to provide minor versions.
 	SchemaArn *string `type:"string"`
 }
 
@@ -14948,6 +15219,229 @@ func (s UpdateTypedLinkFacetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTypedLinkFacetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaRequest
+type UpgradeAppliedSchemaInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the directory to which the upgraded schema will be applied.
+	//
+	// DirectoryArn is a required field
+	DirectoryArn *string `type:"string" required:"true"`
+
+	// Used for testing whether the major version schemas are backward compatible
+	// or not. If schema compatibility fails, an exception would be thrown else
+	// the call would succeed but no changes will be saved. This parameter is optional.
+	DryRun *bool `type:"boolean"`
+
+	// The revision of the published schema to upgrade the directory to.
+	//
+	// PublishedSchemaArn is a required field
+	PublishedSchemaArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpgradeAppliedSchemaInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradeAppliedSchemaInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpgradeAppliedSchemaInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpgradeAppliedSchemaInput"}
+
+	if s.DirectoryArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
+	}
+
+	if s.PublishedSchemaArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PublishedSchemaArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDirectoryArn sets the DirectoryArn field's value.
+func (s *UpgradeAppliedSchemaInput) SetDirectoryArn(v string) *UpgradeAppliedSchemaInput {
+	s.DirectoryArn = &v
+	return s
+}
+
+// SetDryRun sets the DryRun field's value.
+func (s *UpgradeAppliedSchemaInput) SetDryRun(v bool) *UpgradeAppliedSchemaInput {
+	s.DryRun = &v
+	return s
+}
+
+// SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
+func (s *UpgradeAppliedSchemaInput) SetPublishedSchemaArn(v string) *UpgradeAppliedSchemaInput {
+	s.PublishedSchemaArn = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaResponse
+type UpgradeAppliedSchemaOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the directory that is returned as part of the response.
+	DirectoryArn *string `type:"string"`
+
+	// The ARN of the upgraded schema that is returned as part of the response.
+	UpgradedSchemaArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpgradeAppliedSchemaOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradeAppliedSchemaOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpgradeAppliedSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetDirectoryArn sets the DirectoryArn field's value.
+func (s *UpgradeAppliedSchemaOutput) SetDirectoryArn(v string) *UpgradeAppliedSchemaOutput {
+	s.DirectoryArn = &v
+	return s
+}
+
+// SetUpgradedSchemaArn sets the UpgradedSchemaArn field's value.
+func (s *UpgradeAppliedSchemaOutput) SetUpgradedSchemaArn(v string) *UpgradeAppliedSchemaOutput {
+	s.UpgradedSchemaArn = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaRequest
+type UpgradePublishedSchemaInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the development schema with the changes used for the upgrade.
+	//
+	// DevelopmentSchemaArn is a required field
+	DevelopmentSchemaArn *string `type:"string" required:"true"`
+
+	// Used for testing whether the Development schema provided is backwards compatible,
+	// or not, with the publish schema provided by the user to be upgraded. If schema
+	// compatibility fails, an exception would be thrown else the call would succeed.
+	// This parameter is optional and defaults to false.
+	DryRun *bool `type:"boolean"`
+
+	// Identifies the minor version of the published schema that will be created.
+	// This parameter is NOT optional.
+	//
+	// MinorVersion is a required field
+	MinorVersion *string `min:"1" type:"string" required:"true"`
+
+	// The ARN of the published schema to be upgraded.
+	//
+	// PublishedSchemaArn is a required field
+	PublishedSchemaArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpgradePublishedSchemaInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradePublishedSchemaInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpgradePublishedSchemaInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpgradePublishedSchemaInput"}
+
+	if s.DevelopmentSchemaArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DevelopmentSchemaArn"))
+	}
+
+	if s.MinorVersion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinorVersion"))
+	}
+	if s.MinorVersion != nil && len(*s.MinorVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MinorVersion", 1))
+	}
+
+	if s.PublishedSchemaArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PublishedSchemaArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDevelopmentSchemaArn sets the DevelopmentSchemaArn field's value.
+func (s *UpgradePublishedSchemaInput) SetDevelopmentSchemaArn(v string) *UpgradePublishedSchemaInput {
+	s.DevelopmentSchemaArn = &v
+	return s
+}
+
+// SetDryRun sets the DryRun field's value.
+func (s *UpgradePublishedSchemaInput) SetDryRun(v bool) *UpgradePublishedSchemaInput {
+	s.DryRun = &v
+	return s
+}
+
+// SetMinorVersion sets the MinorVersion field's value.
+func (s *UpgradePublishedSchemaInput) SetMinorVersion(v string) *UpgradePublishedSchemaInput {
+	s.MinorVersion = &v
+	return s
+}
+
+// SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
+func (s *UpgradePublishedSchemaInput) SetPublishedSchemaArn(v string) *UpgradePublishedSchemaInput {
+	s.PublishedSchemaArn = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaResponse
+type UpgradePublishedSchemaOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the upgraded schema that is returned as part of the response.
+	UpgradedSchemaArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpgradePublishedSchemaOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradePublishedSchemaOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpgradePublishedSchemaOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetUpgradedSchemaArn sets the UpgradedSchemaArn field's value.
+func (s *UpgradePublishedSchemaOutput) SetUpgradedSchemaArn(v string) *UpgradePublishedSchemaOutput {
+	s.UpgradedSchemaArn = &v
+	return s
 }
 
 type BatchReadExceptionType string

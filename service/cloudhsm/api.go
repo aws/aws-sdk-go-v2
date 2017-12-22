@@ -30,6 +30,15 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 // AddTagsToResourceRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Adds or overwrites one or more tags for the specified AWS CloudHSM resource.
 //
 // Each tag consists of a key and a value. Tag keys must be unique to each resource.
@@ -81,6 +90,15 @@ func (r CreateHapgRequest) Send() (*CreateHapgOutput, error) {
 // CreateHapgRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Creates a high-availability partition group. A high-availability partition
 // group is a group of partitions that spans multiple physical HSMs.
 //
@@ -130,6 +148,15 @@ func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
 
 // CreateHsmRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Creates an uninitialized HSM instance.
 //
@@ -190,6 +217,15 @@ func (r CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
 // CreateLunaClientRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Creates an HSM client.
 //
 //    // Example sending a request using the CreateLunaClientRequest method.
@@ -239,6 +275,15 @@ func (r DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
 // DeleteHapgRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Deletes a high-availability partition group.
 //
 //    // Example sending a request using the DeleteHapgRequest method.
@@ -287,6 +332,15 @@ func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
 
 // DeleteHsmRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Deletes an HSM. After completion, this operation cannot be undone and your
 // key material cannot be recovered.
@@ -338,6 +392,15 @@ func (r DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
 // DeleteLunaClientRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Deletes a client.
 //
 //    // Example sending a request using the DeleteLunaClientRequest method.
@@ -387,6 +450,15 @@ func (r DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
 // DescribeHapgRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Retrieves information about a high-availability partition group.
 //
 //    // Example sending a request using the DescribeHapgRequest method.
@@ -435,6 +507,15 @@ func (r DescribeHsmRequest) Send() (*DescribeHsmOutput, error) {
 
 // DescribeHsmRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Retrieves information about an HSM. You can identify the HSM by its ARN or
 // its serial number.
@@ -486,6 +567,15 @@ func (r DescribeLunaClientRequest) Send() (*DescribeLunaClientOutput, error) {
 // DescribeLunaClientRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Retrieves information about an HSM client.
 //
 //    // Example sending a request using the DescribeLunaClientRequest method.
@@ -534,6 +624,15 @@ func (r GetConfigRequest) Send() (*GetConfigOutput, error) {
 
 // GetConfigRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Gets the configuration files necessary to connect to all high availability
 // partition groups the client is associated with.
@@ -585,6 +684,15 @@ func (r ListAvailableZonesRequest) Send() (*ListAvailableZonesOutput, error) {
 // ListAvailableZonesRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Lists the Availability Zones that have available AWS CloudHSM capacity.
 //
 //    // Example sending a request using the ListAvailableZonesRequest method.
@@ -633,6 +741,15 @@ func (r ListHapgsRequest) Send() (*ListHapgsOutput, error) {
 
 // ListHapgsRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Lists the high-availability partition groups for the account.
 //
@@ -687,6 +804,15 @@ func (r ListHsmsRequest) Send() (*ListHsmsOutput, error) {
 
 // ListHsmsRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Retrieves the identifiers of all of the HSMs provisioned for the current
 // customer.
@@ -743,6 +869,15 @@ func (r ListLunaClientsRequest) Send() (*ListLunaClientsOutput, error) {
 // ListLunaClientsRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Lists all of the clients.
 //
 // This operation supports pagination with the use of the NextToken member.
@@ -797,6 +932,15 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Returns a list of all tags for the specified AWS CloudHSM resource.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
@@ -846,6 +990,15 @@ func (r ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
 // ModifyHapgRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Modifies an existing high-availability partition group.
 //
 //    // Example sending a request using the ModifyHapgRequest method.
@@ -894,6 +1047,15 @@ func (r ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
 
 // ModifyHsmRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Modifies an HSM.
 //
@@ -950,6 +1112,15 @@ func (r ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
 // ModifyLunaClientRequest returns a request value for making API operation for
 // Amazon CloudHSM.
 //
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
+//
 // Modifies the certificate used by the client.
 //
 // This action can potentially start a workflow to install the new certificate
@@ -1001,6 +1172,15 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 
 // RemoveTagsFromResourceRequest returns a request value for making API operation for
 // Amazon CloudHSM.
+//
+// This is documentation for AWS CloudHSM Classic. For more information, see
+// AWS CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/),
+// the AWS CloudHSM Classic User Guide (http://docs.aws.amazon.com/cloudhsm/classic/userguide/),
+// and the AWS CloudHSM Classic API Reference (http://docs.aws.amazon.com/cloudhsm/classic/APIReference/).
+//
+// For information about the current version of AWS CloudHSM, see AWS CloudHSM
+// (http://aws.amazon.com/cloudhsm/), the AWS CloudHSM User Guide (http://docs.aws.amazon.com/cloudhsm/latest/userguide/),
+// and the AWS CloudHSM API Reference (http://docs.aws.amazon.com/cloudhsm/latest/APIReference/).
 //
 // Removes one or more tags from the specified AWS CloudHSM resource.
 //

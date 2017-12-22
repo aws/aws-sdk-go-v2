@@ -31,7 +31,7 @@ func (r AcceptPortfolioShareRequest) Send() (*AcceptPortfolioShareOutput, error)
 // AcceptPortfolioShareRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Accepts an offer to share a portfolio.
+// Accepts an offer to share the specified portfolio.
 //
 //    // Example sending a request using the AcceptPortfolioShareRequest method.
 //    req := client.AcceptPortfolioShareRequest(params)
@@ -129,7 +129,7 @@ func (r AssociateProductWithPortfolioRequest) Send() (*AssociateProductWithPortf
 // AssociateProductWithPortfolioRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Associates a product with a portfolio.
+// Associates the specified product with the specified portfolio.
 //
 //    // Example sending a request using the AssociateProductWithPortfolioRequest method.
 //    req := client.AssociateProductWithPortfolioRequest(params)
@@ -178,7 +178,7 @@ func (r AssociateTagOptionWithResourceRequest) Send() (*AssociateTagOptionWithRe
 // AssociateTagOptionWithResourceRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Associate a TagOption identifier with a resource identifier.
+// Associate the specified TagOption with the specified portfolio or product.
 //
 //    // Example sending a request using the AssociateTagOptionWithResourceRequest method.
 //    req := client.AssociateTagOptionWithResourceRequest(params)
@@ -230,8 +230,8 @@ func (r CopyProductRequest) Send() (*CopyProductOutput, error) {
 // Copies the specified source product to the specified target product or a
 // new product.
 //
-// You can copy the product to the same account or another account. You can
-// copy the product to the same region or another region.
+// You can copy a product to the same account or another account. You can copy
+// a product to the same region or another region.
 //
 // This operation is performed asynchronously. To track the progress of the
 // operation, use DescribeCopyProductStatus.
@@ -283,7 +283,7 @@ func (r CreateConstraintRequest) Send() (*CreateConstraintOutput, error) {
 // CreateConstraintRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Creates a new constraint. For more information, see Using Constraints (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html).
+// Creates a constraint.
 //
 //    // Example sending a request using the CreateConstraintRequest method.
 //    req := client.CreateConstraintRequest(params)
@@ -332,7 +332,7 @@ func (r CreatePortfolioRequest) Send() (*CreatePortfolioOutput, error) {
 // CreatePortfolioRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Creates a new portfolio.
+// Creates a portfolio.
 //
 //    // Example sending a request using the CreatePortfolioRequest method.
 //    req := client.CreatePortfolioRequest(params)
@@ -381,7 +381,7 @@ func (r CreatePortfolioShareRequest) Send() (*CreatePortfolioShareOutput, error)
 // CreatePortfolioShareRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Creates a new portfolio share.
+// Shares the specified portfolio with the specified account.
 //
 //    // Example sending a request using the CreatePortfolioShareRequest method.
 //    req := client.CreatePortfolioShareRequest(params)
@@ -430,7 +430,7 @@ func (r CreateProductRequest) Send() (*CreateProductOutput, error) {
 // CreateProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Creates a new product.
+// Creates a product.
 //
 //    // Example sending a request using the CreateProductRequest method.
 //    req := client.CreateProductRequest(params)
@@ -479,8 +479,11 @@ func (r CreateProvisioningArtifactRequest) Send() (*CreateProvisioningArtifactOu
 // CreateProvisioningArtifactRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Create a new provisioning artifact for the specified product. This operation
-// does not work with a product that has been shared with you.
+// Creates a provisioning artifact (also known as a version) for the specified
+// product.
+//
+// You cannot create a provisioning artifact for a product that was shared with
+// you.
 //
 //    // Example sending a request using the CreateProvisioningArtifactRequest method.
 //    req := client.CreateProvisioningArtifactRequest(params)
@@ -529,7 +532,7 @@ func (r CreateTagOptionRequest) Send() (*CreateTagOptionOutput, error) {
 // CreateTagOptionRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Create a new TagOption.
+// Creates a TagOption.
 //
 //    // Example sending a request using the CreateTagOptionRequest method.
 //    req := client.CreateTagOptionRequest(params)
@@ -627,9 +630,10 @@ func (r DeletePortfolioRequest) Send() (*DeletePortfolioOutput, error) {
 // DeletePortfolioRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Deletes the specified portfolio. This operation does not work with a portfolio
-// that has been shared with you or if it has products, users, constraints,
-// or shared accounts associated with it.
+// Deletes the specified portfolio.
+//
+// You cannot delete a portfolio if it was shared with you or if it has associated
+// products, users, constraints, or shared accounts.
 //
 //    // Example sending a request using the DeletePortfolioRequest method.
 //    req := client.DeletePortfolioRequest(params)
@@ -678,7 +682,7 @@ func (r DeletePortfolioShareRequest) Send() (*DeletePortfolioShareOutput, error)
 // DeletePortfolioShareRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Deletes the specified portfolio share.
+// Stops sharing the specified portfolio with the specified account.
 //
 //    // Example sending a request using the DeletePortfolioShareRequest method.
 //    req := client.DeletePortfolioShareRequest(params)
@@ -727,8 +731,10 @@ func (r DeleteProductRequest) Send() (*DeleteProductOutput, error) {
 // DeleteProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Deletes the specified product. This operation does not work with a product
-// that has been shared with you or is associated with a portfolio.
+// Deletes the specified product.
+//
+// You cannot delete a product if it was shared with you or is associated with
+// a portfolio.
 //
 //    // Example sending a request using the DeleteProductRequest method.
 //    req := client.DeleteProductRequest(params)
@@ -777,10 +783,12 @@ func (r DeleteProvisioningArtifactRequest) Send() (*DeleteProvisioningArtifactOu
 // DeleteProvisioningArtifactRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Deletes the specified provisioning artifact. This operation does not work
-// on a provisioning artifact associated with a product that has been shared
-// with you, or on the last provisioning artifact associated with a product
-// (a product must have at least one provisioning artifact).
+// Deletes the specified provisioning artifact (also known as a version) for
+// the specified product.
+//
+// You cannot delete a provisioning artifact associated with a product that
+// was shared with you. You cannot delete the last provisioning artifact for
+// a product, because a product must have at least one provisioning artifact.
 //
 //    // Example sending a request using the DeleteProvisioningArtifactRequest method.
 //    req := client.DeleteProvisioningArtifactRequest(params)
@@ -829,7 +837,7 @@ func (r DescribeConstraintRequest) Send() (*DescribeConstraintOutput, error) {
 // DescribeConstraintRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves detailed information for a specified constraint.
+// Gets information about the specified constraint.
 //
 //    // Example sending a request using the DescribeConstraintRequest method.
 //    req := client.DescribeConstraintRequest(params)
@@ -878,7 +886,7 @@ func (r DescribeCopyProductStatusRequest) Send() (*DescribeCopyProductStatusOutp
 // DescribeCopyProductStatusRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Describes the status of the specified copy product operation.
+// Gets the status of the specified copy product operation.
 //
 //    // Example sending a request using the DescribeCopyProductStatusRequest method.
 //    req := client.DescribeCopyProductStatusRequest(params)
@@ -927,8 +935,7 @@ func (r DescribePortfolioRequest) Send() (*DescribePortfolioOutput, error) {
 // DescribePortfolioRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves detailed information and any tags associated with the specified
-// portfolio.
+// Gets information about the specified portfolio.
 //
 //    // Example sending a request using the DescribePortfolioRequest method.
 //    req := client.DescribePortfolioRequest(params)
@@ -977,10 +984,7 @@ func (r DescribeProductRequest) Send() (*DescribeProductOutput, error) {
 // DescribeProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves information about a specified product.
-//
-// This operation is functionally identical to DescribeProductView except that
-// it takes as input ProductId instead of ProductViewId.
+// Gets information about the specified product.
 //
 //    // Example sending a request using the DescribeProductRequest method.
 //    req := client.DescribeProductRequest(params)
@@ -1029,7 +1033,8 @@ func (r DescribeProductAsAdminRequest) Send() (*DescribeProductAsAdminOutput, er
 // DescribeProductAsAdminRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves information about a specified product, run with administrator access.
+// Gets information about the specified product. This operation is run with
+// administrator access.
 //
 //    // Example sending a request using the DescribeProductAsAdminRequest method.
 //    req := client.DescribeProductAsAdminRequest(params)
@@ -1078,10 +1083,7 @@ func (r DescribeProductViewRequest) Send() (*DescribeProductViewOutput, error) {
 // DescribeProductViewRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves information about a specified product.
-//
-// This operation is functionally identical to DescribeProduct except that it
-// takes as input ProductViewId instead of ProductId.
+// Gets information about the specified product.
 //
 //    // Example sending a request using the DescribeProductViewRequest method.
 //    req := client.DescribeProductViewRequest(params)
@@ -1130,7 +1132,7 @@ func (r DescribeProvisionedProductRequest) Send() (*DescribeProvisionedProductOu
 // DescribeProvisionedProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieve detailed information about the provisioned product.
+// Gets information about the specified provisioned product.
 //
 //    // Example sending a request using the DescribeProvisionedProductRequest method.
 //    req := client.DescribeProvisionedProductRequest(params)
@@ -1179,7 +1181,8 @@ func (r DescribeProvisioningArtifactRequest) Send() (*DescribeProvisioningArtifa
 // DescribeProvisioningArtifactRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves detailed information about the specified provisioning artifact.
+// Gets information about the specified provisioning artifact (also known as
+// a version) for the specified product.
 //
 //    // Example sending a request using the DescribeProvisioningArtifactRequest method.
 //    req := client.DescribeProvisioningArtifactRequest(params)
@@ -1228,19 +1231,15 @@ func (r DescribeProvisioningParametersRequest) Send() (*DescribeProvisioningPara
 // DescribeProvisioningParametersRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Provides information about parameters required to provision a specified product
-// in a specified manner. Use this operation to obtain the list of ProvisioningArtifactParameters
-// parameters available to call the ProvisionProduct operation for the specified
-// product.
+// Gets information about the configuration required to provision the specified
+// product using the specified provisioning artifact.
 //
 // If the output contains a TagOption key with an empty list of values, there
 // is a TagOption conflict for that key. The end user cannot take action to
-// fix the conflict, and launch is not blocked. In subsequent calls to the ProvisionProduct
-// operation, do not include conflicted TagOption keys as tags. Calls to ProvisionProduct
-// with empty TagOption values cause the error "Parameter validation failed:
-// Missing required parameter in Tags[N]:Value ". Calls to ProvisionProduct
-// with conflicted TagOption keys automatically tag the provisioned product
-// with the conflicted keys with the value "sc-tagoption-conflict-portfolioId-productId".
+// fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct,
+// do not include conflicted TagOption keys as tags, or this will cause the
+// error "Parameter validation failed: Missing required parameter in Tags[N]:Value"
+// and tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
 //
 //    // Example sending a request using the DescribeProvisioningParametersRequest method.
 //    req := client.DescribeProvisioningParametersRequest(params)
@@ -1289,9 +1288,10 @@ func (r DescribeRecordRequest) Send() (*DescribeRecordOutput, error) {
 // DescribeRecordRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves a paginated list of the full details of a specific request. Use
-// this operation after calling a request operation (ProvisionProduct, TerminateProvisionedProduct,
-// or UpdateProvisionedProduct).
+// Gets information about the specified request operation.
+//
+// Use this operation after calling a request operation (for example, ProvisionProduct,
+// TerminateProvisionedProduct, or UpdateProvisionedProduct).
 //
 //    // Example sending a request using the DescribeRecordRequest method.
 //    req := client.DescribeRecordRequest(params)
@@ -1340,7 +1340,7 @@ func (r DescribeTagOptionRequest) Send() (*DescribeTagOptionOutput, error) {
 // DescribeTagOptionRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Describes a TagOption.
+// Gets information about the specified TagOption.
 //
 //    // Example sending a request using the DescribeTagOptionRequest method.
 //    req := client.DescribeTagOptionRequest(params)
@@ -1487,7 +1487,7 @@ func (r DisassociateTagOptionFromResourceRequest) Send() (*DisassociateTagOption
 // DisassociateTagOptionFromResourceRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Disassociates a TagOption from a resource.
+// Disassociates the specified TagOption from the specified resource.
 //
 //    // Example sending a request using the DisassociateTagOptionFromResourceRequest method.
 //    req := client.DisassociateTagOptionFromResourceRequest(params)
@@ -1536,7 +1536,7 @@ func (r ListAcceptedPortfolioSharesRequest) Send() (*ListAcceptedPortfolioShares
 // ListAcceptedPortfolioSharesRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Lists details of all portfolios for which sharing was accepted by this account.
+// Lists all portfolios for which sharing was accepted by this account.
 //
 //    // Example sending a request using the ListAcceptedPortfolioSharesRequest method.
 //    req := client.ListAcceptedPortfolioSharesRequest(params)
@@ -1641,8 +1641,7 @@ func (r ListConstraintsForPortfolioRequest) Send() (*ListConstraintsForPortfolio
 // ListConstraintsForPortfolioRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves detailed constraint information for the specified portfolio and
-// product.
+// Lists the constraints for the specified portfolio and product.
 //
 //    // Example sending a request using the ListConstraintsForPortfolioRequest method.
 //    req := client.ListConstraintsForPortfolioRequest(params)
@@ -1747,9 +1746,9 @@ func (r ListLaunchPathsRequest) Send() (*ListLaunchPathsOutput, error) {
 // ListLaunchPathsRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Returns a paginated list of all paths to a specified product. A path is how
-// the user has access to a specified product, and is necessary when provisioning
-// a product. A path also determines the constraints put on the product.
+// Lists the paths to the specified product. A path is how the user has access
+// to a specified product, and is necessary when provisioning a product. A path
+// also determines the constraints put on the product.
 //
 //    // Example sending a request using the ListLaunchPathsRequest method.
 //    req := client.ListLaunchPathsRequest(params)
@@ -1854,8 +1853,7 @@ func (r ListPortfolioAccessRequest) Send() (*ListPortfolioAccessOutput, error) {
 // ListPortfolioAccessRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Lists the account IDs that have been authorized sharing of the specified
-// portfolio.
+// Lists the account IDs that have access to the specified portfolio.
 //
 //    // Example sending a request using the ListPortfolioAccessRequest method.
 //    req := client.ListPortfolioAccessRequest(params)
@@ -2219,7 +2217,8 @@ func (r ListProvisioningArtifactsRequest) Send() (*ListProvisioningArtifactsOutp
 // ListProvisioningArtifactsRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Lists all provisioning artifacts associated with the specified product.
+// Lists all provisioning artifacts (also known as versions) for the specified
+// product.
 //
 //    // Example sending a request using the ListProvisioningArtifactsRequest method.
 //    req := client.ListProvisioningArtifactsRequest(params)
@@ -2268,8 +2267,7 @@ func (r ListRecordHistoryRequest) Send() (*ListRecordHistoryOutput, error) {
 // ListRecordHistoryRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Returns a paginated list of all performed requests, in the form of RecordDetails
-// objects that are filtered as specified.
+// Lists the specified requests or all performed requests.
 //
 //    // Example sending a request using the ListRecordHistoryRequest method.
 //    req := client.ListRecordHistoryRequest(params)
@@ -2318,7 +2316,7 @@ func (r ListResourcesForTagOptionRequest) Send() (*ListResourcesForTagOptionOutp
 // ListResourcesForTagOptionRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Lists resources associated with a TagOption.
+// Lists the resources associated with the specified TagOption.
 //
 //    // Example sending a request using the ListResourcesForTagOptionRequest method.
 //    req := client.ListResourcesForTagOptionRequest(params)
@@ -2423,7 +2421,7 @@ func (r ListTagOptionsRequest) Send() (*ListTagOptionsOutput, error) {
 // ListTagOptionsRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Lists detailed TagOptions information.
+// Lists the specified TagOptions or all TagOptions.
 //
 //    // Example sending a request using the ListTagOptionsRequest method.
 //    req := client.ListTagOptionsRequest(params)
@@ -2528,18 +2526,17 @@ func (r ProvisionProductRequest) Send() (*ProvisionProductOutput, error) {
 // ProvisionProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Requests a provision of a specified product. A provisioned product is a resourced
-// instance for a product. For example, provisioning a CloudFormation-template-backed
-// product results in launching a CloudFormation stack and all the underlying
-// resources that come with it.
+// Provisions the specified product.
 //
-// You can check the status of this request using the DescribeRecord operation.
-// The error "Parameter validation failed: Missing required parameter in Tags[N]:Value"
-// indicates that your request contains a tag which has a tag key but no corresponding
-// tag value (value is empty or null). Your call may have included values returned
-// from a DescribeProvisioningParameters call that resulted in a TagOption key
-// with an empty list. This happens when TagOption keys are in conflict. For
-// more information, see DescribeProvisioningParameters.
+// A provisioned product is a resourced instance of a product. For example,
+// provisioning a product based on a CloudFormation template launches a CloudFormation
+// stack and its underlying resources. You can check the status of this request
+// using DescribeRecord.
+//
+// If the request contains a tag key with an empty list of values, there is
+// a tag conflict for that key. Do not include conflicted keys as tags, or this
+// will cause the error "Parameter validation failed: Missing required parameter
+// in Tags[N]:Value".
 //
 //    // Example sending a request using the ProvisionProductRequest method.
 //    req := client.ProvisionProductRequest(params)
@@ -2588,7 +2585,7 @@ func (r RejectPortfolioShareRequest) Send() (*RejectPortfolioShareOutput, error)
 // RejectPortfolioShareRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Rejects an offer to share a portfolio.
+// Rejects an offer to share the specified portfolio.
 //
 //    // Example sending a request using the RejectPortfolioShareRequest method.
 //    req := client.RejectPortfolioShareRequest(params)
@@ -2637,8 +2634,7 @@ func (r ScanProvisionedProductsRequest) Send() (*ScanProvisionedProductsOutput, 
 // ScanProvisionedProductsRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Returns a paginated list of all the ProvisionedProduct objects that are currently
-// available (not terminated).
+// Lists the provisioned products that are available (not terminated).
 //
 //    // Example sending a request using the ScanProvisionedProductsRequest method.
 //    req := client.ScanProvisionedProductsRequest(params)
@@ -2687,11 +2683,7 @@ func (r SearchProductsRequest) Send() (*SearchProductsOutput, error) {
 // SearchProductsRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Returns a paginated list all of the Products objects to which the caller
-// has access.
-//
-// The output of this operation can be used as input for other operations, such
-// as DescribeProductView.
+// Gets information about the products to which the caller has access.
 //
 //    // Example sending a request using the SearchProductsRequest method.
 //    req := client.SearchProductsRequest(params)
@@ -2796,10 +2788,7 @@ func (r SearchProductsAsAdminRequest) Send() (*SearchProductsAsAdminOutput, erro
 // SearchProductsAsAdminRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Retrieves summary and status information about all products created within
-// the caller's account. If a portfolio ID is provided, this operation retrieves
-// information for only those products that are associated with the specified
-// portfolio.
+// Gets information about the products for the specified portfolio or all products.
 //
 //    // Example sending a request using the SearchProductsAsAdminRequest method.
 //    req := client.SearchProductsAsAdminRequest(params)
@@ -2904,14 +2893,12 @@ func (r TerminateProvisionedProductRequest) Send() (*TerminateProvisionedProduct
 // TerminateProvisionedProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Requests termination of an existing ProvisionedProduct object. If there are
-// Tags associated with the object, they are terminated when the ProvisionedProduct
-// object is terminated.
+// Terminates the specified provisioned product.
 //
-// This operation does not delete any records associated with the ProvisionedProduct
-// object.
+// This operation does not delete any records associated with the provisioned
+// product.
 //
-// You can check the status of this request using the DescribeRecord operation.
+// You can check the status of this request using DescribeRecord.
 //
 //    // Example sending a request using the TerminateProvisionedProductRequest method.
 //    req := client.TerminateProvisionedProductRequest(params)
@@ -2960,7 +2947,7 @@ func (r UpdateConstraintRequest) Send() (*UpdateConstraintOutput, error) {
 // UpdateConstraintRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Updates an existing constraint.
+// Updates the specified constraint.
 //
 //    // Example sending a request using the UpdateConstraintRequest method.
 //    req := client.UpdateConstraintRequest(params)
@@ -3009,8 +2996,9 @@ func (r UpdatePortfolioRequest) Send() (*UpdatePortfolioOutput, error) {
 // UpdatePortfolioRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Updates the specified portfolio's details. This operation does not work with
-// a product that has been shared with you.
+// Updates the specified portfolio.
+//
+// You cannot update a product that was shared with you.
 //
 //    // Example sending a request using the UpdatePortfolioRequest method.
 //    req := client.UpdatePortfolioRequest(params)
@@ -3059,7 +3047,7 @@ func (r UpdateProductRequest) Send() (*UpdateProductOutput, error) {
 // UpdateProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Updates an existing product.
+// Updates the specified product.
 //
 //    // Example sending a request using the UpdateProductRequest method.
 //    req := client.UpdateProductRequest(params)
@@ -3108,13 +3096,14 @@ func (r UpdateProvisionedProductRequest) Send() (*UpdateProvisionedProductOutput
 // UpdateProvisionedProductRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Requests updates to the configuration of an existing ProvisionedProduct object.
-// If there are tags associated with the object, they cannot be updated or added
-// with this operation. Depending on the specific updates requested, this operation
-// may update with no interruption, with some interruption, or replace the ProvisionedProduct
-// object entirely.
+// Requests updates to the configuration of the specified provisioned product.
 //
-// You can check the status of this request using the DescribeRecord operation.
+// If there are tags associated with the object, they cannot be updated or added.
+// Depending on the specific updates requested, this operation can update with
+// no interruption, with some interruption, or replace the provisioned product
+// entirely.
+//
+// You can check the status of this request using DescribeRecord.
 //
 //    // Example sending a request using the UpdateProvisionedProductRequest method.
 //    req := client.UpdateProvisionedProductRequest(params)
@@ -3163,9 +3152,11 @@ func (r UpdateProvisioningArtifactRequest) Send() (*UpdateProvisioningArtifactOu
 // UpdateProvisioningArtifactRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Updates an existing provisioning artifact's information. This operation does
-// not work on a provisioning artifact associated with a product that has been
-// shared with you.
+// Updates the specified provisioning artifact (also known as a version) for
+// the specified product.
+//
+// You cannot update a provisioning artifact for a product that was shared with
+// you.
 //
 //    // Example sending a request using the UpdateProvisioningArtifactRequest method.
 //    req := client.UpdateProvisioningArtifactRequest(params)
@@ -3214,7 +3205,7 @@ func (r UpdateTagOptionRequest) Send() (*UpdateTagOptionOutput, error) {
 // UpdateTagOptionRequest returns a request value for making API operation for
 // AWS Service Catalog.
 //
-// Updates an existing TagOption.
+// Updates the specified TagOption.
 //
 //    // Example sending a request using the UpdateTagOptionRequest method.
 //    req := client.UpdateTagOptionRequest(params)
@@ -3322,22 +3313,21 @@ func (s AcceptPortfolioShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The access level to limit results.
+// The access level to use to filter results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AccessLevelFilter
 type AccessLevelFilter struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the access level.
+	// The access level.
 	//
-	// Account allows results at the account level.
+	//    * Account - Filter results based on the account.
 	//
-	// Role allows results based on the federated role of the specified user.
+	//    * Role - Filter results based on the federated role of the specified user.
 	//
-	// User allows results limited to the specified user.
+	//    * User - Filter results based on the specified user.
 	Key AccessLevelFilterKey `type:"string" enum:"true"`
 
-	// Specifies the user to which the access level applies. A value of Self is
-	// currently supported.
+	// The user to which the access level applies. The only supported value is Self.
 	Value *string `type:"string"`
 }
 
@@ -3381,12 +3371,12 @@ type AssociatePrincipalWithPortfolioInput struct {
 	// PortfolioId is a required field
 	PortfolioId *string `min:"1" type:"string" required:"true"`
 
-	// The ARN representing the principal (IAM user, role, or group).
+	// The ARN of the principal (IAM user, role, or group).
 	//
 	// PrincipalARN is a required field
 	PrincipalARN *string `min:"1" type:"string" required:"true"`
 
-	// The principal type. Must be IAM
+	// The principal type. The supported value is IAM.
 	//
 	// PrincipalType is a required field
 	PrincipalType PrincipalType `type:"string" required:"true" enum:"true"`
@@ -3498,7 +3488,7 @@ type AssociateProductWithPortfolioInput struct {
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of the source portfolio to use with this association.
+	// The identifier of the source portfolio.
 	SourcePortfolioId *string `min:"1" type:"string"`
 }
 
@@ -3665,7 +3655,7 @@ func (s AssociateTagOptionWithResourceOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// Detailed constraint information.
+// Information about a constraint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail
 type ConstraintDetail struct {
 	_ struct{} `type:"structure"`
@@ -3673,13 +3663,19 @@ type ConstraintDetail struct {
 	// The identifier of the constraint.
 	ConstraintId *string `min:"1" type:"string"`
 
-	// The text description of the constraint.
+	// The description of the constraint.
 	Description *string `type:"string"`
 
 	// The owner of the constraint.
 	Owner *string `type:"string"`
 
-	// The type of the constraint.
+	// The type of constraint.
+	//
+	//    * LAUNCH
+	//
+	//    * NOTIFICATION
+	//
+	//    * TEMPLATE
 	Type *string `min:"1" type:"string"`
 }
 
@@ -3717,15 +3713,21 @@ func (s *ConstraintDetail) SetType(v string) *ConstraintDetail {
 	return s
 }
 
-// An administrator-specified constraint to apply when provisioning a product.
+// Summary information about a constraint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintSummary
 type ConstraintSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The text description of the constraint.
+	// The description of the constraint.
 	Description *string `type:"string"`
 
-	// The type of the constraint.
+	// The type of constraint.
+	//
+	//    * LAUNCH
+	//
+	//    * NOTIFICATION
+	//
+	//    * TEMPLATE
 	Type *string `min:"1" type:"string"`
 }
 
@@ -3768,9 +3770,9 @@ type CopyProductInput struct {
 	// are copied to the target product.
 	CopyOptions []CopyOption `type:"list"`
 
-	// A token to disambiguate duplicate requests. You can use the same input in
-	// multiple requests, provided that you also specify a different idempotency
-	// token for each request.
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
 	//
 	// IdempotencyToken is a required field
 	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -3780,11 +3782,11 @@ type CopyProductInput struct {
 	// SourceProductArn is a required field
 	SourceProductArn *string `min:"1" type:"string" required:"true"`
 
-	// The IDs of the product versions to copy. By default, all provisioning artifacts
-	// are copied.
+	// The identifiers of the provisioning artifacts (also known as versions) of
+	// the product to copy. By default, all provisioning artifacts are copied.
 	SourceProvisioningArtifactIdentifiers []map[string]string `type:"list"`
 
-	// The ID of the target product. By default, a new product is created.
+	// The identifier of the target product. By default, a new product is created.
 	TargetProductId *string `min:"1" type:"string"`
 
 	// A name for the target product. The default is the name of the source product.
@@ -3876,8 +3878,7 @@ type CopyProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// A unique token to pass to DescribeCopyProductStatus to track the progress
-	// of the operation.
+	// The token to use to track the progress of the operation.
 	CopyProductToken *string `min:"1" type:"string"`
 }
 
@@ -3915,24 +3916,29 @@ type CreateConstraintInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The text description of the constraint.
+	// The description of the constraint.
 	Description *string `type:"string"`
 
-	// A token to disambiguate duplicate requests. You can use the same input in
-	// multiple requests, provided that you also specify a different idempotency
-	// token for each request.
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
 	//
 	// IdempotencyToken is a required field
 	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// The constraint parameters. Expected values vary depending on which Type is
-	// specified. For more information, see the Examples section.
+	// The constraint parameters, in JSON format. The syntax depends on the constraint
+	// type as follows:
 	//
-	// For Type LAUNCH, the RoleArn property is required.
+	// LAUNCHSpecify the RoleArn property as follows:
 	//
-	// For Type NOTIFICATION, the NotificationArns property is required.
+	// \"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"
 	//
-	// For Type TEMPLATE, the Rules property is required.
+	// NOTIFICATIONSpecify the NotificationArns property as follows:
+	//
+	// \"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]
+	//
+	// TEMPLATESpecify the Rules property. For more information, see Template Constraint
+	// Rules (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html).
 	//
 	// Parameters is a required field
 	Parameters *string `type:"string" required:"true"`
@@ -3947,8 +3953,13 @@ type CreateConstraintInput struct {
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
 
-	// The type of the constraint. Case-sensitive valid values are: LAUNCH, NOTIFICATION,
-	// or TEMPLATE.
+	// The type of constraint.
+	//
+	//    * LAUNCH
+	//
+	//    * NOTIFICATION
+	//
+	//    * TEMPLATE
 	//
 	// Type is a required field
 	Type *string `min:"1" type:"string" required:"true"`
@@ -4054,10 +4065,10 @@ type CreateConstraintOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed constraint information.
+	// Information about the constraint.
 	ConstraintDetail *ConstraintDetail `type:"structure"`
 
-	// The resulting constraint parameters.
+	// The constraint parameters.
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
@@ -4110,7 +4121,7 @@ type CreatePortfolioInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The text description of the portfolio.
+	// The description of the portfolio.
 	Description *string `type:"string"`
 
 	// The name to use for display purposes.
@@ -4118,9 +4129,9 @@ type CreatePortfolioInput struct {
 	// DisplayName is a required field
 	DisplayName *string `min:"1" type:"string" required:"true"`
 
-	// A token to disambiguate duplicate requests. You can use the same input in
-	// multiple requests, provided that you also specify a different idempotency
-	// token for each request.
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
 	//
 	// IdempotencyToken is a required field
 	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -4130,7 +4141,7 @@ type CreatePortfolioInput struct {
 	// ProviderName is a required field
 	ProviderName *string `min:"1" type:"string" required:"true"`
 
-	// Tags to associate with the new portfolio.
+	// The tags to associate with the portfolio.
 	Tags []Tag `type:"list"`
 }
 
@@ -4224,10 +4235,10 @@ type CreatePortfolioOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed portfolio information.
+	// Information about the portfolio.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
-	// Tags successfully associated with the new portfolio.
+	// Information about the tags associated with the portfolio.
 	Tags []Tag `type:"list"`
 }
 
@@ -4271,7 +4282,7 @@ type CreatePortfolioShareInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The account ID with which to share the portfolio.
+	// The AWS account ID.
 	//
 	// AccountId is a required field
 	AccountId *string `type:"string" required:"true"`
@@ -4366,15 +4377,15 @@ type CreateProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The text description of the product.
+	// The description of the product.
 	Description *string `type:"string"`
 
 	// The distributor of the product.
 	Distributor *string `type:"string"`
 
-	// A token to disambiguate duplicate requests. You can use the same input in
-	// multiple requests, provided that you also specify a different idempotency
-	// token for each request.
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
 	//
 	// IdempotencyToken is a required field
 	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -4389,26 +4400,26 @@ type CreateProductInput struct {
 	// Owner is a required field
 	Owner *string `type:"string" required:"true"`
 
-	// The type of the product to create.
+	// The type of product.
 	//
 	// ProductType is a required field
 	ProductType ProductType `type:"string" required:"true" enum:"true"`
 
-	// Parameters for the provisioning artifact.
+	// The configuration of the provisioning artifact.
 	//
 	// ProvisioningArtifactParameters is a required field
 	ProvisioningArtifactParameters *ProvisioningArtifactProperties `type:"structure" required:"true"`
 
-	// Support information about the product.
+	// The support information about the product.
 	SupportDescription *string `type:"string"`
 
-	// Contact email for product support.
+	// The contact email for product support.
 	SupportEmail *string `type:"string"`
 
-	// Contact URL for product support.
+	// The contact URL for product support.
 	SupportUrl *string `type:"string"`
 
-	// Tags to associate with the new product.
+	// The tags to associate with the product.
 	Tags []Tag `type:"list"`
 }
 
@@ -4544,13 +4555,13 @@ type CreateProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed product view information.
+	// Information about the product view.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
-	// The resulting detailed provisioning artifact information.
+	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
-	// Tags successfully associated with the new product.
+	// Information about the tags associated with the product.
 	Tags []Tag `type:"list"`
 }
 
@@ -4600,14 +4611,14 @@ type CreateProvisioningArtifactInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// A token to disambiguate duplicate requests. You can use the same input in
-	// multiple requests, provided that you also specify a different idempotency
-	// token for each request.
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
 	//
 	// IdempotencyToken is a required field
 	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// The parameters to use when creating the new provisioning artifact.
+	// The configuration for the provisioning artifact.
 	//
 	// Parameters is a required field
 	Parameters *ProvisioningArtifactProperties `type:"structure" required:"true"`
@@ -4691,10 +4702,10 @@ type CreateProvisioningArtifactOutput struct {
 
 	responseMetadata aws.Response
 
-	// Additional information about the creation request for the provisioning artifact.
+	// The URL of the CloudFormation template in Amazon S3, in JSON format.
 	Info map[string]string `min:"1" type:"map"`
 
-	// The resulting detailed provisioning artifact information.
+	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
@@ -4801,7 +4812,7 @@ type CreateTagOptionOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed TagOption information.
+	// Information about the TagOption.
 	TagOptionDetail *TagOptionDetail `type:"structure"`
 }
 
@@ -4839,7 +4850,7 @@ type DeleteConstraintInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the constraint to delete.
+	// The identifier of the constraint.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -4919,7 +4930,7 @@ type DeletePortfolioInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the portfolio for the delete request.
+	// The portfolio identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -4999,7 +5010,7 @@ type DeletePortfolioShareInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The account ID associated with the share to delete.
+	// The AWS account ID.
 	//
 	// AccountId is a required field
 	AccountId *string `type:"string" required:"true"`
@@ -5094,7 +5105,7 @@ type DeleteProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the product for the delete request.
+	// The product identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -5179,8 +5190,7 @@ type DeleteProvisioningArtifactInput struct {
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of the provisioning artifact for the delete request. This
-	// is sometimes referred to as the product version.
+	// The identifier of the provisioning artifact.
 	//
 	// ProvisioningArtifactId is a required field
 	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
@@ -5324,10 +5334,10 @@ type DescribeConstraintOutput struct {
 
 	responseMetadata aws.Response
 
-	// Detailed constraint information.
+	// Information about the constraint.
 	ConstraintDetail *ConstraintDetail `type:"structure"`
 
-	// The current parameters associated with the specified constraint.
+	// The constraint parameters.
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
@@ -5380,7 +5390,7 @@ type DescribeCopyProductStatusInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The token returned from the call to CopyProduct that initiated the operation.
+	// The token for the copy product operation. This token is returned by CopyProduct.
 	//
 	// CopyProductToken is a required field
 	CopyProductToken *string `min:"1" type:"string" required:"true"`
@@ -5437,7 +5447,7 @@ type DescribeCopyProductStatusOutput struct {
 	// The status message.
 	StatusDetail *string `type:"string"`
 
-	// The ID of the copied product.
+	// The identifier of the copied product.
 	TargetProductId *string `min:"1" type:"string"`
 }
 
@@ -5487,7 +5497,7 @@ type DescribePortfolioInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the portfolio for which to retrieve information.
+	// The portfolio identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -5538,13 +5548,13 @@ type DescribePortfolioOutput struct {
 
 	responseMetadata aws.Response
 
-	// Detailed portfolio information.
+	// Information about the portfolio.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
-	// TagOptions associated with the portfolio.
+	// Information about the TagOptions associated with the portfolio.
 	TagOptions []TagOptionDetail `type:"list"`
 
-	// Tags associated with the portfolio.
+	// Information about the tags associated with the portfolio.
 	Tags []Tag `type:"list"`
 }
 
@@ -5594,7 +5604,7 @@ type DescribeProductAsAdminInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the product for which to retrieve information.
+	// The product identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -5645,16 +5655,17 @@ type DescribeProductAsAdminOutput struct {
 
 	responseMetadata aws.Response
 
-	// Detailed product view information.
+	// Information about the product view.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
-	// A list of provisioning artifact summaries for the product.
+	// Information about the provisioning artifacts (also known as versions) for
+	// the specified product.
 	ProvisioningArtifactSummaries []ProvisioningArtifactSummary `type:"list"`
 
-	// List of TagOptions associated with the product.
+	// Information about the TagOptions associated with the product.
 	TagOptions []TagOptionDetail `type:"list"`
 
-	// Tags associated with the product.
+	// Information about the tags associated with the product.
 	Tags []Tag `type:"list"`
 }
 
@@ -5710,7 +5721,7 @@ type DescribeProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The ProductId of the product to describe.
+	// The product identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -5761,11 +5772,10 @@ type DescribeProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The summary metadata about the specified product.
+	// Summary information about the product view.
 	ProductViewSummary *ProductViewSummary `type:"structure"`
 
-	// A list of provisioning artifact objects for the specified product. The ProvisioningArtifacts
-	// parameter represent the ways the specified product can be provisioned.
+	// Information about the provisioning artifacts for the specified product.
 	ProvisioningArtifacts []ProvisioningArtifact `type:"list"`
 }
 
@@ -5809,7 +5819,7 @@ type DescribeProductViewInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The ProductViewId of the product to describe.
+	// The product view identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -5860,11 +5870,10 @@ type DescribeProductViewOutput struct {
 
 	responseMetadata aws.Response
 
-	// The summary metadata about the specified product.
+	// Summary information about the product.
 	ProductViewSummary *ProductViewSummary `type:"structure"`
 
-	// A list of provisioning artifact objects for the specified product. The ProvisioningArtifacts
-	// represent the ways in which the specified product can be provisioned.
+	// Information about the provisioning artifacts for the product.
 	ProvisioningArtifacts []ProvisioningArtifact `type:"list"`
 }
 
@@ -5959,7 +5968,7 @@ type DescribeProvisionedProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// Detailed provisioned product information.
+	// Information about the provisioned product.
 	ProvisionedProductDetail *ProvisionedProductDetail `type:"structure"`
 }
 
@@ -6002,13 +6011,12 @@ type DescribeProvisioningArtifactInput struct {
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of the provisioning artifact. This is sometimes referred to
-	// as the product version.
+	// The identifier of the provisioning artifact.
 	//
 	// ProvisioningArtifactId is a required field
 	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
 
-	// Enable a verbose level of details for the provisioning artifact.
+	// Indicates whether a verbose level of detail is enabled.
 	Verbose *bool `type:"boolean"`
 }
 
@@ -6076,10 +6084,10 @@ type DescribeProvisioningArtifactOutput struct {
 
 	responseMetadata aws.Response
 
-	// Additional information about the provisioning artifact.
+	// The URL of the CloudFormation template in Amazon S3.
 	Info map[string]string `min:"1" type:"map"`
 
-	// Detailed provisioning artifact information.
+	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
@@ -6132,9 +6140,9 @@ type DescribeProvisioningParametersInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the path for this product's provisioning. This value is
-	// optional if the product has a default path, and is required if there is more
-	// than one path for the specified product.
+	// The path identifier of the product. This value is optional if the product
+	// has a default path, and required if the product has more than one path. To
+	// list the paths for a product, use ListLaunchPaths.
 	PathId *string `min:"1" type:"string"`
 
 	// The product identifier.
@@ -6142,8 +6150,7 @@ type DescribeProvisioningParametersInput struct {
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
 
-	// The provisioning artifact identifier for this product. This is sometimes
-	// referred to as the product version.
+	// The identifier of the provisioning artifact.
 	//
 	// ProvisioningArtifactId is a required field
 	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
@@ -6216,14 +6223,13 @@ type DescribeProvisioningParametersOutput struct {
 
 	responseMetadata aws.Response
 
-	// The list of constraint summaries that apply to provisioning this product.
+	// Information about the constraints used to provision the product.
 	ConstraintSummaries []ConstraintSummary `type:"list"`
 
-	// The list of parameters used to successfully provision the product. Each parameter
-	// includes a list of allowable values and additional metadata about each parameter.
+	// Information about the parameters used to provision the product.
 	ProvisioningArtifactParameters []ProvisioningArtifactParameter `type:"list"`
 
-	// List of TagOptions associated with the provisioned provisioning parameters.
+	// Information about the TagOptions associated with the resource.
 	TagOptions []TagOptionSummary `type:"list"`
 
 	// Any additional metadata specifically related to the provisioning of the product.
@@ -6283,20 +6289,17 @@ type DescribeRecordInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The record identifier of the ProvisionedProduct object for which to retrieve
-	// output information. This is the RecordDetail.RecordId obtained from the request
-	// operation's response.
+	// The record identifier of the provisioned product. This identifier is returned
+	// by the request operation.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 }
 
@@ -6357,16 +6360,16 @@ type DescribeRecordOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// Detailed record information for the specified product.
+	// Information about the product.
 	RecordDetail *RecordDetail `type:"structure"`
 
-	// A list of outputs for the specified Product object created as the result
-	// of a request. For example, a CloudFormation-backed product that creates an
-	// S3 bucket would have an output for the S3 bucket URL.
+	// Information about the product created as the result of a request. For example,
+	// the output for a CloudFormation-backed product that creates an S3 bucket
+	// would include the S3 bucket URL.
 	RecordOutputs []RecordOutput `type:"list"`
 }
 
@@ -6407,7 +6410,7 @@ func (s *DescribeRecordOutput) SetRecordOutputs(v []RecordOutput) *DescribeRecor
 type DescribeTagOptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the TagOption.
+	// The TagOption identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -6452,7 +6455,7 @@ type DescribeTagOptionOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed TagOption information.
+	// Information about the TagOption.
 	TagOptionDetail *TagOptionDetail `type:"structure"`
 }
 
@@ -6495,7 +6498,7 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	// PortfolioId is a required field
 	PortfolioId *string `min:"1" type:"string" required:"true"`
 
-	// The ARN representing the principal (IAM user, role, or group).
+	// The ARN of the principal (IAM user, role, or group).
 	//
 	// PrincipalARN is a required field
 	PrincipalARN *string `min:"1" type:"string" required:"true"`
@@ -6677,12 +6680,12 @@ func (s DisassociateProductFromPortfolioOutput) SDKResponseMetadata() aws.Respon
 type DisassociateTagOptionFromResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Identifier of the resource from which to disassociate the TagOption.
+	// The resource identifier.
 	//
 	// ResourceId is a required field
 	ResourceId *string `type:"string" required:"true"`
 
-	// Identifier of the TagOption to disassociate from the resource.
+	// The TagOption identifier.
 	//
 	// TagOptionId is a required field
 	TagOptionId *string `min:"1" type:"string" required:"true"`
@@ -6753,22 +6756,21 @@ func (s DisassociateTagOptionFromResourceOutput) SDKResponseMetadata() aws.Respo
 	return s.responseMetadata
 }
 
-// Summary information about a path for a user to have access to a specified
-// product.
+// Summary information about a product path for a user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary
 type LaunchPathSummary struct {
 	_ struct{} `type:"structure"`
 
-	// List of constraints on the portfolio-product relationship.
+	// The constraints on the portfolio-product relationship.
 	ConstraintSummaries []ConstraintSummary `type:"list"`
 
-	// The unique identifier of the product path.
+	// The identifier of the product path.
 	Id *string `min:"1" type:"string"`
 
-	// Corresponds to the name of the portfolio to which the user was assigned.
+	// The name of the portfolio to which the user was assigned.
 	Name *string `type:"string"`
 
-	// List of tags used by this launch path.
+	// The tags associated with this product path.
 	Tags []Tag `type:"list"`
 }
 
@@ -6819,13 +6821,11 @@ type ListAcceptedPortfolioSharesInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 }
 
@@ -6863,11 +6863,11 @@ type ListAcceptedPortfolioSharesOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// List of detailed portfolio information objects.
+	// Information about the portfolios.
 	PortfolioDetails []PortfolioDetail `type:"list"`
 }
 
@@ -6911,13 +6911,11 @@ type ListConstraintsForPortfolioInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
 	// The portfolio identifier.
@@ -6995,11 +6993,11 @@ type ListConstraintsForPortfolioOutput struct {
 
 	responseMetadata aws.Response
 
-	// List of detailed constraint information objects.
+	// Information about the constraints.
 	ConstraintDetails []ConstraintDetail `type:"list"`
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 }
 
@@ -7043,17 +7041,14 @@ type ListLaunchPathsInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
-	// The product identifier. Identifies the product for which to retrieve LaunchPathSummaries
-	// information.
+	// The product identifier.
 	//
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
@@ -7116,11 +7111,11 @@ type ListLaunchPathsOutput struct {
 
 	responseMetadata aws.Response
 
-	// List of launch path information summaries for the specified PageToken.
+	// Information about the launch path.
 	LaunchPathSummaries []LaunchPathSummary `type:"list"`
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 }
 
@@ -7215,11 +7210,11 @@ type ListPortfolioAccessOutput struct {
 
 	responseMetadata aws.Response
 
-	// List of account IDs associated with access to the portfolio.
+	// Information about the AWS accounts with access to the portfolio.
 	AccountIds []string `type:"list"`
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 }
 
@@ -7263,13 +7258,11 @@ type ListPortfoliosForProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
 	// The product identifier.
@@ -7335,11 +7328,11 @@ type ListPortfoliosForProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// List of detailed portfolio information objects.
+	// Information about the portfolios.
 	PortfolioDetails []PortfolioDetail `type:"list"`
 }
 
@@ -7383,13 +7376,11 @@ type ListPortfoliosInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 }
 
@@ -7427,11 +7418,11 @@ type ListPortfoliosOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// List of detailed portfolio information objects.
+	// Information about the portfolios.
 	PortfolioDetails []PortfolioDetail `type:"list"`
 }
 
@@ -7475,13 +7466,11 @@ type ListPrincipalsForPortfolioInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
 	// The portfolio identifier.
@@ -7547,8 +7536,8 @@ type ListPrincipalsForPortfolioOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
 	// The IAM principals (users or roles) associated with the portfolio.
@@ -7646,11 +7635,11 @@ type ListProvisioningArtifactsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// List of detailed provisioning artifact information objects.
+	// Information about the provisioning artifacts.
 	ProvisioningArtifactDetails []ProvisioningArtifactDetail `type:"list"`
 }
 
@@ -7694,20 +7683,17 @@ type ListRecordHistoryInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The access level for obtaining results. If left unspecified, User level access
-	// is used.
+	// The access level to use to obtain results. The default is User.
 	AccessLevelFilter *AccessLevelFilter `type:"structure"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
-	// The filter to limit search results.
+	// The search filter to scope the results.
 	SearchFilter *ListRecordHistorySearchFilter `type:"structure"`
 }
 
@@ -7757,11 +7743,11 @@ type ListRecordHistoryOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// A list of record detail objects, listed in reverse chronological order.
+	// The records, in reverse chronological order.
 	RecordDetails []RecordDetail `type:"list"`
 }
 
@@ -7792,15 +7778,20 @@ func (s *ListRecordHistoryOutput) SetRecordDetails(v []RecordDetail) *ListRecord
 	return s
 }
 
-// The search filter to limit results when listing request history records.
+// The search filter to use when listing history records.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistorySearchFilter
 type ListRecordHistorySearchFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The filter key.
+	//
+	//    * product - Filter results based on the specified product identifier.
+	//
+	//    * provisionedproduct - Filter results based on the provisioned product
+	//    identifier.
 	Key *string `type:"string"`
 
-	// The filter value for Key.
+	// The filter value.
 	Value *string `type:"string"`
 }
 
@@ -7830,19 +7821,21 @@ func (s *ListRecordHistorySearchFilter) SetValue(v string) *ListRecordHistorySea
 type ListResourcesForTagOptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
-	// Resource type.
+	// The resource type.
+	//
+	//    * Portfolio
+	//
+	//    * Product
 	ResourceType *string `type:"string"`
 
-	// Identifier of the TagOption.
+	// The TagOption identifier.
 	//
 	// TagOptionId is a required field
 	TagOptionId *string `min:"1" type:"string" required:"true"`
@@ -7905,11 +7898,11 @@ type ListResourcesForTagOptionOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
-	// The resulting detailed resource information.
+	// Information about the resources.
 	ResourceDetails []ResourceDetail `type:"list"`
 }
 
@@ -7940,18 +7933,18 @@ func (s *ListResourcesForTagOptionOutput) SetResourceDetails(v []ResourceDetail)
 	return s
 }
 
-// The ListTagOptions filters.
+// Filters to use when listing TagOptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsFilters
 type ListTagOptionsFilters struct {
 	_ struct{} `type:"structure"`
 
-	// The ListTagOptionsFilters active state.
+	// The active state.
 	Active *bool `type:"boolean"`
 
-	// The ListTagOptionsFilters key.
+	// The TagOption key.
 	Key *string `min:"1" type:"string"`
 
-	// The ListTagOptionsFilters value.
+	// The TagOption value.
 	Value *string `min:"1" type:"string"`
 }
 
@@ -8003,17 +7996,15 @@ func (s *ListTagOptionsFilters) SetValue(v string) *ListTagOptionsFilters {
 type ListTagOptionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of filters with which to limit search results. If no search filters
-	// are specified, the output is all TagOptions.
+	// The search filters. If no search filters are specified, the output includes
+	// all TagOptions.
 	Filters *ListTagOptionsFilters `type:"structure"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 }
 
@@ -8066,11 +8057,11 @@ type ListTagOptionsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
-	// The resulting detailed TagOption information.
+	// Information about the TagOptions.
 	TagOptionDetails []TagOptionDetail `type:"list"`
 }
 
@@ -8126,7 +8117,7 @@ func (s *ParameterConstraints) SetAllowedValues(v []string) *ParameterConstraint
 	return s
 }
 
-// Detailed portfolio information.
+// Information about a portfolio.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/PortfolioDetail
 type PortfolioDetail struct {
 	_ struct{} `type:"structure"`
@@ -8137,13 +8128,13 @@ type PortfolioDetail struct {
 	// The UTC timestamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The text description of the portfolio.
+	// The description of the portfolio.
 	Description *string `type:"string"`
 
 	// The name to use for display purposes.
 	DisplayName *string `min:"1" type:"string"`
 
-	// The identifier for the portfolio.
+	// The portfolio identifier.
 	Id *string `min:"1" type:"string"`
 
 	// The name of the portfolio provider.
@@ -8196,15 +8187,15 @@ func (s *PortfolioDetail) SetProviderName(v string) *PortfolioDetail {
 	return s
 }
 
-// A principal's ARN and type.
+// Information about a principal.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal
 type Principal struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN representing the principal (IAM user, role, or group).
+	// The ARN of the principal (IAM user, role, or group).
 	PrincipalARN *string `min:"1" type:"string"`
 
-	// The principal type. Must be IAM
+	// The principal type. The supported value is IAM.
 	PrincipalType PrincipalType `type:"string" enum:"true"`
 }
 
@@ -8265,7 +8256,7 @@ func (s *ProductViewAggregationValue) SetValue(v string) *ProductViewAggregation
 	return s
 }
 
-// Detailed product view information.
+// Information about a product view.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewDetail
 type ProductViewDetail struct {
 	_ struct{} `type:"structure"`
@@ -8273,19 +8264,20 @@ type ProductViewDetail struct {
 	// The UTC timestamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The ARN associated with the product.
+	// The ARN of the product.
 	ProductARN *string `min:"1" type:"string"`
 
-	// The summary metadata about the specified product view.
+	// Summary information about the product view.
 	ProductViewSummary *ProductViewSummary `type:"structure"`
 
-	// Current status of the product.
+	// The status of the product.
 	//
-	// AVAILABLE - Product is available for use.
+	//    * AVAILABLE - The product is ready for use.
 	//
-	// CREATING - Creation of product started, not ready for use.
+	//    * CREATING - Product creation has started; the product is not ready for
+	//    use.
 	//
-	// FAILED - Action on product failed.
+	//    * FAILED - An action failed.
 	Status Status `type:"string" enum:"true"`
 }
 
@@ -8323,7 +8315,7 @@ func (s *ProductViewDetail) SetStatus(v Status) *ProductViewDetail {
 	return s
 }
 
-// The summary metadata about the specified product.
+// Summary information about a product view.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewSummary
 type ProductViewSummary struct {
 	_ struct{} `type:"structure"`
@@ -8332,11 +8324,10 @@ type ProductViewSummary struct {
 	// significance of this value.
 	Distributor *string `type:"string"`
 
-	// A value of false indicates that the product does not have a default path,
-	// while a value of true indicates that it does. If it's false, call ListLaunchPaths
-	// to disambiguate between paths. If true, ListLaunchPaths is not required,
-	// and the output of the ProductViewSummary operation can be used directly with
-	// DescribeProvisioningParameters.
+	// Indicates whether the product has a default path. If the product does not
+	// have a default path, call ListLaunchPaths to disambiguate between paths.
+	// Otherwise, ListLaunchPaths is not required, and the output of ProductViewSummary
+	// can be used directly with DescribeProvisioningParameters.
 	HasDefaultPath *bool `type:"boolean"`
 
 	// The product view identifier.
@@ -8463,9 +8454,9 @@ type ProvisionProductInput struct {
 	// events.
 	NotificationArns []string `type:"list"`
 
-	// The identifier of the path for this product's provisioning. This value is
-	// optional if the product has a default path, and is required if there is more
-	// than one path for the specified product.
+	// The path identifier of the product. This value is optional if the product
+	// has a default path, and required if the product has more than one path. To
+	// list the paths for a product, use ListLaunchPaths.
 	PathId *string `min:"1" type:"string"`
 
 	// The product identifier.
@@ -8478,15 +8469,13 @@ type ProvisionProductInput struct {
 	// ProvisionToken is a required field
 	ProvisionToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// A user-friendly name to identify the ProvisionedProduct object. This value
-	// must be unique for the AWS account and cannot be updated after the product
-	// is provisioned.
+	// A user-friendly name for the provisioned product. This value must be unique
+	// for the AWS account and cannot be updated after the product is provisioned.
 	//
 	// ProvisionedProductName is a required field
 	ProvisionedProductName *string `min:"1" type:"string" required:"true"`
 
-	// The provisioning artifact identifier for this product. This is sometimes
-	// referred to as the product version.
+	// The identifier of the provisioning artifact.
 	//
 	// ProvisioningArtifactId is a required field
 	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
@@ -8495,7 +8484,7 @@ type ProvisionProductInput struct {
 	// the product.
 	ProvisioningParameters []ProvisioningParameter `type:"list"`
 
-	// A list of tags to use as provisioning options.
+	// The tags to use as provisioning options.
 	Tags []Tag `type:"list"`
 }
 
@@ -8624,10 +8613,7 @@ type ProvisionProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The detailed result of the ProvisionProduct request, containing the inputs
-	// made to that request, the current state of the request, a pointer to the
-	// ProvisionedProduct object of the request, and a list of any errors that the
-	// request encountered.
+	// Information about the result of ProvisionProduct.
 	RecordDetail *RecordDetail `type:"structure"`
 }
 
@@ -8652,54 +8638,53 @@ func (s *ProvisionProductOutput) SetRecordDetail(v *RecordDetail) *ProvisionProd
 	return s
 }
 
-// Detailed information about a ProvisionedProduct object.
+// Information about a provisioned product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail
 type ProvisionedProductDetail struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN associated with the ProvisionedProduct object.
+	// The ARN of the provisioned product.
 	Arn *string `min:"1" type:"string"`
 
 	// The UTC timestamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The identifier of the ProvisionedProduct object.
+	// The identifier of the provisioned product.
 	Id *string `type:"string"`
 
-	// A token to disambiguate duplicate requests. You can use the same input in
-	// multiple requests, provided that you also specify a different idempotency
-	// token for each request.
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
 	IdempotencyToken *string `min:"1" type:"string"`
 
-	// The record identifier of the last request performed on this ProvisionedProduct
-	// object.
+	// The record identifier of the last request performed on this provisioned product.
 	LastRecordId *string `type:"string"`
 
-	// The user-friendly name of the ProvisionedProduct object.
+	// The user-friendly name of the provisioned product.
 	Name *string `min:"1" type:"string"`
 
-	// The current status of the ProvisionedProduct.
+	// The current status of the provisioned product.
 	//
-	// AVAILABLE - Stable state, ready to perform any operation. The most recent
-	// action request succeeded and completed.
+	//    * AVAILABLE - Stable state, ready to perform any operation. The most recent
+	//    operation succeeded and completed.
 	//
-	// UNDER_CHANGE - Transitive state, operations performed may or may not have
-	// valid results. Wait for an AVAILABLE status before performing operations.
+	//    * UNDER_CHANGE - Transitive state, operations performed might not have
+	//    valid results. Wait for an AVAILABLE status before performing operations.
 	//
-	// TAINTED - Stable state, ready to perform any operation. The stack has completed
-	// the requested operation but is not exactly what was requested. For example,
-	// a request to update to a new version failed and the stack rolled back to
-	// the current version.
+	//    * TAINTED - Stable state, ready to perform any operation. The stack has
+	//    completed the requested operation but is not exactly what was requested.
+	//    For example, a request to update to a new version failed and the stack
+	//    rolled back to the current version.
 	//
-	// ERROR - Something unexpected happened such that the provisioned product exists
-	// but the stack is not running. For example, CloudFormation received an invalid
-	// parameter value and could not launch the stack.
+	//    * ERROR - An unexpected error occurred, the provisioned product exists
+	//    but the stack is not running. For example, CloudFormation received a parameter
+	//    value that was not valid and could not launch the stack.
 	Status ProvisionedProductStatus `type:"string" enum:"true"`
 
-	// The current status message of the ProvisionedProduct.
+	// The current status message of the provisioned product.
 	StatusMessage *string `type:"string"`
 
-	// The type of the ProvisionedProduct object.
+	// The type of provisioned product. The supported value is CFN_STACK.
 	Type *string `type:"string"`
 }
 
@@ -8767,7 +8752,8 @@ func (s *ProvisionedProductDetail) SetType(v string) *ProvisionedProductDetail {
 	return s
 }
 
-// Contains information indicating the ways in which a product can be provisioned.
+// Information about a provisioning artifact. A provisioning artifact is also
+// known as a product version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact
 type ProvisioningArtifact struct {
 	_ struct{} `type:"structure"`
@@ -8775,14 +8761,13 @@ type ProvisioningArtifact struct {
 	// The UTC timestamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The text description of the artifact.
+	// The description of the provisioning artifact.
 	Description *string `type:"string"`
 
-	// The identifier for the artifact. This is sometimes referred to as the product
-	// version.
+	// The identifier of the provisioning artifact.
 	Id *string `min:"1" type:"string"`
 
-	// The name of the artifact.
+	// The name of the provisioning artifact.
 	Name *string `type:"string"`
 }
 
@@ -8820,30 +8805,34 @@ func (s *ProvisioningArtifact) SetName(v string) *ProvisioningArtifact {
 	return s
 }
 
-// Detailed provisioning artifact information.
+// Information about a provisioning artifact (also known as a version) for a
+// product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail
 type ProvisioningArtifactDetail struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates whether the product version is active.
+	Active *bool `type:"boolean"`
+
 	// The UTC timestamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The text description of the provisioning artifact.
+	// The description of the provisioning artifact.
 	Description *string `type:"string"`
 
-	// The identifier of the provisioning artifact. This is sometimes referred to
-	// as the product version.
+	// The identifier of the provisioning artifact.
 	Id *string `min:"1" type:"string"`
 
-	// The name assigned to the provisioning artifact.
+	// The name of the provisioning artifact.
 	Name *string `type:"string"`
 
-	// The type of the provisioning artifact. The following provisioning artifact
-	// types are used by AWS Marketplace products:
+	// The type of provisioning artifact.
 	//
-	// MARKETPLACE_AMI - AMI products.
+	//    * CLOUD_FORMATION_TEMPLATE - AWS CloudFormation template
 	//
-	// MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
+	//    * MARKETPLACE_AMI - AWS Marketplace AMI
+	//
+	//    * MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType `type:"string" enum:"true"`
 }
 
@@ -8855,6 +8844,12 @@ func (s ProvisioningArtifactDetail) String() string {
 // GoString returns the string representation
 func (s ProvisioningArtifactDetail) GoString() string {
 	return s.String()
+}
+
+// SetActive sets the Active field's value.
+func (s *ProvisioningArtifactDetail) SetActive(v bool) *ProvisioningArtifactDetail {
+	s.Active = &v
+	return s
 }
 
 // SetCreatedTime sets the CreatedTime field's value.
@@ -8887,16 +8882,15 @@ func (s *ProvisioningArtifactDetail) SetType(v ProvisioningArtifactType) *Provis
 	return s
 }
 
-// A parameter used to successfully provision the product. This value includes
-// a list of allowable values and additional metadata.
+// Information about a parameter used to provision a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactParameter
 type ProvisioningArtifactParameter struct {
 	_ struct{} `type:"structure"`
 
-	// The default value for this parameter.
+	// The default value.
 	DefaultValue *string `type:"string"`
 
-	// The text description of the parameter.
+	// The description of the parameter.
 	Description *string `type:"string"`
 
 	// If this value is true, the value for this parameter is obfuscated from view
@@ -8904,7 +8898,7 @@ type ProvisioningArtifactParameter struct {
 	// information.
 	IsNoEcho *bool `type:"boolean"`
 
-	// The list of constraints that the administrator has put on the parameter.
+	// Constraints that the administrator has put on a parameter.
 	ParameterConstraints *ParameterConstraints `type:"structure"`
 
 	// The parameter key.
@@ -8960,30 +8954,35 @@ func (s *ProvisioningArtifactParameter) SetParameterType(v string) *Provisioning
 	return s
 }
 
-// Provisioning artifact properties. For example request JSON, see CreateProvisioningArtifact.
+// Information about a provisioning artifact (also known as a version) for a
+// product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties
 type ProvisioningArtifactProperties struct {
 	_ struct{} `type:"structure"`
 
-	// The text description of the provisioning artifact properties.
+	// The description of the provisioning artifact, including how it differs from
+	// the previous provisioning artifact.
 	Description *string `type:"string"`
 
-	// Additional information about the provisioning artifact properties. When using
-	// this element in a request, you must specify LoadTemplateFromURL. For more
-	// information, see CreateProvisioningArtifact.
+	// The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON
+	// format as follows:
+	//
+	// "LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."
 	//
 	// Info is a required field
 	Info map[string]string `min:"1" type:"map" required:"true"`
 
-	// The name assigned to the provisioning artifact properties.
+	// The name of the provisioning artifact (for example, v1 v2beta). No spaces
+	// are allowed.
 	Name *string `type:"string"`
 
-	// The type of the provisioning artifact properties. The following provisioning
-	// artifact property types are used by AWS Marketplace products:
+	// The type of provisioning artifact.
 	//
-	// MARKETPLACE_AMI - AMI products.
+	//    * CLOUD_FORMATION_TEMPLATE - AWS CloudFormation template
 	//
-	// MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
+	//    * MARKETPLACE_AMI - AWS Marketplace AMI
+	//
+	//    * MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType `type:"string" enum:"true"`
 }
 
@@ -9038,7 +9037,8 @@ func (s *ProvisioningArtifactProperties) SetType(v ProvisioningArtifactType) *Pr
 	return s
 }
 
-// Stores summary information about a provisioning artifact.
+// Summary information about a provisioning artifact (also known as a version)
+// for a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactSummary
 type ProvisioningArtifactSummary struct {
 	_ struct{} `type:"structure"`
@@ -9055,8 +9055,8 @@ type ProvisioningArtifactSummary struct {
 	// The name of the provisioning artifact.
 	Name *string `type:"string"`
 
-	// The provisioning artifact metadata. This data is used with products created
-	// by AWS Marketplace.
+	// The metadata for the provisioning artifact. This is used with AWS Marketplace
+	// products.
 	ProvisioningArtifactMetadata map[string]string `min:"1" type:"map"`
 }
 
@@ -9100,16 +9100,15 @@ func (s *ProvisioningArtifactSummary) SetProvisioningArtifactMetadata(v map[stri
 	return s
 }
 
-// The parameter key-value pairs used to provision a product.
+// Information about a parameter used to provision a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningParameter
 type ProvisioningParameter struct {
 	_ struct{} `type:"structure"`
 
-	// The ProvisioningArtifactParameter.ParameterKey parameter from DescribeProvisioningParameters.
+	// The parameter key.
 	Key *string `min:"1" type:"string"`
 
-	// The value to use for provisioning. Any constraints on this value can be found
-	// in ProvisioningArtifactParameter for Key.
+	// The parameter value.
 	Value *string `type:"string"`
 }
 
@@ -9148,7 +9147,7 @@ func (s *ProvisioningParameter) SetValue(v string) *ProvisioningParameter {
 	return s
 }
 
-// The full details of a specific ProvisionedProduct object.
+// Information about a request operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail
 type RecordDetail struct {
 	_ struct{} `type:"structure"`
@@ -9156,53 +9155,59 @@ type RecordDetail struct {
 	// The UTC timestamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The identifier of the path for this product's provisioning.
+	// The path identifier.
 	PathId *string `min:"1" type:"string"`
 
 	// The product identifier.
 	ProductId *string `min:"1" type:"string"`
 
-	// The identifier of the ProvisionedProduct object.
+	// The identifier of the provisioned product.
 	ProvisionedProductId *string `min:"1" type:"string"`
 
-	// The user-friendly name of the ProvisionedProduct object.
+	// The user-friendly name of the provisioned product.
 	ProvisionedProductName *string `min:"1" type:"string"`
 
-	// The type of the ProvisionedProduct object.
+	// The type of provisioned product. The supported value is CFN_STACK.
 	ProvisionedProductType *string `type:"string"`
 
-	// The provisioning artifact identifier for this product. This is sometimes
-	// referred to as the product version.
+	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string `min:"1" type:"string"`
 
-	// A list of errors that occurred while processing the request.
+	// The errors that occurred while processing the request.
 	RecordErrors []RecordError `type:"list"`
 
-	// The identifier of the ProvisionedProduct object record.
+	// The identifier of the record.
 	RecordId *string `min:"1" type:"string"`
 
-	// List of tags associated with this record.
+	// The tags associated with this record.
 	RecordTags []RecordTag `type:"list"`
 
 	// The record type for this record.
+	//
+	//    * PROVISION_PRODUCT
+	//
+	//    * UPDATE_PROVISIONED_PRODUCT
+	//
+	//    * TERMINATE_PROVISIONED_PRODUCT
 	RecordType *string `type:"string"`
 
-	// The status of the ProvisionedProduct object.
+	// The status of the provisioned product.
 	//
-	// CREATED - Request created but the operation has not yet started.
+	//    * CREATED - The request was created but the operation has not started.
 	//
-	// IN_PROGRESS - The requested operation is in-progress.
+	//    * IN_PROGRESS - The requested operation is in progress.
 	//
-	// IN_PROGRESS_IN_ERROR - The provisioned product is under change but the requested
-	// operation failed and some remediation is occurring. For example, a rollback.
+	//    * IN_PROGRESS_IN_ERROR - The provisioned product is under change but the
+	//    requested operation failed and some remediation is occurring. For example,
+	//    a rollback.
 	//
-	// SUCCEEDED - The requested operation has successfully completed.
+	//    * SUCCEEDED - The requested operation has successfully completed.
 	//
-	// FAILED - The requested operation has completed but has failed. Investigate
-	// using the error messages returned.
+	//    * FAILED - The requested operation has unsuccessfully completed. Investigate
+	//    using the error messages returned.
 	Status RecordStatus `type:"string" enum:"true"`
 
-	// The time when the record for the ProvisionedProduct object was last updated.
+	// The time when the record was last updated.
 	UpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -9302,7 +9307,7 @@ type RecordError struct {
 	// The numeric value of the error.
 	Code *string `type:"string"`
 
-	// The text description of the error.
+	// The description of the error.
 	Description *string `type:"string"`
 }
 
@@ -9328,14 +9333,14 @@ func (s *RecordError) SetDescription(v string) *RecordError {
 	return s
 }
 
-// An output for the specified Product object created as the result of a request.
-// For example, a CloudFormation-backed product that creates an S3 bucket would
-// have an output for the S3 bucket URL.
+// The output for the product created as the result of a request. For example,
+// the output for a CloudFormation-backed product that creates an S3 bucket
+// would include the S3 bucket URL.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordOutput
 type RecordOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The text description of the output.
+	// The description of the output.
 	Description *string `type:"string"`
 
 	// The output key.
@@ -9487,24 +9492,24 @@ func (s RejectPortfolioShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Detailed resource information.
+// Information about a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceDetail
 type ResourceDetail struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of the resource.
+	// The ARN of the resource.
 	ARN *string `type:"string"`
 
-	// Creation time of the resource.
+	// The creation time of the resource.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Description of the resource.
+	// The description of the resource.
 	Description *string `type:"string"`
 
-	// Identifier of the resource.
+	// The identifier of the resource.
 	Id *string `type:"string"`
 
-	// Name of the resource.
+	// The name of the resource.
 	Name *string `type:"string"`
 }
 
@@ -9561,17 +9566,14 @@ type ScanProvisionedProductsInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The access level for obtaining results. If left unspecified, User level access
-	// is used.
+	// The access level to use to obtain results. The default is User.
 	AccessLevelFilter *AccessLevelFilter `type:"structure"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 }
 
@@ -9615,11 +9617,11 @@ type ScanProvisionedProductsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// A list of ProvisionedProduct detail objects.
+	// Information about the provisioned products.
 	ProvisionedProducts []ProvisionedProductDetail `type:"list"`
 }
 
@@ -9663,18 +9665,15 @@ type SearchProductsAsAdminInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The list of filters with which to limit search results. If no search filters
-	// are specified, the output is all the products to which the administrator
-	// has access.
+	// The search filters. If no search filters are specified, the output includes
+	// all products to which the administrator has access.
 	Filters map[string][]string `type:"map"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
 	// The portfolio identifier.
@@ -9683,10 +9682,10 @@ type SearchProductsAsAdminInput struct {
 	// Access level of the source of the product.
 	ProductSource ProductSource `type:"string" enum:"true"`
 
-	// The sort field specifier. If no value is specified, results are not sorted.
+	// The sort field. If no value is specified, the results are not sorted.
 	SortBy ProductViewSortBy `type:"string" enum:"true"`
 
-	// The sort order specifier. If no value is specified, results are not sorted.
+	// The sort order. If no value is specified, the results are not sorted.
 	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
@@ -9767,11 +9766,11 @@ type SearchProductsAsAdminOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// List of detailed product view information objects.
+	// Information about the product views.
 	ProductViewDetails []ProductViewDetail `type:"list"`
 }
 
@@ -9815,24 +9814,21 @@ type SearchProductsInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The list of filters with which to limit search results. If no search filters
-	// are specified, the output is all the products to which the calling user has
-	// access.
+	// The search filters. If no search filters are specified, the output includes
+	// all products to which the caller has access.
 	Filters map[string][]string `type:"map"`
 
-	// The maximum number of items to return in the results. If more results exist
-	// than fit in the specified PageSize, the value of NextPageToken in the response
-	// is non-null.
+	// The maximum number of items to return with this call.
 	PageSize *int64 `type:"integer"`
 
-	// The page token of the first page retrieved. If null, this retrieves the first
-	// page of size PageSize.
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
 	PageToken *string `type:"string"`
 
-	// The sort field specifier. If no value is specified, results are not sorted.
+	// The sort field. If no value is specified, the results are not sorted.
 	SortBy ProductViewSortBy `type:"string" enum:"true"`
 
-	// The sort order specifier. If no value is specified, results are not sorted.
+	// The sort order. If no value is specified, the results are not sorted.
 	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
@@ -9888,14 +9884,14 @@ type SearchProductsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The page token to use to retrieve the next page of results for this operation.
-	// If there are no more pages, this value is null.
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
 	NextPageToken *string `type:"string"`
 
-	// A list of the product view aggregation value objects.
+	// The product view aggregations.
 	ProductViewAggregations map[string][]ProductViewAggregationValue `type:"map"`
 
-	// A list of the product view summary objects.
+	// Information about the product views.
 	ProductViewSummaries []ProductViewSummary `type:"list"`
 }
 
@@ -9932,18 +9928,18 @@ func (s *SearchProductsOutput) SetProductViewSummaries(v []ProductViewSummary) *
 	return s
 }
 
-// Key-value pairs to associate with this provisioning. These tags are entirely
-// discretionary and are propagated to the resources created in the provisioning.
+// Information about a tag. A tag is a key-value pair. Tags are entirely discretionary
+// and are propagated to the resources created when provisioning a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// The ProvisioningArtifactParameter.TagKey parameter from DescribeProvisioningParameters.
+	// The tag key.
 	//
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
 
-	// The desired value for this key.
+	// The value for this key.
 	//
 	// Value is a required field
 	Value *string `min:"1" type:"string" required:"true"`
@@ -9995,21 +9991,21 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
-// The TagOption details.
+// Information about a TagOption.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail
 type TagOptionDetail struct {
 	_ struct{} `type:"structure"`
 
-	// The TagOptionDetail active state.
+	// The TagOption active state.
 	Active *bool `type:"boolean"`
 
-	// The TagOptionDetail identifier.
+	// The TagOption identifier.
 	Id *string `min:"1" type:"string"`
 
-	// The TagOptionDetail key.
+	// The TagOption key.
 	Key *string `min:"1" type:"string"`
 
-	// The TagOptionDetail value.
+	// The TagOption value.
 	Value *string `min:"1" type:"string"`
 }
 
@@ -10047,15 +10043,15 @@ func (s *TagOptionDetail) SetValue(v string) *TagOptionDetail {
 	return s
 }
 
-// The TagOption summary key-value pair.
+// Summary information about a TagOption.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionSummary
 type TagOptionSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The TagOptionSummary key.
+	// The TagOption key.
 	Key *string `min:"1" type:"string"`
 
-	// The TagOptionSummary value.
+	// The TagOption value.
 	Values []string `type:"list"`
 }
 
@@ -10094,22 +10090,22 @@ type TerminateProvisionedProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// If set to true, AWS Service Catalog stops managing the specified ProvisionedProduct
-	// object even if it cannot delete the underlying resources.
+	// If set to true, AWS Service Catalog stops managing the specified provisioned
+	// product even if it cannot delete the underlying resources.
 	IgnoreErrors *bool `type:"boolean"`
 
-	// The identifier of the ProvisionedProduct object to terminate. Specify either
-	// ProvisionedProductName or ProvisionedProductId, but not both.
+	// The identifier of the provisioned product. You cannot specify both ProvisionedProductName
+	// and ProvisionedProductId.
 	ProvisionedProductId *string `min:"1" type:"string"`
 
-	// The name of the ProvisionedProduct object to terminate. Specify either ProvisionedProductName
-	// or ProvisionedProductId, but not both.
+	// The name of the provisioned product. You cannot specify both ProvisionedProductName
+	// and ProvisionedProductId.
 	ProvisionedProductName *string `min:"1" type:"string"`
 
 	// An idempotency token that uniquely identifies the termination request. This
-	// token is only valid during the termination process. After the ProvisionedProduct
-	// object is terminated, further requests to terminate the same ProvisionedProduct
-	// object always return ResourceNotFound regardless of the value of TerminateToken.
+	// token is only valid during the termination process. After the provisioned
+	// product is terminated, subsequent requests to terminate the same provisioned
+	// product always return ResourceNotFound.
 	//
 	// TerminateToken is a required field
 	TerminateToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -10184,10 +10180,7 @@ type TerminateProvisionedProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The detailed result of the TerminateProvisionedProduct request, containing
-	// the inputs made to that request, the current state of the request, a pointer
-	// to the ProvisionedProduct object that the request is modifying, and a list
-	// of any errors that the request encountered.
+	// Information about the result of this request.
 	RecordDetail *RecordDetail `type:"structure"`
 }
 
@@ -10225,10 +10218,10 @@ type UpdateConstraintInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The updated text description of the constraint.
+	// The updated description of the constraint.
 	Description *string `type:"string"`
 
-	// The identifier of the constraint to update.
+	// The identifier of the constraint.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -10285,10 +10278,10 @@ type UpdateConstraintOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed constraint information.
+	// Information about the constraint.
 	ConstraintDetail *ConstraintDetail `type:"structure"`
 
-	// The resulting updated constraint parameters.
+	// The constraint parameters.
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
@@ -10341,16 +10334,16 @@ type UpdatePortfolioInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// Tags to add to the existing list of tags associated with the portfolio.
+	// The tags to add.
 	AddTags []Tag `type:"list"`
 
-	// The updated text description of the portfolio.
+	// The updated description of the portfolio.
 	Description *string `type:"string"`
 
 	// The name to use for display purposes.
 	DisplayName *string `min:"1" type:"string"`
 
-	// The identifier of the portfolio for the update request.
+	// The portfolio identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -10358,7 +10351,7 @@ type UpdatePortfolioInput struct {
 	// The updated name of the portfolio provider.
 	ProviderName *string `min:"1" type:"string"`
 
-	// Tags to remove from the existing list of tags associated with the portfolio.
+	// The tags to remove.
 	RemoveTags []string `type:"list"`
 }
 
@@ -10450,10 +10443,10 @@ type UpdatePortfolioOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed portfolio information.
+	// Information about the portfolio.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 
-	// Tags associated with the portfolio.
+	// Information about the tags associated with the portfolio.
 	Tags []Tag `type:"list"`
 }
 
@@ -10497,16 +10490,16 @@ type UpdateProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// Tags to add to the existing list of tags associated with the product.
+	// The tags to add to the product.
 	AddTags []Tag `type:"list"`
 
-	// The updated text description of the product.
+	// The updated description of the product.
 	Description *string `type:"string"`
 
 	// The updated distributor of the product.
 	Distributor *string `type:"string"`
 
-	// The identifier of the product for the update request.
+	// The product identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -10517,7 +10510,7 @@ type UpdateProductInput struct {
 	// The updated owner of the product.
 	Owner *string `type:"string"`
 
-	// Tags to remove from the existing list of tags associated with the product.
+	// The tags to remove from the product.
 	RemoveTags []string `type:"list"`
 
 	// The updated support description for the product.
@@ -10636,10 +10629,10 @@ type UpdateProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed product view information.
+	// Information about the product view.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 
-	// Tags associated with the product.
+	// Information about the tags associated with the product.
 	Tags []Tag `type:"list"`
 }
 
@@ -10683,31 +10676,28 @@ type UpdateProvisionedProductInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The identifier of the path to use in the updated ProvisionedProduct object.
-	// This value is optional if the product has a default path, and is required
-	// if there is more than one path for the specified product.
+	// The new path identifier. This value is optional if the product has a default
+	// path, and required if the product has more than one path.
 	PathId *string `min:"1" type:"string"`
 
-	// The identifier of the ProvisionedProduct object.
+	// The identifier of the provisioned product.
 	ProductId *string `min:"1" type:"string"`
 
-	// The identifier of the ProvisionedProduct object to update. Specify either
-	// ProvisionedProductName or ProvisionedProductId, but not both.
+	// The identifier of the provisioned product. You cannot specify both ProvisionedProductName
+	// and ProvisionedProductId.
 	ProvisionedProductId *string `min:"1" type:"string"`
 
-	// The updated name of the ProvisionedProduct object. Specify either ProvisionedProductName
-	// or ProvisionedProductId, but not both.
+	// The updated name of the provisioned product. You cannot specify both ProvisionedProductName
+	// and ProvisionedProductId.
 	ProvisionedProductName *string `min:"1" type:"string"`
 
-	// The provisioning artifact identifier for this product. This is sometimes
-	// referred to as the product version.
+	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string `min:"1" type:"string"`
 
-	// A list of ProvisioningParameter objects used to update the ProvisionedProduct
-	// object.
+	// The new parameters.
 	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
 
-	// The idempotency token that uniquely identifies the provisioning update request.
+	// The idempotency token that uniquely identifies the provisioning update rquest.
 	//
 	// UpdateToken is a required field
 	UpdateToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -10816,10 +10806,7 @@ type UpdateProvisionedProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// The detailed result of the UpdateProvisionedProduct request, containing the
-	// inputs made to that request, the current state of the request, a pointer
-	// to the ProvisionedProduct object that the request is modifying, and a list
-	// of any errors that the request encountered.
+	// Information about the result of the request.
 	RecordDetail *RecordDetail `type:"structure"`
 }
 
@@ -10857,7 +10844,10 @@ type UpdateProvisioningArtifactInput struct {
 	//    * zh - Chinese
 	AcceptLanguage *string `type:"string"`
 
-	// The updated text description of the provisioning artifact.
+	// Indicates whether the product version is active.
+	Active *bool `type:"boolean"`
+
+	// The updated description of the provisioning artifact.
 	Description *string `type:"string"`
 
 	// The updated name of the provisioning artifact.
@@ -10868,8 +10858,7 @@ type UpdateProvisioningArtifactInput struct {
 	// ProductId is a required field
 	ProductId *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of the provisioning artifact for the update request. This
-	// is sometimes referred to as the product version.
+	// The identifier of the provisioning artifact.
 	//
 	// ProvisioningArtifactId is a required field
 	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
@@ -10915,6 +10904,12 @@ func (s *UpdateProvisioningArtifactInput) SetAcceptLanguage(v string) *UpdatePro
 	return s
 }
 
+// SetActive sets the Active field's value.
+func (s *UpdateProvisioningArtifactInput) SetActive(v bool) *UpdateProvisioningArtifactInput {
+	s.Active = &v
+	return s
+}
+
 // SetDescription sets the Description field's value.
 func (s *UpdateProvisioningArtifactInput) SetDescription(v string) *UpdateProvisioningArtifactInput {
 	s.Description = &v
@@ -10945,10 +10940,10 @@ type UpdateProvisioningArtifactOutput struct {
 
 	responseMetadata aws.Response
 
-	// Additional information about the provisioning artifact update request.
+	// The URL of the CloudFormation template in Amazon S3.
 	Info map[string]string `min:"1" type:"map"`
 
-	// The resulting detailed provisioning artifact information.
+	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
@@ -10988,22 +10983,18 @@ func (s *UpdateProvisioningArtifactOutput) SetStatus(v Status) *UpdateProvisioni
 	return s
 }
 
-// The parameter key-value pair used to update a ProvisionedProduct object.
-// If UsePreviousValue is set to true, Value is ignored and the value for Key
-// is kept as previously set (current value).
+// The parameter key-value pair used to update a provisioned product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningParameter
 type UpdateProvisioningParameter struct {
 	_ struct{} `type:"structure"`
 
-	// The ProvisioningArtifactParameter.ParameterKey parameter from DescribeProvisioningParameters.
+	// The parameter key.
 	Key *string `min:"1" type:"string"`
 
-	// If true, uses the currently set value for Key, ignoring UpdateProvisioningParameter.Value.
+	// If set to true, Value is ignored and the previous parameter value is kept.
 	UsePreviousValue *bool `type:"boolean"`
 
-	// The value to use for updating the product provisioning. Any constraints on
-	// this value can be found in the ProvisioningArtifactParameter parameter for
-	// Key.
+	// The parameter value.
 	Value *string `type:"string"`
 }
 
@@ -11055,7 +11046,7 @@ type UpdateTagOptionInput struct {
 	// The updated active state.
 	Active *bool `type:"boolean"`
 
-	// The identifier of the constraint to update.
+	// The TagOption identifier.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -11118,7 +11109,7 @@ type UpdateTagOptionOutput struct {
 
 	responseMetadata aws.Response
 
-	// The resulting detailed TagOption information.
+	// Information about the TagOption.
 	TagOptionDetail *TagOptionDetail `type:"structure"`
 }
 

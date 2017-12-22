@@ -67,13 +67,36 @@ type CodeCommitAPI interface {
 
 	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest
 
+	CreatePullRequestRequest(*codecommit.CreatePullRequestInput) codecommit.CreatePullRequestRequest
+
 	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) codecommit.CreateRepositoryRequest
 
+	DeleteBranchRequest(*codecommit.DeleteBranchInput) codecommit.DeleteBranchRequest
+
+	DeleteCommentContentRequest(*codecommit.DeleteCommentContentInput) codecommit.DeleteCommentContentRequest
+
 	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) codecommit.DeleteRepositoryRequest
+
+	DescribePullRequestEventsRequest(*codecommit.DescribePullRequestEventsInput) codecommit.DescribePullRequestEventsRequest
+
+	DescribePullRequestEventsPages(*codecommit.DescribePullRequestEventsInput, func(*codecommit.DescribePullRequestEventsOutput, bool) bool) error
+	DescribePullRequestEventsPagesWithContext(aws.Context, *codecommit.DescribePullRequestEventsInput, func(*codecommit.DescribePullRequestEventsOutput, bool) bool, ...aws.Option) error
 
 	GetBlobRequest(*codecommit.GetBlobInput) codecommit.GetBlobRequest
 
 	GetBranchRequest(*codecommit.GetBranchInput) codecommit.GetBranchRequest
+
+	GetCommentRequest(*codecommit.GetCommentInput) codecommit.GetCommentRequest
+
+	GetCommentsForComparedCommitRequest(*codecommit.GetCommentsForComparedCommitInput) codecommit.GetCommentsForComparedCommitRequest
+
+	GetCommentsForComparedCommitPages(*codecommit.GetCommentsForComparedCommitInput, func(*codecommit.GetCommentsForComparedCommitOutput, bool) bool) error
+	GetCommentsForComparedCommitPagesWithContext(aws.Context, *codecommit.GetCommentsForComparedCommitInput, func(*codecommit.GetCommentsForComparedCommitOutput, bool) bool, ...aws.Option) error
+
+	GetCommentsForPullRequestRequest(*codecommit.GetCommentsForPullRequestInput) codecommit.GetCommentsForPullRequestRequest
+
+	GetCommentsForPullRequestPages(*codecommit.GetCommentsForPullRequestInput, func(*codecommit.GetCommentsForPullRequestOutput, bool) bool) error
+	GetCommentsForPullRequestPagesWithContext(aws.Context, *codecommit.GetCommentsForPullRequestInput, func(*codecommit.GetCommentsForPullRequestOutput, bool) bool, ...aws.Option) error
 
 	GetCommitRequest(*codecommit.GetCommitInput) codecommit.GetCommitRequest
 
@@ -81,6 +104,10 @@ type CodeCommitAPI interface {
 
 	GetDifferencesPages(*codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool) error
 	GetDifferencesPagesWithContext(aws.Context, *codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool, ...aws.Option) error
+
+	GetMergeConflictsRequest(*codecommit.GetMergeConflictsInput) codecommit.GetMergeConflictsRequest
+
+	GetPullRequestRequest(*codecommit.GetPullRequestInput) codecommit.GetPullRequestRequest
 
 	GetRepositoryRequest(*codecommit.GetRepositoryInput) codecommit.GetRepositoryRequest
 
@@ -91,16 +118,37 @@ type CodeCommitAPI interface {
 	ListBranchesPages(*codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool) error
 	ListBranchesPagesWithContext(aws.Context, *codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool, ...aws.Option) error
 
+	ListPullRequestsRequest(*codecommit.ListPullRequestsInput) codecommit.ListPullRequestsRequest
+
+	ListPullRequestsPages(*codecommit.ListPullRequestsInput, func(*codecommit.ListPullRequestsOutput, bool) bool) error
+	ListPullRequestsPagesWithContext(aws.Context, *codecommit.ListPullRequestsInput, func(*codecommit.ListPullRequestsOutput, bool) bool, ...aws.Option) error
+
 	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) codecommit.ListRepositoriesRequest
 
 	ListRepositoriesPages(*codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool) error
 	ListRepositoriesPagesWithContext(aws.Context, *codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool, ...aws.Option) error
 
+	MergePullRequestByFastForwardRequest(*codecommit.MergePullRequestByFastForwardInput) codecommit.MergePullRequestByFastForwardRequest
+
+	PostCommentForComparedCommitRequest(*codecommit.PostCommentForComparedCommitInput) codecommit.PostCommentForComparedCommitRequest
+
+	PostCommentForPullRequestRequest(*codecommit.PostCommentForPullRequestInput) codecommit.PostCommentForPullRequestRequest
+
+	PostCommentReplyRequest(*codecommit.PostCommentReplyInput) codecommit.PostCommentReplyRequest
+
 	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) codecommit.PutRepositoryTriggersRequest
 
 	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) codecommit.TestRepositoryTriggersRequest
 
+	UpdateCommentRequest(*codecommit.UpdateCommentInput) codecommit.UpdateCommentRequest
+
 	UpdateDefaultBranchRequest(*codecommit.UpdateDefaultBranchInput) codecommit.UpdateDefaultBranchRequest
+
+	UpdatePullRequestDescriptionRequest(*codecommit.UpdatePullRequestDescriptionInput) codecommit.UpdatePullRequestDescriptionRequest
+
+	UpdatePullRequestStatusRequest(*codecommit.UpdatePullRequestStatusInput) codecommit.UpdatePullRequestStatusRequest
+
+	UpdatePullRequestTitleRequest(*codecommit.UpdatePullRequestTitleInput) codecommit.UpdatePullRequestTitleRequest
 
 	UpdateRepositoryDescriptionRequest(*codecommit.UpdateRepositoryDescriptionInput) codecommit.UpdateRepositoryDescriptionRequest
 

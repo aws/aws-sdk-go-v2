@@ -41,6 +41,13 @@ func (r AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
 //    * Invitation to join or Approve all features request handshakes: only
 //    a principal from the member account.
 //
+// The user who calls the API for an invitation to join must have the organizations:AcceptHandshake
+//    permission. If you enabled all features in the organization, then the
+//    user must also have the iam:CreateServiceLinkedRole permission so that
+//    Organizations can create the required service-linked role named OrgsServiceLinkedRoleName.
+//    For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
+//    in the AWS Organizations User Guide.
+//
 //    * Enable all features final confirmation handshake: only a principal from
 //    the master account.
 //
@@ -253,11 +260,22 @@ func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 // later, you need the OperationId response element from this operation to provide
 // as a parameter to the DescribeCreateAccountStatus operation.
 //
-// AWS Organizations preconfigures the new member account with a role (named
-// OrganizationAccountAccessRole by default) that grants administrator permissions
-// to the new account. Principals in the master account can assume the role.
-// AWS Organizations clones the company name and address information for the
-// new account from the organization's master account.
+// The user who calls the API for an invitation to join must have the organizations:CreateAccount
+// permission. If you enabled all features in the organization, then the user
+// must also have the iam:CreateServiceLinkedRole permission so that Organizations
+// can create the required service-linked role named OrgsServiceLinkedRoleName.
+// For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
+// in the AWS Organizations User Guide.
+//
+// The user in the master account who calls this API must also have the iam:CreateRole
+// permission because AWS Organizations preconfigures the new member account
+// with a role (named OrganizationAccountAccessRole by default) that grants
+// users in the master account administrator permissions in the new member account.
+// Principals in the master account can assume the role. AWS Organizations clones
+// the company name and address information for the new account from the organization's
+// master account.
+//
+// This operation can be called only from the organization's master account.
 //
 // For more information about creating accounts, see Creating an AWS Account
 // in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
@@ -1084,6 +1102,79 @@ func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) DetachPoli
 	return DetachPolicyRequest{Request: req, Input: input}
 }
 
+const opDisableAWSServiceAccess = "DisableAWSServiceAccess"
+
+// DisableAWSServiceAccessRequest is a API request type for the DisableAWSServiceAccess API operation.
+type DisableAWSServiceAccessRequest struct {
+	*aws.Request
+	Input *DisableAWSServiceAccessInput
+}
+
+// Send marshals and sends the DisableAWSServiceAccess API request.
+func (r DisableAWSServiceAccessRequest) Send() (*DisableAWSServiceAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableAWSServiceAccessOutput), nil
+}
+
+// DisableAWSServiceAccessRequest returns a request value for making API operation for
+// AWS Organizations.
+//
+// Disables the integration of an AWS service (the service that is specified
+// by ServicePrincipal) with AWS Organizations. When you disable integration,
+// the specified service no longer can create a service-linked role (http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
+// in new accounts in your organization. This means the service can't perform
+// operations on your behalf on any new accounts in your organization. The service
+// can still perform operations in older accounts until the service completes
+// its clean-up from AWS Organizations.
+//
+// We recommend that you disable integration between AWS Organizations and the
+// specified AWS service by using the console or commands that are provided
+// by the specified service. Doing so ensures that the other service is aware
+// that it can clean up any resources that are required only for the integration.
+// How the service cleans up its resources in the organization's accounts depends
+// on that service. For more information, see the documentation for the other
+// AWS service.
+//
+// After you perform the DisableAWSServiceAccessoperation, the specified service can no longer perform operations in your
+// organization's accounts unless the operations are explicitly permitted by
+// the IAM policies that are attached to your roles.
+//
+// For more information about integrating other services with AWS Organizations,
+// including the list of services that work with Organizations, see Integrating
+// AWS Organizations with Other AWS Services (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)in the AWS Organizations User Guide
+//
+//    // Example sending a request using the DisableAWSServiceAccessRequest method.
+//    req := client.DisableAWSServiceAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccess
+func (c *Organizations) DisableAWSServiceAccessRequest(input *DisableAWSServiceAccessInput) DisableAWSServiceAccessRequest {
+	op := &aws.Operation{
+		Name:       opDisableAWSServiceAccess,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableAWSServiceAccessInput{}
+	}
+
+	output := &DisableAWSServiceAccessOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisableAWSServiceAccessRequest{Request: req, Input: input}
+}
+
 const opDisablePolicyType = "DisablePolicyType"
 
 // DisablePolicyTypeRequest is a API request type for the DisablePolicyType API operation.
@@ -1137,6 +1228,76 @@ func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) 
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DisablePolicyTypeRequest{Request: req, Input: input}
+}
+
+const opEnableAWSServiceAccess = "EnableAWSServiceAccess"
+
+// EnableAWSServiceAccessRequest is a API request type for the EnableAWSServiceAccess API operation.
+type EnableAWSServiceAccessRequest struct {
+	*aws.Request
+	Input *EnableAWSServiceAccessInput
+}
+
+// Send marshals and sends the EnableAWSServiceAccess API request.
+func (r EnableAWSServiceAccessRequest) Send() (*EnableAWSServiceAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableAWSServiceAccessOutput), nil
+}
+
+// EnableAWSServiceAccessRequest returns a request value for making API operation for
+// AWS Organizations.
+//
+// Enables the integration of an AWS service (the service that is specified
+// by ServicePrincipal) with AWS Organizations. When you enable integration,
+// you allow the specified service to create a service-linked role (http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
+// in all the accounts in your organization. This allows the service to perform
+// operations on your behalf in your organization and its accounts.
+//
+// We recommend that you enable integration between AWS Organizations and the
+// specified AWS service by using the console or commands that are provided
+// by the specified service. Doing so ensures that the service is aware that
+// it can create the resources that are required for the integration. How the
+// service creates those resources in the organization's accounts depends on
+// that service. For more information, see the documentation for the other AWS
+// service.
+//
+// For more information about enabling services to integrate with AWS Organizations,
+// see Integrating AWS Organizations with Other AWS Services (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// in the AWS Organizations User Guide.
+//
+// This operation can be called only from the organization's master account
+// and only if the organization has enabled all features (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html).
+//
+//    // Example sending a request using the EnableAWSServiceAccessRequest method.
+//    req := client.EnableAWSServiceAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccess
+func (c *Organizations) EnableAWSServiceAccessRequest(input *EnableAWSServiceAccessInput) EnableAWSServiceAccessRequest {
+	op := &aws.Operation{
+		Name:       opEnableAWSServiceAccess,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableAWSServiceAccessInput{}
+	}
+
+	output := &EnableAWSServiceAccessOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return EnableAWSServiceAccessRequest{Request: req, Input: input}
 }
 
 const opEnableAllFeatures = "EnableAllFeatures"
@@ -1411,6 +1572,121 @@ func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) 
 	return LeaveOrganizationRequest{Request: req, Input: input}
 }
 
+const opListAWSServiceAccessForOrganization = "ListAWSServiceAccessForOrganization"
+
+// ListAWSServiceAccessForOrganizationRequest is a API request type for the ListAWSServiceAccessForOrganization API operation.
+type ListAWSServiceAccessForOrganizationRequest struct {
+	*aws.Request
+	Input *ListAWSServiceAccessForOrganizationInput
+}
+
+// Send marshals and sends the ListAWSServiceAccessForOrganization API request.
+func (r ListAWSServiceAccessForOrganizationRequest) Send() (*ListAWSServiceAccessForOrganizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAWSServiceAccessForOrganizationOutput), nil
+}
+
+// ListAWSServiceAccessForOrganizationRequest returns a request value for making API operation for
+// AWS Organizations.
+//
+// Returns a list of the AWS services that you enabled to integrate with your
+// organization. After a service on this list creates the resources that it
+// requires for the integration, it can perform operations on your organization
+// and its accounts.
+//
+// For more information about integrating other services with AWS Organizations,
+// including the list of services that currently work with Organizations, see
+// Integrating AWS Organizations with Other AWS Services (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
+// in the AWS Organizations User Guide.
+//
+// This operation can be called only from the organization's master account.
+//
+//    // Example sending a request using the ListAWSServiceAccessForOrganizationRequest method.
+//    req := client.ListAWSServiceAccessForOrganizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization
+func (c *Organizations) ListAWSServiceAccessForOrganizationRequest(input *ListAWSServiceAccessForOrganizationInput) ListAWSServiceAccessForOrganizationRequest {
+	op := &aws.Operation{
+		Name:       opListAWSServiceAccessForOrganization,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListAWSServiceAccessForOrganizationInput{}
+	}
+
+	output := &ListAWSServiceAccessForOrganizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListAWSServiceAccessForOrganizationRequest{Request: req, Input: input}
+}
+
+// ListAWSServiceAccessForOrganizationPages iterates over the pages of a ListAWSServiceAccessForOrganization operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See ListAWSServiceAccessForOrganization method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListAWSServiceAccessForOrganization operation.
+//    pageNum := 0
+//    err := client.ListAWSServiceAccessForOrganizationPages(params,
+//        func(page *ListAWSServiceAccessForOrganizationOutput, lastPage bool) bool {
+//            pageNum++
+//            fmt.Println(page)
+//            return pageNum <= 3
+//        })
+//
+func (c *Organizations) ListAWSServiceAccessForOrganizationPages(input *ListAWSServiceAccessForOrganizationInput, fn func(*ListAWSServiceAccessForOrganizationOutput, bool) bool) error {
+	return c.ListAWSServiceAccessForOrganizationPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// ListAWSServiceAccessForOrganizationPagesWithContext same as ListAWSServiceAccessForOrganizationPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *Organizations) ListAWSServiceAccessForOrganizationPagesWithContext(ctx aws.Context, input *ListAWSServiceAccessForOrganizationInput, fn func(*ListAWSServiceAccessForOrganizationOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
+			var inCpy *ListAWSServiceAccessForOrganizationInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.ListAWSServiceAccessForOrganizationRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+
+	cont := true
+	for p.Next() && cont {
+		cont = fn(p.Page().(*ListAWSServiceAccessForOrganizationOutput), !p.HasNextPage())
+	}
+	return p.Err()
+}
+
 const opListAccounts = "ListAccounts"
 
 // ListAccountsRequest is a API request type for the ListAccounts API operation.
@@ -1547,6 +1823,8 @@ func (r ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, erro
 // OUs. To get a list of all accounts in the organization, use the ListAccounts
 // operation.
 //
+// This operation can be called only from the organization's master account.
+//
 //    // Example sending a request using the ListAccountsForParentRequest method.
 //    req := client.ListAccountsForParentRequest(params)
 //    resp, err := req.Send()
@@ -1653,6 +1931,8 @@ func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
 // Lists all of the OUs or accounts that are contained in the specified parent
 // OU or root. This operation, along with ListParents enables you to traverse
 // the tree structure that makes up this root.
+//
+// This operation can be called only from the organization's master account.
 //
 //    // Example sending a request using the ListChildrenRequest method.
 //    req := client.ListChildrenRequest(params)
@@ -4661,6 +4941,73 @@ func (s DetachPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessRequest
+type DisableAWSServiceAccessInput struct {
+	_ struct{} `type:"structure"`
+
+	// The service principal name of the AWS service for which you want to disable
+	// integration with your organization. This is typically in the form of a URL,
+	// such as service-abbreviation.amazonaws.com.
+	//
+	// ServicePrincipal is a required field
+	ServicePrincipal *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisableAWSServiceAccessInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableAWSServiceAccessInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisableAWSServiceAccessInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisableAWSServiceAccessInput"}
+
+	if s.ServicePrincipal == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServicePrincipal"))
+	}
+	if s.ServicePrincipal != nil && len(*s.ServicePrincipal) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServicePrincipal", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetServicePrincipal sets the ServicePrincipal field's value.
+func (s *DisableAWSServiceAccessInput) SetServicePrincipal(v string) *DisableAWSServiceAccessInput {
+	s.ServicePrincipal = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessOutput
+type DisableAWSServiceAccessOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisableAWSServiceAccessOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableAWSServiceAccessOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableAWSServiceAccessOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest
 type DisablePolicyTypeInput struct {
 	_ struct{} `type:"structure"`
@@ -4748,6 +5095,73 @@ func (s DisablePolicyTypeOutput) SDKResponseMetadata() aws.Response {
 func (s *DisablePolicyTypeOutput) SetRoot(v *Root) *DisablePolicyTypeOutput {
 	s.Root = v
 	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessRequest
+type EnableAWSServiceAccessInput struct {
+	_ struct{} `type:"structure"`
+
+	// The service principal name of the AWS service for which you want to enable
+	// integration with your organization. This is typically in the form of a URL,
+	// such as service-abbreviation.amazonaws.com.
+	//
+	// ServicePrincipal is a required field
+	ServicePrincipal *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EnableAWSServiceAccessInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableAWSServiceAccessInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableAWSServiceAccessInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EnableAWSServiceAccessInput"}
+
+	if s.ServicePrincipal == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServicePrincipal"))
+	}
+	if s.ServicePrincipal != nil && len(*s.ServicePrincipal) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServicePrincipal", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetServicePrincipal sets the ServicePrincipal field's value.
+func (s *EnableAWSServiceAccessInput) SetServicePrincipal(v string) *EnableAWSServiceAccessInput {
+	s.ServicePrincipal = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessOutput
+type EnableAWSServiceAccessOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s EnableAWSServiceAccessOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableAWSServiceAccessOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableAWSServiceAccessOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeaturesRequest
@@ -4886,6 +5300,43 @@ func (s *EnablePolicyTypeOutput) SetRoot(v *Root) *EnablePolicyTypeOutput {
 	return s
 }
 
+// A structure that contains details of a service principal that is enabled
+// to integrate with AWS Organizations.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnabledServicePrincipal
+type EnabledServicePrincipal struct {
+	_ struct{} `type:"structure"`
+
+	// The date that the service principal was enabled for integration with AWS
+	// Organizations.
+	DateEnabled *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the service principal. This is typically in the form of a URL,
+	// such as: servicename.amazonaws.com.
+	ServicePrincipal *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s EnabledServicePrincipal) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnabledServicePrincipal) GoString() string {
+	return s.String()
+}
+
+// SetDateEnabled sets the DateEnabled field's value.
+func (s *EnabledServicePrincipal) SetDateEnabled(v time.Time) *EnabledServicePrincipal {
+	s.DateEnabled = &v
+	return s
+}
+
+// SetServicePrincipal sets the ServicePrincipal field's value.
+func (s *EnabledServicePrincipal) SetServicePrincipal(v string) *EnabledServicePrincipal {
+	s.ServicePrincipal = &v
+	return s
+}
+
 // Contains information that must be exchanged to securely establish a relationship
 // between two accounts (an originator and a recipient). For example, when a
 // master account (the originator) invites another account (the recipient) to
@@ -4899,7 +5350,21 @@ type Handshake struct {
 	_ struct{} `type:"structure"`
 
 	// The type of handshake, indicating what action occurs when the recipient accepts
-	// the handshake.
+	// the handshake. The following handshake types are supported:
+	//
+	//    * INVITE: This type of handshake represents a request to join an organization.
+	//    It is always sent from the master account to only non-member accounts.
+	//
+	//    * ENABLE_ALL_FEATURES: This type of handshake represents a request to
+	//    enable all features in an organization. It is always sent from the master
+	//    account to only invited member accounts. Created accounts do not receive
+	//    this because those accounts were created by the organization's master
+	//    account and approval is inferred.
+	//
+	//    * APPROVE_ALL_FEATURES: This type of handshake is sent from the Organizations
+	//    service when all member accounts have approved the ENABLE_ALL_FEATURES
+	//    invitation. It is sent only to the master account and signals the master
+	//    that it can finalize the process to enable all features.
 	Action ActionType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of a handshake.
@@ -5315,6 +5780,109 @@ func (s LeaveOrganizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s LeaveOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationRequest
+type ListAWSServiceAccessForOrganizationInput struct {
+	_ struct{} `type:"structure"`
+
+	// (Optional) Use this to limit the number of results you want included in the
+	// response. If you do not include this parameter, it defaults to a value that
+	// is specific to the operation. If additional items exist beyond the maximum
+	// you specify, the NextToken response element is present and has a value (is
+	// not null). Include that value as the NextToken request parameter in the next
+	// call to the operation to get the next part of the results. Note that Organizations
+	// might return fewer results than the maximum even when there are more results
+	// available. You should check NextToken after every operation to ensure that
+	// you receive all of the results.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// Use this parameter if you receive a NextToken response in a previous request
+	// that indicates that there is more output available. Set it to the value of
+	// the previous call's NextToken response to indicate where the output should
+	// continue from.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListAWSServiceAccessForOrganizationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAWSServiceAccessForOrganizationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListAWSServiceAccessForOrganizationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListAWSServiceAccessForOrganizationInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *ListAWSServiceAccessForOrganizationInput) SetMaxResults(v int64) *ListAWSServiceAccessForOrganizationInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListAWSServiceAccessForOrganizationInput) SetNextToken(v string) *ListAWSServiceAccessForOrganizationInput {
+	s.NextToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationResponse
+type ListAWSServiceAccessForOrganizationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of the service principals for the services that are enabled to integrate
+	// with your organization. Each principal is a structure that includes the name
+	// and the date that it was enabled for integration with AWS Organizations.
+	EnabledServicePrincipals []EnabledServicePrincipal `type:"list"`
+
+	// If present, this value indicates that there is more output available than
+	// is included in the current response. Use this value in the NextToken request
+	// parameter in a subsequent call to the operation to get the next part of the
+	// output. You should repeat this until the NextToken response element comes
+	// back as null.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListAWSServiceAccessForOrganizationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAWSServiceAccessForOrganizationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAWSServiceAccessForOrganizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetEnabledServicePrincipals sets the EnabledServicePrincipals field's value.
+func (s *ListAWSServiceAccessForOrganizationOutput) SetEnabledServicePrincipals(v []EnabledServicePrincipal) *ListAWSServiceAccessForOrganizationOutput {
+	s.EnabledServicePrincipals = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *ListAWSServiceAccessForOrganizationOutput) SetNextToken(v string) *ListAWSServiceAccessForOrganizationOutput {
+	s.NextToken = &v
+	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest
@@ -7661,6 +8229,13 @@ func (s *UpdatePolicyOutput) SetPolicy(v *Policy) *UpdatePolicyOutput {
 	return s
 }
 
+type AccessDeniedForDependencyExceptionReason string
+
+// Enum values for AccessDeniedForDependencyExceptionReason
+const (
+	AccessDeniedForDependencyExceptionReasonAccessDeniedDuringCreateServiceLinkedRole AccessDeniedForDependencyExceptionReason = "ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE"
+)
+
 type AccountJoinedMethod string
 
 // Enum values for AccountJoinedMethod
@@ -7681,9 +8256,10 @@ type ActionType string
 
 // Enum values for ActionType
 const (
-	ActionTypeInvite             ActionType = "INVITE"
-	ActionTypeEnableAllFeatures  ActionType = "ENABLE_ALL_FEATURES"
-	ActionTypeApproveAllFeatures ActionType = "APPROVE_ALL_FEATURES"
+	ActionTypeInvite                            ActionType = "INVITE"
+	ActionTypeEnableAllFeatures                 ActionType = "ENABLE_ALL_FEATURES"
+	ActionTypeApproveAllFeatures                ActionType = "APPROVE_ALL_FEATURES"
+	ActionTypeAddOrganizationsServiceLinkedRole ActionType = "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
 )
 
 type ChildType string
@@ -7713,17 +8289,19 @@ const (
 	ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded            ConstraintViolationExceptionReason = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
 	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
 	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo             ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
+	ConstraintViolationExceptionReasonOrganizationNotInAllFeaturesMode            ConstraintViolationExceptionReason = "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"
 )
 
 type CreateAccountFailureReason string
 
 // Enum values for CreateAccountFailureReason
 const (
-	CreateAccountFailureReasonAccountLimitExceeded CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
-	CreateAccountFailureReasonEmailAlreadyExists   CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
-	CreateAccountFailureReasonInvalidAddress       CreateAccountFailureReason = "INVALID_ADDRESS"
-	CreateAccountFailureReasonInvalidEmail         CreateAccountFailureReason = "INVALID_EMAIL"
-	CreateAccountFailureReasonInternalFailure      CreateAccountFailureReason = "INTERNAL_FAILURE"
+	CreateAccountFailureReasonAccountLimitExceeded          CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
+	CreateAccountFailureReasonEmailAlreadyExists            CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
+	CreateAccountFailureReasonInvalidAddress                CreateAccountFailureReason = "INVALID_ADDRESS"
+	CreateAccountFailureReasonInvalidEmail                  CreateAccountFailureReason = "INVALID_EMAIL"
+	CreateAccountFailureReasonConcurrentAccountModification CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
+	CreateAccountFailureReasonInternalFailure               CreateAccountFailureReason = "INTERNAL_FAILURE"
 )
 
 type CreateAccountState string
@@ -7813,6 +8391,7 @@ const (
 	InvalidInputExceptionReasonMaxLimitExceededFilter             InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
 	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
 	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
+	InvalidInputExceptionReasonUnrecognizedServicePrincipal       InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
 )
 
 type OrganizationFeatureSet string

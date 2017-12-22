@@ -66,11 +66,19 @@ type WAFRegionalAPI interface {
 
 	CreateByteMatchSetRequest(*wafregional.CreateByteMatchSetInput) wafregional.CreateByteMatchSetRequest
 
+	CreateGeoMatchSetRequest(*wafregional.CreateGeoMatchSetInput) wafregional.CreateGeoMatchSetRequest
+
 	CreateIPSetRequest(*wafregional.CreateIPSetInput) wafregional.CreateIPSetRequest
 
 	CreateRateBasedRuleRequest(*wafregional.CreateRateBasedRuleInput) wafregional.CreateRateBasedRuleRequest
 
+	CreateRegexMatchSetRequest(*wafregional.CreateRegexMatchSetInput) wafregional.CreateRegexMatchSetRequest
+
+	CreateRegexPatternSetRequest(*wafregional.CreateRegexPatternSetInput) wafregional.CreateRegexPatternSetRequest
+
 	CreateRuleRequest(*wafregional.CreateRuleInput) wafregional.CreateRuleRequest
+
+	CreateRuleGroupRequest(*wafregional.CreateRuleGroupInput) wafregional.CreateRuleGroupRequest
 
 	CreateSizeConstraintSetRequest(*wafregional.CreateSizeConstraintSetInput) wafregional.CreateSizeConstraintSetRequest
 
@@ -82,11 +90,19 @@ type WAFRegionalAPI interface {
 
 	DeleteByteMatchSetRequest(*wafregional.DeleteByteMatchSetInput) wafregional.DeleteByteMatchSetRequest
 
+	DeleteGeoMatchSetRequest(*wafregional.DeleteGeoMatchSetInput) wafregional.DeleteGeoMatchSetRequest
+
 	DeleteIPSetRequest(*wafregional.DeleteIPSetInput) wafregional.DeleteIPSetRequest
 
 	DeleteRateBasedRuleRequest(*wafregional.DeleteRateBasedRuleInput) wafregional.DeleteRateBasedRuleRequest
 
+	DeleteRegexMatchSetRequest(*wafregional.DeleteRegexMatchSetInput) wafregional.DeleteRegexMatchSetRequest
+
+	DeleteRegexPatternSetRequest(*wafregional.DeleteRegexPatternSetInput) wafregional.DeleteRegexPatternSetRequest
+
 	DeleteRuleRequest(*wafregional.DeleteRuleInput) wafregional.DeleteRuleRequest
+
+	DeleteRuleGroupRequest(*wafregional.DeleteRuleGroupInput) wafregional.DeleteRuleGroupRequest
 
 	DeleteSizeConstraintSetRequest(*wafregional.DeleteSizeConstraintSetInput) wafregional.DeleteSizeConstraintSetRequest
 
@@ -104,13 +120,21 @@ type WAFRegionalAPI interface {
 
 	GetChangeTokenStatusRequest(*wafregional.GetChangeTokenStatusInput) wafregional.GetChangeTokenStatusRequest
 
+	GetGeoMatchSetRequest(*wafregional.GetGeoMatchSetInput) wafregional.GetGeoMatchSetRequest
+
 	GetIPSetRequest(*wafregional.GetIPSetInput) wafregional.GetIPSetRequest
 
 	GetRateBasedRuleRequest(*wafregional.GetRateBasedRuleInput) wafregional.GetRateBasedRuleRequest
 
 	GetRateBasedRuleManagedKeysRequest(*wafregional.GetRateBasedRuleManagedKeysInput) wafregional.GetRateBasedRuleManagedKeysRequest
 
+	GetRegexMatchSetRequest(*wafregional.GetRegexMatchSetInput) wafregional.GetRegexMatchSetRequest
+
+	GetRegexPatternSetRequest(*wafregional.GetRegexPatternSetInput) wafregional.GetRegexPatternSetRequest
+
 	GetRuleRequest(*wafregional.GetRuleInput) wafregional.GetRuleRequest
+
+	GetRuleGroupRequest(*wafregional.GetRuleGroupInput) wafregional.GetRuleGroupRequest
 
 	GetSampledRequestsRequest(*wafregional.GetSampledRequestsInput) wafregional.GetSampledRequestsRequest
 
@@ -124,13 +148,23 @@ type WAFRegionalAPI interface {
 
 	GetXssMatchSetRequest(*wafregional.GetXssMatchSetInput) wafregional.GetXssMatchSetRequest
 
+	ListActivatedRulesInRuleGroupRequest(*wafregional.ListActivatedRulesInRuleGroupInput) wafregional.ListActivatedRulesInRuleGroupRequest
+
 	ListByteMatchSetsRequest(*wafregional.ListByteMatchSetsInput) wafregional.ListByteMatchSetsRequest
+
+	ListGeoMatchSetsRequest(*wafregional.ListGeoMatchSetsInput) wafregional.ListGeoMatchSetsRequest
 
 	ListIPSetsRequest(*wafregional.ListIPSetsInput) wafregional.ListIPSetsRequest
 
 	ListRateBasedRulesRequest(*wafregional.ListRateBasedRulesInput) wafregional.ListRateBasedRulesRequest
 
+	ListRegexMatchSetsRequest(*wafregional.ListRegexMatchSetsInput) wafregional.ListRegexMatchSetsRequest
+
+	ListRegexPatternSetsRequest(*wafregional.ListRegexPatternSetsInput) wafregional.ListRegexPatternSetsRequest
+
 	ListResourcesForWebACLRequest(*wafregional.ListResourcesForWebACLInput) wafregional.ListResourcesForWebACLRequest
+
+	ListRuleGroupsRequest(*wafregional.ListRuleGroupsInput) wafregional.ListRuleGroupsRequest
 
 	ListRulesRequest(*wafregional.ListRulesInput) wafregional.ListRulesRequest
 
@@ -138,17 +172,27 @@ type WAFRegionalAPI interface {
 
 	ListSqlInjectionMatchSetsRequest(*wafregional.ListSqlInjectionMatchSetsInput) wafregional.ListSqlInjectionMatchSetsRequest
 
+	ListSubscribedRuleGroupsRequest(*wafregional.ListSubscribedRuleGroupsInput) wafregional.ListSubscribedRuleGroupsRequest
+
 	ListWebACLsRequest(*wafregional.ListWebACLsInput) wafregional.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*wafregional.ListXssMatchSetsInput) wafregional.ListXssMatchSetsRequest
 
 	UpdateByteMatchSetRequest(*wafregional.UpdateByteMatchSetInput) wafregional.UpdateByteMatchSetRequest
 
+	UpdateGeoMatchSetRequest(*wafregional.UpdateGeoMatchSetInput) wafregional.UpdateGeoMatchSetRequest
+
 	UpdateIPSetRequest(*wafregional.UpdateIPSetInput) wafregional.UpdateIPSetRequest
 
 	UpdateRateBasedRuleRequest(*wafregional.UpdateRateBasedRuleInput) wafregional.UpdateRateBasedRuleRequest
 
+	UpdateRegexMatchSetRequest(*wafregional.UpdateRegexMatchSetInput) wafregional.UpdateRegexMatchSetRequest
+
+	UpdateRegexPatternSetRequest(*wafregional.UpdateRegexPatternSetInput) wafregional.UpdateRegexPatternSetRequest
+
 	UpdateRuleRequest(*wafregional.UpdateRuleInput) wafregional.UpdateRuleRequest
+
+	UpdateRuleGroupRequest(*wafregional.UpdateRuleGroupInput) wafregional.UpdateRuleGroupRequest
 
 	UpdateSizeConstraintSetRequest(*wafregional.UpdateSizeConstraintSetInput) wafregional.UpdateSizeConstraintSetRequest
 

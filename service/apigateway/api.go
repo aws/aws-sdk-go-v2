@@ -672,6 +672,56 @@ func (c *APIGateway) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) C
 	return CreateUsagePlanKeyRequest{Request: req, Input: input}
 }
 
+const opCreateVpcLink = "CreateVpcLink"
+
+// CreateVpcLinkRequest is a API request type for the CreateVpcLink API operation.
+type CreateVpcLinkRequest struct {
+	*aws.Request
+	Input *CreateVpcLinkInput
+}
+
+// Send marshals and sends the CreateVpcLink API request.
+func (r CreateVpcLinkRequest) Send() (*UpdateVpcLinkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVpcLinkOutput), nil
+}
+
+// CreateVpcLinkRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Creates a VPC link, under the caller's account in a selected region, in an
+// asynchronous operation that typically takes 2-4 minutes to complete and become
+// operational. The caller must have permissions to create and update VPC Endpoint
+// services.
+//
+//    // Example sending a request using the CreateVpcLinkRequest method.
+//    req := client.CreateVpcLinkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) CreateVpcLinkRequest(input *CreateVpcLinkInput) CreateVpcLinkRequest {
+	op := &aws.Operation{
+		Name:       opCreateVpcLink,
+		HTTPMethod: "POST",
+		HTTPPath:   "/vpclinks",
+	}
+
+	if input == nil {
+		input = &CreateVpcLinkInput{}
+	}
+
+	output := &UpdateVpcLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateVpcLinkRequest{Request: req, Input: input}
+}
+
 const opDeleteApiKey = "DeleteApiKey"
 
 // DeleteApiKeyRequest is a API request type for the DeleteApiKey API operation.
@@ -1651,6 +1701,55 @@ func (c *APIGateway) DeleteUsagePlanKeyRequest(input *DeleteUsagePlanKeyInput) D
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteUsagePlanKeyRequest{Request: req, Input: input}
+}
+
+const opDeleteVpcLink = "DeleteVpcLink"
+
+// DeleteVpcLinkRequest is a API request type for the DeleteVpcLink API operation.
+type DeleteVpcLinkRequest struct {
+	*aws.Request
+	Input *DeleteVpcLinkInput
+}
+
+// Send marshals and sends the DeleteVpcLink API request.
+func (r DeleteVpcLinkRequest) Send() (*DeleteVpcLinkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVpcLinkOutput), nil
+}
+
+// DeleteVpcLinkRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Deletes an existing VpcLink of a specified identifier.
+//
+//    // Example sending a request using the DeleteVpcLinkRequest method.
+//    req := client.DeleteVpcLinkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLinkRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVpcLink,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/vpclinks/{vpclink_id}",
+	}
+
+	if input == nil {
+		input = &DeleteVpcLinkInput{}
+	}
+
+	output := &DeleteVpcLinkOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVpcLinkRequest{Request: req, Input: input}
 }
 
 const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
@@ -2991,8 +3090,8 @@ func (r GetGatewayResponsesRequest) Send() (*GetGatewayResponsesOutput, error) {
 //
 // Gets the GatewayResponses collection on the given RestApi. If an API developer
 // has not added any definitions for gateway responses, the result will be the
-// Amazon API Gateway-generated default GatewayResponses collection for the
-// supported response types.
+// API Gateway-generated default GatewayResponses collection for the supported
+// response types.
 //
 //    // Example sending a request using the GetGatewayResponsesRequest method.
 //    req := client.GetGatewayResponsesRequest(params)
@@ -3039,7 +3138,7 @@ func (r GetIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
 // GetIntegrationRequest returns a request value for making API operation for
 // Amazon API Gateway.
 //
-// Represents a get integration.
+// Get the integration settings.
 //
 //    // Example sending a request using the GetIntegrationRequest method.
 //    req := client.GetIntegrationRequest(params)
@@ -4029,6 +4128,53 @@ func (c *APIGateway) GetStagesRequest(input *GetStagesInput) GetStagesRequest {
 	return GetStagesRequest{Request: req, Input: input}
 }
 
+const opGetTags = "GetTags"
+
+// GetTagsRequest is a API request type for the GetTags API operation.
+type GetTagsRequest struct {
+	*aws.Request
+	Input *GetTagsInput
+}
+
+// Send marshals and sends the GetTags API request.
+func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTagsOutput), nil
+}
+
+// GetTagsRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Gets the Tags collection for a given resource.
+//
+//    // Example sending a request using the GetTagsRequest method.
+//    req := client.GetTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
+	op := &aws.Operation{
+		Name:       opGetTags,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags/{resource_arn}",
+	}
+
+	if input == nil {
+		input = &GetTagsInput{}
+	}
+
+	output := &GetTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetTagsRequest{Request: req, Input: input}
+}
+
 const opGetUsage = "GetUsage"
 
 // GetUsageRequest is a API request type for the GetUsage API operation.
@@ -4433,6 +4579,156 @@ func (c *APIGateway) GetUsagePlansPagesWithContext(ctx aws.Context, input *GetUs
 	return p.Err()
 }
 
+const opGetVpcLink = "GetVpcLink"
+
+// GetVpcLinkRequest is a API request type for the GetVpcLink API operation.
+type GetVpcLinkRequest struct {
+	*aws.Request
+	Input *GetVpcLinkInput
+}
+
+// Send marshals and sends the GetVpcLink API request.
+func (r GetVpcLinkRequest) Send() (*UpdateVpcLinkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVpcLinkOutput), nil
+}
+
+// GetVpcLinkRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Gets a specified VPC link under the caller's account in a region.
+//
+//    // Example sending a request using the GetVpcLinkRequest method.
+//    req := client.GetVpcLinkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) GetVpcLinkRequest(input *GetVpcLinkInput) GetVpcLinkRequest {
+	op := &aws.Operation{
+		Name:       opGetVpcLink,
+		HTTPMethod: "GET",
+		HTTPPath:   "/vpclinks/{vpclink_id}",
+	}
+
+	if input == nil {
+		input = &GetVpcLinkInput{}
+	}
+
+	output := &UpdateVpcLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVpcLinkRequest{Request: req, Input: input}
+}
+
+const opGetVpcLinks = "GetVpcLinks"
+
+// GetVpcLinksRequest is a API request type for the GetVpcLinks API operation.
+type GetVpcLinksRequest struct {
+	*aws.Request
+	Input *GetVpcLinksInput
+}
+
+// Send marshals and sends the GetVpcLinks API request.
+func (r GetVpcLinksRequest) Send() (*GetVpcLinksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVpcLinksOutput), nil
+}
+
+// GetVpcLinksRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Gets the VpcLinks collection under the caller's account in a selected region.
+//
+//    // Example sending a request using the GetVpcLinksRequest method.
+//    req := client.GetVpcLinksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequest {
+	op := &aws.Operation{
+		Name:       opGetVpcLinks,
+		HTTPMethod: "GET",
+		HTTPPath:   "/vpclinks",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"position"},
+			OutputTokens:    []string{"position"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetVpcLinksInput{}
+	}
+
+	output := &GetVpcLinksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVpcLinksRequest{Request: req, Input: input}
+}
+
+// GetVpcLinksPages iterates over the pages of a GetVpcLinks operation,
+// calling the "fn" function with the response data for each page. To stop
+// iterating, return false from the fn function.
+//
+// See GetVpcLinks method for more information on how to use this operation.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a GetVpcLinks operation.
+//    pageNum := 0
+//    err := client.GetVpcLinksPages(params,
+//        func(page *GetVpcLinksOutput, lastPage bool) bool {
+//            pageNum++
+//            fmt.Println(page)
+//            return pageNum <= 3
+//        })
+//
+func (c *APIGateway) GetVpcLinksPages(input *GetVpcLinksInput, fn func(*GetVpcLinksOutput, bool) bool) error {
+	return c.GetVpcLinksPagesWithContext(aws.BackgroundContext(), input, fn)
+}
+
+// GetVpcLinksPagesWithContext same as GetVpcLinksPages except
+// it takes a Context and allows setting request options on the pages.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *APIGateway) GetVpcLinksPagesWithContext(ctx aws.Context, input *GetVpcLinksInput, fn func(*GetVpcLinksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
+			var inCpy *GetVpcLinksInput
+			if input != nil {
+				tmp := *input
+				inCpy = &tmp
+			}
+			req := c.GetVpcLinksRequest(inCpy)
+			req.SetContext(ctx)
+			req.ApplyOptions(opts...)
+			return req.Request, nil
+		},
+	}
+
+	cont := true
+	for p.Next() && cont {
+		cont = fn(p.Page().(*GetVpcLinksOutput), !p.HasNextPage())
+	}
+	return p.Err()
+}
+
 const opImportApiKeys = "ImportApiKeys"
 
 // ImportApiKeysRequest is a API request type for the ImportApiKeys API operation.
@@ -4546,8 +4842,8 @@ func (r ImportRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 // ImportRestApiRequest returns a request value for making API operation for
 // Amazon API Gateway.
 //
-// A feature of the Amazon API Gateway control service for creating a new API
-// from an external API definition file.
+// A feature of the API Gateway control service for creating a new API from
+// an external API definition file.
 //
 //    // Example sending a request using the ImportRestApiRequest method.
 //    req := client.ImportRestApiRequest(params)
@@ -4830,9 +5126,9 @@ func (r PutRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 // PutRestApiRequest returns a request value for making API operation for
 // Amazon API Gateway.
 //
-// A feature of the Amazon API Gateway control service for updating an existing
-// API with an input of external API definitions. The update can take the form
-// of merging the supplied definition into the existing API or overwriting the
+// A feature of the API Gateway control service for updating an existing API
+// with an input of external API definitions. The update can take the form of
+// merging the supplied definition into the existing API or overwriting the
 // existing API.
 //
 //    // Example sending a request using the PutRestApiRequest method.
@@ -4857,6 +5153,55 @@ func (c *APIGateway) PutRestApiRequest(input *PutRestApiInput) PutRestApiRequest
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutRestApiRequest{Request: req, Input: input}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Adds or updates Tags on a gievn resource.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/tags/{resource_arn}",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
@@ -4955,6 +5300,55 @@ func (c *APIGateway) TestInvokeMethodRequest(input *TestInvokeMethodInput) TestI
 	output.responseMetadata = aws.Response{Request: req}
 
 	return TestInvokeMethodRequest{Request: req, Input: input}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Removes Tags from a given resource.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/tags/{resource_arn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateAccount = "UpdateAccount"
@@ -5943,6 +6337,89 @@ func (c *APIGateway) UpdateUsagePlanRequest(input *UpdateUsagePlanInput) UpdateU
 	return UpdateUsagePlanRequest{Request: req, Input: input}
 }
 
+const opUpdateVpcLink = "UpdateVpcLink"
+
+// UpdateVpcLinkRequest is a API request type for the UpdateVpcLink API operation.
+type UpdateVpcLinkRequest struct {
+	*aws.Request
+	Input *UpdateVpcLinkInput
+}
+
+// Send marshals and sends the UpdateVpcLink API request.
+func (r UpdateVpcLinkRequest) Send() (*UpdateVpcLinkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVpcLinkOutput), nil
+}
+
+// UpdateVpcLinkRequest returns a request value for making API operation for
+// Amazon API Gateway.
+//
+// Updates an existing VpcLink of a specified identifier.
+//
+//    // Example sending a request using the UpdateVpcLinkRequest method.
+//    req := client.UpdateVpcLinkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *APIGateway) UpdateVpcLinkRequest(input *UpdateVpcLinkInput) UpdateVpcLinkRequest {
+	op := &aws.Operation{
+		Name:       opUpdateVpcLink,
+		HTTPMethod: "PATCH",
+		HTTPPath:   "/vpclinks/{vpclink_id}",
+	}
+
+	if input == nil {
+		input = &UpdateVpcLinkInput{}
+	}
+
+	output := &UpdateVpcLinkOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateVpcLinkRequest{Request: req, Input: input}
+}
+
+// Access log settings, including the access log format and access log destination
+// ARN.
+type AccessLogSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the CloudWatch Logs log group to receive access logs.
+	DestinationArn *string `locationName:"destinationArn" type:"string"`
+
+	// A single line format of the access logs of data, as specified by selected
+	// $context variables (http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference).
+	// The format must include at least $context.requestId.
+	Format *string `locationName:"format" type:"string"`
+}
+
+// String returns the string representation
+func (s AccessLogSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccessLogSettings) GoString() string {
+	return s.String()
+}
+
+// SetDestinationArn sets the DestinationArn field's value.
+func (s *AccessLogSettings) SetDestinationArn(v string) *AccessLogSettings {
+	s.DestinationArn = &v
+	return s
+}
+
+// SetFormat sets the Format field's value.
+func (s *AccessLogSettings) SetFormat(v string) *AccessLogSettings {
+	s.Format = &v
+	return s
+}
+
 // API stage name of the associated API stage in a usage plan.
 type ApiStage struct {
 	_ struct{} `type:"structure"`
@@ -5973,6 +6450,60 @@ func (s *ApiStage) SetApiId(v string) *ApiStage {
 // SetStage sets the Stage field's value.
 func (s *ApiStage) SetStage(v string) *ApiStage {
 	s.Stage = &v
+	return s
+}
+
+// Configuration settings of a canary deployment.
+type CanarySettings struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the canary deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The percent (0-100) of traffic diverted to a canary deployment.
+	PercentTraffic *float64 `locationName:"percentTraffic" type:"double"`
+
+	// Stage variables overridden for a canary release deployment, including new
+	// stage variables introduced in the canary. These stage variables are represented
+	// as a string-to-string map between stage variable names and their values.
+	StageVariableOverrides map[string]string `locationName:"stageVariableOverrides" type:"map"`
+
+	// A Boolean flag to indicate whether the canary deployment uses the stage cache
+	// or not.
+	UseStageCache *bool `locationName:"useStageCache" type:"boolean"`
+}
+
+// String returns the string representation
+func (s CanarySettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CanarySettings) GoString() string {
+	return s.String()
+}
+
+// SetDeploymentId sets the DeploymentId field's value.
+func (s *CanarySettings) SetDeploymentId(v string) *CanarySettings {
+	s.DeploymentId = &v
+	return s
+}
+
+// SetPercentTraffic sets the PercentTraffic field's value.
+func (s *CanarySettings) SetPercentTraffic(v float64) *CanarySettings {
+	s.PercentTraffic = &v
+	return s
+}
+
+// SetStageVariableOverrides sets the StageVariableOverrides field's value.
+func (s *CanarySettings) SetStageVariableOverrides(v map[string]string) *CanarySettings {
+	s.StageVariableOverrides = v
+	return s
+}
+
+// SetUseStageCache sets the UseStageCache field's value.
+func (s *CanarySettings) SetUseStageCache(v bool) *CanarySettings {
+	s.UseStageCache = &v
 	return s
 }
 
@@ -6064,10 +6595,10 @@ type CreateAuthorizerInput struct {
 	// functional impact.
 	AuthType *string `locationName:"authType" type:"string"`
 
-	// Specifies the required credentials as an IAM role for Amazon API Gateway
-	// to invoke the authorizer. To specify an IAM role for Amazon API Gateway to
-	// assume, use the role's Amazon Resource Name (ARN). To use resource-based
-	// permissions on the Lambda function, specify null.
+	// Specifies the required credentials as an IAM role for API Gateway to invoke
+	// the authorizer. To specify an IAM role for API Gateway to assume, use the
+	// role's Amazon Resource Name (ARN). To use resource-based permissions on the
+	// Lambda function, specify null.
 	AuthorizerCredentials *string `locationName:"authorizerCredentials" type:"string"`
 
 	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
@@ -6108,8 +6639,8 @@ type CreateAuthorizerInput struct {
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
-	// this value is a regular expression. Amazon API Gateway will match the incoming
-	// token from the client against the specified regular expression. It will invoke
+	// this value is a regular expression. API Gateway will match the incoming token
+	// from the client against the specified regular expression. It will invoke
 	// the authorizer's Lambda function there is a match. Otherwise, it will return
 	// a 401 Unauthorized response without calling the Lambda function. The validation
 	// expression does not apply to the REQUEST authorizer.
@@ -6230,7 +6761,7 @@ func (s *CreateAuthorizerInput) SetType(v AuthorizerType) *CreateAuthorizerInput
 	return s
 }
 
-// Requests Amazon API Gateway to create a new BasePathMapping resource.
+// Requests API Gateway to create a new BasePathMapping resource.
 type CreateBasePathMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6308,7 +6839,7 @@ func (s *CreateBasePathMappingInput) SetStage(v string) *CreateBasePathMappingIn
 	return s
 }
 
-// Requests Amazon API Gateway to create a Deployment resource.
+// Requests API Gateway to create a Deployment resource.
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6318,6 +6849,10 @@ type CreateDeploymentInput struct {
 	// Specifies the cache cluster size for the Stage resource specified in the
 	// input, if a cache cluster is enabled.
 	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string" enum:"true"`
+
+	// The input configuration for the canary deployment when the deployment is
+	// a canary release deployment.
+	CanarySettings *DeploymentCanarySettings `locationName:"canarySettings" type:"structure"`
 
 	// The description for the Deployment resource to create.
 	Description *string `locationName:"description" type:"string"`
@@ -6372,6 +6907,12 @@ func (s *CreateDeploymentInput) SetCacheClusterEnabled(v bool) *CreateDeployment
 // SetCacheClusterSize sets the CacheClusterSize field's value.
 func (s *CreateDeploymentInput) SetCacheClusterSize(v CacheClusterSize) *CreateDeploymentInput {
 	s.CacheClusterSize = v
+	return s
+}
+
+// SetCanarySettings sets the CanarySettings field's value.
+func (s *CreateDeploymentInput) SetCanarySettings(v *DeploymentCanarySettings) *CreateDeploymentInput {
+	s.CanarySettings = v
 	return s
 }
 
@@ -6560,32 +7101,49 @@ func (s *CreateDocumentationVersionInput) SetStageName(v string) *CreateDocument
 type CreateDomainNameInput struct {
 	_ struct{} `type:"structure"`
 
-	// The reference to an AWS-managed certificate. AWS Certificate Manager is the
-	// only supported source.
+	// The reference to an AWS-managed certificate that will be used by edge-optimized
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
 
-	// [Deprecated] The body of the server certificate provided by your certificate
-	// authority.
+	// [Deprecated] The body of the server certificate that will be used by edge-optimized
+	// endpoint for this domain name provided by your certificate authority.
 	CertificateBody *string `locationName:"certificateBody" type:"string"`
 
 	// [Deprecated] The intermediate certificates and optionally the root certificate,
-	// one after the other without any blank lines. If you include the root certificate,
-	// your certificate chain must start with intermediate certificates and end
-	// with the root certificate. Use the intermediate certificates that were provided
-	// by your certificate authority. Do not include any intermediaries that are
-	// not in the chain of trust path.
+	// one after the other without any blank lines, used by an edge-optimized endpoint
+	// for this domain name. If you include the root certificate, your certificate
+	// chain must start with intermediate certificates and end with the root certificate.
+	// Use the intermediate certificates that were provided by your certificate
+	// authority. Do not include any intermediaries that are not in the chain of
+	// trust path.
 	CertificateChain *string `locationName:"certificateChain" type:"string"`
 
-	// The user-friendly name of the certificate.
+	// The user-friendly name of the certificate that will be used by edge-optimized
+	// endpoint for this domain name.
 	CertificateName *string `locationName:"certificateName" type:"string"`
 
-	// [Deprecated] Your certificate's private key.
+	// [Deprecated] Your edge-optimized endpoint's domain name certificate's private
+	// key.
 	CertificatePrivateKey *string `locationName:"certificatePrivateKey" type:"string"`
 
 	// (Required) The name of the DomainName resource.
 	//
 	// DomainName is a required field
 	DomainName *string `locationName:"domainName" type:"string" required:"true"`
+
+	// The endpoint configuration of this DomainName showing the endpoint types
+	// of the domain name.
+	EndpointConfiguration *EndpointConfiguration `locationName:"endpointConfiguration" type:"structure"`
+
+	// The reference to an AWS-managed certificate that will be used by regional
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
+	RegionalCertificateArn *string `locationName:"regionalCertificateArn" type:"string"`
+
+	// The user-friendly name of the certificate that will be used by regional endpoint
+	// for this domain name.
+	RegionalCertificateName *string `locationName:"regionalCertificateName" type:"string"`
 }
 
 // String returns the string representation
@@ -6645,6 +7203,24 @@ func (s *CreateDomainNameInput) SetCertificatePrivateKey(v string) *CreateDomain
 // SetDomainName sets the DomainName field's value.
 func (s *CreateDomainNameInput) SetDomainName(v string) *CreateDomainNameInput {
 	s.DomainName = &v
+	return s
+}
+
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *CreateDomainNameInput) SetEndpointConfiguration(v *EndpointConfiguration) *CreateDomainNameInput {
+	s.EndpointConfiguration = v
+	return s
+}
+
+// SetRegionalCertificateArn sets the RegionalCertificateArn field's value.
+func (s *CreateDomainNameInput) SetRegionalCertificateArn(v string) *CreateDomainNameInput {
+	s.RegionalCertificateArn = &v
+	return s
+}
+
+// SetRegionalCertificateName sets the RegionalCertificateName field's value.
+func (s *CreateDomainNameInput) SetRegionalCertificateName(v string) *CreateDomainNameInput {
+	s.RegionalCertificateName = &v
 	return s
 }
 
@@ -6806,7 +7382,7 @@ func (s *CreateRequestValidatorInput) SetValidateRequestParameters(v bool) *Crea
 	return s
 }
 
-// Requests Amazon API Gateway to create a Resource resource.
+// Requests API Gateway to create a Resource resource.
 type CreateResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6880,6 +7456,13 @@ func (s *CreateResourceInput) SetRestApiId(v string) *CreateResourceInput {
 type CreateRestApiInput struct {
 	_ struct{} `type:"structure"`
 
+	// The source of the API key for metring requests according to a usage plan.
+	// Valid values are HEADER to read the API key from the X-API-Key header of
+	// a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
+	ApiKeySource ApiKeySourceType `locationName:"apiKeySource" type:"string" enum:"true"`
+
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string `locationName:"binaryMediaTypes" type:"list"`
@@ -6889,6 +7472,17 @@ type CreateRestApiInput struct {
 
 	// The description of the RestApi.
 	Description *string `locationName:"description" type:"string"`
+
+	// The endpoint configuration of this RestApi showing the endpoint types of
+	// the API.
+	EndpointConfiguration *EndpointConfiguration `locationName:"endpointConfiguration" type:"structure"`
+
+	// A nullable integer used to enable (non-negative between 0 and 10485760 (10M)
+	// bytes, inclusive) or disable (null) compression on an API. When compression
+	// is enabled, compression or decompression are not applied on the payload if
+	// the payload size is smaller than this value. Setting it to zero allows compression
+	// for any payload size.
+	MinimumCompressionSize *int64 `locationName:"minimumCompressionSize" type:"integer"`
 
 	// The name of the RestApi.
 	//
@@ -6923,6 +7517,12 @@ func (s *CreateRestApiInput) Validate() error {
 	return nil
 }
 
+// SetApiKeySource sets the ApiKeySource field's value.
+func (s *CreateRestApiInput) SetApiKeySource(v ApiKeySourceType) *CreateRestApiInput {
+	s.ApiKeySource = v
+	return s
+}
+
 // SetBinaryMediaTypes sets the BinaryMediaTypes field's value.
 func (s *CreateRestApiInput) SetBinaryMediaTypes(v []string) *CreateRestApiInput {
 	s.BinaryMediaTypes = v
@@ -6941,6 +7541,18 @@ func (s *CreateRestApiInput) SetDescription(v string) *CreateRestApiInput {
 	return s
 }
 
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *CreateRestApiInput) SetEndpointConfiguration(v *EndpointConfiguration) *CreateRestApiInput {
+	s.EndpointConfiguration = v
+	return s
+}
+
+// SetMinimumCompressionSize sets the MinimumCompressionSize field's value.
+func (s *CreateRestApiInput) SetMinimumCompressionSize(v int64) *CreateRestApiInput {
+	s.MinimumCompressionSize = &v
+	return s
+}
+
 // SetName sets the Name field's value.
 func (s *CreateRestApiInput) SetName(v string) *CreateRestApiInput {
 	s.Name = &v
@@ -6953,7 +7565,7 @@ func (s *CreateRestApiInput) SetVersion(v string) *CreateRestApiInput {
 	return s
 }
 
-// Requests Amazon API Gateway to create a Stage resource.
+// Requests API Gateway to create a Stage resource.
 type CreateStageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6963,7 +7575,10 @@ type CreateStageInput struct {
 	// The stage's cache cluster size.
 	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string" enum:"true"`
 
-	// The identifier of the Deployment resource for the Stage resource.
+	// The canary deployment settings of this stage.
+	CanarySettings *CanarySettings `locationName:"canarySettings" type:"structure"`
+
+	// [Required] The identifier of the Deployment resource for the Stage resource.
 	//
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
@@ -6979,10 +7594,15 @@ type CreateStageInput struct {
 	// RestApiId is a required field
 	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
 
-	// The name for the Stage resource.
+	// [Required] The name for the Stage resource.
 	//
 	// StageName is a required field
 	StageName *string `locationName:"stageName" type:"string" required:"true"`
+
+	// Key/Value map of strings. Valid character set is [a-zA-Z+-=._:/]. Tag key
+	// can be up to 128 characters and must not start with "aws:". Tag value can
+	// be up to 256 characters.
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// A map that defines the stage variables for the new Stage resource. Variable
 	// names can have alphanumeric and underscore characters, and the values must
@@ -7034,6 +7654,12 @@ func (s *CreateStageInput) SetCacheClusterSize(v CacheClusterSize) *CreateStageI
 	return s
 }
 
+// SetCanarySettings sets the CanarySettings field's value.
+func (s *CreateStageInput) SetCanarySettings(v *CanarySettings) *CreateStageInput {
+	s.CanarySettings = v
+	return s
+}
+
 // SetDeploymentId sets the DeploymentId field's value.
 func (s *CreateStageInput) SetDeploymentId(v string) *CreateStageInput {
 	s.DeploymentId = &v
@@ -7061,6 +7687,12 @@ func (s *CreateStageInput) SetRestApiId(v string) *CreateStageInput {
 // SetStageName sets the StageName field's value.
 func (s *CreateStageInput) SetStageName(v string) *CreateStageInput {
 	s.StageName = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *CreateStageInput) SetTags(v map[string]string) *CreateStageInput {
+	s.Tags = v
 	return s
 }
 
@@ -7217,6 +7849,75 @@ func (s *CreateUsagePlanKeyInput) SetKeyType(v string) *CreateUsagePlanKeyInput 
 // SetUsagePlanId sets the UsagePlanId field's value.
 func (s *CreateUsagePlanKeyInput) SetUsagePlanId(v string) *CreateUsagePlanKeyInput {
 	s.UsagePlanId = &v
+	return s
+}
+
+// Creates a VPC link, under the caller's account in a selected region, in an
+// asynchronous operation that typically takes 2-4 minutes to complete and become
+// operational. The caller must have permissions to create and update VPC Endpoint
+// services.
+type CreateVpcLinkInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the VPC link.
+	Description *string `locationName:"description" type:"string"`
+
+	// [Required] The name used to label and identify the VPC link.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// [Required] The ARNs of network load balancers of the VPC targeted by the
+	// VPC link. The network load balancers must be owned by the same AWS account
+	// of the API owner.
+	//
+	// TargetArns is a required field
+	TargetArns []string `locationName:"targetArns" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateVpcLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcLinkInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateVpcLinkInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcLinkInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.TargetArns == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetArns"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetDescription sets the Description field's value.
+func (s *CreateVpcLinkInput) SetDescription(v string) *CreateVpcLinkInput {
+	s.Description = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateVpcLinkInput) SetName(v string) *CreateVpcLinkInput {
+	s.Name = &v
+	return s
+}
+
+// SetTargetArns sets the TargetArns field's value.
+func (s *CreateVpcLinkInput) SetTargetArns(v []string) *CreateVpcLinkInput {
+	s.TargetArns = v
 	return s
 }
 
@@ -7494,7 +8195,7 @@ func (s DeleteClientCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Requests Amazon API Gateway to delete a Deployment resource.
+// Requests API Gateway to delete a Deployment resource.
 type DeleteDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8562,7 +9263,7 @@ func (s DeleteRestApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Requests Amazon API Gateway to delete a Stage resource.
+// Requests API Gateway to delete a Stage resource.
 type DeleteStageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8777,6 +9478,114 @@ func (s DeleteUsagePlanOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Deletes an existing VpcLink of a specified identifier.
+type DeleteVpcLinkInput struct {
+	_ struct{} `type:"structure"`
+
+	// [Required] The identifier of the VpcLink. It is used in an Integration to
+	// reference this VpcLink.
+	//
+	// VpcLinkId is a required field
+	VpcLinkId *string `location:"uri" locationName:"vpclink_id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVpcLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcLinkInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVpcLinkInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcLinkInput"}
+
+	if s.VpcLinkId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VpcLinkId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetVpcLinkId sets the VpcLinkId field's value.
+func (s *DeleteVpcLinkInput) SetVpcLinkId(v string) *DeleteVpcLinkInput {
+	s.VpcLinkId = &v
+	return s
+}
+
+type DeleteVpcLinkOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteVpcLinkOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcLinkOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVpcLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// The input configuration for a canary deployment.
+type DeploymentCanarySettings struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage (0.0-100.0) of traffic routed to the canary deployment.
+	PercentTraffic *float64 `locationName:"percentTraffic" type:"double"`
+
+	// A stage variable overrides used for the canary release deployment. They can
+	// override existing stage variables or add new stage variables for the canary
+	// release deployment. These stage variables are represented as a string-to-string
+	// map between stage variable names and their values.
+	StageVariableOverrides map[string]string `locationName:"stageVariableOverrides" type:"map"`
+
+	// A Boolean flag to indicate whether the canary release deployment uses the
+	// stage cache or not.
+	UseStageCache *bool `locationName:"useStageCache" type:"boolean"`
+}
+
+// String returns the string representation
+func (s DeploymentCanarySettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeploymentCanarySettings) GoString() string {
+	return s.String()
+}
+
+// SetPercentTraffic sets the PercentTraffic field's value.
+func (s *DeploymentCanarySettings) SetPercentTraffic(v float64) *DeploymentCanarySettings {
+	s.PercentTraffic = &v
+	return s
+}
+
+// SetStageVariableOverrides sets the StageVariableOverrides field's value.
+func (s *DeploymentCanarySettings) SetStageVariableOverrides(v map[string]string) *DeploymentCanarySettings {
+	s.StageVariableOverrides = v
+	return s
+}
+
+// SetUseStageCache sets the UseStageCache field's value.
+func (s *DeploymentCanarySettings) SetUseStageCache(v bool) *DeploymentCanarySettings {
+	s.UseStageCache = &v
+	return s
+}
+
 // Specifies the target API entity to which the documentation applies.
 type DocumentationPartLocation struct {
 	_ struct{} `type:"structure"`
@@ -8877,6 +9686,34 @@ func (s *DocumentationPartLocation) SetType(v DocumentationPartType) *Documentat
 	return s
 }
 
+// The endpoint configuration to indicate the types of endpoints an API (RestApi)
+// or its custom domain name (DomainName) has.
+type EndpointConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A list of endpoint types of an API (RestApi) or its custom domain name (DomainName).
+	// For an edge-optimized API and its custom domain name, the endpoint type is
+	// "EDGE". For a regional API and its custom domain name, the endpoint type
+	// is REGIONAL.
+	Types []EndpointType `locationName:"types" type:"list"`
+}
+
+// String returns the string representation
+func (s EndpointConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EndpointConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetTypes sets the Types field's value.
+func (s *EndpointConfiguration) SetTypes(v []EndpointType) *EndpointConfiguration {
+	s.Types = v
+	return s
+}
+
 // Request to flush authorizer cache entries on a specified stage.
 type FlushStageAuthorizersCacheInput struct {
 	_ struct{} `type:"structure"`
@@ -8953,7 +9790,7 @@ func (s FlushStageAuthorizersCacheOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Requests Amazon API Gateway to flush a stage's cache.
+// Requests API Gateway to flush a stage's cache.
 type FlushStageCacheInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9053,8 +9890,7 @@ func (s *GenerateClientCertificateInput) SetDescription(v string) *GenerateClien
 	return s
 }
 
-// Requests Amazon API Gateway to get information about the current Account
-// resource.
+// Requests API Gateway to get information about the current Account resource.
 type GetAccountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -9659,7 +10495,7 @@ func (s *GetClientCertificatesOutput) SetPosition(v string) *GetClientCertificat
 	return s
 }
 
-// Requests Amazon API Gateway to get information about a Deployment resource.
+// Requests API Gateway to get information about a Deployment resource.
 type GetDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9729,7 +10565,7 @@ func (s *GetDeploymentInput) SetRestApiId(v string) *GetDeploymentInput {
 	return s
 }
 
-// Requests Amazon API Gateway to get information about a Deployments collection.
+// Requests API Gateway to get information about a Deployments collection.
 type GetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9901,6 +10737,11 @@ type GetDocumentationPartsInput struct {
 	// The maximum number of returned results per page.
 	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
 
+	// The status of the API documentation parts to retrieve. Valid values are DOCUMENTED
+	// for retrieving DocumentationPart resources with content and UNDOCUMENTED
+	// for DocumentationPart resources without content.
+	LocationStatus LocationStatusType `location:"querystring" locationName:"locationStatus" type:"string" enum:"true"`
+
 	// The name of API entities of the to-be-retrieved documentation parts.
 	NameQuery *string `location:"querystring" locationName:"name" type:"string"`
 
@@ -9946,6 +10787,12 @@ func (s *GetDocumentationPartsInput) Validate() error {
 // SetLimit sets the Limit field's value.
 func (s *GetDocumentationPartsInput) SetLimit(v int64) *GetDocumentationPartsInput {
 	s.Limit = &v
+	return s
+}
+
+// SetLocationStatus sets the LocationStatus field's value.
+func (s *GetDocumentationPartsInput) SetLocationStatus(v LocationStatusType) *GetDocumentationPartsInput {
+	s.LocationStatus = v
 	return s
 }
 
@@ -10515,8 +11362,8 @@ func (s *GetGatewayResponseInput) SetRestApiId(v string) *GetGatewayResponseInpu
 
 // Gets the GatewayResponses collection on the given RestApi. If an API developer
 // has not added any definitions for gateway responses, the result will be the
-// Amazon API Gateway-generated default GatewayResponses collection for the
-// supported response types.
+// API Gateway-generated default GatewayResponses collection for the supported
+// response types.
 type GetGatewayResponsesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10581,7 +11428,7 @@ func (s *GetGatewayResponsesInput) SetRestApiId(v string) *GetGatewayResponsesIn
 // this collection.
 //
 // For more information about valid gateway response types, see Gateway Response
-// Types Supported by Amazon API Gateway (http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)Example:
+// Types Supported by API Gateway (http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)Example:
 // Get the collection of gateway responses of an API
 //
 // Request
@@ -10774,7 +11621,7 @@ func (s *GetGatewayResponsesOutput) SetPosition(v string) *GetGatewayResponsesOu
 	return s
 }
 
-// Represents a get integration request.
+// Represents a request to get the integration configuration.
 type GetIntegrationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11813,7 +12660,7 @@ type GetSdkInput struct {
 	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
 
 	// The language for the generated SDK. Currently java, javascript, android,
-	// objectivec and swift (for iOS) are supported.
+	// objectivec (for iOS), swift (for iOS), and ruby are supported.
 	//
 	// SdkType is a required field
 	SdkType *string `location:"uri" locationName:"sdk_type" type:"string" required:"true"`
@@ -12099,7 +12946,7 @@ func (s *GetSdkTypesOutput) SetPosition(v string) *GetSdkTypesOutput {
 	return s
 }
 
-// Requests Amazon API Gateway to get information about a Stage resource.
+// Requests API Gateway to get information about a Stage resource.
 type GetStageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12154,7 +13001,7 @@ func (s *GetStageInput) SetStageName(v string) *GetStageInput {
 	return s
 }
 
-// Requests Amazon API Gateway to get information about one or more Stage resources.
+// Requests API Gateway to get information about one or more Stage resources.
 type GetStagesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12233,6 +13080,97 @@ func (s GetStagesOutput) SDKResponseMetadata() aws.Response {
 // SetItem sets the Item field's value.
 func (s *GetStagesOutput) SetItem(v []UpdateStageOutput) *GetStagesOutput {
 	s.Item = v
+	return s
+}
+
+// Gets the Tags collection for a given resource.
+type GetTagsInput struct {
+	_ struct{} `type:"structure"`
+
+	// (Not currently supported) The maximum number of returned results per page.
+	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
+
+	// (Not currently supported) The current pagination position in the paged result
+	// set.
+	Position *string `location:"querystring" locationName:"position" type:"string"`
+
+	// [Required] The ARN of a resource that can be tagged. At present, Stage is
+	// the only taggable resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource_arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetTagsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetTagsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetTagsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetTagsInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *GetTagsInput) SetLimit(v int64) *GetTagsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetPosition sets the Position field's value.
+func (s *GetTagsInput) SetPosition(v string) *GetTagsInput {
+	s.Position = &v
+	return s
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *GetTagsInput) SetResourceArn(v string) *GetTagsInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// A collection of Tags associated with a given resource.
+type GetTagsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A collection of Tags associated with a given resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s GetTagsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetTagsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetTags sets the Tags field's value.
+func (s *GetTagsOutput) SetTags(v map[string]string) *GetTagsOutput {
+	s.Tags = v
 	return s
 }
 
@@ -12688,6 +13626,122 @@ func (s *GetUsagePlansOutput) SetPosition(v string) *GetUsagePlansOutput {
 	return s
 }
 
+// Gets a specified VPC link under the caller's account in a region.
+type GetVpcLinkInput struct {
+	_ struct{} `type:"structure"`
+
+	// [Required] The identifier of the VpcLink. It is used in an Integration to
+	// reference this VpcLink.
+	//
+	// VpcLinkId is a required field
+	VpcLinkId *string `location:"uri" locationName:"vpclink_id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVpcLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVpcLinkInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVpcLinkInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVpcLinkInput"}
+
+	if s.VpcLinkId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VpcLinkId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetVpcLinkId sets the VpcLinkId field's value.
+func (s *GetVpcLinkInput) SetVpcLinkId(v string) *GetVpcLinkInput {
+	s.VpcLinkId = &v
+	return s
+}
+
+// Gets the VpcLinks collection under the caller's account in a selected region.
+type GetVpcLinksInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of returned results per page.
+	Limit *int64 `location:"querystring" locationName:"limit" type:"integer"`
+
+	// The current pagination position in the paged result set.
+	Position *string `location:"querystring" locationName:"position" type:"string"`
+}
+
+// String returns the string representation
+func (s GetVpcLinksInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVpcLinksInput) GoString() string {
+	return s.String()
+}
+
+// SetLimit sets the Limit field's value.
+func (s *GetVpcLinksInput) SetLimit(v int64) *GetVpcLinksInput {
+	s.Limit = &v
+	return s
+}
+
+// SetPosition sets the Position field's value.
+func (s *GetVpcLinksInput) SetPosition(v string) *GetVpcLinksInput {
+	s.Position = &v
+	return s
+}
+
+// The collection of VPC links under the caller's account in a region.
+//
+// Getting Started with Private Integrations (http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html),
+// Set up Private Integrations (http://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html)
+type GetVpcLinksOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The current page of elements from this collection.
+	Items []UpdateVpcLinkOutput `locationName:"item" type:"list"`
+
+	Position *string `locationName:"position" type:"string"`
+}
+
+// String returns the string representation
+func (s GetVpcLinksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVpcLinksOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVpcLinksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetItems sets the Items field's value.
+func (s *GetVpcLinksOutput) SetItems(v []UpdateVpcLinkOutput) *GetVpcLinksOutput {
+	s.Items = v
+	return s
+}
+
+// SetPosition sets the Position field's value.
+func (s *GetVpcLinksOutput) SetPosition(v string) *GetVpcLinksOutput {
+	s.Position = &v
+	return s
+}
+
 // The POST request to import API keys from an external source, such as a CSV-formatted
 // file.
 type ImportApiKeysInput struct {
@@ -12876,7 +13930,7 @@ func (s *ImportDocumentationPartsInput) SetRestApiId(v string) *ImportDocumentat
 // A collection of the imported DocumentationPart identifiers.
 //
 // This is used to return the result when documentation parts in an external
-// (e.g., Swagger) file are imported into Amazon API Gateway
+// (e.g., Swagger) file are imported into API Gateway
 // Documenting an API (http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
 // documentationpart:import (http://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/),
 // DocumentationPart
@@ -12919,8 +13973,8 @@ func (s *ImportDocumentationPartsOutput) SetWarnings(v []string) *ImportDocument
 	return s
 }
 
-// A POST request to import an API to Amazon API Gateway using an input of an
-// API definition file.
+// A POST request to import an API to API Gateway using an input of an API definition
+// file.
 type ImportRestApiInput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
@@ -12935,10 +13989,27 @@ type ImportRestApiInput struct {
 	// or not (false) when a warning is encountered. The default value is false.
 	FailOnWarnings *bool `location:"querystring" locationName:"failonwarnings" type:"boolean"`
 
-	// Custom header parameters as part of the request. For example, to exclude
-	// DocumentationParts from an imported API, set ignore=documentation as a parameters
-	// value, as in the AWS CLI command of aws apigateway import-rest-api --parameters
-	// ignore=documentation --body 'file:///path/to/imported-api-body.json.
+	// A key-value map of context-specific query string parameters specifying the
+	// behavior of different API importing operations. The following shows operation-specific
+	// parameters and their supported values.
+	//
+	// To exclude DocumentationParts from the import, set parameters as ignore=documentation.
+	//
+	// To configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE
+	// orendpointConfigurationTypes=REGIONAL. The default endpoint type is EDGE.
+	//
+	// To handle imported basePath, set parameters as basePath=ignore, basePath=prepend
+	// or basePath=split.
+	//
+	// For example, the AWS CLI command to exclude documentation from the imported
+	// API is:
+	//
+	//    aws apigateway import-rest-api --parameters ignore=documentation --body
+	//    'file:///path/to/imported-api-body.json
+	// The AWS CLI command to set the regional endpoint on the imported API is:
+	//
+	//    aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL
+	//    --body 'file:///path/to/imported-api-body.json
 	Parameters map[string]string `location:"querystring" locationName:"parameters" type:"map"`
 }
 
@@ -13151,11 +14222,15 @@ func (s *MethodSnapshot) SetAuthorizationType(v string) *MethodSnapshot {
 type PatchOperation struct {
 	_ struct{} `type:"structure"`
 
-	// Not supported.
+	// The copy update operation's source as identified by a JSON-Pointer value
+	// referencing the location within the targeted resource to copy the value from.
+	// For example, to promote a canary deployment, you copy the canary deployment
+	// ID to the affiliated deployment ID by calling a PATCH request on a Stage
+	// resource with "op":"copy", "from":"/canarySettings/deploymentId" and "path":"/deploymentId".
 	From *string `locationName:"from" type:"string"`
 
 	// An update operation to be performed with this PATCH request. The valid value
-	// can be "add", "remove", or "replace". Not all valid operations are supported
+	// can be add, remove, replace or copy. Not all valid operations are supported
 	// for a given resource. Support of the operations depends on specific operational
 	// contexts. Attempts to apply an unsupported operation on a resource will return
 	// an error message.
@@ -13171,10 +14246,10 @@ type PatchOperation struct {
 	// op operation can have only one path associated with it.
 	Path *string `locationName:"path" type:"string"`
 
-	// The new target value of the update operation. When using AWS CLI to update
-	// a property of a JSON value, enclose the JSON object with a pair of single
-	// quotes in a Linux shell, e.g., '{"a": ...}'. In a Windows shell, see Using
-	// JSON for Parameters (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
+	// The new target value of the update operation. It is applicable for the add
+	// or replace operation. When using AWS CLI to update a property of a JSON value,
+	// enclose the JSON object with a pair of single quotes in a Linux shell, e.g.,
+	// '{"a": ...}'. In a Windows shell, see Using JSON for Parameters (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
 	Value *string `locationName:"value" type:"string"`
 }
 
@@ -13326,6 +14401,17 @@ type PutIntegrationInput struct {
 	// Specifies a put integration input's cache namespace.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
+	// The (id (http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
+	// of the VpcLink used for the integration when connectionType=VPC_LINK and
+	// undefined, otherwise.
+	ConnectionId *string `locationName:"connectionId" type:"string"`
+
+	// The type of the network connection to the integration endpoint. The valid
+	// value is INTERNET for connections through the public routable internet or
+	// VPC_LINK for private connections between API Gateway and a network load balancer
+	// in a VPC. The default value is INTERNET.
+	ConnectionType ConnectionType `locationName:"connectionType" type:"string" enum:"true"`
+
 	// Specifies how to handle request payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
 	//
@@ -13393,20 +14479,36 @@ type PutIntegrationInput struct {
 	// RestApiId is a required field
 	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
 
+	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+	// milliseconds or 29 seconds.
+	TimeoutInMillis *int64 `locationName:"timeoutInMillis" type:"integer"`
+
 	// Specifies a put integration input's type.
 	//
 	// Type is a required field
 	Type IntegrationType `locationName:"type" type:"string" required:"true" enum:"true"`
 
-	// Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations,
-	// the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986
-	// specification (https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
-	// For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}.
-	// Region, subdomain and service are used to determine the right endpoint. For
-	// AWS services that use the Action= query string parameter, service_api should
-	// be a valid action for the desired service. For RESTful AWS service APIs,
-	// path is used to indicate that the remaining substring in the URI should be
-	// treated as the path to the resource, including the initial /.
+	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
+	//
+	//    *  For HTTP or HTTP_PROXY integrations, the URI must be a fully formed,
+	//    encoded HTTP(S) URL according to the RFC-3986 specification (_blank),
+	//    for either standard integration, where connectionType is not VPC_LINK,
+	//    or private integration, where connectionType is VPC_LINK. For a private
+	//    HTTP integration, the URI is not used for routing.
+	//
+	//    *  For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
+	//    Here, {Region} is the API Gateway region (e.g., us-east-1); {service}
+	//    is the name of the integrated AWS service (e.g., s3); and {subdomain}
+	//    is a designated subdomain supported by certain AWS service for fast host-name
+	//    lookup. action can be used for an AWS service action-based API, using
+	//    an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api}
+	//    refers to a supported action {name} plus any required input parameters.
+	//    Alternatively, path can be used for an AWS service path-based API. The
+	//    ensuing service_api refers to the path to an AWS service resource, including
+	//    the region of the integrated AWS service, if applicable. For example,
+	//    for integration with the S3 API of GetObject (http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html),
+	//    the uri can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}
+	//    or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string `locationName:"uri" type:"string"`
 }
 
@@ -13454,6 +14556,18 @@ func (s *PutIntegrationInput) SetCacheKeyParameters(v []string) *PutIntegrationI
 // SetCacheNamespace sets the CacheNamespace field's value.
 func (s *PutIntegrationInput) SetCacheNamespace(v string) *PutIntegrationInput {
 	s.CacheNamespace = &v
+	return s
+}
+
+// SetConnectionId sets the ConnectionId field's value.
+func (s *PutIntegrationInput) SetConnectionId(v string) *PutIntegrationInput {
+	s.ConnectionId = &v
+	return s
+}
+
+// SetConnectionType sets the ConnectionType field's value.
+func (s *PutIntegrationInput) SetConnectionType(v ConnectionType) *PutIntegrationInput {
+	s.ConnectionType = v
 	return s
 }
 
@@ -13508,6 +14622,12 @@ func (s *PutIntegrationInput) SetResourceId(v string) *PutIntegrationInput {
 // SetRestApiId sets the RestApiId field's value.
 func (s *PutIntegrationInput) SetRestApiId(v string) *PutIntegrationInput {
 	s.RestApiId = &v
+	return s
+}
+
+// SetTimeoutInMillis sets the TimeoutInMillis field's value.
+func (s *PutIntegrationInput) SetTimeoutInMillis(v int64) *PutIntegrationInput {
+	s.TimeoutInMillis = &v
 	return s
 }
 
@@ -13671,6 +14791,16 @@ type PutMethodInput struct {
 	// Specifies whether the method required a valid ApiKey.
 	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
 
+	// A list of authorization scopes configured on the method. The scopes are used
+	// with a COGNITO_USER_POOL authorizer to authorize the method invocation. The
+	// authorization works by matching the method scopes against the scopes parsed
+	// from the access token in the incoming request. The method invocation is authorized
+	// if any method scopes matches a claimed scope in the access token. Otherwise,
+	// the invocation is not authorized. When the method scope is configured, the
+	// client must provide an access token instead of an identity token for authorization
+	// purposes.
+	AuthorizationScopes []string `locationName:"authorizationScopes" type:"list"`
+
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS
 	// for using a Cognito user pool.
@@ -13698,7 +14828,7 @@ type PutMethodInput struct {
 	RequestModels map[string]string `locationName:"requestModels" type:"map"`
 
 	// A key-value map defining required or optional method request parameters that
-	// can be accepted by Amazon API Gateway. A key defines a method request parameter
+	// can be accepted by API Gateway. A key defines a method request parameter
 	// name matching the pattern of method.request.{location}.{name}, where location
 	// is querystring, path, or header and name is a valid and unique parameter
 	// name. The value associated with the key is a Boolean flag indicating whether
@@ -13760,6 +14890,12 @@ func (s *PutMethodInput) Validate() error {
 // SetApiKeyRequired sets the ApiKeyRequired field's value.
 func (s *PutMethodInput) SetApiKeyRequired(v bool) *PutMethodInput {
 	s.ApiKeyRequired = &v
+	return s
+}
+
+// SetAuthorizationScopes sets the AuthorizationScopes field's value.
+func (s *PutMethodInput) SetAuthorizationScopes(v []string) *PutMethodInput {
+	s.AuthorizationScopes = v
 	return s
 }
 
@@ -13837,7 +14973,7 @@ type PutMethodResponseInput struct {
 	ResponseModels map[string]string `locationName:"responseModels" type:"map"`
 
 	// A key-value map specifying required or optional response parameters that
-	// Amazon API Gateway can send back to the caller. A key defines a method response
+	// API Gateway can send back to the caller. A key defines a method response
 	// header name and the associated value is a Boolean flag indicating whether
 	// the method response parameter is required or not. The method response header
 	// names must match the pattern of method.response.header.{name}, where name
@@ -14160,6 +15296,85 @@ func (s *StageKey) SetStageName(v string) *StageKey {
 	return s
 }
 
+// Adds or updates Tags on a gievn resource.
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// [Required] The ARN of a resource that can be tagged. At present, Stage is
+	// the only taggable resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource_arn" type:"string" required:"true"`
+
+	// [Required] Key/Value map of strings. Valid character set is [a-zA-Z+-=._:/].
+	// Tag key can be up to 128 characters and must not start with "aws:". Tag value
+	// can be up to 256 characters.
+	//
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
+	s.Tags = v
+	return s
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Make a request to simulate the execution of an Authorizer.
 type TestInvokeAuthorizerInput struct {
 	_ struct{} `type:"structure"`
@@ -14284,7 +15499,7 @@ type TestInvokeAuthorizerOutput struct {
 	// The execution latency of the test authorizer request.
 	Latency *int64 `locationName:"latency" type:"long"`
 
-	// The Amazon API Gateway execution log for the test authorizer request.
+	// The API Gateway execution log for the test authorizer request.
 	Log *string `locationName:"log" type:"string"`
 
 	// The JSON policy document returned by the Authorizer
@@ -14487,7 +15702,7 @@ type TestInvokeMethodOutput struct {
 	// The execution latency of the test invoke request.
 	Latency *int64 `locationName:"latency" type:"long"`
 
-	// The Amazon API Gateway execution log for the test invoke request.
+	// The API Gateway execution log for the test invoke request.
 	Log *string `locationName:"log" type:"string"`
 
 	// The HTTP status code.
@@ -14574,8 +15789,84 @@ func (s *ThrottleSettings) SetRateLimit(v float64) *ThrottleSettings {
 	return s
 }
 
-// Requests Amazon API Gateway to change information about the current Account
-// resource.
+// Removes Tags from a given resource.
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// [Required] The ARN of a resource that can be tagged. At present, Stage is
+	// the only taggable resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource_arn" type:"string" required:"true"`
+
+	// The Tag keys to delete.
+	//
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetResourceArn sets the ResourceArn field's value.
+func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
+	s.ResourceArn = &v
+	return s
+}
+
+// SetTagKeys sets the TagKeys field's value.
+func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
+	s.TagKeys = v
+	return s
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Requests API Gateway to change information about the current Account resource.
 type UpdateAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14600,7 +15891,7 @@ func (s *UpdateAccountInput) SetPatchOperations(v []PatchOperation) *UpdateAccou
 	return s
 }
 
-// Represents an AWS account that is associated with Amazon API Gateway.
+// Represents an AWS account that is associated with API Gateway.
 //
 // To view the account info, call GET on this resource.
 //
@@ -14931,10 +16222,10 @@ type UpdateAuthorizerOutput struct {
 	// functional impact.
 	AuthType *string `locationName:"authType" type:"string"`
 
-	// Specifies the required credentials as an IAM role for Amazon API Gateway
-	// to invoke the authorizer. To specify an IAM role for Amazon API Gateway to
-	// assume, use the role's Amazon Resource Name (ARN). To use resource-based
-	// permissions on the Lambda function, specify null.
+	// Specifies the required credentials as an IAM role for API Gateway to invoke
+	// the authorizer. To specify an IAM role for API Gateway to assume, use the
+	// role's Amazon Resource Name (ARN). To use resource-based permissions on the
+	// Lambda function, specify null.
 	AuthorizerCredentials *string `locationName:"authorizerCredentials" type:"string"`
 
 	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
@@ -14978,8 +16269,8 @@ type UpdateAuthorizerOutput struct {
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
-	// this value is a regular expression. Amazon API Gateway will match the incoming
-	// token from the client against the specified regular expression. It will invoke
+	// this value is a regular expression. API Gateway will match the incoming token
+	// from the client against the specified regular expression. It will invoke
 	// the authorizer's Lambda function there is a match. Otherwise, it will return
 	// a 401 Unauthorized response without calling the Lambda function. The validation
 	// expression does not apply to the REQUEST authorizer.
@@ -15319,7 +16610,7 @@ func (s *UpdateClientCertificateOutput) SetPemEncodedCertificate(v string) *Upda
 	return s
 }
 
-// Requests Amazon API Gateway to change information about a Deployment resource.
+// Requests API Gateway to change information about a Deployment resource.
 type UpdateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -15539,8 +16830,8 @@ type UpdateDocumentationPartOutput struct {
 
 	responseMetadata aws.Response
 
-	// The DocumentationPart identifier, generated by Amazon API Gateway when the
-	// DocumentationPart is created.
+	// The DocumentationPart identifier, generated by API Gateway when the DocumentationPart
+	// is created.
 	Id *string `locationName:"id" type:"string"`
 
 	// The location of the API entity to which the documentation applies. Valid
@@ -15763,31 +17054,74 @@ func (s *UpdateDomainNameInput) SetPatchOperations(v []PatchOperation) *UpdateDo
 	return s
 }
 
-// Represents a domain name that is contained in a simpler, more intuitive URL
-// that can be called.
+// Represents a custom domain name as a user-friendly host name of an API (RestApi).
 //
-// Use Client-Side Certificate (http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// When you deploy an API, API Gateway creates a default host name for the API.
+// This default API host name is of the {restapi-id}.execute-api.{region}.amazonaws.com
+// format. With the default host name, you can access the API's root resource
+// with the URL of https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/.
+// When you set up a custom domain name of apis.example.com for this API, you
+// can then access the same resource using the URL of the https://apis.examples.com/myApi,
+// where myApi is the base path mapping (BasePathMapping) of your API under
+// the custom domain name.
+//
+// Set a Custom Host Name for an API (http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type UpdateDomainNameOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// The reference to an AWS-managed certificate. AWS Certificate Manager is the
-	// only supported source.
+	// The reference to an AWS-managed certificate that will be used by edge-optimized
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
 
-	// The name of the certificate.
+	// The name of the certificate that will be used by edge-optimized endpoint
+	// for this domain name.
 	CertificateName *string `locationName:"certificateName" type:"string"`
 
-	// The timestamp when the certificate was uploaded.
+	// The timestamp when the certificate that was used by edge-optimized endpoint
+	// for this domain name was uploaded.
 	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp" timestampFormat:"unix"`
 
-	// The domain name of the Amazon CloudFront distribution. For more information,
-	// see the Amazon CloudFront documentation (http://aws.amazon.com/documentation/cloudfront/).
+	// The domain name of the Amazon CloudFront distribution associated with this
+	// custom domain name for an edge-optimized endpoint. You set up this association
+	// when adding a DNS record pointing the custom domain name to this distribution
+	// name. For more information about CloudFront distributions, see the Amazon
+	// CloudFront documentation (http://aws.amazon.com/documentation/cloudfront/).
 	DistributionDomainName *string `locationName:"distributionDomainName" type:"string"`
+
+	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
+	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
+	// information, see Set up a Regional Custom Domain Name (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
+	// and AWS Regions and Endpoints for API Gateway (http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+	DistributionHostedZoneId *string `locationName:"distributionHostedZoneId" type:"string"`
 
 	// The name of the DomainName resource.
 	DomainName *string `locationName:"domainName" type:"string"`
+
+	// The endpoint configuration of this DomainName showing the endpoint types
+	// of the domain name.
+	EndpointConfiguration *EndpointConfiguration `locationName:"endpointConfiguration" type:"structure"`
+
+	// The reference to an AWS-managed certificate that will be used for validating
+	// the regional domain name. AWS Certificate Manager is the only supported source.
+	RegionalCertificateArn *string `locationName:"regionalCertificateArn" type:"string"`
+
+	// The name of the certificate that will be used for validating the regional
+	// domain name.
+	RegionalCertificateName *string `locationName:"regionalCertificateName" type:"string"`
+
+	// The domain name associated with the regional endpoint for this custom domain
+	// name. You set up this association by adding a DNS record that points the
+	// custom domain name to this regional domain name. The regional domain name
+	// is returned by API Gateway when you create a regional endpoint.
+	RegionalDomainName *string `locationName:"regionalDomainName" type:"string"`
+
+	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
+	// For more information, see Set up a Regional Custom Domain Name (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
+	// and AWS Regions and Endpoints for API Gateway (http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+	RegionalHostedZoneId *string `locationName:"regionalHostedZoneId" type:"string"`
 }
 
 // String returns the string representation
@@ -15829,9 +17163,45 @@ func (s *UpdateDomainNameOutput) SetDistributionDomainName(v string) *UpdateDoma
 	return s
 }
 
+// SetDistributionHostedZoneId sets the DistributionHostedZoneId field's value.
+func (s *UpdateDomainNameOutput) SetDistributionHostedZoneId(v string) *UpdateDomainNameOutput {
+	s.DistributionHostedZoneId = &v
+	return s
+}
+
 // SetDomainName sets the DomainName field's value.
 func (s *UpdateDomainNameOutput) SetDomainName(v string) *UpdateDomainNameOutput {
 	s.DomainName = &v
+	return s
+}
+
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *UpdateDomainNameOutput) SetEndpointConfiguration(v *EndpointConfiguration) *UpdateDomainNameOutput {
+	s.EndpointConfiguration = v
+	return s
+}
+
+// SetRegionalCertificateArn sets the RegionalCertificateArn field's value.
+func (s *UpdateDomainNameOutput) SetRegionalCertificateArn(v string) *UpdateDomainNameOutput {
+	s.RegionalCertificateArn = &v
+	return s
+}
+
+// SetRegionalCertificateName sets the RegionalCertificateName field's value.
+func (s *UpdateDomainNameOutput) SetRegionalCertificateName(v string) *UpdateDomainNameOutput {
+	s.RegionalCertificateName = &v
+	return s
+}
+
+// SetRegionalDomainName sets the RegionalDomainName field's value.
+func (s *UpdateDomainNameOutput) SetRegionalDomainName(v string) *UpdateDomainNameOutput {
+	s.RegionalDomainName = &v
+	return s
+}
+
+// SetRegionalHostedZoneId sets the RegionalHostedZoneId field's value.
+func (s *UpdateDomainNameOutput) SetRegionalHostedZoneId(v string) *UpdateDomainNameOutput {
+	s.RegionalHostedZoneId = &v
 	return s
 }
 
@@ -15923,12 +17293,12 @@ func (s *UpdateGatewayResponseInput) SetRestApiId(v string) *UpdateGatewayRespon
 // response parameters and mapping templates.
 //
 // For more information about valid gateway response types, see Gateway Response
-// Types Supported by Amazon API Gateway (http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)Example:
+// Types Supported by API Gateway (http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)Example:
 // Get a Gateway Response of a given response type
 //
 // Request
 //
-// This example shows how to get a gateway response of the MISSING_AUTHNETICATION_TOKEN
+// This example shows how to get a gateway response of the MISSING_AUTHENTICATION_TOKEN
 // type.
 //
 // GET /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1
@@ -15967,7 +17337,7 @@ type UpdateGatewayResponseOutput struct {
 
 	// A Boolean flag to indicate whether this GatewayResponse is the default gateway
 	// response (true) or not (false). A default gateway response is one generated
-	// by Amazon API Gateway without any customization by an API developer.
+	// by API Gateway without any customization by an API developer.
 	DefaultResponse *bool `locationName:"defaultResponse" type:"boolean"`
 
 	// Response parameters (paths, query strings and headers) of the GatewayResponse
@@ -16146,6 +17516,17 @@ type UpdateIntegrationOutput struct {
 	// Specifies the integration's cache namespace.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
+	// The (id (http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
+	// of the VpcLink used for the integration when connectionType=VPC_LINK and
+	// undefined, otherwise.
+	ConnectionId *string `locationName:"connectionId" type:"string"`
+
+	// The type of the network connection to the integration endpoint. The valid
+	// value is INTERNET for connections through the public routable internet or
+	// VPC_LINK for private connections between API Gateway and a network load balancer
+	// in a VPC. The default value is INTERNET.
+	ConnectionType ConnectionType `locationName:"connectionType" type:"string" enum:"true"`
+
 	// Specifies how to handle request payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
 	//
@@ -16161,11 +17542,10 @@ type UpdateIntegrationOutput struct {
 	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies the credentials required for the integration, if any. For AWS integrations,
-	// three options are available. To specify an IAM Role for Amazon API Gateway
-	// to assume, use the role's Amazon Resource Name (ARN). To require that the
-	// caller's identity be passed through from the request, specify the string
-	// arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS
-	// services, specify null.
+	// three options are available. To specify an IAM Role for API Gateway to assume,
+	// use the role's Amazon Resource Name (ARN). To require that the caller's identity
+	// be passed through from the request, specify the string arn:aws:iam::\*:user/\*.
+	// To use resource-based permissions on supported AWS services, specify null.
 	Credentials *string `locationName:"credentials" type:"string"`
 
 	// Specifies the integration's HTTP method type.
@@ -16199,19 +17579,18 @@ type UpdateIntegrationOutput struct {
 	// passed through the integration request to the back end without transformation.
 	// A content type is unmapped if no mapping template is defined in the integration
 	// or the content type does not match any of the mapped content types, as specified
-	// in requestTemplates. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES,
-	// and NEVER.
+	// in requestTemplates. The valid value is one of the following:
 	//
-	// WHEN_NO_MATCH passes the method request body through the integration request
+	// WHEN_NO_MATCH: passes the method request body through the integration request
 	// to the back end without transformation when the method request content type
 	// does not match any content type associated with the mapping templates defined
 	// in the integration request.
-	// WHEN_NO_TEMPLATES passes the method request body through the integration
+	// WHEN_NO_TEMPLATES: passes the method request body through the integration
 	// request to the back end without transformation when no mapping template is
 	// defined in the integration request. If a template is defined when this option
 	// is selected, the method request of an unmapped content-type will be rejected
 	// with an HTTP 415 Unsupported Media Type response.
-	// NEVER rejects the method request with an HTTP 415 Unsupported Media Type
+	// NEVER: rejects the method request with an HTTP 415 Unsupported Media Type
 	// response when either the method request content type does not match any content
 	// type associated with the mapping templates defined in the integration request
 	// or no mapping template is defined in the integration request.
@@ -16232,22 +17611,56 @@ type UpdateIntegrationOutput struct {
 	// value.
 	RequestTemplates map[string]string `locationName:"requestTemplates" type:"map"`
 
-	// Specifies the integration's type. The valid value is HTTP for integrating
-	// with an HTTP back end, AWS for any AWS service endpoints, MOCK for testing
-	// without actually invoking the back end, HTTP_PROXY for integrating with the
-	// HTTP proxy integration, or AWS_PROXY for integrating with the Lambda proxy
-	// integration type.
+	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+	// milliseconds or 29 seconds.
+	TimeoutInMillis *int64 `locationName:"timeoutInMillis" type:"integer"`
+
+	// Specifies an API method integration type. The valid value is one of the following:
+	//
+	//    * AWS: for integrating the API method request with an AWS service action,
+	//    including the Lambda function-invoking action. With the Lambda function-invoking
+	//    action, this is referred to as the Lambda custom integration. With any
+	//    other AWS service action, this is known as AWS integration.
+	//    * AWS_PROXY: for integrating the API method request with the Lambda function-invoking
+	//    action with the client request passed through as-is. This integration
+	//    is also referred to as the Lambda proxy integration.
+	//    * HTTP: for integrating the API method request with an HTTP endpoint,
+	//    including a private HTTP endpoint within a VPC. This integration is also
+	//    referred to as the HTTP custom integration.
+	//    * HTTP_PROXY: for integrating the API method request with an HTTP endpoint,
+	//    including a private HTTP endpoint within a VPC, with the client request
+	//    passed through as-is. This is also referred to as the HTTP proxy integration.
+	//
+	//    * MOCK: for integrating the API method request with API Gateway as a "loop-back"
+	//    endpoint without invoking any backend.
+	// For the HTTP and HTTP proxy integrations, each integration can specify a
+	// protocol (http/https), port and path. Standard 80 and 443 ports are supported
+	// as well as custom ports above 1024. An HTTP or HTTP proxy integration with
+	// a connectionType of VPC_LINK is referred to as a private integration and
+	// uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type IntegrationType `locationName:"type" type:"string" enum:"true"`
 
-	// Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations,
-	// the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986
-	// specification (https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
-	// For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}.
-	// Region, subdomain and service are used to determine the right endpoint. For
-	// AWS services that use the Action= query string parameter, service_api should
-	// be a valid action for the desired service. For RESTful AWS service APIs,
-	// path is used to indicate that the remaining substring in the URI should be
-	// treated as the path to the resource, including the initial /.
+	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
+	//
+	//    *  For HTTP or HTTP_PROXY integrations, the URI must be a fully formed,
+	//    encoded HTTP(S) URL according to the RFC-3986 specification (_blank),
+	//    for either standard integration, where connectionType is not VPC_LINK,
+	//    or private integration, where connectionType is VPC_LINK. For a private
+	//    HTTP integration, the URI is not used for routing.
+	//
+	//    *  For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
+	//    Here, {Region} is the API Gateway region (e.g., us-east-1); {service}
+	//    is the name of the integrated AWS service (e.g., s3); and {subdomain}
+	//    is a designated subdomain supported by certain AWS service for fast host-name
+	//    lookup. action can be used for an AWS service action-based API, using
+	//    an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api}
+	//    refers to a supported action {name} plus any required input parameters.
+	//    Alternatively, path can be used for an AWS service path-based API. The
+	//    ensuing service_api refers to the path to an AWS service resource, including
+	//    the region of the integrated AWS service, if applicable. For example,
+	//    for integration with the S3 API of GetObject (http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html),
+	//    the uri can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}
+	//    or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string `locationName:"uri" type:"string"`
 }
 
@@ -16275,6 +17688,18 @@ func (s *UpdateIntegrationOutput) SetCacheKeyParameters(v []string) *UpdateInteg
 // SetCacheNamespace sets the CacheNamespace field's value.
 func (s *UpdateIntegrationOutput) SetCacheNamespace(v string) *UpdateIntegrationOutput {
 	s.CacheNamespace = &v
+	return s
+}
+
+// SetConnectionId sets the ConnectionId field's value.
+func (s *UpdateIntegrationOutput) SetConnectionId(v string) *UpdateIntegrationOutput {
+	s.ConnectionId = &v
+	return s
+}
+
+// SetConnectionType sets the ConnectionType field's value.
+func (s *UpdateIntegrationOutput) SetConnectionType(v ConnectionType) *UpdateIntegrationOutput {
+	s.ConnectionType = v
 	return s
 }
 
@@ -16317,6 +17742,12 @@ func (s *UpdateIntegrationOutput) SetRequestParameters(v map[string]string) *Upd
 // SetRequestTemplates sets the RequestTemplates field's value.
 func (s *UpdateIntegrationOutput) SetRequestTemplates(v map[string]string) *UpdateIntegrationOutput {
 	s.RequestTemplates = v
+	return s
+}
+
+// SetTimeoutInMillis sets the TimeoutInMillis field's value.
+func (s *UpdateIntegrationOutput) SetTimeoutInMillis(v int64) *UpdateIntegrationOutput {
+	s.TimeoutInMillis = &v
 	return s
 }
 
@@ -16687,6 +18118,16 @@ type UpdateMethodOutput struct {
 	// method.
 	ApiKeyRequired *bool `locationName:"apiKeyRequired" type:"boolean"`
 
+	// A list of authorization scopes configured on the method. The scopes are used
+	// with a COGNITO_USER_POOL authorizer to authorize the method invocation. The
+	// authorization works by matching the method scopes against the scopes parsed
+	// from the access token in the incoming request. The method invocation is authorized
+	// if any method scopes matches a claimed scope in the access token. Otherwise,
+	// the invocation is not authorized. When the method scope is configured, the
+	// client must provide an access token instead of an identity token for authorization
+	// purposes.
+	AuthorizationScopes []string `locationName:"authorizationScopes" type:"list"`
+
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or COGNITO_USER_POOLS
 	// for using a Cognito user pool.
@@ -16782,8 +18223,8 @@ type UpdateMethodOutput struct {
 	RequestModels map[string]string `locationName:"requestModels" type:"map"`
 
 	// A key-value map defining required or optional method request parameters that
-	// can be accepted by Amazon API Gateway. A key is a method request parameter
-	// name matching the pattern of method.request.{location}.{name}, where location
+	// can be accepted by API Gateway. A key is a method request parameter name
+	// matching the pattern of method.request.{location}.{name}, where location
 	// is querystring, path, or header and name is a valid and unique parameter
 	// name. The value associated with the key is a Boolean flag indicating whether
 	// the parameter is required (true) or optional (false). The method request
@@ -16813,6 +18254,12 @@ func (s UpdateMethodOutput) SDKResponseMetadata() aws.Response {
 // SetApiKeyRequired sets the ApiKeyRequired field's value.
 func (s *UpdateMethodOutput) SetApiKeyRequired(v bool) *UpdateMethodOutput {
 	s.ApiKeyRequired = &v
+	return s
+}
+
+// SetAuthorizationScopes sets the AuthorizationScopes field's value.
+func (s *UpdateMethodOutput) SetAuthorizationScopes(v []string) *UpdateMethodOutput {
+	s.AuthorizationScopes = v
 	return s
 }
 
@@ -17001,10 +18448,10 @@ type UpdateMethodResponseOutput struct {
 	ResponseModels map[string]string `locationName:"responseModels" type:"map"`
 
 	// A key-value map specifying required or optional response parameters that
-	// Amazon API Gateway can send back to the caller. A key defines a method response
+	// API Gateway can send back to the caller. A key defines a method response
 	// header and the value specifies whether the associated method response header
 	// is required or not. The expression of the key must match the pattern method.response.header.{name},
-	// where name is a valid and unique header name. Amazon API Gateway passes certain
+	// where name is a valid and unique header name. API Gateway passes certain
 	// integration response data to the method response headers specified here according
 	// to the mapping you prescribe in the API's IntegrationResponse. The integration
 	// response data that can be mapped include an integration response header expressed
@@ -17579,6 +19026,13 @@ type UpdateRestApiOutput struct {
 
 	responseMetadata aws.Response
 
+	// The source of the API key for metring requests according to a usage plan.
+	// Valid values are HEADER to read the API key from the X-API-Key header of
+	// a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
+	ApiKeySource ApiKeySourceType `locationName:"apiKeySource" type:"string" enum:"true"`
+
 	// The list of binary media types supported by the RestApi. By default, the
 	// RestApi supports only UTF-8-encoded text payloads.
 	BinaryMediaTypes []string `locationName:"binaryMediaTypes" type:"list"`
@@ -17589,9 +19043,20 @@ type UpdateRestApiOutput struct {
 	// The API's description.
 	Description *string `locationName:"description" type:"string"`
 
+	// The endpoint configuration of this RestApi showing the endpoint types of
+	// the API.
+	EndpointConfiguration *EndpointConfiguration `locationName:"endpointConfiguration" type:"structure"`
+
 	// The API's identifier. This identifier is unique across all of your APIs in
-	// Amazon API Gateway.
+	// API Gateway.
 	Id *string `locationName:"id" type:"string"`
+
+	// A nullable integer used to enable (non-negative between 0 and 10485760 (10M)
+	// bytes, inclusive) or disable (null) compression on an API. When compression
+	// is enabled, compression or decompression are not applied on the payload if
+	// the payload size is smaller than this value. Setting it to zero allows compression
+	// for any payload size.
+	MinimumCompressionSize *int64 `locationName:"minimumCompressionSize" type:"integer"`
 
 	// The API's name.
 	Name *string `locationName:"name" type:"string"`
@@ -17619,6 +19084,12 @@ func (s UpdateRestApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// SetApiKeySource sets the ApiKeySource field's value.
+func (s *UpdateRestApiOutput) SetApiKeySource(v ApiKeySourceType) *UpdateRestApiOutput {
+	s.ApiKeySource = v
+	return s
+}
+
 // SetBinaryMediaTypes sets the BinaryMediaTypes field's value.
 func (s *UpdateRestApiOutput) SetBinaryMediaTypes(v []string) *UpdateRestApiOutput {
 	s.BinaryMediaTypes = v
@@ -17637,9 +19108,21 @@ func (s *UpdateRestApiOutput) SetDescription(v string) *UpdateRestApiOutput {
 	return s
 }
 
+// SetEndpointConfiguration sets the EndpointConfiguration field's value.
+func (s *UpdateRestApiOutput) SetEndpointConfiguration(v *EndpointConfiguration) *UpdateRestApiOutput {
+	s.EndpointConfiguration = v
+	return s
+}
+
 // SetId sets the Id field's value.
 func (s *UpdateRestApiOutput) SetId(v string) *UpdateRestApiOutput {
 	s.Id = &v
+	return s
+}
+
+// SetMinimumCompressionSize sets the MinimumCompressionSize field's value.
+func (s *UpdateRestApiOutput) SetMinimumCompressionSize(v int64) *UpdateRestApiOutput {
+	s.MinimumCompressionSize = &v
 	return s
 }
 
@@ -17661,7 +19144,7 @@ func (s *UpdateRestApiOutput) SetWarnings(v []string) *UpdateRestApiOutput {
 	return s
 }
 
-// Requests Amazon API Gateway to change information about a Stage resource.
+// Requests API Gateway to change information about a Stage resource.
 type UpdateStageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -17735,6 +19218,9 @@ type UpdateStageOutput struct {
 
 	responseMetadata aws.Response
 
+	// Settings for logging access in this stage.
+	AccessLogSettings *AccessLogSettings `locationName:"accessLogSettings" type:"structure"`
+
 	// Specifies whether a cache cluster is enabled for the stage.
 	CacheClusterEnabled *bool `locationName:"cacheClusterEnabled" type:"boolean"`
 
@@ -17743,6 +19229,9 @@ type UpdateStageOutput struct {
 
 	// The status of the cache cluster for the stage, if enabled.
 	CacheClusterStatus CacheClusterStatus `locationName:"cacheClusterStatus" type:"string" enum:"true"`
+
+	// Settings for the canary deployment in this stage.
+	CanarySettings *CanarySettings `locationName:"canarySettings" type:"structure"`
 
 	// The identifier of a client certificate for an API stage.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
@@ -17769,8 +19258,11 @@ type UpdateStageOutput struct {
 	MethodSettings map[string]MethodSetting `locationName:"methodSettings" type:"map"`
 
 	// The name of the stage is the first path segment in the Uniform Resource Identifier
-	// (URI) of a call to Amazon API Gateway.
+	// (URI) of a call to API Gateway.
 	StageName *string `locationName:"stageName" type:"string"`
+
+	// A collection of Tags associated with a given resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// A map that defines the stage variables for a Stage resource. Variable names
 	// can have alphanumeric and underscore characters, and the values must match
@@ -17793,6 +19285,12 @@ func (s UpdateStageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// SetAccessLogSettings sets the AccessLogSettings field's value.
+func (s *UpdateStageOutput) SetAccessLogSettings(v *AccessLogSettings) *UpdateStageOutput {
+	s.AccessLogSettings = v
+	return s
+}
+
 // SetCacheClusterEnabled sets the CacheClusterEnabled field's value.
 func (s *UpdateStageOutput) SetCacheClusterEnabled(v bool) *UpdateStageOutput {
 	s.CacheClusterEnabled = &v
@@ -17808,6 +19306,12 @@ func (s *UpdateStageOutput) SetCacheClusterSize(v CacheClusterSize) *UpdateStage
 // SetCacheClusterStatus sets the CacheClusterStatus field's value.
 func (s *UpdateStageOutput) SetCacheClusterStatus(v CacheClusterStatus) *UpdateStageOutput {
 	s.CacheClusterStatus = v
+	return s
+}
+
+// SetCanarySettings sets the CanarySettings field's value.
+func (s *UpdateStageOutput) SetCanarySettings(v *CanarySettings) *UpdateStageOutput {
+	s.CanarySettings = v
 	return s
 }
 
@@ -17856,6 +19360,12 @@ func (s *UpdateStageOutput) SetMethodSettings(v map[string]MethodSetting) *Updat
 // SetStageName sets the StageName field's value.
 func (s *UpdateStageOutput) SetStageName(v string) *UpdateStageOutput {
 	s.StageName = &v
+	return s
+}
+
+// SetTags sets the Tags field's value.
+func (s *UpdateStageOutput) SetTags(v map[string]string) *UpdateStageOutput {
+	s.Tags = v
 	return s
 }
 
@@ -18147,6 +19657,154 @@ func (s *UpdateUsagePlanOutput) SetThrottle(v *ThrottleSettings) *UpdateUsagePla
 	return s
 }
 
+// Updates an existing VpcLink of a specified identifier.
+type UpdateVpcLinkInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of update operations to be applied to the specified resource and in
+	// the order specified in this list.
+	PatchOperations []PatchOperation `locationName:"patchOperations" type:"list"`
+
+	// [Required] The identifier of the VpcLink. It is used in an Integration to
+	// reference this VpcLink.
+	//
+	// VpcLinkId is a required field
+	VpcLinkId *string `location:"uri" locationName:"vpclink_id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVpcLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVpcLinkInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateVpcLinkInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVpcLinkInput"}
+
+	if s.VpcLinkId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VpcLinkId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetPatchOperations sets the PatchOperations field's value.
+func (s *UpdateVpcLinkInput) SetPatchOperations(v []PatchOperation) *UpdateVpcLinkInput {
+	s.PatchOperations = v
+	return s
+}
+
+// SetVpcLinkId sets the VpcLinkId field's value.
+func (s *UpdateVpcLinkInput) SetVpcLinkId(v string) *UpdateVpcLinkInput {
+	s.VpcLinkId = &v
+	return s
+}
+
+// A API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
+// Private Cloud (VPC).
+//
+// To enable access to a resource in an Amazon Virtual Private Cloud through
+// Amazon API Gateway, you, as an API developer, create a VpcLink resource targeted
+// for one or more network load balancers of the VPC and then integrate an API
+// method with a private integration that uses the VpcLink. The private integration
+// has an integration type of HTTP or HTTP_PROXY and has a connection type of
+// VPC_LINK. The integration uses the connectionId property to identify the
+// VpcLink used.
+type UpdateVpcLinkOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The description of the VPC link.
+	Description *string `locationName:"description" type:"string"`
+
+	// The identifier of the VpcLink. It is used in an Integration to reference
+	// this VpcLink.
+	Id *string `locationName:"id" type:"string"`
+
+	// The name used to label and identify the VPC link.
+	Name *string `locationName:"name" type:"string"`
+
+	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
+	// or FAILED. Deploying an API will wait if the status is PENDING and will fail
+	// if the status is DELETING.
+	Status VpcLinkStatus `locationName:"status" type:"string" enum:"true"`
+
+	// A description about the VPC link status.
+	StatusMessage *string `locationName:"statusMessage" type:"string"`
+
+	// The ARNs of network load balancers of the VPC targeted by the VPC link. The
+	// network load balancers must be owned by the same AWS account of the API owner.
+	TargetArns []string `locationName:"targetArns" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateVpcLinkOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVpcLinkOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVpcLinkOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetDescription sets the Description field's value.
+func (s *UpdateVpcLinkOutput) SetDescription(v string) *UpdateVpcLinkOutput {
+	s.Description = &v
+	return s
+}
+
+// SetId sets the Id field's value.
+func (s *UpdateVpcLinkOutput) SetId(v string) *UpdateVpcLinkOutput {
+	s.Id = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *UpdateVpcLinkOutput) SetName(v string) *UpdateVpcLinkOutput {
+	s.Name = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *UpdateVpcLinkOutput) SetStatus(v VpcLinkStatus) *UpdateVpcLinkOutput {
+	s.Status = v
+	return s
+}
+
+// SetStatusMessage sets the StatusMessage field's value.
+func (s *UpdateVpcLinkOutput) SetStatusMessage(v string) *UpdateVpcLinkOutput {
+	s.StatusMessage = &v
+	return s
+}
+
+// SetTargetArns sets the TargetArns field's value.
+func (s *UpdateVpcLinkOutput) SetTargetArns(v []string) *UpdateVpcLinkOutput {
+	s.TargetArns = v
+	return s
+}
+
+type ApiKeySourceType string
+
+// Enum values for ApiKeySourceType
+const (
+	ApiKeySourceTypeHeader     ApiKeySourceType = "HEADER"
+	ApiKeySourceTypeAuthorizer ApiKeySourceType = "AUTHORIZER"
+)
+
 type ApiKeysFormat string
 
 // Enum values for ApiKeysFormat
@@ -18194,6 +19852,14 @@ const (
 	CacheClusterStatusFlushInProgress  CacheClusterStatus = "FLUSH_IN_PROGRESS"
 )
 
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeInternet ConnectionType = "INTERNET"
+	ConnectionTypeVpcLink  ConnectionType = "VPC_LINK"
+)
+
 type ContentHandlingStrategy string
 
 // Enum values for ContentHandlingStrategy
@@ -18218,6 +19884,17 @@ const (
 	DocumentationPartTypeResponse       DocumentationPartType = "RESPONSE"
 	DocumentationPartTypeResponseHeader DocumentationPartType = "RESPONSE_HEADER"
 	DocumentationPartTypeResponseBody   DocumentationPartType = "RESPONSE_BODY"
+)
+
+// The endpoint type. The valid value is EDGE for edge-optimized API setup,
+// most suitable for mobile applications, REGIONAL for regional API endpoint
+// setup, most suitable for calling from AWS Region
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypeRegional EndpointType = "REGIONAL"
+	EndpointTypeEdge     EndpointType = "EDGE"
 )
 
 type GatewayResponseType string
@@ -18246,10 +19923,10 @@ const (
 	GatewayResponseTypeQuotaExceeded                GatewayResponseType = "QUOTA_EXCEEDED"
 )
 
-// The integration type. The valid value is HTTP for integrating with an HTTP
-// back end, AWS for any AWS service endpoints, MOCK for testing without actually
-// invoking the back end, HTTP_PROXY for integrating with the HTTP proxy integration,
-// or AWS_PROXY for integrating with the Lambda proxy integration type.
+// The integration type. The valid value is HTTP for integrating an API method
+// with an HTTP backend; AWS with any AWS service endpoints; MOCK for testing
+// without actually invoking the backend; HTTP_PROXY for integrating with the
+// HTTP proxy integration; AWS_PROXY for integrating with the Lambda proxy integration.
 type IntegrationType string
 
 // Enum values for IntegrationType
@@ -18259,6 +19936,14 @@ const (
 	IntegrationTypeMock      IntegrationType = "MOCK"
 	IntegrationTypeHttpProxy IntegrationType = "HTTP_PROXY"
 	IntegrationTypeAwsProxy  IntegrationType = "AWS_PROXY"
+)
+
+type LocationStatusType string
+
+// Enum values for LocationStatusType
+const (
+	LocationStatusTypeDocumented   LocationStatusType = "DOCUMENTED"
+	LocationStatusTypeUndocumented LocationStatusType = "UNDOCUMENTED"
 )
 
 type Op string
@@ -18297,4 +19982,14 @@ const (
 	UnauthorizedCacheControlHeaderStrategyFailWith403                  UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"
 	UnauthorizedCacheControlHeaderStrategySucceedWithResponseHeader    UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITH_RESPONSE_HEADER"
 	UnauthorizedCacheControlHeaderStrategySucceedWithoutResponseHeader UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITHOUT_RESPONSE_HEADER"
+)
+
+type VpcLinkStatus string
+
+// Enum values for VpcLinkStatus
+const (
+	VpcLinkStatusAvailable VpcLinkStatus = "AVAILABLE"
+	VpcLinkStatusPending   VpcLinkStatus = "PENDING"
+	VpcLinkStatusDeleting  VpcLinkStatus = "DELETING"
+	VpcLinkStatusFailed    VpcLinkStatus = "FAILED"
 )

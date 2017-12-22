@@ -2617,7 +2617,7 @@ func ExampleS3_UploadPartCopyRequest_shared01() {
 	svc := s3.New(cfg)
 	input := &s3.UploadPartCopyInput{
 		Bucket:     aws.String("examplebucket"),
-		CopySource: aws.String("bucketname/sourceobjectkey"),
+		CopySource: aws.String("/bucketname/sourceobjectkey"),
 		Key:        aws.String("examplelargeobject"),
 		PartNumber: aws.Int64(1),
 		UploadId:   aws.String("exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--"),

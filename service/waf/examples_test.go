@@ -1570,6 +1570,8 @@ func ExampleWAF_UpdateWebACLRequest_shared00() {
 				fmt.Println(waf.ErrCodeReferencedItemException, aerr.Error())
 			case waf.ErrCodeLimitsExceededException:
 				fmt.Println(waf.ErrCodeLimitsExceededException, aerr.Error())
+			case waf.ErrCodeSubscriptionNotFoundException:
+				fmt.Println(waf.ErrCodeSubscriptionNotFoundException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

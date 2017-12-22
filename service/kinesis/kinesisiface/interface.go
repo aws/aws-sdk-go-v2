@@ -78,6 +78,8 @@ type KinesisAPI interface {
 	DescribeStreamPages(*kinesis.DescribeStreamInput, func(*kinesis.DescribeStreamOutput, bool) bool) error
 	DescribeStreamPagesWithContext(aws.Context, *kinesis.DescribeStreamInput, func(*kinesis.DescribeStreamOutput, bool) bool, ...aws.Option) error
 
+	DescribeStreamSummaryRequest(*kinesis.DescribeStreamSummaryInput) kinesis.DescribeStreamSummaryRequest
+
 	DisableEnhancedMonitoringRequest(*kinesis.DisableEnhancedMonitoringInput) kinesis.DisableEnhancedMonitoringRequest
 
 	EnableEnhancedMonitoringRequest(*kinesis.EnableEnhancedMonitoringInput) kinesis.EnableEnhancedMonitoringRequest

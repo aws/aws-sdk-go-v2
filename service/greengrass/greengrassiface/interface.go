@@ -90,6 +90,12 @@ type GreengrassAPI interface {
 
 	CreateLoggerDefinitionVersionRequest(*greengrass.CreateLoggerDefinitionVersionInput) greengrass.CreateLoggerDefinitionVersionRequest
 
+	CreateResourceDefinitionRequest(*greengrass.CreateResourceDefinitionInput) greengrass.CreateResourceDefinitionRequest
+
+	CreateResourceDefinitionVersionRequest(*greengrass.CreateResourceDefinitionVersionInput) greengrass.CreateResourceDefinitionVersionRequest
+
+	CreateSoftwareUpdateJobRequest(*greengrass.CreateSoftwareUpdateJobInput) greengrass.CreateSoftwareUpdateJobRequest
+
 	CreateSubscriptionDefinitionRequest(*greengrass.CreateSubscriptionDefinitionInput) greengrass.CreateSubscriptionDefinitionRequest
 
 	CreateSubscriptionDefinitionVersionRequest(*greengrass.CreateSubscriptionDefinitionVersionInput) greengrass.CreateSubscriptionDefinitionVersionRequest
@@ -103,6 +109,8 @@ type GreengrassAPI interface {
 	DeleteGroupRequest(*greengrass.DeleteGroupInput) greengrass.DeleteGroupRequest
 
 	DeleteLoggerDefinitionRequest(*greengrass.DeleteLoggerDefinitionInput) greengrass.DeleteLoggerDefinitionRequest
+
+	DeleteResourceDefinitionRequest(*greengrass.DeleteResourceDefinitionInput) greengrass.DeleteResourceDefinitionRequest
 
 	DeleteSubscriptionDefinitionRequest(*greengrass.DeleteSubscriptionDefinitionInput) greengrass.DeleteSubscriptionDefinitionRequest
 
@@ -140,6 +148,10 @@ type GreengrassAPI interface {
 
 	GetLoggerDefinitionVersionRequest(*greengrass.GetLoggerDefinitionVersionInput) greengrass.GetLoggerDefinitionVersionRequest
 
+	GetResourceDefinitionRequest(*greengrass.GetResourceDefinitionInput) greengrass.GetResourceDefinitionRequest
+
+	GetResourceDefinitionVersionRequest(*greengrass.GetResourceDefinitionVersionInput) greengrass.GetResourceDefinitionVersionRequest
+
 	GetServiceRoleForAccountRequest(*greengrass.GetServiceRoleForAccountInput) greengrass.GetServiceRoleForAccountRequest
 
 	GetSubscriptionDefinitionRequest(*greengrass.GetSubscriptionDefinitionInput) greengrass.GetSubscriptionDefinitionRequest
@@ -170,6 +182,10 @@ type GreengrassAPI interface {
 
 	ListLoggerDefinitionsRequest(*greengrass.ListLoggerDefinitionsInput) greengrass.ListLoggerDefinitionsRequest
 
+	ListResourceDefinitionVersionsRequest(*greengrass.ListResourceDefinitionVersionsInput) greengrass.ListResourceDefinitionVersionsRequest
+
+	ListResourceDefinitionsRequest(*greengrass.ListResourceDefinitionsInput) greengrass.ListResourceDefinitionsRequest
+
 	ListSubscriptionDefinitionVersionsRequest(*greengrass.ListSubscriptionDefinitionVersionsInput) greengrass.ListSubscriptionDefinitionVersionsRequest
 
 	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) greengrass.ListSubscriptionDefinitionsRequest
@@ -189,6 +205,8 @@ type GreengrassAPI interface {
 	UpdateGroupCertificateConfigurationRequest(*greengrass.UpdateGroupCertificateConfigurationInput) greengrass.UpdateGroupCertificateConfigurationRequest
 
 	UpdateLoggerDefinitionRequest(*greengrass.UpdateLoggerDefinitionInput) greengrass.UpdateLoggerDefinitionRequest
+
+	UpdateResourceDefinitionRequest(*greengrass.UpdateResourceDefinitionInput) greengrass.UpdateResourceDefinitionRequest
 
 	UpdateSubscriptionDefinitionRequest(*greengrass.UpdateSubscriptionDefinitionInput) greengrass.UpdateSubscriptionDefinitionRequest
 }

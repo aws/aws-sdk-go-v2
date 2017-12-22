@@ -32,7 +32,7 @@ func (r CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
 //
 // Enables AWS Shield Advanced for a specific AWS resource. The resource can
 // be an Amazon CloudFront distribution, Elastic Load Balancing load balancer,
-// or an Amazon Route 53 hosted zone.
+// Elastic IP Address, or an Amazon Route 53 hosted zone.
 //
 //    // Example sending a request using the CreateProtectionRequest method.
 //    req := client.CreateProtectionRequest(params)
@@ -179,7 +179,9 @@ func (r DeleteSubscriptionRequest) Send() (*DeleteSubscriptionOutput, error) {
 // DeleteSubscriptionRequest returns a request value for making API operation for
 // AWS Shield.
 //
-// Removes AWS Shield Advanced from an account.
+// Removes AWS Shield Advanced from an account. AWS Shield Advanced requires
+// a 1-year subscription commitment. You cannot delete a subscription prior
+// to the completion of that commitment.
 //
 //    // Example sending a request using the DeleteSubscriptionRequest method.
 //    req := client.DeleteSubscriptionRequest(params)
@@ -354,6 +356,55 @@ func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) D
 	return DescribeSubscriptionRequest{Request: req, Input: input}
 }
 
+const opGetSubscriptionState = "GetSubscriptionState"
+
+// GetSubscriptionStateRequest is a API request type for the GetSubscriptionState API operation.
+type GetSubscriptionStateRequest struct {
+	*aws.Request
+	Input *GetSubscriptionStateInput
+}
+
+// Send marshals and sends the GetSubscriptionState API request.
+func (r GetSubscriptionStateRequest) Send() (*GetSubscriptionStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSubscriptionStateOutput), nil
+}
+
+// GetSubscriptionStateRequest returns a request value for making API operation for
+// AWS Shield.
+//
+// Returns the SubscriptionState, either Active or Inactive.
+//
+//    // Example sending a request using the GetSubscriptionStateRequest method.
+//    req := client.GetSubscriptionStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionState
+func (c *Shield) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) GetSubscriptionStateRequest {
+	op := &aws.Operation{
+		Name:       opGetSubscriptionState,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetSubscriptionStateInput{}
+	}
+
+	output := &GetSubscriptionStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSubscriptionStateRequest{Request: req, Input: input}
+}
+
 const opListAttacks = "ListAttacks"
 
 // ListAttacksRequest is a API request type for the ListAttacks API operation.
@@ -464,7 +515,11 @@ type AttackDetail struct {
 	// The unique identifier (ID) of the attack.
 	AttackId *string `min:"1" type:"string"`
 
-	// The time the attack ended, in the format 2016-12-16T13:50Z.
+	// The array of AttackProperty objects.
+	AttackProperties []AttackProperty `type:"list"`
+
+	// The time the attack ended, in Unix time in seconds. For more information
+	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// List of mitigation actions taken for the attack.
@@ -473,7 +528,8 @@ type AttackDetail struct {
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string `min:"1" type:"string"`
 
-	// The time the attack started, in the format 2016-12-16T13:50Z.
+	// The time the attack started, in Unix time in seconds. For more information
+	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// If applicable, additional detail about the resource being attacked, for example,
@@ -500,6 +556,12 @@ func (s *AttackDetail) SetAttackCounters(v []SummarizedCounter) *AttackDetail {
 // SetAttackId sets the AttackId field's value.
 func (s *AttackDetail) SetAttackId(v string) *AttackDetail {
 	s.AttackId = &v
+	return s
+}
+
+// SetAttackProperties sets the AttackProperties field's value.
+func (s *AttackDetail) SetAttackProperties(v []AttackProperty) *AttackDetail {
+	s.AttackProperties = v
 	return s
 }
 
@@ -533,6 +595,70 @@ func (s *AttackDetail) SetSubResources(v []SubResourceSummary) *AttackDetail {
 	return s
 }
 
+// Details of the described attack.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackProperty
+type AttackProperty struct {
+	_ struct{} `type:"structure"`
+
+	// The type of DDoS event that was observed. NETWORK indicates layer 3 and layer
+	// 4 events and APPLICATION indicates layer 7 events.
+	AttackLayer AttackLayer `type:"string" enum:"true"`
+
+	// Defines the DDoS attack property information that is provided.
+	AttackPropertyIdentifier AttackPropertyIdentifier `type:"string" enum:"true"`
+
+	// The array of Contributor objects that includes the top five contributors
+	// to an attack.
+	TopContributors []Contributor `type:"list"`
+
+	// The total contributions made to this attack by all contributors, not just
+	// the five listed in the TopContributors list.
+	Total *int64 `type:"long"`
+
+	// The unit of the Value of the contributions.
+	Unit Unit `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AttackProperty) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttackProperty) GoString() string {
+	return s.String()
+}
+
+// SetAttackLayer sets the AttackLayer field's value.
+func (s *AttackProperty) SetAttackLayer(v AttackLayer) *AttackProperty {
+	s.AttackLayer = v
+	return s
+}
+
+// SetAttackPropertyIdentifier sets the AttackPropertyIdentifier field's value.
+func (s *AttackProperty) SetAttackPropertyIdentifier(v AttackPropertyIdentifier) *AttackProperty {
+	s.AttackPropertyIdentifier = v
+	return s
+}
+
+// SetTopContributors sets the TopContributors field's value.
+func (s *AttackProperty) SetTopContributors(v []Contributor) *AttackProperty {
+	s.TopContributors = v
+	return s
+}
+
+// SetTotal sets the Total field's value.
+func (s *AttackProperty) SetTotal(v int64) *AttackProperty {
+	s.Total = &v
+	return s
+}
+
+// SetUnit sets the Unit field's value.
+func (s *AttackProperty) SetUnit(v Unit) *AttackProperty {
+	s.Unit = v
+	return s
+}
+
 // Summarizes all DDoS attacks for a specified time period.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackSummary
 type AttackSummary struct {
@@ -544,13 +670,15 @@ type AttackSummary struct {
 	// The list of attacks for a specified time period.
 	AttackVectors []AttackVectorDescription `type:"list"`
 
-	// The end time of the attack, in the format 2016-12-16T13:50Z.
+	// The end time of the attack, in Unix time in seconds. For more information
+	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The ARN (Amazon Resource Name) of the resource that was attacked.
 	ResourceArn *string `type:"string"`
 
-	// The start time of the attack, in the format 2016-12-16T13:50Z.
+	// The start time of the attack, in Unix time in seconds. For more information
+	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -599,7 +727,37 @@ func (s *AttackSummary) SetStartTime(v time.Time) *AttackSummary {
 type AttackVectorDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The attack type, for example, SNMP reflection or SYN flood.
+	// The attack type. Valid values:
+	//
+	//    * UDP_TRAFFIC
+	//
+	//    * UDP_FRAGMENT
+	//
+	//    * GENERIC_UDP_REFLECTION
+	//
+	//    * DNS_REFLECTION
+	//
+	//    * NTP_REFLECTION
+	//
+	//    * CHARGEN_REFLECTION
+	//
+	//    * SSDP_REFLECTION
+	//
+	//    * PORT_MAPPER
+	//
+	//    * RIP_REFLECTION
+	//
+	//    * SNMP_REFLECTION
+	//
+	//    * MSSQL_REFLECTION
+	//
+	//    * NET_BIOS_REFLECTION
+	//
+	//    * SYN_FLOOD
+	//
+	//    * ACK_FLOOD
+	//
+	//    * REQUEST_FLOOD
 	//
 	// VectorType is a required field
 	VectorType *string `type:"string" required:"true"`
@@ -621,6 +779,43 @@ func (s *AttackVectorDescription) SetVectorType(v string) *AttackVectorDescripti
 	return s
 }
 
+// A contributor to the attack and their contribution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Contributor
+type Contributor struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the contributor. This is dependent on the AttackPropertyIdentifier.
+	// For example, if the AttackPropertyIdentifier is SOURCE_COUNTRY, the Name
+	// could be United States.
+	Name *string `type:"string"`
+
+	// The contribution of this contributor expressed in Protection units. For example
+	// 10,000.
+	Value *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s Contributor) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Contributor) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *Contributor) SetName(v string) *Contributor {
+	s.Name = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *Contributor) SetValue(v int64) *Contributor {
+	s.Value = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionRequest
 type CreateProtectionInput struct {
 	_ struct{} `type:"structure"`
@@ -631,6 +826,18 @@ type CreateProtectionInput struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The ARN (Amazon Resource Name) of the resource to be protected.
+	//
+	// The ARN should be in one of the following formats:
+	//
+	//    * For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+	//
+	//    * For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
+	//
+	//    * For AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
+	//
+	//    * For Amazon Route 53: arn:aws:route53::account-id:hostedzone/hosted-zone-id
+	//
+	//    * For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`
@@ -1046,11 +1253,62 @@ func (s *DescribeSubscriptionOutput) SetSubscription(v *Subscription) *DescribeS
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest
+type GetSubscriptionStateInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetSubscriptionStateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSubscriptionStateInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateResponse
+type GetSubscriptionStateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The status of the subscription.
+	//
+	// SubscriptionState is a required field
+	SubscriptionState SubscriptionState `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetSubscriptionStateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSubscriptionStateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSubscriptionStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetSubscriptionState sets the SubscriptionState field's value.
+func (s *GetSubscriptionStateOutput) SetSubscriptionState(v SubscriptionState) *GetSubscriptionStateOutput {
+	s.SubscriptionState = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksRequest
 type ListAttacksInput struct {
 	_ struct{} `type:"structure"`
 
-	// The end of the time period for the attacks.
+	// The end of the time period for the attacks. This is a timestamp type. The
+	// sample request above indicates a number type because the default used by
+	// WAF is Unix time in seconds. However any valid timestamp format (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types)
+	// is allowed.
 	EndTime *TimeRange `type:"structure"`
 
 	// The maximum number of AttackSummary objects to be returned. If this is left
@@ -1065,7 +1323,10 @@ type ListAttacksInput struct {
 	// is left blank, all applicable resources for this account will be included.
 	ResourceArns []string `type:"list"`
 
-	// The time period for the attacks.
+	// The start of the time period for the attacks. This is a timestamp type. The
+	// sample request above indicates a number type because the default used by
+	// WAF is Unix time in seconds. However any valid timestamp format (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types)
+	// is allowed.
 	StartTime *TimeRange `type:"structure"`
 }
 
@@ -1382,7 +1643,8 @@ func (s *SubResourceSummary) SetType(v SubResourceType) *SubResourceSummary {
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
-	// The start time of the subscription, in the format "2016-12-16T13:50Z".
+	// The start time of the subscription, in Unix time in seconds. For more information
+	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
@@ -1522,10 +1784,12 @@ func (s *SummarizedCounter) SetUnit(v string) *SummarizedCounter {
 type TimeRange struct {
 	_ struct{} `type:"structure"`
 
-	// The start time, in the format 2016-12-16T13:50Z.
+	// The start time, in Unix time in seconds. For more information see timestamp
+	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	FromInclusive *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The end time, in the format 2016-12-16T15:50Z.
+	// The end time, in Unix time in seconds. For more information see timestamp
+	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	ToExclusive *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -1551,10 +1815,48 @@ func (s *TimeRange) SetToExclusive(v time.Time) *TimeRange {
 	return s
 }
 
+type AttackLayer string
+
+// Enum values for AttackLayer
+const (
+	AttackLayerNetwork     AttackLayer = "NETWORK"
+	AttackLayerApplication AttackLayer = "APPLICATION"
+)
+
+type AttackPropertyIdentifier string
+
+// Enum values for AttackPropertyIdentifier
+const (
+	AttackPropertyIdentifierDestinationUrl  AttackPropertyIdentifier = "DESTINATION_URL"
+	AttackPropertyIdentifierReferrer        AttackPropertyIdentifier = "REFERRER"
+	AttackPropertyIdentifierSourceAsn       AttackPropertyIdentifier = "SOURCE_ASN"
+	AttackPropertyIdentifierSourceCountry   AttackPropertyIdentifier = "SOURCE_COUNTRY"
+	AttackPropertyIdentifierSourceIpAddress AttackPropertyIdentifier = "SOURCE_IP_ADDRESS"
+	AttackPropertyIdentifierSourceUserAgent AttackPropertyIdentifier = "SOURCE_USER_AGENT"
+)
+
 type SubResourceType string
 
 // Enum values for SubResourceType
 const (
 	SubResourceTypeIp  SubResourceType = "IP"
 	SubResourceTypeUrl SubResourceType = "URL"
+)
+
+type SubscriptionState string
+
+// Enum values for SubscriptionState
+const (
+	SubscriptionStateActive   SubscriptionState = "ACTIVE"
+	SubscriptionStateInactive SubscriptionState = "INACTIVE"
+)
+
+type Unit string
+
+// Enum values for Unit
+const (
+	UnitBits     Unit = "BITS"
+	UnitBytes    Unit = "BYTES"
+	UnitPackets  Unit = "PACKETS"
+	UnitRequests Unit = "REQUESTS"
 )

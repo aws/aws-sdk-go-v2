@@ -64,9 +64,21 @@ import (
 type LightsailAPI interface {
 	AllocateStaticIpRequest(*lightsail.AllocateStaticIpInput) lightsail.AllocateStaticIpRequest
 
+	AttachDiskRequest(*lightsail.AttachDiskInput) lightsail.AttachDiskRequest
+
+	AttachInstancesToLoadBalancerRequest(*lightsail.AttachInstancesToLoadBalancerInput) lightsail.AttachInstancesToLoadBalancerRequest
+
+	AttachLoadBalancerTlsCertificateRequest(*lightsail.AttachLoadBalancerTlsCertificateInput) lightsail.AttachLoadBalancerTlsCertificateRequest
+
 	AttachStaticIpRequest(*lightsail.AttachStaticIpInput) lightsail.AttachStaticIpRequest
 
 	CloseInstancePublicPortsRequest(*lightsail.CloseInstancePublicPortsInput) lightsail.CloseInstancePublicPortsRequest
+
+	CreateDiskRequest(*lightsail.CreateDiskInput) lightsail.CreateDiskRequest
+
+	CreateDiskFromSnapshotRequest(*lightsail.CreateDiskFromSnapshotInput) lightsail.CreateDiskFromSnapshotRequest
+
+	CreateDiskSnapshotRequest(*lightsail.CreateDiskSnapshotInput) lightsail.CreateDiskSnapshotRequest
 
 	CreateDomainRequest(*lightsail.CreateDomainInput) lightsail.CreateDomainRequest
 
@@ -80,6 +92,14 @@ type LightsailAPI interface {
 
 	CreateKeyPairRequest(*lightsail.CreateKeyPairInput) lightsail.CreateKeyPairRequest
 
+	CreateLoadBalancerRequest(*lightsail.CreateLoadBalancerInput) lightsail.CreateLoadBalancerRequest
+
+	CreateLoadBalancerTlsCertificateRequest(*lightsail.CreateLoadBalancerTlsCertificateInput) lightsail.CreateLoadBalancerTlsCertificateRequest
+
+	DeleteDiskRequest(*lightsail.DeleteDiskInput) lightsail.DeleteDiskRequest
+
+	DeleteDiskSnapshotRequest(*lightsail.DeleteDiskSnapshotInput) lightsail.DeleteDiskSnapshotRequest
+
 	DeleteDomainRequest(*lightsail.DeleteDomainInput) lightsail.DeleteDomainRequest
 
 	DeleteDomainEntryRequest(*lightsail.DeleteDomainEntryInput) lightsail.DeleteDomainEntryRequest
@@ -90,6 +110,14 @@ type LightsailAPI interface {
 
 	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
 
+	DeleteLoadBalancerRequest(*lightsail.DeleteLoadBalancerInput) lightsail.DeleteLoadBalancerRequest
+
+	DeleteLoadBalancerTlsCertificateRequest(*lightsail.DeleteLoadBalancerTlsCertificateInput) lightsail.DeleteLoadBalancerTlsCertificateRequest
+
+	DetachDiskRequest(*lightsail.DetachDiskInput) lightsail.DetachDiskRequest
+
+	DetachInstancesFromLoadBalancerRequest(*lightsail.DetachInstancesFromLoadBalancerInput) lightsail.DetachInstancesFromLoadBalancerRequest
+
 	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) lightsail.DetachStaticIpRequest
 
 	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
@@ -99,6 +127,14 @@ type LightsailAPI interface {
 	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
 
 	GetBundlesRequest(*lightsail.GetBundlesInput) lightsail.GetBundlesRequest
+
+	GetDiskRequest(*lightsail.GetDiskInput) lightsail.GetDiskRequest
+
+	GetDiskSnapshotRequest(*lightsail.GetDiskSnapshotInput) lightsail.GetDiskSnapshotRequest
+
+	GetDiskSnapshotsRequest(*lightsail.GetDiskSnapshotsInput) lightsail.GetDiskSnapshotsRequest
+
+	GetDisksRequest(*lightsail.GetDisksInput) lightsail.GetDisksRequest
 
 	GetDomainRequest(*lightsail.GetDomainInput) lightsail.GetDomainRequest
 
@@ -123,6 +159,14 @@ type LightsailAPI interface {
 	GetKeyPairRequest(*lightsail.GetKeyPairInput) lightsail.GetKeyPairRequest
 
 	GetKeyPairsRequest(*lightsail.GetKeyPairsInput) lightsail.GetKeyPairsRequest
+
+	GetLoadBalancerRequest(*lightsail.GetLoadBalancerInput) lightsail.GetLoadBalancerRequest
+
+	GetLoadBalancerMetricDataRequest(*lightsail.GetLoadBalancerMetricDataInput) lightsail.GetLoadBalancerMetricDataRequest
+
+	GetLoadBalancerTlsCertificatesRequest(*lightsail.GetLoadBalancerTlsCertificatesInput) lightsail.GetLoadBalancerTlsCertificatesRequest
+
+	GetLoadBalancersRequest(*lightsail.GetLoadBalancersInput) lightsail.GetLoadBalancersRequest
 
 	GetOperationRequest(*lightsail.GetOperationInput) lightsail.GetOperationRequest
 
@@ -157,6 +201,8 @@ type LightsailAPI interface {
 	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) lightsail.UnpeerVpcRequest
 
 	UpdateDomainEntryRequest(*lightsail.UpdateDomainEntryInput) lightsail.UpdateDomainEntryRequest
+
+	UpdateLoadBalancerAttributeRequest(*lightsail.UpdateLoadBalancerAttributeInput) lightsail.UpdateLoadBalancerAttributeRequest
 }
 
 var _ LightsailAPI = (*lightsail.Lightsail)(nil)

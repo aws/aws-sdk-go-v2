@@ -429,6 +429,57 @@ func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 	return DeleteFunctionRequest{Request: req, Input: input}
 }
 
+const opDeleteFunctionConcurrency = "DeleteFunctionConcurrency"
+
+// DeleteFunctionConcurrencyRequest is a API request type for the DeleteFunctionConcurrency API operation.
+type DeleteFunctionConcurrencyRequest struct {
+	*aws.Request
+	Input *DeleteFunctionConcurrencyInput
+}
+
+// Send marshals and sends the DeleteFunctionConcurrency API request.
+func (r DeleteFunctionConcurrencyRequest) Send() (*DeleteFunctionConcurrencyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFunctionConcurrencyOutput), nil
+}
+
+// DeleteFunctionConcurrencyRequest returns a request value for making API operation for
+// AWS Lambda.
+//
+// Removes concurrent execution limits from this function.
+//
+//    // Example sending a request using the DeleteFunctionConcurrencyRequest method.
+//    req := client.DeleteFunctionConcurrencyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency
+func (c *Lambda) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurrencyInput) DeleteFunctionConcurrencyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFunctionConcurrency,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-10-31/functions/{FunctionName}/concurrency",
+	}
+
+	if input == nil {
+		input = &DeleteFunctionConcurrencyInput{}
+	}
+
+	output := &DeleteFunctionConcurrencyOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFunctionConcurrencyRequest{Request: req, Input: input}
+}
+
 const opGetAccountSettings = "GetAccountSettings"
 
 // GetAccountSettingsRequest is a API request type for the GetAccountSettings API operation.
@@ -1322,6 +1373,60 @@ func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) PublishVersio
 	return PublishVersionRequest{Request: req, Input: input}
 }
 
+const opPutFunctionConcurrency = "PutFunctionConcurrency"
+
+// PutFunctionConcurrencyRequest is a API request type for the PutFunctionConcurrency API operation.
+type PutFunctionConcurrencyRequest struct {
+	*aws.Request
+	Input *PutFunctionConcurrencyInput
+}
+
+// Send marshals and sends the PutFunctionConcurrency API request.
+func (r PutFunctionConcurrencyRequest) Send() (*PutFunctionConcurrencyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutFunctionConcurrencyOutput), nil
+}
+
+// PutFunctionConcurrencyRequest returns a request value for making API operation for
+// AWS Lambda.
+//
+// Sets a limit on the number of concurrent executions available to this function.
+// It is a subset of your account's total concurrent execution limit per region.
+// Note that Lambda automatically reserves a buffer of 100 concurrent executions
+// for functions without any reserved concurrency limit. This means if your
+// account limit is 1000, you have a total of 900 available to allocate to individual
+// functions.
+//
+//    // Example sending a request using the PutFunctionConcurrencyRequest method.
+//    req := client.PutFunctionConcurrencyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency
+func (c *Lambda) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInput) PutFunctionConcurrencyRequest {
+	op := &aws.Operation{
+		Name:       opPutFunctionConcurrency,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2017-10-31/functions/{FunctionName}/concurrency",
+	}
+
+	if input == nil {
+		input = &PutFunctionConcurrencyInput{}
+	}
+
+	output := &PutFunctionConcurrencyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutFunctionConcurrencyRequest{Request: req, Input: input}
+}
+
 const opRemovePermission = "RemovePermission"
 
 // RemovePermissionRequest is a API request type for the RemovePermission API operation.
@@ -1742,12 +1847,16 @@ type AccountLimit struct {
 	// Number of simultaneous executions of your function per region. For more information
 	// or to request a limit increase for concurrent executions, see Lambda Function
 	// Concurrent Executions (http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
-	// The default limit is 100.
+	// The default limit is 1000.
 	ConcurrentExecutions *int64 `type:"integer"`
 
 	// Maximum size, in bytes, of a code package you can upload per region. The
 	// default size is 75 GB.
 	TotalCodeSize *int64 `type:"long"`
+
+	// The number of concurrent executions available to functions that do not have
+	// concurrency limits set.
+	UnreservedConcurrentExecutions *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -1781,6 +1890,12 @@ func (s *AccountLimit) SetConcurrentExecutions(v int64) *AccountLimit {
 // SetTotalCodeSize sets the TotalCodeSize field's value.
 func (s *AccountLimit) SetTotalCodeSize(v int64) *AccountLimit {
 	s.TotalCodeSize = &v
+	return s
+}
+
+// SetUnreservedConcurrentExecutions sets the UnreservedConcurrentExecutions field's value.
+func (s *AccountLimit) SetUnreservedConcurrentExecutions(v int64) *AccountLimit {
+	s.UnreservedConcurrentExecutions = &v
 	return s
 }
 
@@ -2027,6 +2142,34 @@ func (s *AddPermissionOutput) SetStatement(v string) *AddPermissionOutput {
 	return s
 }
 
+// The parent object that implements what percentage of traffic will invoke
+// each function version. For more information, see lambda-traffic-shifting-using-aliases.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration
+type AliasRoutingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Set this property value to dictate what percentage of traffic will invoke
+	// the updated function version. If set to an empty string, 100 percent of traffic
+	// will invoke function-version.
+	AdditionalVersionWeights map[string]float64 `type:"map"`
+}
+
+// String returns the string representation
+func (s AliasRoutingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AliasRoutingConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetAdditionalVersionWeights sets the AdditionalVersionWeights field's value.
+func (s *AliasRoutingConfiguration) SetAdditionalVersionWeights(v map[string]float64) *AliasRoutingConfiguration {
+	s.AdditionalVersionWeights = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
@@ -2050,6 +2193,11 @@ type CreateAliasInput struct {
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
+
+	// Specifies an additional version your alias can point to, allowing you to
+	// dictate what percentage of traffic will invoke each version. For more information,
+	// see lambda-traffic-shifting-using-aliases.
+	RoutingConfig *AliasRoutingConfiguration `type:"structure"`
 }
 
 // String returns the string representation
@@ -2114,6 +2262,12 @@ func (s *CreateAliasInput) SetFunctionVersion(v string) *CreateAliasInput {
 // SetName sets the Name field's value.
 func (s *CreateAliasInput) SetName(v string) *CreateAliasInput {
 	s.Name = &v
+	return s
+}
+
+// SetRoutingConfig sets the RoutingConfig field's value.
+func (s *CreateAliasInput) SetRoutingConfig(v *AliasRoutingConfiguration) *CreateAliasInput {
+	s.RoutingConfig = v
 	return s
 }
 
@@ -2317,11 +2471,9 @@ type CreateFunctionInput struct {
 	//
 	// Node v0.10.42 is currently marked as deprecated. You must migrate existing
 	// functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3
-	// or nodejs6.10) as soon as possible. You can request a one-time extension
-	// until June 30, 2017 by going to the Lambda console and following the instructions
-	// provided. Failure to do so will result in an invalid parmaeter error being
-	// returned. Note that you will have to follow this procedure for each region
-	// that contains functions written in the Node v0.10.42 runtime.
+	// or nodejs6.10) as soon as possible. Failure to do so will result in an invalid
+	// parmaeter error being returned. Note that you will have to follow this procedure
+	// for each region that contains functions written in the Node v0.10.42 runtime.
 	//
 	// Runtime is a required field
 	Runtime Runtime `type:"string" required:"true" enum:"true"`
@@ -2638,6 +2790,71 @@ func (s *DeleteEventSourceMappingInput) Validate() error {
 func (s *DeleteEventSourceMappingInput) SetUUID(v string) *DeleteEventSourceMappingInput {
 	s.UUID = &v
 	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest
+type DeleteFunctionConcurrencyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the function you are removing concurrent execution limits from.
+	//
+	// FunctionName is a required field
+	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFunctionConcurrencyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFunctionConcurrencyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFunctionConcurrencyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionConcurrencyInput"}
+
+	if s.FunctionName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
+	}
+	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFunctionName sets the FunctionName field's value.
+func (s *DeleteFunctionConcurrencyInput) SetFunctionName(v string) *DeleteFunctionConcurrencyInput {
+	s.FunctionName = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyOutput
+type DeleteFunctionConcurrencyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteFunctionConcurrencyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFunctionConcurrencyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFunctionConcurrencyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest
@@ -3196,7 +3413,7 @@ type GetFunctionInput struct {
 	// FunctionName is a required field
 	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
 
-	// Using this optional parameter to specify a function version or an alias name.
+	// Use this optional parameter to specify a function version or an alias name.
 	// If you specify function version, the API uses qualified function ARN for
 	// the request and returns information about the specific Lambda function version.
 	// If you specify an alias name, the API uses the alias ARN and returns information
@@ -3258,6 +3475,9 @@ type GetFunctionOutput struct {
 	// The object for the Lambda function location.
 	Code *FunctionCodeLocation `type:"structure"`
 
+	// The concurrent execution limit set for this function.
+	Concurrency *PutFunctionConcurrencyOutput `type:"structure"`
+
 	// A complex type that describes function metadata.
 	Configuration *UpdateFunctionConfigurationOutput `type:"structure"`
 
@@ -3283,6 +3503,12 @@ func (s GetFunctionOutput) SDKResponseMetadata() aws.Response {
 // SetCode sets the Code field's value.
 func (s *GetFunctionOutput) SetCode(v *FunctionCodeLocation) *GetFunctionOutput {
 	s.Code = v
+	return s
+}
+
+// SetConcurrency sets the Concurrency field's value.
+func (s *GetFunctionOutput) SetConcurrency(v *PutFunctionConcurrencyOutput) *GetFunctionOutput {
+	s.Concurrency = v
 	return s
 }
 
@@ -3500,7 +3726,8 @@ type InvokeInput struct {
 	// of a ClientContext JSON, see PutEvents (http://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html)
 	// in the Amazon Mobile Analytics API Reference and User Guide.
 	//
-	// The ClientContext JSON must be base64-encoded.
+	// The ClientContext JSON must be base64-encoded and has a maximum size of 3583
+	// bytes.
 	ClientContext *string `location:"header" locationName:"X-Amz-Client-Context" type:"string"`
 
 	// The Lambda function name.
@@ -3616,6 +3843,10 @@ type InvokeOutput struct {
 
 	responseMetadata aws.Response
 
+	// The function version that has been executed. This value is returned only
+	// if the invocation type is RequestResponse.
+	ExecutedVersion *string `location:"header" locationName:"X-Amz-Executed-Version" min:"1" type:"string"`
+
 	// Indicates whether an error occurred while executing the Lambda function.
 	// If an error occurred this field will have one of two values; Handled or Unhandled.
 	// Handled errors are errors that are reported by the function while the Unhandled
@@ -3657,6 +3888,12 @@ func (s InvokeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InvokeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// SetExecutedVersion sets the ExecutedVersion field's value.
+func (s *InvokeOutput) SetExecutedVersion(v string) *InvokeOutput {
+	s.ExecutedVersion = &v
+	return s
 }
 
 // SetFunctionError sets the FunctionError field's value.
@@ -3935,7 +4172,7 @@ type ListFunctionsInput struct {
 	//
 	// Valid value:
 	//
-	// ALL _ Will return all versions, including $LATEST which will have fully qualified
+	// ALL: Will return all versions, including $LATEST which will have fully qualified
 	// ARNs (Amazon Resource Names).
 	FunctionVersion FunctionVersion `location:"querystring" locationName:"FunctionVersion" type:"string" enum:"true"`
 
@@ -3951,7 +4188,7 @@ type ListFunctionsInput struct {
 	// The region from which the functions are replicated. For example, if you specify
 	// us-east-1, only functions replicated from that region will be returned.
 	//
-	// ALL _ Will return all functions from any region. If specified, you also must
+	// ALL: Will return all functions from any region. If specified, you also must
 	// specify a valid FunctionVersion parameter.
 	MasterRegion *string `location:"querystring" locationName:"MasterRegion" type:"string"`
 
@@ -4235,9 +4472,10 @@ type PublishVersionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The SHA256 hash of the deployment package you want to publish. This provides
-	// validation on the code you are publishing. If you provide this parameter
-	// value must match the SHA256 of the $LATEST version for the publication to
-	// succeed.
+	// validation on the code you are publishing. If you provide this parameter,
+	// the value must match the SHA256 of the $LATEST version for the publication
+	// to succeed. You can use the DryRun parameter of UpdateFunctionCode to verify
+	// the hash value that will be returned before publishing your new version.
 	CodeSha256 *string `type:"string"`
 
 	// The description for the version you are publishing. If not provided, AWS
@@ -4297,6 +4535,95 @@ func (s *PublishVersionInput) SetDescription(v string) *PublishVersionInput {
 // SetFunctionName sets the FunctionName field's value.
 func (s *PublishVersionInput) SetFunctionName(v string) *PublishVersionInput {
 	s.FunctionName = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest
+type PutFunctionConcurrencyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the function you are setting concurrent execution limits on.
+	//
+	// FunctionName is a required field
+	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
+
+	// The concurrent execution limit reserved for this function.
+	//
+	// ReservedConcurrentExecutions is a required field
+	ReservedConcurrentExecutions *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s PutFunctionConcurrencyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutFunctionConcurrencyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutFunctionConcurrencyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutFunctionConcurrencyInput"}
+
+	if s.FunctionName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
+	}
+	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
+	}
+
+	if s.ReservedConcurrentExecutions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservedConcurrentExecutions"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFunctionName sets the FunctionName field's value.
+func (s *PutFunctionConcurrencyInput) SetFunctionName(v string) *PutFunctionConcurrencyInput {
+	s.FunctionName = &v
+	return s
+}
+
+// SetReservedConcurrentExecutions sets the ReservedConcurrentExecutions field's value.
+func (s *PutFunctionConcurrencyInput) SetReservedConcurrentExecutions(v int64) *PutFunctionConcurrencyInput {
+	s.ReservedConcurrentExecutions = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency
+type PutFunctionConcurrencyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The number of concurrent executions reserved for this function.
+	ReservedConcurrentExecutions *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s PutFunctionConcurrencyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutFunctionConcurrencyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutFunctionConcurrencyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetReservedConcurrentExecutions sets the ReservedConcurrentExecutions field's value.
+func (s *PutFunctionConcurrencyOutput) SetReservedConcurrentExecutions(v int64) *PutFunctionConcurrencyOutput {
+	s.ReservedConcurrentExecutions = &v
 	return s
 }
 
@@ -4634,6 +4961,11 @@ type UpdateAliasInput struct {
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"Name" min:"1" type:"string" required:"true"`
+
+	// Specifies an additional version your alias can point to, allowing you to
+	// dictate what percentage of traffic will invoke each version. For more information,
+	// see lambda-traffic-shifting-using-aliases.
+	RoutingConfig *AliasRoutingConfiguration `type:"structure"`
 }
 
 // String returns the string representation
@@ -4697,6 +5029,12 @@ func (s *UpdateAliasInput) SetName(v string) *UpdateAliasInput {
 	return s
 }
 
+// SetRoutingConfig sets the RoutingConfig field's value.
+func (s *UpdateAliasInput) SetRoutingConfig(v *AliasRoutingConfiguration) *UpdateAliasInput {
+	s.RoutingConfig = v
+	return s
+}
+
 // Provides configuration information about a Lambda function version alias.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasOutput
 type UpdateAliasOutput struct {
@@ -4717,6 +5055,11 @@ type UpdateAliasOutput struct {
 
 	// Alias name.
 	Name *string `min:"1" type:"string"`
+
+	// Specifies an additional function versions the alias points to, allowing you
+	// to dictate what percentage of traffic will invoke each version. For more
+	// information, see lambda-traffic-shifting-using-aliases.
+	RoutingConfig *AliasRoutingConfiguration `type:"structure"`
 }
 
 // String returns the string representation
@@ -4755,6 +5098,12 @@ func (s *UpdateAliasOutput) SetFunctionVersion(v string) *UpdateAliasOutput {
 // SetName sets the Name field's value.
 func (s *UpdateAliasOutput) SetName(v string) *UpdateAliasOutput {
 	s.Name = &v
+	return s
+}
+
+// SetRoutingConfig sets the RoutingConfig field's value.
+func (s *UpdateAliasOutput) SetRoutingConfig(v *AliasRoutingConfiguration) *UpdateAliasOutput {
+	s.RoutingConfig = v
 	return s
 }
 
@@ -4955,8 +5304,8 @@ type UpdateFunctionCodeInput struct {
 	// update the Lambda function and publish a version as an atomic operation.
 	// It will do all necessary computation and validation of your code but will
 	// not upload it or a publish a version. Each time this operation is invoked,
-	// the CodeSha256 hash value the provided code will also be computed and returned
-	// in the response.
+	// the CodeSha256 hash value of the provided code will also be computed and
+	// returned in the response.
 	DryRun *bool `type:"boolean"`
 
 	// The existing Lambda function name whose code you want to replace.
@@ -5131,11 +5480,9 @@ type UpdateFunctionConfigurationInput struct {
 	//
 	// Node v0.10.42 is currently marked as deprecated. You must migrate existing
 	// functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3
-	// or nodejs6.10) as soon as possible. You can request a one-time extension
-	// until June 30, 2017 by going to the Lambda console and following the instructions
-	// provided. Failure to do so will result in an invalid parameter error being
-	// returned. Note that you will have to follow this procedure for each region
-	// that contains functions written in the Node v0.10.42 runtime.
+	// or nodejs6.10) as soon as possible. Failure to do so will result in an invalid
+	// parameter error being returned. Note that you will have to follow this procedure
+	// for each region that contains functions written in the Node v0.10.42 runtime.
 	Runtime Runtime `type:"string" enum:"true"`
 
 	// The function execution time at which AWS Lambda should terminate the function.
@@ -5586,9 +5933,11 @@ type ThrottleReason string
 
 // Enum values for ThrottleReason
 const (
-	ThrottleReasonConcurrentInvocationLimitExceeded   ThrottleReason = "ConcurrentInvocationLimitExceeded"
-	ThrottleReasonFunctionInvocationRateLimitExceeded ThrottleReason = "FunctionInvocationRateLimitExceeded"
-	ThrottleReasonCallerRateLimitExceeded             ThrottleReason = "CallerRateLimitExceeded"
+	ThrottleReasonConcurrentInvocationLimitExceeded                 ThrottleReason = "ConcurrentInvocationLimitExceeded"
+	ThrottleReasonFunctionInvocationRateLimitExceeded               ThrottleReason = "FunctionInvocationRateLimitExceeded"
+	ThrottleReasonReservedFunctionConcurrentInvocationLimitExceeded ThrottleReason = "ReservedFunctionConcurrentInvocationLimitExceeded"
+	ThrottleReasonReservedFunctionInvocationRateLimitExceeded       ThrottleReason = "ReservedFunctionInvocationRateLimitExceeded"
+	ThrottleReasonCallerRateLimitExceeded                           ThrottleReason = "CallerRateLimitExceeded"
 )
 
 type TracingMode string

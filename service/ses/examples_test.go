@@ -513,6 +513,38 @@ func ExampleSES_DescribeReceiptRuleSetRequest_shared00() {
 	fmt.Println(result)
 }
 
+// GetAccountSendingEnabled
+//
+// The following example returns if sending status for an account is enabled. (true
+// / false):
+func ExampleSES_GetAccountSendingEnabledRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ses.New(cfg)
+	input := &ses.GetAccountSendingEnabledInput{}
+
+	req := svc.GetAccountSendingEnabledRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // GetIdentityDkimAttributes
 //
 // The following example retrieves the Amazon SES Easy DKIM attributes for a list of
@@ -1052,6 +1084,10 @@ func ExampleSES_SendEmailRequest_shared00() {
 				fmt.Println(ses.ErrCodeMailFromDomainNotVerifiedException, aerr.Error())
 			case ses.ErrCodeConfigurationSetDoesNotExistException:
 				fmt.Println(ses.ErrCodeConfigurationSetDoesNotExistException, aerr.Error())
+			case ses.ErrCodeConfigurationSetSendingPausedException:
+				fmt.Println(ses.ErrCodeConfigurationSetSendingPausedException, aerr.Error())
+			case ses.ErrCodeAccountSendingPausedException:
+				fmt.Println(ses.ErrCodeAccountSendingPausedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1097,6 +1133,10 @@ func ExampleSES_SendRawEmailRequest_shared00() {
 				fmt.Println(ses.ErrCodeMailFromDomainNotVerifiedException, aerr.Error())
 			case ses.ErrCodeConfigurationSetDoesNotExistException:
 				fmt.Println(ses.ErrCodeConfigurationSetDoesNotExistException, aerr.Error())
+			case ses.ErrCodeConfigurationSetSendingPausedException:
+				fmt.Println(ses.ErrCodeConfigurationSetSendingPausedException, aerr.Error())
+			case ses.ErrCodeAccountSendingPausedException:
+				fmt.Println(ses.ErrCodeAccountSendingPausedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1350,6 +1390,111 @@ func ExampleSES_SetReceiptRulePositionRequest_shared00() {
 				fmt.Println(ses.ErrCodeRuleSetDoesNotExistException, aerr.Error())
 			case ses.ErrCodeRuleDoesNotExistException:
 				fmt.Println(ses.ErrCodeRuleDoesNotExistException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// UpdateAccountSendingEnabled
+//
+// The following example updated the sending status for this account.
+func ExampleSES_UpdateAccountSendingEnabledRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ses.New(cfg)
+	input := &ses.UpdateAccountSendingEnabledInput{
+		Enabled: aws.Bool(true),
+	}
+
+	req := svc.UpdateAccountSendingEnabledRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// UpdateConfigurationSetReputationMetricsEnabled
+//
+// Set the reputationMetricsEnabled flag for a specific configuration set.
+func ExampleSES_UpdateConfigurationSetReputationMetricsEnabledRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ses.New(cfg)
+	input := &ses.UpdateConfigurationSetReputationMetricsEnabledInput{
+		ConfigurationSetName: aws.String("foo"),
+		Enabled:              aws.Bool(true),
+	}
+
+	req := svc.UpdateConfigurationSetReputationMetricsEnabledRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case ses.ErrCodeConfigurationSetDoesNotExistException:
+				fmt.Println(ses.ErrCodeConfigurationSetDoesNotExistException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// UpdateConfigurationSetReputationMetricsEnabled
+//
+// Set the sending enabled flag for a specific configuration set.
+func ExampleSES_UpdateConfigurationSetSendingEnabledRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ses.New(cfg)
+	input := &ses.UpdateConfigurationSetSendingEnabledInput{
+		ConfigurationSetName: aws.String("foo"),
+		Enabled:              aws.Bool(true),
+	}
+
+	req := svc.UpdateConfigurationSetSendingEnabledRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case ses.ErrCodeConfigurationSetDoesNotExistException:
+				fmt.Println(ses.ErrCodeConfigurationSetDoesNotExistException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
