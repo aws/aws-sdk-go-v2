@@ -3442,6 +3442,70 @@ func (s *Activity) SetStatusMessage(v string) *Activity {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Activity) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActivityId != nil {
+		v := *s.ActivityId
+
+		e.SetValue(protocol.BodyTarget, "ActivityId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Cause != nil {
+		v := *s.Cause
+
+		e.SetValue(protocol.BodyTarget, "Cause", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Details != nil {
+		v := *s.Details
+
+		e.SetValue(protocol.BodyTarget, "Details", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Progress != nil {
+		v := *s.Progress
+
+		e.SetValue(protocol.BodyTarget, "Progress", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.StatusCode) > 0 {
+		v := s.StatusCode
+
+		e.SetValue(protocol.BodyTarget, "StatusCode", v, protocol.Metadata{})
+	}
+	if s.StatusMessage != nil {
+		v := *s.StatusMessage
+
+		e.SetValue(protocol.BodyTarget, "StatusMessage", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeActivityList(vs []Activity) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a policy adjustment type.
 //
 // For more information, see Dynamic Scaling (http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html)
@@ -3469,6 +3533,25 @@ func (s AdjustmentType) GoString() string {
 func (s *AdjustmentType) SetAdjustmentType(v string) *AdjustmentType {
 	s.AdjustmentType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AdjustmentType) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AdjustmentType != nil {
+		v := *s.AdjustmentType
+
+		e.SetValue(protocol.BodyTarget, "AdjustmentType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAdjustmentTypeList(vs []AdjustmentType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes an alarm.
@@ -3503,6 +3586,30 @@ func (s *Alarm) SetAlarmARN(v string) *Alarm {
 func (s *Alarm) SetAlarmName(v string) *Alarm {
 	s.AlarmName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Alarm) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AlarmARN != nil {
+		v := *s.AlarmARN
+
+		e.SetValue(protocol.BodyTarget, "AlarmARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AlarmName != nil {
+		v := *s.AlarmName
+
+		e.SetValue(protocol.BodyTarget, "AlarmName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAlarmList(vs []Alarm) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstancesQuery
@@ -3557,6 +3664,22 @@ func (s *AttachInstancesInput) SetInstanceIds(v []string) *AttachInstancesInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		e.SetList(protocol.BodyTarget, "InstanceIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstancesOutput
 type AttachInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3577,6 +3700,12 @@ func (s AttachInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsType
@@ -3637,6 +3766,22 @@ func (s *AttachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []string) *At
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachLoadBalancerTargetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TargetGroupARNs) > 0 {
+		v := s.TargetGroupARNs
+
+		e.SetList(protocol.BodyTarget, "TargetGroupARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsResultType
 type AttachLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3657,6 +3802,12 @@ func (s AttachLoadBalancerTargetGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachLoadBalancerTargetGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachLoadBalancerTargetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersType
@@ -3717,6 +3868,22 @@ func (s *AttachLoadBalancersInput) SetLoadBalancerNames(v []string) *AttachLoadB
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachLoadBalancersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersResultType
 type AttachLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
@@ -3737,6 +3904,12 @@ func (s AttachLoadBalancersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachLoadBalancersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachLoadBalancersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes a block device mapping.
@@ -3820,6 +3993,40 @@ func (s *BlockDeviceMapping) SetNoDevice(v bool) *BlockDeviceMapping {
 func (s *BlockDeviceMapping) SetVirtualName(v string) *BlockDeviceMapping {
 	s.VirtualName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BlockDeviceMapping) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeviceName != nil {
+		v := *s.DeviceName
+
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Ebs != nil {
+		v := s.Ebs
+
+		e.SetFields(protocol.BodyTarget, "Ebs", v, protocol.Metadata{})
+	}
+	if s.NoDevice != nil {
+		v := *s.NoDevice
+
+		e.SetValue(protocol.BodyTarget, "NoDevice", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.VirtualName != nil {
+		v := *s.VirtualName
+
+		e.SetValue(protocol.BodyTarget, "VirtualName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeBlockDeviceMappingList(vs []BlockDeviceMapping) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleActionType
@@ -3925,6 +4132,37 @@ func (s *CompleteLifecycleActionInput) SetLifecycleHookName(v string) *CompleteL
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CompleteLifecycleActionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleActionResult != nil {
+		v := *s.LifecycleActionResult
+
+		e.SetValue(protocol.BodyTarget, "LifecycleActionResult", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleActionToken != nil {
+		v := *s.LifecycleActionToken
+
+		e.SetValue(protocol.BodyTarget, "LifecycleActionToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleHookName != nil {
+		v := *s.LifecycleHookName
+
+		e.SetValue(protocol.BodyTarget, "LifecycleHookName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleActionAnswer
 type CompleteLifecycleActionOutput struct {
 	_ struct{} `type:"structure"`
@@ -3945,6 +4183,12 @@ func (s CompleteLifecycleActionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CompleteLifecycleActionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CompleteLifecycleActionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType
@@ -4242,6 +4486,102 @@ func (s *CreateAutoScalingGroupInput) SetVPCZoneIdentifier(v string) *CreateAuto
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAutoScalingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.DefaultCooldown != nil {
+		v := *s.DefaultCooldown
+
+		e.SetValue(protocol.BodyTarget, "DefaultCooldown", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DesiredCapacity != nil {
+		v := *s.DesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "DesiredCapacity", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HealthCheckGracePeriod != nil {
+		v := *s.HealthCheckGracePeriod
+
+		e.SetValue(protocol.BodyTarget, "HealthCheckGracePeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HealthCheckType != nil {
+		v := *s.HealthCheckType
+
+		e.SetValue(protocol.BodyTarget, "HealthCheckType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LifecycleHookSpecificationList) > 0 {
+		v := s.LifecycleHookSpecificationList
+
+		e.SetList(protocol.BodyTarget, "LifecycleHookSpecificationList", encodeLifecycleHookSpecificationList(v), protocol.Metadata{})
+	}
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxSize != nil {
+		v := *s.MaxSize
+
+		e.SetValue(protocol.BodyTarget, "MaxSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinSize != nil {
+		v := *s.MinSize
+
+		e.SetValue(protocol.BodyTarget, "MinSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NewInstancesProtectedFromScaleIn != nil {
+		v := *s.NewInstancesProtectedFromScaleIn
+
+		e.SetValue(protocol.BodyTarget, "NewInstancesProtectedFromScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PlacementGroup != nil {
+		v := *s.PlacementGroup
+
+		e.SetValue(protocol.BodyTarget, "PlacementGroup", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if len(s.TargetGroupARNs) > 0 {
+		v := s.TargetGroupARNs
+
+		e.SetList(protocol.BodyTarget, "TargetGroupARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.TerminationPolicies) > 0 {
+		v := s.TerminationPolicies
+
+		e.SetList(protocol.BodyTarget, "TerminationPolicies", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.VPCZoneIdentifier != nil {
+		v := *s.VPCZoneIdentifier
+
+		e.SetValue(protocol.BodyTarget, "VPCZoneIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupOutput
 type CreateAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -4262,6 +4602,12 @@ func (s CreateAutoScalingGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAutoScalingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationType
@@ -4584,6 +4930,102 @@ func (s *CreateLaunchConfigurationInput) SetUserData(v string) *CreateLaunchConf
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLaunchConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AssociatePublicIpAddress != nil {
+		v := *s.AssociatePublicIpAddress
+
+		e.SetValue(protocol.BodyTarget, "AssociatePublicIpAddress", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.BlockDeviceMappings) > 0 {
+		v := s.BlockDeviceMappings
+
+		e.SetList(protocol.BodyTarget, "BlockDeviceMappings", encodeBlockDeviceMappingList(v), protocol.Metadata{})
+	}
+	if s.ClassicLinkVPCId != nil {
+		v := *s.ClassicLinkVPCId
+
+		e.SetValue(protocol.BodyTarget, "ClassicLinkVPCId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClassicLinkVPCSecurityGroups) > 0 {
+		v := s.ClassicLinkVPCSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClassicLinkVPCSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.EbsOptimized != nil {
+		v := *s.EbsOptimized
+
+		e.SetValue(protocol.BodyTarget, "EbsOptimized", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.IamInstanceProfile != nil {
+		v := *s.IamInstanceProfile
+
+		e.SetValue(protocol.BodyTarget, "IamInstanceProfile", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ImageId != nil {
+		v := *s.ImageId
+
+		e.SetValue(protocol.BodyTarget, "ImageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceMonitoring != nil {
+		v := s.InstanceMonitoring
+
+		e.SetFields(protocol.BodyTarget, "InstanceMonitoring", v, protocol.Metadata{})
+	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KernelId != nil {
+		v := *s.KernelId
+
+		e.SetValue(protocol.BodyTarget, "KernelId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KeyName != nil {
+		v := *s.KeyName
+
+		e.SetValue(protocol.BodyTarget, "KeyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlacementTenancy != nil {
+		v := *s.PlacementTenancy
+
+		e.SetValue(protocol.BodyTarget, "PlacementTenancy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RamdiskId != nil {
+		v := *s.RamdiskId
+
+		e.SetValue(protocol.BodyTarget, "RamdiskId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.SpotPrice != nil {
+		v := *s.SpotPrice
+
+		e.SetValue(protocol.BodyTarget, "SpotPrice", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserData != nil {
+		v := *s.UserData
+
+		e.SetValue(protocol.BodyTarget, "UserData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationOutput
 type CreateLaunchConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -4604,6 +5046,12 @@ func (s CreateLaunchConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLaunchConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTagsType
@@ -4653,6 +5101,17 @@ func (s *CreateOrUpdateTagsInput) SetTags(v []Tag) *CreateOrUpdateTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateOrUpdateTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTagsOutput
 type CreateOrUpdateTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4673,6 +5132,12 @@ func (s CreateOrUpdateTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateOrUpdateTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateOrUpdateTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Configures a customized metric for a target tracking policy.
@@ -4770,6 +5235,37 @@ func (s *CustomizedMetricSpecification) SetUnit(v string) *CustomizedMetricSpeci
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CustomizedMetricSpecification) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeMetricDimensionList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Statistic) > 0 {
+		v := s.Statistic
+
+		e.SetValue(protocol.BodyTarget, "Statistic", v, protocol.Metadata{})
+	}
+	if s.Unit != nil {
+		v := *s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroupType
 type DeleteAutoScalingGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -4824,6 +5320,22 @@ func (s *DeleteAutoScalingGroupInput) SetForceDelete(v bool) *DeleteAutoScalingG
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAutoScalingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ForceDelete != nil {
+		v := *s.ForceDelete
+
+		e.SetValue(protocol.BodyTarget, "ForceDelete", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroupOutput
 type DeleteAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -4844,6 +5356,12 @@ func (s DeleteAutoScalingGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAutoScalingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationNameType
@@ -4889,6 +5407,17 @@ func (s *DeleteLaunchConfigurationInput) SetLaunchConfigurationName(v string) *D
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLaunchConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLaunchConfigurationOutput
 type DeleteLaunchConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -4909,6 +5438,12 @@ func (s DeleteLaunchConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLaunchConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookType
@@ -4972,6 +5507,22 @@ func (s *DeleteLifecycleHookInput) SetLifecycleHookName(v string) *DeleteLifecyc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLifecycleHookInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleHookName != nil {
+		v := *s.LifecycleHookName
+
+		e.SetValue(protocol.BodyTarget, "LifecycleHookName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookAnswer
 type DeleteLifecycleHookOutput struct {
 	_ struct{} `type:"structure"`
@@ -4992,6 +5543,12 @@ func (s DeleteLifecycleHookOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLifecycleHookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLifecycleHookOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfigurationType
@@ -5056,6 +5613,22 @@ func (s *DeleteNotificationConfigurationInput) SetTopicARN(v string) *DeleteNoti
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteNotificationConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicARN != nil {
+		v := *s.TopicARN
+
+		e.SetValue(protocol.BodyTarget, "TopicARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfigurationOutput
 type DeleteNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -5076,6 +5649,12 @@ func (s DeleteNotificationConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteNotificationConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteNotificationConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicyType
@@ -5133,6 +5712,22 @@ func (s *DeletePolicyInput) SetPolicyName(v string) *DeletePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicyOutput
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -5153,6 +5748,12 @@ func (s DeletePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledActionType
@@ -5216,6 +5817,22 @@ func (s *DeleteScheduledActionInput) SetScheduledActionName(v string) *DeleteSch
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteScheduledActionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScheduledActionName != nil {
+		v := *s.ScheduledActionName
+
+		e.SetValue(protocol.BodyTarget, "ScheduledActionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledActionOutput
 type DeleteScheduledActionOutput struct {
 	_ struct{} `type:"structure"`
@@ -5236,6 +5853,12 @@ func (s DeleteScheduledActionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteScheduledActionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteScheduledActionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTagsType
@@ -5285,6 +5908,17 @@ func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5307,6 +5941,12 @@ func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimitsInput
 type DescribeAccountLimitsInput struct {
 	_ struct{} `type:"structure"`
@@ -5320,6 +5960,12 @@ func (s DescribeAccountLimitsInput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountLimitsInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountLimitsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimitsAnswer
@@ -5382,6 +6028,32 @@ func (s *DescribeAccountLimitsOutput) SetNumberOfLaunchConfigurations(v int64) *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountLimitsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxNumberOfAutoScalingGroups != nil {
+		v := *s.MaxNumberOfAutoScalingGroups
+
+		e.SetValue(protocol.BodyTarget, "MaxNumberOfAutoScalingGroups", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MaxNumberOfLaunchConfigurations != nil {
+		v := *s.MaxNumberOfLaunchConfigurations
+
+		e.SetValue(protocol.BodyTarget, "MaxNumberOfLaunchConfigurations", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NumberOfAutoScalingGroups != nil {
+		v := *s.NumberOfAutoScalingGroups
+
+		e.SetValue(protocol.BodyTarget, "NumberOfAutoScalingGroups", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NumberOfLaunchConfigurations != nil {
+		v := *s.NumberOfLaunchConfigurations
+
+		e.SetValue(protocol.BodyTarget, "NumberOfLaunchConfigurations", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypesInput
 type DescribeAdjustmentTypesInput struct {
 	_ struct{} `type:"structure"`
@@ -5395,6 +6067,12 @@ func (s DescribeAdjustmentTypesInput) String() string {
 // GoString returns the string representation
 func (s DescribeAdjustmentTypesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAdjustmentTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypesAnswer
@@ -5426,6 +6104,17 @@ func (s DescribeAdjustmentTypesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeAdjustmentTypesOutput) SetAdjustmentTypes(v []AdjustmentType) *DescribeAdjustmentTypesOutput {
 	s.AdjustmentTypes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAdjustmentTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AdjustmentTypes) > 0 {
+		v := s.AdjustmentTypes
+
+		e.SetList(protocol.BodyTarget, "AdjustmentTypes", encodeAdjustmentTypeList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/GroupNamesType
@@ -5473,6 +6162,27 @@ func (s *DescribeAutoScalingGroupsInput) SetNextToken(v string) *DescribeAutoSca
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAutoScalingGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutoScalingGroupNames) > 0 {
+		v := s.AutoScalingGroupNames
+
+		e.SetList(protocol.BodyTarget, "AutoScalingGroupNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/GroupsType
 type DescribeAutoScalingGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5514,6 +6224,22 @@ func (s *DescribeAutoScalingGroupsOutput) SetAutoScalingGroups(v []Group) *Descr
 func (s *DescribeAutoScalingGroupsOutput) SetNextToken(v string) *DescribeAutoScalingGroupsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAutoScalingGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutoScalingGroups) > 0 {
+		v := s.AutoScalingGroups
+
+		e.SetList(protocol.BodyTarget, "AutoScalingGroups", encodeGroupList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstancesType
@@ -5562,6 +6288,27 @@ func (s *DescribeAutoScalingInstancesInput) SetNextToken(v string) *DescribeAuto
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAutoScalingInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		e.SetList(protocol.BodyTarget, "InstanceIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesType
 type DescribeAutoScalingInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5603,6 +6350,22 @@ func (s *DescribeAutoScalingInstancesOutput) SetNextToken(v string) *DescribeAut
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAutoScalingInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutoScalingInstances) > 0 {
+		v := s.AutoScalingInstances
+
+		e.SetList(protocol.BodyTarget, "AutoScalingInstances", encodeInstanceDetailsList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypesInput
 type DescribeAutoScalingNotificationTypesInput struct {
 	_ struct{} `type:"structure"`
@@ -5616,6 +6379,12 @@ func (s DescribeAutoScalingNotificationTypesInput) String() string {
 // GoString returns the string representation
 func (s DescribeAutoScalingNotificationTypesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAutoScalingNotificationTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypesAnswer
@@ -5647,6 +6416,17 @@ func (s DescribeAutoScalingNotificationTypesOutput) SDKResponseMetadata() aws.Re
 func (s *DescribeAutoScalingNotificationTypesOutput) SetAutoScalingNotificationTypes(v []string) *DescribeAutoScalingNotificationTypesOutput {
 	s.AutoScalingNotificationTypes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAutoScalingNotificationTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutoScalingNotificationTypes) > 0 {
+		v := s.AutoScalingNotificationTypes
+
+		e.SetList(protocol.BodyTarget, "AutoScalingNotificationTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationNamesType
@@ -5694,6 +6474,27 @@ func (s *DescribeLaunchConfigurationsInput) SetNextToken(v string) *DescribeLaun
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLaunchConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LaunchConfigurationNames) > 0 {
+		v := s.LaunchConfigurationNames
+
+		e.SetList(protocol.BodyTarget, "LaunchConfigurationNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationsType
 type DescribeLaunchConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5737,6 +6538,22 @@ func (s *DescribeLaunchConfigurationsOutput) SetNextToken(v string) *DescribeLau
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLaunchConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LaunchConfigurations) > 0 {
+		v := s.LaunchConfigurations
+
+		e.SetList(protocol.BodyTarget, "LaunchConfigurations", encodeLaunchConfigurationList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypesInput
 type DescribeLifecycleHookTypesInput struct {
 	_ struct{} `type:"structure"`
@@ -5750,6 +6567,12 @@ func (s DescribeLifecycleHookTypesInput) String() string {
 // GoString returns the string representation
 func (s DescribeLifecycleHookTypesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLifecycleHookTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypesAnswer
@@ -5781,6 +6604,17 @@ func (s DescribeLifecycleHookTypesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeLifecycleHookTypesOutput) SetLifecycleHookTypes(v []string) *DescribeLifecycleHookTypesOutput {
 	s.LifecycleHookTypes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLifecycleHookTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LifecycleHookTypes) > 0 {
+		v := s.LifecycleHookTypes
+
+		e.SetList(protocol.BodyTarget, "LifecycleHookTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooksType
@@ -5836,6 +6670,22 @@ func (s *DescribeLifecycleHooksInput) SetLifecycleHookNames(v []string) *Describ
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLifecycleHooksInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LifecycleHookNames) > 0 {
+		v := s.LifecycleHookNames
+
+		e.SetList(protocol.BodyTarget, "LifecycleHookNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooksAnswer
 type DescribeLifecycleHooksOutput struct {
 	_ struct{} `type:"structure"`
@@ -5865,6 +6715,17 @@ func (s DescribeLifecycleHooksOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeLifecycleHooksOutput) SetLifecycleHooks(v []LifecycleHook) *DescribeLifecycleHooksOutput {
 	s.LifecycleHooks = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLifecycleHooksOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LifecycleHooks) > 0 {
+		v := s.LifecycleHooks
+
+		e.SetList(protocol.BodyTarget, "LifecycleHooks", encodeLifecycleHookList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroupsRequest
@@ -5930,6 +6791,27 @@ func (s *DescribeLoadBalancerTargetGroupsInput) SetNextToken(v string) *Describe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerTargetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroupsResponse
 type DescribeLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5969,6 +6851,22 @@ func (s *DescribeLoadBalancerTargetGroupsOutput) SetLoadBalancerTargetGroups(v [
 func (s *DescribeLoadBalancerTargetGroupsOutput) SetNextToken(v string) *DescribeLoadBalancerTargetGroupsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancerTargetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancerTargetGroups) > 0 {
+		v := s.LoadBalancerTargetGroups
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerTargetGroups", encodeLoadBalancerTargetGroupStateList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancersRequest
@@ -6034,6 +6932,27 @@ func (s *DescribeLoadBalancersInput) SetNextToken(v string) *DescribeLoadBalance
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancersResponse
 type DescribeLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
@@ -6075,6 +6994,22 @@ func (s *DescribeLoadBalancersOutput) SetNextToken(v string) *DescribeLoadBalanc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoadBalancersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LoadBalancers) > 0 {
+		v := s.LoadBalancers
+
+		e.SetList(protocol.BodyTarget, "LoadBalancers", encodeLoadBalancerStateList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypesInput
 type DescribeMetricCollectionTypesInput struct {
 	_ struct{} `type:"structure"`
@@ -6088,6 +7023,12 @@ func (s DescribeMetricCollectionTypesInput) String() string {
 // GoString returns the string representation
 func (s DescribeMetricCollectionTypesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeMetricCollectionTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypesAnswer
@@ -6128,6 +7069,22 @@ func (s *DescribeMetricCollectionTypesOutput) SetGranularities(v []MetricGranula
 func (s *DescribeMetricCollectionTypesOutput) SetMetrics(v []MetricCollectionType) *DescribeMetricCollectionTypesOutput {
 	s.Metrics = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeMetricCollectionTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Granularities) > 0 {
+		v := s.Granularities
+
+		e.SetList(protocol.BodyTarget, "Granularities", encodeMetricGranularityTypeList(v), protocol.Metadata{})
+	}
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		e.SetList(protocol.BodyTarget, "Metrics", encodeMetricCollectionTypeList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurationsType
@@ -6174,6 +7131,27 @@ func (s *DescribeNotificationConfigurationsInput) SetNextToken(v string) *Descri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeNotificationConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutoScalingGroupNames) > 0 {
+		v := s.AutoScalingGroupNames
+
+		e.SetList(protocol.BodyTarget, "AutoScalingGroupNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurationsAnswer
 type DescribeNotificationConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6215,6 +7193,22 @@ func (s *DescribeNotificationConfigurationsOutput) SetNextToken(v string) *Descr
 func (s *DescribeNotificationConfigurationsOutput) SetNotificationConfigurations(v []NotificationConfiguration) *DescribeNotificationConfigurationsOutput {
 	s.NotificationConfigurations = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeNotificationConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationConfigurations) > 0 {
+		v := s.NotificationConfigurations
+
+		e.SetList(protocol.BodyTarget, "NotificationConfigurations", encodeNotificationConfigurationList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePoliciesType
@@ -6295,6 +7289,37 @@ func (s *DescribePoliciesInput) SetPolicyTypes(v []string) *DescribePoliciesInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribePoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.PolicyTypes) > 0 {
+		v := s.PolicyTypes
+
+		e.SetList(protocol.BodyTarget, "PolicyTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PoliciesType
 type DescribePoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6334,6 +7359,22 @@ func (s *DescribePoliciesOutput) SetNextToken(v string) *DescribePoliciesOutput 
 func (s *DescribePoliciesOutput) SetScalingPolicies(v []ScalingPolicy) *DescribePoliciesOutput {
 	s.ScalingPolicies = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ScalingPolicies) > 0 {
+		v := s.ScalingPolicies
+
+		e.SetList(protocol.BodyTarget, "ScalingPolicies", encodeScalingPolicyList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivitiesType
@@ -6406,6 +7447,32 @@ func (s *DescribeScalingActivitiesInput) SetNextToken(v string) *DescribeScaling
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScalingActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ActivityIds) > 0 {
+		v := s.ActivityIds
+
+		e.SetList(protocol.BodyTarget, "ActivityIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ActivitiesType
 type DescribeScalingActivitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6450,6 +7517,22 @@ func (s *DescribeScalingActivitiesOutput) SetNextToken(v string) *DescribeScalin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScalingActivitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Activities) > 0 {
+		v := s.Activities
+
+		e.SetList(protocol.BodyTarget, "Activities", encodeActivityList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingProcessTypesInput
 type DescribeScalingProcessTypesInput struct {
 	_ struct{} `type:"structure"`
@@ -6463,6 +7546,12 @@ func (s DescribeScalingProcessTypesInput) String() string {
 // GoString returns the string representation
 func (s DescribeScalingProcessTypesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScalingProcessTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ProcessesType
@@ -6494,6 +7583,17 @@ func (s DescribeScalingProcessTypesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeScalingProcessTypesOutput) SetProcesses(v []ProcessType) *DescribeScalingProcessTypesOutput {
 	s.Processes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScalingProcessTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Processes) > 0 {
+		v := s.Processes
+
+		e.SetList(protocol.BodyTarget, "Processes", encodeProcessTypeList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActionsType
@@ -6588,6 +7688,42 @@ func (s *DescribeScheduledActionsInput) SetStartTime(v time.Time) *DescribeSched
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScheduledActionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ScheduledActionNames) > 0 {
+		v := s.ScheduledActionNames
+
+		e.SetList(protocol.BodyTarget, "ScheduledActionNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledActionsType
 type DescribeScheduledActionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6627,6 +7763,22 @@ func (s *DescribeScheduledActionsOutput) SetNextToken(v string) *DescribeSchedul
 func (s *DescribeScheduledActionsOutput) SetScheduledUpdateGroupActions(v []ScheduledUpdateGroupAction) *DescribeScheduledActionsOutput {
 	s.ScheduledUpdateGroupActions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScheduledActionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ScheduledUpdateGroupActions) > 0 {
+		v := s.ScheduledUpdateGroupActions
+
+		e.SetList(protocol.BodyTarget, "ScheduledUpdateGroupActions", encodeScheduledUpdateGroupActionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTagsType
@@ -6673,6 +7825,27 @@ func (s *DescribeTagsInput) SetNextToken(v string) *DescribeTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TagsType
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6714,6 +7887,22 @@ func (s *DescribeTagsOutput) SetTags(v []TagDescription) *DescribeTagsOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagDescriptionList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypesInput
 type DescribeTerminationPolicyTypesInput struct {
 	_ struct{} `type:"structure"`
@@ -6727,6 +7916,12 @@ func (s DescribeTerminationPolicyTypesInput) String() string {
 // GoString returns the string representation
 func (s DescribeTerminationPolicyTypesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTerminationPolicyTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypesAnswer
@@ -6759,6 +7954,17 @@ func (s DescribeTerminationPolicyTypesOutput) SDKResponseMetadata() aws.Response
 func (s *DescribeTerminationPolicyTypesOutput) SetTerminationPolicyTypes(v []string) *DescribeTerminationPolicyTypesOutput {
 	s.TerminationPolicyTypes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTerminationPolicyTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.TerminationPolicyTypes) > 0 {
+		v := s.TerminationPolicyTypes
+
+		e.SetList(protocol.BodyTarget, "TerminationPolicyTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstancesQuery
@@ -6829,6 +8035,27 @@ func (s *DetachInstancesInput) SetShouldDecrementDesiredCapacity(v bool) *Detach
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		e.SetList(protocol.BodyTarget, "InstanceIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ShouldDecrementDesiredCapacity != nil {
+		v := *s.ShouldDecrementDesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "ShouldDecrementDesiredCapacity", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstancesAnswer
 type DetachInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6858,6 +8085,17 @@ func (s DetachInstancesOutput) SDKResponseMetadata() aws.Response {
 func (s *DetachInstancesOutput) SetActivities(v []Activity) *DetachInstancesOutput {
 	s.Activities = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Activities) > 0 {
+		v := s.Activities
+
+		e.SetList(protocol.BodyTarget, "Activities", encodeActivityList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroupsType
@@ -6918,6 +8156,22 @@ func (s *DetachLoadBalancerTargetGroupsInput) SetTargetGroupARNs(v []string) *De
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachLoadBalancerTargetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TargetGroupARNs) > 0 {
+		v := s.TargetGroupARNs
+
+		e.SetList(protocol.BodyTarget, "TargetGroupARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroupsResultType
 type DetachLoadBalancerTargetGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6938,6 +8192,12 @@ func (s DetachLoadBalancerTargetGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachLoadBalancerTargetGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachLoadBalancerTargetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersType
@@ -6998,6 +8258,22 @@ func (s *DetachLoadBalancersInput) SetLoadBalancerNames(v []string) *DetachLoadB
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachLoadBalancersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersResultType
 type DetachLoadBalancersOutput struct {
 	_ struct{} `type:"structure"`
@@ -7018,6 +8294,12 @@ func (s DetachLoadBalancersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachLoadBalancersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachLoadBalancersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollectionQuery
@@ -7089,6 +8371,22 @@ func (s *DisableMetricsCollectionInput) SetMetrics(v []string) *DisableMetricsCo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableMetricsCollectionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		e.SetList(protocol.BodyTarget, "Metrics", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollectionOutput
 type DisableMetricsCollectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7109,6 +8407,12 @@ func (s DisableMetricsCollectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisableMetricsCollectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableMetricsCollectionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes an Amazon EBS volume.
@@ -7224,6 +8528,42 @@ func (s *Ebs) SetVolumeType(v string) *Ebs {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Ebs) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeleteOnTermination != nil {
+		v := *s.DeleteOnTermination
+
+		e.SetValue(protocol.BodyTarget, "DeleteOnTermination", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotId != nil {
+		v := *s.SnapshotId
+
+		e.SetValue(protocol.BodyTarget, "SnapshotId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VolumeSize != nil {
+		v := *s.VolumeSize
+
+		e.SetValue(protocol.BodyTarget, "VolumeSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.VolumeType != nil {
+		v := *s.VolumeType
+
+		e.SetValue(protocol.BodyTarget, "VolumeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollectionQuery
 type EnableMetricsCollectionInput struct {
 	_ struct{} `type:"structure"`
@@ -7312,6 +8652,27 @@ func (s *EnableMetricsCollectionInput) SetMetrics(v []string) *EnableMetricsColl
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableMetricsCollectionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Granularity != nil {
+		v := *s.Granularity
+
+		e.SetValue(protocol.BodyTarget, "Granularity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		e.SetList(protocol.BodyTarget, "Metrics", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollectionOutput
 type EnableMetricsCollectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7332,6 +8693,12 @@ func (s EnableMetricsCollectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EnableMetricsCollectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableMetricsCollectionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes an enabled metric.
@@ -7382,6 +8749,30 @@ func (s *EnabledMetric) SetGranularity(v string) *EnabledMetric {
 func (s *EnabledMetric) SetMetric(v string) *EnabledMetric {
 	s.Metric = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnabledMetric) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Granularity != nil {
+		v := *s.Granularity
+
+		e.SetValue(protocol.BodyTarget, "Granularity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Metric != nil {
+		v := *s.Metric
+
+		e.SetValue(protocol.BodyTarget, "Metric", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEnabledMetricList(vs []EnabledMetric) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandbyQuery
@@ -7455,6 +8846,27 @@ func (s *EnterStandbyInput) SetShouldDecrementDesiredCapacity(v bool) *EnterStan
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnterStandbyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		e.SetList(protocol.BodyTarget, "InstanceIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ShouldDecrementDesiredCapacity != nil {
+		v := *s.ShouldDecrementDesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "ShouldDecrementDesiredCapacity", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandbyAnswer
 type EnterStandbyOutput struct {
 	_ struct{} `type:"structure"`
@@ -7484,6 +8896,17 @@ func (s EnterStandbyOutput) SDKResponseMetadata() aws.Response {
 func (s *EnterStandbyOutput) SetActivities(v []Activity) *EnterStandbyOutput {
 	s.Activities = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnterStandbyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Activities) > 0 {
+		v := s.Activities
+
+		e.SetList(protocol.BodyTarget, "Activities", encodeActivityList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicyType
@@ -7588,6 +9011,37 @@ func (s *ExecutePolicyInput) SetPolicyName(v string) *ExecutePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExecutePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.BreachThreshold != nil {
+		v := *s.BreachThreshold
+
+		e.SetValue(protocol.BodyTarget, "BreachThreshold", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.HonorCooldown != nil {
+		v := *s.HonorCooldown
+
+		e.SetValue(protocol.BodyTarget, "HonorCooldown", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MetricValue != nil {
+		v := *s.MetricValue
+
+		e.SetValue(protocol.BodyTarget, "MetricValue", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicyOutput
 type ExecutePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -7608,6 +9062,12 @@ func (s ExecutePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ExecutePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExecutePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandbyQuery
@@ -7662,6 +9122,22 @@ func (s *ExitStandbyInput) SetInstanceIds(v []string) *ExitStandbyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExitStandbyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		e.SetList(protocol.BodyTarget, "InstanceIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandbyAnswer
 type ExitStandbyOutput struct {
 	_ struct{} `type:"structure"`
@@ -7691,6 +9167,17 @@ func (s ExitStandbyOutput) SDKResponseMetadata() aws.Response {
 func (s *ExitStandbyOutput) SetActivities(v []Activity) *ExitStandbyOutput {
 	s.Activities = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExitStandbyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Activities) > 0 {
+		v := s.Activities
+
+		e.SetList(protocol.BodyTarget, "Activities", encodeActivityList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a filter.
@@ -7726,6 +9213,30 @@ func (s *Filter) SetName(v string) *Filter {
 func (s *Filter) SetValues(v []string) *Filter {
 	s.Values = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Filter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Values) > 0 {
+		v := s.Values
+
+		e.SetList(protocol.BodyTarget, "Values", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeFilterList(vs []Filter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes an Auto Scaling group.
@@ -7966,6 +9477,130 @@ func (s *Group) SetVPCZoneIdentifier(v string) *Group {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Group) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupARN != nil {
+		v := *s.AutoScalingGroupARN
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DefaultCooldown != nil {
+		v := *s.DefaultCooldown
+
+		e.SetValue(protocol.BodyTarget, "DefaultCooldown", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DesiredCapacity != nil {
+		v := *s.DesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "DesiredCapacity", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.EnabledMetrics) > 0 {
+		v := s.EnabledMetrics
+
+		e.SetList(protocol.BodyTarget, "EnabledMetrics", encodeEnabledMetricList(v), protocol.Metadata{})
+	}
+	if s.HealthCheckGracePeriod != nil {
+		v := *s.HealthCheckGracePeriod
+
+		e.SetValue(protocol.BodyTarget, "HealthCheckGracePeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HealthCheckType != nil {
+		v := *s.HealthCheckType
+
+		e.SetValue(protocol.BodyTarget, "HealthCheckType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LoadBalancerNames) > 0 {
+		v := s.LoadBalancerNames
+
+		e.SetList(protocol.BodyTarget, "LoadBalancerNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxSize != nil {
+		v := *s.MaxSize
+
+		e.SetValue(protocol.BodyTarget, "MaxSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinSize != nil {
+		v := *s.MinSize
+
+		e.SetValue(protocol.BodyTarget, "MinSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NewInstancesProtectedFromScaleIn != nil {
+		v := *s.NewInstancesProtectedFromScaleIn
+
+		e.SetValue(protocol.BodyTarget, "NewInstancesProtectedFromScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PlacementGroup != nil {
+		v := *s.PlacementGroup
+
+		e.SetValue(protocol.BodyTarget, "PlacementGroup", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SuspendedProcesses) > 0 {
+		v := s.SuspendedProcesses
+
+		e.SetList(protocol.BodyTarget, "SuspendedProcesses", encodeSuspendedProcessList(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagDescriptionList(v), protocol.Metadata{})
+	}
+	if len(s.TargetGroupARNs) > 0 {
+		v := s.TargetGroupARNs
+
+		e.SetList(protocol.BodyTarget, "TargetGroupARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.TerminationPolicies) > 0 {
+		v := s.TerminationPolicies
+
+		e.SetList(protocol.BodyTarget, "TerminationPolicies", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.VPCZoneIdentifier != nil {
+		v := *s.VPCZoneIdentifier
+
+		e.SetValue(protocol.BodyTarget, "VPCZoneIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeGroupList(vs []Group) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes an EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Instance
 type Instance struct {
@@ -8050,6 +9685,50 @@ func (s *Instance) SetLifecycleState(v LifecycleState) *Instance {
 func (s *Instance) SetProtectedFromScaleIn(v bool) *Instance {
 	s.ProtectedFromScaleIn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Instance) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HealthStatus != nil {
+		v := *s.HealthStatus
+
+		e.SetValue(protocol.BodyTarget, "HealthStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.LifecycleState) > 0 {
+		v := s.LifecycleState
+
+		e.SetValue(protocol.BodyTarget, "LifecycleState", v, protocol.Metadata{})
+	}
+	if s.ProtectedFromScaleIn != nil {
+		v := *s.ProtectedFromScaleIn
+
+		e.SetValue(protocol.BodyTarget, "ProtectedFromScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeInstanceList(vs []Instance) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes an EC2 instance associated with an Auto Scaling group.
@@ -8151,6 +9830,55 @@ func (s *InstanceDetails) SetProtectedFromScaleIn(v bool) *InstanceDetails {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HealthStatus != nil {
+		v := *s.HealthStatus
+
+		e.SetValue(protocol.BodyTarget, "HealthStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleState != nil {
+		v := *s.LifecycleState
+
+		e.SetValue(protocol.BodyTarget, "LifecycleState", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProtectedFromScaleIn != nil {
+		v := *s.ProtectedFromScaleIn
+
+		e.SetValue(protocol.BodyTarget, "ProtectedFromScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeInstanceDetailsList(vs []InstanceDetails) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes whether detailed monitoring is enabled for the Auto Scaling instances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceMonitoring
 type InstanceMonitoring struct {
@@ -8174,6 +9902,17 @@ func (s InstanceMonitoring) GoString() string {
 func (s *InstanceMonitoring) SetEnabled(v bool) *InstanceMonitoring {
 	s.Enabled = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *InstanceMonitoring) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a launch configuration.
@@ -8381,6 +10120,115 @@ func (s *LaunchConfiguration) SetUserData(v string) *LaunchConfiguration {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LaunchConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AssociatePublicIpAddress != nil {
+		v := *s.AssociatePublicIpAddress
+
+		e.SetValue(protocol.BodyTarget, "AssociatePublicIpAddress", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.BlockDeviceMappings) > 0 {
+		v := s.BlockDeviceMappings
+
+		e.SetList(protocol.BodyTarget, "BlockDeviceMappings", encodeBlockDeviceMappingList(v), protocol.Metadata{})
+	}
+	if s.ClassicLinkVPCId != nil {
+		v := *s.ClassicLinkVPCId
+
+		e.SetValue(protocol.BodyTarget, "ClassicLinkVPCId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClassicLinkVPCSecurityGroups) > 0 {
+		v := s.ClassicLinkVPCSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClassicLinkVPCSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.EbsOptimized != nil {
+		v := *s.EbsOptimized
+
+		e.SetValue(protocol.BodyTarget, "EbsOptimized", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.IamInstanceProfile != nil {
+		v := *s.IamInstanceProfile
+
+		e.SetValue(protocol.BodyTarget, "IamInstanceProfile", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ImageId != nil {
+		v := *s.ImageId
+
+		e.SetValue(protocol.BodyTarget, "ImageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceMonitoring != nil {
+		v := s.InstanceMonitoring
+
+		e.SetFields(protocol.BodyTarget, "InstanceMonitoring", v, protocol.Metadata{})
+	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KernelId != nil {
+		v := *s.KernelId
+
+		e.SetValue(protocol.BodyTarget, "KernelId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KeyName != nil {
+		v := *s.KeyName
+
+		e.SetValue(protocol.BodyTarget, "KeyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationARN != nil {
+		v := *s.LaunchConfigurationARN
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlacementTenancy != nil {
+		v := *s.PlacementTenancy
+
+		e.SetValue(protocol.BodyTarget, "PlacementTenancy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RamdiskId != nil {
+		v := *s.RamdiskId
+
+		e.SetValue(protocol.BodyTarget, "RamdiskId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.SpotPrice != nil {
+		v := *s.SpotPrice
+
+		e.SetValue(protocol.BodyTarget, "SpotPrice", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserData != nil {
+		v := *s.UserData
+
+		e.SetValue(protocol.BodyTarget, "UserData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLaunchConfigurationList(vs []LaunchConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a lifecycle hook, which tells Auto Scaling that you want to perform
 // an action whenever it launches instances or whenever it terminates instances.
 //
@@ -8491,6 +10339,65 @@ func (s *LifecycleHook) SetNotificationTargetARN(v string) *LifecycleHook {
 func (s *LifecycleHook) SetRoleARN(v string) *LifecycleHook {
 	s.RoleARN = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LifecycleHook) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultResult != nil {
+		v := *s.DefaultResult
+
+		e.SetValue(protocol.BodyTarget, "DefaultResult", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GlobalTimeout != nil {
+		v := *s.GlobalTimeout
+
+		e.SetValue(protocol.BodyTarget, "GlobalTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HeartbeatTimeout != nil {
+		v := *s.HeartbeatTimeout
+
+		e.SetValue(protocol.BodyTarget, "HeartbeatTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LifecycleHookName != nil {
+		v := *s.LifecycleHookName
+
+		e.SetValue(protocol.BodyTarget, "LifecycleHookName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleTransition != nil {
+		v := *s.LifecycleTransition
+
+		e.SetValue(protocol.BodyTarget, "LifecycleTransition", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationMetadata != nil {
+		v := *s.NotificationMetadata
+
+		e.SetValue(protocol.BodyTarget, "NotificationMetadata", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTargetARN != nil {
+		v := *s.NotificationTargetARN
+
+		e.SetValue(protocol.BodyTarget, "NotificationTargetARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLifecycleHookList(vs []LifecycleHook) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a lifecycle hook, which tells Auto Scaling that you want to perform
@@ -8610,6 +10517,55 @@ func (s *LifecycleHookSpecification) SetRoleARN(v string) *LifecycleHookSpecific
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LifecycleHookSpecification) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultResult != nil {
+		v := *s.DefaultResult
+
+		e.SetValue(protocol.BodyTarget, "DefaultResult", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HeartbeatTimeout != nil {
+		v := *s.HeartbeatTimeout
+
+		e.SetValue(protocol.BodyTarget, "HeartbeatTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LifecycleHookName != nil {
+		v := *s.LifecycleHookName
+
+		e.SetValue(protocol.BodyTarget, "LifecycleHookName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleTransition != nil {
+		v := *s.LifecycleTransition
+
+		e.SetValue(protocol.BodyTarget, "LifecycleTransition", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationMetadata != nil {
+		v := *s.NotificationMetadata
+
+		e.SetValue(protocol.BodyTarget, "NotificationMetadata", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTargetARN != nil {
+		v := *s.NotificationTargetARN
+
+		e.SetValue(protocol.BodyTarget, "NotificationTargetARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLifecycleHookSpecificationList(vs []LifecycleHookSpecification) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the state of a Classic Load Balancer.
 //
 // If you specify a load balancer when creating the Auto Scaling group, the
@@ -8669,6 +10625,30 @@ func (s *LoadBalancerState) SetState(v string) *LoadBalancerState {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoadBalancerState) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.State != nil {
+		v := *s.State
+
+		e.SetValue(protocol.BodyTarget, "State", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLoadBalancerStateList(vs []LoadBalancerState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the state of a target group.
 //
 // If you attach a target group to an existing Auto Scaling group, the initial
@@ -8725,6 +10705,30 @@ func (s *LoadBalancerTargetGroupState) SetState(v string) *LoadBalancerTargetGro
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoadBalancerTargetGroupState) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancerTargetGroupARN != nil {
+		v := *s.LoadBalancerTargetGroupARN
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerTargetGroupARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.State != nil {
+		v := *s.State
+
+		e.SetValue(protocol.BodyTarget, "State", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLoadBalancerTargetGroupStateList(vs []LoadBalancerTargetGroupState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricCollectionType
 type MetricCollectionType struct {
@@ -8764,6 +10768,25 @@ func (s MetricCollectionType) GoString() string {
 func (s *MetricCollectionType) SetMetric(v string) *MetricCollectionType {
 	s.Metric = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MetricCollectionType) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Metric != nil {
+		v := *s.Metric
+
+		e.SetValue(protocol.BodyTarget, "Metric", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMetricCollectionTypeList(vs []MetricCollectionType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes the dimension of a metric.
@@ -8822,6 +10845,30 @@ func (s *MetricDimension) SetValue(v string) *MetricDimension {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MetricDimension) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMetricDimensionList(vs []MetricDimension) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a granularity of a metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricGranularityType
 type MetricGranularityType struct {
@@ -8845,6 +10892,25 @@ func (s MetricGranularityType) GoString() string {
 func (s *MetricGranularityType) SetGranularity(v string) *MetricGranularityType {
 	s.Granularity = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MetricGranularityType) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Granularity != nil {
+		v := *s.Granularity
+
+		e.SetValue(protocol.BodyTarget, "Granularity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMetricGranularityTypeList(vs []MetricGranularityType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a notification.
@@ -8899,6 +10965,35 @@ func (s *NotificationConfiguration) SetNotificationType(v string) *NotificationC
 func (s *NotificationConfiguration) SetTopicARN(v string) *NotificationConfiguration {
 	s.TopicARN = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationType != nil {
+		v := *s.NotificationType
+
+		e.SetValue(protocol.BodyTarget, "NotificationType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicARN != nil {
+		v := *s.TopicARN
+
+		e.SetValue(protocol.BodyTarget, "TopicARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeNotificationConfigurationList(vs []NotificationConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Configures a predefined metric for a target tracking policy.
@@ -8976,6 +11071,22 @@ func (s *PredefinedMetricSpecification) SetResourceLabel(v string) *PredefinedMe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PredefinedMetricSpecification) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PredefinedMetricType) > 0 {
+		v := s.PredefinedMetricType
+
+		e.SetValue(protocol.BodyTarget, "PredefinedMetricType", v, protocol.Metadata{})
+	}
+	if s.ResourceLabel != nil {
+		v := *s.ResourceLabel
+
+		e.SetValue(protocol.BodyTarget, "ResourceLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes a process type.
 //
 // For more information, see Auto Scaling Processes (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html#process-types)
@@ -9020,6 +11131,25 @@ func (s ProcessType) GoString() string {
 func (s *ProcessType) SetProcessName(v string) *ProcessType {
 	s.ProcessName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ProcessType) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ProcessName != nil {
+		v := *s.ProcessName
+
+		e.SetValue(protocol.BodyTarget, "ProcessName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeProcessTypeList(vs []ProcessType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHookType
@@ -9171,6 +11301,52 @@ func (s *PutLifecycleHookInput) SetRoleARN(v string) *PutLifecycleHookInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutLifecycleHookInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultResult != nil {
+		v := *s.DefaultResult
+
+		e.SetValue(protocol.BodyTarget, "DefaultResult", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HeartbeatTimeout != nil {
+		v := *s.HeartbeatTimeout
+
+		e.SetValue(protocol.BodyTarget, "HeartbeatTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LifecycleHookName != nil {
+		v := *s.LifecycleHookName
+
+		e.SetValue(protocol.BodyTarget, "LifecycleHookName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleTransition != nil {
+		v := *s.LifecycleTransition
+
+		e.SetValue(protocol.BodyTarget, "LifecycleTransition", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationMetadata != nil {
+		v := *s.NotificationMetadata
+
+		e.SetValue(protocol.BodyTarget, "NotificationMetadata", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTargetARN != nil {
+		v := *s.NotificationTargetARN
+
+		e.SetValue(protocol.BodyTarget, "NotificationTargetARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHookAnswer
 type PutLifecycleHookOutput struct {
 	_ struct{} `type:"structure"`
@@ -9191,6 +11367,12 @@ func (s PutLifecycleHookOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutLifecycleHookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutLifecycleHookOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationType
@@ -9271,6 +11453,27 @@ func (s *PutNotificationConfigurationInput) SetTopicARN(v string) *PutNotificati
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutNotificationConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationTypes) > 0 {
+		v := s.NotificationTypes
+
+		e.SetList(protocol.BodyTarget, "NotificationTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.TopicARN != nil {
+		v := *s.TopicARN
+
+		e.SetValue(protocol.BodyTarget, "TopicARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationOutput
 type PutNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -9291,6 +11494,12 @@ func (s PutNotificationConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutNotificationConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutNotificationConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicyType
@@ -9504,6 +11713,72 @@ func (s *PutScalingPolicyInput) SetTargetTrackingConfiguration(v *TargetTracking
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutScalingPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AdjustmentType != nil {
+		v := *s.AdjustmentType
+
+		e.SetValue(protocol.BodyTarget, "AdjustmentType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Cooldown != nil {
+		v := *s.Cooldown
+
+		e.SetValue(protocol.BodyTarget, "Cooldown", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EstimatedInstanceWarmup != nil {
+		v := *s.EstimatedInstanceWarmup
+
+		e.SetValue(protocol.BodyTarget, "EstimatedInstanceWarmup", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MetricAggregationType != nil {
+		v := *s.MetricAggregationType
+
+		e.SetValue(protocol.BodyTarget, "MetricAggregationType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MinAdjustmentMagnitude != nil {
+		v := *s.MinAdjustmentMagnitude
+
+		e.SetValue(protocol.BodyTarget, "MinAdjustmentMagnitude", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinAdjustmentStep != nil {
+		v := *s.MinAdjustmentStep
+
+		e.SetValue(protocol.BodyTarget, "MinAdjustmentStep", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyType != nil {
+		v := *s.PolicyType
+
+		e.SetValue(protocol.BodyTarget, "PolicyType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScalingAdjustment != nil {
+		v := *s.ScalingAdjustment
+
+		e.SetValue(protocol.BodyTarget, "ScalingAdjustment", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.StepAdjustments) > 0 {
+		v := s.StepAdjustments
+
+		e.SetList(protocol.BodyTarget, "StepAdjustments", encodeStepAdjustmentList(v), protocol.Metadata{})
+	}
+	if s.TargetTrackingConfiguration != nil {
+		v := s.TargetTrackingConfiguration
+
+		e.SetFields(protocol.BodyTarget, "TargetTrackingConfiguration", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output of PutScalingPolicy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PolicyARNType
 type PutScalingPolicyOutput struct {
@@ -9543,6 +11818,22 @@ func (s *PutScalingPolicyOutput) SetAlarms(v []Alarm) *PutScalingPolicyOutput {
 func (s *PutScalingPolicyOutput) SetPolicyARN(v string) *PutScalingPolicyOutput {
 	s.PolicyARN = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutScalingPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Alarms) > 0 {
+		v := s.Alarms
+
+		e.SetList(protocol.BodyTarget, "Alarms", encodeAlarmList(v), protocol.Metadata{})
+	}
+	if s.PolicyARN != nil {
+		v := *s.PolicyARN
+
+		e.SetValue(protocol.BodyTarget, "PolicyARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupActionType
@@ -9681,6 +11972,57 @@ func (s *PutScheduledUpdateGroupActionInput) SetTime(v time.Time) *PutScheduledU
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutScheduledUpdateGroupActionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DesiredCapacity != nil {
+		v := *s.DesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "DesiredCapacity", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.MaxSize != nil {
+		v := *s.MaxSize
+
+		e.SetValue(protocol.BodyTarget, "MaxSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinSize != nil {
+		v := *s.MinSize
+
+		e.SetValue(protocol.BodyTarget, "MinSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Recurrence != nil {
+		v := *s.Recurrence
+
+		e.SetValue(protocol.BodyTarget, "Recurrence", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScheduledActionName != nil {
+		v := *s.ScheduledActionName
+
+		e.SetValue(protocol.BodyTarget, "ScheduledActionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Time != nil {
+		v := *s.Time
+
+		e.SetValue(protocol.BodyTarget, "Time", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupActionOutput
 type PutScheduledUpdateGroupActionOutput struct {
 	_ struct{} `type:"structure"`
@@ -9701,6 +12043,12 @@ func (s PutScheduledUpdateGroupActionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutScheduledUpdateGroupActionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutScheduledUpdateGroupActionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatType
@@ -9790,6 +12138,32 @@ func (s *RecordLifecycleActionHeartbeatInput) SetLifecycleHookName(v string) *Re
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RecordLifecycleActionHeartbeatInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleActionToken != nil {
+		v := *s.LifecycleActionToken
+
+		e.SetValue(protocol.BodyTarget, "LifecycleActionToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LifecycleHookName != nil {
+		v := *s.LifecycleHookName
+
+		e.SetValue(protocol.BodyTarget, "LifecycleHookName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatAnswer
 type RecordLifecycleActionHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
@@ -9812,6 +12186,12 @@ func (s RecordLifecycleActionHeartbeatOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RecordLifecycleActionHeartbeatOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcessesOutput
 type ResumeProcessesOutput struct {
 	_ struct{} `type:"structure"`
@@ -9832,6 +12212,12 @@ func (s ResumeProcessesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResumeProcessesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResumeProcessesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes a scaling policy.
@@ -9986,6 +12372,90 @@ func (s *ScalingPolicy) SetTargetTrackingConfiguration(v *TargetTrackingConfigur
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ScalingPolicy) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AdjustmentType != nil {
+		v := *s.AdjustmentType
+
+		e.SetValue(protocol.BodyTarget, "AdjustmentType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Alarms) > 0 {
+		v := s.Alarms
+
+		e.SetList(protocol.BodyTarget, "Alarms", encodeAlarmList(v), protocol.Metadata{})
+	}
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Cooldown != nil {
+		v := *s.Cooldown
+
+		e.SetValue(protocol.BodyTarget, "Cooldown", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EstimatedInstanceWarmup != nil {
+		v := *s.EstimatedInstanceWarmup
+
+		e.SetValue(protocol.BodyTarget, "EstimatedInstanceWarmup", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MetricAggregationType != nil {
+		v := *s.MetricAggregationType
+
+		e.SetValue(protocol.BodyTarget, "MetricAggregationType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MinAdjustmentMagnitude != nil {
+		v := *s.MinAdjustmentMagnitude
+
+		e.SetValue(protocol.BodyTarget, "MinAdjustmentMagnitude", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinAdjustmentStep != nil {
+		v := *s.MinAdjustmentStep
+
+		e.SetValue(protocol.BodyTarget, "MinAdjustmentStep", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PolicyARN != nil {
+		v := *s.PolicyARN
+
+		e.SetValue(protocol.BodyTarget, "PolicyARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyType != nil {
+		v := *s.PolicyType
+
+		e.SetValue(protocol.BodyTarget, "PolicyType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScalingAdjustment != nil {
+		v := *s.ScalingAdjustment
+
+		e.SetValue(protocol.BodyTarget, "ScalingAdjustment", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.StepAdjustments) > 0 {
+		v := s.StepAdjustments
+
+		e.SetList(protocol.BodyTarget, "StepAdjustments", encodeStepAdjustmentList(v), protocol.Metadata{})
+	}
+	if s.TargetTrackingConfiguration != nil {
+		v := s.TargetTrackingConfiguration
+
+		e.SetFields(protocol.BodyTarget, "TargetTrackingConfiguration", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeScalingPolicyList(vs []ScalingPolicy) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a scheduled update to an Auto Scaling group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupAction
 type ScheduledUpdateGroupAction struct {
@@ -10097,6 +12567,70 @@ func (s *ScheduledUpdateGroupAction) SetTime(v time.Time) *ScheduledUpdateGroupA
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ScheduledUpdateGroupAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DesiredCapacity != nil {
+		v := *s.DesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "DesiredCapacity", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.MaxSize != nil {
+		v := *s.MaxSize
+
+		e.SetValue(protocol.BodyTarget, "MaxSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinSize != nil {
+		v := *s.MinSize
+
+		e.SetValue(protocol.BodyTarget, "MinSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Recurrence != nil {
+		v := *s.Recurrence
+
+		e.SetValue(protocol.BodyTarget, "Recurrence", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScheduledActionARN != nil {
+		v := *s.ScheduledActionARN
+
+		e.SetValue(protocol.BodyTarget, "ScheduledActionARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScheduledActionName != nil {
+		v := *s.ScheduledActionName
+
+		e.SetValue(protocol.BodyTarget, "ScheduledActionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Time != nil {
+		v := *s.Time
+
+		e.SetValue(protocol.BodyTarget, "Time", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeScheduledUpdateGroupActionList(vs []ScheduledUpdateGroupAction) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityType
 type SetDesiredCapacityInput struct {
 	_ struct{} `type:"structure"`
@@ -10167,6 +12701,27 @@ func (s *SetDesiredCapacityInput) SetHonorCooldown(v bool) *SetDesiredCapacityIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetDesiredCapacityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DesiredCapacity != nil {
+		v := *s.DesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "DesiredCapacity", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HonorCooldown != nil {
+		v := *s.HonorCooldown
+
+		e.SetValue(protocol.BodyTarget, "HonorCooldown", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityOutput
 type SetDesiredCapacityOutput struct {
 	_ struct{} `type:"structure"`
@@ -10187,6 +12742,12 @@ func (s SetDesiredCapacityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetDesiredCapacityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetDesiredCapacityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealthQuery
@@ -10267,6 +12828,27 @@ func (s *SetInstanceHealthInput) SetShouldRespectGracePeriod(v bool) *SetInstanc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetInstanceHealthInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HealthStatus != nil {
+		v := *s.HealthStatus
+
+		e.SetValue(protocol.BodyTarget, "HealthStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ShouldRespectGracePeriod != nil {
+		v := *s.ShouldRespectGracePeriod
+
+		e.SetValue(protocol.BodyTarget, "ShouldRespectGracePeriod", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealthOutput
 type SetInstanceHealthOutput struct {
 	_ struct{} `type:"structure"`
@@ -10287,6 +12869,12 @@ func (s SetInstanceHealthOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetInstanceHealthOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetInstanceHealthOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionQuery
@@ -10363,6 +12951,27 @@ func (s *SetInstanceProtectionInput) SetProtectedFromScaleIn(v bool) *SetInstanc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetInstanceProtectionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		e.SetList(protocol.BodyTarget, "InstanceIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ProtectedFromScaleIn != nil {
+		v := *s.ProtectedFromScaleIn
+
+		e.SetValue(protocol.BodyTarget, "ProtectedFromScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionAnswer
 type SetInstanceProtectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -10383,6 +12992,12 @@ func (s SetInstanceProtectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetInstanceProtectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetInstanceProtectionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes an adjustment based on the difference between the value of the
@@ -10484,6 +13099,35 @@ func (s *StepAdjustment) SetScalingAdjustment(v int64) *StepAdjustment {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StepAdjustment) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MetricIntervalLowerBound != nil {
+		v := *s.MetricIntervalLowerBound
+
+		e.SetValue(protocol.BodyTarget, "MetricIntervalLowerBound", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.MetricIntervalUpperBound != nil {
+		v := *s.MetricIntervalUpperBound
+
+		e.SetValue(protocol.BodyTarget, "MetricIntervalUpperBound", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.ScalingAdjustment != nil {
+		v := *s.ScalingAdjustment
+
+		e.SetValue(protocol.BodyTarget, "ScalingAdjustment", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStepAdjustmentList(vs []StepAdjustment) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcessesInput
 type SuspendProcessesInput struct {
 	_ struct{} `type:"structure"`
@@ -10553,6 +13197,22 @@ func (s *SuspendProcessesInput) SetScalingProcesses(v []string) *SuspendProcesse
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SuspendProcessesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ScalingProcesses) > 0 {
+		v := s.ScalingProcesses
+
+		e.SetList(protocol.BodyTarget, "ScalingProcesses", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendProcessesOutput
 type SuspendProcessesOutput struct {
 	_ struct{} `type:"structure"`
@@ -10573,6 +13233,12 @@ func (s SuspendProcessesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SuspendProcessesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SuspendProcessesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes an Auto Scaling process that has been suspended. For more information,
@@ -10608,6 +13274,30 @@ func (s *SuspendedProcess) SetProcessName(v string) *SuspendedProcess {
 func (s *SuspendedProcess) SetSuspensionReason(v string) *SuspendedProcess {
 	s.SuspensionReason = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SuspendedProcess) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ProcessName != nil {
+		v := *s.ProcessName
+
+		e.SetValue(protocol.BodyTarget, "ProcessName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SuspensionReason != nil {
+		v := *s.SuspensionReason
+
+		e.SetValue(protocol.BodyTarget, "SuspensionReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSuspendedProcessList(vs []SuspendedProcess) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a tag for an Auto Scaling group.
@@ -10691,6 +13381,45 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PropagateAtLaunch != nil {
+		v := *s.PropagateAtLaunch
+
+		e.SetValue(protocol.BodyTarget, "PropagateAtLaunch", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		e.SetValue(protocol.BodyTarget, "ResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a tag for an Auto Scaling group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TagDescription
 type TagDescription struct {
@@ -10751,6 +13480,45 @@ func (s *TagDescription) SetResourceType(v string) *TagDescription {
 func (s *TagDescription) SetValue(v string) *TagDescription {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TagDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PropagateAtLaunch != nil {
+		v := *s.PropagateAtLaunch
+
+		e.SetValue(protocol.BodyTarget, "PropagateAtLaunch", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		e.SetValue(protocol.BodyTarget, "ResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagDescriptionList(vs []TagDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents a target tracking policy configuration.
@@ -10836,6 +13604,32 @@ func (s *TargetTrackingConfiguration) SetTargetValue(v float64) *TargetTrackingC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TargetTrackingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CustomizedMetricSpecification != nil {
+		v := s.CustomizedMetricSpecification
+
+		e.SetFields(protocol.BodyTarget, "CustomizedMetricSpecification", v, protocol.Metadata{})
+	}
+	if s.DisableScaleIn != nil {
+		v := *s.DisableScaleIn
+
+		e.SetValue(protocol.BodyTarget, "DisableScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PredefinedMetricSpecification != nil {
+		v := s.PredefinedMetricSpecification
+
+		e.SetFields(protocol.BodyTarget, "PredefinedMetricSpecification", v, protocol.Metadata{})
+	}
+	if s.TargetValue != nil {
+		v := *s.TargetValue
+
+		e.SetValue(protocol.BodyTarget, "TargetValue", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroupType
 type TerminateInstanceInAutoScalingGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -10895,6 +13689,22 @@ func (s *TerminateInstanceInAutoScalingGroupInput) SetShouldDecrementDesiredCapa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TerminateInstanceInAutoScalingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ShouldDecrementDesiredCapacity != nil {
+		v := *s.ShouldDecrementDesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "ShouldDecrementDesiredCapacity", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ActivityType
 type TerminateInstanceInAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -10924,6 +13734,17 @@ func (s TerminateInstanceInAutoScalingGroupOutput) SDKResponseMetadata() aws.Res
 func (s *TerminateInstanceInAutoScalingGroupOutput) SetActivity(v *Activity) *TerminateInstanceInAutoScalingGroupOutput {
 	s.Activity = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TerminateInstanceInAutoScalingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Activity != nil {
+		v := s.Activity
+
+		e.SetFields(protocol.BodyTarget, "Activity", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType
@@ -11119,6 +13940,77 @@ func (s *UpdateAutoScalingGroupInput) SetVPCZoneIdentifier(v string) *UpdateAuto
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAutoScalingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoScalingGroupName != nil {
+		v := *s.AutoScalingGroupName
+
+		e.SetValue(protocol.BodyTarget, "AutoScalingGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.DefaultCooldown != nil {
+		v := *s.DefaultCooldown
+
+		e.SetValue(protocol.BodyTarget, "DefaultCooldown", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DesiredCapacity != nil {
+		v := *s.DesiredCapacity
+
+		e.SetValue(protocol.BodyTarget, "DesiredCapacity", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HealthCheckGracePeriod != nil {
+		v := *s.HealthCheckGracePeriod
+
+		e.SetValue(protocol.BodyTarget, "HealthCheckGracePeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.HealthCheckType != nil {
+		v := *s.HealthCheckType
+
+		e.SetValue(protocol.BodyTarget, "HealthCheckType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxSize != nil {
+		v := *s.MaxSize
+
+		e.SetValue(protocol.BodyTarget, "MaxSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinSize != nil {
+		v := *s.MinSize
+
+		e.SetValue(protocol.BodyTarget, "MinSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NewInstancesProtectedFromScaleIn != nil {
+		v := *s.NewInstancesProtectedFromScaleIn
+
+		e.SetValue(protocol.BodyTarget, "NewInstancesProtectedFromScaleIn", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PlacementGroup != nil {
+		v := *s.PlacementGroup
+
+		e.SetValue(protocol.BodyTarget, "PlacementGroup", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TerminationPolicies) > 0 {
+		v := s.TerminationPolicies
+
+		e.SetList(protocol.BodyTarget, "TerminationPolicies", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.VPCZoneIdentifier != nil {
+		v := *s.VPCZoneIdentifier
+
+		e.SetValue(protocol.BodyTarget, "VPCZoneIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupOutput
 type UpdateAutoScalingGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -11141,6 +14033,12 @@ func (s UpdateAutoScalingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAutoScalingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 type LifecycleState string
 
 // Enum values for LifecycleState
@@ -11160,6 +14058,15 @@ const (
 	LifecycleStateStandby            LifecycleState = "Standby"
 )
 
+func (enum LifecycleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecycleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricStatistic string
 
 // Enum values for MetricStatistic
@@ -11171,6 +14078,15 @@ const (
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
+func (enum MetricStatistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricStatistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricType string
 
 // Enum values for MetricType
@@ -11180,6 +14096,15 @@ const (
 	MetricTypeAsgaverageNetworkOut     MetricType = "ASGAverageNetworkOut"
 	MetricTypeAlbrequestCountPerTarget MetricType = "ALBRequestCountPerTarget"
 )
+
+func (enum MetricType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ScalingActivityStatusCode string
 
@@ -11198,3 +14123,12 @@ const (
 	ScalingActivityStatusCodeFailed                          ScalingActivityStatusCode = "Failed"
 	ScalingActivityStatusCodeCancelled                       ScalingActivityStatusCode = "Cancelled"
 )
+
+func (enum ScalingActivityStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalingActivityStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

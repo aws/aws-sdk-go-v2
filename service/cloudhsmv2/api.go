@@ -2092,6 +2092,15 @@ const (
 	BackupPolicyDefault BackupPolicy = "DEFAULT"
 )
 
+func (enum BackupPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BackupState string
 
 // Enum values for BackupState
@@ -2100,6 +2109,15 @@ const (
 	BackupStateReady            BackupState = "READY"
 	BackupStateDeleted          BackupState = "DELETED"
 )
+
+func (enum BackupState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ClusterState string
 
@@ -2116,6 +2134,15 @@ const (
 	ClusterStateDegraded             ClusterState = "DEGRADED"
 )
 
+func (enum ClusterState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClusterState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HsmState string
 
 // Enum values for HsmState
@@ -2126,3 +2153,12 @@ const (
 	HsmStateDeleteInProgress HsmState = "DELETE_IN_PROGRESS"
 	HsmStateDeleted          HsmState = "DELETED"
 )
+
+func (enum HsmState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HsmState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

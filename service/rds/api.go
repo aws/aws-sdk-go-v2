@@ -5901,6 +5901,35 @@ func (s *AccountQuota) SetUsed(v int64) *AccountQuota {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccountQuota) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountQuotaName != nil {
+		v := *s.AccountQuotaName
+
+		e.SetValue(protocol.BodyTarget, "AccountQuotaName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Max != nil {
+		v := *s.Max
+
+		e.SetValue(protocol.BodyTarget, "Max", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Used != nil {
+		v := *s.Used
+
+		e.SetValue(protocol.BodyTarget, "Used", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAccountQuotaList(vs []AccountQuota) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBClusterMessage
 type AddRoleToDBClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -5957,6 +5986,22 @@ func (s *AddRoleToDBClusterInput) SetRoleArn(v string) *AddRoleToDBClusterInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddRoleToDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBClusterOutput
 type AddRoleToDBClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -5977,6 +6022,12 @@ func (s AddRoleToDBClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddRoleToDBClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddRoleToDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscriptionMessage
@@ -6051,6 +6102,22 @@ func (s *AddSourceIdentifierToSubscriptionInput) SetSubscriptionName(v string) *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddSourceIdentifierToSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscriptionResult
 type AddSourceIdentifierToSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6081,6 +6148,17 @@ func (s AddSourceIdentifierToSubscriptionOutput) SDKResponseMetadata() aws.Respo
 func (s *AddSourceIdentifierToSubscriptionOutput) SetEventSubscription(v *EventSubscription) *AddSourceIdentifierToSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddSourceIdentifierToSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResourceMessage
@@ -6140,6 +6218,22 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddTagsToResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResourceOutput
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6160,6 +6254,12 @@ func (s AddTagsToResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddTagsToResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceActionMessage
@@ -6246,6 +6346,27 @@ func (s *ApplyPendingMaintenanceActionInput) SetResourceIdentifier(v string) *Ap
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplyPendingMaintenanceActionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplyAction != nil {
+		v := *s.ApplyAction
+
+		e.SetValue(protocol.BodyTarget, "ApplyAction", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptInType != nil {
+		v := *s.OptInType
+
+		e.SetValue(protocol.BodyTarget, "OptInType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceIdentifier != nil {
+		v := *s.ResourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ResourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceActionResult
 type ApplyPendingMaintenanceActionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6275,6 +6396,17 @@ func (s ApplyPendingMaintenanceActionOutput) SDKResponseMetadata() aws.Response 
 func (s *ApplyPendingMaintenanceActionOutput) SetResourcePendingMaintenanceActions(v *ResourcePendingMaintenanceActions) *ApplyPendingMaintenanceActionOutput {
 	s.ResourcePendingMaintenanceActions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplyPendingMaintenanceActionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourcePendingMaintenanceActions != nil {
+		v := s.ResourcePendingMaintenanceActions
+
+		e.SetFields(protocol.BodyTarget, "ResourcePendingMaintenanceActions", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngressMessage
@@ -6361,6 +6493,37 @@ func (s *AuthorizeDBSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeDBSecurityGroupIngressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CIDRIP != nil {
+		v := *s.CIDRIP
+
+		e.SetValue(protocol.BodyTarget, "CIDRIP", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupId != nil {
+		v := *s.EC2SecurityGroupId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngressResult
 type AuthorizeDBSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -6403,6 +6566,17 @@ func (s *AuthorizeDBSecurityGroupIngressOutput) SetDBSecurityGroup(v *DBSecurity
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeDBSecurityGroupIngressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroup != nil {
+		v := s.DBSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "DBSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains Availability Zone information.
 //
 // This data type is used as an element in the following data type:
@@ -6430,6 +6604,25 @@ func (s AvailabilityZone) GoString() string {
 func (s *AvailabilityZone) SetName(v string) *AvailabilityZone {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AvailabilityZone) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAvailabilityZoneList(vs []AvailabilityZone) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // A CA certificate for an AWS account.
@@ -6502,6 +6695,50 @@ func (s *Certificate) SetValidTill(v time.Time) *Certificate {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Certificate) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
+
+		e.SetValue(protocol.BodyTarget, "CertificateArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CertificateIdentifier != nil {
+		v := *s.CertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "CertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CertificateType != nil {
+		v := *s.CertificateType
+
+		e.SetValue(protocol.BodyTarget, "CertificateType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Thumbprint != nil {
+		v := *s.Thumbprint
+
+		e.SetValue(protocol.BodyTarget, "Thumbprint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ValidFrom != nil {
+		v := *s.ValidFrom
+
+		e.SetValue(protocol.BodyTarget, "ValidFrom", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ValidTill != nil {
+		v := *s.ValidTill
+
+		e.SetValue(protocol.BodyTarget, "ValidTill", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCertificateList(vs []Certificate) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a response element in the action DescribeDBEngineVersions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CharacterSet
 type CharacterSet struct {
@@ -6534,6 +6771,30 @@ func (s *CharacterSet) SetCharacterSetDescription(v string) *CharacterSet {
 func (s *CharacterSet) SetCharacterSetName(v string) *CharacterSet {
 	s.CharacterSetName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CharacterSet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CharacterSetDescription != nil {
+		v := *s.CharacterSetDescription
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CharacterSetName != nil {
+		v := *s.CharacterSetName
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCharacterSetList(vs []CharacterSet) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroupMessage
@@ -6640,6 +6901,32 @@ func (s *CopyDBClusterParameterGroupInput) SetTargetDBClusterParameterGroupIdent
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceDBClusterParameterGroupIdentifier != nil {
+		v := *s.SourceDBClusterParameterGroupIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBClusterParameterGroupIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TargetDBClusterParameterGroupDescription != nil {
+		v := *s.TargetDBClusterParameterGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "TargetDBClusterParameterGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetDBClusterParameterGroupIdentifier != nil {
+		v := *s.TargetDBClusterParameterGroupIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetDBClusterParameterGroupIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroupResult
 type CopyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6674,6 +6961,17 @@ func (s CopyDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CopyDBClusterParameterGroupOutput) SetDBClusterParameterGroup(v *DBClusterParameterGroup) *CopyDBClusterParameterGroupOutput {
 	s.DBClusterParameterGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroup != nil {
+		v := s.DBClusterParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "DBClusterParameterGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshotMessage
@@ -6870,6 +7168,52 @@ func (s *CopyDBClusterSnapshotInput) SetTargetDBClusterSnapshotIdentifier(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CopyTags != nil {
+		v := *s.CopyTags
+
+		e.SetValue(protocol.BodyTarget, "CopyTags", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DestinationRegion != nil {
+		v := *s.DestinationRegion
+
+		e.SetValue(protocol.BodyTarget, "DestinationRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreSignedUrl != nil {
+		v := *s.PreSignedUrl
+
+		e.SetValue(protocol.BodyTarget, "PreSignedUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDBClusterSnapshotIdentifier != nil {
+		v := *s.SourceDBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceRegion != nil {
+		v := *s.SourceRegion
+
+		e.SetValue(protocol.BodyTarget, "SourceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TargetDBClusterSnapshotIdentifier != nil {
+		v := *s.TargetDBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetDBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshotResult
 type CopyDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -6906,6 +7250,17 @@ func (s CopyDBClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CopyDBClusterSnapshotOutput) SetDBClusterSnapshot(v *DBClusterSnapshot) *CopyDBClusterSnapshotOutput {
 	s.DBClusterSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshot != nil {
+		v := s.DBClusterSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBClusterSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroupMessage
@@ -7008,6 +7363,32 @@ func (s *CopyDBParameterGroupInput) SetTargetDBParameterGroupIdentifier(v string
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceDBParameterGroupIdentifier != nil {
+		v := *s.SourceDBParameterGroupIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBParameterGroupIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TargetDBParameterGroupDescription != nil {
+		v := *s.TargetDBParameterGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "TargetDBParameterGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetDBParameterGroupIdentifier != nil {
+		v := *s.TargetDBParameterGroupIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetDBParameterGroupIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroupResult
 type CopyDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7041,6 +7422,17 @@ func (s CopyDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CopyDBParameterGroupOutput) SetDBParameterGroup(v *DBParameterGroup) *CopyDBParameterGroupOutput {
 	s.DBParameterGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroup != nil {
+		v := s.DBParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "DBParameterGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshotMessage
@@ -7259,6 +7651,57 @@ func (s *CopyDBSnapshotInput) SetTargetDBSnapshotIdentifier(v string) *CopyDBSna
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CopyTags != nil {
+		v := *s.CopyTags
+
+		e.SetValue(protocol.BodyTarget, "CopyTags", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DestinationRegion != nil {
+		v := *s.DestinationRegion
+
+		e.SetValue(protocol.BodyTarget, "DestinationRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreSignedUrl != nil {
+		v := *s.PreSignedUrl
+
+		e.SetValue(protocol.BodyTarget, "PreSignedUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDBSnapshotIdentifier != nil {
+		v := *s.SourceDBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceRegion != nil {
+		v := *s.SourceRegion
+
+		e.SetValue(protocol.BodyTarget, "SourceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TargetDBSnapshotIdentifier != nil {
+		v := *s.TargetDBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetDBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshotResult
 type CopyDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -7294,6 +7737,17 @@ func (s CopyDBSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CopyDBSnapshotOutput) SetDBSnapshot(v *DBSnapshot) *CopyDBSnapshotOutput {
 	s.DBSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyDBSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshot != nil {
+		v := s.DBSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroupMessage
@@ -7399,6 +7853,32 @@ func (s *CopyOptionGroupInput) SetTargetOptionGroupIdentifier(v string) *CopyOpt
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyOptionGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceOptionGroupIdentifier != nil {
+		v := *s.SourceOptionGroupIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceOptionGroupIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TargetOptionGroupDescription != nil {
+		v := *s.TargetOptionGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "TargetOptionGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetOptionGroupIdentifier != nil {
+		v := *s.TargetOptionGroupIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetOptionGroupIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroupResult
 type CopyOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7427,6 +7907,17 @@ func (s CopyOptionGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CopyOptionGroupOutput) SetOptionGroup(v *OptionGroup) *CopyOptionGroupOutput {
 	s.OptionGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyOptionGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OptionGroup != nil {
+		v := s.OptionGroup
+
+		e.SetFields(protocol.BodyTarget, "OptionGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterMessage
@@ -7824,6 +8315,132 @@ func (s *CreateDBClusterInput) SetVpcSecurityGroupIds(v []string) *CreateDBClust
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CharacterSetName != nil {
+		v := *s.CharacterSetName
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DatabaseName != nil {
+		v := *s.DatabaseName
+
+		e.SetValue(protocol.BodyTarget, "DatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DestinationRegion != nil {
+		v := *s.DestinationRegion
+
+		e.SetValue(protocol.BodyTarget, "DestinationRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreSignedUrl != nil {
+		v := *s.PreSignedUrl
+
+		e.SetValue(protocol.BodyTarget, "PreSignedUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationSourceIdentifier != nil {
+		v := *s.ReplicationSourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ReplicationSourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceRegion != nil {
+		v := *s.SourceRegion
+
+		e.SetValue(protocol.BodyTarget, "SourceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterResult
 type CreateDBClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -7867,6 +8484,17 @@ func (s CreateDBClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBClusterOutput) SetDBCluster(v *DBCluster) *CreateDBClusterOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroupMessage
@@ -7961,6 +8589,32 @@ func (s *CreateDBClusterParameterGroupInput) SetTags(v []Tag) *CreateDBClusterPa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroupResult
 type CreateDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7995,6 +8649,17 @@ func (s CreateDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response 
 func (s *CreateDBClusterParameterGroupOutput) SetDBClusterParameterGroup(v *DBClusterParameterGroup) *CreateDBClusterParameterGroupOutput {
 	s.DBClusterParameterGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroup != nil {
+		v := s.DBClusterParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "DBClusterParameterGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshotMessage
@@ -8083,6 +8748,27 @@ func (s *CreateDBClusterSnapshotInput) SetTags(v []Tag) *CreateDBClusterSnapshot
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshotResult
 type CreateDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -8119,6 +8805,17 @@ func (s CreateDBClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBClusterSnapshotOutput) SetDBClusterSnapshot(v *DBClusterSnapshot) *CreateDBClusterSnapshotOutput {
 	s.DBClusterSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshot != nil {
+		v := s.DBClusterSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBClusterSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage
@@ -9167,6 +9864,217 @@ func (s *CreateDBInstanceInput) SetVpcSecurityGroupIds(v []string) *CreateDBInst
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CharacterSetName != nil {
+		v := *s.CharacterSetName
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CopyTagsToSnapshot != nil {
+		v := *s.CopyTagsToSnapshot
+
+		e.SetValue(protocol.BodyTarget, "CopyTagsToSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DBSecurityGroups) > 0 {
+		v := s.DBSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "DBSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "DBSecurityGroupName"})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainIAMRoleName != nil {
+		v := *s.DomainIAMRoleName
+
+		e.SetValue(protocol.BodyTarget, "DomainIAMRoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnablePerformanceInsights != nil {
+		v := *s.EnablePerformanceInsights
+
+		e.SetValue(protocol.BodyTarget, "EnablePerformanceInsights", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MonitoringInterval != nil {
+		v := *s.MonitoringInterval
+
+		e.SetValue(protocol.BodyTarget, "MonitoringInterval", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MonitoringRoleArn != nil {
+		v := *s.MonitoringRoleArn
+
+		e.SetValue(protocol.BodyTarget, "MonitoringRoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PerformanceInsightsKMSKeyId != nil {
+		v := *s.PerformanceInsightsKMSKeyId
+
+		e.SetValue(protocol.BodyTarget, "PerformanceInsightsKMSKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PromotionTier != nil {
+		v := *s.PromotionTier
+
+		e.SetValue(protocol.BodyTarget, "PromotionTier", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialPassword != nil {
+		v := *s.TdeCredentialPassword
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timezone != nil {
+		v := *s.Timezone
+
+		e.SetValue(protocol.BodyTarget, "Timezone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceResult
 type CreateDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -9208,6 +10116,17 @@ func (s CreateDBInstanceOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBInstanceOutput) SetDBInstance(v *DBInstance) *CreateDBInstanceOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaMessage
@@ -9617,6 +10536,122 @@ func (s *CreateDBInstanceReadReplicaInput) SetTags(v []Tag) *CreateDBInstanceRea
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBInstanceReadReplicaInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CopyTagsToSnapshot != nil {
+		v := *s.CopyTagsToSnapshot
+
+		e.SetValue(protocol.BodyTarget, "CopyTagsToSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DestinationRegion != nil {
+		v := *s.DestinationRegion
+
+		e.SetValue(protocol.BodyTarget, "DestinationRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnablePerformanceInsights != nil {
+		v := *s.EnablePerformanceInsights
+
+		e.SetValue(protocol.BodyTarget, "EnablePerformanceInsights", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MonitoringInterval != nil {
+		v := *s.MonitoringInterval
+
+		e.SetValue(protocol.BodyTarget, "MonitoringInterval", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MonitoringRoleArn != nil {
+		v := *s.MonitoringRoleArn
+
+		e.SetValue(protocol.BodyTarget, "MonitoringRoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PerformanceInsightsKMSKeyId != nil {
+		v := *s.PerformanceInsightsKMSKeyId
+
+		e.SetValue(protocol.BodyTarget, "PerformanceInsightsKMSKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreSignedUrl != nil {
+		v := *s.PreSignedUrl
+
+		e.SetValue(protocol.BodyTarget, "PreSignedUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceDBInstanceIdentifier != nil {
+		v := *s.SourceDBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceRegion != nil {
+		v := *s.SourceRegion
+
+		e.SetValue(protocol.BodyTarget, "SourceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaResult
 type CreateDBInstanceReadReplicaOutput struct {
 	_ struct{} `type:"structure"`
@@ -9658,6 +10693,17 @@ func (s CreateDBInstanceReadReplicaOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBInstanceReadReplicaOutput) SetDBInstance(v *DBInstance) *CreateDBInstanceReadReplicaOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBInstanceReadReplicaOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroupMessage
@@ -9752,6 +10798,32 @@ func (s *CreateDBParameterGroupInput) SetTags(v []Tag) *CreateDBParameterGroupIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroupResult
 type CreateDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -9785,6 +10857,17 @@ func (s CreateDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBParameterGroupOutput) SetDBParameterGroup(v *DBParameterGroup) *CreateDBParameterGroupOutput {
 	s.DBParameterGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroup != nil {
+		v := s.DBParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "DBParameterGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroupMessage
@@ -9863,6 +10946,27 @@ func (s *CreateDBSecurityGroupInput) SetTags(v []Tag) *CreateDBSecurityGroupInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroupDescription != nil {
+		v := *s.DBSecurityGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroupResult
 type CreateDBSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -9903,6 +11007,17 @@ func (s CreateDBSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBSecurityGroupOutput) SetDBSecurityGroup(v *DBSecurityGroup) *CreateDBSecurityGroupOutput {
 	s.DBSecurityGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroup != nil {
+		v := s.DBSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "DBSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshotMessage
@@ -9989,6 +11104,27 @@ func (s *CreateDBSnapshotInput) SetTags(v []Tag) *CreateDBSnapshotInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshotResult
 type CreateDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -10024,6 +11160,17 @@ func (s CreateDBSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBSnapshotOutput) SetDBSnapshot(v *DBSnapshot) *CreateDBSnapshotOutput {
 	s.DBSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshot != nil {
+		v := s.DBSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroupMessage
@@ -10110,6 +11257,32 @@ func (s *CreateDBSubnetGroupInput) SetTags(v []Tag) *CreateDBSubnetGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroupDescription != nil {
+		v := *s.DBSubnetGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		e.SetList(protocol.BodyTarget, "SubnetIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SubnetIdentifier"})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroupResult
 type CreateDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -10150,6 +11323,17 @@ func (s CreateDBSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDBSubnetGroupOutput) SetDBSubnetGroup(v *DBSubnetGroup) *CreateDBSubnetGroupOutput {
 	s.DBSubnetGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDBSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroup != nil {
+		v := s.DBSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "DBSubnetGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscriptionMessage
@@ -10286,6 +11470,47 @@ func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscription
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateEventSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceIds) > 0 {
+		v := s.SourceIds
+
+		e.SetList(protocol.BodyTarget, "SourceIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SourceId"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscriptionResult
 type CreateEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -10316,6 +11541,17 @@ func (s CreateEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *CreateEventSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateEventSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroupMessage
@@ -10424,6 +11660,37 @@ func (s *CreateOptionGroupInput) SetTags(v []Tag) *CreateOptionGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateOptionGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EngineName != nil {
+		v := *s.EngineName
+
+		e.SetValue(protocol.BodyTarget, "EngineName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MajorEngineVersion != nil {
+		v := *s.MajorEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MajorEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupDescription != nil {
+		v := *s.OptionGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroupResult
 type CreateOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -10452,6 +11719,17 @@ func (s CreateOptionGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateOptionGroupOutput) SetOptionGroup(v *OptionGroup) *CreateOptionGroupOutput {
 	s.OptionGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateOptionGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OptionGroup != nil {
+		v := s.OptionGroup
+
+		e.SetFields(protocol.BodyTarget, "OptionGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the result of a successful invocation of the following actions:
@@ -10832,6 +12110,195 @@ func (s *DBCluster) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *DBClus
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBCluster) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.AssociatedRoles) > 0 {
+		v := s.AssociatedRoles
+
+		e.SetList(protocol.BodyTarget, "AssociatedRoles", encodeDBClusterRoleList(v), protocol.Metadata{ListLocationName: "DBClusterRole"})
+	}
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CharacterSetName != nil {
+		v := *s.CharacterSetName
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CloneGroupId != nil {
+		v := *s.CloneGroupId
+
+		e.SetValue(protocol.BodyTarget, "CloneGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterCreateTime != nil {
+		v := *s.ClusterCreateTime
+
+		e.SetValue(protocol.BodyTarget, "ClusterCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DBClusterArn != nil {
+		v := *s.DBClusterArn
+
+		e.SetValue(protocol.BodyTarget, "DBClusterArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DBClusterMembers) > 0 {
+		v := s.DBClusterMembers
+
+		e.SetList(protocol.BodyTarget, "DBClusterMembers", encodeDBClusterMemberList(v), protocol.Metadata{ListLocationName: "DBClusterMember"})
+	}
+	if len(s.DBClusterOptionGroupMemberships) > 0 {
+		v := s.DBClusterOptionGroupMemberships
+
+		e.SetList(protocol.BodyTarget, "DBClusterOptionGroupMemberships", encodeDBClusterOptionGroupStatusList(v), protocol.Metadata{ListLocationName: "DBClusterOptionGroup"})
+	}
+	if s.DBClusterParameterGroup != nil {
+		v := *s.DBClusterParameterGroup
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroup", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroup != nil {
+		v := *s.DBSubnetGroup
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroup", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DatabaseName != nil {
+		v := *s.DatabaseName
+
+		e.SetValue(protocol.BodyTarget, "DatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DbClusterResourceId != nil {
+		v := *s.DbClusterResourceId
+
+		e.SetValue(protocol.BodyTarget, "DbClusterResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EarliestRestorableTime != nil {
+		v := *s.EarliestRestorableTime
+
+		e.SetValue(protocol.BodyTarget, "EarliestRestorableTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HostedZoneId != nil {
+		v := *s.HostedZoneId
+
+		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IAMDatabaseAuthenticationEnabled != nil {
+		v := *s.IAMDatabaseAuthenticationEnabled
+
+		e.SetValue(protocol.BodyTarget, "IAMDatabaseAuthenticationEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LatestRestorableTime != nil {
+		v := *s.LatestRestorableTime
+
+		e.SetValue(protocol.BodyTarget, "LatestRestorableTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PercentProgress != nil {
+		v := *s.PercentProgress
+
+		e.SetValue(protocol.BodyTarget, "PercentProgress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReadReplicaIdentifiers) > 0 {
+		v := s.ReadReplicaIdentifiers
+
+		e.SetList(protocol.BodyTarget, "ReadReplicaIdentifiers", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ReadReplicaIdentifier"})
+	}
+	if s.ReaderEndpoint != nil {
+		v := *s.ReaderEndpoint
+
+		e.SetValue(protocol.BodyTarget, "ReaderEndpoint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationSourceIdentifier != nil {
+		v := *s.ReplicationSourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ReplicationSourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroups) > 0 {
+		v := s.VpcSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroups", encodeVpcSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupMembership"})
+	}
+	return nil
+}
+
+func encodeDBClusterList(vs []DBCluster) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about an instance that is part of a DB cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterMember
 type DBClusterMember struct {
@@ -10888,6 +12355,40 @@ func (s *DBClusterMember) SetPromotionTier(v int64) *DBClusterMember {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterMember) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupStatus != nil {
+		v := *s.DBClusterParameterGroupStatus
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsClusterWriter != nil {
+		v := *s.IsClusterWriter
+
+		e.SetValue(protocol.BodyTarget, "IsClusterWriter", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PromotionTier != nil {
+		v := *s.PromotionTier
+
+		e.SetValue(protocol.BodyTarget, "PromotionTier", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBClusterMemberList(vs []DBClusterMember) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains status information for a DB cluster option group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterOptionGroupStatus
 type DBClusterOptionGroupStatus struct {
@@ -10920,6 +12421,30 @@ func (s *DBClusterOptionGroupStatus) SetDBClusterOptionGroupName(v string) *DBCl
 func (s *DBClusterOptionGroupStatus) SetStatus(v string) *DBClusterOptionGroupStatus {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterOptionGroupStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterOptionGroupName != nil {
+		v := *s.DBClusterOptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterOptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBClusterOptionGroupStatusList(vs []DBClusterOptionGroupStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the result of a successful invocation of the CreateDBClusterParameterGroup
@@ -10981,6 +12506,40 @@ func (s *DBClusterParameterGroup) SetDescription(v string) *DBClusterParameterGr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterParameterGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupArn != nil {
+		v := *s.DBClusterParameterGroupArn
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBClusterParameterGroupList(vs []DBClusterParameterGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole
@@ -11025,6 +12584,30 @@ func (s *DBClusterRole) SetRoleArn(v string) *DBClusterRole {
 func (s *DBClusterRole) SetStatus(v string) *DBClusterRole {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterRole) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBClusterRoleList(vs []DBClusterRole) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the result of a successful invocation of the following actions:
@@ -11239,6 +12822,120 @@ func (s *DBClusterSnapshot) SetVpcId(v string) *DBClusterSnapshot {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterSnapshot) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.ClusterCreateTime != nil {
+		v := *s.ClusterCreateTime
+
+		e.SetValue(protocol.BodyTarget, "ClusterCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterSnapshotArn != nil {
+		v := *s.DBClusterSnapshotArn
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IAMDatabaseAuthenticationEnabled != nil {
+		v := *s.IAMDatabaseAuthenticationEnabled
+
+		e.SetValue(protocol.BodyTarget, "IAMDatabaseAuthenticationEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PercentProgress != nil {
+		v := *s.PercentProgress
+
+		e.SetValue(protocol.BodyTarget, "PercentProgress", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotCreateTime != nil {
+		v := *s.SnapshotCreateTime
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SnapshotType != nil {
+		v := *s.SnapshotType
+
+		e.SetValue(protocol.BodyTarget, "SnapshotType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDBClusterSnapshotArn != nil {
+		v := *s.SourceDBClusterSnapshotArn
+
+		e.SetValue(protocol.BodyTarget, "SourceDBClusterSnapshotArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBClusterSnapshotList(vs []DBClusterSnapshot) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the name and values of a manual DB cluster snapshot attribute.
 //
 // Manual DB cluster snapshot attributes are used to authorize other AWS accounts
@@ -11287,6 +12984,30 @@ func (s *DBClusterSnapshotAttribute) SetAttributeValues(v []string) *DBClusterSn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterSnapshotAttribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AttributeValues) > 0 {
+		v := s.AttributeValues
+
+		e.SetList(protocol.BodyTarget, "AttributeValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AttributeValue"})
+	}
+	return nil
+}
+
+func encodeDBClusterSnapshotAttributeList(vs []DBClusterSnapshotAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes
 // API action.
 //
@@ -11325,6 +13046,22 @@ func (s *DBClusterSnapshotAttributesResult) SetDBClusterSnapshotAttributes(v []D
 func (s *DBClusterSnapshotAttributesResult) SetDBClusterSnapshotIdentifier(v string) *DBClusterSnapshotAttributesResult {
 	s.DBClusterSnapshotIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBClusterSnapshotAttributesResult) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBClusterSnapshotAttributes) > 0 {
+		v := s.DBClusterSnapshotAttributes
+
+		e.SetList(protocol.BodyTarget, "DBClusterSnapshotAttributes", encodeDBClusterSnapshotAttributeList(v), protocol.Metadata{ListLocationName: "DBClusterSnapshotAttribute"})
+	}
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // This data type is used as a response element in the action DescribeDBEngineVersions.
@@ -11426,6 +13163,65 @@ func (s *DBEngineVersion) SetSupportedTimezones(v []Timezone) *DBEngineVersion {
 func (s *DBEngineVersion) SetValidUpgradeTarget(v []UpgradeTarget) *DBEngineVersion {
 	s.ValidUpgradeTarget = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBEngineVersion) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBEngineDescription != nil {
+		v := *s.DBEngineDescription
+
+		e.SetValue(protocol.BodyTarget, "DBEngineDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBEngineVersionDescription != nil {
+		v := *s.DBEngineVersionDescription
+
+		e.SetValue(protocol.BodyTarget, "DBEngineVersionDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultCharacterSet != nil {
+		v := s.DefaultCharacterSet
+
+		e.SetFields(protocol.BodyTarget, "DefaultCharacterSet", v, protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SupportedCharacterSets) > 0 {
+		v := s.SupportedCharacterSets
+
+		e.SetList(protocol.BodyTarget, "SupportedCharacterSets", encodeCharacterSetList(v), protocol.Metadata{ListLocationName: "CharacterSet"})
+	}
+	if len(s.SupportedTimezones) > 0 {
+		v := s.SupportedTimezones
+
+		e.SetList(protocol.BodyTarget, "SupportedTimezones", encodeTimezoneList(v), protocol.Metadata{ListLocationName: "Timezone"})
+	}
+	if len(s.ValidUpgradeTarget) > 0 {
+		v := s.ValidUpgradeTarget
+
+		e.SetList(protocol.BodyTarget, "ValidUpgradeTarget", encodeUpgradeTargetList(v), protocol.Metadata{ListLocationName: "UpgradeTarget"})
+	}
+	return nil
+}
+
+func encodeDBEngineVersionList(vs []DBEngineVersion) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the result of a successful invocation of the following actions:
@@ -11982,6 +13778,275 @@ func (s *DBInstance) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *DBIns
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBInstance) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CACertificateIdentifier != nil {
+		v := *s.CACertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "CACertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CharacterSetName != nil {
+		v := *s.CharacterSetName
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CopyTagsToSnapshot != nil {
+		v := *s.CopyTagsToSnapshot
+
+		e.SetValue(protocol.BodyTarget, "CopyTagsToSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceArn != nil {
+		v := *s.DBInstanceArn
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceStatus != nil {
+		v := *s.DBInstanceStatus
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DBParameterGroups) > 0 {
+		v := s.DBParameterGroups
+
+		e.SetList(protocol.BodyTarget, "DBParameterGroups", encodeDBParameterGroupStatusList(v), protocol.Metadata{ListLocationName: "DBParameterGroup"})
+	}
+	if len(s.DBSecurityGroups) > 0 {
+		v := s.DBSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "DBSecurityGroups", encodeDBSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "DBSecurityGroup"})
+	}
+	if s.DBSubnetGroup != nil {
+		v := s.DBSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "DBSubnetGroup", v, protocol.Metadata{})
+	}
+	if s.DbInstancePort != nil {
+		v := *s.DbInstancePort
+
+		e.SetValue(protocol.BodyTarget, "DbInstancePort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DbiResourceId != nil {
+		v := *s.DbiResourceId
+
+		e.SetValue(protocol.BodyTarget, "DbiResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DomainMemberships) > 0 {
+		v := s.DomainMemberships
+
+		e.SetList(protocol.BodyTarget, "DomainMemberships", encodeDomainMembershipList(v), protocol.Metadata{ListLocationName: "DomainMembership"})
+	}
+	if s.Endpoint != nil {
+		v := s.Endpoint
+
+		e.SetFields(protocol.BodyTarget, "Endpoint", v, protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnhancedMonitoringResourceArn != nil {
+		v := *s.EnhancedMonitoringResourceArn
+
+		e.SetValue(protocol.BodyTarget, "EnhancedMonitoringResourceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IAMDatabaseAuthenticationEnabled != nil {
+		v := *s.IAMDatabaseAuthenticationEnabled
+
+		e.SetValue(protocol.BodyTarget, "IAMDatabaseAuthenticationEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.InstanceCreateTime != nil {
+		v := *s.InstanceCreateTime
+
+		e.SetValue(protocol.BodyTarget, "InstanceCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LatestRestorableTime != nil {
+		v := *s.LatestRestorableTime
+
+		e.SetValue(protocol.BodyTarget, "LatestRestorableTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MonitoringInterval != nil {
+		v := *s.MonitoringInterval
+
+		e.SetValue(protocol.BodyTarget, "MonitoringInterval", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MonitoringRoleArn != nil {
+		v := *s.MonitoringRoleArn
+
+		e.SetValue(protocol.BodyTarget, "MonitoringRoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionGroupMemberships) > 0 {
+		v := s.OptionGroupMemberships
+
+		e.SetList(protocol.BodyTarget, "OptionGroupMemberships", encodeOptionGroupMembershipList(v), protocol.Metadata{ListLocationName: "OptionGroupMembership"})
+	}
+	if s.PendingModifiedValues != nil {
+		v := s.PendingModifiedValues
+
+		e.SetFields(protocol.BodyTarget, "PendingModifiedValues", v, protocol.Metadata{})
+	}
+	if s.PerformanceInsightsEnabled != nil {
+		v := *s.PerformanceInsightsEnabled
+
+		e.SetValue(protocol.BodyTarget, "PerformanceInsightsEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PerformanceInsightsKMSKeyId != nil {
+		v := *s.PerformanceInsightsKMSKeyId
+
+		e.SetValue(protocol.BodyTarget, "PerformanceInsightsKMSKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PromotionTier != nil {
+		v := *s.PromotionTier
+
+		e.SetValue(protocol.BodyTarget, "PromotionTier", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.ReadReplicaDBClusterIdentifiers) > 0 {
+		v := s.ReadReplicaDBClusterIdentifiers
+
+		e.SetList(protocol.BodyTarget, "ReadReplicaDBClusterIdentifiers", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ReadReplicaDBClusterIdentifier"})
+	}
+	if len(s.ReadReplicaDBInstanceIdentifiers) > 0 {
+		v := s.ReadReplicaDBInstanceIdentifiers
+
+		e.SetList(protocol.BodyTarget, "ReadReplicaDBInstanceIdentifiers", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ReadReplicaDBInstanceIdentifier"})
+	}
+	if s.ReadReplicaSourceDBInstanceIdentifier != nil {
+		v := *s.ReadReplicaSourceDBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ReadReplicaSourceDBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SecondaryAvailabilityZone != nil {
+		v := *s.SecondaryAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "SecondaryAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StatusInfos) > 0 {
+		v := s.StatusInfos
+
+		e.SetList(protocol.BodyTarget, "StatusInfos", encodeDBInstanceStatusInfoList(v), protocol.Metadata{ListLocationName: "DBInstanceStatusInfo"})
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timezone != nil {
+		v := *s.Timezone
+
+		e.SetValue(protocol.BodyTarget, "Timezone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroups) > 0 {
+		v := s.VpcSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroups", encodeVpcSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupMembership"})
+	}
+	return nil
+}
+
+func encodeDBInstanceList(vs []DBInstance) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Provides a list of status information for a DB instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceStatusInfo
 type DBInstanceStatusInfo struct {
@@ -12035,6 +14100,40 @@ func (s *DBInstanceStatusInfo) SetStatus(v string) *DBInstanceStatusInfo {
 func (s *DBInstanceStatusInfo) SetStatusType(v string) *DBInstanceStatusInfo {
 	s.StatusType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBInstanceStatusInfo) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Normal != nil {
+		v := *s.Normal
+
+		e.SetValue(protocol.BodyTarget, "Normal", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StatusType != nil {
+		v := *s.StatusType
+
+		e.SetValue(protocol.BodyTarget, "StatusType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBInstanceStatusInfoList(vs []DBInstanceStatusInfo) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the result of a successful invocation of the CreateDBParameterGroup
@@ -12094,6 +14193,40 @@ func (s *DBParameterGroup) SetDescription(v string) *DBParameterGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBParameterGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupArn != nil {
+		v := *s.DBParameterGroupArn
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBParameterGroupList(vs []DBParameterGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The status of the DB parameter group.
 //
 // This data type is used as a response element in the following actions:
@@ -12140,6 +14273,30 @@ func (s *DBParameterGroupStatus) SetDBParameterGroupName(v string) *DBParameterG
 func (s *DBParameterGroupStatus) SetParameterApplyStatus(v string) *DBParameterGroupStatus {
 	s.ParameterApplyStatus = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBParameterGroupStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterApplyStatus != nil {
+		v := *s.ParameterApplyStatus
+
+		e.SetValue(protocol.BodyTarget, "ParameterApplyStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBParameterGroupStatusList(vs []DBParameterGroupStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the result of a successful invocation of the following actions:
@@ -12232,6 +14389,55 @@ func (s *DBSecurityGroup) SetVpcId(v string) *DBSecurityGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroupArn != nil {
+		v := *s.DBSecurityGroupArn
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSecurityGroupDescription != nil {
+		v := *s.DBSecurityGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.EC2SecurityGroups) > 0 {
+		v := s.EC2SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "EC2SecurityGroups", encodeEC2SecurityGroupList(v), protocol.Metadata{ListLocationName: "EC2SecurityGroup"})
+	}
+	if len(s.IPRanges) > 0 {
+		v := s.IPRanges
+
+		e.SetList(protocol.BodyTarget, "IPRanges", encodeIPRangeList(v), protocol.Metadata{ListLocationName: "IPRange"})
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBSecurityGroupList(vs []DBSecurityGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a response element in the following actions:
 //
 //    * ModifyDBInstance
@@ -12272,6 +14478,30 @@ func (s *DBSecurityGroupMembership) SetDBSecurityGroupName(v string) *DBSecurity
 func (s *DBSecurityGroupMembership) SetStatus(v string) *DBSecurityGroupMembership {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBSecurityGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBSecurityGroupMembershipList(vs []DBSecurityGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the result of a successful invocation of the following actions:
@@ -12540,6 +14770,150 @@ func (s *DBSnapshot) SetVpcId(v string) *DBSnapshot {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBSnapshot) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotArn != nil {
+		v := *s.DBSnapshotArn
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IAMDatabaseAuthenticationEnabled != nil {
+		v := *s.IAMDatabaseAuthenticationEnabled
+
+		e.SetValue(protocol.BodyTarget, "IAMDatabaseAuthenticationEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.InstanceCreateTime != nil {
+		v := *s.InstanceCreateTime
+
+		e.SetValue(protocol.BodyTarget, "InstanceCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PercentProgress != nil {
+		v := *s.PercentProgress
+
+		e.SetValue(protocol.BodyTarget, "PercentProgress", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotCreateTime != nil {
+		v := *s.SnapshotCreateTime
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SnapshotType != nil {
+		v := *s.SnapshotType
+
+		e.SetValue(protocol.BodyTarget, "SnapshotType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDBSnapshotIdentifier != nil {
+		v := *s.SourceDBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceRegion != nil {
+		v := *s.SourceRegion
+
+		e.SetValue(protocol.BodyTarget, "SourceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timezone != nil {
+		v := *s.Timezone
+
+		e.SetValue(protocol.BodyTarget, "Timezone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBSnapshotList(vs []DBSnapshot) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the name and values of a manual DB snapshot attribute
 //
 // Manual DB snapshot attributes are used to authorize other AWS accounts to
@@ -12587,6 +14961,30 @@ func (s *DBSnapshotAttribute) SetAttributeValues(v []string) *DBSnapshotAttribut
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBSnapshotAttribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AttributeValues) > 0 {
+		v := s.AttributeValues
+
+		e.SetList(protocol.BodyTarget, "AttributeValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AttributeValue"})
+	}
+	return nil
+}
+
+func encodeDBSnapshotAttributeList(vs []DBSnapshotAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the results of a successful call to the DescribeDBSnapshotAttributes
 // API action.
 //
@@ -12624,6 +15022,22 @@ func (s *DBSnapshotAttributesResult) SetDBSnapshotAttributes(v []DBSnapshotAttri
 func (s *DBSnapshotAttributesResult) SetDBSnapshotIdentifier(v string) *DBSnapshotAttributesResult {
 	s.DBSnapshotIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBSnapshotAttributesResult) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBSnapshotAttributes) > 0 {
+		v := s.DBSnapshotAttributes
+
+		e.SetList(protocol.BodyTarget, "DBSnapshotAttributes", encodeDBSnapshotAttributeList(v), protocol.Metadata{ListLocationName: "DBSnapshotAttribute"})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the result of a successful invocation of the following actions:
@@ -12705,6 +15119,50 @@ func (s *DBSubnetGroup) SetSubnets(v []Subnet) *DBSubnetGroup {
 func (s *DBSubnetGroup) SetVpcId(v string) *DBSubnetGroup {
 	s.VpcId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DBSubnetGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroupArn != nil {
+		v := *s.DBSubnetGroupArn
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupDescription != nil {
+		v := *s.DBSubnetGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubnetGroupStatus != nil {
+		v := *s.SubnetGroupStatus
+
+		e.SetValue(protocol.BodyTarget, "SubnetGroupStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", encodeSubnetList(v), protocol.Metadata{ListLocationName: "Subnet"})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDBSubnetGroupList(vs []DBSubnetGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage
@@ -12793,6 +15251,27 @@ func (s *DeleteDBClusterInput) SetSkipFinalSnapshot(v bool) *DeleteDBClusterInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FinalDBSnapshotIdentifier != nil {
+		v := *s.FinalDBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "FinalDBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SkipFinalSnapshot != nil {
+		v := *s.SkipFinalSnapshot
+
+		e.SetValue(protocol.BodyTarget, "SkipFinalSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterResult
 type DeleteDBClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -12836,6 +15315,17 @@ func (s DeleteDBClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteDBClusterOutput) SetDBCluster(v *DBCluster) *DeleteDBClusterOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroupMessage
@@ -12886,6 +15376,17 @@ func (s *DeleteDBClusterParameterGroupInput) SetDBClusterParameterGroupName(v st
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroupOutput
 type DeleteDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -12906,6 +15407,12 @@ func (s DeleteDBClusterParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshotMessage
@@ -12951,6 +15458,17 @@ func (s *DeleteDBClusterSnapshotInput) SetDBClusterSnapshotIdentifier(v string) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshotResult
 type DeleteDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -12987,6 +15505,17 @@ func (s DeleteDBClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteDBClusterSnapshotOutput) SetDBClusterSnapshot(v *DBClusterSnapshot) *DeleteDBClusterSnapshotOutput {
 	s.DBClusterSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshot != nil {
+		v := s.DBClusterSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBClusterSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceMessage
@@ -13083,6 +15612,27 @@ func (s *DeleteDBInstanceInput) SetSkipFinalSnapshot(v bool) *DeleteDBInstanceIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FinalDBSnapshotIdentifier != nil {
+		v := *s.FinalDBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "FinalDBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SkipFinalSnapshot != nil {
+		v := *s.SkipFinalSnapshot
+
+		e.SetValue(protocol.BodyTarget, "SkipFinalSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceResult
 type DeleteDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -13124,6 +15674,17 @@ func (s DeleteDBInstanceOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteDBInstanceOutput) SetDBInstance(v *DBInstance) *DeleteDBInstanceOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroupMessage
@@ -13174,6 +15735,17 @@ func (s *DeleteDBParameterGroupInput) SetDBParameterGroupName(v string) *DeleteD
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroupOutput
 type DeleteDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -13194,6 +15766,12 @@ func (s DeleteDBParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroupMessage
@@ -13248,6 +15826,17 @@ func (s *DeleteDBSecurityGroupInput) SetDBSecurityGroupName(v string) *DeleteDBS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroupOutput
 type DeleteDBSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -13268,6 +15857,12 @@ func (s DeleteDBSecurityGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDBSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshotMessage
@@ -13313,6 +15908,17 @@ func (s *DeleteDBSnapshotInput) SetDBSnapshotIdentifier(v string) *DeleteDBSnaps
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshotResult
 type DeleteDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -13348,6 +15954,17 @@ func (s DeleteDBSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteDBSnapshotOutput) SetDBSnapshot(v *DBSnapshot) *DeleteDBSnapshotOutput {
 	s.DBSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshot != nil {
+		v := s.DBSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroupMessage
@@ -13399,6 +16016,17 @@ func (s *DeleteDBSubnetGroupInput) SetDBSubnetGroupName(v string) *DeleteDBSubne
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroupOutput
 type DeleteDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -13419,6 +16047,12 @@ func (s DeleteDBSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDBSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDBSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscriptionMessage
@@ -13461,6 +16095,17 @@ func (s *DeleteEventSubscriptionInput) SetSubscriptionName(v string) *DeleteEven
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEventSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscriptionResult
 type DeleteEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -13491,6 +16136,17 @@ func (s DeleteEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *DeleteEventSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEventSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroupMessage
@@ -13535,6 +16191,17 @@ func (s *DeleteOptionGroupInput) SetOptionGroupName(v string) *DeleteOptionGroup
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteOptionGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroupOutput
 type DeleteOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -13557,6 +16224,12 @@ func (s DeleteOptionGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteOptionGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributesMessage
 type DescribeAccountAttributesInput struct {
 	_ struct{} `type:"structure"`
@@ -13570,6 +16243,12 @@ func (s DescribeAccountAttributesInput) String() string {
 // GoString returns the string representation
 func (s DescribeAccountAttributesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Data returned by the DescribeAccountAttributes action.
@@ -13603,6 +16282,17 @@ func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeAccountAttributesOutput) SetAccountQuotas(v []AccountQuota) *DescribeAccountAttributesOutput {
 	s.AccountQuotas = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AccountQuotas) > 0 {
+		v := s.AccountQuotas
+
+		e.SetList(protocol.BodyTarget, "AccountQuotas", encodeAccountQuotaList(v), protocol.Metadata{ListLocationName: "AccountQuota"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificatesMessage
@@ -13691,6 +16381,32 @@ func (s *DescribeCertificatesInput) SetMaxRecords(v int64) *DescribeCertificates
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateIdentifier != nil {
+		v := *s.CertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "CertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Data returned by the DescribeCertificates action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CertificateMessage
 type DescribeCertificatesOutput struct {
@@ -13732,6 +16448,22 @@ func (s *DescribeCertificatesOutput) SetCertificates(v []Certificate) *DescribeC
 func (s *DescribeCertificatesOutput) SetMarker(v string) *DescribeCertificatesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Certificates) > 0 {
+		v := s.Certificates
+
+		e.SetList(protocol.BodyTarget, "Certificates", encodeCertificateList(v), protocol.Metadata{ListLocationName: "Certificate"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroupsMessage
@@ -13818,6 +16550,32 @@ func (s *DescribeDBClusterParameterGroupsInput) SetMaxRecords(v int64) *Describe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterParameterGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupsMessage
 type DescribeDBClusterParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -13858,6 +16616,22 @@ func (s *DescribeDBClusterParameterGroupsOutput) SetDBClusterParameterGroups(v [
 func (s *DescribeDBClusterParameterGroupsOutput) SetMarker(v string) *DescribeDBClusterParameterGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterParameterGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBClusterParameterGroups) > 0 {
+		v := s.DBClusterParameterGroups
+
+		e.SetList(protocol.BodyTarget, "DBClusterParameterGroups", encodeDBClusterParameterGroupList(v), protocol.Metadata{ListLocationName: "DBClusterParameterGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParametersMessage
@@ -13961,6 +16735,37 @@ func (s *DescribeDBClusterParametersInput) SetSource(v string) *DescribeDBCluste
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Provides details about a DB cluster parameter group including the parameters
 // in the DB cluster parameter group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupDetails
@@ -14005,6 +16810,22 @@ func (s *DescribeDBClusterParametersOutput) SetParameters(v []Parameter) *Descri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributesMessage
 type DescribeDBClusterSnapshotAttributesInput struct {
 	_ struct{} `type:"structure"`
@@ -14045,6 +16866,17 @@ func (s *DescribeDBClusterSnapshotAttributesInput) SetDBClusterSnapshotIdentifie
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterSnapshotAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributesResult
 type DescribeDBClusterSnapshotAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -14079,6 +16911,17 @@ func (s DescribeDBClusterSnapshotAttributesOutput) SDKResponseMetadata() aws.Res
 func (s *DescribeDBClusterSnapshotAttributesOutput) SetDBClusterSnapshotAttributesResult(v *DBClusterSnapshotAttributesResult) *DescribeDBClusterSnapshotAttributesOutput {
 	s.DBClusterSnapshotAttributesResult = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterSnapshotAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshotAttributesResult != nil {
+		v := s.DBClusterSnapshotAttributesResult
+
+		e.SetFields(protocol.BodyTarget, "DBClusterSnapshotAttributesResult", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotsMessage
@@ -14249,6 +17092,52 @@ func (s *DescribeDBClusterSnapshotsInput) SetSnapshotType(v string) *DescribeDBC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterSnapshotsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.IncludePublic != nil {
+		v := *s.IncludePublic
+
+		e.SetValue(protocol.BodyTarget, "IncludePublic", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.IncludeShared != nil {
+		v := *s.IncludeShared
+
+		e.SetValue(protocol.BodyTarget, "IncludeShared", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotType != nil {
+		v := *s.SnapshotType
+
+		e.SetValue(protocol.BodyTarget, "SnapshotType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Provides a list of DB cluster snapshots for the user as the result of a call
 // to the DescribeDBClusterSnapshots action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotMessage
@@ -14291,6 +17180,22 @@ func (s *DescribeDBClusterSnapshotsOutput) SetDBClusterSnapshots(v []DBClusterSn
 func (s *DescribeDBClusterSnapshotsOutput) SetMarker(v string) *DescribeDBClusterSnapshotsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClusterSnapshotsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBClusterSnapshots) > 0 {
+		v := s.DBClusterSnapshots
+
+		e.SetList(protocol.BodyTarget, "DBClusterSnapshots", encodeDBClusterSnapshotList(v), protocol.Metadata{ListLocationName: "DBClusterSnapshot"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClustersMessage
@@ -14385,6 +17290,32 @@ func (s *DescribeDBClustersInput) SetMaxRecords(v int64) *DescribeDBClustersInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClustersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBClusters
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterMessage
@@ -14425,6 +17356,22 @@ func (s *DescribeDBClustersOutput) SetDBClusters(v []DBCluster) *DescribeDBClust
 func (s *DescribeDBClustersOutput) SetMarker(v string) *DescribeDBClustersOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBClustersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBClusters) > 0 {
+		v := s.DBClusters
+
+		e.SetList(protocol.BodyTarget, "DBClusters", encodeDBClusterList(v), protocol.Metadata{ListLocationName: "DBCluster"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersionsMessage
@@ -14563,6 +17510,57 @@ func (s *DescribeDBEngineVersionsInput) SetMaxRecords(v int64) *DescribeDBEngine
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBEngineVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultOnly != nil {
+		v := *s.DefaultOnly
+
+		e.SetValue(protocol.BodyTarget, "DefaultOnly", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.ListSupportedCharacterSets != nil {
+		v := *s.ListSupportedCharacterSets
+
+		e.SetValue(protocol.BodyTarget, "ListSupportedCharacterSets", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ListSupportedTimezones != nil {
+		v := *s.ListSupportedTimezones
+
+		e.SetValue(protocol.BodyTarget, "ListSupportedTimezones", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBEngineVersions
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersionMessage
@@ -14605,6 +17603,22 @@ func (s *DescribeDBEngineVersionsOutput) SetDBEngineVersions(v []DBEngineVersion
 func (s *DescribeDBEngineVersionsOutput) SetMarker(v string) *DescribeDBEngineVersionsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBEngineVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBEngineVersions) > 0 {
+		v := s.DBEngineVersions
+
+		e.SetList(protocol.BodyTarget, "DBEngineVersions", encodeDBEngineVersionList(v), protocol.Metadata{ListLocationName: "DBEngineVersion"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstancesMessage
@@ -14703,6 +17717,32 @@ func (s *DescribeDBInstancesInput) SetMaxRecords(v int64) *DescribeDBInstancesIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBInstances
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceMessage
@@ -14747,6 +17787,22 @@ func (s *DescribeDBInstancesOutput) SetMarker(v string) *DescribeDBInstancesOutp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBInstances) > 0 {
+		v := s.DBInstances
+
+		e.SetList(protocol.BodyTarget, "DBInstances", encodeDBInstanceList(v), protocol.Metadata{ListLocationName: "DBInstance"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // This data type is used as a response element to DescribeDBLogFiles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesDetails
 type DescribeDBLogFilesDetails struct {
@@ -14788,6 +17844,35 @@ func (s *DescribeDBLogFilesDetails) SetLogFileName(v string) *DescribeDBLogFiles
 func (s *DescribeDBLogFilesDetails) SetSize(v int64) *DescribeDBLogFilesDetails {
 	s.Size = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBLogFilesDetails) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LastWritten != nil {
+		v := *s.LastWritten
+
+		e.SetValue(protocol.BodyTarget, "LastWritten", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LogFileName != nil {
+		v := *s.LogFileName
+
+		e.SetValue(protocol.BodyTarget, "LogFileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		e.SetValue(protocol.BodyTarget, "Size", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDescribeDBLogFilesDetailsList(vs []DescribeDBLogFilesDetails) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesMessage
@@ -14906,6 +17991,47 @@ func (s *DescribeDBLogFilesInput) SetMaxRecords(v int64) *DescribeDBLogFilesInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBLogFilesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FileLastWritten != nil {
+		v := *s.FileLastWritten
+
+		e.SetValue(protocol.BodyTarget, "FileLastWritten", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FileSize != nil {
+		v := *s.FileSize
+
+		e.SetValue(protocol.BodyTarget, "FileSize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FilenameContains != nil {
+		v := *s.FilenameContains
+
+		e.SetValue(protocol.BodyTarget, "FilenameContains", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The response from a call to DescribeDBLogFiles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesResponse
 type DescribeDBLogFilesOutput struct {
@@ -14945,6 +18071,22 @@ func (s *DescribeDBLogFilesOutput) SetDescribeDBLogFiles(v []DescribeDBLogFilesD
 func (s *DescribeDBLogFilesOutput) SetMarker(v string) *DescribeDBLogFilesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBLogFilesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DescribeDBLogFiles) > 0 {
+		v := s.DescribeDBLogFiles
+
+		e.SetList(protocol.BodyTarget, "DescribeDBLogFiles", encodeDescribeDBLogFilesDetailsList(v), protocol.Metadata{ListLocationName: "DescribeDBLogFilesDetails"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroupsMessage
@@ -15031,6 +18173,32 @@ func (s *DescribeDBParameterGroupsInput) SetMaxRecords(v int64) *DescribeDBParam
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBParameterGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBParameterGroups
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupsMessage
@@ -15073,6 +18241,22 @@ func (s *DescribeDBParameterGroupsOutput) SetDBParameterGroups(v []DBParameterGr
 func (s *DescribeDBParameterGroupsOutput) SetMarker(v string) *DescribeDBParameterGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBParameterGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBParameterGroups) > 0 {
+		v := s.DBParameterGroups
+
+		e.SetList(protocol.BodyTarget, "DBParameterGroups", encodeDBParameterGroupList(v), protocol.Metadata{ListLocationName: "DBParameterGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParametersMessage
@@ -15178,6 +18362,37 @@ func (s *DescribeDBParametersInput) SetSource(v string) *DescribeDBParametersInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBParameters
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupDetails
@@ -15220,6 +18435,22 @@ func (s *DescribeDBParametersOutput) SetMarker(v string) *DescribeDBParametersOu
 func (s *DescribeDBParametersOutput) SetParameters(v []Parameter) *DescribeDBParametersOutput {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroupsMessage
@@ -15298,6 +18529,32 @@ func (s *DescribeDBSecurityGroupsInput) SetMaxRecords(v int64) *DescribeDBSecuri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBSecurityGroups
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupMessage
@@ -15342,6 +18599,22 @@ func (s *DescribeDBSecurityGroupsOutput) SetMarker(v string) *DescribeDBSecurity
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBSecurityGroups) > 0 {
+		v := s.DBSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "DBSecurityGroups", encodeDBSecurityGroupList(v), protocol.Metadata{ListLocationName: "DBSecurityGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributesMessage
 type DescribeDBSnapshotAttributesInput struct {
 	_ struct{} `type:"structure"`
@@ -15382,6 +18655,17 @@ func (s *DescribeDBSnapshotAttributesInput) SetDBSnapshotIdentifier(v string) *D
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSnapshotAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributesResult
 type DescribeDBSnapshotAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -15416,6 +18700,17 @@ func (s DescribeDBSnapshotAttributesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeDBSnapshotAttributesOutput) SetDBSnapshotAttributesResult(v *DBSnapshotAttributesResult) *DescribeDBSnapshotAttributesOutput {
 	s.DBSnapshotAttributesResult = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSnapshotAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshotAttributesResult != nil {
+		v := s.DBSnapshotAttributesResult
+
+		e.SetFields(protocol.BodyTarget, "DBSnapshotAttributesResult", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotsMessage
@@ -15585,6 +18880,52 @@ func (s *DescribeDBSnapshotsInput) SetSnapshotType(v string) *DescribeDBSnapshot
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSnapshotsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.IncludePublic != nil {
+		v := *s.IncludePublic
+
+		e.SetValue(protocol.BodyTarget, "IncludePublic", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.IncludeShared != nil {
+		v := *s.IncludeShared
+
+		e.SetValue(protocol.BodyTarget, "IncludeShared", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotType != nil {
+		v := *s.SnapshotType
+
+		e.SetValue(protocol.BodyTarget, "SnapshotType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBSnapshots
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotMessage
@@ -15627,6 +18968,22 @@ func (s *DescribeDBSnapshotsOutput) SetDBSnapshots(v []DBSnapshot) *DescribeDBSn
 func (s *DescribeDBSnapshotsOutput) SetMarker(v string) *DescribeDBSnapshotsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSnapshotsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBSnapshots) > 0 {
+		v := s.DBSnapshots
+
+		e.SetList(protocol.BodyTarget, "DBSnapshots", encodeDBSnapshotList(v), protocol.Metadata{ListLocationName: "DBSnapshot"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroupsMessage
@@ -15705,6 +19062,32 @@ func (s *DescribeDBSubnetGroupsInput) SetMaxRecords(v int64) *DescribeDBSubnetGr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSubnetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeDBSubnetGroups
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupMessage
@@ -15747,6 +19130,22 @@ func (s *DescribeDBSubnetGroupsOutput) SetDBSubnetGroups(v []DBSubnetGroup) *Des
 func (s *DescribeDBSubnetGroupsOutput) SetMarker(v string) *DescribeDBSubnetGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDBSubnetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBSubnetGroups) > 0 {
+		v := s.DBSubnetGroups
+
+		e.SetList(protocol.BodyTarget, "DBSubnetGroups", encodeDBSubnetGroupList(v), protocol.Metadata{ListLocationName: "DBSubnetGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParametersMessage
@@ -15832,6 +19231,32 @@ func (s *DescribeEngineDefaultClusterParametersInput) SetMaxRecords(v int64) *De
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEngineDefaultClusterParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParametersResult
 type DescribeEngineDefaultClusterParametersOutput struct {
 	_ struct{} `type:"structure"`
@@ -15862,6 +19287,17 @@ func (s DescribeEngineDefaultClusterParametersOutput) SDKResponseMetadata() aws.
 func (s *DescribeEngineDefaultClusterParametersOutput) SetEngineDefaults(v *EngineDefaults) *DescribeEngineDefaultClusterParametersOutput {
 	s.EngineDefaults = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEngineDefaultClusterParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EngineDefaults != nil {
+		v := s.EngineDefaults
+
+		e.SetFields(protocol.BodyTarget, "EngineDefaults", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParametersMessage
@@ -15946,6 +19382,32 @@ func (s *DescribeEngineDefaultParametersInput) SetMaxRecords(v int64) *DescribeE
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEngineDefaultParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParametersResult
 type DescribeEngineDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
@@ -15976,6 +19438,17 @@ func (s DescribeEngineDefaultParametersOutput) SDKResponseMetadata() aws.Respons
 func (s *DescribeEngineDefaultParametersOutput) SetEngineDefaults(v *EngineDefaults) *DescribeEngineDefaultParametersOutput {
 	s.EngineDefaults = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEngineDefaultParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EngineDefaults != nil {
+		v := s.EngineDefaults
+
+		e.SetFields(protocol.BodyTarget, "EngineDefaults", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategoriesMessage
@@ -16030,6 +19503,22 @@ func (s *DescribeEventCategoriesInput) SetSourceType(v string) *DescribeEventCat
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventCategoriesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Data returned from the DescribeEventCategories action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventCategoriesMessage
 type DescribeEventCategoriesOutput struct {
@@ -16060,6 +19549,17 @@ func (s DescribeEventCategoriesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []EventCategoriesMap) *DescribeEventCategoriesOutput {
 	s.EventCategoriesMapList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventCategoriesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EventCategoriesMapList) > 0 {
+		v := s.EventCategoriesMapList
+
+		e.SetList(protocol.BodyTarget, "EventCategoriesMapList", encodeEventCategoriesMapList(v), protocol.Metadata{ListLocationName: "EventCategoriesMap"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptionsMessage
@@ -16138,6 +19638,32 @@ func (s *DescribeEventSubscriptionsInput) SetSubscriptionName(v string) *Describ
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventSubscriptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Data returned by the DescribeEventSubscriptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventSubscriptionsMessage
 type DescribeEventSubscriptionsOutput struct {
@@ -16179,6 +19705,22 @@ func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []EventSu
 func (s *DescribeEventSubscriptionsOutput) SetMarker(v string) *DescribeEventSubscriptionsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventSubscriptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EventSubscriptionsList) > 0 {
+		v := s.EventSubscriptionsList
+
+		e.SetList(protocol.BodyTarget, "EventSubscriptionsList", encodeEventSubscriptionList(v), protocol.Metadata{ListLocationName: "EventSubscription"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventsMessage
@@ -16332,6 +19874,57 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeEvents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventsMessage
 type DescribeEventsOutput struct {
@@ -16373,6 +19966,22 @@ func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 func (s *DescribeEventsOutput) SetMarker(v string) *DescribeEventsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		e.SetList(protocol.BodyTarget, "Events", encodeEventList(v), protocol.Metadata{ListLocationName: "Event"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptionsMessage
@@ -16468,6 +20077,37 @@ func (s *DescribeOptionGroupOptionsInput) SetMaxRecords(v int64) *DescribeOption
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOptionGroupOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EngineName != nil {
+		v := *s.EngineName
+
+		e.SetValue(protocol.BodyTarget, "EngineName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.MajorEngineVersion != nil {
+		v := *s.MajorEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MajorEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionsMessage
 type DescribeOptionGroupOptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -16508,6 +20148,22 @@ func (s *DescribeOptionGroupOptionsOutput) SetMarker(v string) *DescribeOptionGr
 func (s *DescribeOptionGroupOptionsOutput) SetOptionGroupOptions(v []OptionGroupOption) *DescribeOptionGroupOptionsOutput {
 	s.OptionGroupOptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOptionGroupOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionGroupOptions) > 0 {
+		v := s.OptionGroupOptions
+
+		e.SetList(protocol.BodyTarget, "OptionGroupOptions", encodeOptionGroupOptionList(v), protocol.Metadata{ListLocationName: "OptionGroupOption"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupsMessage
@@ -16608,6 +20264,42 @@ func (s *DescribeOptionGroupsInput) SetOptionGroupName(v string) *DescribeOption
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOptionGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EngineName != nil {
+		v := *s.EngineName
+
+		e.SetValue(protocol.BodyTarget, "EngineName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.MajorEngineVersion != nil {
+		v := *s.MajorEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MajorEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // List of option groups.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroups
 type DescribeOptionGroupsOutput struct {
@@ -16649,6 +20341,22 @@ func (s *DescribeOptionGroupsOutput) SetMarker(v string) *DescribeOptionGroupsOu
 func (s *DescribeOptionGroupsOutput) SetOptionGroupsList(v []OptionGroup) *DescribeOptionGroupsOutput {
 	s.OptionGroupsList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOptionGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionGroupsList) > 0 {
+		v := s.OptionGroupsList
+
+		e.SetList(protocol.BodyTarget, "OptionGroupsList", encodeOptionGroupList(v), protocol.Metadata{ListLocationName: "OptionGroup"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptionsMessage
@@ -16773,6 +20481,52 @@ func (s *DescribeOrderableDBInstanceOptionsInput) SetVpc(v bool) *DescribeOrdera
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOrderableDBInstanceOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Vpc != nil {
+		v := *s.Vpc
+
+		e.SetValue(protocol.BodyTarget, "Vpc", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeOrderableDBInstanceOptions
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOptionsMessage
@@ -16816,6 +20570,22 @@ func (s *DescribeOrderableDBInstanceOptionsOutput) SetMarker(v string) *Describe
 func (s *DescribeOrderableDBInstanceOptionsOutput) SetOrderableDBInstanceOptions(v []OrderableDBInstanceOption) *DescribeOrderableDBInstanceOptionsOutput {
 	s.OrderableDBInstanceOptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOrderableDBInstanceOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OrderableDBInstanceOptions) > 0 {
+		v := s.OrderableDBInstanceOptions
+
+		e.SetList(protocol.BodyTarget, "OrderableDBInstanceOptions", encodeOrderableDBInstanceOptionList(v), protocol.Metadata{ListLocationName: "OrderableDBInstanceOption"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribePendingMaintenanceActionsMessage
@@ -16905,6 +20675,32 @@ func (s *DescribePendingMaintenanceActionsInput) SetResourceIdentifier(v string)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribePendingMaintenanceActionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ResourceIdentifier != nil {
+		v := *s.ResourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ResourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Data returned from the DescribePendingMaintenanceActions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingMaintenanceActionsMessage
 type DescribePendingMaintenanceActionsOutput struct {
@@ -16946,6 +20742,22 @@ func (s *DescribePendingMaintenanceActionsOutput) SetMarker(v string) *DescribeP
 func (s *DescribePendingMaintenanceActionsOutput) SetPendingMaintenanceActions(v []ResourcePendingMaintenanceActions) *DescribePendingMaintenanceActionsOutput {
 	s.PendingMaintenanceActions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribePendingMaintenanceActionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PendingMaintenanceActions) > 0 {
+		v := s.PendingMaintenanceActions
+
+		e.SetList(protocol.BodyTarget, "PendingMaintenanceActions", encodeResourcePendingMaintenanceActionsList(v), protocol.Metadata{ListLocationName: "ResourcePendingMaintenanceActions"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesMessage
@@ -17089,6 +20901,62 @@ func (s *DescribeReservedDBInstancesInput) SetReservedDBInstancesOfferingId(v st
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedDBInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstanceId != nil {
+		v := *s.ReservedDBInstanceId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstancesOfferingId != nil {
+		v := *s.ReservedDBInstancesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstancesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferingsMessage
 type DescribeReservedDBInstancesOfferingsInput struct {
 	_ struct{} `type:"structure"`
@@ -17222,6 +21090,57 @@ func (s *DescribeReservedDBInstancesOfferingsInput) SetReservedDBInstancesOfferi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedDBInstancesOfferingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstancesOfferingId != nil {
+		v := *s.ReservedDBInstancesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstancesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeReservedDBInstancesOfferings
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOfferingMessage
@@ -17266,6 +21185,22 @@ func (s *DescribeReservedDBInstancesOfferingsOutput) SetReservedDBInstancesOffer
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedDBInstancesOfferingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReservedDBInstancesOfferings) > 0 {
+		v := s.ReservedDBInstancesOfferings
+
+		e.SetList(protocol.BodyTarget, "ReservedDBInstancesOfferings", encodeReservedDBInstancesOfferingList(v), protocol.Metadata{ListLocationName: "ReservedDBInstancesOffering"})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeReservedDBInstances
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceMessage
@@ -17308,6 +21243,22 @@ func (s *DescribeReservedDBInstancesOutput) SetMarker(v string) *DescribeReserve
 func (s *DescribeReservedDBInstancesOutput) SetReservedDBInstances(v []ReservedDBInstance) *DescribeReservedDBInstancesOutput {
 	s.ReservedDBInstances = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedDBInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReservedDBInstances) > 0 {
+		v := s.ReservedDBInstances
+
+		e.SetList(protocol.BodyTarget, "ReservedDBInstances", encodeReservedDBInstanceList(v), protocol.Metadata{ListLocationName: "ReservedDBInstance"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegionsMessage
@@ -17390,6 +21341,32 @@ func (s *DescribeSourceRegionsInput) SetRegionName(v string) *DescribeSourceRegi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSourceRegionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RegionName != nil {
+		v := *s.RegionName
+
+		e.SetValue(protocol.BodyTarget, "RegionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeSourceRegions
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceRegionMessage
@@ -17433,6 +21410,22 @@ func (s *DescribeSourceRegionsOutput) SetMarker(v string) *DescribeSourceRegions
 func (s *DescribeSourceRegionsOutput) SetSourceRegions(v []SourceRegion) *DescribeSourceRegionsOutput {
 	s.SourceRegions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSourceRegionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceRegions) > 0 {
+		v := s.SourceRegions
+
+		e.SetList(protocol.BodyTarget, "SourceRegions", encodeSourceRegionList(v), protocol.Metadata{ListLocationName: "SourceRegion"})
+	}
+	return nil
 }
 
 // An Active Directory Domain membership record associated with the DB instance.
@@ -17487,6 +21480,40 @@ func (s *DomainMembership) SetIAMRoleName(v string) *DomainMembership {
 func (s *DomainMembership) SetStatus(v string) *DomainMembership {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DomainMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FQDN != nil {
+		v := *s.FQDN
+
+		e.SetValue(protocol.BodyTarget, "FQDN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IAMRoleName != nil {
+		v := *s.IAMRoleName
+
+		e.SetValue(protocol.BodyTarget, "IAMRoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDomainMembershipList(vs []DomainMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortionMessage
@@ -17594,6 +21621,32 @@ func (s *DownloadDBLogFilePortionInput) SetNumberOfLines(v int64) *DownloadDBLog
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DownloadDBLogFilePortionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LogFileName != nil {
+		v := *s.LogFileName
+
+		e.SetValue(protocol.BodyTarget, "LogFileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumberOfLines != nil {
+		v := *s.NumberOfLines
+
+		e.SetValue(protocol.BodyTarget, "NumberOfLines", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // This data type is used as a response element to DownloadDBLogFilePortion.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortionDetails
 type DownloadDBLogFilePortionOutput struct {
@@ -17643,6 +21696,27 @@ func (s *DownloadDBLogFilePortionOutput) SetLogFileData(v string) *DownloadDBLog
 func (s *DownloadDBLogFilePortionOutput) SetMarker(v string) *DownloadDBLogFilePortionOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DownloadDBLogFilePortionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AdditionalDataPending != nil {
+		v := *s.AdditionalDataPending
+
+		e.SetValue(protocol.BodyTarget, "AdditionalDataPending", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.LogFileData != nil {
+		v := *s.LogFileData
+
+		e.SetValue(protocol.BodyTarget, "LogFileData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // This data type is used as a response element in the following actions:
@@ -17705,6 +21779,40 @@ func (s *EC2SecurityGroup) SetStatus(v string) *EC2SecurityGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EC2SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EC2SecurityGroupId != nil {
+		v := *s.EC2SecurityGroupId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEC2SecurityGroupList(vs []EC2SecurityGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a response element in the following actions:
 //
 //    * CreateDBInstance
@@ -17754,6 +21862,27 @@ func (s *Endpoint) SetPort(v int64) *Endpoint {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Endpoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Address != nil {
+		v := *s.Address
+
+		e.SetValue(protocol.BodyTarget, "Address", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HostedZoneId != nil {
+		v := *s.HostedZoneId
+
+		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the DescribeEngineDefaultParameters
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EngineDefaults
@@ -17799,6 +21928,27 @@ func (s *EngineDefaults) SetMarker(v string) *EngineDefaults {
 func (s *EngineDefaults) SetParameters(v []Parameter) *EngineDefaults {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EngineDefaults) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupFamily != nil {
+		v := *s.DBParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // This data type is used as a response element in the DescribeEvents action.
@@ -17871,6 +22021,50 @@ func (s *Event) SetSourceType(v SourceType) *Event {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Event) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Date != nil {
+		v := *s.Date
+
+		e.SetValue(protocol.BodyTarget, "Date", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceArn != nil {
+		v := *s.SourceArn
+
+		e.SetValue(protocol.BodyTarget, "SourceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventList(vs []Event) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the results of a successful invocation of the DescribeEventCategories
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventCategoriesMap
@@ -17904,6 +22098,30 @@ func (s *EventCategoriesMap) SetEventCategories(v []string) *EventCategoriesMap 
 func (s *EventCategoriesMap) SetSourceType(v string) *EventCategoriesMap {
 	s.SourceType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventCategoriesMap) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventCategoriesMapList(vs []EventCategoriesMap) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the results of a successful invocation of the DescribeEventSubscriptions
@@ -18023,6 +22241,70 @@ func (s *EventSubscription) SetSubscriptionCreationTime(v string) *EventSubscrip
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventSubscription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CustSubscriptionId != nil {
+		v := *s.CustSubscriptionId
+
+		e.SetValue(protocol.BodyTarget, "CustSubscriptionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CustomerAwsId != nil {
+		v := *s.CustomerAwsId
+
+		e.SetValue(protocol.BodyTarget, "CustomerAwsId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.EventCategoriesList) > 0 {
+		v := s.EventCategoriesList
+
+		e.SetList(protocol.BodyTarget, "EventCategoriesList", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.EventSubscriptionArn != nil {
+		v := *s.EventSubscriptionArn
+
+		e.SetValue(protocol.BodyTarget, "EventSubscriptionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceIdsList) > 0 {
+		v := s.SourceIdsList
+
+		e.SetList(protocol.BodyTarget, "SourceIdsList", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SourceId"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionCreationTime != nil {
+		v := *s.SubscriptionCreationTime
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionCreationTime", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventSubscriptionList(vs []EventSubscription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBClusterMessage
 type FailoverDBClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -18065,6 +22347,22 @@ func (s *FailoverDBClusterInput) SetDBClusterIdentifier(v string) *FailoverDBClu
 func (s *FailoverDBClusterInput) SetTargetDBInstanceIdentifier(v string) *FailoverDBClusterInput {
 	s.TargetDBInstanceIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *FailoverDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetDBInstanceIdentifier != nil {
+		v := *s.TargetDBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetDBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBClusterResult
@@ -18110,6 +22408,17 @@ func (s FailoverDBClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *FailoverDBClusterOutput) SetDBCluster(v *DBCluster) *FailoverDBClusterOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *FailoverDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // This type is not currently supported.
@@ -18168,6 +22477,30 @@ func (s *Filter) SetValues(v []string) *Filter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Filter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Values) > 0 {
+		v := s.Values
+
+		e.SetList(protocol.BodyTarget, "Values", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "Value"})
+	}
+	return nil
+}
+
+func encodeFilterList(vs []Filter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a response element in the DescribeDBSecurityGroups
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IPRange
@@ -18202,6 +22535,30 @@ func (s *IPRange) SetCIDRIP(v string) *IPRange {
 func (s *IPRange) SetStatus(v string) *IPRange {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IPRange) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CIDRIP != nil {
+		v := *s.CIDRIP
+
+		e.SetValue(protocol.BodyTarget, "CIDRIP", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeIPRangeList(vs []IPRange) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ListTagsForResourceMessage
@@ -18262,6 +22619,22 @@ func (s *ListTagsForResourceInput) SetResourceName(v string) *ListTagsForResourc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeFilterList(v), protocol.Metadata{ListLocationName: "Filter"})
+	}
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TagListMessage
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -18291,6 +22664,17 @@ func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 func (s *ListTagsForResourceOutput) SetTagList(v []Tag) *ListTagsForResourceOutput {
 	s.TagList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.TagList) > 0 {
+		v := s.TagList
+
+		e.SetList(protocol.BodyTarget, "TagList", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage
@@ -18521,6 +22905,72 @@ func (s *ModifyDBClusterInput) SetVpcSecurityGroupIds(v []string) *ModifyDBClust
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplyImmediately != nil {
+		v := *s.ApplyImmediately
+
+		e.SetValue(protocol.BodyTarget, "ApplyImmediately", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewDBClusterIdentifier != nil {
+		v := *s.NewDBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "NewDBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterResult
 type ModifyDBClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -18564,6 +23014,17 @@ func (s ModifyDBClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyDBClusterOutput) SetDBCluster(v *DBCluster) *ModifyDBClusterOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroupMessage
@@ -18619,6 +23080,22 @@ func (s *ModifyDBClusterParameterGroupInput) SetDBClusterParameterGroupName(v st
 func (s *ModifyDBClusterParameterGroupInput) SetParameters(v []Parameter) *ModifyDBClusterParameterGroupInput {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttributeMessage
@@ -18712,6 +23189,32 @@ func (s *ModifyDBClusterSnapshotAttributeInput) SetValuesToRemove(v []string) *M
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBClusterSnapshotAttributeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterSnapshotIdentifier != nil {
+		v := *s.DBClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ValuesToAdd) > 0 {
+		v := s.ValuesToAdd
+
+		e.SetList(protocol.BodyTarget, "ValuesToAdd", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AttributeValue"})
+	}
+	if len(s.ValuesToRemove) > 0 {
+		v := s.ValuesToRemove
+
+		e.SetList(protocol.BodyTarget, "ValuesToRemove", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AttributeValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttributeResult
 type ModifyDBClusterSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -18746,6 +23249,17 @@ func (s ModifyDBClusterSnapshotAttributeOutput) SDKResponseMetadata() aws.Respon
 func (s *ModifyDBClusterSnapshotAttributeOutput) SetDBClusterSnapshotAttributesResult(v *DBClusterSnapshotAttributesResult) *ModifyDBClusterSnapshotAttributeOutput {
 	s.DBClusterSnapshotAttributesResult = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBClusterSnapshotAttributeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterSnapshotAttributesResult != nil {
+		v := s.DBClusterSnapshotAttributesResult
+
+		e.SetFields(protocol.BodyTarget, "DBClusterSnapshotAttributesResult", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage
@@ -19508,6 +24022,187 @@ func (s *ModifyDBInstanceInput) SetVpcSecurityGroupIds(v []string) *ModifyDBInst
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AllowMajorVersionUpgrade != nil {
+		v := *s.AllowMajorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AllowMajorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ApplyImmediately != nil {
+		v := *s.ApplyImmediately
+
+		e.SetValue(protocol.BodyTarget, "ApplyImmediately", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CACertificateIdentifier != nil {
+		v := *s.CACertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "CACertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CopyTagsToSnapshot != nil {
+		v := *s.CopyTagsToSnapshot
+
+		e.SetValue(protocol.BodyTarget, "CopyTagsToSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBPortNumber != nil {
+		v := *s.DBPortNumber
+
+		e.SetValue(protocol.BodyTarget, "DBPortNumber", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.DBSecurityGroups) > 0 {
+		v := s.DBSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "DBSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "DBSecurityGroupName"})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainIAMRoleName != nil {
+		v := *s.DomainIAMRoleName
+
+		e.SetValue(protocol.BodyTarget, "DomainIAMRoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnablePerformanceInsights != nil {
+		v := *s.EnablePerformanceInsights
+
+		e.SetValue(protocol.BodyTarget, "EnablePerformanceInsights", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MonitoringInterval != nil {
+		v := *s.MonitoringInterval
+
+		e.SetValue(protocol.BodyTarget, "MonitoringInterval", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MonitoringRoleArn != nil {
+		v := *s.MonitoringRoleArn
+
+		e.SetValue(protocol.BodyTarget, "MonitoringRoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.NewDBInstanceIdentifier != nil {
+		v := *s.NewDBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "NewDBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PerformanceInsightsKMSKeyId != nil {
+		v := *s.PerformanceInsightsKMSKeyId
+
+		e.SetValue(protocol.BodyTarget, "PerformanceInsightsKMSKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PromotionTier != nil {
+		v := *s.PromotionTier
+
+		e.SetValue(protocol.BodyTarget, "PromotionTier", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialPassword != nil {
+		v := *s.TdeCredentialPassword
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceResult
 type ModifyDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -19549,6 +24244,17 @@ func (s ModifyDBInstanceOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyDBInstanceOutput) SetDBInstance(v *DBInstance) *ModifyDBInstanceOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroupMessage
@@ -19623,6 +24329,22 @@ func (s *ModifyDBParameterGroupInput) SetDBParameterGroupName(v string) *ModifyD
 func (s *ModifyDBParameterGroupInput) SetParameters(v []Parameter) *ModifyDBParameterGroupInput {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttributeMessage
@@ -19714,6 +24436,32 @@ func (s *ModifyDBSnapshotAttributeInput) SetValuesToRemove(v []string) *ModifyDB
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBSnapshotAttributeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ValuesToAdd) > 0 {
+		v := s.ValuesToAdd
+
+		e.SetList(protocol.BodyTarget, "ValuesToAdd", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AttributeValue"})
+	}
+	if len(s.ValuesToRemove) > 0 {
+		v := s.ValuesToRemove
+
+		e.SetList(protocol.BodyTarget, "ValuesToRemove", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AttributeValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttributeResult
 type ModifyDBSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -19748,6 +24496,17 @@ func (s ModifyDBSnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyDBSnapshotAttributeOutput) SetDBSnapshotAttributesResult(v *DBSnapshotAttributesResult) *ModifyDBSnapshotAttributeOutput {
 	s.DBSnapshotAttributesResult = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBSnapshotAttributeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshotAttributesResult != nil {
+		v := s.DBSnapshotAttributesResult
+
+		e.SetFields(protocol.BodyTarget, "DBSnapshotAttributesResult", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotMessage
@@ -19828,6 +24587,27 @@ func (s *ModifyDBSnapshotInput) SetOptionGroupName(v string) *ModifyDBSnapshotIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotResult
 type ModifyDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -19863,6 +24643,17 @@ func (s ModifyDBSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyDBSnapshotOutput) SetDBSnapshot(v *DBSnapshot) *ModifyDBSnapshotOutput {
 	s.DBSnapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSnapshot != nil {
+		v := s.DBSnapshot
+
+		e.SetFields(protocol.BodyTarget, "DBSnapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroupMessage
@@ -19934,6 +24725,27 @@ func (s *ModifyDBSubnetGroupInput) SetSubnetIds(v []string) *ModifyDBSubnetGroup
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroupDescription != nil {
+		v := *s.DBSubnetGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		e.SetList(protocol.BodyTarget, "SubnetIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SubnetIdentifier"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroupResult
 type ModifyDBSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -19974,6 +24786,17 @@ func (s ModifyDBSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyDBSubnetGroupOutput) SetDBSubnetGroup(v *DBSubnetGroup) *ModifyDBSubnetGroupOutput {
 	s.DBSubnetGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyDBSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSubnetGroup != nil {
+		v := s.DBSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "DBSubnetGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscriptionMessage
@@ -20063,6 +24886,37 @@ func (s *ModifyEventSubscriptionInput) SetSubscriptionName(v string) *ModifyEven
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyEventSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscriptionResult
 type ModifyEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -20093,6 +24947,17 @@ func (s ModifyEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *ModifyEventSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyEventSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroupMessage
@@ -20175,6 +25040,32 @@ func (s *ModifyOptionGroupInput) SetOptionsToRemove(v []string) *ModifyOptionGro
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyOptionGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplyImmediately != nil {
+		v := *s.ApplyImmediately
+
+		e.SetValue(protocol.BodyTarget, "ApplyImmediately", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionsToInclude) > 0 {
+		v := s.OptionsToInclude
+
+		e.SetList(protocol.BodyTarget, "OptionsToInclude", encodeOptionConfigurationList(v), protocol.Metadata{ListLocationName: "OptionConfiguration"})
+	}
+	if len(s.OptionsToRemove) > 0 {
+		v := s.OptionsToRemove
+
+		e.SetList(protocol.BodyTarget, "OptionsToRemove", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroupResult
 type ModifyOptionGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -20203,6 +25094,17 @@ func (s ModifyOptionGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyOptionGroupOutput) SetOptionGroup(v *OptionGroup) *ModifyOptionGroupOutput {
 	s.OptionGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyOptionGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OptionGroup != nil {
+		v := s.OptionGroup
+
+		e.SetFields(protocol.BodyTarget, "OptionGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Option details.
@@ -20304,6 +25206,65 @@ func (s *Option) SetVpcSecurityGroupMemberships(v []VpcSecurityGroupMembership) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Option) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBSecurityGroupMemberships) > 0 {
+		v := s.DBSecurityGroupMemberships
+
+		e.SetList(protocol.BodyTarget, "DBSecurityGroupMemberships", encodeDBSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "DBSecurityGroup"})
+	}
+	if s.OptionDescription != nil {
+		v := *s.OptionDescription
+
+		e.SetValue(protocol.BodyTarget, "OptionDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionName != nil {
+		v := *s.OptionName
+
+		e.SetValue(protocol.BodyTarget, "OptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeOptionSettingList(v), protocol.Metadata{ListLocationName: "OptionSetting"})
+	}
+	if s.OptionVersion != nil {
+		v := *s.OptionVersion
+
+		e.SetValue(protocol.BodyTarget, "OptionVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Permanent != nil {
+		v := *s.Permanent
+
+		e.SetValue(protocol.BodyTarget, "Permanent", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Persistent != nil {
+		v := *s.Persistent
+
+		e.SetValue(protocol.BodyTarget, "Persistent", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupMemberships) > 0 {
+		v := s.VpcSecurityGroupMemberships
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupMemberships", encodeVpcSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupMembership"})
+	}
+	return nil
+}
+
+func encodeOptionList(vs []Option) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A list of all available options
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionConfiguration
 type OptionConfiguration struct {
@@ -20388,6 +25349,50 @@ func (s *OptionConfiguration) SetPort(v int64) *OptionConfiguration {
 func (s *OptionConfiguration) SetVpcSecurityGroupMemberships(v []string) *OptionConfiguration {
 	s.VpcSecurityGroupMemberships = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DBSecurityGroupMemberships) > 0 {
+		v := s.DBSecurityGroupMemberships
+
+		e.SetList(protocol.BodyTarget, "DBSecurityGroupMemberships", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "DBSecurityGroupName"})
+	}
+	if s.OptionName != nil {
+		v := *s.OptionName
+
+		e.SetValue(protocol.BodyTarget, "OptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeOptionSettingList(v), protocol.Metadata{ListLocationName: "OptionSetting"})
+	}
+	if s.OptionVersion != nil {
+		v := *s.OptionVersion
+
+		e.SetValue(protocol.BodyTarget, "OptionVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupMemberships) > 0 {
+		v := s.VpcSecurityGroupMemberships
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupMemberships", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
+func encodeOptionConfigurationList(vs []OptionConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroup
@@ -20483,6 +25488,60 @@ func (s *OptionGroup) SetVpcId(v string) *OptionGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowsVpcAndNonVpcInstanceMemberships != nil {
+		v := *s.AllowsVpcAndNonVpcInstanceMemberships
+
+		e.SetValue(protocol.BodyTarget, "AllowsVpcAndNonVpcInstanceMemberships", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EngineName != nil {
+		v := *s.EngineName
+
+		e.SetValue(protocol.BodyTarget, "EngineName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MajorEngineVersion != nil {
+		v := *s.MajorEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MajorEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupArn != nil {
+		v := *s.OptionGroupArn
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupDescription != nil {
+		v := *s.OptionGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Options) > 0 {
+		v := s.Options
+
+		e.SetList(protocol.BodyTarget, "Options", encodeOptionList(v), protocol.Metadata{ListLocationName: "Option"})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionGroupList(vs []OptionGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Provides information on the option groups the DB instance is a member of.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupMembership
 type OptionGroupMembership struct {
@@ -20517,6 +25576,30 @@ func (s *OptionGroupMembership) SetOptionGroupName(v string) *OptionGroupMembers
 func (s *OptionGroupMembership) SetStatus(v string) *OptionGroupMembership {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionGroupMembershipList(vs []OptionGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Available option.
@@ -20688,6 +25771,100 @@ func (s *OptionGroupOption) SetVpcOnly(v bool) *OptionGroupOption {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionGroupOption) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultPort != nil {
+		v := *s.DefaultPort
+
+		e.SetValue(protocol.BodyTarget, "DefaultPort", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineName != nil {
+		v := *s.EngineName
+
+		e.SetValue(protocol.BodyTarget, "EngineName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MajorEngineVersion != nil {
+		v := *s.MajorEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MajorEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MinimumRequiredMinorEngineVersion != nil {
+		v := *s.MinimumRequiredMinorEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MinimumRequiredMinorEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionGroupOptionSettings) > 0 {
+		v := s.OptionGroupOptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionGroupOptionSettings", encodeOptionGroupOptionSettingList(v), protocol.Metadata{ListLocationName: "OptionGroupOptionSetting"})
+	}
+	if len(s.OptionGroupOptionVersions) > 0 {
+		v := s.OptionGroupOptionVersions
+
+		e.SetList(protocol.BodyTarget, "OptionGroupOptionVersions", encodeOptionVersionList(v), protocol.Metadata{ListLocationName: "OptionVersion"})
+	}
+	if len(s.OptionsConflictsWith) > 0 {
+		v := s.OptionsConflictsWith
+
+		e.SetList(protocol.BodyTarget, "OptionsConflictsWith", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "OptionConflictName"})
+	}
+	if len(s.OptionsDependedOn) > 0 {
+		v := s.OptionsDependedOn
+
+		e.SetList(protocol.BodyTarget, "OptionsDependedOn", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "OptionName"})
+	}
+	if s.Permanent != nil {
+		v := *s.Permanent
+
+		e.SetValue(protocol.BodyTarget, "Permanent", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Persistent != nil {
+		v := *s.Persistent
+
+		e.SetValue(protocol.BodyTarget, "Persistent", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PortRequired != nil {
+		v := *s.PortRequired
+
+		e.SetValue(protocol.BodyTarget, "PortRequired", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequiresAutoMinorEngineVersionUpgrade != nil {
+		v := *s.RequiresAutoMinorEngineVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "RequiresAutoMinorEngineVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SupportsOptionVersionDowngrade != nil {
+		v := *s.SupportsOptionVersionDowngrade
+
+		e.SetValue(protocol.BodyTarget, "SupportsOptionVersionDowngrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.VpcOnly != nil {
+		v := *s.VpcOnly
+
+		e.SetValue(protocol.BodyTarget, "VpcOnly", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionGroupOptionList(vs []OptionGroupOption) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Option group option settings are used to display settings available for each
 // option with their default values and other information. These values are
 // used with the DescribeOptionGroupOptions action.
@@ -20759,6 +25936,50 @@ func (s *OptionGroupOptionSetting) SetSettingDescription(v string) *OptionGroupO
 func (s *OptionGroupOptionSetting) SetSettingName(v string) *OptionGroupOptionSetting {
 	s.SettingName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionGroupOptionSetting) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedValues != nil {
+		v := *s.AllowedValues
+
+		e.SetValue(protocol.BodyTarget, "AllowedValues", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ApplyType != nil {
+		v := *s.ApplyType
+
+		e.SetValue(protocol.BodyTarget, "ApplyType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsModifiable != nil {
+		v := *s.IsModifiable
+
+		e.SetValue(protocol.BodyTarget, "IsModifiable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SettingDescription != nil {
+		v := *s.SettingDescription
+
+		e.SetValue(protocol.BodyTarget, "SettingDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SettingName != nil {
+		v := *s.SettingName
+
+		e.SetValue(protocol.BodyTarget, "SettingName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionGroupOptionSettingList(vs []OptionGroupOptionSetting) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Option settings are the actual settings being applied or configured for that
@@ -20862,6 +26083,65 @@ func (s *OptionSetting) SetValue(v string) *OptionSetting {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionSetting) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedValues != nil {
+		v := *s.AllowedValues
+
+		e.SetValue(protocol.BodyTarget, "AllowedValues", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ApplyType != nil {
+		v := *s.ApplyType
+
+		e.SetValue(protocol.BodyTarget, "ApplyType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsCollection != nil {
+		v := *s.IsCollection
+
+		e.SetValue(protocol.BodyTarget, "IsCollection", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.IsModifiable != nil {
+		v := *s.IsModifiable
+
+		e.SetValue(protocol.BodyTarget, "IsModifiable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionSettingList(vs []OptionSetting) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The version for an option. Option group option versions are returned by the
 // DescribeOptionGroupOptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionVersion
@@ -20895,6 +26175,30 @@ func (s *OptionVersion) SetIsDefault(v bool) *OptionVersion {
 func (s *OptionVersion) SetVersion(v string) *OptionVersion {
 	s.Version = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionVersion) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsDefault != nil {
+		v := *s.IsDefault
+
+		e.SetValue(protocol.BodyTarget, "IsDefault", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		e.SetValue(protocol.BodyTarget, "Version", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionVersionList(vs []OptionVersion) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains a list of available options for a DB instance
@@ -21042,6 +26346,90 @@ func (s *OrderableDBInstanceOption) SetVpc(v bool) *OrderableDBInstanceOption {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OrderableDBInstanceOption) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", encodeAvailabilityZoneList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZCapable != nil {
+		v := *s.MultiAZCapable
+
+		e.SetValue(protocol.BodyTarget, "MultiAZCapable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReadReplicaCapable != nil {
+		v := *s.ReadReplicaCapable
+
+		e.SetValue(protocol.BodyTarget, "ReadReplicaCapable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SupportsEnhancedMonitoring != nil {
+		v := *s.SupportsEnhancedMonitoring
+
+		e.SetValue(protocol.BodyTarget, "SupportsEnhancedMonitoring", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SupportsIAMDatabaseAuthentication != nil {
+		v := *s.SupportsIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "SupportsIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SupportsIops != nil {
+		v := *s.SupportsIops
+
+		e.SetValue(protocol.BodyTarget, "SupportsIops", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SupportsPerformanceInsights != nil {
+		v := *s.SupportsPerformanceInsights
+
+		e.SetValue(protocol.BodyTarget, "SupportsPerformanceInsights", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SupportsStorageEncryption != nil {
+		v := *s.SupportsStorageEncryption
+
+		e.SetValue(protocol.BodyTarget, "SupportsStorageEncryption", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Vpc != nil {
+		v := *s.Vpc
+
+		e.SetValue(protocol.BodyTarget, "Vpc", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOrderableDBInstanceOptionList(vs []OrderableDBInstanceOption) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a request parameter in the ModifyDBParameterGroup
 // and ResetDBParameterGroup actions.
 //
@@ -21154,6 +26542,70 @@ func (s *Parameter) SetSource(v string) *Parameter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Parameter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedValues != nil {
+		v := *s.AllowedValues
+
+		e.SetValue(protocol.BodyTarget, "AllowedValues", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ApplyMethod) > 0 {
+		v := s.ApplyMethod
+
+		e.SetValue(protocol.BodyTarget, "ApplyMethod", v, protocol.Metadata{})
+	}
+	if s.ApplyType != nil {
+		v := *s.ApplyType
+
+		e.SetValue(protocol.BodyTarget, "ApplyType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsModifiable != nil {
+		v := *s.IsModifiable
+
+		e.SetValue(protocol.BodyTarget, "IsModifiable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MinimumEngineVersion != nil {
+		v := *s.MinimumEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MinimumEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterName != nil {
+		v := *s.ParameterName
+
+		e.SetValue(protocol.BodyTarget, "ParameterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterValue != nil {
+		v := *s.ParameterValue
+
+		e.SetValue(protocol.BodyTarget, "ParameterValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeParameterList(vs []Parameter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Provides information about a pending maintenance action for a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingMaintenanceAction
 type PendingMaintenanceAction struct {
@@ -21232,6 +26684,50 @@ func (s *PendingMaintenanceAction) SetForcedApplyDate(v time.Time) *PendingMaint
 func (s *PendingMaintenanceAction) SetOptInStatus(v string) *PendingMaintenanceAction {
 	s.OptInStatus = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PendingMaintenanceAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Action != nil {
+		v := *s.Action
+
+		e.SetValue(protocol.BodyTarget, "Action", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoAppliedAfterDate != nil {
+		v := *s.AutoAppliedAfterDate
+
+		e.SetValue(protocol.BodyTarget, "AutoAppliedAfterDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.CurrentApplyDate != nil {
+		v := *s.CurrentApplyDate
+
+		e.SetValue(protocol.BodyTarget, "CurrentApplyDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ForcedApplyDate != nil {
+		v := *s.ForcedApplyDate
+
+		e.SetValue(protocol.BodyTarget, "ForcedApplyDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.OptInStatus != nil {
+		v := *s.OptInStatus
+
+		e.SetValue(protocol.BodyTarget, "OptInStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePendingMaintenanceActionList(vs []PendingMaintenanceAction) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // This data type is used as a response element in the ModifyDBInstance action.
@@ -21374,6 +26870,77 @@ func (s *PendingModifiedValues) SetStorageType(v string) *PendingModifiedValues 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PendingModifiedValues) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllocatedStorage != nil {
+		v := *s.AllocatedStorage
+
+		e.SetValue(protocol.BodyTarget, "AllocatedStorage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CACertificateIdentifier != nil {
+		v := *s.CACertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "CACertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBClusterMessage
 type PromoteReadReplicaDBClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -21425,6 +26992,17 @@ func (s *PromoteReadReplicaDBClusterInput) SetDBClusterIdentifier(v string) *Pro
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PromoteReadReplicaDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBClusterResult
 type PromoteReadReplicaDBClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -21468,6 +27046,17 @@ func (s PromoteReadReplicaDBClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *PromoteReadReplicaDBClusterOutput) SetDBCluster(v *DBCluster) *PromoteReadReplicaDBClusterOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PromoteReadReplicaDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaMessage
@@ -21564,6 +27153,27 @@ func (s *PromoteReadReplicaInput) SetPreferredBackupWindow(v string) *PromoteRea
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PromoteReadReplicaInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaResult
 type PromoteReadReplicaOutput struct {
 	_ struct{} `type:"structure"`
@@ -21605,6 +27215,17 @@ func (s PromoteReadReplicaOutput) SDKResponseMetadata() aws.Response {
 func (s *PromoteReadReplicaOutput) SetDBInstance(v *DBInstance) *PromoteReadReplicaOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PromoteReadReplicaOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOfferingMessage
@@ -21680,6 +27301,32 @@ func (s *PurchaseReservedDBInstancesOfferingInput) SetTags(v []Tag) *PurchaseRes
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurchaseReservedDBInstancesOfferingInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceCount != nil {
+		v := *s.DBInstanceCount
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstanceId != nil {
+		v := *s.ReservedDBInstanceId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstancesOfferingId != nil {
+		v := *s.ReservedDBInstancesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstancesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOfferingResult
 type PurchaseReservedDBInstancesOfferingOutput struct {
 	_ struct{} `type:"structure"`
@@ -21710,6 +27357,17 @@ func (s PurchaseReservedDBInstancesOfferingOutput) SDKResponseMetadata() aws.Res
 func (s *PurchaseReservedDBInstancesOfferingOutput) SetReservedDBInstance(v *ReservedDBInstance) *PurchaseReservedDBInstancesOfferingOutput {
 	s.ReservedDBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurchaseReservedDBInstancesOfferingOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReservedDBInstance != nil {
+		v := s.ReservedDBInstance
+
+		e.SetFields(protocol.BodyTarget, "ReservedDBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstanceMessage
@@ -21772,6 +27430,22 @@ func (s *RebootDBInstanceInput) SetForceFailover(v bool) *RebootDBInstanceInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebootDBInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ForceFailover != nil {
+		v := *s.ForceFailover
+
+		e.SetValue(protocol.BodyTarget, "ForceFailover", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstanceResult
 type RebootDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -21815,6 +27489,17 @@ func (s *RebootDBInstanceOutput) SetDBInstance(v *DBInstance) *RebootDBInstanceO
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebootDBInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // This data type is used as a response element in the DescribeReservedDBInstances
 // and DescribeReservedDBInstancesOfferings actions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecurringCharge
@@ -21848,6 +27533,30 @@ func (s *RecurringCharge) SetRecurringChargeAmount(v float64) *RecurringCharge {
 func (s *RecurringCharge) SetRecurringChargeFrequency(v string) *RecurringCharge {
 	s.RecurringChargeFrequency = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RecurringCharge) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RecurringChargeAmount != nil {
+		v := *s.RecurringChargeAmount
+
+		e.SetValue(protocol.BodyTarget, "RecurringChargeAmount", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.RecurringChargeFrequency != nil {
+		v := *s.RecurringChargeFrequency
+
+		e.SetValue(protocol.BodyTarget, "RecurringChargeFrequency", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRecurringChargeList(vs []RecurringCharge) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBClusterMessage
@@ -21906,6 +27615,22 @@ func (s *RemoveRoleFromDBClusterInput) SetRoleArn(v string) *RemoveRoleFromDBClu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveRoleFromDBClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBClusterOutput
 type RemoveRoleFromDBClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -21926,6 +27651,12 @@ func (s RemoveRoleFromDBClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveRoleFromDBClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveRoleFromDBClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscriptionMessage
@@ -21985,6 +27716,22 @@ func (s *RemoveSourceIdentifierFromSubscriptionInput) SetSubscriptionName(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveSourceIdentifierFromSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscriptionResult
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -22015,6 +27762,17 @@ func (s RemoveSourceIdentifierFromSubscriptionOutput) SDKResponseMetadata() aws.
 func (s *RemoveSourceIdentifierFromSubscriptionOutput) SetEventSubscription(v *EventSubscription) *RemoveSourceIdentifierFromSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveSourceIdentifierFromSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResourceMessage
@@ -22074,6 +27832,22 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveTagsFromResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResourceOutput
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -22094,6 +27868,12 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveTagsFromResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // This data type is used as a response element in the DescribeReservedDBInstances
@@ -22248,6 +28028,95 @@ func (s *ReservedDBInstance) SetUsagePrice(v float64) *ReservedDBInstance {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReservedDBInstance) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrencyCode != nil {
+		v := *s.CurrencyCode
+
+		e.SetValue(protocol.BodyTarget, "CurrencyCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceCount != nil {
+		v := *s.DBInstanceCount
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		e.SetList(protocol.BodyTarget, "RecurringCharges", encodeRecurringChargeList(v), protocol.Metadata{ListLocationName: "RecurringCharge"})
+	}
+	if s.ReservedDBInstanceArn != nil {
+		v := *s.ReservedDBInstanceArn
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstanceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstanceId != nil {
+		v := *s.ReservedDBInstanceId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedDBInstancesOfferingId != nil {
+		v := *s.ReservedDBInstancesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstancesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.State != nil {
+		v := *s.State
+
+		e.SetValue(protocol.BodyTarget, "State", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReservedDBInstanceList(vs []ReservedDBInstance) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a response element in the DescribeReservedDBInstancesOfferings
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOffering
@@ -22355,6 +28224,70 @@ func (s *ReservedDBInstancesOffering) SetUsagePrice(v float64) *ReservedDBInstan
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReservedDBInstancesOffering) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrencyCode != nil {
+		v := *s.CurrencyCode
+
+		e.SetValue(protocol.BodyTarget, "CurrencyCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		e.SetList(protocol.BodyTarget, "RecurringCharges", encodeRecurringChargeList(v), protocol.Metadata{ListLocationName: "RecurringCharge"})
+	}
+	if s.ReservedDBInstancesOfferingId != nil {
+		v := *s.ReservedDBInstancesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedDBInstancesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReservedDBInstancesOfferingList(vs []ReservedDBInstancesOffering) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroupMessage
 type ResetDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -22417,6 +28350,27 @@ func (s *ResetDBClusterParameterGroupInput) SetResetAllParameters(v bool) *Reset
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetDBClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	if s.ResetAllParameters != nil {
+		v := *s.ResetAllParameters
+
+		e.SetValue(protocol.BodyTarget, "ResetAllParameters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroupOutput
 type ResetDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -22456,6 +28410,17 @@ func (s ResetDBClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ResetDBClusterParameterGroupOutput) SetDBClusterParameterGroupName(v string) *ResetDBClusterParameterGroupOutput {
 	s.DBClusterParameterGroupName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetDBClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroupMessage
@@ -22550,6 +28515,27 @@ func (s *ResetDBParameterGroupInput) SetResetAllParameters(v bool) *ResetDBParam
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetDBParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	if s.ResetAllParameters != nil {
+		v := *s.ResetAllParameters
+
+		e.SetValue(protocol.BodyTarget, "ResetAllParameters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the result of a successful invocation of the ModifyDBParameterGroup
 // or ResetDBParameterGroup action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroupOutput
@@ -22581,6 +28567,17 @@ func (s ResetDBParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ResetDBParameterGroupOutput) SetDBParameterGroupName(v string) *ResetDBParameterGroupOutput {
 	s.DBParameterGroupName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetDBParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBParameterGroupName != nil {
+		v := *s.DBParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the pending maintenance actions for a resource.
@@ -22616,6 +28613,30 @@ func (s *ResourcePendingMaintenanceActions) SetPendingMaintenanceActionDetails(v
 func (s *ResourcePendingMaintenanceActions) SetResourceIdentifier(v string) *ResourcePendingMaintenanceActions {
 	s.ResourceIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResourcePendingMaintenanceActions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PendingMaintenanceActionDetails) > 0 {
+		v := s.PendingMaintenanceActionDetails
+
+		e.SetList(protocol.BodyTarget, "PendingMaintenanceActionDetails", encodePendingMaintenanceActionList(v), protocol.Metadata{ListLocationName: "PendingMaintenanceAction"})
+	}
+	if s.ResourceIdentifier != nil {
+		v := *s.ResourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ResourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeResourcePendingMaintenanceActionsList(vs []ResourcePendingMaintenanceActions) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message
@@ -23028,6 +29049,137 @@ func (s *RestoreDBClusterFromS3Input) SetVpcSecurityGroupIds(v []string) *Restor
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBClusterFromS3Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.BackupRetentionPeriod != nil {
+		v := *s.BackupRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "BackupRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CharacterSetName != nil {
+		v := *s.CharacterSetName
+
+		e.SetValue(protocol.BodyTarget, "CharacterSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBClusterParameterGroupName != nil {
+		v := *s.DBClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DatabaseName != nil {
+		v := *s.DatabaseName
+
+		e.SetValue(protocol.BodyTarget, "DatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredBackupWindow != nil {
+		v := *s.PreferredBackupWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredBackupWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.S3BucketName != nil {
+		v := *s.S3BucketName
+
+		e.SetValue(protocol.BodyTarget, "S3BucketName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.S3IngestionRoleArn != nil {
+		v := *s.S3IngestionRoleArn
+
+		e.SetValue(protocol.BodyTarget, "S3IngestionRoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.S3Prefix != nil {
+		v := *s.S3Prefix
+
+		e.SetValue(protocol.BodyTarget, "S3Prefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceEngine != nil {
+		v := *s.SourceEngine
+
+		e.SetValue(protocol.BodyTarget, "SourceEngine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceEngineVersion != nil {
+		v := *s.SourceEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "SourceEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageEncrypted != nil {
+		v := *s.StorageEncrypted
+
+		e.SetValue(protocol.BodyTarget, "StorageEncrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Result
 type RestoreDBClusterFromS3Output struct {
 	_ struct{} `type:"structure"`
@@ -23071,6 +29223,17 @@ func (s RestoreDBClusterFromS3Output) SDKResponseMetadata() aws.Response {
 func (s *RestoreDBClusterFromS3Output) SetDBCluster(v *DBCluster) *RestoreDBClusterFromS3Output {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBClusterFromS3Output) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage
@@ -23289,6 +29452,77 @@ func (s *RestoreDBClusterFromSnapshotInput) SetVpcSecurityGroupIds(v []string) *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBClusterFromSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DatabaseName != nil {
+		v := *s.DatabaseName
+
+		e.SetValue(protocol.BodyTarget, "DatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotResult
 type RestoreDBClusterFromSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -23332,6 +29566,17 @@ func (s RestoreDBClusterFromSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *RestoreDBClusterFromSnapshotOutput) SetDBCluster(v *DBCluster) *RestoreDBClusterFromSnapshotOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBClusterFromSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage
@@ -23564,6 +29809,72 @@ func (s *RestoreDBClusterToPointInTimeInput) SetVpcSecurityGroupIds(v []string) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBClusterToPointInTimeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBClusterIdentifier != nil {
+		v := *s.DBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RestoreToTime != nil {
+		v := *s.RestoreToTime
+
+		e.SetValue(protocol.BodyTarget, "RestoreToTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.RestoreType != nil {
+		v := *s.RestoreType
+
+		e.SetValue(protocol.BodyTarget, "RestoreType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDBClusterIdentifier != nil {
+		v := *s.SourceDBClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.UseLatestRestorableTime != nil {
+		v := *s.UseLatestRestorableTime
+
+		e.SetValue(protocol.BodyTarget, "UseLatestRestorableTime", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeResult
 type RestoreDBClusterToPointInTimeOutput struct {
 	_ struct{} `type:"structure"`
@@ -23607,6 +29918,17 @@ func (s RestoreDBClusterToPointInTimeOutput) SDKResponseMetadata() aws.Response 
 func (s *RestoreDBClusterToPointInTimeOutput) SetDBCluster(v *DBCluster) *RestoreDBClusterToPointInTimeOutput {
 	s.DBCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBClusterToPointInTimeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBCluster != nil {
+		v := s.DBCluster
+
+		e.SetFields(protocol.BodyTarget, "DBCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage
@@ -23956,6 +30278,122 @@ func (s *RestoreDBInstanceFromDBSnapshotInput) SetTdeCredentialPassword(v string
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBInstanceFromDBSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CopyTagsToSnapshot != nil {
+		v := *s.CopyTagsToSnapshot
+
+		e.SetValue(protocol.BodyTarget, "CopyTagsToSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainIAMRoleName != nil {
+		v := *s.DomainIAMRoleName
+
+		e.SetValue(protocol.BodyTarget, "DomainIAMRoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialPassword != nil {
+		v := *s.TdeCredentialPassword
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotResult
 type RestoreDBInstanceFromDBSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -23997,6 +30435,17 @@ func (s RestoreDBInstanceFromDBSnapshotOutput) SDKResponseMetadata() aws.Respons
 func (s *RestoreDBInstanceFromDBSnapshotOutput) SetDBInstance(v *DBInstance) *RestoreDBInstanceFromDBSnapshotOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBInstanceFromDBSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage
@@ -24372,6 +30821,132 @@ func (s *RestoreDBInstanceToPointInTimeInput) SetUseLatestRestorableTime(v bool)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBInstanceToPointInTimeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CopyTagsToSnapshot != nil {
+		v := *s.CopyTagsToSnapshot
+
+		e.SetValue(protocol.BodyTarget, "CopyTagsToSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DBInstanceClass != nil {
+		v := *s.DBInstanceClass
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceClass", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSubnetGroupName != nil {
+		v := *s.DBSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainIAMRoleName != nil {
+		v := *s.DomainIAMRoleName
+
+		e.SetValue(protocol.BodyTarget, "DomainIAMRoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnableIAMDatabaseAuthentication != nil {
+		v := *s.EnableIAMDatabaseAuthentication
+
+		e.SetValue(protocol.BodyTarget, "EnableIAMDatabaseAuthentication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Iops != nil {
+		v := *s.Iops
+
+		e.SetValue(protocol.BodyTarget, "Iops", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.LicenseModel != nil {
+		v := *s.LicenseModel
+
+		e.SetValue(protocol.BodyTarget, "LicenseModel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.OptionGroupName != nil {
+		v := *s.OptionGroupName
+
+		e.SetValue(protocol.BodyTarget, "OptionGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RestoreTime != nil {
+		v := *s.RestoreTime
+
+		e.SetValue(protocol.BodyTarget, "RestoreTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SourceDBInstanceIdentifier != nil {
+		v := *s.SourceDBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceDBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StorageType != nil {
+		v := *s.StorageType
+
+		e.SetValue(protocol.BodyTarget, "StorageType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TargetDBInstanceIdentifier != nil {
+		v := *s.TargetDBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetDBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialArn != nil {
+		v := *s.TdeCredentialArn
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TdeCredentialPassword != nil {
+		v := *s.TdeCredentialPassword
+
+		e.SetValue(protocol.BodyTarget, "TdeCredentialPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UseLatestRestorableTime != nil {
+		v := *s.UseLatestRestorableTime
+
+		e.SetValue(protocol.BodyTarget, "UseLatestRestorableTime", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeResult
 type RestoreDBInstanceToPointInTimeOutput struct {
 	_ struct{} `type:"structure"`
@@ -24413,6 +30988,17 @@ func (s RestoreDBInstanceToPointInTimeOutput) SDKResponseMetadata() aws.Response
 func (s *RestoreDBInstanceToPointInTimeOutput) SetDBInstance(v *DBInstance) *RestoreDBInstanceToPointInTimeOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreDBInstanceToPointInTimeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngressMessage
@@ -24501,6 +31087,37 @@ func (s *RevokeDBSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v string)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeDBSecurityGroupIngressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CIDRIP != nil {
+		v := *s.CIDRIP
+
+		e.SetValue(protocol.BodyTarget, "CIDRIP", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSecurityGroupName != nil {
+		v := *s.DBSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "DBSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupId != nil {
+		v := *s.EC2SecurityGroupId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngressResult
 type RevokeDBSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -24541,6 +31158,17 @@ func (s RevokeDBSecurityGroupIngressOutput) SDKResponseMetadata() aws.Response {
 func (s *RevokeDBSecurityGroupIngressOutput) SetDBSecurityGroup(v *DBSecurityGroup) *RevokeDBSecurityGroupIngressOutput {
 	s.DBSecurityGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeDBSecurityGroupIngressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBSecurityGroup != nil {
+		v := s.DBSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "DBSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains an AWS Region name as the result of a successful call to the DescribeSourceRegions
@@ -24587,6 +31215,35 @@ func (s *SourceRegion) SetStatus(v string) *SourceRegion {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SourceRegion) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RegionName != nil {
+		v := *s.RegionName
+
+		e.SetValue(protocol.BodyTarget, "RegionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSourceRegionList(vs []SourceRegion) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceMessage
 type StartDBInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -24625,6 +31282,17 @@ func (s *StartDBInstanceInput) Validate() error {
 func (s *StartDBInstanceInput) SetDBInstanceIdentifier(v string) *StartDBInstanceInput {
 	s.DBInstanceIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StartDBInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceResult
@@ -24668,6 +31336,17 @@ func (s StartDBInstanceOutput) SDKResponseMetadata() aws.Response {
 func (s *StartDBInstanceOutput) SetDBInstance(v *DBInstance) *StartDBInstanceOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StartDBInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceMessage
@@ -24720,6 +31399,22 @@ func (s *StopDBInstanceInput) SetDBSnapshotIdentifier(v string) *StopDBInstanceI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StopDBInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstanceIdentifier != nil {
+		v := *s.DBInstanceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBInstanceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBSnapshotIdentifier != nil {
+		v := *s.DBSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "DBSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceResult
 type StopDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -24761,6 +31456,17 @@ func (s StopDBInstanceOutput) SDKResponseMetadata() aws.Response {
 func (s *StopDBInstanceOutput) SetDBInstance(v *DBInstance) *StopDBInstanceOutput {
 	s.DBInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StopDBInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DBInstance != nil {
+		v := s.DBInstance
+
+		e.SetFields(protocol.BodyTarget, "DBInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // This data type is used as a response element in the DescribeDBSubnetGroups
@@ -24811,6 +31517,35 @@ func (s *Subnet) SetSubnetStatus(v string) *Subnet {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Subnet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubnetAvailabilityZone != nil {
+		v := s.SubnetAvailabilityZone
+
+		e.SetFields(protocol.BodyTarget, "SubnetAvailabilityZone", v, protocol.Metadata{})
+	}
+	if s.SubnetIdentifier != nil {
+		v := *s.SubnetIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SubnetIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubnetStatus != nil {
+		v := *s.SubnetStatus
+
+		e.SetValue(protocol.BodyTarget, "SubnetStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSubnetList(vs []Subnet) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag
 type Tag struct {
@@ -24851,6 +31586,30 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A time zone associated with a DBInstance or a DBSnapshot. This data type
 // is an element in the response to the DescribeDBInstances, the DescribeDBSnapshots,
 // and the DescribeDBEngineVersions actions.
@@ -24876,6 +31635,25 @@ func (s Timezone) GoString() string {
 func (s *Timezone) SetTimezoneName(v string) *Timezone {
 	s.TimezoneName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Timezone) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TimezoneName != nil {
+		v := *s.TimezoneName
+
+		e.SetValue(protocol.BodyTarget, "TimezoneName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTimezoneList(vs []Timezone) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The version of the database engine that a DB instance can be upgraded to.
@@ -24941,6 +31719,45 @@ func (s *UpgradeTarget) SetIsMajorVersionUpgrade(v bool) *UpgradeTarget {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpgradeTarget) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoUpgrade != nil {
+		v := *s.AutoUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsMajorVersionUpgrade != nil {
+		v := *s.IsMajorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "IsMajorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeUpgradeTargetList(vs []UpgradeTarget) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // This data type is used as a response element for queries on VPC security
 // group membership.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/VpcSecurityGroupMembership
@@ -24976,6 +31793,30 @@ func (s *VpcSecurityGroupMembership) SetVpcSecurityGroupId(v string) *VpcSecurit
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VpcSecurityGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VpcSecurityGroupId != nil {
+		v := *s.VpcSecurityGroupId
+
+		e.SetValue(protocol.BodyTarget, "VpcSecurityGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeVpcSecurityGroupMembershipList(vs []VpcSecurityGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type ApplyMethod string
 
 // Enum values for ApplyMethod
@@ -24983,6 +31824,15 @@ const (
 	ApplyMethodImmediate     ApplyMethod = "immediate"
 	ApplyMethodPendingReboot ApplyMethod = "pending-reboot"
 )
+
+func (enum ApplyMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplyMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -24995,3 +31845,12 @@ const (
 	SourceTypeDbCluster         SourceType = "db-cluster"
 	SourceTypeDbClusterSnapshot SourceType = "db-cluster-snapshot"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

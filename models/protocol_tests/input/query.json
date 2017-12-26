@@ -563,18 +563,18 @@
       "InputShape": {
         "type": "structure",
         "members": {
-		  "BlobArgs": {
-			"shape": "BlobsType"
-		  }
+          "BlobArgs": {
+            "shape": "BlobsType"
+          }
         }
       },
-	  "BlobsType": {
+      "BlobsType": {
         "type": "list",
         "member": {
           "shape": "BlobType"
         },
         "flattened": true
-	  },
+      },
       "BlobType": {
         "type": "blob"
       }

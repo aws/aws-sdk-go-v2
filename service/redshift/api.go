@@ -4433,6 +4433,30 @@ func (s *AccountWithRestoreAccess) SetAccountId(v string) *AccountWithRestoreAcc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccountWithRestoreAccess) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountAlias != nil {
+		v := *s.AccountAlias
+
+		e.SetValue(protocol.BodyTarget, "AccountAlias", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAccountWithRestoreAccessList(vs []AccountWithRestoreAccess) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngressMessage
 type AuthorizeClusterSecurityGroupIngressInput struct {
 	_ struct{} `type:"structure"`
@@ -4504,6 +4528,32 @@ func (s *AuthorizeClusterSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeClusterSecurityGroupIngressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CIDRIP != nil {
+		v := *s.CIDRIP
+
+		e.SetValue(protocol.BodyTarget, "CIDRIP", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngressResult
 type AuthorizeClusterSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -4533,6 +4583,17 @@ func (s AuthorizeClusterSecurityGroupIngressOutput) SDKResponseMetadata() aws.Re
 func (s *AuthorizeClusterSecurityGroupIngressOutput) SetClusterSecurityGroup(v *ClusterSecurityGroup) *AuthorizeClusterSecurityGroupIngressOutput {
 	s.ClusterSecurityGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeClusterSecurityGroupIngressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroup != nil {
+		v := s.ClusterSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "ClusterSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccessMessage
@@ -4604,6 +4665,27 @@ func (s *AuthorizeSnapshotAccessInput) SetSnapshotIdentifier(v string) *Authoriz
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeSnapshotAccessInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountWithRestoreAccess != nil {
+		v := *s.AccountWithRestoreAccess
+
+		e.SetValue(protocol.BodyTarget, "AccountWithRestoreAccess", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotClusterIdentifier != nil {
+		v := *s.SnapshotClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccessResult
 type AuthorizeSnapshotAccessOutput struct {
 	_ struct{} `type:"structure"`
@@ -4635,6 +4717,17 @@ func (s *AuthorizeSnapshotAccessOutput) SetSnapshot(v *Snapshot) *AuthorizeSnaps
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeSnapshotAccessOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes an availability zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AvailabilityZone
 type AvailabilityZone struct {
@@ -4658,6 +4751,25 @@ func (s AvailabilityZone) GoString() string {
 func (s *AvailabilityZone) SetName(v string) *AvailabilityZone {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AvailabilityZone) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAvailabilityZoneList(vs []AvailabilityZone) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a cluster.
@@ -5039,6 +5151,185 @@ func (s *Cluster) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *Cluster 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Cluster) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowVersionUpgrade != nil {
+		v := *s.AllowVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AllowVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutomatedSnapshotRetentionPeriod != nil {
+		v := *s.AutomatedSnapshotRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "AutomatedSnapshotRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterCreateTime != nil {
+		v := *s.ClusterCreateTime
+
+		e.SetValue(protocol.BodyTarget, "ClusterCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClusterNodes) > 0 {
+		v := s.ClusterNodes
+
+		e.SetList(protocol.BodyTarget, "ClusterNodes", encodeClusterNodeList(v), protocol.Metadata{})
+	}
+	if len(s.ClusterParameterGroups) > 0 {
+		v := s.ClusterParameterGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterParameterGroups", encodeClusterParameterGroupStatusList(v), protocol.Metadata{ListLocationName: "ClusterParameterGroup"})
+	}
+	if s.ClusterPublicKey != nil {
+		v := *s.ClusterPublicKey
+
+		e.SetValue(protocol.BodyTarget, "ClusterPublicKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterRevisionNumber != nil {
+		v := *s.ClusterRevisionNumber
+
+		e.SetValue(protocol.BodyTarget, "ClusterRevisionNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClusterSecurityGroups) > 0 {
+		v := s.ClusterSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterSecurityGroups", encodeClusterSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "ClusterSecurityGroup"})
+	}
+	if s.ClusterSnapshotCopyStatus != nil {
+		v := s.ClusterSnapshotCopyStatus
+
+		e.SetFields(protocol.BodyTarget, "ClusterSnapshotCopyStatus", v, protocol.Metadata{})
+	}
+	if s.ClusterStatus != nil {
+		v := *s.ClusterStatus
+
+		e.SetValue(protocol.BodyTarget, "ClusterStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ElasticIpStatus != nil {
+		v := s.ElasticIpStatus
+
+		e.SetFields(protocol.BodyTarget, "ElasticIpStatus", v, protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Endpoint != nil {
+		v := s.Endpoint
+
+		e.SetFields(protocol.BodyTarget, "Endpoint", v, protocol.Metadata{})
+	}
+	if s.EnhancedVpcRouting != nil {
+		v := *s.EnhancedVpcRouting
+
+		e.SetValue(protocol.BodyTarget, "EnhancedVpcRouting", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HsmStatus != nil {
+		v := s.HsmStatus
+
+		e.SetFields(protocol.BodyTarget, "HsmStatus", v, protocol.Metadata{})
+	}
+	if len(s.IamRoles) > 0 {
+		v := s.IamRoles
+
+		e.SetList(protocol.BodyTarget, "IamRoles", encodeClusterIamRoleList(v), protocol.Metadata{ListLocationName: "ClusterIamRole"})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ModifyStatus != nil {
+		v := *s.ModifyStatus
+
+		e.SetValue(protocol.BodyTarget, "ModifyStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumberOfNodes != nil {
+		v := *s.NumberOfNodes
+
+		e.SetValue(protocol.BodyTarget, "NumberOfNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PendingModifiedValues != nil {
+		v := s.PendingModifiedValues
+
+		e.SetFields(protocol.BodyTarget, "PendingModifiedValues", v, protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RestoreStatus != nil {
+		v := s.RestoreStatus
+
+		e.SetFields(protocol.BodyTarget, "RestoreStatus", v, protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroups) > 0 {
+		v := s.VpcSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroups", encodeVpcSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroup"})
+	}
+	return nil
+}
+
+func encodeClusterList(vs []Cluster) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // An AWS Identity and Access Management (IAM) role that can be used by the
 // associated Amazon Redshift cluster to access other AWS services.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterIamRole
@@ -5084,6 +5375,30 @@ func (s *ClusterIamRole) SetIamRoleArn(v string) *ClusterIamRole {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterIamRole) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplyStatus != nil {
+		v := *s.ApplyStatus
+
+		e.SetValue(protocol.BodyTarget, "ApplyStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IamRoleArn != nil {
+		v := *s.IamRoleArn
+
+		e.SetValue(protocol.BodyTarget, "IamRoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterIamRoleList(vs []ClusterIamRole) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The identifier of a node in a cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterNode
 type ClusterNode struct {
@@ -5125,6 +5440,35 @@ func (s *ClusterNode) SetPrivateIPAddress(v string) *ClusterNode {
 func (s *ClusterNode) SetPublicIPAddress(v string) *ClusterNode {
 	s.PublicIPAddress = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterNode) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NodeRole != nil {
+		v := *s.NodeRole
+
+		e.SetValue(protocol.BodyTarget, "NodeRole", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PrivateIPAddress != nil {
+		v := *s.PrivateIPAddress
+
+		e.SetValue(protocol.BodyTarget, "PrivateIPAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PublicIPAddress != nil {
+		v := *s.PublicIPAddress
+
+		e.SetValue(protocol.BodyTarget, "PublicIPAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterNodeList(vs []ClusterNode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a parameter group.
@@ -5180,6 +5524,40 @@ func (s *ClusterParameterGroup) SetTags(v []Tag) *ClusterParameterGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterParameterGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupFamily != nil {
+		v := *s.ParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeClusterParameterGroupList(vs []ClusterParameterGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the status of a parameter group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupStatus
 type ClusterParameterGroupStatus struct {
@@ -5225,6 +5603,35 @@ func (s *ClusterParameterGroupStatus) SetParameterApplyStatus(v string) *Cluster
 func (s *ClusterParameterGroupStatus) SetParameterGroupName(v string) *ClusterParameterGroupStatus {
 	s.ParameterGroupName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterParameterGroupStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ClusterParameterStatusList) > 0 {
+		v := s.ClusterParameterStatusList
+
+		e.SetList(protocol.BodyTarget, "ClusterParameterStatusList", encodeClusterParameterStatusList(v), protocol.Metadata{})
+	}
+	if s.ParameterApplyStatus != nil {
+		v := *s.ParameterApplyStatus
+
+		e.SetValue(protocol.BodyTarget, "ParameterApplyStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterParameterGroupStatusList(vs []ClusterParameterGroupStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes the status of a parameter group.
@@ -5293,6 +5700,35 @@ func (s *ClusterParameterStatus) SetParameterName(v string) *ClusterParameterSta
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterParameterStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterApplyErrorDescription != nil {
+		v := *s.ParameterApplyErrorDescription
+
+		e.SetValue(protocol.BodyTarget, "ParameterApplyErrorDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterApplyStatus != nil {
+		v := *s.ParameterApplyStatus
+
+		e.SetValue(protocol.BodyTarget, "ParameterApplyStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterName != nil {
+		v := *s.ParameterName
+
+		e.SetValue(protocol.BodyTarget, "ParameterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterParameterStatusList(vs []ClusterParameterStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroup
 type ClusterSecurityGroup struct {
@@ -5356,6 +5792,45 @@ func (s *ClusterSecurityGroup) SetTags(v []Tag) *ClusterSecurityGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.EC2SecurityGroups) > 0 {
+		v := s.EC2SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "EC2SecurityGroups", encodeEC2SecurityGroupList(v), protocol.Metadata{ListLocationName: "EC2SecurityGroup"})
+	}
+	if len(s.IPRanges) > 0 {
+		v := s.IPRanges
+
+		e.SetList(protocol.BodyTarget, "IPRanges", encodeIPRangeList(v), protocol.Metadata{ListLocationName: "IPRange"})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeClusterSecurityGroupList(vs []ClusterSecurityGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a cluster security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupMembership
 type ClusterSecurityGroupMembership struct {
@@ -5388,6 +5863,30 @@ func (s *ClusterSecurityGroupMembership) SetClusterSecurityGroupName(v string) *
 func (s *ClusterSecurityGroupMembership) SetStatus(v string) *ClusterSecurityGroupMembership {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterSecurityGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterSecurityGroupMembershipList(vs []ClusterSecurityGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Returns the destination region and retention period that are configured for
@@ -5434,6 +5933,27 @@ func (s *ClusterSnapshotCopyStatus) SetRetentionPeriod(v int64) *ClusterSnapshot
 func (s *ClusterSnapshotCopyStatus) SetSnapshotCopyGrantName(v string) *ClusterSnapshotCopyStatus {
 	s.SnapshotCopyGrantName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterSnapshotCopyStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DestinationRegion != nil {
+		v := *s.DestinationRegion
+
+		e.SetValue(protocol.BodyTarget, "DestinationRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RetentionPeriod != nil {
+		v := *s.RetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "RetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotCopyGrantName != nil {
+		v := *s.SnapshotCopyGrantName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCopyGrantName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a subnet group.
@@ -5507,6 +6027,50 @@ func (s *ClusterSubnetGroup) SetVpcId(v string) *ClusterSubnetGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterSubnetGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubnetGroupStatus != nil {
+		v := *s.SubnetGroupStatus
+
+		e.SetValue(protocol.BodyTarget, "SubnetGroupStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", encodeSubnetList(v), protocol.Metadata{ListLocationName: "Subnet"})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterSubnetGroupList(vs []ClusterSubnetGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a cluster version, including the parameter group family and description
 // of the version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterVersion
@@ -5549,6 +6113,35 @@ func (s *ClusterVersion) SetClusterVersion(v string) *ClusterVersion {
 func (s *ClusterVersion) SetDescription(v string) *ClusterVersion {
 	s.Description = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ClusterVersion) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterParameterGroupFamily != nil {
+		v := *s.ClusterParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "ClusterParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeClusterVersionList(vs []ClusterVersion) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshotMessage
@@ -5638,6 +6231,27 @@ func (s *CopyClusterSnapshotInput) SetTargetSnapshotIdentifier(v string) *CopyCl
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceSnapshotClusterIdentifier != nil {
+		v := *s.SourceSnapshotClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceSnapshotClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceSnapshotIdentifier != nil {
+		v := *s.SourceSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetSnapshotIdentifier != nil {
+		v := *s.TargetSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "TargetSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshotResult
 type CopyClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -5667,6 +6281,17 @@ func (s CopyClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CopyClusterSnapshotOutput) SetSnapshot(v *Snapshot) *CopyClusterSnapshotOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopyClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage
@@ -6139,6 +6764,147 @@ func (s *CreateClusterInput) SetVpcSecurityGroupIds(v []string) *CreateClusterIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AdditionalInfo != nil {
+		v := *s.AdditionalInfo
+
+		e.SetValue(protocol.BodyTarget, "AdditionalInfo", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AllowVersionUpgrade != nil {
+		v := *s.AllowVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AllowVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutomatedSnapshotRetentionPeriod != nil {
+		v := *s.AutomatedSnapshotRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "AutomatedSnapshotRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterParameterGroupName != nil {
+		v := *s.ClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClusterSecurityGroups) > 0 {
+		v := s.ClusterSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ClusterSecurityGroupName"})
+	}
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterType != nil {
+		v := *s.ClusterType
+
+		e.SetValue(protocol.BodyTarget, "ClusterType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ElasticIp != nil {
+		v := *s.ElasticIp
+
+		e.SetValue(protocol.BodyTarget, "ElasticIp", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnhancedVpcRouting != nil {
+		v := *s.EnhancedVpcRouting
+
+		e.SetValue(protocol.BodyTarget, "EnhancedVpcRouting", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.IamRoles) > 0 {
+		v := s.IamRoles
+
+		e.SetList(protocol.BodyTarget, "IamRoles", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "IamRoleArn"})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumberOfNodes != nil {
+		v := *s.NumberOfNodes
+
+		e.SetValue(protocol.BodyTarget, "NumberOfNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterResult
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -6168,6 +6934,17 @@ func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateClusterOutput) SetCluster(v *Cluster) *CreateClusterOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroupMessage
@@ -6269,6 +7046,32 @@ func (s *CreateClusterParameterGroupInput) SetTags(v []Tag) *CreateClusterParame
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupFamily != nil {
+		v := *s.ParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroupResult
 type CreateClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6298,6 +7101,17 @@ func (s CreateClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateClusterParameterGroupOutput) SetClusterParameterGroup(v *ClusterParameterGroup) *CreateClusterParameterGroupOutput {
 	s.ClusterParameterGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterParameterGroup != nil {
+		v := s.ClusterParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "ClusterParameterGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroupMessage
@@ -6376,6 +7190,27 @@ func (s *CreateClusterSecurityGroupInput) SetTags(v []Tag) *CreateClusterSecurit
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroupResult
 type CreateClusterSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6405,6 +7240,17 @@ func (s CreateClusterSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateClusterSecurityGroupOutput) SetClusterSecurityGroup(v *ClusterSecurityGroup) *CreateClusterSecurityGroupOutput {
 	s.ClusterSecurityGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroup != nil {
+		v := s.ClusterSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "ClusterSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshotMessage
@@ -6484,6 +7330,27 @@ func (s *CreateClusterSnapshotInput) SetTags(v []Tag) *CreateClusterSnapshotInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshotResult
 type CreateClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -6513,6 +7380,17 @@ func (s CreateClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateClusterSnapshotOutput) SetSnapshot(v *Snapshot) *CreateClusterSnapshotOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroupMessage
@@ -6606,6 +7484,32 @@ func (s *CreateClusterSubnetGroupInput) SetTags(v []Tag) *CreateClusterSubnetGro
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		e.SetList(protocol.BodyTarget, "SubnetIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SubnetIdentifier"})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroupResult
 type CreateClusterSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6635,6 +7539,17 @@ func (s CreateClusterSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateClusterSubnetGroupOutput) SetClusterSubnetGroup(v *ClusterSubnetGroup) *CreateClusterSubnetGroupOutput {
 	s.ClusterSubnetGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateClusterSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroup != nil {
+		v := s.ClusterSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "ClusterSubnetGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscriptionMessage
@@ -6780,6 +7695,52 @@ func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscription
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateEventSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.Severity != nil {
+		v := *s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceIds) > 0 {
+		v := s.SourceIds
+
+		e.SetList(protocol.BodyTarget, "SourceIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SourceId"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscriptionResult
 type CreateEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6809,6 +7770,17 @@ func (s CreateEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *CreateEventSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateEventSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificateMessage
@@ -6861,6 +7833,22 @@ func (s *CreateHsmClientCertificateInput) SetTags(v []Tag) *CreateHsmClientCerti
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateHsmClientCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificateResult
 type CreateHsmClientCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -6892,6 +7880,17 @@ func (s CreateHsmClientCertificateOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateHsmClientCertificateOutput) SetHsmClientCertificate(v *HsmClientCertificate) *CreateHsmClientCertificateOutput {
 	s.HsmClientCertificate = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateHsmClientCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmClientCertificate != nil {
+		v := s.HsmClientCertificate
+
+		e.SetFields(protocol.BodyTarget, "HsmClientCertificate", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfigurationMessage
@@ -7020,6 +8019,47 @@ func (s *CreateHsmConfigurationInput) SetTags(v []Tag) *CreateHsmConfigurationIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateHsmConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmIpAddress != nil {
+		v := *s.HsmIpAddress
+
+		e.SetValue(protocol.BodyTarget, "HsmIpAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmPartitionName != nil {
+		v := *s.HsmPartitionName
+
+		e.SetValue(protocol.BodyTarget, "HsmPartitionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmPartitionPassword != nil {
+		v := *s.HsmPartitionPassword
+
+		e.SetValue(protocol.BodyTarget, "HsmPartitionPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmServerPublicCertificate != nil {
+		v := *s.HsmServerPublicCertificate
+
+		e.SetValue(protocol.BodyTarget, "HsmServerPublicCertificate", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfigurationResult
 type CreateHsmConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -7051,6 +8091,17 @@ func (s CreateHsmConfigurationOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateHsmConfigurationOutput) SetHsmConfiguration(v *HsmConfiguration) *CreateHsmConfigurationOutput {
 	s.HsmConfiguration = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateHsmConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmConfiguration != nil {
+		v := s.HsmConfiguration
+
+		e.SetFields(protocol.BodyTarget, "HsmConfiguration", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // The result of the CreateSnapshotCopyGrant action.
@@ -7126,6 +8177,27 @@ func (s *CreateSnapshotCopyGrantInput) SetTags(v []Tag) *CreateSnapshotCopyGrant
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateSnapshotCopyGrantInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotCopyGrantName != nil {
+		v := *s.SnapshotCopyGrantName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCopyGrantName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrantResult
 type CreateSnapshotCopyGrantOutput struct {
 	_ struct{} `type:"structure"`
@@ -7161,6 +8233,17 @@ func (s CreateSnapshotCopyGrantOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateSnapshotCopyGrantOutput) SetSnapshotCopyGrant(v *SnapshotCopyGrant) *CreateSnapshotCopyGrantOutput {
 	s.SnapshotCopyGrant = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateSnapshotCopyGrantOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SnapshotCopyGrant != nil {
+		v := s.SnapshotCopyGrant
+
+		e.SetFields(protocol.BodyTarget, "SnapshotCopyGrant", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the output from the CreateTags action.
@@ -7224,6 +8307,22 @@ func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTagsOutput
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7244,6 +8343,12 @@ func (s CreateTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes the default cluster parameters for a parameter group family.
@@ -7292,6 +8397,27 @@ func (s *DefaultClusterParameters) SetParameterGroupFamily(v string) *DefaultClu
 func (s *DefaultClusterParameters) SetParameters(v []Parameter) *DefaultClusterParameters {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefaultClusterParameters) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupFamily != nil {
+		v := *s.ParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterMessage
@@ -7379,6 +8505,27 @@ func (s *DeleteClusterInput) SetSkipFinalClusterSnapshot(v bool) *DeleteClusterI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FinalClusterSnapshotIdentifier != nil {
+		v := *s.FinalClusterSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "FinalClusterSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SkipFinalClusterSnapshot != nil {
+		v := *s.SkipFinalClusterSnapshot
+
+		e.SetValue(protocol.BodyTarget, "SkipFinalClusterSnapshot", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterResult
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -7408,6 +8555,17 @@ func (s DeleteClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteClusterOutput) SetCluster(v *Cluster) *DeleteClusterOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroupMessage
@@ -7456,6 +8614,17 @@ func (s *DeleteClusterParameterGroupInput) SetParameterGroupName(v string) *Dele
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroupOutput
 type DeleteClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7476,6 +8645,12 @@ func (s DeleteClusterParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroupMessage
@@ -7518,6 +8693,17 @@ func (s *DeleteClusterSecurityGroupInput) SetClusterSecurityGroupName(v string) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroupOutput
 type DeleteClusterSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7538,6 +8724,12 @@ func (s DeleteClusterSecurityGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteClusterSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshotMessage
@@ -7596,6 +8788,22 @@ func (s *DeleteClusterSnapshotInput) SetSnapshotIdentifier(v string) *DeleteClus
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SnapshotClusterIdentifier != nil {
+		v := *s.SnapshotClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshotResult
 type DeleteClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -7625,6 +8833,17 @@ func (s DeleteClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteClusterSnapshotOutput) SetSnapshot(v *Snapshot) *DeleteClusterSnapshotOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroupMessage
@@ -7667,6 +8886,17 @@ func (s *DeleteClusterSubnetGroupInput) SetClusterSubnetGroupName(v string) *Del
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroupOutput
 type DeleteClusterSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7687,6 +8917,12 @@ func (s DeleteClusterSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteClusterSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteClusterSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscriptionMessage
@@ -7729,6 +8965,17 @@ func (s *DeleteEventSubscriptionInput) SetSubscriptionName(v string) *DeleteEven
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEventSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscriptionOutput
 type DeleteEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7749,6 +8996,12 @@ func (s DeleteEventSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEventSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificateMessage
@@ -7791,6 +9044,17 @@ func (s *DeleteHsmClientCertificateInput) SetHsmClientCertificateIdentifier(v st
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteHsmClientCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificateOutput
 type DeleteHsmClientCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -7811,6 +9075,12 @@ func (s DeleteHsmClientCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteHsmClientCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteHsmClientCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfigurationMessage
@@ -7853,6 +9123,17 @@ func (s *DeleteHsmConfigurationInput) SetHsmConfigurationIdentifier(v string) *D
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteHsmConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfigurationOutput
 type DeleteHsmConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -7873,6 +9154,12 @@ func (s DeleteHsmConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteHsmConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteHsmConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The result of the DeleteSnapshotCopyGrant action.
@@ -7916,6 +9203,17 @@ func (s *DeleteSnapshotCopyGrantInput) SetSnapshotCopyGrantName(v string) *Delet
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSnapshotCopyGrantInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SnapshotCopyGrantName != nil {
+		v := *s.SnapshotCopyGrantName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCopyGrantName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrantOutput
 type DeleteSnapshotCopyGrantOutput struct {
 	_ struct{} `type:"structure"`
@@ -7936,6 +9234,12 @@ func (s DeleteSnapshotCopyGrantOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSnapshotCopyGrantOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSnapshotCopyGrantOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the output from the DeleteTags action.
@@ -7995,6 +9299,22 @@ func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8015,6 +9335,12 @@ func (s DeleteTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroupsMessage
@@ -8100,6 +9426,37 @@ func (s *DescribeClusterParameterGroupsInput) SetTagValues(v []string) *Describe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterParameterGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeClusterParameterGroups action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupsMessage
 type DescribeClusterParameterGroupsOutput struct {
@@ -8144,6 +9501,22 @@ func (s *DescribeClusterParameterGroupsOutput) SetMarker(v string) *DescribeClus
 func (s *DescribeClusterParameterGroupsOutput) SetParameterGroups(v []ClusterParameterGroup) *DescribeClusterParameterGroupsOutput {
 	s.ParameterGroups = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterParameterGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ParameterGroups) > 0 {
+		v := s.ParameterGroups
+
+		e.SetList(protocol.BodyTarget, "ParameterGroups", encodeClusterParameterGroupList(v), protocol.Metadata{ListLocationName: "ClusterParameterGroup"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParametersMessage
@@ -8231,6 +9604,32 @@ func (s *DescribeClusterParametersInput) SetSource(v string) *DescribeClusterPar
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeClusterParameters action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupDetails
 type DescribeClusterParametersOutput struct {
@@ -8275,6 +9674,22 @@ func (s *DescribeClusterParametersOutput) SetMarker(v string) *DescribeClusterPa
 func (s *DescribeClusterParametersOutput) SetParameters(v []Parameter) *DescribeClusterParametersOutput {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroupsMessage
@@ -8366,6 +9781,37 @@ func (s *DescribeClusterSecurityGroupsInput) SetTagValues(v []string) *DescribeC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupMessage
 type DescribeClusterSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8408,6 +9854,22 @@ func (s *DescribeClusterSecurityGroupsOutput) SetClusterSecurityGroups(v []Clust
 func (s *DescribeClusterSecurityGroupsOutput) SetMarker(v string) *DescribeClusterSecurityGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ClusterSecurityGroups) > 0 {
+		v := s.ClusterSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterSecurityGroups", encodeClusterSecurityGroupList(v), protocol.Metadata{ListLocationName: "ClusterSecurityGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshotsMessage
@@ -8551,6 +10013,62 @@ func (s *DescribeClusterSnapshotsInput) SetTagValues(v []string) *DescribeCluste
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterSnapshotsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OwnerAccount != nil {
+		v := *s.OwnerAccount
+
+		e.SetValue(protocol.BodyTarget, "OwnerAccount", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotType != nil {
+		v := *s.SnapshotType
+
+		e.SetValue(protocol.BodyTarget, "SnapshotType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeClusterSnapshots action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotMessage
 type DescribeClusterSnapshotsOutput struct {
@@ -8594,6 +10112,22 @@ func (s *DescribeClusterSnapshotsOutput) SetMarker(v string) *DescribeClusterSna
 func (s *DescribeClusterSnapshotsOutput) SetSnapshots(v []Snapshot) *DescribeClusterSnapshotsOutput {
 	s.Snapshots = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterSnapshotsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Snapshots) > 0 {
+		v := s.Snapshots
+
+		e.SetList(protocol.BodyTarget, "Snapshots", encodeSnapshotList(v), protocol.Metadata{ListLocationName: "Snapshot"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroupsMessage
@@ -8678,6 +10212,37 @@ func (s *DescribeClusterSubnetGroupsInput) SetTagValues(v []string) *DescribeClu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterSubnetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeClusterSubnetGroups action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroupMessage
 type DescribeClusterSubnetGroupsOutput struct {
@@ -8721,6 +10286,22 @@ func (s *DescribeClusterSubnetGroupsOutput) SetClusterSubnetGroups(v []ClusterSu
 func (s *DescribeClusterSubnetGroupsOutput) SetMarker(v string) *DescribeClusterSubnetGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterSubnetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ClusterSubnetGroups) > 0 {
+		v := s.ClusterSubnetGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterSubnetGroups", encodeClusterSubnetGroupList(v), protocol.Metadata{ListLocationName: "ClusterSubnetGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersionsMessage
@@ -8795,6 +10376,32 @@ func (s *DescribeClusterVersionsInput) SetMaxRecords(v int64) *DescribeClusterVe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterParameterGroupFamily != nil {
+		v := *s.ClusterParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "ClusterParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeClusterVersions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterVersionsMessage
 type DescribeClusterVersionsOutput struct {
@@ -8838,6 +10445,22 @@ func (s *DescribeClusterVersionsOutput) SetClusterVersions(v []ClusterVersion) *
 func (s *DescribeClusterVersionsOutput) SetMarker(v string) *DescribeClusterVersionsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClusterVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ClusterVersions) > 0 {
+		v := s.ClusterVersions
+
+		e.SetList(protocol.BodyTarget, "ClusterVersions", encodeClusterVersionList(v), protocol.Metadata{ListLocationName: "ClusterVersion"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClustersMessage
@@ -8927,6 +10550,37 @@ func (s *DescribeClustersInput) SetTagValues(v []string) *DescribeClustersInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClustersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeClusters action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClustersMessage
 type DescribeClustersOutput struct {
@@ -8970,6 +10624,22 @@ func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutpu
 func (s *DescribeClustersOutput) SetMarker(v string) *DescribeClustersOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeClustersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Clusters) > 0 {
+		v := s.Clusters
+
+		e.SetList(protocol.BodyTarget, "Clusters", encodeClusterList(v), protocol.Metadata{ListLocationName: "Cluster"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParametersMessage
@@ -9042,6 +10712,27 @@ func (s *DescribeDefaultClusterParametersInput) SetParameterGroupFamily(v string
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDefaultClusterParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupFamily != nil {
+		v := *s.ParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParametersResult
 type DescribeDefaultClusterParametersOutput struct {
 	_ struct{} `type:"structure"`
@@ -9073,6 +10764,17 @@ func (s *DescribeDefaultClusterParametersOutput) SetDefaultClusterParameters(v *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDefaultClusterParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultClusterParameters != nil {
+		v := s.DefaultClusterParameters
+
+		e.SetFields(protocol.BodyTarget, "DefaultClusterParameters", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategoriesMessage
 type DescribeEventCategoriesInput struct {
 	_ struct{} `type:"structure"`
@@ -9098,6 +10800,17 @@ func (s DescribeEventCategoriesInput) GoString() string {
 func (s *DescribeEventCategoriesInput) SetSourceType(v string) *DescribeEventCategoriesInput {
 	s.SourceType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventCategoriesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventCategoriesMessage
@@ -9129,6 +10842,17 @@ func (s DescribeEventCategoriesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeEventCategoriesOutput) SetEventCategoriesMapList(v []EventCategoriesMap) *DescribeEventCategoriesOutput {
 	s.EventCategoriesMapList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventCategoriesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EventCategoriesMapList) > 0 {
+		v := s.EventCategoriesMapList
+
+		e.SetList(protocol.BodyTarget, "EventCategoriesMapList", encodeEventCategoriesMapList(v), protocol.Metadata{ListLocationName: "EventCategoriesMap"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptionsMessage
@@ -9213,6 +10937,37 @@ func (s *DescribeEventSubscriptionsInput) SetTagValues(v []string) *DescribeEven
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventSubscriptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventSubscriptionsMessage
 type DescribeEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9255,6 +11010,22 @@ func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []EventSu
 func (s *DescribeEventSubscriptionsOutput) SetMarker(v string) *DescribeEventSubscriptionsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventSubscriptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EventSubscriptionsList) > 0 {
+		v := s.EventSubscriptionsList
+
+		e.SetList(protocol.BodyTarget, "EventSubscriptionsList", encodeEventSubscriptionList(v), protocol.Metadata{ListLocationName: "EventSubscription"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventsMessage
@@ -9387,6 +11158,47 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventsMessage
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9429,6 +11241,22 @@ func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 func (s *DescribeEventsOutput) SetMarker(v string) *DescribeEventsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		e.SetList(protocol.BodyTarget, "Events", encodeEventList(v), protocol.Metadata{ListLocationName: "Event"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmClientCertificatesMessage
@@ -9515,6 +11343,37 @@ func (s *DescribeHsmClientCertificatesInput) SetTagValues(v []string) *DescribeH
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeHsmClientCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificateMessage
 type DescribeHsmClientCertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -9559,6 +11418,22 @@ func (s *DescribeHsmClientCertificatesOutput) SetHsmClientCertificates(v []HsmCl
 func (s *DescribeHsmClientCertificatesOutput) SetMarker(v string) *DescribeHsmClientCertificatesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeHsmClientCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.HsmClientCertificates) > 0 {
+		v := s.HsmClientCertificates
+
+		e.SetList(protocol.BodyTarget, "HsmClientCertificates", encodeHsmClientCertificateList(v), protocol.Metadata{ListLocationName: "HsmClientCertificate"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurationsMessage
@@ -9645,6 +11520,37 @@ func (s *DescribeHsmConfigurationsInput) SetTagValues(v []string) *DescribeHsmCo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeHsmConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfigurationMessage
 type DescribeHsmConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9689,6 +11595,22 @@ func (s *DescribeHsmConfigurationsOutput) SetMarker(v string) *DescribeHsmConfig
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeHsmConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.HsmConfigurations) > 0 {
+		v := s.HsmConfigurations
+
+		e.SetList(protocol.BodyTarget, "HsmConfigurations", encodeHsmConfigurationList(v), protocol.Metadata{ListLocationName: "HsmConfiguration"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatusMessage
 type DescribeLoggingStatusInput struct {
 	_ struct{} `type:"structure"`
@@ -9729,6 +11651,17 @@ func (s *DescribeLoggingStatusInput) Validate() error {
 func (s *DescribeLoggingStatusInput) SetClusterIdentifier(v string) *DescribeLoggingStatusInput {
 	s.ClusterIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeLoggingStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptionsMessage
@@ -9800,6 +11733,32 @@ func (s *DescribeOrderableClusterOptionsInput) SetNodeType(v string) *DescribeOr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOrderableClusterOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the output from the DescribeOrderableClusterOptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/OrderableClusterOptionsMessage
 type DescribeOrderableClusterOptionsOutput struct {
@@ -9844,6 +11803,22 @@ func (s *DescribeOrderableClusterOptionsOutput) SetMarker(v string) *DescribeOrd
 func (s *DescribeOrderableClusterOptionsOutput) SetOrderableClusterOptions(v []OrderableClusterOption) *DescribeOrderableClusterOptionsOutput {
 	s.OrderableClusterOptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeOrderableClusterOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OrderableClusterOptions) > 0 {
+		v := s.OrderableClusterOptions
+
+		e.SetList(protocol.BodyTarget, "OrderableClusterOptions", encodeOrderableClusterOptionList(v), protocol.Metadata{ListLocationName: "OrderableClusterOption"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferingsMessage
@@ -9900,6 +11875,27 @@ func (s *DescribeReservedNodeOfferingsInput) SetReservedNodeOfferingId(v string)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedNodeOfferingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReservedNodeOfferingId != nil {
+		v := *s.ReservedNodeOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedNodeOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOfferingsMessage
 type DescribeReservedNodeOfferingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9942,6 +11938,22 @@ func (s *DescribeReservedNodeOfferingsOutput) SetMarker(v string) *DescribeReser
 func (s *DescribeReservedNodeOfferingsOutput) SetReservedNodeOfferings(v []ReservedNodeOffering) *DescribeReservedNodeOfferingsOutput {
 	s.ReservedNodeOfferings = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedNodeOfferingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReservedNodeOfferings) > 0 {
+		v := s.ReservedNodeOfferings
+
+		e.SetList(protocol.BodyTarget, "ReservedNodeOfferings", encodeReservedNodeOfferingList(v), protocol.Metadata{ListLocationName: "ReservedNodeOffering"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodesMessage
@@ -9997,6 +12009,27 @@ func (s *DescribeReservedNodesInput) SetReservedNodeId(v string) *DescribeReserv
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedNodesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReservedNodeId != nil {
+		v := *s.ReservedNodeId
+
+		e.SetValue(protocol.BodyTarget, "ReservedNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodesMessage
 type DescribeReservedNodesOutput struct {
 	_ struct{} `type:"structure"`
@@ -10041,6 +12074,22 @@ func (s *DescribeReservedNodesOutput) SetReservedNodes(v []ReservedNode) *Descri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedNodesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReservedNodes) > 0 {
+		v := s.ReservedNodes
+
+		e.SetList(protocol.BodyTarget, "ReservedNodes", encodeReservedNodeList(v), protocol.Metadata{ListLocationName: "ReservedNode"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResizeMessage
 type DescribeResizeInput struct {
 	_ struct{} `type:"structure"`
@@ -10083,6 +12132,17 @@ func (s *DescribeResizeInput) Validate() error {
 func (s *DescribeResizeInput) SetClusterIdentifier(v string) *DescribeResizeInput {
 	s.ClusterIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeResizeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the result of a cluster resize operation.
@@ -10239,6 +12299,72 @@ func (s *DescribeResizeOutput) SetTotalResizeDataInMegaBytes(v int64) *DescribeR
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeResizeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AvgResizeRateInMegaBytesPerSecond != nil {
+		v := *s.AvgResizeRateInMegaBytesPerSecond
+
+		e.SetValue(protocol.BodyTarget, "AvgResizeRateInMegaBytesPerSecond", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.ElapsedTimeInSeconds != nil {
+		v := *s.ElapsedTimeInSeconds
+
+		e.SetValue(protocol.BodyTarget, "ElapsedTimeInSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EstimatedTimeToCompletionInSeconds != nil {
+		v := *s.EstimatedTimeToCompletionInSeconds
+
+		e.SetValue(protocol.BodyTarget, "EstimatedTimeToCompletionInSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.ImportTablesCompleted) > 0 {
+		v := s.ImportTablesCompleted
+
+		e.SetList(protocol.BodyTarget, "ImportTablesCompleted", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ImportTablesInProgress) > 0 {
+		v := s.ImportTablesInProgress
+
+		e.SetList(protocol.BodyTarget, "ImportTablesInProgress", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ImportTablesNotStarted) > 0 {
+		v := s.ImportTablesNotStarted
+
+		e.SetList(protocol.BodyTarget, "ImportTablesNotStarted", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ProgressInMegaBytes != nil {
+		v := *s.ProgressInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "ProgressInMegaBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetClusterType != nil {
+		v := *s.TargetClusterType
+
+		e.SetValue(protocol.BodyTarget, "TargetClusterType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetNodeType != nil {
+		v := *s.TargetNodeType
+
+		e.SetValue(protocol.BodyTarget, "TargetNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetNumberOfNodes != nil {
+		v := *s.TargetNumberOfNodes
+
+		e.SetValue(protocol.BodyTarget, "TargetNumberOfNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.TotalResizeDataInMegaBytes != nil {
+		v := *s.TotalResizeDataInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "TotalResizeDataInMegaBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of the DescribeSnapshotCopyGrants action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrantsMessage
 type DescribeSnapshotCopyGrantsInput struct {
@@ -10325,6 +12451,37 @@ func (s *DescribeSnapshotCopyGrantsInput) SetTagValues(v []string) *DescribeSnap
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSnapshotCopyGrantsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotCopyGrantName != nil {
+		v := *s.SnapshotCopyGrantName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCopyGrantName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrantMessage
 type DescribeSnapshotCopyGrantsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10371,6 +12528,22 @@ func (s *DescribeSnapshotCopyGrantsOutput) SetMarker(v string) *DescribeSnapshot
 func (s *DescribeSnapshotCopyGrantsOutput) SetSnapshotCopyGrants(v []SnapshotCopyGrant) *DescribeSnapshotCopyGrantsOutput {
 	s.SnapshotCopyGrants = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSnapshotCopyGrantsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SnapshotCopyGrants) > 0 {
+		v := s.SnapshotCopyGrants
+
+		e.SetList(protocol.BodyTarget, "SnapshotCopyGrants", encodeSnapshotCopyGrantList(v), protocol.Metadata{ListLocationName: "SnapshotCopyGrant"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatusMessage
@@ -10430,6 +12603,32 @@ func (s *DescribeTableRestoreStatusInput) SetTableRestoreRequestId(v string) *De
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTableRestoreStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.TableRestoreRequestId != nil {
+		v := *s.TableRestoreRequestId
+
+		e.SetValue(protocol.BodyTarget, "TableRestoreRequestId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TableRestoreStatusMessage
 type DescribeTableRestoreStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -10469,6 +12668,22 @@ func (s *DescribeTableRestoreStatusOutput) SetMarker(v string) *DescribeTableRes
 func (s *DescribeTableRestoreStatusOutput) SetTableRestoreStatusDetails(v []TableRestoreStatus) *DescribeTableRestoreStatusOutput {
 	s.TableRestoreStatusDetails = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTableRestoreStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TableRestoreStatusDetails) > 0 {
+		v := s.TableRestoreStatusDetails
+
+		e.SetList(protocol.BodyTarget, "TableRestoreStatusDetails", encodeTableRestoreStatusList(v), protocol.Metadata{ListLocationName: "TableRestoreStatus"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTagsMessage
@@ -10584,6 +12799,42 @@ func (s *DescribeTagsInput) SetTagValues(v []string) *DescribeTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagKey"})
+	}
+	if len(s.TagValues) > 0 {
+		v := s.TagValues
+
+		e.SetList(protocol.BodyTarget, "TagValues", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "TagValue"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResourceListMessage
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10628,6 +12879,22 @@ func (s *DescribeTagsOutput) SetTaggedResources(v []TaggedResource) *DescribeTag
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TaggedResources) > 0 {
+		v := s.TaggedResources
+
+		e.SetList(protocol.BodyTarget, "TaggedResources", encodeTaggedResourceList(v), protocol.Metadata{ListLocationName: "TaggedResource"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLoggingMessage
 type DisableLoggingInput struct {
 	_ struct{} `type:"structure"`
@@ -10668,6 +12935,17 @@ func (s *DisableLoggingInput) Validate() error {
 func (s *DisableLoggingInput) SetClusterIdentifier(v string) *DisableLoggingInput {
 	s.ClusterIdentifier = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableLoggingInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopyMessage
@@ -10714,6 +12992,17 @@ func (s *DisableSnapshotCopyInput) SetClusterIdentifier(v string) *DisableSnapsh
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableSnapshotCopyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopyResult
 type DisableSnapshotCopyOutput struct {
 	_ struct{} `type:"structure"`
@@ -10743,6 +13032,17 @@ func (s DisableSnapshotCopyOutput) SDKResponseMetadata() aws.Response {
 func (s *DisableSnapshotCopyOutput) SetCluster(v *Cluster) *DisableSnapshotCopyOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableSnapshotCopyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes an Amazon EC2 security group.
@@ -10798,6 +13098,40 @@ func (s *EC2SecurityGroup) SetTags(v []Tag) *EC2SecurityGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EC2SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeEC2SecurityGroupList(vs []EC2SecurityGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the status of the elastic IP (EIP) address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ElasticIpStatus
 type ElasticIpStatus struct {
@@ -10830,6 +13164,22 @@ func (s *ElasticIpStatus) SetElasticIp(v string) *ElasticIpStatus {
 func (s *ElasticIpStatus) SetStatus(v string) *ElasticIpStatus {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ElasticIpStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ElasticIp != nil {
+		v := *s.ElasticIp
+
+		e.SetValue(protocol.BodyTarget, "ElasticIp", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLoggingMessage
@@ -10922,6 +13272,27 @@ func (s *EnableLoggingInput) SetS3KeyPrefix(v string) *EnableLoggingInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableLoggingInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BucketName != nil {
+		v := *s.BucketName
+
+		e.SetValue(protocol.BodyTarget, "BucketName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.S3KeyPrefix != nil {
+		v := *s.S3KeyPrefix
+
+		e.SetValue(protocol.BodyTarget, "S3KeyPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes the status of logging for a cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLoggingOutput
 type EnableLoggingOutput struct {
@@ -10997,6 +13368,42 @@ func (s *EnableLoggingOutput) SetLoggingEnabled(v bool) *EnableLoggingOutput {
 func (s *EnableLoggingOutput) SetS3KeyPrefix(v string) *EnableLoggingOutput {
 	s.S3KeyPrefix = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableLoggingOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BucketName != nil {
+		v := *s.BucketName
+
+		e.SetValue(protocol.BodyTarget, "BucketName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LastFailureMessage != nil {
+		v := *s.LastFailureMessage
+
+		e.SetValue(protocol.BodyTarget, "LastFailureMessage", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LastFailureTime != nil {
+		v := *s.LastFailureTime
+
+		e.SetValue(protocol.BodyTarget, "LastFailureTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.LastSuccessfulDeliveryTime != nil {
+		v := *s.LastSuccessfulDeliveryTime
+
+		e.SetValue(protocol.BodyTarget, "LastSuccessfulDeliveryTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.LoggingEnabled != nil {
+		v := *s.LoggingEnabled
+
+		e.SetValue(protocol.BodyTarget, "LoggingEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.S3KeyPrefix != nil {
+		v := *s.S3KeyPrefix
+
+		e.SetValue(protocol.BodyTarget, "S3KeyPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopyMessage
@@ -11085,6 +13492,32 @@ func (s *EnableSnapshotCopyInput) SetSnapshotCopyGrantName(v string) *EnableSnap
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableSnapshotCopyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DestinationRegion != nil {
+		v := *s.DestinationRegion
+
+		e.SetValue(protocol.BodyTarget, "DestinationRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RetentionPeriod != nil {
+		v := *s.RetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "RetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotCopyGrantName != nil {
+		v := *s.SnapshotCopyGrantName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCopyGrantName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopyResult
 type EnableSnapshotCopyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11114,6 +13547,17 @@ func (s EnableSnapshotCopyOutput) SDKResponseMetadata() aws.Response {
 func (s *EnableSnapshotCopyOutput) SetCluster(v *Cluster) *EnableSnapshotCopyOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableSnapshotCopyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a connection endpoint.
@@ -11148,6 +13592,22 @@ func (s *Endpoint) SetAddress(v string) *Endpoint {
 func (s *Endpoint) SetPort(v int64) *Endpoint {
 	s.Port = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Endpoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Address != nil {
+		v := *s.Address
+
+		e.SetValue(protocol.BodyTarget, "Address", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes an event.
@@ -11233,6 +13693,55 @@ func (s *Event) SetSourceType(v SourceType) *Event {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Event) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Date != nil {
+		v := *s.Date
+
+		e.SetValue(protocol.BodyTarget, "Date", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.EventId != nil {
+		v := *s.EventId
+
+		e.SetValue(protocol.BodyTarget, "EventId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Severity != nil {
+		v := *s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventList(vs []Event) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes event categories.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventCategoriesMap
 type EventCategoriesMap struct {
@@ -11266,6 +13775,30 @@ func (s *EventCategoriesMap) SetEvents(v []EventInfoMap) *EventCategoriesMap {
 func (s *EventCategoriesMap) SetSourceType(v string) *EventCategoriesMap {
 	s.SourceType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventCategoriesMap) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		e.SetList(protocol.BodyTarget, "Events", encodeEventInfoMapList(v), protocol.Metadata{ListLocationName: "EventInfoMap"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventCategoriesMapList(vs []EventCategoriesMap) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes event information.
@@ -11320,6 +13853,40 @@ func (s *EventInfoMap) SetEventId(v string) *EventInfoMap {
 func (s *EventInfoMap) SetSeverity(v string) *EventInfoMap {
 	s.Severity = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventInfoMap) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.EventDescription != nil {
+		v := *s.EventDescription
+
+		e.SetValue(protocol.BodyTarget, "EventDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EventId != nil {
+		v := *s.EventId
+
+		e.SetValue(protocol.BodyTarget, "EventId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Severity != nil {
+		v := *s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventInfoMapList(vs []EventInfoMap) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes event subscriptions.
@@ -11454,6 +14021,75 @@ func (s *EventSubscription) SetSubscriptionCreationTime(v time.Time) *EventSubsc
 func (s *EventSubscription) SetTags(v []Tag) *EventSubscription {
 	s.Tags = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventSubscription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CustSubscriptionId != nil {
+		v := *s.CustSubscriptionId
+
+		e.SetValue(protocol.BodyTarget, "CustSubscriptionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CustomerAwsId != nil {
+		v := *s.CustomerAwsId
+
+		e.SetValue(protocol.BodyTarget, "CustomerAwsId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.EventCategoriesList) > 0 {
+		v := s.EventCategoriesList
+
+		e.SetList(protocol.BodyTarget, "EventCategoriesList", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.Severity != nil {
+		v := *s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceIdsList) > 0 {
+		v := s.SourceIdsList
+
+		e.SetList(protocol.BodyTarget, "SourceIdsList", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SourceId"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionCreationTime != nil {
+		v := *s.SubscriptionCreationTime
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionCreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeEventSubscriptionList(vs []EventSubscription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The request parameters to get cluster credentials.
@@ -11611,6 +14247,42 @@ func (s *GetClusterCredentialsInput) SetDurationSeconds(v int64) *GetClusterCred
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetClusterCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoCreate != nil {
+		v := *s.AutoCreate
+
+		e.SetValue(protocol.BodyTarget, "AutoCreate", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DbGroups) > 0 {
+		v := s.DbGroups
+
+		e.SetList(protocol.BodyTarget, "DbGroups", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "DbGroup"})
+	}
+	if s.DbName != nil {
+		v := *s.DbName
+
+		e.SetValue(protocol.BodyTarget, "DbName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DbUser != nil {
+		v := *s.DbUser
+
+		e.SetValue(protocol.BodyTarget, "DbUser", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DurationSeconds != nil {
+		v := *s.DurationSeconds
+
+		e.SetValue(protocol.BodyTarget, "DurationSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Temporary credentials with authorization to log on to an Amazon Redshift
 // database.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterCredentials
@@ -11668,6 +14340,27 @@ func (s *GetClusterCredentialsOutput) SetExpiration(v time.Time) *GetClusterCred
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetClusterCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DbPassword != nil {
+		v := *s.DbPassword
+
+		e.SetValue(protocol.BodyTarget, "DbPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DbUser != nil {
+		v := *s.DbUser
+
+		e.SetValue(protocol.BodyTarget, "DbUser", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Expiration != nil {
+		v := *s.Expiration
+
+		e.SetValue(protocol.BodyTarget, "Expiration", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Returns information about an HSM client certificate. The certificate is stored
 // in a secure Hardware Storage Module (HSM), and used by the Amazon Redshift
 // cluster to encrypt data files.
@@ -11712,6 +14405,35 @@ func (s *HsmClientCertificate) SetHsmClientCertificatePublicKey(v string) *HsmCl
 func (s *HsmClientCertificate) SetTags(v []Tag) *HsmClientCertificate {
 	s.Tags = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *HsmClientCertificate) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmClientCertificatePublicKey != nil {
+		v := *s.HsmClientCertificatePublicKey
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificatePublicKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeHsmClientCertificateList(vs []HsmClientCertificate) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Returns information about an HSM configuration, which is an object that describes
@@ -11778,6 +14500,45 @@ func (s *HsmConfiguration) SetTags(v []Tag) *HsmConfiguration {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *HsmConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmIpAddress != nil {
+		v := *s.HsmIpAddress
+
+		e.SetValue(protocol.BodyTarget, "HsmIpAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmPartitionName != nil {
+		v := *s.HsmPartitionName
+
+		e.SetValue(protocol.BodyTarget, "HsmPartitionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeHsmConfigurationList(vs []HsmConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the status of changes to HSM settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmStatus
 type HsmStatus struct {
@@ -11826,6 +14587,27 @@ func (s *HsmStatus) SetStatus(v string) *HsmStatus {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *HsmStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes an IP range used in a security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IPRange
 type IPRange struct {
@@ -11867,6 +14649,35 @@ func (s *IPRange) SetStatus(v string) *IPRange {
 func (s *IPRange) SetTags(v []Tag) *IPRange {
 	s.Tags = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IPRange) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CIDRIP != nil {
+		v := *s.CIDRIP
+
+		e.SetValue(protocol.BodyTarget, "CIDRIP", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeIPRangeList(vs []IPRange) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesMessage
@@ -11931,6 +14742,27 @@ func (s *ModifyClusterIamRolesInput) SetRemoveIamRoles(v []string) *ModifyCluste
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterIamRolesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AddIamRoles) > 0 {
+		v := s.AddIamRoles
+
+		e.SetList(protocol.BodyTarget, "AddIamRoles", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "IamRoleArn"})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RemoveIamRoles) > 0 {
+		v := s.RemoveIamRoles
+
+		e.SetList(protocol.BodyTarget, "RemoveIamRoles", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "IamRoleArn"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesResult
 type ModifyClusterIamRolesOutput struct {
 	_ struct{} `type:"structure"`
@@ -11960,6 +14792,17 @@ func (s ModifyClusterIamRolesOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyClusterIamRolesOutput) SetCluster(v *Cluster) *ModifyClusterIamRolesOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterIamRolesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage
@@ -12297,6 +15140,102 @@ func (s *ModifyClusterInput) SetVpcSecurityGroupIds(v []string) *ModifyClusterIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowVersionUpgrade != nil {
+		v := *s.AllowVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AllowVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutomatedSnapshotRetentionPeriod != nil {
+		v := *s.AutomatedSnapshotRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "AutomatedSnapshotRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterParameterGroupName != nil {
+		v := *s.ClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClusterSecurityGroups) > 0 {
+		v := s.ClusterSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ClusterSecurityGroupName"})
+	}
+	if s.ClusterType != nil {
+		v := *s.ClusterType
+
+		e.SetValue(protocol.BodyTarget, "ClusterType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ElasticIp != nil {
+		v := *s.ElasticIp
+
+		e.SetValue(protocol.BodyTarget, "ElasticIp", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnhancedVpcRouting != nil {
+		v := *s.EnhancedVpcRouting
+
+		e.SetValue(protocol.BodyTarget, "EnhancedVpcRouting", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewClusterIdentifier != nil {
+		v := *s.NewClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "NewClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumberOfNodes != nil {
+		v := *s.NumberOfNodes
+
+		e.SetValue(protocol.BodyTarget, "NumberOfNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterResult
 type ModifyClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -12326,6 +15265,17 @@ func (s ModifyClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyClusterOutput) SetCluster(v *Cluster) *ModifyClusterOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroupMessage
@@ -12388,6 +15338,22 @@ func (s *ModifyClusterParameterGroupInput) SetParameterGroupName(v string) *Modi
 func (s *ModifyClusterParameterGroupInput) SetParameters(v []Parameter) *ModifyClusterParameterGroupInput {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupMessage
@@ -12455,6 +15421,27 @@ func (s *ModifyClusterSubnetGroupInput) SetSubnetIds(v []string) *ModifyClusterS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		e.SetList(protocol.BodyTarget, "SubnetIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SubnetIdentifier"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupResult
 type ModifyClusterSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -12484,6 +15471,17 @@ func (s ModifyClusterSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyClusterSubnetGroupOutput) SetClusterSubnetGroup(v *ClusterSubnetGroup) *ModifyClusterSubnetGroupOutput {
 	s.ClusterSubnetGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyClusterSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSubnetGroup != nil {
+		v := s.ClusterSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "ClusterSubnetGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscriptionMessage
@@ -12603,6 +15601,47 @@ func (s *ModifyEventSubscriptionInput) SetSubscriptionName(v string) *ModifyEven
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyEventSubscriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.EventCategories) > 0 {
+		v := s.EventCategories
+
+		e.SetList(protocol.BodyTarget, "EventCategories", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "EventCategory"})
+	}
+	if s.Severity != nil {
+		v := *s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceIds) > 0 {
+		v := s.SourceIds
+
+		e.SetList(protocol.BodyTarget, "SourceIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SourceId"})
+	}
+	if s.SourceType != nil {
+		v := *s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubscriptionName != nil {
+		v := *s.SubscriptionName
+
+		e.SetValue(protocol.BodyTarget, "SubscriptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscriptionResult
 type ModifyEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -12632,6 +15671,17 @@ func (s ModifyEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *ModifyEventSubscriptionOutput {
 	s.EventSubscription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyEventSubscriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EventSubscription != nil {
+		v := s.EventSubscription
+
+		e.SetFields(protocol.BodyTarget, "EventSubscription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriodMessage
@@ -12701,6 +15751,22 @@ func (s *ModifySnapshotCopyRetentionPeriodInput) SetRetentionPeriod(v int64) *Mo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifySnapshotCopyRetentionPeriodInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RetentionPeriod != nil {
+		v := *s.RetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "RetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriodResult
 type ModifySnapshotCopyRetentionPeriodOutput struct {
 	_ struct{} `type:"structure"`
@@ -12730,6 +15796,17 @@ func (s ModifySnapshotCopyRetentionPeriodOutput) SDKResponseMetadata() aws.Respo
 func (s *ModifySnapshotCopyRetentionPeriodOutput) SetCluster(v *Cluster) *ModifySnapshotCopyRetentionPeriodOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifySnapshotCopyRetentionPeriodOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes an orderable cluster option.
@@ -12782,6 +15859,40 @@ func (s *OrderableClusterOption) SetClusterVersion(v string) *OrderableClusterOp
 func (s *OrderableClusterOption) SetNodeType(v string) *OrderableClusterOption {
 	s.NodeType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OrderableClusterOption) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "AvailabilityZones", encodeAvailabilityZoneList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.ClusterType != nil {
+		v := *s.ClusterType
+
+		e.SetValue(protocol.BodyTarget, "ClusterType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOrderableClusterOptionList(vs []OrderableClusterOption) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a parameter in a cluster parameter group.
@@ -12885,6 +15996,65 @@ func (s *Parameter) SetParameterValue(v string) *Parameter {
 func (s *Parameter) SetSource(v string) *Parameter {
 	s.Source = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Parameter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedValues != nil {
+		v := *s.AllowedValues
+
+		e.SetValue(protocol.BodyTarget, "AllowedValues", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ApplyType) > 0 {
+		v := s.ApplyType
+
+		e.SetValue(protocol.BodyTarget, "ApplyType", v, protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsModifiable != nil {
+		v := *s.IsModifiable
+
+		e.SetValue(protocol.BodyTarget, "IsModifiable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MinimumEngineVersion != nil {
+		v := *s.MinimumEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MinimumEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterName != nil {
+		v := *s.ParameterName
+
+		e.SetValue(protocol.BodyTarget, "ParameterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterValue != nil {
+		v := *s.ParameterValue
+
+		e.SetValue(protocol.BodyTarget, "ParameterValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeParameterList(vs []Parameter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes cluster attributes that are in a pending state. A change to one
@@ -12994,6 +16164,57 @@ func (s *PendingModifiedValues) SetPubliclyAccessible(v bool) *PendingModifiedVa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PendingModifiedValues) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutomatedSnapshotRetentionPeriod != nil {
+		v := *s.AutomatedSnapshotRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "AutomatedSnapshotRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterType != nil {
+		v := *s.ClusterType
+
+		e.SetValue(protocol.BodyTarget, "ClusterType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnhancedVpcRouting != nil {
+		v := *s.EnhancedVpcRouting
+
+		e.SetValue(protocol.BodyTarget, "EnhancedVpcRouting", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MasterUserPassword != nil {
+		v := *s.MasterUserPassword
+
+		e.SetValue(protocol.BodyTarget, "MasterUserPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumberOfNodes != nil {
+		v := *s.NumberOfNodes
+
+		e.SetValue(protocol.BodyTarget, "NumberOfNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOfferingMessage
 type PurchaseReservedNodeOfferingInput struct {
 	_ struct{} `type:"structure"`
@@ -13045,6 +16266,22 @@ func (s *PurchaseReservedNodeOfferingInput) SetReservedNodeOfferingId(v string) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurchaseReservedNodeOfferingInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NodeCount != nil {
+		v := *s.NodeCount
+
+		e.SetValue(protocol.BodyTarget, "NodeCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReservedNodeOfferingId != nil {
+		v := *s.ReservedNodeOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedNodeOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOfferingResult
 type PurchaseReservedNodeOfferingOutput struct {
 	_ struct{} `type:"structure"`
@@ -13075,6 +16312,17 @@ func (s PurchaseReservedNodeOfferingOutput) SDKResponseMetadata() aws.Response {
 func (s *PurchaseReservedNodeOfferingOutput) SetReservedNode(v *ReservedNode) *PurchaseReservedNodeOfferingOutput {
 	s.ReservedNode = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurchaseReservedNodeOfferingOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReservedNode != nil {
+		v := s.ReservedNode
+
+		e.SetFields(protocol.BodyTarget, "ReservedNode", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootClusterMessage
@@ -13117,6 +16365,17 @@ func (s *RebootClusterInput) SetClusterIdentifier(v string) *RebootClusterInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebootClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootClusterResult
 type RebootClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -13146,6 +16405,17 @@ func (s RebootClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *RebootClusterOutput) SetCluster(v *Cluster) *RebootClusterOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebootClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a recurring charge.
@@ -13181,6 +16451,30 @@ func (s *RecurringCharge) SetRecurringChargeAmount(v float64) *RecurringCharge {
 func (s *RecurringCharge) SetRecurringChargeFrequency(v string) *RecurringCharge {
 	s.RecurringChargeFrequency = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RecurringCharge) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RecurringChargeAmount != nil {
+		v := *s.RecurringChargeAmount
+
+		e.SetValue(protocol.BodyTarget, "RecurringChargeAmount", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.RecurringChargeFrequency != nil {
+		v := *s.RecurringChargeFrequency
+
+		e.SetValue(protocol.BodyTarget, "RecurringChargeFrequency", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRecurringChargeList(vs []RecurringCharge) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes a reserved node. You can call the DescribeReservedNodeOfferings
@@ -13320,6 +16614,80 @@ func (s *ReservedNode) SetUsagePrice(v float64) *ReservedNode {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReservedNode) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrencyCode != nil {
+		v := *s.CurrencyCode
+
+		e.SetValue(protocol.BodyTarget, "CurrencyCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.NodeCount != nil {
+		v := *s.NodeCount
+
+		e.SetValue(protocol.BodyTarget, "NodeCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		e.SetList(protocol.BodyTarget, "RecurringCharges", encodeRecurringChargeList(v), protocol.Metadata{ListLocationName: "RecurringCharge"})
+	}
+	if s.ReservedNodeId != nil {
+		v := *s.ReservedNodeId
+
+		e.SetValue(protocol.BodyTarget, "ReservedNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedNodeOfferingId != nil {
+		v := *s.ReservedNodeOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedNodeOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.State != nil {
+		v := *s.State
+
+		e.SetValue(protocol.BodyTarget, "State", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReservedNodeList(vs []ReservedNode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a reserved node offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOffering
 type ReservedNodeOffering struct {
@@ -13413,6 +16781,60 @@ func (s *ReservedNodeOffering) SetUsagePrice(v float64) *ReservedNodeOffering {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReservedNodeOffering) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrencyCode != nil {
+		v := *s.CurrencyCode
+
+		e.SetValue(protocol.BodyTarget, "CurrencyCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		e.SetList(protocol.BodyTarget, "RecurringCharges", encodeRecurringChargeList(v), protocol.Metadata{ListLocationName: "RecurringCharge"})
+	}
+	if s.ReservedNodeOfferingId != nil {
+		v := *s.ReservedNodeOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedNodeOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReservedNodeOfferingList(vs []ReservedNodeOffering) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroupMessage
 type ResetClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -13477,6 +16899,27 @@ func (s *ResetClusterParameterGroupInput) SetResetAllParameters(v bool) *ResetCl
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetClusterParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	if s.ResetAllParameters != nil {
+		v := *s.ResetAllParameters
+
+		e.SetValue(protocol.BodyTarget, "ResetAllParameters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroupOutput
 type ResetClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -13517,6 +16960,22 @@ func (s *ResetClusterParameterGroupOutput) SetParameterGroupName(v string) *Rese
 func (s *ResetClusterParameterGroupOutput) SetParameterGroupStatus(v string) *ResetClusterParameterGroupOutput {
 	s.ParameterGroupStatus = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetClusterParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterGroupName != nil {
+		v := *s.ParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterGroupStatus != nil {
+		v := *s.ParameterGroupStatus
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage
@@ -13852,6 +17311,122 @@ func (s *RestoreFromClusterSnapshotInput) SetVpcSecurityGroupIds(v []string) *Re
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreFromClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AdditionalInfo != nil {
+		v := *s.AdditionalInfo
+
+		e.SetValue(protocol.BodyTarget, "AdditionalInfo", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AllowVersionUpgrade != nil {
+		v := *s.AllowVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AllowVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutomatedSnapshotRetentionPeriod != nil {
+		v := *s.AutomatedSnapshotRetentionPeriod
+
+		e.SetValue(protocol.BodyTarget, "AutomatedSnapshotRetentionPeriod", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterParameterGroupName != nil {
+		v := *s.ClusterParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ClusterSecurityGroups) > 0 {
+		v := s.ClusterSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "ClusterSecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ClusterSecurityGroupName"})
+	}
+	if s.ClusterSubnetGroupName != nil {
+		v := *s.ClusterSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ElasticIp != nil {
+		v := *s.ElasticIp
+
+		e.SetValue(protocol.BodyTarget, "ElasticIp", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnhancedVpcRouting != nil {
+		v := *s.EnhancedVpcRouting
+
+		e.SetValue(protocol.BodyTarget, "EnhancedVpcRouting", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HsmClientCertificateIdentifier != nil {
+		v := *s.HsmClientCertificateIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmClientCertificateIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HsmConfigurationIdentifier != nil {
+		v := *s.HsmConfigurationIdentifier
+
+		e.SetValue(protocol.BodyTarget, "HsmConfigurationIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.IamRoles) > 0 {
+		v := s.IamRoles
+
+		e.SetList(protocol.BodyTarget, "IamRoles", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "IamRoleArn"})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OwnerAccount != nil {
+		v := *s.OwnerAccount
+
+		e.SetValue(protocol.BodyTarget, "OwnerAccount", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		e.SetValue(protocol.BodyTarget, "PubliclyAccessible", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotClusterIdentifier != nil {
+		v := *s.SnapshotClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VpcSecurityGroupIds) > 0 {
+		v := s.VpcSecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "VpcSecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "VpcSecurityGroupId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotResult
 type RestoreFromClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -13881,6 +17456,17 @@ func (s RestoreFromClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *RestoreFromClusterSnapshotOutput) SetCluster(v *Cluster) *RestoreFromClusterSnapshotOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreFromClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the status of a cluster restore action. Returns null if the cluster
@@ -13956,6 +17542,42 @@ func (s *RestoreStatus) SetSnapshotSizeInMegaBytes(v int64) *RestoreStatus {
 func (s *RestoreStatus) SetStatus(v string) *RestoreStatus {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrentRestoreRateInMegaBytesPerSecond != nil {
+		v := *s.CurrentRestoreRateInMegaBytesPerSecond
+
+		e.SetValue(protocol.BodyTarget, "CurrentRestoreRateInMegaBytesPerSecond", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.ElapsedTimeInSeconds != nil {
+		v := *s.ElapsedTimeInSeconds
+
+		e.SetValue(protocol.BodyTarget, "ElapsedTimeInSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EstimatedTimeToCompletionInSeconds != nil {
+		v := *s.EstimatedTimeToCompletionInSeconds
+
+		e.SetValue(protocol.BodyTarget, "EstimatedTimeToCompletionInSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ProgressInMegaBytes != nil {
+		v := *s.ProgressInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "ProgressInMegaBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotSizeInMegaBytes != nil {
+		v := *s.SnapshotSizeInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "SnapshotSizeInMegaBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshotMessage
@@ -14088,6 +17710,52 @@ func (s *RestoreTableFromClusterSnapshotInput) SetTargetSchemaName(v string) *Re
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreTableFromClusterSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewTableName != nil {
+		v := *s.NewTableName
+
+		e.SetValue(protocol.BodyTarget, "NewTableName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDatabaseName != nil {
+		v := *s.SourceDatabaseName
+
+		e.SetValue(protocol.BodyTarget, "SourceDatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceSchemaName != nil {
+		v := *s.SourceSchemaName
+
+		e.SetValue(protocol.BodyTarget, "SourceSchemaName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceTableName != nil {
+		v := *s.SourceTableName
+
+		e.SetValue(protocol.BodyTarget, "SourceTableName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetDatabaseName != nil {
+		v := *s.TargetDatabaseName
+
+		e.SetValue(protocol.BodyTarget, "TargetDatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetSchemaName != nil {
+		v := *s.TargetSchemaName
+
+		e.SetValue(protocol.BodyTarget, "TargetSchemaName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshotResult
 type RestoreTableFromClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -14117,6 +17785,17 @@ func (s RestoreTableFromClusterSnapshotOutput) SDKResponseMetadata() aws.Respons
 func (s *RestoreTableFromClusterSnapshotOutput) SetTableRestoreStatus(v *TableRestoreStatus) *RestoreTableFromClusterSnapshotOutput {
 	s.TableRestoreStatus = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestoreTableFromClusterSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TableRestoreStatus != nil {
+		v := s.TableRestoreStatus
+
+		e.SetFields(protocol.BodyTarget, "TableRestoreStatus", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngressMessage
@@ -14195,6 +17874,32 @@ func (s *RevokeClusterSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v st
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeClusterSecurityGroupIngressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CIDRIP != nil {
+		v := *s.CIDRIP
+
+		e.SetValue(protocol.BodyTarget, "CIDRIP", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterSecurityGroupName != nil {
+		v := *s.ClusterSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "ClusterSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngressResult
 type RevokeClusterSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -14224,6 +17929,17 @@ func (s RevokeClusterSecurityGroupIngressOutput) SDKResponseMetadata() aws.Respo
 func (s *RevokeClusterSecurityGroupIngressOutput) SetClusterSecurityGroup(v *ClusterSecurityGroup) *RevokeClusterSecurityGroupIngressOutput {
 	s.ClusterSecurityGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeClusterSecurityGroupIngressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterSecurityGroup != nil {
+		v := s.ClusterSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "ClusterSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccessMessage
@@ -14293,6 +18009,27 @@ func (s *RevokeSnapshotAccessInput) SetSnapshotIdentifier(v string) *RevokeSnaps
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeSnapshotAccessInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountWithRestoreAccess != nil {
+		v := *s.AccountWithRestoreAccess
+
+		e.SetValue(protocol.BodyTarget, "AccountWithRestoreAccess", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotClusterIdentifier != nil {
+		v := *s.SnapshotClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccessResult
 type RevokeSnapshotAccessOutput struct {
 	_ struct{} `type:"structure"`
@@ -14322,6 +18059,17 @@ func (s RevokeSnapshotAccessOutput) SDKResponseMetadata() aws.Response {
 func (s *RevokeSnapshotAccessOutput) SetSnapshot(v *Snapshot) *RevokeSnapshotAccessOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeSnapshotAccessOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKeyMessage
@@ -14367,6 +18115,17 @@ func (s *RotateEncryptionKeyInput) SetClusterIdentifier(v string) *RotateEncrypt
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RotateEncryptionKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKeyResult
 type RotateEncryptionKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -14396,6 +18155,17 @@ func (s RotateEncryptionKeyOutput) SDKResponseMetadata() aws.Response {
 func (s *RotateEncryptionKeyOutput) SetCluster(v *Cluster) *RotateEncryptionKeyOutput {
 	s.Cluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RotateEncryptionKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cluster != nil {
+		v := s.Cluster
+
+		e.SetFields(protocol.BodyTarget, "Cluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a snapshot.
@@ -14705,6 +18475,165 @@ func (s *Snapshot) SetVpcId(v string) *Snapshot {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Snapshot) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AccountsWithRestoreAccess) > 0 {
+		v := s.AccountsWithRestoreAccess
+
+		e.SetList(protocol.BodyTarget, "AccountsWithRestoreAccess", encodeAccountWithRestoreAccessList(v), protocol.Metadata{ListLocationName: "AccountWithRestoreAccess"})
+	}
+	if s.ActualIncrementalBackupSizeInMegaBytes != nil {
+		v := *s.ActualIncrementalBackupSizeInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "ActualIncrementalBackupSizeInMegaBytes", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.BackupProgressInMegaBytes != nil {
+		v := *s.BackupProgressInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "BackupProgressInMegaBytes", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.ClusterCreateTime != nil {
+		v := *s.ClusterCreateTime
+
+		e.SetValue(protocol.BodyTarget, "ClusterCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterVersion != nil {
+		v := *s.ClusterVersion
+
+		e.SetValue(protocol.BodyTarget, "ClusterVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CurrentBackupRateInMegaBytesPerSecond != nil {
+		v := *s.CurrentBackupRateInMegaBytesPerSecond
+
+		e.SetValue(protocol.BodyTarget, "CurrentBackupRateInMegaBytesPerSecond", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.DBName != nil {
+		v := *s.DBName
+
+		e.SetValue(protocol.BodyTarget, "DBName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ElapsedTimeInSeconds != nil {
+		v := *s.ElapsedTimeInSeconds
+
+		e.SetValue(protocol.BodyTarget, "ElapsedTimeInSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EncryptedWithHSM != nil {
+		v := *s.EncryptedWithHSM
+
+		e.SetValue(protocol.BodyTarget, "EncryptedWithHSM", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnhancedVpcRouting != nil {
+		v := *s.EnhancedVpcRouting
+
+		e.SetValue(protocol.BodyTarget, "EnhancedVpcRouting", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EstimatedSecondsToCompletion != nil {
+		v := *s.EstimatedSecondsToCompletion
+
+		e.SetValue(protocol.BodyTarget, "EstimatedSecondsToCompletion", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MasterUsername != nil {
+		v := *s.MasterUsername
+
+		e.SetValue(protocol.BodyTarget, "MasterUsername", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeType != nil {
+		v := *s.NodeType
+
+		e.SetValue(protocol.BodyTarget, "NodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumberOfNodes != nil {
+		v := *s.NumberOfNodes
+
+		e.SetValue(protocol.BodyTarget, "NumberOfNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OwnerAccount != nil {
+		v := *s.OwnerAccount
+
+		e.SetValue(protocol.BodyTarget, "OwnerAccount", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.RestorableNodeTypes) > 0 {
+		v := s.RestorableNodeTypes
+
+		e.SetList(protocol.BodyTarget, "RestorableNodeTypes", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "NodeType"})
+	}
+	if s.SnapshotCreateTime != nil {
+		v := *s.SnapshotCreateTime
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotType != nil {
+		v := *s.SnapshotType
+
+		e.SetValue(protocol.BodyTarget, "SnapshotType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceRegion != nil {
+		v := *s.SourceRegion
+
+		e.SetValue(protocol.BodyTarget, "SourceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	if s.TotalBackupSizeInMegaBytes != nil {
+		v := *s.TotalBackupSizeInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "TotalBackupSizeInMegaBytes", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSnapshotList(vs []Snapshot) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The snapshot copy grant that grants Amazon Redshift permission to encrypt
 // copied snapshots with the specified customer master key (CMK) from AWS KMS
 // in the destination region.
@@ -14755,6 +18684,35 @@ func (s *SnapshotCopyGrant) SetTags(v []Tag) *SnapshotCopyGrant {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SnapshotCopyGrant) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotCopyGrantName != nil {
+		v := *s.SnapshotCopyGrantName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCopyGrantName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
+func encodeSnapshotCopyGrantList(vs []SnapshotCopyGrant) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a subnet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Subnet
 type Subnet struct {
@@ -14796,6 +18754,35 @@ func (s *Subnet) SetSubnetIdentifier(v string) *Subnet {
 func (s *Subnet) SetSubnetStatus(v string) *Subnet {
 	s.SubnetStatus = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Subnet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubnetAvailabilityZone != nil {
+		v := s.SubnetAvailabilityZone
+
+		e.SetFields(protocol.BodyTarget, "SubnetAvailabilityZone", v, protocol.Metadata{})
+	}
+	if s.SubnetIdentifier != nil {
+		v := *s.SubnetIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SubnetIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubnetStatus != nil {
+		v := *s.SubnetStatus
+
+		e.SetValue(protocol.BodyTarget, "SubnetStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSubnetList(vs []Subnet) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes the status of a RestoreTableFromClusterSnapshot operation.
@@ -14945,6 +18932,90 @@ func (s *TableRestoreStatus) SetTotalDataInMegaBytes(v int64) *TableRestoreStatu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TableRestoreStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClusterIdentifier != nil {
+		v := *s.ClusterIdentifier
+
+		e.SetValue(protocol.BodyTarget, "ClusterIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewTableName != nil {
+		v := *s.NewTableName
+
+		e.SetValue(protocol.BodyTarget, "NewTableName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProgressInMegaBytes != nil {
+		v := *s.ProgressInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "ProgressInMegaBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RequestTime != nil {
+		v := *s.RequestTime
+
+		e.SetValue(protocol.BodyTarget, "RequestTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SnapshotIdentifier != nil {
+		v := *s.SnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceDatabaseName != nil {
+		v := *s.SourceDatabaseName
+
+		e.SetValue(protocol.BodyTarget, "SourceDatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceSchemaName != nil {
+		v := *s.SourceSchemaName
+
+		e.SetValue(protocol.BodyTarget, "SourceSchemaName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceTableName != nil {
+		v := *s.SourceTableName
+
+		e.SetValue(protocol.BodyTarget, "SourceTableName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.TableRestoreRequestId != nil {
+		v := *s.TableRestoreRequestId
+
+		e.SetValue(protocol.BodyTarget, "TableRestoreRequestId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetDatabaseName != nil {
+		v := *s.TargetDatabaseName
+
+		e.SetValue(protocol.BodyTarget, "TargetDatabaseName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetSchemaName != nil {
+		v := *s.TargetSchemaName
+
+		e.SetValue(protocol.BodyTarget, "TargetSchemaName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TotalDataInMegaBytes != nil {
+		v := *s.TotalDataInMegaBytes
+
+		e.SetValue(protocol.BodyTarget, "TotalDataInMegaBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTableRestoreStatusList(vs []TableRestoreStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A tag consisting of a name/value pair for a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Tag
 type Tag struct {
@@ -14977,6 +19048,30 @@ func (s *Tag) SetKey(v string) *Tag {
 func (s *Tag) SetValue(v string) *Tag {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // A tag and its associated resource.
@@ -15046,6 +19141,35 @@ func (s *TaggedResource) SetTag(v *Tag) *TaggedResource {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TaggedResource) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Tag != nil {
+		v := s.Tag
+
+		e.SetFields(protocol.BodyTarget, "Tag", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTaggedResourceList(vs []TaggedResource) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the members of a VPC security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
@@ -15080,6 +19204,30 @@ func (s *VpcSecurityGroupMembership) SetVpcSecurityGroupId(v string) *VpcSecurit
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VpcSecurityGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VpcSecurityGroupId != nil {
+		v := *s.VpcSecurityGroupId
+
+		e.SetValue(protocol.BodyTarget, "VpcSecurityGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeVpcSecurityGroupMembershipList(vs []VpcSecurityGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type ParameterApplyType string
 
 // Enum values for ParameterApplyType
@@ -15087,6 +19235,15 @@ const (
 	ParameterApplyTypeStatic  ParameterApplyType = "static"
 	ParameterApplyTypeDynamic ParameterApplyType = "dynamic"
 )
+
+func (enum ParameterApplyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterApplyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -15098,6 +19255,15 @@ const (
 	SourceTypeClusterSnapshot       SourceType = "cluster-snapshot"
 )
 
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TableRestoreStatusType string
 
 // Enum values for TableRestoreStatusType
@@ -15108,3 +19274,12 @@ const (
 	TableRestoreStatusTypeFailed     TableRestoreStatusType = "FAILED"
 	TableRestoreStatusTypeCanceled   TableRestoreStatusType = "CANCELED"
 )
+
+func (enum TableRestoreStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TableRestoreStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

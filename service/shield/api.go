@@ -1558,3 +1558,12 @@ const (
 	SubResourceTypeIp  SubResourceType = "IP"
 	SubResourceTypeUrl SubResourceType = "URL"
 )
+
+func (enum SubResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

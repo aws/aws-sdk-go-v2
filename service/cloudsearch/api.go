@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opBuildSuggesters = "BuildSuggesters"
@@ -1266,6 +1267,22 @@ func (s *AccessPoliciesStatus) SetStatus(v *OptionStatus) *AccessPoliciesStatus 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccessPoliciesStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := *s.Options
+
+		e.SetValue(protocol.BodyTarget, "Options", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Synonyms, stopwords, and stemming options for an analysis scheme. Includes
 // tokenization dictionary for Japanese.
 type AnalysisOptions struct {
@@ -1348,6 +1365,37 @@ func (s *AnalysisOptions) SetSynonyms(v string) *AnalysisOptions {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AnalysisOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AlgorithmicStemming) > 0 {
+		v := s.AlgorithmicStemming
+
+		e.SetValue(protocol.BodyTarget, "AlgorithmicStemming", v, protocol.Metadata{})
+	}
+	if s.JapaneseTokenizationDictionary != nil {
+		v := *s.JapaneseTokenizationDictionary
+
+		e.SetValue(protocol.BodyTarget, "JapaneseTokenizationDictionary", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StemmingDictionary != nil {
+		v := *s.StemmingDictionary
+
+		e.SetValue(protocol.BodyTarget, "StemmingDictionary", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Stopwords != nil {
+		v := *s.Stopwords
+
+		e.SetValue(protocol.BodyTarget, "Stopwords", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Synonyms != nil {
+		v := *s.Synonyms
+
+		e.SetValue(protocol.BodyTarget, "Synonyms", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Configuration information for an analysis scheme. Each analysis scheme has
 // a unique name and specifies the language of the text to be processed. The
 // following options can be configured for an analysis scheme: Synonyms, Stopwords,
@@ -1420,6 +1468,27 @@ func (s *AnalysisScheme) SetAnalysisSchemeName(v string) *AnalysisScheme {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AnalysisScheme) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisOptions != nil {
+		v := s.AnalysisOptions
+
+		e.SetFields(protocol.BodyTarget, "AnalysisOptions", v, protocol.Metadata{})
+	}
+	if len(s.AnalysisSchemeLanguage) > 0 {
+		v := s.AnalysisSchemeLanguage
+
+		e.SetValue(protocol.BodyTarget, "AnalysisSchemeLanguage", v, protocol.Metadata{})
+	}
+	if s.AnalysisSchemeName != nil {
+		v := *s.AnalysisSchemeName
+
+		e.SetValue(protocol.BodyTarget, "AnalysisSchemeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The status and configuration of an AnalysisScheme.
 type AnalysisSchemeStatus struct {
 	_ struct{} `type:"structure"`
@@ -1460,6 +1529,30 @@ func (s *AnalysisSchemeStatus) SetStatus(v *OptionStatus) *AnalysisSchemeStatus 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AnalysisSchemeStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := s.Options
+
+		e.SetFields(protocol.BodyTarget, "Options", v, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAnalysisSchemeStatusList(vs []AnalysisSchemeStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The status and configuration of the domain's availability options.
 type AvailabilityOptionsStatus struct {
 	_ struct{} `type:"structure"`
@@ -1495,6 +1588,22 @@ func (s *AvailabilityOptionsStatus) SetOptions(v bool) *AvailabilityOptionsStatu
 func (s *AvailabilityOptionsStatus) SetStatus(v *OptionStatus) *AvailabilityOptionsStatus {
 	s.Status = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AvailabilityOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := *s.Options
+
+		e.SetValue(protocol.BodyTarget, "Options", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the BuildSuggester operation. Specifies the
@@ -1544,6 +1653,17 @@ func (s *BuildSuggestersInput) SetDomainName(v string) *BuildSuggestersInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BuildSuggestersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a BuildSuggester request. Contains a list of the fields used
 // for suggestions.
 type BuildSuggestersOutput struct {
@@ -1574,6 +1694,17 @@ func (s BuildSuggestersOutput) SDKResponseMetadata() aws.Response {
 func (s *BuildSuggestersOutput) SetFieldNames(v []string) *BuildSuggestersOutput {
 	s.FieldNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BuildSuggestersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.FieldNames) > 0 {
+		v := s.FieldNames
+
+		e.SetList(protocol.BodyTarget, "FieldNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the CreateDomain operation. Specifies a name
@@ -1622,6 +1753,17 @@ func (s *CreateDomainInput) SetDomainName(v string) *CreateDomainInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDomainInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a CreateDomainRequest. Contains the status of a newly created
 // domain.
 type CreateDomainOutput struct {
@@ -1652,6 +1794,17 @@ func (s CreateDomainOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateDomainOutput) SetDomainStatus(v *DomainStatus) *CreateDomainOutput {
 	s.DomainStatus = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainStatus != nil {
+		v := s.DomainStatus
+
+		e.SetFields(protocol.BodyTarget, "DomainStatus", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a field that contains an array of dates. Present if IndexFieldType
@@ -1713,6 +1866,37 @@ func (s *DateArrayOptions) SetSearchEnabled(v bool) *DateArrayOptions {
 func (s *DateArrayOptions) SetSourceFields(v string) *DateArrayOptions {
 	s.SourceFields = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DateArrayOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceFields != nil {
+		v := *s.SourceFields
+
+		e.SetValue(protocol.BodyTarget, "SourceFields", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a date field. Dates and times are specified in UTC (Coordinated
@@ -1813,6 +1997,42 @@ func (s *DateOptions) SetSourceField(v string) *DateOptions {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DateOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SortEnabled != nil {
+		v := *s.SortEnabled
+
+		e.SetValue(protocol.BodyTarget, "SortEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Container for the parameters to the DefineAnalysisScheme operation. Specifies
 // the name of the domain you want to update and the analysis scheme configuration.
 type DefineAnalysisSchemeInput struct {
@@ -1883,6 +2103,22 @@ func (s *DefineAnalysisSchemeInput) SetDomainName(v string) *DefineAnalysisSchem
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineAnalysisSchemeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisScheme != nil {
+		v := s.AnalysisScheme
+
+		e.SetFields(protocol.BodyTarget, "AnalysisScheme", v, protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DefineAnalysisScheme request. Contains the status of the
 // newly-configured analysis scheme.
 type DefineAnalysisSchemeOutput struct {
@@ -1915,6 +2151,17 @@ func (s DefineAnalysisSchemeOutput) SDKResponseMetadata() aws.Response {
 func (s *DefineAnalysisSchemeOutput) SetAnalysisScheme(v *AnalysisSchemeStatus) *DefineAnalysisSchemeOutput {
 	s.AnalysisScheme = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineAnalysisSchemeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisScheme != nil {
+		v := s.AnalysisScheme
+
+		e.SetFields(protocol.BodyTarget, "AnalysisScheme", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DefineExpression operation. Specifies
@@ -1987,6 +2234,22 @@ func (s *DefineExpressionInput) SetExpression(v *Expression) *DefineExpressionIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineExpressionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Expression != nil {
+		v := s.Expression
+
+		e.SetFields(protocol.BodyTarget, "Expression", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DefineExpression request. Contains the status of the newly-configured
 // expression.
 type DefineExpressionOutput struct {
@@ -2019,6 +2282,17 @@ func (s DefineExpressionOutput) SDKResponseMetadata() aws.Response {
 func (s *DefineExpressionOutput) SetExpression(v *ExpressionStatus) *DefineExpressionOutput {
 	s.Expression = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineExpressionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Expression != nil {
+		v := s.Expression
+
+		e.SetFields(protocol.BodyTarget, "Expression", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DefineIndexField operation. Specifies
@@ -2088,6 +2362,22 @@ func (s *DefineIndexFieldInput) SetIndexField(v *IndexField) *DefineIndexFieldIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineIndexFieldInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IndexField != nil {
+		v := s.IndexField
+
+		e.SetFields(protocol.BodyTarget, "IndexField", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DefineIndexField request. Contains the status of the newly-configured
 // index field.
 type DefineIndexFieldOutput struct {
@@ -2120,6 +2410,17 @@ func (s DefineIndexFieldOutput) SDKResponseMetadata() aws.Response {
 func (s *DefineIndexFieldOutput) SetIndexField(v *IndexFieldStatus) *DefineIndexFieldOutput {
 	s.IndexField = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineIndexFieldOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IndexField != nil {
+		v := s.IndexField
+
+		e.SetFields(protocol.BodyTarget, "IndexField", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DefineSuggester operation. Specifies
@@ -2191,6 +2492,22 @@ func (s *DefineSuggesterInput) SetSuggester(v *Suggester) *DefineSuggesterInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineSuggesterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Suggester != nil {
+		v := s.Suggester
+
+		e.SetFields(protocol.BodyTarget, "Suggester", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DefineSuggester request. Contains the status of the newly-configured
 // suggester.
 type DefineSuggesterOutput struct {
@@ -2223,6 +2540,17 @@ func (s DefineSuggesterOutput) SDKResponseMetadata() aws.Response {
 func (s *DefineSuggesterOutput) SetSuggester(v *SuggesterStatus) *DefineSuggesterOutput {
 	s.Suggester = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DefineSuggesterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Suggester != nil {
+		v := s.Suggester
+
+		e.SetFields(protocol.BodyTarget, "Suggester", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DeleteAnalysisScheme operation. Specifies
@@ -2291,6 +2619,22 @@ func (s *DeleteAnalysisSchemeInput) SetDomainName(v string) *DeleteAnalysisSchem
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAnalysisSchemeInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisSchemeName != nil {
+		v := *s.AnalysisSchemeName
+
+		e.SetValue(protocol.BodyTarget, "AnalysisSchemeName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DeleteAnalysisScheme request. Contains the status of the
 // deleted analysis scheme.
 type DeleteAnalysisSchemeOutput struct {
@@ -2323,6 +2667,17 @@ func (s DeleteAnalysisSchemeOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteAnalysisSchemeOutput) SetAnalysisScheme(v *AnalysisSchemeStatus) *DeleteAnalysisSchemeOutput {
 	s.AnalysisScheme = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAnalysisSchemeOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisScheme != nil {
+		v := s.AnalysisScheme
+
+		e.SetFields(protocol.BodyTarget, "AnalysisScheme", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DeleteDomain operation. Specifies the
@@ -2369,6 +2724,17 @@ func (s *DeleteDomainInput) SetDomainName(v string) *DeleteDomainInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDomainInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DeleteDomain request. Contains the status of a newly deleted
 // domain, or no status if the domain has already been completely deleted.
 type DeleteDomainOutput struct {
@@ -2399,6 +2765,17 @@ func (s DeleteDomainOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteDomainOutput) SetDomainStatus(v *DomainStatus) *DeleteDomainOutput {
 	s.DomainStatus = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainStatus != nil {
+		v := s.DomainStatus
+
+		e.SetFields(protocol.BodyTarget, "DomainStatus", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DeleteExpression operation. Specifies
@@ -2467,6 +2844,22 @@ func (s *DeleteExpressionInput) SetExpressionName(v string) *DeleteExpressionInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteExpressionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ExpressionName != nil {
+		v := *s.ExpressionName
+
+		e.SetValue(protocol.BodyTarget, "ExpressionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DeleteExpression request. Specifies the expression being
 // deleted.
 type DeleteExpressionOutput struct {
@@ -2499,6 +2892,17 @@ func (s DeleteExpressionOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteExpressionOutput) SetExpression(v *ExpressionStatus) *DeleteExpressionOutput {
 	s.Expression = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteExpressionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Expression != nil {
+		v := s.Expression
+
+		e.SetFields(protocol.BodyTarget, "Expression", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DeleteIndexField operation. Specifies
@@ -2568,6 +2972,22 @@ func (s *DeleteIndexFieldInput) SetIndexFieldName(v string) *DeleteIndexFieldInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteIndexFieldInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IndexFieldName != nil {
+		v := *s.IndexFieldName
+
+		e.SetValue(protocol.BodyTarget, "IndexFieldName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DeleteIndexField request.
 type DeleteIndexFieldOutput struct {
 	_ struct{} `type:"structure"`
@@ -2599,6 +3019,17 @@ func (s DeleteIndexFieldOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteIndexFieldOutput) SetIndexField(v *IndexFieldStatus) *DeleteIndexFieldOutput {
 	s.IndexField = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteIndexFieldOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IndexField != nil {
+		v := s.IndexField
+
+		e.SetFields(protocol.BodyTarget, "IndexField", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DeleteSuggester operation. Specifies
@@ -2667,6 +3098,22 @@ func (s *DeleteSuggesterInput) SetSuggesterName(v string) *DeleteSuggesterInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSuggesterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SuggesterName != nil {
+		v := *s.SuggesterName
+
+		e.SetValue(protocol.BodyTarget, "SuggesterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DeleteSuggester request. Contains the status of the deleted
 // suggester.
 type DeleteSuggesterOutput struct {
@@ -2699,6 +3146,17 @@ func (s DeleteSuggesterOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteSuggesterOutput) SetSuggester(v *SuggesterStatus) *DeleteSuggesterOutput {
 	s.Suggester = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSuggesterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Suggester != nil {
+		v := s.Suggester
+
+		e.SetFields(protocol.BodyTarget, "Suggester", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeAnalysisSchemes operation. Specifies
@@ -2767,6 +3225,27 @@ func (s *DescribeAnalysisSchemesInput) SetDomainName(v string) *DescribeAnalysis
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAnalysisSchemesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AnalysisSchemeNames) > 0 {
+		v := s.AnalysisSchemeNames
+
+		e.SetList(protocol.BodyTarget, "AnalysisSchemeNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Deployed != nil {
+		v := *s.Deployed
+
+		e.SetValue(protocol.BodyTarget, "Deployed", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeAnalysisSchemes request. Contains the analysis schemes
 // configured for the domain specified in the request.
 type DescribeAnalysisSchemesOutput struct {
@@ -2799,6 +3278,17 @@ func (s DescribeAnalysisSchemesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeAnalysisSchemesOutput) SetAnalysisSchemes(v []AnalysisSchemeStatus) *DescribeAnalysisSchemesOutput {
 	s.AnalysisSchemes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAnalysisSchemesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AnalysisSchemes) > 0 {
+		v := s.AnalysisSchemes
+
+		e.SetList(protocol.BodyTarget, "AnalysisSchemes", encodeAnalysisSchemeStatusList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeAvailabilityOptions operation.
@@ -2857,6 +3347,22 @@ func (s *DescribeAvailabilityOptionsInput) SetDomainName(v string) *DescribeAvai
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAvailabilityOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Deployed != nil {
+		v := *s.Deployed
+
+		e.SetValue(protocol.BodyTarget, "Deployed", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeAvailabilityOptions request. Indicates whether or
 // not the Multi-AZ option is enabled for the domain specified in the request.
 type DescribeAvailabilityOptionsOutput struct {
@@ -2890,6 +3396,17 @@ func (s *DescribeAvailabilityOptionsOutput) SetAvailabilityOptions(v *Availabili
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAvailabilityOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AvailabilityOptions != nil {
+		v := s.AvailabilityOptions
+
+		e.SetFields(protocol.BodyTarget, "AvailabilityOptions", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Container for the parameters to the DescribeDomains operation. By default
 // shows the status of all domains. To restrict the response to particular domains,
 // specify the names of the domains you want to describe.
@@ -2914,6 +3431,17 @@ func (s DescribeDomainsInput) GoString() string {
 func (s *DescribeDomainsInput) SetDomainNames(v []string) *DescribeDomainsInput {
 	s.DomainNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDomainsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DomainNames) > 0 {
+		v := s.DomainNames
+
+		e.SetList(protocol.BodyTarget, "DomainNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The result of a DescribeDomains request. Contains the status of the domains
@@ -2948,6 +3476,17 @@ func (s DescribeDomainsOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeDomainsOutput) SetDomainStatusList(v []DomainStatus) *DescribeDomainsOutput {
 	s.DomainStatusList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeDomainsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DomainStatusList) > 0 {
+		v := s.DomainStatusList
+
+		e.SetList(protocol.BodyTarget, "DomainStatusList", encodeDomainStatusList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeDomains operation. Specifies
@@ -3017,6 +3556,27 @@ func (s *DescribeExpressionsInput) SetExpressionNames(v []string) *DescribeExpre
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeExpressionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Deployed != nil {
+		v := *s.Deployed
+
+		e.SetValue(protocol.BodyTarget, "Deployed", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ExpressionNames) > 0 {
+		v := s.ExpressionNames
+
+		e.SetList(protocol.BodyTarget, "ExpressionNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeExpressions request. Contains the expressions configured
 // for the domain specified in the request.
 type DescribeExpressionsOutput struct {
@@ -3049,6 +3609,17 @@ func (s DescribeExpressionsOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeExpressionsOutput) SetExpressions(v []ExpressionStatus) *DescribeExpressionsOutput {
 	s.Expressions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeExpressionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Expressions) > 0 {
+		v := s.Expressions
+
+		e.SetList(protocol.BodyTarget, "Expressions", encodeExpressionStatusList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeIndexFields operation. Specifies
@@ -3118,6 +3689,27 @@ func (s *DescribeIndexFieldsInput) SetFieldNames(v []string) *DescribeIndexField
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeIndexFieldsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Deployed != nil {
+		v := *s.Deployed
+
+		e.SetValue(protocol.BodyTarget, "Deployed", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.FieldNames) > 0 {
+		v := s.FieldNames
+
+		e.SetList(protocol.BodyTarget, "FieldNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeIndexFields request. Contains the index fields configured
 // for the domain specified in the request.
 type DescribeIndexFieldsOutput struct {
@@ -3150,6 +3742,17 @@ func (s DescribeIndexFieldsOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeIndexFieldsOutput) SetIndexFields(v []IndexFieldStatus) *DescribeIndexFieldsOutput {
 	s.IndexFields = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeIndexFieldsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.IndexFields) > 0 {
+		v := s.IndexFields
+
+		e.SetList(protocol.BodyTarget, "IndexFields", encodeIndexFieldStatusList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeScalingParameters operation.
@@ -3199,6 +3802,17 @@ func (s *DescribeScalingParametersInput) SetDomainName(v string) *DescribeScalin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScalingParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeScalingParameters request. Contains the scaling parameters
 // configured for the domain specified in the request.
 type DescribeScalingParametersOutput struct {
@@ -3231,6 +3845,17 @@ func (s DescribeScalingParametersOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeScalingParametersOutput) SetScalingParameters(v *ScalingParametersStatus) *DescribeScalingParametersOutput {
 	s.ScalingParameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeScalingParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ScalingParameters != nil {
+		v := s.ScalingParameters
+
+		e.SetFields(protocol.BodyTarget, "ScalingParameters", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeServiceAccessPolicies operation.
@@ -3289,6 +3914,22 @@ func (s *DescribeServiceAccessPoliciesInput) SetDomainName(v string) *DescribeSe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeServiceAccessPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Deployed != nil {
+		v := *s.Deployed
+
+		e.SetValue(protocol.BodyTarget, "Deployed", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeServiceAccessPolicies request.
 type DescribeServiceAccessPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3320,6 +3961,17 @@ func (s DescribeServiceAccessPoliciesOutput) SDKResponseMetadata() aws.Response 
 func (s *DescribeServiceAccessPoliciesOutput) SetAccessPolicies(v *AccessPoliciesStatus) *DescribeServiceAccessPoliciesOutput {
 	s.AccessPolicies = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeServiceAccessPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessPolicies != nil {
+		v := s.AccessPolicies
+
+		e.SetFields(protocol.BodyTarget, "AccessPolicies", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the DescribeSuggester operation. Specifies
@@ -3388,6 +4040,27 @@ func (s *DescribeSuggestersInput) SetSuggesterNames(v []string) *DescribeSuggest
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSuggestersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Deployed != nil {
+		v := *s.Deployed
+
+		e.SetValue(protocol.BodyTarget, "Deployed", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SuggesterNames) > 0 {
+		v := s.SuggesterNames
+
+		e.SetList(protocol.BodyTarget, "SuggesterNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a DescribeSuggesters request.
 type DescribeSuggestersOutput struct {
 	_ struct{} `type:"structure"`
@@ -3419,6 +4092,17 @@ func (s DescribeSuggestersOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeSuggestersOutput) SetSuggesters(v []SuggesterStatus) *DescribeSuggestersOutput {
 	s.Suggesters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSuggestersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Suggesters) > 0 {
+		v := s.Suggesters
+
+		e.SetList(protocol.BodyTarget, "Suggesters", encodeSuggesterStatusList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a search suggester.
@@ -3490,6 +4174,27 @@ func (s *DocumentSuggesterOptions) SetSortExpression(v string) *DocumentSuggeste
 func (s *DocumentSuggesterOptions) SetSourceField(v string) *DocumentSuggesterOptions {
 	s.SourceField = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DocumentSuggesterOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.FuzzyMatching) > 0 {
+		v := s.FuzzyMatching
+
+		e.SetValue(protocol.BodyTarget, "FuzzyMatching", v, protocol.Metadata{})
+	}
+	if s.SortExpression != nil {
+		v := *s.SortExpression
+
+		e.SetValue(protocol.BodyTarget, "SortExpression", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The current status of the search domain.
@@ -3641,6 +4346,85 @@ func (s *DomainStatus) SetSearchService(v *ServiceEndpoint) *DomainStatus {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DomainStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ARN != nil {
+		v := *s.ARN
+
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Created != nil {
+		v := *s.Created
+
+		e.SetValue(protocol.BodyTarget, "Created", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Deleted != nil {
+		v := *s.Deleted
+
+		e.SetValue(protocol.BodyTarget, "Deleted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DocService != nil {
+		v := s.DocService
+
+		e.SetFields(protocol.BodyTarget, "DocService", v, protocol.Metadata{})
+	}
+	if s.DomainId != nil {
+		v := *s.DomainId
+
+		e.SetValue(protocol.BodyTarget, "DomainId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Limits != nil {
+		v := s.Limits
+
+		e.SetFields(protocol.BodyTarget, "Limits", v, protocol.Metadata{})
+	}
+	if s.Processing != nil {
+		v := *s.Processing
+
+		e.SetValue(protocol.BodyTarget, "Processing", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequiresIndexDocuments != nil {
+		v := *s.RequiresIndexDocuments
+
+		e.SetValue(protocol.BodyTarget, "RequiresIndexDocuments", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchInstanceCount != nil {
+		v := *s.SearchInstanceCount
+
+		e.SetValue(protocol.BodyTarget, "SearchInstanceCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SearchInstanceType != nil {
+		v := *s.SearchInstanceType
+
+		e.SetValue(protocol.BodyTarget, "SearchInstanceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SearchPartitionCount != nil {
+		v := *s.SearchPartitionCount
+
+		e.SetValue(protocol.BodyTarget, "SearchPartitionCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SearchService != nil {
+		v := s.SearchService
+
+		e.SetFields(protocol.BodyTarget, "SearchService", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDomainStatusList(vs []DomainStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Options for a field that contains an array of double-precision 64-bit floating
 // point values. Present if IndexFieldType specifies the field is of type double-array.
 // All options are enabled by default.
@@ -3701,6 +4485,37 @@ func (s *DoubleArrayOptions) SetSearchEnabled(v bool) *DoubleArrayOptions {
 func (s *DoubleArrayOptions) SetSourceFields(v string) *DoubleArrayOptions {
 	s.SourceFields = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DoubleArrayOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceFields != nil {
+		v := *s.SourceFields
+
+		e.SetValue(protocol.BodyTarget, "SourceFields", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a double-precision 64-bit floating point field. Present if IndexFieldType
@@ -3788,6 +4603,42 @@ func (s *DoubleOptions) SetSourceField(v string) *DoubleOptions {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DoubleOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SortEnabled != nil {
+		v := *s.SortEnabled
+
+		e.SetValue(protocol.BodyTarget, "SortEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A named expression that can be evaluated at search time. Can be used to sort
 // the search results, define other expressions, or return computed information
 // in the search results.
@@ -3855,6 +4706,22 @@ func (s *Expression) SetExpressionValue(v string) *Expression {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Expression) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExpressionName != nil {
+		v := *s.ExpressionName
+
+		e.SetValue(protocol.BodyTarget, "ExpressionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ExpressionValue != nil {
+		v := *s.ExpressionValue
+
+		e.SetValue(protocol.BodyTarget, "ExpressionValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The value of an Expression and its current status.
 type ExpressionStatus struct {
 	_ struct{} `type:"structure"`
@@ -3890,6 +4757,30 @@ func (s *ExpressionStatus) SetOptions(v *Expression) *ExpressionStatus {
 func (s *ExpressionStatus) SetStatus(v *OptionStatus) *ExpressionStatus {
 	s.Status = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExpressionStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := s.Options
+
+		e.SetFields(protocol.BodyTarget, "Options", v, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeExpressionStatusList(vs []ExpressionStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Container for the parameters to the IndexDocuments operation. Specifies the
@@ -3939,6 +4830,17 @@ func (s *IndexDocumentsInput) SetDomainName(v string) *IndexDocumentsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IndexDocumentsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of an IndexDocuments request. Contains the status of the indexing
 // operation, including the fields being indexed.
 type IndexDocumentsOutput struct {
@@ -3969,6 +4871,17 @@ func (s IndexDocumentsOutput) SDKResponseMetadata() aws.Response {
 func (s *IndexDocumentsOutput) SetFieldNames(v []string) *IndexDocumentsOutput {
 	s.FieldNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IndexDocumentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.FieldNames) > 0 {
+		v := s.FieldNames
+
+		e.SetList(protocol.BodyTarget, "FieldNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Configuration information for a field in the index, including its name, type,
@@ -4193,6 +5106,77 @@ func (s *IndexField) SetTextOptions(v *TextOptions) *IndexField {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IndexField) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DateArrayOptions != nil {
+		v := s.DateArrayOptions
+
+		e.SetFields(protocol.BodyTarget, "DateArrayOptions", v, protocol.Metadata{})
+	}
+	if s.DateOptions != nil {
+		v := s.DateOptions
+
+		e.SetFields(protocol.BodyTarget, "DateOptions", v, protocol.Metadata{})
+	}
+	if s.DoubleArrayOptions != nil {
+		v := s.DoubleArrayOptions
+
+		e.SetFields(protocol.BodyTarget, "DoubleArrayOptions", v, protocol.Metadata{})
+	}
+	if s.DoubleOptions != nil {
+		v := s.DoubleOptions
+
+		e.SetFields(protocol.BodyTarget, "DoubleOptions", v, protocol.Metadata{})
+	}
+	if s.IndexFieldName != nil {
+		v := *s.IndexFieldName
+
+		e.SetValue(protocol.BodyTarget, "IndexFieldName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.IndexFieldType) > 0 {
+		v := s.IndexFieldType
+
+		e.SetValue(protocol.BodyTarget, "IndexFieldType", v, protocol.Metadata{})
+	}
+	if s.IntArrayOptions != nil {
+		v := s.IntArrayOptions
+
+		e.SetFields(protocol.BodyTarget, "IntArrayOptions", v, protocol.Metadata{})
+	}
+	if s.IntOptions != nil {
+		v := s.IntOptions
+
+		e.SetFields(protocol.BodyTarget, "IntOptions", v, protocol.Metadata{})
+	}
+	if s.LatLonOptions != nil {
+		v := s.LatLonOptions
+
+		e.SetFields(protocol.BodyTarget, "LatLonOptions", v, protocol.Metadata{})
+	}
+	if s.LiteralArrayOptions != nil {
+		v := s.LiteralArrayOptions
+
+		e.SetFields(protocol.BodyTarget, "LiteralArrayOptions", v, protocol.Metadata{})
+	}
+	if s.LiteralOptions != nil {
+		v := s.LiteralOptions
+
+		e.SetFields(protocol.BodyTarget, "LiteralOptions", v, protocol.Metadata{})
+	}
+	if s.TextArrayOptions != nil {
+		v := s.TextArrayOptions
+
+		e.SetFields(protocol.BodyTarget, "TextArrayOptions", v, protocol.Metadata{})
+	}
+	if s.TextOptions != nil {
+		v := s.TextOptions
+
+		e.SetFields(protocol.BodyTarget, "TextOptions", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The value of an IndexField and its current status.
 type IndexFieldStatus struct {
 	_ struct{} `type:"structure"`
@@ -4229,6 +5213,30 @@ func (s *IndexFieldStatus) SetOptions(v *IndexField) *IndexFieldStatus {
 func (s *IndexFieldStatus) SetStatus(v *OptionStatus) *IndexFieldStatus {
 	s.Status = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IndexFieldStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := s.Options
+
+		e.SetFields(protocol.BodyTarget, "Options", v, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeIndexFieldStatusList(vs []IndexFieldStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Options for a field that contains an array of 64-bit signed integers. Present
@@ -4291,6 +5299,37 @@ func (s *IntArrayOptions) SetSearchEnabled(v bool) *IntArrayOptions {
 func (s *IntArrayOptions) SetSourceFields(v string) *IntArrayOptions {
 	s.SourceFields = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IntArrayOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceFields != nil {
+		v := *s.SourceFields
+
+		e.SetValue(protocol.BodyTarget, "SourceFields", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a 64-bit signed integer field. Present if IndexFieldType specifies
@@ -4376,6 +5415,42 @@ func (s *IntOptions) SetSortEnabled(v bool) *IntOptions {
 func (s *IntOptions) SetSourceField(v string) *IntOptions {
 	s.SourceField = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IntOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SortEnabled != nil {
+		v := *s.SortEnabled
+
+		e.SetValue(protocol.BodyTarget, "SortEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a latlon field. A latlon field contains a location stored as
@@ -4475,6 +5550,42 @@ func (s *LatLonOptions) SetSourceField(v string) *LatLonOptions {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LatLonOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SortEnabled != nil {
+		v := *s.SortEnabled
+
+		e.SetValue(protocol.BodyTarget, "SortEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type Limits struct {
 	_ struct{} `type:"structure"`
 
@@ -4507,6 +5618,22 @@ func (s *Limits) SetMaximumReplicationCount(v int64) *Limits {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Limits) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaximumPartitionCount != nil {
+		v := *s.MaximumPartitionCount
+
+		e.SetValue(protocol.BodyTarget, "MaximumPartitionCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MaximumReplicationCount != nil {
+		v := *s.MaximumReplicationCount
+
+		e.SetValue(protocol.BodyTarget, "MaximumReplicationCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type ListDomainNamesInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4519,6 +5646,12 @@ func (s ListDomainNamesInput) String() string {
 // GoString returns the string representation
 func (s ListDomainNamesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDomainNamesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The result of a ListDomainNames request. Contains a list of the domains owned
@@ -4551,6 +5684,17 @@ func (s ListDomainNamesOutput) SDKResponseMetadata() aws.Response {
 func (s *ListDomainNamesOutput) SetDomainNames(v map[string]string) *ListDomainNamesOutput {
 	s.DomainNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDomainNamesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DomainNames) > 0 {
+		v := s.DomainNames
+
+		e.SetMap(protocol.BodyTarget, "DomainNames", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for a field that contains an array of literal strings. Present if
@@ -4613,6 +5757,37 @@ func (s *LiteralArrayOptions) SetSearchEnabled(v bool) *LiteralArrayOptions {
 func (s *LiteralArrayOptions) SetSourceFields(v string) *LiteralArrayOptions {
 	s.SourceFields = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LiteralArrayOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceFields != nil {
+		v := *s.SourceFields
+
+		e.SetValue(protocol.BodyTarget, "SourceFields", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for literal field. Present if IndexFieldType specifies the field
@@ -4711,6 +5886,42 @@ func (s *LiteralOptions) SetSourceField(v string) *LiteralOptions {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LiteralOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FacetEnabled != nil {
+		v := *s.FacetEnabled
+
+		e.SetValue(protocol.BodyTarget, "FacetEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SearchEnabled != nil {
+		v := *s.SearchEnabled
+
+		e.SetValue(protocol.BodyTarget, "SearchEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SortEnabled != nil {
+		v := *s.SortEnabled
+
+		e.SetValue(protocol.BodyTarget, "SortEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The status of domain configuration option.
 type OptionStatus struct {
 	_ struct{} `type:"structure"`
@@ -4786,6 +5997,37 @@ func (s *OptionStatus) SetUpdateVersion(v int64) *OptionStatus {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.PendingDeletion != nil {
+		v := *s.PendingDeletion
+
+		e.SetValue(protocol.BodyTarget, "PendingDeletion", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		e.SetValue(protocol.BodyTarget, "State", v, protocol.Metadata{})
+	}
+	if s.UpdateDate != nil {
+		v := *s.UpdateDate
+
+		e.SetValue(protocol.BodyTarget, "UpdateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.UpdateVersion != nil {
+		v := *s.UpdateVersion
+
+		e.SetValue(protocol.BodyTarget, "UpdateVersion", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The desired instance type and desired number of replicas of each index partition.
 type ScalingParameters struct {
 	_ struct{} `type:"structure"`
@@ -4830,6 +6072,27 @@ func (s *ScalingParameters) SetDesiredReplicationCount(v int64) *ScalingParamete
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ScalingParameters) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DesiredInstanceType) > 0 {
+		v := s.DesiredInstanceType
+
+		e.SetValue(protocol.BodyTarget, "DesiredInstanceType", v, protocol.Metadata{})
+	}
+	if s.DesiredPartitionCount != nil {
+		v := *s.DesiredPartitionCount
+
+		e.SetValue(protocol.BodyTarget, "DesiredPartitionCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DesiredReplicationCount != nil {
+		v := *s.DesiredReplicationCount
+
+		e.SetValue(protocol.BodyTarget, "DesiredReplicationCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The status and configuration of a search domain's scaling parameters.
 type ScalingParametersStatus struct {
 	_ struct{} `type:"structure"`
@@ -4867,6 +6130,22 @@ func (s *ScalingParametersStatus) SetStatus(v *OptionStatus) *ScalingParametersS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ScalingParametersStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := s.Options
+
+		e.SetFields(protocol.BodyTarget, "Options", v, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The endpoint to which service requests can be submitted.
 type ServiceEndpoint struct {
 	_ struct{} `type:"structure"`
@@ -4890,6 +6169,17 @@ func (s ServiceEndpoint) GoString() string {
 func (s *ServiceEndpoint) SetEndpoint(v string) *ServiceEndpoint {
 	s.Endpoint = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ServiceEndpoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Configuration information for a search suggester. Each suggester has a unique
@@ -4958,6 +6248,22 @@ func (s *Suggester) SetSuggesterName(v string) *Suggester {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Suggester) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DocumentSuggesterOptions != nil {
+		v := s.DocumentSuggesterOptions
+
+		e.SetFields(protocol.BodyTarget, "DocumentSuggesterOptions", v, protocol.Metadata{})
+	}
+	if s.SuggesterName != nil {
+		v := *s.SuggesterName
+
+		e.SetValue(protocol.BodyTarget, "SuggesterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The value of a Suggester and its current status.
 type SuggesterStatus struct {
 	_ struct{} `type:"structure"`
@@ -4995,6 +6301,30 @@ func (s *SuggesterStatus) SetOptions(v *Suggester) *SuggesterStatus {
 func (s *SuggesterStatus) SetStatus(v *OptionStatus) *SuggesterStatus {
 	s.Status = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SuggesterStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Options != nil {
+		v := s.Options
+
+		e.SetFields(protocol.BodyTarget, "Options", v, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		e.SetFields(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSuggesterStatusList(vs []SuggesterStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Options for a field that contains an array of text strings. Present if IndexFieldType
@@ -5057,6 +6387,37 @@ func (s *TextArrayOptions) SetReturnEnabled(v bool) *TextArrayOptions {
 func (s *TextArrayOptions) SetSourceFields(v string) *TextArrayOptions {
 	s.SourceFields = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TextArrayOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisScheme != nil {
+		v := *s.AnalysisScheme
+
+		e.SetValue(protocol.BodyTarget, "AnalysisScheme", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HighlightEnabled != nil {
+		v := *s.HighlightEnabled
+
+		e.SetValue(protocol.BodyTarget, "HighlightEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceFields != nil {
+		v := *s.SourceFields
+
+		e.SetValue(protocol.BodyTarget, "SourceFields", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Options for text field. Present if IndexFieldType specifies the field is
@@ -5156,6 +6517,42 @@ func (s *TextOptions) SetSourceField(v string) *TextOptions {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TextOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AnalysisScheme != nil {
+		v := *s.AnalysisScheme
+
+		e.SetValue(protocol.BodyTarget, "AnalysisScheme", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HighlightEnabled != nil {
+		v := *s.HighlightEnabled
+
+		e.SetValue(protocol.BodyTarget, "HighlightEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ReturnEnabled != nil {
+		v := *s.ReturnEnabled
+
+		e.SetValue(protocol.BodyTarget, "ReturnEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SortEnabled != nil {
+		v := *s.SortEnabled
+
+		e.SetValue(protocol.BodyTarget, "SortEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceField != nil {
+		v := *s.SourceField
+
+		e.SetValue(protocol.BodyTarget, "SourceField", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Container for the parameters to the UpdateAvailabilityOptions operation.
 // Specifies the name of the domain you want to update and the Multi-AZ availability
 // option.
@@ -5222,6 +6619,22 @@ func (s *UpdateAvailabilityOptionsInput) SetMultiAZ(v bool) *UpdateAvailabilityO
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAvailabilityOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MultiAZ != nil {
+		v := *s.MultiAZ
+
+		e.SetValue(protocol.BodyTarget, "MultiAZ", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a UpdateAvailabilityOptions request. Contains the status of
 // the domain's availability options.
 type UpdateAvailabilityOptionsOutput struct {
@@ -5253,6 +6666,17 @@ func (s UpdateAvailabilityOptionsOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateAvailabilityOptionsOutput) SetAvailabilityOptions(v *AvailabilityOptionsStatus) *UpdateAvailabilityOptionsOutput {
 	s.AvailabilityOptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAvailabilityOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AvailabilityOptions != nil {
+		v := s.AvailabilityOptions
+
+		e.SetFields(protocol.BodyTarget, "AvailabilityOptions", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the UpdateScalingParameters operation. Specifies
@@ -5318,6 +6742,22 @@ func (s *UpdateScalingParametersInput) SetScalingParameters(v *ScalingParameters
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateScalingParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ScalingParameters != nil {
+		v := s.ScalingParameters
+
+		e.SetFields(protocol.BodyTarget, "ScalingParameters", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of a UpdateScalingParameters request. Contains the status of the
 // newly-configured scaling parameters.
 type UpdateScalingParametersOutput struct {
@@ -5350,6 +6790,17 @@ func (s UpdateScalingParametersOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateScalingParametersOutput) SetScalingParameters(v *ScalingParametersStatus) *UpdateScalingParametersOutput {
 	s.ScalingParameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateScalingParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ScalingParameters != nil {
+		v := s.ScalingParameters
+
+		e.SetFields(protocol.BodyTarget, "ScalingParameters", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Container for the parameters to the UpdateServiceAccessPolicies operation.
@@ -5416,6 +6867,22 @@ func (s *UpdateServiceAccessPoliciesInput) SetDomainName(v string) *UpdateServic
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateServiceAccessPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessPolicies != nil {
+		v := *s.AccessPolicies
+
+		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result of an UpdateServiceAccessPolicies request. Contains the new access
 // policies.
 type UpdateServiceAccessPoliciesOutput struct {
@@ -5450,6 +6917,17 @@ func (s *UpdateServiceAccessPoliciesOutput) SetAccessPolicies(v *AccessPoliciesS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateServiceAccessPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessPolicies != nil {
+		v := s.AccessPolicies
+
+		e.SetFields(protocol.BodyTarget, "AccessPolicies", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 type AlgorithmicStemming string
 
 // Enum values for AlgorithmicStemming
@@ -5459,6 +6937,15 @@ const (
 	AlgorithmicStemmingLight   AlgorithmicStemming = "light"
 	AlgorithmicStemmingFull    AlgorithmicStemming = "full"
 )
+
+func (enum AlgorithmicStemming) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlgorithmicStemming) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // An IETF RFC 4646 (http://tools.ietf.org/html/rfc4646) language code or mul
 // for multiple languages.
@@ -5503,6 +6990,15 @@ const (
 	AnalysisSchemeLanguageZhHant AnalysisSchemeLanguage = "zh-Hant"
 )
 
+func (enum AnalysisSchemeLanguage) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AnalysisSchemeLanguage) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of field. The valid options for a field depend on the field type.
 // For more information about the supported field types, see Configuring Index
 // Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
@@ -5524,6 +7020,15 @@ const (
 	IndexFieldTypeDateArray    IndexFieldType = "date-array"
 )
 
+func (enum IndexFieldType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IndexFieldType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The state of processing a change to an option. One of:
 //
 //    * RequiresIndexDocuments: The option's latest value will not be deployed
@@ -5544,6 +7049,15 @@ const (
 	OptionStateFailedToValidate       OptionState = "FailedToValidate"
 )
 
+func (enum OptionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OptionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The instance type (such as search.m1.small) on which an index partition is
 // hosted.
 type PartitionInstanceType string
@@ -5560,6 +7074,15 @@ const (
 	PartitionInstanceTypeSearchM32xlarge PartitionInstanceType = "search.m3.2xlarge"
 )
 
+func (enum PartitionInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PartitionInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SuggesterFuzzyMatching string
 
 // Enum values for SuggesterFuzzyMatching
@@ -5568,3 +7091,12 @@ const (
 	SuggesterFuzzyMatchingLow  SuggesterFuzzyMatching = "low"
 	SuggesterFuzzyMatchingHigh SuggesterFuzzyMatching = "high"
 )
+
+func (enum SuggesterFuzzyMatching) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SuggesterFuzzyMatching) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

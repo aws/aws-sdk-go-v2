@@ -8062,6 +8062,15 @@ const (
 	AttributeActionDelete AttributeAction = "DELETE"
 )
 
+func (enum AttributeAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttributeAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -8081,6 +8090,15 @@ const (
 	ComparisonOperatorBeginsWith  ComparisonOperator = "BEGINS_WITH"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConditionalOperator string
 
 // Enum values for ConditionalOperator
@@ -8088,6 +8106,15 @@ const (
 	ConditionalOperatorAnd ConditionalOperator = "AND"
 	ConditionalOperatorOr  ConditionalOperator = "OR"
 )
+
+func (enum ConditionalOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConditionalOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type IndexStatus string
 
@@ -8099,6 +8126,15 @@ const (
 	IndexStatusActive   IndexStatus = "ACTIVE"
 )
 
+func (enum IndexStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IndexStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type KeyType string
 
 // Enum values for KeyType
@@ -8106,6 +8142,15 @@ const (
 	KeyTypeHash  KeyType = "HASH"
 	KeyTypeRange KeyType = "RANGE"
 )
+
+func (enum KeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProjectionType string
 
@@ -8115,6 +8160,15 @@ const (
 	ProjectionTypeKeysOnly ProjectionType = "KEYS_ONLY"
 	ProjectionTypeInclude  ProjectionType = "INCLUDE"
 )
+
+func (enum ProjectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Determines the level of detail about provisioned throughput consumption that
 // is returned in the response:
@@ -8140,6 +8194,15 @@ const (
 	ReturnConsumedCapacityNone    ReturnConsumedCapacity = "NONE"
 )
 
+func (enum ReturnConsumedCapacity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReturnConsumedCapacity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReturnItemCollectionMetrics string
 
 // Enum values for ReturnItemCollectionMetrics
@@ -8147,6 +8210,15 @@ const (
 	ReturnItemCollectionMetricsSize ReturnItemCollectionMetrics = "SIZE"
 	ReturnItemCollectionMetricsNone ReturnItemCollectionMetrics = "NONE"
 )
+
+func (enum ReturnItemCollectionMetrics) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReturnItemCollectionMetrics) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReturnValue string
 
@@ -8159,6 +8231,15 @@ const (
 	ReturnValueUpdatedNew ReturnValue = "UPDATED_NEW"
 )
 
+func (enum ReturnValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReturnValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScalarAttributeType string
 
 // Enum values for ScalarAttributeType
@@ -8167,6 +8248,15 @@ const (
 	ScalarAttributeTypeN ScalarAttributeType = "N"
 	ScalarAttributeTypeB ScalarAttributeType = "B"
 )
+
+func (enum ScalarAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalarAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Select string
 
@@ -8178,6 +8268,15 @@ const (
 	SelectCount                  Select = "COUNT"
 )
 
+func (enum Select) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Select) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StreamViewType string
 
 // Enum values for StreamViewType
@@ -8187,6 +8286,15 @@ const (
 	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
 	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )
+
+func (enum StreamViewType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamViewType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TableStatus string
 
@@ -8198,6 +8306,15 @@ const (
 	TableStatusActive   TableStatus = "ACTIVE"
 )
 
+func (enum TableStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TableStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TimeToLiveStatus string
 
 // Enum values for TimeToLiveStatus
@@ -8207,3 +8324,12 @@ const (
 	TimeToLiveStatusEnabled   TimeToLiveStatus = "ENABLED"
 	TimeToLiveStatusDisabled  TimeToLiveStatus = "DISABLED"
 )
+
+func (enum TimeToLiveStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TimeToLiveStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

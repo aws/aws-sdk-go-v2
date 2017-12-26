@@ -2948,6 +2948,22 @@ func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddTagsToResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Represents the input of an AuthorizeCacheSecurityGroupIngress operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngressMessage
 type AuthorizeCacheSecurityGroupIngressInput struct {
@@ -3022,6 +3038,27 @@ func (s *AuthorizeCacheSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v s
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeCacheSecurityGroupIngressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngressResult
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -3059,6 +3096,17 @@ func (s *AuthorizeCacheSecurityGroupIngressOutput) SetCacheSecurityGroup(v *Cach
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AuthorizeCacheSecurityGroupIngressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroup != nil {
+		v := s.CacheSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes an Availability Zone in which the cache cluster is launched.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AvailabilityZone
 type AvailabilityZone struct {
@@ -3082,6 +3130,17 @@ func (s AvailabilityZone) GoString() string {
 func (s *AvailabilityZone) SetName(v string) *AvailabilityZone {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AvailabilityZone) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains all of the attributes of a specific cache cluster.
@@ -3381,6 +3440,130 @@ func (s *CacheCluster) SetSnapshotWindow(v string) *CacheCluster {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheCluster) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.CacheClusterCreateTime != nil {
+		v := *s.CacheClusterCreateTime
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheClusterStatus != nil {
+		v := *s.CacheClusterStatus
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheNodes) > 0 {
+		v := s.CacheNodes
+
+		e.SetList(protocol.BodyTarget, "CacheNodes", encodeCacheNodeList(v), protocol.Metadata{ListLocationName: "CacheNode"})
+	}
+	if s.CacheParameterGroup != nil {
+		v := s.CacheParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheParameterGroup", v, protocol.Metadata{})
+	}
+	if len(s.CacheSecurityGroups) > 0 {
+		v := s.CacheSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "CacheSecurityGroups", encodeCacheSecurityGroupMembershipList(v), protocol.Metadata{ListLocationName: "CacheSecurityGroup"})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClientDownloadLandingPage != nil {
+		v := *s.ClientDownloadLandingPage
+
+		e.SetValue(protocol.BodyTarget, "ClientDownloadLandingPage", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ConfigurationEndpoint != nil {
+		v := s.ConfigurationEndpoint
+
+		e.SetFields(protocol.BodyTarget, "ConfigurationEndpoint", v, protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationConfiguration != nil {
+		v := s.NotificationConfiguration
+
+		e.SetFields(protocol.BodyTarget, "NotificationConfiguration", v, protocol.Metadata{})
+	}
+	if s.NumCacheNodes != nil {
+		v := *s.NumCacheNodes
+
+		e.SetValue(protocol.BodyTarget, "NumCacheNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PendingModifiedValues != nil {
+		v := s.PendingModifiedValues
+
+		e.SetFields(protocol.BodyTarget, "PendingModifiedValues", v, protocol.Metadata{})
+	}
+	if s.PreferredAvailabilityZone != nil {
+		v := *s.PreferredAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "PreferredAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", encodeSecurityGroupMembershipList(v), protocol.Metadata{})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheClusterList(vs []CacheCluster) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Provides all of the details about a particular cache engine version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheEngineVersion
 type CacheEngineVersion struct {
@@ -3442,6 +3625,45 @@ func (s *CacheEngineVersion) SetEngine(v string) *CacheEngineVersion {
 func (s *CacheEngineVersion) SetEngineVersion(v string) *CacheEngineVersion {
 	s.EngineVersion = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheEngineVersion) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheEngineDescription != nil {
+		v := *s.CacheEngineDescription
+
+		e.SetValue(protocol.BodyTarget, "CacheEngineDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheEngineVersionDescription != nil {
+		v := *s.CacheEngineVersionDescription
+
+		e.SetValue(protocol.BodyTarget, "CacheEngineVersionDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupFamily != nil {
+		v := *s.CacheParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheEngineVersionList(vs []CacheEngineVersion) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents an individual cache node within a cache cluster. Each cache node
@@ -3566,6 +3788,55 @@ func (s *CacheNode) SetSourceCacheNodeId(v string) *CacheNode {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheNode) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeCreateTime != nil {
+		v := *s.CacheNodeCreateTime
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.CacheNodeId != nil {
+		v := *s.CacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeStatus != nil {
+		v := *s.CacheNodeStatus
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CustomerAvailabilityZone != nil {
+		v := *s.CustomerAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "CustomerAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Endpoint != nil {
+		v := s.Endpoint
+
+		e.SetFields(protocol.BodyTarget, "Endpoint", v, protocol.Metadata{})
+	}
+	if s.ParameterGroupStatus != nil {
+		v := *s.ParameterGroupStatus
+
+		e.SetValue(protocol.BodyTarget, "ParameterGroupStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceCacheNodeId != nil {
+		v := *s.SourceCacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "SourceCacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheNodeList(vs []CacheNode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A parameter that has a different value for each cache node type it is applied
 // to. For example, in a Redis cache cluster, a cache.m1.large cache node type
 // would have a larger maxmemory value than a cache.m1.small type.
@@ -3670,6 +3941,65 @@ func (s *CacheNodeTypeSpecificParameter) SetSource(v string) *CacheNodeTypeSpeci
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheNodeTypeSpecificParameter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedValues != nil {
+		v := *s.AllowedValues
+
+		e.SetValue(protocol.BodyTarget, "AllowedValues", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheNodeTypeSpecificValues) > 0 {
+		v := s.CacheNodeTypeSpecificValues
+
+		e.SetList(protocol.BodyTarget, "CacheNodeTypeSpecificValues", encodeCacheNodeTypeSpecificValueList(v), protocol.Metadata{ListLocationName: "CacheNodeTypeSpecificValue"})
+	}
+	if len(s.ChangeType) > 0 {
+		v := s.ChangeType
+
+		e.SetValue(protocol.BodyTarget, "ChangeType", v, protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsModifiable != nil {
+		v := *s.IsModifiable
+
+		e.SetValue(protocol.BodyTarget, "IsModifiable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MinimumEngineVersion != nil {
+		v := *s.MinimumEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MinimumEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterName != nil {
+		v := *s.ParameterName
+
+		e.SetValue(protocol.BodyTarget, "ParameterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheNodeTypeSpecificParameterList(vs []CacheNodeTypeSpecificParameter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A value that applies only to a certain cache node type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeTypeSpecificValue
 type CacheNodeTypeSpecificValue struct {
@@ -3702,6 +4032,30 @@ func (s *CacheNodeTypeSpecificValue) SetCacheNodeType(v string) *CacheNodeTypeSp
 func (s *CacheNodeTypeSpecificValue) SetValue(v string) *CacheNodeTypeSpecificValue {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheNodeTypeSpecificValue) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheNodeTypeSpecificValueList(vs []CacheNodeTypeSpecificValue) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents the output of a CreateCacheParameterGroup operation.
@@ -3750,6 +4104,35 @@ func (s *CacheParameterGroup) SetDescription(v string) *CacheParameterGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheParameterGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupFamily != nil {
+		v := *s.CacheParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheParameterGroupList(vs []CacheParameterGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Status of the cache parameter group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupStatus
 type CacheParameterGroupStatus struct {
@@ -3792,6 +4175,27 @@ func (s *CacheParameterGroupStatus) SetCacheParameterGroupName(v string) *CacheP
 func (s *CacheParameterGroupStatus) SetParameterApplyStatus(v string) *CacheParameterGroupStatus {
 	s.ParameterApplyStatus = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheParameterGroupStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheNodeIdsToReboot) > 0 {
+		v := s.CacheNodeIdsToReboot
+
+		e.SetList(protocol.BodyTarget, "CacheNodeIdsToReboot", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheNodeId"})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterApplyStatus != nil {
+		v := *s.ParameterApplyStatus
+
+		e.SetValue(protocol.BodyTarget, "ParameterApplyStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the output of one of the following operations:
@@ -3853,6 +4257,40 @@ func (s *CacheSecurityGroup) SetOwnerId(v string) *CacheSecurityGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheSecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.EC2SecurityGroups) > 0 {
+		v := s.EC2SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "EC2SecurityGroups", encodeEC2SecurityGroupList(v), protocol.Metadata{ListLocationName: "EC2SecurityGroup"})
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheSecurityGroupList(vs []CacheSecurityGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents a cache cluster's status within a particular cache security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMembership
 type CacheSecurityGroupMembership struct {
@@ -3887,6 +4325,30 @@ func (s *CacheSecurityGroupMembership) SetCacheSecurityGroupName(v string) *Cach
 func (s *CacheSecurityGroupMembership) SetStatus(v string) *CacheSecurityGroupMembership {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheSecurityGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheSecurityGroupMembershipList(vs []CacheSecurityGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents the output of one of the following operations:
@@ -3944,6 +4406,40 @@ func (s *CacheSubnetGroup) SetSubnets(v []Subnet) *CacheSubnetGroup {
 func (s *CacheSubnetGroup) SetVpcId(v string) *CacheSubnetGroup {
 	s.VpcId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CacheSubnetGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroupDescription != nil {
+		v := *s.CacheSubnetGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		e.SetList(protocol.BodyTarget, "Subnets", encodeSubnetList(v), protocol.Metadata{ListLocationName: "Subnet"})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCacheSubnetGroupList(vs []CacheSubnetGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents the input of a CopySnapshotMessage operation.
@@ -4022,6 +4518,27 @@ func (s *CopySnapshotInput) SetTargetSnapshotName(v string) *CopySnapshotInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopySnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceSnapshotName != nil {
+		v := *s.SourceSnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SourceSnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetBucket != nil {
+		v := *s.TargetBucket
+
+		e.SetValue(protocol.BodyTarget, "TargetBucket", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TargetSnapshotName != nil {
+		v := *s.TargetSnapshotName
+
+		e.SetValue(protocol.BodyTarget, "TargetSnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotResult
 type CopySnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -4052,6 +4569,17 @@ func (s CopySnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CopySnapshotOutput) SetSnapshot(v *Snapshot) *CopySnapshotOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CopySnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a CreateCacheCluster operation.
@@ -4477,6 +5005,127 @@ func (s *CreateCacheClusterInput) SetTags(v []Tag) *CreateCacheClusterInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AZMode) > 0 {
+		v := s.AZMode
+
+		e.SetValue(protocol.BodyTarget, "AZMode", v, protocol.Metadata{})
+	}
+	if s.AuthToken != nil {
+		v := *s.AuthToken
+
+		e.SetValue(protocol.BodyTarget, "AuthToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheSecurityGroupNames) > 0 {
+		v := s.CacheSecurityGroupNames
+
+		e.SetList(protocol.BodyTarget, "CacheSecurityGroupNames", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheSecurityGroupName"})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTopicArn != nil {
+		v := *s.NotificationTopicArn
+
+		e.SetValue(protocol.BodyTarget, "NotificationTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumCacheNodes != nil {
+		v := *s.NumCacheNodes
+
+		e.SetValue(protocol.BodyTarget, "NumCacheNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredAvailabilityZone != nil {
+		v := *s.PreferredAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "PreferredAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PreferredAvailabilityZones) > 0 {
+		v := s.PreferredAvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "PreferredAvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "PreferredAvailabilityZone"})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroupIds) > 0 {
+		v := s.SecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "SecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SecurityGroupId"})
+	}
+	if len(s.SnapshotArns) > 0 {
+		v := s.SnapshotArns
+
+		e.SetList(protocol.BodyTarget, "SnapshotArns", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SnapshotArn"})
+	}
+	if s.SnapshotName != nil {
+		v := *s.SnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterResult
 type CreateCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -4506,6 +5155,17 @@ func (s CreateCacheClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateCacheClusterOutput) SetCacheCluster(v *CacheCluster) *CreateCacheClusterOutput {
 	s.CacheCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheCluster != nil {
+		v := s.CacheCluster
+
+		e.SetFields(protocol.BodyTarget, "CacheCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a CreateCacheParameterGroup operation.
@@ -4582,6 +5242,27 @@ func (s *CreateCacheParameterGroupInput) SetDescription(v string) *CreateCachePa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupFamily != nil {
+		v := *s.CacheParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroupResult
 type CreateCacheParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -4611,6 +5292,17 @@ func (s CreateCacheParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateCacheParameterGroupOutput) SetCacheParameterGroup(v *CacheParameterGroup) *CreateCacheParameterGroupOutput {
 	s.CacheParameterGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroup != nil {
+		v := s.CacheParameterGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheParameterGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a CreateCacheSecurityGroup operation.
@@ -4675,6 +5367,22 @@ func (s *CreateCacheSecurityGroupInput) SetDescription(v string) *CreateCacheSec
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroupResult
 type CreateCacheSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -4710,6 +5418,17 @@ func (s CreateCacheSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateCacheSecurityGroupOutput) SetCacheSecurityGroup(v *CacheSecurityGroup) *CreateCacheSecurityGroupOutput {
 	s.CacheSecurityGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroup != nil {
+		v := s.CacheSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a CreateCacheSubnetGroup operation.
@@ -4787,6 +5506,27 @@ func (s *CreateCacheSubnetGroupInput) SetSubnetIds(v []string) *CreateCacheSubne
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroupDescription != nil {
+		v := *s.CacheSubnetGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		e.SetList(protocol.BodyTarget, "SubnetIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SubnetIdentifier"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroupResult
 type CreateCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -4820,6 +5560,17 @@ func (s CreateCacheSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateCacheSubnetGroupOutput) SetCacheSubnetGroup(v *CacheSubnetGroup) *CreateCacheSubnetGroupOutput {
 	s.CacheSubnetGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateCacheSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroup != nil {
+		v := s.CacheSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheSubnetGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a CreateReplicationGroup operation.
@@ -5291,6 +6042,142 @@ func (s *CreateReplicationGroupInput) SetTags(v []Tag) *CreateReplicationGroupIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReplicationGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AuthToken != nil {
+		v := *s.AuthToken
+
+		e.SetValue(protocol.BodyTarget, "AuthToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutomaticFailoverEnabled != nil {
+		v := *s.AutomaticFailoverEnabled
+
+		e.SetValue(protocol.BodyTarget, "AutomaticFailoverEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheSecurityGroupNames) > 0 {
+		v := s.CacheSecurityGroupNames
+
+		e.SetList(protocol.BodyTarget, "CacheSecurityGroupNames", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheSecurityGroupName"})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NodeGroupConfiguration) > 0 {
+		v := s.NodeGroupConfiguration
+
+		e.SetList(protocol.BodyTarget, "NodeGroupConfiguration", encodeNodeGroupConfigurationList(v), protocol.Metadata{ListLocationName: "NodeGroupConfiguration"})
+	}
+	if s.NotificationTopicArn != nil {
+		v := *s.NotificationTopicArn
+
+		e.SetValue(protocol.BodyTarget, "NotificationTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumCacheClusters != nil {
+		v := *s.NumCacheClusters
+
+		e.SetValue(protocol.BodyTarget, "NumCacheClusters", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NumNodeGroups != nil {
+		v := *s.NumNodeGroups
+
+		e.SetValue(protocol.BodyTarget, "NumNodeGroups", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.PreferredCacheClusterAZs) > 0 {
+		v := s.PreferredCacheClusterAZs
+
+		e.SetList(protocol.BodyTarget, "PreferredCacheClusterAZs", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PrimaryClusterId != nil {
+		v := *s.PrimaryClusterId
+
+		e.SetValue(protocol.BodyTarget, "PrimaryClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicasPerNodeGroup != nil {
+		v := *s.ReplicasPerNodeGroup
+
+		e.SetValue(protocol.BodyTarget, "ReplicasPerNodeGroup", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupDescription != nil {
+		v := *s.ReplicationGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroupIds) > 0 {
+		v := s.SecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "SecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SecurityGroupId"})
+	}
+	if len(s.SnapshotArns) > 0 {
+		v := s.SnapshotArns
+
+		e.SetList(protocol.BodyTarget, "SnapshotArns", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SnapshotArn"})
+	}
+	if s.SnapshotName != nil {
+		v := *s.SnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupResult
 type CreateReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5320,6 +6207,17 @@ func (s CreateReplicationGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateReplicationGroupOutput) SetReplicationGroup(v *ReplicationGroup) *CreateReplicationGroupOutput {
 	s.ReplicationGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReplicationGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReplicationGroup != nil {
+		v := s.ReplicationGroup
+
+		e.SetFields(protocol.BodyTarget, "ReplicationGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a CreateSnapshot operation.
@@ -5383,6 +6281,27 @@ func (s *CreateSnapshotInput) SetSnapshotName(v string) *CreateSnapshotInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotName != nil {
+		v := *s.SnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotResult
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -5413,6 +6332,17 @@ func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateSnapshotOutput) SetSnapshot(v *Snapshot) *CreateSnapshotOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DeleteCacheCluster operation.
@@ -5468,6 +6398,22 @@ func (s *DeleteCacheClusterInput) SetFinalSnapshotIdentifier(v string) *DeleteCa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FinalSnapshotIdentifier != nil {
+		v := *s.FinalSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "FinalSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheClusterResult
 type DeleteCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -5497,6 +6443,17 @@ func (s DeleteCacheClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteCacheClusterOutput) SetCacheCluster(v *CacheCluster) *DeleteCacheClusterOutput {
 	s.CacheCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheCluster != nil {
+		v := s.CacheCluster
+
+		e.SetFields(protocol.BodyTarget, "CacheCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DeleteCacheParameterGroup operation.
@@ -5543,6 +6500,17 @@ func (s *DeleteCacheParameterGroupInput) SetCacheParameterGroupName(v string) *D
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroupOutput
 type DeleteCacheParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5563,6 +6531,12 @@ func (s DeleteCacheParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCacheParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents the input of a DeleteCacheSecurityGroup operation.
@@ -5608,6 +6582,17 @@ func (s *DeleteCacheSecurityGroupInput) SetCacheSecurityGroupName(v string) *Del
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroupOutput
 type DeleteCacheSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5628,6 +6613,12 @@ func (s DeleteCacheSecurityGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCacheSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents the input of a DeleteCacheSubnetGroup operation.
@@ -5673,6 +6664,17 @@ func (s *DeleteCacheSubnetGroupInput) SetCacheSubnetGroupName(v string) *DeleteC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroupOutput
 type DeleteCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5693,6 +6695,12 @@ func (s DeleteCacheSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCacheSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteCacheSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents the input of a DeleteReplicationGroup operation.
@@ -5759,6 +6767,27 @@ func (s *DeleteReplicationGroupInput) SetRetainPrimaryCluster(v bool) *DeleteRep
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReplicationGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FinalSnapshotIdentifier != nil {
+		v := *s.FinalSnapshotIdentifier
+
+		e.SetValue(protocol.BodyTarget, "FinalSnapshotIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RetainPrimaryCluster != nil {
+		v := *s.RetainPrimaryCluster
+
+		e.SetValue(protocol.BodyTarget, "RetainPrimaryCluster", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroupResult
 type DeleteReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5788,6 +6817,17 @@ func (s DeleteReplicationGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteReplicationGroupOutput) SetReplicationGroup(v *ReplicationGroup) *DeleteReplicationGroupOutput {
 	s.ReplicationGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReplicationGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReplicationGroup != nil {
+		v := s.ReplicationGroup
+
+		e.SetFields(protocol.BodyTarget, "ReplicationGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DeleteSnapshot operation.
@@ -5831,6 +6871,17 @@ func (s *DeleteSnapshotInput) SetSnapshotName(v string) *DeleteSnapshotInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSnapshotInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SnapshotName != nil {
+		v := *s.SnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshotResult
 type DeleteSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -5861,6 +6912,17 @@ func (s DeleteSnapshotOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteSnapshotOutput) SetSnapshot(v *Snapshot) *DeleteSnapshotOutput {
 	s.Snapshot = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSnapshotOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Snapshot != nil {
+		v := s.Snapshot
+
+		e.SetFields(protocol.BodyTarget, "Snapshot", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeCacheClusters operation.
@@ -5937,6 +6999,37 @@ func (s *DescribeCacheClustersInput) SetShowCacheNodeInfo(v bool) *DescribeCache
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheClustersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ShowCacheClustersNotInReplicationGroups != nil {
+		v := *s.ShowCacheClustersNotInReplicationGroups
+
+		e.SetValue(protocol.BodyTarget, "ShowCacheClustersNotInReplicationGroups", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ShowCacheNodeInfo != nil {
+		v := *s.ShowCacheNodeInfo
+
+		e.SetValue(protocol.BodyTarget, "ShowCacheNodeInfo", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeCacheClusters operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheClusterMessage
 type DescribeCacheClustersOutput struct {
@@ -5977,6 +7070,22 @@ func (s *DescribeCacheClustersOutput) SetCacheClusters(v []CacheCluster) *Descri
 func (s *DescribeCacheClustersOutput) SetMarker(v string) *DescribeCacheClustersOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheClustersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheClusters) > 0 {
+		v := s.CacheClusters
+
+		e.SetList(protocol.BodyTarget, "CacheClusters", encodeCacheClusterList(v), protocol.Metadata{ListLocationName: "CacheCluster"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeCacheEngineVersions operation.
@@ -6070,6 +7179,42 @@ func (s *DescribeCacheEngineVersionsInput) SetMaxRecords(v int64) *DescribeCache
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheEngineVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupFamily != nil {
+		v := *s.CacheParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultOnly != nil {
+		v := *s.DefaultOnly
+
+		e.SetValue(protocol.BodyTarget, "DefaultOnly", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeCacheEngineVersions operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheEngineVersionMessage
 type DescribeCacheEngineVersionsOutput struct {
@@ -6110,6 +7255,22 @@ func (s *DescribeCacheEngineVersionsOutput) SetCacheEngineVersions(v []CacheEngi
 func (s *DescribeCacheEngineVersionsOutput) SetMarker(v string) *DescribeCacheEngineVersionsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheEngineVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheEngineVersions) > 0 {
+		v := s.CacheEngineVersions
+
+		e.SetList(protocol.BodyTarget, "CacheEngineVersions", encodeCacheEngineVersionList(v), protocol.Metadata{ListLocationName: "CacheEngineVersion"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeCacheParameterGroups operation.
@@ -6163,6 +7324,27 @@ func (s *DescribeCacheParameterGroupsInput) SetMaxRecords(v int64) *DescribeCach
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheParameterGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeCacheParameterGroups operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupsMessage
 type DescribeCacheParameterGroupsOutput struct {
@@ -6203,6 +7385,22 @@ func (s *DescribeCacheParameterGroupsOutput) SetCacheParameterGroups(v []CachePa
 func (s *DescribeCacheParameterGroupsOutput) SetMarker(v string) *DescribeCacheParameterGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheParameterGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheParameterGroups) > 0 {
+		v := s.CacheParameterGroups
+
+		e.SetList(protocol.BodyTarget, "CacheParameterGroups", encodeCacheParameterGroupList(v), protocol.Metadata{ListLocationName: "CacheParameterGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeCacheParameters operation.
@@ -6283,6 +7481,32 @@ func (s *DescribeCacheParametersInput) SetSource(v string) *DescribeCacheParamet
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeCacheParameters operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupDetails
 type DescribeCacheParametersOutput struct {
@@ -6332,6 +7556,27 @@ func (s *DescribeCacheParametersOutput) SetMarker(v string) *DescribeCacheParame
 func (s *DescribeCacheParametersOutput) SetParameters(v []Parameter) *DescribeCacheParametersOutput {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheNodeTypeSpecificParameters) > 0 {
+		v := s.CacheNodeTypeSpecificParameters
+
+		e.SetList(protocol.BodyTarget, "CacheNodeTypeSpecificParameters", encodeCacheNodeTypeSpecificParameterList(v), protocol.Metadata{ListLocationName: "CacheNodeTypeSpecificParameter"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeCacheSecurityGroups operation.
@@ -6385,6 +7630,27 @@ func (s *DescribeCacheSecurityGroupsInput) SetMaxRecords(v int64) *DescribeCache
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeCacheSecurityGroups operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMessage
 type DescribeCacheSecurityGroupsOutput struct {
@@ -6425,6 +7691,22 @@ func (s *DescribeCacheSecurityGroupsOutput) SetCacheSecurityGroups(v []CacheSecu
 func (s *DescribeCacheSecurityGroupsOutput) SetMarker(v string) *DescribeCacheSecurityGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheSecurityGroups) > 0 {
+		v := s.CacheSecurityGroups
+
+		e.SetList(protocol.BodyTarget, "CacheSecurityGroups", encodeCacheSecurityGroupList(v), protocol.Metadata{ListLocationName: "CacheSecurityGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeCacheSubnetGroups operation.
@@ -6478,6 +7760,27 @@ func (s *DescribeCacheSubnetGroupsInput) SetMaxRecords(v int64) *DescribeCacheSu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheSubnetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeCacheSubnetGroups operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroupMessage
 type DescribeCacheSubnetGroupsOutput struct {
@@ -6518,6 +7821,22 @@ func (s *DescribeCacheSubnetGroupsOutput) SetCacheSubnetGroups(v []CacheSubnetGr
 func (s *DescribeCacheSubnetGroupsOutput) SetMarker(v string) *DescribeCacheSubnetGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeCacheSubnetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheSubnetGroups) > 0 {
+		v := s.CacheSubnetGroups
+
+		e.SetList(protocol.BodyTarget, "CacheSubnetGroups", encodeCacheSubnetGroupList(v), protocol.Metadata{ListLocationName: "CacheSubnetGroup"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeEngineDefaultParameters operation.
@@ -6589,6 +7908,27 @@ func (s *DescribeEngineDefaultParametersInput) SetMaxRecords(v int64) *DescribeE
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEngineDefaultParametersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupFamily != nil {
+		v := *s.CacheParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParametersResult
 type DescribeEngineDefaultParametersOutput struct {
 	_ struct{} `type:"structure"`
@@ -6618,6 +7958,17 @@ func (s DescribeEngineDefaultParametersOutput) SDKResponseMetadata() aws.Respons
 func (s *DescribeEngineDefaultParametersOutput) SetEngineDefaults(v *EngineDefaults) *DescribeEngineDefaultParametersOutput {
 	s.EngineDefaults = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEngineDefaultParametersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EngineDefaults != nil {
+		v := s.EngineDefaults
+
+		e.SetFields(protocol.BodyTarget, "EngineDefaults", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeEvents operation.
@@ -6715,6 +8066,47 @@ func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeEvents operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EventsMessage
 type DescribeEventsOutput struct {
@@ -6755,6 +8147,22 @@ func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
 func (s *DescribeEventsOutput) SetMarker(v string) *DescribeEventsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		e.SetList(protocol.BodyTarget, "Events", encodeEventList(v), protocol.Metadata{ListLocationName: "Event"})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeReplicationGroups operation.
@@ -6812,6 +8220,27 @@ func (s *DescribeReplicationGroupsInput) SetReplicationGroupId(v string) *Descri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReplicationGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeReplicationGroups operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupMessage
 type DescribeReplicationGroupsOutput struct {
@@ -6852,6 +8281,22 @@ func (s *DescribeReplicationGroupsOutput) SetMarker(v string) *DescribeReplicati
 func (s *DescribeReplicationGroupsOutput) SetReplicationGroups(v []ReplicationGroup) *DescribeReplicationGroupsOutput {
 	s.ReplicationGroups = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReplicationGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReplicationGroups) > 0 {
+		v := s.ReplicationGroups
+
+		e.SetList(protocol.BodyTarget, "ReplicationGroups", encodeReplicationGroupList(v), protocol.Metadata{ListLocationName: "ReplicationGroup"})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeReservedCacheNodes operation.
@@ -6997,6 +8442,52 @@ func (s *DescribeReservedCacheNodesInput) SetReservedCacheNodesOfferingId(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedCacheNodesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedCacheNodeId != nil {
+		v := *s.ReservedCacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedCacheNodesOfferingId != nil {
+		v := *s.ReservedCacheNodesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the input of a DescribeReservedCacheNodesOfferings operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesOfferingsMessage
 type DescribeReservedCacheNodesOfferingsInput struct {
@@ -7132,6 +8623,47 @@ func (s *DescribeReservedCacheNodesOfferingsInput) SetReservedCacheNodesOffering
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedCacheNodesOfferingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedCacheNodesOfferingId != nil {
+		v := *s.ReservedCacheNodesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeReservedCacheNodesOfferings operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodesOfferingMessage
 type DescribeReservedCacheNodesOfferingsOutput struct {
@@ -7174,6 +8706,22 @@ func (s *DescribeReservedCacheNodesOfferingsOutput) SetReservedCacheNodesOfferin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedCacheNodesOfferingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReservedCacheNodesOfferings) > 0 {
+		v := s.ReservedCacheNodesOfferings
+
+		e.SetList(protocol.BodyTarget, "ReservedCacheNodesOfferings", encodeReservedCacheNodesOfferingList(v), protocol.Metadata{ListLocationName: "ReservedCacheNodesOffering"})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeReservedCacheNodes operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodeMessage
 type DescribeReservedCacheNodesOutput struct {
@@ -7214,6 +8762,22 @@ func (s *DescribeReservedCacheNodesOutput) SetMarker(v string) *DescribeReserved
 func (s *DescribeReservedCacheNodesOutput) SetReservedCacheNodes(v []ReservedCacheNode) *DescribeReservedCacheNodesOutput {
 	s.ReservedCacheNodes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReservedCacheNodesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReservedCacheNodes) > 0 {
+		v := s.ReservedCacheNodes
+
+		e.SetList(protocol.BodyTarget, "ReservedCacheNodes", encodeReservedCacheNodeList(v), protocol.Metadata{ListLocationName: "ReservedCacheNode"})
+	}
+	return nil
 }
 
 // Represents the input of a DescribeSnapshotsMessage operation.
@@ -7310,6 +8874,47 @@ func (s *DescribeSnapshotsInput) SetSnapshotSource(v string) *DescribeSnapshotsI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSnapshotsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ShowNodeGroupConfig != nil {
+		v := *s.ShowNodeGroupConfig
+
+		e.SetValue(protocol.BodyTarget, "ShowNodeGroupConfig", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotName != nil {
+		v := *s.SnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotSource != nil {
+		v := *s.SnapshotSource
+
+		e.SetValue(protocol.BodyTarget, "SnapshotSource", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of a DescribeSnapshots operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshotsListMessage
 type DescribeSnapshotsOutput struct {
@@ -7352,6 +8957,22 @@ func (s *DescribeSnapshotsOutput) SetMarker(v string) *DescribeSnapshotsOutput {
 func (s *DescribeSnapshotsOutput) SetSnapshots(v []Snapshot) *DescribeSnapshotsOutput {
 	s.Snapshots = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeSnapshotsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Snapshots) > 0 {
+		v := s.Snapshots
+
+		e.SetList(protocol.BodyTarget, "Snapshots", encodeSnapshotList(v), protocol.Metadata{ListLocationName: "Snapshot"})
+	}
+	return nil
 }
 
 // Provides ownership and status information for an Amazon EC2 security group.
@@ -7397,6 +9018,35 @@ func (s *EC2SecurityGroup) SetStatus(v string) *EC2SecurityGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EC2SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEC2SecurityGroupList(vs []EC2SecurityGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents the information required for client programs to connect to a cache
 // node.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Endpoint
@@ -7430,6 +9080,22 @@ func (s *Endpoint) SetAddress(v string) *Endpoint {
 func (s *Endpoint) SetPort(v int64) *Endpoint {
 	s.Port = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Endpoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Address != nil {
+		v := *s.Address
+
+		e.SetValue(protocol.BodyTarget, "Address", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the output of a DescribeEngineDefaultParameters operation.
@@ -7486,6 +9152,32 @@ func (s *EngineDefaults) SetMarker(v string) *EngineDefaults {
 func (s *EngineDefaults) SetParameters(v []Parameter) *EngineDefaults {
 	s.Parameters = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EngineDefaults) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheNodeTypeSpecificParameters) > 0 {
+		v := s.CacheNodeTypeSpecificParameters
+
+		e.SetList(protocol.BodyTarget, "CacheNodeTypeSpecificParameters", encodeCacheNodeTypeSpecificParameterList(v), protocol.Metadata{ListLocationName: "CacheNodeTypeSpecificParameter"})
+	}
+	if s.CacheParameterGroupFamily != nil {
+		v := *s.CacheParameterGroupFamily
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupFamily", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{ListLocationName: "Parameter"})
+	}
+	return nil
 }
 
 // Represents a single occurrence of something interesting within the system.
@@ -7545,6 +9237,40 @@ func (s *Event) SetSourceType(v SourceType) *Event {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Event) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Date != nil {
+		v := *s.Date
+
+		e.SetValue(protocol.BodyTarget, "Date", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceIdentifier != nil {
+		v := *s.SourceIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SourceIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventList(vs []Event) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The input parameters for the ListAllowedNodeTypeModifications operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModificationsMessage
 type ListAllowedNodeTypeModificationsInput struct {
@@ -7589,6 +9315,22 @@ func (s *ListAllowedNodeTypeModificationsInput) SetReplicationGroupId(v string) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAllowedNodeTypeModificationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the allowed node types you can use to modify your cache cluster
 // or replication group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage
@@ -7625,6 +9367,17 @@ func (s ListAllowedNodeTypeModificationsOutput) SDKResponseMetadata() aws.Respon
 func (s *ListAllowedNodeTypeModificationsOutput) SetScaleUpModifications(v []string) *ListAllowedNodeTypeModificationsOutput {
 	s.ScaleUpModifications = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAllowedNodeTypeModificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ScaleUpModifications) > 0 {
+		v := s.ScaleUpModifications
+
+		e.SetList(protocol.BodyTarget, "ScaleUpModifications", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input parameters for the ListTagsForResource operation.
@@ -7671,6 +9424,17 @@ func (s *ListTagsForResourceInput) Validate() error {
 func (s *ListTagsForResourceInput) SetResourceName(v string) *ListTagsForResourceInput {
 	s.ResourceName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a ModifyCacheCluster operation.
@@ -8043,6 +9807,97 @@ func (s *ModifyCacheClusterInput) SetSnapshotWindow(v string) *ModifyCacheCluste
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyCacheClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AZMode) > 0 {
+		v := s.AZMode
+
+		e.SetValue(protocol.BodyTarget, "AZMode", v, protocol.Metadata{})
+	}
+	if s.ApplyImmediately != nil {
+		v := *s.ApplyImmediately
+
+		e.SetValue(protocol.BodyTarget, "ApplyImmediately", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheNodeIdsToRemove) > 0 {
+		v := s.CacheNodeIdsToRemove
+
+		e.SetList(protocol.BodyTarget, "CacheNodeIdsToRemove", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheNodeId"})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheSecurityGroupNames) > 0 {
+		v := s.CacheSecurityGroupNames
+
+		e.SetList(protocol.BodyTarget, "CacheSecurityGroupNames", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheSecurityGroupName"})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NewAvailabilityZones) > 0 {
+		v := s.NewAvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "NewAvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "PreferredAvailabilityZone"})
+	}
+	if s.NotificationTopicArn != nil {
+		v := *s.NotificationTopicArn
+
+		e.SetValue(protocol.BodyTarget, "NotificationTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTopicStatus != nil {
+		v := *s.NotificationTopicStatus
+
+		e.SetValue(protocol.BodyTarget, "NotificationTopicStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumCacheNodes != nil {
+		v := *s.NumCacheNodes
+
+		e.SetValue(protocol.BodyTarget, "NumCacheNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroupIds) > 0 {
+		v := s.SecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "SecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SecurityGroupId"})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterResult
 type ModifyCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -8072,6 +9927,17 @@ func (s ModifyCacheClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyCacheClusterOutput) SetCacheCluster(v *CacheCluster) *ModifyCacheClusterOutput {
 	s.CacheCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyCacheClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheCluster != nil {
+		v := s.CacheCluster
+
+		e.SetFields(protocol.BodyTarget, "CacheCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a ModifyCacheParameterGroup operation.
@@ -8130,6 +9996,22 @@ func (s *ModifyCacheParameterGroupInput) SetCacheParameterGroupName(v string) *M
 func (s *ModifyCacheParameterGroupInput) SetParameterNameValues(v []ParameterNameValue) *ModifyCacheParameterGroupInput {
 	s.ParameterNameValues = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyCacheParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ParameterNameValues) > 0 {
+		v := s.ParameterNameValues
+
+		e.SetList(protocol.BodyTarget, "ParameterNameValues", encodeParameterNameValueList(v), protocol.Metadata{ListLocationName: "ParameterNameValue"})
+	}
+	return nil
 }
 
 // Represents the input of a ModifyCacheSubnetGroup operation.
@@ -8196,6 +10078,27 @@ func (s *ModifyCacheSubnetGroupInput) SetSubnetIds(v []string) *ModifyCacheSubne
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyCacheSubnetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroupDescription != nil {
+		v := *s.CacheSubnetGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		e.SetList(protocol.BodyTarget, "SubnetIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SubnetIdentifier"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroupResult
 type ModifyCacheSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -8229,6 +10132,17 @@ func (s ModifyCacheSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyCacheSubnetGroupOutput) SetCacheSubnetGroup(v *CacheSubnetGroup) *ModifyCacheSubnetGroupOutput {
 	s.CacheSubnetGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyCacheSubnetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSubnetGroup != nil {
+		v := s.CacheSubnetGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheSubnetGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a ModifyReplicationGroups operation.
@@ -8510,6 +10424,102 @@ func (s *ModifyReplicationGroupInput) SetSnapshottingClusterId(v string) *Modify
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyReplicationGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplyImmediately != nil {
+		v := *s.ApplyImmediately
+
+		e.SetValue(protocol.BodyTarget, "ApplyImmediately", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.AutomaticFailoverEnabled != nil {
+		v := *s.AutomaticFailoverEnabled
+
+		e.SetValue(protocol.BodyTarget, "AutomaticFailoverEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheSecurityGroupNames) > 0 {
+		v := s.CacheSecurityGroupNames
+
+		e.SetList(protocol.BodyTarget, "CacheSecurityGroupNames", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheSecurityGroupName"})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeGroupId != nil {
+		v := *s.NodeGroupId
+
+		e.SetValue(protocol.BodyTarget, "NodeGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTopicArn != nil {
+		v := *s.NotificationTopicArn
+
+		e.SetValue(protocol.BodyTarget, "NotificationTopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NotificationTopicStatus != nil {
+		v := *s.NotificationTopicStatus
+
+		e.SetValue(protocol.BodyTarget, "NotificationTopicStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PrimaryClusterId != nil {
+		v := *s.PrimaryClusterId
+
+		e.SetValue(protocol.BodyTarget, "PrimaryClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupDescription != nil {
+		v := *s.ReplicationGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SecurityGroupIds) > 0 {
+		v := s.SecurityGroupIds
+
+		e.SetList(protocol.BodyTarget, "SecurityGroupIds", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "SecurityGroupId"})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshottingClusterId != nil {
+		v := *s.SnapshottingClusterId
+
+		e.SetValue(protocol.BodyTarget, "SnapshottingClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupResult
 type ModifyReplicationGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -8539,6 +10549,17 @@ func (s ModifyReplicationGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ModifyReplicationGroupOutput) SetReplicationGroup(v *ReplicationGroup) *ModifyReplicationGroupOutput {
 	s.ReplicationGroup = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyReplicationGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReplicationGroup != nil {
+		v := s.ReplicationGroup
+
+		e.SetFields(protocol.BodyTarget, "ReplicationGroup", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a collection of cache nodes in a replication group. One node in
@@ -8608,6 +10629,45 @@ func (s *NodeGroup) SetStatus(v string) *NodeGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *NodeGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NodeGroupId != nil {
+		v := *s.NodeGroupId
+
+		e.SetValue(protocol.BodyTarget, "NodeGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NodeGroupMembers) > 0 {
+		v := s.NodeGroupMembers
+
+		e.SetList(protocol.BodyTarget, "NodeGroupMembers", encodeNodeGroupMemberList(v), protocol.Metadata{ListLocationName: "NodeGroupMember"})
+	}
+	if s.PrimaryEndpoint != nil {
+		v := s.PrimaryEndpoint
+
+		e.SetFields(protocol.BodyTarget, "PrimaryEndpoint", v, protocol.Metadata{})
+	}
+	if s.Slots != nil {
+		v := *s.Slots
+
+		e.SetValue(protocol.BodyTarget, "Slots", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeNodeGroupList(vs []NodeGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // node group (shard) configuration options. Each node group (shard) configuration
 // has the following: Slots, PrimaryAvailabilityZone, ReplicaAvailabilityZones,
 // ReplicaCount.
@@ -8666,6 +10726,40 @@ func (s *NodeGroupConfiguration) SetReplicaCount(v int64) *NodeGroupConfiguratio
 func (s *NodeGroupConfiguration) SetSlots(v string) *NodeGroupConfiguration {
 	s.Slots = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *NodeGroupConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PrimaryAvailabilityZone != nil {
+		v := *s.PrimaryAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "PrimaryAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ReplicaAvailabilityZones) > 0 {
+		v := s.ReplicaAvailabilityZones
+
+		e.SetList(protocol.BodyTarget, "ReplicaAvailabilityZones", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "AvailabilityZone"})
+	}
+	if s.ReplicaCount != nil {
+		v := *s.ReplicaCount
+
+		e.SetValue(protocol.BodyTarget, "ReplicaCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Slots != nil {
+		v := *s.Slots
+
+		e.SetValue(protocol.BodyTarget, "Slots", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeNodeGroupConfigurationList(vs []NodeGroupConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents a single node within a node group (shard).
@@ -8729,6 +10823,45 @@ func (s *NodeGroupMember) SetPreferredAvailabilityZone(v string) *NodeGroupMembe
 func (s *NodeGroupMember) SetReadEndpoint(v *Endpoint) *NodeGroupMember {
 	s.ReadEndpoint = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *NodeGroupMember) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeId != nil {
+		v := *s.CacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CurrentRole != nil {
+		v := *s.CurrentRole
+
+		e.SetValue(protocol.BodyTarget, "CurrentRole", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredAvailabilityZone != nil {
+		v := *s.PreferredAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "PreferredAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReadEndpoint != nil {
+		v := s.ReadEndpoint
+
+		e.SetFields(protocol.BodyTarget, "ReadEndpoint", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeNodeGroupMemberList(vs []NodeGroupMember) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents an individual cache node in a snapshot of a cache cluster.
@@ -8811,6 +10944,55 @@ func (s *NodeSnapshot) SetSnapshotCreateTime(v time.Time) *NodeSnapshot {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *NodeSnapshot) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeCreateTime != nil {
+		v := *s.CacheNodeCreateTime
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.CacheNodeId != nil {
+		v := *s.CacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheSize != nil {
+		v := *s.CacheSize
+
+		e.SetValue(protocol.BodyTarget, "CacheSize", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NodeGroupConfiguration != nil {
+		v := s.NodeGroupConfiguration
+
+		e.SetFields(protocol.BodyTarget, "NodeGroupConfiguration", v, protocol.Metadata{})
+	}
+	if s.NodeGroupId != nil {
+		v := *s.NodeGroupId
+
+		e.SetValue(protocol.BodyTarget, "NodeGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotCreateTime != nil {
+		v := *s.SnapshotCreateTime
+
+		e.SetValue(protocol.BodyTarget, "SnapshotCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeNodeSnapshotList(vs []NodeSnapshot) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a notification topic and its status. Notification topics are used
 // for publishing ElastiCache events to subscribers using Amazon Simple Notification
 // Service (SNS).
@@ -8845,6 +11027,22 @@ func (s *NotificationConfiguration) SetTopicArn(v string) *NotificationConfigura
 func (s *NotificationConfiguration) SetTopicStatus(v string) *NotificationConfiguration {
 	s.TopicStatus = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicStatus != nil {
+		v := *s.TopicStatus
+
+		e.SetValue(protocol.BodyTarget, "TopicStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes an individual setting that controls some aspect of ElastiCache
@@ -8950,6 +11148,65 @@ func (s *Parameter) SetSource(v string) *Parameter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Parameter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedValues != nil {
+		v := *s.AllowedValues
+
+		e.SetValue(protocol.BodyTarget, "AllowedValues", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ChangeType) > 0 {
+		v := s.ChangeType
+
+		e.SetValue(protocol.BodyTarget, "ChangeType", v, protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsModifiable != nil {
+		v := *s.IsModifiable
+
+		e.SetValue(protocol.BodyTarget, "IsModifiable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MinimumEngineVersion != nil {
+		v := *s.MinimumEngineVersion
+
+		e.SetValue(protocol.BodyTarget, "MinimumEngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterName != nil {
+		v := *s.ParameterName
+
+		e.SetValue(protocol.BodyTarget, "ParameterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterValue != nil {
+		v := *s.ParameterValue
+
+		e.SetValue(protocol.BodyTarget, "ParameterValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeParameterList(vs []Parameter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a name-value pair that is used to update the value of a parameter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ParameterNameValue
 type ParameterNameValue struct {
@@ -8982,6 +11239,30 @@ func (s *ParameterNameValue) SetParameterName(v string) *ParameterNameValue {
 func (s *ParameterNameValue) SetParameterValue(v string) *ParameterNameValue {
 	s.ParameterValue = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ParameterNameValue) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterName != nil {
+		v := *s.ParameterName
+
+		e.SetValue(protocol.BodyTarget, "ParameterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterValue != nil {
+		v := *s.ParameterValue
+
+		e.SetValue(protocol.BodyTarget, "ParameterValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeParameterNameValueList(vs []ParameterNameValue) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // A group of settings that are applied to the cache cluster in the future,
@@ -9040,6 +11321,32 @@ func (s *PendingModifiedValues) SetEngineVersion(v string) *PendingModifiedValue
 func (s *PendingModifiedValues) SetNumCacheNodes(v int64) *PendingModifiedValues {
 	s.NumCacheNodes = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PendingModifiedValues) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CacheNodeIdsToRemove) > 0 {
+		v := s.CacheNodeIdsToRemove
+
+		e.SetList(protocol.BodyTarget, "CacheNodeIdsToRemove", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheNodeId"})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NumCacheNodes != nil {
+		v := *s.NumCacheNodes
+
+		e.SetValue(protocol.BodyTarget, "NumCacheNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a PurchaseReservedCacheNodesOffering operation.
@@ -9111,6 +11418,27 @@ func (s *PurchaseReservedCacheNodesOfferingInput) SetReservedCacheNodesOfferingI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurchaseReservedCacheNodesOfferingInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeCount != nil {
+		v := *s.CacheNodeCount
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ReservedCacheNodeId != nil {
+		v := *s.ReservedCacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedCacheNodesOfferingId != nil {
+		v := *s.ReservedCacheNodesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOfferingResult
 type PurchaseReservedCacheNodesOfferingOutput struct {
 	_ struct{} `type:"structure"`
@@ -9140,6 +11468,17 @@ func (s PurchaseReservedCacheNodesOfferingOutput) SDKResponseMetadata() aws.Resp
 func (s *PurchaseReservedCacheNodesOfferingOutput) SetReservedCacheNode(v *ReservedCacheNode) *PurchaseReservedCacheNodesOfferingOutput {
 	s.ReservedCacheNode = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurchaseReservedCacheNodesOfferingOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReservedCacheNode != nil {
+		v := s.ReservedCacheNode
+
+		e.SetFields(protocol.BodyTarget, "ReservedCacheNode", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a RebootCacheCluster operation.
@@ -9200,6 +11539,22 @@ func (s *RebootCacheClusterInput) SetCacheNodeIdsToReboot(v []string) *RebootCac
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebootCacheClusterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.CacheNodeIdsToReboot) > 0 {
+		v := s.CacheNodeIdsToReboot
+
+		e.SetList(protocol.BodyTarget, "CacheNodeIdsToReboot", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "CacheNodeId"})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheClusterResult
 type RebootCacheClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -9229,6 +11584,17 @@ func (s RebootCacheClusterOutput) SDKResponseMetadata() aws.Response {
 func (s *RebootCacheClusterOutput) SetCacheCluster(v *CacheCluster) *RebootCacheClusterOutput {
 	s.CacheCluster = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebootCacheClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheCluster != nil {
+		v := s.CacheCluster
+
+		e.SetFields(protocol.BodyTarget, "CacheCluster", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the specific price and frequency of a recurring charges for a reserved
@@ -9264,6 +11630,30 @@ func (s *RecurringCharge) SetRecurringChargeAmount(v float64) *RecurringCharge {
 func (s *RecurringCharge) SetRecurringChargeFrequency(v string) *RecurringCharge {
 	s.RecurringChargeFrequency = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RecurringCharge) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RecurringChargeAmount != nil {
+		v := *s.RecurringChargeAmount
+
+		e.SetValue(protocol.BodyTarget, "RecurringChargeAmount", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.RecurringChargeFrequency != nil {
+		v := *s.RecurringChargeFrequency
+
+		e.SetValue(protocol.BodyTarget, "RecurringChargeFrequency", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRecurringChargeList(vs []RecurringCharge) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents the input of a RemoveTagsFromResource operation.
@@ -9327,6 +11717,22 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromReso
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveTagsFromResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
 // RemoveTagsFromResource operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResourceOutput
@@ -9358,6 +11764,17 @@ func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
 func (s *RemoveTagsFromResourceOutput) SetTagList(v []Tag) *RemoveTagsFromResourceOutput {
 	s.TagList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveTagsFromResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.TagList) > 0 {
+		v := s.TagList
+
+		e.SetList(protocol.BodyTarget, "TagList", encodeTagList(v), protocol.Metadata{ListLocationName: "Tag"})
+	}
+	return nil
 }
 
 // Contains all of the attributes of a specific Redis replication group.
@@ -9525,6 +11942,85 @@ func (s *ReplicationGroup) SetStatus(v string) *ReplicationGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReplicationGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutomaticFailover) > 0 {
+		v := s.AutomaticFailover
+
+		e.SetValue(protocol.BodyTarget, "AutomaticFailover", v, protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClusterEnabled != nil {
+		v := *s.ClusterEnabled
+
+		e.SetValue(protocol.BodyTarget, "ClusterEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ConfigurationEndpoint != nil {
+		v := s.ConfigurationEndpoint
+
+		e.SetFields(protocol.BodyTarget, "ConfigurationEndpoint", v, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MemberClusters) > 0 {
+		v := s.MemberClusters
+
+		e.SetList(protocol.BodyTarget, "MemberClusters", protocol.EncodeStringList(v), protocol.Metadata{ListLocationName: "ClusterId"})
+	}
+	if len(s.NodeGroups) > 0 {
+		v := s.NodeGroups
+
+		e.SetList(protocol.BodyTarget, "NodeGroups", encodeNodeGroupList(v), protocol.Metadata{ListLocationName: "NodeGroup"})
+	}
+	if s.PendingModifiedValues != nil {
+		v := s.PendingModifiedValues
+
+		e.SetFields(protocol.BodyTarget, "PendingModifiedValues", v, protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshottingClusterId != nil {
+		v := *s.SnapshottingClusterId
+
+		e.SetValue(protocol.BodyTarget, "SnapshottingClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReplicationGroupList(vs []ReplicationGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The settings to be applied to the Redis replication group, either immediately
 // or during the next maintenance window.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues
@@ -9567,6 +12063,22 @@ func (s *ReplicationGroupPendingModifiedValues) SetAutomaticFailoverStatus(v Pen
 func (s *ReplicationGroupPendingModifiedValues) SetPrimaryClusterId(v string) *ReplicationGroupPendingModifiedValues {
 	s.PrimaryClusterId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReplicationGroupPendingModifiedValues) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutomaticFailoverStatus) > 0 {
+		v := s.AutomaticFailoverStatus
+
+		e.SetValue(protocol.BodyTarget, "AutomaticFailoverStatus", v, protocol.Metadata{})
+	}
+	if s.PrimaryClusterId != nil {
+		v := *s.PrimaryClusterId
+
+		e.SetValue(protocol.BodyTarget, "PrimaryClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the output of a PurchaseReservedCacheNodesOffering operation.
@@ -9730,6 +12242,80 @@ func (s *ReservedCacheNode) SetUsagePrice(v float64) *ReservedCacheNode {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReservedCacheNode) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeCount != nil {
+		v := *s.CacheNodeCount
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		e.SetList(protocol.BodyTarget, "RecurringCharges", encodeRecurringChargeList(v), protocol.Metadata{ListLocationName: "RecurringCharge"})
+	}
+	if s.ReservedCacheNodeId != nil {
+		v := *s.ReservedCacheNodeId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodeId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReservedCacheNodesOfferingId != nil {
+		v := *s.ReservedCacheNodesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.State != nil {
+		v := *s.State
+
+		e.SetValue(protocol.BodyTarget, "State", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReservedCacheNodeList(vs []ReservedCacheNode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes all of the attributes of a reserved cache node offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodesOffering
 type ReservedCacheNodesOffering struct {
@@ -9855,6 +12441,60 @@ func (s *ReservedCacheNodesOffering) SetUsagePrice(v float64) *ReservedCacheNode
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReservedCacheNodesOffering) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.OfferingType != nil {
+		v := *s.OfferingType
+
+		e.SetValue(protocol.BodyTarget, "OfferingType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProductDescription != nil {
+		v := *s.ProductDescription
+
+		e.SetValue(protocol.BodyTarget, "ProductDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		e.SetList(protocol.BodyTarget, "RecurringCharges", encodeRecurringChargeList(v), protocol.Metadata{ListLocationName: "RecurringCharge"})
+	}
+	if s.ReservedCacheNodesOfferingId != nil {
+		v := *s.ReservedCacheNodesOfferingId
+
+		e.SetValue(protocol.BodyTarget, "ReservedCacheNodesOfferingId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReservedCacheNodesOfferingList(vs []ReservedCacheNodesOffering) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents the input of a ResetCacheParameterGroup operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroupMessage
 type ResetCacheParameterGroupInput struct {
@@ -9920,6 +12560,27 @@ func (s *ResetCacheParameterGroupInput) SetResetAllParameters(v bool) *ResetCach
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetCacheParameterGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ParameterNameValues) > 0 {
+		v := s.ParameterNameValues
+
+		e.SetList(protocol.BodyTarget, "ParameterNameValues", encodeParameterNameValueList(v), protocol.Metadata{ListLocationName: "ParameterNameValue"})
+	}
+	if s.ResetAllParameters != nil {
+		v := *s.ResetAllParameters
+
+		e.SetValue(protocol.BodyTarget, "ResetAllParameters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the output of one of the following operations:
 //
 //    * ModifyCacheParameterGroup
@@ -9954,6 +12615,17 @@ func (s ResetCacheParameterGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *ResetCacheParameterGroupOutput) SetCacheParameterGroupName(v string) *ResetCacheParameterGroupOutput {
 	s.CacheParameterGroupName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetCacheParameterGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the input of a RevokeCacheSecurityGroupIngress operation.
@@ -10029,6 +12701,27 @@ func (s *RevokeCacheSecurityGroupIngressInput) SetEC2SecurityGroupOwnerId(v stri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeCacheSecurityGroupIngressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroupName != nil {
+		v := *s.CacheSecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupName != nil {
+		v := *s.EC2SecurityGroupName
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EC2SecurityGroupOwnerId != nil {
+		v := *s.EC2SecurityGroupOwnerId
+
+		e.SetValue(protocol.BodyTarget, "EC2SecurityGroupOwnerId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngressResult
 type RevokeCacheSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -10066,6 +12759,17 @@ func (s *RevokeCacheSecurityGroupIngressOutput) SetCacheSecurityGroup(v *CacheSe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RevokeCacheSecurityGroupIngressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheSecurityGroup != nil {
+		v := s.CacheSecurityGroup
+
+		e.SetFields(protocol.BodyTarget, "CacheSecurityGroup", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a single cache security group and its status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SecurityGroupMembership
 type SecurityGroupMembership struct {
@@ -10100,6 +12804,30 @@ func (s *SecurityGroupMembership) SetSecurityGroupId(v string) *SecurityGroupMem
 func (s *SecurityGroupMembership) SetStatus(v string) *SecurityGroupMembership {
 	s.Status = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SecurityGroupMembership) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SecurityGroupId != nil {
+		v := *s.SecurityGroupId
+
+		e.SetValue(protocol.BodyTarget, "SecurityGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSecurityGroupMembershipList(vs []SecurityGroupMembership) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents a copy of an entire Redis cache cluster as of the time when the
@@ -10423,6 +13151,140 @@ func (s *Snapshot) SetVpcId(v string) *Snapshot {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Snapshot) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		e.SetValue(protocol.BodyTarget, "AutoMinorVersionUpgrade", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.AutomaticFailover) > 0 {
+		v := s.AutomaticFailover
+
+		e.SetValue(protocol.BodyTarget, "AutomaticFailover", v, protocol.Metadata{})
+	}
+	if s.CacheClusterCreateTime != nil {
+		v := *s.CacheClusterCreateTime
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterCreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.CacheClusterId != nil {
+		v := *s.CacheClusterId
+
+		e.SetValue(protocol.BodyTarget, "CacheClusterId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheNodeType != nil {
+		v := *s.CacheNodeType
+
+		e.SetValue(protocol.BodyTarget, "CacheNodeType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheParameterGroupName != nil {
+		v := *s.CacheParameterGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheParameterGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CacheSubnetGroupName != nil {
+		v := *s.CacheSubnetGroupName
+
+		e.SetValue(protocol.BodyTarget, "CacheSubnetGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Engine != nil {
+		v := *s.Engine
+
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		e.SetValue(protocol.BodyTarget, "EngineVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NodeSnapshots) > 0 {
+		v := s.NodeSnapshots
+
+		e.SetList(protocol.BodyTarget, "NodeSnapshots", encodeNodeSnapshotList(v), protocol.Metadata{ListLocationName: "NodeSnapshot"})
+	}
+	if s.NumCacheNodes != nil {
+		v := *s.NumCacheNodes
+
+		e.SetValue(protocol.BodyTarget, "NumCacheNodes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NumNodeGroups != nil {
+		v := *s.NumNodeGroups
+
+		e.SetValue(protocol.BodyTarget, "NumNodeGroups", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PreferredAvailabilityZone != nil {
+		v := *s.PreferredAvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "PreferredAvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PreferredMaintenanceWindow != nil {
+		v := *s.PreferredMaintenanceWindow
+
+		e.SetValue(protocol.BodyTarget, "PreferredMaintenanceWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupDescription != nil {
+		v := *s.ReplicationGroupDescription
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotName != nil {
+		v := *s.SnapshotName
+
+		e.SetValue(protocol.BodyTarget, "SnapshotName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotRetentionLimit != nil {
+		v := *s.SnapshotRetentionLimit
+
+		e.SetValue(protocol.BodyTarget, "SnapshotRetentionLimit", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SnapshotSource != nil {
+		v := *s.SnapshotSource
+
+		e.SetValue(protocol.BodyTarget, "SnapshotSource", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotStatus != nil {
+		v := *s.SnapshotStatus
+
+		e.SetValue(protocol.BodyTarget, "SnapshotStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SnapshotWindow != nil {
+		v := *s.SnapshotWindow
+
+		e.SetValue(protocol.BodyTarget, "SnapshotWindow", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSnapshotList(vs []Snapshot) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents the subnet associated with a cache cluster. This parameter refers
 // to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used
 // with ElastiCache.
@@ -10459,6 +13321,30 @@ func (s *Subnet) SetSubnetIdentifier(v string) *Subnet {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Subnet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SubnetAvailabilityZone != nil {
+		v := s.SubnetAvailabilityZone
+
+		e.SetFields(protocol.BodyTarget, "SubnetAvailabilityZone", v, protocol.Metadata{})
+	}
+	if s.SubnetIdentifier != nil {
+		v := *s.SubnetIdentifier
+
+		e.SetValue(protocol.BodyTarget, "SubnetIdentifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSubnetList(vs []Subnet) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A cost allocation Tag that can be added to an ElastiCache cluster or replication
 // group. Tags are composed of a Key/Value pair. A tag with a null Value is
 // permitted.
@@ -10493,6 +13379,30 @@ func (s *Tag) SetKey(v string) *Tag {
 func (s *Tag) SetValue(v string) *Tag {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailoverMessage
@@ -10553,6 +13463,22 @@ func (s *TestFailoverInput) SetReplicationGroupId(v string) *TestFailoverInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TestFailoverInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NodeGroupId != nil {
+		v := *s.NodeGroupId
+
+		e.SetValue(protocol.BodyTarget, "NodeGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReplicationGroupId != nil {
+		v := *s.ReplicationGroupId
+
+		e.SetValue(protocol.BodyTarget, "ReplicationGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailoverResult
 type TestFailoverOutput struct {
 	_ struct{} `type:"structure"`
@@ -10584,6 +13510,17 @@ func (s *TestFailoverOutput) SetReplicationGroup(v *ReplicationGroup) *TestFailo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TestFailoverOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ReplicationGroup != nil {
+		v := s.ReplicationGroup
+
+		e.SetFields(protocol.BodyTarget, "ReplicationGroup", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 type AZMode string
 
 // Enum values for AZMode
@@ -10591,6 +13528,15 @@ const (
 	AZModeSingleAz AZMode = "single-az"
 	AZModeCrossAz  AZMode = "cross-az"
 )
+
+func (enum AZMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AZMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AutomaticFailoverStatus string
 
@@ -10602,6 +13548,15 @@ const (
 	AutomaticFailoverStatusDisabling AutomaticFailoverStatus = "disabling"
 )
 
+func (enum AutomaticFailoverStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutomaticFailoverStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
@@ -10610,6 +13565,15 @@ const (
 	ChangeTypeRequiresReboot ChangeType = "requires-reboot"
 )
 
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PendingAutomaticFailoverStatus string
 
 // Enum values for PendingAutomaticFailoverStatus
@@ -10617,6 +13581,15 @@ const (
 	PendingAutomaticFailoverStatusEnabled  PendingAutomaticFailoverStatus = "enabled"
 	PendingAutomaticFailoverStatusDisabled PendingAutomaticFailoverStatus = "disabled"
 )
+
+func (enum PendingAutomaticFailoverStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PendingAutomaticFailoverStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -10628,3 +13601,12 @@ const (
 	SourceTypeCacheSubnetGroup    SourceType = "cache-subnet-group"
 	SourceTypeReplicationGroup    SourceType = "replication-group"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

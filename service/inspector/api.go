@@ -7209,6 +7209,23 @@ const (
 	AccessDeniedErrorCodeAccessDeniedToIamRole            AccessDeniedErrorCode = "ACCESS_DENIED_TO_IAM_ROLE"
 )
 
+func (enum AccessDeniedErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessDeniedErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeAgentHealthList(vs []AgentHealth) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type AgentHealth string
 
 // Enum values for AgentHealth
@@ -7216,6 +7233,23 @@ const (
 	AgentHealthHealthy   AgentHealth = "HEALTHY"
 	AgentHealthUnhealthy AgentHealth = "UNHEALTHY"
 )
+
+func (enum AgentHealth) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AgentHealth) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeAgentHealthCodeList(vs []AgentHealthCode) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type AgentHealthCode string
 
@@ -7229,6 +7263,15 @@ const (
 	AgentHealthCodeUnknown   AgentHealthCode = "UNKNOWN"
 )
 
+func (enum AgentHealthCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AgentHealthCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssessmentRunNotificationSnsStatusCode string
 
 // Enum values for AssessmentRunNotificationSnsStatusCode
@@ -7238,6 +7281,23 @@ const (
 	AssessmentRunNotificationSnsStatusCodeAccessDenied      AssessmentRunNotificationSnsStatusCode = "ACCESS_DENIED"
 	AssessmentRunNotificationSnsStatusCodeInternalError     AssessmentRunNotificationSnsStatusCode = "INTERNAL_ERROR"
 )
+
+func (enum AssessmentRunNotificationSnsStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssessmentRunNotificationSnsStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeAssessmentRunStateList(vs []AssessmentRunState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type AssessmentRunState string
 
@@ -7258,12 +7318,30 @@ const (
 	AssessmentRunStateCanceled                      AssessmentRunState = "CANCELED"
 )
 
+func (enum AssessmentRunState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssessmentRunState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssetType string
 
 // Enum values for AssetType
 const (
 	AssetTypeEc2Instance AssetType = "ec2-instance"
 )
+
+func (enum AssetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Event string
 
@@ -7275,6 +7353,15 @@ const (
 	EventFindingReported           Event = "FINDING_REPORTED"
 	EventOther                     Event = "OTHER"
 )
+
+func (enum Event) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Event) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FailedItemErrorCode string
 
@@ -7288,6 +7375,15 @@ const (
 	FailedItemErrorCodeInternalError    FailedItemErrorCode = "INTERNAL_ERROR"
 )
 
+func (enum FailedItemErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FailedItemErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InvalidCrossAccountRoleErrorCode string
 
 // Enum values for InvalidCrossAccountRoleErrorCode
@@ -7295,6 +7391,15 @@ const (
 	InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
 	InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy               InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
 )
+
+func (enum InvalidCrossAccountRoleErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InvalidCrossAccountRoleErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InvalidInputErrorCode string
 
@@ -7356,6 +7461,15 @@ const (
 	InvalidInputErrorCodeInvalidNumberOfSeverities                InvalidInputErrorCode = "INVALID_NUMBER_OF_SEVERITIES"
 )
 
+func (enum InvalidInputErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InvalidInputErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LimitExceededErrorCode string
 
 // Enum values for LimitExceededErrorCode
@@ -7367,12 +7481,30 @@ const (
 	LimitExceededErrorCodeEventSubscriptionLimitExceeded  LimitExceededErrorCode = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
 )
 
+func (enum LimitExceededErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LimitExceededErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Locale string
 
 // Enum values for Locale
 const (
 	LocaleEnUs Locale = "EN_US"
 )
+
+func (enum Locale) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Locale) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NoSuchEntityErrorCode string
 
@@ -7388,6 +7520,15 @@ const (
 	NoSuchEntityErrorCodeIamRoleDoesNotExist            NoSuchEntityErrorCode = "IAM_ROLE_DOES_NOT_EXIST"
 )
 
+func (enum NoSuchEntityErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NoSuchEntityErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportFileFormat string
 
 // Enum values for ReportFileFormat
@@ -7395,6 +7536,15 @@ const (
 	ReportFileFormatHtml ReportFileFormat = "HTML"
 	ReportFileFormatPdf  ReportFileFormat = "PDF"
 )
+
+func (enum ReportFileFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportFileFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReportStatus string
 
@@ -7405,6 +7555,15 @@ const (
 	ReportStatusCompleted      ReportStatus = "COMPLETED"
 )
 
+func (enum ReportStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportType string
 
 // Enum values for ReportType
@@ -7412,6 +7571,23 @@ const (
 	ReportTypeFinding ReportType = "FINDING"
 	ReportTypeFull    ReportType = "FULL"
 )
+
+func (enum ReportType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeSeverityList(vs []Severity) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type Severity string
 
@@ -7424,6 +7600,15 @@ const (
 	SeverityUndefined     Severity = "Undefined"
 )
 
+func (enum Severity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Severity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StopAction string
 
 // Enum values for StopAction
@@ -7431,3 +7616,12 @@ const (
 	StopActionStartEvaluation StopAction = "START_EVALUATION"
 	StopActionSkipEvaluation  StopAction = "SKIP_EVALUATION"
 )
+
+func (enum StopAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StopAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

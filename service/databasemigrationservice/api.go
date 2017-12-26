@@ -9091,6 +9091,15 @@ const (
 	AuthMechanismValueScramSha1 AuthMechanismValue = "scram_sha_1"
 )
 
+func (enum AuthMechanismValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthMechanismValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AuthTypeValue string
 
 // Enum values for AuthTypeValue
@@ -9099,6 +9108,15 @@ const (
 	AuthTypeValuePassword AuthTypeValue = "password"
 )
 
+func (enum AuthTypeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CompressionTypeValue string
 
 // Enum values for CompressionTypeValue
@@ -9106,6 +9124,15 @@ const (
 	CompressionTypeValueNone CompressionTypeValue = "none"
 	CompressionTypeValueGzip CompressionTypeValue = "gzip"
 )
+
+func (enum CompressionTypeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CompressionTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DmsSslModeValue string
 
@@ -9117,6 +9144,15 @@ const (
 	DmsSslModeValueVerifyFull DmsSslModeValue = "verify-full"
 )
 
+func (enum DmsSslModeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DmsSslModeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MigrationTypeValue string
 
 // Enum values for MigrationTypeValue
@@ -9126,6 +9162,15 @@ const (
 	MigrationTypeValueFullLoadAndCdc MigrationTypeValue = "full-load-and-cdc"
 )
 
+func (enum MigrationTypeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MigrationTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NestingLevelValue string
 
 // Enum values for NestingLevelValue
@@ -9133,6 +9178,15 @@ const (
 	NestingLevelValueNone NestingLevelValue = "none"
 	NestingLevelValueOne  NestingLevelValue = "one"
 )
+
+func (enum NestingLevelValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NestingLevelValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RefreshSchemasStatusTypeValue string
 
@@ -9143,6 +9197,15 @@ const (
 	RefreshSchemasStatusTypeValueRefreshing RefreshSchemasStatusTypeValue = "refreshing"
 )
 
+func (enum RefreshSchemasStatusTypeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RefreshSchemasStatusTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReplicationEndpointTypeValue string
 
 // Enum values for ReplicationEndpointTypeValue
@@ -9151,12 +9214,30 @@ const (
 	ReplicationEndpointTypeValueTarget ReplicationEndpointTypeValue = "target"
 )
 
+func (enum ReplicationEndpointTypeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplicationEndpointTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SourceType string
 
 // Enum values for SourceType
 const (
 	SourceTypeReplicationInstance SourceType = "replication-instance"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StartReplicationTaskTypeValue string
 
@@ -9166,3 +9247,12 @@ const (
 	StartReplicationTaskTypeValueResumeProcessing StartReplicationTaskTypeValue = "resume-processing"
 	StartReplicationTaskTypeValueReloadTarget     StartReplicationTaskTypeValue = "reload-target"
 )
+
+func (enum StartReplicationTaskTypeValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StartReplicationTaskTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
