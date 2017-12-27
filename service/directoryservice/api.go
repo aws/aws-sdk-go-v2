@@ -7380,6 +7380,15 @@ const (
 	DirectorySizeLarge DirectorySize = "Large"
 )
 
+func (enum DirectorySize) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DirectorySize) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DirectoryStage string
 
 // Enum values for DirectoryStage
@@ -7397,6 +7406,15 @@ const (
 	DirectoryStageFailed        DirectoryStage = "Failed"
 )
 
+func (enum DirectoryStage) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DirectoryStage) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DirectoryType string
 
 // Enum values for DirectoryType
@@ -7405,6 +7423,15 @@ const (
 	DirectoryTypeAdconnector DirectoryType = "ADConnector"
 	DirectoryTypeMicrosoftAd DirectoryType = "MicrosoftAD"
 )
+
+func (enum DirectoryType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DirectoryType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DomainControllerStatus string
 
@@ -7419,6 +7446,15 @@ const (
 	DomainControllerStatusFailed    DomainControllerStatus = "Failed"
 )
 
+func (enum DomainControllerStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainControllerStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IpRouteStatusMsg string
 
 // Enum values for IpRouteStatusMsg
@@ -7431,6 +7467,15 @@ const (
 	IpRouteStatusMsgRemoveFailed IpRouteStatusMsg = "RemoveFailed"
 )
 
+func (enum IpRouteStatusMsg) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IpRouteStatusMsg) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RadiusAuthenticationProtocol string
 
 // Enum values for RadiusAuthenticationProtocol
@@ -7441,6 +7486,15 @@ const (
 	RadiusAuthenticationProtocolMsChapv2 RadiusAuthenticationProtocol = "MS-CHAPv2"
 )
 
+func (enum RadiusAuthenticationProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RadiusAuthenticationProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RadiusStatus string
 
 // Enum values for RadiusStatus
@@ -7450,12 +7504,30 @@ const (
 	RadiusStatusFailed    RadiusStatus = "Failed"
 )
 
+func (enum RadiusStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RadiusStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReplicationScope string
 
 // Enum values for ReplicationScope
 const (
 	ReplicationScopeDomain ReplicationScope = "Domain"
 )
+
+func (enum ReplicationScope) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplicationScope) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SchemaExtensionStatus string
 
@@ -7472,6 +7544,15 @@ const (
 	SchemaExtensionStatusCompleted          SchemaExtensionStatus = "Completed"
 )
 
+func (enum SchemaExtensionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SchemaExtensionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SnapshotStatus string
 
 // Enum values for SnapshotStatus
@@ -7481,6 +7562,15 @@ const (
 	SnapshotStatusFailed    SnapshotStatus = "Failed"
 )
 
+func (enum SnapshotStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SnapshotStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SnapshotType string
 
 // Enum values for SnapshotType
@@ -7488,6 +7578,15 @@ const (
 	SnapshotTypeAuto   SnapshotType = "Auto"
 	SnapshotTypeManual SnapshotType = "Manual"
 )
+
+func (enum SnapshotType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SnapshotType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TopicStatus string
 
@@ -7499,6 +7598,15 @@ const (
 	TopicStatusDeleted       TopicStatus = "Deleted"
 )
 
+func (enum TopicStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TopicStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrustDirection string
 
 // Enum values for TrustDirection
@@ -7507,6 +7615,15 @@ const (
 	TrustDirectionOneWayIncoming TrustDirection = "One-Way: Incoming"
 	TrustDirectionTwoWay         TrustDirection = "Two-Way"
 )
+
+func (enum TrustDirection) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrustDirection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TrustState string
 
@@ -7522,9 +7639,27 @@ const (
 	TrustStateFailed       TrustState = "Failed"
 )
 
+func (enum TrustState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrustState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrustType string
 
 // Enum values for TrustType
 const (
 	TrustTypeForest TrustType = "Forest"
 )
+
+func (enum TrustType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrustType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

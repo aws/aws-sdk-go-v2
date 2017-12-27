@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAssumeRole = "AssumeRole"
@@ -940,6 +941,47 @@ func (s *AssumeRoleInput) SetTokenCode(v string) *AssumeRoleInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumeRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DurationSeconds != nil {
+		v := *s.DurationSeconds
+
+		e.SetValue(protocol.BodyTarget, "DurationSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ExternalId != nil {
+		v := *s.ExternalId
+
+		e.SetValue(protocol.BodyTarget, "ExternalId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Policy != nil {
+		v := *s.Policy
+
+		e.SetValue(protocol.BodyTarget, "Policy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleSessionName != nil {
+		v := *s.RoleSessionName
+
+		e.SetValue(protocol.BodyTarget, "RoleSessionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TokenCode != nil {
+		v := *s.TokenCode
+
+		e.SetValue(protocol.BodyTarget, "TokenCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful AssumeRole request, including temporary
 // AWS credentials that can be used to make AWS requests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleResponse
@@ -1001,6 +1043,27 @@ func (s *AssumeRoleOutput) SetCredentials(v *Credentials) *AssumeRoleOutput {
 func (s *AssumeRoleOutput) SetPackedPolicySize(v int64) *AssumeRoleOutput {
 	s.PackedPolicySize = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumeRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AssumedRoleUser != nil {
+		v := s.AssumedRoleUser
+
+		e.SetFields(protocol.BodyTarget, "AssumedRoleUser", v, protocol.Metadata{})
+	}
+	if s.Credentials != nil {
+		v := s.Credentials
+
+		e.SetFields(protocol.BodyTarget, "Credentials", v, protocol.Metadata{})
+	}
+	if s.PackedPolicySize != nil {
+		v := *s.PackedPolicySize
+
+		e.SetValue(protocol.BodyTarget, "PackedPolicySize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLRequest
@@ -1145,6 +1208,37 @@ func (s *AssumeRoleWithSAMLInput) SetSAMLAssertion(v string) *AssumeRoleWithSAML
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumeRoleWithSAMLInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DurationSeconds != nil {
+		v := *s.DurationSeconds
+
+		e.SetValue(protocol.BodyTarget, "DurationSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Policy != nil {
+		v := *s.Policy
+
+		e.SetValue(protocol.BodyTarget, "Policy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PrincipalArn != nil {
+		v := *s.PrincipalArn
+
+		e.SetValue(protocol.BodyTarget, "PrincipalArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SAMLAssertion != nil {
+		v := *s.SAMLAssertion
+
+		e.SetValue(protocol.BodyTarget, "SAMLAssertion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful AssumeRoleWithSAML request, including
 // temporary AWS credentials that can be used to make AWS requests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLResponse
@@ -1264,6 +1358,52 @@ func (s *AssumeRoleWithSAMLOutput) SetSubject(v string) *AssumeRoleWithSAMLOutpu
 func (s *AssumeRoleWithSAMLOutput) SetSubjectType(v string) *AssumeRoleWithSAMLOutput {
 	s.SubjectType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumeRoleWithSAMLOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AssumedRoleUser != nil {
+		v := s.AssumedRoleUser
+
+		e.SetFields(protocol.BodyTarget, "AssumedRoleUser", v, protocol.Metadata{})
+	}
+	if s.Audience != nil {
+		v := *s.Audience
+
+		e.SetValue(protocol.BodyTarget, "Audience", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Credentials != nil {
+		v := s.Credentials
+
+		e.SetFields(protocol.BodyTarget, "Credentials", v, protocol.Metadata{})
+	}
+	if s.Issuer != nil {
+		v := *s.Issuer
+
+		e.SetValue(protocol.BodyTarget, "Issuer", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NameQualifier != nil {
+		v := *s.NameQualifier
+
+		e.SetValue(protocol.BodyTarget, "NameQualifier", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PackedPolicySize != nil {
+		v := *s.PackedPolicySize
+
+		e.SetValue(protocol.BodyTarget, "PackedPolicySize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Subject != nil {
+		v := *s.Subject
+
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubjectType != nil {
+		v := *s.SubjectType
+
+		e.SetValue(protocol.BodyTarget, "SubjectType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityRequest
@@ -1430,6 +1570,42 @@ func (s *AssumeRoleWithWebIdentityInput) SetWebIdentityToken(v string) *AssumeRo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumeRoleWithWebIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DurationSeconds != nil {
+		v := *s.DurationSeconds
+
+		e.SetValue(protocol.BodyTarget, "DurationSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Policy != nil {
+		v := *s.Policy
+
+		e.SetValue(protocol.BodyTarget, "Policy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ProviderId != nil {
+		v := *s.ProviderId
+
+		e.SetValue(protocol.BodyTarget, "ProviderId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleSessionName != nil {
+		v := *s.RoleSessionName
+
+		e.SetValue(protocol.BodyTarget, "RoleSessionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.WebIdentityToken != nil {
+		v := *s.WebIdentityToken
+
+		e.SetValue(protocol.BodyTarget, "WebIdentityToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful AssumeRoleWithWebIdentity request,
 // including temporary AWS credentials that can be used to make AWS requests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityResponse
@@ -1530,6 +1706,42 @@ func (s *AssumeRoleWithWebIdentityOutput) SetSubjectFromWebIdentityToken(v strin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumeRoleWithWebIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AssumedRoleUser != nil {
+		v := s.AssumedRoleUser
+
+		e.SetFields(protocol.BodyTarget, "AssumedRoleUser", v, protocol.Metadata{})
+	}
+	if s.Audience != nil {
+		v := *s.Audience
+
+		e.SetValue(protocol.BodyTarget, "Audience", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Credentials != nil {
+		v := s.Credentials
+
+		e.SetFields(protocol.BodyTarget, "Credentials", v, protocol.Metadata{})
+	}
+	if s.PackedPolicySize != nil {
+		v := *s.PackedPolicySize
+
+		e.SetValue(protocol.BodyTarget, "PackedPolicySize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Provider != nil {
+		v := *s.Provider
+
+		e.SetValue(protocol.BodyTarget, "Provider", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SubjectFromWebIdentityToken != nil {
+		v := *s.SubjectFromWebIdentityToken
+
+		e.SetValue(protocol.BodyTarget, "SubjectFromWebIdentityToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The identifiers for the temporary security credentials that the operation
 // returns.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumedRoleUser
@@ -1572,6 +1784,22 @@ func (s *AssumedRoleUser) SetArn(v string) *AssumedRoleUser {
 func (s *AssumedRoleUser) SetAssumedRoleId(v string) *AssumedRoleUser {
 	s.AssumedRoleId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AssumedRoleUser) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AssumedRoleId != nil {
+		v := *s.AssumedRoleId
+
+		e.SetValue(protocol.BodyTarget, "AssumedRoleId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // AWS credentials for API authentication.
@@ -1634,6 +1862,32 @@ func (s *Credentials) SetSessionToken(v string) *Credentials {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Credentials) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		e.SetValue(protocol.BodyTarget, "AccessKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Expiration != nil {
+		v := *s.Expiration
+
+		e.SetValue(protocol.BodyTarget, "Expiration", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SecretAccessKey != nil {
+		v := *s.SecretAccessKey
+
+		e.SetValue(protocol.BodyTarget, "SecretAccessKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SessionToken != nil {
+		v := *s.SessionToken
+
+		e.SetValue(protocol.BodyTarget, "SessionToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessageRequest
 type DecodeAuthorizationMessageInput struct {
 	_ struct{} `type:"structure"`
@@ -1677,6 +1931,17 @@ func (s *DecodeAuthorizationMessageInput) SetEncodedMessage(v string) *DecodeAut
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DecodeAuthorizationMessageInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EncodedMessage != nil {
+		v := *s.EncodedMessage
+
+		e.SetValue(protocol.BodyTarget, "EncodedMessage", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A document that contains additional information about the authorization status
 // of a request from an encoded message that is returned in response to an AWS
 // request.
@@ -1709,6 +1974,17 @@ func (s DecodeAuthorizationMessageOutput) SDKResponseMetadata() aws.Response {
 func (s *DecodeAuthorizationMessageOutput) SetDecodedMessage(v string) *DecodeAuthorizationMessageOutput {
 	s.DecodedMessage = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DecodeAuthorizationMessageOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DecodedMessage != nil {
+		v := *s.DecodedMessage
+
+		e.SetValue(protocol.BodyTarget, "DecodedMessage", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Identifiers for the federated user that is associated with the credentials.
@@ -1753,6 +2029,22 @@ func (s *FederatedUser) SetFederatedUserId(v string) *FederatedUser {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *FederatedUser) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.FederatedUserId != nil {
+		v := *s.FederatedUserId
+
+		e.SetValue(protocol.BodyTarget, "FederatedUserId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentityRequest
 type GetCallerIdentityInput struct {
 	_ struct{} `type:"structure"`
@@ -1766,6 +2058,12 @@ func (s GetCallerIdentityInput) String() string {
 // GoString returns the string representation
 func (s GetCallerIdentityInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetCallerIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful GetCallerIdentity request, including
@@ -1821,6 +2119,27 @@ func (s *GetCallerIdentityOutput) SetArn(v string) *GetCallerIdentityOutput {
 func (s *GetCallerIdentityOutput) SetUserId(v string) *GetCallerIdentityOutput {
 	s.UserId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetCallerIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Account != nil {
+		v := *s.Account
+
+		e.SetValue(protocol.BodyTarget, "Account", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenRequest
@@ -1931,6 +2250,27 @@ func (s *GetFederationTokenInput) SetPolicy(v string) *GetFederationTokenInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetFederationTokenInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DurationSeconds != nil {
+		v := *s.DurationSeconds
+
+		e.SetValue(protocol.BodyTarget, "DurationSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Policy != nil {
+		v := *s.Policy
+
+		e.SetValue(protocol.BodyTarget, "Policy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetFederationToken request, including
 // temporary AWS credentials that can be used to make AWS requests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenResponse
@@ -1991,6 +2331,27 @@ func (s *GetFederationTokenOutput) SetFederatedUser(v *FederatedUser) *GetFedera
 func (s *GetFederationTokenOutput) SetPackedPolicySize(v int64) *GetFederationTokenOutput {
 	s.PackedPolicySize = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetFederationTokenOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Credentials != nil {
+		v := s.Credentials
+
+		e.SetFields(protocol.BodyTarget, "Credentials", v, protocol.Metadata{})
+	}
+	if s.FederatedUser != nil {
+		v := s.FederatedUser
+
+		e.SetFields(protocol.BodyTarget, "FederatedUser", v, protocol.Metadata{})
+	}
+	if s.PackedPolicySize != nil {
+		v := *s.PackedPolicySize
+
+		e.SetValue(protocol.BodyTarget, "PackedPolicySize", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenRequest
@@ -2076,6 +2437,27 @@ func (s *GetSessionTokenInput) SetTokenCode(v string) *GetSessionTokenInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSessionTokenInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DurationSeconds != nil {
+		v := *s.DurationSeconds
+
+		e.SetValue(protocol.BodyTarget, "DurationSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TokenCode != nil {
+		v := *s.TokenCode
+
+		e.SetValue(protocol.BodyTarget, "TokenCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetSessionToken request, including
 // temporary AWS credentials that can be used to make AWS requests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenResponse
@@ -2113,4 +2495,15 @@ func (s GetSessionTokenOutput) SDKResponseMetadata() aws.Response {
 func (s *GetSessionTokenOutput) SetCredentials(v *Credentials) *GetSessionTokenOutput {
 	s.Credentials = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSessionTokenOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Credentials != nil {
+		v := s.Credentials
+
+		e.SetFields(protocol.BodyTarget, "Credentials", v, protocol.Metadata{})
+	}
+	return nil
 }

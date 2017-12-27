@@ -3198,6 +3198,15 @@ const (
 	ComputePerformance Compute = "PERFORMANCE"
 )
 
+func (enum Compute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Compute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConnectionState string
 
 // Enum values for ConnectionState
@@ -3207,6 +3216,15 @@ const (
 	ConnectionStateUnknown      ConnectionState = "UNKNOWN"
 )
 
+func (enum ConnectionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RunningMode string
 
 // Enum values for RunningMode
@@ -3214,6 +3232,15 @@ const (
 	RunningModeAutoStop RunningMode = "AUTO_STOP"
 	RunningModeAlwaysOn RunningMode = "ALWAYS_ON"
 )
+
+func (enum RunningMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RunningMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type WorkspaceDirectoryState string
 
@@ -3226,6 +3253,15 @@ const (
 	WorkspaceDirectoryStateError         WorkspaceDirectoryState = "ERROR"
 )
 
+func (enum WorkspaceDirectoryState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WorkspaceDirectoryState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WorkspaceDirectoryType string
 
 // Enum values for WorkspaceDirectoryType
@@ -3233,6 +3269,15 @@ const (
 	WorkspaceDirectoryTypeSimpleAd    WorkspaceDirectoryType = "SIMPLE_AD"
 	WorkspaceDirectoryTypeAdConnector WorkspaceDirectoryType = "AD_CONNECTOR"
 )
+
+func (enum WorkspaceDirectoryType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WorkspaceDirectoryType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type WorkspaceState string
 
@@ -3253,3 +3298,12 @@ const (
 	WorkspaceStateStopped     WorkspaceState = "STOPPED"
 	WorkspaceStateError       WorkspaceState = "ERROR"
 )
+
+func (enum WorkspaceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WorkspaceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

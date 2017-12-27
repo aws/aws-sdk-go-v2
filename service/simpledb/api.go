@@ -801,6 +801,40 @@ func (s *Attribute) SetValue(v string) *Attribute {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Attribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AlternateNameEncoding != nil {
+		v := *s.AlternateNameEncoding
+
+		e.SetValue(protocol.BodyTarget, "AlternateNameEncoding", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AlternateValueEncoding != nil {
+		v := *s.AlternateValueEncoding
+
+		e.SetValue(protocol.BodyTarget, "AlternateValueEncoding", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAttributeList(vs []Attribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type BatchDeleteAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -862,6 +896,22 @@ func (s *BatchDeleteAttributesInput) SetItems(v []DeletableItem) *BatchDeleteAtt
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BatchDeleteAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		e.SetList(protocol.BodyTarget, "Items", encodeDeletableItemList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
+}
+
 type BatchDeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -881,6 +931,12 @@ func (s BatchDeleteAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchDeleteAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BatchDeleteAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 type BatchPutAttributesInput struct {
@@ -944,6 +1000,22 @@ func (s *BatchPutAttributesInput) SetItems(v []ReplaceableItem) *BatchPutAttribu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BatchPutAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		e.SetList(protocol.BodyTarget, "Items", encodeReplaceableItemList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
+}
+
 type BatchPutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -963,6 +1035,12 @@ func (s BatchPutAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchPutAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BatchPutAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 type CreateDomainInput struct {
@@ -1005,6 +1083,17 @@ func (s *CreateDomainInput) SetDomainName(v string) *CreateDomainInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDomainInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type CreateDomainOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1024,6 +1113,12 @@ func (s CreateDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 type DeletableAttribute struct {
@@ -1072,6 +1167,30 @@ func (s *DeletableAttribute) SetName(v string) *DeletableAttribute {
 func (s *DeletableAttribute) SetValue(v string) *DeletableAttribute {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletableAttribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDeletableAttributeList(vs []DeletableAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 type DeletableItem struct {
@@ -1124,6 +1243,30 @@ func (s *DeletableItem) SetAttributes(v []DeletableAttribute) *DeletableItem {
 func (s *DeletableItem) SetName(v string) *DeletableItem {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletableItem) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "Attributes", encodeDeletableAttributeList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "ItemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDeletableItemList(vs []DeletableItem) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 type DeleteAttributesInput struct {
@@ -1209,6 +1352,32 @@ func (s *DeleteAttributesInput) SetItemName(v string) *DeleteAttributesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "Attributes", encodeDeletableAttributeList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Expected != nil {
+		v := s.Expected
+
+		e.SetFields(protocol.BodyTarget, "Expected", v, protocol.Metadata{})
+	}
+	if s.ItemName != nil {
+		v := *s.ItemName
+
+		e.SetValue(protocol.BodyTarget, "ItemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1228,6 +1397,12 @@ func (s DeleteAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 type DeleteDomainInput struct {
@@ -1269,6 +1444,17 @@ func (s *DeleteDomainInput) SetDomainName(v string) *DeleteDomainInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDomainInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type DeleteDomainOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1288,6 +1474,12 @@ func (s DeleteDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 type DomainMetadataInput struct {
@@ -1327,6 +1519,17 @@ func (s *DomainMetadataInput) Validate() error {
 func (s *DomainMetadataInput) SetDomainName(v string) *DomainMetadataInput {
 	s.DomainName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DomainMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 type DomainMetadataOutput struct {
@@ -1413,6 +1616,47 @@ func (s *DomainMetadataOutput) SetTimestamp(v int64) *DomainMetadataOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DomainMetadataOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AttributeNameCount != nil {
+		v := *s.AttributeNameCount
+
+		e.SetValue(protocol.BodyTarget, "AttributeNameCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AttributeNamesSizeBytes != nil {
+		v := *s.AttributeNamesSizeBytes
+
+		e.SetValue(protocol.BodyTarget, "AttributeNamesSizeBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AttributeValueCount != nil {
+		v := *s.AttributeValueCount
+
+		e.SetValue(protocol.BodyTarget, "AttributeValueCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.AttributeValuesSizeBytes != nil {
+		v := *s.AttributeValuesSizeBytes
+
+		e.SetValue(protocol.BodyTarget, "AttributeValuesSizeBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ItemCount != nil {
+		v := *s.ItemCount
+
+		e.SetValue(protocol.BodyTarget, "ItemCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ItemNamesSizeBytes != nil {
+		v := *s.ItemNamesSizeBytes
+
+		e.SetValue(protocol.BodyTarget, "ItemNamesSizeBytes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type GetAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1486,6 +1730,32 @@ func (s *GetAttributesInput) SetItemName(v string) *GetAttributesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		e.SetList(protocol.BodyTarget, "AttributeNames", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.ConsistentRead != nil {
+		v := *s.ConsistentRead
+
+		e.SetValue(protocol.BodyTarget, "ConsistentRead", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ItemName != nil {
+		v := *s.ItemName
+
+		e.SetValue(protocol.BodyTarget, "ItemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type GetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1514,6 +1784,17 @@ func (s GetAttributesOutput) SDKResponseMetadata() aws.Response {
 func (s *GetAttributesOutput) SetAttributes(v []Attribute) *GetAttributesOutput {
 	s.Attributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "Attributes", encodeAttributeList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
 }
 
 type Item struct {
@@ -1560,6 +1841,35 @@ func (s *Item) SetName(v string) *Item {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Item) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AlternateNameEncoding != nil {
+		v := *s.AlternateNameEncoding
+
+		e.SetValue(protocol.BodyTarget, "AlternateNameEncoding", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "Attributes", encodeAttributeList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeItemList(vs []Item) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type ListDomainsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1592,6 +1902,22 @@ func (s *ListDomainsInput) SetMaxNumberOfDomains(v int64) *ListDomainsInput {
 func (s *ListDomainsInput) SetNextToken(v string) *ListDomainsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDomainsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxNumberOfDomains != nil {
+		v := *s.MaxNumberOfDomains
+
+		e.SetValue(protocol.BodyTarget, "MaxNumberOfDomains", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 type ListDomainsOutput struct {
@@ -1632,6 +1958,22 @@ func (s *ListDomainsOutput) SetDomainNames(v []string) *ListDomainsOutput {
 func (s *ListDomainsOutput) SetNextToken(v string) *ListDomainsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDomainsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DomainNames) > 0 {
+		v := s.DomainNames
+
+		e.SetList(protocol.BodyTarget, "DomainNames", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 type PutAttributesInput struct {
@@ -1721,6 +2063,32 @@ func (s *PutAttributesInput) SetItemName(v string) *PutAttributesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "Attributes", encodeReplaceableAttributeList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Expected != nil {
+		v := s.Expected
+
+		e.SetFields(protocol.BodyTarget, "Expected", v, protocol.Metadata{})
+	}
+	if s.ItemName != nil {
+		v := *s.ItemName
+
+		e.SetValue(protocol.BodyTarget, "ItemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type PutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1740,6 +2108,12 @@ func (s PutAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 type ReplaceableAttribute struct {
@@ -1806,6 +2180,35 @@ func (s *ReplaceableAttribute) SetValue(v string) *ReplaceableAttribute {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReplaceableAttribute) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Replace != nil {
+		v := *s.Replace
+
+		e.SetValue(protocol.BodyTarget, "Replace", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReplaceableAttributeList(vs []ReplaceableAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type ReplaceableItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1867,6 +2270,30 @@ func (s *ReplaceableItem) SetName(v string) *ReplaceableItem {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReplaceableItem) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetList(protocol.BodyTarget, "Attributes", encodeReplaceableAttributeList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "ItemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReplaceableItemList(vs []ReplaceableItem) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type SelectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1925,6 +2352,27 @@ func (s *SelectInput) SetSelectExpression(v string) *SelectInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SelectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConsistentRead != nil {
+		v := *s.ConsistentRead
+
+		e.SetValue(protocol.BodyTarget, "ConsistentRead", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SelectExpression != nil {
+		v := *s.SelectExpression
+
+		e.SetValue(protocol.BodyTarget, "SelectExpression", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type SelectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1962,6 +2410,22 @@ func (s *SelectOutput) SetItems(v []Item) *SelectOutput {
 func (s *SelectOutput) SetNextToken(v string) *SelectOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SelectOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		e.SetList(protocol.BodyTarget, "Items", encodeItemList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Specifies the conditions under which data should be updated. If an update
@@ -2012,4 +2476,25 @@ func (s *UpdateCondition) SetName(v string) *UpdateCondition {
 func (s *UpdateCondition) SetValue(v string) *UpdateCondition {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateCondition) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Exists != nil {
+		v := *s.Exists
+
+		e.SetValue(protocol.BodyTarget, "Exists", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }

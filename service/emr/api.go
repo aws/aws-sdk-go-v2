@@ -9610,6 +9610,15 @@ const (
 	ActionOnFailureContinue         ActionOnFailure = "CONTINUE"
 )
 
+func (enum ActionOnFailure) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionOnFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AdjustmentType string
 
 // Enum values for AdjustmentType
@@ -9618,6 +9627,15 @@ const (
 	AdjustmentTypePercentChangeInCapacity AdjustmentType = "PERCENT_CHANGE_IN_CAPACITY"
 	AdjustmentTypeExactCapacity           AdjustmentType = "EXACT_CAPACITY"
 )
+
+func (enum AdjustmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdjustmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AutoScalingPolicyState string
 
@@ -9631,6 +9649,15 @@ const (
 	AutoScalingPolicyStateFailed    AutoScalingPolicyState = "FAILED"
 )
 
+func (enum AutoScalingPolicyState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoScalingPolicyState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutoScalingPolicyStateChangeReasonCode string
 
 // Enum values for AutoScalingPolicyStateChangeReasonCode
@@ -9640,6 +9667,15 @@ const (
 	AutoScalingPolicyStateChangeReasonCodeCleanupFailure   AutoScalingPolicyStateChangeReasonCode = "CLEANUP_FAILURE"
 )
 
+func (enum AutoScalingPolicyStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoScalingPolicyStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CancelStepsRequestStatus string
 
 // Enum values for CancelStepsRequestStatus
@@ -9647,6 +9683,23 @@ const (
 	CancelStepsRequestStatusSubmitted CancelStepsRequestStatus = "SUBMITTED"
 	CancelStepsRequestStatusFailed    CancelStepsRequestStatus = "FAILED"
 )
+
+func (enum CancelStepsRequestStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CancelStepsRequestStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeClusterStateList(vs []ClusterState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type ClusterState string
 
@@ -9660,6 +9713,15 @@ const (
 	ClusterStateTerminated           ClusterState = "TERMINATED"
 	ClusterStateTerminatedWithErrors ClusterState = "TERMINATED_WITH_ERRORS"
 )
+
+func (enum ClusterState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClusterState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ClusterStateChangeReasonCode string
 
@@ -9675,6 +9737,15 @@ const (
 	ClusterStateChangeReasonCodeAllStepsCompleted    ClusterStateChangeReasonCode = "ALL_STEPS_COMPLETED"
 )
 
+func (enum ClusterStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClusterStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -9685,6 +9756,15 @@ const (
 	ComparisonOperatorLessThanOrEqual    ComparisonOperator = "LESS_THAN_OR_EQUAL"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceCollectionType string
 
 // Enum values for InstanceCollectionType
@@ -9692,6 +9772,15 @@ const (
 	InstanceCollectionTypeInstanceFleet InstanceCollectionType = "INSTANCE_FLEET"
 	InstanceCollectionTypeInstanceGroup InstanceCollectionType = "INSTANCE_GROUP"
 )
+
+func (enum InstanceCollectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceCollectionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceFleetState string
 
@@ -9706,6 +9795,15 @@ const (
 	InstanceFleetStateTerminated    InstanceFleetState = "TERMINATED"
 )
 
+func (enum InstanceFleetState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceFleetState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceFleetStateChangeReasonCode string
 
 // Enum values for InstanceFleetStateChangeReasonCode
@@ -9716,6 +9814,15 @@ const (
 	InstanceFleetStateChangeReasonCodeClusterTerminated InstanceFleetStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
+func (enum InstanceFleetStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceFleetStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceFleetType string
 
 // Enum values for InstanceFleetType
@@ -9724,6 +9831,15 @@ const (
 	InstanceFleetTypeCore   InstanceFleetType = "CORE"
 	InstanceFleetTypeTask   InstanceFleetType = "TASK"
 )
+
+func (enum InstanceFleetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceFleetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceGroupState string
 
@@ -9741,6 +9857,15 @@ const (
 	InstanceGroupStateEnded         InstanceGroupState = "ENDED"
 )
 
+func (enum InstanceGroupState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceGroupState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceGroupStateChangeReasonCode string
 
 // Enum values for InstanceGroupStateChangeReasonCode
@@ -9751,6 +9876,23 @@ const (
 	InstanceGroupStateChangeReasonCodeClusterTerminated InstanceGroupStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
+func (enum InstanceGroupStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceGroupStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeInstanceGroupTypeList(vs []InstanceGroupType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type InstanceGroupType string
 
 // Enum values for InstanceGroupType
@@ -9760,6 +9902,15 @@ const (
 	InstanceGroupTypeTask   InstanceGroupType = "TASK"
 )
 
+func (enum InstanceGroupType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceGroupType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceRoleType string
 
 // Enum values for InstanceRoleType
@@ -9768,6 +9919,23 @@ const (
 	InstanceRoleTypeCore   InstanceRoleType = "CORE"
 	InstanceRoleTypeTask   InstanceRoleType = "TASK"
 )
+
+func (enum InstanceRoleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceRoleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeInstanceStateList(vs []InstanceState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type InstanceState string
 
@@ -9780,6 +9948,15 @@ const (
 	InstanceStateTerminated          InstanceState = "TERMINATED"
 )
 
+func (enum InstanceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceStateChangeReasonCode string
 
 // Enum values for InstanceStateChangeReasonCode
@@ -9790,6 +9967,23 @@ const (
 	InstanceStateChangeReasonCodeBootstrapFailure  InstanceStateChangeReasonCode = "BOOTSTRAP_FAILURE"
 	InstanceStateChangeReasonCodeClusterTerminated InstanceStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
+
+func (enum InstanceStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeJobFlowExecutionStateList(vs []JobFlowExecutionState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 // The type of instance.
 type JobFlowExecutionState string
@@ -9806,6 +10000,15 @@ const (
 	JobFlowExecutionStateFailed        JobFlowExecutionState = "FAILED"
 )
 
+func (enum JobFlowExecutionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobFlowExecutionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MarketType string
 
 // Enum values for MarketType
@@ -9813,6 +10016,15 @@ const (
 	MarketTypeOnDemand MarketType = "ON_DEMAND"
 	MarketTypeSpot     MarketType = "SPOT"
 )
+
+func (enum MarketType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MarketType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RepoUpgradeOnBoot string
 
@@ -9822,6 +10034,15 @@ const (
 	RepoUpgradeOnBootNone     RepoUpgradeOnBoot = "NONE"
 )
 
+func (enum RepoUpgradeOnBoot) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RepoUpgradeOnBoot) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScaleDownBehavior string
 
 // Enum values for ScaleDownBehavior
@@ -9830,6 +10051,15 @@ const (
 	ScaleDownBehaviorTerminateAtTaskCompletion ScaleDownBehavior = "TERMINATE_AT_TASK_COMPLETION"
 )
 
+func (enum ScaleDownBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScaleDownBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SpotProvisioningTimeoutAction string
 
 // Enum values for SpotProvisioningTimeoutAction
@@ -9837,6 +10067,15 @@ const (
 	SpotProvisioningTimeoutActionSwitchToOnDemand SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"
 	SpotProvisioningTimeoutActionTerminateCluster SpotProvisioningTimeoutAction = "TERMINATE_CLUSTER"
 )
+
+func (enum SpotProvisioningTimeoutAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SpotProvisioningTimeoutAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Statistic string
 
@@ -9848,6 +10087,15 @@ const (
 	StatisticMinimum     Statistic = "MINIMUM"
 	StatisticMaximum     Statistic = "MAXIMUM"
 )
+
+func (enum Statistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Statistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StepExecutionState string
 
@@ -9862,6 +10110,23 @@ const (
 	StepExecutionStateInterrupted StepExecutionState = "INTERRUPTED"
 )
 
+func (enum StepExecutionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StepExecutionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeStepStateList(vs []StepState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type StepState string
 
 // Enum values for StepState
@@ -9875,12 +10140,30 @@ const (
 	StepStateInterrupted   StepState = "INTERRUPTED"
 )
 
+func (enum StepState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StepState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StepStateChangeReasonCode string
 
 // Enum values for StepStateChangeReasonCode
 const (
 	StepStateChangeReasonCodeNone StepStateChangeReasonCode = "NONE"
 )
+
+func (enum StepStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StepStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Unit string
 
@@ -9914,3 +10197,12 @@ const (
 	UnitTeraBitsPerSecond  Unit = "TERA_BITS_PER_SECOND"
 	UnitCountPerSecond     Unit = "COUNT_PER_SECOND"
 )
+
+func (enum Unit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Unit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

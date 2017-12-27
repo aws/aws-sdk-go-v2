@@ -2270,6 +2270,22 @@ func (s *AbortEnvironmentUpdateInput) SetEnvironmentName(v string) *AbortEnviron
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AbortEnvironmentUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdateOutput
 type AbortEnvironmentUpdateOutput struct {
 	_ struct{} `type:"structure"`
@@ -2290,6 +2306,12 @@ func (s AbortEnvironmentUpdateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AbortEnvironmentUpdateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AbortEnvironmentUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes the properties of an application.
@@ -2371,6 +2393,55 @@ func (s *ApplicationDescription) SetVersions(v []string) *ApplicationDescription
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplicationDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ConfigurationTemplates) > 0 {
+		v := s.ConfigurationTemplates
+
+		e.SetList(protocol.BodyTarget, "ConfigurationTemplates", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.DateCreated != nil {
+		v := *s.DateCreated
+
+		e.SetValue(protocol.BodyTarget, "DateCreated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DateUpdated != nil {
+		v := *s.DateUpdated
+
+		e.SetValue(protocol.BodyTarget, "DateUpdated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceLifecycleConfig != nil {
+		v := s.ResourceLifecycleConfig
+
+		e.SetFields(protocol.BodyTarget, "ResourceLifecycleConfig", v, protocol.Metadata{})
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		e.SetList(protocol.BodyTarget, "Versions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeApplicationDescriptionList(vs []ApplicationDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Application request metrics for an AWS Elastic Beanstalk environment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationMetrics
 type ApplicationMetrics struct {
@@ -2428,6 +2499,32 @@ func (s *ApplicationMetrics) SetStatusCodes(v *StatusCodes) *ApplicationMetrics 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplicationMetrics) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Latency != nil {
+		v := s.Latency
+
+		e.SetFields(protocol.BodyTarget, "Latency", v, protocol.Metadata{})
+	}
+	if s.RequestCount != nil {
+		v := *s.RequestCount
+
+		e.SetValue(protocol.BodyTarget, "RequestCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.StatusCodes != nil {
+		v := s.StatusCodes
+
+		e.SetFields(protocol.BodyTarget, "StatusCodes", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The resource lifecycle configuration for an application. Defines lifecycle
 // settings for resources that belong to the application, and the service role
 // that Elastic Beanstalk assumes in order to apply lifecycle settings. The
@@ -2479,6 +2576,22 @@ func (s *ApplicationResourceLifecycleConfig) SetServiceRole(v string) *Applicati
 func (s *ApplicationResourceLifecycleConfig) SetVersionLifecycleConfig(v *ApplicationVersionLifecycleConfig) *ApplicationResourceLifecycleConfig {
 	s.VersionLifecycleConfig = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplicationResourceLifecycleConfig) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceRole != nil {
+		v := *s.ServiceRole
+
+		e.SetValue(protocol.BodyTarget, "ServiceRole", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionLifecycleConfig != nil {
+		v := s.VersionLifecycleConfig
+
+		e.SetFields(protocol.BodyTarget, "VersionLifecycleConfig", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the properties of an application version.
@@ -2580,6 +2693,65 @@ func (s *ApplicationVersionDescription) SetVersionLabel(v string) *ApplicationVe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplicationVersionDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.BuildArn != nil {
+		v := *s.BuildArn
+
+		e.SetValue(protocol.BodyTarget, "BuildArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DateCreated != nil {
+		v := *s.DateCreated
+
+		e.SetValue(protocol.BodyTarget, "DateCreated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DateUpdated != nil {
+		v := *s.DateUpdated
+
+		e.SetValue(protocol.BodyTarget, "DateUpdated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceBuildInformation != nil {
+		v := s.SourceBuildInformation
+
+		e.SetFields(protocol.BodyTarget, "SourceBuildInformation", v, protocol.Metadata{})
+	}
+	if s.SourceBundle != nil {
+		v := s.SourceBundle
+
+		e.SetFields(protocol.BodyTarget, "SourceBundle", v, protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeApplicationVersionDescriptionList(vs []ApplicationVersionDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The application version lifecycle settings for an application. Defines the
 // rules that Elastic Beanstalk applies to an application's versions in order
 // to avoid hitting the per-region limit for application versions.
@@ -2642,6 +2814,22 @@ func (s *ApplicationVersionLifecycleConfig) SetMaxCountRule(v *MaxCountRule) *Ap
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplicationVersionLifecycleConfig) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxAgeRule != nil {
+		v := s.MaxAgeRule
+
+		e.SetFields(protocol.BodyTarget, "MaxAgeRule", v, protocol.Metadata{})
+	}
+	if s.MaxCountRule != nil {
+		v := s.MaxCountRule
+
+		e.SetFields(protocol.BodyTarget, "MaxCountRule", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Request to execute a scheduled managed action immediately.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedActionRequest
 type ApplyEnvironmentManagedActionInput struct {
@@ -2699,6 +2887,27 @@ func (s *ApplyEnvironmentManagedActionInput) SetEnvironmentId(v string) *ApplyEn
 func (s *ApplyEnvironmentManagedActionInput) SetEnvironmentName(v string) *ApplyEnvironmentManagedActionInput {
 	s.EnvironmentName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplyEnvironmentManagedActionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionId != nil {
+		v := *s.ActionId
+
+		e.SetValue(protocol.BodyTarget, "ActionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The result message containing information about the managed action.
@@ -2760,6 +2969,32 @@ func (s *ApplyEnvironmentManagedActionOutput) SetStatus(v string) *ApplyEnvironm
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ApplyEnvironmentManagedActionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionDescription != nil {
+		v := *s.ActionDescription
+
+		e.SetValue(protocol.BodyTarget, "ActionDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ActionId != nil {
+		v := *s.ActionId
+
+		e.SetValue(protocol.BodyTarget, "ActionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ActionType) > 0 {
+		v := s.ActionType
+
+		e.SetValue(protocol.BodyTarget, "ActionType", v, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes an Auto Scaling launch configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AutoScalingGroup
 type AutoScalingGroup struct {
@@ -2783,6 +3018,25 @@ func (s AutoScalingGroup) GoString() string {
 func (s *AutoScalingGroup) SetName(v string) *AutoScalingGroup {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AutoScalingGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAutoScalingGroupList(vs []AutoScalingGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Settings for an AWS CodeBuild build.
@@ -2881,6 +3135,37 @@ func (s *BuildConfiguration) SetTimeoutInMinutes(v int64) *BuildConfiguration {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BuildConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ArtifactName != nil {
+		v := *s.ArtifactName
+
+		e.SetValue(protocol.BodyTarget, "ArtifactName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CodeBuildServiceRole != nil {
+		v := *s.CodeBuildServiceRole
+
+		e.SetValue(protocol.BodyTarget, "CodeBuildServiceRole", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ComputeType) > 0 {
+		v := s.ComputeType
+
+		e.SetValue(protocol.BodyTarget, "ComputeType", v, protocol.Metadata{})
+	}
+	if s.Image != nil {
+		v := *s.Image
+
+		e.SetValue(protocol.BodyTarget, "Image", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TimeoutInMinutes != nil {
+		v := *s.TimeoutInMinutes
+
+		e.SetValue(protocol.BodyTarget, "TimeoutInMinutes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The builder used to build the custom platform.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Builder
 type Builder struct {
@@ -2904,6 +3189,17 @@ func (s Builder) GoString() string {
 func (s *Builder) SetARN(v string) *Builder {
 	s.ARN = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Builder) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ARN != nil {
+		v := *s.ARN
+
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // CPU utilization metrics for an instance.
@@ -2992,6 +3288,47 @@ func (s *CPUUtilization) SetUser(v float64) *CPUUtilization {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CPUUtilization) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IOWait != nil {
+		v := *s.IOWait
+
+		e.SetValue(protocol.BodyTarget, "IOWait", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.IRQ != nil {
+		v := *s.IRQ
+
+		e.SetValue(protocol.BodyTarget, "IRQ", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Idle != nil {
+		v := *s.Idle
+
+		e.SetValue(protocol.BodyTarget, "Idle", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Nice != nil {
+		v := *s.Nice
+
+		e.SetValue(protocol.BodyTarget, "Nice", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.SoftIRQ != nil {
+		v := *s.SoftIRQ
+
+		e.SetValue(protocol.BodyTarget, "SoftIRQ", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.System != nil {
+		v := *s.System
+
+		e.SetValue(protocol.BodyTarget, "System", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.User != nil {
+		v := *s.User
+
+		e.SetValue(protocol.BodyTarget, "User", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Results message indicating whether a CNAME is available.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailabilityMessage
 type CheckDNSAvailabilityInput struct {
@@ -3034,6 +3371,17 @@ func (s *CheckDNSAvailabilityInput) Validate() error {
 func (s *CheckDNSAvailabilityInput) SetCNAMEPrefix(v string) *CheckDNSAvailabilityInput {
 	s.CNAMEPrefix = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CheckDNSAvailabilityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CNAMEPrefix != nil {
+		v := *s.CNAMEPrefix
+
+		e.SetValue(protocol.BodyTarget, "CNAMEPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Indicates if the specified CNAME is available.
@@ -3080,6 +3428,22 @@ func (s *CheckDNSAvailabilityOutput) SetAvailable(v bool) *CheckDNSAvailabilityO
 func (s *CheckDNSAvailabilityOutput) SetFullyQualifiedCNAME(v string) *CheckDNSAvailabilityOutput {
 	s.FullyQualifiedCNAME = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CheckDNSAvailabilityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Available != nil {
+		v := *s.Available
+
+		e.SetValue(protocol.BodyTarget, "Available", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.FullyQualifiedCNAME != nil {
+		v := *s.FullyQualifiedCNAME
+
+		e.SetValue(protocol.BodyTarget, "FullyQualifiedCNAME", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to create or update a group of environments.
@@ -3147,6 +3511,27 @@ func (s *ComposeEnvironmentsInput) SetGroupName(v string) *ComposeEnvironmentsIn
 func (s *ComposeEnvironmentsInput) SetVersionLabels(v []string) *ComposeEnvironmentsInput {
 	s.VersionLabels = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ComposeEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VersionLabels) > 0 {
+		v := s.VersionLabels
+
+		e.SetList(protocol.BodyTarget, "VersionLabels", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the possible values for a configuration option.
@@ -3303,6 +3688,75 @@ func (s *ConfigurationOptionDescription) SetValueType(v ConfigurationOptionValue
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfigurationOptionDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ChangeSeverity != nil {
+		v := *s.ChangeSeverity
+
+		e.SetValue(protocol.BodyTarget, "ChangeSeverity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxLength != nil {
+		v := *s.MaxLength
+
+		e.SetValue(protocol.BodyTarget, "MaxLength", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MaxValue != nil {
+		v := *s.MaxValue
+
+		e.SetValue(protocol.BodyTarget, "MaxValue", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinValue != nil {
+		v := *s.MinValue
+
+		e.SetValue(protocol.BodyTarget, "MinValue", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Regex != nil {
+		v := s.Regex
+
+		e.SetFields(protocol.BodyTarget, "Regex", v, protocol.Metadata{})
+	}
+	if s.UserDefined != nil {
+		v := *s.UserDefined
+
+		e.SetValue(protocol.BodyTarget, "UserDefined", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.ValueOptions) > 0 {
+		v := s.ValueOptions
+
+		e.SetList(protocol.BodyTarget, "ValueOptions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ValueType) > 0 {
+		v := s.ValueType
+
+		e.SetValue(protocol.BodyTarget, "ValueType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeConfigurationOptionDescriptionList(vs []ConfigurationOptionDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A specification identifying an individual configuration option along with
 // its current value. For a list of possible option values, go to Option Values
 // (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html)
@@ -3369,6 +3823,40 @@ func (s *ConfigurationOptionSetting) SetResourceName(v string) *ConfigurationOpt
 func (s *ConfigurationOptionSetting) SetValue(v string) *ConfigurationOptionSetting {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfigurationOptionSetting) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionName != nil {
+		v := *s.OptionName
+
+		e.SetValue(protocol.BodyTarget, "OptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeConfigurationOptionSettingList(vs []ConfigurationOptionSetting) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Request to create an application.
@@ -3440,6 +3928,27 @@ func (s *CreateApplicationInput) SetDescription(v string) *CreateApplicationInpu
 func (s *CreateApplicationInput) SetResourceLifecycleConfig(v *ApplicationResourceLifecycleConfig) *CreateApplicationInput {
 	s.ResourceLifecycleConfig = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceLifecycleConfig != nil {
+		v := s.ResourceLifecycleConfig
+
+		e.SetFields(protocol.BodyTarget, "ResourceLifecycleConfig", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionMessage
@@ -3581,6 +4090,52 @@ func (s *CreateApplicationVersionInput) SetSourceBundle(v *S3Location) *CreateAp
 func (s *CreateApplicationVersionInput) SetVersionLabel(v string) *CreateApplicationVersionInput {
 	s.VersionLabel = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AutoCreateApplication != nil {
+		v := *s.AutoCreateApplication
+
+		e.SetValue(protocol.BodyTarget, "AutoCreateApplication", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.BuildConfiguration != nil {
+		v := s.BuildConfiguration
+
+		e.SetFields(protocol.BodyTarget, "BuildConfiguration", v, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Process != nil {
+		v := *s.Process
+
+		e.SetValue(protocol.BodyTarget, "Process", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.SourceBuildInformation != nil {
+		v := s.SourceBuildInformation
+
+		e.SetFields(protocol.BodyTarget, "SourceBuildInformation", v, protocol.Metadata{})
+	}
+	if s.SourceBundle != nil {
+		v := s.SourceBundle
+
+		e.SetFields(protocol.BodyTarget, "SourceBundle", v, protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to create a configuration template.
@@ -3741,6 +4296,52 @@ func (s *CreateConfigurationTemplateInput) SetSourceConfiguration(v *SourceConfi
 func (s *CreateConfigurationTemplateInput) SetTemplateName(v string) *CreateConfigurationTemplateInput {
 	s.TemplateName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceConfiguration != nil {
+		v := s.SourceConfiguration
+
+		e.SetFields(protocol.BodyTarget, "SourceConfiguration", v, protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironmentMessage
@@ -3962,6 +4563,77 @@ func (s *CreateEnvironmentInput) SetVersionLabel(v string) *CreateEnvironmentInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CNAMEPrefix != nil {
+		v := *s.CNAMEPrefix
+
+		e.SetValue(protocol.BodyTarget, "CNAMEPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if len(s.OptionsToRemove) > 0 {
+		v := s.OptionsToRemove
+
+		e.SetList(protocol.BodyTarget, "OptionsToRemove", encodeOptionSpecificationList(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Tier != nil {
+		v := s.Tier
+
+		e.SetFields(protocol.BodyTarget, "Tier", v, protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Request to create a new platform version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersionRequest
 type CreatePlatformVersionInput struct {
@@ -4061,6 +4733,37 @@ func (s *CreatePlatformVersionInput) SetPlatformVersion(v string) *CreatePlatfor
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePlatformVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if s.PlatformDefinitionBundle != nil {
+		v := s.PlatformDefinitionBundle
+
+		e.SetFields(protocol.BodyTarget, "PlatformDefinitionBundle", v, protocol.Metadata{})
+	}
+	if s.PlatformName != nil {
+		v := *s.PlatformName
+
+		e.SetValue(protocol.BodyTarget, "PlatformName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformVersion != nil {
+		v := *s.PlatformVersion
+
+		e.SetValue(protocol.BodyTarget, "PlatformVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersionResult
 type CreatePlatformVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4101,6 +4804,22 @@ func (s *CreatePlatformVersionOutput) SetPlatformSummary(v *PlatformSummary) *Cr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePlatformVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Builder != nil {
+		v := s.Builder
+
+		e.SetFields(protocol.BodyTarget, "Builder", v, protocol.Metadata{})
+	}
+	if s.PlatformSummary != nil {
+		v := s.PlatformSummary
+
+		e.SetFields(protocol.BodyTarget, "PlatformSummary", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocationInput
 type CreateStorageLocationInput struct {
 	_ struct{} `type:"structure"`
@@ -4114,6 +4833,12 @@ func (s CreateStorageLocationInput) String() string {
 // GoString returns the string representation
 func (s CreateStorageLocationInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStorageLocationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Results of a CreateStorageLocationResult call.
@@ -4148,6 +4873,17 @@ func (s *CreateStorageLocationOutput) SetS3Bucket(v string) *CreateStorageLocati
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStorageLocationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.S3Bucket != nil {
+		v := *s.S3Bucket
+
+		e.SetValue(protocol.BodyTarget, "S3Bucket", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A custom AMI available to platforms.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CustomAmi
 type CustomAmi struct {
@@ -4180,6 +4916,30 @@ func (s *CustomAmi) SetImageId(v string) *CustomAmi {
 func (s *CustomAmi) SetVirtualizationType(v string) *CustomAmi {
 	s.VirtualizationType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CustomAmi) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ImageId != nil {
+		v := *s.ImageId
+
+		e.SetValue(protocol.BodyTarget, "ImageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VirtualizationType != nil {
+		v := *s.VirtualizationType
+
+		e.SetValue(protocol.BodyTarget, "VirtualizationType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCustomAmiList(vs []CustomAmi) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Request to delete an application.
@@ -4236,6 +4996,22 @@ func (s *DeleteApplicationInput) SetTerminateEnvByForce(v bool) *DeleteApplicati
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TerminateEnvByForce != nil {
+		v := *s.TerminateEnvByForce
+
+		e.SetValue(protocol.BodyTarget, "TerminateEnvByForce", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationOutput
 type DeleteApplicationOutput struct {
 	_ struct{} `type:"structure"`
@@ -4256,6 +5032,12 @@ func (s DeleteApplicationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Request to delete an application version.
@@ -4331,6 +5113,27 @@ func (s *DeleteApplicationVersionInput) SetVersionLabel(v string) *DeleteApplica
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DeleteSourceBundle != nil {
+		v := *s.DeleteSourceBundle
+
+		e.SetValue(protocol.BodyTarget, "DeleteSourceBundle", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersionOutput
 type DeleteApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4351,6 +5154,12 @@ func (s DeleteApplicationVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApplicationVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Request to delete a configuration template.
@@ -4415,6 +5224,22 @@ func (s *DeleteConfigurationTemplateInput) SetTemplateName(v string) *DeleteConf
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplateOutput
 type DeleteConfigurationTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -4435,6 +5260,12 @@ func (s DeleteConfigurationTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteConfigurationTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Request to delete a draft environment configuration.
@@ -4499,6 +5330,22 @@ func (s *DeleteEnvironmentConfigurationInput) SetEnvironmentName(v string) *Dele
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEnvironmentConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfigurationOutput
 type DeleteEnvironmentConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -4519,6 +5366,12 @@ func (s DeleteEnvironmentConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEnvironmentConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteEnvironmentConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersionRequest
@@ -4543,6 +5396,17 @@ func (s DeletePlatformVersionInput) GoString() string {
 func (s *DeletePlatformVersionInput) SetPlatformArn(v string) *DeletePlatformVersionInput {
 	s.PlatformArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePlatformVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersionResult
@@ -4574,6 +5438,17 @@ func (s DeletePlatformVersionOutput) SDKResponseMetadata() aws.Response {
 func (s *DeletePlatformVersionOutput) SetPlatformSummary(v *PlatformSummary) *DeletePlatformVersionOutput {
 	s.PlatformSummary = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePlatformVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformSummary != nil {
+		v := s.PlatformSummary
+
+		e.SetFields(protocol.BodyTarget, "PlatformSummary", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Information about an application version deployment.
@@ -4635,6 +5510,32 @@ func (s *Deployment) SetStatus(v string) *Deployment {
 func (s *Deployment) SetVersionLabel(v string) *Deployment {
 	s.VersionLabel = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Deployment) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeploymentId != nil {
+		v := *s.DeploymentId
+
+		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DeploymentTime != nil {
+		v := *s.DeploymentTime
+
+		e.SetValue(protocol.BodyTarget, "DeploymentTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to describe application versions.
@@ -4713,6 +5614,32 @@ func (s *DescribeApplicationVersionsInput) SetVersionLabels(v []string) *Describ
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeApplicationVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VersionLabels) > 0 {
+		v := s.VersionLabels
+
+		e.SetList(protocol.BodyTarget, "VersionLabels", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message wrapping a list of application version descriptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionsMessage
 type DescribeApplicationVersionsOutput struct {
@@ -4755,6 +5682,22 @@ func (s *DescribeApplicationVersionsOutput) SetNextToken(v string) *DescribeAppl
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeApplicationVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ApplicationVersions) > 0 {
+		v := s.ApplicationVersions
+
+		e.SetList(protocol.BodyTarget, "ApplicationVersions", encodeApplicationVersionDescriptionList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Request to describe one or more applications.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationsMessage
 type DescribeApplicationsInput struct {
@@ -4779,6 +5722,17 @@ func (s DescribeApplicationsInput) GoString() string {
 func (s *DescribeApplicationsInput) SetApplicationNames(v []string) *DescribeApplicationsInput {
 	s.ApplicationNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ApplicationNames) > 0 {
+		v := s.ApplicationNames
+
+		e.SetList(protocol.BodyTarget, "ApplicationNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Result message containing a list of application descriptions.
@@ -4811,6 +5765,17 @@ func (s DescribeApplicationsOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeApplicationsOutput) SetApplications(v []ApplicationDescription) *DescribeApplicationsOutput {
 	s.Applications = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeApplicationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Applications) > 0 {
+		v := s.Applications
+
+		e.SetList(protocol.BodyTarget, "Applications", encodeApplicationDescriptionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Result message containing a list of application version descriptions.
@@ -4912,6 +5877,42 @@ func (s *DescribeConfigurationOptionsInput) SetTemplateName(v string) *DescribeC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeConfigurationOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Options) > 0 {
+		v := s.Options
+
+		e.SetList(protocol.BodyTarget, "Options", encodeOptionSpecificationList(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes the settings for a specified configuration set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionsDescription
 type DescribeConfigurationOptionsOutput struct {
@@ -4960,6 +5961,27 @@ func (s *DescribeConfigurationOptionsOutput) SetPlatformArn(v string) *DescribeC
 func (s *DescribeConfigurationOptionsOutput) SetSolutionStackName(v string) *DescribeConfigurationOptionsOutput {
 	s.SolutionStackName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeConfigurationOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Options) > 0 {
+		v := s.Options
+
+		e.SetList(protocol.BodyTarget, "Options", encodeConfigurationOptionDescriptionList(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Result message containing all of the configuration settings for a specified
@@ -5041,6 +6063,27 @@ func (s *DescribeConfigurationSettingsInput) SetTemplateName(v string) *Describe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeConfigurationSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The results from a request to change the configuration settings of an environment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescriptions
 type DescribeConfigurationSettingsOutput struct {
@@ -5071,6 +6114,17 @@ func (s DescribeConfigurationSettingsOutput) SDKResponseMetadata() aws.Response 
 func (s *DescribeConfigurationSettingsOutput) SetConfigurationSettings(v []UpdateConfigurationTemplateOutput) *DescribeConfigurationSettingsOutput {
 	s.ConfigurationSettings = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeConfigurationSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ConfigurationSettings) > 0 {
+		v := s.ConfigurationSettings
+
+		e.SetList(protocol.BodyTarget, "ConfigurationSettings", encodeUpdateConfigurationTemplateOutputList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // See the example below to learn how to create a request body.
@@ -5132,6 +6186,32 @@ func (s *DescribeEnvironmentHealthInput) SetEnvironmentId(v string) *DescribeEnv
 func (s *DescribeEnvironmentHealthInput) SetEnvironmentName(v string) *DescribeEnvironmentHealthInput {
 	s.EnvironmentName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentHealthInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		e.SetList(protocol.BodyTarget, "AttributeNames", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Health details for an AWS Elastic Beanstalk environment.
@@ -5233,6 +6313,52 @@ func (s *DescribeEnvironmentHealthOutput) SetStatus(v EnvironmentHealth) *Descri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentHealthOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationMetrics != nil {
+		v := s.ApplicationMetrics
+
+		e.SetFields(protocol.BodyTarget, "ApplicationMetrics", v, protocol.Metadata{})
+	}
+	if len(s.Causes) > 0 {
+		v := s.Causes
+
+		e.SetList(protocol.BodyTarget, "Causes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Color != nil {
+		v := *s.Color
+
+		e.SetValue(protocol.BodyTarget, "Color", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HealthStatus != nil {
+		v := *s.HealthStatus
+
+		e.SetValue(protocol.BodyTarget, "HealthStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstancesHealth != nil {
+		v := s.InstancesHealth
+
+		e.SetFields(protocol.BodyTarget, "InstancesHealth", v, protocol.Metadata{})
+	}
+	if s.RefreshedAt != nil {
+		v := *s.RefreshedAt
+
+		e.SetValue(protocol.BodyTarget, "RefreshedAt", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Request to list completed and failed managed actions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistoryRequest
 type DescribeEnvironmentManagedActionHistoryInput struct {
@@ -5298,6 +6424,32 @@ func (s *DescribeEnvironmentManagedActionHistoryInput) SetNextToken(v string) *D
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentManagedActionHistoryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A result message containing a list of completed and failed managed actions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistoryResult
 type DescribeEnvironmentManagedActionHistoryOutput struct {
@@ -5338,6 +6490,22 @@ func (s *DescribeEnvironmentManagedActionHistoryOutput) SetManagedActionHistoryI
 func (s *DescribeEnvironmentManagedActionHistoryOutput) SetNextToken(v string) *DescribeEnvironmentManagedActionHistoryOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentManagedActionHistoryOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ManagedActionHistoryItems) > 0 {
+		v := s.ManagedActionHistoryItems
+
+		e.SetList(protocol.BodyTarget, "ManagedActionHistoryItems", encodeManagedActionHistoryItemList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to list an environment's upcoming and in-progress managed actions.
@@ -5383,6 +6551,27 @@ func (s *DescribeEnvironmentManagedActionsInput) SetStatus(v ActionStatus) *Desc
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentManagedActionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The result message containing a list of managed actions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionsResult
 type DescribeEnvironmentManagedActionsOutput struct {
@@ -5413,6 +6602,17 @@ func (s DescribeEnvironmentManagedActionsOutput) SDKResponseMetadata() aws.Respo
 func (s *DescribeEnvironmentManagedActionsOutput) SetManagedActions(v []ManagedAction) *DescribeEnvironmentManagedActionsOutput {
 	s.ManagedActions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentManagedActionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ManagedActions) > 0 {
+		v := s.ManagedActions
+
+		e.SetList(protocol.BodyTarget, "ManagedActions", encodeManagedActionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to describe the resources in an environment.
@@ -5470,6 +6670,22 @@ func (s *DescribeEnvironmentResourcesInput) SetEnvironmentName(v string) *Descri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message containing a list of environment resource descriptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourceDescriptionsMessage
 type DescribeEnvironmentResourcesOutput struct {
@@ -5500,6 +6716,17 @@ func (s DescribeEnvironmentResourcesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeEnvironmentResourcesOutput) SetEnvironmentResources(v *EnvironmentResourceDescription) *DescribeEnvironmentResourcesOutput {
 	s.EnvironmentResources = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentResources != nil {
+		v := s.EnvironmentResources
+
+		e.SetFields(protocol.BodyTarget, "EnvironmentResources", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to describe one or more environments.
@@ -5627,6 +6854,52 @@ func (s *DescribeEnvironmentsInput) SetVersionLabel(v string) *DescribeEnvironme
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.EnvironmentIds) > 0 {
+		v := s.EnvironmentIds
+
+		e.SetList(protocol.BodyTarget, "EnvironmentIds", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.EnvironmentNames) > 0 {
+		v := s.EnvironmentNames
+
+		e.SetList(protocol.BodyTarget, "EnvironmentNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.IncludeDeleted != nil {
+		v := *s.IncludeDeleted
+
+		e.SetValue(protocol.BodyTarget, "IncludeDeleted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.IncludedDeletedBackTo != nil {
+		v := *s.IncludedDeletedBackTo
+
+		e.SetValue(protocol.BodyTarget, "IncludedDeletedBackTo", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message containing a list of environment descriptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironmentsOutput
 type DescribeEnvironmentsOutput struct {
@@ -5667,6 +6940,22 @@ func (s *DescribeEnvironmentsOutput) SetEnvironments(v []UpdateEnvironmentOutput
 func (s *DescribeEnvironmentsOutput) SetNextToken(v string) *DescribeEnvironmentsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEnvironmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Environments) > 0 {
+		v := s.Environments
+
+		e.SetList(protocol.BodyTarget, "Environments", encodeUpdateEnvironmentOutputList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Request to retrieve a list of events for an environment.
@@ -5828,6 +7117,72 @@ func (s *DescribeEventsInput) SetVersionLabel(v string) *DescribeEventsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RequestId != nil {
+		v := *s.RequestId
+
+		e.SetValue(protocol.BodyTarget, "RequestId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Severity) > 0 {
+		v := s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", v, protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message wrapping a list of event descriptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EventDescriptionsMessage
 type DescribeEventsOutput struct {
@@ -5868,6 +7223,22 @@ func (s *DescribeEventsOutput) SetEvents(v []EventDescription) *DescribeEventsOu
 func (s *DescribeEventsOutput) SetNextToken(v string) *DescribeEventsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		e.SetList(protocol.BodyTarget, "Events", encodeEventDescriptionList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Parameters for a call to DescribeInstancesHealth.
@@ -5939,6 +7310,37 @@ func (s *DescribeInstancesHealthInput) SetNextToken(v string) *DescribeInstances
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeInstancesHealthInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		e.SetList(protocol.BodyTarget, "AttributeNames", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Detailed health information about the Amazon EC2 instances in an AWS Elastic
 // Beanstalk environment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealthResult
@@ -5990,6 +7392,27 @@ func (s *DescribeInstancesHealthOutput) SetRefreshedAt(v time.Time) *DescribeIns
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeInstancesHealthOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.InstanceHealthList) > 0 {
+		v := s.InstanceHealthList
+
+		e.SetList(protocol.BodyTarget, "InstanceHealthList", encodeSingleInstanceHealthList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RefreshedAt != nil {
+		v := *s.RefreshedAt
+
+		e.SetValue(protocol.BodyTarget, "RefreshedAt", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersionRequest
 type DescribePlatformVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -6012,6 +7435,17 @@ func (s DescribePlatformVersionInput) GoString() string {
 func (s *DescribePlatformVersionInput) SetPlatformArn(v string) *DescribePlatformVersionInput {
 	s.PlatformArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribePlatformVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersionResult
@@ -6043,6 +7477,17 @@ func (s DescribePlatformVersionOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribePlatformVersionOutput) SetPlatformDescription(v *PlatformDescription) *DescribePlatformVersionOutput {
 	s.PlatformDescription = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribePlatformVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PlatformDescription != nil {
+		v := s.PlatformDescription
+
+		e.SetFields(protocol.BodyTarget, "PlatformDescription", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // The information retrieved from the Amazon EC2 instances.
@@ -6097,6 +7542,40 @@ func (s *EnvironmentInfoDescription) SetSampleTimestamp(v time.Time) *Environmen
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnvironmentInfoDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Ec2InstanceId != nil {
+		v := *s.Ec2InstanceId
+
+		e.SetValue(protocol.BodyTarget, "Ec2InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InfoType) > 0 {
+		v := s.InfoType
+
+		e.SetValue(protocol.BodyTarget, "InfoType", v, protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SampleTimestamp != nil {
+		v := *s.SampleTimestamp
+
+		e.SetValue(protocol.BodyTarget, "SampleTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEnvironmentInfoDescriptionList(vs []EnvironmentInfoDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A link to another environment, defined in the environment's manifest. Links
 // provide connection information in system properties that can be used to connect
 // to another environment in the same group. See Environment Manifest (env.yaml)
@@ -6133,6 +7612,30 @@ func (s *EnvironmentLink) SetEnvironmentName(v string) *EnvironmentLink {
 func (s *EnvironmentLink) SetLinkName(v string) *EnvironmentLink {
 	s.LinkName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnvironmentLink) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LinkName != nil {
+		v := *s.LinkName
+
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEnvironmentLinkList(vs []EnvironmentLink) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes the AWS resources in use by this environment. This data is live.
@@ -6214,6 +7717,47 @@ func (s *EnvironmentResourceDescription) SetTriggers(v []Trigger) *EnvironmentRe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnvironmentResourceDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AutoScalingGroups) > 0 {
+		v := s.AutoScalingGroups
+
+		e.SetList(protocol.BodyTarget, "AutoScalingGroups", encodeAutoScalingGroupList(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Instances) > 0 {
+		v := s.Instances
+
+		e.SetList(protocol.BodyTarget, "Instances", encodeInstanceList(v), protocol.Metadata{})
+	}
+	if len(s.LaunchConfigurations) > 0 {
+		v := s.LaunchConfigurations
+
+		e.SetList(protocol.BodyTarget, "LaunchConfigurations", encodeLaunchConfigurationList(v), protocol.Metadata{})
+	}
+	if len(s.LoadBalancers) > 0 {
+		v := s.LoadBalancers
+
+		e.SetList(protocol.BodyTarget, "LoadBalancers", encodeLoadBalancerList(v), protocol.Metadata{})
+	}
+	if len(s.Queues) > 0 {
+		v := s.Queues
+
+		e.SetList(protocol.BodyTarget, "Queues", encodeQueueList(v), protocol.Metadata{})
+	}
+	if len(s.Triggers) > 0 {
+		v := s.Triggers
+
+		e.SetList(protocol.BodyTarget, "Triggers", encodeTriggerList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes the AWS resources in use by this environment. This data is not
 // live data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourcesDescription
@@ -6238,6 +7782,17 @@ func (s EnvironmentResourcesDescription) GoString() string {
 func (s *EnvironmentResourcesDescription) SetLoadBalancer(v *LoadBalancerDescription) *EnvironmentResourcesDescription {
 	s.LoadBalancer = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnvironmentResourcesDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoadBalancer != nil {
+		v := s.LoadBalancer
+
+		e.SetFields(protocol.BodyTarget, "LoadBalancer", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the properties of an environment tier
@@ -6281,6 +7836,27 @@ func (s *EnvironmentTier) SetType(v string) *EnvironmentTier {
 func (s *EnvironmentTier) SetVersion(v string) *EnvironmentTier {
 	s.Version = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnvironmentTier) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		e.SetValue(protocol.BodyTarget, "Type", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		e.SetValue(protocol.BodyTarget, "Version", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes an event.
@@ -6380,6 +7956,65 @@ func (s *EventDescription) SetVersionLabel(v string) *EventDescription {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EventDate != nil {
+		v := *s.EventDate
+
+		e.SetValue(protocol.BodyTarget, "EventDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RequestId != nil {
+		v := *s.RequestId
+
+		e.SetValue(protocol.BodyTarget, "RequestId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Severity) > 0 {
+		v := s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", v, protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventDescriptionList(vs []EventDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The description of an Amazon EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Instance
 type Instance struct {
@@ -6403,6 +8038,25 @@ func (s Instance) GoString() string {
 func (s *Instance) SetId(v string) *Instance {
 	s.Id = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Instance) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeInstanceList(vs []Instance) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents summary information about the health of an instance. For more
@@ -6498,6 +8152,52 @@ func (s *InstanceHealthSummary) SetUnknown(v int64) *InstanceHealthSummary {
 func (s *InstanceHealthSummary) SetWarning(v int64) *InstanceHealthSummary {
 	s.Warning = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *InstanceHealthSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Degraded != nil {
+		v := *s.Degraded
+
+		e.SetValue(protocol.BodyTarget, "Degraded", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Info != nil {
+		v := *s.Info
+
+		e.SetValue(protocol.BodyTarget, "Info", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NoData != nil {
+		v := *s.NoData
+
+		e.SetValue(protocol.BodyTarget, "NoData", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Ok != nil {
+		v := *s.Ok
+
+		e.SetValue(protocol.BodyTarget, "Ok", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Pending != nil {
+		v := *s.Pending
+
+		e.SetValue(protocol.BodyTarget, "Pending", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Severe != nil {
+		v := *s.Severe
+
+		e.SetValue(protocol.BodyTarget, "Severe", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Unknown != nil {
+		v := *s.Unknown
+
+		e.SetValue(protocol.BodyTarget, "Unknown", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Warning != nil {
+		v := *s.Warning
+
+		e.SetValue(protocol.BodyTarget, "Warning", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the average latency for the slowest X percent of requests over
@@ -6597,6 +8297,52 @@ func (s *Latency) SetP999(v float64) *Latency {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Latency) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.P10 != nil {
+		v := *s.P10
+
+		e.SetValue(protocol.BodyTarget, "P10", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P50 != nil {
+		v := *s.P50
+
+		e.SetValue(protocol.BodyTarget, "P50", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P75 != nil {
+		v := *s.P75
+
+		e.SetValue(protocol.BodyTarget, "P75", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P85 != nil {
+		v := *s.P85
+
+		e.SetValue(protocol.BodyTarget, "P85", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P90 != nil {
+		v := *s.P90
+
+		e.SetValue(protocol.BodyTarget, "P90", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P95 != nil {
+		v := *s.P95
+
+		e.SetValue(protocol.BodyTarget, "P95", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P99 != nil {
+		v := *s.P99
+
+		e.SetValue(protocol.BodyTarget, "P99", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.P999 != nil {
+		v := *s.P999
+
+		e.SetValue(protocol.BodyTarget, "P999", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes an Auto Scaling launch configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchConfiguration
 type LaunchConfiguration struct {
@@ -6622,6 +8368,25 @@ func (s *LaunchConfiguration) SetName(v string) *LaunchConfiguration {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LaunchConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLaunchConfigurationList(vs []LaunchConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacksInput
 type ListAvailableSolutionStacksInput struct {
 	_ struct{} `type:"structure"`
@@ -6635,6 +8400,12 @@ func (s ListAvailableSolutionStacksInput) String() string {
 // GoString returns the string representation
 func (s ListAvailableSolutionStacksInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAvailableSolutionStacksInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // A list of available AWS Elastic Beanstalk solution stacks.
@@ -6676,6 +8447,22 @@ func (s *ListAvailableSolutionStacksOutput) SetSolutionStackDetails(v []Solution
 func (s *ListAvailableSolutionStacksOutput) SetSolutionStacks(v []string) *ListAvailableSolutionStacksOutput {
 	s.SolutionStacks = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAvailableSolutionStacksOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SolutionStackDetails) > 0 {
+		v := s.SolutionStackDetails
+
+		e.SetList(protocol.BodyTarget, "SolutionStackDetails", encodeSolutionStackDescriptionList(v), protocol.Metadata{})
+	}
+	if len(s.SolutionStacks) > 0 {
+		v := s.SolutionStacks
+
+		e.SetList(protocol.BodyTarget, "SolutionStacks", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersionsRequest
@@ -6735,6 +8522,27 @@ func (s *ListPlatformVersionsInput) SetNextToken(v string) *ListPlatformVersions
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPlatformVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodePlatformFilterList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersionsResult
 type ListPlatformVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6776,6 +8584,22 @@ func (s *ListPlatformVersionsOutput) SetPlatformSummaryList(v []PlatformSummary)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPlatformVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PlatformSummaryList) > 0 {
+		v := s.PlatformSummaryList
+
+		e.SetList(protocol.BodyTarget, "PlatformSummaryList", encodePlatformSummaryList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes the properties of a Listener for the LoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Listener
 type Listener struct {
@@ -6810,6 +8634,30 @@ func (s *Listener) SetProtocol(v string) *Listener {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Listener) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Port != nil {
+		v := *s.Port
+
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Protocol != nil {
+		v := *s.Protocol
+
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeListenerList(vs []Listener) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a LoadBalancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LoadBalancer
 type LoadBalancer struct {
@@ -6833,6 +8681,25 @@ func (s LoadBalancer) GoString() string {
 func (s *LoadBalancer) SetName(v string) *LoadBalancer {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoadBalancer) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeLoadBalancerList(vs []LoadBalancer) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Describes the details of a LoadBalancer.
@@ -6876,6 +8743,27 @@ func (s *LoadBalancerDescription) SetListeners(v []Listener) *LoadBalancerDescri
 func (s *LoadBalancerDescription) SetLoadBalancerName(v string) *LoadBalancerDescription {
 	s.LoadBalancerName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoadBalancerDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Listeners) > 0 {
+		v := s.Listeners
+
+		e.SetList(protocol.BodyTarget, "Listeners", encodeListenerList(v), protocol.Metadata{})
+	}
+	if s.LoadBalancerName != nil {
+		v := *s.LoadBalancerName
+
+		e.SetValue(protocol.BodyTarget, "LoadBalancerName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The record of an upcoming or in-progress managed action.
@@ -6939,6 +8827,45 @@ func (s *ManagedAction) SetStatus(v ActionStatus) *ManagedAction {
 func (s *ManagedAction) SetWindowStartTime(v time.Time) *ManagedAction {
 	s.WindowStartTime = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ManagedAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionDescription != nil {
+		v := *s.ActionDescription
+
+		e.SetValue(protocol.BodyTarget, "ActionDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ActionId != nil {
+		v := *s.ActionId
+
+		e.SetValue(protocol.BodyTarget, "ActionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ActionType) > 0 {
+		v := s.ActionType
+
+		e.SetValue(protocol.BodyTarget, "ActionType", v, protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.WindowStartTime != nil {
+		v := *s.WindowStartTime
+
+		e.SetValue(protocol.BodyTarget, "WindowStartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeManagedActionList(vs []ManagedAction) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The record of a completed or failed managed action.
@@ -7029,6 +8956,60 @@ func (s *ManagedActionHistoryItem) SetStatus(v ActionHistoryStatus) *ManagedActi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ManagedActionHistoryItem) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionDescription != nil {
+		v := *s.ActionDescription
+
+		e.SetValue(protocol.BodyTarget, "ActionDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ActionId != nil {
+		v := *s.ActionId
+
+		e.SetValue(protocol.BodyTarget, "ActionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ActionType) > 0 {
+		v := s.ActionType
+
+		e.SetValue(protocol.BodyTarget, "ActionType", v, protocol.Metadata{})
+	}
+	if s.ExecutedTime != nil {
+		v := *s.ExecutedTime
+
+		e.SetValue(protocol.BodyTarget, "ExecutedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.FailureDescription != nil {
+		v := *s.FailureDescription
+
+		e.SetValue(protocol.BodyTarget, "FailureDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.FailureType) > 0 {
+		v := s.FailureType
+
+		e.SetValue(protocol.BodyTarget, "FailureType", v, protocol.Metadata{})
+	}
+	if s.FinishedTime != nil {
+		v := *s.FinishedTime
+
+		e.SetValue(protocol.BodyTarget, "FinishedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeManagedActionHistoryItemList(vs []ManagedActionHistoryItem) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A lifecycle rule that deletes application versions after the specified number
 // of days.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/MaxAgeRule
@@ -7088,6 +9069,27 @@ func (s *MaxAgeRule) SetEnabled(v bool) *MaxAgeRule {
 func (s *MaxAgeRule) SetMaxAgeInDays(v int64) *MaxAgeRule {
 	s.MaxAgeInDays = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MaxAgeRule) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeleteSourceFromS3 != nil {
+		v := *s.DeleteSourceFromS3
+
+		e.SetValue(protocol.BodyTarget, "DeleteSourceFromS3", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MaxAgeInDays != nil {
+		v := *s.MaxAgeInDays
+
+		e.SetValue(protocol.BodyTarget, "MaxAgeInDays", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // A lifecycle rule that deletes the oldest application version when the maximum
@@ -7151,6 +9153,27 @@ func (s *MaxCountRule) SetMaxCount(v int64) *MaxCountRule {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MaxCountRule) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeleteSourceFromS3 != nil {
+		v := *s.DeleteSourceFromS3
+
+		e.SetValue(protocol.BodyTarget, "DeleteSourceFromS3", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MaxCount != nil {
+		v := *s.MaxCount
+
+		e.SetValue(protocol.BodyTarget, "MaxCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A regular expression representing a restriction on a string configuration
 // option value.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/OptionRestrictionRegex
@@ -7185,6 +9208,22 @@ func (s *OptionRestrictionRegex) SetLabel(v string) *OptionRestrictionRegex {
 func (s *OptionRestrictionRegex) SetPattern(v string) *OptionRestrictionRegex {
 	s.Pattern = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionRestrictionRegex) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Label != nil {
+		v := *s.Label
+
+		e.SetValue(protocol.BodyTarget, "Label", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Pattern != nil {
+		v := *s.Pattern
+
+		e.SetValue(protocol.BodyTarget, "Pattern", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // A specification identifying an individual configuration option.
@@ -7241,6 +9280,35 @@ func (s *OptionSpecification) SetOptionName(v string) *OptionSpecification {
 func (s *OptionSpecification) SetResourceName(v string) *OptionSpecification {
 	s.ResourceName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OptionSpecification) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionName != nil {
+		v := *s.OptionName
+
+		e.SetValue(protocol.BodyTarget, "OptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceName != nil {
+		v := *s.ResourceName
+
+		e.SetValue(protocol.BodyTarget, "ResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOptionSpecificationList(vs []OptionSpecification) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Detailed information about a platform.
@@ -7421,6 +9489,102 @@ func (s *PlatformDescription) SetSupportedTierList(v []string) *PlatformDescript
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PlatformDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.CustomAmiList) > 0 {
+		v := s.CustomAmiList
+
+		e.SetList(protocol.BodyTarget, "CustomAmiList", encodeCustomAmiList(v), protocol.Metadata{})
+	}
+	if s.DateCreated != nil {
+		v := *s.DateCreated
+
+		e.SetValue(protocol.BodyTarget, "DateCreated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DateUpdated != nil {
+		v := *s.DateUpdated
+
+		e.SetValue(protocol.BodyTarget, "DateUpdated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Frameworks) > 0 {
+		v := s.Frameworks
+
+		e.SetList(protocol.BodyTarget, "Frameworks", encodePlatformFrameworkList(v), protocol.Metadata{})
+	}
+	if s.Maintainer != nil {
+		v := *s.Maintainer
+
+		e.SetValue(protocol.BodyTarget, "Maintainer", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperatingSystemName != nil {
+		v := *s.OperatingSystemName
+
+		e.SetValue(protocol.BodyTarget, "OperatingSystemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperatingSystemVersion != nil {
+		v := *s.OperatingSystemVersion
+
+		e.SetValue(protocol.BodyTarget, "OperatingSystemVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformCategory != nil {
+		v := *s.PlatformCategory
+
+		e.SetValue(protocol.BodyTarget, "PlatformCategory", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformName != nil {
+		v := *s.PlatformName
+
+		e.SetValue(protocol.BodyTarget, "PlatformName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformOwner != nil {
+		v := *s.PlatformOwner
+
+		e.SetValue(protocol.BodyTarget, "PlatformOwner", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PlatformStatus) > 0 {
+		v := s.PlatformStatus
+
+		e.SetValue(protocol.BodyTarget, "PlatformStatus", v, protocol.Metadata{})
+	}
+	if s.PlatformVersion != nil {
+		v := *s.PlatformVersion
+
+		e.SetValue(protocol.BodyTarget, "PlatformVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ProgrammingLanguages) > 0 {
+		v := s.ProgrammingLanguages
+
+		e.SetList(protocol.BodyTarget, "ProgrammingLanguages", encodePlatformProgrammingLanguageList(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SupportedAddonList) > 0 {
+		v := s.SupportedAddonList
+
+		e.SetList(protocol.BodyTarget, "SupportedAddonList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.SupportedTierList) > 0 {
+		v := s.SupportedTierList
+
+		e.SetList(protocol.BodyTarget, "SupportedTierList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Specify criteria to restrict the results when listing custom platforms.
 //
 // The filter is evaluated as the expression:
@@ -7474,6 +9638,35 @@ func (s *PlatformFilter) SetValues(v []string) *PlatformFilter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PlatformFilter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Operator != nil {
+		v := *s.Operator
+
+		e.SetValue(protocol.BodyTarget, "Operator", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		e.SetValue(protocol.BodyTarget, "Type", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Values) > 0 {
+		v := s.Values
+
+		e.SetList(protocol.BodyTarget, "Values", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePlatformFilterList(vs []PlatformFilter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A framework supported by the custom platform.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformFramework
 type PlatformFramework struct {
@@ -7508,6 +9701,30 @@ func (s *PlatformFramework) SetVersion(v string) *PlatformFramework {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PlatformFramework) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		e.SetValue(protocol.BodyTarget, "Version", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePlatformFrameworkList(vs []PlatformFramework) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A programming language supported by the platform.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformProgrammingLanguage
 type PlatformProgrammingLanguage struct {
@@ -7540,6 +9757,30 @@ func (s *PlatformProgrammingLanguage) SetName(v string) *PlatformProgrammingLang
 func (s *PlatformProgrammingLanguage) SetVersion(v string) *PlatformProgrammingLanguage {
 	s.Version = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PlatformProgrammingLanguage) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		e.SetValue(protocol.BodyTarget, "Version", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePlatformProgrammingLanguageList(vs []PlatformProgrammingLanguage) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Detailed information about a platform.
@@ -7631,6 +9872,60 @@ func (s *PlatformSummary) SetSupportedTierList(v []string) *PlatformSummary {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PlatformSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OperatingSystemName != nil {
+		v := *s.OperatingSystemName
+
+		e.SetValue(protocol.BodyTarget, "OperatingSystemName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperatingSystemVersion != nil {
+		v := *s.OperatingSystemVersion
+
+		e.SetValue(protocol.BodyTarget, "OperatingSystemVersion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformCategory != nil {
+		v := *s.PlatformCategory
+
+		e.SetValue(protocol.BodyTarget, "PlatformCategory", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PlatformOwner != nil {
+		v := *s.PlatformOwner
+
+		e.SetValue(protocol.BodyTarget, "PlatformOwner", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PlatformStatus) > 0 {
+		v := s.PlatformStatus
+
+		e.SetValue(protocol.BodyTarget, "PlatformStatus", v, protocol.Metadata{})
+	}
+	if len(s.SupportedAddonList) > 0 {
+		v := s.SupportedAddonList
+
+		e.SetList(protocol.BodyTarget, "SupportedAddonList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.SupportedTierList) > 0 {
+		v := s.SupportedTierList
+
+		e.SetList(protocol.BodyTarget, "SupportedTierList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePlatformSummaryList(vs []PlatformSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes a queue.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Queue
 type Queue struct {
@@ -7663,6 +9958,30 @@ func (s *Queue) SetName(v string) *Queue {
 func (s *Queue) SetURL(v string) *Queue {
 	s.URL = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Queue) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.URL != nil {
+		v := *s.URL
+
+		e.SetValue(protocol.BodyTarget, "URL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeQueueList(vs []Queue) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironmentMessage
@@ -7719,6 +10038,22 @@ func (s *RebuildEnvironmentInput) SetEnvironmentName(v string) *RebuildEnvironme
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebuildEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironmentOutput
 type RebuildEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -7739,6 +10074,12 @@ func (s RebuildEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RebuildEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RebuildEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Request to retrieve logs from an environment and store them in your Elastic
@@ -7817,6 +10158,27 @@ func (s *RequestEnvironmentInfoInput) SetInfoType(v EnvironmentInfoType) *Reques
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RequestEnvironmentInfoInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InfoType) > 0 {
+		v := s.InfoType
+
+		e.SetValue(protocol.BodyTarget, "InfoType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfoOutput
 type RequestEnvironmentInfoOutput struct {
 	_ struct{} `type:"structure"`
@@ -7837,6 +10199,12 @@ func (s RequestEnvironmentInfoOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RequestEnvironmentInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RequestEnvironmentInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServerMessage
@@ -7893,6 +10261,22 @@ func (s *RestartAppServerInput) SetEnvironmentName(v string) *RestartAppServerIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestartAppServerInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServerOutput
 type RestartAppServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -7913,6 +10297,12 @@ func (s RestartAppServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RestartAppServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RestartAppServerOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Request to download logs retrieved with RequestEnvironmentInfo.
@@ -7988,6 +10378,27 @@ func (s *RetrieveEnvironmentInfoInput) SetInfoType(v EnvironmentInfoType) *Retri
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RetrieveEnvironmentInfoInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InfoType) > 0 {
+		v := s.InfoType
+
+		e.SetValue(protocol.BodyTarget, "InfoType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message containing a description of the requested environment info.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfoResultMessage
 type RetrieveEnvironmentInfoOutput struct {
@@ -8018,6 +10429,17 @@ func (s RetrieveEnvironmentInfoOutput) SDKResponseMetadata() aws.Response {
 func (s *RetrieveEnvironmentInfoOutput) SetEnvironmentInfo(v []EnvironmentInfoDescription) *RetrieveEnvironmentInfoOutput {
 	s.EnvironmentInfo = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RetrieveEnvironmentInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EnvironmentInfo) > 0 {
+		v := s.EnvironmentInfo
+
+		e.SetList(protocol.BodyTarget, "EnvironmentInfo", encodeEnvironmentInfoDescriptionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The bucket and key of an item stored in Amazon S3.
@@ -8052,6 +10474,22 @@ func (s *S3Location) SetS3Bucket(v string) *S3Location {
 func (s *S3Location) SetS3Key(v string) *S3Location {
 	s.S3Key = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *S3Location) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.S3Bucket != nil {
+		v := *s.S3Bucket
+
+		e.SetValue(protocol.BodyTarget, "S3Bucket", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.S3Key != nil {
+		v := *s.S3Key
+
+		e.SetValue(protocol.BodyTarget, "S3Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Detailed health information about an Amazon EC2 instance in your Elastic
@@ -8165,6 +10603,70 @@ func (s *SingleInstanceHealth) SetSystem(v *SystemStatus) *SingleInstanceHealth 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SingleInstanceHealth) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationMetrics != nil {
+		v := s.ApplicationMetrics
+
+		e.SetFields(protocol.BodyTarget, "ApplicationMetrics", v, protocol.Metadata{})
+	}
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		e.SetValue(protocol.BodyTarget, "AvailabilityZone", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Causes) > 0 {
+		v := s.Causes
+
+		e.SetList(protocol.BodyTarget, "Causes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Color != nil {
+		v := *s.Color
+
+		e.SetValue(protocol.BodyTarget, "Color", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Deployment != nil {
+		v := s.Deployment
+
+		e.SetFields(protocol.BodyTarget, "Deployment", v, protocol.Metadata{})
+	}
+	if s.HealthStatus != nil {
+		v := *s.HealthStatus
+
+		e.SetValue(protocol.BodyTarget, "HealthStatus", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LaunchedAt != nil {
+		v := *s.LaunchedAt
+
+		e.SetValue(protocol.BodyTarget, "LaunchedAt", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.System != nil {
+		v := s.System
+
+		e.SetFields(protocol.BodyTarget, "System", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSingleInstanceHealthList(vs []SingleInstanceHealth) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Describes the solution stack.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SolutionStackDescription
 type SolutionStackDescription struct {
@@ -8197,6 +10699,30 @@ func (s *SolutionStackDescription) SetPermittedFileTypes(v []string) *SolutionSt
 func (s *SolutionStackDescription) SetSolutionStackName(v string) *SolutionStackDescription {
 	s.SolutionStackName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SolutionStackDescription) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PermittedFileTypes) > 0 {
+		v := s.PermittedFileTypes
+
+		e.SetList(protocol.BodyTarget, "PermittedFileTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSolutionStackDescriptionList(vs []SolutionStackDescription) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Location of the source code for an application version.
@@ -8286,6 +10812,27 @@ func (s *SourceBuildInformation) SetSourceType(v SourceType) *SourceBuildInforma
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SourceBuildInformation) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SourceLocation != nil {
+		v := *s.SourceLocation
+
+		e.SetValue(protocol.BodyTarget, "SourceLocation", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourceRepository) > 0 {
+		v := s.SourceRepository
+
+		e.SetValue(protocol.BodyTarget, "SourceRepository", v, protocol.Metadata{})
+	}
+	if len(s.SourceType) > 0 {
+		v := s.SourceType
+
+		e.SetValue(protocol.BodyTarget, "SourceType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // A specification for an environment configuration
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SourceConfiguration
 type SourceConfiguration struct {
@@ -8334,6 +10881,22 @@ func (s *SourceConfiguration) SetApplicationName(v string) *SourceConfiguration 
 func (s *SourceConfiguration) SetTemplateName(v string) *SourceConfiguration {
 	s.TemplateName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SourceConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the percentage of requests over the last 10 seconds that resulted
@@ -8392,6 +10955,32 @@ func (s *StatusCodes) SetStatus4xx(v int64) *StatusCodes {
 func (s *StatusCodes) SetStatus5xx(v int64) *StatusCodes {
 	s.Status5xx = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StatusCodes) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Status2xx != nil {
+		v := *s.Status2xx
+
+		e.SetValue(protocol.BodyTarget, "Status2xx", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Status3xx != nil {
+		v := *s.Status3xx
+
+		e.SetValue(protocol.BodyTarget, "Status3xx", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Status4xx != nil {
+		v := *s.Status4xx
+
+		e.SetValue(protocol.BodyTarget, "Status4xx", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Status5xx != nil {
+		v := *s.Status5xx
+
+		e.SetValue(protocol.BodyTarget, "Status5xx", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Swaps the CNAMEs of two environments.
@@ -8478,6 +11067,32 @@ func (s *SwapEnvironmentCNAMEsInput) SetSourceEnvironmentName(v string) *SwapEnv
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SwapEnvironmentCNAMEsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DestinationEnvironmentId != nil {
+		v := *s.DestinationEnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "DestinationEnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DestinationEnvironmentName != nil {
+		v := *s.DestinationEnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "DestinationEnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceEnvironmentId != nil {
+		v := *s.SourceEnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "SourceEnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceEnvironmentName != nil {
+		v := *s.SourceEnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "SourceEnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEsOutput
 type SwapEnvironmentCNAMEsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8498,6 +11113,12 @@ func (s SwapEnvironmentCNAMEsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SwapEnvironmentCNAMEsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SwapEnvironmentCNAMEsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // CPU utilization and load average metrics for an Amazon EC2 instance.
@@ -8533,6 +11154,22 @@ func (s *SystemStatus) SetCPUUtilization(v *CPUUtilization) *SystemStatus {
 func (s *SystemStatus) SetLoadAverage(v []float64) *SystemStatus {
 	s.LoadAverage = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SystemStatus) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CPUUtilization != nil {
+		v := s.CPUUtilization
+
+		e.SetFields(protocol.BodyTarget, "CPUUtilization", v, protocol.Metadata{})
+	}
+	if len(s.LoadAverage) > 0 {
+		v := s.LoadAverage
+
+		e.SetList(protocol.BodyTarget, "LoadAverage", protocol.EncodeFloat64List(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes a tag applied to a resource in an environment.
@@ -8583,6 +11220,30 @@ func (s *Tag) SetKey(v string) *Tag {
 func (s *Tag) SetValue(v string) *Tag {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Request to terminate an environment.
@@ -8672,6 +11333,32 @@ func (s *TerminateEnvironmentInput) SetTerminateResources(v bool) *TerminateEnvi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TerminateEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ForceTerminate != nil {
+		v := *s.ForceTerminate
+
+		e.SetValue(protocol.BodyTarget, "ForceTerminate", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.TerminateResources != nil {
+		v := *s.TerminateResources
+
+		e.SetValue(protocol.BodyTarget, "TerminateResources", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Describes a trigger.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Trigger
 type Trigger struct {
@@ -8695,6 +11382,25 @@ func (s Trigger) GoString() string {
 func (s *Trigger) SetName(v string) *Trigger {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Trigger) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTriggerList(vs []Trigger) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Request to update an application.
@@ -8753,6 +11459,22 @@ func (s *UpdateApplicationInput) SetDescription(v string) *UpdateApplicationInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message containing a single description of an application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationOutput
 type UpdateApplicationOutput struct {
@@ -8783,6 +11505,17 @@ func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateApplicationOutput) SetApplication(v *ApplicationDescription) *UpdateApplicationOutput {
 	s.Application = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Application != nil {
+		v := s.Application
+
+		e.SetFields(protocol.BodyTarget, "Application", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycleMessage
@@ -8848,6 +11581,22 @@ func (s *UpdateApplicationResourceLifecycleInput) SetResourceLifecycleConfig(v *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateApplicationResourceLifecycleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceLifecycleConfig != nil {
+		v := s.ResourceLifecycleConfig
+
+		e.SetFields(protocol.BodyTarget, "ResourceLifecycleConfig", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationResourceLifecycleDescriptionMessage
 type UpdateApplicationResourceLifecycleOutput struct {
 	_ struct{} `type:"structure"`
@@ -8886,6 +11635,22 @@ func (s *UpdateApplicationResourceLifecycleOutput) SetApplicationName(v string) 
 func (s *UpdateApplicationResourceLifecycleOutput) SetResourceLifecycleConfig(v *ApplicationResourceLifecycleConfig) *UpdateApplicationResourceLifecycleOutput {
 	s.ResourceLifecycleConfig = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateApplicationResourceLifecycleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceLifecycleConfig != nil {
+		v := s.ResourceLifecycleConfig
+
+		e.SetFields(protocol.BodyTarget, "ResourceLifecycleConfig", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersionMessage
@@ -8964,6 +11729,27 @@ func (s *UpdateApplicationVersionInput) SetVersionLabel(v string) *UpdateApplica
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Result message wrapping a single description of an application version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionOutput
 type UpdateApplicationVersionOutput struct {
@@ -8994,6 +11780,17 @@ func (s UpdateApplicationVersionOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateApplicationVersionOutput) SetApplicationVersion(v *ApplicationVersionDescription) *UpdateApplicationVersionOutput {
 	s.ApplicationVersion = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationVersion != nil {
+		v := s.ApplicationVersion
+
+		e.SetFields(protocol.BodyTarget, "ApplicationVersion", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // The result message containing the options for the specified solution stack.
@@ -9107,6 +11904,37 @@ func (s *UpdateConfigurationTemplateInput) SetOptionsToRemove(v []OptionSpecific
 func (s *UpdateConfigurationTemplateInput) SetTemplateName(v string) *UpdateConfigurationTemplateInput {
 	s.TemplateName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateConfigurationTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if len(s.OptionsToRemove) > 0 {
+		v := s.OptionsToRemove
+
+		e.SetList(protocol.BodyTarget, "OptionsToRemove", encodeOptionSpecificationList(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the settings for a configuration set.
@@ -9233,6 +12061,70 @@ func (s *UpdateConfigurationTemplateOutput) SetSolutionStackName(v string) *Upda
 func (s *UpdateConfigurationTemplateOutput) SetTemplateName(v string) *UpdateConfigurationTemplateOutput {
 	s.TemplateName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateConfigurationTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DateCreated != nil {
+		v := *s.DateCreated
+
+		e.SetValue(protocol.BodyTarget, "DateCreated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DateUpdated != nil {
+		v := *s.DateUpdated
+
+		e.SetValue(protocol.BodyTarget, "DateUpdated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.DeploymentStatus) > 0 {
+		v := s.DeploymentStatus
+
+		e.SetValue(protocol.BodyTarget, "DeploymentStatus", v, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeUpdateConfigurationTemplateOutputList(vs []UpdateConfigurationTemplateOutput) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Request to update an environment.
@@ -9424,6 +12316,72 @@ func (s *UpdateEnvironmentInput) SetTier(v *EnvironmentTier) *UpdateEnvironmentI
 func (s *UpdateEnvironmentInput) SetVersionLabel(v string) *UpdateEnvironmentInput {
 	s.VersionLabel = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if len(s.OptionsToRemove) > 0 {
+		v := s.OptionsToRemove
+
+		e.SetList(protocol.BodyTarget, "OptionsToRemove", encodeOptionSpecificationList(v), protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Tier != nil {
+		v := s.Tier
+
+		e.SetFields(protocol.BodyTarget, "Tier", v, protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Describes the properties of an environment.
@@ -9664,6 +12622,120 @@ func (s *UpdateEnvironmentOutput) SetVersionLabel(v string) *UpdateEnvironmentOu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AbortableOperationInProgress != nil {
+		v := *s.AbortableOperationInProgress
+
+		e.SetValue(protocol.BodyTarget, "AbortableOperationInProgress", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CNAME != nil {
+		v := *s.CNAME
+
+		e.SetValue(protocol.BodyTarget, "CNAME", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DateCreated != nil {
+		v := *s.DateCreated
+
+		e.SetValue(protocol.BodyTarget, "DateCreated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DateUpdated != nil {
+		v := *s.DateUpdated
+
+		e.SetValue(protocol.BodyTarget, "DateUpdated", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EndpointURL != nil {
+		v := *s.EndpointURL
+
+		e.SetValue(protocol.BodyTarget, "EndpointURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentArn != nil {
+		v := *s.EnvironmentArn
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentId != nil {
+		v := *s.EnvironmentId
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.EnvironmentLinks) > 0 {
+		v := s.EnvironmentLinks
+
+		e.SetList(protocol.BodyTarget, "EnvironmentLinks", encodeEnvironmentLinkList(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Health) > 0 {
+		v := s.Health
+
+		e.SetValue(protocol.BodyTarget, "Health", v, protocol.Metadata{})
+	}
+	if len(s.HealthStatus) > 0 {
+		v := s.HealthStatus
+
+		e.SetValue(protocol.BodyTarget, "HealthStatus", v, protocol.Metadata{})
+	}
+	if s.PlatformArn != nil {
+		v := *s.PlatformArn
+
+		e.SetValue(protocol.BodyTarget, "PlatformArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Resources != nil {
+		v := s.Resources
+
+		e.SetFields(protocol.BodyTarget, "Resources", v, protocol.Metadata{})
+	}
+	if s.SolutionStackName != nil {
+		v := *s.SolutionStackName
+
+		e.SetValue(protocol.BodyTarget, "SolutionStackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Tier != nil {
+		v := s.Tier
+
+		e.SetFields(protocol.BodyTarget, "Tier", v, protocol.Metadata{})
+	}
+	if s.VersionLabel != nil {
+		v := *s.VersionLabel
+
+		e.SetValue(protocol.BodyTarget, "VersionLabel", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeUpdateEnvironmentOutputList(vs []UpdateEnvironmentOutput) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A list of validation messages for a specified configuration template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettingsMessage
 type ValidateConfigurationSettingsInput struct {
@@ -9759,6 +12831,32 @@ func (s *ValidateConfigurationSettingsInput) SetTemplateName(v string) *Validate
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ValidateConfigurationSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ApplicationName != nil {
+		v := *s.ApplicationName
+
+		e.SetValue(protocol.BodyTarget, "ApplicationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		e.SetValue(protocol.BodyTarget, "EnvironmentName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OptionSettings) > 0 {
+		v := s.OptionSettings
+
+		e.SetList(protocol.BodyTarget, "OptionSettings", encodeConfigurationOptionSettingList(v), protocol.Metadata{})
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Provides a list of validation messages.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsValidationMessages
 type ValidateConfigurationSettingsOutput struct {
@@ -9789,6 +12887,17 @@ func (s ValidateConfigurationSettingsOutput) SDKResponseMetadata() aws.Response 
 func (s *ValidateConfigurationSettingsOutput) SetMessages(v []ValidationMessage) *ValidateConfigurationSettingsOutput {
 	s.Messages = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ValidateConfigurationSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Messages) > 0 {
+		v := s.Messages
+
+		e.SetList(protocol.BodyTarget, "Messages", encodeValidationMessageList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // An error or warning for a desired configuration option value.
@@ -9849,6 +12958,40 @@ func (s *ValidationMessage) SetSeverity(v ValidationSeverity) *ValidationMessage
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ValidationMessage) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OptionName != nil {
+		v := *s.OptionName
+
+		e.SetValue(protocol.BodyTarget, "OptionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Severity) > 0 {
+		v := s.Severity
+
+		e.SetValue(protocol.BodyTarget, "Severity", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeValidationMessageList(vs []ValidationMessage) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type ActionHistoryStatus string
 
 // Enum values for ActionHistoryStatus
@@ -9857,6 +13000,15 @@ const (
 	ActionHistoryStatusFailed    ActionHistoryStatus = "Failed"
 	ActionHistoryStatusUnknown   ActionHistoryStatus = "Unknown"
 )
+
+func (enum ActionHistoryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionHistoryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ActionStatus string
 
@@ -9868,6 +13020,15 @@ const (
 	ActionStatusUnknown   ActionStatus = "Unknown"
 )
 
+func (enum ActionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ActionType string
 
 // Enum values for ActionType
@@ -9876,6 +13037,15 @@ const (
 	ActionTypePlatformUpdate  ActionType = "PlatformUpdate"
 	ActionTypeUnknown         ActionType = "Unknown"
 )
+
+func (enum ActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ApplicationVersionStatus string
 
@@ -9888,6 +13058,15 @@ const (
 	ApplicationVersionStatusBuilding    ApplicationVersionStatus = "Building"
 )
 
+func (enum ApplicationVersionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplicationVersionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComputeType string
 
 // Enum values for ComputeType
@@ -9896,6 +13075,15 @@ const (
 	ComputeTypeBuildGeneral1Medium ComputeType = "BUILD_GENERAL1_MEDIUM"
 	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
+
+func (enum ComputeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ConfigurationDeploymentStatus string
 
@@ -9906,6 +13094,15 @@ const (
 	ConfigurationDeploymentStatusFailed   ConfigurationDeploymentStatus = "failed"
 )
 
+func (enum ConfigurationDeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationDeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationOptionValueType string
 
 // Enum values for ConfigurationOptionValueType
@@ -9913,6 +13110,15 @@ const (
 	ConfigurationOptionValueTypeScalar ConfigurationOptionValueType = "Scalar"
 	ConfigurationOptionValueTypeList   ConfigurationOptionValueType = "List"
 )
+
+func (enum ConfigurationOptionValueType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationOptionValueType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnvironmentHealth string
 
@@ -9923,6 +13129,23 @@ const (
 	EnvironmentHealthRed    EnvironmentHealth = "Red"
 	EnvironmentHealthGrey   EnvironmentHealth = "Grey"
 )
+
+func (enum EnvironmentHealth) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentHealth) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeEnvironmentHealthAttributeList(vs []EnvironmentHealthAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type EnvironmentHealthAttribute string
 
@@ -9938,6 +13161,15 @@ const (
 	EnvironmentHealthAttributeRefreshedAt        EnvironmentHealthAttribute = "RefreshedAt"
 )
 
+func (enum EnvironmentHealthAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentHealthAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnvironmentHealthStatus string
 
 // Enum values for EnvironmentHealthStatus
@@ -9952,6 +13184,15 @@ const (
 	EnvironmentHealthStatusSevere   EnvironmentHealthStatus = "Severe"
 )
 
+func (enum EnvironmentHealthStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentHealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnvironmentInfoType string
 
 // Enum values for EnvironmentInfoType
@@ -9959,6 +13200,15 @@ const (
 	EnvironmentInfoTypeTail   EnvironmentInfoType = "tail"
 	EnvironmentInfoTypeBundle EnvironmentInfoType = "bundle"
 )
+
+func (enum EnvironmentInfoType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentInfoType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnvironmentStatus string
 
@@ -9970,6 +13220,15 @@ const (
 	EnvironmentStatusTerminating EnvironmentStatus = "Terminating"
 	EnvironmentStatusTerminated  EnvironmentStatus = "Terminated"
 )
+
+func (enum EnvironmentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EventSeverity string
 
@@ -9983,6 +13242,15 @@ const (
 	EventSeverityFatal EventSeverity = "FATAL"
 )
 
+func (enum EventSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FailureType string
 
 // Enum values for FailureType
@@ -9995,6 +13263,23 @@ const (
 	FailureTypeInvalidEnvironmentState FailureType = "InvalidEnvironmentState"
 	FailureTypePermissionsError        FailureType = "PermissionsError"
 )
+
+func (enum FailureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FailureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeInstancesHealthAttributeList(vs []InstancesHealthAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type InstancesHealthAttribute string
 
@@ -10013,6 +13298,15 @@ const (
 	InstancesHealthAttributeAll                InstancesHealthAttribute = "All"
 )
 
+func (enum InstancesHealthAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstancesHealthAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformStatus string
 
 // Enum values for PlatformStatus
@@ -10024,6 +13318,15 @@ const (
 	PlatformStatusDeleted  PlatformStatus = "Deleted"
 )
 
+func (enum PlatformStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SourceRepository string
 
 // Enum values for SourceRepository
@@ -10031,6 +13334,15 @@ const (
 	SourceRepositoryCodeCommit SourceRepository = "CodeCommit"
 	SourceRepositoryS3         SourceRepository = "S3"
 )
+
+func (enum SourceRepository) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceRepository) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -10040,6 +13352,15 @@ const (
 	SourceTypeZip SourceType = "Zip"
 )
 
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ValidationSeverity string
 
 // Enum values for ValidationSeverity
@@ -10047,3 +13368,12 @@ const (
 	ValidationSeverityError   ValidationSeverity = "error"
 	ValidationSeverityWarning ValidationSeverity = "warning"
 )
+
+func (enum ValidationSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ValidationSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

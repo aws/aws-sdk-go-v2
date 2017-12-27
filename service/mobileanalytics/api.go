@@ -172,6 +172,50 @@ func (s *Event) SetVersion(v string) *Event {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Event) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "attributes", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	if s.EventType != nil {
+		v := *s.EventType
+
+		e.SetValue(protocol.BodyTarget, "eventType", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		e.SetMap(protocol.BodyTarget, "metrics", protocol.EncodeFloat64Map(v), protocol.Metadata{})
+	}
+	if s.Session != nil {
+		v := s.Session
+
+		e.SetFields(protocol.BodyTarget, "session", v, protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "timestamp", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventList(vs []Event) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A container for the data needed for a PutEvent operation
 type PutEventsInput struct {
 	_ struct{} `type:"structure"`
@@ -244,6 +288,27 @@ func (s *PutEventsInput) SetEvents(v []Event) *PutEventsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		e.SetList(protocol.BodyTarget, "events", encodeEventList(v), protocol.Metadata{})
+	}
+	if s.ClientContext != nil {
+		v := *s.ClientContext
+
+		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.ClientContextEncoding != nil {
+		v := *s.ClientContextEncoding
+
+		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context-Encoding", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 type PutEventsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -263,6 +328,12 @@ func (s PutEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Describes the session. Session information is required on ALL events.
@@ -329,4 +400,30 @@ func (s *Session) SetStartTimestamp(v string) *Session {
 func (s *Session) SetStopTimestamp(v string) *Session {
 	s.StopTimestamp = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Session) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Duration != nil {
+		v := *s.Duration
+
+		e.SetValue(protocol.BodyTarget, "duration", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		e.SetValue(protocol.BodyTarget, "startTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.StopTimestamp != nil {
+		v := *s.StopTimestamp
+
+		e.SetValue(protocol.BodyTarget, "stopTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
 }

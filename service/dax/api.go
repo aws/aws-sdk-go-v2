@@ -3960,6 +3960,15 @@ const (
 	ChangeTypeRequiresReboot ChangeType = "REQUIRES_REBOOT"
 )
 
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IsModifiable string
 
 // Enum values for IsModifiable
@@ -3969,6 +3978,15 @@ const (
 	IsModifiableConditional IsModifiable = "CONDITIONAL"
 )
 
+func (enum IsModifiable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IsModifiable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParameterType string
 
 // Enum values for ParameterType
@@ -3976,6 +3994,15 @@ const (
 	ParameterTypeDefault          ParameterType = "DEFAULT"
 	ParameterTypeNodeTypeSpecific ParameterType = "NODE_TYPE_SPECIFIC"
 )
+
+func (enum ParameterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -3985,3 +4012,12 @@ const (
 	SourceTypeParameterGroup SourceType = "PARAMETER_GROUP"
 	SourceTypeSubnetGroup    SourceType = "SUBNET_GROUP"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

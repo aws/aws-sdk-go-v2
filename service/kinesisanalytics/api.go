@@ -6035,6 +6035,15 @@ const (
 	ApplicationStatusUpdating ApplicationStatus = "UPDATING"
 )
 
+func (enum ApplicationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplicationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InputStartingPosition string
 
 // Enum values for InputStartingPosition
@@ -6044,6 +6053,15 @@ const (
 	InputStartingPositionLastStoppedPoint InputStartingPosition = "LAST_STOPPED_POINT"
 )
 
+func (enum InputStartingPosition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputStartingPosition) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecordFormatType string
 
 // Enum values for RecordFormatType
@@ -6051,3 +6069,12 @@ const (
 	RecordFormatTypeJson RecordFormatType = "JSON"
 	RecordFormatTypeCsv  RecordFormatType = "CSV"
 )
+
+func (enum RecordFormatType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordFormatType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

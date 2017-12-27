@@ -3838,6 +3838,15 @@ const (
 	ExecutionStatusAborted   ExecutionStatus = "ABORTED"
 )
 
+func (enum ExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HistoryEventType string
 
 // Enum values for HistoryEventType
@@ -3875,6 +3884,15 @@ const (
 	HistoryEventTypeWaitStateExited              HistoryEventType = "WaitStateExited"
 )
 
+func (enum HistoryEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HistoryEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StateMachineStatus string
 
 // Enum values for StateMachineStatus
@@ -3882,3 +3900,12 @@ const (
 	StateMachineStatusActive   StateMachineStatus = "ACTIVE"
 	StateMachineStatusDeleting StateMachineStatus = "DELETING"
 )
+
+func (enum StateMachineStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StateMachineStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAcceptPortfolioShare = "AcceptPortfolioShare"
@@ -11186,12 +11187,38 @@ const (
 	AccessLevelFilterKeyUser    AccessLevelFilterKey = "User"
 )
 
+func (enum AccessLevelFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessLevelFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeCopyOptionList(vs []CopyOption) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type CopyOption string
 
 // Enum values for CopyOption
 const (
 	CopyOptionCopyTags CopyOption = "CopyTags"
 )
+
+func (enum CopyOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CopyOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CopyProductStatus string
 
@@ -11202,12 +11229,30 @@ const (
 	CopyProductStatusFailed     CopyProductStatus = "FAILED"
 )
 
+func (enum CopyProductStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CopyProductStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
 const (
 	PrincipalTypeIam PrincipalType = "IAM"
 )
+
+func (enum PrincipalType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PrincipalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProductSource string
 
@@ -11216,6 +11261,15 @@ const (
 	ProductSourceAccount ProductSource = "ACCOUNT"
 )
 
+func (enum ProductSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProductType string
 
 // Enum values for ProductType
@@ -11223,6 +11277,15 @@ const (
 	ProductTypeCloudFormationTemplate ProductType = "CLOUD_FORMATION_TEMPLATE"
 	ProductTypeMarketplace            ProductType = "MARKETPLACE"
 )
+
+func (enum ProductType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProductViewFilterBy string
 
@@ -11234,6 +11297,15 @@ const (
 	ProductViewFilterBySourceProductId ProductViewFilterBy = "SourceProductId"
 )
 
+func (enum ProductViewFilterBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductViewFilterBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProductViewSortBy string
 
 // Enum values for ProductViewSortBy
@@ -11242,6 +11314,15 @@ const (
 	ProductViewSortByVersionCount ProductViewSortBy = "VersionCount"
 	ProductViewSortByCreationDate ProductViewSortBy = "CreationDate"
 )
+
+func (enum ProductViewSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductViewSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProvisionedProductStatus string
 
@@ -11253,12 +11334,30 @@ const (
 	ProvisionedProductStatusError       ProvisionedProductStatus = "ERROR"
 )
 
+func (enum ProvisionedProductStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisionedProductStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProvisioningArtifactPropertyName string
 
 // Enum values for ProvisioningArtifactPropertyName
 const (
 	ProvisioningArtifactPropertyNameId ProvisioningArtifactPropertyName = "Id"
 )
+
+func (enum ProvisioningArtifactPropertyName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisioningArtifactPropertyName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProvisioningArtifactType string
 
@@ -11268,6 +11367,15 @@ const (
 	ProvisioningArtifactTypeMarketplaceAmi         ProvisioningArtifactType = "MARKETPLACE_AMI"
 	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
 )
+
+func (enum ProvisioningArtifactType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisioningArtifactType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RecordStatus string
 
@@ -11280,6 +11388,15 @@ const (
 	RecordStatusFailed            RecordStatus = "FAILED"
 )
 
+func (enum RecordStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -11287,6 +11404,15 @@ const (
 	SortOrderAscending  SortOrder = "ASCENDING"
 	SortOrderDescending SortOrder = "DESCENDING"
 )
+
+func (enum SortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Status string
 
@@ -11296,3 +11422,12 @@ const (
 	StatusCreating  Status = "CREATING"
 	StatusFailed    Status = "FAILED"
 )
+
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

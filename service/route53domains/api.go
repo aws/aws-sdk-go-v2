@@ -4700,6 +4700,15 @@ const (
 	ContactTypeReseller    ContactType = "RESELLER"
 )
 
+func (enum ContactType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContactType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CountryCode string
 
 // Enum values for CountryCode
@@ -4935,6 +4944,15 @@ const (
 	CountryCodeZw CountryCode = "ZW"
 )
 
+func (enum CountryCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CountryCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DomainAvailability string
 
 // Enum values for DomainAvailability
@@ -4948,6 +4966,15 @@ const (
 	DomainAvailabilityReserved              DomainAvailability = "RESERVED"
 	DomainAvailabilityDontKnow              DomainAvailability = "DONT_KNOW"
 )
+
+func (enum DomainAvailability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainAvailability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExtraParamName string
 
@@ -4981,6 +5008,15 @@ const (
 	ExtraParamNameUkCompanyNumber        ExtraParamName = "UK_COMPANY_NUMBER"
 )
 
+func (enum ExtraParamName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExtraParamName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -4991,6 +5027,15 @@ const (
 	OperationStatusSuccessful OperationStatus = "SUCCESSFUL"
 	OperationStatusFailed     OperationStatus = "FAILED"
 )
+
+func (enum OperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationType string
 
@@ -5014,6 +5059,15 @@ const (
 	OperationTypePushDomain              OperationType = "PUSH_DOMAIN"
 )
 
+func (enum OperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReachabilityStatus string
 
 // Enum values for ReachabilityStatus
@@ -5022,6 +5076,15 @@ const (
 	ReachabilityStatusDone    ReachabilityStatus = "DONE"
 	ReachabilityStatusExpired ReachabilityStatus = "EXPIRED"
 )
+
+func (enum ReachabilityStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReachabilityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Whether the domain name can be transferred to Amazon Route 53.
 //
@@ -5042,3 +5105,12 @@ const (
 	TransferableUntransferable Transferable = "UNTRANSFERABLE"
 	TransferableDontKnow       Transferable = "DONT_KNOW"
 )
+
+func (enum Transferable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Transferable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

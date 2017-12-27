@@ -1252,6 +1252,32 @@ func (s *AddPermissionInput) SetQueueUrl(v string) *AddPermissionInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddPermissionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AWSAccountIds) > 0 {
+		v := s.AWSAccountIds
+
+		e.SetList(protocol.BodyTarget, "AWSAccountIds", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	if len(s.Actions) > 0 {
+		v := s.Actions
+
+		e.SetList(protocol.BodyTarget, "Actions", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.Label != nil {
+		v := *s.Label
+
+		e.SetValue(protocol.BodyTarget, "Label", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermissionOutput
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1272,6 +1298,12 @@ func (s AddPermissionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddPermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddPermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // This is used in the responses of batch API to give a detailed description
@@ -1331,6 +1363,40 @@ func (s *BatchResultErrorEntry) SetMessage(v string) *BatchResultErrorEntry {
 func (s *BatchResultErrorEntry) SetSenderFault(v bool) *BatchResultErrorEntry {
 	s.SenderFault = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BatchResultErrorEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Code != nil {
+		v := *s.Code
+
+		e.SetValue(protocol.BodyTarget, "Code", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SenderFault != nil {
+		v := *s.SenderFault
+
+		e.SetValue(protocol.BodyTarget, "SenderFault", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeBatchResultErrorEntryList(vs []BatchResultErrorEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchRequest
@@ -1398,6 +1464,22 @@ func (s *ChangeMessageVisibilityBatchInput) SetQueueUrl(v string) *ChangeMessage
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeMessageVisibilityBatchInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Entries) > 0 {
+		v := s.Entries
+
+		e.SetList(protocol.BodyTarget, "Entries", encodeChangeMessageVisibilityBatchRequestEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // For each message in the batch, the response contains a ChangeMessageVisibilityBatchResultEntry
 // tag if the message succeeds or a BatchResultErrorEntry tag if the message
 // fails.
@@ -1443,6 +1525,22 @@ func (s *ChangeMessageVisibilityBatchOutput) SetFailed(v []BatchResultErrorEntry
 func (s *ChangeMessageVisibilityBatchOutput) SetSuccessful(v []ChangeMessageVisibilityBatchResultEntry) *ChangeMessageVisibilityBatchOutput {
 	s.Successful = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeMessageVisibilityBatchOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Failed) > 0 {
+		v := s.Failed
+
+		e.SetList(protocol.BodyTarget, "Failed", encodeBatchResultErrorEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	if len(s.Successful) > 0 {
+		v := s.Successful
+
+		e.SetList(protocol.BodyTarget, "Successful", encodeChangeMessageVisibilityBatchResultEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
 }
 
 // Encloses a receipt handle and an entry id for each message in ChangeMessageVisibilityBatch.
@@ -1523,6 +1621,35 @@ func (s *ChangeMessageVisibilityBatchRequestEntry) SetVisibilityTimeout(v int64)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeMessageVisibilityBatchRequestEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReceiptHandle != nil {
+		v := *s.ReceiptHandle
+
+		e.SetValue(protocol.BodyTarget, "ReceiptHandle", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VisibilityTimeout != nil {
+		v := *s.VisibilityTimeout
+
+		e.SetValue(protocol.BodyTarget, "VisibilityTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeChangeMessageVisibilityBatchRequestEntryList(vs []ChangeMessageVisibilityBatchRequestEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Encloses the Id of an entry in ChangeMessageVisibilityBatch.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchResultEntry
 type ChangeMessageVisibilityBatchResultEntry struct {
@@ -1548,6 +1675,25 @@ func (s ChangeMessageVisibilityBatchResultEntry) GoString() string {
 func (s *ChangeMessageVisibilityBatchResultEntry) SetId(v string) *ChangeMessageVisibilityBatchResultEntry {
 	s.Id = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeMessageVisibilityBatchResultEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeChangeMessageVisibilityBatchResultEntryList(vs []ChangeMessageVisibilityBatchResultEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityRequest
@@ -1624,6 +1770,27 @@ func (s *ChangeMessageVisibilityInput) SetVisibilityTimeout(v int64) *ChangeMess
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeMessageVisibilityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReceiptHandle != nil {
+		v := *s.ReceiptHandle
+
+		e.SetValue(protocol.BodyTarget, "ReceiptHandle", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VisibilityTimeout != nil {
+		v := *s.VisibilityTimeout
+
+		e.SetValue(protocol.BodyTarget, "VisibilityTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityOutput
 type ChangeMessageVisibilityOutput struct {
 	_ struct{} `type:"structure"`
@@ -1644,6 +1811,12 @@ func (s ChangeMessageVisibilityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ChangeMessageVisibilityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeMessageVisibilityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueueRequest
@@ -1821,6 +1994,22 @@ func (s *CreateQueueInput) SetQueueName(v string) *CreateQueueInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attribute", protocol.EncodeStringMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.QueueName != nil {
+		v := *s.QueueName
+
+		e.SetValue(protocol.BodyTarget, "QueueName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Returns the QueueUrl attribute of the created queue.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueueResult
 type CreateQueueOutput struct {
@@ -1851,6 +2040,17 @@ func (s CreateQueueOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateQueueOutput) SetQueueUrl(v string) *CreateQueueOutput {
 	s.QueueUrl = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequest
@@ -1917,6 +2117,22 @@ func (s *DeleteMessageBatchInput) SetQueueUrl(v string) *DeleteMessageBatchInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMessageBatchInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Entries) > 0 {
+		v := s.Entries
+
+		e.SetList(protocol.BodyTarget, "Entries", encodeDeleteMessageBatchRequestEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // For each message in the batch, the response contains a DeleteMessageBatchResultEntry
 // tag if the message is deleted or a BatchResultErrorEntry tag if the message
 // can't be deleted.
@@ -1962,6 +2178,22 @@ func (s *DeleteMessageBatchOutput) SetFailed(v []BatchResultErrorEntry) *DeleteM
 func (s *DeleteMessageBatchOutput) SetSuccessful(v []DeleteMessageBatchResultEntry) *DeleteMessageBatchOutput {
 	s.Successful = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMessageBatchOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Failed) > 0 {
+		v := s.Failed
+
+		e.SetList(protocol.BodyTarget, "Failed", encodeBatchResultErrorEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	if len(s.Successful) > 0 {
+		v := s.Successful
+
+		e.SetList(protocol.BodyTarget, "Successful", encodeDeleteMessageBatchResultEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
 }
 
 // Encloses a receipt handle and an identifier for it.
@@ -2023,6 +2255,30 @@ func (s *DeleteMessageBatchRequestEntry) SetReceiptHandle(v string) *DeleteMessa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMessageBatchRequestEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReceiptHandle != nil {
+		v := *s.ReceiptHandle
+
+		e.SetValue(protocol.BodyTarget, "ReceiptHandle", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDeleteMessageBatchRequestEntryList(vs []DeleteMessageBatchRequestEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Encloses the Id of an entry in DeleteMessageBatch.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchResultEntry
 type DeleteMessageBatchResultEntry struct {
@@ -2048,6 +2304,25 @@ func (s DeleteMessageBatchResultEntry) GoString() string {
 func (s *DeleteMessageBatchResultEntry) SetId(v string) *DeleteMessageBatchResultEntry {
 	s.Id = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMessageBatchResultEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDeleteMessageBatchResultEntryList(vs []DeleteMessageBatchResultEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageRequest
@@ -2107,6 +2382,22 @@ func (s *DeleteMessageInput) SetReceiptHandle(v string) *DeleteMessageInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMessageInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReceiptHandle != nil {
+		v := *s.ReceiptHandle
+
+		e.SetValue(protocol.BodyTarget, "ReceiptHandle", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageOutput
 type DeleteMessageOutput struct {
 	_ struct{} `type:"structure"`
@@ -2127,6 +2418,12 @@ func (s DeleteMessageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteMessageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMessageOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueRequest
@@ -2171,6 +2468,17 @@ func (s *DeleteQueueInput) SetQueueUrl(v string) *DeleteQueueInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteQueueInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueOutput
 type DeleteQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -2191,6 +2499,12 @@ func (s DeleteQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesRequest
@@ -2331,6 +2645,27 @@ func (s *GetQueueAttributesInput) SetQueueUrl(v string) *GetQueueAttributesInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetQueueAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		e.SetList(protocol.BodyTarget, "AttributeNames", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{Flatten: true})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A list of returned queue attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesResult
 type GetQueueAttributesOutput struct {
@@ -2361,6 +2696,17 @@ func (s GetQueueAttributesOutput) SDKResponseMetadata() aws.Response {
 func (s *GetQueueAttributesOutput) SetAttributes(v map[string]string) *GetQueueAttributesOutput {
 	s.Attributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetQueueAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attribute", protocol.EncodeStringMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlRequest
@@ -2415,6 +2761,22 @@ func (s *GetQueueUrlInput) SetQueueOwnerAWSAccountId(v string) *GetQueueUrlInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetQueueUrlInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueName != nil {
+		v := *s.QueueName
+
+		e.SetValue(protocol.BodyTarget, "QueueName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.QueueOwnerAWSAccountId != nil {
+		v := *s.QueueOwnerAWSAccountId
+
+		e.SetValue(protocol.BodyTarget, "QueueOwnerAWSAccountId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // For more information, see Responses (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UnderstandingResponses.html)
 // in the Amazon SQS Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlResult
@@ -2446,6 +2808,17 @@ func (s GetQueueUrlOutput) SDKResponseMetadata() aws.Response {
 func (s *GetQueueUrlOutput) SetQueueUrl(v string) *GetQueueUrlOutput {
 	s.QueueUrl = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetQueueUrlOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesRequest
@@ -2490,6 +2863,17 @@ func (s *ListDeadLetterSourceQueuesInput) SetQueueUrl(v string) *ListDeadLetterS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDeadLetterSourceQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A list of your dead letter source queues.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult
 type ListDeadLetterSourceQueuesOutput struct {
@@ -2525,6 +2909,17 @@ func (s *ListDeadLetterSourceQueuesOutput) SetQueueUrls(v []string) *ListDeadLet
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDeadLetterSourceQueuesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.QueueUrls) > 0 {
+		v := s.QueueUrls
+
+		e.SetList(protocol.BodyTarget, "queueUrls", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesRequest
 type ListQueuesInput struct {
 	_ struct{} `type:"structure"`
@@ -2550,6 +2945,17 @@ func (s ListQueuesInput) GoString() string {
 func (s *ListQueuesInput) SetQueueNamePrefix(v string) *ListQueuesInput {
 	s.QueueNamePrefix = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueNamePrefix != nil {
+		v := *s.QueueNamePrefix
+
+		e.SetValue(protocol.BodyTarget, "QueueNamePrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // A list of your queues.
@@ -2582,6 +2988,17 @@ func (s ListQueuesOutput) SDKResponseMetadata() aws.Response {
 func (s *ListQueuesOutput) SetQueueUrls(v []string) *ListQueuesOutput {
 	s.QueueUrls = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListQueuesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.QueueUrls) > 0 {
+		v := s.QueueUrls
+
+		e.SetList(protocol.BodyTarget, "QueueUrls", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
 }
 
 // An Amazon SQS message.
@@ -2672,6 +3089,55 @@ func (s *Message) SetMessageId(v string) *Message {
 func (s *Message) SetReceiptHandle(v string) *Message {
 	s.ReceiptHandle = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Message) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attribute", protocol.EncodeStringMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.Body != nil {
+		v := *s.Body
+
+		e.SetValue(protocol.BodyTarget, "Body", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MD5OfBody != nil {
+		v := *s.MD5OfBody
+
+		e.SetValue(protocol.BodyTarget, "MD5OfBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MD5OfMessageAttributes != nil {
+		v := *s.MD5OfMessageAttributes
+
+		e.SetValue(protocol.BodyTarget, "MD5OfMessageAttributes", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MessageAttributes) > 0 {
+		v := s.MessageAttributes
+
+		e.SetMap(protocol.BodyTarget, "MessageAttribute", encodeMessageAttributeValueMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReceiptHandle != nil {
+		v := *s.ReceiptHandle
+
+		e.SetValue(protocol.BodyTarget, "ReceiptHandle", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMessageList(vs []Message) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The user-specified message attribute value. For string data types, the Value
@@ -2766,6 +3232,45 @@ func (s *MessageAttributeValue) SetStringValue(v string) *MessageAttributeValue 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MessageAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.BinaryListValues) > 0 {
+		v := s.BinaryListValues
+
+		e.SetList(protocol.BodyTarget, "BinaryListValue", protocol.EncodeBytesList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.BinaryValue != nil {
+		v := s.BinaryValue
+
+		e.SetValue(protocol.BodyTarget, "BinaryValue", protocol.BytesValue(v), protocol.Metadata{})
+	}
+	if s.DataType != nil {
+		v := *s.DataType
+
+		e.SetValue(protocol.BodyTarget, "DataType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StringListValues) > 0 {
+		v := s.StringListValues
+
+		e.SetList(protocol.BodyTarget, "StringListValue", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.StringValue != nil {
+		v := *s.StringValue
+
+		e.SetValue(protocol.BodyTarget, "StringValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMessageAttributeValueMap(vs map[string]MessageAttributeValue) func(protocol.MapEncoder) {
+	return func(me protocol.MapEncoder) {
+		for k, v := range vs {
+			me.MapSetFields(k, &v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueRequest
 type PurgeQueueInput struct {
 	_ struct{} `type:"structure"`
@@ -2808,6 +3313,17 @@ func (s *PurgeQueueInput) SetQueueUrl(v string) *PurgeQueueInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurgeQueueInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueOutput
 type PurgeQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -2828,6 +3344,12 @@ func (s PurgeQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PurgeQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PurgeQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageRequest
@@ -3063,6 +3585,52 @@ func (s *ReceiveMessageInput) SetWaitTimeSeconds(v int64) *ReceiveMessageInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiveMessageInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		e.SetList(protocol.BodyTarget, "AttributeNames", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{Flatten: true})
+	}
+	if s.MaxNumberOfMessages != nil {
+		v := *s.MaxNumberOfMessages
+
+		e.SetValue(protocol.BodyTarget, "MaxNumberOfMessages", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.MessageAttributeNames) > 0 {
+		v := s.MessageAttributeNames
+
+		e.SetList(protocol.BodyTarget, "MessageAttributeNames", protocol.EncodeStringList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReceiveRequestAttemptId != nil {
+		v := *s.ReceiveRequestAttemptId
+
+		e.SetValue(protocol.BodyTarget, "ReceiveRequestAttemptId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VisibilityTimeout != nil {
+		v := *s.VisibilityTimeout
+
+		e.SetValue(protocol.BodyTarget, "VisibilityTimeout", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.WaitTimeSeconds != nil {
+		v := *s.WaitTimeSeconds
+
+		e.SetValue(protocol.BodyTarget, "WaitTimeSeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A list of received messages.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageResult
 type ReceiveMessageOutput struct {
@@ -3093,6 +3661,17 @@ func (s ReceiveMessageOutput) SDKResponseMetadata() aws.Response {
 func (s *ReceiveMessageOutput) SetMessages(v []Message) *ReceiveMessageOutput {
 	s.Messages = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiveMessageOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Messages) > 0 {
+		v := s.Messages
+
+		e.SetList(protocol.BodyTarget, "Messages", encodeMessageList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermissionRequest
@@ -3153,6 +3732,22 @@ func (s *RemovePermissionInput) SetQueueUrl(v string) *RemovePermissionInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemovePermissionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Label != nil {
+		v := *s.Label
+
+		e.SetValue(protocol.BodyTarget, "Label", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -3173,6 +3768,12 @@ func (s RemovePermissionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemovePermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequest
@@ -3239,6 +3840,22 @@ func (s *SendMessageBatchInput) SetQueueUrl(v string) *SendMessageBatchInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendMessageBatchInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Entries) > 0 {
+		v := s.Entries
+
+		e.SetList(protocol.BodyTarget, "Entries", encodeSendMessageBatchRequestEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // For each message in the batch, the response contains a SendMessageBatchResultEntry
 // tag if the message succeeds or a BatchResultErrorEntry tag if the message
 // fails.
@@ -3285,6 +3902,22 @@ func (s *SendMessageBatchOutput) SetFailed(v []BatchResultErrorEntry) *SendMessa
 func (s *SendMessageBatchOutput) SetSuccessful(v []SendMessageBatchResultEntry) *SendMessageBatchOutput {
 	s.Successful = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendMessageBatchOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Failed) > 0 {
+		v := s.Failed
+
+		e.SetList(protocol.BodyTarget, "Failed", encodeBatchResultErrorEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	if len(s.Successful) > 0 {
+		v := s.Successful
+
+		e.SetList(protocol.BodyTarget, "Successful", encodeSendMessageBatchResultEntryList(v), protocol.Metadata{Flatten: true})
+	}
+	return nil
 }
 
 // Contains the details of a single Amazon SQS message along with an Id.
@@ -3466,6 +4099,50 @@ func (s *SendMessageBatchRequestEntry) SetMessageGroupId(v string) *SendMessageB
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendMessageBatchRequestEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DelaySeconds != nil {
+		v := *s.DelaySeconds
+
+		e.SetValue(protocol.BodyTarget, "DelaySeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MessageAttributes) > 0 {
+		v := s.MessageAttributes
+
+		e.SetMap(protocol.BodyTarget, "MessageAttribute", encodeMessageAttributeValueMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.MessageBody != nil {
+		v := *s.MessageBody
+
+		e.SetValue(protocol.BodyTarget, "MessageBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageDeduplicationId != nil {
+		v := *s.MessageDeduplicationId
+
+		e.SetValue(protocol.BodyTarget, "MessageDeduplicationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageGroupId != nil {
+		v := *s.MessageGroupId
+
+		e.SetValue(protocol.BodyTarget, "MessageGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSendMessageBatchRequestEntryList(vs []SendMessageBatchRequestEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchResultEntry
 type SendMessageBatchResultEntry struct {
@@ -3542,6 +4219,45 @@ func (s *SendMessageBatchResultEntry) SetMessageId(v string) *SendMessageBatchRe
 func (s *SendMessageBatchResultEntry) SetSequenceNumber(v string) *SendMessageBatchResultEntry {
 	s.SequenceNumber = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendMessageBatchResultEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MD5OfMessageAttributes != nil {
+		v := *s.MD5OfMessageAttributes
+
+		e.SetValue(protocol.BodyTarget, "MD5OfMessageAttributes", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MD5OfMessageBody != nil {
+		v := *s.MD5OfMessageBody
+
+		e.SetValue(protocol.BodyTarget, "MD5OfMessageBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SequenceNumber != nil {
+		v := *s.SequenceNumber
+
+		e.SetValue(protocol.BodyTarget, "SequenceNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSendMessageBatchResultEntryList(vs []SendMessageBatchResultEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageRequest
@@ -3730,6 +4446,42 @@ func (s *SendMessageInput) SetQueueUrl(v string) *SendMessageInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendMessageInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DelaySeconds != nil {
+		v := *s.DelaySeconds
+
+		e.SetValue(protocol.BodyTarget, "DelaySeconds", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.MessageAttributes) > 0 {
+		v := s.MessageAttributes
+
+		e.SetMap(protocol.BodyTarget, "MessageAttribute", encodeMessageAttributeValueMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.MessageBody != nil {
+		v := *s.MessageBody
+
+		e.SetValue(protocol.BodyTarget, "MessageBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageDeduplicationId != nil {
+		v := *s.MessageDeduplicationId
+
+		e.SetValue(protocol.BodyTarget, "MessageDeduplicationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageGroupId != nil {
+		v := *s.MessageGroupId
+
+		e.SetValue(protocol.BodyTarget, "MessageGroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The MD5OfMessageBody and MessageId elements.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageResult
 type SendMessageOutput struct {
@@ -3800,6 +4552,32 @@ func (s *SendMessageOutput) SetMessageId(v string) *SendMessageOutput {
 func (s *SendMessageOutput) SetSequenceNumber(v string) *SendMessageOutput {
 	s.SequenceNumber = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendMessageOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MD5OfMessageAttributes != nil {
+		v := *s.MD5OfMessageAttributes
+
+		e.SetValue(protocol.BodyTarget, "MD5OfMessageAttributes", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MD5OfMessageBody != nil {
+		v := *s.MD5OfMessageBody
+
+		e.SetValue(protocol.BodyTarget, "MD5OfMessageBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SequenceNumber != nil {
+		v := *s.SequenceNumber
+
+		e.SetValue(protocol.BodyTarget, "SequenceNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributesRequest
@@ -3969,6 +4747,22 @@ func (s *SetQueueAttributesInput) SetQueueUrl(v string) *SetQueueAttributesInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetQueueAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		e.SetMap(protocol.BodyTarget, "Attribute", protocol.EncodeStringMap(v), protocol.Metadata{Flatten: true, MapLocationNameKey: "Name", MapLocationNameValue: "Value"})
+	}
+	if s.QueueUrl != nil {
+		v := *s.QueueUrl
+
+		e.SetValue(protocol.BodyTarget, "QueueUrl", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributesOutput
 type SetQueueAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3991,6 +4785,12 @@ func (s SetQueueAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetQueueAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 type MessageSystemAttributeName string
 
 // Enum values for MessageSystemAttributeName
@@ -4003,6 +4803,23 @@ const (
 	MessageSystemAttributeNameMessageDeduplicationId           MessageSystemAttributeName = "MessageDeduplicationId"
 	MessageSystemAttributeNameMessageGroupId                   MessageSystemAttributeName = "MessageGroupId"
 )
+
+func (enum MessageSystemAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageSystemAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeQueueAttributeNameList(vs []QueueAttributeName) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type QueueAttributeName string
 
@@ -4027,3 +4844,12 @@ const (
 	QueueAttributeNameKmsMasterKeyId                        QueueAttributeName = "KmsMasterKeyId"
 	QueueAttributeNameKmsDataKeyReusePeriodSeconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
 )
+
+func (enum QueueAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueueAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

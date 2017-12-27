@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAllocateStaticIp = "AllocateStaticIp"
@@ -7954,6 +7955,15 @@ const (
 	AccessDirectionOutbound AccessDirection = "outbound"
 )
 
+func (enum AccessDirection) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessDirection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BlueprintType string
 
 // Enum values for BlueprintType
@@ -7962,6 +7972,15 @@ const (
 	BlueprintTypeApp BlueprintType = "app"
 )
 
+func (enum BlueprintType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BlueprintType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceAccessProtocol string
 
 // Enum values for InstanceAccessProtocol
@@ -7969,6 +7988,15 @@ const (
 	InstanceAccessProtocolSsh InstanceAccessProtocol = "ssh"
 	InstanceAccessProtocolRdp InstanceAccessProtocol = "rdp"
 )
+
+func (enum InstanceAccessProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceAccessProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceMetricName string
 
@@ -7982,6 +8010,15 @@ const (
 	InstanceMetricNameStatusCheckFailedSystem   InstanceMetricName = "StatusCheckFailed_System"
 )
 
+func (enum InstanceMetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceSnapshotState string
 
 // Enum values for InstanceSnapshotState
@@ -7990,6 +8027,23 @@ const (
 	InstanceSnapshotStateError     InstanceSnapshotState = "error"
 	InstanceSnapshotStateAvailable InstanceSnapshotState = "available"
 )
+
+func (enum InstanceSnapshotState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceSnapshotState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeMetricStatisticList(vs []MetricStatistic) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type MetricStatistic string
 
@@ -8001,6 +8055,15 @@ const (
 	MetricStatisticAverage     MetricStatistic = "Average"
 	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 )
+
+func (enum MetricStatistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricStatistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MetricUnit string
 
@@ -8035,6 +8098,15 @@ const (
 	MetricUnitNone            MetricUnit = "None"
 )
 
+func (enum MetricUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkProtocol string
 
 // Enum values for NetworkProtocol
@@ -8043,6 +8115,15 @@ const (
 	NetworkProtocolAll NetworkProtocol = "all"
 	NetworkProtocolUdp NetworkProtocol = "udp"
 )
+
+func (enum NetworkProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationStatus string
 
@@ -8053,6 +8134,15 @@ const (
 	OperationStatusFailed     OperationStatus = "Failed"
 	OperationStatusCompleted  OperationStatus = "Completed"
 )
+
+func (enum OperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationType string
 
@@ -8079,6 +8169,15 @@ const (
 	OperationTypeCreateInstancesFromSnapshot OperationType = "CreateInstancesFromSnapshot"
 )
 
+func (enum OperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PortAccessType string
 
 // Enum values for PortAccessType
@@ -8087,6 +8186,15 @@ const (
 	PortAccessTypePrivate PortAccessType = "Private"
 )
 
+func (enum PortAccessType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PortAccessType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PortState string
 
 // Enum values for PortState
@@ -8094,6 +8202,15 @@ const (
 	PortStateOpen   PortState = "open"
 	PortStateClosed PortState = "closed"
 )
+
+func (enum PortState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PortState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RegionName string
 
@@ -8112,6 +8229,15 @@ const (
 	RegionNameApNortheast2 RegionName = "ap-northeast-2"
 )
 
+func (enum RegionName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RegionName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -8123,3 +8249,12 @@ const (
 	ResourceTypeDomain           ResourceType = "Domain"
 	ResourceTypePeeredVpc        ResourceType = "PeeredVpc"
 )
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -55836,6 +55836,14 @@ func (s *VpnTunnelOptionsSpecification) SetTunnelInsideCidr(v string) *VpnTunnel
 	return s
 }
 
+func encodeAccountAttributeNameList(vs []AccountAttributeName) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type AccountAttributeName string
 
 // Enum values for AccountAttributeName
@@ -55843,6 +55851,15 @@ const (
 	AccountAttributeNameSupportedPlatforms AccountAttributeName = "supported-platforms"
 	AccountAttributeNameDefaultVpc         AccountAttributeName = "default-vpc"
 )
+
+func (enum AccountAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccountAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ActivityStatus string
 
@@ -55854,6 +55871,15 @@ const (
 	ActivityStatusFulfilled          ActivityStatus = "fulfilled"
 )
 
+func (enum ActivityStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActivityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Affinity string
 
 // Enum values for Affinity
@@ -55861,6 +55887,15 @@ const (
 	AffinityDefault Affinity = "default"
 	AffinityHost    Affinity = "host"
 )
+
+func (enum Affinity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Affinity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AllocationState string
 
@@ -55873,6 +55908,15 @@ const (
 	AllocationStateReleasedPermanentFailure AllocationState = "released-permanent-failure"
 )
 
+func (enum AllocationState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AllocationState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AllocationStrategy string
 
 // Enum values for AllocationStrategy
@@ -55881,6 +55925,15 @@ const (
 	AllocationStrategyDiversified AllocationStrategy = "diversified"
 )
 
+func (enum AllocationStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AllocationStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ArchitectureValues string
 
 // Enum values for ArchitectureValues
@@ -55888,6 +55941,15 @@ const (
 	ArchitectureValuesI386  ArchitectureValues = "i386"
 	ArchitectureValuesX8664 ArchitectureValues = "x86_64"
 )
+
+func (enum ArchitectureValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArchitectureValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AttachmentStatus string
 
@@ -55899,6 +55961,15 @@ const (
 	AttachmentStatusDetached  AttachmentStatus = "detached"
 )
 
+func (enum AttachmentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttachmentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutoPlacement string
 
 // Enum values for AutoPlacement
@@ -55906,6 +55977,15 @@ const (
 	AutoPlacementOn  AutoPlacement = "on"
 	AutoPlacementOff AutoPlacement = "off"
 )
+
+func (enum AutoPlacement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoPlacement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AvailabilityZoneState string
 
@@ -55916,6 +55996,15 @@ const (
 	AvailabilityZoneStateImpaired    AvailabilityZoneState = "impaired"
 	AvailabilityZoneStateUnavailable AvailabilityZoneState = "unavailable"
 )
+
+func (enum AvailabilityZoneState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AvailabilityZoneState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type BatchState string
 
@@ -55930,6 +56019,15 @@ const (
 	BatchStateModifying            BatchState = "modifying"
 )
 
+func (enum BatchState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BatchState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BundleTaskState string
 
 // Enum values for BundleTaskState
@@ -55943,6 +56041,15 @@ const (
 	BundleTaskStateFailed             BundleTaskState = "failed"
 )
 
+func (enum BundleTaskState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BundleTaskState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CancelBatchErrorCode string
 
 // Enum values for CancelBatchErrorCode
@@ -55952,6 +56059,15 @@ const (
 	CancelBatchErrorCodeFleetRequestNotInCancellableState CancelBatchErrorCode = "fleetRequestNotInCancellableState"
 	CancelBatchErrorCodeUnexpectedError                   CancelBatchErrorCode = "unexpectedError"
 )
+
+func (enum CancelBatchErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CancelBatchErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CancelSpotInstanceRequestState string
 
@@ -55964,12 +56080,30 @@ const (
 	CancelSpotInstanceRequestStateCompleted CancelSpotInstanceRequestState = "completed"
 )
 
+func (enum CancelSpotInstanceRequestState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CancelSpotInstanceRequestState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ContainerFormat string
 
 // Enum values for ContainerFormat
 const (
 	ContainerFormatOva ContainerFormat = "ova"
 )
+
+func (enum ContainerFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContainerFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ConversionTaskState string
 
@@ -55981,12 +56115,30 @@ const (
 	ConversionTaskStateCompleted  ConversionTaskState = "completed"
 )
 
+func (enum ConversionTaskState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConversionTaskState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CurrencyCodeValues string
 
 // Enum values for CurrencyCodeValues
 const (
 	CurrencyCodeValuesUsd CurrencyCodeValues = "USD"
 )
+
+func (enum CurrencyCodeValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CurrencyCodeValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DatafeedSubscriptionState string
 
@@ -55996,6 +56148,15 @@ const (
 	DatafeedSubscriptionStateInactive DatafeedSubscriptionState = "Inactive"
 )
 
+func (enum DatafeedSubscriptionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DatafeedSubscriptionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -56003,6 +56164,15 @@ const (
 	DeviceTypeEbs           DeviceType = "ebs"
 	DeviceTypeInstanceStore DeviceType = "instance-store"
 )
+
+func (enum DeviceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DiskImageFormat string
 
@@ -56013,6 +56183,15 @@ const (
 	DiskImageFormatVhd  DiskImageFormat = "VHD"
 )
 
+func (enum DiskImageFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DiskImageFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DomainType string
 
 // Enum values for DomainType
@@ -56021,12 +56200,30 @@ const (
 	DomainTypeStandard DomainType = "standard"
 )
 
+func (enum DomainType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ElasticGpuState string
 
 // Enum values for ElasticGpuState
 const (
 	ElasticGpuStateAttached ElasticGpuState = "ATTACHED"
 )
+
+func (enum ElasticGpuState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ElasticGpuState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ElasticGpuStatus string
 
@@ -56035,6 +56232,15 @@ const (
 	ElasticGpuStatusOk       ElasticGpuStatus = "OK"
 	ElasticGpuStatusImpaired ElasticGpuStatus = "IMPAIRED"
 )
+
+func (enum ElasticGpuStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ElasticGpuStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EventCode string
 
@@ -56047,6 +56253,15 @@ const (
 	EventCodeInstanceStop       EventCode = "instance-stop"
 )
 
+func (enum EventCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventType string
 
 // Enum values for EventType
@@ -56056,6 +56271,15 @@ const (
 	EventTypeError              EventType = "error"
 )
 
+func (enum EventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExcessCapacityTerminationPolicy string
 
 // Enum values for ExcessCapacityTerminationPolicy
@@ -56063,6 +56287,15 @@ const (
 	ExcessCapacityTerminationPolicyNoTermination ExcessCapacityTerminationPolicy = "noTermination"
 	ExcessCapacityTerminationPolicyDefault       ExcessCapacityTerminationPolicy = "default"
 )
+
+func (enum ExcessCapacityTerminationPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExcessCapacityTerminationPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExportEnvironment string
 
@@ -56072,6 +56305,15 @@ const (
 	ExportEnvironmentVmware    ExportEnvironment = "vmware"
 	ExportEnvironmentMicrosoft ExportEnvironment = "microsoft"
 )
+
+func (enum ExportEnvironment) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExportEnvironment) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExportTaskState string
 
@@ -56083,6 +56325,15 @@ const (
 	ExportTaskStateCompleted  ExportTaskState = "completed"
 )
 
+func (enum ExportTaskState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExportTaskState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetType string
 
 // Enum values for FleetType
@@ -56090,6 +56341,15 @@ const (
 	FleetTypeRequest  FleetType = "request"
 	FleetTypeMaintain FleetType = "maintain"
 )
+
+func (enum FleetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FlowLogsResourceType string
 
@@ -56099,6 +56359,15 @@ const (
 	FlowLogsResourceTypeSubnet           FlowLogsResourceType = "Subnet"
 	FlowLogsResourceTypeNetworkInterface FlowLogsResourceType = "NetworkInterface"
 )
+
+func (enum FlowLogsResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FlowLogsResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FpgaImageAttributeName string
 
@@ -56110,6 +56379,15 @@ const (
 	FpgaImageAttributeNameProductCodes   FpgaImageAttributeName = "productCodes"
 )
 
+func (enum FpgaImageAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FpgaImageAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FpgaImageStateCode string
 
 // Enum values for FpgaImageStateCode
@@ -56120,12 +56398,30 @@ const (
 	FpgaImageStateCodeUnavailable FpgaImageStateCode = "unavailable"
 )
 
+func (enum FpgaImageStateCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FpgaImageStateCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GatewayType string
 
 // Enum values for GatewayType
 const (
 	GatewayTypeIpsec1 GatewayType = "ipsec.1"
 )
+
+func (enum GatewayType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GatewayType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type HostTenancy string
 
@@ -56135,6 +56431,15 @@ const (
 	HostTenancyHost      HostTenancy = "host"
 )
 
+func (enum HostTenancy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HostTenancy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HypervisorType string
 
 // Enum values for HypervisorType
@@ -56142,6 +56447,15 @@ const (
 	HypervisorTypeOvm HypervisorType = "ovm"
 	HypervisorTypeXen HypervisorType = "xen"
 )
+
+func (enum HypervisorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HypervisorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type IamInstanceProfileAssociationState string
 
@@ -56152,6 +56466,15 @@ const (
 	IamInstanceProfileAssociationStateDisassociating IamInstanceProfileAssociationState = "disassociating"
 	IamInstanceProfileAssociationStateDisassociated  IamInstanceProfileAssociationState = "disassociated"
 )
+
+func (enum IamInstanceProfileAssociationState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IamInstanceProfileAssociationState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ImageAttributeName string
 
@@ -56166,6 +56489,15 @@ const (
 	ImageAttributeNameSriovNetSupport    ImageAttributeName = "sriovNetSupport"
 )
 
+func (enum ImageAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageState string
 
 // Enum values for ImageState
@@ -56179,6 +56511,15 @@ const (
 	ImageStateError        ImageState = "error"
 )
 
+func (enum ImageState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageTypeValues string
 
 // Enum values for ImageTypeValues
@@ -56187,6 +56528,15 @@ const (
 	ImageTypeValuesKernel  ImageTypeValues = "kernel"
 	ImageTypeValuesRamdisk ImageTypeValues = "ramdisk"
 )
+
+func (enum ImageTypeValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageTypeValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceAttributeName string
 
@@ -56208,6 +56558,15 @@ const (
 	InstanceAttributeNameEnaSupport                        InstanceAttributeName = "enaSupport"
 )
 
+func (enum InstanceAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceHealthStatus string
 
 // Enum values for InstanceHealthStatus
@@ -56215,6 +56574,15 @@ const (
 	InstanceHealthStatusHealthy   InstanceHealthStatus = "healthy"
 	InstanceHealthStatusUnhealthy InstanceHealthStatus = "unhealthy"
 )
+
+func (enum InstanceHealthStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceHealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceInterruptionBehavior string
 
@@ -56224,6 +56592,15 @@ const (
 	InstanceInterruptionBehaviorTerminate InstanceInterruptionBehavior = "terminate"
 )
 
+func (enum InstanceInterruptionBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceInterruptionBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceLifecycleType string
 
 // Enum values for InstanceLifecycleType
@@ -56231,6 +56608,15 @@ const (
 	InstanceLifecycleTypeSpot      InstanceLifecycleType = "spot"
 	InstanceLifecycleTypeScheduled InstanceLifecycleType = "scheduled"
 )
+
+func (enum InstanceLifecycleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceLifecycleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceStateName string
 
@@ -56243,6 +56629,23 @@ const (
 	InstanceStateNameStopping     InstanceStateName = "stopping"
 	InstanceStateNameStopped      InstanceStateName = "stopped"
 )
+
+func (enum InstanceStateName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceStateName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeInstanceTypeList(vs []InstanceType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type InstanceType string
 
@@ -56331,6 +56734,15 @@ const (
 	InstanceTypeF116xlarge  InstanceType = "f1.16xlarge"
 )
 
+func (enum InstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InterfacePermissionType string
 
 // Enum values for InterfacePermissionType
@@ -56338,6 +56750,15 @@ const (
 	InterfacePermissionTypeInstanceAttach InterfacePermissionType = "INSTANCE-ATTACH"
 	InterfacePermissionTypeEipAssociate   InterfacePermissionType = "EIP-ASSOCIATE"
 )
+
+func (enum InterfacePermissionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InterfacePermissionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ListingState string
 
@@ -56349,6 +56770,15 @@ const (
 	ListingStatePending   ListingState = "pending"
 )
 
+func (enum ListingState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListingState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ListingStatus string
 
 // Enum values for ListingStatus
@@ -56358,6 +56788,15 @@ const (
 	ListingStatusCancelled ListingStatus = "cancelled"
 	ListingStatusClosed    ListingStatus = "closed"
 )
+
+func (enum ListingStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListingStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MonitoringState string
 
@@ -56369,6 +56808,15 @@ const (
 	MonitoringStatePending   MonitoringState = "pending"
 )
 
+func (enum MonitoringState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MonitoringState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MoveStatus string
 
 // Enum values for MoveStatus
@@ -56376,6 +56824,15 @@ const (
 	MoveStatusMovingToVpc        MoveStatus = "movingToVpc"
 	MoveStatusRestoringToClassic MoveStatus = "restoringToClassic"
 )
+
+func (enum MoveStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MoveStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NatGatewayState string
 
@@ -56388,6 +56845,15 @@ const (
 	NatGatewayStateDeleted   NatGatewayState = "deleted"
 )
 
+func (enum NatGatewayState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NatGatewayState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkInterfaceAttribute string
 
 // Enum values for NetworkInterfaceAttribute
@@ -56397,6 +56863,15 @@ const (
 	NetworkInterfaceAttributeSourceDestCheck NetworkInterfaceAttribute = "sourceDestCheck"
 	NetworkInterfaceAttributeAttachment      NetworkInterfaceAttribute = "attachment"
 )
+
+func (enum NetworkInterfaceAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkInterfaceAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NetworkInterfacePermissionStateCode string
 
@@ -56408,6 +56883,15 @@ const (
 	NetworkInterfacePermissionStateCodeRevoked  NetworkInterfacePermissionStateCode = "revoked"
 )
 
+func (enum NetworkInterfacePermissionStateCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkInterfacePermissionStateCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkInterfaceStatus string
 
 // Enum values for NetworkInterfaceStatus
@@ -56418,6 +56902,15 @@ const (
 	NetworkInterfaceStatusDetaching NetworkInterfaceStatus = "detaching"
 )
 
+func (enum NetworkInterfaceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkInterfaceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkInterfaceType string
 
 // Enum values for NetworkInterfaceType
@@ -56426,6 +56919,15 @@ const (
 	NetworkInterfaceTypeNatGateway NetworkInterfaceType = "natGateway"
 )
 
+func (enum NetworkInterfaceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkInterfaceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OfferingClassType string
 
 // Enum values for OfferingClassType
@@ -56433,6 +56935,15 @@ const (
 	OfferingClassTypeStandard    OfferingClassType = "standard"
 	OfferingClassTypeConvertible OfferingClassType = "convertible"
 )
+
+func (enum OfferingClassType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OfferingClassType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OfferingTypeValues string
 
@@ -56446,6 +56957,15 @@ const (
 	OfferingTypeValuesAllUpfront        OfferingTypeValues = "All Upfront"
 )
 
+func (enum OfferingTypeValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OfferingTypeValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperationType string
 
 // Enum values for OperationType
@@ -56453,6 +56973,15 @@ const (
 	OperationTypeAdd    OperationType = "add"
 	OperationTypeRemove OperationType = "remove"
 )
+
+func (enum OperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PaymentOption string
 
@@ -56463,12 +56992,30 @@ const (
 	PaymentOptionNoUpfront      PaymentOption = "NoUpfront"
 )
 
+func (enum PaymentOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PaymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PermissionGroup string
 
 // Enum values for PermissionGroup
 const (
 	PermissionGroupAll PermissionGroup = "all"
 )
+
+func (enum PermissionGroup) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PermissionGroup) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PlacementGroupState string
 
@@ -56480,12 +57027,30 @@ const (
 	PlacementGroupStateDeleted   PlacementGroupState = "deleted"
 )
 
+func (enum PlacementGroupState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlacementGroupState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlacementStrategy string
 
 // Enum values for PlacementStrategy
 const (
 	PlacementStrategyCluster PlacementStrategy = "cluster"
 )
+
+func (enum PlacementStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlacementStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PlatformValues string
 
@@ -56494,6 +57059,15 @@ const (
 	PlatformValuesWindows PlatformValues = "Windows"
 )
 
+func (enum PlatformValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProductCodeValues string
 
 // Enum values for ProductCodeValues
@@ -56501,6 +57075,15 @@ const (
 	ProductCodeValuesDevpay      ProductCodeValues = "devpay"
 	ProductCodeValuesMarketplace ProductCodeValues = "marketplace"
 )
+
+func (enum ProductCodeValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductCodeValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RIProductDescription string
 
@@ -56512,12 +57095,38 @@ const (
 	RIProductDescriptionWindowsAmazonVpc   RIProductDescription = "Windows (Amazon VPC)"
 )
 
+func (enum RIProductDescription) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RIProductDescription) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecurringChargeFrequency string
 
 // Enum values for RecurringChargeFrequency
 const (
 	RecurringChargeFrequencyHourly RecurringChargeFrequency = "Hourly"
 )
+
+func (enum RecurringChargeFrequency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecurringChargeFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeReportInstanceReasonCodesList(vs []ReportInstanceReasonCodes) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type ReportInstanceReasonCodes string
 
@@ -56534,6 +57143,15 @@ const (
 	ReportInstanceReasonCodesOther                    ReportInstanceReasonCodes = "other"
 )
 
+func (enum ReportInstanceReasonCodes) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportInstanceReasonCodes) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportStatusType string
 
 // Enum values for ReportStatusType
@@ -56541,6 +57159,15 @@ const (
 	ReportStatusTypeOk       ReportStatusType = "ok"
 	ReportStatusTypeImpaired ReportStatusType = "impaired"
 )
+
+func (enum ReportStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReservationState string
 
@@ -56552,6 +57179,15 @@ const (
 	ReservationStateRetired        ReservationState = "retired"
 )
 
+func (enum ReservationState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReservationState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReservedInstanceState string
 
 // Enum values for ReservedInstanceState
@@ -56562,6 +57198,15 @@ const (
 	ReservedInstanceStateRetired        ReservedInstanceState = "retired"
 )
 
+func (enum ReservedInstanceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReservedInstanceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResetFpgaImageAttributeName string
 
 // Enum values for ResetFpgaImageAttributeName
@@ -56569,12 +57214,30 @@ const (
 	ResetFpgaImageAttributeNameLoadPermission ResetFpgaImageAttributeName = "loadPermission"
 )
 
+func (enum ResetFpgaImageAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResetFpgaImageAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResetImageAttributeName string
 
 // Enum values for ResetImageAttributeName
 const (
 	ResetImageAttributeNameLaunchPermission ResetImageAttributeName = "launchPermission"
 )
+
+func (enum ResetImageAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResetImageAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceType string
 
@@ -56599,6 +57262,15 @@ const (
 	ResourceTypeVpnGateway           ResourceType = "vpn-gateway"
 )
 
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RouteOrigin string
 
 // Enum values for RouteOrigin
@@ -56608,6 +57280,15 @@ const (
 	RouteOriginEnableVgwRoutePropagation RouteOrigin = "EnableVgwRoutePropagation"
 )
 
+func (enum RouteOrigin) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RouteOrigin) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RouteState string
 
 // Enum values for RouteState
@@ -56615,6 +57296,15 @@ const (
 	RouteStateActive    RouteState = "active"
 	RouteStateBlackhole RouteState = "blackhole"
 )
+
+func (enum RouteState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RouteState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RuleAction string
 
@@ -56624,6 +57314,15 @@ const (
 	RuleActionDeny  RuleAction = "deny"
 )
 
+func (enum RuleAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RuleAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ShutdownBehavior string
 
 // Enum values for ShutdownBehavior
@@ -56631,6 +57330,15 @@ const (
 	ShutdownBehaviorStop      ShutdownBehavior = "stop"
 	ShutdownBehaviorTerminate ShutdownBehavior = "terminate"
 )
+
+func (enum ShutdownBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ShutdownBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SnapshotAttributeName string
 
@@ -56640,6 +57348,15 @@ const (
 	SnapshotAttributeNameCreateVolumePermission SnapshotAttributeName = "createVolumePermission"
 )
 
+func (enum SnapshotAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SnapshotAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SnapshotState string
 
 // Enum values for SnapshotState
@@ -56648,6 +57365,15 @@ const (
 	SnapshotStateCompleted SnapshotState = "completed"
 	SnapshotStateError     SnapshotState = "error"
 )
+
+func (enum SnapshotState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SnapshotState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SpotInstanceState string
 
@@ -56660,6 +57386,15 @@ const (
 	SpotInstanceStateFailed    SpotInstanceState = "failed"
 )
 
+func (enum SpotInstanceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SpotInstanceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SpotInstanceType string
 
 // Enum values for SpotInstanceType
@@ -56667,6 +57402,15 @@ const (
 	SpotInstanceTypeOneTime    SpotInstanceType = "one-time"
 	SpotInstanceTypePersistent SpotInstanceType = "persistent"
 )
+
+func (enum SpotInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SpotInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type State string
 
@@ -56678,6 +57422,15 @@ const (
 	StateDeleted   State = "Deleted"
 )
 
+func (enum State) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum State) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Status string
 
 // Enum values for Status
@@ -56687,12 +57440,30 @@ const (
 	StatusInClassic      Status = "InClassic"
 )
 
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusName string
 
 // Enum values for StatusName
 const (
 	StatusNameReachability StatusName = "reachability"
 )
+
+func (enum StatusName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StatusType string
 
@@ -56703,6 +57474,15 @@ const (
 	StatusTypeInsufficientData StatusType = "insufficient-data"
 	StatusTypeInitializing     StatusType = "initializing"
 )
+
+func (enum StatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SubnetCidrBlockStateCode string
 
@@ -56716,6 +57496,15 @@ const (
 	SubnetCidrBlockStateCodeFailed         SubnetCidrBlockStateCode = "failed"
 )
 
+func (enum SubnetCidrBlockStateCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubnetCidrBlockStateCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SubnetState string
 
 // Enum values for SubnetState
@@ -56723,6 +57512,15 @@ const (
 	SubnetStatePending   SubnetState = "pending"
 	SubnetStateAvailable SubnetState = "available"
 )
+
+func (enum SubnetState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubnetState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SummaryStatus string
 
@@ -56735,6 +57533,15 @@ const (
 	SummaryStatusInitializing     SummaryStatus = "initializing"
 )
 
+func (enum SummaryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SummaryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TelemetryStatus string
 
 // Enum values for TelemetryStatus
@@ -56742,6 +57549,15 @@ const (
 	TelemetryStatusUp   TelemetryStatus = "UP"
 	TelemetryStatusDown TelemetryStatus = "DOWN"
 )
+
+func (enum TelemetryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TelemetryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Tenancy string
 
@@ -56752,6 +57568,15 @@ const (
 	TenancyHost      Tenancy = "host"
 )
 
+func (enum Tenancy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Tenancy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrafficType string
 
 // Enum values for TrafficType
@@ -56761,6 +57586,15 @@ const (
 	TrafficTypeAll    TrafficType = "ALL"
 )
 
+func (enum TrafficType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VirtualizationType string
 
 // Enum values for VirtualizationType
@@ -56768,6 +57602,15 @@ const (
 	VirtualizationTypeHvm         VirtualizationType = "hvm"
 	VirtualizationTypeParavirtual VirtualizationType = "paravirtual"
 )
+
+func (enum VirtualizationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualizationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VolumeAttachmentState string
 
@@ -56779,6 +57622,15 @@ const (
 	VolumeAttachmentStateDetached  VolumeAttachmentState = "detached"
 )
 
+func (enum VolumeAttachmentState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeAttachmentState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VolumeAttributeName string
 
 // Enum values for VolumeAttributeName
@@ -56786,6 +57638,15 @@ const (
 	VolumeAttributeNameAutoEnableIo VolumeAttributeName = "autoEnableIO"
 	VolumeAttributeNameProductCodes VolumeAttributeName = "productCodes"
 )
+
+func (enum VolumeAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VolumeModificationState string
 
@@ -56796,6 +57657,15 @@ const (
 	VolumeModificationStateCompleted  VolumeModificationState = "completed"
 	VolumeModificationStateFailed     VolumeModificationState = "failed"
 )
+
+func (enum VolumeModificationState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeModificationState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VolumeState string
 
@@ -56809,6 +57679,15 @@ const (
 	VolumeStateError     VolumeState = "error"
 )
 
+func (enum VolumeState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VolumeStatusInfoStatus string
 
 // Enum values for VolumeStatusInfoStatus
@@ -56818,6 +57697,15 @@ const (
 	VolumeStatusInfoStatusInsufficientData VolumeStatusInfoStatus = "insufficient-data"
 )
 
+func (enum VolumeStatusInfoStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeStatusInfoStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VolumeStatusName string
 
 // Enum values for VolumeStatusName
@@ -56825,6 +57713,15 @@ const (
 	VolumeStatusNameIoEnabled     VolumeStatusName = "io-enabled"
 	VolumeStatusNameIoPerformance VolumeStatusName = "io-performance"
 )
+
+func (enum VolumeStatusName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeStatusName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VolumeType string
 
@@ -56837,6 +57734,15 @@ const (
 	VolumeTypeSt1      VolumeType = "st1"
 )
 
+func (enum VolumeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VpcAttributeName string
 
 // Enum values for VpcAttributeName
@@ -56844,6 +57750,15 @@ const (
 	VpcAttributeNameEnableDnsSupport   VpcAttributeName = "enableDnsSupport"
 	VpcAttributeNameEnableDnsHostnames VpcAttributeName = "enableDnsHostnames"
 )
+
+func (enum VpcAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpcAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VpcCidrBlockStateCode string
 
@@ -56856,6 +57771,15 @@ const (
 	VpcCidrBlockStateCodeFailing        VpcCidrBlockStateCode = "failing"
 	VpcCidrBlockStateCodeFailed         VpcCidrBlockStateCode = "failed"
 )
+
+func (enum VpcCidrBlockStateCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpcCidrBlockStateCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VpcPeeringConnectionStateReasonCode string
 
@@ -56872,6 +57796,15 @@ const (
 	VpcPeeringConnectionStateReasonCodeDeleting          VpcPeeringConnectionStateReasonCode = "deleting"
 )
 
+func (enum VpcPeeringConnectionStateReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpcPeeringConnectionStateReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VpcState string
 
 // Enum values for VpcState
@@ -56879,6 +57812,15 @@ const (
 	VpcStatePending   VpcState = "pending"
 	VpcStateAvailable VpcState = "available"
 )
+
+func (enum VpcState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpcState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VpnState string
 
@@ -56890,12 +57832,30 @@ const (
 	VpnStateDeleted   VpnState = "deleted"
 )
 
+func (enum VpnState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpnState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VpnStaticRouteSource string
 
 // Enum values for VpnStaticRouteSource
 const (
 	VpnStaticRouteSourceStatic VpnStaticRouteSource = "Static"
 )
+
+func (enum VpnStaticRouteSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VpnStaticRouteSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Scope string
 
@@ -56904,3 +57864,12 @@ const (
 	ScopeAvailabilityZone Scope = "Availability Zone"
 	ScopeRegion           Scope = "Region"
 )
+
+func (enum Scope) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Scope) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

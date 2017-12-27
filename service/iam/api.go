@@ -8574,6 +8574,37 @@ func (s *AccessKey) SetUserName(v string) *AccessKey {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccessKey) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		e.SetValue(protocol.BodyTarget, "AccessKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SecretAccessKey != nil {
+		v := *s.SecretAccessKey
+
+		e.SetValue(protocol.BodyTarget, "SecretAccessKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains information about the last time an AWS access key was used.
 //
 // This data type is used as a response element in the GetAccessKeyLastUsed
@@ -8653,6 +8684,27 @@ func (s *AccessKeyLastUsed) SetServiceName(v string) *AccessKeyLastUsed {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccessKeyLastUsed) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LastUsedDate != nil {
+		v := *s.LastUsedDate
+
+		e.SetValue(protocol.BodyTarget, "LastUsedDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		e.SetValue(protocol.BodyTarget, "Region", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains information about an AWS access key, without its secret key.
 //
 // This data type is used as a response element in the ListAccessKeys action.
@@ -8706,6 +8758,40 @@ func (s *AccessKeyMetadata) SetStatus(v StatusType) *AccessKeyMetadata {
 func (s *AccessKeyMetadata) SetUserName(v string) *AccessKeyMetadata {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccessKeyMetadata) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		e.SetValue(protocol.BodyTarget, "AccessKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAccessKeyMetadataList(vs []AccessKeyMetadata) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProviderRequest
@@ -8772,6 +8858,22 @@ func (s *AddClientIDToOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddClientIDToOpenIDConnectProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClientID != nil {
+		v := *s.ClientID
+
+		e.SetValue(protocol.BodyTarget, "ClientID", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OpenIDConnectProviderArn != nil {
+		v := *s.OpenIDConnectProviderArn
+
+		e.SetValue(protocol.BodyTarget, "OpenIDConnectProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProviderOutput
 type AddClientIDToOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -8792,6 +8894,12 @@ func (s AddClientIDToOpenIDConnectProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddClientIDToOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddClientIDToOpenIDConnectProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfileRequest
@@ -8863,6 +8971,22 @@ func (s *AddRoleToInstanceProfileInput) SetRoleName(v string) *AddRoleToInstance
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddRoleToInstanceProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfileName != nil {
+		v := *s.InstanceProfileName
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfileOutput
 type AddRoleToInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -8883,6 +9007,12 @@ func (s AddRoleToInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddRoleToInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddRoleToInstanceProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroupRequest
@@ -8954,6 +9084,22 @@ func (s *AddUserToGroupInput) SetUserName(v string) *AddUserToGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddUserToGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroupOutput
 type AddUserToGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -8974,6 +9120,12 @@ func (s AddUserToGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddUserToGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddUserToGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyRequest
@@ -9045,6 +9197,22 @@ func (s *AttachGroupPolicyInput) SetPolicyArn(v string) *AttachGroupPolicyInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachGroupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyOutput
 type AttachGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -9065,6 +9233,12 @@ func (s AttachGroupPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachGroupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachGroupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyRequest
@@ -9136,6 +9310,22 @@ func (s *AttachRolePolicyInput) SetRoleName(v string) *AttachRolePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachRolePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyOutput
 type AttachRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -9156,6 +9346,12 @@ func (s AttachRolePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachRolePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachRolePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyRequest
@@ -9227,6 +9423,22 @@ func (s *AttachUserPolicyInput) SetUserName(v string) *AttachUserPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachUserPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyOutput
 type AttachUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -9247,6 +9459,12 @@ func (s AttachUserPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachUserPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachUserPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains information about an attached policy.
@@ -9294,6 +9512,30 @@ func (s *AttachedPolicy) SetPolicyArn(v string) *AttachedPolicy {
 func (s *AttachedPolicy) SetPolicyName(v string) *AttachedPolicy {
 	s.PolicyName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AttachedPolicy) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAttachedPolicyList(vs []AttachedPolicy) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordRequest
@@ -9367,6 +9609,22 @@ func (s *ChangePasswordInput) SetOldPassword(v string) *ChangePasswordInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangePasswordInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NewPassword != nil {
+		v := *s.NewPassword
+
+		e.SetValue(protocol.BodyTarget, "NewPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OldPassword != nil {
+		v := *s.OldPassword
+
+		e.SetValue(protocol.BodyTarget, "OldPassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordOutput
 type ChangePasswordOutput struct {
 	_ struct{} `type:"structure"`
@@ -9387,6 +9645,12 @@ func (s ChangePasswordOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ChangePasswordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangePasswordOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains information about a condition context key. It includes the name
@@ -9455,6 +9719,35 @@ func (s *ContextEntry) SetContextKeyValues(v []string) *ContextEntry {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ContextEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ContextKeyName != nil {
+		v := *s.ContextKeyName
+
+		e.SetValue(protocol.BodyTarget, "ContextKeyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ContextKeyType) > 0 {
+		v := s.ContextKeyType
+
+		e.SetValue(protocol.BodyTarget, "ContextKeyType", v, protocol.Metadata{})
+	}
+	if len(s.ContextKeyValues) > 0 {
+		v := s.ContextKeyValues
+
+		e.SetList(protocol.BodyTarget, "ContextKeyValues", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeContextEntryList(vs []ContextEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKeyRequest
 type CreateAccessKeyInput struct {
 	_ struct{} `type:"structure"`
@@ -9496,6 +9789,17 @@ func (s *CreateAccessKeyInput) SetUserName(v string) *CreateAccessKeyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAccessKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateAccessKey request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKeyResponse
 type CreateAccessKeyOutput struct {
@@ -9528,6 +9832,17 @@ func (s CreateAccessKeyOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateAccessKeyOutput) SetAccessKey(v *AccessKey) *CreateAccessKeyOutput {
 	s.AccessKey = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAccessKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKey != nil {
+		v := s.AccessKey
+
+		e.SetFields(protocol.BodyTarget, "AccessKey", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAliasRequest
@@ -9578,6 +9893,17 @@ func (s *CreateAccountAliasInput) SetAccountAlias(v string) *CreateAccountAliasI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAccountAliasInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountAlias != nil {
+		v := *s.AccountAlias
+
+		e.SetValue(protocol.BodyTarget, "AccountAlias", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAliasOutput
 type CreateAccountAliasOutput struct {
 	_ struct{} `type:"structure"`
@@ -9598,6 +9924,12 @@ func (s CreateAccountAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAccountAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateAccountAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupRequest
@@ -9672,6 +10004,22 @@ func (s *CreateGroupInput) SetPath(v string) *CreateGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateGroup request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupResponse
 type CreateGroupOutput struct {
@@ -9704,6 +10052,17 @@ func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateGroupOutput) SetGroup(v *Group) *CreateGroupOutput {
 	s.Group = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Group != nil {
+		v := s.Group
+
+		e.SetFields(protocol.BodyTarget, "Group", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileRequest
@@ -9776,6 +10135,22 @@ func (s *CreateInstanceProfileInput) SetPath(v string) *CreateInstanceProfileInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateInstanceProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfileName != nil {
+		v := *s.InstanceProfileName
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateInstanceProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileResponse
 type CreateInstanceProfileOutput struct {
@@ -9808,6 +10183,17 @@ func (s CreateInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateInstanceProfileOutput) SetInstanceProfile(v *InstanceProfile) *CreateInstanceProfileOutput {
 	s.InstanceProfile = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateInstanceProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfile != nil {
+		v := s.InstanceProfile
+
+		e.SetFields(protocol.BodyTarget, "InstanceProfile", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileRequest
@@ -9894,6 +10280,27 @@ func (s *CreateLoginProfileInput) SetUserName(v string) *CreateLoginProfileInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoginProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Password != nil {
+		v := *s.Password
+
+		e.SetValue(protocol.BodyTarget, "Password", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PasswordResetRequired != nil {
+		v := *s.PasswordResetRequired
+
+		e.SetValue(protocol.BodyTarget, "PasswordResetRequired", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateLoginProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileResponse
 type CreateLoginProfileOutput struct {
@@ -9926,6 +10333,17 @@ func (s CreateLoginProfileOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateLoginProfileOutput) SetLoginProfile(v *LoginProfile) *CreateLoginProfileOutput {
 	s.LoginProfile = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateLoginProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoginProfile != nil {
+		v := s.LoginProfile
+
+		e.SetFields(protocol.BodyTarget, "LoginProfile", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest
@@ -10031,6 +10449,27 @@ func (s *CreateOpenIDConnectProviderInput) SetUrl(v string) *CreateOpenIDConnect
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateOpenIDConnectProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ClientIDList) > 0 {
+		v := s.ClientIDList
+
+		e.SetList(protocol.BodyTarget, "ClientIDList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ThumbprintList) > 0 {
+		v := s.ThumbprintList
+
+		e.SetList(protocol.BodyTarget, "ThumbprintList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		e.SetValue(protocol.BodyTarget, "Url", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateOpenIDConnectProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderResponse
 type CreateOpenIDConnectProviderOutput struct {
@@ -10062,6 +10501,17 @@ func (s CreateOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateOpenIDConnectProviderOutput) SetOpenIDConnectProviderArn(v string) *CreateOpenIDConnectProviderOutput {
 	s.OpenIDConnectProviderArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateOpenIDConnectProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OpenIDConnectProviderArn != nil {
+		v := *s.OpenIDConnectProviderArn
+
+		e.SetValue(protocol.BodyTarget, "OpenIDConnectProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyRequest
@@ -10173,6 +10623,32 @@ func (s *CreatePolicyInput) SetPolicyName(v string) *CreatePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreatePolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyResponse
 type CreatePolicyOutput struct {
@@ -10203,6 +10679,17 @@ func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
 func (s *CreatePolicyOutput) SetPolicy(v *Policy) *CreatePolicyOutput {
 	s.Policy = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Policy != nil {
+		v := s.Policy
+
+		e.SetFields(protocol.BodyTarget, "Policy", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionRequest
@@ -10296,6 +10783,27 @@ func (s *CreatePolicyVersionInput) SetSetAsDefault(v bool) *CreatePolicyVersionI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SetAsDefault != nil {
+		v := *s.SetAsDefault
+
+		e.SetValue(protocol.BodyTarget, "SetAsDefault", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreatePolicyVersion request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionResponse
 type CreatePolicyVersionOutput struct {
@@ -10326,6 +10834,17 @@ func (s CreatePolicyVersionOutput) SDKResponseMetadata() aws.Response {
 func (s *CreatePolicyVersionOutput) SetPolicyVersion(v *PolicyVersion) *CreatePolicyVersionOutput {
 	s.PolicyVersion = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreatePolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyVersion != nil {
+		v := s.PolicyVersion
+
+		e.SetFields(protocol.BodyTarget, "PolicyVersion", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest
@@ -10436,6 +10955,32 @@ func (s *CreateRoleInput) SetRoleName(v string) *CreateRoleInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AssumeRolePolicyDocument != nil {
+		v := *s.AssumeRolePolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "AssumeRolePolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateRole request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleResponse
 type CreateRoleOutput struct {
@@ -10468,6 +11013,17 @@ func (s CreateRoleOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateRoleOutput) SetRole(v *Role) *CreateRoleOutput {
 	s.Role = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Role != nil {
+		v := s.Role
+
+		e.SetFields(protocol.BodyTarget, "Role", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderRequest
@@ -10542,6 +11098,22 @@ func (s *CreateSAMLProviderInput) SetSAMLMetadataDocument(v string) *CreateSAMLP
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateSAMLProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SAMLMetadataDocument != nil {
+		v := *s.SAMLMetadataDocument
+
+		e.SetValue(protocol.BodyTarget, "SAMLMetadataDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateSAMLProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderResponse
 type CreateSAMLProviderOutput struct {
@@ -10572,6 +11144,17 @@ func (s CreateSAMLProviderOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateSAMLProviderOutput) SetSAMLProviderArn(v string) *CreateSAMLProviderOutput {
 	s.SAMLProviderArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateSAMLProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SAMLProviderArn != nil {
+		v := *s.SAMLProviderArn
+
+		e.SetValue(protocol.BodyTarget, "SAMLProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleRequest
@@ -10643,6 +11226,27 @@ func (s *CreateServiceLinkedRoleInput) SetDescription(v string) *CreateServiceLi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateServiceLinkedRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AWSServiceName != nil {
+		v := *s.AWSServiceName
+
+		e.SetValue(protocol.BodyTarget, "AWSServiceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CustomSuffix != nil {
+		v := *s.CustomSuffix
+
+		e.SetValue(protocol.BodyTarget, "CustomSuffix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleResponse
 type CreateServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
@@ -10672,6 +11276,17 @@ func (s CreateServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateServiceLinkedRoleOutput) SetRole(v *Role) *CreateServiceLinkedRoleOutput {
 	s.Role = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateServiceLinkedRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Role != nil {
+		v := s.Role
+
+		e.SetFields(protocol.BodyTarget, "Role", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialRequest
@@ -10740,6 +11355,22 @@ func (s *CreateServiceSpecificCredentialInput) SetUserName(v string) *CreateServ
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateServiceSpecificCredentialInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialResponse
 type CreateServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -10774,6 +11405,17 @@ func (s CreateServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Respons
 func (s *CreateServiceSpecificCredentialOutput) SetServiceSpecificCredential(v *ServiceSpecificCredential) *CreateServiceSpecificCredentialOutput {
 	s.ServiceSpecificCredential = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateServiceSpecificCredentialOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceSpecificCredential != nil {
+		v := s.ServiceSpecificCredential
+
+		e.SetFields(protocol.BodyTarget, "ServiceSpecificCredential", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest
@@ -10848,6 +11490,22 @@ func (s *CreateUserInput) SetUserName(v string) *CreateUserInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateUser request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserResponse
 type CreateUserOutput struct {
@@ -10878,6 +11536,17 @@ func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateUserOutput) SetUser(v *User) *CreateUserOutput {
 	s.User = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.User != nil {
+		v := s.User
+
+		e.SetFields(protocol.BodyTarget, "User", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceRequest
@@ -10951,6 +11620,22 @@ func (s *CreateVirtualMFADeviceInput) SetVirtualMFADeviceName(v string) *CreateV
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateVirtualMFADeviceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VirtualMFADeviceName != nil {
+		v := *s.VirtualMFADeviceName
+
+		e.SetValue(protocol.BodyTarget, "VirtualMFADeviceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful CreateVirtualMFADevice request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceResponse
 type CreateVirtualMFADeviceOutput struct {
@@ -10983,6 +11668,17 @@ func (s CreateVirtualMFADeviceOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateVirtualMFADeviceOutput) SetVirtualMFADevice(v *VirtualMFADevice) *CreateVirtualMFADeviceOutput {
 	s.VirtualMFADevice = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateVirtualMFADeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VirtualMFADevice != nil {
+		v := s.VirtualMFADevice
+
+		e.SetFields(protocol.BodyTarget, "VirtualMFADevice", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADeviceRequest
@@ -11055,6 +11751,22 @@ func (s *DeactivateMFADeviceInput) SetUserName(v string) *DeactivateMFADeviceInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeactivateMFADeviceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADeviceOutput
 type DeactivateMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -11075,6 +11787,12 @@ func (s DeactivateMFADeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeactivateMFADeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeactivateMFADeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKeyRequest
@@ -11141,6 +11859,22 @@ func (s *DeleteAccessKeyInput) SetUserName(v string) *DeleteAccessKeyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAccessKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		e.SetValue(protocol.BodyTarget, "AccessKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKeyOutput
 type DeleteAccessKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11161,6 +11895,12 @@ func (s DeleteAccessKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAccessKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAccessKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasRequest
@@ -11211,6 +11951,17 @@ func (s *DeleteAccountAliasInput) SetAccountAlias(v string) *DeleteAccountAliasI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAccountAliasInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountAlias != nil {
+		v := *s.AccountAlias
+
+		e.SetValue(protocol.BodyTarget, "AccountAlias", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasOutput
 type DeleteAccountAliasOutput struct {
 	_ struct{} `type:"structure"`
@@ -11233,6 +11984,12 @@ func (s DeleteAccountAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAccountAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicyInput
 type DeleteAccountPasswordPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -11246,6 +12003,12 @@ func (s DeleteAccountPasswordPolicyInput) String() string {
 // GoString returns the string representation
 func (s DeleteAccountPasswordPolicyInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAccountPasswordPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicyOutput
@@ -11268,6 +12031,12 @@ func (s DeleteAccountPasswordPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAccountPasswordPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAccountPasswordPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupRequest
@@ -11317,6 +12086,17 @@ func (s *DeleteGroupInput) SetGroupName(v string) *DeleteGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -11337,6 +12117,12 @@ func (s DeleteGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicyRequest
@@ -11409,6 +12195,22 @@ func (s *DeleteGroupPolicyInput) SetPolicyName(v string) *DeleteGroupPolicyInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteGroupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicyOutput
 type DeleteGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11429,6 +12231,12 @@ func (s DeleteGroupPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGroupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteGroupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfileRequest
@@ -11478,6 +12286,17 @@ func (s *DeleteInstanceProfileInput) SetInstanceProfileName(v string) *DeleteIns
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteInstanceProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfileName != nil {
+		v := *s.InstanceProfileName
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfileOutput
 type DeleteInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -11498,6 +12317,12 @@ func (s DeleteInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteInstanceProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileRequest
@@ -11547,6 +12372,17 @@ func (s *DeleteLoginProfileInput) SetUserName(v string) *DeleteLoginProfileInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoginProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileOutput
 type DeleteLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -11567,6 +12403,12 @@ func (s DeleteLoginProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLoginProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteLoginProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderRequest
@@ -11614,6 +12456,17 @@ func (s *DeleteOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteOpenIDConnectProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OpenIDConnectProviderArn != nil {
+		v := *s.OpenIDConnectProviderArn
+
+		e.SetValue(protocol.BodyTarget, "OpenIDConnectProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderOutput
 type DeleteOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -11634,6 +12487,12 @@ func (s DeleteOpenIDConnectProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteOpenIDConnectProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyRequest
@@ -11683,6 +12542,17 @@ func (s *DeletePolicyInput) SetPolicyArn(v string) *DeletePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyOutput
 type DeletePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11703,6 +12573,12 @@ func (s DeletePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionRequest
@@ -11777,6 +12653,22 @@ func (s *DeletePolicyVersionInput) SetVersionId(v string) *DeletePolicyVersionIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionId != nil {
+		v := *s.VersionId
+
+		e.SetValue(protocol.BodyTarget, "VersionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionOutput
 type DeletePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -11797,6 +12689,12 @@ func (s DeletePolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletePolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleRequest
@@ -11846,6 +12744,17 @@ func (s *DeleteRoleInput) SetRoleName(v string) *DeleteRoleInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleOutput
 type DeleteRoleOutput struct {
 	_ struct{} `type:"structure"`
@@ -11866,6 +12775,12 @@ func (s DeleteRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyRequest
@@ -11938,6 +12853,22 @@ func (s *DeleteRolePolicyInput) SetRoleName(v string) *DeleteRolePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteRolePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyOutput
 type DeleteRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11958,6 +12889,12 @@ func (s DeleteRolePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRolePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteRolePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProviderRequest
@@ -12003,6 +12940,17 @@ func (s *DeleteSAMLProviderInput) SetSAMLProviderArn(v string) *DeleteSAMLProvid
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSAMLProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SAMLProviderArn != nil {
+		v := *s.SAMLProviderArn
+
+		e.SetValue(protocol.BodyTarget, "SAMLProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProviderOutput
 type DeleteSAMLProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -12023,6 +12971,12 @@ func (s DeleteSAMLProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSAMLProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSAMLProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKeyRequest
@@ -12094,6 +13048,22 @@ func (s *DeleteSSHPublicKeyInput) SetUserName(v string) *DeleteSSHPublicKeyInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSSHPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SSHPublicKeyId != nil {
+		v := *s.SSHPublicKeyId
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKeyOutput
 type DeleteSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12114,6 +13084,12 @@ func (s DeleteSSHPublicKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSSHPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificateRequest
@@ -12163,6 +13139,17 @@ func (s *DeleteServerCertificateInput) SetServerCertificateName(v string) *Delet
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteServerCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServerCertificateName != nil {
+		v := *s.ServerCertificateName
+
+		e.SetValue(protocol.BodyTarget, "ServerCertificateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificateOutput
 type DeleteServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -12183,6 +13170,12 @@ func (s DeleteServerCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteServerCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteServerCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRoleRequest
@@ -12228,6 +13221,17 @@ func (s *DeleteServiceLinkedRoleInput) SetRoleName(v string) *DeleteServiceLinke
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteServiceLinkedRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRoleResponse
 type DeleteServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
@@ -12260,6 +13264,17 @@ func (s DeleteServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
 func (s *DeleteServiceLinkedRoleOutput) SetDeletionTaskId(v string) *DeleteServiceLinkedRoleOutput {
 	s.DeletionTaskId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteServiceLinkedRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeletionTaskId != nil {
+		v := *s.DeletionTaskId
+
+		e.SetValue(protocol.BodyTarget, "DeletionTaskId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredentialRequest
@@ -12328,6 +13343,22 @@ func (s *DeleteServiceSpecificCredentialInput) SetUserName(v string) *DeleteServ
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteServiceSpecificCredentialInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceSpecificCredentialId != nil {
+		v := *s.ServiceSpecificCredentialId
+
+		e.SetValue(protocol.BodyTarget, "ServiceSpecificCredentialId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredentialOutput
 type DeleteServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -12348,6 +13379,12 @@ func (s DeleteServiceSpecificCredentialOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteServiceSpecificCredentialOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificateRequest
@@ -12413,6 +13450,22 @@ func (s *DeleteSigningCertificateInput) SetUserName(v string) *DeleteSigningCert
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSigningCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateId != nil {
+		v := *s.CertificateId
+
+		e.SetValue(protocol.BodyTarget, "CertificateId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificateOutput
 type DeleteSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -12433,6 +13486,12 @@ func (s DeleteSigningCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSigningCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteSigningCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserRequest
@@ -12482,6 +13541,17 @@ func (s *DeleteUserInput) SetUserName(v string) *DeleteUserInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserOutput
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -12502,6 +13572,12 @@ func (s DeleteUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyRequest
@@ -12574,6 +13650,22 @@ func (s *DeleteUserPolicyInput) SetUserName(v string) *DeleteUserPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteUserPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyOutput
 type DeleteUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12594,6 +13686,12 @@ func (s DeleteUserPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteUserPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteUserPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADeviceRequest
@@ -12644,6 +13742,17 @@ func (s *DeleteVirtualMFADeviceInput) SetSerialNumber(v string) *DeleteVirtualMF
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteVirtualMFADeviceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADeviceOutput
 type DeleteVirtualMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -12664,6 +13773,12 @@ func (s DeleteVirtualMFADeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteVirtualMFADeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteVirtualMFADeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The reason that the service-linked role deletion failed.
@@ -12706,6 +13821,22 @@ func (s *DeletionTaskFailureReasonType) SetReason(v string) *DeletionTaskFailure
 func (s *DeletionTaskFailureReasonType) SetRoleUsageList(v []RoleUsageType) *DeletionTaskFailureReasonType {
 	s.RoleUsageList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeletionTaskFailureReasonType) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Reason != nil {
+		v := *s.Reason
+
+		e.SetValue(protocol.BodyTarget, "Reason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RoleUsageList) > 0 {
+		v := s.RoleUsageList
+
+		e.SetList(protocol.BodyTarget, "RoleUsageList", encodeRoleUsageTypeList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyRequest
@@ -12777,6 +13908,22 @@ func (s *DetachGroupPolicyInput) SetPolicyArn(v string) *DetachGroupPolicyInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachGroupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyOutput
 type DetachGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12797,6 +13944,12 @@ func (s DetachGroupPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachGroupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachGroupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyRequest
@@ -12868,6 +14021,22 @@ func (s *DetachRolePolicyInput) SetRoleName(v string) *DetachRolePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachRolePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyOutput
 type DetachRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12888,6 +14057,12 @@ func (s DetachRolePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachRolePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachRolePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyRequest
@@ -12959,6 +14134,22 @@ func (s *DetachUserPolicyInput) SetUserName(v string) *DetachUserPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachUserPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyOutput
 type DetachUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12979,6 +14170,12 @@ func (s DetachUserPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachUserPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DetachUserPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceRequest
@@ -13105,6 +14302,32 @@ func (s *EnableMFADeviceInput) SetUserName(v string) *EnableMFADeviceInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableMFADeviceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AuthenticationCode1 != nil {
+		v := *s.AuthenticationCode1
+
+		e.SetValue(protocol.BodyTarget, "AuthenticationCode1", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AuthenticationCode2 != nil {
+		v := *s.AuthenticationCode2
+
+		e.SetValue(protocol.BodyTarget, "AuthenticationCode2", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceOutput
 type EnableMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -13125,6 +14348,12 @@ func (s EnableMFADeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EnableMFADeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableMFADeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the results of a simulation.
@@ -13240,6 +14469,65 @@ func (s *EvaluationResult) SetResourceSpecificResults(v []ResourceSpecificResult
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EvaluationResult) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EvalActionName != nil {
+		v := *s.EvalActionName
+
+		e.SetValue(protocol.BodyTarget, "EvalActionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.EvalDecision) > 0 {
+		v := s.EvalDecision
+
+		e.SetValue(protocol.BodyTarget, "EvalDecision", v, protocol.Metadata{})
+	}
+	if len(s.EvalDecisionDetails) > 0 {
+		v := s.EvalDecisionDetails
+
+		e.SetMap(protocol.BodyTarget, "EvalDecisionDetails", func(me protocol.MapEncoder) {
+			for k, item := range v {
+				v := item
+				me.MapSetValue(k, v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.EvalResourceName != nil {
+		v := *s.EvalResourceName
+
+		e.SetValue(protocol.BodyTarget, "EvalResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MatchedStatements) > 0 {
+		v := s.MatchedStatements
+
+		e.SetList(protocol.BodyTarget, "MatchedStatements", encodeStatementList(v), protocol.Metadata{})
+	}
+	if len(s.MissingContextValues) > 0 {
+		v := s.MissingContextValues
+
+		e.SetList(protocol.BodyTarget, "MissingContextValues", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.OrganizationsDecisionDetail != nil {
+		v := s.OrganizationsDecisionDetail
+
+		e.SetFields(protocol.BodyTarget, "OrganizationsDecisionDetail", v, protocol.Metadata{})
+	}
+	if len(s.ResourceSpecificResults) > 0 {
+		v := s.ResourceSpecificResults
+
+		e.SetList(protocol.BodyTarget, "ResourceSpecificResults", encodeResourceSpecificResultList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEvaluationResultList(vs []EvaluationResult) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReportInput
 type GenerateCredentialReportInput struct {
 	_ struct{} `type:"structure"`
@@ -13253,6 +14541,12 @@ func (s GenerateCredentialReportInput) String() string {
 // GoString returns the string representation
 func (s GenerateCredentialReportInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GenerateCredentialReportInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful GenerateCredentialReport request.
@@ -13294,6 +14588,22 @@ func (s *GenerateCredentialReportOutput) SetDescription(v string) *GenerateCrede
 func (s *GenerateCredentialReportOutput) SetState(v ReportStateType) *GenerateCredentialReportOutput {
 	s.State = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GenerateCredentialReportOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		e.SetValue(protocol.BodyTarget, "State", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsedRequest
@@ -13343,6 +14653,17 @@ func (s *GetAccessKeyLastUsedInput) SetAccessKeyId(v string) *GetAccessKeyLastUs
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccessKeyLastUsedInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		e.SetValue(protocol.BodyTarget, "AccessKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetAccessKeyLastUsed request. It is
 // also returned as a member of the AccessKeyMetaData structure returned by
 // the ListAccessKeys action.
@@ -13384,6 +14705,22 @@ func (s *GetAccessKeyLastUsedOutput) SetAccessKeyLastUsed(v *AccessKeyLastUsed) 
 func (s *GetAccessKeyLastUsedOutput) SetUserName(v string) *GetAccessKeyLastUsedOutput {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccessKeyLastUsedOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyLastUsed != nil {
+		v := s.AccessKeyLastUsed
+
+		e.SetFields(protocol.BodyTarget, "AccessKeyLastUsed", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetailsRequest
@@ -13459,6 +14796,32 @@ func (s *GetAccountAuthorizationDetailsInput) SetMarker(v string) *GetAccountAut
 func (s *GetAccountAuthorizationDetailsInput) SetMaxItems(v int64) *GetAccountAuthorizationDetailsInput {
 	s.MaxItems = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccountAuthorizationDetailsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filter) > 0 {
+		v := s.Filter
+
+		e.SetList(protocol.BodyTarget, "Filter", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the response to a successful GetAccountAuthorizationDetails request.
@@ -13544,6 +14907,42 @@ func (s *GetAccountAuthorizationDetailsOutput) SetUserDetailList(v []UserDetail)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccountAuthorizationDetailsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.GroupDetailList) > 0 {
+		v := s.GroupDetailList
+
+		e.SetList(protocol.BodyTarget, "GroupDetailList", encodeGroupDetailList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Policies) > 0 {
+		v := s.Policies
+
+		e.SetList(protocol.BodyTarget, "Policies", encodeManagedPolicyDetailList(v), protocol.Metadata{})
+	}
+	if len(s.RoleDetailList) > 0 {
+		v := s.RoleDetailList
+
+		e.SetList(protocol.BodyTarget, "RoleDetailList", encodeRoleDetailList(v), protocol.Metadata{})
+	}
+	if len(s.UserDetailList) > 0 {
+		v := s.UserDetailList
+
+		e.SetList(protocol.BodyTarget, "UserDetailList", encodeUserDetailList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicyInput
 type GetAccountPasswordPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -13557,6 +14956,12 @@ func (s GetAccountPasswordPolicyInput) String() string {
 // GoString returns the string representation
 func (s GetAccountPasswordPolicyInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccountPasswordPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful GetAccountPasswordPolicy request.
@@ -13593,6 +14998,17 @@ func (s *GetAccountPasswordPolicyOutput) SetPasswordPolicy(v *PasswordPolicy) *G
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccountPasswordPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PasswordPolicy != nil {
+		v := s.PasswordPolicy
+
+		e.SetFields(protocol.BodyTarget, "PasswordPolicy", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummaryInput
 type GetAccountSummaryInput struct {
 	_ struct{} `type:"structure"`
@@ -13606,6 +15022,12 @@ func (s GetAccountSummaryInput) String() string {
 // GoString returns the string representation
 func (s GetAccountSummaryInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccountSummaryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful GetAccountSummary request.
@@ -13639,6 +15061,17 @@ func (s GetAccountSummaryOutput) SDKResponseMetadata() aws.Response {
 func (s *GetAccountSummaryOutput) SetSummaryMap(v map[string]int64) *GetAccountSummaryOutput {
 	s.SummaryMap = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetAccountSummaryOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SummaryMap) > 0 {
+		v := s.SummaryMap
+
+		e.SetMap(protocol.BodyTarget, "SummaryMap", protocol.EncodeInt64Map(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicyRequest
@@ -13688,6 +15121,17 @@ func (s *GetContextKeysForCustomPolicyInput) Validate() error {
 func (s *GetContextKeysForCustomPolicyInput) SetPolicyInputList(v []string) *GetContextKeysForCustomPolicyInput {
 	s.PolicyInputList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetContextKeysForCustomPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyInputList) > 0 {
+		v := s.PolicyInputList
+
+		e.SetList(protocol.BodyTarget, "PolicyInputList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicyRequest
@@ -13760,6 +15204,22 @@ func (s *GetContextKeysForPrincipalPolicyInput) SetPolicySourceArn(v string) *Ge
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetContextKeysForPrincipalPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyInputList) > 0 {
+		v := s.PolicyInputList
+
+		e.SetList(protocol.BodyTarget, "PolicyInputList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.PolicySourceArn != nil {
+		v := *s.PolicySourceArn
+
+		e.SetValue(protocol.BodyTarget, "PolicySourceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
 // GetContextKeysForCustomPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicyOutput
@@ -13793,6 +15253,17 @@ func (s *GetContextKeysForPrincipalPolicyOutput) SetContextKeyNames(v []string) 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetContextKeysForPrincipalPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ContextKeyNames) > 0 {
+		v := s.ContextKeyNames
+
+		e.SetList(protocol.BodyTarget, "ContextKeyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReportInput
 type GetCredentialReportInput struct {
 	_ struct{} `type:"structure"`
@@ -13806,6 +15277,12 @@ func (s GetCredentialReportInput) String() string {
 // GoString returns the string representation
 func (s GetCredentialReportInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetCredentialReportInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful GetCredentialReport request.
@@ -13859,6 +15336,27 @@ func (s *GetCredentialReportOutput) SetGeneratedTime(v time.Time) *GetCredential
 func (s *GetCredentialReportOutput) SetReportFormat(v ReportFormatType) *GetCredentialReportOutput {
 	s.ReportFormat = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetCredentialReportOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Content != nil {
+		v := s.Content
+
+		e.SetValue(protocol.BodyTarget, "Content", protocol.BytesValue(v), protocol.Metadata{})
+	}
+	if s.GeneratedTime != nil {
+		v := *s.GeneratedTime
+
+		e.SetValue(protocol.BodyTarget, "GeneratedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.ReportFormat) > 0 {
+		v := s.ReportFormat
+
+		e.SetValue(protocol.BodyTarget, "ReportFormat", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupRequest
@@ -13943,6 +15441,27 @@ func (s *GetGroupInput) SetMaxItems(v int64) *GetGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetGroup request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupResponse
 type GetGroupOutput struct {
@@ -14010,6 +15529,32 @@ func (s *GetGroupOutput) SetMarker(v string) *GetGroupOutput {
 func (s *GetGroupOutput) SetUsers(v []User) *GetGroupOutput {
 	s.Users = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Group != nil {
+		v := s.Group
+
+		e.SetFields(protocol.BodyTarget, "Group", v, protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Users) > 0 {
+		v := s.Users
+
+		e.SetList(protocol.BodyTarget, "Users", encodeUserList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyRequest
@@ -14081,6 +15626,22 @@ func (s *GetGroupPolicyInput) SetPolicyName(v string) *GetGroupPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetGroupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetGroupPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyResponse
 type GetGroupPolicyOutput struct {
@@ -14137,6 +15698,27 @@ func (s *GetGroupPolicyOutput) SetPolicyName(v string) *GetGroupPolicyOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetGroupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileRequest
 type GetInstanceProfileInput struct {
 	_ struct{} `type:"structure"`
@@ -14184,6 +15766,17 @@ func (s *GetInstanceProfileInput) SetInstanceProfileName(v string) *GetInstanceP
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetInstanceProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfileName != nil {
+		v := *s.InstanceProfileName
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetInstanceProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileResponse
 type GetInstanceProfileOutput struct {
@@ -14216,6 +15809,17 @@ func (s GetInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 func (s *GetInstanceProfileOutput) SetInstanceProfile(v *InstanceProfile) *GetInstanceProfileOutput {
 	s.InstanceProfile = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetInstanceProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfile != nil {
+		v := s.InstanceProfile
+
+		e.SetFields(protocol.BodyTarget, "InstanceProfile", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileRequest
@@ -14265,6 +15869,17 @@ func (s *GetLoginProfileInput) SetUserName(v string) *GetLoginProfileInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetLoginProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetLoginProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileResponse
 type GetLoginProfileOutput struct {
@@ -14297,6 +15912,17 @@ func (s GetLoginProfileOutput) SDKResponseMetadata() aws.Response {
 func (s *GetLoginProfileOutput) SetLoginProfile(v *LoginProfile) *GetLoginProfileOutput {
 	s.LoginProfile = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetLoginProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LoginProfile != nil {
+		v := s.LoginProfile
+
+		e.SetFields(protocol.BodyTarget, "LoginProfile", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderRequest
@@ -14346,6 +15972,17 @@ func (s *GetOpenIDConnectProviderInput) Validate() error {
 func (s *GetOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string) *GetOpenIDConnectProviderInput {
 	s.OpenIDConnectProviderArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetOpenIDConnectProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OpenIDConnectProviderArn != nil {
+		v := *s.OpenIDConnectProviderArn
+
+		e.SetValue(protocol.BodyTarget, "OpenIDConnectProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the response to a successful GetOpenIDConnectProvider request.
@@ -14411,6 +16048,32 @@ func (s *GetOpenIDConnectProviderOutput) SetUrl(v string) *GetOpenIDConnectProvi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetOpenIDConnectProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ClientIDList) > 0 {
+		v := s.ClientIDList
+
+		e.SetList(protocol.BodyTarget, "ClientIDList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.ThumbprintList) > 0 {
+		v := s.ThumbprintList
+
+		e.SetList(protocol.BodyTarget, "ThumbprintList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		e.SetValue(protocol.BodyTarget, "Url", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyRequest
 type GetPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -14459,6 +16122,17 @@ func (s *GetPolicyInput) SetPolicyArn(v string) *GetPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyResponse
 type GetPolicyOutput struct {
@@ -14489,6 +16163,17 @@ func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
 func (s *GetPolicyOutput) SetPolicy(v *Policy) *GetPolicyOutput {
 	s.Policy = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Policy != nil {
+		v := s.Policy
+
+		e.SetFields(protocol.BodyTarget, "Policy", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersionRequest
@@ -14559,6 +16244,22 @@ func (s *GetPolicyVersionInput) SetVersionId(v string) *GetPolicyVersionInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetPolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionId != nil {
+		v := *s.VersionId
+
+		e.SetValue(protocol.BodyTarget, "VersionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetPolicyVersion request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersionResponse
 type GetPolicyVersionOutput struct {
@@ -14589,6 +16290,17 @@ func (s GetPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 func (s *GetPolicyVersionOutput) SetPolicyVersion(v *PolicyVersion) *GetPolicyVersionOutput {
 	s.PolicyVersion = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetPolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyVersion != nil {
+		v := s.PolicyVersion
+
+		e.SetFields(protocol.BodyTarget, "PolicyVersion", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleRequest
@@ -14638,6 +16350,17 @@ func (s *GetRoleInput) SetRoleName(v string) *GetRoleInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetRole request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleResponse
 type GetRoleOutput struct {
@@ -14670,6 +16393,17 @@ func (s GetRoleOutput) SDKResponseMetadata() aws.Response {
 func (s *GetRoleOutput) SetRole(v *Role) *GetRoleOutput {
 	s.Role = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Role != nil {
+		v := s.Role
+
+		e.SetFields(protocol.BodyTarget, "Role", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyRequest
@@ -14741,6 +16475,22 @@ func (s *GetRolePolicyInput) SetRoleName(v string) *GetRolePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetRolePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetRolePolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyResponse
 type GetRolePolicyOutput struct {
@@ -14797,6 +16547,27 @@ func (s *GetRolePolicyOutput) SetRoleName(v string) *GetRolePolicyOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetRolePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderRequest
 type GetSAMLProviderInput struct {
 	_ struct{} `type:"structure"`
@@ -14843,6 +16614,17 @@ func (s *GetSAMLProviderInput) Validate() error {
 func (s *GetSAMLProviderInput) SetSAMLProviderArn(v string) *GetSAMLProviderInput {
 	s.SAMLProviderArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSAMLProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SAMLProviderArn != nil {
+		v := *s.SAMLProviderArn
+
+		e.SetValue(protocol.BodyTarget, "SAMLProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the response to a successful GetSAMLProvider request.
@@ -14893,6 +16675,27 @@ func (s *GetSAMLProviderOutput) SetSAMLMetadataDocument(v string) *GetSAMLProvid
 func (s *GetSAMLProviderOutput) SetValidUntil(v time.Time) *GetSAMLProviderOutput {
 	s.ValidUntil = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSAMLProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SAMLMetadataDocument != nil {
+		v := *s.SAMLMetadataDocument
+
+		e.SetValue(protocol.BodyTarget, "SAMLMetadataDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ValidUntil != nil {
+		v := *s.ValidUntil
+
+		e.SetValue(protocol.BodyTarget, "ValidUntil", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyRequest
@@ -14980,6 +16783,27 @@ func (s *GetSSHPublicKeyInput) SetUserName(v string) *GetSSHPublicKeyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSSHPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Encoding) > 0 {
+		v := s.Encoding
+
+		e.SetValue(protocol.BodyTarget, "Encoding", v, protocol.Metadata{})
+	}
+	if s.SSHPublicKeyId != nil {
+		v := *s.SSHPublicKeyId
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetSSHPublicKey request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyResponse
 type GetSSHPublicKeyOutput struct {
@@ -15010,6 +16834,17 @@ func (s GetSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
 func (s *GetSSHPublicKeyOutput) SetSSHPublicKey(v *SSHPublicKey) *GetSSHPublicKeyOutput {
 	s.SSHPublicKey = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSSHPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SSHPublicKey != nil {
+		v := s.SSHPublicKey
+
+		e.SetFields(protocol.BodyTarget, "SSHPublicKey", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificateRequest
@@ -15059,6 +16894,17 @@ func (s *GetServerCertificateInput) SetServerCertificateName(v string) *GetServe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetServerCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServerCertificateName != nil {
+		v := *s.ServerCertificateName
+
+		e.SetValue(protocol.BodyTarget, "ServerCertificateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetServerCertificate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificateResponse
 type GetServerCertificateOutput struct {
@@ -15091,6 +16937,17 @@ func (s GetServerCertificateOutput) SDKResponseMetadata() aws.Response {
 func (s *GetServerCertificateOutput) SetServerCertificate(v *ServerCertificate) *GetServerCertificateOutput {
 	s.ServerCertificate = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetServerCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServerCertificate != nil {
+		v := s.ServerCertificate
+
+		e.SetFields(protocol.BodyTarget, "ServerCertificate", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatusRequest
@@ -15137,6 +16994,17 @@ func (s *GetServiceLinkedRoleDeletionStatusInput) SetDeletionTaskId(v string) *G
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetServiceLinkedRoleDeletionStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeletionTaskId != nil {
+		v := *s.DeletionTaskId
+
+		e.SetValue(protocol.BodyTarget, "DeletionTaskId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatusResponse
 type GetServiceLinkedRoleDeletionStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -15177,6 +17045,22 @@ func (s *GetServiceLinkedRoleDeletionStatusOutput) SetReason(v *DeletionTaskFail
 func (s *GetServiceLinkedRoleDeletionStatusOutput) SetStatus(v DeletionTaskStatusType) *GetServiceLinkedRoleDeletionStatusOutput {
 	s.Status = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetServiceLinkedRoleDeletionStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Reason != nil {
+		v := s.Reason
+
+		e.SetFields(protocol.BodyTarget, "Reason", v, protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserRequest
@@ -15221,6 +17105,17 @@ func (s *GetUserInput) SetUserName(v string) *GetUserInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetUser request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserResponse
 type GetUserOutput struct {
@@ -15253,6 +17148,17 @@ func (s GetUserOutput) SDKResponseMetadata() aws.Response {
 func (s *GetUserOutput) SetUser(v *User) *GetUserOutput {
 	s.User = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.User != nil {
+		v := s.User
+
+		e.SetFields(protocol.BodyTarget, "User", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyRequest
@@ -15324,6 +17230,22 @@ func (s *GetUserPolicyInput) SetUserName(v string) *GetUserPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetUserPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful GetUserPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyResponse
 type GetUserPolicyOutput struct {
@@ -15378,6 +17300,27 @@ func (s *GetUserPolicyOutput) SetPolicyName(v string) *GetUserPolicyOutput {
 func (s *GetUserPolicyOutput) SetUserName(v string) *GetUserPolicyOutput {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetUserPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about an IAM group entity.
@@ -15464,6 +17407,45 @@ func (s *Group) SetGroupName(v string) *Group {
 func (s *Group) SetPath(v string) *Group {
 	s.Path = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Group) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeGroupList(vs []Group) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about an IAM group, including all of the group's policies.
@@ -15555,6 +17537,55 @@ func (s *GroupDetail) SetGroupPolicyList(v []PolicyDetail) *GroupDetail {
 func (s *GroupDetail) SetPath(v string) *GroupDetail {
 	s.Path = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GroupDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AttachedManagedPolicies) > 0 {
+		v := s.AttachedManagedPolicies
+
+		e.SetList(protocol.BodyTarget, "AttachedManagedPolicies", encodeAttachedPolicyList(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.GroupPolicyList) > 0 {
+		v := s.GroupPolicyList
+
+		e.SetList(protocol.BodyTarget, "GroupPolicyList", encodePolicyDetailList(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeGroupDetailList(vs []GroupDetail) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about an instance profile.
@@ -15656,6 +17687,50 @@ func (s *InstanceProfile) SetRoles(v []Role) *InstanceProfile {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *InstanceProfile) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.InstanceProfileId != nil {
+		v := *s.InstanceProfileId
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.InstanceProfileName != nil {
+		v := *s.InstanceProfileName
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Roles) > 0 {
+		v := s.Roles
+
+		e.SetList(protocol.BodyTarget, "Roles", encodeRoleList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeInstanceProfileList(vs []InstanceProfile) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysRequest
 type ListAccessKeysInput struct {
 	_ struct{} `type:"structure"`
@@ -15732,6 +17807,27 @@ func (s *ListAccessKeysInput) SetUserName(v string) *ListAccessKeysInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAccessKeysInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListAccessKeys request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysResponse
 type ListAccessKeysOutput struct {
@@ -15788,6 +17884,27 @@ func (s *ListAccessKeysOutput) SetIsTruncated(v bool) *ListAccessKeysOutput {
 func (s *ListAccessKeysOutput) SetMarker(v string) *ListAccessKeysOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAccessKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AccessKeyMetadata) > 0 {
+		v := s.AccessKeyMetadata
+
+		e.SetList(protocol.BodyTarget, "AccessKeyMetadata", encodeAccessKeyMetadataList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesRequest
@@ -15850,6 +17967,22 @@ func (s *ListAccountAliasesInput) SetMaxItems(v int64) *ListAccountAliasesInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAccountAliasesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListAccountAliases request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesResponse
 type ListAccountAliasesOutput struct {
@@ -15907,6 +18040,27 @@ func (s *ListAccountAliasesOutput) SetIsTruncated(v bool) *ListAccountAliasesOut
 func (s *ListAccountAliasesOutput) SetMarker(v string) *ListAccountAliasesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAccountAliasesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AccountAliases) > 0 {
+		v := s.AccountAliases
+
+		e.SetList(protocol.BodyTarget, "AccountAliases", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesRequest
@@ -16008,6 +18162,32 @@ func (s *ListAttachedGroupPoliciesInput) SetPathPrefix(v string) *ListAttachedGr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAttachedGroupPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListAttachedGroupPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesResponse
 type ListAttachedGroupPoliciesOutput struct {
@@ -16062,6 +18242,27 @@ func (s *ListAttachedGroupPoliciesOutput) SetIsTruncated(v bool) *ListAttachedGr
 func (s *ListAttachedGroupPoliciesOutput) SetMarker(v string) *ListAttachedGroupPoliciesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAttachedGroupPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttachedPolicies) > 0 {
+		v := s.AttachedPolicies
+
+		e.SetList(protocol.BodyTarget, "AttachedPolicies", encodeAttachedPolicyList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesRequest
@@ -16162,6 +18363,32 @@ func (s *ListAttachedRolePoliciesInput) SetRoleName(v string) *ListAttachedRoleP
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAttachedRolePoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListAttachedRolePolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesResponse
 type ListAttachedRolePoliciesOutput struct {
@@ -16216,6 +18443,27 @@ func (s *ListAttachedRolePoliciesOutput) SetIsTruncated(v bool) *ListAttachedRol
 func (s *ListAttachedRolePoliciesOutput) SetMarker(v string) *ListAttachedRolePoliciesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAttachedRolePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttachedPolicies) > 0 {
+		v := s.AttachedPolicies
+
+		e.SetList(protocol.BodyTarget, "AttachedPolicies", encodeAttachedPolicyList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesRequest
@@ -16316,6 +18564,32 @@ func (s *ListAttachedUserPoliciesInput) SetUserName(v string) *ListAttachedUserP
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAttachedUserPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListAttachedUserPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesResponse
 type ListAttachedUserPoliciesOutput struct {
@@ -16370,6 +18644,27 @@ func (s *ListAttachedUserPoliciesOutput) SetIsTruncated(v bool) *ListAttachedUse
 func (s *ListAttachedUserPoliciesOutput) SetMarker(v string) *ListAttachedUserPoliciesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListAttachedUserPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttachedPolicies) > 0 {
+		v := s.AttachedPolicies
+
+		e.SetList(protocol.BodyTarget, "AttachedPolicies", encodeAttachedPolicyList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyRequest
@@ -16487,6 +18782,37 @@ func (s *ListEntitiesForPolicyInput) SetPolicyArn(v string) *ListEntitiesForPoli
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListEntitiesForPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EntityFilter) > 0 {
+		v := s.EntityFilter
+
+		e.SetValue(protocol.BodyTarget, "EntityFilter", v, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListEntitiesForPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyResponse
 type ListEntitiesForPolicyOutput struct {
@@ -16559,6 +18885,37 @@ func (s *ListEntitiesForPolicyOutput) SetPolicyRoles(v []PolicyRole) *ListEntiti
 func (s *ListEntitiesForPolicyOutput) SetPolicyUsers(v []PolicyUser) *ListEntitiesForPolicyOutput {
 	s.PolicyUsers = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListEntitiesForPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyGroups) > 0 {
+		v := s.PolicyGroups
+
+		e.SetList(protocol.BodyTarget, "PolicyGroups", encodePolicyGroupList(v), protocol.Metadata{})
+	}
+	if len(s.PolicyRoles) > 0 {
+		v := s.PolicyRoles
+
+		e.SetList(protocol.BodyTarget, "PolicyRoles", encodePolicyRoleList(v), protocol.Metadata{})
+	}
+	if len(s.PolicyUsers) > 0 {
+		v := s.PolicyUsers
+
+		e.SetList(protocol.BodyTarget, "PolicyUsers", encodePolicyUserList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesRequest
@@ -16643,6 +19000,27 @@ func (s *ListGroupPoliciesInput) SetMaxItems(v int64) *ListGroupPoliciesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListGroupPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListGroupPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesResponse
 type ListGroupPoliciesOutput struct {
@@ -16703,6 +19081,27 @@ func (s *ListGroupPoliciesOutput) SetMarker(v string) *ListGroupPoliciesOutput {
 func (s *ListGroupPoliciesOutput) SetPolicyNames(v []string) *ListGroupPoliciesOutput {
 	s.PolicyNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListGroupPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserRequest
@@ -16787,6 +19186,27 @@ func (s *ListGroupsForUserInput) SetUserName(v string) *ListGroupsForUserInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListGroupsForUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListGroupsForUser request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserResponse
 type ListGroupsForUserOutput struct {
@@ -16843,6 +19263,27 @@ func (s *ListGroupsForUserOutput) SetIsTruncated(v bool) *ListGroupsForUserOutpu
 func (s *ListGroupsForUserOutput) SetMarker(v string) *ListGroupsForUserOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListGroupsForUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		e.SetList(protocol.BodyTarget, "Groups", encodeGroupList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsRequest
@@ -16925,6 +19366,27 @@ func (s *ListGroupsInput) SetPathPrefix(v string) *ListGroupsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListGroups request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsResponse
 type ListGroupsOutput struct {
@@ -16981,6 +19443,27 @@ func (s *ListGroupsOutput) SetIsTruncated(v bool) *ListGroupsOutput {
 func (s *ListGroupsOutput) SetMarker(v string) *ListGroupsOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		e.SetList(protocol.BodyTarget, "Groups", encodeGroupList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleRequest
@@ -17065,6 +19548,27 @@ func (s *ListInstanceProfilesForRoleInput) SetRoleName(v string) *ListInstancePr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListInstanceProfilesForRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListInstanceProfilesForRole request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleResponse
 type ListInstanceProfilesForRoleOutput struct {
@@ -17121,6 +19625,27 @@ func (s *ListInstanceProfilesForRoleOutput) SetIsTruncated(v bool) *ListInstance
 func (s *ListInstanceProfilesForRoleOutput) SetMarker(v string) *ListInstanceProfilesForRoleOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListInstanceProfilesForRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.InstanceProfiles) > 0 {
+		v := s.InstanceProfiles
+
+		e.SetList(protocol.BodyTarget, "InstanceProfiles", encodeInstanceProfileList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesRequest
@@ -17204,6 +19729,27 @@ func (s *ListInstanceProfilesInput) SetPathPrefix(v string) *ListInstanceProfile
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListInstanceProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListInstanceProfiles request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesResponse
 type ListInstanceProfilesOutput struct {
@@ -17260,6 +19806,27 @@ func (s *ListInstanceProfilesOutput) SetIsTruncated(v bool) *ListInstanceProfile
 func (s *ListInstanceProfilesOutput) SetMarker(v string) *ListInstanceProfilesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListInstanceProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.InstanceProfiles) > 0 {
+		v := s.InstanceProfiles
+
+		e.SetList(protocol.BodyTarget, "InstanceProfiles", encodeInstanceProfileList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesRequest
@@ -17338,6 +19905,27 @@ func (s *ListMFADevicesInput) SetUserName(v string) *ListMFADevicesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListMFADevicesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListMFADevices request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesResponse
 type ListMFADevicesOutput struct {
@@ -17396,6 +19984,27 @@ func (s *ListMFADevicesOutput) SetMarker(v string) *ListMFADevicesOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListMFADevicesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.MFADevices) > 0 {
+		v := s.MFADevices
+
+		e.SetList(protocol.BodyTarget, "MFADevices", encodeMFADeviceList(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersRequest
 type ListOpenIDConnectProvidersInput struct {
 	_ struct{} `type:"structure"`
@@ -17409,6 +20018,12 @@ func (s ListOpenIDConnectProvidersInput) String() string {
 // GoString returns the string representation
 func (s ListOpenIDConnectProvidersInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListOpenIDConnectProvidersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful ListOpenIDConnectProviders request.
@@ -17441,6 +20056,17 @@ func (s ListOpenIDConnectProvidersOutput) SDKResponseMetadata() aws.Response {
 func (s *ListOpenIDConnectProvidersOutput) SetOpenIDConnectProviderList(v []OpenIDConnectProviderListEntry) *ListOpenIDConnectProvidersOutput {
 	s.OpenIDConnectProviderList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListOpenIDConnectProvidersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.OpenIDConnectProviderList) > 0 {
+		v := s.OpenIDConnectProviderList
+
+		e.SetList(protocol.BodyTarget, "OpenIDConnectProviderList", encodeOpenIDConnectProviderListEntryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesRequest
@@ -17546,6 +20172,37 @@ func (s *ListPoliciesInput) SetScope(v PolicyScopeType) *ListPoliciesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OnlyAttached != nil {
+		v := *s.OnlyAttached
+
+		e.SetValue(protocol.BodyTarget, "OnlyAttached", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Scope) > 0 {
+		v := s.Scope
+
+		e.SetValue(protocol.BodyTarget, "Scope", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesResponse
 type ListPoliciesOutput struct {
@@ -17600,6 +20257,27 @@ func (s *ListPoliciesOutput) SetMarker(v string) *ListPoliciesOutput {
 func (s *ListPoliciesOutput) SetPolicies(v []Policy) *ListPoliciesOutput {
 	s.Policies = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Policies) > 0 {
+		v := s.Policies
+
+		e.SetList(protocol.BodyTarget, "Policies", encodePolicyList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsRequest
@@ -17684,6 +20362,27 @@ func (s *ListPolicyVersionsInput) SetPolicyArn(v string) *ListPolicyVersionsInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPolicyVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListPolicyVersions request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsResponse
 type ListPolicyVersionsOutput struct {
@@ -17742,6 +20441,27 @@ func (s *ListPolicyVersionsOutput) SetMarker(v string) *ListPolicyVersionsOutput
 func (s *ListPolicyVersionsOutput) SetVersions(v []PolicyVersion) *ListPolicyVersionsOutput {
 	s.Versions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListPolicyVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		e.SetList(protocol.BodyTarget, "Versions", encodePolicyVersionList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesRequest
@@ -17826,6 +20546,27 @@ func (s *ListRolePoliciesInput) SetRoleName(v string) *ListRolePoliciesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListRolePoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListRolePolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesResponse
 type ListRolePoliciesOutput struct {
@@ -17882,6 +20623,27 @@ func (s *ListRolePoliciesOutput) SetMarker(v string) *ListRolePoliciesOutput {
 func (s *ListRolePoliciesOutput) SetPolicyNames(v []string) *ListRolePoliciesOutput {
 	s.PolicyNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListRolePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesRequest
@@ -17964,6 +20726,27 @@ func (s *ListRolesInput) SetPathPrefix(v string) *ListRolesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListRolesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListRoles request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesResponse
 type ListRolesOutput struct {
@@ -18022,6 +20805,27 @@ func (s *ListRolesOutput) SetRoles(v []Role) *ListRolesOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListRolesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Roles) > 0 {
+		v := s.Roles
+
+		e.SetList(protocol.BodyTarget, "Roles", encodeRoleList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersRequest
 type ListSAMLProvidersInput struct {
 	_ struct{} `type:"structure"`
@@ -18035,6 +20839,12 @@ func (s ListSAMLProvidersInput) String() string {
 // GoString returns the string representation
 func (s ListSAMLProvidersInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSAMLProvidersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains the response to a successful ListSAMLProviders request.
@@ -18067,6 +20877,17 @@ func (s ListSAMLProvidersOutput) SDKResponseMetadata() aws.Response {
 func (s *ListSAMLProvidersOutput) SetSAMLProviderList(v []SAMLProviderListEntry) *ListSAMLProvidersOutput {
 	s.SAMLProviderList = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSAMLProvidersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SAMLProviderList) > 0 {
+		v := s.SAMLProviderList
+
+		e.SetList(protocol.BodyTarget, "SAMLProviderList", encodeSAMLProviderListEntryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysRequest
@@ -18147,6 +20968,27 @@ func (s *ListSSHPublicKeysInput) SetUserName(v string) *ListSSHPublicKeysInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSSHPublicKeysInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListSSHPublicKeys request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysResponse
 type ListSSHPublicKeysOutput struct {
@@ -18201,6 +21043,27 @@ func (s *ListSSHPublicKeysOutput) SetMarker(v string) *ListSSHPublicKeysOutput {
 func (s *ListSSHPublicKeysOutput) SetSSHPublicKeys(v []SSHPublicKeyMetadata) *ListSSHPublicKeysOutput {
 	s.SSHPublicKeys = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSSHPublicKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SSHPublicKeys) > 0 {
+		v := s.SSHPublicKeys
+
+		e.SetList(protocol.BodyTarget, "SSHPublicKeys", encodeSSHPublicKeyMetadataList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesRequest
@@ -18284,6 +21147,27 @@ func (s *ListServerCertificatesInput) SetPathPrefix(v string) *ListServerCertifi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListServerCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListServerCertificates request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesResponse
 type ListServerCertificatesOutput struct {
@@ -18342,6 +21226,27 @@ func (s *ListServerCertificatesOutput) SetServerCertificateMetadataList(v []Serv
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListServerCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ServerCertificateMetadataList) > 0 {
+		v := s.ServerCertificateMetadataList
+
+		e.SetList(protocol.BodyTarget, "ServerCertificateMetadataList", encodeServerCertificateMetadataList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentialsRequest
 type ListServiceSpecificCredentialsInput struct {
 	_ struct{} `type:"structure"`
@@ -18395,6 +21300,22 @@ func (s *ListServiceSpecificCredentialsInput) SetUserName(v string) *ListService
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListServiceSpecificCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentialsResponse
 type ListServiceSpecificCredentialsOutput struct {
 	_ struct{} `type:"structure"`
@@ -18424,6 +21345,17 @@ func (s ListServiceSpecificCredentialsOutput) SDKResponseMetadata() aws.Response
 func (s *ListServiceSpecificCredentialsOutput) SetServiceSpecificCredentials(v []ServiceSpecificCredentialMetadata) *ListServiceSpecificCredentialsOutput {
 	s.ServiceSpecificCredentials = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListServiceSpecificCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ServiceSpecificCredentials) > 0 {
+		v := s.ServiceSpecificCredentials
+
+		e.SetList(protocol.BodyTarget, "ServiceSpecificCredentials", encodeServiceSpecificCredentialMetadataList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesRequest
@@ -18502,6 +21434,27 @@ func (s *ListSigningCertificatesInput) SetUserName(v string) *ListSigningCertifi
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSigningCertificatesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListSigningCertificates request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesResponse
 type ListSigningCertificatesOutput struct {
@@ -18558,6 +21511,27 @@ func (s *ListSigningCertificatesOutput) SetIsTruncated(v bool) *ListSigningCerti
 func (s *ListSigningCertificatesOutput) SetMarker(v string) *ListSigningCertificatesOutput {
 	s.Marker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListSigningCertificatesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Certificates) > 0 {
+		v := s.Certificates
+
+		e.SetList(protocol.BodyTarget, "Certificates", encodeSigningCertificateList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesRequest
@@ -18642,6 +21616,27 @@ func (s *ListUserPoliciesInput) SetUserName(v string) *ListUserPoliciesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListUserPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListUserPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesResponse
 type ListUserPoliciesOutput struct {
@@ -18698,6 +21693,27 @@ func (s *ListUserPoliciesOutput) SetMarker(v string) *ListUserPoliciesOutput {
 func (s *ListUserPoliciesOutput) SetPolicyNames(v []string) *ListUserPoliciesOutput {
 	s.PolicyNames = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListUserPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersRequest
@@ -18781,6 +21797,27 @@ func (s *ListUsersInput) SetPathPrefix(v string) *ListUsersInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PathPrefix != nil {
+		v := *s.PathPrefix
+
+		e.SetValue(protocol.BodyTarget, "PathPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListUsers request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersResponse
 type ListUsersOutput struct {
@@ -18837,6 +21874,27 @@ func (s *ListUsersOutput) SetMarker(v string) *ListUsersOutput {
 func (s *ListUsersOutput) SetUsers(v []User) *ListUsersOutput {
 	s.Users = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Users) > 0 {
+		v := s.Users
+
+		e.SetList(protocol.BodyTarget, "Users", encodeUserList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesRequest
@@ -18910,6 +21968,27 @@ func (s *ListVirtualMFADevicesInput) SetMaxItems(v int64) *ListVirtualMFADevices
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListVirtualMFADevicesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AssignmentStatus) > 0 {
+		v := s.AssignmentStatus
+
+		e.SetValue(protocol.BodyTarget, "AssignmentStatus", v, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful ListVirtualMFADevices request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesResponse
 type ListVirtualMFADevicesOutput struct {
@@ -18969,6 +22048,27 @@ func (s *ListVirtualMFADevicesOutput) SetVirtualMFADevices(v []VirtualMFADevice)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListVirtualMFADevicesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.VirtualMFADevices) > 0 {
+		v := s.VirtualMFADevices
+
+		e.SetList(protocol.BodyTarget, "VirtualMFADevices", encodeVirtualMFADeviceList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the user name and password create date for a user.
 //
 // This data type is used as a response element in the CreateLoginProfile and
@@ -19018,6 +22118,27 @@ func (s *LoginProfile) SetPasswordResetRequired(v bool) *LoginProfile {
 func (s *LoginProfile) SetUserName(v string) *LoginProfile {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LoginProfile) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.PasswordResetRequired != nil {
+		v := *s.PasswordResetRequired
+
+		e.SetValue(protocol.BodyTarget, "PasswordResetRequired", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about an MFA device.
@@ -19070,6 +22191,35 @@ func (s *MFADevice) SetSerialNumber(v string) *MFADevice {
 func (s *MFADevice) SetUserName(v string) *MFADevice {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MFADevice) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnableDate != nil {
+		v := *s.EnableDate
+
+		e.SetValue(protocol.BodyTarget, "EnableDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMFADeviceList(vs []MFADevice) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about a managed policy, including the policy's ARN,
@@ -19219,6 +22369,75 @@ func (s *ManagedPolicyDetail) SetUpdateDate(v time.Time) *ManagedPolicyDetail {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ManagedPolicyDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttachmentCount != nil {
+		v := *s.AttachmentCount
+
+		e.SetValue(protocol.BodyTarget, "AttachmentCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DefaultVersionId != nil {
+		v := *s.DefaultVersionId
+
+		e.SetValue(protocol.BodyTarget, "DefaultVersionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsAttachable != nil {
+		v := *s.IsAttachable
+
+		e.SetValue(protocol.BodyTarget, "IsAttachable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyId != nil {
+		v := *s.PolicyId
+
+		e.SetValue(protocol.BodyTarget, "PolicyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyVersionList) > 0 {
+		v := s.PolicyVersionList
+
+		e.SetList(protocol.BodyTarget, "PolicyVersionList", encodePolicyVersionList(v), protocol.Metadata{})
+	}
+	if s.UpdateDate != nil {
+		v := *s.UpdateDate
+
+		e.SetValue(protocol.BodyTarget, "UpdateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeManagedPolicyDetailList(vs []ManagedPolicyDetail) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry
 type OpenIDConnectProviderListEntry struct {
@@ -19248,6 +22467,25 @@ func (s *OpenIDConnectProviderListEntry) SetArn(v string) *OpenIDConnectProvider
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OpenIDConnectProviderListEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOpenIDConnectProviderListEntryList(vs []OpenIDConnectProviderListEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about AWS Organizations's affect on a policy simulation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationsDecisionDetail
 type OrganizationsDecisionDetail struct {
@@ -19272,6 +22510,17 @@ func (s OrganizationsDecisionDetail) GoString() string {
 func (s *OrganizationsDecisionDetail) SetAllowedByOrganizations(v bool) *OrganizationsDecisionDetail {
 	s.AllowedByOrganizations = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *OrganizationsDecisionDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowedByOrganizations != nil {
+		v := *s.AllowedByOrganizations
+
+		e.SetValue(protocol.BodyTarget, "AllowedByOrganizations", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about the account password policy.
@@ -19385,6 +22634,62 @@ func (s *PasswordPolicy) SetRequireSymbols(v bool) *PasswordPolicy {
 func (s *PasswordPolicy) SetRequireUppercaseCharacters(v bool) *PasswordPolicy {
 	s.RequireUppercaseCharacters = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PasswordPolicy) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowUsersToChangePassword != nil {
+		v := *s.AllowUsersToChangePassword
+
+		e.SetValue(protocol.BodyTarget, "AllowUsersToChangePassword", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ExpirePasswords != nil {
+		v := *s.ExpirePasswords
+
+		e.SetValue(protocol.BodyTarget, "ExpirePasswords", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HardExpiry != nil {
+		v := *s.HardExpiry
+
+		e.SetValue(protocol.BodyTarget, "HardExpiry", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MaxPasswordAge != nil {
+		v := *s.MaxPasswordAge
+
+		e.SetValue(protocol.BodyTarget, "MaxPasswordAge", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinimumPasswordLength != nil {
+		v := *s.MinimumPasswordLength
+
+		e.SetValue(protocol.BodyTarget, "MinimumPasswordLength", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PasswordReusePrevention != nil {
+		v := *s.PasswordReusePrevention
+
+		e.SetValue(protocol.BodyTarget, "PasswordReusePrevention", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RequireLowercaseCharacters != nil {
+		v := *s.RequireLowercaseCharacters
+
+		e.SetValue(protocol.BodyTarget, "RequireLowercaseCharacters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequireNumbers != nil {
+		v := *s.RequireNumbers
+
+		e.SetValue(protocol.BodyTarget, "RequireNumbers", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequireSymbols != nil {
+		v := *s.RequireSymbols
+
+		e.SetValue(protocol.BodyTarget, "RequireSymbols", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequireUppercaseCharacters != nil {
+		v := *s.RequireUppercaseCharacters
+
+		e.SetValue(protocol.BodyTarget, "RequireUppercaseCharacters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about a managed policy.
@@ -19521,6 +22826,70 @@ func (s *Policy) SetUpdateDate(v time.Time) *Policy {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Policy) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AttachmentCount != nil {
+		v := *s.AttachmentCount
+
+		e.SetValue(protocol.BodyTarget, "AttachmentCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DefaultVersionId != nil {
+		v := *s.DefaultVersionId
+
+		e.SetValue(protocol.BodyTarget, "DefaultVersionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsAttachable != nil {
+		v := *s.IsAttachable
+
+		e.SetValue(protocol.BodyTarget, "IsAttachable", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyId != nil {
+		v := *s.PolicyId
+
+		e.SetValue(protocol.BodyTarget, "PolicyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UpdateDate != nil {
+		v := *s.UpdateDate
+
+		e.SetValue(protocol.BodyTarget, "UpdateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyList(vs []Policy) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about an IAM policy, including the policy document.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
@@ -19556,6 +22925,30 @@ func (s *PolicyDetail) SetPolicyDocument(v string) *PolicyDetail {
 func (s *PolicyDetail) SetPolicyName(v string) *PolicyDetail {
 	s.PolicyName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyDetailList(vs []PolicyDetail) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about a group that a managed policy is attached to.
@@ -19601,6 +22994,30 @@ func (s *PolicyGroup) SetGroupName(v string) *PolicyGroup {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyGroup) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyGroupList(vs []PolicyGroup) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about a role that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
@@ -19644,6 +23061,30 @@ func (s *PolicyRole) SetRoleName(v string) *PolicyRole {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyRole) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RoleId != nil {
+		v := *s.RoleId
+
+		e.SetValue(protocol.BodyTarget, "RoleId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyRoleList(vs []PolicyRole) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about a user that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
@@ -19685,6 +23126,30 @@ func (s *PolicyUser) SetUserId(v string) *PolicyUser {
 func (s *PolicyUser) SetUserName(v string) *PolicyUser {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyUser) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserId != nil {
+		v := *s.UserId
+
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyUserList(vs []PolicyUser) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about a version of a managed policy.
@@ -19755,6 +23220,40 @@ func (s *PolicyVersion) SetVersionId(v string) *PolicyVersion {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PolicyVersion) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Document != nil {
+		v := *s.Document
+
+		e.SetValue(protocol.BodyTarget, "Document", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IsDefaultVersion != nil {
+		v := *s.IsDefaultVersion
+
+		e.SetValue(protocol.BodyTarget, "IsDefaultVersion", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.VersionId != nil {
+		v := *s.VersionId
+
+		e.SetValue(protocol.BodyTarget, "VersionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodePolicyVersionList(vs []PolicyVersion) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains the row and column of a location of a Statement element in a policy
 // document.
 //
@@ -19790,6 +23289,22 @@ func (s *Position) SetColumn(v int64) *Position {
 func (s *Position) SetLine(v int64) *Position {
 	s.Line = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Position) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Column != nil {
+		v := *s.Column
+
+		e.SetValue(protocol.BodyTarget, "Column", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Line != nil {
+		v := *s.Line
+
+		e.SetValue(protocol.BodyTarget, "Line", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicyRequest
@@ -19886,6 +23401,27 @@ func (s *PutGroupPolicyInput) SetPolicyName(v string) *PutGroupPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutGroupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicyOutput
 type PutGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -19906,6 +23442,12 @@ func (s PutGroupPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutGroupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutGroupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyRequest
@@ -20002,6 +23544,27 @@ func (s *PutRolePolicyInput) SetRoleName(v string) *PutRolePolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutRolePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyOutput
 type PutRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -20022,6 +23585,12 @@ func (s PutRolePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRolePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutRolePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicyRequest
@@ -20118,6 +23687,27 @@ func (s *PutUserPolicyInput) SetUserName(v string) *PutUserPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutUserPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicyOutput
 type PutUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -20138,6 +23728,12 @@ func (s PutUserPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutUserPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutUserPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProviderRequest
@@ -20208,6 +23804,22 @@ func (s *RemoveClientIDFromOpenIDConnectProviderInput) SetOpenIDConnectProviderA
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveClientIDFromOpenIDConnectProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClientID != nil {
+		v := *s.ClientID
+
+		e.SetValue(protocol.BodyTarget, "ClientID", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OpenIDConnectProviderArn != nil {
+		v := *s.OpenIDConnectProviderArn
+
+		e.SetValue(protocol.BodyTarget, "OpenIDConnectProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProviderOutput
 type RemoveClientIDFromOpenIDConnectProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -20228,6 +23840,12 @@ func (s RemoveClientIDFromOpenIDConnectProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveClientIDFromOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveClientIDFromOpenIDConnectProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfileRequest
@@ -20299,6 +23917,22 @@ func (s *RemoveRoleFromInstanceProfileInput) SetRoleName(v string) *RemoveRoleFr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveRoleFromInstanceProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceProfileName != nil {
+		v := *s.InstanceProfileName
+
+		e.SetValue(protocol.BodyTarget, "InstanceProfileName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfileOutput
 type RemoveRoleFromInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -20319,6 +23953,12 @@ func (s RemoveRoleFromInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveRoleFromInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveRoleFromInstanceProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroupRequest
@@ -20390,6 +24030,22 @@ func (s *RemoveUserFromGroupInput) SetUserName(v string) *RemoveUserFromGroupInp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveUserFromGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroupOutput
 type RemoveUserFromGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -20410,6 +24066,12 @@ func (s RemoveUserFromGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveUserFromGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RemoveUserFromGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredentialRequest
@@ -20477,6 +24139,22 @@ func (s *ResetServiceSpecificCredentialInput) SetUserName(v string) *ResetServic
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetServiceSpecificCredentialInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceSpecificCredentialId != nil {
+		v := *s.ServiceSpecificCredentialId
+
+		e.SetValue(protocol.BodyTarget, "ServiceSpecificCredentialId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredentialResponse
 type ResetServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -20510,6 +24188,17 @@ func (s ResetServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response
 func (s *ResetServiceSpecificCredentialOutput) SetServiceSpecificCredential(v *ServiceSpecificCredential) *ResetServiceSpecificCredentialOutput {
 	s.ServiceSpecificCredential = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResetServiceSpecificCredentialOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceSpecificCredential != nil {
+		v := s.ServiceSpecificCredential
+
+		e.SetFields(protocol.BodyTarget, "ServiceSpecificCredential", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the result of the simulation of a single API action call on a single
@@ -20594,6 +24283,50 @@ func (s *ResourceSpecificResult) SetMatchedStatements(v []Statement) *ResourceSp
 func (s *ResourceSpecificResult) SetMissingContextValues(v []string) *ResourceSpecificResult {
 	s.MissingContextValues = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResourceSpecificResult) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EvalDecisionDetails) > 0 {
+		v := s.EvalDecisionDetails
+
+		e.SetMap(protocol.BodyTarget, "EvalDecisionDetails", func(me protocol.MapEncoder) {
+			for k, item := range v {
+				v := item
+				me.MapSetValue(k, v)
+			}
+		}, protocol.Metadata{})
+	}
+	if len(s.EvalResourceDecision) > 0 {
+		v := s.EvalResourceDecision
+
+		e.SetValue(protocol.BodyTarget, "EvalResourceDecision", v, protocol.Metadata{})
+	}
+	if s.EvalResourceName != nil {
+		v := *s.EvalResourceName
+
+		e.SetValue(protocol.BodyTarget, "EvalResourceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MatchedStatements) > 0 {
+		v := s.MatchedStatements
+
+		e.SetList(protocol.BodyTarget, "MatchedStatements", encodeStatementList(v), protocol.Metadata{})
+	}
+	if len(s.MissingContextValues) > 0 {
+		v := s.MissingContextValues
+
+		e.SetList(protocol.BodyTarget, "MissingContextValues", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeResourceSpecificResultList(vs []ResourceSpecificResult) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADeviceRequest
@@ -20705,6 +24438,32 @@ func (s *ResyncMFADeviceInput) SetUserName(v string) *ResyncMFADeviceInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResyncMFADeviceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AuthenticationCode1 != nil {
+		v := *s.AuthenticationCode1
+
+		e.SetValue(protocol.BodyTarget, "AuthenticationCode1", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AuthenticationCode2 != nil {
+		v := *s.AuthenticationCode2
+
+		e.SetValue(protocol.BodyTarget, "AuthenticationCode2", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADeviceOutput
 type ResyncMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -20725,6 +24484,12 @@ func (s ResyncMFADeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResyncMFADeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResyncMFADeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains information about an IAM role. This structure is returned as a response
@@ -20822,6 +24587,55 @@ func (s *Role) SetRoleId(v string) *Role {
 func (s *Role) SetRoleName(v string) *Role {
 	s.RoleName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Role) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AssumeRolePolicyDocument != nil {
+		v := *s.AssumeRolePolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "AssumeRolePolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleId != nil {
+		v := *s.RoleId
+
+		e.SetValue(protocol.BodyTarget, "RoleId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRoleList(vs []Role) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about an IAM role, including all of the role's policies.
@@ -20935,6 +24749,65 @@ func (s *RoleDetail) SetRolePolicyList(v []PolicyDetail) *RoleDetail {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RoleDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AssumeRolePolicyDocument != nil {
+		v := *s.AssumeRolePolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "AssumeRolePolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AttachedManagedPolicies) > 0 {
+		v := s.AttachedManagedPolicies
+
+		e.SetList(protocol.BodyTarget, "AttachedManagedPolicies", encodeAttachedPolicyList(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.InstanceProfileList) > 0 {
+		v := s.InstanceProfileList
+
+		e.SetList(protocol.BodyTarget, "InstanceProfileList", encodeInstanceProfileList(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleId != nil {
+		v := *s.RoleId
+
+		e.SetValue(protocol.BodyTarget, "RoleId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RolePolicyList) > 0 {
+		v := s.RolePolicyList
+
+		e.SetList(protocol.BodyTarget, "RolePolicyList", encodePolicyDetailList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRoleDetailList(vs []RoleDetail) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // An object that contains details about how a service-linked role is used.
 //
 // This data type is used as a response element in the GetServiceLinkedRoleDeletionStatus
@@ -20970,6 +24843,30 @@ func (s *RoleUsageType) SetRegion(v string) *RoleUsageType {
 func (s *RoleUsageType) SetResources(v []string) *RoleUsageType {
 	s.Resources = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RoleUsageType) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Region != nil {
+		v := *s.Region
+
+		e.SetValue(protocol.BodyTarget, "Region", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Resources) > 0 {
+		v := s.Resources
+
+		e.SetList(protocol.BodyTarget, "Resources", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRoleUsageTypeList(vs []RoleUsageType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the list of SAML providers for this account.
@@ -21013,6 +24910,35 @@ func (s *SAMLProviderListEntry) SetCreateDate(v time.Time) *SAMLProviderListEntr
 func (s *SAMLProviderListEntry) SetValidUntil(v time.Time) *SAMLProviderListEntry {
 	s.ValidUntil = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SAMLProviderListEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ValidUntil != nil {
+		v := *s.ValidUntil
+
+		e.SetValue(protocol.BodyTarget, "ValidUntil", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSAMLProviderListEntryList(vs []SAMLProviderListEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains information about an SSH public key.
@@ -21100,6 +25026,42 @@ func (s *SSHPublicKey) SetUserName(v string) *SSHPublicKey {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SSHPublicKey) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Fingerprint != nil {
+		v := *s.Fingerprint
+
+		e.SetValue(protocol.BodyTarget, "Fingerprint", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SSHPublicKeyBody != nil {
+		v := *s.SSHPublicKeyBody
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SSHPublicKeyId != nil {
+		v := *s.SSHPublicKeyId
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UploadDate != nil {
+		v := *s.UploadDate
+
+		e.SetValue(protocol.BodyTarget, "UploadDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains information about an SSH public key, without the key's body or fingerprint.
 //
 // This data type is used as a response element in the ListSSHPublicKeys action.
@@ -21164,6 +25126,40 @@ func (s *SSHPublicKeyMetadata) SetUserName(v string) *SSHPublicKeyMetadata {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SSHPublicKeyMetadata) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SSHPublicKeyId != nil {
+		v := *s.SSHPublicKeyId
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UploadDate != nil {
+		v := *s.UploadDate
+
+		e.SetValue(protocol.BodyTarget, "UploadDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSSHPublicKeyMetadataList(vs []SSHPublicKeyMetadata) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about a server certificate.
 //
 // This data type is used as a response element in the GetServerCertificate
@@ -21213,6 +25209,27 @@ func (s *ServerCertificate) SetCertificateChain(v string) *ServerCertificate {
 func (s *ServerCertificate) SetServerCertificateMetadata(v *ServerCertificateMetadata) *ServerCertificate {
 	s.ServerCertificateMetadata = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ServerCertificate) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateBody != nil {
+		v := *s.CertificateBody
+
+		e.SetValue(protocol.BodyTarget, "CertificateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CertificateChain != nil {
+		v := *s.CertificateChain
+
+		e.SetValue(protocol.BodyTarget, "CertificateChain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServerCertificateMetadata != nil {
+		v := s.ServerCertificateMetadata
+
+		e.SetFields(protocol.BodyTarget, "ServerCertificateMetadata", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about a server certificate without its certificate body,
@@ -21302,6 +25319,50 @@ func (s *ServerCertificateMetadata) SetServerCertificateName(v string) *ServerCe
 func (s *ServerCertificateMetadata) SetUploadDate(v time.Time) *ServerCertificateMetadata {
 	s.UploadDate = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ServerCertificateMetadata) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Expiration != nil {
+		v := *s.Expiration
+
+		e.SetValue(protocol.BodyTarget, "Expiration", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServerCertificateId != nil {
+		v := *s.ServerCertificateId
+
+		e.SetValue(protocol.BodyTarget, "ServerCertificateId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServerCertificateName != nil {
+		v := *s.ServerCertificateName
+
+		e.SetValue(protocol.BodyTarget, "ServerCertificateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UploadDate != nil {
+		v := *s.UploadDate
+
+		e.SetValue(protocol.BodyTarget, "UploadDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeServerCertificateMetadataList(vs []ServerCertificateMetadata) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains the details of a service specific credential.
@@ -21402,6 +25463,47 @@ func (s *ServiceSpecificCredential) SetUserName(v string) *ServiceSpecificCreden
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ServiceSpecificCredential) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServicePassword != nil {
+		v := *s.ServicePassword
+
+		e.SetValue(protocol.BodyTarget, "ServicePassword", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServiceSpecificCredentialId != nil {
+		v := *s.ServiceSpecificCredentialId
+
+		e.SetValue(protocol.BodyTarget, "ServiceSpecificCredentialId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServiceUserName != nil {
+		v := *s.ServiceUserName
+
+		e.SetValue(protocol.BodyTarget, "ServiceUserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains additional details about a service-specific credential.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredentialMetadata
 type ServiceSpecificCredentialMetadata struct {
@@ -21486,6 +25588,50 @@ func (s *ServiceSpecificCredentialMetadata) SetUserName(v string) *ServiceSpecif
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ServiceSpecificCredentialMetadata) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServiceSpecificCredentialId != nil {
+		v := *s.ServiceSpecificCredentialId
+
+		e.SetValue(protocol.BodyTarget, "ServiceSpecificCredentialId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServiceUserName != nil {
+		v := *s.ServiceUserName
+
+		e.SetValue(protocol.BodyTarget, "ServiceUserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeServiceSpecificCredentialMetadataList(vs []ServiceSpecificCredentialMetadata) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionRequest
 type SetDefaultPolicyVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -21553,6 +25699,22 @@ func (s *SetDefaultPolicyVersionInput) SetVersionId(v string) *SetDefaultPolicyV
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetDefaultPolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyArn != nil {
+		v := *s.PolicyArn
+
+		e.SetValue(protocol.BodyTarget, "PolicyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.VersionId != nil {
+		v := *s.VersionId
+
+		e.SetValue(protocol.BodyTarget, "VersionId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionOutput
 type SetDefaultPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -21573,6 +25735,12 @@ func (s SetDefaultPolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetDefaultPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetDefaultPolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains information about an X.509 signing certificate.
@@ -21646,6 +25814,45 @@ func (s *SigningCertificate) SetUploadDate(v time.Time) *SigningCertificate {
 func (s *SigningCertificate) SetUserName(v string) *SigningCertificate {
 	s.UserName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SigningCertificate) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateBody != nil {
+		v := *s.CertificateBody
+
+		e.SetValue(protocol.BodyTarget, "CertificateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CertificateId != nil {
+		v := *s.CertificateId
+
+		e.SetValue(protocol.BodyTarget, "CertificateId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UploadDate != nil {
+		v := *s.UploadDate
+
+		e.SetValue(protocol.BodyTarget, "UploadDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSigningCertificateList(vs []SigningCertificate) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicyRequest
@@ -21902,6 +26109,62 @@ func (s *SimulateCustomPolicyInput) SetResourceOwner(v string) *SimulateCustomPo
 func (s *SimulateCustomPolicyInput) SetResourcePolicy(v string) *SimulateCustomPolicyInput {
 	s.ResourcePolicy = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SimulateCustomPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ActionNames) > 0 {
+		v := s.ActionNames
+
+		e.SetList(protocol.BodyTarget, "ActionNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.CallerArn != nil {
+		v := *s.CallerArn
+
+		e.SetValue(protocol.BodyTarget, "CallerArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ContextEntries) > 0 {
+		v := s.ContextEntries
+
+		e.SetList(protocol.BodyTarget, "ContextEntries", encodeContextEntryList(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.PolicyInputList) > 0 {
+		v := s.PolicyInputList
+
+		e.SetList(protocol.BodyTarget, "PolicyInputList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ResourceArns) > 0 {
+		v := s.ResourceArns
+
+		e.SetList(protocol.BodyTarget, "ResourceArns", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ResourceHandlingOption != nil {
+		v := *s.ResourceHandlingOption
+
+		e.SetValue(protocol.BodyTarget, "ResourceHandlingOption", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		e.SetValue(protocol.BodyTarget, "ResourceOwner", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourcePolicy != nil {
+		v := *s.ResourcePolicy
+
+		e.SetValue(protocol.BodyTarget, "ResourcePolicy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicyRequest
@@ -22183,6 +26446,67 @@ func (s *SimulatePrincipalPolicyInput) SetResourcePolicy(v string) *SimulatePrin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SimulatePrincipalPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ActionNames) > 0 {
+		v := s.ActionNames
+
+		e.SetList(protocol.BodyTarget, "ActionNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.CallerArn != nil {
+		v := *s.CallerArn
+
+		e.SetValue(protocol.BodyTarget, "CallerArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ContextEntries) > 0 {
+		v := s.ContextEntries
+
+		e.SetList(protocol.BodyTarget, "ContextEntries", encodeContextEntryList(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.PolicyInputList) > 0 {
+		v := s.PolicyInputList
+
+		e.SetList(protocol.BodyTarget, "PolicyInputList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.PolicySourceArn != nil {
+		v := *s.PolicySourceArn
+
+		e.SetValue(protocol.BodyTarget, "PolicySourceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ResourceArns) > 0 {
+		v := s.ResourceArns
+
+		e.SetList(protocol.BodyTarget, "ResourceArns", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ResourceHandlingOption != nil {
+		v := *s.ResourceHandlingOption
+
+		e.SetValue(protocol.BodyTarget, "ResourceHandlingOption", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		e.SetValue(protocol.BodyTarget, "ResourceOwner", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourcePolicy != nil {
+		v := *s.ResourcePolicy
+
+		e.SetValue(protocol.BodyTarget, "ResourcePolicy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful SimulatePrincipalPolicy or SimulateCustomPolicy
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicyOutput
@@ -22240,6 +26564,27 @@ func (s *SimulatePrincipalPolicyOutput) SetMarker(v string) *SimulatePrincipalPo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SimulatePrincipalPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.EvaluationResults) > 0 {
+		v := s.EvaluationResults
+
+		e.SetList(protocol.BodyTarget, "EvaluationResults", encodeEvaluationResultList(v), protocol.Metadata{})
+	}
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains a reference to a Statement element in a policy document that determines
 // the result of the simulation.
 //
@@ -22294,6 +26639,40 @@ func (s *Statement) SetSourcePolicyType(v PolicySourceType) *Statement {
 func (s *Statement) SetStartPosition(v *Position) *Statement {
 	s.StartPosition = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Statement) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EndPosition != nil {
+		v := s.EndPosition
+
+		e.SetFields(protocol.BodyTarget, "EndPosition", v, protocol.Metadata{})
+	}
+	if s.SourcePolicyId != nil {
+		v := *s.SourcePolicyId
+
+		e.SetValue(protocol.BodyTarget, "SourcePolicyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.SourcePolicyType) > 0 {
+		v := s.SourcePolicyType
+
+		e.SetValue(protocol.BodyTarget, "SourcePolicyType", v, protocol.Metadata{})
+	}
+	if s.StartPosition != nil {
+		v := s.StartPosition
+
+		e.SetFields(protocol.BodyTarget, "StartPosition", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStatementList(vs []Statement) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyRequest
@@ -22375,6 +26754,27 @@ func (s *UpdateAccessKeyInput) SetUserName(v string) *UpdateAccessKeyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAccessKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		e.SetValue(protocol.BodyTarget, "AccessKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyOutput
 type UpdateAccessKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -22395,6 +26795,12 @@ func (s UpdateAccessKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAccessKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAccessKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyRequest
@@ -22542,6 +26948,57 @@ func (s *UpdateAccountPasswordPolicyInput) SetRequireUppercaseCharacters(v bool)
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAccountPasswordPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AllowUsersToChangePassword != nil {
+		v := *s.AllowUsersToChangePassword
+
+		e.SetValue(protocol.BodyTarget, "AllowUsersToChangePassword", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HardExpiry != nil {
+		v := *s.HardExpiry
+
+		e.SetValue(protocol.BodyTarget, "HardExpiry", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.MaxPasswordAge != nil {
+		v := *s.MaxPasswordAge
+
+		e.SetValue(protocol.BodyTarget, "MaxPasswordAge", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MinimumPasswordLength != nil {
+		v := *s.MinimumPasswordLength
+
+		e.SetValue(protocol.BodyTarget, "MinimumPasswordLength", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.PasswordReusePrevention != nil {
+		v := *s.PasswordReusePrevention
+
+		e.SetValue(protocol.BodyTarget, "PasswordReusePrevention", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.RequireLowercaseCharacters != nil {
+		v := *s.RequireLowercaseCharacters
+
+		e.SetValue(protocol.BodyTarget, "RequireLowercaseCharacters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequireNumbers != nil {
+		v := *s.RequireNumbers
+
+		e.SetValue(protocol.BodyTarget, "RequireNumbers", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequireSymbols != nil {
+		v := *s.RequireSymbols
+
+		e.SetValue(protocol.BodyTarget, "RequireSymbols", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.RequireUppercaseCharacters != nil {
+		v := *s.RequireUppercaseCharacters
+
+		e.SetValue(protocol.BodyTarget, "RequireUppercaseCharacters", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyOutput
 type UpdateAccountPasswordPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -22562,6 +27019,12 @@ func (s UpdateAccountPasswordPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAccountPasswordPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAccountPasswordPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicyRequest
@@ -22636,6 +27099,22 @@ func (s *UpdateAssumeRolePolicyInput) SetRoleName(v string) *UpdateAssumeRolePol
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAssumeRolePolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PolicyDocument != nil {
+		v := *s.PolicyDocument
+
+		e.SetValue(protocol.BodyTarget, "PolicyDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicyOutput
 type UpdateAssumeRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -22656,6 +27135,12 @@ func (s UpdateAssumeRolePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAssumeRolePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateAssumeRolePolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupRequest
@@ -22740,6 +27225,27 @@ func (s *UpdateGroupInput) SetNewPath(v string) *UpdateGroupInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewGroupName != nil {
+		v := *s.NewGroupName
+
+		e.SetValue(protocol.BodyTarget, "NewGroupName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewPath != nil {
+		v := *s.NewPath
+
+		e.SetValue(protocol.BodyTarget, "NewPath", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupOutput
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -22760,6 +27266,12 @@ func (s UpdateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileRequest
@@ -22840,6 +27352,27 @@ func (s *UpdateLoginProfileInput) SetUserName(v string) *UpdateLoginProfileInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateLoginProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Password != nil {
+		v := *s.Password
+
+		e.SetValue(protocol.BodyTarget, "Password", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PasswordResetRequired != nil {
+		v := *s.PasswordResetRequired
+
+		e.SetValue(protocol.BodyTarget, "PasswordResetRequired", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileOutput
 type UpdateLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -22860,6 +27393,12 @@ func (s UpdateLoginProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateLoginProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateLoginProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprintRequest
@@ -22927,6 +27466,22 @@ func (s *UpdateOpenIDConnectProviderThumbprintInput) SetThumbprintList(v []strin
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateOpenIDConnectProviderThumbprintInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OpenIDConnectProviderArn != nil {
+		v := *s.OpenIDConnectProviderArn
+
+		e.SetValue(protocol.BodyTarget, "OpenIDConnectProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ThumbprintList) > 0 {
+		v := s.ThumbprintList
+
+		e.SetList(protocol.BodyTarget, "ThumbprintList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprintOutput
 type UpdateOpenIDConnectProviderThumbprintOutput struct {
 	_ struct{} `type:"structure"`
@@ -22947,6 +27502,12 @@ func (s UpdateOpenIDConnectProviderThumbprintOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateOpenIDConnectProviderThumbprintOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateOpenIDConnectProviderThumbprintOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescriptionRequest
@@ -23007,6 +27568,22 @@ func (s *UpdateRoleDescriptionInput) SetRoleName(v string) *UpdateRoleDescriptio
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateRoleDescriptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		e.SetValue(protocol.BodyTarget, "RoleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescriptionResponse
 type UpdateRoleDescriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -23036,6 +27613,17 @@ func (s UpdateRoleDescriptionOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateRoleDescriptionOutput) SetRole(v *Role) *UpdateRoleDescriptionOutput {
 	s.Role = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateRoleDescriptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Role != nil {
+		v := s.Role
+
+		e.SetFields(protocol.BodyTarget, "Role", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest
@@ -23107,6 +27695,22 @@ func (s *UpdateSAMLProviderInput) SetSAMLProviderArn(v string) *UpdateSAMLProvid
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateSAMLProviderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SAMLMetadataDocument != nil {
+		v := *s.SAMLMetadataDocument
+
+		e.SetValue(protocol.BodyTarget, "SAMLMetadataDocument", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SAMLProviderArn != nil {
+		v := *s.SAMLProviderArn
+
+		e.SetValue(protocol.BodyTarget, "SAMLProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful UpdateSAMLProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderResponse
 type UpdateSAMLProviderOutput struct {
@@ -23137,6 +27741,17 @@ func (s UpdateSAMLProviderOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateSAMLProviderOutput) SetSAMLProviderArn(v string) *UpdateSAMLProviderOutput {
 	s.SAMLProviderArn = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateSAMLProviderOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SAMLProviderArn != nil {
+		v := *s.SAMLProviderArn
+
+		e.SetValue(protocol.BodyTarget, "SAMLProviderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyRequest
@@ -23224,6 +27839,27 @@ func (s *UpdateSSHPublicKeyInput) SetUserName(v string) *UpdateSSHPublicKeyInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateSSHPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SSHPublicKeyId != nil {
+		v := *s.SSHPublicKeyId
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyOutput
 type UpdateSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -23244,6 +27880,12 @@ func (s UpdateSSHPublicKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateSSHPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificateRequest
@@ -23330,6 +27972,27 @@ func (s *UpdateServerCertificateInput) SetServerCertificateName(v string) *Updat
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateServerCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NewPath != nil {
+		v := *s.NewPath
+
+		e.SetValue(protocol.BodyTarget, "NewPath", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewServerCertificateName != nil {
+		v := *s.NewServerCertificateName
+
+		e.SetValue(protocol.BodyTarget, "NewServerCertificateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServerCertificateName != nil {
+		v := *s.ServerCertificateName
+
+		e.SetValue(protocol.BodyTarget, "ServerCertificateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificateOutput
 type UpdateServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -23350,6 +28013,12 @@ func (s UpdateServerCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateServerCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateServerCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredentialRequest
@@ -23431,6 +28100,27 @@ func (s *UpdateServiceSpecificCredentialInput) SetUserName(v string) *UpdateServ
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateServiceSpecificCredentialInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServiceSpecificCredentialId != nil {
+		v := *s.ServiceSpecificCredentialId
+
+		e.SetValue(protocol.BodyTarget, "ServiceSpecificCredentialId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredentialOutput
 type UpdateServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -23451,6 +28141,12 @@ func (s UpdateServiceSpecificCredentialOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateServiceSpecificCredentialOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateRequest
@@ -23532,6 +28228,27 @@ func (s *UpdateSigningCertificateInput) SetUserName(v string) *UpdateSigningCert
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateSigningCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateId != nil {
+		v := *s.CertificateId
+
+		e.SetValue(protocol.BodyTarget, "CertificateId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateOutput
 type UpdateSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -23552,6 +28269,12 @@ func (s UpdateSigningCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSigningCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateSigningCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserRequest
@@ -23638,6 +28361,27 @@ func (s *UpdateUserInput) SetUserName(v string) *UpdateUserInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NewPath != nil {
+		v := *s.NewPath
+
+		e.SetValue(protocol.BodyTarget, "NewPath", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NewUserName != nil {
+		v := *s.NewUserName
+
+		e.SetValue(protocol.BodyTarget, "NewUserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserOutput
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -23658,6 +28402,12 @@ func (s UpdateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKeyRequest
@@ -23733,6 +28483,22 @@ func (s *UploadSSHPublicKeyInput) SetUserName(v string) *UploadSSHPublicKeyInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UploadSSHPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SSHPublicKeyBody != nil {
+		v := *s.SSHPublicKeyBody
+
+		e.SetValue(protocol.BodyTarget, "SSHPublicKeyBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful UploadSSHPublicKey request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKeyResponse
 type UploadSSHPublicKeyOutput struct {
@@ -23763,6 +28529,17 @@ func (s UploadSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
 func (s *UploadSSHPublicKeyOutput) SetSSHPublicKey(v *SSHPublicKey) *UploadSSHPublicKeyOutput {
 	s.SSHPublicKey = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UploadSSHPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SSHPublicKey != nil {
+		v := s.SSHPublicKey
+
+		e.SetFields(protocol.BodyTarget, "SSHPublicKey", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateRequest
@@ -23909,6 +28686,37 @@ func (s *UploadServerCertificateInput) SetServerCertificateName(v string) *Uploa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UploadServerCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateBody != nil {
+		v := *s.CertificateBody
+
+		e.SetValue(protocol.BodyTarget, "CertificateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CertificateChain != nil {
+		v := *s.CertificateChain
+
+		e.SetValue(protocol.BodyTarget, "CertificateChain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PrivateKey != nil {
+		v := *s.PrivateKey
+
+		e.SetValue(protocol.BodyTarget, "PrivateKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ServerCertificateName != nil {
+		v := *s.ServerCertificateName
+
+		e.SetValue(protocol.BodyTarget, "ServerCertificateName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful UploadServerCertificate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateResponse
 type UploadServerCertificateOutput struct {
@@ -23940,6 +28748,17 @@ func (s UploadServerCertificateOutput) SDKResponseMetadata() aws.Response {
 func (s *UploadServerCertificateOutput) SetServerCertificateMetadata(v *ServerCertificateMetadata) *UploadServerCertificateOutput {
 	s.ServerCertificateMetadata = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UploadServerCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ServerCertificateMetadata != nil {
+		v := s.ServerCertificateMetadata
+
+		e.SetFields(protocol.BodyTarget, "ServerCertificateMetadata", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificateRequest
@@ -24008,6 +28827,22 @@ func (s *UploadSigningCertificateInput) SetUserName(v string) *UploadSigningCert
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UploadSigningCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CertificateBody != nil {
+		v := *s.CertificateBody
+
+		e.SetValue(protocol.BodyTarget, "CertificateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the response to a successful UploadSigningCertificate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificateResponse
 type UploadSigningCertificateOutput struct {
@@ -24040,6 +28875,17 @@ func (s UploadSigningCertificateOutput) SDKResponseMetadata() aws.Response {
 func (s *UploadSigningCertificateOutput) SetCertificate(v *SigningCertificate) *UploadSigningCertificateOutput {
 	s.Certificate = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UploadSigningCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Certificate != nil {
+		v := s.Certificate
+
+		e.SetFields(protocol.BodyTarget, "Certificate", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about an IAM user entity.
@@ -24155,6 +29001,50 @@ func (s *User) SetUserName(v string) *User {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *User) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.PasswordLastUsed != nil {
+		v := *s.PasswordLastUsed
+
+		e.SetValue(protocol.BodyTarget, "PasswordLastUsed", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeUserList(vs []User) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about an IAM user, including all the user's policies
 // and all the IAM groups the user is in.
 //
@@ -24256,6 +29146,60 @@ func (s *UserDetail) SetUserPolicyList(v []PolicyDetail) *UserDetail {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UserDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AttachedManagedPolicies) > 0 {
+		v := s.AttachedManagedPolicies
+
+		e.SetList(protocol.BodyTarget, "AttachedManagedPolicies", encodeAttachedPolicyList(v), protocol.Metadata{})
+	}
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.GroupList) > 0 {
+		v := s.GroupList
+
+		e.SetList(protocol.BodyTarget, "GroupList", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		e.SetValue(protocol.BodyTarget, "Path", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		e.SetValue(protocol.BodyTarget, "UserName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.UserPolicyList) > 0 {
+		v := s.UserPolicyList
+
+		e.SetList(protocol.BodyTarget, "UserPolicyList", encodePolicyDetailList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeUserDetailList(vs []UserDetail) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Contains information about a virtual MFA device.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/VirtualMFADevice
 type VirtualMFADevice struct {
@@ -24327,6 +29271,45 @@ func (s *VirtualMFADevice) SetUser(v *User) *VirtualMFADevice {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VirtualMFADevice) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Base32StringSeed != nil {
+		v := s.Base32StringSeed
+
+		e.SetValue(protocol.BodyTarget, "Base32StringSeed", protocol.BytesValue(v), protocol.Metadata{})
+	}
+	if s.EnableDate != nil {
+		v := *s.EnableDate
+
+		e.SetValue(protocol.BodyTarget, "EnableDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.QRCodePNG != nil {
+		v := s.QRCodePNG
+
+		e.SetValue(protocol.BodyTarget, "QRCodePNG", protocol.BytesValue(v), protocol.Metadata{})
+	}
+	if s.SerialNumber != nil {
+		v := *s.SerialNumber
+
+		e.SetValue(protocol.BodyTarget, "SerialNumber", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.User != nil {
+		v := s.User
+
+		e.SetFields(protocol.BodyTarget, "User", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeVirtualMFADeviceList(vs []VirtualMFADevice) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type ContextKeyTypeEnum string
 
 // Enum values for ContextKeyTypeEnum
@@ -24345,6 +29328,15 @@ const (
 	ContextKeyTypeEnumDateList    ContextKeyTypeEnum = "dateList"
 )
 
+func (enum ContextKeyTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContextKeyTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeletionTaskStatusType string
 
 // Enum values for DeletionTaskStatusType
@@ -24354,6 +29346,23 @@ const (
 	DeletionTaskStatusTypeFailed     DeletionTaskStatusType = "FAILED"
 	DeletionTaskStatusTypeNotStarted DeletionTaskStatusType = "NOT_STARTED"
 )
+
+func (enum DeletionTaskStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeletionTaskStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeEntityTypeList(vs []EntityType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type EntityType string
 
@@ -24366,6 +29375,15 @@ const (
 	EntityTypeAwsmanagedPolicy   EntityType = "AWSManagedPolicy"
 )
 
+func (enum EntityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PolicyEvaluationDecisionType string
 
 // Enum values for PolicyEvaluationDecisionType
@@ -24374,6 +29392,15 @@ const (
 	PolicyEvaluationDecisionTypeExplicitDeny PolicyEvaluationDecisionType = "explicitDeny"
 	PolicyEvaluationDecisionTypeImplicitDeny PolicyEvaluationDecisionType = "implicitDeny"
 )
+
+func (enum PolicyEvaluationDecisionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyEvaluationDecisionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicySourceType string
 
@@ -24388,12 +29415,30 @@ const (
 	PolicySourceTypeNone        PolicySourceType = "none"
 )
 
+func (enum PolicySourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicySourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportFormatType string
 
 // Enum values for ReportFormatType
 const (
 	ReportFormatTypeTextCsv ReportFormatType = "text/csv"
 )
+
+func (enum ReportFormatType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportFormatType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReportStateType string
 
@@ -24404,6 +29449,15 @@ const (
 	ReportStateTypeComplete   ReportStateType = "COMPLETE"
 )
 
+func (enum ReportStateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportStateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssignmentStatusType string
 
 // Enum values for AssignmentStatusType
@@ -24413,6 +29467,15 @@ const (
 	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
 )
 
+func (enum AssignmentStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssignmentStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncodingType string
 
 // Enum values for EncodingType
@@ -24420,6 +29483,15 @@ const (
 	EncodingTypeSsh EncodingType = "SSH"
 	EncodingTypePem EncodingType = "PEM"
 )
+
+func (enum EncodingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncodingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicyScopeType string
 
@@ -24430,6 +29502,15 @@ const (
 	PolicyScopeTypeLocal PolicyScopeType = "Local"
 )
 
+func (enum PolicyScopeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyScopeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -24437,6 +29518,15 @@ const (
 	StatusTypeActive   StatusType = "Active"
 	StatusTypeInactive StatusType = "Inactive"
 )
+
+func (enum StatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SummaryKeyType string
 
@@ -24468,3 +29558,12 @@ const (
 	SummaryKeyTypePolicyVersionsInUseQuota          SummaryKeyType = "PolicyVersionsInUseQuota"
 	SummaryKeyTypeVersionsPerPolicyQuota            SummaryKeyType = "VersionsPerPolicyQuota"
 )
+
+func (enum SummaryKeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SummaryKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -1397,7 +1397,7 @@
           "body": "{\"BodyListField\":[\"{\\\"Foo\\\":\\\"Bar\\\"}\"]}"
         }
       },
-	  {
+      {
         "given": {
           "input": {
             "shape": "InputShape"
