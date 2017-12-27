@@ -1153,6 +1153,45 @@ func (s *AlarmHistoryItem) SetTimestamp(v time.Time) *AlarmHistoryItem {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AlarmHistoryItem) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AlarmName != nil {
+		v := *s.AlarmName
+
+		e.SetValue(protocol.BodyTarget, "AlarmName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HistoryData != nil {
+		v := *s.HistoryData
+
+		e.SetValue(protocol.BodyTarget, "HistoryData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.HistoryItemType) > 0 {
+		v := s.HistoryItemType
+
+		e.SetValue(protocol.BodyTarget, "HistoryItemType", v, protocol.Metadata{})
+	}
+	if s.HistorySummary != nil {
+		v := *s.HistorySummary
+
+		e.SetValue(protocol.BodyTarget, "HistorySummary", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAlarmHistoryItemList(vs []AlarmHistoryItem) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents a specific dashboard.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardEntry
 type DashboardEntry struct {
@@ -1207,6 +1246,40 @@ func (s *DashboardEntry) SetSize(v int64) *DashboardEntry {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DashboardEntry) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DashboardArn != nil {
+		v := *s.DashboardArn
+
+		e.SetValue(protocol.BodyTarget, "DashboardArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DashboardName != nil {
+		v := *s.DashboardName
+
+		e.SetValue(protocol.BodyTarget, "DashboardName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LastModified != nil {
+		v := *s.LastModified
+
+		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		e.SetValue(protocol.BodyTarget, "Size", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDashboardEntryList(vs []DashboardEntry) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // An error or warning for the operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardValidationMessage
 type DashboardValidationMessage struct {
@@ -1239,6 +1312,30 @@ func (s *DashboardValidationMessage) SetDataPath(v string) *DashboardValidationM
 func (s *DashboardValidationMessage) SetMessage(v string) *DashboardValidationMessage {
 	s.Message = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DashboardValidationMessage) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DataPath != nil {
+		v := *s.DataPath
+
+		e.SetValue(protocol.BodyTarget, "DataPath", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDashboardValidationMessageList(vs []DashboardValidationMessage) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Encapsulates the statistical data that CloudWatch computes from metric data.
@@ -1330,6 +1427,60 @@ func (s *Datapoint) SetUnit(v StandardUnit) *Datapoint {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Datapoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Average != nil {
+		v := *s.Average
+
+		e.SetValue(protocol.BodyTarget, "Average", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if len(s.ExtendedStatistics) > 0 {
+		v := s.ExtendedStatistics
+
+		e.SetMap(protocol.BodyTarget, "ExtendedStatistics", protocol.EncodeFloat64Map(v), protocol.Metadata{})
+	}
+	if s.Maximum != nil {
+		v := *s.Maximum
+
+		e.SetValue(protocol.BodyTarget, "Maximum", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Minimum != nil {
+		v := *s.Minimum
+
+		e.SetValue(protocol.BodyTarget, "Minimum", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.SampleCount != nil {
+		v := *s.SampleCount
+
+		e.SetValue(protocol.BodyTarget, "SampleCount", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Sum != nil {
+		v := *s.Sum
+
+		e.SetValue(protocol.BodyTarget, "Sum", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDatapointList(vs []Datapoint) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmsInput
 type DeleteAlarmsInput struct {
 	_ struct{} `type:"structure"`
@@ -1370,6 +1521,17 @@ func (s *DeleteAlarmsInput) SetAlarmNames(v []string) *DeleteAlarmsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAlarmsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AlarmNames) > 0 {
+		v := s.AlarmNames
+
+		e.SetList(protocol.BodyTarget, "AlarmNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmsOutput
 type DeleteAlarmsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1390,6 +1552,12 @@ func (s DeleteAlarmsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAlarmsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteAlarmsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsInput
@@ -1416,6 +1584,17 @@ func (s *DeleteDashboardsInput) SetDashboardNames(v []string) *DeleteDashboardsI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDashboardsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DashboardNames) > 0 {
+		v := s.DashboardNames
+
+		e.SetList(protocol.BodyTarget, "DashboardNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsOutput
 type DeleteDashboardsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1436,6 +1615,12 @@ func (s DeleteDashboardsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDashboardsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteDashboardsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistoryInput
@@ -1524,6 +1709,42 @@ func (s *DescribeAlarmHistoryInput) SetStartDate(v time.Time) *DescribeAlarmHist
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAlarmHistoryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AlarmName != nil {
+		v := *s.AlarmName
+
+		e.SetValue(protocol.BodyTarget, "AlarmName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EndDate != nil {
+		v := *s.EndDate
+
+		e.SetValue(protocol.BodyTarget, "EndDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.HistoryItemType) > 0 {
+		v := s.HistoryItemType
+
+		e.SetValue(protocol.BodyTarget, "HistoryItemType", v, protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StartDate != nil {
+		v := *s.StartDate
+
+		e.SetValue(protocol.BodyTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistoryOutput
 type DescribeAlarmHistoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1562,6 +1783,22 @@ func (s *DescribeAlarmHistoryOutput) SetAlarmHistoryItems(v []AlarmHistoryItem) 
 func (s *DescribeAlarmHistoryOutput) SetNextToken(v string) *DescribeAlarmHistoryOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAlarmHistoryOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AlarmHistoryItems) > 0 {
+		v := s.AlarmHistoryItems
+
+		e.SetList(protocol.BodyTarget, "AlarmHistoryItems", encodeAlarmHistoryItemList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetricInput
@@ -1683,6 +1920,47 @@ func (s *DescribeAlarmsForMetricInput) SetUnit(v StandardUnit) *DescribeAlarmsFo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAlarmsForMetricInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionList(v), protocol.Metadata{})
+	}
+	if s.ExtendedStatistic != nil {
+		v := *s.ExtendedStatistic
+
+		e.SetValue(protocol.BodyTarget, "ExtendedStatistic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Period != nil {
+		v := *s.Period
+
+		e.SetValue(protocol.BodyTarget, "Period", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.Statistic) > 0 {
+		v := s.Statistic
+
+		e.SetValue(protocol.BodyTarget, "Statistic", v, protocol.Metadata{})
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetricOutput
 type DescribeAlarmsForMetricOutput struct {
 	_ struct{} `type:"structure"`
@@ -1712,6 +1990,17 @@ func (s DescribeAlarmsForMetricOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeAlarmsForMetricOutput) SetMetricAlarms(v []MetricAlarm) *DescribeAlarmsForMetricOutput {
 	s.MetricAlarms = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAlarmsForMetricOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.MetricAlarms) > 0 {
+		v := s.MetricAlarms
+
+		e.SetList(protocol.BodyTarget, "MetricAlarms", encodeMetricAlarmList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsInput
@@ -1804,6 +2093,42 @@ func (s *DescribeAlarmsInput) SetStateValue(v StateValue) *DescribeAlarmsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAlarmsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionPrefix != nil {
+		v := *s.ActionPrefix
+
+		e.SetValue(protocol.BodyTarget, "ActionPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AlarmNamePrefix != nil {
+		v := *s.AlarmNamePrefix
+
+		e.SetValue(protocol.BodyTarget, "AlarmNamePrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.AlarmNames) > 0 {
+		v := s.AlarmNames
+
+		e.SetList(protocol.BodyTarget, "AlarmNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MaxRecords != nil {
+		v := *s.MaxRecords
+
+		e.SetValue(protocol.BodyTarget, "MaxRecords", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StateValue) > 0 {
+		v := s.StateValue
+
+		e.SetValue(protocol.BodyTarget, "StateValue", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsOutput
 type DescribeAlarmsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1842,6 +2167,22 @@ func (s *DescribeAlarmsOutput) SetMetricAlarms(v []MetricAlarm) *DescribeAlarmsO
 func (s *DescribeAlarmsOutput) SetNextToken(v string) *DescribeAlarmsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAlarmsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.MetricAlarms) > 0 {
+		v := s.MetricAlarms
+
+		e.SetList(protocol.BodyTarget, "MetricAlarms", encodeMetricAlarmList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Expands the identity of a metric.
@@ -1906,6 +2247,30 @@ func (s *Dimension) SetValue(v string) *Dimension {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Dimension) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDimensionList(vs []Dimension) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents filters for a dimension.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DimensionFilter
 type DimensionFilter struct {
@@ -1962,6 +2327,30 @@ func (s *DimensionFilter) SetValue(v string) *DimensionFilter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DimensionFilter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeDimensionFilterList(vs []DimensionFilter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActionsInput
 type DisableAlarmActionsInput struct {
 	_ struct{} `type:"structure"`
@@ -2002,6 +2391,17 @@ func (s *DisableAlarmActionsInput) SetAlarmNames(v []string) *DisableAlarmAction
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableAlarmActionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AlarmNames) > 0 {
+		v := s.AlarmNames
+
+		e.SetList(protocol.BodyTarget, "AlarmNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActionsOutput
 type DisableAlarmActionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2022,6 +2422,12 @@ func (s DisableAlarmActionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisableAlarmActionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DisableAlarmActionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActionsInput
@@ -2064,6 +2470,17 @@ func (s *EnableAlarmActionsInput) SetAlarmNames(v []string) *EnableAlarmActionsI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableAlarmActionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AlarmNames) > 0 {
+		v := s.AlarmNames
+
+		e.SetList(protocol.BodyTarget, "AlarmNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActionsOutput
 type EnableAlarmActionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2084,6 +2501,12 @@ func (s EnableAlarmActionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EnableAlarmActionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EnableAlarmActionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboardInput
@@ -2108,6 +2531,17 @@ func (s GetDashboardInput) GoString() string {
 func (s *GetDashboardInput) SetDashboardName(v string) *GetDashboardInput {
 	s.DashboardName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetDashboardInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DashboardName != nil {
+		v := *s.DashboardName
+
+		e.SetValue(protocol.BodyTarget, "DashboardName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboardOutput
@@ -2159,6 +2593,27 @@ func (s *GetDashboardOutput) SetDashboardBody(v string) *GetDashboardOutput {
 func (s *GetDashboardOutput) SetDashboardName(v string) *GetDashboardOutput {
 	s.DashboardName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetDashboardOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DashboardArn != nil {
+		v := *s.DashboardArn
+
+		e.SetValue(protocol.BodyTarget, "DashboardArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DashboardBody != nil {
+		v := *s.DashboardBody
+
+		e.SetValue(protocol.BodyTarget, "DashboardBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DashboardName != nil {
+		v := *s.DashboardName
+
+		e.SetValue(protocol.BodyTarget, "DashboardName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatisticsInput
@@ -2377,6 +2832,62 @@ func (s *GetMetricStatisticsInput) SetUnit(v StandardUnit) *GetMetricStatisticsI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetMetricStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionList(v), protocol.Metadata{})
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.ExtendedStatistics) > 0 {
+		v := s.ExtendedStatistics
+
+		e.SetList(protocol.BodyTarget, "ExtendedStatistics", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Period != nil {
+		v := *s.Period
+
+		e.SetValue(protocol.BodyTarget, "Period", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Statistics) > 0 {
+		v := s.Statistics
+
+		e.SetList(protocol.BodyTarget, "Statistics", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatisticsOutput
 type GetMetricStatisticsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2417,6 +2928,22 @@ func (s *GetMetricStatisticsOutput) SetLabel(v string) *GetMetricStatisticsOutpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetMetricStatisticsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Datapoints) > 0 {
+		v := s.Datapoints
+
+		e.SetList(protocol.BodyTarget, "Datapoints", encodeDatapointList(v), protocol.Metadata{})
+	}
+	if s.Label != nil {
+		v := *s.Label
+
+		e.SetValue(protocol.BodyTarget, "Label", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboardsInput
 type ListDashboardsInput struct {
 	_ struct{} `type:"structure"`
@@ -2451,6 +2978,22 @@ func (s *ListDashboardsInput) SetDashboardNamePrefix(v string) *ListDashboardsIn
 func (s *ListDashboardsInput) SetNextToken(v string) *ListDashboardsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDashboardsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DashboardNamePrefix != nil {
+		v := *s.DashboardNamePrefix
+
+		e.SetValue(protocol.BodyTarget, "DashboardNamePrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboardsOutput
@@ -2491,6 +3034,22 @@ func (s *ListDashboardsOutput) SetDashboardEntries(v []DashboardEntry) *ListDash
 func (s *ListDashboardsOutput) SetNextToken(v string) *ListDashboardsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListDashboardsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DashboardEntries) > 0 {
+		v := s.DashboardEntries
+
+		e.SetList(protocol.BodyTarget, "DashboardEntries", encodeDashboardEntryList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsInput
@@ -2568,6 +3127,32 @@ func (s *ListMetricsInput) SetNextToken(v string) *ListMetricsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListMetricsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionFilterList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsOutput
 type ListMetricsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2606,6 +3191,22 @@ func (s *ListMetricsOutput) SetMetrics(v []Metric) *ListMetricsOutput {
 func (s *ListMetricsOutput) SetNextToken(v string) *ListMetricsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListMetricsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		e.SetList(protocol.BodyTarget, "Metrics", encodeMetricList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a specific metric.
@@ -2649,6 +3250,35 @@ func (s *Metric) SetMetricName(v string) *Metric {
 func (s *Metric) SetNamespace(v string) *Metric {
 	s.Namespace = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Metric) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMetricList(vs []Metric) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents an alarm.
@@ -2895,6 +3525,140 @@ func (s *MetricAlarm) SetUnit(v StandardUnit) *MetricAlarm {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MetricAlarm) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionsEnabled != nil {
+		v := *s.ActionsEnabled
+
+		e.SetValue(protocol.BodyTarget, "ActionsEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.AlarmActions) > 0 {
+		v := s.AlarmActions
+
+		e.SetList(protocol.BodyTarget, "AlarmActions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.AlarmArn != nil {
+		v := *s.AlarmArn
+
+		e.SetValue(protocol.BodyTarget, "AlarmArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AlarmConfigurationUpdatedTimestamp != nil {
+		v := *s.AlarmConfigurationUpdatedTimestamp
+
+		e.SetValue(protocol.BodyTarget, "AlarmConfigurationUpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.AlarmDescription != nil {
+		v := *s.AlarmDescription
+
+		e.SetValue(protocol.BodyTarget, "AlarmDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AlarmName != nil {
+		v := *s.AlarmName
+
+		e.SetValue(protocol.BodyTarget, "AlarmName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ComparisonOperator) > 0 {
+		v := s.ComparisonOperator
+
+		e.SetValue(protocol.BodyTarget, "ComparisonOperator", v, protocol.Metadata{})
+	}
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionList(v), protocol.Metadata{})
+	}
+	if s.EvaluateLowSampleCountPercentile != nil {
+		v := *s.EvaluateLowSampleCountPercentile
+
+		e.SetValue(protocol.BodyTarget, "EvaluateLowSampleCountPercentile", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EvaluationPeriods != nil {
+		v := *s.EvaluationPeriods
+
+		e.SetValue(protocol.BodyTarget, "EvaluationPeriods", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ExtendedStatistic != nil {
+		v := *s.ExtendedStatistic
+
+		e.SetValue(protocol.BodyTarget, "ExtendedStatistic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InsufficientDataActions) > 0 {
+		v := s.InsufficientDataActions
+
+		e.SetList(protocol.BodyTarget, "InsufficientDataActions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OKActions) > 0 {
+		v := s.OKActions
+
+		e.SetList(protocol.BodyTarget, "OKActions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Period != nil {
+		v := *s.Period
+
+		e.SetValue(protocol.BodyTarget, "Period", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.StateReason != nil {
+		v := *s.StateReason
+
+		e.SetValue(protocol.BodyTarget, "StateReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StateReasonData != nil {
+		v := *s.StateReasonData
+
+		e.SetValue(protocol.BodyTarget, "StateReasonData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StateUpdatedTimestamp != nil {
+		v := *s.StateUpdatedTimestamp
+
+		e.SetValue(protocol.BodyTarget, "StateUpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.StateValue) > 0 {
+		v := s.StateValue
+
+		e.SetValue(protocol.BodyTarget, "StateValue", v, protocol.Metadata{})
+	}
+	if len(s.Statistic) > 0 {
+		v := s.Statistic
+
+		e.SetValue(protocol.BodyTarget, "Statistic", v, protocol.Metadata{})
+	}
+	if s.Threshold != nil {
+		v := *s.Threshold
+
+		e.SetValue(protocol.BodyTarget, "Threshold", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.TreatMissingData != nil {
+		v := *s.TreatMissingData
+
+		e.SetValue(protocol.BodyTarget, "TreatMissingData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMetricAlarmList(vs []MetricAlarm) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Encapsulates the information sent to either create a metric or add new values
 // to be aggregated into an existing metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDatum
@@ -3024,6 +3788,55 @@ func (s *MetricDatum) SetValue(v float64) *MetricDatum {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MetricDatum) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StatisticValues != nil {
+		v := s.StatisticValues
+
+		e.SetFields(protocol.BodyTarget, "StatisticValues", v, protocol.Metadata{})
+	}
+	if s.StorageResolution != nil {
+		v := *s.StorageResolution
+
+		e.SetValue(protocol.BodyTarget, "StorageResolution", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", v, protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMetricDatumList(vs []MetricDatum) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboardInput
 type PutDashboardInput struct {
 	_ struct{} `type:"structure"`
@@ -3063,6 +3876,22 @@ func (s *PutDashboardInput) SetDashboardName(v string) *PutDashboardInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutDashboardInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DashboardBody != nil {
+		v := *s.DashboardBody
+
+		e.SetValue(protocol.BodyTarget, "DashboardBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DashboardName != nil {
+		v := *s.DashboardName
+
+		e.SetValue(protocol.BodyTarget, "DashboardName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboardOutput
 type PutDashboardOutput struct {
 	_ struct{} `type:"structure"`
@@ -3100,6 +3929,17 @@ func (s PutDashboardOutput) SDKResponseMetadata() aws.Response {
 func (s *PutDashboardOutput) SetDashboardValidationMessages(v []DashboardValidationMessage) *PutDashboardOutput {
 	s.DashboardValidationMessages = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutDashboardOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DashboardValidationMessages) > 0 {
+		v := s.DashboardValidationMessages
+
+		e.SetList(protocol.BodyTarget, "DashboardValidationMessages", encodeDashboardValidationMessageList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput
@@ -3422,6 +4262,102 @@ func (s *PutMetricAlarmInput) SetUnit(v StandardUnit) *PutMetricAlarmInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutMetricAlarmInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ActionsEnabled != nil {
+		v := *s.ActionsEnabled
+
+		e.SetValue(protocol.BodyTarget, "ActionsEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.AlarmActions) > 0 {
+		v := s.AlarmActions
+
+		e.SetList(protocol.BodyTarget, "AlarmActions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.AlarmDescription != nil {
+		v := *s.AlarmDescription
+
+		e.SetValue(protocol.BodyTarget, "AlarmDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AlarmName != nil {
+		v := *s.AlarmName
+
+		e.SetValue(protocol.BodyTarget, "AlarmName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ComparisonOperator) > 0 {
+		v := s.ComparisonOperator
+
+		e.SetValue(protocol.BodyTarget, "ComparisonOperator", v, protocol.Metadata{})
+	}
+	if len(s.Dimensions) > 0 {
+		v := s.Dimensions
+
+		e.SetList(protocol.BodyTarget, "Dimensions", encodeDimensionList(v), protocol.Metadata{})
+	}
+	if s.EvaluateLowSampleCountPercentile != nil {
+		v := *s.EvaluateLowSampleCountPercentile
+
+		e.SetValue(protocol.BodyTarget, "EvaluateLowSampleCountPercentile", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EvaluationPeriods != nil {
+		v := *s.EvaluationPeriods
+
+		e.SetValue(protocol.BodyTarget, "EvaluationPeriods", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.ExtendedStatistic != nil {
+		v := *s.ExtendedStatistic
+
+		e.SetValue(protocol.BodyTarget, "ExtendedStatistic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InsufficientDataActions) > 0 {
+		v := s.InsufficientDataActions
+
+		e.SetList(protocol.BodyTarget, "InsufficientDataActions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MetricName != nil {
+		v := *s.MetricName
+
+		e.SetValue(protocol.BodyTarget, "MetricName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.OKActions) > 0 {
+		v := s.OKActions
+
+		e.SetList(protocol.BodyTarget, "OKActions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Period != nil {
+		v := *s.Period
+
+		e.SetValue(protocol.BodyTarget, "Period", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.Statistic) > 0 {
+		v := s.Statistic
+
+		e.SetValue(protocol.BodyTarget, "Statistic", v, protocol.Metadata{})
+	}
+	if s.Threshold != nil {
+		v := *s.Threshold
+
+		e.SetValue(protocol.BodyTarget, "Threshold", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.TreatMissingData != nil {
+		v := *s.TreatMissingData
+
+		e.SetValue(protocol.BodyTarget, "TreatMissingData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		e.SetValue(protocol.BodyTarget, "Unit", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmOutput
 type PutMetricAlarmOutput struct {
 	_ struct{} `type:"structure"`
@@ -3442,6 +4378,12 @@ func (s PutMetricAlarmOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutMetricAlarmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutMetricAlarmOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataInput
@@ -3512,6 +4454,22 @@ func (s *PutMetricDataInput) SetNamespace(v string) *PutMetricDataInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.MetricData) > 0 {
+		v := s.MetricData
+
+		e.SetList(protocol.BodyTarget, "MetricData", encodeMetricDatumList(v), protocol.Metadata{})
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		e.SetValue(protocol.BodyTarget, "Namespace", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataOutput
 type PutMetricDataOutput struct {
 	_ struct{} `type:"structure"`
@@ -3532,6 +4490,12 @@ func (s PutMetricDataOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutMetricDataOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutMetricDataOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmStateInput
@@ -3616,6 +4580,32 @@ func (s *SetAlarmStateInput) SetStateValue(v StateValue) *SetAlarmStateInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetAlarmStateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AlarmName != nil {
+		v := *s.AlarmName
+
+		e.SetValue(protocol.BodyTarget, "AlarmName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StateReason != nil {
+		v := *s.StateReason
+
+		e.SetValue(protocol.BodyTarget, "StateReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StateReasonData != nil {
+		v := *s.StateReasonData
+
+		e.SetValue(protocol.BodyTarget, "StateReasonData", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StateValue) > 0 {
+		v := s.StateValue
+
+		e.SetValue(protocol.BodyTarget, "StateValue", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmStateOutput
 type SetAlarmStateOutput struct {
 	_ struct{} `type:"structure"`
@@ -3636,6 +4626,12 @@ func (s SetAlarmStateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetAlarmStateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetAlarmStateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a set of statistics that describes a specific metric.
@@ -3724,6 +4720,32 @@ func (s *StatisticSet) SetSum(v float64) *StatisticSet {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StatisticSet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Maximum != nil {
+		v := *s.Maximum
+
+		e.SetValue(protocol.BodyTarget, "Maximum", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Minimum != nil {
+		v := *s.Minimum
+
+		e.SetValue(protocol.BodyTarget, "Minimum", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.SampleCount != nil {
+		v := *s.SampleCount
+
+		e.SetValue(protocol.BodyTarget, "SampleCount", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.Sum != nil {
+		v := *s.Sum
+
+		e.SetValue(protocol.BodyTarget, "Sum", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -3734,6 +4756,15 @@ const (
 	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HistoryItemType string
 
 // Enum values for HistoryItemType
@@ -3742,6 +4773,15 @@ const (
 	HistoryItemTypeStateUpdate         HistoryItemType = "StateUpdate"
 	HistoryItemTypeAction              HistoryItemType = "Action"
 )
+
+func (enum HistoryItemType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HistoryItemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StandardUnit string
 
@@ -3776,6 +4816,15 @@ const (
 	StandardUnitNone            StandardUnit = "None"
 )
 
+func (enum StandardUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StandardUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StateValue string
 
 // Enum values for StateValue
@@ -3784,6 +4833,23 @@ const (
 	StateValueAlarm            StateValue = "ALARM"
 	StateValueInsufficientData StateValue = "INSUFFICIENT_DATA"
 )
+
+func (enum StateValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StateValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeStatisticList(vs []Statistic) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type Statistic string
 
@@ -3795,3 +4861,12 @@ const (
 	StatisticMinimum     Statistic = "Minimum"
 	StatisticMaximum     Statistic = "Maximum"
 )
+
+func (enum Statistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Statistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

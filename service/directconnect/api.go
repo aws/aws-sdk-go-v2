@@ -6702,6 +6702,15 @@ const (
 	AddressFamilyIpv6 AddressFamily = "ipv6"
 )
 
+func (enum AddressFamily) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AddressFamily) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The state of the BGP peer.
 //
 //    * Verifying: The BGP peering addresses or ASN require validation before
@@ -6727,6 +6736,15 @@ const (
 	BGPPeerStateDeleted   BGPPeerState = "deleted"
 )
 
+func (enum BGPPeerState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BGPPeerState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The Up/Down state of the BGP peer.
 //
 //    * Up: The BGP peer is established.
@@ -6739,6 +6757,15 @@ const (
 	BGPStatusUp   BGPStatus = "up"
 	BGPStatusDown BGPStatus = "down"
 )
+
+func (enum BGPStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BGPStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // State of the connection.
 //
@@ -6776,6 +6803,15 @@ const (
 	ConnectionStateRejected  ConnectionState = "rejected"
 )
 
+func (enum ConnectionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // State of the interconnect.
 //
 //    * Requested: The initial state of an interconnect. The interconnect stays
@@ -6804,6 +6840,15 @@ const (
 	InterconnectStateDeleted   InterconnectState = "deleted"
 )
 
+func (enum InterconnectState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InterconnectState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The state of the LAG.
 //
 //    * Requested: The initial state of a LAG. The LAG stays in the requested
@@ -6831,6 +6876,15 @@ const (
 	LagStateDeleted   LagState = "deleted"
 )
 
+func (enum LagState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LagState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // A standard media type indicating the content type of the LOA-CFA document.
 // Currently, the only supported value is "application/pdf".
 //
@@ -6841,6 +6895,15 @@ type LoaContentType string
 const (
 	LoaContentTypeApplicationPdf LoaContentType = "application/pdf"
 )
+
+func (enum LoaContentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoaContentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // State of the virtual interface.
 //
@@ -6883,3 +6946,12 @@ const (
 	VirtualInterfaceStateDeleted    VirtualInterfaceState = "deleted"
 	VirtualInterfaceStateRejected   VirtualInterfaceState = "rejected"
 )
+
+func (enum VirtualInterfaceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualInterfaceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

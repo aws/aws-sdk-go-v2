@@ -4224,6 +4224,15 @@ const (
 	CompressionFormatSnappy       CompressionFormat = "Snappy"
 )
 
+func (enum CompressionFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CompressionFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStreamStatus string
 
 // Enum values for DeliveryStreamStatus
@@ -4233,6 +4242,15 @@ const (
 	DeliveryStreamStatusActive   DeliveryStreamStatus = "ACTIVE"
 )
 
+func (enum DeliveryStreamStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStreamStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStreamType string
 
 // Enum values for DeliveryStreamType
@@ -4240,6 +4258,15 @@ const (
 	DeliveryStreamTypeDirectPut             DeliveryStreamType = "DirectPut"
 	DeliveryStreamTypeKinesisStreamAsSource DeliveryStreamType = "KinesisStreamAsSource"
 )
+
+func (enum DeliveryStreamType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStreamType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ElasticsearchIndexRotationPeriod string
 
@@ -4252,6 +4279,15 @@ const (
 	ElasticsearchIndexRotationPeriodOneMonth   ElasticsearchIndexRotationPeriod = "OneMonth"
 )
 
+func (enum ElasticsearchIndexRotationPeriod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ElasticsearchIndexRotationPeriod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ElasticsearchS3BackupMode string
 
 // Enum values for ElasticsearchS3BackupMode
@@ -4260,12 +4296,30 @@ const (
 	ElasticsearchS3BackupModeAllDocuments        ElasticsearchS3BackupMode = "AllDocuments"
 )
 
+func (enum ElasticsearchS3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ElasticsearchS3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NoEncryptionConfig string
 
 // Enum values for NoEncryptionConfig
 const (
 	NoEncryptionConfigNoEncryption NoEncryptionConfig = "NoEncryption"
 )
+
+func (enum NoEncryptionConfig) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NoEncryptionConfig) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProcessorParameterName string
 
@@ -4275,12 +4329,30 @@ const (
 	ProcessorParameterNameNumberOfRetries ProcessorParameterName = "NumberOfRetries"
 )
 
+func (enum ProcessorParameterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessorParameterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProcessorType string
 
 // Enum values for ProcessorType
 const (
 	ProcessorTypeLambda ProcessorType = "Lambda"
 )
+
+func (enum ProcessorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RedshiftS3BackupMode string
 
@@ -4290,6 +4362,15 @@ const (
 	RedshiftS3BackupModeEnabled  RedshiftS3BackupMode = "Enabled"
 )
 
+func (enum RedshiftS3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RedshiftS3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type S3BackupMode string
 
 // Enum values for S3BackupMode
@@ -4297,3 +4378,12 @@ const (
 	S3BackupModeDisabled S3BackupMode = "Disabled"
 	S3BackupModeEnabled  S3BackupMode = "Enabled"
 )
+
+func (enum S3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

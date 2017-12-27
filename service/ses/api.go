@@ -3155,6 +3155,22 @@ func (s *AddHeaderAction) SetHeaderValue(v string) *AddHeaderAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AddHeaderAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.HeaderName != nil {
+		v := *s.HeaderName
+
+		e.SetValue(protocol.BodyTarget, "HeaderName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.HeaderValue != nil {
+		v := *s.HeaderValue
+
+		e.SetValue(protocol.BodyTarget, "HeaderValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the body of the message. You can specify text, HTML, or both.
 // If you use both, then the message should display correctly in the widest
 // variety of email clients.
@@ -3212,6 +3228,22 @@ func (s *Body) SetHtml(v *Content) *Body {
 func (s *Body) SetText(v *Content) *Body {
 	s.Text = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Body) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Html != nil {
+		v := s.Html
+
+		e.SetFields(protocol.BodyTarget, "Html", v, protocol.Metadata{})
+	}
+	if s.Text != nil {
+		v := s.Text
+
+		e.SetFields(protocol.BodyTarget, "Text", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // When included in a receipt rule, this action rejects the received email by
@@ -3312,6 +3344,37 @@ func (s *BounceAction) SetTopicArn(v string) *BounceAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BounceAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Message != nil {
+		v := *s.Message
+
+		e.SetValue(protocol.BodyTarget, "Message", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Sender != nil {
+		v := *s.Sender
+
+		e.SetValue(protocol.BodyTarget, "Sender", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SmtpReplyCode != nil {
+		v := *s.SmtpReplyCode
+
+		e.SetValue(protocol.BodyTarget, "SmtpReplyCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StatusCode != nil {
+		v := *s.StatusCode
+
+		e.SetValue(protocol.BodyTarget, "StatusCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Recipient-related information to include in the Delivery Status Notification
 // (DSN) when an email that Amazon SES receives on your behalf bounces.
 //
@@ -3394,6 +3457,40 @@ func (s *BouncedRecipientInfo) SetRecipientDsnFields(v *RecipientDsnFields) *Bou
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *BouncedRecipientInfo) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.BounceType) > 0 {
+		v := s.BounceType
+
+		e.SetValue(protocol.BodyTarget, "BounceType", v, protocol.Metadata{})
+	}
+	if s.Recipient != nil {
+		v := *s.Recipient
+
+		e.SetValue(protocol.BodyTarget, "Recipient", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RecipientArn != nil {
+		v := *s.RecipientArn
+
+		e.SetValue(protocol.BodyTarget, "RecipientArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RecipientDsnFields != nil {
+		v := s.RecipientDsnFields
+
+		e.SetFields(protocol.BodyTarget, "RecipientDsnFields", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeBouncedRecipientInfoList(vs []BouncedRecipientInfo) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents a request to create a receipt rule set by cloning an existing
 // one. You use receipt rule sets to receive email with Amazon SES. For more
 // information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -3459,6 +3556,22 @@ func (s *CloneReceiptRuleSetInput) SetRuleSetName(v string) *CloneReceiptRuleSet
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CloneReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OriginalRuleSetName != nil {
+		v := *s.OriginalRuleSetName
+
+		e.SetValue(protocol.BodyTarget, "OriginalRuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSetResponse
 type CloneReceiptRuleSetOutput struct {
@@ -3480,6 +3593,12 @@ func (s CloneReceiptRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CloneReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CloneReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Contains information associated with an Amazon CloudWatch event destination
@@ -3534,6 +3653,17 @@ func (s *CloudWatchDestination) Validate() error {
 func (s *CloudWatchDestination) SetDimensionConfigurations(v []CloudWatchDimensionConfiguration) *CloudWatchDestination {
 	s.DimensionConfigurations = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CloudWatchDestination) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DimensionConfigurations) > 0 {
+		v := s.DimensionConfigurations
+
+		e.SetList(protocol.BodyTarget, "DimensionConfigurations", encodeCloudWatchDimensionConfigurationList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains the dimension configuration to use when you publish email sending
@@ -3627,6 +3757,35 @@ func (s *CloudWatchDimensionConfiguration) SetDimensionValueSource(v DimensionVa
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CloudWatchDimensionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultDimensionValue != nil {
+		v := *s.DefaultDimensionValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultDimensionValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DimensionName != nil {
+		v := *s.DimensionName
+
+		e.SetValue(protocol.BodyTarget, "DimensionName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DimensionValueSource) > 0 {
+		v := s.DimensionValueSource
+
+		e.SetValue(protocol.BodyTarget, "DimensionValueSource", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCloudWatchDimensionConfigurationList(vs []CloudWatchDimensionConfiguration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The name of the configuration set.
 //
 // Configuration sets let you create groups of rules that you can apply to the
@@ -3676,6 +3835,25 @@ func (s *ConfigurationSet) Validate() error {
 func (s *ConfigurationSet) SetName(v string) *ConfigurationSet {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ConfigurationSet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeConfigurationSetList(vs []ConfigurationSet) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents textual data, plus an optional character set specification.
@@ -3730,6 +3908,22 @@ func (s *Content) SetCharset(v string) *Content {
 func (s *Content) SetData(v string) *Content {
 	s.Data = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Content) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Charset != nil {
+		v := *s.Charset
+
+		e.SetValue(protocol.BodyTarget, "Charset", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Data != nil {
+		v := *s.Data
+
+		e.SetValue(protocol.BodyTarget, "Data", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to create a configuration set event destination. A configuration
@@ -3799,6 +3993,22 @@ func (s *CreateConfigurationSetEventDestinationInput) SetEventDestination(v *Eve
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EventDestination != nil {
+		v := s.EventDestination
+
+		e.SetFields(protocol.BodyTarget, "EventDestination", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestinationResponse
 type CreateConfigurationSetEventDestinationOutput struct {
@@ -3820,6 +4030,12 @@ func (s CreateConfigurationSetEventDestinationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateConfigurationSetEventDestinationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to create a configuration set. Configuration sets enable
@@ -3870,6 +4086,17 @@ func (s *CreateConfigurationSetInput) SetConfigurationSet(v *ConfigurationSet) *
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSet != nil {
+		v := s.ConfigurationSet
+
+		e.SetFields(protocol.BodyTarget, "ConfigurationSet", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetResponse
 type CreateConfigurationSetOutput struct {
@@ -3891,6 +4118,12 @@ func (s CreateConfigurationSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateConfigurationSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to create an open and click tracking option object in
@@ -3957,6 +4190,22 @@ func (s *CreateConfigurationSetTrackingOptionsInput) SetTrackingOptions(v *Track
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationSetTrackingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TrackingOptions != nil {
+		v := s.TrackingOptions
+
+		e.SetFields(protocol.BodyTarget, "TrackingOptions", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetTrackingOptionsResponse
 type CreateConfigurationSetTrackingOptionsOutput struct {
@@ -3978,6 +4227,12 @@ func (s CreateConfigurationSetTrackingOptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateConfigurationSetTrackingOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateConfigurationSetTrackingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to create a new IP address filter. You use IP address
@@ -4029,6 +4284,17 @@ func (s *CreateReceiptFilterInput) SetFilter(v *ReceiptFilter) *CreateReceiptFil
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReceiptFilterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Filter != nil {
+		v := s.Filter
+
+		e.SetFields(protocol.BodyTarget, "Filter", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilterResponse
 type CreateReceiptFilterOutput struct {
@@ -4050,6 +4316,12 @@ func (s CreateReceiptFilterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReceiptFilterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReceiptFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to create a receipt rule. You use receipt rules to receive
@@ -4127,6 +4399,27 @@ func (s *CreateReceiptRuleInput) SetRuleSetName(v string) *CreateReceiptRuleInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReceiptRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.After != nil {
+		v := *s.After
+
+		e.SetValue(protocol.BodyTarget, "After", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Rule != nil {
+		v := s.Rule
+
+		e.SetFields(protocol.BodyTarget, "Rule", v, protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleResponse
 type CreateReceiptRuleOutput struct {
@@ -4148,6 +4441,12 @@ func (s CreateReceiptRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReceiptRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReceiptRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to create an empty receipt rule set. You use receipt
@@ -4200,6 +4499,17 @@ func (s *CreateReceiptRuleSetInput) SetRuleSetName(v string) *CreateReceiptRuleS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetResponse
 type CreateReceiptRuleSetOutput struct {
@@ -4221,6 +4531,12 @@ func (s CreateReceiptRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete a configuration set event destination. Configuration
@@ -4282,6 +4598,22 @@ func (s *DeleteConfigurationSetEventDestinationInput) SetEventDestinationName(v 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EventDestinationName != nil {
+		v := *s.EventDestinationName
+
+		e.SetValue(protocol.BodyTarget, "EventDestinationName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestinationResponse
 type DeleteConfigurationSetEventDestinationOutput struct {
@@ -4303,6 +4635,12 @@ func (s DeleteConfigurationSetEventDestinationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteConfigurationSetEventDestinationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete a configuration set. Configuration sets enable
@@ -4348,6 +4686,17 @@ func (s *DeleteConfigurationSetInput) SetConfigurationSetName(v string) *DeleteC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetResponse
 type DeleteConfigurationSetOutput struct {
@@ -4369,6 +4718,12 @@ func (s DeleteConfigurationSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteConfigurationSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete open and click tracking options in a configuration
@@ -4414,6 +4769,17 @@ func (s *DeleteConfigurationSetTrackingOptionsInput) SetConfigurationSetName(v s
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationSetTrackingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsResponse
 type DeleteConfigurationSetTrackingOptionsOutput struct {
@@ -4435,6 +4801,12 @@ func (s DeleteConfigurationSetTrackingOptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteConfigurationSetTrackingOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteConfigurationSetTrackingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete one of your Amazon SES identities (an email
@@ -4479,6 +4851,17 @@ func (s *DeleteIdentityInput) SetIdentity(v string) *DeleteIdentityInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityResponse
 type DeleteIdentityOutput struct {
@@ -4500,6 +4883,12 @@ func (s DeleteIdentityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteIdentityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete a sending authorization policy for an identity.
@@ -4568,6 +4957,22 @@ func (s *DeleteIdentityPolicyInput) SetPolicyName(v string) *DeleteIdentityPolic
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteIdentityPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicyResponse
 type DeleteIdentityPolicyOutput struct {
@@ -4589,6 +4994,12 @@ func (s DeleteIdentityPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteIdentityPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteIdentityPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete an IP address filter. You use IP address filters
@@ -4634,6 +5045,17 @@ func (s *DeleteReceiptFilterInput) SetFilterName(v string) *DeleteReceiptFilterI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReceiptFilterInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FilterName != nil {
+		v := *s.FilterName
+
+		e.SetValue(protocol.BodyTarget, "FilterName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilterResponse
 type DeleteReceiptFilterOutput struct {
@@ -4655,6 +5077,12 @@ func (s DeleteReceiptFilterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteReceiptFilterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReceiptFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete a receipt rule. You use receipt rules to receive
@@ -4715,6 +5143,22 @@ func (s *DeleteReceiptRuleInput) SetRuleSetName(v string) *DeleteReceiptRuleInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReceiptRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleResponse
 type DeleteReceiptRuleOutput struct {
@@ -4736,6 +5180,12 @@ func (s DeleteReceiptRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteReceiptRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReceiptRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete a receipt rule set and all of the receipt
@@ -4781,6 +5231,17 @@ func (s *DeleteReceiptRuleSetInput) SetRuleSetName(v string) *DeleteReceiptRuleS
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSetResponse
 type DeleteReceiptRuleSetOutput struct {
@@ -4802,6 +5263,12 @@ func (s DeleteReceiptRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to delete an email address from the list of email addresses
@@ -4846,6 +5313,17 @@ func (s *DeleteVerifiedEmailAddressInput) SetEmailAddress(v string) *DeleteVerif
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteVerifiedEmailAddressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EmailAddress != nil {
+		v := *s.EmailAddress
+
+		e.SetValue(protocol.BodyTarget, "EmailAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddressOutput
 type DeleteVerifiedEmailAddressOutput struct {
 	_ struct{} `type:"structure"`
@@ -4868,6 +5346,12 @@ func (s DeleteVerifiedEmailAddressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteVerifiedEmailAddressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
 // Represents a request to return the metadata and receipt rules for the receipt
 // rule set that is currently active. You use receipt rule sets to receive email
 // with Amazon SES. For more information, see the Amazon SES Developer Guide
@@ -4885,6 +5369,12 @@ func (s DescribeActiveReceiptRuleSetInput) String() string {
 // GoString returns the string representation
 func (s DescribeActiveReceiptRuleSetInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeActiveReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents the metadata and receipt rules for the receipt rule set that is
@@ -4928,6 +5418,22 @@ func (s *DescribeActiveReceiptRuleSetOutput) SetMetadata(v *ReceiptRuleSetMetada
 func (s *DescribeActiveReceiptRuleSetOutput) SetRules(v []ReceiptRule) *DescribeActiveReceiptRuleSetOutput {
 	s.Rules = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeActiveReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Metadata != nil {
+		v := s.Metadata
+
+		e.SetFields(protocol.BodyTarget, "Metadata", v, protocol.Metadata{})
+	}
+	if len(s.Rules) > 0 {
+		v := s.Rules
+
+		e.SetList(protocol.BodyTarget, "Rules", encodeReceiptRuleList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the details of a configuration set. Configuration
@@ -4982,6 +5488,27 @@ func (s *DescribeConfigurationSetInput) SetConfigurationSetName(v string) *Descr
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ConfigurationSetAttributeNames) > 0 {
+		v := s.ConfigurationSetAttributeNames
+
+		e.SetList(protocol.BodyTarget, "ConfigurationSetAttributeNames", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the details of a configuration set. Configuration sets enable
 // you to publish email sending events. For information about using configuration
 // sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
@@ -5034,6 +5561,27 @@ func (s *DescribeConfigurationSetOutput) SetEventDestinations(v []EventDestinati
 func (s *DescribeConfigurationSetOutput) SetTrackingOptions(v *TrackingOptions) *DescribeConfigurationSetOutput {
 	s.TrackingOptions = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSet != nil {
+		v := s.ConfigurationSet
+
+		e.SetFields(protocol.BodyTarget, "ConfigurationSet", v, protocol.Metadata{})
+	}
+	if len(s.EventDestinations) > 0 {
+		v := s.EventDestinations
+
+		e.SetList(protocol.BodyTarget, "EventDestinations", encodeEventDestinationList(v), protocol.Metadata{})
+	}
+	if s.TrackingOptions != nil {
+		v := s.TrackingOptions
+
+		e.SetFields(protocol.BodyTarget, "TrackingOptions", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the details of a receipt rule. You use receipt
@@ -5094,6 +5642,22 @@ func (s *DescribeReceiptRuleInput) SetRuleSetName(v string) *DescribeReceiptRule
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReceiptRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the details of a receipt rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleResponse
 type DescribeReceiptRuleOutput struct {
@@ -5126,6 +5690,17 @@ func (s DescribeReceiptRuleOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeReceiptRuleOutput) SetRule(v *ReceiptRule) *DescribeReceiptRuleOutput {
 	s.Rule = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReceiptRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Rule != nil {
+		v := s.Rule
+
+		e.SetFields(protocol.BodyTarget, "Rule", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the details of a receipt rule set. You use
@@ -5171,6 +5746,17 @@ func (s *DescribeReceiptRuleSetInput) SetRuleSetName(v string) *DescribeReceiptR
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the details of the specified receipt rule set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSetResponse
 type DescribeReceiptRuleSetOutput struct {
@@ -5211,6 +5797,22 @@ func (s *DescribeReceiptRuleSetOutput) SetMetadata(v *ReceiptRuleSetMetadata) *D
 func (s *DescribeReceiptRuleSetOutput) SetRules(v []ReceiptRule) *DescribeReceiptRuleSetOutput {
 	s.Rules = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Metadata != nil {
+		v := s.Metadata
+
+		e.SetFields(protocol.BodyTarget, "Metadata", v, protocol.Metadata{})
+	}
+	if len(s.Rules) > 0 {
+		v := s.Rules
+
+		e.SetList(protocol.BodyTarget, "Rules", encodeReceiptRuleList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the destination of the message, consisting of To:, CC:, and BCC:
@@ -5260,6 +5862,27 @@ func (s *Destination) SetCcAddresses(v []string) *Destination {
 func (s *Destination) SetToAddresses(v []string) *Destination {
 	s.ToAddresses = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Destination) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.BccAddresses) > 0 {
+		v := s.BccAddresses
+
+		e.SetList(protocol.BodyTarget, "BccAddresses", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.CcAddresses) > 0 {
+		v := s.CcAddresses
+
+		e.SetList(protocol.BodyTarget, "CcAddresses", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.ToAddresses) > 0 {
+		v := s.ToAddresses
+
+		e.SetList(protocol.BodyTarget, "ToAddresses", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Contains information about the event destination that the specified email
@@ -5390,6 +6013,55 @@ func (s *EventDestination) SetSNSDestination(v *SNSDestination) *EventDestinatio
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EventDestination) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CloudWatchDestination != nil {
+		v := s.CloudWatchDestination
+
+		e.SetFields(protocol.BodyTarget, "CloudWatchDestination", v, protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.KinesisFirehoseDestination != nil {
+		v := s.KinesisFirehoseDestination
+
+		e.SetFields(protocol.BodyTarget, "KinesisFirehoseDestination", v, protocol.Metadata{})
+	}
+	if len(s.MatchingEventTypes) > 0 {
+		v := s.MatchingEventTypes
+
+		e.SetList(protocol.BodyTarget, "MatchingEventTypes", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SNSDestination != nil {
+		v := s.SNSDestination
+
+		e.SetFields(protocol.BodyTarget, "SNSDestination", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeEventDestinationList(vs []EventDestination) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Additional X-headers to include in the Delivery Status Notification (DSN)
 // when an email that Amazon SES receives on your behalf bounces.
 //
@@ -5452,6 +6124,30 @@ func (s *ExtensionField) SetValue(v string) *ExtensionField {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExtensionField) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeExtensionFieldList(vs []ExtensionField) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Represents a request for the status of Amazon SES Easy DKIM signing for an
 // identity. For domain identities, this request also returns the DKIM tokens
 // that are required for Easy DKIM signing, and whether Amazon SES successfully
@@ -5498,6 +6194,17 @@ func (s *GetIdentityDkimAttributesInput) SetIdentities(v []string) *GetIdentityD
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityDkimAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Identities) > 0 {
+		v := s.Identities
+
+		e.SetList(protocol.BodyTarget, "Identities", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the status of Amazon SES Easy DKIM signing for an identity. For
 // domain identities, this response also contains the DKIM tokens that are required
 // for Easy DKIM signing, and whether Amazon SES successfully verified that
@@ -5533,6 +6240,17 @@ func (s GetIdentityDkimAttributesOutput) SDKResponseMetadata() aws.Response {
 func (s *GetIdentityDkimAttributesOutput) SetDkimAttributes(v map[string]IdentityDkimAttributes) *GetIdentityDkimAttributesOutput {
 	s.DkimAttributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityDkimAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DkimAttributes) > 0 {
+		v := s.DkimAttributes
+
+		e.SetMap(protocol.BodyTarget, "DkimAttributes", encodeIdentityDkimAttributesMap(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the Amazon SES custom MAIL FROM attributes
@@ -5578,6 +6296,17 @@ func (s *GetIdentityMailFromDomainAttributesInput) SetIdentities(v []string) *Ge
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityMailFromDomainAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Identities) > 0 {
+		v := s.Identities
+
+		e.SetList(protocol.BodyTarget, "Identities", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the custom MAIL FROM attributes for a list of identities.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributesResponse
 type GetIdentityMailFromDomainAttributesOutput struct {
@@ -5610,6 +6339,17 @@ func (s GetIdentityMailFromDomainAttributesOutput) SDKResponseMetadata() aws.Res
 func (s *GetIdentityMailFromDomainAttributesOutput) SetMailFromDomainAttributes(v map[string]IdentityMailFromDomainAttributes) *GetIdentityMailFromDomainAttributesOutput {
 	s.MailFromDomainAttributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityMailFromDomainAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.MailFromDomainAttributes) > 0 {
+		v := s.MailFromDomainAttributes
+
+		e.SetMap(protocol.BodyTarget, "MailFromDomainAttributes", encodeIdentityMailFromDomainAttributesMap(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the notification attributes for a list of
@@ -5657,6 +6397,17 @@ func (s *GetIdentityNotificationAttributesInput) SetIdentities(v []string) *GetI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityNotificationAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Identities) > 0 {
+		v := s.Identities
+
+		e.SetList(protocol.BodyTarget, "Identities", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the notification attributes for a list of identities.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesResponse
 type GetIdentityNotificationAttributesOutput struct {
@@ -5689,6 +6440,17 @@ func (s GetIdentityNotificationAttributesOutput) SDKResponseMetadata() aws.Respo
 func (s *GetIdentityNotificationAttributesOutput) SetNotificationAttributes(v map[string]IdentityNotificationAttributes) *GetIdentityNotificationAttributesOutput {
 	s.NotificationAttributes = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityNotificationAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.NotificationAttributes) > 0 {
+		v := s.NotificationAttributes
+
+		e.SetMap(protocol.BodyTarget, "NotificationAttributes", encodeIdentityNotificationAttributesMap(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the requested sending authorization policies
@@ -5756,6 +6518,22 @@ func (s *GetIdentityPoliciesInput) SetPolicyNames(v []string) *GetIdentityPolici
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents the requested sending authorization policies.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPoliciesResponse
 type GetIdentityPoliciesOutput struct {
@@ -5788,6 +6566,17 @@ func (s GetIdentityPoliciesOutput) SDKResponseMetadata() aws.Response {
 func (s *GetIdentityPoliciesOutput) SetPolicies(v map[string]string) *GetIdentityPoliciesOutput {
 	s.Policies = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Policies) > 0 {
+		v := s.Policies
+
+		e.SetMap(protocol.BodyTarget, "Policies", protocol.EncodeStringMap(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return the Amazon SES verification status of a list
@@ -5834,6 +6623,17 @@ func (s *GetIdentityVerificationAttributesInput) SetIdentities(v []string) *GetI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityVerificationAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Identities) > 0 {
+		v := s.Identities
+
+		e.SetList(protocol.BodyTarget, "Identities", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The Amazon SES verification status of a list of identities. For domain identities,
 // this response also contains the verification token.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributesResponse
@@ -5869,6 +6669,17 @@ func (s *GetIdentityVerificationAttributesOutput) SetVerificationAttributes(v ma
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetIdentityVerificationAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.VerificationAttributes) > 0 {
+		v := s.VerificationAttributes
+
+		e.SetMap(protocol.BodyTarget, "VerificationAttributes", encodeIdentityVerificationAttributesMap(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuotaInput
 type GetSendQuotaInput struct {
 	_ struct{} `type:"structure"`
@@ -5882,6 +6693,12 @@ func (s GetSendQuotaInput) String() string {
 // GoString returns the string representation
 func (s GetSendQuotaInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSendQuotaInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents your Amazon SES daily sending quota, maximum send rate, and the
@@ -5940,6 +6757,27 @@ func (s *GetSendQuotaOutput) SetSentLast24Hours(v float64) *GetSendQuotaOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSendQuotaOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Max24HourSend != nil {
+		v := *s.Max24HourSend
+
+		e.SetValue(protocol.BodyTarget, "Max24HourSend", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.MaxSendRate != nil {
+		v := *s.MaxSendRate
+
+		e.SetValue(protocol.BodyTarget, "MaxSendRate", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	if s.SentLast24Hours != nil {
+		v := *s.SentLast24Hours
+
+		e.SetValue(protocol.BodyTarget, "SentLast24Hours", protocol.Float64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendStatisticsInput
 type GetSendStatisticsInput struct {
 	_ struct{} `type:"structure"`
@@ -5953,6 +6791,12 @@ func (s GetSendStatisticsInput) String() string {
 // GoString returns the string representation
 func (s GetSendStatisticsInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSendStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a list of data points. This list contains aggregated data from
@@ -5986,6 +6830,17 @@ func (s GetSendStatisticsOutput) SDKResponseMetadata() aws.Response {
 func (s *GetSendStatisticsOutput) SetSendDataPoints(v []SendDataPoint) *GetSendStatisticsOutput {
 	s.SendDataPoints = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetSendStatisticsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SendDataPoints) > 0 {
+		v := s.SendDataPoints
+
+		e.SetList(protocol.BodyTarget, "SendDataPoints", encodeSendDataPointList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the DKIM attributes of a verified email address or a domain.
@@ -6045,6 +6900,35 @@ func (s *IdentityDkimAttributes) SetDkimTokens(v []string) *IdentityDkimAttribut
 func (s *IdentityDkimAttributes) SetDkimVerificationStatus(v VerificationStatus) *IdentityDkimAttributes {
 	s.DkimVerificationStatus = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IdentityDkimAttributes) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DkimEnabled != nil {
+		v := *s.DkimEnabled
+
+		e.SetValue(protocol.BodyTarget, "DkimEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.DkimTokens) > 0 {
+		v := s.DkimTokens
+
+		e.SetList(protocol.BodyTarget, "DkimTokens", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.DkimVerificationStatus) > 0 {
+		v := s.DkimVerificationStatus
+
+		e.SetValue(protocol.BodyTarget, "DkimVerificationStatus", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeIdentityDkimAttributesMap(vs map[string]IdentityDkimAttributes) func(protocol.MapEncoder) {
+	return func(me protocol.MapEncoder) {
+		for k, v := range vs {
+			me.MapSetFields(k, &v)
+		}
+	}
 }
 
 // Represents the custom MAIL FROM domain attributes of a verified identity
@@ -6107,6 +6991,35 @@ func (s *IdentityMailFromDomainAttributes) SetMailFromDomain(v string) *Identity
 func (s *IdentityMailFromDomainAttributes) SetMailFromDomainStatus(v CustomMailFromStatus) *IdentityMailFromDomainAttributes {
 	s.MailFromDomainStatus = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IdentityMailFromDomainAttributes) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.BehaviorOnMXFailure) > 0 {
+		v := s.BehaviorOnMXFailure
+
+		e.SetValue(protocol.BodyTarget, "BehaviorOnMXFailure", v, protocol.Metadata{})
+	}
+	if s.MailFromDomain != nil {
+		v := *s.MailFromDomain
+
+		e.SetValue(protocol.BodyTarget, "MailFromDomain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.MailFromDomainStatus) > 0 {
+		v := s.MailFromDomainStatus
+
+		e.SetValue(protocol.BodyTarget, "MailFromDomainStatus", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeIdentityMailFromDomainAttributesMap(vs map[string]IdentityMailFromDomainAttributes) func(protocol.MapEncoder) {
+	return func(me protocol.MapEncoder) {
+		for k, v := range vs {
+			me.MapSetFields(k, &v)
+		}
+	}
 }
 
 // Represents the notification attributes of an identity, including whether
@@ -6214,6 +7127,55 @@ func (s *IdentityNotificationAttributes) SetHeadersInDeliveryNotificationsEnable
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IdentityNotificationAttributes) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BounceTopic != nil {
+		v := *s.BounceTopic
+
+		e.SetValue(protocol.BodyTarget, "BounceTopic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ComplaintTopic != nil {
+		v := *s.ComplaintTopic
+
+		e.SetValue(protocol.BodyTarget, "ComplaintTopic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DeliveryTopic != nil {
+		v := *s.DeliveryTopic
+
+		e.SetValue(protocol.BodyTarget, "DeliveryTopic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ForwardingEnabled != nil {
+		v := *s.ForwardingEnabled
+
+		e.SetValue(protocol.BodyTarget, "ForwardingEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HeadersInBounceNotificationsEnabled != nil {
+		v := *s.HeadersInBounceNotificationsEnabled
+
+		e.SetValue(protocol.BodyTarget, "HeadersInBounceNotificationsEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HeadersInComplaintNotificationsEnabled != nil {
+		v := *s.HeadersInComplaintNotificationsEnabled
+
+		e.SetValue(protocol.BodyTarget, "HeadersInComplaintNotificationsEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.HeadersInDeliveryNotificationsEnabled != nil {
+		v := *s.HeadersInDeliveryNotificationsEnabled
+
+		e.SetValue(protocol.BodyTarget, "HeadersInDeliveryNotificationsEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeIdentityNotificationAttributesMap(vs map[string]IdentityNotificationAttributes) func(protocol.MapEncoder) {
+	return func(me protocol.MapEncoder) {
+		for k, v := range vs {
+			me.MapSetFields(k, &v)
+		}
+	}
+}
+
 // Represents the verification attributes of a single identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityVerificationAttributes
 type IdentityVerificationAttributes struct {
@@ -6249,6 +7211,30 @@ func (s *IdentityVerificationAttributes) SetVerificationStatus(v VerificationSta
 func (s *IdentityVerificationAttributes) SetVerificationToken(v string) *IdentityVerificationAttributes {
 	s.VerificationToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *IdentityVerificationAttributes) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.VerificationStatus) > 0 {
+		v := s.VerificationStatus
+
+		e.SetValue(protocol.BodyTarget, "VerificationStatus", v, protocol.Metadata{})
+	}
+	if s.VerificationToken != nil {
+		v := *s.VerificationToken
+
+		e.SetValue(protocol.BodyTarget, "VerificationToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeIdentityVerificationAttributesMap(vs map[string]IdentityVerificationAttributes) func(protocol.MapEncoder) {
+	return func(me protocol.MapEncoder) {
+		for k, v := range vs {
+			me.MapSetFields(k, &v)
+		}
+	}
 }
 
 // Contains the delivery stream ARN and the IAM role ARN associated with an
@@ -6313,6 +7299,22 @@ func (s *KinesisFirehoseDestination) SetDeliveryStreamARN(v string) *KinesisFire
 func (s *KinesisFirehoseDestination) SetIAMRoleARN(v string) *KinesisFirehoseDestination {
 	s.IAMRoleARN = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *KinesisFirehoseDestination) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DeliveryStreamARN != nil {
+		v := *s.DeliveryStreamARN
+
+		e.SetValue(protocol.BodyTarget, "DeliveryStreamARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.IAMRoleARN != nil {
+		v := *s.IAMRoleARN
+
+		e.SetValue(protocol.BodyTarget, "IAMRoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // When included in a receipt rule, this action calls an AWS Lambda function
@@ -6399,6 +7401,27 @@ func (s *LambdaAction) SetTopicArn(v string) *LambdaAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *LambdaAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FunctionArn != nil {
+		v := *s.FunctionArn
+
+		e.SetValue(protocol.BodyTarget, "FunctionArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.InvocationType) > 0 {
+		v := s.InvocationType
+
+		e.SetValue(protocol.BodyTarget, "InvocationType", v, protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to list the configuration sets associated with your
 // AWS account. Configuration sets enable you to publish email sending events.
 // For information about using configuration sets, see the Amazon SES Developer
@@ -6435,6 +7458,22 @@ func (s *ListConfigurationSetsInput) SetMaxItems(v int64) *ListConfigurationSets
 func (s *ListConfigurationSetsInput) SetNextToken(v string) *ListConfigurationSetsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListConfigurationSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // A list of configuration sets associated with your AWS account. Configuration
@@ -6479,6 +7518,22 @@ func (s *ListConfigurationSetsOutput) SetConfigurationSets(v []ConfigurationSet)
 func (s *ListConfigurationSetsOutput) SetNextToken(v string) *ListConfigurationSetsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListConfigurationSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ConfigurationSets) > 0 {
+		v := s.ConfigurationSets
+
+		e.SetList(protocol.BodyTarget, "ConfigurationSets", encodeConfigurationSetList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return a list of all identities (email addresses
@@ -6527,6 +7582,27 @@ func (s *ListIdentitiesInput) SetNextToken(v string) *ListIdentitiesInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListIdentitiesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.IdentityType) > 0 {
+		v := s.IdentityType
+
+		e.SetValue(protocol.BodyTarget, "IdentityType", v, protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A list of all identities that you have attempted to verify under your AWS
 // account, regardless of verification status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentitiesResponse
@@ -6569,6 +7645,22 @@ func (s *ListIdentitiesOutput) SetIdentities(v []string) *ListIdentitiesOutput {
 func (s *ListIdentitiesOutput) SetNextToken(v string) *ListIdentitiesOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListIdentitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Identities) > 0 {
+		v := s.Identities
+
+		e.SetList(protocol.BodyTarget, "Identities", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to return a list of sending authorization policies that
@@ -6619,6 +7711,17 @@ func (s *ListIdentityPoliciesInput) SetIdentity(v string) *ListIdentityPoliciesI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListIdentityPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A list of names of sending authorization policies that apply to an identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPoliciesResponse
 type ListIdentityPoliciesOutput struct {
@@ -6653,6 +7756,17 @@ func (s *ListIdentityPoliciesOutput) SetPolicyNames(v []string) *ListIdentityPol
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListIdentityPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PolicyNames) > 0 {
+		v := s.PolicyNames
+
+		e.SetList(protocol.BodyTarget, "PolicyNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to list the IP address filters that exist under your
 // AWS account. You use IP address filters when you receive email with Amazon
 // SES. For more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -6669,6 +7783,12 @@ func (s ListReceiptFiltersInput) String() string {
 // GoString returns the string representation
 func (s ListReceiptFiltersInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListReceiptFiltersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // A list of IP address filters that exist under your AWS account.
@@ -6704,6 +7824,17 @@ func (s *ListReceiptFiltersOutput) SetFilters(v []ReceiptFilter) *ListReceiptFil
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListReceiptFiltersOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		e.SetList(protocol.BodyTarget, "Filters", encodeReceiptFilterList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to list the receipt rule sets that exist under your
 // AWS account. You use receipt rule sets to receive email with Amazon SES.
 // For more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -6730,6 +7861,17 @@ func (s ListReceiptRuleSetsInput) GoString() string {
 func (s *ListReceiptRuleSetsInput) SetNextToken(v string) *ListReceiptRuleSetsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListReceiptRuleSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // A list of receipt rule sets that exist under your AWS account.
@@ -6776,6 +7918,22 @@ func (s *ListReceiptRuleSetsOutput) SetRuleSets(v []ReceiptRuleSetMetadata) *Lis
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListReceiptRuleSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RuleSets) > 0 {
+		v := s.RuleSets
+
+		e.SetList(protocol.BodyTarget, "RuleSets", encodeReceiptRuleSetMetadataList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddressesInput
 type ListVerifiedEmailAddressesInput struct {
 	_ struct{} `type:"structure"`
@@ -6789,6 +7947,12 @@ func (s ListVerifiedEmailAddressesInput) String() string {
 // GoString returns the string representation
 func (s ListVerifiedEmailAddressesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListVerifiedEmailAddressesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // A list of email addresses that you have verified with Amazon SES under your
@@ -6822,6 +7986,17 @@ func (s ListVerifiedEmailAddressesOutput) SDKResponseMetadata() aws.Response {
 func (s *ListVerifiedEmailAddressesOutput) SetVerifiedEmailAddresses(v []string) *ListVerifiedEmailAddressesOutput {
 	s.VerifiedEmailAddresses = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListVerifiedEmailAddressesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.VerifiedEmailAddresses) > 0 {
+		v := s.VerifiedEmailAddresses
+
+		e.SetList(protocol.BodyTarget, "VerifiedEmailAddresses", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents the message to be sent, composed of a subject and a body.
@@ -6889,6 +8064,22 @@ func (s *Message) SetBody(v *Body) *Message {
 func (s *Message) SetSubject(v *Content) *Message {
 	s.Subject = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Message) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Body != nil {
+		v := s.Body
+
+		e.SetFields(protocol.BodyTarget, "Body", v, protocol.Metadata{})
+	}
+	if s.Subject != nil {
+		v := s.Subject
+
+		e.SetFields(protocol.BodyTarget, "Subject", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Message-related information to include in the Delivery Status Notification
@@ -6964,6 +8155,27 @@ func (s *MessageDsn) SetReportingMta(v string) *MessageDsn {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MessageDsn) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ArrivalDate != nil {
+		v := *s.ArrivalDate
+
+		e.SetValue(protocol.BodyTarget, "ArrivalDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.ExtensionFields) > 0 {
+		v := s.ExtensionFields
+
+		e.SetList(protocol.BodyTarget, "ExtensionFields", encodeExtensionFieldList(v), protocol.Metadata{})
+	}
+	if s.ReportingMta != nil {
+		v := *s.ReportingMta
+
+		e.SetValue(protocol.BodyTarget, "ReportingMta", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the name and value of a tag that you can provide to SendEmail or
 // SendRawEmail to apply to an email.
 //
@@ -7033,6 +8245,30 @@ func (s *MessageTag) SetName(v string) *MessageTag {
 func (s *MessageTag) SetValue(v string) *MessageTag {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *MessageTag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeMessageTagList(vs []MessageTag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents a request to add or update a sending authorization policy for
@@ -7125,6 +8361,27 @@ func (s *PutIdentityPolicyInput) SetPolicyName(v string) *PutIdentityPolicyInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutIdentityPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Policy != nil {
+		v := *s.Policy
+
+		e.SetValue(protocol.BodyTarget, "Policy", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PolicyName != nil {
+		v := *s.PolicyName
+
+		e.SetValue(protocol.BodyTarget, "PolicyName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicyResponse
 type PutIdentityPolicyOutput struct {
@@ -7146,6 +8403,12 @@ func (s PutIdentityPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutIdentityPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *PutIdentityPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents the raw data of the message.
@@ -7205,6 +8468,17 @@ func (s *RawMessage) Validate() error {
 func (s *RawMessage) SetData(v []byte) *RawMessage {
 	s.Data = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RawMessage) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Data != nil {
+		v := s.Data
+
+		e.SetValue(protocol.BodyTarget, "Data", protocol.BytesValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // An action that Amazon SES can take when it receives an email on behalf of
@@ -7342,6 +8616,55 @@ func (s *ReceiptAction) SetWorkmailAction(v *WorkmailAction) *ReceiptAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiptAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AddHeaderAction != nil {
+		v := s.AddHeaderAction
+
+		e.SetFields(protocol.BodyTarget, "AddHeaderAction", v, protocol.Metadata{})
+	}
+	if s.BounceAction != nil {
+		v := s.BounceAction
+
+		e.SetFields(protocol.BodyTarget, "BounceAction", v, protocol.Metadata{})
+	}
+	if s.LambdaAction != nil {
+		v := s.LambdaAction
+
+		e.SetFields(protocol.BodyTarget, "LambdaAction", v, protocol.Metadata{})
+	}
+	if s.S3Action != nil {
+		v := s.S3Action
+
+		e.SetFields(protocol.BodyTarget, "S3Action", v, protocol.Metadata{})
+	}
+	if s.SNSAction != nil {
+		v := s.SNSAction
+
+		e.SetFields(protocol.BodyTarget, "SNSAction", v, protocol.Metadata{})
+	}
+	if s.StopAction != nil {
+		v := s.StopAction
+
+		e.SetFields(protocol.BodyTarget, "StopAction", v, protocol.Metadata{})
+	}
+	if s.WorkmailAction != nil {
+		v := s.WorkmailAction
+
+		e.SetFields(protocol.BodyTarget, "WorkmailAction", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReceiptActionList(vs []ReceiptAction) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A receipt IP address filter enables you to specify whether to accept or reject
 // mail originating from an IP address or range of IP addresses.
 //
@@ -7415,6 +8738,30 @@ func (s *ReceiptFilter) SetName(v string) *ReceiptFilter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiptFilter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IpFilter != nil {
+		v := s.IpFilter
+
+		e.SetFields(protocol.BodyTarget, "IpFilter", v, protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReceiptFilterList(vs []ReceiptFilter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A receipt IP address filter enables you to specify whether to accept or reject
 // mail originating from an IP address or range of IP addresses.
 //
@@ -7475,6 +8822,22 @@ func (s *ReceiptIpFilter) SetCidr(v string) *ReceiptIpFilter {
 func (s *ReceiptIpFilter) SetPolicy(v ReceiptFilterPolicy) *ReceiptIpFilter {
 	s.Policy = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiptIpFilter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Cidr != nil {
+		v := *s.Cidr
+
+		e.SetValue(protocol.BodyTarget, "Cidr", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Policy) > 0 {
+		v := s.Policy
+
+		e.SetValue(protocol.BodyTarget, "Policy", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Receipt rules enable you to specify which actions Amazon SES should take
@@ -7594,6 +8957,50 @@ func (s *ReceiptRule) SetTlsPolicy(v TlsPolicy) *ReceiptRule {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiptRule) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Actions) > 0 {
+		v := s.Actions
+
+		e.SetList(protocol.BodyTarget, "Actions", encodeReceiptActionList(v), protocol.Metadata{})
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Recipients) > 0 {
+		v := s.Recipients
+
+		e.SetList(protocol.BodyTarget, "Recipients", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ScanEnabled != nil {
+		v := *s.ScanEnabled
+
+		e.SetValue(protocol.BodyTarget, "ScanEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.TlsPolicy) > 0 {
+		v := s.TlsPolicy
+
+		e.SetValue(protocol.BodyTarget, "TlsPolicy", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReceiptRuleList(vs []ReceiptRule) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Information about a receipt rule set.
 //
 // A receipt rule set is a collection of rules that specify what Amazon SES
@@ -7639,6 +9046,30 @@ func (s *ReceiptRuleSetMetadata) SetCreatedTimestamp(v time.Time) *ReceiptRuleSe
 func (s *ReceiptRuleSetMetadata) SetName(v string) *ReceiptRuleSetMetadata {
 	s.Name = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReceiptRuleSetMetadata) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeReceiptRuleSetMetadataList(vs []ReceiptRuleSetMetadata) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Recipient-related information to include in the Delivery Status Notification
@@ -7768,6 +9199,47 @@ func (s *RecipientDsnFields) SetStatus(v string) *RecipientDsnFields {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RecipientDsnFields) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		e.SetValue(protocol.BodyTarget, "Action", v, protocol.Metadata{})
+	}
+	if s.DiagnosticCode != nil {
+		v := *s.DiagnosticCode
+
+		e.SetValue(protocol.BodyTarget, "DiagnosticCode", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ExtensionFields) > 0 {
+		v := s.ExtensionFields
+
+		e.SetList(protocol.BodyTarget, "ExtensionFields", encodeExtensionFieldList(v), protocol.Metadata{})
+	}
+	if s.FinalRecipient != nil {
+		v := *s.FinalRecipient
+
+		e.SetValue(protocol.BodyTarget, "FinalRecipient", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LastAttemptDate != nil {
+		v := *s.LastAttemptDate
+
+		e.SetValue(protocol.BodyTarget, "LastAttemptDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.RemoteMta != nil {
+		v := *s.RemoteMta
+
+		e.SetValue(protocol.BodyTarget, "RemoteMta", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to reorder the receipt rules within a receipt rule set.
 // You use receipt rule sets to receive email with Amazon SES. For more information,
 // see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -7827,6 +9299,22 @@ func (s *ReorderReceiptRuleSetInput) SetRuleSetName(v string) *ReorderReceiptRul
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReorderReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.RuleNames) > 0 {
+		v := s.RuleNames
+
+		e.SetList(protocol.BodyTarget, "RuleNames", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSetResponse
 type ReorderReceiptRuleSetOutput struct {
@@ -7848,6 +9336,12 @@ func (s ReorderReceiptRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReorderReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ReorderReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // When included in a receipt rule, this action saves the received message to
@@ -7964,6 +9458,32 @@ func (s *S3Action) SetTopicArn(v string) *S3Action {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *S3Action) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BucketName != nil {
+		v := *s.BucketName
+
+		e.SetValue(protocol.BodyTarget, "BucketName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyArn != nil {
+		v := *s.KmsKeyArn
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ObjectKeyPrefix != nil {
+		v := *s.ObjectKeyPrefix
+
+		e.SetValue(protocol.BodyTarget, "ObjectKeyPrefix", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // When included in a receipt rule, this action publishes a notification to
 // Amazon Simple Notification Service (Amazon SNS). This action includes a complete
 // copy of the email content in the Amazon SNS notifications. Amazon SNS notifications
@@ -8037,6 +9557,22 @@ func (s *SNSAction) SetTopicArn(v string) *SNSAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SNSAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Encoding) > 0 {
+		v := s.Encoding
+
+		e.SetValue(protocol.BodyTarget, "Encoding", v, protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains the topic ARN associated with an Amazon Simple Notification Service
 // (Amazon SNS) event destination.
 //
@@ -8084,6 +9620,17 @@ func (s *SNSDestination) Validate() error {
 func (s *SNSDestination) SetTopicARN(v string) *SNSDestination {
 	s.TopicARN = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SNSDestination) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TopicARN != nil {
+		v := *s.TopicARN
+
+		e.SetValue(protocol.BodyTarget, "TopicARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to send a bounce message to the sender of an email you
@@ -8206,6 +9753,42 @@ func (s *SendBounceInput) SetOriginalMessageId(v string) *SendBounceInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendBounceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BounceSender != nil {
+		v := *s.BounceSender
+
+		e.SetValue(protocol.BodyTarget, "BounceSender", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.BounceSenderArn != nil {
+		v := *s.BounceSenderArn
+
+		e.SetValue(protocol.BodyTarget, "BounceSenderArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.BouncedRecipientInfoList) > 0 {
+		v := s.BouncedRecipientInfoList
+
+		e.SetList(protocol.BodyTarget, "BouncedRecipientInfoList", encodeBouncedRecipientInfoList(v), protocol.Metadata{})
+	}
+	if s.Explanation != nil {
+		v := *s.Explanation
+
+		e.SetValue(protocol.BodyTarget, "Explanation", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MessageDsn != nil {
+		v := s.MessageDsn
+
+		e.SetFields(protocol.BodyTarget, "MessageDsn", v, protocol.Metadata{})
+	}
+	if s.OriginalMessageId != nil {
+		v := *s.OriginalMessageId
+
+		e.SetValue(protocol.BodyTarget, "OriginalMessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a unique message ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceResponse
 type SendBounceOutput struct {
@@ -8236,6 +9819,17 @@ func (s SendBounceOutput) SDKResponseMetadata() aws.Response {
 func (s *SendBounceOutput) SetMessageId(v string) *SendBounceOutput {
 	s.MessageId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendBounceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents sending statistics data. Each SendDataPoint contains statistics
@@ -8298,6 +9892,45 @@ func (s *SendDataPoint) SetRejects(v int64) *SendDataPoint {
 func (s *SendDataPoint) SetTimestamp(v time.Time) *SendDataPoint {
 	s.Timestamp = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendDataPoint) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Bounces != nil {
+		v := *s.Bounces
+
+		e.SetValue(protocol.BodyTarget, "Bounces", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Complaints != nil {
+		v := *s.Complaints
+
+		e.SetValue(protocol.BodyTarget, "Complaints", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.DeliveryAttempts != nil {
+		v := *s.DeliveryAttempts
+
+		e.SetValue(protocol.BodyTarget, "DeliveryAttempts", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Rejects != nil {
+		v := *s.Rejects
+
+		e.SetValue(protocol.BodyTarget, "Rejects", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeSendDataPointList(vs []SendDataPoint) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Represents a request to send a single formatted email using Amazon SES. For
@@ -8481,6 +10114,57 @@ func (s *SendEmailInput) SetTags(v []MessageTag) *SendEmailInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendEmailInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Destination != nil {
+		v := s.Destination
+
+		e.SetFields(protocol.BodyTarget, "Destination", v, protocol.Metadata{})
+	}
+	if s.Message != nil {
+		v := s.Message
+
+		e.SetFields(protocol.BodyTarget, "Message", v, protocol.Metadata{})
+	}
+	if len(s.ReplyToAddresses) > 0 {
+		v := s.ReplyToAddresses
+
+		e.SetList(protocol.BodyTarget, "ReplyToAddresses", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.ReturnPath != nil {
+		v := *s.ReturnPath
+
+		e.SetValue(protocol.BodyTarget, "ReturnPath", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ReturnPathArn != nil {
+		v := *s.ReturnPathArn
+
+		e.SetValue(protocol.BodyTarget, "ReturnPathArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceArn != nil {
+		v := *s.SourceArn
+
+		e.SetValue(protocol.BodyTarget, "SourceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeMessageTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a unique message ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailResponse
 type SendEmailOutput struct {
@@ -8513,6 +10197,17 @@ func (s SendEmailOutput) SDKResponseMetadata() aws.Response {
 func (s *SendEmailOutput) SetMessageId(v string) *SendEmailOutput {
 	s.MessageId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendEmailOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to send a single raw email using Amazon SES. For more
@@ -8701,6 +10396,52 @@ func (s *SendRawEmailInput) SetTags(v []MessageTag) *SendRawEmailInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendRawEmailInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Destinations) > 0 {
+		v := s.Destinations
+
+		e.SetList(protocol.BodyTarget, "Destinations", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.FromArn != nil {
+		v := *s.FromArn
+
+		e.SetValue(protocol.BodyTarget, "FromArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RawMessage != nil {
+		v := s.RawMessage
+
+		e.SetFields(protocol.BodyTarget, "RawMessage", v, protocol.Metadata{})
+	}
+	if s.ReturnPathArn != nil {
+		v := *s.ReturnPathArn
+
+		e.SetValue(protocol.BodyTarget, "ReturnPathArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Source != nil {
+		v := *s.Source
+
+		e.SetValue(protocol.BodyTarget, "Source", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.SourceArn != nil {
+		v := *s.SourceArn
+
+		e.SetValue(protocol.BodyTarget, "SourceArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeMessageTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a unique message ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailResponse
 type SendRawEmailOutput struct {
@@ -8735,6 +10476,17 @@ func (s *SendRawEmailOutput) SetMessageId(v string) *SendRawEmailOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SendRawEmailOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		e.SetValue(protocol.BodyTarget, "MessageId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to set a receipt rule set as the active receipt rule
 // set. You use receipt rule sets to receive email with Amazon SES. For more
 // information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -8763,6 +10515,17 @@ func (s *SetActiveReceiptRuleSetInput) SetRuleSetName(v string) *SetActiveReceip
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetActiveReceiptRuleSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSetResponse
 type SetActiveReceiptRuleSetOutput struct {
@@ -8784,6 +10547,12 @@ func (s SetActiveReceiptRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetActiveReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetActiveReceiptRuleSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to enable or disable Amazon SES Easy DKIM signing for
@@ -8845,6 +10614,22 @@ func (s *SetIdentityDkimEnabledInput) SetIdentity(v string) *SetIdentityDkimEnab
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityDkimEnabledInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DkimEnabled != nil {
+		v := *s.DkimEnabled
+
+		e.SetValue(protocol.BodyTarget, "DkimEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabledResponse
 type SetIdentityDkimEnabledOutput struct {
@@ -8866,6 +10651,12 @@ func (s SetIdentityDkimEnabledOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetIdentityDkimEnabledOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityDkimEnabledOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to enable or disable whether Amazon SES forwards you
@@ -8932,6 +10723,22 @@ func (s *SetIdentityFeedbackForwardingEnabledInput) SetIdentity(v string) *SetId
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityFeedbackForwardingEnabledInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ForwardingEnabled != nil {
+		v := *s.ForwardingEnabled
+
+		e.SetValue(protocol.BodyTarget, "ForwardingEnabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledResponse
 type SetIdentityFeedbackForwardingEnabledOutput struct {
@@ -8953,6 +10760,12 @@ func (s SetIdentityFeedbackForwardingEnabledOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetIdentityFeedbackForwardingEnabledOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityFeedbackForwardingEnabledOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to set whether Amazon SES includes the original email
@@ -9034,6 +10847,27 @@ func (s *SetIdentityHeadersInNotificationsEnabledInput) SetNotificationType(v No
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityHeadersInNotificationsEnabledInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationType) > 0 {
+		v := s.NotificationType
+
+		e.SetValue(protocol.BodyTarget, "NotificationType", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabledResponse
 type SetIdentityHeadersInNotificationsEnabledOutput struct {
@@ -9055,6 +10889,12 @@ func (s SetIdentityHeadersInNotificationsEnabledOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetIdentityHeadersInNotificationsEnabledOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityHeadersInNotificationsEnabledOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to enable or disable the Amazon SES custom MAIL FROM
@@ -9132,6 +10972,27 @@ func (s *SetIdentityMailFromDomainInput) SetMailFromDomain(v string) *SetIdentit
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityMailFromDomainInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.BehaviorOnMXFailure) > 0 {
+		v := s.BehaviorOnMXFailure
+
+		e.SetValue(protocol.BodyTarget, "BehaviorOnMXFailure", v, protocol.Metadata{})
+	}
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.MailFromDomain != nil {
+		v := *s.MailFromDomain
+
+		e.SetValue(protocol.BodyTarget, "MailFromDomain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainResponse
 type SetIdentityMailFromDomainOutput struct {
@@ -9153,6 +11014,12 @@ func (s SetIdentityMailFromDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetIdentityMailFromDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityMailFromDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to specify the Amazon SNS topic to which Amazon SES
@@ -9227,6 +11094,27 @@ func (s *SetIdentityNotificationTopicInput) SetSnsTopic(v string) *SetIdentityNo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityNotificationTopicInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Identity != nil {
+		v := *s.Identity
+
+		e.SetValue(protocol.BodyTarget, "Identity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationType) > 0 {
+		v := s.NotificationType
+
+		e.SetValue(protocol.BodyTarget, "NotificationType", v, protocol.Metadata{})
+	}
+	if s.SnsTopic != nil {
+		v := *s.SnsTopic
+
+		e.SetValue(protocol.BodyTarget, "SnsTopic", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicResponse
 type SetIdentityNotificationTopicOutput struct {
@@ -9248,6 +11136,12 @@ func (s SetIdentityNotificationTopicOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetIdentityNotificationTopicOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetIdentityNotificationTopicOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to set the position of a receipt rule in a receipt rule
@@ -9317,6 +11211,27 @@ func (s *SetReceiptRulePositionInput) SetRuleSetName(v string) *SetReceiptRulePo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetReceiptRulePositionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.After != nil {
+		v := *s.After
+
+		e.SetValue(protocol.BodyTarget, "After", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePositionResponse
 type SetReceiptRulePositionOutput struct {
@@ -9338,6 +11253,12 @@ func (s SetReceiptRulePositionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetReceiptRulePositionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetReceiptRulePositionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // When included in a receipt rule, this action terminates the evaluation of
@@ -9397,6 +11318,22 @@ func (s *StopAction) SetTopicArn(v string) *StopAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StopAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Scope) > 0 {
+		v := s.Scope
+
+		e.SetValue(protocol.BodyTarget, "Scope", v, protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A domain that is used to redirect email recipients to an Amazon SES-operated
 // domain. This domain captures open and click events generated by Amazon SES
 // emails.
@@ -9427,6 +11364,17 @@ func (s TrackingOptions) GoString() string {
 func (s *TrackingOptions) SetCustomRedirectDomain(v string) *TrackingOptions {
 	s.CustomRedirectDomain = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TrackingOptions) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CustomRedirectDomain != nil {
+		v := *s.CustomRedirectDomain
+
+		e.SetValue(protocol.BodyTarget, "CustomRedirectDomain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Represents a request to update the event destination of a configuration set.
@@ -9494,6 +11442,22 @@ func (s *UpdateConfigurationSetEventDestinationInput) SetEventDestination(v *Eve
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateConfigurationSetEventDestinationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EventDestination != nil {
+		v := s.EventDestination
+
+		e.SetFields(protocol.BodyTarget, "EventDestination", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationResponse
 type UpdateConfigurationSetEventDestinationOutput struct {
@@ -9515,6 +11479,12 @@ func (s UpdateConfigurationSetEventDestinationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateConfigurationSetEventDestinationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateConfigurationSetEventDestinationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to update the tracking options for a configuration set.
@@ -9580,6 +11550,22 @@ func (s *UpdateConfigurationSetTrackingOptionsInput) SetTrackingOptions(v *Track
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateConfigurationSetTrackingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ConfigurationSetName != nil {
+		v := *s.ConfigurationSetName
+
+		e.SetValue(protocol.BodyTarget, "ConfigurationSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TrackingOptions != nil {
+		v := s.TrackingOptions
+
+		e.SetFields(protocol.BodyTarget, "TrackingOptions", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsResponse
 type UpdateConfigurationSetTrackingOptionsOutput struct {
@@ -9601,6 +11587,12 @@ func (s UpdateConfigurationSetTrackingOptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateConfigurationSetTrackingOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateConfigurationSetTrackingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to update a receipt rule. You use receipt rules to receive
@@ -9666,6 +11658,22 @@ func (s *UpdateReceiptRuleInput) SetRuleSetName(v string) *UpdateReceiptRuleInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateReceiptRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Rule != nil {
+		v := s.Rule
+
+		e.SetFields(protocol.BodyTarget, "Rule", v, protocol.Metadata{})
+	}
+	if s.RuleSetName != nil {
+		v := *s.RuleSetName
+
+		e.SetValue(protocol.BodyTarget, "RuleSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleResponse
 type UpdateReceiptRuleOutput struct {
@@ -9687,6 +11695,12 @@ func (s UpdateReceiptRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateReceiptRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateReceiptRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to generate the CNAME records needed to set up Easy
@@ -9730,6 +11744,17 @@ func (s *VerifyDomainDkimInput) Validate() error {
 func (s *VerifyDomainDkimInput) SetDomain(v string) *VerifyDomainDkimInput {
 	s.Domain = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyDomainDkimInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Returns CNAME records that you must publish to the DNS server of your domain
@@ -9777,6 +11802,17 @@ func (s *VerifyDomainDkimOutput) SetDkimTokens(v []string) *VerifyDomainDkimOutp
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyDomainDkimOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.DkimTokens) > 0 {
+		v := s.DkimTokens
+
+		e.SetList(protocol.BodyTarget, "DkimTokens", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to begin Amazon SES domain verification and to generate
 // the TXT records that you must publish to the DNS server of your domain to
 // complete the verification. For information about domain verification, see
@@ -9819,6 +11855,17 @@ func (s *VerifyDomainIdentityInput) Validate() error {
 func (s *VerifyDomainIdentityInput) SetDomain(v string) *VerifyDomainIdentityInput {
 	s.Domain = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyDomainIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Domain != nil {
+		v := *s.Domain
+
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Returns a TXT record that you must publish to the DNS server of your domain
@@ -9864,6 +11911,17 @@ func (s *VerifyDomainIdentityOutput) SetVerificationToken(v string) *VerifyDomai
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyDomainIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VerificationToken != nil {
+		v := *s.VerificationToken
+
+		e.SetValue(protocol.BodyTarget, "VerificationToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Represents a request to begin email address verification with Amazon SES.
 // For information about email address verification, see the Amazon SES Developer
 // Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
@@ -9907,6 +11965,17 @@ func (s *VerifyEmailAddressInput) SetEmailAddress(v string) *VerifyEmailAddressI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyEmailAddressInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EmailAddress != nil {
+		v := *s.EmailAddress
+
+		e.SetValue(protocol.BodyTarget, "EmailAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailAddressOutput
 type VerifyEmailAddressOutput struct {
 	_ struct{} `type:"structure"`
@@ -9927,6 +11996,12 @@ func (s VerifyEmailAddressOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s VerifyEmailAddressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyEmailAddressOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Represents a request to begin email address verification with Amazon SES.
@@ -9972,6 +12047,17 @@ func (s *VerifyEmailIdentityInput) SetEmailAddress(v string) *VerifyEmailIdentit
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EmailAddress != nil {
+		v := *s.EmailAddress
+
+		e.SetValue(protocol.BodyTarget, "EmailAddress", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentityResponse
 type VerifyEmailIdentityOutput struct {
@@ -9993,6 +12079,12 @@ func (s VerifyEmailIdentityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s VerifyEmailIdentityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *VerifyEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // When included in a receipt rule, this action calls Amazon WorkMail and, optionally,
@@ -10057,6 +12149,22 @@ func (s *WorkmailAction) SetTopicArn(v string) *WorkmailAction {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *WorkmailAction) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OrganizationArn != nil {
+		v := *s.OrganizationArn
+
+		e.SetValue(protocol.BodyTarget, "OrganizationArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type BehaviorOnMXFailure string
 
 // Enum values for BehaviorOnMXFailure
@@ -10064,6 +12172,15 @@ const (
 	BehaviorOnMXFailureUseDefaultValue BehaviorOnMXFailure = "UseDefaultValue"
 	BehaviorOnMXFailureRejectMessage   BehaviorOnMXFailure = "RejectMessage"
 )
+
+func (enum BehaviorOnMXFailure) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BehaviorOnMXFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type BounceType string
 
@@ -10077,6 +12194,23 @@ const (
 	BounceTypeTemporaryFailure BounceType = "TemporaryFailure"
 )
 
+func (enum BounceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BounceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeConfigurationSetAttributeList(vs []ConfigurationSetAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type ConfigurationSetAttribute string
 
 // Enum values for ConfigurationSetAttribute
@@ -10084,6 +12218,15 @@ const (
 	ConfigurationSetAttributeEventDestinations ConfigurationSetAttribute = "eventDestinations"
 	ConfigurationSetAttributeTrackingOptions   ConfigurationSetAttribute = "trackingOptions"
 )
+
+func (enum ConfigurationSetAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationSetAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CustomMailFromStatus string
 
@@ -10095,6 +12238,15 @@ const (
 	CustomMailFromStatusTemporaryFailure CustomMailFromStatus = "TemporaryFailure"
 )
 
+func (enum CustomMailFromStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CustomMailFromStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DimensionValueSource string
 
 // Enum values for DimensionValueSource
@@ -10103,6 +12255,15 @@ const (
 	DimensionValueSourceEmailHeader DimensionValueSource = "emailHeader"
 	DimensionValueSourceLinkTag     DimensionValueSource = "linkTag"
 )
+
+func (enum DimensionValueSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DimensionValueSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DsnAction string
 
@@ -10114,6 +12275,23 @@ const (
 	DsnActionRelayed   DsnAction = "relayed"
 	DsnActionExpanded  DsnAction = "expanded"
 )
+
+func (enum DsnAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DsnAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeEventTypeList(vs []EventType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type EventType string
 
@@ -10128,6 +12306,15 @@ const (
 	EventTypeClick     EventType = "click"
 )
 
+func (enum EventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -10136,6 +12323,15 @@ const (
 	IdentityTypeDomain       IdentityType = "Domain"
 )
 
+func (enum IdentityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IdentityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InvocationType string
 
 // Enum values for InvocationType
@@ -10143,6 +12339,15 @@ const (
 	InvocationTypeEvent           InvocationType = "Event"
 	InvocationTypeRequestResponse InvocationType = "RequestResponse"
 )
+
+func (enum InvocationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InvocationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NotificationType string
 
@@ -10153,6 +12358,15 @@ const (
 	NotificationTypeDelivery  NotificationType = "Delivery"
 )
 
+func (enum NotificationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReceiptFilterPolicy string
 
 // Enum values for ReceiptFilterPolicy
@@ -10160,6 +12374,15 @@ const (
 	ReceiptFilterPolicyBlock ReceiptFilterPolicy = "Block"
 	ReceiptFilterPolicyAllow ReceiptFilterPolicy = "Allow"
 )
+
+func (enum ReceiptFilterPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReceiptFilterPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SNSActionEncoding string
 
@@ -10169,12 +12392,30 @@ const (
 	SNSActionEncodingBase64 SNSActionEncoding = "Base64"
 )
 
+func (enum SNSActionEncoding) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SNSActionEncoding) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StopScope string
 
 // Enum values for StopScope
 const (
 	StopScopeRuleSet StopScope = "RuleSet"
 )
+
+func (enum StopScope) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StopScope) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TlsPolicy string
 
@@ -10183,6 +12424,15 @@ const (
 	TlsPolicyRequire  TlsPolicy = "Require"
 	TlsPolicyOptional TlsPolicy = "Optional"
 )
+
+func (enum TlsPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TlsPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VerificationStatus string
 
@@ -10194,3 +12444,12 @@ const (
 	VerificationStatusTemporaryFailure VerificationStatus = "TemporaryFailure"
 	VerificationStatusNotStarted       VerificationStatus = "NotStarted"
 )
+
+func (enum VerificationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VerificationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

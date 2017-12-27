@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAddTagsToResource = "AddTagsToResource"
@@ -24082,6 +24083,15 @@ const (
 	AssociationFilterKeyAssociationName       AssociationFilterKey = "AssociationName"
 )
 
+func (enum AssociationFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssociationFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssociationStatusName string
 
 // Enum values for AssociationStatusName
@@ -24091,6 +24101,15 @@ const (
 	AssociationStatusNameFailed  AssociationStatusName = "Failed"
 )
 
+func (enum AssociationStatusName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssociationStatusName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutomationExecutionFilterKey string
 
 // Enum values for AutomationExecutionFilterKey
@@ -24098,6 +24117,15 @@ const (
 	AutomationExecutionFilterKeyDocumentNamePrefix AutomationExecutionFilterKey = "DocumentNamePrefix"
 	AutomationExecutionFilterKeyExecutionStatus    AutomationExecutionFilterKey = "ExecutionStatus"
 )
+
+func (enum AutomationExecutionFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutomationExecutionFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AutomationExecutionStatus string
 
@@ -24112,6 +24140,15 @@ const (
 	AutomationExecutionStatusFailed     AutomationExecutionStatus = "Failed"
 )
 
+func (enum AutomationExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutomationExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CommandFilterKey string
 
 // Enum values for CommandFilterKey
@@ -24120,6 +24157,15 @@ const (
 	CommandFilterKeyInvokedBefore CommandFilterKey = "InvokedBefore"
 	CommandFilterKeyStatus        CommandFilterKey = "Status"
 )
+
+func (enum CommandFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CommandFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CommandInvocationStatus string
 
@@ -24135,6 +24181,15 @@ const (
 	CommandInvocationStatusCancelling CommandInvocationStatus = "Cancelling"
 )
 
+func (enum CommandInvocationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CommandInvocationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CommandPluginStatus string
 
 // Enum values for CommandPluginStatus
@@ -24146,6 +24201,15 @@ const (
 	CommandPluginStatusCancelled  CommandPluginStatus = "Cancelled"
 	CommandPluginStatusFailed     CommandPluginStatus = "Failed"
 )
+
+func (enum CommandPluginStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CommandPluginStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CommandStatus string
 
@@ -24160,6 +24224,15 @@ const (
 	CommandStatusCancelling CommandStatus = "Cancelling"
 )
 
+func (enum CommandStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CommandStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComplianceQueryOperatorType string
 
 // Enum values for ComplianceQueryOperatorType
@@ -24170,6 +24243,15 @@ const (
 	ComplianceQueryOperatorTypeLessThan    ComplianceQueryOperatorType = "LESS_THAN"
 	ComplianceQueryOperatorTypeGreaterThan ComplianceQueryOperatorType = "GREATER_THAN"
 )
+
+func (enum ComplianceQueryOperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComplianceQueryOperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ComplianceSeverity string
 
@@ -24183,6 +24265,15 @@ const (
 	ComplianceSeverityUnspecified   ComplianceSeverity = "UNSPECIFIED"
 )
 
+func (enum ComplianceSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComplianceSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComplianceStatus string
 
 // Enum values for ComplianceStatus
@@ -24190,6 +24281,15 @@ const (
 	ComplianceStatusCompliant    ComplianceStatus = "COMPLIANT"
 	ComplianceStatusNonCompliant ComplianceStatus = "NON_COMPLIANT"
 )
+
+func (enum ComplianceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComplianceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DescribeActivationsFilterKeys string
 
@@ -24199,6 +24299,15 @@ const (
 	DescribeActivationsFilterKeysDefaultInstanceName DescribeActivationsFilterKeys = "DefaultInstanceName"
 	DescribeActivationsFilterKeysIamRole             DescribeActivationsFilterKeys = "IamRole"
 )
+
+func (enum DescribeActivationsFilterKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DescribeActivationsFilterKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DocumentFilterKey string
 
@@ -24210,6 +24319,15 @@ const (
 	DocumentFilterKeyDocumentType  DocumentFilterKey = "DocumentType"
 )
 
+func (enum DocumentFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DocumentHashType string
 
 // Enum values for DocumentHashType
@@ -24217,6 +24335,15 @@ const (
 	DocumentHashTypeSha256 DocumentHashType = "Sha256"
 	DocumentHashTypeSha1   DocumentHashType = "Sha1"
 )
+
+func (enum DocumentHashType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentHashType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DocumentParameterType string
 
@@ -24226,12 +24353,30 @@ const (
 	DocumentParameterTypeStringList DocumentParameterType = "StringList"
 )
 
+func (enum DocumentParameterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DocumentPermissionType string
 
 // Enum values for DocumentPermissionType
 const (
 	DocumentPermissionTypeShare DocumentPermissionType = "Share"
 )
+
+func (enum DocumentPermissionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentPermissionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DocumentStatus string
 
@@ -24243,6 +24388,15 @@ const (
 	DocumentStatusDeleting DocumentStatus = "Deleting"
 )
 
+func (enum DocumentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DocumentType string
 
 // Enum values for DocumentType
@@ -24252,6 +24406,15 @@ const (
 	DocumentTypeAutomation DocumentType = "Automation"
 )
 
+func (enum DocumentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DocumentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Fault string
 
 // Enum values for Fault
@@ -24260,6 +24423,15 @@ const (
 	FaultServer  Fault = "Server"
 	FaultUnknown Fault = "Unknown"
 )
+
+func (enum Fault) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Fault) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceInformationFilterKey string
 
@@ -24275,6 +24447,15 @@ const (
 	InstanceInformationFilterKeyAssociationStatus InstanceInformationFilterKey = "AssociationStatus"
 )
 
+func (enum InstanceInformationFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceInformationFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstancePatchStateOperatorType string
 
 // Enum values for InstancePatchStateOperatorType
@@ -24285,6 +24466,15 @@ const (
 	InstancePatchStateOperatorTypeGreaterThan InstancePatchStateOperatorType = "GreaterThan"
 )
 
+func (enum InstancePatchStateOperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstancePatchStateOperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InventoryAttributeDataType string
 
 // Enum values for InventoryAttributeDataType
@@ -24292,6 +24482,15 @@ const (
 	InventoryAttributeDataTypeString InventoryAttributeDataType = "string"
 	InventoryAttributeDataTypeNumber InventoryAttributeDataType = "number"
 )
+
+func (enum InventoryAttributeDataType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InventoryAttributeDataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InventoryQueryOperatorType string
 
@@ -24304,6 +24503,15 @@ const (
 	InventoryQueryOperatorTypeGreaterThan InventoryQueryOperatorType = "GreaterThan"
 )
 
+func (enum InventoryQueryOperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InventoryQueryOperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LastResourceDataSyncStatus string
 
 // Enum values for LastResourceDataSyncStatus
@@ -24312,6 +24520,15 @@ const (
 	LastResourceDataSyncStatusFailed     LastResourceDataSyncStatus = "Failed"
 	LastResourceDataSyncStatusInProgress LastResourceDataSyncStatus = "InProgress"
 )
+
+func (enum LastResourceDataSyncStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LastResourceDataSyncStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MaintenanceWindowExecutionStatus string
 
@@ -24327,12 +24544,30 @@ const (
 	MaintenanceWindowExecutionStatusSkippedOverlapping MaintenanceWindowExecutionStatus = "SKIPPED_OVERLAPPING"
 )
 
+func (enum MaintenanceWindowExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MaintenanceWindowExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MaintenanceWindowResourceType string
 
 // Enum values for MaintenanceWindowResourceType
 const (
 	MaintenanceWindowResourceTypeInstance MaintenanceWindowResourceType = "INSTANCE"
 )
+
+func (enum MaintenanceWindowResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MaintenanceWindowResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MaintenanceWindowTaskType string
 
@@ -24343,6 +24578,23 @@ const (
 	MaintenanceWindowTaskTypeStepFunctions MaintenanceWindowTaskType = "STEP_FUNCTIONS"
 	MaintenanceWindowTaskTypeLambda        MaintenanceWindowTaskType = "LAMBDA"
 )
+
+func (enum MaintenanceWindowTaskType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MaintenanceWindowTaskType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeNotificationEventList(vs []NotificationEvent) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type NotificationEvent string
 
@@ -24356,6 +24608,15 @@ const (
 	NotificationEventFailed     NotificationEvent = "Failed"
 )
 
+func (enum NotificationEvent) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationEvent) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NotificationType string
 
 // Enum values for NotificationType
@@ -24363,6 +24624,15 @@ const (
 	NotificationTypeCommand    NotificationType = "Command"
 	NotificationTypeInvocation NotificationType = "Invocation"
 )
+
+func (enum NotificationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperatingSystem string
 
@@ -24374,6 +24644,15 @@ const (
 	OperatingSystemRedhatEnterpriseLinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
 )
 
+func (enum OperatingSystem) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperatingSystem) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParameterType string
 
 // Enum values for ParameterType
@@ -24383,6 +24662,15 @@ const (
 	ParameterTypeSecureString ParameterType = "SecureString"
 )
 
+func (enum ParameterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParametersFilterKey string
 
 // Enum values for ParametersFilterKey
@@ -24391,6 +24679,15 @@ const (
 	ParametersFilterKeyType  ParametersFilterKey = "Type"
 	ParametersFilterKeyKeyId ParametersFilterKey = "KeyId"
 )
+
+func (enum ParametersFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParametersFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PatchComplianceDataState string
 
@@ -24402,6 +24699,15 @@ const (
 	PatchComplianceDataStateNotApplicable  PatchComplianceDataState = "NOT_APPLICABLE"
 	PatchComplianceDataStateFailed         PatchComplianceDataState = "FAILED"
 )
+
+func (enum PatchComplianceDataState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchComplianceDataState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PatchComplianceLevel string
 
@@ -24415,6 +24721,15 @@ const (
 	PatchComplianceLevelUnspecified   PatchComplianceLevel = "UNSPECIFIED"
 )
 
+func (enum PatchComplianceLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchComplianceLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PatchDeploymentStatus string
 
 // Enum values for PatchDeploymentStatus
@@ -24424,6 +24739,15 @@ const (
 	PatchDeploymentStatusExplicitApproved PatchDeploymentStatus = "EXPLICIT_APPROVED"
 	PatchDeploymentStatusExplicitRejected PatchDeploymentStatus = "EXPLICIT_REJECTED"
 )
+
+func (enum PatchDeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchDeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PatchFilterKey string
 
@@ -24438,6 +24762,15 @@ const (
 	PatchFilterKeySeverity       PatchFilterKey = "SEVERITY"
 )
 
+func (enum PatchFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PatchOperationType string
 
 // Enum values for PatchOperationType
@@ -24445,6 +24778,15 @@ const (
 	PatchOperationTypeScan    PatchOperationType = "Scan"
 	PatchOperationTypeInstall PatchOperationType = "Install"
 )
+
+func (enum PatchOperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchOperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PingStatus string
 
@@ -24455,6 +24797,23 @@ const (
 	PingStatusInactive       PingStatus = "Inactive"
 )
 
+func (enum PingStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PingStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodePlatformTypeList(vs []PlatformType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
@@ -24463,12 +24822,30 @@ const (
 	PlatformTypeLinux   PlatformType = "Linux"
 )
 
+func (enum PlatformType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceDataSyncS3Format string
 
 // Enum values for ResourceDataSyncS3Format
 const (
 	ResourceDataSyncS3FormatJsonSerDe ResourceDataSyncS3Format = "JsonSerDe"
 )
+
+func (enum ResourceDataSyncS3Format) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceDataSyncS3Format) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceType string
 
@@ -24478,6 +24855,15 @@ const (
 	ResourceTypeDocument        ResourceType = "Document"
 	ResourceTypeEc2instance     ResourceType = "EC2Instance"
 )
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceTypeForTagging string
 
@@ -24490,6 +24876,15 @@ const (
 	ResourceTypeForTaggingPatchBaseline     ResourceTypeForTagging = "PatchBaseline"
 )
 
+func (enum ResourceTypeForTagging) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceTypeForTagging) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SignalType string
 
 // Enum values for SignalType
@@ -24497,3 +24892,12 @@ const (
 	SignalTypeApprove SignalType = "Approve"
 	SignalTypeReject  SignalType = "Reject"
 )
+
+func (enum SignalType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SignalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

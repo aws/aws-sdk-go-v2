@@ -2556,6 +2556,22 @@ func (s *AccountGateResult) SetStatusReason(v string) *AccountGateResult {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccountGateResult) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		e.SetValue(protocol.BodyTarget, "StatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The AccountLimit data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountLimit
 type AccountLimit struct {
@@ -2588,6 +2604,30 @@ func (s *AccountLimit) SetName(v string) *AccountLimit {
 func (s *AccountLimit) SetValue(v int64) *AccountLimit {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *AccountLimit) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeAccountLimitList(vs []AccountLimit) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The input for the CancelUpdateStack action.
@@ -2647,6 +2687,22 @@ func (s *CancelUpdateStackInput) SetStackName(v string) *CancelUpdateStackInput 
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CancelUpdateStackInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStackOutput
 type CancelUpdateStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -2667,6 +2723,12 @@ func (s CancelUpdateStackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelUpdateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CancelUpdateStackOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The Change structure describes the changes AWS CloudFormation will perform
@@ -2704,6 +2766,30 @@ func (s *Change) SetResourceChange(v *ResourceChange) *Change {
 func (s *Change) SetType(v ChangeType) *Change {
 	s.Type = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Change) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceChange != nil {
+		v := s.ResourceChange
+
+		e.SetFields(protocol.BodyTarget, "ResourceChange", v, protocol.Metadata{})
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		e.SetValue(protocol.BodyTarget, "Type", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeChangeList(vs []Change) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The ChangeSetSummary structure describes a change set, its status, and the
@@ -2808,6 +2894,65 @@ func (s *ChangeSetSummary) SetStatus(v ChangeSetStatus) *ChangeSetSummary {
 func (s *ChangeSetSummary) SetStatusReason(v string) *ChangeSetSummary {
 	s.StatusReason = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ChangeSetSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ChangeSetId != nil {
+		v := *s.ChangeSetId
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ExecutionStatus) > 0 {
+		v := s.ExecutionStatus
+
+		e.SetValue(protocol.BodyTarget, "ExecutionStatus", v, protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		e.SetValue(protocol.BodyTarget, "StatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeChangeSetSummaryList(vs []ChangeSetSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The input for the ContinueUpdateRollback action.
@@ -2938,6 +3083,32 @@ func (s *ContinueUpdateRollbackInput) SetStackName(v string) *ContinueUpdateRoll
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ContinueUpdateRollbackInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ResourcesToSkip) > 0 {
+		v := s.ResourcesToSkip
+
+		e.SetList(protocol.BodyTarget, "ResourcesToSkip", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a ContinueUpdateRollback action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackOutput
 type ContinueUpdateRollbackOutput struct {
@@ -2959,6 +3130,12 @@ func (s ContinueUpdateRollbackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ContinueUpdateRollbackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ContinueUpdateRollbackOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The input for the CreateChangeSet action.
@@ -3248,6 +3425,92 @@ func (s *CreateChangeSetInput) SetUsePreviousTemplate(v bool) *CreateChangeSetIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ChangeSetType) > 0 {
+		v := s.ChangeSetType
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetType", v, protocol.Metadata{})
+	}
+	if s.ClientToken != nil {
+		v := *s.ClientToken
+
+		e.SetValue(protocol.BodyTarget, "ClientToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationARNs) > 0 {
+		v := s.NotificationARNs
+
+		e.SetList(protocol.BodyTarget, "NotificationARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if len(s.ResourceTypes) > 0 {
+		v := s.ResourceTypes
+
+		e.SetList(protocol.BodyTarget, "ResourceTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RollbackConfiguration != nil {
+		v := s.RollbackConfiguration
+
+		e.SetFields(protocol.BodyTarget, "RollbackConfiguration", v, protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsePreviousTemplate != nil {
+		v := *s.UsePreviousTemplate
+
+		e.SetValue(protocol.BodyTarget, "UsePreviousTemplate", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for the CreateChangeSet action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetOutput
 type CreateChangeSetOutput struct {
@@ -3287,6 +3550,22 @@ func (s *CreateChangeSetOutput) SetId(v string) *CreateChangeSetOutput {
 func (s *CreateChangeSetOutput) SetStackId(v string) *CreateChangeSetOutput {
 	s.StackId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateChangeSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for CreateStack action.
@@ -3615,6 +3894,102 @@ func (s *CreateStackInput) SetTimeoutInMinutes(v int64) *CreateStackInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStackInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DisableRollback != nil {
+		v := *s.DisableRollback
+
+		e.SetValue(protocol.BodyTarget, "DisableRollback", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnableTerminationProtection != nil {
+		v := *s.EnableTerminationProtection
+
+		e.SetValue(protocol.BodyTarget, "EnableTerminationProtection", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationARNs) > 0 {
+		v := s.NotificationARNs
+
+		e.SetList(protocol.BodyTarget, "NotificationARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.OnFailure) > 0 {
+		v := s.OnFailure
+
+		e.SetValue(protocol.BodyTarget, "OnFailure", v, protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if len(s.ResourceTypes) > 0 {
+		v := s.ResourceTypes
+
+		e.SetList(protocol.BodyTarget, "ResourceTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RollbackConfiguration != nil {
+		v := s.RollbackConfiguration
+
+		e.SetFields(protocol.BodyTarget, "RollbackConfiguration", v, protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyBody != nil {
+		v := *s.StackPolicyBody
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyURL != nil {
+		v := *s.StackPolicyURL
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TimeoutInMinutes != nil {
+		v := *s.TimeoutInMinutes
+
+		e.SetValue(protocol.BodyTarget, "TimeoutInMinutes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstancesInput
 type CreateStackInstancesInput struct {
 	_ struct{} `type:"structure"`
@@ -3724,6 +4099,43 @@ func (s *CreateStackInstancesInput) SetStackSetName(v string) *CreateStackInstan
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStackInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Accounts) > 0 {
+		v := s.Accounts
+
+		e.SetList(protocol.BodyTarget, "Accounts", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	var OperationId string
+	if s.OperationId != nil {
+		OperationId = *s.OperationId
+	} else {
+		OperationId = protocol.GetIdempotencyToken()
+	}
+	{
+		v := OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperationPreferences != nil {
+		v := s.OperationPreferences
+
+		e.SetFields(protocol.BodyTarget, "OperationPreferences", v, protocol.Metadata{})
+	}
+	if len(s.Regions) > 0 {
+		v := s.Regions
+
+		e.SetList(protocol.BodyTarget, "Regions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstancesOutput
 type CreateStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3753,6 +4165,17 @@ func (s CreateStackInstancesOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateStackInstancesOutput) SetOperationId(v string) *CreateStackInstancesOutput {
 	s.OperationId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStackInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The output for a CreateStack action.
@@ -3785,6 +4208,17 @@ func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateStackOutput) SetStackId(v string) *CreateStackOutput {
 	s.StackId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStackOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetInput
@@ -3973,6 +4407,63 @@ func (s *CreateStackSetInput) SetTemplateURL(v string) *CreateStackSetInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStackSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	var ClientRequestToken string
+	if s.ClientRequestToken != nil {
+		ClientRequestToken = *s.ClientRequestToken
+	} else {
+		ClientRequestToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetOutput
 type CreateStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4002,6 +4493,17 @@ func (s CreateStackSetOutput) SDKResponseMetadata() aws.Response {
 func (s *CreateStackSetOutput) SetStackSetId(v string) *CreateStackSetOutput {
 	s.StackSetId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateStackSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackSetId != nil {
+		v := *s.StackSetId
+
+		e.SetValue(protocol.BodyTarget, "StackSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for the DeleteChangeSet action.
@@ -4062,6 +4564,22 @@ func (s *DeleteChangeSetInput) SetStackName(v string) *DeleteChangeSetInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for the DeleteChangeSet action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSetOutput
 type DeleteChangeSetOutput struct {
@@ -4083,6 +4601,12 @@ func (s DeleteChangeSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteChangeSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The input for DeleteStack action.
@@ -4182,6 +4706,32 @@ func (s *DeleteStackInput) SetRoleARN(v string) *DeleteStackInput {
 func (s *DeleteStackInput) SetStackName(v string) *DeleteStackInput {
 	s.StackName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteStackInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RetainResources) > 0 {
+		v := s.RetainResources
+
+		e.SetList(protocol.BodyTarget, "RetainResources", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstancesInput
@@ -4310,6 +4860,48 @@ func (s *DeleteStackInstancesInput) SetStackSetName(v string) *DeleteStackInstan
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteStackInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Accounts) > 0 {
+		v := s.Accounts
+
+		e.SetList(protocol.BodyTarget, "Accounts", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	var OperationId string
+	if s.OperationId != nil {
+		OperationId = *s.OperationId
+	} else {
+		OperationId = protocol.GetIdempotencyToken()
+	}
+	{
+		v := OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperationPreferences != nil {
+		v := s.OperationPreferences
+
+		e.SetFields(protocol.BodyTarget, "OperationPreferences", v, protocol.Metadata{})
+	}
+	if len(s.Regions) > 0 {
+		v := s.Regions
+
+		e.SetList(protocol.BodyTarget, "Regions", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RetainStacks != nil {
+		v := *s.RetainStacks
+
+		e.SetValue(protocol.BodyTarget, "RetainStacks", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstancesOutput
 type DeleteStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4341,6 +4933,17 @@ func (s *DeleteStackInstancesOutput) SetOperationId(v string) *DeleteStackInstan
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteStackInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackOutput
 type DeleteStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -4361,6 +4964,12 @@ func (s DeleteStackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteStackOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetInput
@@ -4404,6 +5013,17 @@ func (s *DeleteStackSetInput) SetStackSetName(v string) *DeleteStackSetInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteStackSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput
 type DeleteStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4424,6 +5044,12 @@ func (s DeleteStackSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteStackSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteStackSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The input for the DescribeAccountLimits action.
@@ -4462,6 +5088,17 @@ func (s *DescribeAccountLimitsInput) Validate() error {
 func (s *DescribeAccountLimitsInput) SetNextToken(v string) *DescribeAccountLimitsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountLimitsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The output for the DescribeAccountLimits action.
@@ -4505,6 +5142,22 @@ func (s *DescribeAccountLimitsOutput) SetAccountLimits(v []AccountLimit) *Descri
 func (s *DescribeAccountLimitsOutput) SetNextToken(v string) *DescribeAccountLimitsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeAccountLimitsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AccountLimits) > 0 {
+		v := s.AccountLimits
+
+		e.SetList(protocol.BodyTarget, "AccountLimits", encodeAccountLimitList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for the DescribeChangeSet action.
@@ -4576,6 +5229,27 @@ func (s *DescribeChangeSetInput) SetNextToken(v string) *DescribeChangeSetInput 
 func (s *DescribeChangeSetInput) SetStackName(v string) *DescribeChangeSetInput {
 	s.StackName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The output for the DescribeChangeSet action.
@@ -4760,6 +5434,97 @@ func (s *DescribeChangeSetOutput) SetTags(v []Tag) *DescribeChangeSetOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeChangeSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.ChangeSetId != nil {
+		v := *s.ChangeSetId
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Changes) > 0 {
+		v := s.Changes
+
+		e.SetList(protocol.BodyTarget, "Changes", encodeChangeList(v), protocol.Metadata{})
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ExecutionStatus) > 0 {
+		v := s.ExecutionStatus
+
+		e.SetValue(protocol.BodyTarget, "ExecutionStatus", v, protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationARNs) > 0 {
+		v := s.NotificationARNs
+
+		e.SetList(protocol.BodyTarget, "NotificationARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if s.RollbackConfiguration != nil {
+		v := s.RollbackConfiguration
+
+		e.SetFields(protocol.BodyTarget, "RollbackConfiguration", v, protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		e.SetValue(protocol.BodyTarget, "StatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The input for DescribeStackEvents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsInput
 type DescribeStackEventsInput struct {
@@ -4815,6 +5580,22 @@ func (s *DescribeStackEventsInput) SetStackName(v string) *DescribeStackEventsIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a DescribeStackEvents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsOutput
 type DescribeStackEventsOutput struct {
@@ -4855,6 +5636,22 @@ func (s *DescribeStackEventsOutput) SetNextToken(v string) *DescribeStackEventsO
 func (s *DescribeStackEventsOutput) SetStackEvents(v []StackEvent) *DescribeStackEventsOutput {
 	s.StackEvents = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StackEvents) > 0 {
+		v := s.StackEvents
+
+		e.SetList(protocol.BodyTarget, "StackEvents", encodeStackEventList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceInput
@@ -4928,6 +5725,27 @@ func (s *DescribeStackInstanceInput) SetStackSetName(v string) *DescribeStackIns
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackInstanceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackInstanceAccount != nil {
+		v := *s.StackInstanceAccount
+
+		e.SetValue(protocol.BodyTarget, "StackInstanceAccount", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackInstanceRegion != nil {
+		v := *s.StackInstanceRegion
+
+		e.SetValue(protocol.BodyTarget, "StackInstanceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceOutput
 type DescribeStackInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4957,6 +5775,17 @@ func (s DescribeStackInstanceOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeStackInstanceOutput) SetStackInstance(v *StackInstance) *DescribeStackInstanceOutput {
 	s.StackInstance = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackInstanceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackInstance != nil {
+		v := s.StackInstance
+
+		e.SetFields(protocol.BodyTarget, "StackInstance", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for DescribeStackResource action.
@@ -5025,6 +5854,22 @@ func (s *DescribeStackResourceInput) SetStackName(v string) *DescribeStackResour
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a DescribeStackResource action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceOutput
 type DescribeStackResourceOutput struct {
@@ -5056,6 +5901,17 @@ func (s DescribeStackResourceOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeStackResourceOutput) SetStackResourceDetail(v *StackResourceDetail) *DescribeStackResourceOutput {
 	s.StackResourceDetail = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackResourceDetail != nil {
+		v := s.StackResourceDetail
+
+		e.SetFields(protocol.BodyTarget, "StackResourceDetail", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for DescribeStackResources action.
@@ -5125,6 +5981,27 @@ func (s *DescribeStackResourcesInput) SetStackName(v string) *DescribeStackResou
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhysicalResourceId != nil {
+		v := *s.PhysicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "PhysicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a DescribeStackResources action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesOutput
 type DescribeStackResourcesOutput struct {
@@ -5155,6 +6032,17 @@ func (s DescribeStackResourcesOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeStackResourcesOutput) SetStackResources(v []StackResource) *DescribeStackResourcesOutput {
 	s.StackResources = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.StackResources) > 0 {
+		v := s.StackResources
+
+		e.SetList(protocol.BodyTarget, "StackResources", encodeStackResourceList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetInput
@@ -5195,6 +6083,17 @@ func (s *DescribeStackSetInput) Validate() error {
 func (s *DescribeStackSetInput) SetStackSetName(v string) *DescribeStackSetInput {
 	s.StackSetName = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperationInput
@@ -5255,6 +6154,22 @@ func (s *DescribeStackSetOperationInput) SetStackSetName(v string) *DescribeStac
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackSetOperationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperationOutput
 type DescribeStackSetOperationOutput struct {
 	_ struct{} `type:"structure"`
@@ -5286,6 +6201,17 @@ func (s *DescribeStackSetOperationOutput) SetStackSetOperation(v *StackSetOperat
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackSetOperationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackSetOperation != nil {
+		v := s.StackSetOperation
+
+		e.SetFields(protocol.BodyTarget, "StackSetOperation", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOutput
 type DescribeStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5315,6 +6241,17 @@ func (s DescribeStackSetOutput) SDKResponseMetadata() aws.Response {
 func (s *DescribeStackSetOutput) SetStackSet(v *StackSet) *DescribeStackSetOutput {
 	s.StackSet = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStackSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackSet != nil {
+		v := s.StackSet
+
+		e.SetFields(protocol.BodyTarget, "StackSet", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for DescribeStacks action.
@@ -5372,6 +6309,22 @@ func (s *DescribeStacksInput) SetStackName(v string) *DescribeStacksInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStacksInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a DescribeStacks action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacksOutput
 type DescribeStacksOutput struct {
@@ -5412,6 +6365,22 @@ func (s *DescribeStacksOutput) SetNextToken(v string) *DescribeStacksOutput {
 func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
 	s.Stacks = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeStacksOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Stacks) > 0 {
+		v := s.Stacks
+
+		e.SetList(protocol.BodyTarget, "Stacks", encodeStackList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for an EstimateTemplateCost action.
@@ -5485,6 +6454,27 @@ func (s *EstimateTemplateCostInput) SetTemplateURL(v string) *EstimateTemplateCo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EstimateTemplateCostInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a EstimateTemplateCost action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCostOutput
 type EstimateTemplateCostOutput struct {
@@ -5516,6 +6506,17 @@ func (s EstimateTemplateCostOutput) SDKResponseMetadata() aws.Response {
 func (s *EstimateTemplateCostOutput) SetUrl(v string) *EstimateTemplateCostOutput {
 	s.Url = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *EstimateTemplateCostOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Url != nil {
+		v := *s.Url
+
+		e.SetValue(protocol.BodyTarget, "Url", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for the ExecuteChangeSet action.
@@ -5592,6 +6593,27 @@ func (s *ExecuteChangeSetInput) SetStackName(v string) *ExecuteChangeSetInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExecuteChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for the ExecuteChangeSet action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetOutput
 type ExecuteChangeSetOutput struct {
@@ -5613,6 +6635,12 @@ func (s ExecuteChangeSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ExecuteChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ExecuteChangeSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The Export structure describes the exported output values for a stack.
@@ -5661,6 +6689,35 @@ func (s *Export) SetValue(v string) *Export {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Export) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExportingStackId != nil {
+		v := *s.ExportingStackId
+
+		e.SetValue(protocol.BodyTarget, "ExportingStackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeExportList(vs []Export) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The input for the GetStackPolicy action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyInput
 type GetStackPolicyInput struct {
@@ -5703,6 +6760,17 @@ func (s *GetStackPolicyInput) SetStackName(v string) *GetStackPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetStackPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for the GetStackPolicy action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyOutput
 type GetStackPolicyOutput struct {
@@ -5735,6 +6803,17 @@ func (s GetStackPolicyOutput) SDKResponseMetadata() aws.Response {
 func (s *GetStackPolicyOutput) SetStackPolicyBody(v string) *GetStackPolicyOutput {
 	s.StackPolicyBody = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetStackPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackPolicyBody != nil {
+		v := *s.StackPolicyBody
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for a GetTemplate action.
@@ -5809,6 +6888,27 @@ func (s *GetTemplateInput) SetTemplateStage(v TemplateStage) *GetTemplateInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.TemplateStage) > 0 {
+		v := s.TemplateStage
+
+		e.SetValue(protocol.BodyTarget, "TemplateStage", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for GetTemplate action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateOutput
 type GetTemplateOutput struct {
@@ -5856,6 +6956,27 @@ func (s *GetTemplateOutput) SetStagesAvailable(v []TemplateStage) *GetTemplateOu
 func (s *GetTemplateOutput) SetTemplateBody(v string) *GetTemplateOutput {
 	s.TemplateBody = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.StagesAvailable) > 0 {
+		v := s.StagesAvailable
+
+		e.SetList(protocol.BodyTarget, "StagesAvailable", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for the GetTemplateSummary action.
@@ -5951,6 +7072,32 @@ func (s *GetTemplateSummaryInput) SetTemplateBody(v string) *GetTemplateSummaryI
 func (s *GetTemplateSummaryInput) SetTemplateURL(v string) *GetTemplateSummaryInput {
 	s.TemplateURL = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetTemplateSummaryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The output for the GetTemplateSummary action.
@@ -6059,6 +7206,57 @@ func (s *GetTemplateSummaryOutput) SetVersion(v string) *GetTemplateSummaryOutpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *GetTemplateSummaryOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.CapabilitiesReason != nil {
+		v := *s.CapabilitiesReason
+
+		e.SetValue(protocol.BodyTarget, "CapabilitiesReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DeclaredTransforms) > 0 {
+		v := s.DeclaredTransforms
+
+		e.SetList(protocol.BodyTarget, "DeclaredTransforms", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Metadata != nil {
+		v := *s.Metadata
+
+		e.SetValue(protocol.BodyTarget, "Metadata", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterDeclarationList(v), protocol.Metadata{})
+	}
+	if len(s.ResourceTypes) > 0 {
+		v := s.ResourceTypes
+
+		e.SetList(protocol.BodyTarget, "ResourceTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		e.SetValue(protocol.BodyTarget, "Version", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The input for the ListChangeSets action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsInput
 type ListChangeSetsInput struct {
@@ -6117,6 +7315,22 @@ func (s *ListChangeSetsInput) SetStackName(v string) *ListChangeSetsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListChangeSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for the ListChangeSets action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsOutput
 type ListChangeSetsOutput struct {
@@ -6160,6 +7374,22 @@ func (s *ListChangeSetsOutput) SetSummaries(v []ChangeSetSummary) *ListChangeSet
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListChangeSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Summaries) > 0 {
+		v := s.Summaries
+
+		e.SetList(protocol.BodyTarget, "Summaries", encodeChangeSetSummaryList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsInput
 type ListExportsInput struct {
 	_ struct{} `type:"structure"`
@@ -6196,6 +7426,17 @@ func (s *ListExportsInput) Validate() error {
 func (s *ListExportsInput) SetNextToken(v string) *ListExportsInput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListExportsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsOutput
@@ -6237,6 +7478,22 @@ func (s *ListExportsOutput) SetExports(v []Export) *ListExportsOutput {
 func (s *ListExportsOutput) SetNextToken(v string) *ListExportsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListExportsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Exports) > 0 {
+		v := s.Exports
+
+		e.SetList(protocol.BodyTarget, "Exports", encodeExportList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsInput
@@ -6293,6 +7550,22 @@ func (s *ListImportsInput) SetNextToken(v string) *ListImportsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListImportsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExportName != nil {
+		v := *s.ExportName
+
+		e.SetValue(protocol.BodyTarget, "ExportName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsOutput
 type ListImportsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6332,6 +7605,22 @@ func (s *ListImportsOutput) SetImports(v []string) *ListImportsOutput {
 func (s *ListImportsOutput) SetNextToken(v string) *ListImportsOutput {
 	s.NextToken = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListImportsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Imports) > 0 {
+		v := s.Imports
+
+		e.SetList(protocol.BodyTarget, "Imports", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesInput
@@ -6424,6 +7713,37 @@ func (s *ListStackInstancesInput) SetStackSetName(v string) *ListStackInstancesI
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackInstanceAccount != nil {
+		v := *s.StackInstanceAccount
+
+		e.SetValue(protocol.BodyTarget, "StackInstanceAccount", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackInstanceRegion != nil {
+		v := *s.StackInstanceRegion
+
+		e.SetValue(protocol.BodyTarget, "StackInstanceRegion", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesOutput
 type ListStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6466,6 +7786,22 @@ func (s *ListStackInstancesOutput) SetNextToken(v string) *ListStackInstancesOut
 func (s *ListStackInstancesOutput) SetSummaries(v []StackInstanceSummary) *ListStackInstancesOutput {
 	s.Summaries = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Summaries) > 0 {
+		v := s.Summaries
+
+		e.SetList(protocol.BodyTarget, "Summaries", encodeStackInstanceSummaryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for the ListStackResource action.
@@ -6530,6 +7866,22 @@ func (s *ListStackResourcesInput) SetStackName(v string) *ListStackResourcesInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for a ListStackResources action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResourcesOutput
 type ListStackResourcesOutput struct {
@@ -6570,6 +7922,22 @@ func (s *ListStackResourcesOutput) SetNextToken(v string) *ListStackResourcesOut
 func (s *ListStackResourcesOutput) SetStackResourceSummaries(v []StackResourceSummary) *ListStackResourcesOutput {
 	s.StackResourceSummaries = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StackResourceSummaries) > 0 {
+		v := s.StackResourceSummaries
+
+		e.SetList(protocol.BodyTarget, "StackResourceSummaries", encodeStackResourceSummaryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsInput
@@ -6662,6 +8030,32 @@ func (s *ListStackSetOperationResultsInput) SetStackSetName(v string) *ListStack
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackSetOperationResultsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsOutput
 type ListStackSetOperationResultsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6705,6 +8099,22 @@ func (s *ListStackSetOperationResultsOutput) SetNextToken(v string) *ListStackSe
 func (s *ListStackSetOperationResultsOutput) SetSummaries(v []StackSetOperationResultSummary) *ListStackSetOperationResultsOutput {
 	s.Summaries = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackSetOperationResultsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Summaries) > 0 {
+		v := s.Summaries
+
+		e.SetList(protocol.BodyTarget, "Summaries", encodeStackSetOperationResultSummaryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationsInput
@@ -6779,6 +8189,27 @@ func (s *ListStackSetOperationsInput) SetStackSetName(v string) *ListStackSetOpe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackSetOperationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationsOutput
 type ListStackSetOperationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6821,6 +8252,22 @@ func (s *ListStackSetOperationsOutput) SetNextToken(v string) *ListStackSetOpera
 func (s *ListStackSetOperationsOutput) SetSummaries(v []StackSetOperationSummary) *ListStackSetOperationsOutput {
 	s.Summaries = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackSetOperationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Summaries) > 0 {
+		v := s.Summaries
+
+		e.SetList(protocol.BodyTarget, "Summaries", encodeStackSetOperationSummaryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetsInput
@@ -6888,6 +8335,27 @@ func (s *ListStackSetsInput) SetStatus(v StackSetStatus) *ListStackSetsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetsOutput
 type ListStackSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6930,6 +8398,22 @@ func (s *ListStackSetsOutput) SetNextToken(v string) *ListStackSetsOutput {
 func (s *ListStackSetsOutput) SetSummaries(v []StackSetSummary) *ListStackSetsOutput {
 	s.Summaries = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStackSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Summaries) > 0 {
+		v := s.Summaries
+
+		e.SetList(protocol.BodyTarget, "Summaries", encodeStackSetSummaryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for ListStacks action.
@@ -6981,6 +8465,27 @@ func (s *ListStacksInput) SetStackStatusFilter(v []StackStatus) *ListStacksInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStacksInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StackStatusFilter) > 0 {
+		v := s.StackStatusFilter
+
+		e.SetList(protocol.BodyTarget, "StackStatusFilter", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for ListStacks action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacksOutput
 type ListStacksOutput struct {
@@ -7022,6 +8527,22 @@ func (s *ListStacksOutput) SetNextToken(v string) *ListStacksOutput {
 func (s *ListStacksOutput) SetStackSummaries(v []StackSummary) *ListStacksOutput {
 	s.StackSummaries = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ListStacksOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StackSummaries) > 0 {
+		v := s.StackSummaries
+
+		e.SetList(protocol.BodyTarget, "StackSummaries", encodeStackSummaryList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The Output data type.
@@ -7076,6 +8597,40 @@ func (s *Output) SetOutputValue(v string) *Output {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Output) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ExportName != nil {
+		v := *s.ExportName
+
+		e.SetValue(protocol.BodyTarget, "ExportName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OutputKey != nil {
+		v := *s.OutputKey
+
+		e.SetValue(protocol.BodyTarget, "OutputKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OutputValue != nil {
+		v := *s.OutputValue
+
+		e.SetValue(protocol.BodyTarget, "OutputValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeOutputList(vs []Output) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The Parameter data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Parameter
 type Parameter struct {
@@ -7123,6 +8678,35 @@ func (s *Parameter) SetUsePreviousValue(v bool) *Parameter {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Parameter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ParameterKey != nil {
+		v := *s.ParameterKey
+
+		e.SetValue(protocol.BodyTarget, "ParameterKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterValue != nil {
+		v := *s.ParameterValue
+
+		e.SetValue(protocol.BodyTarget, "ParameterValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsePreviousValue != nil {
+		v := *s.UsePreviousValue
+
+		e.SetValue(protocol.BodyTarget, "UsePreviousValue", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeParameterList(vs []Parameter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // A set of criteria that AWS CloudFormation uses to validate parameter values.
 // Although other constraints might be defined in the stack template, AWS CloudFormation
 // returns only the AllowedValues property.
@@ -7148,6 +8732,17 @@ func (s ParameterConstraints) GoString() string {
 func (s *ParameterConstraints) SetAllowedValues(v []string) *ParameterConstraints {
 	s.AllowedValues = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ParameterConstraints) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AllowedValues) > 0 {
+		v := s.AllowedValues
+
+		e.SetList(protocol.BodyTarget, "AllowedValues", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The ParameterDeclaration data type.
@@ -7219,6 +8814,50 @@ func (s *ParameterDeclaration) SetParameterKey(v string) *ParameterDeclaration {
 func (s *ParameterDeclaration) SetParameterType(v string) *ParameterDeclaration {
 	s.ParameterType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ParameterDeclaration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NoEcho != nil {
+		v := *s.NoEcho
+
+		e.SetValue(protocol.BodyTarget, "NoEcho", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ParameterConstraints != nil {
+		v := s.ParameterConstraints
+
+		e.SetFields(protocol.BodyTarget, "ParameterConstraints", v, protocol.Metadata{})
+	}
+	if s.ParameterKey != nil {
+		v := *s.ParameterKey
+
+		e.SetValue(protocol.BodyTarget, "ParameterKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ParameterType != nil {
+		v := *s.ParameterType
+
+		e.SetValue(protocol.BodyTarget, "ParameterType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeParameterDeclarationList(vs []ParameterDeclaration) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The ResourceChange structure describes the resource and the action that AWS
@@ -7316,6 +8955,52 @@ func (s *ResourceChange) SetScope(v []ResourceAttribute) *ResourceChange {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResourceChange) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		e.SetValue(protocol.BodyTarget, "Action", v, protocol.Metadata{})
+	}
+	if len(s.Details) > 0 {
+		v := s.Details
+
+		e.SetList(protocol.BodyTarget, "Details", encodeResourceChangeDetailList(v), protocol.Metadata{})
+	}
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhysicalResourceId != nil {
+		v := *s.PhysicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "PhysicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Replacement) > 0 {
+		v := s.Replacement
+
+		e.SetValue(protocol.BodyTarget, "Replacement", v, protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Scope) > 0 {
+		v := s.Scope
+
+		e.SetList(protocol.BodyTarget, "Scope", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // For a resource with Modify as the action, the ResourceChange structure describes
 // the changes AWS CloudFormation will make to that resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChangeDetail
@@ -7410,6 +9095,40 @@ func (s *ResourceChangeDetail) SetTarget(v *ResourceTargetDefinition) *ResourceC
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResourceChangeDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CausingEntity != nil {
+		v := *s.CausingEntity
+
+		e.SetValue(protocol.BodyTarget, "CausingEntity", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ChangeSource) > 0 {
+		v := s.ChangeSource
+
+		e.SetValue(protocol.BodyTarget, "ChangeSource", v, protocol.Metadata{})
+	}
+	if len(s.Evaluation) > 0 {
+		v := s.Evaluation
+
+		e.SetValue(protocol.BodyTarget, "Evaluation", v, protocol.Metadata{})
+	}
+	if s.Target != nil {
+		v := s.Target
+
+		e.SetFields(protocol.BodyTarget, "Target", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeResourceChangeDetailList(vs []ResourceChangeDetail) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The field that AWS CloudFormation will change, such as the name of a resource's
 // property, and whether the resource will be recreated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition
@@ -7458,6 +9177,27 @@ func (s *ResourceTargetDefinition) SetName(v string) *ResourceTargetDefinition {
 func (s *ResourceTargetDefinition) SetRequiresRecreation(v RequiresRecreation) *ResourceTargetDefinition {
 	s.RequiresRecreation = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ResourceTargetDefinition) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Attribute) > 0 {
+		v := s.Attribute
+
+		e.SetValue(protocol.BodyTarget, "Attribute", v, protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.RequiresRecreation) > 0 {
+		v := s.RequiresRecreation
+
+		e.SetValue(protocol.BodyTarget, "RequiresRecreation", v, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Structure containing the rollback triggers for AWS CloudFormation to monitor
@@ -7573,6 +9313,22 @@ func (s *RollbackConfiguration) SetRollbackTriggers(v []RollbackTrigger) *Rollba
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RollbackConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MonitoringTimeInMinutes != nil {
+		v := *s.MonitoringTimeInMinutes
+
+		e.SetValue(protocol.BodyTarget, "MonitoringTimeInMinutes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.RollbackTriggers) > 0 {
+		v := s.RollbackTriggers
+
+		e.SetList(protocol.BodyTarget, "RollbackTriggers", encodeRollbackTriggerList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // A rollback trigger AWS CloudFormation monitors during creation and updating
 // of stacks. If any of the alarms you specify goes to ALERT state during the
 // stack operation or within the specified monitoring period afterwards, CloudFormation
@@ -7632,6 +9388,30 @@ func (s *RollbackTrigger) SetArn(v string) *RollbackTrigger {
 func (s *RollbackTrigger) SetType(v string) *RollbackTrigger {
 	s.Type = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *RollbackTrigger) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		e.SetValue(protocol.BodyTarget, "Type", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeRollbackTriggerList(vs []RollbackTrigger) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The input for the SetStackPolicy action.
@@ -7705,6 +9485,27 @@ func (s *SetStackPolicyInput) SetStackPolicyURL(v string) *SetStackPolicyInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetStackPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyBody != nil {
+		v := *s.StackPolicyBody
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyURL != nil {
+		v := *s.StackPolicyURL
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicyOutput
 type SetStackPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -7725,6 +9526,12 @@ func (s SetStackPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetStackPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SetStackPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The input for the SignalResource action.
@@ -7824,6 +9631,32 @@ func (s *SignalResourceInput) SetUniqueId(v string) *SignalResourceInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SignalResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.UniqueId != nil {
+		v := *s.UniqueId
+
+		e.SetValue(protocol.BodyTarget, "UniqueId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResourceOutput
 type SignalResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -7844,6 +9677,12 @@ func (s SignalResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SignalResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *SignalResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The Stack data type.
@@ -8080,6 +9919,130 @@ func (s *Stack) SetTimeoutInMinutes(v int64) *Stack {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Stack) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.ChangeSetId != nil {
+		v := *s.ChangeSetId
+
+		e.SetValue(protocol.BodyTarget, "ChangeSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DeletionTime != nil {
+		v := *s.DeletionTime
+
+		e.SetValue(protocol.BodyTarget, "DeletionTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.DisableRollback != nil {
+		v := *s.DisableRollback
+
+		e.SetValue(protocol.BodyTarget, "DisableRollback", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.EnableTerminationProtection != nil {
+		v := *s.EnableTerminationProtection
+
+		e.SetValue(protocol.BodyTarget, "EnableTerminationProtection", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.LastUpdatedTime != nil {
+		v := *s.LastUpdatedTime
+
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if len(s.NotificationARNs) > 0 {
+		v := s.NotificationARNs
+
+		e.SetList(protocol.BodyTarget, "NotificationARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Outputs) > 0 {
+		v := s.Outputs
+
+		e.SetList(protocol.BodyTarget, "Outputs", encodeOutputList(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if s.ParentId != nil {
+		v := *s.ParentId
+
+		e.SetValue(protocol.BodyTarget, "ParentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RollbackConfiguration != nil {
+		v := s.RollbackConfiguration
+
+		e.SetFields(protocol.BodyTarget, "RollbackConfiguration", v, protocol.Metadata{})
+	}
+	if s.RootId != nil {
+		v := *s.RootId
+
+		e.SetValue(protocol.BodyTarget, "RootId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StackStatus) > 0 {
+		v := s.StackStatus
+
+		e.SetValue(protocol.BodyTarget, "StackStatus", v, protocol.Metadata{})
+	}
+	if s.StackStatusReason != nil {
+		v := *s.StackStatusReason
+
+		e.SetValue(protocol.BodyTarget, "StackStatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TimeoutInMinutes != nil {
+		v := *s.TimeoutInMinutes
+
+		e.SetValue(protocol.BodyTarget, "TimeoutInMinutes", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackList(vs []Stack) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The StackEvent data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent
 type StackEvent struct {
@@ -8217,6 +10180,75 @@ func (s *StackEvent) SetTimestamp(v time.Time) *StackEvent {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackEvent) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.EventId != nil {
+		v := *s.EventId
+
+		e.SetValue(protocol.BodyTarget, "EventId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhysicalResourceId != nil {
+		v := *s.PhysicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "PhysicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceProperties != nil {
+		v := *s.ResourceProperties
+
+		e.SetValue(protocol.BodyTarget, "ResourceProperties", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ResourceStatus) > 0 {
+		v := s.ResourceStatus
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatus", v, protocol.Metadata{})
+	}
+	if s.ResourceStatusReason != nil {
+		v := *s.ResourceStatusReason
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackEventList(vs []StackEvent) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // An AWS CloudFormation stack, in a specific account and region, that's part
 // of a stack set operation. A stack instance is a reference to an attempted
 // or actual stack in a given account within a given region. A stack instance
@@ -8312,6 +10344,42 @@ func (s *StackInstance) SetStatusReason(v string) *StackInstance {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackInstance) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Account != nil {
+		v := *s.Account
+
+		e.SetValue(protocol.BodyTarget, "Account", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		e.SetValue(protocol.BodyTarget, "Region", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetId != nil {
+		v := *s.StackSetId
+
+		e.SetValue(protocol.BodyTarget, "StackSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		e.SetValue(protocol.BodyTarget, "StatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The structure that contains summary information about a stack instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary
 type StackInstanceSummary struct {
@@ -8398,6 +10466,50 @@ func (s *StackInstanceSummary) SetStatus(v StackInstanceStatus) *StackInstanceSu
 func (s *StackInstanceSummary) SetStatusReason(v string) *StackInstanceSummary {
 	s.StatusReason = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackInstanceSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Account != nil {
+		v := *s.Account
+
+		e.SetValue(protocol.BodyTarget, "Account", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		e.SetValue(protocol.BodyTarget, "Region", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetId != nil {
+		v := *s.StackSetId
+
+		e.SetValue(protocol.BodyTarget, "StackSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		e.SetValue(protocol.BodyTarget, "StatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackInstanceSummaryList(vs []StackInstanceSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The StackResource data type.
@@ -8506,6 +10618,65 @@ func (s *StackResource) SetStackName(v string) *StackResource {
 func (s *StackResource) SetTimestamp(v time.Time) *StackResource {
 	s.Timestamp = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackResource) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhysicalResourceId != nil {
+		v := *s.PhysicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "PhysicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ResourceStatus) > 0 {
+		v := s.ResourceStatus
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatus", v, protocol.Metadata{})
+	}
+	if s.ResourceStatusReason != nil {
+		v := *s.ResourceStatusReason
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackResourceList(vs []StackResource) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // Contains detailed information about the specified stack resource.
@@ -8627,6 +10798,62 @@ func (s *StackResourceDetail) SetStackName(v string) *StackResourceDetail {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackResourceDetail) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
+
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Metadata != nil {
+		v := *s.Metadata
+
+		e.SetValue(protocol.BodyTarget, "Metadata", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhysicalResourceId != nil {
+		v := *s.PhysicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "PhysicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ResourceStatus) > 0 {
+		v := s.ResourceStatus
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatus", v, protocol.Metadata{})
+	}
+	if s.ResourceStatusReason != nil {
+		v := *s.ResourceStatusReason
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Contains high-level information about the specified stack resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary
 type StackResourceSummary struct {
@@ -8706,6 +10933,50 @@ func (s *StackResourceSummary) SetResourceStatusReason(v string) *StackResourceS
 func (s *StackResourceSummary) SetResourceType(v string) *StackResourceSummary {
 	s.ResourceType = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackResourceSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
+
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.LogicalResourceId != nil {
+		v := *s.LogicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "LogicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.PhysicalResourceId != nil {
+		v := *s.PhysicalResourceId
+
+		e.SetValue(protocol.BodyTarget, "PhysicalResourceId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.ResourceStatus) > 0 {
+		v := s.ResourceStatus
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatus", v, protocol.Metadata{})
+	}
+	if s.ResourceStatusReason != nil {
+		v := *s.ResourceStatusReason
+
+		e.SetValue(protocol.BodyTarget, "ResourceStatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackResourceSummaryList(vs []StackResourceSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // A structure that contains information about a stack set. A stack set enables
@@ -8804,6 +11075,57 @@ func (s *StackSet) SetTags(v []Tag) *StackSet {
 func (s *StackSet) SetTemplateBody(v string) *StackSet {
 	s.TemplateBody = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSet) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if s.StackSetId != nil {
+		v := *s.StackSetId
+
+		e.SetValue(protocol.BodyTarget, "StackSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The structure that contains information about a stack set operation.
@@ -8924,6 +11246,52 @@ func (s *StackSetOperation) SetStatus(v StackSetOperationStatus) *StackSetOperat
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSetOperation) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		e.SetValue(protocol.BodyTarget, "Action", v, protocol.Metadata{})
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.EndTimestamp != nil {
+		v := *s.EndTimestamp
+
+		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperationPreferences != nil {
+		v := s.OperationPreferences
+
+		e.SetFields(protocol.BodyTarget, "OperationPreferences", v, protocol.Metadata{})
+	}
+	if s.RetainStacks != nil {
+		v := *s.RetainStacks
+
+		e.SetValue(protocol.BodyTarget, "RetainStacks", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StackSetId != nil {
+		v := *s.StackSetId
+
+		e.SetValue(protocol.BodyTarget, "StackSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
 // The user-specified preferences for how AWS CloudFormation performs a stack
 // set operation.
 //
@@ -9042,6 +11410,37 @@ func (s *StackSetOperationPreferences) SetRegionOrder(v []string) *StackSetOpera
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSetOperationPreferences) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FailureToleranceCount != nil {
+		v := *s.FailureToleranceCount
+
+		e.SetValue(protocol.BodyTarget, "FailureToleranceCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.FailureTolerancePercentage != nil {
+		v := *s.FailureTolerancePercentage
+
+		e.SetValue(protocol.BodyTarget, "FailureTolerancePercentage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MaxConcurrentCount != nil {
+		v := *s.MaxConcurrentCount
+
+		e.SetValue(protocol.BodyTarget, "MaxConcurrentCount", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MaxConcurrentPercentage != nil {
+		v := *s.MaxConcurrentPercentage
+
+		e.SetValue(protocol.BodyTarget, "MaxConcurrentPercentage", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if len(s.RegionOrder) > 0 {
+		v := s.RegionOrder
+
+		e.SetList(protocol.BodyTarget, "RegionOrder", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The structure that contains information about a specified operation's results
 // for a given account in a given region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary
@@ -9123,6 +11522,45 @@ func (s *StackSetOperationResultSummary) SetStatus(v StackSetOperationResultStat
 func (s *StackSetOperationResultSummary) SetStatusReason(v string) *StackSetOperationResultSummary {
 	s.StatusReason = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSetOperationResultSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Account != nil {
+		v := *s.Account
+
+		e.SetValue(protocol.BodyTarget, "Account", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.AccountGateResult != nil {
+		v := s.AccountGateResult
+
+		e.SetFields(protocol.BodyTarget, "AccountGateResult", v, protocol.Metadata{})
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		e.SetValue(protocol.BodyTarget, "Region", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		e.SetValue(protocol.BodyTarget, "StatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackSetOperationResultSummaryList(vs []StackSetOperationResultSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The structures that contain summary information about the specified operation.
@@ -9213,6 +11651,45 @@ func (s *StackSetOperationSummary) SetStatus(v StackSetOperationStatus) *StackSe
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSetOperationSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		e.SetValue(protocol.BodyTarget, "Action", v, protocol.Metadata{})
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.EndTimestamp != nil {
+		v := *s.EndTimestamp
+
+		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackSetOperationSummaryList(vs []StackSetOperationSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The structures that contain summary information about the specified stack
 // set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary
@@ -9265,6 +11742,40 @@ func (s *StackSetSummary) SetStackSetName(v string) *StackSetSummary {
 func (s *StackSetSummary) SetStatus(v StackSetStatus) *StackSetSummary {
 	s.Status = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSetSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetId != nil {
+		v := *s.StackSetId
+
+		e.SetValue(protocol.BodyTarget, "StackSetId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		e.SetValue(protocol.BodyTarget, "Status", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackSetSummaryList(vs []StackSetSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The StackSummary Data Type
@@ -9389,6 +11900,70 @@ func (s *StackSummary) SetTemplateDescription(v string) *StackSummary {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StackSummary) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.DeletionTime != nil {
+		v := *s.DeletionTime
+
+		e.SetValue(protocol.BodyTarget, "DeletionTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.LastUpdatedTime != nil {
+		v := *s.LastUpdatedTime
+
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, protocol.Metadata{})
+	}
+	if s.ParentId != nil {
+		v := *s.ParentId
+
+		e.SetValue(protocol.BodyTarget, "ParentId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RootId != nil {
+		v := *s.RootId
+
+		e.SetValue(protocol.BodyTarget, "RootId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.StackStatus) > 0 {
+		v := s.StackStatus
+
+		e.SetValue(protocol.BodyTarget, "StackStatus", v, protocol.Metadata{})
+	}
+	if s.StackStatusReason != nil {
+		v := *s.StackStatusReason
+
+		e.SetValue(protocol.BodyTarget, "StackStatusReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateDescription != nil {
+		v := *s.TemplateDescription
+
+		e.SetValue(protocol.BodyTarget, "TemplateDescription", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeStackSummaryList(vs []StackSummary) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationInput
 type StopStackSetOperationInput struct {
 	_ struct{} `type:"structure"`
@@ -9448,6 +12023,22 @@ func (s *StopStackSetOperationInput) SetStackSetName(v string) *StopStackSetOper
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StopStackSetOperationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationOutput
 type StopStackSetOperationOutput struct {
 	_ struct{} `type:"structure"`
@@ -9468,6 +12059,12 @@ func (s StopStackSetOperationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopStackSetOperationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *StopStackSetOperationOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // The Tag type enables you to specify a key-value pair that can be used to
@@ -9536,6 +12133,30 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // The TemplateParameter data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateParameter
 type TemplateParameter struct {
@@ -9587,6 +12208,40 @@ func (s *TemplateParameter) SetNoEcho(v bool) *TemplateParameter {
 func (s *TemplateParameter) SetParameterKey(v string) *TemplateParameter {
 	s.ParameterKey = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *TemplateParameter) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		e.SetValue(protocol.BodyTarget, "DefaultValue", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.NoEcho != nil {
+		v := *s.NoEcho
+
+		e.SetValue(protocol.BodyTarget, "NoEcho", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.ParameterKey != nil {
+		v := *s.ParameterKey
+
+		e.SetValue(protocol.BodyTarget, "ParameterKey", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTemplateParameterList(vs []TemplateParameter) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
 }
 
 // The input for an UpdateStack action.
@@ -9908,6 +12563,97 @@ func (s *UpdateStackInput) SetUsePreviousTemplate(v bool) *UpdateStackInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateStackInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.ClientRequestToken != nil {
+		v := *s.ClientRequestToken
+
+		e.SetValue(protocol.BodyTarget, "ClientRequestToken", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.NotificationARNs) > 0 {
+		v := s.NotificationARNs
+
+		e.SetList(protocol.BodyTarget, "NotificationARNs", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if len(s.ResourceTypes) > 0 {
+		v := s.ResourceTypes
+
+		e.SetList(protocol.BodyTarget, "ResourceTypes", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.RoleARN != nil {
+		v := *s.RoleARN
+
+		e.SetValue(protocol.BodyTarget, "RoleARN", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.RollbackConfiguration != nil {
+		v := s.RollbackConfiguration
+
+		e.SetFields(protocol.BodyTarget, "RollbackConfiguration", v, protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyBody != nil {
+		v := *s.StackPolicyBody
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyDuringUpdateBody != nil {
+		v := *s.StackPolicyDuringUpdateBody
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyDuringUpdateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyDuringUpdateURL != nil {
+		v := *s.StackPolicyDuringUpdateURL
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyDuringUpdateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.StackPolicyURL != nil {
+		v := *s.StackPolicyURL
+
+		e.SetValue(protocol.BodyTarget, "StackPolicyURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsePreviousTemplate != nil {
+		v := *s.UsePreviousTemplate
+
+		e.SetValue(protocol.BodyTarget, "UsePreviousTemplate", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // The output for an UpdateStack action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackOutput
 type UpdateStackOutput struct {
@@ -9938,6 +12684,17 @@ func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateStackOutput) SetStackId(v string) *UpdateStackOutput {
 	s.StackId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateStackOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetInput
@@ -10170,6 +12927,73 @@ func (s *UpdateStackSetInput) SetUsePreviousTemplate(v bool) *UpdateStackSetInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateStackSetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	var OperationId string
+	if s.OperationId != nil {
+		OperationId = *s.OperationId
+	} else {
+		OperationId = protocol.GetIdempotencyToken()
+	}
+	{
+		v := OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.OperationPreferences != nil {
+		v := s.OperationPreferences
+
+		e.SetFields(protocol.BodyTarget, "OperationPreferences", v, protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeParameterList(v), protocol.Metadata{})
+	}
+	if s.StackSetName != nil {
+		v := *s.StackSetName
+
+		e.SetValue(protocol.BodyTarget, "StackSetName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.UsePreviousTemplate != nil {
+		v := *s.UsePreviousTemplate
+
+		e.SetValue(protocol.BodyTarget, "UsePreviousTemplate", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetOutput
 type UpdateStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -10199,6 +13023,17 @@ func (s UpdateStackSetOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateStackSetOutput) SetOperationId(v string) *UpdateStackSetOutput {
 	s.OperationId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateStackSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.OperationId != nil {
+		v := *s.OperationId
+
+		e.SetValue(protocol.BodyTarget, "OperationId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtectionInput
@@ -10260,6 +13095,22 @@ func (s *UpdateTerminationProtectionInput) SetStackName(v string) *UpdateTermina
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateTerminationProtectionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.EnableTerminationProtection != nil {
+		v := *s.EnableTerminationProtection
+
+		e.SetValue(protocol.BodyTarget, "EnableTerminationProtection", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		e.SetValue(protocol.BodyTarget, "StackName", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtectionOutput
 type UpdateTerminationProtectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -10289,6 +13140,17 @@ func (s UpdateTerminationProtectionOutput) SDKResponseMetadata() aws.Response {
 func (s *UpdateTerminationProtectionOutput) SetStackId(v string) *UpdateTerminationProtectionOutput {
 	s.StackId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *UpdateTerminationProtectionOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StackId != nil {
+		v := *s.StackId
+
+		e.SetValue(protocol.BodyTarget, "StackId", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The input for ValidateTemplate action.
@@ -10351,6 +13213,22 @@ func (s *ValidateTemplateInput) SetTemplateBody(v string) *ValidateTemplateInput
 func (s *ValidateTemplateInput) SetTemplateURL(v string) *ValidateTemplateInput {
 	s.TemplateURL = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ValidateTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		e.SetValue(protocol.BodyTarget, "TemplateBody", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if s.TemplateURL != nil {
+		v := *s.TemplateURL
+
+		e.SetValue(protocol.BodyTarget, "TemplateURL", protocol.StringValue(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // The output for ValidateTemplate action.
@@ -10429,6 +13307,42 @@ func (s *ValidateTemplateOutput) SetParameters(v []TemplateParameter) *ValidateT
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ValidateTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		e.SetList(protocol.BodyTarget, "Capabilities", func(le protocol.ListEncoder) {
+			for _, item := range v {
+				v := item
+				le.ListAddValue(v)
+			}
+		}, protocol.Metadata{})
+	}
+	if s.CapabilitiesReason != nil {
+		v := *s.CapabilitiesReason
+
+		e.SetValue(protocol.BodyTarget, "CapabilitiesReason", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.DeclaredTransforms) > 0 {
+		v := s.DeclaredTransforms
+
+		e.SetList(protocol.BodyTarget, "DeclaredTransforms", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), protocol.Metadata{})
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		e.SetList(protocol.BodyTarget, "Parameters", encodeTemplateParameterList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 type AccountGateStatus string
 
 // Enum values for AccountGateStatus
@@ -10438,6 +13352,23 @@ const (
 	AccountGateStatusSkipped   AccountGateStatus = "SKIPPED"
 )
 
+func (enum AccountGateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccountGateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeCapabilityList(vs []Capability) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type Capability string
 
 // Enum values for Capability
@@ -10445,6 +13376,15 @@ const (
 	CapabilityCapabilityIam      Capability = "CAPABILITY_IAM"
 	CapabilityCapabilityNamedIam Capability = "CAPABILITY_NAMED_IAM"
 )
+
+func (enum Capability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Capability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChangeAction string
 
@@ -10454,6 +13394,15 @@ const (
 	ChangeActionModify ChangeAction = "Modify"
 	ChangeActionRemove ChangeAction = "Remove"
 )
+
+func (enum ChangeAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChangeSetStatus string
 
@@ -10466,6 +13415,15 @@ const (
 	ChangeSetStatusFailed           ChangeSetStatus = "FAILED"
 )
 
+func (enum ChangeSetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeSetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeSetType string
 
 // Enum values for ChangeSetType
@@ -10473,6 +13431,15 @@ const (
 	ChangeSetTypeCreate ChangeSetType = "CREATE"
 	ChangeSetTypeUpdate ChangeSetType = "UPDATE"
 )
+
+func (enum ChangeSetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeSetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChangeSource string
 
@@ -10485,12 +13452,30 @@ const (
 	ChangeSourceAutomatic          ChangeSource = "Automatic"
 )
 
+func (enum ChangeSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
 const (
 	ChangeTypeResource ChangeType = "Resource"
 )
+
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EvaluationType string
 
@@ -10499,6 +13484,15 @@ const (
 	EvaluationTypeStatic  EvaluationType = "Static"
 	EvaluationTypeDynamic EvaluationType = "Dynamic"
 )
+
+func (enum EvaluationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EvaluationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExecutionStatus string
 
@@ -10512,6 +13506,15 @@ const (
 	ExecutionStatusObsolete          ExecutionStatus = "OBSOLETE"
 )
 
+func (enum ExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OnFailure string
 
 // Enum values for OnFailure
@@ -10520,6 +13523,15 @@ const (
 	OnFailureRollback  OnFailure = "ROLLBACK"
 	OnFailureDelete    OnFailure = "DELETE"
 )
+
+func (enum OnFailure) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OnFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Replacement string
 
@@ -10530,6 +13542,15 @@ const (
 	ReplacementConditional Replacement = "Conditional"
 )
 
+func (enum Replacement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Replacement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RequiresRecreation string
 
 // Enum values for RequiresRecreation
@@ -10538,6 +13559,23 @@ const (
 	RequiresRecreationConditionally RequiresRecreation = "Conditionally"
 	RequiresRecreationAlways        RequiresRecreation = "Always"
 )
+
+func (enum RequiresRecreation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RequiresRecreation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeResourceAttributeList(vs []ResourceAttribute) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type ResourceAttribute string
 
@@ -10551,6 +13589,15 @@ const (
 	ResourceAttributeTags           ResourceAttribute = "Tags"
 )
 
+func (enum ResourceAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceSignalStatus string
 
 // Enum values for ResourceSignalStatus
@@ -10558,6 +13605,15 @@ const (
 	ResourceSignalStatusSuccess ResourceSignalStatus = "SUCCESS"
 	ResourceSignalStatusFailure ResourceSignalStatus = "FAILURE"
 )
+
+func (enum ResourceSignalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceSignalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceStatus string
 
@@ -10575,6 +13631,15 @@ const (
 	ResourceStatusUpdateComplete   ResourceStatus = "UPDATE_COMPLETE"
 )
 
+func (enum ResourceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackInstanceStatus string
 
 // Enum values for StackInstanceStatus
@@ -10584,6 +13649,15 @@ const (
 	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
 )
 
+func (enum StackInstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackInstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetOperationAction string
 
 // Enum values for StackSetOperationAction
@@ -10592,6 +13666,15 @@ const (
 	StackSetOperationActionUpdate StackSetOperationAction = "UPDATE"
 	StackSetOperationActionDelete StackSetOperationAction = "DELETE"
 )
+
+func (enum StackSetOperationAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetOperationAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StackSetOperationResultStatus string
 
@@ -10604,6 +13687,15 @@ const (
 	StackSetOperationResultStatusCancelled StackSetOperationResultStatus = "CANCELLED"
 )
 
+func (enum StackSetOperationResultStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetOperationResultStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetOperationStatus string
 
 // Enum values for StackSetOperationStatus
@@ -10615,6 +13707,15 @@ const (
 	StackSetOperationStatusStopped   StackSetOperationStatus = "STOPPED"
 )
 
+func (enum StackSetOperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetOperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetStatus string
 
 // Enum values for StackSetStatus
@@ -10622,6 +13723,23 @@ const (
 	StackSetStatusActive  StackSetStatus = "ACTIVE"
 	StackSetStatusDeleted StackSetStatus = "DELETED"
 )
+
+func (enum StackSetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeStackStatusList(vs []StackStatus) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type StackStatus string
 
@@ -10646,6 +13764,23 @@ const (
 	StackStatusReviewInProgress                        StackStatus = "REVIEW_IN_PROGRESS"
 )
 
+func (enum StackStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeTemplateStageList(vs []TemplateStage) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type TemplateStage string
 
 // Enum values for TemplateStage
@@ -10653,3 +13788,12 @@ const (
 	TemplateStageOriginal  TemplateStage = "Original"
 	TemplateStageProcessed TemplateStage = "Processed"
 )
+
+func (enum TemplateStage) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TemplateStage) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

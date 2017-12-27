@@ -3352,6 +3352,15 @@ const (
 	AmbiguousRoleResolutionTypeDeny              AmbiguousRoleResolutionType = "Deny"
 )
 
+func (enum AmbiguousRoleResolutionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AmbiguousRoleResolutionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -3359,6 +3368,15 @@ const (
 	ErrorCodeAccessDenied        ErrorCode = "AccessDenied"
 	ErrorCodeInternalServerError ErrorCode = "InternalServerError"
 )
+
+func (enum ErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MappingRuleMatchType string
 
@@ -3370,6 +3388,15 @@ const (
 	MappingRuleMatchTypeNotEqual   MappingRuleMatchType = "NotEqual"
 )
 
+func (enum MappingRuleMatchType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MappingRuleMatchType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RoleMappingType string
 
 // Enum values for RoleMappingType
@@ -3377,3 +3404,12 @@ const (
 	RoleMappingTypeToken RoleMappingType = "Token"
 	RoleMappingTypeRules RoleMappingType = "Rules"
 )
+
+func (enum RoleMappingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RoleMappingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

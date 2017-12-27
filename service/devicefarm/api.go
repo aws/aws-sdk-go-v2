@@ -11206,6 +11206,15 @@ const (
 	ArtifactCategoryLog        ArtifactCategory = "LOG"
 )
 
+func (enum ArtifactCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ArtifactType string
 
 // Enum values for ArtifactType
@@ -11239,6 +11248,15 @@ const (
 	ArtifactTypeCustomerArtifactLog    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
 )
 
+func (enum ArtifactType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BillingMethod string
 
 // Enum values for BillingMethod
@@ -11247,12 +11265,30 @@ const (
 	BillingMethodUnmetered BillingMethod = "UNMETERED"
 )
 
+func (enum BillingMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BillingMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CurrencyCode string
 
 // Enum values for CurrencyCode
 const (
 	CurrencyCodeUsd CurrencyCode = "USD"
 )
+
+func (enum CurrencyCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CurrencyCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeviceAttribute string
 
@@ -11267,6 +11303,15 @@ const (
 	DeviceAttributeAppiumVersion       DeviceAttribute = "APPIUM_VERSION"
 )
 
+func (enum DeviceAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceFormFactor string
 
 // Enum values for DeviceFormFactor
@@ -11274,6 +11319,15 @@ const (
 	DeviceFormFactorPhone  DeviceFormFactor = "PHONE"
 	DeviceFormFactorTablet DeviceFormFactor = "TABLET"
 )
+
+func (enum DeviceFormFactor) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceFormFactor) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DevicePlatform string
 
@@ -11283,6 +11337,15 @@ const (
 	DevicePlatformIos     DevicePlatform = "IOS"
 )
 
+func (enum DevicePlatform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DevicePlatform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DevicePoolType string
 
 // Enum values for DevicePoolType
@@ -11290,6 +11353,15 @@ const (
 	DevicePoolTypeCurated DevicePoolType = "CURATED"
 	DevicePoolTypePrivate DevicePoolType = "PRIVATE"
 )
+
+func (enum DevicePoolType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DevicePoolType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExecutionResult string
 
@@ -11304,12 +11376,30 @@ const (
 	ExecutionResultStopped ExecutionResult = "STOPPED"
 )
 
+func (enum ExecutionResult) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionResult) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExecutionResultCode string
 
 // Enum values for ExecutionResultCode
 const (
 	ExecutionResultCodeParsingFailed ExecutionResultCode = "PARSING_FAILED"
 )
+
+func (enum ExecutionResultCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionResultCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExecutionStatus string
 
@@ -11326,6 +11416,15 @@ const (
 	ExecutionStatusStopping           ExecutionStatus = "STOPPING"
 )
 
+func (enum ExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkProfileType string
 
 // Enum values for NetworkProfileType
@@ -11333,6 +11432,15 @@ const (
 	NetworkProfileTypeCurated NetworkProfileType = "CURATED"
 	NetworkProfileTypePrivate NetworkProfileType = "PRIVATE"
 )
+
+func (enum NetworkProfileType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkProfileType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OfferingTransactionType string
 
@@ -11343,6 +11451,15 @@ const (
 	OfferingTransactionTypeSystem   OfferingTransactionType = "SYSTEM"
 )
 
+func (enum OfferingTransactionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OfferingTransactionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OfferingType string
 
 // Enum values for OfferingType
@@ -11350,12 +11467,30 @@ const (
 	OfferingTypeRecurring OfferingType = "RECURRING"
 )
 
+func (enum OfferingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OfferingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecurringChargeFrequency string
 
 // Enum values for RecurringChargeFrequency
 const (
 	RecurringChargeFrequencyMonthly RecurringChargeFrequency = "MONTHLY"
 )
+
+func (enum RecurringChargeFrequency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecurringChargeFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RuleOperator string
 
@@ -11368,6 +11503,15 @@ const (
 	RuleOperatorNotIn       RuleOperator = "NOT_IN"
 	RuleOperatorContains    RuleOperator = "CONTAINS"
 )
+
+func (enum RuleOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RuleOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SampleType string
 
@@ -11392,6 +11536,15 @@ const (
 	SampleTypeOpenglMaxDrawtime SampleType = "OPENGL_MAX_DRAWTIME"
 )
 
+func (enum SampleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SampleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TestType string
 
 // Enum values for TestType
@@ -11412,6 +11565,15 @@ const (
 	TestTypeXctestUi            TestType = "XCTEST_UI"
 )
 
+func (enum TestType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TestType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UploadStatus string
 
 // Enum values for UploadStatus
@@ -11421,6 +11583,15 @@ const (
 	UploadStatusSucceeded   UploadStatus = "SUCCEEDED"
 	UploadStatusFailed      UploadStatus = "FAILED"
 )
+
+func (enum UploadStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UploadStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type UploadType string
 
@@ -11443,3 +11614,12 @@ const (
 	UploadTypeXctestTestPackage              UploadType = "XCTEST_TEST_PACKAGE"
 	UploadTypeXctestUiTestPackage            UploadType = "XCTEST_UI_TEST_PACKAGE"
 )
+
+func (enum UploadType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UploadType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -46,6 +46,10 @@ type API struct {
 	// Set to true to not generate struct field accessors
 	NoGenStructFieldAccessors bool
 
+	// Set to true to not generate (un)marshalers
+	NoGenMarshalers   bool
+	NoGenUnmarshalers bool
+
 	SvcClientImportPath string
 
 	initialized bool
@@ -309,6 +313,9 @@ func (a *API) APIGoCode() string {
 	a.imports["github.com/aws/aws-sdk-go-v2/internal/awsutil"] = true
 	if a.OperationHasOutputPlaceholder() {
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol/"+a.ProtocolPackage()] = true
+		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true
+	}
+	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true
 	}
 

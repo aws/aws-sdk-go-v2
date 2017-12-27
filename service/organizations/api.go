@@ -7669,6 +7669,15 @@ const (
 	AccountJoinedMethodCreated AccountJoinedMethod = "CREATED"
 )
 
+func (enum AccountJoinedMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccountJoinedMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AccountStatus string
 
 // Enum values for AccountStatus
@@ -7676,6 +7685,15 @@ const (
 	AccountStatusActive    AccountStatus = "ACTIVE"
 	AccountStatusSuspended AccountStatus = "SUSPENDED"
 )
+
+func (enum AccountStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccountStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ActionType string
 
@@ -7686,6 +7704,15 @@ const (
 	ActionTypeApproveAllFeatures ActionType = "APPROVE_ALL_FEATURES"
 )
 
+func (enum ActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChildType string
 
 // Enum values for ChildType
@@ -7693,6 +7720,15 @@ const (
 	ChildTypeAccount            ChildType = "ACCOUNT"
 	ChildTypeOrganizationalUnit ChildType = "ORGANIZATIONAL_UNIT"
 )
+
+func (enum ChildType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChildType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ConstraintViolationExceptionReason string
 
@@ -7715,6 +7751,15 @@ const (
 	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo             ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
 )
 
+func (enum ConstraintViolationExceptionReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConstraintViolationExceptionReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CreateAccountFailureReason string
 
 // Enum values for CreateAccountFailureReason
@@ -7726,6 +7771,23 @@ const (
 	CreateAccountFailureReasonInternalFailure      CreateAccountFailureReason = "INTERNAL_FAILURE"
 )
 
+func (enum CreateAccountFailureReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CreateAccountFailureReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeCreateAccountStateList(vs []CreateAccountState) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type CreateAccountState string
 
 // Enum values for CreateAccountState
@@ -7734,6 +7796,15 @@ const (
 	CreateAccountStateSucceeded  CreateAccountState = "SUCCEEDED"
 	CreateAccountStateFailed     CreateAccountState = "FAILED"
 )
+
+func (enum CreateAccountState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CreateAccountState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type HandshakeConstraintViolationExceptionReason string
 
@@ -7749,6 +7820,15 @@ const (
 	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
 )
 
+func (enum HandshakeConstraintViolationExceptionReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HandshakeConstraintViolationExceptionReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HandshakePartyType string
 
 // Enum values for HandshakePartyType
@@ -7757,6 +7837,15 @@ const (
 	HandshakePartyTypeOrganization HandshakePartyType = "ORGANIZATION"
 	HandshakePartyTypeEmail        HandshakePartyType = "EMAIL"
 )
+
+func (enum HandshakePartyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HandshakePartyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type HandshakeResourceType string
 
@@ -7772,6 +7861,15 @@ const (
 	HandshakeResourceTypeParentHandshake        HandshakeResourceType = "PARENT_HANDSHAKE"
 )
 
+func (enum HandshakeResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HandshakeResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HandshakeState string
 
 // Enum values for HandshakeState
@@ -7784,6 +7882,15 @@ const (
 	HandshakeStateExpired   HandshakeState = "EXPIRED"
 )
 
+func (enum HandshakeState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HandshakeState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IAMUserAccessToBilling string
 
 // Enum values for IAMUserAccessToBilling
@@ -7791,6 +7898,15 @@ const (
 	IAMUserAccessToBillingAllow IAMUserAccessToBilling = "ALLOW"
 	IAMUserAccessToBillingDeny  IAMUserAccessToBilling = "DENY"
 )
+
+func (enum IAMUserAccessToBilling) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IAMUserAccessToBilling) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InvalidInputExceptionReason string
 
@@ -7815,6 +7931,15 @@ const (
 	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
 )
 
+func (enum InvalidInputExceptionReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InvalidInputExceptionReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrganizationFeatureSet string
 
 // Enum values for OrganizationFeatureSet
@@ -7822,6 +7947,15 @@ const (
 	OrganizationFeatureSetAll                 OrganizationFeatureSet = "ALL"
 	OrganizationFeatureSetConsolidatedBilling OrganizationFeatureSet = "CONSOLIDATED_BILLING"
 )
+
+func (enum OrganizationFeatureSet) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrganizationFeatureSet) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ParentType string
 
@@ -7831,12 +7965,30 @@ const (
 	ParentTypeOrganizationalUnit ParentType = "ORGANIZATIONAL_UNIT"
 )
 
+func (enum ParentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PolicyType string
 
 // Enum values for PolicyType
 const (
 	PolicyTypeServiceControlPolicy PolicyType = "SERVICE_CONTROL_POLICY"
 )
+
+func (enum PolicyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicyTypeStatus string
 
@@ -7847,6 +7999,15 @@ const (
 	PolicyTypeStatusPendingDisable PolicyTypeStatus = "PENDING_DISABLE"
 )
 
+func (enum PolicyTypeStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyTypeStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TargetType string
 
 // Enum values for TargetType
@@ -7855,3 +8016,12 @@ const (
 	TargetTypeOrganizationalUnit TargetType = "ORGANIZATIONAL_UNIT"
 	TargetTypeRoot               TargetType = "ROOT"
 )
+
+func (enum TargetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

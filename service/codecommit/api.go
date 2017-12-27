@@ -3173,6 +3173,15 @@ const (
 	ChangeTypeEnumD ChangeTypeEnum = "D"
 )
 
+func (enum ChangeTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderEnum string
 
 // Enum values for OrderEnum
@@ -3180,6 +3189,23 @@ const (
 	OrderEnumAscending  OrderEnum = "ascending"
 	OrderEnumDescending OrderEnum = "descending"
 )
+
+func (enum OrderEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+func encodeRepositoryTriggerEventEnumList(vs []RepositoryTriggerEventEnum) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
 
 type RepositoryTriggerEventEnum string
 
@@ -3191,6 +3217,15 @@ const (
 	RepositoryTriggerEventEnumDeleteReference RepositoryTriggerEventEnum = "deleteReference"
 )
 
+func (enum RepositoryTriggerEventEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RepositoryTriggerEventEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortByEnum string
 
 // Enum values for SortByEnum
@@ -3198,3 +3233,12 @@ const (
 	SortByEnumRepositoryName   SortByEnum = "repositoryName"
 	SortByEnumLastModifiedDate SortByEnum = "lastModifiedDate"
 )
+
+func (enum SortByEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortByEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

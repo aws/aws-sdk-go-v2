@@ -911,6 +911,32 @@ func (s *CreateFileSystemInput) SetPerformanceMode(v PerformanceMode) *CreateFil
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreationToken != nil {
+		v := *s.CreationToken
+
+		e.SetValue(protocol.BodyTarget, "CreationToken", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.PerformanceMode) > 0 {
+		v := s.PerformanceMode
+
+		e.SetValue(protocol.BodyTarget, "PerformanceMode", protocol.QuotedValue{v}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Description of the file system.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription
 type CreateFileSystemOutput struct {
@@ -1062,6 +1088,75 @@ func (s *CreateFileSystemOutput) SetSizeInBytes(v *FileSystemSize) *CreateFileSy
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, protocol.Metadata{})
+	}
+	if s.CreationToken != nil {
+		v := *s.CreationToken
+
+		e.SetValue(protocol.BodyTarget, "CreationToken", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), protocol.Metadata{})
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.LifeCycleState) > 0 {
+		v := s.LifeCycleState
+
+		e.SetValue(protocol.BodyTarget, "LifeCycleState", protocol.QuotedValue{v}, protocol.Metadata{})
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.NumberOfMountTargets != nil {
+		v := *s.NumberOfMountTargets
+
+		e.SetValue(protocol.BodyTarget, "NumberOfMountTargets", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.PerformanceMode) > 0 {
+		v := s.PerformanceMode
+
+		e.SetValue(protocol.BodyTarget, "PerformanceMode", protocol.QuotedValue{v}, protocol.Metadata{})
+	}
+	if s.SizeInBytes != nil {
+		v := s.SizeInBytes
+
+		e.SetFields(protocol.BodyTarget, "SizeInBytes", v, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCreateFileSystemOutputList(vs []CreateFileSystemOutput) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTargetRequest
 type CreateMountTargetInput struct {
 	_ struct{} `type:"structure"`
@@ -1134,6 +1229,32 @@ func (s *CreateMountTargetInput) SetSecurityGroups(v []string) *CreateMountTarge
 func (s *CreateMountTargetInput) SetSubnetId(v string) *CreateMountTargetInput {
 	s.SubnetId = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.IpAddress != nil {
+		v := *s.IpAddress
+
+		e.SetValue(protocol.BodyTarget, "IpAddress", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.SubnetId != nil {
+		v := *s.SubnetId
+
+		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Provides a description of a mount target.
@@ -1231,6 +1352,55 @@ func (s *CreateMountTargetOutput) SetSubnetId(v string) *CreateMountTargetOutput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateMountTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.IpAddress != nil {
+		v := *s.IpAddress
+
+		e.SetValue(protocol.BodyTarget, "IpAddress", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.LifeCycleState) > 0 {
+		v := s.LifeCycleState
+
+		e.SetValue(protocol.BodyTarget, "LifeCycleState", protocol.QuotedValue{v}, protocol.Metadata{})
+	}
+	if s.MountTargetId != nil {
+		v := *s.MountTargetId
+
+		e.SetValue(protocol.BodyTarget, "MountTargetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.NetworkInterfaceId != nil {
+		v := *s.NetworkInterfaceId
+
+		e.SetValue(protocol.BodyTarget, "NetworkInterfaceId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.SubnetId != nil {
+		v := *s.SubnetId
+
+		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeCreateMountTargetOutputList(vs []CreateMountTargetOutput) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTagsRequest
 type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
@@ -1294,6 +1464,22 @@ func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTagsOutput
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1314,6 +1500,12 @@ func (s CreateTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *CreateTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemRequest
@@ -1356,6 +1548,17 @@ func (s *DeleteFileSystemInput) SetFileSystemId(v string) *DeleteFileSystemInput
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemOutput
 type DeleteFileSystemOutput struct {
 	_ struct{} `type:"structure"`
@@ -1376,6 +1579,12 @@ func (s DeleteFileSystemOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteFileSystemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetRequest
@@ -1418,6 +1627,17 @@ func (s *DeleteMountTargetInput) SetMountTargetId(v string) *DeleteMountTargetIn
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MountTargetId != nil {
+		v := *s.MountTargetId
+
+		e.SetValue(protocol.PathTarget, "MountTargetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetOutput
 type DeleteMountTargetOutput struct {
 	_ struct{} `type:"structure"`
@@ -1438,6 +1658,12 @@ func (s DeleteMountTargetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteMountTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteMountTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTagsRequest
@@ -1495,6 +1721,22 @@ func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		e.SetList(protocol.BodyTarget, "TagKeys", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1515,6 +1757,12 @@ func (s DeleteTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DeleteTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsRequest
@@ -1592,6 +1840,32 @@ func (s *DescribeFileSystemsInput) SetMaxItems(v int64) *DescribeFileSystemsInpu
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeFileSystemsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CreationToken != nil {
+		v := *s.CreationToken
+
+		e.SetValue(protocol.QueryTarget, "CreationToken", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.QueryTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsResponse
 type DescribeFileSystemsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1642,6 +1916,27 @@ func (s *DescribeFileSystemsOutput) SetNextMarker(v string) *DescribeFileSystems
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeFileSystemsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.FileSystems) > 0 {
+		v := s.FileSystems
+
+		e.SetList(protocol.BodyTarget, "FileSystems", encodeCreateFileSystemOutputList(v), protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroupsRequest
 type DescribeMountTargetSecurityGroupsInput struct {
 	_ struct{} `type:"structure"`
@@ -1682,6 +1977,17 @@ func (s *DescribeMountTargetSecurityGroupsInput) SetMountTargetId(v string) *Des
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeMountTargetSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MountTargetId != nil {
+		v := *s.MountTargetId
+
+		e.SetValue(protocol.PathTarget, "MountTargetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroupsResponse
 type DescribeMountTargetSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1713,6 +2019,17 @@ func (s DescribeMountTargetSecurityGroupsOutput) SDKResponseMetadata() aws.Respo
 func (s *DescribeMountTargetSecurityGroupsOutput) SetSecurityGroups(v []string) *DescribeMountTargetSecurityGroupsOutput {
 	s.SecurityGroups = v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeMountTargetSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetsRequest
@@ -1784,6 +2101,32 @@ func (s *DescribeMountTargetsInput) SetMountTargetId(v string) *DescribeMountTar
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeMountTargetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.QueryTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	if s.MountTargetId != nil {
+		v := *s.MountTargetId
+
+		e.SetValue(protocol.QueryTarget, "MountTargetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetsResponse
 type DescribeMountTargetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1835,6 +2178,27 @@ func (s *DescribeMountTargetsOutput) SetMountTargets(v []CreateMountTargetOutput
 func (s *DescribeMountTargetsOutput) SetNextMarker(v string) *DescribeMountTargetsOutput {
 	s.NextMarker = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeMountTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.MountTargets) > 0 {
+		v := s.MountTargets
+
+		e.SetList(protocol.BodyTarget, "MountTargets", encodeCreateMountTargetOutputList(v), protocol.Metadata{})
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTagsRequest
@@ -1901,6 +2265,27 @@ func (s *DescribeTagsInput) SetMaxItems(v int64) *DescribeTagsInput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTagsResponse
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1955,6 +2340,27 @@ func (s *DescribeTagsOutput) SetTags(v []Tag) *DescribeTagsOutput {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *DescribeTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		e.SetList(protocol.BodyTarget, "Tags", encodeTagList(v), protocol.Metadata{})
+	}
+	return nil
+}
+
 // Latest known metered size (in bytes) of data stored in the file system, in
 // its Value field, and the time at which that size was determined in its Timestamp
 // field. Note that the value does not represent the size of a consistent snapshot
@@ -1997,6 +2403,22 @@ func (s *FileSystemSize) SetTimestamp(v time.Time) *FileSystemSize {
 func (s *FileSystemSize) SetValue(v int64) *FileSystemSize {
 	s.Value = &v
 	return s
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *FileSystemSize) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.Int64Value(v), protocol.Metadata{})
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroupsRequest
@@ -2048,6 +2470,22 @@ func (s *ModifyMountTargetSecurityGroupsInput) SetSecurityGroups(v []string) *Mo
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyMountTargetSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		e.SetList(protocol.BodyTarget, "SecurityGroups", protocol.EncodeStringList(v), protocol.Metadata{})
+	}
+	if s.MountTargetId != nil {
+		v := *s.MountTargetId
+
+		e.SetValue(protocol.PathTarget, "MountTargetId", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroupsOutput
 type ModifyMountTargetSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2068,6 +2506,12 @@ func (s ModifyMountTargetSecurityGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyMountTargetSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *ModifyMountTargetSecurityGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
 }
 
 // A tag is a key-value pair. Allowed characters: letters, whitespace, and numbers,
@@ -2130,6 +2574,30 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s *Tag) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Key != nil {
+		v := *s.Key
+
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{protocol.StringValue(v)}, protocol.Metadata{})
+	}
+	return nil
+}
+
+func encodeTagList(vs []Tag) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddFields(&v)
+		}
+	}
+}
+
 type LifeCycleState string
 
 // Enum values for LifeCycleState
@@ -2140,6 +2608,15 @@ const (
 	LifeCycleStateDeleted   LifeCycleState = "deleted"
 )
 
+func (enum LifeCycleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifeCycleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PerformanceMode string
 
 // Enum values for PerformanceMode
@@ -2147,3 +2624,12 @@ const (
 	PerformanceModeGeneralPurpose PerformanceMode = "generalPurpose"
 	PerformanceModeMaxIo          PerformanceMode = "maxIO"
 )
+
+func (enum PerformanceMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PerformanceMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

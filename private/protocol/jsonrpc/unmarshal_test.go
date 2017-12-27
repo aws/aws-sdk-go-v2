@@ -1070,6 +1070,14 @@ func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetListE
 	return s
 }
 
+func encodeOutputService7TestShapeJSONEnumTypeList(vs []OutputService7TestShapeJSONEnumType) func(protocol.ListEncoder) {
+	return func(le protocol.ListEncoder) {
+		for _, v := range vs {
+			le.ListAddValue(v)
+		}
+	}
+}
+
 type OutputService7TestShapeJSONEnumType string
 
 // Enum values for OutputService7TestShapeJSONEnumType
@@ -1077,6 +1085,15 @@ const (
 	JSONEnumTypeFoo OutputService7TestShapeJSONEnumType = "foo"
 	JSONEnumTypeBar OutputService7TestShapeJSONEnumType = "bar"
 )
+
+func (enum OutputService7TestShapeJSONEnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputService7TestShapeJSONEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 //
 // Tests begin here
