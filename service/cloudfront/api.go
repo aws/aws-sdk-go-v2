@@ -441,6 +441,55 @@ func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) D
 	return DeleteDistributionRequest{Request: req, Input: input}
 }
 
+const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole2017_03_25"
+
+// DeleteServiceLinkedRoleRequest is a API request type for the DeleteServiceLinkedRole API operation.
+type DeleteServiceLinkedRoleRequest struct {
+	*aws.Request
+	Input *DeleteServiceLinkedRoleInput
+}
+
+// Send marshals and sends the DeleteServiceLinkedRole API request.
+func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServiceLinkedRoleOutput), nil
+}
+
+// DeleteServiceLinkedRoleRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+//    // Example sending a request using the DeleteServiceLinkedRoleRequest method.
+//    req := client.DeleteServiceLinkedRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRole
+func (c *CloudFront) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteServiceLinkedRole,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-03-25/service-linked-role/{RoleName}",
+	}
+
+	if input == nil {
+		input = &DeleteServiceLinkedRoleInput{}
+	}
+
+	output := &DeleteServiceLinkedRoleOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteServiceLinkedRoleRequest{Request: req, Input: input}
+}
+
 const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
 
 // DeleteStreamingDistributionRequest is a API request type for the DeleteStreamingDistribution API operation.
@@ -3433,7 +3482,7 @@ func (s *CustomOriginConfig) SetOriginSslProtocols(v *OriginSslProtocols) *Custo
 	return s
 }
 
-// A complex type that describes the default cache behavior if you do not specify
+// A complex type that describes the default cache behavior if you don't specify
 // a CacheBehavior element or if files don't match any of the values of PathPattern
 // in CacheBehavior elements. You must create exactly one default cache behavior.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DefaultCacheBehavior
@@ -3865,6 +3914,66 @@ func (s DeleteDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRoleRequest
+type DeleteServiceLinkedRoleInput struct {
+	_ struct{} `type:"structure"`
+
+	// RoleName is a required field
+	RoleName *string `location:"uri" locationName:"RoleName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteServiceLinkedRoleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteServiceLinkedRoleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteServiceLinkedRoleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceLinkedRoleInput"}
+
+	if s.RoleName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRoleName sets the RoleName field's value.
+func (s *DeleteServiceLinkedRoleInput) SetRoleName(v string) *DeleteServiceLinkedRoleInput {
+	s.RoleName = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRoleOutput
+type DeleteServiceLinkedRoleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteServiceLinkedRoleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteServiceLinkedRoleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // The request to delete a streaming distribution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistributionRequest
 type DeleteStreamingDistributionInput struct {
@@ -3967,7 +4076,7 @@ type Distribution struct {
 	// DistributionConfig is a required field
 	DistributionConfig *DistributionConfig `type:"structure" required:"true"`
 
-	// The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
+	// The domain name corresponding to the distribution, for example, d111111abcdef8.cloudfront.net.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -4108,7 +4217,7 @@ type DistributionConfig struct {
 	// in the Amazon CloudFront Developer Guide.
 	CustomErrorResponses *CustomErrorResponses `type:"structure"`
 
-	// A complex type that describes the default cache behavior if you do not specify
+	// A complex type that describes the default cache behavior if you don't specify
 	// a CacheBehavior element or if files don't match any of the values of PathPattern
 	// in CacheBehavior elements. You must create exactly one default cache behavior.
 	//
@@ -4120,7 +4229,7 @@ type DistributionConfig struct {
 	// instead of an object in your distribution (http://www.example.com/product-description.html).
 	// Specifying a default root object avoids exposing the contents of your distribution.
 	//
-	// Specify only the object name, for example, index.html. Do not add a / before
+	// Specify only the object name, for example, index.html. Don't add a / before
 	// the object name.
 	//
 	// If you don't want to specify a default root object when you create a distribution,
@@ -4168,7 +4277,7 @@ type DistributionConfig struct {
 	// want to access your content. However, if you're using signed URLs or signed
 	// cookies to restrict access to your content, and if you're using a custom
 	// policy that includes the IpAddress parameter to restrict the IP addresses
-	// that can access your content, do not enable IPv6. If you want to restrict
+	// that can access your content, don't enable IPv6. If you want to restrict
 	// access to some content by IP address and not restrict access to other content
 	// (or restrict access but not by IP address), you can create two distributions.
 	// For more information, see Creating a Signed URL Using a Custom Policy (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html)
@@ -4226,18 +4335,90 @@ type DistributionConfig struct {
 
 	// A complex type that specifies the following:
 	//
-	//    * Which SSL/TLS certificate to use when viewers request objects using
-	//    HTTPS
+	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
 	//
-	//    * Whether you want CloudFront to use dedicated IP addresses or SNI when
-	//    you're using alternate domain names in your object names
+	//    * If you want viewers to use HTTPS, whether you're using an alternate
+	//    domain name such as example.com or the CloudFront domain name for your
+	//    distribution, such as d111111abcdef8.cloudfront.net.
 	//
-	//    * The minimum protocol version that you want CloudFront to use when communicating
-	//    with viewers
+	//    * If you're using an alternate domain name, whether AWS Certificate Manager
+	//    (ACM) provided the certificate, or you purchased a certificate from a
+	//    third-party certificate authority and imported it into ACM or uploaded
+	//    it to the IAM certificate store.
 	//
-	// For more information, see Using an HTTPS Connection to Access Your Objects
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// You must specify only one of the following values:
+	//
+	//    * ViewerCertificate$ACMCertificateArn
+	//
+	//    * ViewerCertificate$IAMCertificateId
+	//
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
+	//
+	// Don't specify false for CloudFrontDefaultCertificate.
+	//
+	// If you want viewers to use HTTP instead of HTTPS to request your objects:
+	// Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
+	// behaviors.
+	//
+	// If you want viewers to use HTTPS to request your objects: Choose the type
+	// of certificate that you want to use based on whether you're using an alternate
+	// domain name for your objects or the CloudFront domain name:
+	//
+	//    * If you're using an alternate domain name, such as example.com: Specify
+	//    one of the following values, depending on whether ACM provided your certificate
+	//    or you purchased your certificate from third-party certificate authority:
+	//
+	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
+	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution.
+	//
+	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+	//    ID is the ID that IAM returned when you added the certificate to the IAM
+	//    certificate store.
+	//
+	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
+	//    a value for SSLSupportMethod.
+	//
+	// If you choose to use an ACM certificate or a certificate in the IAM certificate
+	//    store, we recommend that you use only an alternate domain name in your
+	//    object URLs (https://example.com/logo.jpg). If you use the domain name
+	//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
+	//    and the viewer supports SNI, then CloudFront behaves normally. However,
+	//    if the browser does not support SNI, the user's experience depends on
+	//    the value that you choose for SSLSupportMethod:
+	//
+	// vip: The viewer displays a warning because there is a mismatch between the
+	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
+	//
+	// sni-only: CloudFront drops the connection with the browser without returning
+	//    the object.
+	//
+	//    * If you're using the CloudFront domain name for your distribution, such
+	//    as d111111abcdef8.cloudfront.net: Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// If you want viewers to use HTTPS, you must also specify one of the following
+	// values in your cache behaviors:
+	//
+	//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+	//
+	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+	//
+	// You can also optionally require that CloudFront use HTTPS to communicate
+	// with your origin by specifying one of the following values for the applicable
+	// origins:
+	//
+	//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
+	//
+	//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
+	//
+	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+	// in the Amazon CloudFront Developer Guide.
 	ViewerCertificate *ViewerCertificate `type:"structure"`
 
 	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
@@ -4608,14 +4789,14 @@ type DistributionSummary struct {
 	// CustomErrorResponses is a required field
 	CustomErrorResponses *CustomErrorResponses `type:"structure" required:"true"`
 
-	// A complex type that describes the default cache behavior if you do not specify
+	// A complex type that describes the default cache behavior if you don't specify
 	// a CacheBehavior element or if files don't match any of the values of PathPattern
 	// in CacheBehavior elements. You must create exactly one default cache behavior.
 	//
 	// DefaultCacheBehavior is a required field
 	DefaultCacheBehavior *DefaultCacheBehavior `type:"structure" required:"true"`
 
-	// The domain name that corresponds to the distribution. For example: d604721fxaaqy9.cloudfront.net.
+	// The domain name that corresponds to the distribution, for example, d111111abcdef8.cloudfront.net.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -4670,18 +4851,90 @@ type DistributionSummary struct {
 
 	// A complex type that specifies the following:
 	//
-	//    * Which SSL/TLS certificate to use when viewers request objects using
-	//    HTTPS
+	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
 	//
-	//    * Whether you want CloudFront to use dedicated IP addresses or SNI when
-	//    you're using alternate domain names in your object names
+	//    * If you want viewers to use HTTPS, whether you're using an alternate
+	//    domain name such as example.com or the CloudFront domain name for your
+	//    distribution, such as d111111abcdef8.cloudfront.net.
 	//
-	//    * The minimum protocol version that you want CloudFront to use when communicating
-	//    with viewers
+	//    * If you're using an alternate domain name, whether AWS Certificate Manager
+	//    (ACM) provided the certificate, or you purchased a certificate from a
+	//    third-party certificate authority and imported it into ACM or uploaded
+	//    it to the IAM certificate store.
 	//
-	// For more information, see Using an HTTPS Connection to Access Your Objects
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// You must specify only one of the following values:
+	//
+	//    * ViewerCertificate$ACMCertificateArn
+	//
+	//    * ViewerCertificate$IAMCertificateId
+	//
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
+	//
+	// Don't specify false for CloudFrontDefaultCertificate.
+	//
+	// If you want viewers to use HTTP instead of HTTPS to request your objects:
+	// Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
+	// behaviors.
+	//
+	// If you want viewers to use HTTPS to request your objects: Choose the type
+	// of certificate that you want to use based on whether you're using an alternate
+	// domain name for your objects or the CloudFront domain name:
+	//
+	//    * If you're using an alternate domain name, such as example.com: Specify
+	//    one of the following values, depending on whether ACM provided your certificate
+	//    or you purchased your certificate from third-party certificate authority:
+	//
+	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
+	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution.
+	//
+	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+	//    ID is the ID that IAM returned when you added the certificate to the IAM
+	//    certificate store.
+	//
+	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
+	//    a value for SSLSupportMethod.
+	//
+	// If you choose to use an ACM certificate or a certificate in the IAM certificate
+	//    store, we recommend that you use only an alternate domain name in your
+	//    object URLs (https://example.com/logo.jpg). If you use the domain name
+	//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
+	//    and the viewer supports SNI, then CloudFront behaves normally. However,
+	//    if the browser does not support SNI, the user's experience depends on
+	//    the value that you choose for SSLSupportMethod:
+	//
+	// vip: The viewer displays a warning because there is a mismatch between the
+	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
+	//
+	// sni-only: CloudFront drops the connection with the browser without returning
+	//    the object.
+	//
+	//    * If you're using the CloudFront domain name for your distribution, such
+	//    as d111111abcdef8.cloudfront.net: Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// If you want viewers to use HTTPS, you must also specify one of the following
+	// values in your cache behaviors:
+	//
+	//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+	//
+	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+	//
+	// You can also optionally require that CloudFront use HTTPS to communicate
+	// with your origin by specifying one of the following values for the applicable
+	// origins:
+	//
+	//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
+	//
+	//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
+	//
+	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerCertificate is a required field
 	ViewerCertificate *ViewerCertificate `type:"structure" required:"true"`
@@ -4825,7 +5078,7 @@ type ForwardedValues struct {
 	Cookies *CookiePreference `type:"structure" required:"true"`
 
 	// A complex type that specifies the Headers, if any, that you want CloudFront
-	// to vary upon for this cache behavior.
+	// to base caching on for this cache behavior.
 	Headers *Headers `type:"structure"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin
@@ -4944,7 +5197,7 @@ type GeoRestriction struct {
 	// CloudFront and MaxMind both use ISO 3166 country codes. For the current list
 	// of countries and the corresponding codes, see ISO 3166-1-alpha-2 code on
 	// the International Organization for Standardization website. You can also
-	// refer to the country list in the CloudFront console, which includes both
+	// refer to the country list on the CloudFront console, which includes both
 	// country names and codes.
 	Items []string `locationNameList:"Location" type:"list"`
 
@@ -4962,7 +5215,7 @@ type GeoRestriction struct {
 	//    restricted by client geo location.
 	//
 	//    * blacklist: The Location elements specify the countries in which you
-	//    do not want CloudFront to distribute your content.
+	//    don't want CloudFront to distribute your content.
 	//
 	//    * whitelist: The Location elements specify the countries in which you
 	//    want CloudFront to distribute your content.
@@ -5600,48 +5853,53 @@ func (s *GetStreamingDistributionOutput) SetStreamingDistribution(v *StreamingDi
 	return s
 }
 
-// A complex type that specifies the headers that you want CloudFront to forward
-// to the origin for this cache behavior.
+// A complex type that specifies the request headers, if any, that you want
+// CloudFront to base caching on for this cache behavior.
 //
-// For the headers that you specify, CloudFront also caches separate versions
-// of a specified object based on the header values in viewer requests. For
-// example, suppose viewer requests for logo.jpg contain a custom Product header
-// that has a value of either Acme or Apex, and you configure CloudFront to
-// cache your content based on values in the Product header. CloudFront forwards
-// the Product header to the origin and caches the response from the origin
-// once for each header value. For more information about caching based on header
+// For the headers that you specify, CloudFront caches separate versions of
+// a specified object based on the header values in viewer requests. For example,
+// suppose viewer requests for logo.jpg contain a custom product header that
+// has a value of either acme or apex, and you configure CloudFront to cache
+// your content based on values in the product header. CloudFront forwards the
+// product header to the origin and caches the response from the origin once
+// for each header value. For more information about caching based on header
 // values, see How CloudFront Forwards and Caches Headers (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Headers
 type Headers struct {
 	_ struct{} `type:"structure"`
 
-	// A complex type that contains one Name element for each header that you want
-	// CloudFront to forward to the origin and to vary on for this cache behavior.
-	// If Quantity is 0, omit Items.
+	// A list that contains one Name element for each header that you want CloudFront
+	// to use for caching in this cache behavior. If Quantity is 0, omit Items.
 	Items []string `locationNameList:"Name" type:"list"`
 
-	// The number of different headers that you want CloudFront to forward to the
-	// origin for this cache behavior. You can configure each cache behavior in
-	// a web distribution to do one of the following:
+	// The number of different headers that you want CloudFront to base caching
+	// on for this cache behavior. You can configure each cache behavior in a web
+	// distribution to do one of the following:
 	//
 	//    * Forward all headers to your origin: Specify 1 for Quantity and * for
 	//    Name.
 	//
-	// If you configure CloudFront to forward all headers to your origin, CloudFront
-	//    doesn't cache the objects associated with this cache behavior. Instead,
-	//    it sends every request to the origin.
+	// CloudFront doesn't cache the objects that are associated with this cache
+	//    behavior. Instead, CloudFront sends every request to the origin.
 	//
 	//    * Forward a whitelist of headers you specify: Specify the number of headers
-	//    that you want to forward, and specify the header names in Name elements.
-	//    CloudFront caches your objects based on the values in all of the specified
-	//    headers. CloudFront also forwards the headers that it forwards by default,
-	//    but it caches your objects based only on the headers that you specify.
-	//
+	//    that you want CloudFront to base caching on. Then specify the header names
+	//    in Name elements. CloudFront caches your objects based on the values in
+	//    the specified headers.
 	//
 	//    * Forward only the default headers: Specify 0 for Quantity and omit Items.
 	//    In this configuration, CloudFront doesn't cache based on the values in
 	//    the request headers.
+	//
+	// Regardless of which option you choose, CloudFront forwards headers to your
+	// origin based on whether the origin is an S3 bucket or a custom origin. See
+	// the following documentation:
+	//
+	//    * S3 bucket: See HTTP Request Headers That CloudFront Removes or Updates
+	//    (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers)
+	//
+	//    * Custom origin: See HTTP Request Headers and CloudFront Behavior (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -6005,19 +6263,34 @@ func (s *KeyPairIds) SetQuantity(v int64) *KeyPairIds {
 type LambdaFunctionAssociation struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the event type that triggers a Lambda function invocation. Valid
-	// values are:
+	// Specifies the event type that triggers a Lambda function invocation. You
+	// can specify the following values:
 	//
-	//    * viewer-request
+	//    * viewer-request: The function executes when CloudFront receives a request
+	//    from a viewer and before it checks to see whether the requested object
+	//    is in the edge cache.
 	//
-	//    * origin-request
+	//    * origin-request: The function executes only when CloudFront forwards
+	//    a request to your origin. When the requested object is in the edge cache,
+	//    the function doesn't execute.
 	//
-	//    * viewer-response
+	//    * origin-response: The function executes after CloudFront receives a response
+	//    from the origin and before it caches the object in the response. When
+	//    the requested object is in the edge cache, the function doesn't execute.
 	//
-	//    * origin-response
+	// If the origin returns an HTTP status code other than HTTP 200 (OK), the function
+	//    doesn't execute.
+	//
+	//    * viewer-response: The function executes before CloudFront returns the
+	//    requested object to the viewer. The function executes regardless of whether
+	//    the object was already in the edge cache.
+	//
+	// If the origin returns an HTTP status code other than HTTP 200 (OK), the function
+	//    doesn't execute.
 	EventType EventType `type:"string" enum:"true"`
 
-	// The ARN of the Lambda function.
+	// The ARN of the Lambda function. You must specify the ARN of a function version;
+	// you can't specify a Lambda alias or $LATEST.
 	LambdaFunctionARN *string `type:"string"`
 }
 
@@ -6594,7 +6867,7 @@ type LoggingConfig struct {
 	Bucket *string `type:"string" required:"true"`
 
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
-	// bucket. If you do not want to enable logging when you create a distribution
+	// bucket. If you don't want to enable logging when you create a distribution
 	// or if you want to disable logging for an existing distribution, specify false
 	// for Enabled, and specify empty Bucket and Prefix elements. If you specify
 	// false for Enabled but you specify values for Bucket, prefix, and IncludeCookies,
@@ -6606,7 +6879,7 @@ type LoggingConfig struct {
 	// Specifies whether you want CloudFront to include cookies in access logs,
 	// specify true for IncludeCookies. If you choose to include cookies in logs,
 	// CloudFront logs all cookies regardless of how you configure the cache behaviors
-	// for this distribution. If you do not want to include cookies when you create
+	// for this distribution. If you don't want to include cookies when you create
 	// a distribution or if you want to disable include cookies for an existing
 	// distribution, specify false for IncludeCookies.
 	//
@@ -6615,8 +6888,8 @@ type LoggingConfig struct {
 
 	// An optional string that you want CloudFront to prefix to the access log filenames
 	// for this distribution, for example, myprefix/. If you want to enable logging,
-	// but you do not want to specify a prefix, you still must include an empty
-	// Prefix element in the Logging element.
+	// but you don't want to specify a prefix, you still must include an empty Prefix
+	// element in the Logging element.
 	//
 	// Prefix is a required field
 	Prefix *string `type:"string" required:"true"`
@@ -6706,8 +6979,8 @@ type Origin struct {
 	//
 	// Constraints for Amazon S3 origins:
 	//
-	//    * If you configured Amazon S3 Transfer Acceleration for your bucket, do
-	//    not specify the s3-accelerate endpoint for DomainName.
+	//    * If you configured Amazon S3 Transfer Acceleration for your bucket, don't
+	//    specify the s3-accelerate endpoint for DomainName.
 	//
 	//    * The bucket name must be between 3 and 63 characters long (inclusive).
 	//
@@ -6856,7 +7129,7 @@ type OriginAccessIdentity struct {
 	// The current configuration information for the identity.
 	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `type:"structure"`
 
-	// The ID for the origin access identity. For example: E74FTE3AJFJ256A.
+	// The ID for the origin access identity, for example, E74FTE3AJFJ256A.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
@@ -7645,7 +7918,7 @@ type StreamingDistribution struct {
 	// ActiveTrustedSigners is a required field
 	ActiveTrustedSigners *ActiveTrustedSigners `type:"structure" required:"true"`
 
-	// The domain name that corresponds to the streaming distribution. For example:
+	// The domain name that corresponds to the streaming distribution, for example,
 	// s5c39gqb8ow64r.cloudfront.net.
 	//
 	// DomainName is a required field
@@ -8065,7 +8338,7 @@ type StreamingDistributionSummary struct {
 	// Comment is a required field
 	Comment *string `type:"string" required:"true"`
 
-	// The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
+	// The domain name corresponding to the distribution, for example, d111111abcdef8.cloudfront.net.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -8075,7 +8348,7 @@ type StreamingDistributionSummary struct {
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// The identifier for the distribution, for example, EDFDVBD632BHDS5.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
@@ -8204,19 +8477,19 @@ type StreamingLoggingConfig struct {
 	Bucket *string `type:"string" required:"true"`
 
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
-	// bucket. If you do not want to enable logging when you create a streaming
-	// distribution or if you want to disable logging for an existing streaming
-	// distribution, specify false for Enabled, and specify empty Bucket and Prefix
-	// elements. If you specify false for Enabled but you specify values for Bucket
-	// and Prefix, the values are automatically deleted.
+	// bucket. If you don't want to enable logging when you create a streaming distribution
+	// or if you want to disable logging for an existing streaming distribution,
+	// specify false for Enabled, and specify empty Bucket and Prefix elements.
+	// If you specify false for Enabled but you specify values for Bucket and Prefix,
+	// the values are automatically deleted.
 	//
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
 
 	// An optional string that you want CloudFront to prefix to the access log filenames
 	// for this streaming distribution, for example, myprefix/. If you want to enable
-	// logging, but you do not want to specify a prefix, you still must include
-	// an empty Prefix element in the Logging element.
+	// logging, but you don't want to specify a prefix, you still must include an
+	// empty Prefix element in the Logging element.
 	//
 	// Prefix is a required field
 	Prefix *string `type:"string" required:"true"`
@@ -8981,130 +9254,157 @@ func (s *UpdateStreamingDistributionOutput) SetStreamingDistribution(v *Streamin
 
 // A complex type that specifies the following:
 //
-//    * Which SSL/TLS certificate to use when viewers request objects using
-//    HTTPS
+//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
 //
-//    * Whether you want CloudFront to use dedicated IP addresses or SNI when
-//    you're using alternate domain names in your object names
+//    * If you want viewers to use HTTPS, whether you're using an alternate
+//    domain name such as example.com or the CloudFront domain name for your
+//    distribution, such as d111111abcdef8.cloudfront.net.
 //
-//    * The minimum protocol version that you want CloudFront to use when communicating
-//    with viewers
+//    * If you're using an alternate domain name, whether AWS Certificate Manager
+//    (ACM) provided the certificate, or you purchased a certificate from a
+//    third-party certificate authority and imported it into ACM or uploaded
+//    it to the IAM certificate store.
 //
-// For more information, see Using an HTTPS Connection to Access Your Objects
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
-// in the Amazon Amazon CloudFront Developer Guide.
+// You must specify only one of the following values:
+//
+//    * ViewerCertificate$ACMCertificateArn
+//
+//    * ViewerCertificate$IAMCertificateId
+//
+//    * ViewerCertificate$CloudFrontDefaultCertificate
+//
+// Don't specify false for CloudFrontDefaultCertificate.
+//
+// If you want viewers to use HTTP instead of HTTPS to request your objects:
+// Specify the following value:
+//
+// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+//
+// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
+// behaviors.
+//
+// If you want viewers to use HTTPS to request your objects: Choose the type
+// of certificate that you want to use based on whether you're using an alternate
+// domain name for your objects or the CloudFront domain name:
+//
+//    * If you're using an alternate domain name, such as example.com: Specify
+//    one of the following values, depending on whether ACM provided your certificate
+//    or you purchased your certificate from third-party certificate authority:
+//
+// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
+//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+//    that you want to use for this distribution.
+//
+// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+//    ID is the ID that IAM returned when you added the certificate to the IAM
+//    certificate store.
+//
+// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
+//    a value for SSLSupportMethod.
+//
+// If you choose to use an ACM certificate or a certificate in the IAM certificate
+//    store, we recommend that you use only an alternate domain name in your
+//    object URLs (https://example.com/logo.jpg). If you use the domain name
+//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
+//    and the viewer supports SNI, then CloudFront behaves normally. However,
+//    if the browser does not support SNI, the user's experience depends on
+//    the value that you choose for SSLSupportMethod:
+//
+// vip: The viewer displays a warning because there is a mismatch between the
+//    CloudFront domain name and the domain name in your SSL/TLS certificate.
+//
+// sni-only: CloudFront drops the connection with the browser without returning
+//    the object.
+//
+//    * If you're using the CloudFront domain name for your distribution, such
+//    as d111111abcdef8.cloudfront.net: Specify the following value:
+//
+// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+//
+// If you want viewers to use HTTPS, you must also specify one of the following
+// values in your cache behaviors:
+//
+//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+//
+//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+//
+// You can also optionally require that CloudFront use HTTPS to communicate
+// with your origin by specifying one of the following values for the applicable
+// origins:
+//
+//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
+//
+//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
+//
+// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+// in the Amazon CloudFront Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ViewerCertificate
 type ViewerCertificate struct {
 	_ struct{} `type:"structure"`
 
+	// For information about how and when to use ACMCertificateArn, see ViewerCertificate.
 	ACMCertificateArn *string `type:"string"`
 
-	// Include one of these values to specify the following:
+	// This field has been deprecated. Use one of the following fields instead:
 	//
-	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
+	//    * ViewerCertificate$ACMCertificateArn
 	//
-	//    * If you want viewers to use HTTPS, whether you're using an alternate
-	//    domain name such as example.com or the CloudFront domain name for your
-	//    distribution, such as d111111abcdef8.cloudfront.net.
+	//    * ViewerCertificate$IAMCertificateId
 	//
-	//    * If you're using an alternate domain name, whether AWS Certificate Manager
-	//    (ACM) provided the certificate, or you purchased a certificate from a
-	//    third-party certificate authority and imported it into ACM or uploaded
-	//    it to the IAM certificate store.
-	//
-	// You must specify one (and only one) of the three values. Do not specify false
-	// for CloudFrontDefaultCertificate.
-	//
-	// If you want viewers to use HTTP to request your objects: Specify the following
-	// value:
-	//
-	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
-	// behaviors.
-	//
-	// If you want viewers to use HTTPS to request your objects: Choose the type
-	// of certificate that you want to use based on whether you're using an alternate
-	// domain name for your objects or the CloudFront domain name:
-	//
-	//    * If you're using an alternate domain name, such as example.com: Specify
-	//    one of the following values, depending on whether ACM provided your certificate
-	//    or you purchased your certificate from third-party certificate authority:
-	//
-	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
-	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-	//    that you want to use for this distribution.
-	//
-	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
-	//    ID is the ID that IAM returned when you added the certificate to the IAM
-	//    certificate store.
-	//
-	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
-	//    a value for SSLSupportMethod.
-	//
-	// If you choose to use an ACM certificate or a certificate in the IAM certificate
-	//    store, we recommend that you use only an alternate domain name in your
-	//    object URLs (https://example.com/logo.jpg). If you use the domain name
-	//    that is associated with your CloudFront distribution (https://d111111abcdef8.cloudfront.net/logo.jpg)
-	//    and the viewer supports SNI, then CloudFront behaves normally. However,
-	//    if the browser does not support SNI, the user's experience depends on
-	//    the value that you choose for SSLSupportMethod:
-	//
-	// vip: The viewer displays a warning because there is a mismatch between the
-	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
-	//
-	// sni-only: CloudFront drops the connection with the browser without returning
-	//    the object.
-	//
-	//    * If you're using the CloudFront domain name for your distribution, such
-	//    as d111111abcdef8.cloudfront.net: Specify the following value:
-	//
-	//  <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// If you want viewers to use HTTPS, you must also specify one of the following
-	//    values in your cache behaviors:
-	//
-	//  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
-	//
-	//  <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
-	//
-	// You can also optionally require that CloudFront use HTTPS to communicate
-	//    with your origin by specifying one of the following values for the applicable
-	//    origins:
-	//
-	//  <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
-	//
-	//  <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
-	//
-	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
-	//    in the Amazon CloudFront Developer Guide.
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
 	Certificate *string `deprecated:"true" type:"string"`
 
-	// This field is deprecated. You can use one of the following: [ACMCertificateArn,
-	// IAMCertificateId, or CloudFrontDefaultCertificate].
+	// This field has been deprecated. Use one of the following fields instead:
+	//
+	//    * ViewerCertificate$ACMCertificateArn
+	//
+	//    * ViewerCertificate$IAMCertificateId
+	//
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
 	CertificateSource CertificateSource `deprecated:"true" type:"string" enum:"true"`
 
+	// For information about how and when to use CloudFrontDefaultCertificate, see
+	// ViewerCertificate.
 	CloudFrontDefaultCertificate *bool `type:"boolean"`
 
+	// For information about how and when to use IAMCertificateId, see ViewerCertificate.
 	IAMCertificateId *string `type:"string"`
 
-	// Specify the minimum version of the SSL/TLS protocol that you want CloudFront
-	// to use for HTTPS connections between viewers and CloudFront: SSLv3 or TLSv1.
-	// CloudFront serves your objects only to viewers that support SSL/TLS version
-	// that you specify and later versions. The TLSv1 protocol is more secure, so
-	// we recommend that you specify SSLv3 only if your users are using browsers
-	// or devices that don't support TLSv1. Note the following:
+	// Specify the security policy that you want CloudFront to use for HTTPS connections.
+	// A security policy determines two settings:
 	//
-	//    * If you specify <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>,
-	//    the minimum SSL protocol version is TLSv1 and can't be changed.
+	//    * The minimum SSL/TLS protocol that CloudFront uses to communicate with
+	//    viewers
 	//
-	//    * If you're using a custom certificate (if you specify a value for ACMCertificateArn
-	//    or for IAMCertificateId) and if you're using SNI (if you specify sni-only
-	//    for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.
+	//    * The cipher that CloudFront uses to encrypt the content that it returns
+	//    to viewers
+	//
+	// On the CloudFront console, this setting is called Security policy.
+	//
+	// We recommend that you specify TLSv1.1_2016 unless your users are using browsers
+	// or devices that do not support TLSv1.1 or later.
+	//
+	// When both of the following are true, you must specify TLSv1 or later for
+	// the security policy:
+	//
+	//    * You're using a custom certificate: you specified a value for ACMCertificateArn
+	//    or for IAMCertificateId
+	//
+	//    * You're using SNI: you specified sni-only for SSLSupportMethod
+	//
+	// If you specify true for CloudFrontDefaultCertificate, CloudFront automatically
+	// sets the security policy to TLSv1 regardless of the value that you specify
+	// for MinimumProtocolVersion.
+	//
+	// For information about the relationship between the security policy that you
+	// choose and the protocols and ciphers that CloudFront uses to communicate
+	// with viewers, see  Supported SSL/TLS Protocols and Ciphers for Communication
+	// Between Viewers and CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers)
+	// in the Amazon CloudFront Developer Guide.
 	MinimumProtocolVersion MinimumProtocolVersion `type:"string" enum:"true"`
 
-	// If you specify a value for ACMCertificateArn or for IAMCertificateId, you
-	// must also specify how you want CloudFront to serve HTTPS requests: using
+	// If you specify a value for ViewerCertificate$ACMCertificateArn or for ViewerCertificate$IAMCertificateId,
+	// you must also specify how you want CloudFront to serve HTTPS requests: using
 	// a method that works for all clients or one that works for most clients:
 	//
 	//    * vip: CloudFront uses dedicated IP addresses for your content and can
@@ -9127,7 +9427,7 @@ type ViewerCertificate struct {
 	//
 	// Use HTTP instead of HTTPS.
 	//
-	// Do not specify a value for SSLSupportMethod if you specified <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>.
+	// Don't specify a value for SSLSupportMethod if you specified <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>.
 	//
 	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html)
 	// in the Amazon CloudFront Developer Guide.
@@ -9248,8 +9548,11 @@ type MinimumProtocolVersion string
 
 // Enum values for MinimumProtocolVersion
 const (
-	MinimumProtocolVersionSslv3 MinimumProtocolVersion = "SSLv3"
-	MinimumProtocolVersionTlsv1 MinimumProtocolVersion = "TLSv1"
+	MinimumProtocolVersionSslv3      MinimumProtocolVersion = "SSLv3"
+	MinimumProtocolVersionTlsv1      MinimumProtocolVersion = "TLSv1"
+	MinimumProtocolVersionTlsv12016  MinimumProtocolVersion = "TLSv1_2016"
+	MinimumProtocolVersionTlsv112016 MinimumProtocolVersion = "TLSv1.1_2016"
+	MinimumProtocolVersionTlsv122018 MinimumProtocolVersion = "TLSv1.2_2018"
 )
 
 type OriginProtocolPolicy string

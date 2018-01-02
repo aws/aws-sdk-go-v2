@@ -76,6 +76,10 @@ type PinpointAPI interface {
 
 	DeleteApnsSandboxChannelRequest(*pinpoint.DeleteApnsSandboxChannelInput) pinpoint.DeleteApnsSandboxChannelRequest
 
+	DeleteApnsVoipChannelRequest(*pinpoint.DeleteApnsVoipChannelInput) pinpoint.DeleteApnsVoipChannelRequest
+
+	DeleteApnsVoipSandboxChannelRequest(*pinpoint.DeleteApnsVoipSandboxChannelInput) pinpoint.DeleteApnsVoipSandboxChannelRequest
+
 	DeleteAppRequest(*pinpoint.DeleteAppInput) pinpoint.DeleteAppRequest
 
 	DeleteBaiduChannelRequest(*pinpoint.DeleteBaiduChannelInput) pinpoint.DeleteBaiduChannelRequest
@@ -97,6 +101,10 @@ type PinpointAPI interface {
 	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
 
 	GetApnsSandboxChannelRequest(*pinpoint.GetApnsSandboxChannelInput) pinpoint.GetApnsSandboxChannelRequest
+
+	GetApnsVoipChannelRequest(*pinpoint.GetApnsVoipChannelInput) pinpoint.GetApnsVoipChannelRequest
+
+	GetApnsVoipSandboxChannelRequest(*pinpoint.GetApnsVoipSandboxChannelInput) pinpoint.GetApnsVoipSandboxChannelRequest
 
 	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
 
@@ -151,6 +159,10 @@ type PinpointAPI interface {
 	UpdateApnsChannelRequest(*pinpoint.UpdateApnsChannelInput) pinpoint.UpdateApnsChannelRequest
 
 	UpdateApnsSandboxChannelRequest(*pinpoint.UpdateApnsSandboxChannelInput) pinpoint.UpdateApnsSandboxChannelRequest
+
+	UpdateApnsVoipChannelRequest(*pinpoint.UpdateApnsVoipChannelInput) pinpoint.UpdateApnsVoipChannelRequest
+
+	UpdateApnsVoipSandboxChannelRequest(*pinpoint.UpdateApnsVoipSandboxChannelInput) pinpoint.UpdateApnsVoipSandboxChannelRequest
 
 	UpdateApplicationSettingsRequest(*pinpoint.UpdateApplicationSettingsInput) pinpoint.UpdateApplicationSettingsRequest
 

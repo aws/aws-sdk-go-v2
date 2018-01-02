@@ -9,6 +9,7 @@
 package opsworkscmiface
 
 import (
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
 )
 
@@ -91,6 +92,9 @@ type OpsWorksCMAPI interface {
 	UpdateServerRequest(*opsworkscm.UpdateServerInput) opsworkscm.UpdateServerRequest
 
 	UpdateServerEngineAttributesRequest(*opsworkscm.UpdateServerEngineAttributesInput) opsworkscm.UpdateServerEngineAttributesRequest
+
+	WaitUntilNodeAssociated(*opsworkscm.DescribeNodeAssociationStatusInput) error
+	WaitUntilNodeAssociatedWithContext(aws.Context, *opsworkscm.DescribeNodeAssociationStatusInput, ...aws.WaiterOption) error
 }
 
 var _ OpsWorksCMAPI = (*opsworkscm.OpsWorksCM)(nil)

@@ -73,6 +73,8 @@ type GlueAPI interface {
 
 	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) glue.BatchGetPartitionRequest
 
+	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
+
 	CreateClassifierRequest(*glue.CreateClassifierInput) glue.CreateClassifierRequest
 
 	CreateConnectionRequest(*glue.CreateConnectionInput) glue.CreateConnectionRequest

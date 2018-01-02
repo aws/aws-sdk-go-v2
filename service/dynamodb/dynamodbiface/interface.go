@@ -70,11 +70,23 @@ type DynamoDBAPI interface {
 
 	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) dynamodb.BatchWriteItemRequest
 
+	CreateBackupRequest(*dynamodb.CreateBackupInput) dynamodb.CreateBackupRequest
+
+	CreateGlobalTableRequest(*dynamodb.CreateGlobalTableInput) dynamodb.CreateGlobalTableRequest
+
 	CreateTableRequest(*dynamodb.CreateTableInput) dynamodb.CreateTableRequest
+
+	DeleteBackupRequest(*dynamodb.DeleteBackupInput) dynamodb.DeleteBackupRequest
 
 	DeleteItemRequest(*dynamodb.DeleteItemInput) dynamodb.DeleteItemRequest
 
 	DeleteTableRequest(*dynamodb.DeleteTableInput) dynamodb.DeleteTableRequest
+
+	DescribeBackupRequest(*dynamodb.DescribeBackupInput) dynamodb.DescribeBackupRequest
+
+	DescribeContinuousBackupsRequest(*dynamodb.DescribeContinuousBackupsInput) dynamodb.DescribeContinuousBackupsRequest
+
+	DescribeGlobalTableRequest(*dynamodb.DescribeGlobalTableInput) dynamodb.DescribeGlobalTableRequest
 
 	DescribeLimitsRequest(*dynamodb.DescribeLimitsInput) dynamodb.DescribeLimitsRequest
 
@@ -83,6 +95,10 @@ type DynamoDBAPI interface {
 	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) dynamodb.DescribeTimeToLiveRequest
 
 	GetItemRequest(*dynamodb.GetItemInput) dynamodb.GetItemRequest
+
+	ListBackupsRequest(*dynamodb.ListBackupsInput) dynamodb.ListBackupsRequest
+
+	ListGlobalTablesRequest(*dynamodb.ListGlobalTablesInput) dynamodb.ListGlobalTablesRequest
 
 	ListTablesRequest(*dynamodb.ListTablesInput) dynamodb.ListTablesRequest
 
@@ -98,6 +114,8 @@ type DynamoDBAPI interface {
 	QueryPages(*dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool) error
 	QueryPagesWithContext(aws.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...aws.Option) error
 
+	RestoreTableFromBackupRequest(*dynamodb.RestoreTableFromBackupInput) dynamodb.RestoreTableFromBackupRequest
+
 	ScanRequest(*dynamodb.ScanInput) dynamodb.ScanRequest
 
 	ScanPages(*dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool) error
@@ -106,6 +124,8 @@ type DynamoDBAPI interface {
 	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
 
 	UntagResourceRequest(*dynamodb.UntagResourceInput) dynamodb.UntagResourceRequest
+
+	UpdateGlobalTableRequest(*dynamodb.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
 
 	UpdateItemRequest(*dynamodb.UpdateItemInput) dynamodb.UpdateItemRequest
 

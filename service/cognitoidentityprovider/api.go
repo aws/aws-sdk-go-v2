@@ -187,13 +187,22 @@ func (r AdminCreateUserRequest) Send() (*AdminCreateUserOutput, error) {
 // AdminCreateUserRequest returns a request value for making API operation for
 // Amazon Cognito Identity Provider.
 //
-// Creates a new user in the specified user pool and sends a welcome message
-// via email or phone (SMS). This message is based on a template that you configured
-// in your call to CreateUserPool (API_CreateUserPool.html) or UpdateUserPool
-// (API_UpdateUserPool.html). This template includes your custom sign-up instructions
-// and placeholders for user name and temporary password.
+// Creates a new user in the specified user pool.
 //
-// Requires developer credentials.
+// If MessageAction is not set, the default is to send a welcome message via
+// email or phone (SMS).
+//
+// This message is based on a template that you configured in your call to or
+// . This template includes your custom sign-up instructions and placeholders
+// for user name and temporary password.
+//
+// Alternatively, you can call AdminCreateUser with “SUPPRESS” for the MessageAction
+// parameter, and Amazon Cognito will not send any email.
+//
+// In either case, the user will be in the FORCE_CHANGE_PASSWORD state until
+// they sign in and change their password.
+//
+// AdminCreateUser requires developer credentials.
 //
 //    // Example sending a request using the AdminCreateUserRequest method.
 //    req := client.AdminCreateUserRequest(params)
@@ -353,7 +362,7 @@ func (r AdminDisableProviderForUserRequest) Send() (*AdminDisableProviderForUser
 // sign-in. If the user to disable is a linked external IdP user, any link between
 // that user and an existing user is removed. The next time the external user
 // (no longer attached to the previously linked DestinationUser) signs in, they
-// must create a new user account. See AdminLinkProviderForUser (API_AdminLinkProviderForUser.html).
+// must create a new user account. See .
 //
 // This action is enabled only for admin access and requires developer credentials.
 //
@@ -372,11 +381,10 @@ func (r AdminDisableProviderForUserRequest) Send() (*AdminDisableProviderForUser
 // For de-linking a SAML identity, there are two scenarios. If the linked identity
 // has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue
 // must be the same values that were used for the SourceUser when the identities
-// were originally linked in the AdminLinkProviderForUser (API_AdminLinkProviderForUser.html)
-// call. (If the linking was done with ProviderAttributeName set to Cognito_Subject,
-// the same applies here). However, if the user has already signed in, the ProviderAttributeName
-// must be Cognito_Subject and ProviderAttributeValue must be the subject of
-// the SAML assertion.
+// were originally linked in the call. (If the linking was done with ProviderAttributeName
+// set to Cognito_Subject, the same applies here). However, if the user has
+// already signed in, the ProviderAttributeName must be Cognito_Subject and
+// ProviderAttributeValue must be the subject of the SAML assertion.
 //
 //    // Example sending a request using the AdminDisableProviderForUserRequest method.
 //    req := client.AdminDisableProviderForUserRequest(params)
@@ -750,7 +758,7 @@ func (r AdminLinkProviderForUserRequest) Send() (*AdminLinkProviderForUserOutput
 // with external identity providers and provider attributes that have been trusted
 // by the application owner.
 //
-// See also AdminDisableProviderForUser (API_AdminDisableProviderForUser.html).
+// See also .
 //
 // This action is enabled only for admin access and requires developer credentials.
 //
@@ -880,6 +888,56 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminList
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AdminListGroupsForUserRequest{Request: req, Input: input}
+}
+
+const opAdminListUserAuthEvents = "AdminListUserAuthEvents"
+
+// AdminListUserAuthEventsRequest is a API request type for the AdminListUserAuthEvents API operation.
+type AdminListUserAuthEventsRequest struct {
+	*aws.Request
+	Input *AdminListUserAuthEventsInput
+}
+
+// Send marshals and sends the AdminListUserAuthEvents API request.
+func (r AdminListUserAuthEventsRequest) Send() (*AdminListUserAuthEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AdminListUserAuthEventsOutput), nil
+}
+
+// AdminListUserAuthEventsRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Lists a history of user activity and any risks detected as part of Amazon
+// Cognito advanced security.
+//
+//    // Example sending a request using the AdminListUserAuthEventsRequest method.
+//    req := client.AdminListUserAuthEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEvents
+func (c *CognitoIdentityProvider) AdminListUserAuthEventsRequest(input *AdminListUserAuthEventsInput) AdminListUserAuthEventsRequest {
+	op := &aws.Operation{
+		Name:       opAdminListUserAuthEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AdminListUserAuthEventsInput{}
+	}
+
+	output := &AdminListUserAuthEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AdminListUserAuthEventsRequest{Request: req, Input: input}
 }
 
 const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
@@ -1048,6 +1106,55 @@ func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeRequest(input *Admi
 	return AdminRespondToAuthChallengeRequest{Request: req, Input: input}
 }
 
+const opAdminSetUserMFAPreference = "AdminSetUserMFAPreference"
+
+// AdminSetUserMFAPreferenceRequest is a API request type for the AdminSetUserMFAPreference API operation.
+type AdminSetUserMFAPreferenceRequest struct {
+	*aws.Request
+	Input *AdminSetUserMFAPreferenceInput
+}
+
+// Send marshals and sends the AdminSetUserMFAPreference API request.
+func (r AdminSetUserMFAPreferenceRequest) Send() (*AdminSetUserMFAPreferenceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AdminSetUserMFAPreferenceOutput), nil
+}
+
+// AdminSetUserMFAPreferenceRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Sets the user's multi-factor authentication (MFA) preference.
+//
+//    // Example sending a request using the AdminSetUserMFAPreferenceRequest method.
+//    req := client.AdminSetUserMFAPreferenceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreference
+func (c *CognitoIdentityProvider) AdminSetUserMFAPreferenceRequest(input *AdminSetUserMFAPreferenceInput) AdminSetUserMFAPreferenceRequest {
+	op := &aws.Operation{
+		Name:       opAdminSetUserMFAPreference,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AdminSetUserMFAPreferenceInput{}
+	}
+
+	output := &AdminSetUserMFAPreferenceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AdminSetUserMFAPreferenceRequest{Request: req, Input: input}
+}
+
 const opAdminSetUserSettings = "AdminSetUserSettings"
 
 // AdminSetUserSettingsRequest is a API request type for the AdminSetUserSettings API operation.
@@ -1097,6 +1204,57 @@ func (c *CognitoIdentityProvider) AdminSetUserSettingsRequest(input *AdminSetUse
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AdminSetUserSettingsRequest{Request: req, Input: input}
+}
+
+const opAdminUpdateAuthEventFeedback = "AdminUpdateAuthEventFeedback"
+
+// AdminUpdateAuthEventFeedbackRequest is a API request type for the AdminUpdateAuthEventFeedback API operation.
+type AdminUpdateAuthEventFeedbackRequest struct {
+	*aws.Request
+	Input *AdminUpdateAuthEventFeedbackInput
+}
+
+// Send marshals and sends the AdminUpdateAuthEventFeedback API request.
+func (r AdminUpdateAuthEventFeedbackRequest) Send() (*AdminUpdateAuthEventFeedbackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AdminUpdateAuthEventFeedbackOutput), nil
+}
+
+// AdminUpdateAuthEventFeedbackRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Provides feedback for an authentication event as to whether it was from a
+// valid user. This feedback is used for improving the risk evaluation decision
+// for the user pool as part of Amazon Cognito advanced security.
+//
+//    // Example sending a request using the AdminUpdateAuthEventFeedbackRequest method.
+//    req := client.AdminUpdateAuthEventFeedbackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateAuthEventFeedback
+func (c *CognitoIdentityProvider) AdminUpdateAuthEventFeedbackRequest(input *AdminUpdateAuthEventFeedbackInput) AdminUpdateAuthEventFeedbackRequest {
+	op := &aws.Operation{
+		Name:       opAdminUpdateAuthEventFeedback,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AdminUpdateAuthEventFeedbackInput{}
+	}
+
+	output := &AdminUpdateAuthEventFeedbackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AdminUpdateAuthEventFeedbackRequest{Request: req, Input: input}
 }
 
 const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
@@ -1257,6 +1415,56 @@ func (c *CognitoIdentityProvider) AdminUserGlobalSignOutRequest(input *AdminUser
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AdminUserGlobalSignOutRequest{Request: req, Input: input}
+}
+
+const opAssociateSoftwareToken = "AssociateSoftwareToken"
+
+// AssociateSoftwareTokenRequest is a API request type for the AssociateSoftwareToken API operation.
+type AssociateSoftwareTokenRequest struct {
+	*aws.Request
+	Input *AssociateSoftwareTokenInput
+}
+
+// Send marshals and sends the AssociateSoftwareToken API request.
+func (r AssociateSoftwareTokenRequest) Send() (*AssociateSoftwareTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateSoftwareTokenOutput), nil
+}
+
+// AssociateSoftwareTokenRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Returns a unique generated shared secret key code for the user account. The
+// request takes an access token or a session string, but not both.
+//
+//    // Example sending a request using the AssociateSoftwareTokenRequest method.
+//    req := client.AssociateSoftwareTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareToken
+func (c *CognitoIdentityProvider) AssociateSoftwareTokenRequest(input *AssociateSoftwareTokenInput) AssociateSoftwareTokenRequest {
+	op := &aws.Operation{
+		Name:       opAssociateSoftwareToken,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateSoftwareTokenInput{}
+	}
+
+	output := &AssociateSoftwareTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociateSoftwareTokenRequest{Request: req, Input: input}
 }
 
 const opChangePassword = "ChangePassword"
@@ -2312,6 +2520,55 @@ func (c *CognitoIdentityProvider) DescribeResourceServerRequest(input *DescribeR
 	return DescribeResourceServerRequest{Request: req, Input: input}
 }
 
+const opDescribeRiskConfiguration = "DescribeRiskConfiguration"
+
+// DescribeRiskConfigurationRequest is a API request type for the DescribeRiskConfiguration API operation.
+type DescribeRiskConfigurationRequest struct {
+	*aws.Request
+	Input *DescribeRiskConfigurationInput
+}
+
+// Send marshals and sends the DescribeRiskConfiguration API request.
+func (r DescribeRiskConfigurationRequest) Send() (*DescribeRiskConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRiskConfigurationOutput), nil
+}
+
+// DescribeRiskConfigurationRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Describes the risk configuration.
+//
+//    // Example sending a request using the DescribeRiskConfigurationRequest method.
+//    req := client.DescribeRiskConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfiguration
+func (c *CognitoIdentityProvider) DescribeRiskConfigurationRequest(input *DescribeRiskConfigurationInput) DescribeRiskConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opDescribeRiskConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeRiskConfigurationInput{}
+	}
+
+	output := &DescribeRiskConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeRiskConfigurationRequest{Request: req, Input: input}
+}
+
 const opDescribeUserImportJob = "DescribeUserImportJob"
 
 // DescribeUserImportJobRequest is a API request type for the DescribeUserImportJob API operation.
@@ -2589,7 +2846,7 @@ func (r ForgotPasswordRequest) Send() (*ForgotPasswordOutput, error) {
 // if a verified email exists, the confirmation code is sent to the email. If
 // neither a verified phone number nor a verified email exists, InvalidParameterException
 // is thrown. To use the confirmation code for resetting the password, call
-// ConfirmForgotPassword (API_ConfirmForgotPassword.html).
+// .
 //
 //    // Example sending a request using the ForgotPasswordRequest method.
 //    req := client.ForgotPasswordRequest(params)
@@ -2967,6 +3224,55 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input 
 
 	req.Config.Credentials = aws.AnonymousCredentials
 	return GetUserAttributeVerificationCodeRequest{Request: req, Input: input}
+}
+
+const opGetUserPoolMfaConfig = "GetUserPoolMfaConfig"
+
+// GetUserPoolMfaConfigRequest is a API request type for the GetUserPoolMfaConfig API operation.
+type GetUserPoolMfaConfigRequest struct {
+	*aws.Request
+	Input *GetUserPoolMfaConfigInput
+}
+
+// Send marshals and sends the GetUserPoolMfaConfig API request.
+func (r GetUserPoolMfaConfigRequest) Send() (*GetUserPoolMfaConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUserPoolMfaConfigOutput), nil
+}
+
+// GetUserPoolMfaConfigRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Gets the user pool multi-factor authentication (MFA) configuration.
+//
+//    // Example sending a request using the GetUserPoolMfaConfigRequest method.
+//    req := client.GetUserPoolMfaConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfig
+func (c *CognitoIdentityProvider) GetUserPoolMfaConfigRequest(input *GetUserPoolMfaConfigInput) GetUserPoolMfaConfigRequest {
+	op := &aws.Operation{
+		Name:       opGetUserPoolMfaConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetUserPoolMfaConfigInput{}
+	}
+
+	output := &GetUserPoolMfaConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetUserPoolMfaConfigRequest{Request: req, Input: input}
 }
 
 const opGlobalSignOut = "GlobalSignOut"
@@ -3612,6 +3918,61 @@ func (c *CognitoIdentityProvider) RespondToAuthChallengeRequest(input *RespondTo
 	return RespondToAuthChallengeRequest{Request: req, Input: input}
 }
 
+const opSetRiskConfiguration = "SetRiskConfiguration"
+
+// SetRiskConfigurationRequest is a API request type for the SetRiskConfiguration API operation.
+type SetRiskConfigurationRequest struct {
+	*aws.Request
+	Input *SetRiskConfigurationInput
+}
+
+// Send marshals and sends the SetRiskConfiguration API request.
+func (r SetRiskConfigurationRequest) Send() (*SetRiskConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetRiskConfigurationOutput), nil
+}
+
+// SetRiskConfigurationRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Configures actions on detected risks. To delete the risk configuration for
+// UserPoolId or ClientId, pass null values for all four configuration types.
+//
+// To enable Amazon Cognito advanced security features, update the user pool
+// to include the UserPoolAddOns keyAdvancedSecurityMode.
+//
+// See .
+//
+//    // Example sending a request using the SetRiskConfigurationRequest method.
+//    req := client.SetRiskConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfiguration
+func (c *CognitoIdentityProvider) SetRiskConfigurationRequest(input *SetRiskConfigurationInput) SetRiskConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opSetRiskConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &SetRiskConfigurationInput{}
+	}
+
+	output := &SetRiskConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SetRiskConfigurationRequest{Request: req, Input: input}
+}
+
 const opSetUICustomization = "SetUICustomization"
 
 // SetUICustomizationRequest is a API request type for the SetUICustomization API operation.
@@ -3670,6 +4031,104 @@ func (c *CognitoIdentityProvider) SetUICustomizationRequest(input *SetUICustomiz
 	output.responseMetadata = aws.Response{Request: req}
 
 	return SetUICustomizationRequest{Request: req, Input: input}
+}
+
+const opSetUserMFAPreference = "SetUserMFAPreference"
+
+// SetUserMFAPreferenceRequest is a API request type for the SetUserMFAPreference API operation.
+type SetUserMFAPreferenceRequest struct {
+	*aws.Request
+	Input *SetUserMFAPreferenceInput
+}
+
+// Send marshals and sends the SetUserMFAPreference API request.
+func (r SetUserMFAPreferenceRequest) Send() (*SetUserMFAPreferenceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetUserMFAPreferenceOutput), nil
+}
+
+// SetUserMFAPreferenceRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Set the user's multi-factor authentication (MFA) method preference.
+//
+//    // Example sending a request using the SetUserMFAPreferenceRequest method.
+//    req := client.SetUserMFAPreferenceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreference
+func (c *CognitoIdentityProvider) SetUserMFAPreferenceRequest(input *SetUserMFAPreferenceInput) SetUserMFAPreferenceRequest {
+	op := &aws.Operation{
+		Name:       opSetUserMFAPreference,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &SetUserMFAPreferenceInput{}
+	}
+
+	output := &SetUserMFAPreferenceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SetUserMFAPreferenceRequest{Request: req, Input: input}
+}
+
+const opSetUserPoolMfaConfig = "SetUserPoolMfaConfig"
+
+// SetUserPoolMfaConfigRequest is a API request type for the SetUserPoolMfaConfig API operation.
+type SetUserPoolMfaConfigRequest struct {
+	*aws.Request
+	Input *SetUserPoolMfaConfigInput
+}
+
+// Send marshals and sends the SetUserPoolMfaConfig API request.
+func (r SetUserPoolMfaConfigRequest) Send() (*SetUserPoolMfaConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetUserPoolMfaConfigOutput), nil
+}
+
+// SetUserPoolMfaConfigRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Set the user pool MFA configuration.
+//
+//    // Example sending a request using the SetUserPoolMfaConfigRequest method.
+//    req := client.SetUserPoolMfaConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfig
+func (c *CognitoIdentityProvider) SetUserPoolMfaConfigRequest(input *SetUserPoolMfaConfigInput) SetUserPoolMfaConfigRequest {
+	op := &aws.Operation{
+		Name:       opSetUserPoolMfaConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &SetUserPoolMfaConfigInput{}
+	}
+
+	output := &SetUserPoolMfaConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SetUserPoolMfaConfigRequest{Request: req, Input: input}
 }
 
 const opSetUserSettings = "SetUserSettings"
@@ -3871,6 +4330,57 @@ func (c *CognitoIdentityProvider) StopUserImportJobRequest(input *StopUserImport
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StopUserImportJobRequest{Request: req, Input: input}
+}
+
+const opUpdateAuthEventFeedback = "UpdateAuthEventFeedback"
+
+// UpdateAuthEventFeedbackRequest is a API request type for the UpdateAuthEventFeedback API operation.
+type UpdateAuthEventFeedbackRequest struct {
+	*aws.Request
+	Input *UpdateAuthEventFeedbackInput
+}
+
+// Send marshals and sends the UpdateAuthEventFeedback API request.
+func (r UpdateAuthEventFeedbackRequest) Send() (*UpdateAuthEventFeedbackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAuthEventFeedbackOutput), nil
+}
+
+// UpdateAuthEventFeedbackRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Provides the feedback for an authentication event whether it was from a valid
+// user or not. This feedback is used for improving the risk evaluation decision
+// for the user pool as part of Amazon Cognito advanced security.
+//
+//    // Example sending a request using the UpdateAuthEventFeedbackRequest method.
+//    req := client.UpdateAuthEventFeedbackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedback
+func (c *CognitoIdentityProvider) UpdateAuthEventFeedbackRequest(input *UpdateAuthEventFeedbackInput) UpdateAuthEventFeedbackRequest {
+	op := &aws.Operation{
+		Name:       opUpdateAuthEventFeedback,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateAuthEventFeedbackInput{}
+	}
+
+	output := &UpdateAuthEventFeedbackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateAuthEventFeedbackRequest{Request: req, Input: input}
 }
 
 const opUpdateDeviceStatus = "UpdateDeviceStatus"
@@ -4220,6 +4730,56 @@ func (c *CognitoIdentityProvider) UpdateUserPoolClientRequest(input *UpdateUserP
 	return UpdateUserPoolClientRequest{Request: req, Input: input}
 }
 
+const opVerifySoftwareToken = "VerifySoftwareToken"
+
+// VerifySoftwareTokenRequest is a API request type for the VerifySoftwareToken API operation.
+type VerifySoftwareTokenRequest struct {
+	*aws.Request
+	Input *VerifySoftwareTokenInput
+}
+
+// Send marshals and sends the VerifySoftwareToken API request.
+func (r VerifySoftwareTokenRequest) Send() (*VerifySoftwareTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*VerifySoftwareTokenOutput), nil
+}
+
+// VerifySoftwareTokenRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Use this API to register a user's entered TOTP code and mark the user's software
+// token MFA status as "verified" if successful,
+//
+//    // Example sending a request using the VerifySoftwareTokenRequest method.
+//    req := client.VerifySoftwareTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareToken
+func (c *CognitoIdentityProvider) VerifySoftwareTokenRequest(input *VerifySoftwareTokenInput) VerifySoftwareTokenRequest {
+	op := &aws.Operation{
+		Name:       opVerifySoftwareToken,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &VerifySoftwareTokenInput{}
+	}
+
+	output := &VerifySoftwareTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return VerifySoftwareTokenRequest{Request: req, Input: input}
+}
+
 const opVerifyUserAttribute = "VerifyUserAttribute"
 
 // VerifyUserAttributeRequest is a API request type for the VerifyUserAttribute API operation.
@@ -4268,6 +4828,200 @@ func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAt
 
 	req.Config.Credentials = aws.AnonymousCredentials
 	return VerifyUserAttributeRequest{Request: req, Input: input}
+}
+
+// Account takeover action type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverActionType
+type AccountTakeoverActionType struct {
+	_ struct{} `type:"structure"`
+
+	// The event action.
+	//
+	//    * BLOCK Choosing this action will block the request.
+	//
+	//    * MFA_IF_CONFIGURED Throw MFA challenge if user has configured it, else
+	//    allow the request.
+	//
+	//    * MFA_REQUIRED Throw MFA challenge if user has configured it, else block
+	//    the request.
+	//
+	//    * NO_ACTION Allow the user sign-in.
+	//
+	// EventAction is a required field
+	EventAction AccountTakeoverEventActionType `type:"string" required:"true" enum:"true"`
+
+	// Flag specifying whether to send a notification.
+	//
+	// Notify is a required field
+	Notify *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s AccountTakeoverActionType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccountTakeoverActionType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccountTakeoverActionType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccountTakeoverActionType"}
+	if len(s.EventAction) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("EventAction"))
+	}
+
+	if s.Notify == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Notify"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEventAction sets the EventAction field's value.
+func (s *AccountTakeoverActionType) SetEventAction(v AccountTakeoverEventActionType) *AccountTakeoverActionType {
+	s.EventAction = v
+	return s
+}
+
+// SetNotify sets the Notify field's value.
+func (s *AccountTakeoverActionType) SetNotify(v bool) *AccountTakeoverActionType {
+	s.Notify = &v
+	return s
+}
+
+// Account takeover actions type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverActionsType
+type AccountTakeoverActionsType struct {
+	_ struct{} `type:"structure"`
+
+	// Action to take for a high risk.
+	HighAction *AccountTakeoverActionType `type:"structure"`
+
+	// Action to take for a low risk.
+	LowAction *AccountTakeoverActionType `type:"structure"`
+
+	// Action to take for a medium risk.
+	MediumAction *AccountTakeoverActionType `type:"structure"`
+}
+
+// String returns the string representation
+func (s AccountTakeoverActionsType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccountTakeoverActionsType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccountTakeoverActionsType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccountTakeoverActionsType"}
+	if s.HighAction != nil {
+		if err := s.HighAction.Validate(); err != nil {
+			invalidParams.AddNested("HighAction", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.LowAction != nil {
+		if err := s.LowAction.Validate(); err != nil {
+			invalidParams.AddNested("LowAction", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MediumAction != nil {
+		if err := s.MediumAction.Validate(); err != nil {
+			invalidParams.AddNested("MediumAction", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetHighAction sets the HighAction field's value.
+func (s *AccountTakeoverActionsType) SetHighAction(v *AccountTakeoverActionType) *AccountTakeoverActionsType {
+	s.HighAction = v
+	return s
+}
+
+// SetLowAction sets the LowAction field's value.
+func (s *AccountTakeoverActionsType) SetLowAction(v *AccountTakeoverActionType) *AccountTakeoverActionsType {
+	s.LowAction = v
+	return s
+}
+
+// SetMediumAction sets the MediumAction field's value.
+func (s *AccountTakeoverActionsType) SetMediumAction(v *AccountTakeoverActionType) *AccountTakeoverActionsType {
+	s.MediumAction = v
+	return s
+}
+
+// Configuration for mitigation actions and notification for different levels
+// of risk detected for a potential account takeover.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverRiskConfigurationType
+type AccountTakeoverRiskConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// Account takeover risk configuration actions
+	//
+	// Actions is a required field
+	Actions *AccountTakeoverActionsType `type:"structure" required:"true"`
+
+	// The notify configuration used to construct email notifications.
+	NotifyConfiguration *NotifyConfigurationType `type:"structure"`
+}
+
+// String returns the string representation
+func (s AccountTakeoverRiskConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccountTakeoverRiskConfigurationType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccountTakeoverRiskConfigurationType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccountTakeoverRiskConfigurationType"}
+
+	if s.Actions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
+	}
+	if s.Actions != nil {
+		if err := s.Actions.Validate(); err != nil {
+			invalidParams.AddNested("Actions", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.NotifyConfiguration != nil {
+		if err := s.NotifyConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("NotifyConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetActions sets the Actions field's value.
+func (s *AccountTakeoverRiskConfigurationType) SetActions(v *AccountTakeoverActionsType) *AccountTakeoverRiskConfigurationType {
+	s.Actions = v
+	return s
+}
+
+// SetNotifyConfiguration sets the NotifyConfiguration field's value.
+func (s *AccountTakeoverRiskConfigurationType) SetNotifyConfiguration(v *NotifyConfigurationType) *AccountTakeoverRiskConfigurationType {
+	s.NotifyConfiguration = v
+	return s
 }
 
 // Represents the request to add custom attributes.
@@ -4548,7 +5302,7 @@ func (s AdminConfirmSignUpOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The type of configuration for creating a new user profile.
+// The configuration for creating a new user profile.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserConfigType
 type AdminCreateUserConfigType struct {
 	_ struct{} `type:"structure"`
@@ -4558,6 +5312,8 @@ type AdminCreateUserConfigType struct {
 	AllowAdminCreateUserOnly *bool `type:"boolean"`
 
 	// The message template to be used for the welcome message to new users.
+	//
+	// See also Customizing User Invitation Messages (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization).
 	InviteMessageTemplate *MessageTemplateType `type:"structure"`
 
 	// The user account expiration limit, in days, after which the account is no
@@ -4657,9 +5413,9 @@ type AdminCreateUserInput struct {
 	// An array of name-value pairs that contain user attributes and attribute values
 	// to be set for the user to be created. You can create a user without specifying
 	// any attributes other than Username. However, any attributes that you specify
-	// as required (in CreateUserPool (API_CreateUserPool.html) or in the Attributes
-	// tab of the console) must be supplied either by you (in your call to AdminCreateUser)
-	// or by the user (when he or she signs up in response to your welcome message).
+	// as required (in or in the Attributes tab of the console) must be supplied
+	// either by you (in your call to AdminCreateUser) or by the user (when he or
+	// she signs up in response to your welcome message).
 	//
 	// For custom attributes, you must prepend the custom: prefix to the attribute
 	// name.
@@ -4671,7 +5427,7 @@ type AdminCreateUserInput struct {
 	//
 	// In your call to AdminCreateUser, you can set the email_verified attribute
 	// to True, and you can set the phone_number_verified attribute to True. (You
-	// can also do this by calling AdminUpdateUserAttributes (API_AdminUpdateUserAttributes.html).)
+	// can also do this by calling .)
 	//
 	//    * email: The email address of the user to whom the message that contains
 	//    the code and username will be sent. Required if the email_verified attribute
@@ -5577,6 +6333,9 @@ type AdminGetUserOutput struct {
 	// Specifies the options for MFA (e.g., email or phone number).
 	MFAOptions []MFAOptionType `type:"list"`
 
+	// The user's preferred MFA setting.
+	PreferredMfaSetting *string `type:"string"`
+
 	// An array of name-value pairs representing user attributes.
 	UserAttributes []AttributeType `type:"list"`
 
@@ -5585,6 +6344,9 @@ type AdminGetUserOutput struct {
 
 	// The date the user was last modified.
 	UserLastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The list of the user's MFA settings.
+	UserMFASettingList []string `type:"list"`
 
 	// The user status. Can be one of the following:
 	//
@@ -5632,6 +6394,12 @@ func (s *AdminGetUserOutput) SetMFAOptions(v []MFAOptionType) *AdminGetUserOutpu
 	return s
 }
 
+// SetPreferredMfaSetting sets the PreferredMfaSetting field's value.
+func (s *AdminGetUserOutput) SetPreferredMfaSetting(v string) *AdminGetUserOutput {
+	s.PreferredMfaSetting = &v
+	return s
+}
+
 // SetUserAttributes sets the UserAttributes field's value.
 func (s *AdminGetUserOutput) SetUserAttributes(v []AttributeType) *AdminGetUserOutput {
 	s.UserAttributes = v
@@ -5647,6 +6415,12 @@ func (s *AdminGetUserOutput) SetUserCreateDate(v time.Time) *AdminGetUserOutput 
 // SetUserLastModifiedDate sets the UserLastModifiedDate field's value.
 func (s *AdminGetUserOutput) SetUserLastModifiedDate(v time.Time) *AdminGetUserOutput {
 	s.UserLastModifiedDate = &v
+	return s
+}
+
+// SetUserMFASettingList sets the UserMFASettingList field's value.
+func (s *AdminGetUserOutput) SetUserMFASettingList(v []string) *AdminGetUserOutput {
+	s.UserMFASettingList = v
 	return s
 }
 
@@ -5666,6 +6440,10 @@ func (s *AdminGetUserOutput) SetUsername(v string) *AdminGetUserOutput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthRequest
 type AdminInitiateAuthInput struct {
 	_ struct{} `type:"structure"`
+
+	// The analytics metadata for collecting Amazon Pinpoint metrics for AdminInitiateAuth
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
 
 	// The authentication flow for this call to execute. The API action will depend
 	// on this value. For example:
@@ -5720,6 +6498,11 @@ type AdminInitiateAuthInput struct {
 	// implement additional validations around authentication.
 	ClientMetadata map[string]string `type:"map"`
 
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	ContextData *ContextDataType `type:"structure"`
+
 	// The ID of the Amazon Cognito user pool.
 	//
 	// UserPoolId is a required field
@@ -5756,11 +6539,22 @@ func (s *AdminInitiateAuthInput) Validate() error {
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+	if s.ContextData != nil {
+		if err := s.ContextData.Validate(); err != nil {
+			invalidParams.AddNested("ContextData", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *AdminInitiateAuthInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *AdminInitiateAuthInput {
+	s.AnalyticsMetadata = v
+	return s
 }
 
 // SetAuthFlow sets the AuthFlow field's value.
@@ -5784,6 +6578,12 @@ func (s *AdminInitiateAuthInput) SetClientId(v string) *AdminInitiateAuthInput {
 // SetClientMetadata sets the ClientMetadata field's value.
 func (s *AdminInitiateAuthInput) SetClientMetadata(v map[string]string) *AdminInitiateAuthInput {
 	s.ClientMetadata = v
+	return s
+}
+
+// SetContextData sets the ContextData field's value.
+func (s *AdminInitiateAuthInput) SetContextData(v *ContextDataType) *AdminInitiateAuthInput {
+	s.ContextData = v
 	return s
 }
 
@@ -5906,8 +6706,13 @@ type AdminLinkProviderForUserInput struct {
 	// returned when the new user (with the linked identity provider attribute)
 	// signs in.
 	//
-	// The ProviderAttributeValue for the DestinationUser must match the username
-	// for the user in the user pool. The ProviderAttributeName will always be ignored.
+	// For a native username + password user, the ProviderAttributeValue for the
+	// DestinationUser should be the username in the user pool. For a federated
+	// user, it should be the provider-specific user_id.
+	//
+	// The ProviderAttributeName of the DestinationUser is ignored.
+	//
+	// The ProviderName should be set to Cognito for users in Cognito user pools.
 	//
 	// DestinationUser is a required field
 	DestinationUser *ProviderUserIdentifierType `type:"structure" required:"true"`
@@ -6268,6 +7073,129 @@ func (s *AdminListGroupsForUserOutput) SetNextToken(v string) *AdminListGroupsFo
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEventsRequest
+type AdminListUserAuthEventsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of authentication events to return.
+	MaxResults *int64 `type:"integer"`
+
+	// A pagination token.
+	NextToken *string `min:"1" type:"string"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+
+	// The user pool username.
+	//
+	// Username is a required field
+	Username *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AdminListUserAuthEventsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AdminListUserAuthEventsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AdminListUserAuthEventsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AdminListUserAuthEventsInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if s.Username == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
+	}
+	if s.Username != nil && len(*s.Username) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *AdminListUserAuthEventsInput) SetMaxResults(v int64) *AdminListUserAuthEventsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *AdminListUserAuthEventsInput) SetNextToken(v string) *AdminListUserAuthEventsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *AdminListUserAuthEventsInput) SetUserPoolId(v string) *AdminListUserAuthEventsInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// SetUsername sets the Username field's value.
+func (s *AdminListUserAuthEventsInput) SetUsername(v string) *AdminListUserAuthEventsInput {
+	s.Username = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEventsResponse
+type AdminListUserAuthEventsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The response object. It includes the EventID, EventType, CreationDate, EventRisk,
+	// and EventResponse.
+	AuthEvents []AuthEventType `type:"list"`
+
+	// A pagination token.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AdminListUserAuthEventsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AdminListUserAuthEventsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminListUserAuthEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetAuthEvents sets the AuthEvents field's value.
+func (s *AdminListUserAuthEventsOutput) SetAuthEvents(v []AuthEventType) *AdminListUserAuthEventsOutput {
+	s.AuthEvents = v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *AdminListUserAuthEventsOutput) SetNextToken(v string) *AdminListUserAuthEventsOutput {
+	s.NextToken = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupRequest
 type AdminRemoveUserFromGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -6459,7 +7387,11 @@ func (s AdminResetUserPasswordOutput) SDKResponseMetadata() aws.Response {
 type AdminRespondToAuthChallengeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The challenge name. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
+	// The analytics metadata for collecting Amazon Pinpoint metrics for AdminRespondToAuthChallenge
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
+	// The challenge name. For more information, see .
 	//
 	// ChallengeName is a required field
 	ChallengeName ChallengeNameType `type:"string" required:"true" enum:"true"`
@@ -6491,6 +7423,11 @@ type AdminRespondToAuthChallengeInput struct {
 	//
 	// ClientId is a required field
 	ClientId *string `min:"1" type:"string" required:"true"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	ContextData *ContextDataType `type:"structure"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. If InitiateAuth or RespondToAuthChallenge API call determines
@@ -6538,11 +7475,22 @@ func (s *AdminRespondToAuthChallengeInput) Validate() error {
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+	if s.ContextData != nil {
+		if err := s.ContextData.Validate(); err != nil {
+			invalidParams.AddNested("ContextData", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *AdminRespondToAuthChallengeInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *AdminRespondToAuthChallengeInput {
+	s.AnalyticsMetadata = v
+	return s
 }
 
 // SetChallengeName sets the ChallengeName field's value.
@@ -6560,6 +7508,12 @@ func (s *AdminRespondToAuthChallengeInput) SetChallengeResponses(v map[string]st
 // SetClientId sets the ClientId field's value.
 func (s *AdminRespondToAuthChallengeInput) SetClientId(v string) *AdminRespondToAuthChallengeInput {
 	s.ClientId = &v
+	return s
+}
+
+// SetContextData sets the ContextData field's value.
+func (s *AdminRespondToAuthChallengeInput) SetContextData(v *ContextDataType) *AdminRespondToAuthChallengeInput {
+	s.ContextData = v
 	return s
 }
 
@@ -6585,17 +7539,16 @@ type AdminRespondToAuthChallengeOutput struct {
 	// The result returned by the server in response to the authentication request.
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
-	// The name of the challenge. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
+	// The name of the challenge. For more information, see .
 	ChallengeName ChallengeNameType `type:"string" enum:"true"`
 
-	// The challenge parameters. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
+	// The challenge parameters. For more information, see .
 	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
-	// to the service. If the InitiateAuth (API_InitiateAuth.html) or RespondToAuthChallenge
-	// (API_RespondToAuthChallenge.html) API call determines that the caller needs
-	// to go through another challenge, they return a session with other challenge
-	// parameters. This session should be passed as it is to the next RespondToAuthChallenge
+	// to the service. If the or API call determines that the caller needs to go
+	// through another challenge, they return a session with other challenge parameters.
+	// This session should be passed as it is to the next RespondToAuthChallenge
 	// API call.
 	Session *string `min:"20" type:"string"`
 }
@@ -6637,6 +7590,107 @@ func (s *AdminRespondToAuthChallengeOutput) SetChallengeParameters(v map[string]
 func (s *AdminRespondToAuthChallengeOutput) SetSession(v string) *AdminRespondToAuthChallengeOutput {
 	s.Session = &v
 	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreferenceRequest
+type AdminSetUserMFAPreferenceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The SMS text message MFA settings.
+	SMSMfaSettings *SMSMfaSettingsType `type:"structure"`
+
+	// The time-based one-time password software token MFA settings.
+	SoftwareTokenMfaSettings *SoftwareTokenMfaSettingsType `type:"structure"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+
+	// The user pool username.
+	//
+	// Username is a required field
+	Username *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AdminSetUserMFAPreferenceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AdminSetUserMFAPreferenceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AdminSetUserMFAPreferenceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AdminSetUserMFAPreferenceInput"}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if s.Username == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
+	}
+	if s.Username != nil && len(*s.Username) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSMSMfaSettings sets the SMSMfaSettings field's value.
+func (s *AdminSetUserMFAPreferenceInput) SetSMSMfaSettings(v *SMSMfaSettingsType) *AdminSetUserMFAPreferenceInput {
+	s.SMSMfaSettings = v
+	return s
+}
+
+// SetSoftwareTokenMfaSettings sets the SoftwareTokenMfaSettings field's value.
+func (s *AdminSetUserMFAPreferenceInput) SetSoftwareTokenMfaSettings(v *SoftwareTokenMfaSettingsType) *AdminSetUserMFAPreferenceInput {
+	s.SoftwareTokenMfaSettings = v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *AdminSetUserMFAPreferenceInput) SetUserPoolId(v string) *AdminSetUserMFAPreferenceInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// SetUsername sets the Username field's value.
+func (s *AdminSetUserMFAPreferenceInput) SetUsername(v string) *AdminSetUserMFAPreferenceInput {
+	s.Username = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreferenceResponse
+type AdminSetUserMFAPreferenceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AdminSetUserMFAPreferenceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AdminSetUserMFAPreferenceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminSetUserMFAPreferenceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to set user settings as an administrator.
@@ -6744,6 +7798,121 @@ func (s AdminSetUserSettingsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminSetUserSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateAuthEventFeedbackRequest
+type AdminUpdateAuthEventFeedbackInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication event ID.
+	//
+	// EventId is a required field
+	EventId *string `min:"1" type:"string" required:"true"`
+
+	// The authentication event feedback value.
+	//
+	// FeedbackValue is a required field
+	FeedbackValue FeedbackValueType `type:"string" required:"true" enum:"true"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+
+	// The user pool username.
+	//
+	// Username is a required field
+	Username *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AdminUpdateAuthEventFeedbackInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AdminUpdateAuthEventFeedbackInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AdminUpdateAuthEventFeedbackInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateAuthEventFeedbackInput"}
+
+	if s.EventId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EventId"))
+	}
+	if s.EventId != nil && len(*s.EventId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventId", 1))
+	}
+	if len(s.FeedbackValue) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FeedbackValue"))
+	}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if s.Username == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
+	}
+	if s.Username != nil && len(*s.Username) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEventId sets the EventId field's value.
+func (s *AdminUpdateAuthEventFeedbackInput) SetEventId(v string) *AdminUpdateAuthEventFeedbackInput {
+	s.EventId = &v
+	return s
+}
+
+// SetFeedbackValue sets the FeedbackValue field's value.
+func (s *AdminUpdateAuthEventFeedbackInput) SetFeedbackValue(v FeedbackValueType) *AdminUpdateAuthEventFeedbackInput {
+	s.FeedbackValue = v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *AdminUpdateAuthEventFeedbackInput) SetUserPoolId(v string) *AdminUpdateAuthEventFeedbackInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// SetUsername sets the Username field's value.
+func (s *AdminUpdateAuthEventFeedbackInput) SetUsername(v string) *AdminUpdateAuthEventFeedbackInput {
+	s.Username = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateAuthEventFeedbackResponse
+type AdminUpdateAuthEventFeedbackOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AdminUpdateAuthEventFeedbackOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AdminUpdateAuthEventFeedbackOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AdminUpdateAuthEventFeedbackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7055,6 +8224,211 @@ func (s AdminUserGlobalSignOutOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The Amazon Pinpoint analytics configuration for collecting metrics for a
+// user pool.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AnalyticsConfigurationType
+type AnalyticsConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// The application ID for an Amazon Pinpoint application.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `type:"string" required:"true"`
+
+	// The external ID.
+	//
+	// ExternalId is a required field
+	ExternalId *string `type:"string" required:"true"`
+
+	// The ARN of an IAM role that authorizes Amazon Cognito to publish events to
+	// Amazon Pinpoint analytics.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// If UserDataShared is true, Amazon Cognito will include user data in the events
+	// it publishes to Amazon Pinpoint analytics.
+	UserDataShared *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s AnalyticsConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AnalyticsConfigurationType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AnalyticsConfigurationType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsConfigurationType"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.ExternalId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ExternalId"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplicationId sets the ApplicationId field's value.
+func (s *AnalyticsConfigurationType) SetApplicationId(v string) *AnalyticsConfigurationType {
+	s.ApplicationId = &v
+	return s
+}
+
+// SetExternalId sets the ExternalId field's value.
+func (s *AnalyticsConfigurationType) SetExternalId(v string) *AnalyticsConfigurationType {
+	s.ExternalId = &v
+	return s
+}
+
+// SetRoleArn sets the RoleArn field's value.
+func (s *AnalyticsConfigurationType) SetRoleArn(v string) *AnalyticsConfigurationType {
+	s.RoleArn = &v
+	return s
+}
+
+// SetUserDataShared sets the UserDataShared field's value.
+func (s *AnalyticsConfigurationType) SetUserDataShared(v bool) *AnalyticsConfigurationType {
+	s.UserDataShared = &v
+	return s
+}
+
+// An Amazon Pinpoint analytics endpoint.
+//
+// An endpoint uniquely identifies a mobile device, email address, or phone
+// number that can receive messages from Amazon Pinpoint analytics.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AnalyticsMetadataType
+type AnalyticsMetadataType struct {
+	_ struct{} `type:"structure"`
+
+	// The endpoint ID.
+	AnalyticsEndpointId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AnalyticsMetadataType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AnalyticsMetadataType) GoString() string {
+	return s.String()
+}
+
+// SetAnalyticsEndpointId sets the AnalyticsEndpointId field's value.
+func (s *AnalyticsMetadataType) SetAnalyticsEndpointId(v string) *AnalyticsMetadataType {
+	s.AnalyticsEndpointId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareTokenRequest
+type AssociateSoftwareTokenInput struct {
+	_ struct{} `type:"structure"`
+
+	// The access token.
+	AccessToken *string `type:"string"`
+
+	// The session which should be passed both ways in challenge-response calls
+	// to the service. This allows authentication of the user as part of the MFA
+	// setup process.
+	Session *string `min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s AssociateSoftwareTokenInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateSoftwareTokenInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateSoftwareTokenInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateSoftwareTokenInput"}
+	if s.Session != nil && len(*s.Session) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("Session", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccessToken sets the AccessToken field's value.
+func (s *AssociateSoftwareTokenInput) SetAccessToken(v string) *AssociateSoftwareTokenInput {
+	s.AccessToken = &v
+	return s
+}
+
+// SetSession sets the Session field's value.
+func (s *AssociateSoftwareTokenInput) SetSession(v string) *AssociateSoftwareTokenInput {
+	s.Session = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareTokenResponse
+type AssociateSoftwareTokenOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A unique generated shared secret code that is used in the TOTP algorithm
+	// to generate a one time code.
+	SecretCode *string `min:"16" type:"string"`
+
+	// The session which should be passed both ways in challenge-response calls
+	// to the service. This allows authentication of the user as part of the MFA
+	// setup process.
+	Session *string `min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s AssociateSoftwareTokenOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateSoftwareTokenOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateSoftwareTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetSecretCode sets the SecretCode field's value.
+func (s *AssociateSoftwareTokenOutput) SetSecretCode(v string) *AssociateSoftwareTokenOutput {
+	s.SecretCode = &v
+	return s
+}
+
+// SetSession sets the Session field's value.
+func (s *AssociateSoftwareTokenOutput) SetSession(v string) *AssociateSoftwareTokenOutput {
+	s.Session = &v
+	return s
+}
+
 // Specifies whether the attribute is standard or custom.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AttributeType
 type AttributeType struct {
@@ -7108,27 +8482,117 @@ func (s *AttributeType) SetValue(v string) *AttributeType {
 	return s
 }
 
-// The result type of the authentication result.
+// The authentication event type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AuthEventType
+type AuthEventType struct {
+	_ struct{} `type:"structure"`
+
+	// The challenge responses.
+	ChallengeResponses []ChallengeResponseType `type:"list"`
+
+	// The creation date
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The user context data captured at the time of an event request. It provides
+	// additional information about the client from which event the request is received.
+	EventContextData *EventContextDataType `type:"structure"`
+
+	// A flag specifying the user feedback captured at the time of an event request
+	// is good or bad.
+	EventFeedback *EventFeedbackType `type:"structure"`
+
+	// The event ID.
+	EventId *string `type:"string"`
+
+	// The event response.
+	EventResponse EventResponseType `type:"string" enum:"true"`
+
+	// The event risk.
+	EventRisk *EventRiskType `type:"structure"`
+
+	// The event type.
+	EventType EventType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AuthEventType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AuthEventType) GoString() string {
+	return s.String()
+}
+
+// SetChallengeResponses sets the ChallengeResponses field's value.
+func (s *AuthEventType) SetChallengeResponses(v []ChallengeResponseType) *AuthEventType {
+	s.ChallengeResponses = v
+	return s
+}
+
+// SetCreationDate sets the CreationDate field's value.
+func (s *AuthEventType) SetCreationDate(v time.Time) *AuthEventType {
+	s.CreationDate = &v
+	return s
+}
+
+// SetEventContextData sets the EventContextData field's value.
+func (s *AuthEventType) SetEventContextData(v *EventContextDataType) *AuthEventType {
+	s.EventContextData = v
+	return s
+}
+
+// SetEventFeedback sets the EventFeedback field's value.
+func (s *AuthEventType) SetEventFeedback(v *EventFeedbackType) *AuthEventType {
+	s.EventFeedback = v
+	return s
+}
+
+// SetEventId sets the EventId field's value.
+func (s *AuthEventType) SetEventId(v string) *AuthEventType {
+	s.EventId = &v
+	return s
+}
+
+// SetEventResponse sets the EventResponse field's value.
+func (s *AuthEventType) SetEventResponse(v EventResponseType) *AuthEventType {
+	s.EventResponse = v
+	return s
+}
+
+// SetEventRisk sets the EventRisk field's value.
+func (s *AuthEventType) SetEventRisk(v *EventRiskType) *AuthEventType {
+	s.EventRisk = v
+	return s
+}
+
+// SetEventType sets the EventType field's value.
+func (s *AuthEventType) SetEventType(v EventType) *AuthEventType {
+	s.EventType = v
+	return s
+}
+
+// The authentication result.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AuthenticationResultType
 type AuthenticationResultType struct {
 	_ struct{} `type:"structure"`
 
-	// The access token of the authentication result.
+	// The access token.
 	AccessToken *string `type:"string"`
 
 	// The expiration period of the authentication result.
 	ExpiresIn *int64 `type:"integer"`
 
-	// The ID token of the authentication result.
+	// The ID token.
 	IdToken *string `type:"string"`
 
 	// The new device metadata from an authentication result.
 	NewDeviceMetadata *NewDeviceMetadataType `type:"structure"`
 
-	// The refresh token of the authentication result.
+	// The refresh token.
 	RefreshToken *string `type:"string"`
 
-	// The token type of the authentication result.
+	// The token type.
 	TokenType *string `type:"string"`
 }
 
@@ -7178,22 +8642,56 @@ func (s *AuthenticationResultType) SetTokenType(v string) *AuthenticationResultT
 	return s
 }
 
+// The challenge response type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChallengeResponseType
+type ChallengeResponseType struct {
+	_ struct{} `type:"structure"`
+
+	// The challenge name
+	ChallengeName ChallengeName `type:"string" enum:"true"`
+
+	// The challenge response.
+	ChallengeResponse ChallengeResponse `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ChallengeResponseType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ChallengeResponseType) GoString() string {
+	return s.String()
+}
+
+// SetChallengeName sets the ChallengeName field's value.
+func (s *ChallengeResponseType) SetChallengeName(v ChallengeName) *ChallengeResponseType {
+	s.ChallengeName = v
+	return s
+}
+
+// SetChallengeResponse sets the ChallengeResponse field's value.
+func (s *ChallengeResponseType) SetChallengeResponse(v ChallengeResponse) *ChallengeResponseType {
+	s.ChallengeResponse = v
+	return s
+}
+
 // Represents the request to change a user password.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordRequest
 type ChangePasswordInput struct {
 	_ struct{} `type:"structure"`
 
-	// The access token in the change password request.
+	// The access token.
 	//
 	// AccessToken is a required field
 	AccessToken *string `type:"string" required:"true"`
 
-	// The old password in the change password request.
+	// The old password.
 	//
 	// PreviousPassword is a required field
 	PreviousPassword *string `min:"6" type:"string" required:"true"`
 
-	// The new password in the change password request.
+	// The new password.
 	//
 	// ProposedPassword is a required field
 	ProposedPassword *string `min:"6" type:"string" required:"true"`
@@ -7278,12 +8776,12 @@ func (s ChangePasswordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The type of code delivery details being returned from the server.
+// The code delivery details being returned from the server.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CodeDeliveryDetailsType
 type CodeDeliveryDetailsType struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the attribute in the code delivery details type.
+	// The attribute name.
 	AttributeName *string `min:"1" type:"string"`
 
 	// The delivery medium (email message or phone number).
@@ -7318,6 +8816,102 @@ func (s *CodeDeliveryDetailsType) SetDeliveryMedium(v DeliveryMediumType) *CodeD
 // SetDestination sets the Destination field's value.
 func (s *CodeDeliveryDetailsType) SetDestination(v string) *CodeDeliveryDetailsType {
 	s.Destination = &v
+	return s
+}
+
+// The compromised credentials actions type
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CompromisedCredentialsActionsType
+type CompromisedCredentialsActionsType struct {
+	_ struct{} `type:"structure"`
+
+	// The event action.
+	//
+	// EventAction is a required field
+	EventAction CompromisedCredentialsEventActionType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CompromisedCredentialsActionsType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CompromisedCredentialsActionsType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CompromisedCredentialsActionsType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CompromisedCredentialsActionsType"}
+	if len(s.EventAction) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("EventAction"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEventAction sets the EventAction field's value.
+func (s *CompromisedCredentialsActionsType) SetEventAction(v CompromisedCredentialsEventActionType) *CompromisedCredentialsActionsType {
+	s.EventAction = v
+	return s
+}
+
+// The compromised credentials risk configuration type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CompromisedCredentialsRiskConfigurationType
+type CompromisedCredentialsRiskConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// The compromised credentials risk configuration actions.
+	//
+	// Actions is a required field
+	Actions *CompromisedCredentialsActionsType `type:"structure" required:"true"`
+
+	// Perform the action for these events. The default is to perform all events
+	// if no event filter is specified.
+	EventFilter []EventFilterType `type:"list"`
+}
+
+// String returns the string representation
+func (s CompromisedCredentialsRiskConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CompromisedCredentialsRiskConfigurationType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CompromisedCredentialsRiskConfigurationType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CompromisedCredentialsRiskConfigurationType"}
+
+	if s.Actions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
+	}
+	if s.Actions != nil {
+		if err := s.Actions.Validate(); err != nil {
+			invalidParams.AddNested("Actions", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetActions sets the Actions field's value.
+func (s *CompromisedCredentialsRiskConfigurationType) SetActions(v *CompromisedCredentialsActionsType) *CompromisedCredentialsRiskConfigurationType {
+	s.Actions = v
+	return s
+}
+
+// SetEventFilter sets the EventFilter field's value.
+func (s *CompromisedCredentialsRiskConfigurationType) SetEventFilter(v []EventFilterType) *CompromisedCredentialsRiskConfigurationType {
+	s.EventFilter = v
 	return s
 }
 
@@ -7439,13 +9033,17 @@ func (s *ConfirmDeviceOutput) SetUserConfirmationNecessary(v bool) *ConfirmDevic
 type ConfirmForgotPasswordInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Pinpoint analytics metadata for collecting metrics for ConfirmForgotPassword
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
 	// The app client ID of the app associated with the user pool.
 	//
 	// ClientId is a required field
 	ClientId *string `min:"1" type:"string" required:"true"`
 
 	// The confirmation code sent by a user's request to retrieve a forgotten password.
-	// For more information, see ForgotPassword (API_ForgotPassword.html)
+	// For more information, see
 	//
 	// ConfirmationCode is a required field
 	ConfirmationCode *string `min:"1" type:"string" required:"true"`
@@ -7458,6 +9056,11 @@ type ConfirmForgotPasswordInput struct {
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
 	SecretHash *string `min:"1" type:"string"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 
 	// The user name of the user for whom you want to enter a code to retrieve a
 	// forgotten password.
@@ -7517,6 +9120,12 @@ func (s *ConfirmForgotPasswordInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *ConfirmForgotPasswordInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ConfirmForgotPasswordInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetClientId sets the ClientId field's value.
 func (s *ConfirmForgotPasswordInput) SetClientId(v string) *ConfirmForgotPasswordInput {
 	s.ClientId = &v
@@ -7538,6 +9147,12 @@ func (s *ConfirmForgotPasswordInput) SetPassword(v string) *ConfirmForgotPasswor
 // SetSecretHash sets the SecretHash field's value.
 func (s *ConfirmForgotPasswordInput) SetSecretHash(v string) *ConfirmForgotPasswordInput {
 	s.SecretHash = &v
+	return s
+}
+
+// SetUserContextData sets the UserContextData field's value.
+func (s *ConfirmForgotPasswordInput) SetUserContextData(v *UserContextDataType) *ConfirmForgotPasswordInput {
+	s.UserContextData = v
 	return s
 }
 
@@ -7576,6 +9191,10 @@ func (s ConfirmForgotPasswordOutput) SDKResponseMetadata() aws.Response {
 type ConfirmSignUpInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Pinpoint analytics metadata for collecting metrics for ConfirmSignUp
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
 	// The ID of the app client associated with the user pool.
 	//
 	// ClientId is a required field
@@ -7597,6 +9216,11 @@ type ConfirmSignUpInput struct {
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
 	SecretHash *string `min:"1" type:"string"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 
 	// The user name of the user whose registration you wish to confirm.
 	//
@@ -7648,6 +9272,12 @@ func (s *ConfirmSignUpInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *ConfirmSignUpInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ConfirmSignUpInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetClientId sets the ClientId field's value.
 func (s *ConfirmSignUpInput) SetClientId(v string) *ConfirmSignUpInput {
 	s.ClientId = &v
@@ -7669,6 +9299,12 @@ func (s *ConfirmSignUpInput) SetForceAliasCreation(v bool) *ConfirmSignUpInput {
 // SetSecretHash sets the SecretHash field's value.
 func (s *ConfirmSignUpInput) SetSecretHash(v string) *ConfirmSignUpInput {
 	s.SecretHash = &v
+	return s
+}
+
+// SetUserContextData sets the UserContextData field's value.
+func (s *ConfirmSignUpInput) SetUserContextData(v *UserContextDataType) *ConfirmSignUpInput {
+	s.UserContextData = v
 	return s
 }
 
@@ -7699,6 +9335,103 @@ func (s ConfirmSignUpOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ConfirmSignUpOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Contextual user data type used for evaluating the risk of an unexpected event
+// by Amazon Cognito advanced security.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ContextDataType
+type ContextDataType struct {
+	_ struct{} `type:"structure"`
+
+	// Encoded data containing device fingerprinting details, collected using the
+	// Amazon Cognito context data collection library.
+	EncodedData *string `type:"string"`
+
+	// HttpHeaders received on your server in same order.
+	//
+	// HttpHeaders is a required field
+	HttpHeaders []HttpHeader `type:"list" required:"true"`
+
+	// Source IP address of your user.
+	//
+	// IpAddress is a required field
+	IpAddress *string `type:"string" required:"true"`
+
+	// Your server endpoint where this API is invoked.
+	//
+	// ServerName is a required field
+	ServerName *string `type:"string" required:"true"`
+
+	// Your server path where this API is invoked.
+	//
+	// ServerPath is a required field
+	ServerPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ContextDataType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContextDataType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContextDataType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContextDataType"}
+
+	if s.HttpHeaders == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HttpHeaders"))
+	}
+
+	if s.IpAddress == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IpAddress"))
+	}
+
+	if s.ServerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
+	}
+
+	if s.ServerPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServerPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEncodedData sets the EncodedData field's value.
+func (s *ContextDataType) SetEncodedData(v string) *ContextDataType {
+	s.EncodedData = &v
+	return s
+}
+
+// SetHttpHeaders sets the HttpHeaders field's value.
+func (s *ContextDataType) SetHttpHeaders(v []HttpHeader) *ContextDataType {
+	s.HttpHeaders = v
+	return s
+}
+
+// SetIpAddress sets the IpAddress field's value.
+func (s *ContextDataType) SetIpAddress(v string) *ContextDataType {
+	s.IpAddress = &v
+	return s
+}
+
+// SetServerName sets the ServerName field's value.
+func (s *ContextDataType) SetServerName(v string) *ContextDataType {
+	s.ServerName = &v
+	return s
+}
+
+// SetServerPath sets the ServerPath field's value.
+func (s *ContextDataType) SetServerPath(v string) *ContextDataType {
+	s.ServerPath = &v
+	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroupRequest
@@ -8242,6 +9975,10 @@ type CreateUserPoolClientInput struct {
 	// "openid", and "Cognito".
 	AllowedOAuthScopes []string `type:"list"`
 
+	// The Amazon Pinpoint analytics configuration for collecting metrics for this
+	// user pool.
+	AnalyticsConfiguration *AnalyticsConfigurationType `type:"structure"`
+
 	// A list of allowed callback URLs for the identity providers.
 	CallbackURLs []string `type:"list"`
 
@@ -8313,6 +10050,11 @@ func (s *CreateUserPoolClientInput) Validate() error {
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+	if s.AnalyticsConfiguration != nil {
+		if err := s.AnalyticsConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AnalyticsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8335,6 +10077,12 @@ func (s *CreateUserPoolClientInput) SetAllowedOAuthFlowsUserPoolClient(v bool) *
 // SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
 func (s *CreateUserPoolClientInput) SetAllowedOAuthScopes(v []string) *CreateUserPoolClientInput {
 	s.AllowedOAuthScopes = v
+	return s
+}
+
+// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
+func (s *CreateUserPoolClientInput) SetAnalyticsConfiguration(v *AnalyticsConfigurationType) *CreateUserPoolClientInput {
+	s.AnalyticsConfiguration = v
 	return s
 }
 
@@ -8573,6 +10321,10 @@ type CreateUserPoolInput struct {
 	// A string representing the SMS verification message.
 	SmsVerificationMessage *string `min:"6" type:"string"`
 
+	// Used to enable advanced security risk detection. Set the key AdvancedSecurityMode
+	// to the value "AUDIT".
+	UserPoolAddOns *UserPoolAddOnsType `type:"structure"`
+
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
 	UserPoolTags map[string]string `type:"map"`
@@ -8651,6 +10403,11 @@ func (s *CreateUserPoolInput) Validate() error {
 	if s.SmsConfiguration != nil {
 		if err := s.SmsConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("SmsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UserPoolAddOns != nil {
+		if err := s.UserPoolAddOns.Validate(); err != nil {
+			invalidParams.AddNested("UserPoolAddOns", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VerificationMessageTemplate != nil {
@@ -8752,6 +10509,12 @@ func (s *CreateUserPoolInput) SetSmsConfiguration(v *SmsConfigurationType) *Crea
 // SetSmsVerificationMessage sets the SmsVerificationMessage field's value.
 func (s *CreateUserPoolInput) SetSmsVerificationMessage(v string) *CreateUserPoolInput {
 	s.SmsVerificationMessage = &v
+	return s
+}
+
+// SetUserPoolAddOns sets the UserPoolAddOns field's value.
+func (s *CreateUserPoolInput) SetUserPoolAddOns(v *UserPoolAddOnsType) *CreateUserPoolInput {
+	s.UserPoolAddOns = v
 	return s
 }
 
@@ -9621,6 +11384,94 @@ func (s *DescribeResourceServerOutput) SetResourceServer(v *ResourceServerType) 
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfigurationRequest
+type DescribeRiskConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The app client ID.
+	ClientId *string `min:"1" type:"string"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeRiskConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeRiskConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeRiskConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRiskConfigurationInput"}
+	if s.ClientId != nil && len(*s.ClientId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
+	}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetClientId sets the ClientId field's value.
+func (s *DescribeRiskConfigurationInput) SetClientId(v string) *DescribeRiskConfigurationInput {
+	s.ClientId = &v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *DescribeRiskConfigurationInput) SetUserPoolId(v string) *DescribeRiskConfigurationInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfigurationResponse
+type DescribeRiskConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The risk configuration.
+	//
+	// RiskConfiguration is a required field
+	RiskConfiguration *RiskConfigurationType `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeRiskConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeRiskConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRiskConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRiskConfiguration sets the RiskConfiguration field's value.
+func (s *DescribeRiskConfigurationOutput) SetRiskConfiguration(v *RiskConfigurationType) *DescribeRiskConfigurationOutput {
+	s.RiskConfiguration = v
+	return s
+}
+
 // Represents the request to describe the user import job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJobRequest
 type DescribeUserImportJobInput struct {
@@ -9961,7 +11812,7 @@ func (s *DescribeUserPoolOutput) SetUserPool(v *UserPoolType) *DescribeUserPoolO
 	return s
 }
 
-// The type of configuration for the user pool's device tracking.
+// The configuration for the user pool's device tracking.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceConfigurationType
 type DeviceConfigurationType struct {
 	_ struct{} `type:"structure"`
@@ -10175,7 +12026,7 @@ func (s *DomainDescriptionType) SetVersion(v string) *DomainDescriptionType {
 type EmailConfigurationType struct {
 	_ struct{} `type:"structure"`
 
-	// The REPLY-TO email address.
+	// The destination to which the receiver of the email should reply to.
 	ReplyToEmailAddress *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the email source.
@@ -10214,6 +12065,148 @@ func (s *EmailConfigurationType) SetReplyToEmailAddress(v string) *EmailConfigur
 // SetSourceArn sets the SourceArn field's value.
 func (s *EmailConfigurationType) SetSourceArn(v string) *EmailConfigurationType {
 	s.SourceArn = &v
+	return s
+}
+
+// Specifies the user context data captured at the time of an event request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventContextDataType
+type EventContextDataType struct {
+	_ struct{} `type:"structure"`
+
+	// The user's city.
+	City *string `type:"string"`
+
+	// The user's country.
+	Country *string `type:"string"`
+
+	// The user's device name.
+	DeviceName *string `type:"string"`
+
+	// The user's IP address.
+	IpAddress *string `type:"string"`
+
+	// The user's time zone.
+	Timezone *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EventContextDataType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EventContextDataType) GoString() string {
+	return s.String()
+}
+
+// SetCity sets the City field's value.
+func (s *EventContextDataType) SetCity(v string) *EventContextDataType {
+	s.City = &v
+	return s
+}
+
+// SetCountry sets the Country field's value.
+func (s *EventContextDataType) SetCountry(v string) *EventContextDataType {
+	s.Country = &v
+	return s
+}
+
+// SetDeviceName sets the DeviceName field's value.
+func (s *EventContextDataType) SetDeviceName(v string) *EventContextDataType {
+	s.DeviceName = &v
+	return s
+}
+
+// SetIpAddress sets the IpAddress field's value.
+func (s *EventContextDataType) SetIpAddress(v string) *EventContextDataType {
+	s.IpAddress = &v
+	return s
+}
+
+// SetTimezone sets the Timezone field's value.
+func (s *EventContextDataType) SetTimezone(v string) *EventContextDataType {
+	s.Timezone = &v
+	return s
+}
+
+// Specifies the event feedback type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventFeedbackType
+type EventFeedbackType struct {
+	_ struct{} `type:"structure"`
+
+	// The event feedback date.
+	FeedbackDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The event feedback value.
+	//
+	// FeedbackValue is a required field
+	FeedbackValue FeedbackValueType `type:"string" required:"true" enum:"true"`
+
+	// The provider.
+	//
+	// Provider is a required field
+	Provider *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EventFeedbackType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EventFeedbackType) GoString() string {
+	return s.String()
+}
+
+// SetFeedbackDate sets the FeedbackDate field's value.
+func (s *EventFeedbackType) SetFeedbackDate(v time.Time) *EventFeedbackType {
+	s.FeedbackDate = &v
+	return s
+}
+
+// SetFeedbackValue sets the FeedbackValue field's value.
+func (s *EventFeedbackType) SetFeedbackValue(v FeedbackValueType) *EventFeedbackType {
+	s.FeedbackValue = v
+	return s
+}
+
+// SetProvider sets the Provider field's value.
+func (s *EventFeedbackType) SetProvider(v string) *EventFeedbackType {
+	s.Provider = &v
+	return s
+}
+
+// The event risk type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventRiskType
+type EventRiskType struct {
+	_ struct{} `type:"structure"`
+
+	// The risk decision.
+	RiskDecision RiskDecisionType `type:"string" enum:"true"`
+
+	// The risk level.
+	RiskLevel RiskLevelType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EventRiskType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EventRiskType) GoString() string {
+	return s.String()
+}
+
+// SetRiskDecision sets the RiskDecision field's value.
+func (s *EventRiskType) SetRiskDecision(v RiskDecisionType) *EventRiskType {
+	s.RiskDecision = v
+	return s
+}
+
+// SetRiskLevel sets the RiskLevel field's value.
+func (s *EventRiskType) SetRiskLevel(v RiskLevelType) *EventRiskType {
+	s.RiskLevel = v
 	return s
 }
 
@@ -10297,6 +12290,10 @@ func (s ForgetDeviceOutput) SDKResponseMetadata() aws.Response {
 type ForgotPasswordInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Pinpoint analytics metadata for collecting metrics for ForgotPassword
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
@@ -10305,6 +12302,11 @@ type ForgotPasswordInput struct {
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
 	SecretHash *string `min:"1" type:"string"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 
 	// The user name of the user for whom you want to enter a code to reset a forgotten
 	// password.
@@ -10350,6 +12352,12 @@ func (s *ForgotPasswordInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *ForgotPasswordInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ForgotPasswordInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetClientId sets the ClientId field's value.
 func (s *ForgotPasswordInput) SetClientId(v string) *ForgotPasswordInput {
 	s.ClientId = &v
@@ -10359,6 +12367,12 @@ func (s *ForgotPasswordInput) SetClientId(v string) *ForgotPasswordInput {
 // SetSecretHash sets the SecretHash field's value.
 func (s *ForgotPasswordInput) SetSecretHash(v string) *ForgotPasswordInput {
 	s.SecretHash = &v
+	return s
+}
+
+// SetUserContextData sets the UserContextData field's value.
+func (s *ForgotPasswordInput) SetUserContextData(v *UserContextDataType) *ForgotPasswordInput {
+	s.UserContextData = v
 	return s
 }
 
@@ -10998,6 +13012,9 @@ type GetUserOutput struct {
 	// Specifies the options for MFA (e.g., email or phone number).
 	MFAOptions []MFAOptionType `type:"list"`
 
+	// The user's preferred MFA setting.
+	PreferredMfaSetting *string `type:"string"`
+
 	// An array of name-value pairs representing user attributes.
 	//
 	// For custom attributes, you must prepend the custom: prefix to the attribute
@@ -11005,6 +13022,9 @@ type GetUserOutput struct {
 	//
 	// UserAttributes is a required field
 	UserAttributes []AttributeType `type:"list" required:"true"`
+
+	// The list of the user's MFA settings.
+	UserMFASettingList []string `type:"list"`
 
 	// The user name of the user you wish to retrieve from the get user request.
 	//
@@ -11033,15 +13053,119 @@ func (s *GetUserOutput) SetMFAOptions(v []MFAOptionType) *GetUserOutput {
 	return s
 }
 
+// SetPreferredMfaSetting sets the PreferredMfaSetting field's value.
+func (s *GetUserOutput) SetPreferredMfaSetting(v string) *GetUserOutput {
+	s.PreferredMfaSetting = &v
+	return s
+}
+
 // SetUserAttributes sets the UserAttributes field's value.
 func (s *GetUserOutput) SetUserAttributes(v []AttributeType) *GetUserOutput {
 	s.UserAttributes = v
 	return s
 }
 
+// SetUserMFASettingList sets the UserMFASettingList field's value.
+func (s *GetUserOutput) SetUserMFASettingList(v []string) *GetUserOutput {
+	s.UserMFASettingList = v
+	return s
+}
+
 // SetUsername sets the Username field's value.
 func (s *GetUserOutput) SetUsername(v string) *GetUserOutput {
 	s.Username = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfigRequest
+type GetUserPoolMfaConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetUserPoolMfaConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUserPoolMfaConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetUserPoolMfaConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetUserPoolMfaConfigInput"}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *GetUserPoolMfaConfigInput) SetUserPoolId(v string) *GetUserPoolMfaConfigInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfigResponse
+type GetUserPoolMfaConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The multi-factor (MFA) configuration.
+	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
+
+	// The SMS text message multi-factor (MFA) configuration.
+	SmsMfaConfiguration *SmsMfaConfigType `type:"structure"`
+
+	// The software token multi-factor (MFA) configuration.
+	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetUserPoolMfaConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUserPoolMfaConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserPoolMfaConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetMfaConfiguration sets the MfaConfiguration field's value.
+func (s *GetUserPoolMfaConfigOutput) SetMfaConfiguration(v UserPoolMfaType) *GetUserPoolMfaConfigOutput {
+	s.MfaConfiguration = v
+	return s
+}
+
+// SetSmsMfaConfiguration sets the SmsMfaConfiguration field's value.
+func (s *GetUserPoolMfaConfigOutput) SetSmsMfaConfiguration(v *SmsMfaConfigType) *GetUserPoolMfaConfigOutput {
+	s.SmsMfaConfiguration = v
+	return s
+}
+
+// SetSoftwareTokenMfaConfiguration sets the SoftwareTokenMfaConfiguration field's value.
+func (s *GetUserPoolMfaConfigOutput) SetSoftwareTokenMfaConfiguration(v *SoftwareTokenMfaConfigType) *GetUserPoolMfaConfigOutput {
+	s.SoftwareTokenMfaConfiguration = v
 	return s
 }
 
@@ -11201,6 +13325,40 @@ func (s *GroupType) SetUserPoolId(v string) *GroupType {
 	return s
 }
 
+// The HTTP header.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/HttpHeader
+type HttpHeader struct {
+	_ struct{} `type:"structure"`
+
+	// The header name
+	HeaderName *string `locationName:"headerName" type:"string"`
+
+	// The header value.
+	HeaderValue *string `locationName:"headerValue" type:"string"`
+}
+
+// String returns the string representation
+func (s HttpHeader) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HttpHeader) GoString() string {
+	return s.String()
+}
+
+// SetHeaderName sets the HeaderName field's value.
+func (s *HttpHeader) SetHeaderName(v string) *HttpHeader {
+	s.HeaderName = &v
+	return s
+}
+
+// SetHeaderValue sets the HeaderValue field's value.
+func (s *HttpHeader) SetHeaderValue(v string) *HttpHeader {
+	s.HeaderValue = &v
+	return s
+}
+
 // A container for information about an identity provider.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/IdentityProviderType
 type IdentityProviderType struct {
@@ -11295,6 +13453,10 @@ func (s *IdentityProviderType) SetUserPoolId(v string) *IdentityProviderType {
 type InitiateAuthInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Pinpoint analytics metadata for collecting metrics for InitiateAuth
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
 	// The authentication flow for this call to execute. The API action will depend
 	// on this value. For example:
 	//
@@ -11342,6 +13504,11 @@ type InitiateAuthInput struct {
 	// passed to your PreAuthentication Lambda trigger as-is. It can be used to
 	// implement additional validations around authentication.
 	ClientMetadata map[string]string `type:"map"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 }
 
 // String returns the string representation
@@ -11374,6 +13541,12 @@ func (s *InitiateAuthInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *InitiateAuthInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *InitiateAuthInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetAuthFlow sets the AuthFlow field's value.
 func (s *InitiateAuthInput) SetAuthFlow(v AuthFlowType) *InitiateAuthInput {
 	s.AuthFlow = v
@@ -11395,6 +13568,12 @@ func (s *InitiateAuthInput) SetClientId(v string) *InitiateAuthInput {
 // SetClientMetadata sets the ClientMetadata field's value.
 func (s *InitiateAuthInput) SetClientMetadata(v map[string]string) *InitiateAuthInput {
 	s.ClientMetadata = v
+	return s
+}
+
+// SetUserContextData sets the UserContextData field's value.
+func (s *InitiateAuthInput) SetUserContextData(v *UserContextDataType) *InitiateAuthInput {
+	s.UserContextData = v
 	return s
 }
 
@@ -11448,10 +13627,9 @@ type InitiateAuthOutput struct {
 	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
-	// to the service. If the InitiateAuth (API_InitiateAuth.html) or RespondToAuthChallenge
-	// (API_RespondToAuthChallenge.html) API call determines that the caller needs
-	// to go through another challenge, they return a session with other challenge
-	// parameters. This session should be passed as it is to the next RespondToAuthChallenge
+	// to the service. If the or API call determines that the caller needs to go
+	// through another challenge, they return a session with other challenge parameters.
+	// This session should be passed as it is to the next RespondToAuthChallenge
 	// API call.
 	Session *string `min:"20" type:"string"`
 }
@@ -11495,7 +13673,7 @@ func (s *InitiateAuthOutput) SetSession(v string) *InitiateAuthOutput {
 	return s
 }
 
-// Specifies the type of configuration for AWS Lambda triggers.
+// Specifies the configuration for AWS Lambda triggers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LambdaConfigType
 type LambdaConfigType struct {
 	_ struct{} `type:"structure"`
@@ -11520,6 +13698,9 @@ type LambdaConfigType struct {
 
 	// A pre-registration AWS Lambda trigger.
 	PreSignUp *string `min:"20" type:"string"`
+
+	// A Lambda trigger that is invoked before token generation.
+	PreTokenGeneration *string `min:"20" type:"string"`
 
 	// Verifies the authentication challenge response.
 	VerifyAuthChallengeResponse *string `min:"20" type:"string"`
@@ -11558,6 +13739,9 @@ func (s *LambdaConfigType) Validate() error {
 	}
 	if s.PreSignUp != nil && len(*s.PreSignUp) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PreSignUp", 20))
+	}
+	if s.PreTokenGeneration != nil && len(*s.PreTokenGeneration) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("PreTokenGeneration", 20))
 	}
 	if s.VerifyAuthChallengeResponse != nil && len(*s.VerifyAuthChallengeResponse) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("VerifyAuthChallengeResponse", 20))
@@ -11608,6 +13792,12 @@ func (s *LambdaConfigType) SetPreAuthentication(v string) *LambdaConfigType {
 // SetPreSignUp sets the PreSignUp field's value.
 func (s *LambdaConfigType) SetPreSignUp(v string) *LambdaConfigType {
 	s.PreSignUp = &v
+	return s
+}
+
+// SetPreTokenGeneration sets the PreTokenGeneration field's value.
+func (s *LambdaConfigType) SetPreTokenGeneration(v string) *LambdaConfigType {
+	s.PreTokenGeneration = &v
 	return s
 }
 
@@ -12504,7 +14694,7 @@ type ListUsersInput struct {
 	_ struct{} `type:"structure"`
 
 	// An array of strings, where each string is the name of a user attribute to
-	// be returned for each user in the search results. If the array is empty, all
+	// be returned for each user in the search results. If the array is null, all
 	// attributes are returned.
 	AttributesToGet []string `type:"list"`
 
@@ -12542,6 +14732,8 @@ type ListUsersInput struct {
 	//    * cognito:user_status (called Enabled in the Console) (case-sensitive)
 	//
 	//    * status (case-insensitive)
+	//
+	//    * sub
 	//
 	// Custom attributes are not searchable.
 	//
@@ -12808,6 +15000,183 @@ func (s *NewDeviceMetadataType) SetDeviceKey(v string) *NewDeviceMetadataType {
 	return s
 }
 
+// The notify configuration type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NotifyConfigurationType
+type NotifyConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// Email template used when a detected risk event is blocked.
+	BlockEmail *NotifyEmailType `type:"structure"`
+
+	// The email address that is sending the email. It must be either individually
+	// verified with Amazon SES, or from a domain that has been verified with Amazon
+	// SES.
+	From *string `type:"string"`
+
+	// The MFA email template used when MFA is challenged as part of a detected
+	// risk.
+	MfaEmail *NotifyEmailType `type:"structure"`
+
+	// The email template used when a detected risk event is allowed.
+	NoActionEmail *NotifyEmailType `type:"structure"`
+
+	// The destination to which the receiver of an email should reply to.
+	ReplyTo *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the identity that is associated with the
+	// sending authorization policy. It permits Amazon Cognito to send for the email
+	// address specified in the From parameter.
+	//
+	// SourceArn is a required field
+	SourceArn *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s NotifyConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NotifyConfigurationType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NotifyConfigurationType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NotifyConfigurationType"}
+
+	if s.SourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceArn"))
+	}
+	if s.SourceArn != nil && len(*s.SourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("SourceArn", 20))
+	}
+	if s.BlockEmail != nil {
+		if err := s.BlockEmail.Validate(); err != nil {
+			invalidParams.AddNested("BlockEmail", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MfaEmail != nil {
+		if err := s.MfaEmail.Validate(); err != nil {
+			invalidParams.AddNested("MfaEmail", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.NoActionEmail != nil {
+		if err := s.NoActionEmail.Validate(); err != nil {
+			invalidParams.AddNested("NoActionEmail", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBlockEmail sets the BlockEmail field's value.
+func (s *NotifyConfigurationType) SetBlockEmail(v *NotifyEmailType) *NotifyConfigurationType {
+	s.BlockEmail = v
+	return s
+}
+
+// SetFrom sets the From field's value.
+func (s *NotifyConfigurationType) SetFrom(v string) *NotifyConfigurationType {
+	s.From = &v
+	return s
+}
+
+// SetMfaEmail sets the MfaEmail field's value.
+func (s *NotifyConfigurationType) SetMfaEmail(v *NotifyEmailType) *NotifyConfigurationType {
+	s.MfaEmail = v
+	return s
+}
+
+// SetNoActionEmail sets the NoActionEmail field's value.
+func (s *NotifyConfigurationType) SetNoActionEmail(v *NotifyEmailType) *NotifyConfigurationType {
+	s.NoActionEmail = v
+	return s
+}
+
+// SetReplyTo sets the ReplyTo field's value.
+func (s *NotifyConfigurationType) SetReplyTo(v string) *NotifyConfigurationType {
+	s.ReplyTo = &v
+	return s
+}
+
+// SetSourceArn sets the SourceArn field's value.
+func (s *NotifyConfigurationType) SetSourceArn(v string) *NotifyConfigurationType {
+	s.SourceArn = &v
+	return s
+}
+
+// The notify email type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NotifyEmailType
+type NotifyEmailType struct {
+	_ struct{} `type:"structure"`
+
+	// The HTML body.
+	HtmlBody *string `min:"6" type:"string"`
+
+	// The subject.
+	//
+	// Subject is a required field
+	Subject *string `min:"1" type:"string" required:"true"`
+
+	// The text body.
+	TextBody *string `min:"6" type:"string"`
+}
+
+// String returns the string representation
+func (s NotifyEmailType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NotifyEmailType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NotifyEmailType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NotifyEmailType"}
+	if s.HtmlBody != nil && len(*s.HtmlBody) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("HtmlBody", 6))
+	}
+
+	if s.Subject == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Subject"))
+	}
+	if s.Subject != nil && len(*s.Subject) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Subject", 1))
+	}
+	if s.TextBody != nil && len(*s.TextBody) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("TextBody", 6))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetHtmlBody sets the HtmlBody field's value.
+func (s *NotifyEmailType) SetHtmlBody(v string) *NotifyEmailType {
+	s.HtmlBody = &v
+	return s
+}
+
+// SetSubject sets the Subject field's value.
+func (s *NotifyEmailType) SetSubject(v string) *NotifyEmailType {
+	s.Subject = &v
+	return s
+}
+
+// SetTextBody sets the TextBody field's value.
+func (s *NotifyEmailType) SetTextBody(v string) *NotifyEmailType {
+	s.TextBody = &v
+	return s
+}
+
 // The minimum and maximum value of an attribute that is of the number data
 // type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NumberAttributeConstraintsType
@@ -13035,6 +15404,10 @@ func (s *ProviderUserIdentifierType) SetProviderName(v string) *ProviderUserIden
 type ResendConfirmationCodeInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Pinpoint analytics metadata for collecting metrics for ResendConfirmationCode
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
@@ -13043,6 +15416,11 @@ type ResendConfirmationCodeInput struct {
 	// A keyed-hash message authentication code (HMAC) calculated using the secret
 	// key of a user pool client and username plus the client ID in the message.
 	SecretHash *string `min:"1" type:"string"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 
 	// The user name of the user to whom you wish to resend a confirmation code.
 	//
@@ -13087,6 +15465,12 @@ func (s *ResendConfirmationCodeInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *ResendConfirmationCodeInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ResendConfirmationCodeInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetClientId sets the ClientId field's value.
 func (s *ResendConfirmationCodeInput) SetClientId(v string) *ResendConfirmationCodeInput {
 	s.ClientId = &v
@@ -13096,6 +15480,12 @@ func (s *ResendConfirmationCodeInput) SetClientId(v string) *ResendConfirmationC
 // SetSecretHash sets the SecretHash field's value.
 func (s *ResendConfirmationCodeInput) SetSecretHash(v string) *ResendConfirmationCodeInput {
 	s.SecretHash = &v
+	return s
+}
+
+// SetUserContextData sets the UserContextData field's value.
+func (s *ResendConfirmationCodeInput) SetUserContextData(v *UserContextDataType) *ResendConfirmationCodeInput {
+	s.UserContextData = v
 	return s
 }
 
@@ -13258,7 +15648,11 @@ func (s *ResourceServerType) SetUserPoolId(v string) *ResourceServerType {
 type RespondToAuthChallengeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The challenge name. For more information, see InitiateAuth (API_InitiateAuth.html).
+	// The Amazon Pinpoint analytics metadata for collecting metrics for RespondToAuthChallenge
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
+	// The challenge name. For more information, see .
 	//
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
@@ -13290,6 +15684,11 @@ type RespondToAuthChallengeInput struct {
 	// with other challenge parameters. This session should be passed as it is to
 	// the next RespondToAuthChallenge API call.
 	Session *string `min:"20" type:"string"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 }
 
 // String returns the string representation
@@ -13325,6 +15724,12 @@ func (s *RespondToAuthChallengeInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *RespondToAuthChallengeInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *RespondToAuthChallengeInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetChallengeName sets the ChallengeName field's value.
 func (s *RespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType) *RespondToAuthChallengeInput {
 	s.ChallengeName = v
@@ -13349,6 +15754,12 @@ func (s *RespondToAuthChallengeInput) SetSession(v string) *RespondToAuthChallen
 	return s
 }
 
+// SetUserContextData sets the UserContextData field's value.
+func (s *RespondToAuthChallengeInput) SetUserContextData(v *UserContextDataType) *RespondToAuthChallengeInput {
+	s.UserContextData = v
+	return s
+}
+
 // The response to respond to the authentication challenge.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeResponse
 type RespondToAuthChallengeOutput struct {
@@ -13360,17 +15771,16 @@ type RespondToAuthChallengeOutput struct {
 	// the authentication challenge.
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
-	// The challenge name. For more information, see InitiateAuth (API_InitiateAuth.html).
+	// The challenge name. For more information, see .
 	ChallengeName ChallengeNameType `type:"string" enum:"true"`
 
-	// The challenge parameters. For more information, see InitiateAuth (API_InitiateAuth.html).
+	// The challenge parameters. For more information, see .
 	ChallengeParameters map[string]string `type:"map"`
 
 	// The session which should be passed both ways in challenge-response calls
-	// to the service. If the InitiateAuth (API_InitiateAuth.html) or RespondToAuthChallenge
-	// (API_RespondToAuthChallenge.html) API call determines that the caller needs
-	// to go through another challenge, they return a session with other challenge
-	// parameters. This session should be passed as it is to the next RespondToAuthChallenge
+	// to the service. If the or API call determines that the caller needs to go
+	// through another challenge, they return a session with other challenge parameters.
+	// This session should be passed as it is to the next RespondToAuthChallenge
 	// API call.
 	Session *string `min:"20" type:"string"`
 }
@@ -13411,6 +15821,149 @@ func (s *RespondToAuthChallengeOutput) SetChallengeParameters(v map[string]strin
 // SetSession sets the Session field's value.
 func (s *RespondToAuthChallengeOutput) SetSession(v string) *RespondToAuthChallengeOutput {
 	s.Session = &v
+	return s
+}
+
+// The risk configuration type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskConfigurationType
+type RiskConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// The account takeover risk configuration object including the NotifyConfiguration
+	// object and Actions to take in the case of an account takeover.
+	AccountTakeoverRiskConfiguration *AccountTakeoverRiskConfigurationType `type:"structure"`
+
+	// The app client ID.
+	ClientId *string `min:"1" type:"string"`
+
+	// The compromised credentials risk configuration object including the EventFilter
+	// and the EventAction
+	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationType `type:"structure"`
+
+	// The last modified date.
+	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The configuration to override the risk decision.
+	RiskExceptionConfiguration *RiskExceptionConfigurationType `type:"structure"`
+
+	// The user pool ID.
+	UserPoolId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RiskConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RiskConfigurationType) GoString() string {
+	return s.String()
+}
+
+// SetAccountTakeoverRiskConfiguration sets the AccountTakeoverRiskConfiguration field's value.
+func (s *RiskConfigurationType) SetAccountTakeoverRiskConfiguration(v *AccountTakeoverRiskConfigurationType) *RiskConfigurationType {
+	s.AccountTakeoverRiskConfiguration = v
+	return s
+}
+
+// SetClientId sets the ClientId field's value.
+func (s *RiskConfigurationType) SetClientId(v string) *RiskConfigurationType {
+	s.ClientId = &v
+	return s
+}
+
+// SetCompromisedCredentialsRiskConfiguration sets the CompromisedCredentialsRiskConfiguration field's value.
+func (s *RiskConfigurationType) SetCompromisedCredentialsRiskConfiguration(v *CompromisedCredentialsRiskConfigurationType) *RiskConfigurationType {
+	s.CompromisedCredentialsRiskConfiguration = v
+	return s
+}
+
+// SetLastModifiedDate sets the LastModifiedDate field's value.
+func (s *RiskConfigurationType) SetLastModifiedDate(v time.Time) *RiskConfigurationType {
+	s.LastModifiedDate = &v
+	return s
+}
+
+// SetRiskExceptionConfiguration sets the RiskExceptionConfiguration field's value.
+func (s *RiskConfigurationType) SetRiskExceptionConfiguration(v *RiskExceptionConfigurationType) *RiskConfigurationType {
+	s.RiskExceptionConfiguration = v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *RiskConfigurationType) SetUserPoolId(v string) *RiskConfigurationType {
+	s.UserPoolId = &v
+	return s
+}
+
+// The type of the configuration to override the risk decision.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskExceptionConfigurationType
+type RiskExceptionConfigurationType struct {
+	_ struct{} `type:"structure"`
+
+	// Overrides the risk decision to always block the pre-authentication requests.
+	// The IP range is in CIDR notation: a compact representation of an IP address
+	// and its associated routing prefix.
+	BlockedIPRangeList []string `type:"list"`
+
+	// Risk detection is not performed on the IP addresses in the range list. The
+	// IP range is in CIDR notation.
+	SkippedIPRangeList []string `type:"list"`
+}
+
+// String returns the string representation
+func (s RiskExceptionConfigurationType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RiskExceptionConfigurationType) GoString() string {
+	return s.String()
+}
+
+// SetBlockedIPRangeList sets the BlockedIPRangeList field's value.
+func (s *RiskExceptionConfigurationType) SetBlockedIPRangeList(v []string) *RiskExceptionConfigurationType {
+	s.BlockedIPRangeList = v
+	return s
+}
+
+// SetSkippedIPRangeList sets the SkippedIPRangeList field's value.
+func (s *RiskExceptionConfigurationType) SetSkippedIPRangeList(v []string) *RiskExceptionConfigurationType {
+	s.SkippedIPRangeList = v
+	return s
+}
+
+// The SMS multi-factor authentication (MFA) settings type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SMSMfaSettingsType
+type SMSMfaSettingsType struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether SMS text message MFA is enabled.
+	Enabled *bool `type:"boolean"`
+
+	// The preferred MFA method.
+	PreferredMfa *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s SMSMfaSettingsType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SMSMfaSettingsType) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *SMSMfaSettingsType) SetEnabled(v bool) *SMSMfaSettingsType {
+	s.Enabled = &v
+	return s
+}
+
+// SetPreferredMfa sets the PreferredMfa field's value.
+func (s *SMSMfaSettingsType) SetPreferredMfa(v bool) *SMSMfaSettingsType {
+	s.PreferredMfa = &v
 	return s
 }
 
@@ -13505,6 +16058,137 @@ func (s *SchemaAttributeType) SetRequired(v bool) *SchemaAttributeType {
 // SetStringAttributeConstraints sets the StringAttributeConstraints field's value.
 func (s *SchemaAttributeType) SetStringAttributeConstraints(v *StringAttributeConstraintsType) *SchemaAttributeType {
 	s.StringAttributeConstraints = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfigurationRequest
+type SetRiskConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account takeover risk configuration.
+	AccountTakeoverRiskConfiguration *AccountTakeoverRiskConfigurationType `type:"structure"`
+
+	// The app client ID. If ClientId is null, then the risk configuration is mapped
+	// to userPoolId. When the client ID is null, the same risk configuration is
+	// applied to all the clients in the userPool.
+	//
+	// Otherwise, ClientId is mapped to the client. When the client ID is not null,
+	// the user pool configuration is overridden and the risk configuration for
+	// the client is used instead.
+	ClientId *string `min:"1" type:"string"`
+
+	// The compromised credentials risk configuration.
+	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationType `type:"structure"`
+
+	// The configuration to override the risk decision.
+	RiskExceptionConfiguration *RiskExceptionConfigurationType `type:"structure"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SetRiskConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetRiskConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SetRiskConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SetRiskConfigurationInput"}
+	if s.ClientId != nil && len(*s.ClientId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
+	}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+	if s.AccountTakeoverRiskConfiguration != nil {
+		if err := s.AccountTakeoverRiskConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AccountTakeoverRiskConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.CompromisedCredentialsRiskConfiguration != nil {
+		if err := s.CompromisedCredentialsRiskConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CompromisedCredentialsRiskConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccountTakeoverRiskConfiguration sets the AccountTakeoverRiskConfiguration field's value.
+func (s *SetRiskConfigurationInput) SetAccountTakeoverRiskConfiguration(v *AccountTakeoverRiskConfigurationType) *SetRiskConfigurationInput {
+	s.AccountTakeoverRiskConfiguration = v
+	return s
+}
+
+// SetClientId sets the ClientId field's value.
+func (s *SetRiskConfigurationInput) SetClientId(v string) *SetRiskConfigurationInput {
+	s.ClientId = &v
+	return s
+}
+
+// SetCompromisedCredentialsRiskConfiguration sets the CompromisedCredentialsRiskConfiguration field's value.
+func (s *SetRiskConfigurationInput) SetCompromisedCredentialsRiskConfiguration(v *CompromisedCredentialsRiskConfigurationType) *SetRiskConfigurationInput {
+	s.CompromisedCredentialsRiskConfiguration = v
+	return s
+}
+
+// SetRiskExceptionConfiguration sets the RiskExceptionConfiguration field's value.
+func (s *SetRiskConfigurationInput) SetRiskExceptionConfiguration(v *RiskExceptionConfigurationType) *SetRiskConfigurationInput {
+	s.RiskExceptionConfiguration = v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *SetRiskConfigurationInput) SetUserPoolId(v string) *SetRiskConfigurationInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfigurationResponse
+type SetRiskConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The risk configuration.
+	//
+	// RiskConfiguration is a required field
+	RiskConfiguration *RiskConfigurationType `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s SetRiskConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetRiskConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetRiskConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRiskConfiguration sets the RiskConfiguration field's value.
+func (s *SetRiskConfigurationOutput) SetRiskConfiguration(v *RiskConfigurationType) *SetRiskConfigurationOutput {
+	s.RiskConfiguration = v
 	return s
 }
 
@@ -13616,6 +16300,210 @@ func (s *SetUICustomizationOutput) SetUICustomization(v *UICustomizationType) *S
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreferenceRequest
+type SetUserMFAPreferenceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The access token.
+	//
+	// AccessToken is a required field
+	AccessToken *string `type:"string" required:"true"`
+
+	// The SMS text message multi-factor authentication (MFA) settings.
+	SMSMfaSettings *SMSMfaSettingsType `type:"structure"`
+
+	// The time-based one-time password software token MFA settings.
+	SoftwareTokenMfaSettings *SoftwareTokenMfaSettingsType `type:"structure"`
+}
+
+// String returns the string representation
+func (s SetUserMFAPreferenceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetUserMFAPreferenceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SetUserMFAPreferenceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SetUserMFAPreferenceInput"}
+
+	if s.AccessToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccessToken sets the AccessToken field's value.
+func (s *SetUserMFAPreferenceInput) SetAccessToken(v string) *SetUserMFAPreferenceInput {
+	s.AccessToken = &v
+	return s
+}
+
+// SetSMSMfaSettings sets the SMSMfaSettings field's value.
+func (s *SetUserMFAPreferenceInput) SetSMSMfaSettings(v *SMSMfaSettingsType) *SetUserMFAPreferenceInput {
+	s.SMSMfaSettings = v
+	return s
+}
+
+// SetSoftwareTokenMfaSettings sets the SoftwareTokenMfaSettings field's value.
+func (s *SetUserMFAPreferenceInput) SetSoftwareTokenMfaSettings(v *SoftwareTokenMfaSettingsType) *SetUserMFAPreferenceInput {
+	s.SoftwareTokenMfaSettings = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreferenceResponse
+type SetUserMFAPreferenceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s SetUserMFAPreferenceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetUserMFAPreferenceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetUserMFAPreferenceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfigRequest
+type SetUserPoolMfaConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The MFA configuration.
+	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
+
+	// The SMS text message MFA configuration.
+	SmsMfaConfiguration *SmsMfaConfigType `type:"structure"`
+
+	// The software token MFA configuration.
+	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `type:"structure"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SetUserPoolMfaConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetUserPoolMfaConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SetUserPoolMfaConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SetUserPoolMfaConfigInput"}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+	if s.SmsMfaConfiguration != nil {
+		if err := s.SmsMfaConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SmsMfaConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetMfaConfiguration sets the MfaConfiguration field's value.
+func (s *SetUserPoolMfaConfigInput) SetMfaConfiguration(v UserPoolMfaType) *SetUserPoolMfaConfigInput {
+	s.MfaConfiguration = v
+	return s
+}
+
+// SetSmsMfaConfiguration sets the SmsMfaConfiguration field's value.
+func (s *SetUserPoolMfaConfigInput) SetSmsMfaConfiguration(v *SmsMfaConfigType) *SetUserPoolMfaConfigInput {
+	s.SmsMfaConfiguration = v
+	return s
+}
+
+// SetSoftwareTokenMfaConfiguration sets the SoftwareTokenMfaConfiguration field's value.
+func (s *SetUserPoolMfaConfigInput) SetSoftwareTokenMfaConfiguration(v *SoftwareTokenMfaConfigType) *SetUserPoolMfaConfigInput {
+	s.SoftwareTokenMfaConfiguration = v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *SetUserPoolMfaConfigInput) SetUserPoolId(v string) *SetUserPoolMfaConfigInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfigResponse
+type SetUserPoolMfaConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The MFA configuration.
+	MfaConfiguration UserPoolMfaType `type:"string" enum:"true"`
+
+	// The SMS text message MFA configuration.
+	SmsMfaConfiguration *SmsMfaConfigType `type:"structure"`
+
+	// The software token MFA configuration.
+	SoftwareTokenMfaConfiguration *SoftwareTokenMfaConfigType `type:"structure"`
+}
+
+// String returns the string representation
+func (s SetUserPoolMfaConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetUserPoolMfaConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetUserPoolMfaConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetMfaConfiguration sets the MfaConfiguration field's value.
+func (s *SetUserPoolMfaConfigOutput) SetMfaConfiguration(v UserPoolMfaType) *SetUserPoolMfaConfigOutput {
+	s.MfaConfiguration = v
+	return s
+}
+
+// SetSmsMfaConfiguration sets the SmsMfaConfiguration field's value.
+func (s *SetUserPoolMfaConfigOutput) SetSmsMfaConfiguration(v *SmsMfaConfigType) *SetUserPoolMfaConfigOutput {
+	s.SmsMfaConfiguration = v
+	return s
+}
+
+// SetSoftwareTokenMfaConfiguration sets the SoftwareTokenMfaConfiguration field's value.
+func (s *SetUserPoolMfaConfigOutput) SetSoftwareTokenMfaConfiguration(v *SoftwareTokenMfaConfigType) *SetUserPoolMfaConfigOutput {
+	s.SoftwareTokenMfaConfiguration = v
+	return s
+}
+
 // Represents the request to set user settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettingsRequest
 type SetUserSettingsInput struct {
@@ -13707,6 +16595,10 @@ func (s SetUserSettingsOutput) SDKResponseMetadata() aws.Response {
 type SignUpInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Pinpoint analytics metadata for collecting metrics for SignUp
+	// calls.
+	AnalyticsMetadata *AnalyticsMetadataType `type:"structure"`
+
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
@@ -13726,6 +16618,11 @@ type SignUpInput struct {
 	// For custom attributes, you must prepend the custom: prefix to the attribute
 	// name.
 	UserAttributes []AttributeType `type:"list"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *UserContextDataType `type:"structure"`
 
 	// The user name of the user you wish to register.
 	//
@@ -13794,6 +16691,12 @@ func (s *SignUpInput) Validate() error {
 	return nil
 }
 
+// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
+func (s *SignUpInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *SignUpInput {
+	s.AnalyticsMetadata = v
+	return s
+}
+
 // SetClientId sets the ClientId field's value.
 func (s *SignUpInput) SetClientId(v string) *SignUpInput {
 	s.ClientId = &v
@@ -13815,6 +16718,12 @@ func (s *SignUpInput) SetSecretHash(v string) *SignUpInput {
 // SetUserAttributes sets the UserAttributes field's value.
 func (s *SignUpInput) SetUserAttributes(v []AttributeType) *SignUpInput {
 	s.UserAttributes = v
+	return s
+}
+
+// SetUserContextData sets the UserContextData field's value.
+func (s *SignUpInput) SetUserContextData(v *UserContextDataType) *SignUpInput {
+	s.UserContextData = v
 	return s
 }
 
@@ -13936,6 +16845,117 @@ func (s *SmsConfigurationType) SetExternalId(v string) *SmsConfigurationType {
 // SetSnsCallerArn sets the SnsCallerArn field's value.
 func (s *SmsConfigurationType) SetSnsCallerArn(v string) *SmsConfigurationType {
 	s.SnsCallerArn = &v
+	return s
+}
+
+// The SMS text message multi-factor authentication (MFA) configuration type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsMfaConfigType
+type SmsMfaConfigType struct {
+	_ struct{} `type:"structure"`
+
+	// The SMS authentication message.
+	SmsAuthenticationMessage *string `min:"6" type:"string"`
+
+	// The SMS configuration.
+	SmsConfiguration *SmsConfigurationType `type:"structure"`
+}
+
+// String returns the string representation
+func (s SmsMfaConfigType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SmsMfaConfigType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SmsMfaConfigType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SmsMfaConfigType"}
+	if s.SmsAuthenticationMessage != nil && len(*s.SmsAuthenticationMessage) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("SmsAuthenticationMessage", 6))
+	}
+	if s.SmsConfiguration != nil {
+		if err := s.SmsConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SmsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSmsAuthenticationMessage sets the SmsAuthenticationMessage field's value.
+func (s *SmsMfaConfigType) SetSmsAuthenticationMessage(v string) *SmsMfaConfigType {
+	s.SmsAuthenticationMessage = &v
+	return s
+}
+
+// SetSmsConfiguration sets the SmsConfiguration field's value.
+func (s *SmsMfaConfigType) SetSmsConfiguration(v *SmsConfigurationType) *SmsMfaConfigType {
+	s.SmsConfiguration = v
+	return s
+}
+
+// The type used for enabling software token MFA at the user pool level.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SoftwareTokenMfaConfigType
+type SoftwareTokenMfaConfigType struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether software token MFA is enabled.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s SoftwareTokenMfaConfigType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SoftwareTokenMfaConfigType) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *SoftwareTokenMfaConfigType) SetEnabled(v bool) *SoftwareTokenMfaConfigType {
+	s.Enabled = &v
+	return s
+}
+
+// The type used for enabling software token MFA at the user level.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SoftwareTokenMfaSettingsType
+type SoftwareTokenMfaSettingsType struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether software token MFA is enabled.
+	Enabled *bool `type:"boolean"`
+
+	// The preferred MFA method.
+	PreferredMfa *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s SoftwareTokenMfaSettingsType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SoftwareTokenMfaSettingsType) GoString() string {
+	return s.String()
+}
+
+// SetEnabled sets the Enabled field's value.
+func (s *SoftwareTokenMfaSettingsType) SetEnabled(v bool) *SoftwareTokenMfaSettingsType {
+	s.Enabled = &v
+	return s
+}
+
+// SetPreferredMfa sets the PreferredMfa field's value.
+func (s *SoftwareTokenMfaSettingsType) SetPreferredMfa(v bool) *SoftwareTokenMfaSettingsType {
+	s.PreferredMfa = &v
 	return s
 }
 
@@ -14129,15 +17149,15 @@ func (s *StopUserImportJobOutput) SetUserImportJob(v *UserImportJobType) *StopUs
 	return s
 }
 
-// The type of constraints associated with an attribute of the string type.
+// The constraints associated with a string attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StringAttributeConstraintsType
 type StringAttributeConstraintsType struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum length of an attribute value of the string type.
+	// The maximum length.
 	MaxLength *string `type:"string"`
 
-	// The minimum length of an attribute value of the string type.
+	// The minimum length.
 	MinLength *string `type:"string"`
 }
 
@@ -14241,6 +17261,136 @@ func (s *UICustomizationType) SetLastModifiedDate(v time.Time) *UICustomizationT
 func (s *UICustomizationType) SetUserPoolId(v string) *UICustomizationType {
 	s.UserPoolId = &v
 	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedbackRequest
+type UpdateAuthEventFeedbackInput struct {
+	_ struct{} `type:"structure"`
+
+	// The event ID.
+	//
+	// EventId is a required field
+	EventId *string `min:"1" type:"string" required:"true"`
+
+	// The feedback token.
+	//
+	// FeedbackToken is a required field
+	FeedbackToken *string `type:"string" required:"true"`
+
+	// The authentication event feedback value.
+	//
+	// FeedbackValue is a required field
+	FeedbackValue FeedbackValueType `type:"string" required:"true" enum:"true"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+
+	// The user pool username.
+	//
+	// Username is a required field
+	Username *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateAuthEventFeedbackInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAuthEventFeedbackInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateAuthEventFeedbackInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAuthEventFeedbackInput"}
+
+	if s.EventId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EventId"))
+	}
+	if s.EventId != nil && len(*s.EventId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventId", 1))
+	}
+
+	if s.FeedbackToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FeedbackToken"))
+	}
+	if len(s.FeedbackValue) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FeedbackValue"))
+	}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if s.Username == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
+	}
+	if s.Username != nil && len(*s.Username) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEventId sets the EventId field's value.
+func (s *UpdateAuthEventFeedbackInput) SetEventId(v string) *UpdateAuthEventFeedbackInput {
+	s.EventId = &v
+	return s
+}
+
+// SetFeedbackToken sets the FeedbackToken field's value.
+func (s *UpdateAuthEventFeedbackInput) SetFeedbackToken(v string) *UpdateAuthEventFeedbackInput {
+	s.FeedbackToken = &v
+	return s
+}
+
+// SetFeedbackValue sets the FeedbackValue field's value.
+func (s *UpdateAuthEventFeedbackInput) SetFeedbackValue(v FeedbackValueType) *UpdateAuthEventFeedbackInput {
+	s.FeedbackValue = v
+	return s
+}
+
+// SetUserPoolId sets the UserPoolId field's value.
+func (s *UpdateAuthEventFeedbackInput) SetUserPoolId(v string) *UpdateAuthEventFeedbackInput {
+	s.UserPoolId = &v
+	return s
+}
+
+// SetUsername sets the Username field's value.
+func (s *UpdateAuthEventFeedbackInput) SetUsername(v string) *UpdateAuthEventFeedbackInput {
+	s.Username = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedbackResponse
+type UpdateAuthEventFeedbackOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateAuthEventFeedbackOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAuthEventFeedbackOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAuthEventFeedbackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to update the device status.
@@ -14347,7 +17497,7 @@ type UpdateGroupInput struct {
 	GroupName *string `min:"1" type:"string" required:"true"`
 
 	// The new precedence value for the group. For more information about this parameter,
-	// see CreateGroup (API_CreateGroup.html).
+	// see .
 	Precedence *int64 `type:"integer"`
 
 	// The new role ARN for the group. This is used for setting the cognito:roles
@@ -14827,6 +17977,10 @@ type UpdateUserPoolClientInput struct {
 	// "openid", and "Cognito".
 	AllowedOAuthScopes []string `type:"list"`
 
+	// The Amazon Pinpoint analytics configuration for collecting metrics for this
+	// user pool.
+	AnalyticsConfiguration *AnalyticsConfigurationType `type:"structure"`
+
 	// A list of allowed callback URLs for the identity providers.
 	CallbackURLs []string `type:"list"`
 
@@ -14901,6 +18055,11 @@ func (s *UpdateUserPoolClientInput) Validate() error {
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+	if s.AnalyticsConfiguration != nil {
+		if err := s.AnalyticsConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AnalyticsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14923,6 +18082,12 @@ func (s *UpdateUserPoolClientInput) SetAllowedOAuthFlowsUserPoolClient(v bool) *
 // SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
 func (s *UpdateUserPoolClientInput) SetAllowedOAuthScopes(v []string) *UpdateUserPoolClientInput {
 	s.AllowedOAuthScopes = v
+	return s
+}
+
+// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
+func (s *UpdateUserPoolClientInput) SetAnalyticsConfiguration(v *AnalyticsConfigurationType) *UpdateUserPoolClientInput {
+	s.AnalyticsConfiguration = v
 	return s
 }
 
@@ -15077,6 +18242,10 @@ type UpdateUserPoolInput struct {
 	// A container with information about the SMS verification message.
 	SmsVerificationMessage *string `min:"6" type:"string"`
 
+	// Used to enable advanced security risk detection. Set the key AdvancedSecurityMode
+	// to the value "AUDIT".
+	UserPoolAddOns *UserPoolAddOnsType `type:"structure"`
+
 	// The user pool ID for the user pool you want to update.
 	//
 	// UserPoolId is a required field
@@ -15145,6 +18314,11 @@ func (s *UpdateUserPoolInput) Validate() error {
 	if s.SmsConfiguration != nil {
 		if err := s.SmsConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("SmsConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UserPoolAddOns != nil {
+		if err := s.UserPoolAddOns.Validate(); err != nil {
+			invalidParams.AddNested("UserPoolAddOns", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VerificationMessageTemplate != nil {
@@ -15231,6 +18405,12 @@ func (s *UpdateUserPoolInput) SetSmsVerificationMessage(v string) *UpdateUserPoo
 	return s
 }
 
+// SetUserPoolAddOns sets the UserPoolAddOns field's value.
+func (s *UpdateUserPoolInput) SetUserPoolAddOns(v *UserPoolAddOnsType) *UpdateUserPoolInput {
+	s.UserPoolAddOns = v
+	return s
+}
+
 // SetUserPoolId sets the UserPoolId field's value.
 func (s *UpdateUserPoolInput) SetUserPoolId(v string) *UpdateUserPoolInput {
 	s.UserPoolId = &v
@@ -15271,6 +18451,35 @@ func (s UpdateUserPoolOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateUserPoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Contextual data such as the user's device fingerprint, IP address, or location
+// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+// security.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserContextDataType
+type UserContextDataType struct {
+	_ struct{} `type:"structure"`
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	EncodedData *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UserContextDataType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserContextDataType) GoString() string {
+	return s.String()
+}
+
+// SetEncodedData sets the EncodedData field's value.
+func (s *UserContextDataType) SetEncodedData(v string) *UserContextDataType {
+	s.EncodedData = &v
+	return s
 }
 
 // The user import job type.
@@ -15429,6 +18638,46 @@ func (s *UserImportJobType) SetUserPoolId(v string) *UserImportJobType {
 	return s
 }
 
+// The user pool add-ons type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolAddOnsType
+type UserPoolAddOnsType struct {
+	_ struct{} `type:"structure"`
+
+	// The advanced security mode.
+	//
+	// AdvancedSecurityMode is a required field
+	AdvancedSecurityMode AdvancedSecurityModeType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s UserPoolAddOnsType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserPoolAddOnsType) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserPoolAddOnsType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserPoolAddOnsType"}
+	if len(s.AdvancedSecurityMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AdvancedSecurityMode"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAdvancedSecurityMode sets the AdvancedSecurityMode field's value.
+func (s *UserPoolAddOnsType) SetAdvancedSecurityMode(v AdvancedSecurityModeType) *UserPoolAddOnsType {
+	s.AdvancedSecurityMode = v
+	return s
+}
+
 // The description of the user pool client.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientDescription
 type UserPoolClientDescription struct {
@@ -15493,6 +18742,9 @@ type UserPoolClientType struct {
 	// A list of allowed OAuth scopes. Currently supported values are "phone", "email",
 	// "openid", and "Cognito".
 	AllowedOAuthScopes []string `type:"list"`
+
+	// The Amazon Pinpoint analytics configuration for the user pool client.
+	AnalyticsConfiguration *AnalyticsConfigurationType `type:"structure"`
 
 	// A list of allowed callback URLs for the identity providers.
 	CallbackURLs []string `type:"list"`
@@ -15564,6 +18816,12 @@ func (s *UserPoolClientType) SetAllowedOAuthFlowsUserPoolClient(v bool) *UserPoo
 // SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
 func (s *UserPoolClientType) SetAllowedOAuthScopes(v []string) *UserPoolClientType {
 	s.AllowedOAuthScopes = v
+	return s
+}
+
+// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
+func (s *UserPoolClientType) SetAnalyticsConfiguration(v *AnalyticsConfigurationType) *UserPoolClientType {
+	s.AnalyticsConfiguration = v
 	return s
 }
 
@@ -15721,12 +18979,12 @@ func (s *UserPoolDescriptionType) SetStatus(v StatusType) *UserPoolDescriptionTy
 	return s
 }
 
-// The type of policy in a user pool.
+// The policy associated with a user pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolPolicyType
 type UserPoolPolicyType struct {
 	_ struct{} `type:"structure"`
 
-	// A container for information about the user pool password policy.
+	// The password policy.
 	PasswordPolicy *PasswordPolicyType `type:"structure"`
 }
 
@@ -15761,7 +19019,7 @@ func (s *UserPoolPolicyType) SetPasswordPolicy(v *PasswordPolicyType) *UserPoolP
 	return s
 }
 
-// A container for information about the user pool type.
+// A container for information about the user pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType
 type UserPoolType struct {
 	_ struct{} `type:"structure"`
@@ -15781,6 +19039,9 @@ type UserPoolType struct {
 	// The device configuration.
 	DeviceConfiguration *DeviceConfigurationType `type:"structure"`
 
+	// Holds the domain prefix if the user pool has a domain associated with it.
+	Domain *string `min:"1" type:"string"`
+
 	// The email configuration.
 	EmailConfiguration *EmailConfigurationType `type:"structure"`
 
@@ -15799,7 +19060,7 @@ type UserPoolType struct {
 	// The ID of the user pool.
 	Id *string `min:"1" type:"string"`
 
-	// A container for the AWS Lambda triggers associated with a user pool.
+	// The AWS Lambda triggers associated with tue user pool.
 	LambdaConfig *LambdaConfigType `type:"structure"`
 
 	// The date the user pool was last modified.
@@ -15819,7 +19080,7 @@ type UserPoolType struct {
 	// The name of the user pool.
 	Name *string `min:"1" type:"string"`
 
-	// A container for the policies associated with a user pool.
+	// The policies associated with the user pool.
 	Policies *UserPoolPolicyType `type:"structure"`
 
 	// A container with the schema attributes of a user pool.
@@ -15839,6 +19100,9 @@ type UserPoolType struct {
 
 	// The status of a user pool.
 	Status StatusType `type:"string" enum:"true"`
+
+	// The user pool add-ons.
+	UserPoolAddOns *UserPoolAddOnsType `type:"structure"`
 
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
@@ -15889,6 +19153,12 @@ func (s *UserPoolType) SetCreationDate(v time.Time) *UserPoolType {
 // SetDeviceConfiguration sets the DeviceConfiguration field's value.
 func (s *UserPoolType) SetDeviceConfiguration(v *DeviceConfigurationType) *UserPoolType {
 	s.DeviceConfiguration = v
+	return s
+}
+
+// SetDomain sets the Domain field's value.
+func (s *UserPoolType) SetDomain(v string) *UserPoolType {
+	s.Domain = &v
 	return s
 }
 
@@ -15991,6 +19261,12 @@ func (s *UserPoolType) SetSmsVerificationMessage(v string) *UserPoolType {
 // SetStatus sets the Status field's value.
 func (s *UserPoolType) SetStatus(v StatusType) *UserPoolType {
 	s.Status = v
+	return s
+}
+
+// SetUserPoolAddOns sets the UserPoolAddOns field's value.
+func (s *UserPoolType) SetUserPoolAddOns(v *UserPoolAddOnsType) *UserPoolType {
+	s.UserPoolAddOns = v
 	return s
 }
 
@@ -16197,6 +19473,121 @@ func (s *VerificationMessageTemplateType) SetSmsMessage(v string) *VerificationM
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareTokenRequest
+type VerifySoftwareTokenInput struct {
+	_ struct{} `type:"structure"`
+
+	// The access token.
+	AccessToken *string `type:"string"`
+
+	// The friendly device name.
+	FriendlyDeviceName *string `type:"string"`
+
+	// The session which should be passed both ways in challenge-response calls
+	// to the service.
+	Session *string `min:"20" type:"string"`
+
+	// The one time password computed using the secret code returned by
+	//
+	// UserCode is a required field
+	UserCode *string `min:"6" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VerifySoftwareTokenInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VerifySoftwareTokenInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VerifySoftwareTokenInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VerifySoftwareTokenInput"}
+	if s.Session != nil && len(*s.Session) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("Session", 20))
+	}
+
+	if s.UserCode == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserCode"))
+	}
+	if s.UserCode != nil && len(*s.UserCode) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserCode", 6))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccessToken sets the AccessToken field's value.
+func (s *VerifySoftwareTokenInput) SetAccessToken(v string) *VerifySoftwareTokenInput {
+	s.AccessToken = &v
+	return s
+}
+
+// SetFriendlyDeviceName sets the FriendlyDeviceName field's value.
+func (s *VerifySoftwareTokenInput) SetFriendlyDeviceName(v string) *VerifySoftwareTokenInput {
+	s.FriendlyDeviceName = &v
+	return s
+}
+
+// SetSession sets the Session field's value.
+func (s *VerifySoftwareTokenInput) SetSession(v string) *VerifySoftwareTokenInput {
+	s.Session = &v
+	return s
+}
+
+// SetUserCode sets the UserCode field's value.
+func (s *VerifySoftwareTokenInput) SetUserCode(v string) *VerifySoftwareTokenInput {
+	s.UserCode = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareTokenResponse
+type VerifySoftwareTokenOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The session which should be passed both ways in challenge-response calls
+	// to the service.
+	Session *string `min:"20" type:"string"`
+
+	// The status of the verify software token.
+	Status VerifySoftwareTokenResponseType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s VerifySoftwareTokenOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VerifySoftwareTokenOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s VerifySoftwareTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetSession sets the Session field's value.
+func (s *VerifySoftwareTokenOutput) SetSession(v string) *VerifySoftwareTokenOutput {
+	s.Session = &v
+	return s
+}
+
+// SetStatus sets the Status field's value.
+func (s *VerifySoftwareTokenOutput) SetStatus(v VerifySoftwareTokenResponseType) *VerifySoftwareTokenOutput {
+	s.Status = v
+	return s
+}
+
 // Represents the request to verify user attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttributeRequest
 type VerifyUserAttributeInput struct {
@@ -16298,6 +19689,25 @@ func (s VerifyUserAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+type AccountTakeoverEventActionType string
+
+// Enum values for AccountTakeoverEventActionType
+const (
+	AccountTakeoverEventActionTypeBlock           AccountTakeoverEventActionType = "BLOCK"
+	AccountTakeoverEventActionTypeMfaIfConfigured AccountTakeoverEventActionType = "MFA_IF_CONFIGURED"
+	AccountTakeoverEventActionTypeMfaRequired     AccountTakeoverEventActionType = "MFA_REQUIRED"
+	AccountTakeoverEventActionTypeNoAction        AccountTakeoverEventActionType = "NO_ACTION"
+)
+
+type AdvancedSecurityModeType string
+
+// Enum values for AdvancedSecurityModeType
+const (
+	AdvancedSecurityModeTypeOff      AdvancedSecurityModeType = "OFF"
+	AdvancedSecurityModeTypeAudit    AdvancedSecurityModeType = "AUDIT"
+	AdvancedSecurityModeTypeEnforced AdvancedSecurityModeType = "ENFORCED"
+)
+
 type AliasAttributeType string
 
 // Enum values for AliasAttributeType
@@ -16328,17 +19738,44 @@ const (
 	AuthFlowTypeAdminNoSrpAuth   AuthFlowType = "ADMIN_NO_SRP_AUTH"
 )
 
+type ChallengeName string
+
+// Enum values for ChallengeName
+const (
+	ChallengeNamePassword ChallengeName = "Password"
+	ChallengeNameMfa      ChallengeName = "Mfa"
+)
+
 type ChallengeNameType string
 
 // Enum values for ChallengeNameType
 const (
 	ChallengeNameTypeSmsMfa                 ChallengeNameType = "SMS_MFA"
+	ChallengeNameTypeSoftwareTokenMfa       ChallengeNameType = "SOFTWARE_TOKEN_MFA"
+	ChallengeNameTypeSelectMfaType          ChallengeNameType = "SELECT_MFA_TYPE"
+	ChallengeNameTypeMfaSetup               ChallengeNameType = "MFA_SETUP"
 	ChallengeNameTypePasswordVerifier       ChallengeNameType = "PASSWORD_VERIFIER"
 	ChallengeNameTypeCustomChallenge        ChallengeNameType = "CUSTOM_CHALLENGE"
 	ChallengeNameTypeDeviceSrpAuth          ChallengeNameType = "DEVICE_SRP_AUTH"
 	ChallengeNameTypeDevicePasswordVerifier ChallengeNameType = "DEVICE_PASSWORD_VERIFIER"
 	ChallengeNameTypeAdminNoSrpAuth         ChallengeNameType = "ADMIN_NO_SRP_AUTH"
 	ChallengeNameTypeNewPasswordRequired    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
+)
+
+type ChallengeResponse string
+
+// Enum values for ChallengeResponse
+const (
+	ChallengeResponseSuccess ChallengeResponse = "Success"
+	ChallengeResponseFailure ChallengeResponse = "Failure"
+)
+
+type CompromisedCredentialsEventActionType string
+
+// Enum values for CompromisedCredentialsEventActionType
+const (
+	CompromisedCredentialsEventActionTypeBlock    CompromisedCredentialsEventActionType = "BLOCK"
+	CompromisedCredentialsEventActionTypeNoAction CompromisedCredentialsEventActionType = "NO_ACTION"
 )
 
 type DefaultEmailOptionType string
@@ -16376,12 +19813,46 @@ const (
 	DomainStatusTypeFailed   DomainStatusType = "FAILED"
 )
 
+type EventFilterType string
+
+// Enum values for EventFilterType
+const (
+	EventFilterTypeSignIn         EventFilterType = "SIGN_IN"
+	EventFilterTypePasswordChange EventFilterType = "PASSWORD_CHANGE"
+	EventFilterTypeSignUp         EventFilterType = "SIGN_UP"
+)
+
+type EventResponseType string
+
+// Enum values for EventResponseType
+const (
+	EventResponseTypeSuccess EventResponseType = "Success"
+	EventResponseTypeFailure EventResponseType = "Failure"
+)
+
+type EventType string
+
+// Enum values for EventType
+const (
+	EventTypeSignIn         EventType = "SignIn"
+	EventTypeSignUp         EventType = "SignUp"
+	EventTypeForgotPassword EventType = "ForgotPassword"
+)
+
 type ExplicitAuthFlowsType string
 
 // Enum values for ExplicitAuthFlowsType
 const (
 	ExplicitAuthFlowsTypeAdminNoSrpAuth     ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
 	ExplicitAuthFlowsTypeCustomAuthFlowOnly ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
+)
+
+type FeedbackValueType string
+
+// Enum values for FeedbackValueType
+const (
+	FeedbackValueTypeValid   FeedbackValueType = "Valid"
+	FeedbackValueTypeInvalid FeedbackValueType = "Invalid"
 )
 
 type IdentityProviderTypeType string
@@ -16409,6 +19880,24 @@ const (
 	OAuthFlowTypeCode              OAuthFlowType = "code"
 	OAuthFlowTypeImplicit          OAuthFlowType = "implicit"
 	OAuthFlowTypeClientCredentials OAuthFlowType = "client_credentials"
+)
+
+type RiskDecisionType string
+
+// Enum values for RiskDecisionType
+const (
+	RiskDecisionTypeNoRisk          RiskDecisionType = "NoRisk"
+	RiskDecisionTypeAccountTakeover RiskDecisionType = "AccountTakeover"
+	RiskDecisionTypeBlock           RiskDecisionType = "Block"
+)
+
+type RiskLevelType string
+
+// Enum values for RiskLevelType
+const (
+	RiskLevelTypeLow    RiskLevelType = "Low"
+	RiskLevelTypeMedium RiskLevelType = "Medium"
+	RiskLevelTypeHigh   RiskLevelType = "High"
 )
 
 type StatusType string
@@ -16469,4 +19958,12 @@ type VerifiedAttributeType string
 const (
 	VerifiedAttributeTypePhoneNumber VerifiedAttributeType = "phone_number"
 	VerifiedAttributeTypeEmail       VerifiedAttributeType = "email"
+)
+
+type VerifySoftwareTokenResponseType string
+
+// Enum values for VerifySoftwareTokenResponseType
+const (
+	VerifySoftwareTokenResponseTypeSuccess VerifySoftwareTokenResponseType = "SUCCESS"
+	VerifySoftwareTokenResponseTypeError   VerifySoftwareTokenResponseType = "ERROR"
 )

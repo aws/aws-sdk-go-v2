@@ -1113,6 +1113,7 @@ const (
 	LanguageCodeFrFr    LanguageCode = "fr-FR"
 	LanguageCodeIsIs    LanguageCode = "is-IS"
 	LanguageCodeItIt    LanguageCode = "it-IT"
+	LanguageCodeKoKr    LanguageCode = "ko-KR"
 	LanguageCodeJaJp    LanguageCode = "ja-JP"
 	LanguageCodeNbNo    LanguageCode = "nb-NO"
 	LanguageCodeNlNl    LanguageCode = "nl-NL"
@@ -1175,6 +1176,7 @@ const (
 	VoiceIdJustin    VoiceId = "Justin"
 	VoiceIdKendra    VoiceId = "Kendra"
 	VoiceIdKimberly  VoiceId = "Kimberly"
+	VoiceIdMatthew   VoiceId = "Matthew"
 	VoiceIdSalli     VoiceId = "Salli"
 	VoiceIdConchita  VoiceId = "Conchita"
 	VoiceIdEnrique   VoiceId = "Enrique"
@@ -1205,4 +1207,7 @@ const (
 	VoiceIdAstrid    VoiceId = "Astrid"
 	VoiceIdFiliz     VoiceId = "Filiz"
 	VoiceIdVicki     VoiceId = "Vicki"
+	VoiceIdTakumi    VoiceId = "Takumi"
+	VoiceIdSeoyeon   VoiceId = "Seoyeon"
+	VoiceIdAditi     VoiceId = "Aditi"
 )

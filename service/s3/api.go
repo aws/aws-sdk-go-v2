@@ -423,6 +423,57 @@ func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) DeleteBucketC
 	return DeleteBucketCorsRequest{Request: req, Input: input}
 }
 
+const opDeleteBucketEncryption = "DeleteBucketEncryption"
+
+// DeleteBucketEncryptionRequest is a API request type for the DeleteBucketEncryption API operation.
+type DeleteBucketEncryptionRequest struct {
+	*aws.Request
+	Input *DeleteBucketEncryptionInput
+}
+
+// Send marshals and sends the DeleteBucketEncryption API request.
+func (r DeleteBucketEncryptionRequest) Send() (*DeleteBucketEncryptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBucketEncryptionOutput), nil
+}
+
+// DeleteBucketEncryptionRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
+//
+// Deletes the server-side encryption configuration from the bucket.
+//
+//    // Example sending a request using the DeleteBucketEncryptionRequest method.
+//    req := client.DeleteBucketEncryptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryption
+func (c *S3) DeleteBucketEncryptionRequest(input *DeleteBucketEncryptionInput) DeleteBucketEncryptionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBucketEncryption,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{Bucket}?encryption",
+	}
+
+	if input == nil {
+		input = &DeleteBucketEncryptionInput{}
+	}
+
+	output := &DeleteBucketEncryptionOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteBucketEncryptionRequest{Request: req, Input: input}
+}
+
 const opDeleteBucketInventoryConfiguration = "DeleteBucketInventoryConfiguration"
 
 // DeleteBucketInventoryConfigurationRequest is a API request type for the DeleteBucketInventoryConfiguration API operation.
@@ -1127,6 +1178,55 @@ func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsReques
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetBucketCorsRequest{Request: req, Input: input}
+}
+
+const opGetBucketEncryption = "GetBucketEncryption"
+
+// GetBucketEncryptionRequest is a API request type for the GetBucketEncryption API operation.
+type GetBucketEncryptionRequest struct {
+	*aws.Request
+	Input *GetBucketEncryptionInput
+}
+
+// Send marshals and sends the GetBucketEncryption API request.
+func (r GetBucketEncryptionRequest) Send() (*GetBucketEncryptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBucketEncryptionOutput), nil
+}
+
+// GetBucketEncryptionRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
+//
+// Returns the server-side encryption configuration of a bucket.
+//
+//    // Example sending a request using the GetBucketEncryptionRequest method.
+//    req := client.GetBucketEncryptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryption
+func (c *S3) GetBucketEncryptionRequest(input *GetBucketEncryptionInput) GetBucketEncryptionRequest {
+	op := &aws.Operation{
+		Name:       opGetBucketEncryption,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{Bucket}?encryption",
+	}
+
+	if input == nil {
+		input = &GetBucketEncryptionInput{}
+	}
+
+	output := &GetBucketEncryptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetBucketEncryptionRequest{Request: req, Input: input}
 }
 
 const opGetBucketInventoryConfiguration = "GetBucketInventoryConfiguration"
@@ -3057,6 +3157,58 @@ func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) PutBucketCorsReques
 	return PutBucketCorsRequest{Request: req, Input: input}
 }
 
+const opPutBucketEncryption = "PutBucketEncryption"
+
+// PutBucketEncryptionRequest is a API request type for the PutBucketEncryption API operation.
+type PutBucketEncryptionRequest struct {
+	*aws.Request
+	Input *PutBucketEncryptionInput
+}
+
+// Send marshals and sends the PutBucketEncryption API request.
+func (r PutBucketEncryptionRequest) Send() (*PutBucketEncryptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutBucketEncryptionOutput), nil
+}
+
+// PutBucketEncryptionRequest returns a request value for making API operation for
+// Amazon Simple Storage Service.
+//
+// Creates a new server-side encryption configuration (or replaces an existing
+// one, if present).
+//
+//    // Example sending a request using the PutBucketEncryptionRequest method.
+//    req := client.PutBucketEncryptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryption
+func (c *S3) PutBucketEncryptionRequest(input *PutBucketEncryptionInput) PutBucketEncryptionRequest {
+	op := &aws.Operation{
+		Name:       opPutBucketEncryption,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/{Bucket}?encryption",
+	}
+
+	if input == nil {
+		input = &PutBucketEncryptionInput{}
+	}
+
+	output := &PutBucketEncryptionOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutBucketEncryptionRequest{Request: req, Input: input}
+}
+
 const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"
 
 // PutBucketInventoryConfigurationRequest is a API request type for the PutBucketInventoryConfiguration API operation.
@@ -4257,6 +4409,46 @@ func (s *AccessControlPolicy) SetOwner(v *Owner) *AccessControlPolicy {
 	return s
 }
 
+// Container for information regarding the access control for replicas.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlTranslation
+type AccessControlTranslation struct {
+	_ struct{} `type:"structure"`
+
+	// The override value for the owner of the replica object.
+	//
+	// Owner is a required field
+	Owner OwnerOverride `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s AccessControlTranslation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccessControlTranslation) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccessControlTranslation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccessControlTranslation"}
+	if len(s.Owner) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Owner"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetOwner sets the Owner field's value.
+func (s *AccessControlTranslation) SetOwner(v OwnerOverride) *AccessControlTranslation {
+	s.Owner = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsAndOperator
 type AnalyticsAndOperator struct {
 	_ struct{} `type:"structure"`
@@ -4817,6 +5009,140 @@ func (s *CORSRule) SetExposeHeaders(v []string) *CORSRule {
 // SetMaxAgeSeconds sets the MaxAgeSeconds field's value.
 func (s *CORSRule) SetMaxAgeSeconds(v int64) *CORSRule {
 	s.MaxAgeSeconds = &v
+	return s
+}
+
+// Describes how a CSV-formatted input object is formatted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVInput
+type CSVInput struct {
+	_ struct{} `type:"structure"`
+
+	// Single character used to indicate a row should be ignored when present at
+	// the start of a row.
+	Comments *string `type:"string"`
+
+	// Value used to separate individual fields in a record.
+	FieldDelimiter *string `type:"string"`
+
+	// Describes the first line of input. Valid values: None, Ignore, Use.
+	FileHeaderInfo FileHeaderInfo `type:"string" enum:"true"`
+
+	// Value used for escaping where the field delimiter is part of the value.
+	QuoteCharacter *string `type:"string"`
+
+	// Single character used for escaping the quote character inside an already
+	// escaped value.
+	QuoteEscapeCharacter *string `type:"string"`
+
+	// Value used to separate individual records.
+	RecordDelimiter *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CSVInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CSVInput) GoString() string {
+	return s.String()
+}
+
+// SetComments sets the Comments field's value.
+func (s *CSVInput) SetComments(v string) *CSVInput {
+	s.Comments = &v
+	return s
+}
+
+// SetFieldDelimiter sets the FieldDelimiter field's value.
+func (s *CSVInput) SetFieldDelimiter(v string) *CSVInput {
+	s.FieldDelimiter = &v
+	return s
+}
+
+// SetFileHeaderInfo sets the FileHeaderInfo field's value.
+func (s *CSVInput) SetFileHeaderInfo(v FileHeaderInfo) *CSVInput {
+	s.FileHeaderInfo = v
+	return s
+}
+
+// SetQuoteCharacter sets the QuoteCharacter field's value.
+func (s *CSVInput) SetQuoteCharacter(v string) *CSVInput {
+	s.QuoteCharacter = &v
+	return s
+}
+
+// SetQuoteEscapeCharacter sets the QuoteEscapeCharacter field's value.
+func (s *CSVInput) SetQuoteEscapeCharacter(v string) *CSVInput {
+	s.QuoteEscapeCharacter = &v
+	return s
+}
+
+// SetRecordDelimiter sets the RecordDelimiter field's value.
+func (s *CSVInput) SetRecordDelimiter(v string) *CSVInput {
+	s.RecordDelimiter = &v
+	return s
+}
+
+// Describes how CSV-formatted results are formatted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVOutput
+type CSVOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Value used to separate individual fields in a record.
+	FieldDelimiter *string `type:"string"`
+
+	// Value used for escaping where the field delimiter is part of the value.
+	QuoteCharacter *string `type:"string"`
+
+	// Single character used for escaping the quote character inside an already
+	// escaped value.
+	QuoteEscapeCharacter *string `type:"string"`
+
+	// Indicates whether or not all output fields should be quoted.
+	QuoteFields QuoteFields `type:"string" enum:"true"`
+
+	// Value used to separate individual records.
+	RecordDelimiter *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CSVOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CSVOutput) GoString() string {
+	return s.String()
+}
+
+// SetFieldDelimiter sets the FieldDelimiter field's value.
+func (s *CSVOutput) SetFieldDelimiter(v string) *CSVOutput {
+	s.FieldDelimiter = &v
+	return s
+}
+
+// SetQuoteCharacter sets the QuoteCharacter field's value.
+func (s *CSVOutput) SetQuoteCharacter(v string) *CSVOutput {
+	s.QuoteCharacter = &v
+	return s
+}
+
+// SetQuoteEscapeCharacter sets the QuoteEscapeCharacter field's value.
+func (s *CSVOutput) SetQuoteEscapeCharacter(v string) *CSVOutput {
+	s.QuoteEscapeCharacter = &v
+	return s
+}
+
+// SetQuoteFields sets the QuoteFields field's value.
+func (s *CSVOutput) SetQuoteFields(v QuoteFields) *CSVOutput {
+	s.QuoteFields = v
+	return s
+}
+
+// SetRecordDelimiter sets the RecordDelimiter field's value.
+func (s *CSVOutput) SetRecordDelimiter(v string) *CSVOutput {
+	s.RecordDelimiter = &v
 	return s
 }
 
@@ -6535,6 +6861,76 @@ func (s DeleteBucketCorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryptionRequest
+type DeleteBucketEncryptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the bucket containing the server-side encryption configuration
+	// to delete.
+	//
+	// Bucket is a required field
+	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteBucketEncryptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBucketEncryptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBucketEncryptionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketEncryptionInput"}
+
+	if s.Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBucket sets the Bucket field's value.
+func (s *DeleteBucketEncryptionInput) SetBucket(v string) *DeleteBucketEncryptionInput {
+	s.Bucket = &v
+	return s
+}
+
+func (s *DeleteBucketEncryptionInput) getBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryptionOutput
+type DeleteBucketEncryptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteBucketEncryptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBucketEncryptionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBucketEncryptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketRequest
 type DeleteBucketInput struct {
 	_ struct{} `type:"structure"`
@@ -7590,15 +7986,26 @@ func (s *DeletedObject) SetVersionId(v string) *DeletedObject {
 	return s
 }
 
+// Container for replication destination information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
+
+	// Container for information regarding the access control for replicas.
+	AccessControlTranslation *AccessControlTranslation `type:"structure"`
+
+	// Account ID of the destination bucket. Currently this is only being verified
+	// if Access Control Translation is enabled
+	Account *string `type:"string"`
 
 	// Amazon resource name (ARN) of the bucket where you want Amazon S3 to store
 	// replicas of the object identified by the rule.
 	//
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
+
+	// Container for information regarding encryption based configuration for replicas.
+	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
 
 	// The class of storage used to store the object.
 	StorageClass StorageClass `type:"string" enum:"true"`
@@ -7621,11 +8028,28 @@ func (s *Destination) Validate() error {
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+	if s.AccessControlTranslation != nil {
+		if err := s.AccessControlTranslation.Validate(); err != nil {
+			invalidParams.AddNested("AccessControlTranslation", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAccessControlTranslation sets the AccessControlTranslation field's value.
+func (s *Destination) SetAccessControlTranslation(v *AccessControlTranslation) *Destination {
+	s.AccessControlTranslation = v
+	return s
+}
+
+// SetAccount sets the Account field's value.
+func (s *Destination) SetAccount(v string) *Destination {
+	s.Account = &v
+	return s
 }
 
 // SetBucket sets the Bucket field's value.
@@ -7641,9 +8065,102 @@ func (s *Destination) getBucket() (v string) {
 	return *s.Bucket
 }
 
+// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
+func (s *Destination) SetEncryptionConfiguration(v *EncryptionConfiguration) *Destination {
+	s.EncryptionConfiguration = v
+	return s
+}
+
 // SetStorageClass sets the StorageClass field's value.
 func (s *Destination) SetStorageClass(v StorageClass) *Destination {
 	s.StorageClass = v
+	return s
+}
+
+// Describes the server-side encryption that will be applied to the restore
+// results.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Encryption
+type Encryption struct {
+	_ struct{} `type:"structure"`
+
+	// The server-side encryption algorithm used when storing job results in Amazon
+	// S3 (e.g., AES256, aws:kms).
+	//
+	// EncryptionType is a required field
+	EncryptionType ServerSideEncryption `type:"string" required:"true" enum:"true"`
+
+	// If the encryption type is aws:kms, this optional value can be used to specify
+	// the encryption context for the restore results.
+	KMSContext *string `type:"string"`
+
+	// If the encryption type is aws:kms, this optional value specifies the AWS
+	// KMS key ID to use for encryption of job results.
+	KMSKeyId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Encryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Encryption) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Encryption) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Encryption"}
+	if len(s.EncryptionType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetEncryptionType sets the EncryptionType field's value.
+func (s *Encryption) SetEncryptionType(v ServerSideEncryption) *Encryption {
+	s.EncryptionType = v
+	return s
+}
+
+// SetKMSContext sets the KMSContext field's value.
+func (s *Encryption) SetKMSContext(v string) *Encryption {
+	s.KMSContext = &v
+	return s
+}
+
+// SetKMSKeyId sets the KMSKeyId field's value.
+func (s *Encryption) SetKMSKeyId(v string) *Encryption {
+	s.KMSKeyId = &v
+	return s
+}
+
+// Container for information regarding encryption based configuration for replicas.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration
+type EncryptionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The id of the KMS key used to encrypt the replica object.
+	ReplicaKmsKeyID *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EncryptionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EncryptionConfiguration) GoString() string {
+	return s.String()
+}
+
+// SetReplicaKmsKeyID sets the ReplicaKmsKeyID field's value.
+func (s *EncryptionConfiguration) SetReplicaKmsKeyID(v string) *EncryptionConfiguration {
+	s.ReplicaKmsKeyID = &v
 	return s
 }
 
@@ -8100,6 +8617,86 @@ func (s GetBucketCorsOutput) SDKResponseMetadata() aws.Response {
 // SetCORSRules sets the CORSRules field's value.
 func (s *GetBucketCorsOutput) SetCORSRules(v []CORSRule) *GetBucketCorsOutput {
 	s.CORSRules = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionRequest
+type GetBucketEncryptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the bucket from which the server-side encryption configuration
+	// is retrieved.
+	//
+	// Bucket is a required field
+	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetBucketEncryptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetBucketEncryptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetBucketEncryptionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketEncryptionInput"}
+
+	if s.Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBucket sets the Bucket field's value.
+func (s *GetBucketEncryptionInput) SetBucket(v string) *GetBucketEncryptionInput {
+	s.Bucket = &v
+	return s
+}
+
+func (s *GetBucketEncryptionInput) getBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionOutput
+type GetBucketEncryptionOutput struct {
+	_ struct{} `type:"structure" payload:"ServerSideEncryptionConfiguration"`
+
+	responseMetadata aws.Response
+
+	// Container for server-side encryption configuration rules. Currently S3 supports
+	// one rule only.
+	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetBucketEncryptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetBucketEncryptionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBucketEncryptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetServerSideEncryptionConfiguration sets the ServerSideEncryptionConfiguration field's value.
+func (s *GetBucketEncryptionOutput) SetServerSideEncryptionConfiguration(v *ServerSideEncryptionConfiguration) *GetBucketEncryptionOutput {
+	s.ServerSideEncryptionConfiguration = v
 	return s
 }
 
@@ -10885,6 +11482,31 @@ func (s *Initiator) SetID(v string) *Initiator {
 	return s
 }
 
+// Describes the serialization format of the object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization
+type InputSerialization struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the serialization of a CSV-encoded object.
+	CSV *CSVInput `type:"structure"`
+}
+
+// String returns the string representation
+func (s InputSerialization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InputSerialization) GoString() string {
+	return s.String()
+}
+
+// SetCSV sets the CSV field's value.
+func (s *InputSerialization) SetCSV(v *CSVInput) *InputSerialization {
+	s.CSV = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryConfiguration
 type InventoryConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -11064,6 +11686,56 @@ func (s *InventoryDestination) SetS3BucketDestination(v *InventoryS3BucketDestin
 	return s
 }
 
+// Contains the type of server-side encryption used to encrypt the inventory
+// results.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryEncryption
+type InventoryEncryption struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+	SSEKMS *SSEKMS `locationName:"SSE-KMS" type:"structure"`
+
+	// Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+	SSES3 *SSES3 `locationName:"SSE-S3" type:"structure"`
+}
+
+// String returns the string representation
+func (s InventoryEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InventoryEncryption) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InventoryEncryption) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryEncryption"}
+	if s.SSEKMS != nil {
+		if err := s.SSEKMS.Validate(); err != nil {
+			invalidParams.AddNested("SSEKMS", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSSEKMS sets the SSEKMS field's value.
+func (s *InventoryEncryption) SetSSEKMS(v *SSEKMS) *InventoryEncryption {
+	s.SSEKMS = v
+	return s
+}
+
+// SetSSES3 sets the SSES3 field's value.
+func (s *InventoryEncryption) SetSSES3(v *SSES3) *InventoryEncryption {
+	s.SSES3 = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryFilter
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
@@ -11117,6 +11789,10 @@ type InventoryS3BucketDestination struct {
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
 
+	// Contains the type of server-side encryption used to encrypt the inventory
+	// results.
+	Encryption *InventoryEncryption `type:"structure"`
+
 	// Specifies the output format of the inventory results.
 	//
 	// Format is a required field
@@ -11146,6 +11822,11 @@ func (s *InventoryS3BucketDestination) Validate() error {
 	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
+	if s.Encryption != nil {
+		if err := s.Encryption.Validate(); err != nil {
+			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11170,6 +11851,12 @@ func (s *InventoryS3BucketDestination) getBucket() (v string) {
 		return v
 	}
 	return *s.Bucket
+}
+
+// SetEncryption sets the Encryption field's value.
+func (s *InventoryS3BucketDestination) SetEncryption(v *InventoryEncryption) *InventoryS3BucketDestination {
+	s.Encryption = v
+	return s
 }
 
 // SetFormat sets the Format field's value.
@@ -13314,6 +14001,134 @@ func (s *ListPartsOutput) SetUploadId(v string) *ListPartsOutput {
 	return s
 }
 
+// Describes an S3 location that will receive the results of the restore request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3Location
+type Location struct {
+	_ struct{} `type:"structure"`
+
+	// A list of grants that control access to the staged results.
+	AccessControlList []Grant `locationNameList:"Grant" type:"list"`
+
+	// The name of the bucket where the restore results will be placed.
+	//
+	// BucketName is a required field
+	BucketName *string `type:"string" required:"true"`
+
+	// The canned ACL to apply to the restore results.
+	CannedACL ObjectCannedACL `type:"string" enum:"true"`
+
+	// Describes the server-side encryption that will be applied to the restore
+	// results.
+	Encryption *Encryption `type:"structure"`
+
+	// The prefix that is prepended to the restore results for this request.
+	//
+	// Prefix is a required field
+	Prefix *string `type:"string" required:"true"`
+
+	// The class of storage used to store the restore results.
+	StorageClass StorageClass `type:"string" enum:"true"`
+
+	// The tag-set that is applied to the restore results.
+	Tagging *Tagging `type:"structure"`
+
+	// A list of metadata to store with the restore results in S3.
+	UserMetadata []MetadataEntry `locationNameList:"MetadataEntry" type:"list"`
+}
+
+// String returns the string representation
+func (s Location) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Location) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Location) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Location"}
+
+	if s.BucketName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
+	}
+
+	if s.Prefix == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
+	}
+	if s.AccessControlList != nil {
+		for i, v := range s.AccessControlList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AccessControlList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Encryption != nil {
+		if err := s.Encryption.Validate(); err != nil {
+			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tagging != nil {
+		if err := s.Tagging.Validate(); err != nil {
+			invalidParams.AddNested("Tagging", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAccessControlList sets the AccessControlList field's value.
+func (s *Location) SetAccessControlList(v []Grant) *Location {
+	s.AccessControlList = v
+	return s
+}
+
+// SetBucketName sets the BucketName field's value.
+func (s *Location) SetBucketName(v string) *Location {
+	s.BucketName = &v
+	return s
+}
+
+// SetCannedACL sets the CannedACL field's value.
+func (s *Location) SetCannedACL(v ObjectCannedACL) *Location {
+	s.CannedACL = v
+	return s
+}
+
+// SetEncryption sets the Encryption field's value.
+func (s *Location) SetEncryption(v *Encryption) *Location {
+	s.Encryption = v
+	return s
+}
+
+// SetPrefix sets the Prefix field's value.
+func (s *Location) SetPrefix(v string) *Location {
+	s.Prefix = &v
+	return s
+}
+
+// SetStorageClass sets the StorageClass field's value.
+func (s *Location) SetStorageClass(v StorageClass) *Location {
+	s.StorageClass = v
+	return s
+}
+
+// SetTagging sets the Tagging field's value.
+func (s *Location) SetTagging(v *Tagging) *Location {
+	s.Tagging = v
+	return s
+}
+
+// SetUserMetadata sets the UserMetadata field's value.
+func (s *Location) SetUserMetadata(v []MetadataEntry) *Location {
+	s.UserMetadata = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled
 type LoggingEnabled struct {
 	_ struct{} `type:"structure"`
@@ -13375,6 +14190,38 @@ func (s *LoggingEnabled) SetTargetGrants(v []TargetGrant) *LoggingEnabled {
 // SetTargetPrefix sets the TargetPrefix field's value.
 func (s *LoggingEnabled) SetTargetPrefix(v string) *LoggingEnabled {
 	s.TargetPrefix = &v
+	return s
+}
+
+// A metadata key-value pair to store with an object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataEntry
+type MetadataEntry struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MetadataEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MetadataEntry) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *MetadataEntry) SetName(v string) *MetadataEntry {
+	s.Name = &v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *MetadataEntry) SetValue(v string) *MetadataEntry {
+	s.Value = &v
 	return s
 }
 
@@ -13917,6 +14764,71 @@ func (s *ObjectVersion) SetVersionId(v string) *ObjectVersion {
 	return s
 }
 
+// Describes the location where the restore job's output is stored.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputLocation
+type OutputLocation struct {
+	_ struct{} `type:"structure"`
+
+	// Describes an S3 location that will receive the results of the restore request.
+	S3 *Location `type:"structure"`
+}
+
+// String returns the string representation
+func (s OutputLocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OutputLocation) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OutputLocation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OutputLocation"}
+	if s.S3 != nil {
+		if err := s.S3.Validate(); err != nil {
+			invalidParams.AddNested("S3", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetS3 sets the S3 field's value.
+func (s *OutputLocation) SetS3(v *Location) *OutputLocation {
+	s.S3 = v
+	return s
+}
+
+// Describes how results of the Select job are serialized.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputSerialization
+type OutputSerialization struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the serialization of CSV-encoded Select results.
+	CSV *CSVOutput `type:"structure"`
+}
+
+// String returns the string representation
+func (s OutputSerialization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OutputSerialization) GoString() string {
+	return s.String()
+}
+
+// SetCSV sets the CSV field's value.
+func (s *OutputSerialization) SetCSV(v *CSVOutput) *OutputSerialization {
+	s.CSV = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Owner
 type Owner struct {
 	_ struct{} `type:"structure"`
@@ -14405,6 +15317,97 @@ func (s PutBucketCorsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutBucketCorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryptionRequest
+type PutBucketEncryptionInput struct {
+	_ struct{} `type:"structure" payload:"ServerSideEncryptionConfiguration"`
+
+	// The name of the bucket for which the server-side encryption configuration
+	// is set.
+	//
+	// Bucket is a required field
+	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
+
+	// Container for server-side encryption configuration rules. Currently S3 supports
+	// one rule only.
+	//
+	// ServerSideEncryptionConfiguration is a required field
+	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration `locationName:"ServerSideEncryptionConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
+}
+
+// String returns the string representation
+func (s PutBucketEncryptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutBucketEncryptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutBucketEncryptionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketEncryptionInput"}
+
+	if s.Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
+	}
+
+	if s.ServerSideEncryptionConfiguration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServerSideEncryptionConfiguration"))
+	}
+	if s.ServerSideEncryptionConfiguration != nil {
+		if err := s.ServerSideEncryptionConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetBucket sets the Bucket field's value.
+func (s *PutBucketEncryptionInput) SetBucket(v string) *PutBucketEncryptionInput {
+	s.Bucket = &v
+	return s
+}
+
+func (s *PutBucketEncryptionInput) getBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
+}
+
+// SetServerSideEncryptionConfiguration sets the ServerSideEncryptionConfiguration field's value.
+func (s *PutBucketEncryptionInput) SetServerSideEncryptionConfiguration(v *ServerSideEncryptionConfiguration) *PutBucketEncryptionInput {
+	s.ServerSideEncryptionConfiguration = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryptionOutput
+type PutBucketEncryptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutBucketEncryptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutBucketEncryptionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutBucketEncryptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -15036,6 +16039,10 @@ type PutBucketPolicyInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Set this parameter to true to confirm that you want to remove your permissions
+	// to change this bucket policy in the future.
+	ConfirmRemoveSelfBucketAccess *bool `location:"header" locationName:"x-amz-confirm-remove-self-bucket-access" type:"boolean"`
+
 	// The bucket policy as a JSON document.
 	//
 	// Policy is a required field
@@ -15081,6 +16088,12 @@ func (s *PutBucketPolicyInput) getBucket() (v string) {
 		return v
 	}
 	return *s.Bucket
+}
+
+// SetConfirmRemoveSelfBucketAccess sets the ConfirmRemoveSelfBucketAccess field's value.
+func (s *PutBucketPolicyInput) SetConfirmRemoveSelfBucketAccess(v bool) *PutBucketPolicyInput {
+	s.ConfirmRemoveSelfBucketAccess = &v
+	return s
 }
 
 // SetPolicy sets the Policy field's value.
@@ -16562,10 +17575,13 @@ func (s *ReplicationConfiguration) SetRules(v []ReplicationRule) *ReplicationCon
 	return s
 }
 
+// Container for information about a particular replication rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule
 type ReplicationRule struct {
 	_ struct{} `type:"structure"`
 
+	// Container for replication destination information.
+	//
 	// Destination is a required field
 	Destination *Destination `type:"structure" required:"true"`
 
@@ -16578,6 +17594,9 @@ type ReplicationRule struct {
 	//
 	// Prefix is a required field
 	Prefix *string `type:"string" required:"true"`
+
+	// Container for filters that define which source objects should be replicated.
+	SourceSelectionCriteria *SourceSelectionCriteria `type:"structure"`
 
 	// The rule is ignored if status is not Enabled.
 	//
@@ -16614,6 +17633,11 @@ func (s *ReplicationRule) Validate() error {
 			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.SourceSelectionCriteria != nil {
+		if err := s.SourceSelectionCriteria.Validate(); err != nil {
+			invalidParams.AddNested("SourceSelectionCriteria", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -16636,6 +17660,12 @@ func (s *ReplicationRule) SetID(v string) *ReplicationRule {
 // SetPrefix sets the Prefix field's value.
 func (s *ReplicationRule) SetPrefix(v string) *ReplicationRule {
 	s.Prefix = &v
+	return s
+}
+
+// SetSourceSelectionCriteria sets the SourceSelectionCriteria field's value.
+func (s *ReplicationRule) SetSourceSelectionCriteria(v *SourceSelectionCriteria) *ReplicationRule {
+	s.SourceSelectionCriteria = v
 	return s
 }
 
@@ -16700,6 +17730,7 @@ type RestoreObjectInput struct {
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
+	// Container for restore job parameters.
 	RestoreRequest *RestoreRequest `locationName:"RestoreRequest" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
 	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
@@ -16787,6 +17818,10 @@ type RestoreObjectOutput struct {
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"true"`
+
+	// Indicates the path in the provided S3 output location where Select results
+	// will be restored to.
+	RestoreOutputPath *string `location:"header" locationName:"x-amz-restore-output-path" type:"string"`
 }
 
 // String returns the string representation
@@ -16810,17 +17845,39 @@ func (s *RestoreObjectOutput) SetRequestCharged(v RequestCharged) *RestoreObject
 	return s
 }
 
+// SetRestoreOutputPath sets the RestoreOutputPath field's value.
+func (s *RestoreObjectOutput) SetRestoreOutputPath(v string) *RestoreObjectOutput {
+	s.RestoreOutputPath = &v
+	return s
+}
+
+// Container for restore job parameters.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreRequest
 type RestoreRequest struct {
 	_ struct{} `type:"structure"`
 
-	// Lifetime of the active copy in days
-	//
-	// Days is a required field
-	Days *int64 `type:"integer" required:"true"`
+	// Lifetime of the active copy in days. Do not use with restores that specify
+	// OutputLocation.
+	Days *int64 `type:"integer"`
 
-	// Glacier related prameters pertaining to this job.
+	// The optional description for the job.
+	Description *string `type:"string"`
+
+	// Glacier related parameters pertaining to this job. Do not use with restores
+	// that specify OutputLocation.
 	GlacierJobParameters *GlacierJobParameters `type:"structure"`
+
+	// Describes the location where the restore job's output is stored.
+	OutputLocation *OutputLocation `type:"structure"`
+
+	// Describes the parameters for Select job types.
+	SelectParameters *SelectParameters `type:"structure"`
+
+	// Glacier retrieval tier at which the restore will be processed.
+	Tier Tier `type:"string" enum:"true"`
+
+	// Type of restore request.
+	Type RestoreRequestType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -16836,13 +17893,19 @@ func (s RestoreRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreRequest"}
-
-	if s.Days == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Days"))
-	}
 	if s.GlacierJobParameters != nil {
 		if err := s.GlacierJobParameters.Validate(); err != nil {
 			invalidParams.AddNested("GlacierJobParameters", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OutputLocation != nil {
+		if err := s.OutputLocation.Validate(); err != nil {
+			invalidParams.AddNested("OutputLocation", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SelectParameters != nil {
+		if err := s.SelectParameters.Validate(); err != nil {
+			invalidParams.AddNested("SelectParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16858,9 +17921,39 @@ func (s *RestoreRequest) SetDays(v int64) *RestoreRequest {
 	return s
 }
 
+// SetDescription sets the Description field's value.
+func (s *RestoreRequest) SetDescription(v string) *RestoreRequest {
+	s.Description = &v
+	return s
+}
+
 // SetGlacierJobParameters sets the GlacierJobParameters field's value.
 func (s *RestoreRequest) SetGlacierJobParameters(v *GlacierJobParameters) *RestoreRequest {
 	s.GlacierJobParameters = v
+	return s
+}
+
+// SetOutputLocation sets the OutputLocation field's value.
+func (s *RestoreRequest) SetOutputLocation(v *OutputLocation) *RestoreRequest {
+	s.OutputLocation = v
+	return s
+}
+
+// SetSelectParameters sets the SelectParameters field's value.
+func (s *RestoreRequest) SetSelectParameters(v *SelectParameters) *RestoreRequest {
+	s.SelectParameters = v
+	return s
+}
+
+// SetTier sets the Tier field's value.
+func (s *RestoreRequest) SetTier(v Tier) *RestoreRequest {
+	s.Tier = v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *RestoreRequest) SetType(v RestoreRequestType) *RestoreRequest {
+	s.Type = v
 	return s
 }
 
@@ -17031,6 +18124,375 @@ func (s *Rule) SetStatus(v ExpirationStatus) *Rule {
 // SetTransition sets the Transition field's value.
 func (s *Rule) SetTransition(v *Transition) *Rule {
 	s.Transition = v
+	return s
+}
+
+// Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS
+type SSEKMS struct {
+	_ struct{} `locationName:"SSE-KMS" type:"structure"`
+
+	// Specifies the ID of the AWS Key Management Service (KMS) master encryption
+	// key to use for encrypting Inventory reports.
+	//
+	// KeyId is a required field
+	KeyId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SSEKMS) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SSEKMS) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SSEKMS) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SSEKMS"}
+
+	if s.KeyId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKeyId sets the KeyId field's value.
+func (s *SSEKMS) SetKeyId(v string) *SSEKMS {
+	s.KeyId = &v
+	return s
+}
+
+// Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSES3
+type SSES3 struct {
+	_ struct{} `locationName:"SSE-S3" type:"structure"`
+}
+
+// String returns the string representation
+func (s SSES3) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SSES3) GoString() string {
+	return s.String()
+}
+
+// Describes the parameters for Select job types.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectParameters
+type SelectParameters struct {
+	_ struct{} `type:"structure"`
+
+	// The expression that is used to query the object.
+	//
+	// Expression is a required field
+	Expression *string `type:"string" required:"true"`
+
+	// The type of the provided expression (e.g., SQL).
+	//
+	// ExpressionType is a required field
+	ExpressionType ExpressionType `type:"string" required:"true" enum:"true"`
+
+	// Describes the serialization format of the object.
+	//
+	// InputSerialization is a required field
+	InputSerialization *InputSerialization `type:"structure" required:"true"`
+
+	// Describes how the results of the Select job are serialized.
+	//
+	// OutputSerialization is a required field
+	OutputSerialization *OutputSerialization `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s SelectParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SelectParameters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SelectParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SelectParameters"}
+
+	if s.Expression == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Expression"))
+	}
+	if len(s.ExpressionType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ExpressionType"))
+	}
+
+	if s.InputSerialization == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputSerialization"))
+	}
+
+	if s.OutputSerialization == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutputSerialization"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetExpression sets the Expression field's value.
+func (s *SelectParameters) SetExpression(v string) *SelectParameters {
+	s.Expression = &v
+	return s
+}
+
+// SetExpressionType sets the ExpressionType field's value.
+func (s *SelectParameters) SetExpressionType(v ExpressionType) *SelectParameters {
+	s.ExpressionType = v
+	return s
+}
+
+// SetInputSerialization sets the InputSerialization field's value.
+func (s *SelectParameters) SetInputSerialization(v *InputSerialization) *SelectParameters {
+	s.InputSerialization = v
+	return s
+}
+
+// SetOutputSerialization sets the OutputSerialization field's value.
+func (s *SelectParameters) SetOutputSerialization(v *OutputSerialization) *SelectParameters {
+	s.OutputSerialization = v
+	return s
+}
+
+// Describes the default server-side encryption to apply to new objects in the
+// bucket. If Put Object request does not specify any server-side encryption,
+// this default encryption will be applied.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionByDefault
+type ServerSideEncryptionByDefault struct {
+	_ struct{} `type:"structure"`
+
+	// KMS master key ID to use for the default encryption. This parameter is allowed
+	// if SSEAlgorithm is aws:kms.
+	KMSMasterKeyID *string `type:"string"`
+
+	// Server-side encryption algorithm to use for the default encryption.
+	//
+	// SSEAlgorithm is a required field
+	SSEAlgorithm ServerSideEncryption `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ServerSideEncryptionByDefault) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerSideEncryptionByDefault) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ServerSideEncryptionByDefault) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ServerSideEncryptionByDefault"}
+	if len(s.SSEAlgorithm) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("SSEAlgorithm"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKMSMasterKeyID sets the KMSMasterKeyID field's value.
+func (s *ServerSideEncryptionByDefault) SetKMSMasterKeyID(v string) *ServerSideEncryptionByDefault {
+	s.KMSMasterKeyID = &v
+	return s
+}
+
+// SetSSEAlgorithm sets the SSEAlgorithm field's value.
+func (s *ServerSideEncryptionByDefault) SetSSEAlgorithm(v ServerSideEncryption) *ServerSideEncryptionByDefault {
+	s.SSEAlgorithm = v
+	return s
+}
+
+// Container for server-side encryption configuration rules. Currently S3 supports
+// one rule only.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionConfiguration
+type ServerSideEncryptionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Container for information about a particular server-side encryption configuration
+	// rule.
+	//
+	// Rules is a required field
+	Rules []ServerSideEncryptionRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
+}
+
+// String returns the string representation
+func (s ServerSideEncryptionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerSideEncryptionConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ServerSideEncryptionConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ServerSideEncryptionConfiguration"}
+
+	if s.Rules == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Rules"))
+	}
+	if s.Rules != nil {
+		for i, v := range s.Rules {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRules sets the Rules field's value.
+func (s *ServerSideEncryptionConfiguration) SetRules(v []ServerSideEncryptionRule) *ServerSideEncryptionConfiguration {
+	s.Rules = v
+	return s
+}
+
+// Container for information about a particular server-side encryption configuration
+// rule.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule
+type ServerSideEncryptionRule struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the default server-side encryption to apply to new objects in the
+	// bucket. If Put Object request does not specify any server-side encryption,
+	// this default encryption will be applied.
+	ApplyServerSideEncryptionByDefault *ServerSideEncryptionByDefault `type:"structure"`
+}
+
+// String returns the string representation
+func (s ServerSideEncryptionRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerSideEncryptionRule) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ServerSideEncryptionRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ServerSideEncryptionRule"}
+	if s.ApplyServerSideEncryptionByDefault != nil {
+		if err := s.ApplyServerSideEncryptionByDefault.Validate(); err != nil {
+			invalidParams.AddNested("ApplyServerSideEncryptionByDefault", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetApplyServerSideEncryptionByDefault sets the ApplyServerSideEncryptionByDefault field's value.
+func (s *ServerSideEncryptionRule) SetApplyServerSideEncryptionByDefault(v *ServerSideEncryptionByDefault) *ServerSideEncryptionRule {
+	s.ApplyServerSideEncryptionByDefault = v
+	return s
+}
+
+// Container for filters that define which source objects should be replicated.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria
+type SourceSelectionCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// Container for filter information of selection of KMS Encrypted S3 objects.
+	SseKmsEncryptedObjects *SseKmsEncryptedObjects `type:"structure"`
+}
+
+// String returns the string representation
+func (s SourceSelectionCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceSelectionCriteria) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SourceSelectionCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SourceSelectionCriteria"}
+	if s.SseKmsEncryptedObjects != nil {
+		if err := s.SseKmsEncryptedObjects.Validate(); err != nil {
+			invalidParams.AddNested("SseKmsEncryptedObjects", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetSseKmsEncryptedObjects sets the SseKmsEncryptedObjects field's value.
+func (s *SourceSelectionCriteria) SetSseKmsEncryptedObjects(v *SseKmsEncryptedObjects) *SourceSelectionCriteria {
+	s.SseKmsEncryptedObjects = v
+	return s
+}
+
+// Container for filter information of selection of KMS Encrypted S3 objects.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SseKmsEncryptedObjects
+type SseKmsEncryptedObjects struct {
+	_ struct{} `type:"structure"`
+
+	// The replication for KMS encrypted S3 objects is disabled if status is not
+	// Enabled.
+	//
+	// Status is a required field
+	Status SseKmsEncryptedObjectsStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s SseKmsEncryptedObjects) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SseKmsEncryptedObjects) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SseKmsEncryptedObjects) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SseKmsEncryptedObjects"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetStatus sets the Status field's value.
+func (s *SseKmsEncryptedObjects) SetStatus(v SseKmsEncryptedObjectsStatus) *SseKmsEncryptedObjects {
+	s.Status = v
 	return s
 }
 
@@ -18266,6 +19728,22 @@ const (
 	ExpirationStatusDisabled ExpirationStatus = "Disabled"
 )
 
+type ExpressionType string
+
+// Enum values for ExpressionType
+const (
+	ExpressionTypeSql ExpressionType = "SQL"
+)
+
+type FileHeaderInfo string
+
+// Enum values for FileHeaderInfo
+const (
+	FileHeaderInfoUse    FileHeaderInfo = "USE"
+	FileHeaderInfoIgnore FileHeaderInfo = "IGNORE"
+	FileHeaderInfoNone   FileHeaderInfo = "NONE"
+)
+
 type FilterRuleName string
 
 // Enum values for FilterRuleName
@@ -18279,6 +19757,7 @@ type InventoryFormat string
 // Enum values for InventoryFormat
 const (
 	InventoryFormatCsv InventoryFormat = "CSV"
+	InventoryFormatOrc InventoryFormat = "ORC"
 )
 
 type InventoryFrequency string
@@ -18307,6 +19786,7 @@ const (
 	InventoryOptionalFieldEtag                InventoryOptionalField = "ETag"
 	InventoryOptionalFieldIsMultipartUploaded InventoryOptionalField = "IsMultipartUploaded"
 	InventoryOptionalFieldReplicationStatus   InventoryOptionalField = "ReplicationStatus"
+	InventoryOptionalFieldEncryptionStatus    InventoryOptionalField = "EncryptionStatus"
 )
 
 type MFADelete string
@@ -18362,6 +19842,13 @@ const (
 	ObjectVersionStorageClassStandard ObjectVersionStorageClass = "STANDARD"
 )
 
+type OwnerOverride string
+
+// Enum values for OwnerOverride
+const (
+	OwnerOverrideDestination OwnerOverride = "Destination"
+)
+
 type Payer string
 
 // Enum values for Payer
@@ -18387,6 +19874,14 @@ type Protocol string
 const (
 	ProtocolHttp  Protocol = "http"
 	ProtocolHttps Protocol = "https"
+)
+
+type QuoteFields string
+
+// Enum values for QuoteFields
+const (
+	QuoteFieldsAlways   QuoteFields = "ALWAYS"
+	QuoteFieldsAsneeded QuoteFields = "ASNEEDED"
 )
 
 type ReplicationRuleStatus string
@@ -18427,12 +19922,27 @@ const (
 	RequestPayerRequester RequestPayer = "requester"
 )
 
+type RestoreRequestType string
+
+// Enum values for RestoreRequestType
+const (
+	RestoreRequestTypeSelect RestoreRequestType = "SELECT"
+)
+
 type ServerSideEncryption string
 
 // Enum values for ServerSideEncryption
 const (
 	ServerSideEncryptionAes256 ServerSideEncryption = "AES256"
 	ServerSideEncryptionAwsKms ServerSideEncryption = "aws:kms"
+)
+
+type SseKmsEncryptedObjectsStatus string
+
+// Enum values for SseKmsEncryptedObjectsStatus
+const (
+	SseKmsEncryptedObjectsStatusEnabled  SseKmsEncryptedObjectsStatus = "Enabled"
+	SseKmsEncryptedObjectsStatusDisabled SseKmsEncryptedObjectsStatus = "Disabled"
 )
 
 type StorageClass string

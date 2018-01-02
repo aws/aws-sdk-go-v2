@@ -101,6 +101,8 @@ type Route53API interface {
 
 	DisassociateVPCFromHostedZoneRequest(*route53.DisassociateVPCFromHostedZoneInput) route53.DisassociateVPCFromHostedZoneRequest
 
+	GetAccountLimitRequest(*route53.GetAccountLimitInput) route53.GetAccountLimitRequest
+
 	GetChangeRequest(*route53.GetChangeInput) route53.GetChangeRequest
 
 	GetCheckerIpRangesRequest(*route53.GetCheckerIpRangesInput) route53.GetCheckerIpRangesRequest
@@ -119,9 +121,13 @@ type Route53API interface {
 
 	GetHostedZoneCountRequest(*route53.GetHostedZoneCountInput) route53.GetHostedZoneCountRequest
 
+	GetHostedZoneLimitRequest(*route53.GetHostedZoneLimitInput) route53.GetHostedZoneLimitRequest
+
 	GetQueryLoggingConfigRequest(*route53.GetQueryLoggingConfigInput) route53.GetQueryLoggingConfigRequest
 
 	GetReusableDelegationSetRequest(*route53.GetReusableDelegationSetInput) route53.GetReusableDelegationSetRequest
+
+	GetReusableDelegationSetLimitRequest(*route53.GetReusableDelegationSetLimitInput) route53.GetReusableDelegationSetLimitRequest
 
 	GetTrafficPolicyRequest(*route53.GetTrafficPolicyInput) route53.GetTrafficPolicyRequest
 

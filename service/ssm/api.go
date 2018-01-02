@@ -469,8 +469,7 @@ func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, er
 // Creates a resource data sync configuration to a single bucket in Amazon S3.
 // This is an asynchronous operation that returns immediately. After a successful
 // initial sync is completed, the system continuously syncs data to the Amazon
-// S3 bucket. To check the status of the sync, use the ListResourceDataSync
-// (API_ListResourceDataSync.html) operation.
+// S3 bucket. To check the status of the sync, use the ListResourceDataSync.
 //
 // By default, data is not encrypted in Amazon S3. We strongly recommend that
 // you enable encryption in Amazon S3 to ensure secure data storage. We also
@@ -1239,8 +1238,11 @@ func (r DescribeAssociationRequest) Send() (*DescribeAssociationOutput, error) {
 // DescribeAssociationRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Describes the associations for the specified Systems Manager document or
-// instance.
+// Describes the association for the specified target or instance. If you created
+// the association by using the Targets parameter, then you must retrieve the
+// association by using the association ID. If you created the association by
+// specifying an instance ID and a Systems Manager document, then you retrieve
+// the association by specifying the document name and the instance ID.
 //
 //    // Example sending a request using the DescribeAssociationRequest method.
 //    req := client.DescribeAssociationRequest(params)
@@ -1315,6 +1317,56 @@ func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeAutomationExecutionsRequest{Request: req, Input: input}
+}
+
+const opDescribeAutomationStepExecutions = "DescribeAutomationStepExecutions"
+
+// DescribeAutomationStepExecutionsRequest is a API request type for the DescribeAutomationStepExecutions API operation.
+type DescribeAutomationStepExecutionsRequest struct {
+	*aws.Request
+	Input *DescribeAutomationStepExecutionsInput
+}
+
+// Send marshals and sends the DescribeAutomationStepExecutions API request.
+func (r DescribeAutomationStepExecutionsRequest) Send() (*DescribeAutomationStepExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAutomationStepExecutionsOutput), nil
+}
+
+// DescribeAutomationStepExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
+//
+// Information about all active and terminated step executions in an Automation
+// workflow.
+//
+//    // Example sending a request using the DescribeAutomationStepExecutionsRequest method.
+//    req := client.DescribeAutomationStepExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions
+func (c *SSM) DescribeAutomationStepExecutionsRequest(input *DescribeAutomationStepExecutionsInput) DescribeAutomationStepExecutionsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeAutomationStepExecutions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeAutomationStepExecutionsInput{}
+	}
+
+	output := &DescribeAutomationStepExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeAutomationStepExecutionsRequest{Request: req, Input: input}
 }
 
 const opDescribeAvailablePatches = "DescribeAvailablePatches"
@@ -5509,6 +5561,11 @@ type AddTagsToResourceInput struct {
 
 	// The resource ID you want to tag.
 	//
+	// For the ManagedInstance, MaintenanceWindow, and PatchBaseline values, use
+	// the ID of the resource, such as mw-01234361858c9b57b for a Maintenance Window.
+	//
+	// For the Document and Parameter values, use the name of the resource.
+	//
 	// ResourceId is a required field
 	ResourceId *string `type:"string" required:"true"`
 
@@ -6178,11 +6235,20 @@ type AutomationExecution struct {
 	// The execution status of the Automation.
 	AutomationExecutionStatus AutomationExecutionStatus `type:"string" enum:"true"`
 
+	// The action of the currently executing step.
+	CurrentAction *string `type:"string"`
+
+	// The name of the currently executing step.
+	CurrentStepName *string `type:"string"`
+
 	// The name of the Automation document used during the execution.
 	DocumentName *string `type:"string"`
 
 	// The version of the document to use during execution.
 	DocumentVersion *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the user who executed the automation.
+	ExecutedBy *string `type:"string"`
 
 	// The time the execution finished.
 	ExecutionEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -6194,6 +6260,15 @@ type AutomationExecution struct {
 	// Failed.
 	FailureMessage *string `type:"string"`
 
+	// The MaxConcurrency value specified by the user when the execution started.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The MaxErrors value specified by the user when the execution started.
+	MaxErrors *string `min:"1" type:"string"`
+
+	// The automation execution mode.
+	Mode ExecutionMode `type:"string" enum:"true"`
+
 	// The list of execution outputs as defined in the automation document.
 	Outputs map[string][]string `min:"1" type:"map"`
 
@@ -6201,9 +6276,29 @@ type AutomationExecution struct {
 	// StartAutomationExecution.
 	Parameters map[string][]string `min:"1" type:"map"`
 
+	// The AutomationExecutionId of the parent automation.
+	ParentAutomationExecutionId *string `min:"36" type:"string"`
+
+	// A list of resolved targets in the rate control execution.
+	ResolvedTargets *ResolvedTargets `type:"structure"`
+
 	// A list of details about the current state of all steps that comprise an execution.
 	// An Automation document contains a list of steps that are executed in order.
 	StepExecutions []StepExecution `type:"list"`
+
+	// A boolean value that indicates if the response contains the full list of
+	// the Automation step executions. If true, use the DescribeAutomationStepExecutions
+	// API action to get the full list of step executions.
+	StepExecutionsTruncated *bool `type:"boolean"`
+
+	// The target of the execution.
+	Target *string `type:"string"`
+
+	// The parameter name.
+	TargetParameterName *string `min:"1" type:"string"`
+
+	// The specified targets.
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -6228,6 +6323,18 @@ func (s *AutomationExecution) SetAutomationExecutionStatus(v AutomationExecution
 	return s
 }
 
+// SetCurrentAction sets the CurrentAction field's value.
+func (s *AutomationExecution) SetCurrentAction(v string) *AutomationExecution {
+	s.CurrentAction = &v
+	return s
+}
+
+// SetCurrentStepName sets the CurrentStepName field's value.
+func (s *AutomationExecution) SetCurrentStepName(v string) *AutomationExecution {
+	s.CurrentStepName = &v
+	return s
+}
+
 // SetDocumentName sets the DocumentName field's value.
 func (s *AutomationExecution) SetDocumentName(v string) *AutomationExecution {
 	s.DocumentName = &v
@@ -6237,6 +6344,12 @@ func (s *AutomationExecution) SetDocumentName(v string) *AutomationExecution {
 // SetDocumentVersion sets the DocumentVersion field's value.
 func (s *AutomationExecution) SetDocumentVersion(v string) *AutomationExecution {
 	s.DocumentVersion = &v
+	return s
+}
+
+// SetExecutedBy sets the ExecutedBy field's value.
+func (s *AutomationExecution) SetExecutedBy(v string) *AutomationExecution {
+	s.ExecutedBy = &v
 	return s
 }
 
@@ -6258,6 +6371,24 @@ func (s *AutomationExecution) SetFailureMessage(v string) *AutomationExecution {
 	return s
 }
 
+// SetMaxConcurrency sets the MaxConcurrency field's value.
+func (s *AutomationExecution) SetMaxConcurrency(v string) *AutomationExecution {
+	s.MaxConcurrency = &v
+	return s
+}
+
+// SetMaxErrors sets the MaxErrors field's value.
+func (s *AutomationExecution) SetMaxErrors(v string) *AutomationExecution {
+	s.MaxErrors = &v
+	return s
+}
+
+// SetMode sets the Mode field's value.
+func (s *AutomationExecution) SetMode(v ExecutionMode) *AutomationExecution {
+	s.Mode = v
+	return s
+}
+
 // SetOutputs sets the Outputs field's value.
 func (s *AutomationExecution) SetOutputs(v map[string][]string) *AutomationExecution {
 	s.Outputs = v
@@ -6270,9 +6401,45 @@ func (s *AutomationExecution) SetParameters(v map[string][]string) *AutomationEx
 	return s
 }
 
+// SetParentAutomationExecutionId sets the ParentAutomationExecutionId field's value.
+func (s *AutomationExecution) SetParentAutomationExecutionId(v string) *AutomationExecution {
+	s.ParentAutomationExecutionId = &v
+	return s
+}
+
+// SetResolvedTargets sets the ResolvedTargets field's value.
+func (s *AutomationExecution) SetResolvedTargets(v *ResolvedTargets) *AutomationExecution {
+	s.ResolvedTargets = v
+	return s
+}
+
 // SetStepExecutions sets the StepExecutions field's value.
 func (s *AutomationExecution) SetStepExecutions(v []StepExecution) *AutomationExecution {
 	s.StepExecutions = v
+	return s
+}
+
+// SetStepExecutionsTruncated sets the StepExecutionsTruncated field's value.
+func (s *AutomationExecution) SetStepExecutionsTruncated(v bool) *AutomationExecution {
+	s.StepExecutionsTruncated = &v
+	return s
+}
+
+// SetTarget sets the Target field's value.
+func (s *AutomationExecution) SetTarget(v string) *AutomationExecution {
+	s.Target = &v
+	return s
+}
+
+// SetTargetParameterName sets the TargetParameterName field's value.
+func (s *AutomationExecution) SetTargetParameterName(v string) *AutomationExecution {
+	s.TargetParameterName = &v
+	return s
+}
+
+// SetTargets sets the Targets field's value.
+func (s *AutomationExecution) SetTargets(v []Target) *AutomationExecution {
+	s.Targets = v
 	return s
 }
 
@@ -6282,7 +6449,9 @@ func (s *AutomationExecution) SetStepExecutions(v []StepExecution) *AutomationEx
 type AutomationExecutionFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The aspect of the Automation execution information that should be limited.
+	// One or more keys to limit the results. Valid filter keys include the following:
+	// DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction,
+	// StartTimeBefore, StartTimeAfter.
 	//
 	// Key is a required field
 	Key AutomationExecutionFilterKey `type:"string" required:"true" enum:"true"`
@@ -6348,6 +6517,12 @@ type AutomationExecutionMetadata struct {
 	// Timed out, or Cancelled.
 	AutomationExecutionStatus AutomationExecutionStatus `type:"string" enum:"true"`
 
+	// The action of the currently executing step.
+	CurrentAction *string `type:"string"`
+
+	// The name of the currently executing step.
+	CurrentStepName *string `type:"string"`
+
 	// The name of the Automation document used during execution.
 	DocumentName *string `type:"string"`
 
@@ -6364,11 +6539,38 @@ type AutomationExecutionMetadata struct {
 	// The time the execution started.>
 	ExecutionStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The list of execution outputs as defined in the Automation document.
+	FailureMessage *string `type:"string"`
+
 	// An Amazon S3 bucket where execution information is stored.
 	LogFile *string `type:"string"`
 
+	// The MaxConcurrency value specified by the user when starting the Automation.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The MaxErrors value specified by the user when starting the Automation.
+	MaxErrors *string `min:"1" type:"string"`
+
+	// The Automation execution mode.
+	Mode ExecutionMode `type:"string" enum:"true"`
+
 	// The list of execution outputs as defined in the Automation document.
 	Outputs map[string][]string `min:"1" type:"map"`
+
+	// The ExecutionId of the parent Automation.
+	ParentAutomationExecutionId *string `min:"36" type:"string"`
+
+	// A list of targets that resolved during the execution.
+	ResolvedTargets *ResolvedTargets `type:"structure"`
+
+	// The list of execution outputs as defined in the Automation document.
+	Target *string `type:"string"`
+
+	// The list of execution outputs as defined in the Automation document.
+	TargetParameterName *string `min:"1" type:"string"`
+
+	// The targets defined by the user when starting the Automation.
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -6390,6 +6592,18 @@ func (s *AutomationExecutionMetadata) SetAutomationExecutionId(v string) *Automa
 // SetAutomationExecutionStatus sets the AutomationExecutionStatus field's value.
 func (s *AutomationExecutionMetadata) SetAutomationExecutionStatus(v AutomationExecutionStatus) *AutomationExecutionMetadata {
 	s.AutomationExecutionStatus = v
+	return s
+}
+
+// SetCurrentAction sets the CurrentAction field's value.
+func (s *AutomationExecutionMetadata) SetCurrentAction(v string) *AutomationExecutionMetadata {
+	s.CurrentAction = &v
+	return s
+}
+
+// SetCurrentStepName sets the CurrentStepName field's value.
+func (s *AutomationExecutionMetadata) SetCurrentStepName(v string) *AutomationExecutionMetadata {
+	s.CurrentStepName = &v
 	return s
 }
 
@@ -6423,15 +6637,69 @@ func (s *AutomationExecutionMetadata) SetExecutionStartTime(v time.Time) *Automa
 	return s
 }
 
+// SetFailureMessage sets the FailureMessage field's value.
+func (s *AutomationExecutionMetadata) SetFailureMessage(v string) *AutomationExecutionMetadata {
+	s.FailureMessage = &v
+	return s
+}
+
 // SetLogFile sets the LogFile field's value.
 func (s *AutomationExecutionMetadata) SetLogFile(v string) *AutomationExecutionMetadata {
 	s.LogFile = &v
 	return s
 }
 
+// SetMaxConcurrency sets the MaxConcurrency field's value.
+func (s *AutomationExecutionMetadata) SetMaxConcurrency(v string) *AutomationExecutionMetadata {
+	s.MaxConcurrency = &v
+	return s
+}
+
+// SetMaxErrors sets the MaxErrors field's value.
+func (s *AutomationExecutionMetadata) SetMaxErrors(v string) *AutomationExecutionMetadata {
+	s.MaxErrors = &v
+	return s
+}
+
+// SetMode sets the Mode field's value.
+func (s *AutomationExecutionMetadata) SetMode(v ExecutionMode) *AutomationExecutionMetadata {
+	s.Mode = v
+	return s
+}
+
 // SetOutputs sets the Outputs field's value.
 func (s *AutomationExecutionMetadata) SetOutputs(v map[string][]string) *AutomationExecutionMetadata {
 	s.Outputs = v
+	return s
+}
+
+// SetParentAutomationExecutionId sets the ParentAutomationExecutionId field's value.
+func (s *AutomationExecutionMetadata) SetParentAutomationExecutionId(v string) *AutomationExecutionMetadata {
+	s.ParentAutomationExecutionId = &v
+	return s
+}
+
+// SetResolvedTargets sets the ResolvedTargets field's value.
+func (s *AutomationExecutionMetadata) SetResolvedTargets(v *ResolvedTargets) *AutomationExecutionMetadata {
+	s.ResolvedTargets = v
+	return s
+}
+
+// SetTarget sets the Target field's value.
+func (s *AutomationExecutionMetadata) SetTarget(v string) *AutomationExecutionMetadata {
+	s.Target = &v
+	return s
+}
+
+// SetTargetParameterName sets the TargetParameterName field's value.
+func (s *AutomationExecutionMetadata) SetTargetParameterName(v string) *AutomationExecutionMetadata {
+	s.TargetParameterName = &v
+	return s
+}
+
+// SetTargets sets the Targets field's value.
+func (s *AutomationExecutionMetadata) SetTargets(v []Target) *AutomationExecutionMetadata {
+	s.Targets = v
 	return s
 }
 
@@ -7482,7 +7750,7 @@ type ComplianceStringFilter struct {
 	Type ComplianceQueryOperatorType `type:"string" enum:"true"`
 
 	// The value for which to search.
-	Values []string `locationNameList:"FilterValue" min:"1" type:"list"`
+	Values []string `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -7741,7 +8009,7 @@ type CreateAssociationBatchInput struct {
 	// One or more associations.
 	//
 	// Entries is a required field
-	Entries []CreateAssociationBatchRequestEntry `locationNameList:"entries" min:"1" type:"list" required:"true"`
+	Entries []CreateAssociationBatchRequestEntry `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -7791,10 +8059,10 @@ type CreateAssociationBatchOutput struct {
 	responseMetadata aws.Response
 
 	// Information about the associations that failed.
-	Failed []FailedCreateAssociation `locationNameList:"FailedCreateAssociationEntry" type:"list"`
+	Failed []FailedCreateAssociation `type:"list"`
 
 	// Information about the associations that succeeded.
-	Successful []AssociationDescription `locationNameList:"AssociationDescription" type:"list"`
+	Successful []AssociationDescription `type:"list"`
 }
 
 // String returns the string representation
@@ -8097,10 +8365,14 @@ func (s *CreateAssociationOutput) SetAssociationDescription(v *AssociationDescri
 type CreateDocumentInput struct {
 	_ struct{} `type:"structure"`
 
-	// A valid JSON string.
+	// A valid JSON or YAML string.
 	//
 	// Content is a required field
 	Content *string `min:"1" type:"string" required:"true"`
+
+	// Specify the document format for the request. The document format can be either
+	// JSON or YAML. JSON is the default format.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
 
 	// The type of document to create. Valid document types include: Policy, Automation,
 	// and Command.
@@ -8110,6 +8382,15 @@ type CreateDocumentInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// Specify a target type to define the kinds of resources the document can run
+	// on. For example, to run a document on EC2 instances, specify the following
+	// value: /AWS::EC2::Instance. If you specify a value of '/' the document can
+	// run on all types of resources. If you don't specify a value, the document
+	// can't run on any resources. For a list of valid resource types, see AWS Resource
+	// Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// in the AWS CloudFormation User Guide.
+	TargetType *string `type:"string"`
 }
 
 // String returns the string representation
@@ -8149,6 +8430,12 @@ func (s *CreateDocumentInput) SetContent(v string) *CreateDocumentInput {
 	return s
 }
 
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *CreateDocumentInput) SetDocumentFormat(v DocumentFormat) *CreateDocumentInput {
+	s.DocumentFormat = v
+	return s
+}
+
 // SetDocumentType sets the DocumentType field's value.
 func (s *CreateDocumentInput) SetDocumentType(v DocumentType) *CreateDocumentInput {
 	s.DocumentType = v
@@ -8158,6 +8445,12 @@ func (s *CreateDocumentInput) SetDocumentType(v DocumentType) *CreateDocumentInp
 // SetName sets the Name field's value.
 func (s *CreateDocumentInput) SetName(v string) *CreateDocumentInput {
 	s.Name = &v
+	return s
+}
+
+// SetTargetType sets the TargetType field's value.
+func (s *CreateDocumentInput) SetTargetType(v string) *CreateDocumentInput {
+	s.TargetType = &v
 	return s
 }
 
@@ -8394,9 +8687,8 @@ type CreatePatchBaselineInput struct {
 	// Name is a required field
 	Name *string `min:"3" type:"string" required:"true"`
 
-	// Defines the operating system the patch baseline applies to. Supported operating
-	// systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX.
-	// The Default value is WINDOWS.
+	// Defines the operating system the patch baseline applies to. The Default value
+	// is WINDOWS.
 	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 
 	// A list of explicitly rejected patches for the baseline.
@@ -9870,6 +10162,144 @@ func (s *DescribeAutomationExecutionsOutput) SetNextToken(v string) *DescribeAut
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutionsRequest
+type DescribeAutomationStepExecutionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Automation execution ID for which you want step execution descriptions.
+	//
+	// AutomationExecutionId is a required field
+	AutomationExecutionId *string `min:"36" type:"string" required:"true"`
+
+	// One or more filters to limit the number of step executions returned by the
+	// request.
+	Filters []StepExecutionFilter `min:"1" type:"list"`
+
+	// The maximum number of items to return for this call. The call also returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token for the next set of items to return. (You received this token from
+	// a previous call.)
+	NextToken *string `type:"string"`
+
+	// A boolean that indicates whether to list step executions in reverse order
+	// by start time. The default value is false.
+	ReverseOrder *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s DescribeAutomationStepExecutionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAutomationStepExecutionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeAutomationStepExecutionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAutomationStepExecutionsInput"}
+
+	if s.AutomationExecutionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
+	}
+	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
+		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
+	}
+	if s.Filters != nil && len(s.Filters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAutomationExecutionId sets the AutomationExecutionId field's value.
+func (s *DescribeAutomationStepExecutionsInput) SetAutomationExecutionId(v string) *DescribeAutomationStepExecutionsInput {
+	s.AutomationExecutionId = &v
+	return s
+}
+
+// SetFilters sets the Filters field's value.
+func (s *DescribeAutomationStepExecutionsInput) SetFilters(v []StepExecutionFilter) *DescribeAutomationStepExecutionsInput {
+	s.Filters = v
+	return s
+}
+
+// SetMaxResults sets the MaxResults field's value.
+func (s *DescribeAutomationStepExecutionsInput) SetMaxResults(v int64) *DescribeAutomationStepExecutionsInput {
+	s.MaxResults = &v
+	return s
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeAutomationStepExecutionsInput) SetNextToken(v string) *DescribeAutomationStepExecutionsInput {
+	s.NextToken = &v
+	return s
+}
+
+// SetReverseOrder sets the ReverseOrder field's value.
+func (s *DescribeAutomationStepExecutionsInput) SetReverseOrder(v bool) *DescribeAutomationStepExecutionsInput {
+	s.ReverseOrder = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutionsResult
+type DescribeAutomationStepExecutionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token to use when requesting the next set of items. If there are no additional
+	// items to return, the string is empty.
+	NextToken *string `type:"string"`
+
+	// A list of details about the current state of all steps that make up an execution.
+	StepExecutions []StepExecution `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeAutomationStepExecutionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAutomationStepExecutionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAutomationStepExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextToken sets the NextToken field's value.
+func (s *DescribeAutomationStepExecutionsOutput) SetNextToken(v string) *DescribeAutomationStepExecutionsOutput {
+	s.NextToken = &v
+	return s
+}
+
+// SetStepExecutions sets the StepExecutions field's value.
+func (s *DescribeAutomationStepExecutionsOutput) SetStepExecutions(v []StepExecution) *DescribeAutomationStepExecutionsOutput {
+	s.StepExecutions = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatchesRequest
 type DescribeAvailablePatchesInput struct {
 	_ struct{} `type:"structure"`
@@ -10117,7 +10547,7 @@ type DescribeDocumentPermissionOutput struct {
 
 	// The account IDs that have permission to use this document. The ID can be
 	// either an AWS account or All.
-	AccountIds []string `locationNameList:"AccountId" type:"list"`
+	AccountIds []string `type:"list"`
 }
 
 // String returns the string representation
@@ -10462,10 +10892,10 @@ type DescribeInstanceInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of instances.
-	Filters []InstanceInformationStringFilter `locationNameList:"InstanceInformationStringFilter" type:"list"`
+	Filters []InstanceInformationStringFilter `type:"list"`
 
 	// One or more filters. Use a filter to return a more specific list of instances.
-	InstanceInformationFilterList []InstanceInformationFilter `locationNameList:"InstanceInformationFilter" type:"list"`
+	InstanceInformationFilterList []InstanceInformationFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -10545,7 +10975,7 @@ type DescribeInstanceInformationOutput struct {
 	responseMetadata aws.Response
 
 	// The instance information list.
-	InstanceInformationList []InstanceInformation `locationNameList:"InstanceInformation" type:"list"`
+	InstanceInformationList []InstanceInformation `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -12216,6 +12646,9 @@ type DocumentDescription struct {
 	// A description of the document.
 	Description *string `type:"string"`
 
+	// The document format, either JSON or YAML.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
+
 	// The type of document.
 	DocumentType DocumentType `type:"string" enum:"true"`
 
@@ -12242,10 +12675,10 @@ type DocumentDescription struct {
 	Owner *string `type:"string"`
 
 	// A description of the parameters for a document.
-	Parameters []DocumentParameter `locationNameList:"DocumentParameter" type:"list"`
+	Parameters []DocumentParameter `type:"list"`
 
 	// The list of OS platforms compatible with this Systems Manager document.
-	PlatformTypes []PlatformType `locationNameList:"PlatformType" type:"list"`
+	PlatformTypes []PlatformType `type:"list"`
 
 	// The schema version.
 	SchemaVersion *string `type:"string"`
@@ -12258,6 +12691,12 @@ type DocumentDescription struct {
 
 	// The tags, or metadata, that have been applied to the document.
 	Tags []Tag `type:"list"`
+
+	// The target type which defines the kinds of resources the document can run
+	// on. For example, /AWS::EC2::Instance. For a list of valid resource types,
+	// see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// in the AWS CloudFormation User Guide.
+	TargetType *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12285,6 +12724,12 @@ func (s *DocumentDescription) SetDefaultVersion(v string) *DocumentDescription {
 // SetDescription sets the Description field's value.
 func (s *DocumentDescription) SetDescription(v string) *DocumentDescription {
 	s.Description = &v
+	return s
+}
+
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *DocumentDescription) SetDocumentFormat(v DocumentFormat) *DocumentDescription {
+	s.DocumentFormat = v
 	return s
 }
 
@@ -12366,6 +12811,12 @@ func (s *DocumentDescription) SetTags(v []Tag) *DocumentDescription {
 	return s
 }
 
+// SetTargetType sets the TargetType field's value.
+func (s *DocumentDescription) SetTargetType(v string) *DocumentDescription {
+	s.TargetType = &v
+	return s
+}
+
 // Describes a filter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentFilter
 type DocumentFilter struct {
@@ -12429,6 +12880,9 @@ func (s *DocumentFilter) SetValue(v string) *DocumentFilter {
 type DocumentIdentifier struct {
 	_ struct{} `type:"structure"`
 
+	// The document format, either JSON or YAML.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
+
 	// The document type.
 	DocumentType DocumentType `type:"string" enum:"true"`
 
@@ -12442,13 +12896,19 @@ type DocumentIdentifier struct {
 	Owner *string `type:"string"`
 
 	// The operating system platform.
-	PlatformTypes []PlatformType `locationNameList:"PlatformType" type:"list"`
+	PlatformTypes []PlatformType `type:"list"`
 
 	// The schema version.
 	SchemaVersion *string `type:"string"`
 
 	// The tags, or metadata, that have been applied to the document.
 	Tags []Tag `type:"list"`
+
+	// The target type which defines the kinds of resources the document can run
+	// on. For example, /AWS::EC2::Instance. For a list of valid resource types,
+	// see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// in the AWS CloudFormation User Guide.
+	TargetType *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12459,6 +12919,12 @@ func (s DocumentIdentifier) String() string {
 // GoString returns the string representation
 func (s DocumentIdentifier) GoString() string {
 	return s.String()
+}
+
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *DocumentIdentifier) SetDocumentFormat(v DocumentFormat) *DocumentIdentifier {
+	s.DocumentFormat = v
+	return s
 }
 
 // SetDocumentType sets the DocumentType field's value.
@@ -12500,6 +12966,12 @@ func (s *DocumentIdentifier) SetSchemaVersion(v string) *DocumentIdentifier {
 // SetTags sets the Tags field's value.
 func (s *DocumentIdentifier) SetTags(v []Tag) *DocumentIdentifier {
 	s.Tags = v
+	return s
+}
+
+// SetTargetType sets the TargetType field's value.
+func (s *DocumentIdentifier) SetTargetType(v string) *DocumentIdentifier {
+	s.TargetType = &v
 	return s
 }
 
@@ -12637,6 +13109,9 @@ type DocumentVersionInfo struct {
 	// The date the document was created.
 	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The document format, either JSON or YAML.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
+
 	// The document version.
 	DocumentVersion *string `type:"string"`
 
@@ -12660,6 +13135,12 @@ func (s DocumentVersionInfo) GoString() string {
 // SetCreatedDate sets the CreatedDate field's value.
 func (s *DocumentVersionInfo) SetCreatedDate(v time.Time) *DocumentVersionInfo {
 	s.CreatedDate = &v
+	return s
+}
+
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *DocumentVersionInfo) SetDocumentFormat(v DocumentFormat) *DocumentVersionInfo {
+	s.DocumentFormat = v
 	return s
 }
 
@@ -13373,6 +13854,10 @@ func (s *GetDeployablePatchSnapshotForInstanceOutput) SetSnapshotId(v string) *G
 type GetDocumentInput struct {
 	_ struct{} `type:"structure"`
 
+	// Returns the document in the specified format. The document format can be
+	// either JSON or YAML. JSON is the default format.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
+
 	// The document version for which you want information.
 	DocumentVersion *string `type:"string"`
 
@@ -13406,6 +13891,12 @@ func (s *GetDocumentInput) Validate() error {
 	return nil
 }
 
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *GetDocumentInput) SetDocumentFormat(v DocumentFormat) *GetDocumentInput {
+	s.DocumentFormat = v
+	return s
+}
+
 // SetDocumentVersion sets the DocumentVersion field's value.
 func (s *GetDocumentInput) SetDocumentVersion(v string) *GetDocumentInput {
 	s.DocumentVersion = &v
@@ -13426,6 +13917,9 @@ type GetDocumentOutput struct {
 
 	// The contents of the Systems Manager document.
 	Content *string `min:"1" type:"string"`
+
+	// The document format, either JSON or YAML.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
 
 	// The document type.
 	DocumentType DocumentType `type:"string" enum:"true"`
@@ -13458,6 +13952,12 @@ func (s *GetDocumentOutput) SetContent(v string) *GetDocumentOutput {
 	return s
 }
 
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *GetDocumentOutput) SetDocumentFormat(v DocumentFormat) *GetDocumentOutput {
+	s.DocumentFormat = v
+	return s
+}
+
 // SetDocumentType sets the DocumentType field's value.
 func (s *GetDocumentOutput) SetDocumentType(v DocumentType) *GetDocumentOutput {
 	s.DocumentType = v
@@ -13480,8 +13980,14 @@ func (s *GetDocumentOutput) SetName(v string) *GetDocumentOutput {
 type GetInventoryInput struct {
 	_ struct{} `type:"structure"`
 
+	// Returns counts of inventory types based on one or more expressions. For example,
+	// if you aggregate by using an expression that uses the AWS:InstanceInformation.PlatformType
+	// type, you can see a count of how many Windows and Linux instances exist in
+	// your inventoried fleet.
+	Aggregators []InventoryAggregator `min:"1" type:"list"`
+
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []InventoryFilter `locationNameList:"InventoryFilter" min:"1" type:"list"`
+	Filters []InventoryFilter `min:"1" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -13493,7 +13999,7 @@ type GetInventoryInput struct {
 	NextToken *string `type:"string"`
 
 	// The list of inventory item types to return.
-	ResultAttributes []ResultAttribute `locationNameList:"ResultAttribute" min:"1" type:"list"`
+	ResultAttributes []ResultAttribute `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -13509,6 +14015,9 @@ func (s GetInventoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInventoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInventoryInput"}
+	if s.Aggregators != nil && len(s.Aggregators) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Aggregators", 1))
+	}
 	if s.Filters != nil && len(s.Filters) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
@@ -13517,6 +14026,13 @@ func (s *GetInventoryInput) Validate() error {
 	}
 	if s.ResultAttributes != nil && len(s.ResultAttributes) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResultAttributes", 1))
+	}
+	if s.Aggregators != nil {
+		for i, v := range s.Aggregators {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Aggregators", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -13537,6 +14053,12 @@ func (s *GetInventoryInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAggregators sets the Aggregators field's value.
+func (s *GetInventoryInput) SetAggregators(v []InventoryAggregator) *GetInventoryInput {
+	s.Aggregators = v
+	return s
 }
 
 // SetFilters sets the Filters field's value.
@@ -13570,7 +14092,7 @@ type GetInventoryOutput struct {
 	responseMetadata aws.Response
 
 	// Collection of inventory entities such as a collection of instance inventory.
-	Entities []InventoryResultEntity `locationNameList:"Entity" type:"list"`
+	Entities []InventoryResultEntity `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -13607,6 +14129,11 @@ func (s *GetInventoryOutput) SetNextToken(v string) *GetInventoryOutput {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchemaRequest
 type GetInventorySchemaInput struct {
 	_ struct{} `type:"structure"`
+
+	// Returns inventory schemas that support aggregation. For example, this call
+	// returns the AWS:InstanceInformation type, because it supports aggregation
+	// based on the PlatformName, PlatformType, and PlatformVersion attributes.
+	Aggregator *bool `type:"boolean"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -13645,6 +14172,12 @@ func (s *GetInventorySchemaInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// SetAggregator sets the Aggregator field's value.
+func (s *GetInventorySchemaInput) SetAggregator(v bool) *GetInventorySchemaInput {
+	s.Aggregator = &v
+	return s
 }
 
 // SetMaxResults sets the MaxResults field's value.
@@ -14841,9 +15374,7 @@ type GetParametersByPathInput struct {
 
 	// The hierarchy for the parameter. Hierarchies start with a forward slash (/)
 	// and end with the parameter name. A hierarchy can have a maximum of five levels.
-	// Examples: /Environment/Test/DBString003
-	//
-	// /Finance/Prod/IAD/OS/WinServ2016/license15
+	// For example: /Finance/Prod/IAD/WinServ2016/license15
 	//
 	// Path is a required field
 	Path *string `min:"1" type:"string" required:"true"`
@@ -15817,7 +16348,7 @@ type InstanceInformationFilter struct {
 	// The filter values.
 	//
 	// ValueSet is a required field
-	ValueSet []string `locationName:"valueSet" locationNameList:"InstanceInformationFilterValue" min:"1" type:"list" required:"true"`
+	ValueSet []string `locationName:"valueSet" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -15878,7 +16409,7 @@ type InstanceInformationStringFilter struct {
 	// The filter values.
 	//
 	// Values is a required field
-	Values []string `locationNameList:"InstanceInformationFilterValue" min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -16162,6 +16693,63 @@ func (s *InstancePatchStateFilter) SetValues(v []string) *InstancePatchStateFilt
 	return s
 }
 
+// Specifies the inventory type and attribute for the aggregation execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryAggregator
+type InventoryAggregator struct {
+	_ struct{} `type:"structure"`
+
+	// Nested aggregators to further refine aggregation for an inventory type.
+	Aggregators []InventoryAggregator `min:"1" type:"list"`
+
+	// The inventory type and attribute name for aggregation.
+	Expression *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s InventoryAggregator) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InventoryAggregator) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InventoryAggregator) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryAggregator"}
+	if s.Aggregators != nil && len(s.Aggregators) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Aggregators", 1))
+	}
+	if s.Expression != nil && len(*s.Expression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Expression", 1))
+	}
+	if s.Aggregators != nil {
+		for i, v := range s.Aggregators {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Aggregators", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAggregators sets the Aggregators field's value.
+func (s *InventoryAggregator) SetAggregators(v []InventoryAggregator) *InventoryAggregator {
+	s.Aggregators = v
+	return s
+}
+
+// SetExpression sets the Expression field's value.
+func (s *InventoryAggregator) SetExpression(v string) *InventoryAggregator {
+	s.Expression = &v
+	return s
+}
+
 // One or more filters. Use a filter to return a more specific list of results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryFilter
 type InventoryFilter struct {
@@ -16180,7 +16768,7 @@ type InventoryFilter struct {
 	// i-1a2b3c4d5e6,Type=Equal
 	//
 	// Values is a required field
-	Values []string `locationNameList:"FilterValue" min:"1" type:"list" required:"true"`
+	Values []string `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -16394,7 +16982,11 @@ type InventoryItemSchema struct {
 	// name.
 	//
 	// Attributes is a required field
-	Attributes []InventoryItemAttribute `locationNameList:"Attribute" min:"1" type:"list" required:"true"`
+	Attributes []InventoryItemAttribute `min:"1" type:"list" required:"true"`
+
+	// The alias name of the inventory type. The alias name is used for display
+	// purposes.
+	DisplayName *string `type:"string"`
 
 	// The name of the inventory type. Default inventory item type names start with
 	// AWS. Custom inventory type names will start with Custom. Default inventory
@@ -16424,6 +17016,12 @@ func (s *InventoryItemSchema) SetAttributes(v []InventoryItemAttribute) *Invento
 	return s
 }
 
+// SetDisplayName sets the DisplayName field's value.
+func (s *InventoryItemSchema) SetDisplayName(v string) *InventoryItemSchema {
+	s.DisplayName = &v
+	return s
+}
+
 // SetTypeName sets the TypeName field's value.
 func (s *InventoryItemSchema) SetTypeName(v string) *InventoryItemSchema {
 	s.TypeName = &v
@@ -16441,7 +17039,7 @@ func (s *InventoryItemSchema) SetVersion(v string) *InventoryItemSchema {
 type InventoryResultEntity struct {
 	_ struct{} `type:"structure"`
 
-	// The data section in the inventory result entity json.
+	// The data section in the inventory result entity JSON.
 	Data map[string]InventoryResultItem `type:"map"`
 
 	// ID of the inventory result entity. For example, for managed instance inventory
@@ -16653,7 +17251,7 @@ type ListAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	AssociationFilterList []AssociationFilter `locationNameList:"AssociationFilter" min:"1" type:"list"`
+	AssociationFilterList []AssociationFilter `min:"1" type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -16723,7 +17321,7 @@ type ListAssociationsOutput struct {
 	responseMetadata aws.Response
 
 	// The associations.
-	Associations []Association `locationNameList:"Association" type:"list"`
+	Associations []Association `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -17035,7 +17633,7 @@ type ListComplianceItemsInput struct {
 
 	// One or more compliance filters. Use a filter to return a more specific list
 	// of results.
-	Filters []ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
+	Filters []ComplianceStringFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -17127,7 +17725,7 @@ type ListComplianceItemsOutput struct {
 	responseMetadata aws.Response
 
 	// A list of compliance information for the specified resource ID.
-	ComplianceItems []ComplianceItem `locationNameList:"Item" type:"list"`
+	ComplianceItems []ComplianceItem `type:"list"`
 
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
@@ -17167,7 +17765,7 @@ type ListComplianceSummariesInput struct {
 
 	// One or more compliance or inventory filters. Use a filter to return a more
 	// specific list of results.
-	Filters []ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
+	Filters []ComplianceStringFilter `type:"list"`
 
 	// The maximum number of items to return for this call. Currently, you can specify
 	// null or 50. The call also returns a token that you can specify in a subsequent
@@ -17235,7 +17833,7 @@ type ListComplianceSummariesOutput struct {
 	// A list of compliant and non-compliant summary counts based on compliance
 	// types. For example, this call returns State Manager associations, patches,
 	// or custom compliance types according to the filter criteria that you specified.
-	ComplianceSummaryItems []ComplianceSummaryItem `locationNameList:"Item" type:"list"`
+	ComplianceSummaryItems []ComplianceSummaryItem `type:"list"`
 
 	// The token for the next set of items to return. Use this token to get the
 	// next set of results.
@@ -17379,7 +17977,7 @@ type ListDocumentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	DocumentFilterList []DocumentFilter `locationNameList:"DocumentFilter" min:"1" type:"list"`
+	DocumentFilterList []DocumentFilter `min:"1" type:"list"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
 	Filters []DocumentKeyValuesFilter `type:"list"`
@@ -17465,7 +18063,7 @@ type ListDocumentsOutput struct {
 	responseMetadata aws.Response
 
 	// The names of the Systems Manager documents.
-	DocumentIdentifiers []DocumentIdentifier `locationNameList:"DocumentIdentifier" type:"list"`
+	DocumentIdentifiers []DocumentIdentifier `type:"list"`
 
 	// The token to use when requesting the next set of items. If there are no additional
 	// items to return, the string is empty.
@@ -17504,7 +18102,7 @@ type ListInventoryEntriesInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []InventoryFilter `locationNameList:"InventoryFilter" min:"1" type:"list"`
+	Filters []InventoryFilter `min:"1" type:"list"`
 
 	// The instance ID for which you want inventory information.
 	//
@@ -17682,7 +18280,7 @@ type ListResourceComplianceSummariesInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []ComplianceStringFilter `locationNameList:"ComplianceFilter" type:"list"`
+	Filters []ComplianceStringFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
 	// a token that you can specify in a subsequent call to get the next set of
@@ -17754,7 +18352,7 @@ type ListResourceComplianceSummariesOutput struct {
 	// A summary count for specified or targeted managed instances. Summary count
 	// includes information about compliant and non-compliant State Manager associations,
 	// patch status, or custom items according to the filter criteria that you specify.
-	ResourceComplianceSummaryItems []ResourceComplianceSummaryItem `locationNameList:"Item" type:"list"`
+	ResourceComplianceSummaryItems []ResourceComplianceSummaryItem `type:"list"`
 }
 
 // String returns the string representation
@@ -19048,13 +19646,13 @@ type ModifyDocumentPermissionInput struct {
 
 	// The AWS user accounts that should have access to the document. The account
 	// IDs can either be a group of account IDs or All.
-	AccountIdsToAdd []string `locationNameList:"AccountId" type:"list"`
+	AccountIdsToAdd []string `type:"list"`
 
 	// The AWS user accounts that should no longer have access to the document.
 	// The AWS user account can either be a group of account IDs or All. This action
 	// has a higher priority than AccountIdsToAdd. If you specify an account ID
 	// to add and the same ID to remove, the system removes access to the document.
-	AccountIdsToRemove []string `locationNameList:"AccountId" type:"list"`
+	AccountIdsToRemove []string `type:"list"`
 
 	// The name of the document that you want to share.
 	//
@@ -19188,7 +19786,7 @@ type NotificationConfig struct {
 	// include the following: All (events), InProgress, Success, TimedOut, Cancelled,
 	// Failed. To learn more about these events, see Setting Up Events and Notifications
 	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
-	// in the Amazon EC2 Systems Manager User Guide.
+	// in the AWS Systems Manager User Guide.
 	NotificationEvents []NotificationEvent `type:"list"`
 
 	// Command: Receive notification when the status of a command changes. Invocation:
@@ -19239,6 +19837,9 @@ type Parameter struct {
 
 	// The parameter value.
 	Value *string `min:"1" type:"string"`
+
+	// The parameter version.
+	Version *int64 `type:"long"`
 }
 
 // String returns the string representation
@@ -19269,6 +19870,12 @@ func (s *Parameter) SetValue(v string) *Parameter {
 	return s
 }
 
+// SetVersion sets the Version field's value.
+func (s *Parameter) SetVersion(v int64) *Parameter {
+	s.Version = &v
+	return s
+}
+
 // Information about parameter usage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory
 type ParameterHistory struct {
@@ -19280,7 +19887,7 @@ type ParameterHistory struct {
 	AllowedPattern *string `type:"string"`
 
 	// Information about the parameter.
-	Description *string `min:"1" type:"string"`
+	Description *string `type:"string"`
 
 	// The ID of the query key used for this parameter.
 	KeyId *string `min:"1" type:"string"`
@@ -19299,6 +19906,9 @@ type ParameterHistory struct {
 
 	// The parameter value.
 	Value *string `min:"1" type:"string"`
+
+	// The parameter version.
+	Version *int64 `type:"long"`
 }
 
 // String returns the string representation
@@ -19359,6 +19969,12 @@ func (s *ParameterHistory) SetValue(v string) *ParameterHistory {
 	return s
 }
 
+// SetVersion sets the Version field's value.
+func (s *ParameterHistory) SetVersion(v int64) *ParameterHistory {
+	s.Version = &v
+	return s
+}
+
 // Metada includes information like the ARN of the last user and the date/time
 // the parameter was last used.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata
@@ -19371,7 +19987,7 @@ type ParameterMetadata struct {
 	AllowedPattern *string `type:"string"`
 
 	// Description of the parameter actions.
-	Description *string `min:"1" type:"string"`
+	Description *string `type:"string"`
 
 	// The ID of the query key used for this parameter.
 	KeyId *string `min:"1" type:"string"`
@@ -19388,6 +20004,9 @@ type ParameterMetadata struct {
 	// The type of parameter. Valid parameter types include the following: String,
 	// String list, Secure string.
 	Type ParameterType `type:"string" enum:"true"`
+
+	// The parameter version.
+	Version *int64 `type:"long"`
 }
 
 // String returns the string representation
@@ -19439,6 +20058,12 @@ func (s *ParameterMetadata) SetName(v string) *ParameterMetadata {
 // SetType sets the Type field's value.
 func (s *ParameterMetadata) SetType(v ParameterType) *ParameterMetadata {
 	s.Type = v
+	return s
+}
+
+// SetVersion sets the Version field's value.
+func (s *ParameterMetadata) SetVersion(v int64) *ParameterMetadata {
+	s.Version = &v
 	return s
 }
 
@@ -19722,9 +20347,8 @@ type PatchBaselineIdentity struct {
 	// default patch baseline for each operating system.
 	DefaultBaseline *bool `type:"boolean"`
 
-	// Defines the operating system the patch baseline applies to. Supported operating
-	// systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX.
-	// The Default value is WINDOWS.
+	// Defines the operating system the patch baseline applies to. The Default value
+	// is WINDOWS.
 	OperatingSystem OperatingSystem `type:"string" enum:"true"`
 }
 
@@ -20379,7 +21003,7 @@ type PutInventoryInput struct {
 	// The inventory items that you want to add or update on instances.
 	//
 	// Items is a required field
-	Items []InventoryItem `locationNameList:"Item" min:"1" type:"list" required:"true"`
+	Items []InventoryItem `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -20463,15 +21087,21 @@ type PutParameterInput struct {
 	// AllowedPattern=^\d+$
 	AllowedPattern *string `type:"string"`
 
-	// Information about the parameter that you want to add to the system
-	Description *string `min:"1" type:"string"`
+	// Information about the parameter that you want to add to the system.
+	Description *string `type:"string"`
 
 	// The KMS Key ID that you want to use to encrypt a parameter when you choose
 	// the SecureString data type. If you don't specify a key ID, the system uses
 	// the default key associated with your AWS account.
 	KeyId *string `min:"1" type:"string"`
 
-	// The name of the parameter that you want to add to the system.
+	// The fully qualified name of the parameter that you want to add to the system.
+	// The fully qualified name includes the complete hierarchy of the parameter
+	// path and name. For example: /Dev/DBServer/MySQL/db-string13
+	//
+	// The maximum length constraint listed below includes capacity for additional
+	// system attributes that are not part of the name. The maximum length for the
+	// fully qualified parameter name is 1011 characters.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -20503,9 +21133,6 @@ func (s PutParameterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutParameterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutParameterInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
@@ -20580,6 +21207,14 @@ type PutParameterOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
+
+	// The new version number of a parameter. If you edit a parameter value, Parameter
+	// Store automatically creates a new version and assigns this new version a
+	// unique ID. You can reference a parameter version ID in API actions or in
+	// Systems Manager documents (SSM documents). By default, if you don't specify
+	// a specific version, the system returns the latest parameter value when a
+	// parameter is called.
+	Version *int64 `type:"long"`
 }
 
 // String returns the string representation
@@ -20595,6 +21230,12 @@ func (s PutParameterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutParameterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// SetVersion sets the Version field's value.
+func (s *PutParameterOutput) SetVersion(v int64) *PutParameterOutput {
+	s.Version = &v
+	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaselineRequest
@@ -21287,6 +21928,41 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Information about targets that resolved during the Automation execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResolvedTargets
+type ResolvedTargets struct {
+	_ struct{} `type:"structure"`
+
+	// A list of parameter values sent to targets that resolved during the Automation
+	// execution.
+	ParameterValues []string `type:"list"`
+
+	// A boolean value indicating whether the resolved target list is truncated.
+	Truncated *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ResolvedTargets) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResolvedTargets) GoString() string {
+	return s.String()
+}
+
+// SetParameterValues sets the ParameterValues field's value.
+func (s *ResolvedTargets) SetParameterValues(v []string) *ResolvedTargets {
+	s.ParameterValues = v
+	return s
+}
+
+// SetTruncated sets the Truncated field's value.
+func (s *ResolvedTargets) SetTruncated(v bool) *ResolvedTargets {
+	s.Truncated = &v
+	return s
 }
 
 // Compliance summary information for a specific resource.
@@ -22120,9 +22796,41 @@ type StartAutomationExecutionInput struct {
 	// The version of the Automation document to use for this execution.
 	DocumentVersion *string `type:"string"`
 
+	// The maximum number of targets allowed to run this task in parallel. You can
+	// specify a number, such as 10, or a percentage, such as 10%. The default value
+	// is 10.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The number of errors that are allowed before the system stops running the
+	// automation on additional targets. You can specify either an absolute number
+	// of errors, for example 10, or a percentage of the target set, for example
+	// 10%. If you specify 3, for example, the system stops running the automation
+	// when the fourth error is received. If you specify 0, then the system stops
+	// running the automation on additional targets after the first error result
+	// is returned. If you run an automation on 50 resources and set max-errors
+	// to 10%, then the system stops running the automation on additional targets
+	// when the sixth error is received.
+	//
+	// Executions that are already running an automation when max-errors is reached
+	// are allowed to complete, but some of these executions may fail as well. If
+	// you need to ensure that there won't be more than max-errors failed executions,
+	// set max-concurrency to 1 so the executions proceed one at a time.
+	MaxErrors *string `min:"1" type:"string"`
+
+	// The execution mode of the automation. Valid modes include the following:
+	// Auto and Interactive. The default mode is Auto.
+	Mode ExecutionMode `type:"string" enum:"true"`
+
 	// A key-value map of execution parameters, which match the declared parameters
 	// in the Automation document.
 	Parameters map[string][]string `min:"1" type:"map"`
+
+	// The name of the parameter used as the target resource for the rate-controlled
+	// execution. Required if you specify Targets.
+	TargetParameterName *string `min:"1" type:"string"`
+
+	// A key-value mapping to target resources. Required if you specify TargetParameterName.
+	Targets []Target `type:"list"`
 }
 
 // String returns the string representation
@@ -22145,8 +22853,24 @@ func (s *StartAutomationExecutionInput) Validate() error {
 	if s.DocumentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentName"))
 	}
+	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
+	}
+	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
+	}
 	if s.Parameters != nil && len(s.Parameters) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
+	}
+	if s.TargetParameterName != nil && len(*s.TargetParameterName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetParameterName", 1))
+	}
+	if s.Targets != nil {
+		for i, v := range s.Targets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22173,9 +22897,39 @@ func (s *StartAutomationExecutionInput) SetDocumentVersion(v string) *StartAutom
 	return s
 }
 
+// SetMaxConcurrency sets the MaxConcurrency field's value.
+func (s *StartAutomationExecutionInput) SetMaxConcurrency(v string) *StartAutomationExecutionInput {
+	s.MaxConcurrency = &v
+	return s
+}
+
+// SetMaxErrors sets the MaxErrors field's value.
+func (s *StartAutomationExecutionInput) SetMaxErrors(v string) *StartAutomationExecutionInput {
+	s.MaxErrors = &v
+	return s
+}
+
+// SetMode sets the Mode field's value.
+func (s *StartAutomationExecutionInput) SetMode(v ExecutionMode) *StartAutomationExecutionInput {
+	s.Mode = v
+	return s
+}
+
 // SetParameters sets the Parameters field's value.
 func (s *StartAutomationExecutionInput) SetParameters(v map[string][]string) *StartAutomationExecutionInput {
 	s.Parameters = v
+	return s
+}
+
+// SetTargetParameterName sets the TargetParameterName field's value.
+func (s *StartAutomationExecutionInput) SetTargetParameterName(v string) *StartAutomationExecutionInput {
+	s.TargetParameterName = &v
+	return s
+}
+
+// SetTargets sets the Targets field's value.
+func (s *StartAutomationExecutionInput) SetTargets(v []Target) *StartAutomationExecutionInput {
+	s.Targets = v
 	return s
 }
 
@@ -22236,8 +22990,18 @@ type StepExecution struct {
 	// Fully-resolved values passed into the step before execution.
 	Inputs map[string]string `type:"map"`
 
+	// The maximum number of tries to run the action of the step. The default value
+	// is 1.
+	MaxAttempts *int64 `type:"integer"`
+
+	// The action to take if the step fails. The default value is Abort.
+	OnFailure *string `type:"string"`
+
 	// Returned values from the execution of the step.
 	Outputs map[string][]string `min:"1" type:"map"`
+
+	// A user-specified list of parameters to override when executing a step.
+	OverriddenParameters map[string][]string `min:"1" type:"map"`
 
 	// A message associated with the response code for an execution.
 	Response *string `type:"string"`
@@ -22245,12 +23009,18 @@ type StepExecution struct {
 	// The response code returned by the execution of the step.
 	ResponseCode *string `type:"string"`
 
+	// The unique ID of a step execution.
+	StepExecutionId *string `type:"string"`
+
 	// The name of this execution step.
 	StepName *string `type:"string"`
 
 	// The execution status for this step. Valid values include: Pending, InProgress,
 	// Success, Cancelled, Failed, and TimedOut.
 	StepStatus AutomationExecutionStatus `type:"string" enum:"true"`
+
+	// The timeout seconds of the step.
+	TimeoutSeconds *int64 `type:"long"`
 }
 
 // String returns the string representation
@@ -22299,9 +23069,27 @@ func (s *StepExecution) SetInputs(v map[string]string) *StepExecution {
 	return s
 }
 
+// SetMaxAttempts sets the MaxAttempts field's value.
+func (s *StepExecution) SetMaxAttempts(v int64) *StepExecution {
+	s.MaxAttempts = &v
+	return s
+}
+
+// SetOnFailure sets the OnFailure field's value.
+func (s *StepExecution) SetOnFailure(v string) *StepExecution {
+	s.OnFailure = &v
+	return s
+}
+
 // SetOutputs sets the Outputs field's value.
 func (s *StepExecution) SetOutputs(v map[string][]string) *StepExecution {
 	s.Outputs = v
+	return s
+}
+
+// SetOverriddenParameters sets the OverriddenParameters field's value.
+func (s *StepExecution) SetOverriddenParameters(v map[string][]string) *StepExecution {
+	s.OverriddenParameters = v
 	return s
 }
 
@@ -22317,6 +23105,12 @@ func (s *StepExecution) SetResponseCode(v string) *StepExecution {
 	return s
 }
 
+// SetStepExecutionId sets the StepExecutionId field's value.
+func (s *StepExecution) SetStepExecutionId(v string) *StepExecution {
+	s.StepExecutionId = &v
+	return s
+}
+
 // SetStepName sets the StepName field's value.
 func (s *StepExecution) SetStepName(v string) *StepExecution {
 	s.StepName = &v
@@ -22329,6 +23123,73 @@ func (s *StepExecution) SetStepStatus(v AutomationExecutionStatus) *StepExecutio
 	return s
 }
 
+// SetTimeoutSeconds sets the TimeoutSeconds field's value.
+func (s *StepExecution) SetTimeoutSeconds(v int64) *StepExecution {
+	s.TimeoutSeconds = &v
+	return s
+}
+
+// A filter to limit the amount of step execution information returned by the
+// call.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecutionFilter
+type StepExecutionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// One or more keys to limit the results. Valid filter keys include the following:
+	// StepName, Action, StepExecutionId, StepExecutionStatus, StartTimeBefore,
+	// StartTimeAfter.
+	//
+	// Key is a required field
+	Key StepExecutionFilterKey `type:"string" required:"true" enum:"true"`
+
+	// The values of the filter key.
+	//
+	// Values is a required field
+	Values []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s StepExecutionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StepExecutionFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StepExecutionFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StepExecutionFilter"}
+	if len(s.Key) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetKey sets the Key field's value.
+func (s *StepExecutionFilter) SetKey(v StepExecutionFilterKey) *StepExecutionFilter {
+	s.Key = v
+	return s
+}
+
+// SetValues sets the Values field's value.
+func (s *StepExecutionFilter) SetValues(v []string) *StepExecutionFilter {
+	s.Values = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecutionRequest
 type StopAutomationExecutionInput struct {
 	_ struct{} `type:"structure"`
@@ -22337,6 +23198,10 @@ type StopAutomationExecutionInput struct {
 	//
 	// AutomationExecutionId is a required field
 	AutomationExecutionId *string `min:"36" type:"string" required:"true"`
+
+	// The stop request type. Valid types include the following: Cancel and Complete.
+	// The default type is Cancel.
+	Type StopType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -22369,6 +23234,12 @@ func (s *StopAutomationExecutionInput) Validate() error {
 // SetAutomationExecutionId sets the AutomationExecutionId field's value.
 func (s *StopAutomationExecutionInput) SetAutomationExecutionId(v string) *StopAutomationExecutionInput {
 	s.AutomationExecutionId = &v
+	return s
+}
+
+// SetType sets the Type field's value.
+func (s *StopAutomationExecutionInput) SetType(v StopType) *StopAutomationExecutionInput {
+	s.Type = v
 	return s
 }
 
@@ -22878,6 +23749,10 @@ type UpdateDocumentInput struct {
 	// Content is a required field
 	Content *string `min:"1" type:"string" required:"true"`
 
+	// Specify the document format for the new document version. Systems Manager
+	// supports JSON and YAML documents. JSON is the default format.
+	DocumentFormat DocumentFormat `type:"string" enum:"true"`
+
 	// The version of the document that you want to update.
 	DocumentVersion *string `type:"string"`
 
@@ -22885,6 +23760,9 @@ type UpdateDocumentInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// Specify a new target type for the document.
+	TargetType *string `type:"string"`
 }
 
 // String returns the string representation
@@ -22924,6 +23802,12 @@ func (s *UpdateDocumentInput) SetContent(v string) *UpdateDocumentInput {
 	return s
 }
 
+// SetDocumentFormat sets the DocumentFormat field's value.
+func (s *UpdateDocumentInput) SetDocumentFormat(v DocumentFormat) *UpdateDocumentInput {
+	s.DocumentFormat = v
+	return s
+}
+
 // SetDocumentVersion sets the DocumentVersion field's value.
 func (s *UpdateDocumentInput) SetDocumentVersion(v string) *UpdateDocumentInput {
 	s.DocumentVersion = &v
@@ -22933,6 +23817,12 @@ func (s *UpdateDocumentInput) SetDocumentVersion(v string) *UpdateDocumentInput 
 // SetName sets the Name field's value.
 func (s *UpdateDocumentInput) SetName(v string) *UpdateDocumentInput {
 	s.Name = &v
+	return s
+}
+
+// SetTargetType sets the TargetType field's value.
+func (s *UpdateDocumentInput) SetTargetType(v string) *UpdateDocumentInput {
+	s.TargetType = &v
 	return s
 }
 
@@ -24097,6 +24987,11 @@ type AutomationExecutionFilterKey string
 const (
 	AutomationExecutionFilterKeyDocumentNamePrefix AutomationExecutionFilterKey = "DocumentNamePrefix"
 	AutomationExecutionFilterKeyExecutionStatus    AutomationExecutionFilterKey = "ExecutionStatus"
+	AutomationExecutionFilterKeyExecutionId        AutomationExecutionFilterKey = "ExecutionId"
+	AutomationExecutionFilterKeyParentExecutionId  AutomationExecutionFilterKey = "ParentExecutionId"
+	AutomationExecutionFilterKeyCurrentAction      AutomationExecutionFilterKey = "CurrentAction"
+	AutomationExecutionFilterKeyStartTimeBefore    AutomationExecutionFilterKey = "StartTimeBefore"
+	AutomationExecutionFilterKeyStartTimeAfter     AutomationExecutionFilterKey = "StartTimeAfter"
 )
 
 type AutomationExecutionStatus string
@@ -24108,6 +25003,7 @@ const (
 	AutomationExecutionStatusWaiting    AutomationExecutionStatus = "Waiting"
 	AutomationExecutionStatusSuccess    AutomationExecutionStatus = "Success"
 	AutomationExecutionStatusTimedOut   AutomationExecutionStatus = "TimedOut"
+	AutomationExecutionStatusCancelling AutomationExecutionStatus = "Cancelling"
 	AutomationExecutionStatusCancelled  AutomationExecutionStatus = "Cancelled"
 	AutomationExecutionStatusFailed     AutomationExecutionStatus = "Failed"
 )
@@ -24210,6 +25106,14 @@ const (
 	DocumentFilterKeyDocumentType  DocumentFilterKey = "DocumentType"
 )
 
+type DocumentFormat string
+
+// Enum values for DocumentFormat
+const (
+	DocumentFormatYaml DocumentFormat = "YAML"
+	DocumentFormatJson DocumentFormat = "JSON"
+)
+
 type DocumentHashType string
 
 // Enum values for DocumentHashType
@@ -24250,6 +25154,14 @@ const (
 	DocumentTypeCommand    DocumentType = "Command"
 	DocumentTypePolicy     DocumentType = "Policy"
 	DocumentTypeAutomation DocumentType = "Automation"
+)
+
+type ExecutionMode string
+
+// Enum values for ExecutionMode
+const (
+	ExecutionModeAuto        ExecutionMode = "Auto"
+	ExecutionModeInteractive ExecutionMode = "Interactive"
 )
 
 type Fault string
@@ -24494,6 +25406,29 @@ type SignalType string
 
 // Enum values for SignalType
 const (
-	SignalTypeApprove SignalType = "Approve"
-	SignalTypeReject  SignalType = "Reject"
+	SignalTypeApprove   SignalType = "Approve"
+	SignalTypeReject    SignalType = "Reject"
+	SignalTypeStartStep SignalType = "StartStep"
+	SignalTypeStopStep  SignalType = "StopStep"
+	SignalTypeResume    SignalType = "Resume"
+)
+
+type StepExecutionFilterKey string
+
+// Enum values for StepExecutionFilterKey
+const (
+	StepExecutionFilterKeyStartTimeBefore     StepExecutionFilterKey = "StartTimeBefore"
+	StepExecutionFilterKeyStartTimeAfter      StepExecutionFilterKey = "StartTimeAfter"
+	StepExecutionFilterKeyStepExecutionStatus StepExecutionFilterKey = "StepExecutionStatus"
+	StepExecutionFilterKeyStepExecutionId     StepExecutionFilterKey = "StepExecutionId"
+	StepExecutionFilterKeyStepName            StepExecutionFilterKey = "StepName"
+	StepExecutionFilterKeyAction              StepExecutionFilterKey = "Action"
+)
+
+type StopType string
+
+// Enum values for StopType
+const (
+	StopTypeComplete StopType = "Complete"
+	StopTypeCancel   StopType = "Cancel"
 )

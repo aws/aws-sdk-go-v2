@@ -73,6 +73,8 @@ type ECRAPI interface {
 
 	CreateRepositoryRequest(*ecr.CreateRepositoryInput) ecr.CreateRepositoryRequest
 
+	DeleteLifecyclePolicyRequest(*ecr.DeleteLifecyclePolicyInput) ecr.DeleteLifecyclePolicyRequest
+
 	DeleteRepositoryRequest(*ecr.DeleteRepositoryInput) ecr.DeleteRepositoryRequest
 
 	DeleteRepositoryPolicyRequest(*ecr.DeleteRepositoryPolicyInput) ecr.DeleteRepositoryPolicyRequest
@@ -91,6 +93,10 @@ type ECRAPI interface {
 
 	GetDownloadUrlForLayerRequest(*ecr.GetDownloadUrlForLayerInput) ecr.GetDownloadUrlForLayerRequest
 
+	GetLifecyclePolicyRequest(*ecr.GetLifecyclePolicyInput) ecr.GetLifecyclePolicyRequest
+
+	GetLifecyclePolicyPreviewRequest(*ecr.GetLifecyclePolicyPreviewInput) ecr.GetLifecyclePolicyPreviewRequest
+
 	GetRepositoryPolicyRequest(*ecr.GetRepositoryPolicyInput) ecr.GetRepositoryPolicyRequest
 
 	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
@@ -102,7 +108,11 @@ type ECRAPI interface {
 
 	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 
+	PutLifecyclePolicyRequest(*ecr.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
+
 	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
+
+	StartLifecyclePolicyPreviewRequest(*ecr.StartLifecyclePolicyPreviewInput) ecr.StartLifecyclePolicyPreviewRequest
 
 	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
 }

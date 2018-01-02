@@ -66,6 +66,8 @@ func ExampleOrganizations_AcceptHandshakeRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeAccessDeniedForDependencyException:
+				fmt.Println(organizations.ErrCodeAccessDeniedForDependencyException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -337,6 +339,8 @@ func ExampleOrganizations_CreateOrganizationRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeAccessDeniedForDependencyException:
+				fmt.Println(organizations.ErrCodeAccessDeniedForDependencyException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -387,6 +391,8 @@ func ExampleOrganizations_CreateOrganizationRequest_shared01() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeAccessDeniedForDependencyException:
+				fmt.Println(organizations.ErrCodeAccessDeniedForDependencyException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

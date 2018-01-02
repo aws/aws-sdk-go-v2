@@ -33,8 +33,8 @@ func (r AddTagsToStreamRequest) Send() (*AddTagsToStreamOutput, error) {
 // AddTagsToStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Adds or updates tags for the specified Amazon Kinesis stream. Each stream
-// can have up to 10 tags.
+// Adds or updates tags for the specified Kinesis stream. Each stream can have
+// up to 10 tags.
 //
 // If tags have already been assigned to the stream, AddTagsToStream overwrites
 // any existing tags that correspond to the specified tag keys.
@@ -88,8 +88,8 @@ func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 // CreateStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Creates an Amazon Kinesis stream. A stream captures and transports data records
-// that are continuously emitted from different data sources or producers. Scale-out
+// Creates a Kinesis stream. A stream captures and transports data records that
+// are continuously emitted from different data sources or producers. Scale-out
 // within a stream is explicitly supported by means of shards, which are uniquely
 // identified groups of data records in a stream.
 //
@@ -97,8 +97,8 @@ func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 // Each shard can support reads up to 5 transactions per second, up to a maximum
 // data read total of 2 MB per second. Each shard can support writes up to 1,000
 // records per second, up to a maximum data write total of 1 MB per second.
-// You can add shards to a stream if the amount of data input increases and
-// you can remove shards if the amount of data input decreases.
+// I the amount of data input increases or decreases, you can add or remove
+// shards.
 //
 // The stream name identifies the stream. The name is scoped to the AWS account
 // used by the application. It is also scoped by region. That is, two streams
@@ -106,12 +106,12 @@ func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 // same account, but in two different regions, can have the same name.
 //
 // CreateStream is an asynchronous operation. Upon receiving a CreateStream
-// request, Amazon Kinesis immediately returns and sets the stream status to
-// CREATING. After the stream is created, Amazon Kinesis sets the stream status
+// request, Kinesis Streams immediately returns and sets the stream status to
+// CREATING. After the stream is created, Kinesis Streams sets the stream status
 // to ACTIVE. You should perform read and write operations only on an ACTIVE
 // stream.
 //
-// You receive a LimitExceededException when making a CreateStream request if
+// You receive a LimitExceededException when making a CreateStream request when
 // you try to do one of the following:
 //
 //    * Have more than five streams in the CREATING state at any point in time.
@@ -119,8 +119,8 @@ func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 //    * Create more shards than are authorized for your account.
 //
 // For the default shard limit for an AWS account, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
-// in the Amazon Kinesis Streams Developer Guide. If you need to increase this
-// limit, contact AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
+// in the Amazon Kinesis Streams Developer Guide. To increase this limit, contact
+// AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
 //
 // You can use DescribeStream to check the stream status, which is returned
 // in StreamStatus.
@@ -176,9 +176,9 @@ func (r DecreaseStreamRetentionPeriodRequest) Send() (*DecreaseStreamRetentionPe
 // DecreaseStreamRetentionPeriodRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Decreases the Amazon Kinesis stream's retention period, which is the length
-// of time data records are accessible after they are added to the stream. The
-// minimum value of a stream's retention period is 24 hours.
+// Decreases the Kinesis stream's retention period, which is the length of time
+// data records are accessible after they are added to the stream. The minimum
+// value of a stream's retention period is 24 hours.
 //
 // This operation may result in lost data. For example, if the stream's retention
 // period is 48 hours and is decreased to 24 hours, any data already in the
@@ -233,16 +233,16 @@ func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
 // DeleteStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Deletes an Amazon Kinesis stream and all its shards and data. You must shut
-// down any applications that are operating on the stream before you delete
-// the stream. If an application attempts to operate on a deleted stream, it
-// will receive the exception ResourceNotFoundException.
+// Deletes a Kinesis stream and all its shards and data. You must shut down
+// any applications that are operating on the stream before you delete the stream.
+// If an application attempts to operate on a deleted stream, it receives the
+// exception ResourceNotFoundException.
 //
 // If the stream is in the ACTIVE state, you can delete it. After a DeleteStream
-// request, the specified stream is in the DELETING state until Amazon Kinesis
+// request, the specified stream is in the DELETING state until Kinesis Streams
 // completes the deletion.
 //
-// Note: Amazon Kinesis might continue to accept data read and write operations,
+// Note: Kinesis Streams might continue to accept data read and write operations,
 // such as PutRecord, PutRecords, and GetRecords, on a stream in the DELETING
 // state until the stream deletion is complete.
 //
@@ -357,7 +357,7 @@ func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
 // DescribeStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Describes the specified Amazon Kinesis stream.
+// Describes the specified Kinesis stream.
 //
 // The information returned includes the stream name, Amazon Resource Name (ARN),
 // creation time, enhanced metric configuration, and shard map. The shard map
@@ -459,6 +459,60 @@ func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *Describ
 	return p.Err()
 }
 
+const opDescribeStreamSummary = "DescribeStreamSummary"
+
+// DescribeStreamSummaryRequest is a API request type for the DescribeStreamSummary API operation.
+type DescribeStreamSummaryRequest struct {
+	*aws.Request
+	Input *DescribeStreamSummaryInput
+}
+
+// Send marshals and sends the DescribeStreamSummary API request.
+func (r DescribeStreamSummaryRequest) Send() (*DescribeStreamSummaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStreamSummaryOutput), nil
+}
+
+// DescribeStreamSummaryRequest returns a request value for making API operation for
+// Amazon Kinesis.
+//
+// Provides a summarized description of the specified Kinesis stream without
+// the shard list.
+//
+// The information returned includes the stream name, Amazon Resource Name (ARN),
+// status, record retention period, approximate creation time, monitoring, encryption
+// details, and open shard count.
+//
+//    // Example sending a request using the DescribeStreamSummaryRequest method.
+//    req := client.DescribeStreamSummaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary
+func (c *Kinesis) DescribeStreamSummaryRequest(input *DescribeStreamSummaryInput) DescribeStreamSummaryRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStreamSummary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeStreamSummaryInput{}
+	}
+
+	output := &DescribeStreamSummaryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeStreamSummaryRequest{Request: req, Input: input}
+}
+
 const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 
 // DisableEnhancedMonitoringRequest is a API request type for the DisableEnhancedMonitoring API operation.
@@ -529,7 +583,7 @@ func (r EnableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput
 // EnableEnhancedMonitoringRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Enables enhanced Amazon Kinesis stream monitoring for shard-level metrics.
+// Enables enhanced Kinesis stream monitoring for shard-level metrics.
 //
 //    // Example sending a request using the EnableEnhancedMonitoringRequest method.
 //    req := client.EnableEnhancedMonitoringRequest(params)
@@ -578,14 +632,14 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 // GetRecordsRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Gets data records from an Amazon Kinesis stream's shard.
+// Gets data records from a Kinesis stream's shard.
 //
 // Specify a shard iterator using the ShardIterator parameter. The shard iterator
 // specifies the position in the shard from which you want to start reading
 // data records sequentially. If there are no records available in the portion
 // of the shard that the iterator points to, GetRecords returns an empty list.
-// Note that it might take multiple calls to get to a portion of the shard that
-// contains records.
+// It might take multiple calls to get to a portion of the shard that contains
+// records.
 //
 // You can scale by provisioning multiple shards per stream while considering
 // service limits (for more information, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
@@ -594,12 +648,11 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 // from a stream continually, call GetRecords in a loop. Use GetShardIterator
 // to get the shard iterator to specify in the first GetRecords call. GetRecords
 // returns a new shard iterator in NextShardIterator. Specify the shard iterator
-// returned in NextShardIterator in subsequent calls to GetRecords. Note that
-// if the shard has been closed, the shard iterator can't return more data and
-// GetRecords returns null in NextShardIterator. You can terminate the loop
-// when the shard is closed, or when the shard iterator reaches the record with
-// the sequence number or other attribute that marks it as the last record to
-// process.
+// returned in NextShardIterator in subsequent calls to GetRecords. If the shard
+// has been closed, the shard iterator can't return more data and GetRecords
+// returns null in NextShardIterator. You can terminate the loop when the shard
+// is closed, or when the shard iterator reaches the record with the sequence
+// number or other attribute that marks it as the last record to process.
 //
 // Each data record can be up to 1 MB in size, and each shard can read up to
 // 2 MB per second. You can ensure that your calls don't exceed the maximum
@@ -612,10 +665,10 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 // If a call returns this amount of data, subsequent calls made within the next
 // 5 seconds throw ProvisionedThroughputExceededException. If there is insufficient
 // provisioned throughput on the shard, subsequent calls made within the next
-// 1 second throw ProvisionedThroughputExceededException. Note that GetRecords
-// won't return any data when it throws an exception. For this reason, we recommend
-// that you wait one second between calls to GetRecords; however, it's possible
-// that the application will get exceptions for longer than 1 second.
+// 1 second throw ProvisionedThroughputExceededException. GetRecords won't return
+// any data when it throws an exception. For this reason, we recommend that
+// you wait one second between calls to GetRecords; however, it's possible that
+// the application will get exceptions for longer than 1 second.
 //
 // To detect whether the application is falling behind in processing, you can
 // use the MillisBehindLatest response attribute. You can also monitor the stream
@@ -624,13 +677,13 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 //
 // Each Amazon Kinesis record includes a value, ApproximateArrivalTimestamp,
 // that is set when a stream successfully receives and stores a record. This
-// is commonly referred to as a server-side timestamp, whereas a client-side
-// timestamp is set when a data producer creates or sends the record to a stream
+// is commonly referred to as a server-side time stamp, whereas a client-side
+// time stamp is set when a data producer creates or sends the record to a stream
 // (a data producer is any data source putting data records into a stream, for
-// example with PutRecords). The timestamp has millisecond precision. There
-// are no guarantees about the timestamp accuracy, or that the timestamp is
+// example with PutRecords). The time stamp has millisecond precision. There
+// are no guarantees about the time stamp accuracy, or that the time stamp is
 // always increasing. For example, records in a shard or across a stream might
-// have timestamps that are out of order.
+// have time stamps that are out of order.
 //
 //    // Example sending a request using the GetRecordsRequest method.
 //    req := client.GetRecordsRequest(params)
@@ -690,14 +743,15 @@ func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
 //
 // You must specify the shard iterator type. For example, you can set the ShardIteratorType
 // parameter to read exactly from the position denoted by a specific sequence
-// number by using the AT_SEQUENCE_NUMBER shard iterator type, or right after
-// the sequence number by using the AFTER_SEQUENCE_NUMBER shard iterator type,
-// using sequence numbers returned by earlier calls to PutRecord, PutRecords,
-// GetRecords, or DescribeStream. In the request, you can specify the shard
-// iterator type AT_TIMESTAMP to read records from an arbitrary point in time,
-// TRIM_HORIZON to cause ShardIterator to point to the last untrimmed record
-// in the shard in the system (the oldest data record in the shard), or LATEST
-// so that you always read the most recent data in the shard.
+// number by using the AT_SEQUENCE_NUMBER shard iterator type. Alternatively,
+// the parameter can read right after the sequence number by using the AFTER_SEQUENCE_NUMBER
+// shard iterator type, using sequence numbers returned by earlier calls to
+// PutRecord, PutRecords, GetRecords, or DescribeStream. In the request, you
+// can specify the shard iterator type AT_TIMESTAMP to read records from an
+// arbitrary point in time, TRIM_HORIZON to cause ShardIterator to point to
+// the last untrimmed record in the shard in the system (the oldest data record
+// in the shard), or LATEST so that you always read the most recent data in
+// the shard.
 //
 // When you read repeatedly from a stream, use a GetShardIterator request to
 // get the first shard iterator for use in your first GetRecords request and
@@ -712,8 +766,8 @@ func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
 // in the Amazon Kinesis Streams Developer Guide.
 //
 // If the shard is closed, GetShardIterator returns a valid iterator for the
-// last sequence number of the shard. Note that a shard can be closed as a result
-// of using SplitShard or MergeShards.
+// last sequence number of the shard. A shard can be closed as a result of using
+// SplitShard or MergeShards.
 //
 // GetShardIterator has a limit of 5 transactions per second per account per
 // open shard.
@@ -769,13 +823,13 @@ func (r IncreaseStreamRetentionPeriodRequest) Send() (*IncreaseStreamRetentionPe
 // of time data records are accessible after they are added to the stream. The
 // maximum value of a stream's retention period is 168 hours (7 days).
 //
-// Upon choosing a longer stream retention period, this operation will increase
-// the time period records are accessible that have not yet expired. However,
-// it will not make previous data that has expired (older than the stream's
+// If you choose a longer stream retention period, this operation increases
+// the time period during which records that have not yet expired are accessible.
+// However, it does not make previous, expired data (older than the stream's
 // previous retention period) accessible after the operation has been called.
 // For example, if a stream's retention period is set to 24 hours and is increased
-// to 168 hours, any data that is older than 24 hours will remain inaccessible
-// to consumer applications.
+// to 168 hours, any data that is older than 24 hours remains inaccessible to
+// consumer applications.
 //
 //    // Example sending a request using the IncreaseStreamRetentionPeriodRequest method.
 //    req := client.IncreaseStreamRetentionPeriodRequest(params)
@@ -826,12 +880,12 @@ func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
 // ListStreamsRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Lists your Amazon Kinesis streams.
+// Lists your Kinesis streams.
 //
 // The number of streams may be too large to return from a single call to ListStreams.
 // You can limit the number of returned streams using the Limit parameter. If
-// you do not specify a value for the Limit parameter, Amazon Kinesis uses the
-// default limit, which is currently 10.
+// you do not specify a value for the Limit parameter, Kinesis Streams uses
+// the default limit, which is currently 10.
 //
 // You can detect if there are more streams available to list by using the HasMoreStreams
 // flag from the returned output. If there are more streams available, you can
@@ -946,7 +1000,7 @@ func (r ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
 // ListTagsForStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Lists the tags for the specified Amazon Kinesis stream.
+// Lists the tags for the specified Kinesis stream.
 //
 //    // Example sending a request using the ListTagsForStreamRequest method.
 //    req := client.ListTagsForStreamRequest(params)
@@ -995,15 +1049,14 @@ func (r MergeShardsRequest) Send() (*MergeShardsOutput, error) {
 // MergeShardsRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Merges two adjacent shards in an Amazon Kinesis stream and combines them
-// into a single shard to reduce the stream's capacity to ingest and transport
-// data. Two shards are considered adjacent if the union of the hash key ranges
-// for the two shards form a contiguous set with no gaps. For example, if you
-// have two shards, one with a hash key range of 276...381 and the other with
-// a hash key range of 382...454, then you could merge these two shards into
-// a single shard that would have a hash key range of 276...454. After the merge,
-// the single child shard receives data for all hash key values covered by the
-// two parent shards.
+// Merges two adjacent shards in a Kinesis stream and combines them into a single
+// shard to reduce the stream's capacity to ingest and transport data. Two shards
+// are considered adjacent if the union of the hash key ranges for the two shards
+// form a contiguous set with no gaps. For example, if you have two shards,
+// one with a hash key range of 276...381 and the other with a hash key range
+// of 382...454, then you could merge these two shards into a single shard that
+// would have a hash key range of 276...454. After the merge, the single child
+// shard receives data for all hash key values covered by the two parent shards.
 //
 // MergeShards is called when there is a need to reduce the overall capacity
 // of a stream because of excess capacity that is not being used. You must specify
@@ -1030,7 +1083,7 @@ func (r MergeShardsRequest) Send() (*MergeShardsOutput, error) {
 // If you try to operate on too many streams in parallel using CreateStream,
 // DeleteStream, MergeShards or SplitShard, you will receive a LimitExceededException.
 //
-// MergeShards has limit of 5 transactions per second per account.
+// MergeShards has a limit of 5 transactions per second per account.
 //
 //    // Example sending a request using the MergeShardsRequest method.
 //    req := client.MergeShardsRequest(params)
@@ -1092,10 +1145,10 @@ func (r PutRecordRequest) Send() (*PutRecordOutput, error) {
 // The data blob can be any type of data; for example, a segment from a log
 // file, geographic/location data, website clickstream data, and so on.
 //
-// The partition key is used by Amazon Kinesis to distribute data across shards.
-// Amazon Kinesis segregates the data records that belong to a stream into multiple
-// shards, using the partition key associated with each data record to determine
-// which shard a given data record belongs to.
+// The partition key is used by Kinesis Streams to distribute data across shards.
+// Kinesis Streams segregates the data records that belong to a stream into
+// multiple shards, using the partition key associated with each data record
+// to determine the shard to which a given data record belongs.
 //
 // Partition keys are Unicode strings, with a maximum length limit of 256 characters
 // for each key. An MD5 hash function is used to map partition keys to 128-bit
@@ -1168,9 +1221,9 @@ func (r PutRecordsRequest) Send() (*PutRecordsOutput, error) {
 // PutRecordsRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Writes multiple data records into an Amazon Kinesis stream in a single call
-// (also referred to as a PutRecords request). Use this operation to send data
-// into the stream for data ingestion and processing.
+// Writes multiple data records into a Kinesis stream in a single call (also
+// referred to as a PutRecords request). Use this operation to send data into
+// the stream for data ingestion and processing.
 //
 // Each PutRecords request can support up to 500 records. Each record in the
 // request can be as large as 1 MB, up to a limit of 5 MB for the entire request,
@@ -1185,10 +1238,10 @@ func (r PutRecordsRequest) Send() (*PutRecordsOutput, error) {
 // The data blob can be any type of data; for example, a segment from a log
 // file, geographic/location data, website clickstream data, and so on.
 //
-// The partition key is used by Amazon Kinesis as input to a hash function that
-// maps the partition key and associated data to a specific shard. An MD5 hash
-// function is used to map partition keys to 128-bit integer values and to map
-// associated data records to shards. As a result of this hashing mechanism,
+// The partition key is used by Kinesis Streams as input to a hash function
+// that maps the partition key and associated data to a specific shard. An MD5
+// hash function is used to map partition keys to 128-bit integer values and
+// to map associated data records to shards. As a result of this hashing mechanism,
 // all data records with the same partition key map to the same shard within
 // the stream. For more information, see Adding Data to a Stream (http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream)
 // in the Amazon Kinesis Streams Developer Guide.
@@ -1210,12 +1263,12 @@ func (r PutRecordsRequest) Send() (*PutRecordsOutput, error) {
 // PutRecords request. A single record failure does not stop the processing
 // of subsequent records.
 //
-// A successfully-processed record includes ShardId and SequenceNumber values.
+// A successfully processed record includes ShardId and SequenceNumber values.
 // The ShardId parameter identifies the shard in the stream where the record
 // is stored. The SequenceNumber parameter is an identifier assigned to the
 // put record, unique to all records in the stream.
 //
-// An unsuccessfully-processed record includes ErrorCode and ErrorMessage values.
+// An unsuccessfully processed record includes ErrorCode and ErrorMessage values.
 // ErrorCode reflects the type of error and can be one of the following values:
 // ProvisionedThroughputExceededException or InternalFailure. ErrorMessage provides
 // more detailed information about the ProvisionedThroughputExceededException
@@ -1275,7 +1328,7 @@ func (r RemoveTagsFromStreamRequest) Send() (*RemoveTagsFromStreamOutput, error)
 // RemoveTagsFromStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Removes tags from the specified Amazon Kinesis stream. Removed tags are deleted
+// Removes tags from the specified Kinesis stream. Removed tags are deleted
 // and cannot be recovered after this operation successfully completes.
 //
 // If you specify a tag that does not exist, it is ignored.
@@ -1329,22 +1382,22 @@ func (r SplitShardRequest) Send() (*SplitShardOutput, error) {
 // SplitShardRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Splits a shard into two new shards in the Amazon Kinesis stream to increase
-// the stream's capacity to ingest and transport data. SplitShard is called
-// when there is a need to increase the overall capacity of a stream because
-// of an expected increase in the volume of data records being ingested.
+// Splits a shard into two new shards in the Kinesis stream, to increase the
+// stream's capacity to ingest and transport data. SplitShard is called when
+// there is a need to increase the overall capacity of a stream because of an
+// expected increase in the volume of data records being ingested.
 //
 // You can also use SplitShard when a shard appears to be approaching its maximum
 // utilization; for example, the producers sending data into the specific shard
 // are suddenly sending more than previously anticipated. You can also call
-// SplitShard to increase stream capacity, so that more Amazon Kinesis applications
+// SplitShard to increase stream capacity, so that more Kinesis Streams applications
 // can simultaneously read data from the stream for real-time processing.
 //
 // You must specify the shard to be split and the new hash key, which is the
 // position in the shard where the shard gets split in two. In many cases, the
-// new hash key might simply be the average of the beginning and ending hash
-// key, but it can be any hash key value in the range being mapped into the
-// shard. For more information about splitting shards, see Split a Shard (http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html)
+// new hash key might be the average of the beginning and ending hash key, but
+// it can be any hash key value in the range being mapped into the shard. For
+// more information, see Split a Shard (http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html)
 // in the Amazon Kinesis Streams Developer Guide.
 //
 // You can use DescribeStream to determine the shard ID and hash key values
@@ -1352,8 +1405,8 @@ func (r SplitShardRequest) Send() (*SplitShardOutput, error) {
 // in the SplitShard request.
 //
 // SplitShard is an asynchronous operation. Upon receiving a SplitShard request,
-// Amazon Kinesis immediately returns a response and sets the stream status
-// to UPDATING. After the operation is completed, Amazon Kinesis sets the stream
+// Kinesis Streams immediately returns a response and sets the stream status
+// to UPDATING. After the operation is completed, Kinesis Streams sets the stream
 // status to ACTIVE. Read and write operations continue to work while the stream
 // is in the UPDATING state.
 //
@@ -1367,13 +1420,13 @@ func (r SplitShardRequest) Send() (*SplitShardOutput, error) {
 // receive a LimitExceededException.
 //
 // For the default shard limit for an AWS account, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
-// in the Amazon Kinesis Streams Developer Guide. If you need to increase this
-// limit, contact AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
+// in the Amazon Kinesis Streams Developer Guide. To increase this limit, contact
+// AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
 //
 // If you try to operate on too many streams simultaneously using CreateStream,
 // DeleteStream, MergeShards, and/or SplitShard, you receive a LimitExceededException.
 //
-// SplitShard has limit of 5 transactions per second per account.
+// SplitShard has a limit of 5 transactions per second per account.
 //
 //    // Example sending a request using the SplitShardRequest method.
 //    req := client.SplitShardRequest(params)
@@ -1428,20 +1481,20 @@ func (r StartStreamEncryptionRequest) Send() (*StartStreamEncryptionOutput, erro
 // stream.
 //
 // Starting encryption is an asynchronous operation. Upon receiving the request,
-// Amazon Kinesis returns immediately and sets the status of the stream to UPDATING.
-// After the update is complete, Amazon Kinesis sets the status of the stream
-// back to ACTIVE. Updating or applying encryption normally takes a few seconds
-// to complete but it can take minutes. You can continue to read and write data
-// to your stream while its status is UPDATING. Once the status of the stream
-// is ACTIVE, records written to the stream will begin to be encrypted.
+// Kinesis Streams returns immediately and sets the status of the stream to
+// UPDATING. After the update is complete, Kinesis Streams sets the status of
+// the stream back to ACTIVE. Updating or applying encryption normally takes
+// a few seconds to complete, but it can take minutes. You can continue to read
+// and write data to your stream while its status is UPDATING. Once the status
+// of the stream is ACTIVE, encryption begins for records written to the stream.
 //
 // API Limits: You can successfully apply a new AWS KMS key for server-side
-// encryption 25 times in a rolling 24 hour period.
+// encryption 25 times in a rolling 24-hour period.
 //
-// Note: It can take up to 5 seconds after the stream is in an ACTIVE status
-// before all records written to the stream are encrypted. After you’ve enabled
-// encryption, you can verify encryption was applied by inspecting the API response
-// from PutRecord or PutRecords.
+// Note: It can take up to five seconds after the stream is in an ACTIVE status
+// before all records written to the stream are encrypted. After you enable
+// encryption, you can verify that encryption is applied by inspecting the API
+// response from PutRecord or PutRecords.
 //
 //    // Example sending a request using the StartStreamEncryptionRequest method.
 //    req := client.StartStreamEncryptionRequest(params)
@@ -1495,20 +1548,20 @@ func (r StopStreamEncryptionRequest) Send() (*StopStreamEncryptionOutput, error)
 // Disables server-side encryption for a specified stream.
 //
 // Stopping encryption is an asynchronous operation. Upon receiving the request,
-// Amazon Kinesis returns immediately and sets the status of the stream to UPDATING.
-// After the update is complete, Amazon Kinesis sets the status of the stream
-// back to ACTIVE. Stopping encryption normally takes a few seconds to complete
-// but it can take minutes. You can continue to read and write data to your
-// stream while its status is UPDATING. Once the status of the stream is ACTIVE
-// records written to the stream will no longer be encrypted by the Amazon Kinesis
-// Streams service.
+// Kinesis Streams returns immediately and sets the status of the stream to
+// UPDATING. After the update is complete, Kinesis Streams sets the status of
+// the stream back to ACTIVE. Stopping encryption normally takes a few seconds
+// to complete, but it can take minutes. You can continue to read and write
+// data to your stream while its status is UPDATING. Once the status of the
+// stream is ACTIVE, records written to the stream are no longer encrypted by
+// Kinesis Streams.
 //
 // API Limits: You can successfully disable server-side encryption 25 times
-// in a rolling 24 hour period.
+// in a rolling 24-hour period.
 //
-// Note: It can take up to 5 seconds after the stream is in an ACTIVE status
+// Note: It can take up to five seconds after the stream is in an ACTIVE status
 // before all records written to the stream are no longer subject to encryption.
-// After you’ve disabled encryption, you can verify encryption was not applied
+// After you disabled encryption, you can verify that encryption is not applied
 // by inspecting the API response from PutRecord or PutRecords.
 //
 //    // Example sending a request using the StopStreamEncryptionRequest method.
@@ -1564,36 +1617,36 @@ func (r UpdateShardCountRequest) Send() (*UpdateShardCountOutput, error) {
 // shards.
 //
 // Updating the shard count is an asynchronous operation. Upon receiving the
-// request, Amazon Kinesis returns immediately and sets the status of the stream
-// to UPDATING. After the update is complete, Amazon Kinesis sets the status
+// request, Kinesis Streams returns immediately and sets the status of the stream
+// to UPDATING. After the update is complete, Kinesis Streams sets the status
 // of the stream back to ACTIVE. Depending on the size of the stream, the scaling
 // action could take a few minutes to complete. You can continue to read and
 // write data to your stream while its status is UPDATING.
 //
-// To update the shard count, Amazon Kinesis performs splits or merges on individual
+// To update the shard count, Kinesis Streams performs splits or merges on individual
 // shards. This can cause short-lived shards to be created, in addition to the
 // final shards. We recommend that you double or halve the shard count, as this
 // results in the fewest number of splits or merges.
 //
 // This operation has the following limits, which are per region per account
-// unless otherwise noted:
+// unless otherwise noted. You cannot:
 //
-//    * scale more than twice per rolling 24 hour period
+//    * Scale more than twice per rolling 24 hour period
 //
-//    * scale up above double your current shard count
+//    * Scale up to double your current shard count
 //
-//    * scale down below half your current shard count
+//    * Scale down below half your current shard count
 //
-//    * scale up above 200 shards in a stream
+//    * Scale up to more 500 shards in a stream
 //
-//    * scale a stream with more than 200 shards down unless the result is less
-//    than 200 shards
+//    * Scale a stream with more than 500 shards down unless the result is less
+//    than 500 shards
 //
-//    * scale up above the shard limits for your account
+//    * Scale up more the shard limits for your account
 //
 //    *
 //
-// For the default limits for an AWS account, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)in the Amazon Kinesis Streams Developer Guide. If you need to increase a limit, contact AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+// For the default limits for an AWS account, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)in the Amazon Kinesis Streams Developer Guide. To increase a limit, contact AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
 //
 //    // Example sending a request using the UpdateShardCountRequest method.
 //    req := client.UpdateShardCountRequest(params)
@@ -1721,8 +1774,8 @@ type CreateStreamInput struct {
 
 	// A name to identify the stream. The stream name is scoped to the AWS account
 	// used by the application that creates the stream. It is also scoped by region.
-	// That is, two streams in two different AWS accounts can have the same name,
-	// and two streams in the same AWS account but in two different regions can
+	// That is, two streams in two different AWS accounts can have the same name.
+	// Two streams in the same AWS account but in two different regions can also
 	// have the same name.
 	//
 	// StreamName is a required field
@@ -2111,6 +2164,82 @@ func (s *DescribeStreamOutput) SetStreamDescription(v *StreamDescription) *Descr
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummaryInput
+type DescribeStreamSummaryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the stream to describe.
+	//
+	// StreamName is a required field
+	StreamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeStreamSummaryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStreamSummaryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeStreamSummaryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamSummaryInput"}
+
+	if s.StreamName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
+	}
+	if s.StreamName != nil && len(*s.StreamName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetStreamName sets the StreamName field's value.
+func (s *DescribeStreamSummaryInput) SetStreamName(v string) *DescribeStreamSummaryInput {
+	s.StreamName = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummaryOutput
+type DescribeStreamSummaryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A StreamDescriptionSummary containing information about the stream.
+	//
+	// StreamDescriptionSummary is a required field
+	StreamDescriptionSummary *StreamDescriptionSummary `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeStreamSummaryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStreamSummaryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStreamSummaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetStreamDescriptionSummary sets the StreamDescriptionSummary field's value.
+func (s *DescribeStreamSummaryOutput) SetStreamDescriptionSummary(v *StreamDescriptionSummary) *DescribeStreamSummaryOutput {
+	s.StreamDescriptionSummary = v
+	return s
+}
+
 // Represents the input for DisableEnhancedMonitoring.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoringInput
 type DisableEnhancedMonitoringInput struct {
@@ -2144,7 +2273,7 @@ type DisableEnhancedMonitoringInput struct {
 	// ShardLevelMetrics is a required field
 	ShardLevelMetrics []MetricsName `min:"1" type:"list" required:"true"`
 
-	// The name of the Amazon Kinesis stream for which to disable enhanced monitoring.
+	// The name of the Kinesis stream for which to disable enhanced monitoring.
 	//
 	// StreamName is a required field
 	StreamName *string `min:"1" type:"string" required:"true"`
@@ -2296,7 +2425,7 @@ type EnableEnhancedMonitoringOutput struct {
 	// after the operation.
 	DesiredShardLevelMetrics []MetricsName `min:"1" type:"list"`
 
-	// The name of the Amazon Kinesis stream.
+	// The name of the Kinesis stream.
 	StreamName *string `min:"1" type:"string"`
 }
 
@@ -2449,13 +2578,13 @@ type GetRecordsOutput struct {
 
 	// The number of milliseconds the GetRecords response is from the tip of the
 	// stream, indicating how far behind current time the consumer is. A value of
-	// zero indicates record processing is caught up, and there are no new records
-	// to process at this moment.
+	// zero indicates that record processing is caught up, and there are no new
+	// records to process at this moment.
 	MillisBehindLatest *int64 `type:"long"`
 
 	// The next position in the shard from which to start sequentially reading data
 	// records. If set to null, the shard has been closed and the requested iterator
-	// will not return any more data.
+	// does not return any more data.
 	NextShardIterator *string `min:"1" type:"string"`
 
 	// The data records retrieved from the shard.
@@ -2502,7 +2631,7 @@ func (s *GetRecordsOutput) SetRecords(v []Record) *GetRecordsOutput {
 type GetShardIteratorInput struct {
 	_ struct{} `type:"structure"`
 
-	// The shard ID of the Amazon Kinesis shard to get the iterator for.
+	// The shard ID of the Kinesis Streams shard to get the iterator for.
 	//
 	// ShardId is a required field
 	ShardId *string `min:"1" type:"string" required:"true"`
@@ -2519,7 +2648,7 @@ type GetShardIteratorInput struct {
 	//    by a specific sequence number, provided in the value StartingSequenceNumber.
 	//
 	//    * AT_TIMESTAMP - Start reading from the position denoted by a specific
-	//    timestamp, provided in the value Timestamp.
+	//    time stamp, provided in the value Timestamp.
 	//
 	//    * TRIM_HORIZON - Start reading at the last untrimmed record in the shard
 	//    in the system, which is the oldest data record in the shard.
@@ -2539,13 +2668,13 @@ type GetShardIteratorInput struct {
 	// StreamName is a required field
 	StreamName *string `min:"1" type:"string" required:"true"`
 
-	// The timestamp of the data record from which to start reading. Used with shard
-	// iterator type AT_TIMESTAMP. A timestamp is the Unix epoch date with precision
-	// in milliseconds. For example, 2016-04-04T19:58:46.480-00:00 or 1459799926.480.
-	// If a record with this exact timestamp does not exist, the iterator returned
-	// is for the next (later) record. If the timestamp is older than the current
-	// trim horizon, the iterator returned is for the oldest untrimmed data record
-	// (TRIM_HORIZON).
+	// The time stamp of the data record from which to start reading. Used with
+	// shard iterator type AT_TIMESTAMP. A time stamp is the Unix epoch date with
+	// precision in milliseconds. For example, 2016-04-04T19:58:46.480-00:00 or
+	// 1459799926.480. If a record with this exact time stamp does not exist, the
+	// iterator returned is for the next (later) record. If the time stamp is older
+	// than the current trim horizon, the iterator returned is for the oldest untrimmed
+	// data record (TRIM_HORIZON).
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -3124,7 +3253,7 @@ type PutRecordInput struct {
 	// Guarantees strictly increasing sequence numbers, for puts from the same client
 	// and to the same partition key. Usage: set the SequenceNumberForOrdering of
 	// record n to the sequence number of record n-1 (as returned in the result
-	// when putting record n-1). If this parameter is not set, records will be coarsely
+	// when putting record n-1). If this parameter is not set, records are coarsely
 	// ordered based on arrival time.
 	SequenceNumberForOrdering *string `type:"string"`
 
@@ -3536,8 +3665,8 @@ func (s *PutRecordsResultEntry) SetShardId(v string) *PutRecordsResultEntry {
 	return s
 }
 
-// The unit of data of the Amazon Kinesis stream, which is composed of a sequence
-// number, a partition key, and a data blob.
+// The unit of data of the Kinesis stream, which is composed of a sequence number,
+// a partition key, and a data blob.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Record
 type Record struct {
 	_ struct{} `type:"structure"`
@@ -3545,11 +3674,11 @@ type Record struct {
 	// The approximate time that the record was inserted into the stream.
 	ApproximateArrivalTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The data blob. The data in the blob is both opaque and immutable to the Amazon
-	// Kinesis service, which does not inspect, interpret, or change the data in
-	// the blob in any way. When the data blob (the payload before base64-encoding)
-	// is added to the partition key size, the total size must not exceed the maximum
-	// record size (1 MB).
+	// The data blob. The data in the blob is both opaque and immutable to Kinesis
+	// Streams, which does not inspect, interpret, or change the data in the blob
+	// in any way. When the data blob (the payload before base64-encoding) is added
+	// to the partition key size, the total size must not exceed the maximum record
+	// size (1 MB).
 	//
 	// Data is automatically base64 encoded/decoded by the SDK.
 	//
@@ -3737,7 +3866,7 @@ func (s *SequenceNumberRange) SetStartingSequenceNumber(v string) *SequenceNumbe
 	return s
 }
 
-// A uniquely identified group of data records in an Amazon Kinesis stream.
+// A uniquely identified group of data records in a Kinesis stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Shard
 type Shard struct {
 	_ struct{} `type:"structure"`
@@ -3914,19 +4043,25 @@ func (s SplitShardOutput) SDKResponseMetadata() aws.Response {
 type StartStreamEncryptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The encryption type to use. This parameter can be one of the following values:
-	//
-	//    * NONE: Not valid for this operation. An InvalidOperationException will
-	//    be thrown.
-	//
-	//    * KMS: Use server-side encryption on the records in the stream using a
-	//    customer-managed KMS key.
+	// The encryption type to use. The only valid value is KMS.
 	//
 	// EncryptionType is a required field
 	EncryptionType EncryptionType `type:"string" required:"true" enum:"true"`
 
-	// The GUID for the customer-managed KMS key to use for encryption. You can
-	// also use a Kinesis-owned master key by specifying the alias aws/kinesis.
+	// The GUID for the customer-managed KMS key to use for encryption. This value
+	// can be a globally unique identifier, a fully specified ARN to either an alias
+	// or a key, or an alias name prefixed by "alias/".You can also use a master
+	// key owned by Kinesis Streams by specifying the alias aws/kinesis.
+	//
+	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//
+	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias name example: alias/MyAliasName
+	//
+	//    * Master key owned by Kinesis Streams: alias/aws/kinesis
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -4018,18 +4153,25 @@ func (s StartStreamEncryptionOutput) SDKResponseMetadata() aws.Response {
 type StopStreamEncryptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The encryption type. This parameter can be one of the following values:
-	//
-	//    * NONE: Not valid for this operation. An InvalidOperationException will
-	//    be thrown.
-	//
-	//    * KMS: Use server-side encryption on the records in the stream using a
-	//    customer-managed KMS key.
+	// The encryption type. The only valid value is KMS.
 	//
 	// EncryptionType is a required field
 	EncryptionType EncryptionType `type:"string" required:"true" enum:"true"`
 
-	// The GUID for the customer-managed key that was used for encryption.
+	// The GUID for the customer-managed KMS key to use for encryption. This value
+	// can be a globally unique identifier, a fully specified ARN to either an alias
+	// or a key, or an alias name prefixed by "alias/".You can also use a master
+	// key owned by Kinesis Streams by specifying the alias aws/kinesis.
+	//
+	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//
+	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias name example: alias/MyAliasName
+	//
+	//    * Master key owned by Kinesis Streams: alias/aws/kinesis
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -4141,7 +4283,20 @@ type StreamDescription struct {
 	// HasMoreShards is a required field
 	HasMoreShards *bool `type:"boolean" required:"true"`
 
-	// The GUID for the customer-managed KMS key used for encryption on the stream.
+	// The GUID for the customer-managed KMS key to use for encryption. This value
+	// can be a globally unique identifier, a fully specified ARN to either an alias
+	// or a key, or an alias name prefixed by "alias/".You can also use a master
+	// key owned by Kinesis Streams by specifying the alias aws/kinesis.
+	//
+	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//
+	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias name example: alias/MyAliasName
+	//
+	//    * Master key owned by Kinesis Streams: alias/aws/kinesis
 	KeyId *string `min:"1" type:"string"`
 
 	// The current retention period, in hours.
@@ -4172,11 +4327,11 @@ type StreamDescription struct {
 	// The current status of the stream being described. The stream status is one
 	// of the following states:
 	//
-	//    * CREATING - The stream is being created. Amazon Kinesis immediately returns
-	//    and sets StreamStatus to CREATING.
+	//    * CREATING - The stream is being created. Kinesis Streams immediately
+	//    returns and sets StreamStatus to CREATING.
 	//
 	//    * DELETING - The stream is being deleted. The specified stream is in the
-	//    DELETING state until Amazon Kinesis completes the deletion.
+	//    DELETING state until Kinesis Streams completes the deletion.
 	//
 	//    * ACTIVE - The stream exists and is ready for read and write operations
 	//    or deletion. You should perform read and write operations only on an ACTIVE
@@ -4256,6 +4411,149 @@ func (s *StreamDescription) SetStreamName(v string) *StreamDescription {
 
 // SetStreamStatus sets the StreamStatus field's value.
 func (s *StreamDescription) SetStreamStatus(v StreamStatus) *StreamDescription {
+	s.StreamStatus = v
+	return s
+}
+
+// Represents the output for DescribeStreamSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary
+type StreamDescriptionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The encryption type used. This value is one of the following:
+	//
+	//    * KMS
+	//
+	//    * NONE
+	EncryptionType EncryptionType `type:"string" enum:"true"`
+
+	// Represents the current enhanced monitoring settings of the stream.
+	//
+	// EnhancedMonitoring is a required field
+	EnhancedMonitoring []EnhancedMetrics `type:"list" required:"true"`
+
+	// The GUID for the customer-managed KMS key to use for encryption. This value
+	// can be a globally unique identifier, a fully specified ARN to either an alias
+	// or a key, or an alias name prefixed by "alias/".You can also use a master
+	// key owned by Kinesis Streams by specifying the alias aws/kinesis.
+	//
+	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias ARN example:  arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//
+	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
+	//
+	//    * Alias name example: alias/MyAliasName
+	//
+	//    * Master key owned by Kinesis: alias/aws/kinesis
+	KeyId *string `min:"1" type:"string"`
+
+	// The number of open shards in the stream.
+	//
+	// OpenShardCount is a required field
+	OpenShardCount *int64 `type:"integer" required:"true"`
+
+	// The current retention period, in hours.
+	//
+	// RetentionPeriodHours is a required field
+	RetentionPeriodHours *int64 `min:"1" type:"integer" required:"true"`
+
+	// The Amazon Resource Name (ARN) for the stream being described.
+	//
+	// StreamARN is a required field
+	StreamARN *string `type:"string" required:"true"`
+
+	// The approximate time that the stream was created.
+	//
+	// StreamCreationTimestamp is a required field
+	StreamCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The name of the stream being described.
+	//
+	// StreamName is a required field
+	StreamName *string `min:"1" type:"string" required:"true"`
+
+	// The current status of the stream being described. The stream status is one
+	// of the following states:
+	//
+	//    * CREATING - The stream is being created. Kinesis Streams immediately
+	//    returns and sets StreamStatus to CREATING.
+	//
+	//    * DELETING - The stream is being deleted. The specified stream is in the
+	//    DELETING state until Kinesis Streams completes the deletion.
+	//
+	//    * ACTIVE - The stream exists and is ready for read and write operations
+	//    or deletion. You should perform read and write operations only on an ACTIVE
+	//    stream.
+	//
+	//    * UPDATING - Shards in the stream are being merged or split. Read and
+	//    write operations continue to work while the stream is in the UPDATING
+	//    state.
+	//
+	// StreamStatus is a required field
+	StreamStatus StreamStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StreamDescriptionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StreamDescriptionSummary) GoString() string {
+	return s.String()
+}
+
+// SetEncryptionType sets the EncryptionType field's value.
+func (s *StreamDescriptionSummary) SetEncryptionType(v EncryptionType) *StreamDescriptionSummary {
+	s.EncryptionType = v
+	return s
+}
+
+// SetEnhancedMonitoring sets the EnhancedMonitoring field's value.
+func (s *StreamDescriptionSummary) SetEnhancedMonitoring(v []EnhancedMetrics) *StreamDescriptionSummary {
+	s.EnhancedMonitoring = v
+	return s
+}
+
+// SetKeyId sets the KeyId field's value.
+func (s *StreamDescriptionSummary) SetKeyId(v string) *StreamDescriptionSummary {
+	s.KeyId = &v
+	return s
+}
+
+// SetOpenShardCount sets the OpenShardCount field's value.
+func (s *StreamDescriptionSummary) SetOpenShardCount(v int64) *StreamDescriptionSummary {
+	s.OpenShardCount = &v
+	return s
+}
+
+// SetRetentionPeriodHours sets the RetentionPeriodHours field's value.
+func (s *StreamDescriptionSummary) SetRetentionPeriodHours(v int64) *StreamDescriptionSummary {
+	s.RetentionPeriodHours = &v
+	return s
+}
+
+// SetStreamARN sets the StreamARN field's value.
+func (s *StreamDescriptionSummary) SetStreamARN(v string) *StreamDescriptionSummary {
+	s.StreamARN = &v
+	return s
+}
+
+// SetStreamCreationTimestamp sets the StreamCreationTimestamp field's value.
+func (s *StreamDescriptionSummary) SetStreamCreationTimestamp(v time.Time) *StreamDescriptionSummary {
+	s.StreamCreationTimestamp = &v
+	return s
+}
+
+// SetStreamName sets the StreamName field's value.
+func (s *StreamDescriptionSummary) SetStreamName(v string) *StreamDescriptionSummary {
+	s.StreamName = &v
+	return s
+}
+
+// SetStreamStatus sets the StreamStatus field's value.
+func (s *StreamDescriptionSummary) SetStreamStatus(v StreamStatus) *StreamDescriptionSummary {
 	s.StreamStatus = v
 	return s
 }

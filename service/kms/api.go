@@ -35,7 +35,8 @@ func (r CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
 //
 // Cancels the deletion of a customer master key (CMK). When this operation
 // is successful, the CMK is set to the Disabled state. To enable a CMK, use
-// EnableKey.
+// EnableKey. You cannot perform this operation on a CMK in a different AWS
+// account.
 //
 // For more information about scheduling and canceling deletion of a CMK, see
 // Deleting Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
@@ -88,18 +89,29 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 // CreateAliasRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Creates a display name for a customer master key. An alias can be used to
-// identify a key and should be unique. The console enforces a one-to-one mapping
-// between the alias and a key. An alias name can contain only alphanumeric
-// characters, forward slashes (/), underscores (_), and dashes (-). An alias
-// must start with the word "alias" followed by a forward slash (alias/). An
-// alias that begins with "aws" after the forward slash (alias/aws...) is reserved
-// by Amazon Web Services (AWS).
+// Creates a display name for a customer master key (CMK). You can use an alias
+// to identify a CMK in selected operations, such as Encrypt and GenerateDataKey.
 //
-// The alias and the key it is mapped to must be in the same AWS account and
-// the same region.
+// Each CMK can have multiple aliases, but each alias points to only one CMK.
+// The alias name must be unique in the AWS account and region. To simplify
+// code that runs in multiple regions, use the same alias name, but point it
+// to a different CMK in each region.
 //
-// To map an alias to a different key, call UpdateAlias.
+// Because an alias is not a property of a CMK, you can delete and change the
+// aliases of a CMK without affecting the CMK. Also, aliases do not appear in
+// the response from the DescribeKey operation. To get the aliases of all CMKs,
+// use the ListAliases operation.
+//
+// An alias must start with the word alias followed by a forward slash (alias/).
+// The alias name can contain only alphanumeric characters, forward slashes
+// (/), underscores (_), and dashes (-). Alias names cannot begin with aws;
+// that alias name prefix is reserved by Amazon Web Services (AWS).
+//
+// The alias and the CMK it is mapped to must be in the same AWS account and
+// the same region. You cannot perform this operation on an alias in a different
+// AWS account.
+//
+// To map an existing alias to a different CMK, call UpdateAlias.
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
@@ -150,10 +162,13 @@ func (r CreateGrantRequest) Send() (*CreateGrantOutput, error) {
 // CreateGrantRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Adds a grant to a key to specify who can use the key and under what conditions.
-// Grants are alternate permission mechanisms to key policies.
+// Adds a grant to a customer master key (CMK). The grant specifies who can
+// use the CMK and under what conditions. When setting permissions, grants are
+// an alternative to key policies.
 //
-// For more information about grants, see Grants (http://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN in the value of the KeyId parameter. For more information about grants,
+// see Grants (http://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the CreateGrantRequest method.
@@ -203,7 +218,7 @@ func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
 // CreateKeyRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Creates a customer master key (CMK).
+// Creates a customer master key (CMK) in the caller's AWS account.
 //
 // You can use a CMK to encrypt small amounts of data (4 KiB or less) directly,
 // but CMKs are more commonly used to encrypt data encryption keys (DEKs), which
@@ -214,6 +229,8 @@ func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
 //
 //    * AWS Key Management Service Concepts (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html)
 //    in the AWS Key Management Service Developer Guide
+//
+// You cannot use this operation to create a CMK in a different AWS account.
 //
 //    // Example sending a request using the CreateKeyRequest method.
 //    req := client.CreateKeyRequest(params)
@@ -263,7 +280,7 @@ func (r DecryptRequest) Send() (*DecryptOutput, error) {
 // AWS Key Management Service.
 //
 // Decrypts ciphertext. Ciphertext is plaintext that has been previously encrypted
-// by using any of the following functions:
+// by using any of the following operations:
 //
 //    * GenerateDataKey
 //
@@ -327,7 +344,17 @@ func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 // DeleteAliasRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Deletes the specified alias. To map an alias to a different key, call UpdateAlias.
+// Deletes the specified alias. You cannot perform this operation on an alias
+// in a different AWS account.
+//
+// Because an alias is not a property of a CMK, you can delete and change the
+// aliases of a CMK without affecting the CMK. Also, aliases do not appear in
+// the response from the DescribeKey operation. To get the aliases of all CMKs,
+// use the ListAliases operation.
+//
+// Each CMK can have multiple aliases. To change the alias of a CMK, use DeleteAlias
+// to delete the current alias and CreateAlias to create a new alias. To associate
+// an existing alias with a different customer master key (CMK), call UpdateAlias.
 //
 //    // Example sending a request using the DeleteAliasRequest method.
 //    req := client.DeleteAliasRequest(params)
@@ -378,10 +405,11 @@ func (r DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutp
 // DeleteImportedKeyMaterialRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Deletes key material that you previously imported and makes the specified
-// customer master key (CMK) unusable. For more information about importing
-// key material into AWS KMS, see Importing Key Material (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
-// in the AWS Key Management Service Developer Guide.
+// Deletes key material that you previously imported. This operation makes the
+// specified customer master key (CMK) unusable. For more information about
+// importing key material into AWS KMS, see Importing Key Material (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+// in the AWS Key Management Service Developer Guide. You cannot perform this
+// operation on a CMK in a different AWS account.
 //
 // When the specified CMK is in the PendingDeletion state, this operation does
 // not change the CMK's state. Otherwise, it changes the CMK's state to PendingImport.
@@ -438,7 +466,10 @@ func (r DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
 // DescribeKeyRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Provides detailed information about the specified customer master key.
+// Provides detailed information about the specified customer master key (CMK).
+//
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN or alias ARN in the value of the KeyId parameter.
 //
 //    // Example sending a request using the DescribeKeyRequest method.
 //    req := client.DescribeKeyRequest(params)
@@ -488,9 +519,11 @@ func (r DisableKeyRequest) Send() (*DisableKeyOutput, error) {
 // AWS Key Management Service.
 //
 // Sets the state of a customer master key (CMK) to disabled, thereby preventing
-// its use for cryptographic operations. For more information about how key
-// state affects the use of a CMK, see How Key State Affects the Use of a Customer
-// Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// its use for cryptographic operations. You cannot perform this operation on
+// a CMK in a different AWS account.
+//
+// For more information about how key state affects the use of a CMK, see How
+// Key State Affects the Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the DisableKeyRequest method.
@@ -542,7 +575,9 @@ func (r DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
 // DisableKeyRotationRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Disables rotation of the specified key.
+// Disables automatic rotation of the key material for the specified customer
+// master key (CMK). You cannot perform this operation on a CMK in a different
+// AWS account.
 //
 //    // Example sending a request using the DisableKeyRotationRequest method.
 //    req := client.DisableKeyRotationRequest(params)
@@ -593,7 +628,9 @@ func (r EnableKeyRequest) Send() (*EnableKeyOutput, error) {
 // EnableKeyRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Marks a key as enabled, thereby permitting its use.
+// Sets the state of a customer master key (CMK) to enabled, thereby permitting
+// its use for cryptographic operations. You cannot perform this operation on
+// a CMK in a different AWS account.
 //
 //    // Example sending a request using the EnableKeyRequest method.
 //    req := client.EnableKeyRequest(params)
@@ -644,7 +681,9 @@ func (r EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
 // EnableKeyRotationRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Enables rotation of the specified customer master key.
+// Enables automatic rotation of the key material for the specified customer
+// master key (CMK). You cannot perform this operation on a CMK in a different
+// AWS account.
 //
 //    // Example sending a request using the EnableKeyRotationRequest method.
 //    req := client.EnableKeyRotationRequest(params)
@@ -695,26 +734,29 @@ func (r EncryptRequest) Send() (*EncryptOutput, error) {
 // EncryptRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Encrypts plaintext into ciphertext by using a customer master key. The Encrypt
-// function has two primary use cases:
+// Encrypts plaintext into ciphertext by using a customer master key (CMK).
+// The Encrypt operation has two primary use cases:
 //
-//    * You can encrypt up to 4 KB of arbitrary data such as an RSA key, a database
-//    password, or other sensitive customer information.
+//    * You can encrypt up to 4 kilobytes (4096 bytes) of arbitrary data such
+//    as an RSA key, a database password, or other sensitive information.
 //
-//    * If you are moving encrypted data from one region to another, you can
-//    use this API to encrypt in the new region the plaintext data key that
-//    was used to encrypt the data in the original region. This provides you
-//    with an encrypted copy of the data key that can be decrypted in the new
-//    region and used there to decrypt the encrypted data.
+//    * To move encrypted data from one AWS region to another, you can use this
+//    operation to encrypt in the new region the plaintext data key that was
+//    used to encrypt the data in the original region. This provides you with
+//    an encrypted copy of the data key that can be decrypted in the new region
+//    and used there to decrypt the encrypted data.
+//
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN or alias ARN in the value of the KeyId parameter.
 //
 // Unless you are moving encrypted data from one region to another, you don't
-// use this function to encrypt a generated data key within a region. You retrieve
-// data keys already encrypted by calling the GenerateDataKey or GenerateDataKeyWithoutPlaintext
-// function. Data keys don't need to be encrypted again by calling Encrypt.
+// use this operation to encrypt a generated data key within a region. To get
+// data keys that are already encrypted, call the GenerateDataKey or GenerateDataKeyWithoutPlaintext
+// operation. Data keys don't need to be encrypted again by calling Encrypt.
 //
-// If you want to encrypt data locally in your application, you can use the
-// GenerateDataKey function to return a plaintext data encryption key and a
-// copy of the key encrypted under the customer master key (CMK) of your choosing.
+// To encrypt data locally in your application, use the GenerateDataKey operation
+// to return a plaintext data encryption key and a copy of the key encrypted
+// under the CMK of your choosing.
 //
 //    // Example sending a request using the EncryptRequest method.
 //    req := client.EncryptRequest(params)
@@ -770,7 +812,9 @@ func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
 // data key. You must also specify the length of the data key using either the
 // KeySpec or NumberOfBytes field. You must specify one field or the other,
 // but not both. For common key lengths (128-bit and 256-bit symmetric keys),
-// we recommend that you use KeySpec.
+// we recommend that you use KeySpec. To perform this operation on a CMK in
+// a different AWS account, specify the key ARN or alias ARN in the value of
+// the KeyId parameter.
 //
 // This operation returns a plaintext copy of the data key in the Plaintext
 // field of the response, and an encrypted copy of the data key in the CiphertextBlob
@@ -780,7 +824,7 @@ func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
 // We recommend that you use the following pattern to encrypt data locally in
 // your application:
 //
-// Use this operation (GenerateDataKey) to retrieve a data encryption key.
+// Use this operation (GenerateDataKey) to get a data encryption key.
 //
 // Use the plaintext data encryption key (returned in the Plaintext field of
 // the response) to encrypt data locally, then erase the plaintext data key
@@ -858,6 +902,9 @@ func (r GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutP
 // Returns a data encryption key encrypted under a customer master key (CMK).
 // This operation is identical to GenerateDataKey but returns only the encrypted
 // copy of the data key.
+//
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN or alias ARN in the value of the KeyId parameter.
 //
 // This operation is useful in a system that has multiple components with different
 // degrees of trust. For example, consider a system that stores encrypted data
@@ -971,7 +1018,8 @@ func (r GetKeyPolicyRequest) Send() (*GetKeyPolicyOutput, error) {
 // GetKeyPolicyRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Retrieves a policy attached to the specified key.
+// Gets a key policy attached to the specified customer master key (CMK). You
+// cannot perform this operation on a CMK in a different AWS account.
 //
 //    // Example sending a request using the GetKeyPolicyRequest method.
 //    req := client.GetKeyPolicyRequest(params)
@@ -1020,8 +1068,11 @@ func (r GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error)
 // GetKeyRotationStatusRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Retrieves a Boolean value that indicates whether key rotation is enabled
-// for the specified key.
+// Gets a Boolean value that indicates whether automatic rotation of the key
+// material is enabled for the specified customer master key (CMK).
+//
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN in the value of the KeyId parameter.
 //
 //    // Example sending a request using the GetKeyRotationStatusRequest method.
 //    req := client.GetKeyRotationStatusRequest(params)
@@ -1078,14 +1129,15 @@ func (r GetParametersForImportRequest) Send() (*GetParametersForImportOutput, er
 // You must specify the key ID of the customer master key (CMK) into which you
 // will import key material. This CMK's Origin must be EXTERNAL. You must also
 // specify the wrapping algorithm and type of wrapping key (public key) that
-// you will use to encrypt the key material.
+// you will use to encrypt the key material. You cannot perform this operation
+// on a CMK in a different AWS account.
 //
 // This operation returns a public key and an import token. Use the public key
 // to encrypt the key material. Store the import token to send with a subsequent
 // ImportKeyMaterial request. The public key and import token from the same
-// response must be used together. These items are valid for 24 hours, after
-// which they cannot be used for a subsequent ImportKeyMaterial request. To
-// retrieve new ones, send another GetParametersForImport request.
+// response must be used together. These items are valid for 24 hours. When
+// they expire, they cannot be used for a subsequent ImportKeyMaterial request.
+// To get new ones, send another GetParametersForImport request.
 //
 //    // Example sending a request using the GetParametersForImportRequest method.
 //    req := client.GetParametersForImportRequest(params)
@@ -1134,27 +1186,42 @@ func (r ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
 // ImportKeyMaterialRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Imports key material into an AWS KMS customer master key (CMK) from your
-// existing key management infrastructure. For more information about importing
-// key material into AWS KMS, see Importing Key Material (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+// Imports key material into an existing AWS KMS customer master key (CMK) that
+// was created without key material. You cannot perform this operation on a
+// CMK in a different AWS account. For more information about creating CMKs
+// with no key material and then importing key material, see Importing Key Material
+// (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
 // in the AWS Key Management Service Developer Guide.
 //
-// You must specify the key ID of the CMK to import the key material into. This
-// CMK's Origin must be EXTERNAL. You must also send an import token and the
-// encrypted key material. Send the import token that you received in the same
-// GetParametersForImport response that contained the public key that you used
-// to encrypt the key material. You must also specify whether the key material
-// expires and if so, when. When the key material expires, AWS KMS deletes the
-// key material and the CMK becomes unusable. To use the CMK again, you can
-// reimport the same key material. If you set an expiration date, you can change
-// it only by reimporting the same key material and specifying a new expiration
-// date.
+// Before using this operation, call GetParametersForImport. Its response includes
+// a public key and an import token. Use the public key to encrypt the key material.
+// Then, submit the import token from the same GetParametersForImport response.
 //
-// When this operation is successful, the specified CMK's key state changes
-// to Enabled, and you can use the CMK.
+// When calling this operation, you must specify the following values:
 //
-// After you successfully import key material into a CMK, you can reimport the
-// same key material into that CMK, but you cannot import different key material.
+//    * The key ID or key ARN of a CMK with no key material. Its Origin must
+//    be EXTERNAL.
+//
+// To create a CMK with no key material, call CreateKey and set the value of
+//    its Origin parameter to EXTERNAL. To get the Origin of a CMK, call DescribeKey.)
+//
+//    * The encrypted key material. To get the public key to encrypt the key
+//    material, call GetParametersForImport.
+//
+//    * The import token that GetParametersForImport returned. This token and
+//    the public key used to encrypt the key material must have come from the
+//    same response.
+//
+//    * Whether the key material expires and if so, when. If you set an expiration
+//    date, you can change it only by reimporting the same key material and
+//    specifying a new expiration date. If the key material expires, AWS KMS
+//    deletes the key material and the CMK becomes unusable. To use the CMK
+//    again, you must reimport the same key material.
+//
+// When this operation is successful, the CMK's key state changes from PendingImport
+// to Enabled, and you can use the CMK. After you successfully import key material
+// into a CMK, you can reimport the same key material into that CMK, but you
+// cannot import different key material.
 //
 //    // Example sending a request using the ImportKeyMaterialRequest method.
 //    req := client.ImportKeyMaterialRequest(params)
@@ -1203,7 +1270,14 @@ func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 // ListAliasesRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Lists all of the key aliases in the account.
+// Gets a list of all aliases in the caller's AWS account and region. You cannot
+// list aliases in other accounts. For more information about aliases, see CreateAlias.
+//
+// The response might include several aliases that do not have a TargetKeyId
+// field because they are not associated with a CMK. These are predefined aliases
+// that are reserved for CMKs managed by AWS services. If an alias is not associated
+// with a CMK, the alias does not count against the alias limit (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#aliases-limit)
+// for your account.
 //
 //    // Example sending a request using the ListAliasesRequest method.
 //    req := client.ListAliasesRequest(params)
@@ -1308,7 +1382,10 @@ func (r ListGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
 // ListGrantsRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// List the grants for a specified key.
+// Gets a list of all grants for the specified customer master key (CMK).
+//
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN in the value of the KeyId parameter.
 //
 //    // Example sending a request using the ListGrantsRequest method.
 //    req := client.ListGrantsRequest(params)
@@ -1413,7 +1490,10 @@ func (r ListKeyPoliciesRequest) Send() (*ListKeyPoliciesOutput, error) {
 // ListKeyPoliciesRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Retrieves a list of policies attached to a key.
+// Gets the names of the key policies that are attached to a customer master
+// key (CMK). This operation is designed to get policy names that you can use
+// in a GetKeyPolicy operation. However, the only valid policy name is default.
+// You cannot perform this operation on a CMK in a different AWS account.
 //
 //    // Example sending a request using the ListKeyPoliciesRequest method.
 //    req := client.ListKeyPoliciesRequest(params)
@@ -1518,7 +1598,8 @@ func (r ListKeysRequest) Send() (*ListKeysOutput, error) {
 // ListKeysRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Lists the customer master keys.
+// Gets a list of all customer master keys (CMKs) in the caller's AWS account
+// and region.
 //
 //    // Example sending a request using the ListKeysRequest method.
 //    req := client.ListKeysRequest(params)
@@ -1625,6 +1706,8 @@ func (r ListResourceTagsRequest) Send() (*ListResourceTagsOutput, error) {
 //
 // Returns a list of all tags for the specified customer master key (CMK).
 //
+// You cannot perform this operation on a CMK in a different AWS account.
+//
 //    // Example sending a request using the ListResourceTagsRequest method.
 //    req := client.ListResourceTagsRequest(params)
 //    resp, err := req.Send()
@@ -1725,7 +1808,8 @@ func (r PutKeyPolicyRequest) Send() (*PutKeyPolicyOutput, error) {
 // PutKeyPolicyRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Attaches a key policy to the specified customer master key (CMK).
+// Attaches a key policy to the specified customer master key (CMK). You cannot
+// perform this operation on a CMK in a different AWS account.
 //
 // For more information about key policies, see Key Policies (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 // in the AWS Key Management Service Developer Guide.
@@ -1783,6 +1867,8 @@ func (r ReEncryptRequest) Send() (*ReEncryptOutput, error) {
 // exposing the plaintext of the data on the client side. The data is first
 // decrypted and then reencrypted. You can also use this operation to change
 // the encryption context of a ciphertext.
+//
+// You can reencrypt data using CMKs in different AWS accounts.
 //
 // Unlike other operations, ReEncrypt is authorized twice, once as ReEncryptFrom
 // on the source CMK and once as ReEncryptTo on the destination CMK. We recommend
@@ -1905,8 +1991,11 @@ func (r RevokeGrantRequest) Send() (*RevokeGrantOutput, error) {
 // RevokeGrantRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Revokes a grant. You can revoke a grant to actively deny operations that
-// depend on it.
+// Revokes the specified grant for the specified customer master key (CMK).
+// You can revoke a grant to actively deny operations that depend on it.
+//
+// To perform this operation on a CMK in a different AWS account, specify the
+// key ARN in the value of the KeyId parameter.
 //
 //    // Example sending a request using the RevokeGrantRequest method.
 //    req := client.RevokeGrantRequest(params)
@@ -1966,6 +2055,8 @@ func (r ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
 // and all AWS KMS data associated with it, including all aliases that refer
 // to it.
 //
+// You cannot perform this operation on a CMK in a different AWS account.
+//
 // Deleting a CMK is a destructive and potentially dangerous operation. When
 // a CMK is deleted, all data that was encrypted under the CMK is rendered unrecoverable.
 // To restrict the use of a CMK without deleting it, use DisableKey.
@@ -2022,7 +2113,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 // AWS Key Management Service.
 //
 // Adds or overwrites one or more tags for the specified customer master key
-// (CMK).
+// (CMK). You cannot perform this operation on a CMK in a different AWS account.
 //
 // Each tag consists of a tag key and a tag value. Tag keys and tag values are
 // both required, but tag values can be empty (null) strings.
@@ -2032,6 +2123,10 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 // send a TagResource request for this CMK with a tag key of Purpose and a tag
 // value of Prod, it does not create a second tag. Instead, the original tag
 // is overwritten with the new tag value.
+//
+// For information about the rules that apply to tag keys and tag values, see
+// User-Defined Tag Restrictions (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
+// in the AWS Billing and Cost Management User Guide.
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
@@ -2083,7 +2178,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 // AWS Key Management Service.
 //
 // Removes the specified tag or tags from the specified customer master key
-// (CMK).
+// (CMK). You cannot perform this operation on a CMK in a different AWS account.
 //
 // To remove a tag, you specify the tag key for each tag to remove. You do not
 // specify the tag value. To overwrite the tag value for an existing tag, use
@@ -2138,19 +2233,26 @@ func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 // UpdateAliasRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Updates an alias to map it to a different key.
+// Associates an existing alias with a different customer master key (CMK).
+// Each CMK can have multiple aliases, but the aliases must be unique within
+// the account and region. You cannot perform this operation on an alias in
+// a different AWS account.
 //
-// An alias is not a property of a key. Therefore, an alias can be mapped to
-// and unmapped from an existing key without changing the properties of the
-// key.
+// This operation works only on existing aliases. To change the alias of a CMK
+// to a new value, use CreateAlias to create a new alias and DeleteAlias to
+// delete the old alias.
+//
+// Because an alias is not a property of a CMK, you can create, update, and
+// delete the aliases of a CMK without affecting the CMK. Also, aliases do not
+// appear in the response from the DescribeKey operation. To get the aliases
+// of all CMKs in the account, use the ListAliases operation.
 //
 // An alias name can contain only alphanumeric characters, forward slashes (/),
-// underscores (_), and dashes (-). An alias must start with the word "alias"
-// followed by a forward slash (alias/). An alias that begins with "aws" after
-// the forward slash (alias/aws...) is reserved by Amazon Web Services (AWS).
-//
-// The alias and the key it is mapped to must be in the same AWS account and
-// the same region.
+// underscores (_), and dashes (-). An alias must start with the word alias
+// followed by a forward slash (alias/). The alias name can contain only alphanumeric
+// characters, forward slashes (/), underscores (_), and dashes (-). Alias names
+// cannot begin with aws; that alias name prefix is reserved by Amazon Web Services
+// (AWS).
 //
 //    // Example sending a request using the UpdateAliasRequest method.
 //    req := client.UpdateAliasRequest(params)
@@ -2201,7 +2303,10 @@ func (r UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error)
 // UpdateKeyDescriptionRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Updates the description of a customer master key (CMK).
+// Updates the description of a customer master key (CMK). To see the decription
+// of a CMK, use DescribeKey.
+//
+// You cannot perform this operation on a CMK in a different AWS account.
 //
 //    // Example sending a request using the UpdateKeyDescriptionRequest method.
 //    req := client.UpdateKeyDescriptionRequest(params)
@@ -2281,15 +2386,15 @@ type CancelKeyDeletionInput struct {
 	// The unique identifier for the customer master key (CMK) for which to cancel
 	// deletion.
 	//
-	// To specify this value, use the unique key ID or the Amazon Resource Name
-	// (ARN) of the CMK. Examples:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// To obtain the unique key ID and key ARN for a given CMK, use ListKeys or
-	// DescribeKey.
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -2370,13 +2475,18 @@ type CreateAliasInput struct {
 	// AliasName is a required field
 	AliasName *string `min:"1" type:"string" required:"true"`
 
-	// An identifier of the key for which you are creating the alias. This value
-	// cannot be another alias but can be a globally unique identifier or a fully
-	// specified ARN to a key.
+	// Identifies the CMK for which you are creating the alias. This value cannot
+	// be an alias.
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// TargetKeyId is a required field
 	TargetKeyId *string `min:"1" type:"string" required:"true"`
@@ -2482,12 +2592,16 @@ type CreateGrantInput struct {
 	// The unique identifier for the customer master key (CMK) that the grant applies
 	// to.
 	//
-	// To specify this value, use the globally unique key ID or the Amazon Resource
-	// Name (ARN) of the key. Examples:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
+	// a CMK in a different AWS account, you must use the key ARN.
 	//
-	//    * Globally unique key ID: 12345678-1234-1234-1234-123456789012
+	// For example:
 	//
-	//    * Key ARN: arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -2507,7 +2621,9 @@ type CreateGrantInput struct {
 	Name *string `min:"1" type:"string"`
 
 	// A list of operations that the grant permits.
-	Operations []GrantOperation `type:"list"`
+	//
+	// Operations is a required field
+	Operations []GrantOperation `type:"list" required:"true"`
 
 	// The principal that is given permission to retire the grant by using RetireGrant
 	// operation.
@@ -2550,6 +2666,10 @@ func (s *CreateGrantInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.Operations == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Operations"))
 	}
 	if s.RetiringPrincipal != nil && len(*s.RetiringPrincipal) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RetiringPrincipal", 1))
@@ -2713,7 +2833,7 @@ type CreateKeyInput struct {
 	// the CMK. For more information, see Default Key Policy (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default)
 	// in the AWS Key Management Service Developer Guide.
 	//
-	// The policy size limit is 32 KiB (32768 bytes).
+	// The policy size limit is 32 kilobytes (32768 bytes).
 	Policy *string `min:"1" type:"string"`
 
 	// One or more tags. Each tag consists of a tag key and a tag value. Tag keys
@@ -2899,8 +3019,8 @@ type DecryptOutput struct {
 	// no errors are encountered during the operation.
 	KeyId *string `min:"1" type:"string"`
 
-	// Decrypted plaintext data. This value may not be returned if the customer
-	// master key is not available or if you didn't have permission to use it.
+	// Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value
+	// is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
 	Plaintext []byte `min:"1" type:"blob"`
@@ -2938,7 +3058,7 @@ type DeleteAliasInput struct {
 	_ struct{} `type:"structure"`
 
 	// The alias to be deleted. The name must start with the word "alias" followed
-	// by a forward slash (alias/). Aliases that begin with "alias/AWS" are reserved.
+	// by a forward slash (alias/). Aliases that begin with "alias/aws" are reserved.
 	//
 	// AliasName is a required field
 	AliasName *string `min:"1" type:"string" required:"true"`
@@ -3006,12 +3126,15 @@ type DeleteImportedKeyMaterialInput struct {
 	// The identifier of the CMK whose key material to delete. The CMK's Origin
 	// must be EXTERNAL.
 	//
-	// A valid identifier is the unique key ID or the Amazon Resource Name (ARN)
-	// of the CMK. Examples:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3082,17 +3205,24 @@ type DescribeKeyInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string `type:"list"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier, a fully specified ARN to either an alias or a key, or
-	// an alias name prefixed by "alias/".
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
+	// a CMK in a different AWS account, you must use the key ARN or alias ARN.
 	//
-	//    * Alias ARN Example - arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	// For example:
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * Alias Name Example - alias/MyAliasName
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Alias name: alias/ExampleAlias
+	//
+	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To
+	// get the alias name and alias ARN, use ListAliases.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3172,13 +3302,17 @@ func (s *DescribeKeyOutput) SetKeyMetadata(v *KeyMetadata) *DescribeKeyOutput {
 type DisableKeyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the CMK.
+	// A unique identifier for the customer master key (CMK).
 	//
-	// Use the CMK's unique identifier or its Amazon Resource Name (ARN). For example:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
 	//
-	//    * ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3243,12 +3377,17 @@ func (s DisableKeyOutput) SDKResponseMetadata() aws.Response {
 type DisableKeyRotationInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3313,12 +3452,17 @@ func (s DisableKeyRotationOutput) SDKResponseMetadata() aws.Response {
 type EnableKeyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3383,12 +3527,17 @@ func (s EnableKeyOutput) SDKResponseMetadata() aws.Response {
 type EnableKeyRotationInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3465,17 +3614,24 @@ type EncryptInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string `type:"list"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier, a fully specified ARN to either an alias or a key, or
-	// an alias name prefixed by "alias/".
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
+	// a CMK in a different AWS account, you must use the key ARN or alias ARN.
 	//
-	//    * Alias ARN Example - arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	// For example:
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * Alias Name Example - alias/MyAliasName
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Alias name: alias/ExampleAlias
+	//
+	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To
+	// get the alias name and alias ARN, use ListAliases.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3552,8 +3708,8 @@ type EncryptOutput struct {
 
 	responseMetadata aws.Response
 
-	// The encrypted plaintext. If you are using the CLI, the value is Base64 encoded.
-	// Otherwise, it is not encoded.
+	// The encrypted plaintext. When you use the HTTP API or the AWS CLI, the value
+	// is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
 	CiphertextBlob []byte `min:"1" type:"blob"`
@@ -3608,17 +3764,22 @@ type GenerateDataKeyInput struct {
 	// The identifier of the CMK under which to generate and encrypt the data encryption
 	// key.
 	//
-	// A valid identifier is the unique key ID or the Amazon Resource Name (ARN)
-	// of the CMK, or the alias name or ARN of an alias that refers to the CMK.
-	// Examples:
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
+	// a CMK in a different AWS account, you must use the key ARN or alias ARN.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
 	//
-	//    * CMK ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Alias name: alias/ExampleAlias
 	//
 	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To
+	// get the alias name and alias ARN, use ListAliases.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3700,7 +3861,8 @@ type GenerateDataKeyOutput struct {
 
 	responseMetadata aws.Response
 
-	// The encrypted data encryption key.
+	// The encrypted data encryption key. When you use the HTTP API or the AWS CLI,
+	// the value is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
 	CiphertextBlob []byte `min:"1" type:"blob"`
@@ -3709,8 +3871,9 @@ type GenerateDataKeyOutput struct {
 	// and encrypted.
 	KeyId *string `min:"1" type:"string"`
 
-	// The data encryption key. Use this data key for local encryption and decryption,
-	// then remove it from memory as soon as possible.
+	// The data encryption key. When you use the HTTP API or the AWS CLI, the value
+	// is Base64-encoded. Otherwise, it is not encoded. Use this data key for local
+	// encryption and decryption, then remove it from memory as soon as possible.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
 	Plaintext []byte `min:"1" type:"blob"`
@@ -3765,20 +3928,25 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string `type:"list"`
 
-	// The identifier of the CMK under which to generate and encrypt the data encryption
-	// key.
+	// The identifier of the customer master key (CMK) under which to generate and
+	// encrypt the data encryption key.
 	//
-	// A valid identifier is the unique key ID or the Amazon Resource Name (ARN)
-	// of the CMK, or the alias name or ARN of an alias that refers to the CMK.
-	// Examples:
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
+	// a CMK in a different AWS account, you must use the key ARN or alias ARN.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
 	//
-	//    * CMK ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Alias name: alias/ExampleAlias
 	//
 	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To
+	// get the alias name and alias ARN, use ListAliases.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -3860,7 +4028,8 @@ type GenerateDataKeyWithoutPlaintextOutput struct {
 
 	responseMetadata aws.Response
 
-	// The encrypted data encryption key.
+	// The encrypted data encryption key. When you use the HTTP API or the AWS CLI,
+	// the value is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
 	CiphertextBlob []byte `min:"1" type:"blob"`
@@ -3940,7 +4109,8 @@ type GenerateRandomOutput struct {
 
 	responseMetadata aws.Response
 
-	// The random byte string.
+	// The random byte string. When you use the HTTP API or the AWS CLI, the value
+	// is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
 	Plaintext []byte `min:"1" type:"blob"`
@@ -3971,18 +4141,23 @@ func (s *GenerateRandomOutput) SetPlaintext(v []byte) *GenerateRandomOutput {
 type GetKeyPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
 
-	// String that contains the name of the policy. Currently, this must be "default".
-	// Policy names can be discovered by calling ListKeyPolicies.
+	// Specifies the name of the policy. The only valid name is default. To get
+	// the names of key policies, use ListKeyPolicies.
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -4069,12 +4244,18 @@ func (s *GetKeyPolicyOutput) SetPolicy(v string) *GetKeyPolicyOutput {
 type GetKeyRotationStatusInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
+	// a CMK in a different AWS account, you must use the key ARN.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -4151,12 +4332,15 @@ type GetParametersForImportInput struct {
 	// The identifier of the CMK into which you will import key material. The CMK's
 	// Origin must be EXTERNAL.
 	//
-	// A valid identifier is the unique key ID or the Amazon Resource Name (ARN)
-	// of the CMK. Examples:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -4244,7 +4428,7 @@ type GetParametersForImportOutput struct {
 
 	// The time at which the import token and public key are no longer valid. After
 	// this time, you cannot use them to make an ImportKeyMaterial request and you
-	// must send another GetParametersForImport request to retrieve new ones.
+	// must send another GetParametersForImport request to get new ones.
 	ParametersValidTo *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The public key to use to encrypt the key material before importing it with
@@ -4476,12 +4660,15 @@ type ImportKeyMaterialInput struct {
 	// The identifier of the CMK to import the key material into. The CMK's Origin
 	// must be EXTERNAL.
 	//
-	// A valid identifier is the unique key ID or the Amazon Resource Name (ARN)
-	// of the CMK. Examples:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -4839,7 +5026,7 @@ type ListAliasesOutput struct {
 
 	responseMetadata aws.Response
 
-	// A list of key aliases in the user's account.
+	// A list of aliases.
 	Aliases []AliasListEntry `type:"list"`
 
 	// When Truncated is true, this element is present and contains the value to
@@ -4847,7 +5034,7 @@ type ListAliasesOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To retrieve more items,
+	// value is true, the list in this response is truncated. To get more items,
 	// pass the value of the NextMarker element in this response to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
@@ -4890,12 +5077,18 @@ func (s *ListAliasesOutput) SetTruncated(v bool) *ListAliasesOutput {
 type ListGrantsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key. This value can be a globally
-	// unique identifier or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
+	// a CMK in a different AWS account, you must use the key ARN.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -4969,12 +5162,17 @@ func (s *ListGrantsInput) SetMarker(v string) *ListGrantsInput {
 type ListKeyPoliciesInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the customer master key (CMK). You can use the unique
-	// key ID or the Amazon Resource Name (ARN) of the CMK. Examples:
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+	//
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -5061,7 +5259,7 @@ type ListKeyPoliciesOutput struct {
 	PolicyNames []string `type:"list"`
 
 	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To retrieve more items,
+	// value is true, the list in this response is truncated. To get more items,
 	// pass the value of the NextMarker element in this response to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
@@ -5162,7 +5360,7 @@ type ListKeysOutput struct {
 
 	responseMetadata aws.Response
 
-	// A list of keys.
+	// A list of customer master keys (CMKs).
 	Keys []KeyListEntry `type:"list"`
 
 	// When Truncated is true, this element is present and contains the value to
@@ -5170,7 +5368,7 @@ type ListKeysOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To retrieve more items,
+	// value is true, the list in this response is truncated. To get more items,
 	// pass the value of the NextMarker element in this response to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
@@ -5213,12 +5411,17 @@ func (s *ListKeysOutput) SetTruncated(v bool) *ListKeysOutput {
 type ListResourceTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the CMK whose tags you are listing. You can use the
-	// unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+	//
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -5307,7 +5510,7 @@ type ListResourceTagsOutput struct {
 	Tags []Tag `type:"list"`
 
 	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To retrieve more items,
+	// value is true, the list in this response is truncated. To get more items,
 	// pass the value of the NextMarker element in this response to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
@@ -5441,7 +5644,7 @@ type ListRetirableGrantsOutput struct {
 	NextMarker *string `min:"1" type:"string"`
 
 	// A flag that indicates whether there are more items in the list. When this
-	// value is true, the list in this response is truncated. To retrieve more items,
+	// value is true, the list in this response is truncated. To get more items,
 	// pass the value of the NextMarker element in this response to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
@@ -5498,13 +5701,17 @@ type PutKeyPolicyInput struct {
 	// The default value is false.
 	BypassPolicyLockoutSafetyCheck *bool `type:"boolean"`
 
-	// A unique identifier for the CMK.
+	// A unique identifier for the customer master key (CMK).
 	//
-	// Use the CMK's unique identifier or its Amazon Resource Name (ARN). For example:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
 	//
-	//    * ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -5528,14 +5735,12 @@ type PutKeyPolicyInput struct {
 	//    I make are not always immediately visible (http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	//    in the IAM User Guide.
 	//
-	// The policy size limit is 32 KiB (32768 bytes).
+	// The policy size limit is 32 kilobytes (32768 bytes).
 	//
 	// Policy is a required field
 	Policy *string `min:"1" type:"string" required:"true"`
 
-	// The name of the key policy.
-	//
-	// This value must be default.
+	// The name of the key policy. The only valid value is default.
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -5642,17 +5847,24 @@ type ReEncryptInput struct {
 	// Encryption context to use when the data is reencrypted.
 	DestinationEncryptionContext map[string]string `type:"map"`
 
-	// A unique identifier for the CMK to use to reencrypt the data. This value
-	// can be a globally unique identifier, a fully specified ARN to either an alias
-	// or a key, or an alias name prefixed by "alias/".
+	// A unique identifier for the CMK that is used to reencrypt the data.
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
+	// a CMK in a different AWS account, you must use the key ARN or alias ARN.
 	//
-	//    * Alias ARN Example - arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	// For example:
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * Alias Name Example - alias/MyAliasName
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Alias name: alias/ExampleAlias
+	//
+	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To
+	// get the alias name and alias ARN, use ListAliases.
 	//
 	// DestinationKeyId is a required field
 	DestinationKeyId *string `min:"1" type:"string" required:"true"`
@@ -5738,7 +5950,8 @@ type ReEncryptOutput struct {
 
 	responseMetadata aws.Response
 
-	// The reencrypted data.
+	// The reencrypted data. When you use the HTTP API or the AWS CLI, the value
+	// is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
 	CiphertextBlob []byte `min:"1" type:"blob"`
@@ -5796,9 +6009,9 @@ type RetireGrantInput struct {
 	// Token that identifies the grant to be retired.
 	GrantToken *string `min:"1" type:"string"`
 
-	// The Amazon Resource Name of the CMK associated with the grant. Example:
+	// The Amazon Resource Name (ARN) of the CMK associated with the grant.
 	//
-	//    * arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example: arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	KeyId *string `min:"1" type:"string"`
 }
 
@@ -5881,12 +6094,17 @@ type RevokeGrantInput struct {
 	GrantId *string `min:"1" type:"string" required:"true"`
 
 	// A unique identifier for the customer master key associated with the grant.
-	// This value can be a globally unique identifier or the fully specified ARN
-	// to a key.
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
+	// a CMK in a different AWS account, you must use the key ARN.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -5964,17 +6182,17 @@ func (s RevokeGrantOutput) SDKResponseMetadata() aws.Response {
 type ScheduleKeyDeletionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for the customer master key (CMK) to delete.
+	// The unique identifier of the customer master key (CMK) to delete.
 	//
-	// To specify this value, use the unique key ID or the Amazon Resource Name
-	// (ARN) of the CMK. Examples:
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// To obtain the unique key ID and key ARN for a given CMK, use ListKeys or
-	// DescribeKey.
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -6072,6 +6290,10 @@ func (s *ScheduleKeyDeletionOutput) SetKeyId(v string) *ScheduleKeyDeletionOutpu
 
 // A key-value pair. A tag consists of a tag key and a tag value. Tag keys and
 // tag values are both required, but tag values can be empty (null) strings.
+//
+// For information about the rules that apply to tag keys and tag values, see
+// User-Defined Tag Restrictions (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
+// in the AWS Billing and Cost Management User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -6134,12 +6356,17 @@ func (s *Tag) SetTagValue(v string) *Tag {
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the CMK you are tagging. You can use the unique key
-	// ID or the Amazon Resource Name (ARN) of the CMK. Examples:
+	// A unique identifier for the CMK you are tagging.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+	//
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -6226,12 +6453,17 @@ func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// A unique identifier for the CMK from which you are removing tags. You can
-	// use the unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:
+	// A unique identifier for the CMK from which you are removing tags.
 	//
-	//    * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+	//
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
@@ -6318,16 +6550,19 @@ type UpdateAliasInput struct {
 	// AliasName is a required field
 	AliasName *string `min:"1" type:"string" required:"true"`
 
-	// Unique identifier of the customer master key to be mapped to the alias. This
-	// value can be a globally unique identifier or the fully specified ARN of a
-	// key.
+	// Unique identifier of the customer master key to be mapped to the alias.
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
 	//
-	// You can call ListAliases to verify that the alias is mapped to the correct
-	// TargetKeyId.
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	//
+	// To verify that the alias is mapped to the correct CMK, use ListAliases.
 	//
 	// TargetKeyId is a required field
 	TargetKeyId *string `min:"1" type:"string" required:"true"`
@@ -6410,12 +6645,17 @@ type UpdateKeyDescriptionInput struct {
 	// Description is a required field
 	Description *string `type:"string" required:"true"`
 
-	// A unique identifier for the CMK. This value can be a globally unique identifier
-	// or the fully specified ARN to a key.
+	// A unique identifier for the customer master key (CMK).
 	//
-	//    * Key ARN Example - arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
-	//    * Globally Unique Key ID Example - 12345678-1234-1234-1234-123456789012
+	// For example:
+	//
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`

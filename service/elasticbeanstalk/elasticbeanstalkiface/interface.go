@@ -124,6 +124,8 @@ type ElasticBeanstalkAPI interface {
 
 	ListPlatformVersionsRequest(*elasticbeanstalk.ListPlatformVersionsInput) elasticbeanstalk.ListPlatformVersionsRequest
 
+	ListTagsForResourceRequest(*elasticbeanstalk.ListTagsForResourceInput) elasticbeanstalk.ListTagsForResourceRequest
+
 	RebuildEnvironmentRequest(*elasticbeanstalk.RebuildEnvironmentInput) elasticbeanstalk.RebuildEnvironmentRequest
 
 	RequestEnvironmentInfoRequest(*elasticbeanstalk.RequestEnvironmentInfoInput) elasticbeanstalk.RequestEnvironmentInfoRequest
@@ -145,6 +147,8 @@ type ElasticBeanstalkAPI interface {
 	UpdateConfigurationTemplateRequest(*elasticbeanstalk.UpdateConfigurationTemplateInput) elasticbeanstalk.UpdateConfigurationTemplateRequest
 
 	UpdateEnvironmentRequest(*elasticbeanstalk.UpdateEnvironmentInput) elasticbeanstalk.UpdateEnvironmentRequest
+
+	UpdateTagsForResourceRequest(*elasticbeanstalk.UpdateTagsForResourceInput) elasticbeanstalk.UpdateTagsForResourceRequest
 
 	ValidateConfigurationSettingsRequest(*elasticbeanstalk.ValidateConfigurationSettingsInput) elasticbeanstalk.ValidateConfigurationSettingsRequest
 }

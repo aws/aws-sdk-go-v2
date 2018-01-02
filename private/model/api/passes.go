@@ -123,15 +123,13 @@ func (a *API) renameToplevelShapes() {
 	for _, v := range a.OperationList() {
 		if v.HasInput() {
 			name := v.ExportedName + "Input"
-			switch {
-			case a.Shapes[name] == nil:
+			if _, ok := a.Shapes[name]; !ok {
 				v.InputRef.Shape.Rename(name)
 			}
 		}
 		if v.HasOutput() {
 			name := v.ExportedName + "Output"
-			switch {
-			case a.Shapes[name] == nil:
+			if _, ok := a.Shapes[name]; !ok {
 				v.OutputRef.Shape.Rename(name)
 			}
 		}

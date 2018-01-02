@@ -53,6 +53,11 @@ func (a *API) Setup() {
 	a.setMetadataEndpointsKey()
 	a.writeShapeNames()
 	a.resolveReferences()
+
+	if !a.NoRemoveUnusedShapes {
+		a.removeUnusedShapes()
+	}
+
 	a.fixStutterNames()
 	a.renameExportable()
 	if !a.NoRenameToplevelShapes {
@@ -61,10 +66,6 @@ func (a *API) Setup() {
 	a.updateTopLevelShapeReferences()
 	a.createInputOutputShapes()
 	a.customizationPasses()
-
-	if !a.NoRemoveUnusedShapes {
-		a.removeUnusedShapes()
-	}
 
 	if !a.NoValidataShapeMethods {
 		a.addShapeValidations()

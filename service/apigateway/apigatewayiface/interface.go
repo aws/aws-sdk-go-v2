@@ -91,6 +91,8 @@ type APIGatewayAPI interface {
 
 	CreateUsagePlanKeyRequest(*apigateway.CreateUsagePlanKeyInput) apigateway.CreateUsagePlanKeyRequest
 
+	CreateVpcLinkRequest(*apigateway.CreateVpcLinkInput) apigateway.CreateVpcLinkRequest
+
 	DeleteApiKeyRequest(*apigateway.DeleteApiKeyInput) apigateway.DeleteApiKeyRequest
 
 	DeleteAuthorizerRequest(*apigateway.DeleteAuthorizerInput) apigateway.DeleteAuthorizerRequest
@@ -130,6 +132,8 @@ type APIGatewayAPI interface {
 	DeleteUsagePlanRequest(*apigateway.DeleteUsagePlanInput) apigateway.DeleteUsagePlanRequest
 
 	DeleteUsagePlanKeyRequest(*apigateway.DeleteUsagePlanKeyInput) apigateway.DeleteUsagePlanKeyRequest
+
+	DeleteVpcLinkRequest(*apigateway.DeleteVpcLinkInput) apigateway.DeleteVpcLinkRequest
 
 	FlushStageAuthorizersCacheRequest(*apigateway.FlushStageAuthorizersCacheInput) apigateway.FlushStageAuthorizersCacheRequest
 
@@ -237,6 +241,8 @@ type APIGatewayAPI interface {
 
 	GetStagesRequest(*apigateway.GetStagesInput) apigateway.GetStagesRequest
 
+	GetTagsRequest(*apigateway.GetTagsInput) apigateway.GetTagsRequest
+
 	GetUsageRequest(*apigateway.GetUsageInput) apigateway.GetUsageRequest
 
 	GetUsagePages(*apigateway.GetUsageInput, func(*apigateway.UpdateUsageOutput, bool) bool) error
@@ -256,6 +262,13 @@ type APIGatewayAPI interface {
 	GetUsagePlansPages(*apigateway.GetUsagePlansInput, func(*apigateway.GetUsagePlansOutput, bool) bool) error
 	GetUsagePlansPagesWithContext(aws.Context, *apigateway.GetUsagePlansInput, func(*apigateway.GetUsagePlansOutput, bool) bool, ...aws.Option) error
 
+	GetVpcLinkRequest(*apigateway.GetVpcLinkInput) apigateway.GetVpcLinkRequest
+
+	GetVpcLinksRequest(*apigateway.GetVpcLinksInput) apigateway.GetVpcLinksRequest
+
+	GetVpcLinksPages(*apigateway.GetVpcLinksInput, func(*apigateway.GetVpcLinksOutput, bool) bool) error
+	GetVpcLinksPagesWithContext(aws.Context, *apigateway.GetVpcLinksInput, func(*apigateway.GetVpcLinksOutput, bool) bool, ...aws.Option) error
+
 	ImportApiKeysRequest(*apigateway.ImportApiKeysInput) apigateway.ImportApiKeysRequest
 
 	ImportDocumentationPartsRequest(*apigateway.ImportDocumentationPartsInput) apigateway.ImportDocumentationPartsRequest
@@ -274,9 +287,13 @@ type APIGatewayAPI interface {
 
 	PutRestApiRequest(*apigateway.PutRestApiInput) apigateway.PutRestApiRequest
 
+	TagResourceRequest(*apigateway.TagResourceInput) apigateway.TagResourceRequest
+
 	TestInvokeAuthorizerRequest(*apigateway.TestInvokeAuthorizerInput) apigateway.TestInvokeAuthorizerRequest
 
 	TestInvokeMethodRequest(*apigateway.TestInvokeMethodInput) apigateway.TestInvokeMethodRequest
+
+	UntagResourceRequest(*apigateway.UntagResourceInput) apigateway.UntagResourceRequest
 
 	UpdateAccountRequest(*apigateway.UpdateAccountInput) apigateway.UpdateAccountRequest
 
@@ -319,6 +336,8 @@ type APIGatewayAPI interface {
 	UpdateUsageRequest(*apigateway.UpdateUsageInput) apigateway.UpdateUsageRequest
 
 	UpdateUsagePlanRequest(*apigateway.UpdateUsagePlanInput) apigateway.UpdateUsagePlanRequest
+
+	UpdateVpcLinkRequest(*apigateway.UpdateVpcLinkInput) apigateway.UpdateVpcLinkRequest
 }
 
 var _ APIGatewayAPI = (*apigateway.APIGateway)(nil)

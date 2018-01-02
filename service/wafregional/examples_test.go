@@ -1571,6 +1571,8 @@ func ExampleWAFRegional_UpdateWebACLRequest_shared00() {
 				fmt.Println(wafregional.ErrCodeWAFReferencedItemException, aerr.Error())
 			case wafregional.ErrCodeWAFLimitsExceededException:
 				fmt.Println(wafregional.ErrCodeWAFLimitsExceededException, aerr.Error())
+			case wafregional.ErrCodeWAFSubscriptionNotFoundException:
+				fmt.Println(wafregional.ErrCodeWAFSubscriptionNotFoundException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

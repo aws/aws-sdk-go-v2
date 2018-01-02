@@ -99,7 +99,11 @@ type OrganizationsAPI interface {
 
 	DetachPolicyRequest(*organizations.DetachPolicyInput) organizations.DetachPolicyRequest
 
+	DisableAWSServiceAccessRequest(*organizations.DisableAWSServiceAccessInput) organizations.DisableAWSServiceAccessRequest
+
 	DisablePolicyTypeRequest(*organizations.DisablePolicyTypeInput) organizations.DisablePolicyTypeRequest
+
+	EnableAWSServiceAccessRequest(*organizations.EnableAWSServiceAccessInput) organizations.EnableAWSServiceAccessRequest
 
 	EnableAllFeaturesRequest(*organizations.EnableAllFeaturesInput) organizations.EnableAllFeaturesRequest
 
@@ -108,6 +112,11 @@ type OrganizationsAPI interface {
 	InviteAccountToOrganizationRequest(*organizations.InviteAccountToOrganizationInput) organizations.InviteAccountToOrganizationRequest
 
 	LeaveOrganizationRequest(*organizations.LeaveOrganizationInput) organizations.LeaveOrganizationRequest
+
+	ListAWSServiceAccessForOrganizationRequest(*organizations.ListAWSServiceAccessForOrganizationInput) organizations.ListAWSServiceAccessForOrganizationRequest
+
+	ListAWSServiceAccessForOrganizationPages(*organizations.ListAWSServiceAccessForOrganizationInput, func(*organizations.ListAWSServiceAccessForOrganizationOutput, bool) bool) error
+	ListAWSServiceAccessForOrganizationPagesWithContext(aws.Context, *organizations.ListAWSServiceAccessForOrganizationInput, func(*organizations.ListAWSServiceAccessForOrganizationOutput, bool) bool, ...aws.Option) error
 
 	ListAccountsRequest(*organizations.ListAccountsInput) organizations.ListAccountsRequest
 

@@ -113,6 +113,8 @@ type CloudDirectoryAPI interface {
 
 	EnableDirectoryRequest(*clouddirectory.EnableDirectoryInput) clouddirectory.EnableDirectoryRequest
 
+	GetAppliedSchemaVersionRequest(*clouddirectory.GetAppliedSchemaVersionInput) clouddirectory.GetAppliedSchemaVersionRequest
+
 	GetDirectoryRequest(*clouddirectory.GetDirectoryInput) clouddirectory.GetDirectoryRequest
 
 	GetFacetRequest(*clouddirectory.GetFacetInput) clouddirectory.GetFacetRequest
@@ -234,6 +236,10 @@ type CloudDirectoryAPI interface {
 	UpdateSchemaRequest(*clouddirectory.UpdateSchemaInput) clouddirectory.UpdateSchemaRequest
 
 	UpdateTypedLinkFacetRequest(*clouddirectory.UpdateTypedLinkFacetInput) clouddirectory.UpdateTypedLinkFacetRequest
+
+	UpgradeAppliedSchemaRequest(*clouddirectory.UpgradeAppliedSchemaInput) clouddirectory.UpgradeAppliedSchemaRequest
+
+	UpgradePublishedSchemaRequest(*clouddirectory.UpgradePublishedSchemaInput) clouddirectory.UpgradePublishedSchemaRequest
 }
 
 var _ CloudDirectoryAPI = (*clouddirectory.CloudDirectory)(nil)

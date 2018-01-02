@@ -80,6 +80,75 @@ func (c *WAF) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) CreateBy
 	return CreateByteMatchSetRequest{Request: req, Input: input}
 }
 
+const opCreateGeoMatchSet = "CreateGeoMatchSet"
+
+// CreateGeoMatchSetRequest is a API request type for the CreateGeoMatchSet API operation.
+type CreateGeoMatchSetRequest struct {
+	*aws.Request
+	Input *CreateGeoMatchSetInput
+}
+
+// Send marshals and sends the CreateGeoMatchSet API request.
+func (r CreateGeoMatchSetRequest) Send() (*CreateGeoMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGeoMatchSetOutput), nil
+}
+
+// CreateGeoMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Creates an GeoMatchSet, which you use to specify which web requests you want
+// to allow or block based on the country that the requests originate from.
+// For example, if you're receiving a lot of requests from one or more countries
+// and you want to block the requests, you can create an GeoMatchSet that contains
+// those countries and then configure AWS WAF to block the requests.
+//
+// To create and configure a GeoMatchSet, perform the following steps:
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a CreateGeoMatchSet request.
+//
+// Submit a CreateGeoMatchSet request.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateGeoMatchSet request.
+//
+// Submit an UpdateGeoMatchSetSet request to specify the countries that you
+// want AWS WAF to watch for.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the CreateGeoMatchSetRequest method.
+//    req := client.CreateGeoMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSet
+func (c *WAF) CreateGeoMatchSetRequest(input *CreateGeoMatchSetInput) CreateGeoMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opCreateGeoMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateGeoMatchSetInput{}
+	}
+
+	output := &CreateGeoMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateGeoMatchSetRequest{Request: req, Input: input}
+}
+
 const opCreateIPSet = "CreateIPSet"
 
 // CreateIPSetRequest is a API request type for the CreateIPSet API operation.
@@ -259,6 +328,144 @@ func (c *WAF) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) Create
 	return CreateRateBasedRuleRequest{Request: req, Input: input}
 }
 
+const opCreateRegexMatchSet = "CreateRegexMatchSet"
+
+// CreateRegexMatchSetRequest is a API request type for the CreateRegexMatchSet API operation.
+type CreateRegexMatchSetRequest struct {
+	*aws.Request
+	Input *CreateRegexMatchSetInput
+}
+
+// Send marshals and sends the CreateRegexMatchSet API request.
+func (r CreateRegexMatchSetRequest) Send() (*CreateRegexMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRegexMatchSetOutput), nil
+}
+
+// CreateRegexMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Creates a RegexMatchSet. You then use UpdateRegexMatchSet to identify the
+// part of a web request that you want AWS WAF to inspect, such as the values
+// of the User-Agent header or the query string. For example, you can create
+// a RegexMatchSet that contains a RegexMatchTuple that looks for any requests
+// with User-Agent headers that match a RegexPatternSet with pattern B[a@]dB[o0]t.
+// You can then configure AWS WAF to reject those requests.
+//
+// To create and configure a RegexMatchSet, perform the following steps:
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a CreateRegexMatchSet request.
+//
+// Submit a CreateRegexMatchSet request.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateRegexMatchSet request.
+//
+// Submit an UpdateRegexMatchSet request to specify the part of the request
+// that you want AWS WAF to inspect (for example, the header or the URI) and
+// the value, using a RegexPatternSet, that you want AWS WAF to watch for.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the CreateRegexMatchSetRequest method.
+//    req := client.CreateRegexMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSet
+func (c *WAF) CreateRegexMatchSetRequest(input *CreateRegexMatchSetInput) CreateRegexMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opCreateRegexMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateRegexMatchSetInput{}
+	}
+
+	output := &CreateRegexMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateRegexMatchSetRequest{Request: req, Input: input}
+}
+
+const opCreateRegexPatternSet = "CreateRegexPatternSet"
+
+// CreateRegexPatternSetRequest is a API request type for the CreateRegexPatternSet API operation.
+type CreateRegexPatternSetRequest struct {
+	*aws.Request
+	Input *CreateRegexPatternSetInput
+}
+
+// Send marshals and sends the CreateRegexPatternSet API request.
+func (r CreateRegexPatternSetRequest) Send() (*CreateRegexPatternSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRegexPatternSetOutput), nil
+}
+
+// CreateRegexPatternSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Creates a RegexPatternSet. You then use UpdateRegexPatternSet to specify
+// the regular expression (regex) pattern that you want AWS WAF to search for,
+// such as B[a@]dB[o0]t. You can then configure AWS WAF to reject those requests.
+//
+// To create and configure a RegexPatternSet, perform the following steps:
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a CreateRegexPatternSet request.
+//
+// Submit a CreateRegexPatternSet request.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateRegexPatternSet request.
+//
+// Submit an UpdateRegexPatternSet request to specify the string that you want
+// AWS WAF to watch for.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the CreateRegexPatternSetRequest method.
+//    req := client.CreateRegexPatternSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSet
+func (c *WAF) CreateRegexPatternSetRequest(input *CreateRegexPatternSetInput) CreateRegexPatternSetRequest {
+	op := &aws.Operation{
+		Name:       opCreateRegexPatternSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateRegexPatternSetInput{}
+	}
+
+	output := &CreateRegexPatternSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateRegexPatternSetRequest{Request: req, Input: input}
+}
+
 const opCreateRule = "CreateRule"
 
 // CreateRuleRequest is a API request type for the CreateRule API operation.
@@ -341,6 +548,68 @@ func (c *WAF) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateRuleRequest{Request: req, Input: input}
+}
+
+const opCreateRuleGroup = "CreateRuleGroup"
+
+// CreateRuleGroupRequest is a API request type for the CreateRuleGroup API operation.
+type CreateRuleGroupRequest struct {
+	*aws.Request
+	Input *CreateRuleGroupInput
+}
+
+// Send marshals and sends the CreateRuleGroup API request.
+func (r CreateRuleGroupRequest) Send() (*CreateRuleGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRuleGroupOutput), nil
+}
+
+// CreateRuleGroupRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Creates a RuleGroup. A rule group is a collection of predefined rules that
+// you add to a web ACL. You use UpdateRuleGroup to add rules to the rule group.
+//
+// Rule groups are subject to the following limits:
+//
+//    * Three rule groups per account. You can request an increase to this limit
+//    by contacting customer support.
+//
+//    * One rule group per web ACL.
+//
+//    * Ten rules per rule group.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the CreateRuleGroupRequest method.
+//    req := client.CreateRuleGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroup
+func (c *WAF) CreateRuleGroupRequest(input *CreateRuleGroupInput) CreateRuleGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateRuleGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateRuleGroupInput{}
+	}
+
+	output := &CreateRuleGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateRuleGroupRequest{Request: req, Input: input}
 }
 
 const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
@@ -691,6 +960,68 @@ func (c *WAF) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) DeleteBy
 	return DeleteByteMatchSetRequest{Request: req, Input: input}
 }
 
+const opDeleteGeoMatchSet = "DeleteGeoMatchSet"
+
+// DeleteGeoMatchSetRequest is a API request type for the DeleteGeoMatchSet API operation.
+type DeleteGeoMatchSetRequest struct {
+	*aws.Request
+	Input *DeleteGeoMatchSetInput
+}
+
+// Send marshals and sends the DeleteGeoMatchSet API request.
+func (r DeleteGeoMatchSetRequest) Send() (*DeleteGeoMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGeoMatchSetOutput), nil
+}
+
+// DeleteGeoMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Permanently deletes a GeoMatchSet. You can't delete a GeoMatchSet if it's
+// still used in any Rules or if it still includes any countries.
+//
+// If you just want to remove a GeoMatchSet from a Rule, use UpdateRule.
+//
+// To permanently delete a GeoMatchSet from AWS WAF, perform the following steps:
+//
+// Update the GeoMatchSet to remove any countries. For more information, see
+// UpdateGeoMatchSet.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a DeleteGeoMatchSet request.
+//
+// Submit a DeleteGeoMatchSet request.
+//
+//    // Example sending a request using the DeleteGeoMatchSetRequest method.
+//    req := client.DeleteGeoMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSet
+func (c *WAF) DeleteGeoMatchSetRequest(input *DeleteGeoMatchSetInput) DeleteGeoMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opDeleteGeoMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteGeoMatchSetInput{}
+	}
+
+	output := &DeleteGeoMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteGeoMatchSetRequest{Request: req, Input: input}
+}
+
 const opDeleteIPSet = "DeleteIPSet"
 
 // DeleteIPSetRequest is a API request type for the DeleteIPSet API operation.
@@ -817,6 +1148,120 @@ func (c *WAF) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) Delete
 	return DeleteRateBasedRuleRequest{Request: req, Input: input}
 }
 
+const opDeleteRegexMatchSet = "DeleteRegexMatchSet"
+
+// DeleteRegexMatchSetRequest is a API request type for the DeleteRegexMatchSet API operation.
+type DeleteRegexMatchSetRequest struct {
+	*aws.Request
+	Input *DeleteRegexMatchSetInput
+}
+
+// Send marshals and sends the DeleteRegexMatchSet API request.
+func (r DeleteRegexMatchSetRequest) Send() (*DeleteRegexMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRegexMatchSetOutput), nil
+}
+
+// DeleteRegexMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Permanently deletes a RegexMatchSet. You can't delete a RegexMatchSet if
+// it's still used in any Rules or if it still includes any RegexMatchTuples
+// objects (any filters).
+//
+// If you just want to remove a RegexMatchSet from a Rule, use UpdateRule.
+//
+// To permanently delete a RegexMatchSet, perform the following steps:
+//
+// Update the RegexMatchSet to remove filters, if any. For more information,
+// see UpdateRegexMatchSet.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a DeleteRegexMatchSet request.
+//
+// Submit a DeleteRegexMatchSet request.
+//
+//    // Example sending a request using the DeleteRegexMatchSetRequest method.
+//    req := client.DeleteRegexMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSet
+func (c *WAF) DeleteRegexMatchSetRequest(input *DeleteRegexMatchSetInput) DeleteRegexMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRegexMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRegexMatchSetInput{}
+	}
+
+	output := &DeleteRegexMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRegexMatchSetRequest{Request: req, Input: input}
+}
+
+const opDeleteRegexPatternSet = "DeleteRegexPatternSet"
+
+// DeleteRegexPatternSetRequest is a API request type for the DeleteRegexPatternSet API operation.
+type DeleteRegexPatternSetRequest struct {
+	*aws.Request
+	Input *DeleteRegexPatternSetInput
+}
+
+// Send marshals and sends the DeleteRegexPatternSet API request.
+func (r DeleteRegexPatternSetRequest) Send() (*DeleteRegexPatternSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRegexPatternSetOutput), nil
+}
+
+// DeleteRegexPatternSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Permanently deletes a RegexPatternSet. You can't delete a RegexPatternSet
+// if it's still used in any RegexMatchSet or if the RegexPatternSet is not
+// empty.
+//
+//    // Example sending a request using the DeleteRegexPatternSetRequest method.
+//    req := client.DeleteRegexPatternSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSet
+func (c *WAF) DeleteRegexPatternSetRequest(input *DeleteRegexPatternSetInput) DeleteRegexPatternSetRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRegexPatternSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRegexPatternSetInput{}
+	}
+
+	output := &DeleteRegexPatternSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRegexPatternSetRequest{Request: req, Input: input}
+}
+
 const opDeleteRule = "DeleteRule"
 
 // DeleteRuleRequest is a API request type for the DeleteRule API operation.
@@ -877,6 +1322,67 @@ func (c *WAF) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteRuleRequest{Request: req, Input: input}
+}
+
+const opDeleteRuleGroup = "DeleteRuleGroup"
+
+// DeleteRuleGroupRequest is a API request type for the DeleteRuleGroup API operation.
+type DeleteRuleGroupRequest struct {
+	*aws.Request
+	Input *DeleteRuleGroupInput
+}
+
+// Send marshals and sends the DeleteRuleGroup API request.
+func (r DeleteRuleGroupRequest) Send() (*DeleteRuleGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRuleGroupOutput), nil
+}
+
+// DeleteRuleGroupRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Permanently deletes a RuleGroup. You can't delete a RuleGroup if it's still
+// used in any WebACL objects or if it still includes any rules.
+//
+// If you just want to remove a RuleGroup from a WebACL, use UpdateWebACL.
+//
+// To permanently delete a RuleGroup from AWS WAF, perform the following steps:
+//
+// Update the RuleGroup to remove rules, if any. For more information, see UpdateRuleGroup.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of a DeleteRuleGroup request.
+//
+// Submit a DeleteRuleGroup request.
+//
+//    // Example sending a request using the DeleteRuleGroupRequest method.
+//    req := client.DeleteRuleGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroup
+func (c *WAF) DeleteRuleGroupRequest(input *DeleteRuleGroupInput) DeleteRuleGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRuleGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRuleGroupInput{}
+	}
+
+	output := &DeleteRuleGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRuleGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
@@ -1299,6 +1805,55 @@ func (c *WAF) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) GetC
 	return GetChangeTokenStatusRequest{Request: req, Input: input}
 }
 
+const opGetGeoMatchSet = "GetGeoMatchSet"
+
+// GetGeoMatchSetRequest is a API request type for the GetGeoMatchSet API operation.
+type GetGeoMatchSetRequest struct {
+	*aws.Request
+	Input *GetGeoMatchSetInput
+}
+
+// Send marshals and sends the GetGeoMatchSet API request.
+func (r GetGeoMatchSetRequest) Send() (*GetGeoMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGeoMatchSetOutput), nil
+}
+
+// GetGeoMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns the GeoMatchSet that is specified by GeoMatchSetId.
+//
+//    // Example sending a request using the GetGeoMatchSetRequest method.
+//    req := client.GetGeoMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSet
+func (c *WAF) GetGeoMatchSetRequest(input *GetGeoMatchSetInput) GetGeoMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opGetGeoMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetGeoMatchSetInput{}
+	}
+
+	output := &GetGeoMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetGeoMatchSetRequest{Request: req, Input: input}
+}
+
 const opGetIPSet = "GetIPSet"
 
 // GetIPSetRequest is a API request type for the GetIPSet API operation.
@@ -1450,6 +2005,104 @@ func (c *WAF) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManagedK
 	return GetRateBasedRuleManagedKeysRequest{Request: req, Input: input}
 }
 
+const opGetRegexMatchSet = "GetRegexMatchSet"
+
+// GetRegexMatchSetRequest is a API request type for the GetRegexMatchSet API operation.
+type GetRegexMatchSetRequest struct {
+	*aws.Request
+	Input *GetRegexMatchSetInput
+}
+
+// Send marshals and sends the GetRegexMatchSet API request.
+func (r GetRegexMatchSetRequest) Send() (*GetRegexMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRegexMatchSetOutput), nil
+}
+
+// GetRegexMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns the RegexMatchSet specified by RegexMatchSetId.
+//
+//    // Example sending a request using the GetRegexMatchSetRequest method.
+//    req := client.GetRegexMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSet
+func (c *WAF) GetRegexMatchSetRequest(input *GetRegexMatchSetInput) GetRegexMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opGetRegexMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRegexMatchSetInput{}
+	}
+
+	output := &GetRegexMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRegexMatchSetRequest{Request: req, Input: input}
+}
+
+const opGetRegexPatternSet = "GetRegexPatternSet"
+
+// GetRegexPatternSetRequest is a API request type for the GetRegexPatternSet API operation.
+type GetRegexPatternSetRequest struct {
+	*aws.Request
+	Input *GetRegexPatternSetInput
+}
+
+// Send marshals and sends the GetRegexPatternSet API request.
+func (r GetRegexPatternSetRequest) Send() (*GetRegexPatternSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRegexPatternSetOutput), nil
+}
+
+// GetRegexPatternSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns the RegexPatternSet specified by RegexPatternSetId.
+//
+//    // Example sending a request using the GetRegexPatternSetRequest method.
+//    req := client.GetRegexPatternSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSet
+func (c *WAF) GetRegexPatternSetRequest(input *GetRegexPatternSetInput) GetRegexPatternSetRequest {
+	op := &aws.Operation{
+		Name:       opGetRegexPatternSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRegexPatternSetInput{}
+	}
+
+	output := &GetRegexPatternSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRegexPatternSetRequest{Request: req, Input: input}
+}
+
 const opGetRule = "GetRule"
 
 // GetRuleRequest is a API request type for the GetRule API operation.
@@ -1498,6 +2151,58 @@ func (c *WAF) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetRuleRequest{Request: req, Input: input}
+}
+
+const opGetRuleGroup = "GetRuleGroup"
+
+// GetRuleGroupRequest is a API request type for the GetRuleGroup API operation.
+type GetRuleGroupRequest struct {
+	*aws.Request
+	Input *GetRuleGroupInput
+}
+
+// Send marshals and sends the GetRuleGroup API request.
+func (r GetRuleGroupRequest) Send() (*GetRuleGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRuleGroupOutput), nil
+}
+
+// GetRuleGroupRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns the RuleGroup that is specified by the RuleGroupId that you included
+// in the GetRuleGroup request.
+//
+// To view the rules in a rule group, use ListActivatedRulesInRuleGroup.
+//
+//    // Example sending a request using the GetRuleGroupRequest method.
+//    req := client.GetRuleGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleGroup
+func (c *WAF) GetRuleGroupRequest(input *GetRuleGroupInput) GetRuleGroupRequest {
+	op := &aws.Operation{
+		Name:       opGetRuleGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRuleGroupInput{}
+	}
+
+	output := &GetRuleGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRuleGroupRequest{Request: req, Input: input}
 }
 
 const opGetSampledRequests = "GetSampledRequests"
@@ -1755,6 +2460,55 @@ func (c *WAF) GetXssMatchSetRequest(input *GetXssMatchSetInput) GetXssMatchSetRe
 	return GetXssMatchSetRequest{Request: req, Input: input}
 }
 
+const opListActivatedRulesInRuleGroup = "ListActivatedRulesInRuleGroup"
+
+// ListActivatedRulesInRuleGroupRequest is a API request type for the ListActivatedRulesInRuleGroup API operation.
+type ListActivatedRulesInRuleGroupRequest struct {
+	*aws.Request
+	Input *ListActivatedRulesInRuleGroupInput
+}
+
+// Send marshals and sends the ListActivatedRulesInRuleGroup API request.
+func (r ListActivatedRulesInRuleGroupRequest) Send() (*ListActivatedRulesInRuleGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListActivatedRulesInRuleGroupOutput), nil
+}
+
+// ListActivatedRulesInRuleGroupRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns an array of ActivatedRule objects.
+//
+//    // Example sending a request using the ListActivatedRulesInRuleGroupRequest method.
+//    req := client.ListActivatedRulesInRuleGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroup
+func (c *WAF) ListActivatedRulesInRuleGroupRequest(input *ListActivatedRulesInRuleGroupInput) ListActivatedRulesInRuleGroupRequest {
+	op := &aws.Operation{
+		Name:       opListActivatedRulesInRuleGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListActivatedRulesInRuleGroupInput{}
+	}
+
+	output := &ListActivatedRulesInRuleGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListActivatedRulesInRuleGroupRequest{Request: req, Input: input}
+}
+
 const opListByteMatchSets = "ListByteMatchSets"
 
 // ListByteMatchSetsRequest is a API request type for the ListByteMatchSets API operation.
@@ -1802,6 +2556,55 @@ func (c *WAF) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) ListByteMa
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListByteMatchSetsRequest{Request: req, Input: input}
+}
+
+const opListGeoMatchSets = "ListGeoMatchSets"
+
+// ListGeoMatchSetsRequest is a API request type for the ListGeoMatchSets API operation.
+type ListGeoMatchSetsRequest struct {
+	*aws.Request
+	Input *ListGeoMatchSetsInput
+}
+
+// Send marshals and sends the ListGeoMatchSets API request.
+func (r ListGeoMatchSetsRequest) Send() (*ListGeoMatchSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGeoMatchSetsOutput), nil
+}
+
+// ListGeoMatchSetsRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns an array of GeoMatchSetSummary objects in the response.
+//
+//    // Example sending a request using the ListGeoMatchSetsRequest method.
+//    req := client.ListGeoMatchSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSets
+func (c *WAF) ListGeoMatchSetsRequest(input *ListGeoMatchSetsInput) ListGeoMatchSetsRequest {
+	op := &aws.Operation{
+		Name:       opListGeoMatchSets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListGeoMatchSetsInput{}
+	}
+
+	output := &ListGeoMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListGeoMatchSetsRequest{Request: req, Input: input}
 }
 
 const opListIPSets = "ListIPSets"
@@ -1900,6 +2703,153 @@ func (c *WAF) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) ListRate
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListRateBasedRulesRequest{Request: req, Input: input}
+}
+
+const opListRegexMatchSets = "ListRegexMatchSets"
+
+// ListRegexMatchSetsRequest is a API request type for the ListRegexMatchSets API operation.
+type ListRegexMatchSetsRequest struct {
+	*aws.Request
+	Input *ListRegexMatchSetsInput
+}
+
+// Send marshals and sends the ListRegexMatchSets API request.
+func (r ListRegexMatchSetsRequest) Send() (*ListRegexMatchSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRegexMatchSetsOutput), nil
+}
+
+// ListRegexMatchSetsRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns an array of RegexMatchSetSummary objects.
+//
+//    // Example sending a request using the ListRegexMatchSetsRequest method.
+//    req := client.ListRegexMatchSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSets
+func (c *WAF) ListRegexMatchSetsRequest(input *ListRegexMatchSetsInput) ListRegexMatchSetsRequest {
+	op := &aws.Operation{
+		Name:       opListRegexMatchSets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListRegexMatchSetsInput{}
+	}
+
+	output := &ListRegexMatchSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListRegexMatchSetsRequest{Request: req, Input: input}
+}
+
+const opListRegexPatternSets = "ListRegexPatternSets"
+
+// ListRegexPatternSetsRequest is a API request type for the ListRegexPatternSets API operation.
+type ListRegexPatternSetsRequest struct {
+	*aws.Request
+	Input *ListRegexPatternSetsInput
+}
+
+// Send marshals and sends the ListRegexPatternSets API request.
+func (r ListRegexPatternSetsRequest) Send() (*ListRegexPatternSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRegexPatternSetsOutput), nil
+}
+
+// ListRegexPatternSetsRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns an array of RegexPatternSetSummary objects.
+//
+//    // Example sending a request using the ListRegexPatternSetsRequest method.
+//    req := client.ListRegexPatternSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSets
+func (c *WAF) ListRegexPatternSetsRequest(input *ListRegexPatternSetsInput) ListRegexPatternSetsRequest {
+	op := &aws.Operation{
+		Name:       opListRegexPatternSets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListRegexPatternSetsInput{}
+	}
+
+	output := &ListRegexPatternSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListRegexPatternSetsRequest{Request: req, Input: input}
+}
+
+const opListRuleGroups = "ListRuleGroups"
+
+// ListRuleGroupsRequest is a API request type for the ListRuleGroups API operation.
+type ListRuleGroupsRequest struct {
+	*aws.Request
+	Input *ListRuleGroupsInput
+}
+
+// Send marshals and sends the ListRuleGroups API request.
+func (r ListRuleGroupsRequest) Send() (*ListRuleGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRuleGroupsOutput), nil
+}
+
+// ListRuleGroupsRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns an array of RuleGroup objects.
+//
+//    // Example sending a request using the ListRuleGroupsRequest method.
+//    req := client.ListRuleGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroups
+func (c *WAF) ListRuleGroupsRequest(input *ListRuleGroupsInput) ListRuleGroupsRequest {
+	op := &aws.Operation{
+		Name:       opListRuleGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListRuleGroupsInput{}
+	}
+
+	output := &ListRuleGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListRuleGroupsRequest{Request: req, Input: input}
 }
 
 const opListRules = "ListRules"
@@ -2047,6 +2997,55 @@ func (c *WAF) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSetsI
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListSqlInjectionMatchSetsRequest{Request: req, Input: input}
+}
+
+const opListSubscribedRuleGroups = "ListSubscribedRuleGroups"
+
+// ListSubscribedRuleGroupsRequest is a API request type for the ListSubscribedRuleGroups API operation.
+type ListSubscribedRuleGroupsRequest struct {
+	*aws.Request
+	Input *ListSubscribedRuleGroupsInput
+}
+
+// Send marshals and sends the ListSubscribedRuleGroups API request.
+func (r ListSubscribedRuleGroupsRequest) Send() (*ListSubscribedRuleGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSubscribedRuleGroupsOutput), nil
+}
+
+// ListSubscribedRuleGroupsRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Returns an array of RuleGroup objects that you are subscribed to.
+//
+//    // Example sending a request using the ListSubscribedRuleGroupsRequest method.
+//    req := client.ListSubscribedRuleGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroups
+func (c *WAF) ListSubscribedRuleGroupsRequest(input *ListSubscribedRuleGroupsInput) ListSubscribedRuleGroupsRequest {
+	op := &aws.Operation{
+		Name:       opListSubscribedRuleGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListSubscribedRuleGroupsInput{}
+	}
+
+	output := &ListSubscribedRuleGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSubscribedRuleGroupsRequest{Request: req, Input: input}
 }
 
 const opListWebACLs = "ListWebACLs"
@@ -2232,6 +3231,82 @@ func (c *WAF) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) UpdateBy
 	return UpdateByteMatchSetRequest{Request: req, Input: input}
 }
 
+const opUpdateGeoMatchSet = "UpdateGeoMatchSet"
+
+// UpdateGeoMatchSetRequest is a API request type for the UpdateGeoMatchSet API operation.
+type UpdateGeoMatchSetRequest struct {
+	*aws.Request
+	Input *UpdateGeoMatchSetInput
+}
+
+// Send marshals and sends the UpdateGeoMatchSet API request.
+func (r UpdateGeoMatchSetRequest) Send() (*UpdateGeoMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGeoMatchSetOutput), nil
+}
+
+// UpdateGeoMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Inserts or deletes GeoMatchConstraint objects in an GeoMatchSet. For each
+// GeoMatchConstraint object, you specify the following values:
+//
+//    * Whether to insert or delete the object from the array. If you want to
+//    change an GeoMatchConstraint object, you delete the existing object and
+//    add a new one.
+//
+//    * The Type. The only valid value for Type is Country.
+//
+//    * The Value, which is a two character code for the country to add to the
+//    GeoMatchConstraint object. Valid codes are listed in GeoMatchConstraint$Value.
+//
+// To create and configure an GeoMatchSet, perform the following steps:
+//
+// Submit a CreateGeoMatchSet request.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateGeoMatchSet request.
+//
+// Submit an UpdateGeoMatchSet request to specify the country that you want
+// AWS WAF to watch for.
+//
+// When you update an GeoMatchSet, you specify the country that you want to
+// add and/or the country that you want to delete. If you want to change a country,
+// you delete the existing country and add the new one.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the UpdateGeoMatchSetRequest method.
+//    req := client.UpdateGeoMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSet
+func (c *WAF) UpdateGeoMatchSetRequest(input *UpdateGeoMatchSetInput) UpdateGeoMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGeoMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateGeoMatchSetInput{}
+	}
+
+	output := &UpdateGeoMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateGeoMatchSetRequest{Request: req, Input: input}
+}
+
 const opUpdateIPSet = "UpdateIPSet"
 
 // UpdateIPSetRequest is a API request type for the UpdateIPSet API operation.
@@ -2415,6 +3490,167 @@ func (c *WAF) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) Update
 	return UpdateRateBasedRuleRequest{Request: req, Input: input}
 }
 
+const opUpdateRegexMatchSet = "UpdateRegexMatchSet"
+
+// UpdateRegexMatchSetRequest is a API request type for the UpdateRegexMatchSet API operation.
+type UpdateRegexMatchSetRequest struct {
+	*aws.Request
+	Input *UpdateRegexMatchSetInput
+}
+
+// Send marshals and sends the UpdateRegexMatchSet API request.
+func (r UpdateRegexMatchSetRequest) Send() (*UpdateRegexMatchSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRegexMatchSetOutput), nil
+}
+
+// UpdateRegexMatchSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Inserts or deletes RegexMatchTuple objects (filters) in a RegexMatchSet.
+// For each RegexMatchSetUpdate object, you specify the following values:
+//
+//    * Whether to insert or delete the object from the array. If you want to
+//    change a RegexMatchSetUpdate object, you delete the existing object and
+//    add a new one.
+//
+//    * The part of a web request that you want AWS WAF to inspectupdate, such
+//    as a query string or the value of the User-Agent header.
+//
+//    * The identifier of the pattern (a regular expression) that you want AWS
+//    WAF to look for. For more information, see RegexPatternSet.
+//
+//    * Whether to perform any conversions on the request, such as converting
+//    it to lowercase, before inspecting it for the specified string.
+//
+// For example, you can create a RegexPatternSet that matches any requests with
+// User-Agent headers that contain the string B[a@]dB[o0]t. You can then configure
+// AWS WAF to reject those requests.
+//
+// To create and configure a RegexMatchSet, perform the following steps:
+//
+// Create a RegexMatchSet. For more information, see CreateRegexMatchSet.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateRegexMatchSet request.
+//
+// Submit an UpdateRegexMatchSet request to specify the part of the request
+// that you want AWS WAF to inspect (for example, the header or the URI) and
+// the identifier of the RegexPatternSet that contain the regular expression
+// patters you want AWS WAF to watch for.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the UpdateRegexMatchSetRequest method.
+//    req := client.UpdateRegexMatchSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSet
+func (c *WAF) UpdateRegexMatchSetRequest(input *UpdateRegexMatchSetInput) UpdateRegexMatchSetRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRegexMatchSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRegexMatchSetInput{}
+	}
+
+	output := &UpdateRegexMatchSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRegexMatchSetRequest{Request: req, Input: input}
+}
+
+const opUpdateRegexPatternSet = "UpdateRegexPatternSet"
+
+// UpdateRegexPatternSetRequest is a API request type for the UpdateRegexPatternSet API operation.
+type UpdateRegexPatternSetRequest struct {
+	*aws.Request
+	Input *UpdateRegexPatternSetInput
+}
+
+// Send marshals and sends the UpdateRegexPatternSet API request.
+func (r UpdateRegexPatternSetRequest) Send() (*UpdateRegexPatternSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRegexPatternSetOutput), nil
+}
+
+// UpdateRegexPatternSetRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Inserts or deletes RegexPatternString objects in a RegexPatternSet. For each
+// RegexPatternString object, you specify the following values:
+//
+//    * Whether to insert or delete the RegexPatternString.
+//
+//    * The regular expression pattern that you want to insert or delete. For
+//    more information, see RegexPatternSet.
+//
+// For example, you can create a RegexPatternString such as B[a@]dB[o0]t. AWS
+// WAF will match this RegexPatternString to:
+//
+//    * BadBot
+//
+//    * BadB0t
+//
+//    * B@dBot
+//
+//    * B@dB0t
+//
+// To create and configure a RegexPatternSet, perform the following steps:
+//
+// Create a RegexPatternSet. For more information, see CreateRegexPatternSet.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateRegexPatternSet request.
+//
+// Submit an UpdateRegexPatternSet request to specify the regular expression
+// pattern that you want AWS WAF to watch for.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the UpdateRegexPatternSetRequest method.
+//    req := client.UpdateRegexPatternSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSet
+func (c *WAF) UpdateRegexPatternSetRequest(input *UpdateRegexPatternSetInput) UpdateRegexPatternSetRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRegexPatternSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRegexPatternSetInput{}
+	}
+
+	output := &UpdateRegexPatternSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRegexPatternSetRequest{Request: req, Input: input}
+}
+
 const opUpdateRule = "UpdateRule"
 
 // UpdateRuleRequest is a API request type for the UpdateRule API operation.
@@ -2494,6 +3730,77 @@ func (c *WAF) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateRuleRequest{Request: req, Input: input}
+}
+
+const opUpdateRuleGroup = "UpdateRuleGroup"
+
+// UpdateRuleGroupRequest is a API request type for the UpdateRuleGroup API operation.
+type UpdateRuleGroupRequest struct {
+	*aws.Request
+	Input *UpdateRuleGroupInput
+}
+
+// Send marshals and sends the UpdateRuleGroup API request.
+func (r UpdateRuleGroupRequest) Send() (*UpdateRuleGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRuleGroupOutput), nil
+}
+
+// UpdateRuleGroupRequest returns a request value for making API operation for
+// AWS WAF.
+//
+// Inserts or deletes ActivatedRule objects in a RuleGroup.
+//
+// You can only insert REGULAR rules into a rule group.
+//
+// You can have a maximum of ten rules per rule group.
+//
+// To create and configure a RuleGroup, perform the following steps:
+//
+// Create and update the Rules that you want to include in the RuleGroup. See
+// CreateRule.
+//
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateRuleGroup request.
+//
+// Submit an UpdateRuleGroup request to add Rules to the RuleGroup.
+//
+// Create and update a WebACL that contains the RuleGroup. See CreateWebACL.
+//
+// If you want to replace one Rule with another, you delete the existing one
+// and add the new one.
+//
+// For more information about how to use the AWS WAF API to allow or block HTTP
+// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+//
+//    // Example sending a request using the UpdateRuleGroupRequest method.
+//    req := client.UpdateRuleGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroup
+func (c *WAF) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) UpdateRuleGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRuleGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRuleGroupInput{}
+	}
+
+	output := &UpdateRuleGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRuleGroupRequest{Request: req, Input: input}
 }
 
 const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
@@ -2861,8 +4168,26 @@ type ActivatedRule struct {
 	//    in the rule and then continues to inspect the web request based on the
 	//    remaining rules in the web ACL.
 	//
-	// Action is a required field
-	Action *WafAction `type:"structure" required:"true"`
+	// The Action data type within ActivatedRule is used only when submitting an
+	// UpdateWebACL request. ActivatedRule|Action is not applicable and therefore
+	// not available for UpdateRuleGroup.
+	Action *WafAction `type:"structure"`
+
+	// Use the OverrideAction to test your RuleGroup.
+	//
+	// Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction
+	// to None, the RuleGroup will block a request if any individual rule in the
+	// RuleGroup matches the request and is configured to block that request. However
+	// if you first want to test the RuleGroup, set the OverrideAction to Count.
+	// The RuleGroup will then override any block action specified by individual
+	// rules contained within the group. Instead of blocking matching requests,
+	// those requests will be counted. You can view a record of counted requests
+	// using GetSampledRequests.
+	//
+	// The OverrideAction data type within ActivatedRule is used only when submitting
+	// an UpdateRuleGroup request. ActivatedRule|OverrideAction is not applicable
+	// and therefore not available for UpdateWebACL.
+	OverrideAction *WafOverrideAction `type:"structure"`
 
 	// Specifies the order in which the Rules in a WebACL are evaluated. Rules with
 	// a lower value for Priority are evaluated before Rules with a higher value.
@@ -2882,11 +4207,12 @@ type ActivatedRule struct {
 	// RuleId is a required field
 	RuleId *string `min:"1" type:"string" required:"true"`
 
-	// The rule type, either REGULAR, as defined by Rule, or RATE_BASED, as defined
-	// by RateBasedRule. The default is REGULAR. Although this field is optional,
-	// be aware that if you try to add a RATE_BASED rule to a web ACL without setting
-	// the type, the UpdateWebACL request will fail because the request tries to
-	// add a REGULAR rule with the specified ID, which does not exist.
+	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined
+	// by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR.
+	// Although this field is optional, be aware that if you try to add a RATE_BASED
+	// rule to a web ACL without setting the type, the UpdateWebACL request will
+	// fail because the request tries to add a REGULAR rule with the specified ID,
+	// which does not exist.
 	Type WafRuleType `type:"string" enum:"true"`
 }
 
@@ -2904,10 +4230,6 @@ func (s ActivatedRule) GoString() string {
 func (s *ActivatedRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActivatedRule"}
 
-	if s.Action == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Action"))
-	}
-
 	if s.Priority == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
@@ -2923,6 +4245,11 @@ func (s *ActivatedRule) Validate() error {
 			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.OverrideAction != nil {
+		if err := s.OverrideAction.Validate(); err != nil {
+			invalidParams.AddNested("OverrideAction", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2933,6 +4260,12 @@ func (s *ActivatedRule) Validate() error {
 // SetAction sets the Action field's value.
 func (s *ActivatedRule) SetAction(v *WafAction) *ActivatedRule {
 	s.Action = v
+	return s
+}
+
+// SetOverrideAction sets the OverrideAction field's value.
+func (s *ActivatedRule) SetOverrideAction(v *WafOverrideAction) *ActivatedRule {
+	s.OverrideAction = v
 	return s
 }
 
@@ -3480,6 +4813,111 @@ func (s *CreateByteMatchSetOutput) SetChangeToken(v string) *CreateByteMatchSetO
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSetRequest
+type CreateGeoMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the GeoMatchSet. You can't change Name
+	// after you create the GeoMatchSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateGeoMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGeoMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGeoMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGeoMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateGeoMatchSetInput) SetChangeToken(v string) *CreateGeoMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateGeoMatchSetInput) SetName(v string) *CreateGeoMatchSetInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSetResponse
+type CreateGeoMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateGeoMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// The GeoMatchSet returned in the CreateGeoMatchSet response. The GeoMatchSet
+	// contains no GeoMatchConstraints.
+	GeoMatchSet *GeoMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateGeoMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGeoMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateGeoMatchSetOutput) SetChangeToken(v string) *CreateGeoMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetGeoMatchSet sets the GeoMatchSet field's value.
+func (s *CreateGeoMatchSetOutput) SetGeoMatchSet(v *GeoMatchSet) *CreateGeoMatchSetOutput {
+	s.GeoMatchSet = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateIPSetRequest
 type CreateIPSetInput struct {
 	_ struct{} `type:"structure"`
@@ -3744,6 +5182,336 @@ func (s *CreateRateBasedRuleOutput) SetChangeToken(v string) *CreateRateBasedRul
 // SetRule sets the Rule field's value.
 func (s *CreateRateBasedRuleOutput) SetRule(v *RateBasedRule) *CreateRateBasedRuleOutput {
 	s.Rule = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSetRequest
+type CreateRegexMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the RegexMatchSet. You can't change Name
+	// after you create a RegexMatchSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateRegexMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRegexMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRegexMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRegexMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRegexMatchSetInput) SetChangeToken(v string) *CreateRegexMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateRegexMatchSetInput) SetName(v string) *CreateRegexMatchSetInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSetResponse
+type CreateRegexMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateRegexMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// A RegexMatchSet that contains no RegexMatchTuple objects.
+	RegexMatchSet *RegexMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateRegexMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRegexMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRegexMatchSetOutput) SetChangeToken(v string) *CreateRegexMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRegexMatchSet sets the RegexMatchSet field's value.
+func (s *CreateRegexMatchSetOutput) SetRegexMatchSet(v *RegexMatchSet) *CreateRegexMatchSetOutput {
+	s.RegexMatchSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSetRequest
+type CreateRegexPatternSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the RegexPatternSet. You can't change Name
+	// after you create a RegexPatternSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateRegexPatternSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRegexPatternSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRegexPatternSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRegexPatternSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRegexPatternSetInput) SetChangeToken(v string) *CreateRegexPatternSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateRegexPatternSetInput) SetName(v string) *CreateRegexPatternSetInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSetResponse
+type CreateRegexPatternSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateRegexPatternSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// A RegexPatternSet that contains no objects.
+	RegexPatternSet *RegexPatternSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateRegexPatternSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRegexPatternSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRegexPatternSetOutput) SetChangeToken(v string) *CreateRegexPatternSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRegexPatternSet sets the RegexPatternSet field's value.
+func (s *CreateRegexPatternSetOutput) SetRegexPatternSet(v *RegexPatternSet) *CreateRegexPatternSetOutput {
+	s.RegexPatternSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupRequest
+type CreateRuleGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description for the metrics for this RuleGroup. The name
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
+	// contain whitespace. You can't change the name of the metric after you create
+	// the RuleGroup.
+	//
+	// MetricName is a required field
+	MetricName *string `type:"string" required:"true"`
+
+	// A friendly name or description of the RuleGroup. You can't change Name after
+	// you create a RuleGroup.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateRuleGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRuleGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRuleGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleGroupInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.MetricName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRuleGroupInput) SetChangeToken(v string) *CreateRuleGroupInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetMetricName sets the MetricName field's value.
+func (s *CreateRuleGroupInput) SetMetricName(v string) *CreateRuleGroupInput {
+	s.MetricName = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateRuleGroupInput) SetName(v string) *CreateRuleGroupInput {
+	s.Name = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupResponse
+type CreateRuleGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the CreateRuleGroup request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+
+	// An empty RuleGroup.
+	RuleGroup *RuleGroup `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateRuleGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRuleGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRuleGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *CreateRuleGroupOutput) SetChangeToken(v string) *CreateRuleGroupOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRuleGroup sets the RuleGroup field's value.
+func (s *CreateRuleGroupOutput) SetRuleGroup(v *RuleGroup) *CreateRuleGroupOutput {
+	s.RuleGroup = v
 	return s
 }
 
@@ -4423,6 +6191,101 @@ func (s *DeleteByteMatchSetOutput) SetChangeToken(v string) *DeleteByteMatchSetO
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSetRequest
+type DeleteGeoMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The GeoMatchSetID of the GeoMatchSet that you want to delete. GeoMatchSetId
+	// is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+	//
+	// GeoMatchSetId is a required field
+	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteGeoMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGeoMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteGeoMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGeoMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.GeoMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GeoMatchSetId"))
+	}
+	if s.GeoMatchSetId != nil && len(*s.GeoMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GeoMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteGeoMatchSetInput) SetChangeToken(v string) *DeleteGeoMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetGeoMatchSetId sets the GeoMatchSetId field's value.
+func (s *DeleteGeoMatchSetInput) SetGeoMatchSetId(v string) *DeleteGeoMatchSetInput {
+	s.GeoMatchSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSetResponse
+type DeleteGeoMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteGeoMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteGeoMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGeoMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteGeoMatchSetOutput) SetChangeToken(v string) *DeleteGeoMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteIPSetRequest
 type DeleteIPSetInput struct {
 	_ struct{} `type:"structure"`
@@ -4609,6 +6472,291 @@ func (s DeleteRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
 
 // SetChangeToken sets the ChangeToken field's value.
 func (s *DeleteRateBasedRuleOutput) SetChangeToken(v string) *DeleteRateBasedRuleOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSetRequest
+type DeleteRegexMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RegexMatchSetId of the RegexMatchSet that you want to delete. RegexMatchSetId
+	// is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+	//
+	// RegexMatchSetId is a required field
+	RegexMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRegexMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRegexMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRegexMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRegexMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RegexMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexMatchSetId"))
+	}
+	if s.RegexMatchSetId != nil && len(*s.RegexMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRegexMatchSetInput) SetChangeToken(v string) *DeleteRegexMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRegexMatchSetId sets the RegexMatchSetId field's value.
+func (s *DeleteRegexMatchSetInput) SetRegexMatchSetId(v string) *DeleteRegexMatchSetInput {
+	s.RegexMatchSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSetResponse
+type DeleteRegexMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteRegexMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteRegexMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRegexMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRegexMatchSetOutput) SetChangeToken(v string) *DeleteRegexMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSetRequest
+type DeleteRegexPatternSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RegexPatternSetId of the RegexPatternSet that you want to delete. RegexPatternSetId
+	// is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+	//
+	// RegexPatternSetId is a required field
+	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRegexPatternSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRegexPatternSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRegexPatternSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRegexPatternSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RegexPatternSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexPatternSetId"))
+	}
+	if s.RegexPatternSetId != nil && len(*s.RegexPatternSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRegexPatternSetInput) SetChangeToken(v string) *DeleteRegexPatternSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRegexPatternSetId sets the RegexPatternSetId field's value.
+func (s *DeleteRegexPatternSetInput) SetRegexPatternSetId(v string) *DeleteRegexPatternSetInput {
+	s.RegexPatternSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSetResponse
+type DeleteRegexPatternSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteRegexPatternSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteRegexPatternSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRegexPatternSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRegexPatternSetOutput) SetChangeToken(v string) *DeleteRegexPatternSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroupRequest
+type DeleteRuleGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RuleGroupId of the RuleGroup that you want to delete. RuleGroupId is
+	// returned by CreateRuleGroup and by ListRuleGroups.
+	//
+	// RuleGroupId is a required field
+	RuleGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRuleGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRuleGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRuleGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleGroupInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RuleGroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleGroupId"))
+	}
+	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRuleGroupInput) SetChangeToken(v string) *DeleteRuleGroupInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *DeleteRuleGroupInput) SetRuleGroupId(v string) *DeleteRuleGroupInput {
+	s.RuleGroupId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroupResponse
+type DeleteRuleGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the DeleteRuleGroup request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteRuleGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRuleGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRuleGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *DeleteRuleGroupOutput) SetChangeToken(v string) *DeleteRuleGroupOutput {
 	s.ChangeToken = &v
 	return s
 }
@@ -5168,6 +7316,217 @@ func (s *FieldToMatch) SetType(v MatchFieldType) *FieldToMatch {
 	return s
 }
 
+// The country from which web requests originate that you want AWS WAF to search
+// for.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchConstraint
+type GeoMatchConstraint struct {
+	_ struct{} `type:"structure"`
+
+	// The type of geographical area you want AWS WAF to search for. Currently Country
+	// is the only valid value.
+	//
+	// Type is a required field
+	Type GeoMatchConstraintType `type:"string" required:"true" enum:"true"`
+
+	// The country that you want AWS WAF to search for.
+	//
+	// Value is a required field
+	Value GeoMatchConstraintValue `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s GeoMatchConstraint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GeoMatchConstraint) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GeoMatchConstraint) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GeoMatchConstraint"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+	if len(s.Value) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetType sets the Type field's value.
+func (s *GeoMatchConstraint) SetType(v GeoMatchConstraintType) *GeoMatchConstraint {
+	s.Type = v
+	return s
+}
+
+// SetValue sets the Value field's value.
+func (s *GeoMatchConstraint) SetValue(v GeoMatchConstraintValue) *GeoMatchConstraint {
+	s.Value = v
+	return s
+}
+
+// Contains one or more countries that AWS WAF will search for.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSet
+type GeoMatchSet struct {
+	_ struct{} `type:"structure"`
+
+	// An array of GeoMatchConstraint objects, which contain the country that you
+	// want AWS WAF to search for.
+	//
+	// GeoMatchConstraints is a required field
+	GeoMatchConstraints []GeoMatchConstraint `type:"list" required:"true"`
+
+	// The GeoMatchSetId for an GeoMatchSet. You use GeoMatchSetId to get information
+	// about a GeoMatchSet (see GeoMatchSet), update a GeoMatchSet (see UpdateGeoMatchSet),
+	// insert a GeoMatchSet into a Rule or delete one from a Rule (see UpdateRule),
+	// and delete a GeoMatchSet from AWS WAF (see DeleteGeoMatchSet).
+	//
+	// GeoMatchSetId is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+	//
+	// GeoMatchSetId is a required field
+	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the GeoMatchSet. You can't change the name
+	// of an GeoMatchSet after you create it.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GeoMatchSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GeoMatchSet) GoString() string {
+	return s.String()
+}
+
+// SetGeoMatchConstraints sets the GeoMatchConstraints field's value.
+func (s *GeoMatchSet) SetGeoMatchConstraints(v []GeoMatchConstraint) *GeoMatchSet {
+	s.GeoMatchConstraints = v
+	return s
+}
+
+// SetGeoMatchSetId sets the GeoMatchSetId field's value.
+func (s *GeoMatchSet) SetGeoMatchSetId(v string) *GeoMatchSet {
+	s.GeoMatchSetId = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *GeoMatchSet) SetName(v string) *GeoMatchSet {
+	s.Name = &v
+	return s
+}
+
+// Contains the identifier and the name of the GeoMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSetSummary
+type GeoMatchSetSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The GeoMatchSetId for an GeoMatchSet. You can use GeoMatchSetId in a GetGeoMatchSet
+	// request to get detailed information about an GeoMatchSet.
+	//
+	// GeoMatchSetId is a required field
+	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// A friendly name or description of the GeoMatchSet. You can't change the name
+	// of an GeoMatchSet after you create it.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GeoMatchSetSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GeoMatchSetSummary) GoString() string {
+	return s.String()
+}
+
+// SetGeoMatchSetId sets the GeoMatchSetId field's value.
+func (s *GeoMatchSetSummary) SetGeoMatchSetId(v string) *GeoMatchSetSummary {
+	s.GeoMatchSetId = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *GeoMatchSetSummary) SetName(v string) *GeoMatchSetSummary {
+	s.Name = &v
+	return s
+}
+
+// Specifies the type of update to perform to an GeoMatchSet with UpdateGeoMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSetUpdate
+type GeoMatchSetUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether to insert or delete a country with UpdateGeoMatchSet.
+	//
+	// Action is a required field
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
+
+	// The country from which web requests originate that you want AWS WAF to search
+	// for.
+	//
+	// GeoMatchConstraint is a required field
+	GeoMatchConstraint *GeoMatchConstraint `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GeoMatchSetUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GeoMatchSetUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GeoMatchSetUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GeoMatchSetUpdate"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.GeoMatchConstraint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GeoMatchConstraint"))
+	}
+	if s.GeoMatchConstraint != nil {
+		if err := s.GeoMatchConstraint.Validate(); err != nil {
+			invalidParams.AddNested("GeoMatchConstraint", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAction sets the Action field's value.
+func (s *GeoMatchSetUpdate) SetAction(v ChangeAction) *GeoMatchSetUpdate {
+	s.Action = v
+	return s
+}
+
+// SetGeoMatchConstraint sets the GeoMatchConstraint field's value.
+func (s *GeoMatchSetUpdate) SetGeoMatchConstraint(v *GeoMatchConstraint) *GeoMatchSetUpdate {
+	s.GeoMatchConstraint = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetByteMatchSetRequest
 type GetByteMatchSetInput struct {
 	_ struct{} `type:"structure"`
@@ -5371,6 +7730,83 @@ func (s GetChangeTokenStatusOutput) SDKResponseMetadata() aws.Response {
 // SetChangeTokenStatus sets the ChangeTokenStatus field's value.
 func (s *GetChangeTokenStatusOutput) SetChangeTokenStatus(v ChangeTokenStatus) *GetChangeTokenStatusOutput {
 	s.ChangeTokenStatus = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSetRequest
+type GetGeoMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The GeoMatchSetId of the GeoMatchSet that you want to get. GeoMatchSetId
+	// is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+	//
+	// GeoMatchSetId is a required field
+	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetGeoMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGeoMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGeoMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetGeoMatchSetInput"}
+
+	if s.GeoMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GeoMatchSetId"))
+	}
+	if s.GeoMatchSetId != nil && len(*s.GeoMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GeoMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetGeoMatchSetId sets the GeoMatchSetId field's value.
+func (s *GetGeoMatchSetInput) SetGeoMatchSetId(v string) *GetGeoMatchSetInput {
+	s.GeoMatchSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSetResponse
+type GetGeoMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the GeoMatchSet that you specified in the GetGeoMatchSet
+	// request. This includes the Type, which for a GeoMatchContraint is always
+	// Country, as well as the Value, which is the identifier for a specific country.
+	GeoMatchSet *GeoMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetGeoMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGeoMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetGeoMatchSet sets the GeoMatchSet field's value.
+func (s *GetGeoMatchSetOutput) SetGeoMatchSet(v *GeoMatchSet) *GetGeoMatchSetOutput {
+	s.GeoMatchSet = v
 	return s
 }
 
@@ -5627,6 +8063,234 @@ func (s *GetRateBasedRuleOutput) SetRule(v *RateBasedRule) *GetRateBasedRuleOutp
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSetRequest
+type GetRegexMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The RegexMatchSetId of the RegexMatchSet that you want to get. RegexMatchSetId
+	// is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+	//
+	// RegexMatchSetId is a required field
+	RegexMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRegexMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRegexMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRegexMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRegexMatchSetInput"}
+
+	if s.RegexMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexMatchSetId"))
+	}
+	if s.RegexMatchSetId != nil && len(*s.RegexMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexMatchSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRegexMatchSetId sets the RegexMatchSetId field's value.
+func (s *GetRegexMatchSetInput) SetRegexMatchSetId(v string) *GetRegexMatchSetInput {
+	s.RegexMatchSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSetResponse
+type GetRegexMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet
+	// request. For more information, see RegexMatchTuple.
+	RegexMatchSet *RegexMatchSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRegexMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRegexMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRegexMatchSet sets the RegexMatchSet field's value.
+func (s *GetRegexMatchSetOutput) SetRegexMatchSet(v *RegexMatchSet) *GetRegexMatchSetOutput {
+	s.RegexMatchSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSetRequest
+type GetRegexPatternSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The RegexPatternSetId of the RegexPatternSet that you want to get. RegexPatternSetId
+	// is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+	//
+	// RegexPatternSetId is a required field
+	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRegexPatternSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRegexPatternSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRegexPatternSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRegexPatternSetInput"}
+
+	if s.RegexPatternSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexPatternSetId"))
+	}
+	if s.RegexPatternSetId != nil && len(*s.RegexPatternSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternSetId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRegexPatternSetId sets the RegexPatternSetId field's value.
+func (s *GetRegexPatternSetInput) SetRegexPatternSetId(v string) *GetRegexPatternSetInput {
+	s.RegexPatternSetId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSetResponse
+type GetRegexPatternSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the RegexPatternSet that you specified in the GetRegexPatternSet
+	// request, including the identifier of the pattern set and the regular expression
+	// patterns you want AWS WAF to search for.
+	RegexPatternSet *RegexPatternSet `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRegexPatternSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRegexPatternSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRegexPatternSet sets the RegexPatternSet field's value.
+func (s *GetRegexPatternSetOutput) SetRegexPatternSet(v *RegexPatternSet) *GetRegexPatternSetOutput {
+	s.RegexPatternSet = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleGroupRequest
+type GetRuleGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The RuleGroupId of the RuleGroup that you want to get. RuleGroupId is returned
+	// by CreateRuleGroup and by ListRuleGroups.
+	//
+	// RuleGroupId is a required field
+	RuleGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRuleGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRuleGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRuleGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRuleGroupInput"}
+
+	if s.RuleGroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleGroupId"))
+	}
+	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *GetRuleGroupInput) SetRuleGroupId(v string) *GetRuleGroupInput {
+	s.RuleGroupId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleGroupResponse
+type GetRuleGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the RuleGroup that you specified in the GetRuleGroup request.
+	RuleGroup *RuleGroup `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRuleGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRuleGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRuleGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetRuleGroup sets the RuleGroup field's value.
+func (s *GetRuleGroupOutput) SetRuleGroup(v *RuleGroup) *GetRuleGroupOutput {
+	s.RuleGroup = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleRequest
 type GetRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -5720,10 +8384,10 @@ type GetSampledRequestsInput struct {
 	// MaxItems is a required field
 	MaxItems *int64 `min:"1" type:"long" required:"true"`
 
-	// RuleId is one of two values:
+	// RuleId is one of three values:
 	//
-	//    * The RuleId of the Rule for which you want GetSampledRequests to return
-	//    a sample of requests.
+	//    * The RuleId of the Rule or the RuleGroupId of the RuleGroup for which
+	//    you want GetSampledRequests to return a sample of requests.
 	//
 	//    * Default_Action, which causes GetSampledRequests to return a sample of
 	//    the requests that didn't match any of the rules in the specified WebACL.
@@ -6579,6 +9243,115 @@ func (s *IPSetUpdate) SetIPSetDescriptor(v *IPSetDescriptor) *IPSetUpdate {
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroupRequest
+type ListActivatedRulesInRuleGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of ActivatedRules that you want AWS WAF to return for
+	// this request. If you have more ActivatedRules than the number that you specify
+	// for Limit, the response includes a NextMarker value that you can use to get
+	// another batch of ActivatedRules.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more ActivatedRules than the
+	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
+	// you to list another group of ActivatedRules. For the second and subsequent
+	// ListActivatedRulesInRuleGroup requests, specify the value of NextMarker from
+	// the previous response to get information about another batch of ActivatedRules.
+	NextMarker *string `min:"1" type:"string"`
+
+	// The RuleGroupId of the RuleGroup for which you want to get a list of ActivatedRule
+	// objects.
+	RuleGroupId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListActivatedRulesInRuleGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListActivatedRulesInRuleGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListActivatedRulesInRuleGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListActivatedRulesInRuleGroupInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListActivatedRulesInRuleGroupInput) SetLimit(v int64) *ListActivatedRulesInRuleGroupInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListActivatedRulesInRuleGroupInput) SetNextMarker(v string) *ListActivatedRulesInRuleGroupInput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *ListActivatedRulesInRuleGroupInput) SetRuleGroupId(v string) *ListActivatedRulesInRuleGroupInput {
+	s.RuleGroupId = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroupResponse
+type ListActivatedRulesInRuleGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of ActivatedRules objects.
+	ActivatedRules []ActivatedRule `type:"list"`
+
+	// If you have more ActivatedRules than the number that you specified for Limit
+	// in the request, the response includes a NextMarker value. To list more ActivatedRules,
+	// submit another ListActivatedRulesInRuleGroup request, and specify the NextMarker
+	// value from the response in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListActivatedRulesInRuleGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListActivatedRulesInRuleGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListActivatedRulesInRuleGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetActivatedRules sets the ActivatedRules field's value.
+func (s *ListActivatedRulesInRuleGroupOutput) SetActivatedRules(v []ActivatedRule) *ListActivatedRulesInRuleGroupOutput {
+	s.ActivatedRules = v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListActivatedRulesInRuleGroupOutput) SetNextMarker(v string) *ListActivatedRulesInRuleGroupOutput {
+	s.NextMarker = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListByteMatchSetsRequest
 type ListByteMatchSetsInput struct {
 	_ struct{} `type:"structure"`
@@ -6676,6 +9449,103 @@ func (s *ListByteMatchSetsOutput) SetNextMarker(v string) *ListByteMatchSetsOutp
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSetsRequest
+type ListGeoMatchSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of GeoMatchSet objects that you want AWS WAF to return
+	// for this request. If you have more GeoMatchSet objects than the number you
+	// specify for Limit, the response includes a NextMarker value that you can
+	// use to get another batch of GeoMatchSet objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more GeoMatchSets than the
+	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
+	// you to list another group of GeoMatchSet objects. For the second and subsequent
+	// ListGeoMatchSets requests, specify the value of NextMarker from the previous
+	// response to get information about another batch of GeoMatchSet objects.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGeoMatchSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGeoMatchSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListGeoMatchSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListGeoMatchSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListGeoMatchSetsInput) SetLimit(v int64) *ListGeoMatchSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListGeoMatchSetsInput) SetNextMarker(v string) *ListGeoMatchSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSetsResponse
+type ListGeoMatchSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of GeoMatchSetSummary objects.
+	GeoMatchSets []GeoMatchSetSummary `type:"list"`
+
+	// If you have more GeoMatchSet objects than the number that you specified for
+	// Limit in the request, the response includes a NextMarker value. To list more
+	// GeoMatchSet objects, submit another ListGeoMatchSets request, and specify
+	// the NextMarker value from the response in the NextMarker value in the next
+	// request.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGeoMatchSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGeoMatchSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGeoMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetGeoMatchSets sets the GeoMatchSets field's value.
+func (s *ListGeoMatchSetsOutput) SetGeoMatchSets(v []GeoMatchSetSummary) *ListGeoMatchSetsOutput {
+	s.GeoMatchSets = v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListGeoMatchSetsOutput) SetNextMarker(v string) *ListGeoMatchSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListIPSetsRequest
 type ListIPSetsInput struct {
 	_ struct{} `type:"structure"`
@@ -6690,7 +9560,7 @@ type ListIPSetsInput struct {
 	// of Limit, AWS WAF returns a NextMarker value in the response that allows
 	// you to list another group of IPSets. For the second and subsequent ListIPSets
 	// requests, specify the value of NextMarker from the previous response to get
-	// information about another batch of ByteMatchSets.
+	// information about another batch of IPSets.
 	NextMarker *string `min:"1" type:"string"`
 }
 
@@ -6864,6 +9734,298 @@ func (s *ListRateBasedRulesOutput) SetNextMarker(v string) *ListRateBasedRulesOu
 // SetRules sets the Rules field's value.
 func (s *ListRateBasedRulesOutput) SetRules(v []RuleSummary) *ListRateBasedRulesOutput {
 	s.Rules = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSetsRequest
+type ListRegexMatchSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of RegexMatchSet objects that you want AWS WAF to return
+	// for this request. If you have more RegexMatchSet objects than the number
+	// you specify for Limit, the response includes a NextMarker value that you
+	// can use to get another batch of RegexMatchSet objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more RegexMatchSet objects
+	// than the value of Limit, AWS WAF returns a NextMarker value in the response
+	// that allows you to list another group of ByteMatchSets. For the second and
+	// subsequent ListRegexMatchSets requests, specify the value of NextMarker from
+	// the previous response to get information about another batch of RegexMatchSet
+	// objects.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListRegexMatchSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRegexMatchSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListRegexMatchSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListRegexMatchSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListRegexMatchSetsInput) SetLimit(v int64) *ListRegexMatchSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRegexMatchSetsInput) SetNextMarker(v string) *ListRegexMatchSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSetsResponse
+type ListRegexMatchSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more RegexMatchSet objects than the number that you specified
+	// for Limit in the request, the response includes a NextMarker value. To list
+	// more RegexMatchSet objects, submit another ListRegexMatchSets request, and
+	// specify the NextMarker value from the response in the NextMarker value in
+	// the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of RegexMatchSetSummary objects.
+	RegexMatchSets []RegexMatchSetSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListRegexMatchSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRegexMatchSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRegexMatchSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRegexMatchSetsOutput) SetNextMarker(v string) *ListRegexMatchSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRegexMatchSets sets the RegexMatchSets field's value.
+func (s *ListRegexMatchSetsOutput) SetRegexMatchSets(v []RegexMatchSetSummary) *ListRegexMatchSetsOutput {
+	s.RegexMatchSets = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSetsRequest
+type ListRegexPatternSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of RegexPatternSet objects that you want AWS WAF to
+	// return for this request. If you have more RegexPatternSet objects than the
+	// number you specify for Limit, the response includes a NextMarker value that
+	// you can use to get another batch of RegexPatternSet objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more RegexPatternSet objects
+	// than the value of Limit, AWS WAF returns a NextMarker value in the response
+	// that allows you to list another group of RegexPatternSet objects. For the
+	// second and subsequent ListRegexPatternSets requests, specify the value of
+	// NextMarker from the previous response to get information about another batch
+	// of RegexPatternSet objects.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListRegexPatternSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRegexPatternSetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListRegexPatternSetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListRegexPatternSetsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListRegexPatternSetsInput) SetLimit(v int64) *ListRegexPatternSetsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRegexPatternSetsInput) SetNextMarker(v string) *ListRegexPatternSetsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSetsResponse
+type ListRegexPatternSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more RegexPatternSet objects than the number that you specified
+	// for Limit in the request, the response includes a NextMarker value. To list
+	// more RegexPatternSet objects, submit another ListRegexPatternSets request,
+	// and specify the NextMarker value from the response in the NextMarker value
+	// in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of RegexPatternSetSummary objects.
+	RegexPatternSets []RegexPatternSetSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListRegexPatternSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRegexPatternSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRegexPatternSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRegexPatternSetsOutput) SetNextMarker(v string) *ListRegexPatternSetsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRegexPatternSets sets the RegexPatternSets field's value.
+func (s *ListRegexPatternSetsOutput) SetRegexPatternSets(v []RegexPatternSetSummary) *ListRegexPatternSetsOutput {
+	s.RegexPatternSets = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroupsRequest
+type ListRuleGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of RuleGroups that you want AWS WAF to return for this
+	// request. If you have more RuleGroups than the number that you specify for
+	// Limit, the response includes a NextMarker value that you can use to get another
+	// batch of RuleGroups.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more RuleGroups than the value
+	// of Limit, AWS WAF returns a NextMarker value in the response that allows
+	// you to list another group of RuleGroups. For the second and subsequent ListRuleGroups
+	// requests, specify the value of NextMarker from the previous response to get
+	// information about another batch of RuleGroups.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListRuleGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRuleGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListRuleGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListRuleGroupsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListRuleGroupsInput) SetLimit(v int64) *ListRuleGroupsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRuleGroupsInput) SetNextMarker(v string) *ListRuleGroupsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroupsResponse
+type ListRuleGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more RuleGroups than the number that you specified for Limit
+	// in the request, the response includes a NextMarker value. To list more RuleGroups,
+	// submit another ListRuleGroups request, and specify the NextMarker value from
+	// the response in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of RuleGroup objects.
+	RuleGroups []RuleGroupSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListRuleGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRuleGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRuleGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListRuleGroupsOutput) SetNextMarker(v string) *ListRuleGroupsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRuleGroups sets the RuleGroups field's value.
+func (s *ListRuleGroupsOutput) SetRuleGroups(v []RuleGroupSummary) *ListRuleGroupsOutput {
+	s.RuleGroups = v
 	return s
 }
 
@@ -7159,6 +10321,103 @@ func (s *ListSqlInjectionMatchSetsOutput) SetSqlInjectionMatchSets(v []SqlInject
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroupsRequest
+type ListSubscribedRuleGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of subscribed rule groups that you want AWS WAF to return
+	// for this request. If you have more objects than the number you specify for
+	// Limit, the response includes a NextMarker value that you can use to get another
+	// batch of objects.
+	Limit *int64 `type:"integer"`
+
+	// If you specify a value for Limit and you have more ByteMatchSetssubscribed
+	// rule groups than the value of Limit, AWS WAF returns a NextMarker value in
+	// the response that allows you to list another group of subscribed rule groups.
+	// For the second and subsequent ListSubscribedRuleGroupsRequest requests, specify
+	// the value of NextMarker from the previous response to get information about
+	// another batch of subscribed rule groups.
+	NextMarker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSubscribedRuleGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSubscribedRuleGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSubscribedRuleGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSubscribedRuleGroupsInput"}
+	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetLimit sets the Limit field's value.
+func (s *ListSubscribedRuleGroupsInput) SetLimit(v int64) *ListSubscribedRuleGroupsInput {
+	s.Limit = &v
+	return s
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListSubscribedRuleGroupsInput) SetNextMarker(v string) *ListSubscribedRuleGroupsInput {
+	s.NextMarker = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroupsResponse
+type ListSubscribedRuleGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If you have more objects than the number that you specified for Limit in
+	// the request, the response includes a NextMarker value. To list more objects,
+	// submit another ListSubscribedRuleGroups request, and specify the NextMarker
+	// value from the response in the NextMarker value in the next request.
+	NextMarker *string `min:"1" type:"string"`
+
+	// An array of RuleGroup objects.
+	RuleGroups []SubscribedRuleGroupSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSubscribedRuleGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSubscribedRuleGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSubscribedRuleGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetNextMarker sets the NextMarker field's value.
+func (s *ListSubscribedRuleGroupsOutput) SetNextMarker(v string) *ListSubscribedRuleGroupsOutput {
+	s.NextMarker = &v
+	return s
+}
+
+// SetRuleGroups sets the RuleGroups field's value.
+func (s *ListSubscribedRuleGroupsOutput) SetRuleGroups(v []SubscribedRuleGroupSummary) *ListSubscribedRuleGroupsOutput {
+	s.RuleGroups = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListWebACLsRequest
 type ListWebACLsInput struct {
 	_ struct{} `type:"structure"`
@@ -7355,10 +10614,10 @@ func (s *ListXssMatchSetsOutput) SetXssMatchSets(v []XssMatchSetSummary) *ListXs
 	return s
 }
 
-// Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, and
-// SizeConstraintSet objects that you want to add to a Rule and, for each object,
-// indicates whether you want to negate the settings, for example, requests
-// that do NOT originate from the IP address 192.0.2.44.
+// Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet,
+// GeoMatchSet, and SizeConstraintSet objects that you want to add to a Rule
+// and, for each object, indicates whether you want to negate the settings,
+// for example, requests that do NOT originate from the IP address 192.0.2.44.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/Predicate
 type Predicate struct {
 	_ struct{} `type:"structure"`
@@ -7371,15 +10630,15 @@ type Predicate struct {
 
 	// Set Negated to False if you want AWS WAF to allow, block, or count requests
 	// based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet,
-	// XssMatchSet, or SizeConstraintSet. For example, if an IPSet includes the
-	// IP address 192.0.2.44, AWS WAF will allow or block requests based on that
-	// IP address.
+	// XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example,
+	// if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block
+	// requests based on that IP address.
 	//
 	// Set Negated to True if you want AWS WAF to allow or block a request based
 	// on the negation of the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet,
-	// XssMatchSet, or SizeConstraintSet. For example, if an IPSet includes the
-	// IP address 192.0.2.44, AWS WAF will allow, block, or count requests based
-	// on all IP addresses except192.0.2.44.
+	// XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example,
+	// if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow, block,
+	// or count requests based on all IP addresses except192.0.2.44.
 	//
 	// Negated is a required field
 	Negated *bool `type:"boolean" required:"true"`
@@ -7550,6 +10809,507 @@ func (s *RateBasedRule) SetRuleId(v string) *RateBasedRule {
 	return s
 }
 
+// In a GetRegexMatchSet request, RegexMatchSet is a complex type that contains
+// the RegexMatchSetId and Name of a RegexMatchSet, and the values that you
+// specified when you updated the RegexMatchSet.
+//
+// The values are contained in a RegexMatchTuple object, which specify the parts
+// of web requests that you want AWS WAF to inspect and the values that you
+// want AWS WAF to search for. If a RegexMatchSet contains more than one RegexMatchTuple
+// object, a request needs to match the settings in only one ByteMatchTuple
+// to be considered a match.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSet
+type RegexMatchSet struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description of the RegexMatchSet. You can't change Name
+	// after you create a RegexMatchSet.
+	Name *string `min:"1" type:"string"`
+
+	// The RegexMatchSetId for a RegexMatchSet. You use RegexMatchSetId to get information
+	// about a RegexMatchSet (see GetRegexMatchSet), update a RegexMatchSet (see
+	// UpdateRegexMatchSet), insert a RegexMatchSet into a Rule or delete one from
+	// a Rule (see UpdateRule), and delete a RegexMatchSet from AWS WAF (see DeleteRegexMatchSet).
+	//
+	// RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+	RegexMatchSetId *string `min:"1" type:"string"`
+
+	// Contains an array of RegexMatchTuple objects. Each RegexMatchTuple object
+	// contains:
+	//
+	//    * The part of a web request that you want AWS WAF to inspect, such as
+	//    a query string or the value of the User-Agent header.
+	//
+	//    * The identifier of the pattern (a regular expression) that you want AWS
+	//    WAF to look for. For more information, see RegexPatternSet.
+	//
+	//    * Whether to perform any conversions on the request, such as converting
+	//    it to lowercase, before inspecting it for the specified string.
+	RegexMatchTuples []RegexMatchTuple `type:"list"`
+}
+
+// String returns the string representation
+func (s RegexMatchSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexMatchSet) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *RegexMatchSet) SetName(v string) *RegexMatchSet {
+	s.Name = &v
+	return s
+}
+
+// SetRegexMatchSetId sets the RegexMatchSetId field's value.
+func (s *RegexMatchSet) SetRegexMatchSetId(v string) *RegexMatchSet {
+	s.RegexMatchSetId = &v
+	return s
+}
+
+// SetRegexMatchTuples sets the RegexMatchTuples field's value.
+func (s *RegexMatchSet) SetRegexMatchTuples(v []RegexMatchTuple) *RegexMatchSet {
+	s.RegexMatchTuples = v
+	return s
+}
+
+// Returned by ListRegexMatchSets. Each RegexMatchSetSummary object includes
+// the Name and RegexMatchSetId for one RegexMatchSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSetSummary
+type RegexMatchSetSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description of the RegexMatchSet. You can't change Name
+	// after you create a RegexMatchSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The RegexMatchSetId for a RegexMatchSet. You use RegexMatchSetId to get information
+	// about a RegexMatchSet, update a RegexMatchSet, remove a RegexMatchSet from
+	// a Rule, and delete a RegexMatchSet from AWS WAF.
+	//
+	// RegexMatchSetId is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+	//
+	// RegexMatchSetId is a required field
+	RegexMatchSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RegexMatchSetSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexMatchSetSummary) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *RegexMatchSetSummary) SetName(v string) *RegexMatchSetSummary {
+	s.Name = &v
+	return s
+}
+
+// SetRegexMatchSetId sets the RegexMatchSetId field's value.
+func (s *RegexMatchSetSummary) SetRegexMatchSetId(v string) *RegexMatchSetSummary {
+	s.RegexMatchSetId = &v
+	return s
+}
+
+// In an UpdateRegexMatchSet request, RegexMatchSetUpdate specifies whether
+// to insert or delete a RegexMatchTuple and includes the settings for the RegexMatchTuple.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSetUpdate
+type RegexMatchSetUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether to insert or delete a RegexMatchTuple.
+	//
+	// Action is a required field
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
+
+	// Information about the part of a web request that you want AWS WAF to inspect
+	// and the identifier of the regular expression (regex) pattern that you want
+	// AWS WAF to search for. If you specify DELETE for the value of Action, the
+	// RegexMatchTuple values must exactly match the values in the RegexMatchTuple
+	// that you want to delete from the RegexMatchSet.
+	//
+	// RegexMatchTuple is a required field
+	RegexMatchTuple *RegexMatchTuple `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s RegexMatchSetUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexMatchSetUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegexMatchSetUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RegexMatchSetUpdate"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.RegexMatchTuple == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexMatchTuple"))
+	}
+	if s.RegexMatchTuple != nil {
+		if err := s.RegexMatchTuple.Validate(); err != nil {
+			invalidParams.AddNested("RegexMatchTuple", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAction sets the Action field's value.
+func (s *RegexMatchSetUpdate) SetAction(v ChangeAction) *RegexMatchSetUpdate {
+	s.Action = v
+	return s
+}
+
+// SetRegexMatchTuple sets the RegexMatchTuple field's value.
+func (s *RegexMatchSetUpdate) SetRegexMatchTuple(v *RegexMatchTuple) *RegexMatchSetUpdate {
+	s.RegexMatchTuple = v
+	return s
+}
+
+// The regular expression pattern that you want AWS WAF to search for in web
+// requests, the location in requests that you want AWS WAF to search, and other
+// settings. Each RegexMatchTuple object contains:
+//
+//    * The part of a web request that you want AWS WAF to inspect, such as
+//    a query string or the value of the User-Agent header.
+//
+//    * The identifier of the pattern (a regular expression) that you want AWS
+//    WAF to look for. For more information, see RegexPatternSet.
+//
+//    * Whether to perform any conversions on the request, such as converting
+//    it to lowercase, before inspecting it for the specified string.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchTuple
+type RegexMatchTuple struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies where in a web request to look for the RegexPatternSet.
+	//
+	// FieldToMatch is a required field
+	FieldToMatch *FieldToMatch `type:"structure" required:"true"`
+
+	// The RegexPatternSetId for a RegexPatternSet. You use RegexPatternSetId to
+	// get information about a RegexPatternSet (see GetRegexPatternSet), update
+	// a RegexPatternSet (see UpdateRegexPatternSet), insert a RegexPatternSet into
+	// a RegexMatchSet or delete one from a RegexMatchSet (see UpdateRegexMatchSet),
+	// and delete an RegexPatternSet from AWS WAF (see DeleteRegexPatternSet).
+	//
+	// RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+	//
+	// RegexPatternSetId is a required field
+	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
+
+	// Text transformations eliminate some of the unusual formatting that attackers
+	// use in web requests in an effort to bypass AWS WAF. If you specify a transformation,
+	// AWS WAF performs the transformation on RegexPatternSet before inspecting
+	// a request for a match.
+	//
+	// CMD_LINE
+	//
+	// When you're concerned that attackers are injecting an operating system commandline
+	// command and using unusual formatting to disguise some or all of the command,
+	// use this option to perform the following transformations:
+	//
+	//    * Delete the following characters: \ " ' ^
+	//
+	//    * Delete spaces before the following characters: / (
+	//
+	//    * Replace the following characters with a space: , ;
+	//
+	//    * Replace multiple spaces with one space
+	//
+	//    * Convert uppercase letters (A-Z) to lowercase (a-z)
+	//
+	// COMPRESS_WHITE_SPACE
+	//
+	// Use this option to replace the following characters with a space character
+	// (decimal 32):
+	//
+	//    * \f, formfeed, decimal 12
+	//
+	//    * \t, tab, decimal 9
+	//
+	//    * \n, newline, decimal 10
+	//
+	//    * \r, carriage return, decimal 13
+	//
+	//    * \v, vertical tab, decimal 11
+	//
+	//    * non-breaking space, decimal 160
+	//
+	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
+	//
+	// HTML_ENTITY_DECODE
+	//
+	// Use this option to replace HTML-encoded characters with unencoded characters.
+	// HTML_ENTITY_DECODE performs the following operations:
+	//
+	//    * Replaces (ampersand)quot; with "
+	//
+	//    * Replaces (ampersand)nbsp; with a non-breaking space, decimal 160
+	//
+	//    * Replaces (ampersand)lt; with a "less than" symbol
+	//
+	//    * Replaces (ampersand)gt; with >
+	//
+	//    * Replaces characters that are represented in hexadecimal format, (ampersand)#xhhhh;,
+	//    with the corresponding characters
+	//
+	//    * Replaces characters that are represented in decimal format, (ampersand)#nnnn;,
+	//    with the corresponding characters
+	//
+	// LOWERCASE
+	//
+	// Use this option to convert uppercase letters (A-Z) to lowercase (a-z).
+	//
+	// URL_DECODE
+	//
+	// Use this option to decode a URL-encoded value.
+	//
+	// NONE
+	//
+	// Specify NONE if you don't want to perform any text transformations.
+	//
+	// TextTransformation is a required field
+	TextTransformation TextTransformation `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s RegexMatchTuple) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexMatchTuple) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegexMatchTuple) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RegexMatchTuple"}
+
+	if s.FieldToMatch == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
+	}
+
+	if s.RegexPatternSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexPatternSetId"))
+	}
+	if s.RegexPatternSetId != nil && len(*s.RegexPatternSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternSetId", 1))
+	}
+	if len(s.TextTransformation) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
+	}
+	if s.FieldToMatch != nil {
+		if err := s.FieldToMatch.Validate(); err != nil {
+			invalidParams.AddNested("FieldToMatch", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetFieldToMatch sets the FieldToMatch field's value.
+func (s *RegexMatchTuple) SetFieldToMatch(v *FieldToMatch) *RegexMatchTuple {
+	s.FieldToMatch = v
+	return s
+}
+
+// SetRegexPatternSetId sets the RegexPatternSetId field's value.
+func (s *RegexMatchTuple) SetRegexPatternSetId(v string) *RegexMatchTuple {
+	s.RegexPatternSetId = &v
+	return s
+}
+
+// SetTextTransformation sets the TextTransformation field's value.
+func (s *RegexMatchTuple) SetTextTransformation(v TextTransformation) *RegexMatchTuple {
+	s.TextTransformation = v
+	return s
+}
+
+// The RegexPatternSet specifies the regular expression (regex) pattern that
+// you want AWS WAF to search for, such as B[a@]dB[o0]t. You can then configure
+// AWS WAF to reject those requests.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSet
+type RegexPatternSet struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description of the RegexPatternSet. You can't change Name
+	// after you create a RegexPatternSet.
+	Name *string `min:"1" type:"string"`
+
+	// The identifier for the RegexPatternSet. You use RegexPatternSetId to get
+	// information about a RegexPatternSet, update a RegexPatternSet, remove a RegexPatternSet
+	// from a RegexMatchSet, and delete a RegexPatternSet from AWS WAF.
+	//
+	// RegexMatchSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+	//
+	// RegexPatternSetId is a required field
+	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
+
+	// Specifies the regular expression (regex) patterns that you want AWS WAF to
+	// search for, such as B[a@]dB[o0]t.
+	//
+	// RegexPatternStrings is a required field
+	RegexPatternStrings []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s RegexPatternSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexPatternSet) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *RegexPatternSet) SetName(v string) *RegexPatternSet {
+	s.Name = &v
+	return s
+}
+
+// SetRegexPatternSetId sets the RegexPatternSetId field's value.
+func (s *RegexPatternSet) SetRegexPatternSetId(v string) *RegexPatternSet {
+	s.RegexPatternSetId = &v
+	return s
+}
+
+// SetRegexPatternStrings sets the RegexPatternStrings field's value.
+func (s *RegexPatternSet) SetRegexPatternStrings(v []string) *RegexPatternSet {
+	s.RegexPatternStrings = v
+	return s
+}
+
+// Returned by ListRegexPatternSets. Each RegexPatternSetSummary object includes
+// the Name and RegexPatternSetId for one RegexPatternSet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSetSummary
+type RegexPatternSetSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description of the RegexPatternSet. You can't change Name
+	// after you create a RegexPatternSet.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The RegexPatternSetId for a RegexPatternSet. You use RegexPatternSetId to
+	// get information about a RegexPatternSet, update a RegexPatternSet, remove
+	// a RegexPatternSet from a RegexMatchSet, and delete a RegexPatternSet from
+	// AWS WAF.
+	//
+	// RegexPatternSetId is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+	//
+	// RegexPatternSetId is a required field
+	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RegexPatternSetSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexPatternSetSummary) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *RegexPatternSetSummary) SetName(v string) *RegexPatternSetSummary {
+	s.Name = &v
+	return s
+}
+
+// SetRegexPatternSetId sets the RegexPatternSetId field's value.
+func (s *RegexPatternSetSummary) SetRegexPatternSetId(v string) *RegexPatternSetSummary {
+	s.RegexPatternSetId = &v
+	return s
+}
+
+// In an UpdateRegexPatternSet request, RegexPatternSetUpdate specifies whether
+// to insert or delete a RegexPatternString and includes the settings for the
+// RegexPatternString.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSetUpdate
+type RegexPatternSetUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether to insert or delete a RegexPatternString.
+	//
+	// Action is a required field
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
+
+	// Specifies the regular expression (regex) pattern that you want AWS WAF to
+	// search for, such as B[a@]dB[o0]t.
+	//
+	// RegexPatternString is a required field
+	RegexPatternString *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RegexPatternSetUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegexPatternSetUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegexPatternSetUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RegexPatternSetUpdate"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.RegexPatternString == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexPatternString"))
+	}
+	if s.RegexPatternString != nil && len(*s.RegexPatternString) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternString", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAction sets the Action field's value.
+func (s *RegexPatternSetUpdate) SetAction(v ChangeAction) *RegexPatternSetUpdate {
+	s.Action = v
+	return s
+}
+
+// SetRegexPatternString sets the RegexPatternString field's value.
+func (s *RegexPatternSetUpdate) SetRegexPatternString(v string) *RegexPatternSetUpdate {
+	s.RegexPatternString = &v
+	return s
+}
+
 // A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet objects
 // that identify the web requests that you want to allow, block, or count. For
 // example, you might create a Rule that includes the following predicates:
@@ -7623,6 +11383,177 @@ func (s *Rule) SetPredicates(v []Predicate) *Rule {
 // SetRuleId sets the RuleId field's value.
 func (s *Rule) SetRuleId(v string) *Rule {
 	s.RuleId = &v
+	return s
+}
+
+// A collection of predefined rules that you can add to a web ACL.
+//
+// Rule groups are subject to the following limits:
+//
+//    * Three rule groups per account. You can request an increase to this limit
+//    by contacting customer support.
+//
+//    * One rule group per web ACL.
+//
+//    * Ten rules per rule group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RuleGroup
+type RuleGroup struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description for the metrics for this RuleGroup. The name
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
+	// contain whitespace. You can't change the name of the metric after you create
+	// the RuleGroup.
+	MetricName *string `type:"string"`
+
+	// The friendly name or description for the RuleGroup. You can't change the
+	// name of a RuleGroup after you create it.
+	Name *string `min:"1" type:"string"`
+
+	// A unique identifier for a RuleGroup. You use RuleGroupId to get more information
+	// about a RuleGroup (see GetRuleGroup), update a RuleGroup (see UpdateRuleGroup),
+	// insert a RuleGroup into a WebACL or delete a one from a WebACL (see UpdateWebACL),
+	// or delete a RuleGroup from AWS WAF (see DeleteRuleGroup).
+	//
+	// RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+	//
+	// RuleGroupId is a required field
+	RuleGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RuleGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RuleGroup) GoString() string {
+	return s.String()
+}
+
+// SetMetricName sets the MetricName field's value.
+func (s *RuleGroup) SetMetricName(v string) *RuleGroup {
+	s.MetricName = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *RuleGroup) SetName(v string) *RuleGroup {
+	s.Name = &v
+	return s
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *RuleGroup) SetRuleGroupId(v string) *RuleGroup {
+	s.RuleGroupId = &v
+	return s
+}
+
+// Contains the identifier and the friendly name or description of the RuleGroup.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RuleGroupSummary
+type RuleGroupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description of the RuleGroup. You can't change the name
+	// of a RuleGroup after you create it.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A unique identifier for a RuleGroup. You use RuleGroupId to get more information
+	// about a RuleGroup (see GetRuleGroup), update a RuleGroup (see UpdateRuleGroup),
+	// insert a RuleGroup into a WebACL or delete one from a WebACL (see UpdateWebACL),
+	// or delete a RuleGroup from AWS WAF (see DeleteRuleGroup).
+	//
+	// RuleGroupId is returned by CreateRuleGroup and by ListRuleGroups.
+	//
+	// RuleGroupId is a required field
+	RuleGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RuleGroupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RuleGroupSummary) GoString() string {
+	return s.String()
+}
+
+// SetName sets the Name field's value.
+func (s *RuleGroupSummary) SetName(v string) *RuleGroupSummary {
+	s.Name = &v
+	return s
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *RuleGroupSummary) SetRuleGroupId(v string) *RuleGroupSummary {
+	s.RuleGroupId = &v
+	return s
+}
+
+// Specifies an ActivatedRule and indicates whether you want to add it to a
+// RuleGroup or delete it from a RuleGroup.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RuleGroupUpdate
+type RuleGroupUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Specify INSERT to add an ActivatedRule to a RuleGroup. Use DELETE to remove
+	// an ActivatedRule from a RuleGroup.
+	//
+	// Action is a required field
+	Action ChangeAction `type:"string" required:"true" enum:"true"`
+
+	// The ActivatedRule object specifies a Rule that you want to insert or delete,
+	// the priority of the Rule in the WebACL, and the action that you want AWS
+	// WAF to take when a web request matches the Rule (ALLOW, BLOCK, or COUNT).
+	//
+	// ActivatedRule is a required field
+	ActivatedRule *ActivatedRule `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s RuleGroupUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RuleGroupUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RuleGroupUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RuleGroupUpdate"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.ActivatedRule == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ActivatedRule"))
+	}
+	if s.ActivatedRule != nil {
+		if err := s.ActivatedRule.Validate(); err != nil {
+			invalidParams.AddNested("ActivatedRule", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAction sets the Action field's value.
+func (s *RuleGroupUpdate) SetAction(v ChangeAction) *RuleGroupUpdate {
+	s.Action = v
+	return s
+}
+
+// SetActivatedRule sets the ActivatedRule field's value.
+func (s *RuleGroupUpdate) SetActivatedRule(v *ActivatedRule) *RuleGroupUpdate {
+	s.ActivatedRule = v
 	return s
 }
 
@@ -7748,6 +11679,12 @@ type SampledHTTPRequest struct {
 	// Request is a required field
 	Request *HTTPRequest `type:"structure" required:"true"`
 
+	// This value is returned if the GetSampledRequests request specifies the ID
+	// of a RuleGroup rather than the ID of an individual rule. RuleWithinRuleGroup
+	// is the rule within the specified RuleGroup that matched the request listed
+	// in the response.
+	RuleWithinRuleGroup *string `min:"1" type:"string"`
+
 	// The time at which AWS WAF received the request from your AWS resource, in
 	// Unix time format (in seconds).
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -7780,6 +11717,12 @@ func (s *SampledHTTPRequest) SetAction(v string) *SampledHTTPRequest {
 // SetRequest sets the Request field's value.
 func (s *SampledHTTPRequest) SetRequest(v *HTTPRequest) *SampledHTTPRequest {
 	s.Request = v
+	return s
+}
+
+// SetRuleWithinRuleGroup sets the RuleWithinRuleGroup field's value.
+func (s *SampledHTTPRequest) SetRuleWithinRuleGroup(v string) *SampledHTTPRequest {
+	s.RuleWithinRuleGroup = &v
 	return s
 }
 
@@ -8450,6 +12393,59 @@ func (s *SqlInjectionMatchTuple) SetTextTransformation(v TextTransformation) *Sq
 	return s
 }
 
+// A summary of the rule groups you are subscribed to.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/SubscribedRuleGroupSummary
+type SubscribedRuleGroupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A friendly name or description for the metrics for this RuleGroup. The name
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
+	// contain whitespace. You can't change the name of the metric after you create
+	// the RuleGroup.
+	//
+	// MetricName is a required field
+	MetricName *string `type:"string" required:"true"`
+
+	// A friendly name or description of the RuleGroup. You can't change the name
+	// of a RuleGroup after you create it.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A unique identifier for a RuleGroup.
+	//
+	// RuleGroupId is a required field
+	RuleGroupId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SubscribedRuleGroupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SubscribedRuleGroupSummary) GoString() string {
+	return s.String()
+}
+
+// SetMetricName sets the MetricName field's value.
+func (s *SubscribedRuleGroupSummary) SetMetricName(v string) *SubscribedRuleGroupSummary {
+	s.MetricName = &v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *SubscribedRuleGroupSummary) SetName(v string) *SubscribedRuleGroupSummary {
+	s.Name = &v
+	return s
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *SubscribedRuleGroupSummary) SetRuleGroupId(v string) *SubscribedRuleGroupSummary {
+	s.RuleGroupId = &v
+	return s
+}
+
 // In a GetSampledRequests request, the StartTime and EndTime objects specify
 // the time range for which you want AWS WAF to return a sample of web requests.
 //
@@ -8547,7 +12543,7 @@ type UpdateByteMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []ByteMatchSetUpdate `type:"list" required:"true"`
+	Updates []ByteMatchSetUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8580,6 +12576,9 @@ func (s *UpdateByteMatchSetInput) Validate() error {
 
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -8646,6 +12645,134 @@ func (s *UpdateByteMatchSetOutput) SetChangeToken(v string) *UpdateByteMatchSetO
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSetRequest
+type UpdateGeoMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The GeoMatchSetId of the GeoMatchSet that you want to update. GeoMatchSetId
+	// is returned by CreateGeoMatchSet and by ListGeoMatchSets.
+	//
+	// GeoMatchSetId is a required field
+	GeoMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// An array of GeoMatchSetUpdate objects that you want to insert into or delete
+	// from an GeoMatchSet. For more information, see the applicable data types:
+	//
+	//    * GeoMatchSetUpdate: Contains Action and GeoMatchConstraint
+	//
+	//    * GeoMatchConstraint: Contains Type and Value
+	//
+	// You can have only one Type and Value per GeoMatchConstraint. To add multiple
+	//    countries, include multiple GeoMatchSetUpdate objects in your request.
+	//
+	// Updates is a required field
+	Updates []GeoMatchSetUpdate `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateGeoMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGeoMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGeoMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGeoMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.GeoMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GeoMatchSetId"))
+	}
+	if s.GeoMatchSetId != nil && len(*s.GeoMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GeoMatchSetId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateGeoMatchSetInput) SetChangeToken(v string) *UpdateGeoMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetGeoMatchSetId sets the GeoMatchSetId field's value.
+func (s *UpdateGeoMatchSetInput) SetGeoMatchSetId(v string) *UpdateGeoMatchSetInput {
+	s.GeoMatchSetId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateGeoMatchSetInput) SetUpdates(v []GeoMatchSetUpdate) *UpdateGeoMatchSetInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSetResponse
+type UpdateGeoMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateGeoMatchSet request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateGeoMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGeoMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateGeoMatchSetOutput) SetChangeToken(v string) *UpdateGeoMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSetRequest
 type UpdateIPSetInput struct {
 	_ struct{} `type:"structure"`
@@ -8669,7 +12796,7 @@ type UpdateIPSetInput struct {
 	//    * IPSetDescriptor: Contains Type and Value
 	//
 	// Updates is a required field
-	Updates []IPSetUpdate `type:"list" required:"true"`
+	Updates []IPSetUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8702,6 +12829,9 @@ func (s *UpdateIPSetInput) Validate() error {
 
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -8908,6 +13038,375 @@ func (s *UpdateRateBasedRuleOutput) SetChangeToken(v string) *UpdateRateBasedRul
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSetRequest
+type UpdateRegexMatchSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RegexMatchSetId of the RegexMatchSet that you want to update. RegexMatchSetId
+	// is returned by CreateRegexMatchSet and by ListRegexMatchSets.
+	//
+	// RegexMatchSetId is a required field
+	RegexMatchSetId *string `min:"1" type:"string" required:"true"`
+
+	// An array of RegexMatchSetUpdate objects that you want to insert into or delete
+	// from a RegexMatchSet. For more information, see RegexMatchTuple.
+	//
+	// Updates is a required field
+	Updates []RegexMatchSetUpdate `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRegexMatchSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRegexMatchSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRegexMatchSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRegexMatchSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RegexMatchSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexMatchSetId"))
+	}
+	if s.RegexMatchSetId != nil && len(*s.RegexMatchSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexMatchSetId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRegexMatchSetInput) SetChangeToken(v string) *UpdateRegexMatchSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRegexMatchSetId sets the RegexMatchSetId field's value.
+func (s *UpdateRegexMatchSetInput) SetRegexMatchSetId(v string) *UpdateRegexMatchSetInput {
+	s.RegexMatchSetId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateRegexMatchSetInput) SetUpdates(v []RegexMatchSetUpdate) *UpdateRegexMatchSetInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSetResponse
+type UpdateRegexMatchSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateRegexMatchSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateRegexMatchSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRegexMatchSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRegexMatchSetOutput) SetChangeToken(v string) *UpdateRegexMatchSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSetRequest
+type UpdateRegexPatternSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RegexPatternSetId of the RegexPatternSet that you want to update. RegexPatternSetId
+	// is returned by CreateRegexPatternSet and by ListRegexPatternSets.
+	//
+	// RegexPatternSetId is a required field
+	RegexPatternSetId *string `min:"1" type:"string" required:"true"`
+
+	// An array of RegexPatternSetUpdate objects that you want to insert into or
+	// delete from a RegexPatternSet.
+	//
+	// Updates is a required field
+	Updates []RegexPatternSetUpdate `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRegexPatternSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRegexPatternSetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRegexPatternSetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRegexPatternSetInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RegexPatternSetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegexPatternSetId"))
+	}
+	if s.RegexPatternSetId != nil && len(*s.RegexPatternSetId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RegexPatternSetId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRegexPatternSetInput) SetChangeToken(v string) *UpdateRegexPatternSetInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRegexPatternSetId sets the RegexPatternSetId field's value.
+func (s *UpdateRegexPatternSetInput) SetRegexPatternSetId(v string) *UpdateRegexPatternSetInput {
+	s.RegexPatternSetId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateRegexPatternSetInput) SetUpdates(v []RegexPatternSetUpdate) *UpdateRegexPatternSetInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSetResponse
+type UpdateRegexPatternSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateRegexPatternSet request.
+	// You can also use this value to query the status of the request. For more
+	// information, see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateRegexPatternSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRegexPatternSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRegexPatternSetOutput) SetChangeToken(v string) *UpdateRegexPatternSetOutput {
+	s.ChangeToken = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroupRequest
+type UpdateRuleGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The value returned by the most recent call to GetChangeToken.
+	//
+	// ChangeToken is a required field
+	ChangeToken *string `min:"1" type:"string" required:"true"`
+
+	// The RuleGroupId of the RuleGroup that you want to update. RuleGroupId is
+	// returned by CreateRuleGroup and by ListRuleGroups.
+	//
+	// RuleGroupId is a required field
+	RuleGroupId *string `min:"1" type:"string" required:"true"`
+
+	// An array of RuleGroupUpdate objects that you want to insert into or delete
+	// from a RuleGroup.
+	//
+	// You can only insert REGULAR rules into a rule group.
+	//
+	// The Action data type within ActivatedRule is used only when submitting an
+	// UpdateWebACL request. ActivatedRule|Action is not applicable and therefore
+	// not available for UpdateRuleGroup.
+	//
+	// Updates is a required field
+	Updates []RuleGroupUpdate `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRuleGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRuleGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRuleGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuleGroupInput"}
+
+	if s.ChangeToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
+	}
+	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
+	}
+
+	if s.RuleGroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleGroupId"))
+	}
+	if s.RuleGroupId != nil && len(*s.RuleGroupId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleGroupId", 1))
+	}
+
+	if s.Updates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
+	}
+	if s.Updates != nil {
+		for i, v := range s.Updates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRuleGroupInput) SetChangeToken(v string) *UpdateRuleGroupInput {
+	s.ChangeToken = &v
+	return s
+}
+
+// SetRuleGroupId sets the RuleGroupId field's value.
+func (s *UpdateRuleGroupInput) SetRuleGroupId(v string) *UpdateRuleGroupInput {
+	s.RuleGroupId = &v
+	return s
+}
+
+// SetUpdates sets the Updates field's value.
+func (s *UpdateRuleGroupInput) SetUpdates(v []RuleGroupUpdate) *UpdateRuleGroupInput {
+	s.Updates = v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroupResponse
+type UpdateRuleGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ChangeToken that you used to submit the UpdateRuleGroup request. You
+	// can also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus.
+	ChangeToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateRuleGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRuleGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRuleGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetChangeToken sets the ChangeToken field's value.
+func (s *UpdateRuleGroupOutput) SetChangeToken(v string) *UpdateRuleGroupOutput {
+	s.ChangeToken = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleRequest
 type UpdateRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -9059,7 +13558,7 @@ type UpdateSizeConstraintSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []SizeConstraintSetUpdate `type:"list" required:"true"`
+	Updates []SizeConstraintSetUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9092,6 +13591,9 @@ func (s *UpdateSizeConstraintSetInput) Validate() error {
 
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -9185,7 +13687,7 @@ type UpdateSqlInjectionMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []SqlInjectionMatchSetUpdate `type:"list" required:"true"`
+	Updates []SqlInjectionMatchSetUpdate `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -9218,6 +13720,9 @@ func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
 
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -9306,7 +13811,10 @@ type UpdateWebACLInput struct {
 	//
 	//    * WebACLUpdate: Contains Action and ActivatedRule
 	//
-	//    * ActivatedRule: Contains Action, Priority, RuleId, and Type
+	//    * ActivatedRule: Contains Action, Priority, RuleId, and Type. The OverrideAction
+	//    data type within ActivatedRule is used only when submitting an UpdateRuleGroup
+	//    request. ActivatedRule|OverrideAction is not applicable and therefore
+	//    not available for UpdateWebACL.
 	//
 	//    * WafAction: Contains Type
 	Updates []WebACLUpdate `type:"list"`
@@ -9441,7 +13949,7 @@ type UpdateXssMatchSetInput struct {
 	//    * FieldToMatch: Contains Data and Type
 	//
 	// Updates is a required field
-	Updates []XssMatchSetUpdate `type:"list" required:"true"`
+	Updates []XssMatchSetUpdate `min:"1" type:"list" required:"true"`
 
 	// The XssMatchSetId of the XssMatchSet that you want to update. XssMatchSetId
 	// is returned by CreateXssMatchSet and by ListXssMatchSets.
@@ -9473,6 +13981,9 @@ func (s *UpdateXssMatchSetInput) Validate() error {
 
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
+	}
+	if s.Updates != nil && len(s.Updates) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Updates", 1))
 	}
 
 	if s.XssMatchSetId == nil {
@@ -9597,6 +14108,47 @@ func (s *WafAction) Validate() error {
 
 // SetType sets the Type field's value.
 func (s *WafAction) SetType(v WafActionType) *WafAction {
+	s.Type = v
+	return s
+}
+
+// The action to take if any rule within the RuleGroup matches a request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WafOverrideAction
+type WafOverrideAction struct {
+	_ struct{} `type:"structure"`
+
+	// COUNT overrides the action specified by the individual rule within a RuleGroup
+	// . If set to NONE, the rule's action will take place.
+	//
+	// Type is a required field
+	Type WafOverrideActionType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s WafOverrideAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s WafOverrideAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WafOverrideAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "WafOverrideAction"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetType sets the Type field's value.
+func (s *WafOverrideAction) SetType(v WafOverrideActionType) *WafOverrideAction {
 	s.Type = v
 	return s
 }
@@ -10116,6 +14668,268 @@ const (
 	ComparisonOperatorGt ComparisonOperator = "GT"
 )
 
+type GeoMatchConstraintType string
+
+// Enum values for GeoMatchConstraintType
+const (
+	GeoMatchConstraintTypeCountry GeoMatchConstraintType = "Country"
+)
+
+type GeoMatchConstraintValue string
+
+// Enum values for GeoMatchConstraintValue
+const (
+	GeoMatchConstraintValueAf GeoMatchConstraintValue = "AF"
+	GeoMatchConstraintValueAx GeoMatchConstraintValue = "AX"
+	GeoMatchConstraintValueAl GeoMatchConstraintValue = "AL"
+	GeoMatchConstraintValueDz GeoMatchConstraintValue = "DZ"
+	GeoMatchConstraintValueAs GeoMatchConstraintValue = "AS"
+	GeoMatchConstraintValueAd GeoMatchConstraintValue = "AD"
+	GeoMatchConstraintValueAo GeoMatchConstraintValue = "AO"
+	GeoMatchConstraintValueAi GeoMatchConstraintValue = "AI"
+	GeoMatchConstraintValueAq GeoMatchConstraintValue = "AQ"
+	GeoMatchConstraintValueAg GeoMatchConstraintValue = "AG"
+	GeoMatchConstraintValueAr GeoMatchConstraintValue = "AR"
+	GeoMatchConstraintValueAm GeoMatchConstraintValue = "AM"
+	GeoMatchConstraintValueAw GeoMatchConstraintValue = "AW"
+	GeoMatchConstraintValueAu GeoMatchConstraintValue = "AU"
+	GeoMatchConstraintValueAt GeoMatchConstraintValue = "AT"
+	GeoMatchConstraintValueAz GeoMatchConstraintValue = "AZ"
+	GeoMatchConstraintValueBs GeoMatchConstraintValue = "BS"
+	GeoMatchConstraintValueBh GeoMatchConstraintValue = "BH"
+	GeoMatchConstraintValueBd GeoMatchConstraintValue = "BD"
+	GeoMatchConstraintValueBb GeoMatchConstraintValue = "BB"
+	GeoMatchConstraintValueBy GeoMatchConstraintValue = "BY"
+	GeoMatchConstraintValueBe GeoMatchConstraintValue = "BE"
+	GeoMatchConstraintValueBz GeoMatchConstraintValue = "BZ"
+	GeoMatchConstraintValueBj GeoMatchConstraintValue = "BJ"
+	GeoMatchConstraintValueBm GeoMatchConstraintValue = "BM"
+	GeoMatchConstraintValueBt GeoMatchConstraintValue = "BT"
+	GeoMatchConstraintValueBo GeoMatchConstraintValue = "BO"
+	GeoMatchConstraintValueBq GeoMatchConstraintValue = "BQ"
+	GeoMatchConstraintValueBa GeoMatchConstraintValue = "BA"
+	GeoMatchConstraintValueBw GeoMatchConstraintValue = "BW"
+	GeoMatchConstraintValueBv GeoMatchConstraintValue = "BV"
+	GeoMatchConstraintValueBr GeoMatchConstraintValue = "BR"
+	GeoMatchConstraintValueIo GeoMatchConstraintValue = "IO"
+	GeoMatchConstraintValueBn GeoMatchConstraintValue = "BN"
+	GeoMatchConstraintValueBg GeoMatchConstraintValue = "BG"
+	GeoMatchConstraintValueBf GeoMatchConstraintValue = "BF"
+	GeoMatchConstraintValueBi GeoMatchConstraintValue = "BI"
+	GeoMatchConstraintValueKh GeoMatchConstraintValue = "KH"
+	GeoMatchConstraintValueCm GeoMatchConstraintValue = "CM"
+	GeoMatchConstraintValueCa GeoMatchConstraintValue = "CA"
+	GeoMatchConstraintValueCv GeoMatchConstraintValue = "CV"
+	GeoMatchConstraintValueKy GeoMatchConstraintValue = "KY"
+	GeoMatchConstraintValueCf GeoMatchConstraintValue = "CF"
+	GeoMatchConstraintValueTd GeoMatchConstraintValue = "TD"
+	GeoMatchConstraintValueCl GeoMatchConstraintValue = "CL"
+	GeoMatchConstraintValueCn GeoMatchConstraintValue = "CN"
+	GeoMatchConstraintValueCx GeoMatchConstraintValue = "CX"
+	GeoMatchConstraintValueCc GeoMatchConstraintValue = "CC"
+	GeoMatchConstraintValueCo GeoMatchConstraintValue = "CO"
+	GeoMatchConstraintValueKm GeoMatchConstraintValue = "KM"
+	GeoMatchConstraintValueCg GeoMatchConstraintValue = "CG"
+	GeoMatchConstraintValueCd GeoMatchConstraintValue = "CD"
+	GeoMatchConstraintValueCk GeoMatchConstraintValue = "CK"
+	GeoMatchConstraintValueCr GeoMatchConstraintValue = "CR"
+	GeoMatchConstraintValueCi GeoMatchConstraintValue = "CI"
+	GeoMatchConstraintValueHr GeoMatchConstraintValue = "HR"
+	GeoMatchConstraintValueCu GeoMatchConstraintValue = "CU"
+	GeoMatchConstraintValueCw GeoMatchConstraintValue = "CW"
+	GeoMatchConstraintValueCy GeoMatchConstraintValue = "CY"
+	GeoMatchConstraintValueCz GeoMatchConstraintValue = "CZ"
+	GeoMatchConstraintValueDk GeoMatchConstraintValue = "DK"
+	GeoMatchConstraintValueDj GeoMatchConstraintValue = "DJ"
+	GeoMatchConstraintValueDm GeoMatchConstraintValue = "DM"
+	GeoMatchConstraintValueDo GeoMatchConstraintValue = "DO"
+	GeoMatchConstraintValueEc GeoMatchConstraintValue = "EC"
+	GeoMatchConstraintValueEg GeoMatchConstraintValue = "EG"
+	GeoMatchConstraintValueSv GeoMatchConstraintValue = "SV"
+	GeoMatchConstraintValueGq GeoMatchConstraintValue = "GQ"
+	GeoMatchConstraintValueEr GeoMatchConstraintValue = "ER"
+	GeoMatchConstraintValueEe GeoMatchConstraintValue = "EE"
+	GeoMatchConstraintValueEt GeoMatchConstraintValue = "ET"
+	GeoMatchConstraintValueFk GeoMatchConstraintValue = "FK"
+	GeoMatchConstraintValueFo GeoMatchConstraintValue = "FO"
+	GeoMatchConstraintValueFj GeoMatchConstraintValue = "FJ"
+	GeoMatchConstraintValueFi GeoMatchConstraintValue = "FI"
+	GeoMatchConstraintValueFr GeoMatchConstraintValue = "FR"
+	GeoMatchConstraintValueGf GeoMatchConstraintValue = "GF"
+	GeoMatchConstraintValuePf GeoMatchConstraintValue = "PF"
+	GeoMatchConstraintValueTf GeoMatchConstraintValue = "TF"
+	GeoMatchConstraintValueGa GeoMatchConstraintValue = "GA"
+	GeoMatchConstraintValueGm GeoMatchConstraintValue = "GM"
+	GeoMatchConstraintValueGe GeoMatchConstraintValue = "GE"
+	GeoMatchConstraintValueDe GeoMatchConstraintValue = "DE"
+	GeoMatchConstraintValueGh GeoMatchConstraintValue = "GH"
+	GeoMatchConstraintValueGi GeoMatchConstraintValue = "GI"
+	GeoMatchConstraintValueGr GeoMatchConstraintValue = "GR"
+	GeoMatchConstraintValueGl GeoMatchConstraintValue = "GL"
+	GeoMatchConstraintValueGd GeoMatchConstraintValue = "GD"
+	GeoMatchConstraintValueGp GeoMatchConstraintValue = "GP"
+	GeoMatchConstraintValueGu GeoMatchConstraintValue = "GU"
+	GeoMatchConstraintValueGt GeoMatchConstraintValue = "GT"
+	GeoMatchConstraintValueGg GeoMatchConstraintValue = "GG"
+	GeoMatchConstraintValueGn GeoMatchConstraintValue = "GN"
+	GeoMatchConstraintValueGw GeoMatchConstraintValue = "GW"
+	GeoMatchConstraintValueGy GeoMatchConstraintValue = "GY"
+	GeoMatchConstraintValueHt GeoMatchConstraintValue = "HT"
+	GeoMatchConstraintValueHm GeoMatchConstraintValue = "HM"
+	GeoMatchConstraintValueVa GeoMatchConstraintValue = "VA"
+	GeoMatchConstraintValueHn GeoMatchConstraintValue = "HN"
+	GeoMatchConstraintValueHk GeoMatchConstraintValue = "HK"
+	GeoMatchConstraintValueHu GeoMatchConstraintValue = "HU"
+	GeoMatchConstraintValueIs GeoMatchConstraintValue = "IS"
+	GeoMatchConstraintValueIn GeoMatchConstraintValue = "IN"
+	GeoMatchConstraintValueId GeoMatchConstraintValue = "ID"
+	GeoMatchConstraintValueIr GeoMatchConstraintValue = "IR"
+	GeoMatchConstraintValueIq GeoMatchConstraintValue = "IQ"
+	GeoMatchConstraintValueIe GeoMatchConstraintValue = "IE"
+	GeoMatchConstraintValueIm GeoMatchConstraintValue = "IM"
+	GeoMatchConstraintValueIl GeoMatchConstraintValue = "IL"
+	GeoMatchConstraintValueIt GeoMatchConstraintValue = "IT"
+	GeoMatchConstraintValueJm GeoMatchConstraintValue = "JM"
+	GeoMatchConstraintValueJp GeoMatchConstraintValue = "JP"
+	GeoMatchConstraintValueJe GeoMatchConstraintValue = "JE"
+	GeoMatchConstraintValueJo GeoMatchConstraintValue = "JO"
+	GeoMatchConstraintValueKz GeoMatchConstraintValue = "KZ"
+	GeoMatchConstraintValueKe GeoMatchConstraintValue = "KE"
+	GeoMatchConstraintValueKi GeoMatchConstraintValue = "KI"
+	GeoMatchConstraintValueKp GeoMatchConstraintValue = "KP"
+	GeoMatchConstraintValueKr GeoMatchConstraintValue = "KR"
+	GeoMatchConstraintValueKw GeoMatchConstraintValue = "KW"
+	GeoMatchConstraintValueKg GeoMatchConstraintValue = "KG"
+	GeoMatchConstraintValueLa GeoMatchConstraintValue = "LA"
+	GeoMatchConstraintValueLv GeoMatchConstraintValue = "LV"
+	GeoMatchConstraintValueLb GeoMatchConstraintValue = "LB"
+	GeoMatchConstraintValueLs GeoMatchConstraintValue = "LS"
+	GeoMatchConstraintValueLr GeoMatchConstraintValue = "LR"
+	GeoMatchConstraintValueLy GeoMatchConstraintValue = "LY"
+	GeoMatchConstraintValueLi GeoMatchConstraintValue = "LI"
+	GeoMatchConstraintValueLt GeoMatchConstraintValue = "LT"
+	GeoMatchConstraintValueLu GeoMatchConstraintValue = "LU"
+	GeoMatchConstraintValueMo GeoMatchConstraintValue = "MO"
+	GeoMatchConstraintValueMk GeoMatchConstraintValue = "MK"
+	GeoMatchConstraintValueMg GeoMatchConstraintValue = "MG"
+	GeoMatchConstraintValueMw GeoMatchConstraintValue = "MW"
+	GeoMatchConstraintValueMy GeoMatchConstraintValue = "MY"
+	GeoMatchConstraintValueMv GeoMatchConstraintValue = "MV"
+	GeoMatchConstraintValueMl GeoMatchConstraintValue = "ML"
+	GeoMatchConstraintValueMt GeoMatchConstraintValue = "MT"
+	GeoMatchConstraintValueMh GeoMatchConstraintValue = "MH"
+	GeoMatchConstraintValueMq GeoMatchConstraintValue = "MQ"
+	GeoMatchConstraintValueMr GeoMatchConstraintValue = "MR"
+	GeoMatchConstraintValueMu GeoMatchConstraintValue = "MU"
+	GeoMatchConstraintValueYt GeoMatchConstraintValue = "YT"
+	GeoMatchConstraintValueMx GeoMatchConstraintValue = "MX"
+	GeoMatchConstraintValueFm GeoMatchConstraintValue = "FM"
+	GeoMatchConstraintValueMd GeoMatchConstraintValue = "MD"
+	GeoMatchConstraintValueMc GeoMatchConstraintValue = "MC"
+	GeoMatchConstraintValueMn GeoMatchConstraintValue = "MN"
+	GeoMatchConstraintValueMe GeoMatchConstraintValue = "ME"
+	GeoMatchConstraintValueMs GeoMatchConstraintValue = "MS"
+	GeoMatchConstraintValueMa GeoMatchConstraintValue = "MA"
+	GeoMatchConstraintValueMz GeoMatchConstraintValue = "MZ"
+	GeoMatchConstraintValueMm GeoMatchConstraintValue = "MM"
+	GeoMatchConstraintValueNa GeoMatchConstraintValue = "NA"
+	GeoMatchConstraintValueNr GeoMatchConstraintValue = "NR"
+	GeoMatchConstraintValueNp GeoMatchConstraintValue = "NP"
+	GeoMatchConstraintValueNl GeoMatchConstraintValue = "NL"
+	GeoMatchConstraintValueNc GeoMatchConstraintValue = "NC"
+	GeoMatchConstraintValueNz GeoMatchConstraintValue = "NZ"
+	GeoMatchConstraintValueNi GeoMatchConstraintValue = "NI"
+	GeoMatchConstraintValueNe GeoMatchConstraintValue = "NE"
+	GeoMatchConstraintValueNg GeoMatchConstraintValue = "NG"
+	GeoMatchConstraintValueNu GeoMatchConstraintValue = "NU"
+	GeoMatchConstraintValueNf GeoMatchConstraintValue = "NF"
+	GeoMatchConstraintValueMp GeoMatchConstraintValue = "MP"
+	GeoMatchConstraintValueNo GeoMatchConstraintValue = "NO"
+	GeoMatchConstraintValueOm GeoMatchConstraintValue = "OM"
+	GeoMatchConstraintValuePk GeoMatchConstraintValue = "PK"
+	GeoMatchConstraintValuePw GeoMatchConstraintValue = "PW"
+	GeoMatchConstraintValuePs GeoMatchConstraintValue = "PS"
+	GeoMatchConstraintValuePa GeoMatchConstraintValue = "PA"
+	GeoMatchConstraintValuePg GeoMatchConstraintValue = "PG"
+	GeoMatchConstraintValuePy GeoMatchConstraintValue = "PY"
+	GeoMatchConstraintValuePe GeoMatchConstraintValue = "PE"
+	GeoMatchConstraintValuePh GeoMatchConstraintValue = "PH"
+	GeoMatchConstraintValuePn GeoMatchConstraintValue = "PN"
+	GeoMatchConstraintValuePl GeoMatchConstraintValue = "PL"
+	GeoMatchConstraintValuePt GeoMatchConstraintValue = "PT"
+	GeoMatchConstraintValuePr GeoMatchConstraintValue = "PR"
+	GeoMatchConstraintValueQa GeoMatchConstraintValue = "QA"
+	GeoMatchConstraintValueRe GeoMatchConstraintValue = "RE"
+	GeoMatchConstraintValueRo GeoMatchConstraintValue = "RO"
+	GeoMatchConstraintValueRu GeoMatchConstraintValue = "RU"
+	GeoMatchConstraintValueRw GeoMatchConstraintValue = "RW"
+	GeoMatchConstraintValueBl GeoMatchConstraintValue = "BL"
+	GeoMatchConstraintValueSh GeoMatchConstraintValue = "SH"
+	GeoMatchConstraintValueKn GeoMatchConstraintValue = "KN"
+	GeoMatchConstraintValueLc GeoMatchConstraintValue = "LC"
+	GeoMatchConstraintValueMf GeoMatchConstraintValue = "MF"
+	GeoMatchConstraintValuePm GeoMatchConstraintValue = "PM"
+	GeoMatchConstraintValueVc GeoMatchConstraintValue = "VC"
+	GeoMatchConstraintValueWs GeoMatchConstraintValue = "WS"
+	GeoMatchConstraintValueSm GeoMatchConstraintValue = "SM"
+	GeoMatchConstraintValueSt GeoMatchConstraintValue = "ST"
+	GeoMatchConstraintValueSa GeoMatchConstraintValue = "SA"
+	GeoMatchConstraintValueSn GeoMatchConstraintValue = "SN"
+	GeoMatchConstraintValueRs GeoMatchConstraintValue = "RS"
+	GeoMatchConstraintValueSc GeoMatchConstraintValue = "SC"
+	GeoMatchConstraintValueSl GeoMatchConstraintValue = "SL"
+	GeoMatchConstraintValueSg GeoMatchConstraintValue = "SG"
+	GeoMatchConstraintValueSx GeoMatchConstraintValue = "SX"
+	GeoMatchConstraintValueSk GeoMatchConstraintValue = "SK"
+	GeoMatchConstraintValueSi GeoMatchConstraintValue = "SI"
+	GeoMatchConstraintValueSb GeoMatchConstraintValue = "SB"
+	GeoMatchConstraintValueSo GeoMatchConstraintValue = "SO"
+	GeoMatchConstraintValueZa GeoMatchConstraintValue = "ZA"
+	GeoMatchConstraintValueGs GeoMatchConstraintValue = "GS"
+	GeoMatchConstraintValueSs GeoMatchConstraintValue = "SS"
+	GeoMatchConstraintValueEs GeoMatchConstraintValue = "ES"
+	GeoMatchConstraintValueLk GeoMatchConstraintValue = "LK"
+	GeoMatchConstraintValueSd GeoMatchConstraintValue = "SD"
+	GeoMatchConstraintValueSr GeoMatchConstraintValue = "SR"
+	GeoMatchConstraintValueSj GeoMatchConstraintValue = "SJ"
+	GeoMatchConstraintValueSz GeoMatchConstraintValue = "SZ"
+	GeoMatchConstraintValueSe GeoMatchConstraintValue = "SE"
+	GeoMatchConstraintValueCh GeoMatchConstraintValue = "CH"
+	GeoMatchConstraintValueSy GeoMatchConstraintValue = "SY"
+	GeoMatchConstraintValueTw GeoMatchConstraintValue = "TW"
+	GeoMatchConstraintValueTj GeoMatchConstraintValue = "TJ"
+	GeoMatchConstraintValueTz GeoMatchConstraintValue = "TZ"
+	GeoMatchConstraintValueTh GeoMatchConstraintValue = "TH"
+	GeoMatchConstraintValueTl GeoMatchConstraintValue = "TL"
+	GeoMatchConstraintValueTg GeoMatchConstraintValue = "TG"
+	GeoMatchConstraintValueTk GeoMatchConstraintValue = "TK"
+	GeoMatchConstraintValueTo GeoMatchConstraintValue = "TO"
+	GeoMatchConstraintValueTt GeoMatchConstraintValue = "TT"
+	GeoMatchConstraintValueTn GeoMatchConstraintValue = "TN"
+	GeoMatchConstraintValueTr GeoMatchConstraintValue = "TR"
+	GeoMatchConstraintValueTm GeoMatchConstraintValue = "TM"
+	GeoMatchConstraintValueTc GeoMatchConstraintValue = "TC"
+	GeoMatchConstraintValueTv GeoMatchConstraintValue = "TV"
+	GeoMatchConstraintValueUg GeoMatchConstraintValue = "UG"
+	GeoMatchConstraintValueUa GeoMatchConstraintValue = "UA"
+	GeoMatchConstraintValueAe GeoMatchConstraintValue = "AE"
+	GeoMatchConstraintValueGb GeoMatchConstraintValue = "GB"
+	GeoMatchConstraintValueUs GeoMatchConstraintValue = "US"
+	GeoMatchConstraintValueUm GeoMatchConstraintValue = "UM"
+	GeoMatchConstraintValueUy GeoMatchConstraintValue = "UY"
+	GeoMatchConstraintValueUz GeoMatchConstraintValue = "UZ"
+	GeoMatchConstraintValueVu GeoMatchConstraintValue = "VU"
+	GeoMatchConstraintValueVe GeoMatchConstraintValue = "VE"
+	GeoMatchConstraintValueVn GeoMatchConstraintValue = "VN"
+	GeoMatchConstraintValueVg GeoMatchConstraintValue = "VG"
+	GeoMatchConstraintValueVi GeoMatchConstraintValue = "VI"
+	GeoMatchConstraintValueWf GeoMatchConstraintValue = "WF"
+	GeoMatchConstraintValueEh GeoMatchConstraintValue = "EH"
+	GeoMatchConstraintValueYe GeoMatchConstraintValue = "YE"
+	GeoMatchConstraintValueZm GeoMatchConstraintValue = "ZM"
+	GeoMatchConstraintValueZw GeoMatchConstraintValue = "ZW"
+)
+
 type IPSetDescriptorType string
 
 // Enum values for IPSetDescriptorType
@@ -10141,6 +14955,7 @@ type ParameterExceptionField string
 const (
 	ParameterExceptionFieldChangeAction                     ParameterExceptionField = "CHANGE_ACTION"
 	ParameterExceptionFieldWafAction                        ParameterExceptionField = "WAF_ACTION"
+	ParameterExceptionFieldWafOverrideAction                ParameterExceptionField = "WAF_OVERRIDE_ACTION"
 	ParameterExceptionFieldPredicateType                    ParameterExceptionField = "PREDICATE_TYPE"
 	ParameterExceptionFieldIpsetType                        ParameterExceptionField = "IPSET_TYPE"
 	ParameterExceptionFieldByteMatchFieldType               ParameterExceptionField = "BYTE_MATCH_FIELD_TYPE"
@@ -10148,6 +14963,8 @@ const (
 	ParameterExceptionFieldByteMatchTextTransformation      ParameterExceptionField = "BYTE_MATCH_TEXT_TRANSFORMATION"
 	ParameterExceptionFieldByteMatchPositionalConstraint    ParameterExceptionField = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
 	ParameterExceptionFieldSizeConstraintComparisonOperator ParameterExceptionField = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
+	ParameterExceptionFieldGeoMatchLocationType             ParameterExceptionField = "GEO_MATCH_LOCATION_TYPE"
+	ParameterExceptionFieldGeoMatchLocationValue            ParameterExceptionField = "GEO_MATCH_LOCATION_VALUE"
 	ParameterExceptionFieldRateKey                          ParameterExceptionField = "RATE_KEY"
 	ParameterExceptionFieldRuleType                         ParameterExceptionField = "RULE_TYPE"
 	ParameterExceptionFieldNextMarker                       ParameterExceptionField = "NEXT_MARKER"
@@ -10179,8 +14996,10 @@ const (
 	PredicateTypeIpmatch           PredicateType = "IPMatch"
 	PredicateTypeByteMatch         PredicateType = "ByteMatch"
 	PredicateTypeSqlInjectionMatch PredicateType = "SqlInjectionMatch"
+	PredicateTypeGeoMatch          PredicateType = "GeoMatch"
 	PredicateTypeSizeConstraint    PredicateType = "SizeConstraint"
 	PredicateTypeXssMatch          PredicateType = "XssMatch"
+	PredicateTypeRegexMatch        PredicateType = "RegexMatch"
 )
 
 type RateKey string
@@ -10211,10 +15030,19 @@ const (
 	WafActionTypeCount WafActionType = "COUNT"
 )
 
+type WafOverrideActionType string
+
+// Enum values for WafOverrideActionType
+const (
+	WafOverrideActionTypeNone  WafOverrideActionType = "NONE"
+	WafOverrideActionTypeCount WafOverrideActionType = "COUNT"
+)
+
 type WafRuleType string
 
 // Enum values for WafRuleType
 const (
 	WafRuleTypeRegular   WafRuleType = "REGULAR"
 	WafRuleTypeRateBased WafRuleType = "RATE_BASED"
+	WafRuleTypeGroup     WafRuleType = "GROUP"
 )

@@ -5990,4 +5990,13 @@ const (
 	ResourceTypeAwsAutoScalingLaunchConfiguration     ResourceType = "AWS::AutoScaling::LaunchConfiguration"
 	ResourceTypeAwsAutoScalingScalingPolicy           ResourceType = "AWS::AutoScaling::ScalingPolicy"
 	ResourceTypeAwsAutoScalingScheduledAction         ResourceType = "AWS::AutoScaling::ScheduledAction"
+	ResourceTypeAwsCodeBuildProject                   ResourceType = "AWS::CodeBuild::Project"
+	ResourceTypeAwsWafRateBasedRule                   ResourceType = "AWS::WAF::RateBasedRule"
+	ResourceTypeAwsWafRule                            ResourceType = "AWS::WAF::Rule"
+	ResourceTypeAwsWafWebAcl                          ResourceType = "AWS::WAF::WebACL"
+	ResourceTypeAwsWafregionalRateBasedRule           ResourceType = "AWS::WAFRegional::RateBasedRule"
+	ResourceTypeAwsWafregionalRule                    ResourceType = "AWS::WAFRegional::Rule"
+	ResourceTypeAwsWafregionalWebAcl                  ResourceType = "AWS::WAFRegional::WebACL"
+	ResourceTypeAwsCloudFrontDistribution             ResourceType = "AWS::CloudFront::Distribution"
+	ResourceTypeAwsCloudFrontStreamingDistribution    ResourceType = "AWS::CloudFront::StreamingDistribution"
 )

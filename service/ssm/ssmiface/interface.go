@@ -114,6 +114,8 @@ type SSMAPI interface {
 
 	DescribeAutomationExecutionsRequest(*ssm.DescribeAutomationExecutionsInput) ssm.DescribeAutomationExecutionsRequest
 
+	DescribeAutomationStepExecutionsRequest(*ssm.DescribeAutomationStepExecutionsInput) ssm.DescribeAutomationStepExecutionsRequest
+
 	DescribeAvailablePatchesRequest(*ssm.DescribeAvailablePatchesInput) ssm.DescribeAvailablePatchesRequest
 
 	DescribeDocumentRequest(*ssm.DescribeDocumentInput) ssm.DescribeDocumentRequest

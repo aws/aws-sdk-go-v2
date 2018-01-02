@@ -155,6 +155,8 @@ type CloudFormationAPI interface {
 
 	UpdateStackRequest(*cloudformation.UpdateStackInput) cloudformation.UpdateStackRequest
 
+	UpdateStackInstancesRequest(*cloudformation.UpdateStackInstancesInput) cloudformation.UpdateStackInstancesRequest
+
 	UpdateStackSetRequest(*cloudformation.UpdateStackSetInput) cloudformation.UpdateStackSetRequest
 
 	UpdateTerminationProtectionRequest(*cloudformation.UpdateTerminationProtectionInput) cloudformation.UpdateTerminationProtectionRequest

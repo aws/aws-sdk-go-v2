@@ -113,6 +113,8 @@ type WorkDocsAPI interface {
 	DescribeFolderContentsPages(*workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool) error
 	DescribeFolderContentsPagesWithContext(aws.Context, *workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool, ...aws.Option) error
 
+	DescribeGroupsRequest(*workdocs.DescribeGroupsInput) workdocs.DescribeGroupsRequest
+
 	DescribeNotificationSubscriptionsRequest(*workdocs.DescribeNotificationSubscriptionsInput) workdocs.DescribeNotificationSubscriptionsRequest
 
 	DescribeResourcePermissionsRequest(*workdocs.DescribeResourcePermissionsInput) workdocs.DescribeResourcePermissionsRequest
