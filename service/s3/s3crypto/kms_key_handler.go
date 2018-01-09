@@ -23,10 +23,10 @@ type kmsKeyHandler struct {
 // description.
 //
 // Example:
-//	sess := session.New(&aws.Config{})
+//  cfg, err := external.LoadDefaultAWSConfig()
 //	cmkID := "arn to key"
 //	matdesc := s3crypto.MaterialDescription{}
-//	handler := s3crypto.NewKMSKeyGenerator(kms.New(sess), cmkID)
+//	handler := s3crypto.NewKMSKeyGenerator(kms.New(cfg), cmkID)
 func NewKMSKeyGenerator(kmsClient kmsiface.KMSAPI, cmkID string) CipherDataGenerator {
 	return NewKMSKeyGeneratorWithMatDesc(kmsClient, cmkID, MaterialDescription{})
 }
@@ -35,10 +35,10 @@ func NewKMSKeyGenerator(kmsClient kmsiface.KMSAPI, cmkID string) CipherDataGener
 // description.
 //
 // Example:
-//	sess := session.New(&aws.Config{})
+//  cfg, err := external.LoadDefaultAWSConfig()
 //	cmkID := "arn to key"
 //	matdesc := s3crypto.MaterialDescription{}
-//	handler, err := s3crypto.NewKMSKeyGeneratorWithMatDesc(kms.New(sess), cmkID, matdesc)
+//	handler, err := s3crypto.NewKMSKeyGeneratorWithMatDesc(kms.New(cfg), cmkID, matdesc)
 func NewKMSKeyGeneratorWithMatDesc(kmsClient kmsiface.KMSAPI, cmkID string, matdesc MaterialDescription) CipherDataGenerator {
 	if matdesc == nil {
 		matdesc = MaterialDescription{}

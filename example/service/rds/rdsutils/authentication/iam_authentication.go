@@ -11,7 +11,7 @@ import (
 	"github.com/go-sql-driver/mysql"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
 )
@@ -19,7 +19,7 @@ import (
 // Usage ./iam_authentication <region> <db user> <db name> <endpoint to database> <iam arn>
 func main() {
 	if len(os.Args) < 5 {
-		log.Println("USAGE ERROR: go run concatenateObjects.go <region> <endpoint to database> <iam arn>")
+		fmt.Fprintf(os.Stderr, "USAGE ERROR: go run concatenateObjects.go <region> <endpoint to database> <iam arn>\n")
 		os.Exit(1)
 	}
 
@@ -27,7 +27,17 @@ func main() {
 	dbUser := os.Args[2]
 	dbName := os.Args[3]
 	dbEndpoint := os.Args[4]
-	awsCreds := stscreds.NewCredentials(session.New(&aws.Config{Region: &awsRegion}), os.Args[5])
+
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to load configuration, %v", err)
+		os.Exit(1)
+	}
+	cfg.Region = awsRegion
+
+	credProvider := stscreds.NewAssumeRoleProvider(sts.New(cfg), os.Args[5])
+
+	awsCreds := aws.NewCredentials(credProvider)
 	authToken, err := rdsutils.BuildAuthToken(dbEndpoint, awsRegion, dbUser, awsCreds)
 
 	// Create the MySQL DNS string for the DB connection

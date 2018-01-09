@@ -17,10 +17,10 @@ import (
 // For example to get the region of a bucket which exists in "eu-central-1"
 // you could provide a region hint of "us-west-2".
 //
-//    sess := session.Must(session.NewSession())
+//    cfg, err := external.LoadDefaultAWSConfig()
 //
 //    bucket := "my-bucket"
-//    region, err := s3manager.GetBucketRegion(ctx, sess, bucket, "us-west-2")
+//    region, err := s3manager.GetBucketRegion(ctx, cfg, bucket, "us-west-2")
 //    if err != nil {
 //        if aerr, ok := err.(awserr.Error); ok && aerr.Code() == "NotFound" {
 //             fmt.Fprintf(os.Stderr, "unable to find bucket %s's region not found\n", bucket)
