@@ -251,19 +251,17 @@ type Uploader struct {
 }
 
 // NewUploader creates a new Uploader instance to upload objects to S3. Pass In
-// additional functional options to customize the uploader's behavior. Requires a
-// client.ConfigProvider in order to create a S3 service client. The session.Session
-// satisfies the client.ConfigProvider interface.
+// additional functional options to customize the uploader's behavior.
 //
 // Example:
-//     // The session the S3 Uploader will use
-//     sess := session.Must(session.NewSession())
+//     // The config the S3 Uploader will use
+//     cfg, err := external.LoadDefaultAWSConfig()
 //
-//     // Create an uploader with the session and default options
-//     uploader := s3manager.NewUploader(sess)
+//     // Create an uploader with the config and default options
+//     uploader := s3manager.NewUploader(cfg)
 //
-//     // Create an uploader with the session and custom options
-//     uploader := s3manager.NewUploader(session, func(u *s3manager.Uploader) {
+//     // Create an uploader with the config and custom options
+//     uploader := s3manager.NewUploader(cfg, func(u *s3manager.Uploader) {
 //          u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
 func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
@@ -287,11 +285,11 @@ func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
 // a S3 service client to make S3 API calls.
 //
 // Example:
-//     // The session the S3 Uploader will use
-//     sess := session.Must(session.NewSession())
+//     // The config the S3 Uploader will use
+//     cfg, err := external.LoadDefaultAWSConfig()
 //
 //     // S3 service client the Upload manager will use.
-//     s3Svc := s3.New(sess)
+//     s3Svc := s3.New(cfg)
 //
 //     // Create an uploader with S3 client and default options
 //     uploader := s3manager.NewUploaderWithClient(s3Svc)

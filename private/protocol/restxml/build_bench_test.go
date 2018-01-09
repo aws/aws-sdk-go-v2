@@ -12,10 +12,9 @@ import (
 	"encoding/xml"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	credentials "github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -31,15 +30,17 @@ func TestMain(m *testing.M) {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	sess := session.Must(session.NewSession(&aws.Config{
-		Credentials:      credentials.NewStaticCredentials("Key", "Secret", "Token"),
-		Endpoint:         aws.String(server.URL),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-		Region:           aws.String(endpoints.UsWest2RegionID),
-	}))
-	cloudfrontSvc = cloudfront.New(sess)
-	s3Svc = s3.New(sess)
+	cfg := unit.Config()
+	cfg.Region = endpoints.UsWest2RegionID
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.Credentials = aws.NewCredentials(aws.NewStaticCredentialsProvider(
+		"Key", "Secret", "Token",
+	))
+
+	cloudfrontSvc = cloudfront.New(cfg)
+
+	s3Svc = s3.New(cfg)
+	s3Svc.ForcePathStyle = true
 
 	c := m.Run()
 	server.Close()

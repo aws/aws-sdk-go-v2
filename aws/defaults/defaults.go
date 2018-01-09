@@ -1,12 +1,10 @@
 // Package defaults is a collection of helpers to retrieve the SDK's default
 // configuration and handlers.
 //
-// Generally this package shouldn't be used directly, but session.Session
+// Generally this package shouldn't be used directly, but external.Config
 // instead. This package is useful when you need to reset the defaults
-// of a session or service client to the SDK defaults before setting
+// of a service client to the SDK defaults before setting
 // additional parameters.
-//
-// TODO rename to "default"
 package defaults
 
 import (
@@ -43,7 +41,7 @@ func (l defaultLogger) Log(args ...interface{}) {
 //
 // Generally you shouldn't need to use this method directly, but
 // is available if you need to reset the configuration of an
-// existing service client or session.
+// existing service client.
 func Config() aws.Config {
 	return aws.Config{
 		EndpointResolver: endpoints.NewDefaultResolver(),
@@ -74,7 +72,7 @@ func HTTPClient() *http.Client {
 //
 // Generally you shouldn't need to use this method directly, but
 // is available if you need to reset the request handlers of an
-// existing service client or session.
+// existing service client.
 func Handlers() aws.Handlers {
 	var handlers aws.Handlers
 

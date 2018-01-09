@@ -69,11 +69,10 @@ type Config struct {
 	// for empty directory names in s3 requests.
 	//
 	// Example:
-	//    sess := session.Must(session.NewSession(&aws.Config{
-	//         DisableRestProtocolURICleaning: aws.Bool(true),
-	//    }))
+	//    cfg, err := external.LoadDefaultAWSConfig()
+	//    cfg.DisableRestProtocolURICleaning = true
 	//
-	//    svc := s3.New(sess)
+	//    svc := s3.New(cfg)
 	//    out, err := svc.GetObject(&s3.GetObjectInput {
 	//    	Bucket: aws.String("bucketname"),
 	//    	Key: aws.String("//foo//bar//moo"),

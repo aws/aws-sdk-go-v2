@@ -6,11 +6,11 @@
 // for optimizations if the Body satisfies that type. Once the Uploader instance
 // is created you can call Upload concurrently from multiple goroutines safely.
 //
-//   // The session the S3 Uploader will use
-//   sess := session.Must(session.NewSession())
+//   // The config the S3 Uploader will use
+//   cfg, err := external.LoadDefaultAWSConfig()
 //
-//   // Create an uploader with the session and default options
-//   uploader := s3manager.NewUploader(sess)
+//   // Create an uploader with the config and default options
+//   uploader := s3manager.NewUploader(cfg)
 //
 //   f, err  := os.Open(filename)
 //   if err != nil {
@@ -38,11 +38,11 @@
 // Once the Downloader instance is created you can call Upload concurrently from
 // multiple goroutines safely.
 //
-//   // The session the S3 Downloader will use
-//   sess := session.Must(session.NewSession())
+//   // The config the S3 Downloader will use
+//   cfg, err := external.LoadDefaultAWSConfig()
 //
-//   // Create a downloader with the session and default options
-//   downloader := s3manager.NewDownloader(sess)
+//   // Create a downloader with the config and default options
+//   downloader := s3manager.NewDownloader(cfg)
 //
 //   // Create a file to write the S3 Object contents to.
 //   f, err := os.Create(filename)
@@ -69,10 +69,10 @@
 // hint to determine which AWS partition to perform the query on. Use this utility
 // to determine the region a bucket is in.
 //
-//   sess := session.Must(session.NewSession())
+//   cfg, err := external.LoadDefaultAWSConfig()
 //
 //   bucket := "my-bucket"
-//   region, err := s3manager.GetBucketRegion(ctx, sess, bucket, "us-west-2")
+//   region, err := s3manager.GetBucketRegion(ctx, cfg, bucket, "us-west-2")
 //   if err != nil {
 //       if aerr, ok := err.(awserr.Error); ok && aerr.Code() == "NotFound" {
 //            fmt.Fprintf(os.Stderr, "unable to find bucket %s's region not found\n", bucket)
@@ -90,10 +90,10 @@
 // content from S3. The Encryption and Decryption clients can be used concurrently
 // once the client is created.
 //
-//    sess := session.Must(session.NewSession())
+//   cfg, err := external.LoadDefaultAWSConfig()
 //
 //    // Create the decryption client.
-//    svc := s3crypto.NewDecryptionClient(sess)
+//    svc := s3crypto.NewDecryptionClient(cfg)
 //
 //    // The object will be downloaded from S3 and decrypted locally. By metadata
 //    // about the object's encryption will instruct the decryption client how

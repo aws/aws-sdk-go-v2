@@ -41,7 +41,7 @@
 // If a type implements the Resolver interface it can be used to resolve
 // endpoints. To use this with the SDK's Session and Config set the value
 // of the type to the EndpointsResolver field of aws.Config when initializing
-// the session, or service client.
+// the service client.
 //
 // In addition the ResolverFunc is a wrapper for a func matching the signature
 // of Resolver.ResolveEndpoint, converting it to a type that satisfies the

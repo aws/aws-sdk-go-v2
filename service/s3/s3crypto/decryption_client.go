@@ -40,8 +40,8 @@ type DecryptionClient struct {
 // NewDecryptionClient instantiates a new S3 crypto client
 //
 // Example:
-//	sess := session.New()
-//	svc := s3crypto.NewDecryptionClient(sess, func(svc *s3crypto.DecryptionClient{
+//  cfg, err := external.LoadDefaultAWSConfig()
+//	svc := s3crypto.NewDecryptionClient(cfg, func(svc *s3crypto.DecryptionClient{
 //		// Custom client options here
 //	}))
 func NewDecryptionClient(cfg aws.Config, options ...func(*DecryptionClient)) *DecryptionClient {
@@ -76,8 +76,8 @@ func NewDecryptionClient(cfg aws.Config, options ...func(*DecryptionClient)) *De
 // decryption will be done. The SDK only supports V2 reads of KMS and GCM.
 //
 // Example:
-//	sess := session.New()
-//	svc := s3crypto.NewDecryptionClient(sess)
+//  cfg, err := external.LoadDefaultAWSConfig()
+//	svc := s3crypto.NewDecryptionClient(cfg)
 //	req, out := svc.GetObjectRequest(&s3.GetObjectInput {
 //	  Key: aws.String("testKey"),
 //	  Bucket: aws.String("testBucket"),
