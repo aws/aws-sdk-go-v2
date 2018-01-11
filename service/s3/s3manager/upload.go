@@ -98,7 +98,7 @@ func (m multiUploadError) UploadID() string {
 // UploadInput contains all input for upload requests to Amazon S3.
 type UploadInput struct {
 	// The canned ACL to apply to the object.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string"`
+	ACL s3.ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -140,13 +140,13 @@ type UploadInput struct {
 	Key *string `location:"uri" locationName:"Key" type:"string" required:"true"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string"`
+	RequestPayer s3.RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256,
 	// aws:kms).
@@ -175,7 +175,7 @@ type UploadInput struct {
 	ServerSideEncryption s3.ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// The type of storage to use for the object. Defaults to 'STANDARD'.
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string"`
+	StorageClass s3.StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters
 	Tagging *string `location:"header" locationName:"x-amz-tagging" type:"string"`
