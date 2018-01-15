@@ -117,7 +117,7 @@ sandbox-test-go18: sandbox-build-go18
 	docker run -t aws-sdk-go-1.8
 
 sandbox-build-go19:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.8 -t "aws-sdk-go-1.9" .
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.9 -t "aws-sdk-go-1.9" .
 sandbox-go19: sandbox-build-go19
 	docker run -i -t aws-sdk-go-1.9 bash
 sandbox-test-go19: sandbox-build-go19
