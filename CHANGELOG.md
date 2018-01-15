@@ -1,3 +1,16 @@
+Release v2.0.0-preview.2 (2018-01-15)
+===
+
+### Services
+* Synced the V2 SDK with latests AWS service API definitions.
+
+### SDK Bugs
+* `service/s3/s3manager`: Fix Upload Manger's UploadInput fields ([#89](https://github.com/aws/aws-sdk-go-v2/pull/89))
+	* Fixes [#88](https://github.com/aws/aws-sdk-go-v2/issues/88)
+* `aws`: Fix Pagination handling of empty string NextToken ([#94](https://github.com/aws/aws-sdk-go-v2/pull/94))
+	* Fixes [#84](https://github.com/aws/aws-sdk-go-v2/issues/84)
+
+
 Release v2.0.0-preview.1 (2017-12-21)
 ===
 
