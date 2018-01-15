@@ -121,12 +121,12 @@ func (r *Request) nextPageTokens() []interface{} {
 		return nil
 	}
 	if r.Operation.TruncationToken != "" {
-		tr, _ := awsutil.ValuesAtPath(r.Data, r.Operation.TruncationToken)
-		if len(tr) == 0 {
+		vs, _ := awsutil.ValuesAtPath(r.Data, r.Operation.TruncationToken)
+		if len(vs) == 0 {
 			return nil
 		}
 
-		switch v := tr[0].(type) {
+		switch v := vs[0].(type) {
 		case *bool:
 			if !BoolValue(v) {
 				return nil
@@ -135,19 +135,43 @@ func (r *Request) nextPageTokens() []interface{} {
 			if v == false {
 				return nil
 			}
+		case *string:
+			if len(StringValue(v)) == 0 {
+				return nil
+			}
+		case string:
+			if len(v) == 0 {
+				return nil
+			}
 		}
 	}
 
 	tokens := []interface{}{}
 	tokenAdded := false
 	for _, outToken := range r.Operation.OutputTokens {
-		v, _ := awsutil.ValuesAtPath(r.Data, outToken)
-		if len(v) > 0 {
-			tokens = append(tokens, v[0])
-			tokenAdded = true
-		} else {
+		vs, _ := awsutil.ValuesAtPath(r.Data, outToken)
+
+		if len(vs) == 0 {
 			tokens = append(tokens, nil)
+			continue
 		}
+		v := vs[0]
+
+		switch tv := v.(type) {
+		case *string:
+			if len(StringValue(tv)) == 0 {
+				tokens = append(tokens, nil)
+				continue
+			}
+		case string:
+			if len(tv) == 0 {
+				tokens = append(tokens, nil)
+				continue
+			}
+		}
+
+		tokenAdded = true
+		tokens = append(tokens, v)
 	}
 	if !tokenAdded {
 		return nil
