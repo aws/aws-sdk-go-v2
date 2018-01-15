@@ -121,26 +121,18 @@ func (r *Request) nextPageTokens() []interface{} {
 		return nil
 	}
 	if r.Operation.TruncationToken != "" {
-		vs, _ := awsutil.ValuesAtPath(r.Data, r.Operation.TruncationToken)
-		if len(vs) == 0 {
+		tr, _ := awsutil.ValuesAtPath(r.Data, r.Operation.TruncationToken)
+		if len(tr) == 0 {
 			return nil
 		}
 
-		switch v := vs[0].(type) {
+		switch v := tr[0].(type) {
 		case *bool:
 			if !BoolValue(v) {
 				return nil
 			}
 		case bool:
 			if v == false {
-				return nil
-			}
-		case *string:
-			if len(StringValue(v)) == 0 {
-				return nil
-			}
-		case string:
-			if len(v) == 0 {
 				return nil
 			}
 		}
