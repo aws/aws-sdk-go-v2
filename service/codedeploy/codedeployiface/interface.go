@@ -93,6 +93,8 @@ type CodeDeployAPI interface {
 
 	DeleteDeploymentGroupRequest(*codedeploy.DeleteDeploymentGroupInput) codedeploy.DeleteDeploymentGroupRequest
 
+	DeleteGitHubAccountTokenRequest(*codedeploy.DeleteGitHubAccountTokenInput) codedeploy.DeleteGitHubAccountTokenRequest
+
 	DeregisterOnPremisesInstanceRequest(*codedeploy.DeregisterOnPremisesInstanceInput) codedeploy.DeregisterOnPremisesInstanceRequest
 
 	GetApplicationRequest(*codedeploy.GetApplicationInput) codedeploy.GetApplicationRequest
@@ -142,6 +144,8 @@ type CodeDeployAPI interface {
 	ListGitHubAccountTokenNamesRequest(*codedeploy.ListGitHubAccountTokenNamesInput) codedeploy.ListGitHubAccountTokenNamesRequest
 
 	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) codedeploy.ListOnPremisesInstancesRequest
+
+	PutLifecycleEventHookExecutionStatusRequest(*codedeploy.PutLifecycleEventHookExecutionStatusInput) codedeploy.PutLifecycleEventHookExecutionStatusRequest
 
 	RegisterApplicationRevisionRequest(*codedeploy.RegisterApplicationRevisionInput) codedeploy.RegisterApplicationRevisionRequest
 
