@@ -3193,6 +3193,10 @@ type CreateMicrosoftADInput struct {
 	// console Directory Details page after the directory is created.
 	Description *string `type:"string"`
 
+	// AWS Microsoft AD is available in two editions: Standard and Enterprise. Enterprise
+	// is the default.
+	Edition DirectoryEdition `type:"string" enum:"true"`
+
 	// The fully qualified domain name for the directory, such as corp.example.com.
 	// This name will resolve inside your VPC only. It does not need to be publicly
 	// resolvable.
@@ -3256,6 +3260,12 @@ func (s *CreateMicrosoftADInput) Validate() error {
 // SetDescription sets the Description field's value.
 func (s *CreateMicrosoftADInput) SetDescription(v string) *CreateMicrosoftADInput {
 	s.Description = &v
+	return s
+}
+
+// SetEdition sets the Edition field's value.
+func (s *CreateMicrosoftADInput) SetEdition(v DirectoryEdition) *CreateMicrosoftADInput {
+	s.Edition = v
 	return s
 }
 
@@ -4714,6 +4724,9 @@ type DirectoryDescription struct {
 	// which the AD Connector is connected.
 	DnsIpAddrs []string `type:"list"`
 
+	// The edition associated with this directory.
+	Edition DirectoryEdition `type:"string" enum:"true"`
+
 	// Specifies when the directory was created.
 	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -4804,6 +4817,12 @@ func (s *DirectoryDescription) SetDirectoryId(v string) *DirectoryDescription {
 // SetDnsIpAddrs sets the DnsIpAddrs field's value.
 func (s *DirectoryDescription) SetDnsIpAddrs(v []string) *DirectoryDescription {
 	s.DnsIpAddrs = v
+	return s
+}
+
+// SetEdition sets the Edition field's value.
+func (s *DirectoryDescription) SetEdition(v DirectoryEdition) *DirectoryDescription {
+	s.Edition = v
 	return s
 }
 
@@ -5042,10 +5061,7 @@ type DirectoryVpcSettingsDescription struct {
 	// The list of Availability Zones that the directory is in.
 	AvailabilityZones []string `type:"list"`
 
-	// The security group identifier for the directory. If the directory was created
-	// before 8/1/2014, this is the identifier of the directory members security
-	// group that was created when the directory was created. If the directory was
-	// created after this date, this value is null.
+	// The domain controller security group identifier for the directory.
 	SecurityGroupId *string `type:"string"`
 
 	// The identifiers of the subnets for the directory servers.
@@ -7371,6 +7387,14 @@ func (s *VerifyTrustOutput) SetTrustId(v string) *VerifyTrustOutput {
 	s.TrustId = &v
 	return s
 }
+
+type DirectoryEdition string
+
+// Enum values for DirectoryEdition
+const (
+	DirectoryEditionEnterprise DirectoryEdition = "Enterprise"
+	DirectoryEditionStandard   DirectoryEdition = "Standard"
+)
 
 type DirectorySize string
 

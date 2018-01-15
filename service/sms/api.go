@@ -816,7 +816,7 @@ type Connector struct {
 	// Hardware (MAC) address
 	MacAddress *string `locationName:"macAddress" type:"string"`
 
-	// Status of on-premise Connector
+	// Status of on-premises Connector
 	Status ConnectorStatus `locationName:"status" type:"string" enum:"true"`
 
 	// Connector version string
@@ -2172,7 +2172,7 @@ const (
 	ConnectorCapabilityVsphere ConnectorCapability = "VSPHERE"
 )
 
-// Status of on-premise Connector
+// Status of on-premises Connector
 type ConnectorStatus string
 
 // Enum values for ConnectorStatus

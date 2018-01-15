@@ -1727,7 +1727,7 @@ func (s DisassociateDiscoveredResourceOutput) SDKResponseMetadata() aws.Response
 type DiscoveredResource struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the on-premise resource.
+	// The configurationId in ADS that uniquely identifies the on-premises resource.
 	//
 	// ConfigurationId is a required field
 	ConfigurationId *string `min:"1" type:"string" required:"true"`

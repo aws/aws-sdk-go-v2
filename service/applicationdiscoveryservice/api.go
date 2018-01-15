@@ -848,13 +848,13 @@ func (r StartExportTaskRequest) Send() (*StartExportTaskOutput, error) {
 //
 // Begins the export of discovered data to an S3 bucket.
 //
-// If you specify agentId in a filter, the task exports up to 72 hours of detailed
+// If you specify agentIds in a filter, the task exports up to 72 hours of detailed
 // data collected by the identified Application Discovery Agent, including network,
 // process, and performance details. A time range for exported agent data may
 // be set by using startTime and endTime. Export of detailed agent data is limited
 // to five concurrently running exports.
 //
-// If you do not include an agentId filter, summary data is exported that includes
+// If you do not include an agentIds filter, summary data is exported that includes
 // both AWS Agentless Discovery Connector data and summary data from AWS Discovery
 // Agents. Export of summary data is limited to two exports per day.
 //
@@ -1410,7 +1410,7 @@ type CreateTagsInput struct {
 	// {"key": "serverType", "value": "webServer"}
 	//
 	// Tags is a required field
-	Tags []Tag `locationName:"tags" locationNameList:"item" type:"list" required:"true"`
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -1743,7 +1743,7 @@ type DeleteTagsInput struct {
 	// the tags that you want to delete in a key-value format. For example:
 	//
 	// {"key": "serverType", "value": "webServer"}
-	Tags []Tag `locationName:"tags" locationNameList:"item" type:"list"`
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -2289,7 +2289,7 @@ type DescribeTagsOutput struct {
 
 	// Depending on the input, this is a list of configuration items tagged with
 	// a specific tag, or a list of tags for a specific configuration item.
-	Tags []ConfigurationTag `locationName:"tags" locationNameList:"item" type:"list"`
+	Tags []ConfigurationTag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -2464,7 +2464,7 @@ type ExportFilter struct {
 	// action. Typically an ADS agentId is in the form o-0123456789abcdef0.
 	//
 	// Values is a required field
-	Values []string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
+	Values []string `locationName:"values" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2647,7 +2647,7 @@ type Filter struct {
 	// filter name, you could specify Ubuntu for the value.
 	//
 	// Values is a required field
-	Values []string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
+	Values []string `locationName:"values" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3275,7 +3275,8 @@ type StartExportTaskInput struct {
 	// the most recent data collected by the agent.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The file format for the returned export data. Default value is CSV.
+	// The file format for the returned export data. Default value is CSV. Note:TheGRAPHMLoption
+	// has been deprecated.
 	ExportDataFormat []ExportDataFormat `locationName:"exportDataFormat" type:"list"`
 
 	// If a filter is present, it selects the single agentId of the Application
@@ -3515,7 +3516,7 @@ type TagFilter struct {
 	// Values for the tag filter.
 	//
 	// Values is a required field
-	Values []string `locationName:"values" locationNameList:"item" type:"list" required:"true"`
+	Values []string `locationName:"values" type:"list" required:"true"`
 }
 
 // String returns the string representation

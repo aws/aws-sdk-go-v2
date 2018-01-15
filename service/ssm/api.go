@@ -41,7 +41,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 // and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev.
 // Or Key=Stack and Value=Production, Pre-Production, or Test.
 //
-// Each resource can have a maximum of 10 tags.
+// Each resource can have a maximum of 50 tags.
 //
 // We recommend that you devise a set of tag keys that meets your needs for
 // each resource type. Using a consistent set of tag keys makes it easier for
@@ -418,6 +418,9 @@ func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
 // Amazon Simple Systems Manager (SSM).
 //
 // Creates a patch baseline.
+//
+// For information about valid key and value pairs in PatchFilters for each
+// supported operating system type, see PatchFilter (http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html).
 //
 //    // Example sending a request using the CreatePatchBaselineRequest method.
 //    req := client.CreatePatchBaselineRequest(params)
@@ -3314,6 +3317,8 @@ func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
 // that point and a NextToken. You can specify the NextToken in a subsequent
 // call to get the next set of results.
 //
+// This API action doesn't support filtering by tags.
+//
 //    // Example sending a request using the GetParametersByPathRequest method.
 //    req := client.GetParametersByPathRequest(params)
 //    resp, err := req.Send()
@@ -4406,6 +4411,43 @@ func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
 // so you must provide a full list of compliance items each time that you send
 // the request.
 //
+// ComplianceType can be one of the following:
+//
+//    * ExecutionId: The execution ID when the patch, association, or custom
+//    compliance item was applied.
+//
+//    * ExecutionType: Specify patch, association, or Custom:string.
+//
+//    * ExecutionTime. The time the patch, association, or custom compliance
+//    item was applied to the instance.
+//
+//    * Id: The patch, association, or custom compliance ID.
+//
+//    * Title: A title.
+//
+//    * Status: The status of the compliance item. For example, approved for
+//    patches, or Failed for associations.
+//
+//    * Severity: A patch severity. For example, critical.
+//
+//    * DocumentName: A SSM document name. For example, AWS-RunPatchBaseline.
+//
+//    * DocumentVersion: An SSM document version number. For example, 4.
+//
+//    * Classification: A patch classification. For example, security updates.
+//
+//    * PatchBaselineId: A patch baseline ID.
+//
+//    * PatchSeverity: A patch severity. For example, Critical.
+//
+//    * PatchState: A patch state. For example, InstancesWithFailedPatches.
+//
+//    * PatchGroup: The name of a patch group.
+//
+//    * InstalledTime: The time the association, patch, or custom compliance
+//    item was applied to the resource. Specify the time by using the following
+//    format: yyyy-MM-dd'T'HH:mm:ss'Z'
+//
 //    // Example sending a request using the PutComplianceItemsRequest method.
 //    req := client.PutComplianceItemsRequest(params)
 //    resp, err := req.Send()
@@ -5427,6 +5469,9 @@ func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
 //
 // Modifies an existing patch baseline. Fields not specified in the request
 // are left unchanged.
+//
+// For information about valid key and value pairs in PatchFilters for each
+// supported operating system type, see PatchFilter (http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html).
 //
 //    // Example sending a request using the UpdatePatchBaselineRequest method.
 //    req := client.UpdatePatchBaselineRequest(params)
@@ -15373,8 +15418,8 @@ type GetParametersByPathInput struct {
 	ParameterFilters []ParameterStringFilter `type:"list"`
 
 	// The hierarchy for the parameter. Hierarchies start with a forward slash (/)
-	// and end with the parameter name. A hierarchy can have a maximum of five levels.
-	// For example: /Finance/Prod/IAD/WinServ2016/license15
+	// and end with the parameter name. A hierarchy can have a maximum of 15 levels.
+	// Here is an example of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33
 	//
 	// Path is a required field
 	Path *string `min:"1" type:"string" required:"true"`
@@ -20136,7 +20181,7 @@ func (s *ParameterStringFilter) SetValues(v []string) *ParameterStringFilter {
 	return s
 }
 
-// One or more filters. Use a filter to return a more specific list of results.
+// This data type is deprecated. Instead, use ParameterStringFilter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParametersFilter
 type ParametersFilter struct {
 	_ struct{} `type:"structure"`
@@ -20478,16 +20523,248 @@ func (s *PatchComplianceData) SetTitle(v string) *PatchComplianceData {
 }
 
 // Defines a patch filter.
+//
+// A patch filter consists of key/value pairs, but not all keys are valid for
+// all operating system types. For example, the key PRODUCT is valid for all
+// supported operating system types. The key MSRC_SEVERITY, however, is valid
+// only for Windows operating systems, and the key SECTION is valid only for
+// Ubuntu operating systems.
+//
+// Refer to the following sections for information about which keys may be used
+// with each major operating system, and which values are valid for each key.
+//
+// Windows Operating Systems
+//
+// The supported keys for Windows operating systems are PRODUCT, CLASSIFICATION,
+// and MSRC_SEVERITY. See the following lists for valid values for each of these
+// keys.
+//
+// Supported key:PRODUCT
+//
+// Supported values:
+//
+//    * Windows7
+//
+//    * Windows8
+//
+//    * Windows8.1
+//
+//    * Windows8Embedded
+//
+//    * Windows10
+//
+//    * Windows10LTSB
+//
+//    * WindowsServer2008
+//
+//    * WindowsServer2008R2
+//
+//    * WindowsServer2012
+//
+//    * WindowsServer2012R2
+//
+//    * WindowsServer2016
+//
+// Supported key:CLASSIFICATION
+//
+// Supported values:
+//
+//    * CriticalUpdates
+//
+//    * DefinitionUpdates
+//
+//    * Drivers
+//
+//    * FeaturePacks
+//
+//    * SecurityUpdates
+//
+//    * ServicePacks
+//
+//    * Tools
+//
+//    * UpdateRollups
+//
+//    * Updates
+//
+//    * Upgrades
+//
+// Supported key:MSRC_SEVERITY
+//
+// Supported values:
+//
+//    * Critical
+//
+//    * Important
+//
+//    * Moderate
+//
+//    * Low
+//
+//    * Unspecified
+//
+// Ubuntu Operating Systems
+//
+// The supported keys for Ubuntu operating systems are PRODUCT, PRIORITY, and
+// SECTION. See the following lists for valid values for each of these keys.
+//
+// Supported key:PRODUCT
+//
+// Supported values:
+//
+//    * Ubuntu14.04
+//
+//    * Ubuntu16.04
+//
+// Supported key:PRIORITY
+//
+// Supported values:
+//
+//    * Required
+//
+//    * Important
+//
+//    * Standard
+//
+//    * Optional
+//
+//    * Extra
+//
+// Supported key:SECTION
+//
+// Only the length of the key value is validated. Minimum length is 1. Maximum
+// length is 64.
+//
+// Amazon Linux Operating Systems
+//
+// The supported keys for Amazon Linux operating systems are PRODUCT, CLASSIFICATION,
+// and SEVERITY. See the following lists for valid values for each of these
+// keys.
+//
+// Supported key:PRODUCT
+//
+// Supported values:
+//
+//    * AmazonLinux2012.03
+//
+//    * AmazonLinux2012.09
+//
+//    * AmazonLinux2013.03
+//
+//    * AmazonLinux2013.09
+//
+//    * AmazonLinux2014.03
+//
+//    * AmazonLinux2014.09
+//
+//    * AmazonLinux2015.03
+//
+//    * AmazonLinux2015.09
+//
+//    * AmazonLinux2016.03
+//
+//    * AmazonLinux2016.09
+//
+//    * AmazonLinux2017.03
+//
+//    * AmazonLinux2017.09
+//
+// Supported key:CLASSIFICATION
+//
+// Supported values:
+//
+//    * Security
+//
+//    * Bugfix
+//
+//    * Enhancement
+//
+//    * Recommended
+//
+//    * Newpackage
+//
+// Supported key:SEVERITY
+//
+// Supported values:
+//
+//    * Critical
+//
+//    * Important
+//
+//    * Medium
+//
+//    * Low
+//
+// RedHat Enterprise Linux (RHEL) Operating Systems
+//
+// The supported keys for RedHat Enterprise Linux operating systems are PRODUCT,
+// CLASSIFICATION, and SEVERITY. See the following lists for valid values for
+// each of these keys.
+//
+// Supported key:PRODUCT
+//
+// Supported values:
+//
+//    * RedhatEnterpriseLinux6.5
+//
+//    * RedhatEnterpriseLinux6.6
+//
+//    * RedhatEnterpriseLinux6.7
+//
+//    * RedhatEnterpriseLinux6.8
+//
+//    * RedhatEnterpriseLinux6.9
+//
+//    * RedhatEnterpriseLinux7.0
+//
+//    * RedhatEnterpriseLinux7.1
+//
+//    * RedhatEnterpriseLinux7.2
+//
+//    * RedhatEnterpriseLinux7.3
+//
+//    * RedhatEnterpriseLinux7.4
+//
+// Supported key:CLASSIFICATION
+//
+// Supported values:
+//
+//    * Security
+//
+//    * Bugfix
+//
+//    * Enhancement
+//
+//    * Recommended
+//
+//    * Newpackage
+//
+// Supported key:SEVERITY
+//
+// Supported values:
+//
+//    * Critical
+//
+//    * Important
+//
+//    * Medium
+//
+//    * Low
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter
 type PatchFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The key for the filter (PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID)
+	// The key for the filter.
+	//
+	// See PatchFilter for lists of valid keys for each operating system type.
 	//
 	// Key is a required field
 	Key PatchFilterKey `type:"string" required:"true" enum:"true"`
 
 	// The value for the filter key.
+	//
+	// See PatchFilter for lists of valid values for each key based on operating
+	// system type.
 	//
 	// Values is a required field
 	Values []string `min:"1" type:"list" required:"true"`

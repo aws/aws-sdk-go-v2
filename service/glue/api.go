@@ -276,7 +276,7 @@ func (r BatchStopJobRunRequest) Send() (*BatchStopJobRunOutput, error) {
 // BatchStopJobRunRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Stops a batch of job runs for a given job.
+// Stops one or more job runs for a specified Job.
 //
 //    // Example sending a request using the BatchStopJobRunRequest method.
 //    req := client.BatchStopJobRunRequest(params)
@@ -671,7 +671,7 @@ func (r CreateScriptRequest) Send() (*CreateScriptOutput, error) {
 // CreateScriptRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Transforms a directed acyclic graph (DAG) into a Python script.
+// Transforms a directed acyclic graph (DAG) into code.
 //
 //    // Example sending a request using the CreateScriptRequest method.
 //    req := client.CreateScriptRequest(params)
@@ -1113,7 +1113,7 @@ func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
 // DeleteJobRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Deletes a specified job.
+// Deletes a specified job. If the job is not found, no exception is thrown.
 //
 //    // Example sending a request using the DeleteJobRequest method.
 //    req := client.DeleteJobRequest(params)
@@ -1260,7 +1260,8 @@ func (r DeleteTriggerRequest) Send() (*DeleteTriggerOutput, error) {
 // DeleteTriggerRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Deletes a specified trigger.
+// Deletes a specified trigger. If the trigger is not found, no exception is
+// thrown.
 //
 //    // Example sending a request using the DeleteTriggerRequest method.
 //    req := client.DeleteTriggerRequest(params)
@@ -2842,7 +2843,7 @@ func (r GetPlanRequest) Send() (*GetPlanOutput, error) {
 // GetPlanRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Gets a Python script to perform a specified mapping.
+// Gets code to perform a specified mapping.
 //
 //    // Example sending a request using the GetPlanRequest method.
 //    req := client.GetPlanRequest(params)
@@ -3706,7 +3707,8 @@ func (r StartTriggerRequest) Send() (*StartTriggerOutput, error) {
 // StartTriggerRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Starts an existing trigger.
+// Starts an existing trigger. See Triggering Jobs (http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html)
+// for information about how different types of trigger are started.
 //
 //    // Example sending a request using the StartTriggerRequest method.
 //    req := client.StartTriggerRequest(params)
@@ -4428,6 +4430,17 @@ type Action struct {
 	_ struct{} `type:"structure"`
 
 	// Arguments to be passed to the job.
+	//
+	// You can specify arguments here that your own job-execution script consumes,
+	// as well as arguments that AWS Glue itself consumes.
+	//
+	// For information about how to specify and consume your own Job arguments,
+	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide.
+	//
+	// For information about the key-value pairs that AWS Glue consumes to set up
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
 	// The name of a job to be executed.
@@ -5056,19 +5069,18 @@ func (s *BatchGetPartitionOutput) SetUnprocessedKeys(v []PartitionValueList) *Ba
 	return s
 }
 
-// Details about the job run and the error that occurred while trying to submit
-// it for stopping.
+// Records an error that occurred when attempting to stop a specified JobRun.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunError
 type BatchStopJobRunError struct {
 	_ struct{} `type:"structure"`
 
-	// The details of the error that occurred.
+	// Specifies details about the error that was encountered.
 	ErrorDetail *ErrorDetail `type:"structure"`
 
-	// The name of the job.
+	// The name of the Job in question.
 	JobName *string `min:"1" type:"string"`
 
-	// The job run Id.
+	// The JobRunId of the JobRun in question.
 	JobRunId *string `min:"1" type:"string"`
 }
 
@@ -5104,12 +5116,12 @@ func (s *BatchStopJobRunError) SetJobRunId(v string) *BatchStopJobRunError {
 type BatchStopJobRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job whose job runs are to be stopped.
+	// The name of the Job in question.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
 
-	// A list of job run Ids of the given job to be stopped.
+	// A list of the JobRunIds that should be stopped for that Job.
 	//
 	// JobRunIds is a required field
 	JobRunIds []string `min:"1" type:"list" required:"true"`
@@ -5167,11 +5179,11 @@ type BatchStopJobRunOutput struct {
 
 	responseMetadata aws.Response
 
-	// A list containing the job run Ids and details of the error that occurred
-	// for each job run while submitting to stop.
+	// A list of the errors that were encountered in tryng to stop JobRuns, including
+	// the JobRunId for which each error was encountered and details about the error.
 	Errors []BatchStopJobRunError `type:"list"`
 
-	// A list of job runs which are successfully submitted for stopping.
+	// A list of the JobRuns that were successfully submitted for stopping.
 	SuccessfulSubmissions []BatchStopJobRunSuccessfulSubmission `type:"list"`
 }
 
@@ -5202,15 +5214,15 @@ func (s *BatchStopJobRunOutput) SetSuccessfulSubmissions(v []BatchStopJobRunSucc
 	return s
 }
 
-// Details about the job run which is submitted successfully for stopping.
+// Records a successful request to stop a specified JobRun.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunSuccessfulSubmission
 type BatchStopJobRunSuccessfulSubmission struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job.
+	// The Name of the Job in question.
 	JobName *string `min:"1" type:"string"`
 
-	// The job run Id.
+	// The JobRunId of the JobRun in question.
 	JobRunId *string `min:"1" type:"string"`
 }
 
@@ -5675,13 +5687,15 @@ func (s *Column) SetType(v string) *Column {
 type Condition struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job in question.
+	// The name of the Job to whose JobRuns this condition applies and on which
+	// this trigger waits.
 	JobName *string `min:"1" type:"string"`
 
 	// A logical operator.
 	LogicalOperator LogicalOperator `type:"string" enum:"true"`
 
-	// The condition state.
+	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED
+	// and FAILED.
 	State JobRunState `type:"string" enum:"true"`
 }
 
@@ -5957,6 +5971,9 @@ type Crawler struct {
 	// input format, output format, serde information, and schema from their parent
 	// table, rather than detect this information separately for each partition.
 	// Use the following JSON string to specify that behavior:
+	//
+	// Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior":
+	// "InheritFromTable" } } }'
 	Configuration *string `type:"string"`
 
 	// If the crawler is running, contains the total time elapsed since the last
@@ -6404,6 +6421,10 @@ type CreateCrawlerInput struct {
 	// You can use this field to force partitions to inherit metadata such as classification,
 	// input format, output format, serde information, and schema from their parent
 	// table, rather than detect this information separately for each partition.
+	// Use the following JSON string to specify that behavior:
+	//
+	// Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior":
+	// "InheritFromTable" } } }'
 	Configuration *string `type:"string"`
 
 	// The AWS Glue database where results are written, such as: arn:aws:daylight:us-east-1::database/sometable/*.
@@ -7007,7 +7028,11 @@ func (s *CreateGrokClassifierRequest) SetName(v string) *CreateGrokClassifierReq
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The number of capacity units allocated to this job.
+	// The number of AWS Glue data processing units (DPUs) to allocate to this Job.
+	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// measure of processing power that consists of 4 vCPUs of compute capacity
+	// and 16 GB of memory. For more information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int64 `type:"integer"`
 
 	// The JobCommand that executes this job.
@@ -7018,7 +7043,18 @@ type CreateJobInput struct {
 	// The connections used for this job.
 	Connections *ConnectionsList `type:"structure"`
 
-	// The default parameters for this job.
+	// The default arguments for this job.
+	//
+	// You can specify arguments here that your own job-execution script consumes,
+	// as well as arguments that AWS Glue itself consumes.
+	//
+	// For information about how to specify and consume your own Job arguments,
+	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide.
+	//
+	// For information about the key-value pairs that AWS Glue consumes to set up
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
 	// Description of the job.
@@ -7034,12 +7070,12 @@ type CreateJobInput struct {
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
-	// The name you assign to this job.
+	// The name you assign to this job. It must be unique in your account.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The role associated with this job.
+	// The name of the IAM role associated with this job.
 	//
 	// Role is a required field
 	Role *string `type:"string" required:"true"`
@@ -7146,7 +7182,7 @@ type CreateJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// The unique name of the new job that has been created.
+	// The unique name that was provided.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -7296,6 +7332,9 @@ type CreateScriptInput struct {
 
 	// A list of the nodes in the DAG.
 	DagNodes []CodeGenNode `type:"list"`
+
+	// The programming language of the resulting code from the DAG.
+	Language Language `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7344,6 +7383,12 @@ func (s *CreateScriptInput) SetDagNodes(v []CodeGenNode) *CreateScriptInput {
 	return s
 }
 
+// SetLanguage sets the Language field's value.
+func (s *CreateScriptInput) SetLanguage(v Language) *CreateScriptInput {
+	s.Language = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScriptResponse
 type CreateScriptOutput struct {
 	_ struct{} `type:"structure"`
@@ -7352,6 +7397,9 @@ type CreateScriptOutput struct {
 
 	// The Python script generated from the DAG.
 	PythonScript *string `type:"string"`
+
+	// The Scala code generated from the DAG.
+	ScalaCode *string `type:"string"`
 }
 
 // String returns the string representation
@@ -7372,6 +7420,12 @@ func (s CreateScriptOutput) SDKResponseMetadata() aws.Response {
 // SetPythonScript sets the PythonScript field's value.
 func (s *CreateScriptOutput) SetPythonScript(v string) *CreateScriptOutput {
 	s.PythonScript = &v
+	return s
+}
+
+// SetScalaCode sets the ScalaCode field's value.
+func (s *CreateScriptOutput) SetScalaCode(v string) *CreateScriptOutput {
+	s.ScalaCode = &v
 	return s
 }
 
@@ -7485,18 +7539,22 @@ type CreateTriggerInput struct {
 	// A description of the new trigger.
 	Description *string `type:"string"`
 
-	// The name to assign to the new trigger.
+	// The name of the trigger.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A predicate to specify when the new trigger should fire.
+	//
+	// This field is required when the trigger type is CONDITIONAL.
 	Predicate *Predicate `type:"structure"`
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules
 	// for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
 	// For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *).
+	//
+	// This field is required when the trigger type is SCHEDULED.
 	Schedule *string `type:"string"`
 
 	// The type of the new trigger.
@@ -7593,7 +7651,7 @@ type CreateTriggerOutput struct {
 
 	responseMetadata aws.Response
 
-	// The name assigned to the new trigger.
+	// The name of the trigger.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -7732,8 +7790,10 @@ type CreateXMLClassifierRequest struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. Note that this cannot be an empty element. It must contain
-	// child elements representing fields in the record.
+	// being parsed. Note that this cannot identify a self-closing element (closed
+	// by />). An empty row element that contains only attributes can be parsed
+	// as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
+	// is okay, but <row item_a="A" item_b="B" /> is not).
 	RowTag *string `type:"string"`
 }
 
@@ -8994,7 +9054,9 @@ func (s *ErrorDetail) SetErrorMessage(v string) *ErrorDetail {
 type ExecutionProperty struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of concurrent runs allowed for a job.
+	// The maximum number of concurrent runs allowed for a job. The default is 1.
+	// An error is returned when this threshold is reached. The maximum value you
+	// can specify is controlled by a service limit.
 	MaxConcurrentRuns *int64 `type:"integer"`
 }
 
@@ -10225,7 +10287,7 @@ type GetJobRunInput struct {
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
 
-	// A list of the predecessor runs to return as well.
+	// True if a list of predecessor runs should be returned.
 	PredecessorsIncluded *bool `type:"boolean"`
 
 	// The ID of the job run.
@@ -10898,6 +10960,9 @@ func (s *GetPartitionsOutput) SetPartitions(v []Partition) *GetPartitionsOutput 
 type GetPlanInput struct {
 	_ struct{} `type:"structure"`
 
+	// The programming language of the code to perform the mapping.
+	Language Language `type:"string" enum:"true"`
+
 	// Parameters for the mapping.
 	Location *Location `type:"structure"`
 
@@ -10960,6 +11025,12 @@ func (s *GetPlanInput) Validate() error {
 	return nil
 }
 
+// SetLanguage sets the Language field's value.
+func (s *GetPlanInput) SetLanguage(v Language) *GetPlanInput {
+	s.Language = v
+	return s
+}
+
 // SetLocation sets the Location field's value.
 func (s *GetPlanInput) SetLocation(v *Location) *GetPlanInput {
 	s.Location = v
@@ -10992,6 +11063,9 @@ type GetPlanOutput struct {
 
 	// A Python script to perform the mapping.
 	PythonScript *string `type:"string"`
+
+	// Scala code to perform the mapping.
+	ScalaCode *string `type:"string"`
 }
 
 // String returns the string representation
@@ -11012,6 +11086,12 @@ func (s GetPlanOutput) SDKResponseMetadata() aws.Response {
 // SetPythonScript sets the PythonScript field's value.
 func (s *GetPlanOutput) SetPythonScript(v string) *GetPlanOutput {
 	s.PythonScript = &v
+	return s
+}
+
+// SetScalaCode sets the ScalaCode field's value.
+func (s *GetPlanOutput) SetScalaCode(v string) *GetPlanOutput {
+	s.ScalaCode = &v
 	return s
 }
 
@@ -11461,7 +11541,9 @@ func (s *GetTriggerOutput) SetTrigger(v *Trigger) *GetTriggerOutput {
 type GetTriggersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job for which to retrieve triggers.
+	// The name of the job for which to retrieve triggers. The trigger that can
+	// start this job will be returned, and if there is no such trigger, all triggers
+	// will be returned.
 	DependentJobName *string `min:"1" type:"string"`
 
 	// The maximum size of the response.
@@ -11989,12 +12071,16 @@ func (s *JdbcTarget) SetPath(v string) *JdbcTarget {
 	return s
 }
 
-// Specifies a job in the Data Catalog.
+// Specifies a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
-	// The number of capacity units allocated to this job.
+	// The number of AWS Glue data processing units (DPUs) allocated to this Job.
+	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// measure of processing power that consists of 4 vCPUs of compute capacity
+	// and 16 GB of memory. For more information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int64 `type:"integer"`
 
 	// The JobCommand that executes this job.
@@ -12006,7 +12092,18 @@ type Job struct {
 	// The time and date that this job specification was created.
 	CreatedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The default parameters for this job.
+	// The default arguments for this job, specified as name-value pairs.
+	//
+	// You can specify arguments here that your own job-execution script consumes,
+	// as well as arguments that AWS Glue itself consumes.
+	//
+	// For information about how to specify and consume your own Job arguments,
+	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide.
+	//
+	// For information about the key-value pairs that AWS Glue consumes to set up
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
 	// Description of this job.
@@ -12028,7 +12125,7 @@ type Job struct {
 	// The name you assign to this job.
 	Name *string `min:"1" type:"string"`
 
-	// The role associated with this job.
+	// The name of the IAM role associated with this job.
 	Role *string `type:"string"`
 }
 
@@ -12180,10 +12277,10 @@ func (s *JobBookmarkEntry) SetVersion(v int64) *JobBookmarkEntry {
 type JobCommand struct {
 	_ struct{} `type:"structure"`
 
-	// The name of this job command.
+	// The name of the job command: this must be glueetl.
 	Name *string `type:"string"`
 
-	// Specifies the location of a script that executes a job.
+	// Specifies the S3 path to a script that executes a job (required).
 	ScriptLocation *string `type:"string"`
 }
 
@@ -12214,13 +12311,29 @@ func (s *JobCommand) SetScriptLocation(v string) *JobCommand {
 type JobRun struct {
 	_ struct{} `type:"structure"`
 
-	// The amount of infrastructure capacity allocated to this job run.
+	// The number of AWS Glue data processing units (DPUs) allocated to this JobRun.
+	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// measure of processing power that consists of 4 vCPUs of compute capacity
+	// and 16 GB of memory. For more information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int64 `type:"integer"`
 
-	// The job arguments associated with this run.
+	// The job arguments associated with this run. These override equivalent default
+	// arguments set for the job.
+	//
+	// You can specify arguments here that your own job-execution script consumes,
+	// as well as arguments that AWS Glue itself consumes.
+	//
+	// For information about how to specify and consume your own job arguments,
+	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide.
+	//
+	// For information about the key-value pairs that AWS Glue consumes to set up
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
-	// The number or the attempt to run this job.
+	// The number of the attempt to run this job.
 	Attempt *int64 `type:"integer"`
 
 	// The date and time this job run completed.
@@ -12244,13 +12357,14 @@ type JobRun struct {
 	// A list of predecessors to this job run.
 	PredecessorRuns []Predecessor `type:"list"`
 
-	// The ID of the previous run of this job.
+	// The ID of the previous run of this job. For example, the JobRunId specified
+	// in the StartJobRun action.
 	PreviousRunId *string `min:"1" type:"string"`
 
 	// The date and time at which this job run was started.
 	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The name of the trigger for this job run.
+	// The name of the trigger that started this job run.
 	TriggerName *string `min:"1" type:"string"`
 }
 
@@ -12342,21 +12456,37 @@ func (s *JobRun) SetTriggerName(v string) *JobRun {
 	return s
 }
 
-// Specifies information used to update an existing job.
+// Specifies information used to update an existing job. Note that the previous
+// job definition will be completely overwritten by this information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate
 type JobUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The number of capacity units allocated to this job.
+	// The number of AWS Glue data processing units (DPUs) to allocate to this Job.
+	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// measure of processing power that consists of 4 vCPUs of compute capacity
+	// and 16 GB of memory. For more information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int64 `type:"integer"`
 
-	// The JobCommand that executes this job.
+	// The JobCommand that executes this job (required).
 	Command *JobCommand `type:"structure"`
 
 	// The connections used for this job.
 	Connections *ConnectionsList `type:"structure"`
 
-	// The default parameters for this job.
+	// The default arguments for this job.
+	//
+	// You can specify arguments here that your own job-execution script consumes,
+	// as well as arguments that AWS Glue itself consumes.
+	//
+	// For information about how to specify and consume your own Job arguments,
+	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide.
+	//
+	// For information about the key-value pairs that AWS Glue consumes to set up
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
 	// Description of the job.
@@ -12372,7 +12502,7 @@ type JobUpdate struct {
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
-	// The role associated with this job.
+	// The name of the IAM role associated with this job (required).
 	Role *string `type:"string"`
 }
 
@@ -12996,7 +13126,8 @@ func (s *PhysicalConnectionRequirements) SetSubnetId(v string) *PhysicalConnecti
 	return s
 }
 
-// A job run that preceded this one.
+// A job run that was used in the predicate of a conditional trigger that triggered
+// this job run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Predecessor
 type Predecessor struct {
 	_ struct{} `type:"structure"`
@@ -13004,7 +13135,7 @@ type Predecessor struct {
 	// The name of the predecessor job.
 	JobName *string `min:"1" type:"string"`
 
-	// The job-run ID of the precessor job run.
+	// The job-run ID of the predecessor job run.
 	RunId *string `min:"1" type:"string"`
 }
 
@@ -13605,10 +13736,26 @@ func (s StartCrawlerScheduleOutput) SDKResponseMetadata() aws.Response {
 type StartJobRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// The infrastructure capacity to allocate to this job.
+	// The number of AWS Glue data processing units (DPUs) to allocate to this JobRun.
+	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// measure of processing power that consists of 4 vCPUs of compute capacity
+	// and 16 GB of memory. For more information, see the AWS Glue pricing page
+	// (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int64 `type:"integer"`
 
-	// Specific arguments for this job run.
+	// The job arguments specifically for this run. They override the equivalent
+	// default arguments set for the job itself.
+	//
+	// You can specify arguments here that your own job-execution script consumes,
+	// as well as arguments that AWS Glue itself consumes.
+	//
+	// For information about how to specify and consume your own Job arguments,
+	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide.
+	//
+	// For information about the key-value pairs that AWS Glue consumes to set up
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
 	// The name of the job to start.
@@ -13616,7 +13763,7 @@ type StartJobRunInput struct {
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
 
-	// The ID of the job run to start.
+	// The ID of a previous JobRun to retry.
 	JobRunId *string `min:"1" type:"string"`
 }
 
@@ -14546,13 +14693,13 @@ type Trigger struct {
 	// A description of this trigger.
 	Description *string `type:"string"`
 
-	// The trigger ID.
+	// Reserved for future use.
 	Id *string `min:"1" type:"string"`
 
 	// Name of the trigger.
 	Name *string `min:"1" type:"string"`
 
-	// The predicate of this trigger.
+	// The predicate of this trigger, which defines when it will fire.
 	Predicate *Predicate `type:"structure"`
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules
@@ -14626,7 +14773,8 @@ func (s *Trigger) SetType(v TriggerType) *Trigger {
 	return s
 }
 
-// A structure used to provide information used to updata a trigger.
+// A structure used to provide information used to update a trigger. This object
+// will update the the previous trigger definition by overwriting it completely.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerUpdate
 type TriggerUpdate struct {
 	_ struct{} `type:"structure"`
@@ -14637,13 +14785,13 @@ type TriggerUpdate struct {
 	// A description of this trigger.
 	Description *string `type:"string"`
 
-	// The name of the trigger.
+	// Reserved for future use.
 	Name *string `min:"1" type:"string"`
 
 	// The predicate of this trigger, which defines when it will fire.
 	Predicate *Predicate `type:"structure"`
 
-	// An updated cron expression used to specify the schedule (see Time-Based Schedules
+	// A cron expression used to specify the schedule (see Time-Based Schedules
 	// for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
 	// For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *).
@@ -14904,6 +15052,9 @@ type UpdateCrawlerInput struct {
 	// input format, output format, serde information, and schema from their parent
 	// table, rather than detect this information separately for each partition.
 	// Use the following JSON string to specify that behavior:
+	//
+	// Example:  '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior":
+	// "InheritFromTable" } } }'
 	Configuration *string `type:"string"`
 
 	// The AWS Glue database where results are stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
@@ -15929,8 +16080,10 @@ type UpdateXMLClassifierRequest struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. Note that this cannot be an empty element. It must contain
-	// child elements representing fields in the record.
+	// being parsed. Note that this cannot identify a self-closing element (closed
+	// by />). An empty row element that contains only attributes can be parsed
+	// as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
+	// is okay, but <row item_a="A" item_b="B" /> is not).
 	RowTag *string `type:"string"`
 }
 
@@ -16158,8 +16311,10 @@ type XMLClassifier struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. Note that this cannot be an empty element. It must contain
-	// child elements representing fields in the record.
+	// being parsed. Note that this cannot identify a self-closing element (closed
+	// by />). An empty row element that contains only attributes can be parsed
+	// as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
+	// is okay, but <row item_a="A" item_b="B" /> is not).
 	RowTag *string `type:"string"`
 
 	// The version of this classifier.
@@ -16267,6 +16422,14 @@ const (
 	JobRunStateFailed    JobRunState = "FAILED"
 )
 
+type Language string
+
+// Enum values for Language
+const (
+	LanguagePython Language = "PYTHON"
+	LanguageScala  Language = "SCALA"
+)
+
 type LastCrawlStatus string
 
 // Enum values for LastCrawlStatus
@@ -16281,6 +16444,7 @@ type Logical string
 // Enum values for Logical
 const (
 	LogicalAnd Logical = "AND"
+	LogicalAny Logical = "ANY"
 )
 
 type LogicalOperator string
