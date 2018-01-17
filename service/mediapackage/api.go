@@ -686,30 +686,6 @@ func (s Channel) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Channel) SetArn(v string) *Channel {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Channel) SetDescription(v string) *Channel {
-	s.Description = &v
-	return s
-}
-
-// SetHlsIngest sets the HlsIngest field's value.
-func (s *Channel) SetHlsIngest(v *HlsIngest) *Channel {
-	s.HlsIngest = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Channel) SetId(v string) *Channel {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelRequest
 type CreateChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -744,18 +720,6 @@ func (s *CreateChannelInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateChannelInput) SetDescription(v string) *CreateChannelInput {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateChannelInput) SetId(v string) *CreateChannelInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelResponse
 type CreateChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -785,30 +749,6 @@ func (s CreateChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateChannelOutput) SetArn(v string) *CreateChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateChannelOutput) SetDescription(v string) *CreateChannelOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsIngest sets the HlsIngest field's value.
-func (s *CreateChannelOutput) SetHlsIngest(v *HlsIngest) *CreateChannelOutput {
-	s.HlsIngest = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateChannelOutput) SetId(v string) *CreateChannelOutput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateOriginEndpointRequest
@@ -884,66 +824,6 @@ func (s *CreateOriginEndpointInput) Validate() error {
 	return nil
 }
 
-// SetChannelId sets the ChannelId field's value.
-func (s *CreateOriginEndpointInput) SetChannelId(v string) *CreateOriginEndpointInput {
-	s.ChannelId = &v
-	return s
-}
-
-// SetDashPackage sets the DashPackage field's value.
-func (s *CreateOriginEndpointInput) SetDashPackage(v *DashPackage) *CreateOriginEndpointInput {
-	s.DashPackage = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateOriginEndpointInput) SetDescription(v string) *CreateOriginEndpointInput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsPackage sets the HlsPackage field's value.
-func (s *CreateOriginEndpointInput) SetHlsPackage(v *HlsPackage) *CreateOriginEndpointInput {
-	s.HlsPackage = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateOriginEndpointInput) SetId(v string) *CreateOriginEndpointInput {
-	s.Id = &v
-	return s
-}
-
-// SetManifestName sets the ManifestName field's value.
-func (s *CreateOriginEndpointInput) SetManifestName(v string) *CreateOriginEndpointInput {
-	s.ManifestName = &v
-	return s
-}
-
-// SetMssPackage sets the MssPackage field's value.
-func (s *CreateOriginEndpointInput) SetMssPackage(v *MssPackage) *CreateOriginEndpointInput {
-	s.MssPackage = v
-	return s
-}
-
-// SetStartoverWindowSeconds sets the StartoverWindowSeconds field's value.
-func (s *CreateOriginEndpointInput) SetStartoverWindowSeconds(v int64) *CreateOriginEndpointInput {
-	s.StartoverWindowSeconds = &v
-	return s
-}
-
-// SetTimeDelaySeconds sets the TimeDelaySeconds field's value.
-func (s *CreateOriginEndpointInput) SetTimeDelaySeconds(v int64) *CreateOriginEndpointInput {
-	s.TimeDelaySeconds = &v
-	return s
-}
-
-// SetWhitelist sets the Whitelist field's value.
-func (s *CreateOriginEndpointInput) SetWhitelist(v []string) *CreateOriginEndpointInput {
-	s.Whitelist = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateOriginEndpointResponse
 type CreateOriginEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -993,78 +873,6 @@ func (s CreateOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateOriginEndpointOutput) SetArn(v string) *CreateOriginEndpointOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *CreateOriginEndpointOutput) SetChannelId(v string) *CreateOriginEndpointOutput {
-	s.ChannelId = &v
-	return s
-}
-
-// SetDashPackage sets the DashPackage field's value.
-func (s *CreateOriginEndpointOutput) SetDashPackage(v *DashPackage) *CreateOriginEndpointOutput {
-	s.DashPackage = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateOriginEndpointOutput) SetDescription(v string) *CreateOriginEndpointOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsPackage sets the HlsPackage field's value.
-func (s *CreateOriginEndpointOutput) SetHlsPackage(v *HlsPackage) *CreateOriginEndpointOutput {
-	s.HlsPackage = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateOriginEndpointOutput) SetId(v string) *CreateOriginEndpointOutput {
-	s.Id = &v
-	return s
-}
-
-// SetManifestName sets the ManifestName field's value.
-func (s *CreateOriginEndpointOutput) SetManifestName(v string) *CreateOriginEndpointOutput {
-	s.ManifestName = &v
-	return s
-}
-
-// SetMssPackage sets the MssPackage field's value.
-func (s *CreateOriginEndpointOutput) SetMssPackage(v *MssPackage) *CreateOriginEndpointOutput {
-	s.MssPackage = v
-	return s
-}
-
-// SetStartoverWindowSeconds sets the StartoverWindowSeconds field's value.
-func (s *CreateOriginEndpointOutput) SetStartoverWindowSeconds(v int64) *CreateOriginEndpointOutput {
-	s.StartoverWindowSeconds = &v
-	return s
-}
-
-// SetTimeDelaySeconds sets the TimeDelaySeconds field's value.
-func (s *CreateOriginEndpointOutput) SetTimeDelaySeconds(v int64) *CreateOriginEndpointOutput {
-	s.TimeDelaySeconds = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *CreateOriginEndpointOutput) SetUrl(v string) *CreateOriginEndpointOutput {
-	s.Url = &v
-	return s
-}
-
-// SetWhitelist sets the Whitelist field's value.
-func (s *CreateOriginEndpointOutput) SetWhitelist(v []string) *CreateOriginEndpointOutput {
-	s.Whitelist = v
-	return s
-}
-
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashEncryption
 type DashEncryption struct {
@@ -1107,18 +915,6 @@ func (s *DashEncryption) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyRotationIntervalSeconds sets the KeyRotationIntervalSeconds field's value.
-func (s *DashEncryption) SetKeyRotationIntervalSeconds(v int64) *DashEncryption {
-	s.KeyRotationIntervalSeconds = &v
-	return s
-}
-
-// SetSpekeKeyProvider sets the SpekeKeyProvider field's value.
-func (s *DashEncryption) SetSpekeKeyProvider(v *SpekeKeyProvider) *DashEncryption {
-	s.SpekeKeyProvider = v
-	return s
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
@@ -1180,54 +976,6 @@ func (s *DashPackage) Validate() error {
 	return nil
 }
 
-// SetEncryption sets the Encryption field's value.
-func (s *DashPackage) SetEncryption(v *DashEncryption) *DashPackage {
-	s.Encryption = v
-	return s
-}
-
-// SetManifestWindowSeconds sets the ManifestWindowSeconds field's value.
-func (s *DashPackage) SetManifestWindowSeconds(v int64) *DashPackage {
-	s.ManifestWindowSeconds = &v
-	return s
-}
-
-// SetMinBufferTimeSeconds sets the MinBufferTimeSeconds field's value.
-func (s *DashPackage) SetMinBufferTimeSeconds(v int64) *DashPackage {
-	s.MinBufferTimeSeconds = &v
-	return s
-}
-
-// SetMinUpdatePeriodSeconds sets the MinUpdatePeriodSeconds field's value.
-func (s *DashPackage) SetMinUpdatePeriodSeconds(v int64) *DashPackage {
-	s.MinUpdatePeriodSeconds = &v
-	return s
-}
-
-// SetProfile sets the Profile field's value.
-func (s *DashPackage) SetProfile(v Profile) *DashPackage {
-	s.Profile = v
-	return s
-}
-
-// SetSegmentDurationSeconds sets the SegmentDurationSeconds field's value.
-func (s *DashPackage) SetSegmentDurationSeconds(v int64) *DashPackage {
-	s.SegmentDurationSeconds = &v
-	return s
-}
-
-// SetStreamSelection sets the StreamSelection field's value.
-func (s *DashPackage) SetStreamSelection(v *StreamSelection) *DashPackage {
-	s.StreamSelection = v
-	return s
-}
-
-// SetSuggestedPresentationDelaySeconds sets the SuggestedPresentationDelaySeconds field's value.
-func (s *DashPackage) SetSuggestedPresentationDelaySeconds(v int64) *DashPackage {
-	s.SuggestedPresentationDelaySeconds = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteChannelRequest
 type DeleteChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -1258,12 +1006,6 @@ func (s *DeleteChannelInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteChannelInput) SetId(v string) *DeleteChannelInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteChannelResponse
@@ -1320,12 +1062,6 @@ func (s *DeleteOriginEndpointInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteOriginEndpointInput) SetId(v string) *DeleteOriginEndpointInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteOriginEndpointResponse
 type DeleteOriginEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -1380,12 +1116,6 @@ func (s *DescribeChannelInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DescribeChannelInput) SetId(v string) *DescribeChannelInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeChannelResponse
 type DescribeChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -1415,30 +1145,6 @@ func (s DescribeChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *DescribeChannelOutput) SetArn(v string) *DescribeChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeChannelOutput) SetDescription(v string) *DescribeChannelOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsIngest sets the HlsIngest field's value.
-func (s *DescribeChannelOutput) SetHlsIngest(v *HlsIngest) *DescribeChannelOutput {
-	s.HlsIngest = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeChannelOutput) SetId(v string) *DescribeChannelOutput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeOriginEndpointRequest
@@ -1471,12 +1177,6 @@ func (s *DescribeOriginEndpointInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeOriginEndpointInput) SetId(v string) *DescribeOriginEndpointInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeOriginEndpointResponse
@@ -1526,78 +1226,6 @@ func (s DescribeOriginEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *DescribeOriginEndpointOutput) SetArn(v string) *DescribeOriginEndpointOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *DescribeOriginEndpointOutput) SetChannelId(v string) *DescribeOriginEndpointOutput {
-	s.ChannelId = &v
-	return s
-}
-
-// SetDashPackage sets the DashPackage field's value.
-func (s *DescribeOriginEndpointOutput) SetDashPackage(v *DashPackage) *DescribeOriginEndpointOutput {
-	s.DashPackage = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeOriginEndpointOutput) SetDescription(v string) *DescribeOriginEndpointOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsPackage sets the HlsPackage field's value.
-func (s *DescribeOriginEndpointOutput) SetHlsPackage(v *HlsPackage) *DescribeOriginEndpointOutput {
-	s.HlsPackage = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeOriginEndpointOutput) SetId(v string) *DescribeOriginEndpointOutput {
-	s.Id = &v
-	return s
-}
-
-// SetManifestName sets the ManifestName field's value.
-func (s *DescribeOriginEndpointOutput) SetManifestName(v string) *DescribeOriginEndpointOutput {
-	s.ManifestName = &v
-	return s
-}
-
-// SetMssPackage sets the MssPackage field's value.
-func (s *DescribeOriginEndpointOutput) SetMssPackage(v *MssPackage) *DescribeOriginEndpointOutput {
-	s.MssPackage = v
-	return s
-}
-
-// SetStartoverWindowSeconds sets the StartoverWindowSeconds field's value.
-func (s *DescribeOriginEndpointOutput) SetStartoverWindowSeconds(v int64) *DescribeOriginEndpointOutput {
-	s.StartoverWindowSeconds = &v
-	return s
-}
-
-// SetTimeDelaySeconds sets the TimeDelaySeconds field's value.
-func (s *DescribeOriginEndpointOutput) SetTimeDelaySeconds(v int64) *DescribeOriginEndpointOutput {
-	s.TimeDelaySeconds = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *DescribeOriginEndpointOutput) SetUrl(v string) *DescribeOriginEndpointOutput {
-	s.Url = &v
-	return s
-}
-
-// SetWhitelist sets the Whitelist field's value.
-func (s *DescribeOriginEndpointOutput) SetWhitelist(v []string) *DescribeOriginEndpointOutput {
-	s.Whitelist = v
-	return s
 }
 
 // An HTTP Live Streaming (HLS) encryption configuration.
@@ -1654,36 +1282,6 @@ func (s *HlsEncryption) Validate() error {
 	return nil
 }
 
-// SetConstantInitializationVector sets the ConstantInitializationVector field's value.
-func (s *HlsEncryption) SetConstantInitializationVector(v string) *HlsEncryption {
-	s.ConstantInitializationVector = &v
-	return s
-}
-
-// SetEncryptionMethod sets the EncryptionMethod field's value.
-func (s *HlsEncryption) SetEncryptionMethod(v EncryptionMethod) *HlsEncryption {
-	s.EncryptionMethod = v
-	return s
-}
-
-// SetKeyRotationIntervalSeconds sets the KeyRotationIntervalSeconds field's value.
-func (s *HlsEncryption) SetKeyRotationIntervalSeconds(v int64) *HlsEncryption {
-	s.KeyRotationIntervalSeconds = &v
-	return s
-}
-
-// SetRepeatExtXKey sets the RepeatExtXKey field's value.
-func (s *HlsEncryption) SetRepeatExtXKey(v bool) *HlsEncryption {
-	s.RepeatExtXKey = &v
-	return s
-}
-
-// SetSpekeKeyProvider sets the SpekeKeyProvider field's value.
-func (s *HlsEncryption) SetSpekeKeyProvider(v *SpekeKeyProvider) *HlsEncryption {
-	s.SpekeKeyProvider = v
-	return s
-}
-
 // An HTTP Live Streaming (HLS) ingest resource configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsIngest
 type HlsIngest struct {
@@ -1701,12 +1299,6 @@ func (s HlsIngest) String() string {
 // GoString returns the string representation
 func (s HlsIngest) GoString() string {
 	return s.String()
-}
-
-// SetIngestEndpoints sets the IngestEndpoints field's value.
-func (s *HlsIngest) SetIngestEndpoints(v []IngestEndpoint) *HlsIngest {
-	s.IngestEndpoints = v
-	return s
 }
 
 // An HTTP Live Streaming (HLS) packaging configuration.
@@ -1781,60 +1373,6 @@ func (s *HlsPackage) Validate() error {
 	return nil
 }
 
-// SetAdMarkers sets the AdMarkers field's value.
-func (s *HlsPackage) SetAdMarkers(v AdMarkers) *HlsPackage {
-	s.AdMarkers = v
-	return s
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *HlsPackage) SetEncryption(v *HlsEncryption) *HlsPackage {
-	s.Encryption = v
-	return s
-}
-
-// SetIncludeIframeOnlyStream sets the IncludeIframeOnlyStream field's value.
-func (s *HlsPackage) SetIncludeIframeOnlyStream(v bool) *HlsPackage {
-	s.IncludeIframeOnlyStream = &v
-	return s
-}
-
-// SetPlaylistType sets the PlaylistType field's value.
-func (s *HlsPackage) SetPlaylistType(v PlaylistType) *HlsPackage {
-	s.PlaylistType = v
-	return s
-}
-
-// SetPlaylistWindowSeconds sets the PlaylistWindowSeconds field's value.
-func (s *HlsPackage) SetPlaylistWindowSeconds(v int64) *HlsPackage {
-	s.PlaylistWindowSeconds = &v
-	return s
-}
-
-// SetProgramDateTimeIntervalSeconds sets the ProgramDateTimeIntervalSeconds field's value.
-func (s *HlsPackage) SetProgramDateTimeIntervalSeconds(v int64) *HlsPackage {
-	s.ProgramDateTimeIntervalSeconds = &v
-	return s
-}
-
-// SetSegmentDurationSeconds sets the SegmentDurationSeconds field's value.
-func (s *HlsPackage) SetSegmentDurationSeconds(v int64) *HlsPackage {
-	s.SegmentDurationSeconds = &v
-	return s
-}
-
-// SetStreamSelection sets the StreamSelection field's value.
-func (s *HlsPackage) SetStreamSelection(v *StreamSelection) *HlsPackage {
-	s.StreamSelection = v
-	return s
-}
-
-// SetUseAudioRenditionGroup sets the UseAudioRenditionGroup field's value.
-func (s *HlsPackage) SetUseAudioRenditionGroup(v bool) *HlsPackage {
-	s.UseAudioRenditionGroup = &v
-	return s
-}
-
 // An endpoint for ingesting source content for a Channel.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngestEndpoint
 type IngestEndpoint struct {
@@ -1858,24 +1396,6 @@ func (s IngestEndpoint) String() string {
 // GoString returns the string representation
 func (s IngestEndpoint) GoString() string {
 	return s.String()
-}
-
-// SetPassword sets the Password field's value.
-func (s *IngestEndpoint) SetPassword(v string) *IngestEndpoint {
-	s.Password = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *IngestEndpoint) SetUrl(v string) *IngestEndpoint {
-	s.Url = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *IngestEndpoint) SetUsername(v string) *IngestEndpoint {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannelsRequest
@@ -1910,18 +1430,6 @@ func (s *ListChannelsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListChannelsInput) SetMaxResults(v int64) *ListChannelsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChannelsInput) SetNextToken(v string) *ListChannelsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannelsResponse
 type ListChannelsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1946,18 +1454,6 @@ func (s ListChannelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListChannelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChannels sets the Channels field's value.
-func (s *ListChannelsOutput) SetChannels(v []Channel) *ListChannelsOutput {
-	s.Channels = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChannelsOutput) SetNextToken(v string) *ListChannelsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListOriginEndpointsRequest
@@ -1994,24 +1490,6 @@ func (s *ListOriginEndpointsInput) Validate() error {
 	return nil
 }
 
-// SetChannelId sets the ChannelId field's value.
-func (s *ListOriginEndpointsInput) SetChannelId(v string) *ListOriginEndpointsInput {
-	s.ChannelId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListOriginEndpointsInput) SetMaxResults(v int64) *ListOriginEndpointsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOriginEndpointsInput) SetNextToken(v string) *ListOriginEndpointsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListOriginEndpointsResponse
 type ListOriginEndpointsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2036,18 +1514,6 @@ func (s ListOriginEndpointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOriginEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOriginEndpointsOutput) SetNextToken(v string) *ListOriginEndpointsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOriginEndpoints sets the OriginEndpoints field's value.
-func (s *ListOriginEndpointsOutput) SetOriginEndpoints(v []OriginEndpoint) *ListOriginEndpointsOutput {
-	s.OriginEndpoints = v
-	return s
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
@@ -2091,12 +1557,6 @@ func (s *MssEncryption) Validate() error {
 	return nil
 }
 
-// SetSpekeKeyProvider sets the SpekeKeyProvider field's value.
-func (s *MssEncryption) SetSpekeKeyProvider(v *SpekeKeyProvider) *MssEncryption {
-	s.SpekeKeyProvider = v
-	return s
-}
-
 // A Microsoft Smooth Streaming (MSS) packaging configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/MssPackage
 type MssPackage struct {
@@ -2138,30 +1598,6 @@ func (s *MssPackage) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *MssPackage) SetEncryption(v *MssEncryption) *MssPackage {
-	s.Encryption = v
-	return s
-}
-
-// SetManifestWindowSeconds sets the ManifestWindowSeconds field's value.
-func (s *MssPackage) SetManifestWindowSeconds(v int64) *MssPackage {
-	s.ManifestWindowSeconds = &v
-	return s
-}
-
-// SetSegmentDurationSeconds sets the SegmentDurationSeconds field's value.
-func (s *MssPackage) SetSegmentDurationSeconds(v int64) *MssPackage {
-	s.SegmentDurationSeconds = &v
-	return s
-}
-
-// SetStreamSelection sets the StreamSelection field's value.
-func (s *MssPackage) SetStreamSelection(v *StreamSelection) *MssPackage {
-	s.StreamSelection = v
-	return s
 }
 
 // An OriginEndpoint resource configuration.
@@ -2218,78 +1654,6 @@ func (s OriginEndpoint) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *OriginEndpoint) SetArn(v string) *OriginEndpoint {
-	s.Arn = &v
-	return s
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *OriginEndpoint) SetChannelId(v string) *OriginEndpoint {
-	s.ChannelId = &v
-	return s
-}
-
-// SetDashPackage sets the DashPackage field's value.
-func (s *OriginEndpoint) SetDashPackage(v *DashPackage) *OriginEndpoint {
-	s.DashPackage = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *OriginEndpoint) SetDescription(v string) *OriginEndpoint {
-	s.Description = &v
-	return s
-}
-
-// SetHlsPackage sets the HlsPackage field's value.
-func (s *OriginEndpoint) SetHlsPackage(v *HlsPackage) *OriginEndpoint {
-	s.HlsPackage = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *OriginEndpoint) SetId(v string) *OriginEndpoint {
-	s.Id = &v
-	return s
-}
-
-// SetManifestName sets the ManifestName field's value.
-func (s *OriginEndpoint) SetManifestName(v string) *OriginEndpoint {
-	s.ManifestName = &v
-	return s
-}
-
-// SetMssPackage sets the MssPackage field's value.
-func (s *OriginEndpoint) SetMssPackage(v *MssPackage) *OriginEndpoint {
-	s.MssPackage = v
-	return s
-}
-
-// SetStartoverWindowSeconds sets the StartoverWindowSeconds field's value.
-func (s *OriginEndpoint) SetStartoverWindowSeconds(v int64) *OriginEndpoint {
-	s.StartoverWindowSeconds = &v
-	return s
-}
-
-// SetTimeDelaySeconds sets the TimeDelaySeconds field's value.
-func (s *OriginEndpoint) SetTimeDelaySeconds(v int64) *OriginEndpoint {
-	s.TimeDelaySeconds = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *OriginEndpoint) SetUrl(v string) *OriginEndpoint {
-	s.Url = &v
-	return s
-}
-
-// SetWhitelist sets the Whitelist field's value.
-func (s *OriginEndpoint) SetWhitelist(v []string) *OriginEndpoint {
-	s.Whitelist = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsRequest
 type RotateChannelCredentialsInput struct {
 	_ struct{} `type:"structure"`
@@ -2322,12 +1686,6 @@ func (s *RotateChannelCredentialsInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *RotateChannelCredentialsInput) SetId(v string) *RotateChannelCredentialsInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsResponse
 type RotateChannelCredentialsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2357,30 +1715,6 @@ func (s RotateChannelCredentialsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RotateChannelCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *RotateChannelCredentialsOutput) SetArn(v string) *RotateChannelCredentialsOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RotateChannelCredentialsOutput) SetDescription(v string) *RotateChannelCredentialsOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsIngest sets the HlsIngest field's value.
-func (s *RotateChannelCredentialsOutput) SetHlsIngest(v *HlsIngest) *RotateChannelCredentialsOutput {
-	s.HlsIngest = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *RotateChannelCredentialsOutput) SetId(v string) *RotateChannelCredentialsOutput {
-	s.Id = &v
-	return s
 }
 
 // A configuration for accessing an external Secure Packager and Encoder Key
@@ -2447,30 +1781,6 @@ func (s *SpekeKeyProvider) Validate() error {
 	return nil
 }
 
-// SetResourceId sets the ResourceId field's value.
-func (s *SpekeKeyProvider) SetResourceId(v string) *SpekeKeyProvider {
-	s.ResourceId = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *SpekeKeyProvider) SetRoleArn(v string) *SpekeKeyProvider {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSystemIds sets the SystemIds field's value.
-func (s *SpekeKeyProvider) SetSystemIds(v []string) *SpekeKeyProvider {
-	s.SystemIds = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *SpekeKeyProvider) SetUrl(v string) *SpekeKeyProvider {
-	s.Url = &v
-	return s
-}
-
 // A StreamSelection configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/StreamSelection
 type StreamSelection struct {
@@ -2494,24 +1804,6 @@ func (s StreamSelection) String() string {
 // GoString returns the string representation
 func (s StreamSelection) GoString() string {
 	return s.String()
-}
-
-// SetMaxVideoBitsPerSecond sets the MaxVideoBitsPerSecond field's value.
-func (s *StreamSelection) SetMaxVideoBitsPerSecond(v int64) *StreamSelection {
-	s.MaxVideoBitsPerSecond = &v
-	return s
-}
-
-// SetMinVideoBitsPerSecond sets the MinVideoBitsPerSecond field's value.
-func (s *StreamSelection) SetMinVideoBitsPerSecond(v int64) *StreamSelection {
-	s.MinVideoBitsPerSecond = &v
-	return s
-}
-
-// SetStreamOrder sets the StreamOrder field's value.
-func (s *StreamSelection) SetStreamOrder(v StreamOrder) *StreamSelection {
-	s.StreamOrder = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateChannelRequest
@@ -2548,18 +1840,6 @@ func (s *UpdateChannelInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateChannelInput) SetDescription(v string) *UpdateChannelInput {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateChannelInput) SetId(v string) *UpdateChannelInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateChannelResponse
 type UpdateChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -2589,30 +1869,6 @@ func (s UpdateChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *UpdateChannelOutput) SetArn(v string) *UpdateChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateChannelOutput) SetDescription(v string) *UpdateChannelOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsIngest sets the HlsIngest field's value.
-func (s *UpdateChannelOutput) SetHlsIngest(v *HlsIngest) *UpdateChannelOutput {
-	s.HlsIngest = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateChannelOutput) SetId(v string) *UpdateChannelOutput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpointRequest
@@ -2681,60 +1937,6 @@ func (s *UpdateOriginEndpointInput) Validate() error {
 	return nil
 }
 
-// SetDashPackage sets the DashPackage field's value.
-func (s *UpdateOriginEndpointInput) SetDashPackage(v *DashPackage) *UpdateOriginEndpointInput {
-	s.DashPackage = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateOriginEndpointInput) SetDescription(v string) *UpdateOriginEndpointInput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsPackage sets the HlsPackage field's value.
-func (s *UpdateOriginEndpointInput) SetHlsPackage(v *HlsPackage) *UpdateOriginEndpointInput {
-	s.HlsPackage = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateOriginEndpointInput) SetId(v string) *UpdateOriginEndpointInput {
-	s.Id = &v
-	return s
-}
-
-// SetManifestName sets the ManifestName field's value.
-func (s *UpdateOriginEndpointInput) SetManifestName(v string) *UpdateOriginEndpointInput {
-	s.ManifestName = &v
-	return s
-}
-
-// SetMssPackage sets the MssPackage field's value.
-func (s *UpdateOriginEndpointInput) SetMssPackage(v *MssPackage) *UpdateOriginEndpointInput {
-	s.MssPackage = v
-	return s
-}
-
-// SetStartoverWindowSeconds sets the StartoverWindowSeconds field's value.
-func (s *UpdateOriginEndpointInput) SetStartoverWindowSeconds(v int64) *UpdateOriginEndpointInput {
-	s.StartoverWindowSeconds = &v
-	return s
-}
-
-// SetTimeDelaySeconds sets the TimeDelaySeconds field's value.
-func (s *UpdateOriginEndpointInput) SetTimeDelaySeconds(v int64) *UpdateOriginEndpointInput {
-	s.TimeDelaySeconds = &v
-	return s
-}
-
-// SetWhitelist sets the Whitelist field's value.
-func (s *UpdateOriginEndpointInput) SetWhitelist(v []string) *UpdateOriginEndpointInput {
-	s.Whitelist = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpointResponse
 type UpdateOriginEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -2782,78 +1984,6 @@ func (s UpdateOriginEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *UpdateOriginEndpointOutput) SetArn(v string) *UpdateOriginEndpointOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *UpdateOriginEndpointOutput) SetChannelId(v string) *UpdateOriginEndpointOutput {
-	s.ChannelId = &v
-	return s
-}
-
-// SetDashPackage sets the DashPackage field's value.
-func (s *UpdateOriginEndpointOutput) SetDashPackage(v *DashPackage) *UpdateOriginEndpointOutput {
-	s.DashPackage = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateOriginEndpointOutput) SetDescription(v string) *UpdateOriginEndpointOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHlsPackage sets the HlsPackage field's value.
-func (s *UpdateOriginEndpointOutput) SetHlsPackage(v *HlsPackage) *UpdateOriginEndpointOutput {
-	s.HlsPackage = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateOriginEndpointOutput) SetId(v string) *UpdateOriginEndpointOutput {
-	s.Id = &v
-	return s
-}
-
-// SetManifestName sets the ManifestName field's value.
-func (s *UpdateOriginEndpointOutput) SetManifestName(v string) *UpdateOriginEndpointOutput {
-	s.ManifestName = &v
-	return s
-}
-
-// SetMssPackage sets the MssPackage field's value.
-func (s *UpdateOriginEndpointOutput) SetMssPackage(v *MssPackage) *UpdateOriginEndpointOutput {
-	s.MssPackage = v
-	return s
-}
-
-// SetStartoverWindowSeconds sets the StartoverWindowSeconds field's value.
-func (s *UpdateOriginEndpointOutput) SetStartoverWindowSeconds(v int64) *UpdateOriginEndpointOutput {
-	s.StartoverWindowSeconds = &v
-	return s
-}
-
-// SetTimeDelaySeconds sets the TimeDelaySeconds field's value.
-func (s *UpdateOriginEndpointOutput) SetTimeDelaySeconds(v int64) *UpdateOriginEndpointOutput {
-	s.TimeDelaySeconds = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *UpdateOriginEndpointOutput) SetUrl(v string) *UpdateOriginEndpointOutput {
-	s.Url = &v
-	return s
-}
-
-// SetWhitelist sets the Whitelist field's value.
-func (s *UpdateOriginEndpointOutput) SetWhitelist(v []string) *UpdateOriginEndpointOutput {
-	s.Whitelist = v
-	return s
 }
 
 type AdMarkers string

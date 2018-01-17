@@ -116,30 +116,6 @@ func (s *InvokeEndpointInput) Validate() error {
 	return nil
 }
 
-// SetAccept sets the Accept field's value.
-func (s *InvokeEndpointInput) SetAccept(v string) *InvokeEndpointInput {
-	s.Accept = &v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *InvokeEndpointInput) SetBody(v []byte) *InvokeEndpointInput {
-	s.Body = v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *InvokeEndpointInput) SetContentType(v string) *InvokeEndpointInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *InvokeEndpointInput) SetEndpointName(v string) *InvokeEndpointInput {
-	s.EndpointName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointOutput
 type InvokeEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
@@ -171,22 +147,4 @@ func (s InvokeEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InvokeEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBody sets the Body field's value.
-func (s *InvokeEndpointOutput) SetBody(v []byte) *InvokeEndpointOutput {
-	s.Body = v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *InvokeEndpointOutput) SetContentType(v string) *InvokeEndpointOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetInvokedProductionVariant sets the InvokedProductionVariant field's value.
-func (s *InvokeEndpointOutput) SetInvokedProductionVariant(v string) *InvokeEndpointOutput {
-	s.InvokedProductionVariant = &v
-	return s
 }

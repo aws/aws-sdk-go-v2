@@ -1343,24 +1343,6 @@ func (s AuthorizationData) GoString() string {
 	return s.String()
 }
 
-// SetAuthorizationToken sets the AuthorizationToken field's value.
-func (s *AuthorizationData) SetAuthorizationToken(v string) *AuthorizationData {
-	s.AuthorizationToken = &v
-	return s
-}
-
-// SetExpiresAt sets the ExpiresAt field's value.
-func (s *AuthorizationData) SetExpiresAt(v time.Time) *AuthorizationData {
-	s.ExpiresAt = &v
-	return s
-}
-
-// SetProxyEndpoint sets the ProxyEndpoint field's value.
-func (s *AuthorizationData) SetProxyEndpoint(v string) *AuthorizationData {
-	s.ProxyEndpoint = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailabilityRequest
 type BatchCheckLayerAvailabilityInput struct {
 	_ struct{} `type:"structure"`
@@ -1414,24 +1396,6 @@ func (s *BatchCheckLayerAvailabilityInput) Validate() error {
 	return nil
 }
 
-// SetLayerDigests sets the LayerDigests field's value.
-func (s *BatchCheckLayerAvailabilityInput) SetLayerDigests(v []string) *BatchCheckLayerAvailabilityInput {
-	s.LayerDigests = v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *BatchCheckLayerAvailabilityInput) SetRegistryId(v string) *BatchCheckLayerAvailabilityInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *BatchCheckLayerAvailabilityInput) SetRepositoryName(v string) *BatchCheckLayerAvailabilityInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailabilityResponse
 type BatchCheckLayerAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
@@ -1459,18 +1423,6 @@ func (s BatchCheckLayerAvailabilityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchCheckLayerAvailabilityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailures sets the Failures field's value.
-func (s *BatchCheckLayerAvailabilityOutput) SetFailures(v []LayerFailure) *BatchCheckLayerAvailabilityOutput {
-	s.Failures = v
-	return s
-}
-
-// SetLayers sets the Layers field's value.
-func (s *BatchCheckLayerAvailabilityOutput) SetLayers(v []Layer) *BatchCheckLayerAvailabilityOutput {
-	s.Layers = v
-	return s
 }
 
 // Deletes specified images within a specified repository. Images are specified
@@ -1529,24 +1481,6 @@ func (s *BatchDeleteImageInput) Validate() error {
 	return nil
 }
 
-// SetImageIds sets the ImageIds field's value.
-func (s *BatchDeleteImageInput) SetImageIds(v []ImageIdentifier) *BatchDeleteImageInput {
-	s.ImageIds = v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *BatchDeleteImageInput) SetRegistryId(v string) *BatchDeleteImageInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *BatchDeleteImageInput) SetRepositoryName(v string) *BatchDeleteImageInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImageResponse
 type BatchDeleteImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -1573,18 +1507,6 @@ func (s BatchDeleteImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchDeleteImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailures sets the Failures field's value.
-func (s *BatchDeleteImageOutput) SetFailures(v []ImageFailure) *BatchDeleteImageOutput {
-	s.Failures = v
-	return s
-}
-
-// SetImageIds sets the ImageIds field's value.
-func (s *BatchDeleteImageOutput) SetImageIds(v []ImageIdentifier) *BatchDeleteImageOutput {
-	s.ImageIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImageRequest
@@ -1650,30 +1572,6 @@ func (s *BatchGetImageInput) Validate() error {
 	return nil
 }
 
-// SetAcceptedMediaTypes sets the AcceptedMediaTypes field's value.
-func (s *BatchGetImageInput) SetAcceptedMediaTypes(v []string) *BatchGetImageInput {
-	s.AcceptedMediaTypes = v
-	return s
-}
-
-// SetImageIds sets the ImageIds field's value.
-func (s *BatchGetImageInput) SetImageIds(v []ImageIdentifier) *BatchGetImageInput {
-	s.ImageIds = v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *BatchGetImageInput) SetRegistryId(v string) *BatchGetImageInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *BatchGetImageInput) SetRepositoryName(v string) *BatchGetImageInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImageResponse
 type BatchGetImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -1700,18 +1598,6 @@ func (s BatchGetImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailures sets the Failures field's value.
-func (s *BatchGetImageOutput) SetFailures(v []ImageFailure) *BatchGetImageOutput {
-	s.Failures = v
-	return s
-}
-
-// SetImages sets the Images field's value.
-func (s *BatchGetImageOutput) SetImages(v []Image) *BatchGetImageOutput {
-	s.Images = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUploadRequest
@@ -1777,30 +1663,6 @@ func (s *CompleteLayerUploadInput) Validate() error {
 	return nil
 }
 
-// SetLayerDigests sets the LayerDigests field's value.
-func (s *CompleteLayerUploadInput) SetLayerDigests(v []string) *CompleteLayerUploadInput {
-	s.LayerDigests = v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *CompleteLayerUploadInput) SetRegistryId(v string) *CompleteLayerUploadInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CompleteLayerUploadInput) SetRepositoryName(v string) *CompleteLayerUploadInput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *CompleteLayerUploadInput) SetUploadId(v string) *CompleteLayerUploadInput {
-	s.UploadId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUploadResponse
 type CompleteLayerUploadOutput struct {
 	_ struct{} `type:"structure"`
@@ -1833,30 +1695,6 @@ func (s CompleteLayerUploadOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CompleteLayerUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLayerDigest sets the LayerDigest field's value.
-func (s *CompleteLayerUploadOutput) SetLayerDigest(v string) *CompleteLayerUploadOutput {
-	s.LayerDigest = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *CompleteLayerUploadOutput) SetRegistryId(v string) *CompleteLayerUploadOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CompleteLayerUploadOutput) SetRepositoryName(v string) *CompleteLayerUploadOutput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *CompleteLayerUploadOutput) SetUploadId(v string) *CompleteLayerUploadOutput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest
@@ -1898,12 +1736,6 @@ func (s *CreateRepositoryInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CreateRepositoryInput) SetRepositoryName(v string) *CreateRepositoryInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryResponse
 type CreateRepositoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1927,12 +1759,6 @@ func (s CreateRepositoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRepositoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRepository sets the Repository field's value.
-func (s *CreateRepositoryOutput) SetRepository(v *Repository) *CreateRepositoryOutput {
-	s.Repository = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicyRequest
@@ -1977,18 +1803,6 @@ func (s *DeleteLifecyclePolicyInput) Validate() error {
 	return nil
 }
 
-// SetRegistryId sets the RegistryId field's value.
-func (s *DeleteLifecyclePolicyInput) SetRegistryId(v string) *DeleteLifecyclePolicyInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteLifecyclePolicyInput) SetRepositoryName(v string) *DeleteLifecyclePolicyInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicyResponse
 type DeleteLifecyclePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -2021,30 +1835,6 @@ func (s DeleteLifecyclePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLastEvaluatedAt sets the LastEvaluatedAt field's value.
-func (s *DeleteLifecyclePolicyOutput) SetLastEvaluatedAt(v time.Time) *DeleteLifecyclePolicyOutput {
-	s.LastEvaluatedAt = &v
-	return s
-}
-
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *DeleteLifecyclePolicyOutput) SetLifecyclePolicyText(v string) *DeleteLifecyclePolicyOutput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *DeleteLifecyclePolicyOutput) SetRegistryId(v string) *DeleteLifecyclePolicyOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteLifecyclePolicyOutput) SetRepositoryName(v string) *DeleteLifecyclePolicyOutput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryRequest
@@ -2091,24 +1881,6 @@ func (s *DeleteRepositoryInput) Validate() error {
 	return nil
 }
 
-// SetForce sets the Force field's value.
-func (s *DeleteRepositoryInput) SetForce(v bool) *DeleteRepositoryInput {
-	s.Force = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *DeleteRepositoryInput) SetRegistryId(v string) *DeleteRepositoryInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteRepositoryInput) SetRepositoryName(v string) *DeleteRepositoryInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryResponse
 type DeleteRepositoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -2132,12 +1904,6 @@ func (s DeleteRepositoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRepositoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRepository sets the Repository field's value.
-func (s *DeleteRepositoryOutput) SetRepository(v *Repository) *DeleteRepositoryOutput {
-	s.Repository = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicyRequest
@@ -2183,18 +1949,6 @@ func (s *DeleteRepositoryPolicyInput) Validate() error {
 	return nil
 }
 
-// SetRegistryId sets the RegistryId field's value.
-func (s *DeleteRepositoryPolicyInput) SetRegistryId(v string) *DeleteRepositoryPolicyInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteRepositoryPolicyInput) SetRepositoryName(v string) *DeleteRepositoryPolicyInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicyResponse
 type DeleteRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -2226,24 +1980,6 @@ func (s DeleteRepositoryPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPolicyText sets the PolicyText field's value.
-func (s *DeleteRepositoryPolicyOutput) SetPolicyText(v string) *DeleteRepositoryPolicyOutput {
-	s.PolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *DeleteRepositoryPolicyOutput) SetRegistryId(v string) *DeleteRepositoryPolicyOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteRepositoryPolicyOutput) SetRepositoryName(v string) *DeleteRepositoryPolicyOutput {
-	s.RepositoryName = &v
-	return s
-}
-
 // An object representing a filter on a DescribeImages operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesFilter
 type DescribeImagesFilter struct {
@@ -2262,12 +1998,6 @@ func (s DescribeImagesFilter) String() string {
 // GoString returns the string representation
 func (s DescribeImagesFilter) GoString() string {
 	return s.String()
-}
-
-// SetTagStatus sets the TagStatus field's value.
-func (s *DescribeImagesFilter) SetTagStatus(v TagStatus) *DescribeImagesFilter {
-	s.TagStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesRequest
@@ -2340,42 +2070,6 @@ func (s *DescribeImagesInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeImagesInput) SetFilter(v *DescribeImagesFilter) *DescribeImagesInput {
-	s.Filter = v
-	return s
-}
-
-// SetImageIds sets the ImageIds field's value.
-func (s *DescribeImagesInput) SetImageIds(v []ImageIdentifier) *DescribeImagesInput {
-	s.ImageIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeImagesInput) SetMaxResults(v int64) *DescribeImagesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImagesInput) SetNextToken(v string) *DescribeImagesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *DescribeImagesInput) SetRegistryId(v string) *DescribeImagesInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DescribeImagesInput) SetRepositoryName(v string) *DescribeImagesInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesResponse
 type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2405,18 +2099,6 @@ func (s DescribeImagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageDetails sets the ImageDetails field's value.
-func (s *DescribeImagesOutput) SetImageDetails(v []ImageDetail) *DescribeImagesOutput {
-	s.ImageDetails = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImagesOutput) SetNextToken(v string) *DescribeImagesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoriesRequest
@@ -2478,30 +2160,6 @@ func (s *DescribeRepositoriesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeRepositoriesInput) SetMaxResults(v int64) *DescribeRepositoriesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeRepositoriesInput) SetNextToken(v string) *DescribeRepositoriesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *DescribeRepositoriesInput) SetRegistryId(v string) *DescribeRepositoriesInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryNames sets the RepositoryNames field's value.
-func (s *DescribeRepositoriesInput) SetRepositoryNames(v []string) *DescribeRepositoriesInput {
-	s.RepositoryNames = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoriesResponse
 type DescribeRepositoriesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2531,18 +2189,6 @@ func (s DescribeRepositoriesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRepositoriesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeRepositoriesOutput) SetNextToken(v string) *DescribeRepositoriesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRepositories sets the Repositories field's value.
-func (s *DescribeRepositoriesOutput) SetRepositories(v []Repository) *DescribeRepositoriesOutput {
-	s.Repositories = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenRequest
@@ -2578,12 +2224,6 @@ func (s *GetAuthorizationTokenInput) Validate() error {
 	return nil
 }
 
-// SetRegistryIds sets the RegistryIds field's value.
-func (s *GetAuthorizationTokenInput) SetRegistryIds(v []string) *GetAuthorizationTokenInput {
-	s.RegistryIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenResponse
 type GetAuthorizationTokenOutput struct {
 	_ struct{} `type:"structure"`
@@ -2608,12 +2248,6 @@ func (s GetAuthorizationTokenOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAuthorizationTokenOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizationData sets the AuthorizationData field's value.
-func (s *GetAuthorizationTokenOutput) SetAuthorizationData(v []AuthorizationData) *GetAuthorizationTokenOutput {
-	s.AuthorizationData = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayerRequest
@@ -2666,24 +2300,6 @@ func (s *GetDownloadUrlForLayerInput) Validate() error {
 	return nil
 }
 
-// SetLayerDigest sets the LayerDigest field's value.
-func (s *GetDownloadUrlForLayerInput) SetLayerDigest(v string) *GetDownloadUrlForLayerInput {
-	s.LayerDigest = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetDownloadUrlForLayerInput) SetRegistryId(v string) *GetDownloadUrlForLayerInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetDownloadUrlForLayerInput) SetRepositoryName(v string) *GetDownloadUrlForLayerInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayerResponse
 type GetDownloadUrlForLayerOutput struct {
 	_ struct{} `type:"structure"`
@@ -2710,18 +2326,6 @@ func (s GetDownloadUrlForLayerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDownloadUrlForLayerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDownloadUrl sets the DownloadUrl field's value.
-func (s *GetDownloadUrlForLayerOutput) SetDownloadUrl(v string) *GetDownloadUrlForLayerOutput {
-	s.DownloadUrl = &v
-	return s
-}
-
-// SetLayerDigest sets the LayerDigest field's value.
-func (s *GetDownloadUrlForLayerOutput) SetLayerDigest(v string) *GetDownloadUrlForLayerOutput {
-	s.LayerDigest = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyRequest
@@ -2765,18 +2369,6 @@ func (s *GetLifecyclePolicyInput) Validate() error {
 	return nil
 }
 
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetLifecyclePolicyInput) SetRegistryId(v string) *GetLifecyclePolicyInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetLifecyclePolicyInput) SetRepositoryName(v string) *GetLifecyclePolicyInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyResponse
 type GetLifecyclePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -2809,30 +2401,6 @@ func (s GetLifecyclePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLastEvaluatedAt sets the LastEvaluatedAt field's value.
-func (s *GetLifecyclePolicyOutput) SetLastEvaluatedAt(v time.Time) *GetLifecyclePolicyOutput {
-	s.LastEvaluatedAt = &v
-	return s
-}
-
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *GetLifecyclePolicyOutput) SetLifecyclePolicyText(v string) *GetLifecyclePolicyOutput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetLifecyclePolicyOutput) SetRegistryId(v string) *GetLifecyclePolicyOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetLifecyclePolicyOutput) SetRepositoryName(v string) *GetLifecyclePolicyOutput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyPreviewRequest
@@ -2906,42 +2474,6 @@ func (s *GetLifecyclePolicyPreviewInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *GetLifecyclePolicyPreviewInput) SetFilter(v *LifecyclePolicyPreviewFilter) *GetLifecyclePolicyPreviewInput {
-	s.Filter = v
-	return s
-}
-
-// SetImageIds sets the ImageIds field's value.
-func (s *GetLifecyclePolicyPreviewInput) SetImageIds(v []ImageIdentifier) *GetLifecyclePolicyPreviewInput {
-	s.ImageIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetLifecyclePolicyPreviewInput) SetMaxResults(v int64) *GetLifecyclePolicyPreviewInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetLifecyclePolicyPreviewInput) SetNextToken(v string) *GetLifecyclePolicyPreviewInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetLifecyclePolicyPreviewInput) SetRegistryId(v string) *GetLifecyclePolicyPreviewInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetLifecyclePolicyPreviewInput) SetRepositoryName(v string) *GetLifecyclePolicyPreviewInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyPreviewResponse
 type GetLifecyclePolicyPreviewOutput struct {
 	_ struct{} `type:"structure"`
@@ -2988,48 +2520,6 @@ func (s GetLifecyclePolicyPreviewOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetLifecyclePolicyText(v string) *GetLifecyclePolicyPreviewOutput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetNextToken(v string) *GetLifecyclePolicyPreviewOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPreviewResults sets the PreviewResults field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetPreviewResults(v []LifecyclePolicyPreviewResult) *GetLifecyclePolicyPreviewOutput {
-	s.PreviewResults = v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetRegistryId(v string) *GetLifecyclePolicyPreviewOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetRepositoryName(v string) *GetLifecyclePolicyPreviewOutput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetStatus(v LifecyclePolicyPreviewStatus) *GetLifecyclePolicyPreviewOutput {
-	s.Status = v
-	return s
-}
-
-// SetSummary sets the Summary field's value.
-func (s *GetLifecyclePolicyPreviewOutput) SetSummary(v *LifecyclePolicyPreviewSummary) *GetLifecyclePolicyPreviewOutput {
-	s.Summary = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicyRequest
 type GetRepositoryPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -3071,18 +2561,6 @@ func (s *GetRepositoryPolicyInput) Validate() error {
 	return nil
 }
 
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetRepositoryPolicyInput) SetRegistryId(v string) *GetRepositoryPolicyInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetRepositoryPolicyInput) SetRepositoryName(v string) *GetRepositoryPolicyInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicyResponse
 type GetRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -3114,24 +2592,6 @@ func (s GetRepositoryPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPolicyText sets the PolicyText field's value.
-func (s *GetRepositoryPolicyOutput) SetPolicyText(v string) *GetRepositoryPolicyOutput {
-	s.PolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *GetRepositoryPolicyOutput) SetRegistryId(v string) *GetRepositoryPolicyOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetRepositoryPolicyOutput) SetRepositoryName(v string) *GetRepositoryPolicyOutput {
-	s.RepositoryName = &v
-	return s
-}
-
 // An object representing an Amazon ECR image.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Image
 type Image struct {
@@ -3158,30 +2618,6 @@ func (s Image) String() string {
 // GoString returns the string representation
 func (s Image) GoString() string {
 	return s.String()
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *Image) SetImageId(v *ImageIdentifier) *Image {
-	s.ImageId = v
-	return s
-}
-
-// SetImageManifest sets the ImageManifest field's value.
-func (s *Image) SetImageManifest(v string) *Image {
-	s.ImageManifest = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *Image) SetRegistryId(v string) *Image {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *Image) SetRepositoryName(v string) *Image {
-	s.RepositoryName = &v
-	return s
 }
 
 // An object that describes an image returned by a DescribeImages operation.
@@ -3224,42 +2660,6 @@ func (s ImageDetail) GoString() string {
 	return s.String()
 }
 
-// SetImageDigest sets the ImageDigest field's value.
-func (s *ImageDetail) SetImageDigest(v string) *ImageDetail {
-	s.ImageDigest = &v
-	return s
-}
-
-// SetImagePushedAt sets the ImagePushedAt field's value.
-func (s *ImageDetail) SetImagePushedAt(v time.Time) *ImageDetail {
-	s.ImagePushedAt = &v
-	return s
-}
-
-// SetImageSizeInBytes sets the ImageSizeInBytes field's value.
-func (s *ImageDetail) SetImageSizeInBytes(v int64) *ImageDetail {
-	s.ImageSizeInBytes = &v
-	return s
-}
-
-// SetImageTags sets the ImageTags field's value.
-func (s *ImageDetail) SetImageTags(v []string) *ImageDetail {
-	s.ImageTags = v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *ImageDetail) SetRegistryId(v string) *ImageDetail {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *ImageDetail) SetRepositoryName(v string) *ImageDetail {
-	s.RepositoryName = &v
-	return s
-}
-
 // An object representing an Amazon ECR image failure.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageFailure
 type ImageFailure struct {
@@ -3285,24 +2685,6 @@ func (s ImageFailure) GoString() string {
 	return s.String()
 }
 
-// SetFailureCode sets the FailureCode field's value.
-func (s *ImageFailure) SetFailureCode(v ImageFailureCode) *ImageFailure {
-	s.FailureCode = v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *ImageFailure) SetFailureReason(v string) *ImageFailure {
-	s.FailureReason = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ImageFailure) SetImageId(v *ImageIdentifier) *ImageFailure {
-	s.ImageId = v
-	return s
-}
-
 // An object with identifying information for an Amazon ECR image.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageIdentifier
 type ImageIdentifier struct {
@@ -3323,18 +2705,6 @@ func (s ImageIdentifier) String() string {
 // GoString returns the string representation
 func (s ImageIdentifier) GoString() string {
 	return s.String()
-}
-
-// SetImageDigest sets the ImageDigest field's value.
-func (s *ImageIdentifier) SetImageDigest(v string) *ImageIdentifier {
-	s.ImageDigest = &v
-	return s
-}
-
-// SetImageTag sets the ImageTag field's value.
-func (s *ImageIdentifier) SetImageTag(v string) *ImageIdentifier {
-	s.ImageTag = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUploadRequest
@@ -3378,18 +2748,6 @@ func (s *InitiateLayerUploadInput) Validate() error {
 	return nil
 }
 
-// SetRegistryId sets the RegistryId field's value.
-func (s *InitiateLayerUploadInput) SetRegistryId(v string) *InitiateLayerUploadInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *InitiateLayerUploadInput) SetRepositoryName(v string) *InitiateLayerUploadInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUploadResponse
 type InitiateLayerUploadOutput struct {
 	_ struct{} `type:"structure"`
@@ -3418,18 +2776,6 @@ func (s InitiateLayerUploadOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InitiateLayerUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPartSize sets the PartSize field's value.
-func (s *InitiateLayerUploadOutput) SetPartSize(v int64) *InitiateLayerUploadOutput {
-	s.PartSize = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *InitiateLayerUploadOutput) SetUploadId(v string) *InitiateLayerUploadOutput {
-	s.UploadId = &v
-	return s
 }
 
 // An object representing an Amazon ECR image layer.
@@ -3461,30 +2807,6 @@ func (s Layer) GoString() string {
 	return s.String()
 }
 
-// SetLayerAvailability sets the LayerAvailability field's value.
-func (s *Layer) SetLayerAvailability(v LayerAvailability) *Layer {
-	s.LayerAvailability = v
-	return s
-}
-
-// SetLayerDigest sets the LayerDigest field's value.
-func (s *Layer) SetLayerDigest(v string) *Layer {
-	s.LayerDigest = &v
-	return s
-}
-
-// SetLayerSize sets the LayerSize field's value.
-func (s *Layer) SetLayerSize(v int64) *Layer {
-	s.LayerSize = &v
-	return s
-}
-
-// SetMediaType sets the MediaType field's value.
-func (s *Layer) SetMediaType(v string) *Layer {
-	s.MediaType = &v
-	return s
-}
-
 // An object representing an Amazon ECR image layer failure.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerFailure
 type LayerFailure struct {
@@ -3510,24 +2832,6 @@ func (s LayerFailure) GoString() string {
 	return s.String()
 }
 
-// SetFailureCode sets the FailureCode field's value.
-func (s *LayerFailure) SetFailureCode(v LayerFailureCode) *LayerFailure {
-	s.FailureCode = v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *LayerFailure) SetFailureReason(v string) *LayerFailure {
-	s.FailureReason = &v
-	return s
-}
-
-// SetLayerDigest sets the LayerDigest field's value.
-func (s *LayerFailure) SetLayerDigest(v string) *LayerFailure {
-	s.LayerDigest = &v
-	return s
-}
-
 // The filter for the lifecycle policy preview.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewFilter
 type LifecyclePolicyPreviewFilter struct {
@@ -3545,12 +2849,6 @@ func (s LifecyclePolicyPreviewFilter) String() string {
 // GoString returns the string representation
 func (s LifecyclePolicyPreviewFilter) GoString() string {
 	return s.String()
-}
-
-// SetTagStatus sets the TagStatus field's value.
-func (s *LifecyclePolicyPreviewFilter) SetTagStatus(v TagStatus) *LifecyclePolicyPreviewFilter {
-	s.TagStatus = v
-	return s
 }
 
 // The result of the lifecycle policy preview.
@@ -3585,36 +2883,6 @@ func (s LifecyclePolicyPreviewResult) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *LifecyclePolicyPreviewResult) SetAction(v *LifecyclePolicyRuleAction) *LifecyclePolicyPreviewResult {
-	s.Action = v
-	return s
-}
-
-// SetAppliedRulePriority sets the AppliedRulePriority field's value.
-func (s *LifecyclePolicyPreviewResult) SetAppliedRulePriority(v int64) *LifecyclePolicyPreviewResult {
-	s.AppliedRulePriority = &v
-	return s
-}
-
-// SetImageDigest sets the ImageDigest field's value.
-func (s *LifecyclePolicyPreviewResult) SetImageDigest(v string) *LifecyclePolicyPreviewResult {
-	s.ImageDigest = &v
-	return s
-}
-
-// SetImagePushedAt sets the ImagePushedAt field's value.
-func (s *LifecyclePolicyPreviewResult) SetImagePushedAt(v time.Time) *LifecyclePolicyPreviewResult {
-	s.ImagePushedAt = &v
-	return s
-}
-
-// SetImageTags sets the ImageTags field's value.
-func (s *LifecyclePolicyPreviewResult) SetImageTags(v []string) *LifecyclePolicyPreviewResult {
-	s.ImageTags = v
-	return s
-}
-
 // The summary of the lifecycle policy preview request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewSummary
 type LifecyclePolicyPreviewSummary struct {
@@ -3632,12 +2900,6 @@ func (s LifecyclePolicyPreviewSummary) String() string {
 // GoString returns the string representation
 func (s LifecyclePolicyPreviewSummary) GoString() string {
 	return s.String()
-}
-
-// SetExpiringImageTotalCount sets the ExpiringImageTotalCount field's value.
-func (s *LifecyclePolicyPreviewSummary) SetExpiringImageTotalCount(v int64) *LifecyclePolicyPreviewSummary {
-	s.ExpiringImageTotalCount = &v
-	return s
 }
 
 // The type of action to be taken.
@@ -3659,12 +2921,6 @@ func (s LifecyclePolicyRuleAction) GoString() string {
 	return s.String()
 }
 
-// SetType sets the Type field's value.
-func (s *LifecyclePolicyRuleAction) SetType(v ImageActionType) *LifecyclePolicyRuleAction {
-	s.Type = v
-	return s
-}
-
 // An object representing a filter on a ListImages operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesFilter
 type ListImagesFilter struct {
@@ -3683,12 +2939,6 @@ func (s ListImagesFilter) String() string {
 // GoString returns the string representation
 func (s ListImagesFilter) GoString() string {
 	return s.String()
-}
-
-// SetTagStatus sets the TagStatus field's value.
-func (s *ListImagesFilter) SetTagStatus(v TagStatus) *ListImagesFilter {
-	s.TagStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesRequest
@@ -3757,36 +3007,6 @@ func (s *ListImagesInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListImagesInput) SetFilter(v *ListImagesFilter) *ListImagesInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListImagesInput) SetMaxResults(v int64) *ListImagesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListImagesInput) SetNextToken(v string) *ListImagesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *ListImagesInput) SetRegistryId(v string) *ListImagesInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *ListImagesInput) SetRepositoryName(v string) *ListImagesInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesResponse
 type ListImagesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3816,18 +3036,6 @@ func (s ListImagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageIds sets the ImageIds field's value.
-func (s *ListImagesOutput) SetImageIds(v []ImageIdentifier) *ListImagesOutput {
-	s.ImageIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListImagesOutput) SetNextToken(v string) *ListImagesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageRequest
@@ -3885,30 +3093,6 @@ func (s *PutImageInput) Validate() error {
 	return nil
 }
 
-// SetImageManifest sets the ImageManifest field's value.
-func (s *PutImageInput) SetImageManifest(v string) *PutImageInput {
-	s.ImageManifest = &v
-	return s
-}
-
-// SetImageTag sets the ImageTag field's value.
-func (s *PutImageInput) SetImageTag(v string) *PutImageInput {
-	s.ImageTag = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *PutImageInput) SetRegistryId(v string) *PutImageInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PutImageInput) SetRepositoryName(v string) *PutImageInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageResponse
 type PutImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -3932,12 +3116,6 @@ func (s PutImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImage sets the Image field's value.
-func (s *PutImageOutput) SetImage(v *Image) *PutImageOutput {
-	s.Image = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutLifecyclePolicyRequest
@@ -3993,24 +3171,6 @@ func (s *PutLifecyclePolicyInput) Validate() error {
 	return nil
 }
 
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *PutLifecyclePolicyInput) SetLifecyclePolicyText(v string) *PutLifecyclePolicyInput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *PutLifecyclePolicyInput) SetRegistryId(v string) *PutLifecyclePolicyInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PutLifecyclePolicyInput) SetRepositoryName(v string) *PutLifecyclePolicyInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutLifecyclePolicyResponse
 type PutLifecyclePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4040,24 +3200,6 @@ func (s PutLifecyclePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *PutLifecyclePolicyOutput) SetLifecyclePolicyText(v string) *PutLifecyclePolicyOutput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *PutLifecyclePolicyOutput) SetRegistryId(v string) *PutLifecyclePolicyOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PutLifecyclePolicyOutput) SetRepositoryName(v string) *PutLifecyclePolicyOutput {
-	s.RepositoryName = &v
-	return s
 }
 
 // An object representing a repository.
@@ -4093,36 +3235,6 @@ func (s Repository) String() string {
 // GoString returns the string representation
 func (s Repository) GoString() string {
 	return s.String()
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Repository) SetCreatedAt(v time.Time) *Repository {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *Repository) SetRegistryId(v string) *Repository {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryArn sets the RepositoryArn field's value.
-func (s *Repository) SetRepositoryArn(v string) *Repository {
-	s.RepositoryArn = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *Repository) SetRepositoryName(v string) *Repository {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetRepositoryUri sets the RepositoryUri field's value.
-func (s *Repository) SetRepositoryUri(v string) *Repository {
-	s.RepositoryUri = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicyRequest
@@ -4180,30 +3292,6 @@ func (s *SetRepositoryPolicyInput) Validate() error {
 	return nil
 }
 
-// SetForce sets the Force field's value.
-func (s *SetRepositoryPolicyInput) SetForce(v bool) *SetRepositoryPolicyInput {
-	s.Force = &v
-	return s
-}
-
-// SetPolicyText sets the PolicyText field's value.
-func (s *SetRepositoryPolicyInput) SetPolicyText(v string) *SetRepositoryPolicyInput {
-	s.PolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *SetRepositoryPolicyInput) SetRegistryId(v string) *SetRepositoryPolicyInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *SetRepositoryPolicyInput) SetRepositoryName(v string) *SetRepositoryPolicyInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicyResponse
 type SetRepositoryPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4233,24 +3321,6 @@ func (s SetRepositoryPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetRepositoryPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyText sets the PolicyText field's value.
-func (s *SetRepositoryPolicyOutput) SetPolicyText(v string) *SetRepositoryPolicyOutput {
-	s.PolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *SetRepositoryPolicyOutput) SetRegistryId(v string) *SetRepositoryPolicyOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *SetRepositoryPolicyOutput) SetRepositoryName(v string) *SetRepositoryPolicyOutput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartLifecyclePolicyPreviewRequest
@@ -4301,24 +3371,6 @@ func (s *StartLifecyclePolicyPreviewInput) Validate() error {
 	return nil
 }
 
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *StartLifecyclePolicyPreviewInput) SetLifecyclePolicyText(v string) *StartLifecyclePolicyPreviewInput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *StartLifecyclePolicyPreviewInput) SetRegistryId(v string) *StartLifecyclePolicyPreviewInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *StartLifecyclePolicyPreviewInput) SetRepositoryName(v string) *StartLifecyclePolicyPreviewInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartLifecyclePolicyPreviewResponse
 type StartLifecyclePolicyPreviewOutput struct {
 	_ struct{} `type:"structure"`
@@ -4351,30 +3403,6 @@ func (s StartLifecyclePolicyPreviewOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartLifecyclePolicyPreviewOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLifecyclePolicyText sets the LifecyclePolicyText field's value.
-func (s *StartLifecyclePolicyPreviewOutput) SetLifecyclePolicyText(v string) *StartLifecyclePolicyPreviewOutput {
-	s.LifecyclePolicyText = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *StartLifecyclePolicyPreviewOutput) SetRegistryId(v string) *StartLifecyclePolicyPreviewOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *StartLifecyclePolicyPreviewOutput) SetRepositoryName(v string) *StartLifecyclePolicyPreviewOutput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StartLifecyclePolicyPreviewOutput) SetStatus(v LifecyclePolicyPreviewStatus) *StartLifecyclePolicyPreviewOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPartRequest
@@ -4457,42 +3485,6 @@ func (s *UploadLayerPartInput) Validate() error {
 	return nil
 }
 
-// SetLayerPartBlob sets the LayerPartBlob field's value.
-func (s *UploadLayerPartInput) SetLayerPartBlob(v []byte) *UploadLayerPartInput {
-	s.LayerPartBlob = v
-	return s
-}
-
-// SetPartFirstByte sets the PartFirstByte field's value.
-func (s *UploadLayerPartInput) SetPartFirstByte(v int64) *UploadLayerPartInput {
-	s.PartFirstByte = &v
-	return s
-}
-
-// SetPartLastByte sets the PartLastByte field's value.
-func (s *UploadLayerPartInput) SetPartLastByte(v int64) *UploadLayerPartInput {
-	s.PartLastByte = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *UploadLayerPartInput) SetRegistryId(v string) *UploadLayerPartInput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *UploadLayerPartInput) SetRepositoryName(v string) *UploadLayerPartInput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *UploadLayerPartInput) SetUploadId(v string) *UploadLayerPartInput {
-	s.UploadId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPartResponse
 type UploadLayerPartOutput struct {
 	_ struct{} `type:"structure"`
@@ -4525,30 +3517,6 @@ func (s UploadLayerPartOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UploadLayerPartOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLastByteReceived sets the LastByteReceived field's value.
-func (s *UploadLayerPartOutput) SetLastByteReceived(v int64) *UploadLayerPartOutput {
-	s.LastByteReceived = &v
-	return s
-}
-
-// SetRegistryId sets the RegistryId field's value.
-func (s *UploadLayerPartOutput) SetRegistryId(v string) *UploadLayerPartOutput {
-	s.RegistryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *UploadLayerPartOutput) SetRepositoryName(v string) *UploadLayerPartOutput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *UploadLayerPartOutput) SetUploadId(v string) *UploadLayerPartOutput {
-	s.UploadId = &v
-	return s
 }
 
 type ImageActionType string

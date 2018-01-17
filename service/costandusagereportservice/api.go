@@ -230,12 +230,6 @@ func (s DeleteReportDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// SetReportName sets the ReportName field's value.
-func (s *DeleteReportDefinitionInput) SetReportName(v string) *DeleteReportDefinitionInput {
-	s.ReportName = &v
-	return s
-}
-
 // Response of DeleteReportDefinition
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinitionResponse
 type DeleteReportDefinitionOutput struct {
@@ -260,12 +254,6 @@ func (s DeleteReportDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteReportDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResponseMessage sets the ResponseMessage field's value.
-func (s *DeleteReportDefinitionOutput) SetResponseMessage(v string) *DeleteReportDefinitionOutput {
-	s.ResponseMessage = &v
-	return s
 }
 
 // Request of DescribeReportDefinitions
@@ -303,18 +291,6 @@ func (s *DescribeReportDefinitionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeReportDefinitionsInput) SetMaxResults(v int64) *DescribeReportDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeReportDefinitionsInput) SetNextToken(v string) *DescribeReportDefinitionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Response of DescribeReportDefinitions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitionsResponse
 type DescribeReportDefinitionsOutput struct {
@@ -342,18 +318,6 @@ func (s DescribeReportDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReportDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeReportDefinitionsOutput) SetNextToken(v string) *DescribeReportDefinitionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReportDefinitions sets the ReportDefinitions field's value.
-func (s *DescribeReportDefinitionsOutput) SetReportDefinitions(v []ReportDefinition) *DescribeReportDefinitionsOutput {
-	s.ReportDefinitions = v
-	return s
 }
 
 // Request of PutReportDefinition
@@ -396,12 +360,6 @@ func (s *PutReportDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetReportDefinition sets the ReportDefinition field's value.
-func (s *PutReportDefinitionInput) SetReportDefinition(v *ReportDefinition) *PutReportDefinitionInput {
-	s.ReportDefinition = v
-	return s
 }
 
 // Response of PutReportDefinition
@@ -525,60 +483,6 @@ func (s *ReportDefinition) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAdditionalArtifacts sets the AdditionalArtifacts field's value.
-func (s *ReportDefinition) SetAdditionalArtifacts(v []AdditionalArtifact) *ReportDefinition {
-	s.AdditionalArtifacts = v
-	return s
-}
-
-// SetAdditionalSchemaElements sets the AdditionalSchemaElements field's value.
-func (s *ReportDefinition) SetAdditionalSchemaElements(v []SchemaElement) *ReportDefinition {
-	s.AdditionalSchemaElements = v
-	return s
-}
-
-// SetCompression sets the Compression field's value.
-func (s *ReportDefinition) SetCompression(v CompressionFormat) *ReportDefinition {
-	s.Compression = v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *ReportDefinition) SetFormat(v ReportFormat) *ReportDefinition {
-	s.Format = v
-	return s
-}
-
-// SetReportName sets the ReportName field's value.
-func (s *ReportDefinition) SetReportName(v string) *ReportDefinition {
-	s.ReportName = &v
-	return s
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *ReportDefinition) SetS3Bucket(v string) *ReportDefinition {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Prefix sets the S3Prefix field's value.
-func (s *ReportDefinition) SetS3Prefix(v string) *ReportDefinition {
-	s.S3Prefix = &v
-	return s
-}
-
-// SetS3Region sets the S3Region field's value.
-func (s *ReportDefinition) SetS3Region(v AWSRegion) *ReportDefinition {
-	s.S3Region = v
-	return s
-}
-
-// SetTimeUnit sets the TimeUnit field's value.
-func (s *ReportDefinition) SetTimeUnit(v TimeUnit) *ReportDefinition {
-	s.TimeUnit = v
-	return s
 }
 
 // Region of customer S3 bucket.

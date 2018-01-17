@@ -777,30 +777,6 @@ func (s Attribute) GoString() string {
 	return s.String()
 }
 
-// SetAlternateNameEncoding sets the AlternateNameEncoding field's value.
-func (s *Attribute) SetAlternateNameEncoding(v string) *Attribute {
-	s.AlternateNameEncoding = &v
-	return s
-}
-
-// SetAlternateValueEncoding sets the AlternateValueEncoding field's value.
-func (s *Attribute) SetAlternateValueEncoding(v string) *Attribute {
-	s.AlternateValueEncoding = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Attribute) SetName(v string) *Attribute {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Attribute) SetValue(v string) *Attribute {
-	s.Value = &v
-	return s
-}
-
 type BatchDeleteAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -848,18 +824,6 @@ func (s *BatchDeleteAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *BatchDeleteAttributesInput) SetDomainName(v string) *BatchDeleteAttributesInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetItems sets the Items field's value.
-func (s *BatchDeleteAttributesInput) SetItems(v []DeletableItem) *BatchDeleteAttributesInput {
-	s.Items = v
-	return s
 }
 
 type BatchDeleteAttributesOutput struct {
@@ -932,18 +896,6 @@ func (s *BatchPutAttributesInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *BatchPutAttributesInput) SetDomainName(v string) *BatchPutAttributesInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetItems sets the Items field's value.
-func (s *BatchPutAttributesInput) SetItems(v []ReplaceableItem) *BatchPutAttributesInput {
-	s.Items = v
-	return s
-}
-
 type BatchPutAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -997,12 +949,6 @@ func (s *CreateDomainInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *CreateDomainInput) SetDomainName(v string) *CreateDomainInput {
-	s.DomainName = &v
-	return s
 }
 
 type CreateDomainOutput struct {
@@ -1062,18 +1008,6 @@ func (s *DeletableAttribute) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeletableAttribute) SetName(v string) *DeletableAttribute {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *DeletableAttribute) SetValue(v string) *DeletableAttribute {
-	s.Value = &v
-	return s
-}
-
 type DeletableItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1112,18 +1046,6 @@ func (s *DeletableItem) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *DeletableItem) SetAttributes(v []DeletableAttribute) *DeletableItem {
-	s.Attributes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeletableItem) SetName(v string) *DeletableItem {
-	s.Name = &v
-	return s
 }
 
 type DeleteAttributesInput struct {
@@ -1185,30 +1107,6 @@ func (s *DeleteAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *DeleteAttributesInput) SetAttributes(v []DeletableAttribute) *DeleteAttributesInput {
-	s.Attributes = v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *DeleteAttributesInput) SetDomainName(v string) *DeleteAttributesInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetExpected sets the Expected field's value.
-func (s *DeleteAttributesInput) SetExpected(v *UpdateCondition) *DeleteAttributesInput {
-	s.Expected = v
-	return s
-}
-
-// SetItemName sets the ItemName field's value.
-func (s *DeleteAttributesInput) SetItemName(v string) *DeleteAttributesInput {
-	s.ItemName = &v
-	return s
-}
-
 type DeleteAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1261,12 +1159,6 @@ func (s *DeleteDomainInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *DeleteDomainInput) SetDomainName(v string) *DeleteDomainInput {
-	s.DomainName = &v
-	return s
 }
 
 type DeleteDomainOutput struct {
@@ -1323,12 +1215,6 @@ func (s *DomainMetadataInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DomainMetadataInput) SetDomainName(v string) *DomainMetadataInput {
-	s.DomainName = &v
-	return s
-}
-
 type DomainMetadataOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1369,48 +1255,6 @@ func (s DomainMetadataOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DomainMetadataOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributeNameCount sets the AttributeNameCount field's value.
-func (s *DomainMetadataOutput) SetAttributeNameCount(v int64) *DomainMetadataOutput {
-	s.AttributeNameCount = &v
-	return s
-}
-
-// SetAttributeNamesSizeBytes sets the AttributeNamesSizeBytes field's value.
-func (s *DomainMetadataOutput) SetAttributeNamesSizeBytes(v int64) *DomainMetadataOutput {
-	s.AttributeNamesSizeBytes = &v
-	return s
-}
-
-// SetAttributeValueCount sets the AttributeValueCount field's value.
-func (s *DomainMetadataOutput) SetAttributeValueCount(v int64) *DomainMetadataOutput {
-	s.AttributeValueCount = &v
-	return s
-}
-
-// SetAttributeValuesSizeBytes sets the AttributeValuesSizeBytes field's value.
-func (s *DomainMetadataOutput) SetAttributeValuesSizeBytes(v int64) *DomainMetadataOutput {
-	s.AttributeValuesSizeBytes = &v
-	return s
-}
-
-// SetItemCount sets the ItemCount field's value.
-func (s *DomainMetadataOutput) SetItemCount(v int64) *DomainMetadataOutput {
-	s.ItemCount = &v
-	return s
-}
-
-// SetItemNamesSizeBytes sets the ItemNamesSizeBytes field's value.
-func (s *DomainMetadataOutput) SetItemNamesSizeBytes(v int64) *DomainMetadataOutput {
-	s.ItemNamesSizeBytes = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *DomainMetadataOutput) SetTimestamp(v int64) *DomainMetadataOutput {
-	s.Timestamp = &v
-	return s
 }
 
 type GetAttributesInput struct {
@@ -1462,30 +1306,6 @@ func (s *GetAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAttributeNames sets the AttributeNames field's value.
-func (s *GetAttributesInput) SetAttributeNames(v []string) *GetAttributesInput {
-	s.AttributeNames = v
-	return s
-}
-
-// SetConsistentRead sets the ConsistentRead field's value.
-func (s *GetAttributesInput) SetConsistentRead(v bool) *GetAttributesInput {
-	s.ConsistentRead = &v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *GetAttributesInput) SetDomainName(v string) *GetAttributesInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetItemName sets the ItemName field's value.
-func (s *GetAttributesInput) SetItemName(v string) *GetAttributesInput {
-	s.ItemName = &v
-	return s
-}
-
 type GetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1508,12 +1328,6 @@ func (s GetAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *GetAttributesOutput) SetAttributes(v []Attribute) *GetAttributesOutput {
-	s.Attributes = v
-	return s
 }
 
 type Item struct {
@@ -1542,24 +1356,6 @@ func (s Item) GoString() string {
 	return s.String()
 }
 
-// SetAlternateNameEncoding sets the AlternateNameEncoding field's value.
-func (s *Item) SetAlternateNameEncoding(v string) *Item {
-	s.AlternateNameEncoding = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *Item) SetAttributes(v []Attribute) *Item {
-	s.Attributes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Item) SetName(v string) *Item {
-	s.Name = &v
-	return s
-}
-
 type ListDomainsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1580,18 +1376,6 @@ func (s ListDomainsInput) String() string {
 // GoString returns the string representation
 func (s ListDomainsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxNumberOfDomains sets the MaxNumberOfDomains field's value.
-func (s *ListDomainsInput) SetMaxNumberOfDomains(v int64) *ListDomainsInput {
-	s.MaxNumberOfDomains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDomainsInput) SetNextToken(v string) *ListDomainsInput {
-	s.NextToken = &v
-	return s
 }
 
 type ListDomainsOutput struct {
@@ -1620,18 +1404,6 @@ func (s ListDomainsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDomainsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainNames sets the DomainNames field's value.
-func (s *ListDomainsOutput) SetDomainNames(v []string) *ListDomainsOutput {
-	s.DomainNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDomainsOutput) SetNextToken(v string) *ListDomainsOutput {
-	s.NextToken = &v
-	return s
 }
 
 type PutAttributesInput struct {
@@ -1695,30 +1467,6 @@ func (s *PutAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *PutAttributesInput) SetAttributes(v []ReplaceableAttribute) *PutAttributesInput {
-	s.Attributes = v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *PutAttributesInput) SetDomainName(v string) *PutAttributesInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetExpected sets the Expected field's value.
-func (s *PutAttributesInput) SetExpected(v *UpdateCondition) *PutAttributesInput {
-	s.Expected = v
-	return s
-}
-
-// SetItemName sets the ItemName field's value.
-func (s *PutAttributesInput) SetItemName(v string) *PutAttributesInput {
-	s.ItemName = &v
-	return s
 }
 
 type PutAttributesOutput struct {
@@ -1788,24 +1536,6 @@ func (s *ReplaceableAttribute) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *ReplaceableAttribute) SetName(v string) *ReplaceableAttribute {
-	s.Name = &v
-	return s
-}
-
-// SetReplace sets the Replace field's value.
-func (s *ReplaceableAttribute) SetReplace(v bool) *ReplaceableAttribute {
-	s.Replace = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ReplaceableAttribute) SetValue(v string) *ReplaceableAttribute {
-	s.Value = &v
-	return s
-}
-
 type ReplaceableItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1855,18 +1585,6 @@ func (s *ReplaceableItem) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *ReplaceableItem) SetAttributes(v []ReplaceableAttribute) *ReplaceableItem {
-	s.Attributes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ReplaceableItem) SetName(v string) *ReplaceableItem {
-	s.Name = &v
-	return s
-}
-
 type SelectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1907,24 +1625,6 @@ func (s *SelectInput) Validate() error {
 	return nil
 }
 
-// SetConsistentRead sets the ConsistentRead field's value.
-func (s *SelectInput) SetConsistentRead(v bool) *SelectInput {
-	s.ConsistentRead = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SelectInput) SetNextToken(v string) *SelectInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSelectExpression sets the SelectExpression field's value.
-func (s *SelectInput) SetSelectExpression(v string) *SelectInput {
-	s.SelectExpression = &v
-	return s
-}
-
 type SelectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1950,18 +1650,6 @@ func (s SelectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SelectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetItems sets the Items field's value.
-func (s *SelectOutput) SetItems(v []Item) *SelectOutput {
-	s.Items = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SelectOutput) SetNextToken(v string) *SelectOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Specifies the conditions under which data should be updated. If an update
@@ -1994,22 +1682,4 @@ func (s UpdateCondition) String() string {
 // GoString returns the string representation
 func (s UpdateCondition) GoString() string {
 	return s.String()
-}
-
-// SetExists sets the Exists field's value.
-func (s *UpdateCondition) SetExists(v bool) *UpdateCondition {
-	s.Exists = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateCondition) SetName(v string) *UpdateCondition {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *UpdateCondition) SetValue(v string) *UpdateCondition {
-	s.Value = &v
-	return s
 }

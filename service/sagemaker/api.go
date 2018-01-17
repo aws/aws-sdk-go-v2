@@ -2030,18 +2030,6 @@ func (s *AddTagsInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *AddTagsInput) SetResourceArn(v string) *AddTagsInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsInput) SetTags(v []Tag) *AddTagsInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2065,12 +2053,6 @@ func (s AddTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsOutput) SetTags(v []Tag) *AddTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // Specifies the training algorithm to use in a CreateTrainingJob (http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html)
@@ -2141,18 +2123,6 @@ func (s *AlgorithmSpecification) Validate() error {
 	return nil
 }
 
-// SetTrainingImage sets the TrainingImage field's value.
-func (s *AlgorithmSpecification) SetTrainingImage(v string) *AlgorithmSpecification {
-	s.TrainingImage = &v
-	return s
-}
-
-// SetTrainingInputMode sets the TrainingInputMode field's value.
-func (s *AlgorithmSpecification) SetTrainingInputMode(v TrainingInputMode) *AlgorithmSpecification {
-	s.TrainingInputMode = v
-	return s
-}
-
 // A channel is a named input source that training algorithms can consume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel
 type Channel struct {
@@ -2220,36 +2190,6 @@ func (s *Channel) Validate() error {
 	return nil
 }
 
-// SetChannelName sets the ChannelName field's value.
-func (s *Channel) SetChannelName(v string) *Channel {
-	s.ChannelName = &v
-	return s
-}
-
-// SetCompressionType sets the CompressionType field's value.
-func (s *Channel) SetCompressionType(v CompressionType) *Channel {
-	s.CompressionType = v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *Channel) SetContentType(v string) *Channel {
-	s.ContentType = &v
-	return s
-}
-
-// SetDataSource sets the DataSource field's value.
-func (s *Channel) SetDataSource(v *DataSource) *Channel {
-	s.DataSource = v
-	return s
-}
-
-// SetRecordWrapperType sets the RecordWrapperType field's value.
-func (s *Channel) SetRecordWrapperType(v RecordWrapper) *Channel {
-	s.RecordWrapperType = v
-	return s
-}
-
 // Describes the container, as part of model definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContainerDefinition
 type ContainerDefinition struct {
@@ -2300,30 +2240,6 @@ func (s *ContainerDefinition) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetContainerHostname sets the ContainerHostname field's value.
-func (s *ContainerDefinition) SetContainerHostname(v string) *ContainerDefinition {
-	s.ContainerHostname = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *ContainerDefinition) SetEnvironment(v map[string]string) *ContainerDefinition {
-	s.Environment = v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ContainerDefinition) SetImage(v string) *ContainerDefinition {
-	s.Image = &v
-	return s
-}
-
-// SetModelDataUrl sets the ModelDataUrl field's value.
-func (s *ContainerDefinition) SetModelDataUrl(v string) *ContainerDefinition {
-	s.ModelDataUrl = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput
@@ -2394,24 +2310,6 @@ func (s *CreateEndpointConfigInput) Validate() error {
 	return nil
 }
 
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *CreateEndpointConfigInput) SetEndpointConfigName(v string) *CreateEndpointConfigInput {
-	s.EndpointConfigName = &v
-	return s
-}
-
-// SetProductionVariants sets the ProductionVariants field's value.
-func (s *CreateEndpointConfigInput) SetProductionVariants(v []ProductionVariant) *CreateEndpointConfigInput {
-	s.ProductionVariants = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateEndpointConfigInput) SetTags(v []Tag) *CreateEndpointConfigInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigOutput
 type CreateEndpointConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -2437,12 +2335,6 @@ func (s CreateEndpointConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEndpointConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointConfigArn sets the EndpointConfigArn field's value.
-func (s *CreateEndpointConfigOutput) SetEndpointConfigArn(v string) *CreateEndpointConfigOutput {
-	s.EndpointConfigArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointInput
@@ -2502,24 +2394,6 @@ func (s *CreateEndpointInput) Validate() error {
 	return nil
 }
 
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *CreateEndpointInput) SetEndpointConfigName(v string) *CreateEndpointInput {
-	s.EndpointConfigName = &v
-	return s
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *CreateEndpointInput) SetEndpointName(v string) *CreateEndpointInput {
-	s.EndpointName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateEndpointInput) SetTags(v []Tag) *CreateEndpointInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointOutput
 type CreateEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -2545,12 +2419,6 @@ func (s CreateEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *CreateEndpointOutput) SetEndpointArn(v string) *CreateEndpointOutput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput
@@ -2630,30 +2498,6 @@ func (s *CreateModelInput) Validate() error {
 	return nil
 }
 
-// SetExecutionRoleArn sets the ExecutionRoleArn field's value.
-func (s *CreateModelInput) SetExecutionRoleArn(v string) *CreateModelInput {
-	s.ExecutionRoleArn = &v
-	return s
-}
-
-// SetModelName sets the ModelName field's value.
-func (s *CreateModelInput) SetModelName(v string) *CreateModelInput {
-	s.ModelName = &v
-	return s
-}
-
-// SetPrimaryContainer sets the PrimaryContainer field's value.
-func (s *CreateModelInput) SetPrimaryContainer(v *ContainerDefinition) *CreateModelInput {
-	s.PrimaryContainer = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateModelInput) SetTags(v []Tag) *CreateModelInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelOutput
 type CreateModelOutput struct {
 	_ struct{} `type:"structure"`
@@ -2679,12 +2523,6 @@ func (s CreateModelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateModelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetModelArn sets the ModelArn field's value.
-func (s *CreateModelOutput) SetModelArn(v string) *CreateModelOutput {
-	s.ModelArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput
@@ -2769,48 +2607,6 @@ func (s *CreateNotebookInstanceInput) Validate() error {
 	return nil
 }
 
-// SetInstanceType sets the InstanceType field's value.
-func (s *CreateNotebookInstanceInput) SetInstanceType(v InstanceType) *CreateNotebookInstanceInput {
-	s.InstanceType = v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateNotebookInstanceInput) SetKmsKeyId(v string) *CreateNotebookInstanceInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *CreateNotebookInstanceInput) SetNotebookInstanceName(v string) *CreateNotebookInstanceInput {
-	s.NotebookInstanceName = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateNotebookInstanceInput) SetRoleArn(v string) *CreateNotebookInstanceInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateNotebookInstanceInput) SetSecurityGroupIds(v []string) *CreateNotebookInstanceInput {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *CreateNotebookInstanceInput) SetSubnetId(v string) *CreateNotebookInstanceInput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateNotebookInstanceInput) SetTags(v []Tag) *CreateNotebookInstanceInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceOutput
 type CreateNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2834,12 +2630,6 @@ func (s CreateNotebookInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNotebookInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNotebookInstanceArn sets the NotebookInstanceArn field's value.
-func (s *CreateNotebookInstanceOutput) SetNotebookInstanceArn(v string) *CreateNotebookInstanceOutput {
-	s.NotebookInstanceArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrlInput
@@ -2882,18 +2672,6 @@ func (s *CreatePresignedNotebookInstanceUrlInput) Validate() error {
 	return nil
 }
 
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *CreatePresignedNotebookInstanceUrlInput) SetNotebookInstanceName(v string) *CreatePresignedNotebookInstanceUrlInput {
-	s.NotebookInstanceName = &v
-	return s
-}
-
-// SetSessionExpirationDurationInSeconds sets the SessionExpirationDurationInSeconds field's value.
-func (s *CreatePresignedNotebookInstanceUrlInput) SetSessionExpirationDurationInSeconds(v int64) *CreatePresignedNotebookInstanceUrlInput {
-	s.SessionExpirationDurationInSeconds = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedNotebookInstanceUrlOutput
 type CreatePresignedNotebookInstanceUrlOutput struct {
 	_ struct{} `type:"structure"`
@@ -2917,12 +2695,6 @@ func (s CreatePresignedNotebookInstanceUrlOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePresignedNotebookInstanceUrlOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizedUrl sets the AuthorizedUrl field's value.
-func (s *CreatePresignedNotebookInstanceUrlOutput) SetAuthorizedUrl(v string) *CreatePresignedNotebookInstanceUrlOutput {
-	s.AuthorizedUrl = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest
@@ -3111,60 +2883,6 @@ func (s *CreateTrainingJobInput) Validate() error {
 	return nil
 }
 
-// SetAlgorithmSpecification sets the AlgorithmSpecification field's value.
-func (s *CreateTrainingJobInput) SetAlgorithmSpecification(v *AlgorithmSpecification) *CreateTrainingJobInput {
-	s.AlgorithmSpecification = v
-	return s
-}
-
-// SetHyperParameters sets the HyperParameters field's value.
-func (s *CreateTrainingJobInput) SetHyperParameters(v map[string]string) *CreateTrainingJobInput {
-	s.HyperParameters = v
-	return s
-}
-
-// SetInputDataConfig sets the InputDataConfig field's value.
-func (s *CreateTrainingJobInput) SetInputDataConfig(v []Channel) *CreateTrainingJobInput {
-	s.InputDataConfig = v
-	return s
-}
-
-// SetOutputDataConfig sets the OutputDataConfig field's value.
-func (s *CreateTrainingJobInput) SetOutputDataConfig(v *OutputDataConfig) *CreateTrainingJobInput {
-	s.OutputDataConfig = v
-	return s
-}
-
-// SetResourceConfig sets the ResourceConfig field's value.
-func (s *CreateTrainingJobInput) SetResourceConfig(v *ResourceConfig) *CreateTrainingJobInput {
-	s.ResourceConfig = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateTrainingJobInput) SetRoleArn(v string) *CreateTrainingJobInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStoppingCondition sets the StoppingCondition field's value.
-func (s *CreateTrainingJobInput) SetStoppingCondition(v *StoppingCondition) *CreateTrainingJobInput {
-	s.StoppingCondition = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateTrainingJobInput) SetTags(v []Tag) *CreateTrainingJobInput {
-	s.Tags = v
-	return s
-}
-
-// SetTrainingJobName sets the TrainingJobName field's value.
-func (s *CreateTrainingJobInput) SetTrainingJobName(v string) *CreateTrainingJobInput {
-	s.TrainingJobName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobResponse
 type CreateTrainingJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -3190,12 +2908,6 @@ func (s CreateTrainingJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTrainingJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTrainingJobArn sets the TrainingJobArn field's value.
-func (s *CreateTrainingJobOutput) SetTrainingJobArn(v string) *CreateTrainingJobOutput {
-	s.TrainingJobArn = &v
-	return s
 }
 
 // Describes the location of the channel data.
@@ -3238,12 +2950,6 @@ func (s *DataSource) Validate() error {
 	return nil
 }
 
-// SetS3DataSource sets the S3DataSource field's value.
-func (s *DataSource) SetS3DataSource(v *S3DataSource) *DataSource {
-	s.S3DataSource = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigInput
 type DeleteEndpointConfigInput struct {
 	_ struct{} `type:"structure"`
@@ -3276,12 +2982,6 @@ func (s *DeleteEndpointConfigInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *DeleteEndpointConfigInput) SetEndpointConfigName(v string) *DeleteEndpointConfigInput {
-	s.EndpointConfigName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigOutput
@@ -3340,12 +3040,6 @@ func (s *DeleteEndpointInput) Validate() error {
 	return nil
 }
 
-// SetEndpointName sets the EndpointName field's value.
-func (s *DeleteEndpointInput) SetEndpointName(v string) *DeleteEndpointInput {
-	s.EndpointName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointOutput
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -3402,12 +3096,6 @@ func (s *DeleteModelInput) Validate() error {
 	return nil
 }
 
-// SetModelName sets the ModelName field's value.
-func (s *DeleteModelInput) SetModelName(v string) *DeleteModelInput {
-	s.ModelName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelOutput
 type DeleteModelOutput struct {
 	_ struct{} `type:"structure"`
@@ -3462,12 +3150,6 @@ func (s *DeleteNotebookInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *DeleteNotebookInstanceInput) SetNotebookInstanceName(v string) *DeleteNotebookInstanceInput {
-	s.NotebookInstanceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceOutput
@@ -3538,18 +3220,6 @@ func (s *DeleteTagsInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *DeleteTagsInput) SetResourceArn(v string) *DeleteTagsInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *DeleteTagsInput) SetTagKeys(v []string) *DeleteTagsInput {
-	s.TagKeys = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3606,12 +3276,6 @@ func (s *DescribeEndpointConfigInput) Validate() error {
 	return nil
 }
 
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *DescribeEndpointConfigInput) SetEndpointConfigName(v string) *DescribeEndpointConfigInput {
-	s.EndpointConfigName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigOutput
 type DescribeEndpointConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -3655,30 +3319,6 @@ func (s DescribeEndpointConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *DescribeEndpointConfigOutput) SetCreationTime(v time.Time) *DescribeEndpointConfigOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetEndpointConfigArn sets the EndpointConfigArn field's value.
-func (s *DescribeEndpointConfigOutput) SetEndpointConfigArn(v string) *DescribeEndpointConfigOutput {
-	s.EndpointConfigArn = &v
-	return s
-}
-
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *DescribeEndpointConfigOutput) SetEndpointConfigName(v string) *DescribeEndpointConfigOutput {
-	s.EndpointConfigName = &v
-	return s
-}
-
-// SetProductionVariants sets the ProductionVariants field's value.
-func (s *DescribeEndpointConfigOutput) SetProductionVariants(v []ProductionVariant) *DescribeEndpointConfigOutput {
-	s.ProductionVariants = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointInput
 type DescribeEndpointInput struct {
 	_ struct{} `type:"structure"`
@@ -3711,12 +3351,6 @@ func (s *DescribeEndpointInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *DescribeEndpointInput) SetEndpointName(v string) *DescribeEndpointInput {
-	s.EndpointName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput
@@ -3778,54 +3412,6 @@ func (s DescribeEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *DescribeEndpointOutput) SetCreationTime(v time.Time) *DescribeEndpointOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *DescribeEndpointOutput) SetEndpointArn(v string) *DescribeEndpointOutput {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *DescribeEndpointOutput) SetEndpointConfigName(v string) *DescribeEndpointOutput {
-	s.EndpointConfigName = &v
-	return s
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *DescribeEndpointOutput) SetEndpointName(v string) *DescribeEndpointOutput {
-	s.EndpointName = &v
-	return s
-}
-
-// SetEndpointStatus sets the EndpointStatus field's value.
-func (s *DescribeEndpointOutput) SetEndpointStatus(v EndpointStatus) *DescribeEndpointOutput {
-	s.EndpointStatus = v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *DescribeEndpointOutput) SetFailureReason(v string) *DescribeEndpointOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *DescribeEndpointOutput) SetLastModifiedTime(v time.Time) *DescribeEndpointOutput {
-	s.LastModifiedTime = &v
-	return s
-}
-
-// SetProductionVariants sets the ProductionVariants field's value.
-func (s *DescribeEndpointOutput) SetProductionVariants(v []ProductionVariantSummary) *DescribeEndpointOutput {
-	s.ProductionVariants = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelInput
 type DescribeModelInput struct {
 	_ struct{} `type:"structure"`
@@ -3858,12 +3444,6 @@ func (s *DescribeModelInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetModelName sets the ModelName field's value.
-func (s *DescribeModelInput) SetModelName(v string) *DescribeModelInput {
-	s.ModelName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput
@@ -3915,36 +3495,6 @@ func (s DescribeModelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *DescribeModelOutput) SetCreationTime(v time.Time) *DescribeModelOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetExecutionRoleArn sets the ExecutionRoleArn field's value.
-func (s *DescribeModelOutput) SetExecutionRoleArn(v string) *DescribeModelOutput {
-	s.ExecutionRoleArn = &v
-	return s
-}
-
-// SetModelArn sets the ModelArn field's value.
-func (s *DescribeModelOutput) SetModelArn(v string) *DescribeModelOutput {
-	s.ModelArn = &v
-	return s
-}
-
-// SetModelName sets the ModelName field's value.
-func (s *DescribeModelOutput) SetModelName(v string) *DescribeModelOutput {
-	s.ModelName = &v
-	return s
-}
-
-// SetPrimaryContainer sets the PrimaryContainer field's value.
-func (s *DescribeModelOutput) SetPrimaryContainer(v *ContainerDefinition) *DescribeModelOutput {
-	s.PrimaryContainer = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceInput
 type DescribeNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -3977,12 +3527,6 @@ func (s *DescribeNotebookInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *DescribeNotebookInstanceInput) SetNotebookInstanceName(v string) *DescribeNotebookInstanceInput {
-	s.NotebookInstanceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput
@@ -4051,84 +3595,6 @@ func (s DescribeNotebookInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *DescribeNotebookInstanceOutput) SetCreationTime(v time.Time) *DescribeNotebookInstanceOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *DescribeNotebookInstanceOutput) SetFailureReason(v string) *DescribeNotebookInstanceOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *DescribeNotebookInstanceOutput) SetInstanceType(v InstanceType) *DescribeNotebookInstanceOutput {
-	s.InstanceType = v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *DescribeNotebookInstanceOutput) SetKmsKeyId(v string) *DescribeNotebookInstanceOutput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *DescribeNotebookInstanceOutput) SetLastModifiedTime(v time.Time) *DescribeNotebookInstanceOutput {
-	s.LastModifiedTime = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *DescribeNotebookInstanceOutput) SetNetworkInterfaceId(v string) *DescribeNotebookInstanceOutput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetNotebookInstanceArn sets the NotebookInstanceArn field's value.
-func (s *DescribeNotebookInstanceOutput) SetNotebookInstanceArn(v string) *DescribeNotebookInstanceOutput {
-	s.NotebookInstanceArn = &v
-	return s
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *DescribeNotebookInstanceOutput) SetNotebookInstanceName(v string) *DescribeNotebookInstanceOutput {
-	s.NotebookInstanceName = &v
-	return s
-}
-
-// SetNotebookInstanceStatus sets the NotebookInstanceStatus field's value.
-func (s *DescribeNotebookInstanceOutput) SetNotebookInstanceStatus(v NotebookInstanceStatus) *DescribeNotebookInstanceOutput {
-	s.NotebookInstanceStatus = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeNotebookInstanceOutput) SetRoleArn(v string) *DescribeNotebookInstanceOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *DescribeNotebookInstanceOutput) SetSecurityGroups(v []string) *DescribeNotebookInstanceOutput {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *DescribeNotebookInstanceOutput) SetSubnetId(v string) *DescribeNotebookInstanceOutput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *DescribeNotebookInstanceOutput) SetUrl(v string) *DescribeNotebookInstanceOutput {
-	s.Url = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobRequest
 type DescribeTrainingJobInput struct {
 	_ struct{} `type:"structure"`
@@ -4164,12 +3630,6 @@ func (s *DescribeTrainingJobInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTrainingJobName sets the TrainingJobName field's value.
-func (s *DescribeTrainingJobInput) SetTrainingJobName(v string) *DescribeTrainingJobInput {
-	s.TrainingJobName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJobResponse
@@ -4287,108 +3747,6 @@ func (s DescribeTrainingJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAlgorithmSpecification sets the AlgorithmSpecification field's value.
-func (s *DescribeTrainingJobOutput) SetAlgorithmSpecification(v *AlgorithmSpecification) *DescribeTrainingJobOutput {
-	s.AlgorithmSpecification = v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *DescribeTrainingJobOutput) SetCreationTime(v time.Time) *DescribeTrainingJobOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *DescribeTrainingJobOutput) SetFailureReason(v string) *DescribeTrainingJobOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetHyperParameters sets the HyperParameters field's value.
-func (s *DescribeTrainingJobOutput) SetHyperParameters(v map[string]string) *DescribeTrainingJobOutput {
-	s.HyperParameters = v
-	return s
-}
-
-// SetInputDataConfig sets the InputDataConfig field's value.
-func (s *DescribeTrainingJobOutput) SetInputDataConfig(v []Channel) *DescribeTrainingJobOutput {
-	s.InputDataConfig = v
-	return s
-}
-
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *DescribeTrainingJobOutput) SetLastModifiedTime(v time.Time) *DescribeTrainingJobOutput {
-	s.LastModifiedTime = &v
-	return s
-}
-
-// SetModelArtifacts sets the ModelArtifacts field's value.
-func (s *DescribeTrainingJobOutput) SetModelArtifacts(v *ModelArtifacts) *DescribeTrainingJobOutput {
-	s.ModelArtifacts = v
-	return s
-}
-
-// SetOutputDataConfig sets the OutputDataConfig field's value.
-func (s *DescribeTrainingJobOutput) SetOutputDataConfig(v *OutputDataConfig) *DescribeTrainingJobOutput {
-	s.OutputDataConfig = v
-	return s
-}
-
-// SetResourceConfig sets the ResourceConfig field's value.
-func (s *DescribeTrainingJobOutput) SetResourceConfig(v *ResourceConfig) *DescribeTrainingJobOutput {
-	s.ResourceConfig = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeTrainingJobOutput) SetRoleArn(v string) *DescribeTrainingJobOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSecondaryStatus sets the SecondaryStatus field's value.
-func (s *DescribeTrainingJobOutput) SetSecondaryStatus(v SecondaryStatus) *DescribeTrainingJobOutput {
-	s.SecondaryStatus = v
-	return s
-}
-
-// SetStoppingCondition sets the StoppingCondition field's value.
-func (s *DescribeTrainingJobOutput) SetStoppingCondition(v *StoppingCondition) *DescribeTrainingJobOutput {
-	s.StoppingCondition = v
-	return s
-}
-
-// SetTrainingEndTime sets the TrainingEndTime field's value.
-func (s *DescribeTrainingJobOutput) SetTrainingEndTime(v time.Time) *DescribeTrainingJobOutput {
-	s.TrainingEndTime = &v
-	return s
-}
-
-// SetTrainingJobArn sets the TrainingJobArn field's value.
-func (s *DescribeTrainingJobOutput) SetTrainingJobArn(v string) *DescribeTrainingJobOutput {
-	s.TrainingJobArn = &v
-	return s
-}
-
-// SetTrainingJobName sets the TrainingJobName field's value.
-func (s *DescribeTrainingJobOutput) SetTrainingJobName(v string) *DescribeTrainingJobOutput {
-	s.TrainingJobName = &v
-	return s
-}
-
-// SetTrainingJobStatus sets the TrainingJobStatus field's value.
-func (s *DescribeTrainingJobOutput) SetTrainingJobStatus(v TrainingJobStatus) *DescribeTrainingJobOutput {
-	s.TrainingJobStatus = v
-	return s
-}
-
-// SetTrainingStartTime sets the TrainingStartTime field's value.
-func (s *DescribeTrainingJobOutput) SetTrainingStartTime(v time.Time) *DescribeTrainingJobOutput {
-	s.TrainingStartTime = &v
-	return s
-}
-
 // Specifies weight and capacity values for a production variant.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DesiredWeightAndCapacity
 type DesiredWeightAndCapacity struct {
@@ -4433,24 +3791,6 @@ func (s *DesiredWeightAndCapacity) Validate() error {
 	return nil
 }
 
-// SetDesiredInstanceCount sets the DesiredInstanceCount field's value.
-func (s *DesiredWeightAndCapacity) SetDesiredInstanceCount(v int64) *DesiredWeightAndCapacity {
-	s.DesiredInstanceCount = &v
-	return s
-}
-
-// SetDesiredWeight sets the DesiredWeight field's value.
-func (s *DesiredWeightAndCapacity) SetDesiredWeight(v float64) *DesiredWeightAndCapacity {
-	s.DesiredWeight = &v
-	return s
-}
-
-// SetVariantName sets the VariantName field's value.
-func (s *DesiredWeightAndCapacity) SetVariantName(v string) *DesiredWeightAndCapacity {
-	s.VariantName = &v
-	return s
-}
-
 // Provides summary information for an endpoint configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointConfigSummary
 type EndpointConfigSummary struct {
@@ -4480,24 +3820,6 @@ func (s EndpointConfigSummary) String() string {
 // GoString returns the string representation
 func (s EndpointConfigSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *EndpointConfigSummary) SetCreationTime(v time.Time) *EndpointConfigSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetEndpointConfigArn sets the EndpointConfigArn field's value.
-func (s *EndpointConfigSummary) SetEndpointConfigArn(v string) *EndpointConfigSummary {
-	s.EndpointConfigArn = &v
-	return s
-}
-
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *EndpointConfigSummary) SetEndpointConfigName(v string) *EndpointConfigSummary {
-	s.EndpointConfigName = &v
-	return s
 }
 
 // Provides summary information for an endpoint.
@@ -4539,36 +3861,6 @@ func (s EndpointSummary) String() string {
 // GoString returns the string representation
 func (s EndpointSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *EndpointSummary) SetCreationTime(v time.Time) *EndpointSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *EndpointSummary) SetEndpointArn(v string) *EndpointSummary {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *EndpointSummary) SetEndpointName(v string) *EndpointSummary {
-	s.EndpointName = &v
-	return s
-}
-
-// SetEndpointStatus sets the EndpointStatus field's value.
-func (s *EndpointSummary) SetEndpointStatus(v EndpointStatus) *EndpointSummary {
-	s.EndpointStatus = v
-	return s
-}
-
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *EndpointSummary) SetLastModifiedTime(v time.Time) *EndpointSummary {
-	s.LastModifiedTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsInput
@@ -4625,48 +3917,6 @@ func (s *ListEndpointConfigsInput) Validate() error {
 	return nil
 }
 
-// SetCreationTimeAfter sets the CreationTimeAfter field's value.
-func (s *ListEndpointConfigsInput) SetCreationTimeAfter(v time.Time) *ListEndpointConfigsInput {
-	s.CreationTimeAfter = &v
-	return s
-}
-
-// SetCreationTimeBefore sets the CreationTimeBefore field's value.
-func (s *ListEndpointConfigsInput) SetCreationTimeBefore(v time.Time) *ListEndpointConfigsInput {
-	s.CreationTimeBefore = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListEndpointConfigsInput) SetMaxResults(v int64) *ListEndpointConfigsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *ListEndpointConfigsInput) SetNameContains(v string) *ListEndpointConfigsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEndpointConfigsInput) SetNextToken(v string) *ListEndpointConfigsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListEndpointConfigsInput) SetSortBy(v EndpointConfigSortKey) *ListEndpointConfigsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListEndpointConfigsInput) SetSortOrder(v OrderKey) *ListEndpointConfigsInput {
-	s.SortOrder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsOutput
 type ListEndpointConfigsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4696,18 +3946,6 @@ func (s ListEndpointConfigsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListEndpointConfigsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointConfigs sets the EndpointConfigs field's value.
-func (s *ListEndpointConfigsOutput) SetEndpointConfigs(v []EndpointConfigSummary) *ListEndpointConfigsOutput {
-	s.EndpointConfigs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEndpointConfigsOutput) SetNextToken(v string) *ListEndpointConfigsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointsInput
@@ -4775,66 +4013,6 @@ func (s *ListEndpointsInput) Validate() error {
 	return nil
 }
 
-// SetCreationTimeAfter sets the CreationTimeAfter field's value.
-func (s *ListEndpointsInput) SetCreationTimeAfter(v time.Time) *ListEndpointsInput {
-	s.CreationTimeAfter = &v
-	return s
-}
-
-// SetCreationTimeBefore sets the CreationTimeBefore field's value.
-func (s *ListEndpointsInput) SetCreationTimeBefore(v time.Time) *ListEndpointsInput {
-	s.CreationTimeBefore = &v
-	return s
-}
-
-// SetLastModifiedTimeAfter sets the LastModifiedTimeAfter field's value.
-func (s *ListEndpointsInput) SetLastModifiedTimeAfter(v time.Time) *ListEndpointsInput {
-	s.LastModifiedTimeAfter = &v
-	return s
-}
-
-// SetLastModifiedTimeBefore sets the LastModifiedTimeBefore field's value.
-func (s *ListEndpointsInput) SetLastModifiedTimeBefore(v time.Time) *ListEndpointsInput {
-	s.LastModifiedTimeBefore = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListEndpointsInput) SetMaxResults(v int64) *ListEndpointsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *ListEndpointsInput) SetNameContains(v string) *ListEndpointsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEndpointsInput) SetNextToken(v string) *ListEndpointsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListEndpointsInput) SetSortBy(v EndpointSortKey) *ListEndpointsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListEndpointsInput) SetSortOrder(v OrderKey) *ListEndpointsInput {
-	s.SortOrder = v
-	return s
-}
-
-// SetStatusEquals sets the StatusEquals field's value.
-func (s *ListEndpointsInput) SetStatusEquals(v EndpointStatus) *ListEndpointsInput {
-	s.StatusEquals = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointsOutput
 type ListEndpointsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4864,18 +4042,6 @@ func (s ListEndpointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpoints sets the Endpoints field's value.
-func (s *ListEndpointsOutput) SetEndpoints(v []EndpointSummary) *ListEndpointsOutput {
-	s.Endpoints = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEndpointsOutput) SetNextToken(v string) *ListEndpointsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsInput
@@ -4930,48 +4096,6 @@ func (s *ListModelsInput) Validate() error {
 	return nil
 }
 
-// SetCreationTimeAfter sets the CreationTimeAfter field's value.
-func (s *ListModelsInput) SetCreationTimeAfter(v time.Time) *ListModelsInput {
-	s.CreationTimeAfter = &v
-	return s
-}
-
-// SetCreationTimeBefore sets the CreationTimeBefore field's value.
-func (s *ListModelsInput) SetCreationTimeBefore(v time.Time) *ListModelsInput {
-	s.CreationTimeBefore = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListModelsInput) SetMaxResults(v int64) *ListModelsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *ListModelsInput) SetNameContains(v string) *ListModelsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListModelsInput) SetNextToken(v string) *ListModelsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListModelsInput) SetSortBy(v ModelSortKey) *ListModelsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListModelsInput) SetSortOrder(v OrderKey) *ListModelsInput {
-	s.SortOrder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsOutput
 type ListModelsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5001,18 +4125,6 @@ func (s ListModelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListModelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetModels sets the Models field's value.
-func (s *ListModelsOutput) SetModels(v []ModelSummary) *ListModelsOutput {
-	s.Models = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListModelsOutput) SetNextToken(v string) *ListModelsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput
@@ -5084,66 +4196,6 @@ func (s *ListNotebookInstancesInput) Validate() error {
 	return nil
 }
 
-// SetCreationTimeAfter sets the CreationTimeAfter field's value.
-func (s *ListNotebookInstancesInput) SetCreationTimeAfter(v time.Time) *ListNotebookInstancesInput {
-	s.CreationTimeAfter = &v
-	return s
-}
-
-// SetCreationTimeBefore sets the CreationTimeBefore field's value.
-func (s *ListNotebookInstancesInput) SetCreationTimeBefore(v time.Time) *ListNotebookInstancesInput {
-	s.CreationTimeBefore = &v
-	return s
-}
-
-// SetLastModifiedTimeAfter sets the LastModifiedTimeAfter field's value.
-func (s *ListNotebookInstancesInput) SetLastModifiedTimeAfter(v time.Time) *ListNotebookInstancesInput {
-	s.LastModifiedTimeAfter = &v
-	return s
-}
-
-// SetLastModifiedTimeBefore sets the LastModifiedTimeBefore field's value.
-func (s *ListNotebookInstancesInput) SetLastModifiedTimeBefore(v time.Time) *ListNotebookInstancesInput {
-	s.LastModifiedTimeBefore = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListNotebookInstancesInput) SetMaxResults(v int64) *ListNotebookInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *ListNotebookInstancesInput) SetNameContains(v string) *ListNotebookInstancesInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNotebookInstancesInput) SetNextToken(v string) *ListNotebookInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListNotebookInstancesInput) SetSortBy(v NotebookInstanceSortKey) *ListNotebookInstancesInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListNotebookInstancesInput) SetSortOrder(v NotebookInstanceSortOrder) *ListNotebookInstancesInput {
-	s.SortOrder = v
-	return s
-}
-
-// SetStatusEquals sets the StatusEquals field's value.
-func (s *ListNotebookInstancesInput) SetStatusEquals(v NotebookInstanceStatus) *ListNotebookInstancesInput {
-	s.StatusEquals = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesOutput
 type ListNotebookInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5172,18 +4224,6 @@ func (s ListNotebookInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListNotebookInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNotebookInstancesOutput) SetNextToken(v string) *ListNotebookInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNotebookInstances sets the NotebookInstances field's value.
-func (s *ListNotebookInstancesOutput) SetNotebookInstances(v []NotebookInstanceSummary) *ListNotebookInstancesOutput {
-	s.NotebookInstances = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTagsInput
@@ -5231,24 +4271,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTagsInput) SetMaxResults(v int64) *ListTagsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsInput) SetNextToken(v string) *ListTagsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsInput) SetResourceArn(v string) *ListTagsInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTagsOutput
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5276,18 +4298,6 @@ func (s ListTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v []Tag) *ListTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsRequest
@@ -5354,66 +4364,6 @@ func (s *ListTrainingJobsInput) Validate() error {
 	return nil
 }
 
-// SetCreationTimeAfter sets the CreationTimeAfter field's value.
-func (s *ListTrainingJobsInput) SetCreationTimeAfter(v time.Time) *ListTrainingJobsInput {
-	s.CreationTimeAfter = &v
-	return s
-}
-
-// SetCreationTimeBefore sets the CreationTimeBefore field's value.
-func (s *ListTrainingJobsInput) SetCreationTimeBefore(v time.Time) *ListTrainingJobsInput {
-	s.CreationTimeBefore = &v
-	return s
-}
-
-// SetLastModifiedTimeAfter sets the LastModifiedTimeAfter field's value.
-func (s *ListTrainingJobsInput) SetLastModifiedTimeAfter(v time.Time) *ListTrainingJobsInput {
-	s.LastModifiedTimeAfter = &v
-	return s
-}
-
-// SetLastModifiedTimeBefore sets the LastModifiedTimeBefore field's value.
-func (s *ListTrainingJobsInput) SetLastModifiedTimeBefore(v time.Time) *ListTrainingJobsInput {
-	s.LastModifiedTimeBefore = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTrainingJobsInput) SetMaxResults(v int64) *ListTrainingJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *ListTrainingJobsInput) SetNameContains(v string) *ListTrainingJobsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTrainingJobsInput) SetNextToken(v string) *ListTrainingJobsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListTrainingJobsInput) SetSortBy(v SortBy) *ListTrainingJobsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListTrainingJobsInput) SetSortOrder(v SortOrder) *ListTrainingJobsInput {
-	s.SortOrder = v
-	return s
-}
-
-// SetStatusEquals sets the StatusEquals field's value.
-func (s *ListTrainingJobsInput) SetStatusEquals(v TrainingJobStatus) *ListTrainingJobsInput {
-	s.StatusEquals = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsResponse
 type ListTrainingJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5445,18 +4395,6 @@ func (s ListTrainingJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListTrainingJobsOutput) SetNextToken(v string) *ListTrainingJobsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTrainingJobSummaries sets the TrainingJobSummaries field's value.
-func (s *ListTrainingJobsOutput) SetTrainingJobSummaries(v []TrainingJobSummary) *ListTrainingJobsOutput {
-	s.TrainingJobSummaries = v
-	return s
-}
-
 // Provides information about the location that is configured for storing model
 // artifacts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelArtifacts
@@ -5478,12 +4416,6 @@ func (s ModelArtifacts) String() string {
 // GoString returns the string representation
 func (s ModelArtifacts) GoString() string {
 	return s.String()
-}
-
-// SetS3ModelArtifacts sets the S3ModelArtifacts field's value.
-func (s *ModelArtifacts) SetS3ModelArtifacts(v string) *ModelArtifacts {
-	s.S3ModelArtifacts = &v
-	return s
 }
 
 // Provides summary information about a model.
@@ -5515,24 +4447,6 @@ func (s ModelSummary) String() string {
 // GoString returns the string representation
 func (s ModelSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *ModelSummary) SetCreationTime(v time.Time) *ModelSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetModelArn sets the ModelArn field's value.
-func (s *ModelSummary) SetModelArn(v string) *ModelSummary {
-	s.ModelArn = &v
-	return s
-}
-
-// SetModelName sets the ModelName field's value.
-func (s *ModelSummary) SetModelName(v string) *ModelSummary {
-	s.ModelName = &v
-	return s
 }
 
 // Provides summary information for an Amazon SageMaker notebook instance.
@@ -5575,48 +4489,6 @@ func (s NotebookInstanceSummary) String() string {
 // GoString returns the string representation
 func (s NotebookInstanceSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *NotebookInstanceSummary) SetCreationTime(v time.Time) *NotebookInstanceSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *NotebookInstanceSummary) SetInstanceType(v InstanceType) *NotebookInstanceSummary {
-	s.InstanceType = v
-	return s
-}
-
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *NotebookInstanceSummary) SetLastModifiedTime(v time.Time) *NotebookInstanceSummary {
-	s.LastModifiedTime = &v
-	return s
-}
-
-// SetNotebookInstanceArn sets the NotebookInstanceArn field's value.
-func (s *NotebookInstanceSummary) SetNotebookInstanceArn(v string) *NotebookInstanceSummary {
-	s.NotebookInstanceArn = &v
-	return s
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *NotebookInstanceSummary) SetNotebookInstanceName(v string) *NotebookInstanceSummary {
-	s.NotebookInstanceName = &v
-	return s
-}
-
-// SetNotebookInstanceStatus sets the NotebookInstanceStatus field's value.
-func (s *NotebookInstanceSummary) SetNotebookInstanceStatus(v NotebookInstanceStatus) *NotebookInstanceSummary {
-	s.NotebookInstanceStatus = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *NotebookInstanceSummary) SetUrl(v string) *NotebookInstanceSummary {
-	s.Url = &v
-	return s
 }
 
 // Provides information about how to store model training results (model artifacts).
@@ -5667,18 +4539,6 @@ func (s *OutputDataConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *OutputDataConfig) SetKmsKeyId(v string) *OutputDataConfig {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetS3OutputPath sets the S3OutputPath field's value.
-func (s *OutputDataConfig) SetS3OutputPath(v string) *OutputDataConfig {
-	s.S3OutputPath = &v
-	return s
 }
 
 // Identifies a model that you want to host and the resources to deploy for
@@ -5754,36 +4614,6 @@ func (s *ProductionVariant) Validate() error {
 	return nil
 }
 
-// SetInitialInstanceCount sets the InitialInstanceCount field's value.
-func (s *ProductionVariant) SetInitialInstanceCount(v int64) *ProductionVariant {
-	s.InitialInstanceCount = &v
-	return s
-}
-
-// SetInitialVariantWeight sets the InitialVariantWeight field's value.
-func (s *ProductionVariant) SetInitialVariantWeight(v float64) *ProductionVariant {
-	s.InitialVariantWeight = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ProductionVariant) SetInstanceType(v ProductionVariantInstanceType) *ProductionVariant {
-	s.InstanceType = v
-	return s
-}
-
-// SetModelName sets the ModelName field's value.
-func (s *ProductionVariant) SetModelName(v string) *ProductionVariant {
-	s.ModelName = &v
-	return s
-}
-
-// SetVariantName sets the VariantName field's value.
-func (s *ProductionVariant) SetVariantName(v string) *ProductionVariant {
-	s.VariantName = &v
-	return s
-}
-
 // Describes weight and capacities for a production variant associated with
 // an endpoint. If you sent a request to the UpdateWeightAndCapacities API and
 // the endpoint status is Updating, you get different desired and current values.
@@ -5817,36 +4647,6 @@ func (s ProductionVariantSummary) String() string {
 // GoString returns the string representation
 func (s ProductionVariantSummary) GoString() string {
 	return s.String()
-}
-
-// SetCurrentInstanceCount sets the CurrentInstanceCount field's value.
-func (s *ProductionVariantSummary) SetCurrentInstanceCount(v int64) *ProductionVariantSummary {
-	s.CurrentInstanceCount = &v
-	return s
-}
-
-// SetCurrentWeight sets the CurrentWeight field's value.
-func (s *ProductionVariantSummary) SetCurrentWeight(v float64) *ProductionVariantSummary {
-	s.CurrentWeight = &v
-	return s
-}
-
-// SetDesiredInstanceCount sets the DesiredInstanceCount field's value.
-func (s *ProductionVariantSummary) SetDesiredInstanceCount(v int64) *ProductionVariantSummary {
-	s.DesiredInstanceCount = &v
-	return s
-}
-
-// SetDesiredWeight sets the DesiredWeight field's value.
-func (s *ProductionVariantSummary) SetDesiredWeight(v float64) *ProductionVariantSummary {
-	s.DesiredWeight = &v
-	return s
-}
-
-// SetVariantName sets the VariantName field's value.
-func (s *ProductionVariantSummary) SetVariantName(v string) *ProductionVariantSummary {
-	s.VariantName = &v
-	return s
 }
 
 // Describes the resources, including ML compute instances and ML storage volumes,
@@ -5917,24 +4717,6 @@ func (s *ResourceConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *ResourceConfig) SetInstanceCount(v int64) *ResourceConfig {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ResourceConfig) SetInstanceType(v TrainingInstanceType) *ResourceConfig {
-	s.InstanceType = v
-	return s
-}
-
-// SetVolumeSizeInGB sets the VolumeSizeInGB field's value.
-func (s *ResourceConfig) SetVolumeSizeInGB(v int64) *ResourceConfig {
-	s.VolumeSizeInGB = &v
-	return s
 }
 
 // Describes the S3 data source.
@@ -6039,24 +4821,6 @@ func (s *S3DataSource) Validate() error {
 	return nil
 }
 
-// SetS3DataDistributionType sets the S3DataDistributionType field's value.
-func (s *S3DataSource) SetS3DataDistributionType(v S3DataDistribution) *S3DataSource {
-	s.S3DataDistributionType = v
-	return s
-}
-
-// SetS3DataType sets the S3DataType field's value.
-func (s *S3DataSource) SetS3DataType(v S3DataType) *S3DataSource {
-	s.S3DataType = v
-	return s
-}
-
-// SetS3Uri sets the S3Uri field's value.
-func (s *S3DataSource) SetS3Uri(v string) *S3DataSource {
-	s.S3Uri = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceInput
 type StartNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -6089,12 +4853,6 @@ func (s *StartNotebookInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *StartNotebookInstanceInput) SetNotebookInstanceName(v string) *StartNotebookInstanceInput {
-	s.NotebookInstanceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceOutput
@@ -6151,12 +4909,6 @@ func (s *StopNotebookInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *StopNotebookInstanceInput) SetNotebookInstanceName(v string) *StopNotebookInstanceInput {
-	s.NotebookInstanceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopNotebookInstanceOutput
@@ -6216,12 +4968,6 @@ func (s *StopTrainingJobInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTrainingJobName sets the TrainingJobName field's value.
-func (s *StopTrainingJobInput) SetTrainingJobName(v string) *StopTrainingJobInput {
-	s.TrainingJobName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTrainingJobOutput
@@ -6293,12 +5039,6 @@ func (s *StoppingCondition) Validate() error {
 	return nil
 }
 
-// SetMaxRuntimeInSeconds sets the MaxRuntimeInSeconds field's value.
-func (s *StoppingCondition) SetMaxRuntimeInSeconds(v int64) *StoppingCondition {
-	s.MaxRuntimeInSeconds = &v
-	return s
-}
-
 // Describes a tag.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Tag
 type Tag struct {
@@ -6346,18 +5086,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // Provides summary information about a training job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobSummary
 type TrainingJobSummary struct {
@@ -6400,42 +5128,6 @@ func (s TrainingJobSummary) String() string {
 // GoString returns the string representation
 func (s TrainingJobSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *TrainingJobSummary) SetCreationTime(v time.Time) *TrainingJobSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *TrainingJobSummary) SetLastModifiedTime(v time.Time) *TrainingJobSummary {
-	s.LastModifiedTime = &v
-	return s
-}
-
-// SetTrainingEndTime sets the TrainingEndTime field's value.
-func (s *TrainingJobSummary) SetTrainingEndTime(v time.Time) *TrainingJobSummary {
-	s.TrainingEndTime = &v
-	return s
-}
-
-// SetTrainingJobArn sets the TrainingJobArn field's value.
-func (s *TrainingJobSummary) SetTrainingJobArn(v string) *TrainingJobSummary {
-	s.TrainingJobArn = &v
-	return s
-}
-
-// SetTrainingJobName sets the TrainingJobName field's value.
-func (s *TrainingJobSummary) SetTrainingJobName(v string) *TrainingJobSummary {
-	s.TrainingJobName = &v
-	return s
-}
-
-// SetTrainingJobStatus sets the TrainingJobStatus field's value.
-func (s *TrainingJobSummary) SetTrainingJobStatus(v TrainingJobStatus) *TrainingJobSummary {
-	s.TrainingJobStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput
@@ -6481,18 +5173,6 @@ func (s *UpdateEndpointInput) Validate() error {
 	return nil
 }
 
-// SetEndpointConfigName sets the EndpointConfigName field's value.
-func (s *UpdateEndpointInput) SetEndpointConfigName(v string) *UpdateEndpointInput {
-	s.EndpointConfigName = &v
-	return s
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *UpdateEndpointInput) SetEndpointName(v string) *UpdateEndpointInput {
-	s.EndpointName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointOutput
 type UpdateEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -6518,12 +5198,6 @@ func (s UpdateEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *UpdateEndpointOutput) SetEndpointArn(v string) *UpdateEndpointOutput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacitiesInput
@@ -6579,18 +5253,6 @@ func (s *UpdateEndpointWeightsAndCapacitiesInput) Validate() error {
 	return nil
 }
 
-// SetDesiredWeightsAndCapacities sets the DesiredWeightsAndCapacities field's value.
-func (s *UpdateEndpointWeightsAndCapacitiesInput) SetDesiredWeightsAndCapacities(v []DesiredWeightAndCapacity) *UpdateEndpointWeightsAndCapacitiesInput {
-	s.DesiredWeightsAndCapacities = v
-	return s
-}
-
-// SetEndpointName sets the EndpointName field's value.
-func (s *UpdateEndpointWeightsAndCapacitiesInput) SetEndpointName(v string) *UpdateEndpointWeightsAndCapacitiesInput {
-	s.EndpointName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointWeightsAndCapacitiesOutput
 type UpdateEndpointWeightsAndCapacitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6616,12 +5278,6 @@ func (s UpdateEndpointWeightsAndCapacitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEndpointWeightsAndCapacitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *UpdateEndpointWeightsAndCapacitiesOutput) SetEndpointArn(v string) *UpdateEndpointWeightsAndCapacitiesOutput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput
@@ -6665,24 +5321,6 @@ func (s *UpdateNotebookInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *UpdateNotebookInstanceInput) SetInstanceType(v InstanceType) *UpdateNotebookInstanceInput {
-	s.InstanceType = v
-	return s
-}
-
-// SetNotebookInstanceName sets the NotebookInstanceName field's value.
-func (s *UpdateNotebookInstanceInput) SetNotebookInstanceName(v string) *UpdateNotebookInstanceInput {
-	s.NotebookInstanceName = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *UpdateNotebookInstanceInput) SetRoleArn(v string) *UpdateNotebookInstanceInput {
-	s.RoleArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceOutput

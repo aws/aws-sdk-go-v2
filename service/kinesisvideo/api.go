@@ -661,36 +661,6 @@ func (s *CreateStreamInput) Validate() error {
 	return nil
 }
 
-// SetDataRetentionInHours sets the DataRetentionInHours field's value.
-func (s *CreateStreamInput) SetDataRetentionInHours(v int64) *CreateStreamInput {
-	s.DataRetentionInHours = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *CreateStreamInput) SetDeviceName(v string) *CreateStreamInput {
-	s.DeviceName = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateStreamInput) SetKmsKeyId(v string) *CreateStreamInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetMediaType sets the MediaType field's value.
-func (s *CreateStreamInput) SetMediaType(v string) *CreateStreamInput {
-	s.MediaType = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *CreateStreamInput) SetStreamName(v string) *CreateStreamInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamOutput
 type CreateStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -714,12 +684,6 @@ func (s CreateStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *CreateStreamOutput) SetStreamARN(v string) *CreateStreamOutput {
-	s.StreamARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamInput
@@ -768,18 +732,6 @@ func (s *DeleteStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCurrentVersion sets the CurrentVersion field's value.
-func (s *DeleteStreamInput) SetCurrentVersion(v string) *DeleteStreamInput {
-	s.CurrentVersion = &v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *DeleteStreamInput) SetStreamARN(v string) *DeleteStreamInput {
-	s.StreamARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamOutput
@@ -841,18 +793,6 @@ func (s *DescribeStreamInput) Validate() error {
 	return nil
 }
 
-// SetStreamARN sets the StreamARN field's value.
-func (s *DescribeStreamInput) SetStreamARN(v string) *DescribeStreamInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *DescribeStreamInput) SetStreamName(v string) *DescribeStreamInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStreamOutput
 type DescribeStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -876,12 +816,6 @@ func (s DescribeStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStreamInfo sets the StreamInfo field's value.
-func (s *DescribeStreamOutput) SetStreamInfo(v *StreamInfo) *DescribeStreamOutput {
-	s.StreamInfo = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetDataEndpointInput
@@ -931,24 +865,6 @@ func (s *GetDataEndpointInput) Validate() error {
 	return nil
 }
 
-// SetAPIName sets the APIName field's value.
-func (s *GetDataEndpointInput) SetAPIName(v APIName) *GetDataEndpointInput {
-	s.APIName = v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *GetDataEndpointInput) SetStreamARN(v string) *GetDataEndpointInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *GetDataEndpointInput) SetStreamName(v string) *GetDataEndpointInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetDataEndpointOutput
 type GetDataEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -973,12 +889,6 @@ func (s GetDataEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDataEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDataEndpoint sets the DataEndpoint field's value.
-func (s *GetDataEndpointOutput) SetDataEndpoint(v string) *GetDataEndpointOutput {
-	s.DataEndpoint = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListStreamsInput
@@ -1026,24 +936,6 @@ func (s *ListStreamsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStreamsInput) SetMaxResults(v int64) *ListStreamsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStreamsInput) SetNextToken(v string) *ListStreamsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStreamNameCondition sets the StreamNameCondition field's value.
-func (s *ListStreamsInput) SetStreamNameCondition(v *StreamNameCondition) *ListStreamsInput {
-	s.StreamNameCondition = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListStreamsOutput
 type ListStreamsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1071,18 +963,6 @@ func (s ListStreamsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStreamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStreamsOutput) SetNextToken(v string) *ListStreamsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStreamInfoList sets the StreamInfoList field's value.
-func (s *ListStreamsOutput) SetStreamInfoList(v []StreamInfo) *ListStreamsOutput {
-	s.StreamInfoList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForStreamInput
@@ -1127,24 +1007,6 @@ func (s *ListTagsForStreamInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsForStreamInput) SetNextToken(v string) *ListTagsForStreamInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *ListTagsForStreamInput) SetStreamARN(v string) *ListTagsForStreamInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *ListTagsForStreamInput) SetStreamName(v string) *ListTagsForStreamInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForStreamOutput
 type ListTagsForStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1173,18 +1035,6 @@ func (s ListTagsForStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsForStreamOutput) SetNextToken(v string) *ListTagsForStreamOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForStreamOutput) SetTags(v map[string]string) *ListTagsForStreamOutput {
-	s.Tags = v
-	return s
 }
 
 // An object describing a Kinesis video stream.
@@ -1231,60 +1081,6 @@ func (s StreamInfo) GoString() string {
 	return s.String()
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *StreamInfo) SetCreationTime(v time.Time) *StreamInfo {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDataRetentionInHours sets the DataRetentionInHours field's value.
-func (s *StreamInfo) SetDataRetentionInHours(v int64) *StreamInfo {
-	s.DataRetentionInHours = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *StreamInfo) SetDeviceName(v string) *StreamInfo {
-	s.DeviceName = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *StreamInfo) SetKmsKeyId(v string) *StreamInfo {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetMediaType sets the MediaType field's value.
-func (s *StreamInfo) SetMediaType(v string) *StreamInfo {
-	s.MediaType = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StreamInfo) SetStatus(v Status) *StreamInfo {
-	s.Status = v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *StreamInfo) SetStreamARN(v string) *StreamInfo {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *StreamInfo) SetStreamName(v string) *StreamInfo {
-	s.StreamName = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *StreamInfo) SetVersion(v string) *StreamInfo {
-	s.Version = &v
-	return s
-}
-
 // Specifies the condition that streams must satisfy to be returned when you
 // list streams (see the ListStreams API). A condition has a comparison operation
 // and a value. Currently, you can specify only the BEGINS_WITH operator, which
@@ -1322,18 +1118,6 @@ func (s *StreamNameCondition) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *StreamNameCondition) SetComparisonOperator(v ComparisonOperator) *StreamNameCondition {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetComparisonValue sets the ComparisonValue field's value.
-func (s *StreamNameCondition) SetComparisonValue(v string) *StreamNameCondition {
-	s.ComparisonValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStreamInput
@@ -1385,24 +1169,6 @@ func (s *TagStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *TagStreamInput) SetStreamARN(v string) *TagStreamInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *TagStreamInput) SetStreamName(v string) *TagStreamInput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagStreamInput) SetTags(v map[string]string) *TagStreamInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStreamOutput
@@ -1475,24 +1241,6 @@ func (s *UntagStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *UntagStreamInput) SetStreamARN(v string) *UntagStreamInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *UntagStreamInput) SetStreamName(v string) *UntagStreamInput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTagKeyList sets the TagKeyList field's value.
-func (s *UntagStreamInput) SetTagKeyList(v []string) *UntagStreamInput {
-	s.TagKeyList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagStreamOutput
@@ -1589,36 +1337,6 @@ func (s *UpdateDataRetentionInput) Validate() error {
 	return nil
 }
 
-// SetCurrentVersion sets the CurrentVersion field's value.
-func (s *UpdateDataRetentionInput) SetCurrentVersion(v string) *UpdateDataRetentionInput {
-	s.CurrentVersion = &v
-	return s
-}
-
-// SetDataRetentionChangeInHours sets the DataRetentionChangeInHours field's value.
-func (s *UpdateDataRetentionInput) SetDataRetentionChangeInHours(v int64) *UpdateDataRetentionInput {
-	s.DataRetentionChangeInHours = &v
-	return s
-}
-
-// SetOperation sets the Operation field's value.
-func (s *UpdateDataRetentionInput) SetOperation(v UpdateDataRetentionOperation) *UpdateDataRetentionInput {
-	s.Operation = v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *UpdateDataRetentionInput) SetStreamARN(v string) *UpdateDataRetentionInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *UpdateDataRetentionInput) SetStreamName(v string) *UpdateDataRetentionInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionOutput
 type UpdateDataRetentionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1711,36 +1429,6 @@ func (s *UpdateStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCurrentVersion sets the CurrentVersion field's value.
-func (s *UpdateStreamInput) SetCurrentVersion(v string) *UpdateStreamInput {
-	s.CurrentVersion = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *UpdateStreamInput) SetDeviceName(v string) *UpdateStreamInput {
-	s.DeviceName = &v
-	return s
-}
-
-// SetMediaType sets the MediaType field's value.
-func (s *UpdateStreamInput) SetMediaType(v string) *UpdateStreamInput {
-	s.MediaType = &v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *UpdateStreamInput) SetStreamARN(v string) *UpdateStreamInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *UpdateStreamInput) SetStreamName(v string) *UpdateStreamInput {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamOutput

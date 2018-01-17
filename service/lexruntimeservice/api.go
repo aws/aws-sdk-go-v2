@@ -242,18 +242,6 @@ func (s Button) GoString() string {
 	return s.String()
 }
 
-// SetText sets the Text field's value.
-func (s *Button) SetText(v string) *Button {
-	s.Text = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Button) SetValue(v string) *Button {
-	s.Value = &v
-	return s
-}
-
 // Represents an option rendered to the user when a prompt is shown. It could
 // be an image, a button, a link, or text.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GenericAttachment
@@ -284,36 +272,6 @@ func (s GenericAttachment) String() string {
 // GoString returns the string representation
 func (s GenericAttachment) GoString() string {
 	return s.String()
-}
-
-// SetAttachmentLinkUrl sets the AttachmentLinkUrl field's value.
-func (s *GenericAttachment) SetAttachmentLinkUrl(v string) *GenericAttachment {
-	s.AttachmentLinkUrl = &v
-	return s
-}
-
-// SetButtons sets the Buttons field's value.
-func (s *GenericAttachment) SetButtons(v []Button) *GenericAttachment {
-	s.Buttons = v
-	return s
-}
-
-// SetImageUrl sets the ImageUrl field's value.
-func (s *GenericAttachment) SetImageUrl(v string) *GenericAttachment {
-	s.ImageUrl = &v
-	return s
-}
-
-// SetSubTitle sets the SubTitle field's value.
-func (s *GenericAttachment) SetSubTitle(v string) *GenericAttachment {
-	s.SubTitle = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *GenericAttachment) SetTitle(v string) *GenericAttachment {
-	s.Title = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentRequest
@@ -485,54 +443,6 @@ func (s *PostContentInput) Validate() error {
 	return nil
 }
 
-// SetAccept sets the Accept field's value.
-func (s *PostContentInput) SetAccept(v string) *PostContentInput {
-	s.Accept = &v
-	return s
-}
-
-// SetBotAlias sets the BotAlias field's value.
-func (s *PostContentInput) SetBotAlias(v string) *PostContentInput {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *PostContentInput) SetBotName(v string) *PostContentInput {
-	s.BotName = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *PostContentInput) SetContentType(v string) *PostContentInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetInputStream sets the InputStream field's value.
-func (s *PostContentInput) SetInputStream(v io.ReadSeeker) *PostContentInput {
-	s.InputStream = v
-	return s
-}
-
-// SetRequestAttributes sets the RequestAttributes field's value.
-func (s *PostContentInput) SetRequestAttributes(v aws.JSONValue) *PostContentInput {
-	s.RequestAttributes = v
-	return s
-}
-
-// SetSessionAttributes sets the SessionAttributes field's value.
-func (s *PostContentInput) SetSessionAttributes(v aws.JSONValue) *PostContentInput {
-	s.SessionAttributes = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *PostContentInput) SetUserId(v string) *PostContentInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentResponse
 type PostContentOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
@@ -655,60 +565,6 @@ func (s PostContentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAudioStream sets the AudioStream field's value.
-func (s *PostContentOutput) SetAudioStream(v io.ReadCloser) *PostContentOutput {
-	s.AudioStream = v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *PostContentOutput) SetContentType(v string) *PostContentOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetDialogState sets the DialogState field's value.
-func (s *PostContentOutput) SetDialogState(v DialogState) *PostContentOutput {
-	s.DialogState = v
-	return s
-}
-
-// SetInputTranscript sets the InputTranscript field's value.
-func (s *PostContentOutput) SetInputTranscript(v string) *PostContentOutput {
-	s.InputTranscript = &v
-	return s
-}
-
-// SetIntentName sets the IntentName field's value.
-func (s *PostContentOutput) SetIntentName(v string) *PostContentOutput {
-	s.IntentName = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *PostContentOutput) SetMessage(v string) *PostContentOutput {
-	s.Message = &v
-	return s
-}
-
-// SetSessionAttributes sets the SessionAttributes field's value.
-func (s *PostContentOutput) SetSessionAttributes(v aws.JSONValue) *PostContentOutput {
-	s.SessionAttributes = v
-	return s
-}
-
-// SetSlotToElicit sets the SlotToElicit field's value.
-func (s *PostContentOutput) SetSlotToElicit(v string) *PostContentOutput {
-	s.SlotToElicit = &v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *PostContentOutput) SetSlots(v aws.JSONValue) *PostContentOutput {
-	s.Slots = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextRequest
 type PostTextInput struct {
 	_ struct{} `type:"structure"`
@@ -809,42 +665,6 @@ func (s *PostTextInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBotAlias sets the BotAlias field's value.
-func (s *PostTextInput) SetBotAlias(v string) *PostTextInput {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *PostTextInput) SetBotName(v string) *PostTextInput {
-	s.BotName = &v
-	return s
-}
-
-// SetInputText sets the InputText field's value.
-func (s *PostTextInput) SetInputText(v string) *PostTextInput {
-	s.InputText = &v
-	return s
-}
-
-// SetRequestAttributes sets the RequestAttributes field's value.
-func (s *PostTextInput) SetRequestAttributes(v map[string]string) *PostTextInput {
-	s.RequestAttributes = v
-	return s
-}
-
-// SetSessionAttributes sets the SessionAttributes field's value.
-func (s *PostTextInput) SetSessionAttributes(v map[string]string) *PostTextInput {
-	s.SessionAttributes = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *PostTextInput) SetUserId(v string) *PostTextInput {
-	s.UserId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextResponse
@@ -954,48 +774,6 @@ func (s PostTextOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDialogState sets the DialogState field's value.
-func (s *PostTextOutput) SetDialogState(v DialogState) *PostTextOutput {
-	s.DialogState = v
-	return s
-}
-
-// SetIntentName sets the IntentName field's value.
-func (s *PostTextOutput) SetIntentName(v string) *PostTextOutput {
-	s.IntentName = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *PostTextOutput) SetMessage(v string) *PostTextOutput {
-	s.Message = &v
-	return s
-}
-
-// SetResponseCard sets the ResponseCard field's value.
-func (s *PostTextOutput) SetResponseCard(v *ResponseCard) *PostTextOutput {
-	s.ResponseCard = v
-	return s
-}
-
-// SetSessionAttributes sets the SessionAttributes field's value.
-func (s *PostTextOutput) SetSessionAttributes(v map[string]string) *PostTextOutput {
-	s.SessionAttributes = v
-	return s
-}
-
-// SetSlotToElicit sets the SlotToElicit field's value.
-func (s *PostTextOutput) SetSlotToElicit(v string) *PostTextOutput {
-	s.SlotToElicit = &v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *PostTextOutput) SetSlots(v map[string]string) *PostTextOutput {
-	s.Slots = v
-	return s
-}
-
 // If you configure a response card when creating your bots, Amazon Lex substitutes
 // the session attributes and slot values that are available, and then returns
 // it. The response card can also come from a Lambda function ( dialogCodeHook
@@ -1022,24 +800,6 @@ func (s ResponseCard) String() string {
 // GoString returns the string representation
 func (s ResponseCard) GoString() string {
 	return s.String()
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *ResponseCard) SetContentType(v ContentType) *ResponseCard {
-	s.ContentType = v
-	return s
-}
-
-// SetGenericAttachments sets the GenericAttachments field's value.
-func (s *ResponseCard) SetGenericAttachments(v []GenericAttachment) *ResponseCard {
-	s.GenericAttachments = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ResponseCard) SetVersion(v string) *ResponseCard {
-	s.Version = &v
-	return s
 }
 
 type ContentType string

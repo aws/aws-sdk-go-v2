@@ -482,24 +482,6 @@ func (s FailureInfo) GoString() string {
 	return s.String()
 }
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *FailureInfo) SetErrorCode(v ErrorCode) *FailureInfo {
-	s.ErrorCode = v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *FailureInfo) SetErrorMessage(v string) *FailureInfo {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *FailureInfo) SetStatusCode(v int64) *FailureInfo {
-	s.StatusCode = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResourcesInput
 type GetResourcesInput struct {
 	_ struct{} `type:"structure"`
@@ -590,36 +572,6 @@ func (s *GetResourcesInput) Validate() error {
 	return nil
 }
 
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *GetResourcesInput) SetPaginationToken(v string) *GetResourcesInput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetResourceTypeFilters sets the ResourceTypeFilters field's value.
-func (s *GetResourcesInput) SetResourceTypeFilters(v []string) *GetResourcesInput {
-	s.ResourceTypeFilters = v
-	return s
-}
-
-// SetResourcesPerPage sets the ResourcesPerPage field's value.
-func (s *GetResourcesInput) SetResourcesPerPage(v int64) *GetResourcesInput {
-	s.ResourcesPerPage = &v
-	return s
-}
-
-// SetTagFilters sets the TagFilters field's value.
-func (s *GetResourcesInput) SetTagFilters(v []TagFilter) *GetResourcesInput {
-	s.TagFilters = v
-	return s
-}
-
-// SetTagsPerPage sets the TagsPerPage field's value.
-func (s *GetResourcesInput) SetTagsPerPage(v int64) *GetResourcesInput {
-	s.TagsPerPage = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResourcesOutput
 type GetResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -650,18 +602,6 @@ func (s GetResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *GetResourcesOutput) SetPaginationToken(v string) *GetResourcesOutput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetResourceTagMappingList sets the ResourceTagMappingList field's value.
-func (s *GetResourcesOutput) SetResourceTagMappingList(v []ResourceTagMapping) *GetResourcesOutput {
-	s.ResourceTagMappingList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeysInput
 type GetTagKeysInput struct {
 	_ struct{} `type:"structure"`
@@ -680,12 +620,6 @@ func (s GetTagKeysInput) String() string {
 // GoString returns the string representation
 func (s GetTagKeysInput) GoString() string {
 	return s.String()
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *GetTagKeysInput) SetPaginationToken(v string) *GetTagKeysInput {
-	s.PaginationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeysOutput
@@ -716,18 +650,6 @@ func (s GetTagKeysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTagKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *GetTagKeysOutput) SetPaginationToken(v string) *GetTagKeysOutput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *GetTagKeysOutput) SetTagKeys(v []string) *GetTagKeysOutput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValuesInput
@@ -773,18 +695,6 @@ func (s *GetTagValuesInput) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *GetTagValuesInput) SetKey(v string) *GetTagValuesInput {
-	s.Key = &v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *GetTagValuesInput) SetPaginationToken(v string) *GetTagValuesInput {
-	s.PaginationToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValuesOutput
 type GetTagValuesOutput struct {
 	_ struct{} `type:"structure"`
@@ -815,18 +725,6 @@ func (s GetTagValuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *GetTagValuesOutput) SetPaginationToken(v string) *GetTagValuesOutput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetTagValues sets the TagValues field's value.
-func (s *GetTagValuesOutput) SetTagValues(v []string) *GetTagValuesOutput {
-	s.TagValues = v
-	return s
-}
-
 // A list of resource ARNs and the tags (keys and values) that are associated
 // with each.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ResourceTagMapping
@@ -848,18 +746,6 @@ func (s ResourceTagMapping) String() string {
 // GoString returns the string representation
 func (s ResourceTagMapping) GoString() string {
 	return s.String()
-}
-
-// SetResourceARN sets the ResourceARN field's value.
-func (s *ResourceTagMapping) SetResourceARN(v string) *ResourceTagMapping {
-	s.ResourceARN = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ResourceTagMapping) SetTags(v []Tag) *ResourceTagMapping {
-	s.Tags = v
-	return s
 }
 
 // The metadata that you apply to AWS resources to help you categorize and organize
@@ -891,18 +777,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // A list of tags (keys and values) that are used to specify the associated
@@ -941,18 +815,6 @@ func (s *TagFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *TagFilter) SetKey(v string) *TagFilter {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *TagFilter) SetValues(v []string) *TagFilter {
-	s.Values = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResourcesInput
@@ -1009,18 +871,6 @@ func (s *TagResourcesInput) Validate() error {
 	return nil
 }
 
-// SetResourceARNList sets the ResourceARNList field's value.
-func (s *TagResourcesInput) SetResourceARNList(v []string) *TagResourcesInput {
-	s.ResourceARNList = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourcesInput) SetTags(v map[string]string) *TagResourcesInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResourcesOutput
 type TagResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1045,12 +895,6 @@ func (s TagResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedResourcesMap sets the FailedResourcesMap field's value.
-func (s *TagResourcesOutput) SetFailedResourcesMap(v map[string]FailureInfo) *TagResourcesOutput {
-	s.FailedResourcesMap = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/UntagResourcesInput
@@ -1106,18 +950,6 @@ func (s *UntagResourcesInput) Validate() error {
 	return nil
 }
 
-// SetResourceARNList sets the ResourceARNList field's value.
-func (s *UntagResourcesInput) SetResourceARNList(v []string) *UntagResourcesInput {
-	s.ResourceARNList = v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourcesInput) SetTagKeys(v []string) *UntagResourcesInput {
-	s.TagKeys = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/UntagResourcesOutput
 type UntagResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1142,12 +974,6 @@ func (s UntagResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedResourcesMap sets the FailedResourcesMap field's value.
-func (s *UntagResourcesOutput) SetFailedResourcesMap(v map[string]FailureInfo) *UntagResourcesOutput {
-	s.FailedResourcesMap = v
-	return s
 }
 
 type ErrorCode string

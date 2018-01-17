@@ -3588,18 +3588,6 @@ func (s AccountLimit) GoString() string {
 	return s.String()
 }
 
-// SetType sets the Type field's value.
-func (s *AccountLimit) SetType(v AccountLimitType) *AccountLimit {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *AccountLimit) SetValue(v int64) *AccountLimit {
-	s.Value = &v
-	return s
-}
-
 // A complex type that identifies the CloudWatch alarm that you want Amazon
 // Route 53 health checkers to use to determine whether this health check is
 // healthy.
@@ -3653,18 +3641,6 @@ func (s *AlarmIdentifier) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *AlarmIdentifier) SetName(v string) *AlarmIdentifier {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *AlarmIdentifier) SetRegion(v CloudWatchRegion) *AlarmIdentifier {
-	s.Region = v
-	return s
 }
 
 // Alias resource record sets only: Information about the CloudFront distribution,
@@ -3897,24 +3873,6 @@ func (s *AliasTarget) Validate() error {
 	return nil
 }
 
-// SetDNSName sets the DNSName field's value.
-func (s *AliasTarget) SetDNSName(v string) *AliasTarget {
-	s.DNSName = &v
-	return s
-}
-
-// SetEvaluateTargetHealth sets the EvaluateTargetHealth field's value.
-func (s *AliasTarget) SetEvaluateTargetHealth(v bool) *AliasTarget {
-	s.EvaluateTargetHealth = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *AliasTarget) SetHostedZoneId(v string) *AliasTarget {
-	s.HostedZoneId = &v
-	return s
-}
-
 // A complex type that contains information about the request to associate a
 // VPC with a private hosted zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZoneRequest
@@ -3973,24 +3931,6 @@ func (s *AssociateVPCWithHostedZoneInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *AssociateVPCWithHostedZoneInput) SetComment(v string) *AssociateVPCWithHostedZoneInput {
-	s.Comment = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *AssociateVPCWithHostedZoneInput) SetHostedZoneId(v string) *AssociateVPCWithHostedZoneInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *AssociateVPCWithHostedZoneInput) SetVPC(v *VPC) *AssociateVPCWithHostedZoneInput {
-	s.VPC = v
-	return s
-}
-
 // A complex type that contains the response information for the AssociateVPCWithHostedZone
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZoneResponse
@@ -4018,12 +3958,6 @@ func (s AssociateVPCWithHostedZoneOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateVPCWithHostedZoneOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeInfo sets the ChangeInfo field's value.
-func (s *AssociateVPCWithHostedZoneOutput) SetChangeInfo(v *ChangeInfo) *AssociateVPCWithHostedZoneOutput {
-	s.ChangeInfo = v
-	return s
 }
 
 // The information for each resource record set that you want to change.
@@ -4089,18 +4023,6 @@ func (s *Change) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *Change) SetAction(v ChangeAction) *Change {
-	s.Action = v
-	return s
-}
-
-// SetResourceRecordSet sets the ResourceRecordSet field's value.
-func (s *Change) SetResourceRecordSet(v *ResourceRecordSet) *Change {
-	s.ResourceRecordSet = v
-	return s
-}
-
 // The information for a change request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeBatch
 type ChangeBatch struct {
@@ -4149,18 +4071,6 @@ func (s *ChangeBatch) Validate() error {
 	return nil
 }
 
-// SetChanges sets the Changes field's value.
-func (s *ChangeBatch) SetChanges(v []Change) *ChangeBatch {
-	s.Changes = v
-	return s
-}
-
-// SetComment sets the Comment field's value.
-func (s *ChangeBatch) SetComment(v string) *ChangeBatch {
-	s.Comment = &v
-	return s
-}
-
 // A complex type that describes change information about changes made to your
 // hosted zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeInfo
@@ -4202,30 +4112,6 @@ func (s ChangeInfo) String() string {
 // GoString returns the string representation
 func (s ChangeInfo) GoString() string {
 	return s.String()
-}
-
-// SetComment sets the Comment field's value.
-func (s *ChangeInfo) SetComment(v string) *ChangeInfo {
-	s.Comment = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ChangeInfo) SetId(v string) *ChangeInfo {
-	s.Id = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ChangeInfo) SetStatus(v ChangeStatus) *ChangeInfo {
-	s.Status = v
-	return s
-}
-
-// SetSubmittedAt sets the SubmittedAt field's value.
-func (s *ChangeInfo) SetSubmittedAt(v time.Time) *ChangeInfo {
-	s.SubmittedAt = &v
-	return s
 }
 
 // A complex type that contains change information for the resource record set.
@@ -4278,18 +4164,6 @@ func (s *ChangeResourceRecordSetsInput) Validate() error {
 	return nil
 }
 
-// SetChangeBatch sets the ChangeBatch field's value.
-func (s *ChangeResourceRecordSetsInput) SetChangeBatch(v *ChangeBatch) *ChangeResourceRecordSetsInput {
-	s.ChangeBatch = v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ChangeResourceRecordSetsInput) SetHostedZoneId(v string) *ChangeResourceRecordSetsInput {
-	s.HostedZoneId = &v
-	return s
-}
-
 // A complex type containing the response for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSetsResponse
 type ChangeResourceRecordSetsOutput struct {
@@ -4320,12 +4194,6 @@ func (s ChangeResourceRecordSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ChangeResourceRecordSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeInfo sets the ChangeInfo field's value.
-func (s *ChangeResourceRecordSetsOutput) SetChangeInfo(v *ChangeInfo) *ChangeResourceRecordSetsOutput {
-	s.ChangeInfo = v
-	return s
 }
 
 // A complex type that contains information about the tags that you want to
@@ -4391,30 +4259,6 @@ func (s *ChangeTagsForResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAddTags sets the AddTags field's value.
-func (s *ChangeTagsForResourceInput) SetAddTags(v []Tag) *ChangeTagsForResourceInput {
-	s.AddTags = v
-	return s
-}
-
-// SetRemoveTagKeys sets the RemoveTagKeys field's value.
-func (s *ChangeTagsForResourceInput) SetRemoveTagKeys(v []string) *ChangeTagsForResourceInput {
-	s.RemoveTagKeys = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ChangeTagsForResourceInput) SetResourceId(v string) *ChangeTagsForResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ChangeTagsForResourceInput) SetResourceType(v TagResourceType) *ChangeTagsForResourceInput {
-	s.ResourceType = v
-	return s
 }
 
 // Empty response for the request.
@@ -4505,54 +4349,6 @@ func (s CloudWatchAlarmConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *CloudWatchAlarmConfiguration) SetComparisonOperator(v ComparisonOperator) *CloudWatchAlarmConfiguration {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetDimensions sets the Dimensions field's value.
-func (s *CloudWatchAlarmConfiguration) SetDimensions(v []Dimension) *CloudWatchAlarmConfiguration {
-	s.Dimensions = v
-	return s
-}
-
-// SetEvaluationPeriods sets the EvaluationPeriods field's value.
-func (s *CloudWatchAlarmConfiguration) SetEvaluationPeriods(v int64) *CloudWatchAlarmConfiguration {
-	s.EvaluationPeriods = &v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *CloudWatchAlarmConfiguration) SetMetricName(v string) *CloudWatchAlarmConfiguration {
-	s.MetricName = &v
-	return s
-}
-
-// SetNamespace sets the Namespace field's value.
-func (s *CloudWatchAlarmConfiguration) SetNamespace(v string) *CloudWatchAlarmConfiguration {
-	s.Namespace = &v
-	return s
-}
-
-// SetPeriod sets the Period field's value.
-func (s *CloudWatchAlarmConfiguration) SetPeriod(v int64) *CloudWatchAlarmConfiguration {
-	s.Period = &v
-	return s
-}
-
-// SetStatistic sets the Statistic field's value.
-func (s *CloudWatchAlarmConfiguration) SetStatistic(v Statistic) *CloudWatchAlarmConfiguration {
-	s.Statistic = v
-	return s
-}
-
-// SetThreshold sets the Threshold field's value.
-func (s *CloudWatchAlarmConfiguration) SetThreshold(v float64) *CloudWatchAlarmConfiguration {
-	s.Threshold = &v
-	return s
-}
-
 // A complex type that contains the health check request information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckRequest
 type CreateHealthCheckInput struct {
@@ -4624,18 +4420,6 @@ func (s *CreateHealthCheckInput) Validate() error {
 	return nil
 }
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *CreateHealthCheckInput) SetCallerReference(v string) *CreateHealthCheckInput {
-	s.CallerReference = &v
-	return s
-}
-
-// SetHealthCheckConfig sets the HealthCheckConfig field's value.
-func (s *CreateHealthCheckInput) SetHealthCheckConfig(v *HealthCheckConfig) *CreateHealthCheckInput {
-	s.HealthCheckConfig = v
-	return s
-}
-
 // A complex type containing the response information for the new health check.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckResponse
 type CreateHealthCheckOutput struct {
@@ -4667,18 +4451,6 @@ func (s CreateHealthCheckOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHealthCheckOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHealthCheck sets the HealthCheck field's value.
-func (s *CreateHealthCheckOutput) SetHealthCheck(v *HealthCheck) *CreateHealthCheckOutput {
-	s.HealthCheck = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateHealthCheckOutput) SetLocation(v string) *CreateHealthCheckOutput {
-	s.Location = &v
-	return s
 }
 
 // A complex type that contains information about the request to create a hosted
@@ -4771,36 +4543,6 @@ func (s *CreateHostedZoneInput) Validate() error {
 	return nil
 }
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *CreateHostedZoneInput) SetCallerReference(v string) *CreateHostedZoneInput {
-	s.CallerReference = &v
-	return s
-}
-
-// SetDelegationSetId sets the DelegationSetId field's value.
-func (s *CreateHostedZoneInput) SetDelegationSetId(v string) *CreateHostedZoneInput {
-	s.DelegationSetId = &v
-	return s
-}
-
-// SetHostedZoneConfig sets the HostedZoneConfig field's value.
-func (s *CreateHostedZoneInput) SetHostedZoneConfig(v *HostedZoneConfig) *CreateHostedZoneInput {
-	s.HostedZoneConfig = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateHostedZoneInput) SetName(v string) *CreateHostedZoneInput {
-	s.Name = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *CreateHostedZoneInput) SetVPC(v *VPC) *CreateHostedZoneInput {
-	s.VPC = v
-	return s
-}
-
 // A complex type containing the response information for the hosted zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneResponse
 type CreateHostedZoneOutput struct {
@@ -4846,36 +4588,6 @@ func (s CreateHostedZoneOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHostedZoneOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeInfo sets the ChangeInfo field's value.
-func (s *CreateHostedZoneOutput) SetChangeInfo(v *ChangeInfo) *CreateHostedZoneOutput {
-	s.ChangeInfo = v
-	return s
-}
-
-// SetDelegationSet sets the DelegationSet field's value.
-func (s *CreateHostedZoneOutput) SetDelegationSet(v *DelegationSet) *CreateHostedZoneOutput {
-	s.DelegationSet = v
-	return s
-}
-
-// SetHostedZone sets the HostedZone field's value.
-func (s *CreateHostedZoneOutput) SetHostedZone(v *HostedZone) *CreateHostedZoneOutput {
-	s.HostedZone = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateHostedZoneOutput) SetLocation(v string) *CreateHostedZoneOutput {
-	s.Location = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *CreateHostedZoneOutput) SetVPC(v *VPC) *CreateHostedZoneOutput {
-	s.VPC = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfigRequest
@@ -4930,18 +4642,6 @@ func (s *CreateQueryLoggingConfigInput) Validate() error {
 	return nil
 }
 
-// SetCloudWatchLogsLogGroupArn sets the CloudWatchLogsLogGroupArn field's value.
-func (s *CreateQueryLoggingConfigInput) SetCloudWatchLogsLogGroupArn(v string) *CreateQueryLoggingConfigInput {
-	s.CloudWatchLogsLogGroupArn = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *CreateQueryLoggingConfigInput) SetHostedZoneId(v string) *CreateQueryLoggingConfigInput {
-	s.HostedZoneId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfigResponse
 type CreateQueryLoggingConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -4974,18 +4674,6 @@ func (s CreateQueryLoggingConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateQueryLoggingConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateQueryLoggingConfigOutput) SetLocation(v string) *CreateQueryLoggingConfigOutput {
-	s.Location = &v
-	return s
-}
-
-// SetQueryLoggingConfig sets the QueryLoggingConfig field's value.
-func (s *CreateQueryLoggingConfigOutput) SetQueryLoggingConfig(v *QueryLoggingConfig) *CreateQueryLoggingConfigOutput {
-	s.QueryLoggingConfig = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSetRequest
@@ -5033,18 +4721,6 @@ func (s *CreateReusableDelegationSetInput) Validate() error {
 	return nil
 }
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *CreateReusableDelegationSetInput) SetCallerReference(v string) *CreateReusableDelegationSetInput {
-	s.CallerReference = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *CreateReusableDelegationSetInput) SetHostedZoneId(v string) *CreateReusableDelegationSetInput {
-	s.HostedZoneId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSetResponse
 type CreateReusableDelegationSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5075,18 +4751,6 @@ func (s CreateReusableDelegationSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReusableDelegationSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDelegationSet sets the DelegationSet field's value.
-func (s *CreateReusableDelegationSetOutput) SetDelegationSet(v *DelegationSet) *CreateReusableDelegationSetOutput {
-	s.DelegationSet = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateReusableDelegationSetOutput) SetLocation(v string) *CreateReusableDelegationSetOutput {
-	s.Location = &v
-	return s
 }
 
 // A complex type that contains information about the traffic policy that you
@@ -5136,24 +4800,6 @@ func (s *CreateTrafficPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComment sets the Comment field's value.
-func (s *CreateTrafficPolicyInput) SetComment(v string) *CreateTrafficPolicyInput {
-	s.Comment = &v
-	return s
-}
-
-// SetDocument sets the Document field's value.
-func (s *CreateTrafficPolicyInput) SetDocument(v string) *CreateTrafficPolicyInput {
-	s.Document = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateTrafficPolicyInput) SetName(v string) *CreateTrafficPolicyInput {
-	s.Name = &v
-	return s
 }
 
 // A complex type that contains information about the resource record sets that
@@ -5240,36 +4886,6 @@ func (s *CreateTrafficPolicyInstanceInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *CreateTrafficPolicyInstanceInput) SetHostedZoneId(v string) *CreateTrafficPolicyInstanceInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateTrafficPolicyInstanceInput) SetName(v string) *CreateTrafficPolicyInstanceInput {
-	s.Name = &v
-	return s
-}
-
-// SetTTL sets the TTL field's value.
-func (s *CreateTrafficPolicyInstanceInput) SetTTL(v int64) *CreateTrafficPolicyInstanceInput {
-	s.TTL = &v
-	return s
-}
-
-// SetTrafficPolicyId sets the TrafficPolicyId field's value.
-func (s *CreateTrafficPolicyInstanceInput) SetTrafficPolicyId(v string) *CreateTrafficPolicyInstanceInput {
-	s.TrafficPolicyId = &v
-	return s
-}
-
-// SetTrafficPolicyVersion sets the TrafficPolicyVersion field's value.
-func (s *CreateTrafficPolicyInstanceInput) SetTrafficPolicyVersion(v int64) *CreateTrafficPolicyInstanceInput {
-	s.TrafficPolicyVersion = &v
-	return s
-}
-
 // A complex type that contains the response information for the CreateTrafficPolicyInstance
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstanceResponse
@@ -5304,18 +4920,6 @@ func (s CreateTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLocation sets the Location field's value.
-func (s *CreateTrafficPolicyInstanceOutput) SetLocation(v string) *CreateTrafficPolicyInstanceOutput {
-	s.Location = &v
-	return s
-}
-
-// SetTrafficPolicyInstance sets the TrafficPolicyInstance field's value.
-func (s *CreateTrafficPolicyInstanceOutput) SetTrafficPolicyInstance(v *TrafficPolicyInstance) *CreateTrafficPolicyInstanceOutput {
-	s.TrafficPolicyInstance = v
-	return s
-}
-
 // A complex type that contains the response information for the CreateTrafficPolicy
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyResponse
@@ -5348,18 +4952,6 @@ func (s CreateTrafficPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTrafficPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateTrafficPolicyOutput) SetLocation(v string) *CreateTrafficPolicyOutput {
-	s.Location = &v
-	return s
-}
-
-// SetTrafficPolicy sets the TrafficPolicy field's value.
-func (s *CreateTrafficPolicyOutput) SetTrafficPolicy(v *TrafficPolicy) *CreateTrafficPolicyOutput {
-	s.TrafficPolicy = v
-	return s
 }
 
 // A complex type that contains information about the traffic policy that you
@@ -5416,24 +5008,6 @@ func (s *CreateTrafficPolicyVersionInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *CreateTrafficPolicyVersionInput) SetComment(v string) *CreateTrafficPolicyVersionInput {
-	s.Comment = &v
-	return s
-}
-
-// SetDocument sets the Document field's value.
-func (s *CreateTrafficPolicyVersionInput) SetDocument(v string) *CreateTrafficPolicyVersionInput {
-	s.Document = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateTrafficPolicyVersionInput) SetId(v string) *CreateTrafficPolicyVersionInput {
-	s.Id = &v
-	return s
-}
-
 // A complex type that contains the response information for the CreateTrafficPolicyVersion
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersionResponse
@@ -5467,18 +5041,6 @@ func (s CreateTrafficPolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTrafficPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateTrafficPolicyVersionOutput) SetLocation(v string) *CreateTrafficPolicyVersionOutput {
-	s.Location = &v
-	return s
-}
-
-// SetTrafficPolicy sets the TrafficPolicy field's value.
-func (s *CreateTrafficPolicyVersionOutput) SetTrafficPolicy(v *TrafficPolicy) *CreateTrafficPolicyVersionOutput {
-	s.TrafficPolicy = v
-	return s
 }
 
 // A complex type that contains information about the request to authorize associating
@@ -5534,18 +5096,6 @@ func (s *CreateVPCAssociationAuthorizationInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *CreateVPCAssociationAuthorizationInput) SetHostedZoneId(v string) *CreateVPCAssociationAuthorizationInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *CreateVPCAssociationAuthorizationInput) SetVPC(v *VPC) *CreateVPCAssociationAuthorizationInput {
-	s.VPC = v
-	return s
-}
-
 // A complex type that contains the response information from a CreateVPCAssociationAuthorization
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorizationResponse
@@ -5580,18 +5130,6 @@ func (s CreateVPCAssociationAuthorizationOutput) SDKResponseMetadata() aws.Respo
 	return s.responseMetadata
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *CreateVPCAssociationAuthorizationOutput) SetHostedZoneId(v string) *CreateVPCAssociationAuthorizationOutput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *CreateVPCAssociationAuthorizationOutput) SetVPC(v *VPC) *CreateVPCAssociationAuthorizationOutput {
-	s.VPC = v
-	return s
-}
-
 // A complex type that lists the name servers in a delegation set, as well as
 // the CallerReference and the ID for the delegation set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSet
@@ -5620,24 +5158,6 @@ func (s DelegationSet) String() string {
 // GoString returns the string representation
 func (s DelegationSet) GoString() string {
 	return s.String()
-}
-
-// SetCallerReference sets the CallerReference field's value.
-func (s *DelegationSet) SetCallerReference(v string) *DelegationSet {
-	s.CallerReference = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DelegationSet) SetId(v string) *DelegationSet {
-	s.Id = &v
-	return s
-}
-
-// SetNameServers sets the NameServers field's value.
-func (s *DelegationSet) SetNameServers(v []string) *DelegationSet {
-	s.NameServers = v
-	return s
 }
 
 // This action deletes a health check.
@@ -5673,12 +5193,6 @@ func (s *DeleteHealthCheckInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHealthCheckId sets the HealthCheckId field's value.
-func (s *DeleteHealthCheckInput) SetHealthCheckId(v string) *DeleteHealthCheckInput {
-	s.HealthCheckId = &v
-	return s
 }
 
 // An empty element.
@@ -5739,12 +5253,6 @@ func (s *DeleteHostedZoneInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteHostedZoneInput) SetId(v string) *DeleteHostedZoneInput {
-	s.Id = &v
-	return s
-}
-
 // A complex type that contains the response to a DeleteHostedZone request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZoneResponse
 type DeleteHostedZoneOutput struct {
@@ -5772,12 +5280,6 @@ func (s DeleteHostedZoneOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteHostedZoneOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeInfo sets the ChangeInfo field's value.
-func (s *DeleteHostedZoneOutput) SetChangeInfo(v *ChangeInfo) *DeleteHostedZoneOutput {
-	s.ChangeInfo = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfigRequest
@@ -5815,12 +5317,6 @@ func (s *DeleteQueryLoggingConfigInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteQueryLoggingConfigInput) SetId(v string) *DeleteQueryLoggingConfigInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfigResponse
@@ -5878,12 +5374,6 @@ func (s *DeleteReusableDelegationSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteReusableDelegationSetInput) SetId(v string) *DeleteReusableDelegationSetInput {
-	s.Id = &v
-	return s
 }
 
 // An empty element.
@@ -5959,18 +5449,6 @@ func (s *DeleteTrafficPolicyInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteTrafficPolicyInput) SetId(v string) *DeleteTrafficPolicyInput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DeleteTrafficPolicyInput) SetVersion(v int64) *DeleteTrafficPolicyInput {
-	s.Version = &v
-	return s
-}
-
 // A request to delete a specified traffic policy instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstanceRequest
 type DeleteTrafficPolicyInstanceInput struct {
@@ -6011,12 +5489,6 @@ func (s *DeleteTrafficPolicyInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteTrafficPolicyInstanceInput) SetId(v string) *DeleteTrafficPolicyInstanceInput {
-	s.Id = &v
-	return s
 }
 
 // An empty element.
@@ -6120,18 +5592,6 @@ func (s *DeleteVPCAssociationAuthorizationInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *DeleteVPCAssociationAuthorizationInput) SetHostedZoneId(v string) *DeleteVPCAssociationAuthorizationInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *DeleteVPCAssociationAuthorizationInput) SetVPC(v *VPC) *DeleteVPCAssociationAuthorizationInput {
-	s.VPC = v
-	return s
-}
-
 // Empty response for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationResponse
 type DeleteVPCAssociationAuthorizationOutput struct {
@@ -6182,18 +5642,6 @@ func (s Dimension) String() string {
 // GoString returns the string representation
 func (s Dimension) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *Dimension) SetName(v string) *Dimension {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Dimension) SetValue(v string) *Dimension {
-	s.Value = &v
-	return s
 }
 
 // A complex type that contains information about the VPC that you want to disassociate
@@ -6250,24 +5698,6 @@ func (s *DisassociateVPCFromHostedZoneInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *DisassociateVPCFromHostedZoneInput) SetComment(v string) *DisassociateVPCFromHostedZoneInput {
-	s.Comment = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *DisassociateVPCFromHostedZoneInput) SetHostedZoneId(v string) *DisassociateVPCFromHostedZoneInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetVPC sets the VPC field's value.
-func (s *DisassociateVPCFromHostedZoneInput) SetVPC(v *VPC) *DisassociateVPCFromHostedZoneInput {
-	s.VPC = v
-	return s
-}
-
 // A complex type that contains the response information for the disassociate
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZoneResponse
@@ -6296,12 +5726,6 @@ func (s DisassociateVPCFromHostedZoneOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateVPCFromHostedZoneOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeInfo sets the ChangeInfo field's value.
-func (s *DisassociateVPCFromHostedZoneOutput) SetChangeInfo(v *ChangeInfo) *DisassociateVPCFromHostedZoneOutput {
-	s.ChangeInfo = v
-	return s
 }
 
 // A complex type that contains information about a geo location.
@@ -6354,24 +5778,6 @@ func (s *GeoLocation) Validate() error {
 	return nil
 }
 
-// SetContinentCode sets the ContinentCode field's value.
-func (s *GeoLocation) SetContinentCode(v string) *GeoLocation {
-	s.ContinentCode = &v
-	return s
-}
-
-// SetCountryCode sets the CountryCode field's value.
-func (s *GeoLocation) SetCountryCode(v string) *GeoLocation {
-	s.CountryCode = &v
-	return s
-}
-
-// SetSubdivisionCode sets the SubdivisionCode field's value.
-func (s *GeoLocation) SetSubdivisionCode(v string) *GeoLocation {
-	s.SubdivisionCode = &v
-	return s
-}
-
 // A complex type that contains the codes and full continent, country, and subdivision
 // names for the specified geolocation code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoLocationDetails
@@ -6407,42 +5813,6 @@ func (s GeoLocationDetails) String() string {
 // GoString returns the string representation
 func (s GeoLocationDetails) GoString() string {
 	return s.String()
-}
-
-// SetContinentCode sets the ContinentCode field's value.
-func (s *GeoLocationDetails) SetContinentCode(v string) *GeoLocationDetails {
-	s.ContinentCode = &v
-	return s
-}
-
-// SetContinentName sets the ContinentName field's value.
-func (s *GeoLocationDetails) SetContinentName(v string) *GeoLocationDetails {
-	s.ContinentName = &v
-	return s
-}
-
-// SetCountryCode sets the CountryCode field's value.
-func (s *GeoLocationDetails) SetCountryCode(v string) *GeoLocationDetails {
-	s.CountryCode = &v
-	return s
-}
-
-// SetCountryName sets the CountryName field's value.
-func (s *GeoLocationDetails) SetCountryName(v string) *GeoLocationDetails {
-	s.CountryName = &v
-	return s
-}
-
-// SetSubdivisionCode sets the SubdivisionCode field's value.
-func (s *GeoLocationDetails) SetSubdivisionCode(v string) *GeoLocationDetails {
-	s.SubdivisionCode = &v
-	return s
-}
-
-// SetSubdivisionName sets the SubdivisionName field's value.
-func (s *GeoLocationDetails) SetSubdivisionName(v string) *GeoLocationDetails {
-	s.SubdivisionName = &v
-	return s
 }
 
 // A complex type that contains information about the request to create a hosted
@@ -6497,12 +5867,6 @@ func (s *GetAccountLimitInput) Validate() error {
 	return nil
 }
 
-// SetType sets the Type field's value.
-func (s *GetAccountLimitInput) SetType(v AccountLimitType) *GetAccountLimitInput {
-	s.Type = v
-	return s
-}
-
 // A complex type that contains the requested limit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimitResponse
 type GetAccountLimitOutput struct {
@@ -6542,18 +5906,6 @@ func (s GetAccountLimitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCount sets the Count field's value.
-func (s *GetAccountLimitOutput) SetCount(v int64) *GetAccountLimitOutput {
-	s.Count = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetAccountLimitOutput) SetLimit(v *AccountLimit) *GetAccountLimitOutput {
-	s.Limit = v
-	return s
-}
-
 // The input for a GetChange request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChangeRequest
 type GetChangeInput struct {
@@ -6591,12 +5943,6 @@ func (s *GetChangeInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetChangeInput) SetId(v string) *GetChangeInput {
-	s.Id = &v
-	return s
-}
-
 // A complex type that contains the ChangeInfo element.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChangeResponse
 type GetChangeOutput struct {
@@ -6623,12 +5969,6 @@ func (s GetChangeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetChangeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeInfo sets the ChangeInfo field's value.
-func (s *GetChangeOutput) SetChangeInfo(v *ChangeInfo) *GetChangeOutput {
-	s.ChangeInfo = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest
@@ -6669,12 +6009,6 @@ func (s GetCheckerIpRangesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCheckerIpRangesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCheckerIpRanges sets the CheckerIpRanges field's value.
-func (s *GetCheckerIpRangesOutput) SetCheckerIpRanges(v []string) *GetCheckerIpRangesOutput {
-	s.CheckerIpRanges = v
-	return s
 }
 
 // A request for information about whether a specified geographic location is
@@ -6740,24 +6074,6 @@ func (s *GetGeoLocationInput) Validate() error {
 	return nil
 }
 
-// SetContinentCode sets the ContinentCode field's value.
-func (s *GetGeoLocationInput) SetContinentCode(v string) *GetGeoLocationInput {
-	s.ContinentCode = &v
-	return s
-}
-
-// SetCountryCode sets the CountryCode field's value.
-func (s *GetGeoLocationInput) SetCountryCode(v string) *GetGeoLocationInput {
-	s.CountryCode = &v
-	return s
-}
-
-// SetSubdivisionCode sets the SubdivisionCode field's value.
-func (s *GetGeoLocationInput) SetSubdivisionCode(v string) *GetGeoLocationInput {
-	s.SubdivisionCode = &v
-	return s
-}
-
 // A complex type that contains the response information for the specified geolocation
 // code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocationResponse
@@ -6786,12 +6102,6 @@ func (s GetGeoLocationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGeoLocationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGeoLocationDetails sets the GeoLocationDetails field's value.
-func (s *GetGeoLocationOutput) SetGeoLocationDetails(v *GeoLocationDetails) *GetGeoLocationOutput {
-	s.GeoLocationDetails = v
-	return s
 }
 
 // A request for the number of health checks that are associated with the current
@@ -6839,12 +6149,6 @@ func (s GetHealthCheckCountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHealthCheckCount sets the HealthCheckCount field's value.
-func (s *GetHealthCheckCountOutput) SetHealthCheckCount(v int64) *GetHealthCheckCountOutput {
-	s.HealthCheckCount = &v
-	return s
-}
-
 // A request to get information about a specified health check.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckRequest
 type GetHealthCheckInput struct {
@@ -6881,12 +6185,6 @@ func (s *GetHealthCheckInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHealthCheckId sets the HealthCheckId field's value.
-func (s *GetHealthCheckInput) SetHealthCheckId(v string) *GetHealthCheckInput {
-	s.HealthCheckId = &v
-	return s
 }
 
 // A request for the reason that a health check failed most recently.
@@ -6930,12 +6228,6 @@ func (s *GetHealthCheckLastFailureReasonInput) Validate() error {
 	return nil
 }
 
-// SetHealthCheckId sets the HealthCheckId field's value.
-func (s *GetHealthCheckLastFailureReasonInput) SetHealthCheckId(v string) *GetHealthCheckLastFailureReasonInput {
-	s.HealthCheckId = &v
-	return s
-}
-
 // A complex type that contains the response to a GetHealthCheckLastFailureReason
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReasonResponse
@@ -6966,12 +6258,6 @@ func (s GetHealthCheckLastFailureReasonOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetHealthCheckObservations sets the HealthCheckObservations field's value.
-func (s *GetHealthCheckLastFailureReasonOutput) SetHealthCheckObservations(v []HealthCheckObservation) *GetHealthCheckLastFailureReasonOutput {
-	s.HealthCheckObservations = v
-	return s
-}
-
 // A complex type that contains the response to a GetHealthCheck request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckResponse
 type GetHealthCheckOutput struct {
@@ -6999,12 +6285,6 @@ func (s GetHealthCheckOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetHealthCheckOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHealthCheck sets the HealthCheck field's value.
-func (s *GetHealthCheckOutput) SetHealthCheck(v *HealthCheck) *GetHealthCheckOutput {
-	s.HealthCheck = v
-	return s
 }
 
 // A request to get the status for a health check.
@@ -7048,12 +6328,6 @@ func (s *GetHealthCheckStatusInput) Validate() error {
 	return nil
 }
 
-// SetHealthCheckId sets the HealthCheckId field's value.
-func (s *GetHealthCheckStatusInput) SetHealthCheckId(v string) *GetHealthCheckStatusInput {
-	s.HealthCheckId = &v
-	return s
-}
-
 // A complex type that contains the response to a GetHealthCheck request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatusResponse
 type GetHealthCheckStatusOutput struct {
@@ -7081,12 +6355,6 @@ func (s GetHealthCheckStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetHealthCheckStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHealthCheckObservations sets the HealthCheckObservations field's value.
-func (s *GetHealthCheckStatusOutput) SetHealthCheckObservations(v []HealthCheckObservation) *GetHealthCheckStatusOutput {
-	s.HealthCheckObservations = v
-	return s
 }
 
 // A request to retrieve a count of all the hosted zones that are associated
@@ -7135,12 +6403,6 @@ func (s GetHostedZoneCountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHostedZoneCount sets the HostedZoneCount field's value.
-func (s *GetHostedZoneCountOutput) SetHostedZoneCount(v int64) *GetHostedZoneCountOutput {
-	s.HostedZoneCount = &v
-	return s
-}
-
 // A request to get information about a specified hosted zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneRequest
 type GetHostedZoneInput struct {
@@ -7174,12 +6436,6 @@ func (s *GetHostedZoneInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *GetHostedZoneInput) SetId(v string) *GetHostedZoneInput {
-	s.Id = &v
-	return s
 }
 
 // A complex type that contains information about the request to create a hosted
@@ -7232,18 +6488,6 @@ func (s *GetHostedZoneLimitInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *GetHostedZoneLimitInput) SetHostedZoneId(v string) *GetHostedZoneLimitInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *GetHostedZoneLimitInput) SetType(v HostedZoneLimitType) *GetHostedZoneLimitInput {
-	s.Type = v
-	return s
-}
-
 // A complex type that contains the requested limit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneLimitResponse
 type GetHostedZoneLimitOutput struct {
@@ -7283,18 +6527,6 @@ func (s GetHostedZoneLimitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCount sets the Count field's value.
-func (s *GetHostedZoneLimitOutput) SetCount(v int64) *GetHostedZoneLimitOutput {
-	s.Count = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetHostedZoneLimitOutput) SetLimit(v *HostedZoneLimit) *GetHostedZoneLimitOutput {
-	s.Limit = v
-	return s
-}
-
 // A complex type that contain the response to a GetHostedZone request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneResponse
 type GetHostedZoneOutput struct {
@@ -7330,24 +6562,6 @@ func (s GetHostedZoneOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetHostedZoneOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDelegationSet sets the DelegationSet field's value.
-func (s *GetHostedZoneOutput) SetDelegationSet(v *DelegationSet) *GetHostedZoneOutput {
-	s.DelegationSet = v
-	return s
-}
-
-// SetHostedZone sets the HostedZone field's value.
-func (s *GetHostedZoneOutput) SetHostedZone(v *HostedZone) *GetHostedZoneOutput {
-	s.HostedZone = v
-	return s
-}
-
-// SetVPCs sets the VPCs field's value.
-func (s *GetHostedZoneOutput) SetVPCs(v []VPC) *GetHostedZoneOutput {
-	s.VPCs = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfigRequest
@@ -7388,12 +6602,6 @@ func (s *GetQueryLoggingConfigInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetQueryLoggingConfigInput) SetId(v string) *GetQueryLoggingConfigInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfigResponse
 type GetQueryLoggingConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -7420,12 +6628,6 @@ func (s GetQueryLoggingConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetQueryLoggingConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQueryLoggingConfig sets the QueryLoggingConfig field's value.
-func (s *GetQueryLoggingConfigOutput) SetQueryLoggingConfig(v *QueryLoggingConfig) *GetQueryLoggingConfigOutput {
-	s.QueryLoggingConfig = v
-	return s
 }
 
 // A request to get information about a specified reusable delegation set.
@@ -7462,12 +6664,6 @@ func (s *GetReusableDelegationSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *GetReusableDelegationSetInput) SetId(v string) *GetReusableDelegationSetInput {
-	s.Id = &v
-	return s
 }
 
 // A complex type that contains information about the request to create a hosted
@@ -7516,18 +6712,6 @@ func (s *GetReusableDelegationSetLimitInput) Validate() error {
 	return nil
 }
 
-// SetDelegationSetId sets the DelegationSetId field's value.
-func (s *GetReusableDelegationSetLimitInput) SetDelegationSetId(v string) *GetReusableDelegationSetLimitInput {
-	s.DelegationSetId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *GetReusableDelegationSetLimitInput) SetType(v ReusableDelegationSetLimitType) *GetReusableDelegationSetLimitInput {
-	s.Type = v
-	return s
-}
-
 // A complex type that contains the requested limit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetLimitResponse
 type GetReusableDelegationSetLimitOutput struct {
@@ -7563,18 +6747,6 @@ func (s GetReusableDelegationSetLimitOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetCount sets the Count field's value.
-func (s *GetReusableDelegationSetLimitOutput) SetCount(v int64) *GetReusableDelegationSetLimitOutput {
-	s.Count = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetReusableDelegationSetLimitOutput) SetLimit(v *ReusableDelegationSetLimit) *GetReusableDelegationSetLimitOutput {
-	s.Limit = v
-	return s
-}
-
 // A complex type that contains the response to the GetReusableDelegationSet
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetResponse
@@ -7602,12 +6774,6 @@ func (s GetReusableDelegationSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetReusableDelegationSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDelegationSet sets the DelegationSet field's value.
-func (s *GetReusableDelegationSetOutput) SetDelegationSet(v *DelegationSet) *GetReusableDelegationSetOutput {
-	s.DelegationSet = v
-	return s
 }
 
 // Gets information about a specific traffic policy version.
@@ -7661,18 +6827,6 @@ func (s *GetTrafficPolicyInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetTrafficPolicyInput) SetId(v string) *GetTrafficPolicyInput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetTrafficPolicyInput) SetVersion(v int64) *GetTrafficPolicyInput {
-	s.Version = &v
-	return s
-}
-
 // Request to get the number of traffic policy instances that are associated
 // with the current AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountRequest
@@ -7720,12 +6874,6 @@ func (s GetTrafficPolicyInstanceCountOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetTrafficPolicyInstanceCount sets the TrafficPolicyInstanceCount field's value.
-func (s *GetTrafficPolicyInstanceCountOutput) SetTrafficPolicyInstanceCount(v int64) *GetTrafficPolicyInstanceCountOutput {
-	s.TrafficPolicyInstanceCount = &v
-	return s
-}
-
 // Gets information about a specified traffic policy instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceRequest
 type GetTrafficPolicyInstanceInput struct {
@@ -7764,12 +6912,6 @@ func (s *GetTrafficPolicyInstanceInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetTrafficPolicyInstanceInput) SetId(v string) *GetTrafficPolicyInstanceInput {
-	s.Id = &v
-	return s
-}
-
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceResponse
@@ -7799,12 +6941,6 @@ func (s GetTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTrafficPolicyInstance sets the TrafficPolicyInstance field's value.
-func (s *GetTrafficPolicyInstanceOutput) SetTrafficPolicyInstance(v *TrafficPolicyInstance) *GetTrafficPolicyInstanceOutput {
-	s.TrafficPolicyInstance = v
-	return s
-}
-
 // A complex type that contains the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyResponse
 type GetTrafficPolicyOutput struct {
@@ -7831,12 +6967,6 @@ func (s GetTrafficPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTrafficPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTrafficPolicy sets the TrafficPolicy field's value.
-func (s *GetTrafficPolicyOutput) SetTrafficPolicy(v *TrafficPolicy) *GetTrafficPolicyOutput {
-	s.TrafficPolicy = v
-	return s
 }
 
 // A complex type that contains information about one health check that is associated
@@ -7888,42 +7018,6 @@ func (s HealthCheck) String() string {
 // GoString returns the string representation
 func (s HealthCheck) GoString() string {
 	return s.String()
-}
-
-// SetCallerReference sets the CallerReference field's value.
-func (s *HealthCheck) SetCallerReference(v string) *HealthCheck {
-	s.CallerReference = &v
-	return s
-}
-
-// SetCloudWatchAlarmConfiguration sets the CloudWatchAlarmConfiguration field's value.
-func (s *HealthCheck) SetCloudWatchAlarmConfiguration(v *CloudWatchAlarmConfiguration) *HealthCheck {
-	s.CloudWatchAlarmConfiguration = v
-	return s
-}
-
-// SetHealthCheckConfig sets the HealthCheckConfig field's value.
-func (s *HealthCheck) SetHealthCheckConfig(v *HealthCheckConfig) *HealthCheck {
-	s.HealthCheckConfig = v
-	return s
-}
-
-// SetHealthCheckVersion sets the HealthCheckVersion field's value.
-func (s *HealthCheck) SetHealthCheckVersion(v int64) *HealthCheck {
-	s.HealthCheckVersion = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *HealthCheck) SetId(v string) *HealthCheck {
-	s.Id = &v
-	return s
-}
-
-// SetLinkedService sets the LinkedService field's value.
-func (s *HealthCheck) SetLinkedService(v *LinkedService) *HealthCheck {
-	s.LinkedService = v
-	return s
 }
 
 // A complex type that contains information about the health check.
@@ -8241,102 +7335,6 @@ func (s *HealthCheckConfig) Validate() error {
 	return nil
 }
 
-// SetAlarmIdentifier sets the AlarmIdentifier field's value.
-func (s *HealthCheckConfig) SetAlarmIdentifier(v *AlarmIdentifier) *HealthCheckConfig {
-	s.AlarmIdentifier = v
-	return s
-}
-
-// SetChildHealthChecks sets the ChildHealthChecks field's value.
-func (s *HealthCheckConfig) SetChildHealthChecks(v []string) *HealthCheckConfig {
-	s.ChildHealthChecks = v
-	return s
-}
-
-// SetEnableSNI sets the EnableSNI field's value.
-func (s *HealthCheckConfig) SetEnableSNI(v bool) *HealthCheckConfig {
-	s.EnableSNI = &v
-	return s
-}
-
-// SetFailureThreshold sets the FailureThreshold field's value.
-func (s *HealthCheckConfig) SetFailureThreshold(v int64) *HealthCheckConfig {
-	s.FailureThreshold = &v
-	return s
-}
-
-// SetFullyQualifiedDomainName sets the FullyQualifiedDomainName field's value.
-func (s *HealthCheckConfig) SetFullyQualifiedDomainName(v string) *HealthCheckConfig {
-	s.FullyQualifiedDomainName = &v
-	return s
-}
-
-// SetHealthThreshold sets the HealthThreshold field's value.
-func (s *HealthCheckConfig) SetHealthThreshold(v int64) *HealthCheckConfig {
-	s.HealthThreshold = &v
-	return s
-}
-
-// SetIPAddress sets the IPAddress field's value.
-func (s *HealthCheckConfig) SetIPAddress(v string) *HealthCheckConfig {
-	s.IPAddress = &v
-	return s
-}
-
-// SetInsufficientDataHealthStatus sets the InsufficientDataHealthStatus field's value.
-func (s *HealthCheckConfig) SetInsufficientDataHealthStatus(v InsufficientDataHealthStatus) *HealthCheckConfig {
-	s.InsufficientDataHealthStatus = v
-	return s
-}
-
-// SetInverted sets the Inverted field's value.
-func (s *HealthCheckConfig) SetInverted(v bool) *HealthCheckConfig {
-	s.Inverted = &v
-	return s
-}
-
-// SetMeasureLatency sets the MeasureLatency field's value.
-func (s *HealthCheckConfig) SetMeasureLatency(v bool) *HealthCheckConfig {
-	s.MeasureLatency = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *HealthCheckConfig) SetPort(v int64) *HealthCheckConfig {
-	s.Port = &v
-	return s
-}
-
-// SetRegions sets the Regions field's value.
-func (s *HealthCheckConfig) SetRegions(v []HealthCheckRegion) *HealthCheckConfig {
-	s.Regions = v
-	return s
-}
-
-// SetRequestInterval sets the RequestInterval field's value.
-func (s *HealthCheckConfig) SetRequestInterval(v int64) *HealthCheckConfig {
-	s.RequestInterval = &v
-	return s
-}
-
-// SetResourcePath sets the ResourcePath field's value.
-func (s *HealthCheckConfig) SetResourcePath(v string) *HealthCheckConfig {
-	s.ResourcePath = &v
-	return s
-}
-
-// SetSearchString sets the SearchString field's value.
-func (s *HealthCheckConfig) SetSearchString(v string) *HealthCheckConfig {
-	s.SearchString = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *HealthCheckConfig) SetType(v HealthCheckType) *HealthCheckConfig {
-	s.Type = v
-	return s
-}
-
 // A complex type that contains the last failure reason as reported by one Amazon
 // Route 53 health checker.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckObservation
@@ -8364,24 +7362,6 @@ func (s HealthCheckObservation) String() string {
 // GoString returns the string representation
 func (s HealthCheckObservation) GoString() string {
 	return s.String()
-}
-
-// SetIPAddress sets the IPAddress field's value.
-func (s *HealthCheckObservation) SetIPAddress(v string) *HealthCheckObservation {
-	s.IPAddress = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *HealthCheckObservation) SetRegion(v HealthCheckRegion) *HealthCheckObservation {
-	s.Region = v
-	return s
-}
-
-// SetStatusReport sets the StatusReport field's value.
-func (s *HealthCheckObservation) SetStatusReport(v *StatusReport) *HealthCheckObservation {
-	s.StatusReport = v
-	return s
 }
 
 // A complex type that contains general information about the hosted zone.
@@ -8434,42 +7414,6 @@ func (s HostedZone) GoString() string {
 	return s.String()
 }
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *HostedZone) SetCallerReference(v string) *HostedZone {
-	s.CallerReference = &v
-	return s
-}
-
-// SetConfig sets the Config field's value.
-func (s *HostedZone) SetConfig(v *HostedZoneConfig) *HostedZone {
-	s.Config = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *HostedZone) SetId(v string) *HostedZone {
-	s.Id = &v
-	return s
-}
-
-// SetLinkedService sets the LinkedService field's value.
-func (s *HostedZone) SetLinkedService(v *LinkedService) *HostedZone {
-	s.LinkedService = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *HostedZone) SetName(v string) *HostedZone {
-	s.Name = &v
-	return s
-}
-
-// SetResourceRecordSetCount sets the ResourceRecordSetCount field's value.
-func (s *HostedZone) SetResourceRecordSetCount(v int64) *HostedZone {
-	s.ResourceRecordSetCount = &v
-	return s
-}
-
 // A complex type that contains an optional comment about your hosted zone.
 // If you don't want to specify a comment, omit both the HostedZoneConfig and
 // Comment elements.
@@ -8492,18 +7436,6 @@ func (s HostedZoneConfig) String() string {
 // GoString returns the string representation
 func (s HostedZoneConfig) GoString() string {
 	return s.String()
-}
-
-// SetComment sets the Comment field's value.
-func (s *HostedZoneConfig) SetComment(v string) *HostedZoneConfig {
-	s.Comment = &v
-	return s
-}
-
-// SetPrivateZone sets the PrivateZone field's value.
-func (s *HostedZoneConfig) SetPrivateZone(v bool) *HostedZoneConfig {
-	s.PrivateZone = &v
-	return s
 }
 
 // A complex type that contains the type of limit that you specified in the
@@ -8539,18 +7471,6 @@ func (s HostedZoneLimit) GoString() string {
 	return s.String()
 }
 
-// SetType sets the Type field's value.
-func (s *HostedZoneLimit) SetType(v HostedZoneLimitType) *HostedZoneLimit {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *HostedZoneLimit) SetValue(v int64) *HostedZoneLimit {
-	s.Value = &v
-	return s
-}
-
 // If a health check or hosted zone was created by another service, LinkedService
 // is a complex type that describes the service that created the resource. When
 // a resource is created by another service, you can't edit or delete it using
@@ -8579,18 +7499,6 @@ func (s LinkedService) String() string {
 // GoString returns the string representation
 func (s LinkedService) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *LinkedService) SetDescription(v string) *LinkedService {
-	s.Description = &v
-	return s
-}
-
-// SetServicePrincipal sets the ServicePrincipal field's value.
-func (s *LinkedService) SetServicePrincipal(v string) *LinkedService {
-	s.ServicePrincipal = &v
-	return s
 }
 
 // A request to get a list of geographic locations that Amazon Route 53 supports
@@ -8665,30 +7573,6 @@ func (s *ListGeoLocationsInput) Validate() error {
 	return nil
 }
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListGeoLocationsInput) SetMaxItems(v string) *ListGeoLocationsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetStartContinentCode sets the StartContinentCode field's value.
-func (s *ListGeoLocationsInput) SetStartContinentCode(v string) *ListGeoLocationsInput {
-	s.StartContinentCode = &v
-	return s
-}
-
-// SetStartCountryCode sets the StartCountryCode field's value.
-func (s *ListGeoLocationsInput) SetStartCountryCode(v string) *ListGeoLocationsInput {
-	s.StartCountryCode = &v
-	return s
-}
-
-// SetStartSubdivisionCode sets the StartSubdivisionCode field's value.
-func (s *ListGeoLocationsInput) SetStartSubdivisionCode(v string) *ListGeoLocationsInput {
-	s.StartSubdivisionCode = &v
-	return s
-}
-
 // A complex type containing the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocationsResponse
 type ListGeoLocationsOutput struct {
@@ -8747,42 +7631,6 @@ func (s ListGeoLocationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetGeoLocationDetailsList sets the GeoLocationDetailsList field's value.
-func (s *ListGeoLocationsOutput) SetGeoLocationDetailsList(v []GeoLocationDetails) *ListGeoLocationsOutput {
-	s.GeoLocationDetailsList = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListGeoLocationsOutput) SetIsTruncated(v bool) *ListGeoLocationsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListGeoLocationsOutput) SetMaxItems(v string) *ListGeoLocationsOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextContinentCode sets the NextContinentCode field's value.
-func (s *ListGeoLocationsOutput) SetNextContinentCode(v string) *ListGeoLocationsOutput {
-	s.NextContinentCode = &v
-	return s
-}
-
-// SetNextCountryCode sets the NextCountryCode field's value.
-func (s *ListGeoLocationsOutput) SetNextCountryCode(v string) *ListGeoLocationsOutput {
-	s.NextCountryCode = &v
-	return s
-}
-
-// SetNextSubdivisionCode sets the NextSubdivisionCode field's value.
-func (s *ListGeoLocationsOutput) SetNextSubdivisionCode(v string) *ListGeoLocationsOutput {
-	s.NextSubdivisionCode = &v
-	return s
-}
-
 // A request to retrieve a list of the health checks that are associated with
 // the current AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksRequest
@@ -8815,18 +7663,6 @@ func (s ListHealthChecksInput) String() string {
 // GoString returns the string representation
 func (s ListHealthChecksInput) GoString() string {
 	return s.String()
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListHealthChecksInput) SetMarker(v string) *ListHealthChecksInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListHealthChecksInput) SetMaxItems(v string) *ListHealthChecksInput {
-	s.MaxItems = &v
-	return s
 }
 
 // A complex type that contains the response to a ListHealthChecks request.
@@ -8883,36 +7719,6 @@ func (s ListHealthChecksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHealthChecks sets the HealthChecks field's value.
-func (s *ListHealthChecksOutput) SetHealthChecks(v []HealthCheck) *ListHealthChecksOutput {
-	s.HealthChecks = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListHealthChecksOutput) SetIsTruncated(v bool) *ListHealthChecksOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListHealthChecksOutput) SetMarker(v string) *ListHealthChecksOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListHealthChecksOutput) SetMaxItems(v string) *ListHealthChecksOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListHealthChecksOutput) SetNextMarker(v string) *ListHealthChecksOutput {
-	s.NextMarker = &v
-	return s
-}
-
 // Retrieves a list of the public and private hosted zones that are associated
 // with the current AWS account in ASCII order by domain name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByNameRequest
@@ -8954,24 +7760,6 @@ func (s ListHostedZonesByNameInput) String() string {
 // GoString returns the string representation
 func (s ListHostedZonesByNameInput) GoString() string {
 	return s.String()
-}
-
-// SetDNSName sets the DNSName field's value.
-func (s *ListHostedZonesByNameInput) SetDNSName(v string) *ListHostedZonesByNameInput {
-	s.DNSName = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListHostedZonesByNameInput) SetHostedZoneId(v string) *ListHostedZonesByNameInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListHostedZonesByNameInput) SetMaxItems(v string) *ListHostedZonesByNameInput {
-	s.MaxItems = &v
-	return s
 }
 
 // A complex type that contains the response information for the request.
@@ -9042,48 +7830,6 @@ func (s ListHostedZonesByNameOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDNSName sets the DNSName field's value.
-func (s *ListHostedZonesByNameOutput) SetDNSName(v string) *ListHostedZonesByNameOutput {
-	s.DNSName = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListHostedZonesByNameOutput) SetHostedZoneId(v string) *ListHostedZonesByNameOutput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetHostedZones sets the HostedZones field's value.
-func (s *ListHostedZonesByNameOutput) SetHostedZones(v []HostedZone) *ListHostedZonesByNameOutput {
-	s.HostedZones = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListHostedZonesByNameOutput) SetIsTruncated(v bool) *ListHostedZonesByNameOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListHostedZonesByNameOutput) SetMaxItems(v string) *ListHostedZonesByNameOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextDNSName sets the NextDNSName field's value.
-func (s *ListHostedZonesByNameOutput) SetNextDNSName(v string) *ListHostedZonesByNameOutput {
-	s.NextDNSName = &v
-	return s
-}
-
-// SetNextHostedZoneId sets the NextHostedZoneId field's value.
-func (s *ListHostedZonesByNameOutput) SetNextHostedZoneId(v string) *ListHostedZonesByNameOutput {
-	s.NextHostedZoneId = &v
-	return s
-}
-
 // A request to retrieve a list of the public and private hosted zones that
 // are associated with the current AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesRequest
@@ -9122,24 +7868,6 @@ func (s ListHostedZonesInput) String() string {
 // GoString returns the string representation
 func (s ListHostedZonesInput) GoString() string {
 	return s.String()
-}
-
-// SetDelegationSetId sets the DelegationSetId field's value.
-func (s *ListHostedZonesInput) SetDelegationSetId(v string) *ListHostedZonesInput {
-	s.DelegationSetId = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListHostedZonesInput) SetMarker(v string) *ListHostedZonesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListHostedZonesInput) SetMaxItems(v string) *ListHostedZonesInput {
-	s.MaxItems = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesResponse
@@ -9197,36 +7925,6 @@ func (s ListHostedZonesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHostedZones sets the HostedZones field's value.
-func (s *ListHostedZonesOutput) SetHostedZones(v []HostedZone) *ListHostedZonesOutput {
-	s.HostedZones = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListHostedZonesOutput) SetIsTruncated(v bool) *ListHostedZonesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListHostedZonesOutput) SetMarker(v string) *ListHostedZonesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListHostedZonesOutput) SetMaxItems(v string) *ListHostedZonesOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListHostedZonesOutput) SetNextMarker(v string) *ListHostedZonesOutput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigsRequest
 type ListQueryLoggingConfigsInput struct {
 	_ struct{} `type:"structure"`
@@ -9267,24 +7965,6 @@ func (s ListQueryLoggingConfigsInput) GoString() string {
 	return s.String()
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListQueryLoggingConfigsInput) SetHostedZoneId(v string) *ListQueryLoggingConfigsInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListQueryLoggingConfigsInput) SetMaxResults(v string) *ListQueryLoggingConfigsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQueryLoggingConfigsInput) SetNextToken(v string) *ListQueryLoggingConfigsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigsResponse
 type ListQueryLoggingConfigsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9321,18 +8001,6 @@ func (s ListQueryLoggingConfigsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListQueryLoggingConfigsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQueryLoggingConfigsOutput) SetNextToken(v string) *ListQueryLoggingConfigsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQueryLoggingConfigs sets the QueryLoggingConfigs field's value.
-func (s *ListQueryLoggingConfigsOutput) SetQueryLoggingConfigs(v []QueryLoggingConfig) *ListQueryLoggingConfigsOutput {
-	s.QueryLoggingConfigs = v
-	return s
 }
 
 // A request for the resource record sets that are associated with a specified
@@ -9418,36 +8086,6 @@ func (s *ListResourceRecordSetsInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListResourceRecordSetsInput) SetHostedZoneId(v string) *ListResourceRecordSetsInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListResourceRecordSetsInput) SetMaxItems(v string) *ListResourceRecordSetsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetStartRecordIdentifier sets the StartRecordIdentifier field's value.
-func (s *ListResourceRecordSetsInput) SetStartRecordIdentifier(v string) *ListResourceRecordSetsInput {
-	s.StartRecordIdentifier = &v
-	return s
-}
-
-// SetStartRecordName sets the StartRecordName field's value.
-func (s *ListResourceRecordSetsInput) SetStartRecordName(v string) *ListResourceRecordSetsInput {
-	s.StartRecordName = &v
-	return s
-}
-
-// SetStartRecordType sets the StartRecordType field's value.
-func (s *ListResourceRecordSetsInput) SetStartRecordType(v RRType) *ListResourceRecordSetsInput {
-	s.StartRecordType = v
-	return s
-}
-
 // A complex type that contains list information for the resource record set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetsResponse
 type ListResourceRecordSetsOutput struct {
@@ -9503,42 +8141,6 @@ func (s ListResourceRecordSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListResourceRecordSetsOutput) SetIsTruncated(v bool) *ListResourceRecordSetsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListResourceRecordSetsOutput) SetMaxItems(v string) *ListResourceRecordSetsOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextRecordIdentifier sets the NextRecordIdentifier field's value.
-func (s *ListResourceRecordSetsOutput) SetNextRecordIdentifier(v string) *ListResourceRecordSetsOutput {
-	s.NextRecordIdentifier = &v
-	return s
-}
-
-// SetNextRecordName sets the NextRecordName field's value.
-func (s *ListResourceRecordSetsOutput) SetNextRecordName(v string) *ListResourceRecordSetsOutput {
-	s.NextRecordName = &v
-	return s
-}
-
-// SetNextRecordType sets the NextRecordType field's value.
-func (s *ListResourceRecordSetsOutput) SetNextRecordType(v RRType) *ListResourceRecordSetsOutput {
-	s.NextRecordType = v
-	return s
-}
-
-// SetResourceRecordSets sets the ResourceRecordSets field's value.
-func (s *ListResourceRecordSetsOutput) SetResourceRecordSets(v []ResourceRecordSet) *ListResourceRecordSetsOutput {
-	s.ResourceRecordSets = v
-	return s
-}
-
 // A request to get a list of the reusable delegation sets that are associated
 // with the current AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSetsRequest
@@ -9571,18 +8173,6 @@ func (s ListReusableDelegationSetsInput) String() string {
 // GoString returns the string representation
 func (s ListReusableDelegationSetsInput) GoString() string {
 	return s.String()
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListReusableDelegationSetsInput) SetMarker(v string) *ListReusableDelegationSetsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListReusableDelegationSetsInput) SetMaxItems(v string) *ListReusableDelegationSetsInput {
-	s.MaxItems = &v
-	return s
 }
 
 // A complex type that contains information about the reusable delegation sets
@@ -9639,36 +8229,6 @@ func (s ListReusableDelegationSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDelegationSets sets the DelegationSets field's value.
-func (s *ListReusableDelegationSetsOutput) SetDelegationSets(v []DelegationSet) *ListReusableDelegationSetsOutput {
-	s.DelegationSets = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListReusableDelegationSetsOutput) SetIsTruncated(v bool) *ListReusableDelegationSetsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListReusableDelegationSetsOutput) SetMarker(v string) *ListReusableDelegationSetsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListReusableDelegationSetsOutput) SetMaxItems(v string) *ListReusableDelegationSetsOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListReusableDelegationSetsOutput) SetNextMarker(v string) *ListReusableDelegationSetsOutput {
-	s.NextMarker = &v
-	return s
-}
-
 // A complex type containing information about a request for a list of the tags
 // that are associated with an individual resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourceRequest
@@ -9717,18 +8277,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceId sets the ResourceId field's value.
-func (s *ListTagsForResourceInput) SetResourceId(v string) *ListTagsForResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ListTagsForResourceInput) SetResourceType(v TagResourceType) *ListTagsForResourceInput {
-	s.ResourceType = v
-	return s
-}
-
 // A complex type that contains information about the health checks or hosted
 // zones for which you want to list tags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourceResponse
@@ -9756,12 +8304,6 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceTagSet sets the ResourceTagSet field's value.
-func (s *ListTagsForResourceOutput) SetResourceTagSet(v *ResourceTagSet) *ListTagsForResourceOutput {
-	s.ResourceTagSet = v
-	return s
 }
 
 // A complex type that contains information about the health checks or hosted
@@ -9816,18 +8358,6 @@ func (s *ListTagsForResourcesInput) Validate() error {
 	return nil
 }
 
-// SetResourceIds sets the ResourceIds field's value.
-func (s *ListTagsForResourcesInput) SetResourceIds(v []string) *ListTagsForResourcesInput {
-	s.ResourceIds = v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ListTagsForResourcesInput) SetResourceType(v TagResourceType) *ListTagsForResourcesInput {
-	s.ResourceType = v
-	return s
-}
-
 // A complex type containing tags for the specified resources.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourcesResponse
 type ListTagsForResourcesOutput struct {
@@ -9854,12 +8384,6 @@ func (s ListTagsForResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceTagSets sets the ResourceTagSets field's value.
-func (s *ListTagsForResourcesOutput) SetResourceTagSets(v []ResourceTagSet) *ListTagsForResourcesOutput {
-	s.ResourceTagSets = v
-	return s
 }
 
 // A complex type that contains the information about the request to list the
@@ -9909,18 +8433,6 @@ func (s *ListTrafficPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPoliciesInput) SetMaxItems(v string) *ListTrafficPoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyIdMarker sets the TrafficPolicyIdMarker field's value.
-func (s *ListTrafficPoliciesInput) SetTrafficPolicyIdMarker(v string) *ListTrafficPoliciesInput {
-	s.TrafficPolicyIdMarker = &v
-	return s
-}
-
 // A complex type that contains the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPoliciesResponse
 type ListTrafficPoliciesOutput struct {
@@ -9968,30 +8480,6 @@ func (s ListTrafficPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTrafficPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListTrafficPoliciesOutput) SetIsTruncated(v bool) *ListTrafficPoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPoliciesOutput) SetMaxItems(v string) *ListTrafficPoliciesOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyIdMarker sets the TrafficPolicyIdMarker field's value.
-func (s *ListTrafficPoliciesOutput) SetTrafficPolicyIdMarker(v string) *ListTrafficPoliciesOutput {
-	s.TrafficPolicyIdMarker = &v
-	return s
-}
-
-// SetTrafficPolicySummaries sets the TrafficPolicySummaries field's value.
-func (s *ListTrafficPoliciesOutput) SetTrafficPolicySummaries(v []TrafficPolicySummary) *ListTrafficPoliciesOutput {
-	s.TrafficPolicySummaries = v
-	return s
 }
 
 // A request for the traffic policy instances that you created in a specified
@@ -10061,30 +8549,6 @@ func (s *ListTrafficPolicyInstancesByHostedZoneInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetHostedZoneId(v string) *ListTrafficPolicyInstancesByHostedZoneInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetMaxItems(v string) *ListTrafficPolicyInstancesByHostedZoneInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceNameMarker sets the TrafficPolicyInstanceNameMarker field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetTrafficPolicyInstanceNameMarker(v string) *ListTrafficPolicyInstancesByHostedZoneInput {
-	s.TrafficPolicyInstanceNameMarker = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByHostedZoneInput {
-	s.TrafficPolicyInstanceTypeMarker = v
-	return s
-}
-
 // A complex type that contains the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZoneResponse
 type ListTrafficPolicyInstancesByHostedZoneOutput struct {
@@ -10136,36 +8600,6 @@ func (s ListTrafficPolicyInstancesByHostedZoneOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTrafficPolicyInstancesByHostedZoneOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetIsTruncated(v bool) *ListTrafficPolicyInstancesByHostedZoneOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetMaxItems(v string) *ListTrafficPolicyInstancesByHostedZoneOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceNameMarker sets the TrafficPolicyInstanceNameMarker field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstanceNameMarker(v string) *ListTrafficPolicyInstancesByHostedZoneOutput {
-	s.TrafficPolicyInstanceNameMarker = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByHostedZoneOutput {
-	s.TrafficPolicyInstanceTypeMarker = v
-	return s
-}
-
-// SetTrafficPolicyInstances sets the TrafficPolicyInstances field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstances(v []TrafficPolicyInstance) *ListTrafficPolicyInstancesByHostedZoneOutput {
-	s.TrafficPolicyInstances = v
-	return s
 }
 
 // A complex type that contains the information about the request to list your
@@ -10265,42 +8699,6 @@ func (s *ListTrafficPolicyInstancesByPolicyInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneIdMarker sets the HostedZoneIdMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetHostedZoneIdMarker(v string) *ListTrafficPolicyInstancesByPolicyInput {
-	s.HostedZoneIdMarker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetMaxItems(v string) *ListTrafficPolicyInstancesByPolicyInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyId sets the TrafficPolicyId field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyId(v string) *ListTrafficPolicyInstancesByPolicyInput {
-	s.TrafficPolicyId = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceNameMarker sets the TrafficPolicyInstanceNameMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyInstanceNameMarker(v string) *ListTrafficPolicyInstancesByPolicyInput {
-	s.TrafficPolicyInstanceNameMarker = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByPolicyInput {
-	s.TrafficPolicyInstanceTypeMarker = v
-	return s
-}
-
-// SetTrafficPolicyVersion sets the TrafficPolicyVersion field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyVersion(v int64) *ListTrafficPolicyInstancesByPolicyInput {
-	s.TrafficPolicyVersion = &v
-	return s
-}
-
 // A complex type that contains the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicyResponse
 type ListTrafficPolicyInstancesByPolicyOutput struct {
@@ -10360,42 +8758,6 @@ func (s ListTrafficPolicyInstancesByPolicyOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetHostedZoneIdMarker sets the HostedZoneIdMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetHostedZoneIdMarker(v string) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.HostedZoneIdMarker = &v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetIsTruncated(v bool) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetMaxItems(v string) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceNameMarker sets the TrafficPolicyInstanceNameMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstanceNameMarker(v string) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.TrafficPolicyInstanceNameMarker = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.TrafficPolicyInstanceTypeMarker = v
-	return s
-}
-
-// SetTrafficPolicyInstances sets the TrafficPolicyInstances field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstances(v []TrafficPolicyInstance) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.TrafficPolicyInstances = v
-	return s
-}
-
 // A request to get information about the traffic policy instances that you
 // created by using the current AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesRequest
@@ -10452,30 +8814,6 @@ func (s ListTrafficPolicyInstancesInput) String() string {
 // GoString returns the string representation
 func (s ListTrafficPolicyInstancesInput) GoString() string {
 	return s.String()
-}
-
-// SetHostedZoneIdMarker sets the HostedZoneIdMarker field's value.
-func (s *ListTrafficPolicyInstancesInput) SetHostedZoneIdMarker(v string) *ListTrafficPolicyInstancesInput {
-	s.HostedZoneIdMarker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyInstancesInput) SetMaxItems(v string) *ListTrafficPolicyInstancesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceNameMarker sets the TrafficPolicyInstanceNameMarker field's value.
-func (s *ListTrafficPolicyInstancesInput) SetTrafficPolicyInstanceNameMarker(v string) *ListTrafficPolicyInstancesInput {
-	s.TrafficPolicyInstanceNameMarker = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesInput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesInput {
-	s.TrafficPolicyInstanceTypeMarker = v
-	return s
 }
 
 // A complex type that contains the response information for the request.
@@ -10538,42 +8876,6 @@ func (s ListTrafficPolicyInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHostedZoneIdMarker sets the HostedZoneIdMarker field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetHostedZoneIdMarker(v string) *ListTrafficPolicyInstancesOutput {
-	s.HostedZoneIdMarker = &v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetIsTruncated(v bool) *ListTrafficPolicyInstancesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetMaxItems(v string) *ListTrafficPolicyInstancesOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceNameMarker sets the TrafficPolicyInstanceNameMarker field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstanceNameMarker(v string) *ListTrafficPolicyInstancesOutput {
-	s.TrafficPolicyInstanceNameMarker = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesOutput {
-	s.TrafficPolicyInstanceTypeMarker = v
-	return s
-}
-
-// SetTrafficPolicyInstances sets the TrafficPolicyInstances field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstances(v []TrafficPolicyInstance) *ListTrafficPolicyInstancesOutput {
-	s.TrafficPolicyInstances = v
-	return s
-}
-
 // A complex type that contains the information about the request to list your
 // traffic policies.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersionsRequest
@@ -10632,24 +8934,6 @@ func (s *ListTrafficPolicyVersionsInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *ListTrafficPolicyVersionsInput) SetId(v string) *ListTrafficPolicyVersionsInput {
-	s.Id = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyVersionsInput) SetMaxItems(v string) *ListTrafficPolicyVersionsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicyVersionMarker sets the TrafficPolicyVersionMarker field's value.
-func (s *ListTrafficPolicyVersionsInput) SetTrafficPolicyVersionMarker(v string) *ListTrafficPolicyVersionsInput {
-	s.TrafficPolicyVersionMarker = &v
-	return s
-}
-
 // A complex type that contains the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersionsResponse
 type ListTrafficPolicyVersionsOutput struct {
@@ -10703,30 +8987,6 @@ func (s ListTrafficPolicyVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListTrafficPolicyVersionsOutput) SetIsTruncated(v bool) *ListTrafficPolicyVersionsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTrafficPolicyVersionsOutput) SetMaxItems(v string) *ListTrafficPolicyVersionsOutput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetTrafficPolicies sets the TrafficPolicies field's value.
-func (s *ListTrafficPolicyVersionsOutput) SetTrafficPolicies(v []TrafficPolicy) *ListTrafficPolicyVersionsOutput {
-	s.TrafficPolicies = v
-	return s
-}
-
-// SetTrafficPolicyVersionMarker sets the TrafficPolicyVersionMarker field's value.
-func (s *ListTrafficPolicyVersionsOutput) SetTrafficPolicyVersionMarker(v string) *ListTrafficPolicyVersionsOutput {
-	s.TrafficPolicyVersionMarker = &v
-	return s
-}
-
 // A complex type that contains information about that can be associated with
 // your hosted zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizationsRequest
@@ -10776,24 +9036,6 @@ func (s *ListVPCAssociationAuthorizationsInput) Validate() error {
 	return nil
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListVPCAssociationAuthorizationsInput) SetHostedZoneId(v string) *ListVPCAssociationAuthorizationsInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListVPCAssociationAuthorizationsInput) SetMaxResults(v string) *ListVPCAssociationAuthorizationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListVPCAssociationAuthorizationsInput) SetNextToken(v string) *ListVPCAssociationAuthorizationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // A complex type that contains the response information for the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizationsResponse
 type ListVPCAssociationAuthorizationsOutput struct {
@@ -10835,24 +9077,6 @@ func (s ListVPCAssociationAuthorizationsOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *ListVPCAssociationAuthorizationsOutput) SetHostedZoneId(v string) *ListVPCAssociationAuthorizationsOutput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListVPCAssociationAuthorizationsOutput) SetNextToken(v string) *ListVPCAssociationAuthorizationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVPCs sets the VPCs field's value.
-func (s *ListVPCAssociationAuthorizationsOutput) SetVPCs(v []VPC) *ListVPCAssociationAuthorizationsOutput {
-	s.VPCs = v
-	return s
-}
-
 // A complex type that contains information about a configuration for DNS query
 // logging.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/QueryLoggingConfig
@@ -10884,24 +9108,6 @@ func (s QueryLoggingConfig) String() string {
 // GoString returns the string representation
 func (s QueryLoggingConfig) GoString() string {
 	return s.String()
-}
-
-// SetCloudWatchLogsLogGroupArn sets the CloudWatchLogsLogGroupArn field's value.
-func (s *QueryLoggingConfig) SetCloudWatchLogsLogGroupArn(v string) *QueryLoggingConfig {
-	s.CloudWatchLogsLogGroupArn = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *QueryLoggingConfig) SetHostedZoneId(v string) *QueryLoggingConfig {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *QueryLoggingConfig) SetId(v string) *QueryLoggingConfig {
-	s.Id = &v
-	return s
 }
 
 // Information specific to the resource record.
@@ -10948,12 +9154,6 @@ func (s *ResourceRecord) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetValue sets the Value field's value.
-func (s *ResourceRecord) SetValue(v string) *ResourceRecord {
-	s.Value = &v
-	return s
 }
 
 // Information about the resource record set to create or delete.
@@ -11406,84 +9606,6 @@ func (s *ResourceRecordSet) Validate() error {
 	return nil
 }
 
-// SetAliasTarget sets the AliasTarget field's value.
-func (s *ResourceRecordSet) SetAliasTarget(v *AliasTarget) *ResourceRecordSet {
-	s.AliasTarget = v
-	return s
-}
-
-// SetFailover sets the Failover field's value.
-func (s *ResourceRecordSet) SetFailover(v ResourceRecordSetFailover) *ResourceRecordSet {
-	s.Failover = v
-	return s
-}
-
-// SetGeoLocation sets the GeoLocation field's value.
-func (s *ResourceRecordSet) SetGeoLocation(v *GeoLocation) *ResourceRecordSet {
-	s.GeoLocation = v
-	return s
-}
-
-// SetHealthCheckId sets the HealthCheckId field's value.
-func (s *ResourceRecordSet) SetHealthCheckId(v string) *ResourceRecordSet {
-	s.HealthCheckId = &v
-	return s
-}
-
-// SetMultiValueAnswer sets the MultiValueAnswer field's value.
-func (s *ResourceRecordSet) SetMultiValueAnswer(v bool) *ResourceRecordSet {
-	s.MultiValueAnswer = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ResourceRecordSet) SetName(v string) *ResourceRecordSet {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *ResourceRecordSet) SetRegion(v ResourceRecordSetRegion) *ResourceRecordSet {
-	s.Region = v
-	return s
-}
-
-// SetResourceRecords sets the ResourceRecords field's value.
-func (s *ResourceRecordSet) SetResourceRecords(v []ResourceRecord) *ResourceRecordSet {
-	s.ResourceRecords = v
-	return s
-}
-
-// SetSetIdentifier sets the SetIdentifier field's value.
-func (s *ResourceRecordSet) SetSetIdentifier(v string) *ResourceRecordSet {
-	s.SetIdentifier = &v
-	return s
-}
-
-// SetTTL sets the TTL field's value.
-func (s *ResourceRecordSet) SetTTL(v int64) *ResourceRecordSet {
-	s.TTL = &v
-	return s
-}
-
-// SetTrafficPolicyInstanceId sets the TrafficPolicyInstanceId field's value.
-func (s *ResourceRecordSet) SetTrafficPolicyInstanceId(v string) *ResourceRecordSet {
-	s.TrafficPolicyInstanceId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ResourceRecordSet) SetType(v RRType) *ResourceRecordSet {
-	s.Type = v
-	return s
-}
-
-// SetWeight sets the Weight field's value.
-func (s *ResourceRecordSet) SetWeight(v int64) *ResourceRecordSet {
-	s.Weight = &v
-	return s
-}
-
 // A complex type containing a resource and its associated tags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceTagSet
 type ResourceTagSet struct {
@@ -11511,24 +9633,6 @@ func (s ResourceTagSet) String() string {
 // GoString returns the string representation
 func (s ResourceTagSet) GoString() string {
 	return s.String()
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ResourceTagSet) SetResourceId(v string) *ResourceTagSet {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ResourceTagSet) SetResourceType(v TagResourceType) *ResourceTagSet {
-	s.ResourceType = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ResourceTagSet) SetTags(v []Tag) *ResourceTagSet {
-	s.Tags = v
-	return s
 }
 
 // A complex type that contains the type of limit that you specified in the
@@ -11560,18 +9664,6 @@ func (s ReusableDelegationSetLimit) GoString() string {
 	return s.String()
 }
 
-// SetType sets the Type field's value.
-func (s *ReusableDelegationSetLimit) SetType(v ReusableDelegationSetLimitType) *ReusableDelegationSetLimit {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ReusableDelegationSetLimit) SetValue(v int64) *ReusableDelegationSetLimit {
-	s.Value = &v
-	return s
-}
-
 // A complex type that contains the status that one Amazon Route 53 health checker
 // reports and the time of the health check.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/StatusReport
@@ -11597,18 +9689,6 @@ func (s StatusReport) String() string {
 // GoString returns the string representation
 func (s StatusReport) GoString() string {
 	return s.String()
-}
-
-// SetCheckedTime sets the CheckedTime field's value.
-func (s *StatusReport) SetCheckedTime(v time.Time) *StatusReport {
-	s.CheckedTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StatusReport) SetStatus(v string) *StatusReport {
-	s.Status = &v
-	return s
 }
 
 // A complex type that contains information about a tag that you want to add
@@ -11649,18 +9729,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Gets the value that Amazon Route 53 returns in response to a DNS request
@@ -11738,42 +9806,6 @@ func (s *TestDNSAnswerInput) Validate() error {
 	return nil
 }
 
-// SetEDNS0ClientSubnetIP sets the EDNS0ClientSubnetIP field's value.
-func (s *TestDNSAnswerInput) SetEDNS0ClientSubnetIP(v string) *TestDNSAnswerInput {
-	s.EDNS0ClientSubnetIP = &v
-	return s
-}
-
-// SetEDNS0ClientSubnetMask sets the EDNS0ClientSubnetMask field's value.
-func (s *TestDNSAnswerInput) SetEDNS0ClientSubnetMask(v string) *TestDNSAnswerInput {
-	s.EDNS0ClientSubnetMask = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *TestDNSAnswerInput) SetHostedZoneId(v string) *TestDNSAnswerInput {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetRecordName sets the RecordName field's value.
-func (s *TestDNSAnswerInput) SetRecordName(v string) *TestDNSAnswerInput {
-	s.RecordName = &v
-	return s
-}
-
-// SetRecordType sets the RecordType field's value.
-func (s *TestDNSAnswerInput) SetRecordType(v RRType) *TestDNSAnswerInput {
-	s.RecordType = v
-	return s
-}
-
-// SetResolverIP sets the ResolverIP field's value.
-func (s *TestDNSAnswerInput) SetResolverIP(v string) *TestDNSAnswerInput {
-	s.ResolverIP = &v
-	return s
-}
-
 // A complex type that contains the response to a TestDNSAnswer request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswerResponse
 type TestDNSAnswerOutput struct {
@@ -11833,42 +9865,6 @@ func (s TestDNSAnswerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNameserver sets the Nameserver field's value.
-func (s *TestDNSAnswerOutput) SetNameserver(v string) *TestDNSAnswerOutput {
-	s.Nameserver = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *TestDNSAnswerOutput) SetProtocol(v string) *TestDNSAnswerOutput {
-	s.Protocol = &v
-	return s
-}
-
-// SetRecordData sets the RecordData field's value.
-func (s *TestDNSAnswerOutput) SetRecordData(v []string) *TestDNSAnswerOutput {
-	s.RecordData = v
-	return s
-}
-
-// SetRecordName sets the RecordName field's value.
-func (s *TestDNSAnswerOutput) SetRecordName(v string) *TestDNSAnswerOutput {
-	s.RecordName = &v
-	return s
-}
-
-// SetRecordType sets the RecordType field's value.
-func (s *TestDNSAnswerOutput) SetRecordType(v RRType) *TestDNSAnswerOutput {
-	s.RecordType = v
-	return s
-}
-
-// SetResponseCode sets the ResponseCode field's value.
-func (s *TestDNSAnswerOutput) SetResponseCode(v string) *TestDNSAnswerOutput {
-	s.ResponseCode = &v
-	return s
-}
-
 // A complex type that contains settings for a traffic policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicy
 type TrafficPolicy struct {
@@ -11916,42 +9912,6 @@ func (s TrafficPolicy) String() string {
 // GoString returns the string representation
 func (s TrafficPolicy) GoString() string {
 	return s.String()
-}
-
-// SetComment sets the Comment field's value.
-func (s *TrafficPolicy) SetComment(v string) *TrafficPolicy {
-	s.Comment = &v
-	return s
-}
-
-// SetDocument sets the Document field's value.
-func (s *TrafficPolicy) SetDocument(v string) *TrafficPolicy {
-	s.Document = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TrafficPolicy) SetId(v string) *TrafficPolicy {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *TrafficPolicy) SetName(v string) *TrafficPolicy {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *TrafficPolicy) SetType(v RRType) *TrafficPolicy {
-	s.Type = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *TrafficPolicy) SetVersion(v int64) *TrafficPolicy {
-	s.Version = &v
-	return s
 }
 
 // A complex type that contains settings for the new traffic policy instance.
@@ -12033,60 +9993,6 @@ func (s TrafficPolicyInstance) GoString() string {
 	return s.String()
 }
 
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *TrafficPolicyInstance) SetHostedZoneId(v string) *TrafficPolicyInstance {
-	s.HostedZoneId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TrafficPolicyInstance) SetId(v string) *TrafficPolicyInstance {
-	s.Id = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *TrafficPolicyInstance) SetMessage(v string) *TrafficPolicyInstance {
-	s.Message = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *TrafficPolicyInstance) SetName(v string) *TrafficPolicyInstance {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *TrafficPolicyInstance) SetState(v string) *TrafficPolicyInstance {
-	s.State = &v
-	return s
-}
-
-// SetTTL sets the TTL field's value.
-func (s *TrafficPolicyInstance) SetTTL(v int64) *TrafficPolicyInstance {
-	s.TTL = &v
-	return s
-}
-
-// SetTrafficPolicyId sets the TrafficPolicyId field's value.
-func (s *TrafficPolicyInstance) SetTrafficPolicyId(v string) *TrafficPolicyInstance {
-	s.TrafficPolicyId = &v
-	return s
-}
-
-// SetTrafficPolicyType sets the TrafficPolicyType field's value.
-func (s *TrafficPolicyInstance) SetTrafficPolicyType(v RRType) *TrafficPolicyInstance {
-	s.TrafficPolicyType = v
-	return s
-}
-
-// SetTrafficPolicyVersion sets the TrafficPolicyVersion field's value.
-func (s *TrafficPolicyInstance) SetTrafficPolicyVersion(v int64) *TrafficPolicyInstance {
-	s.TrafficPolicyVersion = &v
-	return s
-}
-
 // A complex type that contains information about the latest version of one
 // traffic policy that is associated with the current AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicySummary
@@ -12129,36 +10035,6 @@ func (s TrafficPolicySummary) String() string {
 // GoString returns the string representation
 func (s TrafficPolicySummary) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *TrafficPolicySummary) SetId(v string) *TrafficPolicySummary {
-	s.Id = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *TrafficPolicySummary) SetLatestVersion(v int64) *TrafficPolicySummary {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *TrafficPolicySummary) SetName(v string) *TrafficPolicySummary {
-	s.Name = &v
-	return s
-}
-
-// SetTrafficPolicyCount sets the TrafficPolicyCount field's value.
-func (s *TrafficPolicySummary) SetTrafficPolicyCount(v int64) *TrafficPolicySummary {
-	s.TrafficPolicyCount = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *TrafficPolicySummary) SetType(v RRType) *TrafficPolicySummary {
-	s.Type = v
-	return s
 }
 
 // A complex type that contains information about a request to update a health
@@ -12457,102 +10333,6 @@ func (s *UpdateHealthCheckInput) Validate() error {
 	return nil
 }
 
-// SetAlarmIdentifier sets the AlarmIdentifier field's value.
-func (s *UpdateHealthCheckInput) SetAlarmIdentifier(v *AlarmIdentifier) *UpdateHealthCheckInput {
-	s.AlarmIdentifier = v
-	return s
-}
-
-// SetChildHealthChecks sets the ChildHealthChecks field's value.
-func (s *UpdateHealthCheckInput) SetChildHealthChecks(v []string) *UpdateHealthCheckInput {
-	s.ChildHealthChecks = v
-	return s
-}
-
-// SetEnableSNI sets the EnableSNI field's value.
-func (s *UpdateHealthCheckInput) SetEnableSNI(v bool) *UpdateHealthCheckInput {
-	s.EnableSNI = &v
-	return s
-}
-
-// SetFailureThreshold sets the FailureThreshold field's value.
-func (s *UpdateHealthCheckInput) SetFailureThreshold(v int64) *UpdateHealthCheckInput {
-	s.FailureThreshold = &v
-	return s
-}
-
-// SetFullyQualifiedDomainName sets the FullyQualifiedDomainName field's value.
-func (s *UpdateHealthCheckInput) SetFullyQualifiedDomainName(v string) *UpdateHealthCheckInput {
-	s.FullyQualifiedDomainName = &v
-	return s
-}
-
-// SetHealthCheckId sets the HealthCheckId field's value.
-func (s *UpdateHealthCheckInput) SetHealthCheckId(v string) *UpdateHealthCheckInput {
-	s.HealthCheckId = &v
-	return s
-}
-
-// SetHealthCheckVersion sets the HealthCheckVersion field's value.
-func (s *UpdateHealthCheckInput) SetHealthCheckVersion(v int64) *UpdateHealthCheckInput {
-	s.HealthCheckVersion = &v
-	return s
-}
-
-// SetHealthThreshold sets the HealthThreshold field's value.
-func (s *UpdateHealthCheckInput) SetHealthThreshold(v int64) *UpdateHealthCheckInput {
-	s.HealthThreshold = &v
-	return s
-}
-
-// SetIPAddress sets the IPAddress field's value.
-func (s *UpdateHealthCheckInput) SetIPAddress(v string) *UpdateHealthCheckInput {
-	s.IPAddress = &v
-	return s
-}
-
-// SetInsufficientDataHealthStatus sets the InsufficientDataHealthStatus field's value.
-func (s *UpdateHealthCheckInput) SetInsufficientDataHealthStatus(v InsufficientDataHealthStatus) *UpdateHealthCheckInput {
-	s.InsufficientDataHealthStatus = v
-	return s
-}
-
-// SetInverted sets the Inverted field's value.
-func (s *UpdateHealthCheckInput) SetInverted(v bool) *UpdateHealthCheckInput {
-	s.Inverted = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *UpdateHealthCheckInput) SetPort(v int64) *UpdateHealthCheckInput {
-	s.Port = &v
-	return s
-}
-
-// SetRegions sets the Regions field's value.
-func (s *UpdateHealthCheckInput) SetRegions(v []HealthCheckRegion) *UpdateHealthCheckInput {
-	s.Regions = v
-	return s
-}
-
-// SetResetElements sets the ResetElements field's value.
-func (s *UpdateHealthCheckInput) SetResetElements(v []ResettableElementName) *UpdateHealthCheckInput {
-	s.ResetElements = v
-	return s
-}
-
-// SetResourcePath sets the ResourcePath field's value.
-func (s *UpdateHealthCheckInput) SetResourcePath(v string) *UpdateHealthCheckInput {
-	s.ResourcePath = &v
-	return s
-}
-
-// SetSearchString sets the SearchString field's value.
-func (s *UpdateHealthCheckInput) SetSearchString(v string) *UpdateHealthCheckInput {
-	s.SearchString = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheckResponse
 type UpdateHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
@@ -12579,12 +10359,6 @@ func (s UpdateHealthCheckOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateHealthCheckOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHealthCheck sets the HealthCheck field's value.
-func (s *UpdateHealthCheckOutput) SetHealthCheck(v *HealthCheck) *UpdateHealthCheckOutput {
-	s.HealthCheck = v
-	return s
 }
 
 // A request to update the comment for a hosted zone.
@@ -12626,18 +10400,6 @@ func (s *UpdateHostedZoneCommentInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *UpdateHostedZoneCommentInput) SetComment(v string) *UpdateHostedZoneCommentInput {
-	s.Comment = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateHostedZoneCommentInput) SetId(v string) *UpdateHostedZoneCommentInput {
-	s.Id = &v
-	return s
-}
-
 // A complex type that contains the response to the UpdateHostedZoneComment
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneCommentResponse
@@ -12665,12 +10427,6 @@ func (s UpdateHostedZoneCommentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateHostedZoneCommentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHostedZone sets the HostedZone field's value.
-func (s *UpdateHostedZoneCommentOutput) SetHostedZone(v *HostedZone) *UpdateHostedZoneCommentOutput {
-	s.HostedZone = v
-	return s
 }
 
 // A complex type that contains information about the traffic policy that you
@@ -12735,24 +10491,6 @@ func (s *UpdateTrafficPolicyCommentInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *UpdateTrafficPolicyCommentInput) SetComment(v string) *UpdateTrafficPolicyCommentInput {
-	s.Comment = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateTrafficPolicyCommentInput) SetId(v string) *UpdateTrafficPolicyCommentInput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *UpdateTrafficPolicyCommentInput) SetVersion(v int64) *UpdateTrafficPolicyCommentInput {
-	s.Version = &v
-	return s
-}
-
 // A complex type that contains the response information for the traffic policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyCommentResponse
 type UpdateTrafficPolicyCommentOutput struct {
@@ -12779,12 +10517,6 @@ func (s UpdateTrafficPolicyCommentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTrafficPolicyCommentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTrafficPolicy sets the TrafficPolicy field's value.
-func (s *UpdateTrafficPolicyCommentOutput) SetTrafficPolicy(v *TrafficPolicy) *UpdateTrafficPolicyCommentOutput {
-	s.TrafficPolicy = v
-	return s
 }
 
 // A complex type that contains information about the resource record sets that
@@ -12862,30 +10594,6 @@ func (s *UpdateTrafficPolicyInstanceInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *UpdateTrafficPolicyInstanceInput) SetId(v string) *UpdateTrafficPolicyInstanceInput {
-	s.Id = &v
-	return s
-}
-
-// SetTTL sets the TTL field's value.
-func (s *UpdateTrafficPolicyInstanceInput) SetTTL(v int64) *UpdateTrafficPolicyInstanceInput {
-	s.TTL = &v
-	return s
-}
-
-// SetTrafficPolicyId sets the TrafficPolicyId field's value.
-func (s *UpdateTrafficPolicyInstanceInput) SetTrafficPolicyId(v string) *UpdateTrafficPolicyInstanceInput {
-	s.TrafficPolicyId = &v
-	return s
-}
-
-// SetTrafficPolicyVersion sets the TrafficPolicyVersion field's value.
-func (s *UpdateTrafficPolicyInstanceInput) SetTrafficPolicyVersion(v int64) *UpdateTrafficPolicyInstanceInput {
-	s.TrafficPolicyVersion = &v
-	return s
-}
-
 // A complex type that contains information about the resource record sets that
 // Amazon Route 53 created based on a specified traffic policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstanceResponse
@@ -12913,12 +10621,6 @@ func (s UpdateTrafficPolicyInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTrafficPolicyInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTrafficPolicyInstance sets the TrafficPolicyInstance field's value.
-func (s *UpdateTrafficPolicyInstanceOutput) SetTrafficPolicyInstance(v *TrafficPolicyInstance) *UpdateTrafficPolicyInstanceOutput {
-	s.TrafficPolicyInstance = v
-	return s
 }
 
 // (Private hosted zones only) A complex type that contains information about
@@ -12952,18 +10654,6 @@ func (s *VPC) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetVPCId sets the VPCId field's value.
-func (s *VPC) SetVPCId(v string) *VPC {
-	s.VPCId = &v
-	return s
-}
-
-// SetVPCRegion sets the VPCRegion field's value.
-func (s *VPC) SetVPCRegion(v VPCRegion) *VPC {
-	s.VPCRegion = v
-	return s
 }
 
 type AccountLimitType string

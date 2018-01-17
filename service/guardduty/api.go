@@ -2221,24 +2221,6 @@ func (s *AcceptInvitationInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *AcceptInvitationInput) SetDetectorId(v string) *AcceptInvitationInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetInvitationId sets the InvitationId field's value.
-func (s *AcceptInvitationInput) SetInvitationId(v string) *AcceptInvitationInput {
-	s.InvitationId = &v
-	return s
-}
-
-// SetMasterId sets the MasterId field's value.
-func (s *AcceptInvitationInput) SetMasterId(v string) *AcceptInvitationInput {
-	s.MasterId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationResponse
 type AcceptInvitationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2283,18 +2265,6 @@ func (s AccountDetail) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *AccountDetail) SetAccountId(v string) *AccountDetail {
-	s.AccountId = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *AccountDetail) SetEmail(v string) *AccountDetail {
-	s.Email = &v
-	return s
-}
-
 // Information about the activity described in a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action
 type Action struct {
@@ -2321,30 +2291,6 @@ func (s Action) String() string {
 // GoString returns the string representation
 func (s Action) GoString() string {
 	return s.String()
-}
-
-// SetActionType sets the ActionType field's value.
-func (s *Action) SetActionType(v string) *Action {
-	s.ActionType = &v
-	return s
-}
-
-// SetAwsApiCallAction sets the AwsApiCallAction field's value.
-func (s *Action) SetAwsApiCallAction(v *AwsApiCallAction) *Action {
-	s.AwsApiCallAction = v
-	return s
-}
-
-// SetDnsRequestAction sets the DnsRequestAction field's value.
-func (s *Action) SetDnsRequestAction(v *DnsRequestAction) *Action {
-	s.DnsRequestAction = v
-	return s
-}
-
-// SetNetworkConnectionAction sets the NetworkConnectionAction field's value.
-func (s *Action) SetNetworkConnectionAction(v *NetworkConnectionAction) *Action {
-	s.NetworkConnectionAction = v
-	return s
 }
 
 // Archive Findings Request
@@ -2381,18 +2327,6 @@ func (s *ArchiveFindingsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *ArchiveFindingsInput) SetDetectorId(v string) *ArchiveFindingsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFindingIds sets the FindingIds field's value.
-func (s *ArchiveFindingsInput) SetFindingIds(v []string) *ArchiveFindingsInput {
-	s.FindingIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsResponse
@@ -2448,36 +2382,6 @@ func (s AwsApiCallAction) GoString() string {
 	return s.String()
 }
 
-// SetApi sets the Api field's value.
-func (s *AwsApiCallAction) SetApi(v string) *AwsApiCallAction {
-	s.Api = &v
-	return s
-}
-
-// SetCallerType sets the CallerType field's value.
-func (s *AwsApiCallAction) SetCallerType(v string) *AwsApiCallAction {
-	s.CallerType = &v
-	return s
-}
-
-// SetDomainDetails sets the DomainDetails field's value.
-func (s *AwsApiCallAction) SetDomainDetails(v *DomainDetails) *AwsApiCallAction {
-	s.DomainDetails = v
-	return s
-}
-
-// SetRemoteIpDetails sets the RemoteIpDetails field's value.
-func (s *AwsApiCallAction) SetRemoteIpDetails(v *RemoteIpDetails) *AwsApiCallAction {
-	s.RemoteIpDetails = v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *AwsApiCallAction) SetServiceName(v string) *AwsApiCallAction {
-	s.ServiceName = &v
-	return s
-}
-
 // City information of the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/City
 type City struct {
@@ -2495,12 +2399,6 @@ func (s City) String() string {
 // GoString returns the string representation
 func (s City) GoString() string {
 	return s.String()
-}
-
-// SetCityName sets the CityName field's value.
-func (s *City) SetCityName(v string) *City {
-	s.CityName = &v
-	return s
 }
 
 // Finding attribute (for example, accountId) for which conditions and values
@@ -2544,42 +2442,6 @@ func (s Condition) GoString() string {
 	return s.String()
 }
 
-// SetEq sets the Eq field's value.
-func (s *Condition) SetEq(v []string) *Condition {
-	s.Eq = v
-	return s
-}
-
-// SetGt sets the Gt field's value.
-func (s *Condition) SetGt(v int64) *Condition {
-	s.Gt = &v
-	return s
-}
-
-// SetGte sets the Gte field's value.
-func (s *Condition) SetGte(v int64) *Condition {
-	s.Gte = &v
-	return s
-}
-
-// SetLt sets the Lt field's value.
-func (s *Condition) SetLt(v int64) *Condition {
-	s.Lt = &v
-	return s
-}
-
-// SetLte sets the Lte field's value.
-func (s *Condition) SetLte(v int64) *Condition {
-	s.Lte = &v
-	return s
-}
-
-// SetNeq sets the Neq field's value.
-func (s *Condition) SetNeq(v []string) *Condition {
-	s.Neq = v
-	return s
-}
-
 // Country information of the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Country
 type Country struct {
@@ -2602,18 +2464,6 @@ func (s Country) GoString() string {
 	return s.String()
 }
 
-// SetCountryCode sets the CountryCode field's value.
-func (s *Country) SetCountryCode(v string) *Country {
-	s.CountryCode = &v
-	return s
-}
-
-// SetCountryName sets the CountryName field's value.
-func (s *Country) SetCountryName(v string) *Country {
-	s.CountryName = &v
-	return s
-}
-
 // Create Detector Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest
 type CreateDetectorInput struct {
@@ -2631,12 +2481,6 @@ func (s CreateDetectorInput) String() string {
 // GoString returns the string representation
 func (s CreateDetectorInput) GoString() string {
 	return s.String()
-}
-
-// SetEnable sets the Enable field's value.
-func (s *CreateDetectorInput) SetEnable(v bool) *CreateDetectorInput {
-	s.Enable = &v
-	return s
 }
 
 // CreateDetector response object.
@@ -2663,12 +2507,6 @@ func (s CreateDetectorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDetectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *CreateDetectorOutput) SetDetectorId(v string) *CreateDetectorOutput {
-	s.DetectorId = &v
-	return s
 }
 
 // Create IP Set Request
@@ -2719,36 +2557,6 @@ func (s *CreateIPSetInput) Validate() error {
 	return nil
 }
 
-// SetActivate sets the Activate field's value.
-func (s *CreateIPSetInput) SetActivate(v bool) *CreateIPSetInput {
-	s.Activate = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *CreateIPSetInput) SetDetectorId(v string) *CreateIPSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *CreateIPSetInput) SetFormat(v IpSetFormat) *CreateIPSetInput {
-	s.Format = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateIPSetInput) SetLocation(v string) *CreateIPSetInput {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateIPSetInput) SetName(v string) *CreateIPSetInput {
-	s.Name = &v
-	return s
-}
-
 // CreateIPSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetResponse
 type CreateIPSetOutput struct {
@@ -2773,12 +2581,6 @@ func (s CreateIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIpSetId sets the IpSetId field's value.
-func (s *CreateIPSetOutput) SetIpSetId(v string) *CreateIPSetOutput {
-	s.IpSetId = &v
-	return s
 }
 
 // CreateMembers body
@@ -2818,18 +2620,6 @@ func (s *CreateMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountDetails sets the AccountDetails field's value.
-func (s *CreateMembersInput) SetAccountDetails(v []AccountDetail) *CreateMembersInput {
-	s.AccountDetails = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *CreateMembersInput) SetDetectorId(v string) *CreateMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
 // CreateMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersResponse
 type CreateMembersOutput struct {
@@ -2855,12 +2645,6 @@ func (s CreateMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *CreateMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *CreateMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // Create Sample Findings Request
@@ -2897,18 +2681,6 @@ func (s *CreateSampleFindingsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *CreateSampleFindingsInput) SetDetectorId(v string) *CreateSampleFindingsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFindingTypes sets the FindingTypes field's value.
-func (s *CreateSampleFindingsInput) SetFindingTypes(v []string) *CreateSampleFindingsInput {
-	s.FindingTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsResponse
@@ -2980,36 +2752,6 @@ func (s *CreateThreatIntelSetInput) Validate() error {
 	return nil
 }
 
-// SetActivate sets the Activate field's value.
-func (s *CreateThreatIntelSetInput) SetActivate(v bool) *CreateThreatIntelSetInput {
-	s.Activate = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *CreateThreatIntelSetInput) SetDetectorId(v string) *CreateThreatIntelSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *CreateThreatIntelSetInput) SetFormat(v ThreatIntelSetFormat) *CreateThreatIntelSetInput {
-	s.Format = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateThreatIntelSetInput) SetLocation(v string) *CreateThreatIntelSetInput {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateThreatIntelSetInput) SetName(v string) *CreateThreatIntelSetInput {
-	s.Name = &v
-	return s
-}
-
 // CreateThreatIntelSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetResponse
 type CreateThreatIntelSetOutput struct {
@@ -3036,12 +2778,6 @@ func (s CreateThreatIntelSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetThreatIntelSetId sets the ThreatIntelSetId field's value.
-func (s *CreateThreatIntelSetOutput) SetThreatIntelSetId(v string) *CreateThreatIntelSetOutput {
-	s.ThreatIntelSetId = &v
-	return s
-}
-
 // DeclineInvitations request body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsRequest
 type DeclineInvitationsInput struct {
@@ -3060,12 +2796,6 @@ func (s DeclineInvitationsInput) String() string {
 // GoString returns the string representation
 func (s DeclineInvitationsInput) GoString() string {
 	return s.String()
-}
-
-// SetAccountIds sets the AccountIds field's value.
-func (s *DeclineInvitationsInput) SetAccountIds(v []string) *DeclineInvitationsInput {
-	s.AccountIds = v
-	return s
 }
 
 // DeclineInvitations response object.
@@ -3093,12 +2823,6 @@ func (s DeclineInvitationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeclineInvitationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *DeclineInvitationsOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *DeclineInvitationsOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorRequest
@@ -3131,12 +2855,6 @@ func (s *DeleteDetectorInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *DeleteDetectorInput) SetDetectorId(v string) *DeleteDetectorInput {
-	s.DetectorId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorResponse
@@ -3200,18 +2918,6 @@ func (s *DeleteIPSetInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *DeleteIPSetInput) SetDetectorId(v string) *DeleteIPSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetIpSetId sets the IpSetId field's value.
-func (s *DeleteIPSetInput) SetIpSetId(v string) *DeleteIPSetInput {
-	s.IpSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetResponse
 type DeleteIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -3254,12 +2960,6 @@ func (s DeleteInvitationsInput) GoString() string {
 	return s.String()
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *DeleteInvitationsInput) SetAccountIds(v []string) *DeleteInvitationsInput {
-	s.AccountIds = v
-	return s
-}
-
 // DeleteInvitations response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsResponse
 type DeleteInvitationsOutput struct {
@@ -3285,12 +2985,6 @@ func (s DeleteInvitationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteInvitationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *DeleteInvitationsOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *DeleteInvitationsOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // DeleteMembers request body.
@@ -3329,18 +3023,6 @@ func (s *DeleteMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *DeleteMembersInput) SetAccountIds(v []string) *DeleteMembersInput {
-	s.AccountIds = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *DeleteMembersInput) SetDetectorId(v string) *DeleteMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
 // DeleteMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersResponse
 type DeleteMembersOutput struct {
@@ -3366,12 +3048,6 @@ func (s DeleteMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *DeleteMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *DeleteMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetRequest
@@ -3411,18 +3087,6 @@ func (s *DeleteThreatIntelSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *DeleteThreatIntelSetInput) SetDetectorId(v string) *DeleteThreatIntelSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetThreatIntelSetId sets the ThreatIntelSetId field's value.
-func (s *DeleteThreatIntelSetInput) SetThreatIntelSetId(v string) *DeleteThreatIntelSetInput {
-	s.ThreatIntelSetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetResponse
@@ -3477,12 +3141,6 @@ func (s *DisassociateFromMasterAccountInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *DisassociateFromMasterAccountInput) SetDetectorId(v string) *DisassociateFromMasterAccountInput {
-	s.DetectorId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountResponse
@@ -3544,18 +3202,6 @@ func (s *DisassociateMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *DisassociateMembersInput) SetAccountIds(v []string) *DisassociateMembersInput {
-	s.AccountIds = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *DisassociateMembersInput) SetDetectorId(v string) *DisassociateMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
 // DisassociateMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersResponse
 type DisassociateMembersOutput struct {
@@ -3583,12 +3229,6 @@ func (s DisassociateMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *DisassociateMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *DisassociateMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
-}
-
 // Information about the DNS_REQUEST action described in this finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction
 type DnsRequestAction struct {
@@ -3606,12 +3246,6 @@ func (s DnsRequestAction) String() string {
 // GoString returns the string representation
 func (s DnsRequestAction) GoString() string {
 	return s.String()
-}
-
-// SetDomain sets the Domain field's value.
-func (s *DnsRequestAction) SetDomain(v string) *DnsRequestAction {
-	s.Domain = &v
-	return s
 }
 
 // Domain information for the AWS API call.
@@ -3694,96 +3328,6 @@ func (s Finding) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *Finding) SetAccountId(v string) *Finding {
-	s.AccountId = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *Finding) SetArn(v string) *Finding {
-	s.Arn = &v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Finding) SetConfidence(v float64) *Finding {
-	s.Confidence = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Finding) SetCreatedAt(v string) *Finding {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Finding) SetDescription(v string) *Finding {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Finding) SetId(v string) *Finding {
-	s.Id = &v
-	return s
-}
-
-// SetPartition sets the Partition field's value.
-func (s *Finding) SetPartition(v string) *Finding {
-	s.Partition = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *Finding) SetRegion(v string) *Finding {
-	s.Region = &v
-	return s
-}
-
-// SetResource sets the Resource field's value.
-func (s *Finding) SetResource(v *Resource) *Finding {
-	s.Resource = v
-	return s
-}
-
-// SetSchemaVersion sets the SchemaVersion field's value.
-func (s *Finding) SetSchemaVersion(v string) *Finding {
-	s.SchemaVersion = &v
-	return s
-}
-
-// SetService sets the Service field's value.
-func (s *Finding) SetService(v *Service) *Finding {
-	s.Service = v
-	return s
-}
-
-// SetSeverity sets the Severity field's value.
-func (s *Finding) SetSeverity(v float64) *Finding {
-	s.Severity = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *Finding) SetTitle(v string) *Finding {
-	s.Title = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Finding) SetType(v string) *Finding {
-	s.Type = &v
-	return s
-}
-
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *Finding) SetUpdatedAt(v string) *Finding {
-	s.UpdatedAt = &v
-	return s
-}
-
 // Represents the criteria used for querying findings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingCriteria
 type FindingCriteria struct {
@@ -3804,12 +3348,6 @@ func (s FindingCriteria) GoString() string {
 	return s.String()
 }
 
-// SetCriterion sets the Criterion field's value.
-func (s *FindingCriteria) SetCriterion(v map[string]Condition) *FindingCriteria {
-	s.Criterion = v
-	return s
-}
-
 // Finding statistics object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics
 type FindingStatistics struct {
@@ -3827,12 +3365,6 @@ func (s FindingStatistics) String() string {
 // GoString returns the string representation
 func (s FindingStatistics) GoString() string {
 	return s.String()
-}
-
-// SetCountBySeverity sets the CountBySeverity field's value.
-func (s *FindingStatistics) SetCountBySeverity(v map[string]int64) *FindingStatistics {
-	s.CountBySeverity = v
-	return s
 }
 
 // Location information of the remote IP address.
@@ -3855,18 +3387,6 @@ func (s GeoLocation) String() string {
 // GoString returns the string representation
 func (s GeoLocation) GoString() string {
 	return s.String()
-}
-
-// SetLat sets the Lat field's value.
-func (s *GeoLocation) SetLat(v float64) *GeoLocation {
-	s.Lat = &v
-	return s
-}
-
-// SetLon sets the Lon field's value.
-func (s *GeoLocation) SetLon(v float64) *GeoLocation {
-	s.Lon = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorRequest
@@ -3899,12 +3419,6 @@ func (s *GetDetectorInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetDetectorInput) SetDetectorId(v string) *GetDetectorInput {
-	s.DetectorId = &v
-	return s
 }
 
 // GetDetector response object.
@@ -3940,30 +3454,6 @@ func (s GetDetectorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDetectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *GetDetectorOutput) SetCreatedAt(v string) *GetDetectorOutput {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *GetDetectorOutput) SetServiceRole(v string) *GetDetectorOutput {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetDetectorOutput) SetStatus(v DetectorStatus) *GetDetectorOutput {
-	s.Status = v
-	return s
-}
-
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *GetDetectorOutput) SetUpdatedAt(v string) *GetDetectorOutput {
-	s.UpdatedAt = &v
-	return s
 }
 
 // Get Findings Request
@@ -4005,24 +3495,6 @@ func (s *GetFindingsInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetFindingsInput) SetDetectorId(v string) *GetFindingsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFindingIds sets the FindingIds field's value.
-func (s *GetFindingsInput) SetFindingIds(v []string) *GetFindingsInput {
-	s.FindingIds = v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *GetFindingsInput) SetSortCriteria(v *SortCriteria) *GetFindingsInput {
-	s.SortCriteria = v
-	return s
-}
-
 // GetFindings response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsResponse
 type GetFindingsOutput struct {
@@ -4047,12 +3519,6 @@ func (s GetFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFindings sets the Findings field's value.
-func (s *GetFindingsOutput) SetFindings(v []Finding) *GetFindingsOutput {
-	s.Findings = v
-	return s
 }
 
 // Get Findings Statistics Request
@@ -4094,24 +3560,6 @@ func (s *GetFindingsStatisticsInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetFindingsStatisticsInput) SetDetectorId(v string) *GetFindingsStatisticsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFindingCriteria sets the FindingCriteria field's value.
-func (s *GetFindingsStatisticsInput) SetFindingCriteria(v *FindingCriteria) *GetFindingsStatisticsInput {
-	s.FindingCriteria = v
-	return s
-}
-
-// SetFindingStatisticTypes sets the FindingStatisticTypes field's value.
-func (s *GetFindingsStatisticsInput) SetFindingStatisticTypes(v []FindingStatisticType) *GetFindingsStatisticsInput {
-	s.FindingStatisticTypes = v
-	return s
-}
-
 // GetFindingsStatistics response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse
 type GetFindingsStatisticsOutput struct {
@@ -4136,12 +3584,6 @@ func (s GetFindingsStatisticsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFindingsStatisticsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFindingStatistics sets the FindingStatistics field's value.
-func (s *GetFindingsStatisticsOutput) SetFindingStatistics(v *FindingStatistics) *GetFindingsStatisticsOutput {
-	s.FindingStatistics = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetRequest
@@ -4183,18 +3625,6 @@ func (s *GetIPSetInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetIPSetInput) SetDetectorId(v string) *GetIPSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetIpSetId sets the IpSetId field's value.
-func (s *GetIPSetInput) SetIpSetId(v string) *GetIPSetInput {
-	s.IpSetId = &v
-	return s
-}
-
 // GetIPSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse
 type GetIPSetOutput struct {
@@ -4230,30 +3660,6 @@ func (s GetIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFormat sets the Format field's value.
-func (s *GetIPSetOutput) SetFormat(v IpSetFormat) *GetIPSetOutput {
-	s.Format = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *GetIPSetOutput) SetLocation(v string) *GetIPSetOutput {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetIPSetOutput) SetName(v string) *GetIPSetOutput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetIPSetOutput) SetStatus(v IpSetStatus) *GetIPSetOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest
@@ -4297,12 +3703,6 @@ func (s GetInvitationsCountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInvitationsCount sets the InvitationsCount field's value.
-func (s *GetInvitationsCountOutput) SetInvitationsCount(v int64) *GetInvitationsCountOutput {
-	s.InvitationsCount = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest
 type GetMasterAccountInput struct {
 	_ struct{} `type:"structure"`
@@ -4335,12 +3735,6 @@ func (s *GetMasterAccountInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetMasterAccountInput) SetDetectorId(v string) *GetMasterAccountInput {
-	s.DetectorId = &v
-	return s
-}
-
 // GetMasterAccount response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse
 type GetMasterAccountOutput struct {
@@ -4365,12 +3759,6 @@ func (s GetMasterAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMasterAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMaster sets the Master field's value.
-func (s *GetMasterAccountOutput) SetMaster(v *Master) *GetMasterAccountOutput {
-	s.Master = v
-	return s
 }
 
 // GetMembers request body.
@@ -4409,18 +3797,6 @@ func (s *GetMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *GetMembersInput) SetAccountIds(v []string) *GetMembersInput {
-	s.AccountIds = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetMembersInput) SetDetectorId(v string) *GetMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
 // GetMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersResponse
 type GetMembersOutput struct {
@@ -4449,18 +3825,6 @@ func (s GetMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMembers sets the Members field's value.
-func (s *GetMembersOutput) SetMembers(v []Member) *GetMembersOutput {
-	s.Members = v
-	return s
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *GetMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *GetMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetRequest
@@ -4502,18 +3866,6 @@ func (s *GetThreatIntelSetInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *GetThreatIntelSetInput) SetDetectorId(v string) *GetThreatIntelSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetThreatIntelSetId sets the ThreatIntelSetId field's value.
-func (s *GetThreatIntelSetInput) SetThreatIntelSetId(v string) *GetThreatIntelSetInput {
-	s.ThreatIntelSetId = &v
-	return s
-}
-
 // GetThreatIntelSet response object
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse
 type GetThreatIntelSetOutput struct {
@@ -4550,30 +3902,6 @@ func (s GetThreatIntelSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFormat sets the Format field's value.
-func (s *GetThreatIntelSetOutput) SetFormat(v ThreatIntelSetFormat) *GetThreatIntelSetOutput {
-	s.Format = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *GetThreatIntelSetOutput) SetLocation(v string) *GetThreatIntelSetOutput {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetThreatIntelSetOutput) SetName(v string) *GetThreatIntelSetOutput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetThreatIntelSetOutput) SetStatus(v ThreatIntelSetStatus) *GetThreatIntelSetOutput {
-	s.Status = v
-	return s
-}
-
 // The profile information of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfile
 type IamInstanceProfile struct {
@@ -4594,18 +3922,6 @@ func (s IamInstanceProfile) String() string {
 // GoString returns the string representation
 func (s IamInstanceProfile) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *IamInstanceProfile) SetArn(v string) *IamInstanceProfile {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *IamInstanceProfile) SetId(v string) *IamInstanceProfile {
-	s.Id = &v
-	return s
 }
 
 // The information about the EC2 instance associated with the activity that
@@ -4658,72 +3974,6 @@ func (s InstanceDetails) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *InstanceDetails) SetAvailabilityZone(v string) *InstanceDetails {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *InstanceDetails) SetIamInstanceProfile(v *IamInstanceProfile) *InstanceDetails {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *InstanceDetails) SetImageId(v string) *InstanceDetails {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceDetails) SetInstanceId(v string) *InstanceDetails {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceState sets the InstanceState field's value.
-func (s *InstanceDetails) SetInstanceState(v string) *InstanceDetails {
-	s.InstanceState = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *InstanceDetails) SetInstanceType(v string) *InstanceDetails {
-	s.InstanceType = &v
-	return s
-}
-
-// SetLaunchTime sets the LaunchTime field's value.
-func (s *InstanceDetails) SetLaunchTime(v string) *InstanceDetails {
-	s.LaunchTime = &v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *InstanceDetails) SetNetworkInterfaces(v []NetworkInterface) *InstanceDetails {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *InstanceDetails) SetPlatform(v string) *InstanceDetails {
-	s.Platform = &v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *InstanceDetails) SetProductCodes(v []ProductCode) *InstanceDetails {
-	s.ProductCodes = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *InstanceDetails) SetTags(v []Tag) *InstanceDetails {
-	s.Tags = v
-	return s
-}
-
 // Invitation from an AWS account to become the current account's master.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation
 type Invitation struct {
@@ -4750,30 +4000,6 @@ func (s Invitation) String() string {
 // GoString returns the string representation
 func (s Invitation) GoString() string {
 	return s.String()
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *Invitation) SetAccountId(v string) *Invitation {
-	s.AccountId = &v
-	return s
-}
-
-// SetInvitationId sets the InvitationId field's value.
-func (s *Invitation) SetInvitationId(v string) *Invitation {
-	s.InvitationId = &v
-	return s
-}
-
-// SetInvitedAt sets the InvitedAt field's value.
-func (s *Invitation) SetInvitedAt(v string) *Invitation {
-	s.InvitedAt = &v
-	return s
-}
-
-// SetRelationshipStatus sets the RelationshipStatus field's value.
-func (s *Invitation) SetRelationshipStatus(v string) *Invitation {
-	s.RelationshipStatus = &v
-	return s
 }
 
 // InviteMembers request body.
@@ -4817,24 +4043,6 @@ func (s *InviteMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *InviteMembersInput) SetAccountIds(v []string) *InviteMembersInput {
-	s.AccountIds = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *InviteMembersInput) SetDetectorId(v string) *InviteMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *InviteMembersInput) SetMessage(v string) *InviteMembersInput {
-	s.Message = &v
-	return s
-}
-
 // InviteMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersResponse
 type InviteMembersOutput struct {
@@ -4860,12 +4068,6 @@ func (s InviteMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InviteMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *InviteMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *InviteMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsRequest
@@ -4902,18 +4104,6 @@ func (s *ListDetectorsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDetectorsInput) SetMaxResults(v int64) *ListDetectorsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDetectorsInput) SetNextToken(v string) *ListDetectorsInput {
-	s.NextToken = &v
-	return s
-}
-
 // ListDetectors response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsResponse
 type ListDetectorsOutput struct {
@@ -4944,18 +4134,6 @@ func (s ListDetectorsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDetectorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetectorIds sets the DetectorIds field's value.
-func (s *ListDetectorsOutput) SetDetectorIds(v []string) *ListDetectorsOutput {
-	s.DetectorIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDetectorsOutput) SetNextToken(v string) *ListDetectorsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // List Findings Request
@@ -5010,36 +4188,6 @@ func (s *ListFindingsInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *ListFindingsInput) SetDetectorId(v string) *ListFindingsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFindingCriteria sets the FindingCriteria field's value.
-func (s *ListFindingsInput) SetFindingCriteria(v *FindingCriteria) *ListFindingsInput {
-	s.FindingCriteria = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFindingsInput) SetMaxResults(v int64) *ListFindingsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFindingsInput) SetNextToken(v string) *ListFindingsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *ListFindingsInput) SetSortCriteria(v *SortCriteria) *ListFindingsInput {
-	s.SortCriteria = v
-	return s
-}
-
 // ListFindings response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsResponse
 type ListFindingsOutput struct {
@@ -5070,18 +4218,6 @@ func (s ListFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFindingIds sets the FindingIds field's value.
-func (s *ListFindingsOutput) SetFindingIds(v []string) *ListFindingsOutput {
-	s.FindingIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFindingsOutput) SetNextToken(v string) *ListFindingsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsRequest
@@ -5125,24 +4261,6 @@ func (s *ListIPSetsInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *ListIPSetsInput) SetDetectorId(v string) *ListIPSetsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListIPSetsInput) SetMaxResults(v int64) *ListIPSetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIPSetsInput) SetNextToken(v string) *ListIPSetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // ListIPSets response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsResponse
 type ListIPSetsOutput struct {
@@ -5173,18 +4291,6 @@ func (s ListIPSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIPSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIpSetIds sets the IpSetIds field's value.
-func (s *ListIPSetsOutput) SetIpSetIds(v []string) *ListIPSetsOutput {
-	s.IpSetIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIPSetsOutput) SetNextToken(v string) *ListIPSetsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsRequest
@@ -5221,18 +4327,6 @@ func (s *ListInvitationsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListInvitationsInput) SetMaxResults(v int64) *ListInvitationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInvitationsInput) SetNextToken(v string) *ListInvitationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // ListInvitations response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsResponse
 type ListInvitationsOutput struct {
@@ -5263,18 +4357,6 @@ func (s ListInvitationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInvitationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInvitations sets the Invitations field's value.
-func (s *ListInvitationsOutput) SetInvitations(v []Invitation) *ListInvitationsOutput {
-	s.Invitations = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInvitationsOutput) SetNextToken(v string) *ListInvitationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest
@@ -5320,30 +4402,6 @@ func (s *ListMembersInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *ListMembersInput) SetDetectorId(v string) *ListMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListMembersInput) SetMaxResults(v int64) *ListMembersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListMembersInput) SetNextToken(v string) *ListMembersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOnlyAssociated sets the OnlyAssociated field's value.
-func (s *ListMembersInput) SetOnlyAssociated(v string) *ListMembersInput {
-	s.OnlyAssociated = &v
-	return s
-}
-
 // ListMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersResponse
 type ListMembersOutput struct {
@@ -5374,18 +4432,6 @@ func (s ListMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMembers sets the Members field's value.
-func (s *ListMembersOutput) SetMembers(v []Member) *ListMembersOutput {
-	s.Members = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListMembersOutput) SetNextToken(v string) *ListMembersOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsRequest
@@ -5429,24 +4475,6 @@ func (s *ListThreatIntelSetsInput) Validate() error {
 	return nil
 }
 
-// SetDetectorId sets the DetectorId field's value.
-func (s *ListThreatIntelSetsInput) SetDetectorId(v string) *ListThreatIntelSetsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThreatIntelSetsInput) SetMaxResults(v int64) *ListThreatIntelSetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThreatIntelSetsInput) SetNextToken(v string) *ListThreatIntelSetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // ListThreatIntelSets response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsResponse
 type ListThreatIntelSetsOutput struct {
@@ -5479,18 +4507,6 @@ func (s ListThreatIntelSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListThreatIntelSetsOutput) SetNextToken(v string) *ListThreatIntelSetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThreatIntelSetIds sets the ThreatIntelSetIds field's value.
-func (s *ListThreatIntelSetsOutput) SetThreatIntelSetIds(v []string) *ListThreatIntelSetsOutput {
-	s.ThreatIntelSetIds = v
-	return s
-}
-
 // Local port information of the connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalPortDetails
 type LocalPortDetails struct {
@@ -5511,18 +4527,6 @@ func (s LocalPortDetails) String() string {
 // GoString returns the string representation
 func (s LocalPortDetails) GoString() string {
 	return s.String()
-}
-
-// SetPort sets the Port field's value.
-func (s *LocalPortDetails) SetPort(v int64) *LocalPortDetails {
-	s.Port = &v
-	return s
-}
-
-// SetPortName sets the PortName field's value.
-func (s *LocalPortDetails) SetPortName(v string) *LocalPortDetails {
-	s.PortName = &v
-	return s
 }
 
 // Contains details about the master account.
@@ -5551,30 +4555,6 @@ func (s Master) String() string {
 // GoString returns the string representation
 func (s Master) GoString() string {
 	return s.String()
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *Master) SetAccountId(v string) *Master {
-	s.AccountId = &v
-	return s
-}
-
-// SetInvitationId sets the InvitationId field's value.
-func (s *Master) SetInvitationId(v string) *Master {
-	s.InvitationId = &v
-	return s
-}
-
-// SetInvitedAt sets the InvitedAt field's value.
-func (s *Master) SetInvitedAt(v string) *Master {
-	s.InvitedAt = &v
-	return s
-}
-
-// SetRelationshipStatus sets the RelationshipStatus field's value.
-func (s *Master) SetRelationshipStatus(v string) *Master {
-	s.RelationshipStatus = &v
-	return s
 }
 
 // Contains details about the member account.
@@ -5614,48 +4594,6 @@ func (s Member) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *Member) SetAccountId(v string) *Member {
-	s.AccountId = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *Member) SetDetectorId(v string) *Member {
-	s.DetectorId = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *Member) SetEmail(v string) *Member {
-	s.Email = &v
-	return s
-}
-
-// SetInvitedAt sets the InvitedAt field's value.
-func (s *Member) SetInvitedAt(v string) *Member {
-	s.InvitedAt = &v
-	return s
-}
-
-// SetMasterId sets the MasterId field's value.
-func (s *Member) SetMasterId(v string) *Member {
-	s.MasterId = &v
-	return s
-}
-
-// SetRelationshipStatus sets the RelationshipStatus field's value.
-func (s *Member) SetRelationshipStatus(v string) *Member {
-	s.RelationshipStatus = &v
-	return s
-}
-
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *Member) SetUpdatedAt(v string) *Member {
-	s.UpdatedAt = &v
-	return s
-}
-
 // Information about the NETWORK_CONNECTION action described in this finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkConnectionAction
 type NetworkConnectionAction struct {
@@ -5688,42 +4626,6 @@ func (s NetworkConnectionAction) String() string {
 // GoString returns the string representation
 func (s NetworkConnectionAction) GoString() string {
 	return s.String()
-}
-
-// SetBlocked sets the Blocked field's value.
-func (s *NetworkConnectionAction) SetBlocked(v bool) *NetworkConnectionAction {
-	s.Blocked = &v
-	return s
-}
-
-// SetConnectionDirection sets the ConnectionDirection field's value.
-func (s *NetworkConnectionAction) SetConnectionDirection(v string) *NetworkConnectionAction {
-	s.ConnectionDirection = &v
-	return s
-}
-
-// SetLocalPortDetails sets the LocalPortDetails field's value.
-func (s *NetworkConnectionAction) SetLocalPortDetails(v *LocalPortDetails) *NetworkConnectionAction {
-	s.LocalPortDetails = v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *NetworkConnectionAction) SetProtocol(v string) *NetworkConnectionAction {
-	s.Protocol = &v
-	return s
-}
-
-// SetRemoteIpDetails sets the RemoteIpDetails field's value.
-func (s *NetworkConnectionAction) SetRemoteIpDetails(v *RemoteIpDetails) *NetworkConnectionAction {
-	s.RemoteIpDetails = v
-	return s
-}
-
-// SetRemotePortDetails sets the RemotePortDetails field's value.
-func (s *NetworkConnectionAction) SetRemotePortDetails(v *RemotePortDetails) *NetworkConnectionAction {
-	s.RemotePortDetails = v
-	return s
 }
 
 // The network interface information of the EC2 instance.
@@ -5769,60 +4671,6 @@ func (s NetworkInterface) GoString() string {
 	return s.String()
 }
 
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *NetworkInterface) SetIpv6Addresses(v []string) *NetworkInterface {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *NetworkInterface) SetPrivateDnsName(v string) *NetworkInterface {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *NetworkInterface) SetPrivateIpAddress(v string) *NetworkInterface {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *NetworkInterface) SetPrivateIpAddresses(v []PrivateIpAddressDetails) *NetworkInterface {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetPublicDnsName sets the PublicDnsName field's value.
-func (s *NetworkInterface) SetPublicDnsName(v string) *NetworkInterface {
-	s.PublicDnsName = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *NetworkInterface) SetPublicIp(v string) *NetworkInterface {
-	s.PublicIp = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *NetworkInterface) SetSecurityGroups(v []SecurityGroup) *NetworkInterface {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *NetworkInterface) SetSubnetId(v string) *NetworkInterface {
-	s.SubnetId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *NetworkInterface) SetVpcId(v string) *NetworkInterface {
-	s.VpcId = &v
-	return s
-}
-
 // ISP Organization information of the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Organization
 type Organization struct {
@@ -5851,30 +4699,6 @@ func (s Organization) GoString() string {
 	return s.String()
 }
 
-// SetAsn sets the Asn field's value.
-func (s *Organization) SetAsn(v string) *Organization {
-	s.Asn = &v
-	return s
-}
-
-// SetAsnOrg sets the AsnOrg field's value.
-func (s *Organization) SetAsnOrg(v string) *Organization {
-	s.AsnOrg = &v
-	return s
-}
-
-// SetIsp sets the Isp field's value.
-func (s *Organization) SetIsp(v string) *Organization {
-	s.Isp = &v
-	return s
-}
-
-// SetOrg sets the Org field's value.
-func (s *Organization) SetOrg(v string) *Organization {
-	s.Org = &v
-	return s
-}
-
 // Other private IP address information of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails
 type PrivateIpAddressDetails struct {
@@ -5897,18 +4721,6 @@ func (s PrivateIpAddressDetails) GoString() string {
 	return s.String()
 }
 
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *PrivateIpAddressDetails) SetPrivateDnsName(v string) *PrivateIpAddressDetails {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *PrivateIpAddressDetails) SetPrivateIpAddress(v string) *PrivateIpAddressDetails {
-	s.PrivateIpAddress = &v
-	return s
-}
-
 // The product code of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProductCode
 type ProductCode struct {
@@ -5929,18 +4741,6 @@ func (s ProductCode) String() string {
 // GoString returns the string representation
 func (s ProductCode) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *ProductCode) SetCode(v string) *ProductCode {
-	s.Code = &v
-	return s
-}
-
-// SetProductType sets the ProductType field's value.
-func (s *ProductCode) SetProductType(v string) *ProductCode {
-	s.ProductType = &v
-	return s
 }
 
 // Remote IP information of the connection.
@@ -5974,36 +4774,6 @@ func (s RemoteIpDetails) GoString() string {
 	return s.String()
 }
 
-// SetCity sets the City field's value.
-func (s *RemoteIpDetails) SetCity(v *City) *RemoteIpDetails {
-	s.City = v
-	return s
-}
-
-// SetCountry sets the Country field's value.
-func (s *RemoteIpDetails) SetCountry(v *Country) *RemoteIpDetails {
-	s.Country = v
-	return s
-}
-
-// SetGeoLocation sets the GeoLocation field's value.
-func (s *RemoteIpDetails) SetGeoLocation(v *GeoLocation) *RemoteIpDetails {
-	s.GeoLocation = v
-	return s
-}
-
-// SetIpAddressV4 sets the IpAddressV4 field's value.
-func (s *RemoteIpDetails) SetIpAddressV4(v string) *RemoteIpDetails {
-	s.IpAddressV4 = &v
-	return s
-}
-
-// SetOrganization sets the Organization field's value.
-func (s *RemoteIpDetails) SetOrganization(v *Organization) *RemoteIpDetails {
-	s.Organization = v
-	return s
-}
-
 // Remote port information of the connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemotePortDetails
 type RemotePortDetails struct {
@@ -6024,18 +4794,6 @@ func (s RemotePortDetails) String() string {
 // GoString returns the string representation
 func (s RemotePortDetails) GoString() string {
 	return s.String()
-}
-
-// SetPort sets the Port field's value.
-func (s *RemotePortDetails) SetPort(v int64) *RemotePortDetails {
-	s.Port = &v
-	return s
-}
-
-// SetPortName sets the PortName field's value.
-func (s *RemotePortDetails) SetPortName(v string) *RemotePortDetails {
-	s.PortName = &v
-	return s
 }
 
 // The AWS resource associated with the activity that prompted GuardDuty to
@@ -6062,18 +4820,6 @@ func (s Resource) GoString() string {
 	return s.String()
 }
 
-// SetInstanceDetails sets the InstanceDetails field's value.
-func (s *Resource) SetInstanceDetails(v *InstanceDetails) *Resource {
-	s.InstanceDetails = v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *Resource) SetResourceType(v string) *Resource {
-	s.ResourceType = &v
-	return s
-}
-
 // Security groups associated with the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityGroup
 type SecurityGroup struct {
@@ -6094,18 +4840,6 @@ func (s SecurityGroup) String() string {
 // GoString returns the string representation
 func (s SecurityGroup) GoString() string {
 	return s.String()
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *SecurityGroup) SetGroupId(v string) *SecurityGroup {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *SecurityGroup) SetGroupName(v string) *SecurityGroup {
-	s.GroupName = &v
-	return s
 }
 
 // Additional information assigned to the generated finding by GuardDuty.
@@ -6153,60 +4887,6 @@ func (s Service) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *Service) SetAction(v *Action) *Service {
-	s.Action = v
-	return s
-}
-
-// SetArchived sets the Archived field's value.
-func (s *Service) SetArchived(v bool) *Service {
-	s.Archived = &v
-	return s
-}
-
-// SetCount sets the Count field's value.
-func (s *Service) SetCount(v int64) *Service {
-	s.Count = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *Service) SetDetectorId(v string) *Service {
-	s.DetectorId = &v
-	return s
-}
-
-// SetEventFirstSeen sets the EventFirstSeen field's value.
-func (s *Service) SetEventFirstSeen(v string) *Service {
-	s.EventFirstSeen = &v
-	return s
-}
-
-// SetEventLastSeen sets the EventLastSeen field's value.
-func (s *Service) SetEventLastSeen(v string) *Service {
-	s.EventLastSeen = &v
-	return s
-}
-
-// SetResourceRole sets the ResourceRole field's value.
-func (s *Service) SetResourceRole(v string) *Service {
-	s.ResourceRole = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *Service) SetServiceName(v string) *Service {
-	s.ServiceName = &v
-	return s
-}
-
-// SetUserFeedback sets the UserFeedback field's value.
-func (s *Service) SetUserFeedback(v string) *Service {
-	s.UserFeedback = &v
-	return s
-}
-
 // Represents the criteria used for sorting findings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SortCriteria
 type SortCriteria struct {
@@ -6228,18 +4908,6 @@ func (s SortCriteria) String() string {
 // GoString returns the string representation
 func (s SortCriteria) GoString() string {
 	return s.String()
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *SortCriteria) SetAttributeName(v string) *SortCriteria {
-	s.AttributeName = &v
-	return s
-}
-
-// SetOrderBy sets the OrderBy field's value.
-func (s *SortCriteria) SetOrderBy(v OrderBy) *SortCriteria {
-	s.OrderBy = v
-	return s
 }
 
 // StartMonitoringMembers request body.
@@ -6279,18 +4947,6 @@ func (s *StartMonitoringMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *StartMonitoringMembersInput) SetAccountIds(v []string) *StartMonitoringMembersInput {
-	s.AccountIds = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *StartMonitoringMembersInput) SetDetectorId(v string) *StartMonitoringMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
 // StartMonitoringMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersResponse
 type StartMonitoringMembersOutput struct {
@@ -6316,12 +4972,6 @@ func (s StartMonitoringMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartMonitoringMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *StartMonitoringMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *StartMonitoringMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
 }
 
 // StopMonitoringMembers request body.
@@ -6361,18 +5011,6 @@ func (s *StopMonitoringMembersInput) Validate() error {
 	return nil
 }
 
-// SetAccountIds sets the AccountIds field's value.
-func (s *StopMonitoringMembersInput) SetAccountIds(v []string) *StopMonitoringMembersInput {
-	s.AccountIds = v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *StopMonitoringMembersInput) SetDetectorId(v string) *StopMonitoringMembersInput {
-	s.DetectorId = &v
-	return s
-}
-
 // StopMonitoringMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersResponse
 type StopMonitoringMembersOutput struct {
@@ -6400,12 +5038,6 @@ func (s StopMonitoringMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUnprocessedAccounts sets the UnprocessedAccounts field's value.
-func (s *StopMonitoringMembersOutput) SetUnprocessedAccounts(v []UnprocessedAccount) *StopMonitoringMembersOutput {
-	s.UnprocessedAccounts = v
-	return s
-}
-
 // A tag of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag
 type Tag struct {
@@ -6426,18 +5058,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Unrchive Findings Request
@@ -6474,18 +5094,6 @@ func (s *UnarchiveFindingsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *UnarchiveFindingsInput) SetDetectorId(v string) *UnarchiveFindingsInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFindingIds sets the FindingIds field's value.
-func (s *UnarchiveFindingsInput) SetFindingIds(v []string) *UnarchiveFindingsInput {
-	s.FindingIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsResponse
@@ -6533,18 +5141,6 @@ func (s UnprocessedAccount) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *UnprocessedAccount) SetAccountId(v string) *UnprocessedAccount {
-	s.AccountId = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *UnprocessedAccount) SetResult(v string) *UnprocessedAccount {
-	s.Result = &v
-	return s
-}
-
 // Update Detector Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest
 type UpdateDetectorInput struct {
@@ -6580,18 +5176,6 @@ func (s *UpdateDetectorInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *UpdateDetectorInput) SetDetectorId(v string) *UpdateDetectorInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetEnable sets the Enable field's value.
-func (s *UpdateDetectorInput) SetEnable(v bool) *UpdateDetectorInput {
-	s.Enable = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorResponse
@@ -6656,30 +5240,6 @@ func (s *UpdateFindingsFeedbackInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComments sets the Comments field's value.
-func (s *UpdateFindingsFeedbackInput) SetComments(v string) *UpdateFindingsFeedbackInput {
-	s.Comments = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *UpdateFindingsFeedbackInput) SetDetectorId(v string) *UpdateFindingsFeedbackInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetFeedback sets the Feedback field's value.
-func (s *UpdateFindingsFeedbackInput) SetFeedback(v Feedback) *UpdateFindingsFeedbackInput {
-	s.Feedback = v
-	return s
-}
-
-// SetFindingIds sets the FindingIds field's value.
-func (s *UpdateFindingsFeedbackInput) SetFindingIds(v []string) *UpdateFindingsFeedbackInput {
-	s.FindingIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackResponse
@@ -6753,36 +5313,6 @@ func (s *UpdateIPSetInput) Validate() error {
 	return nil
 }
 
-// SetActivate sets the Activate field's value.
-func (s *UpdateIPSetInput) SetActivate(v bool) *UpdateIPSetInput {
-	s.Activate = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *UpdateIPSetInput) SetDetectorId(v string) *UpdateIPSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetIpSetId sets the IpSetId field's value.
-func (s *UpdateIPSetInput) SetIpSetId(v string) *UpdateIPSetInput {
-	s.IpSetId = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *UpdateIPSetInput) SetLocation(v string) *UpdateIPSetInput {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateIPSetInput) SetName(v string) *UpdateIPSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetResponse
 type UpdateIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6854,36 +5384,6 @@ func (s *UpdateThreatIntelSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActivate sets the Activate field's value.
-func (s *UpdateThreatIntelSetInput) SetActivate(v bool) *UpdateThreatIntelSetInput {
-	s.Activate = &v
-	return s
-}
-
-// SetDetectorId sets the DetectorId field's value.
-func (s *UpdateThreatIntelSetInput) SetDetectorId(v string) *UpdateThreatIntelSetInput {
-	s.DetectorId = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *UpdateThreatIntelSetInput) SetLocation(v string) *UpdateThreatIntelSetInput {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateThreatIntelSetInput) SetName(v string) *UpdateThreatIntelSetInput {
-	s.Name = &v
-	return s
-}
-
-// SetThreatIntelSetId sets the ThreatIntelSetId field's value.
-func (s *UpdateThreatIntelSetInput) SetThreatIntelSetId(v string) *UpdateThreatIntelSetInput {
-	s.ThreatIntelSetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse

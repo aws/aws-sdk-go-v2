@@ -4011,48 +4011,6 @@ func (s *ActivateGatewayInput) Validate() error {
 	return nil
 }
 
-// SetActivationKey sets the ActivationKey field's value.
-func (s *ActivateGatewayInput) SetActivationKey(v string) *ActivateGatewayInput {
-	s.ActivationKey = &v
-	return s
-}
-
-// SetGatewayName sets the GatewayName field's value.
-func (s *ActivateGatewayInput) SetGatewayName(v string) *ActivateGatewayInput {
-	s.GatewayName = &v
-	return s
-}
-
-// SetGatewayRegion sets the GatewayRegion field's value.
-func (s *ActivateGatewayInput) SetGatewayRegion(v string) *ActivateGatewayInput {
-	s.GatewayRegion = &v
-	return s
-}
-
-// SetGatewayTimezone sets the GatewayTimezone field's value.
-func (s *ActivateGatewayInput) SetGatewayTimezone(v string) *ActivateGatewayInput {
-	s.GatewayTimezone = &v
-	return s
-}
-
-// SetGatewayType sets the GatewayType field's value.
-func (s *ActivateGatewayInput) SetGatewayType(v string) *ActivateGatewayInput {
-	s.GatewayType = &v
-	return s
-}
-
-// SetMediumChangerType sets the MediumChangerType field's value.
-func (s *ActivateGatewayInput) SetMediumChangerType(v string) *ActivateGatewayInput {
-	s.MediumChangerType = &v
-	return s
-}
-
-// SetTapeDriveType sets the TapeDriveType field's value.
-func (s *ActivateGatewayInput) SetTapeDriveType(v string) *ActivateGatewayInput {
-	s.TapeDriveType = &v
-	return s
-}
-
 // AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated
 // gateway. It is a string made of information such as your account, gateway
 // name, and region. This ARN is used to reference the gateway in other API
@@ -4085,12 +4043,6 @@ func (s ActivateGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ActivateGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ActivateGatewayOutput) SetGatewayARN(v string) *ActivateGatewayOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCacheInput
@@ -4138,18 +4090,6 @@ func (s *AddCacheInput) Validate() error {
 	return nil
 }
 
-// SetDiskIds sets the DiskIds field's value.
-func (s *AddCacheInput) SetDiskIds(v []string) *AddCacheInput {
-	s.DiskIds = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *AddCacheInput) SetGatewayARN(v string) *AddCacheInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCacheOutput
 type AddCacheOutput struct {
 	_ struct{} `type:"structure"`
@@ -4174,12 +4114,6 @@ func (s AddCacheOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddCacheOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *AddCacheOutput) SetGatewayARN(v string) *AddCacheOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // AddTagsToResourceInput
@@ -4240,18 +4174,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceARN sets the ResourceARN field's value.
-func (s *AddTagsToResourceInput) SetResourceARN(v string) *AddTagsToResourceInput {
-	s.ResourceARN = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
-	s.Tags = v
-	return s
-}
-
 // AddTagsToResourceOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResourceOutput
 type AddTagsToResourceOutput struct {
@@ -4276,12 +4198,6 @@ func (s AddTagsToResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceARN sets the ResourceARN field's value.
-func (s *AddTagsToResourceOutput) SetResourceARN(v string) *AddTagsToResourceOutput {
-	s.ResourceARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBufferInput
@@ -4329,18 +4245,6 @@ func (s *AddUploadBufferInput) Validate() error {
 	return nil
 }
 
-// SetDiskIds sets the DiskIds field's value.
-func (s *AddUploadBufferInput) SetDiskIds(v []string) *AddUploadBufferInput {
-	s.DiskIds = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *AddUploadBufferInput) SetGatewayARN(v string) *AddUploadBufferInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBufferOutput
 type AddUploadBufferOutput struct {
 	_ struct{} `type:"structure"`
@@ -4365,12 +4269,6 @@ func (s AddUploadBufferOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddUploadBufferOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *AddUploadBufferOutput) SetGatewayARN(v string) *AddUploadBufferOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -4425,18 +4323,6 @@ func (s *AddWorkingStorageInput) Validate() error {
 	return nil
 }
 
-// SetDiskIds sets the DiskIds field's value.
-func (s *AddWorkingStorageInput) SetDiskIds(v []string) *AddWorkingStorageInput {
-	s.DiskIds = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *AddWorkingStorageInput) SetGatewayARN(v string) *AddWorkingStorageInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the of the gateway for which working storage was
 // configured.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorageOutput
@@ -4463,12 +4349,6 @@ func (s AddWorkingStorageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddWorkingStorageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *AddWorkingStorageOutput) SetGatewayARN(v string) *AddWorkingStorageOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // Describes an iSCSI cached volume.
@@ -4525,66 +4405,6 @@ func (s CachediSCSIVolume) GoString() string {
 	return s.String()
 }
 
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *CachediSCSIVolume) SetCreatedDate(v time.Time) *CachediSCSIVolume {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetSourceSnapshotId sets the SourceSnapshotId field's value.
-func (s *CachediSCSIVolume) SetSourceSnapshotId(v string) *CachediSCSIVolume {
-	s.SourceSnapshotId = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CachediSCSIVolume) SetVolumeARN(v string) *CachediSCSIVolume {
-	s.VolumeARN = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *CachediSCSIVolume) SetVolumeId(v string) *CachediSCSIVolume {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeProgress sets the VolumeProgress field's value.
-func (s *CachediSCSIVolume) SetVolumeProgress(v float64) *CachediSCSIVolume {
-	s.VolumeProgress = &v
-	return s
-}
-
-// SetVolumeSizeInBytes sets the VolumeSizeInBytes field's value.
-func (s *CachediSCSIVolume) SetVolumeSizeInBytes(v int64) *CachediSCSIVolume {
-	s.VolumeSizeInBytes = &v
-	return s
-}
-
-// SetVolumeStatus sets the VolumeStatus field's value.
-func (s *CachediSCSIVolume) SetVolumeStatus(v string) *CachediSCSIVolume {
-	s.VolumeStatus = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *CachediSCSIVolume) SetVolumeType(v string) *CachediSCSIVolume {
-	s.VolumeType = &v
-	return s
-}
-
-// SetVolumeUsedInBytes sets the VolumeUsedInBytes field's value.
-func (s *CachediSCSIVolume) SetVolumeUsedInBytes(v int64) *CachediSCSIVolume {
-	s.VolumeUsedInBytes = &v
-	return s
-}
-
-// SetVolumeiSCSIAttributes sets the VolumeiSCSIAttributes field's value.
-func (s *CachediSCSIVolume) SetVolumeiSCSIAttributes(v *VolumeiSCSIAttributes) *CachediSCSIVolume {
-	s.VolumeiSCSIAttributes = v
-	return s
-}
-
 // CancelArchivalInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchivalInput
 type CancelArchivalInput struct {
@@ -4637,18 +4457,6 @@ func (s *CancelArchivalInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CancelArchivalInput) SetGatewayARN(v string) *CancelArchivalInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *CancelArchivalInput) SetTapeARN(v string) *CancelArchivalInput {
-	s.TapeARN = &v
-	return s
-}
-
 // CancelArchivalOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchivalOutput
 type CancelArchivalOutput struct {
@@ -4674,12 +4482,6 @@ func (s CancelArchivalOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelArchivalOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *CancelArchivalOutput) SetTapeARN(v string) *CancelArchivalOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // CancelRetrievalInput
@@ -4734,18 +4536,6 @@ func (s *CancelRetrievalInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CancelRetrievalInput) SetGatewayARN(v string) *CancelRetrievalInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *CancelRetrievalInput) SetTapeARN(v string) *CancelRetrievalInput {
-	s.TapeARN = &v
-	return s
-}
-
 // CancelRetrievalOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrievalOutput
 type CancelRetrievalOutput struct {
@@ -4771,12 +4561,6 @@ func (s CancelRetrievalOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelRetrievalOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *CancelRetrievalOutput) SetTapeARN(v string) *CancelRetrievalOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // Describes Challenge-Handshake Authentication Protocol (CHAP) information
@@ -4811,30 +4595,6 @@ func (s ChapInfo) String() string {
 // GoString returns the string representation
 func (s ChapInfo) GoString() string {
 	return s.String()
-}
-
-// SetInitiatorName sets the InitiatorName field's value.
-func (s *ChapInfo) SetInitiatorName(v string) *ChapInfo {
-	s.InitiatorName = &v
-	return s
-}
-
-// SetSecretToAuthenticateInitiator sets the SecretToAuthenticateInitiator field's value.
-func (s *ChapInfo) SetSecretToAuthenticateInitiator(v string) *ChapInfo {
-	s.SecretToAuthenticateInitiator = &v
-	return s
-}
-
-// SetSecretToAuthenticateTarget sets the SecretToAuthenticateTarget field's value.
-func (s *ChapInfo) SetSecretToAuthenticateTarget(v string) *ChapInfo {
-	s.SecretToAuthenticateTarget = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *ChapInfo) SetTargetARN(v string) *ChapInfo {
-	s.TargetARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeInput
@@ -4920,48 +4680,6 @@ func (s *CreateCachediSCSIVolumeInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateCachediSCSIVolumeInput) SetClientToken(v string) *CreateCachediSCSIVolumeInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CreateCachediSCSIVolumeInput) SetGatewayARN(v string) *CreateCachediSCSIVolumeInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *CreateCachediSCSIVolumeInput) SetNetworkInterfaceId(v string) *CreateCachediSCSIVolumeInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateCachediSCSIVolumeInput) SetSnapshotId(v string) *CreateCachediSCSIVolumeInput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetSourceVolumeARN sets the SourceVolumeARN field's value.
-func (s *CreateCachediSCSIVolumeInput) SetSourceVolumeARN(v string) *CreateCachediSCSIVolumeInput {
-	s.SourceVolumeARN = &v
-	return s
-}
-
-// SetTargetName sets the TargetName field's value.
-func (s *CreateCachediSCSIVolumeInput) SetTargetName(v string) *CreateCachediSCSIVolumeInput {
-	s.TargetName = &v
-	return s
-}
-
-// SetVolumeSizeInBytes sets the VolumeSizeInBytes field's value.
-func (s *CreateCachediSCSIVolumeInput) SetVolumeSizeInBytes(v int64) *CreateCachediSCSIVolumeInput {
-	s.VolumeSizeInBytes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeOutput
 type CreateCachediSCSIVolumeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4986,18 +4704,6 @@ func (s CreateCachediSCSIVolumeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCachediSCSIVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *CreateCachediSCSIVolumeOutput) SetTargetARN(v string) *CreateCachediSCSIVolumeOutput {
-	s.TargetARN = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CreateCachediSCSIVolumeOutput) SetVolumeARN(v string) *CreateCachediSCSIVolumeOutput {
-	s.VolumeARN = &v
-	return s
 }
 
 // CreateNFSFileShareInput
@@ -5131,78 +4837,6 @@ func (s *CreateNFSFileShareInput) Validate() error {
 	return nil
 }
 
-// SetClientList sets the ClientList field's value.
-func (s *CreateNFSFileShareInput) SetClientList(v []string) *CreateNFSFileShareInput {
-	s.ClientList = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateNFSFileShareInput) SetClientToken(v string) *CreateNFSFileShareInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDefaultStorageClass sets the DefaultStorageClass field's value.
-func (s *CreateNFSFileShareInput) SetDefaultStorageClass(v string) *CreateNFSFileShareInput {
-	s.DefaultStorageClass = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CreateNFSFileShareInput) SetGatewayARN(v string) *CreateNFSFileShareInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGuessMIMETypeEnabled sets the GuessMIMETypeEnabled field's value.
-func (s *CreateNFSFileShareInput) SetGuessMIMETypeEnabled(v bool) *CreateNFSFileShareInput {
-	s.GuessMIMETypeEnabled = &v
-	return s
-}
-
-// SetKMSEncrypted sets the KMSEncrypted field's value.
-func (s *CreateNFSFileShareInput) SetKMSEncrypted(v bool) *CreateNFSFileShareInput {
-	s.KMSEncrypted = &v
-	return s
-}
-
-// SetKMSKey sets the KMSKey field's value.
-func (s *CreateNFSFileShareInput) SetKMSKey(v string) *CreateNFSFileShareInput {
-	s.KMSKey = &v
-	return s
-}
-
-// SetLocationARN sets the LocationARN field's value.
-func (s *CreateNFSFileShareInput) SetLocationARN(v string) *CreateNFSFileShareInput {
-	s.LocationARN = &v
-	return s
-}
-
-// SetNFSFileShareDefaults sets the NFSFileShareDefaults field's value.
-func (s *CreateNFSFileShareInput) SetNFSFileShareDefaults(v *NFSFileShareDefaults) *CreateNFSFileShareInput {
-	s.NFSFileShareDefaults = v
-	return s
-}
-
-// SetReadOnly sets the ReadOnly field's value.
-func (s *CreateNFSFileShareInput) SetReadOnly(v bool) *CreateNFSFileShareInput {
-	s.ReadOnly = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *CreateNFSFileShareInput) SetRole(v string) *CreateNFSFileShareInput {
-	s.Role = &v
-	return s
-}
-
-// SetSquash sets the Squash field's value.
-func (s *CreateNFSFileShareInput) SetSquash(v string) *CreateNFSFileShareInput {
-	s.Squash = &v
-	return s
-}
-
 // CreateNFSFileShareOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareOutput
 type CreateNFSFileShareOutput struct {
@@ -5227,12 +4861,6 @@ func (s CreateNFSFileShareOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNFSFileShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *CreateNFSFileShareOutput) SetFileShareARN(v string) *CreateNFSFileShareOutput {
-	s.FileShareARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointInput
@@ -5280,18 +4908,6 @@ func (s *CreateSnapshotFromVolumeRecoveryPointInput) Validate() error {
 	return nil
 }
 
-// SetSnapshotDescription sets the SnapshotDescription field's value.
-func (s *CreateSnapshotFromVolumeRecoveryPointInput) SetSnapshotDescription(v string) *CreateSnapshotFromVolumeRecoveryPointInput {
-	s.SnapshotDescription = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CreateSnapshotFromVolumeRecoveryPointInput) SetVolumeARN(v string) *CreateSnapshotFromVolumeRecoveryPointInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointOutput
 type CreateSnapshotFromVolumeRecoveryPointOutput struct {
 	_ struct{} `type:"structure"`
@@ -5318,24 +4934,6 @@ func (s CreateSnapshotFromVolumeRecoveryPointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSnapshotFromVolumeRecoveryPointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateSnapshotFromVolumeRecoveryPointOutput) SetSnapshotId(v string) *CreateSnapshotFromVolumeRecoveryPointOutput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CreateSnapshotFromVolumeRecoveryPointOutput) SetVolumeARN(v string) *CreateSnapshotFromVolumeRecoveryPointOutput {
-	s.VolumeARN = &v
-	return s
-}
-
-// SetVolumeRecoveryPointTime sets the VolumeRecoveryPointTime field's value.
-func (s *CreateSnapshotFromVolumeRecoveryPointOutput) SetVolumeRecoveryPointTime(v string) *CreateSnapshotFromVolumeRecoveryPointOutput {
-	s.VolumeRecoveryPointTime = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -5395,18 +4993,6 @@ func (s *CreateSnapshotInput) Validate() error {
 	return nil
 }
 
-// SetSnapshotDescription sets the SnapshotDescription field's value.
-func (s *CreateSnapshotInput) SetSnapshotDescription(v string) *CreateSnapshotInput {
-	s.SnapshotDescription = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CreateSnapshotInput) SetVolumeARN(v string) *CreateSnapshotInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // A JSON object containing the following fields:
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotOutput
 type CreateSnapshotOutput struct {
@@ -5436,18 +5022,6 @@ func (s CreateSnapshotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateSnapshotOutput) SetSnapshotId(v string) *CreateSnapshotOutput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CreateSnapshotOutput) SetVolumeARN(v string) *CreateSnapshotOutput {
-	s.VolumeARN = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -5560,42 +5134,6 @@ func (s *CreateStorediSCSIVolumeInput) Validate() error {
 	return nil
 }
 
-// SetDiskId sets the DiskId field's value.
-func (s *CreateStorediSCSIVolumeInput) SetDiskId(v string) *CreateStorediSCSIVolumeInput {
-	s.DiskId = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CreateStorediSCSIVolumeInput) SetGatewayARN(v string) *CreateStorediSCSIVolumeInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *CreateStorediSCSIVolumeInput) SetNetworkInterfaceId(v string) *CreateStorediSCSIVolumeInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPreserveExistingData sets the PreserveExistingData field's value.
-func (s *CreateStorediSCSIVolumeInput) SetPreserveExistingData(v bool) *CreateStorediSCSIVolumeInput {
-	s.PreserveExistingData = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateStorediSCSIVolumeInput) SetSnapshotId(v string) *CreateStorediSCSIVolumeInput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetTargetName sets the TargetName field's value.
-func (s *CreateStorediSCSIVolumeInput) SetTargetName(v string) *CreateStorediSCSIVolumeInput {
-	s.TargetName = &v
-	return s
-}
-
 // A JSON object containing the following fields:
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeOutput
 type CreateStorediSCSIVolumeOutput struct {
@@ -5627,24 +5165,6 @@ func (s CreateStorediSCSIVolumeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStorediSCSIVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *CreateStorediSCSIVolumeOutput) SetTargetARN(v string) *CreateStorediSCSIVolumeOutput {
-	s.TargetARN = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *CreateStorediSCSIVolumeOutput) SetVolumeARN(v string) *CreateStorediSCSIVolumeOutput {
-	s.VolumeARN = &v
-	return s
-}
-
-// SetVolumeSizeInBytes sets the VolumeSizeInBytes field's value.
-func (s *CreateStorediSCSIVolumeOutput) SetVolumeSizeInBytes(v int64) *CreateStorediSCSIVolumeOutput {
-	s.VolumeSizeInBytes = &v
-	return s
 }
 
 // CreateTapeWithBarcodeInput
@@ -5713,24 +5233,6 @@ func (s *CreateTapeWithBarcodeInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CreateTapeWithBarcodeInput) SetGatewayARN(v string) *CreateTapeWithBarcodeInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeBarcode sets the TapeBarcode field's value.
-func (s *CreateTapeWithBarcodeInput) SetTapeBarcode(v string) *CreateTapeWithBarcodeInput {
-	s.TapeBarcode = &v
-	return s
-}
-
-// SetTapeSizeInBytes sets the TapeSizeInBytes field's value.
-func (s *CreateTapeWithBarcodeInput) SetTapeSizeInBytes(v int64) *CreateTapeWithBarcodeInput {
-	s.TapeSizeInBytes = &v
-	return s
-}
-
 // CreateTapeOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeOutput
 type CreateTapeWithBarcodeOutput struct {
@@ -5756,12 +5258,6 @@ func (s CreateTapeWithBarcodeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTapeWithBarcodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *CreateTapeWithBarcodeOutput) SetTapeARN(v string) *CreateTapeWithBarcodeOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // CreateTapesInput
@@ -5858,36 +5354,6 @@ func (s *CreateTapesInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateTapesInput) SetClientToken(v string) *CreateTapesInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *CreateTapesInput) SetGatewayARN(v string) *CreateTapesInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetNumTapesToCreate sets the NumTapesToCreate field's value.
-func (s *CreateTapesInput) SetNumTapesToCreate(v int64) *CreateTapesInput {
-	s.NumTapesToCreate = &v
-	return s
-}
-
-// SetTapeBarcodePrefix sets the TapeBarcodePrefix field's value.
-func (s *CreateTapesInput) SetTapeBarcodePrefix(v string) *CreateTapesInput {
-	s.TapeBarcodePrefix = &v
-	return s
-}
-
-// SetTapeSizeInBytes sets the TapeSizeInBytes field's value.
-func (s *CreateTapesInput) SetTapeSizeInBytes(v int64) *CreateTapesInput {
-	s.TapeSizeInBytes = &v
-	return s
-}
-
 // CreateTapeOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapesOutput
 type CreateTapesOutput struct {
@@ -5913,12 +5379,6 @@ func (s CreateTapesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTapesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARNs sets the TapeARNs field's value.
-func (s *CreateTapesOutput) SetTapeARNs(v []string) *CreateTapesOutput {
-	s.TapeARNs = v
-	return s
 }
 
 // A JSON object containing the following fields:
@@ -5977,18 +5437,6 @@ func (s *DeleteBandwidthRateLimitInput) Validate() error {
 	return nil
 }
 
-// SetBandwidthType sets the BandwidthType field's value.
-func (s *DeleteBandwidthRateLimitInput) SetBandwidthType(v string) *DeleteBandwidthRateLimitInput {
-	s.BandwidthType = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DeleteBandwidthRateLimitInput) SetGatewayARN(v string) *DeleteBandwidthRateLimitInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the of the gateway whose bandwidth rate information
 // was deleted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimitOutput
@@ -6015,12 +5463,6 @@ func (s DeleteBandwidthRateLimitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteBandwidthRateLimitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DeleteBandwidthRateLimitOutput) SetGatewayARN(v string) *DeleteBandwidthRateLimitOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -6078,18 +5520,6 @@ func (s *DeleteChapCredentialsInput) Validate() error {
 	return nil
 }
 
-// SetInitiatorName sets the InitiatorName field's value.
-func (s *DeleteChapCredentialsInput) SetInitiatorName(v string) *DeleteChapCredentialsInput {
-	s.InitiatorName = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *DeleteChapCredentialsInput) SetTargetARN(v string) *DeleteChapCredentialsInput {
-	s.TargetARN = &v
-	return s
-}
-
 // A JSON object containing the following fields:
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentialsOutput
 type DeleteChapCredentialsOutput struct {
@@ -6117,18 +5547,6 @@ func (s DeleteChapCredentialsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteChapCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInitiatorName sets the InitiatorName field's value.
-func (s *DeleteChapCredentialsOutput) SetInitiatorName(v string) *DeleteChapCredentialsOutput {
-	s.InitiatorName = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *DeleteChapCredentialsOutput) SetTargetARN(v string) *DeleteChapCredentialsOutput {
-	s.TargetARN = &v
-	return s
 }
 
 // DeleteFileShareInput
@@ -6175,18 +5593,6 @@ func (s *DeleteFileShareInput) Validate() error {
 	return nil
 }
 
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *DeleteFileShareInput) SetFileShareARN(v string) *DeleteFileShareInput {
-	s.FileShareARN = &v
-	return s
-}
-
-// SetForceDelete sets the ForceDelete field's value.
-func (s *DeleteFileShareInput) SetForceDelete(v bool) *DeleteFileShareInput {
-	s.ForceDelete = &v
-	return s
-}
-
 // DeleteFileShareOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareOutput
 type DeleteFileShareOutput struct {
@@ -6211,12 +5617,6 @@ func (s DeleteFileShareOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteFileShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *DeleteFileShareOutput) SetFileShareARN(v string) *DeleteFileShareOutput {
-	s.FileShareARN = &v
-	return s
 }
 
 // A JSON object containing the ID of the gateway to delete.
@@ -6258,12 +5658,6 @@ func (s *DeleteGatewayInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DeleteGatewayInput) SetGatewayARN(v string) *DeleteGatewayInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the ID of the deleted gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGatewayOutput
 type DeleteGatewayOutput struct {
@@ -6289,12 +5683,6 @@ func (s DeleteGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DeleteGatewayOutput) SetGatewayARN(v string) *DeleteGatewayOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotScheduleInput
@@ -6332,12 +5720,6 @@ func (s *DeleteSnapshotScheduleInput) Validate() error {
 	return nil
 }
 
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *DeleteSnapshotScheduleInput) SetVolumeARN(v string) *DeleteSnapshotScheduleInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotScheduleOutput
 type DeleteSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
@@ -6360,12 +5742,6 @@ func (s DeleteSnapshotScheduleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *DeleteSnapshotScheduleOutput) SetVolumeARN(v string) *DeleteSnapshotScheduleOutput {
-	s.VolumeARN = &v
-	return s
 }
 
 // DeleteTapeArchiveInput
@@ -6407,12 +5783,6 @@ func (s *DeleteTapeArchiveInput) Validate() error {
 	return nil
 }
 
-// SetTapeARN sets the TapeARN field's value.
-func (s *DeleteTapeArchiveInput) SetTapeARN(v string) *DeleteTapeArchiveInput {
-	s.TapeARN = &v
-	return s
-}
-
 // DeleteTapeArchiveOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchiveOutput
 type DeleteTapeArchiveOutput struct {
@@ -6438,12 +5808,6 @@ func (s DeleteTapeArchiveOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTapeArchiveOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *DeleteTapeArchiveOutput) SetTapeARN(v string) *DeleteTapeArchiveOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // DeleteTapeInput
@@ -6498,18 +5862,6 @@ func (s *DeleteTapeInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DeleteTapeInput) SetGatewayARN(v string) *DeleteTapeInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *DeleteTapeInput) SetTapeARN(v string) *DeleteTapeInput {
-	s.TapeARN = &v
-	return s
-}
-
 // DeleteTapeOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeOutput
 type DeleteTapeOutput struct {
@@ -6534,12 +5886,6 @@ func (s DeleteTapeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTapeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *DeleteTapeOutput) SetTapeARN(v string) *DeleteTapeOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // A JSON object containing the DeleteVolumeInput$VolumeARN to delete.
@@ -6581,12 +5927,6 @@ func (s *DeleteVolumeInput) Validate() error {
 	return nil
 }
 
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *DeleteVolumeInput) SetVolumeARN(v string) *DeleteVolumeInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // A JSON object containing the of the storage volume that was deleted
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolumeOutput
 type DeleteVolumeOutput struct {
@@ -6612,12 +5952,6 @@ func (s DeleteVolumeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *DeleteVolumeOutput) SetVolumeARN(v string) *DeleteVolumeOutput {
-	s.VolumeARN = &v
-	return s
 }
 
 // A JSON object containing the of the gateway.
@@ -6659,12 +5993,6 @@ func (s *DescribeBandwidthRateLimitInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeBandwidthRateLimitInput) SetGatewayARN(v string) *DescribeBandwidthRateLimitInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the following fields:
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitOutput
 type DescribeBandwidthRateLimitOutput struct {
@@ -6698,24 +6026,6 @@ func (s DescribeBandwidthRateLimitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBandwidthRateLimitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAverageDownloadRateLimitInBitsPerSec sets the AverageDownloadRateLimitInBitsPerSec field's value.
-func (s *DescribeBandwidthRateLimitOutput) SetAverageDownloadRateLimitInBitsPerSec(v int64) *DescribeBandwidthRateLimitOutput {
-	s.AverageDownloadRateLimitInBitsPerSec = &v
-	return s
-}
-
-// SetAverageUploadRateLimitInBitsPerSec sets the AverageUploadRateLimitInBitsPerSec field's value.
-func (s *DescribeBandwidthRateLimitOutput) SetAverageUploadRateLimitInBitsPerSec(v int64) *DescribeBandwidthRateLimitOutput {
-	s.AverageUploadRateLimitInBitsPerSec = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeBandwidthRateLimitOutput) SetGatewayARN(v string) *DescribeBandwidthRateLimitOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCacheInput
@@ -6756,12 +6066,6 @@ func (s *DescribeCacheInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeCacheInput) SetGatewayARN(v string) *DescribeCacheInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCacheOutput
 type DescribeCacheOutput struct {
 	_ struct{} `type:"structure"`
@@ -6800,48 +6104,6 @@ func (s DescribeCacheOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCacheAllocatedInBytes sets the CacheAllocatedInBytes field's value.
-func (s *DescribeCacheOutput) SetCacheAllocatedInBytes(v int64) *DescribeCacheOutput {
-	s.CacheAllocatedInBytes = &v
-	return s
-}
-
-// SetCacheDirtyPercentage sets the CacheDirtyPercentage field's value.
-func (s *DescribeCacheOutput) SetCacheDirtyPercentage(v float64) *DescribeCacheOutput {
-	s.CacheDirtyPercentage = &v
-	return s
-}
-
-// SetCacheHitPercentage sets the CacheHitPercentage field's value.
-func (s *DescribeCacheOutput) SetCacheHitPercentage(v float64) *DescribeCacheOutput {
-	s.CacheHitPercentage = &v
-	return s
-}
-
-// SetCacheMissPercentage sets the CacheMissPercentage field's value.
-func (s *DescribeCacheOutput) SetCacheMissPercentage(v float64) *DescribeCacheOutput {
-	s.CacheMissPercentage = &v
-	return s
-}
-
-// SetCacheUsedPercentage sets the CacheUsedPercentage field's value.
-func (s *DescribeCacheOutput) SetCacheUsedPercentage(v float64) *DescribeCacheOutput {
-	s.CacheUsedPercentage = &v
-	return s
-}
-
-// SetDiskIds sets the DiskIds field's value.
-func (s *DescribeCacheOutput) SetDiskIds(v []string) *DescribeCacheOutput {
-	s.DiskIds = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeCacheOutput) SetGatewayARN(v string) *DescribeCacheOutput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumesInput
 type DescribeCachediSCSIVolumesInput struct {
 	_ struct{} `type:"structure"`
@@ -6874,12 +6136,6 @@ func (s *DescribeCachediSCSIVolumesInput) Validate() error {
 	return nil
 }
 
-// SetVolumeARNs sets the VolumeARNs field's value.
-func (s *DescribeCachediSCSIVolumesInput) SetVolumeARNs(v []string) *DescribeCachediSCSIVolumesInput {
-	s.VolumeARNs = v
-	return s
-}
-
 // A JSON object containing the following fields:
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumesOutput
 type DescribeCachediSCSIVolumesOutput struct {
@@ -6905,12 +6161,6 @@ func (s DescribeCachediSCSIVolumesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCachediSCSIVolumesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCachediSCSIVolumes sets the CachediSCSIVolumes field's value.
-func (s *DescribeCachediSCSIVolumesOutput) SetCachediSCSIVolumes(v []CachediSCSIVolume) *DescribeCachediSCSIVolumesOutput {
-	s.CachediSCSIVolumes = v
-	return s
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume
@@ -6953,12 +6203,6 @@ func (s *DescribeChapCredentialsInput) Validate() error {
 	return nil
 }
 
-// SetTargetARN sets the TargetARN field's value.
-func (s *DescribeChapCredentialsInput) SetTargetARN(v string) *DescribeChapCredentialsInput {
-	s.TargetARN = &v
-	return s
-}
-
 // A JSON object containing a .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentialsOutput
 type DescribeChapCredentialsOutput struct {
@@ -6999,12 +6243,6 @@ func (s DescribeChapCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetChapCredentials sets the ChapCredentials field's value.
-func (s *DescribeChapCredentialsOutput) SetChapCredentials(v []ChapInfo) *DescribeChapCredentialsOutput {
-	s.ChapCredentials = v
-	return s
-}
-
 // A JSON object containing the ID of the gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationInput
 type DescribeGatewayInformationInput struct {
@@ -7042,12 +6280,6 @@ func (s *DescribeGatewayInformationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeGatewayInformationInput) SetGatewayARN(v string) *DescribeGatewayInformationInput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing the following fields:
@@ -7108,60 +6340,6 @@ func (s DescribeGatewayInformationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayARN(v string) *DescribeGatewayInformationOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayId(v string) *DescribeGatewayInformationOutput {
-	s.GatewayId = &v
-	return s
-}
-
-// SetGatewayName sets the GatewayName field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayName(v string) *DescribeGatewayInformationOutput {
-	s.GatewayName = &v
-	return s
-}
-
-// SetGatewayNetworkInterfaces sets the GatewayNetworkInterfaces field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayNetworkInterfaces(v []NetworkInterface) *DescribeGatewayInformationOutput {
-	s.GatewayNetworkInterfaces = v
-	return s
-}
-
-// SetGatewayState sets the GatewayState field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayState(v string) *DescribeGatewayInformationOutput {
-	s.GatewayState = &v
-	return s
-}
-
-// SetGatewayTimezone sets the GatewayTimezone field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayTimezone(v string) *DescribeGatewayInformationOutput {
-	s.GatewayTimezone = &v
-	return s
-}
-
-// SetGatewayType sets the GatewayType field's value.
-func (s *DescribeGatewayInformationOutput) SetGatewayType(v string) *DescribeGatewayInformationOutput {
-	s.GatewayType = &v
-	return s
-}
-
-// SetLastSoftwareUpdate sets the LastSoftwareUpdate field's value.
-func (s *DescribeGatewayInformationOutput) SetLastSoftwareUpdate(v string) *DescribeGatewayInformationOutput {
-	s.LastSoftwareUpdate = &v
-	return s
-}
-
-// SetNextUpdateAvailabilityDate sets the NextUpdateAvailabilityDate field's value.
-func (s *DescribeGatewayInformationOutput) SetNextUpdateAvailabilityDate(v string) *DescribeGatewayInformationOutput {
-	s.NextUpdateAvailabilityDate = &v
-	return s
-}
-
 // A JSON object containing the of the gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeInput
 type DescribeMaintenanceStartTimeInput struct {
@@ -7199,12 +6377,6 @@ func (s *DescribeMaintenanceStartTimeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeMaintenanceStartTimeInput) SetGatewayARN(v string) *DescribeMaintenanceStartTimeInput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing the following fields:
@@ -7259,36 +6431,6 @@ func (s DescribeMaintenanceStartTimeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDayOfWeek sets the DayOfWeek field's value.
-func (s *DescribeMaintenanceStartTimeOutput) SetDayOfWeek(v int64) *DescribeMaintenanceStartTimeOutput {
-	s.DayOfWeek = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeMaintenanceStartTimeOutput) SetGatewayARN(v string) *DescribeMaintenanceStartTimeOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetHourOfDay sets the HourOfDay field's value.
-func (s *DescribeMaintenanceStartTimeOutput) SetHourOfDay(v int64) *DescribeMaintenanceStartTimeOutput {
-	s.HourOfDay = &v
-	return s
-}
-
-// SetMinuteOfHour sets the MinuteOfHour field's value.
-func (s *DescribeMaintenanceStartTimeOutput) SetMinuteOfHour(v int64) *DescribeMaintenanceStartTimeOutput {
-	s.MinuteOfHour = &v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *DescribeMaintenanceStartTimeOutput) SetTimezone(v string) *DescribeMaintenanceStartTimeOutput {
-	s.Timezone = &v
-	return s
-}
-
 // DescribeNFSFileSharesInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileSharesInput
 type DescribeNFSFileSharesInput struct {
@@ -7328,12 +6470,6 @@ func (s *DescribeNFSFileSharesInput) Validate() error {
 	return nil
 }
 
-// SetFileShareARNList sets the FileShareARNList field's value.
-func (s *DescribeNFSFileSharesInput) SetFileShareARNList(v []string) *DescribeNFSFileSharesInput {
-	s.FileShareARNList = v
-	return s
-}
-
 // DescribeNFSFileSharesOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileSharesOutput
 type DescribeNFSFileSharesOutput struct {
@@ -7358,12 +6494,6 @@ func (s DescribeNFSFileSharesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNFSFileSharesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNFSFileShareInfoList sets the NFSFileShareInfoList field's value.
-func (s *DescribeNFSFileSharesOutput) SetNFSFileShareInfoList(v []NFSFileShareInfo) *DescribeNFSFileSharesOutput {
-	s.NFSFileShareInfoList = v
-	return s
 }
 
 // A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN of the
@@ -7406,12 +6536,6 @@ func (s *DescribeSnapshotScheduleInput) Validate() error {
 	return nil
 }
 
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *DescribeSnapshotScheduleInput) SetVolumeARN(v string) *DescribeSnapshotScheduleInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleOutput
 type DescribeSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
@@ -7442,36 +6566,6 @@ func (s DescribeSnapshotScheduleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeSnapshotScheduleOutput) SetDescription(v string) *DescribeSnapshotScheduleOutput {
-	s.Description = &v
-	return s
-}
-
-// SetRecurrenceInHours sets the RecurrenceInHours field's value.
-func (s *DescribeSnapshotScheduleOutput) SetRecurrenceInHours(v int64) *DescribeSnapshotScheduleOutput {
-	s.RecurrenceInHours = &v
-	return s
-}
-
-// SetStartAt sets the StartAt field's value.
-func (s *DescribeSnapshotScheduleOutput) SetStartAt(v int64) *DescribeSnapshotScheduleOutput {
-	s.StartAt = &v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *DescribeSnapshotScheduleOutput) SetTimezone(v string) *DescribeSnapshotScheduleOutput {
-	s.Timezone = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *DescribeSnapshotScheduleOutput) SetVolumeARN(v string) *DescribeSnapshotScheduleOutput {
-	s.VolumeARN = &v
-	return s
 }
 
 // A JSON object containing a list of DescribeStorediSCSIVolumesInput$VolumeARNs.
@@ -7511,12 +6605,6 @@ func (s *DescribeStorediSCSIVolumesInput) Validate() error {
 	return nil
 }
 
-// SetVolumeARNs sets the VolumeARNs field's value.
-func (s *DescribeStorediSCSIVolumesInput) SetVolumeARNs(v []string) *DescribeStorediSCSIVolumesInput {
-	s.VolumeARNs = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumesOutput
 type DescribeStorediSCSIVolumesOutput struct {
 	_ struct{} `type:"structure"`
@@ -7539,12 +6627,6 @@ func (s DescribeStorediSCSIVolumesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStorediSCSIVolumesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStorediSCSIVolumes sets the StorediSCSIVolumes field's value.
-func (s *DescribeStorediSCSIVolumesOutput) SetStorediSCSIVolumes(v []StorediSCSIVolume) *DescribeStorediSCSIVolumesOutput {
-	s.StorediSCSIVolumes = v
-	return s
 }
 
 // DescribeTapeArchivesInput
@@ -7591,24 +6673,6 @@ func (s *DescribeTapeArchivesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *DescribeTapeArchivesInput) SetLimit(v int64) *DescribeTapeArchivesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTapeArchivesInput) SetMarker(v string) *DescribeTapeArchivesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapeARNs sets the TapeARNs field's value.
-func (s *DescribeTapeArchivesInput) SetTapeARNs(v []string) *DescribeTapeArchivesInput {
-	s.TapeARNs = v
-	return s
-}
-
 // DescribeTapeArchivesOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchivesOutput
 type DescribeTapeArchivesOutput struct {
@@ -7643,18 +6707,6 @@ func (s DescribeTapeArchivesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTapeArchivesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTapeArchivesOutput) SetMarker(v string) *DescribeTapeArchivesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapeArchives sets the TapeArchives field's value.
-func (s *DescribeTapeArchivesOutput) SetTapeArchives(v []TapeArchive) *DescribeTapeArchivesOutput {
-	s.TapeArchives = v
-	return s
 }
 
 // DescribeTapeRecoveryPointsInput
@@ -7710,24 +6762,6 @@ func (s *DescribeTapeRecoveryPointsInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeTapeRecoveryPointsInput) SetGatewayARN(v string) *DescribeTapeRecoveryPointsInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeTapeRecoveryPointsInput) SetLimit(v int64) *DescribeTapeRecoveryPointsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTapeRecoveryPointsInput) SetMarker(v string) *DescribeTapeRecoveryPointsInput {
-	s.Marker = &v
-	return s
-}
-
 // DescribeTapeRecoveryPointsOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPointsOutput
 type DescribeTapeRecoveryPointsOutput struct {
@@ -7764,24 +6798,6 @@ func (s DescribeTapeRecoveryPointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTapeRecoveryPointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeTapeRecoveryPointsOutput) SetGatewayARN(v string) *DescribeTapeRecoveryPointsOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTapeRecoveryPointsOutput) SetMarker(v string) *DescribeTapeRecoveryPointsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapeRecoveryPointInfos sets the TapeRecoveryPointInfos field's value.
-func (s *DescribeTapeRecoveryPointsOutput) SetTapeRecoveryPointInfos(v []TapeRecoveryPointInfo) *DescribeTapeRecoveryPointsOutput {
-	s.TapeRecoveryPointInfos = v
-	return s
 }
 
 // DescribeTapesInput
@@ -7847,30 +6863,6 @@ func (s *DescribeTapesInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeTapesInput) SetGatewayARN(v string) *DescribeTapesInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeTapesInput) SetLimit(v int64) *DescribeTapesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTapesInput) SetMarker(v string) *DescribeTapesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapeARNs sets the TapeARNs field's value.
-func (s *DescribeTapesInput) SetTapeARNs(v []string) *DescribeTapesInput {
-	s.TapeARNs = v
-	return s
-}
-
 // DescribeTapesOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapesOutput
 type DescribeTapesOutput struct {
@@ -7902,18 +6894,6 @@ func (s DescribeTapesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTapesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTapesOutput) SetMarker(v string) *DescribeTapesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapes sets the Tapes field's value.
-func (s *DescribeTapesOutput) SetTapes(v []Tape) *DescribeTapesOutput {
-	s.Tapes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBufferInput
@@ -7954,12 +6934,6 @@ func (s *DescribeUploadBufferInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeUploadBufferInput) SetGatewayARN(v string) *DescribeUploadBufferInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBufferOutput
 type DescribeUploadBufferOutput struct {
 	_ struct{} `type:"structure"`
@@ -7990,30 +6964,6 @@ func (s DescribeUploadBufferOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeUploadBufferOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDiskIds sets the DiskIds field's value.
-func (s *DescribeUploadBufferOutput) SetDiskIds(v []string) *DescribeUploadBufferOutput {
-	s.DiskIds = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeUploadBufferOutput) SetGatewayARN(v string) *DescribeUploadBufferOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetUploadBufferAllocatedInBytes sets the UploadBufferAllocatedInBytes field's value.
-func (s *DescribeUploadBufferOutput) SetUploadBufferAllocatedInBytes(v int64) *DescribeUploadBufferOutput {
-	s.UploadBufferAllocatedInBytes = &v
-	return s
-}
-
-// SetUploadBufferUsedInBytes sets the UploadBufferUsedInBytes field's value.
-func (s *DescribeUploadBufferOutput) SetUploadBufferUsedInBytes(v int64) *DescribeUploadBufferOutput {
-	s.UploadBufferUsedInBytes = &v
-	return s
 }
 
 // DescribeVTLDevicesInput
@@ -8077,30 +7027,6 @@ func (s *DescribeVTLDevicesInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeVTLDevicesInput) SetGatewayARN(v string) *DescribeVTLDevicesInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeVTLDevicesInput) SetLimit(v int64) *DescribeVTLDevicesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeVTLDevicesInput) SetMarker(v string) *DescribeVTLDevicesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetVTLDeviceARNs sets the VTLDeviceARNs field's value.
-func (s *DescribeVTLDevicesInput) SetVTLDeviceARNs(v []string) *DescribeVTLDevicesInput {
-	s.VTLDeviceARNs = v
-	return s
-}
-
 // DescribeVTLDevicesOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
@@ -8136,24 +7062,6 @@ func (s DescribeVTLDevicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVTLDevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeVTLDevicesOutput) SetGatewayARN(v string) *DescribeVTLDevicesOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeVTLDevicesOutput) SetMarker(v string) *DescribeVTLDevicesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetVTLDevices sets the VTLDevices field's value.
-func (s *DescribeVTLDevicesOutput) SetVTLDevices(v []VTLDevice) *DescribeVTLDevicesOutput {
-	s.VTLDevices = v
-	return s
 }
 
 // A JSON object containing the of the gateway.
@@ -8193,12 +7101,6 @@ func (s *DescribeWorkingStorageInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeWorkingStorageInput) SetGatewayARN(v string) *DescribeWorkingStorageInput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing the following fields:
@@ -8242,30 +7144,6 @@ func (s DescribeWorkingStorageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDiskIds sets the DiskIds field's value.
-func (s *DescribeWorkingStorageOutput) SetDiskIds(v []string) *DescribeWorkingStorageOutput {
-	s.DiskIds = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DescribeWorkingStorageOutput) SetGatewayARN(v string) *DescribeWorkingStorageOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetWorkingStorageAllocatedInBytes sets the WorkingStorageAllocatedInBytes field's value.
-func (s *DescribeWorkingStorageOutput) SetWorkingStorageAllocatedInBytes(v int64) *DescribeWorkingStorageOutput {
-	s.WorkingStorageAllocatedInBytes = &v
-	return s
-}
-
-// SetWorkingStorageUsedInBytes sets the WorkingStorageUsedInBytes field's value.
-func (s *DescribeWorkingStorageOutput) SetWorkingStorageUsedInBytes(v int64) *DescribeWorkingStorageOutput {
-	s.WorkingStorageUsedInBytes = &v
-	return s
-}
-
 // Lists iSCSI information about a VTL device.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeviceiSCSIAttributes
 type DeviceiSCSIAttributes struct {
@@ -8293,30 +7171,6 @@ func (s DeviceiSCSIAttributes) String() string {
 // GoString returns the string representation
 func (s DeviceiSCSIAttributes) GoString() string {
 	return s.String()
-}
-
-// SetChapEnabled sets the ChapEnabled field's value.
-func (s *DeviceiSCSIAttributes) SetChapEnabled(v bool) *DeviceiSCSIAttributes {
-	s.ChapEnabled = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *DeviceiSCSIAttributes) SetNetworkInterfaceId(v string) *DeviceiSCSIAttributes {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetNetworkInterfacePort sets the NetworkInterfacePort field's value.
-func (s *DeviceiSCSIAttributes) SetNetworkInterfacePort(v int64) *DeviceiSCSIAttributes {
-	s.NetworkInterfacePort = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *DeviceiSCSIAttributes) SetTargetARN(v string) *DeviceiSCSIAttributes {
-	s.TargetARN = &v
-	return s
 }
 
 // DisableGatewayInput
@@ -8358,12 +7212,6 @@ func (s *DisableGatewayInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DisableGatewayInput) SetGatewayARN(v string) *DisableGatewayInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // DisableGatewayOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGatewayOutput
 type DisableGatewayOutput struct {
@@ -8388,12 +7236,6 @@ func (s DisableGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisableGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *DisableGatewayOutput) SetGatewayARN(v string) *DisableGatewayOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Disk
@@ -8425,48 +7267,6 @@ func (s Disk) GoString() string {
 	return s.String()
 }
 
-// SetDiskAllocationResource sets the DiskAllocationResource field's value.
-func (s *Disk) SetDiskAllocationResource(v string) *Disk {
-	s.DiskAllocationResource = &v
-	return s
-}
-
-// SetDiskAllocationType sets the DiskAllocationType field's value.
-func (s *Disk) SetDiskAllocationType(v string) *Disk {
-	s.DiskAllocationType = &v
-	return s
-}
-
-// SetDiskId sets the DiskId field's value.
-func (s *Disk) SetDiskId(v string) *Disk {
-	s.DiskId = &v
-	return s
-}
-
-// SetDiskNode sets the DiskNode field's value.
-func (s *Disk) SetDiskNode(v string) *Disk {
-	s.DiskNode = &v
-	return s
-}
-
-// SetDiskPath sets the DiskPath field's value.
-func (s *Disk) SetDiskPath(v string) *Disk {
-	s.DiskPath = &v
-	return s
-}
-
-// SetDiskSizeInBytes sets the DiskSizeInBytes field's value.
-func (s *Disk) SetDiskSizeInBytes(v int64) *Disk {
-	s.DiskSizeInBytes = &v
-	return s
-}
-
-// SetDiskStatus sets the DiskStatus field's value.
-func (s *Disk) SetDiskStatus(v string) *Disk {
-	s.DiskStatus = &v
-	return s
-}
-
 // Provides additional information about an error that was returned by the service
 // as an or. See the errorCode and errorDetails members for more information
 // about the error.
@@ -8489,18 +7289,6 @@ func (s Error) String() string {
 // GoString returns the string representation
 func (s Error) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *Error) SetErrorCode(v ErrorCode) *Error {
-	s.ErrorCode = v
-	return s
-}
-
-// SetErrorDetails sets the ErrorDetails field's value.
-func (s *Error) SetErrorDetails(v map[string]string) *Error {
-	s.ErrorDetails = v
-	return s
 }
 
 // Describes a file share.
@@ -8531,30 +7319,6 @@ func (s FileShareInfo) String() string {
 // GoString returns the string representation
 func (s FileShareInfo) GoString() string {
 	return s.String()
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *FileShareInfo) SetFileShareARN(v string) *FileShareInfo {
-	s.FileShareARN = &v
-	return s
-}
-
-// SetFileShareId sets the FileShareId field's value.
-func (s *FileShareInfo) SetFileShareId(v string) *FileShareInfo {
-	s.FileShareId = &v
-	return s
-}
-
-// SetFileShareStatus sets the FileShareStatus field's value.
-func (s *FileShareInfo) SetFileShareStatus(v string) *FileShareInfo {
-	s.FileShareStatus = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *FileShareInfo) SetGatewayARN(v string) *FileShareInfo {
-	s.GatewayARN = &v
-	return s
 }
 
 // Describes a gateway object.
@@ -8591,36 +7355,6 @@ func (s GatewayInfo) String() string {
 // GoString returns the string representation
 func (s GatewayInfo) GoString() string {
 	return s.String()
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *GatewayInfo) SetGatewayARN(v string) *GatewayInfo {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *GatewayInfo) SetGatewayId(v string) *GatewayInfo {
-	s.GatewayId = &v
-	return s
-}
-
-// SetGatewayName sets the GatewayName field's value.
-func (s *GatewayInfo) SetGatewayName(v string) *GatewayInfo {
-	s.GatewayName = &v
-	return s
-}
-
-// SetGatewayOperationalState sets the GatewayOperationalState field's value.
-func (s *GatewayInfo) SetGatewayOperationalState(v string) *GatewayInfo {
-	s.GatewayOperationalState = &v
-	return s
-}
-
-// SetGatewayType sets the GatewayType field's value.
-func (s *GatewayInfo) SetGatewayType(v string) *GatewayInfo {
-	s.GatewayType = &v
-	return s
 }
 
 // ListFileShareInput
@@ -8672,24 +7406,6 @@ func (s *ListFileSharesInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListFileSharesInput) SetGatewayARN(v string) *ListFileSharesInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListFileSharesInput) SetLimit(v int64) *ListFileSharesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListFileSharesInput) SetMarker(v string) *ListFileSharesInput {
-	s.Marker = &v
-	return s
-}
-
 // ListFileShareOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileSharesOutput
 type ListFileSharesOutput struct {
@@ -8722,24 +7438,6 @@ func (s ListFileSharesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFileSharesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileShareInfoList sets the FileShareInfoList field's value.
-func (s *ListFileSharesOutput) SetFileShareInfoList(v []FileShareInfo) *ListFileSharesOutput {
-	s.FileShareInfoList = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListFileSharesOutput) SetMarker(v string) *ListFileSharesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListFileSharesOutput) SetNextMarker(v string) *ListFileSharesOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // A JSON object containing zero or more of the following fields:
@@ -8786,18 +7484,6 @@ func (s *ListGatewaysInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListGatewaysInput) SetLimit(v int64) *ListGatewaysInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGatewaysInput) SetMarker(v string) *ListGatewaysInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGatewaysOutput
 type ListGatewaysOutput struct {
 	_ struct{} `type:"structure"`
@@ -8822,18 +7508,6 @@ func (s ListGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGateways sets the Gateways field's value.
-func (s *ListGatewaysOutput) SetGateways(v []GatewayInfo) *ListGatewaysOutput {
-	s.Gateways = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGatewaysOutput) SetMarker(v string) *ListGatewaysOutput {
-	s.Marker = &v
-	return s
 }
 
 // A JSON object containing the of the gateway.
@@ -8875,12 +7549,6 @@ func (s *ListLocalDisksInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListLocalDisksInput) SetGatewayARN(v string) *ListLocalDisksInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksOutput
 type ListLocalDisksOutput struct {
 	_ struct{} `type:"structure"`
@@ -8907,18 +7575,6 @@ func (s ListLocalDisksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListLocalDisksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDisks sets the Disks field's value.
-func (s *ListLocalDisksOutput) SetDisks(v []Disk) *ListLocalDisksOutput {
-	s.Disks = v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListLocalDisksOutput) SetGatewayARN(v string) *ListLocalDisksOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // ListTagsForResourceInput
@@ -8974,24 +7630,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListTagsForResourceInput) SetLimit(v int64) *ListTagsForResourceInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListTagsForResourceInput) SetMarker(v string) *ListTagsForResourceInput {
-	s.Marker = &v
-	return s
-}
-
-// SetResourceARN sets the ResourceARN field's value.
-func (s *ListTagsForResourceInput) SetResourceARN(v string) *ListTagsForResourceInput {
-	s.ResourceARN = &v
-	return s
-}
-
 // ListTagsForResourceOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResourceOutput
 type ListTagsForResourceOutput struct {
@@ -9024,24 +7662,6 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListTagsForResourceOutput) SetMarker(v string) *ListTagsForResourceOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetResourceARN sets the ResourceARN field's value.
-func (s *ListTagsForResourceOutput) SetResourceARN(v string) *ListTagsForResourceOutput {
-	s.ResourceARN = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
-	s.Tags = v
-	return s
 }
 
 // A JSON object that contains one or more of the following fields:
@@ -9094,24 +7714,6 @@ func (s *ListTapesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListTapesInput) SetLimit(v int64) *ListTapesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListTapesInput) SetMarker(v string) *ListTapesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapeARNs sets the TapeARNs field's value.
-func (s *ListTapesInput) SetTapeARNs(v []string) *ListTapesInput {
-	s.TapeARNs = v
-	return s
-}
-
 // A JSON object containing the following fields:
 //
 //    * ListTapesOutput$Marker
@@ -9148,18 +7750,6 @@ func (s ListTapesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTapesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListTapesOutput) SetMarker(v string) *ListTapesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetTapeInfos sets the TapeInfos field's value.
-func (s *ListTapesOutput) SetTapeInfos(v []TapeInfo) *ListTapesOutput {
-	s.TapeInfos = v
-	return s
 }
 
 // ListVolumeInitiatorsInput
@@ -9201,12 +7791,6 @@ func (s *ListVolumeInitiatorsInput) Validate() error {
 	return nil
 }
 
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *ListVolumeInitiatorsInput) SetVolumeARN(v string) *ListVolumeInitiatorsInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // ListVolumeInitiatorsOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiatorsOutput
 type ListVolumeInitiatorsOutput struct {
@@ -9232,12 +7816,6 @@ func (s ListVolumeInitiatorsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListVolumeInitiatorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInitiators sets the Initiators field's value.
-func (s *ListVolumeInitiatorsOutput) SetInitiators(v []string) *ListVolumeInitiatorsOutput {
-	s.Initiators = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPointsInput
@@ -9278,12 +7856,6 @@ func (s *ListVolumeRecoveryPointsInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListVolumeRecoveryPointsInput) SetGatewayARN(v string) *ListVolumeRecoveryPointsInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPointsOutput
 type ListVolumeRecoveryPointsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9310,18 +7882,6 @@ func (s ListVolumeRecoveryPointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListVolumeRecoveryPointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListVolumeRecoveryPointsOutput) SetGatewayARN(v string) *ListVolumeRecoveryPointsOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetVolumeRecoveryPointInfos sets the VolumeRecoveryPointInfos field's value.
-func (s *ListVolumeRecoveryPointsOutput) SetVolumeRecoveryPointInfos(v []VolumeRecoveryPointInfo) *ListVolumeRecoveryPointsOutput {
-	s.VolumeRecoveryPointInfos = v
-	return s
 }
 
 // A JSON object that contains one or more of the following fields:
@@ -9376,24 +7936,6 @@ func (s *ListVolumesInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListVolumesInput) SetGatewayARN(v string) *ListVolumesInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListVolumesInput) SetLimit(v int64) *ListVolumesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListVolumesInput) SetMarker(v string) *ListVolumesInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesOutput
 type ListVolumesOutput struct {
 	_ struct{} `type:"structure"`
@@ -9422,24 +7964,6 @@ func (s ListVolumesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListVolumesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ListVolumesOutput) SetGatewayARN(v string) *ListVolumesOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListVolumesOutput) SetMarker(v string) *ListVolumesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetVolumeInfos sets the VolumeInfos field's value.
-func (s *ListVolumesOutput) SetVolumeInfos(v []VolumeInfo) *ListVolumesOutput {
-	s.VolumeInfos = v
-	return s
 }
 
 // Describes file share default values. Files and folders stored as Amazon S3
@@ -9493,30 +8017,6 @@ func (s *NFSFileShareDefaults) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDirectoryMode sets the DirectoryMode field's value.
-func (s *NFSFileShareDefaults) SetDirectoryMode(v string) *NFSFileShareDefaults {
-	s.DirectoryMode = &v
-	return s
-}
-
-// SetFileMode sets the FileMode field's value.
-func (s *NFSFileShareDefaults) SetFileMode(v string) *NFSFileShareDefaults {
-	s.FileMode = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *NFSFileShareDefaults) SetGroupId(v int64) *NFSFileShareDefaults {
-	s.GroupId = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *NFSFileShareDefaults) SetOwnerId(v int64) *NFSFileShareDefaults {
-	s.OwnerId = &v
-	return s
 }
 
 // The Unix file permissions and ownership information assigned, by default,
@@ -9601,96 +8101,6 @@ func (s NFSFileShareInfo) GoString() string {
 	return s.String()
 }
 
-// SetClientList sets the ClientList field's value.
-func (s *NFSFileShareInfo) SetClientList(v []string) *NFSFileShareInfo {
-	s.ClientList = v
-	return s
-}
-
-// SetDefaultStorageClass sets the DefaultStorageClass field's value.
-func (s *NFSFileShareInfo) SetDefaultStorageClass(v string) *NFSFileShareInfo {
-	s.DefaultStorageClass = &v
-	return s
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *NFSFileShareInfo) SetFileShareARN(v string) *NFSFileShareInfo {
-	s.FileShareARN = &v
-	return s
-}
-
-// SetFileShareId sets the FileShareId field's value.
-func (s *NFSFileShareInfo) SetFileShareId(v string) *NFSFileShareInfo {
-	s.FileShareId = &v
-	return s
-}
-
-// SetFileShareStatus sets the FileShareStatus field's value.
-func (s *NFSFileShareInfo) SetFileShareStatus(v string) *NFSFileShareInfo {
-	s.FileShareStatus = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *NFSFileShareInfo) SetGatewayARN(v string) *NFSFileShareInfo {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGuessMIMETypeEnabled sets the GuessMIMETypeEnabled field's value.
-func (s *NFSFileShareInfo) SetGuessMIMETypeEnabled(v bool) *NFSFileShareInfo {
-	s.GuessMIMETypeEnabled = &v
-	return s
-}
-
-// SetKMSEncrypted sets the KMSEncrypted field's value.
-func (s *NFSFileShareInfo) SetKMSEncrypted(v bool) *NFSFileShareInfo {
-	s.KMSEncrypted = &v
-	return s
-}
-
-// SetKMSKey sets the KMSKey field's value.
-func (s *NFSFileShareInfo) SetKMSKey(v string) *NFSFileShareInfo {
-	s.KMSKey = &v
-	return s
-}
-
-// SetLocationARN sets the LocationARN field's value.
-func (s *NFSFileShareInfo) SetLocationARN(v string) *NFSFileShareInfo {
-	s.LocationARN = &v
-	return s
-}
-
-// SetNFSFileShareDefaults sets the NFSFileShareDefaults field's value.
-func (s *NFSFileShareInfo) SetNFSFileShareDefaults(v *NFSFileShareDefaults) *NFSFileShareInfo {
-	s.NFSFileShareDefaults = v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *NFSFileShareInfo) SetPath(v string) *NFSFileShareInfo {
-	s.Path = &v
-	return s
-}
-
-// SetReadOnly sets the ReadOnly field's value.
-func (s *NFSFileShareInfo) SetReadOnly(v bool) *NFSFileShareInfo {
-	s.ReadOnly = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *NFSFileShareInfo) SetRole(v string) *NFSFileShareInfo {
-	s.Role = &v
-	return s
-}
-
-// SetSquash sets the Squash field's value.
-func (s *NFSFileShareInfo) SetSquash(v string) *NFSFileShareInfo {
-	s.Squash = &v
-	return s
-}
-
 // Describes a gateway's network interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NetworkInterface
 type NetworkInterface struct {
@@ -9717,24 +8127,6 @@ func (s NetworkInterface) String() string {
 // GoString returns the string representation
 func (s NetworkInterface) GoString() string {
 	return s.String()
-}
-
-// SetIpv4Address sets the Ipv4Address field's value.
-func (s *NetworkInterface) SetIpv4Address(v string) *NetworkInterface {
-	s.Ipv4Address = &v
-	return s
-}
-
-// SetIpv6Address sets the Ipv6Address field's value.
-func (s *NetworkInterface) SetIpv6Address(v string) *NetworkInterface {
-	s.Ipv6Address = &v
-	return s
-}
-
-// SetMacAddress sets the MacAddress field's value.
-func (s *NetworkInterface) SetMacAddress(v string) *NetworkInterface {
-	s.MacAddress = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NotifyWhenUploadedInput
@@ -9774,12 +8166,6 @@ func (s *NotifyWhenUploadedInput) Validate() error {
 	return nil
 }
 
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *NotifyWhenUploadedInput) SetFileShareARN(v string) *NotifyWhenUploadedInput {
-	s.FileShareARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NotifyWhenUploadedOutput
 type NotifyWhenUploadedOutput struct {
 	_ struct{} `type:"structure"`
@@ -9807,18 +8193,6 @@ func (s NotifyWhenUploadedOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s NotifyWhenUploadedOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *NotifyWhenUploadedOutput) SetFileShareARN(v string) *NotifyWhenUploadedOutput {
-	s.FileShareARN = &v
-	return s
-}
-
-// SetNotificationId sets the NotificationId field's value.
-func (s *NotifyWhenUploadedOutput) SetNotificationId(v string) *NotifyWhenUploadedOutput {
-	s.NotificationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheInput
@@ -9858,12 +8232,6 @@ func (s *RefreshCacheInput) Validate() error {
 	return nil
 }
 
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *RefreshCacheInput) SetFileShareARN(v string) *RefreshCacheInput {
-	s.FileShareARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheOutput
 type RefreshCacheOutput struct {
 	_ struct{} `type:"structure"`
@@ -9887,12 +8255,6 @@ func (s RefreshCacheOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RefreshCacheOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *RefreshCacheOutput) SetFileShareARN(v string) *RefreshCacheOutput {
-	s.FileShareARN = &v
-	return s
 }
 
 // RemoveTagsFromResourceInput
@@ -9944,18 +8306,6 @@ func (s *RemoveTagsFromResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceARN sets the ResourceARN field's value.
-func (s *RemoveTagsFromResourceInput) SetResourceARN(v string) *RemoveTagsFromResourceInput {
-	s.ResourceARN = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
-	s.TagKeys = v
-	return s
-}
-
 // RemoveTagsFromResourceOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResourceOutput
 type RemoveTagsFromResourceOutput struct {
@@ -9981,12 +8331,6 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceARN sets the ResourceARN field's value.
-func (s *RemoveTagsFromResourceOutput) SetResourceARN(v string) *RemoveTagsFromResourceOutput {
-	s.ResourceARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCacheInput
@@ -10027,12 +8371,6 @@ func (s *ResetCacheInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ResetCacheInput) SetGatewayARN(v string) *ResetCacheInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCacheOutput
 type ResetCacheOutput struct {
 	_ struct{} `type:"structure"`
@@ -10057,12 +8395,6 @@ func (s ResetCacheOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResetCacheOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ResetCacheOutput) SetGatewayARN(v string) *ResetCacheOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // RetrieveTapeArchiveInput
@@ -10121,18 +8453,6 @@ func (s *RetrieveTapeArchiveInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *RetrieveTapeArchiveInput) SetGatewayARN(v string) *RetrieveTapeArchiveInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *RetrieveTapeArchiveInput) SetTapeARN(v string) *RetrieveTapeArchiveInput {
-	s.TapeARN = &v
-	return s
-}
-
 // RetrieveTapeArchiveOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchiveOutput
 type RetrieveTapeArchiveOutput struct {
@@ -10157,12 +8477,6 @@ func (s RetrieveTapeArchiveOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RetrieveTapeArchiveOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *RetrieveTapeArchiveOutput) SetTapeARN(v string) *RetrieveTapeArchiveOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // RetrieveTapeRecoveryPointInput
@@ -10217,18 +8531,6 @@ func (s *RetrieveTapeRecoveryPointInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *RetrieveTapeRecoveryPointInput) SetGatewayARN(v string) *RetrieveTapeRecoveryPointInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *RetrieveTapeRecoveryPointInput) SetTapeARN(v string) *RetrieveTapeRecoveryPointInput {
-	s.TapeARN = &v
-	return s
-}
-
 // RetrieveTapeRecoveryPointOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPointOutput
 type RetrieveTapeRecoveryPointOutput struct {
@@ -10254,12 +8556,6 @@ func (s RetrieveTapeRecoveryPointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RetrieveTapeRecoveryPointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *RetrieveTapeRecoveryPointOutput) SetTapeARN(v string) *RetrieveTapeRecoveryPointOutput {
-	s.TapeARN = &v
-	return s
 }
 
 // SetLocalConsolePasswordInput
@@ -10313,18 +8609,6 @@ func (s *SetLocalConsolePasswordInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *SetLocalConsolePasswordInput) SetGatewayARN(v string) *SetLocalConsolePasswordInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetLocalConsolePassword sets the LocalConsolePassword field's value.
-func (s *SetLocalConsolePasswordInput) SetLocalConsolePassword(v string) *SetLocalConsolePasswordInput {
-	s.LocalConsolePassword = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordOutput
 type SetLocalConsolePasswordOutput struct {
 	_ struct{} `type:"structure"`
@@ -10349,12 +8633,6 @@ func (s SetLocalConsolePasswordOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetLocalConsolePasswordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *SetLocalConsolePasswordOutput) SetGatewayARN(v string) *SetLocalConsolePasswordOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing the of the gateway to shut down.
@@ -10396,12 +8674,6 @@ func (s *ShutdownGatewayInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ShutdownGatewayInput) SetGatewayARN(v string) *ShutdownGatewayInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the of the gateway that was shut down.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayOutput
 type ShutdownGatewayOutput struct {
@@ -10427,12 +8699,6 @@ func (s ShutdownGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ShutdownGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *ShutdownGatewayOutput) SetGatewayARN(v string) *ShutdownGatewayOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing the of the gateway to start.
@@ -10474,12 +8740,6 @@ func (s *StartGatewayInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *StartGatewayInput) SetGatewayARN(v string) *StartGatewayInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the of the gateway that was restarted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayOutput
 type StartGatewayOutput struct {
@@ -10505,12 +8765,6 @@ func (s StartGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *StartGatewayOutput) SetGatewayARN(v string) *StartGatewayOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // Describes an iSCSI stored volume.
@@ -10577,78 +8831,6 @@ func (s StorediSCSIVolume) GoString() string {
 	return s.String()
 }
 
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *StorediSCSIVolume) SetCreatedDate(v time.Time) *StorediSCSIVolume {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetPreservedExistingData sets the PreservedExistingData field's value.
-func (s *StorediSCSIVolume) SetPreservedExistingData(v bool) *StorediSCSIVolume {
-	s.PreservedExistingData = &v
-	return s
-}
-
-// SetSourceSnapshotId sets the SourceSnapshotId field's value.
-func (s *StorediSCSIVolume) SetSourceSnapshotId(v string) *StorediSCSIVolume {
-	s.SourceSnapshotId = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *StorediSCSIVolume) SetVolumeARN(v string) *StorediSCSIVolume {
-	s.VolumeARN = &v
-	return s
-}
-
-// SetVolumeDiskId sets the VolumeDiskId field's value.
-func (s *StorediSCSIVolume) SetVolumeDiskId(v string) *StorediSCSIVolume {
-	s.VolumeDiskId = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *StorediSCSIVolume) SetVolumeId(v string) *StorediSCSIVolume {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeProgress sets the VolumeProgress field's value.
-func (s *StorediSCSIVolume) SetVolumeProgress(v float64) *StorediSCSIVolume {
-	s.VolumeProgress = &v
-	return s
-}
-
-// SetVolumeSizeInBytes sets the VolumeSizeInBytes field's value.
-func (s *StorediSCSIVolume) SetVolumeSizeInBytes(v int64) *StorediSCSIVolume {
-	s.VolumeSizeInBytes = &v
-	return s
-}
-
-// SetVolumeStatus sets the VolumeStatus field's value.
-func (s *StorediSCSIVolume) SetVolumeStatus(v string) *StorediSCSIVolume {
-	s.VolumeStatus = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *StorediSCSIVolume) SetVolumeType(v string) *StorediSCSIVolume {
-	s.VolumeType = &v
-	return s
-}
-
-// SetVolumeUsedInBytes sets the VolumeUsedInBytes field's value.
-func (s *StorediSCSIVolume) SetVolumeUsedInBytes(v int64) *StorediSCSIVolume {
-	s.VolumeUsedInBytes = &v
-	return s
-}
-
-// SetVolumeiSCSIAttributes sets the VolumeiSCSIAttributes field's value.
-func (s *StorediSCSIVolume) SetVolumeiSCSIAttributes(v *VolumeiSCSIAttributes) *StorediSCSIVolume {
-	s.VolumeiSCSIAttributes = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -10689,18 +8871,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Describes a virtual tape object.
@@ -10747,54 +8917,6 @@ func (s Tape) String() string {
 // GoString returns the string representation
 func (s Tape) GoString() string {
 	return s.String()
-}
-
-// SetProgress sets the Progress field's value.
-func (s *Tape) SetProgress(v float64) *Tape {
-	s.Progress = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *Tape) SetTapeARN(v string) *Tape {
-	s.TapeARN = &v
-	return s
-}
-
-// SetTapeBarcode sets the TapeBarcode field's value.
-func (s *Tape) SetTapeBarcode(v string) *Tape {
-	s.TapeBarcode = &v
-	return s
-}
-
-// SetTapeCreatedDate sets the TapeCreatedDate field's value.
-func (s *Tape) SetTapeCreatedDate(v time.Time) *Tape {
-	s.TapeCreatedDate = &v
-	return s
-}
-
-// SetTapeSizeInBytes sets the TapeSizeInBytes field's value.
-func (s *Tape) SetTapeSizeInBytes(v int64) *Tape {
-	s.TapeSizeInBytes = &v
-	return s
-}
-
-// SetTapeStatus sets the TapeStatus field's value.
-func (s *Tape) SetTapeStatus(v string) *Tape {
-	s.TapeStatus = &v
-	return s
-}
-
-// SetTapeUsedInBytes sets the TapeUsedInBytes field's value.
-func (s *Tape) SetTapeUsedInBytes(v int64) *Tape {
-	s.TapeUsedInBytes = &v
-	return s
-}
-
-// SetVTLDevice sets the VTLDevice field's value.
-func (s *Tape) SetVTLDevice(v string) *Tape {
-	s.VTLDevice = &v
-	return s
 }
 
 // Represents a virtual tape that is archived in the virtual tape shelf (VTS).
@@ -10844,54 +8966,6 @@ func (s TapeArchive) GoString() string {
 	return s.String()
 }
 
-// SetCompletionTime sets the CompletionTime field's value.
-func (s *TapeArchive) SetCompletionTime(v time.Time) *TapeArchive {
-	s.CompletionTime = &v
-	return s
-}
-
-// SetRetrievedTo sets the RetrievedTo field's value.
-func (s *TapeArchive) SetRetrievedTo(v string) *TapeArchive {
-	s.RetrievedTo = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *TapeArchive) SetTapeARN(v string) *TapeArchive {
-	s.TapeARN = &v
-	return s
-}
-
-// SetTapeBarcode sets the TapeBarcode field's value.
-func (s *TapeArchive) SetTapeBarcode(v string) *TapeArchive {
-	s.TapeBarcode = &v
-	return s
-}
-
-// SetTapeCreatedDate sets the TapeCreatedDate field's value.
-func (s *TapeArchive) SetTapeCreatedDate(v time.Time) *TapeArchive {
-	s.TapeCreatedDate = &v
-	return s
-}
-
-// SetTapeSizeInBytes sets the TapeSizeInBytes field's value.
-func (s *TapeArchive) SetTapeSizeInBytes(v int64) *TapeArchive {
-	s.TapeSizeInBytes = &v
-	return s
-}
-
-// SetTapeStatus sets the TapeStatus field's value.
-func (s *TapeArchive) SetTapeStatus(v string) *TapeArchive {
-	s.TapeStatus = &v
-	return s
-}
-
-// SetTapeUsedInBytes sets the TapeUsedInBytes field's value.
-func (s *TapeArchive) SetTapeUsedInBytes(v int64) *TapeArchive {
-	s.TapeUsedInBytes = &v
-	return s
-}
-
 // Describes a virtual tape.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeInfo
 type TapeInfo struct {
@@ -10924,36 +8998,6 @@ func (s TapeInfo) GoString() string {
 	return s.String()
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *TapeInfo) SetGatewayARN(v string) *TapeInfo {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *TapeInfo) SetTapeARN(v string) *TapeInfo {
-	s.TapeARN = &v
-	return s
-}
-
-// SetTapeBarcode sets the TapeBarcode field's value.
-func (s *TapeInfo) SetTapeBarcode(v string) *TapeInfo {
-	s.TapeBarcode = &v
-	return s
-}
-
-// SetTapeSizeInBytes sets the TapeSizeInBytes field's value.
-func (s *TapeInfo) SetTapeSizeInBytes(v int64) *TapeInfo {
-	s.TapeSizeInBytes = &v
-	return s
-}
-
-// SetTapeStatus sets the TapeStatus field's value.
-func (s *TapeInfo) SetTapeStatus(v string) *TapeInfo {
-	s.TapeStatus = &v
-	return s
-}
-
 // Describes a recovery point.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeRecoveryPointInfo
 type TapeRecoveryPointInfo struct {
@@ -10983,30 +9027,6 @@ func (s TapeRecoveryPointInfo) String() string {
 // GoString returns the string representation
 func (s TapeRecoveryPointInfo) GoString() string {
 	return s.String()
-}
-
-// SetTapeARN sets the TapeARN field's value.
-func (s *TapeRecoveryPointInfo) SetTapeARN(v string) *TapeRecoveryPointInfo {
-	s.TapeARN = &v
-	return s
-}
-
-// SetTapeRecoveryPointTime sets the TapeRecoveryPointTime field's value.
-func (s *TapeRecoveryPointInfo) SetTapeRecoveryPointTime(v time.Time) *TapeRecoveryPointInfo {
-	s.TapeRecoveryPointTime = &v
-	return s
-}
-
-// SetTapeSizeInBytes sets the TapeSizeInBytes field's value.
-func (s *TapeRecoveryPointInfo) SetTapeSizeInBytes(v int64) *TapeRecoveryPointInfo {
-	s.TapeSizeInBytes = &v
-	return s
-}
-
-// SetTapeStatus sets the TapeStatus field's value.
-func (s *TapeRecoveryPointInfo) SetTapeStatus(v string) *TapeRecoveryPointInfo {
-	s.TapeStatus = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -11064,24 +9084,6 @@ func (s *UpdateBandwidthRateLimitInput) Validate() error {
 	return nil
 }
 
-// SetAverageDownloadRateLimitInBitsPerSec sets the AverageDownloadRateLimitInBitsPerSec field's value.
-func (s *UpdateBandwidthRateLimitInput) SetAverageDownloadRateLimitInBitsPerSec(v int64) *UpdateBandwidthRateLimitInput {
-	s.AverageDownloadRateLimitInBitsPerSec = &v
-	return s
-}
-
-// SetAverageUploadRateLimitInBitsPerSec sets the AverageUploadRateLimitInBitsPerSec field's value.
-func (s *UpdateBandwidthRateLimitInput) SetAverageUploadRateLimitInBitsPerSec(v int64) *UpdateBandwidthRateLimitInput {
-	s.AverageUploadRateLimitInBitsPerSec = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateBandwidthRateLimitInput) SetGatewayARN(v string) *UpdateBandwidthRateLimitInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the of the gateway whose throttle information was
 // updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitOutput
@@ -11108,12 +9110,6 @@ func (s UpdateBandwidthRateLimitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateBandwidthRateLimitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateBandwidthRateLimitOutput) SetGatewayARN(v string) *UpdateBandwidthRateLimitOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -11201,30 +9197,6 @@ func (s *UpdateChapCredentialsInput) Validate() error {
 	return nil
 }
 
-// SetInitiatorName sets the InitiatorName field's value.
-func (s *UpdateChapCredentialsInput) SetInitiatorName(v string) *UpdateChapCredentialsInput {
-	s.InitiatorName = &v
-	return s
-}
-
-// SetSecretToAuthenticateInitiator sets the SecretToAuthenticateInitiator field's value.
-func (s *UpdateChapCredentialsInput) SetSecretToAuthenticateInitiator(v string) *UpdateChapCredentialsInput {
-	s.SecretToAuthenticateInitiator = &v
-	return s
-}
-
-// SetSecretToAuthenticateTarget sets the SecretToAuthenticateTarget field's value.
-func (s *UpdateChapCredentialsInput) SetSecretToAuthenticateTarget(v string) *UpdateChapCredentialsInput {
-	s.SecretToAuthenticateTarget = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *UpdateChapCredentialsInput) SetTargetARN(v string) *UpdateChapCredentialsInput {
-	s.TargetARN = &v
-	return s
-}
-
 // A JSON object containing the following fields:
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentialsOutput
 type UpdateChapCredentialsOutput struct {
@@ -11254,18 +9226,6 @@ func (s UpdateChapCredentialsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateChapCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInitiatorName sets the InitiatorName field's value.
-func (s *UpdateChapCredentialsOutput) SetInitiatorName(v string) *UpdateChapCredentialsOutput {
-	s.InitiatorName = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *UpdateChapCredentialsOutput) SetTargetARN(v string) *UpdateChapCredentialsOutput {
-	s.TargetARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationInput
@@ -11317,24 +9277,6 @@ func (s *UpdateGatewayInformationInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateGatewayInformationInput) SetGatewayARN(v string) *UpdateGatewayInformationInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGatewayName sets the GatewayName field's value.
-func (s *UpdateGatewayInformationInput) SetGatewayName(v string) *UpdateGatewayInformationInput {
-	s.GatewayName = &v
-	return s
-}
-
-// SetGatewayTimezone sets the GatewayTimezone field's value.
-func (s *UpdateGatewayInformationInput) SetGatewayTimezone(v string) *UpdateGatewayInformationInput {
-	s.GatewayTimezone = &v
-	return s
-}
-
 // A JSON object containing the ARN of the gateway that was updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationOutput
 type UpdateGatewayInformationOutput struct {
@@ -11362,18 +9304,6 @@ func (s UpdateGatewayInformationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGatewayInformationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateGatewayInformationOutput) SetGatewayARN(v string) *UpdateGatewayInformationOutput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGatewayName sets the GatewayName field's value.
-func (s *UpdateGatewayInformationOutput) SetGatewayName(v string) *UpdateGatewayInformationOutput {
-	s.GatewayName = &v
-	return s
 }
 
 // A JSON object containing the of the gateway to update.
@@ -11415,12 +9345,6 @@ func (s *UpdateGatewaySoftwareNowInput) Validate() error {
 	return nil
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateGatewaySoftwareNowInput) SetGatewayARN(v string) *UpdateGatewaySoftwareNowInput {
-	s.GatewayARN = &v
-	return s
-}
-
 // A JSON object containing the of the gateway that was updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNowOutput
 type UpdateGatewaySoftwareNowOutput struct {
@@ -11446,12 +9370,6 @@ func (s UpdateGatewaySoftwareNowOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGatewaySoftwareNowOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateGatewaySoftwareNowOutput) SetGatewayARN(v string) *UpdateGatewaySoftwareNowOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // A JSON object containing the following fields:
@@ -11531,30 +9449,6 @@ func (s *UpdateMaintenanceStartTimeInput) Validate() error {
 	return nil
 }
 
-// SetDayOfWeek sets the DayOfWeek field's value.
-func (s *UpdateMaintenanceStartTimeInput) SetDayOfWeek(v int64) *UpdateMaintenanceStartTimeInput {
-	s.DayOfWeek = &v
-	return s
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateMaintenanceStartTimeInput) SetGatewayARN(v string) *UpdateMaintenanceStartTimeInput {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetHourOfDay sets the HourOfDay field's value.
-func (s *UpdateMaintenanceStartTimeInput) SetHourOfDay(v int64) *UpdateMaintenanceStartTimeInput {
-	s.HourOfDay = &v
-	return s
-}
-
-// SetMinuteOfHour sets the MinuteOfHour field's value.
-func (s *UpdateMaintenanceStartTimeInput) SetMinuteOfHour(v int64) *UpdateMaintenanceStartTimeInput {
-	s.MinuteOfHour = &v
-	return s
-}
-
 // A JSON object containing the of the gateway whose maintenance start time
 // is updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeOutput
@@ -11581,12 +9475,6 @@ func (s UpdateMaintenanceStartTimeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateMaintenanceStartTimeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *UpdateMaintenanceStartTimeOutput) SetGatewayARN(v string) *UpdateMaintenanceStartTimeOutput {
-	s.GatewayARN = &v
-	return s
 }
 
 // UpdateNFSFileShareInput
@@ -11681,60 +9569,6 @@ func (s *UpdateNFSFileShareInput) Validate() error {
 	return nil
 }
 
-// SetClientList sets the ClientList field's value.
-func (s *UpdateNFSFileShareInput) SetClientList(v []string) *UpdateNFSFileShareInput {
-	s.ClientList = v
-	return s
-}
-
-// SetDefaultStorageClass sets the DefaultStorageClass field's value.
-func (s *UpdateNFSFileShareInput) SetDefaultStorageClass(v string) *UpdateNFSFileShareInput {
-	s.DefaultStorageClass = &v
-	return s
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *UpdateNFSFileShareInput) SetFileShareARN(v string) *UpdateNFSFileShareInput {
-	s.FileShareARN = &v
-	return s
-}
-
-// SetGuessMIMETypeEnabled sets the GuessMIMETypeEnabled field's value.
-func (s *UpdateNFSFileShareInput) SetGuessMIMETypeEnabled(v bool) *UpdateNFSFileShareInput {
-	s.GuessMIMETypeEnabled = &v
-	return s
-}
-
-// SetKMSEncrypted sets the KMSEncrypted field's value.
-func (s *UpdateNFSFileShareInput) SetKMSEncrypted(v bool) *UpdateNFSFileShareInput {
-	s.KMSEncrypted = &v
-	return s
-}
-
-// SetKMSKey sets the KMSKey field's value.
-func (s *UpdateNFSFileShareInput) SetKMSKey(v string) *UpdateNFSFileShareInput {
-	s.KMSKey = &v
-	return s
-}
-
-// SetNFSFileShareDefaults sets the NFSFileShareDefaults field's value.
-func (s *UpdateNFSFileShareInput) SetNFSFileShareDefaults(v *NFSFileShareDefaults) *UpdateNFSFileShareInput {
-	s.NFSFileShareDefaults = v
-	return s
-}
-
-// SetReadOnly sets the ReadOnly field's value.
-func (s *UpdateNFSFileShareInput) SetReadOnly(v bool) *UpdateNFSFileShareInput {
-	s.ReadOnly = &v
-	return s
-}
-
-// SetSquash sets the Squash field's value.
-func (s *UpdateNFSFileShareInput) SetSquash(v string) *UpdateNFSFileShareInput {
-	s.Squash = &v
-	return s
-}
-
 // UpdateNFSFileShareOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareOutput
 type UpdateNFSFileShareOutput struct {
@@ -11759,12 +9593,6 @@ func (s UpdateNFSFileShareOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateNFSFileShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileShareARN sets the FileShareARN field's value.
-func (s *UpdateNFSFileShareOutput) SetFileShareARN(v string) *UpdateNFSFileShareOutput {
-	s.FileShareARN = &v
-	return s
 }
 
 // A JSON object containing one or more of the following fields:
@@ -11843,30 +9671,6 @@ func (s *UpdateSnapshotScheduleInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateSnapshotScheduleInput) SetDescription(v string) *UpdateSnapshotScheduleInput {
-	s.Description = &v
-	return s
-}
-
-// SetRecurrenceInHours sets the RecurrenceInHours field's value.
-func (s *UpdateSnapshotScheduleInput) SetRecurrenceInHours(v int64) *UpdateSnapshotScheduleInput {
-	s.RecurrenceInHours = &v
-	return s
-}
-
-// SetStartAt sets the StartAt field's value.
-func (s *UpdateSnapshotScheduleInput) SetStartAt(v int64) *UpdateSnapshotScheduleInput {
-	s.StartAt = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *UpdateSnapshotScheduleInput) SetVolumeARN(v string) *UpdateSnapshotScheduleInput {
-	s.VolumeARN = &v
-	return s
-}
-
 // A JSON object containing the of the updated storage volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotScheduleOutput
 type UpdateSnapshotScheduleOutput struct {
@@ -11890,12 +9694,6 @@ func (s UpdateSnapshotScheduleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *UpdateSnapshotScheduleOutput) SetVolumeARN(v string) *UpdateSnapshotScheduleOutput {
-	s.VolumeARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeInput
@@ -11949,18 +9747,6 @@ func (s *UpdateVTLDeviceTypeInput) Validate() error {
 	return nil
 }
 
-// SetDeviceType sets the DeviceType field's value.
-func (s *UpdateVTLDeviceTypeInput) SetDeviceType(v string) *UpdateVTLDeviceTypeInput {
-	s.DeviceType = &v
-	return s
-}
-
-// SetVTLDeviceARN sets the VTLDeviceARN field's value.
-func (s *UpdateVTLDeviceTypeInput) SetVTLDeviceARN(v string) *UpdateVTLDeviceTypeInput {
-	s.VTLDeviceARN = &v
-	return s
-}
-
 // UpdateVTLDeviceTypeOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeOutput
 type UpdateVTLDeviceTypeOutput struct {
@@ -11985,12 +9771,6 @@ func (s UpdateVTLDeviceTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateVTLDeviceTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVTLDeviceARN sets the VTLDeviceARN field's value.
-func (s *UpdateVTLDeviceTypeOutput) SetVTLDeviceARN(v string) *UpdateVTLDeviceTypeOutput {
-	s.VTLDeviceARN = &v
-	return s
 }
 
 // Represents a device object associated with a tape gateway.
@@ -12020,36 +9800,6 @@ func (s VTLDevice) String() string {
 // GoString returns the string representation
 func (s VTLDevice) GoString() string {
 	return s.String()
-}
-
-// SetDeviceiSCSIAttributes sets the DeviceiSCSIAttributes field's value.
-func (s *VTLDevice) SetDeviceiSCSIAttributes(v *DeviceiSCSIAttributes) *VTLDevice {
-	s.DeviceiSCSIAttributes = v
-	return s
-}
-
-// SetVTLDeviceARN sets the VTLDeviceARN field's value.
-func (s *VTLDevice) SetVTLDeviceARN(v string) *VTLDevice {
-	s.VTLDeviceARN = &v
-	return s
-}
-
-// SetVTLDeviceProductIdentifier sets the VTLDeviceProductIdentifier field's value.
-func (s *VTLDevice) SetVTLDeviceProductIdentifier(v string) *VTLDevice {
-	s.VTLDeviceProductIdentifier = &v
-	return s
-}
-
-// SetVTLDeviceType sets the VTLDeviceType field's value.
-func (s *VTLDevice) SetVTLDeviceType(v string) *VTLDevice {
-	s.VTLDeviceType = &v
-	return s
-}
-
-// SetVTLDeviceVendor sets the VTLDeviceVendor field's value.
-func (s *VTLDevice) SetVTLDeviceVendor(v string) *VTLDevice {
-	s.VTLDeviceVendor = &v
-	return s
 }
 
 // Describes a storage volume object.
@@ -12104,42 +9854,6 @@ func (s VolumeInfo) GoString() string {
 	return s.String()
 }
 
-// SetGatewayARN sets the GatewayARN field's value.
-func (s *VolumeInfo) SetGatewayARN(v string) *VolumeInfo {
-	s.GatewayARN = &v
-	return s
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *VolumeInfo) SetGatewayId(v string) *VolumeInfo {
-	s.GatewayId = &v
-	return s
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *VolumeInfo) SetVolumeARN(v string) *VolumeInfo {
-	s.VolumeARN = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *VolumeInfo) SetVolumeId(v string) *VolumeInfo {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeSizeInBytes sets the VolumeSizeInBytes field's value.
-func (s *VolumeInfo) SetVolumeSizeInBytes(v int64) *VolumeInfo {
-	s.VolumeSizeInBytes = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *VolumeInfo) SetVolumeType(v string) *VolumeInfo {
-	s.VolumeType = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeRecoveryPointInfo
 type VolumeRecoveryPointInfo struct {
 	_ struct{} `type:"structure"`
@@ -12161,30 +9875,6 @@ func (s VolumeRecoveryPointInfo) String() string {
 // GoString returns the string representation
 func (s VolumeRecoveryPointInfo) GoString() string {
 	return s.String()
-}
-
-// SetVolumeARN sets the VolumeARN field's value.
-func (s *VolumeRecoveryPointInfo) SetVolumeARN(v string) *VolumeRecoveryPointInfo {
-	s.VolumeARN = &v
-	return s
-}
-
-// SetVolumeRecoveryPointTime sets the VolumeRecoveryPointTime field's value.
-func (s *VolumeRecoveryPointInfo) SetVolumeRecoveryPointTime(v string) *VolumeRecoveryPointInfo {
-	s.VolumeRecoveryPointTime = &v
-	return s
-}
-
-// SetVolumeSizeInBytes sets the VolumeSizeInBytes field's value.
-func (s *VolumeRecoveryPointInfo) SetVolumeSizeInBytes(v int64) *VolumeRecoveryPointInfo {
-	s.VolumeSizeInBytes = &v
-	return s
-}
-
-// SetVolumeUsageInBytes sets the VolumeUsageInBytes field's value.
-func (s *VolumeRecoveryPointInfo) SetVolumeUsageInBytes(v int64) *VolumeRecoveryPointInfo {
-	s.VolumeUsageInBytes = &v
-	return s
 }
 
 // Lists iSCSI information about a volume.
@@ -12216,36 +9906,6 @@ func (s VolumeiSCSIAttributes) String() string {
 // GoString returns the string representation
 func (s VolumeiSCSIAttributes) GoString() string {
 	return s.String()
-}
-
-// SetChapEnabled sets the ChapEnabled field's value.
-func (s *VolumeiSCSIAttributes) SetChapEnabled(v bool) *VolumeiSCSIAttributes {
-	s.ChapEnabled = &v
-	return s
-}
-
-// SetLunNumber sets the LunNumber field's value.
-func (s *VolumeiSCSIAttributes) SetLunNumber(v int64) *VolumeiSCSIAttributes {
-	s.LunNumber = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *VolumeiSCSIAttributes) SetNetworkInterfaceId(v string) *VolumeiSCSIAttributes {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetNetworkInterfacePort sets the NetworkInterfacePort field's value.
-func (s *VolumeiSCSIAttributes) SetNetworkInterfacePort(v int64) *VolumeiSCSIAttributes {
-	s.NetworkInterfacePort = &v
-	return s
-}
-
-// SetTargetARN sets the TargetARN field's value.
-func (s *VolumeiSCSIAttributes) SetTargetARN(v string) *VolumeiSCSIAttributes {
-	s.TargetARN = &v
-	return s
 }
 
 type ErrorCode string

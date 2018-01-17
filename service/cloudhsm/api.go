@@ -1263,18 +1263,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *AddTagsToResourceInput) SetResourceArn(v string) *AddTagsToResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *AddTagsToResourceInput) SetTagList(v []Tag) *AddTagsToResourceInput {
-	s.TagList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResourceResponse
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1300,12 +1288,6 @@ func (s AddTagsToResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddTagsToResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *AddTagsToResourceOutput) SetStatus(v string) *AddTagsToResourceOutput {
-	s.Status = &v
-	return s
 }
 
 // Contains the inputs for the CreateHapgRequest action.
@@ -1343,12 +1325,6 @@ func (s *CreateHapgInput) Validate() error {
 	return nil
 }
 
-// SetLabel sets the Label field's value.
-func (s *CreateHapgInput) SetLabel(v string) *CreateHapgInput {
-	s.Label = &v
-	return s
-}
-
 // Contains the output of the CreateHAPartitionGroup action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapgResponse
 type CreateHapgOutput struct {
@@ -1373,12 +1349,6 @@ func (s CreateHapgOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHapgOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHapgArn sets the HapgArn field's value.
-func (s *CreateHapgOutput) SetHapgArn(v string) *CreateHapgOutput {
-	s.HapgArn = &v
-	return s
 }
 
 // Contains the inputs for the CreateHsm operation.
@@ -1464,54 +1434,6 @@ func (s *CreateHsmInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateHsmInput) SetClientToken(v string) *CreateHsmInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetEniIp sets the EniIp field's value.
-func (s *CreateHsmInput) SetEniIp(v string) *CreateHsmInput {
-	s.EniIp = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *CreateHsmInput) SetExternalId(v string) *CreateHsmInput {
-	s.ExternalId = &v
-	return s
-}
-
-// SetIamRoleArn sets the IamRoleArn field's value.
-func (s *CreateHsmInput) SetIamRoleArn(v string) *CreateHsmInput {
-	s.IamRoleArn = &v
-	return s
-}
-
-// SetSshKey sets the SshKey field's value.
-func (s *CreateHsmInput) SetSshKey(v string) *CreateHsmInput {
-	s.SshKey = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *CreateHsmInput) SetSubnetId(v string) *CreateHsmInput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetSubscriptionType sets the SubscriptionType field's value.
-func (s *CreateHsmInput) SetSubscriptionType(v SubscriptionType) *CreateHsmInput {
-	s.SubscriptionType = v
-	return s
-}
-
-// SetSyslogIp sets the SyslogIp field's value.
-func (s *CreateHsmInput) SetSyslogIp(v string) *CreateHsmInput {
-	s.SyslogIp = &v
-	return s
-}
-
 // Contains the output of the CreateHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsmResponse
 type CreateHsmOutput struct {
@@ -1536,12 +1458,6 @@ func (s CreateHsmOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHsmArn sets the HsmArn field's value.
-func (s *CreateHsmOutput) SetHsmArn(v string) *CreateHsmOutput {
-	s.HsmArn = &v
-	return s
 }
 
 // Contains the inputs for the CreateLunaClient action.
@@ -1586,18 +1502,6 @@ func (s *CreateLunaClientInput) Validate() error {
 	return nil
 }
 
-// SetCertificate sets the Certificate field's value.
-func (s *CreateLunaClientInput) SetCertificate(v string) *CreateLunaClientInput {
-	s.Certificate = &v
-	return s
-}
-
-// SetLabel sets the Label field's value.
-func (s *CreateLunaClientInput) SetLabel(v string) *CreateLunaClientInput {
-	s.Label = &v
-	return s
-}
-
 // Contains the output of the CreateLunaClient action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClientResponse
 type CreateLunaClientOutput struct {
@@ -1622,12 +1526,6 @@ func (s CreateLunaClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLunaClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientArn sets the ClientArn field's value.
-func (s *CreateLunaClientOutput) SetClientArn(v string) *CreateLunaClientOutput {
-	s.ClientArn = &v
-	return s
 }
 
 // Contains the inputs for the DeleteHapg action.
@@ -1665,12 +1563,6 @@ func (s *DeleteHapgInput) Validate() error {
 	return nil
 }
 
-// SetHapgArn sets the HapgArn field's value.
-func (s *DeleteHapgInput) SetHapgArn(v string) *DeleteHapgInput {
-	s.HapgArn = &v
-	return s
-}
-
 // Contains the output of the DeleteHapg action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapgResponse
 type DeleteHapgOutput struct {
@@ -1697,12 +1589,6 @@ func (s DeleteHapgOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteHapgOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *DeleteHapgOutput) SetStatus(v string) *DeleteHapgOutput {
-	s.Status = &v
-	return s
 }
 
 // Contains the inputs for the DeleteHsm operation.
@@ -1740,12 +1626,6 @@ func (s *DeleteHsmInput) Validate() error {
 	return nil
 }
 
-// SetHsmArn sets the HsmArn field's value.
-func (s *DeleteHsmInput) SetHsmArn(v string) *DeleteHsmInput {
-	s.HsmArn = &v
-	return s
-}
-
 // Contains the output of the DeleteHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsmResponse
 type DeleteHsmOutput struct {
@@ -1772,12 +1652,6 @@ func (s DeleteHsmOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *DeleteHsmOutput) SetStatus(v string) *DeleteHsmOutput {
-	s.Status = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClientRequest
@@ -1814,12 +1688,6 @@ func (s *DeleteLunaClientInput) Validate() error {
 	return nil
 }
 
-// SetClientArn sets the ClientArn field's value.
-func (s *DeleteLunaClientInput) SetClientArn(v string) *DeleteLunaClientInput {
-	s.ClientArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClientResponse
 type DeleteLunaClientOutput struct {
 	_ struct{} `type:"structure"`
@@ -1845,12 +1713,6 @@ func (s DeleteLunaClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLunaClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *DeleteLunaClientOutput) SetStatus(v string) *DeleteLunaClientOutput {
-	s.Status = &v
-	return s
 }
 
 // Contains the inputs for the DescribeHapg action.
@@ -1886,12 +1748,6 @@ func (s *DescribeHapgInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHapgArn sets the HapgArn field's value.
-func (s *DescribeHapgInput) SetHapgArn(v string) *DescribeHapgInput {
-	s.HapgArn = &v
-	return s
 }
 
 // Contains the output of the DescribeHapg action.
@@ -1945,60 +1801,6 @@ func (s DescribeHapgOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHapgArn sets the HapgArn field's value.
-func (s *DescribeHapgOutput) SetHapgArn(v string) *DescribeHapgOutput {
-	s.HapgArn = &v
-	return s
-}
-
-// SetHapgSerial sets the HapgSerial field's value.
-func (s *DescribeHapgOutput) SetHapgSerial(v string) *DescribeHapgOutput {
-	s.HapgSerial = &v
-	return s
-}
-
-// SetHsmsLastActionFailed sets the HsmsLastActionFailed field's value.
-func (s *DescribeHapgOutput) SetHsmsLastActionFailed(v []string) *DescribeHapgOutput {
-	s.HsmsLastActionFailed = v
-	return s
-}
-
-// SetHsmsPendingDeletion sets the HsmsPendingDeletion field's value.
-func (s *DescribeHapgOutput) SetHsmsPendingDeletion(v []string) *DescribeHapgOutput {
-	s.HsmsPendingDeletion = v
-	return s
-}
-
-// SetHsmsPendingRegistration sets the HsmsPendingRegistration field's value.
-func (s *DescribeHapgOutput) SetHsmsPendingRegistration(v []string) *DescribeHapgOutput {
-	s.HsmsPendingRegistration = v
-	return s
-}
-
-// SetLabel sets the Label field's value.
-func (s *DescribeHapgOutput) SetLabel(v string) *DescribeHapgOutput {
-	s.Label = &v
-	return s
-}
-
-// SetLastModifiedTimestamp sets the LastModifiedTimestamp field's value.
-func (s *DescribeHapgOutput) SetLastModifiedTimestamp(v string) *DescribeHapgOutput {
-	s.LastModifiedTimestamp = &v
-	return s
-}
-
-// SetPartitionSerialList sets the PartitionSerialList field's value.
-func (s *DescribeHapgOutput) SetPartitionSerialList(v []string) *DescribeHapgOutput {
-	s.PartitionSerialList = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeHapgOutput) SetState(v CloudHsmObjectState) *DescribeHapgOutput {
-	s.State = v
-	return s
-}
-
 // Contains the inputs for the DescribeHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsmRequest
 type DescribeHsmInput struct {
@@ -2021,18 +1823,6 @@ func (s DescribeHsmInput) String() string {
 // GoString returns the string representation
 func (s DescribeHsmInput) GoString() string {
 	return s.String()
-}
-
-// SetHsmArn sets the HsmArn field's value.
-func (s *DescribeHsmInput) SetHsmArn(v string) *DescribeHsmInput {
-	s.HsmArn = &v
-	return s
-}
-
-// SetHsmSerialNumber sets the HsmSerialNumber field's value.
-func (s *DescribeHsmInput) SetHsmSerialNumber(v string) *DescribeHsmInput {
-	s.HsmSerialNumber = &v
-	return s
 }
 
 // Contains the output of the DescribeHsm operation.
@@ -2125,132 +1915,6 @@ func (s DescribeHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *DescribeHsmOutput) SetAvailabilityZone(v string) *DescribeHsmOutput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEniId sets the EniId field's value.
-func (s *DescribeHsmOutput) SetEniId(v string) *DescribeHsmOutput {
-	s.EniId = &v
-	return s
-}
-
-// SetEniIp sets the EniIp field's value.
-func (s *DescribeHsmOutput) SetEniIp(v string) *DescribeHsmOutput {
-	s.EniIp = &v
-	return s
-}
-
-// SetHsmArn sets the HsmArn field's value.
-func (s *DescribeHsmOutput) SetHsmArn(v string) *DescribeHsmOutput {
-	s.HsmArn = &v
-	return s
-}
-
-// SetHsmType sets the HsmType field's value.
-func (s *DescribeHsmOutput) SetHsmType(v string) *DescribeHsmOutput {
-	s.HsmType = &v
-	return s
-}
-
-// SetIamRoleArn sets the IamRoleArn field's value.
-func (s *DescribeHsmOutput) SetIamRoleArn(v string) *DescribeHsmOutput {
-	s.IamRoleArn = &v
-	return s
-}
-
-// SetPartitions sets the Partitions field's value.
-func (s *DescribeHsmOutput) SetPartitions(v []string) *DescribeHsmOutput {
-	s.Partitions = v
-	return s
-}
-
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *DescribeHsmOutput) SetSerialNumber(v string) *DescribeHsmOutput {
-	s.SerialNumber = &v
-	return s
-}
-
-// SetServerCertLastUpdated sets the ServerCertLastUpdated field's value.
-func (s *DescribeHsmOutput) SetServerCertLastUpdated(v string) *DescribeHsmOutput {
-	s.ServerCertLastUpdated = &v
-	return s
-}
-
-// SetServerCertUri sets the ServerCertUri field's value.
-func (s *DescribeHsmOutput) SetServerCertUri(v string) *DescribeHsmOutput {
-	s.ServerCertUri = &v
-	return s
-}
-
-// SetSoftwareVersion sets the SoftwareVersion field's value.
-func (s *DescribeHsmOutput) SetSoftwareVersion(v string) *DescribeHsmOutput {
-	s.SoftwareVersion = &v
-	return s
-}
-
-// SetSshKeyLastUpdated sets the SshKeyLastUpdated field's value.
-func (s *DescribeHsmOutput) SetSshKeyLastUpdated(v string) *DescribeHsmOutput {
-	s.SshKeyLastUpdated = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *DescribeHsmOutput) SetSshPublicKey(v string) *DescribeHsmOutput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeHsmOutput) SetStatus(v HsmStatus) *DescribeHsmOutput {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetails sets the StatusDetails field's value.
-func (s *DescribeHsmOutput) SetStatusDetails(v string) *DescribeHsmOutput {
-	s.StatusDetails = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *DescribeHsmOutput) SetSubnetId(v string) *DescribeHsmOutput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetSubscriptionEndDate sets the SubscriptionEndDate field's value.
-func (s *DescribeHsmOutput) SetSubscriptionEndDate(v string) *DescribeHsmOutput {
-	s.SubscriptionEndDate = &v
-	return s
-}
-
-// SetSubscriptionStartDate sets the SubscriptionStartDate field's value.
-func (s *DescribeHsmOutput) SetSubscriptionStartDate(v string) *DescribeHsmOutput {
-	s.SubscriptionStartDate = &v
-	return s
-}
-
-// SetSubscriptionType sets the SubscriptionType field's value.
-func (s *DescribeHsmOutput) SetSubscriptionType(v SubscriptionType) *DescribeHsmOutput {
-	s.SubscriptionType = v
-	return s
-}
-
-// SetVendorName sets the VendorName field's value.
-func (s *DescribeHsmOutput) SetVendorName(v string) *DescribeHsmOutput {
-	s.VendorName = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DescribeHsmOutput) SetVpcId(v string) *DescribeHsmOutput {
-	s.VpcId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClientRequest
 type DescribeLunaClientInput struct {
 	_ struct{} `type:"structure"`
@@ -2270,18 +1934,6 @@ func (s DescribeLunaClientInput) String() string {
 // GoString returns the string representation
 func (s DescribeLunaClientInput) GoString() string {
 	return s.String()
-}
-
-// SetCertificateFingerprint sets the CertificateFingerprint field's value.
-func (s *DescribeLunaClientInput) SetCertificateFingerprint(v string) *DescribeLunaClientInput {
-	s.CertificateFingerprint = &v
-	return s
-}
-
-// SetClientArn sets the ClientArn field's value.
-func (s *DescribeLunaClientInput) SetClientArn(v string) *DescribeLunaClientInput {
-	s.ClientArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClientResponse
@@ -2319,36 +1971,6 @@ func (s DescribeLunaClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLunaClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *DescribeLunaClientOutput) SetCertificate(v string) *DescribeLunaClientOutput {
-	s.Certificate = &v
-	return s
-}
-
-// SetCertificateFingerprint sets the CertificateFingerprint field's value.
-func (s *DescribeLunaClientOutput) SetCertificateFingerprint(v string) *DescribeLunaClientOutput {
-	s.CertificateFingerprint = &v
-	return s
-}
-
-// SetClientArn sets the ClientArn field's value.
-func (s *DescribeLunaClientOutput) SetClientArn(v string) *DescribeLunaClientOutput {
-	s.ClientArn = &v
-	return s
-}
-
-// SetLabel sets the Label field's value.
-func (s *DescribeLunaClientOutput) SetLabel(v string) *DescribeLunaClientOutput {
-	s.Label = &v
-	return s
-}
-
-// SetLastModifiedTimestamp sets the LastModifiedTimestamp field's value.
-func (s *DescribeLunaClientOutput) SetLastModifiedTimestamp(v string) *DescribeLunaClientOutput {
-	s.LastModifiedTimestamp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfigRequest
@@ -2403,24 +2025,6 @@ func (s *GetConfigInput) Validate() error {
 	return nil
 }
 
-// SetClientArn sets the ClientArn field's value.
-func (s *GetConfigInput) SetClientArn(v string) *GetConfigInput {
-	s.ClientArn = &v
-	return s
-}
-
-// SetClientVersion sets the ClientVersion field's value.
-func (s *GetConfigInput) SetClientVersion(v ClientVersion) *GetConfigInput {
-	s.ClientVersion = v
-	return s
-}
-
-// SetHapgList sets the HapgList field's value.
-func (s *GetConfigInput) SetHapgList(v []string) *GetConfigInput {
-	s.HapgList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfigResponse
 type GetConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -2450,24 +2054,6 @@ func (s GetConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigCred sets the ConfigCred field's value.
-func (s *GetConfigOutput) SetConfigCred(v string) *GetConfigOutput {
-	s.ConfigCred = &v
-	return s
-}
-
-// SetConfigFile sets the ConfigFile field's value.
-func (s *GetConfigOutput) SetConfigFile(v string) *GetConfigOutput {
-	s.ConfigFile = &v
-	return s
-}
-
-// SetConfigType sets the ConfigType field's value.
-func (s *GetConfigOutput) SetConfigType(v string) *GetConfigOutput {
-	s.ConfigType = &v
-	return s
 }
 
 // Contains the inputs for the ListAvailableZones action.
@@ -2511,12 +2097,6 @@ func (s ListAvailableZonesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAZList sets the AZList field's value.
-func (s *ListAvailableZonesOutput) SetAZList(v []string) *ListAvailableZonesOutput {
-	s.AZList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsRequest
 type ListHapgsInput struct {
 	_ struct{} `type:"structure"`
@@ -2534,12 +2114,6 @@ func (s ListHapgsInput) String() string {
 // GoString returns the string representation
 func (s ListHapgsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHapgsInput) SetNextToken(v string) *ListHapgsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsResponse
@@ -2573,18 +2147,6 @@ func (s ListHapgsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHapgList sets the HapgList field's value.
-func (s *ListHapgsOutput) SetHapgList(v []string) *ListHapgsOutput {
-	s.HapgList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHapgsOutput) SetNextToken(v string) *ListHapgsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsRequest
 type ListHsmsInput struct {
 	_ struct{} `type:"structure"`
@@ -2602,12 +2164,6 @@ func (s ListHsmsInput) String() string {
 // GoString returns the string representation
 func (s ListHsmsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHsmsInput) SetNextToken(v string) *ListHsmsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the output of the ListHsms operation.
@@ -2640,18 +2196,6 @@ func (s ListHsmsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHsmList sets the HsmList field's value.
-func (s *ListHsmsOutput) SetHsmList(v []string) *ListHsmsOutput {
-	s.HsmList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHsmsOutput) SetNextToken(v string) *ListHsmsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClientsRequest
 type ListLunaClientsInput struct {
 	_ struct{} `type:"structure"`
@@ -2669,12 +2213,6 @@ func (s ListLunaClientsInput) String() string {
 // GoString returns the string representation
 func (s ListLunaClientsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLunaClientsInput) SetNextToken(v string) *ListLunaClientsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClientsResponse
@@ -2706,18 +2244,6 @@ func (s ListLunaClientsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListLunaClientsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientList sets the ClientList field's value.
-func (s *ListLunaClientsOutput) SetClientList(v []string) *ListLunaClientsOutput {
-	s.ClientList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLunaClientsOutput) SetNextToken(v string) *ListLunaClientsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResourceRequest
@@ -2754,12 +2280,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2785,12 +2305,6 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTagList sets the TagList field's value.
-func (s *ListTagsForResourceOutput) SetTagList(v []Tag) *ListTagsForResourceOutput {
-	s.TagList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapgRequest
@@ -2834,24 +2348,6 @@ func (s *ModifyHapgInput) Validate() error {
 	return nil
 }
 
-// SetHapgArn sets the HapgArn field's value.
-func (s *ModifyHapgInput) SetHapgArn(v string) *ModifyHapgInput {
-	s.HapgArn = &v
-	return s
-}
-
-// SetLabel sets the Label field's value.
-func (s *ModifyHapgInput) SetLabel(v string) *ModifyHapgInput {
-	s.Label = &v
-	return s
-}
-
-// SetPartitionSerialList sets the PartitionSerialList field's value.
-func (s *ModifyHapgInput) SetPartitionSerialList(v []string) *ModifyHapgInput {
-	s.PartitionSerialList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapgResponse
 type ModifyHapgOutput struct {
 	_ struct{} `type:"structure"`
@@ -2875,12 +2371,6 @@ func (s ModifyHapgOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyHapgOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHapgArn sets the HapgArn field's value.
-func (s *ModifyHapgOutput) SetHapgArn(v string) *ModifyHapgOutput {
-	s.HapgArn = &v
-	return s
 }
 
 // Contains the inputs for the ModifyHsm operation.
@@ -2939,42 +2429,6 @@ func (s *ModifyHsmInput) Validate() error {
 	return nil
 }
 
-// SetEniIp sets the EniIp field's value.
-func (s *ModifyHsmInput) SetEniIp(v string) *ModifyHsmInput {
-	s.EniIp = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *ModifyHsmInput) SetExternalId(v string) *ModifyHsmInput {
-	s.ExternalId = &v
-	return s
-}
-
-// SetHsmArn sets the HsmArn field's value.
-func (s *ModifyHsmInput) SetHsmArn(v string) *ModifyHsmInput {
-	s.HsmArn = &v
-	return s
-}
-
-// SetIamRoleArn sets the IamRoleArn field's value.
-func (s *ModifyHsmInput) SetIamRoleArn(v string) *ModifyHsmInput {
-	s.IamRoleArn = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *ModifyHsmInput) SetSubnetId(v string) *ModifyHsmInput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetSyslogIp sets the SyslogIp field's value.
-func (s *ModifyHsmInput) SetSyslogIp(v string) *ModifyHsmInput {
-	s.SyslogIp = &v
-	return s
-}
-
 // Contains the output of the ModifyHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsmResponse
 type ModifyHsmOutput struct {
@@ -2999,12 +2453,6 @@ func (s ModifyHsmOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHsmArn sets the HsmArn field's value.
-func (s *ModifyHsmOutput) SetHsmArn(v string) *ModifyHsmOutput {
-	s.HsmArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClientRequest
@@ -3053,18 +2501,6 @@ func (s *ModifyLunaClientInput) Validate() error {
 	return nil
 }
 
-// SetCertificate sets the Certificate field's value.
-func (s *ModifyLunaClientInput) SetCertificate(v string) *ModifyLunaClientInput {
-	s.Certificate = &v
-	return s
-}
-
-// SetClientArn sets the ClientArn field's value.
-func (s *ModifyLunaClientInput) SetClientArn(v string) *ModifyLunaClientInput {
-	s.ClientArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClientResponse
 type ModifyLunaClientOutput struct {
 	_ struct{} `type:"structure"`
@@ -3088,12 +2524,6 @@ func (s ModifyLunaClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyLunaClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientArn sets the ClientArn field's value.
-func (s *ModifyLunaClientOutput) SetClientArn(v string) *ModifyLunaClientOutput {
-	s.ClientArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResourceRequest
@@ -3142,18 +2572,6 @@ func (s *RemoveTagsFromResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *RemoveTagsFromResourceInput) SetResourceArn(v string) *RemoveTagsFromResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeyList sets the TagKeyList field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeyList(v []string) *RemoveTagsFromResourceInput {
-	s.TagKeyList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResourceResponse
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3179,12 +2597,6 @@ func (s RemoveTagsFromResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveTagsFromResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *RemoveTagsFromResourceOutput) SetStatus(v string) *RemoveTagsFromResourceOutput {
-	s.Status = &v
-	return s
 }
 
 // A key-value pair that identifies or specifies metadata about an AWS CloudHSM
@@ -3233,18 +2645,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 type ClientVersion string

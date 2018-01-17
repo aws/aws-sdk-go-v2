@@ -6056,18 +6056,6 @@ func (s *AcceptCertificateTransferInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *AcceptCertificateTransferInput) SetCertificateId(v string) *AcceptCertificateTransferInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetSetAsActive sets the SetAsActive field's value.
-func (s *AcceptCertificateTransferInput) SetSetAsActive(v bool) *AcceptCertificateTransferInput {
-	s.SetAsActive = &v
-	return s
-}
-
 type AcceptCertificateTransferOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6220,84 +6208,6 @@ func (s *Action) Validate() error {
 	return nil
 }
 
-// SetCloudwatchAlarm sets the CloudwatchAlarm field's value.
-func (s *Action) SetCloudwatchAlarm(v *CloudwatchAlarmAction) *Action {
-	s.CloudwatchAlarm = v
-	return s
-}
-
-// SetCloudwatchMetric sets the CloudwatchMetric field's value.
-func (s *Action) SetCloudwatchMetric(v *CloudwatchMetricAction) *Action {
-	s.CloudwatchMetric = v
-	return s
-}
-
-// SetDynamoDB sets the DynamoDB field's value.
-func (s *Action) SetDynamoDB(v *DynamoDBAction) *Action {
-	s.DynamoDB = v
-	return s
-}
-
-// SetDynamoDBv2 sets the DynamoDBv2 field's value.
-func (s *Action) SetDynamoDBv2(v *DynamoDBv2Action) *Action {
-	s.DynamoDBv2 = v
-	return s
-}
-
-// SetElasticsearch sets the Elasticsearch field's value.
-func (s *Action) SetElasticsearch(v *ElasticsearchAction) *Action {
-	s.Elasticsearch = v
-	return s
-}
-
-// SetFirehose sets the Firehose field's value.
-func (s *Action) SetFirehose(v *FirehoseAction) *Action {
-	s.Firehose = v
-	return s
-}
-
-// SetKinesis sets the Kinesis field's value.
-func (s *Action) SetKinesis(v *KinesisAction) *Action {
-	s.Kinesis = v
-	return s
-}
-
-// SetLambda sets the Lambda field's value.
-func (s *Action) SetLambda(v *LambdaAction) *Action {
-	s.Lambda = v
-	return s
-}
-
-// SetRepublish sets the Republish field's value.
-func (s *Action) SetRepublish(v *RepublishAction) *Action {
-	s.Republish = v
-	return s
-}
-
-// SetS3 sets the S3 field's value.
-func (s *Action) SetS3(v *S3Action) *Action {
-	s.S3 = v
-	return s
-}
-
-// SetSalesforce sets the Salesforce field's value.
-func (s *Action) SetSalesforce(v *SalesforceAction) *Action {
-	s.Salesforce = v
-	return s
-}
-
-// SetSns sets the Sns field's value.
-func (s *Action) SetSns(v *SnsAction) *Action {
-	s.Sns = v
-	return s
-}
-
-// SetSqs sets the Sqs field's value.
-func (s *Action) SetSqs(v *SqsAction) *Action {
-	s.Sqs = v
-	return s
-}
-
 type AddThingToThingGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6340,30 +6250,6 @@ func (s *AddThingToThingGroupInput) Validate() error {
 	return nil
 }
 
-// SetThingArn sets the ThingArn field's value.
-func (s *AddThingToThingGroupInput) SetThingArn(v string) *AddThingToThingGroupInput {
-	s.ThingArn = &v
-	return s
-}
-
-// SetThingGroupArn sets the ThingGroupArn field's value.
-func (s *AddThingToThingGroupInput) SetThingGroupArn(v string) *AddThingToThingGroupInput {
-	s.ThingGroupArn = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *AddThingToThingGroupInput) SetThingGroupName(v string) *AddThingToThingGroupInput {
-	s.ThingGroupName = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *AddThingToThingGroupInput) SetThingName(v string) *AddThingToThingGroupInput {
-	s.ThingName = &v
-	return s
-}
-
 type AddThingToThingGroupOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6401,12 +6287,6 @@ func (s Allowed) String() string {
 // GoString returns the string representation
 func (s Allowed) GoString() string {
 	return s.String()
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *Allowed) SetPolicies(v []Policy) *Allowed {
-	s.Policies = v
-	return s
 }
 
 type AssociateTargetsWithJobInput struct {
@@ -6461,24 +6341,6 @@ func (s *AssociateTargetsWithJobInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *AssociateTargetsWithJobInput) SetComment(v string) *AssociateTargetsWithJobInput {
-	s.Comment = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *AssociateTargetsWithJobInput) SetJobId(v string) *AssociateTargetsWithJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *AssociateTargetsWithJobInput) SetTargets(v []string) *AssociateTargetsWithJobInput {
-	s.Targets = v
-	return s
-}
-
 type AssociateTargetsWithJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6507,24 +6369,6 @@ func (s AssociateTargetsWithJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateTargetsWithJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDescription sets the Description field's value.
-func (s *AssociateTargetsWithJobOutput) SetDescription(v string) *AssociateTargetsWithJobOutput {
-	s.Description = &v
-	return s
-}
-
-// SetJobArn sets the JobArn field's value.
-func (s *AssociateTargetsWithJobOutput) SetJobArn(v string) *AssociateTargetsWithJobOutput {
-	s.JobArn = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *AssociateTargetsWithJobOutput) SetJobId(v string) *AssociateTargetsWithJobOutput {
-	s.JobId = &v
-	return s
 }
 
 type AttachPolicyInput struct {
@@ -6570,18 +6414,6 @@ func (s *AttachPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *AttachPolicyInput) SetPolicyName(v string) *AttachPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetTarget sets the Target field's value.
-func (s *AttachPolicyInput) SetTarget(v string) *AttachPolicyInput {
-	s.Target = &v
-	return s
 }
 
 type AttachPolicyOutput struct {
@@ -6652,18 +6484,6 @@ func (s *AttachPrincipalPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *AttachPrincipalPolicyInput) SetPolicyName(v string) *AttachPrincipalPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *AttachPrincipalPolicyInput) SetPrincipal(v string) *AttachPrincipalPolicyInput {
-	s.Principal = &v
-	return s
-}
-
 type AttachPrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6731,18 +6551,6 @@ func (s *AttachThingPrincipalInput) Validate() error {
 	return nil
 }
 
-// SetPrincipal sets the Principal field's value.
-func (s *AttachThingPrincipalInput) SetPrincipal(v string) *AttachThingPrincipalInput {
-	s.Principal = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *AttachThingPrincipalInput) SetThingName(v string) *AttachThingPrincipalInput {
-	s.ThingName = &v
-	return s
-}
-
 // The output from the AttachThingPrincipal operation.
 type AttachThingPrincipalOutput struct {
 	_ struct{} `type:"structure"`
@@ -6794,18 +6602,6 @@ func (s AttributePayload) GoString() string {
 	return s.String()
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *AttributePayload) SetAttributes(v map[string]string) *AttributePayload {
-	s.Attributes = v
-	return s
-}
-
-// SetMerge sets the Merge field's value.
-func (s *AttributePayload) SetMerge(v bool) *AttributePayload {
-	s.Merge = &v
-	return s
-}
-
 // A collection of authorization information.
 type AuthInfo struct {
 	_ struct{} `type:"structure"`
@@ -6826,18 +6622,6 @@ func (s AuthInfo) String() string {
 // GoString returns the string representation
 func (s AuthInfo) GoString() string {
 	return s.String()
-}
-
-// SetActionType sets the ActionType field's value.
-func (s *AuthInfo) SetActionType(v ActionType) *AuthInfo {
-	s.ActionType = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *AuthInfo) SetResources(v []string) *AuthInfo {
-	s.Resources = v
-	return s
 }
 
 // The authorizer result.
@@ -6870,36 +6654,6 @@ func (s AuthResult) String() string {
 // GoString returns the string representation
 func (s AuthResult) GoString() string {
 	return s.String()
-}
-
-// SetAllowed sets the Allowed field's value.
-func (s *AuthResult) SetAllowed(v *Allowed) *AuthResult {
-	s.Allowed = v
-	return s
-}
-
-// SetAuthDecision sets the AuthDecision field's value.
-func (s *AuthResult) SetAuthDecision(v AuthDecision) *AuthResult {
-	s.AuthDecision = v
-	return s
-}
-
-// SetAuthInfo sets the AuthInfo field's value.
-func (s *AuthResult) SetAuthInfo(v *AuthInfo) *AuthResult {
-	s.AuthInfo = v
-	return s
-}
-
-// SetDenied sets the Denied field's value.
-func (s *AuthResult) SetDenied(v *Denied) *AuthResult {
-	s.Denied = v
-	return s
-}
-
-// SetMissingContextValues sets the MissingContextValues field's value.
-func (s *AuthResult) SetMissingContextValues(v []string) *AuthResult {
-	s.MissingContextValues = v
-	return s
 }
 
 // The authorizer description.
@@ -6942,54 +6696,6 @@ func (s AuthorizerDescription) GoString() string {
 	return s.String()
 }
 
-// SetAuthorizerArn sets the AuthorizerArn field's value.
-func (s *AuthorizerDescription) SetAuthorizerArn(v string) *AuthorizerDescription {
-	s.AuthorizerArn = &v
-	return s
-}
-
-// SetAuthorizerFunctionArn sets the AuthorizerFunctionArn field's value.
-func (s *AuthorizerDescription) SetAuthorizerFunctionArn(v string) *AuthorizerDescription {
-	s.AuthorizerFunctionArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *AuthorizerDescription) SetAuthorizerName(v string) *AuthorizerDescription {
-	s.AuthorizerName = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *AuthorizerDescription) SetCreationDate(v time.Time) *AuthorizerDescription {
-	s.CreationDate = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *AuthorizerDescription) SetLastModifiedDate(v time.Time) *AuthorizerDescription {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *AuthorizerDescription) SetStatus(v AuthorizerStatus) *AuthorizerDescription {
-	s.Status = v
-	return s
-}
-
-// SetTokenKeyName sets the TokenKeyName field's value.
-func (s *AuthorizerDescription) SetTokenKeyName(v string) *AuthorizerDescription {
-	s.TokenKeyName = &v
-	return s
-}
-
-// SetTokenSigningPublicKeys sets the TokenSigningPublicKeys field's value.
-func (s *AuthorizerDescription) SetTokenSigningPublicKeys(v map[string]string) *AuthorizerDescription {
-	s.TokenSigningPublicKeys = v
-	return s
-}
-
 // The authorizer summary.
 type AuthorizerSummary struct {
 	_ struct{} `type:"structure"`
@@ -7009,18 +6715,6 @@ func (s AuthorizerSummary) String() string {
 // GoString returns the string representation
 func (s AuthorizerSummary) GoString() string {
 	return s.String()
-}
-
-// SetAuthorizerArn sets the AuthorizerArn field's value.
-func (s *AuthorizerSummary) SetAuthorizerArn(v string) *AuthorizerSummary {
-	s.AuthorizerArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *AuthorizerSummary) SetAuthorizerName(v string) *AuthorizerSummary {
-	s.AuthorizerName = &v
-	return s
 }
 
 // A CA certificate.
@@ -7050,30 +6744,6 @@ func (s CACertificate) String() string {
 // GoString returns the string representation
 func (s CACertificate) GoString() string {
 	return s.String()
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CACertificate) SetCertificateArn(v string) *CACertificate {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *CACertificate) SetCertificateId(v string) *CACertificate {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *CACertificate) SetCreationDate(v time.Time) *CACertificate {
-	s.CreationDate = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CACertificate) SetStatus(v CACertificateStatus) *CACertificate {
-	s.Status = v
-	return s
 }
 
 // Describes a CA certificate.
@@ -7113,48 +6783,6 @@ func (s CACertificateDescription) GoString() string {
 	return s.String()
 }
 
-// SetAutoRegistrationStatus sets the AutoRegistrationStatus field's value.
-func (s *CACertificateDescription) SetAutoRegistrationStatus(v AutoRegistrationStatus) *CACertificateDescription {
-	s.AutoRegistrationStatus = v
-	return s
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CACertificateDescription) SetCertificateArn(v string) *CACertificateDescription {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *CACertificateDescription) SetCertificateId(v string) *CACertificateDescription {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *CACertificateDescription) SetCertificatePem(v string) *CACertificateDescription {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *CACertificateDescription) SetCreationDate(v time.Time) *CACertificateDescription {
-	s.CreationDate = &v
-	return s
-}
-
-// SetOwnedBy sets the OwnedBy field's value.
-func (s *CACertificateDescription) SetOwnedBy(v string) *CACertificateDescription {
-	s.OwnedBy = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CACertificateDescription) SetStatus(v CACertificateStatus) *CACertificateDescription {
-	s.Status = v
-	return s
-}
-
 // The input for the CancelCertificateTransfer operation.
 type CancelCertificateTransferInput struct {
 	_ struct{} `type:"structure"`
@@ -7190,12 +6818,6 @@ func (s *CancelCertificateTransferInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *CancelCertificateTransferInput) SetCertificateId(v string) *CancelCertificateTransferInput {
-	s.CertificateId = &v
-	return s
 }
 
 type CancelCertificateTransferOutput struct {
@@ -7258,18 +6880,6 @@ func (s *CancelJobInput) Validate() error {
 	return nil
 }
 
-// SetComment sets the Comment field's value.
-func (s *CancelJobInput) SetComment(v string) *CancelJobInput {
-	s.Comment = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *CancelJobInput) SetJobId(v string) *CancelJobInput {
-	s.JobId = &v
-	return s
-}
-
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7300,24 +6910,6 @@ func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDescription sets the Description field's value.
-func (s *CancelJobOutput) SetDescription(v string) *CancelJobOutput {
-	s.Description = &v
-	return s
-}
-
-// SetJobArn sets the JobArn field's value.
-func (s *CancelJobOutput) SetJobArn(v string) *CancelJobOutput {
-	s.JobArn = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *CancelJobOutput) SetJobId(v string) *CancelJobOutput {
-	s.JobId = &v
-	return s
-}
-
 // Information about a certificate.
 type Certificate struct {
 	_ struct{} `type:"structure"`
@@ -7345,30 +6937,6 @@ func (s Certificate) String() string {
 // GoString returns the string representation
 func (s Certificate) GoString() string {
 	return s.String()
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Certificate) SetCertificateArn(v string) *Certificate {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *Certificate) SetCertificateId(v string) *Certificate {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *Certificate) SetCreationDate(v time.Time) *Certificate {
-	s.CreationDate = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Certificate) SetStatus(v CertificateStatus) *Certificate {
-	s.Status = v
-	return s
 }
 
 // Describes a certificate.
@@ -7414,66 +6982,6 @@ func (s CertificateDescription) String() string {
 // GoString returns the string representation
 func (s CertificateDescription) GoString() string {
 	return s.String()
-}
-
-// SetCaCertificateId sets the CaCertificateId field's value.
-func (s *CertificateDescription) SetCaCertificateId(v string) *CertificateDescription {
-	s.CaCertificateId = &v
-	return s
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CertificateDescription) SetCertificateArn(v string) *CertificateDescription {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *CertificateDescription) SetCertificateId(v string) *CertificateDescription {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *CertificateDescription) SetCertificatePem(v string) *CertificateDescription {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *CertificateDescription) SetCreationDate(v time.Time) *CertificateDescription {
-	s.CreationDate = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *CertificateDescription) SetLastModifiedDate(v time.Time) *CertificateDescription {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetOwnedBy sets the OwnedBy field's value.
-func (s *CertificateDescription) SetOwnedBy(v string) *CertificateDescription {
-	s.OwnedBy = &v
-	return s
-}
-
-// SetPreviousOwnedBy sets the PreviousOwnedBy field's value.
-func (s *CertificateDescription) SetPreviousOwnedBy(v string) *CertificateDescription {
-	s.PreviousOwnedBy = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CertificateDescription) SetStatus(v CertificateStatus) *CertificateDescription {
-	s.Status = v
-	return s
-}
-
-// SetTransferData sets the TransferData field's value.
-func (s *CertificateDescription) SetTransferData(v *TransferData) *CertificateDescription {
-	s.TransferData = v
-	return s
 }
 
 type ClearDefaultAuthorizerInput struct {
@@ -7572,30 +7080,6 @@ func (s *CloudwatchAlarmAction) Validate() error {
 	return nil
 }
 
-// SetAlarmName sets the AlarmName field's value.
-func (s *CloudwatchAlarmAction) SetAlarmName(v string) *CloudwatchAlarmAction {
-	s.AlarmName = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CloudwatchAlarmAction) SetRoleArn(v string) *CloudwatchAlarmAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStateReason sets the StateReason field's value.
-func (s *CloudwatchAlarmAction) SetStateReason(v string) *CloudwatchAlarmAction {
-	s.StateReason = &v
-	return s
-}
-
-// SetStateValue sets the StateValue field's value.
-func (s *CloudwatchAlarmAction) SetStateValue(v string) *CloudwatchAlarmAction {
-	s.StateValue = &v
-	return s
-}
-
 // Describes an action that captures a CloudWatch metric.
 type CloudwatchMetricAction struct {
 	_ struct{} `type:"structure"`
@@ -7670,42 +7154,6 @@ func (s *CloudwatchMetricAction) Validate() error {
 	return nil
 }
 
-// SetMetricName sets the MetricName field's value.
-func (s *CloudwatchMetricAction) SetMetricName(v string) *CloudwatchMetricAction {
-	s.MetricName = &v
-	return s
-}
-
-// SetMetricNamespace sets the MetricNamespace field's value.
-func (s *CloudwatchMetricAction) SetMetricNamespace(v string) *CloudwatchMetricAction {
-	s.MetricNamespace = &v
-	return s
-}
-
-// SetMetricTimestamp sets the MetricTimestamp field's value.
-func (s *CloudwatchMetricAction) SetMetricTimestamp(v string) *CloudwatchMetricAction {
-	s.MetricTimestamp = &v
-	return s
-}
-
-// SetMetricUnit sets the MetricUnit field's value.
-func (s *CloudwatchMetricAction) SetMetricUnit(v string) *CloudwatchMetricAction {
-	s.MetricUnit = &v
-	return s
-}
-
-// SetMetricValue sets the MetricValue field's value.
-func (s *CloudwatchMetricAction) SetMetricValue(v string) *CloudwatchMetricAction {
-	s.MetricValue = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CloudwatchMetricAction) SetRoleArn(v string) *CloudwatchMetricAction {
-	s.RoleArn = &v
-	return s
-}
-
 // Describes the method to use when code signing a file.
 type CodeSigning struct {
 	_ struct{} `type:"structure"`
@@ -7740,18 +7188,6 @@ func (s *CodeSigning) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAwsSignerJobId sets the AwsSignerJobId field's value.
-func (s *CodeSigning) SetAwsSignerJobId(v string) *CodeSigning {
-	s.AwsSignerJobId = &v
-	return s
-}
-
-// SetCustomCodeSigning sets the CustomCodeSigning field's value.
-func (s *CodeSigning) SetCustomCodeSigning(v *CustomCodeSigning) *CodeSigning {
-	s.CustomCodeSigning = v
-	return s
 }
 
 // Describes the certificate chain being used when code signing a file.
@@ -7793,24 +7229,6 @@ func (s *CodeSigningCertificateChain) Validate() error {
 	return nil
 }
 
-// SetCertificateName sets the CertificateName field's value.
-func (s *CodeSigningCertificateChain) SetCertificateName(v string) *CodeSigningCertificateChain {
-	s.CertificateName = &v
-	return s
-}
-
-// SetInlineDocument sets the InlineDocument field's value.
-func (s *CodeSigningCertificateChain) SetInlineDocument(v string) *CodeSigningCertificateChain {
-	s.InlineDocument = &v
-	return s
-}
-
-// SetStream sets the Stream field's value.
-func (s *CodeSigningCertificateChain) SetStream(v *Stream) *CodeSigningCertificateChain {
-	s.Stream = v
-	return s
-}
-
 // Describes the signature for a file.
 type CodeSigningSignature struct {
 	_ struct{} `type:"structure"`
@@ -7849,18 +7267,6 @@ func (s *CodeSigningSignature) Validate() error {
 	return nil
 }
 
-// SetInlineDocument sets the InlineDocument field's value.
-func (s *CodeSigningSignature) SetInlineDocument(v []byte) *CodeSigningSignature {
-	s.InlineDocument = v
-	return s
-}
-
-// SetStream sets the Stream field's value.
-func (s *CodeSigningSignature) SetStream(v *Stream) *CodeSigningSignature {
-	s.Stream = v
-	return s
-}
-
 // Configuration.
 type Configuration struct {
 	_ struct{} `type:"structure"`
@@ -7877,12 +7283,6 @@ func (s Configuration) String() string {
 // GoString returns the string representation
 func (s Configuration) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *Configuration) SetEnabled(v bool) *Configuration {
-	s.Enabled = &v
-	return s
 }
 
 type CreateAuthorizerInput struct {
@@ -7955,36 +7355,6 @@ func (s *CreateAuthorizerInput) Validate() error {
 	return nil
 }
 
-// SetAuthorizerFunctionArn sets the AuthorizerFunctionArn field's value.
-func (s *CreateAuthorizerInput) SetAuthorizerFunctionArn(v string) *CreateAuthorizerInput {
-	s.AuthorizerFunctionArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *CreateAuthorizerInput) SetAuthorizerName(v string) *CreateAuthorizerInput {
-	s.AuthorizerName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CreateAuthorizerInput) SetStatus(v AuthorizerStatus) *CreateAuthorizerInput {
-	s.Status = v
-	return s
-}
-
-// SetTokenKeyName sets the TokenKeyName field's value.
-func (s *CreateAuthorizerInput) SetTokenKeyName(v string) *CreateAuthorizerInput {
-	s.TokenKeyName = &v
-	return s
-}
-
-// SetTokenSigningPublicKeys sets the TokenSigningPublicKeys field's value.
-func (s *CreateAuthorizerInput) SetTokenSigningPublicKeys(v map[string]string) *CreateAuthorizerInput {
-	s.TokenSigningPublicKeys = v
-	return s
-}
-
 type CreateAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8010,18 +7380,6 @@ func (s CreateAuthorizerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAuthorizerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizerArn sets the AuthorizerArn field's value.
-func (s *CreateAuthorizerOutput) SetAuthorizerArn(v string) *CreateAuthorizerOutput {
-	s.AuthorizerArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *CreateAuthorizerOutput) SetAuthorizerName(v string) *CreateAuthorizerOutput {
-	s.AuthorizerName = &v
-	return s
 }
 
 // The input for the CreateCertificateFromCsr operation.
@@ -8064,18 +7422,6 @@ func (s *CreateCertificateFromCsrInput) Validate() error {
 	return nil
 }
 
-// SetCertificateSigningRequest sets the CertificateSigningRequest field's value.
-func (s *CreateCertificateFromCsrInput) SetCertificateSigningRequest(v string) *CreateCertificateFromCsrInput {
-	s.CertificateSigningRequest = &v
-	return s
-}
-
-// SetSetAsActive sets the SetAsActive field's value.
-func (s *CreateCertificateFromCsrInput) SetSetAsActive(v bool) *CreateCertificateFromCsrInput {
-	s.SetAsActive = &v
-	return s
-}
-
 // The output from the CreateCertificateFromCsr operation.
 type CreateCertificateFromCsrOutput struct {
 	_ struct{} `type:"structure"`
@@ -8107,24 +7453,6 @@ func (s CreateCertificateFromCsrOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCertificateFromCsrOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CreateCertificateFromCsrOutput) SetCertificateArn(v string) *CreateCertificateFromCsrOutput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *CreateCertificateFromCsrOutput) SetCertificateId(v string) *CreateCertificateFromCsrOutput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *CreateCertificateFromCsrOutput) SetCertificatePem(v string) *CreateCertificateFromCsrOutput {
-	s.CertificatePem = &v
-	return s
 }
 
 type CreateJobInput struct {
@@ -8215,60 +7543,6 @@ func (s *CreateJobInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateJobInput) SetDescription(v string) *CreateJobInput {
-	s.Description = &v
-	return s
-}
-
-// SetDocument sets the Document field's value.
-func (s *CreateJobInput) SetDocument(v string) *CreateJobInput {
-	s.Document = &v
-	return s
-}
-
-// SetDocumentParameters sets the DocumentParameters field's value.
-func (s *CreateJobInput) SetDocumentParameters(v map[string]string) *CreateJobInput {
-	s.DocumentParameters = v
-	return s
-}
-
-// SetDocumentSource sets the DocumentSource field's value.
-func (s *CreateJobInput) SetDocumentSource(v string) *CreateJobInput {
-	s.DocumentSource = &v
-	return s
-}
-
-// SetJobExecutionsRolloutConfig sets the JobExecutionsRolloutConfig field's value.
-func (s *CreateJobInput) SetJobExecutionsRolloutConfig(v *JobExecutionsRolloutConfig) *CreateJobInput {
-	s.JobExecutionsRolloutConfig = v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *CreateJobInput) SetJobId(v string) *CreateJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetPresignedUrlConfig sets the PresignedUrlConfig field's value.
-func (s *CreateJobInput) SetPresignedUrlConfig(v *PresignedUrlConfig) *CreateJobInput {
-	s.PresignedUrlConfig = v
-	return s
-}
-
-// SetTargetSelection sets the TargetSelection field's value.
-func (s *CreateJobInput) SetTargetSelection(v TargetSelection) *CreateJobInput {
-	s.TargetSelection = v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *CreateJobInput) SetTargets(v []string) *CreateJobInput {
-	s.Targets = v
-	return s
-}
-
 type CreateJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8299,24 +7573,6 @@ func (s CreateJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateJobOutput) SetDescription(v string) *CreateJobOutput {
-	s.Description = &v
-	return s
-}
-
-// SetJobArn sets the JobArn field's value.
-func (s *CreateJobOutput) SetJobArn(v string) *CreateJobOutput {
-	s.JobArn = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *CreateJobOutput) SetJobId(v string) *CreateJobOutput {
-	s.JobId = &v
-	return s
-}
-
 // The input for the CreateKeysAndCertificate operation.
 type CreateKeysAndCertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -8333,12 +7589,6 @@ func (s CreateKeysAndCertificateInput) String() string {
 // GoString returns the string representation
 func (s CreateKeysAndCertificateInput) GoString() string {
 	return s.String()
-}
-
-// SetSetAsActive sets the SetAsActive field's value.
-func (s *CreateKeysAndCertificateInput) SetSetAsActive(v bool) *CreateKeysAndCertificateInput {
-	s.SetAsActive = &v
-	return s
 }
 
 // The output of the CreateKeysAndCertificate operation.
@@ -8374,30 +7624,6 @@ func (s CreateKeysAndCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateKeysAndCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CreateKeysAndCertificateOutput) SetCertificateArn(v string) *CreateKeysAndCertificateOutput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *CreateKeysAndCertificateOutput) SetCertificateId(v string) *CreateKeysAndCertificateOutput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *CreateKeysAndCertificateOutput) SetCertificatePem(v string) *CreateKeysAndCertificateOutput {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetKeyPair sets the KeyPair field's value.
-func (s *CreateKeysAndCertificateOutput) SetKeyPair(v *KeyPair) *CreateKeysAndCertificateOutput {
-	s.KeyPair = v
-	return s
 }
 
 type CreateOTAUpdateInput struct {
@@ -8493,48 +7719,6 @@ func (s *CreateOTAUpdateInput) Validate() error {
 	return nil
 }
 
-// SetAdditionalParameters sets the AdditionalParameters field's value.
-func (s *CreateOTAUpdateInput) SetAdditionalParameters(v map[string]string) *CreateOTAUpdateInput {
-	s.AdditionalParameters = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateOTAUpdateInput) SetDescription(v string) *CreateOTAUpdateInput {
-	s.Description = &v
-	return s
-}
-
-// SetFiles sets the Files field's value.
-func (s *CreateOTAUpdateInput) SetFiles(v []OTAUpdateFile) *CreateOTAUpdateInput {
-	s.Files = v
-	return s
-}
-
-// SetOtaUpdateId sets the OtaUpdateId field's value.
-func (s *CreateOTAUpdateInput) SetOtaUpdateId(v string) *CreateOTAUpdateInput {
-	s.OtaUpdateId = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateOTAUpdateInput) SetRoleArn(v string) *CreateOTAUpdateInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetTargetSelection sets the TargetSelection field's value.
-func (s *CreateOTAUpdateInput) SetTargetSelection(v TargetSelection) *CreateOTAUpdateInput {
-	s.TargetSelection = v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *CreateOTAUpdateInput) SetTargets(v []string) *CreateOTAUpdateInput {
-	s.Targets = v
-	return s
-}
-
 type CreateOTAUpdateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8569,36 +7753,6 @@ func (s CreateOTAUpdateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateOTAUpdateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAwsIotJobArn sets the AwsIotJobArn field's value.
-func (s *CreateOTAUpdateOutput) SetAwsIotJobArn(v string) *CreateOTAUpdateOutput {
-	s.AwsIotJobArn = &v
-	return s
-}
-
-// SetAwsIotJobId sets the AwsIotJobId field's value.
-func (s *CreateOTAUpdateOutput) SetAwsIotJobId(v string) *CreateOTAUpdateOutput {
-	s.AwsIotJobId = &v
-	return s
-}
-
-// SetOtaUpdateArn sets the OtaUpdateArn field's value.
-func (s *CreateOTAUpdateOutput) SetOtaUpdateArn(v string) *CreateOTAUpdateOutput {
-	s.OtaUpdateArn = &v
-	return s
-}
-
-// SetOtaUpdateId sets the OtaUpdateId field's value.
-func (s *CreateOTAUpdateOutput) SetOtaUpdateId(v string) *CreateOTAUpdateOutput {
-	s.OtaUpdateId = &v
-	return s
-}
-
-// SetOtaUpdateStatus sets the OtaUpdateStatus field's value.
-func (s *CreateOTAUpdateOutput) SetOtaUpdateStatus(v OTAUpdateStatus) *CreateOTAUpdateOutput {
-	s.OtaUpdateStatus = v
-	return s
 }
 
 // The input for the CreatePolicy operation.
@@ -8648,18 +7802,6 @@ func (s *CreatePolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreatePolicyInput) SetPolicyDocument(v string) *CreatePolicyInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *CreatePolicyInput) SetPolicyName(v string) *CreatePolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // The output from the CreatePolicy operation.
 type CreatePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -8692,30 +7834,6 @@ func (s CreatePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *CreatePolicyOutput) SetPolicyArn(v string) *CreatePolicyOutput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreatePolicyOutput) SetPolicyDocument(v string) *CreatePolicyOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *CreatePolicyOutput) SetPolicyName(v string) *CreatePolicyOutput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyVersionId sets the PolicyVersionId field's value.
-func (s *CreatePolicyOutput) SetPolicyVersionId(v string) *CreatePolicyOutput {
-	s.PolicyVersionId = &v
-	return s
 }
 
 // The input for the CreatePolicyVersion operation.
@@ -8770,24 +7888,6 @@ func (s *CreatePolicyVersionInput) Validate() error {
 	return nil
 }
 
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreatePolicyVersionInput) SetPolicyDocument(v string) *CreatePolicyVersionInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *CreatePolicyVersionInput) SetPolicyName(v string) *CreatePolicyVersionInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetSetAsDefault sets the SetAsDefault field's value.
-func (s *CreatePolicyVersionInput) SetSetAsDefault(v bool) *CreatePolicyVersionInput {
-	s.SetAsDefault = &v
-	return s
-}
-
 // The output of the CreatePolicyVersion operation.
 type CreatePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -8820,30 +7920,6 @@ func (s CreatePolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsDefaultVersion sets the IsDefaultVersion field's value.
-func (s *CreatePolicyVersionOutput) SetIsDefaultVersion(v bool) *CreatePolicyVersionOutput {
-	s.IsDefaultVersion = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *CreatePolicyVersionOutput) SetPolicyArn(v string) *CreatePolicyVersionOutput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreatePolicyVersionOutput) SetPolicyDocument(v string) *CreatePolicyVersionOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyVersionId sets the PolicyVersionId field's value.
-func (s *CreatePolicyVersionOutput) SetPolicyVersionId(v string) *CreatePolicyVersionOutput {
-	s.PolicyVersionId = &v
-	return s
 }
 
 type CreateRoleAliasInput struct {
@@ -8901,24 +7977,6 @@ func (s *CreateRoleAliasInput) Validate() error {
 	return nil
 }
 
-// SetCredentialDurationSeconds sets the CredentialDurationSeconds field's value.
-func (s *CreateRoleAliasInput) SetCredentialDurationSeconds(v int64) *CreateRoleAliasInput {
-	s.CredentialDurationSeconds = &v
-	return s
-}
-
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *CreateRoleAliasInput) SetRoleAlias(v string) *CreateRoleAliasInput {
-	s.RoleAlias = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateRoleAliasInput) SetRoleArn(v string) *CreateRoleAliasInput {
-	s.RoleArn = &v
-	return s
-}
-
 type CreateRoleAliasOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8944,18 +8002,6 @@ func (s CreateRoleAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRoleAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *CreateRoleAliasOutput) SetRoleAlias(v string) *CreateRoleAliasOutput {
-	s.RoleAlias = &v
-	return s
-}
-
-// SetRoleAliasArn sets the RoleAliasArn field's value.
-func (s *CreateRoleAliasOutput) SetRoleAliasArn(v string) *CreateRoleAliasOutput {
-	s.RoleAliasArn = &v
-	return s
 }
 
 type CreateStreamInput struct {
@@ -9029,30 +8075,6 @@ func (s *CreateStreamInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateStreamInput) SetDescription(v string) *CreateStreamInput {
-	s.Description = &v
-	return s
-}
-
-// SetFiles sets the Files field's value.
-func (s *CreateStreamInput) SetFiles(v []StreamFile) *CreateStreamInput {
-	s.Files = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateStreamInput) SetRoleArn(v string) *CreateStreamInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *CreateStreamInput) SetStreamId(v string) *CreateStreamInput {
-	s.StreamId = &v
-	return s
-}
-
 type CreateStreamOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9084,30 +8106,6 @@ func (s CreateStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateStreamOutput) SetDescription(v string) *CreateStreamOutput {
-	s.Description = &v
-	return s
-}
-
-// SetStreamArn sets the StreamArn field's value.
-func (s *CreateStreamOutput) SetStreamArn(v string) *CreateStreamOutput {
-	s.StreamArn = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *CreateStreamOutput) SetStreamId(v string) *CreateStreamOutput {
-	s.StreamId = &v
-	return s
-}
-
-// SetStreamVersion sets the StreamVersion field's value.
-func (s *CreateStreamOutput) SetStreamVersion(v int64) *CreateStreamOutput {
-	s.StreamVersion = &v
-	return s
 }
 
 type CreateThingGroupInput struct {
@@ -9155,24 +8153,6 @@ func (s *CreateThingGroupInput) Validate() error {
 	return nil
 }
 
-// SetParentGroupName sets the ParentGroupName field's value.
-func (s *CreateThingGroupInput) SetParentGroupName(v string) *CreateThingGroupInput {
-	s.ParentGroupName = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *CreateThingGroupInput) SetThingGroupName(v string) *CreateThingGroupInput {
-	s.ThingGroupName = &v
-	return s
-}
-
-// SetThingGroupProperties sets the ThingGroupProperties field's value.
-func (s *CreateThingGroupInput) SetThingGroupProperties(v *ThingGroupProperties) *CreateThingGroupInput {
-	s.ThingGroupProperties = v
-	return s
-}
-
 type CreateThingGroupOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9201,24 +8181,6 @@ func (s CreateThingGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateThingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetThingGroupArn sets the ThingGroupArn field's value.
-func (s *CreateThingGroupOutput) SetThingGroupArn(v string) *CreateThingGroupOutput {
-	s.ThingGroupArn = &v
-	return s
-}
-
-// SetThingGroupId sets the ThingGroupId field's value.
-func (s *CreateThingGroupOutput) SetThingGroupId(v string) *CreateThingGroupOutput {
-	s.ThingGroupId = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *CreateThingGroupOutput) SetThingGroupName(v string) *CreateThingGroupOutput {
-	s.ThingGroupName = &v
-	return s
 }
 
 // The input for the CreateThing operation.
@@ -9270,24 +8232,6 @@ func (s *CreateThingInput) Validate() error {
 	return nil
 }
 
-// SetAttributePayload sets the AttributePayload field's value.
-func (s *CreateThingInput) SetAttributePayload(v *AttributePayload) *CreateThingInput {
-	s.AttributePayload = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *CreateThingInput) SetThingName(v string) *CreateThingInput {
-	s.ThingName = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *CreateThingInput) SetThingTypeName(v string) *CreateThingInput {
-	s.ThingTypeName = &v
-	return s
-}
-
 // The output of the CreateThing operation.
 type CreateThingOutput struct {
 	_ struct{} `type:"structure"`
@@ -9317,24 +8261,6 @@ func (s CreateThingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateThingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *CreateThingOutput) SetThingArn(v string) *CreateThingOutput {
-	s.ThingArn = &v
-	return s
-}
-
-// SetThingId sets the ThingId field's value.
-func (s *CreateThingOutput) SetThingId(v string) *CreateThingOutput {
-	s.ThingId = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *CreateThingOutput) SetThingName(v string) *CreateThingOutput {
-	s.ThingName = &v
-	return s
 }
 
 // The input for the CreateThingType operation.
@@ -9379,18 +8305,6 @@ func (s *CreateThingTypeInput) Validate() error {
 	return nil
 }
 
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *CreateThingTypeInput) SetThingTypeName(v string) *CreateThingTypeInput {
-	s.ThingTypeName = &v
-	return s
-}
-
-// SetThingTypeProperties sets the ThingTypeProperties field's value.
-func (s *CreateThingTypeInput) SetThingTypeProperties(v *ThingTypeProperties) *CreateThingTypeInput {
-	s.ThingTypeProperties = v
-	return s
-}
-
 // The output of the CreateThingType operation.
 type CreateThingTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -9420,24 +8334,6 @@ func (s CreateThingTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateThingTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetThingTypeArn sets the ThingTypeArn field's value.
-func (s *CreateThingTypeOutput) SetThingTypeArn(v string) *CreateThingTypeOutput {
-	s.ThingTypeArn = &v
-	return s
-}
-
-// SetThingTypeId sets the ThingTypeId field's value.
-func (s *CreateThingTypeOutput) SetThingTypeId(v string) *CreateThingTypeOutput {
-	s.ThingTypeId = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *CreateThingTypeOutput) SetThingTypeName(v string) *CreateThingTypeOutput {
-	s.ThingTypeName = &v
-	return s
 }
 
 // The input for the CreateTopicRule operation.
@@ -9489,18 +8385,6 @@ func (s *CreateTopicRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *CreateTopicRuleInput) SetRuleName(v string) *CreateTopicRuleInput {
-	s.RuleName = &v
-	return s
-}
-
-// SetTopicRulePayload sets the TopicRulePayload field's value.
-func (s *CreateTopicRuleInput) SetTopicRulePayload(v *TopicRulePayload) *CreateTopicRuleInput {
-	s.TopicRulePayload = v
-	return s
 }
 
 type CreateTopicRuleOutput struct {
@@ -9571,30 +8455,6 @@ func (s *CustomCodeSigning) Validate() error {
 	return nil
 }
 
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *CustomCodeSigning) SetCertificateChain(v *CodeSigningCertificateChain) *CustomCodeSigning {
-	s.CertificateChain = v
-	return s
-}
-
-// SetHashAlgorithm sets the HashAlgorithm field's value.
-func (s *CustomCodeSigning) SetHashAlgorithm(v string) *CustomCodeSigning {
-	s.HashAlgorithm = &v
-	return s
-}
-
-// SetSignature sets the Signature field's value.
-func (s *CustomCodeSigning) SetSignature(v *CodeSigningSignature) *CustomCodeSigning {
-	s.Signature = v
-	return s
-}
-
-// SetSignatureAlgorithm sets the SignatureAlgorithm field's value.
-func (s *CustomCodeSigning) SetSignatureAlgorithm(v string) *CustomCodeSigning {
-	s.SignatureAlgorithm = &v
-	return s
-}
-
 type DeleteAuthorizerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9629,12 +8489,6 @@ func (s *DeleteAuthorizerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *DeleteAuthorizerInput) SetAuthorizerName(v string) *DeleteAuthorizerInput {
-	s.AuthorizerName = &v
-	return s
 }
 
 type DeleteAuthorizerOutput struct {
@@ -9693,12 +8547,6 @@ func (s *DeleteCACertificateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *DeleteCACertificateInput) SetCertificateId(v string) *DeleteCACertificateInput {
-	s.CertificateId = &v
-	return s
 }
 
 // The output for the DeleteCACertificate operation.
@@ -9763,18 +8611,6 @@ func (s *DeleteCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *DeleteCertificateInput) SetCertificateId(v string) *DeleteCertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetForceDelete sets the ForceDelete field's value.
-func (s *DeleteCertificateInput) SetForceDelete(v bool) *DeleteCertificateInput {
-	s.ForceDelete = &v
-	return s
-}
-
 type DeleteCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9830,12 +8666,6 @@ func (s *DeleteOTAUpdateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOtaUpdateId sets the OtaUpdateId field's value.
-func (s *DeleteOTAUpdateInput) SetOtaUpdateId(v string) *DeleteOTAUpdateInput {
-	s.OtaUpdateId = &v
-	return s
 }
 
 type DeleteOTAUpdateOutput struct {
@@ -9894,12 +8724,6 @@ func (s *DeletePolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeletePolicyInput) SetPolicyName(v string) *DeletePolicyInput {
-	s.PolicyName = &v
-	return s
 }
 
 type DeletePolicyOutput struct {
@@ -9967,18 +8791,6 @@ func (s *DeletePolicyVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeletePolicyVersionInput) SetPolicyName(v string) *DeletePolicyVersionInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyVersionId sets the PolicyVersionId field's value.
-func (s *DeletePolicyVersionInput) SetPolicyVersionId(v string) *DeletePolicyVersionInput {
-	s.PolicyVersionId = &v
-	return s
 }
 
 type DeletePolicyVersionOutput struct {
@@ -10075,12 +8887,6 @@ func (s *DeleteRoleAliasInput) Validate() error {
 	return nil
 }
 
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *DeleteRoleAliasInput) SetRoleAlias(v string) *DeleteRoleAliasInput {
-	s.RoleAlias = &v
-	return s
-}
-
 type DeleteRoleAliasOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10136,12 +8942,6 @@ func (s *DeleteStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *DeleteStreamInput) SetStreamId(v string) *DeleteStreamInput {
-	s.StreamId = &v
-	return s
 }
 
 type DeleteStreamOutput struct {
@@ -10202,18 +9002,6 @@ func (s *DeleteThingGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetExpectedVersion sets the ExpectedVersion field's value.
-func (s *DeleteThingGroupInput) SetExpectedVersion(v int64) *DeleteThingGroupInput {
-	s.ExpectedVersion = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *DeleteThingGroupInput) SetThingGroupName(v string) *DeleteThingGroupInput {
-	s.ThingGroupName = &v
-	return s
 }
 
 type DeleteThingGroupOutput struct {
@@ -10279,18 +9067,6 @@ func (s *DeleteThingInput) Validate() error {
 	return nil
 }
 
-// SetExpectedVersion sets the ExpectedVersion field's value.
-func (s *DeleteThingInput) SetExpectedVersion(v int64) *DeleteThingInput {
-	s.ExpectedVersion = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *DeleteThingInput) SetThingName(v string) *DeleteThingInput {
-	s.ThingName = &v
-	return s
-}
-
 // The output of the DeleteThing operation.
 type DeleteThingOutput struct {
 	_ struct{} `type:"structure"`
@@ -10350,12 +9126,6 @@ func (s *DeleteThingTypeInput) Validate() error {
 	return nil
 }
 
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *DeleteThingTypeInput) SetThingTypeName(v string) *DeleteThingTypeInput {
-	s.ThingTypeName = &v
-	return s
-}
-
 // The output for the DeleteThingType operation.
 type DeleteThingTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -10413,12 +9183,6 @@ func (s *DeleteTopicRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *DeleteTopicRuleInput) SetRuleName(v string) *DeleteTopicRuleInput {
-	s.RuleName = &v
-	return s
 }
 
 type DeleteTopicRuleOutput struct {
@@ -10483,18 +9247,6 @@ func (s *DeleteV2LoggingLevelInput) Validate() error {
 	return nil
 }
 
-// SetTargetName sets the TargetName field's value.
-func (s *DeleteV2LoggingLevelInput) SetTargetName(v string) *DeleteV2LoggingLevelInput {
-	s.TargetName = &v
-	return s
-}
-
-// SetTargetType sets the TargetType field's value.
-func (s *DeleteV2LoggingLevelInput) SetTargetType(v LogTargetType) *DeleteV2LoggingLevelInput {
-	s.TargetType = v
-	return s
-}
-
 type DeleteV2LoggingLevelOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10539,18 +9291,6 @@ func (s Denied) GoString() string {
 	return s.String()
 }
 
-// SetExplicitDeny sets the ExplicitDeny field's value.
-func (s *Denied) SetExplicitDeny(v *ExplicitDeny) *Denied {
-	s.ExplicitDeny = v
-	return s
-}
-
-// SetImplicitDeny sets the ImplicitDeny field's value.
-func (s *Denied) SetImplicitDeny(v *ImplicitDeny) *Denied {
-	s.ImplicitDeny = v
-	return s
-}
-
 // The input for the DeprecateThingType operation.
 type DeprecateThingTypeInput struct {
 	_ struct{} `type:"structure"`
@@ -10590,18 +9330,6 @@ func (s *DeprecateThingTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *DeprecateThingTypeInput) SetThingTypeName(v string) *DeprecateThingTypeInput {
-	s.ThingTypeName = &v
-	return s
-}
-
-// SetUndoDeprecate sets the UndoDeprecate field's value.
-func (s *DeprecateThingTypeInput) SetUndoDeprecate(v bool) *DeprecateThingTypeInput {
-	s.UndoDeprecate = &v
-	return s
 }
 
 // The output for the DeprecateThingType operation.
@@ -10662,12 +9390,6 @@ func (s *DescribeAuthorizerInput) Validate() error {
 	return nil
 }
 
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *DescribeAuthorizerInput) SetAuthorizerName(v string) *DescribeAuthorizerInput {
-	s.AuthorizerName = &v
-	return s
-}
-
 type DescribeAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10690,12 +9412,6 @@ func (s DescribeAuthorizerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAuthorizerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizerDescription sets the AuthorizerDescription field's value.
-func (s *DescribeAuthorizerOutput) SetAuthorizerDescription(v *AuthorizerDescription) *DescribeAuthorizerOutput {
-	s.AuthorizerDescription = v
-	return s
 }
 
 // The input for the DescribeCACertificate operation.
@@ -10735,12 +9451,6 @@ func (s *DescribeCACertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *DescribeCACertificateInput) SetCertificateId(v string) *DescribeCACertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
 // The output from the DescribeCACertificate operation.
 type DescribeCACertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -10767,18 +9477,6 @@ func (s DescribeCACertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCACertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateDescription sets the CertificateDescription field's value.
-func (s *DescribeCACertificateOutput) SetCertificateDescription(v *CACertificateDescription) *DescribeCACertificateOutput {
-	s.CertificateDescription = v
-	return s
-}
-
-// SetRegistrationConfig sets the RegistrationConfig field's value.
-func (s *DescribeCACertificateOutput) SetRegistrationConfig(v *RegistrationConfig) *DescribeCACertificateOutput {
-	s.RegistrationConfig = v
-	return s
 }
 
 // The input for the DescribeCertificate operation.
@@ -10818,12 +9516,6 @@ func (s *DescribeCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *DescribeCertificateInput) SetCertificateId(v string) *DescribeCertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
 // The output of the DescribeCertificate operation.
 type DescribeCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -10847,12 +9539,6 @@ func (s DescribeCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateDescription sets the CertificateDescription field's value.
-func (s *DescribeCertificateOutput) SetCertificateDescription(v *CertificateDescription) *DescribeCertificateOutput {
-	s.CertificateDescription = v
-	return s
 }
 
 type DescribeDefaultAuthorizerInput struct {
@@ -10893,12 +9579,6 @@ func (s DescribeDefaultAuthorizerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAuthorizerDescription sets the AuthorizerDescription field's value.
-func (s *DescribeDefaultAuthorizerOutput) SetAuthorizerDescription(v *AuthorizerDescription) *DescribeDefaultAuthorizerOutput {
-	s.AuthorizerDescription = v
-	return s
-}
-
 // The input for the DescribeEndpoint operation.
 type DescribeEndpointInput struct {
 	_ struct{} `type:"structure"`
@@ -10915,12 +9595,6 @@ func (s DescribeEndpointInput) String() string {
 // GoString returns the string representation
 func (s DescribeEndpointInput) GoString() string {
 	return s.String()
-}
-
-// SetEndpointType sets the EndpointType field's value.
-func (s *DescribeEndpointInput) SetEndpointType(v string) *DescribeEndpointInput {
-	s.EndpointType = &v
-	return s
 }
 
 // The output from the DescribeEndpoint operation.
@@ -10946,12 +9620,6 @@ func (s DescribeEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointAddress sets the EndpointAddress field's value.
-func (s *DescribeEndpointOutput) SetEndpointAddress(v string) *DescribeEndpointOutput {
-	s.EndpointAddress = &v
-	return s
 }
 
 type DescribeEventConfigurationsInput struct {
@@ -10998,24 +9666,6 @@ func (s DescribeEventConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *DescribeEventConfigurationsOutput) SetCreationDate(v time.Time) *DescribeEventConfigurationsOutput {
-	s.CreationDate = &v
-	return s
-}
-
-// SetEventConfigurations sets the EventConfigurations field's value.
-func (s *DescribeEventConfigurationsOutput) SetEventConfigurations(v map[string]Configuration) *DescribeEventConfigurationsOutput {
-	s.EventConfigurations = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *DescribeEventConfigurationsOutput) SetLastModifiedDate(v time.Time) *DescribeEventConfigurationsOutput {
-	s.LastModifiedDate = &v
-	return s
-}
-
 type DescribeIndexInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11052,12 +9702,6 @@ func (s *DescribeIndexInput) Validate() error {
 	return nil
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *DescribeIndexInput) SetIndexName(v string) *DescribeIndexInput {
-	s.IndexName = &v
-	return s
-}
-
 type DescribeIndexOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11091,24 +9735,6 @@ func (s DescribeIndexOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeIndexOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *DescribeIndexOutput) SetIndexName(v string) *DescribeIndexOutput {
-	s.IndexName = &v
-	return s
-}
-
-// SetIndexStatus sets the IndexStatus field's value.
-func (s *DescribeIndexOutput) SetIndexStatus(v IndexStatus) *DescribeIndexOutput {
-	s.IndexStatus = v
-	return s
-}
-
-// SetSchema sets the Schema field's value.
-func (s *DescribeIndexOutput) SetSchema(v string) *DescribeIndexOutput {
-	s.Schema = &v
-	return s
 }
 
 type DescribeJobExecutionInput struct {
@@ -11163,24 +9789,6 @@ func (s *DescribeJobExecutionInput) Validate() error {
 	return nil
 }
 
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *DescribeJobExecutionInput) SetExecutionNumber(v int64) *DescribeJobExecutionInput {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *DescribeJobExecutionInput) SetJobId(v string) *DescribeJobExecutionInput {
-	s.JobId = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *DescribeJobExecutionInput) SetThingName(v string) *DescribeJobExecutionInput {
-	s.ThingName = &v
-	return s
-}
-
 type DescribeJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11203,12 +9811,6 @@ func (s DescribeJobExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecution sets the Execution field's value.
-func (s *DescribeJobExecutionOutput) SetExecution(v *JobExecution) *DescribeJobExecutionOutput {
-	s.Execution = v
-	return s
 }
 
 type DescribeJobInput struct {
@@ -11247,12 +9849,6 @@ func (s *DescribeJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *DescribeJobInput) SetJobId(v string) *DescribeJobInput {
-	s.JobId = &v
-	return s
-}
-
 type DescribeJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11278,18 +9874,6 @@ func (s DescribeJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDocumentSource sets the DocumentSource field's value.
-func (s *DescribeJobOutput) SetDocumentSource(v string) *DescribeJobOutput {
-	s.DocumentSource = &v
-	return s
-}
-
-// SetJob sets the Job field's value.
-func (s *DescribeJobOutput) SetJob(v *Job) *DescribeJobOutput {
-	s.Job = v
-	return s
 }
 
 type DescribeRoleAliasInput struct {
@@ -11328,12 +9912,6 @@ func (s *DescribeRoleAliasInput) Validate() error {
 	return nil
 }
 
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *DescribeRoleAliasInput) SetRoleAlias(v string) *DescribeRoleAliasInput {
-	s.RoleAlias = &v
-	return s
-}
-
 type DescribeRoleAliasOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11356,12 +9934,6 @@ func (s DescribeRoleAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRoleAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRoleAliasDescription sets the RoleAliasDescription field's value.
-func (s *DescribeRoleAliasOutput) SetRoleAliasDescription(v *RoleAliasDescription) *DescribeRoleAliasOutput {
-	s.RoleAliasDescription = v
-	return s
 }
 
 type DescribeStreamInput struct {
@@ -11400,12 +9972,6 @@ func (s *DescribeStreamInput) Validate() error {
 	return nil
 }
 
-// SetStreamId sets the StreamId field's value.
-func (s *DescribeStreamInput) SetStreamId(v string) *DescribeStreamInput {
-	s.StreamId = &v
-	return s
-}
-
 type DescribeStreamOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11428,12 +9994,6 @@ func (s DescribeStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStreamInfo sets the StreamInfo field's value.
-func (s *DescribeStreamOutput) SetStreamInfo(v *StreamInfo) *DescribeStreamOutput {
-	s.StreamInfo = v
-	return s
 }
 
 type DescribeThingGroupInput struct {
@@ -11470,12 +10030,6 @@ func (s *DescribeThingGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *DescribeThingGroupInput) SetThingGroupName(v string) *DescribeThingGroupInput {
-	s.ThingGroupName = &v
-	return s
 }
 
 type DescribeThingGroupOutput struct {
@@ -11517,42 +10071,6 @@ func (s DescribeThingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetThingGroupArn sets the ThingGroupArn field's value.
-func (s *DescribeThingGroupOutput) SetThingGroupArn(v string) *DescribeThingGroupOutput {
-	s.ThingGroupArn = &v
-	return s
-}
-
-// SetThingGroupId sets the ThingGroupId field's value.
-func (s *DescribeThingGroupOutput) SetThingGroupId(v string) *DescribeThingGroupOutput {
-	s.ThingGroupId = &v
-	return s
-}
-
-// SetThingGroupMetadata sets the ThingGroupMetadata field's value.
-func (s *DescribeThingGroupOutput) SetThingGroupMetadata(v *ThingGroupMetadata) *DescribeThingGroupOutput {
-	s.ThingGroupMetadata = v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *DescribeThingGroupOutput) SetThingGroupName(v string) *DescribeThingGroupOutput {
-	s.ThingGroupName = &v
-	return s
-}
-
-// SetThingGroupProperties sets the ThingGroupProperties field's value.
-func (s *DescribeThingGroupOutput) SetThingGroupProperties(v *ThingGroupProperties) *DescribeThingGroupOutput {
-	s.ThingGroupProperties = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DescribeThingGroupOutput) SetVersion(v int64) *DescribeThingGroupOutput {
-	s.Version = &v
-	return s
-}
-
 // The input for the DescribeThing operation.
 type DescribeThingInput struct {
 	_ struct{} `type:"structure"`
@@ -11588,12 +10106,6 @@ func (s *DescribeThingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *DescribeThingInput) SetThingName(v string) *DescribeThingInput {
-	s.ThingName = &v
-	return s
 }
 
 // The output from the DescribeThing operation.
@@ -11643,48 +10155,6 @@ func (s DescribeThingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *DescribeThingOutput) SetAttributes(v map[string]string) *DescribeThingOutput {
-	s.Attributes = v
-	return s
-}
-
-// SetDefaultClientId sets the DefaultClientId field's value.
-func (s *DescribeThingOutput) SetDefaultClientId(v string) *DescribeThingOutput {
-	s.DefaultClientId = &v
-	return s
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *DescribeThingOutput) SetThingArn(v string) *DescribeThingOutput {
-	s.ThingArn = &v
-	return s
-}
-
-// SetThingId sets the ThingId field's value.
-func (s *DescribeThingOutput) SetThingId(v string) *DescribeThingOutput {
-	s.ThingId = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *DescribeThingOutput) SetThingName(v string) *DescribeThingOutput {
-	s.ThingName = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *DescribeThingOutput) SetThingTypeName(v string) *DescribeThingOutput {
-	s.ThingTypeName = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DescribeThingOutput) SetVersion(v int64) *DescribeThingOutput {
-	s.Version = &v
-	return s
-}
-
 type DescribeThingRegistrationTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11716,12 +10186,6 @@ func (s *DescribeThingRegistrationTaskInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTaskId sets the TaskId field's value.
-func (s *DescribeThingRegistrationTaskInput) SetTaskId(v string) *DescribeThingRegistrationTaskInput {
-	s.TaskId = &v
-	return s
 }
 
 type DescribeThingRegistrationTaskOutput struct {
@@ -11781,78 +10245,6 @@ func (s DescribeThingRegistrationTaskOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetCreationDate(v time.Time) *DescribeThingRegistrationTaskOutput {
-	s.CreationDate = &v
-	return s
-}
-
-// SetFailureCount sets the FailureCount field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetFailureCount(v int64) *DescribeThingRegistrationTaskOutput {
-	s.FailureCount = &v
-	return s
-}
-
-// SetInputFileBucket sets the InputFileBucket field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetInputFileBucket(v string) *DescribeThingRegistrationTaskOutput {
-	s.InputFileBucket = &v
-	return s
-}
-
-// SetInputFileKey sets the InputFileKey field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetInputFileKey(v string) *DescribeThingRegistrationTaskOutput {
-	s.InputFileKey = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetLastModifiedDate(v time.Time) *DescribeThingRegistrationTaskOutput {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetMessage(v string) *DescribeThingRegistrationTaskOutput {
-	s.Message = &v
-	return s
-}
-
-// SetPercentageProgress sets the PercentageProgress field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetPercentageProgress(v int64) *DescribeThingRegistrationTaskOutput {
-	s.PercentageProgress = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetRoleArn(v string) *DescribeThingRegistrationTaskOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetStatus(v Status) *DescribeThingRegistrationTaskOutput {
-	s.Status = v
-	return s
-}
-
-// SetSuccessCount sets the SuccessCount field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetSuccessCount(v int64) *DescribeThingRegistrationTaskOutput {
-	s.SuccessCount = &v
-	return s
-}
-
-// SetTaskId sets the TaskId field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetTaskId(v string) *DescribeThingRegistrationTaskOutput {
-	s.TaskId = &v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *DescribeThingRegistrationTaskOutput) SetTemplateBody(v string) *DescribeThingRegistrationTaskOutput {
-	s.TemplateBody = &v
-	return s
-}
-
 // The input for the DescribeThingType operation.
 type DescribeThingTypeInput struct {
 	_ struct{} `type:"structure"`
@@ -11888,12 +10280,6 @@ func (s *DescribeThingTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *DescribeThingTypeInput) SetThingTypeName(v string) *DescribeThingTypeInput {
-	s.ThingTypeName = &v
-	return s
 }
 
 // The output for the DescribeThingType operation.
@@ -11934,36 +10320,6 @@ func (s DescribeThingTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeThingTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetThingTypeArn sets the ThingTypeArn field's value.
-func (s *DescribeThingTypeOutput) SetThingTypeArn(v string) *DescribeThingTypeOutput {
-	s.ThingTypeArn = &v
-	return s
-}
-
-// SetThingTypeId sets the ThingTypeId field's value.
-func (s *DescribeThingTypeOutput) SetThingTypeId(v string) *DescribeThingTypeOutput {
-	s.ThingTypeId = &v
-	return s
-}
-
-// SetThingTypeMetadata sets the ThingTypeMetadata field's value.
-func (s *DescribeThingTypeOutput) SetThingTypeMetadata(v *ThingTypeMetadata) *DescribeThingTypeOutput {
-	s.ThingTypeMetadata = v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *DescribeThingTypeOutput) SetThingTypeName(v string) *DescribeThingTypeOutput {
-	s.ThingTypeName = &v
-	return s
-}
-
-// SetThingTypeProperties sets the ThingTypeProperties field's value.
-func (s *DescribeThingTypeOutput) SetThingTypeProperties(v *ThingTypeProperties) *DescribeThingTypeOutput {
-	s.ThingTypeProperties = v
-	return s
 }
 
 type DetachPolicyInput struct {
@@ -12009,18 +10365,6 @@ func (s *DetachPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *DetachPolicyInput) SetPolicyName(v string) *DetachPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetTarget sets the Target field's value.
-func (s *DetachPolicyInput) SetTarget(v string) *DetachPolicyInput {
-	s.Target = &v
-	return s
 }
 
 type DetachPolicyOutput struct {
@@ -12093,18 +10437,6 @@ func (s *DetachPrincipalPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *DetachPrincipalPolicyInput) SetPolicyName(v string) *DetachPrincipalPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *DetachPrincipalPolicyInput) SetPrincipal(v string) *DetachPrincipalPolicyInput {
-	s.Principal = &v
-	return s
-}
-
 type DetachPrincipalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12174,18 +10506,6 @@ func (s *DetachThingPrincipalInput) Validate() error {
 	return nil
 }
 
-// SetPrincipal sets the Principal field's value.
-func (s *DetachThingPrincipalInput) SetPrincipal(v string) *DetachThingPrincipalInput {
-	s.Principal = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *DetachThingPrincipalInput) SetThingName(v string) *DetachThingPrincipalInput {
-	s.ThingName = &v
-	return s
-}
-
 // The output from the DetachThingPrincipal operation.
 type DetachThingPrincipalOutput struct {
 	_ struct{} `type:"structure"`
@@ -12243,12 +10563,6 @@ func (s *DisableTopicRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *DisableTopicRuleInput) SetRuleName(v string) *DisableTopicRuleInput {
-	s.RuleName = &v
-	return s
 }
 
 type DisableTopicRuleOutput struct {
@@ -12369,66 +10683,6 @@ func (s *DynamoDBAction) Validate() error {
 	return nil
 }
 
-// SetHashKeyField sets the HashKeyField field's value.
-func (s *DynamoDBAction) SetHashKeyField(v string) *DynamoDBAction {
-	s.HashKeyField = &v
-	return s
-}
-
-// SetHashKeyType sets the HashKeyType field's value.
-func (s *DynamoDBAction) SetHashKeyType(v DynamoKeyType) *DynamoDBAction {
-	s.HashKeyType = v
-	return s
-}
-
-// SetHashKeyValue sets the HashKeyValue field's value.
-func (s *DynamoDBAction) SetHashKeyValue(v string) *DynamoDBAction {
-	s.HashKeyValue = &v
-	return s
-}
-
-// SetOperation sets the Operation field's value.
-func (s *DynamoDBAction) SetOperation(v string) *DynamoDBAction {
-	s.Operation = &v
-	return s
-}
-
-// SetPayloadField sets the PayloadField field's value.
-func (s *DynamoDBAction) SetPayloadField(v string) *DynamoDBAction {
-	s.PayloadField = &v
-	return s
-}
-
-// SetRangeKeyField sets the RangeKeyField field's value.
-func (s *DynamoDBAction) SetRangeKeyField(v string) *DynamoDBAction {
-	s.RangeKeyField = &v
-	return s
-}
-
-// SetRangeKeyType sets the RangeKeyType field's value.
-func (s *DynamoDBAction) SetRangeKeyType(v DynamoKeyType) *DynamoDBAction {
-	s.RangeKeyType = v
-	return s
-}
-
-// SetRangeKeyValue sets the RangeKeyValue field's value.
-func (s *DynamoDBAction) SetRangeKeyValue(v string) *DynamoDBAction {
-	s.RangeKeyValue = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DynamoDBAction) SetRoleArn(v string) *DynamoDBAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *DynamoDBAction) SetTableName(v string) *DynamoDBAction {
-	s.TableName = &v
-	return s
-}
-
 // Describes an action to write to a DynamoDB table.
 //
 // This DynamoDB action writes each attribute in the message payload into it's
@@ -12475,18 +10729,6 @@ func (s *DynamoDBv2Action) Validate() error {
 	return nil
 }
 
-// SetPutItem sets the PutItem field's value.
-func (s *DynamoDBv2Action) SetPutItem(v *PutItemInput) *DynamoDBv2Action {
-	s.PutItem = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DynamoDBv2Action) SetRoleArn(v string) *DynamoDBv2Action {
-	s.RoleArn = &v
-	return s
-}
-
 // The policy that has the effect on the authorization results.
 type EffectivePolicy struct {
 	_ struct{} `type:"structure"`
@@ -12509,24 +10751,6 @@ func (s EffectivePolicy) String() string {
 // GoString returns the string representation
 func (s EffectivePolicy) GoString() string {
 	return s.String()
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *EffectivePolicy) SetPolicyArn(v string) *EffectivePolicy {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *EffectivePolicy) SetPolicyDocument(v string) *EffectivePolicy {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *EffectivePolicy) SetPolicyName(v string) *EffectivePolicy {
-	s.PolicyName = &v
-	return s
 }
 
 // Describes an action that writes data to an Amazon Elasticsearch Service domain.
@@ -12599,36 +10823,6 @@ func (s *ElasticsearchAction) Validate() error {
 	return nil
 }
 
-// SetEndpoint sets the Endpoint field's value.
-func (s *ElasticsearchAction) SetEndpoint(v string) *ElasticsearchAction {
-	s.Endpoint = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ElasticsearchAction) SetId(v string) *ElasticsearchAction {
-	s.Id = &v
-	return s
-}
-
-// SetIndex sets the Index field's value.
-func (s *ElasticsearchAction) SetIndex(v string) *ElasticsearchAction {
-	s.Index = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *ElasticsearchAction) SetRoleArn(v string) *ElasticsearchAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ElasticsearchAction) SetType(v string) *ElasticsearchAction {
-	s.Type = &v
-	return s
-}
-
 // The input for the EnableTopicRuleRequest operation.
 type EnableTopicRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -12664,12 +10858,6 @@ func (s *EnableTopicRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *EnableTopicRuleInput) SetRuleName(v string) *EnableTopicRuleInput {
-	s.RuleName = &v
-	return s
 }
 
 type EnableTopicRuleOutput struct {
@@ -12714,18 +10902,6 @@ func (s ErrorInfo) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *ErrorInfo) SetCode(v string) *ErrorInfo {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ErrorInfo) SetMessage(v string) *ErrorInfo {
-	s.Message = &v
-	return s
-}
-
 // Information that explicitly denies authorization.
 type ExplicitDeny struct {
 	_ struct{} `type:"structure"`
@@ -12742,12 +10918,6 @@ func (s ExplicitDeny) String() string {
 // GoString returns the string representation
 func (s ExplicitDeny) GoString() string {
 	return s.String()
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ExplicitDeny) SetPolicies(v []Policy) *ExplicitDeny {
-	s.Policies = v
-	return s
 }
 
 // Describes an action that writes data to an Amazon Kinesis Firehose stream.
@@ -12798,24 +10968,6 @@ func (s *FirehoseAction) Validate() error {
 	return nil
 }
 
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *FirehoseAction) SetDeliveryStreamName(v string) *FirehoseAction {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *FirehoseAction) SetRoleArn(v string) *FirehoseAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSeparator sets the Separator field's value.
-func (s *FirehoseAction) SetSeparator(v string) *FirehoseAction {
-	s.Separator = &v
-	return s
-}
-
 type GetEffectivePoliciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12852,24 +11004,6 @@ func (s *GetEffectivePoliciesInput) Validate() error {
 	return nil
 }
 
-// SetCognitoIdentityPoolId sets the CognitoIdentityPoolId field's value.
-func (s *GetEffectivePoliciesInput) SetCognitoIdentityPoolId(v string) *GetEffectivePoliciesInput {
-	s.CognitoIdentityPoolId = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *GetEffectivePoliciesInput) SetPrincipal(v string) *GetEffectivePoliciesInput {
-	s.Principal = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *GetEffectivePoliciesInput) SetThingName(v string) *GetEffectivePoliciesInput {
-	s.ThingName = &v
-	return s
-}
-
 type GetEffectivePoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12892,12 +11026,6 @@ func (s GetEffectivePoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetEffectivePoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEffectivePolicies sets the EffectivePolicies field's value.
-func (s *GetEffectivePoliciesOutput) SetEffectivePolicies(v []EffectivePolicy) *GetEffectivePoliciesOutput {
-	s.EffectivePolicies = v
-	return s
 }
 
 type GetIndexingConfigurationInput struct {
@@ -12938,12 +11066,6 @@ func (s GetIndexingConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetThingIndexingConfiguration sets the ThingIndexingConfiguration field's value.
-func (s *GetIndexingConfigurationOutput) SetThingIndexingConfiguration(v *ThingIndexingConfiguration) *GetIndexingConfigurationOutput {
-	s.ThingIndexingConfiguration = v
-	return s
-}
-
 type GetJobDocumentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12980,12 +11102,6 @@ func (s *GetJobDocumentInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetJobDocumentInput) SetJobId(v string) *GetJobDocumentInput {
-	s.JobId = &v
-	return s
-}
-
 type GetJobDocumentOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13008,12 +11124,6 @@ func (s GetJobDocumentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetJobDocumentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDocument sets the Document field's value.
-func (s *GetJobDocumentOutput) SetDocument(v string) *GetJobDocumentOutput {
-	s.Document = &v
-	return s
 }
 
 // The input for the GetLoggingOptions operation.
@@ -13059,18 +11169,6 @@ func (s GetLoggingOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLogLevel sets the LogLevel field's value.
-func (s *GetLoggingOptionsOutput) SetLogLevel(v LogLevel) *GetLoggingOptionsOutput {
-	s.LogLevel = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *GetLoggingOptionsOutput) SetRoleArn(v string) *GetLoggingOptionsOutput {
-	s.RoleArn = &v
-	return s
-}
-
 type GetOTAUpdateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13107,12 +11205,6 @@ func (s *GetOTAUpdateInput) Validate() error {
 	return nil
 }
 
-// SetOtaUpdateId sets the OtaUpdateId field's value.
-func (s *GetOTAUpdateInput) SetOtaUpdateId(v string) *GetOTAUpdateInput {
-	s.OtaUpdateId = &v
-	return s
-}
-
 type GetOTAUpdateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13135,12 +11227,6 @@ func (s GetOTAUpdateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetOTAUpdateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOtaUpdateInfo sets the OtaUpdateInfo field's value.
-func (s *GetOTAUpdateOutput) SetOtaUpdateInfo(v *OTAUpdateInfo) *GetOTAUpdateOutput {
-	s.OtaUpdateInfo = v
-	return s
 }
 
 // The input for the GetPolicy operation.
@@ -13180,12 +11266,6 @@ func (s *GetPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetPolicyInput) SetPolicyName(v string) *GetPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // The output from the GetPolicy operation.
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -13218,30 +11298,6 @@ func (s GetPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDefaultVersionId sets the DefaultVersionId field's value.
-func (s *GetPolicyOutput) SetDefaultVersionId(v string) *GetPolicyOutput {
-	s.DefaultVersionId = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *GetPolicyOutput) SetPolicyArn(v string) *GetPolicyOutput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *GetPolicyOutput) SetPolicyDocument(v string) *GetPolicyOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetPolicyOutput) SetPolicyName(v string) *GetPolicyOutput {
-	s.PolicyName = &v
-	return s
 }
 
 // The input for the GetPolicyVersion operation.
@@ -13290,18 +11346,6 @@ func (s *GetPolicyVersionInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetPolicyVersionInput) SetPolicyName(v string) *GetPolicyVersionInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyVersionId sets the PolicyVersionId field's value.
-func (s *GetPolicyVersionInput) SetPolicyVersionId(v string) *GetPolicyVersionInput {
-	s.PolicyVersionId = &v
-	return s
-}
-
 // The output from the GetPolicyVersion operation.
 type GetPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -13337,36 +11381,6 @@ func (s GetPolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsDefaultVersion sets the IsDefaultVersion field's value.
-func (s *GetPolicyVersionOutput) SetIsDefaultVersion(v bool) *GetPolicyVersionOutput {
-	s.IsDefaultVersion = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *GetPolicyVersionOutput) SetPolicyArn(v string) *GetPolicyVersionOutput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *GetPolicyVersionOutput) SetPolicyDocument(v string) *GetPolicyVersionOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetPolicyVersionOutput) SetPolicyName(v string) *GetPolicyVersionOutput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyVersionId sets the PolicyVersionId field's value.
-func (s *GetPolicyVersionOutput) SetPolicyVersionId(v string) *GetPolicyVersionOutput {
-	s.PolicyVersionId = &v
-	return s
 }
 
 // The input to the GetRegistrationCode operation.
@@ -13409,12 +11423,6 @@ func (s GetRegistrationCodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetRegistrationCode sets the RegistrationCode field's value.
-func (s *GetRegistrationCodeOutput) SetRegistrationCode(v string) *GetRegistrationCodeOutput {
-	s.RegistrationCode = &v
-	return s
-}
-
 // The input for the GetTopicRule operation.
 type GetTopicRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -13452,12 +11460,6 @@ func (s *GetTopicRuleInput) Validate() error {
 	return nil
 }
 
-// SetRuleName sets the RuleName field's value.
-func (s *GetTopicRuleInput) SetRuleName(v string) *GetTopicRuleInput {
-	s.RuleName = &v
-	return s
-}
-
 // The output from the GetTopicRule operation.
 type GetTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -13484,18 +11486,6 @@ func (s GetTopicRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTopicRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRule sets the Rule field's value.
-func (s *GetTopicRuleOutput) SetRule(v *TopicRule) *GetTopicRuleOutput {
-	s.Rule = v
-	return s
-}
-
-// SetRuleArn sets the RuleArn field's value.
-func (s *GetTopicRuleOutput) SetRuleArn(v string) *GetTopicRuleOutput {
-	s.RuleArn = &v
-	return s
 }
 
 type GetV2LoggingOptionsInput struct {
@@ -13542,24 +11532,6 @@ func (s GetV2LoggingOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefaultLogLevel sets the DefaultLogLevel field's value.
-func (s *GetV2LoggingOptionsOutput) SetDefaultLogLevel(v LogLevel) *GetV2LoggingOptionsOutput {
-	s.DefaultLogLevel = v
-	return s
-}
-
-// SetDisableAllLogs sets the DisableAllLogs field's value.
-func (s *GetV2LoggingOptionsOutput) SetDisableAllLogs(v bool) *GetV2LoggingOptionsOutput {
-	s.DisableAllLogs = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *GetV2LoggingOptionsOutput) SetRoleArn(v string) *GetV2LoggingOptionsOutput {
-	s.RoleArn = &v
-	return s
-}
-
 // The name and ARN of a group.
 type GroupNameAndArn struct {
 	_ struct{} `type:"structure"`
@@ -13581,18 +11553,6 @@ func (s GroupNameAndArn) GoString() string {
 	return s.String()
 }
 
-// SetGroupArn sets the GroupArn field's value.
-func (s *GroupNameAndArn) SetGroupArn(v string) *GroupNameAndArn {
-	s.GroupArn = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *GroupNameAndArn) SetGroupName(v string) *GroupNameAndArn {
-	s.GroupName = &v
-	return s
-}
-
 // Information that implicitly denies authorization. When policy doesn't explicitly
 // deny or allow an action on a resource it is considered an implicit deny.
 type ImplicitDeny struct {
@@ -13611,12 +11571,6 @@ func (s ImplicitDeny) String() string {
 // GoString returns the string representation
 func (s ImplicitDeny) GoString() string {
 	return s.String()
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ImplicitDeny) SetPolicies(v []Policy) *ImplicitDeny {
-	s.Policies = v
-	return s
 }
 
 // The Job object contains details about a job.
@@ -13681,90 +11635,6 @@ func (s Job) GoString() string {
 	return s.String()
 }
 
-// SetComment sets the Comment field's value.
-func (s *Job) SetComment(v string) *Job {
-	s.Comment = &v
-	return s
-}
-
-// SetCompletedAt sets the CompletedAt field's value.
-func (s *Job) SetCompletedAt(v time.Time) *Job {
-	s.CompletedAt = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Job) SetCreatedAt(v time.Time) *Job {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Job) SetDescription(v string) *Job {
-	s.Description = &v
-	return s
-}
-
-// SetDocumentParameters sets the DocumentParameters field's value.
-func (s *Job) SetDocumentParameters(v map[string]string) *Job {
-	s.DocumentParameters = v
-	return s
-}
-
-// SetJobArn sets the JobArn field's value.
-func (s *Job) SetJobArn(v string) *Job {
-	s.JobArn = &v
-	return s
-}
-
-// SetJobExecutionsRolloutConfig sets the JobExecutionsRolloutConfig field's value.
-func (s *Job) SetJobExecutionsRolloutConfig(v *JobExecutionsRolloutConfig) *Job {
-	s.JobExecutionsRolloutConfig = v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *Job) SetJobId(v string) *Job {
-	s.JobId = &v
-	return s
-}
-
-// SetJobProcessDetails sets the JobProcessDetails field's value.
-func (s *Job) SetJobProcessDetails(v *JobProcessDetails) *Job {
-	s.JobProcessDetails = v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *Job) SetLastUpdatedAt(v time.Time) *Job {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetPresignedUrlConfig sets the PresignedUrlConfig field's value.
-func (s *Job) SetPresignedUrlConfig(v *PresignedUrlConfig) *Job {
-	s.PresignedUrlConfig = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Job) SetStatus(v JobStatus) *Job {
-	s.Status = v
-	return s
-}
-
-// SetTargetSelection sets the TargetSelection field's value.
-func (s *Job) SetTargetSelection(v TargetSelection) *Job {
-	s.TargetSelection = v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *Job) SetTargets(v []string) *Job {
-	s.Targets = v
-	return s
-}
-
 // The job execution object represents the execution of a job on a particular
 // device.
 type JobExecution struct {
@@ -13809,54 +11679,6 @@ func (s JobExecution) GoString() string {
 	return s.String()
 }
 
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *JobExecution) SetExecutionNumber(v int64) *JobExecution {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobExecution) SetJobId(v string) *JobExecution {
-	s.JobId = &v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *JobExecution) SetLastUpdatedAt(v time.Time) *JobExecution {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetQueuedAt sets the QueuedAt field's value.
-func (s *JobExecution) SetQueuedAt(v time.Time) *JobExecution {
-	s.QueuedAt = &v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *JobExecution) SetStartedAt(v time.Time) *JobExecution {
-	s.StartedAt = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobExecution) SetStatus(v JobExecutionStatus) *JobExecution {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetails sets the StatusDetails field's value.
-func (s *JobExecution) SetStatusDetails(v *JobExecutionStatusDetails) *JobExecution {
-	s.StatusDetails = v
-	return s
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *JobExecution) SetThingArn(v string) *JobExecution {
-	s.ThingArn = &v
-	return s
-}
-
 // Details of the job execution status.
 type JobExecutionStatusDetails struct {
 	_ struct{} `type:"structure"`
@@ -13873,12 +11695,6 @@ func (s JobExecutionStatusDetails) String() string {
 // GoString returns the string representation
 func (s JobExecutionStatusDetails) GoString() string {
 	return s.String()
-}
-
-// SetDetailsMap sets the DetailsMap field's value.
-func (s *JobExecutionStatusDetails) SetDetailsMap(v map[string]string) *JobExecutionStatusDetails {
-	s.DetailsMap = v
-	return s
 }
 
 // The job execution summary.
@@ -13914,36 +11730,6 @@ func (s JobExecutionSummary) GoString() string {
 	return s.String()
 }
 
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *JobExecutionSummary) SetExecutionNumber(v int64) *JobExecutionSummary {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *JobExecutionSummary) SetLastUpdatedAt(v time.Time) *JobExecutionSummary {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetQueuedAt sets the QueuedAt field's value.
-func (s *JobExecutionSummary) SetQueuedAt(v time.Time) *JobExecutionSummary {
-	s.QueuedAt = &v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *JobExecutionSummary) SetStartedAt(v time.Time) *JobExecutionSummary {
-	s.StartedAt = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobExecutionSummary) SetStatus(v JobExecutionStatus) *JobExecutionSummary {
-	s.Status = v
-	return s
-}
-
 // Contains a summary of information about job executions for a specific job.
 type JobExecutionSummaryForJob struct {
 	_ struct{} `type:"structure"`
@@ -13965,18 +11751,6 @@ func (s JobExecutionSummaryForJob) GoString() string {
 	return s.String()
 }
 
-// SetJobExecutionSummary sets the JobExecutionSummary field's value.
-func (s *JobExecutionSummaryForJob) SetJobExecutionSummary(v *JobExecutionSummary) *JobExecutionSummaryForJob {
-	s.JobExecutionSummary = v
-	return s
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *JobExecutionSummaryForJob) SetThingArn(v string) *JobExecutionSummaryForJob {
-	s.ThingArn = &v
-	return s
-}
-
 // The job execution summary for a thing.
 type JobExecutionSummaryForThing struct {
 	_ struct{} `type:"structure"`
@@ -13996,18 +11770,6 @@ func (s JobExecutionSummaryForThing) String() string {
 // GoString returns the string representation
 func (s JobExecutionSummaryForThing) GoString() string {
 	return s.String()
-}
-
-// SetJobExecutionSummary sets the JobExecutionSummary field's value.
-func (s *JobExecutionSummaryForThing) SetJobExecutionSummary(v *JobExecutionSummary) *JobExecutionSummaryForThing {
-	s.JobExecutionSummary = v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobExecutionSummaryForThing) SetJobId(v string) *JobExecutionSummaryForThing {
-	s.JobId = &v
-	return s
 }
 
 // Allows you to create a staged rollout of a job.
@@ -14040,12 +11802,6 @@ func (s *JobExecutionsRolloutConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetMaximumPerMinute sets the MaximumPerMinute field's value.
-func (s *JobExecutionsRolloutConfig) SetMaximumPerMinute(v int64) *JobExecutionsRolloutConfig {
-	s.MaximumPerMinute = &v
-	return s
 }
 
 // The job process details.
@@ -14087,54 +11843,6 @@ func (s JobProcessDetails) String() string {
 // GoString returns the string representation
 func (s JobProcessDetails) GoString() string {
 	return s.String()
-}
-
-// SetNumberOfCanceledThings sets the NumberOfCanceledThings field's value.
-func (s *JobProcessDetails) SetNumberOfCanceledThings(v int64) *JobProcessDetails {
-	s.NumberOfCanceledThings = &v
-	return s
-}
-
-// SetNumberOfFailedThings sets the NumberOfFailedThings field's value.
-func (s *JobProcessDetails) SetNumberOfFailedThings(v int64) *JobProcessDetails {
-	s.NumberOfFailedThings = &v
-	return s
-}
-
-// SetNumberOfInProgressThings sets the NumberOfInProgressThings field's value.
-func (s *JobProcessDetails) SetNumberOfInProgressThings(v int64) *JobProcessDetails {
-	s.NumberOfInProgressThings = &v
-	return s
-}
-
-// SetNumberOfQueuedThings sets the NumberOfQueuedThings field's value.
-func (s *JobProcessDetails) SetNumberOfQueuedThings(v int64) *JobProcessDetails {
-	s.NumberOfQueuedThings = &v
-	return s
-}
-
-// SetNumberOfRejectedThings sets the NumberOfRejectedThings field's value.
-func (s *JobProcessDetails) SetNumberOfRejectedThings(v int64) *JobProcessDetails {
-	s.NumberOfRejectedThings = &v
-	return s
-}
-
-// SetNumberOfRemovedThings sets the NumberOfRemovedThings field's value.
-func (s *JobProcessDetails) SetNumberOfRemovedThings(v int64) *JobProcessDetails {
-	s.NumberOfRemovedThings = &v
-	return s
-}
-
-// SetNumberOfSucceededThings sets the NumberOfSucceededThings field's value.
-func (s *JobProcessDetails) SetNumberOfSucceededThings(v int64) *JobProcessDetails {
-	s.NumberOfSucceededThings = &v
-	return s
-}
-
-// SetProcessingTargets sets the ProcessingTargets field's value.
-func (s *JobProcessDetails) SetProcessingTargets(v []string) *JobProcessDetails {
-	s.ProcessingTargets = v
-	return s
 }
 
 // The job summary.
@@ -14181,54 +11889,6 @@ func (s JobSummary) GoString() string {
 	return s.String()
 }
 
-// SetCompletedAt sets the CompletedAt field's value.
-func (s *JobSummary) SetCompletedAt(v time.Time) *JobSummary {
-	s.CompletedAt = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *JobSummary) SetCreatedAt(v time.Time) *JobSummary {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetJobArn sets the JobArn field's value.
-func (s *JobSummary) SetJobArn(v string) *JobSummary {
-	s.JobArn = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobSummary) SetJobId(v string) *JobSummary {
-	s.JobId = &v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *JobSummary) SetLastUpdatedAt(v time.Time) *JobSummary {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobSummary) SetStatus(v JobStatus) *JobSummary {
-	s.Status = v
-	return s
-}
-
-// SetTargetSelection sets the TargetSelection field's value.
-func (s *JobSummary) SetTargetSelection(v TargetSelection) *JobSummary {
-	s.TargetSelection = v
-	return s
-}
-
-// SetThingGroupId sets the ThingGroupId field's value.
-func (s *JobSummary) SetThingGroupId(v string) *JobSummary {
-	s.ThingGroupId = &v
-	return s
-}
-
 // Describes a key pair.
 type KeyPair struct {
 	_ struct{} `type:"structure"`
@@ -14248,18 +11908,6 @@ func (s KeyPair) String() string {
 // GoString returns the string representation
 func (s KeyPair) GoString() string {
 	return s.String()
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *KeyPair) SetPrivateKey(v string) *KeyPair {
-	s.PrivateKey = &v
-	return s
-}
-
-// SetPublicKey sets the PublicKey field's value.
-func (s *KeyPair) SetPublicKey(v string) *KeyPair {
-	s.PublicKey = &v
-	return s
 }
 
 // Describes an action to write data to an Amazon Kinesis stream.
@@ -14308,24 +11956,6 @@ func (s *KinesisAction) Validate() error {
 	return nil
 }
 
-// SetPartitionKey sets the PartitionKey field's value.
-func (s *KinesisAction) SetPartitionKey(v string) *KinesisAction {
-	s.PartitionKey = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *KinesisAction) SetRoleArn(v string) *KinesisAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *KinesisAction) SetStreamName(v string) *KinesisAction {
-	s.StreamName = &v
-	return s
-}
-
 // Describes an action to invoke a Lambda function.
 type LambdaAction struct {
 	_ struct{} `type:"structure"`
@@ -14358,12 +11988,6 @@ func (s *LambdaAction) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *LambdaAction) SetFunctionArn(v string) *LambdaAction {
-	s.FunctionArn = &v
-	return s
 }
 
 type ListAttachedPoliciesInput struct {
@@ -14411,30 +12035,6 @@ func (s *ListAttachedPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedPoliciesInput) SetMarker(v string) *ListAttachedPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListAttachedPoliciesInput) SetPageSize(v int64) *ListAttachedPoliciesInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetRecursive sets the Recursive field's value.
-func (s *ListAttachedPoliciesInput) SetRecursive(v bool) *ListAttachedPoliciesInput {
-	s.Recursive = &v
-	return s
-}
-
-// SetTarget sets the Target field's value.
-func (s *ListAttachedPoliciesInput) SetTarget(v string) *ListAttachedPoliciesInput {
-	s.Target = &v
-	return s
-}
-
 type ListAttachedPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14461,18 +12061,6 @@ func (s ListAttachedPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAttachedPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListAttachedPoliciesOutput) SetNextMarker(v string) *ListAttachedPoliciesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ListAttachedPoliciesOutput) SetPolicies(v []Policy) *ListAttachedPoliciesOutput {
-	s.Policies = v
-	return s
 }
 
 type ListAuthorizersInput struct {
@@ -14514,30 +12102,6 @@ func (s *ListAuthorizersInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListAuthorizersInput) SetAscendingOrder(v bool) *ListAuthorizersInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAuthorizersInput) SetMarker(v string) *ListAuthorizersInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListAuthorizersInput) SetPageSize(v int64) *ListAuthorizersInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListAuthorizersInput) SetStatus(v AuthorizerStatus) *ListAuthorizersInput {
-	s.Status = v
-	return s
-}
-
 type ListAuthorizersOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14563,18 +12127,6 @@ func (s ListAuthorizersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAuthorizersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizers sets the Authorizers field's value.
-func (s *ListAuthorizersOutput) SetAuthorizers(v []AuthorizerSummary) *ListAuthorizersOutput {
-	s.Authorizers = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListAuthorizersOutput) SetNextMarker(v string) *ListAuthorizersOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Input for the ListCACertificates operation.
@@ -14614,24 +12166,6 @@ func (s *ListCACertificatesInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListCACertificatesInput) SetAscendingOrder(v bool) *ListCACertificatesInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListCACertificatesInput) SetMarker(v string) *ListCACertificatesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListCACertificatesInput) SetPageSize(v int64) *ListCACertificatesInput {
-	s.PageSize = &v
-	return s
-}
-
 // The output from the ListCACertificates operation.
 type ListCACertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -14658,18 +12192,6 @@ func (s ListCACertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCACertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificates sets the Certificates field's value.
-func (s *ListCACertificatesOutput) SetCertificates(v []CACertificate) *ListCACertificatesOutput {
-	s.Certificates = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListCACertificatesOutput) SetNextMarker(v string) *ListCACertificatesOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // The input to the ListCertificatesByCA operation.
@@ -14723,30 +12245,6 @@ func (s *ListCertificatesByCAInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListCertificatesByCAInput) SetAscendingOrder(v bool) *ListCertificatesByCAInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetCaCertificateId sets the CaCertificateId field's value.
-func (s *ListCertificatesByCAInput) SetCaCertificateId(v string) *ListCertificatesByCAInput {
-	s.CaCertificateId = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListCertificatesByCAInput) SetMarker(v string) *ListCertificatesByCAInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListCertificatesByCAInput) SetPageSize(v int64) *ListCertificatesByCAInput {
-	s.PageSize = &v
-	return s
-}
-
 // The output of the ListCertificatesByCA operation.
 type ListCertificatesByCAOutput struct {
 	_ struct{} `type:"structure"`
@@ -14774,18 +12272,6 @@ func (s ListCertificatesByCAOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCertificatesByCAOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificates sets the Certificates field's value.
-func (s *ListCertificatesByCAOutput) SetCertificates(v []Certificate) *ListCertificatesByCAOutput {
-	s.Certificates = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListCertificatesByCAOutput) SetNextMarker(v string) *ListCertificatesByCAOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // The input for the ListCertificates operation.
@@ -14826,24 +12312,6 @@ func (s *ListCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListCertificatesInput) SetAscendingOrder(v bool) *ListCertificatesInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListCertificatesInput) SetMarker(v string) *ListCertificatesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListCertificatesInput) SetPageSize(v int64) *ListCertificatesInput {
-	s.PageSize = &v
-	return s
-}
-
 // The output of the ListCertificates operation.
 type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -14871,18 +12339,6 @@ func (s ListCertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificates sets the Certificates field's value.
-func (s *ListCertificatesOutput) SetCertificates(v []Certificate) *ListCertificatesOutput {
-	s.Certificates = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListCertificatesOutput) SetNextMarker(v string) *ListCertificatesOutput {
-	s.NextMarker = &v
-	return s
 }
 
 type ListIndicesInput struct {
@@ -14919,18 +12375,6 @@ func (s *ListIndicesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListIndicesInput) SetMaxResults(v int64) *ListIndicesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIndicesInput) SetNextToken(v string) *ListIndicesInput {
-	s.NextToken = &v
-	return s
-}
-
 type ListIndicesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14957,18 +12401,6 @@ func (s ListIndicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIndicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIndexNames sets the IndexNames field's value.
-func (s *ListIndicesOutput) SetIndexNames(v []string) *ListIndicesOutput {
-	s.IndexNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIndicesOutput) SetNextToken(v string) *ListIndicesOutput {
-	s.NextToken = &v
-	return s
 }
 
 type ListJobExecutionsForJobInput struct {
@@ -15019,30 +12451,6 @@ func (s *ListJobExecutionsForJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *ListJobExecutionsForJobInput) SetJobId(v string) *ListJobExecutionsForJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobExecutionsForJobInput) SetMaxResults(v int64) *ListJobExecutionsForJobInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobExecutionsForJobInput) SetNextToken(v string) *ListJobExecutionsForJobInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListJobExecutionsForJobInput) SetStatus(v JobExecutionStatus) *ListJobExecutionsForJobInput {
-	s.Status = v
-	return s
-}
-
 type ListJobExecutionsForJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15069,18 +12477,6 @@ func (s ListJobExecutionsForJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobExecutionsForJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutionSummaries sets the ExecutionSummaries field's value.
-func (s *ListJobExecutionsForJobOutput) SetExecutionSummaries(v []JobExecutionSummaryForJob) *ListJobExecutionsForJobOutput {
-	s.ExecutionSummaries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobExecutionsForJobOutput) SetNextToken(v string) *ListJobExecutionsForJobOutput {
-	s.NextToken = &v
-	return s
 }
 
 type ListJobExecutionsForThingInput struct {
@@ -15132,30 +12528,6 @@ func (s *ListJobExecutionsForThingInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobExecutionsForThingInput) SetMaxResults(v int64) *ListJobExecutionsForThingInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobExecutionsForThingInput) SetNextToken(v string) *ListJobExecutionsForThingInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListJobExecutionsForThingInput) SetStatus(v JobExecutionStatus) *ListJobExecutionsForThingInput {
-	s.Status = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *ListJobExecutionsForThingInput) SetThingName(v string) *ListJobExecutionsForThingInput {
-	s.ThingName = &v
-	return s
-}
-
 type ListJobExecutionsForThingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15182,18 +12554,6 @@ func (s ListJobExecutionsForThingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobExecutionsForThingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutionSummaries sets the ExecutionSummaries field's value.
-func (s *ListJobExecutionsForThingOutput) SetExecutionSummaries(v []JobExecutionSummaryForThing) *ListJobExecutionsForThingOutput {
-	s.ExecutionSummaries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobExecutionsForThingOutput) SetNextToken(v string) *ListJobExecutionsForThingOutput {
-	s.NextToken = &v
-	return s
 }
 
 type ListJobsInput struct {
@@ -15253,42 +12613,6 @@ func (s *ListJobsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobsInput) SetMaxResults(v int64) *ListJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListJobsInput) SetStatus(v JobStatus) *ListJobsInput {
-	s.Status = v
-	return s
-}
-
-// SetTargetSelection sets the TargetSelection field's value.
-func (s *ListJobsInput) SetTargetSelection(v TargetSelection) *ListJobsInput {
-	s.TargetSelection = v
-	return s
-}
-
-// SetThingGroupId sets the ThingGroupId field's value.
-func (s *ListJobsInput) SetThingGroupId(v string) *ListJobsInput {
-	s.ThingGroupId = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *ListJobsInput) SetThingGroupName(v string) *ListJobsInput {
-	s.ThingGroupName = &v
-	return s
-}
-
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15315,18 +12639,6 @@ func (s ListJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobs sets the Jobs field's value.
-func (s *ListJobsOutput) SetJobs(v []JobSummary) *ListJobsOutput {
-	s.Jobs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsOutput) SetNextToken(v string) *ListJobsOutput {
-	s.NextToken = &v
-	return s
 }
 
 type ListOTAUpdatesInput struct {
@@ -15365,24 +12677,6 @@ func (s *ListOTAUpdatesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListOTAUpdatesInput) SetMaxResults(v int64) *ListOTAUpdatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOTAUpdatesInput) SetNextToken(v string) *ListOTAUpdatesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOtaUpdateStatus sets the OtaUpdateStatus field's value.
-func (s *ListOTAUpdatesInput) SetOtaUpdateStatus(v OTAUpdateStatus) *ListOTAUpdatesInput {
-	s.OtaUpdateStatus = v
-	return s
-}
-
 type ListOTAUpdatesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15408,18 +12702,6 @@ func (s ListOTAUpdatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOTAUpdatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOTAUpdatesOutput) SetNextToken(v string) *ListOTAUpdatesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOtaUpdates sets the OtaUpdates field's value.
-func (s *ListOTAUpdatesOutput) SetOtaUpdates(v []OTAUpdateSummary) *ListOTAUpdatesOutput {
-	s.OtaUpdates = v
-	return s
 }
 
 // The input to the ListOutgoingCertificates operation.
@@ -15460,24 +12742,6 @@ func (s *ListOutgoingCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListOutgoingCertificatesInput) SetAscendingOrder(v bool) *ListOutgoingCertificatesInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListOutgoingCertificatesInput) SetMarker(v string) *ListOutgoingCertificatesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListOutgoingCertificatesInput) SetPageSize(v int64) *ListOutgoingCertificatesInput {
-	s.PageSize = &v
-	return s
-}
-
 // The output from the ListOutgoingCertificates operation.
 type ListOutgoingCertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -15504,18 +12768,6 @@ func (s ListOutgoingCertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOutgoingCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListOutgoingCertificatesOutput) SetNextMarker(v string) *ListOutgoingCertificatesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetOutgoingCertificates sets the OutgoingCertificates field's value.
-func (s *ListOutgoingCertificatesOutput) SetOutgoingCertificates(v []OutgoingCertificate) *ListOutgoingCertificatesOutput {
-	s.OutgoingCertificates = v
-	return s
 }
 
 // The input for the ListPolicies operation.
@@ -15556,24 +12808,6 @@ func (s *ListPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListPoliciesInput) SetAscendingOrder(v bool) *ListPoliciesInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListPoliciesInput) SetMarker(v string) *ListPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListPoliciesInput) SetPageSize(v int64) *ListPoliciesInput {
-	s.PageSize = &v
-	return s
-}
-
 // The output from the ListPolicies operation.
 type ListPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -15601,18 +12835,6 @@ func (s ListPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListPoliciesOutput) SetNextMarker(v string) *ListPoliciesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ListPoliciesOutput) SetPolicies(v []Policy) *ListPoliciesOutput {
-	s.Policies = v
-	return s
 }
 
 // The input for the ListPolicyPrincipals operation.
@@ -15665,30 +12887,6 @@ func (s *ListPolicyPrincipalsInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListPolicyPrincipalsInput) SetAscendingOrder(v bool) *ListPolicyPrincipalsInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListPolicyPrincipalsInput) SetMarker(v string) *ListPolicyPrincipalsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListPolicyPrincipalsInput) SetPageSize(v int64) *ListPolicyPrincipalsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *ListPolicyPrincipalsInput) SetPolicyName(v string) *ListPolicyPrincipalsInput {
-	s.PolicyName = &v
-	return s
-}
-
 // The output from the ListPolicyPrincipals operation.
 type ListPolicyPrincipalsOutput struct {
 	_ struct{} `type:"structure"`
@@ -15716,18 +12914,6 @@ func (s ListPolicyPrincipalsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPolicyPrincipalsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListPolicyPrincipalsOutput) SetNextMarker(v string) *ListPolicyPrincipalsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetPrincipals sets the Principals field's value.
-func (s *ListPolicyPrincipalsOutput) SetPrincipals(v []string) *ListPolicyPrincipalsOutput {
-	s.Principals = v
-	return s
 }
 
 // The input for the ListPolicyVersions operation.
@@ -15767,12 +12953,6 @@ func (s *ListPolicyVersionsInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *ListPolicyVersionsInput) SetPolicyName(v string) *ListPolicyVersionsInput {
-	s.PolicyName = &v
-	return s
-}
-
 // The output from the ListPolicyVersions operation.
 type ListPolicyVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -15796,12 +12976,6 @@ func (s ListPolicyVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPolicyVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyVersions sets the PolicyVersions field's value.
-func (s *ListPolicyVersionsOutput) SetPolicyVersions(v []PolicyVersion) *ListPolicyVersionsOutput {
-	s.PolicyVersions = v
-	return s
 }
 
 // The input for the ListPrincipalPolicies operation.
@@ -15851,30 +13025,6 @@ func (s *ListPrincipalPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListPrincipalPoliciesInput) SetAscendingOrder(v bool) *ListPrincipalPoliciesInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListPrincipalPoliciesInput) SetMarker(v string) *ListPrincipalPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListPrincipalPoliciesInput) SetPageSize(v int64) *ListPrincipalPoliciesInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *ListPrincipalPoliciesInput) SetPrincipal(v string) *ListPrincipalPoliciesInput {
-	s.Principal = &v
-	return s
-}
-
 // The output from the ListPrincipalPolicies operation.
 type ListPrincipalPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -15902,18 +13052,6 @@ func (s ListPrincipalPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPrincipalPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListPrincipalPoliciesOutput) SetNextMarker(v string) *ListPrincipalPoliciesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ListPrincipalPoliciesOutput) SetPolicies(v []Policy) *ListPrincipalPoliciesOutput {
-	s.Policies = v
-	return s
 }
 
 // The input for the ListPrincipalThings operation.
@@ -15960,24 +13098,6 @@ func (s *ListPrincipalThingsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPrincipalThingsInput) SetMaxResults(v int64) *ListPrincipalThingsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPrincipalThingsInput) SetNextToken(v string) *ListPrincipalThingsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *ListPrincipalThingsInput) SetPrincipal(v string) *ListPrincipalThingsInput {
-	s.Principal = &v
-	return s
-}
-
 // The output from the ListPrincipalThings operation.
 type ListPrincipalThingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -16005,18 +13125,6 @@ func (s ListPrincipalThingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPrincipalThingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPrincipalThingsOutput) SetNextToken(v string) *ListPrincipalThingsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThings sets the Things field's value.
-func (s *ListPrincipalThingsOutput) SetThings(v []string) *ListPrincipalThingsOutput {
-	s.Things = v
-	return s
 }
 
 type ListRoleAliasesInput struct {
@@ -16055,24 +13163,6 @@ func (s *ListRoleAliasesInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListRoleAliasesInput) SetAscendingOrder(v bool) *ListRoleAliasesInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListRoleAliasesInput) SetMarker(v string) *ListRoleAliasesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListRoleAliasesInput) SetPageSize(v int64) *ListRoleAliasesInput {
-	s.PageSize = &v
-	return s
-}
-
 type ListRoleAliasesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16098,18 +13188,6 @@ func (s ListRoleAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRoleAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRoleAliasesOutput) SetNextMarker(v string) *ListRoleAliasesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRoleAliases sets the RoleAliases field's value.
-func (s *ListRoleAliasesOutput) SetRoleAliases(v []string) *ListRoleAliasesOutput {
-	s.RoleAliases = v
-	return s
 }
 
 type ListStreamsInput struct {
@@ -16148,24 +13226,6 @@ func (s *ListStreamsInput) Validate() error {
 	return nil
 }
 
-// SetAscendingOrder sets the AscendingOrder field's value.
-func (s *ListStreamsInput) SetAscendingOrder(v bool) *ListStreamsInput {
-	s.AscendingOrder = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStreamsInput) SetMaxResults(v int64) *ListStreamsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStreamsInput) SetNextToken(v string) *ListStreamsInput {
-	s.NextToken = &v
-	return s
-}
-
 type ListStreamsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16191,18 +13251,6 @@ func (s ListStreamsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStreamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStreamsOutput) SetNextToken(v string) *ListStreamsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStreams sets the Streams field's value.
-func (s *ListStreamsOutput) SetStreams(v []StreamSummary) *ListStreamsOutput {
-	s.Streams = v
-	return s
 }
 
 type ListTargetsForPolicyInput struct {
@@ -16250,24 +13298,6 @@ func (s *ListTargetsForPolicyInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListTargetsForPolicyInput) SetMarker(v string) *ListTargetsForPolicyInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListTargetsForPolicyInput) SetPageSize(v int64) *ListTargetsForPolicyInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *ListTargetsForPolicyInput) SetPolicyName(v string) *ListTargetsForPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 type ListTargetsForPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16293,18 +13323,6 @@ func (s ListTargetsForPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTargetsForPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListTargetsForPolicyOutput) SetNextMarker(v string) *ListTargetsForPolicyOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *ListTargetsForPolicyOutput) SetTargets(v []string) *ListTargetsForPolicyOutput {
-	s.Targets = v
-	return s
 }
 
 type ListThingGroupsForThingInput struct {
@@ -16353,24 +13371,6 @@ func (s *ListThingGroupsForThingInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingGroupsForThingInput) SetMaxResults(v int64) *ListThingGroupsForThingInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingGroupsForThingInput) SetNextToken(v string) *ListThingGroupsForThingInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *ListThingGroupsForThingInput) SetThingName(v string) *ListThingGroupsForThingInput {
-	s.ThingName = &v
-	return s
-}
-
 type ListThingGroupsForThingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16397,18 +13397,6 @@ func (s ListThingGroupsForThingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingGroupsForThingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingGroupsForThingOutput) SetNextToken(v string) *ListThingGroupsForThingOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThingGroups sets the ThingGroups field's value.
-func (s *ListThingGroupsForThingOutput) SetThingGroups(v []GroupNameAndArn) *ListThingGroupsForThingOutput {
-	s.ThingGroups = v
-	return s
 }
 
 type ListThingGroupsInput struct {
@@ -16460,36 +13448,6 @@ func (s *ListThingGroupsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingGroupsInput) SetMaxResults(v int64) *ListThingGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNamePrefixFilter sets the NamePrefixFilter field's value.
-func (s *ListThingGroupsInput) SetNamePrefixFilter(v string) *ListThingGroupsInput {
-	s.NamePrefixFilter = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingGroupsInput) SetNextToken(v string) *ListThingGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParentGroup sets the ParentGroup field's value.
-func (s *ListThingGroupsInput) SetParentGroup(v string) *ListThingGroupsInput {
-	s.ParentGroup = &v
-	return s
-}
-
-// SetRecursive sets the Recursive field's value.
-func (s *ListThingGroupsInput) SetRecursive(v bool) *ListThingGroupsInput {
-	s.Recursive = &v
-	return s
-}
-
 type ListThingGroupsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16516,18 +13474,6 @@ func (s ListThingGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingGroupsOutput) SetNextToken(v string) *ListThingGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThingGroups sets the ThingGroups field's value.
-func (s *ListThingGroupsOutput) SetThingGroups(v []GroupNameAndArn) *ListThingGroupsOutput {
-	s.ThingGroups = v
-	return s
 }
 
 // The input for the ListThingPrincipal operation.
@@ -16567,12 +13513,6 @@ func (s *ListThingPrincipalsInput) Validate() error {
 	return nil
 }
 
-// SetThingName sets the ThingName field's value.
-func (s *ListThingPrincipalsInput) SetThingName(v string) *ListThingPrincipalsInput {
-	s.ThingName = &v
-	return s
-}
-
 // The output from the ListThingPrincipals operation.
 type ListThingPrincipalsOutput struct {
 	_ struct{} `type:"structure"`
@@ -16596,12 +13536,6 @@ func (s ListThingPrincipalsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingPrincipalsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPrincipals sets the Principals field's value.
-func (s *ListThingPrincipalsOutput) SetPrincipals(v []string) *ListThingPrincipalsOutput {
-	s.Principals = v
-	return s
 }
 
 type ListThingRegistrationTaskReportsInput struct {
@@ -16654,30 +13588,6 @@ func (s *ListThingRegistrationTaskReportsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingRegistrationTaskReportsInput) SetMaxResults(v int64) *ListThingRegistrationTaskReportsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingRegistrationTaskReportsInput) SetNextToken(v string) *ListThingRegistrationTaskReportsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReportType sets the ReportType field's value.
-func (s *ListThingRegistrationTaskReportsInput) SetReportType(v ReportType) *ListThingRegistrationTaskReportsInput {
-	s.ReportType = v
-	return s
-}
-
-// SetTaskId sets the TaskId field's value.
-func (s *ListThingRegistrationTaskReportsInput) SetTaskId(v string) *ListThingRegistrationTaskReportsInput {
-	s.TaskId = &v
-	return s
-}
-
 type ListThingRegistrationTaskReportsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16706,24 +13616,6 @@ func (s ListThingRegistrationTaskReportsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingRegistrationTaskReportsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingRegistrationTaskReportsOutput) SetNextToken(v string) *ListThingRegistrationTaskReportsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReportType sets the ReportType field's value.
-func (s *ListThingRegistrationTaskReportsOutput) SetReportType(v ReportType) *ListThingRegistrationTaskReportsOutput {
-	s.ReportType = v
-	return s
-}
-
-// SetResourceLinks sets the ResourceLinks field's value.
-func (s *ListThingRegistrationTaskReportsOutput) SetResourceLinks(v []string) *ListThingRegistrationTaskReportsOutput {
-	s.ResourceLinks = v
-	return s
 }
 
 type ListThingRegistrationTasksInput struct {
@@ -16763,24 +13655,6 @@ func (s *ListThingRegistrationTasksInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingRegistrationTasksInput) SetMaxResults(v int64) *ListThingRegistrationTasksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingRegistrationTasksInput) SetNextToken(v string) *ListThingRegistrationTasksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListThingRegistrationTasksInput) SetStatus(v Status) *ListThingRegistrationTasksInput {
-	s.Status = v
-	return s
-}
-
 type ListThingRegistrationTasksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16807,18 +13681,6 @@ func (s ListThingRegistrationTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingRegistrationTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingRegistrationTasksOutput) SetNextToken(v string) *ListThingRegistrationTasksOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTaskIds sets the TaskIds field's value.
-func (s *ListThingRegistrationTasksOutput) SetTaskIds(v []string) *ListThingRegistrationTasksOutput {
-	s.TaskIds = v
-	return s
 }
 
 // The input for the ListThingTypes operation.
@@ -16862,24 +13724,6 @@ func (s *ListThingTypesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingTypesInput) SetMaxResults(v int64) *ListThingTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingTypesInput) SetNextToken(v string) *ListThingTypesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *ListThingTypesInput) SetThingTypeName(v string) *ListThingTypesInput {
-	s.ThingTypeName = &v
-	return s
-}
-
 // The output for the ListThingTypes operation.
 type ListThingTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -16907,18 +13751,6 @@ func (s ListThingTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingTypesOutput) SetNextToken(v string) *ListThingTypesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThingTypes sets the ThingTypes field's value.
-func (s *ListThingTypesOutput) SetThingTypes(v []ThingTypeDefinition) *ListThingTypesOutput {
-	s.ThingTypes = v
-	return s
 }
 
 type ListThingsInThingGroupInput struct {
@@ -16970,30 +13802,6 @@ func (s *ListThingsInThingGroupInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingsInThingGroupInput) SetMaxResults(v int64) *ListThingsInThingGroupInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingsInThingGroupInput) SetNextToken(v string) *ListThingsInThingGroupInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRecursive sets the Recursive field's value.
-func (s *ListThingsInThingGroupInput) SetRecursive(v bool) *ListThingsInThingGroupInput {
-	s.Recursive = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *ListThingsInThingGroupInput) SetThingGroupName(v string) *ListThingsInThingGroupInput {
-	s.ThingGroupName = &v
-	return s
-}
-
 type ListThingsInThingGroupOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -17020,18 +13828,6 @@ func (s ListThingsInThingGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingsInThingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingsInThingGroupOutput) SetNextToken(v string) *ListThingsInThingGroupOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThings sets the Things field's value.
-func (s *ListThingsInThingGroupOutput) SetThings(v []string) *ListThingsInThingGroupOutput {
-	s.Things = v
-	return s
 }
 
 // The input for the ListThings operation.
@@ -17081,36 +13877,6 @@ func (s *ListThingsInput) Validate() error {
 	return nil
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *ListThingsInput) SetAttributeName(v string) *ListThingsInput {
-	s.AttributeName = &v
-	return s
-}
-
-// SetAttributeValue sets the AttributeValue field's value.
-func (s *ListThingsInput) SetAttributeValue(v string) *ListThingsInput {
-	s.AttributeValue = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListThingsInput) SetMaxResults(v int64) *ListThingsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingsInput) SetNextToken(v string) *ListThingsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *ListThingsInput) SetThingTypeName(v string) *ListThingsInput {
-	s.ThingTypeName = &v
-	return s
-}
-
 // The output from the ListThings operation.
 type ListThingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -17138,18 +13904,6 @@ func (s ListThingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListThingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListThingsOutput) SetNextToken(v string) *ListThingsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThings sets the Things field's value.
-func (s *ListThingsOutput) SetThings(v []ThingAttribute) *ListThingsOutput {
-	s.Things = v
-	return s
 }
 
 // The input for the ListTopicRules operation.
@@ -17192,30 +13946,6 @@ func (s *ListTopicRulesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTopicRulesInput) SetMaxResults(v int64) *ListTopicRulesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTopicRulesInput) SetNextToken(v string) *ListTopicRulesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRuleDisabled sets the RuleDisabled field's value.
-func (s *ListTopicRulesInput) SetRuleDisabled(v bool) *ListTopicRulesInput {
-	s.RuleDisabled = &v
-	return s
-}
-
-// SetTopic sets the Topic field's value.
-func (s *ListTopicRulesInput) SetTopic(v string) *ListTopicRulesInput {
-	s.Topic = &v
-	return s
-}
-
 // The output from the ListTopicRules operation.
 type ListTopicRulesOutput struct {
 	_ struct{} `type:"structure"`
@@ -17242,18 +13972,6 @@ func (s ListTopicRulesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTopicRulesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTopicRulesOutput) SetNextToken(v string) *ListTopicRulesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *ListTopicRulesOutput) SetRules(v []TopicRuleListItem) *ListTopicRulesOutput {
-	s.Rules = v
-	return s
 }
 
 type ListV2LoggingLevelsInput struct {
@@ -17293,24 +14011,6 @@ func (s *ListV2LoggingLevelsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListV2LoggingLevelsInput) SetMaxResults(v int64) *ListV2LoggingLevelsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListV2LoggingLevelsInput) SetNextToken(v string) *ListV2LoggingLevelsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargetType sets the TargetType field's value.
-func (s *ListV2LoggingLevelsInput) SetTargetType(v LogTargetType) *ListV2LoggingLevelsInput {
-	s.TargetType = v
-	return s
-}
-
 type ListV2LoggingLevelsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -17337,18 +14037,6 @@ func (s ListV2LoggingLevelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListV2LoggingLevelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLogTargetConfigurations sets the LogTargetConfigurations field's value.
-func (s *ListV2LoggingLevelsOutput) SetLogTargetConfigurations(v []LogTargetConfiguration) *ListV2LoggingLevelsOutput {
-	s.LogTargetConfigurations = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListV2LoggingLevelsOutput) SetNextToken(v string) *ListV2LoggingLevelsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // A log target.
@@ -17387,18 +14075,6 @@ func (s *LogTarget) Validate() error {
 	return nil
 }
 
-// SetTargetName sets the TargetName field's value.
-func (s *LogTarget) SetTargetName(v string) *LogTarget {
-	s.TargetName = &v
-	return s
-}
-
-// SetTargetType sets the TargetType field's value.
-func (s *LogTarget) SetTargetType(v LogTargetType) *LogTarget {
-	s.TargetType = v
-	return s
-}
-
 // The target configuration.
 type LogTargetConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -17418,18 +14094,6 @@ func (s LogTargetConfiguration) String() string {
 // GoString returns the string representation
 func (s LogTargetConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetLogLevel sets the LogLevel field's value.
-func (s *LogTargetConfiguration) SetLogLevel(v LogLevel) *LogTargetConfiguration {
-	s.LogLevel = v
-	return s
-}
-
-// SetLogTarget sets the LogTarget field's value.
-func (s *LogTargetConfiguration) SetLogTarget(v *LogTarget) *LogTargetConfiguration {
-	s.LogTarget = v
-	return s
 }
 
 // Describes the logging options payload.
@@ -17467,18 +14131,6 @@ func (s *LoggingOptionsPayload) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLogLevel sets the LogLevel field's value.
-func (s *LoggingOptionsPayload) SetLogLevel(v LogLevel) *LoggingOptionsPayload {
-	s.LogLevel = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *LoggingOptionsPayload) SetRoleArn(v string) *LoggingOptionsPayload {
-	s.RoleArn = &v
-	return s
 }
 
 // Describes a file to be associated with an OTA update.
@@ -17529,36 +14181,6 @@ func (s *OTAUpdateFile) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *OTAUpdateFile) SetAttributes(v map[string]string) *OTAUpdateFile {
-	s.Attributes = v
-	return s
-}
-
-// SetCodeSigning sets the CodeSigning field's value.
-func (s *OTAUpdateFile) SetCodeSigning(v *CodeSigning) *OTAUpdateFile {
-	s.CodeSigning = v
-	return s
-}
-
-// SetFileName sets the FileName field's value.
-func (s *OTAUpdateFile) SetFileName(v string) *OTAUpdateFile {
-	s.FileName = &v
-	return s
-}
-
-// SetFileSource sets the FileSource field's value.
-func (s *OTAUpdateFile) SetFileSource(v *Stream) *OTAUpdateFile {
-	s.FileSource = v
-	return s
-}
-
-// SetFileVersion sets the FileVersion field's value.
-func (s *OTAUpdateFile) SetFileVersion(v string) *OTAUpdateFile {
-	s.FileVersion = &v
-	return s
 }
 
 // Information about an OTA update.
@@ -17620,84 +14242,6 @@ func (s OTAUpdateInfo) GoString() string {
 	return s.String()
 }
 
-// SetAdditionalParameters sets the AdditionalParameters field's value.
-func (s *OTAUpdateInfo) SetAdditionalParameters(v map[string]string) *OTAUpdateInfo {
-	s.AdditionalParameters = v
-	return s
-}
-
-// SetAwsIotJobArn sets the AwsIotJobArn field's value.
-func (s *OTAUpdateInfo) SetAwsIotJobArn(v string) *OTAUpdateInfo {
-	s.AwsIotJobArn = &v
-	return s
-}
-
-// SetAwsIotJobId sets the AwsIotJobId field's value.
-func (s *OTAUpdateInfo) SetAwsIotJobId(v string) *OTAUpdateInfo {
-	s.AwsIotJobId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *OTAUpdateInfo) SetCreationDate(v time.Time) *OTAUpdateInfo {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *OTAUpdateInfo) SetDescription(v string) *OTAUpdateInfo {
-	s.Description = &v
-	return s
-}
-
-// SetErrorInfo sets the ErrorInfo field's value.
-func (s *OTAUpdateInfo) SetErrorInfo(v *ErrorInfo) *OTAUpdateInfo {
-	s.ErrorInfo = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *OTAUpdateInfo) SetLastModifiedDate(v time.Time) *OTAUpdateInfo {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetOtaUpdateArn sets the OtaUpdateArn field's value.
-func (s *OTAUpdateInfo) SetOtaUpdateArn(v string) *OTAUpdateInfo {
-	s.OtaUpdateArn = &v
-	return s
-}
-
-// SetOtaUpdateFiles sets the OtaUpdateFiles field's value.
-func (s *OTAUpdateInfo) SetOtaUpdateFiles(v []OTAUpdateFile) *OTAUpdateInfo {
-	s.OtaUpdateFiles = v
-	return s
-}
-
-// SetOtaUpdateId sets the OtaUpdateId field's value.
-func (s *OTAUpdateInfo) SetOtaUpdateId(v string) *OTAUpdateInfo {
-	s.OtaUpdateId = &v
-	return s
-}
-
-// SetOtaUpdateStatus sets the OtaUpdateStatus field's value.
-func (s *OTAUpdateInfo) SetOtaUpdateStatus(v OTAUpdateStatus) *OTAUpdateInfo {
-	s.OtaUpdateStatus = v
-	return s
-}
-
-// SetTargetSelection sets the TargetSelection field's value.
-func (s *OTAUpdateInfo) SetTargetSelection(v TargetSelection) *OTAUpdateInfo {
-	s.TargetSelection = v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *OTAUpdateInfo) SetTargets(v []string) *OTAUpdateInfo {
-	s.Targets = v
-	return s
-}
-
 // An OTA update summary.
 type OTAUpdateSummary struct {
 	_ struct{} `type:"structure"`
@@ -17720,24 +14264,6 @@ func (s OTAUpdateSummary) String() string {
 // GoString returns the string representation
 func (s OTAUpdateSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *OTAUpdateSummary) SetCreationDate(v time.Time) *OTAUpdateSummary {
-	s.CreationDate = &v
-	return s
-}
-
-// SetOtaUpdateArn sets the OtaUpdateArn field's value.
-func (s *OTAUpdateSummary) SetOtaUpdateArn(v string) *OTAUpdateSummary {
-	s.OtaUpdateArn = &v
-	return s
-}
-
-// SetOtaUpdateId sets the OtaUpdateId field's value.
-func (s *OTAUpdateSummary) SetOtaUpdateId(v string) *OTAUpdateSummary {
-	s.OtaUpdateId = &v
-	return s
 }
 
 // A certificate that has been transferred but not yet accepted.
@@ -17773,42 +14299,6 @@ func (s OutgoingCertificate) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *OutgoingCertificate) SetCertificateArn(v string) *OutgoingCertificate {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *OutgoingCertificate) SetCertificateId(v string) *OutgoingCertificate {
-	s.CertificateId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *OutgoingCertificate) SetCreationDate(v time.Time) *OutgoingCertificate {
-	s.CreationDate = &v
-	return s
-}
-
-// SetTransferDate sets the TransferDate field's value.
-func (s *OutgoingCertificate) SetTransferDate(v time.Time) *OutgoingCertificate {
-	s.TransferDate = &v
-	return s
-}
-
-// SetTransferMessage sets the TransferMessage field's value.
-func (s *OutgoingCertificate) SetTransferMessage(v string) *OutgoingCertificate {
-	s.TransferMessage = &v
-	return s
-}
-
-// SetTransferredTo sets the TransferredTo field's value.
-func (s *OutgoingCertificate) SetTransferredTo(v string) *OutgoingCertificate {
-	s.TransferredTo = &v
-	return s
-}
-
 // Describes an AWS IoT policy.
 type Policy struct {
 	_ struct{} `type:"structure"`
@@ -17828,18 +14318,6 @@ func (s Policy) String() string {
 // GoString returns the string representation
 func (s Policy) GoString() string {
 	return s.String()
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *Policy) SetPolicyArn(v string) *Policy {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *Policy) SetPolicyName(v string) *Policy {
-	s.PolicyName = &v
-	return s
 }
 
 // Describes a policy version.
@@ -17864,24 +14342,6 @@ func (s PolicyVersion) String() string {
 // GoString returns the string representation
 func (s PolicyVersion) GoString() string {
 	return s.String()
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *PolicyVersion) SetCreateDate(v time.Time) *PolicyVersion {
-	s.CreateDate = &v
-	return s
-}
-
-// SetIsDefaultVersion sets the IsDefaultVersion field's value.
-func (s *PolicyVersion) SetIsDefaultVersion(v bool) *PolicyVersion {
-	s.IsDefaultVersion = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *PolicyVersion) SetVersionId(v string) *PolicyVersion {
-	s.VersionId = &v
-	return s
 }
 
 // Configuration for pre-signed S3 URLs.
@@ -17925,18 +14385,6 @@ func (s *PresignedUrlConfig) Validate() error {
 	return nil
 }
 
-// SetExpiresInSec sets the ExpiresInSec field's value.
-func (s *PresignedUrlConfig) SetExpiresInSec(v int64) *PresignedUrlConfig {
-	s.ExpiresInSec = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *PresignedUrlConfig) SetRoleArn(v string) *PresignedUrlConfig {
-	s.RoleArn = &v
-	return s
-}
-
 // The input for the DynamoActionVS action that specifies the DynamoDB table
 // to which the message data will be written.
 type PutItemInput struct {
@@ -17970,12 +14418,6 @@ func (s *PutItemInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTableName sets the TableName field's value.
-func (s *PutItemInput) SetTableName(v string) *PutItemInput {
-	s.TableName = &v
-	return s
 }
 
 // The input to the RegisterCACertificate operation.
@@ -18041,36 +14483,6 @@ func (s *RegisterCACertificateInput) Validate() error {
 	return nil
 }
 
-// SetAllowAutoRegistration sets the AllowAutoRegistration field's value.
-func (s *RegisterCACertificateInput) SetAllowAutoRegistration(v bool) *RegisterCACertificateInput {
-	s.AllowAutoRegistration = &v
-	return s
-}
-
-// SetCaCertificate sets the CaCertificate field's value.
-func (s *RegisterCACertificateInput) SetCaCertificate(v string) *RegisterCACertificateInput {
-	s.CaCertificate = &v
-	return s
-}
-
-// SetRegistrationConfig sets the RegistrationConfig field's value.
-func (s *RegisterCACertificateInput) SetRegistrationConfig(v *RegistrationConfig) *RegisterCACertificateInput {
-	s.RegistrationConfig = v
-	return s
-}
-
-// SetSetAsActive sets the SetAsActive field's value.
-func (s *RegisterCACertificateInput) SetSetAsActive(v bool) *RegisterCACertificateInput {
-	s.SetAsActive = &v
-	return s
-}
-
-// SetVerificationCertificate sets the VerificationCertificate field's value.
-func (s *RegisterCACertificateInput) SetVerificationCertificate(v string) *RegisterCACertificateInput {
-	s.VerificationCertificate = &v
-	return s
-}
-
 // The output from the RegisterCACertificateResponse operation.
 type RegisterCACertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -18097,18 +14509,6 @@ func (s RegisterCACertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterCACertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *RegisterCACertificateOutput) SetCertificateArn(v string) *RegisterCACertificateOutput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *RegisterCACertificateOutput) SetCertificateId(v string) *RegisterCACertificateOutput {
-	s.CertificateId = &v
-	return s
 }
 
 // The input to the RegisterCertificate operation.
@@ -18160,30 +14560,6 @@ func (s *RegisterCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCaCertificatePem sets the CaCertificatePem field's value.
-func (s *RegisterCertificateInput) SetCaCertificatePem(v string) *RegisterCertificateInput {
-	s.CaCertificatePem = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *RegisterCertificateInput) SetCertificatePem(v string) *RegisterCertificateInput {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetSetAsActive sets the SetAsActive field's value.
-func (s *RegisterCertificateInput) SetSetAsActive(v bool) *RegisterCertificateInput {
-	s.SetAsActive = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *RegisterCertificateInput) SetStatus(v CertificateStatus) *RegisterCertificateInput {
-	s.Status = v
-	return s
-}
-
 // The output from the RegisterCertificate operation.
 type RegisterCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -18210,18 +14586,6 @@ func (s RegisterCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *RegisterCertificateOutput) SetCertificateArn(v string) *RegisterCertificateOutput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *RegisterCertificateOutput) SetCertificateId(v string) *RegisterCertificateOutput {
-	s.CertificateId = &v
-	return s
 }
 
 type RegisterThingInput struct {
@@ -18260,18 +14624,6 @@ func (s *RegisterThingInput) Validate() error {
 	return nil
 }
 
-// SetParameters sets the Parameters field's value.
-func (s *RegisterThingInput) SetParameters(v map[string]string) *RegisterThingInput {
-	s.Parameters = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *RegisterThingInput) SetTemplateBody(v string) *RegisterThingInput {
-	s.TemplateBody = &v
-	return s
-}
-
 type RegisterThingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -18297,18 +14649,6 @@ func (s RegisterThingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterThingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *RegisterThingOutput) SetCertificatePem(v string) *RegisterThingOutput {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetResourceArns sets the ResourceArns field's value.
-func (s *RegisterThingOutput) SetResourceArns(v map[string]string) *RegisterThingOutput {
-	s.ResourceArns = v
-	return s
 }
 
 // The registration configuration.
@@ -18343,18 +14683,6 @@ func (s *RegistrationConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *RegistrationConfig) SetRoleArn(v string) *RegistrationConfig {
-	s.RoleArn = &v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *RegistrationConfig) SetTemplateBody(v string) *RegistrationConfig {
-	s.TemplateBody = &v
-	return s
 }
 
 // The input for the RejectCertificateTransfer operation.
@@ -18395,18 +14723,6 @@ func (s *RejectCertificateTransferInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *RejectCertificateTransferInput) SetCertificateId(v string) *RejectCertificateTransferInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetRejectReason sets the RejectReason field's value.
-func (s *RejectCertificateTransferInput) SetRejectReason(v string) *RejectCertificateTransferInput {
-	s.RejectReason = &v
-	return s
 }
 
 type RejectCertificateTransferOutput struct {
@@ -18470,30 +14786,6 @@ func (s *RemoveThingFromThingGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *RemoveThingFromThingGroupInput) SetThingArn(v string) *RemoveThingFromThingGroupInput {
-	s.ThingArn = &v
-	return s
-}
-
-// SetThingGroupArn sets the ThingGroupArn field's value.
-func (s *RemoveThingFromThingGroupInput) SetThingGroupArn(v string) *RemoveThingFromThingGroupInput {
-	s.ThingGroupArn = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *RemoveThingFromThingGroupInput) SetThingGroupName(v string) *RemoveThingFromThingGroupInput {
-	s.ThingGroupName = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *RemoveThingFromThingGroupInput) SetThingName(v string) *RemoveThingFromThingGroupInput {
-	s.ThingName = &v
-	return s
 }
 
 type RemoveThingFromThingGroupOutput struct {
@@ -18568,18 +14860,6 @@ func (s *ReplaceTopicRuleInput) Validate() error {
 	return nil
 }
 
-// SetRuleName sets the RuleName field's value.
-func (s *ReplaceTopicRuleInput) SetRuleName(v string) *ReplaceTopicRuleInput {
-	s.RuleName = &v
-	return s
-}
-
-// SetTopicRulePayload sets the TopicRulePayload field's value.
-func (s *ReplaceTopicRuleInput) SetTopicRulePayload(v *TopicRulePayload) *ReplaceTopicRuleInput {
-	s.TopicRulePayload = v
-	return s
-}
-
 type ReplaceTopicRuleOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -18644,18 +14924,6 @@ func (s *RepublishAction) Validate() error {
 	return nil
 }
 
-// SetRoleArn sets the RoleArn field's value.
-func (s *RepublishAction) SetRoleArn(v string) *RepublishAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetTopic sets the Topic field's value.
-func (s *RepublishAction) SetTopic(v string) *RepublishAction {
-	s.Topic = &v
-	return s
-}
-
 // Role alias description.
 type RoleAliasDescription struct {
 	_ struct{} `type:"structure"`
@@ -18687,42 +14955,6 @@ func (s RoleAliasDescription) String() string {
 // GoString returns the string representation
 func (s RoleAliasDescription) GoString() string {
 	return s.String()
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *RoleAliasDescription) SetCreationDate(v time.Time) *RoleAliasDescription {
-	s.CreationDate = &v
-	return s
-}
-
-// SetCredentialDurationSeconds sets the CredentialDurationSeconds field's value.
-func (s *RoleAliasDescription) SetCredentialDurationSeconds(v int64) *RoleAliasDescription {
-	s.CredentialDurationSeconds = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *RoleAliasDescription) SetLastModifiedDate(v time.Time) *RoleAliasDescription {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *RoleAliasDescription) SetOwner(v string) *RoleAliasDescription {
-	s.Owner = &v
-	return s
-}
-
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *RoleAliasDescription) SetRoleAlias(v string) *RoleAliasDescription {
-	s.RoleAlias = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *RoleAliasDescription) SetRoleArn(v string) *RoleAliasDescription {
-	s.RoleArn = &v
-	return s
 }
 
 // Describes an action to write data to an Amazon S3 bucket.
@@ -18781,30 +15013,6 @@ func (s *S3Action) Validate() error {
 	return nil
 }
 
-// SetBucketName sets the BucketName field's value.
-func (s *S3Action) SetBucketName(v string) *S3Action {
-	s.BucketName = &v
-	return s
-}
-
-// SetCannedAcl sets the CannedAcl field's value.
-func (s *S3Action) SetCannedAcl(v CannedAccessControlList) *S3Action {
-	s.CannedAcl = v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *S3Action) SetKey(v string) *S3Action {
-	s.Key = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *S3Action) SetRoleArn(v string) *S3Action {
-	s.RoleArn = &v
-	return s
-}
-
 // The location in S3 the contains the files to stream.
 type S3Location struct {
 	_ struct{} `type:"structure"`
@@ -18857,24 +15065,6 @@ func (s *S3Location) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *S3Location) SetBucket(v string) *S3Location {
-	s.Bucket = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *S3Location) SetKey(v string) *S3Location {
-	s.Key = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *S3Location) SetVersion(v string) *S3Location {
-	s.Version = &v
-	return s
-}
-
 // Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
 type SalesforceAction struct {
 	_ struct{} `type:"structure"`
@@ -18922,18 +15112,6 @@ func (s *SalesforceAction) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetToken sets the Token field's value.
-func (s *SalesforceAction) SetToken(v string) *SalesforceAction {
-	s.Token = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *SalesforceAction) SetUrl(v string) *SalesforceAction {
-	s.Url = &v
-	return s
 }
 
 type SearchIndexInput struct {
@@ -18991,36 +15169,6 @@ func (s *SearchIndexInput) Validate() error {
 	return nil
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *SearchIndexInput) SetIndexName(v string) *SearchIndexInput {
-	s.IndexName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchIndexInput) SetMaxResults(v int64) *SearchIndexInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchIndexInput) SetNextToken(v string) *SearchIndexInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQueryString sets the QueryString field's value.
-func (s *SearchIndexInput) SetQueryString(v string) *SearchIndexInput {
-	s.QueryString = &v
-	return s
-}
-
-// SetQueryVersion sets the QueryVersion field's value.
-func (s *SearchIndexInput) SetQueryVersion(v string) *SearchIndexInput {
-	s.QueryVersion = &v
-	return s
-}
-
 type SearchIndexOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -19047,18 +15195,6 @@ func (s SearchIndexOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchIndexOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchIndexOutput) SetNextToken(v string) *SearchIndexOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetThings sets the Things field's value.
-func (s *SearchIndexOutput) SetThings(v []ThingDocument) *SearchIndexOutput {
-	s.Things = v
-	return s
 }
 
 type SetDefaultAuthorizerInput struct {
@@ -19097,12 +15233,6 @@ func (s *SetDefaultAuthorizerInput) Validate() error {
 	return nil
 }
 
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *SetDefaultAuthorizerInput) SetAuthorizerName(v string) *SetDefaultAuthorizerInput {
-	s.AuthorizerName = &v
-	return s
-}
-
 type SetDefaultAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -19128,18 +15258,6 @@ func (s SetDefaultAuthorizerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetDefaultAuthorizerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizerArn sets the AuthorizerArn field's value.
-func (s *SetDefaultAuthorizerOutput) SetAuthorizerArn(v string) *SetDefaultAuthorizerOutput {
-	s.AuthorizerArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *SetDefaultAuthorizerOutput) SetAuthorizerName(v string) *SetDefaultAuthorizerOutput {
-	s.AuthorizerName = &v
-	return s
 }
 
 // The input for the SetDefaultPolicyVersion operation.
@@ -19186,18 +15304,6 @@ func (s *SetDefaultPolicyVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *SetDefaultPolicyVersionInput) SetPolicyName(v string) *SetDefaultPolicyVersionInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyVersionId sets the PolicyVersionId field's value.
-func (s *SetDefaultPolicyVersionInput) SetPolicyVersionId(v string) *SetDefaultPolicyVersionInput {
-	s.PolicyVersionId = &v
-	return s
 }
 
 type SetDefaultPolicyVersionOutput struct {
@@ -19258,12 +15364,6 @@ func (s *SetLoggingOptionsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLoggingOptionsPayload sets the LoggingOptionsPayload field's value.
-func (s *SetLoggingOptionsInput) SetLoggingOptionsPayload(v *LoggingOptionsPayload) *SetLoggingOptionsInput {
-	s.LoggingOptionsPayload = v
-	return s
 }
 
 type SetLoggingOptionsOutput struct {
@@ -19333,18 +15433,6 @@ func (s *SetV2LoggingLevelInput) Validate() error {
 	return nil
 }
 
-// SetLogLevel sets the LogLevel field's value.
-func (s *SetV2LoggingLevelInput) SetLogLevel(v LogLevel) *SetV2LoggingLevelInput {
-	s.LogLevel = v
-	return s
-}
-
-// SetLogTarget sets the LogTarget field's value.
-func (s *SetV2LoggingLevelInput) SetLogTarget(v *LogTarget) *SetV2LoggingLevelInput {
-	s.LogTarget = v
-	return s
-}
-
 type SetV2LoggingLevelOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -19387,24 +15475,6 @@ func (s SetV2LoggingOptionsInput) String() string {
 // GoString returns the string representation
 func (s SetV2LoggingOptionsInput) GoString() string {
 	return s.String()
-}
-
-// SetDefaultLogLevel sets the DefaultLogLevel field's value.
-func (s *SetV2LoggingOptionsInput) SetDefaultLogLevel(v LogLevel) *SetV2LoggingOptionsInput {
-	s.DefaultLogLevel = v
-	return s
-}
-
-// SetDisableAllLogs sets the DisableAllLogs field's value.
-func (s *SetV2LoggingOptionsInput) SetDisableAllLogs(v bool) *SetV2LoggingOptionsInput {
-	s.DisableAllLogs = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *SetV2LoggingOptionsInput) SetRoleArn(v string) *SetV2LoggingOptionsInput {
-	s.RoleArn = &v
-	return s
 }
 
 type SetV2LoggingOptionsOutput struct {
@@ -19479,24 +15549,6 @@ func (s *SnsAction) Validate() error {
 	return nil
 }
 
-// SetMessageFormat sets the MessageFormat field's value.
-func (s *SnsAction) SetMessageFormat(v MessageFormat) *SnsAction {
-	s.MessageFormat = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *SnsAction) SetRoleArn(v string) *SnsAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetTargetArn sets the TargetArn field's value.
-func (s *SnsAction) SetTargetArn(v string) *SnsAction {
-	s.TargetArn = &v
-	return s
-}
-
 // Describes an action to publish data to an Amazon SQS queue.
 type SqsAction struct {
 	_ struct{} `type:"structure"`
@@ -19541,24 +15593,6 @@ func (s *SqsAction) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetQueueUrl sets the QueueUrl field's value.
-func (s *SqsAction) SetQueueUrl(v string) *SqsAction {
-	s.QueueUrl = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *SqsAction) SetRoleArn(v string) *SqsAction {
-	s.RoleArn = &v
-	return s
-}
-
-// SetUseBase64 sets the UseBase64 field's value.
-func (s *SqsAction) SetUseBase64(v bool) *SqsAction {
-	s.UseBase64 = &v
-	return s
 }
 
 type StartThingRegistrationTaskInput struct {
@@ -19632,30 +15666,6 @@ func (s *StartThingRegistrationTaskInput) Validate() error {
 	return nil
 }
 
-// SetInputFileBucket sets the InputFileBucket field's value.
-func (s *StartThingRegistrationTaskInput) SetInputFileBucket(v string) *StartThingRegistrationTaskInput {
-	s.InputFileBucket = &v
-	return s
-}
-
-// SetInputFileKey sets the InputFileKey field's value.
-func (s *StartThingRegistrationTaskInput) SetInputFileKey(v string) *StartThingRegistrationTaskInput {
-	s.InputFileKey = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *StartThingRegistrationTaskInput) SetRoleArn(v string) *StartThingRegistrationTaskInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *StartThingRegistrationTaskInput) SetTemplateBody(v string) *StartThingRegistrationTaskInput {
-	s.TemplateBody = &v
-	return s
-}
-
 type StartThingRegistrationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -19678,12 +15688,6 @@ func (s StartThingRegistrationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartThingRegistrationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTaskId sets the TaskId field's value.
-func (s *StartThingRegistrationTaskOutput) SetTaskId(v string) *StartThingRegistrationTaskOutput {
-	s.TaskId = &v
-	return s
 }
 
 type StopThingRegistrationTaskInput struct {
@@ -19717,12 +15721,6 @@ func (s *StopThingRegistrationTaskInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTaskId sets the TaskId field's value.
-func (s *StopThingRegistrationTaskInput) SetTaskId(v string) *StopThingRegistrationTaskInput {
-	s.TaskId = &v
-	return s
 }
 
 type StopThingRegistrationTaskOutput struct {
@@ -19780,18 +15778,6 @@ func (s *Stream) Validate() error {
 	return nil
 }
 
-// SetFileId sets the FileId field's value.
-func (s *Stream) SetFileId(v int64) *Stream {
-	s.FileId = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *Stream) SetStreamId(v string) *Stream {
-	s.StreamId = &v
-	return s
-}
-
 // Represents a file to stream.
 type StreamFile struct {
 	_ struct{} `type:"structure"`
@@ -19826,18 +15812,6 @@ func (s *StreamFile) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFileId sets the FileId field's value.
-func (s *StreamFile) SetFileId(v int64) *StreamFile {
-	s.FileId = &v
-	return s
-}
-
-// SetS3Location sets the S3Location field's value.
-func (s *StreamFile) SetS3Location(v *S3Location) *StreamFile {
-	s.S3Location = v
-	return s
 }
 
 // Information about a stream.
@@ -19879,54 +15853,6 @@ func (s StreamInfo) GoString() string {
 	return s.String()
 }
 
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *StreamInfo) SetCreatedAt(v time.Time) *StreamInfo {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *StreamInfo) SetDescription(v string) *StreamInfo {
-	s.Description = &v
-	return s
-}
-
-// SetFiles sets the Files field's value.
-func (s *StreamInfo) SetFiles(v []StreamFile) *StreamInfo {
-	s.Files = v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *StreamInfo) SetLastUpdatedAt(v time.Time) *StreamInfo {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *StreamInfo) SetRoleArn(v string) *StreamInfo {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStreamArn sets the StreamArn field's value.
-func (s *StreamInfo) SetStreamArn(v string) *StreamInfo {
-	s.StreamArn = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *StreamInfo) SetStreamId(v string) *StreamInfo {
-	s.StreamId = &v
-	return s
-}
-
-// SetStreamVersion sets the StreamVersion field's value.
-func (s *StreamInfo) SetStreamVersion(v int64) *StreamInfo {
-	s.StreamVersion = &v
-	return s
-}
-
 // A summary of a stream.
 type StreamSummary struct {
 	_ struct{} `type:"structure"`
@@ -19952,30 +15878,6 @@ func (s StreamSummary) String() string {
 // GoString returns the string representation
 func (s StreamSummary) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *StreamSummary) SetDescription(v string) *StreamSummary {
-	s.Description = &v
-	return s
-}
-
-// SetStreamArn sets the StreamArn field's value.
-func (s *StreamSummary) SetStreamArn(v string) *StreamSummary {
-	s.StreamArn = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *StreamSummary) SetStreamId(v string) *StreamSummary {
-	s.StreamId = &v
-	return s
-}
-
-// SetStreamVersion sets the StreamVersion field's value.
-func (s *StreamSummary) SetStreamVersion(v int64) *StreamSummary {
-	s.StreamVersion = &v
-	return s
 }
 
 type TestAuthorizationInput struct {
@@ -20032,42 +15934,6 @@ func (s *TestAuthorizationInput) Validate() error {
 	return nil
 }
 
-// SetAuthInfos sets the AuthInfos field's value.
-func (s *TestAuthorizationInput) SetAuthInfos(v []AuthInfo) *TestAuthorizationInput {
-	s.AuthInfos = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *TestAuthorizationInput) SetClientId(v string) *TestAuthorizationInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetCognitoIdentityPoolId sets the CognitoIdentityPoolId field's value.
-func (s *TestAuthorizationInput) SetCognitoIdentityPoolId(v string) *TestAuthorizationInput {
-	s.CognitoIdentityPoolId = &v
-	return s
-}
-
-// SetPolicyNamesToAdd sets the PolicyNamesToAdd field's value.
-func (s *TestAuthorizationInput) SetPolicyNamesToAdd(v []string) *TestAuthorizationInput {
-	s.PolicyNamesToAdd = v
-	return s
-}
-
-// SetPolicyNamesToSkip sets the PolicyNamesToSkip field's value.
-func (s *TestAuthorizationInput) SetPolicyNamesToSkip(v []string) *TestAuthorizationInput {
-	s.PolicyNamesToSkip = v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *TestAuthorizationInput) SetPrincipal(v string) *TestAuthorizationInput {
-	s.Principal = &v
-	return s
-}
-
 type TestAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -20090,12 +15956,6 @@ func (s TestAuthorizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TestAuthorizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthResults sets the AuthResults field's value.
-func (s *TestAuthorizationOutput) SetAuthResults(v []AuthResult) *TestAuthorizationOutput {
-	s.AuthResults = v
-	return s
 }
 
 type TestInvokeAuthorizerInput struct {
@@ -20159,24 +16019,6 @@ func (s *TestInvokeAuthorizerInput) Validate() error {
 	return nil
 }
 
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *TestInvokeAuthorizerInput) SetAuthorizerName(v string) *TestInvokeAuthorizerInput {
-	s.AuthorizerName = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *TestInvokeAuthorizerInput) SetToken(v string) *TestInvokeAuthorizerInput {
-	s.Token = &v
-	return s
-}
-
-// SetTokenSignature sets the TokenSignature field's value.
-func (s *TestInvokeAuthorizerInput) SetTokenSignature(v string) *TestInvokeAuthorizerInput {
-	s.TokenSignature = &v
-	return s
-}
-
 type TestInvokeAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -20213,36 +16055,6 @@ func (s TestInvokeAuthorizerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDisconnectAfterInSeconds sets the DisconnectAfterInSeconds field's value.
-func (s *TestInvokeAuthorizerOutput) SetDisconnectAfterInSeconds(v int64) *TestInvokeAuthorizerOutput {
-	s.DisconnectAfterInSeconds = &v
-	return s
-}
-
-// SetIsAuthenticated sets the IsAuthenticated field's value.
-func (s *TestInvokeAuthorizerOutput) SetIsAuthenticated(v bool) *TestInvokeAuthorizerOutput {
-	s.IsAuthenticated = &v
-	return s
-}
-
-// SetPolicyDocuments sets the PolicyDocuments field's value.
-func (s *TestInvokeAuthorizerOutput) SetPolicyDocuments(v []string) *TestInvokeAuthorizerOutput {
-	s.PolicyDocuments = v
-	return s
-}
-
-// SetPrincipalId sets the PrincipalId field's value.
-func (s *TestInvokeAuthorizerOutput) SetPrincipalId(v string) *TestInvokeAuthorizerOutput {
-	s.PrincipalId = &v
-	return s
-}
-
-// SetRefreshAfterInSeconds sets the RefreshAfterInSeconds field's value.
-func (s *TestInvokeAuthorizerOutput) SetRefreshAfterInSeconds(v int64) *TestInvokeAuthorizerOutput {
-	s.RefreshAfterInSeconds = &v
-	return s
-}
-
 // The properties of the thing, including thing name, thing type name, and a
 // list of thing attributes.
 type ThingAttribute struct {
@@ -20272,36 +16084,6 @@ func (s ThingAttribute) String() string {
 // GoString returns the string representation
 func (s ThingAttribute) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *ThingAttribute) SetAttributes(v map[string]string) *ThingAttribute {
-	s.Attributes = v
-	return s
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *ThingAttribute) SetThingArn(v string) *ThingAttribute {
-	s.ThingArn = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *ThingAttribute) SetThingName(v string) *ThingAttribute {
-	s.ThingName = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *ThingAttribute) SetThingTypeName(v string) *ThingAttribute {
-	s.ThingTypeName = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ThingAttribute) SetVersion(v int64) *ThingAttribute {
-	s.Version = &v
-	return s
 }
 
 // The thing search index document.
@@ -20337,42 +16119,6 @@ func (s ThingDocument) GoString() string {
 	return s.String()
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *ThingDocument) SetAttributes(v map[string]string) *ThingDocument {
-	s.Attributes = v
-	return s
-}
-
-// SetShadow sets the Shadow field's value.
-func (s *ThingDocument) SetShadow(v string) *ThingDocument {
-	s.Shadow = &v
-	return s
-}
-
-// SetThingGroupNames sets the ThingGroupNames field's value.
-func (s *ThingDocument) SetThingGroupNames(v []string) *ThingDocument {
-	s.ThingGroupNames = v
-	return s
-}
-
-// SetThingId sets the ThingId field's value.
-func (s *ThingDocument) SetThingId(v string) *ThingDocument {
-	s.ThingId = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *ThingDocument) SetThingName(v string) *ThingDocument {
-	s.ThingName = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *ThingDocument) SetThingTypeName(v string) *ThingDocument {
-	s.ThingTypeName = &v
-	return s
-}
-
 // Thing group metadata.
 type ThingGroupMetadata struct {
 	_ struct{} `type:"structure"`
@@ -20397,24 +16143,6 @@ func (s ThingGroupMetadata) GoString() string {
 	return s.String()
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *ThingGroupMetadata) SetCreationDate(v time.Time) *ThingGroupMetadata {
-	s.CreationDate = &v
-	return s
-}
-
-// SetParentGroupName sets the ParentGroupName field's value.
-func (s *ThingGroupMetadata) SetParentGroupName(v string) *ThingGroupMetadata {
-	s.ParentGroupName = &v
-	return s
-}
-
-// SetRootToParentThingGroups sets the RootToParentThingGroups field's value.
-func (s *ThingGroupMetadata) SetRootToParentThingGroups(v []GroupNameAndArn) *ThingGroupMetadata {
-	s.RootToParentThingGroups = v
-	return s
-}
-
 // Thing group properties.
 type ThingGroupProperties struct {
 	_ struct{} `type:"structure"`
@@ -20434,18 +16162,6 @@ func (s ThingGroupProperties) String() string {
 // GoString returns the string representation
 func (s ThingGroupProperties) GoString() string {
 	return s.String()
-}
-
-// SetAttributePayload sets the AttributePayload field's value.
-func (s *ThingGroupProperties) SetAttributePayload(v *AttributePayload) *ThingGroupProperties {
-	s.AttributePayload = v
-	return s
-}
-
-// SetThingGroupDescription sets the ThingGroupDescription field's value.
-func (s *ThingGroupProperties) SetThingGroupDescription(v string) *ThingGroupProperties {
-	s.ThingGroupDescription = &v
-	return s
 }
 
 // Thing indexing configuration.
@@ -20471,12 +16187,6 @@ func (s ThingIndexingConfiguration) String() string {
 // GoString returns the string representation
 func (s ThingIndexingConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetThingIndexingMode sets the ThingIndexingMode field's value.
-func (s *ThingIndexingConfiguration) SetThingIndexingMode(v ThingIndexingMode) *ThingIndexingConfiguration {
-	s.ThingIndexingMode = v
-	return s
 }
 
 // The definition of the thing type, including thing type name and description.
@@ -20508,30 +16218,6 @@ func (s ThingTypeDefinition) GoString() string {
 	return s.String()
 }
 
-// SetThingTypeArn sets the ThingTypeArn field's value.
-func (s *ThingTypeDefinition) SetThingTypeArn(v string) *ThingTypeDefinition {
-	s.ThingTypeArn = &v
-	return s
-}
-
-// SetThingTypeMetadata sets the ThingTypeMetadata field's value.
-func (s *ThingTypeDefinition) SetThingTypeMetadata(v *ThingTypeMetadata) *ThingTypeDefinition {
-	s.ThingTypeMetadata = v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *ThingTypeDefinition) SetThingTypeName(v string) *ThingTypeDefinition {
-	s.ThingTypeName = &v
-	return s
-}
-
-// SetThingTypeProperties sets the ThingTypeProperties field's value.
-func (s *ThingTypeDefinition) SetThingTypeProperties(v *ThingTypeProperties) *ThingTypeDefinition {
-	s.ThingTypeProperties = v
-	return s
-}
-
 // The ThingTypeMetadata contains additional information about the thing type
 // including: creation date and time, a value indicating whether the thing type
 // is deprecated, and a date and time when time was deprecated.
@@ -20559,24 +16245,6 @@ func (s ThingTypeMetadata) GoString() string {
 	return s.String()
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *ThingTypeMetadata) SetCreationDate(v time.Time) *ThingTypeMetadata {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDeprecated sets the Deprecated field's value.
-func (s *ThingTypeMetadata) SetDeprecated(v bool) *ThingTypeMetadata {
-	s.Deprecated = &v
-	return s
-}
-
-// SetDeprecationDate sets the DeprecationDate field's value.
-func (s *ThingTypeMetadata) SetDeprecationDate(v time.Time) *ThingTypeMetadata {
-	s.DeprecationDate = &v
-	return s
-}
-
 // The ThingTypeProperties contains information about the thing type including:
 // a thing type description, and a list of searchable thing attribute names.
 type ThingTypeProperties struct {
@@ -20597,18 +16265,6 @@ func (s ThingTypeProperties) String() string {
 // GoString returns the string representation
 func (s ThingTypeProperties) GoString() string {
 	return s.String()
-}
-
-// SetSearchableAttributes sets the SearchableAttributes field's value.
-func (s *ThingTypeProperties) SetSearchableAttributes(v []string) *ThingTypeProperties {
-	s.SearchableAttributes = v
-	return s
-}
-
-// SetThingTypeDescription sets the ThingTypeDescription field's value.
-func (s *ThingTypeProperties) SetThingTypeDescription(v string) *ThingTypeProperties {
-	s.ThingTypeDescription = &v
-	return s
 }
 
 // Describes a rule.
@@ -20651,54 +16307,6 @@ func (s TopicRule) GoString() string {
 	return s.String()
 }
 
-// SetActions sets the Actions field's value.
-func (s *TopicRule) SetActions(v []Action) *TopicRule {
-	s.Actions = v
-	return s
-}
-
-// SetAwsIotSqlVersion sets the AwsIotSqlVersion field's value.
-func (s *TopicRule) SetAwsIotSqlVersion(v string) *TopicRule {
-	s.AwsIotSqlVersion = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *TopicRule) SetCreatedAt(v time.Time) *TopicRule {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *TopicRule) SetDescription(v string) *TopicRule {
-	s.Description = &v
-	return s
-}
-
-// SetErrorAction sets the ErrorAction field's value.
-func (s *TopicRule) SetErrorAction(v *Action) *TopicRule {
-	s.ErrorAction = v
-	return s
-}
-
-// SetRuleDisabled sets the RuleDisabled field's value.
-func (s *TopicRule) SetRuleDisabled(v bool) *TopicRule {
-	s.RuleDisabled = &v
-	return s
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *TopicRule) SetRuleName(v string) *TopicRule {
-	s.RuleName = &v
-	return s
-}
-
-// SetSql sets the Sql field's value.
-func (s *TopicRule) SetSql(v string) *TopicRule {
-	s.Sql = &v
-	return s
-}
-
 // Describes a rule.
 type TopicRuleListItem struct {
 	_ struct{} `type:"structure"`
@@ -20727,36 +16335,6 @@ func (s TopicRuleListItem) String() string {
 // GoString returns the string representation
 func (s TopicRuleListItem) GoString() string {
 	return s.String()
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *TopicRuleListItem) SetCreatedAt(v time.Time) *TopicRuleListItem {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetRuleArn sets the RuleArn field's value.
-func (s *TopicRuleListItem) SetRuleArn(v string) *TopicRuleListItem {
-	s.RuleArn = &v
-	return s
-}
-
-// SetRuleDisabled sets the RuleDisabled field's value.
-func (s *TopicRuleListItem) SetRuleDisabled(v bool) *TopicRuleListItem {
-	s.RuleDisabled = &v
-	return s
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *TopicRuleListItem) SetRuleName(v string) *TopicRuleListItem {
-	s.RuleName = &v
-	return s
-}
-
-// SetTopicPattern sets the TopicPattern field's value.
-func (s *TopicRuleListItem) SetTopicPattern(v string) *TopicRuleListItem {
-	s.TopicPattern = &v
-	return s
 }
 
 // Describes a rule.
@@ -20828,42 +16406,6 @@ func (s *TopicRulePayload) Validate() error {
 	return nil
 }
 
-// SetActions sets the Actions field's value.
-func (s *TopicRulePayload) SetActions(v []Action) *TopicRulePayload {
-	s.Actions = v
-	return s
-}
-
-// SetAwsIotSqlVersion sets the AwsIotSqlVersion field's value.
-func (s *TopicRulePayload) SetAwsIotSqlVersion(v string) *TopicRulePayload {
-	s.AwsIotSqlVersion = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *TopicRulePayload) SetDescription(v string) *TopicRulePayload {
-	s.Description = &v
-	return s
-}
-
-// SetErrorAction sets the ErrorAction field's value.
-func (s *TopicRulePayload) SetErrorAction(v *Action) *TopicRulePayload {
-	s.ErrorAction = v
-	return s
-}
-
-// SetRuleDisabled sets the RuleDisabled field's value.
-func (s *TopicRulePayload) SetRuleDisabled(v bool) *TopicRulePayload {
-	s.RuleDisabled = &v
-	return s
-}
-
-// SetSql sets the Sql field's value.
-func (s *TopicRulePayload) SetSql(v string) *TopicRulePayload {
-	s.Sql = &v
-	return s
-}
-
 // The input for the TransferCertificate operation.
 type TransferCertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -20913,24 +16455,6 @@ func (s *TransferCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *TransferCertificateInput) SetCertificateId(v string) *TransferCertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetTargetAwsAccount sets the TargetAwsAccount field's value.
-func (s *TransferCertificateInput) SetTargetAwsAccount(v string) *TransferCertificateInput {
-	s.TargetAwsAccount = &v
-	return s
-}
-
-// SetTransferMessage sets the TransferMessage field's value.
-func (s *TransferCertificateInput) SetTransferMessage(v string) *TransferCertificateInput {
-	s.TransferMessage = &v
-	return s
-}
-
 // The output from the TransferCertificate operation.
 type TransferCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -20954,12 +16478,6 @@ func (s TransferCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TransferCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTransferredCertificateArn sets the TransferredCertificateArn field's value.
-func (s *TransferCertificateOutput) SetTransferredCertificateArn(v string) *TransferCertificateOutput {
-	s.TransferredCertificateArn = &v
-	return s
 }
 
 // Data used to transfer a certificate to an AWS account.
@@ -20990,36 +16508,6 @@ func (s TransferData) String() string {
 // GoString returns the string representation
 func (s TransferData) GoString() string {
 	return s.String()
-}
-
-// SetAcceptDate sets the AcceptDate field's value.
-func (s *TransferData) SetAcceptDate(v time.Time) *TransferData {
-	s.AcceptDate = &v
-	return s
-}
-
-// SetRejectDate sets the RejectDate field's value.
-func (s *TransferData) SetRejectDate(v time.Time) *TransferData {
-	s.RejectDate = &v
-	return s
-}
-
-// SetRejectReason sets the RejectReason field's value.
-func (s *TransferData) SetRejectReason(v string) *TransferData {
-	s.RejectReason = &v
-	return s
-}
-
-// SetTransferDate sets the TransferDate field's value.
-func (s *TransferData) SetTransferDate(v time.Time) *TransferData {
-	s.TransferDate = &v
-	return s
-}
-
-// SetTransferMessage sets the TransferMessage field's value.
-func (s *TransferData) SetTransferMessage(v string) *TransferData {
-	s.TransferMessage = &v
-	return s
 }
 
 type UpdateAuthorizerInput struct {
@@ -21073,36 +16561,6 @@ func (s *UpdateAuthorizerInput) Validate() error {
 	return nil
 }
 
-// SetAuthorizerFunctionArn sets the AuthorizerFunctionArn field's value.
-func (s *UpdateAuthorizerInput) SetAuthorizerFunctionArn(v string) *UpdateAuthorizerInput {
-	s.AuthorizerFunctionArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *UpdateAuthorizerInput) SetAuthorizerName(v string) *UpdateAuthorizerInput {
-	s.AuthorizerName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateAuthorizerInput) SetStatus(v AuthorizerStatus) *UpdateAuthorizerInput {
-	s.Status = v
-	return s
-}
-
-// SetTokenKeyName sets the TokenKeyName field's value.
-func (s *UpdateAuthorizerInput) SetTokenKeyName(v string) *UpdateAuthorizerInput {
-	s.TokenKeyName = &v
-	return s
-}
-
-// SetTokenSigningPublicKeys sets the TokenSigningPublicKeys field's value.
-func (s *UpdateAuthorizerInput) SetTokenSigningPublicKeys(v map[string]string) *UpdateAuthorizerInput {
-	s.TokenSigningPublicKeys = v
-	return s
-}
-
 type UpdateAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -21128,18 +16586,6 @@ func (s UpdateAuthorizerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAuthorizerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthorizerArn sets the AuthorizerArn field's value.
-func (s *UpdateAuthorizerOutput) SetAuthorizerArn(v string) *UpdateAuthorizerOutput {
-	s.AuthorizerArn = &v
-	return s
-}
-
-// SetAuthorizerName sets the AuthorizerName field's value.
-func (s *UpdateAuthorizerOutput) SetAuthorizerName(v string) *UpdateAuthorizerOutput {
-	s.AuthorizerName = &v
-	return s
 }
 
 // The input to the UpdateCACertificate operation.
@@ -21198,36 +16644,6 @@ func (s *UpdateCACertificateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *UpdateCACertificateInput) SetCertificateId(v string) *UpdateCACertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetNewAutoRegistrationStatus sets the NewAutoRegistrationStatus field's value.
-func (s *UpdateCACertificateInput) SetNewAutoRegistrationStatus(v AutoRegistrationStatus) *UpdateCACertificateInput {
-	s.NewAutoRegistrationStatus = v
-	return s
-}
-
-// SetNewStatus sets the NewStatus field's value.
-func (s *UpdateCACertificateInput) SetNewStatus(v CACertificateStatus) *UpdateCACertificateInput {
-	s.NewStatus = v
-	return s
-}
-
-// SetRegistrationConfig sets the RegistrationConfig field's value.
-func (s *UpdateCACertificateInput) SetRegistrationConfig(v *RegistrationConfig) *UpdateCACertificateInput {
-	s.RegistrationConfig = v
-	return s
-}
-
-// SetRemoveAutoRegistration sets the RemoveAutoRegistration field's value.
-func (s *UpdateCACertificateInput) SetRemoveAutoRegistration(v bool) *UpdateCACertificateInput {
-	s.RemoveAutoRegistration = &v
-	return s
 }
 
 type UpdateCACertificateOutput struct {
@@ -21303,18 +16719,6 @@ func (s *UpdateCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *UpdateCertificateInput) SetCertificateId(v string) *UpdateCertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetNewStatus sets the NewStatus field's value.
-func (s *UpdateCertificateInput) SetNewStatus(v CertificateStatus) *UpdateCertificateInput {
-	s.NewStatus = v
-	return s
-}
-
 type UpdateCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -21353,12 +16757,6 @@ func (s UpdateEventConfigurationsInput) GoString() string {
 	return s.String()
 }
 
-// SetEventConfigurations sets the EventConfigurations field's value.
-func (s *UpdateEventConfigurationsInput) SetEventConfigurations(v map[string]Configuration) *UpdateEventConfigurationsInput {
-	s.EventConfigurations = v
-	return s
-}
-
 type UpdateEventConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -21395,12 +16793,6 @@ func (s UpdateIndexingConfigurationInput) String() string {
 // GoString returns the string representation
 func (s UpdateIndexingConfigurationInput) GoString() string {
 	return s.String()
-}
-
-// SetThingIndexingConfiguration sets the ThingIndexingConfiguration field's value.
-func (s *UpdateIndexingConfigurationInput) SetThingIndexingConfiguration(v *ThingIndexingConfiguration) *UpdateIndexingConfigurationInput {
-	s.ThingIndexingConfiguration = v
-	return s
 }
 
 type UpdateIndexingConfigurationOutput struct {
@@ -21472,24 +16864,6 @@ func (s *UpdateRoleAliasInput) Validate() error {
 	return nil
 }
 
-// SetCredentialDurationSeconds sets the CredentialDurationSeconds field's value.
-func (s *UpdateRoleAliasInput) SetCredentialDurationSeconds(v int64) *UpdateRoleAliasInput {
-	s.CredentialDurationSeconds = &v
-	return s
-}
-
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *UpdateRoleAliasInput) SetRoleAlias(v string) *UpdateRoleAliasInput {
-	s.RoleAlias = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *UpdateRoleAliasInput) SetRoleArn(v string) *UpdateRoleAliasInput {
-	s.RoleArn = &v
-	return s
-}
-
 type UpdateRoleAliasOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -21515,18 +16889,6 @@ func (s UpdateRoleAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRoleAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRoleAlias sets the RoleAlias field's value.
-func (s *UpdateRoleAliasOutput) SetRoleAlias(v string) *UpdateRoleAliasOutput {
-	s.RoleAlias = &v
-	return s
-}
-
-// SetRoleAliasArn sets the RoleAliasArn field's value.
-func (s *UpdateRoleAliasOutput) SetRoleAliasArn(v string) *UpdateRoleAliasOutput {
-	s.RoleAliasArn = &v
-	return s
 }
 
 type UpdateStreamInput struct {
@@ -21588,30 +16950,6 @@ func (s *UpdateStreamInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateStreamInput) SetDescription(v string) *UpdateStreamInput {
-	s.Description = &v
-	return s
-}
-
-// SetFiles sets the Files field's value.
-func (s *UpdateStreamInput) SetFiles(v []StreamFile) *UpdateStreamInput {
-	s.Files = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *UpdateStreamInput) SetRoleArn(v string) *UpdateStreamInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *UpdateStreamInput) SetStreamId(v string) *UpdateStreamInput {
-	s.StreamId = &v
-	return s
-}
-
 type UpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -21643,30 +16981,6 @@ func (s UpdateStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateStreamOutput) SetDescription(v string) *UpdateStreamOutput {
-	s.Description = &v
-	return s
-}
-
-// SetStreamArn sets the StreamArn field's value.
-func (s *UpdateStreamOutput) SetStreamArn(v string) *UpdateStreamOutput {
-	s.StreamArn = &v
-	return s
-}
-
-// SetStreamId sets the StreamId field's value.
-func (s *UpdateStreamOutput) SetStreamId(v string) *UpdateStreamOutput {
-	s.StreamId = &v
-	return s
-}
-
-// SetStreamVersion sets the StreamVersion field's value.
-func (s *UpdateStreamOutput) SetStreamVersion(v int64) *UpdateStreamOutput {
-	s.StreamVersion = &v
-	return s
 }
 
 type UpdateThingGroupInput struct {
@@ -21718,24 +17032,6 @@ func (s *UpdateThingGroupInput) Validate() error {
 	return nil
 }
 
-// SetExpectedVersion sets the ExpectedVersion field's value.
-func (s *UpdateThingGroupInput) SetExpectedVersion(v int64) *UpdateThingGroupInput {
-	s.ExpectedVersion = &v
-	return s
-}
-
-// SetThingGroupName sets the ThingGroupName field's value.
-func (s *UpdateThingGroupInput) SetThingGroupName(v string) *UpdateThingGroupInput {
-	s.ThingGroupName = &v
-	return s
-}
-
-// SetThingGroupProperties sets the ThingGroupProperties field's value.
-func (s *UpdateThingGroupInput) SetThingGroupProperties(v *ThingGroupProperties) *UpdateThingGroupInput {
-	s.ThingGroupProperties = v
-	return s
-}
-
 type UpdateThingGroupOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -21758,12 +17054,6 @@ func (s UpdateThingGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateThingGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVersion sets the Version field's value.
-func (s *UpdateThingGroupOutput) SetVersion(v int64) *UpdateThingGroupOutput {
-	s.Version = &v
-	return s
 }
 
 type UpdateThingGroupsForThingInput struct {
@@ -21800,24 +17090,6 @@ func (s *UpdateThingGroupsForThingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetThingGroupsToAdd sets the ThingGroupsToAdd field's value.
-func (s *UpdateThingGroupsForThingInput) SetThingGroupsToAdd(v []string) *UpdateThingGroupsForThingInput {
-	s.ThingGroupsToAdd = v
-	return s
-}
-
-// SetThingGroupsToRemove sets the ThingGroupsToRemove field's value.
-func (s *UpdateThingGroupsForThingInput) SetThingGroupsToRemove(v []string) *UpdateThingGroupsForThingInput {
-	s.ThingGroupsToRemove = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *UpdateThingGroupsForThingInput) SetThingName(v string) *UpdateThingGroupsForThingInput {
-	s.ThingName = &v
-	return s
 }
 
 type UpdateThingGroupsForThingOutput struct {
@@ -21898,36 +17170,6 @@ func (s *UpdateThingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributePayload sets the AttributePayload field's value.
-func (s *UpdateThingInput) SetAttributePayload(v *AttributePayload) *UpdateThingInput {
-	s.AttributePayload = v
-	return s
-}
-
-// SetExpectedVersion sets the ExpectedVersion field's value.
-func (s *UpdateThingInput) SetExpectedVersion(v int64) *UpdateThingInput {
-	s.ExpectedVersion = &v
-	return s
-}
-
-// SetRemoveThingType sets the RemoveThingType field's value.
-func (s *UpdateThingInput) SetRemoveThingType(v bool) *UpdateThingInput {
-	s.RemoveThingType = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *UpdateThingInput) SetThingName(v string) *UpdateThingInput {
-	s.ThingName = &v
-	return s
-}
-
-// SetThingTypeName sets the ThingTypeName field's value.
-func (s *UpdateThingInput) SetThingTypeName(v string) *UpdateThingInput {
-	s.ThingTypeName = &v
-	return s
 }
 
 // The output from the UpdateThing operation.

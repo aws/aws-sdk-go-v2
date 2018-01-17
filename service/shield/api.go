@@ -547,54 +547,6 @@ func (s AttackDetail) GoString() string {
 	return s.String()
 }
 
-// SetAttackCounters sets the AttackCounters field's value.
-func (s *AttackDetail) SetAttackCounters(v []SummarizedCounter) *AttackDetail {
-	s.AttackCounters = v
-	return s
-}
-
-// SetAttackId sets the AttackId field's value.
-func (s *AttackDetail) SetAttackId(v string) *AttackDetail {
-	s.AttackId = &v
-	return s
-}
-
-// SetAttackProperties sets the AttackProperties field's value.
-func (s *AttackDetail) SetAttackProperties(v []AttackProperty) *AttackDetail {
-	s.AttackProperties = v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *AttackDetail) SetEndTime(v time.Time) *AttackDetail {
-	s.EndTime = &v
-	return s
-}
-
-// SetMitigations sets the Mitigations field's value.
-func (s *AttackDetail) SetMitigations(v []Mitigation) *AttackDetail {
-	s.Mitigations = v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *AttackDetail) SetResourceArn(v string) *AttackDetail {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *AttackDetail) SetStartTime(v time.Time) *AttackDetail {
-	s.StartTime = &v
-	return s
-}
-
-// SetSubResources sets the SubResources field's value.
-func (s *AttackDetail) SetSubResources(v []SubResourceSummary) *AttackDetail {
-	s.SubResources = v
-	return s
-}
-
 // Details of the described attack.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackProperty
 type AttackProperty struct {
@@ -629,36 +581,6 @@ func (s AttackProperty) GoString() string {
 	return s.String()
 }
 
-// SetAttackLayer sets the AttackLayer field's value.
-func (s *AttackProperty) SetAttackLayer(v AttackLayer) *AttackProperty {
-	s.AttackLayer = v
-	return s
-}
-
-// SetAttackPropertyIdentifier sets the AttackPropertyIdentifier field's value.
-func (s *AttackProperty) SetAttackPropertyIdentifier(v AttackPropertyIdentifier) *AttackProperty {
-	s.AttackPropertyIdentifier = v
-	return s
-}
-
-// SetTopContributors sets the TopContributors field's value.
-func (s *AttackProperty) SetTopContributors(v []Contributor) *AttackProperty {
-	s.TopContributors = v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *AttackProperty) SetTotal(v int64) *AttackProperty {
-	s.Total = &v
-	return s
-}
-
-// SetUnit sets the Unit field's value.
-func (s *AttackProperty) SetUnit(v Unit) *AttackProperty {
-	s.Unit = v
-	return s
-}
-
 // Summarizes all DDoS attacks for a specified time period.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackSummary
 type AttackSummary struct {
@@ -690,36 +612,6 @@ func (s AttackSummary) String() string {
 // GoString returns the string representation
 func (s AttackSummary) GoString() string {
 	return s.String()
-}
-
-// SetAttackId sets the AttackId field's value.
-func (s *AttackSummary) SetAttackId(v string) *AttackSummary {
-	s.AttackId = &v
-	return s
-}
-
-// SetAttackVectors sets the AttackVectors field's value.
-func (s *AttackSummary) SetAttackVectors(v []AttackVectorDescription) *AttackSummary {
-	s.AttackVectors = v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *AttackSummary) SetEndTime(v time.Time) *AttackSummary {
-	s.EndTime = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *AttackSummary) SetResourceArn(v string) *AttackSummary {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *AttackSummary) SetStartTime(v time.Time) *AttackSummary {
-	s.StartTime = &v
-	return s
 }
 
 // Describes the attack.
@@ -773,12 +665,6 @@ func (s AttackVectorDescription) GoString() string {
 	return s.String()
 }
 
-// SetVectorType sets the VectorType field's value.
-func (s *AttackVectorDescription) SetVectorType(v string) *AttackVectorDescription {
-	s.VectorType = &v
-	return s
-}
-
 // A contributor to the attack and their contribution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Contributor
 type Contributor struct {
@@ -802,18 +688,6 @@ func (s Contributor) String() string {
 // GoString returns the string representation
 func (s Contributor) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *Contributor) SetName(v string) *Contributor {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Contributor) SetValue(v int64) *Contributor {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionRequest
@@ -877,18 +751,6 @@ func (s *CreateProtectionInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateProtectionInput) SetName(v string) *CreateProtectionInput {
-	s.Name = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *CreateProtectionInput) SetResourceArn(v string) *CreateProtectionInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionResponse
 type CreateProtectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -912,12 +774,6 @@ func (s CreateProtectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProtectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProtectionId sets the ProtectionId field's value.
-func (s *CreateProtectionOutput) SetProtectionId(v string) *CreateProtectionOutput {
-	s.ProtectionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscriptionRequest
@@ -992,12 +848,6 @@ func (s *DeleteProtectionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetProtectionId sets the ProtectionId field's value.
-func (s *DeleteProtectionInput) SetProtectionId(v string) *DeleteProtectionInput {
-	s.ProtectionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionResponse
@@ -1096,12 +946,6 @@ func (s *DescribeAttackInput) Validate() error {
 	return nil
 }
 
-// SetAttackId sets the AttackId field's value.
-func (s *DescribeAttackInput) SetAttackId(v string) *DescribeAttackInput {
-	s.AttackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackResponse
 type DescribeAttackOutput struct {
 	_ struct{} `type:"structure"`
@@ -1125,12 +969,6 @@ func (s DescribeAttackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAttackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttack sets the Attack field's value.
-func (s *DescribeAttackOutput) SetAttack(v *AttackDetail) *DescribeAttackOutput {
-	s.Attack = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionRequest
@@ -1170,12 +1008,6 @@ func (s *DescribeProtectionInput) Validate() error {
 	return nil
 }
 
-// SetProtectionId sets the ProtectionId field's value.
-func (s *DescribeProtectionInput) SetProtectionId(v string) *DescribeProtectionInput {
-	s.ProtectionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionResponse
 type DescribeProtectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1199,12 +1031,6 @@ func (s DescribeProtectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProtectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProtection sets the Protection field's value.
-func (s *DescribeProtectionOutput) SetProtection(v *Protection) *DescribeProtectionOutput {
-	s.Protection = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscriptionRequest
@@ -1247,12 +1073,6 @@ func (s DescribeSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSubscription sets the Subscription field's value.
-func (s *DescribeSubscriptionOutput) SetSubscription(v *Subscription) *DescribeSubscriptionOutput {
-	s.Subscription = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest
 type GetSubscriptionStateInput struct {
 	_ struct{} `type:"structure"`
@@ -1293,12 +1113,6 @@ func (s GetSubscriptionStateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSubscriptionStateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubscriptionState sets the SubscriptionState field's value.
-func (s *GetSubscriptionStateOutput) SetSubscriptionState(v SubscriptionState) *GetSubscriptionStateOutput {
-	s.SubscriptionState = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksRequest
@@ -1353,36 +1167,6 @@ func (s *ListAttacksInput) Validate() error {
 	return nil
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *ListAttacksInput) SetEndTime(v *TimeRange) *ListAttacksInput {
-	s.EndTime = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAttacksInput) SetMaxResults(v int64) *ListAttacksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAttacksInput) SetNextToken(v string) *ListAttacksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceArns sets the ResourceArns field's value.
-func (s *ListAttacksInput) SetResourceArns(v []string) *ListAttacksInput {
-	s.ResourceArns = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *ListAttacksInput) SetStartTime(v *TimeRange) *ListAttacksInput {
-	s.StartTime = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksResponse
 type ListAttacksOutput struct {
 	_ struct{} `type:"structure"`
@@ -1412,18 +1196,6 @@ func (s ListAttacksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAttacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttackSummaries sets the AttackSummaries field's value.
-func (s *ListAttacksOutput) SetAttackSummaries(v []AttackSummary) *ListAttacksOutput {
-	s.AttackSummaries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAttacksOutput) SetNextToken(v string) *ListAttacksOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsRequest
@@ -1462,18 +1234,6 @@ func (s *ListProtectionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListProtectionsInput) SetMaxResults(v int64) *ListProtectionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProtectionsInput) SetNextToken(v string) *ListProtectionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsResponse
 type ListProtectionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1506,18 +1266,6 @@ func (s ListProtectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListProtectionsOutput) SetNextToken(v string) *ListProtectionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProtections sets the Protections field's value.
-func (s *ListProtectionsOutput) SetProtections(v []Protection) *ListProtectionsOutput {
-	s.Protections = v
-	return s
-}
-
 // The mitigation applied to a DDoS attack.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Mitigation
 type Mitigation struct {
@@ -1535,12 +1283,6 @@ func (s Mitigation) String() string {
 // GoString returns the string representation
 func (s Mitigation) GoString() string {
 	return s.String()
-}
-
-// SetMitigationName sets the MitigationName field's value.
-func (s *Mitigation) SetMitigationName(v string) *Mitigation {
-	s.MitigationName = &v
-	return s
 }
 
 // An object that represents a resource that is under DDoS protection.
@@ -1566,24 +1308,6 @@ func (s Protection) String() string {
 // GoString returns the string representation
 func (s Protection) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *Protection) SetId(v string) *Protection {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Protection) SetName(v string) *Protection {
-	s.Name = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *Protection) SetResourceArn(v string) *Protection {
-	s.ResourceArn = &v
-	return s
 }
 
 // The attack information for the specified SubResource.
@@ -1614,30 +1338,6 @@ func (s SubResourceSummary) GoString() string {
 	return s.String()
 }
 
-// SetAttackVectors sets the AttackVectors field's value.
-func (s *SubResourceSummary) SetAttackVectors(v []SummarizedAttackVector) *SubResourceSummary {
-	s.AttackVectors = v
-	return s
-}
-
-// SetCounters sets the Counters field's value.
-func (s *SubResourceSummary) SetCounters(v []SummarizedCounter) *SubResourceSummary {
-	s.Counters = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *SubResourceSummary) SetId(v string) *SubResourceSummary {
-	s.Id = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *SubResourceSummary) SetType(v SubResourceType) *SubResourceSummary {
-	s.Type = v
-	return s
-}
-
 // Information about the AWS Shield Advanced subscription for an account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription
 type Subscription struct {
@@ -1659,18 +1359,6 @@ func (s Subscription) String() string {
 // GoString returns the string representation
 func (s Subscription) GoString() string {
 	return s.String()
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Subscription) SetStartTime(v time.Time) *Subscription {
-	s.StartTime = &v
-	return s
-}
-
-// SetTimeCommitmentInSeconds sets the TimeCommitmentInSeconds field's value.
-func (s *Subscription) SetTimeCommitmentInSeconds(v int64) *Subscription {
-	s.TimeCommitmentInSeconds = &v
-	return s
 }
 
 // A summary of information about the attack.
@@ -1695,18 +1383,6 @@ func (s SummarizedAttackVector) String() string {
 // GoString returns the string representation
 func (s SummarizedAttackVector) GoString() string {
 	return s.String()
-}
-
-// SetVectorCounters sets the VectorCounters field's value.
-func (s *SummarizedAttackVector) SetVectorCounters(v []SummarizedCounter) *SummarizedAttackVector {
-	s.VectorCounters = v
-	return s
-}
-
-// SetVectorType sets the VectorType field's value.
-func (s *SummarizedAttackVector) SetVectorType(v string) *SummarizedAttackVector {
-	s.VectorType = &v
-	return s
 }
 
 // The counter that describes a DDoS attack.
@@ -1743,42 +1419,6 @@ func (s SummarizedCounter) GoString() string {
 	return s.String()
 }
 
-// SetAverage sets the Average field's value.
-func (s *SummarizedCounter) SetAverage(v float64) *SummarizedCounter {
-	s.Average = &v
-	return s
-}
-
-// SetMax sets the Max field's value.
-func (s *SummarizedCounter) SetMax(v float64) *SummarizedCounter {
-	s.Max = &v
-	return s
-}
-
-// SetN sets the N field's value.
-func (s *SummarizedCounter) SetN(v int64) *SummarizedCounter {
-	s.N = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *SummarizedCounter) SetName(v string) *SummarizedCounter {
-	s.Name = &v
-	return s
-}
-
-// SetSum sets the Sum field's value.
-func (s *SummarizedCounter) SetSum(v float64) *SummarizedCounter {
-	s.Sum = &v
-	return s
-}
-
-// SetUnit sets the Unit field's value.
-func (s *SummarizedCounter) SetUnit(v string) *SummarizedCounter {
-	s.Unit = &v
-	return s
-}
-
 // The time range.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TimeRange
 type TimeRange struct {
@@ -1801,18 +1441,6 @@ func (s TimeRange) String() string {
 // GoString returns the string representation
 func (s TimeRange) GoString() string {
 	return s.String()
-}
-
-// SetFromInclusive sets the FromInclusive field's value.
-func (s *TimeRange) SetFromInclusive(v time.Time) *TimeRange {
-	s.FromInclusive = &v
-	return s
-}
-
-// SetToExclusive sets the ToExclusive field's value.
-func (s *TimeRange) SetToExclusive(v time.Time) *TimeRange {
-	s.ToExclusive = &v
-	return s
 }
 
 type AttackLayer string

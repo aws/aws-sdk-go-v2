@@ -4222,18 +4222,6 @@ func (s *AddHeaderAction) Validate() error {
 	return nil
 }
 
-// SetHeaderName sets the HeaderName field's value.
-func (s *AddHeaderAction) SetHeaderName(v string) *AddHeaderAction {
-	s.HeaderName = &v
-	return s
-}
-
-// SetHeaderValue sets the HeaderValue field's value.
-func (s *AddHeaderAction) SetHeaderValue(v string) *AddHeaderAction {
-	s.HeaderValue = &v
-	return s
-}
-
 // Represents the body of the message. You can specify text, HTML, or both.
 // If you use both, then the message should display correctly in the widest
 // variety of email clients.
@@ -4279,18 +4267,6 @@ func (s *Body) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHtml sets the Html field's value.
-func (s *Body) SetHtml(v *Content) *Body {
-	s.Html = v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *Body) SetText(v *Content) *Body {
-	s.Text = v
-	return s
 }
 
 // When included in a receipt rule, this action rejects the received email by
@@ -4361,36 +4337,6 @@ func (s *BounceAction) Validate() error {
 	return nil
 }
 
-// SetMessage sets the Message field's value.
-func (s *BounceAction) SetMessage(v string) *BounceAction {
-	s.Message = &v
-	return s
-}
-
-// SetSender sets the Sender field's value.
-func (s *BounceAction) SetSender(v string) *BounceAction {
-	s.Sender = &v
-	return s
-}
-
-// SetSmtpReplyCode sets the SmtpReplyCode field's value.
-func (s *BounceAction) SetSmtpReplyCode(v string) *BounceAction {
-	s.SmtpReplyCode = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *BounceAction) SetStatusCode(v string) *BounceAction {
-	s.StatusCode = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *BounceAction) SetTopicArn(v string) *BounceAction {
-	s.TopicArn = &v
-	return s
-}
-
 // Recipient-related information to include in the Delivery Status Notification
 // (DSN) when an email that Amazon SES receives on your behalf bounces.
 //
@@ -4447,30 +4393,6 @@ func (s *BouncedRecipientInfo) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBounceType sets the BounceType field's value.
-func (s *BouncedRecipientInfo) SetBounceType(v BounceType) *BouncedRecipientInfo {
-	s.BounceType = v
-	return s
-}
-
-// SetRecipient sets the Recipient field's value.
-func (s *BouncedRecipientInfo) SetRecipient(v string) *BouncedRecipientInfo {
-	s.Recipient = &v
-	return s
-}
-
-// SetRecipientArn sets the RecipientArn field's value.
-func (s *BouncedRecipientInfo) SetRecipientArn(v string) *BouncedRecipientInfo {
-	s.RecipientArn = &v
-	return s
-}
-
-// SetRecipientDsnFields sets the RecipientDsnFields field's value.
-func (s *BouncedRecipientInfo) SetRecipientDsnFields(v *RecipientDsnFields) *BouncedRecipientInfo {
-	s.RecipientDsnFields = v
-	return s
 }
 
 // An array that contains one or more Destinations, as well as the tags and
@@ -4533,24 +4455,6 @@ func (s *BulkEmailDestination) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDestination sets the Destination field's value.
-func (s *BulkEmailDestination) SetDestination(v *Destination) *BulkEmailDestination {
-	s.Destination = v
-	return s
-}
-
-// SetReplacementTags sets the ReplacementTags field's value.
-func (s *BulkEmailDestination) SetReplacementTags(v []MessageTag) *BulkEmailDestination {
-	s.ReplacementTags = v
-	return s
-}
-
-// SetReplacementTemplateData sets the ReplacementTemplateData field's value.
-func (s *BulkEmailDestination) SetReplacementTemplateData(v string) *BulkEmailDestination {
-	s.ReplacementTemplateData = &v
-	return s
 }
 
 // An object that contains the response from the SendBulkTemplatedEmail operation.
@@ -4622,24 +4526,6 @@ func (s BulkEmailDestinationStatus) GoString() string {
 	return s.String()
 }
 
-// SetError sets the Error field's value.
-func (s *BulkEmailDestinationStatus) SetError(v string) *BulkEmailDestinationStatus {
-	s.Error = &v
-	return s
-}
-
-// SetMessageId sets the MessageId field's value.
-func (s *BulkEmailDestinationStatus) SetMessageId(v string) *BulkEmailDestinationStatus {
-	s.MessageId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *BulkEmailDestinationStatus) SetStatus(v BulkEmailStatus) *BulkEmailDestinationStatus {
-	s.Status = v
-	return s
-}
-
 // Represents a request to create a receipt rule set by cloning an existing
 // one. You use receipt rule sets to receive email with Amazon SES. For more
 // information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -4691,18 +4577,6 @@ func (s *CloneReceiptRuleSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOriginalRuleSetName sets the OriginalRuleSetName field's value.
-func (s *CloneReceiptRuleSetInput) SetOriginalRuleSetName(v string) *CloneReceiptRuleSetInput {
-	s.OriginalRuleSetName = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *CloneReceiptRuleSetInput) SetRuleSetName(v string) *CloneReceiptRuleSetInput {
-	s.RuleSetName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -4774,12 +4648,6 @@ func (s *CloudWatchDestination) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDimensionConfigurations sets the DimensionConfigurations field's value.
-func (s *CloudWatchDestination) SetDimensionConfigurations(v []CloudWatchDimensionConfiguration) *CloudWatchDestination {
-	s.DimensionConfigurations = v
-	return s
 }
 
 // Contains the dimension configuration to use when you publish email sending
@@ -4855,24 +4723,6 @@ func (s *CloudWatchDimensionConfiguration) Validate() error {
 	return nil
 }
 
-// SetDefaultDimensionValue sets the DefaultDimensionValue field's value.
-func (s *CloudWatchDimensionConfiguration) SetDefaultDimensionValue(v string) *CloudWatchDimensionConfiguration {
-	s.DefaultDimensionValue = &v
-	return s
-}
-
-// SetDimensionName sets the DimensionName field's value.
-func (s *CloudWatchDimensionConfiguration) SetDimensionName(v string) *CloudWatchDimensionConfiguration {
-	s.DimensionName = &v
-	return s
-}
-
-// SetDimensionValueSource sets the DimensionValueSource field's value.
-func (s *CloudWatchDimensionConfiguration) SetDimensionValueSource(v DimensionValueSource) *CloudWatchDimensionConfiguration {
-	s.DimensionValueSource = v
-	return s
-}
-
 // The name of the configuration set.
 //
 // Configuration sets let you create groups of rules that you can apply to the
@@ -4918,12 +4768,6 @@ func (s *ConfigurationSet) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *ConfigurationSet) SetName(v string) *ConfigurationSet {
-	s.Name = &v
-	return s
-}
-
 // Represents textual data, plus an optional character set specification.
 //
 // By default, the text must be 7-bit ASCII, due to the constraints of the SMTP
@@ -4964,18 +4808,6 @@ func (s *Content) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCharset sets the Charset field's value.
-func (s *Content) SetCharset(v string) *Content {
-	s.Charset = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *Content) SetData(v string) *Content {
-	s.Data = &v
-	return s
 }
 
 // Represents a request to create a configuration set event destination. A configuration
@@ -5031,18 +4863,6 @@ func (s *CreateConfigurationSetEventDestinationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *CreateConfigurationSetEventDestinationInput) SetConfigurationSetName(v string) *CreateConfigurationSetEventDestinationInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetEventDestination sets the EventDestination field's value.
-func (s *CreateConfigurationSetEventDestinationInput) SetEventDestination(v *EventDestination) *CreateConfigurationSetEventDestinationInput {
-	s.EventDestination = v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -5108,12 +4928,6 @@ func (s *CreateConfigurationSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationSet sets the ConfigurationSet field's value.
-func (s *CreateConfigurationSetInput) SetConfigurationSet(v *ConfigurationSet) *CreateConfigurationSetInput {
-	s.ConfigurationSet = v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -5189,18 +5003,6 @@ func (s *CreateConfigurationSetTrackingOptionsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *CreateConfigurationSetTrackingOptionsInput) SetConfigurationSetName(v string) *CreateConfigurationSetTrackingOptionsInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetTrackingOptions sets the TrackingOptions field's value.
-func (s *CreateConfigurationSetTrackingOptionsInput) SetTrackingOptions(v *TrackingOptions) *CreateConfigurationSetTrackingOptionsInput {
-	s.TrackingOptions = v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -5312,42 +5114,6 @@ func (s *CreateCustomVerificationEmailTemplateInput) Validate() error {
 	return nil
 }
 
-// SetFailureRedirectionURL sets the FailureRedirectionURL field's value.
-func (s *CreateCustomVerificationEmailTemplateInput) SetFailureRedirectionURL(v string) *CreateCustomVerificationEmailTemplateInput {
-	s.FailureRedirectionURL = &v
-	return s
-}
-
-// SetFromEmailAddress sets the FromEmailAddress field's value.
-func (s *CreateCustomVerificationEmailTemplateInput) SetFromEmailAddress(v string) *CreateCustomVerificationEmailTemplateInput {
-	s.FromEmailAddress = &v
-	return s
-}
-
-// SetSuccessRedirectionURL sets the SuccessRedirectionURL field's value.
-func (s *CreateCustomVerificationEmailTemplateInput) SetSuccessRedirectionURL(v string) *CreateCustomVerificationEmailTemplateInput {
-	s.SuccessRedirectionURL = &v
-	return s
-}
-
-// SetTemplateContent sets the TemplateContent field's value.
-func (s *CreateCustomVerificationEmailTemplateInput) SetTemplateContent(v string) *CreateCustomVerificationEmailTemplateInput {
-	s.TemplateContent = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *CreateCustomVerificationEmailTemplateInput) SetTemplateName(v string) *CreateCustomVerificationEmailTemplateInput {
-	s.TemplateName = &v
-	return s
-}
-
-// SetTemplateSubject sets the TemplateSubject field's value.
-func (s *CreateCustomVerificationEmailTemplateInput) SetTemplateSubject(v string) *CreateCustomVerificationEmailTemplateInput {
-	s.TemplateSubject = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateCustomVerificationEmailTemplateOutput
 type CreateCustomVerificationEmailTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -5411,12 +5177,6 @@ func (s *CreateReceiptFilterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFilter sets the Filter field's value.
-func (s *CreateReceiptFilterInput) SetFilter(v *ReceiptFilter) *CreateReceiptFilterInput {
-	s.Filter = v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -5499,24 +5259,6 @@ func (s *CreateReceiptRuleInput) Validate() error {
 	return nil
 }
 
-// SetAfter sets the After field's value.
-func (s *CreateReceiptRuleInput) SetAfter(v string) *CreateReceiptRuleInput {
-	s.After = &v
-	return s
-}
-
-// SetRule sets the Rule field's value.
-func (s *CreateReceiptRuleInput) SetRule(v *ReceiptRule) *CreateReceiptRuleInput {
-	s.Rule = v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *CreateReceiptRuleInput) SetRuleSetName(v string) *CreateReceiptRuleInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleResponse
 type CreateReceiptRuleOutput struct {
@@ -5584,12 +5326,6 @@ func (s *CreateReceiptRuleSetInput) Validate() error {
 	return nil
 }
 
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *CreateReceiptRuleSetInput) SetRuleSetName(v string) *CreateReceiptRuleSetInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetResponse
 type CreateReceiptRuleSetOutput struct {
@@ -5655,12 +5391,6 @@ func (s *CreateTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplate sets the Template field's value.
-func (s *CreateTemplateInput) SetTemplate(v *Template) *CreateTemplateInput {
-	s.Template = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplateResponse
 type CreateTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -5716,36 +5446,6 @@ func (s CustomVerificationEmailTemplate) GoString() string {
 	return s.String()
 }
 
-// SetFailureRedirectionURL sets the FailureRedirectionURL field's value.
-func (s *CustomVerificationEmailTemplate) SetFailureRedirectionURL(v string) *CustomVerificationEmailTemplate {
-	s.FailureRedirectionURL = &v
-	return s
-}
-
-// SetFromEmailAddress sets the FromEmailAddress field's value.
-func (s *CustomVerificationEmailTemplate) SetFromEmailAddress(v string) *CustomVerificationEmailTemplate {
-	s.FromEmailAddress = &v
-	return s
-}
-
-// SetSuccessRedirectionURL sets the SuccessRedirectionURL field's value.
-func (s *CustomVerificationEmailTemplate) SetSuccessRedirectionURL(v string) *CustomVerificationEmailTemplate {
-	s.SuccessRedirectionURL = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *CustomVerificationEmailTemplate) SetTemplateName(v string) *CustomVerificationEmailTemplate {
-	s.TemplateName = &v
-	return s
-}
-
-// SetTemplateSubject sets the TemplateSubject field's value.
-func (s *CustomVerificationEmailTemplate) SetTemplateSubject(v string) *CustomVerificationEmailTemplate {
-	s.TemplateSubject = &v
-	return s
-}
-
 // Represents a request to delete a configuration set event destination. Configuration
 // set event destinations are associated with configuration sets, which enable
 // you to publish email sending events. For information about using configuration
@@ -5791,18 +5491,6 @@ func (s *DeleteConfigurationSetEventDestinationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *DeleteConfigurationSetEventDestinationInput) SetConfigurationSetName(v string) *DeleteConfigurationSetEventDestinationInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetEventDestinationName sets the EventDestinationName field's value.
-func (s *DeleteConfigurationSetEventDestinationInput) SetEventDestinationName(v string) *DeleteConfigurationSetEventDestinationInput {
-	s.EventDestinationName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -5865,12 +5553,6 @@ func (s *DeleteConfigurationSetInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *DeleteConfigurationSetInput) SetConfigurationSetName(v string) *DeleteConfigurationSetInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetResponse
 type DeleteConfigurationSetOutput struct {
@@ -5931,12 +5613,6 @@ func (s *DeleteConfigurationSetTrackingOptionsInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *DeleteConfigurationSetTrackingOptionsInput) SetConfigurationSetName(v string) *DeleteConfigurationSetTrackingOptionsInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsResponse
 type DeleteConfigurationSetTrackingOptionsOutput struct {
@@ -5995,12 +5671,6 @@ func (s *DeleteCustomVerificationEmailTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplateName sets the TemplateName field's value.
-func (s *DeleteCustomVerificationEmailTemplateInput) SetTemplateName(v string) *DeleteCustomVerificationEmailTemplateInput {
-	s.TemplateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteCustomVerificationEmailTemplateOutput
 type DeleteCustomVerificationEmailTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -6057,12 +5727,6 @@ func (s *DeleteIdentityInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *DeleteIdentityInput) SetIdentity(v string) *DeleteIdentityInput {
-	s.Identity = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -6142,18 +5806,6 @@ func (s *DeleteIdentityPolicyInput) Validate() error {
 	return nil
 }
 
-// SetIdentity sets the Identity field's value.
-func (s *DeleteIdentityPolicyInput) SetIdentity(v string) *DeleteIdentityPolicyInput {
-	s.Identity = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeleteIdentityPolicyInput) SetPolicyName(v string) *DeleteIdentityPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicyResponse
 type DeleteIdentityPolicyOutput struct {
@@ -6212,12 +5864,6 @@ func (s *DeleteReceiptFilterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFilterName sets the FilterName field's value.
-func (s *DeleteReceiptFilterInput) SetFilterName(v string) *DeleteReceiptFilterInput {
-	s.FilterName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -6289,18 +5935,6 @@ func (s *DeleteReceiptRuleInput) Validate() error {
 	return nil
 }
 
-// SetRuleName sets the RuleName field's value.
-func (s *DeleteReceiptRuleInput) SetRuleName(v string) *DeleteReceiptRuleInput {
-	s.RuleName = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *DeleteReceiptRuleInput) SetRuleSetName(v string) *DeleteReceiptRuleInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleResponse
 type DeleteReceiptRuleOutput struct {
@@ -6359,12 +5993,6 @@ func (s *DeleteReceiptRuleSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *DeleteReceiptRuleSetInput) SetRuleSetName(v string) *DeleteReceiptRuleSetInput {
-	s.RuleSetName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -6426,12 +6054,6 @@ func (s *DeleteTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplateName sets the TemplateName field's value.
-func (s *DeleteTemplateInput) SetTemplateName(v string) *DeleteTemplateInput {
-	s.TemplateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplateResponse
 type DeleteTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -6488,12 +6110,6 @@ func (s *DeleteVerifiedEmailAddressInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *DeleteVerifiedEmailAddressInput) SetEmailAddress(v string) *DeleteVerifiedEmailAddressInput {
-	s.EmailAddress = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddressOutput
@@ -6568,18 +6184,6 @@ func (s DescribeActiveReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMetadata sets the Metadata field's value.
-func (s *DescribeActiveReceiptRuleSetOutput) SetMetadata(v *ReceiptRuleSetMetadata) *DescribeActiveReceiptRuleSetOutput {
-	s.Metadata = v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *DescribeActiveReceiptRuleSetOutput) SetRules(v []ReceiptRule) *DescribeActiveReceiptRuleSetOutput {
-	s.Rules = v
-	return s
-}
-
 // Represents a request to return the details of a configuration set. Configuration
 // sets enable you to publish email sending events. For information about using
 // configuration sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
@@ -6620,18 +6224,6 @@ func (s *DescribeConfigurationSetInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetAttributeNames sets the ConfigurationSetAttributeNames field's value.
-func (s *DescribeConfigurationSetInput) SetConfigurationSetAttributeNames(v []ConfigurationSetAttribute) *DescribeConfigurationSetInput {
-	s.ConfigurationSetAttributeNames = v
-	return s
-}
-
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *DescribeConfigurationSetInput) SetConfigurationSetName(v string) *DescribeConfigurationSetInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
 // Represents the details of a configuration set. Configuration sets enable
 // you to publish email sending events. For information about using configuration
 // sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
@@ -6669,30 +6261,6 @@ func (s DescribeConfigurationSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConfigurationSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationSet sets the ConfigurationSet field's value.
-func (s *DescribeConfigurationSetOutput) SetConfigurationSet(v *ConfigurationSet) *DescribeConfigurationSetOutput {
-	s.ConfigurationSet = v
-	return s
-}
-
-// SetEventDestinations sets the EventDestinations field's value.
-func (s *DescribeConfigurationSetOutput) SetEventDestinations(v []EventDestination) *DescribeConfigurationSetOutput {
-	s.EventDestinations = v
-	return s
-}
-
-// SetReputationOptions sets the ReputationOptions field's value.
-func (s *DescribeConfigurationSetOutput) SetReputationOptions(v *ReputationOptions) *DescribeConfigurationSetOutput {
-	s.ReputationOptions = v
-	return s
-}
-
-// SetTrackingOptions sets the TrackingOptions field's value.
-func (s *DescribeConfigurationSetOutput) SetTrackingOptions(v *TrackingOptions) *DescribeConfigurationSetOutput {
-	s.TrackingOptions = v
-	return s
 }
 
 // Represents a request to return the details of a receipt rule. You use receipt
@@ -6741,18 +6309,6 @@ func (s *DescribeReceiptRuleInput) Validate() error {
 	return nil
 }
 
-// SetRuleName sets the RuleName field's value.
-func (s *DescribeReceiptRuleInput) SetRuleName(v string) *DescribeReceiptRuleInput {
-	s.RuleName = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *DescribeReceiptRuleInput) SetRuleSetName(v string) *DescribeReceiptRuleInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // Represents the details of a receipt rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleResponse
 type DescribeReceiptRuleOutput struct {
@@ -6779,12 +6335,6 @@ func (s DescribeReceiptRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReceiptRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRule sets the Rule field's value.
-func (s *DescribeReceiptRuleOutput) SetRule(v *ReceiptRule) *DescribeReceiptRuleOutput {
-	s.Rule = v
-	return s
 }
 
 // Represents a request to return the details of a receipt rule set. You use
@@ -6824,12 +6374,6 @@ func (s *DescribeReceiptRuleSetInput) Validate() error {
 	return nil
 }
 
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *DescribeReceiptRuleSetInput) SetRuleSetName(v string) *DescribeReceiptRuleSetInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // Represents the details of the specified receipt rule set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSetResponse
 type DescribeReceiptRuleSetOutput struct {
@@ -6858,18 +6402,6 @@ func (s DescribeReceiptRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReceiptRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *DescribeReceiptRuleSetOutput) SetMetadata(v *ReceiptRuleSetMetadata) *DescribeReceiptRuleSetOutput {
-	s.Metadata = v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *DescribeReceiptRuleSetOutput) SetRules(v []ReceiptRule) *DescribeReceiptRuleSetOutput {
-	s.Rules = v
-	return s
 }
 
 // Represents the destination of the message, consisting of To:, CC:, and BCC:
@@ -6904,24 +6436,6 @@ func (s Destination) String() string {
 // GoString returns the string representation
 func (s Destination) GoString() string {
 	return s.String()
-}
-
-// SetBccAddresses sets the BccAddresses field's value.
-func (s *Destination) SetBccAddresses(v []string) *Destination {
-	s.BccAddresses = v
-	return s
-}
-
-// SetCcAddresses sets the CcAddresses field's value.
-func (s *Destination) SetCcAddresses(v []string) *Destination {
-	s.CcAddresses = v
-	return s
-}
-
-// SetToAddresses sets the ToAddresses field's value.
-func (s *Destination) SetToAddresses(v []string) *Destination {
-	s.ToAddresses = v
-	return s
 }
 
 // Contains information about the event destination that the specified email
@@ -7016,42 +6530,6 @@ func (s *EventDestination) Validate() error {
 	return nil
 }
 
-// SetCloudWatchDestination sets the CloudWatchDestination field's value.
-func (s *EventDestination) SetCloudWatchDestination(v *CloudWatchDestination) *EventDestination {
-	s.CloudWatchDestination = v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *EventDestination) SetEnabled(v bool) *EventDestination {
-	s.Enabled = &v
-	return s
-}
-
-// SetKinesisFirehoseDestination sets the KinesisFirehoseDestination field's value.
-func (s *EventDestination) SetKinesisFirehoseDestination(v *KinesisFirehoseDestination) *EventDestination {
-	s.KinesisFirehoseDestination = v
-	return s
-}
-
-// SetMatchingEventTypes sets the MatchingEventTypes field's value.
-func (s *EventDestination) SetMatchingEventTypes(v []EventType) *EventDestination {
-	s.MatchingEventTypes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *EventDestination) SetName(v string) *EventDestination {
-	s.Name = &v
-	return s
-}
-
-// SetSNSDestination sets the SNSDestination field's value.
-func (s *EventDestination) SetSNSDestination(v *SNSDestination) *EventDestination {
-	s.SNSDestination = v
-	return s
-}
-
 // Additional X-headers to include in the Delivery Status Notification (DSN)
 // when an email that Amazon SES receives on your behalf bounces.
 //
@@ -7102,18 +6580,6 @@ func (s *ExtensionField) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *ExtensionField) SetName(v string) *ExtensionField {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ExtensionField) SetValue(v string) *ExtensionField {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabledInput
 type GetAccountSendingEnabledInput struct {
 	_ struct{} `type:"structure"`
@@ -7157,12 +6623,6 @@ func (s GetAccountSendingEnabledOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *GetAccountSendingEnabledOutput) SetEnabled(v bool) *GetAccountSendingEnabledOutput {
-	s.Enabled = &v
-	return s
-}
-
 // Represents a request to retrieve an existing custom verification email template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplateRequest
 type GetCustomVerificationEmailTemplateInput struct {
@@ -7196,12 +6656,6 @@ func (s *GetCustomVerificationEmailTemplateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *GetCustomVerificationEmailTemplateInput) SetTemplateName(v string) *GetCustomVerificationEmailTemplateInput {
-	s.TemplateName = &v
-	return s
 }
 
 // The content of the custom verification email template.
@@ -7247,42 +6701,6 @@ func (s GetCustomVerificationEmailTemplateOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetFailureRedirectionURL sets the FailureRedirectionURL field's value.
-func (s *GetCustomVerificationEmailTemplateOutput) SetFailureRedirectionURL(v string) *GetCustomVerificationEmailTemplateOutput {
-	s.FailureRedirectionURL = &v
-	return s
-}
-
-// SetFromEmailAddress sets the FromEmailAddress field's value.
-func (s *GetCustomVerificationEmailTemplateOutput) SetFromEmailAddress(v string) *GetCustomVerificationEmailTemplateOutput {
-	s.FromEmailAddress = &v
-	return s
-}
-
-// SetSuccessRedirectionURL sets the SuccessRedirectionURL field's value.
-func (s *GetCustomVerificationEmailTemplateOutput) SetSuccessRedirectionURL(v string) *GetCustomVerificationEmailTemplateOutput {
-	s.SuccessRedirectionURL = &v
-	return s
-}
-
-// SetTemplateContent sets the TemplateContent field's value.
-func (s *GetCustomVerificationEmailTemplateOutput) SetTemplateContent(v string) *GetCustomVerificationEmailTemplateOutput {
-	s.TemplateContent = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *GetCustomVerificationEmailTemplateOutput) SetTemplateName(v string) *GetCustomVerificationEmailTemplateOutput {
-	s.TemplateName = &v
-	return s
-}
-
-// SetTemplateSubject sets the TemplateSubject field's value.
-func (s *GetCustomVerificationEmailTemplateOutput) SetTemplateSubject(v string) *GetCustomVerificationEmailTemplateOutput {
-	s.TemplateSubject = &v
-	return s
-}
-
 // Represents a request for the status of Amazon SES Easy DKIM signing for an
 // identity. For domain identities, this request also returns the DKIM tokens
 // that are required for Easy DKIM signing, and whether Amazon SES successfully
@@ -7323,12 +6741,6 @@ func (s *GetIdentityDkimAttributesInput) Validate() error {
 	return nil
 }
 
-// SetIdentities sets the Identities field's value.
-func (s *GetIdentityDkimAttributesInput) SetIdentities(v []string) *GetIdentityDkimAttributesInput {
-	s.Identities = v
-	return s
-}
-
 // Represents the status of Amazon SES Easy DKIM signing for an identity. For
 // domain identities, this response also contains the DKIM tokens that are required
 // for Easy DKIM signing, and whether Amazon SES successfully verified that
@@ -7358,12 +6770,6 @@ func (s GetIdentityDkimAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIdentityDkimAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDkimAttributes sets the DkimAttributes field's value.
-func (s *GetIdentityDkimAttributesOutput) SetDkimAttributes(v map[string]IdentityDkimAttributes) *GetIdentityDkimAttributesOutput {
-	s.DkimAttributes = v
-	return s
 }
 
 // Represents a request to return the Amazon SES custom MAIL FROM attributes
@@ -7403,12 +6809,6 @@ func (s *GetIdentityMailFromDomainAttributesInput) Validate() error {
 	return nil
 }
 
-// SetIdentities sets the Identities field's value.
-func (s *GetIdentityMailFromDomainAttributesInput) SetIdentities(v []string) *GetIdentityMailFromDomainAttributesInput {
-	s.Identities = v
-	return s
-}
-
 // Represents the custom MAIL FROM attributes for a list of identities.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributesResponse
 type GetIdentityMailFromDomainAttributesOutput struct {
@@ -7435,12 +6835,6 @@ func (s GetIdentityMailFromDomainAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIdentityMailFromDomainAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMailFromDomainAttributes sets the MailFromDomainAttributes field's value.
-func (s *GetIdentityMailFromDomainAttributesOutput) SetMailFromDomainAttributes(v map[string]IdentityMailFromDomainAttributes) *GetIdentityMailFromDomainAttributesOutput {
-	s.MailFromDomainAttributes = v
-	return s
 }
 
 // Represents a request to return the notification attributes for a list of
@@ -7482,12 +6876,6 @@ func (s *GetIdentityNotificationAttributesInput) Validate() error {
 	return nil
 }
 
-// SetIdentities sets the Identities field's value.
-func (s *GetIdentityNotificationAttributesInput) SetIdentities(v []string) *GetIdentityNotificationAttributesInput {
-	s.Identities = v
-	return s
-}
-
 // Represents the notification attributes for a list of identities.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesResponse
 type GetIdentityNotificationAttributesOutput struct {
@@ -7514,12 +6902,6 @@ func (s GetIdentityNotificationAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIdentityNotificationAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNotificationAttributes sets the NotificationAttributes field's value.
-func (s *GetIdentityNotificationAttributesOutput) SetNotificationAttributes(v map[string]IdentityNotificationAttributes) *GetIdentityNotificationAttributesOutput {
-	s.NotificationAttributes = v
-	return s
 }
 
 // Represents a request to return the requested sending authorization policies
@@ -7575,18 +6957,6 @@ func (s *GetIdentityPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetIdentity sets the Identity field's value.
-func (s *GetIdentityPoliciesInput) SetIdentity(v string) *GetIdentityPoliciesInput {
-	s.Identity = &v
-	return s
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *GetIdentityPoliciesInput) SetPolicyNames(v []string) *GetIdentityPoliciesInput {
-	s.PolicyNames = v
-	return s
-}
-
 // Represents the requested sending authorization policies.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPoliciesResponse
 type GetIdentityPoliciesOutput struct {
@@ -7613,12 +6983,6 @@ func (s GetIdentityPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIdentityPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *GetIdentityPoliciesOutput) SetPolicies(v map[string]string) *GetIdentityPoliciesOutput {
-	s.Policies = v
-	return s
 }
 
 // Represents a request to return the Amazon SES verification status of a list
@@ -7659,12 +7023,6 @@ func (s *GetIdentityVerificationAttributesInput) Validate() error {
 	return nil
 }
 
-// SetIdentities sets the Identities field's value.
-func (s *GetIdentityVerificationAttributesInput) SetIdentities(v []string) *GetIdentityVerificationAttributesInput {
-	s.Identities = v
-	return s
-}
-
 // The Amazon SES verification status of a list of identities. For domain identities,
 // this response also contains the verification token.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributesResponse
@@ -7692,12 +7050,6 @@ func (s GetIdentityVerificationAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIdentityVerificationAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVerificationAttributes sets the VerificationAttributes field's value.
-func (s *GetIdentityVerificationAttributesOutput) SetVerificationAttributes(v map[string]IdentityVerificationAttributes) *GetIdentityVerificationAttributesOutput {
-	s.VerificationAttributes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuotaInput
@@ -7753,24 +7105,6 @@ func (s GetSendQuotaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMax24HourSend sets the Max24HourSend field's value.
-func (s *GetSendQuotaOutput) SetMax24HourSend(v float64) *GetSendQuotaOutput {
-	s.Max24HourSend = &v
-	return s
-}
-
-// SetMaxSendRate sets the MaxSendRate field's value.
-func (s *GetSendQuotaOutput) SetMaxSendRate(v float64) *GetSendQuotaOutput {
-	s.MaxSendRate = &v
-	return s
-}
-
-// SetSentLast24Hours sets the SentLast24Hours field's value.
-func (s *GetSendQuotaOutput) SetSentLast24Hours(v float64) *GetSendQuotaOutput {
-	s.SentLast24Hours = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendStatisticsInput
 type GetSendStatisticsInput struct {
 	_ struct{} `type:"structure"`
@@ -7813,12 +7147,6 @@ func (s GetSendStatisticsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSendDataPoints sets the SendDataPoints field's value.
-func (s *GetSendStatisticsOutput) SetSendDataPoints(v []SendDataPoint) *GetSendStatisticsOutput {
-	s.SendDataPoints = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplateRequest
 type GetTemplateInput struct {
 	_ struct{} `type:"structure"`
@@ -7853,12 +7181,6 @@ func (s *GetTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplateName sets the TemplateName field's value.
-func (s *GetTemplateInput) SetTemplateName(v string) *GetTemplateInput {
-	s.TemplateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetTemplateResponse
 type GetTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -7883,12 +7205,6 @@ func (s GetTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTemplate sets the Template field's value.
-func (s *GetTemplateOutput) SetTemplate(v *Template) *GetTemplateOutput {
-	s.Template = v
-	return s
 }
 
 // Represents the DKIM attributes of a verified email address or a domain.
@@ -7930,24 +7246,6 @@ func (s IdentityDkimAttributes) String() string {
 // GoString returns the string representation
 func (s IdentityDkimAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDkimEnabled sets the DkimEnabled field's value.
-func (s *IdentityDkimAttributes) SetDkimEnabled(v bool) *IdentityDkimAttributes {
-	s.DkimEnabled = &v
-	return s
-}
-
-// SetDkimTokens sets the DkimTokens field's value.
-func (s *IdentityDkimAttributes) SetDkimTokens(v []string) *IdentityDkimAttributes {
-	s.DkimTokens = v
-	return s
-}
-
-// SetDkimVerificationStatus sets the DkimVerificationStatus field's value.
-func (s *IdentityDkimAttributes) SetDkimVerificationStatus(v VerificationStatus) *IdentityDkimAttributes {
-	s.DkimVerificationStatus = v
-	return s
 }
 
 // Represents the custom MAIL FROM domain attributes of a verified identity
@@ -7992,24 +7290,6 @@ func (s IdentityMailFromDomainAttributes) String() string {
 // GoString returns the string representation
 func (s IdentityMailFromDomainAttributes) GoString() string {
 	return s.String()
-}
-
-// SetBehaviorOnMXFailure sets the BehaviorOnMXFailure field's value.
-func (s *IdentityMailFromDomainAttributes) SetBehaviorOnMXFailure(v BehaviorOnMXFailure) *IdentityMailFromDomainAttributes {
-	s.BehaviorOnMXFailure = v
-	return s
-}
-
-// SetMailFromDomain sets the MailFromDomain field's value.
-func (s *IdentityMailFromDomainAttributes) SetMailFromDomain(v string) *IdentityMailFromDomainAttributes {
-	s.MailFromDomain = &v
-	return s
-}
-
-// SetMailFromDomainStatus sets the MailFromDomainStatus field's value.
-func (s *IdentityMailFromDomainAttributes) SetMailFromDomainStatus(v CustomMailFromStatus) *IdentityMailFromDomainAttributes {
-	s.MailFromDomainStatus = v
-	return s
 }
 
 // Represents the notification attributes of an identity, including whether
@@ -8075,48 +7355,6 @@ func (s IdentityNotificationAttributes) GoString() string {
 	return s.String()
 }
 
-// SetBounceTopic sets the BounceTopic field's value.
-func (s *IdentityNotificationAttributes) SetBounceTopic(v string) *IdentityNotificationAttributes {
-	s.BounceTopic = &v
-	return s
-}
-
-// SetComplaintTopic sets the ComplaintTopic field's value.
-func (s *IdentityNotificationAttributes) SetComplaintTopic(v string) *IdentityNotificationAttributes {
-	s.ComplaintTopic = &v
-	return s
-}
-
-// SetDeliveryTopic sets the DeliveryTopic field's value.
-func (s *IdentityNotificationAttributes) SetDeliveryTopic(v string) *IdentityNotificationAttributes {
-	s.DeliveryTopic = &v
-	return s
-}
-
-// SetForwardingEnabled sets the ForwardingEnabled field's value.
-func (s *IdentityNotificationAttributes) SetForwardingEnabled(v bool) *IdentityNotificationAttributes {
-	s.ForwardingEnabled = &v
-	return s
-}
-
-// SetHeadersInBounceNotificationsEnabled sets the HeadersInBounceNotificationsEnabled field's value.
-func (s *IdentityNotificationAttributes) SetHeadersInBounceNotificationsEnabled(v bool) *IdentityNotificationAttributes {
-	s.HeadersInBounceNotificationsEnabled = &v
-	return s
-}
-
-// SetHeadersInComplaintNotificationsEnabled sets the HeadersInComplaintNotificationsEnabled field's value.
-func (s *IdentityNotificationAttributes) SetHeadersInComplaintNotificationsEnabled(v bool) *IdentityNotificationAttributes {
-	s.HeadersInComplaintNotificationsEnabled = &v
-	return s
-}
-
-// SetHeadersInDeliveryNotificationsEnabled sets the HeadersInDeliveryNotificationsEnabled field's value.
-func (s *IdentityNotificationAttributes) SetHeadersInDeliveryNotificationsEnabled(v bool) *IdentityNotificationAttributes {
-	s.HeadersInDeliveryNotificationsEnabled = &v
-	return s
-}
-
 // Represents the verification attributes of a single identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityVerificationAttributes
 type IdentityVerificationAttributes struct {
@@ -8140,18 +7378,6 @@ func (s IdentityVerificationAttributes) String() string {
 // GoString returns the string representation
 func (s IdentityVerificationAttributes) GoString() string {
 	return s.String()
-}
-
-// SetVerificationStatus sets the VerificationStatus field's value.
-func (s *IdentityVerificationAttributes) SetVerificationStatus(v VerificationStatus) *IdentityVerificationAttributes {
-	s.VerificationStatus = v
-	return s
-}
-
-// SetVerificationToken sets the VerificationToken field's value.
-func (s *IdentityVerificationAttributes) SetVerificationToken(v string) *IdentityVerificationAttributes {
-	s.VerificationToken = &v
-	return s
 }
 
 // Contains the delivery stream ARN and the IAM role ARN associated with an
@@ -8204,18 +7430,6 @@ func (s *KinesisFirehoseDestination) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeliveryStreamARN sets the DeliveryStreamARN field's value.
-func (s *KinesisFirehoseDestination) SetDeliveryStreamARN(v string) *KinesisFirehoseDestination {
-	s.DeliveryStreamARN = &v
-	return s
-}
-
-// SetIAMRoleARN sets the IAMRoleARN field's value.
-func (s *KinesisFirehoseDestination) SetIAMRoleARN(v string) *KinesisFirehoseDestination {
-	s.IAMRoleARN = &v
-	return s
 }
 
 // When included in a receipt rule, this action calls an AWS Lambda function
@@ -8284,24 +7498,6 @@ func (s *LambdaAction) Validate() error {
 	return nil
 }
 
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *LambdaAction) SetFunctionArn(v string) *LambdaAction {
-	s.FunctionArn = &v
-	return s
-}
-
-// SetInvocationType sets the InvocationType field's value.
-func (s *LambdaAction) SetInvocationType(v InvocationType) *LambdaAction {
-	s.InvocationType = v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *LambdaAction) SetTopicArn(v string) *LambdaAction {
-	s.TopicArn = &v
-	return s
-}
-
 // Represents a request to list the configuration sets associated with your
 // AWS account. Configuration sets enable you to publish email sending events.
 // For information about using configuration sets, see the Amazon SES Developer
@@ -8326,18 +7522,6 @@ func (s ListConfigurationSetsInput) String() string {
 // GoString returns the string representation
 func (s ListConfigurationSetsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListConfigurationSetsInput) SetMaxItems(v int64) *ListConfigurationSetsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListConfigurationSetsInput) SetNextToken(v string) *ListConfigurationSetsInput {
-	s.NextToken = &v
-	return s
 }
 
 // A list of configuration sets associated with your AWS account. Configuration
@@ -8370,18 +7554,6 @@ func (s ListConfigurationSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListConfigurationSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationSets sets the ConfigurationSets field's value.
-func (s *ListConfigurationSetsOutput) SetConfigurationSets(v []ConfigurationSet) *ListConfigurationSetsOutput {
-	s.ConfigurationSets = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListConfigurationSetsOutput) SetNextToken(v string) *ListConfigurationSetsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents a request to list the existing custom verification email templates
@@ -8428,18 +7600,6 @@ func (s *ListCustomVerificationEmailTemplatesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCustomVerificationEmailTemplatesInput) SetMaxResults(v int64) *ListCustomVerificationEmailTemplatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCustomVerificationEmailTemplatesInput) SetNextToken(v string) *ListCustomVerificationEmailTemplatesInput {
-	s.NextToken = &v
-	return s
-}
-
 // A paginated list of custom verification email templates.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesResponse
 type ListCustomVerificationEmailTemplatesOutput struct {
@@ -8471,18 +7631,6 @@ func (s ListCustomVerificationEmailTemplatesOutput) SDKResponseMetadata() aws.Re
 	return s.responseMetadata
 }
 
-// SetCustomVerificationEmailTemplates sets the CustomVerificationEmailTemplates field's value.
-func (s *ListCustomVerificationEmailTemplatesOutput) SetCustomVerificationEmailTemplates(v []CustomVerificationEmailTemplate) *ListCustomVerificationEmailTemplatesOutput {
-	s.CustomVerificationEmailTemplates = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCustomVerificationEmailTemplatesOutput) SetNextToken(v string) *ListCustomVerificationEmailTemplatesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents a request to return a list of all identities (email addresses
 // and domains) that you have attempted to verify under your AWS account, regardless
 // of verification status.
@@ -8509,24 +7657,6 @@ func (s ListIdentitiesInput) String() string {
 // GoString returns the string representation
 func (s ListIdentitiesInput) GoString() string {
 	return s.String()
-}
-
-// SetIdentityType sets the IdentityType field's value.
-func (s *ListIdentitiesInput) SetIdentityType(v IdentityType) *ListIdentitiesInput {
-	s.IdentityType = v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListIdentitiesInput) SetMaxItems(v int64) *ListIdentitiesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIdentitiesInput) SetNextToken(v string) *ListIdentitiesInput {
-	s.NextToken = &v
-	return s
 }
 
 // A list of all identities that you have attempted to verify under your AWS
@@ -8559,18 +7689,6 @@ func (s ListIdentitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIdentitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIdentities sets the Identities field's value.
-func (s *ListIdentitiesOutput) SetIdentities(v []string) *ListIdentitiesOutput {
-	s.Identities = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIdentitiesOutput) SetNextToken(v string) *ListIdentitiesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents a request to return a list of sending authorization policies that
@@ -8615,12 +7733,6 @@ func (s *ListIdentityPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetIdentity sets the Identity field's value.
-func (s *ListIdentityPoliciesInput) SetIdentity(v string) *ListIdentityPoliciesInput {
-	s.Identity = &v
-	return s
-}
-
 // A list of names of sending authorization policies that apply to an identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPoliciesResponse
 type ListIdentityPoliciesOutput struct {
@@ -8647,12 +7759,6 @@ func (s ListIdentityPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIdentityPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *ListIdentityPoliciesOutput) SetPolicyNames(v []string) *ListIdentityPoliciesOutput {
-	s.PolicyNames = v
-	return s
 }
 
 // Represents a request to list the IP address filters that exist under your
@@ -8700,12 +7806,6 @@ func (s ListReceiptFiltersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFilters sets the Filters field's value.
-func (s *ListReceiptFiltersOutput) SetFilters(v []ReceiptFilter) *ListReceiptFiltersOutput {
-	s.Filters = v
-	return s
-}
-
 // Represents a request to list the receipt rule sets that exist under your
 // AWS account. You use receipt rule sets to receive email with Amazon SES.
 // For more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -8726,12 +7826,6 @@ func (s ListReceiptRuleSetsInput) String() string {
 // GoString returns the string representation
 func (s ListReceiptRuleSetsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListReceiptRuleSetsInput) SetNextToken(v string) *ListReceiptRuleSetsInput {
-	s.NextToken = &v
-	return s
 }
 
 // A list of receipt rule sets that exist under your AWS account.
@@ -8766,18 +7860,6 @@ func (s ListReceiptRuleSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListReceiptRuleSetsOutput) SetNextToken(v string) *ListReceiptRuleSetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRuleSets sets the RuleSets field's value.
-func (s *ListReceiptRuleSetsOutput) SetRuleSets(v []ReceiptRuleSetMetadata) *ListReceiptRuleSetsOutput {
-	s.RuleSets = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesRequest
 type ListTemplatesInput struct {
 	_ struct{} `type:"structure"`
@@ -8801,18 +7883,6 @@ func (s ListTemplatesInput) String() string {
 // GoString returns the string representation
 func (s ListTemplatesInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListTemplatesInput) SetMaxItems(v int64) *ListTemplatesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTemplatesInput) SetNextToken(v string) *ListTemplatesInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesResponse
@@ -8844,18 +7914,6 @@ func (s ListTemplatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTemplatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTemplatesOutput) SetNextToken(v string) *ListTemplatesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTemplatesMetadata sets the TemplatesMetadata field's value.
-func (s *ListTemplatesOutput) SetTemplatesMetadata(v []TemplateMetadata) *ListTemplatesOutput {
-	s.TemplatesMetadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddressesInput
@@ -8898,12 +7956,6 @@ func (s ListVerifiedEmailAddressesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListVerifiedEmailAddressesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVerifiedEmailAddresses sets the VerifiedEmailAddresses field's value.
-func (s *ListVerifiedEmailAddressesOutput) SetVerifiedEmailAddresses(v []string) *ListVerifiedEmailAddressesOutput {
-	s.VerifiedEmailAddresses = v
-	return s
 }
 
 // Represents the message to be sent, composed of a subject and a body.
@@ -8961,18 +8013,6 @@ func (s *Message) Validate() error {
 	return nil
 }
 
-// SetBody sets the Body field's value.
-func (s *Message) SetBody(v *Body) *Message {
-	s.Body = v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *Message) SetSubject(v *Content) *Message {
-	s.Subject = v
-	return s
-}
-
 // Message-related information to include in the Delivery Status Notification
 // (DSN) when an email that Amazon SES receives on your behalf bounces.
 //
@@ -9026,24 +8066,6 @@ func (s *MessageDsn) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArrivalDate sets the ArrivalDate field's value.
-func (s *MessageDsn) SetArrivalDate(v time.Time) *MessageDsn {
-	s.ArrivalDate = &v
-	return s
-}
-
-// SetExtensionFields sets the ExtensionFields field's value.
-func (s *MessageDsn) SetExtensionFields(v []ExtensionField) *MessageDsn {
-	s.ExtensionFields = v
-	return s
-}
-
-// SetReportingMta sets the ReportingMta field's value.
-func (s *MessageDsn) SetReportingMta(v string) *MessageDsn {
-	s.ReportingMta = &v
-	return s
 }
 
 // Contains the name and value of a tag that you can provide to SendEmail or
@@ -9103,18 +8125,6 @@ func (s *MessageTag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *MessageTag) SetName(v string) *MessageTag {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *MessageTag) SetValue(v string) *MessageTag {
-	s.Value = &v
-	return s
 }
 
 // Represents a request to add or update a sending authorization policy for
@@ -9187,24 +8197,6 @@ func (s *PutIdentityPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *PutIdentityPolicyInput) SetIdentity(v string) *PutIdentityPolicyInput {
-	s.Identity = &v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *PutIdentityPolicyInput) SetPolicy(v string) *PutIdentityPolicyInput {
-	s.Policy = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *PutIdentityPolicyInput) SetPolicyName(v string) *PutIdentityPolicyInput {
-	s.PolicyName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -9281,12 +8273,6 @@ func (s *RawMessage) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetData sets the Data field's value.
-func (s *RawMessage) SetData(v []byte) *RawMessage {
-	s.Data = v
-	return s
 }
 
 // An action that Amazon SES can take when it receives an email on behalf of
@@ -9382,48 +8368,6 @@ func (s *ReceiptAction) Validate() error {
 	return nil
 }
 
-// SetAddHeaderAction sets the AddHeaderAction field's value.
-func (s *ReceiptAction) SetAddHeaderAction(v *AddHeaderAction) *ReceiptAction {
-	s.AddHeaderAction = v
-	return s
-}
-
-// SetBounceAction sets the BounceAction field's value.
-func (s *ReceiptAction) SetBounceAction(v *BounceAction) *ReceiptAction {
-	s.BounceAction = v
-	return s
-}
-
-// SetLambdaAction sets the LambdaAction field's value.
-func (s *ReceiptAction) SetLambdaAction(v *LambdaAction) *ReceiptAction {
-	s.LambdaAction = v
-	return s
-}
-
-// SetS3Action sets the S3Action field's value.
-func (s *ReceiptAction) SetS3Action(v *S3Action) *ReceiptAction {
-	s.S3Action = v
-	return s
-}
-
-// SetSNSAction sets the SNSAction field's value.
-func (s *ReceiptAction) SetSNSAction(v *SNSAction) *ReceiptAction {
-	s.SNSAction = v
-	return s
-}
-
-// SetStopAction sets the StopAction field's value.
-func (s *ReceiptAction) SetStopAction(v *StopAction) *ReceiptAction {
-	s.StopAction = v
-	return s
-}
-
-// SetWorkmailAction sets the WorkmailAction field's value.
-func (s *ReceiptAction) SetWorkmailAction(v *WorkmailAction) *ReceiptAction {
-	s.WorkmailAction = v
-	return s
-}
-
 // A receipt IP address filter enables you to specify whether to accept or reject
 // mail originating from an IP address or range of IP addresses.
 //
@@ -9485,18 +8429,6 @@ func (s *ReceiptFilter) Validate() error {
 	return nil
 }
 
-// SetIpFilter sets the IpFilter field's value.
-func (s *ReceiptFilter) SetIpFilter(v *ReceiptIpFilter) *ReceiptFilter {
-	s.IpFilter = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ReceiptFilter) SetName(v string) *ReceiptFilter {
-	s.Name = &v
-	return s
-}
-
 // A receipt IP address filter enables you to specify whether to accept or reject
 // mail originating from an IP address or range of IP addresses.
 //
@@ -9545,18 +8477,6 @@ func (s *ReceiptIpFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCidr sets the Cidr field's value.
-func (s *ReceiptIpFilter) SetCidr(v string) *ReceiptIpFilter {
-	s.Cidr = &v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *ReceiptIpFilter) SetPolicy(v ReceiptFilterPolicy) *ReceiptIpFilter {
-	s.Policy = v
-	return s
 }
 
 // Receipt rules enable you to specify which actions Amazon SES should take
@@ -9640,42 +8560,6 @@ func (s *ReceiptRule) Validate() error {
 	return nil
 }
 
-// SetActions sets the Actions field's value.
-func (s *ReceiptRule) SetActions(v []ReceiptAction) *ReceiptRule {
-	s.Actions = v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *ReceiptRule) SetEnabled(v bool) *ReceiptRule {
-	s.Enabled = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ReceiptRule) SetName(v string) *ReceiptRule {
-	s.Name = &v
-	return s
-}
-
-// SetRecipients sets the Recipients field's value.
-func (s *ReceiptRule) SetRecipients(v []string) *ReceiptRule {
-	s.Recipients = v
-	return s
-}
-
-// SetScanEnabled sets the ScanEnabled field's value.
-func (s *ReceiptRule) SetScanEnabled(v bool) *ReceiptRule {
-	s.ScanEnabled = &v
-	return s
-}
-
-// SetTlsPolicy sets the TlsPolicy field's value.
-func (s *ReceiptRule) SetTlsPolicy(v TlsPolicy) *ReceiptRule {
-	s.TlsPolicy = v
-	return s
-}
-
 // Information about a receipt rule set.
 //
 // A receipt rule set is a collection of rules that specify what Amazon SES
@@ -9709,18 +8593,6 @@ func (s ReceiptRuleSetMetadata) String() string {
 // GoString returns the string representation
 func (s ReceiptRuleSetMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *ReceiptRuleSetMetadata) SetCreatedTimestamp(v time.Time) *ReceiptRuleSetMetadata {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ReceiptRuleSetMetadata) SetName(v string) *ReceiptRuleSetMetadata {
-	s.Name = &v
-	return s
 }
 
 // Recipient-related information to include in the Delivery Status Notification
@@ -9808,48 +8680,6 @@ func (s *RecipientDsnFields) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *RecipientDsnFields) SetAction(v DsnAction) *RecipientDsnFields {
-	s.Action = v
-	return s
-}
-
-// SetDiagnosticCode sets the DiagnosticCode field's value.
-func (s *RecipientDsnFields) SetDiagnosticCode(v string) *RecipientDsnFields {
-	s.DiagnosticCode = &v
-	return s
-}
-
-// SetExtensionFields sets the ExtensionFields field's value.
-func (s *RecipientDsnFields) SetExtensionFields(v []ExtensionField) *RecipientDsnFields {
-	s.ExtensionFields = v
-	return s
-}
-
-// SetFinalRecipient sets the FinalRecipient field's value.
-func (s *RecipientDsnFields) SetFinalRecipient(v string) *RecipientDsnFields {
-	s.FinalRecipient = &v
-	return s
-}
-
-// SetLastAttemptDate sets the LastAttemptDate field's value.
-func (s *RecipientDsnFields) SetLastAttemptDate(v time.Time) *RecipientDsnFields {
-	s.LastAttemptDate = &v
-	return s
-}
-
-// SetRemoteMta sets the RemoteMta field's value.
-func (s *RecipientDsnFields) SetRemoteMta(v string) *RecipientDsnFields {
-	s.RemoteMta = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *RecipientDsnFields) SetStatus(v string) *RecipientDsnFields {
-	s.Status = &v
-	return s
-}
-
 // Represents a request to reorder the receipt rules within a receipt rule set.
 // You use receipt rule sets to receive email with Amazon SES. For more information,
 // see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -9895,18 +8725,6 @@ func (s *ReorderReceiptRuleSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleNames sets the RuleNames field's value.
-func (s *ReorderReceiptRuleSetInput) SetRuleNames(v []string) *ReorderReceiptRuleSetInput {
-	s.RuleNames = v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *ReorderReceiptRuleSetInput) SetRuleSetName(v string) *ReorderReceiptRuleSetInput {
-	s.RuleSetName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -9971,24 +8789,6 @@ func (s ReputationOptions) String() string {
 // GoString returns the string representation
 func (s ReputationOptions) GoString() string {
 	return s.String()
-}
-
-// SetLastFreshStart sets the LastFreshStart field's value.
-func (s *ReputationOptions) SetLastFreshStart(v time.Time) *ReputationOptions {
-	s.LastFreshStart = &v
-	return s
-}
-
-// SetReputationMetricsEnabled sets the ReputationMetricsEnabled field's value.
-func (s *ReputationOptions) SetReputationMetricsEnabled(v bool) *ReputationOptions {
-	s.ReputationMetricsEnabled = &v
-	return s
-}
-
-// SetSendingEnabled sets the SendingEnabled field's value.
-func (s *ReputationOptions) SetSendingEnabled(v bool) *ReputationOptions {
-	s.SendingEnabled = &v
-	return s
 }
 
 // When included in a receipt rule, this action saves the received message to
@@ -10081,30 +8881,6 @@ func (s *S3Action) Validate() error {
 	return nil
 }
 
-// SetBucketName sets the BucketName field's value.
-func (s *S3Action) SetBucketName(v string) *S3Action {
-	s.BucketName = &v
-	return s
-}
-
-// SetKmsKeyArn sets the KmsKeyArn field's value.
-func (s *S3Action) SetKmsKeyArn(v string) *S3Action {
-	s.KmsKeyArn = &v
-	return s
-}
-
-// SetObjectKeyPrefix sets the ObjectKeyPrefix field's value.
-func (s *S3Action) SetObjectKeyPrefix(v string) *S3Action {
-	s.ObjectKeyPrefix = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *S3Action) SetTopicArn(v string) *S3Action {
-	s.TopicArn = &v
-	return s
-}
-
 // When included in a receipt rule, this action publishes a notification to
 // Amazon Simple Notification Service (Amazon SNS). This action includes a complete
 // copy of the email content in the Amazon SNS notifications. Amazon SNS notifications
@@ -10166,18 +8942,6 @@ func (s *SNSAction) Validate() error {
 	return nil
 }
 
-// SetEncoding sets the Encoding field's value.
-func (s *SNSAction) SetEncoding(v SNSActionEncoding) *SNSAction {
-	s.Encoding = v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *SNSAction) SetTopicArn(v string) *SNSAction {
-	s.TopicArn = &v
-	return s
-}
-
 // Contains the topic ARN associated with an Amazon Simple Notification Service
 // (Amazon SNS) event destination.
 //
@@ -10219,12 +8983,6 @@ func (s *SNSDestination) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTopicARN sets the TopicARN field's value.
-func (s *SNSDestination) SetTopicARN(v string) *SNSDestination {
-	s.TopicARN = &v
-	return s
 }
 
 // Represents a request to send a bounce message to the sender of an email you
@@ -10311,42 +9069,6 @@ func (s *SendBounceInput) Validate() error {
 	return nil
 }
 
-// SetBounceSender sets the BounceSender field's value.
-func (s *SendBounceInput) SetBounceSender(v string) *SendBounceInput {
-	s.BounceSender = &v
-	return s
-}
-
-// SetBounceSenderArn sets the BounceSenderArn field's value.
-func (s *SendBounceInput) SetBounceSenderArn(v string) *SendBounceInput {
-	s.BounceSenderArn = &v
-	return s
-}
-
-// SetBouncedRecipientInfoList sets the BouncedRecipientInfoList field's value.
-func (s *SendBounceInput) SetBouncedRecipientInfoList(v []BouncedRecipientInfo) *SendBounceInput {
-	s.BouncedRecipientInfoList = v
-	return s
-}
-
-// SetExplanation sets the Explanation field's value.
-func (s *SendBounceInput) SetExplanation(v string) *SendBounceInput {
-	s.Explanation = &v
-	return s
-}
-
-// SetMessageDsn sets the MessageDsn field's value.
-func (s *SendBounceInput) SetMessageDsn(v *MessageDsn) *SendBounceInput {
-	s.MessageDsn = v
-	return s
-}
-
-// SetOriginalMessageId sets the OriginalMessageId field's value.
-func (s *SendBounceInput) SetOriginalMessageId(v string) *SendBounceInput {
-	s.OriginalMessageId = &v
-	return s
-}
-
 // Represents a unique message ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceResponse
 type SendBounceOutput struct {
@@ -10371,12 +9093,6 @@ func (s SendBounceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SendBounceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageId sets the MessageId field's value.
-func (s *SendBounceOutput) SetMessageId(v string) *SendBounceOutput {
-	s.MessageId = &v
-	return s
 }
 
 // Represents a request to send a templated email to multiple destinations using
@@ -10525,72 +9241,6 @@ func (s *SendBulkTemplatedEmailInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *SendBulkTemplatedEmailInput) SetConfigurationSetName(v string) *SendBulkTemplatedEmailInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetDefaultTags sets the DefaultTags field's value.
-func (s *SendBulkTemplatedEmailInput) SetDefaultTags(v []MessageTag) *SendBulkTemplatedEmailInput {
-	s.DefaultTags = v
-	return s
-}
-
-// SetDefaultTemplateData sets the DefaultTemplateData field's value.
-func (s *SendBulkTemplatedEmailInput) SetDefaultTemplateData(v string) *SendBulkTemplatedEmailInput {
-	s.DefaultTemplateData = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *SendBulkTemplatedEmailInput) SetDestinations(v []BulkEmailDestination) *SendBulkTemplatedEmailInput {
-	s.Destinations = v
-	return s
-}
-
-// SetReplyToAddresses sets the ReplyToAddresses field's value.
-func (s *SendBulkTemplatedEmailInput) SetReplyToAddresses(v []string) *SendBulkTemplatedEmailInput {
-	s.ReplyToAddresses = v
-	return s
-}
-
-// SetReturnPath sets the ReturnPath field's value.
-func (s *SendBulkTemplatedEmailInput) SetReturnPath(v string) *SendBulkTemplatedEmailInput {
-	s.ReturnPath = &v
-	return s
-}
-
-// SetReturnPathArn sets the ReturnPathArn field's value.
-func (s *SendBulkTemplatedEmailInput) SetReturnPathArn(v string) *SendBulkTemplatedEmailInput {
-	s.ReturnPathArn = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *SendBulkTemplatedEmailInput) SetSource(v string) *SendBulkTemplatedEmailInput {
-	s.Source = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *SendBulkTemplatedEmailInput) SetSourceArn(v string) *SendBulkTemplatedEmailInput {
-	s.SourceArn = &v
-	return s
-}
-
-// SetTemplate sets the Template field's value.
-func (s *SendBulkTemplatedEmailInput) SetTemplate(v string) *SendBulkTemplatedEmailInput {
-	s.Template = &v
-	return s
-}
-
-// SetTemplateArn sets the TemplateArn field's value.
-func (s *SendBulkTemplatedEmailInput) SetTemplateArn(v string) *SendBulkTemplatedEmailInput {
-	s.TemplateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailResponse
 type SendBulkTemplatedEmailOutput struct {
 	_ struct{} `type:"structure"`
@@ -10616,12 +9266,6 @@ func (s SendBulkTemplatedEmailOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SendBulkTemplatedEmailOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *SendBulkTemplatedEmailOutput) SetStatus(v []BulkEmailDestinationStatus) *SendBulkTemplatedEmailOutput {
-	s.Status = v
-	return s
 }
 
 // Represents a request to send a custom verification email to a specified recipient.
@@ -10672,24 +9316,6 @@ func (s *SendCustomVerificationEmailInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *SendCustomVerificationEmailInput) SetConfigurationSetName(v string) *SendCustomVerificationEmailInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *SendCustomVerificationEmailInput) SetEmailAddress(v string) *SendCustomVerificationEmailInput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *SendCustomVerificationEmailInput) SetTemplateName(v string) *SendCustomVerificationEmailInput {
-	s.TemplateName = &v
-	return s
-}
-
 // The response received when attempting to send the custom verification email.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendCustomVerificationEmailResponse
 type SendCustomVerificationEmailOutput struct {
@@ -10715,12 +9341,6 @@ func (s SendCustomVerificationEmailOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SendCustomVerificationEmailOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageId sets the MessageId field's value.
-func (s *SendCustomVerificationEmailOutput) SetMessageId(v string) *SendCustomVerificationEmailOutput {
-	s.MessageId = &v
-	return s
 }
 
 // Represents sending statistics data. Each SendDataPoint contains statistics
@@ -10753,36 +9373,6 @@ func (s SendDataPoint) String() string {
 // GoString returns the string representation
 func (s SendDataPoint) GoString() string {
 	return s.String()
-}
-
-// SetBounces sets the Bounces field's value.
-func (s *SendDataPoint) SetBounces(v int64) *SendDataPoint {
-	s.Bounces = &v
-	return s
-}
-
-// SetComplaints sets the Complaints field's value.
-func (s *SendDataPoint) SetComplaints(v int64) *SendDataPoint {
-	s.Complaints = &v
-	return s
-}
-
-// SetDeliveryAttempts sets the DeliveryAttempts field's value.
-func (s *SendDataPoint) SetDeliveryAttempts(v int64) *SendDataPoint {
-	s.DeliveryAttempts = &v
-	return s
-}
-
-// SetRejects sets the Rejects field's value.
-func (s *SendDataPoint) SetRejects(v int64) *SendDataPoint {
-	s.Rejects = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *SendDataPoint) SetTimestamp(v time.Time) *SendDataPoint {
-	s.Timestamp = &v
-	return s
 }
 
 // Represents a request to send a single formatted email using Amazon SES. For
@@ -10917,60 +9507,6 @@ func (s *SendEmailInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *SendEmailInput) SetConfigurationSetName(v string) *SendEmailInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *SendEmailInput) SetDestination(v *Destination) *SendEmailInput {
-	s.Destination = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *SendEmailInput) SetMessage(v *Message) *SendEmailInput {
-	s.Message = v
-	return s
-}
-
-// SetReplyToAddresses sets the ReplyToAddresses field's value.
-func (s *SendEmailInput) SetReplyToAddresses(v []string) *SendEmailInput {
-	s.ReplyToAddresses = v
-	return s
-}
-
-// SetReturnPath sets the ReturnPath field's value.
-func (s *SendEmailInput) SetReturnPath(v string) *SendEmailInput {
-	s.ReturnPath = &v
-	return s
-}
-
-// SetReturnPathArn sets the ReturnPathArn field's value.
-func (s *SendEmailInput) SetReturnPathArn(v string) *SendEmailInput {
-	s.ReturnPathArn = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *SendEmailInput) SetSource(v string) *SendEmailInput {
-	s.Source = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *SendEmailInput) SetSourceArn(v string) *SendEmailInput {
-	s.SourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SendEmailInput) SetTags(v []MessageTag) *SendEmailInput {
-	s.Tags = v
-	return s
-}
-
 // Represents a unique message ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailResponse
 type SendEmailOutput struct {
@@ -10997,12 +9533,6 @@ func (s SendEmailOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SendEmailOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageId sets the MessageId field's value.
-func (s *SendEmailOutput) SetMessageId(v string) *SendEmailOutput {
-	s.MessageId = &v
-	return s
 }
 
 // Represents a request to send a single raw email using Amazon SES. For more
@@ -11149,54 +9679,6 @@ func (s *SendRawEmailInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *SendRawEmailInput) SetConfigurationSetName(v string) *SendRawEmailInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *SendRawEmailInput) SetDestinations(v []string) *SendRawEmailInput {
-	s.Destinations = v
-	return s
-}
-
-// SetFromArn sets the FromArn field's value.
-func (s *SendRawEmailInput) SetFromArn(v string) *SendRawEmailInput {
-	s.FromArn = &v
-	return s
-}
-
-// SetRawMessage sets the RawMessage field's value.
-func (s *SendRawEmailInput) SetRawMessage(v *RawMessage) *SendRawEmailInput {
-	s.RawMessage = v
-	return s
-}
-
-// SetReturnPathArn sets the ReturnPathArn field's value.
-func (s *SendRawEmailInput) SetReturnPathArn(v string) *SendRawEmailInput {
-	s.ReturnPathArn = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *SendRawEmailInput) SetSource(v string) *SendRawEmailInput {
-	s.Source = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *SendRawEmailInput) SetSourceArn(v string) *SendRawEmailInput {
-	s.SourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SendRawEmailInput) SetTags(v []MessageTag) *SendRawEmailInput {
-	s.Tags = v
-	return s
-}
-
 // Represents a unique message ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailResponse
 type SendRawEmailOutput struct {
@@ -11223,12 +9705,6 @@ func (s SendRawEmailOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SendRawEmailOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageId sets the MessageId field's value.
-func (s *SendRawEmailOutput) SetMessageId(v string) *SendRawEmailOutput {
-	s.MessageId = &v
-	return s
 }
 
 // Represents a request to send a templated email using Amazon SES. For more
@@ -11373,72 +9849,6 @@ func (s *SendTemplatedEmailInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *SendTemplatedEmailInput) SetConfigurationSetName(v string) *SendTemplatedEmailInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *SendTemplatedEmailInput) SetDestination(v *Destination) *SendTemplatedEmailInput {
-	s.Destination = v
-	return s
-}
-
-// SetReplyToAddresses sets the ReplyToAddresses field's value.
-func (s *SendTemplatedEmailInput) SetReplyToAddresses(v []string) *SendTemplatedEmailInput {
-	s.ReplyToAddresses = v
-	return s
-}
-
-// SetReturnPath sets the ReturnPath field's value.
-func (s *SendTemplatedEmailInput) SetReturnPath(v string) *SendTemplatedEmailInput {
-	s.ReturnPath = &v
-	return s
-}
-
-// SetReturnPathArn sets the ReturnPathArn field's value.
-func (s *SendTemplatedEmailInput) SetReturnPathArn(v string) *SendTemplatedEmailInput {
-	s.ReturnPathArn = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *SendTemplatedEmailInput) SetSource(v string) *SendTemplatedEmailInput {
-	s.Source = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *SendTemplatedEmailInput) SetSourceArn(v string) *SendTemplatedEmailInput {
-	s.SourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SendTemplatedEmailInput) SetTags(v []MessageTag) *SendTemplatedEmailInput {
-	s.Tags = v
-	return s
-}
-
-// SetTemplate sets the Template field's value.
-func (s *SendTemplatedEmailInput) SetTemplate(v string) *SendTemplatedEmailInput {
-	s.Template = &v
-	return s
-}
-
-// SetTemplateArn sets the TemplateArn field's value.
-func (s *SendTemplatedEmailInput) SetTemplateArn(v string) *SendTemplatedEmailInput {
-	s.TemplateArn = &v
-	return s
-}
-
-// SetTemplateData sets the TemplateData field's value.
-func (s *SendTemplatedEmailInput) SetTemplateData(v string) *SendTemplatedEmailInput {
-	s.TemplateData = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendTemplatedEmailResponse
 type SendTemplatedEmailOutput struct {
 	_ struct{} `type:"structure"`
@@ -11466,12 +9876,6 @@ func (s SendTemplatedEmailOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMessageId sets the MessageId field's value.
-func (s *SendTemplatedEmailOutput) SetMessageId(v string) *SendTemplatedEmailOutput {
-	s.MessageId = &v
-	return s
-}
-
 // Represents a request to set a receipt rule set as the active receipt rule
 // set. You use receipt rule sets to receive email with Amazon SES. For more
 // information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
@@ -11492,12 +9896,6 @@ func (s SetActiveReceiptRuleSetInput) String() string {
 // GoString returns the string representation
 func (s SetActiveReceiptRuleSetInput) GoString() string {
 	return s.String()
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *SetActiveReceiptRuleSetInput) SetRuleSetName(v string) *SetActiveReceiptRuleSetInput {
-	s.RuleSetName = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -11568,18 +9966,6 @@ func (s *SetIdentityDkimEnabledInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDkimEnabled sets the DkimEnabled field's value.
-func (s *SetIdentityDkimEnabledInput) SetDkimEnabled(v bool) *SetIdentityDkimEnabledInput {
-	s.DkimEnabled = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *SetIdentityDkimEnabledInput) SetIdentity(v string) *SetIdentityDkimEnabledInput {
-	s.Identity = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -11655,18 +10041,6 @@ func (s *SetIdentityFeedbackForwardingEnabledInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetForwardingEnabled sets the ForwardingEnabled field's value.
-func (s *SetIdentityFeedbackForwardingEnabledInput) SetForwardingEnabled(v bool) *SetIdentityFeedbackForwardingEnabledInput {
-	s.ForwardingEnabled = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *SetIdentityFeedbackForwardingEnabledInput) SetIdentity(v string) *SetIdentityFeedbackForwardingEnabledInput {
-	s.Identity = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -11753,24 +10127,6 @@ func (s *SetIdentityHeadersInNotificationsEnabledInput) Validate() error {
 	return nil
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *SetIdentityHeadersInNotificationsEnabledInput) SetEnabled(v bool) *SetIdentityHeadersInNotificationsEnabledInput {
-	s.Enabled = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *SetIdentityHeadersInNotificationsEnabledInput) SetIdentity(v string) *SetIdentityHeadersInNotificationsEnabledInput {
-	s.Identity = &v
-	return s
-}
-
-// SetNotificationType sets the NotificationType field's value.
-func (s *SetIdentityHeadersInNotificationsEnabledInput) SetNotificationType(v NotificationType) *SetIdentityHeadersInNotificationsEnabledInput {
-	s.NotificationType = v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabledResponse
 type SetIdentityHeadersInNotificationsEnabledOutput struct {
@@ -11851,24 +10207,6 @@ func (s *SetIdentityMailFromDomainInput) Validate() error {
 	return nil
 }
 
-// SetBehaviorOnMXFailure sets the BehaviorOnMXFailure field's value.
-func (s *SetIdentityMailFromDomainInput) SetBehaviorOnMXFailure(v BehaviorOnMXFailure) *SetIdentityMailFromDomainInput {
-	s.BehaviorOnMXFailure = v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *SetIdentityMailFromDomainInput) SetIdentity(v string) *SetIdentityMailFromDomainInput {
-	s.Identity = &v
-	return s
-}
-
-// SetMailFromDomain sets the MailFromDomain field's value.
-func (s *SetIdentityMailFromDomainInput) SetMailFromDomain(v string) *SetIdentityMailFromDomainInput {
-	s.MailFromDomain = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainResponse
 type SetIdentityMailFromDomainOutput struct {
@@ -11946,24 +10284,6 @@ func (s *SetIdentityNotificationTopicInput) Validate() error {
 	return nil
 }
 
-// SetIdentity sets the Identity field's value.
-func (s *SetIdentityNotificationTopicInput) SetIdentity(v string) *SetIdentityNotificationTopicInput {
-	s.Identity = &v
-	return s
-}
-
-// SetNotificationType sets the NotificationType field's value.
-func (s *SetIdentityNotificationTopicInput) SetNotificationType(v NotificationType) *SetIdentityNotificationTopicInput {
-	s.NotificationType = v
-	return s
-}
-
-// SetSnsTopic sets the SnsTopic field's value.
-func (s *SetIdentityNotificationTopicInput) SetSnsTopic(v string) *SetIdentityNotificationTopicInput {
-	s.SnsTopic = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicResponse
 type SetIdentityNotificationTopicOutput struct {
@@ -12036,24 +10356,6 @@ func (s *SetReceiptRulePositionInput) Validate() error {
 	return nil
 }
 
-// SetAfter sets the After field's value.
-func (s *SetReceiptRulePositionInput) SetAfter(v string) *SetReceiptRulePositionInput {
-	s.After = &v
-	return s
-}
-
-// SetRuleName sets the RuleName field's value.
-func (s *SetReceiptRulePositionInput) SetRuleName(v string) *SetReceiptRulePositionInput {
-	s.RuleName = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *SetReceiptRulePositionInput) SetRuleSetName(v string) *SetReceiptRulePositionInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePositionResponse
 type SetReceiptRulePositionOutput struct {
@@ -12122,18 +10424,6 @@ func (s *StopAction) Validate() error {
 	return nil
 }
 
-// SetScope sets the Scope field's value.
-func (s *StopAction) SetScope(v StopScope) *StopAction {
-	s.Scope = v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *StopAction) SetTopicArn(v string) *StopAction {
-	s.TopicArn = &v
-	return s
-}
-
 // The content of the email, composed of a subject line, an HTML part, and a
 // text-only part.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Template
@@ -12181,30 +10471,6 @@ func (s *Template) Validate() error {
 	return nil
 }
 
-// SetHtmlPart sets the HtmlPart field's value.
-func (s *Template) SetHtmlPart(v string) *Template {
-	s.HtmlPart = &v
-	return s
-}
-
-// SetSubjectPart sets the SubjectPart field's value.
-func (s *Template) SetSubjectPart(v string) *Template {
-	s.SubjectPart = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *Template) SetTemplateName(v string) *Template {
-	s.TemplateName = &v
-	return s
-}
-
-// SetTextPart sets the TextPart field's value.
-func (s *Template) SetTextPart(v string) *Template {
-	s.TextPart = &v
-	return s
-}
-
 // Contains information about an email template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TemplateMetadata
 type TemplateMetadata struct {
@@ -12225,18 +10491,6 @@ func (s TemplateMetadata) String() string {
 // GoString returns the string representation
 func (s TemplateMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *TemplateMetadata) SetCreatedTimestamp(v time.Time) *TemplateMetadata {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *TemplateMetadata) SetName(v string) *TemplateMetadata {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TestRenderTemplateRequest
@@ -12284,18 +10538,6 @@ func (s *TestRenderTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplateData sets the TemplateData field's value.
-func (s *TestRenderTemplateInput) SetTemplateData(v string) *TestRenderTemplateInput {
-	s.TemplateData = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *TestRenderTemplateInput) SetTemplateName(v string) *TestRenderTemplateInput {
-	s.TemplateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TestRenderTemplateResponse
 type TestRenderTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -12320,12 +10562,6 @@ func (s TestRenderTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TestRenderTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRenderedTemplate sets the RenderedTemplate field's value.
-func (s *TestRenderTemplateOutput) SetRenderedTemplate(v string) *TestRenderTemplateOutput {
-	s.RenderedTemplate = &v
-	return s
 }
 
 // A domain that is used to redirect email recipients to an Amazon SES-operated
@@ -12354,12 +10590,6 @@ func (s TrackingOptions) GoString() string {
 	return s.String()
 }
 
-// SetCustomRedirectDomain sets the CustomRedirectDomain field's value.
-func (s *TrackingOptions) SetCustomRedirectDomain(v string) *TrackingOptions {
-	s.CustomRedirectDomain = &v
-	return s
-}
-
 // Represents a request to enable or disable the email sending capabilities
 // for your entire Amazon SES account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabledRequest
@@ -12379,12 +10609,6 @@ func (s UpdateAccountSendingEnabledInput) String() string {
 // GoString returns the string representation
 func (s UpdateAccountSendingEnabledInput) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *UpdateAccountSendingEnabledInput) SetEnabled(v bool) *UpdateAccountSendingEnabledInput {
-	s.Enabled = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabledOutput
@@ -12462,18 +10686,6 @@ func (s *UpdateConfigurationSetEventDestinationInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *UpdateConfigurationSetEventDestinationInput) SetConfigurationSetName(v string) *UpdateConfigurationSetEventDestinationInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetEventDestination sets the EventDestination field's value.
-func (s *UpdateConfigurationSetEventDestinationInput) SetEventDestination(v *EventDestination) *UpdateConfigurationSetEventDestinationInput {
-	s.EventDestination = v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationResponse
 type UpdateConfigurationSetEventDestinationOutput struct {
@@ -12543,18 +10755,6 @@ func (s *UpdateConfigurationSetReputationMetricsEnabledInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *UpdateConfigurationSetReputationMetricsEnabledInput) SetConfigurationSetName(v string) *UpdateConfigurationSetReputationMetricsEnabledInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *UpdateConfigurationSetReputationMetricsEnabledInput) SetEnabled(v bool) *UpdateConfigurationSetReputationMetricsEnabledInput {
-	s.Enabled = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetReputationMetricsEnabledOutput
 type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
 	_ struct{} `type:"structure"`
@@ -12621,18 +10821,6 @@ func (s *UpdateConfigurationSetSendingEnabledInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *UpdateConfigurationSetSendingEnabledInput) SetConfigurationSetName(v string) *UpdateConfigurationSetSendingEnabledInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *UpdateConfigurationSetSendingEnabledInput) SetEnabled(v bool) *UpdateConfigurationSetSendingEnabledInput {
-	s.Enabled = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetSendingEnabledOutput
@@ -12706,18 +10894,6 @@ func (s *UpdateConfigurationSetTrackingOptionsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationSetName sets the ConfigurationSetName field's value.
-func (s *UpdateConfigurationSetTrackingOptionsInput) SetConfigurationSetName(v string) *UpdateConfigurationSetTrackingOptionsInput {
-	s.ConfigurationSetName = &v
-	return s
-}
-
-// SetTrackingOptions sets the TrackingOptions field's value.
-func (s *UpdateConfigurationSetTrackingOptionsInput) SetTrackingOptions(v *TrackingOptions) *UpdateConfigurationSetTrackingOptionsInput {
-	s.TrackingOptions = v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -12799,42 +10975,6 @@ func (s *UpdateCustomVerificationEmailTemplateInput) Validate() error {
 	return nil
 }
 
-// SetFailureRedirectionURL sets the FailureRedirectionURL field's value.
-func (s *UpdateCustomVerificationEmailTemplateInput) SetFailureRedirectionURL(v string) *UpdateCustomVerificationEmailTemplateInput {
-	s.FailureRedirectionURL = &v
-	return s
-}
-
-// SetFromEmailAddress sets the FromEmailAddress field's value.
-func (s *UpdateCustomVerificationEmailTemplateInput) SetFromEmailAddress(v string) *UpdateCustomVerificationEmailTemplateInput {
-	s.FromEmailAddress = &v
-	return s
-}
-
-// SetSuccessRedirectionURL sets the SuccessRedirectionURL field's value.
-func (s *UpdateCustomVerificationEmailTemplateInput) SetSuccessRedirectionURL(v string) *UpdateCustomVerificationEmailTemplateInput {
-	s.SuccessRedirectionURL = &v
-	return s
-}
-
-// SetTemplateContent sets the TemplateContent field's value.
-func (s *UpdateCustomVerificationEmailTemplateInput) SetTemplateContent(v string) *UpdateCustomVerificationEmailTemplateInput {
-	s.TemplateContent = &v
-	return s
-}
-
-// SetTemplateName sets the TemplateName field's value.
-func (s *UpdateCustomVerificationEmailTemplateInput) SetTemplateName(v string) *UpdateCustomVerificationEmailTemplateInput {
-	s.TemplateName = &v
-	return s
-}
-
-// SetTemplateSubject sets the TemplateSubject field's value.
-func (s *UpdateCustomVerificationEmailTemplateInput) SetTemplateSubject(v string) *UpdateCustomVerificationEmailTemplateInput {
-	s.TemplateSubject = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateCustomVerificationEmailTemplateOutput
 type UpdateCustomVerificationEmailTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -12908,18 +11048,6 @@ func (s *UpdateReceiptRuleInput) Validate() error {
 	return nil
 }
 
-// SetRule sets the Rule field's value.
-func (s *UpdateReceiptRuleInput) SetRule(v *ReceiptRule) *UpdateReceiptRuleInput {
-	s.Rule = v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *UpdateReceiptRuleInput) SetRuleSetName(v string) *UpdateReceiptRuleInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // An empty element returned on a successful request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleResponse
 type UpdateReceiptRuleOutput struct {
@@ -12983,12 +11111,6 @@ func (s *UpdateTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplate sets the Template field's value.
-func (s *UpdateTemplateInput) SetTemplate(v *Template) *UpdateTemplateInput {
-	s.Template = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateTemplateResponse
 type UpdateTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -13048,12 +11170,6 @@ func (s *VerifyDomainDkimInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *VerifyDomainDkimInput) SetDomain(v string) *VerifyDomainDkimInput {
-	s.Domain = &v
-	return s
-}
-
 // Returns CNAME records that you must publish to the DNS server of your domain
 // to set up Easy DKIM with Amazon SES.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkimResponse
@@ -13091,12 +11207,6 @@ func (s VerifyDomainDkimOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s VerifyDomainDkimOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDkimTokens sets the DkimTokens field's value.
-func (s *VerifyDomainDkimOutput) SetDkimTokens(v []string) *VerifyDomainDkimOutput {
-	s.DkimTokens = v
-	return s
 }
 
 // Represents a request to begin Amazon SES domain verification and to generate
@@ -13137,12 +11247,6 @@ func (s *VerifyDomainIdentityInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *VerifyDomainIdentityInput) SetDomain(v string) *VerifyDomainIdentityInput {
-	s.Domain = &v
-	return s
-}
-
 // Returns a TXT record that you must publish to the DNS server of your domain
 // to complete domain verification with Amazon SES.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentityResponse
@@ -13180,12 +11284,6 @@ func (s VerifyDomainIdentityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVerificationToken sets the VerificationToken field's value.
-func (s *VerifyDomainIdentityOutput) SetVerificationToken(v string) *VerifyDomainIdentityOutput {
-	s.VerificationToken = &v
-	return s
-}
-
 // Represents a request to begin email address verification with Amazon SES.
 // For information about email address verification, see the Amazon SES Developer
 // Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html).
@@ -13221,12 +11319,6 @@ func (s *VerifyEmailAddressInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *VerifyEmailAddressInput) SetEmailAddress(v string) *VerifyEmailAddressInput {
-	s.EmailAddress = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailAddressOutput
@@ -13286,12 +11378,6 @@ func (s *VerifyEmailIdentityInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *VerifyEmailIdentityInput) SetEmailAddress(v string) *VerifyEmailIdentityInput {
-	s.EmailAddress = &v
-	return s
 }
 
 // An empty element returned on a successful request.
@@ -13365,18 +11451,6 @@ func (s *WorkmailAction) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOrganizationArn sets the OrganizationArn field's value.
-func (s *WorkmailAction) SetOrganizationArn(v string) *WorkmailAction {
-	s.OrganizationArn = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *WorkmailAction) SetTopicArn(v string) *WorkmailAction {
-	s.TopicArn = &v
-	return s
 }
 
 type BehaviorOnMXFailure string

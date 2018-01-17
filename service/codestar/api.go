@@ -979,36 +979,6 @@ func (s *AssociateTeamMemberInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *AssociateTeamMemberInput) SetClientRequestToken(v string) *AssociateTeamMemberInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *AssociateTeamMemberInput) SetProjectId(v string) *AssociateTeamMemberInput {
-	s.ProjectId = &v
-	return s
-}
-
-// SetProjectRole sets the ProjectRole field's value.
-func (s *AssociateTeamMemberInput) SetProjectRole(v string) *AssociateTeamMemberInput {
-	s.ProjectRole = &v
-	return s
-}
-
-// SetRemoteAccessAllowed sets the RemoteAccessAllowed field's value.
-func (s *AssociateTeamMemberInput) SetRemoteAccessAllowed(v bool) *AssociateTeamMemberInput {
-	s.RemoteAccessAllowed = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *AssociateTeamMemberInput) SetUserArn(v string) *AssociateTeamMemberInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMemberResult
 type AssociateTeamMemberOutput struct {
 	_ struct{} `type:"structure"`
@@ -1033,12 +1003,6 @@ func (s AssociateTeamMemberOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateTeamMemberOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *AssociateTeamMemberOutput) SetClientRequestToken(v string) *AssociateTeamMemberOutput {
-	s.ClientRequestToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectRequest
@@ -1099,30 +1063,6 @@ func (s *CreateProjectInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateProjectInput) SetClientRequestToken(v string) *CreateProjectInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateProjectInput) SetDescription(v string) *CreateProjectInput {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateProjectInput) SetId(v string) *CreateProjectInput {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectResult
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -1159,30 +1099,6 @@ func (s CreateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateProjectOutput) SetArn(v string) *CreateProjectOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateProjectOutput) SetClientRequestToken(v string) *CreateProjectOutput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateProjectOutput) SetId(v string) *CreateProjectOutput {
-	s.Id = &v
-	return s
-}
-
-// SetProjectTemplateId sets the ProjectTemplateId field's value.
-func (s *CreateProjectOutput) SetProjectTemplateId(v string) *CreateProjectOutput {
-	s.ProjectTemplateId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfileRequest
@@ -1253,30 +1169,6 @@ func (s *CreateUserProfileInput) Validate() error {
 	return nil
 }
 
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreateUserProfileInput) SetDisplayName(v string) *CreateUserProfileInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *CreateUserProfileInput) SetEmailAddress(v string) *CreateUserProfileInput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *CreateUserProfileInput) SetSshPublicKey(v string) *CreateUserProfileInput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *CreateUserProfileInput) SetUserArn(v string) *CreateUserProfileInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfileResult
 type CreateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -1320,42 +1212,6 @@ func (s CreateUserProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *CreateUserProfileOutput) SetCreatedTimestamp(v time.Time) *CreateUserProfileOutput {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreateUserProfileOutput) SetDisplayName(v string) *CreateUserProfileOutput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *CreateUserProfileOutput) SetEmailAddress(v string) *CreateUserProfileOutput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetLastModifiedTimestamp sets the LastModifiedTimestamp field's value.
-func (s *CreateUserProfileOutput) SetLastModifiedTimestamp(v time.Time) *CreateUserProfileOutput {
-	s.LastModifiedTimestamp = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *CreateUserProfileOutput) SetSshPublicKey(v string) *CreateUserProfileOutput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *CreateUserProfileOutput) SetUserArn(v string) *CreateUserProfileOutput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProjectRequest
@@ -1408,24 +1264,6 @@ func (s *DeleteProjectInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *DeleteProjectInput) SetClientRequestToken(v string) *DeleteProjectInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDeleteStack sets the DeleteStack field's value.
-func (s *DeleteProjectInput) SetDeleteStack(v bool) *DeleteProjectInput {
-	s.DeleteStack = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteProjectInput) SetId(v string) *DeleteProjectInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProjectResult
 type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -1453,18 +1291,6 @@ func (s DeleteProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProjectArn sets the ProjectArn field's value.
-func (s *DeleteProjectOutput) SetProjectArn(v string) *DeleteProjectOutput {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DeleteProjectOutput) SetStackId(v string) *DeleteProjectOutput {
-	s.StackId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfileRequest
@@ -1504,12 +1330,6 @@ func (s *DeleteUserProfileInput) Validate() error {
 	return nil
 }
 
-// SetUserArn sets the UserArn field's value.
-func (s *DeleteUserProfileInput) SetUserArn(v string) *DeleteUserProfileInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfileResult
 type DeleteUserProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -1535,12 +1355,6 @@ func (s DeleteUserProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteUserProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DeleteUserProfileOutput) SetUserArn(v string) *DeleteUserProfileOutput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProjectRequest
@@ -1578,12 +1392,6 @@ func (s *DescribeProjectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeProjectInput) SetId(v string) *DescribeProjectInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProjectResult
@@ -1634,54 +1442,6 @@ func (s DescribeProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DescribeProjectOutput) SetArn(v string) *DescribeProjectOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *DescribeProjectOutput) SetClientRequestToken(v string) *DescribeProjectOutput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetCreatedTimeStamp sets the CreatedTimeStamp field's value.
-func (s *DescribeProjectOutput) SetCreatedTimeStamp(v time.Time) *DescribeProjectOutput {
-	s.CreatedTimeStamp = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeProjectOutput) SetDescription(v string) *DescribeProjectOutput {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeProjectOutput) SetId(v string) *DescribeProjectOutput {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeProjectOutput) SetName(v string) *DescribeProjectOutput {
-	s.Name = &v
-	return s
-}
-
-// SetProjectTemplateId sets the ProjectTemplateId field's value.
-func (s *DescribeProjectOutput) SetProjectTemplateId(v string) *DescribeProjectOutput {
-	s.ProjectTemplateId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeProjectOutput) SetStackId(v string) *DescribeProjectOutput {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfileRequest
 type DescribeUserProfileInput struct {
 	_ struct{} `type:"structure"`
@@ -1717,12 +1477,6 @@ func (s *DescribeUserProfileInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DescribeUserProfileInput) SetUserArn(v string) *DescribeUserProfileInput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfileResult
@@ -1783,42 +1537,6 @@ func (s DescribeUserProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *DescribeUserProfileOutput) SetCreatedTimestamp(v time.Time) *DescribeUserProfileOutput {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *DescribeUserProfileOutput) SetDisplayName(v string) *DescribeUserProfileOutput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *DescribeUserProfileOutput) SetEmailAddress(v string) *DescribeUserProfileOutput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetLastModifiedTimestamp sets the LastModifiedTimestamp field's value.
-func (s *DescribeUserProfileOutput) SetLastModifiedTimestamp(v time.Time) *DescribeUserProfileOutput {
-	s.LastModifiedTimestamp = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *DescribeUserProfileOutput) SetSshPublicKey(v string) *DescribeUserProfileOutput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DescribeUserProfileOutput) SetUserArn(v string) *DescribeUserProfileOutput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMemberRequest
 type DisassociateTeamMemberInput struct {
 	_ struct{} `type:"structure"`
@@ -1867,18 +1585,6 @@ func (s *DisassociateTeamMemberInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *DisassociateTeamMemberInput) SetProjectId(v string) *DisassociateTeamMemberInput {
-	s.ProjectId = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DisassociateTeamMemberInput) SetUserArn(v string) *DisassociateTeamMemberInput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMemberResult
@@ -1941,18 +1647,6 @@ func (s *ListProjectsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListProjectsInput) SetMaxResults(v int64) *ListProjectsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjectsResult
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1982,18 +1676,6 @@ func (s ListProjectsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []ProjectSummary) *ListProjectsOutput {
-	s.Projects = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResourcesRequest
@@ -2046,24 +1728,6 @@ func (s *ListResourcesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResourcesInput) SetMaxResults(v int64) *ListResourcesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourcesInput) SetNextToken(v string) *ListResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ListResourcesInput) SetProjectId(v string) *ListResourcesInput {
-	s.ProjectId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResourcesResult
 type ListResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2091,18 +1755,6 @@ func (s ListResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourcesOutput) SetNextToken(v string) *ListResourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *ListResourcesOutput) SetResources(v []Resource) *ListResourcesOutput {
-	s.Resources = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProjectRequest
@@ -2154,24 +1806,6 @@ func (s *ListTagsForProjectInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *ListTagsForProjectInput) SetId(v string) *ListTagsForProjectInput {
-	s.Id = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTagsForProjectInput) SetMaxResults(v int64) *ListTagsForProjectInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsForProjectInput) SetNextToken(v string) *ListTagsForProjectInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProjectResult
 type ListTagsForProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -2198,18 +1832,6 @@ func (s ListTagsForProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsForProjectOutput) SetNextToken(v string) *ListTagsForProjectOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForProjectOutput) SetTags(v map[string]string) *ListTagsForProjectOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembersRequest
@@ -2262,24 +1884,6 @@ func (s *ListTeamMembersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTeamMembersInput) SetMaxResults(v int64) *ListTeamMembersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTeamMembersInput) SetNextToken(v string) *ListTeamMembersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ListTeamMembersInput) SetProjectId(v string) *ListTeamMembersInput {
-	s.ProjectId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembersResult
 type ListTeamMembersOutput struct {
 	_ struct{} `type:"structure"`
@@ -2309,18 +1913,6 @@ func (s ListTeamMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTeamMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTeamMembersOutput) SetNextToken(v string) *ListTeamMembersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTeamMembers sets the TeamMembers field's value.
-func (s *ListTeamMembersOutput) SetTeamMembers(v []TeamMember) *ListTeamMembersOutput {
-	s.TeamMembers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfilesRequest
@@ -2361,18 +1953,6 @@ func (s *ListUserProfilesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUserProfilesInput) SetMaxResults(v int64) *ListUserProfilesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUserProfilesInput) SetNextToken(v string) *ListUserProfilesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfilesResult
 type ListUserProfilesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2404,18 +1984,6 @@ func (s ListUserProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListUserProfilesOutput) SetNextToken(v string) *ListUserProfilesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserProfiles sets the UserProfiles field's value.
-func (s *ListUserProfilesOutput) SetUserProfiles(v []UserProfileSummary) *ListUserProfilesOutput {
-	s.UserProfiles = v
-	return s
-}
-
 // Information about the metadata for a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectSummary
 type ProjectSummary struct {
@@ -2438,18 +2006,6 @@ func (s ProjectSummary) GoString() string {
 	return s.String()
 }
 
-// SetProjectArn sets the ProjectArn field's value.
-func (s *ProjectSummary) SetProjectArn(v string) *ProjectSummary {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ProjectSummary) SetProjectId(v string) *ProjectSummary {
-	s.ProjectId = &v
-	return s
-}
-
 // Information about a resource for a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Resource
 type Resource struct {
@@ -2469,12 +2025,6 @@ func (s Resource) String() string {
 // GoString returns the string representation
 func (s Resource) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *Resource) SetId(v string) *Resource {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProjectRequest
@@ -2523,18 +2073,6 @@ func (s *TagProjectInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *TagProjectInput) SetId(v string) *TagProjectInput {
-	s.Id = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagProjectInput) SetTags(v map[string]string) *TagProjectInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProjectResult
 type TagProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -2558,12 +2096,6 @@ func (s TagProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagProjectOutput) SetTags(v map[string]string) *TagProjectOutput {
-	s.Tags = v
-	return s
 }
 
 // Information about a team member in a project.
@@ -2596,24 +2128,6 @@ func (s TeamMember) String() string {
 // GoString returns the string representation
 func (s TeamMember) GoString() string {
 	return s.String()
-}
-
-// SetProjectRole sets the ProjectRole field's value.
-func (s *TeamMember) SetProjectRole(v string) *TeamMember {
-	s.ProjectRole = &v
-	return s
-}
-
-// SetRemoteAccessAllowed sets the RemoteAccessAllowed field's value.
-func (s *TeamMember) SetRemoteAccessAllowed(v bool) *TeamMember {
-	s.RemoteAccessAllowed = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *TeamMember) SetUserArn(v string) *TeamMember {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProjectRequest
@@ -2660,18 +2174,6 @@ func (s *UntagProjectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *UntagProjectInput) SetId(v string) *UntagProjectInput {
-	s.Id = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *UntagProjectInput) SetTags(v []string) *UntagProjectInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProjectResult
@@ -2740,24 +2242,6 @@ func (s *UpdateProjectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateProjectInput) SetDescription(v string) *UpdateProjectInput {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateProjectInput) SetId(v string) *UpdateProjectInput {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateProjectInput) SetName(v string) *UpdateProjectInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProjectResult
@@ -2843,30 +2327,6 @@ func (s *UpdateTeamMemberInput) Validate() error {
 	return nil
 }
 
-// SetProjectId sets the ProjectId field's value.
-func (s *UpdateTeamMemberInput) SetProjectId(v string) *UpdateTeamMemberInput {
-	s.ProjectId = &v
-	return s
-}
-
-// SetProjectRole sets the ProjectRole field's value.
-func (s *UpdateTeamMemberInput) SetProjectRole(v string) *UpdateTeamMemberInput {
-	s.ProjectRole = &v
-	return s
-}
-
-// SetRemoteAccessAllowed sets the RemoteAccessAllowed field's value.
-func (s *UpdateTeamMemberInput) SetRemoteAccessAllowed(v bool) *UpdateTeamMemberInput {
-	s.RemoteAccessAllowed = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UpdateTeamMemberInput) SetUserArn(v string) *UpdateTeamMemberInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMemberResult
 type UpdateTeamMemberOutput struct {
 	_ struct{} `type:"structure"`
@@ -2898,24 +2358,6 @@ func (s UpdateTeamMemberOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTeamMemberOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProjectRole sets the ProjectRole field's value.
-func (s *UpdateTeamMemberOutput) SetProjectRole(v string) *UpdateTeamMemberOutput {
-	s.ProjectRole = &v
-	return s
-}
-
-// SetRemoteAccessAllowed sets the RemoteAccessAllowed field's value.
-func (s *UpdateTeamMemberOutput) SetRemoteAccessAllowed(v bool) *UpdateTeamMemberOutput {
-	s.RemoteAccessAllowed = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UpdateTeamMemberOutput) SetUserArn(v string) *UpdateTeamMemberOutput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfileRequest
@@ -2974,30 +2416,6 @@ func (s *UpdateUserProfileInput) Validate() error {
 	return nil
 }
 
-// SetDisplayName sets the DisplayName field's value.
-func (s *UpdateUserProfileInput) SetDisplayName(v string) *UpdateUserProfileInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *UpdateUserProfileInput) SetEmailAddress(v string) *UpdateUserProfileInput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *UpdateUserProfileInput) SetSshPublicKey(v string) *UpdateUserProfileInput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UpdateUserProfileInput) SetUserArn(v string) *UpdateUserProfileInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfileResult
 type UpdateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -3043,42 +2461,6 @@ func (s UpdateUserProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *UpdateUserProfileOutput) SetCreatedTimestamp(v time.Time) *UpdateUserProfileOutput {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *UpdateUserProfileOutput) SetDisplayName(v string) *UpdateUserProfileOutput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *UpdateUserProfileOutput) SetEmailAddress(v string) *UpdateUserProfileOutput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetLastModifiedTimestamp sets the LastModifiedTimestamp field's value.
-func (s *UpdateUserProfileOutput) SetLastModifiedTimestamp(v time.Time) *UpdateUserProfileOutput {
-	s.LastModifiedTimestamp = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *UpdateUserProfileOutput) SetSshPublicKey(v string) *UpdateUserProfileOutput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UpdateUserProfileOutput) SetUserArn(v string) *UpdateUserProfileOutput {
-	s.UserArn = &v
-	return s
-}
-
 // Information about a user's profile in AWS CodeStar.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UserProfileSummary
 type UserProfileSummary struct {
@@ -3115,28 +2497,4 @@ func (s UserProfileSummary) String() string {
 // GoString returns the string representation
 func (s UserProfileSummary) GoString() string {
 	return s.String()
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *UserProfileSummary) SetDisplayName(v string) *UserProfileSummary {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *UserProfileSummary) SetEmailAddress(v string) *UserProfileSummary {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *UserProfileSummary) SetSshPublicKey(v string) *UserProfileSummary {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UserProfileSummary) SetUserArn(v string) *UserProfileSummary {
-	s.UserArn = &v
-	return s
 }

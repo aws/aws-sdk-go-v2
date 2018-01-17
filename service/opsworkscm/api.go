@@ -916,24 +916,6 @@ func (s AccountAttribute) GoString() string {
 	return s.String()
 }
 
-// SetMaximum sets the Maximum field's value.
-func (s *AccountAttribute) SetMaximum(v int64) *AccountAttribute {
-	s.Maximum = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AccountAttribute) SetName(v string) *AccountAttribute {
-	s.Name = &v
-	return s
-}
-
-// SetUsed sets the Used field's value.
-func (s *AccountAttribute) SetUsed(v int64) *AccountAttribute {
-	s.Used = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeRequest
 type AssociateNodeInput struct {
 	_ struct{} `type:"structure"`
@@ -1002,24 +984,6 @@ func (s *AssociateNodeInput) Validate() error {
 	return nil
 }
 
-// SetEngineAttributes sets the EngineAttributes field's value.
-func (s *AssociateNodeInput) SetEngineAttributes(v []EngineAttribute) *AssociateNodeInput {
-	s.EngineAttributes = v
-	return s
-}
-
-// SetNodeName sets the NodeName field's value.
-func (s *AssociateNodeInput) SetNodeName(v string) *AssociateNodeInput {
-	s.NodeName = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *AssociateNodeInput) SetServerName(v string) *AssociateNodeInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeResponse
 type AssociateNodeOutput struct {
 	_ struct{} `type:"structure"`
@@ -1044,12 +1008,6 @@ func (s AssociateNodeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateNodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNodeAssociationStatusToken sets the NodeAssociationStatusToken field's value.
-func (s *AssociateNodeOutput) SetNodeAssociationStatusToken(v string) *AssociateNodeOutput {
-	s.NodeAssociationStatusToken = &v
-	return s
 }
 
 // Describes a single backup.
@@ -1149,150 +1107,6 @@ func (s Backup) GoString() string {
 	return s.String()
 }
 
-// SetBackupArn sets the BackupArn field's value.
-func (s *Backup) SetBackupArn(v string) *Backup {
-	s.BackupArn = &v
-	return s
-}
-
-// SetBackupId sets the BackupId field's value.
-func (s *Backup) SetBackupId(v string) *Backup {
-	s.BackupId = &v
-	return s
-}
-
-// SetBackupType sets the BackupType field's value.
-func (s *Backup) SetBackupType(v BackupType) *Backup {
-	s.BackupType = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Backup) SetCreatedAt(v time.Time) *Backup {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Backup) SetDescription(v string) *Backup {
-	s.Description = &v
-	return s
-}
-
-// SetEngine sets the Engine field's value.
-func (s *Backup) SetEngine(v string) *Backup {
-	s.Engine = &v
-	return s
-}
-
-// SetEngineModel sets the EngineModel field's value.
-func (s *Backup) SetEngineModel(v string) *Backup {
-	s.EngineModel = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *Backup) SetEngineVersion(v string) *Backup {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetInstanceProfileArn sets the InstanceProfileArn field's value.
-func (s *Backup) SetInstanceProfileArn(v string) *Backup {
-	s.InstanceProfileArn = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *Backup) SetInstanceType(v string) *Backup {
-	s.InstanceType = &v
-	return s
-}
-
-// SetKeyPair sets the KeyPair field's value.
-func (s *Backup) SetKeyPair(v string) *Backup {
-	s.KeyPair = &v
-	return s
-}
-
-// SetPreferredBackupWindow sets the PreferredBackupWindow field's value.
-func (s *Backup) SetPreferredBackupWindow(v string) *Backup {
-	s.PreferredBackupWindow = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *Backup) SetPreferredMaintenanceWindow(v string) *Backup {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetS3DataSize sets the S3DataSize field's value.
-func (s *Backup) SetS3DataSize(v int64) *Backup {
-	s.S3DataSize = &v
-	return s
-}
-
-// SetS3DataUrl sets the S3DataUrl field's value.
-func (s *Backup) SetS3DataUrl(v string) *Backup {
-	s.S3DataUrl = &v
-	return s
-}
-
-// SetS3LogUrl sets the S3LogUrl field's value.
-func (s *Backup) SetS3LogUrl(v string) *Backup {
-	s.S3LogUrl = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *Backup) SetSecurityGroupIds(v []string) *Backup {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *Backup) SetServerName(v string) *Backup {
-	s.ServerName = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *Backup) SetServiceRoleArn(v string) *Backup {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Backup) SetStatus(v BackupStatus) *Backup {
-	s.Status = v
-	return s
-}
-
-// SetStatusDescription sets the StatusDescription field's value.
-func (s *Backup) SetStatusDescription(v string) *Backup {
-	s.StatusDescription = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *Backup) SetSubnetIds(v []string) *Backup {
-	s.SubnetIds = v
-	return s
-}
-
-// SetToolsVersion sets the ToolsVersion field's value.
-func (s *Backup) SetToolsVersion(v string) *Backup {
-	s.ToolsVersion = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *Backup) SetUserArn(v string) *Backup {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupRequest
 type CreateBackupInput struct {
 	_ struct{} `type:"structure"`
@@ -1333,18 +1147,6 @@ func (s *CreateBackupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateBackupInput) SetDescription(v string) *CreateBackupInput {
-	s.Description = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *CreateBackupInput) SetServerName(v string) *CreateBackupInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupResponse
 type CreateBackupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1368,12 +1170,6 @@ func (s CreateBackupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateBackupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBackup sets the Backup field's value.
-func (s *CreateBackupOutput) SetBackup(v *Backup) *CreateBackupOutput {
-	s.Backup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerRequest
@@ -1563,108 +1359,6 @@ func (s *CreateServerInput) Validate() error {
 	return nil
 }
 
-// SetAssociatePublicIpAddress sets the AssociatePublicIpAddress field's value.
-func (s *CreateServerInput) SetAssociatePublicIpAddress(v bool) *CreateServerInput {
-	s.AssociatePublicIpAddress = &v
-	return s
-}
-
-// SetBackupId sets the BackupId field's value.
-func (s *CreateServerInput) SetBackupId(v string) *CreateServerInput {
-	s.BackupId = &v
-	return s
-}
-
-// SetBackupRetentionCount sets the BackupRetentionCount field's value.
-func (s *CreateServerInput) SetBackupRetentionCount(v int64) *CreateServerInput {
-	s.BackupRetentionCount = &v
-	return s
-}
-
-// SetDisableAutomatedBackup sets the DisableAutomatedBackup field's value.
-func (s *CreateServerInput) SetDisableAutomatedBackup(v bool) *CreateServerInput {
-	s.DisableAutomatedBackup = &v
-	return s
-}
-
-// SetEngine sets the Engine field's value.
-func (s *CreateServerInput) SetEngine(v string) *CreateServerInput {
-	s.Engine = &v
-	return s
-}
-
-// SetEngineAttributes sets the EngineAttributes field's value.
-func (s *CreateServerInput) SetEngineAttributes(v []EngineAttribute) *CreateServerInput {
-	s.EngineAttributes = v
-	return s
-}
-
-// SetEngineModel sets the EngineModel field's value.
-func (s *CreateServerInput) SetEngineModel(v string) *CreateServerInput {
-	s.EngineModel = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *CreateServerInput) SetEngineVersion(v string) *CreateServerInput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetInstanceProfileArn sets the InstanceProfileArn field's value.
-func (s *CreateServerInput) SetInstanceProfileArn(v string) *CreateServerInput {
-	s.InstanceProfileArn = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *CreateServerInput) SetInstanceType(v string) *CreateServerInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetKeyPair sets the KeyPair field's value.
-func (s *CreateServerInput) SetKeyPair(v string) *CreateServerInput {
-	s.KeyPair = &v
-	return s
-}
-
-// SetPreferredBackupWindow sets the PreferredBackupWindow field's value.
-func (s *CreateServerInput) SetPreferredBackupWindow(v string) *CreateServerInput {
-	s.PreferredBackupWindow = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *CreateServerInput) SetPreferredMaintenanceWindow(v string) *CreateServerInput {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateServerInput) SetSecurityGroupIds(v []string) *CreateServerInput {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *CreateServerInput) SetServerName(v string) *CreateServerInput {
-	s.ServerName = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *CreateServerInput) SetServiceRoleArn(v string) *CreateServerInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateServerInput) SetSubnetIds(v []string) *CreateServerInput {
-	s.SubnetIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerResponse
 type CreateServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -1688,12 +1382,6 @@ func (s CreateServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServer sets the Server field's value.
-func (s *CreateServerOutput) SetServer(v *Server) *CreateServerOutput {
-	s.Server = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackupRequest
@@ -1729,12 +1417,6 @@ func (s *DeleteBackupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBackupId sets the BackupId field's value.
-func (s *DeleteBackupInput) SetBackupId(v string) *DeleteBackupInput {
-	s.BackupId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackupResponse
@@ -1794,12 +1476,6 @@ func (s *DeleteServerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *DeleteServerInput) SetServerName(v string) *DeleteServerInput {
-	s.ServerName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServerResponse
@@ -1864,12 +1540,6 @@ func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *DescribeAccountAttributesOutput) SetAttributes(v []AccountAttribute) *DescribeAccountAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsRequest
 type DescribeBackupsInput struct {
 	_ struct{} `type:"structure"`
@@ -1924,30 +1594,6 @@ func (s *DescribeBackupsInput) Validate() error {
 	return nil
 }
 
-// SetBackupId sets the BackupId field's value.
-func (s *DescribeBackupsInput) SetBackupId(v string) *DescribeBackupsInput {
-	s.BackupId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeBackupsInput) SetMaxResults(v int64) *DescribeBackupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeBackupsInput) SetNextToken(v string) *DescribeBackupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *DescribeBackupsInput) SetServerName(v string) *DescribeBackupsInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsResponse
 type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1981,18 +1627,6 @@ func (s DescribeBackupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBackupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBackups sets the Backups field's value.
-func (s *DescribeBackupsOutput) SetBackups(v []Backup) *DescribeBackupsOutput {
-	s.Backups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeBackupsOutput) SetNextToken(v string) *DescribeBackupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEventsRequest
@@ -2052,24 +1686,6 @@ func (s *DescribeEventsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEventsInput) SetMaxResults(v int64) *DescribeEventsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventsInput) SetNextToken(v string) *DescribeEventsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *DescribeEventsInput) SetServerName(v string) *DescribeEventsInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEventsResponse
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2103,18 +1719,6 @@ func (s DescribeEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventsOutput) SetNextToken(v string) *DescribeEventsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServerEvents sets the ServerEvents field's value.
-func (s *DescribeEventsOutput) SetServerEvents(v []ServerEvent) *DescribeEventsOutput {
-	s.ServerEvents = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusRequest
@@ -2163,18 +1767,6 @@ func (s *DescribeNodeAssociationStatusInput) Validate() error {
 	return nil
 }
 
-// SetNodeAssociationStatusToken sets the NodeAssociationStatusToken field's value.
-func (s *DescribeNodeAssociationStatusInput) SetNodeAssociationStatusToken(v string) *DescribeNodeAssociationStatusInput {
-	s.NodeAssociationStatusToken = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *DescribeNodeAssociationStatusInput) SetServerName(v string) *DescribeNodeAssociationStatusInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusResponse
 type DescribeNodeAssociationStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -2210,18 +1802,6 @@ func (s DescribeNodeAssociationStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNodeAssociationStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEngineAttributes sets the EngineAttributes field's value.
-func (s *DescribeNodeAssociationStatusOutput) SetEngineAttributes(v []EngineAttribute) *DescribeNodeAssociationStatusOutput {
-	s.EngineAttributes = v
-	return s
-}
-
-// SetNodeAssociationStatus sets the NodeAssociationStatus field's value.
-func (s *DescribeNodeAssociationStatusOutput) SetNodeAssociationStatus(v NodeAssociationStatus) *DescribeNodeAssociationStatusOutput {
-	s.NodeAssociationStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersRequest
@@ -2275,24 +1855,6 @@ func (s *DescribeServersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeServersInput) SetMaxResults(v int64) *DescribeServersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeServersInput) SetNextToken(v string) *DescribeServersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *DescribeServersInput) SetServerName(v string) *DescribeServersInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersResponse
 type DescribeServersOutput struct {
 	_ struct{} `type:"structure"`
@@ -2331,18 +1893,6 @@ func (s DescribeServersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeServersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeServersOutput) SetNextToken(v string) *DescribeServersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServers sets the Servers field's value.
-func (s *DescribeServersOutput) SetServers(v []Server) *DescribeServersOutput {
-	s.Servers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNodeRequest
@@ -2400,24 +1950,6 @@ func (s *DisassociateNodeInput) Validate() error {
 	return nil
 }
 
-// SetEngineAttributes sets the EngineAttributes field's value.
-func (s *DisassociateNodeInput) SetEngineAttributes(v []EngineAttribute) *DisassociateNodeInput {
-	s.EngineAttributes = v
-	return s
-}
-
-// SetNodeName sets the NodeName field's value.
-func (s *DisassociateNodeInput) SetNodeName(v string) *DisassociateNodeInput {
-	s.NodeName = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *DisassociateNodeInput) SetServerName(v string) *DisassociateNodeInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNodeResponse
 type DisassociateNodeOutput struct {
 	_ struct{} `type:"structure"`
@@ -2444,12 +1976,6 @@ func (s DisassociateNodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNodeAssociationStatusToken sets the NodeAssociationStatusToken field's value.
-func (s *DisassociateNodeOutput) SetNodeAssociationStatusToken(v string) *DisassociateNodeOutput {
-	s.NodeAssociationStatusToken = &v
-	return s
-}
-
 // A name and value pair that is specific to the engine of the server.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/EngineAttribute
 type EngineAttribute struct {
@@ -2470,18 +1996,6 @@ func (s EngineAttribute) String() string {
 // GoString returns the string representation
 func (s EngineAttribute) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *EngineAttribute) SetName(v string) *EngineAttribute {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *EngineAttribute) SetValue(v string) *EngineAttribute {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerRequest
@@ -2538,30 +2052,6 @@ func (s *RestoreServerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBackupId sets the BackupId field's value.
-func (s *RestoreServerInput) SetBackupId(v string) *RestoreServerInput {
-	s.BackupId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *RestoreServerInput) SetInstanceType(v string) *RestoreServerInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetKeyPair sets the KeyPair field's value.
-func (s *RestoreServerInput) SetKeyPair(v string) *RestoreServerInput {
-	s.KeyPair = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *RestoreServerInput) SetServerName(v string) *RestoreServerInput {
-	s.ServerName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerResponse
@@ -2706,144 +2196,6 @@ func (s Server) GoString() string {
 	return s.String()
 }
 
-// SetAssociatePublicIpAddress sets the AssociatePublicIpAddress field's value.
-func (s *Server) SetAssociatePublicIpAddress(v bool) *Server {
-	s.AssociatePublicIpAddress = &v
-	return s
-}
-
-// SetBackupRetentionCount sets the BackupRetentionCount field's value.
-func (s *Server) SetBackupRetentionCount(v int64) *Server {
-	s.BackupRetentionCount = &v
-	return s
-}
-
-// SetCloudFormationStackArn sets the CloudFormationStackArn field's value.
-func (s *Server) SetCloudFormationStackArn(v string) *Server {
-	s.CloudFormationStackArn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Server) SetCreatedAt(v time.Time) *Server {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDisableAutomatedBackup sets the DisableAutomatedBackup field's value.
-func (s *Server) SetDisableAutomatedBackup(v bool) *Server {
-	s.DisableAutomatedBackup = &v
-	return s
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *Server) SetEndpoint(v string) *Server {
-	s.Endpoint = &v
-	return s
-}
-
-// SetEngine sets the Engine field's value.
-func (s *Server) SetEngine(v string) *Server {
-	s.Engine = &v
-	return s
-}
-
-// SetEngineAttributes sets the EngineAttributes field's value.
-func (s *Server) SetEngineAttributes(v []EngineAttribute) *Server {
-	s.EngineAttributes = v
-	return s
-}
-
-// SetEngineModel sets the EngineModel field's value.
-func (s *Server) SetEngineModel(v string) *Server {
-	s.EngineModel = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *Server) SetEngineVersion(v string) *Server {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetInstanceProfileArn sets the InstanceProfileArn field's value.
-func (s *Server) SetInstanceProfileArn(v string) *Server {
-	s.InstanceProfileArn = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *Server) SetInstanceType(v string) *Server {
-	s.InstanceType = &v
-	return s
-}
-
-// SetKeyPair sets the KeyPair field's value.
-func (s *Server) SetKeyPair(v string) *Server {
-	s.KeyPair = &v
-	return s
-}
-
-// SetMaintenanceStatus sets the MaintenanceStatus field's value.
-func (s *Server) SetMaintenanceStatus(v MaintenanceStatus) *Server {
-	s.MaintenanceStatus = v
-	return s
-}
-
-// SetPreferredBackupWindow sets the PreferredBackupWindow field's value.
-func (s *Server) SetPreferredBackupWindow(v string) *Server {
-	s.PreferredBackupWindow = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *Server) SetPreferredMaintenanceWindow(v string) *Server {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *Server) SetSecurityGroupIds(v []string) *Server {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetServerArn sets the ServerArn field's value.
-func (s *Server) SetServerArn(v string) *Server {
-	s.ServerArn = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *Server) SetServerName(v string) *Server {
-	s.ServerName = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *Server) SetServiceRoleArn(v string) *Server {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Server) SetStatus(v ServerStatus) *Server {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *Server) SetStatusReason(v string) *Server {
-	s.StatusReason = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *Server) SetSubnetIds(v []string) *Server {
-	s.SubnetIds = v
-	return s
-}
-
 // An event that is related to the server, such as the start of maintenance
 // or backup.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ServerEvent
@@ -2871,30 +2223,6 @@ func (s ServerEvent) String() string {
 // GoString returns the string representation
 func (s ServerEvent) GoString() string {
 	return s.String()
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *ServerEvent) SetCreatedAt(v time.Time) *ServerEvent {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetLogUrl sets the LogUrl field's value.
-func (s *ServerEvent) SetLogUrl(v string) *ServerEvent {
-	s.LogUrl = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ServerEvent) SetMessage(v string) *ServerEvent {
-	s.Message = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *ServerEvent) SetServerName(v string) *ServerEvent {
-	s.ServerName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceRequest
@@ -2938,18 +2266,6 @@ func (s *StartMaintenanceInput) Validate() error {
 	return nil
 }
 
-// SetEngineAttributes sets the EngineAttributes field's value.
-func (s *StartMaintenanceInput) SetEngineAttributes(v []EngineAttribute) *StartMaintenanceInput {
-	s.EngineAttributes = v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *StartMaintenanceInput) SetServerName(v string) *StartMaintenanceInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceResponse
 type StartMaintenanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2973,12 +2289,6 @@ func (s StartMaintenanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartMaintenanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServer sets the Server field's value.
-func (s *StartMaintenanceOutput) SetServer(v *Server) *StartMaintenanceOutput {
-	s.Server = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributesRequest
@@ -3033,24 +2343,6 @@ func (s *UpdateServerEngineAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *UpdateServerEngineAttributesInput) SetAttributeName(v string) *UpdateServerEngineAttributesInput {
-	s.AttributeName = &v
-	return s
-}
-
-// SetAttributeValue sets the AttributeValue field's value.
-func (s *UpdateServerEngineAttributesInput) SetAttributeValue(v string) *UpdateServerEngineAttributesInput {
-	s.AttributeValue = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *UpdateServerEngineAttributesInput) SetServerName(v string) *UpdateServerEngineAttributesInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributesResponse
 type UpdateServerEngineAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3074,12 +2366,6 @@ func (s UpdateServerEngineAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateServerEngineAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServer sets the Server field's value.
-func (s *UpdateServerEngineAttributesOutput) SetServer(v *Server) *UpdateServerEngineAttributesOutput {
-	s.Server = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerRequest
@@ -3138,36 +2424,6 @@ func (s *UpdateServerInput) Validate() error {
 	return nil
 }
 
-// SetBackupRetentionCount sets the BackupRetentionCount field's value.
-func (s *UpdateServerInput) SetBackupRetentionCount(v int64) *UpdateServerInput {
-	s.BackupRetentionCount = &v
-	return s
-}
-
-// SetDisableAutomatedBackup sets the DisableAutomatedBackup field's value.
-func (s *UpdateServerInput) SetDisableAutomatedBackup(v bool) *UpdateServerInput {
-	s.DisableAutomatedBackup = &v
-	return s
-}
-
-// SetPreferredBackupWindow sets the PreferredBackupWindow field's value.
-func (s *UpdateServerInput) SetPreferredBackupWindow(v string) *UpdateServerInput {
-	s.PreferredBackupWindow = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *UpdateServerInput) SetPreferredMaintenanceWindow(v string) *UpdateServerInput {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *UpdateServerInput) SetServerName(v string) *UpdateServerInput {
-	s.ServerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerResponse
 type UpdateServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -3191,12 +2447,6 @@ func (s UpdateServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServer sets the Server field's value.
-func (s *UpdateServerOutput) SetServer(v *Server) *UpdateServerOutput {
-	s.Server = v
-	return s
 }
 
 type BackupStatus string

@@ -15663,24 +15663,6 @@ func (s *AcceptReservedInstancesExchangeQuoteInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *AcceptReservedInstancesExchangeQuoteInput) SetDryRun(v bool) *AcceptReservedInstancesExchangeQuoteInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetReservedInstanceIds sets the ReservedInstanceIds field's value.
-func (s *AcceptReservedInstancesExchangeQuoteInput) SetReservedInstanceIds(v []string) *AcceptReservedInstancesExchangeQuoteInput {
-	s.ReservedInstanceIds = v
-	return s
-}
-
-// SetTargetConfigurations sets the TargetConfigurations field's value.
-func (s *AcceptReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []TargetConfigurationRequest) *AcceptReservedInstancesExchangeQuoteInput {
-	s.TargetConfigurations = v
-	return s
-}
-
 // The result of the exchange and whether it was successful.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptReservedInstancesExchangeQuoteResult
 type AcceptReservedInstancesExchangeQuoteOutput struct {
@@ -15705,12 +15687,6 @@ func (s AcceptReservedInstancesExchangeQuoteOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AcceptReservedInstancesExchangeQuoteOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExchangeId sets the ExchangeId field's value.
-func (s *AcceptReservedInstancesExchangeQuoteOutput) SetExchangeId(v string) *AcceptReservedInstancesExchangeQuoteOutput {
-	s.ExchangeId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnectionsRequest
@@ -15762,24 +15738,6 @@ func (s *AcceptVpcEndpointConnectionsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *AcceptVpcEndpointConnectionsInput) SetDryRun(v bool) *AcceptVpcEndpointConnectionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *AcceptVpcEndpointConnectionsInput) SetServiceId(v string) *AcceptVpcEndpointConnectionsInput {
-	s.ServiceId = &v
-	return s
-}
-
-// SetVpcEndpointIds sets the VpcEndpointIds field's value.
-func (s *AcceptVpcEndpointConnectionsInput) SetVpcEndpointIds(v []string) *AcceptVpcEndpointConnectionsInput {
-	s.VpcEndpointIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnectionsResult
 type AcceptVpcEndpointConnectionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -15803,12 +15761,6 @@ func (s AcceptVpcEndpointConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AcceptVpcEndpointConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *AcceptVpcEndpointConnectionsOutput) SetUnsuccessful(v []UnsuccessfulItem) *AcceptVpcEndpointConnectionsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Contains the parameters for AcceptVpcPeeringConnection.
@@ -15837,18 +15789,6 @@ func (s AcceptVpcPeeringConnectionInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *AcceptVpcPeeringConnectionInput) SetDryRun(v bool) *AcceptVpcPeeringConnectionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *AcceptVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *AcceptVpcPeeringConnectionInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Contains the output of AcceptVpcPeeringConnection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnectionResult
 type AcceptVpcPeeringConnectionOutput struct {
@@ -15875,12 +15815,6 @@ func (s AcceptVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVpcPeeringConnection sets the VpcPeeringConnection field's value.
-func (s *AcceptVpcPeeringConnectionOutput) SetVpcPeeringConnection(v *VpcPeeringConnection) *AcceptVpcPeeringConnectionOutput {
-	s.VpcPeeringConnection = v
-	return s
-}
-
 // Describes an account attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttribute
 type AccountAttribute struct {
@@ -15903,18 +15837,6 @@ func (s AccountAttribute) GoString() string {
 	return s.String()
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *AccountAttribute) SetAttributeName(v string) *AccountAttribute {
-	s.AttributeName = &v
-	return s
-}
-
-// SetAttributeValues sets the AttributeValues field's value.
-func (s *AccountAttribute) SetAttributeValues(v []AccountAttributeValue) *AccountAttribute {
-	s.AttributeValues = v
-	return s
-}
-
 // Describes a value of an account attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttributeValue
 type AccountAttributeValue struct {
@@ -15932,12 +15854,6 @@ func (s AccountAttributeValue) String() string {
 // GoString returns the string representation
 func (s AccountAttributeValue) GoString() string {
 	return s.String()
-}
-
-// SetAttributeValue sets the AttributeValue field's value.
-func (s *AccountAttributeValue) SetAttributeValue(v string) *AccountAttributeValue {
-	s.AttributeValue = &v
-	return s
 }
 
 // Describes a running instance in a Spot Fleet.
@@ -15968,30 +15884,6 @@ func (s ActiveInstance) String() string {
 // GoString returns the string representation
 func (s ActiveInstance) GoString() string {
 	return s.String()
-}
-
-// SetInstanceHealth sets the InstanceHealth field's value.
-func (s *ActiveInstance) SetInstanceHealth(v InstanceHealthStatus) *ActiveInstance {
-	s.InstanceHealth = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ActiveInstance) SetInstanceId(v string) *ActiveInstance {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ActiveInstance) SetInstanceType(v string) *ActiveInstance {
-	s.InstanceType = &v
-	return s
-}
-
-// SetSpotInstanceRequestId sets the SpotInstanceRequestId field's value.
-func (s *ActiveInstance) SetSpotInstanceRequestId(v string) *ActiveInstance {
-	s.SpotInstanceRequestId = &v
-	return s
 }
 
 // Describes an Elastic IP address.
@@ -16039,60 +15931,6 @@ func (s Address) GoString() string {
 	return s.String()
 }
 
-// SetAllocationId sets the AllocationId field's value.
-func (s *Address) SetAllocationId(v string) *Address {
-	s.AllocationId = &v
-	return s
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *Address) SetAssociationId(v string) *Address {
-	s.AssociationId = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *Address) SetDomain(v DomainType) *Address {
-	s.Domain = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Address) SetInstanceId(v string) *Address {
-	s.InstanceId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *Address) SetNetworkInterfaceId(v string) *Address {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetNetworkInterfaceOwnerId sets the NetworkInterfaceOwnerId field's value.
-func (s *Address) SetNetworkInterfaceOwnerId(v string) *Address {
-	s.NetworkInterfaceOwnerId = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *Address) SetPrivateIpAddress(v string) *Address {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *Address) SetPublicIp(v string) *Address {
-	s.PublicIp = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Address) SetTags(v []Tag) *Address {
-	s.Tags = v
-	return s
-}
-
 // Contains the parameters for AllocateAddress.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressRequest
 type AllocateAddressInput struct {
@@ -16121,24 +15959,6 @@ func (s AllocateAddressInput) String() string {
 // GoString returns the string representation
 func (s AllocateAddressInput) GoString() string {
 	return s.String()
-}
-
-// SetAddress sets the Address field's value.
-func (s *AllocateAddressInput) SetAddress(v string) *AllocateAddressInput {
-	s.Address = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *AllocateAddressInput) SetDomain(v DomainType) *AllocateAddressInput {
-	s.Domain = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AllocateAddressInput) SetDryRun(v bool) *AllocateAddressInput {
-	s.DryRun = &v
-	return s
 }
 
 // Contains the output of AllocateAddress.
@@ -16173,24 +15993,6 @@ func (s AllocateAddressOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AllocateAddressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAllocationId sets the AllocationId field's value.
-func (s *AllocateAddressOutput) SetAllocationId(v string) *AllocateAddressOutput {
-	s.AllocationId = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *AllocateAddressOutput) SetDomain(v DomainType) *AllocateAddressOutput {
-	s.Domain = v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *AllocateAddressOutput) SetPublicIp(v string) *AllocateAddressOutput {
-	s.PublicIp = &v
-	return s
 }
 
 // Contains the parameters for AllocateHosts.
@@ -16261,36 +16063,6 @@ func (s *AllocateHostsInput) Validate() error {
 	return nil
 }
 
-// SetAutoPlacement sets the AutoPlacement field's value.
-func (s *AllocateHostsInput) SetAutoPlacement(v AutoPlacement) *AllocateHostsInput {
-	s.AutoPlacement = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *AllocateHostsInput) SetAvailabilityZone(v string) *AllocateHostsInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *AllocateHostsInput) SetClientToken(v string) *AllocateHostsInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *AllocateHostsInput) SetInstanceType(v string) *AllocateHostsInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetQuantity sets the Quantity field's value.
-func (s *AllocateHostsInput) SetQuantity(v int64) *AllocateHostsInput {
-	s.Quantity = &v
-	return s
-}
-
 // Contains the output of AllocateHosts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsResult
 type AllocateHostsOutput struct {
@@ -16318,12 +16090,6 @@ func (s AllocateHostsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHostIds sets the HostIds field's value.
-func (s *AllocateHostsOutput) SetHostIds(v []string) *AllocateHostsOutput {
-	s.HostIds = v
-	return s
-}
-
 // Describes a principal.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllowedPrincipal
 type AllowedPrincipal struct {
@@ -16344,18 +16110,6 @@ func (s AllowedPrincipal) String() string {
 // GoString returns the string representation
 func (s AllowedPrincipal) GoString() string {
 	return s.String()
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *AllowedPrincipal) SetPrincipal(v string) *AllowedPrincipal {
-	s.Principal = &v
-	return s
-}
-
-// SetPrincipalType sets the PrincipalType field's value.
-func (s *AllowedPrincipal) SetPrincipalType(v PrincipalType) *AllowedPrincipal {
-	s.PrincipalType = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesRequest
@@ -16401,24 +16155,6 @@ func (s *AssignIpv6AddressesInput) Validate() error {
 	return nil
 }
 
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *AssignIpv6AddressesInput) SetIpv6AddressCount(v int64) *AssignIpv6AddressesInput {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *AssignIpv6AddressesInput) SetIpv6Addresses(v []string) *AssignIpv6AddressesInput {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *AssignIpv6AddressesInput) SetNetworkInterfaceId(v string) *AssignIpv6AddressesInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesResult
 type AssignIpv6AddressesOutput struct {
 	_ struct{} `type:"structure"`
@@ -16445,18 +16181,6 @@ func (s AssignIpv6AddressesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssignIpv6AddressesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssignedIpv6Addresses sets the AssignedIpv6Addresses field's value.
-func (s *AssignIpv6AddressesOutput) SetAssignedIpv6Addresses(v []string) *AssignIpv6AddressesOutput {
-	s.AssignedIpv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *AssignIpv6AddressesOutput) SetNetworkInterfaceId(v string) *AssignIpv6AddressesOutput {
-	s.NetworkInterfaceId = &v
-	return s
 }
 
 // Contains the parameters for AssignPrivateIpAddresses.
@@ -16508,30 +16232,6 @@ func (s *AssignPrivateIpAddressesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAllowReassignment sets the AllowReassignment field's value.
-func (s *AssignPrivateIpAddressesInput) SetAllowReassignment(v bool) *AssignPrivateIpAddressesInput {
-	s.AllowReassignment = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *AssignPrivateIpAddressesInput) SetNetworkInterfaceId(v string) *AssignPrivateIpAddressesInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *AssignPrivateIpAddressesInput) SetPrivateIpAddresses(v []string) *AssignPrivateIpAddressesInput {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetSecondaryPrivateIpAddressCount sets the SecondaryPrivateIpAddressCount field's value.
-func (s *AssignPrivateIpAddressesInput) SetSecondaryPrivateIpAddressCount(v int64) *AssignPrivateIpAddressesInput {
-	s.SecondaryPrivateIpAddressCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesOutput
@@ -16607,48 +16307,6 @@ func (s AssociateAddressInput) GoString() string {
 	return s.String()
 }
 
-// SetAllocationId sets the AllocationId field's value.
-func (s *AssociateAddressInput) SetAllocationId(v string) *AssociateAddressInput {
-	s.AllocationId = &v
-	return s
-}
-
-// SetAllowReassociation sets the AllowReassociation field's value.
-func (s *AssociateAddressInput) SetAllowReassociation(v bool) *AssociateAddressInput {
-	s.AllowReassociation = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AssociateAddressInput) SetDryRun(v bool) *AssociateAddressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AssociateAddressInput) SetInstanceId(v string) *AssociateAddressInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *AssociateAddressInput) SetNetworkInterfaceId(v string) *AssociateAddressInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *AssociateAddressInput) SetPrivateIpAddress(v string) *AssociateAddressInput {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *AssociateAddressInput) SetPublicIp(v string) *AssociateAddressInput {
-	s.PublicIp = &v
-	return s
-}
-
 // Contains the output of AssociateAddress.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddressResult
 type AssociateAddressOutput struct {
@@ -16674,12 +16332,6 @@ func (s AssociateAddressOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateAddressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *AssociateAddressOutput) SetAssociationId(v string) *AssociateAddressOutput {
-	s.AssociationId = &v
-	return s
 }
 
 // Contains the parameters for AssociateDhcpOptions.
@@ -16731,24 +16383,6 @@ func (s *AssociateDhcpOptionsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDhcpOptionsId sets the DhcpOptionsId field's value.
-func (s *AssociateDhcpOptionsInput) SetDhcpOptionsId(v string) *AssociateDhcpOptionsInput {
-	s.DhcpOptionsId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AssociateDhcpOptionsInput) SetDryRun(v bool) *AssociateDhcpOptionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *AssociateDhcpOptionsInput) SetVpcId(v string) *AssociateDhcpOptionsInput {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateDhcpOptionsOutput
@@ -16816,18 +16450,6 @@ func (s *AssociateIamInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *AssociateIamInstanceProfileInput) SetIamInstanceProfile(v *IamInstanceProfileSpecification) *AssociateIamInstanceProfileInput {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AssociateIamInstanceProfileInput) SetInstanceId(v string) *AssociateIamInstanceProfileInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIamInstanceProfileResult
 type AssociateIamInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -16851,12 +16473,6 @@ func (s AssociateIamInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateIamInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIamInstanceProfileAssociation sets the IamInstanceProfileAssociation field's value.
-func (s *AssociateIamInstanceProfileOutput) SetIamInstanceProfileAssociation(v *IamInstanceProfileAssociation) *AssociateIamInstanceProfileOutput {
-	s.IamInstanceProfileAssociation = v
-	return s
 }
 
 // Contains the parameters for AssociateRouteTable.
@@ -16909,24 +16525,6 @@ func (s *AssociateRouteTableInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *AssociateRouteTableInput) SetDryRun(v bool) *AssociateRouteTableInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *AssociateRouteTableInput) SetRouteTableId(v string) *AssociateRouteTableInput {
-	s.RouteTableId = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *AssociateRouteTableInput) SetSubnetId(v string) *AssociateRouteTableInput {
-	s.SubnetId = &v
-	return s
-}
-
 // Contains the output of AssociateRouteTable.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateRouteTableResult
 type AssociateRouteTableOutput struct {
@@ -16951,12 +16549,6 @@ func (s AssociateRouteTableOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateRouteTableOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *AssociateRouteTableOutput) SetAssociationId(v string) *AssociateRouteTableOutput {
-	s.AssociationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest
@@ -17002,18 +16594,6 @@ func (s *AssociateSubnetCidrBlockInput) Validate() error {
 	return nil
 }
 
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *AssociateSubnetCidrBlockInput) SetIpv6CidrBlock(v string) *AssociateSubnetCidrBlockInput {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *AssociateSubnetCidrBlockInput) SetSubnetId(v string) *AssociateSubnetCidrBlockInput {
-	s.SubnetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockResult
 type AssociateSubnetCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
@@ -17040,18 +16620,6 @@ func (s AssociateSubnetCidrBlockOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateSubnetCidrBlockOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIpv6CidrBlockAssociation sets the Ipv6CidrBlockAssociation field's value.
-func (s *AssociateSubnetCidrBlockOutput) SetIpv6CidrBlockAssociation(v *SubnetIpv6CidrBlockAssociation) *AssociateSubnetCidrBlockOutput {
-	s.Ipv6CidrBlockAssociation = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *AssociateSubnetCidrBlockOutput) SetSubnetId(v string) *AssociateSubnetCidrBlockOutput {
-	s.SubnetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockRequest
@@ -17096,24 +16664,6 @@ func (s *AssociateVpcCidrBlockInput) Validate() error {
 	return nil
 }
 
-// SetAmazonProvidedIpv6CidrBlock sets the AmazonProvidedIpv6CidrBlock field's value.
-func (s *AssociateVpcCidrBlockInput) SetAmazonProvidedIpv6CidrBlock(v bool) *AssociateVpcCidrBlockInput {
-	s.AmazonProvidedIpv6CidrBlock = &v
-	return s
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *AssociateVpcCidrBlockInput) SetCidrBlock(v string) *AssociateVpcCidrBlockInput {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *AssociateVpcCidrBlockInput) SetVpcId(v string) *AssociateVpcCidrBlockInput {
-	s.VpcId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockResult
 type AssociateVpcCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
@@ -17143,24 +16693,6 @@ func (s AssociateVpcCidrBlockOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateVpcCidrBlockOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCidrBlockAssociation sets the CidrBlockAssociation field's value.
-func (s *AssociateVpcCidrBlockOutput) SetCidrBlockAssociation(v *VpcCidrBlockAssociation) *AssociateVpcCidrBlockOutput {
-	s.CidrBlockAssociation = v
-	return s
-}
-
-// SetIpv6CidrBlockAssociation sets the Ipv6CidrBlockAssociation field's value.
-func (s *AssociateVpcCidrBlockOutput) SetIpv6CidrBlockAssociation(v *VpcIpv6CidrBlockAssociation) *AssociateVpcCidrBlockOutput {
-	s.Ipv6CidrBlockAssociation = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *AssociateVpcCidrBlockOutput) SetVpcId(v string) *AssociateVpcCidrBlockOutput {
-	s.VpcId = &v
-	return s
 }
 
 // Contains the parameters for AttachClassicLinkVpc.
@@ -17223,30 +16755,6 @@ func (s *AttachClassicLinkVpcInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *AttachClassicLinkVpcInput) SetDryRun(v bool) *AttachClassicLinkVpcInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *AttachClassicLinkVpcInput) SetGroups(v []string) *AttachClassicLinkVpcInput {
-	s.Groups = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AttachClassicLinkVpcInput) SetInstanceId(v string) *AttachClassicLinkVpcInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *AttachClassicLinkVpcInput) SetVpcId(v string) *AttachClassicLinkVpcInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of AttachClassicLinkVpc.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachClassicLinkVpcResult
 type AttachClassicLinkVpcOutput struct {
@@ -17271,12 +16779,6 @@ func (s AttachClassicLinkVpcOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachClassicLinkVpcOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *AttachClassicLinkVpcOutput) SetReturn(v bool) *AttachClassicLinkVpcOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for AttachInternetGateway.
@@ -17327,24 +16829,6 @@ func (s *AttachInternetGatewayInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AttachInternetGatewayInput) SetDryRun(v bool) *AttachInternetGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInternetGatewayId sets the InternetGatewayId field's value.
-func (s *AttachInternetGatewayInput) SetInternetGatewayId(v string) *AttachInternetGatewayInput {
-	s.InternetGatewayId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *AttachInternetGatewayInput) SetVpcId(v string) *AttachInternetGatewayInput {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachInternetGatewayOutput
@@ -17428,30 +16912,6 @@ func (s *AttachNetworkInterfaceInput) Validate() error {
 	return nil
 }
 
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *AttachNetworkInterfaceInput) SetDeviceIndex(v int64) *AttachNetworkInterfaceInput {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AttachNetworkInterfaceInput) SetDryRun(v bool) *AttachNetworkInterfaceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AttachNetworkInterfaceInput) SetInstanceId(v string) *AttachNetworkInterfaceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *AttachNetworkInterfaceInput) SetNetworkInterfaceId(v string) *AttachNetworkInterfaceInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
 // Contains the output of AttachNetworkInterface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceResult
 type AttachNetworkInterfaceOutput struct {
@@ -17476,12 +16936,6 @@ func (s AttachNetworkInterfaceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachNetworkInterfaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachmentId sets the AttachmentId field's value.
-func (s *AttachNetworkInterfaceOutput) SetAttachmentId(v string) *AttachNetworkInterfaceOutput {
-	s.AttachmentId = &v
-	return s
 }
 
 // Contains the parameters for AttachVolume.
@@ -17544,30 +16998,6 @@ func (s *AttachVolumeInput) Validate() error {
 	return nil
 }
 
-// SetDevice sets the Device field's value.
-func (s *AttachVolumeInput) SetDevice(v string) *AttachVolumeInput {
-	s.Device = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AttachVolumeInput) SetDryRun(v bool) *AttachVolumeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AttachVolumeInput) SetInstanceId(v string) *AttachVolumeInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *AttachVolumeInput) SetVolumeId(v string) *AttachVolumeInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Contains the parameters for AttachVpnGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGatewayRequest
 type AttachVpnGatewayInput struct {
@@ -17618,24 +17048,6 @@ func (s *AttachVpnGatewayInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *AttachVpnGatewayInput) SetDryRun(v bool) *AttachVpnGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *AttachVpnGatewayInput) SetVpcId(v string) *AttachVpnGatewayInput {
-	s.VpcId = &v
-	return s
-}
-
-// SetVpnGatewayId sets the VpnGatewayId field's value.
-func (s *AttachVpnGatewayInput) SetVpnGatewayId(v string) *AttachVpnGatewayInput {
-	s.VpnGatewayId = &v
-	return s
-}
-
 // Contains the output of AttachVpnGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGatewayResult
 type AttachVpnGatewayOutput struct {
@@ -17662,12 +17074,6 @@ func (s AttachVpnGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVpcAttachment sets the VpcAttachment field's value.
-func (s *AttachVpnGatewayOutput) SetVpcAttachment(v *VpcAttachment) *AttachVpnGatewayOutput {
-	s.VpcAttachment = v
-	return s
-}
-
 // Describes a value for a resource attribute that is a Boolean value.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeBooleanValue
 type AttributeBooleanValue struct {
@@ -17687,12 +17093,6 @@ func (s AttributeBooleanValue) GoString() string {
 	return s.String()
 }
 
-// SetValue sets the Value field's value.
-func (s *AttributeBooleanValue) SetValue(v bool) *AttributeBooleanValue {
-	s.Value = &v
-	return s
-}
-
 // Describes a value for a resource attribute that is a String.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeValue
 type AttributeValue struct {
@@ -17710,12 +17110,6 @@ func (s AttributeValue) String() string {
 // GoString returns the string representation
 func (s AttributeValue) GoString() string {
 	return s.String()
-}
-
-// SetValue sets the Value field's value.
-func (s *AttributeValue) SetValue(v string) *AttributeValue {
-	s.Value = &v
-	return s
 }
 
 // Contains the parameters for AuthorizeSecurityGroupEgress.
@@ -17782,60 +17176,6 @@ func (s *AuthorizeSecurityGroupEgressInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCidrIp sets the CidrIp field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetCidrIp(v string) *AuthorizeSecurityGroupEgressInput {
-	s.CidrIp = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetDryRun(v bool) *AuthorizeSecurityGroupEgressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFromPort sets the FromPort field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetFromPort(v int64) *AuthorizeSecurityGroupEgressInput {
-	s.FromPort = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetGroupId(v string) *AuthorizeSecurityGroupEgressInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetIpPermissions(v []IpPermission) *AuthorizeSecurityGroupEgressInput {
-	s.IpPermissions = v
-	return s
-}
-
-// SetIpProtocol sets the IpProtocol field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetIpProtocol(v string) *AuthorizeSecurityGroupEgressInput {
-	s.IpProtocol = &v
-	return s
-}
-
-// SetSourceSecurityGroupName sets the SourceSecurityGroupName field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetSourceSecurityGroupName(v string) *AuthorizeSecurityGroupEgressInput {
-	s.SourceSecurityGroupName = &v
-	return s
-}
-
-// SetSourceSecurityGroupOwnerId sets the SourceSecurityGroupOwnerId field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetSourceSecurityGroupOwnerId(v string) *AuthorizeSecurityGroupEgressInput {
-	s.SourceSecurityGroupOwnerId = &v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *AuthorizeSecurityGroupEgressInput) SetToPort(v int64) *AuthorizeSecurityGroupEgressInput {
-	s.ToPort = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressOutput
@@ -17934,66 +17274,6 @@ func (s AuthorizeSecurityGroupIngressInput) GoString() string {
 	return s.String()
 }
 
-// SetCidrIp sets the CidrIp field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetCidrIp(v string) *AuthorizeSecurityGroupIngressInput {
-	s.CidrIp = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetDryRun(v bool) *AuthorizeSecurityGroupIngressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFromPort sets the FromPort field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetFromPort(v int64) *AuthorizeSecurityGroupIngressInput {
-	s.FromPort = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetGroupId(v string) *AuthorizeSecurityGroupIngressInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetGroupName(v string) *AuthorizeSecurityGroupIngressInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetIpPermissions(v []IpPermission) *AuthorizeSecurityGroupIngressInput {
-	s.IpPermissions = v
-	return s
-}
-
-// SetIpProtocol sets the IpProtocol field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetIpProtocol(v string) *AuthorizeSecurityGroupIngressInput {
-	s.IpProtocol = &v
-	return s
-}
-
-// SetSourceSecurityGroupName sets the SourceSecurityGroupName field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetSourceSecurityGroupName(v string) *AuthorizeSecurityGroupIngressInput {
-	s.SourceSecurityGroupName = &v
-	return s
-}
-
-// SetSourceSecurityGroupOwnerId sets the SourceSecurityGroupOwnerId field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetSourceSecurityGroupOwnerId(v string) *AuthorizeSecurityGroupIngressInput {
-	s.SourceSecurityGroupOwnerId = &v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *AuthorizeSecurityGroupIngressInput) SetToPort(v int64) *AuthorizeSecurityGroupIngressInput {
-	s.ToPort = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngressOutput
 type AuthorizeSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -18044,30 +17324,6 @@ func (s AvailabilityZone) GoString() string {
 	return s.String()
 }
 
-// SetMessages sets the Messages field's value.
-func (s *AvailabilityZone) SetMessages(v []AvailabilityZoneMessage) *AvailabilityZone {
-	s.Messages = v
-	return s
-}
-
-// SetRegionName sets the RegionName field's value.
-func (s *AvailabilityZone) SetRegionName(v string) *AvailabilityZone {
-	s.RegionName = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *AvailabilityZone) SetState(v AvailabilityZoneState) *AvailabilityZone {
-	s.State = v
-	return s
-}
-
-// SetZoneName sets the ZoneName field's value.
-func (s *AvailabilityZone) SetZoneName(v string) *AvailabilityZone {
-	s.ZoneName = &v
-	return s
-}
-
 // Describes a message about an Availability Zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneMessage
 type AvailabilityZoneMessage struct {
@@ -18085,12 +17341,6 @@ func (s AvailabilityZoneMessage) String() string {
 // GoString returns the string representation
 func (s AvailabilityZoneMessage) GoString() string {
 	return s.String()
-}
-
-// SetMessage sets the Message field's value.
-func (s *AvailabilityZoneMessage) SetMessage(v string) *AvailabilityZoneMessage {
-	s.Message = &v
-	return s
 }
 
 // The capacity information for instances launched onto the Dedicated Host.
@@ -18115,18 +17365,6 @@ func (s AvailableCapacity) GoString() string {
 	return s.String()
 }
 
-// SetAvailableInstanceCapacity sets the AvailableInstanceCapacity field's value.
-func (s *AvailableCapacity) SetAvailableInstanceCapacity(v []InstanceCapacity) *AvailableCapacity {
-	s.AvailableInstanceCapacity = v
-	return s
-}
-
-// SetAvailableVCpus sets the AvailableVCpus field's value.
-func (s *AvailableCapacity) SetAvailableVCpus(v int64) *AvailableCapacity {
-	s.AvailableVCpus = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BlobAttributeValue
 type BlobAttributeValue struct {
 	_ struct{} `type:"structure"`
@@ -18143,12 +17381,6 @@ func (s BlobAttributeValue) String() string {
 // GoString returns the string representation
 func (s BlobAttributeValue) GoString() string {
 	return s.String()
-}
-
-// SetValue sets the Value field's value.
-func (s *BlobAttributeValue) SetValue(v []byte) *BlobAttributeValue {
-	s.Value = v
-	return s
 }
 
 // Describes a block device mapping.
@@ -18188,30 +17420,6 @@ func (s BlockDeviceMapping) String() string {
 // GoString returns the string representation
 func (s BlockDeviceMapping) GoString() string {
 	return s.String()
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *BlockDeviceMapping) SetDeviceName(v string) *BlockDeviceMapping {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *BlockDeviceMapping) SetEbs(v *EbsBlockDevice) *BlockDeviceMapping {
-	s.Ebs = v
-	return s
-}
-
-// SetNoDevice sets the NoDevice field's value.
-func (s *BlockDeviceMapping) SetNoDevice(v string) *BlockDeviceMapping {
-	s.NoDevice = &v
-	return s
-}
-
-// SetVirtualName sets the VirtualName field's value.
-func (s *BlockDeviceMapping) SetVirtualName(v string) *BlockDeviceMapping {
-	s.VirtualName = &v
-	return s
 }
 
 // Contains the parameters for BundleInstance.
@@ -18272,24 +17480,6 @@ func (s *BundleInstanceInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *BundleInstanceInput) SetDryRun(v bool) *BundleInstanceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *BundleInstanceInput) SetInstanceId(v string) *BundleInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetStorage sets the Storage field's value.
-func (s *BundleInstanceInput) SetStorage(v *Storage) *BundleInstanceInput {
-	s.Storage = v
-	return s
-}
-
 // Contains the output of BundleInstance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstanceResult
 type BundleInstanceOutput struct {
@@ -18314,12 +17504,6 @@ func (s BundleInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BundleInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBundleTask sets the BundleTask field's value.
-func (s *BundleInstanceOutput) SetBundleTask(v *BundleTask) *BundleInstanceOutput {
-	s.BundleTask = v
-	return s
 }
 
 // Describes a bundle task.
@@ -18362,54 +17546,6 @@ func (s BundleTask) GoString() string {
 	return s.String()
 }
 
-// SetBundleId sets the BundleId field's value.
-func (s *BundleTask) SetBundleId(v string) *BundleTask {
-	s.BundleId = &v
-	return s
-}
-
-// SetBundleTaskError sets the BundleTaskError field's value.
-func (s *BundleTask) SetBundleTaskError(v *BundleTaskError) *BundleTask {
-	s.BundleTaskError = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *BundleTask) SetInstanceId(v string) *BundleTask {
-	s.InstanceId = &v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *BundleTask) SetProgress(v string) *BundleTask {
-	s.Progress = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *BundleTask) SetStartTime(v time.Time) *BundleTask {
-	s.StartTime = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *BundleTask) SetState(v BundleTaskState) *BundleTask {
-	s.State = v
-	return s
-}
-
-// SetStorage sets the Storage field's value.
-func (s *BundleTask) SetStorage(v *Storage) *BundleTask {
-	s.Storage = v
-	return s
-}
-
-// SetUpdateTime sets the UpdateTime field's value.
-func (s *BundleTask) SetUpdateTime(v time.Time) *BundleTask {
-	s.UpdateTime = &v
-	return s
-}
-
 // Describes an error for BundleInstance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleTaskError
 type BundleTaskError struct {
@@ -18430,18 +17566,6 @@ func (s BundleTaskError) String() string {
 // GoString returns the string representation
 func (s BundleTaskError) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *BundleTaskError) SetCode(v string) *BundleTaskError {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *BundleTaskError) SetMessage(v string) *BundleTaskError {
-	s.Message = &v
-	return s
 }
 
 // Contains the parameters for CancelBundleTask.
@@ -18485,18 +17609,6 @@ func (s *CancelBundleTaskInput) Validate() error {
 	return nil
 }
 
-// SetBundleId sets the BundleId field's value.
-func (s *CancelBundleTaskInput) SetBundleId(v string) *CancelBundleTaskInput {
-	s.BundleId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CancelBundleTaskInput) SetDryRun(v bool) *CancelBundleTaskInput {
-	s.DryRun = &v
-	return s
-}
-
 // Contains the output of CancelBundleTask.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTaskResult
 type CancelBundleTaskOutput struct {
@@ -18521,12 +17633,6 @@ func (s CancelBundleTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelBundleTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBundleTask sets the BundleTask field's value.
-func (s *CancelBundleTaskOutput) SetBundleTask(v *BundleTask) *CancelBundleTaskOutput {
-	s.BundleTask = v
-	return s
 }
 
 // Contains the parameters for CancelConversionTask.
@@ -18571,24 +17677,6 @@ func (s *CancelConversionTaskInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConversionTaskId sets the ConversionTaskId field's value.
-func (s *CancelConversionTaskInput) SetConversionTaskId(v string) *CancelConversionTaskInput {
-	s.ConversionTaskId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CancelConversionTaskInput) SetDryRun(v bool) *CancelConversionTaskInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetReasonMessage sets the ReasonMessage field's value.
-func (s *CancelConversionTaskInput) SetReasonMessage(v string) *CancelConversionTaskInput {
-	s.ReasonMessage = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionTaskOutput
@@ -18648,12 +17736,6 @@ func (s *CancelExportTaskInput) Validate() error {
 	return nil
 }
 
-// SetExportTaskId sets the ExportTaskId field's value.
-func (s *CancelExportTaskInput) SetExportTaskId(v string) *CancelExportTaskInput {
-	s.ExportTaskId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTaskOutput
 type CancelExportTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -18704,24 +17786,6 @@ func (s CancelImportTaskInput) GoString() string {
 	return s.String()
 }
 
-// SetCancelReason sets the CancelReason field's value.
-func (s *CancelImportTaskInput) SetCancelReason(v string) *CancelImportTaskInput {
-	s.CancelReason = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CancelImportTaskInput) SetDryRun(v bool) *CancelImportTaskInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetImportTaskId sets the ImportTaskId field's value.
-func (s *CancelImportTaskInput) SetImportTaskId(v string) *CancelImportTaskInput {
-	s.ImportTaskId = &v
-	return s
-}
-
 // Contains the output for CancelImportTask.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImportTaskResult
 type CancelImportTaskOutput struct {
@@ -18752,24 +17816,6 @@ func (s CancelImportTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelImportTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportTaskId sets the ImportTaskId field's value.
-func (s *CancelImportTaskOutput) SetImportTaskId(v string) *CancelImportTaskOutput {
-	s.ImportTaskId = &v
-	return s
-}
-
-// SetPreviousState sets the PreviousState field's value.
-func (s *CancelImportTaskOutput) SetPreviousState(v string) *CancelImportTaskOutput {
-	s.PreviousState = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CancelImportTaskOutput) SetState(v string) *CancelImportTaskOutput {
-	s.State = &v
-	return s
 }
 
 // Contains the parameters for CancelReservedInstancesListing.
@@ -18807,12 +17853,6 @@ func (s *CancelReservedInstancesListingInput) Validate() error {
 	return nil
 }
 
-// SetReservedInstancesListingId sets the ReservedInstancesListingId field's value.
-func (s *CancelReservedInstancesListingInput) SetReservedInstancesListingId(v string) *CancelReservedInstancesListingInput {
-	s.ReservedInstancesListingId = &v
-	return s
-}
-
 // Contains the output of CancelReservedInstancesListing.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListingResult
 type CancelReservedInstancesListingOutput struct {
@@ -18837,12 +17877,6 @@ func (s CancelReservedInstancesListingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelReservedInstancesListingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedInstancesListings sets the ReservedInstancesListings field's value.
-func (s *CancelReservedInstancesListingOutput) SetReservedInstancesListings(v []ReservedInstancesListing) *CancelReservedInstancesListingOutput {
-	s.ReservedInstancesListings = v
-	return s
 }
 
 // Describes a Spot Fleet error.
@@ -18871,18 +17905,6 @@ func (s CancelSpotFleetRequestsError) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *CancelSpotFleetRequestsError) SetCode(v CancelBatchErrorCode) *CancelSpotFleetRequestsError {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *CancelSpotFleetRequestsError) SetMessage(v string) *CancelSpotFleetRequestsError {
-	s.Message = &v
-	return s
-}
-
 // Describes a Spot Fleet request that was not successfully canceled.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsErrorItem
 type CancelSpotFleetRequestsErrorItem struct {
@@ -18907,18 +17929,6 @@ func (s CancelSpotFleetRequestsErrorItem) String() string {
 // GoString returns the string representation
 func (s CancelSpotFleetRequestsErrorItem) GoString() string {
 	return s.String()
-}
-
-// SetError sets the Error field's value.
-func (s *CancelSpotFleetRequestsErrorItem) SetError(v *CancelSpotFleetRequestsError) *CancelSpotFleetRequestsErrorItem {
-	s.Error = v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *CancelSpotFleetRequestsErrorItem) SetSpotFleetRequestId(v string) *CancelSpotFleetRequestsErrorItem {
-	s.SpotFleetRequestId = &v
-	return s
 }
 
 // Contains the parameters for CancelSpotFleetRequests.
@@ -18972,24 +17982,6 @@ func (s *CancelSpotFleetRequestsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *CancelSpotFleetRequestsInput) SetDryRun(v bool) *CancelSpotFleetRequestsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSpotFleetRequestIds sets the SpotFleetRequestIds field's value.
-func (s *CancelSpotFleetRequestsInput) SetSpotFleetRequestIds(v []string) *CancelSpotFleetRequestsInput {
-	s.SpotFleetRequestIds = v
-	return s
-}
-
-// SetTerminateInstances sets the TerminateInstances field's value.
-func (s *CancelSpotFleetRequestsInput) SetTerminateInstances(v bool) *CancelSpotFleetRequestsInput {
-	s.TerminateInstances = &v
-	return s
-}
-
 // Contains the output of CancelSpotFleetRequests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsResponse
 type CancelSpotFleetRequestsOutput struct {
@@ -19017,18 +18009,6 @@ func (s CancelSpotFleetRequestsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelSpotFleetRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSuccessfulFleetRequests sets the SuccessfulFleetRequests field's value.
-func (s *CancelSpotFleetRequestsOutput) SetSuccessfulFleetRequests(v []CancelSpotFleetRequestsSuccessItem) *CancelSpotFleetRequestsOutput {
-	s.SuccessfulFleetRequests = v
-	return s
-}
-
-// SetUnsuccessfulFleetRequests sets the UnsuccessfulFleetRequests field's value.
-func (s *CancelSpotFleetRequestsOutput) SetUnsuccessfulFleetRequests(v []CancelSpotFleetRequestsErrorItem) *CancelSpotFleetRequestsOutput {
-	s.UnsuccessfulFleetRequests = v
-	return s
 }
 
 // Describes a Spot Fleet request that was successfully canceled.
@@ -19060,24 +18040,6 @@ func (s CancelSpotFleetRequestsSuccessItem) String() string {
 // GoString returns the string representation
 func (s CancelSpotFleetRequestsSuccessItem) GoString() string {
 	return s.String()
-}
-
-// SetCurrentSpotFleetRequestState sets the CurrentSpotFleetRequestState field's value.
-func (s *CancelSpotFleetRequestsSuccessItem) SetCurrentSpotFleetRequestState(v BatchState) *CancelSpotFleetRequestsSuccessItem {
-	s.CurrentSpotFleetRequestState = v
-	return s
-}
-
-// SetPreviousSpotFleetRequestState sets the PreviousSpotFleetRequestState field's value.
-func (s *CancelSpotFleetRequestsSuccessItem) SetPreviousSpotFleetRequestState(v BatchState) *CancelSpotFleetRequestsSuccessItem {
-	s.PreviousSpotFleetRequestState = v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *CancelSpotFleetRequestsSuccessItem) SetSpotFleetRequestId(v string) *CancelSpotFleetRequestsSuccessItem {
-	s.SpotFleetRequestId = &v
-	return s
 }
 
 // Contains the parameters for CancelSpotInstanceRequests.
@@ -19121,18 +18083,6 @@ func (s *CancelSpotInstanceRequestsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *CancelSpotInstanceRequestsInput) SetDryRun(v bool) *CancelSpotInstanceRequestsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSpotInstanceRequestIds sets the SpotInstanceRequestIds field's value.
-func (s *CancelSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []string) *CancelSpotInstanceRequestsInput {
-	s.SpotInstanceRequestIds = v
-	return s
-}
-
 // Contains the output of CancelSpotInstanceRequests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsResult
 type CancelSpotInstanceRequestsOutput struct {
@@ -19159,12 +18109,6 @@ func (s CancelSpotInstanceRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCancelledSpotInstanceRequests sets the CancelledSpotInstanceRequests field's value.
-func (s *CancelSpotInstanceRequestsOutput) SetCancelledSpotInstanceRequests(v []CancelledSpotInstanceRequest) *CancelSpotInstanceRequestsOutput {
-	s.CancelledSpotInstanceRequests = v
-	return s
-}
-
 // Describes a request to cancel a Spot Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelledSpotInstanceRequest
 type CancelledSpotInstanceRequest struct {
@@ -19187,18 +18131,6 @@ func (s CancelledSpotInstanceRequest) GoString() string {
 	return s.String()
 }
 
-// SetSpotInstanceRequestId sets the SpotInstanceRequestId field's value.
-func (s *CancelledSpotInstanceRequest) SetSpotInstanceRequestId(v string) *CancelledSpotInstanceRequest {
-	s.SpotInstanceRequestId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CancelledSpotInstanceRequest) SetState(v CancelSpotInstanceRequestState) *CancelledSpotInstanceRequest {
-	s.State = v
-	return s
-}
-
 // Describes an IPv4 CIDR block.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CidrBlock
 type CidrBlock struct {
@@ -19216,12 +18148,6 @@ func (s CidrBlock) String() string {
 // GoString returns the string representation
 func (s CidrBlock) GoString() string {
 	return s.String()
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *CidrBlock) SetCidrBlock(v string) *CidrBlock {
-	s.CidrBlock = &v
-	return s
 }
 
 // Describes the ClassicLink DNS support status of a VPC.
@@ -19244,18 +18170,6 @@ func (s ClassicLinkDnsSupport) String() string {
 // GoString returns the string representation
 func (s ClassicLinkDnsSupport) GoString() string {
 	return s.String()
-}
-
-// SetClassicLinkDnsSupported sets the ClassicLinkDnsSupported field's value.
-func (s *ClassicLinkDnsSupport) SetClassicLinkDnsSupported(v bool) *ClassicLinkDnsSupport {
-	s.ClassicLinkDnsSupported = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *ClassicLinkDnsSupport) SetVpcId(v string) *ClassicLinkDnsSupport {
-	s.VpcId = &v
-	return s
 }
 
 // Describes a linked EC2-Classic instance.
@@ -19284,30 +18198,6 @@ func (s ClassicLinkInstance) String() string {
 // GoString returns the string representation
 func (s ClassicLinkInstance) GoString() string {
 	return s.String()
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ClassicLinkInstance) SetGroups(v []GroupIdentifier) *ClassicLinkInstance {
-	s.Groups = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ClassicLinkInstance) SetInstanceId(v string) *ClassicLinkInstance {
-	s.InstanceId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ClassicLinkInstance) SetTags(v []Tag) *ClassicLinkInstance {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *ClassicLinkInstance) SetVpcId(v string) *ClassicLinkInstance {
-	s.VpcId = &v
-	return s
 }
 
 // Describes a Classic Load Balancer.
@@ -19343,12 +18233,6 @@ func (s *ClassicLoadBalancer) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *ClassicLoadBalancer) SetName(v string) *ClassicLoadBalancer {
-	s.Name = &v
-	return s
 }
 
 // Describes the Classic Load Balancers to attach to a Spot Fleet. Spot Fleet
@@ -19397,12 +18281,6 @@ func (s *ClassicLoadBalancersConfig) Validate() error {
 	return nil
 }
 
-// SetClassicLoadBalancers sets the ClassicLoadBalancers field's value.
-func (s *ClassicLoadBalancersConfig) SetClassicLoadBalancers(v []ClassicLoadBalancer) *ClassicLoadBalancersConfig {
-	s.ClassicLoadBalancers = v
-	return s
-}
-
 // Describes the client-specific data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientData
 type ClientData struct {
@@ -19429,30 +18307,6 @@ func (s ClientData) String() string {
 // GoString returns the string representation
 func (s ClientData) GoString() string {
 	return s.String()
-}
-
-// SetComment sets the Comment field's value.
-func (s *ClientData) SetComment(v string) *ClientData {
-	s.Comment = &v
-	return s
-}
-
-// SetUploadEnd sets the UploadEnd field's value.
-func (s *ClientData) SetUploadEnd(v time.Time) *ClientData {
-	s.UploadEnd = &v
-	return s
-}
-
-// SetUploadSize sets the UploadSize field's value.
-func (s *ClientData) SetUploadSize(v float64) *ClientData {
-	s.UploadSize = &v
-	return s
-}
-
-// SetUploadStart sets the UploadStart field's value.
-func (s *ClientData) SetUploadStart(v time.Time) *ClientData {
-	s.UploadStart = &v
-	return s
 }
 
 // Contains the parameters for ConfirmProductInstance.
@@ -19505,24 +18359,6 @@ func (s *ConfirmProductInstanceInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *ConfirmProductInstanceInput) SetDryRun(v bool) *ConfirmProductInstanceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ConfirmProductInstanceInput) SetInstanceId(v string) *ConfirmProductInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetProductCode sets the ProductCode field's value.
-func (s *ConfirmProductInstanceInput) SetProductCode(v string) *ConfirmProductInstanceInput {
-	s.ProductCode = &v
-	return s
-}
-
 // Contains the output of ConfirmProductInstance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstanceResult
 type ConfirmProductInstanceOutput struct {
@@ -19552,18 +18388,6 @@ func (s ConfirmProductInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ConfirmProductInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *ConfirmProductInstanceOutput) SetOwnerId(v string) *ConfirmProductInstanceOutput {
-	s.OwnerId = &v
-	return s
-}
-
-// SetReturn sets the Return field's value.
-func (s *ConfirmProductInstanceOutput) SetReturn(v bool) *ConfirmProductInstanceOutput {
-	s.Return = &v
-	return s
 }
 
 // Describes a connection notification for a VPC endpoint or VPC endpoint service.
@@ -19602,48 +18426,6 @@ func (s ConnectionNotification) String() string {
 // GoString returns the string representation
 func (s ConnectionNotification) GoString() string {
 	return s.String()
-}
-
-// SetConnectionEvents sets the ConnectionEvents field's value.
-func (s *ConnectionNotification) SetConnectionEvents(v []string) *ConnectionNotification {
-	s.ConnectionEvents = v
-	return s
-}
-
-// SetConnectionNotificationArn sets the ConnectionNotificationArn field's value.
-func (s *ConnectionNotification) SetConnectionNotificationArn(v string) *ConnectionNotification {
-	s.ConnectionNotificationArn = &v
-	return s
-}
-
-// SetConnectionNotificationId sets the ConnectionNotificationId field's value.
-func (s *ConnectionNotification) SetConnectionNotificationId(v string) *ConnectionNotification {
-	s.ConnectionNotificationId = &v
-	return s
-}
-
-// SetConnectionNotificationState sets the ConnectionNotificationState field's value.
-func (s *ConnectionNotification) SetConnectionNotificationState(v ConnectionNotificationState) *ConnectionNotification {
-	s.ConnectionNotificationState = v
-	return s
-}
-
-// SetConnectionNotificationType sets the ConnectionNotificationType field's value.
-func (s *ConnectionNotification) SetConnectionNotificationType(v ConnectionNotificationType) *ConnectionNotification {
-	s.ConnectionNotificationType = v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *ConnectionNotification) SetServiceId(v string) *ConnectionNotification {
-	s.ServiceId = &v
-	return s
-}
-
-// SetVpcEndpointId sets the VpcEndpointId field's value.
-func (s *ConnectionNotification) SetVpcEndpointId(v string) *ConnectionNotification {
-	s.VpcEndpointId = &v
-	return s
 }
 
 // Describes a conversion task.
@@ -19688,48 +18470,6 @@ func (s ConversionTask) String() string {
 // GoString returns the string representation
 func (s ConversionTask) GoString() string {
 	return s.String()
-}
-
-// SetConversionTaskId sets the ConversionTaskId field's value.
-func (s *ConversionTask) SetConversionTaskId(v string) *ConversionTask {
-	s.ConversionTaskId = &v
-	return s
-}
-
-// SetExpirationTime sets the ExpirationTime field's value.
-func (s *ConversionTask) SetExpirationTime(v string) *ConversionTask {
-	s.ExpirationTime = &v
-	return s
-}
-
-// SetImportInstance sets the ImportInstance field's value.
-func (s *ConversionTask) SetImportInstance(v *ImportInstanceTaskDetails) *ConversionTask {
-	s.ImportInstance = v
-	return s
-}
-
-// SetImportVolume sets the ImportVolume field's value.
-func (s *ConversionTask) SetImportVolume(v *ImportVolumeTaskDetails) *ConversionTask {
-	s.ImportVolume = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ConversionTask) SetState(v ConversionTaskState) *ConversionTask {
-	s.State = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ConversionTask) SetStatusMessage(v string) *ConversionTask {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ConversionTask) SetTags(v []Tag) *ConversionTask {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyFpgaImageRequest
@@ -19791,42 +18531,6 @@ func (s *CopyFpgaImageInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CopyFpgaImageInput) SetClientToken(v string) *CopyFpgaImageInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CopyFpgaImageInput) SetDescription(v string) *CopyFpgaImageInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CopyFpgaImageInput) SetDryRun(v bool) *CopyFpgaImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CopyFpgaImageInput) SetName(v string) *CopyFpgaImageInput {
-	s.Name = &v
-	return s
-}
-
-// SetSourceFpgaImageId sets the SourceFpgaImageId field's value.
-func (s *CopyFpgaImageInput) SetSourceFpgaImageId(v string) *CopyFpgaImageInput {
-	s.SourceFpgaImageId = &v
-	return s
-}
-
-// SetSourceRegion sets the SourceRegion field's value.
-func (s *CopyFpgaImageInput) SetSourceRegion(v string) *CopyFpgaImageInput {
-	s.SourceRegion = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyFpgaImageResult
 type CopyFpgaImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -19850,12 +18554,6 @@ func (s CopyFpgaImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CopyFpgaImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *CopyFpgaImageOutput) SetFpgaImageId(v string) *CopyFpgaImageOutput {
-	s.FpgaImageId = &v
-	return s
 }
 
 // Contains the parameters for CopyImage.
@@ -19942,54 +18640,6 @@ func (s *CopyImageInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CopyImageInput) SetClientToken(v string) *CopyImageInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CopyImageInput) SetDescription(v string) *CopyImageInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CopyImageInput) SetDryRun(v bool) *CopyImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *CopyImageInput) SetEncrypted(v bool) *CopyImageInput {
-	s.Encrypted = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CopyImageInput) SetKmsKeyId(v string) *CopyImageInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CopyImageInput) SetName(v string) *CopyImageInput {
-	s.Name = &v
-	return s
-}
-
-// SetSourceImageId sets the SourceImageId field's value.
-func (s *CopyImageInput) SetSourceImageId(v string) *CopyImageInput {
-	s.SourceImageId = &v
-	return s
-}
-
-// SetSourceRegion sets the SourceRegion field's value.
-func (s *CopyImageInput) SetSourceRegion(v string) *CopyImageInput {
-	s.SourceRegion = &v
-	return s
-}
-
 // Contains the output of CopyImage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageResult
 type CopyImageOutput struct {
@@ -20014,12 +18664,6 @@ func (s CopyImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CopyImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *CopyImageOutput) SetImageId(v string) *CopyImageOutput {
-	s.ImageId = &v
-	return s
 }
 
 // Contains the parameters for CopySnapshot.
@@ -20118,54 +18762,6 @@ func (s *CopySnapshotInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CopySnapshotInput) SetDescription(v string) *CopySnapshotInput {
-	s.Description = &v
-	return s
-}
-
-// SetDestinationRegion sets the DestinationRegion field's value.
-func (s *CopySnapshotInput) SetDestinationRegion(v string) *CopySnapshotInput {
-	s.DestinationRegion = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CopySnapshotInput) SetDryRun(v bool) *CopySnapshotInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *CopySnapshotInput) SetEncrypted(v bool) *CopySnapshotInput {
-	s.Encrypted = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CopySnapshotInput) SetKmsKeyId(v string) *CopySnapshotInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetPresignedUrl sets the PresignedUrl field's value.
-func (s *CopySnapshotInput) SetPresignedUrl(v string) *CopySnapshotInput {
-	s.PresignedUrl = &v
-	return s
-}
-
-// SetSourceRegion sets the SourceRegion field's value.
-func (s *CopySnapshotInput) SetSourceRegion(v string) *CopySnapshotInput {
-	s.SourceRegion = &v
-	return s
-}
-
-// SetSourceSnapshotId sets the SourceSnapshotId field's value.
-func (s *CopySnapshotInput) SetSourceSnapshotId(v string) *CopySnapshotInput {
-	s.SourceSnapshotId = &v
-	return s
-}
-
 // Contains the output of CopySnapshot.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotResult
 type CopySnapshotOutput struct {
@@ -20190,12 +18786,6 @@ func (s CopySnapshotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CopySnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CopySnapshotOutput) SetSnapshotId(v string) *CopySnapshotOutput {
-	s.SnapshotId = &v
-	return s
 }
 
 // Contains the parameters for CreateCustomerGateway.
@@ -20259,30 +18849,6 @@ func (s *CreateCustomerGatewayInput) Validate() error {
 	return nil
 }
 
-// SetBgpAsn sets the BgpAsn field's value.
-func (s *CreateCustomerGatewayInput) SetBgpAsn(v int64) *CreateCustomerGatewayInput {
-	s.BgpAsn = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateCustomerGatewayInput) SetDryRun(v bool) *CreateCustomerGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *CreateCustomerGatewayInput) SetPublicIp(v string) *CreateCustomerGatewayInput {
-	s.PublicIp = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateCustomerGatewayInput) SetType(v GatewayType) *CreateCustomerGatewayInput {
-	s.Type = v
-	return s
-}
-
 // Contains the output of CreateCustomerGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayResult
 type CreateCustomerGatewayOutput struct {
@@ -20307,12 +18873,6 @@ func (s CreateCustomerGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCustomerGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCustomerGateway sets the CustomerGateway field's value.
-func (s *CreateCustomerGatewayOutput) SetCustomerGateway(v *CustomerGateway) *CreateCustomerGatewayOutput {
-	s.CustomerGateway = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetRequest
@@ -20355,18 +18915,6 @@ func (s *CreateDefaultSubnetInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateDefaultSubnetInput) SetAvailabilityZone(v string) *CreateDefaultSubnetInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateDefaultSubnetInput) SetDryRun(v bool) *CreateDefaultSubnetInput {
-	s.DryRun = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetResult
 type CreateDefaultSubnetOutput struct {
 	_ struct{} `type:"structure"`
@@ -20392,12 +18940,6 @@ func (s CreateDefaultSubnetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSubnet sets the Subnet field's value.
-func (s *CreateDefaultSubnetOutput) SetSubnet(v *Subnet) *CreateDefaultSubnetOutput {
-	s.Subnet = v
-	return s
-}
-
 // Contains the parameters for CreateDefaultVpc.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultVpcRequest
 type CreateDefaultVpcInput struct {
@@ -20418,12 +18960,6 @@ func (s CreateDefaultVpcInput) String() string {
 // GoString returns the string representation
 func (s CreateDefaultVpcInput) GoString() string {
 	return s.String()
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateDefaultVpcInput) SetDryRun(v bool) *CreateDefaultVpcInput {
-	s.DryRun = &v
-	return s
 }
 
 // Contains the output of CreateDefaultVpc.
@@ -20450,12 +18986,6 @@ func (s CreateDefaultVpcOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDefaultVpcOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpc sets the Vpc field's value.
-func (s *CreateDefaultVpcOutput) SetVpc(v *Vpc) *CreateDefaultVpcOutput {
-	s.Vpc = v
-	return s
 }
 
 // Contains the parameters for CreateDhcpOptions.
@@ -20499,18 +19029,6 @@ func (s *CreateDhcpOptionsInput) Validate() error {
 	return nil
 }
 
-// SetDhcpConfigurations sets the DhcpConfigurations field's value.
-func (s *CreateDhcpOptionsInput) SetDhcpConfigurations(v []NewDhcpConfiguration) *CreateDhcpOptionsInput {
-	s.DhcpConfigurations = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateDhcpOptionsInput) SetDryRun(v bool) *CreateDhcpOptionsInput {
-	s.DryRun = &v
-	return s
-}
-
 // Contains the output of CreateDhcpOptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptionsResult
 type CreateDhcpOptionsOutput struct {
@@ -20535,12 +19053,6 @@ func (s CreateDhcpOptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDhcpOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDhcpOptions sets the DhcpOptions field's value.
-func (s *CreateDhcpOptionsOutput) SetDhcpOptions(v *DhcpOptions) *CreateDhcpOptionsOutput {
-	s.DhcpOptions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayRequest
@@ -20587,24 +19099,6 @@ func (s *CreateEgressOnlyInternetGatewayInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateEgressOnlyInternetGatewayInput) SetClientToken(v string) *CreateEgressOnlyInternetGatewayInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateEgressOnlyInternetGatewayInput) SetDryRun(v bool) *CreateEgressOnlyInternetGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateEgressOnlyInternetGatewayInput) SetVpcId(v string) *CreateEgressOnlyInternetGatewayInput {
-	s.VpcId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayResult
 type CreateEgressOnlyInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
@@ -20632,18 +19126,6 @@ func (s CreateEgressOnlyInternetGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEgressOnlyInternetGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateEgressOnlyInternetGatewayOutput) SetClientToken(v string) *CreateEgressOnlyInternetGatewayOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetEgressOnlyInternetGateway sets the EgressOnlyInternetGateway field's value.
-func (s *CreateEgressOnlyInternetGatewayOutput) SetEgressOnlyInternetGateway(v *EgressOnlyInternetGateway) *CreateEgressOnlyInternetGatewayOutput {
-	s.EgressOnlyInternetGateway = v
-	return s
 }
 
 // Contains the parameters for CreateFlowLogs.
@@ -20722,42 +19204,6 @@ func (s *CreateFlowLogsInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateFlowLogsInput) SetClientToken(v string) *CreateFlowLogsInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDeliverLogsPermissionArn sets the DeliverLogsPermissionArn field's value.
-func (s *CreateFlowLogsInput) SetDeliverLogsPermissionArn(v string) *CreateFlowLogsInput {
-	s.DeliverLogsPermissionArn = &v
-	return s
-}
-
-// SetLogGroupName sets the LogGroupName field's value.
-func (s *CreateFlowLogsInput) SetLogGroupName(v string) *CreateFlowLogsInput {
-	s.LogGroupName = &v
-	return s
-}
-
-// SetResourceIds sets the ResourceIds field's value.
-func (s *CreateFlowLogsInput) SetResourceIds(v []string) *CreateFlowLogsInput {
-	s.ResourceIds = v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *CreateFlowLogsInput) SetResourceType(v FlowLogsResourceType) *CreateFlowLogsInput {
-	s.ResourceType = v
-	return s
-}
-
-// SetTrafficType sets the TrafficType field's value.
-func (s *CreateFlowLogsInput) SetTrafficType(v TrafficType) *CreateFlowLogsInput {
-	s.TrafficType = v
-	return s
-}
-
 // Contains the output of CreateFlowLogs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsResult
 type CreateFlowLogsOutput struct {
@@ -20789,24 +19235,6 @@ func (s CreateFlowLogsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateFlowLogsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateFlowLogsOutput) SetClientToken(v string) *CreateFlowLogsOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetFlowLogIds sets the FlowLogIds field's value.
-func (s *CreateFlowLogsOutput) SetFlowLogIds(v []string) *CreateFlowLogsOutput {
-	s.FlowLogIds = v
-	return s
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *CreateFlowLogsOutput) SetUnsuccessful(v []UnsuccessfulItem) *CreateFlowLogsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImageRequest
@@ -20863,42 +19291,6 @@ func (s *CreateFpgaImageInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateFpgaImageInput) SetClientToken(v string) *CreateFpgaImageInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateFpgaImageInput) SetDescription(v string) *CreateFpgaImageInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateFpgaImageInput) SetDryRun(v bool) *CreateFpgaImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInputStorageLocation sets the InputStorageLocation field's value.
-func (s *CreateFpgaImageInput) SetInputStorageLocation(v *StorageLocation) *CreateFpgaImageInput {
-	s.InputStorageLocation = v
-	return s
-}
-
-// SetLogsStorageLocation sets the LogsStorageLocation field's value.
-func (s *CreateFpgaImageInput) SetLogsStorageLocation(v *StorageLocation) *CreateFpgaImageInput {
-	s.LogsStorageLocation = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFpgaImageInput) SetName(v string) *CreateFpgaImageInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImageResult
 type CreateFpgaImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -20925,18 +19317,6 @@ func (s CreateFpgaImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateFpgaImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFpgaImageGlobalId sets the FpgaImageGlobalId field's value.
-func (s *CreateFpgaImageOutput) SetFpgaImageGlobalId(v string) *CreateFpgaImageOutput {
-	s.FpgaImageGlobalId = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *CreateFpgaImageOutput) SetFpgaImageId(v string) *CreateFpgaImageOutput {
-	s.FpgaImageId = &v
-	return s
 }
 
 // Contains the parameters for CreateImage.
@@ -21005,42 +19385,6 @@ func (s *CreateImageInput) Validate() error {
 	return nil
 }
 
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *CreateImageInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *CreateImageInput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateImageInput) SetDescription(v string) *CreateImageInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateImageInput) SetDryRun(v bool) *CreateImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *CreateImageInput) SetInstanceId(v string) *CreateImageInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateImageInput) SetName(v string) *CreateImageInput {
-	s.Name = &v
-	return s
-}
-
-// SetNoReboot sets the NoReboot field's value.
-func (s *CreateImageInput) SetNoReboot(v bool) *CreateImageInput {
-	s.NoReboot = &v
-	return s
-}
-
 // Contains the output of CreateImage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImageResult
 type CreateImageOutput struct {
@@ -21065,12 +19409,6 @@ func (s CreateImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *CreateImageOutput) SetImageId(v string) *CreateImageOutput {
-	s.ImageId = &v
-	return s
 }
 
 // Contains the parameters for CreateInstanceExportTask.
@@ -21118,30 +19456,6 @@ func (s *CreateInstanceExportTaskInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateInstanceExportTaskInput) SetDescription(v string) *CreateInstanceExportTaskInput {
-	s.Description = &v
-	return s
-}
-
-// SetExportToS3Task sets the ExportToS3Task field's value.
-func (s *CreateInstanceExportTaskInput) SetExportToS3Task(v *ExportToS3TaskSpecification) *CreateInstanceExportTaskInput {
-	s.ExportToS3Task = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *CreateInstanceExportTaskInput) SetInstanceId(v string) *CreateInstanceExportTaskInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetTargetEnvironment sets the TargetEnvironment field's value.
-func (s *CreateInstanceExportTaskInput) SetTargetEnvironment(v ExportEnvironment) *CreateInstanceExportTaskInput {
-	s.TargetEnvironment = v
-	return s
-}
-
 // Contains the output for CreateInstanceExportTask.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskResult
 type CreateInstanceExportTaskOutput struct {
@@ -21168,12 +19482,6 @@ func (s CreateInstanceExportTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetExportTask sets the ExportTask field's value.
-func (s *CreateInstanceExportTaskOutput) SetExportTask(v *ExportTask) *CreateInstanceExportTaskOutput {
-	s.ExportTask = v
-	return s
-}
-
 // Contains the parameters for CreateInternetGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInternetGatewayRequest
 type CreateInternetGatewayInput struct {
@@ -21194,12 +19502,6 @@ func (s CreateInternetGatewayInput) String() string {
 // GoString returns the string representation
 func (s CreateInternetGatewayInput) GoString() string {
 	return s.String()
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateInternetGatewayInput) SetDryRun(v bool) *CreateInternetGatewayInput {
-	s.DryRun = &v
-	return s
 }
 
 // Contains the output of CreateInternetGateway.
@@ -21226,12 +19528,6 @@ func (s CreateInternetGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateInternetGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInternetGateway sets the InternetGateway field's value.
-func (s *CreateInternetGatewayOutput) SetInternetGateway(v *InternetGateway) *CreateInternetGatewayOutput {
-	s.InternetGateway = v
-	return s
 }
 
 // Contains the parameters for CreateKeyPair.
@@ -21277,18 +19573,6 @@ func (s *CreateKeyPairInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *CreateKeyPairInput) SetDryRun(v bool) *CreateKeyPairInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *CreateKeyPairInput) SetKeyName(v string) *CreateKeyPairInput {
-	s.KeyName = &v
-	return s
-}
-
 // Describes a key pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPair
 type CreateKeyPairOutput struct {
@@ -21319,24 +19603,6 @@ func (s CreateKeyPairOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateKeyPairOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyFingerprint sets the KeyFingerprint field's value.
-func (s *CreateKeyPairOutput) SetKeyFingerprint(v string) *CreateKeyPairOutput {
-	s.KeyFingerprint = &v
-	return s
-}
-
-// SetKeyMaterial sets the KeyMaterial field's value.
-func (s *CreateKeyPairOutput) SetKeyMaterial(v string) *CreateKeyPairOutput {
-	s.KeyMaterial = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *CreateKeyPairOutput) SetKeyName(v string) *CreateKeyPairOutput {
-	s.KeyName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateRequest
@@ -21403,36 +19669,6 @@ func (s *CreateLaunchTemplateInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateLaunchTemplateInput) SetClientToken(v string) *CreateLaunchTemplateInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateLaunchTemplateInput) SetDryRun(v bool) *CreateLaunchTemplateInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetLaunchTemplateData sets the LaunchTemplateData field's value.
-func (s *CreateLaunchTemplateInput) SetLaunchTemplateData(v *RequestLaunchTemplateData) *CreateLaunchTemplateInput {
-	s.LaunchTemplateData = v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *CreateLaunchTemplateInput) SetLaunchTemplateName(v string) *CreateLaunchTemplateInput {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetVersionDescription sets the VersionDescription field's value.
-func (s *CreateLaunchTemplateInput) SetVersionDescription(v string) *CreateLaunchTemplateInput {
-	s.VersionDescription = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateResult
 type CreateLaunchTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -21456,12 +19692,6 @@ func (s CreateLaunchTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLaunchTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplate sets the LaunchTemplate field's value.
-func (s *CreateLaunchTemplateOutput) SetLaunchTemplate(v *LaunchTemplate) *CreateLaunchTemplateOutput {
-	s.LaunchTemplate = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersionRequest
@@ -21532,48 +19762,6 @@ func (s *CreateLaunchTemplateVersionInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateLaunchTemplateVersionInput) SetClientToken(v string) *CreateLaunchTemplateVersionInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateLaunchTemplateVersionInput) SetDryRun(v bool) *CreateLaunchTemplateVersionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetLaunchTemplateData sets the LaunchTemplateData field's value.
-func (s *CreateLaunchTemplateVersionInput) SetLaunchTemplateData(v *RequestLaunchTemplateData) *CreateLaunchTemplateVersionInput {
-	s.LaunchTemplateData = v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *CreateLaunchTemplateVersionInput) SetLaunchTemplateId(v string) *CreateLaunchTemplateVersionInput {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *CreateLaunchTemplateVersionInput) SetLaunchTemplateName(v string) *CreateLaunchTemplateVersionInput {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetSourceVersion sets the SourceVersion field's value.
-func (s *CreateLaunchTemplateVersionInput) SetSourceVersion(v string) *CreateLaunchTemplateVersionInput {
-	s.SourceVersion = &v
-	return s
-}
-
-// SetVersionDescription sets the VersionDescription field's value.
-func (s *CreateLaunchTemplateVersionInput) SetVersionDescription(v string) *CreateLaunchTemplateVersionInput {
-	s.VersionDescription = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersionResult
 type CreateLaunchTemplateVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -21597,12 +19785,6 @@ func (s CreateLaunchTemplateVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLaunchTemplateVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplateVersion sets the LaunchTemplateVersion field's value.
-func (s *CreateLaunchTemplateVersionOutput) SetLaunchTemplateVersion(v *LaunchTemplateVersion) *CreateLaunchTemplateVersionOutput {
-	s.LaunchTemplateVersion = v
-	return s
 }
 
 // Contains the parameters for CreateNatGateway.
@@ -21657,24 +19839,6 @@ func (s *CreateNatGatewayInput) Validate() error {
 	return nil
 }
 
-// SetAllocationId sets the AllocationId field's value.
-func (s *CreateNatGatewayInput) SetAllocationId(v string) *CreateNatGatewayInput {
-	s.AllocationId = &v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateNatGatewayInput) SetClientToken(v string) *CreateNatGatewayInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *CreateNatGatewayInput) SetSubnetId(v string) *CreateNatGatewayInput {
-	s.SubnetId = &v
-	return s
-}
-
 // Contains the output of CreateNatGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayResult
 type CreateNatGatewayOutput struct {
@@ -21703,18 +19867,6 @@ func (s CreateNatGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNatGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateNatGatewayOutput) SetClientToken(v string) *CreateNatGatewayOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetNatGateway sets the NatGateway field's value.
-func (s *CreateNatGatewayOutput) SetNatGateway(v *NatGateway) *CreateNatGatewayOutput {
-	s.NatGateway = v
-	return s
 }
 
 // Contains the parameters for CreateNetworkAclEntry.
@@ -21817,66 +19969,6 @@ func (s *CreateNetworkAclEntryInput) Validate() error {
 	return nil
 }
 
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *CreateNetworkAclEntryInput) SetCidrBlock(v string) *CreateNetworkAclEntryInput {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateNetworkAclEntryInput) SetDryRun(v bool) *CreateNetworkAclEntryInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgress sets the Egress field's value.
-func (s *CreateNetworkAclEntryInput) SetEgress(v bool) *CreateNetworkAclEntryInput {
-	s.Egress = &v
-	return s
-}
-
-// SetIcmpTypeCode sets the IcmpTypeCode field's value.
-func (s *CreateNetworkAclEntryInput) SetIcmpTypeCode(v *IcmpTypeCode) *CreateNetworkAclEntryInput {
-	s.IcmpTypeCode = v
-	return s
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *CreateNetworkAclEntryInput) SetIpv6CidrBlock(v string) *CreateNetworkAclEntryInput {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *CreateNetworkAclEntryInput) SetNetworkAclId(v string) *CreateNetworkAclEntryInput {
-	s.NetworkAclId = &v
-	return s
-}
-
-// SetPortRange sets the PortRange field's value.
-func (s *CreateNetworkAclEntryInput) SetPortRange(v *PortRange) *CreateNetworkAclEntryInput {
-	s.PortRange = v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *CreateNetworkAclEntryInput) SetProtocol(v string) *CreateNetworkAclEntryInput {
-	s.Protocol = &v
-	return s
-}
-
-// SetRuleAction sets the RuleAction field's value.
-func (s *CreateNetworkAclEntryInput) SetRuleAction(v RuleAction) *CreateNetworkAclEntryInput {
-	s.RuleAction = v
-	return s
-}
-
-// SetRuleNumber sets the RuleNumber field's value.
-func (s *CreateNetworkAclEntryInput) SetRuleNumber(v int64) *CreateNetworkAclEntryInput {
-	s.RuleNumber = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntryOutput
 type CreateNetworkAclEntryOutput struct {
 	_ struct{} `type:"structure"`
@@ -21940,18 +20032,6 @@ func (s *CreateNetworkAclInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *CreateNetworkAclInput) SetDryRun(v bool) *CreateNetworkAclInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateNetworkAclInput) SetVpcId(v string) *CreateNetworkAclInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of CreateNetworkAcl.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclResult
 type CreateNetworkAclOutput struct {
@@ -21976,12 +20056,6 @@ func (s CreateNetworkAclOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNetworkAclOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkAcl sets the NetworkAcl field's value.
-func (s *CreateNetworkAclOutput) SetNetworkAcl(v *NetworkAcl) *CreateNetworkAclOutput {
-	s.NetworkAcl = v
-	return s
 }
 
 // Contains the parameters for CreateNetworkInterface.
@@ -22070,60 +20144,6 @@ func (s *CreateNetworkInterfaceInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateNetworkInterfaceInput) SetDescription(v string) *CreateNetworkInterfaceInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateNetworkInterfaceInput) SetDryRun(v bool) *CreateNetworkInterfaceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *CreateNetworkInterfaceInput) SetGroups(v []string) *CreateNetworkInterfaceInput {
-	s.Groups = v
-	return s
-}
-
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *CreateNetworkInterfaceInput) SetIpv6AddressCount(v int64) *CreateNetworkInterfaceInput {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *CreateNetworkInterfaceInput) SetIpv6Addresses(v []InstanceIpv6Address) *CreateNetworkInterfaceInput {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *CreateNetworkInterfaceInput) SetPrivateIpAddress(v string) *CreateNetworkInterfaceInput {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *CreateNetworkInterfaceInput) SetPrivateIpAddresses(v []PrivateIpAddressSpecification) *CreateNetworkInterfaceInput {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetSecondaryPrivateIpAddressCount sets the SecondaryPrivateIpAddressCount field's value.
-func (s *CreateNetworkInterfaceInput) SetSecondaryPrivateIpAddressCount(v int64) *CreateNetworkInterfaceInput {
-	s.SecondaryPrivateIpAddressCount = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *CreateNetworkInterfaceInput) SetSubnetId(v string) *CreateNetworkInterfaceInput {
-	s.SubnetId = &v
-	return s
-}
-
 // Contains the output of CreateNetworkInterface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceResult
 type CreateNetworkInterfaceOutput struct {
@@ -22148,12 +20168,6 @@ func (s CreateNetworkInterfaceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNetworkInterfaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkInterface sets the NetworkInterface field's value.
-func (s *CreateNetworkInterfaceOutput) SetNetworkInterface(v *NetworkInterface) *CreateNetworkInterfaceOutput {
-	s.NetworkInterface = v
-	return s
 }
 
 // Contains the parameters for CreateNetworkInterfacePermission.
@@ -22211,36 +20225,6 @@ func (s *CreateNetworkInterfacePermissionInput) Validate() error {
 	return nil
 }
 
-// SetAwsAccountId sets the AwsAccountId field's value.
-func (s *CreateNetworkInterfacePermissionInput) SetAwsAccountId(v string) *CreateNetworkInterfacePermissionInput {
-	s.AwsAccountId = &v
-	return s
-}
-
-// SetAwsService sets the AwsService field's value.
-func (s *CreateNetworkInterfacePermissionInput) SetAwsService(v string) *CreateNetworkInterfacePermissionInput {
-	s.AwsService = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateNetworkInterfacePermissionInput) SetDryRun(v bool) *CreateNetworkInterfacePermissionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *CreateNetworkInterfacePermissionInput) SetNetworkInterfaceId(v string) *CreateNetworkInterfacePermissionInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPermission sets the Permission field's value.
-func (s *CreateNetworkInterfacePermissionInput) SetPermission(v InterfacePermissionType) *CreateNetworkInterfacePermissionInput {
-	s.Permission = v
-	return s
-}
-
 // Contains the output of CreateNetworkInterfacePermission.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfacePermissionResult
 type CreateNetworkInterfacePermissionOutput struct {
@@ -22265,12 +20249,6 @@ func (s CreateNetworkInterfacePermissionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNetworkInterfacePermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInterfacePermission sets the InterfacePermission field's value.
-func (s *CreateNetworkInterfacePermissionOutput) SetInterfacePermission(v *NetworkInterfacePermission) *CreateNetworkInterfacePermissionOutput {
-	s.InterfacePermission = v
-	return s
 }
 
 // Contains the parameters for CreatePlacementGroup.
@@ -22323,24 +20301,6 @@ func (s *CreatePlacementGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreatePlacementGroupInput) SetDryRun(v bool) *CreatePlacementGroupInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *CreatePlacementGroupInput) SetGroupName(v string) *CreatePlacementGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetStrategy sets the Strategy field's value.
-func (s *CreatePlacementGroupInput) SetStrategy(v PlacementStrategy) *CreatePlacementGroupInput {
-	s.Strategy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupOutput
@@ -22433,30 +20393,6 @@ func (s *CreateReservedInstancesListingInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateReservedInstancesListingInput) SetClientToken(v string) *CreateReservedInstancesListingInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *CreateReservedInstancesListingInput) SetInstanceCount(v int64) *CreateReservedInstancesListingInput {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetPriceSchedules sets the PriceSchedules field's value.
-func (s *CreateReservedInstancesListingInput) SetPriceSchedules(v []PriceScheduleSpecification) *CreateReservedInstancesListingInput {
-	s.PriceSchedules = v
-	return s
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *CreateReservedInstancesListingInput) SetReservedInstancesId(v string) *CreateReservedInstancesListingInput {
-	s.ReservedInstancesId = &v
-	return s
-}
-
 // Contains the output of CreateReservedInstancesListing.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListingResult
 type CreateReservedInstancesListingOutput struct {
@@ -22481,12 +20417,6 @@ func (s CreateReservedInstancesListingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReservedInstancesListingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedInstancesListings sets the ReservedInstancesListings field's value.
-func (s *CreateReservedInstancesListingOutput) SetReservedInstancesListings(v []ReservedInstancesListing) *CreateReservedInstancesListingOutput {
-	s.ReservedInstancesListings = v
-	return s
 }
 
 // Contains the parameters for CreateRoute.
@@ -22558,66 +20488,6 @@ func (s *CreateRouteInput) Validate() error {
 	return nil
 }
 
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *CreateRouteInput) SetDestinationCidrBlock(v string) *CreateRouteInput {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetDestinationIpv6CidrBlock sets the DestinationIpv6CidrBlock field's value.
-func (s *CreateRouteInput) SetDestinationIpv6CidrBlock(v string) *CreateRouteInput {
-	s.DestinationIpv6CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateRouteInput) SetDryRun(v bool) *CreateRouteInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgressOnlyInternetGatewayId sets the EgressOnlyInternetGatewayId field's value.
-func (s *CreateRouteInput) SetEgressOnlyInternetGatewayId(v string) *CreateRouteInput {
-	s.EgressOnlyInternetGatewayId = &v
-	return s
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *CreateRouteInput) SetGatewayId(v string) *CreateRouteInput {
-	s.GatewayId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *CreateRouteInput) SetInstanceId(v string) *CreateRouteInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetNatGatewayId sets the NatGatewayId field's value.
-func (s *CreateRouteInput) SetNatGatewayId(v string) *CreateRouteInput {
-	s.NatGatewayId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *CreateRouteInput) SetNetworkInterfaceId(v string) *CreateRouteInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *CreateRouteInput) SetRouteTableId(v string) *CreateRouteInput {
-	s.RouteTableId = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *CreateRouteInput) SetVpcPeeringConnectionId(v string) *CreateRouteInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Contains the output of CreateRoute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteResult
 type CreateRouteOutput struct {
@@ -22642,12 +20512,6 @@ func (s CreateRouteOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRouteOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *CreateRouteOutput) SetReturn(v bool) *CreateRouteOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for CreateRouteTable.
@@ -22691,18 +20555,6 @@ func (s *CreateRouteTableInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *CreateRouteTableInput) SetDryRun(v bool) *CreateRouteTableInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateRouteTableInput) SetVpcId(v string) *CreateRouteTableInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of CreateRouteTable.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableResult
 type CreateRouteTableOutput struct {
@@ -22727,12 +20579,6 @@ func (s CreateRouteTableOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRouteTableOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRouteTable sets the RouteTable field's value.
-func (s *CreateRouteTableOutput) SetRouteTable(v *RouteTable) *CreateRouteTableOutput {
-	s.RouteTable = v
-	return s
 }
 
 // Contains the parameters for CreateSecurityGroup.
@@ -22800,30 +20646,6 @@ func (s *CreateSecurityGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateSecurityGroupInput) SetDescription(v string) *CreateSecurityGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateSecurityGroupInput) SetDryRun(v bool) *CreateSecurityGroupInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *CreateSecurityGroupInput) SetGroupName(v string) *CreateSecurityGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateSecurityGroupInput) SetVpcId(v string) *CreateSecurityGroupInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of CreateSecurityGroup.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupResult
 type CreateSecurityGroupOutput struct {
@@ -22848,12 +20670,6 @@ func (s CreateSecurityGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *CreateSecurityGroupOutput) SetGroupId(v string) *CreateSecurityGroupOutput {
-	s.GroupId = &v
-	return s
 }
 
 // Contains the parameters for CreateSnapshot.
@@ -22898,24 +20714,6 @@ func (s *CreateSnapshotInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateSnapshotInput) SetDescription(v string) *CreateSnapshotInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateSnapshotInput) SetDryRun(v bool) *CreateSnapshotInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *CreateSnapshotInput) SetVolumeId(v string) *CreateSnapshotInput {
-	s.VolumeId = &v
-	return s
 }
 
 // Describes a snapshot.
@@ -22999,90 +20797,6 @@ func (s CreateSnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDataEncryptionKeyId sets the DataEncryptionKeyId field's value.
-func (s *CreateSnapshotOutput) SetDataEncryptionKeyId(v string) *CreateSnapshotOutput {
-	s.DataEncryptionKeyId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateSnapshotOutput) SetDescription(v string) *CreateSnapshotOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *CreateSnapshotOutput) SetEncrypted(v bool) *CreateSnapshotOutput {
-	s.Encrypted = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateSnapshotOutput) SetKmsKeyId(v string) *CreateSnapshotOutput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetOwnerAlias sets the OwnerAlias field's value.
-func (s *CreateSnapshotOutput) SetOwnerAlias(v string) *CreateSnapshotOutput {
-	s.OwnerAlias = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *CreateSnapshotOutput) SetOwnerId(v string) *CreateSnapshotOutput {
-	s.OwnerId = &v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *CreateSnapshotOutput) SetProgress(v string) *CreateSnapshotOutput {
-	s.Progress = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateSnapshotOutput) SetSnapshotId(v string) *CreateSnapshotOutput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *CreateSnapshotOutput) SetStartTime(v time.Time) *CreateSnapshotOutput {
-	s.StartTime = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CreateSnapshotOutput) SetState(v SnapshotState) *CreateSnapshotOutput {
-	s.State = v
-	return s
-}
-
-// SetStateMessage sets the StateMessage field's value.
-func (s *CreateSnapshotOutput) SetStateMessage(v string) *CreateSnapshotOutput {
-	s.StateMessage = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateSnapshotOutput) SetTags(v []Tag) *CreateSnapshotOutput {
-	s.Tags = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *CreateSnapshotOutput) SetVolumeId(v string) *CreateSnapshotOutput {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *CreateSnapshotOutput) SetVolumeSize(v int64) *CreateSnapshotOutput {
-	s.VolumeSize = &v
-	return s
-}
-
 // Contains the parameters for CreateSpotDatafeedSubscription.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionRequest
 type CreateSpotDatafeedSubscriptionInput struct {
@@ -23127,24 +20841,6 @@ func (s *CreateSpotDatafeedSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *CreateSpotDatafeedSubscriptionInput) SetBucket(v string) *CreateSpotDatafeedSubscriptionInput {
-	s.Bucket = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateSpotDatafeedSubscriptionInput) SetDryRun(v bool) *CreateSpotDatafeedSubscriptionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *CreateSpotDatafeedSubscriptionInput) SetPrefix(v string) *CreateSpotDatafeedSubscriptionInput {
-	s.Prefix = &v
-	return s
-}
-
 // Contains the output of CreateSpotDatafeedSubscription.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionResult
 type CreateSpotDatafeedSubscriptionOutput struct {
@@ -23169,12 +20865,6 @@ func (s CreateSpotDatafeedSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSpotDatafeedSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSpotDatafeedSubscription sets the SpotDatafeedSubscription field's value.
-func (s *CreateSpotDatafeedSubscriptionOutput) SetSpotDatafeedSubscription(v *SpotDatafeedSubscription) *CreateSpotDatafeedSubscriptionOutput {
-	s.SpotDatafeedSubscription = v
-	return s
 }
 
 // Contains the parameters for CreateSubnet.
@@ -23237,36 +20927,6 @@ func (s *CreateSubnetInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateSubnetInput) SetAvailabilityZone(v string) *CreateSubnetInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *CreateSubnetInput) SetCidrBlock(v string) *CreateSubnetInput {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateSubnetInput) SetDryRun(v bool) *CreateSubnetInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *CreateSubnetInput) SetIpv6CidrBlock(v string) *CreateSubnetInput {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateSubnetInput) SetVpcId(v string) *CreateSubnetInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of CreateSubnet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetResult
 type CreateSubnetOutput struct {
@@ -23291,12 +20951,6 @@ func (s CreateSubnetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSubnetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubnet sets the Subnet field's value.
-func (s *CreateSubnetOutput) SetSubnet(v *Subnet) *CreateSubnetOutput {
-	s.Subnet = v
-	return s
 }
 
 // Contains the parameters for CreateTags.
@@ -23349,24 +21003,6 @@ func (s *CreateTagsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateTagsInput) SetDryRun(v bool) *CreateTagsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *CreateTagsInput) SetResources(v []string) *CreateTagsInput {
-	s.Resources = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateTagsInput) SetTags(v []Tag) *CreateTagsInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTagsOutput
@@ -23481,60 +21117,6 @@ func (s *CreateVolumeInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateVolumeInput) SetAvailabilityZone(v string) *CreateVolumeInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVolumeInput) SetDryRun(v bool) *CreateVolumeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *CreateVolumeInput) SetEncrypted(v bool) *CreateVolumeInput {
-	s.Encrypted = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *CreateVolumeInput) SetIops(v int64) *CreateVolumeInput {
-	s.Iops = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateVolumeInput) SetKmsKeyId(v string) *CreateVolumeInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *CreateVolumeInput) SetSize(v int64) *CreateVolumeInput {
-	s.Size = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateVolumeInput) SetSnapshotId(v string) *CreateVolumeInput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetTagSpecifications sets the TagSpecifications field's value.
-func (s *CreateVolumeInput) SetTagSpecifications(v []TagSpecification) *CreateVolumeInput {
-	s.TagSpecifications = v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *CreateVolumeInput) SetVolumeType(v VolumeType) *CreateVolumeInput {
-	s.VolumeType = v
-	return s
-}
-
 // Describes a volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume
 type CreateVolumeOutput struct {
@@ -23609,78 +21191,6 @@ func (s CreateVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttachments sets the Attachments field's value.
-func (s *CreateVolumeOutput) SetAttachments(v []DetachVolumeOutput) *CreateVolumeOutput {
-	s.Attachments = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateVolumeOutput) SetAvailabilityZone(v string) *CreateVolumeOutput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *CreateVolumeOutput) SetCreateTime(v time.Time) *CreateVolumeOutput {
-	s.CreateTime = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *CreateVolumeOutput) SetEncrypted(v bool) *CreateVolumeOutput {
-	s.Encrypted = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *CreateVolumeOutput) SetIops(v int64) *CreateVolumeOutput {
-	s.Iops = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateVolumeOutput) SetKmsKeyId(v string) *CreateVolumeOutput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *CreateVolumeOutput) SetSize(v int64) *CreateVolumeOutput {
-	s.Size = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateVolumeOutput) SetSnapshotId(v string) *CreateVolumeOutput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CreateVolumeOutput) SetState(v VolumeState) *CreateVolumeOutput {
-	s.State = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateVolumeOutput) SetTags(v []Tag) *CreateVolumeOutput {
-	s.Tags = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *CreateVolumeOutput) SetVolumeId(v string) *CreateVolumeOutput {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *CreateVolumeOutput) SetVolumeType(v VolumeType) *CreateVolumeOutput {
-	s.VolumeType = v
-	return s
-}
-
 // Describes the user or group to be added or removed from the permissions for
 // a volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermission
@@ -23706,18 +21216,6 @@ func (s CreateVolumePermission) GoString() string {
 	return s.String()
 }
 
-// SetGroup sets the Group field's value.
-func (s *CreateVolumePermission) SetGroup(v PermissionGroup) *CreateVolumePermission {
-	s.Group = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *CreateVolumePermission) SetUserId(v string) *CreateVolumePermission {
-	s.UserId = &v
-	return s
-}
-
 // Describes modifications to the permissions for a volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermissionModifications
 type CreateVolumePermissionModifications struct {
@@ -23740,18 +21238,6 @@ func (s CreateVolumePermissionModifications) String() string {
 // GoString returns the string representation
 func (s CreateVolumePermissionModifications) GoString() string {
 	return s.String()
-}
-
-// SetAdd sets the Add field's value.
-func (s *CreateVolumePermissionModifications) SetAdd(v []CreateVolumePermission) *CreateVolumePermissionModifications {
-	s.Add = v
-	return s
-}
-
-// SetRemove sets the Remove field's value.
-func (s *CreateVolumePermissionModifications) SetRemove(v []CreateVolumePermission) *CreateVolumePermissionModifications {
-	s.Remove = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotificationRequest
@@ -23814,42 +21300,6 @@ func (s *CreateVpcEndpointConnectionNotificationInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateVpcEndpointConnectionNotificationInput) SetClientToken(v string) *CreateVpcEndpointConnectionNotificationInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetConnectionEvents sets the ConnectionEvents field's value.
-func (s *CreateVpcEndpointConnectionNotificationInput) SetConnectionEvents(v []string) *CreateVpcEndpointConnectionNotificationInput {
-	s.ConnectionEvents = v
-	return s
-}
-
-// SetConnectionNotificationArn sets the ConnectionNotificationArn field's value.
-func (s *CreateVpcEndpointConnectionNotificationInput) SetConnectionNotificationArn(v string) *CreateVpcEndpointConnectionNotificationInput {
-	s.ConnectionNotificationArn = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpcEndpointConnectionNotificationInput) SetDryRun(v bool) *CreateVpcEndpointConnectionNotificationInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *CreateVpcEndpointConnectionNotificationInput) SetServiceId(v string) *CreateVpcEndpointConnectionNotificationInput {
-	s.ServiceId = &v
-	return s
-}
-
-// SetVpcEndpointId sets the VpcEndpointId field's value.
-func (s *CreateVpcEndpointConnectionNotificationInput) SetVpcEndpointId(v string) *CreateVpcEndpointConnectionNotificationInput {
-	s.VpcEndpointId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotificationResult
 type CreateVpcEndpointConnectionNotificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -23877,18 +21327,6 @@ func (s CreateVpcEndpointConnectionNotificationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpcEndpointConnectionNotificationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateVpcEndpointConnectionNotificationOutput) SetClientToken(v string) *CreateVpcEndpointConnectionNotificationOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetConnectionNotification sets the ConnectionNotification field's value.
-func (s *CreateVpcEndpointConnectionNotificationOutput) SetConnectionNotification(v *ConnectionNotification) *CreateVpcEndpointConnectionNotificationOutput {
-	s.ConnectionNotification = v
-	return s
 }
 
 // Contains the parameters for CreateVpcEndpoint.
@@ -23983,66 +21421,6 @@ func (s *CreateVpcEndpointInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateVpcEndpointInput) SetClientToken(v string) *CreateVpcEndpointInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpcEndpointInput) SetDryRun(v bool) *CreateVpcEndpointInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreateVpcEndpointInput) SetPolicyDocument(v string) *CreateVpcEndpointInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPrivateDnsEnabled sets the PrivateDnsEnabled field's value.
-func (s *CreateVpcEndpointInput) SetPrivateDnsEnabled(v bool) *CreateVpcEndpointInput {
-	s.PrivateDnsEnabled = &v
-	return s
-}
-
-// SetRouteTableIds sets the RouteTableIds field's value.
-func (s *CreateVpcEndpointInput) SetRouteTableIds(v []string) *CreateVpcEndpointInput {
-	s.RouteTableIds = v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateVpcEndpointInput) SetSecurityGroupIds(v []string) *CreateVpcEndpointInput {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *CreateVpcEndpointInput) SetServiceName(v string) *CreateVpcEndpointInput {
-	s.ServiceName = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateVpcEndpointInput) SetSubnetIds(v []string) *CreateVpcEndpointInput {
-	s.SubnetIds = v
-	return s
-}
-
-// SetVpcEndpointType sets the VpcEndpointType field's value.
-func (s *CreateVpcEndpointInput) SetVpcEndpointType(v VpcEndpointType) *CreateVpcEndpointInput {
-	s.VpcEndpointType = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateVpcEndpointInput) SetVpcId(v string) *CreateVpcEndpointInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of CreateVpcEndpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointResult
 type CreateVpcEndpointOutput struct {
@@ -24071,18 +21449,6 @@ func (s CreateVpcEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpcEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateVpcEndpointOutput) SetClientToken(v string) *CreateVpcEndpointOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetVpcEndpoint sets the VpcEndpoint field's value.
-func (s *CreateVpcEndpointOutput) SetVpcEndpoint(v *VpcEndpoint) *CreateVpcEndpointOutput {
-	s.VpcEndpoint = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfigurationRequest
@@ -24134,30 +21500,6 @@ func (s *CreateVpcEndpointServiceConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *CreateVpcEndpointServiceConfigurationInput) SetAcceptanceRequired(v bool) *CreateVpcEndpointServiceConfigurationInput {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateVpcEndpointServiceConfigurationInput) SetClientToken(v string) *CreateVpcEndpointServiceConfigurationInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpcEndpointServiceConfigurationInput) SetDryRun(v bool) *CreateVpcEndpointServiceConfigurationInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkLoadBalancerArns sets the NetworkLoadBalancerArns field's value.
-func (s *CreateVpcEndpointServiceConfigurationInput) SetNetworkLoadBalancerArns(v []string) *CreateVpcEndpointServiceConfigurationInput {
-	s.NetworkLoadBalancerArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfigurationResult
 type CreateVpcEndpointServiceConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -24185,18 +21527,6 @@ func (s CreateVpcEndpointServiceConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpcEndpointServiceConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateVpcEndpointServiceConfigurationOutput) SetClientToken(v string) *CreateVpcEndpointServiceConfigurationOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetServiceConfiguration sets the ServiceConfiguration field's value.
-func (s *CreateVpcEndpointServiceConfigurationOutput) SetServiceConfiguration(v *ServiceConfiguration) *CreateVpcEndpointServiceConfigurationOutput {
-	s.ServiceConfiguration = v
-	return s
 }
 
 // Contains the parameters for CreateVpc.
@@ -24257,30 +21587,6 @@ func (s *CreateVpcInput) Validate() error {
 	return nil
 }
 
-// SetAmazonProvidedIpv6CidrBlock sets the AmazonProvidedIpv6CidrBlock field's value.
-func (s *CreateVpcInput) SetAmazonProvidedIpv6CidrBlock(v bool) *CreateVpcInput {
-	s.AmazonProvidedIpv6CidrBlock = &v
-	return s
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *CreateVpcInput) SetCidrBlock(v string) *CreateVpcInput {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpcInput) SetDryRun(v bool) *CreateVpcInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *CreateVpcInput) SetInstanceTenancy(v Tenancy) *CreateVpcInput {
-	s.InstanceTenancy = v
-	return s
-}
-
 // Contains the output of CreateVpc.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcResult
 type CreateVpcOutput struct {
@@ -24305,12 +21611,6 @@ func (s CreateVpcOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpcOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpc sets the Vpc field's value.
-func (s *CreateVpcOutput) SetVpc(v *Vpc) *CreateVpcOutput {
-	s.Vpc = v
-	return s
 }
 
 // Contains the parameters for CreateVpcPeeringConnection.
@@ -24353,36 +21653,6 @@ func (s CreateVpcPeeringConnectionInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpcPeeringConnectionInput) SetDryRun(v bool) *CreateVpcPeeringConnectionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPeerOwnerId sets the PeerOwnerId field's value.
-func (s *CreateVpcPeeringConnectionInput) SetPeerOwnerId(v string) *CreateVpcPeeringConnectionInput {
-	s.PeerOwnerId = &v
-	return s
-}
-
-// SetPeerRegion sets the PeerRegion field's value.
-func (s *CreateVpcPeeringConnectionInput) SetPeerRegion(v string) *CreateVpcPeeringConnectionInput {
-	s.PeerRegion = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *CreateVpcPeeringConnectionInput) SetPeerVpcId(v string) *CreateVpcPeeringConnectionInput {
-	s.PeerVpcId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateVpcPeeringConnectionInput) SetVpcId(v string) *CreateVpcPeeringConnectionInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of CreateVpcPeeringConnection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionResult
 type CreateVpcPeeringConnectionOutput struct {
@@ -24407,12 +21677,6 @@ func (s CreateVpcPeeringConnectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpcPeeringConnection sets the VpcPeeringConnection field's value.
-func (s *CreateVpcPeeringConnectionOutput) SetVpcPeeringConnection(v *VpcPeeringConnection) *CreateVpcPeeringConnectionOutput {
-	s.VpcPeeringConnection = v
-	return s
 }
 
 // Contains the parameters for CreateVpnConnection.
@@ -24477,36 +21741,6 @@ func (s *CreateVpnConnectionInput) Validate() error {
 	return nil
 }
 
-// SetCustomerGatewayId sets the CustomerGatewayId field's value.
-func (s *CreateVpnConnectionInput) SetCustomerGatewayId(v string) *CreateVpnConnectionInput {
-	s.CustomerGatewayId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpnConnectionInput) SetDryRun(v bool) *CreateVpnConnectionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetOptions sets the Options field's value.
-func (s *CreateVpnConnectionInput) SetOptions(v *VpnConnectionOptionsSpecification) *CreateVpnConnectionInput {
-	s.Options = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateVpnConnectionInput) SetType(v string) *CreateVpnConnectionInput {
-	s.Type = &v
-	return s
-}
-
-// SetVpnGatewayId sets the VpnGatewayId field's value.
-func (s *CreateVpnConnectionInput) SetVpnGatewayId(v string) *CreateVpnConnectionInput {
-	s.VpnGatewayId = &v
-	return s
-}
-
 // Contains the output of CreateVpnConnection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionResult
 type CreateVpnConnectionOutput struct {
@@ -24531,12 +21765,6 @@ func (s CreateVpnConnectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpnConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpnConnection sets the VpnConnection field's value.
-func (s *CreateVpnConnectionOutput) SetVpnConnection(v *VpnConnection) *CreateVpnConnectionOutput {
-	s.VpnConnection = v
-	return s
 }
 
 // Contains the parameters for CreateVpnConnectionRoute.
@@ -24581,18 +21809,6 @@ func (s *CreateVpnConnectionRouteInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *CreateVpnConnectionRouteInput) SetDestinationCidrBlock(v string) *CreateVpnConnectionRouteInput {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetVpnConnectionId sets the VpnConnectionId field's value.
-func (s *CreateVpnConnectionRouteInput) SetVpnConnectionId(v string) *CreateVpnConnectionRouteInput {
-	s.VpnConnectionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRouteOutput
@@ -24667,30 +21883,6 @@ func (s *CreateVpnGatewayInput) Validate() error {
 	return nil
 }
 
-// SetAmazonSideAsn sets the AmazonSideAsn field's value.
-func (s *CreateVpnGatewayInput) SetAmazonSideAsn(v int64) *CreateVpnGatewayInput {
-	s.AmazonSideAsn = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateVpnGatewayInput) SetAvailabilityZone(v string) *CreateVpnGatewayInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateVpnGatewayInput) SetDryRun(v bool) *CreateVpnGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateVpnGatewayInput) SetType(v GatewayType) *CreateVpnGatewayInput {
-	s.Type = v
-	return s
-}
-
 // Contains the output of CreateVpnGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGatewayResult
 type CreateVpnGatewayOutput struct {
@@ -24717,12 +21909,6 @@ func (s CreateVpnGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVpnGateway sets the VpnGateway field's value.
-func (s *CreateVpnGatewayOutput) SetVpnGateway(v *VpnGateway) *CreateVpnGatewayOutput {
-	s.VpnGateway = v
-	return s
-}
-
 // Describes the credit option for CPU usage of a T2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecification
 type CreditSpecification struct {
@@ -24740,12 +21926,6 @@ func (s CreditSpecification) String() string {
 // GoString returns the string representation
 func (s CreditSpecification) GoString() string {
 	return s.String()
-}
-
-// SetCpuCredits sets the CpuCredits field's value.
-func (s *CreditSpecification) SetCpuCredits(v string) *CreditSpecification {
-	s.CpuCredits = &v
-	return s
 }
 
 // The credit option for CPU usage of a T2 instance.
@@ -24784,12 +21964,6 @@ func (s *CreditSpecificationRequest) Validate() error {
 	return nil
 }
 
-// SetCpuCredits sets the CpuCredits field's value.
-func (s *CreditSpecificationRequest) SetCpuCredits(v string) *CreditSpecificationRequest {
-	s.CpuCredits = &v
-	return s
-}
-
 // Describes a customer gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CustomerGateway
 type CustomerGateway struct {
@@ -24824,42 +21998,6 @@ func (s CustomerGateway) String() string {
 // GoString returns the string representation
 func (s CustomerGateway) GoString() string {
 	return s.String()
-}
-
-// SetBgpAsn sets the BgpAsn field's value.
-func (s *CustomerGateway) SetBgpAsn(v string) *CustomerGateway {
-	s.BgpAsn = &v
-	return s
-}
-
-// SetCustomerGatewayId sets the CustomerGatewayId field's value.
-func (s *CustomerGateway) SetCustomerGatewayId(v string) *CustomerGateway {
-	s.CustomerGatewayId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *CustomerGateway) SetIpAddress(v string) *CustomerGateway {
-	s.IpAddress = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CustomerGateway) SetState(v string) *CustomerGateway {
-	s.State = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CustomerGateway) SetTags(v []Tag) *CustomerGateway {
-	s.Tags = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CustomerGateway) SetType(v string) *CustomerGateway {
-	s.Type = &v
-	return s
 }
 
 // Contains the parameters for DeleteCustomerGateway.
@@ -24901,18 +22039,6 @@ func (s *DeleteCustomerGatewayInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCustomerGatewayId sets the CustomerGatewayId field's value.
-func (s *DeleteCustomerGatewayInput) SetCustomerGatewayId(v string) *DeleteCustomerGatewayInput {
-	s.CustomerGatewayId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteCustomerGatewayInput) SetDryRun(v bool) *DeleteCustomerGatewayInput {
-	s.DryRun = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGatewayOutput
@@ -24978,18 +22104,6 @@ func (s *DeleteDhcpOptionsInput) Validate() error {
 	return nil
 }
 
-// SetDhcpOptionsId sets the DhcpOptionsId field's value.
-func (s *DeleteDhcpOptionsInput) SetDhcpOptionsId(v string) *DeleteDhcpOptionsInput {
-	s.DhcpOptionsId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteDhcpOptionsInput) SetDryRun(v bool) *DeleteDhcpOptionsInput {
-	s.DryRun = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteDhcpOptionsOutput
 type DeleteDhcpOptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -25052,18 +22166,6 @@ func (s *DeleteEgressOnlyInternetGatewayInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteEgressOnlyInternetGatewayInput) SetDryRun(v bool) *DeleteEgressOnlyInternetGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgressOnlyInternetGatewayId sets the EgressOnlyInternetGatewayId field's value.
-func (s *DeleteEgressOnlyInternetGatewayInput) SetEgressOnlyInternetGatewayId(v string) *DeleteEgressOnlyInternetGatewayInput {
-	s.EgressOnlyInternetGatewayId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGatewayResult
 type DeleteEgressOnlyInternetGatewayOutput struct {
 	_ struct{} `type:"structure"`
@@ -25087,12 +22189,6 @@ func (s DeleteEgressOnlyInternetGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEgressOnlyInternetGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturnCode sets the ReturnCode field's value.
-func (s *DeleteEgressOnlyInternetGatewayOutput) SetReturnCode(v bool) *DeleteEgressOnlyInternetGatewayOutput {
-	s.ReturnCode = &v
-	return s
 }
 
 // Contains the parameters for DeleteFlowLogs.
@@ -25130,12 +22226,6 @@ func (s *DeleteFlowLogsInput) Validate() error {
 	return nil
 }
 
-// SetFlowLogIds sets the FlowLogIds field's value.
-func (s *DeleteFlowLogsInput) SetFlowLogIds(v []string) *DeleteFlowLogsInput {
-	s.FlowLogIds = v
-	return s
-}
-
 // Contains the output of DeleteFlowLogs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogsResult
 type DeleteFlowLogsOutput struct {
@@ -25160,12 +22250,6 @@ func (s DeleteFlowLogsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteFlowLogsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *DeleteFlowLogsOutput) SetUnsuccessful(v []UnsuccessfulItem) *DeleteFlowLogsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFpgaImageRequest
@@ -25208,18 +22292,6 @@ func (s *DeleteFpgaImageInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteFpgaImageInput) SetDryRun(v bool) *DeleteFpgaImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *DeleteFpgaImageInput) SetFpgaImageId(v string) *DeleteFpgaImageInput {
-	s.FpgaImageId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFpgaImageResult
 type DeleteFpgaImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -25243,12 +22315,6 @@ func (s DeleteFpgaImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteFpgaImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *DeleteFpgaImageOutput) SetReturn(v bool) *DeleteFpgaImageOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for DeleteInternetGateway.
@@ -25290,18 +22356,6 @@ func (s *DeleteInternetGatewayInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteInternetGatewayInput) SetDryRun(v bool) *DeleteInternetGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInternetGatewayId sets the InternetGatewayId field's value.
-func (s *DeleteInternetGatewayInput) SetInternetGatewayId(v string) *DeleteInternetGatewayInput {
-	s.InternetGatewayId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGatewayOutput
@@ -25365,18 +22419,6 @@ func (s *DeleteKeyPairInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteKeyPairInput) SetDryRun(v bool) *DeleteKeyPairInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *DeleteKeyPairInput) SetKeyName(v string) *DeleteKeyPairInput {
-	s.KeyName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPairOutput
@@ -25443,24 +22485,6 @@ func (s *DeleteLaunchTemplateInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteLaunchTemplateInput) SetDryRun(v bool) *DeleteLaunchTemplateInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *DeleteLaunchTemplateInput) SetLaunchTemplateId(v string) *DeleteLaunchTemplateInput {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *DeleteLaunchTemplateInput) SetLaunchTemplateName(v string) *DeleteLaunchTemplateInput {
-	s.LaunchTemplateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateResult
 type DeleteLaunchTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -25484,12 +22508,6 @@ func (s DeleteLaunchTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLaunchTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplate sets the LaunchTemplate field's value.
-func (s *DeleteLaunchTemplateOutput) SetLaunchTemplate(v *LaunchTemplate) *DeleteLaunchTemplateOutput {
-	s.LaunchTemplate = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsRequest
@@ -25543,30 +22561,6 @@ func (s *DeleteLaunchTemplateVersionsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteLaunchTemplateVersionsInput) SetDryRun(v bool) *DeleteLaunchTemplateVersionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *DeleteLaunchTemplateVersionsInput) SetLaunchTemplateId(v string) *DeleteLaunchTemplateVersionsInput {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *DeleteLaunchTemplateVersionsInput) SetLaunchTemplateName(v string) *DeleteLaunchTemplateVersionsInput {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *DeleteLaunchTemplateVersionsInput) SetVersions(v []string) *DeleteLaunchTemplateVersionsInput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResult
 type DeleteLaunchTemplateVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -25593,18 +22587,6 @@ func (s DeleteLaunchTemplateVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLaunchTemplateVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSuccessfullyDeletedLaunchTemplateVersions sets the SuccessfullyDeletedLaunchTemplateVersions field's value.
-func (s *DeleteLaunchTemplateVersionsOutput) SetSuccessfullyDeletedLaunchTemplateVersions(v []DeleteLaunchTemplateVersionsResponseSuccessItem) *DeleteLaunchTemplateVersionsOutput {
-	s.SuccessfullyDeletedLaunchTemplateVersions = v
-	return s
-}
-
-// SetUnsuccessfullyDeletedLaunchTemplateVersions sets the UnsuccessfullyDeletedLaunchTemplateVersions field's value.
-func (s *DeleteLaunchTemplateVersionsOutput) SetUnsuccessfullyDeletedLaunchTemplateVersions(v []DeleteLaunchTemplateVersionsResponseErrorItem) *DeleteLaunchTemplateVersionsOutput {
-	s.UnsuccessfullyDeletedLaunchTemplateVersions = v
-	return s
 }
 
 // Describes a launch template version that could not be deleted.
@@ -25635,30 +22617,6 @@ func (s DeleteLaunchTemplateVersionsResponseErrorItem) GoString() string {
 	return s.String()
 }
 
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *DeleteLaunchTemplateVersionsResponseErrorItem) SetLaunchTemplateId(v string) *DeleteLaunchTemplateVersionsResponseErrorItem {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *DeleteLaunchTemplateVersionsResponseErrorItem) SetLaunchTemplateName(v string) *DeleteLaunchTemplateVersionsResponseErrorItem {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetResponseError sets the ResponseError field's value.
-func (s *DeleteLaunchTemplateVersionsResponseErrorItem) SetResponseError(v *ResponseError) *DeleteLaunchTemplateVersionsResponseErrorItem {
-	s.ResponseError = v
-	return s
-}
-
-// SetVersionNumber sets the VersionNumber field's value.
-func (s *DeleteLaunchTemplateVersionsResponseErrorItem) SetVersionNumber(v int64) *DeleteLaunchTemplateVersionsResponseErrorItem {
-	s.VersionNumber = &v
-	return s
-}
-
 // Describes a launch template version that was successfully deleted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResponseSuccessItem
 type DeleteLaunchTemplateVersionsResponseSuccessItem struct {
@@ -25682,24 +22640,6 @@ func (s DeleteLaunchTemplateVersionsResponseSuccessItem) String() string {
 // GoString returns the string representation
 func (s DeleteLaunchTemplateVersionsResponseSuccessItem) GoString() string {
 	return s.String()
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *DeleteLaunchTemplateVersionsResponseSuccessItem) SetLaunchTemplateId(v string) *DeleteLaunchTemplateVersionsResponseSuccessItem {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *DeleteLaunchTemplateVersionsResponseSuccessItem) SetLaunchTemplateName(v string) *DeleteLaunchTemplateVersionsResponseSuccessItem {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetVersionNumber sets the VersionNumber field's value.
-func (s *DeleteLaunchTemplateVersionsResponseSuccessItem) SetVersionNumber(v int64) *DeleteLaunchTemplateVersionsResponseSuccessItem {
-	s.VersionNumber = &v
-	return s
 }
 
 // Contains the parameters for DeleteNatGateway.
@@ -25737,12 +22677,6 @@ func (s *DeleteNatGatewayInput) Validate() error {
 	return nil
 }
 
-// SetNatGatewayId sets the NatGatewayId field's value.
-func (s *DeleteNatGatewayInput) SetNatGatewayId(v string) *DeleteNatGatewayInput {
-	s.NatGatewayId = &v
-	return s
-}
-
 // Contains the output of DeleteNatGateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNatGatewayResult
 type DeleteNatGatewayOutput struct {
@@ -25767,12 +22701,6 @@ func (s DeleteNatGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteNatGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNatGatewayId sets the NatGatewayId field's value.
-func (s *DeleteNatGatewayOutput) SetNatGatewayId(v string) *DeleteNatGatewayOutput {
-	s.NatGatewayId = &v
-	return s
 }
 
 // Contains the parameters for DeleteNetworkAclEntry.
@@ -25832,30 +22760,6 @@ func (s *DeleteNetworkAclEntryInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteNetworkAclEntryInput) SetDryRun(v bool) *DeleteNetworkAclEntryInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgress sets the Egress field's value.
-func (s *DeleteNetworkAclEntryInput) SetEgress(v bool) *DeleteNetworkAclEntryInput {
-	s.Egress = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *DeleteNetworkAclEntryInput) SetNetworkAclId(v string) *DeleteNetworkAclEntryInput {
-	s.NetworkAclId = &v
-	return s
-}
-
-// SetRuleNumber sets the RuleNumber field's value.
-func (s *DeleteNetworkAclEntryInput) SetRuleNumber(v int64) *DeleteNetworkAclEntryInput {
-	s.RuleNumber = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclEntryOutput
@@ -25921,18 +22825,6 @@ func (s *DeleteNetworkAclInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteNetworkAclInput) SetDryRun(v bool) *DeleteNetworkAclInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *DeleteNetworkAclInput) SetNetworkAclId(v string) *DeleteNetworkAclInput {
-	s.NetworkAclId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclOutput
 type DeleteNetworkAclOutput struct {
 	_ struct{} `type:"structure"`
@@ -25994,18 +22886,6 @@ func (s *DeleteNetworkInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteNetworkInterfaceInput) SetDryRun(v bool) *DeleteNetworkInterfaceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *DeleteNetworkInterfaceInput) SetNetworkInterfaceId(v string) *DeleteNetworkInterfaceInput {
-	s.NetworkInterfaceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfaceOutput
@@ -26075,24 +22955,6 @@ func (s *DeleteNetworkInterfacePermissionInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteNetworkInterfacePermissionInput) SetDryRun(v bool) *DeleteNetworkInterfacePermissionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetForce sets the Force field's value.
-func (s *DeleteNetworkInterfacePermissionInput) SetForce(v bool) *DeleteNetworkInterfacePermissionInput {
-	s.Force = &v
-	return s
-}
-
-// SetNetworkInterfacePermissionId sets the NetworkInterfacePermissionId field's value.
-func (s *DeleteNetworkInterfacePermissionInput) SetNetworkInterfacePermissionId(v string) *DeleteNetworkInterfacePermissionInput {
-	s.NetworkInterfacePermissionId = &v
-	return s
-}
-
 // Contains the output for DeleteNetworkInterfacePermission.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfacePermissionResult
 type DeleteNetworkInterfacePermissionOutput struct {
@@ -26117,12 +22979,6 @@ func (s DeleteNetworkInterfacePermissionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteNetworkInterfacePermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *DeleteNetworkInterfacePermissionOutput) SetReturn(v bool) *DeleteNetworkInterfacePermissionOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for DeletePlacementGroup.
@@ -26164,18 +23020,6 @@ func (s *DeletePlacementGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeletePlacementGroupInput) SetDryRun(v bool) *DeletePlacementGroupInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *DeletePlacementGroupInput) SetGroupName(v string) *DeletePlacementGroupInput {
-	s.GroupName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePlacementGroupOutput
@@ -26249,30 +23093,6 @@ func (s *DeleteRouteInput) Validate() error {
 	return nil
 }
 
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *DeleteRouteInput) SetDestinationCidrBlock(v string) *DeleteRouteInput {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetDestinationIpv6CidrBlock sets the DestinationIpv6CidrBlock field's value.
-func (s *DeleteRouteInput) SetDestinationIpv6CidrBlock(v string) *DeleteRouteInput {
-	s.DestinationIpv6CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteRouteInput) SetDryRun(v bool) *DeleteRouteInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *DeleteRouteInput) SetRouteTableId(v string) *DeleteRouteInput {
-	s.RouteTableId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteOutput
 type DeleteRouteOutput struct {
 	_ struct{} `type:"structure"`
@@ -26336,18 +23156,6 @@ func (s *DeleteRouteTableInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteRouteTableInput) SetDryRun(v bool) *DeleteRouteTableInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *DeleteRouteTableInput) SetRouteTableId(v string) *DeleteRouteTableInput {
-	s.RouteTableId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteTableOutput
 type DeleteRouteTableOutput struct {
 	_ struct{} `type:"structure"`
@@ -26397,24 +23205,6 @@ func (s DeleteSecurityGroupInput) String() string {
 // GoString returns the string representation
 func (s DeleteSecurityGroupInput) GoString() string {
 	return s.String()
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteSecurityGroupInput) SetDryRun(v bool) *DeleteSecurityGroupInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *DeleteSecurityGroupInput) SetGroupId(v string) *DeleteSecurityGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *DeleteSecurityGroupInput) SetGroupName(v string) *DeleteSecurityGroupInput {
-	s.GroupName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroupOutput
@@ -26480,18 +23270,6 @@ func (s *DeleteSnapshotInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteSnapshotInput) SetDryRun(v bool) *DeleteSnapshotInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *DeleteSnapshotInput) SetSnapshotId(v string) *DeleteSnapshotInput {
-	s.SnapshotId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshotOutput
 type DeleteSnapshotOutput struct {
 	_ struct{} `type:"structure"`
@@ -26534,12 +23312,6 @@ func (s DeleteSpotDatafeedSubscriptionInput) String() string {
 // GoString returns the string representation
 func (s DeleteSpotDatafeedSubscriptionInput) GoString() string {
 	return s.String()
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteSpotDatafeedSubscriptionInput) SetDryRun(v bool) *DeleteSpotDatafeedSubscriptionInput {
-	s.DryRun = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSpotDatafeedSubscriptionOutput
@@ -26603,18 +23375,6 @@ func (s *DeleteSubnetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteSubnetInput) SetDryRun(v bool) *DeleteSubnetInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *DeleteSubnetInput) SetSubnetId(v string) *DeleteSubnetInput {
-	s.SubnetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSubnetOutput
@@ -26688,24 +23448,6 @@ func (s *DeleteTagsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteTagsInput) SetDryRun(v bool) *DeleteTagsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *DeleteTagsInput) SetResources(v []string) *DeleteTagsInput {
-	s.Resources = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *DeleteTagsInput) SetTags(v []Tag) *DeleteTagsInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsOutput
 type DeleteTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -26767,18 +23509,6 @@ func (s *DeleteVolumeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVolumeInput) SetDryRun(v bool) *DeleteVolumeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *DeleteVolumeInput) SetVolumeId(v string) *DeleteVolumeInput {
-	s.VolumeId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVolumeOutput
@@ -26843,18 +23573,6 @@ func (s *DeleteVpcEndpointConnectionNotificationsInput) Validate() error {
 	return nil
 }
 
-// SetConnectionNotificationIds sets the ConnectionNotificationIds field's value.
-func (s *DeleteVpcEndpointConnectionNotificationsInput) SetConnectionNotificationIds(v []string) *DeleteVpcEndpointConnectionNotificationsInput {
-	s.ConnectionNotificationIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpcEndpointConnectionNotificationsInput) SetDryRun(v bool) *DeleteVpcEndpointConnectionNotificationsInput {
-	s.DryRun = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointConnectionNotificationsResult
 type DeleteVpcEndpointConnectionNotificationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -26878,12 +23596,6 @@ func (s DeleteVpcEndpointConnectionNotificationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteVpcEndpointConnectionNotificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *DeleteVpcEndpointConnectionNotificationsOutput) SetUnsuccessful(v []UnsuccessfulItem) *DeleteVpcEndpointConnectionNotificationsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurationsRequest
@@ -26926,18 +23638,6 @@ func (s *DeleteVpcEndpointServiceConfigurationsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpcEndpointServiceConfigurationsInput) SetDryRun(v bool) *DeleteVpcEndpointServiceConfigurationsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetServiceIds sets the ServiceIds field's value.
-func (s *DeleteVpcEndpointServiceConfigurationsInput) SetServiceIds(v []string) *DeleteVpcEndpointServiceConfigurationsInput {
-	s.ServiceIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurationsResult
 type DeleteVpcEndpointServiceConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -26961,12 +23661,6 @@ func (s DeleteVpcEndpointServiceConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteVpcEndpointServiceConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *DeleteVpcEndpointServiceConfigurationsOutput) SetUnsuccessful(v []UnsuccessfulItem) *DeleteVpcEndpointServiceConfigurationsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Contains the parameters for DeleteVpcEndpoints.
@@ -27010,18 +23704,6 @@ func (s *DeleteVpcEndpointsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpcEndpointsInput) SetDryRun(v bool) *DeleteVpcEndpointsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcEndpointIds sets the VpcEndpointIds field's value.
-func (s *DeleteVpcEndpointsInput) SetVpcEndpointIds(v []string) *DeleteVpcEndpointsInput {
-	s.VpcEndpointIds = v
-	return s
-}
-
 // Contains the output of DeleteVpcEndpoints.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsResult
 type DeleteVpcEndpointsOutput struct {
@@ -27046,12 +23728,6 @@ func (s DeleteVpcEndpointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteVpcEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *DeleteVpcEndpointsOutput) SetUnsuccessful(v []UnsuccessfulItem) *DeleteVpcEndpointsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Contains the parameters for DeleteVpc.
@@ -27093,18 +23769,6 @@ func (s *DeleteVpcInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpcInput) SetDryRun(v bool) *DeleteVpcInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DeleteVpcInput) SetVpcId(v string) *DeleteVpcInput {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcOutput
@@ -27170,18 +23834,6 @@ func (s *DeleteVpcPeeringConnectionInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpcPeeringConnectionInput) SetDryRun(v bool) *DeleteVpcPeeringConnectionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *DeleteVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *DeleteVpcPeeringConnectionInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Contains the output of DeleteVpcPeeringConnection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcPeeringConnectionResult
 type DeleteVpcPeeringConnectionOutput struct {
@@ -27206,12 +23858,6 @@ func (s DeleteVpcPeeringConnectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *DeleteVpcPeeringConnectionOutput) SetReturn(v bool) *DeleteVpcPeeringConnectionOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for DeleteVpnConnection.
@@ -27253,18 +23899,6 @@ func (s *DeleteVpnConnectionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpnConnectionInput) SetDryRun(v bool) *DeleteVpnConnectionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpnConnectionId sets the VpnConnectionId field's value.
-func (s *DeleteVpnConnectionInput) SetVpnConnectionId(v string) *DeleteVpnConnectionInput {
-	s.VpnConnectionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionOutput
@@ -27333,18 +23967,6 @@ func (s *DeleteVpnConnectionRouteInput) Validate() error {
 	return nil
 }
 
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *DeleteVpnConnectionRouteInput) SetDestinationCidrBlock(v string) *DeleteVpnConnectionRouteInput {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetVpnConnectionId sets the VpnConnectionId field's value.
-func (s *DeleteVpnConnectionRouteInput) SetVpnConnectionId(v string) *DeleteVpnConnectionRouteInput {
-	s.VpnConnectionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRouteOutput
 type DeleteVpnConnectionRouteOutput struct {
 	_ struct{} `type:"structure"`
@@ -27406,18 +24028,6 @@ func (s *DeleteVpnGatewayInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteVpnGatewayInput) SetDryRun(v bool) *DeleteVpnGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpnGatewayId sets the VpnGatewayId field's value.
-func (s *DeleteVpnGatewayInput) SetVpnGatewayId(v string) *DeleteVpnGatewayInput {
-	s.VpnGatewayId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnGatewayOutput
@@ -27483,18 +24093,6 @@ func (s *DeregisterImageInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DeregisterImageInput) SetDryRun(v bool) *DeregisterImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *DeregisterImageInput) SetImageId(v string) *DeregisterImageInput {
-	s.ImageId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImageOutput
 type DeregisterImageOutput struct {
 	_ struct{} `type:"structure"`
@@ -27542,18 +24140,6 @@ func (s DescribeAccountAttributesInput) GoString() string {
 	return s.String()
 }
 
-// SetAttributeNames sets the AttributeNames field's value.
-func (s *DescribeAccountAttributesInput) SetAttributeNames(v []AccountAttributeName) *DescribeAccountAttributesInput {
-	s.AttributeNames = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeAccountAttributesInput) SetDryRun(v bool) *DescribeAccountAttributesInput {
-	s.DryRun = &v
-	return s
-}
-
 // Contains the output of DescribeAccountAttributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountAttributesResult
 type DescribeAccountAttributesOutput struct {
@@ -27578,12 +24164,6 @@ func (s DescribeAccountAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccountAttributes sets the AccountAttributes field's value.
-func (s *DescribeAccountAttributesOutput) SetAccountAttributes(v []AccountAttribute) *DescribeAccountAttributesOutput {
-	s.AccountAttributes = v
-	return s
 }
 
 // Contains the parameters for DescribeAddresses.
@@ -27641,30 +24221,6 @@ func (s DescribeAddressesInput) GoString() string {
 	return s.String()
 }
 
-// SetAllocationIds sets the AllocationIds field's value.
-func (s *DescribeAddressesInput) SetAllocationIds(v []string) *DescribeAddressesInput {
-	s.AllocationIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeAddressesInput) SetDryRun(v bool) *DescribeAddressesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeAddressesInput) SetFilters(v []Filter) *DescribeAddressesInput {
-	s.Filters = v
-	return s
-}
-
-// SetPublicIps sets the PublicIps field's value.
-func (s *DescribeAddressesInput) SetPublicIps(v []string) *DescribeAddressesInput {
-	s.PublicIps = v
-	return s
-}
-
 // Contains the output of DescribeAddresses.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesResult
 type DescribeAddressesOutput struct {
@@ -27689,12 +24245,6 @@ func (s DescribeAddressesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAddressesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAddresses sets the Addresses field's value.
-func (s *DescribeAddressesOutput) SetAddresses(v []Address) *DescribeAddressesOutput {
-	s.Addresses = v
-	return s
 }
 
 // Contains the parameters for DescribeAvailabilityZones.
@@ -27735,24 +24285,6 @@ func (s DescribeAvailabilityZonesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeAvailabilityZonesInput) SetDryRun(v bool) *DescribeAvailabilityZonesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeAvailabilityZonesInput) SetFilters(v []Filter) *DescribeAvailabilityZonesInput {
-	s.Filters = v
-	return s
-}
-
-// SetZoneNames sets the ZoneNames field's value.
-func (s *DescribeAvailabilityZonesInput) SetZoneNames(v []string) *DescribeAvailabilityZonesInput {
-	s.ZoneNames = v
-	return s
-}
-
 // Contains the output of DescribeAvailabiltyZones.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesResult
 type DescribeAvailabilityZonesOutput struct {
@@ -27777,12 +24309,6 @@ func (s DescribeAvailabilityZonesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAvailabilityZonesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DescribeAvailabilityZonesOutput) SetAvailabilityZones(v []AvailabilityZone) *DescribeAvailabilityZonesOutput {
-	s.AvailabilityZones = v
-	return s
 }
 
 // Contains the parameters for DescribeBundleTasks.
@@ -27837,24 +24363,6 @@ func (s DescribeBundleTasksInput) GoString() string {
 	return s.String()
 }
 
-// SetBundleIds sets the BundleIds field's value.
-func (s *DescribeBundleTasksInput) SetBundleIds(v []string) *DescribeBundleTasksInput {
-	s.BundleIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeBundleTasksInput) SetDryRun(v bool) *DescribeBundleTasksInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeBundleTasksInput) SetFilters(v []Filter) *DescribeBundleTasksInput {
-	s.Filters = v
-	return s
-}
-
 // Contains the output of DescribeBundleTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasksResult
 type DescribeBundleTasksOutput struct {
@@ -27879,12 +24387,6 @@ func (s DescribeBundleTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBundleTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBundleTasks sets the BundleTasks field's value.
-func (s *DescribeBundleTasksOutput) SetBundleTasks(v []BundleTask) *DescribeBundleTasksOutput {
-	s.BundleTasks = v
-	return s
 }
 
 // Contains the parameters for DescribeClassicLinkInstances.
@@ -27948,36 +24450,6 @@ func (s DescribeClassicLinkInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeClassicLinkInstancesInput) SetDryRun(v bool) *DescribeClassicLinkInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeClassicLinkInstancesInput) SetFilters(v []Filter) *DescribeClassicLinkInstancesInput {
-	s.Filters = v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeClassicLinkInstancesInput) SetInstanceIds(v []string) *DescribeClassicLinkInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeClassicLinkInstancesInput) SetMaxResults(v int64) *DescribeClassicLinkInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeClassicLinkInstancesInput) SetNextToken(v string) *DescribeClassicLinkInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeClassicLinkInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesResult
 type DescribeClassicLinkInstancesOutput struct {
@@ -28008,18 +24480,6 @@ func (s DescribeClassicLinkInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstances sets the Instances field's value.
-func (s *DescribeClassicLinkInstancesOutput) SetInstances(v []ClassicLinkInstance) *DescribeClassicLinkInstancesOutput {
-	s.Instances = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeClassicLinkInstancesOutput) SetNextToken(v string) *DescribeClassicLinkInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the parameters for DescribeConversionTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasksRequest
 type DescribeConversionTasksInput struct {
@@ -28043,18 +24503,6 @@ func (s DescribeConversionTasksInput) String() string {
 // GoString returns the string representation
 func (s DescribeConversionTasksInput) GoString() string {
 	return s.String()
-}
-
-// SetConversionTaskIds sets the ConversionTaskIds field's value.
-func (s *DescribeConversionTasksInput) SetConversionTaskIds(v []string) *DescribeConversionTasksInput {
-	s.ConversionTaskIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeConversionTasksInput) SetDryRun(v bool) *DescribeConversionTasksInput {
-	s.DryRun = &v
-	return s
 }
 
 // Contains the output for DescribeConversionTasks.
@@ -28081,12 +24529,6 @@ func (s DescribeConversionTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConversionTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConversionTasks sets the ConversionTasks field's value.
-func (s *DescribeConversionTasksOutput) SetConversionTasks(v []ConversionTask) *DescribeConversionTasksOutput {
-	s.ConversionTasks = v
-	return s
 }
 
 // Contains the parameters for DescribeCustomerGateways.
@@ -28149,24 +24591,6 @@ func (s DescribeCustomerGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// SetCustomerGatewayIds sets the CustomerGatewayIds field's value.
-func (s *DescribeCustomerGatewaysInput) SetCustomerGatewayIds(v []string) *DescribeCustomerGatewaysInput {
-	s.CustomerGatewayIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeCustomerGatewaysInput) SetDryRun(v bool) *DescribeCustomerGatewaysInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeCustomerGatewaysInput) SetFilters(v []Filter) *DescribeCustomerGatewaysInput {
-	s.Filters = v
-	return s
-}
-
 // Contains the output of DescribeCustomerGateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGatewaysResult
 type DescribeCustomerGatewaysOutput struct {
@@ -28191,12 +24615,6 @@ func (s DescribeCustomerGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCustomerGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCustomerGateways sets the CustomerGateways field's value.
-func (s *DescribeCustomerGatewaysOutput) SetCustomerGateways(v []CustomerGateway) *DescribeCustomerGatewaysOutput {
-	s.CustomerGateways = v
-	return s
 }
 
 // Contains the parameters for DescribeDhcpOptions.
@@ -28251,24 +24669,6 @@ func (s DescribeDhcpOptionsInput) GoString() string {
 	return s.String()
 }
 
-// SetDhcpOptionsIds sets the DhcpOptionsIds field's value.
-func (s *DescribeDhcpOptionsInput) SetDhcpOptionsIds(v []string) *DescribeDhcpOptionsInput {
-	s.DhcpOptionsIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeDhcpOptionsInput) SetDryRun(v bool) *DescribeDhcpOptionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeDhcpOptionsInput) SetFilters(v []Filter) *DescribeDhcpOptionsInput {
-	s.Filters = v
-	return s
-}
-
 // Contains the output of DescribeDhcpOptions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsResult
 type DescribeDhcpOptionsOutput struct {
@@ -28293,12 +24693,6 @@ func (s DescribeDhcpOptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDhcpOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDhcpOptions sets the DhcpOptions field's value.
-func (s *DescribeDhcpOptionsOutput) SetDhcpOptions(v []DhcpOptions) *DescribeDhcpOptionsOutput {
-	s.DhcpOptions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysRequest
@@ -28334,30 +24728,6 @@ func (s DescribeEgressOnlyInternetGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeEgressOnlyInternetGatewaysInput) SetDryRun(v bool) *DescribeEgressOnlyInternetGatewaysInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgressOnlyInternetGatewayIds sets the EgressOnlyInternetGatewayIds field's value.
-func (s *DescribeEgressOnlyInternetGatewaysInput) SetEgressOnlyInternetGatewayIds(v []string) *DescribeEgressOnlyInternetGatewaysInput {
-	s.EgressOnlyInternetGatewayIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEgressOnlyInternetGatewaysInput) SetMaxResults(v int64) *DescribeEgressOnlyInternetGatewaysInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEgressOnlyInternetGatewaysInput) SetNextToken(v string) *DescribeEgressOnlyInternetGatewaysInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysResult
 type DescribeEgressOnlyInternetGatewaysOutput struct {
 	_ struct{} `type:"structure"`
@@ -28384,18 +24754,6 @@ func (s DescribeEgressOnlyInternetGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEgressOnlyInternetGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEgressOnlyInternetGateways sets the EgressOnlyInternetGateways field's value.
-func (s *DescribeEgressOnlyInternetGatewaysOutput) SetEgressOnlyInternetGateways(v []EgressOnlyInternetGateway) *DescribeEgressOnlyInternetGatewaysOutput {
-	s.EgressOnlyInternetGateways = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEgressOnlyInternetGatewaysOutput) SetNextToken(v string) *DescribeEgressOnlyInternetGatewaysOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpusRequest
@@ -28443,36 +24801,6 @@ func (s DescribeElasticGpusInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeElasticGpusInput) SetDryRun(v bool) *DescribeElasticGpusInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetElasticGpuIds sets the ElasticGpuIds field's value.
-func (s *DescribeElasticGpusInput) SetElasticGpuIds(v []string) *DescribeElasticGpusInput {
-	s.ElasticGpuIds = v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeElasticGpusInput) SetFilters(v []Filter) *DescribeElasticGpusInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeElasticGpusInput) SetMaxResults(v int64) *DescribeElasticGpusInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeElasticGpusInput) SetNextToken(v string) *DescribeElasticGpusInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpusResult
 type DescribeElasticGpusOutput struct {
 	_ struct{} `type:"structure"`
@@ -28507,24 +24835,6 @@ func (s DescribeElasticGpusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetElasticGpuSet sets the ElasticGpuSet field's value.
-func (s *DescribeElasticGpusOutput) SetElasticGpuSet(v []ElasticGpus) *DescribeElasticGpusOutput {
-	s.ElasticGpuSet = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeElasticGpusOutput) SetMaxResults(v int64) *DescribeElasticGpusOutput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeElasticGpusOutput) SetNextToken(v string) *DescribeElasticGpusOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the parameters for DescribeExportTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasksRequest
 type DescribeExportTasksInput struct {
@@ -28542,12 +24852,6 @@ func (s DescribeExportTasksInput) String() string {
 // GoString returns the string representation
 func (s DescribeExportTasksInput) GoString() string {
 	return s.String()
-}
-
-// SetExportTaskIds sets the ExportTaskIds field's value.
-func (s *DescribeExportTasksInput) SetExportTaskIds(v []string) *DescribeExportTasksInput {
-	s.ExportTaskIds = v
-	return s
 }
 
 // Contains the output for DescribeExportTasks.
@@ -28574,12 +24878,6 @@ func (s DescribeExportTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeExportTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExportTasks sets the ExportTasks field's value.
-func (s *DescribeExportTasksOutput) SetExportTasks(v []ExportTask) *DescribeExportTasksOutput {
-	s.ExportTasks = v
-	return s
 }
 
 // Contains the parameters for DescribeFlowLogs.
@@ -28624,30 +24922,6 @@ func (s DescribeFlowLogsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeFlowLogsInput) SetFilter(v []Filter) *DescribeFlowLogsInput {
-	s.Filter = v
-	return s
-}
-
-// SetFlowLogIds sets the FlowLogIds field's value.
-func (s *DescribeFlowLogsInput) SetFlowLogIds(v []string) *DescribeFlowLogsInput {
-	s.FlowLogIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeFlowLogsInput) SetMaxResults(v int64) *DescribeFlowLogsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFlowLogsInput) SetNextToken(v string) *DescribeFlowLogsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeFlowLogs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsResult
 type DescribeFlowLogsOutput struct {
@@ -28676,18 +24950,6 @@ func (s DescribeFlowLogsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFlowLogsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFlowLogs sets the FlowLogs field's value.
-func (s *DescribeFlowLogsOutput) SetFlowLogs(v []FlowLog) *DescribeFlowLogsOutput {
-	s.FlowLogs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFlowLogsOutput) SetNextToken(v string) *DescribeFlowLogsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttributeRequest
@@ -28738,24 +25000,6 @@ func (s *DescribeFpgaImageAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeFpgaImageAttributeInput) SetAttribute(v FpgaImageAttributeName) *DescribeFpgaImageAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeFpgaImageAttributeInput) SetDryRun(v bool) *DescribeFpgaImageAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *DescribeFpgaImageAttributeInput) SetFpgaImageId(v string) *DescribeFpgaImageAttributeInput {
-	s.FpgaImageId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImageAttributeResult
 type DescribeFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -28779,12 +25023,6 @@ func (s DescribeFpgaImageAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFpgaImageAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFpgaImageAttribute sets the FpgaImageAttribute field's value.
-func (s *DescribeFpgaImageAttributeOutput) SetFpgaImageAttribute(v *FpgaImageAttribute) *DescribeFpgaImageAttributeOutput {
-	s.FpgaImageAttribute = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImagesRequest
@@ -28875,42 +25113,6 @@ func (s *DescribeFpgaImagesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeFpgaImagesInput) SetDryRun(v bool) *DescribeFpgaImagesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeFpgaImagesInput) SetFilters(v []Filter) *DescribeFpgaImagesInput {
-	s.Filters = v
-	return s
-}
-
-// SetFpgaImageIds sets the FpgaImageIds field's value.
-func (s *DescribeFpgaImagesInput) SetFpgaImageIds(v []string) *DescribeFpgaImagesInput {
-	s.FpgaImageIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeFpgaImagesInput) SetMaxResults(v int64) *DescribeFpgaImagesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFpgaImagesInput) SetNextToken(v string) *DescribeFpgaImagesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOwners sets the Owners field's value.
-func (s *DescribeFpgaImagesInput) SetOwners(v []string) *DescribeFpgaImagesInput {
-	s.Owners = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFpgaImagesResult
 type DescribeFpgaImagesOutput struct {
 	_ struct{} `type:"structure"`
@@ -28938,18 +25140,6 @@ func (s DescribeFpgaImagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFpgaImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFpgaImages sets the FpgaImages field's value.
-func (s *DescribeFpgaImagesOutput) SetFpgaImages(v []FpgaImage) *DescribeFpgaImagesOutput {
-	s.FpgaImages = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFpgaImagesOutput) SetNextToken(v string) *DescribeFpgaImagesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferingsRequest
@@ -29000,42 +25190,6 @@ func (s DescribeHostReservationOfferingsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeHostReservationOfferingsInput) SetFilter(v []Filter) *DescribeHostReservationOfferingsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxDuration sets the MaxDuration field's value.
-func (s *DescribeHostReservationOfferingsInput) SetMaxDuration(v int64) *DescribeHostReservationOfferingsInput {
-	s.MaxDuration = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeHostReservationOfferingsInput) SetMaxResults(v int64) *DescribeHostReservationOfferingsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMinDuration sets the MinDuration field's value.
-func (s *DescribeHostReservationOfferingsInput) SetMinDuration(v int64) *DescribeHostReservationOfferingsInput {
-	s.MinDuration = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeHostReservationOfferingsInput) SetNextToken(v string) *DescribeHostReservationOfferingsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *DescribeHostReservationOfferingsInput) SetOfferingId(v string) *DescribeHostReservationOfferingsInput {
-	s.OfferingId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferingsResult
 type DescribeHostReservationOfferingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -29063,18 +25217,6 @@ func (s DescribeHostReservationOfferingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeHostReservationOfferingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeHostReservationOfferingsOutput) SetNextToken(v string) *DescribeHostReservationOfferingsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOfferingSet sets the OfferingSet field's value.
-func (s *DescribeHostReservationOfferingsOutput) SetOfferingSet(v []HostOffering) *DescribeHostReservationOfferingsOutput {
-	s.OfferingSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationsRequest
@@ -29114,30 +25256,6 @@ func (s DescribeHostReservationsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeHostReservationsInput) SetFilter(v []Filter) *DescribeHostReservationsInput {
-	s.Filter = v
-	return s
-}
-
-// SetHostReservationIdSet sets the HostReservationIdSet field's value.
-func (s *DescribeHostReservationsInput) SetHostReservationIdSet(v []string) *DescribeHostReservationsInput {
-	s.HostReservationIdSet = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeHostReservationsInput) SetMaxResults(v int64) *DescribeHostReservationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeHostReservationsInput) SetNextToken(v string) *DescribeHostReservationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationsResult
 type DescribeHostReservationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -29165,18 +25283,6 @@ func (s DescribeHostReservationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeHostReservationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHostReservationSet sets the HostReservationSet field's value.
-func (s *DescribeHostReservationsOutput) SetHostReservationSet(v []HostReservation) *DescribeHostReservationsOutput {
-	s.HostReservationSet = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeHostReservationsOutput) SetNextToken(v string) *DescribeHostReservationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeHosts.
@@ -29227,30 +25333,6 @@ func (s DescribeHostsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeHostsInput) SetFilter(v []Filter) *DescribeHostsInput {
-	s.Filter = v
-	return s
-}
-
-// SetHostIds sets the HostIds field's value.
-func (s *DescribeHostsInput) SetHostIds(v []string) *DescribeHostsInput {
-	s.HostIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeHostsInput) SetMaxResults(v int64) *DescribeHostsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeHostsInput) SetNextToken(v string) *DescribeHostsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeHosts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostsResult
 type DescribeHostsOutput struct {
@@ -29279,18 +25361,6 @@ func (s DescribeHostsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeHostsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHosts sets the Hosts field's value.
-func (s *DescribeHostsOutput) SetHosts(v []Host) *DescribeHostsOutput {
-	s.Hosts = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeHostsOutput) SetNextToken(v string) *DescribeHostsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIamInstanceProfileAssociationsRequest
@@ -29342,30 +25412,6 @@ func (s *DescribeIamInstanceProfileAssociationsInput) Validate() error {
 	return nil
 }
 
-// SetAssociationIds sets the AssociationIds field's value.
-func (s *DescribeIamInstanceProfileAssociationsInput) SetAssociationIds(v []string) *DescribeIamInstanceProfileAssociationsInput {
-	s.AssociationIds = v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeIamInstanceProfileAssociationsInput) SetFilters(v []Filter) *DescribeIamInstanceProfileAssociationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeIamInstanceProfileAssociationsInput) SetMaxResults(v int64) *DescribeIamInstanceProfileAssociationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeIamInstanceProfileAssociationsInput) SetNextToken(v string) *DescribeIamInstanceProfileAssociationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIamInstanceProfileAssociationsResult
 type DescribeIamInstanceProfileAssociationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -29395,18 +25441,6 @@ func (s DescribeIamInstanceProfileAssociationsOutput) SDKResponseMetadata() aws.
 	return s.responseMetadata
 }
 
-// SetIamInstanceProfileAssociations sets the IamInstanceProfileAssociations field's value.
-func (s *DescribeIamInstanceProfileAssociationsOutput) SetIamInstanceProfileAssociations(v []IamInstanceProfileAssociation) *DescribeIamInstanceProfileAssociationsOutput {
-	s.IamInstanceProfileAssociations = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeIamInstanceProfileAssociationsOutput) SetNextToken(v string) *DescribeIamInstanceProfileAssociationsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the parameters for DescribeIdFormat.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormatRequest
 type DescribeIdFormatInput struct {
@@ -29424,12 +25458,6 @@ func (s DescribeIdFormatInput) String() string {
 // GoString returns the string representation
 func (s DescribeIdFormatInput) GoString() string {
 	return s.String()
-}
-
-// SetResource sets the Resource field's value.
-func (s *DescribeIdFormatInput) SetResource(v string) *DescribeIdFormatInput {
-	s.Resource = &v
-	return s
 }
 
 // Contains the output of DescribeIdFormat.
@@ -29456,12 +25484,6 @@ func (s DescribeIdFormatOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeIdFormatOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatuses sets the Statuses field's value.
-func (s *DescribeIdFormatOutput) SetStatuses(v []IdFormat) *DescribeIdFormatOutput {
-	s.Statuses = v
-	return s
 }
 
 // Contains the parameters for DescribeIdentityIdFormat.
@@ -29503,18 +25525,6 @@ func (s *DescribeIdentityIdFormatInput) Validate() error {
 	return nil
 }
 
-// SetPrincipalArn sets the PrincipalArn field's value.
-func (s *DescribeIdentityIdFormatInput) SetPrincipalArn(v string) *DescribeIdentityIdFormatInput {
-	s.PrincipalArn = &v
-	return s
-}
-
-// SetResource sets the Resource field's value.
-func (s *DescribeIdentityIdFormatInput) SetResource(v string) *DescribeIdentityIdFormatInput {
-	s.Resource = &v
-	return s
-}
-
 // Contains the output of DescribeIdentityIdFormat.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatResult
 type DescribeIdentityIdFormatOutput struct {
@@ -29539,12 +25549,6 @@ func (s DescribeIdentityIdFormatOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeIdentityIdFormatOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatuses sets the Statuses field's value.
-func (s *DescribeIdentityIdFormatOutput) SetStatuses(v []IdFormat) *DescribeIdentityIdFormatOutput {
-	s.Statuses = v
-	return s
 }
 
 // Contains the parameters for DescribeImageAttribute.
@@ -29600,24 +25604,6 @@ func (s *DescribeImageAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeImageAttributeInput) SetAttribute(v ImageAttributeName) *DescribeImageAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeImageAttributeInput) SetDryRun(v bool) *DescribeImageAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *DescribeImageAttributeInput) SetImageId(v string) *DescribeImageAttributeInput {
-	s.ImageId = &v
-	return s
-}
-
 // Describes an image attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute
 type DescribeImageAttributeOutput struct {
@@ -29664,54 +25650,6 @@ func (s DescribeImageAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeImageAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *DescribeImageAttributeOutput) SetBlockDeviceMappings(v []BlockDeviceMapping) *DescribeImageAttributeOutput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeImageAttributeOutput) SetDescription(v *AttributeValue) *DescribeImageAttributeOutput {
-	s.Description = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *DescribeImageAttributeOutput) SetImageId(v string) *DescribeImageAttributeOutput {
-	s.ImageId = &v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *DescribeImageAttributeOutput) SetKernelId(v *AttributeValue) *DescribeImageAttributeOutput {
-	s.KernelId = v
-	return s
-}
-
-// SetLaunchPermissions sets the LaunchPermissions field's value.
-func (s *DescribeImageAttributeOutput) SetLaunchPermissions(v []LaunchPermission) *DescribeImageAttributeOutput {
-	s.LaunchPermissions = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeImageAttributeOutput) SetProductCodes(v []ProductCode) *DescribeImageAttributeOutput {
-	s.ProductCodes = v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *DescribeImageAttributeOutput) SetRamdiskId(v *AttributeValue) *DescribeImageAttributeOutput {
-	s.RamdiskId = v
-	return s
-}
-
-// SetSriovNetSupport sets the SriovNetSupport field's value.
-func (s *DescribeImageAttributeOutput) SetSriovNetSupport(v *AttributeValue) *DescribeImageAttributeOutput {
-	s.SriovNetSupport = v
-	return s
 }
 
 // Contains the parameters for DescribeImages.
@@ -29836,36 +25774,6 @@ func (s DescribeImagesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeImagesInput) SetDryRun(v bool) *DescribeImagesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetExecutableUsers sets the ExecutableUsers field's value.
-func (s *DescribeImagesInput) SetExecutableUsers(v []string) *DescribeImagesInput {
-	s.ExecutableUsers = v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeImagesInput) SetFilters(v []Filter) *DescribeImagesInput {
-	s.Filters = v
-	return s
-}
-
-// SetImageIds sets the ImageIds field's value.
-func (s *DescribeImagesInput) SetImageIds(v []string) *DescribeImagesInput {
-	s.ImageIds = v
-	return s
-}
-
-// SetOwners sets the Owners field's value.
-func (s *DescribeImagesInput) SetOwners(v []string) *DescribeImagesInput {
-	s.Owners = v
-	return s
-}
-
 // Contains the output of DescribeImages.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesResult
 type DescribeImagesOutput struct {
@@ -29890,12 +25798,6 @@ func (s DescribeImagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImages sets the Images field's value.
-func (s *DescribeImagesOutput) SetImages(v []Image) *DescribeImagesOutput {
-	s.Images = v
-	return s
 }
 
 // Contains the parameters for DescribeImportImageTasks.
@@ -29934,36 +25836,6 @@ func (s DescribeImportImageTasksInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeImportImageTasksInput) SetDryRun(v bool) *DescribeImportImageTasksInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeImportImageTasksInput) SetFilters(v []Filter) *DescribeImportImageTasksInput {
-	s.Filters = v
-	return s
-}
-
-// SetImportTaskIds sets the ImportTaskIds field's value.
-func (s *DescribeImportImageTasksInput) SetImportTaskIds(v []string) *DescribeImportImageTasksInput {
-	s.ImportTaskIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeImportImageTasksInput) SetMaxResults(v int64) *DescribeImportImageTasksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImportImageTasksInput) SetNextToken(v string) *DescribeImportImageTasksInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output for DescribeImportImageTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasksResult
 type DescribeImportImageTasksOutput struct {
@@ -29993,18 +25865,6 @@ func (s DescribeImportImageTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeImportImageTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportImageTasks sets the ImportImageTasks field's value.
-func (s *DescribeImportImageTasksOutput) SetImportImageTasks(v []ImportImageTask) *DescribeImportImageTasksOutput {
-	s.ImportImageTasks = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImportImageTasksOutput) SetNextToken(v string) *DescribeImportImageTasksOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeImportSnapshotTasks.
@@ -30042,36 +25902,6 @@ func (s DescribeImportSnapshotTasksInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeImportSnapshotTasksInput) SetDryRun(v bool) *DescribeImportSnapshotTasksInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeImportSnapshotTasksInput) SetFilters(v []Filter) *DescribeImportSnapshotTasksInput {
-	s.Filters = v
-	return s
-}
-
-// SetImportTaskIds sets the ImportTaskIds field's value.
-func (s *DescribeImportSnapshotTasksInput) SetImportTaskIds(v []string) *DescribeImportSnapshotTasksInput {
-	s.ImportTaskIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeImportSnapshotTasksInput) SetMaxResults(v int64) *DescribeImportSnapshotTasksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImportSnapshotTasksInput) SetNextToken(v string) *DescribeImportSnapshotTasksInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output for DescribeImportSnapshotTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasksResult
 type DescribeImportSnapshotTasksOutput struct {
@@ -30101,18 +25931,6 @@ func (s DescribeImportSnapshotTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeImportSnapshotTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportSnapshotTasks sets the ImportSnapshotTasks field's value.
-func (s *DescribeImportSnapshotTasksOutput) SetImportSnapshotTasks(v []ImportSnapshotTask) *DescribeImportSnapshotTasksOutput {
-	s.ImportSnapshotTasks = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImportSnapshotTasksOutput) SetNextToken(v string) *DescribeImportSnapshotTasksOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeInstanceAttribute.
@@ -30164,24 +25982,6 @@ func (s *DescribeInstanceAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *DescribeInstanceAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeInstanceAttributeInput) SetDryRun(v bool) *DescribeInstanceAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeInstanceAttributeInput) SetInstanceId(v string) *DescribeInstanceAttributeInput {
-	s.InstanceId = &v
-	return s
 }
 
 // Describes an instance attribute.
@@ -30257,96 +26057,6 @@ func (s DescribeInstanceAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *DescribeInstanceAttributeOutput) SetBlockDeviceMappings(v []InstanceBlockDeviceMapping) *DescribeInstanceAttributeOutput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetDisableApiTermination sets the DisableApiTermination field's value.
-func (s *DescribeInstanceAttributeOutput) SetDisableApiTermination(v *AttributeBooleanValue) *DescribeInstanceAttributeOutput {
-	s.DisableApiTermination = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *DescribeInstanceAttributeOutput) SetEbsOptimized(v *AttributeBooleanValue) *DescribeInstanceAttributeOutput {
-	s.EbsOptimized = v
-	return s
-}
-
-// SetEnaSupport sets the EnaSupport field's value.
-func (s *DescribeInstanceAttributeOutput) SetEnaSupport(v *AttributeBooleanValue) *DescribeInstanceAttributeOutput {
-	s.EnaSupport = v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *DescribeInstanceAttributeOutput) SetGroups(v []GroupIdentifier) *DescribeInstanceAttributeOutput {
-	s.Groups = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeInstanceAttributeOutput) SetInstanceId(v string) *DescribeInstanceAttributeOutput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *DescribeInstanceAttributeOutput) SetInstanceInitiatedShutdownBehavior(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.InstanceInitiatedShutdownBehavior = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *DescribeInstanceAttributeOutput) SetInstanceType(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *DescribeInstanceAttributeOutput) SetKernelId(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.KernelId = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeInstanceAttributeOutput) SetProductCodes(v []ProductCode) *DescribeInstanceAttributeOutput {
-	s.ProductCodes = v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *DescribeInstanceAttributeOutput) SetRamdiskId(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.RamdiskId = v
-	return s
-}
-
-// SetRootDeviceName sets the RootDeviceName field's value.
-func (s *DescribeInstanceAttributeOutput) SetRootDeviceName(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.RootDeviceName = v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *DescribeInstanceAttributeOutput) SetSourceDestCheck(v *AttributeBooleanValue) *DescribeInstanceAttributeOutput {
-	s.SourceDestCheck = v
-	return s
-}
-
-// SetSriovNetSupport sets the SriovNetSupport field's value.
-func (s *DescribeInstanceAttributeOutput) SetSriovNetSupport(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.SriovNetSupport = v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *DescribeInstanceAttributeOutput) SetUserData(v *AttributeValue) *DescribeInstanceAttributeOutput {
-	s.UserData = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceCreditSpecificationsRequest
 type DescribeInstanceCreditSpecificationsInput struct {
 	_ struct{} `type:"structure"`
@@ -30389,36 +26099,6 @@ func (s DescribeInstanceCreditSpecificationsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeInstanceCreditSpecificationsInput) SetDryRun(v bool) *DescribeInstanceCreditSpecificationsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeInstanceCreditSpecificationsInput) SetFilters(v []Filter) *DescribeInstanceCreditSpecificationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstanceCreditSpecificationsInput) SetInstanceIds(v []string) *DescribeInstanceCreditSpecificationsInput {
-	s.InstanceIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeInstanceCreditSpecificationsInput) SetMaxResults(v int64) *DescribeInstanceCreditSpecificationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstanceCreditSpecificationsInput) SetNextToken(v string) *DescribeInstanceCreditSpecificationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceCreditSpecificationsResult
 type DescribeInstanceCreditSpecificationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -30446,18 +26126,6 @@ func (s DescribeInstanceCreditSpecificationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeInstanceCreditSpecificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceCreditSpecifications sets the InstanceCreditSpecifications field's value.
-func (s *DescribeInstanceCreditSpecificationsOutput) SetInstanceCreditSpecifications(v []InstanceCreditSpecification) *DescribeInstanceCreditSpecificationsOutput {
-	s.InstanceCreditSpecifications = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstanceCreditSpecificationsOutput) SetNextToken(v string) *DescribeInstanceCreditSpecificationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeInstanceStatus.
@@ -30541,42 +26209,6 @@ func (s DescribeInstanceStatusInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeInstanceStatusInput) SetDryRun(v bool) *DescribeInstanceStatusInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeInstanceStatusInput) SetFilters(v []Filter) *DescribeInstanceStatusInput {
-	s.Filters = v
-	return s
-}
-
-// SetIncludeAllInstances sets the IncludeAllInstances field's value.
-func (s *DescribeInstanceStatusInput) SetIncludeAllInstances(v bool) *DescribeInstanceStatusInput {
-	s.IncludeAllInstances = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstanceStatusInput) SetInstanceIds(v []string) *DescribeInstanceStatusInput {
-	s.InstanceIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeInstanceStatusInput) SetMaxResults(v int64) *DescribeInstanceStatusInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstanceStatusInput) SetNextToken(v string) *DescribeInstanceStatusInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeInstanceStatus.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatusResult
 type DescribeInstanceStatusOutput struct {
@@ -30605,18 +26237,6 @@ func (s DescribeInstanceStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeInstanceStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceStatuses sets the InstanceStatuses field's value.
-func (s *DescribeInstanceStatusOutput) SetInstanceStatuses(v []InstanceStatus) *DescribeInstanceStatusOutput {
-	s.InstanceStatuses = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstanceStatusOutput) SetNextToken(v string) *DescribeInstanceStatusOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeInstances.
@@ -30895,36 +26515,6 @@ func (s DescribeInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeInstancesInput) SetDryRun(v bool) *DescribeInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeInstancesInput) SetFilters(v []Filter) *DescribeInstancesInput {
-	s.Filters = v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstancesInput) SetInstanceIds(v []string) *DescribeInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeInstancesInput) SetMaxResults(v int64) *DescribeInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstancesInput) SetNextToken(v string) *DescribeInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstancesResult
 type DescribeInstancesOutput struct {
@@ -30953,18 +26543,6 @@ func (s DescribeInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstancesOutput) SetNextToken(v string) *DescribeInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReservations sets the Reservations field's value.
-func (s *DescribeInstancesOutput) SetReservations(v []RunInstancesOutput) *DescribeInstancesOutput {
-	s.Reservations = v
-	return s
 }
 
 // Contains the parameters for DescribeInternetGateways.
@@ -31020,24 +26598,6 @@ func (s DescribeInternetGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeInternetGatewaysInput) SetDryRun(v bool) *DescribeInternetGatewaysInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeInternetGatewaysInput) SetFilters(v []Filter) *DescribeInternetGatewaysInput {
-	s.Filters = v
-	return s
-}
-
-// SetInternetGatewayIds sets the InternetGatewayIds field's value.
-func (s *DescribeInternetGatewaysInput) SetInternetGatewayIds(v []string) *DescribeInternetGatewaysInput {
-	s.InternetGatewayIds = v
-	return s
-}
-
 // Contains the output of DescribeInternetGateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysResult
 type DescribeInternetGatewaysOutput struct {
@@ -31062,12 +26622,6 @@ func (s DescribeInternetGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeInternetGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInternetGateways sets the InternetGateways field's value.
-func (s *DescribeInternetGatewaysOutput) SetInternetGateways(v []InternetGateway) *DescribeInternetGatewaysOutput {
-	s.InternetGateways = v
-	return s
 }
 
 // Contains the parameters for DescribeKeyPairs.
@@ -31104,24 +26658,6 @@ func (s DescribeKeyPairsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeKeyPairsInput) SetDryRun(v bool) *DescribeKeyPairsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeKeyPairsInput) SetFilters(v []Filter) *DescribeKeyPairsInput {
-	s.Filters = v
-	return s
-}
-
-// SetKeyNames sets the KeyNames field's value.
-func (s *DescribeKeyPairsInput) SetKeyNames(v []string) *DescribeKeyPairsInput {
-	s.KeyNames = v
-	return s
-}
-
 // Contains the output of DescribeKeyPairs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairsResult
 type DescribeKeyPairsOutput struct {
@@ -31146,12 +26682,6 @@ func (s DescribeKeyPairsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeKeyPairsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyPairs sets the KeyPairs field's value.
-func (s *DescribeKeyPairsOutput) SetKeyPairs(v []KeyPairInfo) *DescribeKeyPairsOutput {
-	s.KeyPairs = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersionsRequest
@@ -31234,60 +26764,6 @@ func (s *DescribeLaunchTemplateVersionsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetDryRun(v bool) *DescribeLaunchTemplateVersionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetFilters(v []Filter) *DescribeLaunchTemplateVersionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetLaunchTemplateId(v string) *DescribeLaunchTemplateVersionsInput {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetLaunchTemplateName(v string) *DescribeLaunchTemplateVersionsInput {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetMaxResults(v int64) *DescribeLaunchTemplateVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMaxVersion sets the MaxVersion field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetMaxVersion(v string) *DescribeLaunchTemplateVersionsInput {
-	s.MaxVersion = &v
-	return s
-}
-
-// SetMinVersion sets the MinVersion field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetMinVersion(v string) *DescribeLaunchTemplateVersionsInput {
-	s.MinVersion = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetNextToken(v string) *DescribeLaunchTemplateVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *DescribeLaunchTemplateVersionsInput) SetVersions(v []string) *DescribeLaunchTemplateVersionsInput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersionsResult
 type DescribeLaunchTemplateVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -31315,18 +26791,6 @@ func (s DescribeLaunchTemplateVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLaunchTemplateVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplateVersions sets the LaunchTemplateVersions field's value.
-func (s *DescribeLaunchTemplateVersionsOutput) SetLaunchTemplateVersions(v []LaunchTemplateVersion) *DescribeLaunchTemplateVersionsOutput {
-	s.LaunchTemplateVersions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeLaunchTemplateVersionsOutput) SetNextToken(v string) *DescribeLaunchTemplateVersionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplatesRequest
@@ -31371,42 +26835,6 @@ func (s DescribeLaunchTemplatesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeLaunchTemplatesInput) SetDryRun(v bool) *DescribeLaunchTemplatesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeLaunchTemplatesInput) SetFilters(v []Filter) *DescribeLaunchTemplatesInput {
-	s.Filters = v
-	return s
-}
-
-// SetLaunchTemplateIds sets the LaunchTemplateIds field's value.
-func (s *DescribeLaunchTemplatesInput) SetLaunchTemplateIds(v []string) *DescribeLaunchTemplatesInput {
-	s.LaunchTemplateIds = v
-	return s
-}
-
-// SetLaunchTemplateNames sets the LaunchTemplateNames field's value.
-func (s *DescribeLaunchTemplatesInput) SetLaunchTemplateNames(v []string) *DescribeLaunchTemplatesInput {
-	s.LaunchTemplateNames = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeLaunchTemplatesInput) SetMaxResults(v int64) *DescribeLaunchTemplatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeLaunchTemplatesInput) SetNextToken(v string) *DescribeLaunchTemplatesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplatesResult
 type DescribeLaunchTemplatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -31434,18 +26862,6 @@ func (s DescribeLaunchTemplatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLaunchTemplatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplates sets the LaunchTemplates field's value.
-func (s *DescribeLaunchTemplatesOutput) SetLaunchTemplates(v []LaunchTemplate) *DescribeLaunchTemplatesOutput {
-	s.LaunchTemplates = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeLaunchTemplatesOutput) SetNextToken(v string) *DescribeLaunchTemplatesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeMovingAddresses.
@@ -31490,36 +26906,6 @@ func (s DescribeMovingAddressesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeMovingAddressesInput) SetDryRun(v bool) *DescribeMovingAddressesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeMovingAddressesInput) SetFilters(v []Filter) *DescribeMovingAddressesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeMovingAddressesInput) SetMaxResults(v int64) *DescribeMovingAddressesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeMovingAddressesInput) SetNextToken(v string) *DescribeMovingAddressesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPublicIps sets the PublicIps field's value.
-func (s *DescribeMovingAddressesInput) SetPublicIps(v []string) *DescribeMovingAddressesInput {
-	s.PublicIps = v
-	return s
-}
-
 // Contains the output of DescribeMovingAddresses.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddressesResult
 type DescribeMovingAddressesOutput struct {
@@ -31548,18 +26934,6 @@ func (s DescribeMovingAddressesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeMovingAddressesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMovingAddressStatuses sets the MovingAddressStatuses field's value.
-func (s *DescribeMovingAddressesOutput) SetMovingAddressStatuses(v []MovingAddressStatus) *DescribeMovingAddressesOutput {
-	s.MovingAddressStatuses = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeMovingAddressesOutput) SetNextToken(v string) *DescribeMovingAddressesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeNatGateways.
@@ -31620,30 +26994,6 @@ func (s DescribeNatGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeNatGatewaysInput) SetFilter(v []Filter) *DescribeNatGatewaysInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeNatGatewaysInput) SetMaxResults(v int64) *DescribeNatGatewaysInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNatGatewayIds sets the NatGatewayIds field's value.
-func (s *DescribeNatGatewaysInput) SetNatGatewayIds(v []string) *DescribeNatGatewaysInput {
-	s.NatGatewayIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeNatGatewaysInput) SetNextToken(v string) *DescribeNatGatewaysInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeNatGateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysResult
 type DescribeNatGatewaysOutput struct {
@@ -31672,18 +27022,6 @@ func (s DescribeNatGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNatGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNatGateways sets the NatGateways field's value.
-func (s *DescribeNatGatewaysOutput) SetNatGateways(v []NatGateway) *DescribeNatGatewaysOutput {
-	s.NatGateways = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeNatGatewaysOutput) SetNextToken(v string) *DescribeNatGatewaysOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeNetworkAcls.
@@ -31770,24 +27108,6 @@ func (s DescribeNetworkAclsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeNetworkAclsInput) SetDryRun(v bool) *DescribeNetworkAclsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeNetworkAclsInput) SetFilters(v []Filter) *DescribeNetworkAclsInput {
-	s.Filters = v
-	return s
-}
-
-// SetNetworkAclIds sets the NetworkAclIds field's value.
-func (s *DescribeNetworkAclsInput) SetNetworkAclIds(v []string) *DescribeNetworkAclsInput {
-	s.NetworkAclIds = v
-	return s
-}
-
 // Contains the output of DescribeNetworkAcls.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsResult
 type DescribeNetworkAclsOutput struct {
@@ -31812,12 +27132,6 @@ func (s DescribeNetworkAclsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNetworkAclsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkAcls sets the NetworkAcls field's value.
-func (s *DescribeNetworkAclsOutput) SetNetworkAcls(v []NetworkAcl) *DescribeNetworkAclsOutput {
-	s.NetworkAcls = v
-	return s
 }
 
 // Contains the parameters for DescribeNetworkInterfaceAttribute.
@@ -31864,24 +27178,6 @@ func (s *DescribeNetworkInterfaceAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeNetworkInterfaceAttributeInput) SetAttribute(v NetworkInterfaceAttribute) *DescribeNetworkInterfaceAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeNetworkInterfaceAttributeInput) SetDryRun(v bool) *DescribeNetworkInterfaceAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *DescribeNetworkInterfaceAttributeInput) SetNetworkInterfaceId(v string) *DescribeNetworkInterfaceAttributeInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
 // Contains the output of DescribeNetworkInterfaceAttribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeResult
 type DescribeNetworkInterfaceAttributeOutput struct {
@@ -31918,36 +27214,6 @@ func (s DescribeNetworkInterfaceAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNetworkInterfaceAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachment sets the Attachment field's value.
-func (s *DescribeNetworkInterfaceAttributeOutput) SetAttachment(v *NetworkInterfaceAttachment) *DescribeNetworkInterfaceAttributeOutput {
-	s.Attachment = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeNetworkInterfaceAttributeOutput) SetDescription(v *AttributeValue) *DescribeNetworkInterfaceAttributeOutput {
-	s.Description = v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *DescribeNetworkInterfaceAttributeOutput) SetGroups(v []GroupIdentifier) *DescribeNetworkInterfaceAttributeOutput {
-	s.Groups = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *DescribeNetworkInterfaceAttributeOutput) SetNetworkInterfaceId(v string) *DescribeNetworkInterfaceAttributeOutput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *DescribeNetworkInterfaceAttributeOutput) SetSourceDestCheck(v *AttributeBooleanValue) *DescribeNetworkInterfaceAttributeOutput {
-	s.SourceDestCheck = v
-	return s
 }
 
 // Contains the parameters for DescribeNetworkInterfacePermissions.
@@ -31993,30 +27259,6 @@ func (s DescribeNetworkInterfacePermissionsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeNetworkInterfacePermissionsInput) SetFilters(v []Filter) *DescribeNetworkInterfacePermissionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeNetworkInterfacePermissionsInput) SetMaxResults(v int64) *DescribeNetworkInterfacePermissionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNetworkInterfacePermissionIds sets the NetworkInterfacePermissionIds field's value.
-func (s *DescribeNetworkInterfacePermissionsInput) SetNetworkInterfacePermissionIds(v []string) *DescribeNetworkInterfacePermissionsInput {
-	s.NetworkInterfacePermissionIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeNetworkInterfacePermissionsInput) SetNextToken(v string) *DescribeNetworkInterfacePermissionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output for DescribeNetworkInterfacePermissions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsResult
 type DescribeNetworkInterfacePermissionsOutput struct {
@@ -32044,18 +27286,6 @@ func (s DescribeNetworkInterfacePermissionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNetworkInterfacePermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkInterfacePermissions sets the NetworkInterfacePermissions field's value.
-func (s *DescribeNetworkInterfacePermissionsOutput) SetNetworkInterfacePermissions(v []NetworkInterfacePermission) *DescribeNetworkInterfacePermissionsOutput {
-	s.NetworkInterfacePermissions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeNetworkInterfacePermissionsOutput) SetNextToken(v string) *DescribeNetworkInterfacePermissionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeNetworkInterfaces.
@@ -32198,24 +27428,6 @@ func (s DescribeNetworkInterfacesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeNetworkInterfacesInput) SetDryRun(v bool) *DescribeNetworkInterfacesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeNetworkInterfacesInput) SetFilters(v []Filter) *DescribeNetworkInterfacesInput {
-	s.Filters = v
-	return s
-}
-
-// SetNetworkInterfaceIds sets the NetworkInterfaceIds field's value.
-func (s *DescribeNetworkInterfacesInput) SetNetworkInterfaceIds(v []string) *DescribeNetworkInterfacesInput {
-	s.NetworkInterfaceIds = v
-	return s
-}
-
 // Contains the output of DescribeNetworkInterfaces.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesResult
 type DescribeNetworkInterfacesOutput struct {
@@ -32240,12 +27452,6 @@ func (s DescribeNetworkInterfacesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNetworkInterfacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *DescribeNetworkInterfacesOutput) SetNetworkInterfaces(v []NetworkInterface) *DescribeNetworkInterfacesOutput {
-	s.NetworkInterfaces = v
-	return s
 }
 
 // Contains the parameters for DescribePlacementGroups.
@@ -32285,24 +27491,6 @@ func (s DescribePlacementGroupsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribePlacementGroupsInput) SetDryRun(v bool) *DescribePlacementGroupsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribePlacementGroupsInput) SetFilters(v []Filter) *DescribePlacementGroupsInput {
-	s.Filters = v
-	return s
-}
-
-// SetGroupNames sets the GroupNames field's value.
-func (s *DescribePlacementGroupsInput) SetGroupNames(v []string) *DescribePlacementGroupsInput {
-	s.GroupNames = v
-	return s
-}
-
 // Contains the output of DescribePlacementGroups.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroupsResult
 type DescribePlacementGroupsOutput struct {
@@ -32327,12 +27515,6 @@ func (s DescribePlacementGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribePlacementGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPlacementGroups sets the PlacementGroups field's value.
-func (s *DescribePlacementGroupsOutput) SetPlacementGroups(v []PlacementGroup) *DescribePlacementGroupsOutput {
-	s.PlacementGroups = v
-	return s
 }
 
 // Contains the parameters for DescribePrefixLists.
@@ -32379,36 +27561,6 @@ func (s DescribePrefixListsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribePrefixListsInput) SetDryRun(v bool) *DescribePrefixListsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribePrefixListsInput) SetFilters(v []Filter) *DescribePrefixListsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribePrefixListsInput) SetMaxResults(v int64) *DescribePrefixListsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribePrefixListsInput) SetNextToken(v string) *DescribePrefixListsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPrefixListIds sets the PrefixListIds field's value.
-func (s *DescribePrefixListsInput) SetPrefixListIds(v []string) *DescribePrefixListsInput {
-	s.PrefixListIds = v
-	return s
-}
-
 // Contains the output of DescribePrefixLists.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixListsResult
 type DescribePrefixListsOutput struct {
@@ -32437,18 +27589,6 @@ func (s DescribePrefixListsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribePrefixListsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribePrefixListsOutput) SetNextToken(v string) *DescribePrefixListsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPrefixLists sets the PrefixLists field's value.
-func (s *DescribePrefixListsOutput) SetPrefixLists(v []PrefixList) *DescribePrefixListsOutput {
-	s.PrefixLists = v
-	return s
 }
 
 // Contains the parameters for DescribeRegions.
@@ -32483,24 +27623,6 @@ func (s DescribeRegionsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeRegionsInput) SetDryRun(v bool) *DescribeRegionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeRegionsInput) SetFilters(v []Filter) *DescribeRegionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetRegionNames sets the RegionNames field's value.
-func (s *DescribeRegionsInput) SetRegionNames(v []string) *DescribeRegionsInput {
-	s.RegionNames = v
-	return s
-}
-
 // Contains the output of DescribeRegions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsResult
 type DescribeRegionsOutput struct {
@@ -32525,12 +27647,6 @@ func (s DescribeRegionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRegionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRegions sets the Regions field's value.
-func (s *DescribeRegionsOutput) SetRegions(v []Region) *DescribeRegionsOutput {
-	s.Regions = v
-	return s
 }
 
 // Contains the parameters for DescribeReservedInstances.
@@ -32623,36 +27739,6 @@ func (s DescribeReservedInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeReservedInstancesInput) SetDryRun(v bool) *DescribeReservedInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesInput) SetFilters(v []Filter) *DescribeReservedInstancesInput {
-	s.Filters = v
-	return s
-}
-
-// SetOfferingClass sets the OfferingClass field's value.
-func (s *DescribeReservedInstancesInput) SetOfferingClass(v OfferingClassType) *DescribeReservedInstancesInput {
-	s.OfferingClass = v
-	return s
-}
-
-// SetOfferingType sets the OfferingType field's value.
-func (s *DescribeReservedInstancesInput) SetOfferingType(v OfferingTypeValues) *DescribeReservedInstancesInput {
-	s.OfferingType = v
-	return s
-}
-
-// SetReservedInstancesIds sets the ReservedInstancesIds field's value.
-func (s *DescribeReservedInstancesInput) SetReservedInstancesIds(v []string) *DescribeReservedInstancesInput {
-	s.ReservedInstancesIds = v
-	return s
-}
-
 // Contains the parameters for DescribeReservedInstancesListings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListingsRequest
 type DescribeReservedInstancesListingsInput struct {
@@ -32687,24 +27773,6 @@ func (s DescribeReservedInstancesListingsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesListingsInput) SetFilters(v []Filter) *DescribeReservedInstancesListingsInput {
-	s.Filters = v
-	return s
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *DescribeReservedInstancesListingsInput) SetReservedInstancesId(v string) *DescribeReservedInstancesListingsInput {
-	s.ReservedInstancesId = &v
-	return s
-}
-
-// SetReservedInstancesListingId sets the ReservedInstancesListingId field's value.
-func (s *DescribeReservedInstancesListingsInput) SetReservedInstancesListingId(v string) *DescribeReservedInstancesListingsInput {
-	s.ReservedInstancesListingId = &v
-	return s
-}
-
 // Contains the output of DescribeReservedInstancesListings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListingsResult
 type DescribeReservedInstancesListingsOutput struct {
@@ -32729,12 +27797,6 @@ func (s DescribeReservedInstancesListingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReservedInstancesListingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedInstancesListings sets the ReservedInstancesListings field's value.
-func (s *DescribeReservedInstancesListingsOutput) SetReservedInstancesListings(v []ReservedInstancesListing) *DescribeReservedInstancesListingsOutput {
-	s.ReservedInstancesListings = v
-	return s
 }
 
 // Contains the parameters for DescribeReservedInstancesModifications.
@@ -32795,24 +27857,6 @@ func (s DescribeReservedInstancesModificationsInput) GoString() string {
 	return s.String()
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesModificationsInput) SetFilters(v []Filter) *DescribeReservedInstancesModificationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeReservedInstancesModificationsInput) SetNextToken(v string) *DescribeReservedInstancesModificationsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReservedInstancesModificationIds sets the ReservedInstancesModificationIds field's value.
-func (s *DescribeReservedInstancesModificationsInput) SetReservedInstancesModificationIds(v []string) *DescribeReservedInstancesModificationsInput {
-	s.ReservedInstancesModificationIds = v
-	return s
-}
-
 // Contains the output of DescribeReservedInstancesModifications.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsResult
 type DescribeReservedInstancesModificationsOutput struct {
@@ -32841,18 +27885,6 @@ func (s DescribeReservedInstancesModificationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReservedInstancesModificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeReservedInstancesModificationsOutput) SetNextToken(v string) *DescribeReservedInstancesModificationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReservedInstancesModifications sets the ReservedInstancesModifications field's value.
-func (s *DescribeReservedInstancesModificationsOutput) SetReservedInstancesModifications(v []ReservedInstancesModification) *DescribeReservedInstancesModificationsOutput {
-	s.ReservedInstancesModifications = v
-	return s
 }
 
 // Contains the parameters for DescribeReservedInstancesOfferings.
@@ -32975,96 +28007,6 @@ func (s DescribeReservedInstancesOfferingsInput) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetAvailabilityZone(v string) *DescribeReservedInstancesOfferingsInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetDryRun(v bool) *DescribeReservedInstancesOfferingsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetFilters(v []Filter) *DescribeReservedInstancesOfferingsInput {
-	s.Filters = v
-	return s
-}
-
-// SetIncludeMarketplace sets the IncludeMarketplace field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetIncludeMarketplace(v bool) *DescribeReservedInstancesOfferingsInput {
-	s.IncludeMarketplace = &v
-	return s
-}
-
-// SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetInstanceTenancy(v Tenancy) *DescribeReservedInstancesOfferingsInput {
-	s.InstanceTenancy = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetInstanceType(v InstanceType) *DescribeReservedInstancesOfferingsInput {
-	s.InstanceType = v
-	return s
-}
-
-// SetMaxDuration sets the MaxDuration field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetMaxDuration(v int64) *DescribeReservedInstancesOfferingsInput {
-	s.MaxDuration = &v
-	return s
-}
-
-// SetMaxInstanceCount sets the MaxInstanceCount field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetMaxInstanceCount(v int64) *DescribeReservedInstancesOfferingsInput {
-	s.MaxInstanceCount = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetMaxResults(v int64) *DescribeReservedInstancesOfferingsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMinDuration sets the MinDuration field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetMinDuration(v int64) *DescribeReservedInstancesOfferingsInput {
-	s.MinDuration = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetNextToken(v string) *DescribeReservedInstancesOfferingsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOfferingClass sets the OfferingClass field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetOfferingClass(v OfferingClassType) *DescribeReservedInstancesOfferingsInput {
-	s.OfferingClass = v
-	return s
-}
-
-// SetOfferingType sets the OfferingType field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetOfferingType(v OfferingTypeValues) *DescribeReservedInstancesOfferingsInput {
-	s.OfferingType = v
-	return s
-}
-
-// SetProductDescription sets the ProductDescription field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetProductDescription(v RIProductDescription) *DescribeReservedInstancesOfferingsInput {
-	s.ProductDescription = v
-	return s
-}
-
-// SetReservedInstancesOfferingIds sets the ReservedInstancesOfferingIds field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetReservedInstancesOfferingIds(v []string) *DescribeReservedInstancesOfferingsInput {
-	s.ReservedInstancesOfferingIds = v
-	return s
-}
-
 // Contains the output of DescribeReservedInstancesOfferings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferingsResult
 type DescribeReservedInstancesOfferingsOutput struct {
@@ -33095,18 +28037,6 @@ func (s DescribeReservedInstancesOfferingsOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeReservedInstancesOfferingsOutput) SetNextToken(v string) *DescribeReservedInstancesOfferingsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReservedInstancesOfferings sets the ReservedInstancesOfferings field's value.
-func (s *DescribeReservedInstancesOfferingsOutput) SetReservedInstancesOfferings(v []ReservedInstancesOffering) *DescribeReservedInstancesOfferingsOutput {
-	s.ReservedInstancesOfferings = v
-	return s
-}
-
 // Contains the output for DescribeReservedInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesResult
 type DescribeReservedInstancesOutput struct {
@@ -33131,12 +28061,6 @@ func (s DescribeReservedInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReservedInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedInstances sets the ReservedInstances field's value.
-func (s *DescribeReservedInstancesOutput) SetReservedInstances(v []ReservedInstances) *DescribeReservedInstancesOutput {
-	s.ReservedInstances = v
-	return s
 }
 
 // Contains the parameters for DescribeRouteTables.
@@ -33234,24 +28158,6 @@ func (s DescribeRouteTablesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeRouteTablesInput) SetDryRun(v bool) *DescribeRouteTablesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeRouteTablesInput) SetFilters(v []Filter) *DescribeRouteTablesInput {
-	s.Filters = v
-	return s
-}
-
-// SetRouteTableIds sets the RouteTableIds field's value.
-func (s *DescribeRouteTablesInput) SetRouteTableIds(v []string) *DescribeRouteTablesInput {
-	s.RouteTableIds = v
-	return s
-}
-
 // Contains the output of DescribeRouteTables.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesResult
 type DescribeRouteTablesOutput struct {
@@ -33276,12 +28182,6 @@ func (s DescribeRouteTablesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRouteTablesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRouteTables sets the RouteTables field's value.
-func (s *DescribeRouteTablesOutput) SetRouteTables(v []RouteTable) *DescribeRouteTablesOutput {
-	s.RouteTables = v
-	return s
 }
 
 // Contains the parameters for DescribeScheduledInstanceAvailability.
@@ -33368,54 +28268,6 @@ func (s *DescribeScheduledInstanceAvailabilityInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetDryRun(v bool) *DescribeScheduledInstanceAvailabilityInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetFilters(v []Filter) *DescribeScheduledInstanceAvailabilityInput {
-	s.Filters = v
-	return s
-}
-
-// SetFirstSlotStartTimeRange sets the FirstSlotStartTimeRange field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetFirstSlotStartTimeRange(v *SlotDateTimeRangeRequest) *DescribeScheduledInstanceAvailabilityInput {
-	s.FirstSlotStartTimeRange = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetMaxResults(v int64) *DescribeScheduledInstanceAvailabilityInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMaxSlotDurationInHours sets the MaxSlotDurationInHours field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetMaxSlotDurationInHours(v int64) *DescribeScheduledInstanceAvailabilityInput {
-	s.MaxSlotDurationInHours = &v
-	return s
-}
-
-// SetMinSlotDurationInHours sets the MinSlotDurationInHours field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetMinSlotDurationInHours(v int64) *DescribeScheduledInstanceAvailabilityInput {
-	s.MinSlotDurationInHours = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetNextToken(v string) *DescribeScheduledInstanceAvailabilityInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRecurrence sets the Recurrence field's value.
-func (s *DescribeScheduledInstanceAvailabilityInput) SetRecurrence(v *ScheduledInstanceRecurrenceRequest) *DescribeScheduledInstanceAvailabilityInput {
-	s.Recurrence = v
-	return s
-}
-
 // Contains the output of DescribeScheduledInstanceAvailability.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailabilityResult
 type DescribeScheduledInstanceAvailabilityOutput struct {
@@ -33444,18 +28296,6 @@ func (s DescribeScheduledInstanceAvailabilityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScheduledInstanceAvailabilityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScheduledInstanceAvailabilityOutput) SetNextToken(v string) *DescribeScheduledInstanceAvailabilityOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScheduledInstanceAvailabilitySet sets the ScheduledInstanceAvailabilitySet field's value.
-func (s *DescribeScheduledInstanceAvailabilityOutput) SetScheduledInstanceAvailabilitySet(v []ScheduledInstanceAvailability) *DescribeScheduledInstanceAvailabilityOutput {
-	s.ScheduledInstanceAvailabilitySet = v
-	return s
 }
 
 // Contains the parameters for DescribeScheduledInstances.
@@ -33505,42 +28345,6 @@ func (s DescribeScheduledInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeScheduledInstancesInput) SetDryRun(v bool) *DescribeScheduledInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeScheduledInstancesInput) SetFilters(v []Filter) *DescribeScheduledInstancesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeScheduledInstancesInput) SetMaxResults(v int64) *DescribeScheduledInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScheduledInstancesInput) SetNextToken(v string) *DescribeScheduledInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScheduledInstanceIds sets the ScheduledInstanceIds field's value.
-func (s *DescribeScheduledInstancesInput) SetScheduledInstanceIds(v []string) *DescribeScheduledInstancesInput {
-	s.ScheduledInstanceIds = v
-	return s
-}
-
-// SetSlotStartTimeRange sets the SlotStartTimeRange field's value.
-func (s *DescribeScheduledInstancesInput) SetSlotStartTimeRange(v *SlotStartTimeRangeRequest) *DescribeScheduledInstancesInput {
-	s.SlotStartTimeRange = v
-	return s
-}
-
 // Contains the output of DescribeScheduledInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstancesResult
 type DescribeScheduledInstancesOutput struct {
@@ -33569,18 +28373,6 @@ func (s DescribeScheduledInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScheduledInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScheduledInstancesOutput) SetNextToken(v string) *DescribeScheduledInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScheduledInstanceSet sets the ScheduledInstanceSet field's value.
-func (s *DescribeScheduledInstancesOutput) SetScheduledInstanceSet(v []ScheduledInstance) *DescribeScheduledInstancesOutput {
-	s.ScheduledInstanceSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferencesRequest
@@ -33623,18 +28415,6 @@ func (s *DescribeSecurityGroupReferencesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSecurityGroupReferencesInput) SetDryRun(v bool) *DescribeSecurityGroupReferencesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *DescribeSecurityGroupReferencesInput) SetGroupId(v []string) *DescribeSecurityGroupReferencesInput {
-	s.GroupId = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferencesResult
 type DescribeSecurityGroupReferencesOutput struct {
 	_ struct{} `type:"structure"`
@@ -33658,12 +28438,6 @@ func (s DescribeSecurityGroupReferencesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSecurityGroupReferencesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSecurityGroupReferenceSet sets the SecurityGroupReferenceSet field's value.
-func (s *DescribeSecurityGroupReferencesOutput) SetSecurityGroupReferenceSet(v []SecurityGroupReference) *DescribeSecurityGroupReferencesOutput {
-	s.SecurityGroupReferenceSet = v
-	return s
 }
 
 // Contains the parameters for DescribeSecurityGroups.
@@ -33783,42 +28557,6 @@ func (s DescribeSecurityGroupsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSecurityGroupsInput) SetDryRun(v bool) *DescribeSecurityGroupsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeSecurityGroupsInput) SetFilters(v []Filter) *DescribeSecurityGroupsInput {
-	s.Filters = v
-	return s
-}
-
-// SetGroupIds sets the GroupIds field's value.
-func (s *DescribeSecurityGroupsInput) SetGroupIds(v []string) *DescribeSecurityGroupsInput {
-	s.GroupIds = v
-	return s
-}
-
-// SetGroupNames sets the GroupNames field's value.
-func (s *DescribeSecurityGroupsInput) SetGroupNames(v []string) *DescribeSecurityGroupsInput {
-	s.GroupNames = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSecurityGroupsInput) SetMaxResults(v int64) *DescribeSecurityGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSecurityGroupsInput) SetNextToken(v string) *DescribeSecurityGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeSecurityGroups.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsResult
 type DescribeSecurityGroupsOutput struct {
@@ -33847,18 +28585,6 @@ func (s DescribeSecurityGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSecurityGroupsOutput) SetNextToken(v string) *DescribeSecurityGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *DescribeSecurityGroupsOutput) SetSecurityGroups(v []SecurityGroup) *DescribeSecurityGroupsOutput {
-	s.SecurityGroups = v
-	return s
 }
 
 // Contains the parameters for DescribeSnapshotAttribute.
@@ -33910,24 +28636,6 @@ func (s *DescribeSnapshotAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeSnapshotAttributeInput) SetAttribute(v SnapshotAttributeName) *DescribeSnapshotAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSnapshotAttributeInput) SetDryRun(v bool) *DescribeSnapshotAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *DescribeSnapshotAttributeInput) SetSnapshotId(v string) *DescribeSnapshotAttributeInput {
-	s.SnapshotId = &v
-	return s
-}
-
 // Contains the output of DescribeSnapshotAttribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeResult
 type DescribeSnapshotAttributeOutput struct {
@@ -33958,24 +28666,6 @@ func (s DescribeSnapshotAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSnapshotAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreateVolumePermissions sets the CreateVolumePermissions field's value.
-func (s *DescribeSnapshotAttributeOutput) SetCreateVolumePermissions(v []CreateVolumePermission) *DescribeSnapshotAttributeOutput {
-	s.CreateVolumePermissions = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeSnapshotAttributeOutput) SetProductCodes(v []ProductCode) *DescribeSnapshotAttributeOutput {
-	s.ProductCodes = v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *DescribeSnapshotAttributeOutput) SetSnapshotId(v string) *DescribeSnapshotAttributeOutput {
-	s.SnapshotId = &v
-	return s
 }
 
 // Contains the parameters for DescribeSnapshots.
@@ -34070,48 +28760,6 @@ func (s DescribeSnapshotsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSnapshotsInput) SetDryRun(v bool) *DescribeSnapshotsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeSnapshotsInput) SetFilters(v []Filter) *DescribeSnapshotsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSnapshotsInput) SetMaxResults(v int64) *DescribeSnapshotsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSnapshotsInput) SetNextToken(v string) *DescribeSnapshotsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOwnerIds sets the OwnerIds field's value.
-func (s *DescribeSnapshotsInput) SetOwnerIds(v []string) *DescribeSnapshotsInput {
-	s.OwnerIds = v
-	return s
-}
-
-// SetRestorableByUserIds sets the RestorableByUserIds field's value.
-func (s *DescribeSnapshotsInput) SetRestorableByUserIds(v []string) *DescribeSnapshotsInput {
-	s.RestorableByUserIds = v
-	return s
-}
-
-// SetSnapshotIds sets the SnapshotIds field's value.
-func (s *DescribeSnapshotsInput) SetSnapshotIds(v []string) *DescribeSnapshotsInput {
-	s.SnapshotIds = v
-	return s
-}
-
 // Contains the output of DescribeSnapshots.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotsResult
 type DescribeSnapshotsOutput struct {
@@ -34144,18 +28792,6 @@ func (s DescribeSnapshotsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSnapshotsOutput) SetNextToken(v string) *DescribeSnapshotsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSnapshots sets the Snapshots field's value.
-func (s *DescribeSnapshotsOutput) SetSnapshots(v []CreateSnapshotOutput) *DescribeSnapshotsOutput {
-	s.Snapshots = v
-	return s
-}
-
 // Contains the parameters for DescribeSpotDatafeedSubscription.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotDatafeedSubscriptionRequest
 type DescribeSpotDatafeedSubscriptionInput struct {
@@ -34176,12 +28812,6 @@ func (s DescribeSpotDatafeedSubscriptionInput) String() string {
 // GoString returns the string representation
 func (s DescribeSpotDatafeedSubscriptionInput) GoString() string {
 	return s.String()
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSpotDatafeedSubscriptionInput) SetDryRun(v bool) *DescribeSpotDatafeedSubscriptionInput {
-	s.DryRun = &v
-	return s
 }
 
 // Contains the output of DescribeSpotDatafeedSubscription.
@@ -34208,12 +28838,6 @@ func (s DescribeSpotDatafeedSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSpotDatafeedSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSpotDatafeedSubscription sets the SpotDatafeedSubscription field's value.
-func (s *DescribeSpotDatafeedSubscriptionOutput) SetSpotDatafeedSubscription(v *SpotDatafeedSubscription) *DescribeSpotDatafeedSubscriptionOutput {
-	s.SpotDatafeedSubscription = v
-	return s
 }
 
 // Contains the parameters for DescribeSpotFleetInstances.
@@ -34265,30 +28889,6 @@ func (s *DescribeSpotFleetInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSpotFleetInstancesInput) SetDryRun(v bool) *DescribeSpotFleetInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSpotFleetInstancesInput) SetMaxResults(v int64) *DescribeSpotFleetInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotFleetInstancesInput) SetNextToken(v string) *DescribeSpotFleetInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *DescribeSpotFleetInstancesInput) SetSpotFleetRequestId(v string) *DescribeSpotFleetInstancesInput {
-	s.SpotFleetRequestId = &v
-	return s
-}
-
 // Contains the output of DescribeSpotFleetInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesResponse
 type DescribeSpotFleetInstancesOutput struct {
@@ -34325,24 +28925,6 @@ func (s DescribeSpotFleetInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSpotFleetInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetActiveInstances sets the ActiveInstances field's value.
-func (s *DescribeSpotFleetInstancesOutput) SetActiveInstances(v []ActiveInstance) *DescribeSpotFleetInstancesOutput {
-	s.ActiveInstances = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotFleetInstancesOutput) SetNextToken(v string) *DescribeSpotFleetInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *DescribeSpotFleetInstancesOutput) SetSpotFleetRequestId(v string) *DescribeSpotFleetInstancesOutput {
-	s.SpotFleetRequestId = &v
-	return s
 }
 
 // Contains the parameters for DescribeSpotFleetRequestHistory.
@@ -34406,42 +28988,6 @@ func (s *DescribeSpotFleetRequestHistoryInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetDryRun(v bool) *DescribeSpotFleetRequestHistoryInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEventType sets the EventType field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetEventType(v EventType) *DescribeSpotFleetRequestHistoryInput {
-	s.EventType = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetMaxResults(v int64) *DescribeSpotFleetRequestHistoryInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetNextToken(v string) *DescribeSpotFleetRequestHistoryInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetSpotFleetRequestId(v string) *DescribeSpotFleetRequestHistoryInput {
-	s.SpotFleetRequestId = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetStartTime(v time.Time) *DescribeSpotFleetRequestHistoryInput {
-	s.StartTime = &v
-	return s
-}
-
 // Contains the output of DescribeSpotFleetRequestHistory.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryResponse
 type DescribeSpotFleetRequestHistoryOutput struct {
@@ -34492,36 +29038,6 @@ func (s DescribeSpotFleetRequestHistoryOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetHistoryRecords sets the HistoryRecords field's value.
-func (s *DescribeSpotFleetRequestHistoryOutput) SetHistoryRecords(v []HistoryRecord) *DescribeSpotFleetRequestHistoryOutput {
-	s.HistoryRecords = v
-	return s
-}
-
-// SetLastEvaluatedTime sets the LastEvaluatedTime field's value.
-func (s *DescribeSpotFleetRequestHistoryOutput) SetLastEvaluatedTime(v time.Time) *DescribeSpotFleetRequestHistoryOutput {
-	s.LastEvaluatedTime = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotFleetRequestHistoryOutput) SetNextToken(v string) *DescribeSpotFleetRequestHistoryOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *DescribeSpotFleetRequestHistoryOutput) SetSpotFleetRequestId(v string) *DescribeSpotFleetRequestHistoryOutput {
-	s.SpotFleetRequestId = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeSpotFleetRequestHistoryOutput) SetStartTime(v time.Time) *DescribeSpotFleetRequestHistoryOutput {
-	s.StartTime = &v
-	return s
-}
-
 // Contains the parameters for DescribeSpotFleetRequests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsRequest
 type DescribeSpotFleetRequestsInput struct {
@@ -34555,30 +29071,6 @@ func (s DescribeSpotFleetRequestsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSpotFleetRequestsInput) SetDryRun(v bool) *DescribeSpotFleetRequestsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSpotFleetRequestsInput) SetMaxResults(v int64) *DescribeSpotFleetRequestsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotFleetRequestsInput) SetNextToken(v string) *DescribeSpotFleetRequestsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotFleetRequestIds sets the SpotFleetRequestIds field's value.
-func (s *DescribeSpotFleetRequestsInput) SetSpotFleetRequestIds(v []string) *DescribeSpotFleetRequestsInput {
-	s.SpotFleetRequestIds = v
-	return s
-}
-
 // Contains the output of DescribeSpotFleetRequests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsResponse
 type DescribeSpotFleetRequestsOutput struct {
@@ -34609,18 +29101,6 @@ func (s DescribeSpotFleetRequestsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSpotFleetRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotFleetRequestsOutput) SetNextToken(v string) *DescribeSpotFleetRequestsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotFleetRequestConfigs sets the SpotFleetRequestConfigs field's value.
-func (s *DescribeSpotFleetRequestsOutput) SetSpotFleetRequestConfigs(v []SpotFleetRequestConfig) *DescribeSpotFleetRequestsOutput {
-	s.SpotFleetRequestConfigs = v
-	return s
 }
 
 // Contains the parameters for DescribeSpotInstanceRequests.
@@ -34760,24 +29240,6 @@ func (s DescribeSpotInstanceRequestsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSpotInstanceRequestsInput) SetDryRun(v bool) *DescribeSpotInstanceRequestsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeSpotInstanceRequestsInput) SetFilters(v []Filter) *DescribeSpotInstanceRequestsInput {
-	s.Filters = v
-	return s
-}
-
-// SetSpotInstanceRequestIds sets the SpotInstanceRequestIds field's value.
-func (s *DescribeSpotInstanceRequestsInput) SetSpotInstanceRequestIds(v []string) *DescribeSpotInstanceRequestsInput {
-	s.SpotInstanceRequestIds = v
-	return s
-}
-
 // Contains the output of DescribeSpotInstanceRequests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsResult
 type DescribeSpotInstanceRequestsOutput struct {
@@ -34802,12 +29264,6 @@ func (s DescribeSpotInstanceRequestsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSpotInstanceRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSpotInstanceRequests sets the SpotInstanceRequests field's value.
-func (s *DescribeSpotInstanceRequestsOutput) SetSpotInstanceRequests(v []SpotInstanceRequest) *DescribeSpotInstanceRequestsOutput {
-	s.SpotInstanceRequests = v
-	return s
 }
 
 // Contains the parameters for DescribeSpotPriceHistory.
@@ -34876,60 +29332,6 @@ func (s DescribeSpotPriceHistoryInput) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *DescribeSpotPriceHistoryInput) SetAvailabilityZone(v string) *DescribeSpotPriceHistoryInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSpotPriceHistoryInput) SetDryRun(v bool) *DescribeSpotPriceHistoryInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *DescribeSpotPriceHistoryInput) SetEndTime(v time.Time) *DescribeSpotPriceHistoryInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeSpotPriceHistoryInput) SetFilters(v []Filter) *DescribeSpotPriceHistoryInput {
-	s.Filters = v
-	return s
-}
-
-// SetInstanceTypes sets the InstanceTypes field's value.
-func (s *DescribeSpotPriceHistoryInput) SetInstanceTypes(v []InstanceType) *DescribeSpotPriceHistoryInput {
-	s.InstanceTypes = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSpotPriceHistoryInput) SetMaxResults(v int64) *DescribeSpotPriceHistoryInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotPriceHistoryInput) SetNextToken(v string) *DescribeSpotPriceHistoryInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProductDescriptions sets the ProductDescriptions field's value.
-func (s *DescribeSpotPriceHistoryInput) SetProductDescriptions(v []string) *DescribeSpotPriceHistoryInput {
-	s.ProductDescriptions = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeSpotPriceHistoryInput) SetStartTime(v time.Time) *DescribeSpotPriceHistoryInput {
-	s.StartTime = &v
-	return s
-}
-
 // Contains the output of DescribeSpotPriceHistory.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryResult
 type DescribeSpotPriceHistoryOutput struct {
@@ -34958,18 +29360,6 @@ func (s DescribeSpotPriceHistoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSpotPriceHistoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSpotPriceHistoryOutput) SetNextToken(v string) *DescribeSpotPriceHistoryOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSpotPriceHistory sets the SpotPriceHistory field's value.
-func (s *DescribeSpotPriceHistoryOutput) SetSpotPriceHistory(v []SpotPrice) *DescribeSpotPriceHistoryOutput {
-	s.SpotPriceHistory = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroupsRequest
@@ -35027,30 +29417,6 @@ func (s *DescribeStaleSecurityGroupsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeStaleSecurityGroupsInput) SetDryRun(v bool) *DescribeStaleSecurityGroupsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeStaleSecurityGroupsInput) SetMaxResults(v int64) *DescribeStaleSecurityGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStaleSecurityGroupsInput) SetNextToken(v string) *DescribeStaleSecurityGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DescribeStaleSecurityGroupsInput) SetVpcId(v string) *DescribeStaleSecurityGroupsInput {
-	s.VpcId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroupsResult
 type DescribeStaleSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -35078,18 +29444,6 @@ func (s DescribeStaleSecurityGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStaleSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStaleSecurityGroupsOutput) SetNextToken(v string) *DescribeStaleSecurityGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStaleSecurityGroupSet sets the StaleSecurityGroupSet field's value.
-func (s *DescribeStaleSecurityGroupsOutput) SetStaleSecurityGroupSet(v []StaleSecurityGroup) *DescribeStaleSecurityGroupsOutput {
-	s.StaleSecurityGroupSet = v
-	return s
 }
 
 // Contains the parameters for DescribeSubnets.
@@ -35166,24 +29520,6 @@ func (s DescribeSubnetsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeSubnetsInput) SetDryRun(v bool) *DescribeSubnetsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeSubnetsInput) SetFilters(v []Filter) *DescribeSubnetsInput {
-	s.Filters = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *DescribeSubnetsInput) SetSubnetIds(v []string) *DescribeSubnetsInput {
-	s.SubnetIds = v
-	return s
-}
-
 // Contains the output of DescribeSubnets.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsResult
 type DescribeSubnetsOutput struct {
@@ -35208,12 +29544,6 @@ func (s DescribeSubnetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSubnetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubnets sets the Subnets field's value.
-func (s *DescribeSubnetsOutput) SetSubnets(v []Subnet) *DescribeSubnetsOutput {
-	s.Subnets = v
-	return s
 }
 
 // Contains the parameters for DescribeTags.
@@ -35260,30 +29590,6 @@ func (s DescribeTagsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeTagsInput) SetDryRun(v bool) *DescribeTagsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeTagsInput) SetFilters(v []Filter) *DescribeTagsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeTagsInput) SetMaxResults(v int64) *DescribeTagsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeTagsInput) SetNextToken(v string) *DescribeTagsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Contains the output of DescribeTags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTagsResult
 type DescribeTagsOutput struct {
@@ -35312,18 +29618,6 @@ func (s DescribeTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeTagsOutput) SetNextToken(v string) *DescribeTagsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *DescribeTagsOutput) SetTags(v []TagDescription) *DescribeTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // Contains the parameters for DescribeVolumeAttribute.
@@ -35370,24 +29664,6 @@ func (s *DescribeVolumeAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeVolumeAttributeInput) SetAttribute(v VolumeAttributeName) *DescribeVolumeAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVolumeAttributeInput) SetDryRun(v bool) *DescribeVolumeAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *DescribeVolumeAttributeInput) SetVolumeId(v string) *DescribeVolumeAttributeInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Contains the output of DescribeVolumeAttribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeResult
 type DescribeVolumeAttributeOutput struct {
@@ -35418,24 +29694,6 @@ func (s DescribeVolumeAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVolumeAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAutoEnableIO sets the AutoEnableIO field's value.
-func (s *DescribeVolumeAttributeOutput) SetAutoEnableIO(v *AttributeBooleanValue) *DescribeVolumeAttributeOutput {
-	s.AutoEnableIO = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *DescribeVolumeAttributeOutput) SetProductCodes(v []ProductCode) *DescribeVolumeAttributeOutput {
-	s.ProductCodes = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *DescribeVolumeAttributeOutput) SetVolumeId(v string) *DescribeVolumeAttributeOutput {
-	s.VolumeId = &v
-	return s
 }
 
 // Contains the parameters for DescribeVolumeStatus.
@@ -35514,36 +29772,6 @@ func (s DescribeVolumeStatusInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVolumeStatusInput) SetDryRun(v bool) *DescribeVolumeStatusInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVolumeStatusInput) SetFilters(v []Filter) *DescribeVolumeStatusInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVolumeStatusInput) SetMaxResults(v int64) *DescribeVolumeStatusInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVolumeStatusInput) SetNextToken(v string) *DescribeVolumeStatusInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumeStatusInput) SetVolumeIds(v []string) *DescribeVolumeStatusInput {
-	s.VolumeIds = v
-	return s
-}
-
 // Contains the output of DescribeVolumeStatus.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatusResult
 type DescribeVolumeStatusOutput struct {
@@ -35572,18 +29800,6 @@ func (s DescribeVolumeStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVolumeStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVolumeStatusOutput) SetNextToken(v string) *DescribeVolumeStatusOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVolumeStatuses sets the VolumeStatuses field's value.
-func (s *DescribeVolumeStatusOutput) SetVolumeStatuses(v []VolumeStatusItem) *DescribeVolumeStatusOutput {
-	s.VolumeStatuses = v
-	return s
 }
 
 // Contains the parameters for DescribeVolumes.
@@ -35680,36 +29896,6 @@ func (s DescribeVolumesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVolumesInput) SetDryRun(v bool) *DescribeVolumesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVolumesInput) SetFilters(v []Filter) *DescribeVolumesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVolumesInput) SetMaxResults(v int64) *DescribeVolumesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVolumesInput) SetNextToken(v string) *DescribeVolumesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumesInput) SetVolumeIds(v []string) *DescribeVolumesInput {
-	s.VolumeIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModificationsRequest
 type DescribeVolumesModificationsInput struct {
 	_ struct{} `type:"structure"`
@@ -35746,36 +29932,6 @@ func (s DescribeVolumesModificationsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVolumesModificationsInput) SetDryRun(v bool) *DescribeVolumesModificationsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVolumesModificationsInput) SetFilters(v []Filter) *DescribeVolumesModificationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVolumesModificationsInput) SetMaxResults(v int64) *DescribeVolumesModificationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVolumesModificationsInput) SetNextToken(v string) *DescribeVolumesModificationsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumesModificationsInput) SetVolumeIds(v []string) *DescribeVolumesModificationsInput {
-	s.VolumeIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModificationsResult
 type DescribeVolumesModificationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -35802,18 +29958,6 @@ func (s DescribeVolumesModificationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVolumesModificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVolumesModificationsOutput) SetNextToken(v string) *DescribeVolumesModificationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVolumesModifications sets the VolumesModifications field's value.
-func (s *DescribeVolumesModificationsOutput) SetVolumesModifications(v []VolumeModification) *DescribeVolumesModificationsOutput {
-	s.VolumesModifications = v
-	return s
 }
 
 // Contains the output of DescribeVolumes.
@@ -35846,18 +29990,6 @@ func (s DescribeVolumesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVolumesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVolumesOutput) SetNextToken(v string) *DescribeVolumesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVolumes sets the Volumes field's value.
-func (s *DescribeVolumesOutput) SetVolumes(v []CreateVolumeOutput) *DescribeVolumesOutput {
-	s.Volumes = v
-	return s
 }
 
 // Contains the parameters for DescribeVpcAttribute.
@@ -35909,24 +30041,6 @@ func (s *DescribeVpcAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *DescribeVpcAttributeInput) SetAttribute(v VpcAttributeName) *DescribeVpcAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcAttributeInput) SetDryRun(v bool) *DescribeVpcAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DescribeVpcAttributeInput) SetVpcId(v string) *DescribeVpcAttributeInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of DescribeVpcAttribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttributeResult
 type DescribeVpcAttributeOutput struct {
@@ -35961,24 +30075,6 @@ func (s DescribeVpcAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEnableDnsHostnames sets the EnableDnsHostnames field's value.
-func (s *DescribeVpcAttributeOutput) SetEnableDnsHostnames(v *AttributeBooleanValue) *DescribeVpcAttributeOutput {
-	s.EnableDnsHostnames = v
-	return s
-}
-
-// SetEnableDnsSupport sets the EnableDnsSupport field's value.
-func (s *DescribeVpcAttributeOutput) SetEnableDnsSupport(v *AttributeBooleanValue) *DescribeVpcAttributeOutput {
-	s.EnableDnsSupport = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DescribeVpcAttributeOutput) SetVpcId(v string) *DescribeVpcAttributeOutput {
-	s.VpcId = &v
-	return s
 }
 
 // Contains the parameters for DescribeVpcClassicLinkDnsSupport.
@@ -36025,24 +30121,6 @@ func (s *DescribeVpcClassicLinkDnsSupportInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcClassicLinkDnsSupportInput) SetMaxResults(v int64) *DescribeVpcClassicLinkDnsSupportInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcClassicLinkDnsSupportInput) SetNextToken(v string) *DescribeVpcClassicLinkDnsSupportInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVpcIds sets the VpcIds field's value.
-func (s *DescribeVpcClassicLinkDnsSupportInput) SetVpcIds(v []string) *DescribeVpcClassicLinkDnsSupportInput {
-	s.VpcIds = v
-	return s
-}
-
 // Contains the output of DescribeVpcClassicLinkDnsSupport.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupportResult
 type DescribeVpcClassicLinkDnsSupportOutput struct {
@@ -36070,18 +30148,6 @@ func (s DescribeVpcClassicLinkDnsSupportOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcClassicLinkDnsSupportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcClassicLinkDnsSupportOutput) SetNextToken(v string) *DescribeVpcClassicLinkDnsSupportOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVpcs sets the Vpcs field's value.
-func (s *DescribeVpcClassicLinkDnsSupportOutput) SetVpcs(v []ClassicLinkDnsSupport) *DescribeVpcClassicLinkDnsSupportOutput {
-	s.Vpcs = v
-	return s
 }
 
 // Contains the parameters for DescribeVpcClassicLink.
@@ -36131,24 +30197,6 @@ func (s DescribeVpcClassicLinkInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcClassicLinkInput) SetDryRun(v bool) *DescribeVpcClassicLinkInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcClassicLinkInput) SetFilters(v []Filter) *DescribeVpcClassicLinkInput {
-	s.Filters = v
-	return s
-}
-
-// SetVpcIds sets the VpcIds field's value.
-func (s *DescribeVpcClassicLinkInput) SetVpcIds(v []string) *DescribeVpcClassicLinkInput {
-	s.VpcIds = v
-	return s
-}
-
 // Contains the output of DescribeVpcClassicLink.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkResult
 type DescribeVpcClassicLinkOutput struct {
@@ -36173,12 +30221,6 @@ func (s DescribeVpcClassicLinkOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcClassicLinkOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpcs sets the Vpcs field's value.
-func (s *DescribeVpcClassicLinkOutput) SetVpcs(v []VpcClassicLink) *DescribeVpcClassicLinkOutput {
-	s.Vpcs = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionNotificationsRequest
@@ -36228,36 +30270,6 @@ func (s DescribeVpcEndpointConnectionNotificationsInput) GoString() string {
 	return s.String()
 }
 
-// SetConnectionNotificationId sets the ConnectionNotificationId field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsInput) SetConnectionNotificationId(v string) *DescribeVpcEndpointConnectionNotificationsInput {
-	s.ConnectionNotificationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsInput) SetDryRun(v bool) *DescribeVpcEndpointConnectionNotificationsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsInput) SetFilters(v []Filter) *DescribeVpcEndpointConnectionNotificationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsInput) SetMaxResults(v int64) *DescribeVpcEndpointConnectionNotificationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsInput) SetNextToken(v string) *DescribeVpcEndpointConnectionNotificationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionNotificationsResult
 type DescribeVpcEndpointConnectionNotificationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -36285,18 +30297,6 @@ func (s DescribeVpcEndpointConnectionNotificationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcEndpointConnectionNotificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConnectionNotificationSet sets the ConnectionNotificationSet field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsOutput) SetConnectionNotificationSet(v []ConnectionNotification) *DescribeVpcEndpointConnectionNotificationsOutput {
-	s.ConnectionNotificationSet = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointConnectionNotificationsOutput) SetNextToken(v string) *DescribeVpcEndpointConnectionNotificationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionsRequest
@@ -36342,30 +30342,6 @@ func (s DescribeVpcEndpointConnectionsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcEndpointConnectionsInput) SetDryRun(v bool) *DescribeVpcEndpointConnectionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointConnectionsInput) SetFilters(v []Filter) *DescribeVpcEndpointConnectionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcEndpointConnectionsInput) SetMaxResults(v int64) *DescribeVpcEndpointConnectionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointConnectionsInput) SetNextToken(v string) *DescribeVpcEndpointConnectionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionsResult
 type DescribeVpcEndpointConnectionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -36393,18 +30369,6 @@ func (s DescribeVpcEndpointConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcEndpointConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointConnectionsOutput) SetNextToken(v string) *DescribeVpcEndpointConnectionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVpcEndpointConnections sets the VpcEndpointConnections field's value.
-func (s *DescribeVpcEndpointConnectionsOutput) SetVpcEndpointConnections(v []VpcEndpointConnection) *DescribeVpcEndpointConnectionsOutput {
-	s.VpcEndpointConnections = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurationsRequest
@@ -36451,36 +30415,6 @@ func (s DescribeVpcEndpointServiceConfigurationsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsInput) SetDryRun(v bool) *DescribeVpcEndpointServiceConfigurationsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsInput) SetFilters(v []Filter) *DescribeVpcEndpointServiceConfigurationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsInput) SetMaxResults(v int64) *DescribeVpcEndpointServiceConfigurationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsInput) SetNextToken(v string) *DescribeVpcEndpointServiceConfigurationsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceIds sets the ServiceIds field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsInput) SetServiceIds(v []string) *DescribeVpcEndpointServiceConfigurationsInput {
-	s.ServiceIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurationsResult
 type DescribeVpcEndpointServiceConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -36508,18 +30442,6 @@ func (s DescribeVpcEndpointServiceConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcEndpointServiceConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsOutput) SetNextToken(v string) *DescribeVpcEndpointServiceConfigurationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceConfigurations sets the ServiceConfigurations field's value.
-func (s *DescribeVpcEndpointServiceConfigurationsOutput) SetServiceConfigurations(v []ServiceConfiguration) *DescribeVpcEndpointServiceConfigurationsOutput {
-	s.ServiceConfigurations = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicePermissionsRequest
@@ -36580,36 +30502,6 @@ func (s *DescribeVpcEndpointServicePermissionsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcEndpointServicePermissionsInput) SetDryRun(v bool) *DescribeVpcEndpointServicePermissionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointServicePermissionsInput) SetFilters(v []Filter) *DescribeVpcEndpointServicePermissionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcEndpointServicePermissionsInput) SetMaxResults(v int64) *DescribeVpcEndpointServicePermissionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointServicePermissionsInput) SetNextToken(v string) *DescribeVpcEndpointServicePermissionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *DescribeVpcEndpointServicePermissionsInput) SetServiceId(v string) *DescribeVpcEndpointServicePermissionsInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicePermissionsResult
 type DescribeVpcEndpointServicePermissionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -36637,18 +30529,6 @@ func (s DescribeVpcEndpointServicePermissionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcEndpointServicePermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAllowedPrincipals sets the AllowedPrincipals field's value.
-func (s *DescribeVpcEndpointServicePermissionsOutput) SetAllowedPrincipals(v []AllowedPrincipal) *DescribeVpcEndpointServicePermissionsOutput {
-	s.AllowedPrincipals = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointServicePermissionsOutput) SetNextToken(v string) *DescribeVpcEndpointServicePermissionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains the parameters for DescribeVpcEndpointServices.
@@ -36692,36 +30572,6 @@ func (s DescribeVpcEndpointServicesInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcEndpointServicesInput) SetDryRun(v bool) *DescribeVpcEndpointServicesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointServicesInput) SetFilters(v []Filter) *DescribeVpcEndpointServicesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcEndpointServicesInput) SetMaxResults(v int64) *DescribeVpcEndpointServicesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointServicesInput) SetNextToken(v string) *DescribeVpcEndpointServicesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceNames sets the ServiceNames field's value.
-func (s *DescribeVpcEndpointServicesInput) SetServiceNames(v []string) *DescribeVpcEndpointServicesInput {
-	s.ServiceNames = v
-	return s
-}
-
 // Contains the output of DescribeVpcEndpointServices.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicesResult
 type DescribeVpcEndpointServicesOutput struct {
@@ -36753,24 +30603,6 @@ func (s DescribeVpcEndpointServicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcEndpointServicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointServicesOutput) SetNextToken(v string) *DescribeVpcEndpointServicesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceDetails sets the ServiceDetails field's value.
-func (s *DescribeVpcEndpointServicesOutput) SetServiceDetails(v []ServiceDetail) *DescribeVpcEndpointServicesOutput {
-	s.ServiceDetails = v
-	return s
-}
-
-// SetServiceNames sets the ServiceNames field's value.
-func (s *DescribeVpcEndpointServicesOutput) SetServiceNames(v []string) *DescribeVpcEndpointServicesOutput {
-	s.ServiceNames = v
-	return s
 }
 
 // Contains the parameters for DescribeVpcEndpoints.
@@ -36821,36 +30653,6 @@ func (s DescribeVpcEndpointsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcEndpointsInput) SetDryRun(v bool) *DescribeVpcEndpointsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcEndpointsInput) SetFilters(v []Filter) *DescribeVpcEndpointsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeVpcEndpointsInput) SetMaxResults(v int64) *DescribeVpcEndpointsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointsInput) SetNextToken(v string) *DescribeVpcEndpointsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVpcEndpointIds sets the VpcEndpointIds field's value.
-func (s *DescribeVpcEndpointsInput) SetVpcEndpointIds(v []string) *DescribeVpcEndpointsInput {
-	s.VpcEndpointIds = v
-	return s
-}
-
 // Contains the output of DescribeVpcEndpoints.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsResult
 type DescribeVpcEndpointsOutput struct {
@@ -36879,18 +30681,6 @@ func (s DescribeVpcEndpointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVpcEndpointsOutput) SetNextToken(v string) *DescribeVpcEndpointsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVpcEndpoints sets the VpcEndpoints field's value.
-func (s *DescribeVpcEndpointsOutput) SetVpcEndpoints(v []VpcEndpoint) *DescribeVpcEndpointsOutput {
-	s.VpcEndpoints = v
-	return s
 }
 
 // Contains the parameters for DescribeVpcPeeringConnections.
@@ -36964,24 +30754,6 @@ func (s DescribeVpcPeeringConnectionsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcPeeringConnectionsInput) SetDryRun(v bool) *DescribeVpcPeeringConnectionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcPeeringConnectionsInput) SetFilters(v []Filter) *DescribeVpcPeeringConnectionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetVpcPeeringConnectionIds sets the VpcPeeringConnectionIds field's value.
-func (s *DescribeVpcPeeringConnectionsInput) SetVpcPeeringConnectionIds(v []string) *DescribeVpcPeeringConnectionsInput {
-	s.VpcPeeringConnectionIds = v
-	return s
-}
-
 // Contains the output of DescribeVpcPeeringConnections.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsResult
 type DescribeVpcPeeringConnectionsOutput struct {
@@ -37006,12 +30778,6 @@ func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcPeeringConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpcPeeringConnections sets the VpcPeeringConnections field's value.
-func (s *DescribeVpcPeeringConnectionsOutput) SetVpcPeeringConnections(v []VpcPeeringConnection) *DescribeVpcPeeringConnectionsOutput {
-	s.VpcPeeringConnections = v
-	return s
 }
 
 // Contains the parameters for DescribeVpcs.
@@ -37091,24 +30857,6 @@ func (s DescribeVpcsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpcsInput) SetDryRun(v bool) *DescribeVpcsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpcsInput) SetFilters(v []Filter) *DescribeVpcsInput {
-	s.Filters = v
-	return s
-}
-
-// SetVpcIds sets the VpcIds field's value.
-func (s *DescribeVpcsInput) SetVpcIds(v []string) *DescribeVpcsInput {
-	s.VpcIds = v
-	return s
-}
-
 // Contains the output of DescribeVpcs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsResult
 type DescribeVpcsOutput struct {
@@ -37133,12 +30881,6 @@ func (s DescribeVpcsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpcs sets the Vpcs field's value.
-func (s *DescribeVpcsOutput) SetVpcs(v []Vpc) *DescribeVpcsOutput {
-	s.Vpcs = v
-	return s
 }
 
 // Contains the parameters for DescribeVpnConnections.
@@ -37214,24 +30956,6 @@ func (s DescribeVpnConnectionsInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpnConnectionsInput) SetDryRun(v bool) *DescribeVpnConnectionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpnConnectionsInput) SetFilters(v []Filter) *DescribeVpnConnectionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetVpnConnectionIds sets the VpnConnectionIds field's value.
-func (s *DescribeVpnConnectionsInput) SetVpnConnectionIds(v []string) *DescribeVpnConnectionsInput {
-	s.VpnConnectionIds = v
-	return s
-}
-
 // Contains the output of DescribeVpnConnections.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnectionsResult
 type DescribeVpnConnectionsOutput struct {
@@ -37256,12 +30980,6 @@ func (s DescribeVpnConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpnConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpnConnections sets the VpnConnections field's value.
-func (s *DescribeVpnConnectionsOutput) SetVpnConnections(v []VpnConnection) *DescribeVpnConnectionsOutput {
-	s.VpnConnections = v
-	return s
 }
 
 // Contains the parameters for DescribeVpnGateways.
@@ -37329,24 +31047,6 @@ func (s DescribeVpnGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DescribeVpnGatewaysInput) SetDryRun(v bool) *DescribeVpnGatewaysInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeVpnGatewaysInput) SetFilters(v []Filter) *DescribeVpnGatewaysInput {
-	s.Filters = v
-	return s
-}
-
-// SetVpnGatewayIds sets the VpnGatewayIds field's value.
-func (s *DescribeVpnGatewaysInput) SetVpnGatewayIds(v []string) *DescribeVpnGatewaysInput {
-	s.VpnGatewayIds = v
-	return s
-}
-
 // Contains the output of DescribeVpnGateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGatewaysResult
 type DescribeVpnGatewaysOutput struct {
@@ -37371,12 +31071,6 @@ func (s DescribeVpnGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpnGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpnGateways sets the VpnGateways field's value.
-func (s *DescribeVpnGatewaysOutput) SetVpnGateways(v []VpnGateway) *DescribeVpnGatewaysOutput {
-	s.VpnGateways = v
-	return s
 }
 
 // Contains the parameters for DetachClassicLinkVpc.
@@ -37429,24 +31123,6 @@ func (s *DetachClassicLinkVpcInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DetachClassicLinkVpcInput) SetDryRun(v bool) *DetachClassicLinkVpcInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DetachClassicLinkVpcInput) SetInstanceId(v string) *DetachClassicLinkVpcInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DetachClassicLinkVpcInput) SetVpcId(v string) *DetachClassicLinkVpcInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of DetachClassicLinkVpc.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachClassicLinkVpcResult
 type DetachClassicLinkVpcOutput struct {
@@ -37471,12 +31147,6 @@ func (s DetachClassicLinkVpcOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachClassicLinkVpcOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *DetachClassicLinkVpcOutput) SetReturn(v bool) *DetachClassicLinkVpcOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for DetachInternetGateway.
@@ -37527,24 +31197,6 @@ func (s *DetachInternetGatewayInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DetachInternetGatewayInput) SetDryRun(v bool) *DetachInternetGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInternetGatewayId sets the InternetGatewayId field's value.
-func (s *DetachInternetGatewayInput) SetInternetGatewayId(v string) *DetachInternetGatewayInput {
-	s.InternetGatewayId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DetachInternetGatewayInput) SetVpcId(v string) *DetachInternetGatewayInput {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachInternetGatewayOutput
@@ -37611,24 +31263,6 @@ func (s *DetachNetworkInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttachmentId sets the AttachmentId field's value.
-func (s *DetachNetworkInterfaceInput) SetAttachmentId(v string) *DetachNetworkInterfaceInput {
-	s.AttachmentId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DetachNetworkInterfaceInput) SetDryRun(v bool) *DetachNetworkInterfaceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetForce sets the Force field's value.
-func (s *DetachNetworkInterfaceInput) SetForce(v bool) *DetachNetworkInterfaceInput {
-	s.Force = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachNetworkInterfaceOutput
@@ -37709,36 +31343,6 @@ func (s *DetachVolumeInput) Validate() error {
 	return nil
 }
 
-// SetDevice sets the Device field's value.
-func (s *DetachVolumeInput) SetDevice(v string) *DetachVolumeInput {
-	s.Device = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DetachVolumeInput) SetDryRun(v bool) *DetachVolumeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetForce sets the Force field's value.
-func (s *DetachVolumeInput) SetForce(v bool) *DetachVolumeInput {
-	s.Force = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DetachVolumeInput) SetInstanceId(v string) *DetachVolumeInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *DetachVolumeInput) SetVolumeId(v string) *DetachVolumeInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Describes volume attachment details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolumeOutput
 type DetachVolumeOutput struct {
@@ -37778,42 +31382,6 @@ func (s DetachVolumeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachTime sets the AttachTime field's value.
-func (s *DetachVolumeOutput) SetAttachTime(v time.Time) *DetachVolumeOutput {
-	s.AttachTime = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *DetachVolumeOutput) SetDeleteOnTermination(v bool) *DetachVolumeOutput {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDevice sets the Device field's value.
-func (s *DetachVolumeOutput) SetDevice(v string) *DetachVolumeOutput {
-	s.Device = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DetachVolumeOutput) SetInstanceId(v string) *DetachVolumeOutput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DetachVolumeOutput) SetState(v VolumeAttachmentState) *DetachVolumeOutput {
-	s.State = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *DetachVolumeOutput) SetVolumeId(v string) *DetachVolumeOutput {
-	s.VolumeId = &v
-	return s
 }
 
 // Contains the parameters for DetachVpnGateway.
@@ -37866,24 +31434,6 @@ func (s *DetachVpnGatewayInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DetachVpnGatewayInput) SetDryRun(v bool) *DetachVpnGatewayInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DetachVpnGatewayInput) SetVpcId(v string) *DetachVpnGatewayInput {
-	s.VpcId = &v
-	return s
-}
-
-// SetVpnGatewayId sets the VpnGatewayId field's value.
-func (s *DetachVpnGatewayInput) SetVpnGatewayId(v string) *DetachVpnGatewayInput {
-	s.VpnGatewayId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVpnGatewayOutput
 type DetachVpnGatewayOutput struct {
 	_ struct{} `type:"structure"`
@@ -37928,18 +31478,6 @@ func (s DhcpConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *DhcpConfiguration) SetKey(v string) *DhcpConfiguration {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *DhcpConfiguration) SetValues(v []AttributeValue) *DhcpConfiguration {
-	s.Values = v
-	return s
-}
-
 // Describes a set of DHCP options.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DhcpOptions
 type DhcpOptions struct {
@@ -37963,24 +31501,6 @@ func (s DhcpOptions) String() string {
 // GoString returns the string representation
 func (s DhcpOptions) GoString() string {
 	return s.String()
-}
-
-// SetDhcpConfigurations sets the DhcpConfigurations field's value.
-func (s *DhcpOptions) SetDhcpConfigurations(v []DhcpConfiguration) *DhcpOptions {
-	s.DhcpConfigurations = v
-	return s
-}
-
-// SetDhcpOptionsId sets the DhcpOptionsId field's value.
-func (s *DhcpOptions) SetDhcpOptionsId(v string) *DhcpOptions {
-	s.DhcpOptionsId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *DhcpOptions) SetTags(v []Tag) *DhcpOptions {
-	s.Tags = v
-	return s
 }
 
 // Contains the parameters for DisableVgwRoutePropagation.
@@ -38027,18 +31547,6 @@ func (s *DisableVgwRoutePropagationInput) Validate() error {
 	return nil
 }
 
-// SetGatewayId sets the GatewayId field's value.
-func (s *DisableVgwRoutePropagationInput) SetGatewayId(v string) *DisableVgwRoutePropagationInput {
-	s.GatewayId = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *DisableVgwRoutePropagationInput) SetRouteTableId(v string) *DisableVgwRoutePropagationInput {
-	s.RouteTableId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationOutput
 type DisableVgwRoutePropagationOutput struct {
 	_ struct{} `type:"structure"`
@@ -38080,12 +31588,6 @@ func (s DisableVpcClassicLinkDnsSupportInput) GoString() string {
 	return s.String()
 }
 
-// SetVpcId sets the VpcId field's value.
-func (s *DisableVpcClassicLinkDnsSupportInput) SetVpcId(v string) *DisableVpcClassicLinkDnsSupportInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of DisableVpcClassicLinkDnsSupport.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkDnsSupportResult
 type DisableVpcClassicLinkDnsSupportOutput struct {
@@ -38110,12 +31612,6 @@ func (s DisableVpcClassicLinkDnsSupportOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisableVpcClassicLinkDnsSupportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *DisableVpcClassicLinkDnsSupportOutput) SetReturn(v bool) *DisableVpcClassicLinkDnsSupportOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for DisableVpcClassicLink.
@@ -38159,18 +31655,6 @@ func (s *DisableVpcClassicLinkInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *DisableVpcClassicLinkInput) SetDryRun(v bool) *DisableVpcClassicLinkInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DisableVpcClassicLinkInput) SetVpcId(v string) *DisableVpcClassicLinkInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of DisableVpcClassicLink.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkResult
 type DisableVpcClassicLinkOutput struct {
@@ -38195,12 +31679,6 @@ func (s DisableVpcClassicLinkOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisableVpcClassicLinkOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *DisableVpcClassicLinkOutput) SetReturn(v bool) *DisableVpcClassicLinkOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for DisassociateAddress.
@@ -38229,24 +31707,6 @@ func (s DisassociateAddressInput) String() string {
 // GoString returns the string representation
 func (s DisassociateAddressInput) GoString() string {
 	return s.String()
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *DisassociateAddressInput) SetAssociationId(v string) *DisassociateAddressInput {
-	s.AssociationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DisassociateAddressInput) SetDryRun(v bool) *DisassociateAddressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *DisassociateAddressInput) SetPublicIp(v string) *DisassociateAddressInput {
-	s.PublicIp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateAddressOutput
@@ -38305,12 +31765,6 @@ func (s *DisassociateIamInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *DisassociateIamInstanceProfileInput) SetAssociationId(v string) *DisassociateIamInstanceProfileInput {
-	s.AssociationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIamInstanceProfileResult
 type DisassociateIamInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -38334,12 +31788,6 @@ func (s DisassociateIamInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateIamInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIamInstanceProfileAssociation sets the IamInstanceProfileAssociation field's value.
-func (s *DisassociateIamInstanceProfileOutput) SetIamInstanceProfileAssociation(v *IamInstanceProfileAssociation) *DisassociateIamInstanceProfileOutput {
-	s.IamInstanceProfileAssociation = v
-	return s
 }
 
 // Contains the parameters for DisassociateRouteTable.
@@ -38382,18 +31830,6 @@ func (s *DisassociateRouteTableInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *DisassociateRouteTableInput) SetAssociationId(v string) *DisassociateRouteTableInput {
-	s.AssociationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DisassociateRouteTableInput) SetDryRun(v bool) *DisassociateRouteTableInput {
-	s.DryRun = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTableOutput
@@ -38452,12 +31888,6 @@ func (s *DisassociateSubnetCidrBlockInput) Validate() error {
 	return nil
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *DisassociateSubnetCidrBlockInput) SetAssociationId(v string) *DisassociateSubnetCidrBlockInput {
-	s.AssociationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlockResult
 type DisassociateSubnetCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
@@ -38484,18 +31914,6 @@ func (s DisassociateSubnetCidrBlockOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateSubnetCidrBlockOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIpv6CidrBlockAssociation sets the Ipv6CidrBlockAssociation field's value.
-func (s *DisassociateSubnetCidrBlockOutput) SetIpv6CidrBlockAssociation(v *SubnetIpv6CidrBlockAssociation) *DisassociateSubnetCidrBlockOutput {
-	s.Ipv6CidrBlockAssociation = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *DisassociateSubnetCidrBlockOutput) SetSubnetId(v string) *DisassociateSubnetCidrBlockOutput {
-	s.SubnetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlockRequest
@@ -38532,12 +31950,6 @@ func (s *DisassociateVpcCidrBlockInput) Validate() error {
 	return nil
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *DisassociateVpcCidrBlockInput) SetAssociationId(v string) *DisassociateVpcCidrBlockInput {
-	s.AssociationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlockResult
 type DisassociateVpcCidrBlockOutput struct {
 	_ struct{} `type:"structure"`
@@ -38567,24 +31979,6 @@ func (s DisassociateVpcCidrBlockOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateVpcCidrBlockOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCidrBlockAssociation sets the CidrBlockAssociation field's value.
-func (s *DisassociateVpcCidrBlockOutput) SetCidrBlockAssociation(v *VpcCidrBlockAssociation) *DisassociateVpcCidrBlockOutput {
-	s.CidrBlockAssociation = v
-	return s
-}
-
-// SetIpv6CidrBlockAssociation sets the Ipv6CidrBlockAssociation field's value.
-func (s *DisassociateVpcCidrBlockOutput) SetIpv6CidrBlockAssociation(v *VpcIpv6CidrBlockAssociation) *DisassociateVpcCidrBlockOutput {
-	s.Ipv6CidrBlockAssociation = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *DisassociateVpcCidrBlockOutput) SetVpcId(v string) *DisassociateVpcCidrBlockOutput {
-	s.VpcId = &v
-	return s
 }
 
 // Describes a disk image.
@@ -38632,24 +32026,6 @@ func (s *DiskImage) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *DiskImage) SetDescription(v string) *DiskImage {
-	s.Description = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *DiskImage) SetImage(v *DiskImageDetail) *DiskImage {
-	s.Image = v
-	return s
-}
-
-// SetVolume sets the Volume field's value.
-func (s *DiskImage) SetVolume(v *VolumeDetail) *DiskImage {
-	s.Volume = v
-	return s
-}
-
 // Describes a disk image.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDescription
 type DiskImageDescription struct {
@@ -38689,30 +32065,6 @@ func (s DiskImageDescription) String() string {
 // GoString returns the string representation
 func (s DiskImageDescription) GoString() string {
 	return s.String()
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *DiskImageDescription) SetChecksum(v string) *DiskImageDescription {
-	s.Checksum = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *DiskImageDescription) SetFormat(v DiskImageFormat) *DiskImageDescription {
-	s.Format = v
-	return s
-}
-
-// SetImportManifestUrl sets the ImportManifestUrl field's value.
-func (s *DiskImageDescription) SetImportManifestUrl(v string) *DiskImageDescription {
-	s.ImportManifestUrl = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *DiskImageDescription) SetSize(v int64) *DiskImageDescription {
-	s.Size = &v
-	return s
 }
 
 // Describes a disk image.
@@ -38774,24 +32126,6 @@ func (s *DiskImageDetail) Validate() error {
 	return nil
 }
 
-// SetBytes sets the Bytes field's value.
-func (s *DiskImageDetail) SetBytes(v int64) *DiskImageDetail {
-	s.Bytes = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *DiskImageDetail) SetFormat(v DiskImageFormat) *DiskImageDetail {
-	s.Format = v
-	return s
-}
-
-// SetImportManifestUrl sets the ImportManifestUrl field's value.
-func (s *DiskImageDetail) SetImportManifestUrl(v string) *DiskImageDetail {
-	s.ImportManifestUrl = &v
-	return s
-}
-
 // Describes a disk image volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageVolumeDescription
 type DiskImageVolumeDescription struct {
@@ -38816,18 +32150,6 @@ func (s DiskImageVolumeDescription) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *DiskImageVolumeDescription) SetId(v string) *DiskImageVolumeDescription {
-	s.Id = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *DiskImageVolumeDescription) SetSize(v int64) *DiskImageVolumeDescription {
-	s.Size = &v
-	return s
-}
-
 // Describes a DNS entry.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsEntry
 type DnsEntry struct {
@@ -38848,18 +32170,6 @@ func (s DnsEntry) String() string {
 // GoString returns the string representation
 func (s DnsEntry) GoString() string {
 	return s.String()
-}
-
-// SetDnsName sets the DnsName field's value.
-func (s *DnsEntry) SetDnsName(v string) *DnsEntry {
-	s.DnsName = &v
-	return s
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *DnsEntry) SetHostedZoneId(v string) *DnsEntry {
-	s.HostedZoneId = &v
-	return s
 }
 
 // Describes a block device for an EBS volume.
@@ -38930,48 +32240,6 @@ func (s EbsBlockDevice) GoString() string {
 	return s.String()
 }
 
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *EbsBlockDevice) SetDeleteOnTermination(v bool) *EbsBlockDevice {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *EbsBlockDevice) SetEncrypted(v bool) *EbsBlockDevice {
-	s.Encrypted = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *EbsBlockDevice) SetIops(v int64) *EbsBlockDevice {
-	s.Iops = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *EbsBlockDevice) SetKmsKeyId(v string) *EbsBlockDevice {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *EbsBlockDevice) SetSnapshotId(v string) *EbsBlockDevice {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *EbsBlockDevice) SetVolumeSize(v int64) *EbsBlockDevice {
-	s.VolumeSize = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *EbsBlockDevice) SetVolumeType(v VolumeType) *EbsBlockDevice {
-	s.VolumeType = v
-	return s
-}
-
 // Describes a parameter used to set up an EBS volume in a block device mapping.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice
 type EbsInstanceBlockDevice struct {
@@ -39000,30 +32268,6 @@ func (s EbsInstanceBlockDevice) GoString() string {
 	return s.String()
 }
 
-// SetAttachTime sets the AttachTime field's value.
-func (s *EbsInstanceBlockDevice) SetAttachTime(v time.Time) *EbsInstanceBlockDevice {
-	s.AttachTime = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *EbsInstanceBlockDevice) SetDeleteOnTermination(v bool) *EbsInstanceBlockDevice {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *EbsInstanceBlockDevice) SetStatus(v AttachmentStatus) *EbsInstanceBlockDevice {
-	s.Status = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *EbsInstanceBlockDevice) SetVolumeId(v string) *EbsInstanceBlockDevice {
-	s.VolumeId = &v
-	return s
-}
-
 // Describes information used to set up an EBS volume specified in a block device
 // mapping.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDeviceSpecification
@@ -39047,18 +32291,6 @@ func (s EbsInstanceBlockDeviceSpecification) GoString() string {
 	return s.String()
 }
 
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *EbsInstanceBlockDeviceSpecification) SetDeleteOnTermination(v bool) *EbsInstanceBlockDeviceSpecification {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *EbsInstanceBlockDeviceSpecification) SetVolumeId(v string) *EbsInstanceBlockDeviceSpecification {
-	s.VolumeId = &v
-	return s
-}
-
 // Describes an egress-only Internet gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EgressOnlyInternetGateway
 type EgressOnlyInternetGateway struct {
@@ -39079,18 +32311,6 @@ func (s EgressOnlyInternetGateway) String() string {
 // GoString returns the string representation
 func (s EgressOnlyInternetGateway) GoString() string {
 	return s.String()
-}
-
-// SetAttachments sets the Attachments field's value.
-func (s *EgressOnlyInternetGateway) SetAttachments(v []InternetGatewayAttachment) *EgressOnlyInternetGateway {
-	s.Attachments = v
-	return s
-}
-
-// SetEgressOnlyInternetGatewayId sets the EgressOnlyInternetGatewayId field's value.
-func (s *EgressOnlyInternetGateway) SetEgressOnlyInternetGatewayId(v string) *EgressOnlyInternetGateway {
-	s.EgressOnlyInternetGatewayId = &v
-	return s
 }
 
 // Describes the association between an instance and an Elastic GPU.
@@ -39121,30 +32341,6 @@ func (s ElasticGpuAssociation) GoString() string {
 	return s.String()
 }
 
-// SetElasticGpuAssociationId sets the ElasticGpuAssociationId field's value.
-func (s *ElasticGpuAssociation) SetElasticGpuAssociationId(v string) *ElasticGpuAssociation {
-	s.ElasticGpuAssociationId = &v
-	return s
-}
-
-// SetElasticGpuAssociationState sets the ElasticGpuAssociationState field's value.
-func (s *ElasticGpuAssociation) SetElasticGpuAssociationState(v string) *ElasticGpuAssociation {
-	s.ElasticGpuAssociationState = &v
-	return s
-}
-
-// SetElasticGpuAssociationTime sets the ElasticGpuAssociationTime field's value.
-func (s *ElasticGpuAssociation) SetElasticGpuAssociationTime(v string) *ElasticGpuAssociation {
-	s.ElasticGpuAssociationTime = &v
-	return s
-}
-
-// SetElasticGpuId sets the ElasticGpuId field's value.
-func (s *ElasticGpuAssociation) SetElasticGpuId(v string) *ElasticGpuAssociation {
-	s.ElasticGpuId = &v
-	return s
-}
-
 // Describes the status of an Elastic GPU.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuHealth
 type ElasticGpuHealth struct {
@@ -39162,12 +32358,6 @@ func (s ElasticGpuHealth) String() string {
 // GoString returns the string representation
 func (s ElasticGpuHealth) GoString() string {
 	return s.String()
-}
-
-// SetStatus sets the Status field's value.
-func (s *ElasticGpuHealth) SetStatus(v ElasticGpuStatus) *ElasticGpuHealth {
-	s.Status = v
-	return s
 }
 
 // A specification for an Elastic GPU.
@@ -39205,12 +32395,6 @@ func (s *ElasticGpuSpecification) Validate() error {
 	return nil
 }
 
-// SetType sets the Type field's value.
-func (s *ElasticGpuSpecification) SetType(v string) *ElasticGpuSpecification {
-	s.Type = &v
-	return s
-}
-
 // Describes an elastic GPU.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse
 type ElasticGpuSpecificationResponse struct {
@@ -39228,12 +32412,6 @@ func (s ElasticGpuSpecificationResponse) String() string {
 // GoString returns the string representation
 func (s ElasticGpuSpecificationResponse) GoString() string {
 	return s.String()
-}
-
-// SetType sets the Type field's value.
-func (s *ElasticGpuSpecificationResponse) SetType(v string) *ElasticGpuSpecificationResponse {
-	s.Type = &v
-	return s
 }
 
 // Describes an Elastic GPU.
@@ -39268,42 +32446,6 @@ func (s ElasticGpus) String() string {
 // GoString returns the string representation
 func (s ElasticGpus) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ElasticGpus) SetAvailabilityZone(v string) *ElasticGpus {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetElasticGpuHealth sets the ElasticGpuHealth field's value.
-func (s *ElasticGpus) SetElasticGpuHealth(v *ElasticGpuHealth) *ElasticGpus {
-	s.ElasticGpuHealth = v
-	return s
-}
-
-// SetElasticGpuId sets the ElasticGpuId field's value.
-func (s *ElasticGpus) SetElasticGpuId(v string) *ElasticGpus {
-	s.ElasticGpuId = &v
-	return s
-}
-
-// SetElasticGpuState sets the ElasticGpuState field's value.
-func (s *ElasticGpus) SetElasticGpuState(v ElasticGpuState) *ElasticGpus {
-	s.ElasticGpuState = v
-	return s
-}
-
-// SetElasticGpuType sets the ElasticGpuType field's value.
-func (s *ElasticGpus) SetElasticGpuType(v string) *ElasticGpus {
-	s.ElasticGpuType = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ElasticGpus) SetInstanceId(v string) *ElasticGpus {
-	s.InstanceId = &v
-	return s
 }
 
 // Contains the parameters for EnableVgwRoutePropagation.
@@ -39348,18 +32490,6 @@ func (s *EnableVgwRoutePropagationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *EnableVgwRoutePropagationInput) SetGatewayId(v string) *EnableVgwRoutePropagationInput {
-	s.GatewayId = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *EnableVgwRoutePropagationInput) SetRouteTableId(v string) *EnableVgwRoutePropagationInput {
-	s.RouteTableId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationOutput
@@ -39425,18 +32555,6 @@ func (s *EnableVolumeIOInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *EnableVolumeIOInput) SetDryRun(v bool) *EnableVolumeIOInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *EnableVolumeIOInput) SetVolumeId(v string) *EnableVolumeIOInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVolumeIOOutput
 type EnableVolumeIOOutput struct {
 	_ struct{} `type:"structure"`
@@ -39478,12 +32596,6 @@ func (s EnableVpcClassicLinkDnsSupportInput) GoString() string {
 	return s.String()
 }
 
-// SetVpcId sets the VpcId field's value.
-func (s *EnableVpcClassicLinkDnsSupportInput) SetVpcId(v string) *EnableVpcClassicLinkDnsSupportInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of EnableVpcClassicLinkDnsSupport.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkDnsSupportResult
 type EnableVpcClassicLinkDnsSupportOutput struct {
@@ -39508,12 +32620,6 @@ func (s EnableVpcClassicLinkDnsSupportOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EnableVpcClassicLinkDnsSupportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *EnableVpcClassicLinkDnsSupportOutput) SetReturn(v bool) *EnableVpcClassicLinkDnsSupportOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for EnableVpcClassicLink.
@@ -39557,18 +32663,6 @@ func (s *EnableVpcClassicLinkInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *EnableVpcClassicLinkInput) SetDryRun(v bool) *EnableVpcClassicLinkInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *EnableVpcClassicLinkInput) SetVpcId(v string) *EnableVpcClassicLinkInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of EnableVpcClassicLink.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkResult
 type EnableVpcClassicLinkOutput struct {
@@ -39593,12 +32687,6 @@ func (s EnableVpcClassicLinkOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EnableVpcClassicLinkOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *EnableVpcClassicLinkOutput) SetReturn(v bool) *EnableVpcClassicLinkOutput {
-	s.Return = &v
-	return s
 }
 
 // Describes a Spot Fleet event.
@@ -39687,24 +32775,6 @@ func (s EventInformation) GoString() string {
 	return s.String()
 }
 
-// SetEventDescription sets the EventDescription field's value.
-func (s *EventInformation) SetEventDescription(v string) *EventInformation {
-	s.EventDescription = &v
-	return s
-}
-
-// SetEventSubType sets the EventSubType field's value.
-func (s *EventInformation) SetEventSubType(v string) *EventInformation {
-	s.EventSubType = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *EventInformation) SetInstanceId(v string) *EventInformation {
-	s.InstanceId = &v
-	return s
-}
-
 // Describes an instance export task.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTask
 type ExportTask struct {
@@ -39739,42 +32809,6 @@ func (s ExportTask) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *ExportTask) SetDescription(v string) *ExportTask {
-	s.Description = &v
-	return s
-}
-
-// SetExportTaskId sets the ExportTaskId field's value.
-func (s *ExportTask) SetExportTaskId(v string) *ExportTask {
-	s.ExportTaskId = &v
-	return s
-}
-
-// SetExportToS3Task sets the ExportToS3Task field's value.
-func (s *ExportTask) SetExportToS3Task(v *ExportToS3Task) *ExportTask {
-	s.ExportToS3Task = v
-	return s
-}
-
-// SetInstanceExportDetails sets the InstanceExportDetails field's value.
-func (s *ExportTask) SetInstanceExportDetails(v *InstanceExportDetails) *ExportTask {
-	s.InstanceExportDetails = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ExportTask) SetState(v ExportTaskState) *ExportTask {
-	s.State = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ExportTask) SetStatusMessage(v string) *ExportTask {
-	s.StatusMessage = &v
-	return s
-}
-
 // Describes the format and location for an instance export task.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3Task
 type ExportToS3Task struct {
@@ -39803,30 +32837,6 @@ func (s ExportToS3Task) String() string {
 // GoString returns the string representation
 func (s ExportToS3Task) GoString() string {
 	return s.String()
-}
-
-// SetContainerFormat sets the ContainerFormat field's value.
-func (s *ExportToS3Task) SetContainerFormat(v ContainerFormat) *ExportToS3Task {
-	s.ContainerFormat = v
-	return s
-}
-
-// SetDiskImageFormat sets the DiskImageFormat field's value.
-func (s *ExportToS3Task) SetDiskImageFormat(v DiskImageFormat) *ExportToS3Task {
-	s.DiskImageFormat = v
-	return s
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *ExportToS3Task) SetS3Bucket(v string) *ExportToS3Task {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Key sets the S3Key field's value.
-func (s *ExportToS3Task) SetS3Key(v string) *ExportToS3Task {
-	s.S3Key = &v
-	return s
 }
 
 // Describes an instance export task.
@@ -39860,30 +32870,6 @@ func (s ExportToS3TaskSpecification) GoString() string {
 	return s.String()
 }
 
-// SetContainerFormat sets the ContainerFormat field's value.
-func (s *ExportToS3TaskSpecification) SetContainerFormat(v ContainerFormat) *ExportToS3TaskSpecification {
-	s.ContainerFormat = v
-	return s
-}
-
-// SetDiskImageFormat sets the DiskImageFormat field's value.
-func (s *ExportToS3TaskSpecification) SetDiskImageFormat(v DiskImageFormat) *ExportToS3TaskSpecification {
-	s.DiskImageFormat = v
-	return s
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *ExportToS3TaskSpecification) SetS3Bucket(v string) *ExportToS3TaskSpecification {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Prefix sets the S3Prefix field's value.
-func (s *ExportToS3TaskSpecification) SetS3Prefix(v string) *ExportToS3TaskSpecification {
-	s.S3Prefix = &v
-	return s
-}
-
 // A filter name and value pair that is used to return a more specific list
 // of results. Filters can be used to match a set of resources by various criteria,
 // such as tags, attributes, or IDs.
@@ -39906,18 +32892,6 @@ func (s Filter) String() string {
 // GoString returns the string representation
 func (s Filter) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *Filter) SetName(v string) *Filter {
-	s.Name = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []string) *Filter {
-	s.Values = v
-	return s
 }
 
 // Describes a launch template.
@@ -39959,24 +32933,6 @@ func (s *FleetLaunchTemplateSpecification) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *FleetLaunchTemplateSpecification) SetLaunchTemplateId(v string) *FleetLaunchTemplateSpecification {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *FleetLaunchTemplateSpecification) SetLaunchTemplateName(v string) *FleetLaunchTemplateSpecification {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *FleetLaunchTemplateSpecification) SetVersion(v string) *FleetLaunchTemplateSpecification {
-	s.Version = &v
-	return s
 }
 
 // Describes a flow log.
@@ -40025,60 +32981,6 @@ func (s FlowLog) String() string {
 // GoString returns the string representation
 func (s FlowLog) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *FlowLog) SetCreationTime(v time.Time) *FlowLog {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDeliverLogsErrorMessage sets the DeliverLogsErrorMessage field's value.
-func (s *FlowLog) SetDeliverLogsErrorMessage(v string) *FlowLog {
-	s.DeliverLogsErrorMessage = &v
-	return s
-}
-
-// SetDeliverLogsPermissionArn sets the DeliverLogsPermissionArn field's value.
-func (s *FlowLog) SetDeliverLogsPermissionArn(v string) *FlowLog {
-	s.DeliverLogsPermissionArn = &v
-	return s
-}
-
-// SetDeliverLogsStatus sets the DeliverLogsStatus field's value.
-func (s *FlowLog) SetDeliverLogsStatus(v string) *FlowLog {
-	s.DeliverLogsStatus = &v
-	return s
-}
-
-// SetFlowLogId sets the FlowLogId field's value.
-func (s *FlowLog) SetFlowLogId(v string) *FlowLog {
-	s.FlowLogId = &v
-	return s
-}
-
-// SetFlowLogStatus sets the FlowLogStatus field's value.
-func (s *FlowLog) SetFlowLogStatus(v string) *FlowLog {
-	s.FlowLogStatus = &v
-	return s
-}
-
-// SetLogGroupName sets the LogGroupName field's value.
-func (s *FlowLog) SetLogGroupName(v string) *FlowLog {
-	s.LogGroupName = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *FlowLog) SetResourceId(v string) *FlowLog {
-	s.ResourceId = &v
-	return s
-}
-
-// SetTrafficType sets the TrafficType field's value.
-func (s *FlowLog) SetTrafficType(v TrafficType) *FlowLog {
-	s.TrafficType = v
-	return s
 }
 
 // Describes an Amazon FPGA image (AFI).
@@ -40139,90 +33041,6 @@ func (s FpgaImage) GoString() string {
 	return s.String()
 }
 
-// SetCreateTime sets the CreateTime field's value.
-func (s *FpgaImage) SetCreateTime(v time.Time) *FpgaImage {
-	s.CreateTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *FpgaImage) SetDescription(v string) *FpgaImage {
-	s.Description = &v
-	return s
-}
-
-// SetFpgaImageGlobalId sets the FpgaImageGlobalId field's value.
-func (s *FpgaImage) SetFpgaImageGlobalId(v string) *FpgaImage {
-	s.FpgaImageGlobalId = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *FpgaImage) SetFpgaImageId(v string) *FpgaImage {
-	s.FpgaImageId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *FpgaImage) SetName(v string) *FpgaImage {
-	s.Name = &v
-	return s
-}
-
-// SetOwnerAlias sets the OwnerAlias field's value.
-func (s *FpgaImage) SetOwnerAlias(v string) *FpgaImage {
-	s.OwnerAlias = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *FpgaImage) SetOwnerId(v string) *FpgaImage {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPciId sets the PciId field's value.
-func (s *FpgaImage) SetPciId(v *PciId) *FpgaImage {
-	s.PciId = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *FpgaImage) SetProductCodes(v []ProductCode) *FpgaImage {
-	s.ProductCodes = v
-	return s
-}
-
-// SetPublic sets the Public field's value.
-func (s *FpgaImage) SetPublic(v bool) *FpgaImage {
-	s.Public = &v
-	return s
-}
-
-// SetShellVersion sets the ShellVersion field's value.
-func (s *FpgaImage) SetShellVersion(v string) *FpgaImage {
-	s.ShellVersion = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *FpgaImage) SetState(v *FpgaImageState) *FpgaImage {
-	s.State = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *FpgaImage) SetTags(v []Tag) *FpgaImage {
-	s.Tags = v
-	return s
-}
-
-// SetUpdateTime sets the UpdateTime field's value.
-func (s *FpgaImage) SetUpdateTime(v time.Time) *FpgaImage {
-	s.UpdateTime = &v
-	return s
-}
-
 // Describes an Amazon FPGA image (AFI) attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageAttribute
 type FpgaImageAttribute struct {
@@ -40254,36 +33072,6 @@ func (s FpgaImageAttribute) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *FpgaImageAttribute) SetDescription(v string) *FpgaImageAttribute {
-	s.Description = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *FpgaImageAttribute) SetFpgaImageId(v string) *FpgaImageAttribute {
-	s.FpgaImageId = &v
-	return s
-}
-
-// SetLoadPermissions sets the LoadPermissions field's value.
-func (s *FpgaImageAttribute) SetLoadPermissions(v []LoadPermission) *FpgaImageAttribute {
-	s.LoadPermissions = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *FpgaImageAttribute) SetName(v string) *FpgaImageAttribute {
-	s.Name = &v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *FpgaImageAttribute) SetProductCodes(v []ProductCode) *FpgaImageAttribute {
-	s.ProductCodes = v
-	return s
-}
-
 // Describes the state of the bitstream generation process for an Amazon FPGA
 // image (AFI).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageState
@@ -40313,18 +33101,6 @@ func (s FpgaImageState) String() string {
 // GoString returns the string representation
 func (s FpgaImageState) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *FpgaImageState) SetCode(v FpgaImageStateCode) *FpgaImageState {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *FpgaImageState) SetMessage(v string) *FpgaImageState {
-	s.Message = &v
-	return s
 }
 
 // Contains the parameters for GetConsoleOutput.
@@ -40368,18 +33144,6 @@ func (s *GetConsoleOutputInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *GetConsoleOutputInput) SetDryRun(v bool) *GetConsoleOutputInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetConsoleOutputInput) SetInstanceId(v string) *GetConsoleOutputInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Contains the output of GetConsoleOutput.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputResult
 type GetConsoleOutputOutput struct {
@@ -40411,24 +33175,6 @@ func (s GetConsoleOutputOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetConsoleOutputOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetConsoleOutputOutput) SetInstanceId(v string) *GetConsoleOutputOutput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetOutput sets the Output field's value.
-func (s *GetConsoleOutputOutput) SetOutput(v string) *GetConsoleOutputOutput {
-	s.Output = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *GetConsoleOutputOutput) SetTimestamp(v time.Time) *GetConsoleOutputOutput {
-	s.Timestamp = &v
-	return s
 }
 
 // Contains the parameters for the request.
@@ -40476,24 +33222,6 @@ func (s *GetConsoleScreenshotInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *GetConsoleScreenshotInput) SetDryRun(v bool) *GetConsoleScreenshotInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetConsoleScreenshotInput) SetInstanceId(v string) *GetConsoleScreenshotInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetWakeUp sets the WakeUp field's value.
-func (s *GetConsoleScreenshotInput) SetWakeUp(v bool) *GetConsoleScreenshotInput {
-	s.WakeUp = &v
-	return s
-}
-
 // Contains the output of the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleScreenshotResult
 type GetConsoleScreenshotOutput struct {
@@ -40521,18 +33249,6 @@ func (s GetConsoleScreenshotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetConsoleScreenshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageData sets the ImageData field's value.
-func (s *GetConsoleScreenshotOutput) SetImageData(v string) *GetConsoleScreenshotOutput {
-	s.ImageData = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetConsoleScreenshotOutput) SetInstanceId(v string) *GetConsoleScreenshotOutput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreviewRequest
@@ -40579,18 +33295,6 @@ func (s *GetHostReservationPurchasePreviewInput) Validate() error {
 	return nil
 }
 
-// SetHostIdSet sets the HostIdSet field's value.
-func (s *GetHostReservationPurchasePreviewInput) SetHostIdSet(v []string) *GetHostReservationPurchasePreviewInput {
-	s.HostIdSet = v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *GetHostReservationPurchasePreviewInput) SetOfferingId(v string) *GetHostReservationPurchasePreviewInput {
-	s.OfferingId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreviewResult
 type GetHostReservationPurchasePreviewOutput struct {
 	_ struct{} `type:"structure"`
@@ -40625,30 +33329,6 @@ func (s GetHostReservationPurchasePreviewOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetHostReservationPurchasePreviewOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *GetHostReservationPurchasePreviewOutput) SetCurrencyCode(v CurrencyCodeValues) *GetHostReservationPurchasePreviewOutput {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetPurchase sets the Purchase field's value.
-func (s *GetHostReservationPurchasePreviewOutput) SetPurchase(v []Purchase) *GetHostReservationPurchasePreviewOutput {
-	s.Purchase = v
-	return s
-}
-
-// SetTotalHourlyPrice sets the TotalHourlyPrice field's value.
-func (s *GetHostReservationPurchasePreviewOutput) SetTotalHourlyPrice(v string) *GetHostReservationPurchasePreviewOutput {
-	s.TotalHourlyPrice = &v
-	return s
-}
-
-// SetTotalUpfrontPrice sets the TotalUpfrontPrice field's value.
-func (s *GetHostReservationPurchasePreviewOutput) SetTotalUpfrontPrice(v string) *GetHostReservationPurchasePreviewOutput {
-	s.TotalUpfrontPrice = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateDataRequest
@@ -40691,18 +33371,6 @@ func (s *GetLaunchTemplateDataInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *GetLaunchTemplateDataInput) SetDryRun(v bool) *GetLaunchTemplateDataInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetLaunchTemplateDataInput) SetInstanceId(v string) *GetLaunchTemplateDataInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateDataResult
 type GetLaunchTemplateDataOutput struct {
 	_ struct{} `type:"structure"`
@@ -40726,12 +33394,6 @@ func (s GetLaunchTemplateDataOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetLaunchTemplateDataOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplateData sets the LaunchTemplateData field's value.
-func (s *GetLaunchTemplateDataOutput) SetLaunchTemplateData(v *ResponseLaunchTemplateData) *GetLaunchTemplateDataOutput {
-	s.LaunchTemplateData = v
-	return s
 }
 
 // Contains the parameters for GetPasswordData.
@@ -40775,18 +33437,6 @@ func (s *GetPasswordDataInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *GetPasswordDataInput) SetDryRun(v bool) *GetPasswordDataInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetPasswordDataInput) SetInstanceId(v string) *GetPasswordDataInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Contains the output of GetPasswordData.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordDataResult
 type GetPasswordDataOutput struct {
@@ -40818,24 +33468,6 @@ func (s GetPasswordDataOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPasswordDataOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetPasswordDataOutput) SetInstanceId(v string) *GetPasswordDataOutput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetPasswordData sets the PasswordData field's value.
-func (s *GetPasswordDataOutput) SetPasswordData(v string) *GetPasswordDataOutput {
-	s.PasswordData = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *GetPasswordDataOutput) SetTimestamp(v time.Time) *GetPasswordDataOutput {
-	s.Timestamp = &v
-	return s
 }
 
 // Contains the parameters for GetReservedInstanceExchangeQuote.
@@ -40890,24 +33522,6 @@ func (s *GetReservedInstancesExchangeQuoteInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *GetReservedInstancesExchangeQuoteInput) SetDryRun(v bool) *GetReservedInstancesExchangeQuoteInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetReservedInstanceIds sets the ReservedInstanceIds field's value.
-func (s *GetReservedInstancesExchangeQuoteInput) SetReservedInstanceIds(v []string) *GetReservedInstancesExchangeQuoteInput {
-	s.ReservedInstanceIds = v
-	return s
-}
-
-// SetTargetConfigurations sets the TargetConfigurations field's value.
-func (s *GetReservedInstancesExchangeQuoteInput) SetTargetConfigurations(v []TargetConfigurationRequest) *GetReservedInstancesExchangeQuoteInput {
-	s.TargetConfigurations = v
-	return s
-}
-
 // Contains the output of GetReservedInstancesExchangeQuote.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteResult
 type GetReservedInstancesExchangeQuoteOutput struct {
@@ -40958,60 +33572,6 @@ func (s GetReservedInstancesExchangeQuoteOutput) SDKResponseMetadata() aws.Respo
 	return s.responseMetadata
 }
 
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetCurrencyCode(v string) *GetReservedInstancesExchangeQuoteOutput {
-	s.CurrencyCode = &v
-	return s
-}
-
-// SetIsValidExchange sets the IsValidExchange field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetIsValidExchange(v bool) *GetReservedInstancesExchangeQuoteOutput {
-	s.IsValidExchange = &v
-	return s
-}
-
-// SetOutputReservedInstancesWillExpireAt sets the OutputReservedInstancesWillExpireAt field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetOutputReservedInstancesWillExpireAt(v time.Time) *GetReservedInstancesExchangeQuoteOutput {
-	s.OutputReservedInstancesWillExpireAt = &v
-	return s
-}
-
-// SetPaymentDue sets the PaymentDue field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetPaymentDue(v string) *GetReservedInstancesExchangeQuoteOutput {
-	s.PaymentDue = &v
-	return s
-}
-
-// SetReservedInstanceValueRollup sets the ReservedInstanceValueRollup field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetReservedInstanceValueRollup(v *ReservationValue) *GetReservedInstancesExchangeQuoteOutput {
-	s.ReservedInstanceValueRollup = v
-	return s
-}
-
-// SetReservedInstanceValueSet sets the ReservedInstanceValueSet field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetReservedInstanceValueSet(v []ReservedInstanceReservationValue) *GetReservedInstancesExchangeQuoteOutput {
-	s.ReservedInstanceValueSet = v
-	return s
-}
-
-// SetTargetConfigurationValueRollup sets the TargetConfigurationValueRollup field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetTargetConfigurationValueRollup(v *ReservationValue) *GetReservedInstancesExchangeQuoteOutput {
-	s.TargetConfigurationValueRollup = v
-	return s
-}
-
-// SetTargetConfigurationValueSet sets the TargetConfigurationValueSet field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetTargetConfigurationValueSet(v []TargetReservationValue) *GetReservedInstancesExchangeQuoteOutput {
-	s.TargetConfigurationValueSet = v
-	return s
-}
-
-// SetValidationFailureReason sets the ValidationFailureReason field's value.
-func (s *GetReservedInstancesExchangeQuoteOutput) SetValidationFailureReason(v string) *GetReservedInstancesExchangeQuoteOutput {
-	s.ValidationFailureReason = &v
-	return s
-}
-
 // Describes a security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GroupIdentifier
 type GroupIdentifier struct {
@@ -41032,18 +33592,6 @@ func (s GroupIdentifier) String() string {
 // GoString returns the string representation
 func (s GroupIdentifier) GoString() string {
 	return s.String()
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *GroupIdentifier) SetGroupId(v string) *GroupIdentifier {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *GroupIdentifier) SetGroupName(v string) *GroupIdentifier {
-	s.GroupName = &v
-	return s
 }
 
 // Describes an event in the history of the Spot Fleet request.
@@ -41084,24 +33632,6 @@ func (s HistoryRecord) String() string {
 // GoString returns the string representation
 func (s HistoryRecord) GoString() string {
 	return s.String()
-}
-
-// SetEventInformation sets the EventInformation field's value.
-func (s *HistoryRecord) SetEventInformation(v *EventInformation) *HistoryRecord {
-	s.EventInformation = v
-	return s
-}
-
-// SetEventType sets the EventType field's value.
-func (s *HistoryRecord) SetEventType(v EventType) *HistoryRecord {
-	s.EventType = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *HistoryRecord) SetTimestamp(v time.Time) *HistoryRecord {
-	s.Timestamp = &v
-	return s
 }
 
 // Describes the properties of the Dedicated Host.
@@ -41150,60 +33680,6 @@ func (s Host) GoString() string {
 	return s.String()
 }
 
-// SetAutoPlacement sets the AutoPlacement field's value.
-func (s *Host) SetAutoPlacement(v AutoPlacement) *Host {
-	s.AutoPlacement = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Host) SetAvailabilityZone(v string) *Host {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetAvailableCapacity sets the AvailableCapacity field's value.
-func (s *Host) SetAvailableCapacity(v *AvailableCapacity) *Host {
-	s.AvailableCapacity = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *Host) SetClientToken(v string) *Host {
-	s.ClientToken = &v
-	return s
-}
-
-// SetHostId sets the HostId field's value.
-func (s *Host) SetHostId(v string) *Host {
-	s.HostId = &v
-	return s
-}
-
-// SetHostProperties sets the HostProperties field's value.
-func (s *Host) SetHostProperties(v *HostProperties) *Host {
-	s.HostProperties = v
-	return s
-}
-
-// SetHostReservationId sets the HostReservationId field's value.
-func (s *Host) SetHostReservationId(v string) *Host {
-	s.HostReservationId = &v
-	return s
-}
-
-// SetInstances sets the Instances field's value.
-func (s *Host) SetInstances(v []HostInstance) *Host {
-	s.Instances = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Host) SetState(v AllocationState) *Host {
-	s.State = v
-	return s
-}
-
 // Describes an instance running on a Dedicated Host.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostInstance
 type HostInstance struct {
@@ -41224,18 +33700,6 @@ func (s HostInstance) String() string {
 // GoString returns the string representation
 func (s HostInstance) GoString() string {
 	return s.String()
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *HostInstance) SetInstanceId(v string) *HostInstance {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *HostInstance) SetInstanceType(v string) *HostInstance {
-	s.InstanceType = &v
-	return s
 }
 
 // Details about the Dedicated Host Reservation offering.
@@ -41275,48 +33739,6 @@ func (s HostOffering) GoString() string {
 	return s.String()
 }
 
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *HostOffering) SetCurrencyCode(v CurrencyCodeValues) *HostOffering {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *HostOffering) SetDuration(v int64) *HostOffering {
-	s.Duration = &v
-	return s
-}
-
-// SetHourlyPrice sets the HourlyPrice field's value.
-func (s *HostOffering) SetHourlyPrice(v string) *HostOffering {
-	s.HourlyPrice = &v
-	return s
-}
-
-// SetInstanceFamily sets the InstanceFamily field's value.
-func (s *HostOffering) SetInstanceFamily(v string) *HostOffering {
-	s.InstanceFamily = &v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *HostOffering) SetOfferingId(v string) *HostOffering {
-	s.OfferingId = &v
-	return s
-}
-
-// SetPaymentOption sets the PaymentOption field's value.
-func (s *HostOffering) SetPaymentOption(v PaymentOption) *HostOffering {
-	s.PaymentOption = v
-	return s
-}
-
-// SetUpfrontPrice sets the UpfrontPrice field's value.
-func (s *HostOffering) SetUpfrontPrice(v string) *HostOffering {
-	s.UpfrontPrice = &v
-	return s
-}
-
 // Describes properties of a Dedicated Host.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostProperties
 type HostProperties struct {
@@ -41343,30 +33765,6 @@ func (s HostProperties) String() string {
 // GoString returns the string representation
 func (s HostProperties) GoString() string {
 	return s.String()
-}
-
-// SetCores sets the Cores field's value.
-func (s *HostProperties) SetCores(v int64) *HostProperties {
-	s.Cores = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *HostProperties) SetInstanceType(v string) *HostProperties {
-	s.InstanceType = &v
-	return s
-}
-
-// SetSockets sets the Sockets field's value.
-func (s *HostProperties) SetSockets(v int64) *HostProperties {
-	s.Sockets = &v
-	return s
-}
-
-// SetTotalVCpus sets the TotalVCpus field's value.
-func (s *HostProperties) SetTotalVCpus(v int64) *HostProperties {
-	s.TotalVCpus = &v
-	return s
 }
 
 // Details about the Dedicated Host Reservation and associated Dedicated Hosts.
@@ -41429,84 +33827,6 @@ func (s HostReservation) GoString() string {
 	return s.String()
 }
 
-// SetCount sets the Count field's value.
-func (s *HostReservation) SetCount(v int64) *HostReservation {
-	s.Count = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *HostReservation) SetCurrencyCode(v CurrencyCodeValues) *HostReservation {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *HostReservation) SetDuration(v int64) *HostReservation {
-	s.Duration = &v
-	return s
-}
-
-// SetEnd sets the End field's value.
-func (s *HostReservation) SetEnd(v time.Time) *HostReservation {
-	s.End = &v
-	return s
-}
-
-// SetHostIdSet sets the HostIdSet field's value.
-func (s *HostReservation) SetHostIdSet(v []string) *HostReservation {
-	s.HostIdSet = v
-	return s
-}
-
-// SetHostReservationId sets the HostReservationId field's value.
-func (s *HostReservation) SetHostReservationId(v string) *HostReservation {
-	s.HostReservationId = &v
-	return s
-}
-
-// SetHourlyPrice sets the HourlyPrice field's value.
-func (s *HostReservation) SetHourlyPrice(v string) *HostReservation {
-	s.HourlyPrice = &v
-	return s
-}
-
-// SetInstanceFamily sets the InstanceFamily field's value.
-func (s *HostReservation) SetInstanceFamily(v string) *HostReservation {
-	s.InstanceFamily = &v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *HostReservation) SetOfferingId(v string) *HostReservation {
-	s.OfferingId = &v
-	return s
-}
-
-// SetPaymentOption sets the PaymentOption field's value.
-func (s *HostReservation) SetPaymentOption(v PaymentOption) *HostReservation {
-	s.PaymentOption = v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *HostReservation) SetStart(v time.Time) *HostReservation {
-	s.Start = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *HostReservation) SetState(v ReservationState) *HostReservation {
-	s.State = v
-	return s
-}
-
-// SetUpfrontPrice sets the UpfrontPrice field's value.
-func (s *HostReservation) SetUpfrontPrice(v string) *HostReservation {
-	s.UpfrontPrice = &v
-	return s
-}
-
 // Describes an IAM instance profile.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfile
 type IamInstanceProfile struct {
@@ -41527,18 +33847,6 @@ func (s IamInstanceProfile) String() string {
 // GoString returns the string representation
 func (s IamInstanceProfile) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *IamInstanceProfile) SetArn(v string) *IamInstanceProfile {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *IamInstanceProfile) SetId(v string) *IamInstanceProfile {
-	s.Id = &v
-	return s
 }
 
 // Describes an association between an IAM instance profile and an instance.
@@ -41572,36 +33880,6 @@ func (s IamInstanceProfileAssociation) GoString() string {
 	return s.String()
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *IamInstanceProfileAssociation) SetAssociationId(v string) *IamInstanceProfileAssociation {
-	s.AssociationId = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *IamInstanceProfileAssociation) SetIamInstanceProfile(v *IamInstanceProfile) *IamInstanceProfileAssociation {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *IamInstanceProfileAssociation) SetInstanceId(v string) *IamInstanceProfileAssociation {
-	s.InstanceId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *IamInstanceProfileAssociation) SetState(v IamInstanceProfileAssociationState) *IamInstanceProfileAssociation {
-	s.State = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *IamInstanceProfileAssociation) SetTimestamp(v time.Time) *IamInstanceProfileAssociation {
-	s.Timestamp = &v
-	return s
-}
-
 // Describes an IAM instance profile.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfileSpecification
 type IamInstanceProfileSpecification struct {
@@ -41624,18 +33902,6 @@ func (s IamInstanceProfileSpecification) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *IamInstanceProfileSpecification) SetArn(v string) *IamInstanceProfileSpecification {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *IamInstanceProfileSpecification) SetName(v string) *IamInstanceProfileSpecification {
-	s.Name = &v
-	return s
-}
-
 // Describes the ICMP type and code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IcmpTypeCode
 type IcmpTypeCode struct {
@@ -41656,18 +33922,6 @@ func (s IcmpTypeCode) String() string {
 // GoString returns the string representation
 func (s IcmpTypeCode) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *IcmpTypeCode) SetCode(v int64) *IcmpTypeCode {
-	s.Code = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *IcmpTypeCode) SetType(v int64) *IcmpTypeCode {
-	s.Type = &v
-	return s
 }
 
 // Describes the ID format for a resource.
@@ -41695,24 +33949,6 @@ func (s IdFormat) String() string {
 // GoString returns the string representation
 func (s IdFormat) GoString() string {
 	return s.String()
-}
-
-// SetDeadline sets the Deadline field's value.
-func (s *IdFormat) SetDeadline(v time.Time) *IdFormat {
-	s.Deadline = &v
-	return s
-}
-
-// SetResource sets the Resource field's value.
-func (s *IdFormat) SetResource(v string) *IdFormat {
-	s.Resource = &v
-	return s
-}
-
-// SetUseLongIds sets the UseLongIds field's value.
-func (s *IdFormat) SetUseLongIds(v bool) *IdFormat {
-	s.UseLongIds = &v
-	return s
 }
 
 // Describes an image.
@@ -41811,150 +34047,6 @@ func (s Image) GoString() string {
 	return s.String()
 }
 
-// SetArchitecture sets the Architecture field's value.
-func (s *Image) SetArchitecture(v ArchitectureValues) *Image {
-	s.Architecture = v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *Image) SetBlockDeviceMappings(v []BlockDeviceMapping) *Image {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *Image) SetCreationDate(v string) *Image {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Image) SetDescription(v string) *Image {
-	s.Description = &v
-	return s
-}
-
-// SetEnaSupport sets the EnaSupport field's value.
-func (s *Image) SetEnaSupport(v bool) *Image {
-	s.EnaSupport = &v
-	return s
-}
-
-// SetHypervisor sets the Hypervisor field's value.
-func (s *Image) SetHypervisor(v HypervisorType) *Image {
-	s.Hypervisor = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *Image) SetImageId(v string) *Image {
-	s.ImageId = &v
-	return s
-}
-
-// SetImageLocation sets the ImageLocation field's value.
-func (s *Image) SetImageLocation(v string) *Image {
-	s.ImageLocation = &v
-	return s
-}
-
-// SetImageOwnerAlias sets the ImageOwnerAlias field's value.
-func (s *Image) SetImageOwnerAlias(v string) *Image {
-	s.ImageOwnerAlias = &v
-	return s
-}
-
-// SetImageType sets the ImageType field's value.
-func (s *Image) SetImageType(v ImageTypeValues) *Image {
-	s.ImageType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *Image) SetKernelId(v string) *Image {
-	s.KernelId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Image) SetName(v string) *Image {
-	s.Name = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *Image) SetOwnerId(v string) *Image {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Image) SetPlatform(v PlatformValues) *Image {
-	s.Platform = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *Image) SetProductCodes(v []ProductCode) *Image {
-	s.ProductCodes = v
-	return s
-}
-
-// SetPublic sets the Public field's value.
-func (s *Image) SetPublic(v bool) *Image {
-	s.Public = &v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *Image) SetRamdiskId(v string) *Image {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetRootDeviceName sets the RootDeviceName field's value.
-func (s *Image) SetRootDeviceName(v string) *Image {
-	s.RootDeviceName = &v
-	return s
-}
-
-// SetRootDeviceType sets the RootDeviceType field's value.
-func (s *Image) SetRootDeviceType(v DeviceType) *Image {
-	s.RootDeviceType = v
-	return s
-}
-
-// SetSriovNetSupport sets the SriovNetSupport field's value.
-func (s *Image) SetSriovNetSupport(v string) *Image {
-	s.SriovNetSupport = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Image) SetState(v ImageState) *Image {
-	s.State = v
-	return s
-}
-
-// SetStateReason sets the StateReason field's value.
-func (s *Image) SetStateReason(v *StateReason) *Image {
-	s.StateReason = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Image) SetTags(v []Tag) *Image {
-	s.Tags = v
-	return s
-}
-
-// SetVirtualizationType sets the VirtualizationType field's value.
-func (s *Image) SetVirtualizationType(v VirtualizationType) *Image {
-	s.VirtualizationType = v
-	return s
-}
-
 // Describes the disk container object for an import image task.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageDiskContainer
 type ImageDiskContainer struct {
@@ -41990,42 +34082,6 @@ func (s ImageDiskContainer) String() string {
 // GoString returns the string representation
 func (s ImageDiskContainer) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImageDiskContainer) SetDescription(v string) *ImageDiskContainer {
-	s.Description = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *ImageDiskContainer) SetDeviceName(v string) *ImageDiskContainer {
-	s.DeviceName = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *ImageDiskContainer) SetFormat(v string) *ImageDiskContainer {
-	s.Format = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *ImageDiskContainer) SetSnapshotId(v string) *ImageDiskContainer {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *ImageDiskContainer) SetUrl(v string) *ImageDiskContainer {
-	s.Url = &v
-	return s
-}
-
-// SetUserBucket sets the UserBucket field's value.
-func (s *ImageDiskContainer) SetUserBucket(v *UserBucket) *ImageDiskContainer {
-	s.UserBucket = v
-	return s
 }
 
 // Contains the parameters for ImportImage.
@@ -42090,66 +34146,6 @@ func (s ImportImageInput) GoString() string {
 	return s.String()
 }
 
-// SetArchitecture sets the Architecture field's value.
-func (s *ImportImageInput) SetArchitecture(v string) *ImportImageInput {
-	s.Architecture = &v
-	return s
-}
-
-// SetClientData sets the ClientData field's value.
-func (s *ImportImageInput) SetClientData(v *ClientData) *ImportImageInput {
-	s.ClientData = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *ImportImageInput) SetClientToken(v string) *ImportImageInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportImageInput) SetDescription(v string) *ImportImageInput {
-	s.Description = &v
-	return s
-}
-
-// SetDiskContainers sets the DiskContainers field's value.
-func (s *ImportImageInput) SetDiskContainers(v []ImageDiskContainer) *ImportImageInput {
-	s.DiskContainers = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ImportImageInput) SetDryRun(v bool) *ImportImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetHypervisor sets the Hypervisor field's value.
-func (s *ImportImageInput) SetHypervisor(v string) *ImportImageInput {
-	s.Hypervisor = &v
-	return s
-}
-
-// SetLicenseType sets the LicenseType field's value.
-func (s *ImportImageInput) SetLicenseType(v string) *ImportImageInput {
-	s.LicenseType = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ImportImageInput) SetPlatform(v string) *ImportImageInput {
-	s.Platform = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *ImportImageInput) SetRoleName(v string) *ImportImageInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the output for ImportImage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult
 type ImportImageOutput struct {
@@ -42206,72 +34202,6 @@ func (s ImportImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArchitecture sets the Architecture field's value.
-func (s *ImportImageOutput) SetArchitecture(v string) *ImportImageOutput {
-	s.Architecture = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportImageOutput) SetDescription(v string) *ImportImageOutput {
-	s.Description = &v
-	return s
-}
-
-// SetHypervisor sets the Hypervisor field's value.
-func (s *ImportImageOutput) SetHypervisor(v string) *ImportImageOutput {
-	s.Hypervisor = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ImportImageOutput) SetImageId(v string) *ImportImageOutput {
-	s.ImageId = &v
-	return s
-}
-
-// SetImportTaskId sets the ImportTaskId field's value.
-func (s *ImportImageOutput) SetImportTaskId(v string) *ImportImageOutput {
-	s.ImportTaskId = &v
-	return s
-}
-
-// SetLicenseType sets the LicenseType field's value.
-func (s *ImportImageOutput) SetLicenseType(v string) *ImportImageOutput {
-	s.LicenseType = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ImportImageOutput) SetPlatform(v string) *ImportImageOutput {
-	s.Platform = &v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *ImportImageOutput) SetProgress(v string) *ImportImageOutput {
-	s.Progress = &v
-	return s
-}
-
-// SetSnapshotDetails sets the SnapshotDetails field's value.
-func (s *ImportImageOutput) SetSnapshotDetails(v []SnapshotDetail) *ImportImageOutput {
-	s.SnapshotDetails = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ImportImageOutput) SetStatus(v string) *ImportImageOutput {
-	s.Status = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ImportImageOutput) SetStatusMessage(v string) *ImportImageOutput {
-	s.StatusMessage = &v
-	return s
-}
-
 // Describes an import image task.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageTask
 type ImportImageTask struct {
@@ -42323,72 +34253,6 @@ func (s ImportImageTask) String() string {
 // GoString returns the string representation
 func (s ImportImageTask) GoString() string {
 	return s.String()
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *ImportImageTask) SetArchitecture(v string) *ImportImageTask {
-	s.Architecture = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportImageTask) SetDescription(v string) *ImportImageTask {
-	s.Description = &v
-	return s
-}
-
-// SetHypervisor sets the Hypervisor field's value.
-func (s *ImportImageTask) SetHypervisor(v string) *ImportImageTask {
-	s.Hypervisor = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ImportImageTask) SetImageId(v string) *ImportImageTask {
-	s.ImageId = &v
-	return s
-}
-
-// SetImportTaskId sets the ImportTaskId field's value.
-func (s *ImportImageTask) SetImportTaskId(v string) *ImportImageTask {
-	s.ImportTaskId = &v
-	return s
-}
-
-// SetLicenseType sets the LicenseType field's value.
-func (s *ImportImageTask) SetLicenseType(v string) *ImportImageTask {
-	s.LicenseType = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ImportImageTask) SetPlatform(v string) *ImportImageTask {
-	s.Platform = &v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *ImportImageTask) SetProgress(v string) *ImportImageTask {
-	s.Progress = &v
-	return s
-}
-
-// SetSnapshotDetails sets the SnapshotDetails field's value.
-func (s *ImportImageTask) SetSnapshotDetails(v []SnapshotDetail) *ImportImageTask {
-	s.SnapshotDetails = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ImportImageTask) SetStatus(v string) *ImportImageTask {
-	s.Status = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ImportImageTask) SetStatusMessage(v string) *ImportImageTask {
-	s.StatusMessage = &v
-	return s
 }
 
 // Contains the parameters for ImportInstance.
@@ -42447,36 +34311,6 @@ func (s *ImportInstanceInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *ImportInstanceInput) SetDescription(v string) *ImportInstanceInput {
-	s.Description = &v
-	return s
-}
-
-// SetDiskImages sets the DiskImages field's value.
-func (s *ImportInstanceInput) SetDiskImages(v []DiskImage) *ImportInstanceInput {
-	s.DiskImages = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ImportInstanceInput) SetDryRun(v bool) *ImportInstanceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetLaunchSpecification sets the LaunchSpecification field's value.
-func (s *ImportInstanceInput) SetLaunchSpecification(v *ImportInstanceLaunchSpecification) *ImportInstanceInput {
-	s.LaunchSpecification = v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ImportInstanceInput) SetPlatform(v PlatformValues) *ImportInstanceInput {
-	s.Platform = v
-	return s
-}
-
 // Describes the launch specification for VM import.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceLaunchSpecification
 type ImportInstanceLaunchSpecification struct {
@@ -42531,72 +34365,6 @@ func (s ImportInstanceLaunchSpecification) GoString() string {
 	return s.String()
 }
 
-// SetAdditionalInfo sets the AdditionalInfo field's value.
-func (s *ImportInstanceLaunchSpecification) SetAdditionalInfo(v string) *ImportInstanceLaunchSpecification {
-	s.AdditionalInfo = &v
-	return s
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *ImportInstanceLaunchSpecification) SetArchitecture(v ArchitectureValues) *ImportInstanceLaunchSpecification {
-	s.Architecture = v
-	return s
-}
-
-// SetGroupIds sets the GroupIds field's value.
-func (s *ImportInstanceLaunchSpecification) SetGroupIds(v []string) *ImportInstanceLaunchSpecification {
-	s.GroupIds = v
-	return s
-}
-
-// SetGroupNames sets the GroupNames field's value.
-func (s *ImportInstanceLaunchSpecification) SetGroupNames(v []string) *ImportInstanceLaunchSpecification {
-	s.GroupNames = v
-	return s
-}
-
-// SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *ImportInstanceLaunchSpecification) SetInstanceInitiatedShutdownBehavior(v ShutdownBehavior) *ImportInstanceLaunchSpecification {
-	s.InstanceInitiatedShutdownBehavior = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ImportInstanceLaunchSpecification) SetInstanceType(v InstanceType) *ImportInstanceLaunchSpecification {
-	s.InstanceType = v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *ImportInstanceLaunchSpecification) SetMonitoring(v bool) *ImportInstanceLaunchSpecification {
-	s.Monitoring = &v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *ImportInstanceLaunchSpecification) SetPlacement(v *Placement) *ImportInstanceLaunchSpecification {
-	s.Placement = v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *ImportInstanceLaunchSpecification) SetPrivateIpAddress(v string) *ImportInstanceLaunchSpecification {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *ImportInstanceLaunchSpecification) SetSubnetId(v string) *ImportInstanceLaunchSpecification {
-	s.SubnetId = &v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *ImportInstanceLaunchSpecification) SetUserData(v *UserData) *ImportInstanceLaunchSpecification {
-	s.UserData = v
-	return s
-}
-
 // Contains the output for ImportInstance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceResult
 type ImportInstanceOutput struct {
@@ -42621,12 +34389,6 @@ func (s ImportInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ImportInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConversionTask sets the ConversionTask field's value.
-func (s *ImportInstanceOutput) SetConversionTask(v *ConversionTask) *ImportInstanceOutput {
-	s.ConversionTask = v
-	return s
 }
 
 // Describes an import instance task.
@@ -42657,30 +34419,6 @@ func (s ImportInstanceTaskDetails) String() string {
 // GoString returns the string representation
 func (s ImportInstanceTaskDetails) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportInstanceTaskDetails) SetDescription(v string) *ImportInstanceTaskDetails {
-	s.Description = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ImportInstanceTaskDetails) SetInstanceId(v string) *ImportInstanceTaskDetails {
-	s.InstanceId = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ImportInstanceTaskDetails) SetPlatform(v PlatformValues) *ImportInstanceTaskDetails {
-	s.Platform = v
-	return s
-}
-
-// SetVolumes sets the Volumes field's value.
-func (s *ImportInstanceTaskDetails) SetVolumes(v []ImportInstanceVolumeDetailItem) *ImportInstanceTaskDetails {
-	s.Volumes = v
-	return s
 }
 
 // Describes an import volume task.
@@ -42728,48 +34466,6 @@ func (s ImportInstanceVolumeDetailItem) String() string {
 // GoString returns the string representation
 func (s ImportInstanceVolumeDetailItem) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ImportInstanceVolumeDetailItem) SetAvailabilityZone(v string) *ImportInstanceVolumeDetailItem {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetBytesConverted sets the BytesConverted field's value.
-func (s *ImportInstanceVolumeDetailItem) SetBytesConverted(v int64) *ImportInstanceVolumeDetailItem {
-	s.BytesConverted = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportInstanceVolumeDetailItem) SetDescription(v string) *ImportInstanceVolumeDetailItem {
-	s.Description = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ImportInstanceVolumeDetailItem) SetImage(v *DiskImageDescription) *ImportInstanceVolumeDetailItem {
-	s.Image = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ImportInstanceVolumeDetailItem) SetStatus(v string) *ImportInstanceVolumeDetailItem {
-	s.Status = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ImportInstanceVolumeDetailItem) SetStatusMessage(v string) *ImportInstanceVolumeDetailItem {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVolume sets the Volume field's value.
-func (s *ImportInstanceVolumeDetailItem) SetVolume(v *DiskImageVolumeDescription) *ImportInstanceVolumeDetailItem {
-	s.Volume = v
-	return s
 }
 
 // Contains the parameters for ImportKeyPair.
@@ -42825,24 +34521,6 @@ func (s *ImportKeyPairInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *ImportKeyPairInput) SetDryRun(v bool) *ImportKeyPairInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *ImportKeyPairInput) SetKeyName(v string) *ImportKeyPairInput {
-	s.KeyName = &v
-	return s
-}
-
-// SetPublicKeyMaterial sets the PublicKeyMaterial field's value.
-func (s *ImportKeyPairInput) SetPublicKeyMaterial(v []byte) *ImportKeyPairInput {
-	s.PublicKeyMaterial = v
-	return s
-}
-
 // Contains the output of ImportKeyPair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairResult
 type ImportKeyPairOutput struct {
@@ -42870,18 +34548,6 @@ func (s ImportKeyPairOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ImportKeyPairOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyFingerprint sets the KeyFingerprint field's value.
-func (s *ImportKeyPairOutput) SetKeyFingerprint(v string) *ImportKeyPairOutput {
-	s.KeyFingerprint = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *ImportKeyPairOutput) SetKeyName(v string) *ImportKeyPairOutput {
-	s.KeyName = &v
-	return s
 }
 
 // Contains the parameters for ImportSnapshot.
@@ -42921,42 +34587,6 @@ func (s ImportSnapshotInput) GoString() string {
 	return s.String()
 }
 
-// SetClientData sets the ClientData field's value.
-func (s *ImportSnapshotInput) SetClientData(v *ClientData) *ImportSnapshotInput {
-	s.ClientData = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *ImportSnapshotInput) SetClientToken(v string) *ImportSnapshotInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportSnapshotInput) SetDescription(v string) *ImportSnapshotInput {
-	s.Description = &v
-	return s
-}
-
-// SetDiskContainer sets the DiskContainer field's value.
-func (s *ImportSnapshotInput) SetDiskContainer(v *SnapshotDiskContainer) *ImportSnapshotInput {
-	s.DiskContainer = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ImportSnapshotInput) SetDryRun(v bool) *ImportSnapshotInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *ImportSnapshotInput) SetRoleName(v string) *ImportSnapshotInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the output for ImportSnapshot.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult
 type ImportSnapshotOutput struct {
@@ -42989,24 +34619,6 @@ func (s ImportSnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDescription sets the Description field's value.
-func (s *ImportSnapshotOutput) SetDescription(v string) *ImportSnapshotOutput {
-	s.Description = &v
-	return s
-}
-
-// SetImportTaskId sets the ImportTaskId field's value.
-func (s *ImportSnapshotOutput) SetImportTaskId(v string) *ImportSnapshotOutput {
-	s.ImportTaskId = &v
-	return s
-}
-
-// SetSnapshotTaskDetail sets the SnapshotTaskDetail field's value.
-func (s *ImportSnapshotOutput) SetSnapshotTaskDetail(v *SnapshotTaskDetail) *ImportSnapshotOutput {
-	s.SnapshotTaskDetail = v
-	return s
-}
-
 // Describes an import snapshot task.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotTask
 type ImportSnapshotTask struct {
@@ -43030,24 +34642,6 @@ func (s ImportSnapshotTask) String() string {
 // GoString returns the string representation
 func (s ImportSnapshotTask) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportSnapshotTask) SetDescription(v string) *ImportSnapshotTask {
-	s.Description = &v
-	return s
-}
-
-// SetImportTaskId sets the ImportTaskId field's value.
-func (s *ImportSnapshotTask) SetImportTaskId(v string) *ImportSnapshotTask {
-	s.ImportTaskId = &v
-	return s
-}
-
-// SetSnapshotTaskDetail sets the SnapshotTaskDetail field's value.
-func (s *ImportSnapshotTask) SetSnapshotTaskDetail(v *SnapshotTaskDetail) *ImportSnapshotTask {
-	s.SnapshotTaskDetail = v
-	return s
 }
 
 // Contains the parameters for ImportVolume.
@@ -43122,36 +34716,6 @@ func (s *ImportVolumeInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ImportVolumeInput) SetAvailabilityZone(v string) *ImportVolumeInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportVolumeInput) SetDescription(v string) *ImportVolumeInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ImportVolumeInput) SetDryRun(v bool) *ImportVolumeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ImportVolumeInput) SetImage(v *DiskImageDetail) *ImportVolumeInput {
-	s.Image = v
-	return s
-}
-
-// SetVolume sets the Volume field's value.
-func (s *ImportVolumeInput) SetVolume(v *VolumeDetail) *ImportVolumeInput {
-	s.Volume = v
-	return s
-}
-
 // Contains the output for ImportVolume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeResult
 type ImportVolumeOutput struct {
@@ -43176,12 +34740,6 @@ func (s ImportVolumeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ImportVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConversionTask sets the ConversionTask field's value.
-func (s *ImportVolumeOutput) SetConversionTask(v *ConversionTask) *ImportVolumeOutput {
-	s.ConversionTask = v
-	return s
 }
 
 // Describes an import volume task.
@@ -43221,36 +34779,6 @@ func (s ImportVolumeTaskDetails) String() string {
 // GoString returns the string representation
 func (s ImportVolumeTaskDetails) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ImportVolumeTaskDetails) SetAvailabilityZone(v string) *ImportVolumeTaskDetails {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetBytesConverted sets the BytesConverted field's value.
-func (s *ImportVolumeTaskDetails) SetBytesConverted(v int64) *ImportVolumeTaskDetails {
-	s.BytesConverted = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImportVolumeTaskDetails) SetDescription(v string) *ImportVolumeTaskDetails {
-	s.Description = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ImportVolumeTaskDetails) SetImage(v *DiskImageDescription) *ImportVolumeTaskDetails {
-	s.Image = v
-	return s
-}
-
-// SetVolume sets the Volume field's value.
-func (s *ImportVolumeTaskDetails) SetVolume(v *DiskImageVolumeDescription) *ImportVolumeTaskDetails {
-	s.Volume = v
-	return s
 }
 
 // Describes an instance.
@@ -43408,240 +34936,6 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
-// SetAmiLaunchIndex sets the AmiLaunchIndex field's value.
-func (s *Instance) SetAmiLaunchIndex(v int64) *Instance {
-	s.AmiLaunchIndex = &v
-	return s
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *Instance) SetArchitecture(v ArchitectureValues) *Instance {
-	s.Architecture = v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *Instance) SetBlockDeviceMappings(v []InstanceBlockDeviceMapping) *Instance {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *Instance) SetClientToken(v string) *Instance {
-	s.ClientToken = &v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *Instance) SetEbsOptimized(v bool) *Instance {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetElasticGpuAssociations sets the ElasticGpuAssociations field's value.
-func (s *Instance) SetElasticGpuAssociations(v []ElasticGpuAssociation) *Instance {
-	s.ElasticGpuAssociations = v
-	return s
-}
-
-// SetEnaSupport sets the EnaSupport field's value.
-func (s *Instance) SetEnaSupport(v bool) *Instance {
-	s.EnaSupport = &v
-	return s
-}
-
-// SetHypervisor sets the Hypervisor field's value.
-func (s *Instance) SetHypervisor(v HypervisorType) *Instance {
-	s.Hypervisor = v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *Instance) SetIamInstanceProfile(v *IamInstanceProfile) *Instance {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *Instance) SetImageId(v string) *Instance {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Instance) SetInstanceId(v string) *Instance {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceLifecycle sets the InstanceLifecycle field's value.
-func (s *Instance) SetInstanceLifecycle(v InstanceLifecycleType) *Instance {
-	s.InstanceLifecycle = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *Instance) SetInstanceType(v InstanceType) *Instance {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *Instance) SetKernelId(v string) *Instance {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *Instance) SetKeyName(v string) *Instance {
-	s.KeyName = &v
-	return s
-}
-
-// SetLaunchTime sets the LaunchTime field's value.
-func (s *Instance) SetLaunchTime(v time.Time) *Instance {
-	s.LaunchTime = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *Instance) SetMonitoring(v *Monitoring) *Instance {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *Instance) SetNetworkInterfaces(v []InstanceNetworkInterface) *Instance {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *Instance) SetPlacement(v *Placement) *Instance {
-	s.Placement = v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Instance) SetPlatform(v PlatformValues) *Instance {
-	s.Platform = v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *Instance) SetPrivateDnsName(v string) *Instance {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *Instance) SetPrivateIpAddress(v string) *Instance {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *Instance) SetProductCodes(v []ProductCode) *Instance {
-	s.ProductCodes = v
-	return s
-}
-
-// SetPublicDnsName sets the PublicDnsName field's value.
-func (s *Instance) SetPublicDnsName(v string) *Instance {
-	s.PublicDnsName = &v
-	return s
-}
-
-// SetPublicIpAddress sets the PublicIpAddress field's value.
-func (s *Instance) SetPublicIpAddress(v string) *Instance {
-	s.PublicIpAddress = &v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *Instance) SetRamdiskId(v string) *Instance {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetRootDeviceName sets the RootDeviceName field's value.
-func (s *Instance) SetRootDeviceName(v string) *Instance {
-	s.RootDeviceName = &v
-	return s
-}
-
-// SetRootDeviceType sets the RootDeviceType field's value.
-func (s *Instance) SetRootDeviceType(v DeviceType) *Instance {
-	s.RootDeviceType = v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *Instance) SetSecurityGroups(v []GroupIdentifier) *Instance {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *Instance) SetSourceDestCheck(v bool) *Instance {
-	s.SourceDestCheck = &v
-	return s
-}
-
-// SetSpotInstanceRequestId sets the SpotInstanceRequestId field's value.
-func (s *Instance) SetSpotInstanceRequestId(v string) *Instance {
-	s.SpotInstanceRequestId = &v
-	return s
-}
-
-// SetSriovNetSupport sets the SriovNetSupport field's value.
-func (s *Instance) SetSriovNetSupport(v string) *Instance {
-	s.SriovNetSupport = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Instance) SetState(v *InstanceState) *Instance {
-	s.State = v
-	return s
-}
-
-// SetStateReason sets the StateReason field's value.
-func (s *Instance) SetStateReason(v *StateReason) *Instance {
-	s.StateReason = v
-	return s
-}
-
-// SetStateTransitionReason sets the StateTransitionReason field's value.
-func (s *Instance) SetStateTransitionReason(v string) *Instance {
-	s.StateTransitionReason = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *Instance) SetSubnetId(v string) *Instance {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Instance) SetTags(v []Tag) *Instance {
-	s.Tags = v
-	return s
-}
-
-// SetVirtualizationType sets the VirtualizationType field's value.
-func (s *Instance) SetVirtualizationType(v VirtualizationType) *Instance {
-	s.VirtualizationType = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *Instance) SetVpcId(v string) *Instance {
-	s.VpcId = &v
-	return s
-}
-
 // Describes a block device mapping.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMapping
 type InstanceBlockDeviceMapping struct {
@@ -43663,18 +34957,6 @@ func (s InstanceBlockDeviceMapping) String() string {
 // GoString returns the string representation
 func (s InstanceBlockDeviceMapping) GoString() string {
 	return s.String()
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *InstanceBlockDeviceMapping) SetDeviceName(v string) *InstanceBlockDeviceMapping {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *InstanceBlockDeviceMapping) SetEbs(v *EbsInstanceBlockDevice) *InstanceBlockDeviceMapping {
-	s.Ebs = v
-	return s
 }
 
 // Describes a block device mapping entry.
@@ -43706,30 +34988,6 @@ func (s InstanceBlockDeviceMappingSpecification) GoString() string {
 	return s.String()
 }
 
-// SetDeviceName sets the DeviceName field's value.
-func (s *InstanceBlockDeviceMappingSpecification) SetDeviceName(v string) *InstanceBlockDeviceMappingSpecification {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *InstanceBlockDeviceMappingSpecification) SetEbs(v *EbsInstanceBlockDeviceSpecification) *InstanceBlockDeviceMappingSpecification {
-	s.Ebs = v
-	return s
-}
-
-// SetNoDevice sets the NoDevice field's value.
-func (s *InstanceBlockDeviceMappingSpecification) SetNoDevice(v string) *InstanceBlockDeviceMappingSpecification {
-	s.NoDevice = &v
-	return s
-}
-
-// SetVirtualName sets the VirtualName field's value.
-func (s *InstanceBlockDeviceMappingSpecification) SetVirtualName(v string) *InstanceBlockDeviceMappingSpecification {
-	s.VirtualName = &v
-	return s
-}
-
 // Information about the instance type that the Dedicated Host supports.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCapacity
 type InstanceCapacity struct {
@@ -43755,24 +35013,6 @@ func (s InstanceCapacity) GoString() string {
 	return s.String()
 }
 
-// SetAvailableCapacity sets the AvailableCapacity field's value.
-func (s *InstanceCapacity) SetAvailableCapacity(v int64) *InstanceCapacity {
-	s.AvailableCapacity = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *InstanceCapacity) SetInstanceType(v string) *InstanceCapacity {
-	s.InstanceType = &v
-	return s
-}
-
-// SetTotalCapacity sets the TotalCapacity field's value.
-func (s *InstanceCapacity) SetTotalCapacity(v int64) *InstanceCapacity {
-	s.TotalCapacity = &v
-	return s
-}
-
 // Describes a Reserved Instance listing state.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCount
 type InstanceCount struct {
@@ -43793,18 +35033,6 @@ func (s InstanceCount) String() string {
 // GoString returns the string representation
 func (s InstanceCount) GoString() string {
 	return s.String()
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *InstanceCount) SetInstanceCount(v int64) *InstanceCount {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *InstanceCount) SetState(v ListingState) *InstanceCount {
-	s.State = v
-	return s
 }
 
 // Describes the credit option for CPU usage of a T2 instance.
@@ -43830,18 +35058,6 @@ func (s InstanceCreditSpecification) GoString() string {
 	return s.String()
 }
 
-// SetCpuCredits sets the CpuCredits field's value.
-func (s *InstanceCreditSpecification) SetCpuCredits(v string) *InstanceCreditSpecification {
-	s.CpuCredits = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceCreditSpecification) SetInstanceId(v string) *InstanceCreditSpecification {
-	s.InstanceId = &v
-	return s
-}
-
 // Describes the credit option for CPU usage of a T2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCreditSpecificationRequest
 type InstanceCreditSpecificationRequest struct {
@@ -43863,18 +35079,6 @@ func (s InstanceCreditSpecificationRequest) String() string {
 // GoString returns the string representation
 func (s InstanceCreditSpecificationRequest) GoString() string {
 	return s.String()
-}
-
-// SetCpuCredits sets the CpuCredits field's value.
-func (s *InstanceCreditSpecificationRequest) SetCpuCredits(v string) *InstanceCreditSpecificationRequest {
-	s.CpuCredits = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceCreditSpecificationRequest) SetInstanceId(v string) *InstanceCreditSpecificationRequest {
-	s.InstanceId = &v
-	return s
 }
 
 // Describes an instance to export.
@@ -43899,18 +35103,6 @@ func (s InstanceExportDetails) GoString() string {
 	return s.String()
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceExportDetails) SetInstanceId(v string) *InstanceExportDetails {
-	s.InstanceId = &v
-	return s
-}
-
-// SetTargetEnvironment sets the TargetEnvironment field's value.
-func (s *InstanceExportDetails) SetTargetEnvironment(v ExportEnvironment) *InstanceExportDetails {
-	s.TargetEnvironment = v
-	return s
-}
-
 // Describes an IPv6 address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceIpv6Address
 type InstanceIpv6Address struct {
@@ -43930,12 +35122,6 @@ func (s InstanceIpv6Address) GoString() string {
 	return s.String()
 }
 
-// SetIpv6Address sets the Ipv6Address field's value.
-func (s *InstanceIpv6Address) SetIpv6Address(v string) *InstanceIpv6Address {
-	s.Ipv6Address = &v
-	return s
-}
-
 // Describes an IPv6 address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceIpv6AddressRequest
 type InstanceIpv6AddressRequest struct {
@@ -43953,12 +35139,6 @@ func (s InstanceIpv6AddressRequest) String() string {
 // GoString returns the string representation
 func (s InstanceIpv6AddressRequest) GoString() string {
 	return s.String()
-}
-
-// SetIpv6Address sets the Ipv6Address field's value.
-func (s *InstanceIpv6AddressRequest) SetIpv6Address(v string) *InstanceIpv6AddressRequest {
-	s.Ipv6Address = &v
-	return s
 }
 
 // Describes the market (purchasing) option for the instances.
@@ -43983,18 +35163,6 @@ func (s InstanceMarketOptionsRequest) GoString() string {
 	return s.String()
 }
 
-// SetMarketType sets the MarketType field's value.
-func (s *InstanceMarketOptionsRequest) SetMarketType(v MarketType) *InstanceMarketOptionsRequest {
-	s.MarketType = v
-	return s
-}
-
-// SetSpotOptions sets the SpotOptions field's value.
-func (s *InstanceMarketOptionsRequest) SetSpotOptions(v *SpotMarketOptions) *InstanceMarketOptionsRequest {
-	s.SpotOptions = v
-	return s
-}
-
 // Describes the monitoring of an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMonitoring
 type InstanceMonitoring struct {
@@ -44015,18 +35183,6 @@ func (s InstanceMonitoring) String() string {
 // GoString returns the string representation
 func (s InstanceMonitoring) GoString() string {
 	return s.String()
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceMonitoring) SetInstanceId(v string) *InstanceMonitoring {
-	s.InstanceId = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *InstanceMonitoring) SetMonitoring(v *Monitoring) *InstanceMonitoring {
-	s.Monitoring = v
-	return s
 }
 
 // Describes a network interface.
@@ -44091,96 +35247,6 @@ func (s InstanceNetworkInterface) GoString() string {
 	return s.String()
 }
 
-// SetAssociation sets the Association field's value.
-func (s *InstanceNetworkInterface) SetAssociation(v *InstanceNetworkInterfaceAssociation) *InstanceNetworkInterface {
-	s.Association = v
-	return s
-}
-
-// SetAttachment sets the Attachment field's value.
-func (s *InstanceNetworkInterface) SetAttachment(v *InstanceNetworkInterfaceAttachment) *InstanceNetworkInterface {
-	s.Attachment = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *InstanceNetworkInterface) SetDescription(v string) *InstanceNetworkInterface {
-	s.Description = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *InstanceNetworkInterface) SetGroups(v []GroupIdentifier) *InstanceNetworkInterface {
-	s.Groups = v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *InstanceNetworkInterface) SetIpv6Addresses(v []InstanceIpv6Address) *InstanceNetworkInterface {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetMacAddress sets the MacAddress field's value.
-func (s *InstanceNetworkInterface) SetMacAddress(v string) *InstanceNetworkInterface {
-	s.MacAddress = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *InstanceNetworkInterface) SetNetworkInterfaceId(v string) *InstanceNetworkInterface {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *InstanceNetworkInterface) SetOwnerId(v string) *InstanceNetworkInterface {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *InstanceNetworkInterface) SetPrivateDnsName(v string) *InstanceNetworkInterface {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *InstanceNetworkInterface) SetPrivateIpAddress(v string) *InstanceNetworkInterface {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *InstanceNetworkInterface) SetPrivateIpAddresses(v []InstancePrivateIpAddress) *InstanceNetworkInterface {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *InstanceNetworkInterface) SetSourceDestCheck(v bool) *InstanceNetworkInterface {
-	s.SourceDestCheck = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *InstanceNetworkInterface) SetStatus(v NetworkInterfaceStatus) *InstanceNetworkInterface {
-	s.Status = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *InstanceNetworkInterface) SetSubnetId(v string) *InstanceNetworkInterface {
-	s.SubnetId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *InstanceNetworkInterface) SetVpcId(v string) *InstanceNetworkInterface {
-	s.VpcId = &v
-	return s
-}
-
 // Describes association information for an Elastic IP address (IPv4).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAssociation
 type InstanceNetworkInterfaceAssociation struct {
@@ -44204,24 +35270,6 @@ func (s InstanceNetworkInterfaceAssociation) String() string {
 // GoString returns the string representation
 func (s InstanceNetworkInterfaceAssociation) GoString() string {
 	return s.String()
-}
-
-// SetIpOwnerId sets the IpOwnerId field's value.
-func (s *InstanceNetworkInterfaceAssociation) SetIpOwnerId(v string) *InstanceNetworkInterfaceAssociation {
-	s.IpOwnerId = &v
-	return s
-}
-
-// SetPublicDnsName sets the PublicDnsName field's value.
-func (s *InstanceNetworkInterfaceAssociation) SetPublicDnsName(v string) *InstanceNetworkInterfaceAssociation {
-	s.PublicDnsName = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *InstanceNetworkInterfaceAssociation) SetPublicIp(v string) *InstanceNetworkInterfaceAssociation {
-	s.PublicIp = &v
-	return s
 }
 
 // Describes a network interface attachment.
@@ -44253,36 +35301,6 @@ func (s InstanceNetworkInterfaceAttachment) String() string {
 // GoString returns the string representation
 func (s InstanceNetworkInterfaceAttachment) GoString() string {
 	return s.String()
-}
-
-// SetAttachTime sets the AttachTime field's value.
-func (s *InstanceNetworkInterfaceAttachment) SetAttachTime(v time.Time) *InstanceNetworkInterfaceAttachment {
-	s.AttachTime = &v
-	return s
-}
-
-// SetAttachmentId sets the AttachmentId field's value.
-func (s *InstanceNetworkInterfaceAttachment) SetAttachmentId(v string) *InstanceNetworkInterfaceAttachment {
-	s.AttachmentId = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *InstanceNetworkInterfaceAttachment) SetDeleteOnTermination(v bool) *InstanceNetworkInterfaceAttachment {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *InstanceNetworkInterfaceAttachment) SetDeviceIndex(v int64) *InstanceNetworkInterfaceAttachment {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *InstanceNetworkInterfaceAttachment) SetStatus(v AttachmentStatus) *InstanceNetworkInterfaceAttachment {
-	s.Status = v
-	return s
 }
 
 // Describes a network interface.
@@ -44380,78 +35398,6 @@ func (s *InstanceNetworkInterfaceSpecification) Validate() error {
 	return nil
 }
 
-// SetAssociatePublicIpAddress sets the AssociatePublicIpAddress field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetAssociatePublicIpAddress(v bool) *InstanceNetworkInterfaceSpecification {
-	s.AssociatePublicIpAddress = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetDeleteOnTermination(v bool) *InstanceNetworkInterfaceSpecification {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetDescription(v string) *InstanceNetworkInterfaceSpecification {
-	s.Description = &v
-	return s
-}
-
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetDeviceIndex(v int64) *InstanceNetworkInterfaceSpecification {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetGroups(v []string) *InstanceNetworkInterfaceSpecification {
-	s.Groups = v
-	return s
-}
-
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetIpv6AddressCount(v int64) *InstanceNetworkInterfaceSpecification {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetIpv6Addresses(v []InstanceIpv6Address) *InstanceNetworkInterfaceSpecification {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetNetworkInterfaceId(v string) *InstanceNetworkInterfaceSpecification {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetPrivateIpAddress(v string) *InstanceNetworkInterfaceSpecification {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetPrivateIpAddresses(v []PrivateIpAddressSpecification) *InstanceNetworkInterfaceSpecification {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetSecondaryPrivateIpAddressCount sets the SecondaryPrivateIpAddressCount field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetSecondaryPrivateIpAddressCount(v int64) *InstanceNetworkInterfaceSpecification {
-	s.SecondaryPrivateIpAddressCount = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *InstanceNetworkInterfaceSpecification) SetSubnetId(v string) *InstanceNetworkInterfaceSpecification {
-	s.SubnetId = &v
-	return s
-}
-
 // Describes a private IPv4 address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstancePrivateIpAddress
 type InstancePrivateIpAddress struct {
@@ -44479,30 +35425,6 @@ func (s InstancePrivateIpAddress) String() string {
 // GoString returns the string representation
 func (s InstancePrivateIpAddress) GoString() string {
 	return s.String()
-}
-
-// SetAssociation sets the Association field's value.
-func (s *InstancePrivateIpAddress) SetAssociation(v *InstanceNetworkInterfaceAssociation) *InstancePrivateIpAddress {
-	s.Association = v
-	return s
-}
-
-// SetPrimary sets the Primary field's value.
-func (s *InstancePrivateIpAddress) SetPrimary(v bool) *InstancePrivateIpAddress {
-	s.Primary = &v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *InstancePrivateIpAddress) SetPrivateDnsName(v string) *InstancePrivateIpAddress {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *InstancePrivateIpAddress) SetPrivateIpAddress(v string) *InstancePrivateIpAddress {
-	s.PrivateIpAddress = &v
-	return s
 }
 
 // Describes the current state of an instance.
@@ -44540,18 +35462,6 @@ func (s InstanceState) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *InstanceState) SetCode(v int64) *InstanceState {
-	s.Code = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *InstanceState) SetName(v InstanceStateName) *InstanceState {
-	s.Name = v
-	return s
-}
-
 // Describes an instance state change.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStateChange
 type InstanceStateChange struct {
@@ -44575,24 +35485,6 @@ func (s InstanceStateChange) String() string {
 // GoString returns the string representation
 func (s InstanceStateChange) GoString() string {
 	return s.String()
-}
-
-// SetCurrentState sets the CurrentState field's value.
-func (s *InstanceStateChange) SetCurrentState(v *InstanceState) *InstanceStateChange {
-	s.CurrentState = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceStateChange) SetInstanceId(v string) *InstanceStateChange {
-	s.InstanceId = &v
-	return s
-}
-
-// SetPreviousState sets the PreviousState field's value.
-func (s *InstanceStateChange) SetPreviousState(v *InstanceState) *InstanceStateChange {
-	s.PreviousState = v
-	return s
 }
 
 // Describes the status of an instance.
@@ -44633,42 +35525,6 @@ func (s InstanceStatus) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *InstanceStatus) SetAvailabilityZone(v string) *InstanceStatus {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *InstanceStatus) SetEvents(v []InstanceStatusEvent) *InstanceStatus {
-	s.Events = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceStatus) SetInstanceId(v string) *InstanceStatus {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceState sets the InstanceState field's value.
-func (s *InstanceStatus) SetInstanceState(v *InstanceState) *InstanceStatus {
-	s.InstanceState = v
-	return s
-}
-
-// SetInstanceStatus sets the InstanceStatus field's value.
-func (s *InstanceStatus) SetInstanceStatus(v *InstanceStatusSummary) *InstanceStatus {
-	s.InstanceStatus = v
-	return s
-}
-
-// SetSystemStatus sets the SystemStatus field's value.
-func (s *InstanceStatus) SetSystemStatus(v *InstanceStatusSummary) *InstanceStatus {
-	s.SystemStatus = v
-	return s
-}
-
 // Describes the instance status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusDetails
 type InstanceStatusDetails struct {
@@ -44693,24 +35549,6 @@ func (s InstanceStatusDetails) String() string {
 // GoString returns the string representation
 func (s InstanceStatusDetails) GoString() string {
 	return s.String()
-}
-
-// SetImpairedSince sets the ImpairedSince field's value.
-func (s *InstanceStatusDetails) SetImpairedSince(v time.Time) *InstanceStatusDetails {
-	s.ImpairedSince = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *InstanceStatusDetails) SetName(v StatusName) *InstanceStatusDetails {
-	s.Name = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *InstanceStatusDetails) SetStatus(v StatusType) *InstanceStatusDetails {
-	s.Status = v
-	return s
 }
 
 // Describes a scheduled event for an instance.
@@ -44745,30 +35583,6 @@ func (s InstanceStatusEvent) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *InstanceStatusEvent) SetCode(v EventCode) *InstanceStatusEvent {
-	s.Code = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *InstanceStatusEvent) SetDescription(v string) *InstanceStatusEvent {
-	s.Description = &v
-	return s
-}
-
-// SetNotAfter sets the NotAfter field's value.
-func (s *InstanceStatusEvent) SetNotAfter(v time.Time) *InstanceStatusEvent {
-	s.NotAfter = &v
-	return s
-}
-
-// SetNotBefore sets the NotBefore field's value.
-func (s *InstanceStatusEvent) SetNotBefore(v time.Time) *InstanceStatusEvent {
-	s.NotBefore = &v
-	return s
-}
-
 // Describes the status of an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusSummary
 type InstanceStatusSummary struct {
@@ -44789,18 +35603,6 @@ func (s InstanceStatusSummary) String() string {
 // GoString returns the string representation
 func (s InstanceStatusSummary) GoString() string {
 	return s.String()
-}
-
-// SetDetails sets the Details field's value.
-func (s *InstanceStatusSummary) SetDetails(v []InstanceStatusDetails) *InstanceStatusSummary {
-	s.Details = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *InstanceStatusSummary) SetStatus(v SummaryStatus) *InstanceStatusSummary {
-	s.Status = v
-	return s
 }
 
 // Describes an Internet gateway.
@@ -44828,24 +35630,6 @@ func (s InternetGateway) GoString() string {
 	return s.String()
 }
 
-// SetAttachments sets the Attachments field's value.
-func (s *InternetGateway) SetAttachments(v []InternetGatewayAttachment) *InternetGateway {
-	s.Attachments = v
-	return s
-}
-
-// SetInternetGatewayId sets the InternetGatewayId field's value.
-func (s *InternetGateway) SetInternetGatewayId(v string) *InternetGateway {
-	s.InternetGatewayId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *InternetGateway) SetTags(v []Tag) *InternetGateway {
-	s.Tags = v
-	return s
-}
-
 // Describes the attachment of a VPC to an Internet gateway or an egress-only
 // Internet gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGatewayAttachment
@@ -44867,18 +35651,6 @@ func (s InternetGatewayAttachment) String() string {
 // GoString returns the string representation
 func (s InternetGatewayAttachment) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *InternetGatewayAttachment) SetState(v AttachmentStatus) *InternetGatewayAttachment {
-	s.State = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *InternetGatewayAttachment) SetVpcId(v string) *InternetGatewayAttachment {
-	s.VpcId = &v
-	return s
 }
 
 // Describes a set of permissions for a security group rule.
@@ -44933,48 +35705,6 @@ func (s IpPermission) GoString() string {
 	return s.String()
 }
 
-// SetFromPort sets the FromPort field's value.
-func (s *IpPermission) SetFromPort(v int64) *IpPermission {
-	s.FromPort = &v
-	return s
-}
-
-// SetIpProtocol sets the IpProtocol field's value.
-func (s *IpPermission) SetIpProtocol(v string) *IpPermission {
-	s.IpProtocol = &v
-	return s
-}
-
-// SetIpRanges sets the IpRanges field's value.
-func (s *IpPermission) SetIpRanges(v []IpRange) *IpPermission {
-	s.IpRanges = v
-	return s
-}
-
-// SetIpv6Ranges sets the Ipv6Ranges field's value.
-func (s *IpPermission) SetIpv6Ranges(v []Ipv6Range) *IpPermission {
-	s.Ipv6Ranges = v
-	return s
-}
-
-// SetPrefixListIds sets the PrefixListIds field's value.
-func (s *IpPermission) SetPrefixListIds(v []PrefixListId) *IpPermission {
-	s.PrefixListIds = v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *IpPermission) SetToPort(v int64) *IpPermission {
-	s.ToPort = &v
-	return s
-}
-
-// SetUserIdGroupPairs sets the UserIdGroupPairs field's value.
-func (s *IpPermission) SetUserIdGroupPairs(v []UserIdGroupPair) *IpPermission {
-	s.UserIdGroupPairs = v
-	return s
-}
-
 // Describes an IPv4 range.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpRange
 type IpRange struct {
@@ -45002,18 +35732,6 @@ func (s IpRange) GoString() string {
 	return s.String()
 }
 
-// SetCidrIp sets the CidrIp field's value.
-func (s *IpRange) SetCidrIp(v string) *IpRange {
-	s.CidrIp = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *IpRange) SetDescription(v string) *IpRange {
-	s.Description = &v
-	return s
-}
-
 // Describes an IPv6 CIDR block.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6CidrBlock
 type Ipv6CidrBlock struct {
@@ -45031,12 +35749,6 @@ func (s Ipv6CidrBlock) String() string {
 // GoString returns the string representation
 func (s Ipv6CidrBlock) GoString() string {
 	return s.String()
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *Ipv6CidrBlock) SetIpv6CidrBlock(v string) *Ipv6CidrBlock {
-	s.Ipv6CidrBlock = &v
-	return s
 }
 
 // [EC2-VPC only] Describes an IPv6 range.
@@ -45066,18 +35778,6 @@ func (s Ipv6Range) GoString() string {
 	return s.String()
 }
 
-// SetCidrIpv6 sets the CidrIpv6 field's value.
-func (s *Ipv6Range) SetCidrIpv6(v string) *Ipv6Range {
-	s.CidrIpv6 = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Ipv6Range) SetDescription(v string) *Ipv6Range {
-	s.Description = &v
-	return s
-}
-
 // Describes a key pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPairInfo
 type KeyPairInfo struct {
@@ -45103,18 +35803,6 @@ func (s KeyPairInfo) GoString() string {
 	return s.String()
 }
 
-// SetKeyFingerprint sets the KeyFingerprint field's value.
-func (s *KeyPairInfo) SetKeyFingerprint(v string) *KeyPairInfo {
-	s.KeyFingerprint = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *KeyPairInfo) SetKeyName(v string) *KeyPairInfo {
-	s.KeyName = &v
-	return s
-}
-
 // Describes a launch permission.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermission
 type LaunchPermission struct {
@@ -45135,18 +35823,6 @@ func (s LaunchPermission) String() string {
 // GoString returns the string representation
 func (s LaunchPermission) GoString() string {
 	return s.String()
-}
-
-// SetGroup sets the Group field's value.
-func (s *LaunchPermission) SetGroup(v PermissionGroup) *LaunchPermission {
-	s.Group = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *LaunchPermission) SetUserId(v string) *LaunchPermission {
-	s.UserId = &v
-	return s
 }
 
 // Describes a launch permission modification.
@@ -45170,18 +35846,6 @@ func (s LaunchPermissionModifications) String() string {
 // GoString returns the string representation
 func (s LaunchPermissionModifications) GoString() string {
 	return s.String()
-}
-
-// SetAdd sets the Add field's value.
-func (s *LaunchPermissionModifications) SetAdd(v []LaunchPermission) *LaunchPermissionModifications {
-	s.Add = v
-	return s
-}
-
-// SetRemove sets the Remove field's value.
-func (s *LaunchPermissionModifications) SetRemove(v []LaunchPermission) *LaunchPermissionModifications {
-	s.Remove = v
-	return s
 }
 
 // Describes the launch specification for an instance.
@@ -45256,96 +35920,6 @@ func (s LaunchSpecification) GoString() string {
 	return s.String()
 }
 
-// SetAddressingType sets the AddressingType field's value.
-func (s *LaunchSpecification) SetAddressingType(v string) *LaunchSpecification {
-	s.AddressingType = &v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *LaunchSpecification) SetBlockDeviceMappings(v []BlockDeviceMapping) *LaunchSpecification {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *LaunchSpecification) SetEbsOptimized(v bool) *LaunchSpecification {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *LaunchSpecification) SetIamInstanceProfile(v *IamInstanceProfileSpecification) *LaunchSpecification {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *LaunchSpecification) SetImageId(v string) *LaunchSpecification {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *LaunchSpecification) SetInstanceType(v InstanceType) *LaunchSpecification {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *LaunchSpecification) SetKernelId(v string) *LaunchSpecification {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *LaunchSpecification) SetKeyName(v string) *LaunchSpecification {
-	s.KeyName = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *LaunchSpecification) SetMonitoring(v *RunInstancesMonitoringEnabled) *LaunchSpecification {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *LaunchSpecification) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *LaunchSpecification {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *LaunchSpecification) SetPlacement(v *SpotPlacement) *LaunchSpecification {
-	s.Placement = v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *LaunchSpecification) SetRamdiskId(v string) *LaunchSpecification {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *LaunchSpecification) SetSecurityGroups(v []GroupIdentifier) *LaunchSpecification {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *LaunchSpecification) SetSubnetId(v string) *LaunchSpecification {
-	s.SubnetId = &v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *LaunchSpecification) SetUserData(v string) *LaunchSpecification {
-	s.UserData = &v
-	return s
-}
-
 // Describes a launch template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplate
 type LaunchTemplate struct {
@@ -45383,48 +35957,6 @@ func (s LaunchTemplate) GoString() string {
 	return s.String()
 }
 
-// SetCreateTime sets the CreateTime field's value.
-func (s *LaunchTemplate) SetCreateTime(v time.Time) *LaunchTemplate {
-	s.CreateTime = &v
-	return s
-}
-
-// SetCreatedBy sets the CreatedBy field's value.
-func (s *LaunchTemplate) SetCreatedBy(v string) *LaunchTemplate {
-	s.CreatedBy = &v
-	return s
-}
-
-// SetDefaultVersionNumber sets the DefaultVersionNumber field's value.
-func (s *LaunchTemplate) SetDefaultVersionNumber(v int64) *LaunchTemplate {
-	s.DefaultVersionNumber = &v
-	return s
-}
-
-// SetLatestVersionNumber sets the LatestVersionNumber field's value.
-func (s *LaunchTemplate) SetLatestVersionNumber(v int64) *LaunchTemplate {
-	s.LatestVersionNumber = &v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *LaunchTemplate) SetLaunchTemplateId(v string) *LaunchTemplate {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *LaunchTemplate) SetLaunchTemplateName(v string) *LaunchTemplate {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *LaunchTemplate) SetTags(v []Tag) *LaunchTemplate {
-	s.Tags = v
-	return s
-}
-
 // Describes a block device mapping.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMapping
 type LaunchTemplateBlockDeviceMapping struct {
@@ -45452,30 +35984,6 @@ func (s LaunchTemplateBlockDeviceMapping) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateBlockDeviceMapping) GoString() string {
 	return s.String()
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *LaunchTemplateBlockDeviceMapping) SetDeviceName(v string) *LaunchTemplateBlockDeviceMapping {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *LaunchTemplateBlockDeviceMapping) SetEbs(v *LaunchTemplateEbsBlockDevice) *LaunchTemplateBlockDeviceMapping {
-	s.Ebs = v
-	return s
-}
-
-// SetNoDevice sets the NoDevice field's value.
-func (s *LaunchTemplateBlockDeviceMapping) SetNoDevice(v string) *LaunchTemplateBlockDeviceMapping {
-	s.NoDevice = &v
-	return s
-}
-
-// SetVirtualName sets the VirtualName field's value.
-func (s *LaunchTemplateBlockDeviceMapping) SetVirtualName(v string) *LaunchTemplateBlockDeviceMapping {
-	s.VirtualName = &v
-	return s
 }
 
 // Describes a block device mapping.
@@ -45510,30 +36018,6 @@ func (s LaunchTemplateBlockDeviceMappingRequest) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateBlockDeviceMappingRequest) GoString() string {
 	return s.String()
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *LaunchTemplateBlockDeviceMappingRequest) SetDeviceName(v string) *LaunchTemplateBlockDeviceMappingRequest {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *LaunchTemplateBlockDeviceMappingRequest) SetEbs(v *LaunchTemplateEbsBlockDeviceRequest) *LaunchTemplateBlockDeviceMappingRequest {
-	s.Ebs = v
-	return s
-}
-
-// SetNoDevice sets the NoDevice field's value.
-func (s *LaunchTemplateBlockDeviceMappingRequest) SetNoDevice(v string) *LaunchTemplateBlockDeviceMappingRequest {
-	s.NoDevice = &v
-	return s
-}
-
-// SetVirtualName sets the VirtualName field's value.
-func (s *LaunchTemplateBlockDeviceMappingRequest) SetVirtualName(v string) *LaunchTemplateBlockDeviceMappingRequest {
-	s.VirtualName = &v
-	return s
 }
 
 // Describes a launch template and overrides.
@@ -45574,18 +36058,6 @@ func (s *LaunchTemplateConfig) Validate() error {
 	return nil
 }
 
-// SetLaunchTemplateSpecification sets the LaunchTemplateSpecification field's value.
-func (s *LaunchTemplateConfig) SetLaunchTemplateSpecification(v *FleetLaunchTemplateSpecification) *LaunchTemplateConfig {
-	s.LaunchTemplateSpecification = v
-	return s
-}
-
-// SetOverrides sets the Overrides field's value.
-func (s *LaunchTemplateConfig) SetOverrides(v []LaunchTemplateOverrides) *LaunchTemplateConfig {
-	s.Overrides = v
-	return s
-}
-
 // Describes a block device for an EBS volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDevice
 type LaunchTemplateEbsBlockDevice struct {
@@ -45621,48 +36093,6 @@ func (s LaunchTemplateEbsBlockDevice) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateEbsBlockDevice) GoString() string {
 	return s.String()
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetDeleteOnTermination(v bool) *LaunchTemplateEbsBlockDevice {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetEncrypted(v bool) *LaunchTemplateEbsBlockDevice {
-	s.Encrypted = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetIops(v int64) *LaunchTemplateEbsBlockDevice {
-	s.Iops = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetKmsKeyId(v string) *LaunchTemplateEbsBlockDevice {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetSnapshotId(v string) *LaunchTemplateEbsBlockDevice {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetVolumeSize(v int64) *LaunchTemplateEbsBlockDevice {
-	s.VolumeSize = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *LaunchTemplateEbsBlockDevice) SetVolumeType(v VolumeType) *LaunchTemplateEbsBlockDevice {
-	s.VolumeType = v
-	return s
 }
 
 // The parameters for a block device for an EBS volume.
@@ -45716,48 +36146,6 @@ func (s LaunchTemplateEbsBlockDeviceRequest) GoString() string {
 	return s.String()
 }
 
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetDeleteOnTermination(v bool) *LaunchTemplateEbsBlockDeviceRequest {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetEncrypted(v bool) *LaunchTemplateEbsBlockDeviceRequest {
-	s.Encrypted = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetIops(v int64) *LaunchTemplateEbsBlockDeviceRequest {
-	s.Iops = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetKmsKeyId(v string) *LaunchTemplateEbsBlockDeviceRequest {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetSnapshotId(v string) *LaunchTemplateEbsBlockDeviceRequest {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetVolumeSize(v int64) *LaunchTemplateEbsBlockDeviceRequest {
-	s.VolumeSize = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *LaunchTemplateEbsBlockDeviceRequest) SetVolumeType(v VolumeType) *LaunchTemplateEbsBlockDeviceRequest {
-	s.VolumeType = v
-	return s
-}
-
 // Describes an IAM instance profile.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateIamInstanceProfileSpecification
 type LaunchTemplateIamInstanceProfileSpecification struct {
@@ -45778,18 +36166,6 @@ func (s LaunchTemplateIamInstanceProfileSpecification) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateIamInstanceProfileSpecification) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *LaunchTemplateIamInstanceProfileSpecification) SetArn(v string) *LaunchTemplateIamInstanceProfileSpecification {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *LaunchTemplateIamInstanceProfileSpecification) SetName(v string) *LaunchTemplateIamInstanceProfileSpecification {
-	s.Name = &v
-	return s
 }
 
 // An IAM instance profile.
@@ -45814,18 +36190,6 @@ func (s LaunchTemplateIamInstanceProfileSpecificationRequest) GoString() string 
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *LaunchTemplateIamInstanceProfileSpecificationRequest) SetArn(v string) *LaunchTemplateIamInstanceProfileSpecificationRequest {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *LaunchTemplateIamInstanceProfileSpecificationRequest) SetName(v string) *LaunchTemplateIamInstanceProfileSpecificationRequest {
-	s.Name = &v
-	return s
-}
-
 // The market (purchasing) option for the instances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMarketOptions
 type LaunchTemplateInstanceMarketOptions struct {
@@ -45848,18 +36212,6 @@ func (s LaunchTemplateInstanceMarketOptions) GoString() string {
 	return s.String()
 }
 
-// SetMarketType sets the MarketType field's value.
-func (s *LaunchTemplateInstanceMarketOptions) SetMarketType(v MarketType) *LaunchTemplateInstanceMarketOptions {
-	s.MarketType = v
-	return s
-}
-
-// SetSpotOptions sets the SpotOptions field's value.
-func (s *LaunchTemplateInstanceMarketOptions) SetSpotOptions(v *LaunchTemplateSpotMarketOptions) *LaunchTemplateInstanceMarketOptions {
-	s.SpotOptions = v
-	return s
-}
-
 // The market (purchasing) option for the instances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMarketOptionsRequest
 type LaunchTemplateInstanceMarketOptionsRequest struct {
@@ -45880,18 +36232,6 @@ func (s LaunchTemplateInstanceMarketOptionsRequest) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateInstanceMarketOptionsRequest) GoString() string {
 	return s.String()
-}
-
-// SetMarketType sets the MarketType field's value.
-func (s *LaunchTemplateInstanceMarketOptionsRequest) SetMarketType(v MarketType) *LaunchTemplateInstanceMarketOptionsRequest {
-	s.MarketType = v
-	return s
-}
-
-// SetSpotOptions sets the SpotOptions field's value.
-func (s *LaunchTemplateInstanceMarketOptionsRequest) SetSpotOptions(v *LaunchTemplateSpotMarketOptionsRequest) *LaunchTemplateInstanceMarketOptionsRequest {
-	s.SpotOptions = v
-	return s
 }
 
 // Describes a network interface.
@@ -45945,78 +36285,6 @@ func (s LaunchTemplateInstanceNetworkInterfaceSpecification) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateInstanceNetworkInterfaceSpecification) GoString() string {
 	return s.String()
-}
-
-// SetAssociatePublicIpAddress sets the AssociatePublicIpAddress field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetAssociatePublicIpAddress(v bool) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.AssociatePublicIpAddress = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetDeleteOnTermination(v bool) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetDescription(v string) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.Description = &v
-	return s
-}
-
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetDeviceIndex(v int64) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetGroups(v []string) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.Groups = v
-	return s
-}
-
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetIpv6AddressCount(v int64) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetIpv6Addresses(v []InstanceIpv6Address) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetNetworkInterfaceId(v string) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetPrivateIpAddress(v string) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetPrivateIpAddresses(v []PrivateIpAddressSpecification) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetSecondaryPrivateIpAddressCount sets the SecondaryPrivateIpAddressCount field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetSecondaryPrivateIpAddressCount(v int64) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.SecondaryPrivateIpAddressCount = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecification) SetSubnetId(v string) *LaunchTemplateInstanceNetworkInterfaceSpecification {
-	s.SubnetId = &v
-	return s
 }
 
 // The parameters for a network interface.
@@ -46091,78 +36359,6 @@ func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) Validate() 
 	return nil
 }
 
-// SetAssociatePublicIpAddress sets the AssociatePublicIpAddress field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetAssociatePublicIpAddress(v bool) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.AssociatePublicIpAddress = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetDeleteOnTermination(v bool) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetDescription(v string) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.Description = &v
-	return s
-}
-
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetDeviceIndex(v int64) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetGroups(v []string) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.Groups = v
-	return s
-}
-
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetIpv6AddressCount(v int64) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetIpv6Addresses(v []InstanceIpv6AddressRequest) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetNetworkInterfaceId(v string) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetPrivateIpAddress(v string) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetPrivateIpAddresses(v []PrivateIpAddressSpecification) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetSecondaryPrivateIpAddressCount sets the SecondaryPrivateIpAddressCount field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetSecondaryPrivateIpAddressCount(v int64) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.SecondaryPrivateIpAddressCount = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) SetSubnetId(v string) *LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
-	s.SubnetId = &v
-	return s
-}
-
 // Describes overrides for a launch template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateOverrides
 type LaunchTemplateOverrides struct {
@@ -46192,36 +36388,6 @@ func (s LaunchTemplateOverrides) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateOverrides) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *LaunchTemplateOverrides) SetAvailabilityZone(v string) *LaunchTemplateOverrides {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *LaunchTemplateOverrides) SetInstanceType(v InstanceType) *LaunchTemplateOverrides {
-	s.InstanceType = v
-	return s
-}
-
-// SetSpotPrice sets the SpotPrice field's value.
-func (s *LaunchTemplateOverrides) SetSpotPrice(v string) *LaunchTemplateOverrides {
-	s.SpotPrice = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *LaunchTemplateOverrides) SetSubnetId(v string) *LaunchTemplateOverrides {
-	s.SubnetId = &v
-	return s
-}
-
-// SetWeightedCapacity sets the WeightedCapacity field's value.
-func (s *LaunchTemplateOverrides) SetWeightedCapacity(v float64) *LaunchTemplateOverrides {
-	s.WeightedCapacity = &v
-	return s
 }
 
 // Describes the placement of an instance.
@@ -46259,42 +36425,6 @@ func (s LaunchTemplatePlacement) GoString() string {
 	return s.String()
 }
 
-// SetAffinity sets the Affinity field's value.
-func (s *LaunchTemplatePlacement) SetAffinity(v string) *LaunchTemplatePlacement {
-	s.Affinity = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *LaunchTemplatePlacement) SetAvailabilityZone(v string) *LaunchTemplatePlacement {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *LaunchTemplatePlacement) SetGroupName(v string) *LaunchTemplatePlacement {
-	s.GroupName = &v
-	return s
-}
-
-// SetHostId sets the HostId field's value.
-func (s *LaunchTemplatePlacement) SetHostId(v string) *LaunchTemplatePlacement {
-	s.HostId = &v
-	return s
-}
-
-// SetSpreadDomain sets the SpreadDomain field's value.
-func (s *LaunchTemplatePlacement) SetSpreadDomain(v string) *LaunchTemplatePlacement {
-	s.SpreadDomain = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *LaunchTemplatePlacement) SetTenancy(v Tenancy) *LaunchTemplatePlacement {
-	s.Tenancy = v
-	return s
-}
-
 // The placement for the instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacementRequest
 type LaunchTemplatePlacementRequest struct {
@@ -46330,42 +36460,6 @@ func (s LaunchTemplatePlacementRequest) GoString() string {
 	return s.String()
 }
 
-// SetAffinity sets the Affinity field's value.
-func (s *LaunchTemplatePlacementRequest) SetAffinity(v string) *LaunchTemplatePlacementRequest {
-	s.Affinity = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *LaunchTemplatePlacementRequest) SetAvailabilityZone(v string) *LaunchTemplatePlacementRequest {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *LaunchTemplatePlacementRequest) SetGroupName(v string) *LaunchTemplatePlacementRequest {
-	s.GroupName = &v
-	return s
-}
-
-// SetHostId sets the HostId field's value.
-func (s *LaunchTemplatePlacementRequest) SetHostId(v string) *LaunchTemplatePlacementRequest {
-	s.HostId = &v
-	return s
-}
-
-// SetSpreadDomain sets the SpreadDomain field's value.
-func (s *LaunchTemplatePlacementRequest) SetSpreadDomain(v string) *LaunchTemplatePlacementRequest {
-	s.SpreadDomain = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *LaunchTemplatePlacementRequest) SetTenancy(v Tenancy) *LaunchTemplatePlacementRequest {
-	s.Tenancy = v
-	return s
-}
-
 // The launch template to use. You must specify either the launch template ID
 // or launch template name in the request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpecification
@@ -46392,24 +36486,6 @@ func (s LaunchTemplateSpecification) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateSpecification) GoString() string {
 	return s.String()
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *LaunchTemplateSpecification) SetLaunchTemplateId(v string) *LaunchTemplateSpecification {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *LaunchTemplateSpecification) SetLaunchTemplateName(v string) *LaunchTemplateSpecification {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *LaunchTemplateSpecification) SetVersion(v string) *LaunchTemplateSpecification {
-	s.Version = &v
-	return s
 }
 
 // The options for Spot Instances.
@@ -46446,36 +36522,6 @@ func (s LaunchTemplateSpotMarketOptions) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateSpotMarketOptions) GoString() string {
 	return s.String()
-}
-
-// SetBlockDurationMinutes sets the BlockDurationMinutes field's value.
-func (s *LaunchTemplateSpotMarketOptions) SetBlockDurationMinutes(v int64) *LaunchTemplateSpotMarketOptions {
-	s.BlockDurationMinutes = &v
-	return s
-}
-
-// SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *LaunchTemplateSpotMarketOptions) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *LaunchTemplateSpotMarketOptions {
-	s.InstanceInterruptionBehavior = v
-	return s
-}
-
-// SetMaxPrice sets the MaxPrice field's value.
-func (s *LaunchTemplateSpotMarketOptions) SetMaxPrice(v string) *LaunchTemplateSpotMarketOptions {
-	s.MaxPrice = &v
-	return s
-}
-
-// SetSpotInstanceType sets the SpotInstanceType field's value.
-func (s *LaunchTemplateSpotMarketOptions) SetSpotInstanceType(v SpotInstanceType) *LaunchTemplateSpotMarketOptions {
-	s.SpotInstanceType = v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *LaunchTemplateSpotMarketOptions) SetValidUntil(v time.Time) *LaunchTemplateSpotMarketOptions {
-	s.ValidUntil = &v
-	return s
 }
 
 // The options for Spot Instances.
@@ -46515,36 +36561,6 @@ func (s LaunchTemplateSpotMarketOptionsRequest) GoString() string {
 	return s.String()
 }
 
-// SetBlockDurationMinutes sets the BlockDurationMinutes field's value.
-func (s *LaunchTemplateSpotMarketOptionsRequest) SetBlockDurationMinutes(v int64) *LaunchTemplateSpotMarketOptionsRequest {
-	s.BlockDurationMinutes = &v
-	return s
-}
-
-// SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *LaunchTemplateSpotMarketOptionsRequest) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *LaunchTemplateSpotMarketOptionsRequest {
-	s.InstanceInterruptionBehavior = v
-	return s
-}
-
-// SetMaxPrice sets the MaxPrice field's value.
-func (s *LaunchTemplateSpotMarketOptionsRequest) SetMaxPrice(v string) *LaunchTemplateSpotMarketOptionsRequest {
-	s.MaxPrice = &v
-	return s
-}
-
-// SetSpotInstanceType sets the SpotInstanceType field's value.
-func (s *LaunchTemplateSpotMarketOptionsRequest) SetSpotInstanceType(v SpotInstanceType) *LaunchTemplateSpotMarketOptionsRequest {
-	s.SpotInstanceType = v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *LaunchTemplateSpotMarketOptionsRequest) SetValidUntil(v time.Time) *LaunchTemplateSpotMarketOptionsRequest {
-	s.ValidUntil = &v
-	return s
-}
-
 // The tag specification for the launch template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateTagSpecification
 type LaunchTemplateTagSpecification struct {
@@ -46565,18 +36581,6 @@ func (s LaunchTemplateTagSpecification) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateTagSpecification) GoString() string {
 	return s.String()
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *LaunchTemplateTagSpecification) SetResourceType(v ResourceType) *LaunchTemplateTagSpecification {
-	s.ResourceType = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *LaunchTemplateTagSpecification) SetTags(v []Tag) *LaunchTemplateTagSpecification {
-	s.Tags = v
-	return s
 }
 
 // The tags specification for the launch template.
@@ -46600,18 +36604,6 @@ func (s LaunchTemplateTagSpecificationRequest) String() string {
 // GoString returns the string representation
 func (s LaunchTemplateTagSpecificationRequest) GoString() string {
 	return s.String()
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *LaunchTemplateTagSpecificationRequest) SetResourceType(v ResourceType) *LaunchTemplateTagSpecificationRequest {
-	s.ResourceType = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *LaunchTemplateTagSpecificationRequest) SetTags(v []Tag) *LaunchTemplateTagSpecificationRequest {
-	s.Tags = v
-	return s
 }
 
 // Describes a launch template version.
@@ -46654,54 +36646,6 @@ func (s LaunchTemplateVersion) GoString() string {
 	return s.String()
 }
 
-// SetCreateTime sets the CreateTime field's value.
-func (s *LaunchTemplateVersion) SetCreateTime(v time.Time) *LaunchTemplateVersion {
-	s.CreateTime = &v
-	return s
-}
-
-// SetCreatedBy sets the CreatedBy field's value.
-func (s *LaunchTemplateVersion) SetCreatedBy(v string) *LaunchTemplateVersion {
-	s.CreatedBy = &v
-	return s
-}
-
-// SetDefaultVersion sets the DefaultVersion field's value.
-func (s *LaunchTemplateVersion) SetDefaultVersion(v bool) *LaunchTemplateVersion {
-	s.DefaultVersion = &v
-	return s
-}
-
-// SetLaunchTemplateData sets the LaunchTemplateData field's value.
-func (s *LaunchTemplateVersion) SetLaunchTemplateData(v *ResponseLaunchTemplateData) *LaunchTemplateVersion {
-	s.LaunchTemplateData = v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *LaunchTemplateVersion) SetLaunchTemplateId(v string) *LaunchTemplateVersion {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *LaunchTemplateVersion) SetLaunchTemplateName(v string) *LaunchTemplateVersion {
-	s.LaunchTemplateName = &v
-	return s
-}
-
-// SetVersionDescription sets the VersionDescription field's value.
-func (s *LaunchTemplateVersion) SetVersionDescription(v string) *LaunchTemplateVersion {
-	s.VersionDescription = &v
-	return s
-}
-
-// SetVersionNumber sets the VersionNumber field's value.
-func (s *LaunchTemplateVersion) SetVersionNumber(v int64) *LaunchTemplateVersion {
-	s.VersionNumber = &v
-	return s
-}
-
 // Describes the monitoring for the instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoring
 type LaunchTemplatesMonitoring struct {
@@ -46722,12 +36666,6 @@ func (s LaunchTemplatesMonitoring) GoString() string {
 	return s.String()
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *LaunchTemplatesMonitoring) SetEnabled(v bool) *LaunchTemplatesMonitoring {
-	s.Enabled = &v
-	return s
-}
-
 // Describes the monitoring for the instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoringRequest
 type LaunchTemplatesMonitoringRequest struct {
@@ -46746,12 +36684,6 @@ func (s LaunchTemplatesMonitoringRequest) String() string {
 // GoString returns the string representation
 func (s LaunchTemplatesMonitoringRequest) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *LaunchTemplatesMonitoringRequest) SetEnabled(v bool) *LaunchTemplatesMonitoringRequest {
-	s.Enabled = &v
-	return s
 }
 
 // Describes the Classic Load Balancers and target groups to attach to a Spot
@@ -46797,18 +36729,6 @@ func (s *LoadBalancersConfig) Validate() error {
 	return nil
 }
 
-// SetClassicLoadBalancersConfig sets the ClassicLoadBalancersConfig field's value.
-func (s *LoadBalancersConfig) SetClassicLoadBalancersConfig(v *ClassicLoadBalancersConfig) *LoadBalancersConfig {
-	s.ClassicLoadBalancersConfig = v
-	return s
-}
-
-// SetTargetGroupsConfig sets the TargetGroupsConfig field's value.
-func (s *LoadBalancersConfig) SetTargetGroupsConfig(v *TargetGroupsConfig) *LoadBalancersConfig {
-	s.TargetGroupsConfig = v
-	return s
-}
-
 // Describes a load permission.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermission
 type LoadPermission struct {
@@ -46829,18 +36749,6 @@ func (s LoadPermission) String() string {
 // GoString returns the string representation
 func (s LoadPermission) GoString() string {
 	return s.String()
-}
-
-// SetGroup sets the Group field's value.
-func (s *LoadPermission) SetGroup(v PermissionGroup) *LoadPermission {
-	s.Group = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *LoadPermission) SetUserId(v string) *LoadPermission {
-	s.UserId = &v
-	return s
 }
 
 // Describes modifications to the load permissions of an Amazon FPGA image (AFI).
@@ -46865,18 +36773,6 @@ func (s LoadPermissionModifications) GoString() string {
 	return s.String()
 }
 
-// SetAdd sets the Add field's value.
-func (s *LoadPermissionModifications) SetAdd(v []LoadPermissionRequest) *LoadPermissionModifications {
-	s.Add = v
-	return s
-}
-
-// SetRemove sets the Remove field's value.
-func (s *LoadPermissionModifications) SetRemove(v []LoadPermissionRequest) *LoadPermissionModifications {
-	s.Remove = v
-	return s
-}
-
 // Describes a load permission.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermissionRequest
 type LoadPermissionRequest struct {
@@ -46897,18 +36793,6 @@ func (s LoadPermissionRequest) String() string {
 // GoString returns the string representation
 func (s LoadPermissionRequest) GoString() string {
 	return s.String()
-}
-
-// SetGroup sets the Group field's value.
-func (s *LoadPermissionRequest) SetGroup(v PermissionGroup) *LoadPermissionRequest {
-	s.Group = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *LoadPermissionRequest) SetUserId(v string) *LoadPermissionRequest {
-	s.UserId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFpgaImageAttributeRequest
@@ -46979,66 +36863,6 @@ func (s *ModifyFpgaImageAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *ModifyFpgaImageAttributeInput) SetAttribute(v FpgaImageAttributeName) *ModifyFpgaImageAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ModifyFpgaImageAttributeInput) SetDescription(v string) *ModifyFpgaImageAttributeInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyFpgaImageAttributeInput) SetDryRun(v bool) *ModifyFpgaImageAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *ModifyFpgaImageAttributeInput) SetFpgaImageId(v string) *ModifyFpgaImageAttributeInput {
-	s.FpgaImageId = &v
-	return s
-}
-
-// SetLoadPermission sets the LoadPermission field's value.
-func (s *ModifyFpgaImageAttributeInput) SetLoadPermission(v *LoadPermissionModifications) *ModifyFpgaImageAttributeInput {
-	s.LoadPermission = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ModifyFpgaImageAttributeInput) SetName(v string) *ModifyFpgaImageAttributeInput {
-	s.Name = &v
-	return s
-}
-
-// SetOperationType sets the OperationType field's value.
-func (s *ModifyFpgaImageAttributeInput) SetOperationType(v OperationType) *ModifyFpgaImageAttributeInput {
-	s.OperationType = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *ModifyFpgaImageAttributeInput) SetProductCodes(v []string) *ModifyFpgaImageAttributeInput {
-	s.ProductCodes = v
-	return s
-}
-
-// SetUserGroups sets the UserGroups field's value.
-func (s *ModifyFpgaImageAttributeInput) SetUserGroups(v []string) *ModifyFpgaImageAttributeInput {
-	s.UserGroups = v
-	return s
-}
-
-// SetUserIds sets the UserIds field's value.
-func (s *ModifyFpgaImageAttributeInput) SetUserIds(v []string) *ModifyFpgaImageAttributeInput {
-	s.UserIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFpgaImageAttributeResult
 type ModifyFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -47062,12 +36886,6 @@ func (s ModifyFpgaImageAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyFpgaImageAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFpgaImageAttribute sets the FpgaImageAttribute field's value.
-func (s *ModifyFpgaImageAttributeOutput) SetFpgaImageAttribute(v *FpgaImageAttribute) *ModifyFpgaImageAttributeOutput {
-	s.FpgaImageAttribute = v
-	return s
 }
 
 // Contains the parameters for ModifyHosts.
@@ -47113,18 +36931,6 @@ func (s *ModifyHostsInput) Validate() error {
 	return nil
 }
 
-// SetAutoPlacement sets the AutoPlacement field's value.
-func (s *ModifyHostsInput) SetAutoPlacement(v AutoPlacement) *ModifyHostsInput {
-	s.AutoPlacement = v
-	return s
-}
-
-// SetHostIds sets the HostIds field's value.
-func (s *ModifyHostsInput) SetHostIds(v []string) *ModifyHostsInput {
-	s.HostIds = v
-	return s
-}
-
 // Contains the output of ModifyHosts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsResult
 type ModifyHostsOutput struct {
@@ -47153,18 +36959,6 @@ func (s ModifyHostsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyHostsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSuccessful sets the Successful field's value.
-func (s *ModifyHostsOutput) SetSuccessful(v []string) *ModifyHostsOutput {
-	s.Successful = v
-	return s
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *ModifyHostsOutput) SetUnsuccessful(v []UnsuccessfulItem) *ModifyHostsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Contains the parameters of ModifyIdFormat.
@@ -47209,18 +37003,6 @@ func (s *ModifyIdFormatInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResource sets the Resource field's value.
-func (s *ModifyIdFormatInput) SetResource(v string) *ModifyIdFormatInput {
-	s.Resource = &v
-	return s
-}
-
-// SetUseLongIds sets the UseLongIds field's value.
-func (s *ModifyIdFormatInput) SetUseLongIds(v bool) *ModifyIdFormatInput {
-	s.UseLongIds = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdFormatOutput
@@ -47298,24 +37080,6 @@ func (s *ModifyIdentityIdFormatInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPrincipalArn sets the PrincipalArn field's value.
-func (s *ModifyIdentityIdFormatInput) SetPrincipalArn(v string) *ModifyIdentityIdFormatInput {
-	s.PrincipalArn = &v
-	return s
-}
-
-// SetResource sets the Resource field's value.
-func (s *ModifyIdentityIdFormatInput) SetResource(v string) *ModifyIdentityIdFormatInput {
-	s.Resource = &v
-	return s
-}
-
-// SetUseLongIds sets the UseLongIds field's value.
-func (s *ModifyIdentityIdFormatInput) SetUseLongIds(v bool) *ModifyIdentityIdFormatInput {
-	s.UseLongIds = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormatOutput
@@ -47409,66 +37173,6 @@ func (s *ModifyImageAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *ModifyImageAttributeInput) SetAttribute(v string) *ModifyImageAttributeInput {
-	s.Attribute = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ModifyImageAttributeInput) SetDescription(v *AttributeValue) *ModifyImageAttributeInput {
-	s.Description = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyImageAttributeInput) SetDryRun(v bool) *ModifyImageAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ModifyImageAttributeInput) SetImageId(v string) *ModifyImageAttributeInput {
-	s.ImageId = &v
-	return s
-}
-
-// SetLaunchPermission sets the LaunchPermission field's value.
-func (s *ModifyImageAttributeInput) SetLaunchPermission(v *LaunchPermissionModifications) *ModifyImageAttributeInput {
-	s.LaunchPermission = v
-	return s
-}
-
-// SetOperationType sets the OperationType field's value.
-func (s *ModifyImageAttributeInput) SetOperationType(v OperationType) *ModifyImageAttributeInput {
-	s.OperationType = v
-	return s
-}
-
-// SetProductCodes sets the ProductCodes field's value.
-func (s *ModifyImageAttributeInput) SetProductCodes(v []string) *ModifyImageAttributeInput {
-	s.ProductCodes = v
-	return s
-}
-
-// SetUserGroups sets the UserGroups field's value.
-func (s *ModifyImageAttributeInput) SetUserGroups(v []string) *ModifyImageAttributeInput {
-	s.UserGroups = v
-	return s
-}
-
-// SetUserIds sets the UserIds field's value.
-func (s *ModifyImageAttributeInput) SetUserIds(v []string) *ModifyImageAttributeInput {
-	s.UserIds = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ModifyImageAttributeInput) SetValue(v string) *ModifyImageAttributeInput {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttributeOutput
@@ -47615,102 +37319,6 @@ func (s *ModifyInstanceAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *ModifyInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *ModifyInstanceAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *ModifyInstanceAttributeInput) SetBlockDeviceMappings(v []InstanceBlockDeviceMappingSpecification) *ModifyInstanceAttributeInput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetDisableApiTermination sets the DisableApiTermination field's value.
-func (s *ModifyInstanceAttributeInput) SetDisableApiTermination(v *AttributeBooleanValue) *ModifyInstanceAttributeInput {
-	s.DisableApiTermination = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyInstanceAttributeInput) SetDryRun(v bool) *ModifyInstanceAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *ModifyInstanceAttributeInput) SetEbsOptimized(v *AttributeBooleanValue) *ModifyInstanceAttributeInput {
-	s.EbsOptimized = v
-	return s
-}
-
-// SetEnaSupport sets the EnaSupport field's value.
-func (s *ModifyInstanceAttributeInput) SetEnaSupport(v *AttributeBooleanValue) *ModifyInstanceAttributeInput {
-	s.EnaSupport = v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ModifyInstanceAttributeInput) SetGroups(v []string) *ModifyInstanceAttributeInput {
-	s.Groups = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ModifyInstanceAttributeInput) SetInstanceId(v string) *ModifyInstanceAttributeInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *ModifyInstanceAttributeInput) SetInstanceInitiatedShutdownBehavior(v *AttributeValue) *ModifyInstanceAttributeInput {
-	s.InstanceInitiatedShutdownBehavior = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ModifyInstanceAttributeInput) SetInstanceType(v *AttributeValue) *ModifyInstanceAttributeInput {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernel sets the Kernel field's value.
-func (s *ModifyInstanceAttributeInput) SetKernel(v *AttributeValue) *ModifyInstanceAttributeInput {
-	s.Kernel = v
-	return s
-}
-
-// SetRamdisk sets the Ramdisk field's value.
-func (s *ModifyInstanceAttributeInput) SetRamdisk(v *AttributeValue) *ModifyInstanceAttributeInput {
-	s.Ramdisk = v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *ModifyInstanceAttributeInput) SetSourceDestCheck(v *AttributeBooleanValue) *ModifyInstanceAttributeInput {
-	s.SourceDestCheck = v
-	return s
-}
-
-// SetSriovNetSupport sets the SriovNetSupport field's value.
-func (s *ModifyInstanceAttributeInput) SetSriovNetSupport(v *AttributeValue) *ModifyInstanceAttributeInput {
-	s.SriovNetSupport = v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *ModifyInstanceAttributeInput) SetUserData(v *BlobAttributeValue) *ModifyInstanceAttributeInput {
-	s.UserData = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ModifyInstanceAttributeInput) SetValue(v string) *ModifyInstanceAttributeInput {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttributeOutput
 type ModifyInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -47778,24 +37386,6 @@ func (s *ModifyInstanceCreditSpecificationInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *ModifyInstanceCreditSpecificationInput) SetClientToken(v string) *ModifyInstanceCreditSpecificationInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyInstanceCreditSpecificationInput) SetDryRun(v bool) *ModifyInstanceCreditSpecificationInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceCreditSpecifications sets the InstanceCreditSpecifications field's value.
-func (s *ModifyInstanceCreditSpecificationInput) SetInstanceCreditSpecifications(v []InstanceCreditSpecificationRequest) *ModifyInstanceCreditSpecificationInput {
-	s.InstanceCreditSpecifications = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCreditSpecificationResult
 type ModifyInstanceCreditSpecificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -47824,18 +37414,6 @@ func (s ModifyInstanceCreditSpecificationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyInstanceCreditSpecificationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSuccessfulInstanceCreditSpecifications sets the SuccessfulInstanceCreditSpecifications field's value.
-func (s *ModifyInstanceCreditSpecificationOutput) SetSuccessfulInstanceCreditSpecifications(v []SuccessfulInstanceCreditSpecificationItem) *ModifyInstanceCreditSpecificationOutput {
-	s.SuccessfulInstanceCreditSpecifications = v
-	return s
-}
-
-// SetUnsuccessfulInstanceCreditSpecifications sets the UnsuccessfulInstanceCreditSpecifications field's value.
-func (s *ModifyInstanceCreditSpecificationOutput) SetUnsuccessfulInstanceCreditSpecifications(v []UnsuccessfulInstanceCreditSpecificationItem) *ModifyInstanceCreditSpecificationOutput {
-	s.UnsuccessfulInstanceCreditSpecifications = v
-	return s
 }
 
 // Contains the parameters for ModifyInstancePlacement.
@@ -47882,30 +37460,6 @@ func (s *ModifyInstancePlacementInput) Validate() error {
 	return nil
 }
 
-// SetAffinity sets the Affinity field's value.
-func (s *ModifyInstancePlacementInput) SetAffinity(v Affinity) *ModifyInstancePlacementInput {
-	s.Affinity = v
-	return s
-}
-
-// SetHostId sets the HostId field's value.
-func (s *ModifyInstancePlacementInput) SetHostId(v string) *ModifyInstancePlacementInput {
-	s.HostId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ModifyInstancePlacementInput) SetInstanceId(v string) *ModifyInstancePlacementInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *ModifyInstancePlacementInput) SetTenancy(v HostTenancy) *ModifyInstancePlacementInput {
-	s.Tenancy = v
-	return s
-}
-
 // Contains the output of ModifyInstancePlacement.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementResult
 type ModifyInstancePlacementOutput struct {
@@ -47930,12 +37484,6 @@ func (s ModifyInstancePlacementOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyInstancePlacementOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *ModifyInstancePlacementOutput) SetReturn(v bool) *ModifyInstancePlacementOutput {
-	s.Return = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplateRequest
@@ -47987,36 +37535,6 @@ func (s *ModifyLaunchTemplateInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *ModifyLaunchTemplateInput) SetClientToken(v string) *ModifyLaunchTemplateInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDefaultVersion sets the DefaultVersion field's value.
-func (s *ModifyLaunchTemplateInput) SetDefaultVersion(v string) *ModifyLaunchTemplateInput {
-	s.DefaultVersion = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyLaunchTemplateInput) SetDryRun(v bool) *ModifyLaunchTemplateInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetLaunchTemplateId sets the LaunchTemplateId field's value.
-func (s *ModifyLaunchTemplateInput) SetLaunchTemplateId(v string) *ModifyLaunchTemplateInput {
-	s.LaunchTemplateId = &v
-	return s
-}
-
-// SetLaunchTemplateName sets the LaunchTemplateName field's value.
-func (s *ModifyLaunchTemplateInput) SetLaunchTemplateName(v string) *ModifyLaunchTemplateInput {
-	s.LaunchTemplateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplateResult
 type ModifyLaunchTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -48040,12 +37558,6 @@ func (s ModifyLaunchTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyLaunchTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchTemplate sets the LaunchTemplate field's value.
-func (s *ModifyLaunchTemplateOutput) SetLaunchTemplate(v *LaunchTemplate) *ModifyLaunchTemplateOutput {
-	s.LaunchTemplate = v
-	return s
 }
 
 // Contains the parameters for ModifyNetworkInterfaceAttribute.
@@ -48107,42 +37619,6 @@ func (s *ModifyNetworkInterfaceAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttachment sets the Attachment field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetAttachment(v *NetworkInterfaceAttachmentChanges) *ModifyNetworkInterfaceAttributeInput {
-	s.Attachment = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetDescription(v *AttributeValue) *ModifyNetworkInterfaceAttributeInput {
-	s.Description = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetDryRun(v bool) *ModifyNetworkInterfaceAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetGroups(v []string) *ModifyNetworkInterfaceAttributeInput {
-	s.Groups = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetNetworkInterfaceId(v string) *ModifyNetworkInterfaceAttributeInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *ModifyNetworkInterfaceAttributeInput) SetSourceDestCheck(v *AttributeBooleanValue) *ModifyNetworkInterfaceAttributeInput {
-	s.SourceDestCheck = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeOutput
@@ -48215,24 +37691,6 @@ func (s *ModifyReservedInstancesInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *ModifyReservedInstancesInput) SetClientToken(v string) *ModifyReservedInstancesInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetReservedInstancesIds sets the ReservedInstancesIds field's value.
-func (s *ModifyReservedInstancesInput) SetReservedInstancesIds(v []string) *ModifyReservedInstancesInput {
-	s.ReservedInstancesIds = v
-	return s
-}
-
-// SetTargetConfigurations sets the TargetConfigurations field's value.
-func (s *ModifyReservedInstancesInput) SetTargetConfigurations(v []ReservedInstancesConfiguration) *ModifyReservedInstancesInput {
-	s.TargetConfigurations = v
-	return s
-}
-
 // Contains the output of ModifyReservedInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstancesResult
 type ModifyReservedInstancesOutput struct {
@@ -48257,12 +37715,6 @@ func (s ModifyReservedInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyReservedInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedInstancesModificationId sets the ReservedInstancesModificationId field's value.
-func (s *ModifyReservedInstancesOutput) SetReservedInstancesModificationId(v string) *ModifyReservedInstancesOutput {
-	s.ReservedInstancesModificationId = &v
-	return s
 }
 
 // Contains the parameters for ModifySnapshotAttribute.
@@ -48321,48 +37773,6 @@ func (s *ModifySnapshotAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *ModifySnapshotAttributeInput) SetAttribute(v SnapshotAttributeName) *ModifySnapshotAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetCreateVolumePermission sets the CreateVolumePermission field's value.
-func (s *ModifySnapshotAttributeInput) SetCreateVolumePermission(v *CreateVolumePermissionModifications) *ModifySnapshotAttributeInput {
-	s.CreateVolumePermission = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifySnapshotAttributeInput) SetDryRun(v bool) *ModifySnapshotAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupNames sets the GroupNames field's value.
-func (s *ModifySnapshotAttributeInput) SetGroupNames(v []string) *ModifySnapshotAttributeInput {
-	s.GroupNames = v
-	return s
-}
-
-// SetOperationType sets the OperationType field's value.
-func (s *ModifySnapshotAttributeInput) SetOperationType(v OperationType) *ModifySnapshotAttributeInput {
-	s.OperationType = v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *ModifySnapshotAttributeInput) SetSnapshotId(v string) *ModifySnapshotAttributeInput {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetUserIds sets the UserIds field's value.
-func (s *ModifySnapshotAttributeInput) SetUserIds(v []string) *ModifySnapshotAttributeInput {
-	s.UserIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttributeOutput
@@ -48430,24 +37840,6 @@ func (s *ModifySpotFleetRequestInput) Validate() error {
 	return nil
 }
 
-// SetExcessCapacityTerminationPolicy sets the ExcessCapacityTerminationPolicy field's value.
-func (s *ModifySpotFleetRequestInput) SetExcessCapacityTerminationPolicy(v ExcessCapacityTerminationPolicy) *ModifySpotFleetRequestInput {
-	s.ExcessCapacityTerminationPolicy = v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *ModifySpotFleetRequestInput) SetSpotFleetRequestId(v string) *ModifySpotFleetRequestInput {
-	s.SpotFleetRequestId = &v
-	return s
-}
-
-// SetTargetCapacity sets the TargetCapacity field's value.
-func (s *ModifySpotFleetRequestInput) SetTargetCapacity(v int64) *ModifySpotFleetRequestInput {
-	s.TargetCapacity = &v
-	return s
-}
-
 // Contains the output of ModifySpotFleetRequest.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestResponse
 type ModifySpotFleetRequestOutput struct {
@@ -48472,12 +37864,6 @@ func (s ModifySpotFleetRequestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifySpotFleetRequestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *ModifySpotFleetRequestOutput) SetReturn(v bool) *ModifySpotFleetRequestOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for ModifySubnetAttribute.
@@ -48529,24 +37915,6 @@ func (s *ModifySubnetAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssignIpv6AddressOnCreation sets the AssignIpv6AddressOnCreation field's value.
-func (s *ModifySubnetAttributeInput) SetAssignIpv6AddressOnCreation(v *AttributeBooleanValue) *ModifySubnetAttributeInput {
-	s.AssignIpv6AddressOnCreation = v
-	return s
-}
-
-// SetMapPublicIpOnLaunch sets the MapPublicIpOnLaunch field's value.
-func (s *ModifySubnetAttributeInput) SetMapPublicIpOnLaunch(v *AttributeBooleanValue) *ModifySubnetAttributeInput {
-	s.MapPublicIpOnLaunch = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *ModifySubnetAttributeInput) SetSubnetId(v string) *ModifySubnetAttributeInput {
-	s.SubnetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeOutput
@@ -48613,24 +37981,6 @@ func (s *ModifyVolumeAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAutoEnableIO sets the AutoEnableIO field's value.
-func (s *ModifyVolumeAttributeInput) SetAutoEnableIO(v *AttributeBooleanValue) *ModifyVolumeAttributeInput {
-	s.AutoEnableIO = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVolumeAttributeInput) SetDryRun(v bool) *ModifyVolumeAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *ModifyVolumeAttributeInput) SetVolumeId(v string) *ModifyVolumeAttributeInput {
-	s.VolumeId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeAttributeOutput
@@ -48718,36 +38068,6 @@ func (s *ModifyVolumeInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVolumeInput) SetDryRun(v bool) *ModifyVolumeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *ModifyVolumeInput) SetIops(v int64) *ModifyVolumeInput {
-	s.Iops = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *ModifyVolumeInput) SetSize(v int64) *ModifyVolumeInput {
-	s.Size = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *ModifyVolumeInput) SetVolumeId(v string) *ModifyVolumeInput {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *ModifyVolumeInput) SetVolumeType(v VolumeType) *ModifyVolumeInput {
-	s.VolumeType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeResult
 type ModifyVolumeOutput struct {
 	_ struct{} `type:"structure"`
@@ -48771,12 +38091,6 @@ func (s ModifyVolumeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVolumeModification sets the VolumeModification field's value.
-func (s *ModifyVolumeOutput) SetVolumeModification(v *VolumeModification) *ModifyVolumeOutput {
-	s.VolumeModification = v
-	return s
 }
 
 // Contains the parameters for ModifyVpcAttribute.
@@ -48830,24 +38144,6 @@ func (s *ModifyVpcAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnableDnsHostnames sets the EnableDnsHostnames field's value.
-func (s *ModifyVpcAttributeInput) SetEnableDnsHostnames(v *AttributeBooleanValue) *ModifyVpcAttributeInput {
-	s.EnableDnsHostnames = v
-	return s
-}
-
-// SetEnableDnsSupport sets the EnableDnsSupport field's value.
-func (s *ModifyVpcAttributeInput) SetEnableDnsSupport(v *AttributeBooleanValue) *ModifyVpcAttributeInput {
-	s.EnableDnsSupport = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *ModifyVpcAttributeInput) SetVpcId(v string) *ModifyVpcAttributeInput {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttributeOutput
@@ -48919,30 +38215,6 @@ func (s *ModifyVpcEndpointConnectionNotificationInput) Validate() error {
 	return nil
 }
 
-// SetConnectionEvents sets the ConnectionEvents field's value.
-func (s *ModifyVpcEndpointConnectionNotificationInput) SetConnectionEvents(v []string) *ModifyVpcEndpointConnectionNotificationInput {
-	s.ConnectionEvents = v
-	return s
-}
-
-// SetConnectionNotificationArn sets the ConnectionNotificationArn field's value.
-func (s *ModifyVpcEndpointConnectionNotificationInput) SetConnectionNotificationArn(v string) *ModifyVpcEndpointConnectionNotificationInput {
-	s.ConnectionNotificationArn = &v
-	return s
-}
-
-// SetConnectionNotificationId sets the ConnectionNotificationId field's value.
-func (s *ModifyVpcEndpointConnectionNotificationInput) SetConnectionNotificationId(v string) *ModifyVpcEndpointConnectionNotificationInput {
-	s.ConnectionNotificationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVpcEndpointConnectionNotificationInput) SetDryRun(v bool) *ModifyVpcEndpointConnectionNotificationInput {
-	s.DryRun = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointConnectionNotificationResult
 type ModifyVpcEndpointConnectionNotificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -48966,12 +38238,6 @@ func (s ModifyVpcEndpointConnectionNotificationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVpcEndpointConnectionNotificationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturnValue sets the ReturnValue field's value.
-func (s *ModifyVpcEndpointConnectionNotificationOutput) SetReturnValue(v bool) *ModifyVpcEndpointConnectionNotificationOutput {
-	s.ReturnValue = &v
-	return s
 }
 
 // Contains the parameters for ModifyVpcEndpoint.
@@ -49047,72 +38313,6 @@ func (s *ModifyVpcEndpointInput) Validate() error {
 	return nil
 }
 
-// SetAddRouteTableIds sets the AddRouteTableIds field's value.
-func (s *ModifyVpcEndpointInput) SetAddRouteTableIds(v []string) *ModifyVpcEndpointInput {
-	s.AddRouteTableIds = v
-	return s
-}
-
-// SetAddSecurityGroupIds sets the AddSecurityGroupIds field's value.
-func (s *ModifyVpcEndpointInput) SetAddSecurityGroupIds(v []string) *ModifyVpcEndpointInput {
-	s.AddSecurityGroupIds = v
-	return s
-}
-
-// SetAddSubnetIds sets the AddSubnetIds field's value.
-func (s *ModifyVpcEndpointInput) SetAddSubnetIds(v []string) *ModifyVpcEndpointInput {
-	s.AddSubnetIds = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVpcEndpointInput) SetDryRun(v bool) *ModifyVpcEndpointInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *ModifyVpcEndpointInput) SetPolicyDocument(v string) *ModifyVpcEndpointInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPrivateDnsEnabled sets the PrivateDnsEnabled field's value.
-func (s *ModifyVpcEndpointInput) SetPrivateDnsEnabled(v bool) *ModifyVpcEndpointInput {
-	s.PrivateDnsEnabled = &v
-	return s
-}
-
-// SetRemoveRouteTableIds sets the RemoveRouteTableIds field's value.
-func (s *ModifyVpcEndpointInput) SetRemoveRouteTableIds(v []string) *ModifyVpcEndpointInput {
-	s.RemoveRouteTableIds = v
-	return s
-}
-
-// SetRemoveSecurityGroupIds sets the RemoveSecurityGroupIds field's value.
-func (s *ModifyVpcEndpointInput) SetRemoveSecurityGroupIds(v []string) *ModifyVpcEndpointInput {
-	s.RemoveSecurityGroupIds = v
-	return s
-}
-
-// SetRemoveSubnetIds sets the RemoveSubnetIds field's value.
-func (s *ModifyVpcEndpointInput) SetRemoveSubnetIds(v []string) *ModifyVpcEndpointInput {
-	s.RemoveSubnetIds = v
-	return s
-}
-
-// SetResetPolicy sets the ResetPolicy field's value.
-func (s *ModifyVpcEndpointInput) SetResetPolicy(v bool) *ModifyVpcEndpointInput {
-	s.ResetPolicy = &v
-	return s
-}
-
-// SetVpcEndpointId sets the VpcEndpointId field's value.
-func (s *ModifyVpcEndpointInput) SetVpcEndpointId(v string) *ModifyVpcEndpointInput {
-	s.VpcEndpointId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointResult
 type ModifyVpcEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -49136,12 +38336,6 @@ func (s ModifyVpcEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVpcEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *ModifyVpcEndpointOutput) SetReturn(v bool) *ModifyVpcEndpointOutput {
-	s.Return = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfigurationRequest
@@ -49195,36 +38389,6 @@ func (s *ModifyVpcEndpointServiceConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *ModifyVpcEndpointServiceConfigurationInput) SetAcceptanceRequired(v bool) *ModifyVpcEndpointServiceConfigurationInput {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetAddNetworkLoadBalancerArns sets the AddNetworkLoadBalancerArns field's value.
-func (s *ModifyVpcEndpointServiceConfigurationInput) SetAddNetworkLoadBalancerArns(v []string) *ModifyVpcEndpointServiceConfigurationInput {
-	s.AddNetworkLoadBalancerArns = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVpcEndpointServiceConfigurationInput) SetDryRun(v bool) *ModifyVpcEndpointServiceConfigurationInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRemoveNetworkLoadBalancerArns sets the RemoveNetworkLoadBalancerArns field's value.
-func (s *ModifyVpcEndpointServiceConfigurationInput) SetRemoveNetworkLoadBalancerArns(v []string) *ModifyVpcEndpointServiceConfigurationInput {
-	s.RemoveNetworkLoadBalancerArns = v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *ModifyVpcEndpointServiceConfigurationInput) SetServiceId(v string) *ModifyVpcEndpointServiceConfigurationInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfigurationResult
 type ModifyVpcEndpointServiceConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -49248,12 +38412,6 @@ func (s ModifyVpcEndpointServiceConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVpcEndpointServiceConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *ModifyVpcEndpointServiceConfigurationOutput) SetReturn(v bool) *ModifyVpcEndpointServiceConfigurationOutput {
-	s.Return = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsRequest
@@ -49304,30 +38462,6 @@ func (s *ModifyVpcEndpointServicePermissionsInput) Validate() error {
 	return nil
 }
 
-// SetAddAllowedPrincipals sets the AddAllowedPrincipals field's value.
-func (s *ModifyVpcEndpointServicePermissionsInput) SetAddAllowedPrincipals(v []string) *ModifyVpcEndpointServicePermissionsInput {
-	s.AddAllowedPrincipals = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVpcEndpointServicePermissionsInput) SetDryRun(v bool) *ModifyVpcEndpointServicePermissionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRemoveAllowedPrincipals sets the RemoveAllowedPrincipals field's value.
-func (s *ModifyVpcEndpointServicePermissionsInput) SetRemoveAllowedPrincipals(v []string) *ModifyVpcEndpointServicePermissionsInput {
-	s.RemoveAllowedPrincipals = v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *ModifyVpcEndpointServicePermissionsInput) SetServiceId(v string) *ModifyVpcEndpointServicePermissionsInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsResult
 type ModifyVpcEndpointServicePermissionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -49351,12 +38485,6 @@ func (s ModifyVpcEndpointServicePermissionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVpcEndpointServicePermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturnValue sets the ReturnValue field's value.
-func (s *ModifyVpcEndpointServicePermissionsOutput) SetReturnValue(v bool) *ModifyVpcEndpointServicePermissionsOutput {
-	s.ReturnValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptionsRequest
@@ -49405,30 +38533,6 @@ func (s *ModifyVpcPeeringConnectionOptionsInput) Validate() error {
 	return nil
 }
 
-// SetAccepterPeeringConnectionOptions sets the AccepterPeeringConnectionOptions field's value.
-func (s *ModifyVpcPeeringConnectionOptionsInput) SetAccepterPeeringConnectionOptions(v *PeeringConnectionOptionsRequest) *ModifyVpcPeeringConnectionOptionsInput {
-	s.AccepterPeeringConnectionOptions = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVpcPeeringConnectionOptionsInput) SetDryRun(v bool) *ModifyVpcPeeringConnectionOptionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRequesterPeeringConnectionOptions sets the RequesterPeeringConnectionOptions field's value.
-func (s *ModifyVpcPeeringConnectionOptionsInput) SetRequesterPeeringConnectionOptions(v *PeeringConnectionOptionsRequest) *ModifyVpcPeeringConnectionOptionsInput {
-	s.RequesterPeeringConnectionOptions = v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *ModifyVpcPeeringConnectionOptionsInput) SetVpcPeeringConnectionId(v string) *ModifyVpcPeeringConnectionOptionsInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptionsResult
 type ModifyVpcPeeringConnectionOptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -49455,18 +38559,6 @@ func (s ModifyVpcPeeringConnectionOptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVpcPeeringConnectionOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccepterPeeringConnectionOptions sets the AccepterPeeringConnectionOptions field's value.
-func (s *ModifyVpcPeeringConnectionOptionsOutput) SetAccepterPeeringConnectionOptions(v *PeeringConnectionOptions) *ModifyVpcPeeringConnectionOptionsOutput {
-	s.AccepterPeeringConnectionOptions = v
-	return s
-}
-
-// SetRequesterPeeringConnectionOptions sets the RequesterPeeringConnectionOptions field's value.
-func (s *ModifyVpcPeeringConnectionOptionsOutput) SetRequesterPeeringConnectionOptions(v *PeeringConnectionOptions) *ModifyVpcPeeringConnectionOptionsOutput {
-	s.RequesterPeeringConnectionOptions = v
-	return s
 }
 
 // Contains the parameters for ModifyVpcTenancy.
@@ -49518,24 +38610,6 @@ func (s *ModifyVpcTenancyInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *ModifyVpcTenancyInput) SetDryRun(v bool) *ModifyVpcTenancyInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *ModifyVpcTenancyInput) SetInstanceTenancy(v VpcTenancy) *ModifyVpcTenancyInput {
-	s.InstanceTenancy = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *ModifyVpcTenancyInput) SetVpcId(v string) *ModifyVpcTenancyInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the output of ModifyVpcTenancy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcTenancyResult
 type ModifyVpcTenancyOutput struct {
@@ -49560,12 +38634,6 @@ func (s ModifyVpcTenancyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyVpcTenancyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturnValue sets the ReturnValue field's value.
-func (s *ModifyVpcTenancyOutput) SetReturnValue(v bool) *ModifyVpcTenancyOutput {
-	s.ReturnValue = &v
-	return s
 }
 
 // Contains the parameters for MonitorInstances.
@@ -49609,18 +38677,6 @@ func (s *MonitorInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *MonitorInstancesInput) SetDryRun(v bool) *MonitorInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *MonitorInstancesInput) SetInstanceIds(v []string) *MonitorInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Contains the output of MonitorInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MonitorInstancesResult
 type MonitorInstancesOutput struct {
@@ -49647,12 +38703,6 @@ func (s MonitorInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstanceMonitorings sets the InstanceMonitorings field's value.
-func (s *MonitorInstancesOutput) SetInstanceMonitorings(v []InstanceMonitoring) *MonitorInstancesOutput {
-	s.InstanceMonitorings = v
-	return s
-}
-
 // Describes the monitoring of an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Monitoring
 type Monitoring struct {
@@ -49671,12 +38721,6 @@ func (s Monitoring) String() string {
 // GoString returns the string representation
 func (s Monitoring) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *Monitoring) SetState(v MonitoringState) *Monitoring {
-	s.State = v
-	return s
 }
 
 // Contains the parameters for MoveAddressToVpc.
@@ -49720,18 +38764,6 @@ func (s *MoveAddressToVpcInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *MoveAddressToVpcInput) SetDryRun(v bool) *MoveAddressToVpcInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *MoveAddressToVpcInput) SetPublicIp(v string) *MoveAddressToVpcInput {
-	s.PublicIp = &v
-	return s
-}
-
 // Contains the output of MoveAddressToVpc.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveAddressToVpcResult
 type MoveAddressToVpcOutput struct {
@@ -49761,18 +38793,6 @@ func (s MoveAddressToVpcOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAllocationId sets the AllocationId field's value.
-func (s *MoveAddressToVpcOutput) SetAllocationId(v string) *MoveAddressToVpcOutput {
-	s.AllocationId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *MoveAddressToVpcOutput) SetStatus(v Status) *MoveAddressToVpcOutput {
-	s.Status = v
-	return s
-}
-
 // Describes the status of a moving Elastic IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MovingAddressStatus
 type MovingAddressStatus struct {
@@ -49794,18 +38814,6 @@ func (s MovingAddressStatus) String() string {
 // GoString returns the string representation
 func (s MovingAddressStatus) GoString() string {
 	return s.String()
-}
-
-// SetMoveStatus sets the MoveStatus field's value.
-func (s *MovingAddressStatus) SetMoveStatus(v MoveStatus) *MovingAddressStatus {
-	s.MoveStatus = v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *MovingAddressStatus) SetPublicIp(v string) *MovingAddressStatus {
-	s.PublicIp = &v
-	return s
 }
 
 // Describes a NAT gateway.
@@ -49897,72 +38905,6 @@ func (s NatGateway) GoString() string {
 	return s.String()
 }
 
-// SetCreateTime sets the CreateTime field's value.
-func (s *NatGateway) SetCreateTime(v time.Time) *NatGateway {
-	s.CreateTime = &v
-	return s
-}
-
-// SetDeleteTime sets the DeleteTime field's value.
-func (s *NatGateway) SetDeleteTime(v time.Time) *NatGateway {
-	s.DeleteTime = &v
-	return s
-}
-
-// SetFailureCode sets the FailureCode field's value.
-func (s *NatGateway) SetFailureCode(v string) *NatGateway {
-	s.FailureCode = &v
-	return s
-}
-
-// SetFailureMessage sets the FailureMessage field's value.
-func (s *NatGateway) SetFailureMessage(v string) *NatGateway {
-	s.FailureMessage = &v
-	return s
-}
-
-// SetNatGatewayAddresses sets the NatGatewayAddresses field's value.
-func (s *NatGateway) SetNatGatewayAddresses(v []NatGatewayAddress) *NatGateway {
-	s.NatGatewayAddresses = v
-	return s
-}
-
-// SetNatGatewayId sets the NatGatewayId field's value.
-func (s *NatGateway) SetNatGatewayId(v string) *NatGateway {
-	s.NatGatewayId = &v
-	return s
-}
-
-// SetProvisionedBandwidth sets the ProvisionedBandwidth field's value.
-func (s *NatGateway) SetProvisionedBandwidth(v *ProvisionedBandwidth) *NatGateway {
-	s.ProvisionedBandwidth = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *NatGateway) SetState(v NatGatewayState) *NatGateway {
-	s.State = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *NatGateway) SetSubnetId(v string) *NatGateway {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *NatGateway) SetTags(v []Tag) *NatGateway {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *NatGateway) SetVpcId(v string) *NatGateway {
-	s.VpcId = &v
-	return s
-}
-
 // Describes the IP addresses and network interface associated with a NAT gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAddress
 type NatGatewayAddress struct {
@@ -49990,30 +38932,6 @@ func (s NatGatewayAddress) String() string {
 // GoString returns the string representation
 func (s NatGatewayAddress) GoString() string {
 	return s.String()
-}
-
-// SetAllocationId sets the AllocationId field's value.
-func (s *NatGatewayAddress) SetAllocationId(v string) *NatGatewayAddress {
-	s.AllocationId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *NatGatewayAddress) SetNetworkInterfaceId(v string) *NatGatewayAddress {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIp sets the PrivateIp field's value.
-func (s *NatGatewayAddress) SetPrivateIp(v string) *NatGatewayAddress {
-	s.PrivateIp = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *NatGatewayAddress) SetPublicIp(v string) *NatGatewayAddress {
-	s.PublicIp = &v
-	return s
 }
 
 // Describes a network ACL.
@@ -50050,42 +38968,6 @@ func (s NetworkAcl) GoString() string {
 	return s.String()
 }
 
-// SetAssociations sets the Associations field's value.
-func (s *NetworkAcl) SetAssociations(v []NetworkAclAssociation) *NetworkAcl {
-	s.Associations = v
-	return s
-}
-
-// SetEntries sets the Entries field's value.
-func (s *NetworkAcl) SetEntries(v []NetworkAclEntry) *NetworkAcl {
-	s.Entries = v
-	return s
-}
-
-// SetIsDefault sets the IsDefault field's value.
-func (s *NetworkAcl) SetIsDefault(v bool) *NetworkAcl {
-	s.IsDefault = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *NetworkAcl) SetNetworkAclId(v string) *NetworkAcl {
-	s.NetworkAclId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *NetworkAcl) SetTags(v []Tag) *NetworkAcl {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *NetworkAcl) SetVpcId(v string) *NetworkAcl {
-	s.VpcId = &v
-	return s
-}
-
 // Describes an association between a network ACL and a subnet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAclAssociation
 type NetworkAclAssociation struct {
@@ -50109,24 +38991,6 @@ func (s NetworkAclAssociation) String() string {
 // GoString returns the string representation
 func (s NetworkAclAssociation) GoString() string {
 	return s.String()
-}
-
-// SetNetworkAclAssociationId sets the NetworkAclAssociationId field's value.
-func (s *NetworkAclAssociation) SetNetworkAclAssociationId(v string) *NetworkAclAssociation {
-	s.NetworkAclAssociationId = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *NetworkAclAssociation) SetNetworkAclId(v string) *NetworkAclAssociation {
-	s.NetworkAclId = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *NetworkAclAssociation) SetSubnetId(v string) *NetworkAclAssociation {
-	s.SubnetId = &v
-	return s
 }
 
 // Describes an entry in a network ACL.
@@ -50169,54 +39033,6 @@ func (s NetworkAclEntry) String() string {
 // GoString returns the string representation
 func (s NetworkAclEntry) GoString() string {
 	return s.String()
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *NetworkAclEntry) SetCidrBlock(v string) *NetworkAclEntry {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetEgress sets the Egress field's value.
-func (s *NetworkAclEntry) SetEgress(v bool) *NetworkAclEntry {
-	s.Egress = &v
-	return s
-}
-
-// SetIcmpTypeCode sets the IcmpTypeCode field's value.
-func (s *NetworkAclEntry) SetIcmpTypeCode(v *IcmpTypeCode) *NetworkAclEntry {
-	s.IcmpTypeCode = v
-	return s
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *NetworkAclEntry) SetIpv6CidrBlock(v string) *NetworkAclEntry {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetPortRange sets the PortRange field's value.
-func (s *NetworkAclEntry) SetPortRange(v *PortRange) *NetworkAclEntry {
-	s.PortRange = v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *NetworkAclEntry) SetProtocol(v string) *NetworkAclEntry {
-	s.Protocol = &v
-	return s
-}
-
-// SetRuleAction sets the RuleAction field's value.
-func (s *NetworkAclEntry) SetRuleAction(v RuleAction) *NetworkAclEntry {
-	s.RuleAction = v
-	return s
-}
-
-// SetRuleNumber sets the RuleNumber field's value.
-func (s *NetworkAclEntry) SetRuleNumber(v int64) *NetworkAclEntry {
-	s.RuleNumber = &v
-	return s
 }
 
 // Describes a network interface.
@@ -50297,126 +39113,6 @@ func (s NetworkInterface) GoString() string {
 	return s.String()
 }
 
-// SetAssociation sets the Association field's value.
-func (s *NetworkInterface) SetAssociation(v *NetworkInterfaceAssociation) *NetworkInterface {
-	s.Association = v
-	return s
-}
-
-// SetAttachment sets the Attachment field's value.
-func (s *NetworkInterface) SetAttachment(v *NetworkInterfaceAttachment) *NetworkInterface {
-	s.Attachment = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *NetworkInterface) SetAvailabilityZone(v string) *NetworkInterface {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *NetworkInterface) SetDescription(v string) *NetworkInterface {
-	s.Description = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *NetworkInterface) SetGroups(v []GroupIdentifier) *NetworkInterface {
-	s.Groups = v
-	return s
-}
-
-// SetInterfaceType sets the InterfaceType field's value.
-func (s *NetworkInterface) SetInterfaceType(v NetworkInterfaceType) *NetworkInterface {
-	s.InterfaceType = v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *NetworkInterface) SetIpv6Addresses(v []NetworkInterfaceIpv6Address) *NetworkInterface {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetMacAddress sets the MacAddress field's value.
-func (s *NetworkInterface) SetMacAddress(v string) *NetworkInterface {
-	s.MacAddress = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *NetworkInterface) SetNetworkInterfaceId(v string) *NetworkInterface {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *NetworkInterface) SetOwnerId(v string) *NetworkInterface {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *NetworkInterface) SetPrivateDnsName(v string) *NetworkInterface {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *NetworkInterface) SetPrivateIpAddress(v string) *NetworkInterface {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *NetworkInterface) SetPrivateIpAddresses(v []NetworkInterfacePrivateIpAddress) *NetworkInterface {
-	s.PrivateIpAddresses = v
-	return s
-}
-
-// SetRequesterId sets the RequesterId field's value.
-func (s *NetworkInterface) SetRequesterId(v string) *NetworkInterface {
-	s.RequesterId = &v
-	return s
-}
-
-// SetRequesterManaged sets the RequesterManaged field's value.
-func (s *NetworkInterface) SetRequesterManaged(v bool) *NetworkInterface {
-	s.RequesterManaged = &v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *NetworkInterface) SetSourceDestCheck(v bool) *NetworkInterface {
-	s.SourceDestCheck = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *NetworkInterface) SetStatus(v NetworkInterfaceStatus) *NetworkInterface {
-	s.Status = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *NetworkInterface) SetSubnetId(v string) *NetworkInterface {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTagSet sets the TagSet field's value.
-func (s *NetworkInterface) SetTagSet(v []Tag) *NetworkInterface {
-	s.TagSet = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *NetworkInterface) SetVpcId(v string) *NetworkInterface {
-	s.VpcId = &v
-	return s
-}
-
 // Describes association information for an Elastic IP address (IPv4 only).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAssociation
 type NetworkInterfaceAssociation struct {
@@ -50446,36 +39142,6 @@ func (s NetworkInterfaceAssociation) String() string {
 // GoString returns the string representation
 func (s NetworkInterfaceAssociation) GoString() string {
 	return s.String()
-}
-
-// SetAllocationId sets the AllocationId field's value.
-func (s *NetworkInterfaceAssociation) SetAllocationId(v string) *NetworkInterfaceAssociation {
-	s.AllocationId = &v
-	return s
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *NetworkInterfaceAssociation) SetAssociationId(v string) *NetworkInterfaceAssociation {
-	s.AssociationId = &v
-	return s
-}
-
-// SetIpOwnerId sets the IpOwnerId field's value.
-func (s *NetworkInterfaceAssociation) SetIpOwnerId(v string) *NetworkInterfaceAssociation {
-	s.IpOwnerId = &v
-	return s
-}
-
-// SetPublicDnsName sets the PublicDnsName field's value.
-func (s *NetworkInterfaceAssociation) SetPublicDnsName(v string) *NetworkInterfaceAssociation {
-	s.PublicDnsName = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *NetworkInterfaceAssociation) SetPublicIp(v string) *NetworkInterfaceAssociation {
-	s.PublicIp = &v
-	return s
 }
 
 // Describes a network interface attachment.
@@ -50515,48 +39181,6 @@ func (s NetworkInterfaceAttachment) GoString() string {
 	return s.String()
 }
 
-// SetAttachTime sets the AttachTime field's value.
-func (s *NetworkInterfaceAttachment) SetAttachTime(v time.Time) *NetworkInterfaceAttachment {
-	s.AttachTime = &v
-	return s
-}
-
-// SetAttachmentId sets the AttachmentId field's value.
-func (s *NetworkInterfaceAttachment) SetAttachmentId(v string) *NetworkInterfaceAttachment {
-	s.AttachmentId = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *NetworkInterfaceAttachment) SetDeleteOnTermination(v bool) *NetworkInterfaceAttachment {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *NetworkInterfaceAttachment) SetDeviceIndex(v int64) *NetworkInterfaceAttachment {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *NetworkInterfaceAttachment) SetInstanceId(v string) *NetworkInterfaceAttachment {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceOwnerId sets the InstanceOwnerId field's value.
-func (s *NetworkInterfaceAttachment) SetInstanceOwnerId(v string) *NetworkInterfaceAttachment {
-	s.InstanceOwnerId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *NetworkInterfaceAttachment) SetStatus(v AttachmentStatus) *NetworkInterfaceAttachment {
-	s.Status = v
-	return s
-}
-
 // Describes an attachment change.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachmentChanges
 type NetworkInterfaceAttachmentChanges struct {
@@ -50579,18 +39203,6 @@ func (s NetworkInterfaceAttachmentChanges) GoString() string {
 	return s.String()
 }
 
-// SetAttachmentId sets the AttachmentId field's value.
-func (s *NetworkInterfaceAttachmentChanges) SetAttachmentId(v string) *NetworkInterfaceAttachmentChanges {
-	s.AttachmentId = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *NetworkInterfaceAttachmentChanges) SetDeleteOnTermination(v bool) *NetworkInterfaceAttachmentChanges {
-	s.DeleteOnTermination = &v
-	return s
-}
-
 // Describes an IPv6 address associated with a network interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceIpv6Address
 type NetworkInterfaceIpv6Address struct {
@@ -50608,12 +39220,6 @@ func (s NetworkInterfaceIpv6Address) String() string {
 // GoString returns the string representation
 func (s NetworkInterfaceIpv6Address) GoString() string {
 	return s.String()
-}
-
-// SetIpv6Address sets the Ipv6Address field's value.
-func (s *NetworkInterfaceIpv6Address) SetIpv6Address(v string) *NetworkInterfaceIpv6Address {
-	s.Ipv6Address = &v
-	return s
 }
 
 // Describes a permission for a network interface.
@@ -50650,42 +39256,6 @@ func (s NetworkInterfacePermission) GoString() string {
 	return s.String()
 }
 
-// SetAwsAccountId sets the AwsAccountId field's value.
-func (s *NetworkInterfacePermission) SetAwsAccountId(v string) *NetworkInterfacePermission {
-	s.AwsAccountId = &v
-	return s
-}
-
-// SetAwsService sets the AwsService field's value.
-func (s *NetworkInterfacePermission) SetAwsService(v string) *NetworkInterfacePermission {
-	s.AwsService = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *NetworkInterfacePermission) SetNetworkInterfaceId(v string) *NetworkInterfacePermission {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetNetworkInterfacePermissionId sets the NetworkInterfacePermissionId field's value.
-func (s *NetworkInterfacePermission) SetNetworkInterfacePermissionId(v string) *NetworkInterfacePermission {
-	s.NetworkInterfacePermissionId = &v
-	return s
-}
-
-// SetPermission sets the Permission field's value.
-func (s *NetworkInterfacePermission) SetPermission(v InterfacePermissionType) *NetworkInterfacePermission {
-	s.Permission = v
-	return s
-}
-
-// SetPermissionState sets the PermissionState field's value.
-func (s *NetworkInterfacePermission) SetPermissionState(v *NetworkInterfacePermissionState) *NetworkInterfacePermission {
-	s.PermissionState = v
-	return s
-}
-
 // Describes the state of a network interface permission.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePermissionState
 type NetworkInterfacePermissionState struct {
@@ -50706,18 +39276,6 @@ func (s NetworkInterfacePermissionState) String() string {
 // GoString returns the string representation
 func (s NetworkInterfacePermissionState) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *NetworkInterfacePermissionState) SetState(v NetworkInterfacePermissionStateCode) *NetworkInterfacePermissionState {
-	s.State = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *NetworkInterfacePermissionState) SetStatusMessage(v string) *NetworkInterfacePermissionState {
-	s.StatusMessage = &v
-	return s
 }
 
 // Describes the private IPv4 address of a network interface.
@@ -50750,30 +39308,6 @@ func (s NetworkInterfacePrivateIpAddress) GoString() string {
 	return s.String()
 }
 
-// SetAssociation sets the Association field's value.
-func (s *NetworkInterfacePrivateIpAddress) SetAssociation(v *NetworkInterfaceAssociation) *NetworkInterfacePrivateIpAddress {
-	s.Association = v
-	return s
-}
-
-// SetPrimary sets the Primary field's value.
-func (s *NetworkInterfacePrivateIpAddress) SetPrimary(v bool) *NetworkInterfacePrivateIpAddress {
-	s.Primary = &v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *NetworkInterfacePrivateIpAddress) SetPrivateDnsName(v string) *NetworkInterfacePrivateIpAddress {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *NetworkInterfacePrivateIpAddress) SetPrivateIpAddress(v string) *NetworkInterfacePrivateIpAddress {
-	s.PrivateIpAddress = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NewDhcpConfiguration
 type NewDhcpConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -50791,18 +39325,6 @@ func (s NewDhcpConfiguration) String() string {
 // GoString returns the string representation
 func (s NewDhcpConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *NewDhcpConfiguration) SetKey(v string) *NewDhcpConfiguration {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *NewDhcpConfiguration) SetValues(v []string) *NewDhcpConfiguration {
-	s.Values = v
-	return s
 }
 
 // Describes the data that identifies an Amazon FPGA image (AFI) on the PCI
@@ -50834,30 +39356,6 @@ func (s PciId) GoString() string {
 	return s.String()
 }
 
-// SetDeviceId sets the DeviceId field's value.
-func (s *PciId) SetDeviceId(v string) *PciId {
-	s.DeviceId = &v
-	return s
-}
-
-// SetSubsystemId sets the SubsystemId field's value.
-func (s *PciId) SetSubsystemId(v string) *PciId {
-	s.SubsystemId = &v
-	return s
-}
-
-// SetSubsystemVendorId sets the SubsystemVendorId field's value.
-func (s *PciId) SetSubsystemVendorId(v string) *PciId {
-	s.SubsystemVendorId = &v
-	return s
-}
-
-// SetVendorId sets the VendorId field's value.
-func (s *PciId) SetVendorId(v string) *PciId {
-	s.VendorId = &v
-	return s
-}
-
 // Describes the VPC peering connection options.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptions
 type PeeringConnectionOptions struct {
@@ -50886,24 +39384,6 @@ func (s PeeringConnectionOptions) GoString() string {
 	return s.String()
 }
 
-// SetAllowDnsResolutionFromRemoteVpc sets the AllowDnsResolutionFromRemoteVpc field's value.
-func (s *PeeringConnectionOptions) SetAllowDnsResolutionFromRemoteVpc(v bool) *PeeringConnectionOptions {
-	s.AllowDnsResolutionFromRemoteVpc = &v
-	return s
-}
-
-// SetAllowEgressFromLocalClassicLinkToRemoteVpc sets the AllowEgressFromLocalClassicLinkToRemoteVpc field's value.
-func (s *PeeringConnectionOptions) SetAllowEgressFromLocalClassicLinkToRemoteVpc(v bool) *PeeringConnectionOptions {
-	s.AllowEgressFromLocalClassicLinkToRemoteVpc = &v
-	return s
-}
-
-// SetAllowEgressFromLocalVpcToRemoteClassicLink sets the AllowEgressFromLocalVpcToRemoteClassicLink field's value.
-func (s *PeeringConnectionOptions) SetAllowEgressFromLocalVpcToRemoteClassicLink(v bool) *PeeringConnectionOptions {
-	s.AllowEgressFromLocalVpcToRemoteClassicLink = &v
-	return s
-}
-
 // The VPC peering connection options.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptionsRequest
 type PeeringConnectionOptionsRequest struct {
@@ -50930,24 +39410,6 @@ func (s PeeringConnectionOptionsRequest) String() string {
 // GoString returns the string representation
 func (s PeeringConnectionOptionsRequest) GoString() string {
 	return s.String()
-}
-
-// SetAllowDnsResolutionFromRemoteVpc sets the AllowDnsResolutionFromRemoteVpc field's value.
-func (s *PeeringConnectionOptionsRequest) SetAllowDnsResolutionFromRemoteVpc(v bool) *PeeringConnectionOptionsRequest {
-	s.AllowDnsResolutionFromRemoteVpc = &v
-	return s
-}
-
-// SetAllowEgressFromLocalClassicLinkToRemoteVpc sets the AllowEgressFromLocalClassicLinkToRemoteVpc field's value.
-func (s *PeeringConnectionOptionsRequest) SetAllowEgressFromLocalClassicLinkToRemoteVpc(v bool) *PeeringConnectionOptionsRequest {
-	s.AllowEgressFromLocalClassicLinkToRemoteVpc = &v
-	return s
-}
-
-// SetAllowEgressFromLocalVpcToRemoteClassicLink sets the AllowEgressFromLocalVpcToRemoteClassicLink field's value.
-func (s *PeeringConnectionOptionsRequest) SetAllowEgressFromLocalVpcToRemoteClassicLink(v bool) *PeeringConnectionOptionsRequest {
-	s.AllowEgressFromLocalVpcToRemoteClassicLink = &v
-	return s
 }
 
 // Describes the placement of an instance.
@@ -50988,42 +39450,6 @@ func (s Placement) GoString() string {
 	return s.String()
 }
 
-// SetAffinity sets the Affinity field's value.
-func (s *Placement) SetAffinity(v string) *Placement {
-	s.Affinity = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Placement) SetAvailabilityZone(v string) *Placement {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *Placement) SetGroupName(v string) *Placement {
-	s.GroupName = &v
-	return s
-}
-
-// SetHostId sets the HostId field's value.
-func (s *Placement) SetHostId(v string) *Placement {
-	s.HostId = &v
-	return s
-}
-
-// SetSpreadDomain sets the SpreadDomain field's value.
-func (s *Placement) SetSpreadDomain(v string) *Placement {
-	s.SpreadDomain = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *Placement) SetTenancy(v Tenancy) *Placement {
-	s.Tenancy = v
-	return s
-}
-
 // Describes a placement group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup
 type PlacementGroup struct {
@@ -51049,24 +39475,6 @@ func (s PlacementGroup) GoString() string {
 	return s.String()
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *PlacementGroup) SetGroupName(v string) *PlacementGroup {
-	s.GroupName = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *PlacementGroup) SetState(v PlacementGroupState) *PlacementGroup {
-	s.State = v
-	return s
-}
-
-// SetStrategy sets the Strategy field's value.
-func (s *PlacementGroup) SetStrategy(v PlacementStrategy) *PlacementGroup {
-	s.Strategy = v
-	return s
-}
-
 // Describes a range of ports.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PortRange
 type PortRange struct {
@@ -51087,18 +39495,6 @@ func (s PortRange) String() string {
 // GoString returns the string representation
 func (s PortRange) GoString() string {
 	return s.String()
-}
-
-// SetFrom sets the From field's value.
-func (s *PortRange) SetFrom(v int64) *PortRange {
-	s.From = &v
-	return s
-}
-
-// SetTo sets the To field's value.
-func (s *PortRange) SetTo(v int64) *PortRange {
-	s.To = &v
-	return s
 }
 
 // Describes prefixes for AWS services.
@@ -51126,24 +39522,6 @@ func (s PrefixList) GoString() string {
 	return s.String()
 }
 
-// SetCidrs sets the Cidrs field's value.
-func (s *PrefixList) SetCidrs(v []string) *PrefixList {
-	s.Cidrs = v
-	return s
-}
-
-// SetPrefixListId sets the PrefixListId field's value.
-func (s *PrefixList) SetPrefixListId(v string) *PrefixList {
-	s.PrefixListId = &v
-	return s
-}
-
-// SetPrefixListName sets the PrefixListName field's value.
-func (s *PrefixList) SetPrefixListName(v string) *PrefixList {
-	s.PrefixListName = &v
-	return s
-}
-
 // [EC2-VPC only] The ID of the prefix.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixListId
 type PrefixListId struct {
@@ -51168,18 +39546,6 @@ func (s PrefixListId) String() string {
 // GoString returns the string representation
 func (s PrefixListId) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *PrefixListId) SetDescription(v string) *PrefixListId {
-	s.Description = &v
-	return s
-}
-
-// SetPrefixListId sets the PrefixListId field's value.
-func (s *PrefixListId) SetPrefixListId(v string) *PrefixListId {
-	s.PrefixListId = &v
-	return s
 }
 
 // Describes the price for a Reserved Instance.
@@ -51221,30 +39587,6 @@ func (s PriceSchedule) GoString() string {
 	return s.String()
 }
 
-// SetActive sets the Active field's value.
-func (s *PriceSchedule) SetActive(v bool) *PriceSchedule {
-	s.Active = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PriceSchedule) SetCurrencyCode(v CurrencyCodeValues) *PriceSchedule {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetPrice sets the Price field's value.
-func (s *PriceSchedule) SetPrice(v float64) *PriceSchedule {
-	s.Price = &v
-	return s
-}
-
-// SetTerm sets the Term field's value.
-func (s *PriceSchedule) SetTerm(v int64) *PriceSchedule {
-	s.Term = &v
-	return s
-}
-
 // Describes the price for a Reserved Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceScheduleSpecification
 type PriceScheduleSpecification struct {
@@ -51272,24 +39614,6 @@ func (s PriceScheduleSpecification) GoString() string {
 	return s.String()
 }
 
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PriceScheduleSpecification) SetCurrencyCode(v CurrencyCodeValues) *PriceScheduleSpecification {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetPrice sets the Price field's value.
-func (s *PriceScheduleSpecification) SetPrice(v float64) *PriceScheduleSpecification {
-	s.Price = &v
-	return s
-}
-
-// SetTerm sets the Term field's value.
-func (s *PriceScheduleSpecification) SetTerm(v int64) *PriceScheduleSpecification {
-	s.Term = &v
-	return s
-}
-
 // Describes a Reserved Instance offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PricingDetail
 type PricingDetail struct {
@@ -51310,18 +39634,6 @@ func (s PricingDetail) String() string {
 // GoString returns the string representation
 func (s PricingDetail) GoString() string {
 	return s.String()
-}
-
-// SetCount sets the Count field's value.
-func (s *PricingDetail) SetCount(v int64) *PricingDetail {
-	s.Count = &v
-	return s
-}
-
-// SetPrice sets the Price field's value.
-func (s *PricingDetail) SetPrice(v float64) *PricingDetail {
-	s.Price = &v
-	return s
 }
 
 // Describes a secondary private IPv4 address for a network interface.
@@ -51363,18 +39675,6 @@ func (s *PrivateIpAddressSpecification) Validate() error {
 	return nil
 }
 
-// SetPrimary sets the Primary field's value.
-func (s *PrivateIpAddressSpecification) SetPrimary(v bool) *PrivateIpAddressSpecification {
-	s.Primary = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *PrivateIpAddressSpecification) SetPrivateIpAddress(v string) *PrivateIpAddressSpecification {
-	s.PrivateIpAddress = &v
-	return s
-}
-
 // Describes a product code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProductCode
 type ProductCode struct {
@@ -51397,18 +39697,6 @@ func (s ProductCode) GoString() string {
 	return s.String()
 }
 
-// SetProductCodeId sets the ProductCodeId field's value.
-func (s *ProductCode) SetProductCodeId(v string) *ProductCode {
-	s.ProductCodeId = &v
-	return s
-}
-
-// SetProductCodeType sets the ProductCodeType field's value.
-func (s *ProductCode) SetProductCodeType(v ProductCodeValues) *ProductCode {
-	s.ProductCodeType = v
-	return s
-}
-
 // Describes a virtual private gateway propagating route.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PropagatingVgw
 type PropagatingVgw struct {
@@ -51426,12 +39714,6 @@ func (s PropagatingVgw) String() string {
 // GoString returns the string representation
 func (s PropagatingVgw) GoString() string {
 	return s.String()
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *PropagatingVgw) SetGatewayId(v string) *PropagatingVgw {
-	s.GatewayId = &v
-	return s
 }
 
 // Reserved. If you need to sustain traffic greater than the documented limits
@@ -51477,36 +39759,6 @@ func (s ProvisionedBandwidth) GoString() string {
 	return s.String()
 }
 
-// SetProvisionTime sets the ProvisionTime field's value.
-func (s *ProvisionedBandwidth) SetProvisionTime(v time.Time) *ProvisionedBandwidth {
-	s.ProvisionTime = &v
-	return s
-}
-
-// SetProvisioned sets the Provisioned field's value.
-func (s *ProvisionedBandwidth) SetProvisioned(v string) *ProvisionedBandwidth {
-	s.Provisioned = &v
-	return s
-}
-
-// SetRequestTime sets the RequestTime field's value.
-func (s *ProvisionedBandwidth) SetRequestTime(v time.Time) *ProvisionedBandwidth {
-	s.RequestTime = &v
-	return s
-}
-
-// SetRequested sets the Requested field's value.
-func (s *ProvisionedBandwidth) SetRequested(v string) *ProvisionedBandwidth {
-	s.Requested = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ProvisionedBandwidth) SetStatus(v string) *ProvisionedBandwidth {
-	s.Status = &v
-	return s
-}
-
 // Describes the result of the purchase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Purchase
 type Purchase struct {
@@ -51547,54 +39799,6 @@ func (s Purchase) String() string {
 // GoString returns the string representation
 func (s Purchase) GoString() string {
 	return s.String()
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *Purchase) SetCurrencyCode(v CurrencyCodeValues) *Purchase {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *Purchase) SetDuration(v int64) *Purchase {
-	s.Duration = &v
-	return s
-}
-
-// SetHostIdSet sets the HostIdSet field's value.
-func (s *Purchase) SetHostIdSet(v []string) *Purchase {
-	s.HostIdSet = v
-	return s
-}
-
-// SetHostReservationId sets the HostReservationId field's value.
-func (s *Purchase) SetHostReservationId(v string) *Purchase {
-	s.HostReservationId = &v
-	return s
-}
-
-// SetHourlyPrice sets the HourlyPrice field's value.
-func (s *Purchase) SetHourlyPrice(v string) *Purchase {
-	s.HourlyPrice = &v
-	return s
-}
-
-// SetInstanceFamily sets the InstanceFamily field's value.
-func (s *Purchase) SetInstanceFamily(v string) *Purchase {
-	s.InstanceFamily = &v
-	return s
-}
-
-// SetPaymentOption sets the PaymentOption field's value.
-func (s *Purchase) SetPaymentOption(v PaymentOption) *Purchase {
-	s.PaymentOption = v
-	return s
-}
-
-// SetUpfrontPrice sets the UpfrontPrice field's value.
-func (s *Purchase) SetUpfrontPrice(v string) *Purchase {
-	s.UpfrontPrice = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationRequest
@@ -51659,36 +39863,6 @@ func (s *PurchaseHostReservationInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *PurchaseHostReservationInput) SetClientToken(v string) *PurchaseHostReservationInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PurchaseHostReservationInput) SetCurrencyCode(v CurrencyCodeValues) *PurchaseHostReservationInput {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetHostIdSet sets the HostIdSet field's value.
-func (s *PurchaseHostReservationInput) SetHostIdSet(v []string) *PurchaseHostReservationInput {
-	s.HostIdSet = v
-	return s
-}
-
-// SetLimitPrice sets the LimitPrice field's value.
-func (s *PurchaseHostReservationInput) SetLimitPrice(v string) *PurchaseHostReservationInput {
-	s.LimitPrice = &v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *PurchaseHostReservationInput) SetOfferingId(v string) *PurchaseHostReservationInput {
-	s.OfferingId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationResult
 type PurchaseHostReservationOutput struct {
 	_ struct{} `type:"structure"`
@@ -51728,36 +39902,6 @@ func (s PurchaseHostReservationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PurchaseHostReservationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *PurchaseHostReservationOutput) SetClientToken(v string) *PurchaseHostReservationOutput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PurchaseHostReservationOutput) SetCurrencyCode(v CurrencyCodeValues) *PurchaseHostReservationOutput {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetPurchase sets the Purchase field's value.
-func (s *PurchaseHostReservationOutput) SetPurchase(v []Purchase) *PurchaseHostReservationOutput {
-	s.Purchase = v
-	return s
-}
-
-// SetTotalHourlyPrice sets the TotalHourlyPrice field's value.
-func (s *PurchaseHostReservationOutput) SetTotalHourlyPrice(v string) *PurchaseHostReservationOutput {
-	s.TotalHourlyPrice = &v
-	return s
-}
-
-// SetTotalUpfrontPrice sets the TotalUpfrontPrice field's value.
-func (s *PurchaseHostReservationOutput) SetTotalUpfrontPrice(v string) *PurchaseHostReservationOutput {
-	s.TotalUpfrontPrice = &v
-	return s
 }
 
 // Describes a request to purchase Scheduled Instances.
@@ -51802,18 +39946,6 @@ func (s *PurchaseRequest) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *PurchaseRequest) SetInstanceCount(v int64) *PurchaseRequest {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetPurchaseToken sets the PurchaseToken field's value.
-func (s *PurchaseRequest) SetPurchaseToken(v string) *PurchaseRequest {
-	s.PurchaseToken = &v
-	return s
 }
 
 // Contains the parameters for PurchaseReservedInstancesOffering.
@@ -51871,30 +40003,6 @@ func (s *PurchaseReservedInstancesOfferingInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *PurchaseReservedInstancesOfferingInput) SetDryRun(v bool) *PurchaseReservedInstancesOfferingInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *PurchaseReservedInstancesOfferingInput) SetInstanceCount(v int64) *PurchaseReservedInstancesOfferingInput {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetLimitPrice sets the LimitPrice field's value.
-func (s *PurchaseReservedInstancesOfferingInput) SetLimitPrice(v *ReservedInstanceLimitPrice) *PurchaseReservedInstancesOfferingInput {
-	s.LimitPrice = v
-	return s
-}
-
-// SetReservedInstancesOfferingId sets the ReservedInstancesOfferingId field's value.
-func (s *PurchaseReservedInstancesOfferingInput) SetReservedInstancesOfferingId(v string) *PurchaseReservedInstancesOfferingInput {
-	s.ReservedInstancesOfferingId = &v
-	return s
-}
-
 // Contains the output of PurchaseReservedInstancesOffering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingResult
 type PurchaseReservedInstancesOfferingOutput struct {
@@ -51919,12 +40027,6 @@ func (s PurchaseReservedInstancesOfferingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PurchaseReservedInstancesOfferingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *PurchaseReservedInstancesOfferingOutput) SetReservedInstancesId(v string) *PurchaseReservedInstancesOfferingOutput {
-	s.ReservedInstancesId = &v
-	return s
 }
 
 // Contains the parameters for PurchaseScheduledInstances.
@@ -51982,24 +40084,6 @@ func (s *PurchaseScheduledInstancesInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *PurchaseScheduledInstancesInput) SetClientToken(v string) *PurchaseScheduledInstancesInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *PurchaseScheduledInstancesInput) SetDryRun(v bool) *PurchaseScheduledInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPurchaseRequests sets the PurchaseRequests field's value.
-func (s *PurchaseScheduledInstancesInput) SetPurchaseRequests(v []PurchaseRequest) *PurchaseScheduledInstancesInput {
-	s.PurchaseRequests = v
-	return s
-}
-
 // Contains the output of PurchaseScheduledInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesResult
 type PurchaseScheduledInstancesOutput struct {
@@ -52024,12 +40108,6 @@ func (s PurchaseScheduledInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PurchaseScheduledInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetScheduledInstanceSet sets the ScheduledInstanceSet field's value.
-func (s *PurchaseScheduledInstancesOutput) SetScheduledInstanceSet(v []ScheduledInstance) *PurchaseScheduledInstancesOutput {
-	s.ScheduledInstanceSet = v
-	return s
 }
 
 // Contains the parameters for RebootInstances.
@@ -52071,18 +40149,6 @@ func (s *RebootInstancesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RebootInstancesInput) SetDryRun(v bool) *RebootInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *RebootInstancesInput) SetInstanceIds(v []string) *RebootInstancesInput {
-	s.InstanceIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RebootInstancesOutput
@@ -52129,18 +40195,6 @@ func (s RecurringCharge) GoString() string {
 	return s.String()
 }
 
-// SetAmount sets the Amount field's value.
-func (s *RecurringCharge) SetAmount(v float64) *RecurringCharge {
-	s.Amount = &v
-	return s
-}
-
-// SetFrequency sets the Frequency field's value.
-func (s *RecurringCharge) SetFrequency(v RecurringChargeFrequency) *RecurringCharge {
-	s.Frequency = v
-	return s
-}
-
 // Describes a region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region
 type Region struct {
@@ -52161,18 +40215,6 @@ func (s Region) String() string {
 // GoString returns the string representation
 func (s Region) GoString() string {
 	return s.String()
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *Region) SetEndpoint(v string) *Region {
-	s.Endpoint = &v
-	return s
-}
-
-// SetRegionName sets the RegionName field's value.
-func (s *Region) SetRegionName(v string) *Region {
-	s.RegionName = &v
-	return s
 }
 
 // Contains the parameters for RegisterImage.
@@ -52271,84 +40313,6 @@ func (s *RegisterImageInput) Validate() error {
 	return nil
 }
 
-// SetArchitecture sets the Architecture field's value.
-func (s *RegisterImageInput) SetArchitecture(v ArchitectureValues) *RegisterImageInput {
-	s.Architecture = v
-	return s
-}
-
-// SetBillingProducts sets the BillingProducts field's value.
-func (s *RegisterImageInput) SetBillingProducts(v []string) *RegisterImageInput {
-	s.BillingProducts = v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RegisterImageInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *RegisterImageInput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RegisterImageInput) SetDescription(v string) *RegisterImageInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RegisterImageInput) SetDryRun(v bool) *RegisterImageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEnaSupport sets the EnaSupport field's value.
-func (s *RegisterImageInput) SetEnaSupport(v bool) *RegisterImageInput {
-	s.EnaSupport = &v
-	return s
-}
-
-// SetImageLocation sets the ImageLocation field's value.
-func (s *RegisterImageInput) SetImageLocation(v string) *RegisterImageInput {
-	s.ImageLocation = &v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *RegisterImageInput) SetKernelId(v string) *RegisterImageInput {
-	s.KernelId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RegisterImageInput) SetName(v string) *RegisterImageInput {
-	s.Name = &v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *RegisterImageInput) SetRamdiskId(v string) *RegisterImageInput {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetRootDeviceName sets the RootDeviceName field's value.
-func (s *RegisterImageInput) SetRootDeviceName(v string) *RegisterImageInput {
-	s.RootDeviceName = &v
-	return s
-}
-
-// SetSriovNetSupport sets the SriovNetSupport field's value.
-func (s *RegisterImageInput) SetSriovNetSupport(v string) *RegisterImageInput {
-	s.SriovNetSupport = &v
-	return s
-}
-
-// SetVirtualizationType sets the VirtualizationType field's value.
-func (s *RegisterImageInput) SetVirtualizationType(v string) *RegisterImageInput {
-	s.VirtualizationType = &v
-	return s
-}
-
 // Contains the output of RegisterImage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageResult
 type RegisterImageOutput struct {
@@ -52373,12 +40337,6 @@ func (s RegisterImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *RegisterImageOutput) SetImageId(v string) *RegisterImageOutput {
-	s.ImageId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnectionsRequest
@@ -52430,24 +40388,6 @@ func (s *RejectVpcEndpointConnectionsInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *RejectVpcEndpointConnectionsInput) SetDryRun(v bool) *RejectVpcEndpointConnectionsInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *RejectVpcEndpointConnectionsInput) SetServiceId(v string) *RejectVpcEndpointConnectionsInput {
-	s.ServiceId = &v
-	return s
-}
-
-// SetVpcEndpointIds sets the VpcEndpointIds field's value.
-func (s *RejectVpcEndpointConnectionsInput) SetVpcEndpointIds(v []string) *RejectVpcEndpointConnectionsInput {
-	s.VpcEndpointIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnectionsResult
 type RejectVpcEndpointConnectionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -52471,12 +40411,6 @@ func (s RejectVpcEndpointConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RejectVpcEndpointConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *RejectVpcEndpointConnectionsOutput) SetUnsuccessful(v []UnsuccessfulItem) *RejectVpcEndpointConnectionsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Contains the parameters for RejectVpcPeeringConnection.
@@ -52520,18 +40454,6 @@ func (s *RejectVpcPeeringConnectionInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *RejectVpcPeeringConnectionInput) SetDryRun(v bool) *RejectVpcPeeringConnectionInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *RejectVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *RejectVpcPeeringConnectionInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Contains the output of RejectVpcPeeringConnection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcPeeringConnectionResult
 type RejectVpcPeeringConnectionOutput struct {
@@ -52556,12 +40478,6 @@ func (s RejectVpcPeeringConnectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RejectVpcPeeringConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *RejectVpcPeeringConnectionOutput) SetReturn(v bool) *RejectVpcPeeringConnectionOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for ReleaseAddress.
@@ -52590,24 +40506,6 @@ func (s ReleaseAddressInput) String() string {
 // GoString returns the string representation
 func (s ReleaseAddressInput) GoString() string {
 	return s.String()
-}
-
-// SetAllocationId sets the AllocationId field's value.
-func (s *ReleaseAddressInput) SetAllocationId(v string) *ReleaseAddressInput {
-	s.AllocationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ReleaseAddressInput) SetDryRun(v bool) *ReleaseAddressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *ReleaseAddressInput) SetPublicIp(v string) *ReleaseAddressInput {
-	s.PublicIp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseAddressOutput
@@ -52667,12 +40565,6 @@ func (s *ReleaseHostsInput) Validate() error {
 	return nil
 }
 
-// SetHostIds sets the HostIds field's value.
-func (s *ReleaseHostsInput) SetHostIds(v []string) *ReleaseHostsInput {
-	s.HostIds = v
-	return s
-}
-
 // Contains the output of ReleaseHosts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseHostsResult
 type ReleaseHostsOutput struct {
@@ -52701,18 +40593,6 @@ func (s ReleaseHostsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReleaseHostsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSuccessful sets the Successful field's value.
-func (s *ReleaseHostsOutput) SetSuccessful(v []string) *ReleaseHostsOutput {
-	s.Successful = v
-	return s
-}
-
-// SetUnsuccessful sets the Unsuccessful field's value.
-func (s *ReleaseHostsOutput) SetUnsuccessful(v []UnsuccessfulItem) *ReleaseHostsOutput {
-	s.Unsuccessful = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceIamInstanceProfileAssociationRequest
@@ -52758,18 +40638,6 @@ func (s *ReplaceIamInstanceProfileAssociationInput) Validate() error {
 	return nil
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *ReplaceIamInstanceProfileAssociationInput) SetAssociationId(v string) *ReplaceIamInstanceProfileAssociationInput {
-	s.AssociationId = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *ReplaceIamInstanceProfileAssociationInput) SetIamInstanceProfile(v *IamInstanceProfileSpecification) *ReplaceIamInstanceProfileAssociationInput {
-	s.IamInstanceProfile = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceIamInstanceProfileAssociationResult
 type ReplaceIamInstanceProfileAssociationOutput struct {
 	_ struct{} `type:"structure"`
@@ -52793,12 +40661,6 @@ func (s ReplaceIamInstanceProfileAssociationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReplaceIamInstanceProfileAssociationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIamInstanceProfileAssociation sets the IamInstanceProfileAssociation field's value.
-func (s *ReplaceIamInstanceProfileAssociationOutput) SetIamInstanceProfileAssociation(v *IamInstanceProfileAssociation) *ReplaceIamInstanceProfileAssociationOutput {
-	s.IamInstanceProfileAssociation = v
-	return s
 }
 
 // Contains the parameters for ReplaceNetworkAclAssociation.
@@ -52852,24 +40714,6 @@ func (s *ReplaceNetworkAclAssociationInput) Validate() error {
 	return nil
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *ReplaceNetworkAclAssociationInput) SetAssociationId(v string) *ReplaceNetworkAclAssociationInput {
-	s.AssociationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ReplaceNetworkAclAssociationInput) SetDryRun(v bool) *ReplaceNetworkAclAssociationInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *ReplaceNetworkAclAssociationInput) SetNetworkAclId(v string) *ReplaceNetworkAclAssociationInput {
-	s.NetworkAclId = &v
-	return s
-}
-
 // Contains the output of ReplaceNetworkAclAssociation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclAssociationResult
 type ReplaceNetworkAclAssociationOutput struct {
@@ -52894,12 +40738,6 @@ func (s ReplaceNetworkAclAssociationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReplaceNetworkAclAssociationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNewAssociationId sets the NewAssociationId field's value.
-func (s *ReplaceNetworkAclAssociationOutput) SetNewAssociationId(v string) *ReplaceNetworkAclAssociationOutput {
-	s.NewAssociationId = &v
-	return s
 }
 
 // Contains the parameters for ReplaceNetworkAclEntry.
@@ -53000,66 +40838,6 @@ func (s *ReplaceNetworkAclEntryInput) Validate() error {
 	return nil
 }
 
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *ReplaceNetworkAclEntryInput) SetCidrBlock(v string) *ReplaceNetworkAclEntryInput {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ReplaceNetworkAclEntryInput) SetDryRun(v bool) *ReplaceNetworkAclEntryInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgress sets the Egress field's value.
-func (s *ReplaceNetworkAclEntryInput) SetEgress(v bool) *ReplaceNetworkAclEntryInput {
-	s.Egress = &v
-	return s
-}
-
-// SetIcmpTypeCode sets the IcmpTypeCode field's value.
-func (s *ReplaceNetworkAclEntryInput) SetIcmpTypeCode(v *IcmpTypeCode) *ReplaceNetworkAclEntryInput {
-	s.IcmpTypeCode = v
-	return s
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *ReplaceNetworkAclEntryInput) SetIpv6CidrBlock(v string) *ReplaceNetworkAclEntryInput {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetNetworkAclId sets the NetworkAclId field's value.
-func (s *ReplaceNetworkAclEntryInput) SetNetworkAclId(v string) *ReplaceNetworkAclEntryInput {
-	s.NetworkAclId = &v
-	return s
-}
-
-// SetPortRange sets the PortRange field's value.
-func (s *ReplaceNetworkAclEntryInput) SetPortRange(v *PortRange) *ReplaceNetworkAclEntryInput {
-	s.PortRange = v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *ReplaceNetworkAclEntryInput) SetProtocol(v string) *ReplaceNetworkAclEntryInput {
-	s.Protocol = &v
-	return s
-}
-
-// SetRuleAction sets the RuleAction field's value.
-func (s *ReplaceNetworkAclEntryInput) SetRuleAction(v RuleAction) *ReplaceNetworkAclEntryInput {
-	s.RuleAction = v
-	return s
-}
-
-// SetRuleNumber sets the RuleNumber field's value.
-func (s *ReplaceNetworkAclEntryInput) SetRuleNumber(v int64) *ReplaceNetworkAclEntryInput {
-	s.RuleNumber = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclEntryOutput
 type ReplaceNetworkAclEntryOutput struct {
 	_ struct{} `type:"structure"`
@@ -53149,66 +40927,6 @@ func (s *ReplaceRouteInput) Validate() error {
 	return nil
 }
 
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *ReplaceRouteInput) SetDestinationCidrBlock(v string) *ReplaceRouteInput {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetDestinationIpv6CidrBlock sets the DestinationIpv6CidrBlock field's value.
-func (s *ReplaceRouteInput) SetDestinationIpv6CidrBlock(v string) *ReplaceRouteInput {
-	s.DestinationIpv6CidrBlock = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ReplaceRouteInput) SetDryRun(v bool) *ReplaceRouteInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEgressOnlyInternetGatewayId sets the EgressOnlyInternetGatewayId field's value.
-func (s *ReplaceRouteInput) SetEgressOnlyInternetGatewayId(v string) *ReplaceRouteInput {
-	s.EgressOnlyInternetGatewayId = &v
-	return s
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *ReplaceRouteInput) SetGatewayId(v string) *ReplaceRouteInput {
-	s.GatewayId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ReplaceRouteInput) SetInstanceId(v string) *ReplaceRouteInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetNatGatewayId sets the NatGatewayId field's value.
-func (s *ReplaceRouteInput) SetNatGatewayId(v string) *ReplaceRouteInput {
-	s.NatGatewayId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *ReplaceRouteInput) SetNetworkInterfaceId(v string) *ReplaceRouteInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *ReplaceRouteInput) SetRouteTableId(v string) *ReplaceRouteInput {
-	s.RouteTableId = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *ReplaceRouteInput) SetVpcPeeringConnectionId(v string) *ReplaceRouteInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteOutput
 type ReplaceRouteOutput struct {
 	_ struct{} `type:"structure"`
@@ -53281,24 +40999,6 @@ func (s *ReplaceRouteTableAssociationInput) Validate() error {
 	return nil
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *ReplaceRouteTableAssociationInput) SetAssociationId(v string) *ReplaceRouteTableAssociationInput {
-	s.AssociationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ReplaceRouteTableAssociationInput) SetDryRun(v bool) *ReplaceRouteTableAssociationInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *ReplaceRouteTableAssociationInput) SetRouteTableId(v string) *ReplaceRouteTableAssociationInput {
-	s.RouteTableId = &v
-	return s
-}
-
 // Contains the output of ReplaceRouteTableAssociation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteTableAssociationResult
 type ReplaceRouteTableAssociationOutput struct {
@@ -53323,12 +41023,6 @@ func (s ReplaceRouteTableAssociationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReplaceRouteTableAssociationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNewAssociationId sets the NewAssociationId field's value.
-func (s *ReplaceRouteTableAssociationOutput) SetNewAssociationId(v string) *ReplaceRouteTableAssociationOutput {
-	s.NewAssociationId = &v
-	return s
 }
 
 // Contains the parameters for ReportInstanceStatus.
@@ -53417,48 +41111,6 @@ func (s *ReportInstanceStatusInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *ReportInstanceStatusInput) SetDescription(v string) *ReportInstanceStatusInput {
-	s.Description = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ReportInstanceStatusInput) SetDryRun(v bool) *ReportInstanceStatusInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *ReportInstanceStatusInput) SetEndTime(v time.Time) *ReportInstanceStatusInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetInstances sets the Instances field's value.
-func (s *ReportInstanceStatusInput) SetInstances(v []string) *ReportInstanceStatusInput {
-	s.Instances = v
-	return s
-}
-
-// SetReasonCodes sets the ReasonCodes field's value.
-func (s *ReportInstanceStatusInput) SetReasonCodes(v []ReportInstanceReasonCodes) *ReportInstanceStatusInput {
-	s.ReasonCodes = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *ReportInstanceStatusInput) SetStartTime(v time.Time) *ReportInstanceStatusInput {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ReportInstanceStatusInput) SetStatus(v ReportStatusType) *ReportInstanceStatusInput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReportInstanceStatusOutput
@@ -53626,126 +41278,6 @@ func (s *RequestLaunchTemplateData) Validate() error {
 	return nil
 }
 
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RequestLaunchTemplateData) SetBlockDeviceMappings(v []LaunchTemplateBlockDeviceMappingRequest) *RequestLaunchTemplateData {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetCreditSpecification sets the CreditSpecification field's value.
-func (s *RequestLaunchTemplateData) SetCreditSpecification(v *CreditSpecificationRequest) *RequestLaunchTemplateData {
-	s.CreditSpecification = v
-	return s
-}
-
-// SetDisableApiTermination sets the DisableApiTermination field's value.
-func (s *RequestLaunchTemplateData) SetDisableApiTermination(v bool) *RequestLaunchTemplateData {
-	s.DisableApiTermination = &v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *RequestLaunchTemplateData) SetEbsOptimized(v bool) *RequestLaunchTemplateData {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetElasticGpuSpecifications sets the ElasticGpuSpecifications field's value.
-func (s *RequestLaunchTemplateData) SetElasticGpuSpecifications(v []ElasticGpuSpecification) *RequestLaunchTemplateData {
-	s.ElasticGpuSpecifications = v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *RequestLaunchTemplateData) SetIamInstanceProfile(v *LaunchTemplateIamInstanceProfileSpecificationRequest) *RequestLaunchTemplateData {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *RequestLaunchTemplateData) SetImageId(v string) *RequestLaunchTemplateData {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *RequestLaunchTemplateData) SetInstanceInitiatedShutdownBehavior(v ShutdownBehavior) *RequestLaunchTemplateData {
-	s.InstanceInitiatedShutdownBehavior = v
-	return s
-}
-
-// SetInstanceMarketOptions sets the InstanceMarketOptions field's value.
-func (s *RequestLaunchTemplateData) SetInstanceMarketOptions(v *LaunchTemplateInstanceMarketOptionsRequest) *RequestLaunchTemplateData {
-	s.InstanceMarketOptions = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *RequestLaunchTemplateData) SetInstanceType(v InstanceType) *RequestLaunchTemplateData {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *RequestLaunchTemplateData) SetKernelId(v string) *RequestLaunchTemplateData {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *RequestLaunchTemplateData) SetKeyName(v string) *RequestLaunchTemplateData {
-	s.KeyName = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *RequestLaunchTemplateData) SetMonitoring(v *LaunchTemplatesMonitoringRequest) *RequestLaunchTemplateData {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *RequestLaunchTemplateData) SetNetworkInterfaces(v []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) *RequestLaunchTemplateData {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *RequestLaunchTemplateData) SetPlacement(v *LaunchTemplatePlacementRequest) *RequestLaunchTemplateData {
-	s.Placement = v
-	return s
-}
-
-// SetRamDiskId sets the RamDiskId field's value.
-func (s *RequestLaunchTemplateData) SetRamDiskId(v string) *RequestLaunchTemplateData {
-	s.RamDiskId = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RequestLaunchTemplateData) SetSecurityGroupIds(v []string) *RequestLaunchTemplateData {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *RequestLaunchTemplateData) SetSecurityGroups(v []string) *RequestLaunchTemplateData {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetTagSpecifications sets the TagSpecifications field's value.
-func (s *RequestLaunchTemplateData) SetTagSpecifications(v []LaunchTemplateTagSpecificationRequest) *RequestLaunchTemplateData {
-	s.TagSpecifications = v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *RequestLaunchTemplateData) SetUserData(v string) *RequestLaunchTemplateData {
-	s.UserData = &v
-	return s
-}
-
 // Contains the parameters for RequestSpotFleet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetRequest
 type RequestSpotFleetInput struct {
@@ -53792,18 +41324,6 @@ func (s *RequestSpotFleetInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *RequestSpotFleetInput) SetDryRun(v bool) *RequestSpotFleetInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSpotFleetRequestConfig sets the SpotFleetRequestConfig field's value.
-func (s *RequestSpotFleetInput) SetSpotFleetRequestConfig(v *SpotFleetRequestConfigData) *RequestSpotFleetInput {
-	s.SpotFleetRequestConfig = v
-	return s
-}
-
 // Contains the output of RequestSpotFleet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetResponse
 type RequestSpotFleetOutput struct {
@@ -53830,12 +41350,6 @@ func (s RequestSpotFleetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RequestSpotFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *RequestSpotFleetOutput) SetSpotFleetRequestId(v string) *RequestSpotFleetOutput {
-	s.SpotFleetRequestId = &v
-	return s
 }
 
 // Contains the parameters for RequestSpotInstances.
@@ -53954,78 +41468,6 @@ func (s *RequestSpotInstancesInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZoneGroup sets the AvailabilityZoneGroup field's value.
-func (s *RequestSpotInstancesInput) SetAvailabilityZoneGroup(v string) *RequestSpotInstancesInput {
-	s.AvailabilityZoneGroup = &v
-	return s
-}
-
-// SetBlockDurationMinutes sets the BlockDurationMinutes field's value.
-func (s *RequestSpotInstancesInput) SetBlockDurationMinutes(v int64) *RequestSpotInstancesInput {
-	s.BlockDurationMinutes = &v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *RequestSpotInstancesInput) SetClientToken(v string) *RequestSpotInstancesInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RequestSpotInstancesInput) SetDryRun(v bool) *RequestSpotInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *RequestSpotInstancesInput) SetInstanceCount(v int64) *RequestSpotInstancesInput {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *RequestSpotInstancesInput) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *RequestSpotInstancesInput {
-	s.InstanceInterruptionBehavior = v
-	return s
-}
-
-// SetLaunchGroup sets the LaunchGroup field's value.
-func (s *RequestSpotInstancesInput) SetLaunchGroup(v string) *RequestSpotInstancesInput {
-	s.LaunchGroup = &v
-	return s
-}
-
-// SetLaunchSpecification sets the LaunchSpecification field's value.
-func (s *RequestSpotInstancesInput) SetLaunchSpecification(v *RequestSpotLaunchSpecification) *RequestSpotInstancesInput {
-	s.LaunchSpecification = v
-	return s
-}
-
-// SetSpotPrice sets the SpotPrice field's value.
-func (s *RequestSpotInstancesInput) SetSpotPrice(v string) *RequestSpotInstancesInput {
-	s.SpotPrice = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *RequestSpotInstancesInput) SetType(v SpotInstanceType) *RequestSpotInstancesInput {
-	s.Type = v
-	return s
-}
-
-// SetValidFrom sets the ValidFrom field's value.
-func (s *RequestSpotInstancesInput) SetValidFrom(v time.Time) *RequestSpotInstancesInput {
-	s.ValidFrom = &v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *RequestSpotInstancesInput) SetValidUntil(v time.Time) *RequestSpotInstancesInput {
-	s.ValidUntil = &v
-	return s
-}
-
 // Contains the output of RequestSpotInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesResult
 type RequestSpotInstancesOutput struct {
@@ -54050,12 +41492,6 @@ func (s RequestSpotInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RequestSpotInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSpotInstanceRequests sets the SpotInstanceRequests field's value.
-func (s *RequestSpotInstancesOutput) SetSpotInstanceRequests(v []SpotInstanceRequest) *RequestSpotInstancesOutput {
-	s.SpotInstanceRequests = v
-	return s
 }
 
 // Describes the launch specification for an instance.
@@ -54160,102 +41596,6 @@ func (s *RequestSpotLaunchSpecification) Validate() error {
 	return nil
 }
 
-// SetAddressingType sets the AddressingType field's value.
-func (s *RequestSpotLaunchSpecification) SetAddressingType(v string) *RequestSpotLaunchSpecification {
-	s.AddressingType = &v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RequestSpotLaunchSpecification) SetBlockDeviceMappings(v []BlockDeviceMapping) *RequestSpotLaunchSpecification {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *RequestSpotLaunchSpecification) SetEbsOptimized(v bool) *RequestSpotLaunchSpecification {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *RequestSpotLaunchSpecification) SetIamInstanceProfile(v *IamInstanceProfileSpecification) *RequestSpotLaunchSpecification {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *RequestSpotLaunchSpecification) SetImageId(v string) *RequestSpotLaunchSpecification {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *RequestSpotLaunchSpecification) SetInstanceType(v InstanceType) *RequestSpotLaunchSpecification {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *RequestSpotLaunchSpecification) SetKernelId(v string) *RequestSpotLaunchSpecification {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *RequestSpotLaunchSpecification) SetKeyName(v string) *RequestSpotLaunchSpecification {
-	s.KeyName = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *RequestSpotLaunchSpecification) SetMonitoring(v *RunInstancesMonitoringEnabled) *RequestSpotLaunchSpecification {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *RequestSpotLaunchSpecification) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *RequestSpotLaunchSpecification {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *RequestSpotLaunchSpecification) SetPlacement(v *SpotPlacement) *RequestSpotLaunchSpecification {
-	s.Placement = v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *RequestSpotLaunchSpecification) SetRamdiskId(v string) *RequestSpotLaunchSpecification {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RequestSpotLaunchSpecification) SetSecurityGroupIds(v []string) *RequestSpotLaunchSpecification {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *RequestSpotLaunchSpecification) SetSecurityGroups(v []string) *RequestSpotLaunchSpecification {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *RequestSpotLaunchSpecification) SetSubnetId(v string) *RequestSpotLaunchSpecification {
-	s.SubnetId = &v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *RequestSpotLaunchSpecification) SetUserData(v string) *RequestSpotLaunchSpecification {
-	s.UserData = &v
-	return s
-}
-
 // The cost associated with the Reserved Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservationValue
 type ReservationValue struct {
@@ -54282,24 +41622,6 @@ func (s ReservationValue) GoString() string {
 	return s.String()
 }
 
-// SetHourlyPrice sets the HourlyPrice field's value.
-func (s *ReservationValue) SetHourlyPrice(v string) *ReservationValue {
-	s.HourlyPrice = &v
-	return s
-}
-
-// SetRemainingTotalValue sets the RemainingTotalValue field's value.
-func (s *ReservationValue) SetRemainingTotalValue(v string) *ReservationValue {
-	s.RemainingTotalValue = &v
-	return s
-}
-
-// SetRemainingUpfrontValue sets the RemainingUpfrontValue field's value.
-func (s *ReservationValue) SetRemainingUpfrontValue(v string) *ReservationValue {
-	s.RemainingUpfrontValue = &v
-	return s
-}
-
 // Describes the limit price of a Reserved Instance offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceLimitPrice
 type ReservedInstanceLimitPrice struct {
@@ -54324,18 +41646,6 @@ func (s ReservedInstanceLimitPrice) GoString() string {
 	return s.String()
 }
 
-// SetAmount sets the Amount field's value.
-func (s *ReservedInstanceLimitPrice) SetAmount(v float64) *ReservedInstanceLimitPrice {
-	s.Amount = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *ReservedInstanceLimitPrice) SetCurrencyCode(v CurrencyCodeValues) *ReservedInstanceLimitPrice {
-	s.CurrencyCode = v
-	return s
-}
-
 // The total value of the Convertible Reserved Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceReservationValue
 type ReservedInstanceReservationValue struct {
@@ -54356,18 +41666,6 @@ func (s ReservedInstanceReservationValue) String() string {
 // GoString returns the string representation
 func (s ReservedInstanceReservationValue) GoString() string {
 	return s.String()
-}
-
-// SetReservationValue sets the ReservationValue field's value.
-func (s *ReservedInstanceReservationValue) SetReservationValue(v *ReservationValue) *ReservedInstanceReservationValue {
-	s.ReservationValue = v
-	return s
-}
-
-// SetReservedInstanceId sets the ReservedInstanceId field's value.
-func (s *ReservedInstanceReservationValue) SetReservedInstanceId(v string) *ReservedInstanceReservationValue {
-	s.ReservedInstanceId = &v
-	return s
 }
 
 // Describes a Reserved Instance.
@@ -54441,114 +41739,6 @@ func (s ReservedInstances) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ReservedInstances) SetAvailabilityZone(v string) *ReservedInstances {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *ReservedInstances) SetCurrencyCode(v CurrencyCodeValues) *ReservedInstances {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *ReservedInstances) SetDuration(v int64) *ReservedInstances {
-	s.Duration = &v
-	return s
-}
-
-// SetEnd sets the End field's value.
-func (s *ReservedInstances) SetEnd(v time.Time) *ReservedInstances {
-	s.End = &v
-	return s
-}
-
-// SetFixedPrice sets the FixedPrice field's value.
-func (s *ReservedInstances) SetFixedPrice(v float64) *ReservedInstances {
-	s.FixedPrice = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *ReservedInstances) SetInstanceCount(v int64) *ReservedInstances {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *ReservedInstances) SetInstanceTenancy(v Tenancy) *ReservedInstances {
-	s.InstanceTenancy = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ReservedInstances) SetInstanceType(v InstanceType) *ReservedInstances {
-	s.InstanceType = v
-	return s
-}
-
-// SetOfferingClass sets the OfferingClass field's value.
-func (s *ReservedInstances) SetOfferingClass(v OfferingClassType) *ReservedInstances {
-	s.OfferingClass = v
-	return s
-}
-
-// SetOfferingType sets the OfferingType field's value.
-func (s *ReservedInstances) SetOfferingType(v OfferingTypeValues) *ReservedInstances {
-	s.OfferingType = v
-	return s
-}
-
-// SetProductDescription sets the ProductDescription field's value.
-func (s *ReservedInstances) SetProductDescription(v RIProductDescription) *ReservedInstances {
-	s.ProductDescription = v
-	return s
-}
-
-// SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedInstances) SetRecurringCharges(v []RecurringCharge) *ReservedInstances {
-	s.RecurringCharges = v
-	return s
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *ReservedInstances) SetReservedInstancesId(v string) *ReservedInstances {
-	s.ReservedInstancesId = &v
-	return s
-}
-
-// SetScope sets the Scope field's value.
-func (s *ReservedInstances) SetScope(v Scope) *ReservedInstances {
-	s.Scope = v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *ReservedInstances) SetStart(v time.Time) *ReservedInstances {
-	s.Start = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ReservedInstances) SetState(v ReservedInstanceState) *ReservedInstances {
-	s.State = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ReservedInstances) SetTags(v []Tag) *ReservedInstances {
-	s.Tags = v
-	return s
-}
-
-// SetUsagePrice sets the UsagePrice field's value.
-func (s *ReservedInstances) SetUsagePrice(v float64) *ReservedInstances {
-	s.UsagePrice = &v
-	return s
-}
-
 // Describes the configuration settings for the modified Reserved Instances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesConfiguration
 type ReservedInstancesConfiguration struct {
@@ -54582,36 +41772,6 @@ func (s ReservedInstancesConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ReservedInstancesConfiguration) SetAvailabilityZone(v string) *ReservedInstancesConfiguration {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *ReservedInstancesConfiguration) SetInstanceCount(v int64) *ReservedInstancesConfiguration {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ReservedInstancesConfiguration) SetInstanceType(v InstanceType) *ReservedInstancesConfiguration {
-	s.InstanceType = v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ReservedInstancesConfiguration) SetPlatform(v string) *ReservedInstancesConfiguration {
-	s.Platform = &v
-	return s
-}
-
-// SetScope sets the Scope field's value.
-func (s *ReservedInstancesConfiguration) SetScope(v Scope) *ReservedInstancesConfiguration {
-	s.Scope = v
-	return s
-}
-
 // Describes the ID of a Reserved Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesId
 type ReservedInstancesId struct {
@@ -54629,12 +41789,6 @@ func (s ReservedInstancesId) String() string {
 // GoString returns the string representation
 func (s ReservedInstancesId) GoString() string {
 	return s.String()
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *ReservedInstancesId) SetReservedInstancesId(v string) *ReservedInstancesId {
-	s.ReservedInstancesId = &v
-	return s
 }
 
 // Describes a Reserved Instance listing.
@@ -54685,66 +41839,6 @@ func (s ReservedInstancesListing) GoString() string {
 	return s.String()
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *ReservedInstancesListing) SetClientToken(v string) *ReservedInstancesListing {
-	s.ClientToken = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *ReservedInstancesListing) SetCreateDate(v time.Time) *ReservedInstancesListing {
-	s.CreateDate = &v
-	return s
-}
-
-// SetInstanceCounts sets the InstanceCounts field's value.
-func (s *ReservedInstancesListing) SetInstanceCounts(v []InstanceCount) *ReservedInstancesListing {
-	s.InstanceCounts = v
-	return s
-}
-
-// SetPriceSchedules sets the PriceSchedules field's value.
-func (s *ReservedInstancesListing) SetPriceSchedules(v []PriceSchedule) *ReservedInstancesListing {
-	s.PriceSchedules = v
-	return s
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *ReservedInstancesListing) SetReservedInstancesId(v string) *ReservedInstancesListing {
-	s.ReservedInstancesId = &v
-	return s
-}
-
-// SetReservedInstancesListingId sets the ReservedInstancesListingId field's value.
-func (s *ReservedInstancesListing) SetReservedInstancesListingId(v string) *ReservedInstancesListing {
-	s.ReservedInstancesListingId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ReservedInstancesListing) SetStatus(v ListingStatus) *ReservedInstancesListing {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ReservedInstancesListing) SetStatusMessage(v string) *ReservedInstancesListing {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ReservedInstancesListing) SetTags(v []Tag) *ReservedInstancesListing {
-	s.Tags = v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *ReservedInstancesListing) SetUpdateDate(v time.Time) *ReservedInstancesListing {
-	s.UpdateDate = &v
-	return s
-}
-
 // Describes a Reserved Instance modification.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModification
 type ReservedInstancesModification struct {
@@ -54790,60 +41884,6 @@ func (s ReservedInstancesModification) GoString() string {
 	return s.String()
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *ReservedInstancesModification) SetClientToken(v string) *ReservedInstancesModification {
-	s.ClientToken = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *ReservedInstancesModification) SetCreateDate(v time.Time) *ReservedInstancesModification {
-	s.CreateDate = &v
-	return s
-}
-
-// SetEffectiveDate sets the EffectiveDate field's value.
-func (s *ReservedInstancesModification) SetEffectiveDate(v time.Time) *ReservedInstancesModification {
-	s.EffectiveDate = &v
-	return s
-}
-
-// SetModificationResults sets the ModificationResults field's value.
-func (s *ReservedInstancesModification) SetModificationResults(v []ReservedInstancesModificationResult) *ReservedInstancesModification {
-	s.ModificationResults = v
-	return s
-}
-
-// SetReservedInstancesIds sets the ReservedInstancesIds field's value.
-func (s *ReservedInstancesModification) SetReservedInstancesIds(v []ReservedInstancesId) *ReservedInstancesModification {
-	s.ReservedInstancesIds = v
-	return s
-}
-
-// SetReservedInstancesModificationId sets the ReservedInstancesModificationId field's value.
-func (s *ReservedInstancesModification) SetReservedInstancesModificationId(v string) *ReservedInstancesModification {
-	s.ReservedInstancesModificationId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ReservedInstancesModification) SetStatus(v string) *ReservedInstancesModification {
-	s.Status = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ReservedInstancesModification) SetStatusMessage(v string) *ReservedInstancesModification {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *ReservedInstancesModification) SetUpdateDate(v time.Time) *ReservedInstancesModification {
-	s.UpdateDate = &v
-	return s
-}
-
 // Describes the modification request/s.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModificationResult
 type ReservedInstancesModificationResult struct {
@@ -54866,18 +41906,6 @@ func (s ReservedInstancesModificationResult) String() string {
 // GoString returns the string representation
 func (s ReservedInstancesModificationResult) GoString() string {
 	return s.String()
-}
-
-// SetReservedInstancesId sets the ReservedInstancesId field's value.
-func (s *ReservedInstancesModificationResult) SetReservedInstancesId(v string) *ReservedInstancesModificationResult {
-	s.ReservedInstancesId = &v
-	return s
-}
-
-// SetTargetConfiguration sets the TargetConfiguration field's value.
-func (s *ReservedInstancesModificationResult) SetTargetConfiguration(v *ReservedInstancesConfiguration) *ReservedInstancesModificationResult {
-	s.TargetConfiguration = v
-	return s
 }
 
 // Describes a Reserved Instance offering.
@@ -54949,96 +41977,6 @@ func (s ReservedInstancesOffering) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ReservedInstancesOffering) SetAvailabilityZone(v string) *ReservedInstancesOffering {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *ReservedInstancesOffering) SetCurrencyCode(v CurrencyCodeValues) *ReservedInstancesOffering {
-	s.CurrencyCode = v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *ReservedInstancesOffering) SetDuration(v int64) *ReservedInstancesOffering {
-	s.Duration = &v
-	return s
-}
-
-// SetFixedPrice sets the FixedPrice field's value.
-func (s *ReservedInstancesOffering) SetFixedPrice(v float64) *ReservedInstancesOffering {
-	s.FixedPrice = &v
-	return s
-}
-
-// SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *ReservedInstancesOffering) SetInstanceTenancy(v Tenancy) *ReservedInstancesOffering {
-	s.InstanceTenancy = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ReservedInstancesOffering) SetInstanceType(v InstanceType) *ReservedInstancesOffering {
-	s.InstanceType = v
-	return s
-}
-
-// SetMarketplace sets the Marketplace field's value.
-func (s *ReservedInstancesOffering) SetMarketplace(v bool) *ReservedInstancesOffering {
-	s.Marketplace = &v
-	return s
-}
-
-// SetOfferingClass sets the OfferingClass field's value.
-func (s *ReservedInstancesOffering) SetOfferingClass(v OfferingClassType) *ReservedInstancesOffering {
-	s.OfferingClass = v
-	return s
-}
-
-// SetOfferingType sets the OfferingType field's value.
-func (s *ReservedInstancesOffering) SetOfferingType(v OfferingTypeValues) *ReservedInstancesOffering {
-	s.OfferingType = v
-	return s
-}
-
-// SetPricingDetails sets the PricingDetails field's value.
-func (s *ReservedInstancesOffering) SetPricingDetails(v []PricingDetail) *ReservedInstancesOffering {
-	s.PricingDetails = v
-	return s
-}
-
-// SetProductDescription sets the ProductDescription field's value.
-func (s *ReservedInstancesOffering) SetProductDescription(v RIProductDescription) *ReservedInstancesOffering {
-	s.ProductDescription = v
-	return s
-}
-
-// SetRecurringCharges sets the RecurringCharges field's value.
-func (s *ReservedInstancesOffering) SetRecurringCharges(v []RecurringCharge) *ReservedInstancesOffering {
-	s.RecurringCharges = v
-	return s
-}
-
-// SetReservedInstancesOfferingId sets the ReservedInstancesOfferingId field's value.
-func (s *ReservedInstancesOffering) SetReservedInstancesOfferingId(v string) *ReservedInstancesOffering {
-	s.ReservedInstancesOfferingId = &v
-	return s
-}
-
-// SetScope sets the Scope field's value.
-func (s *ReservedInstancesOffering) SetScope(v Scope) *ReservedInstancesOffering {
-	s.Scope = v
-	return s
-}
-
-// SetUsagePrice sets the UsagePrice field's value.
-func (s *ReservedInstancesOffering) SetUsagePrice(v float64) *ReservedInstancesOffering {
-	s.UsagePrice = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttributeRequest
 type ResetFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
@@ -55082,24 +42020,6 @@ func (s *ResetFpgaImageAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *ResetFpgaImageAttributeInput) SetAttribute(v ResetFpgaImageAttributeName) *ResetFpgaImageAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ResetFpgaImageAttributeInput) SetDryRun(v bool) *ResetFpgaImageAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFpgaImageId sets the FpgaImageId field's value.
-func (s *ResetFpgaImageAttributeInput) SetFpgaImageId(v string) *ResetFpgaImageAttributeInput {
-	s.FpgaImageId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetFpgaImageAttributeResult
 type ResetFpgaImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -55123,12 +42043,6 @@ func (s ResetFpgaImageAttributeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResetFpgaImageAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *ResetFpgaImageAttributeOutput) SetReturn(v bool) *ResetFpgaImageAttributeOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for ResetImageAttribute.
@@ -55179,24 +42093,6 @@ func (s *ResetImageAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *ResetImageAttributeInput) SetAttribute(v ResetImageAttributeName) *ResetImageAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ResetImageAttributeInput) SetDryRun(v bool) *ResetImageAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ResetImageAttributeInput) SetImageId(v string) *ResetImageAttributeInput {
-	s.ImageId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetImageAttributeOutput
@@ -55273,24 +42169,6 @@ func (s *ResetInstanceAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *ResetInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *ResetInstanceAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ResetInstanceAttributeInput) SetDryRun(v bool) *ResetInstanceAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ResetInstanceAttributeInput) SetInstanceId(v string) *ResetInstanceAttributeInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttributeOutput
 type ResetInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -55355,24 +42233,6 @@ func (s *ResetNetworkInterfaceAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ResetNetworkInterfaceAttributeInput) SetDryRun(v bool) *ResetNetworkInterfaceAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *ResetNetworkInterfaceAttributeInput) SetNetworkInterfaceId(v string) *ResetNetworkInterfaceAttributeInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetSourceDestCheck sets the SourceDestCheck field's value.
-func (s *ResetNetworkInterfaceAttributeInput) SetSourceDestCheck(v string) *ResetNetworkInterfaceAttributeInput {
-	s.SourceDestCheck = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetNetworkInterfaceAttributeOutput
@@ -55447,24 +42307,6 @@ func (s *ResetSnapshotAttributeInput) Validate() error {
 	return nil
 }
 
-// SetAttribute sets the Attribute field's value.
-func (s *ResetSnapshotAttributeInput) SetAttribute(v SnapshotAttributeName) *ResetSnapshotAttributeInput {
-	s.Attribute = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ResetSnapshotAttributeInput) SetDryRun(v bool) *ResetSnapshotAttributeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *ResetSnapshotAttributeInput) SetSnapshotId(v string) *ResetSnapshotAttributeInput {
-	s.SnapshotId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetSnapshotAttributeOutput
 type ResetSnapshotAttributeOutput struct {
 	_ struct{} `type:"structure"`
@@ -55508,18 +42350,6 @@ func (s ResponseError) String() string {
 // GoString returns the string representation
 func (s ResponseError) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *ResponseError) SetCode(v LaunchTemplateErrorCode) *ResponseError {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ResponseError) SetMessage(v string) *ResponseError {
-	s.Message = &v
-	return s
 }
 
 // The information for a launch template.
@@ -55600,126 +42430,6 @@ func (s ResponseLaunchTemplateData) GoString() string {
 	return s.String()
 }
 
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *ResponseLaunchTemplateData) SetBlockDeviceMappings(v []LaunchTemplateBlockDeviceMapping) *ResponseLaunchTemplateData {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetCreditSpecification sets the CreditSpecification field's value.
-func (s *ResponseLaunchTemplateData) SetCreditSpecification(v *CreditSpecification) *ResponseLaunchTemplateData {
-	s.CreditSpecification = v
-	return s
-}
-
-// SetDisableApiTermination sets the DisableApiTermination field's value.
-func (s *ResponseLaunchTemplateData) SetDisableApiTermination(v bool) *ResponseLaunchTemplateData {
-	s.DisableApiTermination = &v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *ResponseLaunchTemplateData) SetEbsOptimized(v bool) *ResponseLaunchTemplateData {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetElasticGpuSpecifications sets the ElasticGpuSpecifications field's value.
-func (s *ResponseLaunchTemplateData) SetElasticGpuSpecifications(v []ElasticGpuSpecificationResponse) *ResponseLaunchTemplateData {
-	s.ElasticGpuSpecifications = v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *ResponseLaunchTemplateData) SetIamInstanceProfile(v *LaunchTemplateIamInstanceProfileSpecification) *ResponseLaunchTemplateData {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ResponseLaunchTemplateData) SetImageId(v string) *ResponseLaunchTemplateData {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *ResponseLaunchTemplateData) SetInstanceInitiatedShutdownBehavior(v ShutdownBehavior) *ResponseLaunchTemplateData {
-	s.InstanceInitiatedShutdownBehavior = v
-	return s
-}
-
-// SetInstanceMarketOptions sets the InstanceMarketOptions field's value.
-func (s *ResponseLaunchTemplateData) SetInstanceMarketOptions(v *LaunchTemplateInstanceMarketOptions) *ResponseLaunchTemplateData {
-	s.InstanceMarketOptions = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ResponseLaunchTemplateData) SetInstanceType(v InstanceType) *ResponseLaunchTemplateData {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *ResponseLaunchTemplateData) SetKernelId(v string) *ResponseLaunchTemplateData {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *ResponseLaunchTemplateData) SetKeyName(v string) *ResponseLaunchTemplateData {
-	s.KeyName = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *ResponseLaunchTemplateData) SetMonitoring(v *LaunchTemplatesMonitoring) *ResponseLaunchTemplateData {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *ResponseLaunchTemplateData) SetNetworkInterfaces(v []LaunchTemplateInstanceNetworkInterfaceSpecification) *ResponseLaunchTemplateData {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *ResponseLaunchTemplateData) SetPlacement(v *LaunchTemplatePlacement) *ResponseLaunchTemplateData {
-	s.Placement = v
-	return s
-}
-
-// SetRamDiskId sets the RamDiskId field's value.
-func (s *ResponseLaunchTemplateData) SetRamDiskId(v string) *ResponseLaunchTemplateData {
-	s.RamDiskId = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ResponseLaunchTemplateData) SetSecurityGroupIds(v []string) *ResponseLaunchTemplateData {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *ResponseLaunchTemplateData) SetSecurityGroups(v []string) *ResponseLaunchTemplateData {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetTagSpecifications sets the TagSpecifications field's value.
-func (s *ResponseLaunchTemplateData) SetTagSpecifications(v []LaunchTemplateTagSpecification) *ResponseLaunchTemplateData {
-	s.TagSpecifications = v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *ResponseLaunchTemplateData) SetUserData(v string) *ResponseLaunchTemplateData {
-	s.UserData = &v
-	return s
-}
-
 // Contains the parameters for RestoreAddressToClassic.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreAddressToClassicRequest
 type RestoreAddressToClassicInput struct {
@@ -55761,18 +42471,6 @@ func (s *RestoreAddressToClassicInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *RestoreAddressToClassicInput) SetDryRun(v bool) *RestoreAddressToClassicInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *RestoreAddressToClassicInput) SetPublicIp(v string) *RestoreAddressToClassicInput {
-	s.PublicIp = &v
-	return s
-}
-
 // Contains the output of RestoreAddressToClassic.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreAddressToClassicResult
 type RestoreAddressToClassicOutput struct {
@@ -55800,18 +42498,6 @@ func (s RestoreAddressToClassicOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RestoreAddressToClassicOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *RestoreAddressToClassicOutput) SetPublicIp(v string) *RestoreAddressToClassicOutput {
-	s.PublicIp = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *RestoreAddressToClassicOutput) SetStatus(v Status) *RestoreAddressToClassicOutput {
-	s.Status = v
-	return s
 }
 
 // Contains the parameters for RevokeSecurityGroupEgress.
@@ -55878,60 +42564,6 @@ func (s *RevokeSecurityGroupEgressInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCidrIp sets the CidrIp field's value.
-func (s *RevokeSecurityGroupEgressInput) SetCidrIp(v string) *RevokeSecurityGroupEgressInput {
-	s.CidrIp = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RevokeSecurityGroupEgressInput) SetDryRun(v bool) *RevokeSecurityGroupEgressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFromPort sets the FromPort field's value.
-func (s *RevokeSecurityGroupEgressInput) SetFromPort(v int64) *RevokeSecurityGroupEgressInput {
-	s.FromPort = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *RevokeSecurityGroupEgressInput) SetGroupId(v string) *RevokeSecurityGroupEgressInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *RevokeSecurityGroupEgressInput) SetIpPermissions(v []IpPermission) *RevokeSecurityGroupEgressInput {
-	s.IpPermissions = v
-	return s
-}
-
-// SetIpProtocol sets the IpProtocol field's value.
-func (s *RevokeSecurityGroupEgressInput) SetIpProtocol(v string) *RevokeSecurityGroupEgressInput {
-	s.IpProtocol = &v
-	return s
-}
-
-// SetSourceSecurityGroupName sets the SourceSecurityGroupName field's value.
-func (s *RevokeSecurityGroupEgressInput) SetSourceSecurityGroupName(v string) *RevokeSecurityGroupEgressInput {
-	s.SourceSecurityGroupName = &v
-	return s
-}
-
-// SetSourceSecurityGroupOwnerId sets the SourceSecurityGroupOwnerId field's value.
-func (s *RevokeSecurityGroupEgressInput) SetSourceSecurityGroupOwnerId(v string) *RevokeSecurityGroupEgressInput {
-	s.SourceSecurityGroupOwnerId = &v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *RevokeSecurityGroupEgressInput) SetToPort(v int64) *RevokeSecurityGroupEgressInput {
-	s.ToPort = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressOutput
@@ -56023,66 +42655,6 @@ func (s RevokeSecurityGroupIngressInput) GoString() string {
 	return s.String()
 }
 
-// SetCidrIp sets the CidrIp field's value.
-func (s *RevokeSecurityGroupIngressInput) SetCidrIp(v string) *RevokeSecurityGroupIngressInput {
-	s.CidrIp = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RevokeSecurityGroupIngressInput) SetDryRun(v bool) *RevokeSecurityGroupIngressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFromPort sets the FromPort field's value.
-func (s *RevokeSecurityGroupIngressInput) SetFromPort(v int64) *RevokeSecurityGroupIngressInput {
-	s.FromPort = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *RevokeSecurityGroupIngressInput) SetGroupId(v string) *RevokeSecurityGroupIngressInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *RevokeSecurityGroupIngressInput) SetGroupName(v string) *RevokeSecurityGroupIngressInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *RevokeSecurityGroupIngressInput) SetIpPermissions(v []IpPermission) *RevokeSecurityGroupIngressInput {
-	s.IpPermissions = v
-	return s
-}
-
-// SetIpProtocol sets the IpProtocol field's value.
-func (s *RevokeSecurityGroupIngressInput) SetIpProtocol(v string) *RevokeSecurityGroupIngressInput {
-	s.IpProtocol = &v
-	return s
-}
-
-// SetSourceSecurityGroupName sets the SourceSecurityGroupName field's value.
-func (s *RevokeSecurityGroupIngressInput) SetSourceSecurityGroupName(v string) *RevokeSecurityGroupIngressInput {
-	s.SourceSecurityGroupName = &v
-	return s
-}
-
-// SetSourceSecurityGroupOwnerId sets the SourceSecurityGroupOwnerId field's value.
-func (s *RevokeSecurityGroupIngressInput) SetSourceSecurityGroupOwnerId(v string) *RevokeSecurityGroupIngressInput {
-	s.SourceSecurityGroupOwnerId = &v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *RevokeSecurityGroupIngressInput) SetToPort(v int64) *RevokeSecurityGroupIngressInput {
-	s.ToPort = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressOutput
 type RevokeSecurityGroupIngressOutput struct {
 	_ struct{} `type:"structure"`
@@ -56166,78 +42738,6 @@ func (s Route) GoString() string {
 	return s.String()
 }
 
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *Route) SetDestinationCidrBlock(v string) *Route {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetDestinationIpv6CidrBlock sets the DestinationIpv6CidrBlock field's value.
-func (s *Route) SetDestinationIpv6CidrBlock(v string) *Route {
-	s.DestinationIpv6CidrBlock = &v
-	return s
-}
-
-// SetDestinationPrefixListId sets the DestinationPrefixListId field's value.
-func (s *Route) SetDestinationPrefixListId(v string) *Route {
-	s.DestinationPrefixListId = &v
-	return s
-}
-
-// SetEgressOnlyInternetGatewayId sets the EgressOnlyInternetGatewayId field's value.
-func (s *Route) SetEgressOnlyInternetGatewayId(v string) *Route {
-	s.EgressOnlyInternetGatewayId = &v
-	return s
-}
-
-// SetGatewayId sets the GatewayId field's value.
-func (s *Route) SetGatewayId(v string) *Route {
-	s.GatewayId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Route) SetInstanceId(v string) *Route {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceOwnerId sets the InstanceOwnerId field's value.
-func (s *Route) SetInstanceOwnerId(v string) *Route {
-	s.InstanceOwnerId = &v
-	return s
-}
-
-// SetNatGatewayId sets the NatGatewayId field's value.
-func (s *Route) SetNatGatewayId(v string) *Route {
-	s.NatGatewayId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *Route) SetNetworkInterfaceId(v string) *Route {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetOrigin sets the Origin field's value.
-func (s *Route) SetOrigin(v RouteOrigin) *Route {
-	s.Origin = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Route) SetState(v RouteState) *Route {
-	s.State = v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *Route) SetVpcPeeringConnectionId(v string) *Route {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Describes a route table.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTable
 type RouteTable struct {
@@ -56272,42 +42772,6 @@ func (s RouteTable) GoString() string {
 	return s.String()
 }
 
-// SetAssociations sets the Associations field's value.
-func (s *RouteTable) SetAssociations(v []RouteTableAssociation) *RouteTable {
-	s.Associations = v
-	return s
-}
-
-// SetPropagatingVgws sets the PropagatingVgws field's value.
-func (s *RouteTable) SetPropagatingVgws(v []PropagatingVgw) *RouteTable {
-	s.PropagatingVgws = v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *RouteTable) SetRouteTableId(v string) *RouteTable {
-	s.RouteTableId = &v
-	return s
-}
-
-// SetRoutes sets the Routes field's value.
-func (s *RouteTable) SetRoutes(v []Route) *RouteTable {
-	s.Routes = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *RouteTable) SetTags(v []Tag) *RouteTable {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *RouteTable) SetVpcId(v string) *RouteTable {
-	s.VpcId = &v
-	return s
-}
-
 // Describes an association between a route table and a subnet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTableAssociation
 type RouteTableAssociation struct {
@@ -56334,30 +42798,6 @@ func (s RouteTableAssociation) String() string {
 // GoString returns the string representation
 func (s RouteTableAssociation) GoString() string {
 	return s.String()
-}
-
-// SetMain sets the Main field's value.
-func (s *RouteTableAssociation) SetMain(v bool) *RouteTableAssociation {
-	s.Main = &v
-	return s
-}
-
-// SetRouteTableAssociationId sets the RouteTableAssociationId field's value.
-func (s *RouteTableAssociation) SetRouteTableAssociationId(v string) *RouteTableAssociation {
-	s.RouteTableAssociationId = &v
-	return s
-}
-
-// SetRouteTableId sets the RouteTableId field's value.
-func (s *RouteTableAssociation) SetRouteTableId(v string) *RouteTableAssociation {
-	s.RouteTableId = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *RouteTableAssociation) SetSubnetId(v string) *RouteTableAssociation {
-	s.SubnetId = &v
-	return s
 }
 
 // Contains the parameters for RunInstances.
@@ -56597,186 +43037,6 @@ func (s *RunInstancesInput) Validate() error {
 	return nil
 }
 
-// SetAdditionalInfo sets the AdditionalInfo field's value.
-func (s *RunInstancesInput) SetAdditionalInfo(v string) *RunInstancesInput {
-	s.AdditionalInfo = &v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *RunInstancesInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *RunInstancesInput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *RunInstancesInput) SetClientToken(v string) *RunInstancesInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetCreditSpecification sets the CreditSpecification field's value.
-func (s *RunInstancesInput) SetCreditSpecification(v *CreditSpecificationRequest) *RunInstancesInput {
-	s.CreditSpecification = v
-	return s
-}
-
-// SetDisableApiTermination sets the DisableApiTermination field's value.
-func (s *RunInstancesInput) SetDisableApiTermination(v bool) *RunInstancesInput {
-	s.DisableApiTermination = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RunInstancesInput) SetDryRun(v bool) *RunInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *RunInstancesInput) SetEbsOptimized(v bool) *RunInstancesInput {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetElasticGpuSpecification sets the ElasticGpuSpecification field's value.
-func (s *RunInstancesInput) SetElasticGpuSpecification(v []ElasticGpuSpecification) *RunInstancesInput {
-	s.ElasticGpuSpecification = v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *RunInstancesInput) SetIamInstanceProfile(v *IamInstanceProfileSpecification) *RunInstancesInput {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *RunInstancesInput) SetImageId(v string) *RunInstancesInput {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *RunInstancesInput) SetInstanceInitiatedShutdownBehavior(v ShutdownBehavior) *RunInstancesInput {
-	s.InstanceInitiatedShutdownBehavior = v
-	return s
-}
-
-// SetInstanceMarketOptions sets the InstanceMarketOptions field's value.
-func (s *RunInstancesInput) SetInstanceMarketOptions(v *InstanceMarketOptionsRequest) *RunInstancesInput {
-	s.InstanceMarketOptions = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *RunInstancesInput) SetInstanceType(v InstanceType) *RunInstancesInput {
-	s.InstanceType = v
-	return s
-}
-
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *RunInstancesInput) SetIpv6AddressCount(v int64) *RunInstancesInput {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *RunInstancesInput) SetIpv6Addresses(v []InstanceIpv6Address) *RunInstancesInput {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *RunInstancesInput) SetKernelId(v string) *RunInstancesInput {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *RunInstancesInput) SetKeyName(v string) *RunInstancesInput {
-	s.KeyName = &v
-	return s
-}
-
-// SetLaunchTemplate sets the LaunchTemplate field's value.
-func (s *RunInstancesInput) SetLaunchTemplate(v *LaunchTemplateSpecification) *RunInstancesInput {
-	s.LaunchTemplate = v
-	return s
-}
-
-// SetMaxCount sets the MaxCount field's value.
-func (s *RunInstancesInput) SetMaxCount(v int64) *RunInstancesInput {
-	s.MaxCount = &v
-	return s
-}
-
-// SetMinCount sets the MinCount field's value.
-func (s *RunInstancesInput) SetMinCount(v int64) *RunInstancesInput {
-	s.MinCount = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *RunInstancesInput) SetMonitoring(v *RunInstancesMonitoringEnabled) *RunInstancesInput {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *RunInstancesInput) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *RunInstancesInput {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *RunInstancesInput) SetPlacement(v *Placement) *RunInstancesInput {
-	s.Placement = v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *RunInstancesInput) SetPrivateIpAddress(v string) *RunInstancesInput {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *RunInstancesInput) SetRamdiskId(v string) *RunInstancesInput {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *RunInstancesInput) SetSecurityGroupIds(v []string) *RunInstancesInput {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *RunInstancesInput) SetSecurityGroups(v []string) *RunInstancesInput {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *RunInstancesInput) SetSubnetId(v string) *RunInstancesInput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTagSpecifications sets the TagSpecifications field's value.
-func (s *RunInstancesInput) SetTagSpecifications(v []TagSpecification) *RunInstancesInput {
-	s.TagSpecifications = v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *RunInstancesInput) SetUserData(v string) *RunInstancesInput {
-	s.UserData = &v
-	return s
-}
-
 // Describes the monitoring of an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesMonitoringEnabled
 type RunInstancesMonitoringEnabled struct {
@@ -56811,12 +43071,6 @@ func (s *RunInstancesMonitoringEnabled) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *RunInstancesMonitoringEnabled) SetEnabled(v bool) *RunInstancesMonitoringEnabled {
-	s.Enabled = &v
-	return s
 }
 
 // Describes a reservation.
@@ -56856,36 +43110,6 @@ func (s RunInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RunInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *RunInstancesOutput) SetGroups(v []GroupIdentifier) *RunInstancesOutput {
-	s.Groups = v
-	return s
-}
-
-// SetInstances sets the Instances field's value.
-func (s *RunInstancesOutput) SetInstances(v []Instance) *RunInstancesOutput {
-	s.Instances = v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *RunInstancesOutput) SetOwnerId(v string) *RunInstancesOutput {
-	s.OwnerId = &v
-	return s
-}
-
-// SetRequesterId sets the RequesterId field's value.
-func (s *RunInstancesOutput) SetRequesterId(v string) *RunInstancesOutput {
-	s.RequesterId = &v
-	return s
-}
-
-// SetReservationId sets the ReservationId field's value.
-func (s *RunInstancesOutput) SetReservationId(v string) *RunInstancesOutput {
-	s.ReservationId = &v
-	return s
 }
 
 // Contains the parameters for RunScheduledInstances.
@@ -56953,36 +43177,6 @@ func (s *RunScheduledInstancesInput) Validate() error {
 	return nil
 }
 
-// SetClientToken sets the ClientToken field's value.
-func (s *RunScheduledInstancesInput) SetClientToken(v string) *RunScheduledInstancesInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *RunScheduledInstancesInput) SetDryRun(v bool) *RunScheduledInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *RunScheduledInstancesInput) SetInstanceCount(v int64) *RunScheduledInstancesInput {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetLaunchSpecification sets the LaunchSpecification field's value.
-func (s *RunScheduledInstancesInput) SetLaunchSpecification(v *ScheduledInstancesLaunchSpecification) *RunScheduledInstancesInput {
-	s.LaunchSpecification = v
-	return s
-}
-
-// SetScheduledInstanceId sets the ScheduledInstanceId field's value.
-func (s *RunScheduledInstancesInput) SetScheduledInstanceId(v string) *RunScheduledInstancesInput {
-	s.ScheduledInstanceId = &v
-	return s
-}
-
 // Contains the output of RunScheduledInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstancesResult
 type RunScheduledInstancesOutput struct {
@@ -57007,12 +43201,6 @@ func (s RunScheduledInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RunScheduledInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceIdSet sets the InstanceIdSet field's value.
-func (s *RunScheduledInstancesOutput) SetInstanceIdSet(v []string) *RunScheduledInstancesOutput {
-	s.InstanceIdSet = v
-	return s
 }
 
 // Describes the storage parameters for S3 and S3 buckets for an instance store-backed
@@ -57052,36 +43240,6 @@ func (s S3Storage) String() string {
 // GoString returns the string representation
 func (s S3Storage) GoString() string {
 	return s.String()
-}
-
-// SetAWSAccessKeyId sets the AWSAccessKeyId field's value.
-func (s *S3Storage) SetAWSAccessKeyId(v string) *S3Storage {
-	s.AWSAccessKeyId = &v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *S3Storage) SetBucket(v string) *S3Storage {
-	s.Bucket = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *S3Storage) SetPrefix(v string) *S3Storage {
-	s.Prefix = &v
-	return s
-}
-
-// SetUploadPolicy sets the UploadPolicy field's value.
-func (s *S3Storage) SetUploadPolicy(v []byte) *S3Storage {
-	s.UploadPolicy = v
-	return s
-}
-
-// SetUploadPolicySignature sets the UploadPolicySignature field's value.
-func (s *S3Storage) SetUploadPolicySignature(v string) *S3Storage {
-	s.UploadPolicySignature = &v
-	return s
 }
 
 // Describes a Scheduled Instance.
@@ -57145,96 +43303,6 @@ func (s ScheduledInstance) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ScheduledInstance) SetAvailabilityZone(v string) *ScheduledInstance {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *ScheduledInstance) SetCreateDate(v time.Time) *ScheduledInstance {
-	s.CreateDate = &v
-	return s
-}
-
-// SetHourlyPrice sets the HourlyPrice field's value.
-func (s *ScheduledInstance) SetHourlyPrice(v string) *ScheduledInstance {
-	s.HourlyPrice = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *ScheduledInstance) SetInstanceCount(v int64) *ScheduledInstance {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ScheduledInstance) SetInstanceType(v string) *ScheduledInstance {
-	s.InstanceType = &v
-	return s
-}
-
-// SetNetworkPlatform sets the NetworkPlatform field's value.
-func (s *ScheduledInstance) SetNetworkPlatform(v string) *ScheduledInstance {
-	s.NetworkPlatform = &v
-	return s
-}
-
-// SetNextSlotStartTime sets the NextSlotStartTime field's value.
-func (s *ScheduledInstance) SetNextSlotStartTime(v time.Time) *ScheduledInstance {
-	s.NextSlotStartTime = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ScheduledInstance) SetPlatform(v string) *ScheduledInstance {
-	s.Platform = &v
-	return s
-}
-
-// SetPreviousSlotEndTime sets the PreviousSlotEndTime field's value.
-func (s *ScheduledInstance) SetPreviousSlotEndTime(v time.Time) *ScheduledInstance {
-	s.PreviousSlotEndTime = &v
-	return s
-}
-
-// SetRecurrence sets the Recurrence field's value.
-func (s *ScheduledInstance) SetRecurrence(v *ScheduledInstanceRecurrence) *ScheduledInstance {
-	s.Recurrence = v
-	return s
-}
-
-// SetScheduledInstanceId sets the ScheduledInstanceId field's value.
-func (s *ScheduledInstance) SetScheduledInstanceId(v string) *ScheduledInstance {
-	s.ScheduledInstanceId = &v
-	return s
-}
-
-// SetSlotDurationInHours sets the SlotDurationInHours field's value.
-func (s *ScheduledInstance) SetSlotDurationInHours(v int64) *ScheduledInstance {
-	s.SlotDurationInHours = &v
-	return s
-}
-
-// SetTermEndDate sets the TermEndDate field's value.
-func (s *ScheduledInstance) SetTermEndDate(v time.Time) *ScheduledInstance {
-	s.TermEndDate = &v
-	return s
-}
-
-// SetTermStartDate sets the TermStartDate field's value.
-func (s *ScheduledInstance) SetTermStartDate(v time.Time) *ScheduledInstance {
-	s.TermStartDate = &v
-	return s
-}
-
-// SetTotalScheduledInstanceHours sets the TotalScheduledInstanceHours field's value.
-func (s *ScheduledInstance) SetTotalScheduledInstanceHours(v int64) *ScheduledInstance {
-	s.TotalScheduledInstanceHours = &v
-	return s
-}
-
 // Describes a schedule that is available for your Scheduled Instances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceAvailability
 type ScheduledInstanceAvailability struct {
@@ -57291,84 +43359,6 @@ func (s ScheduledInstanceAvailability) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ScheduledInstanceAvailability) SetAvailabilityZone(v string) *ScheduledInstanceAvailability {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetAvailableInstanceCount sets the AvailableInstanceCount field's value.
-func (s *ScheduledInstanceAvailability) SetAvailableInstanceCount(v int64) *ScheduledInstanceAvailability {
-	s.AvailableInstanceCount = &v
-	return s
-}
-
-// SetFirstSlotStartTime sets the FirstSlotStartTime field's value.
-func (s *ScheduledInstanceAvailability) SetFirstSlotStartTime(v time.Time) *ScheduledInstanceAvailability {
-	s.FirstSlotStartTime = &v
-	return s
-}
-
-// SetHourlyPrice sets the HourlyPrice field's value.
-func (s *ScheduledInstanceAvailability) SetHourlyPrice(v string) *ScheduledInstanceAvailability {
-	s.HourlyPrice = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ScheduledInstanceAvailability) SetInstanceType(v string) *ScheduledInstanceAvailability {
-	s.InstanceType = &v
-	return s
-}
-
-// SetMaxTermDurationInDays sets the MaxTermDurationInDays field's value.
-func (s *ScheduledInstanceAvailability) SetMaxTermDurationInDays(v int64) *ScheduledInstanceAvailability {
-	s.MaxTermDurationInDays = &v
-	return s
-}
-
-// SetMinTermDurationInDays sets the MinTermDurationInDays field's value.
-func (s *ScheduledInstanceAvailability) SetMinTermDurationInDays(v int64) *ScheduledInstanceAvailability {
-	s.MinTermDurationInDays = &v
-	return s
-}
-
-// SetNetworkPlatform sets the NetworkPlatform field's value.
-func (s *ScheduledInstanceAvailability) SetNetworkPlatform(v string) *ScheduledInstanceAvailability {
-	s.NetworkPlatform = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ScheduledInstanceAvailability) SetPlatform(v string) *ScheduledInstanceAvailability {
-	s.Platform = &v
-	return s
-}
-
-// SetPurchaseToken sets the PurchaseToken field's value.
-func (s *ScheduledInstanceAvailability) SetPurchaseToken(v string) *ScheduledInstanceAvailability {
-	s.PurchaseToken = &v
-	return s
-}
-
-// SetRecurrence sets the Recurrence field's value.
-func (s *ScheduledInstanceAvailability) SetRecurrence(v *ScheduledInstanceRecurrence) *ScheduledInstanceAvailability {
-	s.Recurrence = v
-	return s
-}
-
-// SetSlotDurationInHours sets the SlotDurationInHours field's value.
-func (s *ScheduledInstanceAvailability) SetSlotDurationInHours(v int64) *ScheduledInstanceAvailability {
-	s.SlotDurationInHours = &v
-	return s
-}
-
-// SetTotalScheduledInstanceHours sets the TotalScheduledInstanceHours field's value.
-func (s *ScheduledInstanceAvailability) SetTotalScheduledInstanceHours(v int64) *ScheduledInstanceAvailability {
-	s.TotalScheduledInstanceHours = &v
-	return s
-}
-
 // Describes the recurring schedule for a Scheduled Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceRecurrence
 type ScheduledInstanceRecurrence struct {
@@ -57402,36 +43392,6 @@ func (s ScheduledInstanceRecurrence) String() string {
 // GoString returns the string representation
 func (s ScheduledInstanceRecurrence) GoString() string {
 	return s.String()
-}
-
-// SetFrequency sets the Frequency field's value.
-func (s *ScheduledInstanceRecurrence) SetFrequency(v string) *ScheduledInstanceRecurrence {
-	s.Frequency = &v
-	return s
-}
-
-// SetInterval sets the Interval field's value.
-func (s *ScheduledInstanceRecurrence) SetInterval(v int64) *ScheduledInstanceRecurrence {
-	s.Interval = &v
-	return s
-}
-
-// SetOccurrenceDaySet sets the OccurrenceDaySet field's value.
-func (s *ScheduledInstanceRecurrence) SetOccurrenceDaySet(v []int64) *ScheduledInstanceRecurrence {
-	s.OccurrenceDaySet = v
-	return s
-}
-
-// SetOccurrenceRelativeToEnd sets the OccurrenceRelativeToEnd field's value.
-func (s *ScheduledInstanceRecurrence) SetOccurrenceRelativeToEnd(v bool) *ScheduledInstanceRecurrence {
-	s.OccurrenceRelativeToEnd = &v
-	return s
-}
-
-// SetOccurrenceUnit sets the OccurrenceUnit field's value.
-func (s *ScheduledInstanceRecurrence) SetOccurrenceUnit(v string) *ScheduledInstanceRecurrence {
-	s.OccurrenceUnit = &v
-	return s
 }
 
 // Describes the recurring schedule for a Scheduled Instance.
@@ -57472,36 +43432,6 @@ func (s ScheduledInstanceRecurrenceRequest) GoString() string {
 	return s.String()
 }
 
-// SetFrequency sets the Frequency field's value.
-func (s *ScheduledInstanceRecurrenceRequest) SetFrequency(v string) *ScheduledInstanceRecurrenceRequest {
-	s.Frequency = &v
-	return s
-}
-
-// SetInterval sets the Interval field's value.
-func (s *ScheduledInstanceRecurrenceRequest) SetInterval(v int64) *ScheduledInstanceRecurrenceRequest {
-	s.Interval = &v
-	return s
-}
-
-// SetOccurrenceDays sets the OccurrenceDays field's value.
-func (s *ScheduledInstanceRecurrenceRequest) SetOccurrenceDays(v []int64) *ScheduledInstanceRecurrenceRequest {
-	s.OccurrenceDays = v
-	return s
-}
-
-// SetOccurrenceRelativeToEnd sets the OccurrenceRelativeToEnd field's value.
-func (s *ScheduledInstanceRecurrenceRequest) SetOccurrenceRelativeToEnd(v bool) *ScheduledInstanceRecurrenceRequest {
-	s.OccurrenceRelativeToEnd = &v
-	return s
-}
-
-// SetOccurrenceUnit sets the OccurrenceUnit field's value.
-func (s *ScheduledInstanceRecurrenceRequest) SetOccurrenceUnit(v string) *ScheduledInstanceRecurrenceRequest {
-	s.OccurrenceUnit = &v
-	return s
-}
-
 // Describes a block device mapping for a Scheduled Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesBlockDeviceMapping
 type ScheduledInstancesBlockDeviceMapping struct {
@@ -57539,30 +43469,6 @@ func (s ScheduledInstancesBlockDeviceMapping) String() string {
 // GoString returns the string representation
 func (s ScheduledInstancesBlockDeviceMapping) GoString() string {
 	return s.String()
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *ScheduledInstancesBlockDeviceMapping) SetDeviceName(v string) *ScheduledInstancesBlockDeviceMapping {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *ScheduledInstancesBlockDeviceMapping) SetEbs(v *ScheduledInstancesEbs) *ScheduledInstancesBlockDeviceMapping {
-	s.Ebs = v
-	return s
-}
-
-// SetNoDevice sets the NoDevice field's value.
-func (s *ScheduledInstancesBlockDeviceMapping) SetNoDevice(v string) *ScheduledInstancesBlockDeviceMapping {
-	s.NoDevice = &v
-	return s
-}
-
-// SetVirtualName sets the VirtualName field's value.
-func (s *ScheduledInstancesBlockDeviceMapping) SetVirtualName(v string) *ScheduledInstancesBlockDeviceMapping {
-	s.VirtualName = &v
-	return s
 }
 
 // Describes an EBS volume for a Scheduled Instance.
@@ -57618,42 +43524,6 @@ func (s ScheduledInstancesEbs) GoString() string {
 	return s.String()
 }
 
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *ScheduledInstancesEbs) SetDeleteOnTermination(v bool) *ScheduledInstancesEbs {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *ScheduledInstancesEbs) SetEncrypted(v bool) *ScheduledInstancesEbs {
-	s.Encrypted = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *ScheduledInstancesEbs) SetIops(v int64) *ScheduledInstancesEbs {
-	s.Iops = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *ScheduledInstancesEbs) SetSnapshotId(v string) *ScheduledInstancesEbs {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *ScheduledInstancesEbs) SetVolumeSize(v int64) *ScheduledInstancesEbs {
-	s.VolumeSize = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *ScheduledInstancesEbs) SetVolumeType(v string) *ScheduledInstancesEbs {
-	s.VolumeType = &v
-	return s
-}
-
 // Describes an IAM instance profile for a Scheduled Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesIamInstanceProfile
 type ScheduledInstancesIamInstanceProfile struct {
@@ -57676,18 +43546,6 @@ func (s ScheduledInstancesIamInstanceProfile) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *ScheduledInstancesIamInstanceProfile) SetArn(v string) *ScheduledInstancesIamInstanceProfile {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ScheduledInstancesIamInstanceProfile) SetName(v string) *ScheduledInstancesIamInstanceProfile {
-	s.Name = &v
-	return s
-}
-
 // Describes an IPv6 address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesIpv6Address
 type ScheduledInstancesIpv6Address struct {
@@ -57705,12 +43563,6 @@ func (s ScheduledInstancesIpv6Address) String() string {
 // GoString returns the string representation
 func (s ScheduledInstancesIpv6Address) GoString() string {
 	return s.String()
-}
-
-// SetIpv6Address sets the Ipv6Address field's value.
-func (s *ScheduledInstancesIpv6Address) SetIpv6Address(v string) *ScheduledInstancesIpv6Address {
-	s.Ipv6Address = &v
-	return s
 }
 
 // Describes the launch specification for a Scheduled Instance.
@@ -57797,90 +43649,6 @@ func (s *ScheduledInstancesLaunchSpecification) Validate() error {
 	return nil
 }
 
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetBlockDeviceMappings(v []ScheduledInstancesBlockDeviceMapping) *ScheduledInstancesLaunchSpecification {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetEbsOptimized(v bool) *ScheduledInstancesLaunchSpecification {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetIamInstanceProfile(v *ScheduledInstancesIamInstanceProfile) *ScheduledInstancesLaunchSpecification {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetImageId(v string) *ScheduledInstancesLaunchSpecification {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetInstanceType(v string) *ScheduledInstancesLaunchSpecification {
-	s.InstanceType = &v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetKernelId(v string) *ScheduledInstancesLaunchSpecification {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetKeyName(v string) *ScheduledInstancesLaunchSpecification {
-	s.KeyName = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetMonitoring(v *ScheduledInstancesMonitoring) *ScheduledInstancesLaunchSpecification {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetNetworkInterfaces(v []ScheduledInstancesNetworkInterface) *ScheduledInstancesLaunchSpecification {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetPlacement(v *ScheduledInstancesPlacement) *ScheduledInstancesLaunchSpecification {
-	s.Placement = v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetRamdiskId(v string) *ScheduledInstancesLaunchSpecification {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetSecurityGroupIds(v []string) *ScheduledInstancesLaunchSpecification {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetSubnetId(v string) *ScheduledInstancesLaunchSpecification {
-	s.SubnetId = &v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *ScheduledInstancesLaunchSpecification) SetUserData(v string) *ScheduledInstancesLaunchSpecification {
-	s.UserData = &v
-	return s
-}
-
 // Describes whether monitoring is enabled for a Scheduled Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesMonitoring
 type ScheduledInstancesMonitoring struct {
@@ -57898,12 +43666,6 @@ func (s ScheduledInstancesMonitoring) String() string {
 // GoString returns the string representation
 func (s ScheduledInstancesMonitoring) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *ScheduledInstancesMonitoring) SetEnabled(v bool) *ScheduledInstancesMonitoring {
-	s.Enabled = &v
-	return s
 }
 
 // Describes a network interface for a Scheduled Instance.
@@ -57963,78 +43725,6 @@ func (s ScheduledInstancesNetworkInterface) GoString() string {
 	return s.String()
 }
 
-// SetAssociatePublicIpAddress sets the AssociatePublicIpAddress field's value.
-func (s *ScheduledInstancesNetworkInterface) SetAssociatePublicIpAddress(v bool) *ScheduledInstancesNetworkInterface {
-	s.AssociatePublicIpAddress = &v
-	return s
-}
-
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *ScheduledInstancesNetworkInterface) SetDeleteOnTermination(v bool) *ScheduledInstancesNetworkInterface {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ScheduledInstancesNetworkInterface) SetDescription(v string) *ScheduledInstancesNetworkInterface {
-	s.Description = &v
-	return s
-}
-
-// SetDeviceIndex sets the DeviceIndex field's value.
-func (s *ScheduledInstancesNetworkInterface) SetDeviceIndex(v int64) *ScheduledInstancesNetworkInterface {
-	s.DeviceIndex = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ScheduledInstancesNetworkInterface) SetGroups(v []string) *ScheduledInstancesNetworkInterface {
-	s.Groups = v
-	return s
-}
-
-// SetIpv6AddressCount sets the Ipv6AddressCount field's value.
-func (s *ScheduledInstancesNetworkInterface) SetIpv6AddressCount(v int64) *ScheduledInstancesNetworkInterface {
-	s.Ipv6AddressCount = &v
-	return s
-}
-
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *ScheduledInstancesNetworkInterface) SetIpv6Addresses(v []ScheduledInstancesIpv6Address) *ScheduledInstancesNetworkInterface {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *ScheduledInstancesNetworkInterface) SetNetworkInterfaceId(v string) *ScheduledInstancesNetworkInterface {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *ScheduledInstancesNetworkInterface) SetPrivateIpAddress(v string) *ScheduledInstancesNetworkInterface {
-	s.PrivateIpAddress = &v
-	return s
-}
-
-// SetPrivateIpAddressConfigs sets the PrivateIpAddressConfigs field's value.
-func (s *ScheduledInstancesNetworkInterface) SetPrivateIpAddressConfigs(v []ScheduledInstancesPrivateIpAddressConfig) *ScheduledInstancesNetworkInterface {
-	s.PrivateIpAddressConfigs = v
-	return s
-}
-
-// SetSecondaryPrivateIpAddressCount sets the SecondaryPrivateIpAddressCount field's value.
-func (s *ScheduledInstancesNetworkInterface) SetSecondaryPrivateIpAddressCount(v int64) *ScheduledInstancesNetworkInterface {
-	s.SecondaryPrivateIpAddressCount = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *ScheduledInstancesNetworkInterface) SetSubnetId(v string) *ScheduledInstancesNetworkInterface {
-	s.SubnetId = &v
-	return s
-}
-
 // Describes the placement for a Scheduled Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesPlacement
 type ScheduledInstancesPlacement struct {
@@ -58055,18 +43745,6 @@ func (s ScheduledInstancesPlacement) String() string {
 // GoString returns the string representation
 func (s ScheduledInstancesPlacement) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ScheduledInstancesPlacement) SetAvailabilityZone(v string) *ScheduledInstancesPlacement {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *ScheduledInstancesPlacement) SetGroupName(v string) *ScheduledInstancesPlacement {
-	s.GroupName = &v
-	return s
 }
 
 // Describes a private IPv4 address for a Scheduled Instance.
@@ -58090,18 +43768,6 @@ func (s ScheduledInstancesPrivateIpAddressConfig) String() string {
 // GoString returns the string representation
 func (s ScheduledInstancesPrivateIpAddressConfig) GoString() string {
 	return s.String()
-}
-
-// SetPrimary sets the Primary field's value.
-func (s *ScheduledInstancesPrivateIpAddressConfig) SetPrimary(v bool) *ScheduledInstancesPrivateIpAddressConfig {
-	s.Primary = &v
-	return s
-}
-
-// SetPrivateIpAddress sets the PrivateIpAddress field's value.
-func (s *ScheduledInstancesPrivateIpAddressConfig) SetPrivateIpAddress(v string) *ScheduledInstancesPrivateIpAddressConfig {
-	s.PrivateIpAddress = &v
-	return s
 }
 
 // Describes a security group
@@ -58144,54 +43810,6 @@ func (s SecurityGroup) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *SecurityGroup) SetDescription(v string) *SecurityGroup {
-	s.Description = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *SecurityGroup) SetGroupId(v string) *SecurityGroup {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *SecurityGroup) SetGroupName(v string) *SecurityGroup {
-	s.GroupName = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *SecurityGroup) SetIpPermissions(v []IpPermission) *SecurityGroup {
-	s.IpPermissions = v
-	return s
-}
-
-// SetIpPermissionsEgress sets the IpPermissionsEgress field's value.
-func (s *SecurityGroup) SetIpPermissionsEgress(v []IpPermission) *SecurityGroup {
-	s.IpPermissionsEgress = v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *SecurityGroup) SetOwnerId(v string) *SecurityGroup {
-	s.OwnerId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SecurityGroup) SetTags(v []Tag) *SecurityGroup {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *SecurityGroup) SetVpcId(v string) *SecurityGroup {
-	s.VpcId = &v
-	return s
-}
-
 // Describes a security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupIdentifier
 type SecurityGroupIdentifier struct {
@@ -58212,18 +43830,6 @@ func (s SecurityGroupIdentifier) String() string {
 // GoString returns the string representation
 func (s SecurityGroupIdentifier) GoString() string {
 	return s.String()
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *SecurityGroupIdentifier) SetGroupId(v string) *SecurityGroupIdentifier {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *SecurityGroupIdentifier) SetGroupName(v string) *SecurityGroupIdentifier {
-	s.GroupName = &v
-	return s
 }
 
 // Describes a VPC with a security group that references your security group.
@@ -58253,24 +43859,6 @@ func (s SecurityGroupReference) String() string {
 // GoString returns the string representation
 func (s SecurityGroupReference) GoString() string {
 	return s.String()
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *SecurityGroupReference) SetGroupId(v string) *SecurityGroupReference {
-	s.GroupId = &v
-	return s
-}
-
-// SetReferencingVpcId sets the ReferencingVpcId field's value.
-func (s *SecurityGroupReference) SetReferencingVpcId(v string) *SecurityGroupReference {
-	s.ReferencingVpcId = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *SecurityGroupReference) SetVpcPeeringConnectionId(v string) *SecurityGroupReference {
-	s.VpcPeeringConnectionId = &v
-	return s
 }
 
 // Describes a service configuration for a VPC endpoint service.
@@ -58317,60 +43905,6 @@ func (s ServiceConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *ServiceConfiguration) SetAcceptanceRequired(v bool) *ServiceConfiguration {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *ServiceConfiguration) SetAvailabilityZones(v []string) *ServiceConfiguration {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetBaseEndpointDnsNames sets the BaseEndpointDnsNames field's value.
-func (s *ServiceConfiguration) SetBaseEndpointDnsNames(v []string) *ServiceConfiguration {
-	s.BaseEndpointDnsNames = v
-	return s
-}
-
-// SetNetworkLoadBalancerArns sets the NetworkLoadBalancerArns field's value.
-func (s *ServiceConfiguration) SetNetworkLoadBalancerArns(v []string) *ServiceConfiguration {
-	s.NetworkLoadBalancerArns = v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *ServiceConfiguration) SetPrivateDnsName(v string) *ServiceConfiguration {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *ServiceConfiguration) SetServiceId(v string) *ServiceConfiguration {
-	s.ServiceId = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *ServiceConfiguration) SetServiceName(v string) *ServiceConfiguration {
-	s.ServiceName = &v
-	return s
-}
-
-// SetServiceState sets the ServiceState field's value.
-func (s *ServiceConfiguration) SetServiceState(v ServiceState) *ServiceConfiguration {
-	s.ServiceState = v
-	return s
-}
-
-// SetServiceType sets the ServiceType field's value.
-func (s *ServiceConfiguration) SetServiceType(v []ServiceTypeDetail) *ServiceConfiguration {
-	s.ServiceType = v
-	return s
-}
-
 // Describes a VPC endpoint service.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail
 type ServiceDetail struct {
@@ -58412,54 +43946,6 @@ func (s ServiceDetail) GoString() string {
 	return s.String()
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *ServiceDetail) SetAcceptanceRequired(v bool) *ServiceDetail {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *ServiceDetail) SetAvailabilityZones(v []string) *ServiceDetail {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetBaseEndpointDnsNames sets the BaseEndpointDnsNames field's value.
-func (s *ServiceDetail) SetBaseEndpointDnsNames(v []string) *ServiceDetail {
-	s.BaseEndpointDnsNames = v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ServiceDetail) SetOwner(v string) *ServiceDetail {
-	s.Owner = &v
-	return s
-}
-
-// SetPrivateDnsName sets the PrivateDnsName field's value.
-func (s *ServiceDetail) SetPrivateDnsName(v string) *ServiceDetail {
-	s.PrivateDnsName = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *ServiceDetail) SetServiceName(v string) *ServiceDetail {
-	s.ServiceName = &v
-	return s
-}
-
-// SetServiceType sets the ServiceType field's value.
-func (s *ServiceDetail) SetServiceType(v []ServiceTypeDetail) *ServiceDetail {
-	s.ServiceType = v
-	return s
-}
-
-// SetVpcEndpointPolicySupported sets the VpcEndpointPolicySupported field's value.
-func (s *ServiceDetail) SetVpcEndpointPolicySupported(v bool) *ServiceDetail {
-	s.VpcEndpointPolicySupported = &v
-	return s
-}
-
 // Describes the type of service for a VPC endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceTypeDetail
 type ServiceTypeDetail struct {
@@ -58477,12 +43963,6 @@ func (s ServiceTypeDetail) String() string {
 // GoString returns the string representation
 func (s ServiceTypeDetail) GoString() string {
 	return s.String()
-}
-
-// SetServiceType sets the ServiceType field's value.
-func (s *ServiceTypeDetail) SetServiceType(v ServiceType) *ServiceTypeDetail {
-	s.ServiceType = v
-	return s
 }
 
 // Describes the time period for a Scheduled Instance to start its first schedule.
@@ -58532,18 +44012,6 @@ func (s *SlotDateTimeRangeRequest) Validate() error {
 	return nil
 }
 
-// SetEarliestTime sets the EarliestTime field's value.
-func (s *SlotDateTimeRangeRequest) SetEarliestTime(v time.Time) *SlotDateTimeRangeRequest {
-	s.EarliestTime = &v
-	return s
-}
-
-// SetLatestTime sets the LatestTime field's value.
-func (s *SlotDateTimeRangeRequest) SetLatestTime(v time.Time) *SlotDateTimeRangeRequest {
-	s.LatestTime = &v
-	return s
-}
-
 // Describes the time period for a Scheduled Instance to start its first schedule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SlotStartTimeRangeRequest
 type SlotStartTimeRangeRequest struct {
@@ -58564,18 +44032,6 @@ func (s SlotStartTimeRangeRequest) String() string {
 // GoString returns the string representation
 func (s SlotStartTimeRangeRequest) GoString() string {
 	return s.String()
-}
-
-// SetEarliestTime sets the EarliestTime field's value.
-func (s *SlotStartTimeRangeRequest) SetEarliestTime(v time.Time) *SlotStartTimeRangeRequest {
-	s.EarliestTime = &v
-	return s
-}
-
-// SetLatestTime sets the LatestTime field's value.
-func (s *SlotStartTimeRangeRequest) SetLatestTime(v time.Time) *SlotStartTimeRangeRequest {
-	s.LatestTime = &v
-	return s
 }
 
 // Describes the snapshot created from the imported disk.
@@ -58624,66 +44080,6 @@ func (s SnapshotDetail) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *SnapshotDetail) SetDescription(v string) *SnapshotDetail {
-	s.Description = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *SnapshotDetail) SetDeviceName(v string) *SnapshotDetail {
-	s.DeviceName = &v
-	return s
-}
-
-// SetDiskImageSize sets the DiskImageSize field's value.
-func (s *SnapshotDetail) SetDiskImageSize(v float64) *SnapshotDetail {
-	s.DiskImageSize = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *SnapshotDetail) SetFormat(v string) *SnapshotDetail {
-	s.Format = &v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *SnapshotDetail) SetProgress(v string) *SnapshotDetail {
-	s.Progress = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *SnapshotDetail) SetSnapshotId(v string) *SnapshotDetail {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SnapshotDetail) SetStatus(v string) *SnapshotDetail {
-	s.Status = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *SnapshotDetail) SetStatusMessage(v string) *SnapshotDetail {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *SnapshotDetail) SetUrl(v string) *SnapshotDetail {
-	s.Url = &v
-	return s
-}
-
-// SetUserBucket sets the UserBucket field's value.
-func (s *SnapshotDetail) SetUserBucket(v *UserBucketDetails) *SnapshotDetail {
-	s.UserBucket = v
-	return s
-}
-
 // The disk container object for the import snapshot request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDiskContainer
 type SnapshotDiskContainer struct {
@@ -58713,30 +44109,6 @@ func (s SnapshotDiskContainer) String() string {
 // GoString returns the string representation
 func (s SnapshotDiskContainer) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *SnapshotDiskContainer) SetDescription(v string) *SnapshotDiskContainer {
-	s.Description = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *SnapshotDiskContainer) SetFormat(v string) *SnapshotDiskContainer {
-	s.Format = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *SnapshotDiskContainer) SetUrl(v string) *SnapshotDiskContainer {
-	s.Url = &v
-	return s
-}
-
-// SetUserBucket sets the UserBucket field's value.
-func (s *SnapshotDiskContainer) SetUserBucket(v *UserBucket) *SnapshotDiskContainer {
-	s.UserBucket = v
-	return s
 }
 
 // Details about the import snapshot task.
@@ -58782,60 +44154,6 @@ func (s SnapshotTaskDetail) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *SnapshotTaskDetail) SetDescription(v string) *SnapshotTaskDetail {
-	s.Description = &v
-	return s
-}
-
-// SetDiskImageSize sets the DiskImageSize field's value.
-func (s *SnapshotTaskDetail) SetDiskImageSize(v float64) *SnapshotTaskDetail {
-	s.DiskImageSize = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *SnapshotTaskDetail) SetFormat(v string) *SnapshotTaskDetail {
-	s.Format = &v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *SnapshotTaskDetail) SetProgress(v string) *SnapshotTaskDetail {
-	s.Progress = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *SnapshotTaskDetail) SetSnapshotId(v string) *SnapshotTaskDetail {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SnapshotTaskDetail) SetStatus(v string) *SnapshotTaskDetail {
-	s.Status = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *SnapshotTaskDetail) SetStatusMessage(v string) *SnapshotTaskDetail {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *SnapshotTaskDetail) SetUrl(v string) *SnapshotTaskDetail {
-	s.Url = &v
-	return s
-}
-
-// SetUserBucket sets the UserBucket field's value.
-func (s *SnapshotTaskDetail) SetUserBucket(v *UserBucketDetails) *SnapshotTaskDetail {
-	s.UserBucket = v
-	return s
-}
-
 // Describes the data feed for a Spot Instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotDatafeedSubscription
 type SpotDatafeedSubscription struct {
@@ -58865,36 +44183,6 @@ func (s SpotDatafeedSubscription) String() string {
 // GoString returns the string representation
 func (s SpotDatafeedSubscription) GoString() string {
 	return s.String()
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *SpotDatafeedSubscription) SetBucket(v string) *SpotDatafeedSubscription {
-	s.Bucket = &v
-	return s
-}
-
-// SetFault sets the Fault field's value.
-func (s *SpotDatafeedSubscription) SetFault(v *SpotInstanceStateFault) *SpotDatafeedSubscription {
-	s.Fault = v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *SpotDatafeedSubscription) SetOwnerId(v string) *SpotDatafeedSubscription {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *SpotDatafeedSubscription) SetPrefix(v string) *SpotDatafeedSubscription {
-	s.Prefix = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *SpotDatafeedSubscription) SetState(v DatafeedSubscriptionState) *SpotDatafeedSubscription {
-	s.State = v
-	return s
 }
 
 // Describes the launch specification for one or more Spot Instances.
@@ -59008,114 +44296,6 @@ func (s *SpotFleetLaunchSpecification) Validate() error {
 	return nil
 }
 
-// SetAddressingType sets the AddressingType field's value.
-func (s *SpotFleetLaunchSpecification) SetAddressingType(v string) *SpotFleetLaunchSpecification {
-	s.AddressingType = &v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *SpotFleetLaunchSpecification) SetBlockDeviceMappings(v []BlockDeviceMapping) *SpotFleetLaunchSpecification {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *SpotFleetLaunchSpecification) SetEbsOptimized(v bool) *SpotFleetLaunchSpecification {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetIamInstanceProfile sets the IamInstanceProfile field's value.
-func (s *SpotFleetLaunchSpecification) SetIamInstanceProfile(v *IamInstanceProfileSpecification) *SpotFleetLaunchSpecification {
-	s.IamInstanceProfile = v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *SpotFleetLaunchSpecification) SetImageId(v string) *SpotFleetLaunchSpecification {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *SpotFleetLaunchSpecification) SetInstanceType(v InstanceType) *SpotFleetLaunchSpecification {
-	s.InstanceType = v
-	return s
-}
-
-// SetKernelId sets the KernelId field's value.
-func (s *SpotFleetLaunchSpecification) SetKernelId(v string) *SpotFleetLaunchSpecification {
-	s.KernelId = &v
-	return s
-}
-
-// SetKeyName sets the KeyName field's value.
-func (s *SpotFleetLaunchSpecification) SetKeyName(v string) *SpotFleetLaunchSpecification {
-	s.KeyName = &v
-	return s
-}
-
-// SetMonitoring sets the Monitoring field's value.
-func (s *SpotFleetLaunchSpecification) SetMonitoring(v *SpotFleetMonitoring) *SpotFleetLaunchSpecification {
-	s.Monitoring = v
-	return s
-}
-
-// SetNetworkInterfaces sets the NetworkInterfaces field's value.
-func (s *SpotFleetLaunchSpecification) SetNetworkInterfaces(v []InstanceNetworkInterfaceSpecification) *SpotFleetLaunchSpecification {
-	s.NetworkInterfaces = v
-	return s
-}
-
-// SetPlacement sets the Placement field's value.
-func (s *SpotFleetLaunchSpecification) SetPlacement(v *SpotPlacement) *SpotFleetLaunchSpecification {
-	s.Placement = v
-	return s
-}
-
-// SetRamdiskId sets the RamdiskId field's value.
-func (s *SpotFleetLaunchSpecification) SetRamdiskId(v string) *SpotFleetLaunchSpecification {
-	s.RamdiskId = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *SpotFleetLaunchSpecification) SetSecurityGroups(v []GroupIdentifier) *SpotFleetLaunchSpecification {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSpotPrice sets the SpotPrice field's value.
-func (s *SpotFleetLaunchSpecification) SetSpotPrice(v string) *SpotFleetLaunchSpecification {
-	s.SpotPrice = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *SpotFleetLaunchSpecification) SetSubnetId(v string) *SpotFleetLaunchSpecification {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTagSpecifications sets the TagSpecifications field's value.
-func (s *SpotFleetLaunchSpecification) SetTagSpecifications(v []SpotFleetTagSpecification) *SpotFleetLaunchSpecification {
-	s.TagSpecifications = v
-	return s
-}
-
-// SetUserData sets the UserData field's value.
-func (s *SpotFleetLaunchSpecification) SetUserData(v string) *SpotFleetLaunchSpecification {
-	s.UserData = &v
-	return s
-}
-
-// SetWeightedCapacity sets the WeightedCapacity field's value.
-func (s *SpotFleetLaunchSpecification) SetWeightedCapacity(v float64) *SpotFleetLaunchSpecification {
-	s.WeightedCapacity = &v
-	return s
-}
-
 // Describes whether monitoring is enabled.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetMonitoring
 type SpotFleetMonitoring struct {
@@ -59135,12 +44315,6 @@ func (s SpotFleetMonitoring) String() string {
 // GoString returns the string representation
 func (s SpotFleetMonitoring) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *SpotFleetMonitoring) SetEnabled(v bool) *SpotFleetMonitoring {
-	s.Enabled = &v
-	return s
 }
 
 // Describes a Spot Fleet request.
@@ -59184,36 +44358,6 @@ func (s SpotFleetRequestConfig) String() string {
 // GoString returns the string representation
 func (s SpotFleetRequestConfig) GoString() string {
 	return s.String()
-}
-
-// SetActivityStatus sets the ActivityStatus field's value.
-func (s *SpotFleetRequestConfig) SetActivityStatus(v ActivityStatus) *SpotFleetRequestConfig {
-	s.ActivityStatus = v
-	return s
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *SpotFleetRequestConfig) SetCreateTime(v time.Time) *SpotFleetRequestConfig {
-	s.CreateTime = &v
-	return s
-}
-
-// SetSpotFleetRequestConfig sets the SpotFleetRequestConfig field's value.
-func (s *SpotFleetRequestConfig) SetSpotFleetRequestConfig(v *SpotFleetRequestConfigData) *SpotFleetRequestConfig {
-	s.SpotFleetRequestConfig = v
-	return s
-}
-
-// SetSpotFleetRequestId sets the SpotFleetRequestId field's value.
-func (s *SpotFleetRequestConfig) SetSpotFleetRequestId(v string) *SpotFleetRequestConfig {
-	s.SpotFleetRequestId = &v
-	return s
-}
-
-// SetSpotFleetRequestState sets the SpotFleetRequestState field's value.
-func (s *SpotFleetRequestConfig) SetSpotFleetRequestState(v BatchState) *SpotFleetRequestConfig {
-	s.SpotFleetRequestState = v
-	return s
 }
 
 // Describes the configuration of a Spot Fleet request.
@@ -59351,102 +44495,6 @@ func (s *SpotFleetRequestConfigData) Validate() error {
 	return nil
 }
 
-// SetAllocationStrategy sets the AllocationStrategy field's value.
-func (s *SpotFleetRequestConfigData) SetAllocationStrategy(v AllocationStrategy) *SpotFleetRequestConfigData {
-	s.AllocationStrategy = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *SpotFleetRequestConfigData) SetClientToken(v string) *SpotFleetRequestConfigData {
-	s.ClientToken = &v
-	return s
-}
-
-// SetExcessCapacityTerminationPolicy sets the ExcessCapacityTerminationPolicy field's value.
-func (s *SpotFleetRequestConfigData) SetExcessCapacityTerminationPolicy(v ExcessCapacityTerminationPolicy) *SpotFleetRequestConfigData {
-	s.ExcessCapacityTerminationPolicy = v
-	return s
-}
-
-// SetFulfilledCapacity sets the FulfilledCapacity field's value.
-func (s *SpotFleetRequestConfigData) SetFulfilledCapacity(v float64) *SpotFleetRequestConfigData {
-	s.FulfilledCapacity = &v
-	return s
-}
-
-// SetIamFleetRole sets the IamFleetRole field's value.
-func (s *SpotFleetRequestConfigData) SetIamFleetRole(v string) *SpotFleetRequestConfigData {
-	s.IamFleetRole = &v
-	return s
-}
-
-// SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *SpotFleetRequestConfigData) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *SpotFleetRequestConfigData {
-	s.InstanceInterruptionBehavior = v
-	return s
-}
-
-// SetLaunchSpecifications sets the LaunchSpecifications field's value.
-func (s *SpotFleetRequestConfigData) SetLaunchSpecifications(v []SpotFleetLaunchSpecification) *SpotFleetRequestConfigData {
-	s.LaunchSpecifications = v
-	return s
-}
-
-// SetLaunchTemplateConfigs sets the LaunchTemplateConfigs field's value.
-func (s *SpotFleetRequestConfigData) SetLaunchTemplateConfigs(v []LaunchTemplateConfig) *SpotFleetRequestConfigData {
-	s.LaunchTemplateConfigs = v
-	return s
-}
-
-// SetLoadBalancersConfig sets the LoadBalancersConfig field's value.
-func (s *SpotFleetRequestConfigData) SetLoadBalancersConfig(v *LoadBalancersConfig) *SpotFleetRequestConfigData {
-	s.LoadBalancersConfig = v
-	return s
-}
-
-// SetReplaceUnhealthyInstances sets the ReplaceUnhealthyInstances field's value.
-func (s *SpotFleetRequestConfigData) SetReplaceUnhealthyInstances(v bool) *SpotFleetRequestConfigData {
-	s.ReplaceUnhealthyInstances = &v
-	return s
-}
-
-// SetSpotPrice sets the SpotPrice field's value.
-func (s *SpotFleetRequestConfigData) SetSpotPrice(v string) *SpotFleetRequestConfigData {
-	s.SpotPrice = &v
-	return s
-}
-
-// SetTargetCapacity sets the TargetCapacity field's value.
-func (s *SpotFleetRequestConfigData) SetTargetCapacity(v int64) *SpotFleetRequestConfigData {
-	s.TargetCapacity = &v
-	return s
-}
-
-// SetTerminateInstancesWithExpiration sets the TerminateInstancesWithExpiration field's value.
-func (s *SpotFleetRequestConfigData) SetTerminateInstancesWithExpiration(v bool) *SpotFleetRequestConfigData {
-	s.TerminateInstancesWithExpiration = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *SpotFleetRequestConfigData) SetType(v FleetType) *SpotFleetRequestConfigData {
-	s.Type = v
-	return s
-}
-
-// SetValidFrom sets the ValidFrom field's value.
-func (s *SpotFleetRequestConfigData) SetValidFrom(v time.Time) *SpotFleetRequestConfigData {
-	s.ValidFrom = &v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *SpotFleetRequestConfigData) SetValidUntil(v time.Time) *SpotFleetRequestConfigData {
-	s.ValidUntil = &v
-	return s
-}
-
 // The tags for a Spot Fleet resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetTagSpecification
 type SpotFleetTagSpecification struct {
@@ -59468,18 +44516,6 @@ func (s SpotFleetTagSpecification) String() string {
 // GoString returns the string representation
 func (s SpotFleetTagSpecification) GoString() string {
 	return s.String()
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *SpotFleetTagSpecification) SetResourceType(v ResourceType) *SpotFleetTagSpecification {
-	s.ResourceType = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SpotFleetTagSpecification) SetTags(v []Tag) *SpotFleetTagSpecification {
-	s.Tags = v
-	return s
 }
 
 // Describes a Spot Instance request.
@@ -59569,120 +44605,6 @@ func (s SpotInstanceRequest) GoString() string {
 	return s.String()
 }
 
-// SetActualBlockHourlyPrice sets the ActualBlockHourlyPrice field's value.
-func (s *SpotInstanceRequest) SetActualBlockHourlyPrice(v string) *SpotInstanceRequest {
-	s.ActualBlockHourlyPrice = &v
-	return s
-}
-
-// SetAvailabilityZoneGroup sets the AvailabilityZoneGroup field's value.
-func (s *SpotInstanceRequest) SetAvailabilityZoneGroup(v string) *SpotInstanceRequest {
-	s.AvailabilityZoneGroup = &v
-	return s
-}
-
-// SetBlockDurationMinutes sets the BlockDurationMinutes field's value.
-func (s *SpotInstanceRequest) SetBlockDurationMinutes(v int64) *SpotInstanceRequest {
-	s.BlockDurationMinutes = &v
-	return s
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *SpotInstanceRequest) SetCreateTime(v time.Time) *SpotInstanceRequest {
-	s.CreateTime = &v
-	return s
-}
-
-// SetFault sets the Fault field's value.
-func (s *SpotInstanceRequest) SetFault(v *SpotInstanceStateFault) *SpotInstanceRequest {
-	s.Fault = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *SpotInstanceRequest) SetInstanceId(v string) *SpotInstanceRequest {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *SpotInstanceRequest) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *SpotInstanceRequest {
-	s.InstanceInterruptionBehavior = v
-	return s
-}
-
-// SetLaunchGroup sets the LaunchGroup field's value.
-func (s *SpotInstanceRequest) SetLaunchGroup(v string) *SpotInstanceRequest {
-	s.LaunchGroup = &v
-	return s
-}
-
-// SetLaunchSpecification sets the LaunchSpecification field's value.
-func (s *SpotInstanceRequest) SetLaunchSpecification(v *LaunchSpecification) *SpotInstanceRequest {
-	s.LaunchSpecification = v
-	return s
-}
-
-// SetLaunchedAvailabilityZone sets the LaunchedAvailabilityZone field's value.
-func (s *SpotInstanceRequest) SetLaunchedAvailabilityZone(v string) *SpotInstanceRequest {
-	s.LaunchedAvailabilityZone = &v
-	return s
-}
-
-// SetProductDescription sets the ProductDescription field's value.
-func (s *SpotInstanceRequest) SetProductDescription(v RIProductDescription) *SpotInstanceRequest {
-	s.ProductDescription = v
-	return s
-}
-
-// SetSpotInstanceRequestId sets the SpotInstanceRequestId field's value.
-func (s *SpotInstanceRequest) SetSpotInstanceRequestId(v string) *SpotInstanceRequest {
-	s.SpotInstanceRequestId = &v
-	return s
-}
-
-// SetSpotPrice sets the SpotPrice field's value.
-func (s *SpotInstanceRequest) SetSpotPrice(v string) *SpotInstanceRequest {
-	s.SpotPrice = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *SpotInstanceRequest) SetState(v SpotInstanceState) *SpotInstanceRequest {
-	s.State = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SpotInstanceRequest) SetStatus(v *SpotInstanceStatus) *SpotInstanceRequest {
-	s.Status = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SpotInstanceRequest) SetTags(v []Tag) *SpotInstanceRequest {
-	s.Tags = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *SpotInstanceRequest) SetType(v SpotInstanceType) *SpotInstanceRequest {
-	s.Type = v
-	return s
-}
-
-// SetValidFrom sets the ValidFrom field's value.
-func (s *SpotInstanceRequest) SetValidFrom(v time.Time) *SpotInstanceRequest {
-	s.ValidFrom = &v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *SpotInstanceRequest) SetValidUntil(v time.Time) *SpotInstanceRequest {
-	s.ValidUntil = &v
-	return s
-}
-
 // Describes a Spot Instance state change.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStateFault
 type SpotInstanceStateFault struct {
@@ -59703,18 +44625,6 @@ func (s SpotInstanceStateFault) String() string {
 // GoString returns the string representation
 func (s SpotInstanceStateFault) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *SpotInstanceStateFault) SetCode(v string) *SpotInstanceStateFault {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *SpotInstanceStateFault) SetMessage(v string) *SpotInstanceStateFault {
-	s.Message = &v
-	return s
 }
 
 // Describes the status of a Spot Instance request.
@@ -59742,24 +44652,6 @@ func (s SpotInstanceStatus) String() string {
 // GoString returns the string representation
 func (s SpotInstanceStatus) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *SpotInstanceStatus) SetCode(v string) *SpotInstanceStatus {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *SpotInstanceStatus) SetMessage(v string) *SpotInstanceStatus {
-	s.Message = &v
-	return s
-}
-
-// SetUpdateTime sets the UpdateTime field's value.
-func (s *SpotInstanceStatus) SetUpdateTime(v time.Time) *SpotInstanceStatus {
-	s.UpdateTime = &v
-	return s
 }
 
 // The options for Spot Instances.
@@ -59800,36 +44692,6 @@ func (s SpotMarketOptions) GoString() string {
 	return s.String()
 }
 
-// SetBlockDurationMinutes sets the BlockDurationMinutes field's value.
-func (s *SpotMarketOptions) SetBlockDurationMinutes(v int64) *SpotMarketOptions {
-	s.BlockDurationMinutes = &v
-	return s
-}
-
-// SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *SpotMarketOptions) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *SpotMarketOptions {
-	s.InstanceInterruptionBehavior = v
-	return s
-}
-
-// SetMaxPrice sets the MaxPrice field's value.
-func (s *SpotMarketOptions) SetMaxPrice(v string) *SpotMarketOptions {
-	s.MaxPrice = &v
-	return s
-}
-
-// SetSpotInstanceType sets the SpotInstanceType field's value.
-func (s *SpotMarketOptions) SetSpotInstanceType(v SpotInstanceType) *SpotMarketOptions {
-	s.SpotInstanceType = v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *SpotMarketOptions) SetValidUntil(v time.Time) *SpotMarketOptions {
-	s.ValidUntil = &v
-	return s
-}
-
 // Describes Spot Instance placement.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPlacement
 type SpotPlacement struct {
@@ -59858,24 +44720,6 @@ func (s SpotPlacement) String() string {
 // GoString returns the string representation
 func (s SpotPlacement) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *SpotPlacement) SetAvailabilityZone(v string) *SpotPlacement {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *SpotPlacement) SetGroupName(v string) *SpotPlacement {
-	s.GroupName = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *SpotPlacement) SetTenancy(v Tenancy) *SpotPlacement {
-	s.Tenancy = v
-	return s
 }
 
 // Describes the maximum price per hour that you are willing to pay for a Spot
@@ -59908,36 +44752,6 @@ func (s SpotPrice) String() string {
 // GoString returns the string representation
 func (s SpotPrice) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *SpotPrice) SetAvailabilityZone(v string) *SpotPrice {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *SpotPrice) SetInstanceType(v InstanceType) *SpotPrice {
-	s.InstanceType = v
-	return s
-}
-
-// SetProductDescription sets the ProductDescription field's value.
-func (s *SpotPrice) SetProductDescription(v RIProductDescription) *SpotPrice {
-	s.ProductDescription = v
-	return s
-}
-
-// SetSpotPrice sets the SpotPrice field's value.
-func (s *SpotPrice) SetSpotPrice(v string) *SpotPrice {
-	s.SpotPrice = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *SpotPrice) SetTimestamp(v time.Time) *SpotPrice {
-	s.Timestamp = &v
-	return s
 }
 
 // Describes a stale rule in a security group.
@@ -59979,42 +44793,6 @@ func (s StaleIpPermission) GoString() string {
 	return s.String()
 }
 
-// SetFromPort sets the FromPort field's value.
-func (s *StaleIpPermission) SetFromPort(v int64) *StaleIpPermission {
-	s.FromPort = &v
-	return s
-}
-
-// SetIpProtocol sets the IpProtocol field's value.
-func (s *StaleIpPermission) SetIpProtocol(v string) *StaleIpPermission {
-	s.IpProtocol = &v
-	return s
-}
-
-// SetIpRanges sets the IpRanges field's value.
-func (s *StaleIpPermission) SetIpRanges(v []string) *StaleIpPermission {
-	s.IpRanges = v
-	return s
-}
-
-// SetPrefixListIds sets the PrefixListIds field's value.
-func (s *StaleIpPermission) SetPrefixListIds(v []string) *StaleIpPermission {
-	s.PrefixListIds = v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *StaleIpPermission) SetToPort(v int64) *StaleIpPermission {
-	s.ToPort = &v
-	return s
-}
-
-// SetUserIdGroupPairs sets the UserIdGroupPairs field's value.
-func (s *StaleIpPermission) SetUserIdGroupPairs(v []UserIdGroupPair) *StaleIpPermission {
-	s.UserIdGroupPairs = v
-	return s
-}
-
 // Describes a stale security group (a security group that contains stale rules).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleSecurityGroup
 type StaleSecurityGroup struct {
@@ -60049,42 +44827,6 @@ func (s StaleSecurityGroup) String() string {
 // GoString returns the string representation
 func (s StaleSecurityGroup) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *StaleSecurityGroup) SetDescription(v string) *StaleSecurityGroup {
-	s.Description = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *StaleSecurityGroup) SetGroupId(v string) *StaleSecurityGroup {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *StaleSecurityGroup) SetGroupName(v string) *StaleSecurityGroup {
-	s.GroupName = &v
-	return s
-}
-
-// SetStaleIpPermissions sets the StaleIpPermissions field's value.
-func (s *StaleSecurityGroup) SetStaleIpPermissions(v []StaleIpPermission) *StaleSecurityGroup {
-	s.StaleIpPermissions = v
-	return s
-}
-
-// SetStaleIpPermissionsEgress sets the StaleIpPermissionsEgress field's value.
-func (s *StaleSecurityGroup) SetStaleIpPermissionsEgress(v []StaleIpPermission) *StaleSecurityGroup {
-	s.StaleIpPermissionsEgress = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *StaleSecurityGroup) SetVpcId(v string) *StaleSecurityGroup {
-	s.VpcId = &v
-	return s
 }
 
 // Contains the parameters for StartInstances.
@@ -60131,24 +44873,6 @@ func (s *StartInstancesInput) Validate() error {
 	return nil
 }
 
-// SetAdditionalInfo sets the AdditionalInfo field's value.
-func (s *StartInstancesInput) SetAdditionalInfo(v string) *StartInstancesInput {
-	s.AdditionalInfo = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *StartInstancesInput) SetDryRun(v bool) *StartInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *StartInstancesInput) SetInstanceIds(v []string) *StartInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Contains the output of StartInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstancesResult
 type StartInstancesOutput struct {
@@ -60173,12 +44897,6 @@ func (s StartInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStartingInstances sets the StartingInstances field's value.
-func (s *StartInstancesOutput) SetStartingInstances(v []InstanceStateChange) *StartInstancesOutput {
-	s.StartingInstances = v
-	return s
 }
 
 // Describes a state change.
@@ -60232,18 +44950,6 @@ func (s StateReason) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *StateReason) SetCode(v string) *StateReason {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *StateReason) SetMessage(v string) *StateReason {
-	s.Message = &v
-	return s
-}
-
 // Contains the parameters for StopInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesRequest
 type StopInstancesInput struct {
@@ -60293,24 +44999,6 @@ func (s *StopInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *StopInstancesInput) SetDryRun(v bool) *StopInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetForce sets the Force field's value.
-func (s *StopInstancesInput) SetForce(v bool) *StopInstancesInput {
-	s.Force = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *StopInstancesInput) SetInstanceIds(v []string) *StopInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Contains the output of StopInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesResult
 type StopInstancesOutput struct {
@@ -60337,12 +45025,6 @@ func (s StopInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStoppingInstances sets the StoppingInstances field's value.
-func (s *StopInstancesOutput) SetStoppingInstances(v []InstanceStateChange) *StopInstancesOutput {
-	s.StoppingInstances = v
-	return s
-}
-
 // Describes the storage location for an instance store-backed AMI.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Storage
 type Storage struct {
@@ -60360,12 +45042,6 @@ func (s Storage) String() string {
 // GoString returns the string representation
 func (s Storage) GoString() string {
 	return s.String()
-}
-
-// SetS3 sets the S3 field's value.
-func (s *Storage) SetS3(v *S3Storage) *Storage {
-	s.S3 = v
-	return s
 }
 
 // Describes a storage location in Amazon S3.
@@ -60388,18 +45064,6 @@ func (s StorageLocation) String() string {
 // GoString returns the string representation
 func (s StorageLocation) GoString() string {
 	return s.String()
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *StorageLocation) SetBucket(v string) *StorageLocation {
-	s.Bucket = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *StorageLocation) SetKey(v string) *StorageLocation {
-	s.Key = &v
-	return s
 }
 
 // Describes a subnet.
@@ -60454,72 +45118,6 @@ func (s Subnet) GoString() string {
 	return s.String()
 }
 
-// SetAssignIpv6AddressOnCreation sets the AssignIpv6AddressOnCreation field's value.
-func (s *Subnet) SetAssignIpv6AddressOnCreation(v bool) *Subnet {
-	s.AssignIpv6AddressOnCreation = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Subnet) SetAvailabilityZone(v string) *Subnet {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetAvailableIpAddressCount sets the AvailableIpAddressCount field's value.
-func (s *Subnet) SetAvailableIpAddressCount(v int64) *Subnet {
-	s.AvailableIpAddressCount = &v
-	return s
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *Subnet) SetCidrBlock(v string) *Subnet {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetDefaultForAz sets the DefaultForAz field's value.
-func (s *Subnet) SetDefaultForAz(v bool) *Subnet {
-	s.DefaultForAz = &v
-	return s
-}
-
-// SetIpv6CidrBlockAssociationSet sets the Ipv6CidrBlockAssociationSet field's value.
-func (s *Subnet) SetIpv6CidrBlockAssociationSet(v []SubnetIpv6CidrBlockAssociation) *Subnet {
-	s.Ipv6CidrBlockAssociationSet = v
-	return s
-}
-
-// SetMapPublicIpOnLaunch sets the MapPublicIpOnLaunch field's value.
-func (s *Subnet) SetMapPublicIpOnLaunch(v bool) *Subnet {
-	s.MapPublicIpOnLaunch = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Subnet) SetState(v SubnetState) *Subnet {
-	s.State = v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *Subnet) SetSubnetId(v string) *Subnet {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Subnet) SetTags(v []Tag) *Subnet {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *Subnet) SetVpcId(v string) *Subnet {
-	s.VpcId = &v
-	return s
-}
-
 // Describes the state of a CIDR block.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetCidrBlockState
 type SubnetCidrBlockState struct {
@@ -60540,18 +45138,6 @@ func (s SubnetCidrBlockState) String() string {
 // GoString returns the string representation
 func (s SubnetCidrBlockState) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *SubnetCidrBlockState) SetState(v SubnetCidrBlockStateCode) *SubnetCidrBlockState {
-	s.State = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *SubnetCidrBlockState) SetStatusMessage(v string) *SubnetCidrBlockState {
-	s.StatusMessage = &v
-	return s
 }
 
 // Describes an IPv6 CIDR block associated with a subnet.
@@ -60579,24 +45165,6 @@ func (s SubnetIpv6CidrBlockAssociation) GoString() string {
 	return s.String()
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *SubnetIpv6CidrBlockAssociation) SetAssociationId(v string) *SubnetIpv6CidrBlockAssociation {
-	s.AssociationId = &v
-	return s
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *SubnetIpv6CidrBlockAssociation) SetIpv6CidrBlock(v string) *SubnetIpv6CidrBlockAssociation {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetIpv6CidrBlockState sets the Ipv6CidrBlockState field's value.
-func (s *SubnetIpv6CidrBlockAssociation) SetIpv6CidrBlockState(v *SubnetCidrBlockState) *SubnetIpv6CidrBlockAssociation {
-	s.Ipv6CidrBlockState = v
-	return s
-}
-
 // Describes the T2 instance whose credit option for CPU usage was successfully
 // modified.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SuccessfulInstanceCreditSpecificationItem
@@ -60615,12 +45183,6 @@ func (s SuccessfulInstanceCreditSpecificationItem) String() string {
 // GoString returns the string representation
 func (s SuccessfulInstanceCreditSpecificationItem) GoString() string {
 	return s.String()
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *SuccessfulInstanceCreditSpecificationItem) SetInstanceId(v string) *SuccessfulInstanceCreditSpecificationItem {
-	s.InstanceId = &v
-	return s
 }
 
 // Describes a tag.
@@ -60651,18 +45213,6 @@ func (s Tag) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // Describes a tag.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagDescription
 type TagDescription struct {
@@ -60691,30 +45241,6 @@ func (s TagDescription) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *TagDescription) SetKey(v string) *TagDescription {
-	s.Key = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *TagDescription) SetResourceId(v string) *TagDescription {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *TagDescription) SetResourceType(v ResourceType) *TagDescription {
-	s.ResourceType = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *TagDescription) SetValue(v string) *TagDescription {
-	s.Value = &v
-	return s
-}
-
 // The tags to apply to a resource when the resource is being created.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagSpecification
 type TagSpecification struct {
@@ -60738,18 +45264,6 @@ func (s TagSpecification) GoString() string {
 	return s.String()
 }
 
-// SetResourceType sets the ResourceType field's value.
-func (s *TagSpecification) SetResourceType(v ResourceType) *TagSpecification {
-	s.ResourceType = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagSpecification) SetTags(v []Tag) *TagSpecification {
-	s.Tags = v
-	return s
-}
-
 // Information about the Convertible Reserved Instance offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfiguration
 type TargetConfiguration struct {
@@ -60771,18 +45285,6 @@ func (s TargetConfiguration) String() string {
 // GoString returns the string representation
 func (s TargetConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *TargetConfiguration) SetInstanceCount(v int64) *TargetConfiguration {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *TargetConfiguration) SetOfferingId(v string) *TargetConfiguration {
-	s.OfferingId = &v
-	return s
 }
 
 // Details about the target configuration.
@@ -60824,18 +45326,6 @@ func (s *TargetConfigurationRequest) Validate() error {
 	return nil
 }
 
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *TargetConfigurationRequest) SetInstanceCount(v int64) *TargetConfigurationRequest {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetOfferingId sets the OfferingId field's value.
-func (s *TargetConfigurationRequest) SetOfferingId(v string) *TargetConfigurationRequest {
-	s.OfferingId = &v
-	return s
-}
-
 // Describes a load balancer target group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroup
 type TargetGroup struct {
@@ -60869,12 +45359,6 @@ func (s *TargetGroup) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *TargetGroup) SetArn(v string) *TargetGroup {
-	s.Arn = &v
-	return s
 }
 
 // Describes the target groups to attach to a Spot Fleet. Spot Fleet registers
@@ -60923,12 +45407,6 @@ func (s *TargetGroupsConfig) Validate() error {
 	return nil
 }
 
-// SetTargetGroups sets the TargetGroups field's value.
-func (s *TargetGroupsConfig) SetTargetGroups(v []TargetGroup) *TargetGroupsConfig {
-	s.TargetGroups = v
-	return s
-}
-
 // The total value of the new Convertible Reserved Instances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetReservationValue
 type TargetReservationValue struct {
@@ -60952,18 +45430,6 @@ func (s TargetReservationValue) String() string {
 // GoString returns the string representation
 func (s TargetReservationValue) GoString() string {
 	return s.String()
-}
-
-// SetReservationValue sets the ReservationValue field's value.
-func (s *TargetReservationValue) SetReservationValue(v *ReservationValue) *TargetReservationValue {
-	s.ReservationValue = v
-	return s
-}
-
-// SetTargetConfiguration sets the TargetConfiguration field's value.
-func (s *TargetReservationValue) SetTargetConfiguration(v *TargetConfiguration) *TargetReservationValue {
-	s.TargetConfiguration = v
-	return s
 }
 
 // Contains the parameters for TerminateInstances.
@@ -61010,18 +45476,6 @@ func (s *TerminateInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *TerminateInstancesInput) SetDryRun(v bool) *TerminateInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *TerminateInstancesInput) SetInstanceIds(v []string) *TerminateInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Contains the output of TerminateInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstancesResult
 type TerminateInstancesOutput struct {
@@ -61046,12 +45500,6 @@ func (s TerminateInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TerminateInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTerminatingInstances sets the TerminatingInstances field's value.
-func (s *TerminateInstancesOutput) SetTerminatingInstances(v []InstanceStateChange) *TerminateInstancesOutput {
-	s.TerminatingInstances = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesRequest
@@ -61097,18 +45545,6 @@ func (s *UnassignIpv6AddressesInput) Validate() error {
 	return nil
 }
 
-// SetIpv6Addresses sets the Ipv6Addresses field's value.
-func (s *UnassignIpv6AddressesInput) SetIpv6Addresses(v []string) *UnassignIpv6AddressesInput {
-	s.Ipv6Addresses = v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *UnassignIpv6AddressesInput) SetNetworkInterfaceId(v string) *UnassignIpv6AddressesInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesResult
 type UnassignIpv6AddressesOutput struct {
 	_ struct{} `type:"structure"`
@@ -61135,18 +45571,6 @@ func (s UnassignIpv6AddressesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UnassignIpv6AddressesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *UnassignIpv6AddressesOutput) SetNetworkInterfaceId(v string) *UnassignIpv6AddressesOutput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetUnassignedIpv6Addresses sets the UnassignedIpv6Addresses field's value.
-func (s *UnassignIpv6AddressesOutput) SetUnassignedIpv6Addresses(v []string) *UnassignIpv6AddressesOutput {
-	s.UnassignedIpv6Addresses = v
-	return s
 }
 
 // Contains the parameters for UnassignPrivateIpAddresses.
@@ -61192,18 +45616,6 @@ func (s *UnassignPrivateIpAddressesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *UnassignPrivateIpAddressesInput) SetNetworkInterfaceId(v string) *UnassignPrivateIpAddressesInput {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetPrivateIpAddresses sets the PrivateIpAddresses field's value.
-func (s *UnassignPrivateIpAddressesInput) SetPrivateIpAddresses(v []string) *UnassignPrivateIpAddressesInput {
-	s.PrivateIpAddresses = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddressesOutput
@@ -61269,18 +45681,6 @@ func (s *UnmonitorInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *UnmonitorInstancesInput) SetDryRun(v bool) *UnmonitorInstancesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *UnmonitorInstancesInput) SetInstanceIds(v []string) *UnmonitorInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Contains the output of UnmonitorInstances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnmonitorInstancesResult
 type UnmonitorInstancesOutput struct {
@@ -61307,12 +45707,6 @@ func (s UnmonitorInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstanceMonitorings sets the InstanceMonitorings field's value.
-func (s *UnmonitorInstancesOutput) SetInstanceMonitorings(v []InstanceMonitoring) *UnmonitorInstancesOutput {
-	s.InstanceMonitorings = v
-	return s
-}
-
 // Describes the T2 instance whose credit option for CPU usage was not modified.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulInstanceCreditSpecificationItem
 type UnsuccessfulInstanceCreditSpecificationItem struct {
@@ -61334,18 +45728,6 @@ func (s UnsuccessfulInstanceCreditSpecificationItem) String() string {
 // GoString returns the string representation
 func (s UnsuccessfulInstanceCreditSpecificationItem) GoString() string {
 	return s.String()
-}
-
-// SetError sets the Error field's value.
-func (s *UnsuccessfulInstanceCreditSpecificationItem) SetError(v *UnsuccessfulInstanceCreditSpecificationItemError) *UnsuccessfulInstanceCreditSpecificationItem {
-	s.Error = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *UnsuccessfulInstanceCreditSpecificationItem) SetInstanceId(v string) *UnsuccessfulInstanceCreditSpecificationItem {
-	s.InstanceId = &v
-	return s
 }
 
 // Information about the error for the T2 instance whose credit option for CPU
@@ -61371,18 +45753,6 @@ func (s UnsuccessfulInstanceCreditSpecificationItemError) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *UnsuccessfulInstanceCreditSpecificationItemError) SetCode(v UnsuccessfulInstanceCreditSpecificationErrorCode) *UnsuccessfulInstanceCreditSpecificationItemError {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *UnsuccessfulInstanceCreditSpecificationItemError) SetMessage(v string) *UnsuccessfulInstanceCreditSpecificationItemError {
-	s.Message = &v
-	return s
-}
-
 // Information about items that were not successfully processed in a batch call.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulItem
 type UnsuccessfulItem struct {
@@ -61405,18 +45775,6 @@ func (s UnsuccessfulItem) String() string {
 // GoString returns the string representation
 func (s UnsuccessfulItem) GoString() string {
 	return s.String()
-}
-
-// SetError sets the Error field's value.
-func (s *UnsuccessfulItem) SetError(v *UnsuccessfulItemError) *UnsuccessfulItem {
-	s.Error = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *UnsuccessfulItem) SetResourceId(v string) *UnsuccessfulItem {
-	s.ResourceId = &v
-	return s
 }
 
 // Information about the error that occurred. For more information about errors,
@@ -61444,18 +45802,6 @@ func (s UnsuccessfulItemError) String() string {
 // GoString returns the string representation
 func (s UnsuccessfulItemError) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *UnsuccessfulItemError) SetCode(v string) *UnsuccessfulItemError {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *UnsuccessfulItemError) SetMessage(v string) *UnsuccessfulItemError {
-	s.Message = &v
-	return s
 }
 
 // Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.
@@ -61508,30 +45854,6 @@ func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetDryRun(v bool) *UpdateSecurityGroupRuleDescriptionsEgressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetGroupId(v string) *UpdateSecurityGroupRuleDescriptionsEgressInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetGroupName(v string) *UpdateSecurityGroupRuleDescriptionsEgressInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) SetIpPermissions(v []IpPermission) *UpdateSecurityGroupRuleDescriptionsEgressInput {
-	s.IpPermissions = v
-	return s
-}
-
 // Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsEgressResult
 type UpdateSecurityGroupRuleDescriptionsEgressOutput struct {
@@ -61556,12 +45878,6 @@ func (s UpdateSecurityGroupRuleDescriptionsEgressOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSecurityGroupRuleDescriptionsEgressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReturn sets the Return field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsEgressOutput) SetReturn(v bool) *UpdateSecurityGroupRuleDescriptionsEgressOutput {
-	s.Return = &v
-	return s
 }
 
 // Contains the parameters for UpdateSecurityGroupRuleDescriptionsIngress.
@@ -61614,30 +45930,6 @@ func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetDryRun(v bool) *UpdateSecurityGroupRuleDescriptionsIngressInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetGroupId(v string) *UpdateSecurityGroupRuleDescriptionsIngressInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetGroupName(v string) *UpdateSecurityGroupRuleDescriptionsIngressInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetIpPermissions sets the IpPermissions field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) SetIpPermissions(v []IpPermission) *UpdateSecurityGroupRuleDescriptionsIngressInput {
-	s.IpPermissions = v
-	return s
-}
-
 // Contains the output of UpdateSecurityGroupRuleDescriptionsIngress.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateSecurityGroupRuleDescriptionsIngressResult
 type UpdateSecurityGroupRuleDescriptionsIngressOutput struct {
@@ -61664,12 +45956,6 @@ func (s UpdateSecurityGroupRuleDescriptionsIngressOutput) SDKResponseMetadata() 
 	return s.responseMetadata
 }
 
-// SetReturn sets the Return field's value.
-func (s *UpdateSecurityGroupRuleDescriptionsIngressOutput) SetReturn(v bool) *UpdateSecurityGroupRuleDescriptionsIngressOutput {
-	s.Return = &v
-	return s
-}
-
 // Describes the S3 bucket for the disk image.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserBucket
 type UserBucket struct {
@@ -61690,18 +45976,6 @@ func (s UserBucket) String() string {
 // GoString returns the string representation
 func (s UserBucket) GoString() string {
 	return s.String()
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *UserBucket) SetS3Bucket(v string) *UserBucket {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Key sets the S3Key field's value.
-func (s *UserBucket) SetS3Key(v string) *UserBucket {
-	s.S3Key = &v
-	return s
 }
 
 // Describes the S3 bucket for the disk image.
@@ -61726,18 +46000,6 @@ func (s UserBucketDetails) GoString() string {
 	return s.String()
 }
 
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *UserBucketDetails) SetS3Bucket(v string) *UserBucketDetails {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Key sets the S3Key field's value.
-func (s *UserBucketDetails) SetS3Key(v string) *UserBucketDetails {
-	s.S3Key = &v
-	return s
-}
-
 // Describes the user data for an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserData
 type UserData struct {
@@ -61757,12 +46019,6 @@ func (s UserData) String() string {
 // GoString returns the string representation
 func (s UserData) GoString() string {
 	return s.String()
-}
-
-// SetData sets the Data field's value.
-func (s *UserData) SetData(v string) *UserData {
-	s.Data = &v
-	return s
 }
 
 // Describes a security group and AWS account ID pair.
@@ -61812,48 +46068,6 @@ func (s UserIdGroupPair) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *UserIdGroupPair) SetDescription(v string) *UserIdGroupPair {
-	s.Description = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *UserIdGroupPair) SetGroupId(v string) *UserIdGroupPair {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *UserIdGroupPair) SetGroupName(v string) *UserIdGroupPair {
-	s.GroupName = &v
-	return s
-}
-
-// SetPeeringStatus sets the PeeringStatus field's value.
-func (s *UserIdGroupPair) SetPeeringStatus(v string) *UserIdGroupPair {
-	s.PeeringStatus = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *UserIdGroupPair) SetUserId(v string) *UserIdGroupPair {
-	s.UserId = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *UserIdGroupPair) SetVpcId(v string) *UserIdGroupPair {
-	s.VpcId = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *UserIdGroupPair) SetVpcPeeringConnectionId(v string) *UserIdGroupPair {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Describes telemetry for a VPN tunnel.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VgwTelemetry
 type VgwTelemetry struct {
@@ -61884,36 +46098,6 @@ func (s VgwTelemetry) String() string {
 // GoString returns the string representation
 func (s VgwTelemetry) GoString() string {
 	return s.String()
-}
-
-// SetAcceptedRouteCount sets the AcceptedRouteCount field's value.
-func (s *VgwTelemetry) SetAcceptedRouteCount(v int64) *VgwTelemetry {
-	s.AcceptedRouteCount = &v
-	return s
-}
-
-// SetLastStatusChange sets the LastStatusChange field's value.
-func (s *VgwTelemetry) SetLastStatusChange(v time.Time) *VgwTelemetry {
-	s.LastStatusChange = &v
-	return s
-}
-
-// SetOutsideIpAddress sets the OutsideIpAddress field's value.
-func (s *VgwTelemetry) SetOutsideIpAddress(v string) *VgwTelemetry {
-	s.OutsideIpAddress = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VgwTelemetry) SetStatus(v TelemetryStatus) *VgwTelemetry {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *VgwTelemetry) SetStatusMessage(v string) *VgwTelemetry {
-	s.StatusMessage = &v
-	return s
 }
 
 // Describes an EBS volume.
@@ -61949,12 +46133,6 @@ func (s *VolumeDetail) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSize sets the Size field's value.
-func (s *VolumeDetail) SetSize(v int64) *VolumeDetail {
-	s.Size = &v
-	return s
 }
 
 // Describes the modification status of an EBS volume.
@@ -62012,78 +46190,6 @@ func (s VolumeModification) GoString() string {
 	return s.String()
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *VolumeModification) SetEndTime(v time.Time) *VolumeModification {
-	s.EndTime = &v
-	return s
-}
-
-// SetModificationState sets the ModificationState field's value.
-func (s *VolumeModification) SetModificationState(v VolumeModificationState) *VolumeModification {
-	s.ModificationState = v
-	return s
-}
-
-// SetOriginalIops sets the OriginalIops field's value.
-func (s *VolumeModification) SetOriginalIops(v int64) *VolumeModification {
-	s.OriginalIops = &v
-	return s
-}
-
-// SetOriginalSize sets the OriginalSize field's value.
-func (s *VolumeModification) SetOriginalSize(v int64) *VolumeModification {
-	s.OriginalSize = &v
-	return s
-}
-
-// SetOriginalVolumeType sets the OriginalVolumeType field's value.
-func (s *VolumeModification) SetOriginalVolumeType(v VolumeType) *VolumeModification {
-	s.OriginalVolumeType = v
-	return s
-}
-
-// SetProgress sets the Progress field's value.
-func (s *VolumeModification) SetProgress(v int64) *VolumeModification {
-	s.Progress = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *VolumeModification) SetStartTime(v time.Time) *VolumeModification {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *VolumeModification) SetStatusMessage(v string) *VolumeModification {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetTargetIops sets the TargetIops field's value.
-func (s *VolumeModification) SetTargetIops(v int64) *VolumeModification {
-	s.TargetIops = &v
-	return s
-}
-
-// SetTargetSize sets the TargetSize field's value.
-func (s *VolumeModification) SetTargetSize(v int64) *VolumeModification {
-	s.TargetSize = &v
-	return s
-}
-
-// SetTargetVolumeType sets the TargetVolumeType field's value.
-func (s *VolumeModification) SetTargetVolumeType(v VolumeType) *VolumeModification {
-	s.TargetVolumeType = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *VolumeModification) SetVolumeId(v string) *VolumeModification {
-	s.VolumeId = &v
-	return s
-}
-
 // Describes a volume status operation code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusAction
 type VolumeStatusAction struct {
@@ -62112,30 +46218,6 @@ func (s VolumeStatusAction) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *VolumeStatusAction) SetCode(v string) *VolumeStatusAction {
-	s.Code = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *VolumeStatusAction) SetDescription(v string) *VolumeStatusAction {
-	s.Description = &v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *VolumeStatusAction) SetEventId(v string) *VolumeStatusAction {
-	s.EventId = &v
-	return s
-}
-
-// SetEventType sets the EventType field's value.
-func (s *VolumeStatusAction) SetEventType(v string) *VolumeStatusAction {
-	s.EventType = &v
-	return s
-}
-
 // Describes a volume status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusDetails
 type VolumeStatusDetails struct {
@@ -62156,18 +46238,6 @@ func (s VolumeStatusDetails) String() string {
 // GoString returns the string representation
 func (s VolumeStatusDetails) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *VolumeStatusDetails) SetName(v VolumeStatusName) *VolumeStatusDetails {
-	s.Name = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VolumeStatusDetails) SetStatus(v string) *VolumeStatusDetails {
-	s.Status = &v
-	return s
 }
 
 // Describes a volume status event.
@@ -62201,36 +46271,6 @@ func (s VolumeStatusEvent) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *VolumeStatusEvent) SetDescription(v string) *VolumeStatusEvent {
-	s.Description = &v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *VolumeStatusEvent) SetEventId(v string) *VolumeStatusEvent {
-	s.EventId = &v
-	return s
-}
-
-// SetEventType sets the EventType field's value.
-func (s *VolumeStatusEvent) SetEventType(v string) *VolumeStatusEvent {
-	s.EventType = &v
-	return s
-}
-
-// SetNotAfter sets the NotAfter field's value.
-func (s *VolumeStatusEvent) SetNotAfter(v time.Time) *VolumeStatusEvent {
-	s.NotAfter = &v
-	return s
-}
-
-// SetNotBefore sets the NotBefore field's value.
-func (s *VolumeStatusEvent) SetNotBefore(v time.Time) *VolumeStatusEvent {
-	s.NotBefore = &v
-	return s
-}
-
 // Describes the status of a volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusInfo
 type VolumeStatusInfo struct {
@@ -62251,18 +46291,6 @@ func (s VolumeStatusInfo) String() string {
 // GoString returns the string representation
 func (s VolumeStatusInfo) GoString() string {
 	return s.String()
-}
-
-// SetDetails sets the Details field's value.
-func (s *VolumeStatusInfo) SetDetails(v []VolumeStatusDetails) *VolumeStatusInfo {
-	s.Details = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VolumeStatusInfo) SetStatus(v VolumeStatusInfoStatus) *VolumeStatusInfo {
-	s.Status = v
-	return s
 }
 
 // Describes the volume status.
@@ -62294,36 +46322,6 @@ func (s VolumeStatusItem) String() string {
 // GoString returns the string representation
 func (s VolumeStatusItem) GoString() string {
 	return s.String()
-}
-
-// SetActions sets the Actions field's value.
-func (s *VolumeStatusItem) SetActions(v []VolumeStatusAction) *VolumeStatusItem {
-	s.Actions = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *VolumeStatusItem) SetAvailabilityZone(v string) *VolumeStatusItem {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *VolumeStatusItem) SetEvents(v []VolumeStatusEvent) *VolumeStatusItem {
-	s.Events = v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *VolumeStatusItem) SetVolumeId(v string) *VolumeStatusItem {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeStatus sets the VolumeStatus field's value.
-func (s *VolumeStatusItem) SetVolumeStatus(v *VolumeStatusInfo) *VolumeStatusItem {
-	s.VolumeStatus = v
-	return s
 }
 
 // Describes a VPC.
@@ -62370,60 +46368,6 @@ func (s Vpc) GoString() string {
 	return s.String()
 }
 
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *Vpc) SetCidrBlock(v string) *Vpc {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetCidrBlockAssociationSet sets the CidrBlockAssociationSet field's value.
-func (s *Vpc) SetCidrBlockAssociationSet(v []VpcCidrBlockAssociation) *Vpc {
-	s.CidrBlockAssociationSet = v
-	return s
-}
-
-// SetDhcpOptionsId sets the DhcpOptionsId field's value.
-func (s *Vpc) SetDhcpOptionsId(v string) *Vpc {
-	s.DhcpOptionsId = &v
-	return s
-}
-
-// SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *Vpc) SetInstanceTenancy(v Tenancy) *Vpc {
-	s.InstanceTenancy = v
-	return s
-}
-
-// SetIpv6CidrBlockAssociationSet sets the Ipv6CidrBlockAssociationSet field's value.
-func (s *Vpc) SetIpv6CidrBlockAssociationSet(v []VpcIpv6CidrBlockAssociation) *Vpc {
-	s.Ipv6CidrBlockAssociationSet = v
-	return s
-}
-
-// SetIsDefault sets the IsDefault field's value.
-func (s *Vpc) SetIsDefault(v bool) *Vpc {
-	s.IsDefault = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Vpc) SetState(v VpcState) *Vpc {
-	s.State = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Vpc) SetTags(v []Tag) *Vpc {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *Vpc) SetVpcId(v string) *Vpc {
-	s.VpcId = &v
-	return s
-}
-
 // Describes an attachment between a virtual private gateway and a VPC.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcAttachment
 type VpcAttachment struct {
@@ -62444,18 +46388,6 @@ func (s VpcAttachment) String() string {
 // GoString returns the string representation
 func (s VpcAttachment) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *VpcAttachment) SetState(v AttachmentStatus) *VpcAttachment {
-	s.State = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *VpcAttachment) SetVpcId(v string) *VpcAttachment {
-	s.VpcId = &v
-	return s
 }
 
 // Describes an IPv4 CIDR block associated with a VPC.
@@ -62483,24 +46415,6 @@ func (s VpcCidrBlockAssociation) GoString() string {
 	return s.String()
 }
 
-// SetAssociationId sets the AssociationId field's value.
-func (s *VpcCidrBlockAssociation) SetAssociationId(v string) *VpcCidrBlockAssociation {
-	s.AssociationId = &v
-	return s
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *VpcCidrBlockAssociation) SetCidrBlock(v string) *VpcCidrBlockAssociation {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetCidrBlockState sets the CidrBlockState field's value.
-func (s *VpcCidrBlockAssociation) SetCidrBlockState(v *VpcCidrBlockState) *VpcCidrBlockAssociation {
-	s.CidrBlockState = v
-	return s
-}
-
 // Describes the state of a CIDR block.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcCidrBlockState
 type VpcCidrBlockState struct {
@@ -62521,18 +46435,6 @@ func (s VpcCidrBlockState) String() string {
 // GoString returns the string representation
 func (s VpcCidrBlockState) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *VpcCidrBlockState) SetState(v VpcCidrBlockStateCode) *VpcCidrBlockState {
-	s.State = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *VpcCidrBlockState) SetStatusMessage(v string) *VpcCidrBlockState {
-	s.StatusMessage = &v
-	return s
 }
 
 // Describes whether a VPC is enabled for ClassicLink.
@@ -62558,24 +46460,6 @@ func (s VpcClassicLink) String() string {
 // GoString returns the string representation
 func (s VpcClassicLink) GoString() string {
 	return s.String()
-}
-
-// SetClassicLinkEnabled sets the ClassicLinkEnabled field's value.
-func (s *VpcClassicLink) SetClassicLinkEnabled(v bool) *VpcClassicLink {
-	s.ClassicLinkEnabled = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *VpcClassicLink) SetTags(v []Tag) *VpcClassicLink {
-	s.Tags = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *VpcClassicLink) SetVpcId(v string) *VpcClassicLink {
-	s.VpcId = &v
-	return s
 }
 
 // Describes a VPC endpoint.
@@ -62635,84 +46519,6 @@ func (s VpcEndpoint) GoString() string {
 	return s.String()
 }
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *VpcEndpoint) SetCreationTimestamp(v time.Time) *VpcEndpoint {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDnsEntries sets the DnsEntries field's value.
-func (s *VpcEndpoint) SetDnsEntries(v []DnsEntry) *VpcEndpoint {
-	s.DnsEntries = v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *VpcEndpoint) SetGroups(v []SecurityGroupIdentifier) *VpcEndpoint {
-	s.Groups = v
-	return s
-}
-
-// SetNetworkInterfaceIds sets the NetworkInterfaceIds field's value.
-func (s *VpcEndpoint) SetNetworkInterfaceIds(v []string) *VpcEndpoint {
-	s.NetworkInterfaceIds = v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *VpcEndpoint) SetPolicyDocument(v string) *VpcEndpoint {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPrivateDnsEnabled sets the PrivateDnsEnabled field's value.
-func (s *VpcEndpoint) SetPrivateDnsEnabled(v bool) *VpcEndpoint {
-	s.PrivateDnsEnabled = &v
-	return s
-}
-
-// SetRouteTableIds sets the RouteTableIds field's value.
-func (s *VpcEndpoint) SetRouteTableIds(v []string) *VpcEndpoint {
-	s.RouteTableIds = v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *VpcEndpoint) SetServiceName(v string) *VpcEndpoint {
-	s.ServiceName = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *VpcEndpoint) SetState(v State) *VpcEndpoint {
-	s.State = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcEndpoint) SetSubnetIds(v []string) *VpcEndpoint {
-	s.SubnetIds = v
-	return s
-}
-
-// SetVpcEndpointId sets the VpcEndpointId field's value.
-func (s *VpcEndpoint) SetVpcEndpointId(v string) *VpcEndpoint {
-	s.VpcEndpointId = &v
-	return s
-}
-
-// SetVpcEndpointType sets the VpcEndpointType field's value.
-func (s *VpcEndpoint) SetVpcEndpointType(v VpcEndpointType) *VpcEndpoint {
-	s.VpcEndpointType = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *VpcEndpoint) SetVpcId(v string) *VpcEndpoint {
-	s.VpcId = &v
-	return s
-}
-
 // Describes a VPC endpoint connection to a service.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection
 type VpcEndpointConnection struct {
@@ -62744,36 +46550,6 @@ func (s VpcEndpointConnection) GoString() string {
 	return s.String()
 }
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *VpcEndpointConnection) SetCreationTimestamp(v time.Time) *VpcEndpointConnection {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *VpcEndpointConnection) SetServiceId(v string) *VpcEndpointConnection {
-	s.ServiceId = &v
-	return s
-}
-
-// SetVpcEndpointId sets the VpcEndpointId field's value.
-func (s *VpcEndpointConnection) SetVpcEndpointId(v string) *VpcEndpointConnection {
-	s.VpcEndpointId = &v
-	return s
-}
-
-// SetVpcEndpointOwner sets the VpcEndpointOwner field's value.
-func (s *VpcEndpointConnection) SetVpcEndpointOwner(v string) *VpcEndpointConnection {
-	s.VpcEndpointOwner = &v
-	return s
-}
-
-// SetVpcEndpointState sets the VpcEndpointState field's value.
-func (s *VpcEndpointConnection) SetVpcEndpointState(v State) *VpcEndpointConnection {
-	s.VpcEndpointState = v
-	return s
-}
-
 // Describes an IPv6 CIDR block associated with a VPC.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcIpv6CidrBlockAssociation
 type VpcIpv6CidrBlockAssociation struct {
@@ -62797,24 +46573,6 @@ func (s VpcIpv6CidrBlockAssociation) String() string {
 // GoString returns the string representation
 func (s VpcIpv6CidrBlockAssociation) GoString() string {
 	return s.String()
-}
-
-// SetAssociationId sets the AssociationId field's value.
-func (s *VpcIpv6CidrBlockAssociation) SetAssociationId(v string) *VpcIpv6CidrBlockAssociation {
-	s.AssociationId = &v
-	return s
-}
-
-// SetIpv6CidrBlock sets the Ipv6CidrBlock field's value.
-func (s *VpcIpv6CidrBlockAssociation) SetIpv6CidrBlock(v string) *VpcIpv6CidrBlockAssociation {
-	s.Ipv6CidrBlock = &v
-	return s
-}
-
-// SetIpv6CidrBlockState sets the Ipv6CidrBlockState field's value.
-func (s *VpcIpv6CidrBlockAssociation) SetIpv6CidrBlockState(v *VpcCidrBlockState) *VpcIpv6CidrBlockAssociation {
-	s.Ipv6CidrBlockState = v
-	return s
 }
 
 // Describes a VPC peering connection.
@@ -62853,42 +46611,6 @@ func (s VpcPeeringConnection) GoString() string {
 	return s.String()
 }
 
-// SetAccepterVpcInfo sets the AccepterVpcInfo field's value.
-func (s *VpcPeeringConnection) SetAccepterVpcInfo(v *VpcPeeringConnectionVpcInfo) *VpcPeeringConnection {
-	s.AccepterVpcInfo = v
-	return s
-}
-
-// SetExpirationTime sets the ExpirationTime field's value.
-func (s *VpcPeeringConnection) SetExpirationTime(v time.Time) *VpcPeeringConnection {
-	s.ExpirationTime = &v
-	return s
-}
-
-// SetRequesterVpcInfo sets the RequesterVpcInfo field's value.
-func (s *VpcPeeringConnection) SetRequesterVpcInfo(v *VpcPeeringConnectionVpcInfo) *VpcPeeringConnection {
-	s.RequesterVpcInfo = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VpcPeeringConnection) SetStatus(v *VpcPeeringConnectionStateReason) *VpcPeeringConnection {
-	s.Status = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *VpcPeeringConnection) SetTags(v []Tag) *VpcPeeringConnection {
-	s.Tags = v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *VpcPeeringConnection) SetVpcPeeringConnectionId(v string) *VpcPeeringConnection {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Describes the VPC peering connection options.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionOptionsDescription
 type VpcPeeringConnectionOptionsDescription struct {
@@ -62917,24 +46639,6 @@ func (s VpcPeeringConnectionOptionsDescription) GoString() string {
 	return s.String()
 }
 
-// SetAllowDnsResolutionFromRemoteVpc sets the AllowDnsResolutionFromRemoteVpc field's value.
-func (s *VpcPeeringConnectionOptionsDescription) SetAllowDnsResolutionFromRemoteVpc(v bool) *VpcPeeringConnectionOptionsDescription {
-	s.AllowDnsResolutionFromRemoteVpc = &v
-	return s
-}
-
-// SetAllowEgressFromLocalClassicLinkToRemoteVpc sets the AllowEgressFromLocalClassicLinkToRemoteVpc field's value.
-func (s *VpcPeeringConnectionOptionsDescription) SetAllowEgressFromLocalClassicLinkToRemoteVpc(v bool) *VpcPeeringConnectionOptionsDescription {
-	s.AllowEgressFromLocalClassicLinkToRemoteVpc = &v
-	return s
-}
-
-// SetAllowEgressFromLocalVpcToRemoteClassicLink sets the AllowEgressFromLocalVpcToRemoteClassicLink field's value.
-func (s *VpcPeeringConnectionOptionsDescription) SetAllowEgressFromLocalVpcToRemoteClassicLink(v bool) *VpcPeeringConnectionOptionsDescription {
-	s.AllowEgressFromLocalVpcToRemoteClassicLink = &v
-	return s
-}
-
 // Describes the status of a VPC peering connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionStateReason
 type VpcPeeringConnectionStateReason struct {
@@ -62955,18 +46659,6 @@ func (s VpcPeeringConnectionStateReason) String() string {
 // GoString returns the string representation
 func (s VpcPeeringConnectionStateReason) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *VpcPeeringConnectionStateReason) SetCode(v VpcPeeringConnectionStateReasonCode) *VpcPeeringConnectionStateReason {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *VpcPeeringConnectionStateReason) SetMessage(v string) *VpcPeeringConnectionStateReason {
-	s.Message = &v
-	return s
 }
 
 // Describes a VPC in a VPC peering connection.
@@ -63005,48 +46697,6 @@ func (s VpcPeeringConnectionVpcInfo) String() string {
 // GoString returns the string representation
 func (s VpcPeeringConnectionVpcInfo) GoString() string {
 	return s.String()
-}
-
-// SetCidrBlock sets the CidrBlock field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetCidrBlock(v string) *VpcPeeringConnectionVpcInfo {
-	s.CidrBlock = &v
-	return s
-}
-
-// SetCidrBlockSet sets the CidrBlockSet field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetCidrBlockSet(v []CidrBlock) *VpcPeeringConnectionVpcInfo {
-	s.CidrBlockSet = v
-	return s
-}
-
-// SetIpv6CidrBlockSet sets the Ipv6CidrBlockSet field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetIpv6CidrBlockSet(v []Ipv6CidrBlock) *VpcPeeringConnectionVpcInfo {
-	s.Ipv6CidrBlockSet = v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetOwnerId(v string) *VpcPeeringConnectionVpcInfo {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPeeringOptions sets the PeeringOptions field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetPeeringOptions(v *VpcPeeringConnectionOptionsDescription) *VpcPeeringConnectionVpcInfo {
-	s.PeeringOptions = v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetRegion(v string) *VpcPeeringConnectionVpcInfo {
-	s.Region = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *VpcPeeringConnectionVpcInfo) SetVpcId(v string) *VpcPeeringConnectionVpcInfo {
-	s.VpcId = &v
-	return s
 }
 
 // Describes a VPN connection.
@@ -63104,72 +46754,6 @@ func (s VpnConnection) GoString() string {
 	return s.String()
 }
 
-// SetCategory sets the Category field's value.
-func (s *VpnConnection) SetCategory(v string) *VpnConnection {
-	s.Category = &v
-	return s
-}
-
-// SetCustomerGatewayConfiguration sets the CustomerGatewayConfiguration field's value.
-func (s *VpnConnection) SetCustomerGatewayConfiguration(v string) *VpnConnection {
-	s.CustomerGatewayConfiguration = &v
-	return s
-}
-
-// SetCustomerGatewayId sets the CustomerGatewayId field's value.
-func (s *VpnConnection) SetCustomerGatewayId(v string) *VpnConnection {
-	s.CustomerGatewayId = &v
-	return s
-}
-
-// SetOptions sets the Options field's value.
-func (s *VpnConnection) SetOptions(v *VpnConnectionOptions) *VpnConnection {
-	s.Options = v
-	return s
-}
-
-// SetRoutes sets the Routes field's value.
-func (s *VpnConnection) SetRoutes(v []VpnStaticRoute) *VpnConnection {
-	s.Routes = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *VpnConnection) SetState(v VpnState) *VpnConnection {
-	s.State = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *VpnConnection) SetTags(v []Tag) *VpnConnection {
-	s.Tags = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *VpnConnection) SetType(v GatewayType) *VpnConnection {
-	s.Type = v
-	return s
-}
-
-// SetVgwTelemetry sets the VgwTelemetry field's value.
-func (s *VpnConnection) SetVgwTelemetry(v []VgwTelemetry) *VpnConnection {
-	s.VgwTelemetry = v
-	return s
-}
-
-// SetVpnConnectionId sets the VpnConnectionId field's value.
-func (s *VpnConnection) SetVpnConnectionId(v string) *VpnConnection {
-	s.VpnConnectionId = &v
-	return s
-}
-
-// SetVpnGatewayId sets the VpnGatewayId field's value.
-func (s *VpnConnection) SetVpnGatewayId(v string) *VpnConnection {
-	s.VpnGatewayId = &v
-	return s
-}
-
 // Describes VPN connection options.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptions
 type VpnConnectionOptions struct {
@@ -63188,12 +46772,6 @@ func (s VpnConnectionOptions) String() string {
 // GoString returns the string representation
 func (s VpnConnectionOptions) GoString() string {
 	return s.String()
-}
-
-// SetStaticRoutesOnly sets the StaticRoutesOnly field's value.
-func (s *VpnConnectionOptions) SetStaticRoutesOnly(v bool) *VpnConnectionOptions {
-	s.StaticRoutesOnly = &v
-	return s
 }
 
 // Describes VPN connection options.
@@ -63220,18 +46798,6 @@ func (s VpnConnectionOptionsSpecification) String() string {
 // GoString returns the string representation
 func (s VpnConnectionOptionsSpecification) GoString() string {
 	return s.String()
-}
-
-// SetStaticRoutesOnly sets the StaticRoutesOnly field's value.
-func (s *VpnConnectionOptionsSpecification) SetStaticRoutesOnly(v bool) *VpnConnectionOptionsSpecification {
-	s.StaticRoutesOnly = &v
-	return s
-}
-
-// SetTunnelOptions sets the TunnelOptions field's value.
-func (s *VpnConnectionOptionsSpecification) SetTunnelOptions(v []VpnTunnelOptionsSpecification) *VpnConnectionOptionsSpecification {
-	s.TunnelOptions = v
-	return s
 }
 
 // Describes a virtual private gateway.
@@ -63272,48 +46838,6 @@ func (s VpnGateway) GoString() string {
 	return s.String()
 }
 
-// SetAmazonSideAsn sets the AmazonSideAsn field's value.
-func (s *VpnGateway) SetAmazonSideAsn(v int64) *VpnGateway {
-	s.AmazonSideAsn = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *VpnGateway) SetAvailabilityZone(v string) *VpnGateway {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *VpnGateway) SetState(v VpnState) *VpnGateway {
-	s.State = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *VpnGateway) SetTags(v []Tag) *VpnGateway {
-	s.Tags = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *VpnGateway) SetType(v GatewayType) *VpnGateway {
-	s.Type = v
-	return s
-}
-
-// SetVpcAttachments sets the VpcAttachments field's value.
-func (s *VpnGateway) SetVpcAttachments(v []VpcAttachment) *VpnGateway {
-	s.VpcAttachments = v
-	return s
-}
-
-// SetVpnGatewayId sets the VpnGatewayId field's value.
-func (s *VpnGateway) SetVpnGatewayId(v string) *VpnGateway {
-	s.VpnGatewayId = &v
-	return s
-}
-
 // Describes a static route for a VPN connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnStaticRoute
 type VpnStaticRoute struct {
@@ -63337,24 +46861,6 @@ func (s VpnStaticRoute) String() string {
 // GoString returns the string representation
 func (s VpnStaticRoute) GoString() string {
 	return s.String()
-}
-
-// SetDestinationCidrBlock sets the DestinationCidrBlock field's value.
-func (s *VpnStaticRoute) SetDestinationCidrBlock(v string) *VpnStaticRoute {
-	s.DestinationCidrBlock = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *VpnStaticRoute) SetSource(v VpnStaticRouteSource) *VpnStaticRoute {
-	s.Source = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *VpnStaticRoute) SetState(v VpnState) *VpnStaticRoute {
-	s.State = v
-	return s
 }
 
 // The tunnel options for a VPN connection.
@@ -63400,18 +46906,6 @@ func (s VpnTunnelOptionsSpecification) String() string {
 // GoString returns the string representation
 func (s VpnTunnelOptionsSpecification) GoString() string {
 	return s.String()
-}
-
-// SetPreSharedKey sets the PreSharedKey field's value.
-func (s *VpnTunnelOptionsSpecification) SetPreSharedKey(v string) *VpnTunnelOptionsSpecification {
-	s.PreSharedKey = &v
-	return s
-}
-
-// SetTunnelInsideCidr sets the TunnelInsideCidr field's value.
-func (s *VpnTunnelOptionsSpecification) SetTunnelInsideCidr(v string) *VpnTunnelOptionsSpecification {
-	s.TunnelInsideCidr = &v
-	return s
 }
 
 type AccountAttributeName string

@@ -2198,18 +2198,6 @@ func (s AssociateDeviceWithRoomInput) GoString() string {
 	return s.String()
 }
 
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *AssociateDeviceWithRoomInput) SetDeviceArn(v string) *AssociateDeviceWithRoomInput {
-	s.DeviceArn = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *AssociateDeviceWithRoomInput) SetRoomArn(v string) *AssociateDeviceWithRoomInput {
-	s.RoomArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithRoomResponse
 type AssociateDeviceWithRoomOutput struct {
 	_ struct{} `type:"structure"`
@@ -2251,18 +2239,6 @@ func (s AssociateSkillGroupWithRoomInput) String() string {
 // GoString returns the string representation
 func (s AssociateSkillGroupWithRoomInput) GoString() string {
 	return s.String()
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *AssociateSkillGroupWithRoomInput) SetRoomArn(v string) *AssociateSkillGroupWithRoomInput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *AssociateSkillGroupWithRoomInput) SetSkillGroupArn(v string) *AssociateSkillGroupWithRoomInput {
-	s.SkillGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillGroupWithRoomResponse
@@ -2387,66 +2363,6 @@ func (s *CreateProfileInput) Validate() error {
 	return nil
 }
 
-// SetAddress sets the Address field's value.
-func (s *CreateProfileInput) SetAddress(v string) *CreateProfileInput {
-	s.Address = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateProfileInput) SetClientRequestToken(v string) *CreateProfileInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDistanceUnit sets the DistanceUnit field's value.
-func (s *CreateProfileInput) SetDistanceUnit(v DistanceUnit) *CreateProfileInput {
-	s.DistanceUnit = v
-	return s
-}
-
-// SetMaxVolumeLimit sets the MaxVolumeLimit field's value.
-func (s *CreateProfileInput) SetMaxVolumeLimit(v int64) *CreateProfileInput {
-	s.MaxVolumeLimit = &v
-	return s
-}
-
-// SetPSTNEnabled sets the PSTNEnabled field's value.
-func (s *CreateProfileInput) SetPSTNEnabled(v bool) *CreateProfileInput {
-	s.PSTNEnabled = &v
-	return s
-}
-
-// SetProfileName sets the ProfileName field's value.
-func (s *CreateProfileInput) SetProfileName(v string) *CreateProfileInput {
-	s.ProfileName = &v
-	return s
-}
-
-// SetSetupModeDisabled sets the SetupModeDisabled field's value.
-func (s *CreateProfileInput) SetSetupModeDisabled(v bool) *CreateProfileInput {
-	s.SetupModeDisabled = &v
-	return s
-}
-
-// SetTemperatureUnit sets the TemperatureUnit field's value.
-func (s *CreateProfileInput) SetTemperatureUnit(v TemperatureUnit) *CreateProfileInput {
-	s.TemperatureUnit = v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *CreateProfileInput) SetTimezone(v string) *CreateProfileInput {
-	s.Timezone = &v
-	return s
-}
-
-// SetWakeWord sets the WakeWord field's value.
-func (s *CreateProfileInput) SetWakeWord(v WakeWord) *CreateProfileInput {
-	s.WakeWord = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfileResponse
 type CreateProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -2470,12 +2386,6 @@ func (s CreateProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *CreateProfileOutput) SetProfileArn(v string) *CreateProfileOutput {
-	s.ProfileArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateRoomRequest
@@ -2543,42 +2453,6 @@ func (s *CreateRoomInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateRoomInput) SetClientRequestToken(v string) *CreateRoomInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateRoomInput) SetDescription(v string) *CreateRoomInput {
-	s.Description = &v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *CreateRoomInput) SetProfileArn(v string) *CreateRoomInput {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProviderCalendarId sets the ProviderCalendarId field's value.
-func (s *CreateRoomInput) SetProviderCalendarId(v string) *CreateRoomInput {
-	s.ProviderCalendarId = &v
-	return s
-}
-
-// SetRoomName sets the RoomName field's value.
-func (s *CreateRoomInput) SetRoomName(v string) *CreateRoomInput {
-	s.RoomName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateRoomInput) SetTags(v []Tag) *CreateRoomInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateRoomResponse
 type CreateRoomOutput struct {
 	_ struct{} `type:"structure"`
@@ -2602,12 +2476,6 @@ func (s CreateRoomOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRoomOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *CreateRoomOutput) SetRoomArn(v string) *CreateRoomOutput {
-	s.RoomArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateSkillGroupRequest
@@ -2659,24 +2527,6 @@ func (s *CreateSkillGroupInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateSkillGroupInput) SetClientRequestToken(v string) *CreateSkillGroupInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateSkillGroupInput) SetDescription(v string) *CreateSkillGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetSkillGroupName sets the SkillGroupName field's value.
-func (s *CreateSkillGroupInput) SetSkillGroupName(v string) *CreateSkillGroupInput {
-	s.SkillGroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateSkillGroupResponse
 type CreateSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -2700,12 +2550,6 @@ func (s CreateSkillGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSkillGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *CreateSkillGroupOutput) SetSkillGroupArn(v string) *CreateSkillGroupOutput {
-	s.SkillGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateUserRequest
@@ -2773,42 +2617,6 @@ func (s *CreateUserInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateUserInput) SetClientRequestToken(v string) *CreateUserInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *CreateUserInput) SetEmail(v string) *CreateUserInput {
-	s.Email = &v
-	return s
-}
-
-// SetFirstName sets the FirstName field's value.
-func (s *CreateUserInput) SetFirstName(v string) *CreateUserInput {
-	s.FirstName = &v
-	return s
-}
-
-// SetLastName sets the LastName field's value.
-func (s *CreateUserInput) SetLastName(v string) *CreateUserInput {
-	s.LastName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateUserInput) SetTags(v []Tag) *CreateUserInput {
-	s.Tags = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *CreateUserInput) SetUserId(v string) *CreateUserInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateUserResponse
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -2834,12 +2642,6 @@ func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUserArn sets the UserArn field's value.
-func (s *CreateUserOutput) SetUserArn(v string) *CreateUserOutput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteProfileRequest
 type DeleteProfileInput struct {
 	_ struct{} `type:"structure"`
@@ -2856,12 +2658,6 @@ func (s DeleteProfileInput) String() string {
 // GoString returns the string representation
 func (s DeleteProfileInput) GoString() string {
 	return s.String()
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *DeleteProfileInput) SetProfileArn(v string) *DeleteProfileInput {
-	s.ProfileArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteProfileResponse
@@ -2902,12 +2698,6 @@ func (s DeleteRoomInput) String() string {
 // GoString returns the string representation
 func (s DeleteRoomInput) GoString() string {
 	return s.String()
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *DeleteRoomInput) SetRoomArn(v string) *DeleteRoomInput {
-	s.RoomArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoomResponse
@@ -2981,24 +2771,6 @@ func (s *DeleteRoomSkillParameterInput) Validate() error {
 	return nil
 }
 
-// SetParameterKey sets the ParameterKey field's value.
-func (s *DeleteRoomSkillParameterInput) SetParameterKey(v string) *DeleteRoomSkillParameterInput {
-	s.ParameterKey = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *DeleteRoomSkillParameterInput) SetRoomArn(v string) *DeleteRoomSkillParameterInput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetSkillId sets the SkillId field's value.
-func (s *DeleteRoomSkillParameterInput) SetSkillId(v string) *DeleteRoomSkillParameterInput {
-	s.SkillId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteRoomSkillParameterResponse
 type DeleteRoomSkillParameterOutput struct {
 	_ struct{} `type:"structure"`
@@ -3037,12 +2809,6 @@ func (s DeleteSkillGroupInput) String() string {
 // GoString returns the string representation
 func (s DeleteSkillGroupInput) GoString() string {
 	return s.String()
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *DeleteSkillGroupInput) SetSkillGroupArn(v string) *DeleteSkillGroupInput {
-	s.SkillGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillGroupResponse
@@ -3102,18 +2868,6 @@ func (s *DeleteUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnrollmentId sets the EnrollmentId field's value.
-func (s *DeleteUserInput) SetEnrollmentId(v string) *DeleteUserInput {
-	s.EnrollmentId = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DeleteUserInput) SetUserArn(v string) *DeleteUserInput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteUserResponse
@@ -3178,54 +2932,6 @@ func (s Device) GoString() string {
 	return s.String()
 }
 
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *Device) SetDeviceArn(v string) *Device {
-	s.DeviceArn = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *Device) SetDeviceName(v string) *Device {
-	s.DeviceName = &v
-	return s
-}
-
-// SetDeviceSerialNumber sets the DeviceSerialNumber field's value.
-func (s *Device) SetDeviceSerialNumber(v string) *Device {
-	s.DeviceSerialNumber = &v
-	return s
-}
-
-// SetDeviceStatus sets the DeviceStatus field's value.
-func (s *Device) SetDeviceStatus(v DeviceStatus) *Device {
-	s.DeviceStatus = v
-	return s
-}
-
-// SetDeviceType sets the DeviceType field's value.
-func (s *Device) SetDeviceType(v string) *Device {
-	s.DeviceType = &v
-	return s
-}
-
-// SetMacAddress sets the MacAddress field's value.
-func (s *Device) SetMacAddress(v string) *Device {
-	s.MacAddress = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *Device) SetRoomArn(v string) *Device {
-	s.RoomArn = &v
-	return s
-}
-
-// SetSoftwareVersion sets the SoftwareVersion field's value.
-func (s *Device) SetSoftwareVersion(v string) *Device {
-	s.SoftwareVersion = &v
-	return s
-}
-
 // Device attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceData
 type DeviceData struct {
@@ -3269,60 +2975,6 @@ func (s DeviceData) GoString() string {
 	return s.String()
 }
 
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *DeviceData) SetDeviceArn(v string) *DeviceData {
-	s.DeviceArn = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *DeviceData) SetDeviceName(v string) *DeviceData {
-	s.DeviceName = &v
-	return s
-}
-
-// SetDeviceSerialNumber sets the DeviceSerialNumber field's value.
-func (s *DeviceData) SetDeviceSerialNumber(v string) *DeviceData {
-	s.DeviceSerialNumber = &v
-	return s
-}
-
-// SetDeviceStatus sets the DeviceStatus field's value.
-func (s *DeviceData) SetDeviceStatus(v DeviceStatus) *DeviceData {
-	s.DeviceStatus = v
-	return s
-}
-
-// SetDeviceType sets the DeviceType field's value.
-func (s *DeviceData) SetDeviceType(v string) *DeviceData {
-	s.DeviceType = &v
-	return s
-}
-
-// SetMacAddress sets the MacAddress field's value.
-func (s *DeviceData) SetMacAddress(v string) *DeviceData {
-	s.MacAddress = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *DeviceData) SetRoomArn(v string) *DeviceData {
-	s.RoomArn = &v
-	return s
-}
-
-// SetRoomName sets the RoomName field's value.
-func (s *DeviceData) SetRoomName(v string) *DeviceData {
-	s.RoomName = &v
-	return s
-}
-
-// SetSoftwareVersion sets the SoftwareVersion field's value.
-func (s *DeviceData) SetSoftwareVersion(v string) *DeviceData {
-	s.SoftwareVersion = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoomRequest
 type DisassociateDeviceFromRoomInput struct {
 	_ struct{} `type:"structure"`
@@ -3339,12 +2991,6 @@ func (s DisassociateDeviceFromRoomInput) String() string {
 // GoString returns the string representation
 func (s DisassociateDeviceFromRoomInput) GoString() string {
 	return s.String()
-}
-
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *DisassociateDeviceFromRoomInput) SetDeviceArn(v string) *DisassociateDeviceFromRoomInput {
-	s.DeviceArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoomResponse
@@ -3388,18 +3034,6 @@ func (s DisassociateSkillGroupFromRoomInput) String() string {
 // GoString returns the string representation
 func (s DisassociateSkillGroupFromRoomInput) GoString() string {
 	return s.String()
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *DisassociateSkillGroupFromRoomInput) SetRoomArn(v string) *DisassociateSkillGroupFromRoomInput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *DisassociateSkillGroupFromRoomInput) SetSkillGroupArn(v string) *DisassociateSkillGroupFromRoomInput {
-	s.SkillGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillGroupFromRoomResponse
@@ -3472,18 +3106,6 @@ func (s *Filter) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Filter) SetKey(v string) *Filter {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []string) *Filter {
-	s.Values = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDeviceRequest
 type GetDeviceInput struct {
 	_ struct{} `type:"structure"`
@@ -3500,12 +3122,6 @@ func (s GetDeviceInput) String() string {
 // GoString returns the string representation
 func (s GetDeviceInput) GoString() string {
 	return s.String()
-}
-
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *GetDeviceInput) SetDeviceArn(v string) *GetDeviceInput {
-	s.DeviceArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDeviceResponse
@@ -3533,12 +3149,6 @@ func (s GetDeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDevice sets the Device field's value.
-func (s *GetDeviceOutput) SetDevice(v *Device) *GetDeviceOutput {
-	s.Device = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfileRequest
 type GetProfileInput struct {
 	_ struct{} `type:"structure"`
@@ -3555,12 +3165,6 @@ func (s GetProfileInput) String() string {
 // GoString returns the string representation
 func (s GetProfileInput) GoString() string {
 	return s.String()
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *GetProfileInput) SetProfileArn(v string) *GetProfileInput {
-	s.ProfileArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfileResponse
@@ -3588,12 +3192,6 @@ func (s GetProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetProfile sets the Profile field's value.
-func (s *GetProfileOutput) SetProfile(v *Profile) *GetProfileOutput {
-	s.Profile = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomRequest
 type GetRoomInput struct {
 	_ struct{} `type:"structure"`
@@ -3610,12 +3208,6 @@ func (s GetRoomInput) String() string {
 // GoString returns the string representation
 func (s GetRoomInput) GoString() string {
 	return s.String()
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *GetRoomInput) SetRoomArn(v string) *GetRoomInput {
-	s.RoomArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomResponse
@@ -3641,12 +3233,6 @@ func (s GetRoomOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRoomOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRoom sets the Room field's value.
-func (s *GetRoomOutput) SetRoom(v *Room) *GetRoomOutput {
-	s.Room = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomSkillParameterRequest
@@ -3699,24 +3285,6 @@ func (s *GetRoomSkillParameterInput) Validate() error {
 	return nil
 }
 
-// SetParameterKey sets the ParameterKey field's value.
-func (s *GetRoomSkillParameterInput) SetParameterKey(v string) *GetRoomSkillParameterInput {
-	s.ParameterKey = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *GetRoomSkillParameterInput) SetRoomArn(v string) *GetRoomSkillParameterInput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetSkillId sets the SkillId field's value.
-func (s *GetRoomSkillParameterInput) SetSkillId(v string) *GetRoomSkillParameterInput {
-	s.SkillId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetRoomSkillParameterResponse
 type GetRoomSkillParameterOutput struct {
 	_ struct{} `type:"structure"`
@@ -3742,12 +3310,6 @@ func (s GetRoomSkillParameterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetRoomSkillParameter sets the RoomSkillParameter field's value.
-func (s *GetRoomSkillParameterOutput) SetRoomSkillParameter(v *RoomSkillParameter) *GetRoomSkillParameterOutput {
-	s.RoomSkillParameter = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetSkillGroupRequest
 type GetSkillGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -3764,12 +3326,6 @@ func (s GetSkillGroupInput) String() string {
 // GoString returns the string representation
 func (s GetSkillGroupInput) GoString() string {
 	return s.String()
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *GetSkillGroupInput) SetSkillGroupArn(v string) *GetSkillGroupInput {
-	s.SkillGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetSkillGroupResponse
@@ -3795,12 +3351,6 @@ func (s GetSkillGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSkillGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSkillGroup sets the SkillGroup field's value.
-func (s *GetSkillGroupOutput) SetSkillGroup(v *SkillGroup) *GetSkillGroupOutput {
-	s.SkillGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsRequest
@@ -3848,24 +3398,6 @@ func (s *ListSkillsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListSkillsInput) SetMaxResults(v int64) *ListSkillsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSkillsInput) SetNextToken(v string) *ListSkillsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *ListSkillsInput) SetSkillGroupArn(v string) *ListSkillsInput {
-	s.SkillGroupArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsResponse
 type ListSkillsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3892,18 +3424,6 @@ func (s ListSkillsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSkillsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSkillsOutput) SetNextToken(v string) *ListSkillsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSkillSummaries sets the SkillSummaries field's value.
-func (s *ListSkillsOutput) SetSkillSummaries(v []SkillSummary) *ListSkillsOutput {
-	s.SkillSummaries = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListTagsRequest
@@ -3956,24 +3476,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListTagsInput) SetArn(v string) *ListTagsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTagsInput) SetMaxResults(v int64) *ListTagsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsInput) SetNextToken(v string) *ListTagsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListTagsResponse
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4000,18 +3502,6 @@ func (s ListTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v []Tag) *ListTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // A room profile with attributes.
@@ -4060,66 +3550,6 @@ func (s Profile) GoString() string {
 	return s.String()
 }
 
-// SetAddress sets the Address field's value.
-func (s *Profile) SetAddress(v string) *Profile {
-	s.Address = &v
-	return s
-}
-
-// SetDistanceUnit sets the DistanceUnit field's value.
-func (s *Profile) SetDistanceUnit(v DistanceUnit) *Profile {
-	s.DistanceUnit = v
-	return s
-}
-
-// SetMaxVolumeLimit sets the MaxVolumeLimit field's value.
-func (s *Profile) SetMaxVolumeLimit(v int64) *Profile {
-	s.MaxVolumeLimit = &v
-	return s
-}
-
-// SetPSTNEnabled sets the PSTNEnabled field's value.
-func (s *Profile) SetPSTNEnabled(v bool) *Profile {
-	s.PSTNEnabled = &v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *Profile) SetProfileArn(v string) *Profile {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProfileName sets the ProfileName field's value.
-func (s *Profile) SetProfileName(v string) *Profile {
-	s.ProfileName = &v
-	return s
-}
-
-// SetSetupModeDisabled sets the SetupModeDisabled field's value.
-func (s *Profile) SetSetupModeDisabled(v bool) *Profile {
-	s.SetupModeDisabled = &v
-	return s
-}
-
-// SetTemperatureUnit sets the TemperatureUnit field's value.
-func (s *Profile) SetTemperatureUnit(v TemperatureUnit) *Profile {
-	s.TemperatureUnit = v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *Profile) SetTimezone(v string) *Profile {
-	s.Timezone = &v
-	return s
-}
-
-// SetWakeWord sets the WakeWord field's value.
-func (s *Profile) SetWakeWord(v WakeWord) *Profile {
-	s.WakeWord = v
-	return s
-}
-
 // The data of a room profile.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ProfileData
 type ProfileData struct {
@@ -4155,48 +3585,6 @@ func (s ProfileData) String() string {
 // GoString returns the string representation
 func (s ProfileData) GoString() string {
 	return s.String()
-}
-
-// SetAddress sets the Address field's value.
-func (s *ProfileData) SetAddress(v string) *ProfileData {
-	s.Address = &v
-	return s
-}
-
-// SetDistanceUnit sets the DistanceUnit field's value.
-func (s *ProfileData) SetDistanceUnit(v DistanceUnit) *ProfileData {
-	s.DistanceUnit = v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *ProfileData) SetProfileArn(v string) *ProfileData {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProfileName sets the ProfileName field's value.
-func (s *ProfileData) SetProfileName(v string) *ProfileData {
-	s.ProfileName = &v
-	return s
-}
-
-// SetTemperatureUnit sets the TemperatureUnit field's value.
-func (s *ProfileData) SetTemperatureUnit(v TemperatureUnit) *ProfileData {
-	s.TemperatureUnit = v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *ProfileData) SetTimezone(v string) *ProfileData {
-	s.Timezone = &v
-	return s
-}
-
-// SetWakeWord sets the WakeWord field's value.
-func (s *ProfileData) SetWakeWord(v WakeWord) *ProfileData {
-	s.WakeWord = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutRoomSkillParameterRequest
@@ -4248,24 +3636,6 @@ func (s *PutRoomSkillParameterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *PutRoomSkillParameterInput) SetRoomArn(v string) *PutRoomSkillParameterInput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetRoomSkillParameter sets the RoomSkillParameter field's value.
-func (s *PutRoomSkillParameterInput) SetRoomSkillParameter(v *RoomSkillParameter) *PutRoomSkillParameterInput {
-	s.RoomSkillParameter = v
-	return s
-}
-
-// SetSkillId sets the SkillId field's value.
-func (s *PutRoomSkillParameterInput) SetSkillId(v string) *PutRoomSkillParameterInput {
-	s.SkillId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutRoomSkillParameterResponse
@@ -4333,18 +3703,6 @@ func (s *ResolveRoomInput) Validate() error {
 	return nil
 }
 
-// SetSkillId sets the SkillId field's value.
-func (s *ResolveRoomInput) SetSkillId(v string) *ResolveRoomInput {
-	s.SkillId = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *ResolveRoomInput) SetUserId(v string) *ResolveRoomInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ResolveRoomResponse
 type ResolveRoomOutput struct {
 	_ struct{} `type:"structure"`
@@ -4376,24 +3734,6 @@ func (s ResolveRoomOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetRoomArn sets the RoomArn field's value.
-func (s *ResolveRoomOutput) SetRoomArn(v string) *ResolveRoomOutput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetRoomName sets the RoomName field's value.
-func (s *ResolveRoomOutput) SetRoomName(v string) *ResolveRoomOutput {
-	s.RoomName = &v
-	return s
-}
-
-// SetRoomSkillParameters sets the RoomSkillParameters field's value.
-func (s *ResolveRoomOutput) SetRoomSkillParameters(v []RoomSkillParameter) *ResolveRoomOutput {
-	s.RoomSkillParameters = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RevokeInvitationRequest
 type RevokeInvitationInput struct {
 	_ struct{} `type:"structure"`
@@ -4413,18 +3753,6 @@ func (s RevokeInvitationInput) String() string {
 // GoString returns the string representation
 func (s RevokeInvitationInput) GoString() string {
 	return s.String()
-}
-
-// SetEnrollmentId sets the EnrollmentId field's value.
-func (s *RevokeInvitationInput) SetEnrollmentId(v string) *RevokeInvitationInput {
-	s.EnrollmentId = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *RevokeInvitationInput) SetUserArn(v string) *RevokeInvitationInput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RevokeInvitationResponse
@@ -4480,36 +3808,6 @@ func (s Room) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *Room) SetDescription(v string) *Room {
-	s.Description = &v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *Room) SetProfileArn(v string) *Room {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProviderCalendarId sets the ProviderCalendarId field's value.
-func (s *Room) SetProviderCalendarId(v string) *Room {
-	s.ProviderCalendarId = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *Room) SetRoomArn(v string) *Room {
-	s.RoomArn = &v
-	return s
-}
-
-// SetRoomName sets the RoomName field's value.
-func (s *Room) SetRoomName(v string) *Room {
-	s.RoomName = &v
-	return s
-}
-
 // The data of a room.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RoomData
 type RoomData struct {
@@ -4542,42 +3840,6 @@ func (s RoomData) String() string {
 // GoString returns the string representation
 func (s RoomData) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *RoomData) SetDescription(v string) *RoomData {
-	s.Description = &v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *RoomData) SetProfileArn(v string) *RoomData {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProfileName sets the ProfileName field's value.
-func (s *RoomData) SetProfileName(v string) *RoomData {
-	s.ProfileName = &v
-	return s
-}
-
-// SetProviderCalendarId sets the ProviderCalendarId field's value.
-func (s *RoomData) SetProviderCalendarId(v string) *RoomData {
-	s.ProviderCalendarId = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *RoomData) SetRoomArn(v string) *RoomData {
-	s.RoomArn = &v
-	return s
-}
-
-// SetRoomName sets the RoomName field's value.
-func (s *RoomData) SetRoomName(v string) *RoomData {
-	s.RoomName = &v
-	return s
 }
 
 // A skill parameter associated with a room.
@@ -4629,18 +3891,6 @@ func (s *RoomSkillParameter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetParameterKey sets the ParameterKey field's value.
-func (s *RoomSkillParameter) SetParameterKey(v string) *RoomSkillParameter {
-	s.ParameterKey = &v
-	return s
-}
-
-// SetParameterValue sets the ParameterValue field's value.
-func (s *RoomSkillParameter) SetParameterValue(v string) *RoomSkillParameter {
-	s.ParameterValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesRequest
@@ -4707,30 +3957,6 @@ func (s *SearchDevicesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *SearchDevicesInput) SetFilters(v []Filter) *SearchDevicesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchDevicesInput) SetMaxResults(v int64) *SearchDevicesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchDevicesInput) SetNextToken(v string) *SearchDevicesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *SearchDevicesInput) SetSortCriteria(v []Sort) *SearchDevicesInput {
-	s.SortCriteria = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesResponse
 type SearchDevicesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4760,24 +3986,6 @@ func (s SearchDevicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchDevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevices sets the Devices field's value.
-func (s *SearchDevicesOutput) SetDevices(v []DeviceData) *SearchDevicesOutput {
-	s.Devices = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchDevicesOutput) SetNextToken(v string) *SearchDevicesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *SearchDevicesOutput) SetTotalCount(v int64) *SearchDevicesOutput {
-	s.TotalCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchProfilesRequest
@@ -4843,30 +4051,6 @@ func (s *SearchProfilesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *SearchProfilesInput) SetFilters(v []Filter) *SearchProfilesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchProfilesInput) SetMaxResults(v int64) *SearchProfilesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchProfilesInput) SetNextToken(v string) *SearchProfilesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *SearchProfilesInput) SetSortCriteria(v []Sort) *SearchProfilesInput {
-	s.SortCriteria = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchProfilesResponse
 type SearchProfilesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4896,24 +4080,6 @@ func (s SearchProfilesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchProfilesOutput) SetNextToken(v string) *SearchProfilesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProfiles sets the Profiles field's value.
-func (s *SearchProfilesOutput) SetProfiles(v []ProfileData) *SearchProfilesOutput {
-	s.Profiles = v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *SearchProfilesOutput) SetTotalCount(v int64) *SearchProfilesOutput {
-	s.TotalCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchRoomsRequest
@@ -4979,30 +4145,6 @@ func (s *SearchRoomsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *SearchRoomsInput) SetFilters(v []Filter) *SearchRoomsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchRoomsInput) SetMaxResults(v int64) *SearchRoomsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchRoomsInput) SetNextToken(v string) *SearchRoomsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *SearchRoomsInput) SetSortCriteria(v []Sort) *SearchRoomsInput {
-	s.SortCriteria = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchRoomsResponse
 type SearchRoomsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5032,24 +4174,6 @@ func (s SearchRoomsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchRoomsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchRoomsOutput) SetNextToken(v string) *SearchRoomsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRooms sets the Rooms field's value.
-func (s *SearchRoomsOutput) SetRooms(v []RoomData) *SearchRoomsOutput {
-	s.Rooms = v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *SearchRoomsOutput) SetTotalCount(v int64) *SearchRoomsOutput {
-	s.TotalCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchSkillGroupsRequest
@@ -5116,30 +4240,6 @@ func (s *SearchSkillGroupsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *SearchSkillGroupsInput) SetFilters(v []Filter) *SearchSkillGroupsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchSkillGroupsInput) SetMaxResults(v int64) *SearchSkillGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchSkillGroupsInput) SetNextToken(v string) *SearchSkillGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *SearchSkillGroupsInput) SetSortCriteria(v []Sort) *SearchSkillGroupsInput {
-	s.SortCriteria = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchSkillGroupsResponse
 type SearchSkillGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5169,24 +4269,6 @@ func (s SearchSkillGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchSkillGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchSkillGroupsOutput) SetNextToken(v string) *SearchSkillGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSkillGroups sets the SkillGroups field's value.
-func (s *SearchSkillGroupsOutput) SetSkillGroups(v []SkillGroupData) *SearchSkillGroupsOutput {
-	s.SkillGroups = v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *SearchSkillGroupsOutput) SetTotalCount(v int64) *SearchSkillGroupsOutput {
-	s.TotalCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchUsersRequest
@@ -5253,30 +4335,6 @@ func (s *SearchUsersInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *SearchUsersInput) SetFilters(v []Filter) *SearchUsersInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchUsersInput) SetMaxResults(v int64) *SearchUsersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchUsersInput) SetNextToken(v string) *SearchUsersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortCriteria sets the SortCriteria field's value.
-func (s *SearchUsersInput) SetSortCriteria(v []Sort) *SearchUsersInput {
-	s.SortCriteria = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchUsersResponse
 type SearchUsersOutput struct {
 	_ struct{} `type:"structure"`
@@ -5308,24 +4366,6 @@ func (s SearchUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *SearchUsersOutput) SetNextToken(v string) *SearchUsersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *SearchUsersOutput) SetTotalCount(v int64) *SearchUsersOutput {
-	s.TotalCount = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *SearchUsersOutput) SetUsers(v []UserData) *SearchUsersOutput {
-	s.Users = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendInvitationRequest
 type SendInvitationInput struct {
 	_ struct{} `type:"structure"`
@@ -5342,12 +4382,6 @@ func (s SendInvitationInput) String() string {
 // GoString returns the string representation
 func (s SendInvitationInput) GoString() string {
 	return s.String()
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *SendInvitationInput) SetUserArn(v string) *SendInvitationInput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendInvitationResponse
@@ -5397,24 +4431,6 @@ func (s SkillGroup) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *SkillGroup) SetDescription(v string) *SkillGroup {
-	s.Description = &v
-	return s
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *SkillGroup) SetSkillGroupArn(v string) *SkillGroup {
-	s.SkillGroupArn = &v
-	return s
-}
-
-// SetSkillGroupName sets the SkillGroupName field's value.
-func (s *SkillGroup) SetSkillGroupName(v string) *SkillGroup {
-	s.SkillGroupName = &v
-	return s
-}
-
 // The attributes of a skill group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillGroupData
 type SkillGroupData struct {
@@ -5440,24 +4456,6 @@ func (s SkillGroupData) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *SkillGroupData) SetDescription(v string) *SkillGroupData {
-	s.Description = &v
-	return s
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *SkillGroupData) SetSkillGroupArn(v string) *SkillGroupData {
-	s.SkillGroupArn = &v
-	return s
-}
-
-// SetSkillGroupName sets the SkillGroupName field's value.
-func (s *SkillGroupData) SetSkillGroupName(v string) *SkillGroupData {
-	s.SkillGroupName = &v
-	return s
-}
-
 // The summary of skills.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillSummary
 type SkillSummary struct {
@@ -5481,24 +4479,6 @@ func (s SkillSummary) String() string {
 // GoString returns the string representation
 func (s SkillSummary) GoString() string {
 	return s.String()
-}
-
-// SetSkillId sets the SkillId field's value.
-func (s *SkillSummary) SetSkillId(v string) *SkillSummary {
-	s.SkillId = &v
-	return s
-}
-
-// SetSkillName sets the SkillName field's value.
-func (s *SkillSummary) SetSkillName(v string) *SkillSummary {
-	s.SkillName = &v
-	return s
-}
-
-// SetSupportsLinking sets the SupportsLinking field's value.
-func (s *SkillSummary) SetSupportsLinking(v bool) *SkillSummary {
-	s.SupportsLinking = &v
-	return s
 }
 
 // An object representing a sort criteria.
@@ -5547,18 +4527,6 @@ func (s *Sort) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Sort) SetKey(v string) *Sort {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Sort) SetValue(v SortValue) *Sort {
-	s.Value = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSyncRequest
 type StartDeviceSyncInput struct {
 	_ struct{} `type:"structure"`
@@ -5597,24 +4565,6 @@ func (s *StartDeviceSyncInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *StartDeviceSyncInput) SetDeviceArn(v string) *StartDeviceSyncInput {
-	s.DeviceArn = &v
-	return s
-}
-
-// SetFeatures sets the Features field's value.
-func (s *StartDeviceSyncInput) SetFeatures(v []Feature) *StartDeviceSyncInput {
-	s.Features = v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *StartDeviceSyncInput) SetRoomArn(v string) *StartDeviceSyncInput {
-	s.RoomArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSyncResponse
@@ -5674,18 +4624,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -5735,18 +4673,6 @@ func (s *TagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *TagResourceInput) SetArn(v string) *TagResourceInput {
-	s.Arn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/TagResourceResponse
@@ -5815,18 +4741,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *UntagResourceInput) SetArn(v string) *UntagResourceInput {
-	s.Arn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -5881,18 +4795,6 @@ func (s *UpdateDeviceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *UpdateDeviceInput) SetDeviceArn(v string) *UpdateDeviceInput {
-	s.DeviceArn = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *UpdateDeviceInput) SetDeviceName(v string) *UpdateDeviceInput {
-	s.DeviceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateDeviceResponse
@@ -5981,66 +4883,6 @@ func (s *UpdateProfileInput) Validate() error {
 	return nil
 }
 
-// SetAddress sets the Address field's value.
-func (s *UpdateProfileInput) SetAddress(v string) *UpdateProfileInput {
-	s.Address = &v
-	return s
-}
-
-// SetDistanceUnit sets the DistanceUnit field's value.
-func (s *UpdateProfileInput) SetDistanceUnit(v DistanceUnit) *UpdateProfileInput {
-	s.DistanceUnit = v
-	return s
-}
-
-// SetMaxVolumeLimit sets the MaxVolumeLimit field's value.
-func (s *UpdateProfileInput) SetMaxVolumeLimit(v int64) *UpdateProfileInput {
-	s.MaxVolumeLimit = &v
-	return s
-}
-
-// SetPSTNEnabled sets the PSTNEnabled field's value.
-func (s *UpdateProfileInput) SetPSTNEnabled(v bool) *UpdateProfileInput {
-	s.PSTNEnabled = &v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *UpdateProfileInput) SetProfileArn(v string) *UpdateProfileInput {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProfileName sets the ProfileName field's value.
-func (s *UpdateProfileInput) SetProfileName(v string) *UpdateProfileInput {
-	s.ProfileName = &v
-	return s
-}
-
-// SetSetupModeDisabled sets the SetupModeDisabled field's value.
-func (s *UpdateProfileInput) SetSetupModeDisabled(v bool) *UpdateProfileInput {
-	s.SetupModeDisabled = &v
-	return s
-}
-
-// SetTemperatureUnit sets the TemperatureUnit field's value.
-func (s *UpdateProfileInput) SetTemperatureUnit(v TemperatureUnit) *UpdateProfileInput {
-	s.TemperatureUnit = v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *UpdateProfileInput) SetTimezone(v string) *UpdateProfileInput {
-	s.Timezone = &v
-	return s
-}
-
-// SetWakeWord sets the WakeWord field's value.
-func (s *UpdateProfileInput) SetWakeWord(v WakeWord) *UpdateProfileInput {
-	s.WakeWord = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfileResponse
 type UpdateProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -6109,36 +4951,6 @@ func (s *UpdateRoomInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateRoomInput) SetDescription(v string) *UpdateRoomInput {
-	s.Description = &v
-	return s
-}
-
-// SetProfileArn sets the ProfileArn field's value.
-func (s *UpdateRoomInput) SetProfileArn(v string) *UpdateRoomInput {
-	s.ProfileArn = &v
-	return s
-}
-
-// SetProviderCalendarId sets the ProviderCalendarId field's value.
-func (s *UpdateRoomInput) SetProviderCalendarId(v string) *UpdateRoomInput {
-	s.ProviderCalendarId = &v
-	return s
-}
-
-// SetRoomArn sets the RoomArn field's value.
-func (s *UpdateRoomInput) SetRoomArn(v string) *UpdateRoomInput {
-	s.RoomArn = &v
-	return s
-}
-
-// SetRoomName sets the RoomName field's value.
-func (s *UpdateRoomInput) SetRoomName(v string) *UpdateRoomInput {
-	s.RoomName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateRoomResponse
 type UpdateRoomOutput struct {
 	_ struct{} `type:"structure"`
@@ -6201,24 +5013,6 @@ func (s *UpdateSkillGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateSkillGroupInput) SetDescription(v string) *UpdateSkillGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetSkillGroupArn sets the SkillGroupArn field's value.
-func (s *UpdateSkillGroupInput) SetSkillGroupArn(v string) *UpdateSkillGroupInput {
-	s.SkillGroupArn = &v
-	return s
-}
-
-// SetSkillGroupName sets the SkillGroupName field's value.
-func (s *UpdateSkillGroupInput) SetSkillGroupName(v string) *UpdateSkillGroupInput {
-	s.SkillGroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateSkillGroupResponse
 type UpdateSkillGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6273,42 +5067,6 @@ func (s UserData) String() string {
 // GoString returns the string representation
 func (s UserData) GoString() string {
 	return s.String()
-}
-
-// SetEmail sets the Email field's value.
-func (s *UserData) SetEmail(v string) *UserData {
-	s.Email = &v
-	return s
-}
-
-// SetEnrollmentId sets the EnrollmentId field's value.
-func (s *UserData) SetEnrollmentId(v string) *UserData {
-	s.EnrollmentId = &v
-	return s
-}
-
-// SetEnrollmentStatus sets the EnrollmentStatus field's value.
-func (s *UserData) SetEnrollmentStatus(v EnrollmentStatus) *UserData {
-	s.EnrollmentStatus = v
-	return s
-}
-
-// SetFirstName sets the FirstName field's value.
-func (s *UserData) SetFirstName(v string) *UserData {
-	s.FirstName = &v
-	return s
-}
-
-// SetLastName sets the LastName field's value.
-func (s *UserData) SetLastName(v string) *UserData {
-	s.LastName = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UserData) SetUserArn(v string) *UserData {
-	s.UserArn = &v
-	return s
 }
 
 type DeviceStatus string

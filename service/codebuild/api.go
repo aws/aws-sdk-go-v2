@@ -797,12 +797,6 @@ func (s *BatchDeleteBuildsInput) Validate() error {
 	return nil
 }
 
-// SetIds sets the Ids field's value.
-func (s *BatchDeleteBuildsInput) SetIds(v []string) *BatchDeleteBuildsInput {
-	s.Ids = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuildsOutput
 type BatchDeleteBuildsOutput struct {
 	_ struct{} `type:"structure"`
@@ -829,18 +823,6 @@ func (s BatchDeleteBuildsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchDeleteBuildsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuildsDeleted sets the BuildsDeleted field's value.
-func (s *BatchDeleteBuildsOutput) SetBuildsDeleted(v []string) *BatchDeleteBuildsOutput {
-	s.BuildsDeleted = v
-	return s
-}
-
-// SetBuildsNotDeleted sets the BuildsNotDeleted field's value.
-func (s *BatchDeleteBuildsOutput) SetBuildsNotDeleted(v []BuildNotDeleted) *BatchDeleteBuildsOutput {
-	s.BuildsNotDeleted = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildsInput
@@ -880,12 +862,6 @@ func (s *BatchGetBuildsInput) Validate() error {
 	return nil
 }
 
-// SetIds sets the Ids field's value.
-func (s *BatchGetBuildsInput) SetIds(v []string) *BatchGetBuildsInput {
-	s.Ids = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildsOutput
 type BatchGetBuildsOutput struct {
 	_ struct{} `type:"structure"`
@@ -912,18 +888,6 @@ func (s BatchGetBuildsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetBuildsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuilds sets the Builds field's value.
-func (s *BatchGetBuildsOutput) SetBuilds(v []Build) *BatchGetBuildsOutput {
-	s.Builds = v
-	return s
-}
-
-// SetBuildsNotFound sets the BuildsNotFound field's value.
-func (s *BatchGetBuildsOutput) SetBuildsNotFound(v []string) *BatchGetBuildsOutput {
-	s.BuildsNotFound = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjectsInput
@@ -963,12 +927,6 @@ func (s *BatchGetProjectsInput) Validate() error {
 	return nil
 }
 
-// SetNames sets the Names field's value.
-func (s *BatchGetProjectsInput) SetNames(v []string) *BatchGetProjectsInput {
-	s.Names = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjectsOutput
 type BatchGetProjectsOutput struct {
 	_ struct{} `type:"structure"`
@@ -995,18 +953,6 @@ func (s BatchGetProjectsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProjects sets the Projects field's value.
-func (s *BatchGetProjectsOutput) SetProjects(v []Project) *BatchGetProjectsOutput {
-	s.Projects = v
-	return s
-}
-
-// SetProjectsNotFound sets the ProjectsNotFound field's value.
-func (s *BatchGetProjectsOutput) SetProjectsNotFound(v []string) *BatchGetProjectsOutput {
-	s.ProjectsNotFound = v
-	return s
 }
 
 // Information about a build.
@@ -1108,120 +1054,6 @@ func (s Build) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Build) SetArn(v string) *Build {
-	s.Arn = &v
-	return s
-}
-
-// SetArtifacts sets the Artifacts field's value.
-func (s *Build) SetArtifacts(v *BuildArtifacts) *Build {
-	s.Artifacts = v
-	return s
-}
-
-// SetBuildComplete sets the BuildComplete field's value.
-func (s *Build) SetBuildComplete(v bool) *Build {
-	s.BuildComplete = &v
-	return s
-}
-
-// SetBuildStatus sets the BuildStatus field's value.
-func (s *Build) SetBuildStatus(v StatusType) *Build {
-	s.BuildStatus = v
-	return s
-}
-
-// SetCache sets the Cache field's value.
-func (s *Build) SetCache(v *ProjectCache) *Build {
-	s.Cache = v
-	return s
-}
-
-// SetCurrentPhase sets the CurrentPhase field's value.
-func (s *Build) SetCurrentPhase(v string) *Build {
-	s.CurrentPhase = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *Build) SetEndTime(v time.Time) *Build {
-	s.EndTime = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *Build) SetEnvironment(v *ProjectEnvironment) *Build {
-	s.Environment = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Build) SetId(v string) *Build {
-	s.Id = &v
-	return s
-}
-
-// SetInitiator sets the Initiator field's value.
-func (s *Build) SetInitiator(v string) *Build {
-	s.Initiator = &v
-	return s
-}
-
-// SetLogs sets the Logs field's value.
-func (s *Build) SetLogs(v *LogsLocation) *Build {
-	s.Logs = v
-	return s
-}
-
-// SetNetworkInterface sets the NetworkInterface field's value.
-func (s *Build) SetNetworkInterface(v *NetworkInterface) *Build {
-	s.NetworkInterface = v
-	return s
-}
-
-// SetPhases sets the Phases field's value.
-func (s *Build) SetPhases(v []BuildPhase) *Build {
-	s.Phases = v
-	return s
-}
-
-// SetProjectName sets the ProjectName field's value.
-func (s *Build) SetProjectName(v string) *Build {
-	s.ProjectName = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *Build) SetSource(v *ProjectSource) *Build {
-	s.Source = v
-	return s
-}
-
-// SetSourceVersion sets the SourceVersion field's value.
-func (s *Build) SetSourceVersion(v string) *Build {
-	s.SourceVersion = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Build) SetStartTime(v time.Time) *Build {
-	s.StartTime = &v
-	return s
-}
-
-// SetTimeoutInMinutes sets the TimeoutInMinutes field's value.
-func (s *Build) SetTimeoutInMinutes(v int64) *Build {
-	s.TimeoutInMinutes = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *Build) SetVpcConfig(v *VpcConfig) *Build {
-	s.VpcConfig = v
-	return s
-}
-
 // Information about build output artifacts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts
 type BuildArtifacts struct {
@@ -1259,24 +1091,6 @@ func (s BuildArtifacts) GoString() string {
 	return s.String()
 }
 
-// SetLocation sets the Location field's value.
-func (s *BuildArtifacts) SetLocation(v string) *BuildArtifacts {
-	s.Location = &v
-	return s
-}
-
-// SetMd5sum sets the Md5sum field's value.
-func (s *BuildArtifacts) SetMd5sum(v string) *BuildArtifacts {
-	s.Md5sum = &v
-	return s
-}
-
-// SetSha256sum sets the Sha256sum field's value.
-func (s *BuildArtifacts) SetSha256sum(v string) *BuildArtifacts {
-	s.Sha256sum = &v
-	return s
-}
-
 // Information about a build that could not be successfully deleted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildNotDeleted
 type BuildNotDeleted struct {
@@ -1297,18 +1111,6 @@ func (s BuildNotDeleted) String() string {
 // GoString returns the string representation
 func (s BuildNotDeleted) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *BuildNotDeleted) SetId(v string) *BuildNotDeleted {
-	s.Id = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *BuildNotDeleted) SetStatusCode(v string) *BuildNotDeleted {
-	s.StatusCode = &v
-	return s
 }
 
 // Information about a stage for a build.
@@ -1378,42 +1180,6 @@ func (s BuildPhase) String() string {
 // GoString returns the string representation
 func (s BuildPhase) GoString() string {
 	return s.String()
-}
-
-// SetContexts sets the Contexts field's value.
-func (s *BuildPhase) SetContexts(v []PhaseContext) *BuildPhase {
-	s.Contexts = v
-	return s
-}
-
-// SetDurationInSeconds sets the DurationInSeconds field's value.
-func (s *BuildPhase) SetDurationInSeconds(v int64) *BuildPhase {
-	s.DurationInSeconds = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *BuildPhase) SetEndTime(v time.Time) *BuildPhase {
-	s.EndTime = &v
-	return s
-}
-
-// SetPhaseStatus sets the PhaseStatus field's value.
-func (s *BuildPhase) SetPhaseStatus(v StatusType) *BuildPhase {
-	s.PhaseStatus = v
-	return s
-}
-
-// SetPhaseType sets the PhaseType field's value.
-func (s *BuildPhase) SetPhaseType(v BuildPhaseType) *BuildPhase {
-	s.PhaseType = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *BuildPhase) SetStartTime(v time.Time) *BuildPhase {
-	s.StartTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput
@@ -1558,78 +1324,6 @@ func (s *CreateProjectInput) Validate() error {
 	return nil
 }
 
-// SetArtifacts sets the Artifacts field's value.
-func (s *CreateProjectInput) SetArtifacts(v *ProjectArtifacts) *CreateProjectInput {
-	s.Artifacts = v
-	return s
-}
-
-// SetBadgeEnabled sets the BadgeEnabled field's value.
-func (s *CreateProjectInput) SetBadgeEnabled(v bool) *CreateProjectInput {
-	s.BadgeEnabled = &v
-	return s
-}
-
-// SetCache sets the Cache field's value.
-func (s *CreateProjectInput) SetCache(v *ProjectCache) *CreateProjectInput {
-	s.Cache = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateProjectInput) SetDescription(v string) *CreateProjectInput {
-	s.Description = &v
-	return s
-}
-
-// SetEncryptionKey sets the EncryptionKey field's value.
-func (s *CreateProjectInput) SetEncryptionKey(v string) *CreateProjectInput {
-	s.EncryptionKey = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *CreateProjectInput) SetEnvironment(v *ProjectEnvironment) *CreateProjectInput {
-	s.Environment = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *CreateProjectInput) SetServiceRole(v string) *CreateProjectInput {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *CreateProjectInput) SetSource(v *ProjectSource) *CreateProjectInput {
-	s.Source = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateProjectInput) SetTags(v []Tag) *CreateProjectInput {
-	s.Tags = v
-	return s
-}
-
-// SetTimeoutInMinutes sets the TimeoutInMinutes field's value.
-func (s *CreateProjectInput) SetTimeoutInMinutes(v int64) *CreateProjectInput {
-	s.TimeoutInMinutes = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *CreateProjectInput) SetVpcConfig(v *VpcConfig) *CreateProjectInput {
-	s.VpcConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectOutput
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -1653,12 +1347,6 @@ func (s CreateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProject sets the Project field's value.
-func (s *CreateProjectOutput) SetProject(v *Project) *CreateProjectOutput {
-	s.Project = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput
@@ -1698,12 +1386,6 @@ func (s *CreateWebhookInput) Validate() error {
 	return nil
 }
 
-// SetProjectName sets the ProjectName field's value.
-func (s *CreateWebhookInput) SetProjectName(v string) *CreateWebhookInput {
-	s.ProjectName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookOutput
 type CreateWebhookOutput struct {
 	_ struct{} `type:"structure"`
@@ -1728,12 +1410,6 @@ func (s CreateWebhookOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateWebhookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetWebhook sets the Webhook field's value.
-func (s *CreateWebhookOutput) SetWebhook(v *Webhook) *CreateWebhookOutput {
-	s.Webhook = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProjectInput
@@ -1771,12 +1447,6 @@ func (s *DeleteProjectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteProjectInput) SetName(v string) *DeleteProjectInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProjectOutput
@@ -1838,12 +1508,6 @@ func (s *DeleteWebhookInput) Validate() error {
 	return nil
 }
 
-// SetProjectName sets the ProjectName field's value.
-func (s *DeleteWebhookInput) SetProjectName(v string) *DeleteWebhookInput {
-	s.ProjectName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookOutput
 type DeleteWebhookOutput struct {
 	_ struct{} `type:"structure"`
@@ -1891,24 +1555,6 @@ func (s EnvironmentImage) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *EnvironmentImage) SetDescription(v string) *EnvironmentImage {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *EnvironmentImage) SetName(v string) *EnvironmentImage {
-	s.Name = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *EnvironmentImage) SetVersions(v []string) *EnvironmentImage {
-	s.Versions = v
-	return s
-}
-
 // A set of Docker images that are related by programming language and are managed
 // by AWS CodeBuild.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentLanguage
@@ -1932,18 +1578,6 @@ func (s EnvironmentLanguage) GoString() string {
 	return s.String()
 }
 
-// SetImages sets the Images field's value.
-func (s *EnvironmentLanguage) SetImages(v []EnvironmentImage) *EnvironmentLanguage {
-	s.Images = v
-	return s
-}
-
-// SetLanguage sets the Language field's value.
-func (s *EnvironmentLanguage) SetLanguage(v LanguageType) *EnvironmentLanguage {
-	s.Language = v
-	return s
-}
-
 // A set of Docker images that are related by platform and are managed by AWS
 // CodeBuild.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentPlatform
@@ -1965,18 +1599,6 @@ func (s EnvironmentPlatform) String() string {
 // GoString returns the string representation
 func (s EnvironmentPlatform) GoString() string {
 	return s.String()
-}
-
-// SetLanguages sets the Languages field's value.
-func (s *EnvironmentPlatform) SetLanguages(v []EnvironmentLanguage) *EnvironmentPlatform {
-	s.Languages = v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *EnvironmentPlatform) SetPlatform(v PlatformType) *EnvironmentPlatform {
-	s.Platform = v
-	return s
 }
 
 // Information about an environment variable for a build project or a build.
@@ -2039,24 +1661,6 @@ func (s *EnvironmentVariable) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *EnvironmentVariable) SetName(v string) *EnvironmentVariable {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *EnvironmentVariable) SetType(v EnvironmentVariableType) *EnvironmentVariable {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *EnvironmentVariable) SetValue(v string) *EnvironmentVariable {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheInput
 type InvalidateProjectCacheInput struct {
 	_ struct{} `type:"structure"`
@@ -2092,12 +1696,6 @@ func (s *InvalidateProjectCacheInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetProjectName sets the ProjectName field's value.
-func (s *InvalidateProjectCacheInput) SetProjectName(v string) *InvalidateProjectCacheInput {
-	s.ProjectName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheOutput
@@ -2174,24 +1772,6 @@ func (s *ListBuildsForProjectInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListBuildsForProjectInput) SetNextToken(v string) *ListBuildsForProjectInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjectName sets the ProjectName field's value.
-func (s *ListBuildsForProjectInput) SetProjectName(v string) *ListBuildsForProjectInput {
-	s.ProjectName = &v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListBuildsForProjectInput) SetSortOrder(v SortOrderType) *ListBuildsForProjectInput {
-	s.SortOrder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProjectOutput
 type ListBuildsForProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -2224,18 +1804,6 @@ func (s ListBuildsForProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIds sets the Ids field's value.
-func (s *ListBuildsForProjectOutput) SetIds(v []string) *ListBuildsForProjectOutput {
-	s.Ids = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBuildsForProjectOutput) SetNextToken(v string) *ListBuildsForProjectOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsInput
 type ListBuildsInput struct {
 	_ struct{} `type:"structure"`
@@ -2264,18 +1832,6 @@ func (s ListBuildsInput) String() string {
 // GoString returns the string representation
 func (s ListBuildsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBuildsInput) SetNextToken(v string) *ListBuildsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListBuildsInput) SetSortOrder(v SortOrderType) *ListBuildsInput {
-	s.SortOrder = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsOutput
@@ -2307,18 +1863,6 @@ func (s ListBuildsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBuildsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIds sets the Ids field's value.
-func (s *ListBuildsOutput) SetIds(v []string) *ListBuildsOutput {
-	s.Ids = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBuildsOutput) SetNextToken(v string) *ListBuildsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImagesInput
@@ -2360,12 +1904,6 @@ func (s ListCuratedEnvironmentImagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCuratedEnvironmentImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPlatforms sets the Platforms field's value.
-func (s *ListCuratedEnvironmentImagesOutput) SetPlatforms(v []EnvironmentPlatform) *ListCuratedEnvironmentImagesOutput {
-	s.Platforms = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjectsInput
@@ -2427,24 +1965,6 @@ func (s *ListProjectsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListProjectsInput) SetSortBy(v ProjectSortByType) *ListProjectsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListProjectsInput) SetSortOrder(v SortOrderType) *ListProjectsInput {
-	s.SortOrder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjectsOutput
 type ListProjectsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2477,18 +1997,6 @@ func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []string) *ListProjectsOutput {
-	s.Projects = v
-	return s
-}
-
 // Information about build logs in Amazon CloudWatch Logs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsLocation
 type LogsLocation struct {
@@ -2514,24 +2022,6 @@ func (s LogsLocation) GoString() string {
 	return s.String()
 }
 
-// SetDeepLink sets the DeepLink field's value.
-func (s *LogsLocation) SetDeepLink(v string) *LogsLocation {
-	s.DeepLink = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *LogsLocation) SetGroupName(v string) *LogsLocation {
-	s.GroupName = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *LogsLocation) SetStreamName(v string) *LogsLocation {
-	s.StreamName = &v
-	return s
-}
-
 // Describes a network interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/NetworkInterface
 type NetworkInterface struct {
@@ -2552,18 +2042,6 @@ func (s NetworkInterface) String() string {
 // GoString returns the string representation
 func (s NetworkInterface) GoString() string {
 	return s.String()
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *NetworkInterface) SetNetworkInterfaceId(v string) *NetworkInterface {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *NetworkInterface) SetSubnetId(v string) *NetworkInterface {
-	s.SubnetId = &v
-	return s
 }
 
 // Additional information about a build phase that has an error. You can use
@@ -2588,18 +2066,6 @@ func (s PhaseContext) String() string {
 // GoString returns the string representation
 func (s PhaseContext) GoString() string {
 	return s.String()
-}
-
-// SetMessage sets the Message field's value.
-func (s *PhaseContext) SetMessage(v string) *PhaseContext {
-	s.Message = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *PhaseContext) SetStatusCode(v string) *PhaseContext {
-	s.StatusCode = &v
-	return s
 }
 
 // Information about a build project.
@@ -2677,102 +2143,6 @@ func (s Project) String() string {
 // GoString returns the string representation
 func (s Project) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Project) SetArn(v string) *Project {
-	s.Arn = &v
-	return s
-}
-
-// SetArtifacts sets the Artifacts field's value.
-func (s *Project) SetArtifacts(v *ProjectArtifacts) *Project {
-	s.Artifacts = v
-	return s
-}
-
-// SetBadge sets the Badge field's value.
-func (s *Project) SetBadge(v *ProjectBadge) *Project {
-	s.Badge = v
-	return s
-}
-
-// SetCache sets the Cache field's value.
-func (s *Project) SetCache(v *ProjectCache) *Project {
-	s.Cache = v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Project) SetCreated(v time.Time) *Project {
-	s.Created = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Project) SetDescription(v string) *Project {
-	s.Description = &v
-	return s
-}
-
-// SetEncryptionKey sets the EncryptionKey field's value.
-func (s *Project) SetEncryptionKey(v string) *Project {
-	s.EncryptionKey = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *Project) SetEnvironment(v *ProjectEnvironment) *Project {
-	s.Environment = v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *Project) SetLastModified(v time.Time) *Project {
-	s.LastModified = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Project) SetName(v string) *Project {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *Project) SetServiceRole(v string) *Project {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *Project) SetSource(v *ProjectSource) *Project {
-	s.Source = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Project) SetTags(v []Tag) *Project {
-	s.Tags = v
-	return s
-}
-
-// SetTimeoutInMinutes sets the TimeoutInMinutes field's value.
-func (s *Project) SetTimeoutInMinutes(v int64) *Project {
-	s.TimeoutInMinutes = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *Project) SetVpcConfig(v *VpcConfig) *Project {
-	s.VpcConfig = v
-	return s
-}
-
-// SetWebhook sets the Webhook field's value.
-func (s *Project) SetWebhook(v *Webhook) *Project {
-	s.Webhook = v
-	return s
 }
 
 // Information about the build output artifacts for the build project.
@@ -2904,42 +2274,6 @@ func (s *ProjectArtifacts) Validate() error {
 	return nil
 }
 
-// SetLocation sets the Location field's value.
-func (s *ProjectArtifacts) SetLocation(v string) *ProjectArtifacts {
-	s.Location = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProjectArtifacts) SetName(v string) *ProjectArtifacts {
-	s.Name = &v
-	return s
-}
-
-// SetNamespaceType sets the NamespaceType field's value.
-func (s *ProjectArtifacts) SetNamespaceType(v ArtifactNamespace) *ProjectArtifacts {
-	s.NamespaceType = v
-	return s
-}
-
-// SetPackaging sets the Packaging field's value.
-func (s *ProjectArtifacts) SetPackaging(v ArtifactPackaging) *ProjectArtifacts {
-	s.Packaging = v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *ProjectArtifacts) SetPath(v string) *ProjectArtifacts {
-	s.Path = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProjectArtifacts) SetType(v ArtifactsType) *ProjectArtifacts {
-	s.Type = v
-	return s
-}
-
 // Information about the build badge for the build project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBadge
 type ProjectBadge struct {
@@ -2962,18 +2296,6 @@ func (s ProjectBadge) String() string {
 // GoString returns the string representation
 func (s ProjectBadge) GoString() string {
 	return s.String()
-}
-
-// SetBadgeEnabled sets the BadgeEnabled field's value.
-func (s *ProjectBadge) SetBadgeEnabled(v bool) *ProjectBadge {
-	s.BadgeEnabled = &v
-	return s
-}
-
-// SetBadgeRequestUrl sets the BadgeRequestUrl field's value.
-func (s *ProjectBadge) SetBadgeRequestUrl(v string) *ProjectBadge {
-	s.BadgeRequestUrl = &v
-	return s
 }
 
 // Information about the cache for the build project.
@@ -3019,18 +2341,6 @@ func (s *ProjectCache) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLocation sets the Location field's value.
-func (s *ProjectCache) SetLocation(v string) *ProjectCache {
-	s.Location = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProjectCache) SetType(v CacheType) *ProjectCache {
-	s.Type = v
-	return s
 }
 
 // Information about the build environment of the build project.
@@ -3120,36 +2430,6 @@ func (s *ProjectEnvironment) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComputeType sets the ComputeType field's value.
-func (s *ProjectEnvironment) SetComputeType(v ComputeType) *ProjectEnvironment {
-	s.ComputeType = v
-	return s
-}
-
-// SetEnvironmentVariables sets the EnvironmentVariables field's value.
-func (s *ProjectEnvironment) SetEnvironmentVariables(v []EnvironmentVariable) *ProjectEnvironment {
-	s.EnvironmentVariables = v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ProjectEnvironment) SetImage(v string) *ProjectEnvironment {
-	s.Image = &v
-	return s
-}
-
-// SetPrivilegedMode sets the PrivilegedMode field's value.
-func (s *ProjectEnvironment) SetPrivilegedMode(v bool) *ProjectEnvironment {
-	s.PrivilegedMode = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProjectEnvironment) SetType(v EnvironmentType) *ProjectEnvironment {
-	s.Type = v
-	return s
 }
 
 // Information about the build input source code for the build project.
@@ -3259,30 +2539,6 @@ func (s *ProjectSource) Validate() error {
 	return nil
 }
 
-// SetAuth sets the Auth field's value.
-func (s *ProjectSource) SetAuth(v *SourceAuth) *ProjectSource {
-	s.Auth = v
-	return s
-}
-
-// SetBuildspec sets the Buildspec field's value.
-func (s *ProjectSource) SetBuildspec(v string) *ProjectSource {
-	s.Buildspec = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *ProjectSource) SetLocation(v string) *ProjectSource {
-	s.Location = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProjectSource) SetType(v SourceType) *ProjectSource {
-	s.Type = v
-	return s
-}
-
 // Information about the authorization settings for AWS CodeBuild to access
 // the source code to be built.
 //
@@ -3324,18 +2580,6 @@ func (s *SourceAuth) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResource sets the Resource field's value.
-func (s *SourceAuth) SetResource(v string) *SourceAuth {
-	s.Resource = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *SourceAuth) SetType(v SourceAuthType) *SourceAuth {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput
@@ -3427,42 +2671,6 @@ func (s *StartBuildInput) Validate() error {
 	return nil
 }
 
-// SetArtifactsOverride sets the ArtifactsOverride field's value.
-func (s *StartBuildInput) SetArtifactsOverride(v *ProjectArtifacts) *StartBuildInput {
-	s.ArtifactsOverride = v
-	return s
-}
-
-// SetBuildspecOverride sets the BuildspecOverride field's value.
-func (s *StartBuildInput) SetBuildspecOverride(v string) *StartBuildInput {
-	s.BuildspecOverride = &v
-	return s
-}
-
-// SetEnvironmentVariablesOverride sets the EnvironmentVariablesOverride field's value.
-func (s *StartBuildInput) SetEnvironmentVariablesOverride(v []EnvironmentVariable) *StartBuildInput {
-	s.EnvironmentVariablesOverride = v
-	return s
-}
-
-// SetProjectName sets the ProjectName field's value.
-func (s *StartBuildInput) SetProjectName(v string) *StartBuildInput {
-	s.ProjectName = &v
-	return s
-}
-
-// SetSourceVersion sets the SourceVersion field's value.
-func (s *StartBuildInput) SetSourceVersion(v string) *StartBuildInput {
-	s.SourceVersion = &v
-	return s
-}
-
-// SetTimeoutInMinutesOverride sets the TimeoutInMinutesOverride field's value.
-func (s *StartBuildInput) SetTimeoutInMinutesOverride(v int64) *StartBuildInput {
-	s.TimeoutInMinutesOverride = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildOutput
 type StartBuildOutput struct {
 	_ struct{} `type:"structure"`
@@ -3486,12 +2694,6 @@ func (s StartBuildOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartBuildOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuild sets the Build field's value.
-func (s *StartBuildOutput) SetBuild(v *Build) *StartBuildOutput {
-	s.Build = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildInput
@@ -3531,12 +2733,6 @@ func (s *StopBuildInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *StopBuildInput) SetId(v string) *StopBuildInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildOutput
 type StopBuildOutput struct {
 	_ struct{} `type:"structure"`
@@ -3560,12 +2756,6 @@ func (s StopBuildOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopBuildOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuild sets the Build field's value.
-func (s *StopBuildOutput) SetBuild(v *Build) *StopBuildOutput {
-	s.Build = v
-	return s
 }
 
 // A tag, consisting of a key and a value.
@@ -3606,18 +2796,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput
@@ -3747,78 +2925,6 @@ func (s *UpdateProjectInput) Validate() error {
 	return nil
 }
 
-// SetArtifacts sets the Artifacts field's value.
-func (s *UpdateProjectInput) SetArtifacts(v *ProjectArtifacts) *UpdateProjectInput {
-	s.Artifacts = v
-	return s
-}
-
-// SetBadgeEnabled sets the BadgeEnabled field's value.
-func (s *UpdateProjectInput) SetBadgeEnabled(v bool) *UpdateProjectInput {
-	s.BadgeEnabled = &v
-	return s
-}
-
-// SetCache sets the Cache field's value.
-func (s *UpdateProjectInput) SetCache(v *ProjectCache) *UpdateProjectInput {
-	s.Cache = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateProjectInput) SetDescription(v string) *UpdateProjectInput {
-	s.Description = &v
-	return s
-}
-
-// SetEncryptionKey sets the EncryptionKey field's value.
-func (s *UpdateProjectInput) SetEncryptionKey(v string) *UpdateProjectInput {
-	s.EncryptionKey = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *UpdateProjectInput) SetEnvironment(v *ProjectEnvironment) *UpdateProjectInput {
-	s.Environment = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateProjectInput) SetName(v string) *UpdateProjectInput {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *UpdateProjectInput) SetServiceRole(v string) *UpdateProjectInput {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *UpdateProjectInput) SetSource(v *ProjectSource) *UpdateProjectInput {
-	s.Source = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *UpdateProjectInput) SetTags(v []Tag) *UpdateProjectInput {
-	s.Tags = v
-	return s
-}
-
-// SetTimeoutInMinutes sets the TimeoutInMinutes field's value.
-func (s *UpdateProjectInput) SetTimeoutInMinutes(v int64) *UpdateProjectInput {
-	s.TimeoutInMinutes = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *UpdateProjectInput) SetVpcConfig(v *VpcConfig) *UpdateProjectInput {
-	s.VpcConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectOutput
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -3842,12 +2948,6 @@ func (s UpdateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProject sets the Project field's value.
-func (s *UpdateProjectOutput) SetProject(v *Project) *UpdateProjectOutput {
-	s.Project = v
-	return s
 }
 
 // Information about the VPC configuration that AWS CodeBuild will access.
@@ -3888,24 +2988,6 @@ func (s *VpcConfig) Validate() error {
 	return nil
 }
 
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfig) SetSecurityGroupIds(v []string) *VpcConfig {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnets sets the Subnets field's value.
-func (s *VpcConfig) SetSubnets(v []string) *VpcConfig {
-	s.Subnets = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *VpcConfig) SetVpcId(v string) *VpcConfig {
-	s.VpcId = &v
-	return s
-}
-
 // Information about a webhook in GitHub that connects repository events to
 // a build project in AWS CodeBuild.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook
@@ -3924,12 +3006,6 @@ func (s Webhook) String() string {
 // GoString returns the string representation
 func (s Webhook) GoString() string {
 	return s.String()
-}
-
-// SetUrl sets the Url field's value.
-func (s *Webhook) SetUrl(v string) *Webhook {
-	s.Url = &v
-	return s
 }
 
 type ArtifactNamespace string

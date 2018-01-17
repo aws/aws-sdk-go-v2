@@ -2637,18 +2637,6 @@ func (s AgeRange) GoString() string {
 	return s.String()
 }
 
-// SetHigh sets the High field's value.
-func (s *AgeRange) SetHigh(v int64) *AgeRange {
-	s.High = &v
-	return s
-}
-
-// SetLow sets the Low field's value.
-func (s *AgeRange) SetLow(v int64) *AgeRange {
-	s.Low = &v
-	return s
-}
-
 // Indicates whether or not the face has a beard, and the confidence level in
 // the determination.
 type Beard struct {
@@ -2669,18 +2657,6 @@ func (s Beard) String() string {
 // GoString returns the string representation
 func (s Beard) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Beard) SetConfidence(v float64) *Beard {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Beard) SetValue(v bool) *Beard {
-	s.Value = &v
-	return s
 }
 
 // Identifies the bounding box around the object, face or text. The left (x-coordinate)
@@ -2729,30 +2705,6 @@ func (s BoundingBox) GoString() string {
 	return s.String()
 }
 
-// SetHeight sets the Height field's value.
-func (s *BoundingBox) SetHeight(v float64) *BoundingBox {
-	s.Height = &v
-	return s
-}
-
-// SetLeft sets the Left field's value.
-func (s *BoundingBox) SetLeft(v float64) *BoundingBox {
-	s.Left = &v
-	return s
-}
-
-// SetTop sets the Top field's value.
-func (s *BoundingBox) SetTop(v float64) *BoundingBox {
-	s.Top = &v
-	return s
-}
-
-// SetWidth sets the Width field's value.
-func (s *BoundingBox) SetWidth(v float64) *BoundingBox {
-	s.Width = &v
-	return s
-}
-
 // Provides information about a celebrity recognized by the operation.
 type Celebrity struct {
 	_ struct{} `type:"structure"`
@@ -2784,36 +2736,6 @@ func (s Celebrity) String() string {
 // GoString returns the string representation
 func (s Celebrity) GoString() string {
 	return s.String()
-}
-
-// SetFace sets the Face field's value.
-func (s *Celebrity) SetFace(v *ComparedFace) *Celebrity {
-	s.Face = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Celebrity) SetId(v string) *Celebrity {
-	s.Id = &v
-	return s
-}
-
-// SetMatchConfidence sets the MatchConfidence field's value.
-func (s *Celebrity) SetMatchConfidence(v float64) *Celebrity {
-	s.MatchConfidence = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Celebrity) SetName(v string) *Celebrity {
-	s.Name = &v
-	return s
-}
-
-// SetUrls sets the Urls field's value.
-func (s *Celebrity) SetUrls(v []string) *Celebrity {
-	s.Urls = v
-	return s
 }
 
 // Information about a recognized celebrity.
@@ -2850,42 +2772,6 @@ func (s CelebrityDetail) GoString() string {
 	return s.String()
 }
 
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *CelebrityDetail) SetBoundingBox(v *BoundingBox) *CelebrityDetail {
-	s.BoundingBox = v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *CelebrityDetail) SetConfidence(v float64) *CelebrityDetail {
-	s.Confidence = &v
-	return s
-}
-
-// SetFace sets the Face field's value.
-func (s *CelebrityDetail) SetFace(v *FaceDetail) *CelebrityDetail {
-	s.Face = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CelebrityDetail) SetId(v string) *CelebrityDetail {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CelebrityDetail) SetName(v string) *CelebrityDetail {
-	s.Name = &v
-	return s
-}
-
-// SetUrls sets the Urls field's value.
-func (s *CelebrityDetail) SetUrls(v []string) *CelebrityDetail {
-	s.Urls = v
-	return s
-}
-
 // Information about a detected celebrity and the time the celebrity was detected
 // in a stored video. For more information, see .
 type CelebrityRecognition struct {
@@ -2907,18 +2793,6 @@ func (s CelebrityRecognition) String() string {
 // GoString returns the string representation
 func (s CelebrityRecognition) GoString() string {
 	return s.String()
-}
-
-// SetCelebrity sets the Celebrity field's value.
-func (s *CelebrityRecognition) SetCelebrity(v *CelebrityDetail) *CelebrityRecognition {
-	s.Celebrity = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *CelebrityRecognition) SetTimestamp(v int64) *CelebrityRecognition {
-	s.Timestamp = &v
-	return s
 }
 
 type CompareFacesInput struct {
@@ -2981,24 +2855,6 @@ func (s *CompareFacesInput) Validate() error {
 	return nil
 }
 
-// SetSimilarityThreshold sets the SimilarityThreshold field's value.
-func (s *CompareFacesInput) SetSimilarityThreshold(v float64) *CompareFacesInput {
-	s.SimilarityThreshold = &v
-	return s
-}
-
-// SetSourceImage sets the SourceImage field's value.
-func (s *CompareFacesInput) SetSourceImage(v *Image) *CompareFacesInput {
-	s.SourceImage = v
-	return s
-}
-
-// SetTargetImage sets the TargetImage field's value.
-func (s *CompareFacesInput) SetTargetImage(v *Image) *CompareFacesInput {
-	s.TargetImage = v
-	return s
-}
-
 // Provides information about a face in a target image that matches the source
 // image face analysed by CompareFaces. The Face property contains the bounding
 // box of the face in the target image. The Similarity property is the confidence
@@ -3022,18 +2878,6 @@ func (s CompareFacesMatch) String() string {
 // GoString returns the string representation
 func (s CompareFacesMatch) GoString() string {
 	return s.String()
-}
-
-// SetFace sets the Face field's value.
-func (s *CompareFacesMatch) SetFace(v *ComparedFace) *CompareFacesMatch {
-	s.Face = v
-	return s
-}
-
-// SetSimilarity sets the Similarity field's value.
-func (s *CompareFacesMatch) SetSimilarity(v float64) *CompareFacesMatch {
-	s.Similarity = &v
-	return s
 }
 
 type CompareFacesOutput struct {
@@ -3097,36 +2941,6 @@ func (s CompareFacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFaceMatches sets the FaceMatches field's value.
-func (s *CompareFacesOutput) SetFaceMatches(v []CompareFacesMatch) *CompareFacesOutput {
-	s.FaceMatches = v
-	return s
-}
-
-// SetSourceImageFace sets the SourceImageFace field's value.
-func (s *CompareFacesOutput) SetSourceImageFace(v *ComparedSourceImageFace) *CompareFacesOutput {
-	s.SourceImageFace = v
-	return s
-}
-
-// SetSourceImageOrientationCorrection sets the SourceImageOrientationCorrection field's value.
-func (s *CompareFacesOutput) SetSourceImageOrientationCorrection(v OrientationCorrection) *CompareFacesOutput {
-	s.SourceImageOrientationCorrection = v
-	return s
-}
-
-// SetTargetImageOrientationCorrection sets the TargetImageOrientationCorrection field's value.
-func (s *CompareFacesOutput) SetTargetImageOrientationCorrection(v OrientationCorrection) *CompareFacesOutput {
-	s.TargetImageOrientationCorrection = v
-	return s
-}
-
-// SetUnmatchedFaces sets the UnmatchedFaces field's value.
-func (s *CompareFacesOutput) SetUnmatchedFaces(v []ComparedFace) *CompareFacesOutput {
-	s.UnmatchedFaces = v
-	return s
-}
-
 // Provides face metadata for target image faces that are analysed by CompareFaces
 // and RecognizeCelebrities.
 type ComparedFace struct {
@@ -3158,36 +2972,6 @@ func (s ComparedFace) GoString() string {
 	return s.String()
 }
 
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *ComparedFace) SetBoundingBox(v *BoundingBox) *ComparedFace {
-	s.BoundingBox = v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *ComparedFace) SetConfidence(v float64) *ComparedFace {
-	s.Confidence = &v
-	return s
-}
-
-// SetLandmarks sets the Landmarks field's value.
-func (s *ComparedFace) SetLandmarks(v []Landmark) *ComparedFace {
-	s.Landmarks = v
-	return s
-}
-
-// SetPose sets the Pose field's value.
-func (s *ComparedFace) SetPose(v *Pose) *ComparedFace {
-	s.Pose = v
-	return s
-}
-
-// SetQuality sets the Quality field's value.
-func (s *ComparedFace) SetQuality(v *ImageQuality) *ComparedFace {
-	s.Quality = v
-	return s
-}
-
 // Type that describes the face Amazon Rekognition chose to compare with the
 // faces in the target. This contains a bounding box for the selected face and
 // confidence level that the bounding box contains a face. Note that Amazon
@@ -3212,18 +2996,6 @@ func (s ComparedSourceImageFace) GoString() string {
 	return s.String()
 }
 
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *ComparedSourceImageFace) SetBoundingBox(v *BoundingBox) *ComparedSourceImageFace {
-	s.BoundingBox = v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *ComparedSourceImageFace) SetConfidence(v float64) *ComparedSourceImageFace {
-	s.Confidence = &v
-	return s
-}
-
 // Information about a moderation label detection in a stored video.
 type ContentModerationDetection struct {
 	_ struct{} `type:"structure"`
@@ -3244,18 +3016,6 @@ func (s ContentModerationDetection) String() string {
 // GoString returns the string representation
 func (s ContentModerationDetection) GoString() string {
 	return s.String()
-}
-
-// SetModerationLabel sets the ModerationLabel field's value.
-func (s *ContentModerationDetection) SetModerationLabel(v *ModerationLabel) *ContentModerationDetection {
-	s.ModerationLabel = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *ContentModerationDetection) SetTimestamp(v int64) *ContentModerationDetection {
-	s.Timestamp = &v
-	return s
 }
 
 type CreateCollectionInput struct {
@@ -3294,12 +3054,6 @@ func (s *CreateCollectionInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *CreateCollectionInput) SetCollectionId(v string) *CreateCollectionInput {
-	s.CollectionId = &v
-	return s
-}
-
 type CreateCollectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3330,24 +3084,6 @@ func (s CreateCollectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCollectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCollectionArn sets the CollectionArn field's value.
-func (s *CreateCollectionOutput) SetCollectionArn(v string) *CreateCollectionOutput {
-	s.CollectionArn = &v
-	return s
-}
-
-// SetFaceModelVersion sets the FaceModelVersion field's value.
-func (s *CreateCollectionOutput) SetFaceModelVersion(v string) *CreateCollectionOutput {
-	s.FaceModelVersion = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *CreateCollectionOutput) SetStatusCode(v int64) *CreateCollectionOutput {
-	s.StatusCode = &v
-	return s
 }
 
 type CreateStreamProcessorInput struct {
@@ -3432,36 +3168,6 @@ func (s *CreateStreamProcessorInput) Validate() error {
 	return nil
 }
 
-// SetInput sets the Input field's value.
-func (s *CreateStreamProcessorInput) SetInput(v *StreamProcessorInput) *CreateStreamProcessorInput {
-	s.Input = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateStreamProcessorInput) SetName(v string) *CreateStreamProcessorInput {
-	s.Name = &v
-	return s
-}
-
-// SetOutput sets the Output field's value.
-func (s *CreateStreamProcessorInput) SetOutput(v *StreamProcessorOutput) *CreateStreamProcessorInput {
-	s.Output = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateStreamProcessorInput) SetRoleArn(v string) *CreateStreamProcessorInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *CreateStreamProcessorInput) SetSettings(v *StreamProcessorSettings) *CreateStreamProcessorInput {
-	s.Settings = v
-	return s
-}
-
 type CreateStreamProcessorOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3484,12 +3190,6 @@ func (s CreateStreamProcessorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStreamProcessorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStreamProcessorArn sets the StreamProcessorArn field's value.
-func (s *CreateStreamProcessorOutput) SetStreamProcessorArn(v string) *CreateStreamProcessorOutput {
-	s.StreamProcessorArn = &v
-	return s
 }
 
 type DeleteCollectionInput struct {
@@ -3528,12 +3228,6 @@ func (s *DeleteCollectionInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *DeleteCollectionInput) SetCollectionId(v string) *DeleteCollectionInput {
-	s.CollectionId = &v
-	return s
-}
-
 type DeleteCollectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3556,12 +3250,6 @@ func (s DeleteCollectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCollectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *DeleteCollectionOutput) SetStatusCode(v int64) *DeleteCollectionOutput {
-	s.StatusCode = &v
-	return s
 }
 
 type DeleteFacesInput struct {
@@ -3612,18 +3300,6 @@ func (s *DeleteFacesInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *DeleteFacesInput) SetCollectionId(v string) *DeleteFacesInput {
-	s.CollectionId = &v
-	return s
-}
-
-// SetFaceIds sets the FaceIds field's value.
-func (s *DeleteFacesInput) SetFaceIds(v []string) *DeleteFacesInput {
-	s.FaceIds = v
-	return s
-}
-
 type DeleteFacesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3646,12 +3322,6 @@ func (s DeleteFacesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteFacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletedFaces sets the DeletedFaces field's value.
-func (s *DeleteFacesOutput) SetDeletedFaces(v []string) *DeleteFacesOutput {
-	s.DeletedFaces = v
-	return s
 }
 
 type DeleteStreamProcessorInput struct {
@@ -3688,12 +3358,6 @@ func (s *DeleteStreamProcessorInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteStreamProcessorInput) SetName(v string) *DeleteStreamProcessorInput {
-	s.Name = &v
-	return s
 }
 
 type DeleteStreamProcessorOutput struct {
@@ -3753,12 +3417,6 @@ func (s *DescribeStreamProcessorInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DescribeStreamProcessorInput) SetName(v string) *DescribeStreamProcessorInput {
-	s.Name = &v
-	return s
-}
-
 type DescribeStreamProcessorOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3814,66 +3472,6 @@ func (s DescribeStreamProcessorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *DescribeStreamProcessorOutput) SetCreationTimestamp(v time.Time) *DescribeStreamProcessorOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *DescribeStreamProcessorOutput) SetInput(v *StreamProcessorInput) *DescribeStreamProcessorOutput {
-	s.Input = v
-	return s
-}
-
-// SetLastUpdateTimestamp sets the LastUpdateTimestamp field's value.
-func (s *DescribeStreamProcessorOutput) SetLastUpdateTimestamp(v time.Time) *DescribeStreamProcessorOutput {
-	s.LastUpdateTimestamp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeStreamProcessorOutput) SetName(v string) *DescribeStreamProcessorOutput {
-	s.Name = &v
-	return s
-}
-
-// SetOutput sets the Output field's value.
-func (s *DescribeStreamProcessorOutput) SetOutput(v *StreamProcessorOutput) *DescribeStreamProcessorOutput {
-	s.Output = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeStreamProcessorOutput) SetRoleArn(v string) *DescribeStreamProcessorOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *DescribeStreamProcessorOutput) SetSettings(v *StreamProcessorSettings) *DescribeStreamProcessorOutput {
-	s.Settings = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeStreamProcessorOutput) SetStatus(v StreamProcessorStatus) *DescribeStreamProcessorOutput {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *DescribeStreamProcessorOutput) SetStatusMessage(v string) *DescribeStreamProcessorOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetStreamProcessorArn sets the StreamProcessorArn field's value.
-func (s *DescribeStreamProcessorOutput) SetStreamProcessorArn(v string) *DescribeStreamProcessorOutput {
-	s.StreamProcessorArn = &v
-	return s
-}
-
 type DetectFacesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3925,18 +3523,6 @@ func (s *DetectFacesInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *DetectFacesInput) SetAttributes(v []Attribute) *DetectFacesInput {
-	s.Attributes = v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *DetectFacesInput) SetImage(v *Image) *DetectFacesInput {
-	s.Image = v
-	return s
-}
-
 type DetectFacesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -3972,18 +3558,6 @@ func (s DetectFacesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetectFacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFaceDetails sets the FaceDetails field's value.
-func (s *DetectFacesOutput) SetFaceDetails(v []FaceDetail) *DetectFacesOutput {
-	s.FaceDetails = v
-	return s
-}
-
-// SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *DetectFacesOutput) SetOrientationCorrection(v OrientationCorrection) *DetectFacesOutput {
-	s.OrientationCorrection = v
-	return s
 }
 
 type DetectLabelsInput struct {
@@ -4037,24 +3611,6 @@ func (s *DetectLabelsInput) Validate() error {
 	return nil
 }
 
-// SetImage sets the Image field's value.
-func (s *DetectLabelsInput) SetImage(v *Image) *DetectLabelsInput {
-	s.Image = v
-	return s
-}
-
-// SetMaxLabels sets the MaxLabels field's value.
-func (s *DetectLabelsInput) SetMaxLabels(v int64) *DetectLabelsInput {
-	s.MaxLabels = &v
-	return s
-}
-
-// SetMinConfidence sets the MinConfidence field's value.
-func (s *DetectLabelsInput) SetMinConfidence(v float64) *DetectLabelsInput {
-	s.MinConfidence = &v
-	return s
-}
-
 type DetectLabelsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4087,18 +3643,6 @@ func (s DetectLabelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetectLabelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLabels sets the Labels field's value.
-func (s *DetectLabelsOutput) SetLabels(v []Label) *DetectLabelsOutput {
-	s.Labels = v
-	return s
-}
-
-// SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *DetectLabelsOutput) SetOrientationCorrection(v OrientationCorrection) *DetectLabelsOutput {
-	s.OrientationCorrection = v
-	return s
 }
 
 type DetectModerationLabelsInput struct {
@@ -4149,18 +3693,6 @@ func (s *DetectModerationLabelsInput) Validate() error {
 	return nil
 }
 
-// SetImage sets the Image field's value.
-func (s *DetectModerationLabelsInput) SetImage(v *Image) *DetectModerationLabelsInput {
-	s.Image = v
-	return s
-}
-
-// SetMinConfidence sets the MinConfidence field's value.
-func (s *DetectModerationLabelsInput) SetMinConfidence(v float64) *DetectModerationLabelsInput {
-	s.MinConfidence = &v
-	return s
-}
-
 type DetectModerationLabelsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4184,12 +3716,6 @@ func (s DetectModerationLabelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetectModerationLabelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetModerationLabels sets the ModerationLabels field's value.
-func (s *DetectModerationLabelsOutput) SetModerationLabels(v []ModerationLabel) *DetectModerationLabelsOutput {
-	s.ModerationLabels = v
-	return s
 }
 
 type DetectTextInput struct {
@@ -4231,12 +3757,6 @@ func (s *DetectTextInput) Validate() error {
 	return nil
 }
 
-// SetImage sets the Image field's value.
-func (s *DetectTextInput) SetImage(v *Image) *DetectTextInput {
-	s.Image = v
-	return s
-}
-
 type DetectTextOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4261,12 +3781,6 @@ func (s DetectTextOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTextDetections sets the TextDetections field's value.
-func (s *DetectTextOutput) SetTextDetections(v []TextDetection) *DetectTextOutput {
-	s.TextDetections = v
-	return s
-}
-
 // The emotions detected on the face, and the confidence level in the determination.
 // For example, HAPPY, SAD, and ANGRY.
 type Emotion struct {
@@ -4287,18 +3801,6 @@ func (s Emotion) String() string {
 // GoString returns the string representation
 func (s Emotion) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Emotion) SetConfidence(v float64) *Emotion {
-	s.Confidence = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Emotion) SetType(v EmotionName) *Emotion {
-	s.Type = v
-	return s
 }
 
 // Indicates whether or not the eyes on the face are open, and the confidence
@@ -4323,18 +3825,6 @@ func (s EyeOpen) GoString() string {
 	return s.String()
 }
 
-// SetConfidence sets the Confidence field's value.
-func (s *EyeOpen) SetConfidence(v float64) *EyeOpen {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *EyeOpen) SetValue(v bool) *EyeOpen {
-	s.Value = &v
-	return s
-}
-
 // Indicates whether or not the face is wearing eye glasses, and the confidence
 // level in the determination.
 type Eyeglasses struct {
@@ -4355,18 +3845,6 @@ func (s Eyeglasses) String() string {
 // GoString returns the string representation
 func (s Eyeglasses) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Eyeglasses) SetConfidence(v float64) *Eyeglasses {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Eyeglasses) SetValue(v bool) *Eyeglasses {
-	s.Value = &v
-	return s
 }
 
 // Describes the face properties such as the bounding box, face ID, image ID
@@ -4399,36 +3877,6 @@ func (s Face) String() string {
 // GoString returns the string representation
 func (s Face) GoString() string {
 	return s.String()
-}
-
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *Face) SetBoundingBox(v *BoundingBox) *Face {
-	s.BoundingBox = v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Face) SetConfidence(v float64) *Face {
-	s.Confidence = &v
-	return s
-}
-
-// SetExternalImageId sets the ExternalImageId field's value.
-func (s *Face) SetExternalImageId(v string) *Face {
-	s.ExternalImageId = &v
-	return s
-}
-
-// SetFaceId sets the FaceId field's value.
-func (s *Face) SetFaceId(v string) *Face {
-	s.FaceId = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *Face) SetImageId(v string) *Face {
-	s.ImageId = &v
-	return s
 }
 
 // Structure containing attributes of the face that the algorithm detected.
@@ -4501,96 +3949,6 @@ func (s FaceDetail) GoString() string {
 	return s.String()
 }
 
-// SetAgeRange sets the AgeRange field's value.
-func (s *FaceDetail) SetAgeRange(v *AgeRange) *FaceDetail {
-	s.AgeRange = v
-	return s
-}
-
-// SetBeard sets the Beard field's value.
-func (s *FaceDetail) SetBeard(v *Beard) *FaceDetail {
-	s.Beard = v
-	return s
-}
-
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *FaceDetail) SetBoundingBox(v *BoundingBox) *FaceDetail {
-	s.BoundingBox = v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *FaceDetail) SetConfidence(v float64) *FaceDetail {
-	s.Confidence = &v
-	return s
-}
-
-// SetEmotions sets the Emotions field's value.
-func (s *FaceDetail) SetEmotions(v []Emotion) *FaceDetail {
-	s.Emotions = v
-	return s
-}
-
-// SetEyeglasses sets the Eyeglasses field's value.
-func (s *FaceDetail) SetEyeglasses(v *Eyeglasses) *FaceDetail {
-	s.Eyeglasses = v
-	return s
-}
-
-// SetEyesOpen sets the EyesOpen field's value.
-func (s *FaceDetail) SetEyesOpen(v *EyeOpen) *FaceDetail {
-	s.EyesOpen = v
-	return s
-}
-
-// SetGender sets the Gender field's value.
-func (s *FaceDetail) SetGender(v *Gender) *FaceDetail {
-	s.Gender = v
-	return s
-}
-
-// SetLandmarks sets the Landmarks field's value.
-func (s *FaceDetail) SetLandmarks(v []Landmark) *FaceDetail {
-	s.Landmarks = v
-	return s
-}
-
-// SetMouthOpen sets the MouthOpen field's value.
-func (s *FaceDetail) SetMouthOpen(v *MouthOpen) *FaceDetail {
-	s.MouthOpen = v
-	return s
-}
-
-// SetMustache sets the Mustache field's value.
-func (s *FaceDetail) SetMustache(v *Mustache) *FaceDetail {
-	s.Mustache = v
-	return s
-}
-
-// SetPose sets the Pose field's value.
-func (s *FaceDetail) SetPose(v *Pose) *FaceDetail {
-	s.Pose = v
-	return s
-}
-
-// SetQuality sets the Quality field's value.
-func (s *FaceDetail) SetQuality(v *ImageQuality) *FaceDetail {
-	s.Quality = v
-	return s
-}
-
-// SetSmile sets the Smile field's value.
-func (s *FaceDetail) SetSmile(v *Smile) *FaceDetail {
-	s.Smile = v
-	return s
-}
-
-// SetSunglasses sets the Sunglasses field's value.
-func (s *FaceDetail) SetSunglasses(v *Sunglasses) *FaceDetail {
-	s.Sunglasses = v
-	return s
-}
-
 // Information about a face detected in a video analysis request and the time
 // the face was detected in the video.
 type FaceDetection struct {
@@ -4611,18 +3969,6 @@ func (s FaceDetection) String() string {
 // GoString returns the string representation
 func (s FaceDetection) GoString() string {
 	return s.String()
-}
-
-// SetFace sets the Face field's value.
-func (s *FaceDetection) SetFace(v *FaceDetail) *FaceDetection {
-	s.Face = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *FaceDetection) SetTimestamp(v int64) *FaceDetection {
-	s.Timestamp = &v
-	return s
 }
 
 // Provides face metadata. In addition, it also provides the confidence in the
@@ -4648,18 +3994,6 @@ func (s FaceMatch) GoString() string {
 	return s.String()
 }
 
-// SetFace sets the Face field's value.
-func (s *FaceMatch) SetFace(v *Face) *FaceMatch {
-	s.Face = v
-	return s
-}
-
-// SetSimilarity sets the Similarity field's value.
-func (s *FaceMatch) SetSimilarity(v float64) *FaceMatch {
-	s.Similarity = &v
-	return s
-}
-
 // Object containing both the face metadata (stored in the back-end database)
 // and facial attributes that are detected but aren't stored in the database.
 type FaceRecord struct {
@@ -4681,18 +4015,6 @@ func (s FaceRecord) String() string {
 // GoString returns the string representation
 func (s FaceRecord) GoString() string {
 	return s.String()
-}
-
-// SetFace sets the Face field's value.
-func (s *FaceRecord) SetFace(v *Face) *FaceRecord {
-	s.Face = v
-	return s
-}
-
-// SetFaceDetail sets the FaceDetail field's value.
-func (s *FaceRecord) SetFaceDetail(v *FaceDetail) *FaceRecord {
-	s.FaceDetail = v
-	return s
 }
 
 // Input face recognition parameters for an Amazon Rekognition stream processor.
@@ -4732,18 +4054,6 @@ func (s *FaceSearchSettings) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *FaceSearchSettings) SetCollectionId(v string) *FaceSearchSettings {
-	s.CollectionId = &v
-	return s
-}
-
-// SetFaceMatchThreshold sets the FaceMatchThreshold field's value.
-func (s *FaceSearchSettings) SetFaceMatchThreshold(v float64) *FaceSearchSettings {
-	s.FaceMatchThreshold = &v
-	return s
-}
-
 // Gender of the face and the confidence level in the determination.
 type Gender struct {
 	_ struct{} `type:"structure"`
@@ -4763,18 +4073,6 @@ func (s Gender) String() string {
 // GoString returns the string representation
 func (s Gender) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Gender) SetConfidence(v float64) *Gender {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Gender) SetValue(v GenderType) *Gender {
-	s.Value = v
-	return s
 }
 
 // Information about where text detected by is located on an image.
@@ -4797,18 +4095,6 @@ func (s Geometry) String() string {
 // GoString returns the string representation
 func (s Geometry) GoString() string {
 	return s.String()
-}
-
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *Geometry) SetBoundingBox(v *BoundingBox) *Geometry {
-	s.BoundingBox = v
-	return s
-}
-
-// SetPolygon sets the Polygon field's value.
-func (s *Geometry) SetPolygon(v []Point) *Geometry {
-	s.Polygon = v
-	return s
 }
 
 type GetCelebrityInfoInput struct {
@@ -4845,12 +4131,6 @@ func (s *GetCelebrityInfoInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetCelebrityInfoInput) SetId(v string) *GetCelebrityInfoInput {
-	s.Id = &v
-	return s
-}
-
 type GetCelebrityInfoOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4876,18 +4156,6 @@ func (s GetCelebrityInfoOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCelebrityInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetName sets the Name field's value.
-func (s *GetCelebrityInfoOutput) SetName(v string) *GetCelebrityInfoOutput {
-	s.Name = &v
-	return s
-}
-
-// SetUrls sets the Urls field's value.
-func (s *GetCelebrityInfoOutput) SetUrls(v []string) *GetCelebrityInfoOutput {
-	s.Urls = v
-	return s
 }
 
 type GetCelebrityRecognitionInput struct {
@@ -4945,30 +4213,6 @@ func (s *GetCelebrityRecognitionInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetCelebrityRecognitionInput) SetJobId(v string) *GetCelebrityRecognitionInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetCelebrityRecognitionInput) SetMaxResults(v int64) *GetCelebrityRecognitionInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetCelebrityRecognitionInput) SetNextToken(v string) *GetCelebrityRecognitionInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *GetCelebrityRecognitionInput) SetSortBy(v CelebrityRecognitionSortBy) *GetCelebrityRecognitionInput {
-	s.SortBy = v
-	return s
-}
-
 type GetCelebrityRecognitionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5006,36 +4250,6 @@ func (s GetCelebrityRecognitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCelebrityRecognitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCelebrities sets the Celebrities field's value.
-func (s *GetCelebrityRecognitionOutput) SetCelebrities(v []CelebrityRecognition) *GetCelebrityRecognitionOutput {
-	s.Celebrities = v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *GetCelebrityRecognitionOutput) SetJobStatus(v VideoJobStatus) *GetCelebrityRecognitionOutput {
-	s.JobStatus = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetCelebrityRecognitionOutput) SetNextToken(v string) *GetCelebrityRecognitionOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *GetCelebrityRecognitionOutput) SetStatusMessage(v string) *GetCelebrityRecognitionOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVideoMetadata sets the VideoMetadata field's value.
-func (s *GetCelebrityRecognitionOutput) SetVideoMetadata(v *VideoMetadata) *GetCelebrityRecognitionOutput {
-	s.VideoMetadata = v
-	return s
 }
 
 type GetContentModerationInput struct {
@@ -5092,30 +4306,6 @@ func (s *GetContentModerationInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetContentModerationInput) SetJobId(v string) *GetContentModerationInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetContentModerationInput) SetMaxResults(v int64) *GetContentModerationInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetContentModerationInput) SetNextToken(v string) *GetContentModerationInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *GetContentModerationInput) SetSortBy(v ContentModerationSortBy) *GetContentModerationInput {
-	s.SortBy = v
-	return s
-}
-
 type GetContentModerationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5153,36 +4343,6 @@ func (s GetContentModerationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetContentModerationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *GetContentModerationOutput) SetJobStatus(v VideoJobStatus) *GetContentModerationOutput {
-	s.JobStatus = v
-	return s
-}
-
-// SetModerationLabels sets the ModerationLabels field's value.
-func (s *GetContentModerationOutput) SetModerationLabels(v []ContentModerationDetection) *GetContentModerationOutput {
-	s.ModerationLabels = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetContentModerationOutput) SetNextToken(v string) *GetContentModerationOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *GetContentModerationOutput) SetStatusMessage(v string) *GetContentModerationOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVideoMetadata sets the VideoMetadata field's value.
-func (s *GetContentModerationOutput) SetVideoMetadata(v *VideoMetadata) *GetContentModerationOutput {
-	s.VideoMetadata = v
-	return s
 }
 
 type GetFaceDetectionInput struct {
@@ -5233,24 +4393,6 @@ func (s *GetFaceDetectionInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetFaceDetectionInput) SetJobId(v string) *GetFaceDetectionInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetFaceDetectionInput) SetMaxResults(v int64) *GetFaceDetectionInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetFaceDetectionInput) SetNextToken(v string) *GetFaceDetectionInput {
-	s.NextToken = &v
-	return s
-}
-
 type GetFaceDetectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5290,36 +4432,6 @@ func (s GetFaceDetectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFaceDetectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFaces sets the Faces field's value.
-func (s *GetFaceDetectionOutput) SetFaces(v []FaceDetection) *GetFaceDetectionOutput {
-	s.Faces = v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *GetFaceDetectionOutput) SetJobStatus(v VideoJobStatus) *GetFaceDetectionOutput {
-	s.JobStatus = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetFaceDetectionOutput) SetNextToken(v string) *GetFaceDetectionOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *GetFaceDetectionOutput) SetStatusMessage(v string) *GetFaceDetectionOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVideoMetadata sets the VideoMetadata field's value.
-func (s *GetFaceDetectionOutput) SetVideoMetadata(v *VideoMetadata) *GetFaceDetectionOutput {
-	s.VideoMetadata = v
-	return s
 }
 
 type GetFaceSearchInput struct {
@@ -5375,30 +4487,6 @@ func (s *GetFaceSearchInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetFaceSearchInput) SetJobId(v string) *GetFaceSearchInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetFaceSearchInput) SetMaxResults(v int64) *GetFaceSearchInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetFaceSearchInput) SetNextToken(v string) *GetFaceSearchInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *GetFaceSearchInput) SetSortBy(v FaceSearchSortBy) *GetFaceSearchInput {
-	s.SortBy = v
-	return s
-}
-
 type GetFaceSearchOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5441,36 +4529,6 @@ func (s GetFaceSearchOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFaceSearchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *GetFaceSearchOutput) SetJobStatus(v VideoJobStatus) *GetFaceSearchOutput {
-	s.JobStatus = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetFaceSearchOutput) SetNextToken(v string) *GetFaceSearchOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPersons sets the Persons field's value.
-func (s *GetFaceSearchOutput) SetPersons(v []PersonMatch) *GetFaceSearchOutput {
-	s.Persons = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *GetFaceSearchOutput) SetStatusMessage(v string) *GetFaceSearchOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVideoMetadata sets the VideoMetadata field's value.
-func (s *GetFaceSearchOutput) SetVideoMetadata(v *VideoMetadata) *GetFaceSearchOutput {
-	s.VideoMetadata = v
-	return s
 }
 
 type GetLabelDetectionInput struct {
@@ -5528,30 +4586,6 @@ func (s *GetLabelDetectionInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetLabelDetectionInput) SetJobId(v string) *GetLabelDetectionInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetLabelDetectionInput) SetMaxResults(v int64) *GetLabelDetectionInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetLabelDetectionInput) SetNextToken(v string) *GetLabelDetectionInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *GetLabelDetectionInput) SetSortBy(v LabelDetectionSortBy) *GetLabelDetectionInput {
-	s.SortBy = v
-	return s
-}
-
 type GetLabelDetectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5591,36 +4625,6 @@ func (s GetLabelDetectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetLabelDetectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *GetLabelDetectionOutput) SetJobStatus(v VideoJobStatus) *GetLabelDetectionOutput {
-	s.JobStatus = v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *GetLabelDetectionOutput) SetLabels(v []LabelDetection) *GetLabelDetectionOutput {
-	s.Labels = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetLabelDetectionOutput) SetNextToken(v string) *GetLabelDetectionOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *GetLabelDetectionOutput) SetStatusMessage(v string) *GetLabelDetectionOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVideoMetadata sets the VideoMetadata field's value.
-func (s *GetLabelDetectionOutput) SetVideoMetadata(v *VideoMetadata) *GetLabelDetectionOutput {
-	s.VideoMetadata = v
-	return s
 }
 
 type GetPersonTrackingInput struct {
@@ -5677,30 +4681,6 @@ func (s *GetPersonTrackingInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetPersonTrackingInput) SetJobId(v string) *GetPersonTrackingInput {
-	s.JobId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetPersonTrackingInput) SetMaxResults(v int64) *GetPersonTrackingInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetPersonTrackingInput) SetNextToken(v string) *GetPersonTrackingInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *GetPersonTrackingInput) SetSortBy(v PersonTrackingSortBy) *GetPersonTrackingInput {
-	s.SortBy = v
-	return s
-}
-
 type GetPersonTrackingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -5740,36 +4720,6 @@ func (s GetPersonTrackingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPersonTrackingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *GetPersonTrackingOutput) SetJobStatus(v VideoJobStatus) *GetPersonTrackingOutput {
-	s.JobStatus = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetPersonTrackingOutput) SetNextToken(v string) *GetPersonTrackingOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPersons sets the Persons field's value.
-func (s *GetPersonTrackingOutput) SetPersons(v []PersonDetection) *GetPersonTrackingOutput {
-	s.Persons = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *GetPersonTrackingOutput) SetStatusMessage(v string) *GetPersonTrackingOutput {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetVideoMetadata sets the VideoMetadata field's value.
-func (s *GetPersonTrackingOutput) SetVideoMetadata(v *VideoMetadata) *GetPersonTrackingOutput {
-	s.VideoMetadata = v
-	return s
 }
 
 // Provides the input image either as bytes or an S3 object.
@@ -5835,18 +4785,6 @@ func (s *Image) Validate() error {
 	return nil
 }
 
-// SetBytes sets the Bytes field's value.
-func (s *Image) SetBytes(v []byte) *Image {
-	s.Bytes = v
-	return s
-}
-
-// SetS3Object sets the S3Object field's value.
-func (s *Image) SetS3Object(v *S3Object) *Image {
-	s.S3Object = v
-	return s
-}
-
 // Identifies face image brightness and sharpness.
 type ImageQuality struct {
 	_ struct{} `type:"structure"`
@@ -5868,18 +4806,6 @@ func (s ImageQuality) String() string {
 // GoString returns the string representation
 func (s ImageQuality) GoString() string {
 	return s.String()
-}
-
-// SetBrightness sets the Brightness field's value.
-func (s *ImageQuality) SetBrightness(v float64) *ImageQuality {
-	s.Brightness = &v
-	return s
-}
-
-// SetSharpness sets the Sharpness field's value.
-func (s *ImageQuality) SetSharpness(v float64) *ImageQuality {
-	s.Sharpness = &v
-	return s
 }
 
 type IndexFacesInput struct {
@@ -5952,30 +4878,6 @@ func (s *IndexFacesInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *IndexFacesInput) SetCollectionId(v string) *IndexFacesInput {
-	s.CollectionId = &v
-	return s
-}
-
-// SetDetectionAttributes sets the DetectionAttributes field's value.
-func (s *IndexFacesInput) SetDetectionAttributes(v []Attribute) *IndexFacesInput {
-	s.DetectionAttributes = v
-	return s
-}
-
-// SetExternalImageId sets the ExternalImageId field's value.
-func (s *IndexFacesInput) SetExternalImageId(v string) *IndexFacesInput {
-	s.ExternalImageId = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *IndexFacesInput) SetImage(v *Image) *IndexFacesInput {
-	s.Image = v
-	return s
-}
-
 type IndexFacesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6017,24 +4919,6 @@ func (s IndexFacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFaceModelVersion sets the FaceModelVersion field's value.
-func (s *IndexFacesOutput) SetFaceModelVersion(v string) *IndexFacesOutput {
-	s.FaceModelVersion = &v
-	return s
-}
-
-// SetFaceRecords sets the FaceRecords field's value.
-func (s *IndexFacesOutput) SetFaceRecords(v []FaceRecord) *IndexFacesOutput {
-	s.FaceRecords = v
-	return s
-}
-
-// SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *IndexFacesOutput) SetOrientationCorrection(v OrientationCorrection) *IndexFacesOutput {
-	s.OrientationCorrection = v
-	return s
-}
-
 // The Kinesis data stream Amazon Rekognition to which the analysis results
 // of a Amazon Rekognition stream processor are streamed. For more information,
 // see .
@@ -6055,12 +4939,6 @@ func (s KinesisDataStream) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *KinesisDataStream) SetArn(v string) *KinesisDataStream {
-	s.Arn = &v
-	return s
-}
-
 // Kinesis video stream stream that provides the source streaming video for
 // a Rekognition Video stream processor. For more information, see .
 type KinesisVideoStream struct {
@@ -6078,12 +4956,6 @@ func (s KinesisVideoStream) String() string {
 // GoString returns the string representation
 func (s KinesisVideoStream) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *KinesisVideoStream) SetArn(v string) *KinesisVideoStream {
-	s.Arn = &v
-	return s
 }
 
 // Structure containing details about the detected label, including name, and
@@ -6108,18 +4980,6 @@ func (s Label) GoString() string {
 	return s.String()
 }
 
-// SetConfidence sets the Confidence field's value.
-func (s *Label) SetConfidence(v float64) *Label {
-	s.Confidence = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Label) SetName(v string) *Label {
-	s.Name = &v
-	return s
-}
-
 // Information about a label detected in a video analysis request and the time
 // the label was detected in the video.
 type LabelDetection struct {
@@ -6140,18 +5000,6 @@ func (s LabelDetection) String() string {
 // GoString returns the string representation
 func (s LabelDetection) GoString() string {
 	return s.String()
-}
-
-// SetLabel sets the Label field's value.
-func (s *LabelDetection) SetLabel(v *Label) *LabelDetection {
-	s.Label = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *LabelDetection) SetTimestamp(v int64) *LabelDetection {
-	s.Timestamp = &v
-	return s
 }
 
 // Indicates the location of the landmark on the face.
@@ -6182,24 +5030,6 @@ func (s Landmark) GoString() string {
 	return s.String()
 }
 
-// SetType sets the Type field's value.
-func (s *Landmark) SetType(v LandmarkType) *Landmark {
-	s.Type = v
-	return s
-}
-
-// SetX sets the X field's value.
-func (s *Landmark) SetX(v float64) *Landmark {
-	s.X = &v
-	return s
-}
-
-// SetY sets the Y field's value.
-func (s *Landmark) SetY(v float64) *Landmark {
-	s.Y = &v
-	return s
-}
-
 type ListCollectionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6218,18 +5048,6 @@ func (s ListCollectionsInput) String() string {
 // GoString returns the string representation
 func (s ListCollectionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCollectionsInput) SetMaxResults(v int64) *ListCollectionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCollectionsInput) SetNextToken(v string) *ListCollectionsInput {
-	s.NextToken = &v
-	return s
 }
 
 type ListCollectionsOutput struct {
@@ -6264,24 +5082,6 @@ func (s ListCollectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCollectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCollectionIds sets the CollectionIds field's value.
-func (s *ListCollectionsOutput) SetCollectionIds(v []string) *ListCollectionsOutput {
-	s.CollectionIds = v
-	return s
-}
-
-// SetFaceModelVersions sets the FaceModelVersions field's value.
-func (s *ListCollectionsOutput) SetFaceModelVersions(v []string) *ListCollectionsOutput {
-	s.FaceModelVersions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCollectionsOutput) SetNextToken(v string) *ListCollectionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 type ListFacesInput struct {
@@ -6328,24 +5128,6 @@ func (s *ListFacesInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *ListFacesInput) SetCollectionId(v string) *ListFacesInput {
-	s.CollectionId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFacesInput) SetMaxResults(v int64) *ListFacesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFacesInput) SetNextToken(v string) *ListFacesInput {
-	s.NextToken = &v
-	return s
-}
-
 type ListFacesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6376,24 +5158,6 @@ func (s ListFacesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFaceModelVersion sets the FaceModelVersion field's value.
-func (s *ListFacesOutput) SetFaceModelVersion(v string) *ListFacesOutput {
-	s.FaceModelVersion = &v
-	return s
-}
-
-// SetFaces sets the Faces field's value.
-func (s *ListFacesOutput) SetFaces(v []Face) *ListFacesOutput {
-	s.Faces = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFacesOutput) SetNextToken(v string) *ListFacesOutput {
-	s.NextToken = &v
-	return s
 }
 
 type ListStreamProcessorsInput struct {
@@ -6432,18 +5196,6 @@ func (s *ListStreamProcessorsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStreamProcessorsInput) SetMaxResults(v int64) *ListStreamProcessorsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStreamProcessorsInput) SetNextToken(v string) *ListStreamProcessorsInput {
-	s.NextToken = &v
-	return s
-}
-
 type ListStreamProcessorsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6470,18 +5222,6 @@ func (s ListStreamProcessorsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStreamProcessorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStreamProcessorsOutput) SetNextToken(v string) *ListStreamProcessorsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStreamProcessors sets the StreamProcessors field's value.
-func (s *ListStreamProcessorsOutput) SetStreamProcessors(v []StreamProcessor) *ListStreamProcessorsOutput {
-	s.StreamProcessors = v
-	return s
 }
 
 // Provides information about a single type of moderated content found in an
@@ -6516,24 +5256,6 @@ func (s ModerationLabel) GoString() string {
 	return s.String()
 }
 
-// SetConfidence sets the Confidence field's value.
-func (s *ModerationLabel) SetConfidence(v float64) *ModerationLabel {
-	s.Confidence = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ModerationLabel) SetName(v string) *ModerationLabel {
-	s.Name = &v
-	return s
-}
-
-// SetParentName sets the ParentName field's value.
-func (s *ModerationLabel) SetParentName(v string) *ModerationLabel {
-	s.ParentName = &v
-	return s
-}
-
 // Indicates whether or not the mouth on the face is open, and the confidence
 // level in the determination.
 type MouthOpen struct {
@@ -6556,18 +5278,6 @@ func (s MouthOpen) GoString() string {
 	return s.String()
 }
 
-// SetConfidence sets the Confidence field's value.
-func (s *MouthOpen) SetConfidence(v float64) *MouthOpen {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *MouthOpen) SetValue(v bool) *MouthOpen {
-	s.Value = &v
-	return s
-}
-
 // Indicates whether or not the face has a mustache, and the confidence level
 // in the determination.
 type Mustache struct {
@@ -6588,18 +5298,6 @@ func (s Mustache) String() string {
 // GoString returns the string representation
 func (s Mustache) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Mustache) SetConfidence(v float64) *Mustache {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Mustache) SetValue(v bool) *Mustache {
-	s.Value = &v
-	return s
 }
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
@@ -6649,18 +5347,6 @@ func (s *NotificationChannel) Validate() error {
 	return nil
 }
 
-// SetRoleArn sets the RoleArn field's value.
-func (s *NotificationChannel) SetRoleArn(v string) *NotificationChannel {
-	s.RoleArn = &v
-	return s
-}
-
-// SetSNSTopicArn sets the SNSTopicArn field's value.
-func (s *NotificationChannel) SetSNSTopicArn(v string) *NotificationChannel {
-	s.SNSTopicArn = &v
-	return s
-}
-
 // Details about a person detected in a video analysis request.
 type PersonDetail struct {
 	_ struct{} `type:"structure"`
@@ -6687,24 +5373,6 @@ func (s PersonDetail) GoString() string {
 	return s.String()
 }
 
-// SetBoundingBox sets the BoundingBox field's value.
-func (s *PersonDetail) SetBoundingBox(v *BoundingBox) *PersonDetail {
-	s.BoundingBox = v
-	return s
-}
-
-// SetFace sets the Face field's value.
-func (s *PersonDetail) SetFace(v *FaceDetail) *PersonDetail {
-	s.Face = v
-	return s
-}
-
-// SetIndex sets the Index field's value.
-func (s *PersonDetail) SetIndex(v int64) *PersonDetail {
-	s.Index = &v
-	return s
-}
-
 // Details and tracking information for a single time a person is tracked in
 // a video. Amazon Rekognition operations that track persons return an array
 // of PersonDetection objects with elements for each time a person is tracked
@@ -6728,18 +5396,6 @@ func (s PersonDetection) String() string {
 // GoString returns the string representation
 func (s PersonDetection) GoString() string {
 	return s.String()
-}
-
-// SetPerson sets the Person field's value.
-func (s *PersonDetection) SetPerson(v *PersonDetail) *PersonDetection {
-	s.Person = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *PersonDetection) SetTimestamp(v int64) *PersonDetection {
-	s.Timestamp = &v
-	return s
 }
 
 // Information about a person whose face matches a face(s) in a Amazon Rekognition
@@ -6772,24 +5428,6 @@ func (s PersonMatch) GoString() string {
 	return s.String()
 }
 
-// SetFaceMatches sets the FaceMatches field's value.
-func (s *PersonMatch) SetFaceMatches(v []FaceMatch) *PersonMatch {
-	s.FaceMatches = v
-	return s
-}
-
-// SetPerson sets the Person field's value.
-func (s *PersonMatch) SetPerson(v *PersonDetail) *PersonMatch {
-	s.Person = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *PersonMatch) SetTimestamp(v int64) *PersonMatch {
-	s.Timestamp = &v
-	return s
-}
-
 // The X and Y coordinates of a point on an image. The X and Y values returned
 // are ratios of the overall image size. For example, if the input image is
 // 700x200 and the operation returns X=0.5 and Y=0.25, then the point is at
@@ -6817,18 +5455,6 @@ func (s Point) GoString() string {
 	return s.String()
 }
 
-// SetX sets the X field's value.
-func (s *Point) SetX(v float64) *Point {
-	s.X = &v
-	return s
-}
-
-// SetY sets the Y field's value.
-func (s *Point) SetY(v float64) *Point {
-	s.Y = &v
-	return s
-}
-
 // Indicates the pose of the face as determined by its pitch, roll, and yaw.
 type Pose struct {
 	_ struct{} `type:"structure"`
@@ -6851,24 +5477,6 @@ func (s Pose) String() string {
 // GoString returns the string representation
 func (s Pose) GoString() string {
 	return s.String()
-}
-
-// SetPitch sets the Pitch field's value.
-func (s *Pose) SetPitch(v float64) *Pose {
-	s.Pitch = &v
-	return s
-}
-
-// SetRoll sets the Roll field's value.
-func (s *Pose) SetRoll(v float64) *Pose {
-	s.Roll = &v
-	return s
-}
-
-// SetYaw sets the Yaw field's value.
-func (s *Pose) SetYaw(v float64) *Pose {
-	s.Yaw = &v
-	return s
 }
 
 type RecognizeCelebritiesInput struct {
@@ -6911,12 +5519,6 @@ func (s *RecognizeCelebritiesInput) Validate() error {
 	return nil
 }
 
-// SetImage sets the Image field's value.
-func (s *RecognizeCelebritiesInput) SetImage(v *Image) *RecognizeCelebritiesInput {
-	s.Image = v
-	return s
-}
-
 type RecognizeCelebritiesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -6957,24 +5559,6 @@ func (s RecognizeCelebritiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RecognizeCelebritiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCelebrityFaces sets the CelebrityFaces field's value.
-func (s *RecognizeCelebritiesOutput) SetCelebrityFaces(v []Celebrity) *RecognizeCelebritiesOutput {
-	s.CelebrityFaces = v
-	return s
-}
-
-// SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *RecognizeCelebritiesOutput) SetOrientationCorrection(v OrientationCorrection) *RecognizeCelebritiesOutput {
-	s.OrientationCorrection = v
-	return s
-}
-
-// SetUnrecognizedFaces sets the UnrecognizedFaces field's value.
-func (s *RecognizeCelebritiesOutput) SetUnrecognizedFaces(v []ComparedFace) *RecognizeCelebritiesOutput {
-	s.UnrecognizedFaces = v
-	return s
 }
 
 // Provides the S3 bucket name and object name.
@@ -7024,24 +5608,6 @@ func (s *S3Object) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *S3Object) SetBucket(v string) *S3Object {
-	s.Bucket = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *S3Object) SetName(v string) *S3Object {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *S3Object) SetVersion(v string) *S3Object {
-	s.Version = &v
-	return s
 }
 
 type SearchFacesByImageInput struct {
@@ -7108,30 +5674,6 @@ func (s *SearchFacesByImageInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *SearchFacesByImageInput) SetCollectionId(v string) *SearchFacesByImageInput {
-	s.CollectionId = &v
-	return s
-}
-
-// SetFaceMatchThreshold sets the FaceMatchThreshold field's value.
-func (s *SearchFacesByImageInput) SetFaceMatchThreshold(v float64) *SearchFacesByImageInput {
-	s.FaceMatchThreshold = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *SearchFacesByImageInput) SetImage(v *Image) *SearchFacesByImageInput {
-	s.Image = v
-	return s
-}
-
-// SetMaxFaces sets the MaxFaces field's value.
-func (s *SearchFacesByImageInput) SetMaxFaces(v int64) *SearchFacesByImageInput {
-	s.MaxFaces = &v
-	return s
-}
-
 type SearchFacesByImageOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7166,30 +5708,6 @@ func (s SearchFacesByImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchFacesByImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFaceMatches sets the FaceMatches field's value.
-func (s *SearchFacesByImageOutput) SetFaceMatches(v []FaceMatch) *SearchFacesByImageOutput {
-	s.FaceMatches = v
-	return s
-}
-
-// SetFaceModelVersion sets the FaceModelVersion field's value.
-func (s *SearchFacesByImageOutput) SetFaceModelVersion(v string) *SearchFacesByImageOutput {
-	s.FaceModelVersion = &v
-	return s
-}
-
-// SetSearchedFaceBoundingBox sets the SearchedFaceBoundingBox field's value.
-func (s *SearchFacesByImageOutput) SetSearchedFaceBoundingBox(v *BoundingBox) *SearchFacesByImageOutput {
-	s.SearchedFaceBoundingBox = v
-	return s
-}
-
-// SetSearchedFaceConfidence sets the SearchedFaceConfidence field's value.
-func (s *SearchFacesByImageOutput) SetSearchedFaceConfidence(v float64) *SearchFacesByImageOutput {
-	s.SearchedFaceConfidence = &v
-	return s
 }
 
 type SearchFacesInput struct {
@@ -7249,30 +5767,6 @@ func (s *SearchFacesInput) Validate() error {
 	return nil
 }
 
-// SetCollectionId sets the CollectionId field's value.
-func (s *SearchFacesInput) SetCollectionId(v string) *SearchFacesInput {
-	s.CollectionId = &v
-	return s
-}
-
-// SetFaceId sets the FaceId field's value.
-func (s *SearchFacesInput) SetFaceId(v string) *SearchFacesInput {
-	s.FaceId = &v
-	return s
-}
-
-// SetFaceMatchThreshold sets the FaceMatchThreshold field's value.
-func (s *SearchFacesInput) SetFaceMatchThreshold(v float64) *SearchFacesInput {
-	s.FaceMatchThreshold = &v
-	return s
-}
-
-// SetMaxFaces sets the MaxFaces field's value.
-func (s *SearchFacesInput) SetMaxFaces(v int64) *SearchFacesInput {
-	s.MaxFaces = &v
-	return s
-}
-
 type SearchFacesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7305,24 +5799,6 @@ func (s SearchFacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFaceMatches sets the FaceMatches field's value.
-func (s *SearchFacesOutput) SetFaceMatches(v []FaceMatch) *SearchFacesOutput {
-	s.FaceMatches = v
-	return s
-}
-
-// SetFaceModelVersion sets the FaceModelVersion field's value.
-func (s *SearchFacesOutput) SetFaceModelVersion(v string) *SearchFacesOutput {
-	s.FaceModelVersion = &v
-	return s
-}
-
-// SetSearchedFaceId sets the SearchedFaceId field's value.
-func (s *SearchFacesOutput) SetSearchedFaceId(v string) *SearchFacesOutput {
-	s.SearchedFaceId = &v
-	return s
-}
-
 // Indicates whether or not the face is smiling, and the confidence level in
 // the determination.
 type Smile struct {
@@ -7343,18 +5819,6 @@ func (s Smile) String() string {
 // GoString returns the string representation
 func (s Smile) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Smile) SetConfidence(v float64) *Smile {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Smile) SetValue(v bool) *Smile {
-	s.Value = &v
-	return s
 }
 
 type StartCelebrityRecognitionInput struct {
@@ -7421,30 +5885,6 @@ func (s *StartCelebrityRecognitionInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartCelebrityRecognitionInput) SetClientRequestToken(v string) *StartCelebrityRecognitionInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetJobTag sets the JobTag field's value.
-func (s *StartCelebrityRecognitionInput) SetJobTag(v string) *StartCelebrityRecognitionInput {
-	s.JobTag = &v
-	return s
-}
-
-// SetNotificationChannel sets the NotificationChannel field's value.
-func (s *StartCelebrityRecognitionInput) SetNotificationChannel(v *NotificationChannel) *StartCelebrityRecognitionInput {
-	s.NotificationChannel = v
-	return s
-}
-
-// SetVideo sets the Video field's value.
-func (s *StartCelebrityRecognitionInput) SetVideo(v *Video) *StartCelebrityRecognitionInput {
-	s.Video = v
-	return s
-}
-
 type StartCelebrityRecognitionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7468,12 +5908,6 @@ func (s StartCelebrityRecognitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartCelebrityRecognitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartCelebrityRecognitionOutput) SetJobId(v string) *StartCelebrityRecognitionOutput {
-	s.JobId = &v
-	return s
 }
 
 type StartContentModerationInput struct {
@@ -7548,36 +5982,6 @@ func (s *StartContentModerationInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartContentModerationInput) SetClientRequestToken(v string) *StartContentModerationInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetJobTag sets the JobTag field's value.
-func (s *StartContentModerationInput) SetJobTag(v string) *StartContentModerationInput {
-	s.JobTag = &v
-	return s
-}
-
-// SetMinConfidence sets the MinConfidence field's value.
-func (s *StartContentModerationInput) SetMinConfidence(v float64) *StartContentModerationInput {
-	s.MinConfidence = &v
-	return s
-}
-
-// SetNotificationChannel sets the NotificationChannel field's value.
-func (s *StartContentModerationInput) SetNotificationChannel(v *NotificationChannel) *StartContentModerationInput {
-	s.NotificationChannel = v
-	return s
-}
-
-// SetVideo sets the Video field's value.
-func (s *StartContentModerationInput) SetVideo(v *Video) *StartContentModerationInput {
-	s.Video = v
-	return s
-}
-
 type StartContentModerationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7601,12 +6005,6 @@ func (s StartContentModerationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartContentModerationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartContentModerationOutput) SetJobId(v string) *StartContentModerationOutput {
-	s.JobId = &v
-	return s
 }
 
 type StartFaceDetectionInput struct {
@@ -7681,36 +6079,6 @@ func (s *StartFaceDetectionInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartFaceDetectionInput) SetClientRequestToken(v string) *StartFaceDetectionInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetFaceAttributes sets the FaceAttributes field's value.
-func (s *StartFaceDetectionInput) SetFaceAttributes(v FaceAttributes) *StartFaceDetectionInput {
-	s.FaceAttributes = v
-	return s
-}
-
-// SetJobTag sets the JobTag field's value.
-func (s *StartFaceDetectionInput) SetJobTag(v string) *StartFaceDetectionInput {
-	s.JobTag = &v
-	return s
-}
-
-// SetNotificationChannel sets the NotificationChannel field's value.
-func (s *StartFaceDetectionInput) SetNotificationChannel(v *NotificationChannel) *StartFaceDetectionInput {
-	s.NotificationChannel = v
-	return s
-}
-
-// SetVideo sets the Video field's value.
-func (s *StartFaceDetectionInput) SetVideo(v *Video) *StartFaceDetectionInput {
-	s.Video = v
-	return s
-}
-
 type StartFaceDetectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7734,12 +6102,6 @@ func (s StartFaceDetectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartFaceDetectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartFaceDetectionOutput) SetJobId(v string) *StartFaceDetectionOutput {
-	s.JobId = &v
-	return s
 }
 
 type StartFaceSearchInput struct {
@@ -7821,42 +6183,6 @@ func (s *StartFaceSearchInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartFaceSearchInput) SetClientRequestToken(v string) *StartFaceSearchInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetCollectionId sets the CollectionId field's value.
-func (s *StartFaceSearchInput) SetCollectionId(v string) *StartFaceSearchInput {
-	s.CollectionId = &v
-	return s
-}
-
-// SetFaceMatchThreshold sets the FaceMatchThreshold field's value.
-func (s *StartFaceSearchInput) SetFaceMatchThreshold(v float64) *StartFaceSearchInput {
-	s.FaceMatchThreshold = &v
-	return s
-}
-
-// SetJobTag sets the JobTag field's value.
-func (s *StartFaceSearchInput) SetJobTag(v string) *StartFaceSearchInput {
-	s.JobTag = &v
-	return s
-}
-
-// SetNotificationChannel sets the NotificationChannel field's value.
-func (s *StartFaceSearchInput) SetNotificationChannel(v *NotificationChannel) *StartFaceSearchInput {
-	s.NotificationChannel = v
-	return s
-}
-
-// SetVideo sets the Video field's value.
-func (s *StartFaceSearchInput) SetVideo(v *Video) *StartFaceSearchInput {
-	s.Video = v
-	return s
-}
-
 type StartFaceSearchOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -7880,12 +6206,6 @@ func (s StartFaceSearchOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartFaceSearchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartFaceSearchOutput) SetJobId(v string) *StartFaceSearchOutput {
-	s.JobId = &v
-	return s
 }
 
 type StartLabelDetectionInput struct {
@@ -7962,36 +6282,6 @@ func (s *StartLabelDetectionInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartLabelDetectionInput) SetClientRequestToken(v string) *StartLabelDetectionInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetJobTag sets the JobTag field's value.
-func (s *StartLabelDetectionInput) SetJobTag(v string) *StartLabelDetectionInput {
-	s.JobTag = &v
-	return s
-}
-
-// SetMinConfidence sets the MinConfidence field's value.
-func (s *StartLabelDetectionInput) SetMinConfidence(v float64) *StartLabelDetectionInput {
-	s.MinConfidence = &v
-	return s
-}
-
-// SetNotificationChannel sets the NotificationChannel field's value.
-func (s *StartLabelDetectionInput) SetNotificationChannel(v *NotificationChannel) *StartLabelDetectionInput {
-	s.NotificationChannel = v
-	return s
-}
-
-// SetVideo sets the Video field's value.
-func (s *StartLabelDetectionInput) SetVideo(v *Video) *StartLabelDetectionInput {
-	s.Video = v
-	return s
-}
-
 type StartLabelDetectionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8015,12 +6305,6 @@ func (s StartLabelDetectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartLabelDetectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartLabelDetectionOutput) SetJobId(v string) *StartLabelDetectionOutput {
-	s.JobId = &v
-	return s
 }
 
 type StartPersonTrackingInput struct {
@@ -8087,30 +6371,6 @@ func (s *StartPersonTrackingInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartPersonTrackingInput) SetClientRequestToken(v string) *StartPersonTrackingInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetJobTag sets the JobTag field's value.
-func (s *StartPersonTrackingInput) SetJobTag(v string) *StartPersonTrackingInput {
-	s.JobTag = &v
-	return s
-}
-
-// SetNotificationChannel sets the NotificationChannel field's value.
-func (s *StartPersonTrackingInput) SetNotificationChannel(v *NotificationChannel) *StartPersonTrackingInput {
-	s.NotificationChannel = v
-	return s
-}
-
-// SetVideo sets the Video field's value.
-func (s *StartPersonTrackingInput) SetVideo(v *Video) *StartPersonTrackingInput {
-	s.Video = v
-	return s
-}
-
 type StartPersonTrackingOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8134,12 +6394,6 @@ func (s StartPersonTrackingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartPersonTrackingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartPersonTrackingOutput) SetJobId(v string) *StartPersonTrackingOutput {
-	s.JobId = &v
-	return s
 }
 
 type StartStreamProcessorInput struct {
@@ -8176,12 +6430,6 @@ func (s *StartStreamProcessorInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *StartStreamProcessorInput) SetName(v string) *StartStreamProcessorInput {
-	s.Name = &v
-	return s
 }
 
 type StartStreamProcessorOutput struct {
@@ -8241,12 +6489,6 @@ func (s *StopStreamProcessorInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *StopStreamProcessorInput) SetName(v string) *StopStreamProcessorInput {
-	s.Name = &v
-	return s
-}
-
 type StopStreamProcessorOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8292,18 +6534,6 @@ func (s StreamProcessor) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *StreamProcessor) SetName(v string) *StreamProcessor {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StreamProcessor) SetStatus(v StreamProcessorStatus) *StreamProcessor {
-	s.Status = v
-	return s
-}
-
 // Information about the source streaming video.
 type StreamProcessorInput struct {
 	_ struct{} `type:"structure"`
@@ -8320,12 +6550,6 @@ func (s StreamProcessorInput) String() string {
 // GoString returns the string representation
 func (s StreamProcessorInput) GoString() string {
 	return s.String()
-}
-
-// SetKinesisVideoStream sets the KinesisVideoStream field's value.
-func (s *StreamProcessorInput) SetKinesisVideoStream(v *KinesisVideoStream) *StreamProcessorInput {
-	s.KinesisVideoStream = v
-	return s
 }
 
 // Information about the Amazon Kinesis Data Streams stream to which a Rekognition
@@ -8347,12 +6571,6 @@ func (s StreamProcessorOutput) String() string {
 // GoString returns the string representation
 func (s StreamProcessorOutput) GoString() string {
 	return s.String()
-}
-
-// SetKinesisDataStream sets the KinesisDataStream field's value.
-func (s *StreamProcessorOutput) SetKinesisDataStream(v *KinesisDataStream) *StreamProcessorOutput {
-	s.KinesisDataStream = v
-	return s
 }
 
 // Input parameters used to recognize faces in a streaming video analyzed by
@@ -8389,12 +6607,6 @@ func (s *StreamProcessorSettings) Validate() error {
 	return nil
 }
 
-// SetFaceSearch sets the FaceSearch field's value.
-func (s *StreamProcessorSettings) SetFaceSearch(v *FaceSearchSettings) *StreamProcessorSettings {
-	s.FaceSearch = v
-	return s
-}
-
 // Indicates whether or not the face is wearing sunglasses, and the confidence
 // level in the determination.
 type Sunglasses struct {
@@ -8415,18 +6627,6 @@ func (s Sunglasses) String() string {
 // GoString returns the string representation
 func (s Sunglasses) GoString() string {
 	return s.String()
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Sunglasses) SetConfidence(v float64) *Sunglasses {
-	s.Confidence = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Sunglasses) SetValue(v bool) *Sunglasses {
-	s.Value = &v
-	return s
 }
 
 // Information about a word or line of text detected by .
@@ -8477,42 +6677,6 @@ func (s TextDetection) GoString() string {
 	return s.String()
 }
 
-// SetConfidence sets the Confidence field's value.
-func (s *TextDetection) SetConfidence(v float64) *TextDetection {
-	s.Confidence = &v
-	return s
-}
-
-// SetDetectedText sets the DetectedText field's value.
-func (s *TextDetection) SetDetectedText(v string) *TextDetection {
-	s.DetectedText = &v
-	return s
-}
-
-// SetGeometry sets the Geometry field's value.
-func (s *TextDetection) SetGeometry(v *Geometry) *TextDetection {
-	s.Geometry = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TextDetection) SetId(v int64) *TextDetection {
-	s.Id = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *TextDetection) SetParentId(v int64) *TextDetection {
-	s.ParentId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *TextDetection) SetType(v TextTypes) *TextDetection {
-	s.Type = v
-	return s
-}
-
 // Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
 // operations such as use Video to specify a video for analysis. The supported
 // file formats are .mp4, .mov and .avi.
@@ -8548,12 +6712,6 @@ func (s *Video) Validate() error {
 	return nil
 }
 
-// SetS3Object sets the S3Object field's value.
-func (s *Video) SetS3Object(v *S3Object) *Video {
-	s.S3Object = v
-	return s
-}
-
 // Information about a video that Amazon Rekognition analyzed. Videometadata
 // is returned in every page of paginated responses from a Amazon Rekognition
 // video operation.
@@ -8587,42 +6745,6 @@ func (s VideoMetadata) String() string {
 // GoString returns the string representation
 func (s VideoMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCodec sets the Codec field's value.
-func (s *VideoMetadata) SetCodec(v string) *VideoMetadata {
-	s.Codec = &v
-	return s
-}
-
-// SetDurationMillis sets the DurationMillis field's value.
-func (s *VideoMetadata) SetDurationMillis(v int64) *VideoMetadata {
-	s.DurationMillis = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *VideoMetadata) SetFormat(v string) *VideoMetadata {
-	s.Format = &v
-	return s
-}
-
-// SetFrameHeight sets the FrameHeight field's value.
-func (s *VideoMetadata) SetFrameHeight(v int64) *VideoMetadata {
-	s.FrameHeight = &v
-	return s
-}
-
-// SetFrameRate sets the FrameRate field's value.
-func (s *VideoMetadata) SetFrameRate(v float64) *VideoMetadata {
-	s.FrameRate = &v
-	return s
-}
-
-// SetFrameWidth sets the FrameWidth field's value.
-func (s *VideoMetadata) SetFrameWidth(v int64) *VideoMetadata {
-	s.FrameWidth = &v
-	return s
 }
 
 type Attribute string

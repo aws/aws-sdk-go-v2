@@ -4257,36 +4257,6 @@ func (s *ActivatedRule) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *ActivatedRule) SetAction(v *WafAction) *ActivatedRule {
-	s.Action = v
-	return s
-}
-
-// SetOverrideAction sets the OverrideAction field's value.
-func (s *ActivatedRule) SetOverrideAction(v *WafOverrideAction) *ActivatedRule {
-	s.OverrideAction = v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *ActivatedRule) SetPriority(v int64) *ActivatedRule {
-	s.Priority = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *ActivatedRule) SetRuleId(v string) *ActivatedRule {
-	s.RuleId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ActivatedRule) SetType(v WafRuleType) *ActivatedRule {
-	s.Type = v
-	return s
-}
-
 // In a GetByteMatchSet request, ByteMatchSet is a complex type that contains
 // the ByteMatchSetId and Name of a ByteMatchSet, and the values that you specified
 // when you updated the ByteMatchSet.
@@ -4332,24 +4302,6 @@ func (s ByteMatchSet) GoString() string {
 	return s.String()
 }
 
-// SetByteMatchSetId sets the ByteMatchSetId field's value.
-func (s *ByteMatchSet) SetByteMatchSetId(v string) *ByteMatchSet {
-	s.ByteMatchSetId = &v
-	return s
-}
-
-// SetByteMatchTuples sets the ByteMatchTuples field's value.
-func (s *ByteMatchSet) SetByteMatchTuples(v []ByteMatchTuple) *ByteMatchSet {
-	s.ByteMatchTuples = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ByteMatchSet) SetName(v string) *ByteMatchSet {
-	s.Name = &v
-	return s
-}
-
 // Returned by ListByteMatchSets. Each ByteMatchSetSummary object includes the
 // Name and ByteMatchSetId for one ByteMatchSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ByteMatchSetSummary
@@ -4380,18 +4332,6 @@ func (s ByteMatchSetSummary) String() string {
 // GoString returns the string representation
 func (s ByteMatchSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetByteMatchSetId sets the ByteMatchSetId field's value.
-func (s *ByteMatchSetSummary) SetByteMatchSetId(v string) *ByteMatchSetSummary {
-	s.ByteMatchSetId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ByteMatchSetSummary) SetName(v string) *ByteMatchSetSummary {
-	s.Name = &v
-	return s
 }
 
 // In an UpdateByteMatchSet request, ByteMatchSetUpdate specifies whether to
@@ -4444,18 +4384,6 @@ func (s *ByteMatchSetUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAction sets the Action field's value.
-func (s *ByteMatchSetUpdate) SetAction(v ChangeAction) *ByteMatchSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetByteMatchTuple sets the ByteMatchTuple field's value.
-func (s *ByteMatchSetUpdate) SetByteMatchTuple(v *ByteMatchTuple) *ByteMatchSetUpdate {
-	s.ByteMatchTuple = v
-	return s
 }
 
 // The bytes (typically a string that corresponds with ASCII characters) that
@@ -4685,30 +4613,6 @@ func (s *ByteMatchTuple) Validate() error {
 	return nil
 }
 
-// SetFieldToMatch sets the FieldToMatch field's value.
-func (s *ByteMatchTuple) SetFieldToMatch(v *FieldToMatch) *ByteMatchTuple {
-	s.FieldToMatch = v
-	return s
-}
-
-// SetPositionalConstraint sets the PositionalConstraint field's value.
-func (s *ByteMatchTuple) SetPositionalConstraint(v PositionalConstraint) *ByteMatchTuple {
-	s.PositionalConstraint = v
-	return s
-}
-
-// SetTargetString sets the TargetString field's value.
-func (s *ByteMatchTuple) SetTargetString(v []byte) *ByteMatchTuple {
-	s.TargetString = v
-	return s
-}
-
-// SetTextTransformation sets the TextTransformation field's value.
-func (s *ByteMatchTuple) SetTextTransformation(v TextTransformation) *ByteMatchTuple {
-	s.TextTransformation = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateByteMatchSetRequest
 type CreateByteMatchSetInput struct {
 	_ struct{} `type:"structure"`
@@ -4759,18 +4663,6 @@ func (s *CreateByteMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateByteMatchSetInput) SetChangeToken(v string) *CreateByteMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateByteMatchSetInput) SetName(v string) *CreateByteMatchSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateByteMatchSetResponse
 type CreateByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4799,18 +4691,6 @@ func (s CreateByteMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateByteMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetByteMatchSet sets the ByteMatchSet field's value.
-func (s *CreateByteMatchSetOutput) SetByteMatchSet(v *ByteMatchSet) *CreateByteMatchSetOutput {
-	s.ByteMatchSet = v
-	return s
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateByteMatchSetOutput) SetChangeToken(v string) *CreateByteMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSetRequest
@@ -4863,18 +4743,6 @@ func (s *CreateGeoMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateGeoMatchSetInput) SetChangeToken(v string) *CreateGeoMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGeoMatchSetInput) SetName(v string) *CreateGeoMatchSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateGeoMatchSetResponse
 type CreateGeoMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4904,18 +4772,6 @@ func (s CreateGeoMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateGeoMatchSetOutput) SetChangeToken(v string) *CreateGeoMatchSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetGeoMatchSet sets the GeoMatchSet field's value.
-func (s *CreateGeoMatchSetOutput) SetGeoMatchSet(v *GeoMatchSet) *CreateGeoMatchSetOutput {
-	s.GeoMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateIPSetRequest
@@ -4968,18 +4824,6 @@ func (s *CreateIPSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateIPSetInput) SetChangeToken(v string) *CreateIPSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateIPSetInput) SetName(v string) *CreateIPSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateIPSetResponse
 type CreateIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5008,18 +4852,6 @@ func (s CreateIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateIPSetOutput) SetChangeToken(v string) *CreateIPSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetIPSet sets the IPSet field's value.
-func (s *CreateIPSetOutput) SetIPSet(v *IPSet) *CreateIPSetOutput {
-	s.IPSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRuleRequest
@@ -5113,36 +4945,6 @@ func (s *CreateRateBasedRuleInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRateBasedRuleInput) SetChangeToken(v string) *CreateRateBasedRuleInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *CreateRateBasedRuleInput) SetMetricName(v string) *CreateRateBasedRuleInput {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateRateBasedRuleInput) SetName(v string) *CreateRateBasedRuleInput {
-	s.Name = &v
-	return s
-}
-
-// SetRateKey sets the RateKey field's value.
-func (s *CreateRateBasedRuleInput) SetRateKey(v RateKey) *CreateRateBasedRuleInput {
-	s.RateKey = v
-	return s
-}
-
-// SetRateLimit sets the RateLimit field's value.
-func (s *CreateRateBasedRuleInput) SetRateLimit(v int64) *CreateRateBasedRuleInput {
-	s.RateLimit = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRuleResponse
 type CreateRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -5171,18 +4973,6 @@ func (s CreateRateBasedRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRateBasedRuleOutput) SetChangeToken(v string) *CreateRateBasedRuleOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRule sets the Rule field's value.
-func (s *CreateRateBasedRuleOutput) SetRule(v *RateBasedRule) *CreateRateBasedRuleOutput {
-	s.Rule = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSetRequest
@@ -5235,18 +5025,6 @@ func (s *CreateRegexMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRegexMatchSetInput) SetChangeToken(v string) *CreateRegexMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateRegexMatchSetInput) SetName(v string) *CreateRegexMatchSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexMatchSetResponse
 type CreateRegexMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5275,18 +5053,6 @@ func (s CreateRegexMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRegexMatchSetOutput) SetChangeToken(v string) *CreateRegexMatchSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRegexMatchSet sets the RegexMatchSet field's value.
-func (s *CreateRegexMatchSetOutput) SetRegexMatchSet(v *RegexMatchSet) *CreateRegexMatchSetOutput {
-	s.RegexMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSetRequest
@@ -5339,18 +5105,6 @@ func (s *CreateRegexPatternSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRegexPatternSetInput) SetChangeToken(v string) *CreateRegexPatternSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateRegexPatternSetInput) SetName(v string) *CreateRegexPatternSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRegexPatternSetResponse
 type CreateRegexPatternSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5379,18 +5133,6 @@ func (s CreateRegexPatternSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRegexPatternSetOutput) SetChangeToken(v string) *CreateRegexPatternSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRegexPatternSet sets the RegexPatternSet field's value.
-func (s *CreateRegexPatternSetOutput) SetRegexPatternSet(v *RegexPatternSet) *CreateRegexPatternSetOutput {
-	s.RegexPatternSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupRequest
@@ -5455,24 +5197,6 @@ func (s *CreateRuleGroupInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRuleGroupInput) SetChangeToken(v string) *CreateRuleGroupInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *CreateRuleGroupInput) SetMetricName(v string) *CreateRuleGroupInput {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateRuleGroupInput) SetName(v string) *CreateRuleGroupInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroupResponse
 type CreateRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5501,18 +5225,6 @@ func (s CreateRuleGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRuleGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRuleGroupOutput) SetChangeToken(v string) *CreateRuleGroupOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRuleGroup sets the RuleGroup field's value.
-func (s *CreateRuleGroupOutput) SetRuleGroup(v *RuleGroup) *CreateRuleGroupOutput {
-	s.RuleGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleRequest
@@ -5577,24 +5289,6 @@ func (s *CreateRuleInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRuleInput) SetChangeToken(v string) *CreateRuleInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *CreateRuleInput) SetMetricName(v string) *CreateRuleInput {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateRuleInput) SetName(v string) *CreateRuleInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleResponse
 type CreateRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -5623,18 +5317,6 @@ func (s CreateRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateRuleOutput) SetChangeToken(v string) *CreateRuleOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRule sets the Rule field's value.
-func (s *CreateRuleOutput) SetRule(v *Rule) *CreateRuleOutput {
-	s.Rule = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSizeConstraintSetRequest
@@ -5687,18 +5369,6 @@ func (s *CreateSizeConstraintSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateSizeConstraintSetInput) SetChangeToken(v string) *CreateSizeConstraintSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateSizeConstraintSetInput) SetName(v string) *CreateSizeConstraintSetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSizeConstraintSetResponse
 type CreateSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5727,18 +5397,6 @@ func (s CreateSizeConstraintSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateSizeConstraintSetOutput) SetChangeToken(v string) *CreateSizeConstraintSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetSizeConstraintSet sets the SizeConstraintSet field's value.
-func (s *CreateSizeConstraintSetOutput) SetSizeConstraintSet(v *SizeConstraintSet) *CreateSizeConstraintSetOutput {
-	s.SizeConstraintSet = v
-	return s
 }
 
 // A request to create a SqlInjectionMatchSet.
@@ -5792,18 +5450,6 @@ func (s *CreateSqlInjectionMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateSqlInjectionMatchSetInput) SetChangeToken(v string) *CreateSqlInjectionMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateSqlInjectionMatchSetInput) SetName(v string) *CreateSqlInjectionMatchSetInput {
-	s.Name = &v
-	return s
-}
-
 // The response to a CreateSqlInjectionMatchSet request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSqlInjectionMatchSetResponse
 type CreateSqlInjectionMatchSetOutput struct {
@@ -5833,18 +5479,6 @@ func (s CreateSqlInjectionMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateSqlInjectionMatchSetOutput) SetChangeToken(v string) *CreateSqlInjectionMatchSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetSqlInjectionMatchSet sets the SqlInjectionMatchSet field's value.
-func (s *CreateSqlInjectionMatchSetOutput) SetSqlInjectionMatchSet(v *SqlInjectionMatchSet) *CreateSqlInjectionMatchSetOutput {
-	s.SqlInjectionMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLRequest
@@ -5924,30 +5558,6 @@ func (s *CreateWebACLInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateWebACLInput) SetChangeToken(v string) *CreateWebACLInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetDefaultAction sets the DefaultAction field's value.
-func (s *CreateWebACLInput) SetDefaultAction(v *WafAction) *CreateWebACLInput {
-	s.DefaultAction = v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *CreateWebACLInput) SetMetricName(v string) *CreateWebACLInput {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateWebACLInput) SetName(v string) *CreateWebACLInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLResponse
 type CreateWebACLOutput struct {
 	_ struct{} `type:"structure"`
@@ -5976,18 +5586,6 @@ func (s CreateWebACLOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateWebACLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateWebACLOutput) SetChangeToken(v string) *CreateWebACLOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetWebACL sets the WebACL field's value.
-func (s *CreateWebACLOutput) SetWebACL(v *WebACL) *CreateWebACLOutput {
-	s.WebACL = v
-	return s
 }
 
 // A request to create an XssMatchSet.
@@ -6041,18 +5639,6 @@ func (s *CreateXssMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateXssMatchSetInput) SetChangeToken(v string) *CreateXssMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateXssMatchSetInput) SetName(v string) *CreateXssMatchSetInput {
-	s.Name = &v
-	return s
-}
-
 // The response to a CreateXssMatchSet request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateXssMatchSetResponse
 type CreateXssMatchSetOutput struct {
@@ -6082,18 +5668,6 @@ func (s CreateXssMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateXssMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *CreateXssMatchSetOutput) SetChangeToken(v string) *CreateXssMatchSetOutput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetXssMatchSet sets the XssMatchSet field's value.
-func (s *CreateXssMatchSetOutput) SetXssMatchSet(v *XssMatchSet) *CreateXssMatchSetOutput {
-	s.XssMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteByteMatchSetRequest
@@ -6146,18 +5720,6 @@ func (s *DeleteByteMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetByteMatchSetId sets the ByteMatchSetId field's value.
-func (s *DeleteByteMatchSetInput) SetByteMatchSetId(v string) *DeleteByteMatchSetInput {
-	s.ByteMatchSetId = &v
-	return s
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteByteMatchSetInput) SetChangeToken(v string) *DeleteByteMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteByteMatchSetResponse
 type DeleteByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6183,12 +5745,6 @@ func (s DeleteByteMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteByteMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteByteMatchSetOutput) SetChangeToken(v string) *DeleteByteMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSetRequest
@@ -6241,18 +5797,6 @@ func (s *DeleteGeoMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteGeoMatchSetInput) SetChangeToken(v string) *DeleteGeoMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetGeoMatchSetId sets the GeoMatchSetId field's value.
-func (s *DeleteGeoMatchSetInput) SetGeoMatchSetId(v string) *DeleteGeoMatchSetInput {
-	s.GeoMatchSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteGeoMatchSetResponse
 type DeleteGeoMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6278,12 +5822,6 @@ func (s DeleteGeoMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteGeoMatchSetOutput) SetChangeToken(v string) *DeleteGeoMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteIPSetRequest
@@ -6336,18 +5874,6 @@ func (s *DeleteIPSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteIPSetInput) SetChangeToken(v string) *DeleteIPSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetIPSetId sets the IPSetId field's value.
-func (s *DeleteIPSetInput) SetIPSetId(v string) *DeleteIPSetInput {
-	s.IPSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteIPSetResponse
 type DeleteIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6373,12 +5899,6 @@ func (s DeleteIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteIPSetOutput) SetChangeToken(v string) *DeleteIPSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRuleRequest
@@ -6431,18 +5951,6 @@ func (s *DeleteRateBasedRuleInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRateBasedRuleInput) SetChangeToken(v string) *DeleteRateBasedRuleInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *DeleteRateBasedRuleInput) SetRuleId(v string) *DeleteRateBasedRuleInput {
-	s.RuleId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRuleResponse
 type DeleteRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -6468,12 +5976,6 @@ func (s DeleteRateBasedRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRateBasedRuleOutput) SetChangeToken(v string) *DeleteRateBasedRuleOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSetRequest
@@ -6526,18 +6028,6 @@ func (s *DeleteRegexMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRegexMatchSetInput) SetChangeToken(v string) *DeleteRegexMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRegexMatchSetId sets the RegexMatchSetId field's value.
-func (s *DeleteRegexMatchSetInput) SetRegexMatchSetId(v string) *DeleteRegexMatchSetInput {
-	s.RegexMatchSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexMatchSetResponse
 type DeleteRegexMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6563,12 +6053,6 @@ func (s DeleteRegexMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRegexMatchSetOutput) SetChangeToken(v string) *DeleteRegexMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSetRequest
@@ -6621,18 +6105,6 @@ func (s *DeleteRegexPatternSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRegexPatternSetInput) SetChangeToken(v string) *DeleteRegexPatternSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRegexPatternSetId sets the RegexPatternSetId field's value.
-func (s *DeleteRegexPatternSetInput) SetRegexPatternSetId(v string) *DeleteRegexPatternSetInput {
-	s.RegexPatternSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRegexPatternSetResponse
 type DeleteRegexPatternSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6658,12 +6130,6 @@ func (s DeleteRegexPatternSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRegexPatternSetOutput) SetChangeToken(v string) *DeleteRegexPatternSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroupRequest
@@ -6716,18 +6182,6 @@ func (s *DeleteRuleGroupInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRuleGroupInput) SetChangeToken(v string) *DeleteRuleGroupInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *DeleteRuleGroupInput) SetRuleGroupId(v string) *DeleteRuleGroupInput {
-	s.RuleGroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroupResponse
 type DeleteRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6753,12 +6207,6 @@ func (s DeleteRuleGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRuleGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRuleGroupOutput) SetChangeToken(v string) *DeleteRuleGroupOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleRequest
@@ -6811,18 +6259,6 @@ func (s *DeleteRuleInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRuleInput) SetChangeToken(v string) *DeleteRuleInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *DeleteRuleInput) SetRuleId(v string) *DeleteRuleInput {
-	s.RuleId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleResponse
 type DeleteRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -6848,12 +6284,6 @@ func (s DeleteRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteRuleOutput) SetChangeToken(v string) *DeleteRuleOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSizeConstraintSetRequest
@@ -6906,18 +6336,6 @@ func (s *DeleteSizeConstraintSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteSizeConstraintSetInput) SetChangeToken(v string) *DeleteSizeConstraintSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
-func (s *DeleteSizeConstraintSetInput) SetSizeConstraintSetId(v string) *DeleteSizeConstraintSetInput {
-	s.SizeConstraintSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSizeConstraintSetResponse
 type DeleteSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6943,12 +6361,6 @@ func (s DeleteSizeConstraintSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteSizeConstraintSetOutput) SetChangeToken(v string) *DeleteSizeConstraintSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // A request to delete a SqlInjectionMatchSet from AWS WAF.
@@ -7002,18 +6414,6 @@ func (s *DeleteSqlInjectionMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteSqlInjectionMatchSetInput) SetChangeToken(v string) *DeleteSqlInjectionMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
-func (s *DeleteSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *DeleteSqlInjectionMatchSetInput {
-	s.SqlInjectionMatchSetId = &v
-	return s
-}
-
 // The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSqlInjectionMatchSetResponse
 type DeleteSqlInjectionMatchSetOutput struct {
@@ -7040,12 +6440,6 @@ func (s DeleteSqlInjectionMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteSqlInjectionMatchSetOutput) SetChangeToken(v string) *DeleteSqlInjectionMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteWebACLRequest
@@ -7098,18 +6492,6 @@ func (s *DeleteWebACLInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteWebACLInput) SetChangeToken(v string) *DeleteWebACLInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetWebACLId sets the WebACLId field's value.
-func (s *DeleteWebACLInput) SetWebACLId(v string) *DeleteWebACLInput {
-	s.WebACLId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteWebACLResponse
 type DeleteWebACLOutput struct {
 	_ struct{} `type:"structure"`
@@ -7135,12 +6517,6 @@ func (s DeleteWebACLOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteWebACLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteWebACLOutput) SetChangeToken(v string) *DeleteWebACLOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // A request to delete an XssMatchSet from AWS WAF.
@@ -7194,18 +6570,6 @@ func (s *DeleteXssMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteXssMatchSetInput) SetChangeToken(v string) *DeleteXssMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetXssMatchSetId sets the XssMatchSetId field's value.
-func (s *DeleteXssMatchSetInput) SetXssMatchSetId(v string) *DeleteXssMatchSetInput {
-	s.XssMatchSetId = &v
-	return s
-}
-
 // The response to a request to delete an XssMatchSet from AWS WAF.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteXssMatchSetResponse
 type DeleteXssMatchSetOutput struct {
@@ -7232,12 +6596,6 @@ func (s DeleteXssMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteXssMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *DeleteXssMatchSetOutput) SetChangeToken(v string) *DeleteXssMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Specifies where in a web request to look for TargetString.
@@ -7304,18 +6662,6 @@ func (s *FieldToMatch) Validate() error {
 	return nil
 }
 
-// SetData sets the Data field's value.
-func (s *FieldToMatch) SetData(v string) *FieldToMatch {
-	s.Data = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *FieldToMatch) SetType(v MatchFieldType) *FieldToMatch {
-	s.Type = v
-	return s
-}
-
 // The country from which web requests originate that you want AWS WAF to search
 // for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchConstraint
@@ -7360,18 +6706,6 @@ func (s *GeoMatchConstraint) Validate() error {
 	return nil
 }
 
-// SetType sets the Type field's value.
-func (s *GeoMatchConstraint) SetType(v GeoMatchConstraintType) *GeoMatchConstraint {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *GeoMatchConstraint) SetValue(v GeoMatchConstraintValue) *GeoMatchConstraint {
-	s.Value = v
-	return s
-}
-
 // Contains one or more countries that AWS WAF will search for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSet
 type GeoMatchSet struct {
@@ -7408,24 +6742,6 @@ func (s GeoMatchSet) GoString() string {
 	return s.String()
 }
 
-// SetGeoMatchConstraints sets the GeoMatchConstraints field's value.
-func (s *GeoMatchSet) SetGeoMatchConstraints(v []GeoMatchConstraint) *GeoMatchSet {
-	s.GeoMatchConstraints = v
-	return s
-}
-
-// SetGeoMatchSetId sets the GeoMatchSetId field's value.
-func (s *GeoMatchSet) SetGeoMatchSetId(v string) *GeoMatchSet {
-	s.GeoMatchSetId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GeoMatchSet) SetName(v string) *GeoMatchSet {
-	s.Name = &v
-	return s
-}
-
 // Contains the identifier and the name of the GeoMatchSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GeoMatchSetSummary
 type GeoMatchSetSummary struct {
@@ -7452,18 +6768,6 @@ func (s GeoMatchSetSummary) String() string {
 // GoString returns the string representation
 func (s GeoMatchSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetGeoMatchSetId sets the GeoMatchSetId field's value.
-func (s *GeoMatchSetSummary) SetGeoMatchSetId(v string) *GeoMatchSetSummary {
-	s.GeoMatchSetId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GeoMatchSetSummary) SetName(v string) *GeoMatchSetSummary {
-	s.Name = &v
-	return s
 }
 
 // Specifies the type of update to perform to an GeoMatchSet with UpdateGeoMatchSet.
@@ -7515,18 +6819,6 @@ func (s *GeoMatchSetUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *GeoMatchSetUpdate) SetAction(v ChangeAction) *GeoMatchSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetGeoMatchConstraint sets the GeoMatchConstraint field's value.
-func (s *GeoMatchSetUpdate) SetGeoMatchConstraint(v *GeoMatchConstraint) *GeoMatchSetUpdate {
-	s.GeoMatchConstraint = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetByteMatchSetRequest
 type GetByteMatchSetInput struct {
 	_ struct{} `type:"structure"`
@@ -7565,12 +6857,6 @@ func (s *GetByteMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetByteMatchSetId sets the ByteMatchSetId field's value.
-func (s *GetByteMatchSetInput) SetByteMatchSetId(v string) *GetByteMatchSetInput {
-	s.ByteMatchSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetByteMatchSetResponse
 type GetByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -7603,12 +6889,6 @@ func (s GetByteMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetByteMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetByteMatchSet sets the ByteMatchSet field's value.
-func (s *GetByteMatchSetOutput) SetByteMatchSet(v *ByteMatchSet) *GetByteMatchSetOutput {
-	s.ByteMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenRequest
@@ -7652,12 +6932,6 @@ func (s GetChangeTokenOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *GetChangeTokenOutput) SetChangeToken(v string) *GetChangeTokenOutput {
-	s.ChangeToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenStatusRequest
 type GetChangeTokenStatusInput struct {
 	_ struct{} `type:"structure"`
@@ -7696,12 +6970,6 @@ func (s *GetChangeTokenStatusInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *GetChangeTokenStatusInput) SetChangeToken(v string) *GetChangeTokenStatusInput {
-	s.ChangeToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenStatusResponse
 type GetChangeTokenStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -7725,12 +6993,6 @@ func (s GetChangeTokenStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetChangeTokenStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeTokenStatus sets the ChangeTokenStatus field's value.
-func (s *GetChangeTokenStatusOutput) SetChangeTokenStatus(v ChangeTokenStatus) *GetChangeTokenStatusOutput {
-	s.ChangeTokenStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSetRequest
@@ -7771,12 +7033,6 @@ func (s *GetGeoMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetGeoMatchSetId sets the GeoMatchSetId field's value.
-func (s *GetGeoMatchSetInput) SetGeoMatchSetId(v string) *GetGeoMatchSetInput {
-	s.GeoMatchSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetGeoMatchSetResponse
 type GetGeoMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -7802,12 +7058,6 @@ func (s GetGeoMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGeoMatchSet sets the GeoMatchSet field's value.
-func (s *GetGeoMatchSetOutput) SetGeoMatchSet(v *GeoMatchSet) *GetGeoMatchSetOutput {
-	s.GeoMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetIPSetRequest
@@ -7848,12 +7098,6 @@ func (s *GetIPSetInput) Validate() error {
 	return nil
 }
 
-// SetIPSetId sets the IPSetId field's value.
-func (s *GetIPSetInput) SetIPSetId(v string) *GetIPSetInput {
-	s.IPSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetIPSetResponse
 type GetIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -7883,12 +7127,6 @@ func (s GetIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIPSet sets the IPSet field's value.
-func (s *GetIPSetOutput) SetIPSet(v *IPSet) *GetIPSetOutput {
-	s.IPSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleRequest
@@ -7927,12 +7165,6 @@ func (s *GetRateBasedRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *GetRateBasedRuleInput) SetRuleId(v string) *GetRateBasedRuleInput {
-	s.RuleId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeysRequest
@@ -7979,18 +7211,6 @@ func (s *GetRateBasedRuleManagedKeysInput) Validate() error {
 	return nil
 }
 
-// SetNextMarker sets the NextMarker field's value.
-func (s *GetRateBasedRuleManagedKeysInput) SetNextMarker(v string) *GetRateBasedRuleManagedKeysInput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *GetRateBasedRuleManagedKeysInput) SetRuleId(v string) *GetRateBasedRuleManagedKeysInput {
-	s.RuleId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeysResponse
 type GetRateBasedRuleManagedKeysOutput struct {
 	_ struct{} `type:"structure"`
@@ -8019,18 +7239,6 @@ func (s GetRateBasedRuleManagedKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetManagedKeys sets the ManagedKeys field's value.
-func (s *GetRateBasedRuleManagedKeysOutput) SetManagedKeys(v []string) *GetRateBasedRuleManagedKeysOutput {
-	s.ManagedKeys = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *GetRateBasedRuleManagedKeysOutput) SetNextMarker(v string) *GetRateBasedRuleManagedKeysOutput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleResponse
 type GetRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -8055,12 +7263,6 @@ func (s GetRateBasedRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRule sets the Rule field's value.
-func (s *GetRateBasedRuleOutput) SetRule(v *RateBasedRule) *GetRateBasedRuleOutput {
-	s.Rule = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSetRequest
@@ -8101,12 +7303,6 @@ func (s *GetRegexMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetRegexMatchSetId sets the RegexMatchSetId field's value.
-func (s *GetRegexMatchSetInput) SetRegexMatchSetId(v string) *GetRegexMatchSetInput {
-	s.RegexMatchSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexMatchSetResponse
 type GetRegexMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -8131,12 +7327,6 @@ func (s GetRegexMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRegexMatchSet sets the RegexMatchSet field's value.
-func (s *GetRegexMatchSetOutput) SetRegexMatchSet(v *RegexMatchSet) *GetRegexMatchSetOutput {
-	s.RegexMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSetRequest
@@ -8177,12 +7367,6 @@ func (s *GetRegexPatternSetInput) Validate() error {
 	return nil
 }
 
-// SetRegexPatternSetId sets the RegexPatternSetId field's value.
-func (s *GetRegexPatternSetInput) SetRegexPatternSetId(v string) *GetRegexPatternSetInput {
-	s.RegexPatternSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRegexPatternSetResponse
 type GetRegexPatternSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -8208,12 +7392,6 @@ func (s GetRegexPatternSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRegexPatternSet sets the RegexPatternSet field's value.
-func (s *GetRegexPatternSetOutput) SetRegexPatternSet(v *RegexPatternSet) *GetRegexPatternSetOutput {
-	s.RegexPatternSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleGroupRequest
@@ -8254,12 +7432,6 @@ func (s *GetRuleGroupInput) Validate() error {
 	return nil
 }
 
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *GetRuleGroupInput) SetRuleGroupId(v string) *GetRuleGroupInput {
-	s.RuleGroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleGroupResponse
 type GetRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -8283,12 +7455,6 @@ func (s GetRuleGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRuleGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRuleGroup sets the RuleGroup field's value.
-func (s *GetRuleGroupOutput) SetRuleGroup(v *RuleGroup) *GetRuleGroupOutput {
-	s.RuleGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleRequest
@@ -8329,12 +7495,6 @@ func (s *GetRuleInput) Validate() error {
 	return nil
 }
 
-// SetRuleId sets the RuleId field's value.
-func (s *GetRuleInput) SetRuleId(v string) *GetRuleInput {
-	s.RuleId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleResponse
 type GetRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -8364,12 +7524,6 @@ func (s GetRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRule sets the Rule field's value.
-func (s *GetRuleOutput) SetRule(v *Rule) *GetRuleOutput {
-	s.Rule = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSampledRequestsRequest
@@ -8460,30 +7614,6 @@ func (s *GetSampledRequestsInput) Validate() error {
 	return nil
 }
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *GetSampledRequestsInput) SetMaxItems(v int64) *GetSampledRequestsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *GetSampledRequestsInput) SetRuleId(v string) *GetSampledRequestsInput {
-	s.RuleId = &v
-	return s
-}
-
-// SetTimeWindow sets the TimeWindow field's value.
-func (s *GetSampledRequestsInput) SetTimeWindow(v *TimeWindow) *GetSampledRequestsInput {
-	s.TimeWindow = v
-	return s
-}
-
-// SetWebAclId sets the WebAclId field's value.
-func (s *GetSampledRequestsInput) SetWebAclId(v string) *GetSampledRequestsInput {
-	s.WebAclId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSampledRequestsResponse
 type GetSampledRequestsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8519,24 +7649,6 @@ func (s GetSampledRequestsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSampledRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPopulationSize sets the PopulationSize field's value.
-func (s *GetSampledRequestsOutput) SetPopulationSize(v int64) *GetSampledRequestsOutput {
-	s.PopulationSize = &v
-	return s
-}
-
-// SetSampledRequests sets the SampledRequests field's value.
-func (s *GetSampledRequestsOutput) SetSampledRequests(v []SampledHTTPRequest) *GetSampledRequestsOutput {
-	s.SampledRequests = v
-	return s
-}
-
-// SetTimeWindow sets the TimeWindow field's value.
-func (s *GetSampledRequestsOutput) SetTimeWindow(v *TimeWindow) *GetSampledRequestsOutput {
-	s.TimeWindow = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSizeConstraintSetRequest
@@ -8577,12 +7689,6 @@ func (s *GetSizeConstraintSetInput) Validate() error {
 	return nil
 }
 
-// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
-func (s *GetSizeConstraintSetInput) SetSizeConstraintSetId(v string) *GetSizeConstraintSetInput {
-	s.SizeConstraintSetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSizeConstraintSetResponse
 type GetSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -8616,12 +7722,6 @@ func (s GetSizeConstraintSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSizeConstraintSet sets the SizeConstraintSet field's value.
-func (s *GetSizeConstraintSetOutput) SetSizeConstraintSet(v *SizeConstraintSet) *GetSizeConstraintSetOutput {
-	s.SizeConstraintSet = v
-	return s
 }
 
 // A request to get a SqlInjectionMatchSet.
@@ -8663,12 +7763,6 @@ func (s *GetSqlInjectionMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
-func (s *GetSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *GetSqlInjectionMatchSetInput {
-	s.SqlInjectionMatchSetId = &v
-	return s
-}
-
 // The response to a GetSqlInjectionMatchSet request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSqlInjectionMatchSetResponse
 type GetSqlInjectionMatchSetOutput struct {
@@ -8702,12 +7796,6 @@ func (s GetSqlInjectionMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSqlInjectionMatchSet sets the SqlInjectionMatchSet field's value.
-func (s *GetSqlInjectionMatchSetOutput) SetSqlInjectionMatchSet(v *SqlInjectionMatchSet) *GetSqlInjectionMatchSetOutput {
-	s.SqlInjectionMatchSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACLRequest
@@ -8748,12 +7836,6 @@ func (s *GetWebACLInput) Validate() error {
 	return nil
 }
 
-// SetWebACLId sets the WebACLId field's value.
-func (s *GetWebACLInput) SetWebACLId(v string) *GetWebACLInput {
-	s.WebACLId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACLResponse
 type GetWebACLOutput struct {
 	_ struct{} `type:"structure"`
@@ -8788,12 +7870,6 @@ func (s GetWebACLOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetWebACLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetWebACL sets the WebACL field's value.
-func (s *GetWebACLOutput) SetWebACL(v *WebACL) *GetWebACLOutput {
-	s.WebACL = v
-	return s
 }
 
 // A request to get an XssMatchSet.
@@ -8835,12 +7911,6 @@ func (s *GetXssMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetXssMatchSetId sets the XssMatchSetId field's value.
-func (s *GetXssMatchSetInput) SetXssMatchSetId(v string) *GetXssMatchSetInput {
-	s.XssMatchSetId = &v
-	return s
-}
-
 // The response to a GetXssMatchSet request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetXssMatchSetResponse
 type GetXssMatchSetOutput struct {
@@ -8875,12 +7945,6 @@ func (s GetXssMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetXssMatchSet sets the XssMatchSet field's value.
-func (s *GetXssMatchSetOutput) SetXssMatchSet(v *XssMatchSet) *GetXssMatchSetOutput {
-	s.XssMatchSet = v
-	return s
-}
-
 // The response from a GetSampledRequests request includes an HTTPHeader complex
 // type that appears as Headers in the response syntax. HTTPHeader contains
 // the names and values of all of the headers that appear in one of the web
@@ -8904,18 +7968,6 @@ func (s HTTPHeader) String() string {
 // GoString returns the string representation
 func (s HTTPHeader) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *HTTPHeader) SetName(v string) *HTTPHeader {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *HTTPHeader) SetValue(v string) *HTTPHeader {
-	s.Value = &v
-	return s
 }
 
 // The response from a GetSampledRequests request includes an HTTPRequest complex
@@ -8966,42 +8018,6 @@ func (s HTTPRequest) GoString() string {
 	return s.String()
 }
 
-// SetClientIP sets the ClientIP field's value.
-func (s *HTTPRequest) SetClientIP(v string) *HTTPRequest {
-	s.ClientIP = &v
-	return s
-}
-
-// SetCountry sets the Country field's value.
-func (s *HTTPRequest) SetCountry(v string) *HTTPRequest {
-	s.Country = &v
-	return s
-}
-
-// SetHTTPVersion sets the HTTPVersion field's value.
-func (s *HTTPRequest) SetHTTPVersion(v string) *HTTPRequest {
-	s.HTTPVersion = &v
-	return s
-}
-
-// SetHeaders sets the Headers field's value.
-func (s *HTTPRequest) SetHeaders(v []HTTPHeader) *HTTPRequest {
-	s.Headers = v
-	return s
-}
-
-// SetMethod sets the Method field's value.
-func (s *HTTPRequest) SetMethod(v string) *HTTPRequest {
-	s.Method = &v
-	return s
-}
-
-// SetURI sets the URI field's value.
-func (s *HTTPRequest) SetURI(v string) *HTTPRequest {
-	s.URI = &v
-	return s
-}
-
 // Contains one or more IP addresses or blocks of IP addresses specified in
 // Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports /8, /16,
 // /24, and /32 IP address ranges for IPv4, and /24, /32, /48, /56, /64 and
@@ -9048,24 +8064,6 @@ func (s IPSet) String() string {
 // GoString returns the string representation
 func (s IPSet) GoString() string {
 	return s.String()
-}
-
-// SetIPSetDescriptors sets the IPSetDescriptors field's value.
-func (s *IPSet) SetIPSetDescriptors(v []IPSetDescriptor) *IPSet {
-	s.IPSetDescriptors = v
-	return s
-}
-
-// SetIPSetId sets the IPSetId field's value.
-func (s *IPSet) SetIPSetId(v string) *IPSet {
-	s.IPSetId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *IPSet) SetName(v string) *IPSet {
-	s.Name = &v
-	return s
 }
 
 // Specifies the IP address type (IPV4 or IPV6) and the IP address range (in
@@ -9130,18 +8128,6 @@ func (s *IPSetDescriptor) Validate() error {
 	return nil
 }
 
-// SetType sets the Type field's value.
-func (s *IPSetDescriptor) SetType(v IPSetDescriptorType) *IPSetDescriptor {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *IPSetDescriptor) SetValue(v string) *IPSetDescriptor {
-	s.Value = &v
-	return s
-}
-
 // Contains the identifier and the name of the IPSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/IPSetSummary
 type IPSetSummary struct {
@@ -9168,18 +8154,6 @@ func (s IPSetSummary) String() string {
 // GoString returns the string representation
 func (s IPSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetIPSetId sets the IPSetId field's value.
-func (s *IPSetSummary) SetIPSetId(v string) *IPSetSummary {
-	s.IPSetId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *IPSetSummary) SetName(v string) *IPSetSummary {
-	s.Name = &v
-	return s
 }
 
 // Specifies the type of update to perform to an IPSet with UpdateIPSet.
@@ -9231,18 +8205,6 @@ func (s *IPSetUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *IPSetUpdate) SetAction(v ChangeAction) *IPSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetIPSetDescriptor sets the IPSetDescriptor field's value.
-func (s *IPSetUpdate) SetIPSetDescriptor(v *IPSetDescriptor) *IPSetUpdate {
-	s.IPSetDescriptor = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroupRequest
 type ListActivatedRulesInRuleGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -9291,24 +8253,6 @@ func (s *ListActivatedRulesInRuleGroupInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListActivatedRulesInRuleGroupInput) SetLimit(v int64) *ListActivatedRulesInRuleGroupInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListActivatedRulesInRuleGroupInput) SetNextMarker(v string) *ListActivatedRulesInRuleGroupInput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *ListActivatedRulesInRuleGroupInput) SetRuleGroupId(v string) *ListActivatedRulesInRuleGroupInput {
-	s.RuleGroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroupResponse
 type ListActivatedRulesInRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -9338,18 +8282,6 @@ func (s ListActivatedRulesInRuleGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListActivatedRulesInRuleGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetActivatedRules sets the ActivatedRules field's value.
-func (s *ListActivatedRulesInRuleGroupOutput) SetActivatedRules(v []ActivatedRule) *ListActivatedRulesInRuleGroupOutput {
-	s.ActivatedRules = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListActivatedRulesInRuleGroupOutput) SetNextMarker(v string) *ListActivatedRulesInRuleGroupOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListByteMatchSetsRequest
@@ -9393,18 +8325,6 @@ func (s *ListByteMatchSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListByteMatchSetsInput) SetLimit(v int64) *ListByteMatchSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListByteMatchSetsInput) SetNextMarker(v string) *ListByteMatchSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListByteMatchSetsResponse
 type ListByteMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9435,18 +8355,6 @@ func (s ListByteMatchSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListByteMatchSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetByteMatchSets sets the ByteMatchSets field's value.
-func (s *ListByteMatchSetsOutput) SetByteMatchSets(v []ByteMatchSetSummary) *ListByteMatchSetsOutput {
-	s.ByteMatchSets = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListByteMatchSetsOutput) SetNextMarker(v string) *ListByteMatchSetsOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSetsRequest
@@ -9490,18 +8398,6 @@ func (s *ListGeoMatchSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListGeoMatchSetsInput) SetLimit(v int64) *ListGeoMatchSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListGeoMatchSetsInput) SetNextMarker(v string) *ListGeoMatchSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSetsResponse
 type ListGeoMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9532,18 +8428,6 @@ func (s ListGeoMatchSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGeoMatchSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGeoMatchSets sets the GeoMatchSets field's value.
-func (s *ListGeoMatchSetsOutput) SetGeoMatchSets(v []GeoMatchSetSummary) *ListGeoMatchSetsOutput {
-	s.GeoMatchSets = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListGeoMatchSetsOutput) SetNextMarker(v string) *ListGeoMatchSetsOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListIPSetsRequest
@@ -9587,18 +8471,6 @@ func (s *ListIPSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListIPSetsInput) SetLimit(v int64) *ListIPSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListIPSetsInput) SetNextMarker(v string) *ListIPSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListIPSetsResponse
 type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9628,18 +8500,6 @@ func (s ListIPSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIPSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIPSets sets the IPSets field's value.
-func (s *ListIPSetsOutput) SetIPSets(v []IPSetSummary) *ListIPSetsOutput {
-	s.IPSets = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListIPSetsOutput) SetNextMarker(v string) *ListIPSetsOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRulesRequest
@@ -9682,18 +8542,6 @@ func (s *ListRateBasedRulesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRateBasedRulesInput) SetLimit(v int64) *ListRateBasedRulesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRateBasedRulesInput) SetNextMarker(v string) *ListRateBasedRulesInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRulesResponse
 type ListRateBasedRulesOutput struct {
 	_ struct{} `type:"structure"`
@@ -9723,18 +8571,6 @@ func (s ListRateBasedRulesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRateBasedRulesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRateBasedRulesOutput) SetNextMarker(v string) *ListRateBasedRulesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *ListRateBasedRulesOutput) SetRules(v []RuleSummary) *ListRateBasedRulesOutput {
-	s.Rules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSetsRequest
@@ -9779,18 +8615,6 @@ func (s *ListRegexMatchSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRegexMatchSetsInput) SetLimit(v int64) *ListRegexMatchSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRegexMatchSetsInput) SetNextMarker(v string) *ListRegexMatchSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSetsResponse
 type ListRegexMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9821,18 +8645,6 @@ func (s ListRegexMatchSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRegexMatchSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRegexMatchSetsOutput) SetNextMarker(v string) *ListRegexMatchSetsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRegexMatchSets sets the RegexMatchSets field's value.
-func (s *ListRegexMatchSetsOutput) SetRegexMatchSets(v []RegexMatchSetSummary) *ListRegexMatchSetsOutput {
-	s.RegexMatchSets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSetsRequest
@@ -9877,18 +8689,6 @@ func (s *ListRegexPatternSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRegexPatternSetsInput) SetLimit(v int64) *ListRegexPatternSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRegexPatternSetsInput) SetNextMarker(v string) *ListRegexPatternSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSetsResponse
 type ListRegexPatternSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9919,18 +8719,6 @@ func (s ListRegexPatternSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRegexPatternSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRegexPatternSetsOutput) SetNextMarker(v string) *ListRegexPatternSetsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRegexPatternSets sets the RegexPatternSets field's value.
-func (s *ListRegexPatternSetsOutput) SetRegexPatternSets(v []RegexPatternSetSummary) *ListRegexPatternSetsOutput {
-	s.RegexPatternSets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroupsRequest
@@ -9974,18 +8762,6 @@ func (s *ListRuleGroupsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRuleGroupsInput) SetLimit(v int64) *ListRuleGroupsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRuleGroupsInput) SetNextMarker(v string) *ListRuleGroupsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroupsResponse
 type ListRuleGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10015,18 +8791,6 @@ func (s ListRuleGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRuleGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRuleGroupsOutput) SetNextMarker(v string) *ListRuleGroupsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRuleGroups sets the RuleGroups field's value.
-func (s *ListRuleGroupsOutput) SetRuleGroups(v []RuleGroupSummary) *ListRuleGroupsOutput {
-	s.RuleGroups = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRulesRequest
@@ -10069,18 +8833,6 @@ func (s *ListRulesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRulesInput) SetLimit(v int64) *ListRulesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRulesInput) SetNextMarker(v string) *ListRulesInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRulesResponse
 type ListRulesOutput struct {
 	_ struct{} `type:"structure"`
@@ -10110,18 +8862,6 @@ func (s ListRulesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRulesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRulesOutput) SetNextMarker(v string) *ListRulesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *ListRulesOutput) SetRules(v []RuleSummary) *ListRulesOutput {
-	s.Rules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSizeConstraintSetsRequest
@@ -10165,18 +8905,6 @@ func (s *ListSizeConstraintSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListSizeConstraintSetsInput) SetLimit(v int64) *ListSizeConstraintSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListSizeConstraintSetsInput) SetNextMarker(v string) *ListSizeConstraintSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSizeConstraintSetsResponse
 type ListSizeConstraintSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10207,18 +8935,6 @@ func (s ListSizeConstraintSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSizeConstraintSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListSizeConstraintSetsOutput) SetNextMarker(v string) *ListSizeConstraintSetsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetSizeConstraintSets sets the SizeConstraintSets field's value.
-func (s *ListSizeConstraintSetsOutput) SetSizeConstraintSets(v []SizeConstraintSetSummary) *ListSizeConstraintSetsOutput {
-	s.SizeConstraintSets = v
-	return s
 }
 
 // A request to list the SqlInjectionMatchSet objects created by the current
@@ -10264,18 +8980,6 @@ func (s *ListSqlInjectionMatchSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListSqlInjectionMatchSetsInput) SetLimit(v int64) *ListSqlInjectionMatchSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListSqlInjectionMatchSetsInput) SetNextMarker(v string) *ListSqlInjectionMatchSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // The response to a ListSqlInjectionMatchSets request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSqlInjectionMatchSetsResponse
 type ListSqlInjectionMatchSetsOutput struct {
@@ -10307,18 +9011,6 @@ func (s ListSqlInjectionMatchSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSqlInjectionMatchSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListSqlInjectionMatchSetsOutput) SetNextMarker(v string) *ListSqlInjectionMatchSetsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetSqlInjectionMatchSets sets the SqlInjectionMatchSets field's value.
-func (s *ListSqlInjectionMatchSetsOutput) SetSqlInjectionMatchSets(v []SqlInjectionMatchSetSummary) *ListSqlInjectionMatchSetsOutput {
-	s.SqlInjectionMatchSets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroupsRequest
@@ -10363,18 +9055,6 @@ func (s *ListSubscribedRuleGroupsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListSubscribedRuleGroupsInput) SetLimit(v int64) *ListSubscribedRuleGroupsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListSubscribedRuleGroupsInput) SetNextMarker(v string) *ListSubscribedRuleGroupsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroupsResponse
 type ListSubscribedRuleGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10404,18 +9084,6 @@ func (s ListSubscribedRuleGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSubscribedRuleGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListSubscribedRuleGroupsOutput) SetNextMarker(v string) *ListSubscribedRuleGroupsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetRuleGroups sets the RuleGroups field's value.
-func (s *ListSubscribedRuleGroupsOutput) SetRuleGroups(v []SubscribedRuleGroupSummary) *ListSubscribedRuleGroupsOutput {
-	s.RuleGroups = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListWebACLsRequest
@@ -10460,18 +9128,6 @@ func (s *ListWebACLsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListWebACLsInput) SetLimit(v int64) *ListWebACLsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListWebACLsInput) SetNextMarker(v string) *ListWebACLsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListWebACLsResponse
 type ListWebACLsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10501,18 +9157,6 @@ func (s ListWebACLsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListWebACLsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListWebACLsOutput) SetNextMarker(v string) *ListWebACLsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetWebACLs sets the WebACLs field's value.
-func (s *ListWebACLsOutput) SetWebACLs(v []WebACLSummary) *ListWebACLsOutput {
-	s.WebACLs = v
-	return s
 }
 
 // A request to list the XssMatchSet objects created by the current AWS account.
@@ -10557,18 +9201,6 @@ func (s *ListXssMatchSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListXssMatchSetsInput) SetLimit(v int64) *ListXssMatchSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListXssMatchSetsInput) SetNextMarker(v string) *ListXssMatchSetsInput {
-	s.NextMarker = &v
-	return s
-}
-
 // The response to a ListXssMatchSets request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListXssMatchSetsResponse
 type ListXssMatchSetsOutput struct {
@@ -10600,18 +9232,6 @@ func (s ListXssMatchSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListXssMatchSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListXssMatchSetsOutput) SetNextMarker(v string) *ListXssMatchSetsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetXssMatchSets sets the XssMatchSets field's value.
-func (s *ListXssMatchSetsOutput) SetXssMatchSets(v []XssMatchSetSummary) *ListXssMatchSetsOutput {
-	s.XssMatchSets = v
-	return s
 }
 
 // Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet,
@@ -10681,24 +9301,6 @@ func (s *Predicate) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDataId sets the DataId field's value.
-func (s *Predicate) SetDataId(v string) *Predicate {
-	s.DataId = &v
-	return s
-}
-
-// SetNegated sets the Negated field's value.
-func (s *Predicate) SetNegated(v bool) *Predicate {
-	s.Negated = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Predicate) SetType(v PredicateType) *Predicate {
-	s.Type = v
-	return s
 }
 
 // A RateBasedRule is identical to a regular Rule, with one addition: a RateBasedRule
@@ -10773,42 +9375,6 @@ func (s RateBasedRule) GoString() string {
 	return s.String()
 }
 
-// SetMatchPredicates sets the MatchPredicates field's value.
-func (s *RateBasedRule) SetMatchPredicates(v []Predicate) *RateBasedRule {
-	s.MatchPredicates = v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *RateBasedRule) SetMetricName(v string) *RateBasedRule {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RateBasedRule) SetName(v string) *RateBasedRule {
-	s.Name = &v
-	return s
-}
-
-// SetRateKey sets the RateKey field's value.
-func (s *RateBasedRule) SetRateKey(v RateKey) *RateBasedRule {
-	s.RateKey = v
-	return s
-}
-
-// SetRateLimit sets the RateLimit field's value.
-func (s *RateBasedRule) SetRateLimit(v int64) *RateBasedRule {
-	s.RateLimit = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *RateBasedRule) SetRuleId(v string) *RateBasedRule {
-	s.RuleId = &v
-	return s
-}
-
 // In a GetRegexMatchSet request, RegexMatchSet is a complex type that contains
 // the RegexMatchSetId and Name of a RegexMatchSet, and the values that you
 // specified when you updated the RegexMatchSet.
@@ -10858,24 +9424,6 @@ func (s RegexMatchSet) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *RegexMatchSet) SetName(v string) *RegexMatchSet {
-	s.Name = &v
-	return s
-}
-
-// SetRegexMatchSetId sets the RegexMatchSetId field's value.
-func (s *RegexMatchSet) SetRegexMatchSetId(v string) *RegexMatchSet {
-	s.RegexMatchSetId = &v
-	return s
-}
-
-// SetRegexMatchTuples sets the RegexMatchTuples field's value.
-func (s *RegexMatchSet) SetRegexMatchTuples(v []RegexMatchTuple) *RegexMatchSet {
-	s.RegexMatchTuples = v
-	return s
-}
-
 // Returned by ListRegexMatchSets. Each RegexMatchSetSummary object includes
 // the Name and RegexMatchSetId for one RegexMatchSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexMatchSetSummary
@@ -10906,18 +9454,6 @@ func (s RegexMatchSetSummary) String() string {
 // GoString returns the string representation
 func (s RegexMatchSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *RegexMatchSetSummary) SetName(v string) *RegexMatchSetSummary {
-	s.Name = &v
-	return s
-}
-
-// SetRegexMatchSetId sets the RegexMatchSetId field's value.
-func (s *RegexMatchSetSummary) SetRegexMatchSetId(v string) *RegexMatchSetSummary {
-	s.RegexMatchSetId = &v
-	return s
 }
 
 // In an UpdateRegexMatchSet request, RegexMatchSetUpdate specifies whether
@@ -10971,18 +9507,6 @@ func (s *RegexMatchSetUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAction sets the Action field's value.
-func (s *RegexMatchSetUpdate) SetAction(v ChangeAction) *RegexMatchSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetRegexMatchTuple sets the RegexMatchTuple field's value.
-func (s *RegexMatchSetUpdate) SetRegexMatchTuple(v *RegexMatchTuple) *RegexMatchSetUpdate {
-	s.RegexMatchTuple = v
-	return s
 }
 
 // The regular expression pattern that you want AWS WAF to search for in web
@@ -11131,24 +9655,6 @@ func (s *RegexMatchTuple) Validate() error {
 	return nil
 }
 
-// SetFieldToMatch sets the FieldToMatch field's value.
-func (s *RegexMatchTuple) SetFieldToMatch(v *FieldToMatch) *RegexMatchTuple {
-	s.FieldToMatch = v
-	return s
-}
-
-// SetRegexPatternSetId sets the RegexPatternSetId field's value.
-func (s *RegexMatchTuple) SetRegexPatternSetId(v string) *RegexMatchTuple {
-	s.RegexPatternSetId = &v
-	return s
-}
-
-// SetTextTransformation sets the TextTransformation field's value.
-func (s *RegexMatchTuple) SetTextTransformation(v TextTransformation) *RegexMatchTuple {
-	s.TextTransformation = v
-	return s
-}
-
 // The RegexPatternSet specifies the regular expression (regex) pattern that
 // you want AWS WAF to search for, such as B[a@]dB[o0]t. You can then configure
 // AWS WAF to reject those requests.
@@ -11186,24 +9692,6 @@ func (s RegexPatternSet) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *RegexPatternSet) SetName(v string) *RegexPatternSet {
-	s.Name = &v
-	return s
-}
-
-// SetRegexPatternSetId sets the RegexPatternSetId field's value.
-func (s *RegexPatternSet) SetRegexPatternSetId(v string) *RegexPatternSet {
-	s.RegexPatternSetId = &v
-	return s
-}
-
-// SetRegexPatternStrings sets the RegexPatternStrings field's value.
-func (s *RegexPatternSet) SetRegexPatternStrings(v []string) *RegexPatternSet {
-	s.RegexPatternStrings = v
-	return s
-}
-
 // Returned by ListRegexPatternSets. Each RegexPatternSetSummary object includes
 // the Name and RegexPatternSetId for one RegexPatternSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RegexPatternSetSummary
@@ -11235,18 +9723,6 @@ func (s RegexPatternSetSummary) String() string {
 // GoString returns the string representation
 func (s RegexPatternSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *RegexPatternSetSummary) SetName(v string) *RegexPatternSetSummary {
-	s.Name = &v
-	return s
-}
-
-// SetRegexPatternSetId sets the RegexPatternSetId field's value.
-func (s *RegexPatternSetSummary) SetRegexPatternSetId(v string) *RegexPatternSetSummary {
-	s.RegexPatternSetId = &v
-	return s
 }
 
 // In an UpdateRegexPatternSet request, RegexPatternSetUpdate specifies whether
@@ -11296,18 +9772,6 @@ func (s *RegexPatternSetUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAction sets the Action field's value.
-func (s *RegexPatternSetUpdate) SetAction(v ChangeAction) *RegexPatternSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetRegexPatternString sets the RegexPatternString field's value.
-func (s *RegexPatternSetUpdate) SetRegexPatternString(v string) *RegexPatternSetUpdate {
-	s.RegexPatternString = &v
-	return s
 }
 
 // A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet objects
@@ -11362,30 +9826,6 @@ func (s Rule) GoString() string {
 	return s.String()
 }
 
-// SetMetricName sets the MetricName field's value.
-func (s *Rule) SetMetricName(v string) *Rule {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Rule) SetName(v string) *Rule {
-	s.Name = &v
-	return s
-}
-
-// SetPredicates sets the Predicates field's value.
-func (s *Rule) SetPredicates(v []Predicate) *Rule {
-	s.Predicates = v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *Rule) SetRuleId(v string) *Rule {
-	s.RuleId = &v
-	return s
-}
-
 // A collection of predefined rules that you can add to a web ACL.
 //
 // Rule groups are subject to the following limits:
@@ -11431,24 +9871,6 @@ func (s RuleGroup) GoString() string {
 	return s.String()
 }
 
-// SetMetricName sets the MetricName field's value.
-func (s *RuleGroup) SetMetricName(v string) *RuleGroup {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RuleGroup) SetName(v string) *RuleGroup {
-	s.Name = &v
-	return s
-}
-
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *RuleGroup) SetRuleGroupId(v string) *RuleGroup {
-	s.RuleGroupId = &v
-	return s
-}
-
 // Contains the identifier and the friendly name or description of the RuleGroup.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RuleGroupSummary
 type RuleGroupSummary struct {
@@ -11479,18 +9901,6 @@ func (s RuleGroupSummary) String() string {
 // GoString returns the string representation
 func (s RuleGroupSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *RuleGroupSummary) SetName(v string) *RuleGroupSummary {
-	s.Name = &v
-	return s
-}
-
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *RuleGroupSummary) SetRuleGroupId(v string) *RuleGroupSummary {
-	s.RuleGroupId = &v
-	return s
 }
 
 // Specifies an ActivatedRule and indicates whether you want to add it to a
@@ -11545,18 +9955,6 @@ func (s *RuleGroupUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *RuleGroupUpdate) SetAction(v ChangeAction) *RuleGroupUpdate {
-	s.Action = v
-	return s
-}
-
-// SetActivatedRule sets the ActivatedRule field's value.
-func (s *RuleGroupUpdate) SetActivatedRule(v *ActivatedRule) *RuleGroupUpdate {
-	s.ActivatedRule = v
-	return s
-}
-
 // Contains the identifier and the friendly name or description of the Rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/RuleSummary
 type RuleSummary struct {
@@ -11587,18 +9985,6 @@ func (s RuleSummary) String() string {
 // GoString returns the string representation
 func (s RuleSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *RuleSummary) SetName(v string) *RuleSummary {
-	s.Name = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *RuleSummary) SetRuleId(v string) *RuleSummary {
-	s.RuleId = &v
-	return s
 }
 
 // Specifies a Predicate (such as an IPSet) and indicates whether you want to
@@ -11651,18 +10037,6 @@ func (s *RuleUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *RuleUpdate) SetAction(v ChangeAction) *RuleUpdate {
-	s.Action = v
-	return s
-}
-
-// SetPredicate sets the Predicate field's value.
-func (s *RuleUpdate) SetPredicate(v *Predicate) *RuleUpdate {
-	s.Predicate = v
-	return s
-}
-
 // The response from a GetSampledRequests request includes a SampledHTTPRequests
 // complex type that appears as SampledRequests in the response syntax. SampledHTTPRequests
 // contains one SampledHTTPRequest object for each web request that is returned
@@ -11706,36 +10080,6 @@ func (s SampledHTTPRequest) String() string {
 // GoString returns the string representation
 func (s SampledHTTPRequest) GoString() string {
 	return s.String()
-}
-
-// SetAction sets the Action field's value.
-func (s *SampledHTTPRequest) SetAction(v string) *SampledHTTPRequest {
-	s.Action = &v
-	return s
-}
-
-// SetRequest sets the Request field's value.
-func (s *SampledHTTPRequest) SetRequest(v *HTTPRequest) *SampledHTTPRequest {
-	s.Request = v
-	return s
-}
-
-// SetRuleWithinRuleGroup sets the RuleWithinRuleGroup field's value.
-func (s *SampledHTTPRequest) SetRuleWithinRuleGroup(v string) *SampledHTTPRequest {
-	s.RuleWithinRuleGroup = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *SampledHTTPRequest) SetTimestamp(v time.Time) *SampledHTTPRequest {
-	s.Timestamp = &v
-	return s
-}
-
-// SetWeight sets the Weight field's value.
-func (s *SampledHTTPRequest) SetWeight(v int64) *SampledHTTPRequest {
-	s.Weight = &v
-	return s
 }
 
 // Specifies a constraint on the size of a part of the web request. AWS WAF
@@ -11904,30 +10248,6 @@ func (s *SizeConstraint) Validate() error {
 	return nil
 }
 
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *SizeConstraint) SetComparisonOperator(v ComparisonOperator) *SizeConstraint {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetFieldToMatch sets the FieldToMatch field's value.
-func (s *SizeConstraint) SetFieldToMatch(v *FieldToMatch) *SizeConstraint {
-	s.FieldToMatch = v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *SizeConstraint) SetSize(v int64) *SizeConstraint {
-	s.Size = &v
-	return s
-}
-
-// SetTextTransformation sets the TextTransformation field's value.
-func (s *SizeConstraint) SetTextTransformation(v TextTransformation) *SizeConstraint {
-	s.TextTransformation = v
-	return s
-}
-
 // A complex type that contains SizeConstraint objects, which specify the parts
 // of web requests that you want AWS WAF to inspect the size of. If a SizeConstraintSet
 // contains more than one SizeConstraint object, a request only needs to match
@@ -11966,24 +10286,6 @@ func (s SizeConstraintSet) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *SizeConstraintSet) SetName(v string) *SizeConstraintSet {
-	s.Name = &v
-	return s
-}
-
-// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
-func (s *SizeConstraintSet) SetSizeConstraintSetId(v string) *SizeConstraintSet {
-	s.SizeConstraintSetId = &v
-	return s
-}
-
-// SetSizeConstraints sets the SizeConstraints field's value.
-func (s *SizeConstraintSet) SetSizeConstraints(v []SizeConstraint) *SizeConstraintSet {
-	s.SizeConstraints = v
-	return s
-}
-
 // The Id and Name of a SizeConstraintSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/SizeConstraintSetSummary
 type SizeConstraintSetSummary struct {
@@ -12014,18 +10316,6 @@ func (s SizeConstraintSetSummary) String() string {
 // GoString returns the string representation
 func (s SizeConstraintSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *SizeConstraintSetSummary) SetName(v string) *SizeConstraintSetSummary {
-	s.Name = &v
-	return s
-}
-
-// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
-func (s *SizeConstraintSetSummary) SetSizeConstraintSetId(v string) *SizeConstraintSetSummary {
-	s.SizeConstraintSetId = &v
-	return s
 }
 
 // Specifies the part of a web request that you want to inspect the size of
@@ -12082,18 +10372,6 @@ func (s *SizeConstraintSetUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *SizeConstraintSetUpdate) SetAction(v ChangeAction) *SizeConstraintSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetSizeConstraint sets the SizeConstraint field's value.
-func (s *SizeConstraintSetUpdate) SetSizeConstraint(v *SizeConstraint) *SizeConstraintSetUpdate {
-	s.SizeConstraint = v
-	return s
-}
-
 // A complex type that contains SqlInjectionMatchTuple objects, which specify
 // the parts of web requests that you want AWS WAF to inspect for snippets of
 // malicious SQL code and, if you want AWS WAF to inspect a header, the name
@@ -12135,24 +10413,6 @@ func (s SqlInjectionMatchSet) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *SqlInjectionMatchSet) SetName(v string) *SqlInjectionMatchSet {
-	s.Name = &v
-	return s
-}
-
-// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
-func (s *SqlInjectionMatchSet) SetSqlInjectionMatchSetId(v string) *SqlInjectionMatchSet {
-	s.SqlInjectionMatchSetId = &v
-	return s
-}
-
-// SetSqlInjectionMatchTuples sets the SqlInjectionMatchTuples field's value.
-func (s *SqlInjectionMatchSet) SetSqlInjectionMatchTuples(v []SqlInjectionMatchTuple) *SqlInjectionMatchSet {
-	s.SqlInjectionMatchTuples = v
-	return s
-}
-
 // The Id and Name of a SqlInjectionMatchSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/SqlInjectionMatchSetSummary
 type SqlInjectionMatchSetSummary struct {
@@ -12183,18 +10443,6 @@ func (s SqlInjectionMatchSetSummary) String() string {
 // GoString returns the string representation
 func (s SqlInjectionMatchSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *SqlInjectionMatchSetSummary) SetName(v string) *SqlInjectionMatchSetSummary {
-	s.Name = &v
-	return s
-}
-
-// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
-func (s *SqlInjectionMatchSetSummary) SetSqlInjectionMatchSetId(v string) *SqlInjectionMatchSetSummary {
-	s.SqlInjectionMatchSetId = &v
-	return s
 }
 
 // Specifies the part of a web request that you want to inspect for snippets
@@ -12248,18 +10496,6 @@ func (s *SqlInjectionMatchSetUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAction sets the Action field's value.
-func (s *SqlInjectionMatchSetUpdate) SetAction(v ChangeAction) *SqlInjectionMatchSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetSqlInjectionMatchTuple sets the SqlInjectionMatchTuple field's value.
-func (s *SqlInjectionMatchSetUpdate) SetSqlInjectionMatchTuple(v *SqlInjectionMatchTuple) *SqlInjectionMatchSetUpdate {
-	s.SqlInjectionMatchTuple = v
-	return s
 }
 
 // Specifies the part of a web request that you want AWS WAF to inspect for
@@ -12381,18 +10617,6 @@ func (s *SqlInjectionMatchTuple) Validate() error {
 	return nil
 }
 
-// SetFieldToMatch sets the FieldToMatch field's value.
-func (s *SqlInjectionMatchTuple) SetFieldToMatch(v *FieldToMatch) *SqlInjectionMatchTuple {
-	s.FieldToMatch = v
-	return s
-}
-
-// SetTextTransformation sets the TextTransformation field's value.
-func (s *SqlInjectionMatchTuple) SetTextTransformation(v TextTransformation) *SqlInjectionMatchTuple {
-	s.TextTransformation = v
-	return s
-}
-
 // A summary of the rule groups you are subscribed to.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/SubscribedRuleGroupSummary
 type SubscribedRuleGroupSummary struct {
@@ -12426,24 +10650,6 @@ func (s SubscribedRuleGroupSummary) String() string {
 // GoString returns the string representation
 func (s SubscribedRuleGroupSummary) GoString() string {
 	return s.String()
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *SubscribedRuleGroupSummary) SetMetricName(v string) *SubscribedRuleGroupSummary {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *SubscribedRuleGroupSummary) SetName(v string) *SubscribedRuleGroupSummary {
-	s.Name = &v
-	return s
-}
-
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *SubscribedRuleGroupSummary) SetRuleGroupId(v string) *SubscribedRuleGroupSummary {
-	s.RuleGroupId = &v
-	return s
 }
 
 // In a GetSampledRequests request, the StartTime and EndTime objects specify
@@ -12503,18 +10709,6 @@ func (s *TimeWindow) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *TimeWindow) SetEndTime(v time.Time) *TimeWindow {
-	s.EndTime = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *TimeWindow) SetStartTime(v time.Time) *TimeWindow {
-	s.StartTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateByteMatchSetRequest
@@ -12594,24 +10788,6 @@ func (s *UpdateByteMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetByteMatchSetId sets the ByteMatchSetId field's value.
-func (s *UpdateByteMatchSetInput) SetByteMatchSetId(v string) *UpdateByteMatchSetInput {
-	s.ByteMatchSetId = &v
-	return s
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateByteMatchSetInput) SetChangeToken(v string) *UpdateByteMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateByteMatchSetInput) SetUpdates(v []ByteMatchSetUpdate) *UpdateByteMatchSetInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateByteMatchSetResponse
 type UpdateByteMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -12637,12 +10813,6 @@ func (s UpdateByteMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateByteMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateByteMatchSetOutput) SetChangeToken(v string) *UpdateByteMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSetRequest
@@ -12722,24 +10892,6 @@ func (s *UpdateGeoMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateGeoMatchSetInput) SetChangeToken(v string) *UpdateGeoMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetGeoMatchSetId sets the GeoMatchSetId field's value.
-func (s *UpdateGeoMatchSetInput) SetGeoMatchSetId(v string) *UpdateGeoMatchSetInput {
-	s.GeoMatchSetId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateGeoMatchSetInput) SetUpdates(v []GeoMatchSetUpdate) *UpdateGeoMatchSetInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateGeoMatchSetResponse
 type UpdateGeoMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -12765,12 +10917,6 @@ func (s UpdateGeoMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGeoMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateGeoMatchSetOutput) SetChangeToken(v string) *UpdateGeoMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSetRequest
@@ -12847,24 +10993,6 @@ func (s *UpdateIPSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateIPSetInput) SetChangeToken(v string) *UpdateIPSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetIPSetId sets the IPSetId field's value.
-func (s *UpdateIPSetInput) SetIPSetId(v string) *UpdateIPSetInput {
-	s.IPSetId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateIPSetInput) SetUpdates(v []IPSetUpdate) *UpdateIPSetInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSetResponse
 type UpdateIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -12890,12 +11018,6 @@ func (s UpdateIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateIPSetOutput) SetChangeToken(v string) *UpdateIPSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRuleRequest
@@ -12981,30 +11103,6 @@ func (s *UpdateRateBasedRuleInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRateBasedRuleInput) SetChangeToken(v string) *UpdateRateBasedRuleInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRateLimit sets the RateLimit field's value.
-func (s *UpdateRateBasedRuleInput) SetRateLimit(v int64) *UpdateRateBasedRuleInput {
-	s.RateLimit = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *UpdateRateBasedRuleInput) SetRuleId(v string) *UpdateRateBasedRuleInput {
-	s.RuleId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateRateBasedRuleInput) SetUpdates(v []RuleUpdate) *UpdateRateBasedRuleInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRuleResponse
 type UpdateRateBasedRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -13030,12 +11128,6 @@ func (s UpdateRateBasedRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRateBasedRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRateBasedRuleOutput) SetChangeToken(v string) *UpdateRateBasedRuleOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSetRequest
@@ -13108,24 +11200,6 @@ func (s *UpdateRegexMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRegexMatchSetInput) SetChangeToken(v string) *UpdateRegexMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRegexMatchSetId sets the RegexMatchSetId field's value.
-func (s *UpdateRegexMatchSetInput) SetRegexMatchSetId(v string) *UpdateRegexMatchSetInput {
-	s.RegexMatchSetId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateRegexMatchSetInput) SetUpdates(v []RegexMatchSetUpdate) *UpdateRegexMatchSetInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexMatchSetResponse
 type UpdateRegexMatchSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -13151,12 +11225,6 @@ func (s UpdateRegexMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRegexMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRegexMatchSetOutput) SetChangeToken(v string) *UpdateRegexMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSetRequest
@@ -13229,24 +11297,6 @@ func (s *UpdateRegexPatternSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRegexPatternSetInput) SetChangeToken(v string) *UpdateRegexPatternSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRegexPatternSetId sets the RegexPatternSetId field's value.
-func (s *UpdateRegexPatternSetInput) SetRegexPatternSetId(v string) *UpdateRegexPatternSetInput {
-	s.RegexPatternSetId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateRegexPatternSetInput) SetUpdates(v []RegexPatternSetUpdate) *UpdateRegexPatternSetInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRegexPatternSetResponse
 type UpdateRegexPatternSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -13272,12 +11322,6 @@ func (s UpdateRegexPatternSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRegexPatternSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRegexPatternSetOutput) SetChangeToken(v string) *UpdateRegexPatternSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroupRequest
@@ -13356,24 +11400,6 @@ func (s *UpdateRuleGroupInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRuleGroupInput) SetChangeToken(v string) *UpdateRuleGroupInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRuleGroupId sets the RuleGroupId field's value.
-func (s *UpdateRuleGroupInput) SetRuleGroupId(v string) *UpdateRuleGroupInput {
-	s.RuleGroupId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateRuleGroupInput) SetUpdates(v []RuleGroupUpdate) *UpdateRuleGroupInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroupResponse
 type UpdateRuleGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -13399,12 +11425,6 @@ func (s UpdateRuleGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRuleGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRuleGroupOutput) SetChangeToken(v string) *UpdateRuleGroupOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleRequest
@@ -13480,24 +11500,6 @@ func (s *UpdateRuleInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRuleInput) SetChangeToken(v string) *UpdateRuleInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetRuleId sets the RuleId field's value.
-func (s *UpdateRuleInput) SetRuleId(v string) *UpdateRuleInput {
-	s.RuleId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateRuleInput) SetUpdates(v []RuleUpdate) *UpdateRuleInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleResponse
 type UpdateRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -13523,12 +11525,6 @@ func (s UpdateRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateRuleOutput) SetChangeToken(v string) *UpdateRuleOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSizeConstraintSetRequest
@@ -13609,24 +11605,6 @@ func (s *UpdateSizeConstraintSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateSizeConstraintSetInput) SetChangeToken(v string) *UpdateSizeConstraintSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetSizeConstraintSetId sets the SizeConstraintSetId field's value.
-func (s *UpdateSizeConstraintSetInput) SetSizeConstraintSetId(v string) *UpdateSizeConstraintSetInput {
-	s.SizeConstraintSetId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateSizeConstraintSetInput) SetUpdates(v []SizeConstraintSetUpdate) *UpdateSizeConstraintSetInput {
-	s.Updates = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSizeConstraintSetResponse
 type UpdateSizeConstraintSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -13652,12 +11630,6 @@ func (s UpdateSizeConstraintSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSizeConstraintSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateSizeConstraintSetOutput) SetChangeToken(v string) *UpdateSizeConstraintSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // A request to update a SqlInjectionMatchSet.
@@ -13738,24 +11710,6 @@ func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateSqlInjectionMatchSetInput) SetChangeToken(v string) *UpdateSqlInjectionMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetSqlInjectionMatchSetId sets the SqlInjectionMatchSetId field's value.
-func (s *UpdateSqlInjectionMatchSetInput) SetSqlInjectionMatchSetId(v string) *UpdateSqlInjectionMatchSetInput {
-	s.SqlInjectionMatchSetId = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateSqlInjectionMatchSetInput) SetUpdates(v []SqlInjectionMatchSetUpdate) *UpdateSqlInjectionMatchSetInput {
-	s.Updates = v
-	return s
-}
-
 // The response to an UpdateSqlInjectionMatchSets request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSqlInjectionMatchSetResponse
 type UpdateSqlInjectionMatchSetOutput struct {
@@ -13782,12 +11736,6 @@ func (s UpdateSqlInjectionMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSqlInjectionMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateSqlInjectionMatchSetOutput) SetChangeToken(v string) *UpdateSqlInjectionMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateWebACLRequest
@@ -13872,30 +11820,6 @@ func (s *UpdateWebACLInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateWebACLInput) SetChangeToken(v string) *UpdateWebACLInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetDefaultAction sets the DefaultAction field's value.
-func (s *UpdateWebACLInput) SetDefaultAction(v *WafAction) *UpdateWebACLInput {
-	s.DefaultAction = v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateWebACLInput) SetUpdates(v []WebACLUpdate) *UpdateWebACLInput {
-	s.Updates = v
-	return s
-}
-
-// SetWebACLId sets the WebACLId field's value.
-func (s *UpdateWebACLInput) SetWebACLId(v string) *UpdateWebACLInput {
-	s.WebACLId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateWebACLResponse
 type UpdateWebACLOutput struct {
 	_ struct{} `type:"structure"`
@@ -13921,12 +11845,6 @@ func (s UpdateWebACLOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateWebACLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateWebACLOutput) SetChangeToken(v string) *UpdateWebACLOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // A request to update an XssMatchSet.
@@ -14006,24 +11924,6 @@ func (s *UpdateXssMatchSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateXssMatchSetInput) SetChangeToken(v string) *UpdateXssMatchSetInput {
-	s.ChangeToken = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *UpdateXssMatchSetInput) SetUpdates(v []XssMatchSetUpdate) *UpdateXssMatchSetInput {
-	s.Updates = v
-	return s
-}
-
-// SetXssMatchSetId sets the XssMatchSetId field's value.
-func (s *UpdateXssMatchSetInput) SetXssMatchSetId(v string) *UpdateXssMatchSetInput {
-	s.XssMatchSetId = &v
-	return s
-}
-
 // The response to an UpdateXssMatchSets request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateXssMatchSetResponse
 type UpdateXssMatchSetOutput struct {
@@ -14050,12 +11950,6 @@ func (s UpdateXssMatchSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateXssMatchSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChangeToken sets the ChangeToken field's value.
-func (s *UpdateXssMatchSetOutput) SetChangeToken(v string) *UpdateXssMatchSetOutput {
-	s.ChangeToken = &v
-	return s
 }
 
 // For the action that is associated with a rule in a WebACL, specifies the
@@ -14106,12 +12000,6 @@ func (s *WafAction) Validate() error {
 	return nil
 }
 
-// SetType sets the Type field's value.
-func (s *WafAction) SetType(v WafActionType) *WafAction {
-	s.Type = v
-	return s
-}
-
 // The action to take if any rule within the RuleGroup matches a request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WafOverrideAction
 type WafOverrideAction struct {
@@ -14145,12 +12033,6 @@ func (s *WafOverrideAction) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetType sets the Type field's value.
-func (s *WafOverrideAction) SetType(v WafOverrideActionType) *WafOverrideAction {
-	s.Type = v
-	return s
 }
 
 // Contains the Rules that identify the requests that you want to allow, block,
@@ -14206,36 +12088,6 @@ func (s WebACL) GoString() string {
 	return s.String()
 }
 
-// SetDefaultAction sets the DefaultAction field's value.
-func (s *WebACL) SetDefaultAction(v *WafAction) *WebACL {
-	s.DefaultAction = v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *WebACL) SetMetricName(v string) *WebACL {
-	s.MetricName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *WebACL) SetName(v string) *WebACL {
-	s.Name = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *WebACL) SetRules(v []ActivatedRule) *WebACL {
-	s.Rules = v
-	return s
-}
-
-// SetWebACLId sets the WebACLId field's value.
-func (s *WebACL) SetWebACLId(v string) *WebACL {
-	s.WebACLId = &v
-	return s
-}
-
 // Contains the identifier and the name or description of the WebACL.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/WebACLSummary
 type WebACLSummary struct {
@@ -14265,18 +12117,6 @@ func (s WebACLSummary) String() string {
 // GoString returns the string representation
 func (s WebACLSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *WebACLSummary) SetName(v string) *WebACLSummary {
-	s.Name = &v
-	return s
-}
-
-// SetWebACLId sets the WebACLId field's value.
-func (s *WebACLSummary) SetWebACLId(v string) *WebACLSummary {
-	s.WebACLId = &v
-	return s
 }
 
 // Specifies whether to insert a Rule into or delete a Rule from a WebACL.
@@ -14330,18 +12170,6 @@ func (s *WebACLUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *WebACLUpdate) SetAction(v ChangeAction) *WebACLUpdate {
-	s.Action = v
-	return s
-}
-
-// SetActivatedRule sets the ActivatedRule field's value.
-func (s *WebACLUpdate) SetActivatedRule(v *ActivatedRule) *WebACLUpdate {
-	s.ActivatedRule = v
-	return s
-}
-
 // A complex type that contains XssMatchTuple objects, which specify the parts
 // of web requests that you want AWS WAF to inspect for cross-site scripting
 // attacks and, if you want AWS WAF to inspect a header, the name of the header.
@@ -14382,24 +12210,6 @@ func (s XssMatchSet) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *XssMatchSet) SetName(v string) *XssMatchSet {
-	s.Name = &v
-	return s
-}
-
-// SetXssMatchSetId sets the XssMatchSetId field's value.
-func (s *XssMatchSet) SetXssMatchSetId(v string) *XssMatchSet {
-	s.XssMatchSetId = &v
-	return s
-}
-
-// SetXssMatchTuples sets the XssMatchTuples field's value.
-func (s *XssMatchSet) SetXssMatchTuples(v []XssMatchTuple) *XssMatchSet {
-	s.XssMatchTuples = v
-	return s
-}
-
 // The Id and Name of an XssMatchSet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/XssMatchSetSummary
 type XssMatchSetSummary struct {
@@ -14429,18 +12239,6 @@ func (s XssMatchSetSummary) String() string {
 // GoString returns the string representation
 func (s XssMatchSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *XssMatchSetSummary) SetName(v string) *XssMatchSetSummary {
-	s.Name = &v
-	return s
-}
-
-// SetXssMatchSetId sets the XssMatchSetId field's value.
-func (s *XssMatchSetSummary) SetXssMatchSetId(v string) *XssMatchSetSummary {
-	s.XssMatchSetId = &v
-	return s
 }
 
 // Specifies the part of a web request that you want to inspect for cross-site
@@ -14494,18 +12292,6 @@ func (s *XssMatchSetUpdate) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAction sets the Action field's value.
-func (s *XssMatchSetUpdate) SetAction(v ChangeAction) *XssMatchSetUpdate {
-	s.Action = v
-	return s
-}
-
-// SetXssMatchTuple sets the XssMatchTuple field's value.
-func (s *XssMatchSetUpdate) SetXssMatchTuple(v *XssMatchTuple) *XssMatchSetUpdate {
-	s.XssMatchTuple = v
-	return s
 }
 
 // Specifies the part of a web request that you want AWS WAF to inspect for
@@ -14625,18 +12411,6 @@ func (s *XssMatchTuple) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFieldToMatch sets the FieldToMatch field's value.
-func (s *XssMatchTuple) SetFieldToMatch(v *FieldToMatch) *XssMatchTuple {
-	s.FieldToMatch = v
-	return s
-}
-
-// SetTextTransformation sets the TextTransformation field's value.
-func (s *XssMatchTuple) SetTextTransformation(v TextTransformation) *XssMatchTuple {
-	s.TextTransformation = v
-	return s
 }
 
 type ChangeAction string

@@ -945,12 +945,6 @@ func (s *DeleteRuleInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteRuleInput) SetName(v string) *DeleteRuleInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleOutput
 type DeleteRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -1020,24 +1014,6 @@ func (s DescribeEventBusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DescribeEventBusOutput) SetArn(v string) *DescribeEventBusOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeEventBusOutput) SetName(v string) *DescribeEventBusOutput {
-	s.Name = &v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *DescribeEventBusOutput) SetPolicy(v string) *DescribeEventBusOutput {
-	s.Policy = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleRequest
 type DescribeRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -1073,12 +1049,6 @@ func (s *DescribeRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeRuleInput) SetName(v string) *DescribeRuleInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleResponse
@@ -1125,48 +1095,6 @@ func (s DescribeRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DescribeRuleOutput) SetArn(v string) *DescribeRuleOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeRuleOutput) SetDescription(v string) *DescribeRuleOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEventPattern sets the EventPattern field's value.
-func (s *DescribeRuleOutput) SetEventPattern(v string) *DescribeRuleOutput {
-	s.EventPattern = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeRuleOutput) SetName(v string) *DescribeRuleOutput {
-	s.Name = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeRuleOutput) SetRoleArn(v string) *DescribeRuleOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetScheduleExpression sets the ScheduleExpression field's value.
-func (s *DescribeRuleOutput) SetScheduleExpression(v string) *DescribeRuleOutput {
-	s.ScheduleExpression = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeRuleOutput) SetState(v RuleState) *DescribeRuleOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleRequest
 type DisableRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -1202,12 +1130,6 @@ func (s *DisableRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DisableRuleInput) SetName(v string) *DisableRuleInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleOutput
@@ -1278,18 +1200,6 @@ func (s *EcsParameters) Validate() error {
 	return nil
 }
 
-// SetTaskCount sets the TaskCount field's value.
-func (s *EcsParameters) SetTaskCount(v int64) *EcsParameters {
-	s.TaskCount = &v
-	return s
-}
-
-// SetTaskDefinitionArn sets the TaskDefinitionArn field's value.
-func (s *EcsParameters) SetTaskDefinitionArn(v string) *EcsParameters {
-	s.TaskDefinitionArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleRequest
 type EnableRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -1325,12 +1235,6 @@ func (s *EnableRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *EnableRuleInput) SetName(v string) *EnableRuleInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleOutput
@@ -1400,18 +1304,6 @@ func (s *InputTransformer) Validate() error {
 	return nil
 }
 
-// SetInputPathsMap sets the InputPathsMap field's value.
-func (s *InputTransformer) SetInputPathsMap(v map[string]string) *InputTransformer {
-	s.InputPathsMap = v
-	return s
-}
-
-// SetInputTemplate sets the InputTemplate field's value.
-func (s *InputTransformer) SetInputTemplate(v string) *InputTransformer {
-	s.InputTemplate = &v
-	return s
-}
-
 // This object enables you to specify a JSON path to extract from the event
 // and use as the partition key for the Amazon Kinesis stream, so that you can
 // control the shard to which the event goes. If you do not include this parameter,
@@ -1450,12 +1342,6 @@ func (s *KinesisParameters) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPartitionKeyPath sets the PartitionKeyPath field's value.
-func (s *KinesisParameters) SetPartitionKeyPath(v string) *KinesisParameters {
-	s.PartitionKeyPath = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetRequest
@@ -1507,24 +1393,6 @@ func (s *ListRuleNamesByTargetInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRuleNamesByTargetInput) SetLimit(v int64) *ListRuleNamesByTargetInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRuleNamesByTargetInput) SetNextToken(v string) *ListRuleNamesByTargetInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargetArn sets the TargetArn field's value.
-func (s *ListRuleNamesByTargetInput) SetTargetArn(v string) *ListRuleNamesByTargetInput {
-	s.TargetArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetResponse
 type ListRuleNamesByTargetOutput struct {
 	_ struct{} `type:"structure"`
@@ -1552,18 +1420,6 @@ func (s ListRuleNamesByTargetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRuleNamesByTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRuleNamesByTargetOutput) SetNextToken(v string) *ListRuleNamesByTargetOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRuleNames sets the RuleNames field's value.
-func (s *ListRuleNamesByTargetOutput) SetRuleNames(v []string) *ListRuleNamesByTargetOutput {
-	s.RuleNames = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesRequest
@@ -1609,24 +1465,6 @@ func (s *ListRulesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRulesInput) SetLimit(v int64) *ListRulesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNamePrefix sets the NamePrefix field's value.
-func (s *ListRulesInput) SetNamePrefix(v string) *ListRulesInput {
-	s.NamePrefix = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRulesInput) SetNextToken(v string) *ListRulesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesResponse
 type ListRulesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1654,18 +1492,6 @@ func (s ListRulesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRulesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRulesOutput) SetNextToken(v string) *ListRulesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *ListRulesOutput) SetRules(v []Rule) *ListRulesOutput {
-	s.Rules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleRequest
@@ -1717,24 +1543,6 @@ func (s *ListTargetsByRuleInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListTargetsByRuleInput) SetLimit(v int64) *ListTargetsByRuleInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTargetsByRuleInput) SetNextToken(v string) *ListTargetsByRuleInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRule sets the Rule field's value.
-func (s *ListTargetsByRuleInput) SetRule(v string) *ListTargetsByRuleInput {
-	s.Rule = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleResponse
 type ListTargetsByRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -1762,18 +1570,6 @@ func (s ListTargetsByRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTargetsByRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTargetsByRuleOutput) SetNextToken(v string) *ListTargetsByRuleOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *ListTargetsByRuleOutput) SetTargets(v []Target) *ListTargetsByRuleOutput {
-	s.Targets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequest
@@ -1815,12 +1611,6 @@ func (s *PutEventsInput) Validate() error {
 	return nil
 }
 
-// SetEntries sets the Entries field's value.
-func (s *PutEventsInput) SetEntries(v []PutEventsRequestEntry) *PutEventsInput {
-	s.Entries = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResponse
 type PutEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1849,18 +1639,6 @@ func (s PutEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEntries sets the Entries field's value.
-func (s *PutEventsOutput) SetEntries(v []PutEventsResultEntry) *PutEventsOutput {
-	s.Entries = v
-	return s
-}
-
-// SetFailedEntryCount sets the FailedEntryCount field's value.
-func (s *PutEventsOutput) SetFailedEntryCount(v int64) *PutEventsOutput {
-	s.FailedEntryCount = &v
-	return s
 }
 
 // Represents an event to be submitted.
@@ -1897,36 +1675,6 @@ func (s PutEventsRequestEntry) GoString() string {
 	return s.String()
 }
 
-// SetDetail sets the Detail field's value.
-func (s *PutEventsRequestEntry) SetDetail(v string) *PutEventsRequestEntry {
-	s.Detail = &v
-	return s
-}
-
-// SetDetailType sets the DetailType field's value.
-func (s *PutEventsRequestEntry) SetDetailType(v string) *PutEventsRequestEntry {
-	s.DetailType = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *PutEventsRequestEntry) SetResources(v []string) *PutEventsRequestEntry {
-	s.Resources = v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *PutEventsRequestEntry) SetSource(v string) *PutEventsRequestEntry {
-	s.Source = &v
-	return s
-}
-
-// SetTime sets the Time field's value.
-func (s *PutEventsRequestEntry) SetTime(v time.Time) *PutEventsRequestEntry {
-	s.Time = &v
-	return s
-}
-
 // Represents an event that failed to be submitted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResultEntry
 type PutEventsResultEntry struct {
@@ -1950,24 +1698,6 @@ func (s PutEventsResultEntry) String() string {
 // GoString returns the string representation
 func (s PutEventsResultEntry) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *PutEventsResultEntry) SetErrorCode(v string) *PutEventsResultEntry {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *PutEventsResultEntry) SetErrorMessage(v string) *PutEventsResultEntry {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *PutEventsResultEntry) SetEventId(v string) *PutEventsResultEntry {
-	s.EventId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionRequest
@@ -2040,24 +1770,6 @@ func (s *PutPermissionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAction sets the Action field's value.
-func (s *PutPermissionInput) SetAction(v string) *PutPermissionInput {
-	s.Action = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *PutPermissionInput) SetPrincipal(v string) *PutPermissionInput {
-	s.Principal = &v
-	return s
-}
-
-// SetStatementId sets the StatementId field's value.
-func (s *PutPermissionInput) SetStatementId(v string) *PutPermissionInput {
-	s.StatementId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermissionOutput
@@ -2138,42 +1850,6 @@ func (s *PutRuleInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *PutRuleInput) SetDescription(v string) *PutRuleInput {
-	s.Description = &v
-	return s
-}
-
-// SetEventPattern sets the EventPattern field's value.
-func (s *PutRuleInput) SetEventPattern(v string) *PutRuleInput {
-	s.EventPattern = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutRuleInput) SetName(v string) *PutRuleInput {
-	s.Name = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *PutRuleInput) SetRoleArn(v string) *PutRuleInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetScheduleExpression sets the ScheduleExpression field's value.
-func (s *PutRuleInput) SetScheduleExpression(v string) *PutRuleInput {
-	s.ScheduleExpression = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *PutRuleInput) SetState(v RuleState) *PutRuleInput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleResponse
 type PutRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -2197,12 +1873,6 @@ func (s PutRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRuleArn sets the RuleArn field's value.
-func (s *PutRuleOutput) SetRuleArn(v string) *PutRuleOutput {
-	s.RuleArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsRequest
@@ -2261,18 +1931,6 @@ func (s *PutTargetsInput) Validate() error {
 	return nil
 }
 
-// SetRule sets the Rule field's value.
-func (s *PutTargetsInput) SetRule(v string) *PutTargetsInput {
-	s.Rule = &v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *PutTargetsInput) SetTargets(v []Target) *PutTargetsInput {
-	s.Targets = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResponse
 type PutTargetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2301,18 +1959,6 @@ func (s PutTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFailedEntries sets the FailedEntries field's value.
-func (s *PutTargetsOutput) SetFailedEntries(v []PutTargetsResultEntry) *PutTargetsOutput {
-	s.FailedEntries = v
-	return s
-}
-
-// SetFailedEntryCount sets the FailedEntryCount field's value.
-func (s *PutTargetsOutput) SetFailedEntryCount(v int64) *PutTargetsOutput {
-	s.FailedEntryCount = &v
-	return s
-}
-
 // Represents a target that failed to be added to a rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResultEntry
 type PutTargetsResultEntry struct {
@@ -2338,24 +1984,6 @@ func (s PutTargetsResultEntry) String() string {
 // GoString returns the string representation
 func (s PutTargetsResultEntry) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *PutTargetsResultEntry) SetErrorCode(v string) *PutTargetsResultEntry {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *PutTargetsResultEntry) SetErrorMessage(v string) *PutTargetsResultEntry {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *PutTargetsResultEntry) SetTargetId(v string) *PutTargetsResultEntry {
-	s.TargetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermissionRequest
@@ -2394,12 +2022,6 @@ func (s *RemovePermissionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStatementId sets the StatementId field's value.
-func (s *RemovePermissionInput) SetStatementId(v string) *RemovePermissionInput {
-	s.StatementId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermissionOutput
@@ -2473,18 +2095,6 @@ func (s *RemoveTargetsInput) Validate() error {
 	return nil
 }
 
-// SetIds sets the Ids field's value.
-func (s *RemoveTargetsInput) SetIds(v []string) *RemoveTargetsInput {
-	s.Ids = v
-	return s
-}
-
-// SetRule sets the Rule field's value.
-func (s *RemoveTargetsInput) SetRule(v string) *RemoveTargetsInput {
-	s.Rule = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResponse
 type RemoveTargetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2513,18 +2123,6 @@ func (s RemoveTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFailedEntries sets the FailedEntries field's value.
-func (s *RemoveTargetsOutput) SetFailedEntries(v []RemoveTargetsResultEntry) *RemoveTargetsOutput {
-	s.FailedEntries = v
-	return s
-}
-
-// SetFailedEntryCount sets the FailedEntryCount field's value.
-func (s *RemoveTargetsOutput) SetFailedEntryCount(v int64) *RemoveTargetsOutput {
-	s.FailedEntryCount = &v
-	return s
-}
-
 // Represents a target that failed to be removed from a rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResultEntry
 type RemoveTargetsResultEntry struct {
@@ -2550,24 +2148,6 @@ func (s RemoveTargetsResultEntry) String() string {
 // GoString returns the string representation
 func (s RemoveTargetsResultEntry) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *RemoveTargetsResultEntry) SetErrorCode(v string) *RemoveTargetsResultEntry {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *RemoveTargetsResultEntry) SetErrorMessage(v string) *RemoveTargetsResultEntry {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *RemoveTargetsResultEntry) SetTargetId(v string) *RemoveTargetsResultEntry {
-	s.TargetId = &v
-	return s
 }
 
 // Contains information about a rule in Amazon CloudWatch Events.
@@ -2607,48 +2187,6 @@ func (s Rule) String() string {
 // GoString returns the string representation
 func (s Rule) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Rule) SetArn(v string) *Rule {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Rule) SetDescription(v string) *Rule {
-	s.Description = &v
-	return s
-}
-
-// SetEventPattern sets the EventPattern field's value.
-func (s *Rule) SetEventPattern(v string) *Rule {
-	s.EventPattern = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Rule) SetName(v string) *Rule {
-	s.Name = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *Rule) SetRoleArn(v string) *Rule {
-	s.RoleArn = &v
-	return s
-}
-
-// SetScheduleExpression sets the ScheduleExpression field's value.
-func (s *Rule) SetScheduleExpression(v string) *Rule {
-	s.ScheduleExpression = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Rule) SetState(v RuleState) *Rule {
-	s.State = v
-	return s
 }
 
 // This parameter contains the criteria (either InstanceIds or a tag) used to
@@ -2696,12 +2234,6 @@ func (s *RunCommandParameters) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRunCommandTargets sets the RunCommandTargets field's value.
-func (s *RunCommandParameters) SetRunCommandTargets(v []RunCommandTarget) *RunCommandParameters {
-	s.RunCommandTargets = v
-	return s
 }
 
 // Information about the EC2 instances that are to be sent the command, specified
@@ -2755,18 +2287,6 @@ func (s *RunCommandTarget) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *RunCommandTarget) SetKey(v string) *RunCommandTarget {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *RunCommandTarget) SetValues(v []string) *RunCommandTarget {
-	s.Values = v
-	return s
 }
 
 // Targets are the resources to be invoked when a rule is triggered. Target
@@ -2880,60 +2400,6 @@ func (s *Target) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *Target) SetArn(v string) *Target {
-	s.Arn = &v
-	return s
-}
-
-// SetEcsParameters sets the EcsParameters field's value.
-func (s *Target) SetEcsParameters(v *EcsParameters) *Target {
-	s.EcsParameters = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Target) SetId(v string) *Target {
-	s.Id = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *Target) SetInput(v string) *Target {
-	s.Input = &v
-	return s
-}
-
-// SetInputPath sets the InputPath field's value.
-func (s *Target) SetInputPath(v string) *Target {
-	s.InputPath = &v
-	return s
-}
-
-// SetInputTransformer sets the InputTransformer field's value.
-func (s *Target) SetInputTransformer(v *InputTransformer) *Target {
-	s.InputTransformer = v
-	return s
-}
-
-// SetKinesisParameters sets the KinesisParameters field's value.
-func (s *Target) SetKinesisParameters(v *KinesisParameters) *Target {
-	s.KinesisParameters = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *Target) SetRoleArn(v string) *Target {
-	s.RoleArn = &v
-	return s
-}
-
-// SetRunCommandParameters sets the RunCommandParameters field's value.
-func (s *Target) SetRunCommandParameters(v *RunCommandParameters) *Target {
-	s.RunCommandParameters = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternRequest
 type TestEventPatternInput struct {
 	_ struct{} `type:"structure"`
@@ -2978,18 +2444,6 @@ func (s *TestEventPatternInput) Validate() error {
 	return nil
 }
 
-// SetEvent sets the Event field's value.
-func (s *TestEventPatternInput) SetEvent(v string) *TestEventPatternInput {
-	s.Event = &v
-	return s
-}
-
-// SetEventPattern sets the EventPattern field's value.
-func (s *TestEventPatternInput) SetEventPattern(v string) *TestEventPatternInput {
-	s.EventPattern = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternResponse
 type TestEventPatternOutput struct {
 	_ struct{} `type:"structure"`
@@ -3013,12 +2467,6 @@ func (s TestEventPatternOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TestEventPatternOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResult sets the Result field's value.
-func (s *TestEventPatternOutput) SetResult(v bool) *TestEventPatternOutput {
-	s.Result = &v
-	return s
 }
 
 type RuleState string

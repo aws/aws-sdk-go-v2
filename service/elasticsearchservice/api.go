@@ -835,18 +835,6 @@ func (s AccessPoliciesStatus) GoString() string {
 	return s.String()
 }
 
-// SetOptions sets the Options field's value.
-func (s *AccessPoliciesStatus) SetOptions(v string) *AccessPoliciesStatus {
-	s.Options = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *AccessPoliciesStatus) SetStatus(v *OptionStatus) *AccessPoliciesStatus {
-	s.Status = v
-	return s
-}
-
 // Container for the parameters to the AddTags operation. Specify the tags that
 // you want to attach to the Elasticsearch domain.
 type AddTagsInput struct {
@@ -898,18 +886,6 @@ func (s *AddTagsInput) Validate() error {
 	return nil
 }
 
-// SetARN sets the ARN field's value.
-func (s *AddTagsInput) SetARN(v string) *AddTagsInput {
-	s.ARN = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *AddTagsInput) SetTagList(v []Tag) *AddTagsInput {
-	s.TagList = v
-	return s
-}
-
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -958,18 +934,6 @@ func (s AdditionalLimit) GoString() string {
 	return s.String()
 }
 
-// SetLimitName sets the LimitName field's value.
-func (s *AdditionalLimit) SetLimitName(v string) *AdditionalLimit {
-	s.LimitName = &v
-	return s
-}
-
-// SetLimitValues sets the LimitValues field's value.
-func (s *AdditionalLimit) SetLimitValues(v []string) *AdditionalLimit {
-	s.LimitValues = v
-	return s
-}
-
 // Status of the advanced options for the specified Elasticsearch domain. Currently,
 // the following advanced options are available:
 //
@@ -1004,18 +968,6 @@ func (s AdvancedOptionsStatus) String() string {
 // GoString returns the string representation
 func (s AdvancedOptionsStatus) GoString() string {
 	return s.String()
-}
-
-// SetOptions sets the Options field's value.
-func (s *AdvancedOptionsStatus) SetOptions(v map[string]string) *AdvancedOptionsStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *AdvancedOptionsStatus) SetStatus(v *OptionStatus) *AdvancedOptionsStatus {
-	s.Status = v
-	return s
 }
 
 type CreateElasticsearchDomainInput struct {
@@ -1100,66 +1052,6 @@ func (s *CreateElasticsearchDomainInput) Validate() error {
 	return nil
 }
 
-// SetAccessPolicies sets the AccessPolicies field's value.
-func (s *CreateElasticsearchDomainInput) SetAccessPolicies(v string) *CreateElasticsearchDomainInput {
-	s.AccessPolicies = &v
-	return s
-}
-
-// SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetAdvancedOptions(v map[string]string) *CreateElasticsearchDomainInput {
-	s.AdvancedOptions = v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *CreateElasticsearchDomainInput) SetDomainName(v string) *CreateElasticsearchDomainInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetEBSOptions sets the EBSOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetEBSOptions(v *EBSOptions) *CreateElasticsearchDomainInput {
-	s.EBSOptions = v
-	return s
-}
-
-// SetElasticsearchClusterConfig sets the ElasticsearchClusterConfig field's value.
-func (s *CreateElasticsearchDomainInput) SetElasticsearchClusterConfig(v *ElasticsearchClusterConfig) *CreateElasticsearchDomainInput {
-	s.ElasticsearchClusterConfig = v
-	return s
-}
-
-// SetElasticsearchVersion sets the ElasticsearchVersion field's value.
-func (s *CreateElasticsearchDomainInput) SetElasticsearchVersion(v string) *CreateElasticsearchDomainInput {
-	s.ElasticsearchVersion = &v
-	return s
-}
-
-// SetEncryptionAtRestOptions sets the EncryptionAtRestOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetEncryptionAtRestOptions(v *EncryptionAtRestOptions) *CreateElasticsearchDomainInput {
-	s.EncryptionAtRestOptions = v
-	return s
-}
-
-// SetLogPublishingOptions sets the LogPublishingOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetLogPublishingOptions(v map[string]LogPublishingOption) *CreateElasticsearchDomainInput {
-	s.LogPublishingOptions = v
-	return s
-}
-
-// SetSnapshotOptions sets the SnapshotOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetSnapshotOptions(v *SnapshotOptions) *CreateElasticsearchDomainInput {
-	s.SnapshotOptions = v
-	return s
-}
-
-// SetVPCOptions sets the VPCOptions field's value.
-func (s *CreateElasticsearchDomainInput) SetVPCOptions(v *VPCOptions) *CreateElasticsearchDomainInput {
-	s.VPCOptions = v
-	return s
-}
-
 // The result of a CreateElasticsearchDomain operation. Contains the status
 // of the newly created Elasticsearch domain.
 type CreateElasticsearchDomainOutput struct {
@@ -1184,12 +1076,6 @@ func (s CreateElasticsearchDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainStatus sets the DomainStatus field's value.
-func (s *CreateElasticsearchDomainOutput) SetDomainStatus(v *ElasticsearchDomainStatus) *CreateElasticsearchDomainOutput {
-	s.DomainStatus = v
-	return s
 }
 
 // Container for the parameters to the DeleteElasticsearchDomain operation.
@@ -1230,12 +1116,6 @@ func (s *DeleteElasticsearchDomainInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DeleteElasticsearchDomainInput) SetDomainName(v string) *DeleteElasticsearchDomainInput {
-	s.DomainName = &v
-	return s
-}
-
 // The result of a DeleteElasticsearchDomain request. Contains the status of
 // the pending deletion, or no status if the domain and all of its resources
 // have been deleted.
@@ -1261,12 +1141,6 @@ func (s DeleteElasticsearchDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainStatus sets the DomainStatus field's value.
-func (s *DeleteElasticsearchDomainOutput) SetDomainStatus(v *ElasticsearchDomainStatus) *DeleteElasticsearchDomainOutput {
-	s.DomainStatus = v
-	return s
 }
 
 type DeleteElasticsearchServiceRoleInput struct {
@@ -1342,12 +1216,6 @@ func (s *DescribeElasticsearchDomainConfigInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DescribeElasticsearchDomainConfigInput) SetDomainName(v string) *DescribeElasticsearchDomainConfigInput {
-	s.DomainName = &v
-	return s
-}
-
 // The result of a DescribeElasticsearchDomainConfig request. Contains the configuration
 // information of the requested domain.
 type DescribeElasticsearchDomainConfigOutput struct {
@@ -1375,12 +1243,6 @@ func (s DescribeElasticsearchDomainConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeElasticsearchDomainConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainConfig sets the DomainConfig field's value.
-func (s *DescribeElasticsearchDomainConfigOutput) SetDomainConfig(v *ElasticsearchDomainConfig) *DescribeElasticsearchDomainConfigOutput {
-	s.DomainConfig = v
-	return s
 }
 
 // Container for the parameters to the DescribeElasticsearchDomain operation.
@@ -1420,12 +1282,6 @@ func (s *DescribeElasticsearchDomainInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DescribeElasticsearchDomainInput) SetDomainName(v string) *DescribeElasticsearchDomainInput {
-	s.DomainName = &v
-	return s
-}
-
 // The result of a DescribeElasticsearchDomain request. Contains the status
 // of the domain specified in the request.
 type DescribeElasticsearchDomainOutput struct {
@@ -1452,12 +1308,6 @@ func (s DescribeElasticsearchDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainStatus sets the DomainStatus field's value.
-func (s *DescribeElasticsearchDomainOutput) SetDomainStatus(v *ElasticsearchDomainStatus) *DescribeElasticsearchDomainOutput {
-	s.DomainStatus = v
-	return s
 }
 
 // Container for the parameters to the DescribeElasticsearchDomains operation.
@@ -1495,12 +1345,6 @@ func (s *DescribeElasticsearchDomainsInput) Validate() error {
 	return nil
 }
 
-// SetDomainNames sets the DomainNames field's value.
-func (s *DescribeElasticsearchDomainsInput) SetDomainNames(v []string) *DescribeElasticsearchDomainsInput {
-	s.DomainNames = v
-	return s
-}
-
 // The result of a DescribeElasticsearchDomains request. Contains the status
 // of the specified domains or all domains owned by the account.
 type DescribeElasticsearchDomainsOutput struct {
@@ -1527,12 +1371,6 @@ func (s DescribeElasticsearchDomainsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeElasticsearchDomainsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainStatusList sets the DomainStatusList field's value.
-func (s *DescribeElasticsearchDomainsOutput) SetDomainStatusList(v []ElasticsearchDomainStatus) *DescribeElasticsearchDomainsOutput {
-	s.DomainStatusList = v
-	return s
 }
 
 // Container for the parameters to DescribeElasticsearchInstanceTypeLimits operation.
@@ -1586,24 +1424,6 @@ func (s *DescribeElasticsearchInstanceTypeLimitsInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetDomainName(v string) *DescribeElasticsearchInstanceTypeLimitsInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetElasticsearchVersion sets the ElasticsearchVersion field's value.
-func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetElasticsearchVersion(v string) *DescribeElasticsearchInstanceTypeLimitsInput {
-	s.ElasticsearchVersion = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetInstanceType(v ESPartitionInstanceType) *DescribeElasticsearchInstanceTypeLimitsInput {
-	s.InstanceType = v
-	return s
-}
-
 // Container for the parameters received from DescribeElasticsearchInstanceTypeLimits
 // operation.
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {
@@ -1633,12 +1453,6 @@ func (s DescribeElasticsearchInstanceTypeLimitsOutput) SDKResponseMetadata() aws
 	return s.responseMetadata
 }
 
-// SetLimitsByRole sets the LimitsByRole field's value.
-func (s *DescribeElasticsearchInstanceTypeLimitsOutput) SetLimitsByRole(v map[string]Limits) *DescribeElasticsearchInstanceTypeLimitsOutput {
-	s.LimitsByRole = v
-	return s
-}
-
 type DomainInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1654,12 +1468,6 @@ func (s DomainInfo) String() string {
 // GoString returns the string representation
 func (s DomainInfo) GoString() string {
 	return s.String()
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *DomainInfo) SetDomainName(v string) *DomainInfo {
-	s.DomainName = &v
-	return s
 }
 
 // Options to enable, disable, and specify the properties of EBS storage volumes.
@@ -1690,30 +1498,6 @@ func (s EBSOptions) GoString() string {
 	return s.String()
 }
 
-// SetEBSEnabled sets the EBSEnabled field's value.
-func (s *EBSOptions) SetEBSEnabled(v bool) *EBSOptions {
-	s.EBSEnabled = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *EBSOptions) SetIops(v int64) *EBSOptions {
-	s.Iops = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *EBSOptions) SetVolumeSize(v int64) *EBSOptions {
-	s.VolumeSize = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *EBSOptions) SetVolumeType(v VolumeType) *EBSOptions {
-	s.VolumeType = v
-	return s
-}
-
 // Status of the EBS options for the specified Elasticsearch domain.
 type EBSOptionsStatus struct {
 	_ struct{} `type:"structure"`
@@ -1737,18 +1521,6 @@ func (s EBSOptionsStatus) String() string {
 // GoString returns the string representation
 func (s EBSOptionsStatus) GoString() string {
 	return s.String()
-}
-
-// SetOptions sets the Options field's value.
-func (s *EBSOptionsStatus) SetOptions(v *EBSOptions) *EBSOptionsStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *EBSOptionsStatus) SetStatus(v *OptionStatus) *EBSOptionsStatus {
-	s.Status = v
-	return s
 }
 
 // Specifies the configuration for the domain cluster, such as the type and
@@ -1789,42 +1561,6 @@ func (s ElasticsearchClusterConfig) GoString() string {
 	return s.String()
 }
 
-// SetDedicatedMasterCount sets the DedicatedMasterCount field's value.
-func (s *ElasticsearchClusterConfig) SetDedicatedMasterCount(v int64) *ElasticsearchClusterConfig {
-	s.DedicatedMasterCount = &v
-	return s
-}
-
-// SetDedicatedMasterEnabled sets the DedicatedMasterEnabled field's value.
-func (s *ElasticsearchClusterConfig) SetDedicatedMasterEnabled(v bool) *ElasticsearchClusterConfig {
-	s.DedicatedMasterEnabled = &v
-	return s
-}
-
-// SetDedicatedMasterType sets the DedicatedMasterType field's value.
-func (s *ElasticsearchClusterConfig) SetDedicatedMasterType(v ESPartitionInstanceType) *ElasticsearchClusterConfig {
-	s.DedicatedMasterType = v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *ElasticsearchClusterConfig) SetInstanceCount(v int64) *ElasticsearchClusterConfig {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ElasticsearchClusterConfig) SetInstanceType(v ESPartitionInstanceType) *ElasticsearchClusterConfig {
-	s.InstanceType = v
-	return s
-}
-
-// SetZoneAwarenessEnabled sets the ZoneAwarenessEnabled field's value.
-func (s *ElasticsearchClusterConfig) SetZoneAwarenessEnabled(v bool) *ElasticsearchClusterConfig {
-	s.ZoneAwarenessEnabled = &v
-	return s
-}
-
 // Specifies the configuration status for the specified Elasticsearch domain.
 type ElasticsearchClusterConfigStatus struct {
 	_ struct{} `type:"structure"`
@@ -1849,18 +1585,6 @@ func (s ElasticsearchClusterConfigStatus) String() string {
 // GoString returns the string representation
 func (s ElasticsearchClusterConfigStatus) GoString() string {
 	return s.String()
-}
-
-// SetOptions sets the Options field's value.
-func (s *ElasticsearchClusterConfigStatus) SetOptions(v *ElasticsearchClusterConfig) *ElasticsearchClusterConfigStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ElasticsearchClusterConfigStatus) SetStatus(v *OptionStatus) *ElasticsearchClusterConfigStatus {
-	s.Status = v
-	return s
 }
 
 // The configuration of an Elasticsearch domain.
@@ -1906,60 +1630,6 @@ func (s ElasticsearchDomainConfig) String() string {
 // GoString returns the string representation
 func (s ElasticsearchDomainConfig) GoString() string {
 	return s.String()
-}
-
-// SetAccessPolicies sets the AccessPolicies field's value.
-func (s *ElasticsearchDomainConfig) SetAccessPolicies(v *AccessPoliciesStatus) *ElasticsearchDomainConfig {
-	s.AccessPolicies = v
-	return s
-}
-
-// SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *ElasticsearchDomainConfig) SetAdvancedOptions(v *AdvancedOptionsStatus) *ElasticsearchDomainConfig {
-	s.AdvancedOptions = v
-	return s
-}
-
-// SetEBSOptions sets the EBSOptions field's value.
-func (s *ElasticsearchDomainConfig) SetEBSOptions(v *EBSOptionsStatus) *ElasticsearchDomainConfig {
-	s.EBSOptions = v
-	return s
-}
-
-// SetElasticsearchClusterConfig sets the ElasticsearchClusterConfig field's value.
-func (s *ElasticsearchDomainConfig) SetElasticsearchClusterConfig(v *ElasticsearchClusterConfigStatus) *ElasticsearchDomainConfig {
-	s.ElasticsearchClusterConfig = v
-	return s
-}
-
-// SetElasticsearchVersion sets the ElasticsearchVersion field's value.
-func (s *ElasticsearchDomainConfig) SetElasticsearchVersion(v *ElasticsearchVersionStatus) *ElasticsearchDomainConfig {
-	s.ElasticsearchVersion = v
-	return s
-}
-
-// SetEncryptionAtRestOptions sets the EncryptionAtRestOptions field's value.
-func (s *ElasticsearchDomainConfig) SetEncryptionAtRestOptions(v *EncryptionAtRestOptionsStatus) *ElasticsearchDomainConfig {
-	s.EncryptionAtRestOptions = v
-	return s
-}
-
-// SetLogPublishingOptions sets the LogPublishingOptions field's value.
-func (s *ElasticsearchDomainConfig) SetLogPublishingOptions(v *LogPublishingOptionsStatus) *ElasticsearchDomainConfig {
-	s.LogPublishingOptions = v
-	return s
-}
-
-// SetSnapshotOptions sets the SnapshotOptions field's value.
-func (s *ElasticsearchDomainConfig) SetSnapshotOptions(v *SnapshotOptionsStatus) *ElasticsearchDomainConfig {
-	s.SnapshotOptions = v
-	return s
-}
-
-// SetVPCOptions sets the VPCOptions field's value.
-func (s *ElasticsearchDomainConfig) SetVPCOptions(v *VPCDerivedInfoStatus) *ElasticsearchDomainConfig {
-	s.VPCOptions = v
-	return s
 }
 
 // The current status of an Elasticsearch domain.
@@ -2051,108 +1721,6 @@ func (s ElasticsearchDomainStatus) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *ElasticsearchDomainStatus) SetARN(v string) *ElasticsearchDomainStatus {
-	s.ARN = &v
-	return s
-}
-
-// SetAccessPolicies sets the AccessPolicies field's value.
-func (s *ElasticsearchDomainStatus) SetAccessPolicies(v string) *ElasticsearchDomainStatus {
-	s.AccessPolicies = &v
-	return s
-}
-
-// SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *ElasticsearchDomainStatus) SetAdvancedOptions(v map[string]string) *ElasticsearchDomainStatus {
-	s.AdvancedOptions = v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *ElasticsearchDomainStatus) SetCreated(v bool) *ElasticsearchDomainStatus {
-	s.Created = &v
-	return s
-}
-
-// SetDeleted sets the Deleted field's value.
-func (s *ElasticsearchDomainStatus) SetDeleted(v bool) *ElasticsearchDomainStatus {
-	s.Deleted = &v
-	return s
-}
-
-// SetDomainId sets the DomainId field's value.
-func (s *ElasticsearchDomainStatus) SetDomainId(v string) *ElasticsearchDomainStatus {
-	s.DomainId = &v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *ElasticsearchDomainStatus) SetDomainName(v string) *ElasticsearchDomainStatus {
-	s.DomainName = &v
-	return s
-}
-
-// SetEBSOptions sets the EBSOptions field's value.
-func (s *ElasticsearchDomainStatus) SetEBSOptions(v *EBSOptions) *ElasticsearchDomainStatus {
-	s.EBSOptions = v
-	return s
-}
-
-// SetElasticsearchClusterConfig sets the ElasticsearchClusterConfig field's value.
-func (s *ElasticsearchDomainStatus) SetElasticsearchClusterConfig(v *ElasticsearchClusterConfig) *ElasticsearchDomainStatus {
-	s.ElasticsearchClusterConfig = v
-	return s
-}
-
-// SetElasticsearchVersion sets the ElasticsearchVersion field's value.
-func (s *ElasticsearchDomainStatus) SetElasticsearchVersion(v string) *ElasticsearchDomainStatus {
-	s.ElasticsearchVersion = &v
-	return s
-}
-
-// SetEncryptionAtRestOptions sets the EncryptionAtRestOptions field's value.
-func (s *ElasticsearchDomainStatus) SetEncryptionAtRestOptions(v *EncryptionAtRestOptions) *ElasticsearchDomainStatus {
-	s.EncryptionAtRestOptions = v
-	return s
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *ElasticsearchDomainStatus) SetEndpoint(v string) *ElasticsearchDomainStatus {
-	s.Endpoint = &v
-	return s
-}
-
-// SetEndpoints sets the Endpoints field's value.
-func (s *ElasticsearchDomainStatus) SetEndpoints(v map[string]string) *ElasticsearchDomainStatus {
-	s.Endpoints = v
-	return s
-}
-
-// SetLogPublishingOptions sets the LogPublishingOptions field's value.
-func (s *ElasticsearchDomainStatus) SetLogPublishingOptions(v map[string]LogPublishingOption) *ElasticsearchDomainStatus {
-	s.LogPublishingOptions = v
-	return s
-}
-
-// SetProcessing sets the Processing field's value.
-func (s *ElasticsearchDomainStatus) SetProcessing(v bool) *ElasticsearchDomainStatus {
-	s.Processing = &v
-	return s
-}
-
-// SetSnapshotOptions sets the SnapshotOptions field's value.
-func (s *ElasticsearchDomainStatus) SetSnapshotOptions(v *SnapshotOptions) *ElasticsearchDomainStatus {
-	s.SnapshotOptions = v
-	return s
-}
-
-// SetVPCOptions sets the VPCOptions field's value.
-func (s *ElasticsearchDomainStatus) SetVPCOptions(v *VPCDerivedInfo) *ElasticsearchDomainStatus {
-	s.VPCOptions = v
-	return s
-}
-
 // Status of the Elasticsearch version options for the specified Elasticsearch
 // domain.
 type ElasticsearchVersionStatus struct {
@@ -2178,18 +1746,6 @@ func (s ElasticsearchVersionStatus) String() string {
 // GoString returns the string representation
 func (s ElasticsearchVersionStatus) GoString() string {
 	return s.String()
-}
-
-// SetOptions sets the Options field's value.
-func (s *ElasticsearchVersionStatus) SetOptions(v string) *ElasticsearchVersionStatus {
-	s.Options = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ElasticsearchVersionStatus) SetStatus(v *OptionStatus) *ElasticsearchVersionStatus {
-	s.Status = v
-	return s
 }
 
 // Specifies the Encryption At Rest Options.
@@ -2226,18 +1782,6 @@ func (s *EncryptionAtRestOptions) Validate() error {
 	return nil
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *EncryptionAtRestOptions) SetEnabled(v bool) *EncryptionAtRestOptions {
-	s.Enabled = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *EncryptionAtRestOptions) SetKmsKeyId(v string) *EncryptionAtRestOptions {
-	s.KmsKeyId = &v
-	return s
-}
-
 // Status of the Encryption At Rest options for the specified Elasticsearch
 // domain.
 type EncryptionAtRestOptionsStatus struct {
@@ -2266,18 +1810,6 @@ func (s EncryptionAtRestOptionsStatus) GoString() string {
 	return s.String()
 }
 
-// SetOptions sets the Options field's value.
-func (s *EncryptionAtRestOptionsStatus) SetOptions(v *EncryptionAtRestOptions) *EncryptionAtRestOptionsStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *EncryptionAtRestOptionsStatus) SetStatus(v *OptionStatus) *EncryptionAtRestOptionsStatus {
-	s.Status = v
-	return s
-}
-
 // InstanceCountLimits represents the limits on number of instances that be
 // created in Amazon Elasticsearch for given InstanceType.
 type InstanceCountLimits struct {
@@ -2300,18 +1832,6 @@ func (s InstanceCountLimits) GoString() string {
 	return s.String()
 }
 
-// SetMaximumInstanceCount sets the MaximumInstanceCount field's value.
-func (s *InstanceCountLimits) SetMaximumInstanceCount(v int64) *InstanceCountLimits {
-	s.MaximumInstanceCount = &v
-	return s
-}
-
-// SetMinimumInstanceCount sets the MinimumInstanceCount field's value.
-func (s *InstanceCountLimits) SetMinimumInstanceCount(v int64) *InstanceCountLimits {
-	s.MinimumInstanceCount = &v
-	return s
-}
-
 // InstanceLimits represents the list of instance related attributes that are
 // available for given InstanceType.
 type InstanceLimits struct {
@@ -2330,12 +1850,6 @@ func (s InstanceLimits) String() string {
 // GoString returns the string representation
 func (s InstanceLimits) GoString() string {
 	return s.String()
-}
-
-// SetInstanceCountLimits sets the InstanceCountLimits field's value.
-func (s *InstanceLimits) SetInstanceCountLimits(v *InstanceCountLimits) *InstanceLimits {
-	s.InstanceCountLimits = v
-	return s
 }
 
 // Limits for given InstanceType and for each of it's role. Limits contains following StorageTypes,   InstanceLimitsand AdditionalLimits
@@ -2363,24 +1877,6 @@ func (s Limits) String() string {
 // GoString returns the string representation
 func (s Limits) GoString() string {
 	return s.String()
-}
-
-// SetAdditionalLimits sets the AdditionalLimits field's value.
-func (s *Limits) SetAdditionalLimits(v []AdditionalLimit) *Limits {
-	s.AdditionalLimits = v
-	return s
-}
-
-// SetInstanceLimits sets the InstanceLimits field's value.
-func (s *Limits) SetInstanceLimits(v *InstanceLimits) *Limits {
-	s.InstanceLimits = v
-	return s
-}
-
-// SetStorageTypes sets the StorageTypes field's value.
-func (s *Limits) SetStorageTypes(v []StorageType) *Limits {
-	s.StorageTypes = v
-	return s
 }
 
 type ListDomainNamesInput struct {
@@ -2421,12 +1917,6 @@ func (s ListDomainNamesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDomainNamesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainNames sets the DomainNames field's value.
-func (s *ListDomainNamesOutput) SetDomainNames(v []DomainInfo) *ListDomainNamesOutput {
-	s.DomainNames = v
-	return s
 }
 
 // Container for the parameters to the ListElasticsearchInstanceTypes operation.
@@ -2480,30 +1970,6 @@ func (s *ListElasticsearchInstanceTypesInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *ListElasticsearchInstanceTypesInput) SetDomainName(v string) *ListElasticsearchInstanceTypesInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetElasticsearchVersion sets the ElasticsearchVersion field's value.
-func (s *ListElasticsearchInstanceTypesInput) SetElasticsearchVersion(v string) *ListElasticsearchInstanceTypesInput {
-	s.ElasticsearchVersion = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListElasticsearchInstanceTypesInput) SetMaxResults(v int64) *ListElasticsearchInstanceTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListElasticsearchInstanceTypesInput) SetNextToken(v string) *ListElasticsearchInstanceTypesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Container for the parameters returned by ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2535,18 +2001,6 @@ func (s ListElasticsearchInstanceTypesOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetElasticsearchInstanceTypes sets the ElasticsearchInstanceTypes field's value.
-func (s *ListElasticsearchInstanceTypesOutput) SetElasticsearchInstanceTypes(v []ESPartitionInstanceType) *ListElasticsearchInstanceTypesOutput {
-	s.ElasticsearchInstanceTypes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListElasticsearchInstanceTypesOutput) SetNextToken(v string) *ListElasticsearchInstanceTypesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Container for the parameters to the ListElasticsearchVersions operation.
 //  Use MaxResults to control the maximum number of results to retrieve in a
 // single call.
@@ -2574,18 +2028,6 @@ func (s ListElasticsearchVersionsInput) String() string {
 // GoString returns the string representation
 func (s ListElasticsearchVersionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListElasticsearchVersionsInput) SetMaxResults(v int64) *ListElasticsearchVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListElasticsearchVersionsInput) SetNextToken(v string) *ListElasticsearchVersionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Container for the parameters for response received from ListElasticsearchVersions
@@ -2617,18 +2059,6 @@ func (s ListElasticsearchVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListElasticsearchVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetElasticsearchVersions sets the ElasticsearchVersions field's value.
-func (s *ListElasticsearchVersionsOutput) SetElasticsearchVersions(v []string) *ListElasticsearchVersionsOutput {
-	s.ElasticsearchVersions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListElasticsearchVersionsOutput) SetNextToken(v string) *ListElasticsearchVersionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Container for the parameters to the ListTags operation. Specify the ARN for
@@ -2668,12 +2098,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetARN sets the ARN field's value.
-func (s *ListTagsInput) SetARN(v string) *ListTagsInput {
-	s.ARN = &v
-	return s
-}
-
 // The result of a ListTags operation. Contains tags for all requested Elasticsearch
 // domains.
 type ListTagsOutput struct {
@@ -2700,12 +2124,6 @@ func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTagList sets the TagList field's value.
-func (s *ListTagsOutput) SetTagList(v []Tag) *ListTagsOutput {
-	s.TagList = v
-	return s
-}
-
 // Log Publishing option that is set for given domain. Attributes and their details: CloudWatchLogsLogGroupArn: ARN of the Cloudwatch
 // log group to which log needs to be published.
 // Enabled: Whether the log publishing for given log type is enabled or not
@@ -2729,18 +2147,6 @@ func (s LogPublishingOption) GoString() string {
 	return s.String()
 }
 
-// SetCloudWatchLogsLogGroupArn sets the CloudWatchLogsLogGroupArn field's value.
-func (s *LogPublishingOption) SetCloudWatchLogsLogGroupArn(v string) *LogPublishingOption {
-	s.CloudWatchLogsLogGroupArn = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *LogPublishingOption) SetEnabled(v bool) *LogPublishingOption {
-	s.Enabled = &v
-	return s
-}
-
 // The configured log publishing options for the domain and their current status.
 type LogPublishingOptionsStatus struct {
 	_ struct{} `type:"structure"`
@@ -2761,18 +2167,6 @@ func (s LogPublishingOptionsStatus) String() string {
 // GoString returns the string representation
 func (s LogPublishingOptionsStatus) GoString() string {
 	return s.String()
-}
-
-// SetOptions sets the Options field's value.
-func (s *LogPublishingOptionsStatus) SetOptions(v map[string]LogPublishingOption) *LogPublishingOptionsStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *LogPublishingOptionsStatus) SetStatus(v *OptionStatus) *LogPublishingOptionsStatus {
-	s.Status = v
-	return s
 }
 
 // Provides the current status of the entity.
@@ -2809,36 +2203,6 @@ func (s OptionStatus) String() string {
 // GoString returns the string representation
 func (s OptionStatus) GoString() string {
 	return s.String()
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *OptionStatus) SetCreationDate(v time.Time) *OptionStatus {
-	s.CreationDate = &v
-	return s
-}
-
-// SetPendingDeletion sets the PendingDeletion field's value.
-func (s *OptionStatus) SetPendingDeletion(v bool) *OptionStatus {
-	s.PendingDeletion = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *OptionStatus) SetState(v OptionState) *OptionStatus {
-	s.State = v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *OptionStatus) SetUpdateDate(v time.Time) *OptionStatus {
-	s.UpdateDate = &v
-	return s
-}
-
-// SetUpdateVersion sets the UpdateVersion field's value.
-func (s *OptionStatus) SetUpdateVersion(v int64) *OptionStatus {
-	s.UpdateVersion = &v
-	return s
 }
 
 // Container for the parameters to the RemoveTags operation. Specify the ARN
@@ -2888,18 +2252,6 @@ func (s *RemoveTagsInput) Validate() error {
 	return nil
 }
 
-// SetARN sets the ARN field's value.
-func (s *RemoveTagsInput) SetARN(v string) *RemoveTagsInput {
-	s.ARN = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsInput) SetTagKeys(v []string) *RemoveTagsInput {
-	s.TagKeys = v
-	return s
-}
-
 type RemoveTagsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2941,12 +2293,6 @@ func (s SnapshotOptions) GoString() string {
 	return s.String()
 }
 
-// SetAutomatedSnapshotStartHour sets the AutomatedSnapshotStartHour field's value.
-func (s *SnapshotOptions) SetAutomatedSnapshotStartHour(v int64) *SnapshotOptions {
-	s.AutomatedSnapshotStartHour = &v
-	return s
-}
-
 // Status of a daily automated snapshot.
 type SnapshotOptionsStatus struct {
 	_ struct{} `type:"structure"`
@@ -2970,18 +2316,6 @@ func (s SnapshotOptionsStatus) String() string {
 // GoString returns the string representation
 func (s SnapshotOptionsStatus) GoString() string {
 	return s.String()
-}
-
-// SetOptions sets the Options field's value.
-func (s *SnapshotOptionsStatus) SetOptions(v *SnapshotOptions) *SnapshotOptionsStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SnapshotOptionsStatus) SetStatus(v *OptionStatus) *SnapshotOptionsStatus {
-	s.Status = v
-	return s
 }
 
 // StorageTypes represents the list of storage related types and their attributes
@@ -3016,24 +2350,6 @@ func (s StorageType) GoString() string {
 	return s.String()
 }
 
-// SetStorageSubTypeName sets the StorageSubTypeName field's value.
-func (s *StorageType) SetStorageSubTypeName(v string) *StorageType {
-	s.StorageSubTypeName = &v
-	return s
-}
-
-// SetStorageTypeLimits sets the StorageTypeLimits field's value.
-func (s *StorageType) SetStorageTypeLimits(v []StorageTypeLimit) *StorageType {
-	s.StorageTypeLimits = v
-	return s
-}
-
-// SetStorageTypeName sets the StorageTypeName field's value.
-func (s *StorageType) SetStorageTypeName(v string) *StorageType {
-	s.StorageTypeName = &v
-	return s
-}
-
 // Limits that are applicable for given storage type.
 type StorageTypeLimit struct {
 	_ struct{} `type:"structure"`
@@ -3062,18 +2378,6 @@ func (s StorageTypeLimit) String() string {
 // GoString returns the string representation
 func (s StorageTypeLimit) GoString() string {
 	return s.String()
-}
-
-// SetLimitName sets the LimitName field's value.
-func (s *StorageTypeLimit) SetLimitName(v string) *StorageTypeLimit {
-	s.LimitName = &v
-	return s
-}
-
-// SetLimitValues sets the LimitValues field's value.
-func (s *StorageTypeLimit) SetLimitValues(v []string) *StorageTypeLimit {
-	s.LimitValues = v
-	return s
 }
 
 // Specifies a key value pair for a resource tag.
@@ -3124,18 +2428,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Container for the parameters to the UpdateElasticsearchDomain operation.
@@ -3204,54 +2496,6 @@ func (s *UpdateElasticsearchDomainConfigInput) Validate() error {
 	return nil
 }
 
-// SetAccessPolicies sets the AccessPolicies field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetAccessPolicies(v string) *UpdateElasticsearchDomainConfigInput {
-	s.AccessPolicies = &v
-	return s
-}
-
-// SetAdvancedOptions sets the AdvancedOptions field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetAdvancedOptions(v map[string]string) *UpdateElasticsearchDomainConfigInput {
-	s.AdvancedOptions = v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetDomainName(v string) *UpdateElasticsearchDomainConfigInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetEBSOptions sets the EBSOptions field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetEBSOptions(v *EBSOptions) *UpdateElasticsearchDomainConfigInput {
-	s.EBSOptions = v
-	return s
-}
-
-// SetElasticsearchClusterConfig sets the ElasticsearchClusterConfig field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetElasticsearchClusterConfig(v *ElasticsearchClusterConfig) *UpdateElasticsearchDomainConfigInput {
-	s.ElasticsearchClusterConfig = v
-	return s
-}
-
-// SetLogPublishingOptions sets the LogPublishingOptions field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetLogPublishingOptions(v map[string]LogPublishingOption) *UpdateElasticsearchDomainConfigInput {
-	s.LogPublishingOptions = v
-	return s
-}
-
-// SetSnapshotOptions sets the SnapshotOptions field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetSnapshotOptions(v *SnapshotOptions) *UpdateElasticsearchDomainConfigInput {
-	s.SnapshotOptions = v
-	return s
-}
-
-// SetVPCOptions sets the VPCOptions field's value.
-func (s *UpdateElasticsearchDomainConfigInput) SetVPCOptions(v *VPCOptions) *UpdateElasticsearchDomainConfigInput {
-	s.VPCOptions = v
-	return s
-}
-
 // The result of an UpdateElasticsearchDomain request. Contains the status of
 // the Elasticsearch domain being updated.
 type UpdateElasticsearchDomainConfigOutput struct {
@@ -3278,12 +2522,6 @@ func (s UpdateElasticsearchDomainConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateElasticsearchDomainConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainConfig sets the DomainConfig field's value.
-func (s *UpdateElasticsearchDomainConfigOutput) SetDomainConfig(v *ElasticsearchDomainConfig) *UpdateElasticsearchDomainConfigOutput {
-	s.DomainConfig = v
-	return s
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For
@@ -3317,30 +2555,6 @@ func (s VPCDerivedInfo) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *VPCDerivedInfo) SetAvailabilityZones(v []string) *VPCDerivedInfo {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VPCDerivedInfo) SetSecurityGroupIds(v []string) *VPCDerivedInfo {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *VPCDerivedInfo) SetSubnetIds(v []string) *VPCDerivedInfo {
-	s.SubnetIds = v
-	return s
-}
-
-// SetVPCId sets the VPCId field's value.
-func (s *VPCDerivedInfo) SetVPCId(v string) *VPCDerivedInfo {
-	s.VPCId = &v
-	return s
-}
-
 // Status of the VPC options for the specified Elasticsearch domain.
 type VPCDerivedInfoStatus struct {
 	_ struct{} `type:"structure"`
@@ -3366,18 +2580,6 @@ func (s VPCDerivedInfoStatus) GoString() string {
 	return s.String()
 }
 
-// SetOptions sets the Options field's value.
-func (s *VPCDerivedInfoStatus) SetOptions(v *VPCDerivedInfo) *VPCDerivedInfoStatus {
-	s.Options = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VPCDerivedInfoStatus) SetStatus(v *OptionStatus) *VPCDerivedInfoStatus {
-	s.Status = v
-	return s
-}
-
 // Options to specify the subnets and security groups for VPC endpoint. For
 // more information, see  VPC Endpoints for Amazon Elasticsearch Service Domains
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
@@ -3399,18 +2601,6 @@ func (s VPCOptions) String() string {
 // GoString returns the string representation
 func (s VPCOptions) GoString() string {
 	return s.String()
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VPCOptions) SetSecurityGroupIds(v []string) *VPCOptions {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *VPCOptions) SetSubnetIds(v []string) *VPCOptions {
-	s.SubnetIds = v
-	return s
 }
 
 type ESPartitionInstanceType string

@@ -2275,24 +2275,6 @@ func (s *AbortDocumentVersionUploadInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *AbortDocumentVersionUploadInput) SetAuthenticationToken(v string) *AbortDocumentVersionUploadInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *AbortDocumentVersionUploadInput) SetDocumentId(v string) *AbortDocumentVersionUploadInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *AbortDocumentVersionUploadInput) SetVersionId(v string) *AbortDocumentVersionUploadInput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUploadOutput
 type AbortDocumentVersionUploadOutput struct {
 	_ struct{} `type:"structure"`
@@ -2359,18 +2341,6 @@ func (s *ActivateUserInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *ActivateUserInput) SetAuthenticationToken(v string) *ActivateUserInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *ActivateUserInput) SetUserId(v string) *ActivateUserInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserResponse
 type ActivateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -2394,12 +2364,6 @@ func (s ActivateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ActivateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUser sets the User field's value.
-func (s *ActivateUserOutput) SetUser(v *User) *ActivateUserOutput {
-	s.User = v
-	return s
 }
 
 // Describes the activity information.
@@ -2444,54 +2408,6 @@ func (s Activity) String() string {
 // GoString returns the string representation
 func (s Activity) GoString() string {
 	return s.String()
-}
-
-// SetCommentMetadata sets the CommentMetadata field's value.
-func (s *Activity) SetCommentMetadata(v *CommentMetadata) *Activity {
-	s.CommentMetadata = v
-	return s
-}
-
-// SetInitiator sets the Initiator field's value.
-func (s *Activity) SetInitiator(v *UserMetadata) *Activity {
-	s.Initiator = v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *Activity) SetOrganizationId(v string) *Activity {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetOriginalParent sets the OriginalParent field's value.
-func (s *Activity) SetOriginalParent(v *ResourceMetadata) *Activity {
-	s.OriginalParent = v
-	return s
-}
-
-// SetParticipants sets the Participants field's value.
-func (s *Activity) SetParticipants(v *Participants) *Activity {
-	s.Participants = v
-	return s
-}
-
-// SetResourceMetadata sets the ResourceMetadata field's value.
-func (s *Activity) SetResourceMetadata(v *ResourceMetadata) *Activity {
-	s.ResourceMetadata = v
-	return s
-}
-
-// SetTimeStamp sets the TimeStamp field's value.
-func (s *Activity) SetTimeStamp(v time.Time) *Activity {
-	s.TimeStamp = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Activity) SetType(v ActivityType) *Activity {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissionsRequest
@@ -2557,30 +2473,6 @@ func (s *AddResourcePermissionsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *AddResourcePermissionsInput) SetAuthenticationToken(v string) *AddResourcePermissionsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetNotificationOptions sets the NotificationOptions field's value.
-func (s *AddResourcePermissionsInput) SetNotificationOptions(v *NotificationOptions) *AddResourcePermissionsInput {
-	s.NotificationOptions = v
-	return s
-}
-
-// SetPrincipals sets the Principals field's value.
-func (s *AddResourcePermissionsInput) SetPrincipals(v []SharePrincipal) *AddResourcePermissionsInput {
-	s.Principals = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *AddResourcePermissionsInput) SetResourceId(v string) *AddResourcePermissionsInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissionsResponse
 type AddResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2604,12 +2496,6 @@ func (s AddResourcePermissionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddResourcePermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetShareResults sets the ShareResults field's value.
-func (s *AddResourcePermissionsOutput) SetShareResults(v []ShareResult) *AddResourcePermissionsOutput {
-	s.ShareResults = v
-	return s
 }
 
 // Describes a comment.
@@ -2660,60 +2546,6 @@ func (s Comment) GoString() string {
 	return s.String()
 }
 
-// SetCommentId sets the CommentId field's value.
-func (s *Comment) SetCommentId(v string) *Comment {
-	s.CommentId = &v
-	return s
-}
-
-// SetContributor sets the Contributor field's value.
-func (s *Comment) SetContributor(v *User) *Comment {
-	s.Contributor = v
-	return s
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *Comment) SetCreatedTimestamp(v time.Time) *Comment {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *Comment) SetParentId(v string) *Comment {
-	s.ParentId = &v
-	return s
-}
-
-// SetRecipientId sets the RecipientId field's value.
-func (s *Comment) SetRecipientId(v string) *Comment {
-	s.RecipientId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Comment) SetStatus(v CommentStatusType) *Comment {
-	s.Status = v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *Comment) SetText(v string) *Comment {
-	s.Text = &v
-	return s
-}
-
-// SetThreadId sets the ThreadId field's value.
-func (s *Comment) SetThreadId(v string) *Comment {
-	s.ThreadId = &v
-	return s
-}
-
-// SetVisibility sets the Visibility field's value.
-func (s *Comment) SetVisibility(v CommentVisibilityType) *Comment {
-	s.Visibility = v
-	return s
-}
-
 // Describes the metadata of a comment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CommentMetadata
 type CommentMetadata struct {
@@ -2743,36 +2575,6 @@ func (s CommentMetadata) String() string {
 // GoString returns the string representation
 func (s CommentMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCommentId sets the CommentId field's value.
-func (s *CommentMetadata) SetCommentId(v string) *CommentMetadata {
-	s.CommentId = &v
-	return s
-}
-
-// SetCommentStatus sets the CommentStatus field's value.
-func (s *CommentMetadata) SetCommentStatus(v CommentStatusType) *CommentMetadata {
-	s.CommentStatus = v
-	return s
-}
-
-// SetContributor sets the Contributor field's value.
-func (s *CommentMetadata) SetContributor(v *User) *CommentMetadata {
-	s.Contributor = v
-	return s
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *CommentMetadata) SetCreatedTimestamp(v time.Time) *CommentMetadata {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetRecipientId sets the RecipientId field's value.
-func (s *CommentMetadata) SetRecipientId(v string) *CommentMetadata {
-	s.RecipientId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCommentRequest
@@ -2864,54 +2666,6 @@ func (s *CreateCommentInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *CreateCommentInput) SetAuthenticationToken(v string) *CreateCommentInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *CreateCommentInput) SetDocumentId(v string) *CreateCommentInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetNotifyCollaborators sets the NotifyCollaborators field's value.
-func (s *CreateCommentInput) SetNotifyCollaborators(v bool) *CreateCommentInput {
-	s.NotifyCollaborators = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *CreateCommentInput) SetParentId(v string) *CreateCommentInput {
-	s.ParentId = &v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *CreateCommentInput) SetText(v string) *CreateCommentInput {
-	s.Text = &v
-	return s
-}
-
-// SetThreadId sets the ThreadId field's value.
-func (s *CreateCommentInput) SetThreadId(v string) *CreateCommentInput {
-	s.ThreadId = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *CreateCommentInput) SetVersionId(v string) *CreateCommentInput {
-	s.VersionId = &v
-	return s
-}
-
-// SetVisibility sets the Visibility field's value.
-func (s *CreateCommentInput) SetVisibility(v CommentVisibilityType) *CreateCommentInput {
-	s.Visibility = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCommentResponse
 type CreateCommentOutput struct {
 	_ struct{} `type:"structure"`
@@ -2935,12 +2689,6 @@ func (s CreateCommentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCommentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComment sets the Comment field's value.
-func (s *CreateCommentOutput) SetComment(v *Comment) *CreateCommentOutput {
-	s.Comment = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadataRequest
@@ -3004,30 +2752,6 @@ func (s *CreateCustomMetadataInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *CreateCustomMetadataInput) SetAuthenticationToken(v string) *CreateCustomMetadataInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetCustomMetadata sets the CustomMetadata field's value.
-func (s *CreateCustomMetadataInput) SetCustomMetadata(v map[string]string) *CreateCustomMetadataInput {
-	s.CustomMetadata = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *CreateCustomMetadataInput) SetResourceId(v string) *CreateCustomMetadataInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *CreateCustomMetadataInput) SetVersionId(v string) *CreateCustomMetadataInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadataResponse
@@ -3102,24 +2826,6 @@ func (s *CreateFolderInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *CreateFolderInput) SetAuthenticationToken(v string) *CreateFolderInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFolderInput) SetName(v string) *CreateFolderInput {
-	s.Name = &v
-	return s
-}
-
-// SetParentFolderId sets the ParentFolderId field's value.
-func (s *CreateFolderInput) SetParentFolderId(v string) *CreateFolderInput {
-	s.ParentFolderId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolderResponse
 type CreateFolderOutput struct {
 	_ struct{} `type:"structure"`
@@ -3143,12 +2849,6 @@ func (s CreateFolderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateFolderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *CreateFolderOutput) SetMetadata(v *FolderMetadata) *CreateFolderOutput {
-	s.Metadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsRequest
@@ -3202,24 +2902,6 @@ func (s *CreateLabelsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *CreateLabelsInput) SetAuthenticationToken(v string) *CreateLabelsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *CreateLabelsInput) SetLabels(v []string) *CreateLabelsInput {
-	s.Labels = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *CreateLabelsInput) SetResourceId(v string) *CreateLabelsInput {
-	s.ResourceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabelsResponse
@@ -3311,30 +2993,6 @@ func (s *CreateNotificationSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetEndpoint sets the Endpoint field's value.
-func (s *CreateNotificationSubscriptionInput) SetEndpoint(v string) *CreateNotificationSubscriptionInput {
-	s.Endpoint = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *CreateNotificationSubscriptionInput) SetOrganizationId(v string) *CreateNotificationSubscriptionInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *CreateNotificationSubscriptionInput) SetProtocol(v SubscriptionProtocolType) *CreateNotificationSubscriptionInput {
-	s.Protocol = v
-	return s
-}
-
-// SetSubscriptionType sets the SubscriptionType field's value.
-func (s *CreateNotificationSubscriptionInput) SetSubscriptionType(v SubscriptionType) *CreateNotificationSubscriptionInput {
-	s.SubscriptionType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscriptionResponse
 type CreateNotificationSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -3358,12 +3016,6 @@ func (s CreateNotificationSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNotificationSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubscription sets the Subscription field's value.
-func (s *CreateNotificationSubscriptionOutput) SetSubscription(v *Subscription) *CreateNotificationSubscriptionOutput {
-	s.Subscription = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserRequest
@@ -3467,60 +3119,6 @@ func (s *CreateUserInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *CreateUserInput) SetAuthenticationToken(v string) *CreateUserInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *CreateUserInput) SetEmailAddress(v string) *CreateUserInput {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetGivenName sets the GivenName field's value.
-func (s *CreateUserInput) SetGivenName(v string) *CreateUserInput {
-	s.GivenName = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *CreateUserInput) SetOrganizationId(v string) *CreateUserInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *CreateUserInput) SetPassword(v string) *CreateUserInput {
-	s.Password = &v
-	return s
-}
-
-// SetStorageRule sets the StorageRule field's value.
-func (s *CreateUserInput) SetStorageRule(v *StorageRuleType) *CreateUserInput {
-	s.StorageRule = v
-	return s
-}
-
-// SetSurname sets the Surname field's value.
-func (s *CreateUserInput) SetSurname(v string) *CreateUserInput {
-	s.Surname = &v
-	return s
-}
-
-// SetTimeZoneId sets the TimeZoneId field's value.
-func (s *CreateUserInput) SetTimeZoneId(v string) *CreateUserInput {
-	s.TimeZoneId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *CreateUserInput) SetUsername(v string) *CreateUserInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserResponse
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -3544,12 +3142,6 @@ func (s CreateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUser sets the User field's value.
-func (s *CreateUserOutput) SetUser(v *User) *CreateUserOutput {
-	s.User = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserRequest
@@ -3594,18 +3186,6 @@ func (s *DeactivateUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeactivateUserInput) SetAuthenticationToken(v string) *DeactivateUserInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DeactivateUserInput) SetUserId(v string) *DeactivateUserInput {
-	s.UserId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserOutput
@@ -3698,30 +3278,6 @@ func (s *DeleteCommentInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteCommentInput) SetAuthenticationToken(v string) *DeleteCommentInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetCommentId sets the CommentId field's value.
-func (s *DeleteCommentInput) SetCommentId(v string) *DeleteCommentInput {
-	s.CommentId = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *DeleteCommentInput) SetDocumentId(v string) *DeleteCommentInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteCommentInput) SetVersionId(v string) *DeleteCommentInput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCommentOutput
 type DeleteCommentOutput struct {
 	_ struct{} `type:"structure"`
@@ -3802,36 +3358,6 @@ func (s *DeleteCustomMetadataInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteCustomMetadataInput) SetAuthenticationToken(v string) *DeleteCustomMetadataInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDeleteAll sets the DeleteAll field's value.
-func (s *DeleteCustomMetadataInput) SetDeleteAll(v bool) *DeleteCustomMetadataInput {
-	s.DeleteAll = &v
-	return s
-}
-
-// SetKeys sets the Keys field's value.
-func (s *DeleteCustomMetadataInput) SetKeys(v []string) *DeleteCustomMetadataInput {
-	s.Keys = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DeleteCustomMetadataInput) SetResourceId(v string) *DeleteCustomMetadataInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteCustomMetadataInput) SetVersionId(v string) *DeleteCustomMetadataInput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadataResponse
 type DeleteCustomMetadataOutput struct {
 	_ struct{} `type:"structure"`
@@ -3896,18 +3422,6 @@ func (s *DeleteDocumentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteDocumentInput) SetAuthenticationToken(v string) *DeleteDocumentInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *DeleteDocumentInput) SetDocumentId(v string) *DeleteDocumentInput {
-	s.DocumentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentOutput
@@ -3976,18 +3490,6 @@ func (s *DeleteFolderContentsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteFolderContentsInput) SetAuthenticationToken(v string) *DeleteFolderContentsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFolderId sets the FolderId field's value.
-func (s *DeleteFolderContentsInput) SetFolderId(v string) *DeleteFolderContentsInput {
-	s.FolderId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContentsOutput
 type DeleteFolderContentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4052,18 +3554,6 @@ func (s *DeleteFolderInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteFolderInput) SetAuthenticationToken(v string) *DeleteFolderInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFolderId sets the FolderId field's value.
-func (s *DeleteFolderInput) SetFolderId(v string) *DeleteFolderInput {
-	s.FolderId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderOutput
@@ -4138,30 +3628,6 @@ func (s *DeleteLabelsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteLabelsInput) SetAuthenticationToken(v string) *DeleteLabelsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDeleteAll sets the DeleteAll field's value.
-func (s *DeleteLabelsInput) SetDeleteAll(v bool) *DeleteLabelsInput {
-	s.DeleteAll = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *DeleteLabelsInput) SetLabels(v []string) *DeleteLabelsInput {
-	s.Labels = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DeleteLabelsInput) SetResourceId(v string) *DeleteLabelsInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabelsResponse
 type DeleteLabelsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4233,18 +3699,6 @@ func (s *DeleteNotificationSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DeleteNotificationSubscriptionInput) SetOrganizationId(v string) *DeleteNotificationSubscriptionInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetSubscriptionId sets the SubscriptionId field's value.
-func (s *DeleteNotificationSubscriptionInput) SetSubscriptionId(v string) *DeleteNotificationSubscriptionInput {
-	s.SubscriptionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscriptionOutput
 type DeleteNotificationSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4309,18 +3763,6 @@ func (s *DeleteUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DeleteUserInput) SetAuthenticationToken(v string) *DeleteUserInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DeleteUserInput) SetUserId(v string) *DeleteUserInput {
-	s.UserId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUserOutput
@@ -4412,48 +3854,6 @@ func (s *DescribeActivitiesInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeActivitiesInput) SetAuthenticationToken(v string) *DescribeActivitiesInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *DescribeActivitiesInput) SetEndTime(v time.Time) *DescribeActivitiesInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeActivitiesInput) SetLimit(v int64) *DescribeActivitiesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeActivitiesInput) SetMarker(v string) *DescribeActivitiesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeActivitiesInput) SetOrganizationId(v string) *DescribeActivitiesInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeActivitiesInput) SetStartTime(v time.Time) *DescribeActivitiesInput {
-	s.StartTime = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DescribeActivitiesInput) SetUserId(v string) *DescribeActivitiesInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivitiesResponse
 type DescribeActivitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4480,18 +3880,6 @@ func (s DescribeActivitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeActivitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeActivitiesOutput) SetMarker(v string) *DescribeActivitiesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetUserActivities sets the UserActivities field's value.
-func (s *DescribeActivitiesOutput) SetUserActivities(v []Activity) *DescribeActivitiesOutput {
-	s.UserActivities = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeCommentsRequest
@@ -4563,36 +3951,6 @@ func (s *DescribeCommentsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeCommentsInput) SetAuthenticationToken(v string) *DescribeCommentsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *DescribeCommentsInput) SetDocumentId(v string) *DescribeCommentsInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeCommentsInput) SetLimit(v int64) *DescribeCommentsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeCommentsInput) SetMarker(v string) *DescribeCommentsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DescribeCommentsInput) SetVersionId(v string) *DescribeCommentsInput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeCommentsResponse
 type DescribeCommentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4620,18 +3978,6 @@ func (s DescribeCommentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCommentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComments sets the Comments field's value.
-func (s *DescribeCommentsOutput) SetComments(v []Comment) *DescribeCommentsOutput {
-	s.Comments = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeCommentsOutput) SetMarker(v string) *DescribeCommentsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersionsRequest
@@ -4705,42 +4051,6 @@ func (s *DescribeDocumentVersionsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeDocumentVersionsInput) SetAuthenticationToken(v string) *DescribeDocumentVersionsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *DescribeDocumentVersionsInput) SetDocumentId(v string) *DescribeDocumentVersionsInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetFields sets the Fields field's value.
-func (s *DescribeDocumentVersionsInput) SetFields(v string) *DescribeDocumentVersionsInput {
-	s.Fields = &v
-	return s
-}
-
-// SetInclude sets the Include field's value.
-func (s *DescribeDocumentVersionsInput) SetInclude(v string) *DescribeDocumentVersionsInput {
-	s.Include = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeDocumentVersionsInput) SetLimit(v int64) *DescribeDocumentVersionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeDocumentVersionsInput) SetMarker(v string) *DescribeDocumentVersionsInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersionsResponse
 type DescribeDocumentVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4768,18 +4078,6 @@ func (s DescribeDocumentVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDocumentVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDocumentVersions sets the DocumentVersions field's value.
-func (s *DescribeDocumentVersionsOutput) SetDocumentVersions(v []DocumentVersionMetadata) *DescribeDocumentVersionsOutput {
-	s.DocumentVersions = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeDocumentVersionsOutput) SetMarker(v string) *DescribeDocumentVersionsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContentsRequest
@@ -4854,54 +4152,6 @@ func (s *DescribeFolderContentsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeFolderContentsInput) SetAuthenticationToken(v string) *DescribeFolderContentsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFolderId sets the FolderId field's value.
-func (s *DescribeFolderContentsInput) SetFolderId(v string) *DescribeFolderContentsInput {
-	s.FolderId = &v
-	return s
-}
-
-// SetInclude sets the Include field's value.
-func (s *DescribeFolderContentsInput) SetInclude(v string) *DescribeFolderContentsInput {
-	s.Include = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeFolderContentsInput) SetLimit(v int64) *DescribeFolderContentsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeFolderContentsInput) SetMarker(v string) *DescribeFolderContentsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *DescribeFolderContentsInput) SetOrder(v OrderType) *DescribeFolderContentsInput {
-	s.Order = v
-	return s
-}
-
-// SetSort sets the Sort field's value.
-func (s *DescribeFolderContentsInput) SetSort(v ResourceSortType) *DescribeFolderContentsInput {
-	s.Sort = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DescribeFolderContentsInput) SetType(v FolderContentType) *DescribeFolderContentsInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContentsResponse
 type DescribeFolderContentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4932,24 +4182,6 @@ func (s DescribeFolderContentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFolderContentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDocuments sets the Documents field's value.
-func (s *DescribeFolderContentsOutput) SetDocuments(v []DocumentMetadata) *DescribeFolderContentsOutput {
-	s.Documents = v
-	return s
-}
-
-// SetFolders sets the Folders field's value.
-func (s *DescribeFolderContentsOutput) SetFolders(v []FolderMetadata) *DescribeFolderContentsOutput {
-	s.Folders = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeFolderContentsOutput) SetMarker(v string) *DescribeFolderContentsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroupsRequest
@@ -5015,36 +4247,6 @@ func (s *DescribeGroupsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeGroupsInput) SetAuthenticationToken(v string) *DescribeGroupsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeGroupsInput) SetLimit(v int64) *DescribeGroupsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeGroupsInput) SetMarker(v string) *DescribeGroupsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeGroupsInput) SetOrganizationId(v string) *DescribeGroupsInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetSearchQuery sets the SearchQuery field's value.
-func (s *DescribeGroupsInput) SetSearchQuery(v string) *DescribeGroupsInput {
-	s.SearchQuery = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeGroupsResponse
 type DescribeGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5072,18 +4274,6 @@ func (s DescribeGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *DescribeGroupsOutput) SetGroups(v []GroupMetadata) *DescribeGroupsOutput {
-	s.Groups = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeGroupsOutput) SetMarker(v string) *DescribeGroupsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptionsRequest
@@ -5136,24 +4326,6 @@ func (s *DescribeNotificationSubscriptionsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *DescribeNotificationSubscriptionsInput) SetLimit(v int64) *DescribeNotificationSubscriptionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeNotificationSubscriptionsInput) SetMarker(v string) *DescribeNotificationSubscriptionsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeNotificationSubscriptionsInput) SetOrganizationId(v string) *DescribeNotificationSubscriptionsInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptionsResponse
 type DescribeNotificationSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5181,18 +4353,6 @@ func (s DescribeNotificationSubscriptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNotificationSubscriptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeNotificationSubscriptionsOutput) SetMarker(v string) *DescribeNotificationSubscriptionsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *DescribeNotificationSubscriptionsOutput) SetSubscriptions(v []Subscription) *DescribeNotificationSubscriptionsOutput {
-	s.Subscriptions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissionsRequest
@@ -5258,36 +4418,6 @@ func (s *DescribeResourcePermissionsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeResourcePermissionsInput) SetAuthenticationToken(v string) *DescribeResourcePermissionsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeResourcePermissionsInput) SetLimit(v int64) *DescribeResourcePermissionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeResourcePermissionsInput) SetMarker(v string) *DescribeResourcePermissionsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetPrincipalId sets the PrincipalId field's value.
-func (s *DescribeResourcePermissionsInput) SetPrincipalId(v string) *DescribeResourcePermissionsInput {
-	s.PrincipalId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeResourcePermissionsInput) SetResourceId(v string) *DescribeResourcePermissionsInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissionsResponse
 type DescribeResourcePermissionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5315,18 +4445,6 @@ func (s DescribeResourcePermissionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeResourcePermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeResourcePermissionsOutput) SetMarker(v string) *DescribeResourcePermissionsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPrincipals sets the Principals field's value.
-func (s *DescribeResourcePermissionsOutput) SetPrincipals(v []Principal) *DescribeResourcePermissionsOutput {
-	s.Principals = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFoldersRequest
@@ -5380,24 +4498,6 @@ func (s *DescribeRootFoldersInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeRootFoldersInput) SetAuthenticationToken(v string) *DescribeRootFoldersInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeRootFoldersInput) SetLimit(v int64) *DescribeRootFoldersInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeRootFoldersInput) SetMarker(v string) *DescribeRootFoldersInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFoldersResponse
 type DescribeRootFoldersOutput struct {
 	_ struct{} `type:"structure"`
@@ -5424,18 +4524,6 @@ func (s DescribeRootFoldersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRootFoldersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFolders sets the Folders field's value.
-func (s *DescribeRootFoldersOutput) SetFolders(v []FolderMetadata) *DescribeRootFoldersOutput {
-	s.Folders = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeRootFoldersOutput) SetMarker(v string) *DescribeRootFoldersOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersRequest
@@ -5517,66 +4605,6 @@ func (s *DescribeUsersInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *DescribeUsersInput) SetAuthenticationToken(v string) *DescribeUsersInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFields sets the Fields field's value.
-func (s *DescribeUsersInput) SetFields(v string) *DescribeUsersInput {
-	s.Fields = &v
-	return s
-}
-
-// SetInclude sets the Include field's value.
-func (s *DescribeUsersInput) SetInclude(v UserFilterType) *DescribeUsersInput {
-	s.Include = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeUsersInput) SetLimit(v int64) *DescribeUsersInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeUsersInput) SetMarker(v string) *DescribeUsersInput {
-	s.Marker = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *DescribeUsersInput) SetOrder(v OrderType) *DescribeUsersInput {
-	s.Order = v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeUsersInput) SetOrganizationId(v string) *DescribeUsersInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetQuery sets the Query field's value.
-func (s *DescribeUsersInput) SetQuery(v string) *DescribeUsersInput {
-	s.Query = &v
-	return s
-}
-
-// SetSort sets the Sort field's value.
-func (s *DescribeUsersInput) SetSort(v UserSortType) *DescribeUsersInput {
-	s.Sort = v
-	return s
-}
-
-// SetUserIds sets the UserIds field's value.
-func (s *DescribeUsersInput) SetUserIds(v string) *DescribeUsersInput {
-	s.UserIds = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersResponse
 type DescribeUsersOutput struct {
 	_ struct{} `type:"structure"`
@@ -5607,24 +4635,6 @@ func (s DescribeUsersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeUsersOutput) SetMarker(v string) *DescribeUsersOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetTotalNumberOfUsers sets the TotalNumberOfUsers field's value.
-func (s *DescribeUsersOutput) SetTotalNumberOfUsers(v int64) *DescribeUsersOutput {
-	s.TotalNumberOfUsers = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *DescribeUsersOutput) SetUsers(v []User) *DescribeUsersOutput {
-	s.Users = v
-	return s
 }
 
 // Describes the document.
@@ -5665,54 +4675,6 @@ func (s DocumentMetadata) String() string {
 // GoString returns the string representation
 func (s DocumentMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *DocumentMetadata) SetCreatedTimestamp(v time.Time) *DocumentMetadata {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetCreatorId sets the CreatorId field's value.
-func (s *DocumentMetadata) SetCreatorId(v string) *DocumentMetadata {
-	s.CreatorId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DocumentMetadata) SetId(v string) *DocumentMetadata {
-	s.Id = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *DocumentMetadata) SetLabels(v []string) *DocumentMetadata {
-	s.Labels = v
-	return s
-}
-
-// SetLatestVersionMetadata sets the LatestVersionMetadata field's value.
-func (s *DocumentMetadata) SetLatestVersionMetadata(v *DocumentVersionMetadata) *DocumentMetadata {
-	s.LatestVersionMetadata = v
-	return s
-}
-
-// SetModifiedTimestamp sets the ModifiedTimestamp field's value.
-func (s *DocumentMetadata) SetModifiedTimestamp(v time.Time) *DocumentMetadata {
-	s.ModifiedTimestamp = &v
-	return s
-}
-
-// SetParentFolderId sets the ParentFolderId field's value.
-func (s *DocumentMetadata) SetParentFolderId(v string) *DocumentMetadata {
-	s.ParentFolderId = &v
-	return s
-}
-
-// SetResourceState sets the ResourceState field's value.
-func (s *DocumentMetadata) SetResourceState(v ResourceStateType) *DocumentMetadata {
-	s.ResourceState = v
-	return s
 }
 
 // Describes a version of a document.
@@ -5770,84 +4732,6 @@ func (s DocumentVersionMetadata) GoString() string {
 	return s.String()
 }
 
-// SetContentCreatedTimestamp sets the ContentCreatedTimestamp field's value.
-func (s *DocumentVersionMetadata) SetContentCreatedTimestamp(v time.Time) *DocumentVersionMetadata {
-	s.ContentCreatedTimestamp = &v
-	return s
-}
-
-// SetContentModifiedTimestamp sets the ContentModifiedTimestamp field's value.
-func (s *DocumentVersionMetadata) SetContentModifiedTimestamp(v time.Time) *DocumentVersionMetadata {
-	s.ContentModifiedTimestamp = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *DocumentVersionMetadata) SetContentType(v string) *DocumentVersionMetadata {
-	s.ContentType = &v
-	return s
-}
-
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *DocumentVersionMetadata) SetCreatedTimestamp(v time.Time) *DocumentVersionMetadata {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetCreatorId sets the CreatorId field's value.
-func (s *DocumentVersionMetadata) SetCreatorId(v string) *DocumentVersionMetadata {
-	s.CreatorId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DocumentVersionMetadata) SetId(v string) *DocumentVersionMetadata {
-	s.Id = &v
-	return s
-}
-
-// SetModifiedTimestamp sets the ModifiedTimestamp field's value.
-func (s *DocumentVersionMetadata) SetModifiedTimestamp(v time.Time) *DocumentVersionMetadata {
-	s.ModifiedTimestamp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DocumentVersionMetadata) SetName(v string) *DocumentVersionMetadata {
-	s.Name = &v
-	return s
-}
-
-// SetSignature sets the Signature field's value.
-func (s *DocumentVersionMetadata) SetSignature(v string) *DocumentVersionMetadata {
-	s.Signature = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *DocumentVersionMetadata) SetSize(v int64) *DocumentVersionMetadata {
-	s.Size = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *DocumentVersionMetadata) SetSource(v map[string]string) *DocumentVersionMetadata {
-	s.Source = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DocumentVersionMetadata) SetStatus(v DocumentStatusType) *DocumentVersionMetadata {
-	s.Status = v
-	return s
-}
-
-// SetThumbnail sets the Thumbnail field's value.
-func (s *DocumentVersionMetadata) SetThumbnail(v map[string]string) *DocumentVersionMetadata {
-	s.Thumbnail = v
-	return s
-}
-
 // Describes a folder.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/FolderMetadata
 type FolderMetadata struct {
@@ -5897,72 +4781,6 @@ func (s FolderMetadata) GoString() string {
 	return s.String()
 }
 
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *FolderMetadata) SetCreatedTimestamp(v time.Time) *FolderMetadata {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetCreatorId sets the CreatorId field's value.
-func (s *FolderMetadata) SetCreatorId(v string) *FolderMetadata {
-	s.CreatorId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *FolderMetadata) SetId(v string) *FolderMetadata {
-	s.Id = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *FolderMetadata) SetLabels(v []string) *FolderMetadata {
-	s.Labels = v
-	return s
-}
-
-// SetLatestVersionSize sets the LatestVersionSize field's value.
-func (s *FolderMetadata) SetLatestVersionSize(v int64) *FolderMetadata {
-	s.LatestVersionSize = &v
-	return s
-}
-
-// SetModifiedTimestamp sets the ModifiedTimestamp field's value.
-func (s *FolderMetadata) SetModifiedTimestamp(v time.Time) *FolderMetadata {
-	s.ModifiedTimestamp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *FolderMetadata) SetName(v string) *FolderMetadata {
-	s.Name = &v
-	return s
-}
-
-// SetParentFolderId sets the ParentFolderId field's value.
-func (s *FolderMetadata) SetParentFolderId(v string) *FolderMetadata {
-	s.ParentFolderId = &v
-	return s
-}
-
-// SetResourceState sets the ResourceState field's value.
-func (s *FolderMetadata) SetResourceState(v ResourceStateType) *FolderMetadata {
-	s.ResourceState = v
-	return s
-}
-
-// SetSignature sets the Signature field's value.
-func (s *FolderMetadata) SetSignature(v string) *FolderMetadata {
-	s.Signature = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *FolderMetadata) SetSize(v int64) *FolderMetadata {
-	s.Size = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserRequest
 type GetCurrentUserInput struct {
 	_ struct{} `type:"structure"`
@@ -6001,12 +4819,6 @@ func (s *GetCurrentUserInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *GetCurrentUserInput) SetAuthenticationToken(v string) *GetCurrentUserInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUserResponse
 type GetCurrentUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -6030,12 +4842,6 @@ func (s GetCurrentUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCurrentUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUser sets the User field's value.
-func (s *GetCurrentUserOutput) SetUser(v *User) *GetCurrentUserOutput {
-	s.User = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentRequest
@@ -6085,24 +4891,6 @@ func (s *GetDocumentInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *GetDocumentInput) SetAuthenticationToken(v string) *GetDocumentInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *GetDocumentInput) SetDocumentId(v string) *GetDocumentInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetIncludeCustomMetadata sets the IncludeCustomMetadata field's value.
-func (s *GetDocumentInput) SetIncludeCustomMetadata(v bool) *GetDocumentInput {
-	s.IncludeCustomMetadata = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentResponse
 type GetDocumentOutput struct {
 	_ struct{} `type:"structure"`
@@ -6129,18 +4917,6 @@ func (s GetDocumentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDocumentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCustomMetadata sets the CustomMetadata field's value.
-func (s *GetDocumentOutput) SetCustomMetadata(v map[string]string) *GetDocumentOutput {
-	s.CustomMetadata = v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *GetDocumentOutput) SetMetadata(v *DocumentMetadata) *GetDocumentOutput {
-	s.Metadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPathRequest
@@ -6206,36 +4982,6 @@ func (s *GetDocumentPathInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *GetDocumentPathInput) SetAuthenticationToken(v string) *GetDocumentPathInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *GetDocumentPathInput) SetDocumentId(v string) *GetDocumentPathInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetFields sets the Fields field's value.
-func (s *GetDocumentPathInput) SetFields(v string) *GetDocumentPathInput {
-	s.Fields = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetDocumentPathInput) SetLimit(v int64) *GetDocumentPathInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *GetDocumentPathInput) SetMarker(v string) *GetDocumentPathInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPathResponse
 type GetDocumentPathOutput struct {
 	_ struct{} `type:"structure"`
@@ -6259,12 +5005,6 @@ func (s GetDocumentPathOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDocumentPathOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPath sets the Path field's value.
-func (s *GetDocumentPathOutput) SetPath(v *ResourcePath) *GetDocumentPathOutput {
-	s.Path = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionRequest
@@ -6333,36 +5073,6 @@ func (s *GetDocumentVersionInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *GetDocumentVersionInput) SetAuthenticationToken(v string) *GetDocumentVersionInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *GetDocumentVersionInput) SetDocumentId(v string) *GetDocumentVersionInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetFields sets the Fields field's value.
-func (s *GetDocumentVersionInput) SetFields(v string) *GetDocumentVersionInput {
-	s.Fields = &v
-	return s
-}
-
-// SetIncludeCustomMetadata sets the IncludeCustomMetadata field's value.
-func (s *GetDocumentVersionInput) SetIncludeCustomMetadata(v bool) *GetDocumentVersionInput {
-	s.IncludeCustomMetadata = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetDocumentVersionInput) SetVersionId(v string) *GetDocumentVersionInput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionResponse
 type GetDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6389,18 +5099,6 @@ func (s GetDocumentVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDocumentVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCustomMetadata sets the CustomMetadata field's value.
-func (s *GetDocumentVersionOutput) SetCustomMetadata(v map[string]string) *GetDocumentVersionOutput {
-	s.CustomMetadata = v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *GetDocumentVersionOutput) SetMetadata(v *DocumentVersionMetadata) *GetDocumentVersionOutput {
-	s.Metadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderRequest
@@ -6450,24 +5148,6 @@ func (s *GetFolderInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *GetFolderInput) SetAuthenticationToken(v string) *GetFolderInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFolderId sets the FolderId field's value.
-func (s *GetFolderInput) SetFolderId(v string) *GetFolderInput {
-	s.FolderId = &v
-	return s
-}
-
-// SetIncludeCustomMetadata sets the IncludeCustomMetadata field's value.
-func (s *GetFolderInput) SetIncludeCustomMetadata(v bool) *GetFolderInput {
-	s.IncludeCustomMetadata = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderResponse
 type GetFolderOutput struct {
 	_ struct{} `type:"structure"`
@@ -6494,18 +5174,6 @@ func (s GetFolderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFolderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCustomMetadata sets the CustomMetadata field's value.
-func (s *GetFolderOutput) SetCustomMetadata(v map[string]string) *GetFolderOutput {
-	s.CustomMetadata = v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *GetFolderOutput) SetMetadata(v *FolderMetadata) *GetFolderOutput {
-	s.Metadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPathRequest
@@ -6571,36 +5239,6 @@ func (s *GetFolderPathInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *GetFolderPathInput) SetAuthenticationToken(v string) *GetFolderPathInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFields sets the Fields field's value.
-func (s *GetFolderPathInput) SetFields(v string) *GetFolderPathInput {
-	s.Fields = &v
-	return s
-}
-
-// SetFolderId sets the FolderId field's value.
-func (s *GetFolderPathInput) SetFolderId(v string) *GetFolderPathInput {
-	s.FolderId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetFolderPathInput) SetLimit(v int64) *GetFolderPathInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *GetFolderPathInput) SetMarker(v string) *GetFolderPathInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPathResponse
 type GetFolderPathOutput struct {
 	_ struct{} `type:"structure"`
@@ -6626,12 +5264,6 @@ func (s GetFolderPathOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPath sets the Path field's value.
-func (s *GetFolderPathOutput) SetPath(v *ResourcePath) *GetFolderPathOutput {
-	s.Path = v
-	return s
-}
-
 // Describes the metadata of a user group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GroupMetadata
 type GroupMetadata struct {
@@ -6652,18 +5284,6 @@ func (s GroupMetadata) String() string {
 // GoString returns the string representation
 func (s GroupMetadata) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *GroupMetadata) SetId(v string) *GroupMetadata {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GroupMetadata) SetName(v string) *GroupMetadata {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUploadRequest
@@ -6737,54 +5357,6 @@ func (s *InitiateDocumentVersionUploadInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *InitiateDocumentVersionUploadInput) SetAuthenticationToken(v string) *InitiateDocumentVersionUploadInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetContentCreatedTimestamp sets the ContentCreatedTimestamp field's value.
-func (s *InitiateDocumentVersionUploadInput) SetContentCreatedTimestamp(v time.Time) *InitiateDocumentVersionUploadInput {
-	s.ContentCreatedTimestamp = &v
-	return s
-}
-
-// SetContentModifiedTimestamp sets the ContentModifiedTimestamp field's value.
-func (s *InitiateDocumentVersionUploadInput) SetContentModifiedTimestamp(v time.Time) *InitiateDocumentVersionUploadInput {
-	s.ContentModifiedTimestamp = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *InitiateDocumentVersionUploadInput) SetContentType(v string) *InitiateDocumentVersionUploadInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetDocumentSizeInBytes sets the DocumentSizeInBytes field's value.
-func (s *InitiateDocumentVersionUploadInput) SetDocumentSizeInBytes(v int64) *InitiateDocumentVersionUploadInput {
-	s.DocumentSizeInBytes = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *InitiateDocumentVersionUploadInput) SetId(v string) *InitiateDocumentVersionUploadInput {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *InitiateDocumentVersionUploadInput) SetName(v string) *InitiateDocumentVersionUploadInput {
-	s.Name = &v
-	return s
-}
-
-// SetParentFolderId sets the ParentFolderId field's value.
-func (s *InitiateDocumentVersionUploadInput) SetParentFolderId(v string) *InitiateDocumentVersionUploadInput {
-	s.ParentFolderId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUploadResponse
 type InitiateDocumentVersionUploadOutput struct {
 	_ struct{} `type:"structure"`
@@ -6813,18 +5385,6 @@ func (s InitiateDocumentVersionUploadOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetMetadata sets the Metadata field's value.
-func (s *InitiateDocumentVersionUploadOutput) SetMetadata(v *DocumentMetadata) *InitiateDocumentVersionUploadOutput {
-	s.Metadata = v
-	return s
-}
-
-// SetUploadMetadata sets the UploadMetadata field's value.
-func (s *InitiateDocumentVersionUploadOutput) SetUploadMetadata(v *UploadMetadata) *InitiateDocumentVersionUploadOutput {
-	s.UploadMetadata = v
-	return s
-}
-
 // Set of options which defines notification preferences of given action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/NotificationOptions
 type NotificationOptions struct {
@@ -6845,18 +5405,6 @@ func (s NotificationOptions) String() string {
 // GoString returns the string representation
 func (s NotificationOptions) GoString() string {
 	return s.String()
-}
-
-// SetEmailMessage sets the EmailMessage field's value.
-func (s *NotificationOptions) SetEmailMessage(v string) *NotificationOptions {
-	s.EmailMessage = &v
-	return s
-}
-
-// SetSendEmail sets the SendEmail field's value.
-func (s *NotificationOptions) SetSendEmail(v bool) *NotificationOptions {
-	s.SendEmail = &v
-	return s
 }
 
 // Describes the users or user groups.
@@ -6881,18 +5429,6 @@ func (s Participants) GoString() string {
 	return s.String()
 }
 
-// SetGroups sets the Groups field's value.
-func (s *Participants) SetGroups(v []GroupMetadata) *Participants {
-	s.Groups = v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *Participants) SetUsers(v []UserMetadata) *Participants {
-	s.Users = v
-	return s
-}
-
 // Describes the permissions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/PermissionInfo
 type PermissionInfo struct {
@@ -6913,18 +5449,6 @@ func (s PermissionInfo) String() string {
 // GoString returns the string representation
 func (s PermissionInfo) GoString() string {
 	return s.String()
-}
-
-// SetRole sets the Role field's value.
-func (s *PermissionInfo) SetRole(v RoleType) *PermissionInfo {
-	s.Role = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *PermissionInfo) SetType(v RolePermissionType) *PermissionInfo {
-	s.Type = v
-	return s
 }
 
 // Describes a resource.
@@ -6950,24 +5474,6 @@ func (s Principal) String() string {
 // GoString returns the string representation
 func (s Principal) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *Principal) SetId(v string) *Principal {
-	s.Id = &v
-	return s
-}
-
-// SetRoles sets the Roles field's value.
-func (s *Principal) SetRoles(v []PermissionInfo) *Principal {
-	s.Roles = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Principal) SetType(v PrincipalType) *Principal {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissionsRequest
@@ -7012,18 +5518,6 @@ func (s *RemoveAllResourcePermissionsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *RemoveAllResourcePermissionsInput) SetAuthenticationToken(v string) *RemoveAllResourcePermissionsInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *RemoveAllResourcePermissionsInput) SetResourceId(v string) *RemoveAllResourcePermissionsInput {
-	s.ResourceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissionsOutput
@@ -7107,30 +5601,6 @@ func (s *RemoveResourcePermissionInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *RemoveResourcePermissionInput) SetAuthenticationToken(v string) *RemoveResourcePermissionInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetPrincipalId sets the PrincipalId field's value.
-func (s *RemoveResourcePermissionInput) SetPrincipalId(v string) *RemoveResourcePermissionInput {
-	s.PrincipalId = &v
-	return s
-}
-
-// SetPrincipalType sets the PrincipalType field's value.
-func (s *RemoveResourcePermissionInput) SetPrincipalType(v PrincipalType) *RemoveResourcePermissionInput {
-	s.PrincipalType = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *RemoveResourcePermissionInput) SetResourceId(v string) *RemoveResourcePermissionInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermissionOutput
 type RemoveResourcePermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7191,48 +5661,6 @@ func (s ResourceMetadata) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *ResourceMetadata) SetId(v string) *ResourceMetadata {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ResourceMetadata) SetName(v string) *ResourceMetadata {
-	s.Name = &v
-	return s
-}
-
-// SetOriginalName sets the OriginalName field's value.
-func (s *ResourceMetadata) SetOriginalName(v string) *ResourceMetadata {
-	s.OriginalName = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ResourceMetadata) SetOwner(v *UserMetadata) *ResourceMetadata {
-	s.Owner = v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *ResourceMetadata) SetParentId(v string) *ResourceMetadata {
-	s.ParentId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ResourceMetadata) SetType(v ResourceType) *ResourceMetadata {
-	s.Type = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *ResourceMetadata) SetVersionId(v string) *ResourceMetadata {
-	s.VersionId = &v
-	return s
-}
-
 // Describes the path information of a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourcePath
 type ResourcePath struct {
@@ -7250,12 +5678,6 @@ func (s ResourcePath) String() string {
 // GoString returns the string representation
 func (s ResourcePath) GoString() string {
 	return s.String()
-}
-
-// SetComponents sets the Components field's value.
-func (s *ResourcePath) SetComponents(v []ResourcePathComponent) *ResourcePath {
-	s.Components = v
-	return s
 }
 
 // Describes the resource path.
@@ -7278,18 +5700,6 @@ func (s ResourcePathComponent) String() string {
 // GoString returns the string representation
 func (s ResourcePathComponent) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *ResourcePathComponent) SetId(v string) *ResourcePathComponent {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ResourcePathComponent) SetName(v string) *ResourcePathComponent {
-	s.Name = &v
-	return s
 }
 
 // Describes the recipient type and ID, if available.
@@ -7346,24 +5756,6 @@ func (s *SharePrincipal) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *SharePrincipal) SetId(v string) *SharePrincipal {
-	s.Id = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *SharePrincipal) SetRole(v RoleType) *SharePrincipal {
-	s.Role = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *SharePrincipal) SetType(v PrincipalType) *SharePrincipal {
-	s.Type = v
-	return s
-}
-
 // Describes the share results of a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ShareResult
 type ShareResult struct {
@@ -7395,36 +5787,6 @@ func (s ShareResult) GoString() string {
 	return s.String()
 }
 
-// SetPrincipalId sets the PrincipalId field's value.
-func (s *ShareResult) SetPrincipalId(v string) *ShareResult {
-	s.PrincipalId = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *ShareResult) SetRole(v RoleType) *ShareResult {
-	s.Role = v
-	return s
-}
-
-// SetShareId sets the ShareId field's value.
-func (s *ShareResult) SetShareId(v string) *ShareResult {
-	s.ShareId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ShareResult) SetStatus(v ShareStatusType) *ShareResult {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ShareResult) SetStatusMessage(v string) *ShareResult {
-	s.StatusMessage = &v
-	return s
-}
-
 // Describes the storage for a user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/StorageRuleType
 type StorageRuleType struct {
@@ -7445,18 +5807,6 @@ func (s StorageRuleType) String() string {
 // GoString returns the string representation
 func (s StorageRuleType) GoString() string {
 	return s.String()
-}
-
-// SetStorageAllocatedInBytes sets the StorageAllocatedInBytes field's value.
-func (s *StorageRuleType) SetStorageAllocatedInBytes(v int64) *StorageRuleType {
-	s.StorageAllocatedInBytes = &v
-	return s
-}
-
-// SetStorageType sets the StorageType field's value.
-func (s *StorageRuleType) SetStorageType(v StorageType) *StorageRuleType {
-	s.StorageType = v
-	return s
 }
 
 // Describes a subscription.
@@ -7482,24 +5832,6 @@ func (s Subscription) String() string {
 // GoString returns the string representation
 func (s Subscription) GoString() string {
 	return s.String()
-}
-
-// SetEndPoint sets the EndPoint field's value.
-func (s *Subscription) SetEndPoint(v string) *Subscription {
-	s.EndPoint = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *Subscription) SetProtocol(v SubscriptionProtocolType) *Subscription {
-	s.Protocol = v
-	return s
-}
-
-// SetSubscriptionId sets the SubscriptionId field's value.
-func (s *Subscription) SetSubscriptionId(v string) *Subscription {
-	s.SubscriptionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentRequest
@@ -7559,36 +5891,6 @@ func (s *UpdateDocumentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *UpdateDocumentInput) SetAuthenticationToken(v string) *UpdateDocumentInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *UpdateDocumentInput) SetDocumentId(v string) *UpdateDocumentInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateDocumentInput) SetName(v string) *UpdateDocumentInput {
-	s.Name = &v
-	return s
-}
-
-// SetParentFolderId sets the ParentFolderId field's value.
-func (s *UpdateDocumentInput) SetParentFolderId(v string) *UpdateDocumentInput {
-	s.ParentFolderId = &v
-	return s
-}
-
-// SetResourceState sets the ResourceState field's value.
-func (s *UpdateDocumentInput) SetResourceState(v ResourceStateType) *UpdateDocumentInput {
-	s.ResourceState = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentOutput
@@ -7672,30 +5974,6 @@ func (s *UpdateDocumentVersionInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *UpdateDocumentVersionInput) SetAuthenticationToken(v string) *UpdateDocumentVersionInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetDocumentId sets the DocumentId field's value.
-func (s *UpdateDocumentVersionInput) SetDocumentId(v string) *UpdateDocumentVersionInput {
-	s.DocumentId = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *UpdateDocumentVersionInput) SetVersionId(v string) *UpdateDocumentVersionInput {
-	s.VersionId = &v
-	return s
-}
-
-// SetVersionStatus sets the VersionStatus field's value.
-func (s *UpdateDocumentVersionInput) SetVersionStatus(v DocumentVersionStatus) *UpdateDocumentVersionInput {
-	s.VersionStatus = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersionOutput
 type UpdateDocumentVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7776,36 +6054,6 @@ func (s *UpdateFolderInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *UpdateFolderInput) SetAuthenticationToken(v string) *UpdateFolderInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetFolderId sets the FolderId field's value.
-func (s *UpdateFolderInput) SetFolderId(v string) *UpdateFolderInput {
-	s.FolderId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateFolderInput) SetName(v string) *UpdateFolderInput {
-	s.Name = &v
-	return s
-}
-
-// SetParentFolderId sets the ParentFolderId field's value.
-func (s *UpdateFolderInput) SetParentFolderId(v string) *UpdateFolderInput {
-	s.ParentFolderId = &v
-	return s
-}
-
-// SetResourceState sets the ResourceState field's value.
-func (s *UpdateFolderInput) SetResourceState(v ResourceStateType) *UpdateFolderInput {
-	s.ResourceState = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolderOutput
@@ -7904,60 +6152,6 @@ func (s *UpdateUserInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationToken sets the AuthenticationToken field's value.
-func (s *UpdateUserInput) SetAuthenticationToken(v string) *UpdateUserInput {
-	s.AuthenticationToken = &v
-	return s
-}
-
-// SetGivenName sets the GivenName field's value.
-func (s *UpdateUserInput) SetGivenName(v string) *UpdateUserInput {
-	s.GivenName = &v
-	return s
-}
-
-// SetGrantPoweruserPrivileges sets the GrantPoweruserPrivileges field's value.
-func (s *UpdateUserInput) SetGrantPoweruserPrivileges(v BooleanEnumType) *UpdateUserInput {
-	s.GrantPoweruserPrivileges = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *UpdateUserInput) SetLocale(v LocaleType) *UpdateUserInput {
-	s.Locale = v
-	return s
-}
-
-// SetStorageRule sets the StorageRule field's value.
-func (s *UpdateUserInput) SetStorageRule(v *StorageRuleType) *UpdateUserInput {
-	s.StorageRule = v
-	return s
-}
-
-// SetSurname sets the Surname field's value.
-func (s *UpdateUserInput) SetSurname(v string) *UpdateUserInput {
-	s.Surname = &v
-	return s
-}
-
-// SetTimeZoneId sets the TimeZoneId field's value.
-func (s *UpdateUserInput) SetTimeZoneId(v string) *UpdateUserInput {
-	s.TimeZoneId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *UpdateUserInput) SetType(v UserType) *UpdateUserInput {
-	s.Type = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *UpdateUserInput) SetUserId(v string) *UpdateUserInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUserResponse
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -7983,12 +6177,6 @@ func (s UpdateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUser sets the User field's value.
-func (s *UpdateUserOutput) SetUser(v *User) *UpdateUserOutput {
-	s.User = v
-	return s
-}
-
 // Describes the upload.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UploadMetadata
 type UploadMetadata struct {
@@ -8009,18 +6197,6 @@ func (s UploadMetadata) String() string {
 // GoString returns the string representation
 func (s UploadMetadata) GoString() string {
 	return s.String()
-}
-
-// SetSignedHeaders sets the SignedHeaders field's value.
-func (s *UploadMetadata) SetSignedHeaders(v map[string]string) *UploadMetadata {
-	s.SignedHeaders = v
-	return s
-}
-
-// SetUploadUrl sets the UploadUrl field's value.
-func (s *UploadMetadata) SetUploadUrl(v string) *UploadMetadata {
-	s.UploadUrl = &v
-	return s
 }
 
 // Describes a user.
@@ -8084,96 +6260,6 @@ func (s User) GoString() string {
 	return s.String()
 }
 
-// SetCreatedTimestamp sets the CreatedTimestamp field's value.
-func (s *User) SetCreatedTimestamp(v time.Time) *User {
-	s.CreatedTimestamp = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *User) SetEmailAddress(v string) *User {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetGivenName sets the GivenName field's value.
-func (s *User) SetGivenName(v string) *User {
-	s.GivenName = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *User) SetId(v string) *User {
-	s.Id = &v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *User) SetLocale(v LocaleType) *User {
-	s.Locale = v
-	return s
-}
-
-// SetModifiedTimestamp sets the ModifiedTimestamp field's value.
-func (s *User) SetModifiedTimestamp(v time.Time) *User {
-	s.ModifiedTimestamp = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *User) SetOrganizationId(v string) *User {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetRecycleBinFolderId sets the RecycleBinFolderId field's value.
-func (s *User) SetRecycleBinFolderId(v string) *User {
-	s.RecycleBinFolderId = &v
-	return s
-}
-
-// SetRootFolderId sets the RootFolderId field's value.
-func (s *User) SetRootFolderId(v string) *User {
-	s.RootFolderId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *User) SetStatus(v UserStatusType) *User {
-	s.Status = v
-	return s
-}
-
-// SetStorage sets the Storage field's value.
-func (s *User) SetStorage(v *UserStorageMetadata) *User {
-	s.Storage = v
-	return s
-}
-
-// SetSurname sets the Surname field's value.
-func (s *User) SetSurname(v string) *User {
-	s.Surname = &v
-	return s
-}
-
-// SetTimeZoneId sets the TimeZoneId field's value.
-func (s *User) SetTimeZoneId(v string) *User {
-	s.TimeZoneId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *User) SetType(v UserType) *User {
-	s.Type = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *User) SetUsername(v string) *User {
-	s.Username = &v
-	return s
-}
-
 // Describes the metadata of the user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UserMetadata
 type UserMetadata struct {
@@ -8205,36 +6291,6 @@ func (s UserMetadata) GoString() string {
 	return s.String()
 }
 
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *UserMetadata) SetEmailAddress(v string) *UserMetadata {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetGivenName sets the GivenName field's value.
-func (s *UserMetadata) SetGivenName(v string) *UserMetadata {
-	s.GivenName = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UserMetadata) SetId(v string) *UserMetadata {
-	s.Id = &v
-	return s
-}
-
-// SetSurname sets the Surname field's value.
-func (s *UserMetadata) SetSurname(v string) *UserMetadata {
-	s.Surname = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *UserMetadata) SetUsername(v string) *UserMetadata {
-	s.Username = &v
-	return s
-}
-
 // Describes the storage for a user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UserStorageMetadata
 type UserStorageMetadata struct {
@@ -8255,18 +6311,6 @@ func (s UserStorageMetadata) String() string {
 // GoString returns the string representation
 func (s UserStorageMetadata) GoString() string {
 	return s.String()
-}
-
-// SetStorageRule sets the StorageRule field's value.
-func (s *UserStorageMetadata) SetStorageRule(v *StorageRuleType) *UserStorageMetadata {
-	s.StorageRule = v
-	return s
-}
-
-// SetStorageUtilizedInBytes sets the StorageUtilizedInBytes field's value.
-func (s *UserStorageMetadata) SetStorageUtilizedInBytes(v int64) *UserStorageMetadata {
-	s.StorageUtilizedInBytes = &v
-	return s
 }
 
 type ActivityType string

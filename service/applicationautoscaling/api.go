@@ -766,18 +766,6 @@ func (s Alarm) GoString() string {
 	return s.String()
 }
 
-// SetAlarmARN sets the AlarmARN field's value.
-func (s *Alarm) SetAlarmARN(v string) *Alarm {
-	s.AlarmARN = &v
-	return s
-}
-
-// SetAlarmName sets the AlarmName field's value.
-func (s *Alarm) SetAlarmName(v string) *Alarm {
-	s.AlarmName = &v
-	return s
-}
-
 // Configures a customized metric for a target tracking policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/CustomizedMetricSpecification
 type CustomizedMetricSpecification struct {
@@ -841,36 +829,6 @@ func (s *CustomizedMetricSpecification) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDimensions sets the Dimensions field's value.
-func (s *CustomizedMetricSpecification) SetDimensions(v []MetricDimension) *CustomizedMetricSpecification {
-	s.Dimensions = v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *CustomizedMetricSpecification) SetMetricName(v string) *CustomizedMetricSpecification {
-	s.MetricName = &v
-	return s
-}
-
-// SetNamespace sets the Namespace field's value.
-func (s *CustomizedMetricSpecification) SetNamespace(v string) *CustomizedMetricSpecification {
-	s.Namespace = &v
-	return s
-}
-
-// SetStatistic sets the Statistic field's value.
-func (s *CustomizedMetricSpecification) SetStatistic(v MetricStatistic) *CustomizedMetricSpecification {
-	s.Statistic = v
-	return s
-}
-
-// SetUnit sets the Unit field's value.
-func (s *CustomizedMetricSpecification) SetUnit(v string) *CustomizedMetricSpecification {
-	s.Unit = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest
@@ -987,30 +945,6 @@ func (s *DeleteScalingPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeleteScalingPolicyInput) SetPolicyName(v string) *DeleteScalingPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DeleteScalingPolicyInput) SetResourceId(v string) *DeleteScalingPolicyInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DeleteScalingPolicyInput) SetScalableDimension(v ScalableDimension) *DeleteScalingPolicyInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DeleteScalingPolicyInput) SetServiceNamespace(v ServiceNamespace) *DeleteScalingPolicyInput {
-	s.ServiceNamespace = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyResponse
@@ -1146,30 +1080,6 @@ func (s *DeleteScheduledActionInput) Validate() error {
 	return nil
 }
 
-// SetResourceId sets the ResourceId field's value.
-func (s *DeleteScheduledActionInput) SetResourceId(v string) *DeleteScheduledActionInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DeleteScheduledActionInput) SetScalableDimension(v ScalableDimension) *DeleteScheduledActionInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetScheduledActionName sets the ScheduledActionName field's value.
-func (s *DeleteScheduledActionInput) SetScheduledActionName(v string) *DeleteScheduledActionInput {
-	s.ScheduledActionName = &v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DeleteScheduledActionInput) SetServiceNamespace(v ServiceNamespace) *DeleteScheduledActionInput {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionResponse
 type DeleteScheduledActionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1294,24 +1204,6 @@ func (s *DeregisterScalableTargetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DeregisterScalableTargetInput) SetResourceId(v string) *DeregisterScalableTargetInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DeregisterScalableTargetInput) SetScalableDimension(v ScalableDimension) *DeregisterScalableTargetInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DeregisterScalableTargetInput) SetServiceNamespace(v ServiceNamespace) *DeregisterScalableTargetInput {
-	s.ServiceNamespace = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetResponse
@@ -1440,36 +1332,6 @@ func (s *DescribeScalableTargetsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeScalableTargetsInput) SetMaxResults(v int64) *DescribeScalableTargetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalableTargetsInput) SetNextToken(v string) *DescribeScalableTargetsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceIds sets the ResourceIds field's value.
-func (s *DescribeScalableTargetsInput) SetResourceIds(v []string) *DescribeScalableTargetsInput {
-	s.ResourceIds = v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScalableTargetsInput) SetScalableDimension(v ScalableDimension) *DescribeScalableTargetsInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScalableTargetsInput) SetServiceNamespace(v ServiceNamespace) *DescribeScalableTargetsInput {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargetsResponse
 type DescribeScalableTargetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1497,18 +1359,6 @@ func (s DescribeScalableTargetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScalableTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalableTargetsOutput) SetNextToken(v string) *DescribeScalableTargetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScalableTargets sets the ScalableTargets field's value.
-func (s *DescribeScalableTargetsOutput) SetScalableTargets(v []ScalableTarget) *DescribeScalableTargetsOutput {
-	s.ScalableTargets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivitiesRequest
@@ -1618,36 +1468,6 @@ func (s *DescribeScalingActivitiesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeScalingActivitiesInput) SetMaxResults(v int64) *DescribeScalingActivitiesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalingActivitiesInput) SetNextToken(v string) *DescribeScalingActivitiesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeScalingActivitiesInput) SetResourceId(v string) *DescribeScalingActivitiesInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScalingActivitiesInput) SetScalableDimension(v ScalableDimension) *DescribeScalingActivitiesInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScalingActivitiesInput) SetServiceNamespace(v ServiceNamespace) *DescribeScalingActivitiesInput {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivitiesResponse
 type DescribeScalingActivitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1675,18 +1495,6 @@ func (s DescribeScalingActivitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScalingActivitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalingActivitiesOutput) SetNextToken(v string) *DescribeScalingActivitiesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScalingActivities sets the ScalingActivities field's value.
-func (s *DescribeScalingActivitiesOutput) SetScalingActivities(v []ScalingActivity) *DescribeScalingActivitiesOutput {
-	s.ScalingActivities = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPoliciesRequest
@@ -1799,42 +1607,6 @@ func (s *DescribeScalingPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeScalingPoliciesInput) SetMaxResults(v int64) *DescribeScalingPoliciesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalingPoliciesInput) SetNextToken(v string) *DescribeScalingPoliciesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *DescribeScalingPoliciesInput) SetPolicyNames(v []string) *DescribeScalingPoliciesInput {
-	s.PolicyNames = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeScalingPoliciesInput) SetResourceId(v string) *DescribeScalingPoliciesInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScalingPoliciesInput) SetScalableDimension(v ScalableDimension) *DescribeScalingPoliciesInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScalingPoliciesInput) SetServiceNamespace(v ServiceNamespace) *DescribeScalingPoliciesInput {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPoliciesResponse
 type DescribeScalingPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1862,18 +1634,6 @@ func (s DescribeScalingPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScalingPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalingPoliciesOutput) SetNextToken(v string) *DescribeScalingPoliciesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScalingPolicies sets the ScalingPolicies field's value.
-func (s *DescribeScalingPoliciesOutput) SetScalingPolicies(v []ScalingPolicy) *DescribeScalingPoliciesOutput {
-	s.ScalingPolicies = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScheduledActionsRequest
@@ -1986,42 +1746,6 @@ func (s *DescribeScheduledActionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeScheduledActionsInput) SetMaxResults(v int64) *DescribeScheduledActionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScheduledActionsInput) SetNextToken(v string) *DescribeScheduledActionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeScheduledActionsInput) SetResourceId(v string) *DescribeScheduledActionsInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScheduledActionsInput) SetScalableDimension(v ScalableDimension) *DescribeScheduledActionsInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetScheduledActionNames sets the ScheduledActionNames field's value.
-func (s *DescribeScheduledActionsInput) SetScheduledActionNames(v []string) *DescribeScheduledActionsInput {
-	s.ScheduledActionNames = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScheduledActionsInput) SetServiceNamespace(v ServiceNamespace) *DescribeScheduledActionsInput {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScheduledActionsResponse
 type DescribeScheduledActionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2049,18 +1773,6 @@ func (s DescribeScheduledActionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScheduledActionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScheduledActionsOutput) SetNextToken(v string) *DescribeScheduledActionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScheduledActions sets the ScheduledActions field's value.
-func (s *DescribeScheduledActionsOutput) SetScheduledActions(v []ScheduledAction) *DescribeScheduledActionsOutput {
-	s.ScheduledActions = v
-	return s
 }
 
 // Describes the dimension of a metric.
@@ -2105,18 +1817,6 @@ func (s *MetricDimension) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *MetricDimension) SetName(v string) *MetricDimension {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *MetricDimension) SetValue(v string) *MetricDimension {
-	s.Value = &v
-	return s
 }
 
 // Configures a predefined metric for a target tracking policy.
@@ -2169,18 +1869,6 @@ func (s *PredefinedMetricSpecification) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPredefinedMetricType sets the PredefinedMetricType field's value.
-func (s *PredefinedMetricSpecification) SetPredefinedMetricType(v MetricType) *PredefinedMetricSpecification {
-	s.PredefinedMetricType = v
-	return s
-}
-
-// SetResourceLabel sets the ResourceLabel field's value.
-func (s *PredefinedMetricSpecification) SetResourceLabel(v string) *PredefinedMetricSpecification {
-	s.ResourceLabel = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicyRequest
@@ -2328,48 +2016,6 @@ func (s *PutScalingPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *PutScalingPolicyInput) SetPolicyName(v string) *PutScalingPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyType sets the PolicyType field's value.
-func (s *PutScalingPolicyInput) SetPolicyType(v PolicyType) *PutScalingPolicyInput {
-	s.PolicyType = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *PutScalingPolicyInput) SetResourceId(v string) *PutScalingPolicyInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *PutScalingPolicyInput) SetScalableDimension(v ScalableDimension) *PutScalingPolicyInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *PutScalingPolicyInput) SetServiceNamespace(v ServiceNamespace) *PutScalingPolicyInput {
-	s.ServiceNamespace = v
-	return s
-}
-
-// SetStepScalingPolicyConfiguration sets the StepScalingPolicyConfiguration field's value.
-func (s *PutScalingPolicyInput) SetStepScalingPolicyConfiguration(v *StepScalingPolicyConfiguration) *PutScalingPolicyInput {
-	s.StepScalingPolicyConfiguration = v
-	return s
-}
-
-// SetTargetTrackingScalingPolicyConfiguration sets the TargetTrackingScalingPolicyConfiguration field's value.
-func (s *PutScalingPolicyInput) SetTargetTrackingScalingPolicyConfiguration(v *TargetTrackingScalingPolicyConfiguration) *PutScalingPolicyInput {
-	s.TargetTrackingScalingPolicyConfiguration = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicyResponse
 type PutScalingPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -2398,18 +2044,6 @@ func (s PutScalingPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutScalingPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAlarms sets the Alarms field's value.
-func (s *PutScalingPolicyOutput) SetAlarms(v []Alarm) *PutScalingPolicyOutput {
-	s.Alarms = v
-	return s
-}
-
-// SetPolicyARN sets the PolicyARN field's value.
-func (s *PutScalingPolicyOutput) SetPolicyARN(v string) *PutScalingPolicyOutput {
-	s.PolicyARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScheduledActionRequest
@@ -2553,54 +2187,6 @@ func (s *PutScheduledActionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *PutScheduledActionInput) SetEndTime(v time.Time) *PutScheduledActionInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *PutScheduledActionInput) SetResourceId(v string) *PutScheduledActionInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *PutScheduledActionInput) SetScalableDimension(v ScalableDimension) *PutScheduledActionInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetScalableTargetAction sets the ScalableTargetAction field's value.
-func (s *PutScheduledActionInput) SetScalableTargetAction(v *ScalableTargetAction) *PutScheduledActionInput {
-	s.ScalableTargetAction = v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *PutScheduledActionInput) SetSchedule(v string) *PutScheduledActionInput {
-	s.Schedule = &v
-	return s
-}
-
-// SetScheduledActionName sets the ScheduledActionName field's value.
-func (s *PutScheduledActionInput) SetScheduledActionName(v string) *PutScheduledActionInput {
-	s.ScheduledActionName = &v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *PutScheduledActionInput) SetServiceNamespace(v ServiceNamespace) *PutScheduledActionInput {
-	s.ServiceNamespace = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *PutScheduledActionInput) SetStartTime(v time.Time) *PutScheduledActionInput {
-	s.StartTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScheduledActionResponse
@@ -2754,42 +2340,6 @@ func (s *RegisterScalableTargetInput) Validate() error {
 	return nil
 }
 
-// SetMaxCapacity sets the MaxCapacity field's value.
-func (s *RegisterScalableTargetInput) SetMaxCapacity(v int64) *RegisterScalableTargetInput {
-	s.MaxCapacity = &v
-	return s
-}
-
-// SetMinCapacity sets the MinCapacity field's value.
-func (s *RegisterScalableTargetInput) SetMinCapacity(v int64) *RegisterScalableTargetInput {
-	s.MinCapacity = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *RegisterScalableTargetInput) SetResourceId(v string) *RegisterScalableTargetInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *RegisterScalableTargetInput) SetRoleARN(v string) *RegisterScalableTargetInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *RegisterScalableTargetInput) SetScalableDimension(v ScalableDimension) *RegisterScalableTargetInput {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *RegisterScalableTargetInput) SetServiceNamespace(v ServiceNamespace) *RegisterScalableTargetInput {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetResponse
 type RegisterScalableTargetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2915,48 +2465,6 @@ func (s ScalableTarget) GoString() string {
 	return s.String()
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *ScalableTarget) SetCreationTime(v time.Time) *ScalableTarget {
-	s.CreationTime = &v
-	return s
-}
-
-// SetMaxCapacity sets the MaxCapacity field's value.
-func (s *ScalableTarget) SetMaxCapacity(v int64) *ScalableTarget {
-	s.MaxCapacity = &v
-	return s
-}
-
-// SetMinCapacity sets the MinCapacity field's value.
-func (s *ScalableTarget) SetMinCapacity(v int64) *ScalableTarget {
-	s.MinCapacity = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ScalableTarget) SetResourceId(v string) *ScalableTarget {
-	s.ResourceId = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ScalableTarget) SetRoleARN(v string) *ScalableTarget {
-	s.RoleARN = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScalableTarget) SetScalableDimension(v ScalableDimension) *ScalableTarget {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScalableTarget) SetServiceNamespace(v ServiceNamespace) *ScalableTarget {
-	s.ServiceNamespace = v
-	return s
-}
-
 // Represents the minimum and maximum capacity for a scheduled action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTargetAction
 type ScalableTargetAction struct {
@@ -2977,18 +2485,6 @@ func (s ScalableTargetAction) String() string {
 // GoString returns the string representation
 func (s ScalableTargetAction) GoString() string {
 	return s.String()
-}
-
-// SetMaxCapacity sets the MaxCapacity field's value.
-func (s *ScalableTargetAction) SetMaxCapacity(v int64) *ScalableTargetAction {
-	s.MaxCapacity = &v
-	return s
-}
-
-// SetMinCapacity sets the MinCapacity field's value.
-func (s *ScalableTargetAction) SetMinCapacity(v int64) *ScalableTargetAction {
-	s.MinCapacity = &v
-	return s
 }
 
 // Represents a scaling activity.
@@ -3107,72 +2603,6 @@ func (s ScalingActivity) GoString() string {
 	return s.String()
 }
 
-// SetActivityId sets the ActivityId field's value.
-func (s *ScalingActivity) SetActivityId(v string) *ScalingActivity {
-	s.ActivityId = &v
-	return s
-}
-
-// SetCause sets the Cause field's value.
-func (s *ScalingActivity) SetCause(v string) *ScalingActivity {
-	s.Cause = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ScalingActivity) SetDescription(v string) *ScalingActivity {
-	s.Description = &v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *ScalingActivity) SetDetails(v string) *ScalingActivity {
-	s.Details = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *ScalingActivity) SetEndTime(v time.Time) *ScalingActivity {
-	s.EndTime = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ScalingActivity) SetResourceId(v string) *ScalingActivity {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScalingActivity) SetScalableDimension(v ScalableDimension) *ScalingActivity {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScalingActivity) SetServiceNamespace(v ServiceNamespace) *ScalingActivity {
-	s.ServiceNamespace = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *ScalingActivity) SetStartTime(v time.Time) *ScalingActivity {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *ScalingActivity) SetStatusCode(v ScalingActivityStatusCode) *ScalingActivity {
-	s.StatusCode = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ScalingActivity) SetStatusMessage(v string) *ScalingActivity {
-	s.StatusMessage = &v
-	return s
-}
-
 // Represents a scaling policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalingPolicy
 type ScalingPolicy struct {
@@ -3282,66 +2712,6 @@ func (s ScalingPolicy) String() string {
 // GoString returns the string representation
 func (s ScalingPolicy) GoString() string {
 	return s.String()
-}
-
-// SetAlarms sets the Alarms field's value.
-func (s *ScalingPolicy) SetAlarms(v []Alarm) *ScalingPolicy {
-	s.Alarms = v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *ScalingPolicy) SetCreationTime(v time.Time) *ScalingPolicy {
-	s.CreationTime = &v
-	return s
-}
-
-// SetPolicyARN sets the PolicyARN field's value.
-func (s *ScalingPolicy) SetPolicyARN(v string) *ScalingPolicy {
-	s.PolicyARN = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *ScalingPolicy) SetPolicyName(v string) *ScalingPolicy {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyType sets the PolicyType field's value.
-func (s *ScalingPolicy) SetPolicyType(v PolicyType) *ScalingPolicy {
-	s.PolicyType = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ScalingPolicy) SetResourceId(v string) *ScalingPolicy {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScalingPolicy) SetScalableDimension(v ScalableDimension) *ScalingPolicy {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScalingPolicy) SetServiceNamespace(v ServiceNamespace) *ScalingPolicy {
-	s.ServiceNamespace = v
-	return s
-}
-
-// SetStepScalingPolicyConfiguration sets the StepScalingPolicyConfiguration field's value.
-func (s *ScalingPolicy) SetStepScalingPolicyConfiguration(v *StepScalingPolicyConfiguration) *ScalingPolicy {
-	s.StepScalingPolicyConfiguration = v
-	return s
-}
-
-// SetTargetTrackingScalingPolicyConfiguration sets the TargetTrackingScalingPolicyConfiguration field's value.
-func (s *ScalingPolicy) SetTargetTrackingScalingPolicyConfiguration(v *TargetTrackingScalingPolicyConfiguration) *ScalingPolicy {
-	s.TargetTrackingScalingPolicyConfiguration = v
-	return s
 }
 
 // Represents a scheduled action.
@@ -3470,66 +2840,6 @@ func (s ScheduledAction) GoString() string {
 	return s.String()
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *ScheduledAction) SetCreationTime(v time.Time) *ScheduledAction {
-	s.CreationTime = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *ScheduledAction) SetEndTime(v time.Time) *ScheduledAction {
-	s.EndTime = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ScheduledAction) SetResourceId(v string) *ScheduledAction {
-	s.ResourceId = &v
-	return s
-}
-
-// SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScheduledAction) SetScalableDimension(v ScalableDimension) *ScheduledAction {
-	s.ScalableDimension = v
-	return s
-}
-
-// SetScalableTargetAction sets the ScalableTargetAction field's value.
-func (s *ScheduledAction) SetScalableTargetAction(v *ScalableTargetAction) *ScheduledAction {
-	s.ScalableTargetAction = v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *ScheduledAction) SetSchedule(v string) *ScheduledAction {
-	s.Schedule = &v
-	return s
-}
-
-// SetScheduledActionARN sets the ScheduledActionARN field's value.
-func (s *ScheduledAction) SetScheduledActionARN(v string) *ScheduledAction {
-	s.ScheduledActionARN = &v
-	return s
-}
-
-// SetScheduledActionName sets the ScheduledActionName field's value.
-func (s *ScheduledAction) SetScheduledActionName(v string) *ScheduledAction {
-	s.ScheduledActionName = &v
-	return s
-}
-
-// SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScheduledAction) SetServiceNamespace(v ServiceNamespace) *ScheduledAction {
-	s.ServiceNamespace = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *ScheduledAction) SetStartTime(v time.Time) *ScheduledAction {
-	s.StartTime = &v
-	return s
-}
-
 // Represents a step adjustment for a StepScalingPolicyConfiguration. Describes
 // an adjustment based on the difference between the value of the aggregated
 // CloudWatch metric and the breach threshold that you've defined for the alarm.
@@ -3611,24 +2921,6 @@ func (s *StepAdjustment) Validate() error {
 	return nil
 }
 
-// SetMetricIntervalLowerBound sets the MetricIntervalLowerBound field's value.
-func (s *StepAdjustment) SetMetricIntervalLowerBound(v float64) *StepAdjustment {
-	s.MetricIntervalLowerBound = &v
-	return s
-}
-
-// SetMetricIntervalUpperBound sets the MetricIntervalUpperBound field's value.
-func (s *StepAdjustment) SetMetricIntervalUpperBound(v float64) *StepAdjustment {
-	s.MetricIntervalUpperBound = &v
-	return s
-}
-
-// SetScalingAdjustment sets the ScalingAdjustment field's value.
-func (s *StepAdjustment) SetScalingAdjustment(v int64) *StepAdjustment {
-	s.ScalingAdjustment = &v
-	return s
-}
-
 // Represents a step scaling policy configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepScalingPolicyConfiguration
 type StepScalingPolicyConfiguration struct {
@@ -3700,36 +2992,6 @@ func (s *StepScalingPolicyConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAdjustmentType sets the AdjustmentType field's value.
-func (s *StepScalingPolicyConfiguration) SetAdjustmentType(v AdjustmentType) *StepScalingPolicyConfiguration {
-	s.AdjustmentType = v
-	return s
-}
-
-// SetCooldown sets the Cooldown field's value.
-func (s *StepScalingPolicyConfiguration) SetCooldown(v int64) *StepScalingPolicyConfiguration {
-	s.Cooldown = &v
-	return s
-}
-
-// SetMetricAggregationType sets the MetricAggregationType field's value.
-func (s *StepScalingPolicyConfiguration) SetMetricAggregationType(v MetricAggregationType) *StepScalingPolicyConfiguration {
-	s.MetricAggregationType = v
-	return s
-}
-
-// SetMinAdjustmentMagnitude sets the MinAdjustmentMagnitude field's value.
-func (s *StepScalingPolicyConfiguration) SetMinAdjustmentMagnitude(v int64) *StepScalingPolicyConfiguration {
-	s.MinAdjustmentMagnitude = &v
-	return s
-}
-
-// SetStepAdjustments sets the StepAdjustments field's value.
-func (s *StepScalingPolicyConfiguration) SetStepAdjustments(v []StepAdjustment) *StepScalingPolicyConfiguration {
-	s.StepAdjustments = v
-	return s
 }
 
 // Represents a target tracking scaling policy configuration.
@@ -3808,42 +3070,6 @@ func (s *TargetTrackingScalingPolicyConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCustomizedMetricSpecification sets the CustomizedMetricSpecification field's value.
-func (s *TargetTrackingScalingPolicyConfiguration) SetCustomizedMetricSpecification(v *CustomizedMetricSpecification) *TargetTrackingScalingPolicyConfiguration {
-	s.CustomizedMetricSpecification = v
-	return s
-}
-
-// SetDisableScaleIn sets the DisableScaleIn field's value.
-func (s *TargetTrackingScalingPolicyConfiguration) SetDisableScaleIn(v bool) *TargetTrackingScalingPolicyConfiguration {
-	s.DisableScaleIn = &v
-	return s
-}
-
-// SetPredefinedMetricSpecification sets the PredefinedMetricSpecification field's value.
-func (s *TargetTrackingScalingPolicyConfiguration) SetPredefinedMetricSpecification(v *PredefinedMetricSpecification) *TargetTrackingScalingPolicyConfiguration {
-	s.PredefinedMetricSpecification = v
-	return s
-}
-
-// SetScaleInCooldown sets the ScaleInCooldown field's value.
-func (s *TargetTrackingScalingPolicyConfiguration) SetScaleInCooldown(v int64) *TargetTrackingScalingPolicyConfiguration {
-	s.ScaleInCooldown = &v
-	return s
-}
-
-// SetScaleOutCooldown sets the ScaleOutCooldown field's value.
-func (s *TargetTrackingScalingPolicyConfiguration) SetScaleOutCooldown(v int64) *TargetTrackingScalingPolicyConfiguration {
-	s.ScaleOutCooldown = &v
-	return s
-}
-
-// SetTargetValue sets the TargetValue field's value.
-func (s *TargetTrackingScalingPolicyConfiguration) SetTargetValue(v float64) *TargetTrackingScalingPolicyConfiguration {
-	s.TargetValue = &v
-	return s
 }
 
 type AdjustmentType string

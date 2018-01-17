@@ -298,12 +298,6 @@ func (s *DeleteObjectInput) Validate() error {
 	return nil
 }
 
-// SetPath sets the Path field's value.
-func (s *DeleteObjectInput) SetPath(v string) *DeleteObjectInput {
-	s.Path = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DeleteObjectResponse
 type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -364,12 +358,6 @@ func (s *DescribeObjectInput) Validate() error {
 	return nil
 }
 
-// SetPath sets the Path field's value.
-func (s *DescribeObjectInput) SetPath(v string) *DescribeObjectInput {
-	s.Path = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DescribeObjectResponse
 type DescribeObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -409,36 +397,6 @@ func (s DescribeObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCacheControl sets the CacheControl field's value.
-func (s *DescribeObjectOutput) SetCacheControl(v string) *DescribeObjectOutput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentLength sets the ContentLength field's value.
-func (s *DescribeObjectOutput) SetContentLength(v int64) *DescribeObjectOutput {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *DescribeObjectOutput) SetContentType(v string) *DescribeObjectOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *DescribeObjectOutput) SetETag(v string) *DescribeObjectOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *DescribeObjectOutput) SetLastModified(v time.Time) *DescribeObjectOutput {
-	s.LastModified = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/GetObjectRequest
@@ -505,18 +463,6 @@ func (s *GetObjectInput) Validate() error {
 	return nil
 }
 
-// SetPath sets the Path field's value.
-func (s *GetObjectInput) SetPath(v string) *GetObjectInput {
-	s.Path = &v
-	return s
-}
-
-// SetRange sets the Range field's value.
-func (s *GetObjectInput) SetRange(v string) *GetObjectInput {
-	s.Range = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/GetObjectResponse
 type GetObjectOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
@@ -571,54 +517,6 @@ func (s GetObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBody sets the Body field's value.
-func (s *GetObjectOutput) SetBody(v io.ReadCloser) *GetObjectOutput {
-	s.Body = v
-	return s
-}
-
-// SetCacheControl sets the CacheControl field's value.
-func (s *GetObjectOutput) SetCacheControl(v string) *GetObjectOutput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentLength sets the ContentLength field's value.
-func (s *GetObjectOutput) SetContentLength(v int64) *GetObjectOutput {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentRange sets the ContentRange field's value.
-func (s *GetObjectOutput) SetContentRange(v string) *GetObjectOutput {
-	s.ContentRange = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *GetObjectOutput) SetContentType(v string) *GetObjectOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *GetObjectOutput) SetETag(v string) *GetObjectOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *GetObjectOutput) SetLastModified(v time.Time) *GetObjectOutput {
-	s.LastModified = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *GetObjectOutput) SetStatusCode(v int64) *GetObjectOutput {
-	s.StatusCode = &v
-	return s
-}
-
 // A metadata entry for a folder or object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/Item
 type Item struct {
@@ -651,42 +549,6 @@ func (s Item) String() string {
 // GoString returns the string representation
 func (s Item) GoString() string {
 	return s.String()
-}
-
-// SetContentLength sets the ContentLength field's value.
-func (s *Item) SetContentLength(v int64) *Item {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *Item) SetContentType(v string) *Item {
-	s.ContentType = &v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *Item) SetETag(v string) *Item {
-	s.ETag = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *Item) SetLastModified(v time.Time) *Item {
-	s.LastModified = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Item) SetName(v string) *Item {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Item) SetType(v ItemType) *Item {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsRequest
@@ -728,24 +590,6 @@ func (s *ListItemsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListItemsInput) SetMaxResults(v int64) *ListItemsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListItemsInput) SetNextToken(v string) *ListItemsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *ListItemsInput) SetPath(v string) *ListItemsInput {
-	s.Path = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsResponse
 type ListItemsOutput struct {
 	_ struct{} `type:"structure"`
@@ -772,18 +616,6 @@ func (s ListItemsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListItemsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetItems sets the Items field's value.
-func (s *ListItemsOutput) SetItems(v []Item) *ListItemsOutput {
-	s.Items = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListItemsOutput) SetNextToken(v string) *ListItemsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectRequest
@@ -869,36 +701,6 @@ func (s *PutObjectInput) Validate() error {
 	return nil
 }
 
-// SetBody sets the Body field's value.
-func (s *PutObjectInput) SetBody(v io.ReadSeeker) *PutObjectInput {
-	s.Body = v
-	return s
-}
-
-// SetCacheControl sets the CacheControl field's value.
-func (s *PutObjectInput) SetCacheControl(v string) *PutObjectInput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *PutObjectInput) SetContentType(v string) *PutObjectInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *PutObjectInput) SetPath(v string) *PutObjectInput {
-	s.Path = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *PutObjectInput) SetStorageClass(v StorageClass) *PutObjectInput {
-	s.StorageClass = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectResponse
 type PutObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -928,24 +730,6 @@ func (s PutObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContentSHA256 sets the ContentSHA256 field's value.
-func (s *PutObjectOutput) SetContentSHA256(v string) *PutObjectOutput {
-	s.ContentSHA256 = &v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *PutObjectOutput) SetETag(v string) *PutObjectOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *PutObjectOutput) SetStorageClass(v StorageClass) *PutObjectOutput {
-	s.StorageClass = v
-	return s
 }
 
 type ItemType string

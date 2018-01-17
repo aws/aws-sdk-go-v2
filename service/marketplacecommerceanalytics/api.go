@@ -318,48 +318,6 @@ func (s *GenerateDataSetInput) Validate() error {
 	return nil
 }
 
-// SetCustomerDefinedValues sets the CustomerDefinedValues field's value.
-func (s *GenerateDataSetInput) SetCustomerDefinedValues(v map[string]string) *GenerateDataSetInput {
-	s.CustomerDefinedValues = v
-	return s
-}
-
-// SetDataSetPublicationDate sets the DataSetPublicationDate field's value.
-func (s *GenerateDataSetInput) SetDataSetPublicationDate(v time.Time) *GenerateDataSetInput {
-	s.DataSetPublicationDate = &v
-	return s
-}
-
-// SetDataSetType sets the DataSetType field's value.
-func (s *GenerateDataSetInput) SetDataSetType(v DataSetType) *GenerateDataSetInput {
-	s.DataSetType = v
-	return s
-}
-
-// SetDestinationS3BucketName sets the DestinationS3BucketName field's value.
-func (s *GenerateDataSetInput) SetDestinationS3BucketName(v string) *GenerateDataSetInput {
-	s.DestinationS3BucketName = &v
-	return s
-}
-
-// SetDestinationS3Prefix sets the DestinationS3Prefix field's value.
-func (s *GenerateDataSetInput) SetDestinationS3Prefix(v string) *GenerateDataSetInput {
-	s.DestinationS3Prefix = &v
-	return s
-}
-
-// SetRoleNameArn sets the RoleNameArn field's value.
-func (s *GenerateDataSetInput) SetRoleNameArn(v string) *GenerateDataSetInput {
-	s.RoleNameArn = &v
-	return s
-}
-
-// SetSnsTopicArn sets the SnsTopicArn field's value.
-func (s *GenerateDataSetInput) SetSnsTopicArn(v string) *GenerateDataSetInput {
-	s.SnsTopicArn = &v
-	return s
-}
-
 // Container for the result of the GenerateDataSet operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSetResult
 type GenerateDataSetOutput struct {
@@ -386,12 +344,6 @@ func (s GenerateDataSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GenerateDataSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDataSetRequestId sets the DataSetRequestId field's value.
-func (s *GenerateDataSetOutput) SetDataSetRequestId(v string) *GenerateDataSetOutput {
-	s.DataSetRequestId = &v
-	return s
 }
 
 // Container for the parameters to the StartSupportDataExport operation.
@@ -502,48 +454,6 @@ func (s *StartSupportDataExportInput) Validate() error {
 	return nil
 }
 
-// SetCustomerDefinedValues sets the CustomerDefinedValues field's value.
-func (s *StartSupportDataExportInput) SetCustomerDefinedValues(v map[string]string) *StartSupportDataExportInput {
-	s.CustomerDefinedValues = v
-	return s
-}
-
-// SetDataSetType sets the DataSetType field's value.
-func (s *StartSupportDataExportInput) SetDataSetType(v SupportDataSetType) *StartSupportDataExportInput {
-	s.DataSetType = v
-	return s
-}
-
-// SetDestinationS3BucketName sets the DestinationS3BucketName field's value.
-func (s *StartSupportDataExportInput) SetDestinationS3BucketName(v string) *StartSupportDataExportInput {
-	s.DestinationS3BucketName = &v
-	return s
-}
-
-// SetDestinationS3Prefix sets the DestinationS3Prefix field's value.
-func (s *StartSupportDataExportInput) SetDestinationS3Prefix(v string) *StartSupportDataExportInput {
-	s.DestinationS3Prefix = &v
-	return s
-}
-
-// SetFromDate sets the FromDate field's value.
-func (s *StartSupportDataExportInput) SetFromDate(v time.Time) *StartSupportDataExportInput {
-	s.FromDate = &v
-	return s
-}
-
-// SetRoleNameArn sets the RoleNameArn field's value.
-func (s *StartSupportDataExportInput) SetRoleNameArn(v string) *StartSupportDataExportInput {
-	s.RoleNameArn = &v
-	return s
-}
-
-// SetSnsTopicArn sets the SnsTopicArn field's value.
-func (s *StartSupportDataExportInput) SetSnsTopicArn(v string) *StartSupportDataExportInput {
-	s.SnsTopicArn = &v
-	return s
-}
-
 // Container for the result of the StartSupportDataExport operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExportResult
 type StartSupportDataExportOutput struct {
@@ -570,12 +480,6 @@ func (s StartSupportDataExportOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartSupportDataExportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDataSetRequestId sets the DataSetRequestId field's value.
-func (s *StartSupportDataExportOutput) SetDataSetRequestId(v string) *StartSupportDataExportOutput {
-	s.DataSetRequestId = &v
-	return s
 }
 
 type DataSetType string

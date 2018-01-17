@@ -2190,18 +2190,6 @@ func (s *AddAttributesToFindingsInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *AddAttributesToFindingsInput) SetAttributes(v []Attribute) *AddAttributesToFindingsInput {
-	s.Attributes = v
-	return s
-}
-
-// SetFindingArns sets the FindingArns field's value.
-func (s *AddAttributesToFindingsInput) SetFindingArns(v []string) *AddAttributesToFindingsInput {
-	s.FindingArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindingsResponse
 type AddAttributesToFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2228,12 +2216,6 @@ func (s AddAttributesToFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddAttributesToFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *AddAttributesToFindingsOutput) SetFailedItems(v map[string]FailedItemDetails) *AddAttributesToFindingsOutput {
-	s.FailedItems = v
-	return s
 }
 
 // Used in the exception error that is thrown if you start an assessment run
@@ -2263,18 +2245,6 @@ func (s AgentAlreadyRunningAssessment) String() string {
 // GoString returns the string representation
 func (s AgentAlreadyRunningAssessment) GoString() string {
 	return s.String()
-}
-
-// SetAgentId sets the AgentId field's value.
-func (s *AgentAlreadyRunningAssessment) SetAgentId(v string) *AgentAlreadyRunningAssessment {
-	s.AgentId = &v
-	return s
-}
-
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *AgentAlreadyRunningAssessment) SetAssessmentRunArn(v string) *AgentAlreadyRunningAssessment {
-	s.AssessmentRunArn = &v
-	return s
 }
 
 // Contains information about an Amazon Inspector agent. This data type is used
@@ -2323,18 +2293,6 @@ func (s *AgentFilter) Validate() error {
 	return nil
 }
 
-// SetAgentHealthCodes sets the AgentHealthCodes field's value.
-func (s *AgentFilter) SetAgentHealthCodes(v []AgentHealthCode) *AgentFilter {
-	s.AgentHealthCodes = v
-	return s
-}
-
-// SetAgentHealths sets the AgentHealths field's value.
-func (s *AgentFilter) SetAgentHealths(v []AgentHealth) *AgentFilter {
-	s.AgentHealths = v
-	return s
-}
-
 // Used as a response element in the PreviewAgents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentPreview
 type AgentPreview struct {
@@ -2378,54 +2336,6 @@ func (s AgentPreview) String() string {
 // GoString returns the string representation
 func (s AgentPreview) GoString() string {
 	return s.String()
-}
-
-// SetAgentHealth sets the AgentHealth field's value.
-func (s *AgentPreview) SetAgentHealth(v AgentHealth) *AgentPreview {
-	s.AgentHealth = v
-	return s
-}
-
-// SetAgentId sets the AgentId field's value.
-func (s *AgentPreview) SetAgentId(v string) *AgentPreview {
-	s.AgentId = &v
-	return s
-}
-
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *AgentPreview) SetAgentVersion(v string) *AgentPreview {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAutoScalingGroup sets the AutoScalingGroup field's value.
-func (s *AgentPreview) SetAutoScalingGroup(v string) *AgentPreview {
-	s.AutoScalingGroup = &v
-	return s
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *AgentPreview) SetHostname(v string) *AgentPreview {
-	s.Hostname = &v
-	return s
-}
-
-// SetIpv4Address sets the Ipv4Address field's value.
-func (s *AgentPreview) SetIpv4Address(v string) *AgentPreview {
-	s.Ipv4Address = &v
-	return s
-}
-
-// SetKernelVersion sets the KernelVersion field's value.
-func (s *AgentPreview) SetKernelVersion(v string) *AgentPreview {
-	s.KernelVersion = &v
-	return s
-}
-
-// SetOperatingSystem sets the OperatingSystem field's value.
-func (s *AgentPreview) SetOperatingSystem(v string) *AgentPreview {
-	s.OperatingSystem = &v
-	return s
 }
 
 // A snapshot of an Amazon Inspector assessment run that contains the findings
@@ -2522,96 +2432,6 @@ func (s AssessmentRun) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *AssessmentRun) SetArn(v string) *AssessmentRun {
-	s.Arn = &v
-	return s
-}
-
-// SetAssessmentTemplateArn sets the AssessmentTemplateArn field's value.
-func (s *AssessmentRun) SetAssessmentTemplateArn(v string) *AssessmentRun {
-	s.AssessmentTemplateArn = &v
-	return s
-}
-
-// SetCompletedAt sets the CompletedAt field's value.
-func (s *AssessmentRun) SetCompletedAt(v time.Time) *AssessmentRun {
-	s.CompletedAt = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *AssessmentRun) SetCreatedAt(v time.Time) *AssessmentRun {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDataCollected sets the DataCollected field's value.
-func (s *AssessmentRun) SetDataCollected(v bool) *AssessmentRun {
-	s.DataCollected = &v
-	return s
-}
-
-// SetDurationInSeconds sets the DurationInSeconds field's value.
-func (s *AssessmentRun) SetDurationInSeconds(v int64) *AssessmentRun {
-	s.DurationInSeconds = &v
-	return s
-}
-
-// SetFindingCounts sets the FindingCounts field's value.
-func (s *AssessmentRun) SetFindingCounts(v map[string]int64) *AssessmentRun {
-	s.FindingCounts = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AssessmentRun) SetName(v string) *AssessmentRun {
-	s.Name = &v
-	return s
-}
-
-// SetNotifications sets the Notifications field's value.
-func (s *AssessmentRun) SetNotifications(v []AssessmentRunNotification) *AssessmentRun {
-	s.Notifications = v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentRun) SetRulesPackageArns(v []string) *AssessmentRun {
-	s.RulesPackageArns = v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *AssessmentRun) SetStartedAt(v time.Time) *AssessmentRun {
-	s.StartedAt = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *AssessmentRun) SetState(v AssessmentRunState) *AssessmentRun {
-	s.State = v
-	return s
-}
-
-// SetStateChangedAt sets the StateChangedAt field's value.
-func (s *AssessmentRun) SetStateChangedAt(v time.Time) *AssessmentRun {
-	s.StateChangedAt = &v
-	return s
-}
-
-// SetStateChanges sets the StateChanges field's value.
-func (s *AssessmentRun) SetStateChanges(v []AssessmentRunStateChange) *AssessmentRun {
-	s.StateChanges = v
-	return s
-}
-
-// SetUserAttributesForFindings sets the UserAttributesForFindings field's value.
-func (s *AssessmentRun) SetUserAttributesForFindings(v []Attribute) *AssessmentRun {
-	s.UserAttributesForFindings = v
-	return s
-}
-
 // Contains information about an Amazon Inspector agent. This data type is used
 // as a response element in the ListAssessmentRunAgents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunAgent
@@ -2659,48 +2479,6 @@ func (s AssessmentRunAgent) String() string {
 // GoString returns the string representation
 func (s AssessmentRunAgent) GoString() string {
 	return s.String()
-}
-
-// SetAgentHealth sets the AgentHealth field's value.
-func (s *AssessmentRunAgent) SetAgentHealth(v AgentHealth) *AssessmentRunAgent {
-	s.AgentHealth = v
-	return s
-}
-
-// SetAgentHealthCode sets the AgentHealthCode field's value.
-func (s *AssessmentRunAgent) SetAgentHealthCode(v AgentHealthCode) *AssessmentRunAgent {
-	s.AgentHealthCode = v
-	return s
-}
-
-// SetAgentHealthDetails sets the AgentHealthDetails field's value.
-func (s *AssessmentRunAgent) SetAgentHealthDetails(v string) *AssessmentRunAgent {
-	s.AgentHealthDetails = &v
-	return s
-}
-
-// SetAgentId sets the AgentId field's value.
-func (s *AssessmentRunAgent) SetAgentId(v string) *AssessmentRunAgent {
-	s.AgentId = &v
-	return s
-}
-
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *AssessmentRunAgent) SetAssessmentRunArn(v string) *AssessmentRunAgent {
-	s.AssessmentRunArn = &v
-	return s
-}
-
-// SetAutoScalingGroup sets the AutoScalingGroup field's value.
-func (s *AssessmentRunAgent) SetAutoScalingGroup(v string) *AssessmentRunAgent {
-	s.AutoScalingGroup = &v
-	return s
-}
-
-// SetTelemetryMetadata sets the TelemetryMetadata field's value.
-func (s *AssessmentRunAgent) SetTelemetryMetadata(v []TelemetryMetadata) *AssessmentRunAgent {
-	s.TelemetryMetadata = v
-	return s
 }
 
 // Used as the request parameter in the ListAssessmentRuns action.
@@ -2774,48 +2552,6 @@ func (s *AssessmentRunFilter) Validate() error {
 	return nil
 }
 
-// SetCompletionTimeRange sets the CompletionTimeRange field's value.
-func (s *AssessmentRunFilter) SetCompletionTimeRange(v *TimestampRange) *AssessmentRunFilter {
-	s.CompletionTimeRange = v
-	return s
-}
-
-// SetDurationRange sets the DurationRange field's value.
-func (s *AssessmentRunFilter) SetDurationRange(v *DurationRange) *AssessmentRunFilter {
-	s.DurationRange = v
-	return s
-}
-
-// SetNamePattern sets the NamePattern field's value.
-func (s *AssessmentRunFilter) SetNamePattern(v string) *AssessmentRunFilter {
-	s.NamePattern = &v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentRunFilter) SetRulesPackageArns(v []string) *AssessmentRunFilter {
-	s.RulesPackageArns = v
-	return s
-}
-
-// SetStartTimeRange sets the StartTimeRange field's value.
-func (s *AssessmentRunFilter) SetStartTimeRange(v *TimestampRange) *AssessmentRunFilter {
-	s.StartTimeRange = v
-	return s
-}
-
-// SetStateChangeTimeRange sets the StateChangeTimeRange field's value.
-func (s *AssessmentRunFilter) SetStateChangeTimeRange(v *TimestampRange) *AssessmentRunFilter {
-	s.StateChangeTimeRange = v
-	return s
-}
-
-// SetStates sets the States field's value.
-func (s *AssessmentRunFilter) SetStates(v []AssessmentRunState) *AssessmentRunFilter {
-	s.States = v
-	return s
-}
-
 // Used as one of the elements of the AssessmentRun data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunNotification
 type AssessmentRunNotification struct {
@@ -2856,42 +2592,6 @@ func (s AssessmentRunNotification) GoString() string {
 	return s.String()
 }
 
-// SetDate sets the Date field's value.
-func (s *AssessmentRunNotification) SetDate(v time.Time) *AssessmentRunNotification {
-	s.Date = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *AssessmentRunNotification) SetError(v bool) *AssessmentRunNotification {
-	s.Error = &v
-	return s
-}
-
-// SetEvent sets the Event field's value.
-func (s *AssessmentRunNotification) SetEvent(v Event) *AssessmentRunNotification {
-	s.Event = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *AssessmentRunNotification) SetMessage(v string) *AssessmentRunNotification {
-	s.Message = &v
-	return s
-}
-
-// SetSnsPublishStatusCode sets the SnsPublishStatusCode field's value.
-func (s *AssessmentRunNotification) SetSnsPublishStatusCode(v AssessmentRunNotificationSnsStatusCode) *AssessmentRunNotification {
-	s.SnsPublishStatusCode = v
-	return s
-}
-
-// SetSnsTopicArn sets the SnsTopicArn field's value.
-func (s *AssessmentRunNotification) SetSnsTopicArn(v string) *AssessmentRunNotification {
-	s.SnsTopicArn = &v
-	return s
-}
-
 // Used as one of the elements of the AssessmentRun data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunStateChange
 type AssessmentRunStateChange struct {
@@ -2916,18 +2616,6 @@ func (s AssessmentRunStateChange) String() string {
 // GoString returns the string representation
 func (s AssessmentRunStateChange) GoString() string {
 	return s.String()
-}
-
-// SetState sets the State field's value.
-func (s *AssessmentRunStateChange) SetState(v AssessmentRunState) *AssessmentRunStateChange {
-	s.State = v
-	return s
-}
-
-// SetStateChangedAt sets the StateChangedAt field's value.
-func (s *AssessmentRunStateChange) SetStateChangedAt(v time.Time) *AssessmentRunStateChange {
-	s.StateChangedAt = &v
-	return s
 }
 
 // Contains information about an Amazon Inspector application. This data type
@@ -2973,36 +2661,6 @@ func (s AssessmentTarget) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *AssessmentTarget) SetArn(v string) *AssessmentTarget {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *AssessmentTarget) SetCreatedAt(v time.Time) *AssessmentTarget {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AssessmentTarget) SetName(v string) *AssessmentTarget {
-	s.Name = &v
-	return s
-}
-
-// SetResourceGroupArn sets the ResourceGroupArn field's value.
-func (s *AssessmentTarget) SetResourceGroupArn(v string) *AssessmentTarget {
-	s.ResourceGroupArn = &v
-	return s
-}
-
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *AssessmentTarget) SetUpdatedAt(v time.Time) *AssessmentTarget {
-	s.UpdatedAt = &v
-	return s
-}
-
 // Used as the request parameter in the ListAssessmentTargets action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTargetFilter
 type AssessmentTargetFilter struct {
@@ -3035,12 +2693,6 @@ func (s *AssessmentTargetFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssessmentTargetNamePattern sets the AssessmentTargetNamePattern field's value.
-func (s *AssessmentTargetFilter) SetAssessmentTargetNamePattern(v string) *AssessmentTargetFilter {
-	s.AssessmentTargetNamePattern = &v
-	return s
 }
 
 // Contains information about an Amazon Inspector assessment template. This
@@ -3110,60 +2762,6 @@ func (s AssessmentTemplate) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *AssessmentTemplate) SetArn(v string) *AssessmentTemplate {
-	s.Arn = &v
-	return s
-}
-
-// SetAssessmentRunCount sets the AssessmentRunCount field's value.
-func (s *AssessmentTemplate) SetAssessmentRunCount(v int64) *AssessmentTemplate {
-	s.AssessmentRunCount = &v
-	return s
-}
-
-// SetAssessmentTargetArn sets the AssessmentTargetArn field's value.
-func (s *AssessmentTemplate) SetAssessmentTargetArn(v string) *AssessmentTemplate {
-	s.AssessmentTargetArn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *AssessmentTemplate) SetCreatedAt(v time.Time) *AssessmentTemplate {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDurationInSeconds sets the DurationInSeconds field's value.
-func (s *AssessmentTemplate) SetDurationInSeconds(v int64) *AssessmentTemplate {
-	s.DurationInSeconds = &v
-	return s
-}
-
-// SetLastAssessmentRunArn sets the LastAssessmentRunArn field's value.
-func (s *AssessmentTemplate) SetLastAssessmentRunArn(v string) *AssessmentTemplate {
-	s.LastAssessmentRunArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AssessmentTemplate) SetName(v string) *AssessmentTemplate {
-	s.Name = &v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentTemplate) SetRulesPackageArns(v []string) *AssessmentTemplate {
-	s.RulesPackageArns = v
-	return s
-}
-
-// SetUserAttributesForFindings sets the UserAttributesForFindings field's value.
-func (s *AssessmentTemplate) SetUserAttributesForFindings(v []Attribute) *AssessmentTemplate {
-	s.UserAttributesForFindings = v
-	return s
-}
-
 // Used as the request parameter in the ListAssessmentTemplates action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTemplateFilter
 type AssessmentTemplateFilter struct {
@@ -3213,24 +2811,6 @@ func (s *AssessmentTemplateFilter) Validate() error {
 	return nil
 }
 
-// SetDurationRange sets the DurationRange field's value.
-func (s *AssessmentTemplateFilter) SetDurationRange(v *DurationRange) *AssessmentTemplateFilter {
-	s.DurationRange = v
-	return s
-}
-
-// SetNamePattern sets the NamePattern field's value.
-func (s *AssessmentTemplateFilter) SetNamePattern(v string) *AssessmentTemplateFilter {
-	s.NamePattern = &v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *AssessmentTemplateFilter) SetRulesPackageArns(v []string) *AssessmentTemplateFilter {
-	s.RulesPackageArns = v
-	return s
-}
-
 // A collection of attributes of the host from which the finding is generated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssetAttributes
 type AssetAttributes struct {
@@ -3267,42 +2847,6 @@ func (s AssetAttributes) String() string {
 // GoString returns the string representation
 func (s AssetAttributes) GoString() string {
 	return s.String()
-}
-
-// SetAgentId sets the AgentId field's value.
-func (s *AssetAttributes) SetAgentId(v string) *AssetAttributes {
-	s.AgentId = &v
-	return s
-}
-
-// SetAmiId sets the AmiId field's value.
-func (s *AssetAttributes) SetAmiId(v string) *AssetAttributes {
-	s.AmiId = &v
-	return s
-}
-
-// SetAutoScalingGroup sets the AutoScalingGroup field's value.
-func (s *AssetAttributes) SetAutoScalingGroup(v string) *AssetAttributes {
-	s.AutoScalingGroup = &v
-	return s
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *AssetAttributes) SetHostname(v string) *AssetAttributes {
-	s.Hostname = &v
-	return s
-}
-
-// SetIpv4Addresses sets the Ipv4Addresses field's value.
-func (s *AssetAttributes) SetIpv4Addresses(v []string) *AssetAttributes {
-	s.Ipv4Addresses = v
-	return s
-}
-
-// SetSchemaVersion sets the SchemaVersion field's value.
-func (s *AssetAttributes) SetSchemaVersion(v int64) *AssetAttributes {
-	s.SchemaVersion = &v
-	return s
 }
 
 // This data type is used as a request parameter in the AddAttributesToFindings
@@ -3348,18 +2892,6 @@ func (s *Attribute) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Attribute) SetKey(v string) *Attribute {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Attribute) SetValue(v string) *Attribute {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTargetRequest
@@ -3413,18 +2945,6 @@ func (s *CreateAssessmentTargetInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTargetName sets the AssessmentTargetName field's value.
-func (s *CreateAssessmentTargetInput) SetAssessmentTargetName(v string) *CreateAssessmentTargetInput {
-	s.AssessmentTargetName = &v
-	return s
-}
-
-// SetResourceGroupArn sets the ResourceGroupArn field's value.
-func (s *CreateAssessmentTargetInput) SetResourceGroupArn(v string) *CreateAssessmentTargetInput {
-	s.ResourceGroupArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTargetResponse
 type CreateAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
@@ -3450,12 +2970,6 @@ func (s CreateAssessmentTargetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAssessmentTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentTargetArn sets the AssessmentTargetArn field's value.
-func (s *CreateAssessmentTargetOutput) SetAssessmentTargetArn(v string) *CreateAssessmentTargetOutput {
-	s.AssessmentTargetArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplateRequest
@@ -3547,36 +3061,6 @@ func (s *CreateAssessmentTemplateInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTargetArn sets the AssessmentTargetArn field's value.
-func (s *CreateAssessmentTemplateInput) SetAssessmentTargetArn(v string) *CreateAssessmentTemplateInput {
-	s.AssessmentTargetArn = &v
-	return s
-}
-
-// SetAssessmentTemplateName sets the AssessmentTemplateName field's value.
-func (s *CreateAssessmentTemplateInput) SetAssessmentTemplateName(v string) *CreateAssessmentTemplateInput {
-	s.AssessmentTemplateName = &v
-	return s
-}
-
-// SetDurationInSeconds sets the DurationInSeconds field's value.
-func (s *CreateAssessmentTemplateInput) SetDurationInSeconds(v int64) *CreateAssessmentTemplateInput {
-	s.DurationInSeconds = &v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *CreateAssessmentTemplateInput) SetRulesPackageArns(v []string) *CreateAssessmentTemplateInput {
-	s.RulesPackageArns = v
-	return s
-}
-
-// SetUserAttributesForFindings sets the UserAttributesForFindings field's value.
-func (s *CreateAssessmentTemplateInput) SetUserAttributesForFindings(v []Attribute) *CreateAssessmentTemplateInput {
-	s.UserAttributesForFindings = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplateResponse
 type CreateAssessmentTemplateOutput struct {
 	_ struct{} `type:"structure"`
@@ -3602,12 +3086,6 @@ func (s CreateAssessmentTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAssessmentTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentTemplateArn sets the AssessmentTemplateArn field's value.
-func (s *CreateAssessmentTemplateOutput) SetAssessmentTemplateArn(v string) *CreateAssessmentTemplateOutput {
-	s.AssessmentTemplateArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroupRequest
@@ -3656,12 +3134,6 @@ func (s *CreateResourceGroupInput) Validate() error {
 	return nil
 }
 
-// SetResourceGroupTags sets the ResourceGroupTags field's value.
-func (s *CreateResourceGroupInput) SetResourceGroupTags(v []ResourceGroupTag) *CreateResourceGroupInput {
-	s.ResourceGroupTags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroupResponse
 type CreateResourceGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3687,12 +3159,6 @@ func (s CreateResourceGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateResourceGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceGroupArn sets the ResourceGroupArn field's value.
-func (s *CreateResourceGroupOutput) SetResourceGroupArn(v string) *CreateResourceGroupOutput {
-	s.ResourceGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRunRequest
@@ -3730,12 +3196,6 @@ func (s *DeleteAssessmentRunInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *DeleteAssessmentRunInput) SetAssessmentRunArn(v string) *DeleteAssessmentRunInput {
-	s.AssessmentRunArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRunOutput
@@ -3797,12 +3257,6 @@ func (s *DeleteAssessmentTargetInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTargetArn sets the AssessmentTargetArn field's value.
-func (s *DeleteAssessmentTargetInput) SetAssessmentTargetArn(v string) *DeleteAssessmentTargetInput {
-	s.AssessmentTargetArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTargetOutput
 type DeleteAssessmentTargetOutput struct {
 	_ struct{} `type:"structure"`
@@ -3860,12 +3314,6 @@ func (s *DeleteAssessmentTemplateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssessmentTemplateArn sets the AssessmentTemplateArn field's value.
-func (s *DeleteAssessmentTemplateInput) SetAssessmentTemplateArn(v string) *DeleteAssessmentTemplateInput {
-	s.AssessmentTemplateArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplateOutput
@@ -3927,12 +3375,6 @@ func (s *DescribeAssessmentRunsInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentRunArns sets the AssessmentRunArns field's value.
-func (s *DescribeAssessmentRunsInput) SetAssessmentRunArns(v []string) *DescribeAssessmentRunsInput {
-	s.AssessmentRunArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRunsResponse
 type DescribeAssessmentRunsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3964,18 +3406,6 @@ func (s DescribeAssessmentRunsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAssessmentRunsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentRuns sets the AssessmentRuns field's value.
-func (s *DescribeAssessmentRunsOutput) SetAssessmentRuns(v []AssessmentRun) *DescribeAssessmentRunsOutput {
-	s.AssessmentRuns = v
-	return s
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *DescribeAssessmentRunsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeAssessmentRunsOutput {
-	s.FailedItems = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargetsRequest
@@ -4015,12 +3445,6 @@ func (s *DescribeAssessmentTargetsInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
-func (s *DescribeAssessmentTargetsInput) SetAssessmentTargetArns(v []string) *DescribeAssessmentTargetsInput {
-	s.AssessmentTargetArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargetsResponse
 type DescribeAssessmentTargetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4052,18 +3476,6 @@ func (s DescribeAssessmentTargetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAssessmentTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentTargets sets the AssessmentTargets field's value.
-func (s *DescribeAssessmentTargetsOutput) SetAssessmentTargets(v []AssessmentTarget) *DescribeAssessmentTargetsOutput {
-	s.AssessmentTargets = v
-	return s
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *DescribeAssessmentTargetsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeAssessmentTargetsOutput {
-	s.FailedItems = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplatesRequest
@@ -4101,12 +3513,6 @@ func (s *DescribeAssessmentTemplatesInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
-func (s *DescribeAssessmentTemplatesInput) SetAssessmentTemplateArns(v []string) *DescribeAssessmentTemplatesInput {
-	s.AssessmentTemplateArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplatesResponse
 type DescribeAssessmentTemplatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4138,18 +3544,6 @@ func (s DescribeAssessmentTemplatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAssessmentTemplatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentTemplates sets the AssessmentTemplates field's value.
-func (s *DescribeAssessmentTemplatesOutput) SetAssessmentTemplates(v []AssessmentTemplate) *DescribeAssessmentTemplatesOutput {
-	s.AssessmentTemplates = v
-	return s
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *DescribeAssessmentTemplatesOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeAssessmentTemplatesOutput {
-	s.FailedItems = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeCrossAccountAccessRoleInput
@@ -4206,24 +3600,6 @@ func (s DescribeCrossAccountAccessRoleOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetRegisteredAt sets the RegisteredAt field's value.
-func (s *DescribeCrossAccountAccessRoleOutput) SetRegisteredAt(v time.Time) *DescribeCrossAccountAccessRoleOutput {
-	s.RegisteredAt = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeCrossAccountAccessRoleOutput) SetRoleArn(v string) *DescribeCrossAccountAccessRoleOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetValid sets the Valid field's value.
-func (s *DescribeCrossAccountAccessRoleOutput) SetValid(v bool) *DescribeCrossAccountAccessRoleOutput {
-	s.Valid = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindingsRequest
 type DescribeFindingsInput struct {
 	_ struct{} `type:"structure"`
@@ -4265,18 +3641,6 @@ func (s *DescribeFindingsInput) Validate() error {
 	return nil
 }
 
-// SetFindingArns sets the FindingArns field's value.
-func (s *DescribeFindingsInput) SetFindingArns(v []string) *DescribeFindingsInput {
-	s.FindingArns = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *DescribeFindingsInput) SetLocale(v Locale) *DescribeFindingsInput {
-	s.Locale = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindingsResponse
 type DescribeFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4308,18 +3672,6 @@ func (s DescribeFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *DescribeFindingsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeFindingsOutput {
-	s.FailedItems = v
-	return s
-}
-
-// SetFindings sets the Findings field's value.
-func (s *DescribeFindingsOutput) SetFindings(v []Finding) *DescribeFindingsOutput {
-	s.Findings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroupsRequest
@@ -4359,12 +3711,6 @@ func (s *DescribeResourceGroupsInput) Validate() error {
 	return nil
 }
 
-// SetResourceGroupArns sets the ResourceGroupArns field's value.
-func (s *DescribeResourceGroupsInput) SetResourceGroupArns(v []string) *DescribeResourceGroupsInput {
-	s.ResourceGroupArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroupsResponse
 type DescribeResourceGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4396,18 +3742,6 @@ func (s DescribeResourceGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeResourceGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *DescribeResourceGroupsOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeResourceGroupsOutput {
-	s.FailedItems = v
-	return s
-}
-
-// SetResourceGroups sets the ResourceGroups field's value.
-func (s *DescribeResourceGroupsOutput) SetResourceGroups(v []ResourceGroup) *DescribeResourceGroupsOutput {
-	s.ResourceGroups = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackagesRequest
@@ -4450,18 +3784,6 @@ func (s *DescribeRulesPackagesInput) Validate() error {
 	return nil
 }
 
-// SetLocale sets the Locale field's value.
-func (s *DescribeRulesPackagesInput) SetLocale(v Locale) *DescribeRulesPackagesInput {
-	s.Locale = v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *DescribeRulesPackagesInput) SetRulesPackageArns(v []string) *DescribeRulesPackagesInput {
-	s.RulesPackageArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackagesResponse
 type DescribeRulesPackagesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4493,18 +3815,6 @@ func (s DescribeRulesPackagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRulesPackagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *DescribeRulesPackagesOutput) SetFailedItems(v map[string]FailedItemDetails) *DescribeRulesPackagesOutput {
-	s.FailedItems = v
-	return s
-}
-
-// SetRulesPackages sets the RulesPackages field's value.
-func (s *DescribeRulesPackagesOutput) SetRulesPackages(v []RulesPackage) *DescribeRulesPackagesOutput {
-	s.RulesPackages = v
-	return s
 }
 
 // This data type is used in the AssessmentTemplateFilter data type.
@@ -4546,18 +3856,6 @@ func (s *DurationRange) Validate() error {
 	return nil
 }
 
-// SetMaxSeconds sets the MaxSeconds field's value.
-func (s *DurationRange) SetMaxSeconds(v int64) *DurationRange {
-	s.MaxSeconds = &v
-	return s
-}
-
-// SetMinSeconds sets the MinSeconds field's value.
-func (s *DurationRange) SetMinSeconds(v int64) *DurationRange {
-	s.MinSeconds = &v
-	return s
-}
-
 // This data type is used in the Subscription data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/EventSubscription
 type EventSubscription struct {
@@ -4585,18 +3883,6 @@ func (s EventSubscription) GoString() string {
 	return s.String()
 }
 
-// SetEvent sets the Event field's value.
-func (s *EventSubscription) SetEvent(v Event) *EventSubscription {
-	s.Event = v
-	return s
-}
-
-// SetSubscribedAt sets the SubscribedAt field's value.
-func (s *EventSubscription) SetSubscribedAt(v time.Time) *EventSubscription {
-	s.SubscribedAt = &v
-	return s
-}
-
 // Includes details about the failed items.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/FailedItemDetails
 type FailedItemDetails struct {
@@ -4622,18 +3908,6 @@ func (s FailedItemDetails) String() string {
 // GoString returns the string representation
 func (s FailedItemDetails) GoString() string {
 	return s.String()
-}
-
-// SetFailureCode sets the FailureCode field's value.
-func (s *FailedItemDetails) SetFailureCode(v FailedItemErrorCode) *FailedItemDetails {
-	s.FailureCode = v
-	return s
-}
-
-// SetRetryable sets the Retryable field's value.
-func (s *FailedItemDetails) SetRetryable(v bool) *FailedItemDetails {
-	s.Retryable = &v
-	return s
 }
 
 // Contains information about an Amazon Inspector finding. This data type is
@@ -4717,114 +3991,6 @@ func (s Finding) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Finding) SetArn(v string) *Finding {
-	s.Arn = &v
-	return s
-}
-
-// SetAssetAttributes sets the AssetAttributes field's value.
-func (s *Finding) SetAssetAttributes(v *AssetAttributes) *Finding {
-	s.AssetAttributes = v
-	return s
-}
-
-// SetAssetType sets the AssetType field's value.
-func (s *Finding) SetAssetType(v AssetType) *Finding {
-	s.AssetType = v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *Finding) SetAttributes(v []Attribute) *Finding {
-	s.Attributes = v
-	return s
-}
-
-// SetConfidence sets the Confidence field's value.
-func (s *Finding) SetConfidence(v int64) *Finding {
-	s.Confidence = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Finding) SetCreatedAt(v time.Time) *Finding {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Finding) SetDescription(v string) *Finding {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Finding) SetId(v string) *Finding {
-	s.Id = &v
-	return s
-}
-
-// SetIndicatorOfCompromise sets the IndicatorOfCompromise field's value.
-func (s *Finding) SetIndicatorOfCompromise(v bool) *Finding {
-	s.IndicatorOfCompromise = &v
-	return s
-}
-
-// SetNumericSeverity sets the NumericSeverity field's value.
-func (s *Finding) SetNumericSeverity(v float64) *Finding {
-	s.NumericSeverity = &v
-	return s
-}
-
-// SetRecommendation sets the Recommendation field's value.
-func (s *Finding) SetRecommendation(v string) *Finding {
-	s.Recommendation = &v
-	return s
-}
-
-// SetSchemaVersion sets the SchemaVersion field's value.
-func (s *Finding) SetSchemaVersion(v int64) *Finding {
-	s.SchemaVersion = &v
-	return s
-}
-
-// SetService sets the Service field's value.
-func (s *Finding) SetService(v string) *Finding {
-	s.Service = &v
-	return s
-}
-
-// SetServiceAttributes sets the ServiceAttributes field's value.
-func (s *Finding) SetServiceAttributes(v *ServiceAttributes) *Finding {
-	s.ServiceAttributes = v
-	return s
-}
-
-// SetSeverity sets the Severity field's value.
-func (s *Finding) SetSeverity(v Severity) *Finding {
-	s.Severity = v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *Finding) SetTitle(v string) *Finding {
-	s.Title = &v
-	return s
-}
-
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *Finding) SetUpdatedAt(v time.Time) *Finding {
-	s.UpdatedAt = &v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *Finding) SetUserAttributes(v []Attribute) *Finding {
-	s.UserAttributes = v
-	return s
-}
-
 // This data type is used as a request parameter in the ListFindings action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/FindingFilter
 type FindingFilter struct {
@@ -4903,54 +4069,6 @@ func (s *FindingFilter) Validate() error {
 	return nil
 }
 
-// SetAgentIds sets the AgentIds field's value.
-func (s *FindingFilter) SetAgentIds(v []string) *FindingFilter {
-	s.AgentIds = v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *FindingFilter) SetAttributes(v []Attribute) *FindingFilter {
-	s.Attributes = v
-	return s
-}
-
-// SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *FindingFilter) SetAutoScalingGroups(v []string) *FindingFilter {
-	s.AutoScalingGroups = v
-	return s
-}
-
-// SetCreationTimeRange sets the CreationTimeRange field's value.
-func (s *FindingFilter) SetCreationTimeRange(v *TimestampRange) *FindingFilter {
-	s.CreationTimeRange = v
-	return s
-}
-
-// SetRuleNames sets the RuleNames field's value.
-func (s *FindingFilter) SetRuleNames(v []string) *FindingFilter {
-	s.RuleNames = v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *FindingFilter) SetRulesPackageArns(v []string) *FindingFilter {
-	s.RulesPackageArns = v
-	return s
-}
-
-// SetSeverities sets the Severities field's value.
-func (s *FindingFilter) SetSeverities(v []Severity) *FindingFilter {
-	s.Severities = v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *FindingFilter) SetUserAttributes(v []Attribute) *FindingFilter {
-	s.UserAttributes = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReportRequest
 type GetAssessmentReportInput struct {
 	_ struct{} `type:"structure"`
@@ -5008,24 +4126,6 @@ func (s *GetAssessmentReportInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *GetAssessmentReportInput) SetAssessmentRunArn(v string) *GetAssessmentReportInput {
-	s.AssessmentRunArn = &v
-	return s
-}
-
-// SetReportFileFormat sets the ReportFileFormat field's value.
-func (s *GetAssessmentReportInput) SetReportFileFormat(v ReportFileFormat) *GetAssessmentReportInput {
-	s.ReportFileFormat = v
-	return s
-}
-
-// SetReportType sets the ReportType field's value.
-func (s *GetAssessmentReportInput) SetReportType(v ReportType) *GetAssessmentReportInput {
-	s.ReportType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReportResponse
 type GetAssessmentReportOutput struct {
 	_ struct{} `type:"structure"`
@@ -5055,18 +4155,6 @@ func (s GetAssessmentReportOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAssessmentReportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetAssessmentReportOutput) SetStatus(v ReportStatus) *GetAssessmentReportOutput {
-	s.Status = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *GetAssessmentReportOutput) SetUrl(v string) *GetAssessmentReportOutput {
-	s.Url = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadataRequest
@@ -5107,12 +4195,6 @@ func (s *GetTelemetryMetadataInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *GetTelemetryMetadataInput) SetAssessmentRunArn(v string) *GetTelemetryMetadataInput {
-	s.AssessmentRunArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadataResponse
 type GetTelemetryMetadataOutput struct {
 	_ struct{} `type:"structure"`
@@ -5138,12 +4220,6 @@ func (s GetTelemetryMetadataOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTelemetryMetadataOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTelemetryMetadata sets the TelemetryMetadata field's value.
-func (s *GetTelemetryMetadataOutput) SetTelemetryMetadata(v []TelemetryMetadata) *GetTelemetryMetadataOutput {
-	s.TelemetryMetadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgentsRequest
@@ -5209,30 +4285,6 @@ func (s *ListAssessmentRunAgentsInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *ListAssessmentRunAgentsInput) SetAssessmentRunArn(v string) *ListAssessmentRunAgentsInput {
-	s.AssessmentRunArn = &v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *ListAssessmentRunAgentsInput) SetFilter(v *AgentFilter) *ListAssessmentRunAgentsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAssessmentRunAgentsInput) SetMaxResults(v int64) *ListAssessmentRunAgentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentRunAgentsInput) SetNextToken(v string) *ListAssessmentRunAgentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgentsResponse
 type ListAssessmentRunAgentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5264,18 +4316,6 @@ func (s ListAssessmentRunAgentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAssessmentRunAgentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentRunAgents sets the AssessmentRunAgents field's value.
-func (s *ListAssessmentRunAgentsOutput) SetAssessmentRunAgents(v []AssessmentRunAgent) *ListAssessmentRunAgentsOutput {
-	s.AssessmentRunAgents = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentRunAgentsOutput) SetNextToken(v string) *ListAssessmentRunAgentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunsRequest
@@ -5333,30 +4373,6 @@ func (s *ListAssessmentRunsInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
-func (s *ListAssessmentRunsInput) SetAssessmentTemplateArns(v []string) *ListAssessmentRunsInput {
-	s.AssessmentTemplateArns = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *ListAssessmentRunsInput) SetFilter(v *AssessmentRunFilter) *ListAssessmentRunsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAssessmentRunsInput) SetMaxResults(v int64) *ListAssessmentRunsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentRunsInput) SetNextToken(v string) *ListAssessmentRunsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunsResponse
 type ListAssessmentRunsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5389,18 +4405,6 @@ func (s ListAssessmentRunsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAssessmentRunsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentRunArns sets the AssessmentRunArns field's value.
-func (s *ListAssessmentRunsOutput) SetAssessmentRunArns(v []string) *ListAssessmentRunsOutput {
-	s.AssessmentRunArns = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentRunsOutput) SetNextToken(v string) *ListAssessmentRunsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargetsRequest
@@ -5454,24 +4458,6 @@ func (s *ListAssessmentTargetsInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListAssessmentTargetsInput) SetFilter(v *AssessmentTargetFilter) *ListAssessmentTargetsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAssessmentTargetsInput) SetMaxResults(v int64) *ListAssessmentTargetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentTargetsInput) SetNextToken(v string) *ListAssessmentTargetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargetsResponse
 type ListAssessmentTargetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5504,18 +4490,6 @@ func (s ListAssessmentTargetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAssessmentTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
-func (s *ListAssessmentTargetsOutput) SetAssessmentTargetArns(v []string) *ListAssessmentTargetsOutput {
-	s.AssessmentTargetArns = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentTargetsOutput) SetNextToken(v string) *ListAssessmentTargetsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplatesRequest
@@ -5573,30 +4547,6 @@ func (s *ListAssessmentTemplatesInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentTargetArns sets the AssessmentTargetArns field's value.
-func (s *ListAssessmentTemplatesInput) SetAssessmentTargetArns(v []string) *ListAssessmentTemplatesInput {
-	s.AssessmentTargetArns = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *ListAssessmentTemplatesInput) SetFilter(v *AssessmentTemplateFilter) *ListAssessmentTemplatesInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAssessmentTemplatesInput) SetMaxResults(v int64) *ListAssessmentTemplatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentTemplatesInput) SetNextToken(v string) *ListAssessmentTemplatesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplatesResponse
 type ListAssessmentTemplatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5628,18 +4578,6 @@ func (s ListAssessmentTemplatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAssessmentTemplatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentTemplateArns sets the AssessmentTemplateArns field's value.
-func (s *ListAssessmentTemplatesOutput) SetAssessmentTemplateArns(v []string) *ListAssessmentTemplatesOutput {
-	s.AssessmentTemplateArns = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssessmentTemplatesOutput) SetNextToken(v string) *ListAssessmentTemplatesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptionsRequest
@@ -5687,24 +4625,6 @@ func (s *ListEventSubscriptionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListEventSubscriptionsInput) SetMaxResults(v int64) *ListEventSubscriptionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEventSubscriptionsInput) SetNextToken(v string) *ListEventSubscriptionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListEventSubscriptionsInput) SetResourceArn(v string) *ListEventSubscriptionsInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptionsResponse
 type ListEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5736,18 +4656,6 @@ func (s ListEventSubscriptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListEventSubscriptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEventSubscriptionsOutput) SetNextToken(v string) *ListEventSubscriptionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *ListEventSubscriptionsOutput) SetSubscriptions(v []Subscription) *ListEventSubscriptionsOutput {
-	s.Subscriptions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindingsRequest
@@ -5805,30 +4713,6 @@ func (s *ListFindingsInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentRunArns sets the AssessmentRunArns field's value.
-func (s *ListFindingsInput) SetAssessmentRunArns(v []string) *ListFindingsInput {
-	s.AssessmentRunArns = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *ListFindingsInput) SetFilter(v *FindingFilter) *ListFindingsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFindingsInput) SetMaxResults(v int64) *ListFindingsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFindingsInput) SetNextToken(v string) *ListFindingsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindingsResponse
 type ListFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5860,18 +4744,6 @@ func (s ListFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFindingArns sets the FindingArns field's value.
-func (s *ListFindingsOutput) SetFindingArns(v []string) *ListFindingsOutput {
-	s.FindingArns = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFindingsOutput) SetNextToken(v string) *ListFindingsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackagesRequest
@@ -5912,18 +4784,6 @@ func (s *ListRulesPackagesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListRulesPackagesInput) SetMaxResults(v int64) *ListRulesPackagesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRulesPackagesInput) SetNextToken(v string) *ListRulesPackagesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackagesResponse
 type ListRulesPackagesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5955,18 +4815,6 @@ func (s ListRulesPackagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRulesPackagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRulesPackagesOutput) SetNextToken(v string) *ListRulesPackagesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRulesPackageArns sets the RulesPackageArns field's value.
-func (s *ListRulesPackagesOutput) SetRulesPackageArns(v []string) *ListRulesPackagesOutput {
-	s.RulesPackageArns = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResourceRequest
@@ -6006,12 +4854,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6037,12 +4879,6 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgentsRequest
@@ -6095,24 +4931,6 @@ func (s *PreviewAgentsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *PreviewAgentsInput) SetMaxResults(v int64) *PreviewAgentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *PreviewAgentsInput) SetNextToken(v string) *PreviewAgentsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPreviewAgentsArn sets the PreviewAgentsArn field's value.
-func (s *PreviewAgentsInput) SetPreviewAgentsArn(v string) *PreviewAgentsInput {
-	s.PreviewAgentsArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgentsResponse
 type PreviewAgentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6144,18 +4962,6 @@ func (s PreviewAgentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PreviewAgentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAgentPreviews sets the AgentPreviews field's value.
-func (s *PreviewAgentsOutput) SetAgentPreviews(v []AgentPreview) *PreviewAgentsOutput {
-	s.AgentPreviews = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *PreviewAgentsOutput) SetNextToken(v string) *PreviewAgentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleRequest
@@ -6194,12 +5000,6 @@ func (s *RegisterCrossAccountAccessRoleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *RegisterCrossAccountAccessRoleInput) SetRoleArn(v string) *RegisterCrossAccountAccessRoleInput {
-	s.RoleArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleOutput
@@ -6270,18 +5070,6 @@ func (s *RemoveAttributesFromFindingsInput) Validate() error {
 	return nil
 }
 
-// SetAttributeKeys sets the AttributeKeys field's value.
-func (s *RemoveAttributesFromFindingsInput) SetAttributeKeys(v []string) *RemoveAttributesFromFindingsInput {
-	s.AttributeKeys = v
-	return s
-}
-
-// SetFindingArns sets the FindingArns field's value.
-func (s *RemoveAttributesFromFindingsInput) SetFindingArns(v []string) *RemoveAttributesFromFindingsInput {
-	s.FindingArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindingsResponse
 type RemoveAttributesFromFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6308,12 +5096,6 @@ func (s RemoveAttributesFromFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RemoveAttributesFromFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedItems sets the FailedItems field's value.
-func (s *RemoveAttributesFromFindingsOutput) SetFailedItems(v map[string]FailedItemDetails) *RemoveAttributesFromFindingsOutput {
-	s.FailedItems = v
-	return s
 }
 
 // Contains information about a resource group. The resource group defines a
@@ -6349,24 +5131,6 @@ func (s ResourceGroup) String() string {
 // GoString returns the string representation
 func (s ResourceGroup) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *ResourceGroup) SetArn(v string) *ResourceGroup {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *ResourceGroup) SetCreatedAt(v time.Time) *ResourceGroup {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ResourceGroup) SetTags(v []ResourceGroupTag) *ResourceGroup {
-	s.Tags = v
-	return s
 }
 
 // This data type is used as one of the elements of the ResourceGroup data type.
@@ -6413,18 +5177,6 @@ func (s *ResourceGroupTag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *ResourceGroupTag) SetKey(v string) *ResourceGroupTag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ResourceGroupTag) SetValue(v string) *ResourceGroupTag {
-	s.Value = &v
-	return s
-}
-
 // Contains information about an Amazon Inspector rules package. This data type
 // is used as the response element in the DescribeRulesPackages action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RulesPackage
@@ -6465,36 +5217,6 @@ func (s RulesPackage) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *RulesPackage) SetArn(v string) *RulesPackage {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RulesPackage) SetDescription(v string) *RulesPackage {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RulesPackage) SetName(v string) *RulesPackage {
-	s.Name = &v
-	return s
-}
-
-// SetProvider sets the Provider field's value.
-func (s *RulesPackage) SetProvider(v string) *RulesPackage {
-	s.Provider = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *RulesPackage) SetVersion(v string) *RulesPackage {
-	s.Version = &v
-	return s
-}
-
 // This data type is used in the Finding data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/InspectorServiceAttributes
 type ServiceAttributes struct {
@@ -6520,24 +5242,6 @@ func (s ServiceAttributes) String() string {
 // GoString returns the string representation
 func (s ServiceAttributes) GoString() string {
 	return s.String()
-}
-
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *ServiceAttributes) SetAssessmentRunArn(v string) *ServiceAttributes {
-	s.AssessmentRunArn = &v
-	return s
-}
-
-// SetRulesPackageArn sets the RulesPackageArn field's value.
-func (s *ServiceAttributes) SetRulesPackageArn(v string) *ServiceAttributes {
-	s.RulesPackageArn = &v
-	return s
-}
-
-// SetSchemaVersion sets the SchemaVersion field's value.
-func (s *ServiceAttributes) SetSchemaVersion(v int64) *ServiceAttributes {
-	s.SchemaVersion = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResourceRequest
@@ -6586,18 +5290,6 @@ func (s *SetTagsForResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *SetTagsForResourceInput) SetResourceArn(v string) *SetTagsForResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *SetTagsForResourceInput) SetTags(v []Tag) *SetTagsForResourceInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResourceOutput
@@ -6667,18 +5359,6 @@ func (s *StartAssessmentRunInput) Validate() error {
 	return nil
 }
 
-// SetAssessmentRunName sets the AssessmentRunName field's value.
-func (s *StartAssessmentRunInput) SetAssessmentRunName(v string) *StartAssessmentRunInput {
-	s.AssessmentRunName = &v
-	return s
-}
-
-// SetAssessmentTemplateArn sets the AssessmentTemplateArn field's value.
-func (s *StartAssessmentRunInput) SetAssessmentTemplateArn(v string) *StartAssessmentRunInput {
-	s.AssessmentTemplateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRunResponse
 type StartAssessmentRunOutput struct {
 	_ struct{} `type:"structure"`
@@ -6704,12 +5384,6 @@ func (s StartAssessmentRunOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartAssessmentRunOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *StartAssessmentRunOutput) SetAssessmentRunArn(v string) *StartAssessmentRunOutput {
-	s.AssessmentRunArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRunRequest
@@ -6754,18 +5428,6 @@ func (s *StopAssessmentRunInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssessmentRunArn sets the AssessmentRunArn field's value.
-func (s *StopAssessmentRunInput) SetAssessmentRunArn(v string) *StopAssessmentRunInput {
-	s.AssessmentRunArn = &v
-	return s
-}
-
-// SetStopAction sets the StopAction field's value.
-func (s *StopAssessmentRunInput) SetStopAction(v StopAction) *StopAssessmentRunInput {
-	s.StopAction = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRunOutput
@@ -6848,24 +5510,6 @@ func (s *SubscribeToEventInput) Validate() error {
 	return nil
 }
 
-// SetEvent sets the Event field's value.
-func (s *SubscribeToEventInput) SetEvent(v Event) *SubscribeToEventInput {
-	s.Event = v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *SubscribeToEventInput) SetResourceArn(v string) *SubscribeToEventInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *SubscribeToEventInput) SetTopicArn(v string) *SubscribeToEventInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEventOutput
 type SubscribeToEventOutput struct {
 	_ struct{} `type:"structure"`
@@ -6922,24 +5566,6 @@ func (s Subscription) GoString() string {
 	return s.String()
 }
 
-// SetEventSubscriptions sets the EventSubscriptions field's value.
-func (s *Subscription) SetEventSubscriptions(v []EventSubscription) *Subscription {
-	s.EventSubscriptions = v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *Subscription) SetResourceArn(v string) *Subscription {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *Subscription) SetTopicArn(v string) *Subscription {
-	s.TopicArn = &v
-	return s
-}
-
 // A key and value pair. This data type is used as a request parameter in the
 // SetTagsForResource action and a response element in the ListTagsForResource
 // action.
@@ -6986,18 +5612,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // The metadata about the Amazon Inspector application data metrics collected
 // by the agent. This data type is used as the response element in the GetTelemetryMetadata
 // action.
@@ -7029,24 +5643,6 @@ func (s TelemetryMetadata) GoString() string {
 	return s.String()
 }
 
-// SetCount sets the Count field's value.
-func (s *TelemetryMetadata) SetCount(v int64) *TelemetryMetadata {
-	s.Count = &v
-	return s
-}
-
-// SetDataSize sets the DataSize field's value.
-func (s *TelemetryMetadata) SetDataSize(v int64) *TelemetryMetadata {
-	s.DataSize = &v
-	return s
-}
-
-// SetMessageType sets the MessageType field's value.
-func (s *TelemetryMetadata) SetMessageType(v string) *TelemetryMetadata {
-	s.MessageType = &v
-	return s
-}
-
 // This data type is used in the AssessmentRunFilter data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/TimestampRange
 type TimestampRange struct {
@@ -7067,18 +5663,6 @@ func (s TimestampRange) String() string {
 // GoString returns the string representation
 func (s TimestampRange) GoString() string {
 	return s.String()
-}
-
-// SetBeginDate sets the BeginDate field's value.
-func (s *TimestampRange) SetBeginDate(v time.Time) *TimestampRange {
-	s.BeginDate = &v
-	return s
-}
-
-// SetEndDate sets the EndDate field's value.
-func (s *TimestampRange) SetEndDate(v time.Time) *TimestampRange {
-	s.EndDate = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEventRequest
@@ -7137,24 +5721,6 @@ func (s *UnsubscribeFromEventInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEvent sets the Event field's value.
-func (s *UnsubscribeFromEventInput) SetEvent(v Event) *UnsubscribeFromEventInput {
-	s.Event = v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *UnsubscribeFromEventInput) SetResourceArn(v string) *UnsubscribeFromEventInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *UnsubscribeFromEventInput) SetTopicArn(v string) *UnsubscribeFromEventInput {
-	s.TopicArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEventOutput
@@ -7239,24 +5805,6 @@ func (s *UpdateAssessmentTargetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssessmentTargetArn sets the AssessmentTargetArn field's value.
-func (s *UpdateAssessmentTargetInput) SetAssessmentTargetArn(v string) *UpdateAssessmentTargetInput {
-	s.AssessmentTargetArn = &v
-	return s
-}
-
-// SetAssessmentTargetName sets the AssessmentTargetName field's value.
-func (s *UpdateAssessmentTargetInput) SetAssessmentTargetName(v string) *UpdateAssessmentTargetInput {
-	s.AssessmentTargetName = &v
-	return s
-}
-
-// SetResourceGroupArn sets the ResourceGroupArn field's value.
-func (s *UpdateAssessmentTargetInput) SetResourceGroupArn(v string) *UpdateAssessmentTargetInput {
-	s.ResourceGroupArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTargetOutput

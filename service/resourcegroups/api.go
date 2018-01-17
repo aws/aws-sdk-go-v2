@@ -836,30 +836,6 @@ func (s *CreateGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateGroupInput) SetDescription(v string) *CreateGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGroupInput) SetName(v string) *CreateGroupInput {
-	s.Name = &v
-	return s
-}
-
-// SetResourceQuery sets the ResourceQuery field's value.
-func (s *CreateGroupInput) SetResourceQuery(v *ResourceQuery) *CreateGroupInput {
-	s.ResourceQuery = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateGroupInput) SetTags(v map[string]string) *CreateGroupInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroupOutput
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -889,24 +865,6 @@ func (s CreateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *CreateGroupOutput) SetGroup(v *Group) *CreateGroupOutput {
-	s.Group = v
-	return s
-}
-
-// SetResourceQuery sets the ResourceQuery field's value.
-func (s *CreateGroupOutput) SetResourceQuery(v *ResourceQuery) *CreateGroupOutput {
-	s.ResourceQuery = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateGroupOutput) SetTags(v map[string]string) *CreateGroupOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroupInput
@@ -946,12 +904,6 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *DeleteGroupInput) SetGroupName(v string) *DeleteGroupInput {
-	s.GroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -975,12 +927,6 @@ func (s DeleteGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *DeleteGroupOutput) SetGroup(v *Group) *DeleteGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupInput
@@ -1020,12 +966,6 @@ func (s *GetGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *GetGroupInput) SetGroupName(v string) *GetGroupInput {
-	s.GroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupOutput
 type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1049,12 +989,6 @@ func (s GetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *GetGroupOutput) SetGroup(v *Group) *GetGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQueryInput
@@ -1094,12 +1028,6 @@ func (s *GetGroupQueryInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *GetGroupQueryInput) SetGroupName(v string) *GetGroupQueryInput {
-	s.GroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQueryOutput
 type GetGroupQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1123,12 +1051,6 @@ func (s GetGroupQueryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupQuery sets the GroupQuery field's value.
-func (s *GetGroupQueryOutput) SetGroupQuery(v *GroupQuery) *GetGroupQueryOutput {
-	s.GroupQuery = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsInput
@@ -1166,12 +1088,6 @@ func (s *GetTagsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetTagsInput) SetArn(v string) *GetTagsInput {
-	s.Arn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsOutput
 type GetTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1198,18 +1114,6 @@ func (s GetTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetTagsOutput) SetArn(v string) *GetTagsOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *GetTagsOutput) SetTags(v map[string]string) *GetTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // A resource group.
@@ -1241,24 +1145,6 @@ func (s Group) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *Group) SetDescription(v string) *Group {
-	s.Description = &v
-	return s
-}
-
-// SetGroupArn sets the GroupArn field's value.
-func (s *Group) SetGroupArn(v string) *Group {
-	s.GroupArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Group) SetName(v string) *Group {
-	s.Name = &v
-	return s
-}
-
 // The underlying resource query of a resource group. Resources that match query
 // results are part of the group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupQuery
@@ -1286,18 +1172,6 @@ func (s GroupQuery) String() string {
 // GoString returns the string representation
 func (s GroupQuery) GoString() string {
 	return s.String()
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *GroupQuery) SetGroupName(v string) *GroupQuery {
-	s.GroupName = &v
-	return s
-}
-
-// SetResourceQuery sets the ResourceQuery field's value.
-func (s *GroupQuery) SetResourceQuery(v *ResourceQuery) *GroupQuery {
-	s.ResourceQuery = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesInput
@@ -1349,24 +1223,6 @@ func (s *ListGroupResourcesInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *ListGroupResourcesInput) SetGroupName(v string) *ListGroupResourcesInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupResourcesInput) SetMaxResults(v int64) *ListGroupResourcesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupResourcesInput) SetNextToken(v string) *ListGroupResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput
 type ListGroupResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1395,18 +1251,6 @@ func (s ListGroupResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupResourcesOutput) SetNextToken(v string) *ListGroupResourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceIdentifiers sets the ResourceIdentifiers field's value.
-func (s *ListGroupResourcesOutput) SetResourceIdentifiers(v []ResourceIdentifier) *ListGroupResourcesOutput {
-	s.ResourceIdentifiers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsInput
@@ -1446,18 +1290,6 @@ func (s *ListGroupsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupsInput) SetMaxResults(v int64) *ListGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsInput) SetNextToken(v string) *ListGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsOutput
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1487,18 +1319,6 @@ func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []Group) *ListGroupsOutput {
-	s.Groups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsOutput) SetNextToken(v string) *ListGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // The ARN of a resource, and its resource type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceIdentifier
 type ResourceIdentifier struct {
@@ -1519,18 +1339,6 @@ func (s ResourceIdentifier) String() string {
 // GoString returns the string representation
 func (s ResourceIdentifier) GoString() string {
 	return s.String()
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ResourceIdentifier) SetResourceArn(v string) *ResourceIdentifier {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ResourceIdentifier) SetResourceType(v string) *ResourceIdentifier {
-	s.ResourceType = &v
-	return s
 }
 
 // The query that is used to define a resource group or a search for resources.
@@ -1581,18 +1389,6 @@ func (s *ResourceQuery) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetQuery sets the Query field's value.
-func (s *ResourceQuery) SetQuery(v string) *ResourceQuery {
-	s.Query = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ResourceQuery) SetType(v QueryType) *ResourceQuery {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesInput
@@ -1647,24 +1443,6 @@ func (s *SearchResourcesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *SearchResourcesInput) SetMaxResults(v int64) *SearchResourcesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchResourcesInput) SetNextToken(v string) *SearchResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceQuery sets the ResourceQuery field's value.
-func (s *SearchResourcesInput) SetResourceQuery(v *ResourceQuery) *SearchResourcesInput {
-	s.ResourceQuery = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesOutput
 type SearchResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1693,18 +1471,6 @@ func (s SearchResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchResourcesOutput) SetNextToken(v string) *SearchResourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceIdentifiers sets the ResourceIdentifiers field's value.
-func (s *SearchResourcesOutput) SetResourceIdentifiers(v []ResourceIdentifier) *SearchResourcesOutput {
-	s.ResourceIdentifiers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagInput
@@ -1752,18 +1518,6 @@ func (s *TagInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *TagInput) SetArn(v string) *TagInput {
-	s.Arn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagInput) SetTags(v map[string]string) *TagInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagOutput
 type TagOutput struct {
 	_ struct{} `type:"structure"`
@@ -1790,18 +1544,6 @@ func (s TagOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *TagOutput) SetArn(v string) *TagOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagOutput) SetTags(v map[string]string) *TagOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UntagInput
@@ -1847,18 +1589,6 @@ func (s *UntagInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *UntagInput) SetArn(v string) *UntagInput {
-	s.Arn = &v
-	return s
-}
-
-// SetKeys sets the Keys field's value.
-func (s *UntagInput) SetKeys(v []string) *UntagInput {
-	s.Keys = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UntagOutput
 type UntagOutput struct {
 	_ struct{} `type:"structure"`
@@ -1885,18 +1615,6 @@ func (s UntagOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *UntagOutput) SetArn(v string) *UntagOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetKeys sets the Keys field's value.
-func (s *UntagOutput) SetKeys(v []string) *UntagOutput {
-	s.Keys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupInput
@@ -1941,18 +1659,6 @@ func (s *UpdateGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateGroupInput) SetDescription(v string) *UpdateGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *UpdateGroupInput) SetGroupName(v string) *UpdateGroupInput {
-	s.GroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupOutput
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1976,12 +1682,6 @@ func (s UpdateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *UpdateGroupOutput) SetGroup(v *Group) *UpdateGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQueryInput
@@ -2036,18 +1736,6 @@ func (s *UpdateGroupQueryInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *UpdateGroupQueryInput) SetGroupName(v string) *UpdateGroupQueryInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetResourceQuery sets the ResourceQuery field's value.
-func (s *UpdateGroupQueryInput) SetResourceQuery(v *ResourceQuery) *UpdateGroupQueryInput {
-	s.ResourceQuery = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQueryOutput
 type UpdateGroupQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -2071,12 +1759,6 @@ func (s UpdateGroupQueryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupQuery sets the GroupQuery field's value.
-func (s *UpdateGroupQueryOutput) SetGroupQuery(v *GroupQuery) *UpdateGroupQueryOutput {
-	s.GroupQuery = v
-	return s
 }
 
 type QueryType string

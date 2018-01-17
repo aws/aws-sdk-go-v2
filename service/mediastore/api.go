@@ -416,36 +416,6 @@ func (s Container) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *Container) SetARN(v string) *Container {
-	s.ARN = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *Container) SetCreationTime(v time.Time) *Container {
-	s.CreationTime = &v
-	return s
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *Container) SetEndpoint(v string) *Container {
-	s.Endpoint = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Container) SetName(v string) *Container {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Container) SetStatus(v ContainerStatus) *Container {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainerInput
 type CreateContainerInput struct {
 	_ struct{} `type:"structure"`
@@ -484,12 +454,6 @@ func (s *CreateContainerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetContainerName sets the ContainerName field's value.
-func (s *CreateContainerInput) SetContainerName(v string) *CreateContainerInput {
-	s.ContainerName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainerOutput
@@ -533,12 +497,6 @@ func (s CreateContainerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetContainer sets the Container field's value.
-func (s *CreateContainerOutput) SetContainer(v *Container) *CreateContainerOutput {
-	s.Container = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteContainerInput
 type DeleteContainerInput struct {
 	_ struct{} `type:"structure"`
@@ -574,12 +532,6 @@ func (s *DeleteContainerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetContainerName sets the ContainerName field's value.
-func (s *DeleteContainerInput) SetContainerName(v string) *DeleteContainerInput {
-	s.ContainerName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteContainerOutput
@@ -641,12 +593,6 @@ func (s *DeleteContainerPolicyInput) Validate() error {
 	return nil
 }
 
-// SetContainerName sets the ContainerName field's value.
-func (s *DeleteContainerPolicyInput) SetContainerName(v string) *DeleteContainerPolicyInput {
-	s.ContainerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteContainerPolicyOutput
 type DeleteContainerPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -700,12 +646,6 @@ func (s *DescribeContainerInput) Validate() error {
 	return nil
 }
 
-// SetContainerName sets the ContainerName field's value.
-func (s *DescribeContainerInput) SetContainerName(v string) *DescribeContainerInput {
-	s.ContainerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainerOutput
 type DescribeContainerOutput struct {
 	_ struct{} `type:"structure"`
@@ -729,12 +669,6 @@ func (s DescribeContainerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeContainerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContainer sets the Container field's value.
-func (s *DescribeContainerOutput) SetContainer(v *Container) *DescribeContainerOutput {
-	s.Container = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetContainerPolicyInput
@@ -774,12 +708,6 @@ func (s *GetContainerPolicyInput) Validate() error {
 	return nil
 }
 
-// SetContainerName sets the ContainerName field's value.
-func (s *GetContainerPolicyInput) SetContainerName(v string) *GetContainerPolicyInput {
-	s.ContainerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetContainerPolicyOutput
 type GetContainerPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -805,12 +733,6 @@ func (s GetContainerPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetContainerPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *GetContainerPolicyOutput) SetPolicy(v string) *GetContainerPolicyOutput {
-	s.Policy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListContainersInput
@@ -854,18 +776,6 @@ func (s *ListContainersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListContainersInput) SetMaxResults(v int64) *ListContainersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListContainersInput) SetNextToken(v string) *ListContainersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/ListContainersOutput
 type ListContainersOutput struct {
 	_ struct{} `type:"structure"`
@@ -896,18 +806,6 @@ func (s ListContainersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListContainersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContainers sets the Containers field's value.
-func (s *ListContainersOutput) SetContainers(v []Container) *ListContainersOutput {
-	s.Containers = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListContainersOutput) SetNextToken(v string) *ListContainersOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutContainerPolicyInput
@@ -961,18 +859,6 @@ func (s *PutContainerPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetContainerName sets the ContainerName field's value.
-func (s *PutContainerPolicyInput) SetContainerName(v string) *PutContainerPolicyInput {
-	s.ContainerName = &v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *PutContainerPolicyInput) SetPolicy(v string) *PutContainerPolicyInput {
-	s.Policy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutContainerPolicyOutput

@@ -694,48 +694,6 @@ func (s *CreateEnvironmentEC2Input) Validate() error {
 	return nil
 }
 
-// SetAutomaticStopTimeMinutes sets the AutomaticStopTimeMinutes field's value.
-func (s *CreateEnvironmentEC2Input) SetAutomaticStopTimeMinutes(v int64) *CreateEnvironmentEC2Input {
-	s.AutomaticStopTimeMinutes = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateEnvironmentEC2Input) SetClientRequestToken(v string) *CreateEnvironmentEC2Input {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateEnvironmentEC2Input) SetDescription(v string) *CreateEnvironmentEC2Input {
-	s.Description = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *CreateEnvironmentEC2Input) SetInstanceType(v string) *CreateEnvironmentEC2Input {
-	s.InstanceType = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateEnvironmentEC2Input) SetName(v string) *CreateEnvironmentEC2Input {
-	s.Name = &v
-	return s
-}
-
-// SetOwnerArn sets the OwnerArn field's value.
-func (s *CreateEnvironmentEC2Input) SetOwnerArn(v string) *CreateEnvironmentEC2Input {
-	s.OwnerArn = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *CreateEnvironmentEC2Input) SetSubnetId(v string) *CreateEnvironmentEC2Input {
-	s.SubnetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Result
 type CreateEnvironmentEC2Output struct {
 	_ struct{} `type:"structure"`
@@ -759,12 +717,6 @@ func (s CreateEnvironmentEC2Output) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEnvironmentEC2Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *CreateEnvironmentEC2Output) SetEnvironmentId(v string) *CreateEnvironmentEC2Output {
-	s.EnvironmentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentMembershipRequest
@@ -824,24 +776,6 @@ func (s *CreateEnvironmentMembershipInput) Validate() error {
 	return nil
 }
 
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *CreateEnvironmentMembershipInput) SetEnvironmentId(v string) *CreateEnvironmentMembershipInput {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetPermissions sets the Permissions field's value.
-func (s *CreateEnvironmentMembershipInput) SetPermissions(v MemberPermissions) *CreateEnvironmentMembershipInput {
-	s.Permissions = v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *CreateEnvironmentMembershipInput) SetUserArn(v string) *CreateEnvironmentMembershipInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentMembershipResult
 type CreateEnvironmentMembershipOutput struct {
 	_ struct{} `type:"structure"`
@@ -865,12 +799,6 @@ func (s CreateEnvironmentMembershipOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEnvironmentMembershipOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMembership sets the Membership field's value.
-func (s *CreateEnvironmentMembershipOutput) SetMembership(v *EnvironmentMember) *CreateEnvironmentMembershipOutput {
-	s.Membership = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DeleteEnvironmentRequest
@@ -905,12 +833,6 @@ func (s *DeleteEnvironmentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *DeleteEnvironmentInput) SetEnvironmentId(v string) *DeleteEnvironmentInput {
-	s.EnvironmentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DeleteEnvironmentMembershipRequest
@@ -955,18 +877,6 @@ func (s *DeleteEnvironmentMembershipInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *DeleteEnvironmentMembershipInput) SetEnvironmentId(v string) *DeleteEnvironmentMembershipInput {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DeleteEnvironmentMembershipInput) SetUserArn(v string) *DeleteEnvironmentMembershipInput {
-	s.UserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DeleteEnvironmentMembershipResult
@@ -1059,36 +969,6 @@ func (s DescribeEnvironmentMembershipsInput) GoString() string {
 	return s.String()
 }
 
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *DescribeEnvironmentMembershipsInput) SetEnvironmentId(v string) *DescribeEnvironmentMembershipsInput {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEnvironmentMembershipsInput) SetMaxResults(v int64) *DescribeEnvironmentMembershipsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEnvironmentMembershipsInput) SetNextToken(v string) *DescribeEnvironmentMembershipsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPermissions sets the Permissions field's value.
-func (s *DescribeEnvironmentMembershipsInput) SetPermissions(v []Permissions) *DescribeEnvironmentMembershipsInput {
-	s.Permissions = v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *DescribeEnvironmentMembershipsInput) SetUserArn(v string) *DescribeEnvironmentMembershipsInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentMembershipsResult
 type DescribeEnvironmentMembershipsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1118,18 +998,6 @@ func (s DescribeEnvironmentMembershipsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEnvironmentMembershipsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMemberships sets the Memberships field's value.
-func (s *DescribeEnvironmentMembershipsOutput) SetMemberships(v []EnvironmentMember) *DescribeEnvironmentMembershipsOutput {
-	s.Memberships = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEnvironmentMembershipsOutput) SetNextToken(v string) *DescribeEnvironmentMembershipsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentStatusRequest
@@ -1164,12 +1032,6 @@ func (s *DescribeEnvironmentStatusInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *DescribeEnvironmentStatusInput) SetEnvironmentId(v string) *DescribeEnvironmentStatusInput {
-	s.EnvironmentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentStatusResult
@@ -1214,18 +1076,6 @@ func (s DescribeEnvironmentStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMessage sets the Message field's value.
-func (s *DescribeEnvironmentStatusOutput) SetMessage(v string) *DescribeEnvironmentStatusOutput {
-	s.Message = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeEnvironmentStatusOutput) SetStatus(v EnvironmentStatus) *DescribeEnvironmentStatusOutput {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentsRequest
 type DescribeEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
@@ -1263,12 +1113,6 @@ func (s *DescribeEnvironmentsInput) Validate() error {
 	return nil
 }
 
-// SetEnvironmentIds sets the EnvironmentIds field's value.
-func (s *DescribeEnvironmentsInput) SetEnvironmentIds(v []string) *DescribeEnvironmentsInput {
-	s.EnvironmentIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentsResult
 type DescribeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1292,12 +1136,6 @@ func (s DescribeEnvironmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEnvironmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEnvironments sets the Environments field's value.
-func (s *DescribeEnvironmentsOutput) SetEnvironments(v []Environment) *DescribeEnvironmentsOutput {
-	s.Environments = v
-	return s
 }
 
 // Information about an AWS Cloud9 development environment.
@@ -1337,42 +1175,6 @@ func (s Environment) String() string {
 // GoString returns the string representation
 func (s Environment) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Environment) SetArn(v string) *Environment {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Environment) SetDescription(v string) *Environment {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Environment) SetId(v string) *Environment {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Environment) SetName(v string) *Environment {
-	s.Name = &v
-	return s
-}
-
-// SetOwnerArn sets the OwnerArn field's value.
-func (s *Environment) SetOwnerArn(v string) *Environment {
-	s.OwnerArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Environment) SetType(v EnvironmentType) *Environment {
-	s.Type = v
-	return s
 }
 
 // Information about an environment member for an AWS Cloud9 development environment.
@@ -1415,36 +1217,6 @@ func (s EnvironmentMember) GoString() string {
 	return s.String()
 }
 
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *EnvironmentMember) SetEnvironmentId(v string) *EnvironmentMember {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetLastAccess sets the LastAccess field's value.
-func (s *EnvironmentMember) SetLastAccess(v time.Time) *EnvironmentMember {
-	s.LastAccess = &v
-	return s
-}
-
-// SetPermissions sets the Permissions field's value.
-func (s *EnvironmentMember) SetPermissions(v Permissions) *EnvironmentMember {
-	s.Permissions = v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *EnvironmentMember) SetUserArn(v string) *EnvironmentMember {
-	s.UserArn = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *EnvironmentMember) SetUserId(v string) *EnvironmentMember {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListEnvironmentsRequest
 type ListEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
@@ -1469,18 +1241,6 @@ func (s ListEnvironmentsInput) String() string {
 // GoString returns the string representation
 func (s ListEnvironmentsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListEnvironmentsInput) SetMaxResults(v int64) *ListEnvironmentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEnvironmentsInput) SetNextToken(v string) *ListEnvironmentsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListEnvironmentsResult
@@ -1512,18 +1272,6 @@ func (s ListEnvironmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListEnvironmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEnvironmentIds sets the EnvironmentIds field's value.
-func (s *ListEnvironmentsOutput) SetEnvironmentIds(v []string) *ListEnvironmentsOutput {
-	s.EnvironmentIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEnvironmentsOutput) SetNextToken(v string) *ListEnvironmentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentRequest
@@ -1567,24 +1315,6 @@ func (s *UpdateEnvironmentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateEnvironmentInput) SetDescription(v string) *UpdateEnvironmentInput {
-	s.Description = &v
-	return s
-}
-
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *UpdateEnvironmentInput) SetEnvironmentId(v string) *UpdateEnvironmentInput {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateEnvironmentInput) SetName(v string) *UpdateEnvironmentInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentMembershipRequest
@@ -1645,24 +1375,6 @@ func (s *UpdateEnvironmentMembershipInput) Validate() error {
 	return nil
 }
 
-// SetEnvironmentId sets the EnvironmentId field's value.
-func (s *UpdateEnvironmentMembershipInput) SetEnvironmentId(v string) *UpdateEnvironmentMembershipInput {
-	s.EnvironmentId = &v
-	return s
-}
-
-// SetPermissions sets the Permissions field's value.
-func (s *UpdateEnvironmentMembershipInput) SetPermissions(v MemberPermissions) *UpdateEnvironmentMembershipInput {
-	s.Permissions = v
-	return s
-}
-
-// SetUserArn sets the UserArn field's value.
-func (s *UpdateEnvironmentMembershipInput) SetUserArn(v string) *UpdateEnvironmentMembershipInput {
-	s.UserArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentMembershipResult
 type UpdateEnvironmentMembershipOutput struct {
 	_ struct{} `type:"structure"`
@@ -1686,12 +1398,6 @@ func (s UpdateEnvironmentMembershipOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEnvironmentMembershipOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMembership sets the Membership field's value.
-func (s *UpdateEnvironmentMembershipOutput) SetMembership(v *EnvironmentMember) *UpdateEnvironmentMembershipOutput {
-	s.Membership = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UpdateEnvironmentResult
