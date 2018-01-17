@@ -615,16 +615,6 @@ func (s {{ .ShapeName }}) SDKResponseMetadata() aws.Response {
 {{ range $_, $name := $context.MemberNames -}}
 	{{ $elem := index $context.MemberRefs $name -}}
 
-// Set{{ $name }} sets the {{ $name }} field's value.
-func (s *{{ $builderShapeName }}) Set{{ $name }}(v {{ $context.GoStructValueType $name $elem }}) *{{ $builderShapeName }} {
-	{{ if $elem.UseIndirection -}}
-	s.{{ $name }} = &v
-	{{ else -}}
-	s.{{ $name }} = v
-	{{ end -}}
-	return s
-}
-
 {{ if $elem.GenerateGetter -}}
 func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $context.GoStructValueType $name $elem }}) {
 	{{ if $elem.UseIndirection -}}

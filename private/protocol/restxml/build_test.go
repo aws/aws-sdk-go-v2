@@ -255,18 +255,6 @@ type InputService1TestShapeInputService1TestCaseOperation2Input struct {
 	Name *string `type:"string"`
 }
 
-// SetDescription sets the Description field's value.
-func (s *InputService1TestShapeInputService1TestCaseOperation2Input) SetDescription(v string) *InputService1TestShapeInputService1TestCaseOperation2Input {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *InputService1TestShapeInputService1TestCaseOperation2Input) SetName(v string) *InputService1TestShapeInputService1TestCaseOperation2Input {
-	s.Name = &v
-	return s
-}
-
 type InputService1TestShapeInputService1TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
@@ -404,30 +392,6 @@ type InputService2TestShapeInputService2TestCaseOperation1Input struct {
 	Second *bool `type:"boolean"`
 
 	Third *float64 `type:"float"`
-}
-
-// SetFirst sets the First field's value.
-func (s *InputService2TestShapeInputService2TestCaseOperation1Input) SetFirst(v bool) *InputService2TestShapeInputService2TestCaseOperation1Input {
-	s.First = &v
-	return s
-}
-
-// SetFourth sets the Fourth field's value.
-func (s *InputService2TestShapeInputService2TestCaseOperation1Input) SetFourth(v int64) *InputService2TestShapeInputService2TestCaseOperation1Input {
-	s.Fourth = &v
-	return s
-}
-
-// SetSecond sets the Second field's value.
-func (s *InputService2TestShapeInputService2TestCaseOperation1Input) SetSecond(v bool) *InputService2TestShapeInputService2TestCaseOperation1Input {
-	s.Second = &v
-	return s
-}
-
-// SetThird sets the Third field's value.
-func (s *InputService2TestShapeInputService2TestCaseOperation1Input) SetThird(v float64) *InputService2TestShapeInputService2TestCaseOperation1Input {
-	s.Third = &v
-	return s
 }
 
 type InputService2TestShapeInputService2TestCaseOperation1Output struct {
@@ -608,18 +572,6 @@ type InputService3TestShapeInputService3TestCaseOperation2Input struct {
 	SubStructure *InputService3TestShapeSubStructure `type:"structure"`
 }
 
-// SetDescription sets the Description field's value.
-func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetDescription(v string) *InputService3TestShapeInputService3TestCaseOperation2Input {
-	s.Description = &v
-	return s
-}
-
-// SetSubStructure sets the SubStructure field's value.
-func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetSubStructure(v *InputService3TestShapeSubStructure) *InputService3TestShapeInputService3TestCaseOperation2Input {
-	s.SubStructure = v
-	return s
-}
-
 type InputService3TestShapeInputService3TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
@@ -637,18 +589,6 @@ type InputService3TestShapeSubStructure struct {
 	Bar *string `type:"string"`
 
 	Foo *string `type:"string"`
-}
-
-// SetBar sets the Bar field's value.
-func (s *InputService3TestShapeSubStructure) SetBar(v string) *InputService3TestShapeSubStructure {
-	s.Bar = &v
-	return s
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService3TestShapeSubStructure) SetFoo(v string) *InputService3TestShapeSubStructure {
-	s.Foo = &v
-	return s
 }
 
 // InputService4ProtocolTest provides the API operation methods for making requests to
@@ -760,18 +700,6 @@ type InputService4TestShapeInputService4TestCaseOperation1Input struct {
 	SubStructure *InputService4TestShapeSubStructure `type:"structure"`
 }
 
-// SetDescription sets the Description field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetDescription(v string) *InputService4TestShapeInputService4TestCaseOperation1Input {
-	s.Description = &v
-	return s
-}
-
-// SetSubStructure sets the SubStructure field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetSubStructure(v *InputService4TestShapeSubStructure) *InputService4TestShapeInputService4TestCaseOperation1Input {
-	s.SubStructure = v
-	return s
-}
-
 type InputService4TestShapeInputService4TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -789,18 +717,6 @@ type InputService4TestShapeSubStructure struct {
 	Bar *string `type:"string"`
 
 	Foo *string `type:"string"`
-}
-
-// SetBar sets the Bar field's value.
-func (s *InputService4TestShapeSubStructure) SetBar(v string) *InputService4TestShapeSubStructure {
-	s.Bar = &v
-	return s
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService4TestShapeSubStructure) SetFoo(v string) *InputService4TestShapeSubStructure {
-	s.Foo = &v
-	return s
 }
 
 // InputService5ProtocolTest provides the API operation methods for making requests to
@@ -908,12 +824,6 @@ type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
 	ListParam []string `type:"list"`
-}
-
-// SetListParam sets the ListParam field's value.
-func (s *InputService5TestShapeInputService5TestCaseOperation1Input) SetListParam(v []string) *InputService5TestShapeInputService5TestCaseOperation1Input {
-	s.ListParam = v
-	return s
 }
 
 type InputService5TestShapeInputService5TestCaseOperation1Output struct {
@@ -1034,12 +944,6 @@ type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 	ListParam []string `locationName:"AlternateName" locationNameList:"NotMember" type:"list"`
 }
 
-// SetListParam sets the ListParam field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetListParam(v []string) *InputService6TestShapeInputService6TestCaseOperation1Input {
-	s.ListParam = v
-	return s
-}
-
 type InputService6TestShapeInputService6TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1156,12 +1060,6 @@ type InputService7TestShapeInputService7TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
 	ListParam []string `type:"list" flattened:"true"`
-}
-
-// SetListParam sets the ListParam field's value.
-func (s *InputService7TestShapeInputService7TestCaseOperation1Input) SetListParam(v []string) *InputService7TestShapeInputService7TestCaseOperation1Input {
-	s.ListParam = v
-	return s
 }
 
 type InputService7TestShapeInputService7TestCaseOperation1Output struct {
@@ -1282,12 +1180,6 @@ type InputService8TestShapeInputService8TestCaseOperation1Input struct {
 	ListParam []string `locationName:"item" type:"list" flattened:"true"`
 }
 
-// SetListParam sets the ListParam field's value.
-func (s *InputService8TestShapeInputService8TestCaseOperation1Input) SetListParam(v []string) *InputService8TestShapeInputService8TestCaseOperation1Input {
-	s.ListParam = v
-	return s
-}
-
 type InputService8TestShapeInputService8TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1406,12 +1298,6 @@ type InputService9TestShapeInputService9TestCaseOperation1Input struct {
 	ListParam []InputService9TestShapeSingleFieldStruct `locationName:"item" type:"list" flattened:"true"`
 }
 
-// SetListParam sets the ListParam field's value.
-func (s *InputService9TestShapeInputService9TestCaseOperation1Input) SetListParam(v []InputService9TestShapeSingleFieldStruct) *InputService9TestShapeInputService9TestCaseOperation1Input {
-	s.ListParam = v
-	return s
-}
-
 type InputService9TestShapeInputService9TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1427,12 +1313,6 @@ type InputService9TestShapeSingleFieldStruct struct {
 	_ struct{} `type:"structure"`
 
 	Element *string `locationName:"value" type:"string"`
-}
-
-// SetElement sets the Element field's value.
-func (s *InputService9TestShapeSingleFieldStruct) SetElement(v string) *InputService9TestShapeSingleFieldStruct {
-	s.Element = &v
-	return s
 }
 
 // InputService10ProtocolTest provides the API operation methods for making requests to
@@ -1542,12 +1422,6 @@ type InputService10TestShapeInputService10TestCaseOperation1Input struct {
 	StructureParam *InputService10TestShapeStructureShape `type:"structure"`
 }
 
-// SetStructureParam sets the StructureParam field's value.
-func (s *InputService10TestShapeInputService10TestCaseOperation1Input) SetStructureParam(v *InputService10TestShapeStructureShape) *InputService10TestShapeInputService10TestCaseOperation1Input {
-	s.StructureParam = v
-	return s
-}
-
 type InputService10TestShapeInputService10TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1566,18 +1440,6 @@ type InputService10TestShapeStructureShape struct {
 	B []byte `locationName:"b" type:"blob"`
 
 	T *time.Time `locationName:"t" type:"timestamp" timestampFormat:"iso8601"`
-}
-
-// SetB sets the B field's value.
-func (s *InputService10TestShapeStructureShape) SetB(v []byte) *InputService10TestShapeStructureShape {
-	s.B = v
-	return s
-}
-
-// SetT sets the T field's value.
-func (s *InputService10TestShapeStructureShape) SetT(v time.Time) *InputService10TestShapeStructureShape {
-	s.T = &v
-	return s
 }
 
 // InputService11ProtocolTest provides the API operation methods for making requests to
@@ -1685,12 +1547,6 @@ type InputService11TestShapeInputService11TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
 	Foo map[string]string `location:"headers" locationName:"x-foo-" type:"map"`
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService11TestShapeInputService11TestCaseOperation1Input) SetFoo(v map[string]string) *InputService11TestShapeInputService11TestCaseOperation1Input {
-	s.Foo = v
-	return s
 }
 
 type InputService11TestShapeInputService11TestCaseOperation1Output struct {
@@ -1809,12 +1665,6 @@ type InputService12TestShapeInputService12TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
 	Items []string `location:"querystring" locationName:"item" type:"list"`
-}
-
-// SetItems sets the Items field's value.
-func (s *InputService12TestShapeInputService12TestCaseOperation1Input) SetItems(v []string) *InputService12TestShapeInputService12TestCaseOperation1Input {
-	s.Items = v
-	return s
 }
 
 type InputService12TestShapeInputService12TestCaseOperation1Output struct {
@@ -1937,18 +1787,6 @@ type InputService13TestShapeInputService13TestCaseOperation1Input struct {
 	QueryDoc map[string]string `location:"querystring" type:"map"`
 }
 
-// SetPipelineId sets the PipelineId field's value.
-func (s *InputService13TestShapeInputService13TestCaseOperation1Input) SetPipelineId(v string) *InputService13TestShapeInputService13TestCaseOperation1Input {
-	s.PipelineId = &v
-	return s
-}
-
-// SetQueryDoc sets the QueryDoc field's value.
-func (s *InputService13TestShapeInputService13TestCaseOperation1Input) SetQueryDoc(v map[string]string) *InputService13TestShapeInputService13TestCaseOperation1Input {
-	s.QueryDoc = v
-	return s
-}
-
 type InputService13TestShapeInputService13TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -2067,18 +1905,6 @@ type InputService14TestShapeInputService14TestCaseOperation1Input struct {
 	PipelineId *string `location:"uri" type:"string"`
 
 	QueryDoc map[string][]string `location:"querystring" type:"map"`
-}
-
-// SetPipelineId sets the PipelineId field's value.
-func (s *InputService14TestShapeInputService14TestCaseOperation1Input) SetPipelineId(v string) *InputService14TestShapeInputService14TestCaseOperation1Input {
-	s.PipelineId = &v
-	return s
-}
-
-// SetQueryDoc sets the QueryDoc field's value.
-func (s *InputService14TestShapeInputService14TestCaseOperation1Input) SetQueryDoc(v map[string][]string) *InputService14TestShapeInputService14TestCaseOperation1Input {
-	s.QueryDoc = v
-	return s
 }
 
 type InputService14TestShapeInputService14TestCaseOperation1Output struct {
@@ -2257,12 +2083,6 @@ type InputService15TestShapeInputService15TestCaseOperation2Input struct {
 	BoolQuery *bool `location:"querystring" locationName:"bool-query" type:"boolean"`
 }
 
-// SetBoolQuery sets the BoolQuery field's value.
-func (s *InputService15TestShapeInputService15TestCaseOperation2Input) SetBoolQuery(v bool) *InputService15TestShapeInputService15TestCaseOperation2Input {
-	s.BoolQuery = &v
-	return s
-}
-
 type InputService15TestShapeInputService15TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
@@ -2379,12 +2199,6 @@ type InputService16TestShapeInputService16TestCaseOperation1Input struct {
 	_ struct{} `type:"structure" payload:"Foo"`
 
 	Foo *string `locationName:"foo" type:"string"`
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService16TestShapeInputService16TestCaseOperation1Input) SetFoo(v string) *InputService16TestShapeInputService16TestCaseOperation1Input {
-	s.Foo = &v
-	return s
 }
 
 type InputService16TestShapeInputService16TestCaseOperation1Output struct {
@@ -2561,12 +2375,6 @@ type InputService17TestShapeInputService17TestCaseOperation2Input struct {
 	_ struct{} `type:"structure" payload:"Foo"`
 
 	Foo []byte `locationName:"foo" type:"blob"`
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService17TestShapeInputService17TestCaseOperation2Input) SetFoo(v []byte) *InputService17TestShapeInputService17TestCaseOperation2Input {
-	s.Foo = v
-	return s
 }
 
 type InputService17TestShapeInputService17TestCaseOperation2Output struct {
@@ -2828,12 +2636,6 @@ type InputService18TestShapeFooShape struct {
 	Baz *string `locationName:"baz" type:"string"`
 }
 
-// SetBaz sets the Baz field's value.
-func (s *InputService18TestShapeFooShape) SetBaz(v string) *InputService18TestShapeFooShape {
-	s.Baz = &v
-	return s
-}
-
 type InputService18TestShapeInputService18TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -2871,12 +2673,6 @@ type InputService18TestShapeInputService18TestCaseOperation4Input struct {
 	_ struct{} `type:"structure" payload:"Foo"`
 
 	Foo *InputService18TestShapeFooShape `locationName:"foo" type:"structure"`
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService18TestShapeInputService18TestCaseOperation4Input) SetFoo(v *InputService18TestShapeFooShape) *InputService18TestShapeInputService18TestCaseOperation4Input {
-	s.Foo = v
-	return s
 }
 
 type InputService18TestShapeInputService18TestCaseOperation4Output struct {
@@ -2997,12 +2793,6 @@ type InputService19TestShapeGrant struct {
 	Grantee *InputService19TestShapeGrantee `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 }
 
-// SetGrantee sets the Grantee field's value.
-func (s *InputService19TestShapeGrant) SetGrantee(v *InputService19TestShapeGrantee) *InputService19TestShapeGrant {
-	s.Grantee = v
-	return s
-}
-
 type InputService19TestShapeGrantee struct {
 	_ struct{} `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
@@ -3011,28 +2801,10 @@ type InputService19TestShapeGrantee struct {
 	Type *string `locationName:"xsi:type" type:"string" xmlAttribute:"true"`
 }
 
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *InputService19TestShapeGrantee) SetEmailAddress(v string) *InputService19TestShapeGrantee {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *InputService19TestShapeGrantee) SetType(v string) *InputService19TestShapeGrantee {
-	s.Type = &v
-	return s
-}
-
 type InputService19TestShapeInputService19TestCaseOperation1Input struct {
 	_ struct{} `type:"structure" payload:"Grant"`
 
 	Grant *InputService19TestShapeGrant `locationName:"Grant" type:"structure"`
-}
-
-// SetGrant sets the Grant field's value.
-func (s *InputService19TestShapeInputService19TestCaseOperation1Input) SetGrant(v *InputService19TestShapeGrant) *InputService19TestShapeInputService19TestCaseOperation1Input {
-	s.Grant = v
-	return s
 }
 
 type InputService19TestShapeInputService19TestCaseOperation1Output struct {
@@ -3153,18 +2925,6 @@ type InputService20TestShapeInputService20TestCaseOperation1Input struct {
 	Bucket *string `location:"uri" type:"string"`
 
 	Key *string `location:"uri" type:"string"`
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *InputService20TestShapeInputService20TestCaseOperation1Input) SetBucket(v string) *InputService20TestShapeInputService20TestCaseOperation1Input {
-	s.Bucket = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *InputService20TestShapeInputService20TestCaseOperation1Input) SetKey(v string) *InputService20TestShapeInputService20TestCaseOperation1Input {
-	s.Key = &v
-	return s
 }
 
 type InputService20TestShapeInputService20TestCaseOperation1Output struct {
@@ -3341,12 +3101,6 @@ type InputService21TestShapeInputService21TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
 	Foo *string `location:"querystring" locationName:"param-name" type:"string"`
-}
-
-// SetFoo sets the Foo field's value.
-func (s *InputService21TestShapeInputService21TestCaseOperation2Input) SetFoo(v string) *InputService21TestShapeInputService21TestCaseOperation2Input {
-	s.Foo = &v
-	return s
 }
 
 type InputService21TestShapeInputService21TestCaseOperation2Output struct {
@@ -3757,12 +3511,6 @@ type InputService22TestShapeInputService22TestCaseOperation6Input struct {
 	RecursiveStruct *InputService22TestShapeRecursiveStructType `type:"structure"`
 }
 
-// SetRecursiveStruct sets the RecursiveStruct field's value.
-func (s *InputService22TestShapeInputService22TestCaseOperation6Input) SetRecursiveStruct(v *InputService22TestShapeRecursiveStructType) *InputService22TestShapeInputService22TestCaseOperation6Input {
-	s.RecursiveStruct = v
-	return s
-}
-
 type InputService22TestShapeInputService22TestCaseOperation6Output struct {
 	_ struct{} `type:"structure"`
 
@@ -3784,30 +3532,6 @@ type InputService22TestShapeRecursiveStructType struct {
 	RecursiveMap map[string]InputService22TestShapeRecursiveStructType `type:"map"`
 
 	RecursiveStruct *InputService22TestShapeRecursiveStructType `type:"structure"`
-}
-
-// SetNoRecurse sets the NoRecurse field's value.
-func (s *InputService22TestShapeRecursiveStructType) SetNoRecurse(v string) *InputService22TestShapeRecursiveStructType {
-	s.NoRecurse = &v
-	return s
-}
-
-// SetRecursiveList sets the RecursiveList field's value.
-func (s *InputService22TestShapeRecursiveStructType) SetRecursiveList(v []InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
-	s.RecursiveList = v
-	return s
-}
-
-// SetRecursiveMap sets the RecursiveMap field's value.
-func (s *InputService22TestShapeRecursiveStructType) SetRecursiveMap(v map[string]InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
-	s.RecursiveMap = v
-	return s
-}
-
-// SetRecursiveStruct sets the RecursiveStruct field's value.
-func (s *InputService22TestShapeRecursiveStructType) SetRecursiveStruct(v *InputService22TestShapeRecursiveStructType) *InputService22TestShapeRecursiveStructType {
-	s.RecursiveStruct = v
-	return s
 }
 
 // InputService23ProtocolTest provides the API operation methods for making requests to
@@ -3915,12 +3639,6 @@ type InputService23TestShapeInputService23TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
 	TimeArgInHeader *time.Time `location:"header" locationName:"x-amz-timearg" type:"timestamp" timestampFormat:"rfc822"`
-}
-
-// SetTimeArgInHeader sets the TimeArgInHeader field's value.
-func (s *InputService23TestShapeInputService23TestCaseOperation1Input) SetTimeArgInHeader(v time.Time) *InputService23TestShapeInputService23TestCaseOperation1Input {
-	s.TimeArgInHeader = &v
-	return s
 }
 
 type InputService23TestShapeInputService23TestCaseOperation1Output struct {
@@ -4097,12 +3815,6 @@ type InputService24TestShapeInputService24TestCaseOperation2Input struct {
 	_ struct{} `type:"structure"`
 
 	Token *string `type:"string" idempotencyToken:"true"`
-}
-
-// SetToken sets the Token field's value.
-func (s *InputService24TestShapeInputService24TestCaseOperation2Input) SetToken(v string) *InputService24TestShapeInputService24TestCaseOperation2Input {
-	s.Token = &v
-	return s
 }
 
 type InputService24TestShapeInputService24TestCaseOperation2Output struct {
@@ -4287,36 +3999,6 @@ type InputService25TestShapeInputService25TestCaseOperation2Input struct {
 	URIFooEnum InputService25TestShapeEnumType `location:"uri" locationName:"URIEnum" type:"string" enum:"true"`
 
 	URIListEnums []InputService25TestShapeEnumType `location:"querystring" locationName:"ListEnums" type:"list"`
-}
-
-// SetFooEnum sets the FooEnum field's value.
-func (s *InputService25TestShapeInputService25TestCaseOperation2Input) SetFooEnum(v InputService25TestShapeEnumType) *InputService25TestShapeInputService25TestCaseOperation2Input {
-	s.FooEnum = v
-	return s
-}
-
-// SetHeaderEnum sets the HeaderEnum field's value.
-func (s *InputService25TestShapeInputService25TestCaseOperation2Input) SetHeaderEnum(v InputService25TestShapeEnumType) *InputService25TestShapeInputService25TestCaseOperation2Input {
-	s.HeaderEnum = v
-	return s
-}
-
-// SetListEnums sets the ListEnums field's value.
-func (s *InputService25TestShapeInputService25TestCaseOperation2Input) SetListEnums(v []InputService25TestShapeEnumType) *InputService25TestShapeInputService25TestCaseOperation2Input {
-	s.ListEnums = v
-	return s
-}
-
-// SetURIFooEnum sets the URIFooEnum field's value.
-func (s *InputService25TestShapeInputService25TestCaseOperation2Input) SetURIFooEnum(v InputService25TestShapeEnumType) *InputService25TestShapeInputService25TestCaseOperation2Input {
-	s.URIFooEnum = v
-	return s
-}
-
-// SetURIListEnums sets the URIListEnums field's value.
-func (s *InputService25TestShapeInputService25TestCaseOperation2Input) SetURIListEnums(v []InputService25TestShapeEnumType) *InputService25TestShapeInputService25TestCaseOperation2Input {
-	s.URIListEnums = v
-	return s
 }
 
 type InputService25TestShapeInputService25TestCaseOperation2Output struct {
