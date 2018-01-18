@@ -8,6 +8,8 @@ import (
 )
 
 func TestDeepEqual(t *testing.T) {
+	type StringAlias string
+
 	cases := []struct {
 		a, b  interface{}
 		equal bool
@@ -20,6 +22,12 @@ func TestDeepEqual(t *testing.T) {
 		{(*bool)(nil), (*bool)(nil), true},
 		{(*bool)(nil), (*string)(nil), false},
 		{nil, nil, true},
+		{StringAlias("abc"), "abc", true},
+		{StringAlias("abc"), "efg", false},
+		{StringAlias("abc"), aws.String("abc"), true},
+		{"abc", StringAlias("abc"), true},
+		{StringAlias("abc"), StringAlias("abc"), true},
+		{StringAlias("abc"), StringAlias("efg"), false},
 	}
 
 	for i, c := range cases {
