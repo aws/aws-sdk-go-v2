@@ -1724,18 +1724,6 @@ func (s *AddTagsToStreamInput) Validate() error {
 	return nil
 }
 
-// SetStreamName sets the StreamName field's value.
-func (s *AddTagsToStreamInput) SetStreamName(v string) *AddTagsToStreamInput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsToStreamInput) SetTags(v map[string]string) *AddTagsToStreamInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStreamOutput
 type AddTagsToStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1816,18 +1804,6 @@ func (s *CreateStreamInput) Validate() error {
 	return nil
 }
 
-// SetShardCount sets the ShardCount field's value.
-func (s *CreateStreamInput) SetShardCount(v int64) *CreateStreamInput {
-	s.ShardCount = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *CreateStreamInput) SetStreamName(v string) *CreateStreamInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamOutput
 type CreateStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1901,18 +1877,6 @@ func (s *DecreaseStreamRetentionPeriodInput) Validate() error {
 	return nil
 }
 
-// SetRetentionPeriodHours sets the RetentionPeriodHours field's value.
-func (s *DecreaseStreamRetentionPeriodInput) SetRetentionPeriodHours(v int64) *DecreaseStreamRetentionPeriodInput {
-	s.RetentionPeriodHours = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *DecreaseStreamRetentionPeriodInput) SetStreamName(v string) *DecreaseStreamRetentionPeriodInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriodOutput
 type DecreaseStreamRetentionPeriodOutput struct {
 	_ struct{} `type:"structure"`
@@ -1971,12 +1935,6 @@ func (s *DeleteStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *DeleteStreamInput) SetStreamName(v string) *DeleteStreamInput {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStreamOutput
@@ -2048,18 +2006,6 @@ func (s DescribeLimitsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetOpenShardCount sets the OpenShardCount field's value.
-func (s *DescribeLimitsOutput) SetOpenShardCount(v int64) *DescribeLimitsOutput {
-	s.OpenShardCount = &v
-	return s
-}
-
-// SetShardLimit sets the ShardLimit field's value.
-func (s *DescribeLimitsOutput) SetShardLimit(v int64) *DescribeLimitsOutput {
-	s.ShardLimit = &v
-	return s
-}
-
 // Represents the input for DescribeStream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamInput
 type DescribeStreamInput struct {
@@ -2111,24 +2057,6 @@ func (s *DescribeStreamInput) Validate() error {
 	return nil
 }
 
-// SetExclusiveStartShardId sets the ExclusiveStartShardId field's value.
-func (s *DescribeStreamInput) SetExclusiveStartShardId(v string) *DescribeStreamInput {
-	s.ExclusiveStartShardId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeStreamInput) SetLimit(v int64) *DescribeStreamInput {
-	s.Limit = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *DescribeStreamInput) SetStreamName(v string) *DescribeStreamInput {
-	s.StreamName = &v
-	return s
-}
-
 // Represents the output for DescribeStream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamOutput
 type DescribeStreamOutput struct {
@@ -2156,12 +2084,6 @@ func (s DescribeStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStreamDescription sets the StreamDescription field's value.
-func (s *DescribeStreamOutput) SetStreamDescription(v *StreamDescription) *DescribeStreamOutput {
-	s.StreamDescription = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummaryInput
@@ -2201,12 +2123,6 @@ func (s *DescribeStreamSummaryInput) Validate() error {
 	return nil
 }
 
-// SetStreamName sets the StreamName field's value.
-func (s *DescribeStreamSummaryInput) SetStreamName(v string) *DescribeStreamSummaryInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummaryOutput
 type DescribeStreamSummaryOutput struct {
 	_ struct{} `type:"structure"`
@@ -2232,12 +2148,6 @@ func (s DescribeStreamSummaryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStreamSummaryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStreamDescriptionSummary sets the StreamDescriptionSummary field's value.
-func (s *DescribeStreamSummaryOutput) SetStreamDescriptionSummary(v *StreamDescriptionSummary) *DescribeStreamSummaryOutput {
-	s.StreamDescriptionSummary = v
-	return s
 }
 
 // Represents the input for DisableEnhancedMonitoring.
@@ -2313,18 +2223,6 @@ func (s *DisableEnhancedMonitoringInput) Validate() error {
 	return nil
 }
 
-// SetShardLevelMetrics sets the ShardLevelMetrics field's value.
-func (s *DisableEnhancedMonitoringInput) SetShardLevelMetrics(v []MetricsName) *DisableEnhancedMonitoringInput {
-	s.ShardLevelMetrics = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *DisableEnhancedMonitoringInput) SetStreamName(v string) *DisableEnhancedMonitoringInput {
-	s.StreamName = &v
-	return s
-}
-
 // Represents the input for EnableEnhancedMonitoring.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoringInput
 type EnableEnhancedMonitoringInput struct {
@@ -2398,18 +2296,6 @@ func (s *EnableEnhancedMonitoringInput) Validate() error {
 	return nil
 }
 
-// SetShardLevelMetrics sets the ShardLevelMetrics field's value.
-func (s *EnableEnhancedMonitoringInput) SetShardLevelMetrics(v []MetricsName) *EnableEnhancedMonitoringInput {
-	s.ShardLevelMetrics = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *EnableEnhancedMonitoringInput) SetStreamName(v string) *EnableEnhancedMonitoringInput {
-	s.StreamName = &v
-	return s
-}
-
 // Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoringOutput
 type EnableEnhancedMonitoringOutput struct {
@@ -2442,24 +2328,6 @@ func (s EnableEnhancedMonitoringOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EnableEnhancedMonitoringOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCurrentShardLevelMetrics sets the CurrentShardLevelMetrics field's value.
-func (s *EnableEnhancedMonitoringOutput) SetCurrentShardLevelMetrics(v []MetricsName) *EnableEnhancedMonitoringOutput {
-	s.CurrentShardLevelMetrics = v
-	return s
-}
-
-// SetDesiredShardLevelMetrics sets the DesiredShardLevelMetrics field's value.
-func (s *EnableEnhancedMonitoringOutput) SetDesiredShardLevelMetrics(v []MetricsName) *EnableEnhancedMonitoringOutput {
-	s.DesiredShardLevelMetrics = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *EnableEnhancedMonitoringOutput) SetStreamName(v string) *EnableEnhancedMonitoringOutput {
-	s.StreamName = &v
-	return s
 }
 
 // Represents enhanced metrics types.
@@ -2502,12 +2370,6 @@ func (s EnhancedMetrics) String() string {
 // GoString returns the string representation
 func (s EnhancedMetrics) GoString() string {
 	return s.String()
-}
-
-// SetShardLevelMetrics sets the ShardLevelMetrics field's value.
-func (s *EnhancedMetrics) SetShardLevelMetrics(v []MetricsName) *EnhancedMetrics {
-	s.ShardLevelMetrics = v
-	return s
 }
 
 // Represents the input for GetRecords.
@@ -2557,18 +2419,6 @@ func (s *GetRecordsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *GetRecordsInput) SetLimit(v int64) *GetRecordsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetShardIterator sets the ShardIterator field's value.
-func (s *GetRecordsInput) SetShardIterator(v string) *GetRecordsInput {
-	s.ShardIterator = &v
-	return s
-}
-
 // Represents the output for GetRecords.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsOutput
 type GetRecordsOutput struct {
@@ -2606,24 +2456,6 @@ func (s GetRecordsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRecordsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMillisBehindLatest sets the MillisBehindLatest field's value.
-func (s *GetRecordsOutput) SetMillisBehindLatest(v int64) *GetRecordsOutput {
-	s.MillisBehindLatest = &v
-	return s
-}
-
-// SetNextShardIterator sets the NextShardIterator field's value.
-func (s *GetRecordsOutput) SetNextShardIterator(v string) *GetRecordsOutput {
-	s.NextShardIterator = &v
-	return s
-}
-
-// SetRecords sets the Records field's value.
-func (s *GetRecordsOutput) SetRecords(v []Record) *GetRecordsOutput {
-	s.Records = v
-	return s
 }
 
 // Represents the input for GetShardIterator.
@@ -2715,36 +2547,6 @@ func (s *GetShardIteratorInput) Validate() error {
 	return nil
 }
 
-// SetShardId sets the ShardId field's value.
-func (s *GetShardIteratorInput) SetShardId(v string) *GetShardIteratorInput {
-	s.ShardId = &v
-	return s
-}
-
-// SetShardIteratorType sets the ShardIteratorType field's value.
-func (s *GetShardIteratorInput) SetShardIteratorType(v ShardIteratorType) *GetShardIteratorInput {
-	s.ShardIteratorType = v
-	return s
-}
-
-// SetStartingSequenceNumber sets the StartingSequenceNumber field's value.
-func (s *GetShardIteratorInput) SetStartingSequenceNumber(v string) *GetShardIteratorInput {
-	s.StartingSequenceNumber = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *GetShardIteratorInput) SetStreamName(v string) *GetShardIteratorInput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *GetShardIteratorInput) SetTimestamp(v time.Time) *GetShardIteratorInput {
-	s.Timestamp = &v
-	return s
-}
-
 // Represents the output for GetShardIterator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIteratorOutput
 type GetShardIteratorOutput struct {
@@ -2773,12 +2575,6 @@ func (s GetShardIteratorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetShardIterator sets the ShardIterator field's value.
-func (s *GetShardIteratorOutput) SetShardIterator(v string) *GetShardIteratorOutput {
-	s.ShardIterator = &v
-	return s
-}
-
 // The range of possible hash key values for the shard, which is a set of ordered
 // contiguous positive integers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/HashKeyRange
@@ -2804,18 +2600,6 @@ func (s HashKeyRange) String() string {
 // GoString returns the string representation
 func (s HashKeyRange) GoString() string {
 	return s.String()
-}
-
-// SetEndingHashKey sets the EndingHashKey field's value.
-func (s *HashKeyRange) SetEndingHashKey(v string) *HashKeyRange {
-	s.EndingHashKey = &v
-	return s
-}
-
-// SetStartingHashKey sets the StartingHashKey field's value.
-func (s *HashKeyRange) SetStartingHashKey(v string) *HashKeyRange {
-	s.StartingHashKey = &v
-	return s
 }
 
 // Represents the input for IncreaseStreamRetentionPeriod.
@@ -2867,18 +2651,6 @@ func (s *IncreaseStreamRetentionPeriodInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRetentionPeriodHours sets the RetentionPeriodHours field's value.
-func (s *IncreaseStreamRetentionPeriodInput) SetRetentionPeriodHours(v int64) *IncreaseStreamRetentionPeriodInput {
-	s.RetentionPeriodHours = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *IncreaseStreamRetentionPeriodInput) SetStreamName(v string) *IncreaseStreamRetentionPeriodInput {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriodOutput
@@ -2941,18 +2713,6 @@ func (s *ListStreamsInput) Validate() error {
 	return nil
 }
 
-// SetExclusiveStartStreamName sets the ExclusiveStartStreamName field's value.
-func (s *ListStreamsInput) SetExclusiveStartStreamName(v string) *ListStreamsInput {
-	s.ExclusiveStartStreamName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListStreamsInput) SetLimit(v int64) *ListStreamsInput {
-	s.Limit = &v
-	return s
-}
-
 // Represents the output for ListStreams.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamsOutput
 type ListStreamsOutput struct {
@@ -2985,18 +2745,6 @@ func (s ListStreamsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStreamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHasMoreStreams sets the HasMoreStreams field's value.
-func (s *ListStreamsOutput) SetHasMoreStreams(v bool) *ListStreamsOutput {
-	s.HasMoreStreams = &v
-	return s
-}
-
-// SetStreamNames sets the StreamNames field's value.
-func (s *ListStreamsOutput) SetStreamNames(v []string) *ListStreamsOutput {
-	s.StreamNames = v
-	return s
 }
 
 // Represents the input for ListTagsForStream.
@@ -3052,24 +2800,6 @@ func (s *ListTagsForStreamInput) Validate() error {
 	return nil
 }
 
-// SetExclusiveStartTagKey sets the ExclusiveStartTagKey field's value.
-func (s *ListTagsForStreamInput) SetExclusiveStartTagKey(v string) *ListTagsForStreamInput {
-	s.ExclusiveStartTagKey = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListTagsForStreamInput) SetLimit(v int64) *ListTagsForStreamInput {
-	s.Limit = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *ListTagsForStreamInput) SetStreamName(v string) *ListTagsForStreamInput {
-	s.StreamName = &v
-	return s
-}
-
 // Represents the output for ListTagsForStream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStreamOutput
 type ListTagsForStreamOutput struct {
@@ -3103,18 +2833,6 @@ func (s ListTagsForStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHasMoreTags sets the HasMoreTags field's value.
-func (s *ListTagsForStreamOutput) SetHasMoreTags(v bool) *ListTagsForStreamOutput {
-	s.HasMoreTags = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForStreamOutput) SetTags(v []Tag) *ListTagsForStreamOutput {
-	s.Tags = v
-	return s
 }
 
 // Represents the input for MergeShards.
@@ -3177,24 +2895,6 @@ func (s *MergeShardsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAdjacentShardToMerge sets the AdjacentShardToMerge field's value.
-func (s *MergeShardsInput) SetAdjacentShardToMerge(v string) *MergeShardsInput {
-	s.AdjacentShardToMerge = &v
-	return s
-}
-
-// SetShardToMerge sets the ShardToMerge field's value.
-func (s *MergeShardsInput) SetShardToMerge(v string) *MergeShardsInput {
-	s.ShardToMerge = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *MergeShardsInput) SetStreamName(v string) *MergeShardsInput {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShardsOutput
@@ -3301,36 +3001,6 @@ func (s *PutRecordInput) Validate() error {
 	return nil
 }
 
-// SetData sets the Data field's value.
-func (s *PutRecordInput) SetData(v []byte) *PutRecordInput {
-	s.Data = v
-	return s
-}
-
-// SetExplicitHashKey sets the ExplicitHashKey field's value.
-func (s *PutRecordInput) SetExplicitHashKey(v string) *PutRecordInput {
-	s.ExplicitHashKey = &v
-	return s
-}
-
-// SetPartitionKey sets the PartitionKey field's value.
-func (s *PutRecordInput) SetPartitionKey(v string) *PutRecordInput {
-	s.PartitionKey = &v
-	return s
-}
-
-// SetSequenceNumberForOrdering sets the SequenceNumberForOrdering field's value.
-func (s *PutRecordInput) SetSequenceNumberForOrdering(v string) *PutRecordInput {
-	s.SequenceNumberForOrdering = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *PutRecordInput) SetStreamName(v string) *PutRecordInput {
-	s.StreamName = &v
-	return s
-}
-
 // Represents the output for PutRecord.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordOutput
 type PutRecordOutput struct {
@@ -3374,24 +3044,6 @@ func (s PutRecordOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRecordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *PutRecordOutput) SetEncryptionType(v EncryptionType) *PutRecordOutput {
-	s.EncryptionType = v
-	return s
-}
-
-// SetSequenceNumber sets the SequenceNumber field's value.
-func (s *PutRecordOutput) SetSequenceNumber(v string) *PutRecordOutput {
-	s.SequenceNumber = &v
-	return s
-}
-
-// SetShardId sets the ShardId field's value.
-func (s *PutRecordOutput) SetShardId(v string) *PutRecordOutput {
-	s.ShardId = &v
-	return s
 }
 
 // A PutRecords request.
@@ -3451,18 +3103,6 @@ func (s *PutRecordsInput) Validate() error {
 	return nil
 }
 
-// SetRecords sets the Records field's value.
-func (s *PutRecordsInput) SetRecords(v []PutRecordsRequestEntry) *PutRecordsInput {
-	s.Records = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *PutRecordsInput) SetStreamName(v string) *PutRecordsInput {
-	s.StreamName = &v
-	return s
-}
-
 // PutRecords results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsOutput
 type PutRecordsOutput struct {
@@ -3505,24 +3145,6 @@ func (s PutRecordsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRecordsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *PutRecordsOutput) SetEncryptionType(v EncryptionType) *PutRecordsOutput {
-	s.EncryptionType = v
-	return s
-}
-
-// SetFailedRecordCount sets the FailedRecordCount field's value.
-func (s *PutRecordsOutput) SetFailedRecordCount(v int64) *PutRecordsOutput {
-	s.FailedRecordCount = &v
-	return s
-}
-
-// SetRecords sets the Records field's value.
-func (s *PutRecordsOutput) SetRecords(v []PutRecordsResultEntry) *PutRecordsOutput {
-	s.Records = v
-	return s
 }
 
 // Represents the output for PutRecords.
@@ -3588,24 +3210,6 @@ func (s *PutRecordsRequestEntry) Validate() error {
 	return nil
 }
 
-// SetData sets the Data field's value.
-func (s *PutRecordsRequestEntry) SetData(v []byte) *PutRecordsRequestEntry {
-	s.Data = v
-	return s
-}
-
-// SetExplicitHashKey sets the ExplicitHashKey field's value.
-func (s *PutRecordsRequestEntry) SetExplicitHashKey(v string) *PutRecordsRequestEntry {
-	s.ExplicitHashKey = &v
-	return s
-}
-
-// SetPartitionKey sets the PartitionKey field's value.
-func (s *PutRecordsRequestEntry) SetPartitionKey(v string) *PutRecordsRequestEntry {
-	s.PartitionKey = &v
-	return s
-}
-
 // Represents the result of an individual record from a PutRecords request.
 // A record that is successfully added to a stream includes SequenceNumber and
 // ShardId in the result. A record that fails to be added to the stream includes
@@ -3639,30 +3243,6 @@ func (s PutRecordsResultEntry) String() string {
 // GoString returns the string representation
 func (s PutRecordsResultEntry) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *PutRecordsResultEntry) SetErrorCode(v string) *PutRecordsResultEntry {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *PutRecordsResultEntry) SetErrorMessage(v string) *PutRecordsResultEntry {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetSequenceNumber sets the SequenceNumber field's value.
-func (s *PutRecordsResultEntry) SetSequenceNumber(v string) *PutRecordsResultEntry {
-	s.SequenceNumber = &v
-	return s
-}
-
-// SetShardId sets the ShardId field's value.
-func (s *PutRecordsResultEntry) SetShardId(v string) *PutRecordsResultEntry {
-	s.ShardId = &v
-	return s
 }
 
 // The unit of data of the Kinesis stream, which is composed of a sequence number,
@@ -3715,36 +3295,6 @@ func (s Record) GoString() string {
 	return s.String()
 }
 
-// SetApproximateArrivalTimestamp sets the ApproximateArrivalTimestamp field's value.
-func (s *Record) SetApproximateArrivalTimestamp(v time.Time) *Record {
-	s.ApproximateArrivalTimestamp = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *Record) SetData(v []byte) *Record {
-	s.Data = v
-	return s
-}
-
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *Record) SetEncryptionType(v EncryptionType) *Record {
-	s.EncryptionType = v
-	return s
-}
-
-// SetPartitionKey sets the PartitionKey field's value.
-func (s *Record) SetPartitionKey(v string) *Record {
-	s.PartitionKey = &v
-	return s
-}
-
-// SetSequenceNumber sets the SequenceNumber field's value.
-func (s *Record) SetSequenceNumber(v string) *Record {
-	s.SequenceNumber = &v
-	return s
-}
-
 // Represents the input for RemoveTagsFromStream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStreamInput
 type RemoveTagsFromStreamInput struct {
@@ -3795,18 +3345,6 @@ func (s *RemoveTagsFromStreamInput) Validate() error {
 	return nil
 }
 
-// SetStreamName sets the StreamName field's value.
-func (s *RemoveTagsFromStreamInput) SetStreamName(v string) *RemoveTagsFromStreamInput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromStreamInput) SetTagKeys(v []string) *RemoveTagsFromStreamInput {
-	s.TagKeys = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStreamOutput
 type RemoveTagsFromStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -3854,18 +3392,6 @@ func (s SequenceNumberRange) GoString() string {
 	return s.String()
 }
 
-// SetEndingSequenceNumber sets the EndingSequenceNumber field's value.
-func (s *SequenceNumberRange) SetEndingSequenceNumber(v string) *SequenceNumberRange {
-	s.EndingSequenceNumber = &v
-	return s
-}
-
-// SetStartingSequenceNumber sets the StartingSequenceNumber field's value.
-func (s *SequenceNumberRange) SetStartingSequenceNumber(v string) *SequenceNumberRange {
-	s.StartingSequenceNumber = &v
-	return s
-}
-
 // A uniquely identified group of data records in a Kinesis stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Shard
 type Shard struct {
@@ -3902,36 +3428,6 @@ func (s Shard) String() string {
 // GoString returns the string representation
 func (s Shard) GoString() string {
 	return s.String()
-}
-
-// SetAdjacentParentShardId sets the AdjacentParentShardId field's value.
-func (s *Shard) SetAdjacentParentShardId(v string) *Shard {
-	s.AdjacentParentShardId = &v
-	return s
-}
-
-// SetHashKeyRange sets the HashKeyRange field's value.
-func (s *Shard) SetHashKeyRange(v *HashKeyRange) *Shard {
-	s.HashKeyRange = v
-	return s
-}
-
-// SetParentShardId sets the ParentShardId field's value.
-func (s *Shard) SetParentShardId(v string) *Shard {
-	s.ParentShardId = &v
-	return s
-}
-
-// SetSequenceNumberRange sets the SequenceNumberRange field's value.
-func (s *Shard) SetSequenceNumberRange(v *SequenceNumberRange) *Shard {
-	s.SequenceNumberRange = v
-	return s
-}
-
-// SetShardId sets the ShardId field's value.
-func (s *Shard) SetShardId(v string) *Shard {
-	s.ShardId = &v
-	return s
 }
 
 // Represents the input for SplitShard.
@@ -3997,24 +3493,6 @@ func (s *SplitShardInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNewStartingHashKey sets the NewStartingHashKey field's value.
-func (s *SplitShardInput) SetNewStartingHashKey(v string) *SplitShardInput {
-	s.NewStartingHashKey = &v
-	return s
-}
-
-// SetShardToSplit sets the ShardToSplit field's value.
-func (s *SplitShardInput) SetShardToSplit(v string) *SplitShardInput {
-	s.ShardToSplit = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *SplitShardInput) SetStreamName(v string) *SplitShardInput {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShardOutput
@@ -4109,24 +3587,6 @@ func (s *StartStreamEncryptionInput) Validate() error {
 	return nil
 }
 
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *StartStreamEncryptionInput) SetEncryptionType(v EncryptionType) *StartStreamEncryptionInput {
-	s.EncryptionType = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *StartStreamEncryptionInput) SetKeyId(v string) *StartStreamEncryptionInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *StartStreamEncryptionInput) SetStreamName(v string) *StartStreamEncryptionInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryptionOutput
 type StartStreamEncryptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4217,24 +3677,6 @@ func (s *StopStreamEncryptionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *StopStreamEncryptionInput) SetEncryptionType(v EncryptionType) *StopStreamEncryptionInput {
-	s.EncryptionType = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *StopStreamEncryptionInput) SetKeyId(v string) *StopStreamEncryptionInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *StopStreamEncryptionInput) SetStreamName(v string) *StopStreamEncryptionInput {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryptionOutput
@@ -4355,66 +3797,6 @@ func (s StreamDescription) GoString() string {
 	return s.String()
 }
 
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *StreamDescription) SetEncryptionType(v EncryptionType) *StreamDescription {
-	s.EncryptionType = v
-	return s
-}
-
-// SetEnhancedMonitoring sets the EnhancedMonitoring field's value.
-func (s *StreamDescription) SetEnhancedMonitoring(v []EnhancedMetrics) *StreamDescription {
-	s.EnhancedMonitoring = v
-	return s
-}
-
-// SetHasMoreShards sets the HasMoreShards field's value.
-func (s *StreamDescription) SetHasMoreShards(v bool) *StreamDescription {
-	s.HasMoreShards = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *StreamDescription) SetKeyId(v string) *StreamDescription {
-	s.KeyId = &v
-	return s
-}
-
-// SetRetentionPeriodHours sets the RetentionPeriodHours field's value.
-func (s *StreamDescription) SetRetentionPeriodHours(v int64) *StreamDescription {
-	s.RetentionPeriodHours = &v
-	return s
-}
-
-// SetShards sets the Shards field's value.
-func (s *StreamDescription) SetShards(v []Shard) *StreamDescription {
-	s.Shards = v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *StreamDescription) SetStreamARN(v string) *StreamDescription {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamCreationTimestamp sets the StreamCreationTimestamp field's value.
-func (s *StreamDescription) SetStreamCreationTimestamp(v time.Time) *StreamDescription {
-	s.StreamCreationTimestamp = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *StreamDescription) SetStreamName(v string) *StreamDescription {
-	s.StreamName = &v
-	return s
-}
-
-// SetStreamStatus sets the StreamStatus field's value.
-func (s *StreamDescription) SetStreamStatus(v StreamStatus) *StreamDescription {
-	s.StreamStatus = v
-	return s
-}
-
 // Represents the output for DescribeStreamSummary
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary
 type StreamDescriptionSummary struct {
@@ -4504,60 +3886,6 @@ func (s StreamDescriptionSummary) GoString() string {
 	return s.String()
 }
 
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *StreamDescriptionSummary) SetEncryptionType(v EncryptionType) *StreamDescriptionSummary {
-	s.EncryptionType = v
-	return s
-}
-
-// SetEnhancedMonitoring sets the EnhancedMonitoring field's value.
-func (s *StreamDescriptionSummary) SetEnhancedMonitoring(v []EnhancedMetrics) *StreamDescriptionSummary {
-	s.EnhancedMonitoring = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *StreamDescriptionSummary) SetKeyId(v string) *StreamDescriptionSummary {
-	s.KeyId = &v
-	return s
-}
-
-// SetOpenShardCount sets the OpenShardCount field's value.
-func (s *StreamDescriptionSummary) SetOpenShardCount(v int64) *StreamDescriptionSummary {
-	s.OpenShardCount = &v
-	return s
-}
-
-// SetRetentionPeriodHours sets the RetentionPeriodHours field's value.
-func (s *StreamDescriptionSummary) SetRetentionPeriodHours(v int64) *StreamDescriptionSummary {
-	s.RetentionPeriodHours = &v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *StreamDescriptionSummary) SetStreamARN(v string) *StreamDescriptionSummary {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamCreationTimestamp sets the StreamCreationTimestamp field's value.
-func (s *StreamDescriptionSummary) SetStreamCreationTimestamp(v time.Time) *StreamDescriptionSummary {
-	s.StreamCreationTimestamp = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *StreamDescriptionSummary) SetStreamName(v string) *StreamDescriptionSummary {
-	s.StreamName = &v
-	return s
-}
-
-// SetStreamStatus sets the StreamStatus field's value.
-func (s *StreamDescriptionSummary) SetStreamStatus(v StreamStatus) *StreamDescriptionSummary {
-	s.StreamStatus = v
-	return s
-}
-
 // Metadata assigned to the stream, consisting of a key-value pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Tag
 type Tag struct {
@@ -4583,18 +3911,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCountInput
@@ -4654,24 +3970,6 @@ func (s *UpdateShardCountInput) Validate() error {
 	return nil
 }
 
-// SetScalingType sets the ScalingType field's value.
-func (s *UpdateShardCountInput) SetScalingType(v ScalingType) *UpdateShardCountInput {
-	s.ScalingType = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *UpdateShardCountInput) SetStreamName(v string) *UpdateShardCountInput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTargetShardCount sets the TargetShardCount field's value.
-func (s *UpdateShardCountInput) SetTargetShardCount(v int64) *UpdateShardCountInput {
-	s.TargetShardCount = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCountOutput
 type UpdateShardCountOutput struct {
 	_ struct{} `type:"structure"`
@@ -4701,24 +3999,6 @@ func (s UpdateShardCountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateShardCountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCurrentShardCount sets the CurrentShardCount field's value.
-func (s *UpdateShardCountOutput) SetCurrentShardCount(v int64) *UpdateShardCountOutput {
-	s.CurrentShardCount = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *UpdateShardCountOutput) SetStreamName(v string) *UpdateShardCountOutput {
-	s.StreamName = &v
-	return s
-}
-
-// SetTargetShardCount sets the TargetShardCount field's value.
-func (s *UpdateShardCountOutput) SetTargetShardCount(v int64) *UpdateShardCountOutput {
-	s.TargetShardCount = &v
-	return s
 }
 
 type EncryptionType string

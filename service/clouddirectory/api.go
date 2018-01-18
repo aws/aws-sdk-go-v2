@@ -4214,30 +4214,6 @@ func (s *AddFacetToObjectInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *AddFacetToObjectInput) SetDirectoryArn(v string) *AddFacetToObjectInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *AddFacetToObjectInput) SetObjectAttributeList(v []AttributeKeyAndValue) *AddFacetToObjectInput {
-	s.ObjectAttributeList = v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *AddFacetToObjectInput) SetObjectReference(v *ObjectReference) *AddFacetToObjectInput {
-	s.ObjectReference = v
-	return s
-}
-
-// SetSchemaFacet sets the SchemaFacet field's value.
-func (s *AddFacetToObjectInput) SetSchemaFacet(v *SchemaFacet) *AddFacetToObjectInput {
-	s.SchemaFacet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectResponse
 type AddFacetToObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -4305,18 +4281,6 @@ func (s *ApplySchemaInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ApplySchemaInput) SetDirectoryArn(v string) *ApplySchemaInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
-func (s *ApplySchemaInput) SetPublishedSchemaArn(v string) *ApplySchemaInput {
-	s.PublishedSchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchemaResponse
 type ApplySchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -4346,18 +4310,6 @@ func (s ApplySchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ApplySchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAppliedSchemaArn sets the AppliedSchemaArn field's value.
-func (s *ApplySchemaOutput) SetAppliedSchemaArn(v string) *ApplySchemaOutput {
-	s.AppliedSchemaArn = &v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ApplySchemaOutput) SetDirectoryArn(v string) *ApplySchemaOutput {
-	s.DirectoryArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectRequest
@@ -4425,30 +4377,6 @@ func (s *AttachObjectInput) Validate() error {
 	return nil
 }
 
-// SetChildReference sets the ChildReference field's value.
-func (s *AttachObjectInput) SetChildReference(v *ObjectReference) *AttachObjectInput {
-	s.ChildReference = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *AttachObjectInput) SetDirectoryArn(v string) *AttachObjectInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *AttachObjectInput) SetLinkName(v string) *AttachObjectInput {
-	s.LinkName = &v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *AttachObjectInput) SetParentReference(v *ObjectReference) *AttachObjectInput {
-	s.ParentReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectResponse
 type AttachObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -4472,12 +4400,6 @@ func (s AttachObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachedObjectIdentifier sets the AttachedObjectIdentifier field's value.
-func (s *AttachObjectOutput) SetAttachedObjectIdentifier(v string) *AttachObjectOutput {
-	s.AttachedObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicyRequest
@@ -4525,24 +4447,6 @@ func (s *AttachPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *AttachPolicyInput) SetDirectoryArn(v string) *AttachPolicyInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *AttachPolicyInput) SetObjectReference(v *ObjectReference) *AttachPolicyInput {
-	s.ObjectReference = v
-	return s
-}
-
-// SetPolicyReference sets the PolicyReference field's value.
-func (s *AttachPolicyInput) SetPolicyReference(v *ObjectReference) *AttachPolicyInput {
-	s.PolicyReference = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicyResponse
@@ -4620,24 +4524,6 @@ func (s *AttachToIndexInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *AttachToIndexInput) SetDirectoryArn(v string) *AttachToIndexInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetIndexReference sets the IndexReference field's value.
-func (s *AttachToIndexInput) SetIndexReference(v *ObjectReference) *AttachToIndexInput {
-	s.IndexReference = v
-	return s
-}
-
-// SetTargetReference sets the TargetReference field's value.
-func (s *AttachToIndexInput) SetTargetReference(v *ObjectReference) *AttachToIndexInput {
-	s.TargetReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndexResponse
 type AttachToIndexOutput struct {
 	_ struct{} `type:"structure"`
@@ -4661,12 +4547,6 @@ func (s AttachToIndexOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachToIndexOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachedObjectIdentifier sets the AttachedObjectIdentifier field's value.
-func (s *AttachToIndexOutput) SetAttachedObjectIdentifier(v string) *AttachToIndexOutput {
-	s.AttachedObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLinkRequest
@@ -4752,36 +4632,6 @@ func (s *AttachTypedLinkInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *AttachTypedLinkInput) SetAttributes(v []AttributeNameAndValue) *AttachTypedLinkInput {
-	s.Attributes = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *AttachTypedLinkInput) SetDirectoryArn(v string) *AttachTypedLinkInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetSourceObjectReference sets the SourceObjectReference field's value.
-func (s *AttachTypedLinkInput) SetSourceObjectReference(v *ObjectReference) *AttachTypedLinkInput {
-	s.SourceObjectReference = v
-	return s
-}
-
-// SetTargetObjectReference sets the TargetObjectReference field's value.
-func (s *AttachTypedLinkInput) SetTargetObjectReference(v *ObjectReference) *AttachTypedLinkInput {
-	s.TargetObjectReference = v
-	return s
-}
-
-// SetTypedLinkFacet sets the TypedLinkFacet field's value.
-func (s *AttachTypedLinkInput) SetTypedLinkFacet(v *TypedLinkSchemaAndFacetName) *AttachTypedLinkInput {
-	s.TypedLinkFacet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLinkResponse
 type AttachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
@@ -4805,12 +4655,6 @@ func (s AttachTypedLinkOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AttachTypedLinkOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTypedLinkSpecifier sets the TypedLinkSpecifier field's value.
-func (s *AttachTypedLinkOutput) SetTypedLinkSpecifier(v *TypedLinkSpecifier) *AttachTypedLinkOutput {
-	s.TypedLinkSpecifier = v
-	return s
 }
 
 // A unique identifier for an attribute.
@@ -4873,24 +4717,6 @@ func (s *AttributeKey) Validate() error {
 	return nil
 }
 
-// SetFacetName sets the FacetName field's value.
-func (s *AttributeKey) SetFacetName(v string) *AttributeKey {
-	s.FacetName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AttributeKey) SetName(v string) *AttributeKey {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *AttributeKey) SetSchemaArn(v string) *AttributeKey {
-	s.SchemaArn = &v
-	return s
-}
-
 // The combination of an attribute key and an attribute value.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttributeKeyAndValue
 type AttributeKeyAndValue struct {
@@ -4940,18 +4766,6 @@ func (s *AttributeKeyAndValue) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *AttributeKeyAndValue) SetKey(v *AttributeKey) *AttributeKeyAndValue {
-	s.Key = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *AttributeKeyAndValue) SetValue(v *TypedAttributeValue) *AttributeKeyAndValue {
-	s.Value = v
-	return s
-}
-
 // Identifies the attribute name and value for a typed link.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttributeNameAndValue
 type AttributeNameAndValue struct {
@@ -4997,18 +4811,6 @@ func (s *AttributeNameAndValue) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *AttributeNameAndValue) SetAttributeName(v string) *AttributeNameAndValue {
-	s.AttributeName = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *AttributeNameAndValue) SetValue(v *TypedAttributeValue) *AttributeNameAndValue {
-	s.Value = v
-	return s
 }
 
 // Represents the output of a batch add facet to object operation.
@@ -5074,24 +4876,6 @@ func (s *BatchAddFacetToObject) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *BatchAddFacetToObject) SetObjectAttributeList(v []AttributeKeyAndValue) *BatchAddFacetToObject {
-	s.ObjectAttributeList = v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchAddFacetToObject) SetObjectReference(v *ObjectReference) *BatchAddFacetToObject {
-	s.ObjectReference = v
-	return s
-}
-
-// SetSchemaFacet sets the SchemaFacet field's value.
-func (s *BatchAddFacetToObject) SetSchemaFacet(v *SchemaFacet) *BatchAddFacetToObject {
-	s.SchemaFacet = v
-	return s
 }
 
 // The result of a batch add facet to object operation.
@@ -5166,24 +4950,6 @@ func (s *BatchAttachObject) Validate() error {
 	return nil
 }
 
-// SetChildReference sets the ChildReference field's value.
-func (s *BatchAttachObject) SetChildReference(v *ObjectReference) *BatchAttachObject {
-	s.ChildReference = v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *BatchAttachObject) SetLinkName(v string) *BatchAttachObject {
-	s.LinkName = &v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *BatchAttachObject) SetParentReference(v *ObjectReference) *BatchAttachObject {
-	s.ParentReference = v
-	return s
-}
-
 // Represents the output batch AttachObject response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachObjectResponse
 type BatchAttachObjectResponse struct {
@@ -5201,12 +4967,6 @@ func (s BatchAttachObjectResponse) String() string {
 // GoString returns the string representation
 func (s BatchAttachObjectResponse) GoString() string {
 	return s.String()
-}
-
-// SetAttachedObjectIdentifier sets the AttachedObjectIdentifier field's value.
-func (s *BatchAttachObjectResponse) SetAttachedObjectIdentifier(v string) *BatchAttachObjectResponse {
-	s.AttachedObjectIdentifier = &v
-	return s
 }
 
 // Attaches a policy object to a regular object inside a BatchRead operation. For
@@ -5252,18 +5012,6 @@ func (s *BatchAttachPolicy) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchAttachPolicy) SetObjectReference(v *ObjectReference) *BatchAttachPolicy {
-	s.ObjectReference = v
-	return s
-}
-
-// SetPolicyReference sets the PolicyReference field's value.
-func (s *BatchAttachPolicy) SetPolicyReference(v *ObjectReference) *BatchAttachPolicy {
-	s.PolicyReference = v
-	return s
 }
 
 // Represents the output of an AttachPolicy response operation.
@@ -5327,18 +5075,6 @@ func (s *BatchAttachToIndex) Validate() error {
 	return nil
 }
 
-// SetIndexReference sets the IndexReference field's value.
-func (s *BatchAttachToIndex) SetIndexReference(v *ObjectReference) *BatchAttachToIndex {
-	s.IndexReference = v
-	return s
-}
-
-// SetTargetReference sets the TargetReference field's value.
-func (s *BatchAttachToIndex) SetTargetReference(v *ObjectReference) *BatchAttachToIndex {
-	s.TargetReference = v
-	return s
-}
-
 // Represents the output of a AttachToIndex response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachToIndexResponse
 type BatchAttachToIndexResponse struct {
@@ -5356,12 +5092,6 @@ func (s BatchAttachToIndexResponse) String() string {
 // GoString returns the string representation
 func (s BatchAttachToIndexResponse) GoString() string {
 	return s.String()
-}
-
-// SetAttachedObjectIdentifier sets the AttachedObjectIdentifier field's value.
-func (s *BatchAttachToIndexResponse) SetAttachedObjectIdentifier(v string) *BatchAttachToIndexResponse {
-	s.AttachedObjectIdentifier = &v
-	return s
 }
 
 // Attaches a typed link to a specified source and target object inside a BatchRead
@@ -5439,30 +5169,6 @@ func (s *BatchAttachTypedLink) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *BatchAttachTypedLink) SetAttributes(v []AttributeNameAndValue) *BatchAttachTypedLink {
-	s.Attributes = v
-	return s
-}
-
-// SetSourceObjectReference sets the SourceObjectReference field's value.
-func (s *BatchAttachTypedLink) SetSourceObjectReference(v *ObjectReference) *BatchAttachTypedLink {
-	s.SourceObjectReference = v
-	return s
-}
-
-// SetTargetObjectReference sets the TargetObjectReference field's value.
-func (s *BatchAttachTypedLink) SetTargetObjectReference(v *ObjectReference) *BatchAttachTypedLink {
-	s.TargetObjectReference = v
-	return s
-}
-
-// SetTypedLinkFacet sets the TypedLinkFacet field's value.
-func (s *BatchAttachTypedLink) SetTypedLinkFacet(v *TypedLinkSchemaAndFacetName) *BatchAttachTypedLink {
-	s.TypedLinkFacet = v
-	return s
-}
-
 // Represents the output of a AttachTypedLink response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachTypedLinkResponse
 type BatchAttachTypedLinkResponse struct {
@@ -5480,12 +5186,6 @@ func (s BatchAttachTypedLinkResponse) String() string {
 // GoString returns the string representation
 func (s BatchAttachTypedLinkResponse) GoString() string {
 	return s.String()
-}
-
-// SetTypedLinkSpecifier sets the TypedLinkSpecifier field's value.
-func (s *BatchAttachTypedLinkResponse) SetTypedLinkSpecifier(v *TypedLinkSpecifier) *BatchAttachTypedLinkResponse {
-	s.TypedLinkSpecifier = v
-	return s
 }
 
 // Creates an index object inside of a BatchRead operation. For more information,
@@ -5555,36 +5255,6 @@ func (s *BatchCreateIndex) Validate() error {
 	return nil
 }
 
-// SetBatchReferenceName sets the BatchReferenceName field's value.
-func (s *BatchCreateIndex) SetBatchReferenceName(v string) *BatchCreateIndex {
-	s.BatchReferenceName = &v
-	return s
-}
-
-// SetIsUnique sets the IsUnique field's value.
-func (s *BatchCreateIndex) SetIsUnique(v bool) *BatchCreateIndex {
-	s.IsUnique = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *BatchCreateIndex) SetLinkName(v string) *BatchCreateIndex {
-	s.LinkName = &v
-	return s
-}
-
-// SetOrderedIndexedAttributeList sets the OrderedIndexedAttributeList field's value.
-func (s *BatchCreateIndex) SetOrderedIndexedAttributeList(v []AttributeKey) *BatchCreateIndex {
-	s.OrderedIndexedAttributeList = v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *BatchCreateIndex) SetParentReference(v *ObjectReference) *BatchCreateIndex {
-	s.ParentReference = v
-	return s
-}
-
 // Represents the output of a CreateIndex response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateIndexResponse
 type BatchCreateIndexResponse struct {
@@ -5602,12 +5272,6 @@ func (s BatchCreateIndexResponse) String() string {
 // GoString returns the string representation
 func (s BatchCreateIndexResponse) GoString() string {
 	return s.String()
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *BatchCreateIndexResponse) SetObjectIdentifier(v string) *BatchCreateIndexResponse {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Represents the output of a CreateObject operation.
@@ -5701,36 +5365,6 @@ func (s *BatchCreateObject) Validate() error {
 	return nil
 }
 
-// SetBatchReferenceName sets the BatchReferenceName field's value.
-func (s *BatchCreateObject) SetBatchReferenceName(v string) *BatchCreateObject {
-	s.BatchReferenceName = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *BatchCreateObject) SetLinkName(v string) *BatchCreateObject {
-	s.LinkName = &v
-	return s
-}
-
-// SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *BatchCreateObject) SetObjectAttributeList(v []AttributeKeyAndValue) *BatchCreateObject {
-	s.ObjectAttributeList = v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *BatchCreateObject) SetParentReference(v *ObjectReference) *BatchCreateObject {
-	s.ParentReference = v
-	return s
-}
-
-// SetSchemaFacet sets the SchemaFacet field's value.
-func (s *BatchCreateObject) SetSchemaFacet(v []SchemaFacet) *BatchCreateObject {
-	s.SchemaFacet = v
-	return s
-}
-
 // Represents the output of a CreateObject response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateObjectResponse
 type BatchCreateObjectResponse struct {
@@ -5748,12 +5382,6 @@ func (s BatchCreateObjectResponse) String() string {
 // GoString returns the string representation
 func (s BatchCreateObjectResponse) GoString() string {
 	return s.String()
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *BatchCreateObjectResponse) SetObjectIdentifier(v string) *BatchCreateObjectResponse {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Represents the output of a DeleteObject operation.
@@ -5789,12 +5417,6 @@ func (s *BatchDeleteObject) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchDeleteObject) SetObjectReference(v *ObjectReference) *BatchDeleteObject {
-	s.ObjectReference = v
-	return s
 }
 
 // Represents the output of a DeleteObject response operation.
@@ -5858,18 +5480,6 @@ func (s *BatchDetachFromIndex) Validate() error {
 	return nil
 }
 
-// SetIndexReference sets the IndexReference field's value.
-func (s *BatchDetachFromIndex) SetIndexReference(v *ObjectReference) *BatchDetachFromIndex {
-	s.IndexReference = v
-	return s
-}
-
-// SetTargetReference sets the TargetReference field's value.
-func (s *BatchDetachFromIndex) SetTargetReference(v *ObjectReference) *BatchDetachFromIndex {
-	s.TargetReference = v
-	return s
-}
-
 // Represents the output of a DetachFromIndex response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachFromIndexResponse
 type BatchDetachFromIndexResponse struct {
@@ -5887,12 +5497,6 @@ func (s BatchDetachFromIndexResponse) String() string {
 // GoString returns the string representation
 func (s BatchDetachFromIndexResponse) GoString() string {
 	return s.String()
-}
-
-// SetDetachedObjectIdentifier sets the DetachedObjectIdentifier field's value.
-func (s *BatchDetachFromIndexResponse) SetDetachedObjectIdentifier(v string) *BatchDetachFromIndexResponse {
-	s.DetachedObjectIdentifier = &v
-	return s
 }
 
 // Represents the output of a DetachObject operation.
@@ -5952,24 +5556,6 @@ func (s *BatchDetachObject) Validate() error {
 	return nil
 }
 
-// SetBatchReferenceName sets the BatchReferenceName field's value.
-func (s *BatchDetachObject) SetBatchReferenceName(v string) *BatchDetachObject {
-	s.BatchReferenceName = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *BatchDetachObject) SetLinkName(v string) *BatchDetachObject {
-	s.LinkName = &v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *BatchDetachObject) SetParentReference(v *ObjectReference) *BatchDetachObject {
-	s.ParentReference = v
-	return s
-}
-
 // Represents the output of a DetachObject response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachObjectResponse
 type BatchDetachObjectResponse struct {
@@ -5987,12 +5573,6 @@ func (s BatchDetachObjectResponse) String() string {
 // GoString returns the string representation
 func (s BatchDetachObjectResponse) GoString() string {
 	return s.String()
-}
-
-// SetDetachedObjectIdentifier sets the DetachedObjectIdentifier field's value.
-func (s *BatchDetachObjectResponse) SetDetachedObjectIdentifier(v string) *BatchDetachObjectResponse {
-	s.DetachedObjectIdentifier = &v
-	return s
 }
 
 // Detaches the specified policy from the specified directory inside a BatchWrite
@@ -6038,18 +5618,6 @@ func (s *BatchDetachPolicy) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchDetachPolicy) SetObjectReference(v *ObjectReference) *BatchDetachPolicy {
-	s.ObjectReference = v
-	return s
-}
-
-// SetPolicyReference sets the PolicyReference field's value.
-func (s *BatchDetachPolicy) SetPolicyReference(v *ObjectReference) *BatchDetachPolicy {
-	s.PolicyReference = v
-	return s
 }
 
 // Represents the output of a DetachPolicy response operation.
@@ -6109,12 +5677,6 @@ func (s *BatchDetachTypedLink) Validate() error {
 	return nil
 }
 
-// SetTypedLinkSpecifier sets the TypedLinkSpecifier field's value.
-func (s *BatchDetachTypedLink) SetTypedLinkSpecifier(v *TypedLinkSpecifier) *BatchDetachTypedLink {
-	s.TypedLinkSpecifier = v
-	return s
-}
-
 // Represents the output of a DetachTypedLink response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachTypedLinkResponse
 type BatchDetachTypedLinkResponse struct {
@@ -6167,12 +5729,6 @@ func (s *BatchGetObjectInformation) Validate() error {
 	return nil
 }
 
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchGetObjectInformation) SetObjectReference(v *ObjectReference) *BatchGetObjectInformation {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a GetObjectInformation response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectInformationResponse
 type BatchGetObjectInformationResponse struct {
@@ -6193,18 +5749,6 @@ func (s BatchGetObjectInformationResponse) String() string {
 // GoString returns the string representation
 func (s BatchGetObjectInformationResponse) GoString() string {
 	return s.String()
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *BatchGetObjectInformationResponse) SetObjectIdentifier(v string) *BatchGetObjectInformationResponse {
-	s.ObjectIdentifier = &v
-	return s
-}
-
-// SetSchemaFacets sets the SchemaFacets field's value.
-func (s *BatchGetObjectInformationResponse) SetSchemaFacets(v []SchemaFacet) *BatchGetObjectInformationResponse {
-	s.SchemaFacets = v
-	return s
 }
 
 // Lists indices attached to an object inside a BatchRead operation. For more
@@ -6252,24 +5796,6 @@ func (s *BatchListAttachedIndices) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListAttachedIndices) SetMaxResults(v int64) *BatchListAttachedIndices {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListAttachedIndices) SetNextToken(v string) *BatchListAttachedIndices {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargetReference sets the TargetReference field's value.
-func (s *BatchListAttachedIndices) SetTargetReference(v *ObjectReference) *BatchListAttachedIndices {
-	s.TargetReference = v
-	return s
-}
-
 // Represents the output of a ListAttachedIndices response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListAttachedIndicesResponse
 type BatchListAttachedIndicesResponse struct {
@@ -6290,18 +5816,6 @@ func (s BatchListAttachedIndicesResponse) String() string {
 // GoString returns the string representation
 func (s BatchListAttachedIndicesResponse) GoString() string {
 	return s.String()
-}
-
-// SetIndexAttachments sets the IndexAttachments field's value.
-func (s *BatchListAttachedIndicesResponse) SetIndexAttachments(v []IndexAttachment) *BatchListAttachedIndicesResponse {
-	s.IndexAttachments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListAttachedIndicesResponse) SetNextToken(v string) *BatchListAttachedIndicesResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Returns a paginated list of all the incoming TypedLinkSpecifier information
@@ -6372,36 +5886,6 @@ func (s *BatchListIncomingTypedLinks) Validate() error {
 	return nil
 }
 
-// SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *BatchListIncomingTypedLinks) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *BatchListIncomingTypedLinks {
-	s.FilterAttributeRanges = v
-	return s
-}
-
-// SetFilterTypedLink sets the FilterTypedLink field's value.
-func (s *BatchListIncomingTypedLinks) SetFilterTypedLink(v *TypedLinkSchemaAndFacetName) *BatchListIncomingTypedLinks {
-	s.FilterTypedLink = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListIncomingTypedLinks) SetMaxResults(v int64) *BatchListIncomingTypedLinks {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListIncomingTypedLinks) SetNextToken(v string) *BatchListIncomingTypedLinks {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchListIncomingTypedLinks) SetObjectReference(v *ObjectReference) *BatchListIncomingTypedLinks {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a ListIncomingTypedLinks response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIncomingTypedLinksResponse
 type BatchListIncomingTypedLinksResponse struct {
@@ -6422,18 +5906,6 @@ func (s BatchListIncomingTypedLinksResponse) String() string {
 // GoString returns the string representation
 func (s BatchListIncomingTypedLinksResponse) GoString() string {
 	return s.String()
-}
-
-// SetLinkSpecifiers sets the LinkSpecifiers field's value.
-func (s *BatchListIncomingTypedLinksResponse) SetLinkSpecifiers(v []TypedLinkSpecifier) *BatchListIncomingTypedLinksResponse {
-	s.LinkSpecifiers = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListIncomingTypedLinksResponse) SetNextToken(v string) *BatchListIncomingTypedLinksResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Lists objects attached to the specified index inside a BatchRead operation.
@@ -6491,30 +5963,6 @@ func (s *BatchListIndex) Validate() error {
 	return nil
 }
 
-// SetIndexReference sets the IndexReference field's value.
-func (s *BatchListIndex) SetIndexReference(v *ObjectReference) *BatchListIndex {
-	s.IndexReference = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListIndex) SetMaxResults(v int64) *BatchListIndex {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListIndex) SetNextToken(v string) *BatchListIndex {
-	s.NextToken = &v
-	return s
-}
-
-// SetRangesOnIndexedValues sets the RangesOnIndexedValues field's value.
-func (s *BatchListIndex) SetRangesOnIndexedValues(v []ObjectAttributeRange) *BatchListIndex {
-	s.RangesOnIndexedValues = v
-	return s
-}
-
 // Represents the output of a ListIndex response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIndexResponse
 type BatchListIndexResponse struct {
@@ -6535,18 +5983,6 @@ func (s BatchListIndexResponse) String() string {
 // GoString returns the string representation
 func (s BatchListIndexResponse) GoString() string {
 	return s.String()
-}
-
-// SetIndexAttachments sets the IndexAttachments field's value.
-func (s *BatchListIndexResponse) SetIndexAttachments(v []IndexAttachment) *BatchListIndexResponse {
-	s.IndexAttachments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListIndexResponse) SetNextToken(v string) *BatchListIndexResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the output of a ListObjectAttributes operation.
@@ -6603,30 +6039,6 @@ func (s *BatchListObjectAttributes) Validate() error {
 	return nil
 }
 
-// SetFacetFilter sets the FacetFilter field's value.
-func (s *BatchListObjectAttributes) SetFacetFilter(v *SchemaFacet) *BatchListObjectAttributes {
-	s.FacetFilter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListObjectAttributes) SetMaxResults(v int64) *BatchListObjectAttributes {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectAttributes) SetNextToken(v string) *BatchListObjectAttributes {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchListObjectAttributes) SetObjectReference(v *ObjectReference) *BatchListObjectAttributes {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a ListObjectAttributes response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectAttributesResponse
 type BatchListObjectAttributesResponse struct {
@@ -6648,18 +6060,6 @@ func (s BatchListObjectAttributesResponse) String() string {
 // GoString returns the string representation
 func (s BatchListObjectAttributesResponse) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *BatchListObjectAttributesResponse) SetAttributes(v []AttributeKeyAndValue) *BatchListObjectAttributesResponse {
-	s.Attributes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectAttributesResponse) SetNextToken(v string) *BatchListObjectAttributesResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the output of a ListObjectChildren operation.
@@ -6707,24 +6107,6 @@ func (s *BatchListObjectChildren) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListObjectChildren) SetMaxResults(v int64) *BatchListObjectChildren {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectChildren) SetNextToken(v string) *BatchListObjectChildren {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchListObjectChildren) SetObjectReference(v *ObjectReference) *BatchListObjectChildren {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a ListObjectChildren response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectChildrenResponse
 type BatchListObjectChildrenResponse struct {
@@ -6746,18 +6128,6 @@ func (s BatchListObjectChildrenResponse) String() string {
 // GoString returns the string representation
 func (s BatchListObjectChildrenResponse) GoString() string {
 	return s.String()
-}
-
-// SetChildren sets the Children field's value.
-func (s *BatchListObjectChildrenResponse) SetChildren(v map[string]string) *BatchListObjectChildrenResponse {
-	s.Children = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectChildrenResponse) SetNextToken(v string) *BatchListObjectChildrenResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Retrieves all available parent paths for any object type such as node, leaf
@@ -6806,24 +6176,6 @@ func (s *BatchListObjectParentPaths) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListObjectParentPaths) SetMaxResults(v int64) *BatchListObjectParentPaths {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectParentPaths) SetNextToken(v string) *BatchListObjectParentPaths {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchListObjectParentPaths) SetObjectReference(v *ObjectReference) *BatchListObjectParentPaths {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a ListObjectParentPaths response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectParentPathsResponse
 type BatchListObjectParentPathsResponse struct {
@@ -6844,18 +6196,6 @@ func (s BatchListObjectParentPathsResponse) String() string {
 // GoString returns the string representation
 func (s BatchListObjectParentPathsResponse) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectParentPathsResponse) SetNextToken(v string) *BatchListObjectParentPathsResponse {
-	s.NextToken = &v
-	return s
-}
-
-// SetPathToObjectIdentifiersList sets the PathToObjectIdentifiersList field's value.
-func (s *BatchListObjectParentPathsResponse) SetPathToObjectIdentifiersList(v []PathToObjectIdentifiers) *BatchListObjectParentPathsResponse {
-	s.PathToObjectIdentifiersList = v
-	return s
 }
 
 // Returns policies attached to an object in pagination fashion inside a BatchRead
@@ -6903,24 +6243,6 @@ func (s *BatchListObjectPolicies) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListObjectPolicies) SetMaxResults(v int64) *BatchListObjectPolicies {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectPolicies) SetNextToken(v string) *BatchListObjectPolicies {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchListObjectPolicies) SetObjectReference(v *ObjectReference) *BatchListObjectPolicies {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a ListObjectPolicies response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectPoliciesResponse
 type BatchListObjectPoliciesResponse struct {
@@ -6941,18 +6263,6 @@ func (s BatchListObjectPoliciesResponse) String() string {
 // GoString returns the string representation
 func (s BatchListObjectPoliciesResponse) GoString() string {
 	return s.String()
-}
-
-// SetAttachedPolicyIds sets the AttachedPolicyIds field's value.
-func (s *BatchListObjectPoliciesResponse) SetAttachedPolicyIds(v []string) *BatchListObjectPoliciesResponse {
-	s.AttachedPolicyIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListObjectPoliciesResponse) SetNextToken(v string) *BatchListObjectPoliciesResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Returns a paginated list of all the outgoing TypedLinkSpecifier information
@@ -7023,36 +6333,6 @@ func (s *BatchListOutgoingTypedLinks) Validate() error {
 	return nil
 }
 
-// SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *BatchListOutgoingTypedLinks) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *BatchListOutgoingTypedLinks {
-	s.FilterAttributeRanges = v
-	return s
-}
-
-// SetFilterTypedLink sets the FilterTypedLink field's value.
-func (s *BatchListOutgoingTypedLinks) SetFilterTypedLink(v *TypedLinkSchemaAndFacetName) *BatchListOutgoingTypedLinks {
-	s.FilterTypedLink = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListOutgoingTypedLinks) SetMaxResults(v int64) *BatchListOutgoingTypedLinks {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListOutgoingTypedLinks) SetNextToken(v string) *BatchListOutgoingTypedLinks {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchListOutgoingTypedLinks) SetObjectReference(v *ObjectReference) *BatchListOutgoingTypedLinks {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a ListOutgoingTypedLinks response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListOutgoingTypedLinksResponse
 type BatchListOutgoingTypedLinksResponse struct {
@@ -7073,18 +6353,6 @@ func (s BatchListOutgoingTypedLinksResponse) String() string {
 // GoString returns the string representation
 func (s BatchListOutgoingTypedLinksResponse) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListOutgoingTypedLinksResponse) SetNextToken(v string) *BatchListOutgoingTypedLinksResponse {
-	s.NextToken = &v
-	return s
-}
-
-// SetTypedLinkSpecifiers sets the TypedLinkSpecifiers field's value.
-func (s *BatchListOutgoingTypedLinksResponse) SetTypedLinkSpecifiers(v []TypedLinkSpecifier) *BatchListOutgoingTypedLinksResponse {
-	s.TypedLinkSpecifiers = v
-	return s
 }
 
 // Returns all of the ObjectIdentifiers to which a given policy is attached
@@ -7133,24 +6401,6 @@ func (s *BatchListPolicyAttachments) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchListPolicyAttachments) SetMaxResults(v int64) *BatchListPolicyAttachments {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListPolicyAttachments) SetNextToken(v string) *BatchListPolicyAttachments {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyReference sets the PolicyReference field's value.
-func (s *BatchListPolicyAttachments) SetPolicyReference(v *ObjectReference) *BatchListPolicyAttachments {
-	s.PolicyReference = v
-	return s
-}
-
 // Represents the output of a ListPolicyAttachments response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListPolicyAttachmentsResponse
 type BatchListPolicyAttachmentsResponse struct {
@@ -7171,18 +6421,6 @@ func (s BatchListPolicyAttachmentsResponse) String() string {
 // GoString returns the string representation
 func (s BatchListPolicyAttachmentsResponse) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchListPolicyAttachmentsResponse) SetNextToken(v string) *BatchListPolicyAttachmentsResponse {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectIdentifiers sets the ObjectIdentifiers field's value.
-func (s *BatchListPolicyAttachmentsResponse) SetObjectIdentifiers(v []string) *BatchListPolicyAttachmentsResponse {
-	s.ObjectIdentifiers = v
-	return s
 }
 
 // Lists all policies from the root of the Directory to the object specified
@@ -7231,24 +6469,6 @@ func (s *BatchLookupPolicy) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *BatchLookupPolicy) SetMaxResults(v int64) *BatchLookupPolicy {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchLookupPolicy) SetNextToken(v string) *BatchLookupPolicy {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchLookupPolicy) SetObjectReference(v *ObjectReference) *BatchLookupPolicy {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a LookupPolicy response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchLookupPolicyResponse
 type BatchLookupPolicyResponse struct {
@@ -7272,18 +6492,6 @@ func (s BatchLookupPolicyResponse) GoString() string {
 	return s.String()
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *BatchLookupPolicyResponse) SetNextToken(v string) *BatchLookupPolicyResponse {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyToPathList sets the PolicyToPathList field's value.
-func (s *BatchLookupPolicyResponse) SetPolicyToPathList(v []PolicyToPath) *BatchLookupPolicyResponse {
-	s.PolicyToPathList = v
-	return s
-}
-
 // The batch read exception structure, which contains the exception type and
 // message.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadException
@@ -7305,18 +6513,6 @@ func (s BatchReadException) String() string {
 // GoString returns the string representation
 func (s BatchReadException) GoString() string {
 	return s.String()
-}
-
-// SetMessage sets the Message field's value.
-func (s *BatchReadException) SetMessage(v string) *BatchReadException {
-	s.Message = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *BatchReadException) SetType(v BatchReadExceptionType) *BatchReadException {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadRequest
@@ -7372,24 +6568,6 @@ func (s *BatchReadInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *BatchReadInput) SetConsistencyLevel(v ConsistencyLevel) *BatchReadInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *BatchReadInput) SetDirectoryArn(v string) *BatchReadInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetOperations sets the Operations field's value.
-func (s *BatchReadInput) SetOperations(v []BatchReadOperation) *BatchReadInput {
-	s.Operations = v
-	return s
 }
 
 // Represents the output of a BatchRead operation.
@@ -7519,72 +6697,6 @@ func (s *BatchReadOperation) Validate() error {
 	return nil
 }
 
-// SetGetObjectInformation sets the GetObjectInformation field's value.
-func (s *BatchReadOperation) SetGetObjectInformation(v *BatchGetObjectInformation) *BatchReadOperation {
-	s.GetObjectInformation = v
-	return s
-}
-
-// SetListAttachedIndices sets the ListAttachedIndices field's value.
-func (s *BatchReadOperation) SetListAttachedIndices(v *BatchListAttachedIndices) *BatchReadOperation {
-	s.ListAttachedIndices = v
-	return s
-}
-
-// SetListIncomingTypedLinks sets the ListIncomingTypedLinks field's value.
-func (s *BatchReadOperation) SetListIncomingTypedLinks(v *BatchListIncomingTypedLinks) *BatchReadOperation {
-	s.ListIncomingTypedLinks = v
-	return s
-}
-
-// SetListIndex sets the ListIndex field's value.
-func (s *BatchReadOperation) SetListIndex(v *BatchListIndex) *BatchReadOperation {
-	s.ListIndex = v
-	return s
-}
-
-// SetListObjectAttributes sets the ListObjectAttributes field's value.
-func (s *BatchReadOperation) SetListObjectAttributes(v *BatchListObjectAttributes) *BatchReadOperation {
-	s.ListObjectAttributes = v
-	return s
-}
-
-// SetListObjectChildren sets the ListObjectChildren field's value.
-func (s *BatchReadOperation) SetListObjectChildren(v *BatchListObjectChildren) *BatchReadOperation {
-	s.ListObjectChildren = v
-	return s
-}
-
-// SetListObjectParentPaths sets the ListObjectParentPaths field's value.
-func (s *BatchReadOperation) SetListObjectParentPaths(v *BatchListObjectParentPaths) *BatchReadOperation {
-	s.ListObjectParentPaths = v
-	return s
-}
-
-// SetListObjectPolicies sets the ListObjectPolicies field's value.
-func (s *BatchReadOperation) SetListObjectPolicies(v *BatchListObjectPolicies) *BatchReadOperation {
-	s.ListObjectPolicies = v
-	return s
-}
-
-// SetListOutgoingTypedLinks sets the ListOutgoingTypedLinks field's value.
-func (s *BatchReadOperation) SetListOutgoingTypedLinks(v *BatchListOutgoingTypedLinks) *BatchReadOperation {
-	s.ListOutgoingTypedLinks = v
-	return s
-}
-
-// SetListPolicyAttachments sets the ListPolicyAttachments field's value.
-func (s *BatchReadOperation) SetListPolicyAttachments(v *BatchListPolicyAttachments) *BatchReadOperation {
-	s.ListPolicyAttachments = v
-	return s
-}
-
-// SetLookupPolicy sets the LookupPolicy field's value.
-func (s *BatchReadOperation) SetLookupPolicy(v *BatchLookupPolicy) *BatchReadOperation {
-	s.LookupPolicy = v
-	return s
-}
-
 // Represents the output of a BatchRead response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadOperationResponse
 type BatchReadOperationResponse struct {
@@ -7605,18 +6717,6 @@ func (s BatchReadOperationResponse) String() string {
 // GoString returns the string representation
 func (s BatchReadOperationResponse) GoString() string {
 	return s.String()
-}
-
-// SetExceptionResponse sets the ExceptionResponse field's value.
-func (s *BatchReadOperationResponse) SetExceptionResponse(v *BatchReadException) *BatchReadOperationResponse {
-	s.ExceptionResponse = v
-	return s
-}
-
-// SetSuccessfulResponse sets the SuccessfulResponse field's value.
-func (s *BatchReadOperationResponse) SetSuccessfulResponse(v *BatchReadSuccessfulResponse) *BatchReadOperationResponse {
-	s.SuccessfulResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadResponse
@@ -7642,12 +6742,6 @@ func (s BatchReadOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchReadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResponses sets the Responses field's value.
-func (s *BatchReadOutput) SetResponses(v []BatchReadOperationResponse) *BatchReadOutput {
-	s.Responses = v
-	return s
 }
 
 // Represents the output of a BatchRead success response operation.
@@ -7712,72 +6806,6 @@ func (s BatchReadSuccessfulResponse) GoString() string {
 	return s.String()
 }
 
-// SetGetObjectInformation sets the GetObjectInformation field's value.
-func (s *BatchReadSuccessfulResponse) SetGetObjectInformation(v *BatchGetObjectInformationResponse) *BatchReadSuccessfulResponse {
-	s.GetObjectInformation = v
-	return s
-}
-
-// SetListAttachedIndices sets the ListAttachedIndices field's value.
-func (s *BatchReadSuccessfulResponse) SetListAttachedIndices(v *BatchListAttachedIndicesResponse) *BatchReadSuccessfulResponse {
-	s.ListAttachedIndices = v
-	return s
-}
-
-// SetListIncomingTypedLinks sets the ListIncomingTypedLinks field's value.
-func (s *BatchReadSuccessfulResponse) SetListIncomingTypedLinks(v *BatchListIncomingTypedLinksResponse) *BatchReadSuccessfulResponse {
-	s.ListIncomingTypedLinks = v
-	return s
-}
-
-// SetListIndex sets the ListIndex field's value.
-func (s *BatchReadSuccessfulResponse) SetListIndex(v *BatchListIndexResponse) *BatchReadSuccessfulResponse {
-	s.ListIndex = v
-	return s
-}
-
-// SetListObjectAttributes sets the ListObjectAttributes field's value.
-func (s *BatchReadSuccessfulResponse) SetListObjectAttributes(v *BatchListObjectAttributesResponse) *BatchReadSuccessfulResponse {
-	s.ListObjectAttributes = v
-	return s
-}
-
-// SetListObjectChildren sets the ListObjectChildren field's value.
-func (s *BatchReadSuccessfulResponse) SetListObjectChildren(v *BatchListObjectChildrenResponse) *BatchReadSuccessfulResponse {
-	s.ListObjectChildren = v
-	return s
-}
-
-// SetListObjectParentPaths sets the ListObjectParentPaths field's value.
-func (s *BatchReadSuccessfulResponse) SetListObjectParentPaths(v *BatchListObjectParentPathsResponse) *BatchReadSuccessfulResponse {
-	s.ListObjectParentPaths = v
-	return s
-}
-
-// SetListObjectPolicies sets the ListObjectPolicies field's value.
-func (s *BatchReadSuccessfulResponse) SetListObjectPolicies(v *BatchListObjectPoliciesResponse) *BatchReadSuccessfulResponse {
-	s.ListObjectPolicies = v
-	return s
-}
-
-// SetListOutgoingTypedLinks sets the ListOutgoingTypedLinks field's value.
-func (s *BatchReadSuccessfulResponse) SetListOutgoingTypedLinks(v *BatchListOutgoingTypedLinksResponse) *BatchReadSuccessfulResponse {
-	s.ListOutgoingTypedLinks = v
-	return s
-}
-
-// SetListPolicyAttachments sets the ListPolicyAttachments field's value.
-func (s *BatchReadSuccessfulResponse) SetListPolicyAttachments(v *BatchListPolicyAttachmentsResponse) *BatchReadSuccessfulResponse {
-	s.ListPolicyAttachments = v
-	return s
-}
-
-// SetLookupPolicy sets the LookupPolicy field's value.
-func (s *BatchReadSuccessfulResponse) SetLookupPolicy(v *BatchLookupPolicyResponse) *BatchReadSuccessfulResponse {
-	s.LookupPolicy = v
-	return s
-}
-
 // A batch operation to remove a facet from an object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRemoveFacetFromObject
 type BatchRemoveFacetFromObject struct {
@@ -7825,18 +6853,6 @@ func (s *BatchRemoveFacetFromObject) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchRemoveFacetFromObject) SetObjectReference(v *ObjectReference) *BatchRemoveFacetFromObject {
-	s.ObjectReference = v
-	return s
-}
-
-// SetSchemaFacet sets the SchemaFacet field's value.
-func (s *BatchRemoveFacetFromObject) SetSchemaFacet(v *SchemaFacet) *BatchRemoveFacetFromObject {
-	s.SchemaFacet = v
-	return s
 }
 
 // An empty result that represents success.
@@ -7906,18 +6922,6 @@ func (s *BatchUpdateObjectAttributes) Validate() error {
 	return nil
 }
 
-// SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *BatchUpdateObjectAttributes) SetAttributeUpdates(v []ObjectAttributeUpdate) *BatchUpdateObjectAttributes {
-	s.AttributeUpdates = v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *BatchUpdateObjectAttributes) SetObjectReference(v *ObjectReference) *BatchUpdateObjectAttributes {
-	s.ObjectReference = v
-	return s
-}
-
 // Represents the output of a BatchUpdate response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchUpdateObjectAttributesResponse
 type BatchUpdateObjectAttributesResponse struct {
@@ -7935,12 +6939,6 @@ func (s BatchUpdateObjectAttributesResponse) String() string {
 // GoString returns the string representation
 func (s BatchUpdateObjectAttributesResponse) GoString() string {
 	return s.String()
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *BatchUpdateObjectAttributesResponse) SetObjectIdentifier(v string) *BatchUpdateObjectAttributesResponse {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteRequest
@@ -7992,18 +6990,6 @@ func (s *BatchWriteInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *BatchWriteInput) SetDirectoryArn(v string) *BatchWriteInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetOperations sets the Operations field's value.
-func (s *BatchWriteInput) SetOperations(v []BatchWriteOperation) *BatchWriteInput {
-	s.Operations = v
-	return s
 }
 
 // Represents the output of a BatchWrite operation.
@@ -8148,90 +7134,6 @@ func (s *BatchWriteOperation) Validate() error {
 	return nil
 }
 
-// SetAddFacetToObject sets the AddFacetToObject field's value.
-func (s *BatchWriteOperation) SetAddFacetToObject(v *BatchAddFacetToObject) *BatchWriteOperation {
-	s.AddFacetToObject = v
-	return s
-}
-
-// SetAttachObject sets the AttachObject field's value.
-func (s *BatchWriteOperation) SetAttachObject(v *BatchAttachObject) *BatchWriteOperation {
-	s.AttachObject = v
-	return s
-}
-
-// SetAttachPolicy sets the AttachPolicy field's value.
-func (s *BatchWriteOperation) SetAttachPolicy(v *BatchAttachPolicy) *BatchWriteOperation {
-	s.AttachPolicy = v
-	return s
-}
-
-// SetAttachToIndex sets the AttachToIndex field's value.
-func (s *BatchWriteOperation) SetAttachToIndex(v *BatchAttachToIndex) *BatchWriteOperation {
-	s.AttachToIndex = v
-	return s
-}
-
-// SetAttachTypedLink sets the AttachTypedLink field's value.
-func (s *BatchWriteOperation) SetAttachTypedLink(v *BatchAttachTypedLink) *BatchWriteOperation {
-	s.AttachTypedLink = v
-	return s
-}
-
-// SetCreateIndex sets the CreateIndex field's value.
-func (s *BatchWriteOperation) SetCreateIndex(v *BatchCreateIndex) *BatchWriteOperation {
-	s.CreateIndex = v
-	return s
-}
-
-// SetCreateObject sets the CreateObject field's value.
-func (s *BatchWriteOperation) SetCreateObject(v *BatchCreateObject) *BatchWriteOperation {
-	s.CreateObject = v
-	return s
-}
-
-// SetDeleteObject sets the DeleteObject field's value.
-func (s *BatchWriteOperation) SetDeleteObject(v *BatchDeleteObject) *BatchWriteOperation {
-	s.DeleteObject = v
-	return s
-}
-
-// SetDetachFromIndex sets the DetachFromIndex field's value.
-func (s *BatchWriteOperation) SetDetachFromIndex(v *BatchDetachFromIndex) *BatchWriteOperation {
-	s.DetachFromIndex = v
-	return s
-}
-
-// SetDetachObject sets the DetachObject field's value.
-func (s *BatchWriteOperation) SetDetachObject(v *BatchDetachObject) *BatchWriteOperation {
-	s.DetachObject = v
-	return s
-}
-
-// SetDetachPolicy sets the DetachPolicy field's value.
-func (s *BatchWriteOperation) SetDetachPolicy(v *BatchDetachPolicy) *BatchWriteOperation {
-	s.DetachPolicy = v
-	return s
-}
-
-// SetDetachTypedLink sets the DetachTypedLink field's value.
-func (s *BatchWriteOperation) SetDetachTypedLink(v *BatchDetachTypedLink) *BatchWriteOperation {
-	s.DetachTypedLink = v
-	return s
-}
-
-// SetRemoveFacetFromObject sets the RemoveFacetFromObject field's value.
-func (s *BatchWriteOperation) SetRemoveFacetFromObject(v *BatchRemoveFacetFromObject) *BatchWriteOperation {
-	s.RemoveFacetFromObject = v
-	return s
-}
-
-// SetUpdateObjectAttributes sets the UpdateObjectAttributes field's value.
-func (s *BatchWriteOperation) SetUpdateObjectAttributes(v *BatchUpdateObjectAttributes) *BatchWriteOperation {
-	s.UpdateObjectAttributes = v
-	return s
-}
-
 // Represents the output of a BatchWrite response operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperationResponse
 type BatchWriteOperationResponse struct {
@@ -8294,90 +7196,6 @@ func (s BatchWriteOperationResponse) GoString() string {
 	return s.String()
 }
 
-// SetAddFacetToObject sets the AddFacetToObject field's value.
-func (s *BatchWriteOperationResponse) SetAddFacetToObject(v *BatchAddFacetToObjectResponse) *BatchWriteOperationResponse {
-	s.AddFacetToObject = v
-	return s
-}
-
-// SetAttachObject sets the AttachObject field's value.
-func (s *BatchWriteOperationResponse) SetAttachObject(v *BatchAttachObjectResponse) *BatchWriteOperationResponse {
-	s.AttachObject = v
-	return s
-}
-
-// SetAttachPolicy sets the AttachPolicy field's value.
-func (s *BatchWriteOperationResponse) SetAttachPolicy(v *BatchAttachPolicyResponse) *BatchWriteOperationResponse {
-	s.AttachPolicy = v
-	return s
-}
-
-// SetAttachToIndex sets the AttachToIndex field's value.
-func (s *BatchWriteOperationResponse) SetAttachToIndex(v *BatchAttachToIndexResponse) *BatchWriteOperationResponse {
-	s.AttachToIndex = v
-	return s
-}
-
-// SetAttachTypedLink sets the AttachTypedLink field's value.
-func (s *BatchWriteOperationResponse) SetAttachTypedLink(v *BatchAttachTypedLinkResponse) *BatchWriteOperationResponse {
-	s.AttachTypedLink = v
-	return s
-}
-
-// SetCreateIndex sets the CreateIndex field's value.
-func (s *BatchWriteOperationResponse) SetCreateIndex(v *BatchCreateIndexResponse) *BatchWriteOperationResponse {
-	s.CreateIndex = v
-	return s
-}
-
-// SetCreateObject sets the CreateObject field's value.
-func (s *BatchWriteOperationResponse) SetCreateObject(v *BatchCreateObjectResponse) *BatchWriteOperationResponse {
-	s.CreateObject = v
-	return s
-}
-
-// SetDeleteObject sets the DeleteObject field's value.
-func (s *BatchWriteOperationResponse) SetDeleteObject(v *BatchDeleteObjectResponse) *BatchWriteOperationResponse {
-	s.DeleteObject = v
-	return s
-}
-
-// SetDetachFromIndex sets the DetachFromIndex field's value.
-func (s *BatchWriteOperationResponse) SetDetachFromIndex(v *BatchDetachFromIndexResponse) *BatchWriteOperationResponse {
-	s.DetachFromIndex = v
-	return s
-}
-
-// SetDetachObject sets the DetachObject field's value.
-func (s *BatchWriteOperationResponse) SetDetachObject(v *BatchDetachObjectResponse) *BatchWriteOperationResponse {
-	s.DetachObject = v
-	return s
-}
-
-// SetDetachPolicy sets the DetachPolicy field's value.
-func (s *BatchWriteOperationResponse) SetDetachPolicy(v *BatchDetachPolicyResponse) *BatchWriteOperationResponse {
-	s.DetachPolicy = v
-	return s
-}
-
-// SetDetachTypedLink sets the DetachTypedLink field's value.
-func (s *BatchWriteOperationResponse) SetDetachTypedLink(v *BatchDetachTypedLinkResponse) *BatchWriteOperationResponse {
-	s.DetachTypedLink = v
-	return s
-}
-
-// SetRemoveFacetFromObject sets the RemoveFacetFromObject field's value.
-func (s *BatchWriteOperationResponse) SetRemoveFacetFromObject(v *BatchRemoveFacetFromObjectResponse) *BatchWriteOperationResponse {
-	s.RemoveFacetFromObject = v
-	return s
-}
-
-// SetUpdateObjectAttributes sets the UpdateObjectAttributes field's value.
-func (s *BatchWriteOperationResponse) SetUpdateObjectAttributes(v *BatchUpdateObjectAttributesResponse) *BatchWriteOperationResponse {
-	s.UpdateObjectAttributes = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteResponse
 type BatchWriteOutput struct {
 	_ struct{} `type:"structure"`
@@ -8401,12 +7219,6 @@ func (s BatchWriteOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchWriteOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResponses sets the Responses field's value.
-func (s *BatchWriteOutput) SetResponses(v []BatchWriteOperationResponse) *BatchWriteOutput {
-	s.Responses = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectoryRequest
@@ -8456,18 +7268,6 @@ func (s *CreateDirectoryInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateDirectoryInput) SetName(v string) *CreateDirectoryInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *CreateDirectoryInput) SetSchemaArn(v string) *CreateDirectoryInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectoryResponse
 type CreateDirectoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -8511,30 +7311,6 @@ func (s CreateDirectoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDirectoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAppliedSchemaArn sets the AppliedSchemaArn field's value.
-func (s *CreateDirectoryOutput) SetAppliedSchemaArn(v string) *CreateDirectoryOutput {
-	s.AppliedSchemaArn = &v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *CreateDirectoryOutput) SetDirectoryArn(v string) *CreateDirectoryOutput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateDirectoryOutput) SetName(v string) *CreateDirectoryOutput {
-	s.Name = &v
-	return s
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *CreateDirectoryOutput) SetObjectIdentifier(v string) *CreateDirectoryOutput {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacetRequest
@@ -8610,30 +7386,6 @@ func (s *CreateFacetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *CreateFacetInput) SetAttributes(v []FacetAttribute) *CreateFacetInput {
-	s.Attributes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFacetInput) SetName(v string) *CreateFacetInput {
-	s.Name = &v
-	return s
-}
-
-// SetObjectType sets the ObjectType field's value.
-func (s *CreateFacetInput) SetObjectType(v ObjectType) *CreateFacetInput {
-	s.ObjectType = v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *CreateFacetInput) SetSchemaArn(v string) *CreateFacetInput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacetResponse
@@ -8728,36 +7480,6 @@ func (s *CreateIndexInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *CreateIndexInput) SetDirectoryArn(v string) *CreateIndexInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetIsUnique sets the IsUnique field's value.
-func (s *CreateIndexInput) SetIsUnique(v bool) *CreateIndexInput {
-	s.IsUnique = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *CreateIndexInput) SetLinkName(v string) *CreateIndexInput {
-	s.LinkName = &v
-	return s
-}
-
-// SetOrderedIndexedAttributeList sets the OrderedIndexedAttributeList field's value.
-func (s *CreateIndexInput) SetOrderedIndexedAttributeList(v []AttributeKey) *CreateIndexInput {
-	s.OrderedIndexedAttributeList = v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *CreateIndexInput) SetParentReference(v *ObjectReference) *CreateIndexInput {
-	s.ParentReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndexResponse
 type CreateIndexOutput struct {
 	_ struct{} `type:"structure"`
@@ -8781,12 +7503,6 @@ func (s CreateIndexOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateIndexOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *CreateIndexOutput) SetObjectIdentifier(v string) *CreateIndexOutput {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObjectRequest
@@ -8861,36 +7577,6 @@ func (s *CreateObjectInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *CreateObjectInput) SetDirectoryArn(v string) *CreateObjectInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *CreateObjectInput) SetLinkName(v string) *CreateObjectInput {
-	s.LinkName = &v
-	return s
-}
-
-// SetObjectAttributeList sets the ObjectAttributeList field's value.
-func (s *CreateObjectInput) SetObjectAttributeList(v []AttributeKeyAndValue) *CreateObjectInput {
-	s.ObjectAttributeList = v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *CreateObjectInput) SetParentReference(v *ObjectReference) *CreateObjectInput {
-	s.ParentReference = v
-	return s
-}
-
-// SetSchemaFacets sets the SchemaFacets field's value.
-func (s *CreateObjectInput) SetSchemaFacets(v []SchemaFacet) *CreateObjectInput {
-	s.SchemaFacets = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObjectResponse
 type CreateObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -8914,12 +7600,6 @@ func (s CreateObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *CreateObjectOutput) SetObjectIdentifier(v string) *CreateObjectOutput {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchemaRequest
@@ -8960,12 +7640,6 @@ func (s *CreateSchemaInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateSchemaInput) SetName(v string) *CreateSchemaInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchemaResponse
 type CreateSchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -8990,12 +7664,6 @@ func (s CreateSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *CreateSchemaOutput) SetSchemaArn(v string) *CreateSchemaOutput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetRequest
@@ -9045,18 +7713,6 @@ func (s *CreateTypedLinkFacetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFacet sets the Facet field's value.
-func (s *CreateTypedLinkFacetInput) SetFacet(v *TypedLinkFacet) *CreateTypedLinkFacetInput {
-	s.Facet = v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *CreateTypedLinkFacetInput) SetSchemaArn(v string) *CreateTypedLinkFacetInput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetResponse
@@ -9115,12 +7771,6 @@ func (s *DeleteDirectoryInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DeleteDirectoryInput) SetDirectoryArn(v string) *DeleteDirectoryInput {
-	s.DirectoryArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectoryResponse
 type DeleteDirectoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -9146,12 +7796,6 @@ func (s DeleteDirectoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDirectoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DeleteDirectoryOutput) SetDirectoryArn(v string) *DeleteDirectoryOutput {
-	s.DirectoryArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacetRequest
@@ -9199,18 +7843,6 @@ func (s *DeleteFacetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteFacetInput) SetName(v string) *DeleteFacetInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *DeleteFacetInput) SetSchemaArn(v string) *DeleteFacetInput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacetResponse
@@ -9279,18 +7911,6 @@ func (s *DeleteObjectInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DeleteObjectInput) SetDirectoryArn(v string) *DeleteObjectInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *DeleteObjectInput) SetObjectReference(v *ObjectReference) *DeleteObjectInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObjectResponse
 type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -9348,12 +7968,6 @@ func (s *DeleteSchemaInput) Validate() error {
 	return nil
 }
 
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *DeleteSchemaInput) SetSchemaArn(v string) *DeleteSchemaInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchemaResponse
 type DeleteSchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -9378,12 +7992,6 @@ func (s DeleteSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *DeleteSchemaOutput) SetSchemaArn(v string) *DeleteSchemaOutput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetRequest
@@ -9428,18 +8036,6 @@ func (s *DeleteTypedLinkFacetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteTypedLinkFacetInput) SetName(v string) *DeleteTypedLinkFacetInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *DeleteTypedLinkFacetInput) SetSchemaArn(v string) *DeleteTypedLinkFacetInput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetResponse
@@ -9517,24 +8113,6 @@ func (s *DetachFromIndexInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DetachFromIndexInput) SetDirectoryArn(v string) *DetachFromIndexInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetIndexReference sets the IndexReference field's value.
-func (s *DetachFromIndexInput) SetIndexReference(v *ObjectReference) *DetachFromIndexInput {
-	s.IndexReference = v
-	return s
-}
-
-// SetTargetReference sets the TargetReference field's value.
-func (s *DetachFromIndexInput) SetTargetReference(v *ObjectReference) *DetachFromIndexInput {
-	s.TargetReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndexResponse
 type DetachFromIndexOutput struct {
 	_ struct{} `type:"structure"`
@@ -9558,12 +8136,6 @@ func (s DetachFromIndexOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachFromIndexOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetachedObjectIdentifier sets the DetachedObjectIdentifier field's value.
-func (s *DetachFromIndexOutput) SetDetachedObjectIdentifier(v string) *DetachFromIndexOutput {
-	s.DetachedObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObjectRequest
@@ -9623,24 +8195,6 @@ func (s *DetachObjectInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DetachObjectInput) SetDirectoryArn(v string) *DetachObjectInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetLinkName sets the LinkName field's value.
-func (s *DetachObjectInput) SetLinkName(v string) *DetachObjectInput {
-	s.LinkName = &v
-	return s
-}
-
-// SetParentReference sets the ParentReference field's value.
-func (s *DetachObjectInput) SetParentReference(v *ObjectReference) *DetachObjectInput {
-	s.ParentReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObjectResponse
 type DetachObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -9664,12 +8218,6 @@ func (s DetachObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetachObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetachedObjectIdentifier sets the DetachedObjectIdentifier field's value.
-func (s *DetachObjectOutput) SetDetachedObjectIdentifier(v string) *DetachObjectOutput {
-	s.DetachedObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicyRequest
@@ -9723,24 +8271,6 @@ func (s *DetachPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DetachPolicyInput) SetDirectoryArn(v string) *DetachPolicyInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *DetachPolicyInput) SetObjectReference(v *ObjectReference) *DetachPolicyInput {
-	s.ObjectReference = v
-	return s
-}
-
-// SetPolicyReference sets the PolicyReference field's value.
-func (s *DetachPolicyInput) SetPolicyReference(v *ObjectReference) *DetachPolicyInput {
-	s.PolicyReference = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicyResponse
@@ -9814,18 +8344,6 @@ func (s *DetachTypedLinkInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DetachTypedLinkInput) SetDirectoryArn(v string) *DetachTypedLinkInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetTypedLinkSpecifier sets the TypedLinkSpecifier field's value.
-func (s *DetachTypedLinkInput) SetTypedLinkSpecifier(v *TypedLinkSpecifier) *DetachTypedLinkInput {
-	s.TypedLinkSpecifier = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLinkOutput
 type DetachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
@@ -9877,30 +8395,6 @@ func (s Directory) GoString() string {
 	return s.String()
 }
 
-// SetCreationDateTime sets the CreationDateTime field's value.
-func (s *Directory) SetCreationDateTime(v time.Time) *Directory {
-	s.CreationDateTime = &v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *Directory) SetDirectoryArn(v string) *Directory {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Directory) SetName(v string) *Directory {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Directory) SetState(v DirectoryState) *Directory {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectoryRequest
 type DisableDirectoryInput struct {
 	_ struct{} `type:"structure"`
@@ -9935,12 +8429,6 @@ func (s *DisableDirectoryInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DisableDirectoryInput) SetDirectoryArn(v string) *DisableDirectoryInput {
-	s.DirectoryArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectoryResponse
 type DisableDirectoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -9966,12 +8454,6 @@ func (s DisableDirectoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisableDirectoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *DisableDirectoryOutput) SetDirectoryArn(v string) *DisableDirectoryOutput {
-	s.DirectoryArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectoryRequest
@@ -10008,12 +8490,6 @@ func (s *EnableDirectoryInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *EnableDirectoryInput) SetDirectoryArn(v string) *EnableDirectoryInput {
-	s.DirectoryArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectoryResponse
 type EnableDirectoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -10041,12 +8517,6 @@ func (s EnableDirectoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *EnableDirectoryOutput) SetDirectoryArn(v string) *EnableDirectoryOutput {
-	s.DirectoryArn = &v
-	return s
-}
-
 // A structure that contains Name, ARN, Attributes, Rules, and ObjectTypes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Facet
 type Facet struct {
@@ -10068,18 +8538,6 @@ func (s Facet) String() string {
 // GoString returns the string representation
 func (s Facet) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *Facet) SetName(v string) *Facet {
-	s.Name = &v
-	return s
-}
-
-// SetObjectType sets the ObjectType field's value.
-func (s *Facet) SetObjectType(v ObjectType) *Facet {
-	s.ObjectType = v
-	return s
 }
 
 // An attribute that is associated with the Facet.
@@ -10143,30 +8601,6 @@ func (s *FacetAttribute) Validate() error {
 	return nil
 }
 
-// SetAttributeDefinition sets the AttributeDefinition field's value.
-func (s *FacetAttribute) SetAttributeDefinition(v *FacetAttributeDefinition) *FacetAttribute {
-	s.AttributeDefinition = v
-	return s
-}
-
-// SetAttributeReference sets the AttributeReference field's value.
-func (s *FacetAttribute) SetAttributeReference(v *FacetAttributeReference) *FacetAttribute {
-	s.AttributeReference = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *FacetAttribute) SetName(v string) *FacetAttribute {
-	s.Name = &v
-	return s
-}
-
-// SetRequiredBehavior sets the RequiredBehavior field's value.
-func (s *FacetAttribute) SetRequiredBehavior(v RequiredAttributeBehavior) *FacetAttribute {
-	s.RequiredBehavior = v
-	return s
-}
-
 // A facet attribute definition. See Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
 // for more information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttributeDefinition
@@ -10209,30 +8643,6 @@ func (s *FacetAttributeDefinition) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDefaultValue sets the DefaultValue field's value.
-func (s *FacetAttributeDefinition) SetDefaultValue(v *TypedAttributeValue) *FacetAttributeDefinition {
-	s.DefaultValue = v
-	return s
-}
-
-// SetIsImmutable sets the IsImmutable field's value.
-func (s *FacetAttributeDefinition) SetIsImmutable(v bool) *FacetAttributeDefinition {
-	s.IsImmutable = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *FacetAttributeDefinition) SetRules(v map[string]Rule) *FacetAttributeDefinition {
-	s.Rules = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *FacetAttributeDefinition) SetType(v FacetAttributeType) *FacetAttributeDefinition {
-	s.Type = v
-	return s
 }
 
 // The facet attribute reference that specifies the attribute definition that
@@ -10290,18 +8700,6 @@ func (s *FacetAttributeReference) Validate() error {
 	return nil
 }
 
-// SetTargetAttributeName sets the TargetAttributeName field's value.
-func (s *FacetAttributeReference) SetTargetAttributeName(v string) *FacetAttributeReference {
-	s.TargetAttributeName = &v
-	return s
-}
-
-// SetTargetFacetName sets the TargetFacetName field's value.
-func (s *FacetAttributeReference) SetTargetFacetName(v string) *FacetAttributeReference {
-	s.TargetFacetName = &v
-	return s
-}
-
 // A structure that contains information used to update an attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttributeUpdate
 type FacetAttributeUpdate struct {
@@ -10339,18 +8737,6 @@ func (s *FacetAttributeUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *FacetAttributeUpdate) SetAction(v UpdateActionType) *FacetAttributeUpdate {
-	s.Action = v
-	return s
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *FacetAttributeUpdate) SetAttribute(v *FacetAttribute) *FacetAttributeUpdate {
-	s.Attribute = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionRequest
 type GetAppliedSchemaVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -10385,12 +8771,6 @@ func (s *GetAppliedSchemaVersionInput) Validate() error {
 	return nil
 }
 
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *GetAppliedSchemaVersionInput) SetSchemaArn(v string) *GetAppliedSchemaVersionInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionResponse
 type GetAppliedSchemaVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -10415,12 +8795,6 @@ func (s GetAppliedSchemaVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAppliedSchemaVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAppliedSchemaArn sets the AppliedSchemaArn field's value.
-func (s *GetAppliedSchemaVersionOutput) SetAppliedSchemaArn(v string) *GetAppliedSchemaVersionOutput {
-	s.AppliedSchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectoryRequest
@@ -10457,12 +8831,6 @@ func (s *GetDirectoryInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *GetDirectoryInput) SetDirectoryArn(v string) *GetDirectoryInput {
-	s.DirectoryArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectoryResponse
 type GetDirectoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -10488,12 +8856,6 @@ func (s GetDirectoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDirectoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectory sets the Directory field's value.
-func (s *GetDirectoryOutput) SetDirectory(v *Directory) *GetDirectoryOutput {
-	s.Directory = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacetRequest
@@ -10543,18 +8905,6 @@ func (s *GetFacetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetFacetInput) SetName(v string) *GetFacetInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *GetFacetInput) SetSchemaArn(v string) *GetFacetInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacetResponse
 type GetFacetOutput struct {
 	_ struct{} `type:"structure"`
@@ -10578,12 +8928,6 @@ func (s GetFacetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFacetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFacet sets the Facet field's value.
-func (s *GetFacetOutput) SetFacet(v *Facet) *GetFacetOutput {
-	s.Facet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformationRequest
@@ -10632,24 +8976,6 @@ func (s *GetObjectInformationInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *GetObjectInformationInput) SetConsistencyLevel(v ConsistencyLevel) *GetObjectInformationInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *GetObjectInformationInput) SetDirectoryArn(v string) *GetObjectInformationInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *GetObjectInformationInput) SetObjectReference(v *ObjectReference) *GetObjectInformationInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformationResponse
 type GetObjectInformationOutput struct {
 	_ struct{} `type:"structure"`
@@ -10678,18 +9004,6 @@ func (s GetObjectInformationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetObjectInformationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *GetObjectInformationOutput) SetObjectIdentifier(v string) *GetObjectInformationOutput {
-	s.ObjectIdentifier = &v
-	return s
-}
-
-// SetSchemaFacets sets the SchemaFacets field's value.
-func (s *GetObjectInformationOutput) SetSchemaFacets(v []SchemaFacet) *GetObjectInformationOutput {
-	s.SchemaFacets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJsonRequest
@@ -10726,12 +9040,6 @@ func (s *GetSchemaAsJsonInput) Validate() error {
 	return nil
 }
 
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *GetSchemaAsJsonInput) SetSchemaArn(v string) *GetSchemaAsJsonInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJsonResponse
 type GetSchemaAsJsonOutput struct {
 	_ struct{} `type:"structure"`
@@ -10758,18 +9066,6 @@ func (s GetSchemaAsJsonOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSchemaAsJsonOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDocument sets the Document field's value.
-func (s *GetSchemaAsJsonOutput) SetDocument(v string) *GetSchemaAsJsonOutput {
-	s.Document = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetSchemaAsJsonOutput) SetName(v string) *GetSchemaAsJsonOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformationRequest
@@ -10816,18 +9112,6 @@ func (s *GetTypedLinkFacetInformationInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetTypedLinkFacetInformationInput) SetName(v string) *GetTypedLinkFacetInformationInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *GetTypedLinkFacetInformationInput) SetSchemaArn(v string) *GetTypedLinkFacetInformationInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformationResponse
 type GetTypedLinkFacetInformationOutput struct {
 	_ struct{} `type:"structure"`
@@ -10860,12 +9144,6 @@ func (s GetTypedLinkFacetInformationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
-func (s *GetTypedLinkFacetInformationOutput) SetIdentityAttributeOrder(v []string) *GetTypedLinkFacetInformationOutput {
-	s.IdentityAttributeOrder = v
-	return s
-}
-
 // Represents an index and an attached object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/IndexAttachment
 type IndexAttachment struct {
@@ -10889,18 +9167,6 @@ func (s IndexAttachment) String() string {
 // GoString returns the string representation
 func (s IndexAttachment) GoString() string {
 	return s.String()
-}
-
-// SetIndexedAttributes sets the IndexedAttributes field's value.
-func (s *IndexAttachment) SetIndexedAttributes(v []AttributeKeyAndValue) *IndexAttachment {
-	s.IndexedAttributes = v
-	return s
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *IndexAttachment) SetObjectIdentifier(v string) *IndexAttachment {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArnsRequest
@@ -10950,30 +9216,6 @@ func (s *ListAppliedSchemaArnsInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListAppliedSchemaArnsInput) SetDirectoryArn(v string) *ListAppliedSchemaArnsInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAppliedSchemaArnsInput) SetMaxResults(v int64) *ListAppliedSchemaArnsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAppliedSchemaArnsInput) SetNextToken(v string) *ListAppliedSchemaArnsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *ListAppliedSchemaArnsInput) SetSchemaArn(v string) *ListAppliedSchemaArnsInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArnsResponse
 type ListAppliedSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
@@ -11000,18 +9242,6 @@ func (s ListAppliedSchemaArnsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAppliedSchemaArnsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAppliedSchemaArnsOutput) SetNextToken(v string) *ListAppliedSchemaArnsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArns sets the SchemaArns field's value.
-func (s *ListAppliedSchemaArnsOutput) SetSchemaArns(v []string) *ListAppliedSchemaArnsOutput {
-	s.SchemaArns = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndicesRequest
@@ -11069,36 +9299,6 @@ func (s *ListAttachedIndicesInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListAttachedIndicesInput) SetConsistencyLevel(v ConsistencyLevel) *ListAttachedIndicesInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListAttachedIndicesInput) SetDirectoryArn(v string) *ListAttachedIndicesInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAttachedIndicesInput) SetMaxResults(v int64) *ListAttachedIndicesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAttachedIndicesInput) SetNextToken(v string) *ListAttachedIndicesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargetReference sets the TargetReference field's value.
-func (s *ListAttachedIndicesInput) SetTargetReference(v *ObjectReference) *ListAttachedIndicesInput {
-	s.TargetReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndicesResponse
 type ListAttachedIndicesOutput struct {
 	_ struct{} `type:"structure"`
@@ -11125,18 +9325,6 @@ func (s ListAttachedIndicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAttachedIndicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIndexAttachments sets the IndexAttachments field's value.
-func (s *ListAttachedIndicesOutput) SetIndexAttachments(v []IndexAttachment) *ListAttachedIndicesOutput {
-	s.IndexAttachments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAttachedIndicesOutput) SetNextToken(v string) *ListAttachedIndicesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArnsRequest
@@ -11173,18 +9361,6 @@ func (s *ListDevelopmentSchemaArnsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDevelopmentSchemaArnsInput) SetMaxResults(v int64) *ListDevelopmentSchemaArnsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDevelopmentSchemaArnsInput) SetNextToken(v string) *ListDevelopmentSchemaArnsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArnsResponse
 type ListDevelopmentSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
@@ -11211,18 +9387,6 @@ func (s ListDevelopmentSchemaArnsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDevelopmentSchemaArnsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDevelopmentSchemaArnsOutput) SetNextToken(v string) *ListDevelopmentSchemaArnsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArns sets the SchemaArns field's value.
-func (s *ListDevelopmentSchemaArnsOutput) SetSchemaArns(v []string) *ListDevelopmentSchemaArnsOutput {
-	s.SchemaArns = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectoriesRequest
@@ -11263,24 +9427,6 @@ func (s *ListDirectoriesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDirectoriesInput) SetMaxResults(v int64) *ListDirectoriesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDirectoriesInput) SetNextToken(v string) *ListDirectoriesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ListDirectoriesInput) SetState(v DirectoryState) *ListDirectoriesInput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectoriesResponse
 type ListDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
@@ -11310,18 +9456,6 @@ func (s ListDirectoriesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDirectoriesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectories sets the Directories field's value.
-func (s *ListDirectoriesOutput) SetDirectories(v []Directory) *ListDirectoriesOutput {
-	s.Directories = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDirectoriesOutput) SetNextToken(v string) *ListDirectoriesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributesRequest
@@ -11379,30 +9513,6 @@ func (s *ListFacetAttributesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFacetAttributesInput) SetMaxResults(v int64) *ListFacetAttributesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListFacetAttributesInput) SetName(v string) *ListFacetAttributesInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFacetAttributesInput) SetNextToken(v string) *ListFacetAttributesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *ListFacetAttributesInput) SetSchemaArn(v string) *ListFacetAttributesInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributesResponse
 type ListFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -11429,18 +9539,6 @@ func (s ListFacetAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFacetAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *ListFacetAttributesOutput) SetAttributes(v []FacetAttribute) *ListFacetAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFacetAttributesOutput) SetNextToken(v string) *ListFacetAttributesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNamesRequest
@@ -11486,24 +9584,6 @@ func (s *ListFacetNamesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFacetNamesInput) SetMaxResults(v int64) *ListFacetNamesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFacetNamesInput) SetNextToken(v string) *ListFacetNamesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *ListFacetNamesInput) SetSchemaArn(v string) *ListFacetNamesInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNamesResponse
 type ListFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
@@ -11530,18 +9610,6 @@ func (s ListFacetNamesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFacetNamesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFacetNames sets the FacetNames field's value.
-func (s *ListFacetNamesOutput) SetFacetNames(v []string) *ListFacetNamesOutput {
-	s.FacetNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFacetNamesOutput) SetNextToken(v string) *ListFacetNamesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinksRequest
@@ -11622,48 +9690,6 @@ func (s *ListIncomingTypedLinksInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListIncomingTypedLinksInput) SetConsistencyLevel(v ConsistencyLevel) *ListIncomingTypedLinksInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListIncomingTypedLinksInput) SetDirectoryArn(v string) *ListIncomingTypedLinksInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *ListIncomingTypedLinksInput) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *ListIncomingTypedLinksInput {
-	s.FilterAttributeRanges = v
-	return s
-}
-
-// SetFilterTypedLink sets the FilterTypedLink field's value.
-func (s *ListIncomingTypedLinksInput) SetFilterTypedLink(v *TypedLinkSchemaAndFacetName) *ListIncomingTypedLinksInput {
-	s.FilterTypedLink = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListIncomingTypedLinksInput) SetMaxResults(v int64) *ListIncomingTypedLinksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIncomingTypedLinksInput) SetNextToken(v string) *ListIncomingTypedLinksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListIncomingTypedLinksInput) SetObjectReference(v *ObjectReference) *ListIncomingTypedLinksInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinksResponse
 type ListIncomingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
@@ -11690,18 +9716,6 @@ func (s ListIncomingTypedLinksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIncomingTypedLinksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLinkSpecifiers sets the LinkSpecifiers field's value.
-func (s *ListIncomingTypedLinksOutput) SetLinkSpecifiers(v []TypedLinkSpecifier) *ListIncomingTypedLinksOutput {
-	s.LinkSpecifiers = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIncomingTypedLinksOutput) SetNextToken(v string) *ListIncomingTypedLinksOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndexRequest
@@ -11771,42 +9785,6 @@ func (s *ListIndexInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListIndexInput) SetConsistencyLevel(v ConsistencyLevel) *ListIndexInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListIndexInput) SetDirectoryArn(v string) *ListIndexInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetIndexReference sets the IndexReference field's value.
-func (s *ListIndexInput) SetIndexReference(v *ObjectReference) *ListIndexInput {
-	s.IndexReference = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListIndexInput) SetMaxResults(v int64) *ListIndexInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIndexInput) SetNextToken(v string) *ListIndexInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRangesOnIndexedValues sets the RangesOnIndexedValues field's value.
-func (s *ListIndexInput) SetRangesOnIndexedValues(v []ObjectAttributeRange) *ListIndexInput {
-	s.RangesOnIndexedValues = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndexResponse
 type ListIndexOutput struct {
 	_ struct{} `type:"structure"`
@@ -11833,18 +9811,6 @@ func (s ListIndexOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIndexOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIndexAttachments sets the IndexAttachments field's value.
-func (s *ListIndexOutput) SetIndexAttachments(v []IndexAttachment) *ListIndexOutput {
-	s.IndexAttachments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIndexOutput) SetNextToken(v string) *ListIndexOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesRequest
@@ -11914,42 +9880,6 @@ func (s *ListObjectAttributesInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectAttributesInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectAttributesInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListObjectAttributesInput) SetDirectoryArn(v string) *ListObjectAttributesInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetFacetFilter sets the FacetFilter field's value.
-func (s *ListObjectAttributesInput) SetFacetFilter(v *SchemaFacet) *ListObjectAttributesInput {
-	s.FacetFilter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListObjectAttributesInput) SetMaxResults(v int64) *ListObjectAttributesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectAttributesInput) SetNextToken(v string) *ListObjectAttributesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListObjectAttributesInput) SetObjectReference(v *ObjectReference) *ListObjectAttributesInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesResponse
 type ListObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -11977,18 +9907,6 @@ func (s ListObjectAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *ListObjectAttributesOutput) SetAttributes(v []AttributeKeyAndValue) *ListObjectAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectAttributesOutput) SetNextToken(v string) *ListObjectAttributesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildrenRequest
@@ -12050,36 +9968,6 @@ func (s *ListObjectChildrenInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectChildrenInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectChildrenInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListObjectChildrenInput) SetDirectoryArn(v string) *ListObjectChildrenInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListObjectChildrenInput) SetMaxResults(v int64) *ListObjectChildrenInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectChildrenInput) SetNextToken(v string) *ListObjectChildrenInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListObjectChildrenInput) SetObjectReference(v *ObjectReference) *ListObjectChildrenInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildrenResponse
 type ListObjectChildrenOutput struct {
 	_ struct{} `type:"structure"`
@@ -12107,18 +9995,6 @@ func (s ListObjectChildrenOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectChildrenOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChildren sets the Children field's value.
-func (s *ListObjectChildrenOutput) SetChildren(v map[string]string) *ListObjectChildrenOutput {
-	s.Children = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectChildrenOutput) SetNextToken(v string) *ListObjectChildrenOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsRequest
@@ -12174,30 +10050,6 @@ func (s *ListObjectParentPathsInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListObjectParentPathsInput) SetDirectoryArn(v string) *ListObjectParentPathsInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListObjectParentPathsInput) SetMaxResults(v int64) *ListObjectParentPathsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectParentPathsInput) SetNextToken(v string) *ListObjectParentPathsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListObjectParentPathsInput) SetObjectReference(v *ObjectReference) *ListObjectParentPathsInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsResponse
 type ListObjectParentPathsOutput struct {
 	_ struct{} `type:"structure"`
@@ -12224,18 +10076,6 @@ func (s ListObjectParentPathsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectParentPathsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectParentPathsOutput) SetNextToken(v string) *ListObjectParentPathsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPathToObjectIdentifiersList sets the PathToObjectIdentifiersList field's value.
-func (s *ListObjectParentPathsOutput) SetPathToObjectIdentifiersList(v []PathToObjectIdentifiers) *ListObjectParentPathsOutput {
-	s.PathToObjectIdentifiersList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentsRequest
@@ -12297,36 +10137,6 @@ func (s *ListObjectParentsInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectParentsInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectParentsInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListObjectParentsInput) SetDirectoryArn(v string) *ListObjectParentsInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListObjectParentsInput) SetMaxResults(v int64) *ListObjectParentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectParentsInput) SetNextToken(v string) *ListObjectParentsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListObjectParentsInput) SetObjectReference(v *ObjectReference) *ListObjectParentsInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentsResponse
 type ListObjectParentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -12354,18 +10164,6 @@ func (s ListObjectParentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectParentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectParentsOutput) SetNextToken(v string) *ListObjectParentsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParents sets the Parents field's value.
-func (s *ListObjectParentsOutput) SetParents(v map[string]string) *ListObjectParentsOutput {
-	s.Parents = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPoliciesRequest
@@ -12426,36 +10224,6 @@ func (s *ListObjectPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectPoliciesInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectPoliciesInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListObjectPoliciesInput) SetDirectoryArn(v string) *ListObjectPoliciesInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListObjectPoliciesInput) SetMaxResults(v int64) *ListObjectPoliciesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectPoliciesInput) SetNextToken(v string) *ListObjectPoliciesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListObjectPoliciesInput) SetObjectReference(v *ObjectReference) *ListObjectPoliciesInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPoliciesResponse
 type ListObjectPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -12482,18 +10250,6 @@ func (s ListObjectPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachedPolicyIds sets the AttachedPolicyIds field's value.
-func (s *ListObjectPoliciesOutput) SetAttachedPolicyIds(v []string) *ListObjectPoliciesOutput {
-	s.AttachedPolicyIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListObjectPoliciesOutput) SetNextToken(v string) *ListObjectPoliciesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinksRequest
@@ -12574,48 +10330,6 @@ func (s *ListOutgoingTypedLinksInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListOutgoingTypedLinksInput) SetConsistencyLevel(v ConsistencyLevel) *ListOutgoingTypedLinksInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListOutgoingTypedLinksInput) SetDirectoryArn(v string) *ListOutgoingTypedLinksInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetFilterAttributeRanges sets the FilterAttributeRanges field's value.
-func (s *ListOutgoingTypedLinksInput) SetFilterAttributeRanges(v []TypedLinkAttributeRange) *ListOutgoingTypedLinksInput {
-	s.FilterAttributeRanges = v
-	return s
-}
-
-// SetFilterTypedLink sets the FilterTypedLink field's value.
-func (s *ListOutgoingTypedLinksInput) SetFilterTypedLink(v *TypedLinkSchemaAndFacetName) *ListOutgoingTypedLinksInput {
-	s.FilterTypedLink = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListOutgoingTypedLinksInput) SetMaxResults(v int64) *ListOutgoingTypedLinksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOutgoingTypedLinksInput) SetNextToken(v string) *ListOutgoingTypedLinksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *ListOutgoingTypedLinksInput) SetObjectReference(v *ObjectReference) *ListOutgoingTypedLinksInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinksResponse
 type ListOutgoingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
@@ -12642,18 +10356,6 @@ func (s ListOutgoingTypedLinksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOutgoingTypedLinksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOutgoingTypedLinksOutput) SetNextToken(v string) *ListOutgoingTypedLinksOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTypedLinkSpecifiers sets the TypedLinkSpecifiers field's value.
-func (s *ListOutgoingTypedLinksOutput) SetTypedLinkSpecifiers(v []TypedLinkSpecifier) *ListOutgoingTypedLinksOutput {
-	s.TypedLinkSpecifiers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachmentsRequest
@@ -12714,36 +10416,6 @@ func (s *ListPolicyAttachmentsInput) Validate() error {
 	return nil
 }
 
-// SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListPolicyAttachmentsInput) SetConsistencyLevel(v ConsistencyLevel) *ListPolicyAttachmentsInput {
-	s.ConsistencyLevel = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *ListPolicyAttachmentsInput) SetDirectoryArn(v string) *ListPolicyAttachmentsInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPolicyAttachmentsInput) SetMaxResults(v int64) *ListPolicyAttachmentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPolicyAttachmentsInput) SetNextToken(v string) *ListPolicyAttachmentsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyReference sets the PolicyReference field's value.
-func (s *ListPolicyAttachmentsInput) SetPolicyReference(v *ObjectReference) *ListPolicyAttachmentsInput {
-	s.PolicyReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachmentsResponse
 type ListPolicyAttachmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -12770,18 +10442,6 @@ func (s ListPolicyAttachmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPolicyAttachmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPolicyAttachmentsOutput) SetNextToken(v string) *ListPolicyAttachmentsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectIdentifiers sets the ObjectIdentifiers field's value.
-func (s *ListPolicyAttachmentsOutput) SetObjectIdentifiers(v []string) *ListPolicyAttachmentsOutput {
-	s.ObjectIdentifiers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArnsRequest
@@ -12822,24 +10482,6 @@ func (s *ListPublishedSchemaArnsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPublishedSchemaArnsInput) SetMaxResults(v int64) *ListPublishedSchemaArnsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPublishedSchemaArnsInput) SetNextToken(v string) *ListPublishedSchemaArnsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *ListPublishedSchemaArnsInput) SetSchemaArn(v string) *ListPublishedSchemaArnsInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArnsResponse
 type ListPublishedSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
@@ -12866,18 +10508,6 @@ func (s ListPublishedSchemaArnsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPublishedSchemaArnsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPublishedSchemaArnsOutput) SetNextToken(v string) *ListPublishedSchemaArnsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArns sets the SchemaArns field's value.
-func (s *ListPublishedSchemaArnsOutput) SetSchemaArns(v []string) *ListPublishedSchemaArnsOutput {
-	s.SchemaArns = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResourceRequest
@@ -12926,24 +10556,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTagsForResourceInput) SetMaxResults(v int64) *ListTagsForResourceInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsForResourceInput) SetNextToken(v string) *ListTagsForResourceInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -12971,18 +10583,6 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsForResourceOutput) SetNextToken(v string) *ListTagsForResourceOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v []Tag) *ListTagsForResourceOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributesRequest
@@ -13038,30 +10638,6 @@ func (s *ListTypedLinkFacetAttributesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTypedLinkFacetAttributesInput) SetMaxResults(v int64) *ListTypedLinkFacetAttributesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListTypedLinkFacetAttributesInput) SetName(v string) *ListTypedLinkFacetAttributesInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTypedLinkFacetAttributesInput) SetNextToken(v string) *ListTypedLinkFacetAttributesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *ListTypedLinkFacetAttributesInput) SetSchemaArn(v string) *ListTypedLinkFacetAttributesInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributesResponse
 type ListTypedLinkFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -13088,18 +10664,6 @@ func (s ListTypedLinkFacetAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTypedLinkFacetAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *ListTypedLinkFacetAttributesOutput) SetAttributes(v []TypedLinkAttributeDefinition) *ListTypedLinkFacetAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTypedLinkFacetAttributesOutput) SetNextToken(v string) *ListTypedLinkFacetAttributesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNamesRequest
@@ -13146,24 +10710,6 @@ func (s *ListTypedLinkFacetNamesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTypedLinkFacetNamesInput) SetMaxResults(v int64) *ListTypedLinkFacetNamesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTypedLinkFacetNamesInput) SetNextToken(v string) *ListTypedLinkFacetNamesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *ListTypedLinkFacetNamesInput) SetSchemaArn(v string) *ListTypedLinkFacetNamesInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNamesResponse
 type ListTypedLinkFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
@@ -13190,18 +10736,6 @@ func (s ListTypedLinkFacetNamesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTypedLinkFacetNamesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFacetNames sets the FacetNames field's value.
-func (s *ListTypedLinkFacetNamesOutput) SetFacetNames(v []string) *ListTypedLinkFacetNamesOutput {
-	s.FacetNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTypedLinkFacetNamesOutput) SetNextToken(v string) *ListTypedLinkFacetNamesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicyRequest
@@ -13258,30 +10792,6 @@ func (s *LookupPolicyInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *LookupPolicyInput) SetDirectoryArn(v string) *LookupPolicyInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *LookupPolicyInput) SetMaxResults(v int64) *LookupPolicyInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *LookupPolicyInput) SetNextToken(v string) *LookupPolicyInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *LookupPolicyInput) SetObjectReference(v *ObjectReference) *LookupPolicyInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicyResponse
 type LookupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -13311,18 +10821,6 @@ func (s LookupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *LookupPolicyOutput) SetNextToken(v string) *LookupPolicyOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyToPathList sets the PolicyToPathList field's value.
-func (s *LookupPolicyOutput) SetPolicyToPathList(v []PolicyToPath) *LookupPolicyOutput {
-	s.PolicyToPathList = v
-	return s
-}
-
 // The action to take on the object attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectAttributeAction
 type ObjectAttributeAction struct {
@@ -13343,18 +10841,6 @@ func (s ObjectAttributeAction) String() string {
 // GoString returns the string representation
 func (s ObjectAttributeAction) GoString() string {
 	return s.String()
-}
-
-// SetObjectAttributeActionType sets the ObjectAttributeActionType field's value.
-func (s *ObjectAttributeAction) SetObjectAttributeActionType(v UpdateActionType) *ObjectAttributeAction {
-	s.ObjectAttributeActionType = v
-	return s
-}
-
-// SetObjectAttributeUpdateValue sets the ObjectAttributeUpdateValue field's value.
-func (s *ObjectAttributeAction) SetObjectAttributeUpdateValue(v *TypedAttributeValue) *ObjectAttributeAction {
-	s.ObjectAttributeUpdateValue = v
-	return s
 }
 
 // A range of attributes.
@@ -13399,18 +10885,6 @@ func (s *ObjectAttributeRange) Validate() error {
 	return nil
 }
 
-// SetAttributeKey sets the AttributeKey field's value.
-func (s *ObjectAttributeRange) SetAttributeKey(v *AttributeKey) *ObjectAttributeRange {
-	s.AttributeKey = v
-	return s
-}
-
-// SetRange sets the Range field's value.
-func (s *ObjectAttributeRange) SetRange(v *TypedAttributeValueRange) *ObjectAttributeRange {
-	s.Range = v
-	return s
-}
-
 // Structure that contains attribute update information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectAttributeUpdate
 type ObjectAttributeUpdate struct {
@@ -13448,18 +10922,6 @@ func (s *ObjectAttributeUpdate) Validate() error {
 	return nil
 }
 
-// SetObjectAttributeAction sets the ObjectAttributeAction field's value.
-func (s *ObjectAttributeUpdate) SetObjectAttributeAction(v *ObjectAttributeAction) *ObjectAttributeUpdate {
-	s.ObjectAttributeAction = v
-	return s
-}
-
-// SetObjectAttributeKey sets the ObjectAttributeKey field's value.
-func (s *ObjectAttributeUpdate) SetObjectAttributeKey(v *AttributeKey) *ObjectAttributeUpdate {
-	s.ObjectAttributeKey = v
-	return s
-}
-
 // The reference that identifies an object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectReference
 type ObjectReference struct {
@@ -13493,12 +10955,6 @@ func (s ObjectReference) GoString() string {
 	return s.String()
 }
 
-// SetSelector sets the Selector field's value.
-func (s *ObjectReference) SetSelector(v string) *ObjectReference {
-	s.Selector = &v
-	return s
-}
-
 // Returns the path to the ObjectIdentifiers that is associated with the directory.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PathToObjectIdentifiers
 type PathToObjectIdentifiers struct {
@@ -13520,18 +10976,6 @@ func (s PathToObjectIdentifiers) String() string {
 // GoString returns the string representation
 func (s PathToObjectIdentifiers) GoString() string {
 	return s.String()
-}
-
-// SetObjectIdentifiers sets the ObjectIdentifiers field's value.
-func (s *PathToObjectIdentifiers) SetObjectIdentifiers(v []string) *PathToObjectIdentifiers {
-	s.ObjectIdentifiers = v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *PathToObjectIdentifiers) SetPath(v string) *PathToObjectIdentifiers {
-	s.Path = &v
-	return s
 }
 
 // Contains the PolicyType, PolicyId, and the ObjectIdentifier to which it is
@@ -13560,24 +11004,6 @@ func (s PolicyAttachment) GoString() string {
 	return s.String()
 }
 
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *PolicyAttachment) SetObjectIdentifier(v string) *PolicyAttachment {
-	s.ObjectIdentifier = &v
-	return s
-}
-
-// SetPolicyId sets the PolicyId field's value.
-func (s *PolicyAttachment) SetPolicyId(v string) *PolicyAttachment {
-	s.PolicyId = &v
-	return s
-}
-
-// SetPolicyType sets the PolicyType field's value.
-func (s *PolicyAttachment) SetPolicyType(v string) *PolicyAttachment {
-	s.PolicyType = &v
-	return s
-}
-
 // Used when a regular object exists in a Directory and you want to find all
 // of the policies that are associated with that object and the parent to that
 // object.
@@ -13600,18 +11026,6 @@ func (s PolicyToPath) String() string {
 // GoString returns the string representation
 func (s PolicyToPath) GoString() string {
 	return s.String()
-}
-
-// SetPath sets the Path field's value.
-func (s *PolicyToPath) SetPath(v string) *PolicyToPath {
-	s.Path = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *PolicyToPath) SetPolicies(v []PolicyAttachment) *PolicyToPath {
-	s.Policies = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchemaRequest
@@ -13677,30 +11091,6 @@ func (s *PublishSchemaInput) Validate() error {
 	return nil
 }
 
-// SetDevelopmentSchemaArn sets the DevelopmentSchemaArn field's value.
-func (s *PublishSchemaInput) SetDevelopmentSchemaArn(v string) *PublishSchemaInput {
-	s.DevelopmentSchemaArn = &v
-	return s
-}
-
-// SetMinorVersion sets the MinorVersion field's value.
-func (s *PublishSchemaInput) SetMinorVersion(v string) *PublishSchemaInput {
-	s.MinorVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PublishSchemaInput) SetName(v string) *PublishSchemaInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *PublishSchemaInput) SetVersion(v string) *PublishSchemaInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchemaResponse
 type PublishSchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -13725,12 +11115,6 @@ func (s PublishSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PublishSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
-func (s *PublishSchemaOutput) SetPublishedSchemaArn(v string) *PublishSchemaOutput {
-	s.PublishedSchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJsonRequest
@@ -13776,18 +11160,6 @@ func (s *PutSchemaFromJsonInput) Validate() error {
 	return nil
 }
 
-// SetDocument sets the Document field's value.
-func (s *PutSchemaFromJsonInput) SetDocument(v string) *PutSchemaFromJsonInput {
-	s.Document = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *PutSchemaFromJsonInput) SetSchemaArn(v string) *PutSchemaFromJsonInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJsonResponse
 type PutSchemaFromJsonOutput struct {
 	_ struct{} `type:"structure"`
@@ -13811,12 +11183,6 @@ func (s PutSchemaFromJsonOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutSchemaFromJsonOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *PutSchemaFromJsonOutput) SetArn(v string) *PutSchemaFromJsonOutput {
-	s.Arn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObjectRequest
@@ -13876,24 +11242,6 @@ func (s *RemoveFacetFromObjectInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *RemoveFacetFromObjectInput) SetDirectoryArn(v string) *RemoveFacetFromObjectInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *RemoveFacetFromObjectInput) SetObjectReference(v *ObjectReference) *RemoveFacetFromObjectInput {
-	s.ObjectReference = v
-	return s
-}
-
-// SetSchemaFacet sets the SchemaFacet field's value.
-func (s *RemoveFacetFromObjectInput) SetSchemaFacet(v *SchemaFacet) *RemoveFacetFromObjectInput {
-	s.SchemaFacet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObjectResponse
 type RemoveFacetFromObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -13939,18 +11287,6 @@ func (s Rule) GoString() string {
 	return s.String()
 }
 
-// SetParameters sets the Parameters field's value.
-func (s *Rule) SetParameters(v map[string]string) *Rule {
-	s.Parameters = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Rule) SetType(v RuleType) *Rule {
-	s.Type = v
-	return s
-}
-
 // A facet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/SchemaFacet
 type SchemaFacet struct {
@@ -13988,18 +11324,6 @@ func (s *SchemaFacet) Validate() error {
 	return nil
 }
 
-// SetFacetName sets the FacetName field's value.
-func (s *SchemaFacet) SetFacetName(v string) *SchemaFacet {
-	s.FacetName = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *SchemaFacet) SetSchemaArn(v string) *SchemaFacet {
-	s.SchemaArn = &v
-	return s
-}
-
 // The tag structure that contains a tag key and value.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Tag
 type Tag struct {
@@ -14020,18 +11344,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResourceRequest
@@ -14076,18 +11388,6 @@ func (s *TagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResourceResponse
@@ -14147,36 +11447,6 @@ func (s TypedAttributeValue) GoString() string {
 	return s.String()
 }
 
-// SetBinaryValue sets the BinaryValue field's value.
-func (s *TypedAttributeValue) SetBinaryValue(v []byte) *TypedAttributeValue {
-	s.BinaryValue = v
-	return s
-}
-
-// SetBooleanValue sets the BooleanValue field's value.
-func (s *TypedAttributeValue) SetBooleanValue(v bool) *TypedAttributeValue {
-	s.BooleanValue = &v
-	return s
-}
-
-// SetDatetimeValue sets the DatetimeValue field's value.
-func (s *TypedAttributeValue) SetDatetimeValue(v time.Time) *TypedAttributeValue {
-	s.DatetimeValue = &v
-	return s
-}
-
-// SetNumberValue sets the NumberValue field's value.
-func (s *TypedAttributeValue) SetNumberValue(v string) *TypedAttributeValue {
-	s.NumberValue = &v
-	return s
-}
-
-// SetStringValue sets the StringValue field's value.
-func (s *TypedAttributeValue) SetStringValue(v string) *TypedAttributeValue {
-	s.StringValue = &v
-	return s
-}
-
 // A range of attribute values.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedAttributeValueRange
 type TypedAttributeValueRange struct {
@@ -14223,30 +11493,6 @@ func (s *TypedAttributeValueRange) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndMode sets the EndMode field's value.
-func (s *TypedAttributeValueRange) SetEndMode(v RangeMode) *TypedAttributeValueRange {
-	s.EndMode = v
-	return s
-}
-
-// SetEndValue sets the EndValue field's value.
-func (s *TypedAttributeValueRange) SetEndValue(v *TypedAttributeValue) *TypedAttributeValueRange {
-	s.EndValue = v
-	return s
-}
-
-// SetStartMode sets the StartMode field's value.
-func (s *TypedAttributeValueRange) SetStartMode(v RangeMode) *TypedAttributeValueRange {
-	s.StartMode = v
-	return s
-}
-
-// SetStartValue sets the StartValue field's value.
-func (s *TypedAttributeValueRange) SetStartValue(v *TypedAttributeValue) *TypedAttributeValueRange {
-	s.StartValue = v
-	return s
 }
 
 // A typed link attribute definition.
@@ -14312,42 +11558,6 @@ func (s *TypedLinkAttributeDefinition) Validate() error {
 	return nil
 }
 
-// SetDefaultValue sets the DefaultValue field's value.
-func (s *TypedLinkAttributeDefinition) SetDefaultValue(v *TypedAttributeValue) *TypedLinkAttributeDefinition {
-	s.DefaultValue = v
-	return s
-}
-
-// SetIsImmutable sets the IsImmutable field's value.
-func (s *TypedLinkAttributeDefinition) SetIsImmutable(v bool) *TypedLinkAttributeDefinition {
-	s.IsImmutable = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *TypedLinkAttributeDefinition) SetName(v string) *TypedLinkAttributeDefinition {
-	s.Name = &v
-	return s
-}
-
-// SetRequiredBehavior sets the RequiredBehavior field's value.
-func (s *TypedLinkAttributeDefinition) SetRequiredBehavior(v RequiredAttributeBehavior) *TypedLinkAttributeDefinition {
-	s.RequiredBehavior = v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *TypedLinkAttributeDefinition) SetRules(v map[string]Rule) *TypedLinkAttributeDefinition {
-	s.Rules = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *TypedLinkAttributeDefinition) SetType(v FacetAttributeType) *TypedLinkAttributeDefinition {
-	s.Type = v
-	return s
-}
-
 // Identifies the range of attributes that are used by a specified filter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkAttributeRange
 type TypedLinkAttributeRange struct {
@@ -14392,18 +11602,6 @@ func (s *TypedLinkAttributeRange) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *TypedLinkAttributeRange) SetAttributeName(v string) *TypedLinkAttributeRange {
-	s.AttributeName = &v
-	return s
-}
-
-// SetRange sets the Range field's value.
-func (s *TypedLinkAttributeRange) SetRange(v *TypedAttributeValueRange) *TypedLinkAttributeRange {
-	s.Range = v
-	return s
 }
 
 // Defines the typed links structure and its attributes. To create a typed link
@@ -14473,24 +11671,6 @@ func (s *TypedLinkFacet) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *TypedLinkFacet) SetAttributes(v []TypedLinkAttributeDefinition) *TypedLinkFacet {
-	s.Attributes = v
-	return s
-}
-
-// SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
-func (s *TypedLinkFacet) SetIdentityAttributeOrder(v []string) *TypedLinkFacet {
-	s.IdentityAttributeOrder = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *TypedLinkFacet) SetName(v string) *TypedLinkFacet {
-	s.Name = &v
-	return s
-}
-
 // A typed link facet attribute update.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkFacetAttributeUpdate
 type TypedLinkFacetAttributeUpdate struct {
@@ -14539,18 +11719,6 @@ func (s *TypedLinkFacetAttributeUpdate) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *TypedLinkFacetAttributeUpdate) SetAction(v UpdateActionType) *TypedLinkFacetAttributeUpdate {
-	s.Action = v
-	return s
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *TypedLinkFacetAttributeUpdate) SetAttribute(v *TypedLinkAttributeDefinition) *TypedLinkFacetAttributeUpdate {
-	s.Attribute = v
-	return s
-}
-
 // Identifies the schema Amazon Resource Name (ARN) and facet name for the typed
 // link.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkSchemaAndFacetName
@@ -14595,18 +11763,6 @@ func (s *TypedLinkSchemaAndFacetName) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *TypedLinkSchemaAndFacetName) SetSchemaArn(v string) *TypedLinkSchemaAndFacetName {
-	s.SchemaArn = &v
-	return s
-}
-
-// SetTypedLinkName sets the TypedLinkName field's value.
-func (s *TypedLinkSchemaAndFacetName) SetTypedLinkName(v string) *TypedLinkSchemaAndFacetName {
-	s.TypedLinkName = &v
-	return s
 }
 
 // Contains all the information that is used to uniquely identify a typed link.
@@ -14688,30 +11844,6 @@ func (s *TypedLinkSpecifier) Validate() error {
 	return nil
 }
 
-// SetIdentityAttributeValues sets the IdentityAttributeValues field's value.
-func (s *TypedLinkSpecifier) SetIdentityAttributeValues(v []AttributeNameAndValue) *TypedLinkSpecifier {
-	s.IdentityAttributeValues = v
-	return s
-}
-
-// SetSourceObjectReference sets the SourceObjectReference field's value.
-func (s *TypedLinkSpecifier) SetSourceObjectReference(v *ObjectReference) *TypedLinkSpecifier {
-	s.SourceObjectReference = v
-	return s
-}
-
-// SetTargetObjectReference sets the TargetObjectReference field's value.
-func (s *TypedLinkSpecifier) SetTargetObjectReference(v *ObjectReference) *TypedLinkSpecifier {
-	s.TargetObjectReference = v
-	return s
-}
-
-// SetTypedLinkFacet sets the TypedLinkFacet field's value.
-func (s *TypedLinkSpecifier) SetTypedLinkFacet(v *TypedLinkSchemaAndFacetName) *TypedLinkSpecifier {
-	s.TypedLinkFacet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -14754,18 +11886,6 @@ func (s *UntagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResourceResponse
@@ -14853,30 +11973,6 @@ func (s *UpdateFacetInput) Validate() error {
 	return nil
 }
 
-// SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateFacetInput) SetAttributeUpdates(v []FacetAttributeUpdate) *UpdateFacetInput {
-	s.AttributeUpdates = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateFacetInput) SetName(v string) *UpdateFacetInput {
-	s.Name = &v
-	return s
-}
-
-// SetObjectType sets the ObjectType field's value.
-func (s *UpdateFacetInput) SetObjectType(v ObjectType) *UpdateFacetInput {
-	s.ObjectType = v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *UpdateFacetInput) SetSchemaArn(v string) *UpdateFacetInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacetResponse
 type UpdateFacetOutput struct {
 	_ struct{} `type:"structure"`
@@ -14959,24 +12055,6 @@ func (s *UpdateObjectAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateObjectAttributesInput) SetAttributeUpdates(v []ObjectAttributeUpdate) *UpdateObjectAttributesInput {
-	s.AttributeUpdates = v
-	return s
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *UpdateObjectAttributesInput) SetDirectoryArn(v string) *UpdateObjectAttributesInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetObjectReference sets the ObjectReference field's value.
-func (s *UpdateObjectAttributesInput) SetObjectReference(v *ObjectReference) *UpdateObjectAttributesInput {
-	s.ObjectReference = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesResponse
 type UpdateObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -15000,12 +12078,6 @@ func (s UpdateObjectAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateObjectAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetObjectIdentifier sets the ObjectIdentifier field's value.
-func (s *UpdateObjectAttributesOutput) SetObjectIdentifier(v string) *UpdateObjectAttributesOutput {
-	s.ObjectIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchemaRequest
@@ -15055,18 +12127,6 @@ func (s *UpdateSchemaInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *UpdateSchemaInput) SetName(v string) *UpdateSchemaInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *UpdateSchemaInput) SetSchemaArn(v string) *UpdateSchemaInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchemaResponse
 type UpdateSchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -15091,12 +12151,6 @@ func (s UpdateSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *UpdateSchemaOutput) SetSchemaArn(v string) *UpdateSchemaOutput {
-	s.SchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetRequest
@@ -15175,30 +12229,6 @@ func (s *UpdateTypedLinkFacetInput) Validate() error {
 	return nil
 }
 
-// SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateTypedLinkFacetInput) SetAttributeUpdates(v []TypedLinkFacetAttributeUpdate) *UpdateTypedLinkFacetInput {
-	s.AttributeUpdates = v
-	return s
-}
-
-// SetIdentityAttributeOrder sets the IdentityAttributeOrder field's value.
-func (s *UpdateTypedLinkFacetInput) SetIdentityAttributeOrder(v []string) *UpdateTypedLinkFacetInput {
-	s.IdentityAttributeOrder = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateTypedLinkFacetInput) SetName(v string) *UpdateTypedLinkFacetInput {
-	s.Name = &v
-	return s
-}
-
-// SetSchemaArn sets the SchemaArn field's value.
-func (s *UpdateTypedLinkFacetInput) SetSchemaArn(v string) *UpdateTypedLinkFacetInput {
-	s.SchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetResponse
 type UpdateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
@@ -15269,24 +12299,6 @@ func (s *UpgradeAppliedSchemaInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *UpgradeAppliedSchemaInput) SetDirectoryArn(v string) *UpgradeAppliedSchemaInput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *UpgradeAppliedSchemaInput) SetDryRun(v bool) *UpgradeAppliedSchemaInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
-func (s *UpgradeAppliedSchemaInput) SetPublishedSchemaArn(v string) *UpgradeAppliedSchemaInput {
-	s.PublishedSchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaResponse
 type UpgradeAppliedSchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -15313,18 +12325,6 @@ func (s UpgradeAppliedSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpgradeAppliedSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectoryArn sets the DirectoryArn field's value.
-func (s *UpgradeAppliedSchemaOutput) SetDirectoryArn(v string) *UpgradeAppliedSchemaOutput {
-	s.DirectoryArn = &v
-	return s
-}
-
-// SetUpgradedSchemaArn sets the UpgradedSchemaArn field's value.
-func (s *UpgradeAppliedSchemaOutput) SetUpgradedSchemaArn(v string) *UpgradeAppliedSchemaOutput {
-	s.UpgradedSchemaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaRequest
@@ -15389,30 +12389,6 @@ func (s *UpgradePublishedSchemaInput) Validate() error {
 	return nil
 }
 
-// SetDevelopmentSchemaArn sets the DevelopmentSchemaArn field's value.
-func (s *UpgradePublishedSchemaInput) SetDevelopmentSchemaArn(v string) *UpgradePublishedSchemaInput {
-	s.DevelopmentSchemaArn = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *UpgradePublishedSchemaInput) SetDryRun(v bool) *UpgradePublishedSchemaInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMinorVersion sets the MinorVersion field's value.
-func (s *UpgradePublishedSchemaInput) SetMinorVersion(v string) *UpgradePublishedSchemaInput {
-	s.MinorVersion = &v
-	return s
-}
-
-// SetPublishedSchemaArn sets the PublishedSchemaArn field's value.
-func (s *UpgradePublishedSchemaInput) SetPublishedSchemaArn(v string) *UpgradePublishedSchemaInput {
-	s.PublishedSchemaArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaResponse
 type UpgradePublishedSchemaOutput struct {
 	_ struct{} `type:"structure"`
@@ -15436,12 +12412,6 @@ func (s UpgradePublishedSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpgradePublishedSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUpgradedSchemaArn sets the UpgradedSchemaArn field's value.
-func (s *UpgradePublishedSchemaOutput) SetUpgradedSchemaArn(v string) *UpgradePublishedSchemaOutput {
-	s.UpgradedSchemaArn = &v
-	return s
 }
 
 type BatchReadExceptionType string

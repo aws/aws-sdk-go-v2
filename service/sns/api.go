@@ -1979,30 +1979,6 @@ func (s *AddPermissionInput) Validate() error {
 	return nil
 }
 
-// SetAWSAccountId sets the AWSAccountId field's value.
-func (s *AddPermissionInput) SetAWSAccountId(v []string) *AddPermissionInput {
-	s.AWSAccountId = v
-	return s
-}
-
-// SetActionName sets the ActionName field's value.
-func (s *AddPermissionInput) SetActionName(v []string) *AddPermissionInput {
-	s.ActionName = v
-	return s
-}
-
-// SetLabel sets the Label field's value.
-func (s *AddPermissionInput) SetLabel(v string) *AddPermissionInput {
-	s.Label = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *AddPermissionInput) SetTopicArn(v string) *AddPermissionInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionOutput
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2060,12 +2036,6 @@ func (s *CheckIfPhoneNumberIsOptedOutInput) Validate() error {
 	return nil
 }
 
-// SetPhoneNumber sets the PhoneNumber field's value.
-func (s *CheckIfPhoneNumberIsOptedOutInput) SetPhoneNumber(v string) *CheckIfPhoneNumberIsOptedOutInput {
-	s.PhoneNumber = &v
-	return s
-}
-
 // The response from the CheckIfPhoneNumberIsOptedOut action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOutResponse
 type CheckIfPhoneNumberIsOptedOutOutput struct {
@@ -2096,12 +2066,6 @@ func (s CheckIfPhoneNumberIsOptedOutOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CheckIfPhoneNumberIsOptedOutOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsOptedOut sets the IsOptedOut field's value.
-func (s *CheckIfPhoneNumberIsOptedOutOutput) SetIsOptedOut(v bool) *CheckIfPhoneNumberIsOptedOutOutput {
-	s.IsOptedOut = &v
-	return s
 }
 
 // Input for ConfirmSubscription action.
@@ -2154,24 +2118,6 @@ func (s *ConfirmSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticateOnUnsubscribe sets the AuthenticateOnUnsubscribe field's value.
-func (s *ConfirmSubscriptionInput) SetAuthenticateOnUnsubscribe(v string) *ConfirmSubscriptionInput {
-	s.AuthenticateOnUnsubscribe = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *ConfirmSubscriptionInput) SetToken(v string) *ConfirmSubscriptionInput {
-	s.Token = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *ConfirmSubscriptionInput) SetTopicArn(v string) *ConfirmSubscriptionInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Response for ConfirmSubscriptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionResponse
 type ConfirmSubscriptionOutput struct {
@@ -2196,12 +2142,6 @@ func (s ConfirmSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ConfirmSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubscriptionArn sets the SubscriptionArn field's value.
-func (s *ConfirmSubscriptionOutput) SetSubscriptionArn(v string) *ConfirmSubscriptionOutput {
-	s.SubscriptionArn = &v
-	return s
 }
 
 // Input for CreatePlatformApplication action.
@@ -2260,24 +2200,6 @@ func (s *CreatePlatformApplicationInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *CreatePlatformApplicationInput) SetAttributes(v map[string]string) *CreatePlatformApplicationInput {
-	s.Attributes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreatePlatformApplicationInput) SetName(v string) *CreatePlatformApplicationInput {
-	s.Name = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *CreatePlatformApplicationInput) SetPlatform(v string) *CreatePlatformApplicationInput {
-	s.Platform = &v
-	return s
-}
-
 // Response from CreatePlatformApplication action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationResponse
 type CreatePlatformApplicationOutput struct {
@@ -2302,12 +2224,6 @@ func (s CreatePlatformApplicationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePlatformApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *CreatePlatformApplicationOutput) SetPlatformApplicationArn(v string) *CreatePlatformApplicationOutput {
-	s.PlatformApplicationArn = &v
-	return s
 }
 
 // Input for CreatePlatformEndpoint action.
@@ -2366,30 +2282,6 @@ func (s *CreatePlatformEndpointInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *CreatePlatformEndpointInput) SetAttributes(v map[string]string) *CreatePlatformEndpointInput {
-	s.Attributes = v
-	return s
-}
-
-// SetCustomUserData sets the CustomUserData field's value.
-func (s *CreatePlatformEndpointInput) SetCustomUserData(v string) *CreatePlatformEndpointInput {
-	s.CustomUserData = &v
-	return s
-}
-
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *CreatePlatformEndpointInput) SetPlatformApplicationArn(v string) *CreatePlatformEndpointInput {
-	s.PlatformApplicationArn = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *CreatePlatformEndpointInput) SetToken(v string) *CreatePlatformEndpointInput {
-	s.Token = &v
-	return s
-}
-
 // Response from CreateEndpoint action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateEndpointResponse
 type CreatePlatformEndpointOutput struct {
@@ -2414,12 +2306,6 @@ func (s CreatePlatformEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePlatformEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *CreatePlatformEndpointOutput) SetEndpointArn(v string) *CreatePlatformEndpointOutput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Input for CreateTopic action.
@@ -2461,12 +2347,6 @@ func (s *CreateTopicInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateTopicInput) SetName(v string) *CreateTopicInput {
-	s.Name = &v
-	return s
-}
-
 // Response from CreateTopic action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicResponse
 type CreateTopicOutput struct {
@@ -2491,12 +2371,6 @@ func (s CreateTopicOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTopicOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *CreateTopicOutput) SetTopicArn(v string) *CreateTopicOutput {
-	s.TopicArn = &v
-	return s
 }
 
 // Input for DeleteEndpoint action.
@@ -2532,12 +2406,6 @@ func (s *DeleteEndpointInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *DeleteEndpointInput) SetEndpointArn(v string) *DeleteEndpointInput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpointOutput
@@ -2597,12 +2465,6 @@ func (s *DeletePlatformApplicationInput) Validate() error {
 	return nil
 }
 
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *DeletePlatformApplicationInput) SetPlatformApplicationArn(v string) *DeletePlatformApplicationInput {
-	s.PlatformApplicationArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationOutput
 type DeletePlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2659,12 +2521,6 @@ func (s *DeleteTopicInput) Validate() error {
 	return nil
 }
 
-// SetTopicArn sets the TopicArn field's value.
-func (s *DeleteTopicInput) SetTopicArn(v string) *DeleteTopicInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopicOutput
 type DeleteTopicOutput struct {
 	_ struct{} `type:"structure"`
@@ -2709,18 +2565,6 @@ func (s Endpoint) GoString() string {
 	return s.String()
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *Endpoint) SetAttributes(v map[string]string) *Endpoint {
-	s.Attributes = v
-	return s
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *Endpoint) SetEndpointArn(v string) *Endpoint {
-	s.EndpointArn = &v
-	return s
-}
-
 // Input for GetEndpointAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributesInput
 type GetEndpointAttributesInput struct {
@@ -2754,12 +2598,6 @@ func (s *GetEndpointAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *GetEndpointAttributesInput) SetEndpointArn(v string) *GetEndpointAttributesInput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Response from GetEndpointAttributes of the EndpointArn.
@@ -2801,12 +2639,6 @@ func (s GetEndpointAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *GetEndpointAttributesOutput) SetAttributes(v map[string]string) *GetEndpointAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
 // Input for GetPlatformApplicationAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesInput
 type GetPlatformApplicationAttributesInput struct {
@@ -2840,12 +2672,6 @@ func (s *GetPlatformApplicationAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *GetPlatformApplicationAttributesInput) SetPlatformApplicationArn(v string) *GetPlatformApplicationAttributesInput {
-	s.PlatformApplicationArn = &v
-	return s
 }
 
 // Response for GetPlatformApplicationAttributes action.
@@ -2887,12 +2713,6 @@ func (s GetPlatformApplicationAttributesOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *GetPlatformApplicationAttributesOutput) SetAttributes(v map[string]string) *GetPlatformApplicationAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
 // The input for the GetSMSAttributes request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesInput
 type GetSMSAttributesInput struct {
@@ -2915,12 +2735,6 @@ func (s GetSMSAttributesInput) String() string {
 // GoString returns the string representation
 func (s GetSMSAttributesInput) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *GetSMSAttributesInput) SetAttributes(v []string) *GetSMSAttributesInput {
-	s.Attributes = v
-	return s
 }
 
 // The response from the GetSMSAttributes request.
@@ -2947,12 +2761,6 @@ func (s GetSMSAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSMSAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *GetSMSAttributesOutput) SetAttributes(v map[string]string) *GetSMSAttributesOutput {
-	s.Attributes = v
-	return s
 }
 
 // Input for GetSubscriptionAttributes.
@@ -2988,12 +2796,6 @@ func (s *GetSubscriptionAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSubscriptionArn sets the SubscriptionArn field's value.
-func (s *GetSubscriptionAttributesInput) SetSubscriptionArn(v string) *GetSubscriptionAttributesInput {
-	s.SubscriptionArn = &v
-	return s
 }
 
 // Response for GetSubscriptionAttributes action.
@@ -3039,12 +2841,6 @@ func (s GetSubscriptionAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *GetSubscriptionAttributesOutput) SetAttributes(v map[string]string) *GetSubscriptionAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
 // Input for GetTopicAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesInput
 type GetTopicAttributesInput struct {
@@ -3078,12 +2874,6 @@ func (s *GetTopicAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *GetTopicAttributesInput) SetTopicArn(v string) *GetTopicAttributesInput {
-	s.TopicArn = &v
-	return s
 }
 
 // Response for GetTopicAttributes action.
@@ -3135,12 +2925,6 @@ func (s GetTopicAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *GetTopicAttributesOutput) SetAttributes(v map[string]string) *GetTopicAttributesOutput {
-	s.Attributes = v
-	return s
-}
-
 // Input for ListEndpointsByPlatformApplication action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationInput
 type ListEndpointsByPlatformApplicationInput struct {
@@ -3181,18 +2965,6 @@ func (s *ListEndpointsByPlatformApplicationInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListEndpointsByPlatformApplicationInput) SetNextToken(v string) *ListEndpointsByPlatformApplicationInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *ListEndpointsByPlatformApplicationInput) SetPlatformApplicationArn(v string) *ListEndpointsByPlatformApplicationInput {
-	s.PlatformApplicationArn = &v
-	return s
-}
-
 // Response for ListEndpointsByPlatformApplication action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationResponse
 type ListEndpointsByPlatformApplicationOutput struct {
@@ -3223,18 +2995,6 @@ func (s ListEndpointsByPlatformApplicationOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetEndpoints sets the Endpoints field's value.
-func (s *ListEndpointsByPlatformApplicationOutput) SetEndpoints(v []Endpoint) *ListEndpointsByPlatformApplicationOutput {
-	s.Endpoints = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListEndpointsByPlatformApplicationOutput) SetNextToken(v string) *ListEndpointsByPlatformApplicationOutput {
-	s.NextToken = &v
-	return s
-}
-
 // The input for the ListPhoneNumbersOptedOut action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOutInput
 type ListPhoneNumbersOptedOutInput struct {
@@ -3254,12 +3014,6 @@ func (s ListPhoneNumbersOptedOutInput) String() string {
 // GoString returns the string representation
 func (s ListPhoneNumbersOptedOutInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPhoneNumbersOptedOutInput) SetNextToken(v string) *ListPhoneNumbersOptedOutInput {
-	s.NextToken = &v
-	return s
 }
 
 // The response from the ListPhoneNumbersOptedOut action.
@@ -3293,18 +3047,6 @@ func (s ListPhoneNumbersOptedOutOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListPhoneNumbersOptedOutOutput) SetNextToken(v string) *ListPhoneNumbersOptedOutOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPhoneNumbers sets the PhoneNumbers field's value.
-func (s *ListPhoneNumbersOptedOutOutput) SetPhoneNumbers(v []string) *ListPhoneNumbersOptedOutOutput {
-	s.PhoneNumbers = v
-	return s
-}
-
 // Input for ListPlatformApplications action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsInput
 type ListPlatformApplicationsInput struct {
@@ -3323,12 +3065,6 @@ func (s ListPlatformApplicationsInput) String() string {
 // GoString returns the string representation
 func (s ListPlatformApplicationsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPlatformApplicationsInput) SetNextToken(v string) *ListPlatformApplicationsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Response for ListPlatformApplications action.
@@ -3359,18 +3095,6 @@ func (s ListPlatformApplicationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPlatformApplicationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPlatformApplicationsOutput) SetNextToken(v string) *ListPlatformApplicationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPlatformApplications sets the PlatformApplications field's value.
-func (s *ListPlatformApplicationsOutput) SetPlatformApplications(v []PlatformApplication) *ListPlatformApplicationsOutput {
-	s.PlatformApplications = v
-	return s
 }
 
 // Input for ListSubscriptionsByTopic action.
@@ -3411,18 +3135,6 @@ func (s *ListSubscriptionsByTopicInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionsByTopicInput) SetNextToken(v string) *ListSubscriptionsByTopicInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *ListSubscriptionsByTopicInput) SetTopicArn(v string) *ListSubscriptionsByTopicInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Response for ListSubscriptionsByTopic action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopicResponse
 type ListSubscriptionsByTopicOutput struct {
@@ -3453,18 +3165,6 @@ func (s ListSubscriptionsByTopicOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionsByTopicOutput) SetNextToken(v string) *ListSubscriptionsByTopicOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *ListSubscriptionsByTopicOutput) SetSubscriptions(v []Subscription) *ListSubscriptionsByTopicOutput {
-	s.Subscriptions = v
-	return s
-}
-
 // Input for ListSubscriptions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsInput
 type ListSubscriptionsInput struct {
@@ -3482,12 +3182,6 @@ func (s ListSubscriptionsInput) String() string {
 // GoString returns the string representation
 func (s ListSubscriptionsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionsInput) SetNextToken(v string) *ListSubscriptionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Response for ListSubscriptions action
@@ -3520,18 +3214,6 @@ func (s ListSubscriptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionsOutput) SetNextToken(v string) *ListSubscriptionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *ListSubscriptionsOutput) SetSubscriptions(v []Subscription) *ListSubscriptionsOutput {
-	s.Subscriptions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopicsInput
 type ListTopicsInput struct {
 	_ struct{} `type:"structure"`
@@ -3548,12 +3230,6 @@ func (s ListTopicsInput) String() string {
 // GoString returns the string representation
 func (s ListTopicsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTopicsInput) SetNextToken(v string) *ListTopicsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Response for ListTopics action.
@@ -3584,18 +3260,6 @@ func (s ListTopicsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTopicsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTopicsOutput) SetNextToken(v string) *ListTopicsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTopics sets the Topics field's value.
-func (s *ListTopicsOutput) SetTopics(v []Topic) *ListTopicsOutput {
-	s.Topics = v
-	return s
 }
 
 // The user-specified message attribute value. For string data types, the value
@@ -3652,24 +3316,6 @@ func (s *MessageAttributeValue) Validate() error {
 	return nil
 }
 
-// SetBinaryValue sets the BinaryValue field's value.
-func (s *MessageAttributeValue) SetBinaryValue(v []byte) *MessageAttributeValue {
-	s.BinaryValue = v
-	return s
-}
-
-// SetDataType sets the DataType field's value.
-func (s *MessageAttributeValue) SetDataType(v string) *MessageAttributeValue {
-	s.DataType = &v
-	return s
-}
-
-// SetStringValue sets the StringValue field's value.
-func (s *MessageAttributeValue) SetStringValue(v string) *MessageAttributeValue {
-	s.StringValue = &v
-	return s
-}
-
 // Input for the OptInPhoneNumber action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberInput
 type OptInPhoneNumberInput struct {
@@ -3703,12 +3349,6 @@ func (s *OptInPhoneNumberInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPhoneNumber sets the PhoneNumber field's value.
-func (s *OptInPhoneNumberInput) SetPhoneNumber(v string) *OptInPhoneNumberInput {
-	s.PhoneNumber = &v
-	return s
 }
 
 // The response for the OptInPhoneNumber action.
@@ -3754,18 +3394,6 @@ func (s PlatformApplication) String() string {
 // GoString returns the string representation
 func (s PlatformApplication) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *PlatformApplication) SetAttributes(v map[string]string) *PlatformApplication {
-	s.Attributes = v
-	return s
-}
-
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *PlatformApplication) SetPlatformApplicationArn(v string) *PlatformApplication {
-	s.PlatformApplicationArn = &v
-	return s
 }
 
 // Input for Publish action.
@@ -3896,48 +3524,6 @@ func (s *PublishInput) Validate() error {
 	return nil
 }
 
-// SetMessage sets the Message field's value.
-func (s *PublishInput) SetMessage(v string) *PublishInput {
-	s.Message = &v
-	return s
-}
-
-// SetMessageAttributes sets the MessageAttributes field's value.
-func (s *PublishInput) SetMessageAttributes(v map[string]MessageAttributeValue) *PublishInput {
-	s.MessageAttributes = v
-	return s
-}
-
-// SetMessageStructure sets the MessageStructure field's value.
-func (s *PublishInput) SetMessageStructure(v string) *PublishInput {
-	s.MessageStructure = &v
-	return s
-}
-
-// SetPhoneNumber sets the PhoneNumber field's value.
-func (s *PublishInput) SetPhoneNumber(v string) *PublishInput {
-	s.PhoneNumber = &v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *PublishInput) SetSubject(v string) *PublishInput {
-	s.Subject = &v
-	return s
-}
-
-// SetTargetArn sets the TargetArn field's value.
-func (s *PublishInput) SetTargetArn(v string) *PublishInput {
-	s.TargetArn = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *PublishInput) SetTopicArn(v string) *PublishInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Response for Publish action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishResponse
 type PublishOutput struct {
@@ -3964,12 +3550,6 @@ func (s PublishOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PublishOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageId sets the MessageId field's value.
-func (s *PublishOutput) SetMessageId(v string) *PublishOutput {
-	s.MessageId = &v
-	return s
 }
 
 // Input for RemovePermission action.
@@ -4014,18 +3594,6 @@ func (s *RemovePermissionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLabel sets the Label field's value.
-func (s *RemovePermissionInput) SetLabel(v string) *RemovePermissionInput {
-	s.Label = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *RemovePermissionInput) SetTopicArn(v string) *RemovePermissionInput {
-	s.TopicArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermissionOutput
@@ -4105,18 +3673,6 @@ func (s *SetEndpointAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *SetEndpointAttributesInput) SetAttributes(v map[string]string) *SetEndpointAttributesInput {
-	s.Attributes = v
-	return s
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *SetEndpointAttributesInput) SetEndpointArn(v string) *SetEndpointAttributesInput {
-	s.EndpointArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributesOutput
@@ -4216,18 +3772,6 @@ func (s *SetPlatformApplicationAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *SetPlatformApplicationAttributesInput) SetAttributes(v map[string]string) *SetPlatformApplicationAttributesInput {
-	s.Attributes = v
-	return s
-}
-
-// SetPlatformApplicationArn sets the PlatformApplicationArn field's value.
-func (s *SetPlatformApplicationAttributesInput) SetPlatformApplicationArn(v string) *SetPlatformApplicationAttributesInput {
-	s.PlatformApplicationArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributesOutput
@@ -4358,12 +3902,6 @@ func (s *SetSMSAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *SetSMSAttributesInput) SetAttributes(v map[string]string) *SetSMSAttributesInput {
-	s.Attributes = v
-	return s
-}
-
 // The response for the SetSMSAttributes action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesResponse
 type SetSMSAttributesOutput struct {
@@ -4437,24 +3975,6 @@ func (s *SetSubscriptionAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *SetSubscriptionAttributesInput) SetAttributeName(v string) *SetSubscriptionAttributesInput {
-	s.AttributeName = &v
-	return s
-}
-
-// SetAttributeValue sets the AttributeValue field's value.
-func (s *SetSubscriptionAttributesInput) SetAttributeValue(v string) *SetSubscriptionAttributesInput {
-	s.AttributeValue = &v
-	return s
-}
-
-// SetSubscriptionArn sets the SubscriptionArn field's value.
-func (s *SetSubscriptionAttributesInput) SetSubscriptionArn(v string) *SetSubscriptionAttributesInput {
-	s.SubscriptionArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributesOutput
 type SetSubscriptionAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4525,24 +4045,6 @@ func (s *SetTopicAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *SetTopicAttributesInput) SetAttributeName(v string) *SetTopicAttributesInput {
-	s.AttributeName = &v
-	return s
-}
-
-// SetAttributeValue sets the AttributeValue field's value.
-func (s *SetTopicAttributesInput) SetAttributeValue(v string) *SetTopicAttributesInput {
-	s.AttributeValue = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *SetTopicAttributesInput) SetTopicArn(v string) *SetTopicAttributesInput {
-	s.TopicArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributesOutput
@@ -4649,24 +4151,6 @@ func (s *SubscribeInput) Validate() error {
 	return nil
 }
 
-// SetEndpoint sets the Endpoint field's value.
-func (s *SubscribeInput) SetEndpoint(v string) *SubscribeInput {
-	s.Endpoint = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *SubscribeInput) SetProtocol(v string) *SubscribeInput {
-	s.Protocol = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *SubscribeInput) SetTopicArn(v string) *SubscribeInput {
-	s.TopicArn = &v
-	return s
-}
-
 // Response for Subscribe action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeResponse
 type SubscribeOutput struct {
@@ -4692,12 +4176,6 @@ func (s SubscribeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SubscribeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubscriptionArn sets the SubscriptionArn field's value.
-func (s *SubscribeOutput) SetSubscriptionArn(v string) *SubscribeOutput {
-	s.SubscriptionArn = &v
-	return s
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
@@ -4731,36 +4209,6 @@ func (s Subscription) GoString() string {
 	return s.String()
 }
 
-// SetEndpoint sets the Endpoint field's value.
-func (s *Subscription) SetEndpoint(v string) *Subscription {
-	s.Endpoint = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *Subscription) SetOwner(v string) *Subscription {
-	s.Owner = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *Subscription) SetProtocol(v string) *Subscription {
-	s.Protocol = &v
-	return s
-}
-
-// SetSubscriptionArn sets the SubscriptionArn field's value.
-func (s *Subscription) SetSubscriptionArn(v string) *Subscription {
-	s.SubscriptionArn = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *Subscription) SetTopicArn(v string) *Subscription {
-	s.TopicArn = &v
-	return s
-}
-
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a
 // topic's attributes, use GetTopicAttributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Topic
@@ -4779,12 +4227,6 @@ func (s Topic) String() string {
 // GoString returns the string representation
 func (s Topic) GoString() string {
 	return s.String()
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *Topic) SetTopicArn(v string) *Topic {
-	s.TopicArn = &v
-	return s
 }
 
 // Input for Unsubscribe action.
@@ -4820,12 +4262,6 @@ func (s *UnsubscribeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSubscriptionArn sets the SubscriptionArn field's value.
-func (s *UnsubscribeInput) SetSubscriptionArn(v string) *UnsubscribeInput {
-	s.SubscriptionArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UnsubscribeOutput

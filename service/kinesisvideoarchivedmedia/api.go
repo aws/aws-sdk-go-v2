@@ -154,36 +154,6 @@ func (s Fragment) GoString() string {
 	return s.String()
 }
 
-// SetFragmentLengthInMilliseconds sets the FragmentLengthInMilliseconds field's value.
-func (s *Fragment) SetFragmentLengthInMilliseconds(v int64) *Fragment {
-	s.FragmentLengthInMilliseconds = &v
-	return s
-}
-
-// SetFragmentNumber sets the FragmentNumber field's value.
-func (s *Fragment) SetFragmentNumber(v string) *Fragment {
-	s.FragmentNumber = &v
-	return s
-}
-
-// SetFragmentSizeInBytes sets the FragmentSizeInBytes field's value.
-func (s *Fragment) SetFragmentSizeInBytes(v int64) *Fragment {
-	s.FragmentSizeInBytes = &v
-	return s
-}
-
-// SetProducerTimestamp sets the ProducerTimestamp field's value.
-func (s *Fragment) SetProducerTimestamp(v time.Time) *Fragment {
-	s.ProducerTimestamp = &v
-	return s
-}
-
-// SetServerTimestamp sets the ServerTimestamp field's value.
-func (s *Fragment) SetServerTimestamp(v time.Time) *Fragment {
-	s.ServerTimestamp = &v
-	return s
-}
-
 // Describes the time stamp range and time stamp origin of a range of fragments.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/FragmentSelector
 type FragmentSelector struct {
@@ -230,18 +200,6 @@ func (s *FragmentSelector) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFragmentSelectorType sets the FragmentSelectorType field's value.
-func (s *FragmentSelector) SetFragmentSelectorType(v FragmentSelectorType) *FragmentSelector {
-	s.FragmentSelectorType = v
-	return s
-}
-
-// SetTimestampRange sets the TimestampRange field's value.
-func (s *FragmentSelector) SetTimestampRange(v *TimestampRange) *FragmentSelector {
-	s.TimestampRange = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetMediaForFragmentListInput
@@ -291,18 +249,6 @@ func (s *GetMediaForFragmentListInput) Validate() error {
 	return nil
 }
 
-// SetFragments sets the Fragments field's value.
-func (s *GetMediaForFragmentListInput) SetFragments(v []string) *GetMediaForFragmentListInput {
-	s.Fragments = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *GetMediaForFragmentListInput) SetStreamName(v string) *GetMediaForFragmentListInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetMediaForFragmentListOutput
 type GetMediaForFragmentListOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -349,18 +295,6 @@ func (s GetMediaForFragmentListOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMediaForFragmentListOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *GetMediaForFragmentListOutput) SetContentType(v string) *GetMediaForFragmentListOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetPayload sets the Payload field's value.
-func (s *GetMediaForFragmentListOutput) SetPayload(v io.ReadCloser) *GetMediaForFragmentListOutput {
-	s.Payload = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsInput
@@ -424,30 +358,6 @@ func (s *ListFragmentsInput) Validate() error {
 	return nil
 }
 
-// SetFragmentSelector sets the FragmentSelector field's value.
-func (s *ListFragmentsInput) SetFragmentSelector(v *FragmentSelector) *ListFragmentsInput {
-	s.FragmentSelector = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFragmentsInput) SetMaxResults(v int64) *ListFragmentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFragmentsInput) SetNextToken(v string) *ListFragmentsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *ListFragmentsInput) SetStreamName(v string) *ListFragmentsInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsOutput
 type ListFragmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -476,18 +386,6 @@ func (s ListFragmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFragmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFragments sets the Fragments field's value.
-func (s *ListFragmentsOutput) SetFragments(v []Fragment) *ListFragmentsOutput {
-	s.Fragments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFragmentsOutput) SetNextToken(v string) *ListFragmentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // The range of time stamps for which to return fragments.
@@ -532,18 +430,6 @@ func (s *TimestampRange) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEndTimestamp sets the EndTimestamp field's value.
-func (s *TimestampRange) SetEndTimestamp(v time.Time) *TimestampRange {
-	s.EndTimestamp = &v
-	return s
-}
-
-// SetStartTimestamp sets the StartTimestamp field's value.
-func (s *TimestampRange) SetStartTimestamp(v time.Time) *TimestampRange {
-	s.StartTimestamp = &v
-	return s
 }
 
 type FragmentSelectorType string

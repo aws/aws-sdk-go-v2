@@ -5326,24 +5326,6 @@ func (s *AcceptMatchInput) Validate() error {
 	return nil
 }
 
-// SetAcceptanceType sets the AcceptanceType field's value.
-func (s *AcceptMatchInput) SetAcceptanceType(v AcceptanceType) *AcceptMatchInput {
-	s.AcceptanceType = v
-	return s
-}
-
-// SetPlayerIds sets the PlayerIds field's value.
-func (s *AcceptMatchInput) SetPlayerIds(v []string) *AcceptMatchInput {
-	s.PlayerIds = v
-	return s
-}
-
-// SetTicketId sets the TicketId field's value.
-func (s *AcceptMatchInput) SetTicketId(v string) *AcceptMatchInput {
-	s.TicketId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatchOutput
 type AcceptMatchOutput struct {
 	_ struct{} `type:"structure"`
@@ -5420,48 +5402,6 @@ func (s Alias) GoString() string {
 	return s.String()
 }
 
-// SetAliasArn sets the AliasArn field's value.
-func (s *Alias) SetAliasArn(v string) *Alias {
-	s.AliasArn = &v
-	return s
-}
-
-// SetAliasId sets the AliasId field's value.
-func (s *Alias) SetAliasId(v string) *Alias {
-	s.AliasId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *Alias) SetCreationTime(v time.Time) *Alias {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Alias) SetDescription(v string) *Alias {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedTime sets the LastUpdatedTime field's value.
-func (s *Alias) SetLastUpdatedTime(v time.Time) *Alias {
-	s.LastUpdatedTime = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Alias) SetName(v string) *Alias {
-	s.Name = &v
-	return s
-}
-
-// SetRoutingStrategy sets the RoutingStrategy field's value.
-func (s *Alias) SetRoutingStrategy(v *RoutingStrategy) *Alias {
-	s.RoutingStrategy = v
-	return s
-}
-
 // Values for use in Player attribute type:value pairs. This object lets you
 // specify an attribute value using any of the valid data types: string, number,
 // string array or data map. Each AttributeValue object can use only one of
@@ -5509,30 +5449,6 @@ func (s *AttributeValue) Validate() error {
 	return nil
 }
 
-// SetN sets the N field's value.
-func (s *AttributeValue) SetN(v float64) *AttributeValue {
-	s.N = &v
-	return s
-}
-
-// SetS sets the S field's value.
-func (s *AttributeValue) SetS(v string) *AttributeValue {
-	s.S = &v
-	return s
-}
-
-// SetSDM sets the SDM field's value.
-func (s *AttributeValue) SetSDM(v map[string]float64) *AttributeValue {
-	s.SDM = v
-	return s
-}
-
-// SetSL sets the SL field's value.
-func (s *AttributeValue) SetSL(v []string) *AttributeValue {
-	s.SL = v
-	return s
-}
-
 // Temporary access credentials used for uploading game build files to Amazon
 // GameLift. They are valid for a limited time. If they expire before you upload
 // your game build, get a new set by calling RequestUploadCredentials.
@@ -5559,24 +5475,6 @@ func (s AwsCredentials) String() string {
 // GoString returns the string representation
 func (s AwsCredentials) GoString() string {
 	return s.String()
-}
-
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *AwsCredentials) SetAccessKeyId(v string) *AwsCredentials {
-	s.AccessKeyId = &v
-	return s
-}
-
-// SetSecretAccessKey sets the SecretAccessKey field's value.
-func (s *AwsCredentials) SetSecretAccessKey(v string) *AwsCredentials {
-	s.SecretAccessKey = &v
-	return s
-}
-
-// SetSessionToken sets the SessionToken field's value.
-func (s *AwsCredentials) SetSessionToken(v string) *AwsCredentials {
-	s.SessionToken = &v
-	return s
 }
 
 // Properties describing a game build.
@@ -5646,48 +5544,6 @@ func (s Build) GoString() string {
 	return s.String()
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *Build) SetBuildId(v string) *Build {
-	s.BuildId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *Build) SetCreationTime(v time.Time) *Build {
-	s.CreationTime = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Build) SetName(v string) *Build {
-	s.Name = &v
-	return s
-}
-
-// SetOperatingSystem sets the OperatingSystem field's value.
-func (s *Build) SetOperatingSystem(v OperatingSystem) *Build {
-	s.OperatingSystem = v
-	return s
-}
-
-// SetSizeOnDisk sets the SizeOnDisk field's value.
-func (s *Build) SetSizeOnDisk(v int64) *Build {
-	s.SizeOnDisk = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Build) SetStatus(v BuildStatus) *Build {
-	s.Status = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *Build) SetVersion(v string) *Build {
-	s.Version = &v
-	return s
-}
-
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAliasInput
 type CreateAliasInput struct {
@@ -5742,24 +5598,6 @@ func (s *CreateAliasInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateAliasInput) SetDescription(v string) *CreateAliasInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateAliasInput) SetName(v string) *CreateAliasInput {
-	s.Name = &v
-	return s
-}
-
-// SetRoutingStrategy sets the RoutingStrategy field's value.
-func (s *CreateAliasInput) SetRoutingStrategy(v *RoutingStrategy) *CreateAliasInput {
-	s.RoutingStrategy = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAliasOutput
 type CreateAliasOutput struct {
@@ -5784,12 +5622,6 @@ func (s CreateAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAlias sets the Alias field's value.
-func (s *CreateAliasOutput) SetAlias(v *Alias) *CreateAliasOutput {
-	s.Alias = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -5851,30 +5683,6 @@ func (s *CreateBuildInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateBuildInput) SetName(v string) *CreateBuildInput {
-	s.Name = &v
-	return s
-}
-
-// SetOperatingSystem sets the OperatingSystem field's value.
-func (s *CreateBuildInput) SetOperatingSystem(v OperatingSystem) *CreateBuildInput {
-	s.OperatingSystem = v
-	return s
-}
-
-// SetStorageLocation sets the StorageLocation field's value.
-func (s *CreateBuildInput) SetStorageLocation(v *S3Location) *CreateBuildInput {
-	s.StorageLocation = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateBuildInput) SetVersion(v string) *CreateBuildInput {
-	s.Version = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuildOutput
 type CreateBuildOutput struct {
@@ -5905,24 +5713,6 @@ func (s CreateBuildOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateBuildOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuild sets the Build field's value.
-func (s *CreateBuildOutput) SetBuild(v *Build) *CreateBuildOutput {
-	s.Build = v
-	return s
-}
-
-// SetStorageLocation sets the StorageLocation field's value.
-func (s *CreateBuildOutput) SetStorageLocation(v *S3Location) *CreateBuildOutput {
-	s.StorageLocation = v
-	return s
-}
-
-// SetUploadCredentials sets the UploadCredentials field's value.
-func (s *CreateBuildOutput) SetUploadCredentials(v *AwsCredentials) *CreateBuildOutput {
-	s.UploadCredentials = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -6088,90 +5878,6 @@ func (s *CreateFleetInput) Validate() error {
 	return nil
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *CreateFleetInput) SetBuildId(v string) *CreateFleetInput {
-	s.BuildId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateFleetInput) SetDescription(v string) *CreateFleetInput {
-	s.Description = &v
-	return s
-}
-
-// SetEC2InboundPermissions sets the EC2InboundPermissions field's value.
-func (s *CreateFleetInput) SetEC2InboundPermissions(v []IpPermission) *CreateFleetInput {
-	s.EC2InboundPermissions = v
-	return s
-}
-
-// SetEC2InstanceType sets the EC2InstanceType field's value.
-func (s *CreateFleetInput) SetEC2InstanceType(v EC2InstanceType) *CreateFleetInput {
-	s.EC2InstanceType = v
-	return s
-}
-
-// SetLogPaths sets the LogPaths field's value.
-func (s *CreateFleetInput) SetLogPaths(v []string) *CreateFleetInput {
-	s.LogPaths = v
-	return s
-}
-
-// SetMetricGroups sets the MetricGroups field's value.
-func (s *CreateFleetInput) SetMetricGroups(v []string) *CreateFleetInput {
-	s.MetricGroups = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFleetInput) SetName(v string) *CreateFleetInput {
-	s.Name = &v
-	return s
-}
-
-// SetNewGameSessionProtectionPolicy sets the NewGameSessionProtectionPolicy field's value.
-func (s *CreateFleetInput) SetNewGameSessionProtectionPolicy(v ProtectionPolicy) *CreateFleetInput {
-	s.NewGameSessionProtectionPolicy = v
-	return s
-}
-
-// SetPeerVpcAwsAccountId sets the PeerVpcAwsAccountId field's value.
-func (s *CreateFleetInput) SetPeerVpcAwsAccountId(v string) *CreateFleetInput {
-	s.PeerVpcAwsAccountId = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *CreateFleetInput) SetPeerVpcId(v string) *CreateFleetInput {
-	s.PeerVpcId = &v
-	return s
-}
-
-// SetResourceCreationLimitPolicy sets the ResourceCreationLimitPolicy field's value.
-func (s *CreateFleetInput) SetResourceCreationLimitPolicy(v *ResourceCreationLimitPolicy) *CreateFleetInput {
-	s.ResourceCreationLimitPolicy = v
-	return s
-}
-
-// SetRuntimeConfiguration sets the RuntimeConfiguration field's value.
-func (s *CreateFleetInput) SetRuntimeConfiguration(v *RuntimeConfiguration) *CreateFleetInput {
-	s.RuntimeConfiguration = v
-	return s
-}
-
-// SetServerLaunchParameters sets the ServerLaunchParameters field's value.
-func (s *CreateFleetInput) SetServerLaunchParameters(v string) *CreateFleetInput {
-	s.ServerLaunchParameters = &v
-	return s
-}
-
-// SetServerLaunchPath sets the ServerLaunchPath field's value.
-func (s *CreateFleetInput) SetServerLaunchPath(v string) *CreateFleetInput {
-	s.ServerLaunchPath = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetOutput
 type CreateFleetOutput struct {
@@ -6196,12 +5902,6 @@ func (s CreateFleetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetAttributes sets the FleetAttributes field's value.
-func (s *CreateFleetOutput) SetFleetAttributes(v *FleetAttributes) *CreateFleetOutput {
-	s.FleetAttributes = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -6309,60 +6009,6 @@ func (s *CreateGameSessionInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *CreateGameSessionInput) SetAliasId(v string) *CreateGameSessionInput {
-	s.AliasId = &v
-	return s
-}
-
-// SetCreatorId sets the CreatorId field's value.
-func (s *CreateGameSessionInput) SetCreatorId(v string) *CreateGameSessionInput {
-	s.CreatorId = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *CreateGameSessionInput) SetFleetId(v string) *CreateGameSessionInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *CreateGameSessionInput) SetGameProperties(v []GameProperty) *CreateGameSessionInput {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *CreateGameSessionInput) SetGameSessionData(v string) *CreateGameSessionInput {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *CreateGameSessionInput) SetGameSessionId(v string) *CreateGameSessionInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *CreateGameSessionInput) SetIdempotencyToken(v string) *CreateGameSessionInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetMaximumPlayerSessionCount sets the MaximumPlayerSessionCount field's value.
-func (s *CreateGameSessionInput) SetMaximumPlayerSessionCount(v int64) *CreateGameSessionInput {
-	s.MaximumPlayerSessionCount = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGameSessionInput) SetName(v string) *CreateGameSessionInput {
-	s.Name = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionOutput
 type CreateGameSessionOutput struct {
@@ -6387,12 +6033,6 @@ func (s CreateGameSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGameSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSession sets the GameSession field's value.
-func (s *CreateGameSessionOutput) SetGameSession(v *GameSession) *CreateGameSessionOutput {
-	s.GameSession = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -6463,30 +6103,6 @@ func (s *CreateGameSessionQueueInput) Validate() error {
 	return nil
 }
 
-// SetDestinations sets the Destinations field's value.
-func (s *CreateGameSessionQueueInput) SetDestinations(v []GameSessionQueueDestination) *CreateGameSessionQueueInput {
-	s.Destinations = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGameSessionQueueInput) SetName(v string) *CreateGameSessionQueueInput {
-	s.Name = &v
-	return s
-}
-
-// SetPlayerLatencyPolicies sets the PlayerLatencyPolicies field's value.
-func (s *CreateGameSessionQueueInput) SetPlayerLatencyPolicies(v []PlayerLatencyPolicy) *CreateGameSessionQueueInput {
-	s.PlayerLatencyPolicies = v
-	return s
-}
-
-// SetTimeoutInSeconds sets the TimeoutInSeconds field's value.
-func (s *CreateGameSessionQueueInput) SetTimeoutInSeconds(v int64) *CreateGameSessionQueueInput {
-	s.TimeoutInSeconds = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueueOutput
 type CreateGameSessionQueueOutput struct {
@@ -6511,12 +6127,6 @@ func (s CreateGameSessionQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGameSessionQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionQueue sets the GameSessionQueue field's value.
-func (s *CreateGameSessionQueueOutput) SetGameSessionQueue(v *GameSessionQueue) *CreateGameSessionQueueOutput {
-	s.GameSessionQueue = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -6660,78 +6270,6 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *CreateMatchmakingConfigurationInput) SetAcceptanceRequired(v bool) *CreateMatchmakingConfigurationInput {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetAcceptanceTimeoutSeconds sets the AcceptanceTimeoutSeconds field's value.
-func (s *CreateMatchmakingConfigurationInput) SetAcceptanceTimeoutSeconds(v int64) *CreateMatchmakingConfigurationInput {
-	s.AcceptanceTimeoutSeconds = &v
-	return s
-}
-
-// SetAdditionalPlayerCount sets the AdditionalPlayerCount field's value.
-func (s *CreateMatchmakingConfigurationInput) SetAdditionalPlayerCount(v int64) *CreateMatchmakingConfigurationInput {
-	s.AdditionalPlayerCount = &v
-	return s
-}
-
-// SetCustomEventData sets the CustomEventData field's value.
-func (s *CreateMatchmakingConfigurationInput) SetCustomEventData(v string) *CreateMatchmakingConfigurationInput {
-	s.CustomEventData = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateMatchmakingConfigurationInput) SetDescription(v string) *CreateMatchmakingConfigurationInput {
-	s.Description = &v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *CreateMatchmakingConfigurationInput) SetGameProperties(v []GameProperty) *CreateMatchmakingConfigurationInput {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *CreateMatchmakingConfigurationInput) SetGameSessionData(v string) *CreateMatchmakingConfigurationInput {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionQueueArns sets the GameSessionQueueArns field's value.
-func (s *CreateMatchmakingConfigurationInput) SetGameSessionQueueArns(v []string) *CreateMatchmakingConfigurationInput {
-	s.GameSessionQueueArns = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateMatchmakingConfigurationInput) SetName(v string) *CreateMatchmakingConfigurationInput {
-	s.Name = &v
-	return s
-}
-
-// SetNotificationTarget sets the NotificationTarget field's value.
-func (s *CreateMatchmakingConfigurationInput) SetNotificationTarget(v string) *CreateMatchmakingConfigurationInput {
-	s.NotificationTarget = &v
-	return s
-}
-
-// SetRequestTimeoutSeconds sets the RequestTimeoutSeconds field's value.
-func (s *CreateMatchmakingConfigurationInput) SetRequestTimeoutSeconds(v int64) *CreateMatchmakingConfigurationInput {
-	s.RequestTimeoutSeconds = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *CreateMatchmakingConfigurationInput) SetRuleSetName(v string) *CreateMatchmakingConfigurationInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfigurationOutput
 type CreateMatchmakingConfigurationOutput struct {
@@ -6756,12 +6294,6 @@ func (s CreateMatchmakingConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateMatchmakingConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *CreateMatchmakingConfigurationOutput) SetConfiguration(v *MatchmakingConfiguration) *CreateMatchmakingConfigurationOutput {
-	s.Configuration = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -6816,18 +6348,6 @@ func (s *CreateMatchmakingRuleSetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateMatchmakingRuleSetInput) SetName(v string) *CreateMatchmakingRuleSetInput {
-	s.Name = &v
-	return s
-}
-
-// SetRuleSetBody sets the RuleSetBody field's value.
-func (s *CreateMatchmakingRuleSetInput) SetRuleSetBody(v string) *CreateMatchmakingRuleSetInput {
-	s.RuleSetBody = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSetOutput
 type CreateMatchmakingRuleSetOutput struct {
@@ -6854,12 +6374,6 @@ func (s CreateMatchmakingRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateMatchmakingRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRuleSet sets the RuleSet field's value.
-func (s *CreateMatchmakingRuleSetOutput) SetRuleSet(v *MatchmakingRuleSet) *CreateMatchmakingRuleSetOutput {
-	s.RuleSet = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -6919,24 +6433,6 @@ func (s *CreatePlayerSessionInput) Validate() error {
 	return nil
 }
 
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *CreatePlayerSessionInput) SetGameSessionId(v string) *CreatePlayerSessionInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetPlayerData sets the PlayerData field's value.
-func (s *CreatePlayerSessionInput) SetPlayerData(v string) *CreatePlayerSessionInput {
-	s.PlayerData = &v
-	return s
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *CreatePlayerSessionInput) SetPlayerId(v string) *CreatePlayerSessionInput {
-	s.PlayerId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessionOutput
 type CreatePlayerSessionOutput struct {
@@ -6961,12 +6457,6 @@ func (s CreatePlayerSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePlayerSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPlayerSession sets the PlayerSession field's value.
-func (s *CreatePlayerSessionOutput) SetPlayerSession(v *PlayerSession) *CreatePlayerSessionOutput {
-	s.PlayerSession = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -7025,24 +6515,6 @@ func (s *CreatePlayerSessionsInput) Validate() error {
 	return nil
 }
 
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *CreatePlayerSessionsInput) SetGameSessionId(v string) *CreatePlayerSessionsInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetPlayerDataMap sets the PlayerDataMap field's value.
-func (s *CreatePlayerSessionsInput) SetPlayerDataMap(v map[string]string) *CreatePlayerSessionsInput {
-	s.PlayerDataMap = v
-	return s
-}
-
-// SetPlayerIds sets the PlayerIds field's value.
-func (s *CreatePlayerSessionsInput) SetPlayerIds(v []string) *CreatePlayerSessionsInput {
-	s.PlayerIds = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessionsOutput
 type CreatePlayerSessionsOutput struct {
@@ -7067,12 +6539,6 @@ func (s CreatePlayerSessionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePlayerSessionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPlayerSessions sets the PlayerSessions field's value.
-func (s *CreatePlayerSessionsOutput) SetPlayerSessions(v []PlayerSession) *CreatePlayerSessionsOutput {
-	s.PlayerSessions = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -7130,18 +6596,6 @@ func (s *CreateVpcPeeringAuthorizationInput) Validate() error {
 	return nil
 }
 
-// SetGameLiftAwsAccountId sets the GameLiftAwsAccountId field's value.
-func (s *CreateVpcPeeringAuthorizationInput) SetGameLiftAwsAccountId(v string) *CreateVpcPeeringAuthorizationInput {
-	s.GameLiftAwsAccountId = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *CreateVpcPeeringAuthorizationInput) SetPeerVpcId(v string) *CreateVpcPeeringAuthorizationInput {
-	s.PeerVpcId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorizationOutput
 type CreateVpcPeeringAuthorizationOutput struct {
@@ -7166,12 +6620,6 @@ func (s CreateVpcPeeringAuthorizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVpcPeeringAuthorizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpcPeeringAuthorization sets the VpcPeeringAuthorization field's value.
-func (s *CreateVpcPeeringAuthorizationOutput) SetVpcPeeringAuthorization(v *VpcPeeringAuthorization) *CreateVpcPeeringAuthorizationOutput {
-	s.VpcPeeringAuthorization = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -7239,24 +6687,6 @@ func (s *CreateVpcPeeringConnectionInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *CreateVpcPeeringConnectionInput) SetFleetId(v string) *CreateVpcPeeringConnectionInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetPeerVpcAwsAccountId sets the PeerVpcAwsAccountId field's value.
-func (s *CreateVpcPeeringConnectionInput) SetPeerVpcAwsAccountId(v string) *CreateVpcPeeringConnectionInput {
-	s.PeerVpcAwsAccountId = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *CreateVpcPeeringConnectionInput) SetPeerVpcId(v string) *CreateVpcPeeringConnectionInput {
-	s.PeerVpcId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnectionOutput
 type CreateVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7312,12 +6742,6 @@ func (s *DeleteAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAliasId sets the AliasId field's value.
-func (s *DeleteAliasInput) SetAliasId(v string) *DeleteAliasInput {
-	s.AliasId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAliasOutput
@@ -7377,12 +6801,6 @@ func (s *DeleteBuildInput) Validate() error {
 	return nil
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *DeleteBuildInput) SetBuildId(v string) *DeleteBuildInput {
-	s.BuildId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuildOutput
 type DeleteBuildOutput struct {
 	_ struct{} `type:"structure"`
@@ -7438,12 +6856,6 @@ func (s *DeleteFleetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *DeleteFleetInput) SetFleetId(v string) *DeleteFleetInput {
-	s.FleetId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleetOutput
@@ -7507,12 +6919,6 @@ func (s *DeleteGameSessionQueueInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteGameSessionQueueInput) SetName(v string) *DeleteGameSessionQueueInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueueOutput
 type DeleteGameSessionQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -7571,12 +6977,6 @@ func (s *DeleteMatchmakingConfigurationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteMatchmakingConfigurationInput) SetName(v string) *DeleteMatchmakingConfigurationInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfigurationOutput
@@ -7647,18 +7047,6 @@ func (s *DeleteScalingPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *DeleteScalingPolicyInput) SetFleetId(v string) *DeleteScalingPolicyInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteScalingPolicyInput) SetName(v string) *DeleteScalingPolicyInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicyOutput
@@ -7738,18 +7126,6 @@ func (s *DeleteVpcPeeringAuthorizationInput) Validate() error {
 	return nil
 }
 
-// SetGameLiftAwsAccountId sets the GameLiftAwsAccountId field's value.
-func (s *DeleteVpcPeeringAuthorizationInput) SetGameLiftAwsAccountId(v string) *DeleteVpcPeeringAuthorizationInput {
-	s.GameLiftAwsAccountId = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *DeleteVpcPeeringAuthorizationInput) SetPeerVpcId(v string) *DeleteVpcPeeringAuthorizationInput {
-	s.PeerVpcId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorizationOutput
 type DeleteVpcPeeringAuthorizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -7821,18 +7197,6 @@ func (s *DeleteVpcPeeringConnectionInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *DeleteVpcPeeringConnectionInput) SetFleetId(v string) *DeleteVpcPeeringConnectionInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *DeleteVpcPeeringConnectionInput) SetVpcPeeringConnectionId(v string) *DeleteVpcPeeringConnectionInput {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnectionOutput
 type DeleteVpcPeeringConnectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7890,12 +7254,6 @@ func (s *DescribeAliasInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *DescribeAliasInput) SetAliasId(v string) *DescribeAliasInput {
-	s.AliasId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAliasOutput
 type DescribeAliasOutput struct {
@@ -7920,12 +7278,6 @@ func (s DescribeAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAlias sets the Alias field's value.
-func (s *DescribeAliasOutput) SetAlias(v *Alias) *DescribeAliasOutput {
-	s.Alias = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -7963,12 +7315,6 @@ func (s *DescribeBuildInput) Validate() error {
 	return nil
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *DescribeBuildInput) SetBuildId(v string) *DescribeBuildInput {
-	s.BuildId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuildOutput
 type DescribeBuildOutput struct {
@@ -7995,12 +7341,6 @@ func (s DescribeBuildOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBuild sets the Build field's value.
-func (s *DescribeBuildOutput) SetBuild(v *Build) *DescribeBuildOutput {
-	s.Build = v
-	return s
-}
-
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimitsInput
 type DescribeEC2InstanceLimitsInput struct {
@@ -8023,12 +7363,6 @@ func (s DescribeEC2InstanceLimitsInput) String() string {
 // GoString returns the string representation
 func (s DescribeEC2InstanceLimitsInput) GoString() string {
 	return s.String()
-}
-
-// SetEC2InstanceType sets the EC2InstanceType field's value.
-func (s *DescribeEC2InstanceLimitsInput) SetEC2InstanceType(v EC2InstanceType) *DescribeEC2InstanceLimitsInput {
-	s.EC2InstanceType = v
-	return s
 }
 
 // Represents the returned data in response to a request action.
@@ -8056,12 +7390,6 @@ func (s DescribeEC2InstanceLimitsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEC2InstanceLimitsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEC2InstanceLimits sets the EC2InstanceLimits field's value.
-func (s *DescribeEC2InstanceLimitsOutput) SetEC2InstanceLimits(v []EC2InstanceLimit) *DescribeEC2InstanceLimitsOutput {
-	s.EC2InstanceLimits = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8114,24 +7442,6 @@ func (s *DescribeFleetAttributesInput) Validate() error {
 	return nil
 }
 
-// SetFleetIds sets the FleetIds field's value.
-func (s *DescribeFleetAttributesInput) SetFleetIds(v []string) *DescribeFleetAttributesInput {
-	s.FleetIds = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeFleetAttributesInput) SetLimit(v int64) *DescribeFleetAttributesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetAttributesInput) SetNextToken(v string) *DescribeFleetAttributesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributesOutput
 type DescribeFleetAttributesOutput struct {
@@ -8162,18 +7472,6 @@ func (s DescribeFleetAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFleetAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetAttributes sets the FleetAttributes field's value.
-func (s *DescribeFleetAttributesOutput) SetFleetAttributes(v []FleetAttributes) *DescribeFleetAttributesOutput {
-	s.FleetAttributes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetAttributesOutput) SetNextToken(v string) *DescribeFleetAttributesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8226,24 +7524,6 @@ func (s *DescribeFleetCapacityInput) Validate() error {
 	return nil
 }
 
-// SetFleetIds sets the FleetIds field's value.
-func (s *DescribeFleetCapacityInput) SetFleetIds(v []string) *DescribeFleetCapacityInput {
-	s.FleetIds = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeFleetCapacityInput) SetLimit(v int64) *DescribeFleetCapacityInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetCapacityInput) SetNextToken(v string) *DescribeFleetCapacityInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacityOutput
 type DescribeFleetCapacityOutput struct {
@@ -8275,18 +7555,6 @@ func (s DescribeFleetCapacityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFleetCapacityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetCapacity sets the FleetCapacity field's value.
-func (s *DescribeFleetCapacityOutput) SetFleetCapacity(v []FleetCapacity) *DescribeFleetCapacityOutput {
-	s.FleetCapacity = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetCapacityOutput) SetNextToken(v string) *DescribeFleetCapacityOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8350,36 +7618,6 @@ func (s *DescribeFleetEventsInput) Validate() error {
 	return nil
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *DescribeFleetEventsInput) SetEndTime(v time.Time) *DescribeFleetEventsInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeFleetEventsInput) SetFleetId(v string) *DescribeFleetEventsInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeFleetEventsInput) SetLimit(v int64) *DescribeFleetEventsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetEventsInput) SetNextToken(v string) *DescribeFleetEventsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeFleetEventsInput) SetStartTime(v time.Time) *DescribeFleetEventsInput {
-	s.StartTime = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEventsOutput
 type DescribeFleetEventsOutput struct {
@@ -8409,18 +7647,6 @@ func (s DescribeFleetEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFleetEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvents sets the Events field's value.
-func (s *DescribeFleetEventsOutput) SetEvents(v []Event) *DescribeFleetEventsOutput {
-	s.Events = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetEventsOutput) SetNextToken(v string) *DescribeFleetEventsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8458,12 +7684,6 @@ func (s *DescribeFleetPortSettingsInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeFleetPortSettingsInput) SetFleetId(v string) *DescribeFleetPortSettingsInput {
-	s.FleetId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettingsOutput
 type DescribeFleetPortSettingsOutput struct {
@@ -8488,12 +7708,6 @@ func (s DescribeFleetPortSettingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFleetPortSettingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInboundPermissions sets the InboundPermissions field's value.
-func (s *DescribeFleetPortSettingsOutput) SetInboundPermissions(v []IpPermission) *DescribeFleetPortSettingsOutput {
-	s.InboundPermissions = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8546,24 +7760,6 @@ func (s *DescribeFleetUtilizationInput) Validate() error {
 	return nil
 }
 
-// SetFleetIds sets the FleetIds field's value.
-func (s *DescribeFleetUtilizationInput) SetFleetIds(v []string) *DescribeFleetUtilizationInput {
-	s.FleetIds = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeFleetUtilizationInput) SetLimit(v int64) *DescribeFleetUtilizationInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetUtilizationInput) SetNextToken(v string) *DescribeFleetUtilizationInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilizationOutput
 type DescribeFleetUtilizationOutput struct {
@@ -8594,18 +7790,6 @@ func (s DescribeFleetUtilizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeFleetUtilizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetUtilization sets the FleetUtilization field's value.
-func (s *DescribeFleetUtilizationOutput) SetFleetUtilization(v []FleetUtilization) *DescribeFleetUtilizationOutput {
-	s.FleetUtilization = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetUtilizationOutput) SetNextToken(v string) *DescribeFleetUtilizationOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8671,42 +7855,6 @@ func (s *DescribeGameSessionDetailsInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *DescribeGameSessionDetailsInput) SetAliasId(v string) *DescribeGameSessionDetailsInput {
-	s.AliasId = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeGameSessionDetailsInput) SetFleetId(v string) *DescribeGameSessionDetailsInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *DescribeGameSessionDetailsInput) SetGameSessionId(v string) *DescribeGameSessionDetailsInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeGameSessionDetailsInput) SetLimit(v int64) *DescribeGameSessionDetailsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeGameSessionDetailsInput) SetNextToken(v string) *DescribeGameSessionDetailsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusFilter sets the StatusFilter field's value.
-func (s *DescribeGameSessionDetailsInput) SetStatusFilter(v string) *DescribeGameSessionDetailsInput {
-	s.StatusFilter = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetailsOutput
 type DescribeGameSessionDetailsOutput struct {
@@ -8737,18 +7885,6 @@ func (s DescribeGameSessionDetailsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeGameSessionDetailsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionDetails sets the GameSessionDetails field's value.
-func (s *DescribeGameSessionDetailsOutput) SetGameSessionDetails(v []GameSessionDetail) *DescribeGameSessionDetailsOutput {
-	s.GameSessionDetails = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeGameSessionDetailsOutput) SetNextToken(v string) *DescribeGameSessionDetailsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8789,12 +7925,6 @@ func (s *DescribeGameSessionPlacementInput) Validate() error {
 	return nil
 }
 
-// SetPlacementId sets the PlacementId field's value.
-func (s *DescribeGameSessionPlacementInput) SetPlacementId(v string) *DescribeGameSessionPlacementInput {
-	s.PlacementId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacementOutput
 type DescribeGameSessionPlacementOutput struct {
@@ -8819,12 +7949,6 @@ func (s DescribeGameSessionPlacementOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeGameSessionPlacementOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionPlacement sets the GameSessionPlacement field's value.
-func (s *DescribeGameSessionPlacementOutput) SetGameSessionPlacement(v *GameSessionPlacement) *DescribeGameSessionPlacementOutput {
-	s.GameSessionPlacement = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8872,24 +7996,6 @@ func (s *DescribeGameSessionQueuesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *DescribeGameSessionQueuesInput) SetLimit(v int64) *DescribeGameSessionQueuesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *DescribeGameSessionQueuesInput) SetNames(v []string) *DescribeGameSessionQueuesInput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeGameSessionQueuesInput) SetNextToken(v string) *DescribeGameSessionQueuesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueuesOutput
 type DescribeGameSessionQueuesOutput struct {
@@ -8919,18 +8025,6 @@ func (s DescribeGameSessionQueuesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeGameSessionQueuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionQueues sets the GameSessionQueues field's value.
-func (s *DescribeGameSessionQueuesOutput) SetGameSessionQueues(v []GameSessionQueue) *DescribeGameSessionQueuesOutput {
-	s.GameSessionQueues = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeGameSessionQueuesOutput) SetNextToken(v string) *DescribeGameSessionQueuesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -8996,42 +8090,6 @@ func (s *DescribeGameSessionsInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *DescribeGameSessionsInput) SetAliasId(v string) *DescribeGameSessionsInput {
-	s.AliasId = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeGameSessionsInput) SetFleetId(v string) *DescribeGameSessionsInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *DescribeGameSessionsInput) SetGameSessionId(v string) *DescribeGameSessionsInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeGameSessionsInput) SetLimit(v int64) *DescribeGameSessionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeGameSessionsInput) SetNextToken(v string) *DescribeGameSessionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusFilter sets the StatusFilter field's value.
-func (s *DescribeGameSessionsInput) SetStatusFilter(v string) *DescribeGameSessionsInput {
-	s.StatusFilter = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionsOutput
 type DescribeGameSessionsOutput struct {
@@ -9062,18 +8120,6 @@ func (s DescribeGameSessionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeGameSessionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessions sets the GameSessions field's value.
-func (s *DescribeGameSessionsOutput) SetGameSessions(v []GameSession) *DescribeGameSessionsOutput {
-	s.GameSessions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeGameSessionsOutput) SetNextToken(v string) *DescribeGameSessionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9130,30 +8176,6 @@ func (s *DescribeInstancesInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeInstancesInput) SetFleetId(v string) *DescribeInstancesInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeInstancesInput) SetInstanceId(v string) *DescribeInstancesInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeInstancesInput) SetLimit(v int64) *DescribeInstancesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstancesInput) SetNextToken(v string) *DescribeInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstancesOutput
 type DescribeInstancesOutput struct {
@@ -9183,18 +8205,6 @@ func (s DescribeInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstances sets the Instances field's value.
-func (s *DescribeInstancesOutput) SetInstances(v []Instance) *DescribeInstancesOutput {
-	s.Instances = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeInstancesOutput) SetNextToken(v string) *DescribeInstancesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9249,30 +8259,6 @@ func (s *DescribeMatchmakingConfigurationsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *DescribeMatchmakingConfigurationsInput) SetLimit(v int64) *DescribeMatchmakingConfigurationsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *DescribeMatchmakingConfigurationsInput) SetNames(v []string) *DescribeMatchmakingConfigurationsInput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeMatchmakingConfigurationsInput) SetNextToken(v string) *DescribeMatchmakingConfigurationsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *DescribeMatchmakingConfigurationsInput) SetRuleSetName(v string) *DescribeMatchmakingConfigurationsInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurationsOutput
 type DescribeMatchmakingConfigurationsOutput struct {
@@ -9302,18 +8288,6 @@ func (s DescribeMatchmakingConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeMatchmakingConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurations sets the Configurations field's value.
-func (s *DescribeMatchmakingConfigurationsOutput) SetConfigurations(v []MatchmakingConfiguration) *DescribeMatchmakingConfigurationsOutput {
-	s.Configurations = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeMatchmakingConfigurationsOutput) SetNextToken(v string) *DescribeMatchmakingConfigurationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9352,12 +8326,6 @@ func (s *DescribeMatchmakingInput) Validate() error {
 	return nil
 }
 
-// SetTicketIds sets the TicketIds field's value.
-func (s *DescribeMatchmakingInput) SetTicketIds(v []string) *DescribeMatchmakingInput {
-	s.TicketIds = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingOutput
 type DescribeMatchmakingOutput struct {
@@ -9382,12 +8350,6 @@ func (s DescribeMatchmakingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeMatchmakingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTicketList sets the TicketList field's value.
-func (s *DescribeMatchmakingOutput) SetTicketList(v []MatchmakingTicket) *DescribeMatchmakingOutput {
-	s.TicketList = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9438,24 +8400,6 @@ func (s *DescribeMatchmakingRuleSetsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *DescribeMatchmakingRuleSetsInput) SetLimit(v int64) *DescribeMatchmakingRuleSetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *DescribeMatchmakingRuleSetsInput) SetNames(v []string) *DescribeMatchmakingRuleSetsInput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeMatchmakingRuleSetsInput) SetNextToken(v string) *DescribeMatchmakingRuleSetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSetsOutput
 type DescribeMatchmakingRuleSetsOutput struct {
@@ -9487,18 +8431,6 @@ func (s DescribeMatchmakingRuleSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeMatchmakingRuleSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeMatchmakingRuleSetsOutput) SetNextToken(v string) *DescribeMatchmakingRuleSetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRuleSets sets the RuleSets field's value.
-func (s *DescribeMatchmakingRuleSetsOutput) SetRuleSets(v []MatchmakingRuleSet) *DescribeMatchmakingRuleSetsOutput {
-	s.RuleSets = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9578,42 +8510,6 @@ func (s *DescribePlayerSessionsInput) Validate() error {
 	return nil
 }
 
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *DescribePlayerSessionsInput) SetGameSessionId(v string) *DescribePlayerSessionsInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribePlayerSessionsInput) SetLimit(v int64) *DescribePlayerSessionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribePlayerSessionsInput) SetNextToken(v string) *DescribePlayerSessionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *DescribePlayerSessionsInput) SetPlayerId(v string) *DescribePlayerSessionsInput {
-	s.PlayerId = &v
-	return s
-}
-
-// SetPlayerSessionId sets the PlayerSessionId field's value.
-func (s *DescribePlayerSessionsInput) SetPlayerSessionId(v string) *DescribePlayerSessionsInput {
-	s.PlayerSessionId = &v
-	return s
-}
-
-// SetPlayerSessionStatusFilter sets the PlayerSessionStatusFilter field's value.
-func (s *DescribePlayerSessionsInput) SetPlayerSessionStatusFilter(v string) *DescribePlayerSessionsInput {
-	s.PlayerSessionStatusFilter = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessionsOutput
 type DescribePlayerSessionsOutput struct {
@@ -9644,18 +8540,6 @@ func (s DescribePlayerSessionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribePlayerSessionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribePlayerSessionsOutput) SetNextToken(v string) *DescribePlayerSessionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPlayerSessions sets the PlayerSessions field's value.
-func (s *DescribePlayerSessionsOutput) SetPlayerSessions(v []PlayerSession) *DescribePlayerSessionsOutput {
-	s.PlayerSessions = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9693,12 +8577,6 @@ func (s *DescribeRuntimeConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeRuntimeConfigurationInput) SetFleetId(v string) *DescribeRuntimeConfigurationInput {
-	s.FleetId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfigurationOutput
 type DescribeRuntimeConfigurationOutput struct {
@@ -9724,12 +8602,6 @@ func (s DescribeRuntimeConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRuntimeConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRuntimeConfiguration sets the RuntimeConfiguration field's value.
-func (s *DescribeRuntimeConfigurationOutput) SetRuntimeConfiguration(v *RuntimeConfiguration) *DescribeRuntimeConfigurationOutput {
-	s.RuntimeConfiguration = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -9801,30 +8673,6 @@ func (s *DescribeScalingPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeScalingPoliciesInput) SetFleetId(v string) *DescribeScalingPoliciesInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeScalingPoliciesInput) SetLimit(v int64) *DescribeScalingPoliciesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalingPoliciesInput) SetNextToken(v string) *DescribeScalingPoliciesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatusFilter sets the StatusFilter field's value.
-func (s *DescribeScalingPoliciesInput) SetStatusFilter(v ScalingStatusType) *DescribeScalingPoliciesInput {
-	s.StatusFilter = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPoliciesOutput
 type DescribeScalingPoliciesOutput struct {
@@ -9854,18 +8702,6 @@ func (s DescribeScalingPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeScalingPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeScalingPoliciesOutput) SetNextToken(v string) *DescribeScalingPoliciesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetScalingPolicies sets the ScalingPolicies field's value.
-func (s *DescribeScalingPoliciesOutput) SetScalingPolicies(v []ScalingPolicy) *DescribeScalingPoliciesOutput {
-	s.ScalingPolicies = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizationsInput
@@ -9909,12 +8745,6 @@ func (s DescribeVpcPeeringAuthorizationsOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetVpcPeeringAuthorizations sets the VpcPeeringAuthorizations field's value.
-func (s *DescribeVpcPeeringAuthorizationsOutput) SetVpcPeeringAuthorizations(v []VpcPeeringAuthorization) *DescribeVpcPeeringAuthorizationsOutput {
-	s.VpcPeeringAuthorizations = v
-	return s
-}
-
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnectionsInput
 type DescribeVpcPeeringConnectionsInput struct {
@@ -9932,12 +8762,6 @@ func (s DescribeVpcPeeringConnectionsInput) String() string {
 // GoString returns the string representation
 func (s DescribeVpcPeeringConnectionsInput) GoString() string {
 	return s.String()
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *DescribeVpcPeeringConnectionsInput) SetFleetId(v string) *DescribeVpcPeeringConnectionsInput {
-	s.FleetId = &v
-	return s
 }
 
 // Represents the returned data in response to a request action.
@@ -9964,12 +8788,6 @@ func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVpcPeeringConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVpcPeeringConnections sets the VpcPeeringConnections field's value.
-func (s *DescribeVpcPeeringConnectionsOutput) SetVpcPeeringConnections(v []VpcPeeringConnection) *DescribeVpcPeeringConnectionsOutput {
-	s.VpcPeeringConnections = v
-	return s
 }
 
 // Player information for use when creating player sessions using a game session
@@ -10010,18 +8828,6 @@ func (s *DesiredPlayerSession) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPlayerData sets the PlayerData field's value.
-func (s *DesiredPlayerSession) SetPlayerData(v string) *DesiredPlayerSession {
-	s.PlayerData = &v
-	return s
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *DesiredPlayerSession) SetPlayerId(v string) *DesiredPlayerSession {
-	s.PlayerId = &v
-	return s
 }
 
 // Current status of fleet capacity. The number of active instances should match
@@ -10111,48 +8917,6 @@ func (s EC2InstanceCounts) GoString() string {
 	return s.String()
 }
 
-// SetACTIVE sets the ACTIVE field's value.
-func (s *EC2InstanceCounts) SetACTIVE(v int64) *EC2InstanceCounts {
-	s.ACTIVE = &v
-	return s
-}
-
-// SetDESIRED sets the DESIRED field's value.
-func (s *EC2InstanceCounts) SetDESIRED(v int64) *EC2InstanceCounts {
-	s.DESIRED = &v
-	return s
-}
-
-// SetIDLE sets the IDLE field's value.
-func (s *EC2InstanceCounts) SetIDLE(v int64) *EC2InstanceCounts {
-	s.IDLE = &v
-	return s
-}
-
-// SetMAXIMUM sets the MAXIMUM field's value.
-func (s *EC2InstanceCounts) SetMAXIMUM(v int64) *EC2InstanceCounts {
-	s.MAXIMUM = &v
-	return s
-}
-
-// SetMINIMUM sets the MINIMUM field's value.
-func (s *EC2InstanceCounts) SetMINIMUM(v int64) *EC2InstanceCounts {
-	s.MINIMUM = &v
-	return s
-}
-
-// SetPENDING sets the PENDING field's value.
-func (s *EC2InstanceCounts) SetPENDING(v int64) *EC2InstanceCounts {
-	s.PENDING = &v
-	return s
-}
-
-// SetTERMINATING sets the TERMINATING field's value.
-func (s *EC2InstanceCounts) SetTERMINATING(v int64) *EC2InstanceCounts {
-	s.TERMINATING = &v
-	return s
-}
-
 // Maximum number of instances allowed based on the Amazon Elastic Compute Cloud
 // (Amazon EC2) instance type. Instance limits can be retrieved by calling DescribeEC2InstanceLimits.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/EC2InstanceLimit
@@ -10182,24 +8946,6 @@ func (s EC2InstanceLimit) String() string {
 // GoString returns the string representation
 func (s EC2InstanceLimit) GoString() string {
 	return s.String()
-}
-
-// SetCurrentInstances sets the CurrentInstances field's value.
-func (s *EC2InstanceLimit) SetCurrentInstances(v int64) *EC2InstanceLimit {
-	s.CurrentInstances = &v
-	return s
-}
-
-// SetEC2InstanceType sets the EC2InstanceType field's value.
-func (s *EC2InstanceLimit) SetEC2InstanceType(v EC2InstanceType) *EC2InstanceLimit {
-	s.EC2InstanceType = v
-	return s
-}
-
-// SetInstanceLimit sets the InstanceLimit field's value.
-func (s *EC2InstanceLimit) SetInstanceLimit(v int64) *EC2InstanceLimit {
-	s.InstanceLimit = &v
-	return s
 }
 
 // Log entry describing an event that involves Amazon GameLift resources (such
@@ -10330,42 +9076,6 @@ func (s Event) String() string {
 // GoString returns the string representation
 func (s Event) GoString() string {
 	return s.String()
-}
-
-// SetEventCode sets the EventCode field's value.
-func (s *Event) SetEventCode(v EventCode) *Event {
-	s.EventCode = v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *Event) SetEventId(v string) *Event {
-	s.EventId = &v
-	return s
-}
-
-// SetEventTime sets the EventTime field's value.
-func (s *Event) SetEventTime(v time.Time) *Event {
-	s.EventTime = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Event) SetMessage(v string) *Event {
-	s.Message = &v
-	return s
-}
-
-// SetPreSignedLogUrl sets the PreSignedLogUrl field's value.
-func (s *Event) SetPreSignedLogUrl(v string) *Event {
-	s.PreSignedLogUrl = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *Event) SetResourceId(v string) *Event {
-	s.ResourceId = &v
-	return s
 }
 
 // General properties describing a fleet.
@@ -10518,96 +9228,6 @@ func (s FleetAttributes) GoString() string {
 	return s.String()
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *FleetAttributes) SetBuildId(v string) *FleetAttributes {
-	s.BuildId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *FleetAttributes) SetCreationTime(v time.Time) *FleetAttributes {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *FleetAttributes) SetDescription(v string) *FleetAttributes {
-	s.Description = &v
-	return s
-}
-
-// SetFleetArn sets the FleetArn field's value.
-func (s *FleetAttributes) SetFleetArn(v string) *FleetAttributes {
-	s.FleetArn = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *FleetAttributes) SetFleetId(v string) *FleetAttributes {
-	s.FleetId = &v
-	return s
-}
-
-// SetLogPaths sets the LogPaths field's value.
-func (s *FleetAttributes) SetLogPaths(v []string) *FleetAttributes {
-	s.LogPaths = v
-	return s
-}
-
-// SetMetricGroups sets the MetricGroups field's value.
-func (s *FleetAttributes) SetMetricGroups(v []string) *FleetAttributes {
-	s.MetricGroups = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *FleetAttributes) SetName(v string) *FleetAttributes {
-	s.Name = &v
-	return s
-}
-
-// SetNewGameSessionProtectionPolicy sets the NewGameSessionProtectionPolicy field's value.
-func (s *FleetAttributes) SetNewGameSessionProtectionPolicy(v ProtectionPolicy) *FleetAttributes {
-	s.NewGameSessionProtectionPolicy = v
-	return s
-}
-
-// SetOperatingSystem sets the OperatingSystem field's value.
-func (s *FleetAttributes) SetOperatingSystem(v OperatingSystem) *FleetAttributes {
-	s.OperatingSystem = v
-	return s
-}
-
-// SetResourceCreationLimitPolicy sets the ResourceCreationLimitPolicy field's value.
-func (s *FleetAttributes) SetResourceCreationLimitPolicy(v *ResourceCreationLimitPolicy) *FleetAttributes {
-	s.ResourceCreationLimitPolicy = v
-	return s
-}
-
-// SetServerLaunchParameters sets the ServerLaunchParameters field's value.
-func (s *FleetAttributes) SetServerLaunchParameters(v string) *FleetAttributes {
-	s.ServerLaunchParameters = &v
-	return s
-}
-
-// SetServerLaunchPath sets the ServerLaunchPath field's value.
-func (s *FleetAttributes) SetServerLaunchPath(v string) *FleetAttributes {
-	s.ServerLaunchPath = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *FleetAttributes) SetStatus(v FleetStatus) *FleetAttributes {
-	s.Status = v
-	return s
-}
-
-// SetTerminationTime sets the TerminationTime field's value.
-func (s *FleetAttributes) SetTerminationTime(v time.Time) *FleetAttributes {
-	s.TerminationTime = &v
-	return s
-}
-
 // Information about the fleet's capacity. Fleet capacity is measured in EC2
 // instances. By default, new fleets have a capacity of one instance, but can
 // be updated as needed. The maximum number of instances for a fleet is determined
@@ -10682,24 +9302,6 @@ func (s FleetCapacity) String() string {
 // GoString returns the string representation
 func (s FleetCapacity) GoString() string {
 	return s.String()
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *FleetCapacity) SetFleetId(v string) *FleetCapacity {
-	s.FleetId = &v
-	return s
-}
-
-// SetInstanceCounts sets the InstanceCounts field's value.
-func (s *FleetCapacity) SetInstanceCounts(v *EC2InstanceCounts) *FleetCapacity {
-	s.InstanceCounts = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *FleetCapacity) SetInstanceType(v EC2InstanceType) *FleetCapacity {
-	s.InstanceType = v
-	return s
 }
 
 // Current status of fleet utilization, including the number of game and player
@@ -10782,36 +9384,6 @@ func (s FleetUtilization) GoString() string {
 	return s.String()
 }
 
-// SetActiveGameSessionCount sets the ActiveGameSessionCount field's value.
-func (s *FleetUtilization) SetActiveGameSessionCount(v int64) *FleetUtilization {
-	s.ActiveGameSessionCount = &v
-	return s
-}
-
-// SetActiveServerProcessCount sets the ActiveServerProcessCount field's value.
-func (s *FleetUtilization) SetActiveServerProcessCount(v int64) *FleetUtilization {
-	s.ActiveServerProcessCount = &v
-	return s
-}
-
-// SetCurrentPlayerSessionCount sets the CurrentPlayerSessionCount field's value.
-func (s *FleetUtilization) SetCurrentPlayerSessionCount(v int64) *FleetUtilization {
-	s.CurrentPlayerSessionCount = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *FleetUtilization) SetFleetId(v string) *FleetUtilization {
-	s.FleetId = &v
-	return s
-}
-
-// SetMaximumPlayerSessionCount sets the MaximumPlayerSessionCount field's value.
-func (s *FleetUtilization) SetMaximumPlayerSessionCount(v int64) *FleetUtilization {
-	s.MaximumPlayerSessionCount = &v
-	return s
-}
-
 // Set of key-value pairs that contain information about a game session. When
 // included in a game session request, these properties communicate details
 // to be used when setting up the new game session, such as to specify a game
@@ -10860,18 +9432,6 @@ func (s *GameProperty) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *GameProperty) SetKey(v string) *GameProperty {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *GameProperty) SetValue(v string) *GameProperty {
-	s.Value = &v
-	return s
 }
 
 // Properties describing a game session.
@@ -10978,90 +9538,6 @@ func (s GameSession) GoString() string {
 	return s.String()
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *GameSession) SetCreationTime(v time.Time) *GameSession {
-	s.CreationTime = &v
-	return s
-}
-
-// SetCreatorId sets the CreatorId field's value.
-func (s *GameSession) SetCreatorId(v string) *GameSession {
-	s.CreatorId = &v
-	return s
-}
-
-// SetCurrentPlayerSessionCount sets the CurrentPlayerSessionCount field's value.
-func (s *GameSession) SetCurrentPlayerSessionCount(v int64) *GameSession {
-	s.CurrentPlayerSessionCount = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *GameSession) SetFleetId(v string) *GameSession {
-	s.FleetId = &v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *GameSession) SetGameProperties(v []GameProperty) *GameSession {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *GameSession) SetGameSessionData(v string) *GameSession {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *GameSession) SetGameSessionId(v string) *GameSession {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *GameSession) SetIpAddress(v string) *GameSession {
-	s.IpAddress = &v
-	return s
-}
-
-// SetMaximumPlayerSessionCount sets the MaximumPlayerSessionCount field's value.
-func (s *GameSession) SetMaximumPlayerSessionCount(v int64) *GameSession {
-	s.MaximumPlayerSessionCount = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GameSession) SetName(v string) *GameSession {
-	s.Name = &v
-	return s
-}
-
-// SetPlayerSessionCreationPolicy sets the PlayerSessionCreationPolicy field's value.
-func (s *GameSession) SetPlayerSessionCreationPolicy(v PlayerSessionCreationPolicy) *GameSession {
-	s.PlayerSessionCreationPolicy = v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *GameSession) SetPort(v int64) *GameSession {
-	s.Port = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GameSession) SetStatus(v GameSessionStatus) *GameSession {
-	s.Status = v
-	return s
-}
-
-// SetTerminationTime sets the TerminationTime field's value.
-func (s *GameSession) SetTerminationTime(v time.Time) *GameSession {
-	s.TerminationTime = &v
-	return s
-}
-
 // Connection information for the new game session that is created with matchmaking.
 // (with StartMatchmaking). Once a match is set, the FlexMatch engine places
 // the match and creates a new game session for it. This information, including
@@ -11099,30 +9575,6 @@ func (s GameSessionConnectionInfo) GoString() string {
 	return s.String()
 }
 
-// SetGameSessionArn sets the GameSessionArn field's value.
-func (s *GameSessionConnectionInfo) SetGameSessionArn(v string) *GameSessionConnectionInfo {
-	s.GameSessionArn = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *GameSessionConnectionInfo) SetIpAddress(v string) *GameSessionConnectionInfo {
-	s.IpAddress = &v
-	return s
-}
-
-// SetMatchedPlayerSessions sets the MatchedPlayerSessions field's value.
-func (s *GameSessionConnectionInfo) SetMatchedPlayerSessions(v []MatchedPlayerSession) *GameSessionConnectionInfo {
-	s.MatchedPlayerSessions = v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *GameSessionConnectionInfo) SetPort(v int64) *GameSessionConnectionInfo {
-	s.Port = &v
-	return s
-}
-
 // A game session's properties plus the protection policy currently in force.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionDetail
 type GameSessionDetail struct {
@@ -11149,18 +9601,6 @@ func (s GameSessionDetail) String() string {
 // GoString returns the string representation
 func (s GameSessionDetail) GoString() string {
 	return s.String()
-}
-
-// SetGameSession sets the GameSession field's value.
-func (s *GameSessionDetail) SetGameSession(v *GameSession) *GameSessionDetail {
-	s.GameSession = v
-	return s
-}
-
-// SetProtectionPolicy sets the ProtectionPolicy field's value.
-func (s *GameSessionDetail) SetProtectionPolicy(v ProtectionPolicy) *GameSessionDetail {
-	s.ProtectionPolicy = v
-	return s
 }
 
 // Object that describes a StartGameSessionPlacement request. This object includes
@@ -11276,102 +9716,6 @@ func (s GameSessionPlacement) GoString() string {
 	return s.String()
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *GameSessionPlacement) SetEndTime(v time.Time) *GameSessionPlacement {
-	s.EndTime = &v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *GameSessionPlacement) SetGameProperties(v []GameProperty) *GameSessionPlacement {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionArn sets the GameSessionArn field's value.
-func (s *GameSessionPlacement) SetGameSessionArn(v string) *GameSessionPlacement {
-	s.GameSessionArn = &v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *GameSessionPlacement) SetGameSessionData(v string) *GameSessionPlacement {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *GameSessionPlacement) SetGameSessionId(v string) *GameSessionPlacement {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetGameSessionName sets the GameSessionName field's value.
-func (s *GameSessionPlacement) SetGameSessionName(v string) *GameSessionPlacement {
-	s.GameSessionName = &v
-	return s
-}
-
-// SetGameSessionQueueName sets the GameSessionQueueName field's value.
-func (s *GameSessionPlacement) SetGameSessionQueueName(v string) *GameSessionPlacement {
-	s.GameSessionQueueName = &v
-	return s
-}
-
-// SetGameSessionRegion sets the GameSessionRegion field's value.
-func (s *GameSessionPlacement) SetGameSessionRegion(v string) *GameSessionPlacement {
-	s.GameSessionRegion = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *GameSessionPlacement) SetIpAddress(v string) *GameSessionPlacement {
-	s.IpAddress = &v
-	return s
-}
-
-// SetMaximumPlayerSessionCount sets the MaximumPlayerSessionCount field's value.
-func (s *GameSessionPlacement) SetMaximumPlayerSessionCount(v int64) *GameSessionPlacement {
-	s.MaximumPlayerSessionCount = &v
-	return s
-}
-
-// SetPlacedPlayerSessions sets the PlacedPlayerSessions field's value.
-func (s *GameSessionPlacement) SetPlacedPlayerSessions(v []PlacedPlayerSession) *GameSessionPlacement {
-	s.PlacedPlayerSessions = v
-	return s
-}
-
-// SetPlacementId sets the PlacementId field's value.
-func (s *GameSessionPlacement) SetPlacementId(v string) *GameSessionPlacement {
-	s.PlacementId = &v
-	return s
-}
-
-// SetPlayerLatencies sets the PlayerLatencies field's value.
-func (s *GameSessionPlacement) SetPlayerLatencies(v []PlayerLatency) *GameSessionPlacement {
-	s.PlayerLatencies = v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *GameSessionPlacement) SetPort(v int64) *GameSessionPlacement {
-	s.Port = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *GameSessionPlacement) SetStartTime(v time.Time) *GameSessionPlacement {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GameSessionPlacement) SetStatus(v GameSessionPlacementState) *GameSessionPlacement {
-	s.Status = v
-	return s
-}
-
 // Configuration of a queue that is used to process game session placement requests.
 // The queue configuration identifies several game features:
 //
@@ -11442,36 +9786,6 @@ func (s GameSessionQueue) GoString() string {
 	return s.String()
 }
 
-// SetDestinations sets the Destinations field's value.
-func (s *GameSessionQueue) SetDestinations(v []GameSessionQueueDestination) *GameSessionQueue {
-	s.Destinations = v
-	return s
-}
-
-// SetGameSessionQueueArn sets the GameSessionQueueArn field's value.
-func (s *GameSessionQueue) SetGameSessionQueueArn(v string) *GameSessionQueue {
-	s.GameSessionQueueArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GameSessionQueue) SetName(v string) *GameSessionQueue {
-	s.Name = &v
-	return s
-}
-
-// SetPlayerLatencyPolicies sets the PlayerLatencyPolicies field's value.
-func (s *GameSessionQueue) SetPlayerLatencyPolicies(v []PlayerLatencyPolicy) *GameSessionQueue {
-	s.PlayerLatencyPolicies = v
-	return s
-}
-
-// SetTimeoutInSeconds sets the TimeoutInSeconds field's value.
-func (s *GameSessionQueue) SetTimeoutInSeconds(v int64) *GameSessionQueue {
-	s.TimeoutInSeconds = &v
-	return s
-}
-
 // Fleet designated in a game session queue. Requests for new game sessions
 // in the queue are fulfilled by starting a new game session on any destination
 // configured for a queue.
@@ -11518,12 +9832,6 @@ func (s *GameSessionQueueDestination) Validate() error {
 	return nil
 }
 
-// SetDestinationArn sets the DestinationArn field's value.
-func (s *GameSessionQueueDestination) SetDestinationArn(v string) *GameSessionQueueDestination {
-	s.DestinationArn = &v
-	return s
-}
-
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrlInput
 type GetGameSessionLogUrlInput struct {
@@ -11562,12 +9870,6 @@ func (s *GetGameSessionLogUrlInput) Validate() error {
 	return nil
 }
 
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *GetGameSessionLogUrlInput) SetGameSessionId(v string) *GetGameSessionLogUrlInput {
-	s.GameSessionId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrlOutput
 type GetGameSessionLogUrlOutput struct {
@@ -11592,12 +9894,6 @@ func (s GetGameSessionLogUrlOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGameSessionLogUrlOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPreSignedUrl sets the PreSignedUrl field's value.
-func (s *GetGameSessionLogUrlOutput) SetPreSignedUrl(v string) *GetGameSessionLogUrlOutput {
-	s.PreSignedUrl = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -11648,18 +9944,6 @@ func (s *GetInstanceAccessInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *GetInstanceAccessInput) SetFleetId(v string) *GetInstanceAccessInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetInstanceAccessInput) SetInstanceId(v string) *GetInstanceAccessInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccessOutput
 type GetInstanceAccessOutput struct {
@@ -11685,12 +9969,6 @@ func (s GetInstanceAccessOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetInstanceAccessOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceAccess sets the InstanceAccess field's value.
-func (s *GetInstanceAccessOutput) SetInstanceAccess(v *InstanceAccess) *GetInstanceAccessOutput {
-	s.InstanceAccess = v
-	return s
 }
 
 // Properties that describe an instance of a virtual computing resource that
@@ -11744,48 +10022,6 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *Instance) SetCreationTime(v time.Time) *Instance {
-	s.CreationTime = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *Instance) SetFleetId(v string) *Instance {
-	s.FleetId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Instance) SetInstanceId(v string) *Instance {
-	s.InstanceId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *Instance) SetIpAddress(v string) *Instance {
-	s.IpAddress = &v
-	return s
-}
-
-// SetOperatingSystem sets the OperatingSystem field's value.
-func (s *Instance) SetOperatingSystem(v OperatingSystem) *Instance {
-	s.OperatingSystem = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Instance) SetStatus(v InstanceStatus) *Instance {
-	s.Status = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Instance) SetType(v EC2InstanceType) *Instance {
-	s.Type = v
-	return s
-}
-
 // Information required to remotely connect to a fleet instance. Access is requested
 // by calling GetInstanceAccess.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/InstanceAccess
@@ -11818,36 +10054,6 @@ func (s InstanceAccess) GoString() string {
 	return s.String()
 }
 
-// SetCredentials sets the Credentials field's value.
-func (s *InstanceAccess) SetCredentials(v *InstanceCredentials) *InstanceAccess {
-	s.Credentials = v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *InstanceAccess) SetFleetId(v string) *InstanceAccess {
-	s.FleetId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceAccess) SetInstanceId(v string) *InstanceAccess {
-	s.InstanceId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *InstanceAccess) SetIpAddress(v string) *InstanceAccess {
-	s.IpAddress = &v
-	return s
-}
-
-// SetOperatingSystem sets the OperatingSystem field's value.
-func (s *InstanceAccess) SetOperatingSystem(v OperatingSystem) *InstanceAccess {
-	s.OperatingSystem = v
-	return s
-}
-
 // Set of credentials required to remotely access a fleet instance. Access credentials
 // are requested by calling GetInstanceAccess and returned in an InstanceAccess
 // object.
@@ -11872,18 +10078,6 @@ func (s InstanceCredentials) String() string {
 // GoString returns the string representation
 func (s InstanceCredentials) GoString() string {
 	return s.String()
-}
-
-// SetSecret sets the Secret field's value.
-func (s *InstanceCredentials) SetSecret(v string) *InstanceCredentials {
-	s.Secret = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *InstanceCredentials) SetUserName(v string) *InstanceCredentials {
-	s.UserName = &v
-	return s
 }
 
 // A range of IP addresses and port settings that allow inbound traffic to connect
@@ -11960,30 +10154,6 @@ func (s *IpPermission) Validate() error {
 	return nil
 }
 
-// SetFromPort sets the FromPort field's value.
-func (s *IpPermission) SetFromPort(v int64) *IpPermission {
-	s.FromPort = &v
-	return s
-}
-
-// SetIpRange sets the IpRange field's value.
-func (s *IpPermission) SetIpRange(v string) *IpPermission {
-	s.IpRange = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *IpPermission) SetProtocol(v IpProtocol) *IpPermission {
-	s.Protocol = v
-	return s
-}
-
-// SetToPort sets the ToPort field's value.
-func (s *IpPermission) SetToPort(v int64) *IpPermission {
-	s.ToPort = &v
-	return s
-}
-
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliasesInput
 type ListAliasesInput struct {
@@ -12046,30 +10216,6 @@ func (s *ListAliasesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListAliasesInput) SetLimit(v int64) *ListAliasesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListAliasesInput) SetName(v string) *ListAliasesInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAliasesInput) SetNextToken(v string) *ListAliasesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRoutingStrategyType sets the RoutingStrategyType field's value.
-func (s *ListAliasesInput) SetRoutingStrategyType(v RoutingStrategyType) *ListAliasesInput {
-	s.RoutingStrategyType = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliasesOutput
 type ListAliasesOutput struct {
@@ -12099,18 +10245,6 @@ func (s ListAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []Alias) *ListAliasesOutput {
-	s.Aliases = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAliasesOutput) SetNextToken(v string) *ListAliasesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -12171,24 +10305,6 @@ func (s *ListBuildsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListBuildsInput) SetLimit(v int64) *ListBuildsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBuildsInput) SetNextToken(v string) *ListBuildsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListBuildsInput) SetStatus(v BuildStatus) *ListBuildsInput {
-	s.Status = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuildsOutput
 type ListBuildsOutput struct {
@@ -12218,18 +10334,6 @@ func (s ListBuildsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBuildsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuilds sets the Builds field's value.
-func (s *ListBuildsOutput) SetBuilds(v []Build) *ListBuildsOutput {
-	s.Builds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBuildsOutput) SetNextToken(v string) *ListBuildsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -12278,24 +10382,6 @@ func (s *ListFleetsInput) Validate() error {
 	return nil
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *ListFleetsInput) SetBuildId(v string) *ListFleetsInput {
-	s.BuildId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListFleetsInput) SetLimit(v int64) *ListFleetsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFleetsInput) SetNextToken(v string) *ListFleetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleetsOutput
 type ListFleetsOutput struct {
@@ -12329,18 +10415,6 @@ func (s ListFleetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFleetIds sets the FleetIds field's value.
-func (s *ListFleetsOutput) SetFleetIds(v []string) *ListFleetsOutput {
-	s.FleetIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFleetsOutput) SetNextToken(v string) *ListFleetsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents a new player session that is created as a result of a successful
 // FlexMatch match. A successful match automatically creates new player sessions
 // for every player ID in the original matchmaking request.
@@ -12366,18 +10440,6 @@ func (s MatchedPlayerSession) String() string {
 // GoString returns the string representation
 func (s MatchedPlayerSession) GoString() string {
 	return s.String()
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *MatchedPlayerSession) SetPlayerId(v string) *MatchedPlayerSession {
-	s.PlayerId = &v
-	return s
-}
-
-// SetPlayerSessionId sets the PlayerSessionId field's value.
-func (s *MatchedPlayerSession) SetPlayerSessionId(v string) *MatchedPlayerSession {
-	s.PlayerSessionId = &v
-	return s
 }
 
 // Guidelines for use with FlexMatch to match players into games. All matchmaking
@@ -12461,84 +10523,6 @@ func (s MatchmakingConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *MatchmakingConfiguration) SetAcceptanceRequired(v bool) *MatchmakingConfiguration {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetAcceptanceTimeoutSeconds sets the AcceptanceTimeoutSeconds field's value.
-func (s *MatchmakingConfiguration) SetAcceptanceTimeoutSeconds(v int64) *MatchmakingConfiguration {
-	s.AcceptanceTimeoutSeconds = &v
-	return s
-}
-
-// SetAdditionalPlayerCount sets the AdditionalPlayerCount field's value.
-func (s *MatchmakingConfiguration) SetAdditionalPlayerCount(v int64) *MatchmakingConfiguration {
-	s.AdditionalPlayerCount = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *MatchmakingConfiguration) SetCreationTime(v time.Time) *MatchmakingConfiguration {
-	s.CreationTime = &v
-	return s
-}
-
-// SetCustomEventData sets the CustomEventData field's value.
-func (s *MatchmakingConfiguration) SetCustomEventData(v string) *MatchmakingConfiguration {
-	s.CustomEventData = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *MatchmakingConfiguration) SetDescription(v string) *MatchmakingConfiguration {
-	s.Description = &v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *MatchmakingConfiguration) SetGameProperties(v []GameProperty) *MatchmakingConfiguration {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *MatchmakingConfiguration) SetGameSessionData(v string) *MatchmakingConfiguration {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionQueueArns sets the GameSessionQueueArns field's value.
-func (s *MatchmakingConfiguration) SetGameSessionQueueArns(v []string) *MatchmakingConfiguration {
-	s.GameSessionQueueArns = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *MatchmakingConfiguration) SetName(v string) *MatchmakingConfiguration {
-	s.Name = &v
-	return s
-}
-
-// SetNotificationTarget sets the NotificationTarget field's value.
-func (s *MatchmakingConfiguration) SetNotificationTarget(v string) *MatchmakingConfiguration {
-	s.NotificationTarget = &v
-	return s
-}
-
-// SetRequestTimeoutSeconds sets the RequestTimeoutSeconds field's value.
-func (s *MatchmakingConfiguration) SetRequestTimeoutSeconds(v int64) *MatchmakingConfiguration {
-	s.RequestTimeoutSeconds = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *MatchmakingConfiguration) SetRuleSetName(v string) *MatchmakingConfiguration {
-	s.RuleSetName = &v
-	return s
-}
-
 // Set of rule statements, used with FlexMatch, that determine how to build
 // a certain kind of player match. Each rule set describes a type of group to
 // be created and defines the parameters for acceptable player matches. Rule
@@ -12597,24 +10581,6 @@ func (s MatchmakingRuleSet) String() string {
 // GoString returns the string representation
 func (s MatchmakingRuleSet) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *MatchmakingRuleSet) SetCreationTime(v time.Time) *MatchmakingRuleSet {
-	s.CreationTime = &v
-	return s
-}
-
-// SetRuleSetBody sets the RuleSetBody field's value.
-func (s *MatchmakingRuleSet) SetRuleSetBody(v string) *MatchmakingRuleSet {
-	s.RuleSetBody = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *MatchmakingRuleSet) SetRuleSetName(v string) *MatchmakingRuleSet {
-	s.RuleSetName = &v
-	return s
 }
 
 // Ticket generated to track the progress of a matchmaking request. Each ticket
@@ -12705,66 +10671,6 @@ func (s MatchmakingTicket) GoString() string {
 	return s.String()
 }
 
-// SetConfigurationName sets the ConfigurationName field's value.
-func (s *MatchmakingTicket) SetConfigurationName(v string) *MatchmakingTicket {
-	s.ConfigurationName = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *MatchmakingTicket) SetEndTime(v time.Time) *MatchmakingTicket {
-	s.EndTime = &v
-	return s
-}
-
-// SetEstimatedWaitTime sets the EstimatedWaitTime field's value.
-func (s *MatchmakingTicket) SetEstimatedWaitTime(v int64) *MatchmakingTicket {
-	s.EstimatedWaitTime = &v
-	return s
-}
-
-// SetGameSessionConnectionInfo sets the GameSessionConnectionInfo field's value.
-func (s *MatchmakingTicket) SetGameSessionConnectionInfo(v *GameSessionConnectionInfo) *MatchmakingTicket {
-	s.GameSessionConnectionInfo = v
-	return s
-}
-
-// SetPlayers sets the Players field's value.
-func (s *MatchmakingTicket) SetPlayers(v []Player) *MatchmakingTicket {
-	s.Players = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *MatchmakingTicket) SetStartTime(v time.Time) *MatchmakingTicket {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *MatchmakingTicket) SetStatus(v MatchmakingConfigurationStatus) *MatchmakingTicket {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *MatchmakingTicket) SetStatusMessage(v string) *MatchmakingTicket {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *MatchmakingTicket) SetStatusReason(v string) *MatchmakingTicket {
-	s.StatusReason = &v
-	return s
-}
-
-// SetTicketId sets the TicketId field's value.
-func (s *MatchmakingTicket) SetTicketId(v string) *MatchmakingTicket {
-	s.TicketId = &v
-	return s
-}
-
 // Information about a player session that was created as part of a StartGameSessionPlacement
 // request. This object contains only the player ID and player session ID. To
 // retrieve full details on a player session, call DescribePlayerSessions with
@@ -12804,18 +10710,6 @@ func (s PlacedPlayerSession) String() string {
 // GoString returns the string representation
 func (s PlacedPlayerSession) GoString() string {
 	return s.String()
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *PlacedPlayerSession) SetPlayerId(v string) *PlacedPlayerSession {
-	s.PlayerId = &v
-	return s
-}
-
-// SetPlayerSessionId sets the PlayerSessionId field's value.
-func (s *PlacedPlayerSession) SetPlayerSessionId(v string) *PlacedPlayerSession {
-	s.PlayerSessionId = &v
-	return s
 }
 
 // Represents a player in matchmaking. When starting a matchmaking request,
@@ -12883,30 +10777,6 @@ func (s *Player) Validate() error {
 	return nil
 }
 
-// SetLatencyInMs sets the LatencyInMs field's value.
-func (s *Player) SetLatencyInMs(v map[string]int64) *Player {
-	s.LatencyInMs = v
-	return s
-}
-
-// SetPlayerAttributes sets the PlayerAttributes field's value.
-func (s *Player) SetPlayerAttributes(v map[string]AttributeValue) *Player {
-	s.PlayerAttributes = v
-	return s
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *Player) SetPlayerId(v string) *Player {
-	s.PlayerId = &v
-	return s
-}
-
-// SetTeam sets the Team field's value.
-func (s *Player) SetTeam(v string) *Player {
-	s.Team = &v
-	return s
-}
-
 // Regional latency information for a player, used when requesting a new game
 // session with StartGameSessionPlacement. This value indicates the amount of
 // time lag that exists when the player is connected to a fleet in the specified
@@ -12954,24 +10824,6 @@ func (s *PlayerLatency) Validate() error {
 	return nil
 }
 
-// SetLatencyInMilliseconds sets the LatencyInMilliseconds field's value.
-func (s *PlayerLatency) SetLatencyInMilliseconds(v float64) *PlayerLatency {
-	s.LatencyInMilliseconds = &v
-	return s
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *PlayerLatency) SetPlayerId(v string) *PlayerLatency {
-	s.PlayerId = &v
-	return s
-}
-
-// SetRegionIdentifier sets the RegionIdentifier field's value.
-func (s *PlayerLatency) SetRegionIdentifier(v string) *PlayerLatency {
-	s.RegionIdentifier = &v
-	return s
-}
-
 // Queue setting that determines the highest latency allowed for individual
 // players when placing a game session. When a latency policy is in force, a
 // game session cannot be placed at any destination in a region where a player
@@ -13009,18 +10861,6 @@ func (s PlayerLatencyPolicy) String() string {
 // GoString returns the string representation
 func (s PlayerLatencyPolicy) GoString() string {
 	return s.String()
-}
-
-// SetMaximumIndividualPlayerLatencyMilliseconds sets the MaximumIndividualPlayerLatencyMilliseconds field's value.
-func (s *PlayerLatencyPolicy) SetMaximumIndividualPlayerLatencyMilliseconds(v int64) *PlayerLatencyPolicy {
-	s.MaximumIndividualPlayerLatencyMilliseconds = &v
-	return s
-}
-
-// SetPolicyDurationSeconds sets the PolicyDurationSeconds field's value.
-func (s *PlayerLatencyPolicy) SetPolicyDurationSeconds(v int64) *PlayerLatencyPolicy {
-	s.PolicyDurationSeconds = &v
-	return s
 }
 
 // Properties describing a player session. Player session objects are created
@@ -13112,66 +10952,6 @@ func (s PlayerSession) String() string {
 // GoString returns the string representation
 func (s PlayerSession) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *PlayerSession) SetCreationTime(v time.Time) *PlayerSession {
-	s.CreationTime = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *PlayerSession) SetFleetId(v string) *PlayerSession {
-	s.FleetId = &v
-	return s
-}
-
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *PlayerSession) SetGameSessionId(v string) *PlayerSession {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *PlayerSession) SetIpAddress(v string) *PlayerSession {
-	s.IpAddress = &v
-	return s
-}
-
-// SetPlayerData sets the PlayerData field's value.
-func (s *PlayerSession) SetPlayerData(v string) *PlayerSession {
-	s.PlayerData = &v
-	return s
-}
-
-// SetPlayerId sets the PlayerId field's value.
-func (s *PlayerSession) SetPlayerId(v string) *PlayerSession {
-	s.PlayerId = &v
-	return s
-}
-
-// SetPlayerSessionId sets the PlayerSessionId field's value.
-func (s *PlayerSession) SetPlayerSessionId(v string) *PlayerSession {
-	s.PlayerSessionId = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *PlayerSession) SetPort(v int64) *PlayerSession {
-	s.Port = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *PlayerSession) SetStatus(v PlayerSessionStatus) *PlayerSession {
-	s.Status = v
-	return s
-}
-
-// SetTerminationTime sets the TerminationTime field's value.
-func (s *PlayerSession) SetTerminationTime(v time.Time) *PlayerSession {
-	s.TerminationTime = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -13309,54 +11089,6 @@ func (s *PutScalingPolicyInput) Validate() error {
 	return nil
 }
 
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *PutScalingPolicyInput) SetComparisonOperator(v ComparisonOperatorType) *PutScalingPolicyInput {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetEvaluationPeriods sets the EvaluationPeriods field's value.
-func (s *PutScalingPolicyInput) SetEvaluationPeriods(v int64) *PutScalingPolicyInput {
-	s.EvaluationPeriods = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *PutScalingPolicyInput) SetFleetId(v string) *PutScalingPolicyInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *PutScalingPolicyInput) SetMetricName(v MetricName) *PutScalingPolicyInput {
-	s.MetricName = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutScalingPolicyInput) SetName(v string) *PutScalingPolicyInput {
-	s.Name = &v
-	return s
-}
-
-// SetScalingAdjustment sets the ScalingAdjustment field's value.
-func (s *PutScalingPolicyInput) SetScalingAdjustment(v int64) *PutScalingPolicyInput {
-	s.ScalingAdjustment = &v
-	return s
-}
-
-// SetScalingAdjustmentType sets the ScalingAdjustmentType field's value.
-func (s *PutScalingPolicyInput) SetScalingAdjustmentType(v ScalingAdjustmentType) *PutScalingPolicyInput {
-	s.ScalingAdjustmentType = v
-	return s
-}
-
-// SetThreshold sets the Threshold field's value.
-func (s *PutScalingPolicyInput) SetThreshold(v float64) *PutScalingPolicyInput {
-	s.Threshold = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PutScalingPolicyOutput
 type PutScalingPolicyOutput struct {
@@ -13382,12 +11114,6 @@ func (s PutScalingPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutScalingPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetName sets the Name field's value.
-func (s *PutScalingPolicyOutput) SetName(v string) *PutScalingPolicyOutput {
-	s.Name = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -13425,12 +11151,6 @@ func (s *RequestUploadCredentialsInput) Validate() error {
 	return nil
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *RequestUploadCredentialsInput) SetBuildId(v string) *RequestUploadCredentialsInput {
-	s.BuildId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentialsOutput
 type RequestUploadCredentialsOutput struct {
@@ -13460,18 +11180,6 @@ func (s RequestUploadCredentialsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RequestUploadCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStorageLocation sets the StorageLocation field's value.
-func (s *RequestUploadCredentialsOutput) SetStorageLocation(v *S3Location) *RequestUploadCredentialsOutput {
-	s.StorageLocation = v
-	return s
-}
-
-// SetUploadCredentials sets the UploadCredentials field's value.
-func (s *RequestUploadCredentialsOutput) SetUploadCredentials(v *AwsCredentials) *RequestUploadCredentialsOutput {
-	s.UploadCredentials = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -13509,12 +11217,6 @@ func (s *ResolveAliasInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *ResolveAliasInput) SetAliasId(v string) *ResolveAliasInput {
-	s.AliasId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAliasOutput
 type ResolveAliasOutput struct {
@@ -13539,12 +11241,6 @@ func (s ResolveAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResolveAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *ResolveAliasOutput) SetFleetId(v string) *ResolveAliasOutput {
-	s.FleetId = &v
-	return s
 }
 
 // Policy that limits the number of game sessions a player can create on the
@@ -13578,18 +11274,6 @@ func (s ResourceCreationLimitPolicy) String() string {
 // GoString returns the string representation
 func (s ResourceCreationLimitPolicy) GoString() string {
 	return s.String()
-}
-
-// SetNewGameSessionsPerCreator sets the NewGameSessionsPerCreator field's value.
-func (s *ResourceCreationLimitPolicy) SetNewGameSessionsPerCreator(v int64) *ResourceCreationLimitPolicy {
-	s.NewGameSessionsPerCreator = &v
-	return s
-}
-
-// SetPolicyPeriodInMinutes sets the PolicyPeriodInMinutes field's value.
-func (s *ResourceCreationLimitPolicy) SetPolicyPeriodInMinutes(v int64) *ResourceCreationLimitPolicy {
-	s.PolicyPeriodInMinutes = &v
-	return s
 }
 
 // Routing configuration for a fleet alias.
@@ -13668,24 +11352,6 @@ func (s RoutingStrategy) String() string {
 // GoString returns the string representation
 func (s RoutingStrategy) GoString() string {
 	return s.String()
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *RoutingStrategy) SetFleetId(v string) *RoutingStrategy {
-	s.FleetId = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *RoutingStrategy) SetMessage(v string) *RoutingStrategy {
-	s.Message = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *RoutingStrategy) SetType(v RoutingStrategyType) *RoutingStrategy {
-	s.Type = v
-	return s
 }
 
 // A collection of server process configurations that describe what processes
@@ -13808,24 +11474,6 @@ func (s *RuntimeConfiguration) Validate() error {
 	return nil
 }
 
-// SetGameSessionActivationTimeoutSeconds sets the GameSessionActivationTimeoutSeconds field's value.
-func (s *RuntimeConfiguration) SetGameSessionActivationTimeoutSeconds(v int64) *RuntimeConfiguration {
-	s.GameSessionActivationTimeoutSeconds = &v
-	return s
-}
-
-// SetMaxConcurrentGameSessionActivations sets the MaxConcurrentGameSessionActivations field's value.
-func (s *RuntimeConfiguration) SetMaxConcurrentGameSessionActivations(v int64) *RuntimeConfiguration {
-	s.MaxConcurrentGameSessionActivations = &v
-	return s
-}
-
-// SetServerProcesses sets the ServerProcesses field's value.
-func (s *RuntimeConfiguration) SetServerProcesses(v []ServerProcess) *RuntimeConfiguration {
-	s.ServerProcesses = v
-	return s
-}
-
 // Location in Amazon Simple Storage Service (Amazon S3) where build files can
 // be stored for access by Amazon GameLift. This location is specified in a
 // CreateBuild request. For more details, see the Create a Build with Files
@@ -13872,24 +11520,6 @@ func (s *S3Location) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *S3Location) SetBucket(v string) *S3Location {
-	s.Bucket = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *S3Location) SetKey(v string) *S3Location {
-	s.Key = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *S3Location) SetRoleArn(v string) *S3Location {
-	s.RoleArn = &v
-	return s
 }
 
 // Rule that controls how a fleet is scaled. Scaling policies are uniquely identified
@@ -14030,60 +11660,6 @@ func (s ScalingPolicy) GoString() string {
 	return s.String()
 }
 
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *ScalingPolicy) SetComparisonOperator(v ComparisonOperatorType) *ScalingPolicy {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetEvaluationPeriods sets the EvaluationPeriods field's value.
-func (s *ScalingPolicy) SetEvaluationPeriods(v int64) *ScalingPolicy {
-	s.EvaluationPeriods = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *ScalingPolicy) SetFleetId(v string) *ScalingPolicy {
-	s.FleetId = &v
-	return s
-}
-
-// SetMetricName sets the MetricName field's value.
-func (s *ScalingPolicy) SetMetricName(v MetricName) *ScalingPolicy {
-	s.MetricName = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ScalingPolicy) SetName(v string) *ScalingPolicy {
-	s.Name = &v
-	return s
-}
-
-// SetScalingAdjustment sets the ScalingAdjustment field's value.
-func (s *ScalingPolicy) SetScalingAdjustment(v int64) *ScalingPolicy {
-	s.ScalingAdjustment = &v
-	return s
-}
-
-// SetScalingAdjustmentType sets the ScalingAdjustmentType field's value.
-func (s *ScalingPolicy) SetScalingAdjustmentType(v ScalingAdjustmentType) *ScalingPolicy {
-	s.ScalingAdjustmentType = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ScalingPolicy) SetStatus(v ScalingStatusType) *ScalingPolicy {
-	s.Status = v
-	return s
-}
-
-// SetThreshold sets the Threshold field's value.
-func (s *ScalingPolicy) SetThreshold(v float64) *ScalingPolicy {
-	s.Threshold = &v
-	return s
-}
-
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessionsInput
 type SearchGameSessionsInput struct {
@@ -14197,42 +11773,6 @@ func (s *SearchGameSessionsInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *SearchGameSessionsInput) SetAliasId(v string) *SearchGameSessionsInput {
-	s.AliasId = &v
-	return s
-}
-
-// SetFilterExpression sets the FilterExpression field's value.
-func (s *SearchGameSessionsInput) SetFilterExpression(v string) *SearchGameSessionsInput {
-	s.FilterExpression = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *SearchGameSessionsInput) SetFleetId(v string) *SearchGameSessionsInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *SearchGameSessionsInput) SetLimit(v int64) *SearchGameSessionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchGameSessionsInput) SetNextToken(v string) *SearchGameSessionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSortExpression sets the SortExpression field's value.
-func (s *SearchGameSessionsInput) SetSortExpression(v string) *SearchGameSessionsInput {
-	s.SortExpression = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessionsOutput
 type SearchGameSessionsOutput struct {
@@ -14263,18 +11803,6 @@ func (s SearchGameSessionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchGameSessionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessions sets the GameSessions field's value.
-func (s *SearchGameSessionsOutput) SetGameSessions(v []GameSession) *SearchGameSessionsOutput {
-	s.GameSessions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SearchGameSessionsOutput) SetNextToken(v string) *SearchGameSessionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // A set of instructions for launching server processes on each instance in
@@ -14341,24 +11869,6 @@ func (s *ServerProcess) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConcurrentExecutions sets the ConcurrentExecutions field's value.
-func (s *ServerProcess) SetConcurrentExecutions(v int64) *ServerProcess {
-	s.ConcurrentExecutions = &v
-	return s
-}
-
-// SetLaunchPath sets the LaunchPath field's value.
-func (s *ServerProcess) SetLaunchPath(v string) *ServerProcess {
-	s.LaunchPath = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *ServerProcess) SetParameters(v string) *ServerProcess {
-	s.Parameters = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -14475,54 +11985,6 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 	return nil
 }
 
-// SetDesiredPlayerSessions sets the DesiredPlayerSessions field's value.
-func (s *StartGameSessionPlacementInput) SetDesiredPlayerSessions(v []DesiredPlayerSession) *StartGameSessionPlacementInput {
-	s.DesiredPlayerSessions = v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *StartGameSessionPlacementInput) SetGameProperties(v []GameProperty) *StartGameSessionPlacementInput {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *StartGameSessionPlacementInput) SetGameSessionData(v string) *StartGameSessionPlacementInput {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionName sets the GameSessionName field's value.
-func (s *StartGameSessionPlacementInput) SetGameSessionName(v string) *StartGameSessionPlacementInput {
-	s.GameSessionName = &v
-	return s
-}
-
-// SetGameSessionQueueName sets the GameSessionQueueName field's value.
-func (s *StartGameSessionPlacementInput) SetGameSessionQueueName(v string) *StartGameSessionPlacementInput {
-	s.GameSessionQueueName = &v
-	return s
-}
-
-// SetMaximumPlayerSessionCount sets the MaximumPlayerSessionCount field's value.
-func (s *StartGameSessionPlacementInput) SetMaximumPlayerSessionCount(v int64) *StartGameSessionPlacementInput {
-	s.MaximumPlayerSessionCount = &v
-	return s
-}
-
-// SetPlacementId sets the PlacementId field's value.
-func (s *StartGameSessionPlacementInput) SetPlacementId(v string) *StartGameSessionPlacementInput {
-	s.PlacementId = &v
-	return s
-}
-
-// SetPlayerLatencies sets the PlayerLatencies field's value.
-func (s *StartGameSessionPlacementInput) SetPlayerLatencies(v []PlayerLatency) *StartGameSessionPlacementInput {
-	s.PlayerLatencies = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacementOutput
 type StartGameSessionPlacementOutput struct {
@@ -14549,12 +12011,6 @@ func (s StartGameSessionPlacementOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartGameSessionPlacementOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionPlacement sets the GameSessionPlacement field's value.
-func (s *StartGameSessionPlacementOutput) SetGameSessionPlacement(v *GameSessionPlacement) *StartGameSessionPlacementOutput {
-	s.GameSessionPlacement = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -14622,24 +12078,6 @@ func (s *StartMatchmakingInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationName sets the ConfigurationName field's value.
-func (s *StartMatchmakingInput) SetConfigurationName(v string) *StartMatchmakingInput {
-	s.ConfigurationName = &v
-	return s
-}
-
-// SetPlayers sets the Players field's value.
-func (s *StartMatchmakingInput) SetPlayers(v []Player) *StartMatchmakingInput {
-	s.Players = v
-	return s
-}
-
-// SetTicketId sets the TicketId field's value.
-func (s *StartMatchmakingInput) SetTicketId(v string) *StartMatchmakingInput {
-	s.TicketId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmakingOutput
 type StartMatchmakingOutput struct {
@@ -14666,12 +12104,6 @@ func (s StartMatchmakingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartMatchmakingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMatchmakingTicket sets the MatchmakingTicket field's value.
-func (s *StartMatchmakingOutput) SetMatchmakingTicket(v *MatchmakingTicket) *StartMatchmakingOutput {
-	s.MatchmakingTicket = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -14712,12 +12144,6 @@ func (s *StopGameSessionPlacementInput) Validate() error {
 	return nil
 }
 
-// SetPlacementId sets the PlacementId field's value.
-func (s *StopGameSessionPlacementInput) SetPlacementId(v string) *StopGameSessionPlacementInput {
-	s.PlacementId = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacementOutput
 type StopGameSessionPlacementOutput struct {
@@ -14743,12 +12169,6 @@ func (s StopGameSessionPlacementOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopGameSessionPlacementOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionPlacement sets the GameSessionPlacement field's value.
-func (s *StopGameSessionPlacementOutput) SetGameSessionPlacement(v *GameSessionPlacement) *StopGameSessionPlacementOutput {
-	s.GameSessionPlacement = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -14787,12 +12207,6 @@ func (s *StopMatchmakingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTicketId sets the TicketId field's value.
-func (s *StopMatchmakingInput) SetTicketId(v string) *StopMatchmakingInput {
-	s.TicketId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmakingOutput
@@ -14868,30 +12282,6 @@ func (s *UpdateAliasInput) Validate() error {
 	return nil
 }
 
-// SetAliasId sets the AliasId field's value.
-func (s *UpdateAliasInput) SetAliasId(v string) *UpdateAliasInput {
-	s.AliasId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateAliasInput) SetDescription(v string) *UpdateAliasInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateAliasInput) SetName(v string) *UpdateAliasInput {
-	s.Name = &v
-	return s
-}
-
-// SetRoutingStrategy sets the RoutingStrategy field's value.
-func (s *UpdateAliasInput) SetRoutingStrategy(v *RoutingStrategy) *UpdateAliasInput {
-	s.RoutingStrategy = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAliasOutput
 type UpdateAliasOutput struct {
@@ -14916,12 +12306,6 @@ func (s UpdateAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAlias sets the Alias field's value.
-func (s *UpdateAliasOutput) SetAlias(v *Alias) *UpdateAliasOutput {
-	s.Alias = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -14973,24 +12357,6 @@ func (s *UpdateBuildInput) Validate() error {
 	return nil
 }
 
-// SetBuildId sets the BuildId field's value.
-func (s *UpdateBuildInput) SetBuildId(v string) *UpdateBuildInput {
-	s.BuildId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateBuildInput) SetName(v string) *UpdateBuildInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *UpdateBuildInput) SetVersion(v string) *UpdateBuildInput {
-	s.Version = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuildOutput
 type UpdateBuildOutput struct {
@@ -15015,12 +12381,6 @@ func (s UpdateBuildOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateBuildOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuild sets the Build field's value.
-func (s *UpdateBuildOutput) SetBuild(v *Build) *UpdateBuildOutput {
-	s.Build = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15093,42 +12453,6 @@ func (s *UpdateFleetAttributesInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateFleetAttributesInput) SetDescription(v string) *UpdateFleetAttributesInput {
-	s.Description = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateFleetAttributesInput) SetFleetId(v string) *UpdateFleetAttributesInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetMetricGroups sets the MetricGroups field's value.
-func (s *UpdateFleetAttributesInput) SetMetricGroups(v []string) *UpdateFleetAttributesInput {
-	s.MetricGroups = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateFleetAttributesInput) SetName(v string) *UpdateFleetAttributesInput {
-	s.Name = &v
-	return s
-}
-
-// SetNewGameSessionProtectionPolicy sets the NewGameSessionProtectionPolicy field's value.
-func (s *UpdateFleetAttributesInput) SetNewGameSessionProtectionPolicy(v ProtectionPolicy) *UpdateFleetAttributesInput {
-	s.NewGameSessionProtectionPolicy = v
-	return s
-}
-
-// SetResourceCreationLimitPolicy sets the ResourceCreationLimitPolicy field's value.
-func (s *UpdateFleetAttributesInput) SetResourceCreationLimitPolicy(v *ResourceCreationLimitPolicy) *UpdateFleetAttributesInput {
-	s.ResourceCreationLimitPolicy = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributesOutput
 type UpdateFleetAttributesOutput struct {
@@ -15153,12 +12477,6 @@ func (s UpdateFleetAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateFleetAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateFleetAttributesOutput) SetFleetId(v string) *UpdateFleetAttributesOutput {
-	s.FleetId = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15207,30 +12525,6 @@ func (s *UpdateFleetCapacityInput) Validate() error {
 	return nil
 }
 
-// SetDesiredInstances sets the DesiredInstances field's value.
-func (s *UpdateFleetCapacityInput) SetDesiredInstances(v int64) *UpdateFleetCapacityInput {
-	s.DesiredInstances = &v
-	return s
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateFleetCapacityInput) SetFleetId(v string) *UpdateFleetCapacityInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetMaxSize sets the MaxSize field's value.
-func (s *UpdateFleetCapacityInput) SetMaxSize(v int64) *UpdateFleetCapacityInput {
-	s.MaxSize = &v
-	return s
-}
-
-// SetMinSize sets the MinSize field's value.
-func (s *UpdateFleetCapacityInput) SetMinSize(v int64) *UpdateFleetCapacityInput {
-	s.MinSize = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacityOutput
 type UpdateFleetCapacityOutput struct {
@@ -15255,12 +12549,6 @@ func (s UpdateFleetCapacityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateFleetCapacityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateFleetCapacityOutput) SetFleetId(v string) *UpdateFleetCapacityOutput {
-	s.FleetId = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15318,24 +12606,6 @@ func (s *UpdateFleetPortSettingsInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateFleetPortSettingsInput) SetFleetId(v string) *UpdateFleetPortSettingsInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetInboundPermissionAuthorizations sets the InboundPermissionAuthorizations field's value.
-func (s *UpdateFleetPortSettingsInput) SetInboundPermissionAuthorizations(v []IpPermission) *UpdateFleetPortSettingsInput {
-	s.InboundPermissionAuthorizations = v
-	return s
-}
-
-// SetInboundPermissionRevocations sets the InboundPermissionRevocations field's value.
-func (s *UpdateFleetPortSettingsInput) SetInboundPermissionRevocations(v []IpPermission) *UpdateFleetPortSettingsInput {
-	s.InboundPermissionRevocations = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettingsOutput
 type UpdateFleetPortSettingsOutput struct {
@@ -15360,12 +12630,6 @@ func (s UpdateFleetPortSettingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateFleetPortSettingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateFleetPortSettingsOutput) SetFleetId(v string) *UpdateFleetPortSettingsOutput {
-	s.FleetId = &v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15429,36 +12693,6 @@ func (s *UpdateGameSessionInput) Validate() error {
 	return nil
 }
 
-// SetGameSessionId sets the GameSessionId field's value.
-func (s *UpdateGameSessionInput) SetGameSessionId(v string) *UpdateGameSessionInput {
-	s.GameSessionId = &v
-	return s
-}
-
-// SetMaximumPlayerSessionCount sets the MaximumPlayerSessionCount field's value.
-func (s *UpdateGameSessionInput) SetMaximumPlayerSessionCount(v int64) *UpdateGameSessionInput {
-	s.MaximumPlayerSessionCount = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateGameSessionInput) SetName(v string) *UpdateGameSessionInput {
-	s.Name = &v
-	return s
-}
-
-// SetPlayerSessionCreationPolicy sets the PlayerSessionCreationPolicy field's value.
-func (s *UpdateGameSessionInput) SetPlayerSessionCreationPolicy(v PlayerSessionCreationPolicy) *UpdateGameSessionInput {
-	s.PlayerSessionCreationPolicy = v
-	return s
-}
-
-// SetProtectionPolicy sets the ProtectionPolicy field's value.
-func (s *UpdateGameSessionInput) SetProtectionPolicy(v ProtectionPolicy) *UpdateGameSessionInput {
-	s.ProtectionPolicy = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionOutput
 type UpdateGameSessionOutput struct {
@@ -15483,12 +12717,6 @@ func (s UpdateGameSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGameSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSession sets the GameSession field's value.
-func (s *UpdateGameSessionOutput) SetGameSession(v *GameSession) *UpdateGameSessionOutput {
-	s.GameSession = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15559,30 +12787,6 @@ func (s *UpdateGameSessionQueueInput) Validate() error {
 	return nil
 }
 
-// SetDestinations sets the Destinations field's value.
-func (s *UpdateGameSessionQueueInput) SetDestinations(v []GameSessionQueueDestination) *UpdateGameSessionQueueInput {
-	s.Destinations = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateGameSessionQueueInput) SetName(v string) *UpdateGameSessionQueueInput {
-	s.Name = &v
-	return s
-}
-
-// SetPlayerLatencyPolicies sets the PlayerLatencyPolicies field's value.
-func (s *UpdateGameSessionQueueInput) SetPlayerLatencyPolicies(v []PlayerLatencyPolicy) *UpdateGameSessionQueueInput {
-	s.PlayerLatencyPolicies = v
-	return s
-}
-
-// SetTimeoutInSeconds sets the TimeoutInSeconds field's value.
-func (s *UpdateGameSessionQueueInput) SetTimeoutInSeconds(v int64) *UpdateGameSessionQueueInput {
-	s.TimeoutInSeconds = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueueOutput
 type UpdateGameSessionQueueOutput struct {
@@ -15607,12 +12811,6 @@ func (s UpdateGameSessionQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGameSessionQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGameSessionQueue sets the GameSessionQueue field's value.
-func (s *UpdateGameSessionQueueOutput) SetGameSessionQueue(v *GameSessionQueue) *UpdateGameSessionQueueOutput {
-	s.GameSessionQueue = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15733,78 +12931,6 @@ func (s *UpdateMatchmakingConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetAcceptanceRequired sets the AcceptanceRequired field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetAcceptanceRequired(v bool) *UpdateMatchmakingConfigurationInput {
-	s.AcceptanceRequired = &v
-	return s
-}
-
-// SetAcceptanceTimeoutSeconds sets the AcceptanceTimeoutSeconds field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetAcceptanceTimeoutSeconds(v int64) *UpdateMatchmakingConfigurationInput {
-	s.AcceptanceTimeoutSeconds = &v
-	return s
-}
-
-// SetAdditionalPlayerCount sets the AdditionalPlayerCount field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetAdditionalPlayerCount(v int64) *UpdateMatchmakingConfigurationInput {
-	s.AdditionalPlayerCount = &v
-	return s
-}
-
-// SetCustomEventData sets the CustomEventData field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetCustomEventData(v string) *UpdateMatchmakingConfigurationInput {
-	s.CustomEventData = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetDescription(v string) *UpdateMatchmakingConfigurationInput {
-	s.Description = &v
-	return s
-}
-
-// SetGameProperties sets the GameProperties field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetGameProperties(v []GameProperty) *UpdateMatchmakingConfigurationInput {
-	s.GameProperties = v
-	return s
-}
-
-// SetGameSessionData sets the GameSessionData field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetGameSessionData(v string) *UpdateMatchmakingConfigurationInput {
-	s.GameSessionData = &v
-	return s
-}
-
-// SetGameSessionQueueArns sets the GameSessionQueueArns field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetGameSessionQueueArns(v []string) *UpdateMatchmakingConfigurationInput {
-	s.GameSessionQueueArns = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetName(v string) *UpdateMatchmakingConfigurationInput {
-	s.Name = &v
-	return s
-}
-
-// SetNotificationTarget sets the NotificationTarget field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetNotificationTarget(v string) *UpdateMatchmakingConfigurationInput {
-	s.NotificationTarget = &v
-	return s
-}
-
-// SetRequestTimeoutSeconds sets the RequestTimeoutSeconds field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetRequestTimeoutSeconds(v int64) *UpdateMatchmakingConfigurationInput {
-	s.RequestTimeoutSeconds = &v
-	return s
-}
-
-// SetRuleSetName sets the RuleSetName field's value.
-func (s *UpdateMatchmakingConfigurationInput) SetRuleSetName(v string) *UpdateMatchmakingConfigurationInput {
-	s.RuleSetName = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfigurationOutput
 type UpdateMatchmakingConfigurationOutput struct {
@@ -15829,12 +12955,6 @@ func (s UpdateMatchmakingConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateMatchmakingConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *UpdateMatchmakingConfigurationOutput) SetConfiguration(v *MatchmakingConfiguration) *UpdateMatchmakingConfigurationOutput {
-	s.Configuration = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15891,18 +13011,6 @@ func (s *UpdateRuntimeConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *UpdateRuntimeConfigurationInput) SetFleetId(v string) *UpdateRuntimeConfigurationInput {
-	s.FleetId = &v
-	return s
-}
-
-// SetRuntimeConfiguration sets the RuntimeConfiguration field's value.
-func (s *UpdateRuntimeConfigurationInput) SetRuntimeConfiguration(v *RuntimeConfiguration) *UpdateRuntimeConfigurationInput {
-	s.RuntimeConfiguration = v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfigurationOutput
 type UpdateRuntimeConfigurationOutput struct {
@@ -15928,12 +13036,6 @@ func (s UpdateRuntimeConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRuntimeConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRuntimeConfiguration sets the RuntimeConfiguration field's value.
-func (s *UpdateRuntimeConfigurationOutput) SetRuntimeConfiguration(v *RuntimeConfiguration) *UpdateRuntimeConfigurationOutput {
-	s.RuntimeConfiguration = v
-	return s
 }
 
 // Represents the input for a request action.
@@ -15974,12 +13076,6 @@ func (s *ValidateMatchmakingRuleSetInput) Validate() error {
 	return nil
 }
 
-// SetRuleSetBody sets the RuleSetBody field's value.
-func (s *ValidateMatchmakingRuleSetInput) SetRuleSetBody(v string) *ValidateMatchmakingRuleSetInput {
-	s.RuleSetBody = &v
-	return s
-}
-
 // Represents the returned data in response to a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSetOutput
 type ValidateMatchmakingRuleSetOutput struct {
@@ -16004,12 +13100,6 @@ func (s ValidateMatchmakingRuleSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ValidateMatchmakingRuleSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetValid sets the Valid field's value.
-func (s *ValidateMatchmakingRuleSetOutput) SetValid(v bool) *ValidateMatchmakingRuleSetOutput {
-	s.Valid = &v
-	return s
 }
 
 // Represents an authorization for a VPC peering connection between the VPC
@@ -16064,36 +13154,6 @@ func (s VpcPeeringAuthorization) String() string {
 // GoString returns the string representation
 func (s VpcPeeringAuthorization) GoString() string {
 	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *VpcPeeringAuthorization) SetCreationTime(v time.Time) *VpcPeeringAuthorization {
-	s.CreationTime = &v
-	return s
-}
-
-// SetExpirationTime sets the ExpirationTime field's value.
-func (s *VpcPeeringAuthorization) SetExpirationTime(v time.Time) *VpcPeeringAuthorization {
-	s.ExpirationTime = &v
-	return s
-}
-
-// SetGameLiftAwsAccountId sets the GameLiftAwsAccountId field's value.
-func (s *VpcPeeringAuthorization) SetGameLiftAwsAccountId(v string) *VpcPeeringAuthorization {
-	s.GameLiftAwsAccountId = &v
-	return s
-}
-
-// SetPeerVpcAwsAccountId sets the PeerVpcAwsAccountId field's value.
-func (s *VpcPeeringAuthorization) SetPeerVpcAwsAccountId(v string) *VpcPeeringAuthorization {
-	s.PeerVpcAwsAccountId = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *VpcPeeringAuthorization) SetPeerVpcId(v string) *VpcPeeringAuthorization {
-	s.PeerVpcId = &v
-	return s
 }
 
 // Represents a peering connection between a VPC on one of your AWS accounts
@@ -16157,42 +13217,6 @@ func (s VpcPeeringConnection) GoString() string {
 	return s.String()
 }
 
-// SetFleetId sets the FleetId field's value.
-func (s *VpcPeeringConnection) SetFleetId(v string) *VpcPeeringConnection {
-	s.FleetId = &v
-	return s
-}
-
-// SetGameLiftVpcId sets the GameLiftVpcId field's value.
-func (s *VpcPeeringConnection) SetGameLiftVpcId(v string) *VpcPeeringConnection {
-	s.GameLiftVpcId = &v
-	return s
-}
-
-// SetIpV4CidrBlock sets the IpV4CidrBlock field's value.
-func (s *VpcPeeringConnection) SetIpV4CidrBlock(v string) *VpcPeeringConnection {
-	s.IpV4CidrBlock = &v
-	return s
-}
-
-// SetPeerVpcId sets the PeerVpcId field's value.
-func (s *VpcPeeringConnection) SetPeerVpcId(v string) *VpcPeeringConnection {
-	s.PeerVpcId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VpcPeeringConnection) SetStatus(v *VpcPeeringConnectionStatus) *VpcPeeringConnection {
-	s.Status = v
-	return s
-}
-
-// SetVpcPeeringConnectionId sets the VpcPeeringConnectionId field's value.
-func (s *VpcPeeringConnection) SetVpcPeeringConnectionId(v string) *VpcPeeringConnection {
-	s.VpcPeeringConnectionId = &v
-	return s
-}
-
 // Represents status information for a VPC peering connection. Status is associated
 // with a VpcPeeringConnection object. Status codes and messages are provided
 // from EC2 (). (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html)
@@ -16216,18 +13240,6 @@ func (s VpcPeeringConnectionStatus) String() string {
 // GoString returns the string representation
 func (s VpcPeeringConnectionStatus) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *VpcPeeringConnectionStatus) SetCode(v string) *VpcPeeringConnectionStatus {
-	s.Code = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *VpcPeeringConnectionStatus) SetMessage(v string) *VpcPeeringConnectionStatus {
-	s.Message = &v
-	return s
 }
 
 type AcceptanceType string

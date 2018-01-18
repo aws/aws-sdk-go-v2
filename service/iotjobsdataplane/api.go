@@ -258,30 +258,6 @@ func (s *DescribeJobExecutionInput) Validate() error {
 	return nil
 }
 
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *DescribeJobExecutionInput) SetExecutionNumber(v int64) *DescribeJobExecutionInput {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetIncludeJobDocument sets the IncludeJobDocument field's value.
-func (s *DescribeJobExecutionInput) SetIncludeJobDocument(v bool) *DescribeJobExecutionInput {
-	s.IncludeJobDocument = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *DescribeJobExecutionInput) SetJobId(v string) *DescribeJobExecutionInput {
-	s.JobId = &v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *DescribeJobExecutionInput) SetThingName(v string) *DescribeJobExecutionInput {
-	s.ThingName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/DescribeJobExecutionResponse
 type DescribeJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -305,12 +281,6 @@ func (s DescribeJobExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecution sets the Execution field's value.
-func (s *DescribeJobExecutionOutput) SetExecution(v *JobExecution) *DescribeJobExecutionOutput {
-	s.Execution = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutionsRequest
@@ -350,12 +320,6 @@ func (s *GetPendingJobExecutionsInput) Validate() error {
 	return nil
 }
 
-// SetThingName sets the ThingName field's value.
-func (s *GetPendingJobExecutionsInput) SetThingName(v string) *GetPendingJobExecutionsInput {
-	s.ThingName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutionsResponse
 type GetPendingJobExecutionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -382,18 +346,6 @@ func (s GetPendingJobExecutionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPendingJobExecutionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInProgressJobs sets the InProgressJobs field's value.
-func (s *GetPendingJobExecutionsOutput) SetInProgressJobs(v []JobExecutionSummary) *GetPendingJobExecutionsOutput {
-	s.InProgressJobs = v
-	return s
-}
-
-// SetQueuedJobs sets the QueuedJobs field's value.
-func (s *GetPendingJobExecutionsOutput) SetQueuedJobs(v []JobExecutionSummary) *GetPendingJobExecutionsOutput {
-	s.QueuedJobs = v
-	return s
 }
 
 // Contains data about a job execution.
@@ -446,66 +398,6 @@ func (s JobExecution) GoString() string {
 	return s.String()
 }
 
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *JobExecution) SetExecutionNumber(v int64) *JobExecution {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetJobDocument sets the JobDocument field's value.
-func (s *JobExecution) SetJobDocument(v string) *JobExecution {
-	s.JobDocument = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobExecution) SetJobId(v string) *JobExecution {
-	s.JobId = &v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *JobExecution) SetLastUpdatedAt(v int64) *JobExecution {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetQueuedAt sets the QueuedAt field's value.
-func (s *JobExecution) SetQueuedAt(v int64) *JobExecution {
-	s.QueuedAt = &v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *JobExecution) SetStartedAt(v int64) *JobExecution {
-	s.StartedAt = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobExecution) SetStatus(v JobExecutionStatus) *JobExecution {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetails sets the StatusDetails field's value.
-func (s *JobExecution) SetStatusDetails(v map[string]string) *JobExecution {
-	s.StatusDetails = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *JobExecution) SetThingName(v string) *JobExecution {
-	s.ThingName = &v
-	return s
-}
-
-// SetVersionNumber sets the VersionNumber field's value.
-func (s *JobExecution) SetVersionNumber(v int64) *JobExecution {
-	s.VersionNumber = &v
-	return s
-}
-
 // Contains data about the state of a job execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/JobExecutionState
 type JobExecutionState struct {
@@ -531,24 +423,6 @@ func (s JobExecutionState) String() string {
 // GoString returns the string representation
 func (s JobExecutionState) GoString() string {
 	return s.String()
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobExecutionState) SetStatus(v JobExecutionStatus) *JobExecutionState {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetails sets the StatusDetails field's value.
-func (s *JobExecutionState) SetStatusDetails(v map[string]string) *JobExecutionState {
-	s.StatusDetails = v
-	return s
-}
-
-// SetVersionNumber sets the VersionNumber field's value.
-func (s *JobExecutionState) SetVersionNumber(v int64) *JobExecutionState {
-	s.VersionNumber = &v
-	return s
 }
 
 // Contains a subset of information about a job execution.
@@ -585,42 +459,6 @@ func (s JobExecutionSummary) String() string {
 // GoString returns the string representation
 func (s JobExecutionSummary) GoString() string {
 	return s.String()
-}
-
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *JobExecutionSummary) SetExecutionNumber(v int64) *JobExecutionSummary {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobExecutionSummary) SetJobId(v string) *JobExecutionSummary {
-	s.JobId = &v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *JobExecutionSummary) SetLastUpdatedAt(v int64) *JobExecutionSummary {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetQueuedAt sets the QueuedAt field's value.
-func (s *JobExecutionSummary) SetQueuedAt(v int64) *JobExecutionSummary {
-	s.QueuedAt = &v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *JobExecutionSummary) SetStartedAt(v int64) *JobExecutionSummary {
-	s.StartedAt = &v
-	return s
-}
-
-// SetVersionNumber sets the VersionNumber field's value.
-func (s *JobExecutionSummary) SetVersionNumber(v int64) *JobExecutionSummary {
-	s.VersionNumber = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/StartNextPendingJobExecutionRequest
@@ -664,18 +502,6 @@ func (s *StartNextPendingJobExecutionInput) Validate() error {
 	return nil
 }
 
-// SetStatusDetails sets the StatusDetails field's value.
-func (s *StartNextPendingJobExecutionInput) SetStatusDetails(v map[string]string) *StartNextPendingJobExecutionInput {
-	s.StatusDetails = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *StartNextPendingJobExecutionInput) SetThingName(v string) *StartNextPendingJobExecutionInput {
-	s.ThingName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/StartNextPendingJobExecutionResponse
 type StartNextPendingJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -699,12 +525,6 @@ func (s StartNextPendingJobExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartNextPendingJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecution sets the Execution field's value.
-func (s *StartNextPendingJobExecutionOutput) SetExecution(v *JobExecution) *StartNextPendingJobExecutionOutput {
-	s.Execution = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/UpdateJobExecutionRequest
@@ -790,54 +610,6 @@ func (s *UpdateJobExecutionInput) Validate() error {
 	return nil
 }
 
-// SetExecutionNumber sets the ExecutionNumber field's value.
-func (s *UpdateJobExecutionInput) SetExecutionNumber(v int64) *UpdateJobExecutionInput {
-	s.ExecutionNumber = &v
-	return s
-}
-
-// SetExpectedVersion sets the ExpectedVersion field's value.
-func (s *UpdateJobExecutionInput) SetExpectedVersion(v int64) *UpdateJobExecutionInput {
-	s.ExpectedVersion = &v
-	return s
-}
-
-// SetIncludeJobDocument sets the IncludeJobDocument field's value.
-func (s *UpdateJobExecutionInput) SetIncludeJobDocument(v bool) *UpdateJobExecutionInput {
-	s.IncludeJobDocument = &v
-	return s
-}
-
-// SetIncludeJobExecutionState sets the IncludeJobExecutionState field's value.
-func (s *UpdateJobExecutionInput) SetIncludeJobExecutionState(v bool) *UpdateJobExecutionInput {
-	s.IncludeJobExecutionState = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *UpdateJobExecutionInput) SetJobId(v string) *UpdateJobExecutionInput {
-	s.JobId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateJobExecutionInput) SetStatus(v JobExecutionStatus) *UpdateJobExecutionInput {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetails sets the StatusDetails field's value.
-func (s *UpdateJobExecutionInput) SetStatusDetails(v map[string]string) *UpdateJobExecutionInput {
-	s.StatusDetails = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *UpdateJobExecutionInput) SetThingName(v string) *UpdateJobExecutionInput {
-	s.ThingName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/UpdateJobExecutionResponse
 type UpdateJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -864,18 +636,6 @@ func (s UpdateJobExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutionState sets the ExecutionState field's value.
-func (s *UpdateJobExecutionOutput) SetExecutionState(v *JobExecutionState) *UpdateJobExecutionOutput {
-	s.ExecutionState = v
-	return s
-}
-
-// SetJobDocument sets the JobDocument field's value.
-func (s *UpdateJobExecutionOutput) SetJobDocument(v string) *UpdateJobExecutionOutput {
-	s.JobDocument = &v
-	return s
 }
 
 type JobExecutionStatus string

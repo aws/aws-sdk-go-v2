@@ -1792,24 +1792,6 @@ func (s *AssociateDelegateToResourceInput) Validate() error {
 	return nil
 }
 
-// SetEntityId sets the EntityId field's value.
-func (s *AssociateDelegateToResourceInput) SetEntityId(v string) *AssociateDelegateToResourceInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *AssociateDelegateToResourceInput) SetOrganizationId(v string) *AssociateDelegateToResourceInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *AssociateDelegateToResourceInput) SetResourceId(v string) *AssociateDelegateToResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateDelegateToResourceResponse
 type AssociateDelegateToResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1890,24 +1872,6 @@ func (s *AssociateMemberToGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *AssociateMemberToGroupInput) SetGroupId(v string) *AssociateMemberToGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetMemberId sets the MemberId field's value.
-func (s *AssociateMemberToGroupInput) SetMemberId(v string) *AssociateMemberToGroupInput {
-	s.MemberId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *AssociateMemberToGroupInput) SetOrganizationId(v string) *AssociateMemberToGroupInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateMemberToGroupResponse
 type AssociateMemberToGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1955,24 +1919,6 @@ func (s BookingOptions) String() string {
 // GoString returns the string representation
 func (s BookingOptions) GoString() string {
 	return s.String()
-}
-
-// SetAutoAcceptRequests sets the AutoAcceptRequests field's value.
-func (s *BookingOptions) SetAutoAcceptRequests(v bool) *BookingOptions {
-	s.AutoAcceptRequests = &v
-	return s
-}
-
-// SetAutoDeclineConflictingRequests sets the AutoDeclineConflictingRequests field's value.
-func (s *BookingOptions) SetAutoDeclineConflictingRequests(v bool) *BookingOptions {
-	s.AutoDeclineConflictingRequests = &v
-	return s
-}
-
-// SetAutoDeclineRecurringRequests sets the AutoDeclineRecurringRequests field's value.
-func (s *BookingOptions) SetAutoDeclineRecurringRequests(v bool) *BookingOptions {
-	s.AutoDeclineRecurringRequests = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAliasRequest
@@ -2031,24 +1977,6 @@ func (s *CreateAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAlias sets the Alias field's value.
-func (s *CreateAliasInput) SetAlias(v string) *CreateAliasInput {
-	s.Alias = &v
-	return s
-}
-
-// SetEntityId sets the EntityId field's value.
-func (s *CreateAliasInput) SetEntityId(v string) *CreateAliasInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *CreateAliasInput) SetOrganizationId(v string) *CreateAliasInput {
-	s.OrganizationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAliasResponse
@@ -2119,18 +2047,6 @@ func (s *CreateGroupInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateGroupInput) SetName(v string) *CreateGroupInput {
-	s.Name = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *CreateGroupInput) SetOrganizationId(v string) *CreateGroupInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateGroupResponse
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -2154,12 +2070,6 @@ func (s CreateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *CreateGroupOutput) SetGroupId(v string) *CreateGroupOutput {
-	s.GroupId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateResourceRequest
@@ -2217,24 +2127,6 @@ func (s *CreateResourceInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateResourceInput) SetName(v string) *CreateResourceInput {
-	s.Name = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *CreateResourceInput) SetOrganizationId(v string) *CreateResourceInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateResourceInput) SetType(v ResourceType) *CreateResourceInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateResourceResponse
 type CreateResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2258,12 +2150,6 @@ func (s CreateResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *CreateResourceOutput) SetResourceId(v string) *CreateResourceOutput {
-	s.ResourceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUserRequest
@@ -2330,30 +2216,6 @@ func (s *CreateUserInput) Validate() error {
 	return nil
 }
 
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreateUserInput) SetDisplayName(v string) *CreateUserInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateUserInput) SetName(v string) *CreateUserInput {
-	s.Name = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *CreateUserInput) SetOrganizationId(v string) *CreateUserInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *CreateUserInput) SetPassword(v string) *CreateUserInput {
-	s.Password = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUserResponse
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -2377,12 +2239,6 @@ func (s CreateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserId sets the UserId field's value.
-func (s *CreateUserOutput) SetUserId(v string) *CreateUserOutput {
-	s.UserId = &v
-	return s
 }
 
 // The name of the attribute, which is one of the values defined in the UserAttribute
@@ -2410,18 +2266,6 @@ func (s Delegate) String() string {
 // GoString returns the string representation
 func (s Delegate) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *Delegate) SetId(v string) *Delegate {
-	s.Id = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Delegate) SetType(v MemberType) *Delegate {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAliasRequest
@@ -2482,24 +2326,6 @@ func (s *DeleteAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAlias sets the Alias field's value.
-func (s *DeleteAliasInput) SetAlias(v string) *DeleteAliasInput {
-	s.Alias = &v
-	return s
-}
-
-// SetEntityId sets the EntityId field's value.
-func (s *DeleteAliasInput) SetEntityId(v string) *DeleteAliasInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DeleteAliasInput) SetOrganizationId(v string) *DeleteAliasInput {
-	s.OrganizationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAliasResponse
@@ -2570,18 +2396,6 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DeleteGroupInput) SetGroupId(v string) *DeleteGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DeleteGroupInput) SetOrganizationId(v string) *DeleteGroupInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteGroupResponse
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -2646,18 +2460,6 @@ func (s *DeleteResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DeleteResourceInput) SetOrganizationId(v string) *DeleteResourceInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DeleteResourceInput) SetResourceId(v string) *DeleteResourceInput {
-	s.ResourceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteResourceResponse
@@ -2726,18 +2528,6 @@ func (s *DeleteUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DeleteUserInput) SetOrganizationId(v string) *DeleteUserInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DeleteUserInput) SetUserId(v string) *DeleteUserInput {
-	s.UserId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteUserResponse
@@ -2809,18 +2599,6 @@ func (s *DeregisterFromWorkMailInput) Validate() error {
 	return nil
 }
 
-// SetEntityId sets the EntityId field's value.
-func (s *DeregisterFromWorkMailInput) SetEntityId(v string) *DeregisterFromWorkMailInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DeregisterFromWorkMailInput) SetOrganizationId(v string) *DeregisterFromWorkMailInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterFromWorkMailResponse
 type DeregisterFromWorkMailOutput struct {
 	_ struct{} `type:"structure"`
@@ -2889,18 +2667,6 @@ func (s *DescribeGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DescribeGroupInput) SetGroupId(v string) *DescribeGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeGroupInput) SetOrganizationId(v string) *DescribeGroupInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeGroupResponse
 type DescribeGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -2944,42 +2710,6 @@ func (s DescribeGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *DescribeGroupOutput) SetDisabledDate(v time.Time) *DescribeGroupOutput {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *DescribeGroupOutput) SetEmail(v string) *DescribeGroupOutput {
-	s.Email = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *DescribeGroupOutput) SetEnabledDate(v time.Time) *DescribeGroupOutput {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *DescribeGroupOutput) SetGroupId(v string) *DescribeGroupOutput {
-	s.GroupId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeGroupOutput) SetName(v string) *DescribeGroupOutput {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeGroupOutput) SetState(v EntityState) *DescribeGroupOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeOrganizationRequest
 type DescribeOrganizationInput struct {
 	_ struct{} `type:"structure"`
@@ -3012,12 +2742,6 @@ func (s *DescribeOrganizationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeOrganizationInput) SetOrganizationId(v string) *DescribeOrganizationInput {
-	s.OrganizationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeOrganizationResponse
@@ -3068,54 +2792,6 @@ func (s DescribeOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAlias sets the Alias field's value.
-func (s *DescribeOrganizationOutput) SetAlias(v string) *DescribeOrganizationOutput {
-	s.Alias = &v
-	return s
-}
-
-// SetCompletedDate sets the CompletedDate field's value.
-func (s *DescribeOrganizationOutput) SetCompletedDate(v time.Time) *DescribeOrganizationOutput {
-	s.CompletedDate = &v
-	return s
-}
-
-// SetDefaultMailDomain sets the DefaultMailDomain field's value.
-func (s *DescribeOrganizationOutput) SetDefaultMailDomain(v string) *DescribeOrganizationOutput {
-	s.DefaultMailDomain = &v
-	return s
-}
-
-// SetDirectoryId sets the DirectoryId field's value.
-func (s *DescribeOrganizationOutput) SetDirectoryId(v string) *DescribeOrganizationOutput {
-	s.DirectoryId = &v
-	return s
-}
-
-// SetDirectoryType sets the DirectoryType field's value.
-func (s *DescribeOrganizationOutput) SetDirectoryType(v string) *DescribeOrganizationOutput {
-	s.DirectoryType = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *DescribeOrganizationOutput) SetErrorMessage(v string) *DescribeOrganizationOutput {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeOrganizationOutput) SetOrganizationId(v string) *DescribeOrganizationOutput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeOrganizationOutput) SetState(v string) *DescribeOrganizationOutput {
-	s.State = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeResourceRequest
 type DescribeResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -3158,18 +2834,6 @@ func (s *DescribeResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeResourceInput) SetOrganizationId(v string) *DescribeResourceInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeResourceInput) SetResourceId(v string) *DescribeResourceInput {
-	s.ResourceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeResourceResponse
@@ -3221,54 +2885,6 @@ func (s DescribeResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBookingOptions sets the BookingOptions field's value.
-func (s *DescribeResourceOutput) SetBookingOptions(v *BookingOptions) *DescribeResourceOutput {
-	s.BookingOptions = v
-	return s
-}
-
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *DescribeResourceOutput) SetDisabledDate(v time.Time) *DescribeResourceOutput {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *DescribeResourceOutput) SetEmail(v string) *DescribeResourceOutput {
-	s.Email = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *DescribeResourceOutput) SetEnabledDate(v time.Time) *DescribeResourceOutput {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeResourceOutput) SetName(v string) *DescribeResourceOutput {
-	s.Name = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeResourceOutput) SetResourceId(v string) *DescribeResourceOutput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeResourceOutput) SetState(v EntityState) *DescribeResourceOutput {
-	s.State = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DescribeResourceOutput) SetType(v ResourceType) *DescribeResourceOutput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUserRequest
 type DescribeUserInput struct {
 	_ struct{} `type:"structure"`
@@ -3313,18 +2929,6 @@ func (s *DescribeUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DescribeUserInput) SetOrganizationId(v string) *DescribeUserInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DescribeUserInput) SetUserId(v string) *DescribeUserInput {
-	s.UserId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUserResponse
@@ -3381,54 +2985,6 @@ func (s DescribeUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *DescribeUserOutput) SetDisabledDate(v time.Time) *DescribeUserOutput {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *DescribeUserOutput) SetDisplayName(v string) *DescribeUserOutput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *DescribeUserOutput) SetEmail(v string) *DescribeUserOutput {
-	s.Email = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *DescribeUserOutput) SetEnabledDate(v time.Time) *DescribeUserOutput {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeUserOutput) SetName(v string) *DescribeUserOutput {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeUserOutput) SetState(v EntityState) *DescribeUserOutput {
-	s.State = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DescribeUserOutput) SetUserId(v string) *DescribeUserOutput {
-	s.UserId = &v
-	return s
-}
-
-// SetUserRole sets the UserRole field's value.
-func (s *DescribeUserOutput) SetUserRole(v UserRole) *DescribeUserOutput {
-	s.UserRole = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateDelegateFromResourceRequest
 type DisassociateDelegateFromResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -3483,24 +3039,6 @@ func (s *DisassociateDelegateFromResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEntityId sets the EntityId field's value.
-func (s *DisassociateDelegateFromResourceInput) SetEntityId(v string) *DisassociateDelegateFromResourceInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DisassociateDelegateFromResourceInput) SetOrganizationId(v string) *DisassociateDelegateFromResourceInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DisassociateDelegateFromResourceInput) SetResourceId(v string) *DisassociateDelegateFromResourceInput {
-	s.ResourceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateDelegateFromResourceResponse
@@ -3583,24 +3121,6 @@ func (s *DisassociateMemberFromGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DisassociateMemberFromGroupInput) SetGroupId(v string) *DisassociateMemberFromGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetMemberId sets the MemberId field's value.
-func (s *DisassociateMemberFromGroupInput) SetMemberId(v string) *DisassociateMemberFromGroupInput {
-	s.MemberId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *DisassociateMemberFromGroupInput) SetOrganizationId(v string) *DisassociateMemberFromGroupInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateMemberFromGroupResponse
 type DisassociateMemberFromGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3655,42 +3175,6 @@ func (s Group) String() string {
 // GoString returns the string representation
 func (s Group) GoString() string {
 	return s.String()
-}
-
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *Group) SetDisabledDate(v time.Time) *Group {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *Group) SetEmail(v string) *Group {
-	s.Email = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *Group) SetEnabledDate(v time.Time) *Group {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Group) SetId(v string) *Group {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Group) SetName(v string) *Group {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Group) SetState(v EntityState) *Group {
-	s.State = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAliasesRequest
@@ -3752,30 +3236,6 @@ func (s *ListAliasesInput) Validate() error {
 	return nil
 }
 
-// SetEntityId sets the EntityId field's value.
-func (s *ListAliasesInput) SetEntityId(v string) *ListAliasesInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAliasesInput) SetMaxResults(v int64) *ListAliasesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAliasesInput) SetNextToken(v string) *ListAliasesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ListAliasesInput) SetOrganizationId(v string) *ListAliasesInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAliasesResponse
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3803,18 +3263,6 @@ func (s ListAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []string) *ListAliasesOutput {
-	s.Aliases = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAliasesOutput) SetNextToken(v string) *ListAliasesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupMembersRequest
@@ -3876,30 +3324,6 @@ func (s *ListGroupMembersInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListGroupMembersInput) SetGroupId(v string) *ListGroupMembersInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupMembersInput) SetMaxResults(v int64) *ListGroupMembersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupMembersInput) SetNextToken(v string) *ListGroupMembersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ListGroupMembersInput) SetOrganizationId(v string) *ListGroupMembersInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupMembersResponse
 type ListGroupMembersOutput struct {
 	_ struct{} `type:"structure"`
@@ -3927,18 +3351,6 @@ func (s ListGroupMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMembers sets the Members field's value.
-func (s *ListGroupMembersOutput) SetMembers(v []Member) *ListGroupMembersOutput {
-	s.Members = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupMembersOutput) SetNextToken(v string) *ListGroupMembersOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupsRequest
@@ -3988,24 +3400,6 @@ func (s *ListGroupsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupsInput) SetMaxResults(v int64) *ListGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsInput) SetNextToken(v string) *ListGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ListGroupsInput) SetOrganizationId(v string) *ListGroupsInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupsResponse
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4033,18 +3427,6 @@ func (s ListGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []Group) *ListGroupsOutput {
-	s.Groups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsOutput) SetNextToken(v string) *ListGroupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListOrganizationsRequest
@@ -4085,18 +3467,6 @@ func (s *ListOrganizationsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListOrganizationsInput) SetMaxResults(v int64) *ListOrganizationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOrganizationsInput) SetNextToken(v string) *ListOrganizationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListOrganizationsResponse
 type ListOrganizationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4124,18 +3494,6 @@ func (s ListOrganizationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOrganizationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOrganizationsOutput) SetNextToken(v string) *ListOrganizationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationSummaries sets the OrganizationSummaries field's value.
-func (s *ListOrganizationsOutput) SetOrganizationSummaries(v []OrganizationSummary) *ListOrganizationsOutput {
-	s.OrganizationSummaries = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourceDelegatesRequest
@@ -4197,30 +3555,6 @@ func (s *ListResourceDelegatesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResourceDelegatesInput) SetMaxResults(v int64) *ListResourceDelegatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceDelegatesInput) SetNextToken(v string) *ListResourceDelegatesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ListResourceDelegatesInput) SetOrganizationId(v string) *ListResourceDelegatesInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ListResourceDelegatesInput) SetResourceId(v string) *ListResourceDelegatesInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourceDelegatesResponse
 type ListResourceDelegatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4249,18 +3583,6 @@ func (s ListResourceDelegatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourceDelegatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDelegates sets the Delegates field's value.
-func (s *ListResourceDelegatesOutput) SetDelegates(v []Delegate) *ListResourceDelegatesOutput {
-	s.Delegates = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceDelegatesOutput) SetNextToken(v string) *ListResourceDelegatesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourcesRequest
@@ -4310,24 +3632,6 @@ func (s *ListResourcesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResourcesInput) SetMaxResults(v int64) *ListResourcesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourcesInput) SetNextToken(v string) *ListResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ListResourcesInput) SetOrganizationId(v string) *ListResourcesInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourcesResponse
 type ListResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4356,18 +3660,6 @@ func (s ListResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourcesOutput) SetNextToken(v string) *ListResourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *ListResourcesOutput) SetResources(v []Resource) *ListResourcesOutput {
-	s.Resources = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsersRequest
@@ -4416,24 +3708,6 @@ func (s *ListUsersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUsersInput) SetMaxResults(v int64) *ListUsersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUsersInput) SetNextToken(v string) *ListUsersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ListUsersInput) SetOrganizationId(v string) *ListUsersInput {
-	s.OrganizationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsersResponse
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
@@ -4461,18 +3735,6 @@ func (s ListUsersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUsersOutput) SetNextToken(v string) *ListUsersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *ListUsersOutput) SetUsers(v []User) *ListUsersOutput {
-	s.Users = v
-	return s
 }
 
 // The representation of a group member (user or group).
@@ -4509,42 +3771,6 @@ func (s Member) GoString() string {
 	return s.String()
 }
 
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *Member) SetDisabledDate(v time.Time) *Member {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *Member) SetEnabledDate(v time.Time) *Member {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Member) SetId(v string) *Member {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Member) SetName(v string) *Member {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Member) SetState(v EntityState) *Member {
-	s.State = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Member) SetType(v MemberType) *Member {
-	s.Type = v
-	return s
-}
-
 // The brief overview associated with an organization.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/OrganizationSummary
 type OrganizationSummary struct {
@@ -4573,30 +3799,6 @@ func (s OrganizationSummary) String() string {
 // GoString returns the string representation
 func (s OrganizationSummary) GoString() string {
 	return s.String()
-}
-
-// SetAlias sets the Alias field's value.
-func (s *OrganizationSummary) SetAlias(v string) *OrganizationSummary {
-	s.Alias = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *OrganizationSummary) SetErrorMessage(v string) *OrganizationSummary {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *OrganizationSummary) SetOrganizationId(v string) *OrganizationSummary {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *OrganizationSummary) SetState(v string) *OrganizationSummary {
-	s.State = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterToWorkMailRequest
@@ -4656,24 +3858,6 @@ func (s *RegisterToWorkMailInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEmail sets the Email field's value.
-func (s *RegisterToWorkMailInput) SetEmail(v string) *RegisterToWorkMailInput {
-	s.Email = &v
-	return s
-}
-
-// SetEntityId sets the EntityId field's value.
-func (s *RegisterToWorkMailInput) SetEntityId(v string) *RegisterToWorkMailInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *RegisterToWorkMailInput) SetOrganizationId(v string) *RegisterToWorkMailInput {
-	s.OrganizationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterToWorkMailResponse
@@ -4754,24 +3938,6 @@ func (s *ResetPasswordInput) Validate() error {
 	return nil
 }
 
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *ResetPasswordInput) SetOrganizationId(v string) *ResetPasswordInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *ResetPasswordInput) SetPassword(v string) *ResetPasswordInput {
-	s.Password = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *ResetPasswordInput) SetUserId(v string) *ResetPasswordInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ResetPasswordResponse
 type ResetPasswordOutput struct {
 	_ struct{} `type:"structure"`
@@ -4831,48 +3997,6 @@ func (s Resource) GoString() string {
 	return s.String()
 }
 
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *Resource) SetDisabledDate(v time.Time) *Resource {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *Resource) SetEmail(v string) *Resource {
-	s.Email = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *Resource) SetEnabledDate(v time.Time) *Resource {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Resource) SetId(v string) *Resource {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Resource) SetName(v string) *Resource {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Resource) SetState(v EntityState) *Resource {
-	s.State = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Resource) SetType(v ResourceType) *Resource {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdatePrimaryEmailAddressRequest
 type UpdatePrimaryEmailAddressInput struct {
 	_ struct{} `type:"structure"`
@@ -4929,24 +4053,6 @@ func (s *UpdatePrimaryEmailAddressInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEmail sets the Email field's value.
-func (s *UpdatePrimaryEmailAddressInput) SetEmail(v string) *UpdatePrimaryEmailAddressInput {
-	s.Email = &v
-	return s
-}
-
-// SetEntityId sets the EntityId field's value.
-func (s *UpdatePrimaryEmailAddressInput) SetEntityId(v string) *UpdatePrimaryEmailAddressInput {
-	s.EntityId = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *UpdatePrimaryEmailAddressInput) SetOrganizationId(v string) *UpdatePrimaryEmailAddressInput {
-	s.OrganizationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdatePrimaryEmailAddressResponse
@@ -5024,30 +4130,6 @@ func (s *UpdateResourceInput) Validate() error {
 	return nil
 }
 
-// SetBookingOptions sets the BookingOptions field's value.
-func (s *UpdateResourceInput) SetBookingOptions(v *BookingOptions) *UpdateResourceInput {
-	s.BookingOptions = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateResourceInput) SetName(v string) *UpdateResourceInput {
-	s.Name = &v
-	return s
-}
-
-// SetOrganizationId sets the OrganizationId field's value.
-func (s *UpdateResourceInput) SetOrganizationId(v string) *UpdateResourceInput {
-	s.OrganizationId = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *UpdateResourceInput) SetResourceId(v string) *UpdateResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateResourceResponse
 type UpdateResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -5108,54 +4190,6 @@ func (s User) String() string {
 // GoString returns the string representation
 func (s User) GoString() string {
 	return s.String()
-}
-
-// SetDisabledDate sets the DisabledDate field's value.
-func (s *User) SetDisabledDate(v time.Time) *User {
-	s.DisabledDate = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *User) SetDisplayName(v string) *User {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *User) SetEmail(v string) *User {
-	s.Email = &v
-	return s
-}
-
-// SetEnabledDate sets the EnabledDate field's value.
-func (s *User) SetEnabledDate(v time.Time) *User {
-	s.EnabledDate = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *User) SetId(v string) *User {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *User) SetName(v string) *User {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *User) SetState(v EntityState) *User {
-	s.State = v
-	return s
-}
-
-// SetUserRole sets the UserRole field's value.
-func (s *User) SetUserRole(v UserRole) *User {
-	s.UserRole = v
-	return s
 }
 
 type EntityState string

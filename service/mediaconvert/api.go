@@ -1063,60 +1063,6 @@ func (s AacSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioDescriptionBroadcasterMix sets the AudioDescriptionBroadcasterMix field's value.
-func (s *AacSettings) SetAudioDescriptionBroadcasterMix(v AacAudioDescriptionBroadcasterMix) *AacSettings {
-	s.AudioDescriptionBroadcasterMix = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *AacSettings) SetBitrate(v int64) *AacSettings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetCodecProfile sets the CodecProfile field's value.
-func (s *AacSettings) SetCodecProfile(v AacCodecProfile) *AacSettings {
-	s.CodecProfile = v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *AacSettings) SetCodingMode(v AacCodingMode) *AacSettings {
-	s.CodingMode = v
-	return s
-}
-
-// SetRateControlMode sets the RateControlMode field's value.
-func (s *AacSettings) SetRateControlMode(v AacRateControlMode) *AacSettings {
-	s.RateControlMode = v
-	return s
-}
-
-// SetRawFormat sets the RawFormat field's value.
-func (s *AacSettings) SetRawFormat(v AacRawFormat) *AacSettings {
-	s.RawFormat = v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *AacSettings) SetSampleRate(v int64) *AacSettings {
-	s.SampleRate = &v
-	return s
-}
-
-// SetSpecification sets the Specification field's value.
-func (s *AacSettings) SetSpecification(v AacSpecification) *AacSettings {
-	s.Specification = v
-	return s
-}
-
-// SetVbrQuality sets the VbrQuality field's value.
-func (s *AacSettings) SetVbrQuality(v AacVbrQuality) *AacSettings {
-	s.VbrQuality = v
-	return s
-}
-
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value AC3.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Ac3Settings
@@ -1164,54 +1110,6 @@ func (s Ac3Settings) GoString() string {
 	return s.String()
 }
 
-// SetBitrate sets the Bitrate field's value.
-func (s *Ac3Settings) SetBitrate(v int64) *Ac3Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBitstreamMode sets the BitstreamMode field's value.
-func (s *Ac3Settings) SetBitstreamMode(v Ac3BitstreamMode) *Ac3Settings {
-	s.BitstreamMode = v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *Ac3Settings) SetCodingMode(v Ac3CodingMode) *Ac3Settings {
-	s.CodingMode = v
-	return s
-}
-
-// SetDialnorm sets the Dialnorm field's value.
-func (s *Ac3Settings) SetDialnorm(v int64) *Ac3Settings {
-	s.Dialnorm = &v
-	return s
-}
-
-// SetDynamicRangeCompressionProfile sets the DynamicRangeCompressionProfile field's value.
-func (s *Ac3Settings) SetDynamicRangeCompressionProfile(v Ac3DynamicRangeCompressionProfile) *Ac3Settings {
-	s.DynamicRangeCompressionProfile = v
-	return s
-}
-
-// SetLfeFilter sets the LfeFilter field's value.
-func (s *Ac3Settings) SetLfeFilter(v Ac3LfeFilter) *Ac3Settings {
-	s.LfeFilter = v
-	return s
-}
-
-// SetMetadataControl sets the MetadataControl field's value.
-func (s *Ac3Settings) SetMetadataControl(v Ac3MetadataControl) *Ac3Settings {
-	s.MetadataControl = v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *Ac3Settings) SetSampleRate(v int64) *Ac3Settings {
-	s.SampleRate = &v
-	return s
-}
-
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value AIFF.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AiffSettings
@@ -1241,24 +1139,6 @@ func (s AiffSettings) GoString() string {
 	return s.String()
 }
 
-// SetBitDepth sets the BitDepth field's value.
-func (s *AiffSettings) SetBitDepth(v int64) *AiffSettings {
-	s.BitDepth = &v
-	return s
-}
-
-// SetChannels sets the Channels field's value.
-func (s *AiffSettings) SetChannels(v int64) *AiffSettings {
-	s.Channels = &v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *AiffSettings) SetSampleRate(v int64) *AiffSettings {
-	s.SampleRate = &v
-	return s
-}
-
 // Settings for ancillary captions source.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AncillarySourceSettings
 type AncillarySourceSettings struct {
@@ -1277,12 +1157,6 @@ func (s AncillarySourceSettings) String() string {
 // GoString returns the string representation
 func (s AncillarySourceSettings) GoString() string {
 	return s.String()
-}
-
-// SetSourceAncillaryChannelNumber sets the SourceAncillaryChannelNumber field's value.
-func (s *AncillarySourceSettings) SetSourceAncillaryChannelNumber(v int64) *AncillarySourceSettings {
-	s.SourceAncillaryChannelNumber = &v
-	return s
 }
 
 // Audio codec settings (CodecSettings) under (AudioDescriptions) contains the
@@ -1331,48 +1205,6 @@ func (s AudioCodecSettings) String() string {
 // GoString returns the string representation
 func (s AudioCodecSettings) GoString() string {
 	return s.String()
-}
-
-// SetAacSettings sets the AacSettings field's value.
-func (s *AudioCodecSettings) SetAacSettings(v *AacSettings) *AudioCodecSettings {
-	s.AacSettings = v
-	return s
-}
-
-// SetAc3Settings sets the Ac3Settings field's value.
-func (s *AudioCodecSettings) SetAc3Settings(v *Ac3Settings) *AudioCodecSettings {
-	s.Ac3Settings = v
-	return s
-}
-
-// SetAiffSettings sets the AiffSettings field's value.
-func (s *AudioCodecSettings) SetAiffSettings(v *AiffSettings) *AudioCodecSettings {
-	s.AiffSettings = v
-	return s
-}
-
-// SetCodec sets the Codec field's value.
-func (s *AudioCodecSettings) SetCodec(v AudioCodec) *AudioCodecSettings {
-	s.Codec = v
-	return s
-}
-
-// SetEac3Settings sets the Eac3Settings field's value.
-func (s *AudioCodecSettings) SetEac3Settings(v *Eac3Settings) *AudioCodecSettings {
-	s.Eac3Settings = v
-	return s
-}
-
-// SetMp2Settings sets the Mp2Settings field's value.
-func (s *AudioCodecSettings) SetMp2Settings(v *Mp2Settings) *AudioCodecSettings {
-	s.Mp2Settings = v
-	return s
-}
-
-// SetWavSettings sets the WavSettings field's value.
-func (s *AudioCodecSettings) SetWavSettings(v *WavSettings) *AudioCodecSettings {
-	s.WavSettings = v
-	return s
 }
 
 // Description of audio output
@@ -1447,60 +1279,6 @@ func (s AudioDescription) GoString() string {
 	return s.String()
 }
 
-// SetAudioNormalizationSettings sets the AudioNormalizationSettings field's value.
-func (s *AudioDescription) SetAudioNormalizationSettings(v *AudioNormalizationSettings) *AudioDescription {
-	s.AudioNormalizationSettings = v
-	return s
-}
-
-// SetAudioSourceName sets the AudioSourceName field's value.
-func (s *AudioDescription) SetAudioSourceName(v string) *AudioDescription {
-	s.AudioSourceName = &v
-	return s
-}
-
-// SetAudioType sets the AudioType field's value.
-func (s *AudioDescription) SetAudioType(v int64) *AudioDescription {
-	s.AudioType = &v
-	return s
-}
-
-// SetAudioTypeControl sets the AudioTypeControl field's value.
-func (s *AudioDescription) SetAudioTypeControl(v AudioTypeControl) *AudioDescription {
-	s.AudioTypeControl = v
-	return s
-}
-
-// SetCodecSettings sets the CodecSettings field's value.
-func (s *AudioDescription) SetCodecSettings(v *AudioCodecSettings) *AudioDescription {
-	s.CodecSettings = v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *AudioDescription) SetLanguageCode(v LanguageCode) *AudioDescription {
-	s.LanguageCode = v
-	return s
-}
-
-// SetLanguageCodeControl sets the LanguageCodeControl field's value.
-func (s *AudioDescription) SetLanguageCodeControl(v AudioLanguageCodeControl) *AudioDescription {
-	s.LanguageCodeControl = v
-	return s
-}
-
-// SetRemixSettings sets the RemixSettings field's value.
-func (s *AudioDescription) SetRemixSettings(v *RemixSettings) *AudioDescription {
-	s.RemixSettings = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *AudioDescription) SetStreamName(v string) *AudioDescription {
-	s.StreamName = &v
-	return s
-}
-
 // Advanced audio normalization settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioNormalizationSettings
 type AudioNormalizationSettings struct {
@@ -1541,42 +1319,6 @@ func (s AudioNormalizationSettings) String() string {
 // GoString returns the string representation
 func (s AudioNormalizationSettings) GoString() string {
 	return s.String()
-}
-
-// SetAlgorithm sets the Algorithm field's value.
-func (s *AudioNormalizationSettings) SetAlgorithm(v AudioNormalizationAlgorithm) *AudioNormalizationSettings {
-	s.Algorithm = v
-	return s
-}
-
-// SetAlgorithmControl sets the AlgorithmControl field's value.
-func (s *AudioNormalizationSettings) SetAlgorithmControl(v AudioNormalizationAlgorithmControl) *AudioNormalizationSettings {
-	s.AlgorithmControl = v
-	return s
-}
-
-// SetCorrectionGateLevel sets the CorrectionGateLevel field's value.
-func (s *AudioNormalizationSettings) SetCorrectionGateLevel(v int64) *AudioNormalizationSettings {
-	s.CorrectionGateLevel = &v
-	return s
-}
-
-// SetLoudnessLogging sets the LoudnessLogging field's value.
-func (s *AudioNormalizationSettings) SetLoudnessLogging(v AudioNormalizationLoudnessLogging) *AudioNormalizationSettings {
-	s.LoudnessLogging = v
-	return s
-}
-
-// SetPeakCalculation sets the PeakCalculation field's value.
-func (s *AudioNormalizationSettings) SetPeakCalculation(v AudioNormalizationPeakCalculation) *AudioNormalizationSettings {
-	s.PeakCalculation = v
-	return s
-}
-
-// SetTargetLkfs sets the TargetLkfs field's value.
-func (s *AudioNormalizationSettings) SetTargetLkfs(v float64) *AudioNormalizationSettings {
-	s.TargetLkfs = &v
-	return s
 }
 
 // Selector for Audio
@@ -1635,60 +1377,6 @@ func (s AudioSelector) GoString() string {
 	return s.String()
 }
 
-// SetDefaultSelection sets the DefaultSelection field's value.
-func (s *AudioSelector) SetDefaultSelection(v AudioDefaultSelection) *AudioSelector {
-	s.DefaultSelection = v
-	return s
-}
-
-// SetExternalAudioFileInput sets the ExternalAudioFileInput field's value.
-func (s *AudioSelector) SetExternalAudioFileInput(v string) *AudioSelector {
-	s.ExternalAudioFileInput = &v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *AudioSelector) SetLanguageCode(v LanguageCode) *AudioSelector {
-	s.LanguageCode = v
-	return s
-}
-
-// SetOffset sets the Offset field's value.
-func (s *AudioSelector) SetOffset(v int64) *AudioSelector {
-	s.Offset = &v
-	return s
-}
-
-// SetPids sets the Pids field's value.
-func (s *AudioSelector) SetPids(v []int64) *AudioSelector {
-	s.Pids = v
-	return s
-}
-
-// SetProgramSelection sets the ProgramSelection field's value.
-func (s *AudioSelector) SetProgramSelection(v int64) *AudioSelector {
-	s.ProgramSelection = &v
-	return s
-}
-
-// SetRemixSettings sets the RemixSettings field's value.
-func (s *AudioSelector) SetRemixSettings(v *RemixSettings) *AudioSelector {
-	s.RemixSettings = v
-	return s
-}
-
-// SetSelectorType sets the SelectorType field's value.
-func (s *AudioSelector) SetSelectorType(v AudioSelectorType) *AudioSelector {
-	s.SelectorType = v
-	return s
-}
-
-// SetTracks sets the Tracks field's value.
-func (s *AudioSelector) SetTracks(v []int64) *AudioSelector {
-	s.Tracks = v
-	return s
-}
-
 // Group of Audio Selectors
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelectorGroup
 type AudioSelectorGroup struct {
@@ -1711,12 +1399,6 @@ func (s AudioSelectorGroup) GoString() string {
 	return s.String()
 }
 
-// SetAudioSelectorNames sets the AudioSelectorNames field's value.
-func (s *AudioSelectorGroup) SetAudioSelectorNames(v []string) *AudioSelectorGroup {
-	s.AudioSelectorNames = v
-	return s
-}
-
 // Settings for Avail Blanking
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AvailBlanking
 type AvailBlanking struct {
@@ -1735,12 +1417,6 @@ func (s AvailBlanking) String() string {
 // GoString returns the string representation
 func (s AvailBlanking) GoString() string {
 	return s.String()
-}
-
-// SetAvailBlankingImage sets the AvailBlankingImage field's value.
-func (s *AvailBlanking) SetAvailBlankingImage(v string) *AvailBlanking {
-	s.AvailBlankingImage = &v
-	return s
 }
 
 // Burn-In Destination Settings.
@@ -1851,102 +1527,6 @@ func (s BurninDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetAlignment sets the Alignment field's value.
-func (s *BurninDestinationSettings) SetAlignment(v BurninSubtitleAlignment) *BurninDestinationSettings {
-	s.Alignment = v
-	return s
-}
-
-// SetBackgroundColor sets the BackgroundColor field's value.
-func (s *BurninDestinationSettings) SetBackgroundColor(v BurninSubtitleBackgroundColor) *BurninDestinationSettings {
-	s.BackgroundColor = v
-	return s
-}
-
-// SetBackgroundOpacity sets the BackgroundOpacity field's value.
-func (s *BurninDestinationSettings) SetBackgroundOpacity(v int64) *BurninDestinationSettings {
-	s.BackgroundOpacity = &v
-	return s
-}
-
-// SetFontColor sets the FontColor field's value.
-func (s *BurninDestinationSettings) SetFontColor(v BurninSubtitleFontColor) *BurninDestinationSettings {
-	s.FontColor = v
-	return s
-}
-
-// SetFontOpacity sets the FontOpacity field's value.
-func (s *BurninDestinationSettings) SetFontOpacity(v int64) *BurninDestinationSettings {
-	s.FontOpacity = &v
-	return s
-}
-
-// SetFontResolution sets the FontResolution field's value.
-func (s *BurninDestinationSettings) SetFontResolution(v int64) *BurninDestinationSettings {
-	s.FontResolution = &v
-	return s
-}
-
-// SetFontSize sets the FontSize field's value.
-func (s *BurninDestinationSettings) SetFontSize(v int64) *BurninDestinationSettings {
-	s.FontSize = &v
-	return s
-}
-
-// SetOutlineColor sets the OutlineColor field's value.
-func (s *BurninDestinationSettings) SetOutlineColor(v BurninSubtitleOutlineColor) *BurninDestinationSettings {
-	s.OutlineColor = v
-	return s
-}
-
-// SetOutlineSize sets the OutlineSize field's value.
-func (s *BurninDestinationSettings) SetOutlineSize(v int64) *BurninDestinationSettings {
-	s.OutlineSize = &v
-	return s
-}
-
-// SetShadowColor sets the ShadowColor field's value.
-func (s *BurninDestinationSettings) SetShadowColor(v BurninSubtitleShadowColor) *BurninDestinationSettings {
-	s.ShadowColor = v
-	return s
-}
-
-// SetShadowOpacity sets the ShadowOpacity field's value.
-func (s *BurninDestinationSettings) SetShadowOpacity(v int64) *BurninDestinationSettings {
-	s.ShadowOpacity = &v
-	return s
-}
-
-// SetShadowXOffset sets the ShadowXOffset field's value.
-func (s *BurninDestinationSettings) SetShadowXOffset(v int64) *BurninDestinationSettings {
-	s.ShadowXOffset = &v
-	return s
-}
-
-// SetShadowYOffset sets the ShadowYOffset field's value.
-func (s *BurninDestinationSettings) SetShadowYOffset(v int64) *BurninDestinationSettings {
-	s.ShadowYOffset = &v
-	return s
-}
-
-// SetTeletextSpacing sets the TeletextSpacing field's value.
-func (s *BurninDestinationSettings) SetTeletextSpacing(v BurninSubtitleTeletextSpacing) *BurninDestinationSettings {
-	s.TeletextSpacing = v
-	return s
-}
-
-// SetXPosition sets the XPosition field's value.
-func (s *BurninDestinationSettings) SetXPosition(v int64) *BurninDestinationSettings {
-	s.XPosition = &v
-	return s
-}
-
-// SetYPosition sets the YPosition field's value.
-func (s *BurninDestinationSettings) SetYPosition(v int64) *BurninDestinationSettings {
-	s.YPosition = &v
-	return s
-}
-
 // Cancel a job by sending a request with the job ID
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CancelJobRequest
 type CancelJobInput struct {
@@ -1980,12 +1560,6 @@ func (s *CancelJobInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *CancelJobInput) SetId(v string) *CancelJobInput {
-	s.Id = &v
-	return s
 }
 
 // A cancel job request will receive a response with an empty body.
@@ -2045,30 +1619,6 @@ func (s CaptionDescription) GoString() string {
 	return s.String()
 }
 
-// SetCaptionSelectorName sets the CaptionSelectorName field's value.
-func (s *CaptionDescription) SetCaptionSelectorName(v string) *CaptionDescription {
-	s.CaptionSelectorName = &v
-	return s
-}
-
-// SetDestinationSettings sets the DestinationSettings field's value.
-func (s *CaptionDescription) SetDestinationSettings(v *CaptionDestinationSettings) *CaptionDescription {
-	s.DestinationSettings = v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *CaptionDescription) SetLanguageCode(v LanguageCode) *CaptionDescription {
-	s.LanguageCode = v
-	return s
-}
-
-// SetLanguageDescription sets the LanguageDescription field's value.
-func (s *CaptionDescription) SetLanguageDescription(v string) *CaptionDescription {
-	s.LanguageDescription = &v
-	return s
-}
-
 // Caption Description for preset
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescriptionPreset
 type CaptionDescriptionPreset struct {
@@ -2095,24 +1645,6 @@ func (s CaptionDescriptionPreset) String() string {
 // GoString returns the string representation
 func (s CaptionDescriptionPreset) GoString() string {
 	return s.String()
-}
-
-// SetDestinationSettings sets the DestinationSettings field's value.
-func (s *CaptionDescriptionPreset) SetDestinationSettings(v *CaptionDestinationSettings) *CaptionDescriptionPreset {
-	s.DestinationSettings = v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *CaptionDescriptionPreset) SetLanguageCode(v LanguageCode) *CaptionDescriptionPreset {
-	s.LanguageCode = v
-	return s
-}
-
-// SetLanguageDescription sets the LanguageDescription field's value.
-func (s *CaptionDescriptionPreset) SetLanguageDescription(v string) *CaptionDescriptionPreset {
-	s.LanguageDescription = &v
-	return s
 }
 
 // Specific settings required by destination type. Note that burnin_destination_settings
@@ -2152,42 +1684,6 @@ func (s CaptionDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetBurninDestinationSettings sets the BurninDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetBurninDestinationSettings(v *BurninDestinationSettings) *CaptionDestinationSettings {
-	s.BurninDestinationSettings = v
-	return s
-}
-
-// SetDestinationType sets the DestinationType field's value.
-func (s *CaptionDestinationSettings) SetDestinationType(v CaptionDestinationType) *CaptionDestinationSettings {
-	s.DestinationType = v
-	return s
-}
-
-// SetDvbSubDestinationSettings sets the DvbSubDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetDvbSubDestinationSettings(v *DvbSubDestinationSettings) *CaptionDestinationSettings {
-	s.DvbSubDestinationSettings = v
-	return s
-}
-
-// SetSccDestinationSettings sets the SccDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetSccDestinationSettings(v *SccDestinationSettings) *CaptionDestinationSettings {
-	s.SccDestinationSettings = v
-	return s
-}
-
-// SetTeletextDestinationSettings sets the TeletextDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetTeletextDestinationSettings(v *TeletextDestinationSettings) *CaptionDestinationSettings {
-	s.TeletextDestinationSettings = v
-	return s
-}
-
-// SetTtmlDestinationSettings sets the TtmlDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetTtmlDestinationSettings(v *TtmlDestinationSettings) *CaptionDestinationSettings {
-	s.TtmlDestinationSettings = v
-	return s
-}
-
 // Caption inputs to be mapped to caption outputs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSelector
 type CaptionSelector struct {
@@ -2214,18 +1710,6 @@ func (s CaptionSelector) String() string {
 // GoString returns the string representation
 func (s CaptionSelector) GoString() string {
 	return s.String()
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *CaptionSelector) SetLanguageCode(v LanguageCode) *CaptionSelector {
-	s.LanguageCode = v
-	return s
-}
-
-// SetSourceSettings sets the SourceSettings field's value.
-func (s *CaptionSelector) SetSourceSettings(v *CaptionSourceSettings) *CaptionSelector {
-	s.SourceSettings = v
-	return s
 }
 
 // Source settings (SourceSettings) contains the group of settings for captions
@@ -2264,42 +1748,6 @@ func (s CaptionSourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetAncillarySourceSettings sets the AncillarySourceSettings field's value.
-func (s *CaptionSourceSettings) SetAncillarySourceSettings(v *AncillarySourceSettings) *CaptionSourceSettings {
-	s.AncillarySourceSettings = v
-	return s
-}
-
-// SetDvbSubSourceSettings sets the DvbSubSourceSettings field's value.
-func (s *CaptionSourceSettings) SetDvbSubSourceSettings(v *DvbSubSourceSettings) *CaptionSourceSettings {
-	s.DvbSubSourceSettings = v
-	return s
-}
-
-// SetEmbeddedSourceSettings sets the EmbeddedSourceSettings field's value.
-func (s *CaptionSourceSettings) SetEmbeddedSourceSettings(v *EmbeddedSourceSettings) *CaptionSourceSettings {
-	s.EmbeddedSourceSettings = v
-	return s
-}
-
-// SetFileSourceSettings sets the FileSourceSettings field's value.
-func (s *CaptionSourceSettings) SetFileSourceSettings(v *FileSourceSettings) *CaptionSourceSettings {
-	s.FileSourceSettings = v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *CaptionSourceSettings) SetSourceType(v CaptionSourceType) *CaptionSourceSettings {
-	s.SourceType = v
-	return s
-}
-
-// SetTeletextSourceSettings sets the TeletextSourceSettings field's value.
-func (s *CaptionSourceSettings) SetTeletextSourceSettings(v *TeletextSourceSettings) *CaptionSourceSettings {
-	s.TeletextSourceSettings = v
-	return s
-}
-
 // Channel mapping (ChannelMapping) contains the group of fields that hold the
 // remixing value for each channel. Units are in dB. Acceptable values are within
 // the range from -60 (mute) through 6. A setting of 0 passes the input channel
@@ -2320,12 +1768,6 @@ func (s ChannelMapping) String() string {
 // GoString returns the string representation
 func (s ChannelMapping) GoString() string {
 	return s.String()
-}
-
-// SetOutputChannels sets the OutputChannels field's value.
-func (s *ChannelMapping) SetOutputChannels(v []OutputChannelMapping) *ChannelMapping {
-	s.OutputChannels = v
-	return s
 }
 
 // Settings for color correction.
@@ -2369,42 +1811,6 @@ func (s ColorCorrector) GoString() string {
 	return s.String()
 }
 
-// SetBrightness sets the Brightness field's value.
-func (s *ColorCorrector) SetBrightness(v int64) *ColorCorrector {
-	s.Brightness = &v
-	return s
-}
-
-// SetColorSpaceConversion sets the ColorSpaceConversion field's value.
-func (s *ColorCorrector) SetColorSpaceConversion(v ColorSpaceConversion) *ColorCorrector {
-	s.ColorSpaceConversion = v
-	return s
-}
-
-// SetContrast sets the Contrast field's value.
-func (s *ColorCorrector) SetContrast(v int64) *ColorCorrector {
-	s.Contrast = &v
-	return s
-}
-
-// SetHdr10Metadata sets the Hdr10Metadata field's value.
-func (s *ColorCorrector) SetHdr10Metadata(v *Hdr10Metadata) *ColorCorrector {
-	s.Hdr10Metadata = v
-	return s
-}
-
-// SetHue sets the Hue field's value.
-func (s *ColorCorrector) SetHue(v int64) *ColorCorrector {
-	s.Hue = &v
-	return s
-}
-
-// SetSaturation sets the Saturation field's value.
-func (s *ColorCorrector) SetSaturation(v int64) *ColorCorrector {
-	s.Saturation = &v
-	return s
-}
-
 // Container specific settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ContainerSettings
 type ContainerSettings struct {
@@ -2438,42 +1844,6 @@ func (s ContainerSettings) String() string {
 // GoString returns the string representation
 func (s ContainerSettings) GoString() string {
 	return s.String()
-}
-
-// SetContainer sets the Container field's value.
-func (s *ContainerSettings) SetContainer(v ContainerType) *ContainerSettings {
-	s.Container = v
-	return s
-}
-
-// SetF4vSettings sets the F4vSettings field's value.
-func (s *ContainerSettings) SetF4vSettings(v *F4vSettings) *ContainerSettings {
-	s.F4vSettings = v
-	return s
-}
-
-// SetM2tsSettings sets the M2tsSettings field's value.
-func (s *ContainerSettings) SetM2tsSettings(v *M2tsSettings) *ContainerSettings {
-	s.M2tsSettings = v
-	return s
-}
-
-// SetM3u8Settings sets the M3u8Settings field's value.
-func (s *ContainerSettings) SetM3u8Settings(v *M3u8Settings) *ContainerSettings {
-	s.M3u8Settings = v
-	return s
-}
-
-// SetMovSettings sets the MovSettings field's value.
-func (s *ContainerSettings) SetMovSettings(v *MovSettings) *ContainerSettings {
-	s.MovSettings = v
-	return s
-}
-
-// SetMp4Settings sets the Mp4Settings field's value.
-func (s *ContainerSettings) SetMp4Settings(v *Mp4Settings) *ContainerSettings {
-	s.Mp4Settings = v
-	return s
 }
 
 // Send your create job request with your job settings and IAM role. Optionally,
@@ -2516,42 +1886,6 @@ func (s CreateJobInput) GoString() string {
 	return s.String()
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateJobInput) SetClientRequestToken(v string) *CreateJobInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetJobTemplate sets the JobTemplate field's value.
-func (s *CreateJobInput) SetJobTemplate(v string) *CreateJobInput {
-	s.JobTemplate = &v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *CreateJobInput) SetQueue(v string) *CreateJobInput {
-	s.Queue = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *CreateJobInput) SetRole(v string) *CreateJobInput {
-	s.Role = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *CreateJobInput) SetSettings(v *JobSettings) *CreateJobInput {
-	s.Settings = v
-	return s
-}
-
-// SetUserMetadata sets the UserMetadata field's value.
-func (s *CreateJobInput) SetUserMetadata(v map[string]string) *CreateJobInput {
-	s.UserMetadata = v
-	return s
-}
-
 // Successful create job requests will return the job JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobResponse
 type CreateJobOutput struct {
@@ -2577,12 +1911,6 @@ func (s CreateJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJob sets the Job field's value.
-func (s *CreateJobOutput) SetJob(v *Job) *CreateJobOutput {
-	s.Job = v
-	return s
 }
 
 // Send your create job template request with the name of the template and the
@@ -2620,36 +1948,6 @@ func (s CreateJobTemplateInput) GoString() string {
 	return s.String()
 }
 
-// SetCategory sets the Category field's value.
-func (s *CreateJobTemplateInput) SetCategory(v string) *CreateJobTemplateInput {
-	s.Category = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateJobTemplateInput) SetDescription(v string) *CreateJobTemplateInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateJobTemplateInput) SetName(v string) *CreateJobTemplateInput {
-	s.Name = &v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *CreateJobTemplateInput) SetQueue(v string) *CreateJobTemplateInput {
-	s.Queue = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *CreateJobTemplateInput) SetSettings(v *JobTemplateSettings) *CreateJobTemplateInput {
-	s.Settings = v
-	return s
-}
-
 // Successful create job template requests will return the template JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplateResponse
 type CreateJobTemplateOutput struct {
@@ -2675,12 +1973,6 @@ func (s CreateJobTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateJobTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobTemplate sets the JobTemplate field's value.
-func (s *CreateJobTemplateOutput) SetJobTemplate(v *JobTemplate) *CreateJobTemplateOutput {
-	s.JobTemplate = v
-	return s
 }
 
 // Send your create preset request with the name of the preset and the JSON
@@ -2712,30 +2004,6 @@ func (s CreatePresetInput) GoString() string {
 	return s.String()
 }
 
-// SetCategory sets the Category field's value.
-func (s *CreatePresetInput) SetCategory(v string) *CreatePresetInput {
-	s.Category = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreatePresetInput) SetDescription(v string) *CreatePresetInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreatePresetInput) SetName(v string) *CreatePresetInput {
-	s.Name = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *CreatePresetInput) SetSettings(v *PresetSettings) *CreatePresetInput {
-	s.Settings = v
-	return s
-}
-
 // Successful create preset requests will return the preset JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreatePresetResponse
 type CreatePresetOutput struct {
@@ -2763,12 +2031,6 @@ func (s CreatePresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPreset sets the Preset field's value.
-func (s *CreatePresetOutput) SetPreset(v *Preset) *CreatePresetOutput {
-	s.Preset = v
-	return s
-}
-
 // Send your create queue request with the name of the queue.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueueRequest
 type CreateQueueInput struct {
@@ -2789,18 +2051,6 @@ func (s CreateQueueInput) String() string {
 // GoString returns the string representation
 func (s CreateQueueInput) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateQueueInput) SetDescription(v string) *CreateQueueInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateQueueInput) SetName(v string) *CreateQueueInput {
-	s.Name = &v
-	return s
 }
 
 // Successful create queue requests will return the name of the queue you just
@@ -2832,12 +2082,6 @@ func (s CreateQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetQueue sets the Queue field's value.
-func (s *CreateQueueOutput) SetQueue(v *Queue) *CreateQueueOutput {
-	s.Queue = v
-	return s
-}
-
 // Specifies DRM settings for DASH outputs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoEncryptionSettings
 type DashIsoEncryptionSettings struct {
@@ -2855,12 +2099,6 @@ func (s DashIsoEncryptionSettings) String() string {
 // GoString returns the string representation
 func (s DashIsoEncryptionSettings) GoString() string {
 	return s.String()
-}
-
-// SetSpekeKeyProvider sets the SpekeKeyProvider field's value.
-func (s *DashIsoEncryptionSettings) SetSpekeKeyProvider(v *SpekeKeyProvider) *DashIsoEncryptionSettings {
-	s.SpekeKeyProvider = v
-	return s
 }
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
@@ -2922,54 +2160,6 @@ func (s DashIsoGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetBaseUrl sets the BaseUrl field's value.
-func (s *DashIsoGroupSettings) SetBaseUrl(v string) *DashIsoGroupSettings {
-	s.BaseUrl = &v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *DashIsoGroupSettings) SetDestination(v string) *DashIsoGroupSettings {
-	s.Destination = &v
-	return s
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *DashIsoGroupSettings) SetEncryption(v *DashIsoEncryptionSettings) *DashIsoGroupSettings {
-	s.Encryption = v
-	return s
-}
-
-// SetFragmentLength sets the FragmentLength field's value.
-func (s *DashIsoGroupSettings) SetFragmentLength(v int64) *DashIsoGroupSettings {
-	s.FragmentLength = &v
-	return s
-}
-
-// SetHbbtvCompliance sets the HbbtvCompliance field's value.
-func (s *DashIsoGroupSettings) SetHbbtvCompliance(v DashIsoHbbtvCompliance) *DashIsoGroupSettings {
-	s.HbbtvCompliance = v
-	return s
-}
-
-// SetMinBufferTime sets the MinBufferTime field's value.
-func (s *DashIsoGroupSettings) SetMinBufferTime(v int64) *DashIsoGroupSettings {
-	s.MinBufferTime = &v
-	return s
-}
-
-// SetSegmentControl sets the SegmentControl field's value.
-func (s *DashIsoGroupSettings) SetSegmentControl(v DashIsoSegmentControl) *DashIsoGroupSettings {
-	s.SegmentControl = v
-	return s
-}
-
-// SetSegmentLength sets the SegmentLength field's value.
-func (s *DashIsoGroupSettings) SetSegmentLength(v int64) *DashIsoGroupSettings {
-	s.SegmentLength = &v
-	return s
-}
-
 // Settings for deinterlacer
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Deinterlacer
 type Deinterlacer struct {
@@ -3009,24 +2199,6 @@ func (s Deinterlacer) GoString() string {
 	return s.String()
 }
 
-// SetAlgorithm sets the Algorithm field's value.
-func (s *Deinterlacer) SetAlgorithm(v DeinterlaceAlgorithm) *Deinterlacer {
-	s.Algorithm = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *Deinterlacer) SetControl(v DeinterlacerControl) *Deinterlacer {
-	s.Control = v
-	return s
-}
-
-// SetMode sets the Mode field's value.
-func (s *Deinterlacer) SetMode(v DeinterlacerMode) *Deinterlacer {
-	s.Mode = v
-	return s
-}
-
 // Delete a job template by sending a request with the job template name
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteJobTemplateRequest
 type DeleteJobTemplateInput struct {
@@ -3060,12 +2232,6 @@ func (s *DeleteJobTemplateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteJobTemplateInput) SetName(v string) *DeleteJobTemplateInput {
-	s.Name = &v
-	return s
 }
 
 // Delete job template requests will return an OK message or error message with
@@ -3127,12 +2293,6 @@ func (s *DeletePresetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeletePresetInput) SetName(v string) *DeletePresetInput {
-	s.Name = &v
-	return s
-}
-
 // Delete preset requests will return an OK message or error message with an
 // empty body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePresetResponse
@@ -3192,12 +2352,6 @@ func (s *DeleteQueueInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteQueueInput) SetName(v string) *DeleteQueueInput {
-	s.Name = &v
-	return s
-}
-
 // Delete queue requests will return an OK message or error message with an
 // empty body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteQueueResponse
@@ -3247,18 +2401,6 @@ func (s DescribeEndpointsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEndpointsInput) SetMaxResults(v int64) *DescribeEndpointsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEndpointsInput) SetNextToken(v string) *DescribeEndpointsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Successful describe endpoints requests will return your account API endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DescribeEndpointsResponse
 type DescribeEndpointsOutput struct {
@@ -3288,18 +2430,6 @@ func (s DescribeEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEndpoints sets the Endpoints field's value.
-func (s *DescribeEndpointsOutput) SetEndpoints(v []Endpoint) *DescribeEndpointsOutput {
-	s.Endpoints = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEndpointsOutput) SetNextToken(v string) *DescribeEndpointsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Inserts DVB Network Information Table (NIT) at the specified table repetition
 // interval.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbNitSettings
@@ -3326,24 +2456,6 @@ func (s DvbNitSettings) String() string {
 // GoString returns the string representation
 func (s DvbNitSettings) GoString() string {
 	return s.String()
-}
-
-// SetNetworkId sets the NetworkId field's value.
-func (s *DvbNitSettings) SetNetworkId(v int64) *DvbNitSettings {
-	s.NetworkId = &v
-	return s
-}
-
-// SetNetworkName sets the NetworkName field's value.
-func (s *DvbNitSettings) SetNetworkName(v string) *DvbNitSettings {
-	s.NetworkName = &v
-	return s
-}
-
-// SetNitInterval sets the NitInterval field's value.
-func (s *DvbNitSettings) SetNitInterval(v int64) *DvbNitSettings {
-	s.NitInterval = &v
-	return s
 }
 
 // Inserts DVB Service Description Table (NIT) at the specified table repetition
@@ -3381,30 +2493,6 @@ func (s DvbSdtSettings) String() string {
 // GoString returns the string representation
 func (s DvbSdtSettings) GoString() string {
 	return s.String()
-}
-
-// SetOutputSdt sets the OutputSdt field's value.
-func (s *DvbSdtSettings) SetOutputSdt(v OutputSdt) *DvbSdtSettings {
-	s.OutputSdt = v
-	return s
-}
-
-// SetSdtInterval sets the SdtInterval field's value.
-func (s *DvbSdtSettings) SetSdtInterval(v int64) *DvbSdtSettings {
-	s.SdtInterval = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *DvbSdtSettings) SetServiceName(v string) *DvbSdtSettings {
-	s.ServiceName = &v
-	return s
-}
-
-// SetServiceProviderName sets the ServiceProviderName field's value.
-func (s *DvbSdtSettings) SetServiceProviderName(v string) *DvbSdtSettings {
-	s.ServiceProviderName = &v
-	return s
 }
 
 // DVB-Sub Destination Settings
@@ -3515,102 +2603,6 @@ func (s DvbSubDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetAlignment sets the Alignment field's value.
-func (s *DvbSubDestinationSettings) SetAlignment(v DvbSubtitleAlignment) *DvbSubDestinationSettings {
-	s.Alignment = v
-	return s
-}
-
-// SetBackgroundColor sets the BackgroundColor field's value.
-func (s *DvbSubDestinationSettings) SetBackgroundColor(v DvbSubtitleBackgroundColor) *DvbSubDestinationSettings {
-	s.BackgroundColor = v
-	return s
-}
-
-// SetBackgroundOpacity sets the BackgroundOpacity field's value.
-func (s *DvbSubDestinationSettings) SetBackgroundOpacity(v int64) *DvbSubDestinationSettings {
-	s.BackgroundOpacity = &v
-	return s
-}
-
-// SetFontColor sets the FontColor field's value.
-func (s *DvbSubDestinationSettings) SetFontColor(v DvbSubtitleFontColor) *DvbSubDestinationSettings {
-	s.FontColor = v
-	return s
-}
-
-// SetFontOpacity sets the FontOpacity field's value.
-func (s *DvbSubDestinationSettings) SetFontOpacity(v int64) *DvbSubDestinationSettings {
-	s.FontOpacity = &v
-	return s
-}
-
-// SetFontResolution sets the FontResolution field's value.
-func (s *DvbSubDestinationSettings) SetFontResolution(v int64) *DvbSubDestinationSettings {
-	s.FontResolution = &v
-	return s
-}
-
-// SetFontSize sets the FontSize field's value.
-func (s *DvbSubDestinationSettings) SetFontSize(v int64) *DvbSubDestinationSettings {
-	s.FontSize = &v
-	return s
-}
-
-// SetOutlineColor sets the OutlineColor field's value.
-func (s *DvbSubDestinationSettings) SetOutlineColor(v DvbSubtitleOutlineColor) *DvbSubDestinationSettings {
-	s.OutlineColor = v
-	return s
-}
-
-// SetOutlineSize sets the OutlineSize field's value.
-func (s *DvbSubDestinationSettings) SetOutlineSize(v int64) *DvbSubDestinationSettings {
-	s.OutlineSize = &v
-	return s
-}
-
-// SetShadowColor sets the ShadowColor field's value.
-func (s *DvbSubDestinationSettings) SetShadowColor(v DvbSubtitleShadowColor) *DvbSubDestinationSettings {
-	s.ShadowColor = v
-	return s
-}
-
-// SetShadowOpacity sets the ShadowOpacity field's value.
-func (s *DvbSubDestinationSettings) SetShadowOpacity(v int64) *DvbSubDestinationSettings {
-	s.ShadowOpacity = &v
-	return s
-}
-
-// SetShadowXOffset sets the ShadowXOffset field's value.
-func (s *DvbSubDestinationSettings) SetShadowXOffset(v int64) *DvbSubDestinationSettings {
-	s.ShadowXOffset = &v
-	return s
-}
-
-// SetShadowYOffset sets the ShadowYOffset field's value.
-func (s *DvbSubDestinationSettings) SetShadowYOffset(v int64) *DvbSubDestinationSettings {
-	s.ShadowYOffset = &v
-	return s
-}
-
-// SetTeletextSpacing sets the TeletextSpacing field's value.
-func (s *DvbSubDestinationSettings) SetTeletextSpacing(v DvbSubtitleTeletextSpacing) *DvbSubDestinationSettings {
-	s.TeletextSpacing = v
-	return s
-}
-
-// SetXPosition sets the XPosition field's value.
-func (s *DvbSubDestinationSettings) SetXPosition(v int64) *DvbSubDestinationSettings {
-	s.XPosition = &v
-	return s
-}
-
-// SetYPosition sets the YPosition field's value.
-func (s *DvbSubDestinationSettings) SetYPosition(v int64) *DvbSubDestinationSettings {
-	s.YPosition = &v
-	return s
-}
-
 // DVB Sub Source Settings
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbSubSourceSettings
 type DvbSubSourceSettings struct {
@@ -3632,12 +2624,6 @@ func (s DvbSubSourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetPid sets the Pid field's value.
-func (s *DvbSubSourceSettings) SetPid(v int64) *DvbSubSourceSettings {
-	s.Pid = &v
-	return s
-}
-
 // Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbTdtSettings
 type DvbTdtSettings struct {
@@ -3656,12 +2642,6 @@ func (s DvbTdtSettings) String() string {
 // GoString returns the string representation
 func (s DvbTdtSettings) GoString() string {
 	return s.String()
-}
-
-// SetTdtInterval sets the TdtInterval field's value.
-func (s *DvbTdtSettings) SetTdtInterval(v int64) *DvbTdtSettings {
-	s.TdtInterval = &v
-	return s
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
@@ -3762,132 +2742,6 @@ func (s Eac3Settings) GoString() string {
 	return s.String()
 }
 
-// SetAttenuationControl sets the AttenuationControl field's value.
-func (s *Eac3Settings) SetAttenuationControl(v Eac3AttenuationControl) *Eac3Settings {
-	s.AttenuationControl = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *Eac3Settings) SetBitrate(v int64) *Eac3Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBitstreamMode sets the BitstreamMode field's value.
-func (s *Eac3Settings) SetBitstreamMode(v Eac3BitstreamMode) *Eac3Settings {
-	s.BitstreamMode = v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *Eac3Settings) SetCodingMode(v Eac3CodingMode) *Eac3Settings {
-	s.CodingMode = v
-	return s
-}
-
-// SetDcFilter sets the DcFilter field's value.
-func (s *Eac3Settings) SetDcFilter(v Eac3DcFilter) *Eac3Settings {
-	s.DcFilter = v
-	return s
-}
-
-// SetDialnorm sets the Dialnorm field's value.
-func (s *Eac3Settings) SetDialnorm(v int64) *Eac3Settings {
-	s.Dialnorm = &v
-	return s
-}
-
-// SetDynamicRangeCompressionLine sets the DynamicRangeCompressionLine field's value.
-func (s *Eac3Settings) SetDynamicRangeCompressionLine(v Eac3DynamicRangeCompressionLine) *Eac3Settings {
-	s.DynamicRangeCompressionLine = v
-	return s
-}
-
-// SetDynamicRangeCompressionRf sets the DynamicRangeCompressionRf field's value.
-func (s *Eac3Settings) SetDynamicRangeCompressionRf(v Eac3DynamicRangeCompressionRf) *Eac3Settings {
-	s.DynamicRangeCompressionRf = v
-	return s
-}
-
-// SetLfeControl sets the LfeControl field's value.
-func (s *Eac3Settings) SetLfeControl(v Eac3LfeControl) *Eac3Settings {
-	s.LfeControl = v
-	return s
-}
-
-// SetLfeFilter sets the LfeFilter field's value.
-func (s *Eac3Settings) SetLfeFilter(v Eac3LfeFilter) *Eac3Settings {
-	s.LfeFilter = v
-	return s
-}
-
-// SetLoRoCenterMixLevel sets the LoRoCenterMixLevel field's value.
-func (s *Eac3Settings) SetLoRoCenterMixLevel(v float64) *Eac3Settings {
-	s.LoRoCenterMixLevel = &v
-	return s
-}
-
-// SetLoRoSurroundMixLevel sets the LoRoSurroundMixLevel field's value.
-func (s *Eac3Settings) SetLoRoSurroundMixLevel(v float64) *Eac3Settings {
-	s.LoRoSurroundMixLevel = &v
-	return s
-}
-
-// SetLtRtCenterMixLevel sets the LtRtCenterMixLevel field's value.
-func (s *Eac3Settings) SetLtRtCenterMixLevel(v float64) *Eac3Settings {
-	s.LtRtCenterMixLevel = &v
-	return s
-}
-
-// SetLtRtSurroundMixLevel sets the LtRtSurroundMixLevel field's value.
-func (s *Eac3Settings) SetLtRtSurroundMixLevel(v float64) *Eac3Settings {
-	s.LtRtSurroundMixLevel = &v
-	return s
-}
-
-// SetMetadataControl sets the MetadataControl field's value.
-func (s *Eac3Settings) SetMetadataControl(v Eac3MetadataControl) *Eac3Settings {
-	s.MetadataControl = v
-	return s
-}
-
-// SetPassthroughControl sets the PassthroughControl field's value.
-func (s *Eac3Settings) SetPassthroughControl(v Eac3PassthroughControl) *Eac3Settings {
-	s.PassthroughControl = v
-	return s
-}
-
-// SetPhaseControl sets the PhaseControl field's value.
-func (s *Eac3Settings) SetPhaseControl(v Eac3PhaseControl) *Eac3Settings {
-	s.PhaseControl = v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *Eac3Settings) SetSampleRate(v int64) *Eac3Settings {
-	s.SampleRate = &v
-	return s
-}
-
-// SetStereoDownmix sets the StereoDownmix field's value.
-func (s *Eac3Settings) SetStereoDownmix(v Eac3StereoDownmix) *Eac3Settings {
-	s.StereoDownmix = v
-	return s
-}
-
-// SetSurroundExMode sets the SurroundExMode field's value.
-func (s *Eac3Settings) SetSurroundExMode(v Eac3SurroundExMode) *Eac3Settings {
-	s.SurroundExMode = v
-	return s
-}
-
-// SetSurroundMode sets the SurroundMode field's value.
-func (s *Eac3Settings) SetSurroundMode(v Eac3SurroundMode) *Eac3Settings {
-	s.SurroundMode = v
-	return s
-}
-
 // Settings for embedded captions Source
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EmbeddedSourceSettings
 type EmbeddedSourceSettings struct {
@@ -3917,24 +2771,6 @@ func (s EmbeddedSourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetConvert608To708 sets the Convert608To708 field's value.
-func (s *EmbeddedSourceSettings) SetConvert608To708(v EmbeddedConvert608To708) *EmbeddedSourceSettings {
-	s.Convert608To708 = v
-	return s
-}
-
-// SetSource608ChannelNumber sets the Source608ChannelNumber field's value.
-func (s *EmbeddedSourceSettings) SetSource608ChannelNumber(v int64) *EmbeddedSourceSettings {
-	s.Source608ChannelNumber = &v
-	return s
-}
-
-// SetSource608TrackNumber sets the Source608TrackNumber field's value.
-func (s *EmbeddedSourceSettings) SetSource608TrackNumber(v int64) *EmbeddedSourceSettings {
-	s.Source608TrackNumber = &v
-	return s
-}
-
 // Describes account specific API endpoint
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Endpoint
 type Endpoint struct {
@@ -3952,12 +2788,6 @@ func (s Endpoint) String() string {
 // GoString returns the string representation
 func (s Endpoint) GoString() string {
 	return s.String()
-}
-
-// SetUrl sets the Url field's value.
-func (s *Endpoint) SetUrl(v string) *Endpoint {
-	s.Url = &v
-	return s
 }
 
 // Settings for F4v container
@@ -3979,12 +2809,6 @@ func (s F4vSettings) String() string {
 // GoString returns the string representation
 func (s F4vSettings) GoString() string {
 	return s.String()
-}
-
-// SetMoovPlacement sets the MoovPlacement field's value.
-func (s *F4vSettings) SetMoovPlacement(v F4vMoovPlacement) *F4vSettings {
-	s.MoovPlacement = v
-	return s
 }
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
@@ -4009,12 +2833,6 @@ func (s FileGroupSettings) String() string {
 // GoString returns the string representation
 func (s FileGroupSettings) GoString() string {
 	return s.String()
-}
-
-// SetDestination sets the Destination field's value.
-func (s *FileGroupSettings) SetDestination(v string) *FileGroupSettings {
-	s.Destination = &v
-	return s
 }
 
 // Settings for File-based Captions in Source
@@ -4045,24 +2863,6 @@ func (s FileSourceSettings) String() string {
 // GoString returns the string representation
 func (s FileSourceSettings) GoString() string {
 	return s.String()
-}
-
-// SetConvert608To708 sets the Convert608To708 field's value.
-func (s *FileSourceSettings) SetConvert608To708(v FileSourceConvert608To708) *FileSourceSettings {
-	s.Convert608To708 = v
-	return s
-}
-
-// SetSourceFile sets the SourceFile field's value.
-func (s *FileSourceSettings) SetSourceFile(v string) *FileSourceSettings {
-	s.SourceFile = &v
-	return s
-}
-
-// SetTimeDelta sets the TimeDelta field's value.
-func (s *FileSourceSettings) SetTimeDelta(v int64) *FileSourceSettings {
-	s.TimeDelta = &v
-	return s
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
@@ -4104,30 +2904,6 @@ func (s FrameCaptureSettings) GoString() string {
 	return s.String()
 }
 
-// SetFramerateDenominator sets the FramerateDenominator field's value.
-func (s *FrameCaptureSettings) SetFramerateDenominator(v int64) *FrameCaptureSettings {
-	s.FramerateDenominator = &v
-	return s
-}
-
-// SetFramerateNumerator sets the FramerateNumerator field's value.
-func (s *FrameCaptureSettings) SetFramerateNumerator(v int64) *FrameCaptureSettings {
-	s.FramerateNumerator = &v
-	return s
-}
-
-// SetMaxCaptures sets the MaxCaptures field's value.
-func (s *FrameCaptureSettings) SetMaxCaptures(v int64) *FrameCaptureSettings {
-	s.MaxCaptures = &v
-	return s
-}
-
-// SetQuality sets the Quality field's value.
-func (s *FrameCaptureSettings) SetQuality(v int64) *FrameCaptureSettings {
-	s.Quality = &v
-	return s
-}
-
 // Query a job by sending a request with the job ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobRequest
 type GetJobInput struct {
@@ -4163,12 +2939,6 @@ func (s *GetJobInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetJobInput) SetId(v string) *GetJobInput {
-	s.Id = &v
-	return s
-}
-
 // Successful get job requests will return an OK message and the job JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobResponse
 type GetJobOutput struct {
@@ -4194,12 +2964,6 @@ func (s GetJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJob sets the Job field's value.
-func (s *GetJobOutput) SetJob(v *Job) *GetJobOutput {
-	s.Job = v
-	return s
 }
 
 // Query a job template by sending a request with the job template name.
@@ -4237,12 +3001,6 @@ func (s *GetJobTemplateInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetJobTemplateInput) SetName(v string) *GetJobTemplateInput {
-	s.Name = &v
-	return s
-}
-
 // Successful get job template requests will return an OK message and the job
 // template JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobTemplateResponse
@@ -4269,12 +3027,6 @@ func (s GetJobTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetJobTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobTemplate sets the JobTemplate field's value.
-func (s *GetJobTemplateOutput) SetJobTemplate(v *JobTemplate) *GetJobTemplateOutput {
-	s.JobTemplate = v
-	return s
 }
 
 // Query a preset by sending a request with the preset name.
@@ -4312,12 +3064,6 @@ func (s *GetPresetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetPresetInput) SetName(v string) *GetPresetInput {
-	s.Name = &v
-	return s
-}
-
 // Successful get preset requests will return an OK message and the preset JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPresetResponse
 type GetPresetOutput struct {
@@ -4343,12 +3089,6 @@ func (s GetPresetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPreset sets the Preset field's value.
-func (s *GetPresetOutput) SetPreset(v *Preset) *GetPresetOutput {
-	s.Preset = v
-	return s
 }
 
 // Query a queue by sending a request with the queue name.
@@ -4386,12 +3126,6 @@ func (s *GetQueueInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetQueueInput) SetName(v string) *GetQueueInput {
-	s.Name = &v
-	return s
-}
-
 // Successful get queue requests will return an OK message and the queue JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueResponse
 type GetQueueOutput struct {
@@ -4418,12 +3152,6 @@ func (s GetQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQueue sets the Queue field's value.
-func (s *GetQueueOutput) SetQueue(v *Queue) *GetQueueOutput {
-	s.Queue = v
-	return s
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
@@ -4607,228 +3335,6 @@ func (s H264Settings) String() string {
 // GoString returns the string representation
 func (s H264Settings) GoString() string {
 	return s.String()
-}
-
-// SetAdaptiveQuantization sets the AdaptiveQuantization field's value.
-func (s *H264Settings) SetAdaptiveQuantization(v H264AdaptiveQuantization) *H264Settings {
-	s.AdaptiveQuantization = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *H264Settings) SetBitrate(v int64) *H264Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetCodecLevel sets the CodecLevel field's value.
-func (s *H264Settings) SetCodecLevel(v H264CodecLevel) *H264Settings {
-	s.CodecLevel = v
-	return s
-}
-
-// SetCodecProfile sets the CodecProfile field's value.
-func (s *H264Settings) SetCodecProfile(v H264CodecProfile) *H264Settings {
-	s.CodecProfile = v
-	return s
-}
-
-// SetEntropyEncoding sets the EntropyEncoding field's value.
-func (s *H264Settings) SetEntropyEncoding(v H264EntropyEncoding) *H264Settings {
-	s.EntropyEncoding = v
-	return s
-}
-
-// SetFieldEncoding sets the FieldEncoding field's value.
-func (s *H264Settings) SetFieldEncoding(v H264FieldEncoding) *H264Settings {
-	s.FieldEncoding = v
-	return s
-}
-
-// SetFlickerAdaptiveQuantization sets the FlickerAdaptiveQuantization field's value.
-func (s *H264Settings) SetFlickerAdaptiveQuantization(v H264FlickerAdaptiveQuantization) *H264Settings {
-	s.FlickerAdaptiveQuantization = v
-	return s
-}
-
-// SetFramerateControl sets the FramerateControl field's value.
-func (s *H264Settings) SetFramerateControl(v H264FramerateControl) *H264Settings {
-	s.FramerateControl = v
-	return s
-}
-
-// SetFramerateConversionAlgorithm sets the FramerateConversionAlgorithm field's value.
-func (s *H264Settings) SetFramerateConversionAlgorithm(v H264FramerateConversionAlgorithm) *H264Settings {
-	s.FramerateConversionAlgorithm = v
-	return s
-}
-
-// SetFramerateDenominator sets the FramerateDenominator field's value.
-func (s *H264Settings) SetFramerateDenominator(v int64) *H264Settings {
-	s.FramerateDenominator = &v
-	return s
-}
-
-// SetFramerateNumerator sets the FramerateNumerator field's value.
-func (s *H264Settings) SetFramerateNumerator(v int64) *H264Settings {
-	s.FramerateNumerator = &v
-	return s
-}
-
-// SetGopBReference sets the GopBReference field's value.
-func (s *H264Settings) SetGopBReference(v H264GopBReference) *H264Settings {
-	s.GopBReference = v
-	return s
-}
-
-// SetGopClosedCadence sets the GopClosedCadence field's value.
-func (s *H264Settings) SetGopClosedCadence(v int64) *H264Settings {
-	s.GopClosedCadence = &v
-	return s
-}
-
-// SetGopSize sets the GopSize field's value.
-func (s *H264Settings) SetGopSize(v float64) *H264Settings {
-	s.GopSize = &v
-	return s
-}
-
-// SetGopSizeUnits sets the GopSizeUnits field's value.
-func (s *H264Settings) SetGopSizeUnits(v H264GopSizeUnits) *H264Settings {
-	s.GopSizeUnits = v
-	return s
-}
-
-// SetHrdBufferInitialFillPercentage sets the HrdBufferInitialFillPercentage field's value.
-func (s *H264Settings) SetHrdBufferInitialFillPercentage(v int64) *H264Settings {
-	s.HrdBufferInitialFillPercentage = &v
-	return s
-}
-
-// SetHrdBufferSize sets the HrdBufferSize field's value.
-func (s *H264Settings) SetHrdBufferSize(v int64) *H264Settings {
-	s.HrdBufferSize = &v
-	return s
-}
-
-// SetInterlaceMode sets the InterlaceMode field's value.
-func (s *H264Settings) SetInterlaceMode(v H264InterlaceMode) *H264Settings {
-	s.InterlaceMode = v
-	return s
-}
-
-// SetMaxBitrate sets the MaxBitrate field's value.
-func (s *H264Settings) SetMaxBitrate(v int64) *H264Settings {
-	s.MaxBitrate = &v
-	return s
-}
-
-// SetMinIInterval sets the MinIInterval field's value.
-func (s *H264Settings) SetMinIInterval(v int64) *H264Settings {
-	s.MinIInterval = &v
-	return s
-}
-
-// SetNumberBFramesBetweenReferenceFrames sets the NumberBFramesBetweenReferenceFrames field's value.
-func (s *H264Settings) SetNumberBFramesBetweenReferenceFrames(v int64) *H264Settings {
-	s.NumberBFramesBetweenReferenceFrames = &v
-	return s
-}
-
-// SetNumberReferenceFrames sets the NumberReferenceFrames field's value.
-func (s *H264Settings) SetNumberReferenceFrames(v int64) *H264Settings {
-	s.NumberReferenceFrames = &v
-	return s
-}
-
-// SetParControl sets the ParControl field's value.
-func (s *H264Settings) SetParControl(v H264ParControl) *H264Settings {
-	s.ParControl = v
-	return s
-}
-
-// SetParDenominator sets the ParDenominator field's value.
-func (s *H264Settings) SetParDenominator(v int64) *H264Settings {
-	s.ParDenominator = &v
-	return s
-}
-
-// SetParNumerator sets the ParNumerator field's value.
-func (s *H264Settings) SetParNumerator(v int64) *H264Settings {
-	s.ParNumerator = &v
-	return s
-}
-
-// SetQualityTuningLevel sets the QualityTuningLevel field's value.
-func (s *H264Settings) SetQualityTuningLevel(v H264QualityTuningLevel) *H264Settings {
-	s.QualityTuningLevel = v
-	return s
-}
-
-// SetRateControlMode sets the RateControlMode field's value.
-func (s *H264Settings) SetRateControlMode(v H264RateControlMode) *H264Settings {
-	s.RateControlMode = v
-	return s
-}
-
-// SetRepeatPps sets the RepeatPps field's value.
-func (s *H264Settings) SetRepeatPps(v H264RepeatPps) *H264Settings {
-	s.RepeatPps = v
-	return s
-}
-
-// SetSceneChangeDetect sets the SceneChangeDetect field's value.
-func (s *H264Settings) SetSceneChangeDetect(v H264SceneChangeDetect) *H264Settings {
-	s.SceneChangeDetect = v
-	return s
-}
-
-// SetSlices sets the Slices field's value.
-func (s *H264Settings) SetSlices(v int64) *H264Settings {
-	s.Slices = &v
-	return s
-}
-
-// SetSlowPal sets the SlowPal field's value.
-func (s *H264Settings) SetSlowPal(v H264SlowPal) *H264Settings {
-	s.SlowPal = v
-	return s
-}
-
-// SetSoftness sets the Softness field's value.
-func (s *H264Settings) SetSoftness(v int64) *H264Settings {
-	s.Softness = &v
-	return s
-}
-
-// SetSpatialAdaptiveQuantization sets the SpatialAdaptiveQuantization field's value.
-func (s *H264Settings) SetSpatialAdaptiveQuantization(v H264SpatialAdaptiveQuantization) *H264Settings {
-	s.SpatialAdaptiveQuantization = v
-	return s
-}
-
-// SetSyntax sets the Syntax field's value.
-func (s *H264Settings) SetSyntax(v H264Syntax) *H264Settings {
-	s.Syntax = v
-	return s
-}
-
-// SetTelecine sets the Telecine field's value.
-func (s *H264Settings) SetTelecine(v H264Telecine) *H264Settings {
-	s.Telecine = v
-	return s
-}
-
-// SetTemporalAdaptiveQuantization sets the TemporalAdaptiveQuantization field's value.
-func (s *H264Settings) SetTemporalAdaptiveQuantization(v H264TemporalAdaptiveQuantization) *H264Settings {
-	s.TemporalAdaptiveQuantization = v
-	return s
-}
-
-// SetUnregisteredSeiTimecode sets the UnregisteredSeiTimecode field's value.
-func (s *H264Settings) SetUnregisteredSeiTimecode(v H264UnregisteredSeiTimecode) *H264Settings {
-	s.UnregisteredSeiTimecode = v
-	return s
 }
 
 // Settings for H265 codec
@@ -5015,222 +3521,6 @@ func (s H265Settings) GoString() string {
 	return s.String()
 }
 
-// SetAdaptiveQuantization sets the AdaptiveQuantization field's value.
-func (s *H265Settings) SetAdaptiveQuantization(v H265AdaptiveQuantization) *H265Settings {
-	s.AdaptiveQuantization = v
-	return s
-}
-
-// SetAlternateTransferFunctionSei sets the AlternateTransferFunctionSei field's value.
-func (s *H265Settings) SetAlternateTransferFunctionSei(v H265AlternateTransferFunctionSei) *H265Settings {
-	s.AlternateTransferFunctionSei = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *H265Settings) SetBitrate(v int64) *H265Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetCodecLevel sets the CodecLevel field's value.
-func (s *H265Settings) SetCodecLevel(v H265CodecLevel) *H265Settings {
-	s.CodecLevel = v
-	return s
-}
-
-// SetCodecProfile sets the CodecProfile field's value.
-func (s *H265Settings) SetCodecProfile(v H265CodecProfile) *H265Settings {
-	s.CodecProfile = v
-	return s
-}
-
-// SetFlickerAdaptiveQuantization sets the FlickerAdaptiveQuantization field's value.
-func (s *H265Settings) SetFlickerAdaptiveQuantization(v H265FlickerAdaptiveQuantization) *H265Settings {
-	s.FlickerAdaptiveQuantization = v
-	return s
-}
-
-// SetFramerateControl sets the FramerateControl field's value.
-func (s *H265Settings) SetFramerateControl(v H265FramerateControl) *H265Settings {
-	s.FramerateControl = v
-	return s
-}
-
-// SetFramerateConversionAlgorithm sets the FramerateConversionAlgorithm field's value.
-func (s *H265Settings) SetFramerateConversionAlgorithm(v H265FramerateConversionAlgorithm) *H265Settings {
-	s.FramerateConversionAlgorithm = v
-	return s
-}
-
-// SetFramerateDenominator sets the FramerateDenominator field's value.
-func (s *H265Settings) SetFramerateDenominator(v int64) *H265Settings {
-	s.FramerateDenominator = &v
-	return s
-}
-
-// SetFramerateNumerator sets the FramerateNumerator field's value.
-func (s *H265Settings) SetFramerateNumerator(v int64) *H265Settings {
-	s.FramerateNumerator = &v
-	return s
-}
-
-// SetGopBReference sets the GopBReference field's value.
-func (s *H265Settings) SetGopBReference(v H265GopBReference) *H265Settings {
-	s.GopBReference = v
-	return s
-}
-
-// SetGopClosedCadence sets the GopClosedCadence field's value.
-func (s *H265Settings) SetGopClosedCadence(v int64) *H265Settings {
-	s.GopClosedCadence = &v
-	return s
-}
-
-// SetGopSize sets the GopSize field's value.
-func (s *H265Settings) SetGopSize(v float64) *H265Settings {
-	s.GopSize = &v
-	return s
-}
-
-// SetGopSizeUnits sets the GopSizeUnits field's value.
-func (s *H265Settings) SetGopSizeUnits(v H265GopSizeUnits) *H265Settings {
-	s.GopSizeUnits = v
-	return s
-}
-
-// SetHrdBufferInitialFillPercentage sets the HrdBufferInitialFillPercentage field's value.
-func (s *H265Settings) SetHrdBufferInitialFillPercentage(v int64) *H265Settings {
-	s.HrdBufferInitialFillPercentage = &v
-	return s
-}
-
-// SetHrdBufferSize sets the HrdBufferSize field's value.
-func (s *H265Settings) SetHrdBufferSize(v int64) *H265Settings {
-	s.HrdBufferSize = &v
-	return s
-}
-
-// SetInterlaceMode sets the InterlaceMode field's value.
-func (s *H265Settings) SetInterlaceMode(v H265InterlaceMode) *H265Settings {
-	s.InterlaceMode = v
-	return s
-}
-
-// SetMaxBitrate sets the MaxBitrate field's value.
-func (s *H265Settings) SetMaxBitrate(v int64) *H265Settings {
-	s.MaxBitrate = &v
-	return s
-}
-
-// SetMinIInterval sets the MinIInterval field's value.
-func (s *H265Settings) SetMinIInterval(v int64) *H265Settings {
-	s.MinIInterval = &v
-	return s
-}
-
-// SetNumberBFramesBetweenReferenceFrames sets the NumberBFramesBetweenReferenceFrames field's value.
-func (s *H265Settings) SetNumberBFramesBetweenReferenceFrames(v int64) *H265Settings {
-	s.NumberBFramesBetweenReferenceFrames = &v
-	return s
-}
-
-// SetNumberReferenceFrames sets the NumberReferenceFrames field's value.
-func (s *H265Settings) SetNumberReferenceFrames(v int64) *H265Settings {
-	s.NumberReferenceFrames = &v
-	return s
-}
-
-// SetParControl sets the ParControl field's value.
-func (s *H265Settings) SetParControl(v H265ParControl) *H265Settings {
-	s.ParControl = v
-	return s
-}
-
-// SetParDenominator sets the ParDenominator field's value.
-func (s *H265Settings) SetParDenominator(v int64) *H265Settings {
-	s.ParDenominator = &v
-	return s
-}
-
-// SetParNumerator sets the ParNumerator field's value.
-func (s *H265Settings) SetParNumerator(v int64) *H265Settings {
-	s.ParNumerator = &v
-	return s
-}
-
-// SetQualityTuningLevel sets the QualityTuningLevel field's value.
-func (s *H265Settings) SetQualityTuningLevel(v H265QualityTuningLevel) *H265Settings {
-	s.QualityTuningLevel = v
-	return s
-}
-
-// SetRateControlMode sets the RateControlMode field's value.
-func (s *H265Settings) SetRateControlMode(v H265RateControlMode) *H265Settings {
-	s.RateControlMode = v
-	return s
-}
-
-// SetSampleAdaptiveOffsetFilterMode sets the SampleAdaptiveOffsetFilterMode field's value.
-func (s *H265Settings) SetSampleAdaptiveOffsetFilterMode(v H265SampleAdaptiveOffsetFilterMode) *H265Settings {
-	s.SampleAdaptiveOffsetFilterMode = v
-	return s
-}
-
-// SetSceneChangeDetect sets the SceneChangeDetect field's value.
-func (s *H265Settings) SetSceneChangeDetect(v H265SceneChangeDetect) *H265Settings {
-	s.SceneChangeDetect = v
-	return s
-}
-
-// SetSlices sets the Slices field's value.
-func (s *H265Settings) SetSlices(v int64) *H265Settings {
-	s.Slices = &v
-	return s
-}
-
-// SetSlowPal sets the SlowPal field's value.
-func (s *H265Settings) SetSlowPal(v H265SlowPal) *H265Settings {
-	s.SlowPal = v
-	return s
-}
-
-// SetSpatialAdaptiveQuantization sets the SpatialAdaptiveQuantization field's value.
-func (s *H265Settings) SetSpatialAdaptiveQuantization(v H265SpatialAdaptiveQuantization) *H265Settings {
-	s.SpatialAdaptiveQuantization = v
-	return s
-}
-
-// SetTelecine sets the Telecine field's value.
-func (s *H265Settings) SetTelecine(v H265Telecine) *H265Settings {
-	s.Telecine = v
-	return s
-}
-
-// SetTemporalAdaptiveQuantization sets the TemporalAdaptiveQuantization field's value.
-func (s *H265Settings) SetTemporalAdaptiveQuantization(v H265TemporalAdaptiveQuantization) *H265Settings {
-	s.TemporalAdaptiveQuantization = v
-	return s
-}
-
-// SetTemporalIds sets the TemporalIds field's value.
-func (s *H265Settings) SetTemporalIds(v H265TemporalIds) *H265Settings {
-	s.TemporalIds = v
-	return s
-}
-
-// SetTiles sets the Tiles field's value.
-func (s *H265Settings) SetTiles(v H265Tiles) *H265Settings {
-	s.Tiles = v
-	return s
-}
-
-// SetUnregisteredSeiTimecode sets the UnregisteredSeiTimecode field's value.
-func (s *H265Settings) SetUnregisteredSeiTimecode(v H265UnregisteredSeiTimecode) *H265Settings {
-	s.UnregisteredSeiTimecode = v
-	return s
-}
-
 // Use the HDR master display (Hdr10Metadata) settings to provide values for
 // HDR color. These values vary depending on the input video and must be provided
 // by a color grader. Range is 0 to 50,000, each increment represents 0.00002
@@ -5306,78 +3596,6 @@ func (s Hdr10Metadata) GoString() string {
 	return s.String()
 }
 
-// SetBluePrimaryX sets the BluePrimaryX field's value.
-func (s *Hdr10Metadata) SetBluePrimaryX(v int64) *Hdr10Metadata {
-	s.BluePrimaryX = &v
-	return s
-}
-
-// SetBluePrimaryY sets the BluePrimaryY field's value.
-func (s *Hdr10Metadata) SetBluePrimaryY(v int64) *Hdr10Metadata {
-	s.BluePrimaryY = &v
-	return s
-}
-
-// SetGreenPrimaryX sets the GreenPrimaryX field's value.
-func (s *Hdr10Metadata) SetGreenPrimaryX(v int64) *Hdr10Metadata {
-	s.GreenPrimaryX = &v
-	return s
-}
-
-// SetGreenPrimaryY sets the GreenPrimaryY field's value.
-func (s *Hdr10Metadata) SetGreenPrimaryY(v int64) *Hdr10Metadata {
-	s.GreenPrimaryY = &v
-	return s
-}
-
-// SetMaxContentLightLevel sets the MaxContentLightLevel field's value.
-func (s *Hdr10Metadata) SetMaxContentLightLevel(v int64) *Hdr10Metadata {
-	s.MaxContentLightLevel = &v
-	return s
-}
-
-// SetMaxFrameAverageLightLevel sets the MaxFrameAverageLightLevel field's value.
-func (s *Hdr10Metadata) SetMaxFrameAverageLightLevel(v int64) *Hdr10Metadata {
-	s.MaxFrameAverageLightLevel = &v
-	return s
-}
-
-// SetMaxLuminance sets the MaxLuminance field's value.
-func (s *Hdr10Metadata) SetMaxLuminance(v int64) *Hdr10Metadata {
-	s.MaxLuminance = &v
-	return s
-}
-
-// SetMinLuminance sets the MinLuminance field's value.
-func (s *Hdr10Metadata) SetMinLuminance(v int64) *Hdr10Metadata {
-	s.MinLuminance = &v
-	return s
-}
-
-// SetRedPrimaryX sets the RedPrimaryX field's value.
-func (s *Hdr10Metadata) SetRedPrimaryX(v int64) *Hdr10Metadata {
-	s.RedPrimaryX = &v
-	return s
-}
-
-// SetRedPrimaryY sets the RedPrimaryY field's value.
-func (s *Hdr10Metadata) SetRedPrimaryY(v int64) *Hdr10Metadata {
-	s.RedPrimaryY = &v
-	return s
-}
-
-// SetWhitePointX sets the WhitePointX field's value.
-func (s *Hdr10Metadata) SetWhitePointX(v int64) *Hdr10Metadata {
-	s.WhitePointX = &v
-	return s
-}
-
-// SetWhitePointY sets the WhitePointY field's value.
-func (s *Hdr10Metadata) SetWhitePointY(v int64) *Hdr10Metadata {
-	s.WhitePointY = &v
-	return s
-}
-
 // Caption Language Mapping
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsCaptionLanguageMapping
 type HlsCaptionLanguageMapping struct {
@@ -5402,24 +3620,6 @@ func (s HlsCaptionLanguageMapping) String() string {
 // GoString returns the string representation
 func (s HlsCaptionLanguageMapping) GoString() string {
 	return s.String()
-}
-
-// SetCaptionChannel sets the CaptionChannel field's value.
-func (s *HlsCaptionLanguageMapping) SetCaptionChannel(v int64) *HlsCaptionLanguageMapping {
-	s.CaptionChannel = &v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *HlsCaptionLanguageMapping) SetLanguageCode(v LanguageCode) *HlsCaptionLanguageMapping {
-	s.LanguageCode = v
-	return s
-}
-
-// SetLanguageDescription sets the LanguageDescription field's value.
-func (s *HlsCaptionLanguageMapping) SetLanguageDescription(v string) *HlsCaptionLanguageMapping {
-	s.LanguageDescription = &v
-	return s
 }
 
 // Settings for HLS encryption
@@ -5459,42 +3659,6 @@ func (s HlsEncryptionSettings) String() string {
 // GoString returns the string representation
 func (s HlsEncryptionSettings) GoString() string {
 	return s.String()
-}
-
-// SetConstantInitializationVector sets the ConstantInitializationVector field's value.
-func (s *HlsEncryptionSettings) SetConstantInitializationVector(v string) *HlsEncryptionSettings {
-	s.ConstantInitializationVector = &v
-	return s
-}
-
-// SetEncryptionMethod sets the EncryptionMethod field's value.
-func (s *HlsEncryptionSettings) SetEncryptionMethod(v HlsEncryptionType) *HlsEncryptionSettings {
-	s.EncryptionMethod = v
-	return s
-}
-
-// SetInitializationVectorInManifest sets the InitializationVectorInManifest field's value.
-func (s *HlsEncryptionSettings) SetInitializationVectorInManifest(v HlsInitializationVectorInManifest) *HlsEncryptionSettings {
-	s.InitializationVectorInManifest = v
-	return s
-}
-
-// SetSpekeKeyProvider sets the SpekeKeyProvider field's value.
-func (s *HlsEncryptionSettings) SetSpekeKeyProvider(v *SpekeKeyProvider) *HlsEncryptionSettings {
-	s.SpekeKeyProvider = v
-	return s
-}
-
-// SetStaticKeyProvider sets the StaticKeyProvider field's value.
-func (s *HlsEncryptionSettings) SetStaticKeyProvider(v *StaticKeyProvider) *HlsEncryptionSettings {
-	s.StaticKeyProvider = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *HlsEncryptionSettings) SetType(v HlsKeyProviderType) *HlsEncryptionSettings {
-	s.Type = v
-	return s
 }
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
@@ -5609,138 +3773,6 @@ func (s HlsGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetAdMarkers sets the AdMarkers field's value.
-func (s *HlsGroupSettings) SetAdMarkers(v []HlsAdMarkers) *HlsGroupSettings {
-	s.AdMarkers = v
-	return s
-}
-
-// SetBaseUrl sets the BaseUrl field's value.
-func (s *HlsGroupSettings) SetBaseUrl(v string) *HlsGroupSettings {
-	s.BaseUrl = &v
-	return s
-}
-
-// SetCaptionLanguageMappings sets the CaptionLanguageMappings field's value.
-func (s *HlsGroupSettings) SetCaptionLanguageMappings(v []HlsCaptionLanguageMapping) *HlsGroupSettings {
-	s.CaptionLanguageMappings = v
-	return s
-}
-
-// SetCaptionLanguageSetting sets the CaptionLanguageSetting field's value.
-func (s *HlsGroupSettings) SetCaptionLanguageSetting(v HlsCaptionLanguageSetting) *HlsGroupSettings {
-	s.CaptionLanguageSetting = v
-	return s
-}
-
-// SetClientCache sets the ClientCache field's value.
-func (s *HlsGroupSettings) SetClientCache(v HlsClientCache) *HlsGroupSettings {
-	s.ClientCache = v
-	return s
-}
-
-// SetCodecSpecification sets the CodecSpecification field's value.
-func (s *HlsGroupSettings) SetCodecSpecification(v HlsCodecSpecification) *HlsGroupSettings {
-	s.CodecSpecification = v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *HlsGroupSettings) SetDestination(v string) *HlsGroupSettings {
-	s.Destination = &v
-	return s
-}
-
-// SetDirectoryStructure sets the DirectoryStructure field's value.
-func (s *HlsGroupSettings) SetDirectoryStructure(v HlsDirectoryStructure) *HlsGroupSettings {
-	s.DirectoryStructure = v
-	return s
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *HlsGroupSettings) SetEncryption(v *HlsEncryptionSettings) *HlsGroupSettings {
-	s.Encryption = v
-	return s
-}
-
-// SetManifestCompression sets the ManifestCompression field's value.
-func (s *HlsGroupSettings) SetManifestCompression(v HlsManifestCompression) *HlsGroupSettings {
-	s.ManifestCompression = v
-	return s
-}
-
-// SetManifestDurationFormat sets the ManifestDurationFormat field's value.
-func (s *HlsGroupSettings) SetManifestDurationFormat(v HlsManifestDurationFormat) *HlsGroupSettings {
-	s.ManifestDurationFormat = v
-	return s
-}
-
-// SetMinSegmentLength sets the MinSegmentLength field's value.
-func (s *HlsGroupSettings) SetMinSegmentLength(v int64) *HlsGroupSettings {
-	s.MinSegmentLength = &v
-	return s
-}
-
-// SetOutputSelection sets the OutputSelection field's value.
-func (s *HlsGroupSettings) SetOutputSelection(v HlsOutputSelection) *HlsGroupSettings {
-	s.OutputSelection = v
-	return s
-}
-
-// SetProgramDateTime sets the ProgramDateTime field's value.
-func (s *HlsGroupSettings) SetProgramDateTime(v HlsProgramDateTime) *HlsGroupSettings {
-	s.ProgramDateTime = v
-	return s
-}
-
-// SetProgramDateTimePeriod sets the ProgramDateTimePeriod field's value.
-func (s *HlsGroupSettings) SetProgramDateTimePeriod(v int64) *HlsGroupSettings {
-	s.ProgramDateTimePeriod = &v
-	return s
-}
-
-// SetSegmentControl sets the SegmentControl field's value.
-func (s *HlsGroupSettings) SetSegmentControl(v HlsSegmentControl) *HlsGroupSettings {
-	s.SegmentControl = v
-	return s
-}
-
-// SetSegmentLength sets the SegmentLength field's value.
-func (s *HlsGroupSettings) SetSegmentLength(v int64) *HlsGroupSettings {
-	s.SegmentLength = &v
-	return s
-}
-
-// SetSegmentsPerSubdirectory sets the SegmentsPerSubdirectory field's value.
-func (s *HlsGroupSettings) SetSegmentsPerSubdirectory(v int64) *HlsGroupSettings {
-	s.SegmentsPerSubdirectory = &v
-	return s
-}
-
-// SetStreamInfResolution sets the StreamInfResolution field's value.
-func (s *HlsGroupSettings) SetStreamInfResolution(v HlsStreamInfResolution) *HlsGroupSettings {
-	s.StreamInfResolution = v
-	return s
-}
-
-// SetTimedMetadataId3Frame sets the TimedMetadataId3Frame field's value.
-func (s *HlsGroupSettings) SetTimedMetadataId3Frame(v HlsTimedMetadataId3Frame) *HlsGroupSettings {
-	s.TimedMetadataId3Frame = v
-	return s
-}
-
-// SetTimedMetadataId3Period sets the TimedMetadataId3Period field's value.
-func (s *HlsGroupSettings) SetTimedMetadataId3Period(v int64) *HlsGroupSettings {
-	s.TimedMetadataId3Period = &v
-	return s
-}
-
-// SetTimestampDeltaMilliseconds sets the TimestampDeltaMilliseconds field's value.
-func (s *HlsGroupSettings) SetTimestampDeltaMilliseconds(v int64) *HlsGroupSettings {
-	s.TimestampDeltaMilliseconds = &v
-	return s
-}
-
 // Settings for HLS output groups
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsSettings
 type HlsSettings struct {
@@ -5784,36 +3816,6 @@ func (s HlsSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioGroupId sets the AudioGroupId field's value.
-func (s *HlsSettings) SetAudioGroupId(v string) *HlsSettings {
-	s.AudioGroupId = &v
-	return s
-}
-
-// SetAudioRenditionSets sets the AudioRenditionSets field's value.
-func (s *HlsSettings) SetAudioRenditionSets(v string) *HlsSettings {
-	s.AudioRenditionSets = &v
-	return s
-}
-
-// SetAudioTrackType sets the AudioTrackType field's value.
-func (s *HlsSettings) SetAudioTrackType(v HlsAudioTrackType) *HlsSettings {
-	s.AudioTrackType = v
-	return s
-}
-
-// SetIFrameOnlyManifest sets the IFrameOnlyManifest field's value.
-func (s *HlsSettings) SetIFrameOnlyManifest(v HlsIFrameOnlyManifest) *HlsSettings {
-	s.IFrameOnlyManifest = v
-	return s
-}
-
-// SetSegmentModifier sets the SegmentModifier field's value.
-func (s *HlsSettings) SetSegmentModifier(v string) *HlsSettings {
-	s.SegmentModifier = &v
-	return s
-}
-
 // To insert ID3 tags in your output, specify two values. Use ID3 tag (Id3)
 // to specify the base 64 encoded string and use Timecode (TimeCode) to specify
 // the time when the tag should be inserted. To insert multiple ID3 tags in
@@ -5839,18 +3841,6 @@ func (s Id3Insertion) GoString() string {
 	return s.String()
 }
 
-// SetId3 sets the Id3 field's value.
-func (s *Id3Insertion) SetId3(v string) *Id3Insertion {
-	s.Id3 = &v
-	return s
-}
-
-// SetTimecode sets the Timecode field's value.
-func (s *Id3Insertion) SetTimecode(v string) *Id3Insertion {
-	s.Timecode = &v
-	return s
-}
-
 // Enable the Image inserter (ImageInserter) feature to include a graphic overlay
 // on your video. Enable or disable this feature for each output individually.
 // This setting is disabled by default.
@@ -5871,12 +3861,6 @@ func (s ImageInserter) String() string {
 // GoString returns the string representation
 func (s ImageInserter) GoString() string {
 	return s.String()
-}
-
-// SetInsertableImages sets the InsertableImages field's value.
-func (s *ImageInserter) SetInsertableImages(v []InsertableImage) *ImageInserter {
-	s.InsertableImages = v
-	return s
 }
 
 // Specifies media input
@@ -5969,84 +3953,6 @@ func (s Input) GoString() string {
 	return s.String()
 }
 
-// SetAudioSelectorGroups sets the AudioSelectorGroups field's value.
-func (s *Input) SetAudioSelectorGroups(v map[string]AudioSelectorGroup) *Input {
-	s.AudioSelectorGroups = v
-	return s
-}
-
-// SetAudioSelectors sets the AudioSelectors field's value.
-func (s *Input) SetAudioSelectors(v map[string]AudioSelector) *Input {
-	s.AudioSelectors = v
-	return s
-}
-
-// SetCaptionSelectors sets the CaptionSelectors field's value.
-func (s *Input) SetCaptionSelectors(v map[string]CaptionSelector) *Input {
-	s.CaptionSelectors = v
-	return s
-}
-
-// SetDeblockFilter sets the DeblockFilter field's value.
-func (s *Input) SetDeblockFilter(v InputDeblockFilter) *Input {
-	s.DeblockFilter = v
-	return s
-}
-
-// SetDenoiseFilter sets the DenoiseFilter field's value.
-func (s *Input) SetDenoiseFilter(v InputDenoiseFilter) *Input {
-	s.DenoiseFilter = v
-	return s
-}
-
-// SetFileInput sets the FileInput field's value.
-func (s *Input) SetFileInput(v string) *Input {
-	s.FileInput = &v
-	return s
-}
-
-// SetFilterEnable sets the FilterEnable field's value.
-func (s *Input) SetFilterEnable(v InputFilterEnable) *Input {
-	s.FilterEnable = v
-	return s
-}
-
-// SetFilterStrength sets the FilterStrength field's value.
-func (s *Input) SetFilterStrength(v int64) *Input {
-	s.FilterStrength = &v
-	return s
-}
-
-// SetInputClippings sets the InputClippings field's value.
-func (s *Input) SetInputClippings(v []InputClipping) *Input {
-	s.InputClippings = v
-	return s
-}
-
-// SetProgramNumber sets the ProgramNumber field's value.
-func (s *Input) SetProgramNumber(v int64) *Input {
-	s.ProgramNumber = &v
-	return s
-}
-
-// SetPsiControl sets the PsiControl field's value.
-func (s *Input) SetPsiControl(v InputPsiControl) *Input {
-	s.PsiControl = v
-	return s
-}
-
-// SetTimecodeSource sets the TimecodeSource field's value.
-func (s *Input) SetTimecodeSource(v InputTimecodeSource) *Input {
-	s.TimecodeSource = v
-	return s
-}
-
-// SetVideoSelector sets the VideoSelector field's value.
-func (s *Input) SetVideoSelector(v *VideoSelector) *Input {
-	s.VideoSelector = v
-	return s
-}
-
 // Include one instance of (InputClipping) for each input clip.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputClipping
 type InputClipping struct {
@@ -6078,18 +3984,6 @@ func (s InputClipping) String() string {
 // GoString returns the string representation
 func (s InputClipping) GoString() string {
 	return s.String()
-}
-
-// SetEndTimecode sets the EndTimecode field's value.
-func (s *InputClipping) SetEndTimecode(v string) *InputClipping {
-	s.EndTimecode = &v
-	return s
-}
-
-// SetStartTimecode sets the StartTimecode field's value.
-func (s *InputClipping) SetStartTimecode(v string) *InputClipping {
-	s.StartTimecode = &v
-	return s
 }
 
 // Specified video input in a template.
@@ -6177,78 +4071,6 @@ func (s InputTemplate) GoString() string {
 	return s.String()
 }
 
-// SetAudioSelectorGroups sets the AudioSelectorGroups field's value.
-func (s *InputTemplate) SetAudioSelectorGroups(v map[string]AudioSelectorGroup) *InputTemplate {
-	s.AudioSelectorGroups = v
-	return s
-}
-
-// SetAudioSelectors sets the AudioSelectors field's value.
-func (s *InputTemplate) SetAudioSelectors(v map[string]AudioSelector) *InputTemplate {
-	s.AudioSelectors = v
-	return s
-}
-
-// SetCaptionSelectors sets the CaptionSelectors field's value.
-func (s *InputTemplate) SetCaptionSelectors(v map[string]CaptionSelector) *InputTemplate {
-	s.CaptionSelectors = v
-	return s
-}
-
-// SetDeblockFilter sets the DeblockFilter field's value.
-func (s *InputTemplate) SetDeblockFilter(v InputDeblockFilter) *InputTemplate {
-	s.DeblockFilter = v
-	return s
-}
-
-// SetDenoiseFilter sets the DenoiseFilter field's value.
-func (s *InputTemplate) SetDenoiseFilter(v InputDenoiseFilter) *InputTemplate {
-	s.DenoiseFilter = v
-	return s
-}
-
-// SetFilterEnable sets the FilterEnable field's value.
-func (s *InputTemplate) SetFilterEnable(v InputFilterEnable) *InputTemplate {
-	s.FilterEnable = v
-	return s
-}
-
-// SetFilterStrength sets the FilterStrength field's value.
-func (s *InputTemplate) SetFilterStrength(v int64) *InputTemplate {
-	s.FilterStrength = &v
-	return s
-}
-
-// SetInputClippings sets the InputClippings field's value.
-func (s *InputTemplate) SetInputClippings(v []InputClipping) *InputTemplate {
-	s.InputClippings = v
-	return s
-}
-
-// SetProgramNumber sets the ProgramNumber field's value.
-func (s *InputTemplate) SetProgramNumber(v int64) *InputTemplate {
-	s.ProgramNumber = &v
-	return s
-}
-
-// SetPsiControl sets the PsiControl field's value.
-func (s *InputTemplate) SetPsiControl(v InputPsiControl) *InputTemplate {
-	s.PsiControl = v
-	return s
-}
-
-// SetTimecodeSource sets the TimecodeSource field's value.
-func (s *InputTemplate) SetTimecodeSource(v InputTimecodeSource) *InputTemplate {
-	s.TimecodeSource = v
-	return s
-}
-
-// SetVideoSelector sets the VideoSelector field's value.
-func (s *InputTemplate) SetVideoSelector(v *VideoSelector) *InputTemplate {
-	s.VideoSelector = v
-	return s
-}
-
 // Settings for Insertable Image
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InsertableImage
 type InsertableImage struct {
@@ -6316,72 +4138,6 @@ func (s InsertableImage) GoString() string {
 	return s.String()
 }
 
-// SetDuration sets the Duration field's value.
-func (s *InsertableImage) SetDuration(v int64) *InsertableImage {
-	s.Duration = &v
-	return s
-}
-
-// SetFadeIn sets the FadeIn field's value.
-func (s *InsertableImage) SetFadeIn(v int64) *InsertableImage {
-	s.FadeIn = &v
-	return s
-}
-
-// SetFadeOut sets the FadeOut field's value.
-func (s *InsertableImage) SetFadeOut(v int64) *InsertableImage {
-	s.FadeOut = &v
-	return s
-}
-
-// SetHeight sets the Height field's value.
-func (s *InsertableImage) SetHeight(v int64) *InsertableImage {
-	s.Height = &v
-	return s
-}
-
-// SetImageInserterInput sets the ImageInserterInput field's value.
-func (s *InsertableImage) SetImageInserterInput(v string) *InsertableImage {
-	s.ImageInserterInput = &v
-	return s
-}
-
-// SetImageX sets the ImageX field's value.
-func (s *InsertableImage) SetImageX(v int64) *InsertableImage {
-	s.ImageX = &v
-	return s
-}
-
-// SetImageY sets the ImageY field's value.
-func (s *InsertableImage) SetImageY(v int64) *InsertableImage {
-	s.ImageY = &v
-	return s
-}
-
-// SetLayer sets the Layer field's value.
-func (s *InsertableImage) SetLayer(v int64) *InsertableImage {
-	s.Layer = &v
-	return s
-}
-
-// SetOpacity sets the Opacity field's value.
-func (s *InsertableImage) SetOpacity(v int64) *InsertableImage {
-	s.Opacity = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *InsertableImage) SetStartTime(v string) *InsertableImage {
-	s.StartTime = &v
-	return s
-}
-
-// SetWidth sets the Width field's value.
-func (s *InsertableImage) SetWidth(v int64) *InsertableImage {
-	s.Width = &v
-	return s
-}
-
 // Each job converts an input file into an output file or files. For more information,
 // see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Job
@@ -6445,84 +4201,6 @@ func (s Job) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Job) SetArn(v string) *Job {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Job) SetCreatedAt(v time.Time) *Job {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *Job) SetErrorCode(v int64) *Job {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *Job) SetErrorMessage(v string) *Job {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Job) SetId(v string) *Job {
-	s.Id = &v
-	return s
-}
-
-// SetJobTemplate sets the JobTemplate field's value.
-func (s *Job) SetJobTemplate(v string) *Job {
-	s.JobTemplate = &v
-	return s
-}
-
-// SetOutputGroupDetails sets the OutputGroupDetails field's value.
-func (s *Job) SetOutputGroupDetails(v []OutputGroupDetail) *Job {
-	s.OutputGroupDetails = v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *Job) SetQueue(v string) *Job {
-	s.Queue = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *Job) SetRole(v string) *Job {
-	s.Role = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *Job) SetSettings(v *JobSettings) *Job {
-	s.Settings = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Job) SetStatus(v JobStatus) *Job {
-	s.Status = v
-	return s
-}
-
-// SetTiming sets the Timing field's value.
-func (s *Job) SetTiming(v *Timing) *Job {
-	s.Timing = v
-	return s
-}
-
-// SetUserMetadata sets the UserMetadata field's value.
-func (s *Job) SetUserMetadata(v map[string]string) *Job {
-	s.UserMetadata = v
-	return s
-}
-
 // JobSettings contains all the transcode settings for a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobSettings
 type JobSettings struct {
@@ -6575,48 +4253,6 @@ func (s JobSettings) GoString() string {
 	return s.String()
 }
 
-// SetAdAvailOffset sets the AdAvailOffset field's value.
-func (s *JobSettings) SetAdAvailOffset(v int64) *JobSettings {
-	s.AdAvailOffset = &v
-	return s
-}
-
-// SetAvailBlanking sets the AvailBlanking field's value.
-func (s *JobSettings) SetAvailBlanking(v *AvailBlanking) *JobSettings {
-	s.AvailBlanking = v
-	return s
-}
-
-// SetInputs sets the Inputs field's value.
-func (s *JobSettings) SetInputs(v []Input) *JobSettings {
-	s.Inputs = v
-	return s
-}
-
-// SetNielsenConfiguration sets the NielsenConfiguration field's value.
-func (s *JobSettings) SetNielsenConfiguration(v *NielsenConfiguration) *JobSettings {
-	s.NielsenConfiguration = v
-	return s
-}
-
-// SetOutputGroups sets the OutputGroups field's value.
-func (s *JobSettings) SetOutputGroups(v []OutputGroup) *JobSettings {
-	s.OutputGroups = v
-	return s
-}
-
-// SetTimecodeConfig sets the TimecodeConfig field's value.
-func (s *JobSettings) SetTimecodeConfig(v *TimecodeConfig) *JobSettings {
-	s.TimecodeConfig = v
-	return s
-}
-
-// SetTimedMetadataInsertion sets the TimedMetadataInsertion field's value.
-func (s *JobSettings) SetTimedMetadataInsertion(v *TimedMetadataInsertion) *JobSettings {
-	s.TimedMetadataInsertion = v
-	return s
-}
-
 // A job template is a pre-made set of encoding instructions that you can use
 // to quickly create a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobTemplate
@@ -6663,60 +4299,6 @@ func (s JobTemplate) String() string {
 // GoString returns the string representation
 func (s JobTemplate) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *JobTemplate) SetArn(v string) *JobTemplate {
-	s.Arn = &v
-	return s
-}
-
-// SetCategory sets the Category field's value.
-func (s *JobTemplate) SetCategory(v string) *JobTemplate {
-	s.Category = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *JobTemplate) SetCreatedAt(v time.Time) *JobTemplate {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *JobTemplate) SetDescription(v string) *JobTemplate {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdated sets the LastUpdated field's value.
-func (s *JobTemplate) SetLastUpdated(v time.Time) *JobTemplate {
-	s.LastUpdated = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *JobTemplate) SetName(v string) *JobTemplate {
-	s.Name = &v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *JobTemplate) SetQueue(v string) *JobTemplate {
-	s.Queue = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *JobTemplate) SetSettings(v *JobTemplateSettings) *JobTemplate {
-	s.Settings = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *JobTemplate) SetType(v Type) *JobTemplate {
-	s.Type = v
-	return s
 }
 
 // JobTemplateSettings contains all the transcode settings saved in the template
@@ -6772,48 +4354,6 @@ func (s JobTemplateSettings) GoString() string {
 	return s.String()
 }
 
-// SetAdAvailOffset sets the AdAvailOffset field's value.
-func (s *JobTemplateSettings) SetAdAvailOffset(v int64) *JobTemplateSettings {
-	s.AdAvailOffset = &v
-	return s
-}
-
-// SetAvailBlanking sets the AvailBlanking field's value.
-func (s *JobTemplateSettings) SetAvailBlanking(v *AvailBlanking) *JobTemplateSettings {
-	s.AvailBlanking = v
-	return s
-}
-
-// SetInputs sets the Inputs field's value.
-func (s *JobTemplateSettings) SetInputs(v []InputTemplate) *JobTemplateSettings {
-	s.Inputs = v
-	return s
-}
-
-// SetNielsenConfiguration sets the NielsenConfiguration field's value.
-func (s *JobTemplateSettings) SetNielsenConfiguration(v *NielsenConfiguration) *JobTemplateSettings {
-	s.NielsenConfiguration = v
-	return s
-}
-
-// SetOutputGroups sets the OutputGroups field's value.
-func (s *JobTemplateSettings) SetOutputGroups(v []OutputGroup) *JobTemplateSettings {
-	s.OutputGroups = v
-	return s
-}
-
-// SetTimecodeConfig sets the TimecodeConfig field's value.
-func (s *JobTemplateSettings) SetTimecodeConfig(v *TimecodeConfig) *JobTemplateSettings {
-	s.TimecodeConfig = v
-	return s
-}
-
-// SetTimedMetadataInsertion sets the TimedMetadataInsertion field's value.
-func (s *JobTemplateSettings) SetTimedMetadataInsertion(v *TimedMetadataInsertion) *JobTemplateSettings {
-	s.TimedMetadataInsertion = v
-	return s
-}
-
 // You can send list job templates requests with an empty body. Optionally,
 // you can filter the response by category by specifying it in your request
 // body. You can also optionally specify the maximum number, up to twenty, of
@@ -6854,36 +4394,6 @@ func (s ListJobTemplatesInput) GoString() string {
 	return s.String()
 }
 
-// SetCategory sets the Category field's value.
-func (s *ListJobTemplatesInput) SetCategory(v string) *ListJobTemplatesInput {
-	s.Category = &v
-	return s
-}
-
-// SetListBy sets the ListBy field's value.
-func (s *ListJobTemplatesInput) SetListBy(v JobTemplateListBy) *ListJobTemplatesInput {
-	s.ListBy = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobTemplatesInput) SetMaxResults(v int64) *ListJobTemplatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobTemplatesInput) SetNextToken(v string) *ListJobTemplatesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *ListJobTemplatesInput) SetOrder(v Order) *ListJobTemplatesInput {
-	s.Order = v
-	return s
-}
-
 // Successful list job templates requests return a JSON array of job templates.
 // If you do not specify how they are ordered, you will receive them in alphabetical
 // order by name.
@@ -6913,18 +4423,6 @@ func (s ListJobTemplatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobTemplatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobTemplates sets the JobTemplates field's value.
-func (s *ListJobTemplatesOutput) SetJobTemplates(v []JobTemplate) *ListJobTemplatesOutput {
-	s.JobTemplates = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobTemplatesOutput) SetNextToken(v string) *ListJobTemplatesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // You can send list jobs requests with an empty body. Optionally, you can filter
@@ -6963,36 +4461,6 @@ func (s ListJobsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobsInput) SetMaxResults(v int64) *ListJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *ListJobsInput) SetOrder(v Order) *ListJobsInput {
-	s.Order = v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *ListJobsInput) SetQueue(v string) *ListJobsInput {
-	s.Queue = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListJobsInput) SetStatus(v JobStatus) *ListJobsInput {
-	s.Status = v
-	return s
-}
-
 // Successful list jobs requests return a JSON array of jobs. If you do not
 // specify how they are ordered, you will receive the most recently created
 // first.
@@ -7022,18 +4490,6 @@ func (s ListJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobs sets the Jobs field's value.
-func (s *ListJobsOutput) SetJobs(v []Job) *ListJobsOutput {
-	s.Jobs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsOutput) SetNextToken(v string) *ListJobsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // You can send list presets requests with an empty body. Optionally, you can
@@ -7075,36 +4531,6 @@ func (s ListPresetsInput) GoString() string {
 	return s.String()
 }
 
-// SetCategory sets the Category field's value.
-func (s *ListPresetsInput) SetCategory(v string) *ListPresetsInput {
-	s.Category = &v
-	return s
-}
-
-// SetListBy sets the ListBy field's value.
-func (s *ListPresetsInput) SetListBy(v PresetListBy) *ListPresetsInput {
-	s.ListBy = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPresetsInput) SetMaxResults(v int64) *ListPresetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPresetsInput) SetNextToken(v string) *ListPresetsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *ListPresetsInput) SetOrder(v Order) *ListPresetsInput {
-	s.Order = v
-	return s
-}
-
 // Successful list presets requests return a JSON array of presets. If you do
 // not specify how they are ordered, you will receive them alphabetically by
 // name.
@@ -7134,18 +4560,6 @@ func (s ListPresetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPresetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPresetsOutput) SetNextToken(v string) *ListPresetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPresets sets the Presets field's value.
-func (s *ListPresetsOutput) SetPresets(v []Preset) *ListPresetsOutput {
-	s.Presets = v
-	return s
 }
 
 // You can send list queues requests with an empty body. You can optionally
@@ -7181,30 +4595,6 @@ func (s ListQueuesInput) GoString() string {
 	return s.String()
 }
 
-// SetListBy sets the ListBy field's value.
-func (s *ListQueuesInput) SetListBy(v QueueListBy) *ListQueuesInput {
-	s.ListBy = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListQueuesInput) SetMaxResults(v int64) *ListQueuesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQueuesInput) SetNextToken(v string) *ListQueuesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *ListQueuesInput) SetOrder(v Order) *ListQueuesInput {
-	s.Order = v
-	return s
-}
-
 // Successful list queues return a JSON array of queues. If you do not specify
 // how they are ordered, you will receive them alphabetically by name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueuesResponse
@@ -7233,18 +4623,6 @@ func (s ListQueuesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListQueuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQueuesOutput) SetNextToken(v string) *ListQueuesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQueues sets the Queues field's value.
-func (s *ListQueuesOutput) SetQueues(v []Queue) *ListQueuesOutput {
-	s.Queues = v
-	return s
 }
 
 // Settings for M2TS Container.
@@ -7416,198 +4794,6 @@ func (s M2tsSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioBufferModel sets the AudioBufferModel field's value.
-func (s *M2tsSettings) SetAudioBufferModel(v M2tsAudioBufferModel) *M2tsSettings {
-	s.AudioBufferModel = v
-	return s
-}
-
-// SetAudioFramesPerPes sets the AudioFramesPerPes field's value.
-func (s *M2tsSettings) SetAudioFramesPerPes(v int64) *M2tsSettings {
-	s.AudioFramesPerPes = &v
-	return s
-}
-
-// SetAudioPids sets the AudioPids field's value.
-func (s *M2tsSettings) SetAudioPids(v []int64) *M2tsSettings {
-	s.AudioPids = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *M2tsSettings) SetBitrate(v int64) *M2tsSettings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBufferModel sets the BufferModel field's value.
-func (s *M2tsSettings) SetBufferModel(v M2tsBufferModel) *M2tsSettings {
-	s.BufferModel = v
-	return s
-}
-
-// SetDvbNitSettings sets the DvbNitSettings field's value.
-func (s *M2tsSettings) SetDvbNitSettings(v *DvbNitSettings) *M2tsSettings {
-	s.DvbNitSettings = v
-	return s
-}
-
-// SetDvbSdtSettings sets the DvbSdtSettings field's value.
-func (s *M2tsSettings) SetDvbSdtSettings(v *DvbSdtSettings) *M2tsSettings {
-	s.DvbSdtSettings = v
-	return s
-}
-
-// SetDvbSubPids sets the DvbSubPids field's value.
-func (s *M2tsSettings) SetDvbSubPids(v []int64) *M2tsSettings {
-	s.DvbSubPids = v
-	return s
-}
-
-// SetDvbTdtSettings sets the DvbTdtSettings field's value.
-func (s *M2tsSettings) SetDvbTdtSettings(v *DvbTdtSettings) *M2tsSettings {
-	s.DvbTdtSettings = v
-	return s
-}
-
-// SetDvbTeletextPid sets the DvbTeletextPid field's value.
-func (s *M2tsSettings) SetDvbTeletextPid(v int64) *M2tsSettings {
-	s.DvbTeletextPid = &v
-	return s
-}
-
-// SetEbpAudioInterval sets the EbpAudioInterval field's value.
-func (s *M2tsSettings) SetEbpAudioInterval(v M2tsEbpAudioInterval) *M2tsSettings {
-	s.EbpAudioInterval = v
-	return s
-}
-
-// SetEbpPlacement sets the EbpPlacement field's value.
-func (s *M2tsSettings) SetEbpPlacement(v M2tsEbpPlacement) *M2tsSettings {
-	s.EbpPlacement = v
-	return s
-}
-
-// SetEsRateInPes sets the EsRateInPes field's value.
-func (s *M2tsSettings) SetEsRateInPes(v M2tsEsRateInPes) *M2tsSettings {
-	s.EsRateInPes = v
-	return s
-}
-
-// SetFragmentTime sets the FragmentTime field's value.
-func (s *M2tsSettings) SetFragmentTime(v float64) *M2tsSettings {
-	s.FragmentTime = &v
-	return s
-}
-
-// SetMaxPcrInterval sets the MaxPcrInterval field's value.
-func (s *M2tsSettings) SetMaxPcrInterval(v int64) *M2tsSettings {
-	s.MaxPcrInterval = &v
-	return s
-}
-
-// SetMinEbpInterval sets the MinEbpInterval field's value.
-func (s *M2tsSettings) SetMinEbpInterval(v int64) *M2tsSettings {
-	s.MinEbpInterval = &v
-	return s
-}
-
-// SetNullPacketBitrate sets the NullPacketBitrate field's value.
-func (s *M2tsSettings) SetNullPacketBitrate(v float64) *M2tsSettings {
-	s.NullPacketBitrate = &v
-	return s
-}
-
-// SetPatInterval sets the PatInterval field's value.
-func (s *M2tsSettings) SetPatInterval(v int64) *M2tsSettings {
-	s.PatInterval = &v
-	return s
-}
-
-// SetPcrControl sets the PcrControl field's value.
-func (s *M2tsSettings) SetPcrControl(v M2tsPcrControl) *M2tsSettings {
-	s.PcrControl = v
-	return s
-}
-
-// SetPcrPid sets the PcrPid field's value.
-func (s *M2tsSettings) SetPcrPid(v int64) *M2tsSettings {
-	s.PcrPid = &v
-	return s
-}
-
-// SetPmtInterval sets the PmtInterval field's value.
-func (s *M2tsSettings) SetPmtInterval(v int64) *M2tsSettings {
-	s.PmtInterval = &v
-	return s
-}
-
-// SetPmtPid sets the PmtPid field's value.
-func (s *M2tsSettings) SetPmtPid(v int64) *M2tsSettings {
-	s.PmtPid = &v
-	return s
-}
-
-// SetPrivateMetadataPid sets the PrivateMetadataPid field's value.
-func (s *M2tsSettings) SetPrivateMetadataPid(v int64) *M2tsSettings {
-	s.PrivateMetadataPid = &v
-	return s
-}
-
-// SetProgramNumber sets the ProgramNumber field's value.
-func (s *M2tsSettings) SetProgramNumber(v int64) *M2tsSettings {
-	s.ProgramNumber = &v
-	return s
-}
-
-// SetRateMode sets the RateMode field's value.
-func (s *M2tsSettings) SetRateMode(v M2tsRateMode) *M2tsSettings {
-	s.RateMode = v
-	return s
-}
-
-// SetScte35Pid sets the Scte35Pid field's value.
-func (s *M2tsSettings) SetScte35Pid(v int64) *M2tsSettings {
-	s.Scte35Pid = &v
-	return s
-}
-
-// SetScte35Source sets the Scte35Source field's value.
-func (s *M2tsSettings) SetScte35Source(v M2tsScte35Source) *M2tsSettings {
-	s.Scte35Source = v
-	return s
-}
-
-// SetSegmentationMarkers sets the SegmentationMarkers field's value.
-func (s *M2tsSettings) SetSegmentationMarkers(v M2tsSegmentationMarkers) *M2tsSettings {
-	s.SegmentationMarkers = v
-	return s
-}
-
-// SetSegmentationStyle sets the SegmentationStyle field's value.
-func (s *M2tsSettings) SetSegmentationStyle(v M2tsSegmentationStyle) *M2tsSettings {
-	s.SegmentationStyle = v
-	return s
-}
-
-// SetSegmentationTime sets the SegmentationTime field's value.
-func (s *M2tsSettings) SetSegmentationTime(v float64) *M2tsSettings {
-	s.SegmentationTime = &v
-	return s
-}
-
-// SetTransportStreamId sets the TransportStreamId field's value.
-func (s *M2tsSettings) SetTransportStreamId(v int64) *M2tsSettings {
-	s.TransportStreamId = &v
-	return s
-}
-
-// SetVideoPid sets the VideoPid field's value.
-func (s *M2tsSettings) SetVideoPid(v int64) *M2tsSettings {
-	s.VideoPid = &v
-	return s
-}
-
 // Settings for TS segments in HLS
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M3u8Settings
 type M3u8Settings struct {
@@ -7684,96 +4870,6 @@ func (s M3u8Settings) GoString() string {
 	return s.String()
 }
 
-// SetAudioFramesPerPes sets the AudioFramesPerPes field's value.
-func (s *M3u8Settings) SetAudioFramesPerPes(v int64) *M3u8Settings {
-	s.AudioFramesPerPes = &v
-	return s
-}
-
-// SetAudioPids sets the AudioPids field's value.
-func (s *M3u8Settings) SetAudioPids(v []int64) *M3u8Settings {
-	s.AudioPids = v
-	return s
-}
-
-// SetPatInterval sets the PatInterval field's value.
-func (s *M3u8Settings) SetPatInterval(v int64) *M3u8Settings {
-	s.PatInterval = &v
-	return s
-}
-
-// SetPcrControl sets the PcrControl field's value.
-func (s *M3u8Settings) SetPcrControl(v M3u8PcrControl) *M3u8Settings {
-	s.PcrControl = v
-	return s
-}
-
-// SetPcrPid sets the PcrPid field's value.
-func (s *M3u8Settings) SetPcrPid(v int64) *M3u8Settings {
-	s.PcrPid = &v
-	return s
-}
-
-// SetPmtInterval sets the PmtInterval field's value.
-func (s *M3u8Settings) SetPmtInterval(v int64) *M3u8Settings {
-	s.PmtInterval = &v
-	return s
-}
-
-// SetPmtPid sets the PmtPid field's value.
-func (s *M3u8Settings) SetPmtPid(v int64) *M3u8Settings {
-	s.PmtPid = &v
-	return s
-}
-
-// SetPrivateMetadataPid sets the PrivateMetadataPid field's value.
-func (s *M3u8Settings) SetPrivateMetadataPid(v int64) *M3u8Settings {
-	s.PrivateMetadataPid = &v
-	return s
-}
-
-// SetProgramNumber sets the ProgramNumber field's value.
-func (s *M3u8Settings) SetProgramNumber(v int64) *M3u8Settings {
-	s.ProgramNumber = &v
-	return s
-}
-
-// SetScte35Pid sets the Scte35Pid field's value.
-func (s *M3u8Settings) SetScte35Pid(v int64) *M3u8Settings {
-	s.Scte35Pid = &v
-	return s
-}
-
-// SetScte35Source sets the Scte35Source field's value.
-func (s *M3u8Settings) SetScte35Source(v M3u8Scte35Source) *M3u8Settings {
-	s.Scte35Source = v
-	return s
-}
-
-// SetTimedMetadata sets the TimedMetadata field's value.
-func (s *M3u8Settings) SetTimedMetadata(v TimedMetadata) *M3u8Settings {
-	s.TimedMetadata = v
-	return s
-}
-
-// SetTimedMetadataPid sets the TimedMetadataPid field's value.
-func (s *M3u8Settings) SetTimedMetadataPid(v int64) *M3u8Settings {
-	s.TimedMetadataPid = &v
-	return s
-}
-
-// SetTransportStreamId sets the TransportStreamId field's value.
-func (s *M3u8Settings) SetTransportStreamId(v int64) *M3u8Settings {
-	s.TransportStreamId = &v
-	return s
-}
-
-// SetVideoPid sets the VideoPid field's value.
-func (s *M3u8Settings) SetVideoPid(v int64) *M3u8Settings {
-	s.VideoPid = &v
-	return s
-}
-
 // Settings for MOV Container.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MovSettings
 type MovSettings struct {
@@ -7813,36 +4909,6 @@ func (s MovSettings) GoString() string {
 	return s.String()
 }
 
-// SetClapAtom sets the ClapAtom field's value.
-func (s *MovSettings) SetClapAtom(v MovClapAtom) *MovSettings {
-	s.ClapAtom = v
-	return s
-}
-
-// SetCslgAtom sets the CslgAtom field's value.
-func (s *MovSettings) SetCslgAtom(v MovCslgAtom) *MovSettings {
-	s.CslgAtom = v
-	return s
-}
-
-// SetMpeg2FourCCControl sets the Mpeg2FourCCControl field's value.
-func (s *MovSettings) SetMpeg2FourCCControl(v MovMpeg2FourCCControl) *MovSettings {
-	s.Mpeg2FourCCControl = v
-	return s
-}
-
-// SetPaddingControl sets the PaddingControl field's value.
-func (s *MovSettings) SetPaddingControl(v MovPaddingControl) *MovSettings {
-	s.PaddingControl = v
-	return s
-}
-
-// SetReference sets the Reference field's value.
-func (s *MovSettings) SetReference(v MovReference) *MovSettings {
-	s.Reference = v
-	return s
-}
-
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value MP2.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp2Settings
@@ -7869,24 +4935,6 @@ func (s Mp2Settings) String() string {
 // GoString returns the string representation
 func (s Mp2Settings) GoString() string {
 	return s.String()
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *Mp2Settings) SetBitrate(v int64) *Mp2Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetChannels sets the Channels field's value.
-func (s *Mp2Settings) SetChannels(v int64) *Mp2Settings {
-	s.Channels = &v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *Mp2Settings) SetSampleRate(v int64) *Mp2Settings {
-	s.SampleRate = &v
-	return s
 }
 
 // Settings for MP4 Container
@@ -7921,30 +4969,6 @@ func (s Mp4Settings) String() string {
 // GoString returns the string representation
 func (s Mp4Settings) GoString() string {
 	return s.String()
-}
-
-// SetCslgAtom sets the CslgAtom field's value.
-func (s *Mp4Settings) SetCslgAtom(v Mp4CslgAtom) *Mp4Settings {
-	s.CslgAtom = v
-	return s
-}
-
-// SetFreeSpaceBox sets the FreeSpaceBox field's value.
-func (s *Mp4Settings) SetFreeSpaceBox(v Mp4FreeSpaceBox) *Mp4Settings {
-	s.FreeSpaceBox = v
-	return s
-}
-
-// SetMoovPlacement sets the MoovPlacement field's value.
-func (s *Mp4Settings) SetMoovPlacement(v Mp4MoovPlacement) *Mp4Settings {
-	s.MoovPlacement = v
-	return s
-}
-
-// SetMp4MajorBrand sets the Mp4MajorBrand field's value.
-func (s *Mp4Settings) SetMp4MajorBrand(v string) *Mp4Settings {
-	s.Mp4MajorBrand = &v
-	return s
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
@@ -8098,186 +5122,6 @@ func (s Mpeg2Settings) GoString() string {
 	return s.String()
 }
 
-// SetAdaptiveQuantization sets the AdaptiveQuantization field's value.
-func (s *Mpeg2Settings) SetAdaptiveQuantization(v Mpeg2AdaptiveQuantization) *Mpeg2Settings {
-	s.AdaptiveQuantization = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *Mpeg2Settings) SetBitrate(v int64) *Mpeg2Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetCodecLevel sets the CodecLevel field's value.
-func (s *Mpeg2Settings) SetCodecLevel(v Mpeg2CodecLevel) *Mpeg2Settings {
-	s.CodecLevel = v
-	return s
-}
-
-// SetCodecProfile sets the CodecProfile field's value.
-func (s *Mpeg2Settings) SetCodecProfile(v Mpeg2CodecProfile) *Mpeg2Settings {
-	s.CodecProfile = v
-	return s
-}
-
-// SetFramerateControl sets the FramerateControl field's value.
-func (s *Mpeg2Settings) SetFramerateControl(v Mpeg2FramerateControl) *Mpeg2Settings {
-	s.FramerateControl = v
-	return s
-}
-
-// SetFramerateConversionAlgorithm sets the FramerateConversionAlgorithm field's value.
-func (s *Mpeg2Settings) SetFramerateConversionAlgorithm(v Mpeg2FramerateConversionAlgorithm) *Mpeg2Settings {
-	s.FramerateConversionAlgorithm = v
-	return s
-}
-
-// SetFramerateDenominator sets the FramerateDenominator field's value.
-func (s *Mpeg2Settings) SetFramerateDenominator(v int64) *Mpeg2Settings {
-	s.FramerateDenominator = &v
-	return s
-}
-
-// SetFramerateNumerator sets the FramerateNumerator field's value.
-func (s *Mpeg2Settings) SetFramerateNumerator(v int64) *Mpeg2Settings {
-	s.FramerateNumerator = &v
-	return s
-}
-
-// SetGopClosedCadence sets the GopClosedCadence field's value.
-func (s *Mpeg2Settings) SetGopClosedCadence(v int64) *Mpeg2Settings {
-	s.GopClosedCadence = &v
-	return s
-}
-
-// SetGopSize sets the GopSize field's value.
-func (s *Mpeg2Settings) SetGopSize(v float64) *Mpeg2Settings {
-	s.GopSize = &v
-	return s
-}
-
-// SetGopSizeUnits sets the GopSizeUnits field's value.
-func (s *Mpeg2Settings) SetGopSizeUnits(v Mpeg2GopSizeUnits) *Mpeg2Settings {
-	s.GopSizeUnits = v
-	return s
-}
-
-// SetHrdBufferInitialFillPercentage sets the HrdBufferInitialFillPercentage field's value.
-func (s *Mpeg2Settings) SetHrdBufferInitialFillPercentage(v int64) *Mpeg2Settings {
-	s.HrdBufferInitialFillPercentage = &v
-	return s
-}
-
-// SetHrdBufferSize sets the HrdBufferSize field's value.
-func (s *Mpeg2Settings) SetHrdBufferSize(v int64) *Mpeg2Settings {
-	s.HrdBufferSize = &v
-	return s
-}
-
-// SetInterlaceMode sets the InterlaceMode field's value.
-func (s *Mpeg2Settings) SetInterlaceMode(v Mpeg2InterlaceMode) *Mpeg2Settings {
-	s.InterlaceMode = v
-	return s
-}
-
-// SetIntraDcPrecision sets the IntraDcPrecision field's value.
-func (s *Mpeg2Settings) SetIntraDcPrecision(v Mpeg2IntraDcPrecision) *Mpeg2Settings {
-	s.IntraDcPrecision = v
-	return s
-}
-
-// SetMaxBitrate sets the MaxBitrate field's value.
-func (s *Mpeg2Settings) SetMaxBitrate(v int64) *Mpeg2Settings {
-	s.MaxBitrate = &v
-	return s
-}
-
-// SetMinIInterval sets the MinIInterval field's value.
-func (s *Mpeg2Settings) SetMinIInterval(v int64) *Mpeg2Settings {
-	s.MinIInterval = &v
-	return s
-}
-
-// SetNumberBFramesBetweenReferenceFrames sets the NumberBFramesBetweenReferenceFrames field's value.
-func (s *Mpeg2Settings) SetNumberBFramesBetweenReferenceFrames(v int64) *Mpeg2Settings {
-	s.NumberBFramesBetweenReferenceFrames = &v
-	return s
-}
-
-// SetParControl sets the ParControl field's value.
-func (s *Mpeg2Settings) SetParControl(v Mpeg2ParControl) *Mpeg2Settings {
-	s.ParControl = v
-	return s
-}
-
-// SetParDenominator sets the ParDenominator field's value.
-func (s *Mpeg2Settings) SetParDenominator(v int64) *Mpeg2Settings {
-	s.ParDenominator = &v
-	return s
-}
-
-// SetParNumerator sets the ParNumerator field's value.
-func (s *Mpeg2Settings) SetParNumerator(v int64) *Mpeg2Settings {
-	s.ParNumerator = &v
-	return s
-}
-
-// SetQualityTuningLevel sets the QualityTuningLevel field's value.
-func (s *Mpeg2Settings) SetQualityTuningLevel(v Mpeg2QualityTuningLevel) *Mpeg2Settings {
-	s.QualityTuningLevel = v
-	return s
-}
-
-// SetRateControlMode sets the RateControlMode field's value.
-func (s *Mpeg2Settings) SetRateControlMode(v Mpeg2RateControlMode) *Mpeg2Settings {
-	s.RateControlMode = v
-	return s
-}
-
-// SetSceneChangeDetect sets the SceneChangeDetect field's value.
-func (s *Mpeg2Settings) SetSceneChangeDetect(v Mpeg2SceneChangeDetect) *Mpeg2Settings {
-	s.SceneChangeDetect = v
-	return s
-}
-
-// SetSlowPal sets the SlowPal field's value.
-func (s *Mpeg2Settings) SetSlowPal(v Mpeg2SlowPal) *Mpeg2Settings {
-	s.SlowPal = v
-	return s
-}
-
-// SetSoftness sets the Softness field's value.
-func (s *Mpeg2Settings) SetSoftness(v int64) *Mpeg2Settings {
-	s.Softness = &v
-	return s
-}
-
-// SetSpatialAdaptiveQuantization sets the SpatialAdaptiveQuantization field's value.
-func (s *Mpeg2Settings) SetSpatialAdaptiveQuantization(v Mpeg2SpatialAdaptiveQuantization) *Mpeg2Settings {
-	s.SpatialAdaptiveQuantization = v
-	return s
-}
-
-// SetSyntax sets the Syntax field's value.
-func (s *Mpeg2Settings) SetSyntax(v Mpeg2Syntax) *Mpeg2Settings {
-	s.Syntax = v
-	return s
-}
-
-// SetTelecine sets the Telecine field's value.
-func (s *Mpeg2Settings) SetTelecine(v Mpeg2Telecine) *Mpeg2Settings {
-	s.Telecine = v
-	return s
-}
-
-// SetTemporalAdaptiveQuantization sets the TemporalAdaptiveQuantization field's value.
-func (s *Mpeg2Settings) SetTemporalAdaptiveQuantization(v Mpeg2TemporalAdaptiveQuantization) *Mpeg2Settings {
-	s.TemporalAdaptiveQuantization = v
-	return s
-}
-
 // If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify
 // the value SpekeKeyProvider.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MsSmoothEncryptionSettings
@@ -8296,12 +5140,6 @@ func (s MsSmoothEncryptionSettings) String() string {
 // GoString returns the string representation
 func (s MsSmoothEncryptionSettings) GoString() string {
 	return s.String()
-}
-
-// SetSpekeKeyProvider sets the SpekeKeyProvider field's value.
-func (s *MsSmoothEncryptionSettings) SetSpekeKeyProvider(v *SpekeKeyProvider) *MsSmoothEncryptionSettings {
-	s.SpekeKeyProvider = v
-	return s
 }
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
@@ -8344,36 +5182,6 @@ func (s MsSmoothGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioDeduplication sets the AudioDeduplication field's value.
-func (s *MsSmoothGroupSettings) SetAudioDeduplication(v MsSmoothAudioDeduplication) *MsSmoothGroupSettings {
-	s.AudioDeduplication = v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *MsSmoothGroupSettings) SetDestination(v string) *MsSmoothGroupSettings {
-	s.Destination = &v
-	return s
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *MsSmoothGroupSettings) SetEncryption(v *MsSmoothEncryptionSettings) *MsSmoothGroupSettings {
-	s.Encryption = v
-	return s
-}
-
-// SetFragmentLength sets the FragmentLength field's value.
-func (s *MsSmoothGroupSettings) SetFragmentLength(v int64) *MsSmoothGroupSettings {
-	s.FragmentLength = &v
-	return s
-}
-
-// SetManifestEncoding sets the ManifestEncoding field's value.
-func (s *MsSmoothGroupSettings) SetManifestEncoding(v MsSmoothManifestEncoding) *MsSmoothGroupSettings {
-	s.ManifestEncoding = v
-	return s
-}
-
 // Settings for Nielsen Configuration
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NielsenConfiguration
 type NielsenConfiguration struct {
@@ -8396,18 +5204,6 @@ func (s NielsenConfiguration) String() string {
 // GoString returns the string representation
 func (s NielsenConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetBreakoutCode sets the BreakoutCode field's value.
-func (s *NielsenConfiguration) SetBreakoutCode(v int64) *NielsenConfiguration {
-	s.BreakoutCode = &v
-	return s
-}
-
-// SetDistributorId sets the DistributorId field's value.
-func (s *NielsenConfiguration) SetDistributorId(v string) *NielsenConfiguration {
-	s.DistributorId = &v
-	return s
 }
 
 // Enable the Noise reducer (NoiseReducer) feature to remove noise from your
@@ -8444,24 +5240,6 @@ func (s NoiseReducer) GoString() string {
 	return s.String()
 }
 
-// SetFilter sets the Filter field's value.
-func (s *NoiseReducer) SetFilter(v NoiseReducerFilter) *NoiseReducer {
-	s.Filter = v
-	return s
-}
-
-// SetFilterSettings sets the FilterSettings field's value.
-func (s *NoiseReducer) SetFilterSettings(v *NoiseReducerFilterSettings) *NoiseReducer {
-	s.FilterSettings = v
-	return s
-}
-
-// SetSpatialFilterSettings sets the SpatialFilterSettings field's value.
-func (s *NoiseReducer) SetSpatialFilterSettings(v *NoiseReducerSpatialFilterSettings) *NoiseReducer {
-	s.SpatialFilterSettings = v
-	return s
-}
-
 // Settings for a noise reducer filter
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NoiseReducerFilterSettings
 type NoiseReducerFilterSettings struct {
@@ -8480,12 +5258,6 @@ func (s NoiseReducerFilterSettings) String() string {
 // GoString returns the string representation
 func (s NoiseReducerFilterSettings) GoString() string {
 	return s.String()
-}
-
-// SetStrength sets the Strength field's value.
-func (s *NoiseReducerFilterSettings) SetStrength(v int64) *NoiseReducerFilterSettings {
-	s.Strength = &v
-	return s
 }
 
 // Noise reducer filter settings for spatial filter.
@@ -8514,24 +5286,6 @@ func (s NoiseReducerSpatialFilterSettings) String() string {
 // GoString returns the string representation
 func (s NoiseReducerSpatialFilterSettings) GoString() string {
 	return s.String()
-}
-
-// SetPostFilterSharpenStrength sets the PostFilterSharpenStrength field's value.
-func (s *NoiseReducerSpatialFilterSettings) SetPostFilterSharpenStrength(v int64) *NoiseReducerSpatialFilterSettings {
-	s.PostFilterSharpenStrength = &v
-	return s
-}
-
-// SetSpeed sets the Speed field's value.
-func (s *NoiseReducerSpatialFilterSettings) SetSpeed(v int64) *NoiseReducerSpatialFilterSettings {
-	s.Speed = &v
-	return s
-}
-
-// SetStrength sets the Strength field's value.
-func (s *NoiseReducerSpatialFilterSettings) SetStrength(v int64) *NoiseReducerSpatialFilterSettings {
-	s.Strength = &v
-	return s
 }
 
 // An output object describes the settings for a single output file or stream
@@ -8593,54 +5347,6 @@ func (s Output) GoString() string {
 	return s.String()
 }
 
-// SetAudioDescriptions sets the AudioDescriptions field's value.
-func (s *Output) SetAudioDescriptions(v []AudioDescription) *Output {
-	s.AudioDescriptions = v
-	return s
-}
-
-// SetCaptionDescriptions sets the CaptionDescriptions field's value.
-func (s *Output) SetCaptionDescriptions(v []CaptionDescription) *Output {
-	s.CaptionDescriptions = v
-	return s
-}
-
-// SetContainerSettings sets the ContainerSettings field's value.
-func (s *Output) SetContainerSettings(v *ContainerSettings) *Output {
-	s.ContainerSettings = v
-	return s
-}
-
-// SetExtension sets the Extension field's value.
-func (s *Output) SetExtension(v string) *Output {
-	s.Extension = &v
-	return s
-}
-
-// SetNameModifier sets the NameModifier field's value.
-func (s *Output) SetNameModifier(v string) *Output {
-	s.NameModifier = &v
-	return s
-}
-
-// SetOutputSettings sets the OutputSettings field's value.
-func (s *Output) SetOutputSettings(v *OutputSettings) *Output {
-	s.OutputSettings = v
-	return s
-}
-
-// SetPreset sets the Preset field's value.
-func (s *Output) SetPreset(v string) *Output {
-	s.Preset = &v
-	return s
-}
-
-// SetVideoDescription sets the VideoDescription field's value.
-func (s *Output) SetVideoDescription(v *VideoDescription) *Output {
-	s.VideoDescription = v
-	return s
-}
-
 // OutputChannel mapping settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputChannelMapping
 type OutputChannelMapping struct {
@@ -8658,12 +5364,6 @@ func (s OutputChannelMapping) String() string {
 // GoString returns the string representation
 func (s OutputChannelMapping) GoString() string {
 	return s.String()
-}
-
-// SetInputChannels sets the InputChannels field's value.
-func (s *OutputChannelMapping) SetInputChannels(v []int64) *OutputChannelMapping {
-	s.InputChannels = v
-	return s
 }
 
 // Details regarding output
@@ -8686,18 +5386,6 @@ func (s OutputDetail) String() string {
 // GoString returns the string representation
 func (s OutputDetail) GoString() string {
 	return s.String()
-}
-
-// SetDurationInMs sets the DurationInMs field's value.
-func (s *OutputDetail) SetDurationInMs(v int64) *OutputDetail {
-	s.DurationInMs = &v
-	return s
-}
-
-// SetVideoDetails sets the VideoDetails field's value.
-func (s *OutputDetail) SetVideoDetails(v *VideoDetail) *OutputDetail {
-	s.VideoDetails = v
-	return s
 }
 
 // Group of outputs
@@ -8732,30 +5420,6 @@ func (s OutputGroup) GoString() string {
 	return s.String()
 }
 
-// SetCustomName sets the CustomName field's value.
-func (s *OutputGroup) SetCustomName(v string) *OutputGroup {
-	s.CustomName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *OutputGroup) SetName(v string) *OutputGroup {
-	s.Name = &v
-	return s
-}
-
-// SetOutputGroupSettings sets the OutputGroupSettings field's value.
-func (s *OutputGroup) SetOutputGroupSettings(v *OutputGroupSettings) *OutputGroup {
-	s.OutputGroupSettings = v
-	return s
-}
-
-// SetOutputs sets the Outputs field's value.
-func (s *OutputGroup) SetOutputs(v []Output) *OutputGroup {
-	s.Outputs = v
-	return s
-}
-
 // Contains details about the output groups specified in the job settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroupDetail
 type OutputGroupDetail struct {
@@ -8773,12 +5437,6 @@ func (s OutputGroupDetail) String() string {
 // GoString returns the string representation
 func (s OutputGroupDetail) GoString() string {
 	return s.String()
-}
-
-// SetOutputDetails sets the OutputDetails field's value.
-func (s *OutputGroupDetail) SetOutputDetails(v []OutputDetail) *OutputGroupDetail {
-	s.OutputDetails = v
-	return s
 }
 
 // Output Group settings, including type
@@ -8816,36 +5474,6 @@ func (s OutputGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetDashIsoGroupSettings sets the DashIsoGroupSettings field's value.
-func (s *OutputGroupSettings) SetDashIsoGroupSettings(v *DashIsoGroupSettings) *OutputGroupSettings {
-	s.DashIsoGroupSettings = v
-	return s
-}
-
-// SetFileGroupSettings sets the FileGroupSettings field's value.
-func (s *OutputGroupSettings) SetFileGroupSettings(v *FileGroupSettings) *OutputGroupSettings {
-	s.FileGroupSettings = v
-	return s
-}
-
-// SetHlsGroupSettings sets the HlsGroupSettings field's value.
-func (s *OutputGroupSettings) SetHlsGroupSettings(v *HlsGroupSettings) *OutputGroupSettings {
-	s.HlsGroupSettings = v
-	return s
-}
-
-// SetMsSmoothGroupSettings sets the MsSmoothGroupSettings field's value.
-func (s *OutputGroupSettings) SetMsSmoothGroupSettings(v *MsSmoothGroupSettings) *OutputGroupSettings {
-	s.MsSmoothGroupSettings = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *OutputGroupSettings) SetType(v OutputGroupType) *OutputGroupSettings {
-	s.Type = v
-	return s
-}
-
 // Specific settings for this type of output.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputSettings
 type OutputSettings struct {
@@ -8863,12 +5491,6 @@ func (s OutputSettings) String() string {
 // GoString returns the string representation
 func (s OutputSettings) GoString() string {
 	return s.String()
-}
-
-// SetHlsSettings sets the HlsSettings field's value.
-func (s *OutputSettings) SetHlsSettings(v *HlsSettings) *OutputSettings {
-	s.HlsSettings = v
-	return s
 }
 
 // A preset is a collection of preconfigured media conversion settings that
@@ -8913,54 +5535,6 @@ func (s Preset) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Preset) SetArn(v string) *Preset {
-	s.Arn = &v
-	return s
-}
-
-// SetCategory sets the Category field's value.
-func (s *Preset) SetCategory(v string) *Preset {
-	s.Category = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Preset) SetCreatedAt(v time.Time) *Preset {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Preset) SetDescription(v string) *Preset {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdated sets the LastUpdated field's value.
-func (s *Preset) SetLastUpdated(v time.Time) *Preset {
-	s.LastUpdated = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Preset) SetName(v string) *Preset {
-	s.Name = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *Preset) SetSettings(v *PresetSettings) *Preset {
-	s.Settings = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Preset) SetType(v Type) *Preset {
-	s.Type = v
-	return s
-}
-
 // Settings for preset
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PresetSettings
 type PresetSettings struct {
@@ -8992,30 +5566,6 @@ func (s PresetSettings) String() string {
 // GoString returns the string representation
 func (s PresetSettings) GoString() string {
 	return s.String()
-}
-
-// SetAudioDescriptions sets the AudioDescriptions field's value.
-func (s *PresetSettings) SetAudioDescriptions(v []AudioDescription) *PresetSettings {
-	s.AudioDescriptions = v
-	return s
-}
-
-// SetCaptionDescriptions sets the CaptionDescriptions field's value.
-func (s *PresetSettings) SetCaptionDescriptions(v []CaptionDescriptionPreset) *PresetSettings {
-	s.CaptionDescriptions = v
-	return s
-}
-
-// SetContainerSettings sets the ContainerSettings field's value.
-func (s *PresetSettings) SetContainerSettings(v *ContainerSettings) *PresetSettings {
-	s.ContainerSettings = v
-	return s
-}
-
-// SetVideoDescription sets the VideoDescription field's value.
-func (s *PresetSettings) SetVideoDescription(v *VideoDescription) *PresetSettings {
-	s.VideoDescription = v
-	return s
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
@@ -9092,72 +5642,6 @@ func (s ProresSettings) GoString() string {
 	return s.String()
 }
 
-// SetCodecProfile sets the CodecProfile field's value.
-func (s *ProresSettings) SetCodecProfile(v ProresCodecProfile) *ProresSettings {
-	s.CodecProfile = v
-	return s
-}
-
-// SetFramerateControl sets the FramerateControl field's value.
-func (s *ProresSettings) SetFramerateControl(v ProresFramerateControl) *ProresSettings {
-	s.FramerateControl = v
-	return s
-}
-
-// SetFramerateConversionAlgorithm sets the FramerateConversionAlgorithm field's value.
-func (s *ProresSettings) SetFramerateConversionAlgorithm(v ProresFramerateConversionAlgorithm) *ProresSettings {
-	s.FramerateConversionAlgorithm = v
-	return s
-}
-
-// SetFramerateDenominator sets the FramerateDenominator field's value.
-func (s *ProresSettings) SetFramerateDenominator(v int64) *ProresSettings {
-	s.FramerateDenominator = &v
-	return s
-}
-
-// SetFramerateNumerator sets the FramerateNumerator field's value.
-func (s *ProresSettings) SetFramerateNumerator(v int64) *ProresSettings {
-	s.FramerateNumerator = &v
-	return s
-}
-
-// SetInterlaceMode sets the InterlaceMode field's value.
-func (s *ProresSettings) SetInterlaceMode(v ProresInterlaceMode) *ProresSettings {
-	s.InterlaceMode = v
-	return s
-}
-
-// SetParControl sets the ParControl field's value.
-func (s *ProresSettings) SetParControl(v ProresParControl) *ProresSettings {
-	s.ParControl = v
-	return s
-}
-
-// SetParDenominator sets the ParDenominator field's value.
-func (s *ProresSettings) SetParDenominator(v int64) *ProresSettings {
-	s.ParDenominator = &v
-	return s
-}
-
-// SetParNumerator sets the ParNumerator field's value.
-func (s *ProresSettings) SetParNumerator(v int64) *ProresSettings {
-	s.ParNumerator = &v
-	return s
-}
-
-// SetSlowPal sets the SlowPal field's value.
-func (s *ProresSettings) SetSlowPal(v ProresSlowPal) *ProresSettings {
-	s.SlowPal = v
-	return s
-}
-
-// SetTelecine sets the Telecine field's value.
-func (s *ProresSettings) SetTelecine(v ProresTelecine) *ProresSettings {
-	s.Telecine = v
-	return s
-}
-
 // MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs
 // are submitted to a built-in default queue. User can create additional queues
 // to separate the jobs of different categories or priority.
@@ -9200,48 +5684,6 @@ func (s Queue) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Queue) SetArn(v string) *Queue {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Queue) SetCreatedAt(v time.Time) *Queue {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Queue) SetDescription(v string) *Queue {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdated sets the LastUpdated field's value.
-func (s *Queue) SetLastUpdated(v time.Time) *Queue {
-	s.LastUpdated = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Queue) SetName(v string) *Queue {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Queue) SetStatus(v QueueStatus) *Queue {
-	s.Status = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Queue) SetType(v Type) *Queue {
-	s.Type = v
-	return s
-}
-
 // Use Rectangle to identify a specific area of the video frame.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Rectangle
 type Rectangle struct {
@@ -9270,30 +5712,6 @@ func (s Rectangle) String() string {
 // GoString returns the string representation
 func (s Rectangle) GoString() string {
 	return s.String()
-}
-
-// SetHeight sets the Height field's value.
-func (s *Rectangle) SetHeight(v int64) *Rectangle {
-	s.Height = &v
-	return s
-}
-
-// SetWidth sets the Width field's value.
-func (s *Rectangle) SetWidth(v int64) *Rectangle {
-	s.Width = &v
-	return s
-}
-
-// SetX sets the X field's value.
-func (s *Rectangle) SetX(v int64) *Rectangle {
-	s.X = &v
-	return s
-}
-
-// SetY sets the Y field's value.
-func (s *Rectangle) SetY(v int64) *Rectangle {
-	s.Y = &v
-	return s
 }
 
 // Use Manual audio remixing (RemixSettings) to adjust audio levels for each
@@ -9329,24 +5747,6 @@ func (s RemixSettings) GoString() string {
 	return s.String()
 }
 
-// SetChannelMapping sets the ChannelMapping field's value.
-func (s *RemixSettings) SetChannelMapping(v *ChannelMapping) *RemixSettings {
-	s.ChannelMapping = v
-	return s
-}
-
-// SetChannelsIn sets the ChannelsIn field's value.
-func (s *RemixSettings) SetChannelsIn(v int64) *RemixSettings {
-	s.ChannelsIn = &v
-	return s
-}
-
-// SetChannelsOut sets the ChannelsOut field's value.
-func (s *RemixSettings) SetChannelsOut(v int64) *RemixSettings {
-	s.ChannelsOut = &v
-	return s
-}
-
 // Settings for SCC caption output.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SccDestinationSettings
 type SccDestinationSettings struct {
@@ -9368,12 +5768,6 @@ func (s SccDestinationSettings) String() string {
 // GoString returns the string representation
 func (s SccDestinationSettings) GoString() string {
 	return s.String()
-}
-
-// SetFramerate sets the Framerate field's value.
-func (s *SccDestinationSettings) SetFramerate(v SccDestinationFramerate) *SccDestinationSettings {
-	s.Framerate = v
-	return s
 }
 
 // Settings for use with a SPEKE key provider
@@ -9401,24 +5795,6 @@ func (s SpekeKeyProvider) String() string {
 // GoString returns the string representation
 func (s SpekeKeyProvider) GoString() string {
 	return s.String()
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *SpekeKeyProvider) SetResourceId(v string) *SpekeKeyProvider {
-	s.ResourceId = &v
-	return s
-}
-
-// SetSystemIds sets the SystemIds field's value.
-func (s *SpekeKeyProvider) SetSystemIds(v []string) *SpekeKeyProvider {
-	s.SystemIds = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *SpekeKeyProvider) SetUrl(v string) *SpekeKeyProvider {
-	s.Url = &v
-	return s
 }
 
 // Settings for use with a SPEKE key provider.
@@ -9454,30 +5830,6 @@ func (s StaticKeyProvider) GoString() string {
 	return s.String()
 }
 
-// SetKeyFormat sets the KeyFormat field's value.
-func (s *StaticKeyProvider) SetKeyFormat(v string) *StaticKeyProvider {
-	s.KeyFormat = &v
-	return s
-}
-
-// SetKeyFormatVersions sets the KeyFormatVersions field's value.
-func (s *StaticKeyProvider) SetKeyFormatVersions(v string) *StaticKeyProvider {
-	s.KeyFormatVersions = &v
-	return s
-}
-
-// SetStaticKeyValue sets the StaticKeyValue field's value.
-func (s *StaticKeyProvider) SetStaticKeyValue(v string) *StaticKeyProvider {
-	s.StaticKeyValue = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *StaticKeyProvider) SetUrl(v string) *StaticKeyProvider {
-	s.Url = &v
-	return s
-}
-
 // Settings for Teletext caption output
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TeletextDestinationSettings
 type TeletextDestinationSettings struct {
@@ -9500,12 +5852,6 @@ func (s TeletextDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetPageNumber sets the PageNumber field's value.
-func (s *TeletextDestinationSettings) SetPageNumber(v string) *TeletextDestinationSettings {
-	s.PageNumber = &v
-	return s
-}
-
 // Settings specific to Teletext caption sources, including Page number.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TeletextSourceSettings
 type TeletextSourceSettings struct {
@@ -9525,12 +5871,6 @@ func (s TeletextSourceSettings) String() string {
 // GoString returns the string representation
 func (s TeletextSourceSettings) GoString() string {
 	return s.String()
-}
-
-// SetPageNumber sets the PageNumber field's value.
-func (s *TeletextSourceSettings) SetPageNumber(v string) *TeletextSourceSettings {
-	s.PageNumber = &v
-	return s
 }
 
 // Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified
@@ -9563,24 +5903,6 @@ func (s TimecodeBurnin) String() string {
 // GoString returns the string representation
 func (s TimecodeBurnin) GoString() string {
 	return s.String()
-}
-
-// SetFontSize sets the FontSize field's value.
-func (s *TimecodeBurnin) SetFontSize(v int64) *TimecodeBurnin {
-	s.FontSize = &v
-	return s
-}
-
-// SetPosition sets the Position field's value.
-func (s *TimecodeBurnin) SetPosition(v TimecodeBurninPosition) *TimecodeBurnin {
-	s.Position = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *TimecodeBurnin) SetPrefix(v string) *TimecodeBurnin {
-	s.Prefix = &v
-	return s
 }
 
 // Contains settings used to acquire and adjust timecode information from inputs.
@@ -9639,30 +5961,6 @@ func (s TimecodeConfig) GoString() string {
 	return s.String()
 }
 
-// SetAnchor sets the Anchor field's value.
-func (s *TimecodeConfig) SetAnchor(v string) *TimecodeConfig {
-	s.Anchor = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *TimecodeConfig) SetSource(v TimecodeSource) *TimecodeConfig {
-	s.Source = v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *TimecodeConfig) SetStart(v string) *TimecodeConfig {
-	s.Start = &v
-	return s
-}
-
-// SetTimestampOffset sets the TimestampOffset field's value.
-func (s *TimecodeConfig) SetTimestampOffset(v string) *TimecodeConfig {
-	s.TimestampOffset = &v
-	return s
-}
-
 // Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags
 // in your job. To include timed metadata, you must enable it here, enable it
 // in each output container, and specify tags and timecodes in ID3 insertion
@@ -9683,12 +5981,6 @@ func (s TimedMetadataInsertion) String() string {
 // GoString returns the string representation
 func (s TimedMetadataInsertion) GoString() string {
 	return s.String()
-}
-
-// SetId3Insertions sets the Id3Insertions field's value.
-func (s *TimedMetadataInsertion) SetId3Insertions(v []Id3Insertion) *TimedMetadataInsertion {
-	s.Id3Insertions = v
-	return s
 }
 
 // Information about when jobs are submitted, started, and finished is specified
@@ -9717,24 +6009,6 @@ func (s Timing) GoString() string {
 	return s.String()
 }
 
-// SetFinishTime sets the FinishTime field's value.
-func (s *Timing) SetFinishTime(v time.Time) *Timing {
-	s.FinishTime = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Timing) SetStartTime(v time.Time) *Timing {
-	s.StartTime = &v
-	return s
-}
-
-// SetSubmitTime sets the SubmitTime field's value.
-func (s *Timing) SetSubmitTime(v time.Time) *Timing {
-	s.SubmitTime = &v
-	return s
-}
-
 // Settings for TTML caption output
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings
 type TtmlDestinationSettings struct {
@@ -9753,12 +6027,6 @@ func (s TtmlDestinationSettings) String() string {
 // GoString returns the string representation
 func (s TtmlDestinationSettings) GoString() string {
 	return s.String()
-}
-
-// SetStylePassthrough sets the StylePassthrough field's value.
-func (s *TtmlDestinationSettings) SetStylePassthrough(v TtmlStylePassthrough) *TtmlDestinationSettings {
-	s.StylePassthrough = v
-	return s
 }
 
 // Modify a job template by sending a request with the job template name and
@@ -9811,36 +6079,6 @@ func (s *UpdateJobTemplateInput) Validate() error {
 	return nil
 }
 
-// SetCategory sets the Category field's value.
-func (s *UpdateJobTemplateInput) SetCategory(v string) *UpdateJobTemplateInput {
-	s.Category = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateJobTemplateInput) SetDescription(v string) *UpdateJobTemplateInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateJobTemplateInput) SetName(v string) *UpdateJobTemplateInput {
-	s.Name = &v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *UpdateJobTemplateInput) SetQueue(v string) *UpdateJobTemplateInput {
-	s.Queue = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *UpdateJobTemplateInput) SetSettings(v *JobTemplateSettings) *UpdateJobTemplateInput {
-	s.Settings = v
-	return s
-}
-
 // Successful update job template requests will return the new job template
 // JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplateResponse
@@ -9867,12 +6105,6 @@ func (s UpdateJobTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateJobTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobTemplate sets the JobTemplate field's value.
-func (s *UpdateJobTemplateOutput) SetJobTemplate(v *JobTemplate) *UpdateJobTemplateOutput {
-	s.JobTemplate = v
-	return s
 }
 
 // Modify a preset by sending a request with the preset name and any of the
@@ -9921,30 +6153,6 @@ func (s *UpdatePresetInput) Validate() error {
 	return nil
 }
 
-// SetCategory sets the Category field's value.
-func (s *UpdatePresetInput) SetCategory(v string) *UpdatePresetInput {
-	s.Category = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdatePresetInput) SetDescription(v string) *UpdatePresetInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdatePresetInput) SetName(v string) *UpdatePresetInput {
-	s.Name = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *UpdatePresetInput) SetSettings(v *PresetSettings) *UpdatePresetInput {
-	s.Settings = v
-	return s
-}
-
 // Successful update preset requests will return the new preset JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdatePresetResponse
 type UpdatePresetOutput struct {
@@ -9970,12 +6178,6 @@ func (s UpdatePresetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPreset sets the Preset field's value.
-func (s *UpdatePresetOutput) SetPreset(v *Preset) *UpdatePresetOutput {
-	s.Preset = v
-	return s
 }
 
 // Modify a queue by sending a request with the queue name and any of the following
@@ -10023,24 +6225,6 @@ func (s *UpdateQueueInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateQueueInput) SetDescription(v string) *UpdateQueueInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateQueueInput) SetName(v string) *UpdateQueueInput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateQueueInput) SetStatus(v QueueStatus) *UpdateQueueInput {
-	s.Status = v
-	return s
-}
-
 // Successful update queue requests will return the new queue JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueResponse
 type UpdateQueueOutput struct {
@@ -10067,12 +6251,6 @@ func (s UpdateQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQueue sets the Queue field's value.
-func (s *UpdateQueueOutput) SetQueue(v *Queue) *UpdateQueueOutput {
-	s.Queue = v
-	return s
 }
 
 // Video codec settings, (CodecSettings) under (VideoDescription), contains
@@ -10117,42 +6295,6 @@ func (s VideoCodecSettings) String() string {
 // GoString returns the string representation
 func (s VideoCodecSettings) GoString() string {
 	return s.String()
-}
-
-// SetCodec sets the Codec field's value.
-func (s *VideoCodecSettings) SetCodec(v VideoCodec) *VideoCodecSettings {
-	s.Codec = v
-	return s
-}
-
-// SetFrameCaptureSettings sets the FrameCaptureSettings field's value.
-func (s *VideoCodecSettings) SetFrameCaptureSettings(v *FrameCaptureSettings) *VideoCodecSettings {
-	s.FrameCaptureSettings = v
-	return s
-}
-
-// SetH264Settings sets the H264Settings field's value.
-func (s *VideoCodecSettings) SetH264Settings(v *H264Settings) *VideoCodecSettings {
-	s.H264Settings = v
-	return s
-}
-
-// SetH265Settings sets the H265Settings field's value.
-func (s *VideoCodecSettings) SetH265Settings(v *H265Settings) *VideoCodecSettings {
-	s.H265Settings = v
-	return s
-}
-
-// SetMpeg2Settings sets the Mpeg2Settings field's value.
-func (s *VideoCodecSettings) SetMpeg2Settings(v *Mpeg2Settings) *VideoCodecSettings {
-	s.Mpeg2Settings = v
-	return s
-}
-
-// SetProresSettings sets the ProresSettings field's value.
-func (s *VideoCodecSettings) SetProresSettings(v *ProresSettings) *VideoCodecSettings {
-	s.ProresSettings = v
-	return s
 }
 
 // Settings for video outputs
@@ -10266,96 +6408,6 @@ func (s VideoDescription) GoString() string {
 	return s.String()
 }
 
-// SetAfdSignaling sets the AfdSignaling field's value.
-func (s *VideoDescription) SetAfdSignaling(v AfdSignaling) *VideoDescription {
-	s.AfdSignaling = v
-	return s
-}
-
-// SetAntiAlias sets the AntiAlias field's value.
-func (s *VideoDescription) SetAntiAlias(v AntiAlias) *VideoDescription {
-	s.AntiAlias = v
-	return s
-}
-
-// SetCodecSettings sets the CodecSettings field's value.
-func (s *VideoDescription) SetCodecSettings(v *VideoCodecSettings) *VideoDescription {
-	s.CodecSettings = v
-	return s
-}
-
-// SetColorMetadata sets the ColorMetadata field's value.
-func (s *VideoDescription) SetColorMetadata(v ColorMetadata) *VideoDescription {
-	s.ColorMetadata = v
-	return s
-}
-
-// SetCrop sets the Crop field's value.
-func (s *VideoDescription) SetCrop(v *Rectangle) *VideoDescription {
-	s.Crop = v
-	return s
-}
-
-// SetDropFrameTimecode sets the DropFrameTimecode field's value.
-func (s *VideoDescription) SetDropFrameTimecode(v DropFrameTimecode) *VideoDescription {
-	s.DropFrameTimecode = v
-	return s
-}
-
-// SetFixedAfd sets the FixedAfd field's value.
-func (s *VideoDescription) SetFixedAfd(v int64) *VideoDescription {
-	s.FixedAfd = &v
-	return s
-}
-
-// SetHeight sets the Height field's value.
-func (s *VideoDescription) SetHeight(v int64) *VideoDescription {
-	s.Height = &v
-	return s
-}
-
-// SetPosition sets the Position field's value.
-func (s *VideoDescription) SetPosition(v *Rectangle) *VideoDescription {
-	s.Position = v
-	return s
-}
-
-// SetRespondToAfd sets the RespondToAfd field's value.
-func (s *VideoDescription) SetRespondToAfd(v RespondToAfd) *VideoDescription {
-	s.RespondToAfd = v
-	return s
-}
-
-// SetScalingBehavior sets the ScalingBehavior field's value.
-func (s *VideoDescription) SetScalingBehavior(v ScalingBehavior) *VideoDescription {
-	s.ScalingBehavior = v
-	return s
-}
-
-// SetSharpness sets the Sharpness field's value.
-func (s *VideoDescription) SetSharpness(v int64) *VideoDescription {
-	s.Sharpness = &v
-	return s
-}
-
-// SetTimecodeInsertion sets the TimecodeInsertion field's value.
-func (s *VideoDescription) SetTimecodeInsertion(v VideoTimecodeInsertion) *VideoDescription {
-	s.TimecodeInsertion = v
-	return s
-}
-
-// SetVideoPreprocessors sets the VideoPreprocessors field's value.
-func (s *VideoDescription) SetVideoPreprocessors(v *VideoPreprocessor) *VideoDescription {
-	s.VideoPreprocessors = v
-	return s
-}
-
-// SetWidth sets the Width field's value.
-func (s *VideoDescription) SetWidth(v int64) *VideoDescription {
-	s.Width = &v
-	return s
-}
-
 // Contains details about the output's video stream
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoDetail
 type VideoDetail struct {
@@ -10376,18 +6428,6 @@ func (s VideoDetail) String() string {
 // GoString returns the string representation
 func (s VideoDetail) GoString() string {
 	return s.String()
-}
-
-// SetHeightInPx sets the HeightInPx field's value.
-func (s *VideoDetail) SetHeightInPx(v int64) *VideoDetail {
-	s.HeightInPx = &v
-	return s
-}
-
-// SetWidthInPx sets the WidthInPx field's value.
-func (s *VideoDetail) SetWidthInPx(v int64) *VideoDetail {
-	s.WidthInPx = &v
-	return s
 }
 
 // Find additional transcoding features under Preprocessors (VideoPreprocessors).
@@ -10429,36 +6469,6 @@ func (s VideoPreprocessor) String() string {
 // GoString returns the string representation
 func (s VideoPreprocessor) GoString() string {
 	return s.String()
-}
-
-// SetColorCorrector sets the ColorCorrector field's value.
-func (s *VideoPreprocessor) SetColorCorrector(v *ColorCorrector) *VideoPreprocessor {
-	s.ColorCorrector = v
-	return s
-}
-
-// SetDeinterlacer sets the Deinterlacer field's value.
-func (s *VideoPreprocessor) SetDeinterlacer(v *Deinterlacer) *VideoPreprocessor {
-	s.Deinterlacer = v
-	return s
-}
-
-// SetImageInserter sets the ImageInserter field's value.
-func (s *VideoPreprocessor) SetImageInserter(v *ImageInserter) *VideoPreprocessor {
-	s.ImageInserter = v
-	return s
-}
-
-// SetNoiseReducer sets the NoiseReducer field's value.
-func (s *VideoPreprocessor) SetNoiseReducer(v *NoiseReducer) *VideoPreprocessor {
-	s.NoiseReducer = v
-	return s
-}
-
-// SetTimecodeBurnin sets the TimecodeBurnin field's value.
-func (s *VideoPreprocessor) SetTimecodeBurnin(v *TimecodeBurnin) *VideoPreprocessor {
-	s.TimecodeBurnin = v
-	return s
 }
 
 // Selector for video.
@@ -10506,36 +6516,6 @@ func (s VideoSelector) GoString() string {
 	return s.String()
 }
 
-// SetColorSpace sets the ColorSpace field's value.
-func (s *VideoSelector) SetColorSpace(v ColorSpace) *VideoSelector {
-	s.ColorSpace = v
-	return s
-}
-
-// SetColorSpaceUsage sets the ColorSpaceUsage field's value.
-func (s *VideoSelector) SetColorSpaceUsage(v ColorSpaceUsage) *VideoSelector {
-	s.ColorSpaceUsage = v
-	return s
-}
-
-// SetHdr10Metadata sets the Hdr10Metadata field's value.
-func (s *VideoSelector) SetHdr10Metadata(v *Hdr10Metadata) *VideoSelector {
-	s.Hdr10Metadata = v
-	return s
-}
-
-// SetPid sets the Pid field's value.
-func (s *VideoSelector) SetPid(v int64) *VideoSelector {
-	s.Pid = &v
-	return s
-}
-
-// SetProgramNumber sets the ProgramNumber field's value.
-func (s *VideoSelector) SetProgramNumber(v int64) *VideoSelector {
-	s.ProgramNumber = &v
-	return s
-}
-
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value WAV.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/WavSettings
@@ -10563,24 +6543,6 @@ func (s WavSettings) String() string {
 // GoString returns the string representation
 func (s WavSettings) GoString() string {
 	return s.String()
-}
-
-// SetBitDepth sets the BitDepth field's value.
-func (s *WavSettings) SetBitDepth(v int64) *WavSettings {
-	s.BitDepth = &v
-	return s
-}
-
-// SetChannels sets the Channels field's value.
-func (s *WavSettings) SetChannels(v int64) *WavSettings {
-	s.Channels = &v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *WavSettings) SetSampleRate(v int64) *WavSettings {
-	s.SampleRate = &v
-	return s
 }
 
 // Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio

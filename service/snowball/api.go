@@ -1133,90 +1133,6 @@ func (s *Address) Validate() error {
 	return nil
 }
 
-// SetAddressId sets the AddressId field's value.
-func (s *Address) SetAddressId(v string) *Address {
-	s.AddressId = &v
-	return s
-}
-
-// SetCity sets the City field's value.
-func (s *Address) SetCity(v string) *Address {
-	s.City = &v
-	return s
-}
-
-// SetCompany sets the Company field's value.
-func (s *Address) SetCompany(v string) *Address {
-	s.Company = &v
-	return s
-}
-
-// SetCountry sets the Country field's value.
-func (s *Address) SetCountry(v string) *Address {
-	s.Country = &v
-	return s
-}
-
-// SetIsRestricted sets the IsRestricted field's value.
-func (s *Address) SetIsRestricted(v bool) *Address {
-	s.IsRestricted = &v
-	return s
-}
-
-// SetLandmark sets the Landmark field's value.
-func (s *Address) SetLandmark(v string) *Address {
-	s.Landmark = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Address) SetName(v string) *Address {
-	s.Name = &v
-	return s
-}
-
-// SetPhoneNumber sets the PhoneNumber field's value.
-func (s *Address) SetPhoneNumber(v string) *Address {
-	s.PhoneNumber = &v
-	return s
-}
-
-// SetPostalCode sets the PostalCode field's value.
-func (s *Address) SetPostalCode(v string) *Address {
-	s.PostalCode = &v
-	return s
-}
-
-// SetPrefectureOrDistrict sets the PrefectureOrDistrict field's value.
-func (s *Address) SetPrefectureOrDistrict(v string) *Address {
-	s.PrefectureOrDistrict = &v
-	return s
-}
-
-// SetStateOrProvince sets the StateOrProvince field's value.
-func (s *Address) SetStateOrProvince(v string) *Address {
-	s.StateOrProvince = &v
-	return s
-}
-
-// SetStreet1 sets the Street1 field's value.
-func (s *Address) SetStreet1(v string) *Address {
-	s.Street1 = &v
-	return s
-}
-
-// SetStreet2 sets the Street2 field's value.
-func (s *Address) SetStreet2(v string) *Address {
-	s.Street2 = &v
-	return s
-}
-
-// SetStreet3 sets the Street3 field's value.
-func (s *Address) SetStreet3(v string) *Address {
-	s.Street3 = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelClusterRequest
 type CancelClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -1253,12 +1169,6 @@ func (s *CancelClusterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *CancelClusterInput) SetClusterId(v string) *CancelClusterInput {
-	s.ClusterId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelClusterResult
@@ -1321,12 +1231,6 @@ func (s *CancelJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *CancelJobInput) SetJobId(v string) *CancelJobInput {
-	s.JobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobResult
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -1377,30 +1281,6 @@ func (s ClusterListEntry) String() string {
 // GoString returns the string representation
 func (s ClusterListEntry) GoString() string {
 	return s.String()
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *ClusterListEntry) SetClusterId(v string) *ClusterListEntry {
-	s.ClusterId = &v
-	return s
-}
-
-// SetClusterState sets the ClusterState field's value.
-func (s *ClusterListEntry) SetClusterState(v ClusterState) *ClusterListEntry {
-	s.ClusterState = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ClusterListEntry) SetCreationDate(v time.Time) *ClusterListEntry {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ClusterListEntry) SetDescription(v string) *ClusterListEntry {
-	s.Description = &v
-	return s
 }
 
 // Contains metadata about a specific cluster.
@@ -1482,84 +1362,6 @@ func (s ClusterMetadata) GoString() string {
 	return s.String()
 }
 
-// SetAddressId sets the AddressId field's value.
-func (s *ClusterMetadata) SetAddressId(v string) *ClusterMetadata {
-	s.AddressId = &v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *ClusterMetadata) SetClusterId(v string) *ClusterMetadata {
-	s.ClusterId = &v
-	return s
-}
-
-// SetClusterState sets the ClusterState field's value.
-func (s *ClusterMetadata) SetClusterState(v ClusterState) *ClusterMetadata {
-	s.ClusterState = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ClusterMetadata) SetCreationDate(v time.Time) *ClusterMetadata {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ClusterMetadata) SetDescription(v string) *ClusterMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetForwardingAddressId sets the ForwardingAddressId field's value.
-func (s *ClusterMetadata) SetForwardingAddressId(v string) *ClusterMetadata {
-	s.ForwardingAddressId = &v
-	return s
-}
-
-// SetJobType sets the JobType field's value.
-func (s *ClusterMetadata) SetJobType(v JobType) *ClusterMetadata {
-	s.JobType = v
-	return s
-}
-
-// SetKmsKeyARN sets the KmsKeyARN field's value.
-func (s *ClusterMetadata) SetKmsKeyARN(v string) *ClusterMetadata {
-	s.KmsKeyARN = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *ClusterMetadata) SetNotification(v *Notification) *ClusterMetadata {
-	s.Notification = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *ClusterMetadata) SetResources(v *JobResource) *ClusterMetadata {
-	s.Resources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ClusterMetadata) SetRoleARN(v string) *ClusterMetadata {
-	s.RoleARN = &v
-	return s
-}
-
-// SetShippingOption sets the ShippingOption field's value.
-func (s *ClusterMetadata) SetShippingOption(v ShippingOption) *ClusterMetadata {
-	s.ShippingOption = v
-	return s
-}
-
-// SetSnowballType sets the SnowballType field's value.
-func (s *ClusterMetadata) SetSnowballType(v Type) *ClusterMetadata {
-	s.SnowballType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddressRequest
 type CreateAddressInput struct {
 	_ struct{} `type:"structure"`
@@ -1599,12 +1401,6 @@ func (s *CreateAddressInput) Validate() error {
 	return nil
 }
 
-// SetAddress sets the Address field's value.
-func (s *CreateAddressInput) SetAddress(v *Address) *CreateAddressInput {
-	s.Address = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddressResult
 type CreateAddressOutput struct {
 	_ struct{} `type:"structure"`
@@ -1630,12 +1426,6 @@ func (s CreateAddressOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAddressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAddressId sets the AddressId field's value.
-func (s *CreateAddressOutput) SetAddressId(v string) *CreateAddressOutput {
-	s.AddressId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterRequest
@@ -1760,66 +1550,6 @@ func (s *CreateClusterInput) Validate() error {
 	return nil
 }
 
-// SetAddressId sets the AddressId field's value.
-func (s *CreateClusterInput) SetAddressId(v string) *CreateClusterInput {
-	s.AddressId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateClusterInput) SetDescription(v string) *CreateClusterInput {
-	s.Description = &v
-	return s
-}
-
-// SetForwardingAddressId sets the ForwardingAddressId field's value.
-func (s *CreateClusterInput) SetForwardingAddressId(v string) *CreateClusterInput {
-	s.ForwardingAddressId = &v
-	return s
-}
-
-// SetJobType sets the JobType field's value.
-func (s *CreateClusterInput) SetJobType(v JobType) *CreateClusterInput {
-	s.JobType = v
-	return s
-}
-
-// SetKmsKeyARN sets the KmsKeyARN field's value.
-func (s *CreateClusterInput) SetKmsKeyARN(v string) *CreateClusterInput {
-	s.KmsKeyARN = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *CreateClusterInput) SetNotification(v *Notification) *CreateClusterInput {
-	s.Notification = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *CreateClusterInput) SetResources(v *JobResource) *CreateClusterInput {
-	s.Resources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *CreateClusterInput) SetRoleARN(v string) *CreateClusterInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetShippingOption sets the ShippingOption field's value.
-func (s *CreateClusterInput) SetShippingOption(v ShippingOption) *CreateClusterInput {
-	s.ShippingOption = v
-	return s
-}
-
-// SetSnowballType sets the SnowballType field's value.
-func (s *CreateClusterInput) SetSnowballType(v Type) *CreateClusterInput {
-	s.SnowballType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterResult
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -1843,12 +1573,6 @@ func (s CreateClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *CreateClusterOutput) SetClusterId(v string) *CreateClusterOutput {
-	s.ClusterId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest
@@ -1964,78 +1688,6 @@ func (s *CreateJobInput) Validate() error {
 	return nil
 }
 
-// SetAddressId sets the AddressId field's value.
-func (s *CreateJobInput) SetAddressId(v string) *CreateJobInput {
-	s.AddressId = &v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *CreateJobInput) SetClusterId(v string) *CreateJobInput {
-	s.ClusterId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateJobInput) SetDescription(v string) *CreateJobInput {
-	s.Description = &v
-	return s
-}
-
-// SetForwardingAddressId sets the ForwardingAddressId field's value.
-func (s *CreateJobInput) SetForwardingAddressId(v string) *CreateJobInput {
-	s.ForwardingAddressId = &v
-	return s
-}
-
-// SetJobType sets the JobType field's value.
-func (s *CreateJobInput) SetJobType(v JobType) *CreateJobInput {
-	s.JobType = v
-	return s
-}
-
-// SetKmsKeyARN sets the KmsKeyARN field's value.
-func (s *CreateJobInput) SetKmsKeyARN(v string) *CreateJobInput {
-	s.KmsKeyARN = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *CreateJobInput) SetNotification(v *Notification) *CreateJobInput {
-	s.Notification = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *CreateJobInput) SetResources(v *JobResource) *CreateJobInput {
-	s.Resources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *CreateJobInput) SetRoleARN(v string) *CreateJobInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetShippingOption sets the ShippingOption field's value.
-func (s *CreateJobInput) SetShippingOption(v ShippingOption) *CreateJobInput {
-	s.ShippingOption = v
-	return s
-}
-
-// SetSnowballCapacityPreference sets the SnowballCapacityPreference field's value.
-func (s *CreateJobInput) SetSnowballCapacityPreference(v Capacity) *CreateJobInput {
-	s.SnowballCapacityPreference = v
-	return s
-}
-
-// SetSnowballType sets the SnowballType field's value.
-func (s *CreateJobInput) SetSnowballType(v Type) *CreateJobInput {
-	s.SnowballType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobResult
 type CreateJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -2059,12 +1711,6 @@ func (s CreateJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *CreateJobOutput) SetJobId(v string) *CreateJobOutput {
-	s.JobId = &v
-	return s
 }
 
 // Defines the real-time status of a Snowball's data transfer while the appliance
@@ -2099,30 +1745,6 @@ func (s DataTransfer) String() string {
 // GoString returns the string representation
 func (s DataTransfer) GoString() string {
 	return s.String()
-}
-
-// SetBytesTransferred sets the BytesTransferred field's value.
-func (s *DataTransfer) SetBytesTransferred(v int64) *DataTransfer {
-	s.BytesTransferred = &v
-	return s
-}
-
-// SetObjectsTransferred sets the ObjectsTransferred field's value.
-func (s *DataTransfer) SetObjectsTransferred(v int64) *DataTransfer {
-	s.ObjectsTransferred = &v
-	return s
-}
-
-// SetTotalBytes sets the TotalBytes field's value.
-func (s *DataTransfer) SetTotalBytes(v int64) *DataTransfer {
-	s.TotalBytes = &v
-	return s
-}
-
-// SetTotalObjects sets the TotalObjects field's value.
-func (s *DataTransfer) SetTotalObjects(v int64) *DataTransfer {
-	s.TotalObjects = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressRequest
@@ -2162,12 +1784,6 @@ func (s *DescribeAddressInput) Validate() error {
 	return nil
 }
 
-// SetAddressId sets the AddressId field's value.
-func (s *DescribeAddressInput) SetAddressId(v string) *DescribeAddressInput {
-	s.AddressId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressResult
 type DescribeAddressOutput struct {
 	_ struct{} `type:"structure"`
@@ -2192,12 +1808,6 @@ func (s DescribeAddressOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAddressOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAddress sets the Address field's value.
-func (s *DescribeAddressOutput) SetAddress(v *Address) *DescribeAddressOutput {
-	s.Address = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressesRequest
@@ -2236,18 +1846,6 @@ func (s *DescribeAddressesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeAddressesInput) SetMaxResults(v int64) *DescribeAddressesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeAddressesInput) SetNextToken(v string) *DescribeAddressesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressesResult
 type DescribeAddressesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2276,18 +1874,6 @@ func (s DescribeAddressesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAddressesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAddresses sets the Addresses field's value.
-func (s *DescribeAddressesOutput) SetAddresses(v []Address) *DescribeAddressesOutput {
-	s.Addresses = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeAddressesOutput) SetNextToken(v string) *DescribeAddressesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeClusterRequest
@@ -2327,12 +1913,6 @@ func (s *DescribeClusterInput) Validate() error {
 	return nil
 }
 
-// SetClusterId sets the ClusterId field's value.
-func (s *DescribeClusterInput) SetClusterId(v string) *DescribeClusterInput {
-	s.ClusterId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeClusterResult
 type DescribeClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -2357,12 +1937,6 @@ func (s DescribeClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClusterMetadata sets the ClusterMetadata field's value.
-func (s *DescribeClusterOutput) SetClusterMetadata(v *ClusterMetadata) *DescribeClusterOutput {
-	s.ClusterMetadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJobRequest
@@ -2402,12 +1976,6 @@ func (s *DescribeJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *DescribeJobInput) SetJobId(v string) *DescribeJobInput {
-	s.JobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJobResult
 type DescribeJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -2438,18 +2006,6 @@ func (s DescribeJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJobMetadata sets the JobMetadata field's value.
-func (s *DescribeJobOutput) SetJobMetadata(v *JobMetadata) *DescribeJobOutput {
-	s.JobMetadata = v
-	return s
-}
-
-// SetSubJobMetadata sets the SubJobMetadata field's value.
-func (s *DescribeJobOutput) SetSubJobMetadata(v []JobMetadata) *DescribeJobOutput {
-	s.SubJobMetadata = v
-	return s
-}
-
 // The container for the EventTriggerDefinition$EventResourceARN.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EventTriggerDefinition
 type EventTriggerDefinition struct {
@@ -2468,12 +2024,6 @@ func (s EventTriggerDefinition) String() string {
 // GoString returns the string representation
 func (s EventTriggerDefinition) GoString() string {
 	return s.String()
-}
-
-// SetEventResourceARN sets the EventResourceARN field's value.
-func (s *EventTriggerDefinition) SetEventResourceARN(v string) *EventTriggerDefinition {
-	s.EventResourceARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifestRequest
@@ -2514,12 +2064,6 @@ func (s *GetJobManifestInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetJobManifestInput) SetJobId(v string) *GetJobManifestInput {
-	s.JobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifestResult
 type GetJobManifestOutput struct {
 	_ struct{} `type:"structure"`
@@ -2544,12 +2088,6 @@ func (s GetJobManifestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetJobManifestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetManifestURI sets the ManifestURI field's value.
-func (s *GetJobManifestOutput) SetManifestURI(v string) *GetJobManifestOutput {
-	s.ManifestURI = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCodeRequest
@@ -2590,12 +2128,6 @@ func (s *GetJobUnlockCodeInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *GetJobUnlockCodeInput) SetJobId(v string) *GetJobUnlockCodeInput {
-	s.JobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCodeResult
 type GetJobUnlockCodeOutput struct {
 	_ struct{} `type:"structure"`
@@ -2620,12 +2152,6 @@ func (s GetJobUnlockCodeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetJobUnlockCodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUnlockCode sets the UnlockCode field's value.
-func (s *GetJobUnlockCodeOutput) SetUnlockCode(v string) *GetJobUnlockCodeOutput {
-	s.UnlockCode = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsageRequest
@@ -2672,18 +2198,6 @@ func (s GetSnowballUsageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSnowballLimit sets the SnowballLimit field's value.
-func (s *GetSnowballUsageOutput) SetSnowballLimit(v int64) *GetSnowballUsageOutput {
-	s.SnowballLimit = &v
-	return s
-}
-
-// SetSnowballsInUse sets the SnowballsInUse field's value.
-func (s *GetSnowballUsageOutput) SetSnowballsInUse(v int64) *GetSnowballUsageOutput {
-	s.SnowballsInUse = &v
-	return s
-}
-
 // Each JobListEntry object contains a job's state, a job's ID, and a value
 // that indicates whether the job is a job part, in the case of an export job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobListEntry
@@ -2728,48 +2242,6 @@ func (s JobListEntry) GoString() string {
 	return s.String()
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *JobListEntry) SetCreationDate(v time.Time) *JobListEntry {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *JobListEntry) SetDescription(v string) *JobListEntry {
-	s.Description = &v
-	return s
-}
-
-// SetIsMaster sets the IsMaster field's value.
-func (s *JobListEntry) SetIsMaster(v bool) *JobListEntry {
-	s.IsMaster = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobListEntry) SetJobId(v string) *JobListEntry {
-	s.JobId = &v
-	return s
-}
-
-// SetJobState sets the JobState field's value.
-func (s *JobListEntry) SetJobState(v JobState) *JobListEntry {
-	s.JobState = v
-	return s
-}
-
-// SetJobType sets the JobType field's value.
-func (s *JobListEntry) SetJobType(v JobType) *JobListEntry {
-	s.JobType = v
-	return s
-}
-
-// SetSnowballType sets the SnowballType field's value.
-func (s *JobListEntry) SetSnowballType(v Type) *JobListEntry {
-	s.SnowballType = v
-	return s
-}
-
 // Contains job logs. Whenever Snowball is used to import data into or export
 // data out of Amazon S3, you'll have the option of downloading a PDF job report.
 // Job logs are returned as a part of the response syntax of the DescribeJob
@@ -2812,24 +2284,6 @@ func (s JobLogs) String() string {
 // GoString returns the string representation
 func (s JobLogs) GoString() string {
 	return s.String()
-}
-
-// SetJobCompletionReportURI sets the JobCompletionReportURI field's value.
-func (s *JobLogs) SetJobCompletionReportURI(v string) *JobLogs {
-	s.JobCompletionReportURI = &v
-	return s
-}
-
-// SetJobFailureLogURI sets the JobFailureLogURI field's value.
-func (s *JobLogs) SetJobFailureLogURI(v string) *JobLogs {
-	s.JobFailureLogURI = &v
-	return s
-}
-
-// SetJobSuccessLogURI sets the JobSuccessLogURI field's value.
-func (s *JobLogs) SetJobSuccessLogURI(v string) *JobLogs {
-	s.JobSuccessLogURI = &v
-	return s
 }
 
 // Contains information about a specific job including shipping information,
@@ -2918,108 +2372,6 @@ func (s JobMetadata) GoString() string {
 	return s.String()
 }
 
-// SetAddressId sets the AddressId field's value.
-func (s *JobMetadata) SetAddressId(v string) *JobMetadata {
-	s.AddressId = &v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *JobMetadata) SetClusterId(v string) *JobMetadata {
-	s.ClusterId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *JobMetadata) SetCreationDate(v time.Time) *JobMetadata {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDataTransferProgress sets the DataTransferProgress field's value.
-func (s *JobMetadata) SetDataTransferProgress(v *DataTransfer) *JobMetadata {
-	s.DataTransferProgress = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *JobMetadata) SetDescription(v string) *JobMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetForwardingAddressId sets the ForwardingAddressId field's value.
-func (s *JobMetadata) SetForwardingAddressId(v string) *JobMetadata {
-	s.ForwardingAddressId = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobMetadata) SetJobId(v string) *JobMetadata {
-	s.JobId = &v
-	return s
-}
-
-// SetJobLogInfo sets the JobLogInfo field's value.
-func (s *JobMetadata) SetJobLogInfo(v *JobLogs) *JobMetadata {
-	s.JobLogInfo = v
-	return s
-}
-
-// SetJobState sets the JobState field's value.
-func (s *JobMetadata) SetJobState(v JobState) *JobMetadata {
-	s.JobState = v
-	return s
-}
-
-// SetJobType sets the JobType field's value.
-func (s *JobMetadata) SetJobType(v JobType) *JobMetadata {
-	s.JobType = v
-	return s
-}
-
-// SetKmsKeyARN sets the KmsKeyARN field's value.
-func (s *JobMetadata) SetKmsKeyARN(v string) *JobMetadata {
-	s.KmsKeyARN = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *JobMetadata) SetNotification(v *Notification) *JobMetadata {
-	s.Notification = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *JobMetadata) SetResources(v *JobResource) *JobMetadata {
-	s.Resources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *JobMetadata) SetRoleARN(v string) *JobMetadata {
-	s.RoleARN = &v
-	return s
-}
-
-// SetShippingDetails sets the ShippingDetails field's value.
-func (s *JobMetadata) SetShippingDetails(v *ShippingDetails) *JobMetadata {
-	s.ShippingDetails = v
-	return s
-}
-
-// SetSnowballCapacityPreference sets the SnowballCapacityPreference field's value.
-func (s *JobMetadata) SetSnowballCapacityPreference(v Capacity) *JobMetadata {
-	s.SnowballCapacityPreference = v
-	return s
-}
-
-// SetSnowballType sets the SnowballType field's value.
-func (s *JobMetadata) SetSnowballType(v Type) *JobMetadata {
-	s.SnowballType = v
-	return s
-}
-
 // Contains an array of S3Resource objects. Each S3Resource object represents
 // an Amazon S3 bucket that your transferred data will be exported from or imported
 // into.
@@ -3059,18 +2411,6 @@ func (s *JobResource) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLambdaResources sets the LambdaResources field's value.
-func (s *JobResource) SetLambdaResources(v []LambdaResource) *JobResource {
-	s.LambdaResources = v
-	return s
-}
-
-// SetS3Resources sets the S3Resources field's value.
-func (s *JobResource) SetS3Resources(v []S3Resource) *JobResource {
-	s.S3Resources = v
-	return s
 }
 
 // Contains a key range. For export jobs, a S3Resource object can have an optional
@@ -3116,18 +2456,6 @@ func (s *KeyRange) Validate() error {
 	return nil
 }
 
-// SetBeginMarker sets the BeginMarker field's value.
-func (s *KeyRange) SetBeginMarker(v string) *KeyRange {
-	s.BeginMarker = &v
-	return s
-}
-
-// SetEndMarker sets the EndMarker field's value.
-func (s *KeyRange) SetEndMarker(v string) *KeyRange {
-	s.EndMarker = &v
-	return s
-}
-
 // Identifies
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/LambdaResource
 type LambdaResource struct {
@@ -3150,18 +2478,6 @@ func (s LambdaResource) String() string {
 // GoString returns the string representation
 func (s LambdaResource) GoString() string {
 	return s.String()
-}
-
-// SetEventTriggers sets the EventTriggers field's value.
-func (s *LambdaResource) SetEventTriggers(v []EventTriggerDefinition) *LambdaResource {
-	s.EventTriggers = v
-	return s
-}
-
-// SetLambdaArn sets the LambdaArn field's value.
-func (s *LambdaResource) SetLambdaArn(v string) *LambdaResource {
-	s.LambdaArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobsRequest
@@ -3212,24 +2528,6 @@ func (s *ListClusterJobsInput) Validate() error {
 	return nil
 }
 
-// SetClusterId sets the ClusterId field's value.
-func (s *ListClusterJobsInput) SetClusterId(v string) *ListClusterJobsInput {
-	s.ClusterId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListClusterJobsInput) SetMaxResults(v int64) *ListClusterJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListClusterJobsInput) SetNextToken(v string) *ListClusterJobsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobsResult
 type ListClusterJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3259,18 +2557,6 @@ func (s ListClusterJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListClusterJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobListEntries sets the JobListEntries field's value.
-func (s *ListClusterJobsOutput) SetJobListEntries(v []JobListEntry) *ListClusterJobsOutput {
-	s.JobListEntries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListClusterJobsOutput) SetNextToken(v string) *ListClusterJobsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClustersRequest
@@ -3309,18 +2595,6 @@ func (s *ListClustersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListClustersInput) SetMaxResults(v int64) *ListClustersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListClustersInput) SetNextToken(v string) *ListClustersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClustersResult
 type ListClustersOutput struct {
 	_ struct{} `type:"structure"`
@@ -3350,18 +2624,6 @@ func (s ListClustersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListClustersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClusterListEntries sets the ClusterListEntries field's value.
-func (s *ListClustersOutput) SetClusterListEntries(v []ClusterListEntry) *ListClustersOutput {
-	s.ClusterListEntries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListClustersOutput) SetNextToken(v string) *ListClustersOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobsRequest
@@ -3400,18 +2662,6 @@ func (s *ListJobsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobsInput) SetMaxResults(v int64) *ListJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobsResult
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3441,18 +2691,6 @@ func (s ListJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobListEntries sets the JobListEntries field's value.
-func (s *ListJobsOutput) SetJobListEntries(v []JobListEntry) *ListJobsOutput {
-	s.JobListEntries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsOutput) SetNextToken(v string) *ListJobsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
@@ -3492,24 +2730,6 @@ func (s Notification) String() string {
 // GoString returns the string representation
 func (s Notification) GoString() string {
 	return s.String()
-}
-
-// SetJobStatesToNotify sets the JobStatesToNotify field's value.
-func (s *Notification) SetJobStatesToNotify(v []JobState) *Notification {
-	s.JobStatesToNotify = v
-	return s
-}
-
-// SetNotifyAll sets the NotifyAll field's value.
-func (s *Notification) SetNotifyAll(v bool) *Notification {
-	s.NotifyAll = &v
-	return s
-}
-
-// SetSnsTopicARN sets the SnsTopicARN field's value.
-func (s *Notification) SetSnsTopicARN(v string) *Notification {
-	s.SnsTopicARN = &v
-	return s
 }
 
 // Each S3Resource object represents an Amazon S3 bucket that your transferred
@@ -3556,18 +2776,6 @@ func (s *S3Resource) Validate() error {
 	return nil
 }
 
-// SetBucketArn sets the BucketArn field's value.
-func (s *S3Resource) SetBucketArn(v string) *S3Resource {
-	s.BucketArn = &v
-	return s
-}
-
-// SetKeyRange sets the KeyRange field's value.
-func (s *S3Resource) SetKeyRange(v *KeyRange) *S3Resource {
-	s.KeyRange = v
-	return s
-}
-
 // The Status and TrackingNumber information for an inbound or outbound shipment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Shipment
 type Shipment struct {
@@ -3592,18 +2800,6 @@ func (s Shipment) String() string {
 // GoString returns the string representation
 func (s Shipment) GoString() string {
 	return s.String()
-}
-
-// SetStatus sets the Status field's value.
-func (s *Shipment) SetStatus(v string) *Shipment {
-	s.Status = &v
-	return s
-}
-
-// SetTrackingNumber sets the TrackingNumber field's value.
-func (s *Shipment) SetTrackingNumber(v string) *Shipment {
-	s.TrackingNumber = &v
-	return s
 }
 
 // A job's shipping information, including inbound and outbound tracking numbers
@@ -3648,24 +2844,6 @@ func (s ShippingDetails) String() string {
 // GoString returns the string representation
 func (s ShippingDetails) GoString() string {
 	return s.String()
-}
-
-// SetInboundShipment sets the InboundShipment field's value.
-func (s *ShippingDetails) SetInboundShipment(v *Shipment) *ShippingDetails {
-	s.InboundShipment = v
-	return s
-}
-
-// SetOutboundShipment sets the OutboundShipment field's value.
-func (s *ShippingDetails) SetOutboundShipment(v *Shipment) *ShippingDetails {
-	s.OutboundShipment = v
-	return s
-}
-
-// SetShippingOption sets the ShippingOption field's value.
-func (s *ShippingDetails) SetShippingOption(v ShippingOption) *ShippingDetails {
-	s.ShippingOption = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateClusterRequest
@@ -3742,54 +2920,6 @@ func (s *UpdateClusterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAddressId sets the AddressId field's value.
-func (s *UpdateClusterInput) SetAddressId(v string) *UpdateClusterInput {
-	s.AddressId = &v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *UpdateClusterInput) SetClusterId(v string) *UpdateClusterInput {
-	s.ClusterId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateClusterInput) SetDescription(v string) *UpdateClusterInput {
-	s.Description = &v
-	return s
-}
-
-// SetForwardingAddressId sets the ForwardingAddressId field's value.
-func (s *UpdateClusterInput) SetForwardingAddressId(v string) *UpdateClusterInput {
-	s.ForwardingAddressId = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *UpdateClusterInput) SetNotification(v *Notification) *UpdateClusterInput {
-	s.Notification = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *UpdateClusterInput) SetResources(v *JobResource) *UpdateClusterInput {
-	s.Resources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *UpdateClusterInput) SetRoleARN(v string) *UpdateClusterInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetShippingOption sets the ShippingOption field's value.
-func (s *UpdateClusterInput) SetShippingOption(v ShippingOption) *UpdateClusterInput {
-	s.ShippingOption = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateClusterResult
@@ -3892,60 +3022,6 @@ func (s *UpdateJobInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAddressId sets the AddressId field's value.
-func (s *UpdateJobInput) SetAddressId(v string) *UpdateJobInput {
-	s.AddressId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateJobInput) SetDescription(v string) *UpdateJobInput {
-	s.Description = &v
-	return s
-}
-
-// SetForwardingAddressId sets the ForwardingAddressId field's value.
-func (s *UpdateJobInput) SetForwardingAddressId(v string) *UpdateJobInput {
-	s.ForwardingAddressId = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *UpdateJobInput) SetJobId(v string) *UpdateJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *UpdateJobInput) SetNotification(v *Notification) *UpdateJobInput {
-	s.Notification = v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *UpdateJobInput) SetResources(v *JobResource) *UpdateJobInput {
-	s.Resources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *UpdateJobInput) SetRoleARN(v string) *UpdateJobInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetShippingOption sets the ShippingOption field's value.
-func (s *UpdateJobInput) SetShippingOption(v ShippingOption) *UpdateJobInput {
-	s.ShippingOption = v
-	return s
-}
-
-// SetSnowballCapacityPreference sets the SnowballCapacityPreference field's value.
-func (s *UpdateJobInput) SetSnowballCapacityPreference(v Capacity) *UpdateJobInput {
-	s.SnowballCapacityPreference = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobResult

@@ -2211,12 +2211,6 @@ func (s *BatchGetRepositoriesInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryNames sets the RepositoryNames field's value.
-func (s *BatchGetRepositoriesInput) SetRepositoryNames(v []string) *BatchGetRepositoriesInput {
-	s.RepositoryNames = v
-	return s
-}
-
 // Represents the output of a batch get repositories operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositoriesOutput
 type BatchGetRepositoriesOutput struct {
@@ -2244,18 +2238,6 @@ func (s BatchGetRepositoriesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetRepositoriesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRepositories sets the Repositories field's value.
-func (s *BatchGetRepositoriesOutput) SetRepositories(v []RepositoryMetadata) *BatchGetRepositoriesOutput {
-	s.Repositories = v
-	return s
-}
-
-// SetRepositoriesNotFound sets the RepositoriesNotFound field's value.
-func (s *BatchGetRepositoriesOutput) SetRepositoriesNotFound(v []string) *BatchGetRepositoriesOutput {
-	s.RepositoriesNotFound = v
-	return s
 }
 
 // Returns information about a specific Git blob object.
@@ -2291,24 +2273,6 @@ func (s BlobMetadata) GoString() string {
 	return s.String()
 }
 
-// SetBlobId sets the BlobId field's value.
-func (s *BlobMetadata) SetBlobId(v string) *BlobMetadata {
-	s.BlobId = &v
-	return s
-}
-
-// SetMode sets the Mode field's value.
-func (s *BlobMetadata) SetMode(v string) *BlobMetadata {
-	s.Mode = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *BlobMetadata) SetPath(v string) *BlobMetadata {
-	s.Path = &v
-	return s
-}
-
 // Returns information about a branch.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchInfo
 type BranchInfo struct {
@@ -2329,18 +2293,6 @@ func (s BranchInfo) String() string {
 // GoString returns the string representation
 func (s BranchInfo) GoString() string {
 	return s.String()
-}
-
-// SetBranchName sets the BranchName field's value.
-func (s *BranchInfo) SetBranchName(v string) *BranchInfo {
-	s.BranchName = &v
-	return s
-}
-
-// SetCommitId sets the CommitId field's value.
-func (s *BranchInfo) SetCommitId(v string) *BranchInfo {
-	s.CommitId = &v
-	return s
 }
 
 // Returns information about a specific comment.
@@ -2386,54 +2338,6 @@ func (s Comment) GoString() string {
 	return s.String()
 }
 
-// SetAuthorArn sets the AuthorArn field's value.
-func (s *Comment) SetAuthorArn(v string) *Comment {
-	s.AuthorArn = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *Comment) SetClientRequestToken(v string) *Comment {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetCommentId sets the CommentId field's value.
-func (s *Comment) SetCommentId(v string) *Comment {
-	s.CommentId = &v
-	return s
-}
-
-// SetContent sets the Content field's value.
-func (s *Comment) SetContent(v string) *Comment {
-	s.Content = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *Comment) SetCreationDate(v time.Time) *Comment {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDeleted sets the Deleted field's value.
-func (s *Comment) SetDeleted(v bool) *Comment {
-	s.Deleted = &v
-	return s
-}
-
-// SetInReplyTo sets the InReplyTo field's value.
-func (s *Comment) SetInReplyTo(v string) *Comment {
-	s.InReplyTo = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *Comment) SetLastModifiedDate(v time.Time) *Comment {
-	s.LastModifiedDate = &v
-	return s
-}
-
 // Returns information about comments on the comparison between two commits.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentsForComparedCommit
 type CommentsForComparedCommit struct {
@@ -2472,48 +2376,6 @@ func (s CommentsForComparedCommit) String() string {
 // GoString returns the string representation
 func (s CommentsForComparedCommit) GoString() string {
 	return s.String()
-}
-
-// SetAfterBlobId sets the AfterBlobId field's value.
-func (s *CommentsForComparedCommit) SetAfterBlobId(v string) *CommentsForComparedCommit {
-	s.AfterBlobId = &v
-	return s
-}
-
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *CommentsForComparedCommit) SetAfterCommitId(v string) *CommentsForComparedCommit {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeBlobId sets the BeforeBlobId field's value.
-func (s *CommentsForComparedCommit) SetBeforeBlobId(v string) *CommentsForComparedCommit {
-	s.BeforeBlobId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *CommentsForComparedCommit) SetBeforeCommitId(v string) *CommentsForComparedCommit {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetComments sets the Comments field's value.
-func (s *CommentsForComparedCommit) SetComments(v []Comment) *CommentsForComparedCommit {
-	s.Comments = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CommentsForComparedCommit) SetLocation(v *Location) *CommentsForComparedCommit {
-	s.Location = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CommentsForComparedCommit) SetRepositoryName(v string) *CommentsForComparedCommit {
-	s.RepositoryName = &v
-	return s
 }
 
 // Returns information about comments on a pull request.
@@ -2564,54 +2426,6 @@ func (s CommentsForPullRequest) GoString() string {
 	return s.String()
 }
 
-// SetAfterBlobId sets the AfterBlobId field's value.
-func (s *CommentsForPullRequest) SetAfterBlobId(v string) *CommentsForPullRequest {
-	s.AfterBlobId = &v
-	return s
-}
-
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *CommentsForPullRequest) SetAfterCommitId(v string) *CommentsForPullRequest {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeBlobId sets the BeforeBlobId field's value.
-func (s *CommentsForPullRequest) SetBeforeBlobId(v string) *CommentsForPullRequest {
-	s.BeforeBlobId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *CommentsForPullRequest) SetBeforeCommitId(v string) *CommentsForPullRequest {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetComments sets the Comments field's value.
-func (s *CommentsForPullRequest) SetComments(v []Comment) *CommentsForPullRequest {
-	s.Comments = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CommentsForPullRequest) SetLocation(v *Location) *CommentsForPullRequest {
-	s.Location = v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *CommentsForPullRequest) SetPullRequestId(v string) *CommentsForPullRequest {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CommentsForPullRequest) SetRepositoryName(v string) *CommentsForPullRequest {
-	s.RepositoryName = &v
-	return s
-}
-
 // Returns information about a specific commit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Commit
 type Commit struct {
@@ -2656,48 +2470,6 @@ func (s Commit) String() string {
 // GoString returns the string representation
 func (s Commit) GoString() string {
 	return s.String()
-}
-
-// SetAdditionalData sets the AdditionalData field's value.
-func (s *Commit) SetAdditionalData(v string) *Commit {
-	s.AdditionalData = &v
-	return s
-}
-
-// SetAuthor sets the Author field's value.
-func (s *Commit) SetAuthor(v *UserInfo) *Commit {
-	s.Author = v
-	return s
-}
-
-// SetCommitId sets the CommitId field's value.
-func (s *Commit) SetCommitId(v string) *Commit {
-	s.CommitId = &v
-	return s
-}
-
-// SetCommitter sets the Committer field's value.
-func (s *Commit) SetCommitter(v *UserInfo) *Commit {
-	s.Committer = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Commit) SetMessage(v string) *Commit {
-	s.Message = &v
-	return s
-}
-
-// SetParents sets the Parents field's value.
-func (s *Commit) SetParents(v []string) *Commit {
-	s.Parents = v
-	return s
-}
-
-// SetTreeId sets the TreeId field's value.
-func (s *Commit) SetTreeId(v string) *Commit {
-	s.TreeId = &v
-	return s
 }
 
 // Represents the input of a create branch operation.
@@ -2757,24 +2529,6 @@ func (s *CreateBranchInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBranchName sets the BranchName field's value.
-func (s *CreateBranchInput) SetBranchName(v string) *CreateBranchInput {
-	s.BranchName = &v
-	return s
-}
-
-// SetCommitId sets the CommitId field's value.
-func (s *CreateBranchInput) SetCommitId(v string) *CreateBranchInput {
-	s.CommitId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CreateBranchInput) SetRepositoryName(v string) *CreateBranchInput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranchOutput
@@ -2865,30 +2619,6 @@ func (s *CreatePullRequestInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreatePullRequestInput) SetClientRequestToken(v string) *CreatePullRequestInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreatePullRequestInput) SetDescription(v string) *CreatePullRequestInput {
-	s.Description = &v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *CreatePullRequestInput) SetTargets(v []Target) *CreatePullRequestInput {
-	s.Targets = v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *CreatePullRequestInput) SetTitle(v string) *CreatePullRequestInput {
-	s.Title = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestOutput
 type CreatePullRequestOutput struct {
 	_ struct{} `type:"structure"`
@@ -2914,12 +2644,6 @@ func (s CreatePullRequestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePullRequestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPullRequest sets the PullRequest field's value.
-func (s *CreatePullRequestOutput) SetPullRequest(v *PullRequest) *CreatePullRequestOutput {
-	s.PullRequest = v
-	return s
 }
 
 // Represents the input of a create repository operation.
@@ -2975,18 +2699,6 @@ func (s *CreateRepositoryInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryDescription sets the RepositoryDescription field's value.
-func (s *CreateRepositoryInput) SetRepositoryDescription(v string) *CreateRepositoryInput {
-	s.RepositoryDescription = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *CreateRepositoryInput) SetRepositoryName(v string) *CreateRepositoryInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a create repository operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryOutput
 type CreateRepositoryOutput struct {
@@ -3011,12 +2723,6 @@ func (s CreateRepositoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRepositoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRepositoryMetadata sets the RepositoryMetadata field's value.
-func (s *CreateRepositoryOutput) SetRepositoryMetadata(v *RepositoryMetadata) *CreateRepositoryOutput {
-	s.RepositoryMetadata = v
-	return s
 }
 
 // Represents the input of a delete branch operation.
@@ -3069,18 +2775,6 @@ func (s *DeleteBranchInput) Validate() error {
 	return nil
 }
 
-// SetBranchName sets the BranchName field's value.
-func (s *DeleteBranchInput) SetBranchName(v string) *DeleteBranchInput {
-	s.BranchName = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteBranchInput) SetRepositoryName(v string) *DeleteBranchInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a delete branch operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteBranchOutput
 type DeleteBranchOutput struct {
@@ -3106,12 +2800,6 @@ func (s DeleteBranchOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteBranchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletedBranch sets the DeletedBranch field's value.
-func (s *DeleteBranchOutput) SetDeletedBranch(v *BranchInfo) *DeleteBranchOutput {
-	s.DeletedBranch = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContentInput
@@ -3149,12 +2837,6 @@ func (s *DeleteCommentContentInput) Validate() error {
 	return nil
 }
 
-// SetCommentId sets the CommentId field's value.
-func (s *DeleteCommentContentInput) SetCommentId(v string) *DeleteCommentContentInput {
-	s.CommentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteCommentContentOutput
 type DeleteCommentContentOutput struct {
 	_ struct{} `type:"structure"`
@@ -3178,12 +2860,6 @@ func (s DeleteCommentContentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCommentContentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComment sets the Comment field's value.
-func (s *DeleteCommentContentOutput) SetComment(v *Comment) *DeleteCommentContentOutput {
-	s.Comment = v
-	return s
 }
 
 // Represents the input of a delete repository operation.
@@ -3224,12 +2900,6 @@ func (s *DeleteRepositoryInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *DeleteRepositoryInput) SetRepositoryName(v string) *DeleteRepositoryInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a delete repository operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepositoryOutput
 type DeleteRepositoryOutput struct {
@@ -3254,12 +2924,6 @@ func (s DeleteRepositoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteRepositoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRepositoryId sets the RepositoryId field's value.
-func (s *DeleteRepositoryOutput) SetRepositoryId(v string) *DeleteRepositoryOutput {
-	s.RepositoryId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEventsInput
@@ -3313,36 +2977,6 @@ func (s *DescribePullRequestEventsInput) Validate() error {
 	return nil
 }
 
-// SetActorArn sets the ActorArn field's value.
-func (s *DescribePullRequestEventsInput) SetActorArn(v string) *DescribePullRequestEventsInput {
-	s.ActorArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribePullRequestEventsInput) SetMaxResults(v int64) *DescribePullRequestEventsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribePullRequestEventsInput) SetNextToken(v string) *DescribePullRequestEventsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPullRequestEventType sets the PullRequestEventType field's value.
-func (s *DescribePullRequestEventsInput) SetPullRequestEventType(v PullRequestEventType) *DescribePullRequestEventsInput {
-	s.PullRequestEventType = v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *DescribePullRequestEventsInput) SetPullRequestId(v string) *DescribePullRequestEventsInput {
-	s.PullRequestId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DescribePullRequestEventsOutput
 type DescribePullRequestEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3374,18 +3008,6 @@ func (s DescribePullRequestEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribePullRequestEventsOutput) SetNextToken(v string) *DescribePullRequestEventsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPullRequestEvents sets the PullRequestEvents field's value.
-func (s *DescribePullRequestEventsOutput) SetPullRequestEvents(v []PullRequestEvent) *DescribePullRequestEventsOutput {
-	s.PullRequestEvents = v
-	return s
-}
-
 // Returns information about a set of differences for a commit specifier.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Difference
 type Difference struct {
@@ -3412,24 +3034,6 @@ func (s Difference) String() string {
 // GoString returns the string representation
 func (s Difference) GoString() string {
 	return s.String()
-}
-
-// SetAfterBlob sets the AfterBlob field's value.
-func (s *Difference) SetAfterBlob(v *BlobMetadata) *Difference {
-	s.AfterBlob = v
-	return s
-}
-
-// SetBeforeBlob sets the BeforeBlob field's value.
-func (s *Difference) SetBeforeBlob(v *BlobMetadata) *Difference {
-	s.BeforeBlob = v
-	return s
-}
-
-// SetChangeType sets the ChangeType field's value.
-func (s *Difference) SetChangeType(v ChangeTypeEnum) *Difference {
-	s.ChangeType = v
-	return s
 }
 
 // Represents the input of a get blob operation.
@@ -3479,18 +3083,6 @@ func (s *GetBlobInput) Validate() error {
 	return nil
 }
 
-// SetBlobId sets the BlobId field's value.
-func (s *GetBlobInput) SetBlobId(v string) *GetBlobInput {
-	s.BlobId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetBlobInput) SetRepositoryName(v string) *GetBlobInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a get blob operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobOutput
 type GetBlobOutput struct {
@@ -3519,12 +3111,6 @@ func (s GetBlobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBlobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContent sets the Content field's value.
-func (s *GetBlobOutput) SetContent(v []byte) *GetBlobOutput {
-	s.Content = v
-	return s
 }
 
 // Represents the input of a get branch operation.
@@ -3566,18 +3152,6 @@ func (s *GetBranchInput) Validate() error {
 	return nil
 }
 
-// SetBranchName sets the BranchName field's value.
-func (s *GetBranchInput) SetBranchName(v string) *GetBranchInput {
-	s.BranchName = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetBranchInput) SetRepositoryName(v string) *GetBranchInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a get branch operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranchOutput
 type GetBranchOutput struct {
@@ -3602,12 +3176,6 @@ func (s GetBranchOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBranchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBranch sets the Branch field's value.
-func (s *GetBranchOutput) SetBranch(v *BranchInfo) *GetBranchOutput {
-	s.Branch = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentInput
@@ -3645,12 +3213,6 @@ func (s *GetCommentInput) Validate() error {
 	return nil
 }
 
-// SetCommentId sets the CommentId field's value.
-func (s *GetCommentInput) SetCommentId(v string) *GetCommentInput {
-	s.CommentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentOutput
 type GetCommentOutput struct {
 	_ struct{} `type:"structure"`
@@ -3674,12 +3236,6 @@ func (s GetCommentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCommentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComment sets the Comment field's value.
-func (s *GetCommentOutput) SetComment(v *Comment) *GetCommentOutput {
-	s.Comment = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommitInput
@@ -3741,36 +3297,6 @@ func (s *GetCommentsForComparedCommitInput) Validate() error {
 	return nil
 }
 
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *GetCommentsForComparedCommitInput) SetAfterCommitId(v string) *GetCommentsForComparedCommitInput {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *GetCommentsForComparedCommitInput) SetBeforeCommitId(v string) *GetCommentsForComparedCommitInput {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetCommentsForComparedCommitInput) SetMaxResults(v int64) *GetCommentsForComparedCommitInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetCommentsForComparedCommitInput) SetNextToken(v string) *GetCommentsForComparedCommitInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetCommentsForComparedCommitInput) SetRepositoryName(v string) *GetCommentsForComparedCommitInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForComparedCommitOutput
 type GetCommentsForComparedCommitOutput struct {
 	_ struct{} `type:"structure"`
@@ -3798,18 +3324,6 @@ func (s GetCommentsForComparedCommitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCommentsForComparedCommitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCommentsForComparedCommitData sets the CommentsForComparedCommitData field's value.
-func (s *GetCommentsForComparedCommitOutput) SetCommentsForComparedCommitData(v []CommentsForComparedCommit) *GetCommentsForComparedCommitOutput {
-	s.CommentsForComparedCommitData = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetCommentsForComparedCommitOutput) SetNextToken(v string) *GetCommentsForComparedCommitOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForPullRequestInput
@@ -3869,42 +3383,6 @@ func (s *GetCommentsForPullRequestInput) Validate() error {
 	return nil
 }
 
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *GetCommentsForPullRequestInput) SetAfterCommitId(v string) *GetCommentsForPullRequestInput {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *GetCommentsForPullRequestInput) SetBeforeCommitId(v string) *GetCommentsForPullRequestInput {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetCommentsForPullRequestInput) SetMaxResults(v int64) *GetCommentsForPullRequestInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetCommentsForPullRequestInput) SetNextToken(v string) *GetCommentsForPullRequestInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *GetCommentsForPullRequestInput) SetPullRequestId(v string) *GetCommentsForPullRequestInput {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetCommentsForPullRequestInput) SetRepositoryName(v string) *GetCommentsForPullRequestInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommentsForPullRequestOutput
 type GetCommentsForPullRequestOutput struct {
 	_ struct{} `type:"structure"`
@@ -3932,18 +3410,6 @@ func (s GetCommentsForPullRequestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCommentsForPullRequestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCommentsForPullRequestData sets the CommentsForPullRequestData field's value.
-func (s *GetCommentsForPullRequestOutput) SetCommentsForPullRequestData(v []CommentsForPullRequest) *GetCommentsForPullRequestOutput {
-	s.CommentsForPullRequestData = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetCommentsForPullRequestOutput) SetNextToken(v string) *GetCommentsForPullRequestOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input of a get commit operation.
@@ -3993,18 +3459,6 @@ func (s *GetCommitInput) Validate() error {
 	return nil
 }
 
-// SetCommitId sets the CommitId field's value.
-func (s *GetCommitInput) SetCommitId(v string) *GetCommitInput {
-	s.CommitId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetCommitInput) SetRepositoryName(v string) *GetCommitInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a get commit operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommitOutput
 type GetCommitOutput struct {
@@ -4031,12 +3485,6 @@ func (s GetCommitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCommitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCommit sets the Commit field's value.
-func (s *GetCommitOutput) SetCommit(v *Commit) *GetCommitOutput {
-	s.Commit = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferencesInput
@@ -4111,48 +3559,6 @@ func (s *GetDifferencesInput) Validate() error {
 	return nil
 }
 
-// SetAfterCommitSpecifier sets the AfterCommitSpecifier field's value.
-func (s *GetDifferencesInput) SetAfterCommitSpecifier(v string) *GetDifferencesInput {
-	s.AfterCommitSpecifier = &v
-	return s
-}
-
-// SetAfterPath sets the AfterPath field's value.
-func (s *GetDifferencesInput) SetAfterPath(v string) *GetDifferencesInput {
-	s.AfterPath = &v
-	return s
-}
-
-// SetBeforeCommitSpecifier sets the BeforeCommitSpecifier field's value.
-func (s *GetDifferencesInput) SetBeforeCommitSpecifier(v string) *GetDifferencesInput {
-	s.BeforeCommitSpecifier = &v
-	return s
-}
-
-// SetBeforePath sets the BeforePath field's value.
-func (s *GetDifferencesInput) SetBeforePath(v string) *GetDifferencesInput {
-	s.BeforePath = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetDifferencesInput) SetMaxResults(v int64) *GetDifferencesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetDifferencesInput) SetNextToken(v string) *GetDifferencesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetDifferencesInput) SetRepositoryName(v string) *GetDifferencesInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferencesOutput
 type GetDifferencesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4181,18 +3587,6 @@ func (s GetDifferencesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDifferencesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDifferences sets the Differences field's value.
-func (s *GetDifferencesOutput) SetDifferences(v []Difference) *GetDifferencesOutput {
-	s.Differences = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetDifferencesOutput) SetNextToken(v string) *GetDifferencesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflictsInput
@@ -4261,30 +3655,6 @@ func (s *GetMergeConflictsInput) Validate() error {
 	return nil
 }
 
-// SetDestinationCommitSpecifier sets the DestinationCommitSpecifier field's value.
-func (s *GetMergeConflictsInput) SetDestinationCommitSpecifier(v string) *GetMergeConflictsInput {
-	s.DestinationCommitSpecifier = &v
-	return s
-}
-
-// SetMergeOption sets the MergeOption field's value.
-func (s *GetMergeConflictsInput) SetMergeOption(v MergeOptionTypeEnum) *GetMergeConflictsInput {
-	s.MergeOption = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetMergeConflictsInput) SetRepositoryName(v string) *GetMergeConflictsInput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetSourceCommitSpecifier sets the SourceCommitSpecifier field's value.
-func (s *GetMergeConflictsInput) SetSourceCommitSpecifier(v string) *GetMergeConflictsInput {
-	s.SourceCommitSpecifier = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeConflictsOutput
 type GetMergeConflictsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4324,24 +3694,6 @@ func (s GetMergeConflictsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDestinationCommitId sets the DestinationCommitId field's value.
-func (s *GetMergeConflictsOutput) SetDestinationCommitId(v string) *GetMergeConflictsOutput {
-	s.DestinationCommitId = &v
-	return s
-}
-
-// SetMergeable sets the Mergeable field's value.
-func (s *GetMergeConflictsOutput) SetMergeable(v bool) *GetMergeConflictsOutput {
-	s.Mergeable = &v
-	return s
-}
-
-// SetSourceCommitId sets the SourceCommitId field's value.
-func (s *GetMergeConflictsOutput) SetSourceCommitId(v string) *GetMergeConflictsOutput {
-	s.SourceCommitId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequestInput
 type GetPullRequestInput struct {
 	_ struct{} `type:"structure"`
@@ -4376,12 +3728,6 @@ func (s *GetPullRequestInput) Validate() error {
 	return nil
 }
 
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *GetPullRequestInput) SetPullRequestId(v string) *GetPullRequestInput {
-	s.PullRequestId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetPullRequestOutput
 type GetPullRequestOutput struct {
 	_ struct{} `type:"structure"`
@@ -4407,12 +3753,6 @@ func (s GetPullRequestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPullRequestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPullRequest sets the PullRequest field's value.
-func (s *GetPullRequestOutput) SetPullRequest(v *PullRequest) *GetPullRequestOutput {
-	s.PullRequest = v
-	return s
 }
 
 // Represents the input of a get repository operation.
@@ -4453,12 +3793,6 @@ func (s *GetRepositoryInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetRepositoryInput) SetRepositoryName(v string) *GetRepositoryInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a get repository operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryOutput
 type GetRepositoryOutput struct {
@@ -4483,12 +3817,6 @@ func (s GetRepositoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRepositoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRepositoryMetadata sets the RepositoryMetadata field's value.
-func (s *GetRepositoryOutput) SetRepositoryMetadata(v *RepositoryMetadata) *GetRepositoryOutput {
-	s.RepositoryMetadata = v
-	return s
 }
 
 // Represents the input of a get repository triggers operation.
@@ -4529,12 +3857,6 @@ func (s *GetRepositoryTriggersInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *GetRepositoryTriggersInput) SetRepositoryName(v string) *GetRepositoryTriggersInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a get repository triggers operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggersOutput
 type GetRepositoryTriggersOutput struct {
@@ -4562,18 +3884,6 @@ func (s GetRepositoryTriggersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRepositoryTriggersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *GetRepositoryTriggersOutput) SetConfigurationId(v string) *GetRepositoryTriggersOutput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetTriggers sets the Triggers field's value.
-func (s *GetRepositoryTriggersOutput) SetTriggers(v []RepositoryTrigger) *GetRepositoryTriggersOutput {
-	s.Triggers = v
-	return s
 }
 
 // Represents the input of a list branches operation.
@@ -4617,18 +3927,6 @@ func (s *ListBranchesInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListBranchesInput) SetNextToken(v string) *ListBranchesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *ListBranchesInput) SetRepositoryName(v string) *ListBranchesInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Represents the output of a list branches operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranchesOutput
 type ListBranchesOutput struct {
@@ -4656,18 +3954,6 @@ func (s ListBranchesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBranchesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBranches sets the Branches field's value.
-func (s *ListBranchesOutput) SetBranches(v []string) *ListBranchesOutput {
-	s.Branches = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBranchesOutput) SetNextToken(v string) *ListBranchesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListPullRequestsInput
@@ -4723,36 +4009,6 @@ func (s *ListPullRequestsInput) Validate() error {
 	return nil
 }
 
-// SetAuthorArn sets the AuthorArn field's value.
-func (s *ListPullRequestsInput) SetAuthorArn(v string) *ListPullRequestsInput {
-	s.AuthorArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPullRequestsInput) SetMaxResults(v int64) *ListPullRequestsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPullRequestsInput) SetNextToken(v string) *ListPullRequestsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPullRequestStatus sets the PullRequestStatus field's value.
-func (s *ListPullRequestsInput) SetPullRequestStatus(v PullRequestStatusEnum) *ListPullRequestsInput {
-	s.PullRequestStatus = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *ListPullRequestsInput) SetRepositoryName(v string) *ListPullRequestsInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListPullRequestsOutput
 type ListPullRequestsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4784,18 +4040,6 @@ func (s ListPullRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListPullRequestsOutput) SetNextToken(v string) *ListPullRequestsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPullRequestIds sets the PullRequestIds field's value.
-func (s *ListPullRequestsOutput) SetPullRequestIds(v []string) *ListPullRequestsOutput {
-	s.PullRequestIds = v
-	return s
-}
-
 // Represents the input of a list repositories operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositoriesInput
 type ListRepositoriesInput struct {
@@ -4822,24 +4066,6 @@ func (s ListRepositoriesInput) String() string {
 // GoString returns the string representation
 func (s ListRepositoriesInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRepositoriesInput) SetNextToken(v string) *ListRepositoriesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *ListRepositoriesInput) SetOrder(v OrderEnum) *ListRepositoriesInput {
-	s.Order = v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListRepositoriesInput) SetSortBy(v SortByEnum) *ListRepositoriesInput {
-	s.SortBy = v
-	return s
 }
 
 // Represents the output of a list repositories operation.
@@ -4874,18 +4100,6 @@ func (s ListRepositoriesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListRepositoriesOutput) SetNextToken(v string) *ListRepositoriesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRepositories sets the Repositories field's value.
-func (s *ListRepositoriesOutput) SetRepositories(v []RepositoryNameIdPair) *ListRepositoriesOutput {
-	s.Repositories = v
-	return s
-}
-
 // Returns information about the location of a change or comment in the comparison
 // between two commits or a pull request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Location
@@ -4914,24 +4128,6 @@ func (s Location) GoString() string {
 	return s.String()
 }
 
-// SetFilePath sets the FilePath field's value.
-func (s *Location) SetFilePath(v string) *Location {
-	s.FilePath = &v
-	return s
-}
-
-// SetFilePosition sets the FilePosition field's value.
-func (s *Location) SetFilePosition(v int64) *Location {
-	s.FilePosition = &v
-	return s
-}
-
-// SetRelativeFileVersion sets the RelativeFileVersion field's value.
-func (s *Location) SetRelativeFileVersion(v RelativeFileVersionEnum) *Location {
-	s.RelativeFileVersion = v
-	return s
-}
-
 // Returns information about a merge or potential merge between a source reference
 // and a destination reference in a pull request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeMetadata
@@ -4953,18 +4149,6 @@ func (s MergeMetadata) String() string {
 // GoString returns the string representation
 func (s MergeMetadata) GoString() string {
 	return s.String()
-}
-
-// SetIsMerged sets the IsMerged field's value.
-func (s *MergeMetadata) SetIsMerged(v bool) *MergeMetadata {
-	s.IsMerged = &v
-	return s
-}
-
-// SetMergedBy sets the MergedBy field's value.
-func (s *MergeMetadata) SetMergedBy(v string) *MergeMetadata {
-	s.MergedBy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForwardInput
@@ -5018,24 +4202,6 @@ func (s *MergePullRequestByFastForwardInput) Validate() error {
 	return nil
 }
 
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *MergePullRequestByFastForwardInput) SetPullRequestId(v string) *MergePullRequestByFastForwardInput {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *MergePullRequestByFastForwardInput) SetRepositoryName(v string) *MergePullRequestByFastForwardInput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetSourceCommitId sets the SourceCommitId field's value.
-func (s *MergePullRequestByFastForwardInput) SetSourceCommitId(v string) *MergePullRequestByFastForwardInput {
-	s.SourceCommitId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestByFastForwardOutput
 type MergePullRequestByFastForwardOutput struct {
 	_ struct{} `type:"structure"`
@@ -5060,12 +4226,6 @@ func (s MergePullRequestByFastForwardOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s MergePullRequestByFastForwardOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPullRequest sets the PullRequest field's value.
-func (s *MergePullRequestByFastForwardOutput) SetPullRequest(v *PullRequest) *MergePullRequestByFastForwardOutput {
-	s.PullRequest = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommitInput
@@ -5138,42 +4298,6 @@ func (s *PostCommentForComparedCommitInput) Validate() error {
 	return nil
 }
 
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *PostCommentForComparedCommitInput) SetAfterCommitId(v string) *PostCommentForComparedCommitInput {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *PostCommentForComparedCommitInput) SetBeforeCommitId(v string) *PostCommentForComparedCommitInput {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *PostCommentForComparedCommitInput) SetClientRequestToken(v string) *PostCommentForComparedCommitInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetContent sets the Content field's value.
-func (s *PostCommentForComparedCommitInput) SetContent(v string) *PostCommentForComparedCommitInput {
-	s.Content = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *PostCommentForComparedCommitInput) SetLocation(v *Location) *PostCommentForComparedCommitInput {
-	s.Location = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PostCommentForComparedCommitInput) SetRepositoryName(v string) *PostCommentForComparedCommitInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForComparedCommitOutput
 type PostCommentForComparedCommitOutput struct {
 	_ struct{} `type:"structure"`
@@ -5218,48 +4342,6 @@ func (s PostCommentForComparedCommitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PostCommentForComparedCommitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAfterBlobId sets the AfterBlobId field's value.
-func (s *PostCommentForComparedCommitOutput) SetAfterBlobId(v string) *PostCommentForComparedCommitOutput {
-	s.AfterBlobId = &v
-	return s
-}
-
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *PostCommentForComparedCommitOutput) SetAfterCommitId(v string) *PostCommentForComparedCommitOutput {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeBlobId sets the BeforeBlobId field's value.
-func (s *PostCommentForComparedCommitOutput) SetBeforeBlobId(v string) *PostCommentForComparedCommitOutput {
-	s.BeforeBlobId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *PostCommentForComparedCommitOutput) SetBeforeCommitId(v string) *PostCommentForComparedCommitOutput {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetComment sets the Comment field's value.
-func (s *PostCommentForComparedCommitOutput) SetComment(v *Comment) *PostCommentForComparedCommitOutput {
-	s.Comment = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *PostCommentForComparedCommitOutput) SetLocation(v *Location) *PostCommentForComparedCommitOutput {
-	s.Location = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PostCommentForComparedCommitOutput) SetRepositoryName(v string) *PostCommentForComparedCommitOutput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForPullRequestInput
@@ -5348,48 +4430,6 @@ func (s *PostCommentForPullRequestInput) Validate() error {
 	return nil
 }
 
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *PostCommentForPullRequestInput) SetAfterCommitId(v string) *PostCommentForPullRequestInput {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *PostCommentForPullRequestInput) SetBeforeCommitId(v string) *PostCommentForPullRequestInput {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *PostCommentForPullRequestInput) SetClientRequestToken(v string) *PostCommentForPullRequestInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetContent sets the Content field's value.
-func (s *PostCommentForPullRequestInput) SetContent(v string) *PostCommentForPullRequestInput {
-	s.Content = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *PostCommentForPullRequestInput) SetLocation(v *Location) *PostCommentForPullRequestInput {
-	s.Location = v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *PostCommentForPullRequestInput) SetPullRequestId(v string) *PostCommentForPullRequestInput {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PostCommentForPullRequestInput) SetRepositoryName(v string) *PostCommentForPullRequestInput {
-	s.RepositoryName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentForPullRequestOutput
 type PostCommentForPullRequestOutput struct {
 	_ struct{} `type:"structure"`
@@ -5437,54 +4477,6 @@ func (s PostCommentForPullRequestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PostCommentForPullRequestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAfterBlobId sets the AfterBlobId field's value.
-func (s *PostCommentForPullRequestOutput) SetAfterBlobId(v string) *PostCommentForPullRequestOutput {
-	s.AfterBlobId = &v
-	return s
-}
-
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *PostCommentForPullRequestOutput) SetAfterCommitId(v string) *PostCommentForPullRequestOutput {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeBlobId sets the BeforeBlobId field's value.
-func (s *PostCommentForPullRequestOutput) SetBeforeBlobId(v string) *PostCommentForPullRequestOutput {
-	s.BeforeBlobId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *PostCommentForPullRequestOutput) SetBeforeCommitId(v string) *PostCommentForPullRequestOutput {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetComment sets the Comment field's value.
-func (s *PostCommentForPullRequestOutput) SetComment(v *Comment) *PostCommentForPullRequestOutput {
-	s.Comment = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *PostCommentForPullRequestOutput) SetLocation(v *Location) *PostCommentForPullRequestOutput {
-	s.Location = v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *PostCommentForPullRequestOutput) SetPullRequestId(v string) *PostCommentForPullRequestOutput {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PostCommentForPullRequestOutput) SetRepositoryName(v string) *PostCommentForPullRequestOutput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReplyInput
@@ -5537,24 +4529,6 @@ func (s *PostCommentReplyInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *PostCommentReplyInput) SetClientRequestToken(v string) *PostCommentReplyInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetContent sets the Content field's value.
-func (s *PostCommentReplyInput) SetContent(v string) *PostCommentReplyInput {
-	s.Content = &v
-	return s
-}
-
-// SetInReplyTo sets the InReplyTo field's value.
-func (s *PostCommentReplyInput) SetInReplyTo(v string) *PostCommentReplyInput {
-	s.InReplyTo = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PostCommentReplyOutput
 type PostCommentReplyOutput struct {
 	_ struct{} `type:"structure"`
@@ -5578,12 +4552,6 @@ func (s PostCommentReplyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PostCommentReplyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComment sets the Comment field's value.
-func (s *PostCommentReplyOutput) SetComment(v *Comment) *PostCommentReplyOutput {
-	s.Comment = v
-	return s
 }
 
 // Returns information about a pull request.
@@ -5637,60 +4605,6 @@ func (s PullRequest) GoString() string {
 	return s.String()
 }
 
-// SetAuthorArn sets the AuthorArn field's value.
-func (s *PullRequest) SetAuthorArn(v string) *PullRequest {
-	s.AuthorArn = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *PullRequest) SetClientRequestToken(v string) *PullRequest {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *PullRequest) SetCreationDate(v time.Time) *PullRequest {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PullRequest) SetDescription(v string) *PullRequest {
-	s.Description = &v
-	return s
-}
-
-// SetLastActivityDate sets the LastActivityDate field's value.
-func (s *PullRequest) SetLastActivityDate(v time.Time) *PullRequest {
-	s.LastActivityDate = &v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *PullRequest) SetPullRequestId(v string) *PullRequest {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetPullRequestStatus sets the PullRequestStatus field's value.
-func (s *PullRequest) SetPullRequestStatus(v PullRequestStatusEnum) *PullRequest {
-	s.PullRequestStatus = v
-	return s
-}
-
-// SetPullRequestTargets sets the PullRequestTargets field's value.
-func (s *PullRequest) SetPullRequestTargets(v []PullRequestTarget) *PullRequest {
-	s.PullRequestTargets = v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *PullRequest) SetTitle(v string) *PullRequest {
-	s.Title = &v
-	return s
-}
-
 // Returns information about a pull request event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestEvent
 type PullRequestEvent struct {
@@ -5731,48 +4645,6 @@ func (s PullRequestEvent) GoString() string {
 	return s.String()
 }
 
-// SetActorArn sets the ActorArn field's value.
-func (s *PullRequestEvent) SetActorArn(v string) *PullRequestEvent {
-	s.ActorArn = &v
-	return s
-}
-
-// SetEventDate sets the EventDate field's value.
-func (s *PullRequestEvent) SetEventDate(v time.Time) *PullRequestEvent {
-	s.EventDate = &v
-	return s
-}
-
-// SetPullRequestEventType sets the PullRequestEventType field's value.
-func (s *PullRequestEvent) SetPullRequestEventType(v PullRequestEventType) *PullRequestEvent {
-	s.PullRequestEventType = v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *PullRequestEvent) SetPullRequestId(v string) *PullRequestEvent {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetPullRequestMergedStateChangedEventMetadata sets the PullRequestMergedStateChangedEventMetadata field's value.
-func (s *PullRequestEvent) SetPullRequestMergedStateChangedEventMetadata(v *PullRequestMergedStateChangedEventMetadata) *PullRequestEvent {
-	s.PullRequestMergedStateChangedEventMetadata = v
-	return s
-}
-
-// SetPullRequestSourceReferenceUpdatedEventMetadata sets the PullRequestSourceReferenceUpdatedEventMetadata field's value.
-func (s *PullRequestEvent) SetPullRequestSourceReferenceUpdatedEventMetadata(v *PullRequestSourceReferenceUpdatedEventMetadata) *PullRequestEvent {
-	s.PullRequestSourceReferenceUpdatedEventMetadata = v
-	return s
-}
-
-// SetPullRequestStatusChangedEventMetadata sets the PullRequestStatusChangedEventMetadata field's value.
-func (s *PullRequestEvent) SetPullRequestStatusChangedEventMetadata(v *PullRequestStatusChangedEventMetadata) *PullRequestEvent {
-	s.PullRequestStatusChangedEventMetadata = v
-	return s
-}
-
 // Returns information about the change in the merge state for a pull request
 // event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestMergedStateChangedEventMetadata
@@ -5797,24 +4669,6 @@ func (s PullRequestMergedStateChangedEventMetadata) String() string {
 // GoString returns the string representation
 func (s PullRequestMergedStateChangedEventMetadata) GoString() string {
 	return s.String()
-}
-
-// SetDestinationReference sets the DestinationReference field's value.
-func (s *PullRequestMergedStateChangedEventMetadata) SetDestinationReference(v string) *PullRequestMergedStateChangedEventMetadata {
-	s.DestinationReference = &v
-	return s
-}
-
-// SetMergeMetadata sets the MergeMetadata field's value.
-func (s *PullRequestMergedStateChangedEventMetadata) SetMergeMetadata(v *MergeMetadata) *PullRequestMergedStateChangedEventMetadata {
-	s.MergeMetadata = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PullRequestMergedStateChangedEventMetadata) SetRepositoryName(v string) *PullRequestMergedStateChangedEventMetadata {
-	s.RepositoryName = &v
-	return s
 }
 
 // Information about an update to the source branch of a pull request.
@@ -5844,24 +4698,6 @@ func (s PullRequestSourceReferenceUpdatedEventMetadata) GoString() string {
 	return s.String()
 }
 
-// SetAfterCommitId sets the AfterCommitId field's value.
-func (s *PullRequestSourceReferenceUpdatedEventMetadata) SetAfterCommitId(v string) *PullRequestSourceReferenceUpdatedEventMetadata {
-	s.AfterCommitId = &v
-	return s
-}
-
-// SetBeforeCommitId sets the BeforeCommitId field's value.
-func (s *PullRequestSourceReferenceUpdatedEventMetadata) SetBeforeCommitId(v string) *PullRequestSourceReferenceUpdatedEventMetadata {
-	s.BeforeCommitId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PullRequestSourceReferenceUpdatedEventMetadata) SetRepositoryName(v string) *PullRequestSourceReferenceUpdatedEventMetadata {
-	s.RepositoryName = &v
-	return s
-}
-
 // Information about a change to the status of a pull request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestStatusChangedEventMetadata
 type PullRequestStatusChangedEventMetadata struct {
@@ -5879,12 +4715,6 @@ func (s PullRequestStatusChangedEventMetadata) String() string {
 // GoString returns the string representation
 func (s PullRequestStatusChangedEventMetadata) GoString() string {
 	return s.String()
-}
-
-// SetPullRequestStatus sets the PullRequestStatus field's value.
-func (s *PullRequestStatusChangedEventMetadata) SetPullRequestStatus(v PullRequestStatusEnum) *PullRequestStatusChangedEventMetadata {
-	s.PullRequestStatus = v
-	return s
 }
 
 // Returns information about a pull request target.
@@ -5926,42 +4756,6 @@ func (s PullRequestTarget) String() string {
 // GoString returns the string representation
 func (s PullRequestTarget) GoString() string {
 	return s.String()
-}
-
-// SetDestinationCommit sets the DestinationCommit field's value.
-func (s *PullRequestTarget) SetDestinationCommit(v string) *PullRequestTarget {
-	s.DestinationCommit = &v
-	return s
-}
-
-// SetDestinationReference sets the DestinationReference field's value.
-func (s *PullRequestTarget) SetDestinationReference(v string) *PullRequestTarget {
-	s.DestinationReference = &v
-	return s
-}
-
-// SetMergeMetadata sets the MergeMetadata field's value.
-func (s *PullRequestTarget) SetMergeMetadata(v *MergeMetadata) *PullRequestTarget {
-	s.MergeMetadata = v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PullRequestTarget) SetRepositoryName(v string) *PullRequestTarget {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetSourceCommit sets the SourceCommit field's value.
-func (s *PullRequestTarget) SetSourceCommit(v string) *PullRequestTarget {
-	s.SourceCommit = &v
-	return s
-}
-
-// SetSourceReference sets the SourceReference field's value.
-func (s *PullRequestTarget) SetSourceReference(v string) *PullRequestTarget {
-	s.SourceReference = &v
-	return s
 }
 
 // Represents the input ofa put repository triggers operation.
@@ -6018,18 +4812,6 @@ func (s *PutRepositoryTriggersInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *PutRepositoryTriggersInput) SetRepositoryName(v string) *PutRepositoryTriggersInput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetTriggers sets the Triggers field's value.
-func (s *PutRepositoryTriggersInput) SetTriggers(v []RepositoryTrigger) *PutRepositoryTriggersInput {
-	s.Triggers = v
-	return s
-}
-
 // Represents the output of a put repository triggers operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggersOutput
 type PutRepositoryTriggersOutput struct {
@@ -6054,12 +4836,6 @@ func (s PutRepositoryTriggersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRepositoryTriggersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *PutRepositoryTriggersOutput) SetConfigurationId(v string) *PutRepositoryTriggersOutput {
-	s.ConfigurationId = &v
-	return s
 }
 
 // Information about a repository.
@@ -6108,66 +4884,6 @@ func (s RepositoryMetadata) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *RepositoryMetadata) SetAccountId(v string) *RepositoryMetadata {
-	s.AccountId = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *RepositoryMetadata) SetArn(v string) *RepositoryMetadata {
-	s.Arn = &v
-	return s
-}
-
-// SetCloneUrlHttp sets the CloneUrlHttp field's value.
-func (s *RepositoryMetadata) SetCloneUrlHttp(v string) *RepositoryMetadata {
-	s.CloneUrlHttp = &v
-	return s
-}
-
-// SetCloneUrlSsh sets the CloneUrlSsh field's value.
-func (s *RepositoryMetadata) SetCloneUrlSsh(v string) *RepositoryMetadata {
-	s.CloneUrlSsh = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *RepositoryMetadata) SetCreationDate(v time.Time) *RepositoryMetadata {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultBranch sets the DefaultBranch field's value.
-func (s *RepositoryMetadata) SetDefaultBranch(v string) *RepositoryMetadata {
-	s.DefaultBranch = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *RepositoryMetadata) SetLastModifiedDate(v time.Time) *RepositoryMetadata {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetRepositoryDescription sets the RepositoryDescription field's value.
-func (s *RepositoryMetadata) SetRepositoryDescription(v string) *RepositoryMetadata {
-	s.RepositoryDescription = &v
-	return s
-}
-
-// SetRepositoryId sets the RepositoryId field's value.
-func (s *RepositoryMetadata) SetRepositoryId(v string) *RepositoryMetadata {
-	s.RepositoryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *RepositoryMetadata) SetRepositoryName(v string) *RepositoryMetadata {
-	s.RepositoryName = &v
-	return s
-}
-
 // Information about a repository name and ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNameIdPair
 type RepositoryNameIdPair struct {
@@ -6188,18 +4904,6 @@ func (s RepositoryNameIdPair) String() string {
 // GoString returns the string representation
 func (s RepositoryNameIdPair) GoString() string {
 	return s.String()
-}
-
-// SetRepositoryId sets the RepositoryId field's value.
-func (s *RepositoryNameIdPair) SetRepositoryId(v string) *RepositoryNameIdPair {
-	s.RepositoryId = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *RepositoryNameIdPair) SetRepositoryName(v string) *RepositoryNameIdPair {
-	s.RepositoryName = &v
-	return s
 }
 
 // Information about a trigger for a repository.
@@ -6270,36 +4974,6 @@ func (s *RepositoryTrigger) Validate() error {
 	return nil
 }
 
-// SetBranches sets the Branches field's value.
-func (s *RepositoryTrigger) SetBranches(v []string) *RepositoryTrigger {
-	s.Branches = v
-	return s
-}
-
-// SetCustomData sets the CustomData field's value.
-func (s *RepositoryTrigger) SetCustomData(v string) *RepositoryTrigger {
-	s.CustomData = &v
-	return s
-}
-
-// SetDestinationArn sets the DestinationArn field's value.
-func (s *RepositoryTrigger) SetDestinationArn(v string) *RepositoryTrigger {
-	s.DestinationArn = &v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *RepositoryTrigger) SetEvents(v []RepositoryTriggerEventEnum) *RepositoryTrigger {
-	s.Events = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RepositoryTrigger) SetName(v string) *RepositoryTrigger {
-	s.Name = &v
-	return s
-}
-
 // A trigger failed to run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerExecutionFailure
 type RepositoryTriggerExecutionFailure struct {
@@ -6320,18 +4994,6 @@ func (s RepositoryTriggerExecutionFailure) String() string {
 // GoString returns the string representation
 func (s RepositoryTriggerExecutionFailure) GoString() string {
 	return s.String()
-}
-
-// SetFailureMessage sets the FailureMessage field's value.
-func (s *RepositoryTriggerExecutionFailure) SetFailureMessage(v string) *RepositoryTriggerExecutionFailure {
-	s.FailureMessage = &v
-	return s
-}
-
-// SetTrigger sets the Trigger field's value.
-func (s *RepositoryTriggerExecutionFailure) SetTrigger(v string) *RepositoryTriggerExecutionFailure {
-	s.Trigger = &v
-	return s
 }
 
 // Returns information about a target for a pull request.
@@ -6384,24 +5046,6 @@ func (s *Target) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDestinationReference sets the DestinationReference field's value.
-func (s *Target) SetDestinationReference(v string) *Target {
-	s.DestinationReference = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *Target) SetRepositoryName(v string) *Target {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetSourceReference sets the SourceReference field's value.
-func (s *Target) SetSourceReference(v string) *Target {
-	s.SourceReference = &v
-	return s
 }
 
 // Represents the input of a test repository triggers operation.
@@ -6458,18 +5102,6 @@ func (s *TestRepositoryTriggersInput) Validate() error {
 	return nil
 }
 
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *TestRepositoryTriggersInput) SetRepositoryName(v string) *TestRepositoryTriggersInput {
-	s.RepositoryName = &v
-	return s
-}
-
-// SetTriggers sets the Triggers field's value.
-func (s *TestRepositoryTriggersInput) SetTriggers(v []RepositoryTrigger) *TestRepositoryTriggersInput {
-	s.Triggers = v
-	return s
-}
-
 // Represents the output of a test repository triggers operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggersOutput
 type TestRepositoryTriggersOutput struct {
@@ -6499,18 +5131,6 @@ func (s TestRepositoryTriggersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TestRepositoryTriggersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedExecutions sets the FailedExecutions field's value.
-func (s *TestRepositoryTriggersOutput) SetFailedExecutions(v []RepositoryTriggerExecutionFailure) *TestRepositoryTriggersOutput {
-	s.FailedExecutions = v
-	return s
-}
-
-// SetSuccessfulExecutions sets the SuccessfulExecutions field's value.
-func (s *TestRepositoryTriggersOutput) SetSuccessfulExecutions(v []string) *TestRepositoryTriggersOutput {
-	s.SuccessfulExecutions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateCommentInput
@@ -6558,18 +5178,6 @@ func (s *UpdateCommentInput) Validate() error {
 	return nil
 }
 
-// SetCommentId sets the CommentId field's value.
-func (s *UpdateCommentInput) SetCommentId(v string) *UpdateCommentInput {
-	s.CommentId = &v
-	return s
-}
-
-// SetContent sets the Content field's value.
-func (s *UpdateCommentInput) SetContent(v string) *UpdateCommentInput {
-	s.Content = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateCommentOutput
 type UpdateCommentOutput struct {
 	_ struct{} `type:"structure"`
@@ -6593,12 +5201,6 @@ func (s UpdateCommentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateCommentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComment sets the Comment field's value.
-func (s *UpdateCommentOutput) SetComment(v *Comment) *UpdateCommentOutput {
-	s.Comment = v
-	return s
 }
 
 // Represents the input of an update default branch operation.
@@ -6649,18 +5251,6 @@ func (s *UpdateDefaultBranchInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDefaultBranchName sets the DefaultBranchName field's value.
-func (s *UpdateDefaultBranchInput) SetDefaultBranchName(v string) *UpdateDefaultBranchInput {
-	s.DefaultBranchName = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *UpdateDefaultBranchInput) SetRepositoryName(v string) *UpdateDefaultBranchInput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranchOutput
@@ -6729,18 +5319,6 @@ func (s *UpdatePullRequestDescriptionInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdatePullRequestDescriptionInput) SetDescription(v string) *UpdatePullRequestDescriptionInput {
-	s.Description = &v
-	return s
-}
-
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *UpdatePullRequestDescriptionInput) SetPullRequestId(v string) *UpdatePullRequestDescriptionInput {
-	s.PullRequestId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestDescriptionOutput
 type UpdatePullRequestDescriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6766,12 +5344,6 @@ func (s UpdatePullRequestDescriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePullRequestDescriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPullRequest sets the PullRequest field's value.
-func (s *UpdatePullRequestDescriptionOutput) SetPullRequest(v *PullRequest) *UpdatePullRequestDescriptionOutput {
-	s.PullRequest = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatusInput
@@ -6817,18 +5389,6 @@ func (s *UpdatePullRequestStatusInput) Validate() error {
 	return nil
 }
 
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *UpdatePullRequestStatusInput) SetPullRequestId(v string) *UpdatePullRequestStatusInput {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetPullRequestStatus sets the PullRequestStatus field's value.
-func (s *UpdatePullRequestStatusInput) SetPullRequestStatus(v PullRequestStatusEnum) *UpdatePullRequestStatusInput {
-	s.PullRequestStatus = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestStatusOutput
 type UpdatePullRequestStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -6854,12 +5414,6 @@ func (s UpdatePullRequestStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePullRequestStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPullRequest sets the PullRequest field's value.
-func (s *UpdatePullRequestStatusOutput) SetPullRequest(v *PullRequest) *UpdatePullRequestStatusOutput {
-	s.PullRequest = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitleInput
@@ -6905,18 +5459,6 @@ func (s *UpdatePullRequestTitleInput) Validate() error {
 	return nil
 }
 
-// SetPullRequestId sets the PullRequestId field's value.
-func (s *UpdatePullRequestTitleInput) SetPullRequestId(v string) *UpdatePullRequestTitleInput {
-	s.PullRequestId = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *UpdatePullRequestTitleInput) SetTitle(v string) *UpdatePullRequestTitleInput {
-	s.Title = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdatePullRequestTitleOutput
 type UpdatePullRequestTitleOutput struct {
 	_ struct{} `type:"structure"`
@@ -6942,12 +5484,6 @@ func (s UpdatePullRequestTitleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePullRequestTitleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPullRequest sets the PullRequest field's value.
-func (s *UpdatePullRequestTitleOutput) SetPullRequest(v *PullRequest) *UpdatePullRequestTitleOutput {
-	s.PullRequest = v
-	return s
 }
 
 // Represents the input of an update repository description operation.
@@ -6990,18 +5526,6 @@ func (s *UpdateRepositoryDescriptionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRepositoryDescription sets the RepositoryDescription field's value.
-func (s *UpdateRepositoryDescriptionInput) SetRepositoryDescription(v string) *UpdateRepositoryDescriptionInput {
-	s.RepositoryDescription = &v
-	return s
-}
-
-// SetRepositoryName sets the RepositoryName field's value.
-func (s *UpdateRepositoryDescriptionInput) SetRepositoryName(v string) *UpdateRepositoryDescriptionInput {
-	s.RepositoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescriptionOutput
@@ -7076,18 +5600,6 @@ func (s *UpdateRepositoryNameInput) Validate() error {
 	return nil
 }
 
-// SetNewName sets the NewName field's value.
-func (s *UpdateRepositoryNameInput) SetNewName(v string) *UpdateRepositoryNameInput {
-	s.NewName = &v
-	return s
-}
-
-// SetOldName sets the OldName field's value.
-func (s *UpdateRepositoryNameInput) SetOldName(v string) *UpdateRepositoryNameInput {
-	s.OldName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryNameOutput
 type UpdateRepositoryNameOutput struct {
 	_ struct{} `type:"structure"`
@@ -7133,24 +5645,6 @@ func (s UserInfo) String() string {
 // GoString returns the string representation
 func (s UserInfo) GoString() string {
 	return s.String()
-}
-
-// SetDate sets the Date field's value.
-func (s *UserInfo) SetDate(v string) *UserInfo {
-	s.Date = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *UserInfo) SetEmail(v string) *UserInfo {
-	s.Email = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UserInfo) SetName(v string) *UserInfo {
-	s.Name = &v
-	return s
 }
 
 type ChangeTypeEnum string

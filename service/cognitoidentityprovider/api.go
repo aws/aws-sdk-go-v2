@@ -4883,18 +4883,6 @@ func (s *AccountTakeoverActionType) Validate() error {
 	return nil
 }
 
-// SetEventAction sets the EventAction field's value.
-func (s *AccountTakeoverActionType) SetEventAction(v AccountTakeoverEventActionType) *AccountTakeoverActionType {
-	s.EventAction = v
-	return s
-}
-
-// SetNotify sets the Notify field's value.
-func (s *AccountTakeoverActionType) SetNotify(v bool) *AccountTakeoverActionType {
-	s.Notify = &v
-	return s
-}
-
 // Account takeover actions type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverActionsType
 type AccountTakeoverActionsType struct {
@@ -4945,24 +4933,6 @@ func (s *AccountTakeoverActionsType) Validate() error {
 	return nil
 }
 
-// SetHighAction sets the HighAction field's value.
-func (s *AccountTakeoverActionsType) SetHighAction(v *AccountTakeoverActionType) *AccountTakeoverActionsType {
-	s.HighAction = v
-	return s
-}
-
-// SetLowAction sets the LowAction field's value.
-func (s *AccountTakeoverActionsType) SetLowAction(v *AccountTakeoverActionType) *AccountTakeoverActionsType {
-	s.LowAction = v
-	return s
-}
-
-// SetMediumAction sets the MediumAction field's value.
-func (s *AccountTakeoverActionsType) SetMediumAction(v *AccountTakeoverActionType) *AccountTakeoverActionsType {
-	s.MediumAction = v
-	return s
-}
-
 // Configuration for mitigation actions and notification for different levels
 // of risk detected for a potential account takeover.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverRiskConfigurationType
@@ -5010,18 +4980,6 @@ func (s *AccountTakeoverRiskConfigurationType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActions sets the Actions field's value.
-func (s *AccountTakeoverRiskConfigurationType) SetActions(v *AccountTakeoverActionsType) *AccountTakeoverRiskConfigurationType {
-	s.Actions = v
-	return s
-}
-
-// SetNotifyConfiguration sets the NotifyConfiguration field's value.
-func (s *AccountTakeoverRiskConfigurationType) SetNotifyConfiguration(v *NotifyConfigurationType) *AccountTakeoverRiskConfigurationType {
-	s.NotifyConfiguration = v
-	return s
 }
 
 // Represents the request to add custom attributes.
@@ -5079,18 +5037,6 @@ func (s *AddCustomAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCustomAttributes sets the CustomAttributes field's value.
-func (s *AddCustomAttributesInput) SetCustomAttributes(v []SchemaAttributeType) *AddCustomAttributesInput {
-	s.CustomAttributes = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AddCustomAttributesInput) SetUserPoolId(v string) *AddCustomAttributesInput {
-	s.UserPoolId = &v
-	return s
 }
 
 // Represents the response from the server for the request to add custom attributes.
@@ -5177,24 +5123,6 @@ func (s *AdminAddUserToGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *AdminAddUserToGroupInput) SetGroupName(v string) *AdminAddUserToGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminAddUserToGroupInput) SetUserPoolId(v string) *AdminAddUserToGroupInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminAddUserToGroupInput) SetUsername(v string) *AdminAddUserToGroupInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroupOutput
 type AdminAddUserToGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -5267,18 +5195,6 @@ func (s *AdminConfirmSignUpInput) Validate() error {
 	return nil
 }
 
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminConfirmSignUpInput) SetUserPoolId(v string) *AdminConfirmSignUpInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminConfirmSignUpInput) SetUsername(v string) *AdminConfirmSignUpInput {
-	s.Username = &v
-	return s
-}
-
 // Represents the response from the server for the request to confirm registration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpResponse
 type AdminConfirmSignUpOutput struct {
@@ -5346,24 +5262,6 @@ func (s *AdminCreateUserConfigType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAllowAdminCreateUserOnly sets the AllowAdminCreateUserOnly field's value.
-func (s *AdminCreateUserConfigType) SetAllowAdminCreateUserOnly(v bool) *AdminCreateUserConfigType {
-	s.AllowAdminCreateUserOnly = &v
-	return s
-}
-
-// SetInviteMessageTemplate sets the InviteMessageTemplate field's value.
-func (s *AdminCreateUserConfigType) SetInviteMessageTemplate(v *MessageTemplateType) *AdminCreateUserConfigType {
-	s.InviteMessageTemplate = v
-	return s
-}
-
-// SetUnusedAccountValidityDays sets the UnusedAccountValidityDays field's value.
-func (s *AdminCreateUserConfigType) SetUnusedAccountValidityDays(v int64) *AdminCreateUserConfigType {
-	s.UnusedAccountValidityDays = &v
-	return s
 }
 
 // Represents the request to create a user in the specified user pool.
@@ -5518,54 +5416,6 @@ func (s *AdminCreateUserInput) Validate() error {
 	return nil
 }
 
-// SetDesiredDeliveryMediums sets the DesiredDeliveryMediums field's value.
-func (s *AdminCreateUserInput) SetDesiredDeliveryMediums(v []DeliveryMediumType) *AdminCreateUserInput {
-	s.DesiredDeliveryMediums = v
-	return s
-}
-
-// SetForceAliasCreation sets the ForceAliasCreation field's value.
-func (s *AdminCreateUserInput) SetForceAliasCreation(v bool) *AdminCreateUserInput {
-	s.ForceAliasCreation = &v
-	return s
-}
-
-// SetMessageAction sets the MessageAction field's value.
-func (s *AdminCreateUserInput) SetMessageAction(v MessageActionType) *AdminCreateUserInput {
-	s.MessageAction = v
-	return s
-}
-
-// SetTemporaryPassword sets the TemporaryPassword field's value.
-func (s *AdminCreateUserInput) SetTemporaryPassword(v string) *AdminCreateUserInput {
-	s.TemporaryPassword = &v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *AdminCreateUserInput) SetUserAttributes(v []AttributeType) *AdminCreateUserInput {
-	s.UserAttributes = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminCreateUserInput) SetUserPoolId(v string) *AdminCreateUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminCreateUserInput) SetUsername(v string) *AdminCreateUserInput {
-	s.Username = &v
-	return s
-}
-
-// SetValidationData sets the ValidationData field's value.
-func (s *AdminCreateUserInput) SetValidationData(v []AttributeType) *AdminCreateUserInput {
-	s.ValidationData = v
-	return s
-}
-
 // Represents the response from the server to the request to create the user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserResponse
 type AdminCreateUserOutput struct {
@@ -5590,12 +5440,6 @@ func (s AdminCreateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminCreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUser sets the User field's value.
-func (s *AdminCreateUserOutput) SetUser(v *UserType) *AdminCreateUserOutput {
-	s.User = v
-	return s
 }
 
 // Represents the request to delete user attributes as an administrator.
@@ -5658,24 +5502,6 @@ func (s *AdminDeleteUserAttributesInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserAttributeNames sets the UserAttributeNames field's value.
-func (s *AdminDeleteUserAttributesInput) SetUserAttributeNames(v []string) *AdminDeleteUserAttributesInput {
-	s.UserAttributeNames = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminDeleteUserAttributesInput) SetUserPoolId(v string) *AdminDeleteUserAttributesInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminDeleteUserAttributesInput) SetUsername(v string) *AdminDeleteUserAttributesInput {
-	s.Username = &v
-	return s
 }
 
 // Represents the response received from the server for a request to delete
@@ -5752,18 +5578,6 @@ func (s *AdminDeleteUserInput) Validate() error {
 	return nil
 }
 
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminDeleteUserInput) SetUserPoolId(v string) *AdminDeleteUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminDeleteUserInput) SetUsername(v string) *AdminDeleteUserInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserOutput
 type AdminDeleteUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -5832,18 +5646,6 @@ func (s *AdminDisableProviderForUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUser sets the User field's value.
-func (s *AdminDisableProviderForUserInput) SetUser(v *ProviderUserIdentifierType) *AdminDisableProviderForUserInput {
-	s.User = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminDisableProviderForUserInput) SetUserPoolId(v string) *AdminDisableProviderForUserInput {
-	s.UserPoolId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUserResponse
@@ -5918,18 +5720,6 @@ func (s *AdminDisableUserInput) Validate() error {
 	return nil
 }
 
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminDisableUserInput) SetUserPoolId(v string) *AdminDisableUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminDisableUserInput) SetUsername(v string) *AdminDisableUserInput {
-	s.Username = &v
-	return s
-}
-
 // Represents the response received from the server to disable the user as an
 // administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUserResponse
@@ -6002,18 +5792,6 @@ func (s *AdminEnableUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminEnableUserInput) SetUserPoolId(v string) *AdminEnableUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminEnableUserInput) SetUsername(v string) *AdminEnableUserInput {
-	s.Username = &v
-	return s
 }
 
 // Represents the response from the server for the request to enable a user
@@ -6102,24 +5880,6 @@ func (s *AdminForgetDeviceInput) Validate() error {
 	return nil
 }
 
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *AdminForgetDeviceInput) SetDeviceKey(v string) *AdminForgetDeviceInput {
-	s.DeviceKey = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminForgetDeviceInput) SetUserPoolId(v string) *AdminForgetDeviceInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminForgetDeviceInput) SetUsername(v string) *AdminForgetDeviceInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminForgetDeviceOutput
 type AdminForgetDeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6204,24 +5964,6 @@ func (s *AdminGetDeviceInput) Validate() error {
 	return nil
 }
 
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *AdminGetDeviceInput) SetDeviceKey(v string) *AdminGetDeviceInput {
-	s.DeviceKey = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminGetDeviceInput) SetUserPoolId(v string) *AdminGetDeviceInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminGetDeviceInput) SetUsername(v string) *AdminGetDeviceInput {
-	s.Username = &v
-	return s
-}
-
 // Gets the device response, as an administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDeviceResponse
 type AdminGetDeviceOutput struct {
@@ -6248,12 +5990,6 @@ func (s AdminGetDeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminGetDeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevice sets the Device field's value.
-func (s *AdminGetDeviceOutput) SetDevice(v *DeviceType) *AdminGetDeviceOutput {
-	s.Device = v
-	return s
 }
 
 // Represents the request to get the specified user as an administrator.
@@ -6305,18 +6041,6 @@ func (s *AdminGetUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminGetUserInput) SetUserPoolId(v string) *AdminGetUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminGetUserInput) SetUsername(v string) *AdminGetUserInput {
-	s.Username = &v
-	return s
 }
 
 // Represents the response from the server from the request to get the specified
@@ -6380,60 +6104,6 @@ func (s AdminGetUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminGetUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *AdminGetUserOutput) SetEnabled(v bool) *AdminGetUserOutput {
-	s.Enabled = &v
-	return s
-}
-
-// SetMFAOptions sets the MFAOptions field's value.
-func (s *AdminGetUserOutput) SetMFAOptions(v []MFAOptionType) *AdminGetUserOutput {
-	s.MFAOptions = v
-	return s
-}
-
-// SetPreferredMfaSetting sets the PreferredMfaSetting field's value.
-func (s *AdminGetUserOutput) SetPreferredMfaSetting(v string) *AdminGetUserOutput {
-	s.PreferredMfaSetting = &v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *AdminGetUserOutput) SetUserAttributes(v []AttributeType) *AdminGetUserOutput {
-	s.UserAttributes = v
-	return s
-}
-
-// SetUserCreateDate sets the UserCreateDate field's value.
-func (s *AdminGetUserOutput) SetUserCreateDate(v time.Time) *AdminGetUserOutput {
-	s.UserCreateDate = &v
-	return s
-}
-
-// SetUserLastModifiedDate sets the UserLastModifiedDate field's value.
-func (s *AdminGetUserOutput) SetUserLastModifiedDate(v time.Time) *AdminGetUserOutput {
-	s.UserLastModifiedDate = &v
-	return s
-}
-
-// SetUserMFASettingList sets the UserMFASettingList field's value.
-func (s *AdminGetUserOutput) SetUserMFASettingList(v []string) *AdminGetUserOutput {
-	s.UserMFASettingList = v
-	return s
-}
-
-// SetUserStatus sets the UserStatus field's value.
-func (s *AdminGetUserOutput) SetUserStatus(v UserStatusType) *AdminGetUserOutput {
-	s.UserStatus = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminGetUserOutput) SetUsername(v string) *AdminGetUserOutput {
-	s.Username = &v
-	return s
 }
 
 // Initiates the authorization request, as an administrator.
@@ -6551,48 +6221,6 @@ func (s *AdminInitiateAuthInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *AdminInitiateAuthInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *AdminInitiateAuthInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetAuthFlow sets the AuthFlow field's value.
-func (s *AdminInitiateAuthInput) SetAuthFlow(v AuthFlowType) *AdminInitiateAuthInput {
-	s.AuthFlow = v
-	return s
-}
-
-// SetAuthParameters sets the AuthParameters field's value.
-func (s *AdminInitiateAuthInput) SetAuthParameters(v map[string]string) *AdminInitiateAuthInput {
-	s.AuthParameters = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *AdminInitiateAuthInput) SetClientId(v string) *AdminInitiateAuthInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetClientMetadata sets the ClientMetadata field's value.
-func (s *AdminInitiateAuthInput) SetClientMetadata(v map[string]string) *AdminInitiateAuthInput {
-	s.ClientMetadata = v
-	return s
-}
-
-// SetContextData sets the ContextData field's value.
-func (s *AdminInitiateAuthInput) SetContextData(v *ContextDataType) *AdminInitiateAuthInput {
-	s.ContextData = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminInitiateAuthInput) SetUserPoolId(v string) *AdminInitiateAuthInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Initiates the authentication response, as an administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthResponse
 type AdminInitiateAuthOutput struct {
@@ -6669,30 +6297,6 @@ func (s AdminInitiateAuthOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminInitiateAuthOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthenticationResult sets the AuthenticationResult field's value.
-func (s *AdminInitiateAuthOutput) SetAuthenticationResult(v *AuthenticationResultType) *AdminInitiateAuthOutput {
-	s.AuthenticationResult = v
-	return s
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *AdminInitiateAuthOutput) SetChallengeName(v ChallengeNameType) *AdminInitiateAuthOutput {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *AdminInitiateAuthOutput) SetChallengeParameters(v map[string]string) *AdminInitiateAuthOutput {
-	s.ChallengeParameters = v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *AdminInitiateAuthOutput) SetSession(v string) *AdminInitiateAuthOutput {
-	s.Session = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserRequest
@@ -6785,24 +6389,6 @@ func (s *AdminLinkProviderForUserInput) Validate() error {
 	return nil
 }
 
-// SetDestinationUser sets the DestinationUser field's value.
-func (s *AdminLinkProviderForUserInput) SetDestinationUser(v *ProviderUserIdentifierType) *AdminLinkProviderForUserInput {
-	s.DestinationUser = v
-	return s
-}
-
-// SetSourceUser sets the SourceUser field's value.
-func (s *AdminLinkProviderForUserInput) SetSourceUser(v *ProviderUserIdentifierType) *AdminLinkProviderForUserInput {
-	s.SourceUser = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminLinkProviderForUserInput) SetUserPoolId(v string) *AdminLinkProviderForUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUserResponse
 type AdminLinkProviderForUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -6884,30 +6470,6 @@ func (s *AdminListDevicesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *AdminListDevicesInput) SetLimit(v int64) *AdminListDevicesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *AdminListDevicesInput) SetPaginationToken(v string) *AdminListDevicesInput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminListDevicesInput) SetUserPoolId(v string) *AdminListDevicesInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminListDevicesInput) SetUsername(v string) *AdminListDevicesInput {
-	s.Username = &v
-	return s
-}
-
 // Lists the device's response, as an administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevicesResponse
 type AdminListDevicesOutput struct {
@@ -6935,18 +6497,6 @@ func (s AdminListDevicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminListDevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevices sets the Devices field's value.
-func (s *AdminListDevicesOutput) SetDevices(v []DeviceType) *AdminListDevicesOutput {
-	s.Devices = v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *AdminListDevicesOutput) SetPaginationToken(v string) *AdminListDevicesOutput {
-	s.PaginationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUserRequest
@@ -7008,30 +6558,6 @@ func (s *AdminListGroupsForUserInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *AdminListGroupsForUserInput) SetLimit(v int64) *AdminListGroupsForUserInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *AdminListGroupsForUserInput) SetNextToken(v string) *AdminListGroupsForUserInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminListGroupsForUserInput) SetUserPoolId(v string) *AdminListGroupsForUserInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminListGroupsForUserInput) SetUsername(v string) *AdminListGroupsForUserInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUserResponse
 type AdminListGroupsForUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -7059,18 +6585,6 @@ func (s AdminListGroupsForUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminListGroupsForUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *AdminListGroupsForUserOutput) SetGroups(v []GroupType) *AdminListGroupsForUserOutput {
-	s.Groups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *AdminListGroupsForUserOutput) SetNextToken(v string) *AdminListGroupsForUserOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEventsRequest
@@ -7131,30 +6645,6 @@ func (s *AdminListUserAuthEventsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *AdminListUserAuthEventsInput) SetMaxResults(v int64) *AdminListUserAuthEventsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *AdminListUserAuthEventsInput) SetNextToken(v string) *AdminListUserAuthEventsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminListUserAuthEventsInput) SetUserPoolId(v string) *AdminListUserAuthEventsInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminListUserAuthEventsInput) SetUsername(v string) *AdminListUserAuthEventsInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEventsResponse
 type AdminListUserAuthEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7182,18 +6672,6 @@ func (s AdminListUserAuthEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminListUserAuthEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthEvents sets the AuthEvents field's value.
-func (s *AdminListUserAuthEventsOutput) SetAuthEvents(v []AuthEventType) *AdminListUserAuthEventsOutput {
-	s.AuthEvents = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *AdminListUserAuthEventsOutput) SetNextToken(v string) *AdminListUserAuthEventsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupRequest
@@ -7255,24 +6733,6 @@ func (s *AdminRemoveUserFromGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *AdminRemoveUserFromGroupInput) SetGroupName(v string) *AdminRemoveUserFromGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminRemoveUserFromGroupInput) SetUserPoolId(v string) *AdminRemoveUserFromGroupInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminRemoveUserFromGroupInput) SetUsername(v string) *AdminRemoveUserFromGroupInput {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupOutput
@@ -7345,18 +6805,6 @@ func (s *AdminResetUserPasswordInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminResetUserPasswordInput) SetUserPoolId(v string) *AdminResetUserPasswordInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminResetUserPasswordInput) SetUsername(v string) *AdminResetUserPasswordInput {
-	s.Username = &v
-	return s
 }
 
 // Represents the response from the server to reset a user password as an administrator.
@@ -7487,48 +6935,6 @@ func (s *AdminRespondToAuthChallengeInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *AdminRespondToAuthChallengeInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *AdminRespondToAuthChallengeInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *AdminRespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType) *AdminRespondToAuthChallengeInput {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeResponses sets the ChallengeResponses field's value.
-func (s *AdminRespondToAuthChallengeInput) SetChallengeResponses(v map[string]string) *AdminRespondToAuthChallengeInput {
-	s.ChallengeResponses = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *AdminRespondToAuthChallengeInput) SetClientId(v string) *AdminRespondToAuthChallengeInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetContextData sets the ContextData field's value.
-func (s *AdminRespondToAuthChallengeInput) SetContextData(v *ContextDataType) *AdminRespondToAuthChallengeInput {
-	s.ContextData = v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *AdminRespondToAuthChallengeInput) SetSession(v string) *AdminRespondToAuthChallengeInput {
-	s.Session = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminRespondToAuthChallengeInput) SetUserPoolId(v string) *AdminRespondToAuthChallengeInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Responds to the authentication challenge, as an administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeResponse
 type AdminRespondToAuthChallengeOutput struct {
@@ -7566,30 +6972,6 @@ func (s AdminRespondToAuthChallengeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AdminRespondToAuthChallengeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthenticationResult sets the AuthenticationResult field's value.
-func (s *AdminRespondToAuthChallengeOutput) SetAuthenticationResult(v *AuthenticationResultType) *AdminRespondToAuthChallengeOutput {
-	s.AuthenticationResult = v
-	return s
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *AdminRespondToAuthChallengeOutput) SetChallengeName(v ChallengeNameType) *AdminRespondToAuthChallengeOutput {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *AdminRespondToAuthChallengeOutput) SetChallengeParameters(v map[string]string) *AdminRespondToAuthChallengeOutput {
-	s.ChallengeParameters = v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *AdminRespondToAuthChallengeOutput) SetSession(v string) *AdminRespondToAuthChallengeOutput {
-	s.Session = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreferenceRequest
@@ -7645,30 +7027,6 @@ func (s *AdminSetUserMFAPreferenceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSMSMfaSettings sets the SMSMfaSettings field's value.
-func (s *AdminSetUserMFAPreferenceInput) SetSMSMfaSettings(v *SMSMfaSettingsType) *AdminSetUserMFAPreferenceInput {
-	s.SMSMfaSettings = v
-	return s
-}
-
-// SetSoftwareTokenMfaSettings sets the SoftwareTokenMfaSettings field's value.
-func (s *AdminSetUserMFAPreferenceInput) SetSoftwareTokenMfaSettings(v *SoftwareTokenMfaSettingsType) *AdminSetUserMFAPreferenceInput {
-	s.SoftwareTokenMfaSettings = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminSetUserMFAPreferenceInput) SetUserPoolId(v string) *AdminSetUserMFAPreferenceInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminSetUserMFAPreferenceInput) SetUsername(v string) *AdminSetUserMFAPreferenceInput {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreferenceResponse
@@ -7758,24 +7116,6 @@ func (s *AdminSetUserSettingsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetMFAOptions sets the MFAOptions field's value.
-func (s *AdminSetUserSettingsInput) SetMFAOptions(v []MFAOptionType) *AdminSetUserSettingsInput {
-	s.MFAOptions = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminSetUserSettingsInput) SetUserPoolId(v string) *AdminSetUserSettingsInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminSetUserSettingsInput) SetUsername(v string) *AdminSetUserSettingsInput {
-	s.Username = &v
-	return s
 }
 
 // Represents the response from the server to set user settings as an administrator.
@@ -7870,30 +7210,6 @@ func (s *AdminUpdateAuthEventFeedbackInput) Validate() error {
 	return nil
 }
 
-// SetEventId sets the EventId field's value.
-func (s *AdminUpdateAuthEventFeedbackInput) SetEventId(v string) *AdminUpdateAuthEventFeedbackInput {
-	s.EventId = &v
-	return s
-}
-
-// SetFeedbackValue sets the FeedbackValue field's value.
-func (s *AdminUpdateAuthEventFeedbackInput) SetFeedbackValue(v FeedbackValueType) *AdminUpdateAuthEventFeedbackInput {
-	s.FeedbackValue = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminUpdateAuthEventFeedbackInput) SetUserPoolId(v string) *AdminUpdateAuthEventFeedbackInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminUpdateAuthEventFeedbackInput) SetUsername(v string) *AdminUpdateAuthEventFeedbackInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateAuthEventFeedbackResponse
 type AdminUpdateAuthEventFeedbackOutput struct {
 	_ struct{} `type:"structure"`
@@ -7979,30 +7295,6 @@ func (s *AdminUpdateDeviceStatusInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *AdminUpdateDeviceStatusInput) SetDeviceKey(v string) *AdminUpdateDeviceStatusInput {
-	s.DeviceKey = &v
-	return s
-}
-
-// SetDeviceRememberedStatus sets the DeviceRememberedStatus field's value.
-func (s *AdminUpdateDeviceStatusInput) SetDeviceRememberedStatus(v DeviceRememberedStatusType) *AdminUpdateDeviceStatusInput {
-	s.DeviceRememberedStatus = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminUpdateDeviceStatusInput) SetUserPoolId(v string) *AdminUpdateDeviceStatusInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminUpdateDeviceStatusInput) SetUsername(v string) *AdminUpdateDeviceStatusInput {
-	s.Username = &v
-	return s
 }
 
 // The status response from the request to update the device, as an administrator.
@@ -8097,24 +7389,6 @@ func (s *AdminUpdateUserAttributesInput) Validate() error {
 	return nil
 }
 
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *AdminUpdateUserAttributesInput) SetUserAttributes(v []AttributeType) *AdminUpdateUserAttributesInput {
-	s.UserAttributes = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminUpdateUserAttributesInput) SetUserPoolId(v string) *AdminUpdateUserAttributesInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminUpdateUserAttributesInput) SetUsername(v string) *AdminUpdateUserAttributesInput {
-	s.Username = &v
-	return s
-}
-
 // Represents the response from the server for the request to update user attributes
 // as an administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesResponse
@@ -8187,18 +7461,6 @@ func (s *AdminUserGlobalSignOutInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *AdminUserGlobalSignOutInput) SetUserPoolId(v string) *AdminUserGlobalSignOutInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *AdminUserGlobalSignOutInput) SetUsername(v string) *AdminUserGlobalSignOutInput {
-	s.Username = &v
-	return s
 }
 
 // The global sign-out response, as an administrator.
@@ -8286,30 +7548,6 @@ func (s *AnalyticsConfigurationType) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *AnalyticsConfigurationType) SetApplicationId(v string) *AnalyticsConfigurationType {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *AnalyticsConfigurationType) SetExternalId(v string) *AnalyticsConfigurationType {
-	s.ExternalId = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *AnalyticsConfigurationType) SetRoleArn(v string) *AnalyticsConfigurationType {
-	s.RoleArn = &v
-	return s
-}
-
-// SetUserDataShared sets the UserDataShared field's value.
-func (s *AnalyticsConfigurationType) SetUserDataShared(v bool) *AnalyticsConfigurationType {
-	s.UserDataShared = &v
-	return s
-}
-
 // An Amazon Pinpoint analytics endpoint.
 //
 // An endpoint uniquely identifies a mobile device, email address, or phone
@@ -8330,12 +7568,6 @@ func (s AnalyticsMetadataType) String() string {
 // GoString returns the string representation
 func (s AnalyticsMetadataType) GoString() string {
 	return s.String()
-}
-
-// SetAnalyticsEndpointId sets the AnalyticsEndpointId field's value.
-func (s *AnalyticsMetadataType) SetAnalyticsEndpointId(v string) *AnalyticsMetadataType {
-	s.AnalyticsEndpointId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareTokenRequest
@@ -8374,18 +7606,6 @@ func (s *AssociateSoftwareTokenInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *AssociateSoftwareTokenInput) SetAccessToken(v string) *AssociateSoftwareTokenInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *AssociateSoftwareTokenInput) SetSession(v string) *AssociateSoftwareTokenInput {
-	s.Session = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareTokenResponse
 type AssociateSoftwareTokenOutput struct {
 	_ struct{} `type:"structure"`
@@ -8415,18 +7635,6 @@ func (s AssociateSoftwareTokenOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateSoftwareTokenOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSecretCode sets the SecretCode field's value.
-func (s *AssociateSoftwareTokenOutput) SetSecretCode(v string) *AssociateSoftwareTokenOutput {
-	s.SecretCode = &v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *AssociateSoftwareTokenOutput) SetSession(v string) *AssociateSoftwareTokenOutput {
-	s.Session = &v
-	return s
 }
 
 // Specifies whether the attribute is standard or custom.
@@ -8468,18 +7676,6 @@ func (s *AttributeType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *AttributeType) SetName(v string) *AttributeType {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *AttributeType) SetValue(v string) *AttributeType {
-	s.Value = &v
-	return s
 }
 
 // The authentication event type.
@@ -8524,54 +7720,6 @@ func (s AuthEventType) GoString() string {
 	return s.String()
 }
 
-// SetChallengeResponses sets the ChallengeResponses field's value.
-func (s *AuthEventType) SetChallengeResponses(v []ChallengeResponseType) *AuthEventType {
-	s.ChallengeResponses = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *AuthEventType) SetCreationDate(v time.Time) *AuthEventType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetEventContextData sets the EventContextData field's value.
-func (s *AuthEventType) SetEventContextData(v *EventContextDataType) *AuthEventType {
-	s.EventContextData = v
-	return s
-}
-
-// SetEventFeedback sets the EventFeedback field's value.
-func (s *AuthEventType) SetEventFeedback(v *EventFeedbackType) *AuthEventType {
-	s.EventFeedback = v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *AuthEventType) SetEventId(v string) *AuthEventType {
-	s.EventId = &v
-	return s
-}
-
-// SetEventResponse sets the EventResponse field's value.
-func (s *AuthEventType) SetEventResponse(v EventResponseType) *AuthEventType {
-	s.EventResponse = v
-	return s
-}
-
-// SetEventRisk sets the EventRisk field's value.
-func (s *AuthEventType) SetEventRisk(v *EventRiskType) *AuthEventType {
-	s.EventRisk = v
-	return s
-}
-
-// SetEventType sets the EventType field's value.
-func (s *AuthEventType) SetEventType(v EventType) *AuthEventType {
-	s.EventType = v
-	return s
-}
-
 // The authentication result.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AuthenticationResultType
 type AuthenticationResultType struct {
@@ -8606,42 +7754,6 @@ func (s AuthenticationResultType) GoString() string {
 	return s.String()
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *AuthenticationResultType) SetAccessToken(v string) *AuthenticationResultType {
-	s.AccessToken = &v
-	return s
-}
-
-// SetExpiresIn sets the ExpiresIn field's value.
-func (s *AuthenticationResultType) SetExpiresIn(v int64) *AuthenticationResultType {
-	s.ExpiresIn = &v
-	return s
-}
-
-// SetIdToken sets the IdToken field's value.
-func (s *AuthenticationResultType) SetIdToken(v string) *AuthenticationResultType {
-	s.IdToken = &v
-	return s
-}
-
-// SetNewDeviceMetadata sets the NewDeviceMetadata field's value.
-func (s *AuthenticationResultType) SetNewDeviceMetadata(v *NewDeviceMetadataType) *AuthenticationResultType {
-	s.NewDeviceMetadata = v
-	return s
-}
-
-// SetRefreshToken sets the RefreshToken field's value.
-func (s *AuthenticationResultType) SetRefreshToken(v string) *AuthenticationResultType {
-	s.RefreshToken = &v
-	return s
-}
-
-// SetTokenType sets the TokenType field's value.
-func (s *AuthenticationResultType) SetTokenType(v string) *AuthenticationResultType {
-	s.TokenType = &v
-	return s
-}
-
 // The challenge response type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChallengeResponseType
 type ChallengeResponseType struct {
@@ -8662,18 +7774,6 @@ func (s ChallengeResponseType) String() string {
 // GoString returns the string representation
 func (s ChallengeResponseType) GoString() string {
 	return s.String()
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *ChallengeResponseType) SetChallengeName(v ChallengeName) *ChallengeResponseType {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeResponse sets the ChallengeResponse field's value.
-func (s *ChallengeResponseType) SetChallengeResponse(v ChallengeResponse) *ChallengeResponseType {
-	s.ChallengeResponse = v
-	return s
 }
 
 // Represents the request to change a user password.
@@ -8735,24 +7835,6 @@ func (s *ChangePasswordInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *ChangePasswordInput) SetAccessToken(v string) *ChangePasswordInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetPreviousPassword sets the PreviousPassword field's value.
-func (s *ChangePasswordInput) SetPreviousPassword(v string) *ChangePasswordInput {
-	s.PreviousPassword = &v
-	return s
-}
-
-// SetProposedPassword sets the ProposedPassword field's value.
-func (s *ChangePasswordInput) SetProposedPassword(v string) *ChangePasswordInput {
-	s.ProposedPassword = &v
-	return s
-}
-
 // The response from the server to the change password request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordResponse
 type ChangePasswordOutput struct {
@@ -8801,24 +7883,6 @@ func (s CodeDeliveryDetailsType) GoString() string {
 	return s.String()
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *CodeDeliveryDetailsType) SetAttributeName(v string) *CodeDeliveryDetailsType {
-	s.AttributeName = &v
-	return s
-}
-
-// SetDeliveryMedium sets the DeliveryMedium field's value.
-func (s *CodeDeliveryDetailsType) SetDeliveryMedium(v DeliveryMediumType) *CodeDeliveryDetailsType {
-	s.DeliveryMedium = v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *CodeDeliveryDetailsType) SetDestination(v string) *CodeDeliveryDetailsType {
-	s.Destination = &v
-	return s
-}
-
 // The compromised credentials actions type
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CompromisedCredentialsActionsType
 type CompromisedCredentialsActionsType struct {
@@ -8851,12 +7915,6 @@ func (s *CompromisedCredentialsActionsType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEventAction sets the EventAction field's value.
-func (s *CompromisedCredentialsActionsType) SetEventAction(v CompromisedCredentialsEventActionType) *CompromisedCredentialsActionsType {
-	s.EventAction = v
-	return s
 }
 
 // The compromised credentials risk configuration type.
@@ -8901,18 +7959,6 @@ func (s *CompromisedCredentialsRiskConfigurationType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActions sets the Actions field's value.
-func (s *CompromisedCredentialsRiskConfigurationType) SetActions(v *CompromisedCredentialsActionsType) *CompromisedCredentialsRiskConfigurationType {
-	s.Actions = v
-	return s
-}
-
-// SetEventFilter sets the EventFilter field's value.
-func (s *CompromisedCredentialsRiskConfigurationType) SetEventFilter(v []EventFilterType) *CompromisedCredentialsRiskConfigurationType {
-	s.EventFilter = v
-	return s
 }
 
 // Confirms the device request.
@@ -8971,30 +8017,6 @@ func (s *ConfirmDeviceInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *ConfirmDeviceInput) SetAccessToken(v string) *ConfirmDeviceInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *ConfirmDeviceInput) SetDeviceKey(v string) *ConfirmDeviceInput {
-	s.DeviceKey = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *ConfirmDeviceInput) SetDeviceName(v string) *ConfirmDeviceInput {
-	s.DeviceName = &v
-	return s
-}
-
-// SetDeviceSecretVerifierConfig sets the DeviceSecretVerifierConfig field's value.
-func (s *ConfirmDeviceInput) SetDeviceSecretVerifierConfig(v *DeviceSecretVerifierConfigType) *ConfirmDeviceInput {
-	s.DeviceSecretVerifierConfig = v
-	return s
-}
-
 // Confirms the device response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmDeviceResponse
 type ConfirmDeviceOutput struct {
@@ -9020,12 +8042,6 @@ func (s ConfirmDeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ConfirmDeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserConfirmationNecessary sets the UserConfirmationNecessary field's value.
-func (s *ConfirmDeviceOutput) SetUserConfirmationNecessary(v bool) *ConfirmDeviceOutput {
-	s.UserConfirmationNecessary = &v
-	return s
 }
 
 // The request representing the confirmation for a password reset.
@@ -9118,48 +8134,6 @@ func (s *ConfirmForgotPasswordInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *ConfirmForgotPasswordInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ConfirmForgotPasswordInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *ConfirmForgotPasswordInput) SetClientId(v string) *ConfirmForgotPasswordInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetConfirmationCode sets the ConfirmationCode field's value.
-func (s *ConfirmForgotPasswordInput) SetConfirmationCode(v string) *ConfirmForgotPasswordInput {
-	s.ConfirmationCode = &v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *ConfirmForgotPasswordInput) SetPassword(v string) *ConfirmForgotPasswordInput {
-	s.Password = &v
-	return s
-}
-
-// SetSecretHash sets the SecretHash field's value.
-func (s *ConfirmForgotPasswordInput) SetSecretHash(v string) *ConfirmForgotPasswordInput {
-	s.SecretHash = &v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *ConfirmForgotPasswordInput) SetUserContextData(v *UserContextDataType) *ConfirmForgotPasswordInput {
-	s.UserContextData = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *ConfirmForgotPasswordInput) SetUsername(v string) *ConfirmForgotPasswordInput {
-	s.Username = &v
-	return s
 }
 
 // The response from the server that results from a user's request to retrieve
@@ -9272,48 +8246,6 @@ func (s *ConfirmSignUpInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *ConfirmSignUpInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ConfirmSignUpInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *ConfirmSignUpInput) SetClientId(v string) *ConfirmSignUpInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetConfirmationCode sets the ConfirmationCode field's value.
-func (s *ConfirmSignUpInput) SetConfirmationCode(v string) *ConfirmSignUpInput {
-	s.ConfirmationCode = &v
-	return s
-}
-
-// SetForceAliasCreation sets the ForceAliasCreation field's value.
-func (s *ConfirmSignUpInput) SetForceAliasCreation(v bool) *ConfirmSignUpInput {
-	s.ForceAliasCreation = &v
-	return s
-}
-
-// SetSecretHash sets the SecretHash field's value.
-func (s *ConfirmSignUpInput) SetSecretHash(v string) *ConfirmSignUpInput {
-	s.SecretHash = &v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *ConfirmSignUpInput) SetUserContextData(v *UserContextDataType) *ConfirmSignUpInput {
-	s.UserContextData = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *ConfirmSignUpInput) SetUsername(v string) *ConfirmSignUpInput {
-	s.Username = &v
-	return s
-}
-
 // Represents the response from the server for the registration confirmation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpResponse
 type ConfirmSignUpOutput struct {
@@ -9404,36 +8336,6 @@ func (s *ContextDataType) Validate() error {
 	return nil
 }
 
-// SetEncodedData sets the EncodedData field's value.
-func (s *ContextDataType) SetEncodedData(v string) *ContextDataType {
-	s.EncodedData = &v
-	return s
-}
-
-// SetHttpHeaders sets the HttpHeaders field's value.
-func (s *ContextDataType) SetHttpHeaders(v []HttpHeader) *ContextDataType {
-	s.HttpHeaders = v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *ContextDataType) SetIpAddress(v string) *ContextDataType {
-	s.IpAddress = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *ContextDataType) SetServerName(v string) *ContextDataType {
-	s.ServerName = &v
-	return s
-}
-
-// SetServerPath sets the ServerPath field's value.
-func (s *ContextDataType) SetServerPath(v string) *ContextDataType {
-	s.ServerPath = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroupRequest
 type CreateGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -9509,36 +8411,6 @@ func (s *CreateGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateGroupInput) SetDescription(v string) *CreateGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *CreateGroupInput) SetGroupName(v string) *CreateGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPrecedence sets the Precedence field's value.
-func (s *CreateGroupInput) SetPrecedence(v int64) *CreateGroupInput {
-	s.Precedence = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateGroupInput) SetRoleArn(v string) *CreateGroupInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *CreateGroupInput) SetUserPoolId(v string) *CreateGroupInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroupResponse
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -9562,12 +8434,6 @@ func (s CreateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *CreateGroupOutput) SetGroup(v *GroupType) *CreateGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateIdentityProviderRequest
@@ -9643,42 +8509,6 @@ func (s *CreateIdentityProviderInput) Validate() error {
 	return nil
 }
 
-// SetAttributeMapping sets the AttributeMapping field's value.
-func (s *CreateIdentityProviderInput) SetAttributeMapping(v map[string]string) *CreateIdentityProviderInput {
-	s.AttributeMapping = v
-	return s
-}
-
-// SetIdpIdentifiers sets the IdpIdentifiers field's value.
-func (s *CreateIdentityProviderInput) SetIdpIdentifiers(v []string) *CreateIdentityProviderInput {
-	s.IdpIdentifiers = v
-	return s
-}
-
-// SetProviderDetails sets the ProviderDetails field's value.
-func (s *CreateIdentityProviderInput) SetProviderDetails(v map[string]string) *CreateIdentityProviderInput {
-	s.ProviderDetails = v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *CreateIdentityProviderInput) SetProviderName(v string) *CreateIdentityProviderInput {
-	s.ProviderName = &v
-	return s
-}
-
-// SetProviderType sets the ProviderType field's value.
-func (s *CreateIdentityProviderInput) SetProviderType(v IdentityProviderTypeType) *CreateIdentityProviderInput {
-	s.ProviderType = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *CreateIdentityProviderInput) SetUserPoolId(v string) *CreateIdentityProviderInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateIdentityProviderResponse
 type CreateIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -9704,12 +8534,6 @@ func (s CreateIdentityProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateIdentityProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIdentityProvider sets the IdentityProvider field's value.
-func (s *CreateIdentityProviderOutput) SetIdentityProvider(v *IdentityProviderType) *CreateIdentityProviderOutput {
-	s.IdentityProvider = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServerRequest
@@ -9784,30 +8608,6 @@ func (s *CreateResourceServerInput) Validate() error {
 	return nil
 }
 
-// SetIdentifier sets the Identifier field's value.
-func (s *CreateResourceServerInput) SetIdentifier(v string) *CreateResourceServerInput {
-	s.Identifier = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateResourceServerInput) SetName(v string) *CreateResourceServerInput {
-	s.Name = &v
-	return s
-}
-
-// SetScopes sets the Scopes field's value.
-func (s *CreateResourceServerInput) SetScopes(v []ResourceServerScopeType) *CreateResourceServerInput {
-	s.Scopes = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *CreateResourceServerInput) SetUserPoolId(v string) *CreateResourceServerInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServerResponse
 type CreateResourceServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -9833,12 +8633,6 @@ func (s CreateResourceServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateResourceServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceServer sets the ResourceServer field's value.
-func (s *CreateResourceServerOutput) SetResourceServer(v *ResourceServerType) *CreateResourceServerOutput {
-	s.ResourceServer = v
-	return s
 }
 
 // Represents the request to create the user import job.
@@ -9903,24 +8697,6 @@ func (s *CreateUserImportJobInput) Validate() error {
 	return nil
 }
 
-// SetCloudWatchLogsRoleArn sets the CloudWatchLogsRoleArn field's value.
-func (s *CreateUserImportJobInput) SetCloudWatchLogsRoleArn(v string) *CreateUserImportJobInput {
-	s.CloudWatchLogsRoleArn = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *CreateUserImportJobInput) SetJobName(v string) *CreateUserImportJobInput {
-	s.JobName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *CreateUserImportJobInput) SetUserPoolId(v string) *CreateUserImportJobInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server to the request to create the user
 // import job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJobResponse
@@ -9946,12 +8722,6 @@ func (s CreateUserImportJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserImportJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserImportJob sets the UserImportJob field's value.
-func (s *CreateUserImportJobOutput) SetUserImportJob(v *UserImportJobType) *CreateUserImportJobOutput {
-	s.UserImportJob = v
-	return s
 }
 
 // Represents the request to create a user pool client.
@@ -10062,96 +8832,6 @@ func (s *CreateUserPoolClientInput) Validate() error {
 	return nil
 }
 
-// SetAllowedOAuthFlows sets the AllowedOAuthFlows field's value.
-func (s *CreateUserPoolClientInput) SetAllowedOAuthFlows(v []OAuthFlowType) *CreateUserPoolClientInput {
-	s.AllowedOAuthFlows = v
-	return s
-}
-
-// SetAllowedOAuthFlowsUserPoolClient sets the AllowedOAuthFlowsUserPoolClient field's value.
-func (s *CreateUserPoolClientInput) SetAllowedOAuthFlowsUserPoolClient(v bool) *CreateUserPoolClientInput {
-	s.AllowedOAuthFlowsUserPoolClient = &v
-	return s
-}
-
-// SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
-func (s *CreateUserPoolClientInput) SetAllowedOAuthScopes(v []string) *CreateUserPoolClientInput {
-	s.AllowedOAuthScopes = v
-	return s
-}
-
-// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
-func (s *CreateUserPoolClientInput) SetAnalyticsConfiguration(v *AnalyticsConfigurationType) *CreateUserPoolClientInput {
-	s.AnalyticsConfiguration = v
-	return s
-}
-
-// SetCallbackURLs sets the CallbackURLs field's value.
-func (s *CreateUserPoolClientInput) SetCallbackURLs(v []string) *CreateUserPoolClientInput {
-	s.CallbackURLs = v
-	return s
-}
-
-// SetClientName sets the ClientName field's value.
-func (s *CreateUserPoolClientInput) SetClientName(v string) *CreateUserPoolClientInput {
-	s.ClientName = &v
-	return s
-}
-
-// SetDefaultRedirectURI sets the DefaultRedirectURI field's value.
-func (s *CreateUserPoolClientInput) SetDefaultRedirectURI(v string) *CreateUserPoolClientInput {
-	s.DefaultRedirectURI = &v
-	return s
-}
-
-// SetExplicitAuthFlows sets the ExplicitAuthFlows field's value.
-func (s *CreateUserPoolClientInput) SetExplicitAuthFlows(v []ExplicitAuthFlowsType) *CreateUserPoolClientInput {
-	s.ExplicitAuthFlows = v
-	return s
-}
-
-// SetGenerateSecret sets the GenerateSecret field's value.
-func (s *CreateUserPoolClientInput) SetGenerateSecret(v bool) *CreateUserPoolClientInput {
-	s.GenerateSecret = &v
-	return s
-}
-
-// SetLogoutURLs sets the LogoutURLs field's value.
-func (s *CreateUserPoolClientInput) SetLogoutURLs(v []string) *CreateUserPoolClientInput {
-	s.LogoutURLs = v
-	return s
-}
-
-// SetReadAttributes sets the ReadAttributes field's value.
-func (s *CreateUserPoolClientInput) SetReadAttributes(v []string) *CreateUserPoolClientInput {
-	s.ReadAttributes = v
-	return s
-}
-
-// SetRefreshTokenValidity sets the RefreshTokenValidity field's value.
-func (s *CreateUserPoolClientInput) SetRefreshTokenValidity(v int64) *CreateUserPoolClientInput {
-	s.RefreshTokenValidity = &v
-	return s
-}
-
-// SetSupportedIdentityProviders sets the SupportedIdentityProviders field's value.
-func (s *CreateUserPoolClientInput) SetSupportedIdentityProviders(v []string) *CreateUserPoolClientInput {
-	s.SupportedIdentityProviders = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *CreateUserPoolClientInput) SetUserPoolId(v string) *CreateUserPoolClientInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetWriteAttributes sets the WriteAttributes field's value.
-func (s *CreateUserPoolClientInput) SetWriteAttributes(v []string) *CreateUserPoolClientInput {
-	s.WriteAttributes = v
-	return s
-}
-
 // Represents the response from the server to create a user pool client.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientResponse
 type CreateUserPoolClientOutput struct {
@@ -10176,12 +8856,6 @@ func (s CreateUserPoolClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserPoolClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserPoolClient sets the UserPoolClient field's value.
-func (s *CreateUserPoolClientOutput) SetUserPoolClient(v *UserPoolClientType) *CreateUserPoolClientOutput {
-	s.UserPoolClient = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainRequest
@@ -10231,18 +8905,6 @@ func (s *CreateUserPoolDomainInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomain sets the Domain field's value.
-func (s *CreateUserPoolDomainInput) SetDomain(v string) *CreateUserPoolDomainInput {
-	s.Domain = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *CreateUserPoolDomainInput) SetUserPoolId(v string) *CreateUserPoolDomainInput {
-	s.UserPoolId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainResponse
@@ -10422,120 +9084,6 @@ func (s *CreateUserPoolInput) Validate() error {
 	return nil
 }
 
-// SetAdminCreateUserConfig sets the AdminCreateUserConfig field's value.
-func (s *CreateUserPoolInput) SetAdminCreateUserConfig(v *AdminCreateUserConfigType) *CreateUserPoolInput {
-	s.AdminCreateUserConfig = v
-	return s
-}
-
-// SetAliasAttributes sets the AliasAttributes field's value.
-func (s *CreateUserPoolInput) SetAliasAttributes(v []AliasAttributeType) *CreateUserPoolInput {
-	s.AliasAttributes = v
-	return s
-}
-
-// SetAutoVerifiedAttributes sets the AutoVerifiedAttributes field's value.
-func (s *CreateUserPoolInput) SetAutoVerifiedAttributes(v []VerifiedAttributeType) *CreateUserPoolInput {
-	s.AutoVerifiedAttributes = v
-	return s
-}
-
-// SetDeviceConfiguration sets the DeviceConfiguration field's value.
-func (s *CreateUserPoolInput) SetDeviceConfiguration(v *DeviceConfigurationType) *CreateUserPoolInput {
-	s.DeviceConfiguration = v
-	return s
-}
-
-// SetEmailConfiguration sets the EmailConfiguration field's value.
-func (s *CreateUserPoolInput) SetEmailConfiguration(v *EmailConfigurationType) *CreateUserPoolInput {
-	s.EmailConfiguration = v
-	return s
-}
-
-// SetEmailVerificationMessage sets the EmailVerificationMessage field's value.
-func (s *CreateUserPoolInput) SetEmailVerificationMessage(v string) *CreateUserPoolInput {
-	s.EmailVerificationMessage = &v
-	return s
-}
-
-// SetEmailVerificationSubject sets the EmailVerificationSubject field's value.
-func (s *CreateUserPoolInput) SetEmailVerificationSubject(v string) *CreateUserPoolInput {
-	s.EmailVerificationSubject = &v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *CreateUserPoolInput) SetLambdaConfig(v *LambdaConfigType) *CreateUserPoolInput {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *CreateUserPoolInput) SetMfaConfiguration(v UserPoolMfaType) *CreateUserPoolInput {
-	s.MfaConfiguration = v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *CreateUserPoolInput) SetPolicies(v *UserPoolPolicyType) *CreateUserPoolInput {
-	s.Policies = v
-	return s
-}
-
-// SetPoolName sets the PoolName field's value.
-func (s *CreateUserPoolInput) SetPoolName(v string) *CreateUserPoolInput {
-	s.PoolName = &v
-	return s
-}
-
-// SetSchema sets the Schema field's value.
-func (s *CreateUserPoolInput) SetSchema(v []SchemaAttributeType) *CreateUserPoolInput {
-	s.Schema = v
-	return s
-}
-
-// SetSmsAuthenticationMessage sets the SmsAuthenticationMessage field's value.
-func (s *CreateUserPoolInput) SetSmsAuthenticationMessage(v string) *CreateUserPoolInput {
-	s.SmsAuthenticationMessage = &v
-	return s
-}
-
-// SetSmsConfiguration sets the SmsConfiguration field's value.
-func (s *CreateUserPoolInput) SetSmsConfiguration(v *SmsConfigurationType) *CreateUserPoolInput {
-	s.SmsConfiguration = v
-	return s
-}
-
-// SetSmsVerificationMessage sets the SmsVerificationMessage field's value.
-func (s *CreateUserPoolInput) SetSmsVerificationMessage(v string) *CreateUserPoolInput {
-	s.SmsVerificationMessage = &v
-	return s
-}
-
-// SetUserPoolAddOns sets the UserPoolAddOns field's value.
-func (s *CreateUserPoolInput) SetUserPoolAddOns(v *UserPoolAddOnsType) *CreateUserPoolInput {
-	s.UserPoolAddOns = v
-	return s
-}
-
-// SetUserPoolTags sets the UserPoolTags field's value.
-func (s *CreateUserPoolInput) SetUserPoolTags(v map[string]string) *CreateUserPoolInput {
-	s.UserPoolTags = v
-	return s
-}
-
-// SetUsernameAttributes sets the UsernameAttributes field's value.
-func (s *CreateUserPoolInput) SetUsernameAttributes(v []UsernameAttributeType) *CreateUserPoolInput {
-	s.UsernameAttributes = v
-	return s
-}
-
-// SetVerificationMessageTemplate sets the VerificationMessageTemplate field's value.
-func (s *CreateUserPoolInput) SetVerificationMessageTemplate(v *VerificationMessageTemplateType) *CreateUserPoolInput {
-	s.VerificationMessageTemplate = v
-	return s
-}
-
 // Represents the response from the server for the request to create a user
 // pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolResponse
@@ -10561,12 +9109,6 @@ func (s CreateUserPoolOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserPoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserPool sets the UserPool field's value.
-func (s *CreateUserPoolOutput) SetUserPool(v *UserPoolType) *CreateUserPoolOutput {
-	s.UserPool = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroupRequest
@@ -10616,18 +9158,6 @@ func (s *DeleteGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *DeleteGroupInput) SetGroupName(v string) *DeleteGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DeleteGroupInput) SetUserPoolId(v string) *DeleteGroupInput {
-	s.UserPoolId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroupOutput
@@ -10701,18 +9231,6 @@ func (s *DeleteIdentityProviderInput) Validate() error {
 	return nil
 }
 
-// SetProviderName sets the ProviderName field's value.
-func (s *DeleteIdentityProviderInput) SetProviderName(v string) *DeleteIdentityProviderInput {
-	s.ProviderName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DeleteIdentityProviderInput) SetUserPoolId(v string) *DeleteIdentityProviderInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteIdentityProviderOutput
 type DeleteIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -10784,18 +9302,6 @@ func (s *DeleteResourceServerInput) Validate() error {
 	return nil
 }
 
-// SetIdentifier sets the Identifier field's value.
-func (s *DeleteResourceServerInput) SetIdentifier(v string) *DeleteResourceServerInput {
-	s.Identifier = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DeleteResourceServerInput) SetUserPoolId(v string) *DeleteResourceServerInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServerOutput
 type DeleteResourceServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -10865,18 +9371,6 @@ func (s *DeleteUserAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *DeleteUserAttributesInput) SetAccessToken(v string) *DeleteUserAttributesInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetUserAttributeNames sets the UserAttributeNames field's value.
-func (s *DeleteUserAttributesInput) SetUserAttributeNames(v []string) *DeleteUserAttributesInput {
-	s.UserAttributeNames = v
-	return s
-}
-
 // Represents the response from the server to delete user attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributesResponse
 type DeleteUserAttributesOutput struct {
@@ -10933,12 +9427,6 @@ func (s *DeleteUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *DeleteUserInput) SetAccessToken(v string) *DeleteUserInput {
-	s.AccessToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserOutput
@@ -11013,18 +9501,6 @@ func (s *DeleteUserPoolClientInput) Validate() error {
 	return nil
 }
 
-// SetClientId sets the ClientId field's value.
-func (s *DeleteUserPoolClientInput) SetClientId(v string) *DeleteUserPoolClientInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DeleteUserPoolClientInput) SetUserPoolId(v string) *DeleteUserPoolClientInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientOutput
 type DeleteUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
@@ -11096,18 +9572,6 @@ func (s *DeleteUserPoolDomainInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *DeleteUserPoolDomainInput) SetDomain(v string) *DeleteUserPoolDomainInput {
-	s.Domain = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DeleteUserPoolDomainInput) SetUserPoolId(v string) *DeleteUserPoolDomainInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolDomainResponse
 type DeleteUserPoolDomainOutput struct {
 	_ struct{} `type:"structure"`
@@ -11166,12 +9630,6 @@ func (s *DeleteUserPoolInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DeleteUserPoolInput) SetUserPoolId(v string) *DeleteUserPoolInput {
-	s.UserPoolId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolOutput
@@ -11245,18 +9703,6 @@ func (s *DescribeIdentityProviderInput) Validate() error {
 	return nil
 }
 
-// SetProviderName sets the ProviderName field's value.
-func (s *DescribeIdentityProviderInput) SetProviderName(v string) *DescribeIdentityProviderInput {
-	s.ProviderName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DescribeIdentityProviderInput) SetUserPoolId(v string) *DescribeIdentityProviderInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeIdentityProviderResponse
 type DescribeIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -11282,12 +9728,6 @@ func (s DescribeIdentityProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeIdentityProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIdentityProvider sets the IdentityProvider field's value.
-func (s *DescribeIdentityProviderOutput) SetIdentityProvider(v *IdentityProviderType) *DescribeIdentityProviderOutput {
-	s.IdentityProvider = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServerRequest
@@ -11339,18 +9779,6 @@ func (s *DescribeResourceServerInput) Validate() error {
 	return nil
 }
 
-// SetIdentifier sets the Identifier field's value.
-func (s *DescribeResourceServerInput) SetIdentifier(v string) *DescribeResourceServerInput {
-	s.Identifier = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DescribeResourceServerInput) SetUserPoolId(v string) *DescribeResourceServerInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServerResponse
 type DescribeResourceServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -11376,12 +9804,6 @@ func (s DescribeResourceServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeResourceServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceServer sets the ResourceServer field's value.
-func (s *DescribeResourceServerOutput) SetResourceServer(v *ResourceServerType) *DescribeResourceServerOutput {
-	s.ResourceServer = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfigurationRequest
@@ -11427,18 +9849,6 @@ func (s *DescribeRiskConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetClientId sets the ClientId field's value.
-func (s *DescribeRiskConfigurationInput) SetClientId(v string) *DescribeRiskConfigurationInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DescribeRiskConfigurationInput) SetUserPoolId(v string) *DescribeRiskConfigurationInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfigurationResponse
 type DescribeRiskConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -11464,12 +9874,6 @@ func (s DescribeRiskConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRiskConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRiskConfiguration sets the RiskConfiguration field's value.
-func (s *DescribeRiskConfigurationOutput) SetRiskConfiguration(v *RiskConfigurationType) *DescribeRiskConfigurationOutput {
-	s.RiskConfiguration = v
-	return s
 }
 
 // Represents the request to describe the user import job.
@@ -11522,18 +9926,6 @@ func (s *DescribeUserImportJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *DescribeUserImportJobInput) SetJobId(v string) *DescribeUserImportJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DescribeUserImportJobInput) SetUserPoolId(v string) *DescribeUserImportJobInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server to the request to describe the user
 // import job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJobResponse
@@ -11559,12 +9951,6 @@ func (s DescribeUserImportJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeUserImportJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserImportJob sets the UserImportJob field's value.
-func (s *DescribeUserImportJobOutput) SetUserImportJob(v *UserImportJobType) *DescribeUserImportJobOutput {
-	s.UserImportJob = v
-	return s
 }
 
 // Represents the request to describe a user pool client.
@@ -11617,18 +10003,6 @@ func (s *DescribeUserPoolClientInput) Validate() error {
 	return nil
 }
 
-// SetClientId sets the ClientId field's value.
-func (s *DescribeUserPoolClientInput) SetClientId(v string) *DescribeUserPoolClientInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DescribeUserPoolClientInput) SetUserPoolId(v string) *DescribeUserPoolClientInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server from a request to describe the user
 // pool client.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClientResponse
@@ -11654,12 +10028,6 @@ func (s DescribeUserPoolClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeUserPoolClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserPoolClient sets the UserPoolClient field's value.
-func (s *DescribeUserPoolClientOutput) SetUserPoolClient(v *UserPoolClientType) *DescribeUserPoolClientOutput {
-	s.UserPoolClient = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomainRequest
@@ -11699,12 +10067,6 @@ func (s *DescribeUserPoolDomainInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *DescribeUserPoolDomainInput) SetDomain(v string) *DescribeUserPoolDomainInput {
-	s.Domain = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomainResponse
 type DescribeUserPoolDomainOutput struct {
 	_ struct{} `type:"structure"`
@@ -11728,12 +10090,6 @@ func (s DescribeUserPoolDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeUserPoolDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainDescription sets the DomainDescription field's value.
-func (s *DescribeUserPoolDomainOutput) SetDomainDescription(v *DomainDescriptionType) *DescribeUserPoolDomainOutput {
-	s.DomainDescription = v
-	return s
 }
 
 // Represents the request to describe the user pool.
@@ -11774,12 +10130,6 @@ func (s *DescribeUserPoolInput) Validate() error {
 	return nil
 }
 
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DescribeUserPoolInput) SetUserPoolId(v string) *DescribeUserPoolInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response to describe the user pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolResponse
 type DescribeUserPoolOutput struct {
@@ -11806,12 +10156,6 @@ func (s DescribeUserPoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUserPool sets the UserPool field's value.
-func (s *DescribeUserPoolOutput) SetUserPool(v *UserPoolType) *DescribeUserPoolOutput {
-	s.UserPool = v
-	return s
-}
-
 // The configuration for the user pool's device tracking.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceConfigurationType
 type DeviceConfigurationType struct {
@@ -11835,18 +10179,6 @@ func (s DeviceConfigurationType) GoString() string {
 	return s.String()
 }
 
-// SetChallengeRequiredOnNewDevice sets the ChallengeRequiredOnNewDevice field's value.
-func (s *DeviceConfigurationType) SetChallengeRequiredOnNewDevice(v bool) *DeviceConfigurationType {
-	s.ChallengeRequiredOnNewDevice = &v
-	return s
-}
-
-// SetDeviceOnlyRememberedOnUserPrompt sets the DeviceOnlyRememberedOnUserPrompt field's value.
-func (s *DeviceConfigurationType) SetDeviceOnlyRememberedOnUserPrompt(v bool) *DeviceConfigurationType {
-	s.DeviceOnlyRememberedOnUserPrompt = &v
-	return s
-}
-
 // The device verifier against which it will be authenticated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceSecretVerifierConfigType
 type DeviceSecretVerifierConfigType struct {
@@ -11867,18 +10199,6 @@ func (s DeviceSecretVerifierConfigType) String() string {
 // GoString returns the string representation
 func (s DeviceSecretVerifierConfigType) GoString() string {
 	return s.String()
-}
-
-// SetPasswordVerifier sets the PasswordVerifier field's value.
-func (s *DeviceSecretVerifierConfigType) SetPasswordVerifier(v string) *DeviceSecretVerifierConfigType {
-	s.PasswordVerifier = &v
-	return s
-}
-
-// SetSalt sets the Salt field's value.
-func (s *DeviceSecretVerifierConfigType) SetSalt(v string) *DeviceSecretVerifierConfigType {
-	s.Salt = &v
-	return s
 }
 
 // The device type.
@@ -11910,36 +10230,6 @@ func (s DeviceType) String() string {
 // GoString returns the string representation
 func (s DeviceType) GoString() string {
 	return s.String()
-}
-
-// SetDeviceAttributes sets the DeviceAttributes field's value.
-func (s *DeviceType) SetDeviceAttributes(v []AttributeType) *DeviceType {
-	s.DeviceAttributes = v
-	return s
-}
-
-// SetDeviceCreateDate sets the DeviceCreateDate field's value.
-func (s *DeviceType) SetDeviceCreateDate(v time.Time) *DeviceType {
-	s.DeviceCreateDate = &v
-	return s
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *DeviceType) SetDeviceKey(v string) *DeviceType {
-	s.DeviceKey = &v
-	return s
-}
-
-// SetDeviceLastAuthenticatedDate sets the DeviceLastAuthenticatedDate field's value.
-func (s *DeviceType) SetDeviceLastAuthenticatedDate(v time.Time) *DeviceType {
-	s.DeviceLastAuthenticatedDate = &v
-	return s
-}
-
-// SetDeviceLastModifiedDate sets the DeviceLastModifiedDate field's value.
-func (s *DeviceType) SetDeviceLastModifiedDate(v time.Time) *DeviceType {
-	s.DeviceLastModifiedDate = &v
-	return s
 }
 
 // A container for information about a domain.
@@ -11979,48 +10269,6 @@ func (s DomainDescriptionType) GoString() string {
 	return s.String()
 }
 
-// SetAWSAccountId sets the AWSAccountId field's value.
-func (s *DomainDescriptionType) SetAWSAccountId(v string) *DomainDescriptionType {
-	s.AWSAccountId = &v
-	return s
-}
-
-// SetCloudFrontDistribution sets the CloudFrontDistribution field's value.
-func (s *DomainDescriptionType) SetCloudFrontDistribution(v string) *DomainDescriptionType {
-	s.CloudFrontDistribution = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *DomainDescriptionType) SetDomain(v string) *DomainDescriptionType {
-	s.Domain = &v
-	return s
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *DomainDescriptionType) SetS3Bucket(v string) *DomainDescriptionType {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DomainDescriptionType) SetStatus(v DomainStatusType) *DomainDescriptionType {
-	s.Status = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *DomainDescriptionType) SetUserPoolId(v string) *DomainDescriptionType {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DomainDescriptionType) SetVersion(v string) *DomainDescriptionType {
-	s.Version = &v
-	return s
-}
-
 // The email configuration type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailConfigurationType
 type EmailConfigurationType struct {
@@ -12056,18 +10304,6 @@ func (s *EmailConfigurationType) Validate() error {
 	return nil
 }
 
-// SetReplyToEmailAddress sets the ReplyToEmailAddress field's value.
-func (s *EmailConfigurationType) SetReplyToEmailAddress(v string) *EmailConfigurationType {
-	s.ReplyToEmailAddress = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *EmailConfigurationType) SetSourceArn(v string) *EmailConfigurationType {
-	s.SourceArn = &v
-	return s
-}
-
 // Specifies the user context data captured at the time of an event request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventContextDataType
 type EventContextDataType struct {
@@ -12099,36 +10335,6 @@ func (s EventContextDataType) GoString() string {
 	return s.String()
 }
 
-// SetCity sets the City field's value.
-func (s *EventContextDataType) SetCity(v string) *EventContextDataType {
-	s.City = &v
-	return s
-}
-
-// SetCountry sets the Country field's value.
-func (s *EventContextDataType) SetCountry(v string) *EventContextDataType {
-	s.Country = &v
-	return s
-}
-
-// SetDeviceName sets the DeviceName field's value.
-func (s *EventContextDataType) SetDeviceName(v string) *EventContextDataType {
-	s.DeviceName = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *EventContextDataType) SetIpAddress(v string) *EventContextDataType {
-	s.IpAddress = &v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *EventContextDataType) SetTimezone(v string) *EventContextDataType {
-	s.Timezone = &v
-	return s
-}
-
 // Specifies the event feedback type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventFeedbackType
 type EventFeedbackType struct {
@@ -12158,24 +10364,6 @@ func (s EventFeedbackType) GoString() string {
 	return s.String()
 }
 
-// SetFeedbackDate sets the FeedbackDate field's value.
-func (s *EventFeedbackType) SetFeedbackDate(v time.Time) *EventFeedbackType {
-	s.FeedbackDate = &v
-	return s
-}
-
-// SetFeedbackValue sets the FeedbackValue field's value.
-func (s *EventFeedbackType) SetFeedbackValue(v FeedbackValueType) *EventFeedbackType {
-	s.FeedbackValue = v
-	return s
-}
-
-// SetProvider sets the Provider field's value.
-func (s *EventFeedbackType) SetProvider(v string) *EventFeedbackType {
-	s.Provider = &v
-	return s
-}
-
 // The event risk type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventRiskType
 type EventRiskType struct {
@@ -12196,18 +10384,6 @@ func (s EventRiskType) String() string {
 // GoString returns the string representation
 func (s EventRiskType) GoString() string {
 	return s.String()
-}
-
-// SetRiskDecision sets the RiskDecision field's value.
-func (s *EventRiskType) SetRiskDecision(v RiskDecisionType) *EventRiskType {
-	s.RiskDecision = v
-	return s
-}
-
-// SetRiskLevel sets the RiskLevel field's value.
-func (s *EventRiskType) SetRiskLevel(v RiskLevelType) *EventRiskType {
-	s.RiskLevel = v
-	return s
 }
 
 // Represents the request to forget the device.
@@ -12249,18 +10425,6 @@ func (s *ForgetDeviceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *ForgetDeviceInput) SetAccessToken(v string) *ForgetDeviceInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *ForgetDeviceInput) SetDeviceKey(v string) *ForgetDeviceInput {
-	s.DeviceKey = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgetDeviceOutput
@@ -12352,36 +10516,6 @@ func (s *ForgotPasswordInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *ForgotPasswordInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ForgotPasswordInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *ForgotPasswordInput) SetClientId(v string) *ForgotPasswordInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetSecretHash sets the SecretHash field's value.
-func (s *ForgotPasswordInput) SetSecretHash(v string) *ForgotPasswordInput {
-	s.SecretHash = &v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *ForgotPasswordInput) SetUserContextData(v *UserContextDataType) *ForgotPasswordInput {
-	s.UserContextData = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *ForgotPasswordInput) SetUsername(v string) *ForgotPasswordInput {
-	s.Username = &v
-	return s
-}
-
 // Respresents the response from the server regarding the request to reset a
 // password.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPasswordResponse
@@ -12408,12 +10542,6 @@ func (s ForgotPasswordOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ForgotPasswordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
-func (s *ForgotPasswordOutput) SetCodeDeliveryDetails(v *CodeDeliveryDetailsType) *ForgotPasswordOutput {
-	s.CodeDeliveryDetails = v
-	return s
 }
 
 // Represents the request to get the header information for the .csv file for
@@ -12455,12 +10583,6 @@ func (s *GetCSVHeaderInput) Validate() error {
 	return nil
 }
 
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GetCSVHeaderInput) SetUserPoolId(v string) *GetCSVHeaderInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server to the request to get the header
 // information for the .csv file for the user import job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeaderResponse
@@ -12489,18 +10611,6 @@ func (s GetCSVHeaderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCSVHeaderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCSVHeader sets the CSVHeader field's value.
-func (s *GetCSVHeaderOutput) SetCSVHeader(v []string) *GetCSVHeaderOutput {
-	s.CSVHeader = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GetCSVHeaderOutput) SetUserPoolId(v string) *GetCSVHeaderOutput {
-	s.UserPoolId = &v
-	return s
 }
 
 // Represents the request to get the device.
@@ -12544,18 +10654,6 @@ func (s *GetDeviceInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *GetDeviceInput) SetAccessToken(v string) *GetDeviceInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *GetDeviceInput) SetDeviceKey(v string) *GetDeviceInput {
-	s.DeviceKey = &v
-	return s
-}
-
 // Gets the device response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDeviceResponse
 type GetDeviceOutput struct {
@@ -12582,12 +10680,6 @@ func (s GetDeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevice sets the Device field's value.
-func (s *GetDeviceOutput) SetDevice(v *DeviceType) *GetDeviceOutput {
-	s.Device = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetGroupRequest
@@ -12639,18 +10731,6 @@ func (s *GetGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *GetGroupInput) SetGroupName(v string) *GetGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GetGroupInput) SetUserPoolId(v string) *GetGroupInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetGroupResponse
 type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -12674,12 +10754,6 @@ func (s GetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *GetGroupOutput) SetGroup(v *GroupType) *GetGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetIdentityProviderByIdentifierRequest
@@ -12731,18 +10805,6 @@ func (s *GetIdentityProviderByIdentifierInput) Validate() error {
 	return nil
 }
 
-// SetIdpIdentifier sets the IdpIdentifier field's value.
-func (s *GetIdentityProviderByIdentifierInput) SetIdpIdentifier(v string) *GetIdentityProviderByIdentifierInput {
-	s.IdpIdentifier = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GetIdentityProviderByIdentifierInput) SetUserPoolId(v string) *GetIdentityProviderByIdentifierInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetIdentityProviderByIdentifierResponse
 type GetIdentityProviderByIdentifierOutput struct {
 	_ struct{} `type:"structure"`
@@ -12768,12 +10830,6 @@ func (s GetIdentityProviderByIdentifierOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIdentityProviderByIdentifierOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIdentityProvider sets the IdentityProvider field's value.
-func (s *GetIdentityProviderByIdentifierOutput) SetIdentityProvider(v *IdentityProviderType) *GetIdentityProviderByIdentifierOutput {
-	s.IdentityProvider = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationRequest
@@ -12819,18 +10875,6 @@ func (s *GetUICustomizationInput) Validate() error {
 	return nil
 }
 
-// SetClientId sets the ClientId field's value.
-func (s *GetUICustomizationInput) SetClientId(v string) *GetUICustomizationInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GetUICustomizationInput) SetUserPoolId(v string) *GetUICustomizationInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationResponse
 type GetUICustomizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -12856,12 +10900,6 @@ func (s GetUICustomizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUICustomizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUICustomization sets the UICustomization field's value.
-func (s *GetUICustomizationOutput) SetUICustomization(v *UICustomizationType) *GetUICustomizationOutput {
-	s.UICustomization = v
-	return s
 }
 
 // Represents the request to get user attribute verification.
@@ -12913,18 +10951,6 @@ func (s *GetUserAttributeVerificationCodeInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *GetUserAttributeVerificationCodeInput) SetAccessToken(v string) *GetUserAttributeVerificationCodeInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *GetUserAttributeVerificationCodeInput) SetAttributeName(v string) *GetUserAttributeVerificationCodeInput {
-	s.AttributeName = &v
-	return s
-}
-
 // The verification code response returned by the server response to get the
 // user attribute verification code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCodeResponse
@@ -12951,12 +10977,6 @@ func (s GetUserAttributeVerificationCodeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUserAttributeVerificationCodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
-func (s *GetUserAttributeVerificationCodeOutput) SetCodeDeliveryDetails(v *CodeDeliveryDetailsType) *GetUserAttributeVerificationCodeOutput {
-	s.CodeDeliveryDetails = v
-	return s
 }
 
 // Represents the request to get information about the user.
@@ -12993,12 +11013,6 @@ func (s *GetUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *GetUserInput) SetAccessToken(v string) *GetUserInput {
-	s.AccessToken = &v
-	return s
 }
 
 // Represents the response from the server from the request to get information
@@ -13047,36 +11061,6 @@ func (s GetUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMFAOptions sets the MFAOptions field's value.
-func (s *GetUserOutput) SetMFAOptions(v []MFAOptionType) *GetUserOutput {
-	s.MFAOptions = v
-	return s
-}
-
-// SetPreferredMfaSetting sets the PreferredMfaSetting field's value.
-func (s *GetUserOutput) SetPreferredMfaSetting(v string) *GetUserOutput {
-	s.PreferredMfaSetting = &v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *GetUserOutput) SetUserAttributes(v []AttributeType) *GetUserOutput {
-	s.UserAttributes = v
-	return s
-}
-
-// SetUserMFASettingList sets the UserMFASettingList field's value.
-func (s *GetUserOutput) SetUserMFASettingList(v []string) *GetUserOutput {
-	s.UserMFASettingList = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *GetUserOutput) SetUsername(v string) *GetUserOutput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfigRequest
 type GetUserPoolMfaConfigInput struct {
 	_ struct{} `type:"structure"`
@@ -13114,12 +11098,6 @@ func (s *GetUserPoolMfaConfigInput) Validate() error {
 	return nil
 }
 
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GetUserPoolMfaConfigInput) SetUserPoolId(v string) *GetUserPoolMfaConfigInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfigResponse
 type GetUserPoolMfaConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -13149,24 +11127,6 @@ func (s GetUserPoolMfaConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUserPoolMfaConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *GetUserPoolMfaConfigOutput) SetMfaConfiguration(v UserPoolMfaType) *GetUserPoolMfaConfigOutput {
-	s.MfaConfiguration = v
-	return s
-}
-
-// SetSmsMfaConfiguration sets the SmsMfaConfiguration field's value.
-func (s *GetUserPoolMfaConfigOutput) SetSmsMfaConfiguration(v *SmsMfaConfigType) *GetUserPoolMfaConfigOutput {
-	s.SmsMfaConfiguration = v
-	return s
-}
-
-// SetSoftwareTokenMfaConfiguration sets the SoftwareTokenMfaConfiguration field's value.
-func (s *GetUserPoolMfaConfigOutput) SetSoftwareTokenMfaConfiguration(v *SoftwareTokenMfaConfigType) *GetUserPoolMfaConfigOutput {
-	s.SoftwareTokenMfaConfiguration = v
-	return s
 }
 
 // Represents the request to sign out all devices.
@@ -13202,12 +11162,6 @@ func (s *GlobalSignOutInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *GlobalSignOutInput) SetAccessToken(v string) *GlobalSignOutInput {
-	s.AccessToken = &v
-	return s
 }
 
 // The response to the request to sign out all devices.
@@ -13283,48 +11237,6 @@ func (s GroupType) GoString() string {
 	return s.String()
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *GroupType) SetCreationDate(v time.Time) *GroupType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GroupType) SetDescription(v string) *GroupType {
-	s.Description = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *GroupType) SetGroupName(v string) *GroupType {
-	s.GroupName = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *GroupType) SetLastModifiedDate(v time.Time) *GroupType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPrecedence sets the Precedence field's value.
-func (s *GroupType) SetPrecedence(v int64) *GroupType {
-	s.Precedence = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *GroupType) SetRoleArn(v string) *GroupType {
-	s.RoleArn = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *GroupType) SetUserPoolId(v string) *GroupType {
-	s.UserPoolId = &v
-	return s
-}
-
 // The HTTP header.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/HttpHeader
 type HttpHeader struct {
@@ -13345,18 +11257,6 @@ func (s HttpHeader) String() string {
 // GoString returns the string representation
 func (s HttpHeader) GoString() string {
 	return s.String()
-}
-
-// SetHeaderName sets the HeaderName field's value.
-func (s *HttpHeader) SetHeaderName(v string) *HttpHeader {
-	s.HeaderName = &v
-	return s
-}
-
-// SetHeaderValue sets the HeaderValue field's value.
-func (s *HttpHeader) SetHeaderValue(v string) *HttpHeader {
-	s.HeaderValue = &v
-	return s
 }
 
 // A container for information about an identity provider.
@@ -13398,54 +11298,6 @@ func (s IdentityProviderType) String() string {
 // GoString returns the string representation
 func (s IdentityProviderType) GoString() string {
 	return s.String()
-}
-
-// SetAttributeMapping sets the AttributeMapping field's value.
-func (s *IdentityProviderType) SetAttributeMapping(v map[string]string) *IdentityProviderType {
-	s.AttributeMapping = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *IdentityProviderType) SetCreationDate(v time.Time) *IdentityProviderType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetIdpIdentifiers sets the IdpIdentifiers field's value.
-func (s *IdentityProviderType) SetIdpIdentifiers(v []string) *IdentityProviderType {
-	s.IdpIdentifiers = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *IdentityProviderType) SetLastModifiedDate(v time.Time) *IdentityProviderType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetProviderDetails sets the ProviderDetails field's value.
-func (s *IdentityProviderType) SetProviderDetails(v map[string]string) *IdentityProviderType {
-	s.ProviderDetails = v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *IdentityProviderType) SetProviderName(v string) *IdentityProviderType {
-	s.ProviderName = &v
-	return s
-}
-
-// SetProviderType sets the ProviderType field's value.
-func (s *IdentityProviderType) SetProviderType(v IdentityProviderTypeType) *IdentityProviderType {
-	s.ProviderType = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *IdentityProviderType) SetUserPoolId(v string) *IdentityProviderType {
-	s.UserPoolId = &v
-	return s
 }
 
 // Initiates the authentication request.
@@ -13541,42 +11393,6 @@ func (s *InitiateAuthInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *InitiateAuthInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *InitiateAuthInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetAuthFlow sets the AuthFlow field's value.
-func (s *InitiateAuthInput) SetAuthFlow(v AuthFlowType) *InitiateAuthInput {
-	s.AuthFlow = v
-	return s
-}
-
-// SetAuthParameters sets the AuthParameters field's value.
-func (s *InitiateAuthInput) SetAuthParameters(v map[string]string) *InitiateAuthInput {
-	s.AuthParameters = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *InitiateAuthInput) SetClientId(v string) *InitiateAuthInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetClientMetadata sets the ClientMetadata field's value.
-func (s *InitiateAuthInput) SetClientMetadata(v map[string]string) *InitiateAuthInput {
-	s.ClientMetadata = v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *InitiateAuthInput) SetUserContextData(v *UserContextDataType) *InitiateAuthInput {
-	s.UserContextData = v
-	return s
-}
-
 // Initiates the authentication response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuthResponse
 type InitiateAuthOutput struct {
@@ -13647,30 +11463,6 @@ func (s InitiateAuthOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InitiateAuthOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAuthenticationResult sets the AuthenticationResult field's value.
-func (s *InitiateAuthOutput) SetAuthenticationResult(v *AuthenticationResultType) *InitiateAuthOutput {
-	s.AuthenticationResult = v
-	return s
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *InitiateAuthOutput) SetChallengeName(v ChallengeNameType) *InitiateAuthOutput {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *InitiateAuthOutput) SetChallengeParameters(v map[string]string) *InitiateAuthOutput {
-	s.ChallengeParameters = v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *InitiateAuthOutput) SetSession(v string) *InitiateAuthOutput {
-	s.Session = &v
-	return s
 }
 
 // Specifies the configuration for AWS Lambda triggers.
@@ -13753,60 +11545,6 @@ func (s *LambdaConfigType) Validate() error {
 	return nil
 }
 
-// SetCreateAuthChallenge sets the CreateAuthChallenge field's value.
-func (s *LambdaConfigType) SetCreateAuthChallenge(v string) *LambdaConfigType {
-	s.CreateAuthChallenge = &v
-	return s
-}
-
-// SetCustomMessage sets the CustomMessage field's value.
-func (s *LambdaConfigType) SetCustomMessage(v string) *LambdaConfigType {
-	s.CustomMessage = &v
-	return s
-}
-
-// SetDefineAuthChallenge sets the DefineAuthChallenge field's value.
-func (s *LambdaConfigType) SetDefineAuthChallenge(v string) *LambdaConfigType {
-	s.DefineAuthChallenge = &v
-	return s
-}
-
-// SetPostAuthentication sets the PostAuthentication field's value.
-func (s *LambdaConfigType) SetPostAuthentication(v string) *LambdaConfigType {
-	s.PostAuthentication = &v
-	return s
-}
-
-// SetPostConfirmation sets the PostConfirmation field's value.
-func (s *LambdaConfigType) SetPostConfirmation(v string) *LambdaConfigType {
-	s.PostConfirmation = &v
-	return s
-}
-
-// SetPreAuthentication sets the PreAuthentication field's value.
-func (s *LambdaConfigType) SetPreAuthentication(v string) *LambdaConfigType {
-	s.PreAuthentication = &v
-	return s
-}
-
-// SetPreSignUp sets the PreSignUp field's value.
-func (s *LambdaConfigType) SetPreSignUp(v string) *LambdaConfigType {
-	s.PreSignUp = &v
-	return s
-}
-
-// SetPreTokenGeneration sets the PreTokenGeneration field's value.
-func (s *LambdaConfigType) SetPreTokenGeneration(v string) *LambdaConfigType {
-	s.PreTokenGeneration = &v
-	return s
-}
-
-// SetVerifyAuthChallengeResponse sets the VerifyAuthChallengeResponse field's value.
-func (s *LambdaConfigType) SetVerifyAuthChallengeResponse(v string) *LambdaConfigType {
-	s.VerifyAuthChallengeResponse = &v
-	return s
-}
-
 // Represents the request to list the devices.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesRequest
 type ListDevicesInput struct {
@@ -13851,24 +11589,6 @@ func (s *ListDevicesInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *ListDevicesInput) SetAccessToken(v string) *ListDevicesInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListDevicesInput) SetLimit(v int64) *ListDevicesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *ListDevicesInput) SetPaginationToken(v string) *ListDevicesInput {
-	s.PaginationToken = &v
-	return s
-}
-
 // Represents the response to list devices.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesResponse
 type ListDevicesOutput struct {
@@ -13896,18 +11616,6 @@ func (s ListDevicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevices sets the Devices field's value.
-func (s *ListDevicesOutput) SetDevices(v []DeviceType) *ListDevicesOutput {
-	s.Devices = v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *ListDevicesOutput) SetPaginationToken(v string) *ListDevicesOutput {
-	s.PaginationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroupsRequest
@@ -13957,24 +11665,6 @@ func (s *ListGroupsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListGroupsInput) SetLimit(v int64) *ListGroupsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsInput) SetNextToken(v string) *ListGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListGroupsInput) SetUserPoolId(v string) *ListGroupsInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroupsResponse
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -14002,18 +11692,6 @@ func (s ListGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []GroupType) *ListGroupsOutput {
-	s.Groups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsOutput) SetNextToken(v string) *ListGroupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListIdentityProvidersRequest
@@ -14065,24 +11743,6 @@ func (s *ListIdentityProvidersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListIdentityProvidersInput) SetMaxResults(v int64) *ListIdentityProvidersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIdentityProvidersInput) SetNextToken(v string) *ListIdentityProvidersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListIdentityProvidersInput) SetUserPoolId(v string) *ListIdentityProvidersInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListIdentityProvidersResponse
 type ListIdentityProvidersOutput struct {
 	_ struct{} `type:"structure"`
@@ -14111,18 +11771,6 @@ func (s ListIdentityProvidersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIdentityProvidersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListIdentityProvidersOutput) SetNextToken(v string) *ListIdentityProvidersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProviders sets the Providers field's value.
-func (s *ListIdentityProvidersOutput) SetProviders(v []ProviderDescription) *ListIdentityProvidersOutput {
-	s.Providers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServersRequest
@@ -14174,24 +11822,6 @@ func (s *ListResourceServersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResourceServersInput) SetMaxResults(v int64) *ListResourceServersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceServersInput) SetNextToken(v string) *ListResourceServersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListResourceServersInput) SetUserPoolId(v string) *ListResourceServersInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServersResponse
 type ListResourceServersOutput struct {
 	_ struct{} `type:"structure"`
@@ -14220,18 +11850,6 @@ func (s ListResourceServersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourceServersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceServersOutput) SetNextToken(v string) *ListResourceServersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceServers sets the ResourceServers field's value.
-func (s *ListResourceServersOutput) SetResourceServers(v []ResourceServerType) *ListResourceServersOutput {
-	s.ResourceServers = v
-	return s
 }
 
 // Represents the request to list the user import jobs.
@@ -14291,24 +11909,6 @@ func (s *ListUserImportJobsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUserImportJobsInput) SetMaxResults(v int64) *ListUserImportJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *ListUserImportJobsInput) SetPaginationToken(v string) *ListUserImportJobsInput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListUserImportJobsInput) SetUserPoolId(v string) *ListUserImportJobsInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server to the request to list the user import
 // jobs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobsResponse
@@ -14338,18 +11938,6 @@ func (s ListUserImportJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUserImportJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *ListUserImportJobsOutput) SetPaginationToken(v string) *ListUserImportJobsOutput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetUserImportJobs sets the UserImportJobs field's value.
-func (s *ListUserImportJobsOutput) SetUserImportJobs(v []UserImportJobType) *ListUserImportJobsOutput {
-	s.UserImportJobs = v
-	return s
 }
 
 // Represents the request to list the user pool clients.
@@ -14404,24 +11992,6 @@ func (s *ListUserPoolClientsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUserPoolClientsInput) SetMaxResults(v int64) *ListUserPoolClientsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUserPoolClientsInput) SetNextToken(v string) *ListUserPoolClientsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListUserPoolClientsInput) SetUserPoolId(v string) *ListUserPoolClientsInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server that lists user pool clients.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClientsResponse
 type ListUserPoolClientsOutput struct {
@@ -14450,18 +12020,6 @@ func (s ListUserPoolClientsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUserPoolClientsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUserPoolClientsOutput) SetNextToken(v string) *ListUserPoolClientsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolClients sets the UserPoolClients field's value.
-func (s *ListUserPoolClientsOutput) SetUserPoolClients(v []UserPoolClientDescription) *ListUserPoolClientsOutput {
-	s.UserPoolClients = v
-	return s
 }
 
 // Represents the request to list user pools.
@@ -14510,18 +12068,6 @@ func (s *ListUserPoolsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUserPoolsInput) SetMaxResults(v int64) *ListUserPoolsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUserPoolsInput) SetNextToken(v string) *ListUserPoolsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the response to list user pools.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolsResponse
 type ListUserPoolsOutput struct {
@@ -14550,18 +12096,6 @@ func (s ListUserPoolsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUserPoolsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUserPoolsOutput) SetNextToken(v string) *ListUserPoolsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPools sets the UserPools field's value.
-func (s *ListUserPoolsOutput) SetUserPools(v []UserPoolDescriptionType) *ListUserPoolsOutput {
-	s.UserPools = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroupRequest
@@ -14623,30 +12157,6 @@ func (s *ListUsersInGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *ListUsersInGroupInput) SetGroupName(v string) *ListUsersInGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListUsersInGroupInput) SetLimit(v int64) *ListUsersInGroupInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUsersInGroupInput) SetNextToken(v string) *ListUsersInGroupInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListUsersInGroupInput) SetUserPoolId(v string) *ListUsersInGroupInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroupResponse
 type ListUsersInGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -14674,18 +12184,6 @@ func (s ListUsersInGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUsersInGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUsersInGroupOutput) SetNextToken(v string) *ListUsersInGroupOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *ListUsersInGroupOutput) SetUsers(v []UserType) *ListUsersInGroupOutput {
-	s.Users = v
-	return s
 }
 
 // Represents the request to list users.
@@ -14785,36 +12283,6 @@ func (s *ListUsersInput) Validate() error {
 	return nil
 }
 
-// SetAttributesToGet sets the AttributesToGet field's value.
-func (s *ListUsersInput) SetAttributesToGet(v []string) *ListUsersInput {
-	s.AttributesToGet = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *ListUsersInput) SetFilter(v string) *ListUsersInput {
-	s.Filter = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListUsersInput) SetLimit(v int64) *ListUsersInput {
-	s.Limit = &v
-	return s
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *ListUsersInput) SetPaginationToken(v string) *ListUsersInput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ListUsersInput) SetUserPoolId(v string) *ListUsersInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // The response from the request to list users.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersResponse
 type ListUsersOutput struct {
@@ -14843,18 +12311,6 @@ func (s ListUsersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPaginationToken sets the PaginationToken field's value.
-func (s *ListUsersOutput) SetPaginationToken(v string) *ListUsersOutput {
-	s.PaginationToken = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *ListUsersOutput) SetUsers(v []UserType) *ListUsersOutput {
-	s.Users = v
-	return s
 }
 
 // Specifies the different settings for multi-factor authentication (MFA).
@@ -14890,18 +12346,6 @@ func (s *MFAOptionType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *MFAOptionType) SetAttributeName(v string) *MFAOptionType {
-	s.AttributeName = &v
-	return s
-}
-
-// SetDeliveryMedium sets the DeliveryMedium field's value.
-func (s *MFAOptionType) SetDeliveryMedium(v DeliveryMediumType) *MFAOptionType {
-	s.DeliveryMedium = v
-	return s
 }
 
 // The message template structure.
@@ -14948,24 +12392,6 @@ func (s *MessageTemplateType) Validate() error {
 	return nil
 }
 
-// SetEmailMessage sets the EmailMessage field's value.
-func (s *MessageTemplateType) SetEmailMessage(v string) *MessageTemplateType {
-	s.EmailMessage = &v
-	return s
-}
-
-// SetEmailSubject sets the EmailSubject field's value.
-func (s *MessageTemplateType) SetEmailSubject(v string) *MessageTemplateType {
-	s.EmailSubject = &v
-	return s
-}
-
-// SetSMSMessage sets the SMSMessage field's value.
-func (s *MessageTemplateType) SetSMSMessage(v string) *MessageTemplateType {
-	s.SMSMessage = &v
-	return s
-}
-
 // The new device metadata type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NewDeviceMetadataType
 type NewDeviceMetadataType struct {
@@ -14986,18 +12412,6 @@ func (s NewDeviceMetadataType) String() string {
 // GoString returns the string representation
 func (s NewDeviceMetadataType) GoString() string {
 	return s.String()
-}
-
-// SetDeviceGroupKey sets the DeviceGroupKey field's value.
-func (s *NewDeviceMetadataType) SetDeviceGroupKey(v string) *NewDeviceMetadataType {
-	s.DeviceGroupKey = &v
-	return s
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *NewDeviceMetadataType) SetDeviceKey(v string) *NewDeviceMetadataType {
-	s.DeviceKey = &v
-	return s
 }
 
 // The notify configuration type.
@@ -15073,42 +12487,6 @@ func (s *NotifyConfigurationType) Validate() error {
 	return nil
 }
 
-// SetBlockEmail sets the BlockEmail field's value.
-func (s *NotifyConfigurationType) SetBlockEmail(v *NotifyEmailType) *NotifyConfigurationType {
-	s.BlockEmail = v
-	return s
-}
-
-// SetFrom sets the From field's value.
-func (s *NotifyConfigurationType) SetFrom(v string) *NotifyConfigurationType {
-	s.From = &v
-	return s
-}
-
-// SetMfaEmail sets the MfaEmail field's value.
-func (s *NotifyConfigurationType) SetMfaEmail(v *NotifyEmailType) *NotifyConfigurationType {
-	s.MfaEmail = v
-	return s
-}
-
-// SetNoActionEmail sets the NoActionEmail field's value.
-func (s *NotifyConfigurationType) SetNoActionEmail(v *NotifyEmailType) *NotifyConfigurationType {
-	s.NoActionEmail = v
-	return s
-}
-
-// SetReplyTo sets the ReplyTo field's value.
-func (s *NotifyConfigurationType) SetReplyTo(v string) *NotifyConfigurationType {
-	s.ReplyTo = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *NotifyConfigurationType) SetSourceArn(v string) *NotifyConfigurationType {
-	s.SourceArn = &v
-	return s
-}
-
 // The notify email type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NotifyEmailType
 type NotifyEmailType struct {
@@ -15159,24 +12537,6 @@ func (s *NotifyEmailType) Validate() error {
 	return nil
 }
 
-// SetHtmlBody sets the HtmlBody field's value.
-func (s *NotifyEmailType) SetHtmlBody(v string) *NotifyEmailType {
-	s.HtmlBody = &v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *NotifyEmailType) SetSubject(v string) *NotifyEmailType {
-	s.Subject = &v
-	return s
-}
-
-// SetTextBody sets the TextBody field's value.
-func (s *NotifyEmailType) SetTextBody(v string) *NotifyEmailType {
-	s.TextBody = &v
-	return s
-}
-
 // The minimum and maximum value of an attribute that is of the number data
 // type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NumberAttributeConstraintsType
@@ -15198,18 +12558,6 @@ func (s NumberAttributeConstraintsType) String() string {
 // GoString returns the string representation
 func (s NumberAttributeConstraintsType) GoString() string {
 	return s.String()
-}
-
-// SetMaxValue sets the MaxValue field's value.
-func (s *NumberAttributeConstraintsType) SetMaxValue(v string) *NumberAttributeConstraintsType {
-	s.MaxValue = &v
-	return s
-}
-
-// SetMinValue sets the MinValue field's value.
-func (s *NumberAttributeConstraintsType) SetMinValue(v string) *NumberAttributeConstraintsType {
-	s.MinValue = &v
-	return s
 }
 
 // The password policy type.
@@ -15261,36 +12609,6 @@ func (s *PasswordPolicyType) Validate() error {
 	return nil
 }
 
-// SetMinimumLength sets the MinimumLength field's value.
-func (s *PasswordPolicyType) SetMinimumLength(v int64) *PasswordPolicyType {
-	s.MinimumLength = &v
-	return s
-}
-
-// SetRequireLowercase sets the RequireLowercase field's value.
-func (s *PasswordPolicyType) SetRequireLowercase(v bool) *PasswordPolicyType {
-	s.RequireLowercase = &v
-	return s
-}
-
-// SetRequireNumbers sets the RequireNumbers field's value.
-func (s *PasswordPolicyType) SetRequireNumbers(v bool) *PasswordPolicyType {
-	s.RequireNumbers = &v
-	return s
-}
-
-// SetRequireSymbols sets the RequireSymbols field's value.
-func (s *PasswordPolicyType) SetRequireSymbols(v bool) *PasswordPolicyType {
-	s.RequireSymbols = &v
-	return s
-}
-
-// SetRequireUppercase sets the RequireUppercase field's value.
-func (s *PasswordPolicyType) SetRequireUppercase(v bool) *PasswordPolicyType {
-	s.RequireUppercase = &v
-	return s
-}
-
 // A container for identity provider details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ProviderDescription
 type ProviderDescription struct {
@@ -15317,30 +12635,6 @@ func (s ProviderDescription) String() string {
 // GoString returns the string representation
 func (s ProviderDescription) GoString() string {
 	return s.String()
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ProviderDescription) SetCreationDate(v time.Time) *ProviderDescription {
-	s.CreationDate = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *ProviderDescription) SetLastModifiedDate(v time.Time) *ProviderDescription {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *ProviderDescription) SetProviderName(v string) *ProviderDescription {
-	s.ProviderName = &v
-	return s
-}
-
-// SetProviderType sets the ProviderType field's value.
-func (s *ProviderDescription) SetProviderType(v IdentityProviderTypeType) *ProviderDescription {
-	s.ProviderType = v
-	return s
 }
 
 // A container for information about an identity provider for a user pool.
@@ -15379,24 +12673,6 @@ func (s *ProviderUserIdentifierType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetProviderAttributeName sets the ProviderAttributeName field's value.
-func (s *ProviderUserIdentifierType) SetProviderAttributeName(v string) *ProviderUserIdentifierType {
-	s.ProviderAttributeName = &v
-	return s
-}
-
-// SetProviderAttributeValue sets the ProviderAttributeValue field's value.
-func (s *ProviderUserIdentifierType) SetProviderAttributeValue(v string) *ProviderUserIdentifierType {
-	s.ProviderAttributeValue = &v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *ProviderUserIdentifierType) SetProviderName(v string) *ProviderUserIdentifierType {
-	s.ProviderName = &v
-	return s
 }
 
 // Represents the request to resend the confirmation code.
@@ -15465,36 +12741,6 @@ func (s *ResendConfirmationCodeInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *ResendConfirmationCodeInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *ResendConfirmationCodeInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *ResendConfirmationCodeInput) SetClientId(v string) *ResendConfirmationCodeInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetSecretHash sets the SecretHash field's value.
-func (s *ResendConfirmationCodeInput) SetSecretHash(v string) *ResendConfirmationCodeInput {
-	s.SecretHash = &v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *ResendConfirmationCodeInput) SetUserContextData(v *UserContextDataType) *ResendConfirmationCodeInput {
-	s.UserContextData = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *ResendConfirmationCodeInput) SetUsername(v string) *ResendConfirmationCodeInput {
-	s.Username = &v
-	return s
-}
-
 // The response from the server when the Amazon Cognito Your User Pools service
 // makes the request to resend a confirmation code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCodeResponse
@@ -15521,12 +12767,6 @@ func (s ResendConfirmationCodeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResendConfirmationCodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
-func (s *ResendConfirmationCodeOutput) SetCodeDeliveryDetails(v *CodeDeliveryDetailsType) *ResendConfirmationCodeOutput {
-	s.CodeDeliveryDetails = v
-	return s
 }
 
 // A resource server scope.
@@ -15579,18 +12819,6 @@ func (s *ResourceServerScopeType) Validate() error {
 	return nil
 }
 
-// SetScopeDescription sets the ScopeDescription field's value.
-func (s *ResourceServerScopeType) SetScopeDescription(v string) *ResourceServerScopeType {
-	s.ScopeDescription = &v
-	return s
-}
-
-// SetScopeName sets the ScopeName field's value.
-func (s *ResourceServerScopeType) SetScopeName(v string) *ResourceServerScopeType {
-	s.ScopeName = &v
-	return s
-}
-
 // A container for information about a resource server for a user pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceServerType
 type ResourceServerType struct {
@@ -15617,30 +12845,6 @@ func (s ResourceServerType) String() string {
 // GoString returns the string representation
 func (s ResourceServerType) GoString() string {
 	return s.String()
-}
-
-// SetIdentifier sets the Identifier field's value.
-func (s *ResourceServerType) SetIdentifier(v string) *ResourceServerType {
-	s.Identifier = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ResourceServerType) SetName(v string) *ResourceServerType {
-	s.Name = &v
-	return s
-}
-
-// SetScopes sets the Scopes field's value.
-func (s *ResourceServerType) SetScopes(v []ResourceServerScopeType) *ResourceServerType {
-	s.Scopes = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *ResourceServerType) SetUserPoolId(v string) *ResourceServerType {
-	s.UserPoolId = &v
-	return s
 }
 
 // The request to respond to an authentication challenge.
@@ -15724,42 +12928,6 @@ func (s *RespondToAuthChallengeInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *RespondToAuthChallengeInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *RespondToAuthChallengeInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *RespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType) *RespondToAuthChallengeInput {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeResponses sets the ChallengeResponses field's value.
-func (s *RespondToAuthChallengeInput) SetChallengeResponses(v map[string]string) *RespondToAuthChallengeInput {
-	s.ChallengeResponses = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *RespondToAuthChallengeInput) SetClientId(v string) *RespondToAuthChallengeInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *RespondToAuthChallengeInput) SetSession(v string) *RespondToAuthChallengeInput {
-	s.Session = &v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *RespondToAuthChallengeInput) SetUserContextData(v *UserContextDataType) *RespondToAuthChallengeInput {
-	s.UserContextData = v
-	return s
-}
-
 // The response to respond to the authentication challenge.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeResponse
 type RespondToAuthChallengeOutput struct {
@@ -15800,30 +12968,6 @@ func (s RespondToAuthChallengeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAuthenticationResult sets the AuthenticationResult field's value.
-func (s *RespondToAuthChallengeOutput) SetAuthenticationResult(v *AuthenticationResultType) *RespondToAuthChallengeOutput {
-	s.AuthenticationResult = v
-	return s
-}
-
-// SetChallengeName sets the ChallengeName field's value.
-func (s *RespondToAuthChallengeOutput) SetChallengeName(v ChallengeNameType) *RespondToAuthChallengeOutput {
-	s.ChallengeName = v
-	return s
-}
-
-// SetChallengeParameters sets the ChallengeParameters field's value.
-func (s *RespondToAuthChallengeOutput) SetChallengeParameters(v map[string]string) *RespondToAuthChallengeOutput {
-	s.ChallengeParameters = v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *RespondToAuthChallengeOutput) SetSession(v string) *RespondToAuthChallengeOutput {
-	s.Session = &v
-	return s
-}
-
 // The risk configuration type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskConfigurationType
 type RiskConfigurationType struct {
@@ -15860,42 +13004,6 @@ func (s RiskConfigurationType) GoString() string {
 	return s.String()
 }
 
-// SetAccountTakeoverRiskConfiguration sets the AccountTakeoverRiskConfiguration field's value.
-func (s *RiskConfigurationType) SetAccountTakeoverRiskConfiguration(v *AccountTakeoverRiskConfigurationType) *RiskConfigurationType {
-	s.AccountTakeoverRiskConfiguration = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *RiskConfigurationType) SetClientId(v string) *RiskConfigurationType {
-	s.ClientId = &v
-	return s
-}
-
-// SetCompromisedCredentialsRiskConfiguration sets the CompromisedCredentialsRiskConfiguration field's value.
-func (s *RiskConfigurationType) SetCompromisedCredentialsRiskConfiguration(v *CompromisedCredentialsRiskConfigurationType) *RiskConfigurationType {
-	s.CompromisedCredentialsRiskConfiguration = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *RiskConfigurationType) SetLastModifiedDate(v time.Time) *RiskConfigurationType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetRiskExceptionConfiguration sets the RiskExceptionConfiguration field's value.
-func (s *RiskConfigurationType) SetRiskExceptionConfiguration(v *RiskExceptionConfigurationType) *RiskConfigurationType {
-	s.RiskExceptionConfiguration = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *RiskConfigurationType) SetUserPoolId(v string) *RiskConfigurationType {
-	s.UserPoolId = &v
-	return s
-}
-
 // The type of the configuration to override the risk decision.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskExceptionConfigurationType
 type RiskExceptionConfigurationType struct {
@@ -15921,18 +13029,6 @@ func (s RiskExceptionConfigurationType) GoString() string {
 	return s.String()
 }
 
-// SetBlockedIPRangeList sets the BlockedIPRangeList field's value.
-func (s *RiskExceptionConfigurationType) SetBlockedIPRangeList(v []string) *RiskExceptionConfigurationType {
-	s.BlockedIPRangeList = v
-	return s
-}
-
-// SetSkippedIPRangeList sets the SkippedIPRangeList field's value.
-func (s *RiskExceptionConfigurationType) SetSkippedIPRangeList(v []string) *RiskExceptionConfigurationType {
-	s.SkippedIPRangeList = v
-	return s
-}
-
 // The SMS multi-factor authentication (MFA) settings type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SMSMfaSettingsType
 type SMSMfaSettingsType struct {
@@ -15953,18 +13049,6 @@ func (s SMSMfaSettingsType) String() string {
 // GoString returns the string representation
 func (s SMSMfaSettingsType) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *SMSMfaSettingsType) SetEnabled(v bool) *SMSMfaSettingsType {
-	s.Enabled = &v
-	return s
-}
-
-// SetPreferredMfa sets the PreferredMfa field's value.
-func (s *SMSMfaSettingsType) SetPreferredMfa(v bool) *SMSMfaSettingsType {
-	s.PreferredMfa = &v
-	return s
 }
 
 // Contains information about the schema attribute.
@@ -16017,48 +13101,6 @@ func (s *SchemaAttributeType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributeDataType sets the AttributeDataType field's value.
-func (s *SchemaAttributeType) SetAttributeDataType(v AttributeDataType) *SchemaAttributeType {
-	s.AttributeDataType = v
-	return s
-}
-
-// SetDeveloperOnlyAttribute sets the DeveloperOnlyAttribute field's value.
-func (s *SchemaAttributeType) SetDeveloperOnlyAttribute(v bool) *SchemaAttributeType {
-	s.DeveloperOnlyAttribute = &v
-	return s
-}
-
-// SetMutable sets the Mutable field's value.
-func (s *SchemaAttributeType) SetMutable(v bool) *SchemaAttributeType {
-	s.Mutable = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *SchemaAttributeType) SetName(v string) *SchemaAttributeType {
-	s.Name = &v
-	return s
-}
-
-// SetNumberAttributeConstraints sets the NumberAttributeConstraints field's value.
-func (s *SchemaAttributeType) SetNumberAttributeConstraints(v *NumberAttributeConstraintsType) *SchemaAttributeType {
-	s.NumberAttributeConstraints = v
-	return s
-}
-
-// SetRequired sets the Required field's value.
-func (s *SchemaAttributeType) SetRequired(v bool) *SchemaAttributeType {
-	s.Required = &v
-	return s
-}
-
-// SetStringAttributeConstraints sets the StringAttributeConstraints field's value.
-func (s *SchemaAttributeType) SetStringAttributeConstraints(v *StringAttributeConstraintsType) *SchemaAttributeType {
-	s.StringAttributeConstraints = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfigurationRequest
@@ -16129,36 +13171,6 @@ func (s *SetRiskConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetAccountTakeoverRiskConfiguration sets the AccountTakeoverRiskConfiguration field's value.
-func (s *SetRiskConfigurationInput) SetAccountTakeoverRiskConfiguration(v *AccountTakeoverRiskConfigurationType) *SetRiskConfigurationInput {
-	s.AccountTakeoverRiskConfiguration = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *SetRiskConfigurationInput) SetClientId(v string) *SetRiskConfigurationInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetCompromisedCredentialsRiskConfiguration sets the CompromisedCredentialsRiskConfiguration field's value.
-func (s *SetRiskConfigurationInput) SetCompromisedCredentialsRiskConfiguration(v *CompromisedCredentialsRiskConfigurationType) *SetRiskConfigurationInput {
-	s.CompromisedCredentialsRiskConfiguration = v
-	return s
-}
-
-// SetRiskExceptionConfiguration sets the RiskExceptionConfiguration field's value.
-func (s *SetRiskConfigurationInput) SetRiskExceptionConfiguration(v *RiskExceptionConfigurationType) *SetRiskConfigurationInput {
-	s.RiskExceptionConfiguration = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *SetRiskConfigurationInput) SetUserPoolId(v string) *SetRiskConfigurationInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfigurationResponse
 type SetRiskConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -16184,12 +13196,6 @@ func (s SetRiskConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetRiskConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRiskConfiguration sets the RiskConfiguration field's value.
-func (s *SetRiskConfigurationOutput) SetRiskConfiguration(v *RiskConfigurationType) *SetRiskConfigurationOutput {
-	s.RiskConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUICustomizationRequest
@@ -16243,30 +13249,6 @@ func (s *SetUICustomizationInput) Validate() error {
 	return nil
 }
 
-// SetCSS sets the CSS field's value.
-func (s *SetUICustomizationInput) SetCSS(v string) *SetUICustomizationInput {
-	s.CSS = &v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *SetUICustomizationInput) SetClientId(v string) *SetUICustomizationInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetImageFile sets the ImageFile field's value.
-func (s *SetUICustomizationInput) SetImageFile(v []byte) *SetUICustomizationInput {
-	s.ImageFile = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *SetUICustomizationInput) SetUserPoolId(v string) *SetUICustomizationInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUICustomizationResponse
 type SetUICustomizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -16292,12 +13274,6 @@ func (s SetUICustomizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetUICustomizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUICustomization sets the UICustomization field's value.
-func (s *SetUICustomizationOutput) SetUICustomization(v *UICustomizationType) *SetUICustomizationOutput {
-	s.UICustomization = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreferenceRequest
@@ -16338,24 +13314,6 @@ func (s *SetUserMFAPreferenceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *SetUserMFAPreferenceInput) SetAccessToken(v string) *SetUserMFAPreferenceInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetSMSMfaSettings sets the SMSMfaSettings field's value.
-func (s *SetUserMFAPreferenceInput) SetSMSMfaSettings(v *SMSMfaSettingsType) *SetUserMFAPreferenceInput {
-	s.SMSMfaSettings = v
-	return s
-}
-
-// SetSoftwareTokenMfaSettings sets the SoftwareTokenMfaSettings field's value.
-func (s *SetUserMFAPreferenceInput) SetSoftwareTokenMfaSettings(v *SoftwareTokenMfaSettingsType) *SetUserMFAPreferenceInput {
-	s.SoftwareTokenMfaSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreferenceResponse
@@ -16431,30 +13389,6 @@ func (s *SetUserPoolMfaConfigInput) Validate() error {
 	return nil
 }
 
-// SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *SetUserPoolMfaConfigInput) SetMfaConfiguration(v UserPoolMfaType) *SetUserPoolMfaConfigInput {
-	s.MfaConfiguration = v
-	return s
-}
-
-// SetSmsMfaConfiguration sets the SmsMfaConfiguration field's value.
-func (s *SetUserPoolMfaConfigInput) SetSmsMfaConfiguration(v *SmsMfaConfigType) *SetUserPoolMfaConfigInput {
-	s.SmsMfaConfiguration = v
-	return s
-}
-
-// SetSoftwareTokenMfaConfiguration sets the SoftwareTokenMfaConfiguration field's value.
-func (s *SetUserPoolMfaConfigInput) SetSoftwareTokenMfaConfiguration(v *SoftwareTokenMfaConfigType) *SetUserPoolMfaConfigInput {
-	s.SoftwareTokenMfaConfiguration = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *SetUserPoolMfaConfigInput) SetUserPoolId(v string) *SetUserPoolMfaConfigInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfigResponse
 type SetUserPoolMfaConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -16484,24 +13418,6 @@ func (s SetUserPoolMfaConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetUserPoolMfaConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *SetUserPoolMfaConfigOutput) SetMfaConfiguration(v UserPoolMfaType) *SetUserPoolMfaConfigOutput {
-	s.MfaConfiguration = v
-	return s
-}
-
-// SetSmsMfaConfiguration sets the SmsMfaConfiguration field's value.
-func (s *SetUserPoolMfaConfigOutput) SetSmsMfaConfiguration(v *SmsMfaConfigType) *SetUserPoolMfaConfigOutput {
-	s.SmsMfaConfiguration = v
-	return s
-}
-
-// SetSoftwareTokenMfaConfiguration sets the SoftwareTokenMfaConfiguration field's value.
-func (s *SetUserPoolMfaConfigOutput) SetSoftwareTokenMfaConfiguration(v *SoftwareTokenMfaConfigType) *SetUserPoolMfaConfigOutput {
-	s.SoftwareTokenMfaConfiguration = v
-	return s
 }
 
 // Represents the request to set user settings.
@@ -16553,18 +13469,6 @@ func (s *SetUserSettingsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *SetUserSettingsInput) SetAccessToken(v string) *SetUserSettingsInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetMFAOptions sets the MFAOptions field's value.
-func (s *SetUserSettingsInput) SetMFAOptions(v []MFAOptionType) *SetUserSettingsInput {
-	s.MFAOptions = v
-	return s
 }
 
 // The response from the server for a set user settings request.
@@ -16691,54 +13595,6 @@ func (s *SignUpInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsMetadata sets the AnalyticsMetadata field's value.
-func (s *SignUpInput) SetAnalyticsMetadata(v *AnalyticsMetadataType) *SignUpInput {
-	s.AnalyticsMetadata = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *SignUpInput) SetClientId(v string) *SignUpInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *SignUpInput) SetPassword(v string) *SignUpInput {
-	s.Password = &v
-	return s
-}
-
-// SetSecretHash sets the SecretHash field's value.
-func (s *SignUpInput) SetSecretHash(v string) *SignUpInput {
-	s.SecretHash = &v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *SignUpInput) SetUserAttributes(v []AttributeType) *SignUpInput {
-	s.UserAttributes = v
-	return s
-}
-
-// SetUserContextData sets the UserContextData field's value.
-func (s *SignUpInput) SetUserContextData(v *UserContextDataType) *SignUpInput {
-	s.UserContextData = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *SignUpInput) SetUsername(v string) *SignUpInput {
-	s.Username = &v
-	return s
-}
-
-// SetValidationData sets the ValidationData field's value.
-func (s *SignUpInput) SetValidationData(v []AttributeType) *SignUpInput {
-	s.ValidationData = v
-	return s
-}
-
 // The response from the server for a registration request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpResponse
 type SignUpOutput struct {
@@ -16774,24 +13630,6 @@ func (s SignUpOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SignUpOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCodeDeliveryDetails sets the CodeDeliveryDetails field's value.
-func (s *SignUpOutput) SetCodeDeliveryDetails(v *CodeDeliveryDetailsType) *SignUpOutput {
-	s.CodeDeliveryDetails = v
-	return s
-}
-
-// SetUserConfirmed sets the UserConfirmed field's value.
-func (s *SignUpOutput) SetUserConfirmed(v bool) *SignUpOutput {
-	s.UserConfirmed = &v
-	return s
-}
-
-// SetUserSub sets the UserSub field's value.
-func (s *SignUpOutput) SetUserSub(v string) *SignUpOutput {
-	s.UserSub = &v
-	return s
 }
 
 // The SMS configuration type.
@@ -16836,18 +13674,6 @@ func (s *SmsConfigurationType) Validate() error {
 	return nil
 }
 
-// SetExternalId sets the ExternalId field's value.
-func (s *SmsConfigurationType) SetExternalId(v string) *SmsConfigurationType {
-	s.ExternalId = &v
-	return s
-}
-
-// SetSnsCallerArn sets the SnsCallerArn field's value.
-func (s *SmsConfigurationType) SetSnsCallerArn(v string) *SmsConfigurationType {
-	s.SnsCallerArn = &v
-	return s
-}
-
 // The SMS text message multi-factor authentication (MFA) configuration type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsMfaConfigType
 type SmsMfaConfigType struct {
@@ -16888,18 +13714,6 @@ func (s *SmsMfaConfigType) Validate() error {
 	return nil
 }
 
-// SetSmsAuthenticationMessage sets the SmsAuthenticationMessage field's value.
-func (s *SmsMfaConfigType) SetSmsAuthenticationMessage(v string) *SmsMfaConfigType {
-	s.SmsAuthenticationMessage = &v
-	return s
-}
-
-// SetSmsConfiguration sets the SmsConfiguration field's value.
-func (s *SmsMfaConfigType) SetSmsConfiguration(v *SmsConfigurationType) *SmsMfaConfigType {
-	s.SmsConfiguration = v
-	return s
-}
-
 // The type used for enabling software token MFA at the user pool level.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SoftwareTokenMfaConfigType
 type SoftwareTokenMfaConfigType struct {
@@ -16917,12 +13731,6 @@ func (s SoftwareTokenMfaConfigType) String() string {
 // GoString returns the string representation
 func (s SoftwareTokenMfaConfigType) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *SoftwareTokenMfaConfigType) SetEnabled(v bool) *SoftwareTokenMfaConfigType {
-	s.Enabled = &v
-	return s
 }
 
 // The type used for enabling software token MFA at the user level.
@@ -16945,18 +13753,6 @@ func (s SoftwareTokenMfaSettingsType) String() string {
 // GoString returns the string representation
 func (s SoftwareTokenMfaSettingsType) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *SoftwareTokenMfaSettingsType) SetEnabled(v bool) *SoftwareTokenMfaSettingsType {
-	s.Enabled = &v
-	return s
-}
-
-// SetPreferredMfa sets the PreferredMfa field's value.
-func (s *SoftwareTokenMfaSettingsType) SetPreferredMfa(v bool) *SoftwareTokenMfaSettingsType {
-	s.PreferredMfa = &v
-	return s
 }
 
 // Represents the request to start the user import job.
@@ -17009,18 +13805,6 @@ func (s *StartUserImportJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *StartUserImportJobInput) SetJobId(v string) *StartUserImportJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *StartUserImportJobInput) SetUserPoolId(v string) *StartUserImportJobInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server to the request to start the user
 // import job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJobResponse
@@ -17046,12 +13830,6 @@ func (s StartUserImportJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartUserImportJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserImportJob sets the UserImportJob field's value.
-func (s *StartUserImportJobOutput) SetUserImportJob(v *UserImportJobType) *StartUserImportJobOutput {
-	s.UserImportJob = v
-	return s
 }
 
 // Represents the request to stop the user import job.
@@ -17104,18 +13882,6 @@ func (s *StopUserImportJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *StopUserImportJobInput) SetJobId(v string) *StopUserImportJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *StopUserImportJobInput) SetUserPoolId(v string) *StopUserImportJobInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Represents the response from the server to the request to stop the user import
 // job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJobResponse
@@ -17143,12 +13909,6 @@ func (s StopUserImportJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUserImportJob sets the UserImportJob field's value.
-func (s *StopUserImportJobOutput) SetUserImportJob(v *UserImportJobType) *StopUserImportJobOutput {
-	s.UserImportJob = v
-	return s
-}
-
 // The constraints associated with a string attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StringAttributeConstraintsType
 type StringAttributeConstraintsType struct {
@@ -17169,18 +13929,6 @@ func (s StringAttributeConstraintsType) String() string {
 // GoString returns the string representation
 func (s StringAttributeConstraintsType) GoString() string {
 	return s.String()
-}
-
-// SetMaxLength sets the MaxLength field's value.
-func (s *StringAttributeConstraintsType) SetMaxLength(v string) *StringAttributeConstraintsType {
-	s.MaxLength = &v
-	return s
-}
-
-// SetMinLength sets the MinLength field's value.
-func (s *StringAttributeConstraintsType) SetMinLength(v string) *StringAttributeConstraintsType {
-	s.MinLength = &v
-	return s
 }
 
 // A container for the UI customization information for a user pool's built-in
@@ -17219,48 +13967,6 @@ func (s UICustomizationType) String() string {
 // GoString returns the string representation
 func (s UICustomizationType) GoString() string {
 	return s.String()
-}
-
-// SetCSS sets the CSS field's value.
-func (s *UICustomizationType) SetCSS(v string) *UICustomizationType {
-	s.CSS = &v
-	return s
-}
-
-// SetCSSVersion sets the CSSVersion field's value.
-func (s *UICustomizationType) SetCSSVersion(v string) *UICustomizationType {
-	s.CSSVersion = &v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *UICustomizationType) SetClientId(v string) *UICustomizationType {
-	s.ClientId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *UICustomizationType) SetCreationDate(v time.Time) *UICustomizationType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetImageUrl sets the ImageUrl field's value.
-func (s *UICustomizationType) SetImageUrl(v string) *UICustomizationType {
-	s.ImageUrl = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *UICustomizationType) SetLastModifiedDate(v time.Time) *UICustomizationType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UICustomizationType) SetUserPoolId(v string) *UICustomizationType {
-	s.UserPoolId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedbackRequest
@@ -17341,36 +14047,6 @@ func (s *UpdateAuthEventFeedbackInput) Validate() error {
 	return nil
 }
 
-// SetEventId sets the EventId field's value.
-func (s *UpdateAuthEventFeedbackInput) SetEventId(v string) *UpdateAuthEventFeedbackInput {
-	s.EventId = &v
-	return s
-}
-
-// SetFeedbackToken sets the FeedbackToken field's value.
-func (s *UpdateAuthEventFeedbackInput) SetFeedbackToken(v string) *UpdateAuthEventFeedbackInput {
-	s.FeedbackToken = &v
-	return s
-}
-
-// SetFeedbackValue sets the FeedbackValue field's value.
-func (s *UpdateAuthEventFeedbackInput) SetFeedbackValue(v FeedbackValueType) *UpdateAuthEventFeedbackInput {
-	s.FeedbackValue = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UpdateAuthEventFeedbackInput) SetUserPoolId(v string) *UpdateAuthEventFeedbackInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *UpdateAuthEventFeedbackInput) SetUsername(v string) *UpdateAuthEventFeedbackInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedbackResponse
 type UpdateAuthEventFeedbackOutput struct {
 	_ struct{} `type:"structure"`
@@ -17441,24 +14117,6 @@ func (s *UpdateDeviceStatusInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *UpdateDeviceStatusInput) SetAccessToken(v string) *UpdateDeviceStatusInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetDeviceKey sets the DeviceKey field's value.
-func (s *UpdateDeviceStatusInput) SetDeviceKey(v string) *UpdateDeviceStatusInput {
-	s.DeviceKey = &v
-	return s
-}
-
-// SetDeviceRememberedStatus sets the DeviceRememberedStatus field's value.
-func (s *UpdateDeviceStatusInput) SetDeviceRememberedStatus(v DeviceRememberedStatusType) *UpdateDeviceStatusInput {
-	s.DeviceRememberedStatus = v
-	return s
 }
 
 // The response to the request to update the device status.
@@ -17547,36 +14205,6 @@ func (s *UpdateGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateGroupInput) SetDescription(v string) *UpdateGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *UpdateGroupInput) SetGroupName(v string) *UpdateGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPrecedence sets the Precedence field's value.
-func (s *UpdateGroupInput) SetPrecedence(v int64) *UpdateGroupInput {
-	s.Precedence = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *UpdateGroupInput) SetRoleArn(v string) *UpdateGroupInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UpdateGroupInput) SetUserPoolId(v string) *UpdateGroupInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroupResponse
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -17600,12 +14228,6 @@ func (s UpdateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *UpdateGroupOutput) SetGroup(v *GroupType) *UpdateGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateIdentityProviderRequest
@@ -17666,36 +14288,6 @@ func (s *UpdateIdentityProviderInput) Validate() error {
 	return nil
 }
 
-// SetAttributeMapping sets the AttributeMapping field's value.
-func (s *UpdateIdentityProviderInput) SetAttributeMapping(v map[string]string) *UpdateIdentityProviderInput {
-	s.AttributeMapping = v
-	return s
-}
-
-// SetIdpIdentifiers sets the IdpIdentifiers field's value.
-func (s *UpdateIdentityProviderInput) SetIdpIdentifiers(v []string) *UpdateIdentityProviderInput {
-	s.IdpIdentifiers = v
-	return s
-}
-
-// SetProviderDetails sets the ProviderDetails field's value.
-func (s *UpdateIdentityProviderInput) SetProviderDetails(v map[string]string) *UpdateIdentityProviderInput {
-	s.ProviderDetails = v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *UpdateIdentityProviderInput) SetProviderName(v string) *UpdateIdentityProviderInput {
-	s.ProviderName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UpdateIdentityProviderInput) SetUserPoolId(v string) *UpdateIdentityProviderInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateIdentityProviderResponse
 type UpdateIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
@@ -17721,12 +14313,6 @@ func (s UpdateIdentityProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateIdentityProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIdentityProvider sets the IdentityProvider field's value.
-func (s *UpdateIdentityProviderOutput) SetIdentityProvider(v *IdentityProviderType) *UpdateIdentityProviderOutput {
-	s.IdentityProvider = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServerRequest
@@ -17800,30 +14386,6 @@ func (s *UpdateResourceServerInput) Validate() error {
 	return nil
 }
 
-// SetIdentifier sets the Identifier field's value.
-func (s *UpdateResourceServerInput) SetIdentifier(v string) *UpdateResourceServerInput {
-	s.Identifier = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateResourceServerInput) SetName(v string) *UpdateResourceServerInput {
-	s.Name = &v
-	return s
-}
-
-// SetScopes sets the Scopes field's value.
-func (s *UpdateResourceServerInput) SetScopes(v []ResourceServerScopeType) *UpdateResourceServerInput {
-	s.Scopes = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UpdateResourceServerInput) SetUserPoolId(v string) *UpdateResourceServerInput {
-	s.UserPoolId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServerResponse
 type UpdateResourceServerOutput struct {
 	_ struct{} `type:"structure"`
@@ -17849,12 +14411,6 @@ func (s UpdateResourceServerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateResourceServerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceServer sets the ResourceServer field's value.
-func (s *UpdateResourceServerOutput) SetResourceServer(v *ResourceServerType) *UpdateResourceServerOutput {
-	s.ResourceServer = v
-	return s
 }
 
 // Represents the request to update user attributes.
@@ -17911,18 +14467,6 @@ func (s *UpdateUserAttributesInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *UpdateUserAttributesInput) SetAccessToken(v string) *UpdateUserAttributesInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *UpdateUserAttributesInput) SetUserAttributes(v []AttributeType) *UpdateUserAttributesInput {
-	s.UserAttributes = v
-	return s
-}
-
 // Represents the response from the server for the request to update user attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserAttributesResponse
 type UpdateUserAttributesOutput struct {
@@ -17948,12 +14492,6 @@ func (s UpdateUserAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateUserAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCodeDeliveryDetailsList sets the CodeDeliveryDetailsList field's value.
-func (s *UpdateUserAttributesOutput) SetCodeDeliveryDetailsList(v []CodeDeliveryDetailsType) *UpdateUserAttributesOutput {
-	s.CodeDeliveryDetailsList = v
-	return s
 }
 
 // Represents the request to update the user pool client.
@@ -18067,96 +14605,6 @@ func (s *UpdateUserPoolClientInput) Validate() error {
 	return nil
 }
 
-// SetAllowedOAuthFlows sets the AllowedOAuthFlows field's value.
-func (s *UpdateUserPoolClientInput) SetAllowedOAuthFlows(v []OAuthFlowType) *UpdateUserPoolClientInput {
-	s.AllowedOAuthFlows = v
-	return s
-}
-
-// SetAllowedOAuthFlowsUserPoolClient sets the AllowedOAuthFlowsUserPoolClient field's value.
-func (s *UpdateUserPoolClientInput) SetAllowedOAuthFlowsUserPoolClient(v bool) *UpdateUserPoolClientInput {
-	s.AllowedOAuthFlowsUserPoolClient = &v
-	return s
-}
-
-// SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
-func (s *UpdateUserPoolClientInput) SetAllowedOAuthScopes(v []string) *UpdateUserPoolClientInput {
-	s.AllowedOAuthScopes = v
-	return s
-}
-
-// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
-func (s *UpdateUserPoolClientInput) SetAnalyticsConfiguration(v *AnalyticsConfigurationType) *UpdateUserPoolClientInput {
-	s.AnalyticsConfiguration = v
-	return s
-}
-
-// SetCallbackURLs sets the CallbackURLs field's value.
-func (s *UpdateUserPoolClientInput) SetCallbackURLs(v []string) *UpdateUserPoolClientInput {
-	s.CallbackURLs = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *UpdateUserPoolClientInput) SetClientId(v string) *UpdateUserPoolClientInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetClientName sets the ClientName field's value.
-func (s *UpdateUserPoolClientInput) SetClientName(v string) *UpdateUserPoolClientInput {
-	s.ClientName = &v
-	return s
-}
-
-// SetDefaultRedirectURI sets the DefaultRedirectURI field's value.
-func (s *UpdateUserPoolClientInput) SetDefaultRedirectURI(v string) *UpdateUserPoolClientInput {
-	s.DefaultRedirectURI = &v
-	return s
-}
-
-// SetExplicitAuthFlows sets the ExplicitAuthFlows field's value.
-func (s *UpdateUserPoolClientInput) SetExplicitAuthFlows(v []ExplicitAuthFlowsType) *UpdateUserPoolClientInput {
-	s.ExplicitAuthFlows = v
-	return s
-}
-
-// SetLogoutURLs sets the LogoutURLs field's value.
-func (s *UpdateUserPoolClientInput) SetLogoutURLs(v []string) *UpdateUserPoolClientInput {
-	s.LogoutURLs = v
-	return s
-}
-
-// SetReadAttributes sets the ReadAttributes field's value.
-func (s *UpdateUserPoolClientInput) SetReadAttributes(v []string) *UpdateUserPoolClientInput {
-	s.ReadAttributes = v
-	return s
-}
-
-// SetRefreshTokenValidity sets the RefreshTokenValidity field's value.
-func (s *UpdateUserPoolClientInput) SetRefreshTokenValidity(v int64) *UpdateUserPoolClientInput {
-	s.RefreshTokenValidity = &v
-	return s
-}
-
-// SetSupportedIdentityProviders sets the SupportedIdentityProviders field's value.
-func (s *UpdateUserPoolClientInput) SetSupportedIdentityProviders(v []string) *UpdateUserPoolClientInput {
-	s.SupportedIdentityProviders = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UpdateUserPoolClientInput) SetUserPoolId(v string) *UpdateUserPoolClientInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetWriteAttributes sets the WriteAttributes field's value.
-func (s *UpdateUserPoolClientInput) SetWriteAttributes(v []string) *UpdateUserPoolClientInput {
-	s.WriteAttributes = v
-	return s
-}
-
 // Represents the response from the server to the request to update the user
 // pool client.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientResponse
@@ -18183,12 +14631,6 @@ func (s UpdateUserPoolClientOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateUserPoolClientOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserPoolClient sets the UserPoolClient field's value.
-func (s *UpdateUserPoolClientOutput) SetUserPoolClient(v *UserPoolClientType) *UpdateUserPoolClientOutput {
-	s.UserPoolClient = v
-	return s
 }
 
 // Represents the request to update the user pool.
@@ -18333,102 +14775,6 @@ func (s *UpdateUserPoolInput) Validate() error {
 	return nil
 }
 
-// SetAdminCreateUserConfig sets the AdminCreateUserConfig field's value.
-func (s *UpdateUserPoolInput) SetAdminCreateUserConfig(v *AdminCreateUserConfigType) *UpdateUserPoolInput {
-	s.AdminCreateUserConfig = v
-	return s
-}
-
-// SetAutoVerifiedAttributes sets the AutoVerifiedAttributes field's value.
-func (s *UpdateUserPoolInput) SetAutoVerifiedAttributes(v []VerifiedAttributeType) *UpdateUserPoolInput {
-	s.AutoVerifiedAttributes = v
-	return s
-}
-
-// SetDeviceConfiguration sets the DeviceConfiguration field's value.
-func (s *UpdateUserPoolInput) SetDeviceConfiguration(v *DeviceConfigurationType) *UpdateUserPoolInput {
-	s.DeviceConfiguration = v
-	return s
-}
-
-// SetEmailConfiguration sets the EmailConfiguration field's value.
-func (s *UpdateUserPoolInput) SetEmailConfiguration(v *EmailConfigurationType) *UpdateUserPoolInput {
-	s.EmailConfiguration = v
-	return s
-}
-
-// SetEmailVerificationMessage sets the EmailVerificationMessage field's value.
-func (s *UpdateUserPoolInput) SetEmailVerificationMessage(v string) *UpdateUserPoolInput {
-	s.EmailVerificationMessage = &v
-	return s
-}
-
-// SetEmailVerificationSubject sets the EmailVerificationSubject field's value.
-func (s *UpdateUserPoolInput) SetEmailVerificationSubject(v string) *UpdateUserPoolInput {
-	s.EmailVerificationSubject = &v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *UpdateUserPoolInput) SetLambdaConfig(v *LambdaConfigType) *UpdateUserPoolInput {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *UpdateUserPoolInput) SetMfaConfiguration(v UserPoolMfaType) *UpdateUserPoolInput {
-	s.MfaConfiguration = v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *UpdateUserPoolInput) SetPolicies(v *UserPoolPolicyType) *UpdateUserPoolInput {
-	s.Policies = v
-	return s
-}
-
-// SetSmsAuthenticationMessage sets the SmsAuthenticationMessage field's value.
-func (s *UpdateUserPoolInput) SetSmsAuthenticationMessage(v string) *UpdateUserPoolInput {
-	s.SmsAuthenticationMessage = &v
-	return s
-}
-
-// SetSmsConfiguration sets the SmsConfiguration field's value.
-func (s *UpdateUserPoolInput) SetSmsConfiguration(v *SmsConfigurationType) *UpdateUserPoolInput {
-	s.SmsConfiguration = v
-	return s
-}
-
-// SetSmsVerificationMessage sets the SmsVerificationMessage field's value.
-func (s *UpdateUserPoolInput) SetSmsVerificationMessage(v string) *UpdateUserPoolInput {
-	s.SmsVerificationMessage = &v
-	return s
-}
-
-// SetUserPoolAddOns sets the UserPoolAddOns field's value.
-func (s *UpdateUserPoolInput) SetUserPoolAddOns(v *UserPoolAddOnsType) *UpdateUserPoolInput {
-	s.UserPoolAddOns = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UpdateUserPoolInput) SetUserPoolId(v string) *UpdateUserPoolInput {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetUserPoolTags sets the UserPoolTags field's value.
-func (s *UpdateUserPoolInput) SetUserPoolTags(v map[string]string) *UpdateUserPoolInput {
-	s.UserPoolTags = v
-	return s
-}
-
-// SetVerificationMessageTemplate sets the VerificationMessageTemplate field's value.
-func (s *UpdateUserPoolInput) SetVerificationMessageTemplate(v *VerificationMessageTemplateType) *UpdateUserPoolInput {
-	s.VerificationMessageTemplate = v
-	return s
-}
-
 // Represents the response from the server when you make a request to update
 // the user pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolResponse
@@ -18474,12 +14820,6 @@ func (s UserContextDataType) String() string {
 // GoString returns the string representation
 func (s UserContextDataType) GoString() string {
 	return s.String()
-}
-
-// SetEncodedData sets the EncodedData field's value.
-func (s *UserContextDataType) SetEncodedData(v string) *UserContextDataType {
-	s.EncodedData = &v
-	return s
 }
 
 // The user import job type.
@@ -18560,84 +14900,6 @@ func (s UserImportJobType) GoString() string {
 	return s.String()
 }
 
-// SetCloudWatchLogsRoleArn sets the CloudWatchLogsRoleArn field's value.
-func (s *UserImportJobType) SetCloudWatchLogsRoleArn(v string) *UserImportJobType {
-	s.CloudWatchLogsRoleArn = &v
-	return s
-}
-
-// SetCompletionDate sets the CompletionDate field's value.
-func (s *UserImportJobType) SetCompletionDate(v time.Time) *UserImportJobType {
-	s.CompletionDate = &v
-	return s
-}
-
-// SetCompletionMessage sets the CompletionMessage field's value.
-func (s *UserImportJobType) SetCompletionMessage(v string) *UserImportJobType {
-	s.CompletionMessage = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *UserImportJobType) SetCreationDate(v time.Time) *UserImportJobType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetFailedUsers sets the FailedUsers field's value.
-func (s *UserImportJobType) SetFailedUsers(v int64) *UserImportJobType {
-	s.FailedUsers = &v
-	return s
-}
-
-// SetImportedUsers sets the ImportedUsers field's value.
-func (s *UserImportJobType) SetImportedUsers(v int64) *UserImportJobType {
-	s.ImportedUsers = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *UserImportJobType) SetJobId(v string) *UserImportJobType {
-	s.JobId = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *UserImportJobType) SetJobName(v string) *UserImportJobType {
-	s.JobName = &v
-	return s
-}
-
-// SetPreSignedUrl sets the PreSignedUrl field's value.
-func (s *UserImportJobType) SetPreSignedUrl(v string) *UserImportJobType {
-	s.PreSignedUrl = &v
-	return s
-}
-
-// SetSkippedUsers sets the SkippedUsers field's value.
-func (s *UserImportJobType) SetSkippedUsers(v int64) *UserImportJobType {
-	s.SkippedUsers = &v
-	return s
-}
-
-// SetStartDate sets the StartDate field's value.
-func (s *UserImportJobType) SetStartDate(v time.Time) *UserImportJobType {
-	s.StartDate = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UserImportJobType) SetStatus(v UserImportJobStatusType) *UserImportJobType {
-	s.Status = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UserImportJobType) SetUserPoolId(v string) *UserImportJobType {
-	s.UserPoolId = &v
-	return s
-}
-
 // The user pool add-ons type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolAddOnsType
 type UserPoolAddOnsType struct {
@@ -18672,12 +14934,6 @@ func (s *UserPoolAddOnsType) Validate() error {
 	return nil
 }
 
-// SetAdvancedSecurityMode sets the AdvancedSecurityMode field's value.
-func (s *UserPoolAddOnsType) SetAdvancedSecurityMode(v AdvancedSecurityModeType) *UserPoolAddOnsType {
-	s.AdvancedSecurityMode = v
-	return s
-}
-
 // The description of the user pool client.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientDescription
 type UserPoolClientDescription struct {
@@ -18702,24 +14958,6 @@ func (s UserPoolClientDescription) String() string {
 // GoString returns the string representation
 func (s UserPoolClientDescription) GoString() string {
 	return s.String()
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *UserPoolClientDescription) SetClientId(v string) *UserPoolClientDescription {
-	s.ClientId = &v
-	return s
-}
-
-// SetClientName sets the ClientName field's value.
-func (s *UserPoolClientDescription) SetClientName(v string) *UserPoolClientDescription {
-	s.ClientName = &v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UserPoolClientDescription) SetUserPoolId(v string) *UserPoolClientDescription {
-	s.UserPoolId = &v
-	return s
 }
 
 // Contains information about a user pool client.
@@ -18801,114 +15039,6 @@ func (s UserPoolClientType) GoString() string {
 	return s.String()
 }
 
-// SetAllowedOAuthFlows sets the AllowedOAuthFlows field's value.
-func (s *UserPoolClientType) SetAllowedOAuthFlows(v []OAuthFlowType) *UserPoolClientType {
-	s.AllowedOAuthFlows = v
-	return s
-}
-
-// SetAllowedOAuthFlowsUserPoolClient sets the AllowedOAuthFlowsUserPoolClient field's value.
-func (s *UserPoolClientType) SetAllowedOAuthFlowsUserPoolClient(v bool) *UserPoolClientType {
-	s.AllowedOAuthFlowsUserPoolClient = &v
-	return s
-}
-
-// SetAllowedOAuthScopes sets the AllowedOAuthScopes field's value.
-func (s *UserPoolClientType) SetAllowedOAuthScopes(v []string) *UserPoolClientType {
-	s.AllowedOAuthScopes = v
-	return s
-}
-
-// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
-func (s *UserPoolClientType) SetAnalyticsConfiguration(v *AnalyticsConfigurationType) *UserPoolClientType {
-	s.AnalyticsConfiguration = v
-	return s
-}
-
-// SetCallbackURLs sets the CallbackURLs field's value.
-func (s *UserPoolClientType) SetCallbackURLs(v []string) *UserPoolClientType {
-	s.CallbackURLs = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *UserPoolClientType) SetClientId(v string) *UserPoolClientType {
-	s.ClientId = &v
-	return s
-}
-
-// SetClientName sets the ClientName field's value.
-func (s *UserPoolClientType) SetClientName(v string) *UserPoolClientType {
-	s.ClientName = &v
-	return s
-}
-
-// SetClientSecret sets the ClientSecret field's value.
-func (s *UserPoolClientType) SetClientSecret(v string) *UserPoolClientType {
-	s.ClientSecret = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *UserPoolClientType) SetCreationDate(v time.Time) *UserPoolClientType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultRedirectURI sets the DefaultRedirectURI field's value.
-func (s *UserPoolClientType) SetDefaultRedirectURI(v string) *UserPoolClientType {
-	s.DefaultRedirectURI = &v
-	return s
-}
-
-// SetExplicitAuthFlows sets the ExplicitAuthFlows field's value.
-func (s *UserPoolClientType) SetExplicitAuthFlows(v []ExplicitAuthFlowsType) *UserPoolClientType {
-	s.ExplicitAuthFlows = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *UserPoolClientType) SetLastModifiedDate(v time.Time) *UserPoolClientType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetLogoutURLs sets the LogoutURLs field's value.
-func (s *UserPoolClientType) SetLogoutURLs(v []string) *UserPoolClientType {
-	s.LogoutURLs = v
-	return s
-}
-
-// SetReadAttributes sets the ReadAttributes field's value.
-func (s *UserPoolClientType) SetReadAttributes(v []string) *UserPoolClientType {
-	s.ReadAttributes = v
-	return s
-}
-
-// SetRefreshTokenValidity sets the RefreshTokenValidity field's value.
-func (s *UserPoolClientType) SetRefreshTokenValidity(v int64) *UserPoolClientType {
-	s.RefreshTokenValidity = &v
-	return s
-}
-
-// SetSupportedIdentityProviders sets the SupportedIdentityProviders field's value.
-func (s *UserPoolClientType) SetSupportedIdentityProviders(v []string) *UserPoolClientType {
-	s.SupportedIdentityProviders = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UserPoolClientType) SetUserPoolId(v string) *UserPoolClientType {
-	s.UserPoolId = &v
-	return s
-}
-
-// SetWriteAttributes sets the WriteAttributes field's value.
-func (s *UserPoolClientType) SetWriteAttributes(v []string) *UserPoolClientType {
-	s.WriteAttributes = v
-	return s
-}
-
 // A user pool description.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolDescriptionType
 type UserPoolDescriptionType struct {
@@ -18943,42 +15073,6 @@ func (s UserPoolDescriptionType) GoString() string {
 	return s.String()
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *UserPoolDescriptionType) SetCreationDate(v time.Time) *UserPoolDescriptionType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UserPoolDescriptionType) SetId(v string) *UserPoolDescriptionType {
-	s.Id = &v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *UserPoolDescriptionType) SetLambdaConfig(v *LambdaConfigType) *UserPoolDescriptionType {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *UserPoolDescriptionType) SetLastModifiedDate(v time.Time) *UserPoolDescriptionType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UserPoolDescriptionType) SetName(v string) *UserPoolDescriptionType {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UserPoolDescriptionType) SetStatus(v StatusType) *UserPoolDescriptionType {
-	s.Status = v
-	return s
-}
-
 // The policy associated with a user pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolPolicyType
 type UserPoolPolicyType struct {
@@ -19011,12 +15105,6 @@ func (s *UserPoolPolicyType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPasswordPolicy sets the PasswordPolicy field's value.
-func (s *UserPoolPolicyType) SetPasswordPolicy(v *PasswordPolicyType) *UserPoolPolicyType {
-	s.PasswordPolicy = v
-	return s
 }
 
 // A container for information about the user pool.
@@ -19126,168 +15214,6 @@ func (s UserPoolType) GoString() string {
 	return s.String()
 }
 
-// SetAdminCreateUserConfig sets the AdminCreateUserConfig field's value.
-func (s *UserPoolType) SetAdminCreateUserConfig(v *AdminCreateUserConfigType) *UserPoolType {
-	s.AdminCreateUserConfig = v
-	return s
-}
-
-// SetAliasAttributes sets the AliasAttributes field's value.
-func (s *UserPoolType) SetAliasAttributes(v []AliasAttributeType) *UserPoolType {
-	s.AliasAttributes = v
-	return s
-}
-
-// SetAutoVerifiedAttributes sets the AutoVerifiedAttributes field's value.
-func (s *UserPoolType) SetAutoVerifiedAttributes(v []VerifiedAttributeType) *UserPoolType {
-	s.AutoVerifiedAttributes = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *UserPoolType) SetCreationDate(v time.Time) *UserPoolType {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDeviceConfiguration sets the DeviceConfiguration field's value.
-func (s *UserPoolType) SetDeviceConfiguration(v *DeviceConfigurationType) *UserPoolType {
-	s.DeviceConfiguration = v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *UserPoolType) SetDomain(v string) *UserPoolType {
-	s.Domain = &v
-	return s
-}
-
-// SetEmailConfiguration sets the EmailConfiguration field's value.
-func (s *UserPoolType) SetEmailConfiguration(v *EmailConfigurationType) *UserPoolType {
-	s.EmailConfiguration = v
-	return s
-}
-
-// SetEmailConfigurationFailure sets the EmailConfigurationFailure field's value.
-func (s *UserPoolType) SetEmailConfigurationFailure(v string) *UserPoolType {
-	s.EmailConfigurationFailure = &v
-	return s
-}
-
-// SetEmailVerificationMessage sets the EmailVerificationMessage field's value.
-func (s *UserPoolType) SetEmailVerificationMessage(v string) *UserPoolType {
-	s.EmailVerificationMessage = &v
-	return s
-}
-
-// SetEmailVerificationSubject sets the EmailVerificationSubject field's value.
-func (s *UserPoolType) SetEmailVerificationSubject(v string) *UserPoolType {
-	s.EmailVerificationSubject = &v
-	return s
-}
-
-// SetEstimatedNumberOfUsers sets the EstimatedNumberOfUsers field's value.
-func (s *UserPoolType) SetEstimatedNumberOfUsers(v int64) *UserPoolType {
-	s.EstimatedNumberOfUsers = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UserPoolType) SetId(v string) *UserPoolType {
-	s.Id = &v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *UserPoolType) SetLambdaConfig(v *LambdaConfigType) *UserPoolType {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *UserPoolType) SetLastModifiedDate(v time.Time) *UserPoolType {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *UserPoolType) SetMfaConfiguration(v UserPoolMfaType) *UserPoolType {
-	s.MfaConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UserPoolType) SetName(v string) *UserPoolType {
-	s.Name = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *UserPoolType) SetPolicies(v *UserPoolPolicyType) *UserPoolType {
-	s.Policies = v
-	return s
-}
-
-// SetSchemaAttributes sets the SchemaAttributes field's value.
-func (s *UserPoolType) SetSchemaAttributes(v []SchemaAttributeType) *UserPoolType {
-	s.SchemaAttributes = v
-	return s
-}
-
-// SetSmsAuthenticationMessage sets the SmsAuthenticationMessage field's value.
-func (s *UserPoolType) SetSmsAuthenticationMessage(v string) *UserPoolType {
-	s.SmsAuthenticationMessage = &v
-	return s
-}
-
-// SetSmsConfiguration sets the SmsConfiguration field's value.
-func (s *UserPoolType) SetSmsConfiguration(v *SmsConfigurationType) *UserPoolType {
-	s.SmsConfiguration = v
-	return s
-}
-
-// SetSmsConfigurationFailure sets the SmsConfigurationFailure field's value.
-func (s *UserPoolType) SetSmsConfigurationFailure(v string) *UserPoolType {
-	s.SmsConfigurationFailure = &v
-	return s
-}
-
-// SetSmsVerificationMessage sets the SmsVerificationMessage field's value.
-func (s *UserPoolType) SetSmsVerificationMessage(v string) *UserPoolType {
-	s.SmsVerificationMessage = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UserPoolType) SetStatus(v StatusType) *UserPoolType {
-	s.Status = v
-	return s
-}
-
-// SetUserPoolAddOns sets the UserPoolAddOns field's value.
-func (s *UserPoolType) SetUserPoolAddOns(v *UserPoolAddOnsType) *UserPoolType {
-	s.UserPoolAddOns = v
-	return s
-}
-
-// SetUserPoolTags sets the UserPoolTags field's value.
-func (s *UserPoolType) SetUserPoolTags(v map[string]string) *UserPoolType {
-	s.UserPoolTags = v
-	return s
-}
-
-// SetUsernameAttributes sets the UsernameAttributes field's value.
-func (s *UserPoolType) SetUsernameAttributes(v []UsernameAttributeType) *UserPoolType {
-	s.UsernameAttributes = v
-	return s
-}
-
-// SetVerificationMessageTemplate sets the VerificationMessageTemplate field's value.
-func (s *UserPoolType) SetVerificationMessageTemplate(v *VerificationMessageTemplateType) *UserPoolType {
-	s.VerificationMessageTemplate = v
-	return s
-}
-
 // The user type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserType
 type UserType struct {
@@ -19333,48 +15259,6 @@ func (s UserType) String() string {
 // GoString returns the string representation
 func (s UserType) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *UserType) SetAttributes(v []AttributeType) *UserType {
-	s.Attributes = v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *UserType) SetEnabled(v bool) *UserType {
-	s.Enabled = &v
-	return s
-}
-
-// SetMFAOptions sets the MFAOptions field's value.
-func (s *UserType) SetMFAOptions(v []MFAOptionType) *UserType {
-	s.MFAOptions = v
-	return s
-}
-
-// SetUserCreateDate sets the UserCreateDate field's value.
-func (s *UserType) SetUserCreateDate(v time.Time) *UserType {
-	s.UserCreateDate = &v
-	return s
-}
-
-// SetUserLastModifiedDate sets the UserLastModifiedDate field's value.
-func (s *UserType) SetUserLastModifiedDate(v time.Time) *UserType {
-	s.UserLastModifiedDate = &v
-	return s
-}
-
-// SetUserStatus sets the UserStatus field's value.
-func (s *UserType) SetUserStatus(v UserStatusType) *UserType {
-	s.UserStatus = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *UserType) SetUsername(v string) *UserType {
-	s.Username = &v
-	return s
 }
 
 // The template for verification messages.
@@ -19437,42 +15321,6 @@ func (s *VerificationMessageTemplateType) Validate() error {
 	return nil
 }
 
-// SetDefaultEmailOption sets the DefaultEmailOption field's value.
-func (s *VerificationMessageTemplateType) SetDefaultEmailOption(v DefaultEmailOptionType) *VerificationMessageTemplateType {
-	s.DefaultEmailOption = v
-	return s
-}
-
-// SetEmailMessage sets the EmailMessage field's value.
-func (s *VerificationMessageTemplateType) SetEmailMessage(v string) *VerificationMessageTemplateType {
-	s.EmailMessage = &v
-	return s
-}
-
-// SetEmailMessageByLink sets the EmailMessageByLink field's value.
-func (s *VerificationMessageTemplateType) SetEmailMessageByLink(v string) *VerificationMessageTemplateType {
-	s.EmailMessageByLink = &v
-	return s
-}
-
-// SetEmailSubject sets the EmailSubject field's value.
-func (s *VerificationMessageTemplateType) SetEmailSubject(v string) *VerificationMessageTemplateType {
-	s.EmailSubject = &v
-	return s
-}
-
-// SetEmailSubjectByLink sets the EmailSubjectByLink field's value.
-func (s *VerificationMessageTemplateType) SetEmailSubjectByLink(v string) *VerificationMessageTemplateType {
-	s.EmailSubjectByLink = &v
-	return s
-}
-
-// SetSmsMessage sets the SmsMessage field's value.
-func (s *VerificationMessageTemplateType) SetSmsMessage(v string) *VerificationMessageTemplateType {
-	s.SmsMessage = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareTokenRequest
 type VerifySoftwareTokenInput struct {
 	_ struct{} `type:"structure"`
@@ -19523,30 +15371,6 @@ func (s *VerifySoftwareTokenInput) Validate() error {
 	return nil
 }
 
-// SetAccessToken sets the AccessToken field's value.
-func (s *VerifySoftwareTokenInput) SetAccessToken(v string) *VerifySoftwareTokenInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetFriendlyDeviceName sets the FriendlyDeviceName field's value.
-func (s *VerifySoftwareTokenInput) SetFriendlyDeviceName(v string) *VerifySoftwareTokenInput {
-	s.FriendlyDeviceName = &v
-	return s
-}
-
-// SetSession sets the Session field's value.
-func (s *VerifySoftwareTokenInput) SetSession(v string) *VerifySoftwareTokenInput {
-	s.Session = &v
-	return s
-}
-
-// SetUserCode sets the UserCode field's value.
-func (s *VerifySoftwareTokenInput) SetUserCode(v string) *VerifySoftwareTokenInput {
-	s.UserCode = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareTokenResponse
 type VerifySoftwareTokenOutput struct {
 	_ struct{} `type:"structure"`
@@ -19574,18 +15398,6 @@ func (s VerifySoftwareTokenOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s VerifySoftwareTokenOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSession sets the Session field's value.
-func (s *VerifySoftwareTokenOutput) SetSession(v string) *VerifySoftwareTokenOutput {
-	s.Session = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VerifySoftwareTokenOutput) SetStatus(v VerifySoftwareTokenResponseType) *VerifySoftwareTokenOutput {
-	s.Status = v
-	return s
 }
 
 // Represents the request to verify user attributes.
@@ -19645,24 +15457,6 @@ func (s *VerifyUserAttributeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessToken sets the AccessToken field's value.
-func (s *VerifyUserAttributeInput) SetAccessToken(v string) *VerifyUserAttributeInput {
-	s.AccessToken = &v
-	return s
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *VerifyUserAttributeInput) SetAttributeName(v string) *VerifyUserAttributeInput {
-	s.AttributeName = &v
-	return s
-}
-
-// SetCode sets the Code field's value.
-func (s *VerifyUserAttributeInput) SetCode(v string) *VerifyUserAttributeInput {
-	s.Code = &v
-	return s
 }
 
 // A container representing the response from the server from the request to

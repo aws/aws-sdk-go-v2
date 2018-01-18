@@ -594,48 +594,6 @@ func (s AffectedEntity) GoString() string {
 	return s.String()
 }
 
-// SetAwsAccountId sets the AwsAccountId field's value.
-func (s *AffectedEntity) SetAwsAccountId(v string) *AffectedEntity {
-	s.AwsAccountId = &v
-	return s
-}
-
-// SetEntityArn sets the EntityArn field's value.
-func (s *AffectedEntity) SetEntityArn(v string) *AffectedEntity {
-	s.EntityArn = &v
-	return s
-}
-
-// SetEntityValue sets the EntityValue field's value.
-func (s *AffectedEntity) SetEntityValue(v string) *AffectedEntity {
-	s.EntityValue = &v
-	return s
-}
-
-// SetEventArn sets the EventArn field's value.
-func (s *AffectedEntity) SetEventArn(v string) *AffectedEntity {
-	s.EventArn = &v
-	return s
-}
-
-// SetLastUpdatedTime sets the LastUpdatedTime field's value.
-func (s *AffectedEntity) SetLastUpdatedTime(v time.Time) *AffectedEntity {
-	s.LastUpdatedTime = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *AffectedEntity) SetStatusCode(v EntityStatusCode) *AffectedEntity {
-	s.StatusCode = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AffectedEntity) SetTags(v map[string]string) *AffectedEntity {
-	s.Tags = v
-	return s
-}
-
 // A range of dates and times that is used by the EventFilter and EntityFilter
 // objects. If from is set and to is set: match items where the timestamp (startTime,
 // endTime, or lastUpdatedTime) is between from and to inclusive. If from is
@@ -661,18 +619,6 @@ func (s DateTimeRange) String() string {
 // GoString returns the string representation
 func (s DateTimeRange) GoString() string {
 	return s.String()
-}
-
-// SetFrom sets the From field's value.
-func (s *DateTimeRange) SetFrom(v time.Time) *DateTimeRange {
-	s.From = &v
-	return s
-}
-
-// SetTo sets the To field's value.
-func (s *DateTimeRange) SetTo(v time.Time) *DateTimeRange {
-	s.To = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesRequest
@@ -734,30 +680,6 @@ func (s *DescribeAffectedEntitiesInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeAffectedEntitiesInput) SetFilter(v *EntityFilter) *DescribeAffectedEntitiesInput {
-	s.Filter = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *DescribeAffectedEntitiesInput) SetLocale(v string) *DescribeAffectedEntitiesInput {
-	s.Locale = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeAffectedEntitiesInput) SetMaxResults(v int64) *DescribeAffectedEntitiesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeAffectedEntitiesInput) SetNextToken(v string) *DescribeAffectedEntitiesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesResponse
 type DescribeAffectedEntitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -788,18 +710,6 @@ func (s DescribeAffectedEntitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAffectedEntitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEntities sets the Entities field's value.
-func (s *DescribeAffectedEntitiesOutput) SetEntities(v []AffectedEntity) *DescribeAffectedEntitiesOutput {
-	s.Entities = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeAffectedEntitiesOutput) SetNextToken(v string) *DescribeAffectedEntitiesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesRequest
@@ -834,12 +744,6 @@ func (s *DescribeEntityAggregatesInput) Validate() error {
 	return nil
 }
 
-// SetEventArns sets the EventArns field's value.
-func (s *DescribeEntityAggregatesInput) SetEventArns(v []string) *DescribeEntityAggregatesInput {
-	s.EventArns = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesResponse
 type DescribeEntityAggregatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -863,12 +767,6 @@ func (s DescribeEntityAggregatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEntityAggregatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEntityAggregates sets the EntityAggregates field's value.
-func (s *DescribeEntityAggregatesOutput) SetEntityAggregates(v []EntityAggregate) *DescribeEntityAggregatesOutput {
-	s.EntityAggregates = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregatesRequest
@@ -925,30 +823,6 @@ func (s *DescribeEventAggregatesInput) Validate() error {
 	return nil
 }
 
-// SetAggregateField sets the AggregateField field's value.
-func (s *DescribeEventAggregatesInput) SetAggregateField(v EventAggregateField) *DescribeEventAggregatesInput {
-	s.AggregateField = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *DescribeEventAggregatesInput) SetFilter(v *EventFilter) *DescribeEventAggregatesInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEventAggregatesInput) SetMaxResults(v int64) *DescribeEventAggregatesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventAggregatesInput) SetNextToken(v string) *DescribeEventAggregatesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregatesResponse
 type DescribeEventAggregatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -979,18 +853,6 @@ func (s DescribeEventAggregatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventAggregatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventAggregates sets the EventAggregates field's value.
-func (s *DescribeEventAggregatesOutput) SetEventAggregates(v []EventAggregate) *DescribeEventAggregatesOutput {
-	s.EventAggregates = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventAggregatesOutput) SetNextToken(v string) *DescribeEventAggregatesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsRequest
@@ -1038,18 +900,6 @@ func (s *DescribeEventDetailsInput) Validate() error {
 	return nil
 }
 
-// SetEventArns sets the EventArns field's value.
-func (s *DescribeEventDetailsInput) SetEventArns(v []string) *DescribeEventDetailsInput {
-	s.EventArns = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *DescribeEventDetailsInput) SetLocale(v string) *DescribeEventDetailsInput {
-	s.Locale = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsResponse
 type DescribeEventDetailsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1076,18 +926,6 @@ func (s DescribeEventDetailsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventDetailsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedSet sets the FailedSet field's value.
-func (s *DescribeEventDetailsOutput) SetFailedSet(v []EventDetailsErrorItem) *DescribeEventDetailsOutput {
-	s.FailedSet = v
-	return s
-}
-
-// SetSuccessfulSet sets the SuccessfulSet field's value.
-func (s *DescribeEventDetailsOutput) SetSuccessfulSet(v []EventDetails) *DescribeEventDetailsOutput {
-	s.SuccessfulSet = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesRequest
@@ -1143,30 +981,6 @@ func (s *DescribeEventTypesInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeEventTypesInput) SetFilter(v *EventTypeFilter) *DescribeEventTypesInput {
-	s.Filter = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *DescribeEventTypesInput) SetLocale(v string) *DescribeEventTypesInput {
-	s.Locale = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEventTypesInput) SetMaxResults(v int64) *DescribeEventTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventTypesInput) SetNextToken(v string) *DescribeEventTypesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesResponse
 type DescribeEventTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1200,18 +1014,6 @@ func (s DescribeEventTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventTypes sets the EventTypes field's value.
-func (s *DescribeEventTypesOutput) SetEventTypes(v []EventType) *DescribeEventTypesOutput {
-	s.EventTypes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventTypesOutput) SetNextToken(v string) *DescribeEventTypesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsRequest
@@ -1267,30 +1069,6 @@ func (s *DescribeEventsInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *DescribeEventsInput) SetFilter(v *EventFilter) *DescribeEventsInput {
-	s.Filter = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *DescribeEventsInput) SetLocale(v string) *DescribeEventsInput {
-	s.Locale = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEventsInput) SetMaxResults(v int64) *DescribeEventsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventsInput) SetNextToken(v string) *DescribeEventsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsResponse
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1323,18 +1101,6 @@ func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
-	s.Events = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventsOutput) SetNextToken(v string) *DescribeEventsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // The number of entities that are affected by one or more events. Returned
 // by the DescribeEntityAggregates operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAggregate
@@ -1357,18 +1123,6 @@ func (s EntityAggregate) String() string {
 // GoString returns the string representation
 func (s EntityAggregate) GoString() string {
 	return s.String()
-}
-
-// SetCount sets the Count field's value.
-func (s *EntityAggregate) SetCount(v int64) *EntityAggregate {
-	s.Count = &v
-	return s
-}
-
-// SetEventArn sets the EventArn field's value.
-func (s *EntityAggregate) SetEventArn(v string) *EntityAggregate {
-	s.EventArn = &v
-	return s
 }
 
 // The values to use to filter results from the DescribeAffectedEntities operation.
@@ -1437,42 +1191,6 @@ func (s *EntityFilter) Validate() error {
 	return nil
 }
 
-// SetEntityArns sets the EntityArns field's value.
-func (s *EntityFilter) SetEntityArns(v []string) *EntityFilter {
-	s.EntityArns = v
-	return s
-}
-
-// SetEntityValues sets the EntityValues field's value.
-func (s *EntityFilter) SetEntityValues(v []string) *EntityFilter {
-	s.EntityValues = v
-	return s
-}
-
-// SetEventArns sets the EventArns field's value.
-func (s *EntityFilter) SetEventArns(v []string) *EntityFilter {
-	s.EventArns = v
-	return s
-}
-
-// SetLastUpdatedTimes sets the LastUpdatedTimes field's value.
-func (s *EntityFilter) SetLastUpdatedTimes(v []DateTimeRange) *EntityFilter {
-	s.LastUpdatedTimes = v
-	return s
-}
-
-// SetStatusCodes sets the StatusCodes field's value.
-func (s *EntityFilter) SetStatusCodes(v []EntityStatusCode) *EntityFilter {
-	s.StatusCodes = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *EntityFilter) SetTags(v []map[string]string) *EntityFilter {
-	s.Tags = v
-	return s
-}
-
 // Summary information about an event, returned by the DescribeEvents operation.
 // The DescribeEventDetails operation also returns this information, as well
 // as the EventDescription and additional event metadata.
@@ -1524,66 +1242,6 @@ func (s Event) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Event) SetArn(v string) *Event {
-	s.Arn = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Event) SetAvailabilityZone(v string) *Event {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *Event) SetEndTime(v time.Time) *Event {
-	s.EndTime = &v
-	return s
-}
-
-// SetEventTypeCategory sets the EventTypeCategory field's value.
-func (s *Event) SetEventTypeCategory(v EventTypeCategory) *Event {
-	s.EventTypeCategory = v
-	return s
-}
-
-// SetEventTypeCode sets the EventTypeCode field's value.
-func (s *Event) SetEventTypeCode(v string) *Event {
-	s.EventTypeCode = &v
-	return s
-}
-
-// SetLastUpdatedTime sets the LastUpdatedTime field's value.
-func (s *Event) SetLastUpdatedTime(v time.Time) *Event {
-	s.LastUpdatedTime = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *Event) SetRegion(v string) *Event {
-	s.Region = &v
-	return s
-}
-
-// SetService sets the Service field's value.
-func (s *Event) SetService(v string) *Event {
-	s.Service = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Event) SetStartTime(v time.Time) *Event {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *Event) SetStatusCode(v EventStatusCode) *Event {
-	s.StatusCode = v
-	return s
-}
-
 // The number of events of each issue type. Returned by the DescribeEventAggregates
 // operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventAggregate
@@ -1607,18 +1265,6 @@ func (s EventAggregate) GoString() string {
 	return s.String()
 }
 
-// SetAggregateValue sets the AggregateValue field's value.
-func (s *EventAggregate) SetAggregateValue(v string) *EventAggregate {
-	s.AggregateValue = &v
-	return s
-}
-
-// SetCount sets the Count field's value.
-func (s *EventAggregate) SetCount(v int64) *EventAggregate {
-	s.Count = &v
-	return s
-}
-
 // The detailed description of the event. Included in the information returned
 // by the DescribeEventDetails operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDescription
@@ -1637,12 +1283,6 @@ func (s EventDescription) String() string {
 // GoString returns the string representation
 func (s EventDescription) GoString() string {
 	return s.String()
-}
-
-// SetLatestDescription sets the LatestDescription field's value.
-func (s *EventDescription) SetLatestDescription(v string) *EventDescription {
-	s.LatestDescription = &v
-	return s
 }
 
 // Detailed information about an event. A combination of an Event object, an
@@ -1672,24 +1312,6 @@ func (s EventDetails) GoString() string {
 	return s.String()
 }
 
-// SetEvent sets the Event field's value.
-func (s *EventDetails) SetEvent(v *Event) *EventDetails {
-	s.Event = v
-	return s
-}
-
-// SetEventDescription sets the EventDescription field's value.
-func (s *EventDetails) SetEventDescription(v *EventDescription) *EventDetails {
-	s.EventDescription = v
-	return s
-}
-
-// SetEventMetadata sets the EventMetadata field's value.
-func (s *EventDetails) SetEventMetadata(v map[string]string) *EventDetails {
-	s.EventMetadata = v
-	return s
-}
-
 // Error information returned when a DescribeEventDetails operation cannot find
 // a specified event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDetailsErrorItem
@@ -1715,24 +1337,6 @@ func (s EventDetailsErrorItem) String() string {
 // GoString returns the string representation
 func (s EventDetailsErrorItem) GoString() string {
 	return s.String()
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *EventDetailsErrorItem) SetErrorMessage(v string) *EventDetailsErrorItem {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetErrorName sets the ErrorName field's value.
-func (s *EventDetailsErrorItem) SetErrorName(v string) *EventDetailsErrorItem {
-	s.ErrorName = &v
-	return s
-}
-
-// SetEventArn sets the EventArn field's value.
-func (s *EventDetailsErrorItem) SetEventArn(v string) *EventDetailsErrorItem {
-	s.EventArn = &v
-	return s
 }
 
 // The values to use to filter results from the DescribeEvents and DescribeEventAggregates
@@ -1836,84 +1440,6 @@ func (s *EventFilter) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *EventFilter) SetAvailabilityZones(v []string) *EventFilter {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetEndTimes sets the EndTimes field's value.
-func (s *EventFilter) SetEndTimes(v []DateTimeRange) *EventFilter {
-	s.EndTimes = v
-	return s
-}
-
-// SetEntityArns sets the EntityArns field's value.
-func (s *EventFilter) SetEntityArns(v []string) *EventFilter {
-	s.EntityArns = v
-	return s
-}
-
-// SetEntityValues sets the EntityValues field's value.
-func (s *EventFilter) SetEntityValues(v []string) *EventFilter {
-	s.EntityValues = v
-	return s
-}
-
-// SetEventArns sets the EventArns field's value.
-func (s *EventFilter) SetEventArns(v []string) *EventFilter {
-	s.EventArns = v
-	return s
-}
-
-// SetEventStatusCodes sets the EventStatusCodes field's value.
-func (s *EventFilter) SetEventStatusCodes(v []EventStatusCode) *EventFilter {
-	s.EventStatusCodes = v
-	return s
-}
-
-// SetEventTypeCategories sets the EventTypeCategories field's value.
-func (s *EventFilter) SetEventTypeCategories(v []EventTypeCategory) *EventFilter {
-	s.EventTypeCategories = v
-	return s
-}
-
-// SetEventTypeCodes sets the EventTypeCodes field's value.
-func (s *EventFilter) SetEventTypeCodes(v []string) *EventFilter {
-	s.EventTypeCodes = v
-	return s
-}
-
-// SetLastUpdatedTimes sets the LastUpdatedTimes field's value.
-func (s *EventFilter) SetLastUpdatedTimes(v []DateTimeRange) *EventFilter {
-	s.LastUpdatedTimes = v
-	return s
-}
-
-// SetRegions sets the Regions field's value.
-func (s *EventFilter) SetRegions(v []string) *EventFilter {
-	s.Regions = v
-	return s
-}
-
-// SetServices sets the Services field's value.
-func (s *EventFilter) SetServices(v []string) *EventFilter {
-	s.Services = v
-	return s
-}
-
-// SetStartTimes sets the StartTimes field's value.
-func (s *EventFilter) SetStartTimes(v []DateTimeRange) *EventFilter {
-	s.StartTimes = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *EventFilter) SetTags(v []map[string]string) *EventFilter {
-	s.Tags = v
-	return s
-}
-
 // Metadata about a type of event that is reported by AWS Health. Data consists
 // of the category (for example, issue), the service (for example, EC2), and
 // the event type code (for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
@@ -1940,24 +1466,6 @@ func (s EventType) String() string {
 // GoString returns the string representation
 func (s EventType) GoString() string {
 	return s.String()
-}
-
-// SetCategory sets the Category field's value.
-func (s *EventType) SetCategory(v EventTypeCategory) *EventType {
-	s.Category = v
-	return s
-}
-
-// SetCode sets the Code field's value.
-func (s *EventType) SetCode(v string) *EventType {
-	s.Code = &v
-	return s
-}
-
-// SetService sets the Service field's value.
-func (s *EventType) SetService(v string) *EventType {
-	s.Service = &v
-	return s
 }
 
 // The values to use to filter results from the DescribeEventTypes operation.
@@ -2002,24 +1510,6 @@ func (s *EventTypeFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEventTypeCategories sets the EventTypeCategories field's value.
-func (s *EventTypeFilter) SetEventTypeCategories(v []EventTypeCategory) *EventTypeFilter {
-	s.EventTypeCategories = v
-	return s
-}
-
-// SetEventTypeCodes sets the EventTypeCodes field's value.
-func (s *EventTypeFilter) SetEventTypeCodes(v []string) *EventTypeFilter {
-	s.EventTypeCodes = v
-	return s
-}
-
-// SetServices sets the Services field's value.
-func (s *EventTypeFilter) SetServices(v []string) *EventTypeFilter {
-	s.Services = v
-	return s
 }
 
 type EntityStatusCode string

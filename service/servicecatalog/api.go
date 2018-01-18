@@ -3279,18 +3279,6 @@ func (s *AcceptPortfolioShareInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *AcceptPortfolioShareInput) SetAcceptLanguage(v string) *AcceptPortfolioShareInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *AcceptPortfolioShareInput) SetPortfolioId(v string) *AcceptPortfolioShareInput {
-	s.PortfolioId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareOutput
 type AcceptPortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
@@ -3339,18 +3327,6 @@ func (s AccessLevelFilter) String() string {
 // GoString returns the string representation
 func (s AccessLevelFilter) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *AccessLevelFilter) SetKey(v AccessLevelFilterKey) *AccessLevelFilter {
-	s.Key = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *AccessLevelFilter) SetValue(v string) *AccessLevelFilter {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioInput
@@ -3417,30 +3393,6 @@ func (s *AssociatePrincipalWithPortfolioInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *AssociatePrincipalWithPortfolioInput) SetAcceptLanguage(v string) *AssociatePrincipalWithPortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *AssociatePrincipalWithPortfolioInput) SetPortfolioId(v string) *AssociatePrincipalWithPortfolioInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetPrincipalARN sets the PrincipalARN field's value.
-func (s *AssociatePrincipalWithPortfolioInput) SetPrincipalARN(v string) *AssociatePrincipalWithPortfolioInput {
-	s.PrincipalARN = &v
-	return s
-}
-
-// SetPrincipalType sets the PrincipalType field's value.
-func (s *AssociatePrincipalWithPortfolioInput) SetPrincipalType(v PrincipalType) *AssociatePrincipalWithPortfolioInput {
-	s.PrincipalType = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioOutput
@@ -3529,30 +3481,6 @@ func (s *AssociateProductWithPortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *AssociateProductWithPortfolioInput) SetAcceptLanguage(v string) *AssociateProductWithPortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *AssociateProductWithPortfolioInput) SetPortfolioId(v string) *AssociateProductWithPortfolioInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *AssociateProductWithPortfolioInput) SetProductId(v string) *AssociateProductWithPortfolioInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetSourcePortfolioId sets the SourcePortfolioId field's value.
-func (s *AssociateProductWithPortfolioInput) SetSourcePortfolioId(v string) *AssociateProductWithPortfolioInput {
-	s.SourcePortfolioId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolioOutput
 type AssociateProductWithPortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -3621,18 +3549,6 @@ func (s *AssociateTagOptionWithResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceId sets the ResourceId field's value.
-func (s *AssociateTagOptionWithResourceInput) SetResourceId(v string) *AssociateTagOptionWithResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetTagOptionId sets the TagOptionId field's value.
-func (s *AssociateTagOptionWithResourceInput) SetTagOptionId(v string) *AssociateTagOptionWithResourceInput {
-	s.TagOptionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResourceOutput
 type AssociateTagOptionWithResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3689,30 +3605,6 @@ func (s ConstraintDetail) GoString() string {
 	return s.String()
 }
 
-// SetConstraintId sets the ConstraintId field's value.
-func (s *ConstraintDetail) SetConstraintId(v string) *ConstraintDetail {
-	s.ConstraintId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ConstraintDetail) SetDescription(v string) *ConstraintDetail {
-	s.Description = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ConstraintDetail) SetOwner(v string) *ConstraintDetail {
-	s.Owner = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ConstraintDetail) SetType(v string) *ConstraintDetail {
-	s.Type = &v
-	return s
-}
-
 // Summary information about a constraint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintSummary
 type ConstraintSummary struct {
@@ -3739,18 +3631,6 @@ func (s ConstraintSummary) String() string {
 // GoString returns the string representation
 func (s ConstraintSummary) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *ConstraintSummary) SetDescription(v string) *ConstraintSummary {
-	s.Description = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ConstraintSummary) SetType(v string) *ConstraintSummary {
-	s.Type = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductInput
@@ -3830,48 +3710,6 @@ func (s *CopyProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *CopyProductInput) SetAcceptLanguage(v string) *CopyProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetCopyOptions sets the CopyOptions field's value.
-func (s *CopyProductInput) SetCopyOptions(v []CopyOption) *CopyProductInput {
-	s.CopyOptions = v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *CopyProductInput) SetIdempotencyToken(v string) *CopyProductInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetSourceProductArn sets the SourceProductArn field's value.
-func (s *CopyProductInput) SetSourceProductArn(v string) *CopyProductInput {
-	s.SourceProductArn = &v
-	return s
-}
-
-// SetSourceProvisioningArtifactIdentifiers sets the SourceProvisioningArtifactIdentifiers field's value.
-func (s *CopyProductInput) SetSourceProvisioningArtifactIdentifiers(v []map[string]string) *CopyProductInput {
-	s.SourceProvisioningArtifactIdentifiers = v
-	return s
-}
-
-// SetTargetProductId sets the TargetProductId field's value.
-func (s *CopyProductInput) SetTargetProductId(v string) *CopyProductInput {
-	s.TargetProductId = &v
-	return s
-}
-
-// SetTargetProductName sets the TargetProductName field's value.
-func (s *CopyProductInput) SetTargetProductName(v string) *CopyProductInput {
-	s.TargetProductName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductOutput
 type CopyProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -3895,12 +3733,6 @@ func (s CopyProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CopyProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCopyProductToken sets the CopyProductToken field's value.
-func (s *CopyProductOutput) SetCopyProductToken(v string) *CopyProductOutput {
-	s.CopyProductToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraintInput
@@ -4017,48 +3849,6 @@ func (s *CreateConstraintInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *CreateConstraintInput) SetAcceptLanguage(v string) *CreateConstraintInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateConstraintInput) SetDescription(v string) *CreateConstraintInput {
-	s.Description = &v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *CreateConstraintInput) SetIdempotencyToken(v string) *CreateConstraintInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *CreateConstraintInput) SetParameters(v string) *CreateConstraintInput {
-	s.Parameters = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *CreateConstraintInput) SetPortfolioId(v string) *CreateConstraintInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *CreateConstraintInput) SetProductId(v string) *CreateConstraintInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateConstraintInput) SetType(v string) *CreateConstraintInput {
-	s.Type = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraintOutput
 type CreateConstraintOutput struct {
 	_ struct{} `type:"structure"`
@@ -4088,24 +3878,6 @@ func (s CreateConstraintOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateConstraintOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConstraintDetail sets the ConstraintDetail field's value.
-func (s *CreateConstraintOutput) SetConstraintDetail(v *ConstraintDetail) *CreateConstraintOutput {
-	s.ConstraintDetail = v
-	return s
-}
-
-// SetConstraintParameters sets the ConstraintParameters field's value.
-func (s *CreateConstraintOutput) SetConstraintParameters(v string) *CreateConstraintOutput {
-	s.ConstraintParameters = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CreateConstraintOutput) SetStatus(v Status) *CreateConstraintOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioInput
@@ -4193,42 +3965,6 @@ func (s *CreatePortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *CreatePortfolioInput) SetAcceptLanguage(v string) *CreatePortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreatePortfolioInput) SetDescription(v string) *CreatePortfolioInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreatePortfolioInput) SetDisplayName(v string) *CreatePortfolioInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *CreatePortfolioInput) SetIdempotencyToken(v string) *CreatePortfolioInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *CreatePortfolioInput) SetProviderName(v string) *CreatePortfolioInput {
-	s.ProviderName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreatePortfolioInput) SetTags(v []Tag) *CreatePortfolioInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioOutput
 type CreatePortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -4255,18 +3991,6 @@ func (s CreatePortfolioOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePortfolioOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPortfolioDetail sets the PortfolioDetail field's value.
-func (s *CreatePortfolioOutput) SetPortfolioDetail(v *PortfolioDetail) *CreatePortfolioOutput {
-	s.PortfolioDetail = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreatePortfolioOutput) SetTags(v []Tag) *CreatePortfolioOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput
@@ -4322,24 +4046,6 @@ func (s *CreatePortfolioShareInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *CreatePortfolioShareInput) SetAcceptLanguage(v string) *CreatePortfolioShareInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *CreatePortfolioShareInput) SetAccountId(v string) *CreatePortfolioShareInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *CreatePortfolioShareInput) SetPortfolioId(v string) *CreatePortfolioShareInput {
-	s.PortfolioId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareOutput
@@ -4477,78 +4183,6 @@ func (s *CreateProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *CreateProductInput) SetAcceptLanguage(v string) *CreateProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateProductInput) SetDescription(v string) *CreateProductInput {
-	s.Description = &v
-	return s
-}
-
-// SetDistributor sets the Distributor field's value.
-func (s *CreateProductInput) SetDistributor(v string) *CreateProductInput {
-	s.Distributor = &v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *CreateProductInput) SetIdempotencyToken(v string) *CreateProductInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateProductInput) SetName(v string) *CreateProductInput {
-	s.Name = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *CreateProductInput) SetOwner(v string) *CreateProductInput {
-	s.Owner = &v
-	return s
-}
-
-// SetProductType sets the ProductType field's value.
-func (s *CreateProductInput) SetProductType(v ProductType) *CreateProductInput {
-	s.ProductType = v
-	return s
-}
-
-// SetProvisioningArtifactParameters sets the ProvisioningArtifactParameters field's value.
-func (s *CreateProductInput) SetProvisioningArtifactParameters(v *ProvisioningArtifactProperties) *CreateProductInput {
-	s.ProvisioningArtifactParameters = v
-	return s
-}
-
-// SetSupportDescription sets the SupportDescription field's value.
-func (s *CreateProductInput) SetSupportDescription(v string) *CreateProductInput {
-	s.SupportDescription = &v
-	return s
-}
-
-// SetSupportEmail sets the SupportEmail field's value.
-func (s *CreateProductInput) SetSupportEmail(v string) *CreateProductInput {
-	s.SupportEmail = &v
-	return s
-}
-
-// SetSupportUrl sets the SupportUrl field's value.
-func (s *CreateProductInput) SetSupportUrl(v string) *CreateProductInput {
-	s.SupportUrl = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateProductInput) SetTags(v []Tag) *CreateProductInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProductOutput
 type CreateProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -4578,24 +4212,6 @@ func (s CreateProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProductViewDetail sets the ProductViewDetail field's value.
-func (s *CreateProductOutput) SetProductViewDetail(v *ProductViewDetail) *CreateProductOutput {
-	s.ProductViewDetail = v
-	return s
-}
-
-// SetProvisioningArtifactDetail sets the ProvisioningArtifactDetail field's value.
-func (s *CreateProductOutput) SetProvisioningArtifactDetail(v *ProvisioningArtifactDetail) *CreateProductOutput {
-	s.ProvisioningArtifactDetail = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateProductOutput) SetTags(v []Tag) *CreateProductOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifactInput
@@ -4672,30 +4288,6 @@ func (s *CreateProvisioningArtifactInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *CreateProvisioningArtifactInput) SetAcceptLanguage(v string) *CreateProvisioningArtifactInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *CreateProvisioningArtifactInput) SetIdempotencyToken(v string) *CreateProvisioningArtifactInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *CreateProvisioningArtifactInput) SetParameters(v *ProvisioningArtifactProperties) *CreateProvisioningArtifactInput {
-	s.Parameters = v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *CreateProvisioningArtifactInput) SetProductId(v string) *CreateProvisioningArtifactInput {
-	s.ProductId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifactOutput
 type CreateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
@@ -4725,24 +4317,6 @@ func (s CreateProvisioningArtifactOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInfo sets the Info field's value.
-func (s *CreateProvisioningArtifactOutput) SetInfo(v map[string]string) *CreateProvisioningArtifactOutput {
-	s.Info = v
-	return s
-}
-
-// SetProvisioningArtifactDetail sets the ProvisioningArtifactDetail field's value.
-func (s *CreateProvisioningArtifactOutput) SetProvisioningArtifactDetail(v *ProvisioningArtifactDetail) *CreateProvisioningArtifactOutput {
-	s.ProvisioningArtifactDetail = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CreateProvisioningArtifactOutput) SetStatus(v Status) *CreateProvisioningArtifactOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOptionInput
@@ -4794,18 +4368,6 @@ func (s *CreateTagOptionInput) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *CreateTagOptionInput) SetKey(v string) *CreateTagOptionInput {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *CreateTagOptionInput) SetValue(v string) *CreateTagOptionInput {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOptionOutput
 type CreateTagOptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4829,12 +4391,6 @@ func (s CreateTagOptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTagOptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTagOptionDetail sets the TagOptionDetail field's value.
-func (s *CreateTagOptionOutput) SetTagOptionDetail(v *TagOptionDetail) *CreateTagOptionOutput {
-	s.TagOptionDetail = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraintInput
@@ -4881,18 +4437,6 @@ func (s *DeleteConstraintInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DeleteConstraintInput) SetAcceptLanguage(v string) *DeleteConstraintInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteConstraintInput) SetId(v string) *DeleteConstraintInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraintOutput
@@ -4961,18 +4505,6 @@ func (s *DeletePortfolioInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DeletePortfolioInput) SetAcceptLanguage(v string) *DeletePortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DeletePortfolioInput) SetId(v string) *DeletePortfolioInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioOutput
@@ -5052,24 +4584,6 @@ func (s *DeletePortfolioShareInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DeletePortfolioShareInput) SetAcceptLanguage(v string) *DeletePortfolioShareInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *DeletePortfolioShareInput) SetAccountId(v string) *DeletePortfolioShareInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *DeletePortfolioShareInput) SetPortfolioId(v string) *DeletePortfolioShareInput {
-	s.PortfolioId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareOutput
 type DeletePortfolioShareOutput struct {
 	_ struct{} `type:"structure"`
@@ -5136,18 +4650,6 @@ func (s *DeleteProductInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DeleteProductInput) SetAcceptLanguage(v string) *DeleteProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteProductInput) SetId(v string) *DeleteProductInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductOutput
@@ -5230,24 +4732,6 @@ func (s *DeleteProvisioningArtifactInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DeleteProvisioningArtifactInput) SetAcceptLanguage(v string) *DeleteProvisioningArtifactInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *DeleteProvisioningArtifactInput) SetProductId(v string) *DeleteProvisioningArtifactInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *DeleteProvisioningArtifactInput) SetProvisioningArtifactId(v string) *DeleteProvisioningArtifactInput {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactOutput
 type DeleteProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
@@ -5316,18 +4800,6 @@ func (s *DescribeConstraintInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeConstraintInput) SetAcceptLanguage(v string) *DescribeConstraintInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeConstraintInput) SetId(v string) *DescribeConstraintInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraintOutput
 type DescribeConstraintOutput struct {
 	_ struct{} `type:"structure"`
@@ -5357,24 +4829,6 @@ func (s DescribeConstraintOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConstraintOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConstraintDetail sets the ConstraintDetail field's value.
-func (s *DescribeConstraintOutput) SetConstraintDetail(v *ConstraintDetail) *DescribeConstraintOutput {
-	s.ConstraintDetail = v
-	return s
-}
-
-// SetConstraintParameters sets the ConstraintParameters field's value.
-func (s *DescribeConstraintOutput) SetConstraintParameters(v string) *DescribeConstraintOutput {
-	s.ConstraintParameters = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeConstraintOutput) SetStatus(v Status) *DescribeConstraintOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatusInput
@@ -5423,18 +4877,6 @@ func (s *DescribeCopyProductStatusInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeCopyProductStatusInput) SetAcceptLanguage(v string) *DescribeCopyProductStatusInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetCopyProductToken sets the CopyProductToken field's value.
-func (s *DescribeCopyProductStatusInput) SetCopyProductToken(v string) *DescribeCopyProductStatusInput {
-	s.CopyProductToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatusOutput
 type DescribeCopyProductStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -5464,24 +4906,6 @@ func (s DescribeCopyProductStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCopyProductStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCopyProductStatus sets the CopyProductStatus field's value.
-func (s *DescribeCopyProductStatusOutput) SetCopyProductStatus(v CopyProductStatus) *DescribeCopyProductStatusOutput {
-	s.CopyProductStatus = v
-	return s
-}
-
-// SetStatusDetail sets the StatusDetail field's value.
-func (s *DescribeCopyProductStatusOutput) SetStatusDetail(v string) *DescribeCopyProductStatusOutput {
-	s.StatusDetail = &v
-	return s
-}
-
-// SetTargetProductId sets the TargetProductId field's value.
-func (s *DescribeCopyProductStatusOutput) SetTargetProductId(v string) *DescribeCopyProductStatusOutput {
-	s.TargetProductId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioInput
@@ -5530,18 +4954,6 @@ func (s *DescribePortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribePortfolioInput) SetAcceptLanguage(v string) *DescribePortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribePortfolioInput) SetId(v string) *DescribePortfolioInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioOutput
 type DescribePortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -5571,24 +4983,6 @@ func (s DescribePortfolioOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribePortfolioOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPortfolioDetail sets the PortfolioDetail field's value.
-func (s *DescribePortfolioOutput) SetPortfolioDetail(v *PortfolioDetail) *DescribePortfolioOutput {
-	s.PortfolioDetail = v
-	return s
-}
-
-// SetTagOptions sets the TagOptions field's value.
-func (s *DescribePortfolioOutput) SetTagOptions(v []TagOptionDetail) *DescribePortfolioOutput {
-	s.TagOptions = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *DescribePortfolioOutput) SetTags(v []Tag) *DescribePortfolioOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminInput
@@ -5637,18 +5031,6 @@ func (s *DescribeProductAsAdminInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeProductAsAdminInput) SetAcceptLanguage(v string) *DescribeProductAsAdminInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeProductAsAdminInput) SetId(v string) *DescribeProductAsAdminInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminOutput
 type DescribeProductAsAdminOutput struct {
 	_ struct{} `type:"structure"`
@@ -5682,30 +5064,6 @@ func (s DescribeProductAsAdminOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProductAsAdminOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProductViewDetail sets the ProductViewDetail field's value.
-func (s *DescribeProductAsAdminOutput) SetProductViewDetail(v *ProductViewDetail) *DescribeProductAsAdminOutput {
-	s.ProductViewDetail = v
-	return s
-}
-
-// SetProvisioningArtifactSummaries sets the ProvisioningArtifactSummaries field's value.
-func (s *DescribeProductAsAdminOutput) SetProvisioningArtifactSummaries(v []ProvisioningArtifactSummary) *DescribeProductAsAdminOutput {
-	s.ProvisioningArtifactSummaries = v
-	return s
-}
-
-// SetTagOptions sets the TagOptions field's value.
-func (s *DescribeProductAsAdminOutput) SetTagOptions(v []TagOptionDetail) *DescribeProductAsAdminOutput {
-	s.TagOptions = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *DescribeProductAsAdminOutput) SetTags(v []Tag) *DescribeProductAsAdminOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductInput
@@ -5754,18 +5112,6 @@ func (s *DescribeProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeProductInput) SetAcceptLanguage(v string) *DescribeProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeProductInput) SetId(v string) *DescribeProductInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductOutput
 type DescribeProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -5792,18 +5138,6 @@ func (s DescribeProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProductViewSummary sets the ProductViewSummary field's value.
-func (s *DescribeProductOutput) SetProductViewSummary(v *ProductViewSummary) *DescribeProductOutput {
-	s.ProductViewSummary = v
-	return s
-}
-
-// SetProvisioningArtifacts sets the ProvisioningArtifacts field's value.
-func (s *DescribeProductOutput) SetProvisioningArtifacts(v []ProvisioningArtifact) *DescribeProductOutput {
-	s.ProvisioningArtifacts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductViewInput
@@ -5852,18 +5186,6 @@ func (s *DescribeProductViewInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeProductViewInput) SetAcceptLanguage(v string) *DescribeProductViewInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeProductViewInput) SetId(v string) *DescribeProductViewInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductViewOutput
 type DescribeProductViewOutput struct {
 	_ struct{} `type:"structure"`
@@ -5890,18 +5212,6 @@ func (s DescribeProductViewOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProductViewOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProductViewSummary sets the ProductViewSummary field's value.
-func (s *DescribeProductViewOutput) SetProductViewSummary(v *ProductViewSummary) *DescribeProductViewOutput {
-	s.ProductViewSummary = v
-	return s
-}
-
-// SetProvisioningArtifacts sets the ProvisioningArtifacts field's value.
-func (s *DescribeProductViewOutput) SetProvisioningArtifacts(v []ProvisioningArtifact) *DescribeProductViewOutput {
-	s.ProvisioningArtifacts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductInput
@@ -5950,18 +5260,6 @@ func (s *DescribeProvisionedProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeProvisionedProductInput) SetAcceptLanguage(v string) *DescribeProvisionedProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeProvisionedProductInput) SetId(v string) *DescribeProvisionedProductInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductOutput
 type DescribeProvisionedProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -5985,12 +5283,6 @@ func (s DescribeProvisionedProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProvisionedProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProvisionedProductDetail sets the ProvisionedProductDetail field's value.
-func (s *DescribeProvisionedProductOutput) SetProvisionedProductDetail(v *ProvisionedProductDetail) *DescribeProvisionedProductOutput {
-	s.ProvisionedProductDetail = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactInput
@@ -6054,30 +5346,6 @@ func (s *DescribeProvisioningArtifactInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeProvisioningArtifactInput) SetAcceptLanguage(v string) *DescribeProvisioningArtifactInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *DescribeProvisioningArtifactInput) SetProductId(v string) *DescribeProvisioningArtifactInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *DescribeProvisioningArtifactInput) SetProvisioningArtifactId(v string) *DescribeProvisioningArtifactInput {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
-// SetVerbose sets the Verbose field's value.
-func (s *DescribeProvisioningArtifactInput) SetVerbose(v bool) *DescribeProvisioningArtifactInput {
-	s.Verbose = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactOutput
 type DescribeProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
@@ -6107,24 +5375,6 @@ func (s DescribeProvisioningArtifactOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInfo sets the Info field's value.
-func (s *DescribeProvisioningArtifactOutput) SetInfo(v map[string]string) *DescribeProvisioningArtifactOutput {
-	s.Info = v
-	return s
-}
-
-// SetProvisioningArtifactDetail sets the ProvisioningArtifactDetail field's value.
-func (s *DescribeProvisioningArtifactOutput) SetProvisioningArtifactDetail(v *ProvisioningArtifactDetail) *DescribeProvisioningArtifactOutput {
-	s.ProvisioningArtifactDetail = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeProvisioningArtifactOutput) SetStatus(v Status) *DescribeProvisioningArtifactOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersInput
@@ -6193,30 +5443,6 @@ func (s *DescribeProvisioningParametersInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeProvisioningParametersInput) SetAcceptLanguage(v string) *DescribeProvisioningParametersInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPathId sets the PathId field's value.
-func (s *DescribeProvisioningParametersInput) SetPathId(v string) *DescribeProvisioningParametersInput {
-	s.PathId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *DescribeProvisioningParametersInput) SetProductId(v string) *DescribeProvisioningParametersInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *DescribeProvisioningParametersInput) SetProvisioningArtifactId(v string) *DescribeProvisioningParametersInput {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput
 type DescribeProvisioningParametersOutput struct {
 	_ struct{} `type:"structure"`
@@ -6250,30 +5476,6 @@ func (s DescribeProvisioningParametersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProvisioningParametersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConstraintSummaries sets the ConstraintSummaries field's value.
-func (s *DescribeProvisioningParametersOutput) SetConstraintSummaries(v []ConstraintSummary) *DescribeProvisioningParametersOutput {
-	s.ConstraintSummaries = v
-	return s
-}
-
-// SetProvisioningArtifactParameters sets the ProvisioningArtifactParameters field's value.
-func (s *DescribeProvisioningParametersOutput) SetProvisioningArtifactParameters(v []ProvisioningArtifactParameter) *DescribeProvisioningParametersOutput {
-	s.ProvisioningArtifactParameters = v
-	return s
-}
-
-// SetTagOptions sets the TagOptions field's value.
-func (s *DescribeProvisioningParametersOutput) SetTagOptions(v []TagOptionSummary) *DescribeProvisioningParametersOutput {
-	s.TagOptions = v
-	return s
-}
-
-// SetUsageInstructions sets the UsageInstructions field's value.
-func (s *DescribeProvisioningParametersOutput) SetUsageInstructions(v []UsageInstruction) *DescribeProvisioningParametersOutput {
-	s.UsageInstructions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecordInput
@@ -6330,30 +5532,6 @@ func (s *DescribeRecordInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DescribeRecordInput) SetAcceptLanguage(v string) *DescribeRecordInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeRecordInput) SetId(v string) *DescribeRecordInput {
-	s.Id = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *DescribeRecordInput) SetPageSize(v int64) *DescribeRecordInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *DescribeRecordInput) SetPageToken(v string) *DescribeRecordInput {
-	s.PageToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecordOutput
 type DescribeRecordOutput struct {
 	_ struct{} `type:"structure"`
@@ -6386,24 +5564,6 @@ func (s DescribeRecordOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRecordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *DescribeRecordOutput) SetNextPageToken(v string) *DescribeRecordOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetRecordDetail sets the RecordDetail field's value.
-func (s *DescribeRecordOutput) SetRecordDetail(v *RecordDetail) *DescribeRecordOutput {
-	s.RecordDetail = v
-	return s
-}
-
-// SetRecordOutputs sets the RecordOutputs field's value.
-func (s *DescribeRecordOutput) SetRecordOutputs(v []RecordOutput) *DescribeRecordOutput {
-	s.RecordOutputs = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOptionInput
@@ -6443,12 +5603,6 @@ func (s *DescribeTagOptionInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DescribeTagOptionInput) SetId(v string) *DescribeTagOptionInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOptionOutput
 type DescribeTagOptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6472,12 +5626,6 @@ func (s DescribeTagOptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTagOptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTagOptionDetail sets the TagOptionDetail field's value.
-func (s *DescribeTagOptionOutput) SetTagOptionDetail(v *TagOptionDetail) *DescribeTagOptionOutput {
-	s.TagOptionDetail = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioInput
@@ -6536,24 +5684,6 @@ func (s *DisassociatePrincipalFromPortfolioInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DisassociatePrincipalFromPortfolioInput) SetAcceptLanguage(v string) *DisassociatePrincipalFromPortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *DisassociatePrincipalFromPortfolioInput) SetPortfolioId(v string) *DisassociatePrincipalFromPortfolioInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetPrincipalARN sets the PrincipalARN field's value.
-func (s *DisassociatePrincipalFromPortfolioInput) SetPrincipalARN(v string) *DisassociatePrincipalFromPortfolioInput {
-	s.PrincipalARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioOutput
@@ -6636,24 +5766,6 @@ func (s *DisassociateProductFromPortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *DisassociateProductFromPortfolioInput) SetAcceptLanguage(v string) *DisassociateProductFromPortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *DisassociateProductFromPortfolioInput) SetPortfolioId(v string) *DisassociateProductFromPortfolioInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *DisassociateProductFromPortfolioInput) SetProductId(v string) *DisassociateProductFromPortfolioInput {
-	s.ProductId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolioOutput
 type DisassociateProductFromPortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -6722,18 +5834,6 @@ func (s *DisassociateTagOptionFromResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceId sets the ResourceId field's value.
-func (s *DisassociateTagOptionFromResourceInput) SetResourceId(v string) *DisassociateTagOptionFromResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetTagOptionId sets the TagOptionId field's value.
-func (s *DisassociateTagOptionFromResourceInput) SetTagOptionId(v string) *DisassociateTagOptionFromResourceInput {
-	s.TagOptionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceOutput
 type DisassociateTagOptionFromResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6784,30 +5884,6 @@ func (s LaunchPathSummary) GoString() string {
 	return s.String()
 }
 
-// SetConstraintSummaries sets the ConstraintSummaries field's value.
-func (s *LaunchPathSummary) SetConstraintSummaries(v []ConstraintSummary) *LaunchPathSummary {
-	s.ConstraintSummaries = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *LaunchPathSummary) SetId(v string) *LaunchPathSummary {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *LaunchPathSummary) SetName(v string) *LaunchPathSummary {
-	s.Name = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *LaunchPathSummary) SetTags(v []Tag) *LaunchPathSummary {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput
 type ListAcceptedPortfolioSharesInput struct {
 	_ struct{} `type:"structure"`
@@ -6839,24 +5915,6 @@ func (s ListAcceptedPortfolioSharesInput) GoString() string {
 	return s.String()
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListAcceptedPortfolioSharesInput) SetAcceptLanguage(v string) *ListAcceptedPortfolioSharesInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListAcceptedPortfolioSharesInput) SetPageSize(v int64) *ListAcceptedPortfolioSharesInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListAcceptedPortfolioSharesInput) SetPageToken(v string) *ListAcceptedPortfolioSharesInput {
-	s.PageToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesOutput
 type ListAcceptedPortfolioSharesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6884,18 +5942,6 @@ func (s ListAcceptedPortfolioSharesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAcceptedPortfolioSharesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListAcceptedPortfolioSharesOutput) SetNextPageToken(v string) *ListAcceptedPortfolioSharesOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetPortfolioDetails sets the PortfolioDetails field's value.
-func (s *ListAcceptedPortfolioSharesOutput) SetPortfolioDetails(v []PortfolioDetail) *ListAcceptedPortfolioSharesOutput {
-	s.PortfolioDetails = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolioInput
@@ -6957,36 +6003,6 @@ func (s *ListConstraintsForPortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListConstraintsForPortfolioInput) SetAcceptLanguage(v string) *ListConstraintsForPortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListConstraintsForPortfolioInput) SetPageSize(v int64) *ListConstraintsForPortfolioInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListConstraintsForPortfolioInput) SetPageToken(v string) *ListConstraintsForPortfolioInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *ListConstraintsForPortfolioInput) SetPortfolioId(v string) *ListConstraintsForPortfolioInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *ListConstraintsForPortfolioInput) SetProductId(v string) *ListConstraintsForPortfolioInput {
-	s.ProductId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolioOutput
 type ListConstraintsForPortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -7014,18 +6030,6 @@ func (s ListConstraintsForPortfolioOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListConstraintsForPortfolioOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConstraintDetails sets the ConstraintDetails field's value.
-func (s *ListConstraintsForPortfolioOutput) SetConstraintDetails(v []ConstraintDetail) *ListConstraintsForPortfolioOutput {
-	s.ConstraintDetails = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListConstraintsForPortfolioOutput) SetNextPageToken(v string) *ListConstraintsForPortfolioOutput {
-	s.NextPageToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPathsInput
@@ -7081,30 +6085,6 @@ func (s *ListLaunchPathsInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListLaunchPathsInput) SetAcceptLanguage(v string) *ListLaunchPathsInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListLaunchPathsInput) SetPageSize(v int64) *ListLaunchPathsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListLaunchPathsInput) SetPageToken(v string) *ListLaunchPathsInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *ListLaunchPathsInput) SetProductId(v string) *ListLaunchPathsInput {
-	s.ProductId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPathsOutput
 type ListLaunchPathsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7132,18 +6112,6 @@ func (s ListLaunchPathsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListLaunchPathsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLaunchPathSummaries sets the LaunchPathSummaries field's value.
-func (s *ListLaunchPathsOutput) SetLaunchPathSummaries(v []LaunchPathSummary) *ListLaunchPathsOutput {
-	s.LaunchPathSummaries = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListLaunchPathsOutput) SetNextPageToken(v string) *ListLaunchPathsOutput {
-	s.NextPageToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccessInput
@@ -7192,18 +6160,6 @@ func (s *ListPortfolioAccessInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListPortfolioAccessInput) SetAcceptLanguage(v string) *ListPortfolioAccessInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *ListPortfolioAccessInput) SetPortfolioId(v string) *ListPortfolioAccessInput {
-	s.PortfolioId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccessOutput
 type ListPortfolioAccessOutput struct {
 	_ struct{} `type:"structure"`
@@ -7231,18 +6187,6 @@ func (s ListPortfolioAccessOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPortfolioAccessOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccountIds sets the AccountIds field's value.
-func (s *ListPortfolioAccessOutput) SetAccountIds(v []string) *ListPortfolioAccessOutput {
-	s.AccountIds = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListPortfolioAccessOutput) SetNextPageToken(v string) *ListPortfolioAccessOutput {
-	s.NextPageToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProductInput
@@ -7298,30 +6242,6 @@ func (s *ListPortfoliosForProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListPortfoliosForProductInput) SetAcceptLanguage(v string) *ListPortfoliosForProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListPortfoliosForProductInput) SetPageSize(v int64) *ListPortfoliosForProductInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListPortfoliosForProductInput) SetPageToken(v string) *ListPortfoliosForProductInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *ListPortfoliosForProductInput) SetProductId(v string) *ListPortfoliosForProductInput {
-	s.ProductId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProductOutput
 type ListPortfoliosForProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -7349,18 +6269,6 @@ func (s ListPortfoliosForProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPortfoliosForProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListPortfoliosForProductOutput) SetNextPageToken(v string) *ListPortfoliosForProductOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetPortfolioDetails sets the PortfolioDetails field's value.
-func (s *ListPortfoliosForProductOutput) SetPortfolioDetails(v []PortfolioDetail) *ListPortfoliosForProductOutput {
-	s.PortfolioDetails = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosInput
@@ -7394,24 +6302,6 @@ func (s ListPortfoliosInput) GoString() string {
 	return s.String()
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListPortfoliosInput) SetAcceptLanguage(v string) *ListPortfoliosInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListPortfoliosInput) SetPageSize(v int64) *ListPortfoliosInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListPortfoliosInput) SetPageToken(v string) *ListPortfoliosInput {
-	s.PageToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosOutput
 type ListPortfoliosOutput struct {
 	_ struct{} `type:"structure"`
@@ -7439,18 +6329,6 @@ func (s ListPortfoliosOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPortfoliosOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListPortfoliosOutput) SetNextPageToken(v string) *ListPortfoliosOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetPortfolioDetails sets the PortfolioDetails field's value.
-func (s *ListPortfoliosOutput) SetPortfolioDetails(v []PortfolioDetail) *ListPortfoliosOutput {
-	s.PortfolioDetails = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolioInput
@@ -7506,30 +6384,6 @@ func (s *ListPrincipalsForPortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListPrincipalsForPortfolioInput) SetAcceptLanguage(v string) *ListPrincipalsForPortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListPrincipalsForPortfolioInput) SetPageSize(v int64) *ListPrincipalsForPortfolioInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListPrincipalsForPortfolioInput) SetPageToken(v string) *ListPrincipalsForPortfolioInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *ListPrincipalsForPortfolioInput) SetPortfolioId(v string) *ListPrincipalsForPortfolioInput {
-	s.PortfolioId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolioOutput
 type ListPrincipalsForPortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -7557,18 +6411,6 @@ func (s ListPrincipalsForPortfolioOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPrincipalsForPortfolioOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListPrincipalsForPortfolioOutput) SetNextPageToken(v string) *ListPrincipalsForPortfolioOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetPrincipals sets the Principals field's value.
-func (s *ListPrincipalsForPortfolioOutput) SetPrincipals(v []Principal) *ListPrincipalsForPortfolioOutput {
-	s.Principals = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsInput
@@ -7617,18 +6459,6 @@ func (s *ListProvisioningArtifactsInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListProvisioningArtifactsInput) SetAcceptLanguage(v string) *ListProvisioningArtifactsInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *ListProvisioningArtifactsInput) SetProductId(v string) *ListProvisioningArtifactsInput {
-	s.ProductId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsOutput
 type ListProvisioningArtifactsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7656,18 +6486,6 @@ func (s ListProvisioningArtifactsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListProvisioningArtifactsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListProvisioningArtifactsOutput) SetNextPageToken(v string) *ListProvisioningArtifactsOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetProvisioningArtifactDetails sets the ProvisioningArtifactDetails field's value.
-func (s *ListProvisioningArtifactsOutput) SetProvisioningArtifactDetails(v []ProvisioningArtifactDetail) *ListProvisioningArtifactsOutput {
-	s.ProvisioningArtifactDetails = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistoryInput
@@ -7707,36 +6525,6 @@ func (s ListRecordHistoryInput) GoString() string {
 	return s.String()
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ListRecordHistoryInput) SetAcceptLanguage(v string) *ListRecordHistoryInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetAccessLevelFilter sets the AccessLevelFilter field's value.
-func (s *ListRecordHistoryInput) SetAccessLevelFilter(v *AccessLevelFilter) *ListRecordHistoryInput {
-	s.AccessLevelFilter = v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListRecordHistoryInput) SetPageSize(v int64) *ListRecordHistoryInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListRecordHistoryInput) SetPageToken(v string) *ListRecordHistoryInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetSearchFilter sets the SearchFilter field's value.
-func (s *ListRecordHistoryInput) SetSearchFilter(v *ListRecordHistorySearchFilter) *ListRecordHistoryInput {
-	s.SearchFilter = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistoryOutput
 type ListRecordHistoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -7766,18 +6554,6 @@ func (s ListRecordHistoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListRecordHistoryOutput) SetNextPageToken(v string) *ListRecordHistoryOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetRecordDetails sets the RecordDetails field's value.
-func (s *ListRecordHistoryOutput) SetRecordDetails(v []RecordDetail) *ListRecordHistoryOutput {
-	s.RecordDetails = v
-	return s
-}
-
 // The search filter to use when listing history records.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistorySearchFilter
 type ListRecordHistorySearchFilter struct {
@@ -7803,18 +6579,6 @@ func (s ListRecordHistorySearchFilter) String() string {
 // GoString returns the string representation
 func (s ListRecordHistorySearchFilter) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *ListRecordHistorySearchFilter) SetKey(v string) *ListRecordHistorySearchFilter {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ListRecordHistorySearchFilter) SetValue(v string) *ListRecordHistorySearchFilter {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOptionInput
@@ -7868,30 +6632,6 @@ func (s *ListResourcesForTagOptionInput) Validate() error {
 	return nil
 }
 
-// SetPageSize sets the PageSize field's value.
-func (s *ListResourcesForTagOptionInput) SetPageSize(v int64) *ListResourcesForTagOptionInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListResourcesForTagOptionInput) SetPageToken(v string) *ListResourcesForTagOptionInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ListResourcesForTagOptionInput) SetResourceType(v string) *ListResourcesForTagOptionInput {
-	s.ResourceType = &v
-	return s
-}
-
-// SetTagOptionId sets the TagOptionId field's value.
-func (s *ListResourcesForTagOptionInput) SetTagOptionId(v string) *ListResourcesForTagOptionInput {
-	s.TagOptionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOptionOutput
 type ListResourcesForTagOptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7919,18 +6659,6 @@ func (s ListResourcesForTagOptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourcesForTagOptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListResourcesForTagOptionOutput) SetPageToken(v string) *ListResourcesForTagOptionOutput {
-	s.PageToken = &v
-	return s
-}
-
-// SetResourceDetails sets the ResourceDetails field's value.
-func (s *ListResourcesForTagOptionOutput) SetResourceDetails(v []ResourceDetail) *ListResourcesForTagOptionOutput {
-	s.ResourceDetails = v
-	return s
 }
 
 // Filters to use when listing TagOptions.
@@ -7974,24 +6702,6 @@ func (s *ListTagOptionsFilters) Validate() error {
 	return nil
 }
 
-// SetActive sets the Active field's value.
-func (s *ListTagOptionsFilters) SetActive(v bool) *ListTagOptionsFilters {
-	s.Active = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *ListTagOptionsFilters) SetKey(v string) *ListTagOptionsFilters {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ListTagOptionsFilters) SetValue(v string) *ListTagOptionsFilters {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsInput
 type ListTagOptionsInput struct {
 	_ struct{} `type:"structure"`
@@ -8033,24 +6743,6 @@ func (s *ListTagOptionsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *ListTagOptionsInput) SetFilters(v *ListTagOptionsFilters) *ListTagOptionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ListTagOptionsInput) SetPageSize(v int64) *ListTagOptionsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ListTagOptionsInput) SetPageToken(v string) *ListTagOptionsInput {
-	s.PageToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsOutput
 type ListTagOptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8080,18 +6772,6 @@ func (s ListTagOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPageToken sets the PageToken field's value.
-func (s *ListTagOptionsOutput) SetPageToken(v string) *ListTagOptionsOutput {
-	s.PageToken = &v
-	return s
-}
-
-// SetTagOptionDetails sets the TagOptionDetails field's value.
-func (s *ListTagOptionsOutput) SetTagOptionDetails(v []TagOptionDetail) *ListTagOptionsOutput {
-	s.TagOptionDetails = v
-	return s
-}
-
 // The constraints that the administrator has put on the parameter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ParameterConstraints
 type ParameterConstraints struct {
@@ -8109,12 +6789,6 @@ func (s ParameterConstraints) String() string {
 // GoString returns the string representation
 func (s ParameterConstraints) GoString() string {
 	return s.String()
-}
-
-// SetAllowedValues sets the AllowedValues field's value.
-func (s *ParameterConstraints) SetAllowedValues(v []string) *ParameterConstraints {
-	s.AllowedValues = v
-	return s
 }
 
 // Information about a portfolio.
@@ -8151,42 +6825,6 @@ func (s PortfolioDetail) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *PortfolioDetail) SetARN(v string) *PortfolioDetail {
-	s.ARN = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *PortfolioDetail) SetCreatedTime(v time.Time) *PortfolioDetail {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PortfolioDetail) SetDescription(v string) *PortfolioDetail {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *PortfolioDetail) SetDisplayName(v string) *PortfolioDetail {
-	s.DisplayName = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *PortfolioDetail) SetId(v string) *PortfolioDetail {
-	s.Id = &v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *PortfolioDetail) SetProviderName(v string) *PortfolioDetail {
-	s.ProviderName = &v
-	return s
-}
-
 // Information about a principal.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal
 type Principal struct {
@@ -8207,18 +6845,6 @@ func (s Principal) String() string {
 // GoString returns the string representation
 func (s Principal) GoString() string {
 	return s.String()
-}
-
-// SetPrincipalARN sets the PrincipalARN field's value.
-func (s *Principal) SetPrincipalARN(v string) *Principal {
-	s.PrincipalARN = &v
-	return s
-}
-
-// SetPrincipalType sets the PrincipalType field's value.
-func (s *Principal) SetPrincipalType(v PrincipalType) *Principal {
-	s.PrincipalType = v
-	return s
 }
 
 // A single product view aggregation value/count pair, containing metadata about
@@ -8242,18 +6868,6 @@ func (s ProductViewAggregationValue) String() string {
 // GoString returns the string representation
 func (s ProductViewAggregationValue) GoString() string {
 	return s.String()
-}
-
-// SetApproximateCount sets the ApproximateCount field's value.
-func (s *ProductViewAggregationValue) SetApproximateCount(v int64) *ProductViewAggregationValue {
-	s.ApproximateCount = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ProductViewAggregationValue) SetValue(v string) *ProductViewAggregationValue {
-	s.Value = &v
-	return s
 }
 
 // Information about a product view.
@@ -8289,30 +6903,6 @@ func (s ProductViewDetail) String() string {
 // GoString returns the string representation
 func (s ProductViewDetail) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ProductViewDetail) SetCreatedTime(v time.Time) *ProductViewDetail {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetProductARN sets the ProductARN field's value.
-func (s *ProductViewDetail) SetProductARN(v string) *ProductViewDetail {
-	s.ProductARN = &v
-	return s
-}
-
-// SetProductViewSummary sets the ProductViewSummary field's value.
-func (s *ProductViewDetail) SetProductViewSummary(v *ProductViewSummary) *ProductViewDetail {
-	s.ProductViewSummary = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ProductViewDetail) SetStatus(v Status) *ProductViewDetail {
-	s.Status = v
-	return s
 }
 
 // Summary information about a product view.
@@ -8369,72 +6959,6 @@ func (s ProductViewSummary) String() string {
 // GoString returns the string representation
 func (s ProductViewSummary) GoString() string {
 	return s.String()
-}
-
-// SetDistributor sets the Distributor field's value.
-func (s *ProductViewSummary) SetDistributor(v string) *ProductViewSummary {
-	s.Distributor = &v
-	return s
-}
-
-// SetHasDefaultPath sets the HasDefaultPath field's value.
-func (s *ProductViewSummary) SetHasDefaultPath(v bool) *ProductViewSummary {
-	s.HasDefaultPath = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ProductViewSummary) SetId(v string) *ProductViewSummary {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProductViewSummary) SetName(v string) *ProductViewSummary {
-	s.Name = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ProductViewSummary) SetOwner(v string) *ProductViewSummary {
-	s.Owner = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *ProductViewSummary) SetProductId(v string) *ProductViewSummary {
-	s.ProductId = &v
-	return s
-}
-
-// SetShortDescription sets the ShortDescription field's value.
-func (s *ProductViewSummary) SetShortDescription(v string) *ProductViewSummary {
-	s.ShortDescription = &v
-	return s
-}
-
-// SetSupportDescription sets the SupportDescription field's value.
-func (s *ProductViewSummary) SetSupportDescription(v string) *ProductViewSummary {
-	s.SupportDescription = &v
-	return s
-}
-
-// SetSupportEmail sets the SupportEmail field's value.
-func (s *ProductViewSummary) SetSupportEmail(v string) *ProductViewSummary {
-	s.SupportEmail = &v
-	return s
-}
-
-// SetSupportUrl sets the SupportUrl field's value.
-func (s *ProductViewSummary) SetSupportUrl(v string) *ProductViewSummary {
-	s.SupportUrl = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProductViewSummary) SetType(v ProductType) *ProductViewSummary {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProductInput
@@ -8553,60 +7077,6 @@ func (s *ProvisionProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ProvisionProductInput) SetAcceptLanguage(v string) *ProvisionProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetNotificationArns sets the NotificationArns field's value.
-func (s *ProvisionProductInput) SetNotificationArns(v []string) *ProvisionProductInput {
-	s.NotificationArns = v
-	return s
-}
-
-// SetPathId sets the PathId field's value.
-func (s *ProvisionProductInput) SetPathId(v string) *ProvisionProductInput {
-	s.PathId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *ProvisionProductInput) SetProductId(v string) *ProvisionProductInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisionToken sets the ProvisionToken field's value.
-func (s *ProvisionProductInput) SetProvisionToken(v string) *ProvisionProductInput {
-	s.ProvisionToken = &v
-	return s
-}
-
-// SetProvisionedProductName sets the ProvisionedProductName field's value.
-func (s *ProvisionProductInput) SetProvisionedProductName(v string) *ProvisionProductInput {
-	s.ProvisionedProductName = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *ProvisionProductInput) SetProvisioningArtifactId(v string) *ProvisionProductInput {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
-// SetProvisioningParameters sets the ProvisioningParameters field's value.
-func (s *ProvisionProductInput) SetProvisioningParameters(v []ProvisioningParameter) *ProvisionProductInput {
-	s.ProvisioningParameters = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ProvisionProductInput) SetTags(v []Tag) *ProvisionProductInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProductOutput
 type ProvisionProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -8630,12 +7100,6 @@ func (s ProvisionProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ProvisionProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRecordDetail sets the RecordDetail field's value.
-func (s *ProvisionProductOutput) SetRecordDetail(v *RecordDetail) *ProvisionProductOutput {
-	s.RecordDetail = v
-	return s
 }
 
 // Information about a provisioned product.
@@ -8698,60 +7162,6 @@ func (s ProvisionedProductDetail) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *ProvisionedProductDetail) SetArn(v string) *ProvisionedProductDetail {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ProvisionedProductDetail) SetCreatedTime(v time.Time) *ProvisionedProductDetail {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ProvisionedProductDetail) SetId(v string) *ProvisionedProductDetail {
-	s.Id = &v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *ProvisionedProductDetail) SetIdempotencyToken(v string) *ProvisionedProductDetail {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetLastRecordId sets the LastRecordId field's value.
-func (s *ProvisionedProductDetail) SetLastRecordId(v string) *ProvisionedProductDetail {
-	s.LastRecordId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProvisionedProductDetail) SetName(v string) *ProvisionedProductDetail {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ProvisionedProductDetail) SetStatus(v ProvisionedProductStatus) *ProvisionedProductDetail {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *ProvisionedProductDetail) SetStatusMessage(v string) *ProvisionedProductDetail {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProvisionedProductDetail) SetType(v string) *ProvisionedProductDetail {
-	s.Type = &v
-	return s
-}
-
 // Information about a provisioning artifact. A provisioning artifact is also
 // known as a product version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact
@@ -8779,30 +7189,6 @@ func (s ProvisioningArtifact) String() string {
 // GoString returns the string representation
 func (s ProvisioningArtifact) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ProvisioningArtifact) SetCreatedTime(v time.Time) *ProvisioningArtifact {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ProvisioningArtifact) SetDescription(v string) *ProvisioningArtifact {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ProvisioningArtifact) SetId(v string) *ProvisioningArtifact {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProvisioningArtifact) SetName(v string) *ProvisioningArtifact {
-	s.Name = &v
-	return s
 }
 
 // Information about a provisioning artifact (also known as a version) for a
@@ -8846,42 +7232,6 @@ func (s ProvisioningArtifactDetail) GoString() string {
 	return s.String()
 }
 
-// SetActive sets the Active field's value.
-func (s *ProvisioningArtifactDetail) SetActive(v bool) *ProvisioningArtifactDetail {
-	s.Active = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ProvisioningArtifactDetail) SetCreatedTime(v time.Time) *ProvisioningArtifactDetail {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ProvisioningArtifactDetail) SetDescription(v string) *ProvisioningArtifactDetail {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ProvisioningArtifactDetail) SetId(v string) *ProvisioningArtifactDetail {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProvisioningArtifactDetail) SetName(v string) *ProvisioningArtifactDetail {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProvisioningArtifactDetail) SetType(v ProvisioningArtifactType) *ProvisioningArtifactDetail {
-	s.Type = v
-	return s
-}
-
 // Information about a parameter used to provision a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactParameter
 type ProvisioningArtifactParameter struct {
@@ -8916,42 +7266,6 @@ func (s ProvisioningArtifactParameter) String() string {
 // GoString returns the string representation
 func (s ProvisioningArtifactParameter) GoString() string {
 	return s.String()
-}
-
-// SetDefaultValue sets the DefaultValue field's value.
-func (s *ProvisioningArtifactParameter) SetDefaultValue(v string) *ProvisioningArtifactParameter {
-	s.DefaultValue = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ProvisioningArtifactParameter) SetDescription(v string) *ProvisioningArtifactParameter {
-	s.Description = &v
-	return s
-}
-
-// SetIsNoEcho sets the IsNoEcho field's value.
-func (s *ProvisioningArtifactParameter) SetIsNoEcho(v bool) *ProvisioningArtifactParameter {
-	s.IsNoEcho = &v
-	return s
-}
-
-// SetParameterConstraints sets the ParameterConstraints field's value.
-func (s *ProvisioningArtifactParameter) SetParameterConstraints(v *ParameterConstraints) *ProvisioningArtifactParameter {
-	s.ParameterConstraints = v
-	return s
-}
-
-// SetParameterKey sets the ParameterKey field's value.
-func (s *ProvisioningArtifactParameter) SetParameterKey(v string) *ProvisioningArtifactParameter {
-	s.ParameterKey = &v
-	return s
-}
-
-// SetParameterType sets the ParameterType field's value.
-func (s *ProvisioningArtifactParameter) SetParameterType(v string) *ProvisioningArtifactParameter {
-	s.ParameterType = &v
-	return s
 }
 
 // Information about a provisioning artifact (also known as a version) for a
@@ -9013,30 +7327,6 @@ func (s *ProvisioningArtifactProperties) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *ProvisioningArtifactProperties) SetDescription(v string) *ProvisioningArtifactProperties {
-	s.Description = &v
-	return s
-}
-
-// SetInfo sets the Info field's value.
-func (s *ProvisioningArtifactProperties) SetInfo(v map[string]string) *ProvisioningArtifactProperties {
-	s.Info = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProvisioningArtifactProperties) SetName(v string) *ProvisioningArtifactProperties {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ProvisioningArtifactProperties) SetType(v ProvisioningArtifactType) *ProvisioningArtifactProperties {
-	s.Type = v
-	return s
-}
-
 // Summary information about a provisioning artifact (also known as a version)
 // for a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactSummary
@@ -9068,36 +7358,6 @@ func (s ProvisioningArtifactSummary) String() string {
 // GoString returns the string representation
 func (s ProvisioningArtifactSummary) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ProvisioningArtifactSummary) SetCreatedTime(v time.Time) *ProvisioningArtifactSummary {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ProvisioningArtifactSummary) SetDescription(v string) *ProvisioningArtifactSummary {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ProvisioningArtifactSummary) SetId(v string) *ProvisioningArtifactSummary {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProvisioningArtifactSummary) SetName(v string) *ProvisioningArtifactSummary {
-	s.Name = &v
-	return s
-}
-
-// SetProvisioningArtifactMetadata sets the ProvisioningArtifactMetadata field's value.
-func (s *ProvisioningArtifactSummary) SetProvisioningArtifactMetadata(v map[string]string) *ProvisioningArtifactSummary {
-	s.ProvisioningArtifactMetadata = v
-	return s
 }
 
 // Information about a parameter used to provision a product.
@@ -9133,18 +7393,6 @@ func (s *ProvisioningParameter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *ProvisioningParameter) SetKey(v string) *ProvisioningParameter {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ProvisioningParameter) SetValue(v string) *ProvisioningParameter {
-	s.Value = &v
-	return s
 }
 
 // Information about a request operation.
@@ -9221,84 +7469,6 @@ func (s RecordDetail) GoString() string {
 	return s.String()
 }
 
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *RecordDetail) SetCreatedTime(v time.Time) *RecordDetail {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetPathId sets the PathId field's value.
-func (s *RecordDetail) SetPathId(v string) *RecordDetail {
-	s.PathId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *RecordDetail) SetProductId(v string) *RecordDetail {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisionedProductId sets the ProvisionedProductId field's value.
-func (s *RecordDetail) SetProvisionedProductId(v string) *RecordDetail {
-	s.ProvisionedProductId = &v
-	return s
-}
-
-// SetProvisionedProductName sets the ProvisionedProductName field's value.
-func (s *RecordDetail) SetProvisionedProductName(v string) *RecordDetail {
-	s.ProvisionedProductName = &v
-	return s
-}
-
-// SetProvisionedProductType sets the ProvisionedProductType field's value.
-func (s *RecordDetail) SetProvisionedProductType(v string) *RecordDetail {
-	s.ProvisionedProductType = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *RecordDetail) SetProvisioningArtifactId(v string) *RecordDetail {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
-// SetRecordErrors sets the RecordErrors field's value.
-func (s *RecordDetail) SetRecordErrors(v []RecordError) *RecordDetail {
-	s.RecordErrors = v
-	return s
-}
-
-// SetRecordId sets the RecordId field's value.
-func (s *RecordDetail) SetRecordId(v string) *RecordDetail {
-	s.RecordId = &v
-	return s
-}
-
-// SetRecordTags sets the RecordTags field's value.
-func (s *RecordDetail) SetRecordTags(v []RecordTag) *RecordDetail {
-	s.RecordTags = v
-	return s
-}
-
-// SetRecordType sets the RecordType field's value.
-func (s *RecordDetail) SetRecordType(v string) *RecordDetail {
-	s.RecordType = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *RecordDetail) SetStatus(v RecordStatus) *RecordDetail {
-	s.Status = v
-	return s
-}
-
-// SetUpdatedTime sets the UpdatedTime field's value.
-func (s *RecordDetail) SetUpdatedTime(v time.Time) *RecordDetail {
-	s.UpdatedTime = &v
-	return s
-}
-
 // The error code and description resulting from an operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordError
 type RecordError struct {
@@ -9319,18 +7489,6 @@ func (s RecordError) String() string {
 // GoString returns the string representation
 func (s RecordError) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *RecordError) SetCode(v string) *RecordError {
-	s.Code = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RecordError) SetDescription(v string) *RecordError {
-	s.Description = &v
-	return s
 }
 
 // The output for the product created as the result of a request. For example,
@@ -9360,24 +7518,6 @@ func (s RecordOutput) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *RecordOutput) SetDescription(v string) *RecordOutput {
-	s.Description = &v
-	return s
-}
-
-// SetOutputKey sets the OutputKey field's value.
-func (s *RecordOutput) SetOutputKey(v string) *RecordOutput {
-	s.OutputKey = &v
-	return s
-}
-
-// SetOutputValue sets the OutputValue field's value.
-func (s *RecordOutput) SetOutputValue(v string) *RecordOutput {
-	s.OutputValue = &v
-	return s
-}
-
 // A tag associated with the record, stored as a key-value pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordTag
 type RecordTag struct {
@@ -9398,18 +7538,6 @@ func (s RecordTag) String() string {
 // GoString returns the string representation
 func (s RecordTag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *RecordTag) SetKey(v string) *RecordTag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *RecordTag) SetValue(v string) *RecordTag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareInput
@@ -9456,18 +7584,6 @@ func (s *RejectPortfolioShareInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *RejectPortfolioShareInput) SetAcceptLanguage(v string) *RejectPortfolioShareInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *RejectPortfolioShareInput) SetPortfolioId(v string) *RejectPortfolioShareInput {
-	s.PortfolioId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareOutput
@@ -9523,36 +7639,6 @@ func (s ResourceDetail) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *ResourceDetail) SetARN(v string) *ResourceDetail {
-	s.ARN = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ResourceDetail) SetCreatedTime(v time.Time) *ResourceDetail {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ResourceDetail) SetDescription(v string) *ResourceDetail {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ResourceDetail) SetId(v string) *ResourceDetail {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ResourceDetail) SetName(v string) *ResourceDetail {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProductsInput
 type ScanProvisionedProductsInput struct {
 	_ struct{} `type:"structure"`
@@ -9587,30 +7673,6 @@ func (s ScanProvisionedProductsInput) GoString() string {
 	return s.String()
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *ScanProvisionedProductsInput) SetAcceptLanguage(v string) *ScanProvisionedProductsInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetAccessLevelFilter sets the AccessLevelFilter field's value.
-func (s *ScanProvisionedProductsInput) SetAccessLevelFilter(v *AccessLevelFilter) *ScanProvisionedProductsInput {
-	s.AccessLevelFilter = v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *ScanProvisionedProductsInput) SetPageSize(v int64) *ScanProvisionedProductsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *ScanProvisionedProductsInput) SetPageToken(v string) *ScanProvisionedProductsInput {
-	s.PageToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProductsOutput
 type ScanProvisionedProductsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9638,18 +7700,6 @@ func (s ScanProvisionedProductsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ScanProvisionedProductsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ScanProvisionedProductsOutput) SetNextPageToken(v string) *ScanProvisionedProductsOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetProvisionedProducts sets the ProvisionedProducts field's value.
-func (s *ScanProvisionedProductsOutput) SetProvisionedProducts(v []ProvisionedProductDetail) *ScanProvisionedProductsOutput {
-	s.ProvisionedProducts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdminInput
@@ -9712,54 +7762,6 @@ func (s *SearchProductsAsAdminInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *SearchProductsAsAdminInput) SetAcceptLanguage(v string) *SearchProductsAsAdminInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *SearchProductsAsAdminInput) SetFilters(v map[string][]string) *SearchProductsAsAdminInput {
-	s.Filters = v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *SearchProductsAsAdminInput) SetPageSize(v int64) *SearchProductsAsAdminInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *SearchProductsAsAdminInput) SetPageToken(v string) *SearchProductsAsAdminInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetPortfolioId sets the PortfolioId field's value.
-func (s *SearchProductsAsAdminInput) SetPortfolioId(v string) *SearchProductsAsAdminInput {
-	s.PortfolioId = &v
-	return s
-}
-
-// SetProductSource sets the ProductSource field's value.
-func (s *SearchProductsAsAdminInput) SetProductSource(v ProductSource) *SearchProductsAsAdminInput {
-	s.ProductSource = v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *SearchProductsAsAdminInput) SetSortBy(v ProductViewSortBy) *SearchProductsAsAdminInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *SearchProductsAsAdminInput) SetSortOrder(v SortOrder) *SearchProductsAsAdminInput {
-	s.SortOrder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdminOutput
 type SearchProductsAsAdminOutput struct {
 	_ struct{} `type:"structure"`
@@ -9787,18 +7789,6 @@ func (s SearchProductsAsAdminOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchProductsAsAdminOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *SearchProductsAsAdminOutput) SetNextPageToken(v string) *SearchProductsAsAdminOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetProductViewDetails sets the ProductViewDetails field's value.
-func (s *SearchProductsAsAdminOutput) SetProductViewDetails(v []ProductViewDetail) *SearchProductsAsAdminOutput {
-	s.ProductViewDetails = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsInput
@@ -9842,42 +7832,6 @@ func (s SearchProductsInput) GoString() string {
 	return s.String()
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *SearchProductsInput) SetAcceptLanguage(v string) *SearchProductsInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *SearchProductsInput) SetFilters(v map[string][]string) *SearchProductsInput {
-	s.Filters = v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *SearchProductsInput) SetPageSize(v int64) *SearchProductsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetPageToken sets the PageToken field's value.
-func (s *SearchProductsInput) SetPageToken(v string) *SearchProductsInput {
-	s.PageToken = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *SearchProductsInput) SetSortBy(v ProductViewSortBy) *SearchProductsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *SearchProductsInput) SetSortOrder(v SortOrder) *SearchProductsInput {
-	s.SortOrder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsOutput
 type SearchProductsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9908,24 +7862,6 @@ func (s SearchProductsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchProductsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *SearchProductsOutput) SetNextPageToken(v string) *SearchProductsOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetProductViewAggregations sets the ProductViewAggregations field's value.
-func (s *SearchProductsOutput) SetProductViewAggregations(v map[string][]ProductViewAggregationValue) *SearchProductsOutput {
-	s.ProductViewAggregations = v
-	return s
-}
-
-// SetProductViewSummaries sets the ProductViewSummaries field's value.
-func (s *SearchProductsOutput) SetProductViewSummaries(v []ProductViewSummary) *SearchProductsOutput {
-	s.ProductViewSummaries = v
-	return s
 }
 
 // Information about a tag. A tag is a key-value pair. Tags are entirely discretionary
@@ -9979,18 +7915,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // Information about a TagOption.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail
 type TagOptionDetail struct {
@@ -10019,30 +7943,6 @@ func (s TagOptionDetail) GoString() string {
 	return s.String()
 }
 
-// SetActive sets the Active field's value.
-func (s *TagOptionDetail) SetActive(v bool) *TagOptionDetail {
-	s.Active = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TagOptionDetail) SetId(v string) *TagOptionDetail {
-	s.Id = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *TagOptionDetail) SetKey(v string) *TagOptionDetail {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *TagOptionDetail) SetValue(v string) *TagOptionDetail {
-	s.Value = &v
-	return s
-}
-
 // Summary information about a TagOption.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionSummary
 type TagOptionSummary struct {
@@ -10063,18 +7963,6 @@ func (s TagOptionSummary) String() string {
 // GoString returns the string representation
 func (s TagOptionSummary) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *TagOptionSummary) SetKey(v string) *TagOptionSummary {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *TagOptionSummary) SetValues(v []string) *TagOptionSummary {
-	s.Values = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductInput
@@ -10144,36 +8032,6 @@ func (s *TerminateProvisionedProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *TerminateProvisionedProductInput) SetAcceptLanguage(v string) *TerminateProvisionedProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetIgnoreErrors sets the IgnoreErrors field's value.
-func (s *TerminateProvisionedProductInput) SetIgnoreErrors(v bool) *TerminateProvisionedProductInput {
-	s.IgnoreErrors = &v
-	return s
-}
-
-// SetProvisionedProductId sets the ProvisionedProductId field's value.
-func (s *TerminateProvisionedProductInput) SetProvisionedProductId(v string) *TerminateProvisionedProductInput {
-	s.ProvisionedProductId = &v
-	return s
-}
-
-// SetProvisionedProductName sets the ProvisionedProductName field's value.
-func (s *TerminateProvisionedProductInput) SetProvisionedProductName(v string) *TerminateProvisionedProductInput {
-	s.ProvisionedProductName = &v
-	return s
-}
-
-// SetTerminateToken sets the TerminateToken field's value.
-func (s *TerminateProvisionedProductInput) SetTerminateToken(v string) *TerminateProvisionedProductInput {
-	s.TerminateToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductOutput
 type TerminateProvisionedProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -10197,12 +8055,6 @@ func (s TerminateProvisionedProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TerminateProvisionedProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRecordDetail sets the RecordDetail field's value.
-func (s *TerminateProvisionedProductOutput) SetRecordDetail(v *RecordDetail) *TerminateProvisionedProductOutput {
-	s.RecordDetail = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintInput
@@ -10254,24 +8106,6 @@ func (s *UpdateConstraintInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *UpdateConstraintInput) SetAcceptLanguage(v string) *UpdateConstraintInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateConstraintInput) SetDescription(v string) *UpdateConstraintInput {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateConstraintInput) SetId(v string) *UpdateConstraintInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintOutput
 type UpdateConstraintOutput struct {
 	_ struct{} `type:"structure"`
@@ -10301,24 +8135,6 @@ func (s UpdateConstraintOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateConstraintOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConstraintDetail sets the ConstraintDetail field's value.
-func (s *UpdateConstraintOutput) SetConstraintDetail(v *ConstraintDetail) *UpdateConstraintOutput {
-	s.ConstraintDetail = v
-	return s
-}
-
-// SetConstraintParameters sets the ConstraintParameters field's value.
-func (s *UpdateConstraintOutput) SetConstraintParameters(v string) *UpdateConstraintOutput {
-	s.ConstraintParameters = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateConstraintOutput) SetStatus(v Status) *UpdateConstraintOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioInput
@@ -10395,48 +8211,6 @@ func (s *UpdatePortfolioInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *UpdatePortfolioInput) SetAcceptLanguage(v string) *UpdatePortfolioInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetAddTags sets the AddTags field's value.
-func (s *UpdatePortfolioInput) SetAddTags(v []Tag) *UpdatePortfolioInput {
-	s.AddTags = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdatePortfolioInput) SetDescription(v string) *UpdatePortfolioInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *UpdatePortfolioInput) SetDisplayName(v string) *UpdatePortfolioInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdatePortfolioInput) SetId(v string) *UpdatePortfolioInput {
-	s.Id = &v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *UpdatePortfolioInput) SetProviderName(v string) *UpdatePortfolioInput {
-	s.ProviderName = &v
-	return s
-}
-
-// SetRemoveTags sets the RemoveTags field's value.
-func (s *UpdatePortfolioInput) SetRemoveTags(v []string) *UpdatePortfolioInput {
-	s.RemoveTags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioOutput
 type UpdatePortfolioOutput struct {
 	_ struct{} `type:"structure"`
@@ -10463,18 +8237,6 @@ func (s UpdatePortfolioOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePortfolioOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPortfolioDetail sets the PortfolioDetail field's value.
-func (s *UpdatePortfolioOutput) SetPortfolioDetail(v *PortfolioDetail) *UpdatePortfolioOutput {
-	s.PortfolioDetail = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *UpdatePortfolioOutput) SetTags(v []Tag) *UpdatePortfolioOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductInput
@@ -10557,72 +8319,6 @@ func (s *UpdateProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *UpdateProductInput) SetAcceptLanguage(v string) *UpdateProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetAddTags sets the AddTags field's value.
-func (s *UpdateProductInput) SetAddTags(v []Tag) *UpdateProductInput {
-	s.AddTags = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateProductInput) SetDescription(v string) *UpdateProductInput {
-	s.Description = &v
-	return s
-}
-
-// SetDistributor sets the Distributor field's value.
-func (s *UpdateProductInput) SetDistributor(v string) *UpdateProductInput {
-	s.Distributor = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateProductInput) SetId(v string) *UpdateProductInput {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateProductInput) SetName(v string) *UpdateProductInput {
-	s.Name = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *UpdateProductInput) SetOwner(v string) *UpdateProductInput {
-	s.Owner = &v
-	return s
-}
-
-// SetRemoveTags sets the RemoveTags field's value.
-func (s *UpdateProductInput) SetRemoveTags(v []string) *UpdateProductInput {
-	s.RemoveTags = v
-	return s
-}
-
-// SetSupportDescription sets the SupportDescription field's value.
-func (s *UpdateProductInput) SetSupportDescription(v string) *UpdateProductInput {
-	s.SupportDescription = &v
-	return s
-}
-
-// SetSupportEmail sets the SupportEmail field's value.
-func (s *UpdateProductInput) SetSupportEmail(v string) *UpdateProductInput {
-	s.SupportEmail = &v
-	return s
-}
-
-// SetSupportUrl sets the SupportUrl field's value.
-func (s *UpdateProductInput) SetSupportUrl(v string) *UpdateProductInput {
-	s.SupportUrl = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductOutput
 type UpdateProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -10649,18 +8345,6 @@ func (s UpdateProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProductViewDetail sets the ProductViewDetail field's value.
-func (s *UpdateProductOutput) SetProductViewDetail(v *ProductViewDetail) *UpdateProductOutput {
-	s.ProductViewDetail = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *UpdateProductOutput) SetTags(v []Tag) *UpdateProductOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductInput
@@ -10752,54 +8436,6 @@ func (s *UpdateProvisionedProductInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *UpdateProvisionedProductInput) SetAcceptLanguage(v string) *UpdateProvisionedProductInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetPathId sets the PathId field's value.
-func (s *UpdateProvisionedProductInput) SetPathId(v string) *UpdateProvisionedProductInput {
-	s.PathId = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *UpdateProvisionedProductInput) SetProductId(v string) *UpdateProvisionedProductInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisionedProductId sets the ProvisionedProductId field's value.
-func (s *UpdateProvisionedProductInput) SetProvisionedProductId(v string) *UpdateProvisionedProductInput {
-	s.ProvisionedProductId = &v
-	return s
-}
-
-// SetProvisionedProductName sets the ProvisionedProductName field's value.
-func (s *UpdateProvisionedProductInput) SetProvisionedProductName(v string) *UpdateProvisionedProductInput {
-	s.ProvisionedProductName = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *UpdateProvisionedProductInput) SetProvisioningArtifactId(v string) *UpdateProvisionedProductInput {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
-// SetProvisioningParameters sets the ProvisioningParameters field's value.
-func (s *UpdateProvisionedProductInput) SetProvisioningParameters(v []UpdateProvisioningParameter) *UpdateProvisionedProductInput {
-	s.ProvisioningParameters = v
-	return s
-}
-
-// SetUpdateToken sets the UpdateToken field's value.
-func (s *UpdateProvisionedProductInput) SetUpdateToken(v string) *UpdateProvisionedProductInput {
-	s.UpdateToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductOutput
 type UpdateProvisionedProductOutput struct {
 	_ struct{} `type:"structure"`
@@ -10823,12 +8459,6 @@ func (s UpdateProvisionedProductOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateProvisionedProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRecordDetail sets the RecordDetail field's value.
-func (s *UpdateProvisionedProductOutput) SetRecordDetail(v *RecordDetail) *UpdateProvisionedProductOutput {
-	s.RecordDetail = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput
@@ -10898,42 +8528,6 @@ func (s *UpdateProvisioningArtifactInput) Validate() error {
 	return nil
 }
 
-// SetAcceptLanguage sets the AcceptLanguage field's value.
-func (s *UpdateProvisioningArtifactInput) SetAcceptLanguage(v string) *UpdateProvisioningArtifactInput {
-	s.AcceptLanguage = &v
-	return s
-}
-
-// SetActive sets the Active field's value.
-func (s *UpdateProvisioningArtifactInput) SetActive(v bool) *UpdateProvisioningArtifactInput {
-	s.Active = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateProvisioningArtifactInput) SetDescription(v string) *UpdateProvisioningArtifactInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateProvisioningArtifactInput) SetName(v string) *UpdateProvisioningArtifactInput {
-	s.Name = &v
-	return s
-}
-
-// SetProductId sets the ProductId field's value.
-func (s *UpdateProvisioningArtifactInput) SetProductId(v string) *UpdateProvisioningArtifactInput {
-	s.ProductId = &v
-	return s
-}
-
-// SetProvisioningArtifactId sets the ProvisioningArtifactId field's value.
-func (s *UpdateProvisioningArtifactInput) SetProvisioningArtifactId(v string) *UpdateProvisioningArtifactInput {
-	s.ProvisioningArtifactId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactOutput
 type UpdateProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
@@ -10963,24 +8557,6 @@ func (s UpdateProvisioningArtifactOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInfo sets the Info field's value.
-func (s *UpdateProvisioningArtifactOutput) SetInfo(v map[string]string) *UpdateProvisioningArtifactOutput {
-	s.Info = v
-	return s
-}
-
-// SetProvisioningArtifactDetail sets the ProvisioningArtifactDetail field's value.
-func (s *UpdateProvisioningArtifactOutput) SetProvisioningArtifactDetail(v *ProvisioningArtifactDetail) *UpdateProvisioningArtifactOutput {
-	s.ProvisioningArtifactDetail = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateProvisioningArtifactOutput) SetStatus(v Status) *UpdateProvisioningArtifactOutput {
-	s.Status = v
-	return s
 }
 
 // The parameter key-value pair used to update a provisioned product.
@@ -11019,24 +8595,6 @@ func (s *UpdateProvisioningParameter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *UpdateProvisioningParameter) SetKey(v string) *UpdateProvisioningParameter {
-	s.Key = &v
-	return s
-}
-
-// SetUsePreviousValue sets the UsePreviousValue field's value.
-func (s *UpdateProvisioningParameter) SetUsePreviousValue(v bool) *UpdateProvisioningParameter {
-	s.UsePreviousValue = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *UpdateProvisioningParameter) SetValue(v string) *UpdateProvisioningParameter {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOptionInput
@@ -11085,24 +8643,6 @@ func (s *UpdateTagOptionInput) Validate() error {
 	return nil
 }
 
-// SetActive sets the Active field's value.
-func (s *UpdateTagOptionInput) SetActive(v bool) *UpdateTagOptionInput {
-	s.Active = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateTagOptionInput) SetId(v string) *UpdateTagOptionInput {
-	s.Id = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *UpdateTagOptionInput) SetValue(v string) *UpdateTagOptionInput {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOptionOutput
 type UpdateTagOptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -11128,12 +8668,6 @@ func (s UpdateTagOptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTagOptionDetail sets the TagOptionDetail field's value.
-func (s *UpdateTagOptionOutput) SetTagOptionDetail(v *TagOptionDetail) *UpdateTagOptionOutput {
-	s.TagOptionDetail = v
-	return s
-}
-
 // Additional information provided by the administrator.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UsageInstruction
 type UsageInstruction struct {
@@ -11154,18 +8688,6 @@ func (s UsageInstruction) String() string {
 // GoString returns the string representation
 func (s UsageInstruction) GoString() string {
 	return s.String()
-}
-
-// SetType sets the Type field's value.
-func (s *UsageInstruction) SetType(v string) *UsageInstruction {
-	s.Type = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *UsageInstruction) SetValue(v string) *UsageInstruction {
-	s.Value = &v
-	return s
 }
 
 type AccessLevelFilterKey string

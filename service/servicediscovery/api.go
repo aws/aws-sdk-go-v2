@@ -1235,30 +1235,6 @@ func (s *CreatePrivateDnsNamespaceInput) Validate() error {
 	return nil
 }
 
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *CreatePrivateDnsNamespaceInput) SetCreatorRequestId(v string) *CreatePrivateDnsNamespaceInput {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreatePrivateDnsNamespaceInput) SetDescription(v string) *CreatePrivateDnsNamespaceInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreatePrivateDnsNamespaceInput) SetName(v string) *CreatePrivateDnsNamespaceInput {
-	s.Name = &v
-	return s
-}
-
-// SetVpc sets the Vpc field's value.
-func (s *CreatePrivateDnsNamespaceInput) SetVpc(v string) *CreatePrivateDnsNamespaceInput {
-	s.Vpc = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespaceResponse
 type CreatePrivateDnsNamespaceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1283,12 +1259,6 @@ func (s CreatePrivateDnsNamespaceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePrivateDnsNamespaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *CreatePrivateDnsNamespaceOutput) SetOperationId(v string) *CreatePrivateDnsNamespaceOutput {
-	s.OperationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespaceRequest
@@ -1332,24 +1302,6 @@ func (s *CreatePublicDnsNamespaceInput) Validate() error {
 	return nil
 }
 
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *CreatePublicDnsNamespaceInput) SetCreatorRequestId(v string) *CreatePublicDnsNamespaceInput {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreatePublicDnsNamespaceInput) SetDescription(v string) *CreatePublicDnsNamespaceInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreatePublicDnsNamespaceInput) SetName(v string) *CreatePublicDnsNamespaceInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespaceResponse
 type CreatePublicDnsNamespaceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1374,12 +1326,6 @@ func (s CreatePublicDnsNamespaceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePublicDnsNamespaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *CreatePublicDnsNamespaceOutput) SetOperationId(v string) *CreatePublicDnsNamespaceOutput {
-	s.OperationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateServiceRequest
@@ -1462,36 +1408,6 @@ func (s *CreateServiceInput) Validate() error {
 	return nil
 }
 
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *CreateServiceInput) SetCreatorRequestId(v string) *CreateServiceInput {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateServiceInput) SetDescription(v string) *CreateServiceInput {
-	s.Description = &v
-	return s
-}
-
-// SetDnsConfig sets the DnsConfig field's value.
-func (s *CreateServiceInput) SetDnsConfig(v *DnsConfig) *CreateServiceInput {
-	s.DnsConfig = v
-	return s
-}
-
-// SetHealthCheckConfig sets the HealthCheckConfig field's value.
-func (s *CreateServiceInput) SetHealthCheckConfig(v *HealthCheckConfig) *CreateServiceInput {
-	s.HealthCheckConfig = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateServiceInput) SetName(v string) *CreateServiceInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateServiceResponse
 type CreateServiceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1515,12 +1431,6 @@ func (s CreateServiceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateServiceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetService sets the Service field's value.
-func (s *CreateServiceOutput) SetService(v *Service) *CreateServiceOutput {
-	s.Service = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteNamespaceRequest
@@ -1557,12 +1467,6 @@ func (s *DeleteNamespaceInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteNamespaceInput) SetId(v string) *DeleteNamespaceInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteNamespaceResponse
 type DeleteNamespaceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1587,12 +1491,6 @@ func (s DeleteNamespaceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteNamespaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *DeleteNamespaceOutput) SetOperationId(v string) *DeleteNamespaceOutput {
-	s.OperationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteServiceRequest
@@ -1627,12 +1525,6 @@ func (s *DeleteServiceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteServiceInput) SetId(v string) *DeleteServiceInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteServiceResponse
@@ -1700,18 +1592,6 @@ func (s *DeregisterInstanceInput) Validate() error {
 	return nil
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *DeregisterInstanceInput) SetInstanceId(v string) *DeregisterInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *DeregisterInstanceInput) SetServiceId(v string) *DeregisterInstanceInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstanceResponse
 type DeregisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1736,12 +1616,6 @@ func (s DeregisterInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeregisterInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *DeregisterInstanceOutput) SetOperationId(v string) *DeregisterInstanceOutput {
-	s.OperationId = &v
-	return s
 }
 
 // A complex type that contains information about the resource record sets that
@@ -1797,18 +1671,6 @@ func (s *DnsConfig) Validate() error {
 	return nil
 }
 
-// SetDnsRecords sets the DnsRecords field's value.
-func (s *DnsConfig) SetDnsRecords(v []DnsRecord) *DnsConfig {
-	s.DnsRecords = v
-	return s
-}
-
-// SetNamespaceId sets the NamespaceId field's value.
-func (s *DnsConfig) SetNamespaceId(v string) *DnsConfig {
-	s.NamespaceId = &v
-	return s
-}
-
 // A complex type that contains information about changes to the resource record
 // sets that Amazon Route 53 creates when you register an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsConfigChange
@@ -1853,12 +1715,6 @@ func (s *DnsConfigChange) Validate() error {
 	return nil
 }
 
-// SetDnsRecords sets the DnsRecords field's value.
-func (s *DnsConfigChange) SetDnsRecords(v []DnsRecord) *DnsConfigChange {
-	s.DnsRecords = v
-	return s
-}
-
 // A complex type that contains the ID for the hosted zone that Amazon Route
 // 53 creates when you create a namespace.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsProperties
@@ -1878,12 +1734,6 @@ func (s DnsProperties) String() string {
 // GoString returns the string representation
 func (s DnsProperties) GoString() string {
 	return s.String()
-}
-
-// SetHostedZoneId sets the HostedZoneId field's value.
-func (s *DnsProperties) SetHostedZoneId(v string) *DnsProperties {
-	s.HostedZoneId = &v
-	return s
 }
 
 // A complex type that contains information about the resource record sets that
@@ -1947,18 +1797,6 @@ func (s *DnsRecord) Validate() error {
 	return nil
 }
 
-// SetTTL sets the TTL field's value.
-func (s *DnsRecord) SetTTL(v int64) *DnsRecord {
-	s.TTL = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DnsRecord) SetType(v RecordType) *DnsRecord {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstanceRequest
 type GetInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -2002,18 +1840,6 @@ func (s *GetInstanceInput) Validate() error {
 	return nil
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetInstanceInput) SetInstanceId(v string) *GetInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *GetInstanceInput) SetServiceId(v string) *GetInstanceInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstanceResponse
 type GetInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2037,12 +1863,6 @@ func (s GetInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstance sets the Instance field's value.
-func (s *GetInstanceOutput) SetInstance(v *Instance) *GetInstanceOutput {
-	s.Instance = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstancesHealthStatusRequest
@@ -2105,30 +1925,6 @@ func (s *GetInstancesHealthStatusInput) Validate() error {
 	return nil
 }
 
-// SetInstances sets the Instances field's value.
-func (s *GetInstancesHealthStatusInput) SetInstances(v []string) *GetInstancesHealthStatusInput {
-	s.Instances = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetInstancesHealthStatusInput) SetMaxResults(v int64) *GetInstancesHealthStatusInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetInstancesHealthStatusInput) SetNextToken(v string) *GetInstancesHealthStatusInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *GetInstancesHealthStatusInput) SetServiceId(v string) *GetInstancesHealthStatusInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstancesHealthStatusResponse
 type GetInstancesHealthStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -2158,18 +1954,6 @@ func (s GetInstancesHealthStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetInstancesHealthStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetInstancesHealthStatusOutput) SetNextToken(v string) *GetInstancesHealthStatusOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetInstancesHealthStatusOutput) SetStatus(v map[string]HealthStatus) *GetInstancesHealthStatusOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetNamespaceRequest
@@ -2206,12 +1990,6 @@ func (s *GetNamespaceInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetNamespaceInput) SetId(v string) *GetNamespaceInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetNamespaceResponse
 type GetNamespaceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2235,12 +2013,6 @@ func (s GetNamespaceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetNamespaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNamespace sets the Namespace field's value.
-func (s *GetNamespaceOutput) SetNamespace(v *Namespace) *GetNamespaceOutput {
-	s.Namespace = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetOperationRequest
@@ -2277,12 +2049,6 @@ func (s *GetOperationInput) Validate() error {
 	return nil
 }
 
-// SetOperationId sets the OperationId field's value.
-func (s *GetOperationInput) SetOperationId(v string) *GetOperationInput {
-	s.OperationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetOperationResponse
 type GetOperationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2306,12 +2072,6 @@ func (s GetOperationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetOperationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperation sets the Operation field's value.
-func (s *GetOperationOutput) SetOperation(v *Operation) *GetOperationOutput {
-	s.Operation = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetServiceRequest
@@ -2348,12 +2108,6 @@ func (s *GetServiceInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetServiceInput) SetId(v string) *GetServiceInput {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetServiceResponse
 type GetServiceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2377,12 +2131,6 @@ func (s GetServiceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetServiceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetService sets the Service field's value.
-func (s *GetServiceOutput) SetService(v *Service) *GetServiceOutput {
-	s.Service = v
-	return s
 }
 
 // Public DNS namespaces only. A complex type that contains settings for an
@@ -2469,24 +2217,6 @@ func (s *HealthCheckConfig) Validate() error {
 	return nil
 }
 
-// SetFailureThreshold sets the FailureThreshold field's value.
-func (s *HealthCheckConfig) SetFailureThreshold(v int64) *HealthCheckConfig {
-	s.FailureThreshold = &v
-	return s
-}
-
-// SetResourcePath sets the ResourcePath field's value.
-func (s *HealthCheckConfig) SetResourcePath(v string) *HealthCheckConfig {
-	s.ResourcePath = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *HealthCheckConfig) SetType(v HealthCheckType) *HealthCheckConfig {
-	s.Type = v
-	return s
-}
-
 // A complex type that contains information about an instance that Amazon Route
 // 53 creates when you submit a RegisterInstance request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Instance
@@ -2539,24 +2269,6 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *Instance) SetAttributes(v map[string]string) *Instance {
-	s.Attributes = v
-	return s
-}
-
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *Instance) SetCreatorRequestId(v string) *Instance {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Instance) SetId(v string) *Instance {
-	s.Id = &v
-	return s
-}
-
 // A complex type that contains information about the instances that you created
 // by using a specified service.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/InstanceSummary
@@ -2588,18 +2300,6 @@ func (s InstanceSummary) String() string {
 // GoString returns the string representation
 func (s InstanceSummary) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *InstanceSummary) SetAttributes(v map[string]string) *InstanceSummary {
-	s.Attributes = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *InstanceSummary) SetId(v string) *InstanceSummary {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListInstancesRequest
@@ -2651,24 +2351,6 @@ func (s *ListInstancesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListInstancesInput) SetMaxResults(v int64) *ListInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInstancesInput) SetNextToken(v string) *ListInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *ListInstancesInput) SetServiceId(v string) *ListInstancesInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListInstancesResponse
 type ListInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2698,18 +2380,6 @@ func (s ListInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstances sets the Instances field's value.
-func (s *ListInstancesOutput) SetInstances(v []InstanceSummary) *ListInstancesOutput {
-	s.Instances = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInstancesOutput) SetNextToken(v string) *ListInstancesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListNamespacesRequest
@@ -2766,24 +2436,6 @@ func (s *ListNamespacesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *ListNamespacesInput) SetFilters(v []NamespaceFilter) *ListNamespacesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListNamespacesInput) SetMaxResults(v int64) *ListNamespacesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNamespacesInput) SetNextToken(v string) *ListNamespacesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListNamespacesResponse
 type ListNamespacesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2813,18 +2465,6 @@ func (s ListNamespacesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListNamespacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNamespaces sets the Namespaces field's value.
-func (s *ListNamespacesOutput) SetNamespaces(v []NamespaceSummary) *ListNamespacesOutput {
-	s.Namespaces = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNamespacesOutput) SetNextToken(v string) *ListNamespacesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListOperationsRequest
@@ -2882,24 +2522,6 @@ func (s *ListOperationsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *ListOperationsInput) SetFilters(v []OperationFilter) *ListOperationsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListOperationsInput) SetMaxResults(v int64) *ListOperationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOperationsInput) SetNextToken(v string) *ListOperationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListOperationsResponse
 type ListOperationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2928,18 +2550,6 @@ func (s ListOperationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOperationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOperationsOutput) SetNextToken(v string) *ListOperationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOperations sets the Operations field's value.
-func (s *ListOperationsOutput) SetOperations(v []OperationSummary) *ListOperationsOutput {
-	s.Operations = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListServicesRequest
@@ -2996,24 +2606,6 @@ func (s *ListServicesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *ListServicesInput) SetFilters(v []ServiceFilter) *ListServicesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListServicesInput) SetMaxResults(v int64) *ListServicesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListServicesInput) SetNextToken(v string) *ListServicesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListServicesResponse
 type ListServicesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3044,18 +2636,6 @@ func (s ListServicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListServicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListServicesOutput) SetNextToken(v string) *ListServicesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServices sets the Services field's value.
-func (s *ListServicesOutput) SetServices(v []ServiceSummary) *ListServicesOutput {
-	s.Services = v
-	return s
 }
 
 // A complex type that contains information about a specified namespace.
@@ -3103,60 +2683,6 @@ func (s Namespace) String() string {
 // GoString returns the string representation
 func (s Namespace) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Namespace) SetArn(v string) *Namespace {
-	s.Arn = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *Namespace) SetCreateDate(v time.Time) *Namespace {
-	s.CreateDate = &v
-	return s
-}
-
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *Namespace) SetCreatorRequestId(v string) *Namespace {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Namespace) SetDescription(v string) *Namespace {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Namespace) SetId(v string) *Namespace {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Namespace) SetName(v string) *Namespace {
-	s.Name = &v
-	return s
-}
-
-// SetProperties sets the Properties field's value.
-func (s *Namespace) SetProperties(v *NamespaceProperties) *Namespace {
-	s.Properties = v
-	return s
-}
-
-// SetServiceCount sets the ServiceCount field's value.
-func (s *Namespace) SetServiceCount(v int64) *Namespace {
-	s.ServiceCount = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Namespace) SetType(v NamespaceType) *Namespace {
-	s.Type = v
-	return s
 }
 
 // A complex type that identifies the namespaces that you want to list. You
@@ -3217,24 +2743,6 @@ func (s *NamespaceFilter) Validate() error {
 	return nil
 }
 
-// SetCondition sets the Condition field's value.
-func (s *NamespaceFilter) SetCondition(v FilterCondition) *NamespaceFilter {
-	s.Condition = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *NamespaceFilter) SetName(v NamespaceFilterName) *NamespaceFilter {
-	s.Name = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *NamespaceFilter) SetValues(v []string) *NamespaceFilter {
-	s.Values = v
-	return s
-}
-
 // A complex type that contains information that is specific to the namespace
 // type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceProperties
@@ -3254,12 +2762,6 @@ func (s NamespaceProperties) String() string {
 // GoString returns the string representation
 func (s NamespaceProperties) GoString() string {
 	return s.String()
-}
-
-// SetDnsProperties sets the DnsProperties field's value.
-func (s *NamespaceProperties) SetDnsProperties(v *DnsProperties) *NamespaceProperties {
-	s.DnsProperties = v
-	return s
 }
 
 // A complex type that contains information about a namespace.
@@ -3290,30 +2792,6 @@ func (s NamespaceSummary) String() string {
 // GoString returns the string representation
 func (s NamespaceSummary) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *NamespaceSummary) SetArn(v string) *NamespaceSummary {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *NamespaceSummary) SetId(v string) *NamespaceSummary {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *NamespaceSummary) SetName(v string) *NamespaceSummary {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *NamespaceSummary) SetType(v NamespaceType) *NamespaceSummary {
-	s.Type = v
-	return s
 }
 
 // A complex type that contains information about a specified operation.
@@ -3371,54 +2849,6 @@ func (s Operation) String() string {
 // GoString returns the string representation
 func (s Operation) GoString() string {
 	return s.String()
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *Operation) SetCreateDate(v time.Time) *Operation {
-	s.CreateDate = &v
-	return s
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *Operation) SetErrorCode(v string) *Operation {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *Operation) SetErrorMessage(v string) *Operation {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Operation) SetId(v string) *Operation {
-	s.Id = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Operation) SetStatus(v OperationStatus) *Operation {
-	s.Status = v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *Operation) SetTargets(v map[string]string) *Operation {
-	s.Targets = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Operation) SetType(v OperationType) *Operation {
-	s.Type = v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *Operation) SetUpdateDate(v time.Time) *Operation {
-	s.UpdateDate = &v
-	return s
 }
 
 // A complex type that lets you select the operations that you want to list.
@@ -3505,24 +2935,6 @@ func (s *OperationFilter) Validate() error {
 	return nil
 }
 
-// SetCondition sets the Condition field's value.
-func (s *OperationFilter) SetCondition(v FilterCondition) *OperationFilter {
-	s.Condition = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *OperationFilter) SetName(v OperationFilterName) *OperationFilter {
-	s.Name = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *OperationFilter) SetValues(v []string) *OperationFilter {
-	s.Values = v
-	return s
-}
-
 // A complex type that contains information about an operation that matches
 // the criteria that you specified in a ListOperations request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/OperationSummary
@@ -3553,18 +2965,6 @@ func (s OperationSummary) String() string {
 // GoString returns the string representation
 func (s OperationSummary) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *OperationSummary) SetId(v string) *OperationSummary {
-	s.Id = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *OperationSummary) SetStatus(v OperationStatus) *OperationSummary {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RegisterInstanceRequest
@@ -3643,30 +3043,6 @@ func (s *RegisterInstanceInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *RegisterInstanceInput) SetAttributes(v map[string]string) *RegisterInstanceInput {
-	s.Attributes = v
-	return s
-}
-
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *RegisterInstanceInput) SetCreatorRequestId(v string) *RegisterInstanceInput {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *RegisterInstanceInput) SetInstanceId(v string) *RegisterInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetServiceId sets the ServiceId field's value.
-func (s *RegisterInstanceInput) SetServiceId(v string) *RegisterInstanceInput {
-	s.ServiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RegisterInstanceResponse
 type RegisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3691,12 +3067,6 @@ func (s RegisterInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *RegisterInstanceOutput) SetOperationId(v string) *RegisterInstanceOutput {
-	s.OperationId = &v
-	return s
 }
 
 // A complex type that contains information about the specified service.
@@ -3762,60 +3132,6 @@ func (s Service) String() string {
 // GoString returns the string representation
 func (s Service) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Service) SetArn(v string) *Service {
-	s.Arn = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *Service) SetCreateDate(v time.Time) *Service {
-	s.CreateDate = &v
-	return s
-}
-
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *Service) SetCreatorRequestId(v string) *Service {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Service) SetDescription(v string) *Service {
-	s.Description = &v
-	return s
-}
-
-// SetDnsConfig sets the DnsConfig field's value.
-func (s *Service) SetDnsConfig(v *DnsConfig) *Service {
-	s.DnsConfig = v
-	return s
-}
-
-// SetHealthCheckConfig sets the HealthCheckConfig field's value.
-func (s *Service) SetHealthCheckConfig(v *HealthCheckConfig) *Service {
-	s.HealthCheckConfig = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Service) SetId(v string) *Service {
-	s.Id = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *Service) SetInstanceCount(v int64) *Service {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Service) SetName(v string) *Service {
-	s.Name = &v
-	return s
 }
 
 // A complex type that contains changes to an existing service.
@@ -3886,24 +3202,6 @@ func (s *ServiceChange) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *ServiceChange) SetDescription(v string) *ServiceChange {
-	s.Description = &v
-	return s
-}
-
-// SetDnsConfig sets the DnsConfig field's value.
-func (s *ServiceChange) SetDnsConfig(v *DnsConfigChange) *ServiceChange {
-	s.DnsConfig = v
-	return s
-}
-
-// SetHealthCheckConfig sets the HealthCheckConfig field's value.
-func (s *ServiceChange) SetHealthCheckConfig(v *HealthCheckConfig) *ServiceChange {
-	s.HealthCheckConfig = v
-	return s
-}
-
 // A complex type that lets you specify the namespaces that you want to list
 // services for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceFilter
@@ -3959,24 +3257,6 @@ func (s *ServiceFilter) Validate() error {
 	return nil
 }
 
-// SetCondition sets the Condition field's value.
-func (s *ServiceFilter) SetCondition(v FilterCondition) *ServiceFilter {
-	s.Condition = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ServiceFilter) SetName(v ServiceFilterName) *ServiceFilter {
-	s.Name = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *ServiceFilter) SetValues(v []string) *ServiceFilter {
-	s.Values = v
-	return s
-}
-
 // A complex type that contains information about a specified service.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceSummary
 type ServiceSummary struct {
@@ -4009,36 +3289,6 @@ func (s ServiceSummary) String() string {
 // GoString returns the string representation
 func (s ServiceSummary) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *ServiceSummary) SetArn(v string) *ServiceSummary {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ServiceSummary) SetDescription(v string) *ServiceSummary {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ServiceSummary) SetId(v string) *ServiceSummary {
-	s.Id = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *ServiceSummary) SetInstanceCount(v int64) *ServiceSummary {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ServiceSummary) SetName(v string) *ServiceSummary {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateServiceRequest
@@ -4089,18 +3339,6 @@ func (s *UpdateServiceInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *UpdateServiceInput) SetId(v string) *UpdateServiceInput {
-	s.Id = &v
-	return s
-}
-
-// SetService sets the Service field's value.
-func (s *UpdateServiceInput) SetService(v *ServiceChange) *UpdateServiceInput {
-	s.Service = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateServiceResponse
 type UpdateServiceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4125,12 +3363,6 @@ func (s UpdateServiceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateServiceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *UpdateServiceOutput) SetOperationId(v string) *UpdateServiceOutput {
-	s.OperationId = &v
-	return s
 }
 
 type FilterCondition string

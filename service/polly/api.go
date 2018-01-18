@@ -369,12 +369,6 @@ func (s *DeleteLexiconInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteLexiconInput) SetName(v string) *DeleteLexiconInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconOutput
 type DeleteLexiconOutput struct {
 	_ struct{} `type:"structure"`
@@ -421,18 +415,6 @@ func (s DescribeVoicesInput) GoString() string {
 	return s.String()
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *DescribeVoicesInput) SetLanguageCode(v LanguageCode) *DescribeVoicesInput {
-	s.LanguageCode = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVoicesInput) SetNextToken(v string) *DescribeVoicesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoicesOutput
 type DescribeVoicesOutput struct {
 	_ struct{} `type:"structure"`
@@ -460,18 +442,6 @@ func (s DescribeVoicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVoicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeVoicesOutput) SetNextToken(v string) *DescribeVoicesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVoices sets the Voices field's value.
-func (s *DescribeVoicesOutput) SetVoices(v []Voice) *DescribeVoicesOutput {
-	s.Voices = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexiconInput
@@ -508,12 +478,6 @@ func (s *GetLexiconInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetLexiconInput) SetName(v string) *GetLexiconInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexiconOutput
 type GetLexiconOutput struct {
 	_ struct{} `type:"structure"`
@@ -544,18 +508,6 @@ func (s GetLexiconOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLexicon sets the Lexicon field's value.
-func (s *GetLexiconOutput) SetLexicon(v *Lexicon) *GetLexiconOutput {
-	s.Lexicon = v
-	return s
-}
-
-// SetLexiconAttributes sets the LexiconAttributes field's value.
-func (s *GetLexiconOutput) SetLexiconAttributes(v *LexiconAttributes) *GetLexiconOutput {
-	s.LexiconAttributes = v
-	return s
-}
-
 // Provides lexicon name and lexicon content in string format. For more information,
 // see Pronunciation Lexicon Specification (PLS) Version 1.0 (https://www.w3.org/TR/pronunciation-lexicon/).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Lexicon
@@ -578,18 +530,6 @@ func (s Lexicon) String() string {
 // GoString returns the string representation
 func (s Lexicon) GoString() string {
 	return s.String()
-}
-
-// SetContent sets the Content field's value.
-func (s *Lexicon) SetContent(v string) *Lexicon {
-	s.Content = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Lexicon) SetName(v string) *Lexicon {
-	s.Name = &v
-	return s
 }
 
 // Contains metadata describing the lexicon such as the number of lexemes, language
@@ -629,42 +569,6 @@ func (s LexiconAttributes) GoString() string {
 	return s.String()
 }
 
-// SetAlphabet sets the Alphabet field's value.
-func (s *LexiconAttributes) SetAlphabet(v string) *LexiconAttributes {
-	s.Alphabet = &v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *LexiconAttributes) SetLanguageCode(v LanguageCode) *LexiconAttributes {
-	s.LanguageCode = v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *LexiconAttributes) SetLastModified(v time.Time) *LexiconAttributes {
-	s.LastModified = &v
-	return s
-}
-
-// SetLexemesCount sets the LexemesCount field's value.
-func (s *LexiconAttributes) SetLexemesCount(v int64) *LexiconAttributes {
-	s.LexemesCount = &v
-	return s
-}
-
-// SetLexiconArn sets the LexiconArn field's value.
-func (s *LexiconAttributes) SetLexiconArn(v string) *LexiconAttributes {
-	s.LexiconArn = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *LexiconAttributes) SetSize(v int64) *LexiconAttributes {
-	s.Size = &v
-	return s
-}
-
 // Describes the content of the lexicon.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconDescription
 type LexiconDescription struct {
@@ -687,18 +591,6 @@ func (s LexiconDescription) GoString() string {
 	return s.String()
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *LexiconDescription) SetAttributes(v *LexiconAttributes) *LexiconDescription {
-	s.Attributes = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *LexiconDescription) SetName(v string) *LexiconDescription {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexiconsInput
 type ListLexiconsInput struct {
 	_ struct{} `type:"structure"`
@@ -716,12 +608,6 @@ func (s ListLexiconsInput) String() string {
 // GoString returns the string representation
 func (s ListLexiconsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLexiconsInput) SetNextToken(v string) *ListLexiconsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexiconsOutput
@@ -751,18 +637,6 @@ func (s ListLexiconsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListLexiconsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLexicons sets the Lexicons field's value.
-func (s *ListLexiconsOutput) SetLexicons(v []LexiconDescription) *ListLexiconsOutput {
-	s.Lexicons = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLexiconsOutput) SetNextToken(v string) *ListLexiconsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconInput
@@ -808,18 +682,6 @@ func (s *PutLexiconInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetContent sets the Content field's value.
-func (s *PutLexiconInput) SetContent(v string) *PutLexiconInput {
-	s.Content = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutLexiconInput) SetName(v string) *PutLexiconInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput
@@ -919,48 +781,6 @@ func (s *SynthesizeSpeechInput) Validate() error {
 	return nil
 }
 
-// SetLexiconNames sets the LexiconNames field's value.
-func (s *SynthesizeSpeechInput) SetLexiconNames(v []string) *SynthesizeSpeechInput {
-	s.LexiconNames = v
-	return s
-}
-
-// SetOutputFormat sets the OutputFormat field's value.
-func (s *SynthesizeSpeechInput) SetOutputFormat(v OutputFormat) *SynthesizeSpeechInput {
-	s.OutputFormat = v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *SynthesizeSpeechInput) SetSampleRate(v string) *SynthesizeSpeechInput {
-	s.SampleRate = &v
-	return s
-}
-
-// SetSpeechMarkTypes sets the SpeechMarkTypes field's value.
-func (s *SynthesizeSpeechInput) SetSpeechMarkTypes(v []SpeechMarkType) *SynthesizeSpeechInput {
-	s.SpeechMarkTypes = v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *SynthesizeSpeechInput) SetText(v string) *SynthesizeSpeechInput {
-	s.Text = &v
-	return s
-}
-
-// SetTextType sets the TextType field's value.
-func (s *SynthesizeSpeechInput) SetTextType(v TextType) *SynthesizeSpeechInput {
-	s.TextType = v
-	return s
-}
-
-// SetVoiceId sets the VoiceId field's value.
-func (s *SynthesizeSpeechInput) SetVoiceId(v VoiceId) *SynthesizeSpeechInput {
-	s.VoiceId = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechOutput
 type SynthesizeSpeechOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
@@ -1006,24 +826,6 @@ func (s SynthesizeSpeechOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAudioStream sets the AudioStream field's value.
-func (s *SynthesizeSpeechOutput) SetAudioStream(v io.ReadCloser) *SynthesizeSpeechOutput {
-	s.AudioStream = v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *SynthesizeSpeechOutput) SetContentType(v string) *SynthesizeSpeechOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetRequestCharacters sets the RequestCharacters field's value.
-func (s *SynthesizeSpeechOutput) SetRequestCharacters(v int64) *SynthesizeSpeechOutput {
-	s.RequestCharacters = &v
-	return s
-}
-
 // Description of the voice.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice
 type Voice struct {
@@ -1055,36 +857,6 @@ func (s Voice) String() string {
 // GoString returns the string representation
 func (s Voice) GoString() string {
 	return s.String()
-}
-
-// SetGender sets the Gender field's value.
-func (s *Voice) SetGender(v Gender) *Voice {
-	s.Gender = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Voice) SetId(v VoiceId) *Voice {
-	s.Id = v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *Voice) SetLanguageCode(v LanguageCode) *Voice {
-	s.LanguageCode = v
-	return s
-}
-
-// SetLanguageName sets the LanguageName field's value.
-func (s *Voice) SetLanguageName(v string) *Voice {
-	s.LanguageName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Voice) SetName(v string) *Voice {
-	s.Name = &v
-	return s
 }
 
 type Gender string

@@ -2551,36 +2551,6 @@ func (s *AllocateConnectionOnInterconnectInput) Validate() error {
 	return nil
 }
 
-// SetBandwidth sets the Bandwidth field's value.
-func (s *AllocateConnectionOnInterconnectInput) SetBandwidth(v string) *AllocateConnectionOnInterconnectInput {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetConnectionName sets the ConnectionName field's value.
-func (s *AllocateConnectionOnInterconnectInput) SetConnectionName(v string) *AllocateConnectionOnInterconnectInput {
-	s.ConnectionName = &v
-	return s
-}
-
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *AllocateConnectionOnInterconnectInput) SetInterconnectId(v string) *AllocateConnectionOnInterconnectInput {
-	s.InterconnectId = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *AllocateConnectionOnInterconnectInput) SetOwnerAccount(v string) *AllocateConnectionOnInterconnectInput {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *AllocateConnectionOnInterconnectInput) SetVlan(v int64) *AllocateConnectionOnInterconnectInput {
-	s.Vlan = &v
-	return s
-}
-
 // Container for the parameters to theHostedConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnectionRequest
 type AllocateHostedConnectionInput struct {
@@ -2674,36 +2644,6 @@ func (s *AllocateHostedConnectionInput) Validate() error {
 	return nil
 }
 
-// SetBandwidth sets the Bandwidth field's value.
-func (s *AllocateHostedConnectionInput) SetBandwidth(v string) *AllocateHostedConnectionInput {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *AllocateHostedConnectionInput) SetConnectionId(v string) *AllocateHostedConnectionInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetConnectionName sets the ConnectionName field's value.
-func (s *AllocateHostedConnectionInput) SetConnectionName(v string) *AllocateHostedConnectionInput {
-	s.ConnectionName = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *AllocateHostedConnectionInput) SetOwnerAccount(v string) *AllocateHostedConnectionInput {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *AllocateHostedConnectionInput) SetVlan(v int64) *AllocateHostedConnectionInput {
-	s.Vlan = &v
-	return s
-}
-
 // Container for the parameters to the AllocatePrivateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterfaceRequest
 type AllocatePrivateVirtualInterfaceInput struct {
@@ -2766,24 +2706,6 @@ func (s *AllocatePrivateVirtualInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *AllocatePrivateVirtualInterfaceInput) SetConnectionId(v string) *AllocatePrivateVirtualInterfaceInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetNewPrivateVirtualInterfaceAllocation sets the NewPrivateVirtualInterfaceAllocation field's value.
-func (s *AllocatePrivateVirtualInterfaceInput) SetNewPrivateVirtualInterfaceAllocation(v *NewPrivateVirtualInterfaceAllocation) *AllocatePrivateVirtualInterfaceInput {
-	s.NewPrivateVirtualInterfaceAllocation = v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *AllocatePrivateVirtualInterfaceInput) SetOwnerAccount(v string) *AllocatePrivateVirtualInterfaceInput {
-	s.OwnerAccount = &v
-	return s
 }
 
 // Container for the parameters to the AllocatePublicVirtualInterface operation.
@@ -2850,24 +2772,6 @@ func (s *AllocatePublicVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *AllocatePublicVirtualInterfaceInput) SetConnectionId(v string) *AllocatePublicVirtualInterfaceInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetNewPublicVirtualInterfaceAllocation sets the NewPublicVirtualInterfaceAllocation field's value.
-func (s *AllocatePublicVirtualInterfaceInput) SetNewPublicVirtualInterfaceAllocation(v *NewPublicVirtualInterfaceAllocation) *AllocatePublicVirtualInterfaceInput {
-	s.NewPublicVirtualInterfaceAllocation = v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *AllocatePublicVirtualInterfaceInput) SetOwnerAccount(v string) *AllocatePublicVirtualInterfaceInput {
-	s.OwnerAccount = &v
-	return s
-}
-
 // Container for the parameters to the AssociateConnectionWithLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLagRequest
 type AssociateConnectionWithLagInput struct {
@@ -2918,18 +2822,6 @@ func (s *AssociateConnectionWithLagInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *AssociateConnectionWithLagInput) SetConnectionId(v string) *AssociateConnectionWithLagInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *AssociateConnectionWithLagInput) SetLagId(v string) *AssociateConnectionWithLagInput {
-	s.LagId = &v
-	return s
 }
 
 // Container for the parameters to the AssociateHostedConnection operation.
@@ -2984,18 +2876,6 @@ func (s *AssociateHostedConnectionInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *AssociateHostedConnectionInput) SetConnectionId(v string) *AssociateHostedConnectionInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetParentConnectionId sets the ParentConnectionId field's value.
-func (s *AssociateHostedConnectionInput) SetParentConnectionId(v string) *AssociateHostedConnectionInput {
-	s.ParentConnectionId = &v
-	return s
-}
-
 // Container for the parameters to the AssociateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterfaceRequest
 type AssociateVirtualInterfaceInput struct {
@@ -3046,18 +2926,6 @@ func (s *AssociateVirtualInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *AssociateVirtualInterfaceInput) SetConnectionId(v string) *AssociateVirtualInterfaceInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *AssociateVirtualInterfaceInput) SetVirtualInterfaceId(v string) *AssociateVirtualInterfaceInput {
-	s.VirtualInterfaceId = &v
-	return s
 }
 
 // A structure containing information about a BGP peer.
@@ -3126,48 +2994,6 @@ func (s BGPPeer) GoString() string {
 	return s.String()
 }
 
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *BGPPeer) SetAddressFamily(v AddressFamily) *BGPPeer {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *BGPPeer) SetAmazonAddress(v string) *BGPPeer {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *BGPPeer) SetAsn(v int64) *BGPPeer {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *BGPPeer) SetAuthKey(v string) *BGPPeer {
-	s.AuthKey = &v
-	return s
-}
-
-// SetBgpPeerState sets the BgpPeerState field's value.
-func (s *BGPPeer) SetBgpPeerState(v BGPPeerState) *BGPPeer {
-	s.BgpPeerState = v
-	return s
-}
-
-// SetBgpStatus sets the BgpStatus field's value.
-func (s *BGPPeer) SetBgpStatus(v BGPStatus) *BGPPeer {
-	s.BgpStatus = v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *BGPPeer) SetCustomerAddress(v string) *BGPPeer {
-	s.CustomerAddress = &v
-	return s
-}
-
 // Container for the parameters to the ConfirmConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionRequest
 type ConfirmConnectionInput struct {
@@ -3206,12 +3032,6 @@ func (s *ConfirmConnectionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *ConfirmConnectionInput) SetConnectionId(v string) *ConfirmConnectionInput {
-	s.ConnectionId = &v
-	return s
 }
 
 // The response received when ConfirmConnection is called.
@@ -3259,12 +3079,6 @@ func (s ConfirmConnectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ConfirmConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConnectionState sets the ConnectionState field's value.
-func (s *ConfirmConnectionOutput) SetConnectionState(v ConnectionState) *ConfirmConnectionOutput {
-	s.ConnectionState = v
-	return s
 }
 
 // Container for the parameters to the ConfirmPrivateVirtualInterface operation.
@@ -3323,24 +3137,6 @@ func (s *ConfirmPrivateVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *ConfirmPrivateVirtualInterfaceInput) SetDirectConnectGatewayId(v string) *ConfirmPrivateVirtualInterfaceInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *ConfirmPrivateVirtualInterfaceInput) SetVirtualGatewayId(v string) *ConfirmPrivateVirtualInterfaceInput {
-	s.VirtualGatewayId = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *ConfirmPrivateVirtualInterfaceInput) SetVirtualInterfaceId(v string) *ConfirmPrivateVirtualInterfaceInput {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
 // The response received when ConfirmPrivateVirtualInterface is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceResponse
 type ConfirmPrivateVirtualInterfaceOutput struct {
@@ -3394,12 +3190,6 @@ func (s ConfirmPrivateVirtualInterfaceOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *ConfirmPrivateVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *ConfirmPrivateVirtualInterfaceOutput {
-	s.VirtualInterfaceState = v
-	return s
-}
-
 // Container for the parameters to the ConfirmPublicVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceRequest
 type ConfirmPublicVirtualInterfaceInput struct {
@@ -3437,12 +3227,6 @@ func (s *ConfirmPublicVirtualInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *ConfirmPublicVirtualInterfaceInput) SetVirtualInterfaceId(v string) *ConfirmPublicVirtualInterfaceInput {
-	s.VirtualInterfaceId = &v
-	return s
 }
 
 // The response received when ConfirmPublicVirtualInterface is called.
@@ -3498,12 +3282,6 @@ func (s ConfirmPublicVirtualInterfaceOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *ConfirmPublicVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *ConfirmPublicVirtualInterfaceOutput {
-	s.VirtualInterfaceState = v
-	return s
-}
-
 // Container for the parameters to the CreateBGPPeer operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerRequest
 type CreateBGPPeerInput struct {
@@ -3532,18 +3310,6 @@ func (s CreateBGPPeerInput) GoString() string {
 	return s.String()
 }
 
-// SetNewBGPPeer sets the NewBGPPeer field's value.
-func (s *CreateBGPPeerInput) SetNewBGPPeer(v *NewBGPPeer) *CreateBGPPeerInput {
-	s.NewBGPPeer = v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *CreateBGPPeerInput) SetVirtualInterfaceId(v string) *CreateBGPPeerInput {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
 // The response received when CreateBGPPeer is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerResponse
 type CreateBGPPeerOutput struct {
@@ -3569,12 +3335,6 @@ func (s CreateBGPPeerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateBGPPeerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVirtualInterface sets the VirtualInterface field's value.
-func (s *CreateBGPPeerOutput) SetVirtualInterface(v *CreatePublicVirtualInterfaceOutput) *CreateBGPPeerOutput {
-	s.VirtualInterface = v
-	return s
 }
 
 // Container for the parameters to the CreateConnection operation.
@@ -3647,30 +3407,6 @@ func (s *CreateConnectionInput) Validate() error {
 	return nil
 }
 
-// SetBandwidth sets the Bandwidth field's value.
-func (s *CreateConnectionInput) SetBandwidth(v string) *CreateConnectionInput {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetConnectionName sets the ConnectionName field's value.
-func (s *CreateConnectionInput) SetConnectionName(v string) *CreateConnectionInput {
-	s.ConnectionName = &v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *CreateConnectionInput) SetLagId(v string) *CreateConnectionInput {
-	s.LagId = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateConnectionInput) SetLocation(v string) *CreateConnectionInput {
-	s.Location = &v
-	return s
-}
-
 // Container for the parameters to the CreateDirectConnectGatewayAssociation
 // operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationRequest
@@ -3724,18 +3460,6 @@ func (s *CreateDirectConnectGatewayAssociationInput) Validate() error {
 	return nil
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *CreateDirectConnectGatewayAssociationInput) SetDirectConnectGatewayId(v string) *CreateDirectConnectGatewayAssociationInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *CreateDirectConnectGatewayAssociationInput) SetVirtualGatewayId(v string) *CreateDirectConnectGatewayAssociationInput {
-	s.VirtualGatewayId = &v
-	return s
-}
-
 // Container for the response from the CreateDirectConnectGatewayAssociation
 // API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationResult
@@ -3761,12 +3485,6 @@ func (s CreateDirectConnectGatewayAssociationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDirectConnectGatewayAssociationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGatewayAssociation sets the DirectConnectGatewayAssociation field's value.
-func (s *CreateDirectConnectGatewayAssociationOutput) SetDirectConnectGatewayAssociation(v *GatewayAssociation) *CreateDirectConnectGatewayAssociationOutput {
-	s.DirectConnectGatewayAssociation = v
-	return s
 }
 
 // Container for the parameters to the CreateDirectConnectGateway operation.
@@ -3817,18 +3535,6 @@ func (s *CreateDirectConnectGatewayInput) Validate() error {
 	return nil
 }
 
-// SetAmazonSideAsn sets the AmazonSideAsn field's value.
-func (s *CreateDirectConnectGatewayInput) SetAmazonSideAsn(v int64) *CreateDirectConnectGatewayInput {
-	s.AmazonSideAsn = &v
-	return s
-}
-
-// SetDirectConnectGatewayName sets the DirectConnectGatewayName field's value.
-func (s *CreateDirectConnectGatewayInput) SetDirectConnectGatewayName(v string) *CreateDirectConnectGatewayInput {
-	s.DirectConnectGatewayName = &v
-	return s
-}
-
 // Container for the response from the CreateDirectConnectGateway API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayResult
 type CreateDirectConnectGatewayOutput struct {
@@ -3853,12 +3559,6 @@ func (s CreateDirectConnectGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDirectConnectGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGateway sets the DirectConnectGateway field's value.
-func (s *CreateDirectConnectGatewayOutput) SetDirectConnectGateway(v *Gateway) *CreateDirectConnectGatewayOutput {
-	s.DirectConnectGateway = v
-	return s
 }
 
 // Container for the parameters to the CreateInterconnect operation.
@@ -3931,30 +3631,6 @@ func (s *CreateInterconnectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBandwidth sets the Bandwidth field's value.
-func (s *CreateInterconnectInput) SetBandwidth(v string) *CreateInterconnectInput {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetInterconnectName sets the InterconnectName field's value.
-func (s *CreateInterconnectInput) SetInterconnectName(v string) *CreateInterconnectInput {
-	s.InterconnectName = &v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *CreateInterconnectInput) SetLagId(v string) *CreateInterconnectInput {
-	s.LagId = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateInterconnectInput) SetLocation(v string) *CreateInterconnectInput {
-	s.Location = &v
-	return s
 }
 
 // An interconnect is a connection that can host other connections.
@@ -4051,60 +3727,6 @@ func (s CreateInterconnectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAwsDevice sets the AwsDevice field's value.
-func (s *CreateInterconnectOutput) SetAwsDevice(v string) *CreateInterconnectOutput {
-	s.AwsDevice = &v
-	return s
-}
-
-// SetBandwidth sets the Bandwidth field's value.
-func (s *CreateInterconnectOutput) SetBandwidth(v string) *CreateInterconnectOutput {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *CreateInterconnectOutput) SetInterconnectId(v string) *CreateInterconnectOutput {
-	s.InterconnectId = &v
-	return s
-}
-
-// SetInterconnectName sets the InterconnectName field's value.
-func (s *CreateInterconnectOutput) SetInterconnectName(v string) *CreateInterconnectOutput {
-	s.InterconnectName = &v
-	return s
-}
-
-// SetInterconnectState sets the InterconnectState field's value.
-func (s *CreateInterconnectOutput) SetInterconnectState(v InterconnectState) *CreateInterconnectOutput {
-	s.InterconnectState = v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *CreateInterconnectOutput) SetLagId(v string) *CreateInterconnectOutput {
-	s.LagId = &v
-	return s
-}
-
-// SetLoaIssueTime sets the LoaIssueTime field's value.
-func (s *CreateInterconnectOutput) SetLoaIssueTime(v time.Time) *CreateInterconnectOutput {
-	s.LoaIssueTime = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateInterconnectOutput) SetLocation(v string) *CreateInterconnectOutput {
-	s.Location = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *CreateInterconnectOutput) SetRegion(v string) *CreateInterconnectOutput {
-	s.Region = &v
-	return s
-}
-
 // Container for the parameters to the CreateLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest
 type CreateLagInput struct {
@@ -4187,36 +3809,6 @@ func (s *CreateLagInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *CreateLagInput) SetConnectionId(v string) *CreateLagInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetConnectionsBandwidth sets the ConnectionsBandwidth field's value.
-func (s *CreateLagInput) SetConnectionsBandwidth(v string) *CreateLagInput {
-	s.ConnectionsBandwidth = &v
-	return s
-}
-
-// SetLagName sets the LagName field's value.
-func (s *CreateLagInput) SetLagName(v string) *CreateLagInput {
-	s.LagName = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateLagInput) SetLocation(v string) *CreateLagInput {
-	s.Location = &v
-	return s
-}
-
-// SetNumberOfConnections sets the NumberOfConnections field's value.
-func (s *CreateLagInput) SetNumberOfConnections(v int64) *CreateLagInput {
-	s.NumberOfConnections = &v
-	return s
-}
-
 // Container for the parameters to the CreatePrivateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterfaceRequest
 type CreatePrivateVirtualInterfaceInput struct {
@@ -4273,18 +3865,6 @@ func (s *CreatePrivateVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *CreatePrivateVirtualInterfaceInput) SetConnectionId(v string) *CreatePrivateVirtualInterfaceInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetNewPrivateVirtualInterface sets the NewPrivateVirtualInterface field's value.
-func (s *CreatePrivateVirtualInterfaceInput) SetNewPrivateVirtualInterface(v *NewPrivateVirtualInterface) *CreatePrivateVirtualInterfaceInput {
-	s.NewPrivateVirtualInterface = v
-	return s
-}
-
 // Container for the parameters to the CreatePublicVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterfaceRequest
 type CreatePublicVirtualInterfaceInput struct {
@@ -4339,18 +3919,6 @@ func (s *CreatePublicVirtualInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *CreatePublicVirtualInterfaceInput) SetConnectionId(v string) *CreatePublicVirtualInterfaceInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetNewPublicVirtualInterface sets the NewPublicVirtualInterface field's value.
-func (s *CreatePublicVirtualInterfaceInput) SetNewPublicVirtualInterface(v *NewPublicVirtualInterface) *CreatePublicVirtualInterfaceInput {
-	s.NewPublicVirtualInterface = v
-	return s
 }
 
 // A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
@@ -4499,120 +4067,6 @@ func (s CreatePublicVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetAddressFamily(v AddressFamily) *CreatePublicVirtualInterfaceOutput {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetAmazonAddress(v string) *CreatePublicVirtualInterfaceOutput {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAmazonSideAsn sets the AmazonSideAsn field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetAmazonSideAsn(v int64) *CreatePublicVirtualInterfaceOutput {
-	s.AmazonSideAsn = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetAsn(v int64) *CreatePublicVirtualInterfaceOutput {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetAuthKey(v string) *CreatePublicVirtualInterfaceOutput {
-	s.AuthKey = &v
-	return s
-}
-
-// SetBgpPeers sets the BgpPeers field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetBgpPeers(v []BGPPeer) *CreatePublicVirtualInterfaceOutput {
-	s.BgpPeers = v
-	return s
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetConnectionId(v string) *CreatePublicVirtualInterfaceOutput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetCustomerAddress(v string) *CreatePublicVirtualInterfaceOutput {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetCustomerRouterConfig sets the CustomerRouterConfig field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetCustomerRouterConfig(v string) *CreatePublicVirtualInterfaceOutput {
-	s.CustomerRouterConfig = &v
-	return s
-}
-
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetDirectConnectGatewayId(v string) *CreatePublicVirtualInterfaceOutput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetLocation(v string) *CreatePublicVirtualInterfaceOutput {
-	s.Location = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetOwnerAccount(v string) *CreatePublicVirtualInterfaceOutput {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetRouteFilterPrefixes sets the RouteFilterPrefixes field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetRouteFilterPrefixes(v []RouteFilterPrefix) *CreatePublicVirtualInterfaceOutput {
-	s.RouteFilterPrefixes = v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetVirtualGatewayId(v string) *CreatePublicVirtualInterfaceOutput {
-	s.VirtualGatewayId = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceId(v string) *CreatePublicVirtualInterfaceOutput {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
-// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceName(v string) *CreatePublicVirtualInterfaceOutput {
-	s.VirtualInterfaceName = &v
-	return s
-}
-
-// SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *CreatePublicVirtualInterfaceOutput {
-	s.VirtualInterfaceState = v
-	return s
-}
-
-// SetVirtualInterfaceType sets the VirtualInterfaceType field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceType(v string) *CreatePublicVirtualInterfaceOutput {
-	s.VirtualInterfaceType = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *CreatePublicVirtualInterfaceOutput) SetVlan(v int64) *CreatePublicVirtualInterfaceOutput {
-	s.Vlan = &v
-	return s
-}
-
 // Container for the parameters to the DeleteBGPPeer operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerRequest
 type DeleteBGPPeerInput struct {
@@ -4646,24 +4100,6 @@ func (s DeleteBGPPeerInput) GoString() string {
 	return s.String()
 }
 
-// SetAsn sets the Asn field's value.
-func (s *DeleteBGPPeerInput) SetAsn(v int64) *DeleteBGPPeerInput {
-	s.Asn = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *DeleteBGPPeerInput) SetCustomerAddress(v string) *DeleteBGPPeerInput {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *DeleteBGPPeerInput) SetVirtualInterfaceId(v string) *DeleteBGPPeerInput {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
 // The response received when DeleteBGPPeer is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerResponse
 type DeleteBGPPeerOutput struct {
@@ -4689,12 +4125,6 @@ func (s DeleteBGPPeerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteBGPPeerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVirtualInterface sets the VirtualInterface field's value.
-func (s *DeleteBGPPeerOutput) SetVirtualInterface(v *CreatePublicVirtualInterfaceOutput) *DeleteBGPPeerOutput {
-	s.VirtualInterface = v
-	return s
 }
 
 // Container for the parameters to the DeleteConnection operation.
@@ -4735,12 +4165,6 @@ func (s *DeleteConnectionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DeleteConnectionInput) SetConnectionId(v string) *DeleteConnectionInput {
-	s.ConnectionId = &v
-	return s
 }
 
 // Container for the parameters to the DeleteDirectConnectGatewayAssociation
@@ -4796,18 +4220,6 @@ func (s *DeleteDirectConnectGatewayAssociationInput) Validate() error {
 	return nil
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *DeleteDirectConnectGatewayAssociationInput) SetDirectConnectGatewayId(v string) *DeleteDirectConnectGatewayAssociationInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *DeleteDirectConnectGatewayAssociationInput) SetVirtualGatewayId(v string) *DeleteDirectConnectGatewayAssociationInput {
-	s.VirtualGatewayId = &v
-	return s
-}
-
 // Container for the response from the DeleteDirectConnectGatewayAssociation
 // API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationResult
@@ -4833,12 +4245,6 @@ func (s DeleteDirectConnectGatewayAssociationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDirectConnectGatewayAssociationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGatewayAssociation sets the DirectConnectGatewayAssociation field's value.
-func (s *DeleteDirectConnectGatewayAssociationOutput) SetDirectConnectGatewayAssociation(v *GatewayAssociation) *DeleteDirectConnectGatewayAssociationOutput {
-	s.DirectConnectGatewayAssociation = v
-	return s
 }
 
 // Container for the parameters to the DeleteDirectConnectGateway operation.
@@ -4880,12 +4286,6 @@ func (s *DeleteDirectConnectGatewayInput) Validate() error {
 	return nil
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *DeleteDirectConnectGatewayInput) SetDirectConnectGatewayId(v string) *DeleteDirectConnectGatewayInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
 // Container for the response from the DeleteDirectConnectGateway API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayResult
 type DeleteDirectConnectGatewayOutput struct {
@@ -4910,12 +4310,6 @@ func (s DeleteDirectConnectGatewayOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDirectConnectGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGateway sets the DirectConnectGateway field's value.
-func (s *DeleteDirectConnectGatewayOutput) SetDirectConnectGateway(v *Gateway) *DeleteDirectConnectGatewayOutput {
-	s.DirectConnectGateway = v
-	return s
 }
 
 // Container for the parameters to the DeleteInterconnect operation.
@@ -4953,12 +4347,6 @@ func (s *DeleteInterconnectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *DeleteInterconnectInput) SetInterconnectId(v string) *DeleteInterconnectInput {
-	s.InterconnectId = &v
-	return s
 }
 
 // The response received when DeleteInterconnect is called.
@@ -5002,12 +4390,6 @@ func (s DeleteInterconnectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInterconnectState sets the InterconnectState field's value.
-func (s *DeleteInterconnectOutput) SetInterconnectState(v InterconnectState) *DeleteInterconnectOutput {
-	s.InterconnectState = v
-	return s
-}
-
 // Container for the parameters to the DeleteLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLagRequest
 type DeleteLagInput struct {
@@ -5047,12 +4429,6 @@ func (s *DeleteLagInput) Validate() error {
 	return nil
 }
 
-// SetLagId sets the LagId field's value.
-func (s *DeleteLagInput) SetLagId(v string) *DeleteLagInput {
-	s.LagId = &v
-	return s
-}
-
 // Container for the parameters to the DeleteVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceRequest
 type DeleteVirtualInterfaceInput struct {
@@ -5090,12 +4466,6 @@ func (s *DeleteVirtualInterfaceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *DeleteVirtualInterfaceInput) SetVirtualInterfaceId(v string) *DeleteVirtualInterfaceInput {
-	s.VirtualInterfaceId = &v
-	return s
 }
 
 // The response received when DeleteVirtualInterface is called.
@@ -5151,12 +4521,6 @@ func (s DeleteVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *DeleteVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *DeleteVirtualInterfaceOutput {
-	s.VirtualInterfaceState = v
-	return s
-}
-
 // Container for the parameters to the DescribeConnectionLoa operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoaRequest
 type DescribeConnectionLoaInput struct {
@@ -5210,24 +4574,6 @@ func (s *DescribeConnectionLoaInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DescribeConnectionLoaInput) SetConnectionId(v string) *DescribeConnectionLoaInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeConnectionLoaInput) SetLoaContentType(v LoaContentType) *DescribeConnectionLoaInput {
-	s.LoaContentType = v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *DescribeConnectionLoaInput) SetProviderName(v string) *DescribeConnectionLoaInput {
-	s.ProviderName = &v
-	return s
-}
-
 // The response received when DescribeConnectionLoa is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoaResponse
 type DescribeConnectionLoaOutput struct {
@@ -5255,12 +4601,6 @@ func (s DescribeConnectionLoaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLoa sets the Loa field's value.
-func (s *DescribeConnectionLoaOutput) SetLoa(v *DescribeLoaOutput) *DescribeConnectionLoaOutput {
-	s.Loa = v
-	return s
-}
-
 // Container for the parameters to the DescribeConnections operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsRequest
 type DescribeConnectionsInput struct {
@@ -5283,12 +4623,6 @@ func (s DescribeConnectionsInput) String() string {
 // GoString returns the string representation
 func (s DescribeConnectionsInput) GoString() string {
 	return s.String()
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DescribeConnectionsInput) SetConnectionId(v string) *DescribeConnectionsInput {
-	s.ConnectionId = &v
-	return s
 }
 
 // Container for the parameters to the DescribeConnectionsOnInterconnect operation.
@@ -5328,12 +4662,6 @@ func (s *DescribeConnectionsOnInterconnectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *DescribeConnectionsOnInterconnectInput) SetInterconnectId(v string) *DescribeConnectionsOnInterconnectInput {
-	s.InterconnectId = &v
-	return s
 }
 
 // Container for the parameters to the DescribeDirectConnectGatewayAssociations
@@ -5380,30 +4708,6 @@ func (s DescribeDirectConnectGatewayAssociationsInput) GoString() string {
 	return s.String()
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *DescribeDirectConnectGatewayAssociationsInput) SetDirectConnectGatewayId(v string) *DescribeDirectConnectGatewayAssociationsInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeDirectConnectGatewayAssociationsInput) SetMaxResults(v int64) *DescribeDirectConnectGatewayAssociationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectConnectGatewayAssociationsInput) SetNextToken(v string) *DescribeDirectConnectGatewayAssociationsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *DescribeDirectConnectGatewayAssociationsInput) SetVirtualGatewayId(v string) *DescribeDirectConnectGatewayAssociationsInput {
-	s.VirtualGatewayId = &v
-	return s
-}
-
 // Container for the response from the DescribeDirectConnectGatewayAssociations
 // API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsResult
@@ -5432,18 +4736,6 @@ func (s DescribeDirectConnectGatewayAssociationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDirectConnectGatewayAssociationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGatewayAssociations sets the DirectConnectGatewayAssociations field's value.
-func (s *DescribeDirectConnectGatewayAssociationsOutput) SetDirectConnectGatewayAssociations(v []GatewayAssociation) *DescribeDirectConnectGatewayAssociationsOutput {
-	s.DirectConnectGatewayAssociations = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectConnectGatewayAssociationsOutput) SetNextToken(v string) *DescribeDirectConnectGatewayAssociationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Container for the parameters to the DescribeDirectConnectGatewayAttachments
@@ -5490,30 +4782,6 @@ func (s DescribeDirectConnectGatewayAttachmentsInput) GoString() string {
 	return s.String()
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *DescribeDirectConnectGatewayAttachmentsInput) SetDirectConnectGatewayId(v string) *DescribeDirectConnectGatewayAttachmentsInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeDirectConnectGatewayAttachmentsInput) SetMaxResults(v int64) *DescribeDirectConnectGatewayAttachmentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectConnectGatewayAttachmentsInput) SetNextToken(v string) *DescribeDirectConnectGatewayAttachmentsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *DescribeDirectConnectGatewayAttachmentsInput) SetVirtualInterfaceId(v string) *DescribeDirectConnectGatewayAttachmentsInput {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
 // Container for the response from the DescribeDirectConnectGatewayAttachments
 // API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAttachmentsResult
@@ -5542,18 +4810,6 @@ func (s DescribeDirectConnectGatewayAttachmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDirectConnectGatewayAttachmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGatewayAttachments sets the DirectConnectGatewayAttachments field's value.
-func (s *DescribeDirectConnectGatewayAttachmentsOutput) SetDirectConnectGatewayAttachments(v []GatewayAttachment) *DescribeDirectConnectGatewayAttachmentsOutput {
-	s.DirectConnectGatewayAttachments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectConnectGatewayAttachmentsOutput) SetNextToken(v string) *DescribeDirectConnectGatewayAttachmentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Container for the parameters to the DescribeDirectConnectGateways operation.
@@ -5592,24 +4848,6 @@ func (s DescribeDirectConnectGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *DescribeDirectConnectGatewaysInput) SetDirectConnectGatewayId(v string) *DescribeDirectConnectGatewaysInput {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeDirectConnectGatewaysInput) SetMaxResults(v int64) *DescribeDirectConnectGatewaysInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectConnectGatewaysInput) SetNextToken(v string) *DescribeDirectConnectGatewaysInput {
-	s.NextToken = &v
-	return s
-}
-
 // Container for the response from the DescribeDirectConnectGateways API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewaysResult
 type DescribeDirectConnectGatewaysOutput struct {
@@ -5637,18 +4875,6 @@ func (s DescribeDirectConnectGatewaysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDirectConnectGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectConnectGateways sets the DirectConnectGateways field's value.
-func (s *DescribeDirectConnectGatewaysOutput) SetDirectConnectGateways(v []Gateway) *DescribeDirectConnectGatewaysOutput {
-	s.DirectConnectGateways = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectConnectGatewaysOutput) SetNextToken(v string) *DescribeDirectConnectGatewaysOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Container for the parameters to the DescribeHostedConnections operation.
@@ -5690,12 +4916,6 @@ func (s *DescribeHostedConnectionsInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DescribeHostedConnectionsInput) SetConnectionId(v string) *DescribeHostedConnectionsInput {
-	s.ConnectionId = &v
-	return s
-}
-
 // A structure containing a list of connections.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnectOutput
 type DescribeHostedConnectionsOutput struct {
@@ -5720,12 +4940,6 @@ func (s DescribeHostedConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeHostedConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConnections sets the Connections field's value.
-func (s *DescribeHostedConnectionsOutput) SetConnections(v []DisassociateConnectionFromLagOutput) *DescribeHostedConnectionsOutput {
-	s.Connections = v
-	return s
 }
 
 // Container for the parameters to the DescribeInterconnectLoa operation.
@@ -5778,24 +4992,6 @@ func (s *DescribeInterconnectLoaInput) Validate() error {
 	return nil
 }
 
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *DescribeInterconnectLoaInput) SetInterconnectId(v string) *DescribeInterconnectLoaInput {
-	s.InterconnectId = &v
-	return s
-}
-
-// SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeInterconnectLoaInput) SetLoaContentType(v LoaContentType) *DescribeInterconnectLoaInput {
-	s.LoaContentType = v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *DescribeInterconnectLoaInput) SetProviderName(v string) *DescribeInterconnectLoaInput {
-	s.ProviderName = &v
-	return s
-}
-
 // The response received when DescribeInterconnectLoa is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoaResponse
 type DescribeInterconnectLoaOutput struct {
@@ -5823,12 +5019,6 @@ func (s DescribeInterconnectLoaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLoa sets the Loa field's value.
-func (s *DescribeInterconnectLoaOutput) SetLoa(v *DescribeLoaOutput) *DescribeInterconnectLoaOutput {
-	s.Loa = v
-	return s
-}
-
 // Container for the parameters to the DescribeInterconnects operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectsRequest
 type DescribeInterconnectsInput struct {
@@ -5848,12 +5038,6 @@ func (s DescribeInterconnectsInput) String() string {
 // GoString returns the string representation
 func (s DescribeInterconnectsInput) GoString() string {
 	return s.String()
-}
-
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *DescribeInterconnectsInput) SetInterconnectId(v string) *DescribeInterconnectsInput {
-	s.InterconnectId = &v
-	return s
 }
 
 // A structure containing a list of interconnects.
@@ -5882,12 +5066,6 @@ func (s DescribeInterconnectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInterconnects sets the Interconnects field's value.
-func (s *DescribeInterconnectsOutput) SetInterconnects(v []CreateInterconnectOutput) *DescribeInterconnectsOutput {
-	s.Interconnects = v
-	return s
-}
-
 // Container for the parameters to the DescribeLags operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLagsRequest
 type DescribeLagsInput struct {
@@ -5909,12 +5087,6 @@ func (s DescribeLagsInput) String() string {
 // GoString returns the string representation
 func (s DescribeLagsInput) GoString() string {
 	return s.String()
-}
-
-// SetLagId sets the LagId field's value.
-func (s *DescribeLagsInput) SetLagId(v string) *DescribeLagsInput {
-	s.LagId = &v
-	return s
 }
 
 // A structure containing a list of LAGs.
@@ -5941,12 +5113,6 @@ func (s DescribeLagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLags sets the Lags field's value.
-func (s *DescribeLagsOutput) SetLags(v []UpdateLagOutput) *DescribeLagsOutput {
-	s.Lags = v
-	return s
 }
 
 // Container for the parameters to the DescribeLoa operation.
@@ -6002,24 +5168,6 @@ func (s *DescribeLoaInput) Validate() error {
 	return nil
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DescribeLoaInput) SetConnectionId(v string) *DescribeLoaInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeLoaInput) SetLoaContentType(v LoaContentType) *DescribeLoaInput {
-	s.LoaContentType = v
-	return s
-}
-
-// SetProviderName sets the ProviderName field's value.
-func (s *DescribeLoaInput) SetProviderName(v string) *DescribeLoaInput {
-	s.ProviderName = &v
-	return s
-}
-
 // A structure containing the Letter of Authorization - Connecting Facility
 // Assignment (LOA-CFA) for a connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Loa
@@ -6053,18 +5201,6 @@ func (s DescribeLoaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLoaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLoaContent sets the LoaContent field's value.
-func (s *DescribeLoaOutput) SetLoaContent(v []byte) *DescribeLoaOutput {
-	s.LoaContent = v
-	return s
-}
-
-// SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeLoaOutput) SetLoaContentType(v LoaContentType) *DescribeLoaOutput {
-	s.LoaContentType = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocationsInput
@@ -6112,12 +5248,6 @@ func (s DescribeLocationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetLocations sets the Locations field's value.
-func (s *DescribeLocationsOutput) SetLocations(v []Location) *DescribeLocationsOutput {
-	s.Locations = v
-	return s
-}
-
 // Container for the parameters to the DescribeTags operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTagsRequest
 type DescribeTagsInput struct {
@@ -6153,12 +5283,6 @@ func (s *DescribeTagsInput) Validate() error {
 	return nil
 }
 
-// SetResourceArns sets the ResourceArns field's value.
-func (s *DescribeTagsInput) SetResourceArns(v []string) *DescribeTagsInput {
-	s.ResourceArns = v
-	return s
-}
-
 // The response received when DescribeTags is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTagsResponse
 type DescribeTagsOutput struct {
@@ -6183,12 +5307,6 @@ func (s DescribeTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResourceTags sets the ResourceTags field's value.
-func (s *DescribeTagsOutput) SetResourceTags(v []ResourceTag) *DescribeTagsOutput {
-	s.ResourceTags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualGatewaysInput
@@ -6232,12 +5350,6 @@ func (s DescribeVirtualGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVirtualGateways sets the VirtualGateways field's value.
-func (s *DescribeVirtualGatewaysOutput) SetVirtualGateways(v []VirtualGateway) *DescribeVirtualGatewaysOutput {
-	s.VirtualGateways = v
-	return s
-}
-
 // Container for the parameters to the DescribeVirtualInterfaces operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfacesRequest
 type DescribeVirtualInterfacesInput struct {
@@ -6269,18 +5381,6 @@ func (s DescribeVirtualInterfacesInput) GoString() string {
 	return s.String()
 }
 
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DescribeVirtualInterfacesInput) SetConnectionId(v string) *DescribeVirtualInterfacesInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *DescribeVirtualInterfacesInput) SetVirtualInterfaceId(v string) *DescribeVirtualInterfacesInput {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
 // A structure containing a list of virtual interfaces.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterfaces
 type DescribeVirtualInterfacesOutput struct {
@@ -6305,12 +5405,6 @@ func (s DescribeVirtualInterfacesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVirtualInterfacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVirtualInterfaces sets the VirtualInterfaces field's value.
-func (s *DescribeVirtualInterfacesOutput) SetVirtualInterfaces(v []CreatePublicVirtualInterfaceOutput) *DescribeVirtualInterfacesOutput {
-	s.VirtualInterfaces = v
-	return s
 }
 
 // Container for the parameters to the DisassociateConnectionFromLag operation.
@@ -6363,18 +5457,6 @@ func (s *DisassociateConnectionFromLagInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DisassociateConnectionFromLagInput) SetConnectionId(v string) *DisassociateConnectionFromLagInput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *DisassociateConnectionFromLagInput) SetLagId(v string) *DisassociateConnectionFromLagInput {
-	s.LagId = &v
-	return s
 }
 
 // A connection represents the physical network connection between the AWS Direct
@@ -6483,78 +5565,6 @@ func (s DisassociateConnectionFromLagOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetAwsDevice sets the AwsDevice field's value.
-func (s *DisassociateConnectionFromLagOutput) SetAwsDevice(v string) *DisassociateConnectionFromLagOutput {
-	s.AwsDevice = &v
-	return s
-}
-
-// SetBandwidth sets the Bandwidth field's value.
-func (s *DisassociateConnectionFromLagOutput) SetBandwidth(v string) *DisassociateConnectionFromLagOutput {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *DisassociateConnectionFromLagOutput) SetConnectionId(v string) *DisassociateConnectionFromLagOutput {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetConnectionName sets the ConnectionName field's value.
-func (s *DisassociateConnectionFromLagOutput) SetConnectionName(v string) *DisassociateConnectionFromLagOutput {
-	s.ConnectionName = &v
-	return s
-}
-
-// SetConnectionState sets the ConnectionState field's value.
-func (s *DisassociateConnectionFromLagOutput) SetConnectionState(v ConnectionState) *DisassociateConnectionFromLagOutput {
-	s.ConnectionState = v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *DisassociateConnectionFromLagOutput) SetLagId(v string) *DisassociateConnectionFromLagOutput {
-	s.LagId = &v
-	return s
-}
-
-// SetLoaIssueTime sets the LoaIssueTime field's value.
-func (s *DisassociateConnectionFromLagOutput) SetLoaIssueTime(v time.Time) *DisassociateConnectionFromLagOutput {
-	s.LoaIssueTime = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *DisassociateConnectionFromLagOutput) SetLocation(v string) *DisassociateConnectionFromLagOutput {
-	s.Location = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *DisassociateConnectionFromLagOutput) SetOwnerAccount(v string) *DisassociateConnectionFromLagOutput {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetPartnerName sets the PartnerName field's value.
-func (s *DisassociateConnectionFromLagOutput) SetPartnerName(v string) *DisassociateConnectionFromLagOutput {
-	s.PartnerName = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *DisassociateConnectionFromLagOutput) SetRegion(v string) *DisassociateConnectionFromLagOutput {
-	s.Region = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *DisassociateConnectionFromLagOutput) SetVlan(v int64) *DisassociateConnectionFromLagOutput {
-	s.Vlan = &v
-	return s
-}
-
 // A direct connect gateway is an intermediate object that enables you to connect
 // virtual interfaces and virtual private gateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGateway
@@ -6602,42 +5612,6 @@ func (s Gateway) String() string {
 // GoString returns the string representation
 func (s Gateway) GoString() string {
 	return s.String()
-}
-
-// SetAmazonSideAsn sets the AmazonSideAsn field's value.
-func (s *Gateway) SetAmazonSideAsn(v int64) *Gateway {
-	s.AmazonSideAsn = &v
-	return s
-}
-
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *Gateway) SetDirectConnectGatewayId(v string) *Gateway {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetDirectConnectGatewayName sets the DirectConnectGatewayName field's value.
-func (s *Gateway) SetDirectConnectGatewayName(v string) *Gateway {
-	s.DirectConnectGatewayName = &v
-	return s
-}
-
-// SetDirectConnectGatewayState sets the DirectConnectGatewayState field's value.
-func (s *Gateway) SetDirectConnectGatewayState(v GatewayState) *Gateway {
-	s.DirectConnectGatewayState = v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *Gateway) SetOwnerAccount(v string) *Gateway {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetStateChangeError sets the StateChangeError field's value.
-func (s *Gateway) SetStateChangeError(v string) *Gateway {
-	s.StateChangeError = &v
-	return s
 }
 
 // The association between a direct connect gateway and virtual private gateway.
@@ -6690,42 +5664,6 @@ func (s GatewayAssociation) String() string {
 // GoString returns the string representation
 func (s GatewayAssociation) GoString() string {
 	return s.String()
-}
-
-// SetAssociationState sets the AssociationState field's value.
-func (s *GatewayAssociation) SetAssociationState(v GatewayAssociationState) *GatewayAssociation {
-	s.AssociationState = v
-	return s
-}
-
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *GatewayAssociation) SetDirectConnectGatewayId(v string) *GatewayAssociation {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetStateChangeError sets the StateChangeError field's value.
-func (s *GatewayAssociation) SetStateChangeError(v string) *GatewayAssociation {
-	s.StateChangeError = &v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *GatewayAssociation) SetVirtualGatewayId(v string) *GatewayAssociation {
-	s.VirtualGatewayId = &v
-	return s
-}
-
-// SetVirtualGatewayOwnerAccount sets the VirtualGatewayOwnerAccount field's value.
-func (s *GatewayAssociation) SetVirtualGatewayOwnerAccount(v string) *GatewayAssociation {
-	s.VirtualGatewayOwnerAccount = &v
-	return s
-}
-
-// SetVirtualGatewayRegion sets the VirtualGatewayRegion field's value.
-func (s *GatewayAssociation) SetVirtualGatewayRegion(v string) *GatewayAssociation {
-	s.VirtualGatewayRegion = &v
-	return s
 }
 
 // The association between a direct connect gateway and virtual interface.
@@ -6783,42 +5721,6 @@ func (s GatewayAttachment) GoString() string {
 	return s.String()
 }
 
-// SetAttachmentState sets the AttachmentState field's value.
-func (s *GatewayAttachment) SetAttachmentState(v GatewayAttachmentState) *GatewayAttachment {
-	s.AttachmentState = v
-	return s
-}
-
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *GatewayAttachment) SetDirectConnectGatewayId(v string) *GatewayAttachment {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetStateChangeError sets the StateChangeError field's value.
-func (s *GatewayAttachment) SetStateChangeError(v string) *GatewayAttachment {
-	s.StateChangeError = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *GatewayAttachment) SetVirtualInterfaceId(v string) *GatewayAttachment {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
-// SetVirtualInterfaceOwnerAccount sets the VirtualInterfaceOwnerAccount field's value.
-func (s *GatewayAttachment) SetVirtualInterfaceOwnerAccount(v string) *GatewayAttachment {
-	s.VirtualInterfaceOwnerAccount = &v
-	return s
-}
-
-// SetVirtualInterfaceRegion sets the VirtualInterfaceRegion field's value.
-func (s *GatewayAttachment) SetVirtualInterfaceRegion(v string) *GatewayAttachment {
-	s.VirtualInterfaceRegion = &v
-	return s
-}
-
 // An AWS Direct Connect location where connections and interconnects can be
 // requested.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location
@@ -6841,18 +5743,6 @@ func (s Location) String() string {
 // GoString returns the string representation
 func (s Location) GoString() string {
 	return s.String()
-}
-
-// SetLocationCode sets the LocationCode field's value.
-func (s *Location) SetLocationCode(v string) *Location {
-	s.LocationCode = &v
-	return s
-}
-
-// SetLocationName sets the LocationName field's value.
-func (s *Location) SetLocationName(v string) *Location {
-	s.LocationName = &v
-	return s
 }
 
 // A structure containing information about a new BGP peer.
@@ -6896,36 +5786,6 @@ func (s NewBGPPeer) String() string {
 // GoString returns the string representation
 func (s NewBGPPeer) GoString() string {
 	return s.String()
-}
-
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *NewBGPPeer) SetAddressFamily(v AddressFamily) *NewBGPPeer {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *NewBGPPeer) SetAmazonAddress(v string) *NewBGPPeer {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *NewBGPPeer) SetAsn(v int64) *NewBGPPeer {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *NewBGPPeer) SetAuthKey(v string) *NewBGPPeer {
-	s.AuthKey = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *NewBGPPeer) SetCustomerAddress(v string) *NewBGPPeer {
-	s.CustomerAddress = &v
-	return s
 }
 
 // A structure containing information about a new private virtual interface.
@@ -7020,60 +5880,6 @@ func (s *NewPrivateVirtualInterface) Validate() error {
 	return nil
 }
 
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPrivateVirtualInterface) SetAddressFamily(v AddressFamily) *NewPrivateVirtualInterface {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *NewPrivateVirtualInterface) SetAmazonAddress(v string) *NewPrivateVirtualInterface {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *NewPrivateVirtualInterface) SetAsn(v int64) *NewPrivateVirtualInterface {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *NewPrivateVirtualInterface) SetAuthKey(v string) *NewPrivateVirtualInterface {
-	s.AuthKey = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *NewPrivateVirtualInterface) SetCustomerAddress(v string) *NewPrivateVirtualInterface {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetDirectConnectGatewayId sets the DirectConnectGatewayId field's value.
-func (s *NewPrivateVirtualInterface) SetDirectConnectGatewayId(v string) *NewPrivateVirtualInterface {
-	s.DirectConnectGatewayId = &v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *NewPrivateVirtualInterface) SetVirtualGatewayId(v string) *NewPrivateVirtualInterface {
-	s.VirtualGatewayId = &v
-	return s
-}
-
-// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
-func (s *NewPrivateVirtualInterface) SetVirtualInterfaceName(v string) *NewPrivateVirtualInterface {
-	s.VirtualInterfaceName = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *NewPrivateVirtualInterface) SetVlan(v int64) *NewPrivateVirtualInterface {
-	s.Vlan = &v
-	return s
-}
-
 // A structure containing information about a private virtual interface that
 // will be provisioned on a connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterfaceAllocation
@@ -7154,48 +5960,6 @@ func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetAddressFamily(v AddressFamily) *NewPrivateVirtualInterfaceAllocation {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetAmazonAddress(v string) *NewPrivateVirtualInterfaceAllocation {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetAsn(v int64) *NewPrivateVirtualInterfaceAllocation {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetAuthKey(v string) *NewPrivateVirtualInterfaceAllocation {
-	s.AuthKey = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetCustomerAddress(v string) *NewPrivateVirtualInterfaceAllocation {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetVirtualInterfaceName(v string) *NewPrivateVirtualInterfaceAllocation {
-	s.VirtualInterfaceName = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetVlan(v int64) *NewPrivateVirtualInterfaceAllocation {
-	s.Vlan = &v
-	return s
 }
 
 // A structure containing information about a new public virtual interface.
@@ -7281,54 +6045,6 @@ func (s *NewPublicVirtualInterface) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPublicVirtualInterface) SetAddressFamily(v AddressFamily) *NewPublicVirtualInterface {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *NewPublicVirtualInterface) SetAmazonAddress(v string) *NewPublicVirtualInterface {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *NewPublicVirtualInterface) SetAsn(v int64) *NewPublicVirtualInterface {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *NewPublicVirtualInterface) SetAuthKey(v string) *NewPublicVirtualInterface {
-	s.AuthKey = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *NewPublicVirtualInterface) SetCustomerAddress(v string) *NewPublicVirtualInterface {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetRouteFilterPrefixes sets the RouteFilterPrefixes field's value.
-func (s *NewPublicVirtualInterface) SetRouteFilterPrefixes(v []RouteFilterPrefix) *NewPublicVirtualInterface {
-	s.RouteFilterPrefixes = v
-	return s
-}
-
-// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
-func (s *NewPublicVirtualInterface) SetVirtualInterfaceName(v string) *NewPublicVirtualInterface {
-	s.VirtualInterfaceName = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *NewPublicVirtualInterface) SetVlan(v int64) *NewPublicVirtualInterface {
-	s.Vlan = &v
-	return s
 }
 
 // A structure containing information about a public virtual interface that
@@ -7417,54 +6133,6 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	return nil
 }
 
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetAddressFamily(v AddressFamily) *NewPublicVirtualInterfaceAllocation {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetAmazonAddress(v string) *NewPublicVirtualInterfaceAllocation {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetAsn(v int64) *NewPublicVirtualInterfaceAllocation {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetAuthKey(v string) *NewPublicVirtualInterfaceAllocation {
-	s.AuthKey = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetCustomerAddress(v string) *NewPublicVirtualInterfaceAllocation {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetRouteFilterPrefixes sets the RouteFilterPrefixes field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetRouteFilterPrefixes(v []RouteFilterPrefix) *NewPublicVirtualInterfaceAllocation {
-	s.RouteFilterPrefixes = v
-	return s
-}
-
-// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetVirtualInterfaceName(v string) *NewPublicVirtualInterfaceAllocation {
-	s.VirtualInterfaceName = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetVlan(v int64) *NewPublicVirtualInterfaceAllocation {
-	s.Vlan = &v
-	return s
-}
-
 // The tags associated with a Direct Connect resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResourceTag
 type ResourceTag struct {
@@ -7485,18 +6153,6 @@ func (s ResourceTag) String() string {
 // GoString returns the string representation
 func (s ResourceTag) GoString() string {
 	return s.String()
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ResourceTag) SetResourceArn(v string) *ResourceTag {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ResourceTag) SetTags(v []Tag) *ResourceTag {
-	s.Tags = v
-	return s
 }
 
 // A route filter prefix that the customer can advertise through Border Gateway
@@ -7522,12 +6178,6 @@ func (s RouteFilterPrefix) String() string {
 // GoString returns the string representation
 func (s RouteFilterPrefix) GoString() string {
 	return s.String()
-}
-
-// SetCidr sets the Cidr field's value.
-func (s *RouteFilterPrefix) SetCidr(v string) *RouteFilterPrefix {
-	s.Cidr = &v
-	return s
 }
 
 // Information about a tag.
@@ -7569,18 +6219,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Container for the parameters to the TagResource operation.
@@ -7637,18 +6275,6 @@ func (s *TagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
-	s.Tags = v
-	return s
 }
 
 // The response received when TagResource is called.
@@ -7716,18 +6342,6 @@ func (s *UntagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // The response received when UntagResource is called.
@@ -7803,24 +6417,6 @@ func (s *UpdateLagInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLagId sets the LagId field's value.
-func (s *UpdateLagInput) SetLagId(v string) *UpdateLagInput {
-	s.LagId = &v
-	return s
-}
-
-// SetLagName sets the LagName field's value.
-func (s *UpdateLagInput) SetLagName(v string) *UpdateLagInput {
-	s.LagName = &v
-	return s
-}
-
-// SetMinimumLinks sets the MinimumLinks field's value.
-func (s *UpdateLagInput) SetMinimumLinks(v int64) *UpdateLagInput {
-	s.MinimumLinks = &v
-	return s
 }
 
 // Describes a link aggregation group (LAG). A LAG is a connection that uses
@@ -7919,78 +6515,6 @@ func (s UpdateLagOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAllowsHostedConnections sets the AllowsHostedConnections field's value.
-func (s *UpdateLagOutput) SetAllowsHostedConnections(v bool) *UpdateLagOutput {
-	s.AllowsHostedConnections = &v
-	return s
-}
-
-// SetAwsDevice sets the AwsDevice field's value.
-func (s *UpdateLagOutput) SetAwsDevice(v string) *UpdateLagOutput {
-	s.AwsDevice = &v
-	return s
-}
-
-// SetConnections sets the Connections field's value.
-func (s *UpdateLagOutput) SetConnections(v []DisassociateConnectionFromLagOutput) *UpdateLagOutput {
-	s.Connections = v
-	return s
-}
-
-// SetConnectionsBandwidth sets the ConnectionsBandwidth field's value.
-func (s *UpdateLagOutput) SetConnectionsBandwidth(v string) *UpdateLagOutput {
-	s.ConnectionsBandwidth = &v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *UpdateLagOutput) SetLagId(v string) *UpdateLagOutput {
-	s.LagId = &v
-	return s
-}
-
-// SetLagName sets the LagName field's value.
-func (s *UpdateLagOutput) SetLagName(v string) *UpdateLagOutput {
-	s.LagName = &v
-	return s
-}
-
-// SetLagState sets the LagState field's value.
-func (s *UpdateLagOutput) SetLagState(v LagState) *UpdateLagOutput {
-	s.LagState = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *UpdateLagOutput) SetLocation(v string) *UpdateLagOutput {
-	s.Location = &v
-	return s
-}
-
-// SetMinimumLinks sets the MinimumLinks field's value.
-func (s *UpdateLagOutput) SetMinimumLinks(v int64) *UpdateLagOutput {
-	s.MinimumLinks = &v
-	return s
-}
-
-// SetNumberOfConnections sets the NumberOfConnections field's value.
-func (s *UpdateLagOutput) SetNumberOfConnections(v int64) *UpdateLagOutput {
-	s.NumberOfConnections = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *UpdateLagOutput) SetOwnerAccount(v string) *UpdateLagOutput {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *UpdateLagOutput) SetRegion(v string) *UpdateLagOutput {
-	s.Region = &v
-	return s
-}
-
 // You can create one or more AWS Direct Connect private virtual interfaces
 // linking to your virtual private gateway.
 //
@@ -8027,18 +6551,6 @@ func (s VirtualGateway) String() string {
 // GoString returns the string representation
 func (s VirtualGateway) GoString() string {
 	return s.String()
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *VirtualGateway) SetVirtualGatewayId(v string) *VirtualGateway {
-	s.VirtualGatewayId = &v
-	return s
-}
-
-// SetVirtualGatewayState sets the VirtualGatewayState field's value.
-func (s *VirtualGateway) SetVirtualGatewayState(v string) *VirtualGateway {
-	s.VirtualGatewayState = &v
-	return s
 }
 
 // Indicates the address family for the BGP peer.

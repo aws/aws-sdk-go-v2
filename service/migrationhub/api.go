@@ -959,30 +959,6 @@ func (s *AssociateCreatedArtifactInput) Validate() error {
 	return nil
 }
 
-// SetCreatedArtifact sets the CreatedArtifact field's value.
-func (s *AssociateCreatedArtifactInput) SetCreatedArtifact(v *CreatedArtifact) *AssociateCreatedArtifactInput {
-	s.CreatedArtifact = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AssociateCreatedArtifactInput) SetDryRun(v bool) *AssociateCreatedArtifactInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *AssociateCreatedArtifactInput) SetMigrationTaskName(v string) *AssociateCreatedArtifactInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *AssociateCreatedArtifactInput) SetProgressUpdateStream(v string) *AssociateCreatedArtifactInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactResult
 type AssociateCreatedArtifactOutput struct {
 	_ struct{} `type:"structure"`
@@ -1072,30 +1048,6 @@ func (s *AssociateDiscoveredResourceInput) Validate() error {
 	return nil
 }
 
-// SetDiscoveredResource sets the DiscoveredResource field's value.
-func (s *AssociateDiscoveredResourceInput) SetDiscoveredResource(v *DiscoveredResource) *AssociateDiscoveredResourceInput {
-	s.DiscoveredResource = v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *AssociateDiscoveredResourceInput) SetDryRun(v bool) *AssociateDiscoveredResourceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *AssociateDiscoveredResourceInput) SetMigrationTaskName(v string) *AssociateDiscoveredResourceInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *AssociateDiscoveredResourceInput) SetProgressUpdateStream(v string) *AssociateDiscoveredResourceInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResourceResult
 type AssociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1157,18 +1109,6 @@ func (s *CreateProgressUpdateStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *CreateProgressUpdateStreamInput) SetDryRun(v bool) *CreateProgressUpdateStreamInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetProgressUpdateStreamName sets the ProgressUpdateStreamName field's value.
-func (s *CreateProgressUpdateStreamInput) SetProgressUpdateStreamName(v string) *CreateProgressUpdateStreamInput {
-	s.ProgressUpdateStreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStreamResult
@@ -1236,18 +1176,6 @@ func (s *CreatedArtifact) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreatedArtifact) SetDescription(v string) *CreatedArtifact {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreatedArtifact) SetName(v string) *CreatedArtifact {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamRequest
 type DeleteProgressUpdateStreamInput struct {
 	_ struct{} `type:"structure"`
@@ -1287,18 +1215,6 @@ func (s *DeleteProgressUpdateStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DeleteProgressUpdateStreamInput) SetDryRun(v bool) *DeleteProgressUpdateStreamInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetProgressUpdateStreamName sets the ProgressUpdateStreamName field's value.
-func (s *DeleteProgressUpdateStreamInput) SetProgressUpdateStreamName(v string) *DeleteProgressUpdateStreamInput {
-	s.ProgressUpdateStreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStreamResult
@@ -1360,12 +1276,6 @@ func (s *DescribeApplicationStateInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DescribeApplicationStateInput) SetApplicationId(v string) *DescribeApplicationStateInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationStateResult
 type DescribeApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1392,18 +1302,6 @@ func (s DescribeApplicationStateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeApplicationStateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationStatus sets the ApplicationStatus field's value.
-func (s *DescribeApplicationStateOutput) SetApplicationStatus(v ApplicationStatus) *DescribeApplicationStateOutput {
-	s.ApplicationStatus = v
-	return s
-}
-
-// SetLastUpdatedTime sets the LastUpdatedTime field's value.
-func (s *DescribeApplicationStateOutput) SetLastUpdatedTime(v time.Time) *DescribeApplicationStateOutput {
-	s.LastUpdatedTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskRequest
@@ -1455,18 +1353,6 @@ func (s *DescribeMigrationTaskInput) Validate() error {
 	return nil
 }
 
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *DescribeMigrationTaskInput) SetMigrationTaskName(v string) *DescribeMigrationTaskInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *DescribeMigrationTaskInput) SetProgressUpdateStream(v string) *DescribeMigrationTaskInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTaskResult
 type DescribeMigrationTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -1490,12 +1376,6 @@ func (s DescribeMigrationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeMigrationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMigrationTask sets the MigrationTask field's value.
-func (s *DescribeMigrationTaskOutput) SetMigrationTask(v *MigrationTask) *DescribeMigrationTaskOutput {
-	s.MigrationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactRequest
@@ -1563,30 +1443,6 @@ func (s *DisassociateCreatedArtifactInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCreatedArtifactName sets the CreatedArtifactName field's value.
-func (s *DisassociateCreatedArtifactInput) SetCreatedArtifactName(v string) *DisassociateCreatedArtifactInput {
-	s.CreatedArtifactName = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DisassociateCreatedArtifactInput) SetDryRun(v bool) *DisassociateCreatedArtifactInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *DisassociateCreatedArtifactInput) SetMigrationTaskName(v string) *DisassociateCreatedArtifactInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *DisassociateCreatedArtifactInput) SetProgressUpdateStream(v string) *DisassociateCreatedArtifactInput {
-	s.ProgressUpdateStream = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifactResult
@@ -1676,30 +1532,6 @@ func (s *DisassociateDiscoveredResourceInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *DisassociateDiscoveredResourceInput) SetConfigurationId(v string) *DisassociateDiscoveredResourceInput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *DisassociateDiscoveredResourceInput) SetDryRun(v bool) *DisassociateDiscoveredResourceInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *DisassociateDiscoveredResourceInput) SetMigrationTaskName(v string) *DisassociateDiscoveredResourceInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *DisassociateDiscoveredResourceInput) SetProgressUpdateStream(v string) *DisassociateDiscoveredResourceInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResourceResult
 type DisassociateDiscoveredResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1764,18 +1596,6 @@ func (s *DiscoveredResource) Validate() error {
 	return nil
 }
 
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *DiscoveredResource) SetConfigurationId(v string) *DiscoveredResource {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DiscoveredResource) SetDescription(v string) *DiscoveredResource {
-	s.Description = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskRequest
 type ImportMigrationTaskInput struct {
 	_ struct{} `type:"structure"`
@@ -1827,24 +1647,6 @@ func (s *ImportMigrationTaskInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *ImportMigrationTaskInput) SetDryRun(v bool) *ImportMigrationTaskInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *ImportMigrationTaskInput) SetMigrationTaskName(v string) *ImportMigrationTaskInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *ImportMigrationTaskInput) SetProgressUpdateStream(v string) *ImportMigrationTaskInput {
-	s.ProgressUpdateStream = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTaskResult
@@ -1929,30 +1731,6 @@ func (s *ListCreatedArtifactsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCreatedArtifactsInput) SetMaxResults(v int64) *ListCreatedArtifactsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *ListCreatedArtifactsInput) SetMigrationTaskName(v string) *ListCreatedArtifactsInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCreatedArtifactsInput) SetNextToken(v string) *ListCreatedArtifactsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *ListCreatedArtifactsInput) SetProgressUpdateStream(v string) *ListCreatedArtifactsInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifactsResult
 type ListCreatedArtifactsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1981,18 +1759,6 @@ func (s ListCreatedArtifactsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCreatedArtifactsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreatedArtifactList sets the CreatedArtifactList field's value.
-func (s *ListCreatedArtifactsOutput) SetCreatedArtifactList(v []CreatedArtifact) *ListCreatedArtifactsOutput {
-	s.CreatedArtifactList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCreatedArtifactsOutput) SetNextToken(v string) *ListCreatedArtifactsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResourcesRequest
@@ -2055,30 +1821,6 @@ func (s *ListDiscoveredResourcesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDiscoveredResourcesInput) SetMaxResults(v int64) *ListDiscoveredResourcesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *ListDiscoveredResourcesInput) SetMigrationTaskName(v string) *ListDiscoveredResourcesInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDiscoveredResourcesInput) SetNextToken(v string) *ListDiscoveredResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *ListDiscoveredResourcesInput) SetProgressUpdateStream(v string) *ListDiscoveredResourcesInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResourcesResult
 type ListDiscoveredResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2106,18 +1848,6 @@ func (s ListDiscoveredResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDiscoveredResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDiscoveredResourceList sets the DiscoveredResourceList field's value.
-func (s *ListDiscoveredResourcesOutput) SetDiscoveredResourceList(v []DiscoveredResource) *ListDiscoveredResourcesOutput {
-	s.DiscoveredResourceList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDiscoveredResourcesOutput) SetNextToken(v string) *ListDiscoveredResourcesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasksRequest
@@ -2162,24 +1892,6 @@ func (s *ListMigrationTasksInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListMigrationTasksInput) SetMaxResults(v int64) *ListMigrationTasksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListMigrationTasksInput) SetNextToken(v string) *ListMigrationTasksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceName sets the ResourceName field's value.
-func (s *ListMigrationTasksInput) SetResourceName(v string) *ListMigrationTasksInput {
-	s.ResourceName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasksResult
 type ListMigrationTasksOutput struct {
 	_ struct{} `type:"structure"`
@@ -2208,18 +1920,6 @@ func (s ListMigrationTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListMigrationTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMigrationTaskSummaryList sets the MigrationTaskSummaryList field's value.
-func (s *ListMigrationTasksOutput) SetMigrationTaskSummaryList(v []MigrationTaskSummary) *ListMigrationTasksOutput {
-	s.MigrationTaskSummaryList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListMigrationTasksOutput) SetNextToken(v string) *ListMigrationTasksOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreamsRequest
@@ -2258,18 +1958,6 @@ func (s *ListProgressUpdateStreamsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListProgressUpdateStreamsInput) SetMaxResults(v int64) *ListProgressUpdateStreamsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProgressUpdateStreamsInput) SetNextToken(v string) *ListProgressUpdateStreamsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreamsResult
 type ListProgressUpdateStreamsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2300,18 +1988,6 @@ func (s ListProgressUpdateStreamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListProgressUpdateStreamsOutput) SetNextToken(v string) *ListProgressUpdateStreamsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProgressUpdateStreamSummaryList sets the ProgressUpdateStreamSummaryList field's value.
-func (s *ListProgressUpdateStreamsOutput) SetProgressUpdateStreamSummaryList(v []ProgressUpdateStreamSummary) *ListProgressUpdateStreamsOutput {
-	s.ProgressUpdateStreamSummaryList = v
-	return s
-}
-
 // Represents a migration task in a migration tool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTask
 type MigrationTask struct {
@@ -2340,36 +2016,6 @@ func (s MigrationTask) String() string {
 // GoString returns the string representation
 func (s MigrationTask) GoString() string {
 	return s.String()
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *MigrationTask) SetMigrationTaskName(v string) *MigrationTask {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *MigrationTask) SetProgressUpdateStream(v string) *MigrationTask {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
-// SetResourceAttributeList sets the ResourceAttributeList field's value.
-func (s *MigrationTask) SetResourceAttributeList(v []ResourceAttribute) *MigrationTask {
-	s.ResourceAttributeList = v
-	return s
-}
-
-// SetTask sets the Task field's value.
-func (s *MigrationTask) SetTask(v *Task) *MigrationTask {
-	s.Task = v
-	return s
-}
-
-// SetUpdateDateTime sets the UpdateDateTime field's value.
-func (s *MigrationTask) SetUpdateDateTime(v time.Time) *MigrationTask {
-	s.UpdateDateTime = &v
-	return s
 }
 
 // MigrationTaskSummary includes MigrationTaskName, ProgressPercent, ProgressUpdateStream,
@@ -2405,42 +2051,6 @@ func (s MigrationTaskSummary) String() string {
 // GoString returns the string representation
 func (s MigrationTaskSummary) GoString() string {
 	return s.String()
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *MigrationTaskSummary) SetMigrationTaskName(v string) *MigrationTaskSummary {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressPercent sets the ProgressPercent field's value.
-func (s *MigrationTaskSummary) SetProgressPercent(v int64) *MigrationTaskSummary {
-	s.ProgressPercent = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *MigrationTaskSummary) SetProgressUpdateStream(v string) *MigrationTaskSummary {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *MigrationTaskSummary) SetStatus(v Status) *MigrationTaskSummary {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetail sets the StatusDetail field's value.
-func (s *MigrationTaskSummary) SetStatusDetail(v string) *MigrationTaskSummary {
-	s.StatusDetail = &v
-	return s
-}
-
-// SetUpdateDateTime sets the UpdateDateTime field's value.
-func (s *MigrationTaskSummary) SetUpdateDateTime(v time.Time) *MigrationTaskSummary {
-	s.UpdateDateTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateRequest
@@ -2490,24 +2100,6 @@ func (s *NotifyApplicationStateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *NotifyApplicationStateInput) SetApplicationId(v string) *NotifyApplicationStateInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *NotifyApplicationStateInput) SetDryRun(v bool) *NotifyApplicationStateInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *NotifyApplicationStateInput) SetStatus(v ApplicationStatus) *NotifyApplicationStateInput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationStateResult
@@ -2619,42 +2211,6 @@ func (s *NotifyMigrationTaskStateInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *NotifyMigrationTaskStateInput) SetDryRun(v bool) *NotifyMigrationTaskStateInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *NotifyMigrationTaskStateInput) SetMigrationTaskName(v string) *NotifyMigrationTaskStateInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetNextUpdateSeconds sets the NextUpdateSeconds field's value.
-func (s *NotifyMigrationTaskStateInput) SetNextUpdateSeconds(v int64) *NotifyMigrationTaskStateInput {
-	s.NextUpdateSeconds = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *NotifyMigrationTaskStateInput) SetProgressUpdateStream(v string) *NotifyMigrationTaskStateInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
-// SetTask sets the Task field's value.
-func (s *NotifyMigrationTaskStateInput) SetTask(v *Task) *NotifyMigrationTaskStateInput {
-	s.Task = v
-	return s
-}
-
-// SetUpdateDateTime sets the UpdateDateTime field's value.
-func (s *NotifyMigrationTaskStateInput) SetUpdateDateTime(v time.Time) *NotifyMigrationTaskStateInput {
-	s.UpdateDateTime = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskStateResult
 type NotifyMigrationTaskStateOutput struct {
 	_ struct{} `type:"structure"`
@@ -2695,12 +2251,6 @@ func (s ProgressUpdateStreamSummary) String() string {
 // GoString returns the string representation
 func (s ProgressUpdateStreamSummary) GoString() string {
 	return s.String()
-}
-
-// SetProgressUpdateStreamName sets the ProgressUpdateStreamName field's value.
-func (s *ProgressUpdateStreamSummary) SetProgressUpdateStreamName(v string) *ProgressUpdateStreamSummary {
-	s.ProgressUpdateStreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesRequest
@@ -2777,30 +2327,6 @@ func (s *PutResourceAttributesInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *PutResourceAttributesInput) SetDryRun(v bool) *PutResourceAttributesInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetMigrationTaskName sets the MigrationTaskName field's value.
-func (s *PutResourceAttributesInput) SetMigrationTaskName(v string) *PutResourceAttributesInput {
-	s.MigrationTaskName = &v
-	return s
-}
-
-// SetProgressUpdateStream sets the ProgressUpdateStream field's value.
-func (s *PutResourceAttributesInput) SetProgressUpdateStream(v string) *PutResourceAttributesInput {
-	s.ProgressUpdateStream = &v
-	return s
-}
-
-// SetResourceAttributeList sets the ResourceAttributeList field's value.
-func (s *PutResourceAttributesInput) SetResourceAttributeList(v []ResourceAttribute) *PutResourceAttributesInput {
-	s.ResourceAttributeList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributesResult
 type PutResourceAttributesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2869,18 +2395,6 @@ func (s *ResourceAttribute) Validate() error {
 	return nil
 }
 
-// SetType sets the Type field's value.
-func (s *ResourceAttribute) SetType(v ResourceAttributeType) *ResourceAttribute {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ResourceAttribute) SetValue(v string) *ResourceAttribute {
-	s.Value = &v
-	return s
-}
-
 // Task object encapsulating task information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/Task
 type Task struct {
@@ -2921,24 +2435,6 @@ func (s *Task) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetProgressPercent sets the ProgressPercent field's value.
-func (s *Task) SetProgressPercent(v int64) *Task {
-	s.ProgressPercent = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Task) SetStatus(v Status) *Task {
-	s.Status = v
-	return s
-}
-
-// SetStatusDetail sets the StatusDetail field's value.
-func (s *Task) SetStatusDetail(v string) *Task {
-	s.StatusDetail = &v
-	return s
 }
 
 type ApplicationStatus string

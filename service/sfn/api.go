@@ -1246,18 +1246,6 @@ func (s ActivityFailedEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *ActivityFailedEventDetails) SetCause(v string) *ActivityFailedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *ActivityFailedEventDetails) SetError(v string) *ActivityFailedEventDetails {
-	s.Error = &v
-	return s
-}
-
 // Contains details about an activity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityListItem
 type ActivityListItem struct {
@@ -1301,24 +1289,6 @@ func (s ActivityListItem) GoString() string {
 	return s.String()
 }
 
-// SetActivityArn sets the ActivityArn field's value.
-func (s *ActivityListItem) SetActivityArn(v string) *ActivityListItem {
-	s.ActivityArn = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ActivityListItem) SetCreationDate(v time.Time) *ActivityListItem {
-	s.CreationDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ActivityListItem) SetName(v string) *ActivityListItem {
-	s.Name = &v
-	return s
-}
-
 // Contains details about an activity schedule failure which occurred during
 // an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduleFailedEventDetails
@@ -1340,18 +1310,6 @@ func (s ActivityScheduleFailedEventDetails) String() string {
 // GoString returns the string representation
 func (s ActivityScheduleFailedEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *ActivityScheduleFailedEventDetails) SetCause(v string) *ActivityScheduleFailedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *ActivityScheduleFailedEventDetails) SetError(v string) *ActivityScheduleFailedEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Contains details about an activity scheduled during an execution.
@@ -1384,30 +1342,6 @@ func (s ActivityScheduledEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetHeartbeatInSeconds sets the HeartbeatInSeconds field's value.
-func (s *ActivityScheduledEventDetails) SetHeartbeatInSeconds(v int64) *ActivityScheduledEventDetails {
-	s.HeartbeatInSeconds = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *ActivityScheduledEventDetails) SetInput(v string) *ActivityScheduledEventDetails {
-	s.Input = &v
-	return s
-}
-
-// SetResource sets the Resource field's value.
-func (s *ActivityScheduledEventDetails) SetResource(v string) *ActivityScheduledEventDetails {
-	s.Resource = &v
-	return s
-}
-
-// SetTimeoutInSeconds sets the TimeoutInSeconds field's value.
-func (s *ActivityScheduledEventDetails) SetTimeoutInSeconds(v int64) *ActivityScheduledEventDetails {
-	s.TimeoutInSeconds = &v
-	return s
-}
-
 // Contains details about the start of an activity during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityStartedEventDetails
 type ActivityStartedEventDetails struct {
@@ -1426,12 +1360,6 @@ func (s ActivityStartedEventDetails) String() string {
 // GoString returns the string representation
 func (s ActivityStartedEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetWorkerName sets the WorkerName field's value.
-func (s *ActivityStartedEventDetails) SetWorkerName(v string) *ActivityStartedEventDetails {
-	s.WorkerName = &v
-	return s
 }
 
 // Contains details about an activity which successfully terminated during an
@@ -1454,12 +1382,6 @@ func (s ActivitySucceededEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetOutput sets the Output field's value.
-func (s *ActivitySucceededEventDetails) SetOutput(v string) *ActivitySucceededEventDetails {
-	s.Output = &v
-	return s
-}
-
 // Contains details about an activity timeout which occurred during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityTimedOutEventDetails
 type ActivityTimedOutEventDetails struct {
@@ -1480,18 +1402,6 @@ func (s ActivityTimedOutEventDetails) String() string {
 // GoString returns the string representation
 func (s ActivityTimedOutEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *ActivityTimedOutEventDetails) SetCause(v string) *ActivityTimedOutEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *ActivityTimedOutEventDetails) SetError(v string) *ActivityTimedOutEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput
@@ -1546,12 +1456,6 @@ func (s *CreateActivityInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateActivityInput) SetName(v string) *CreateActivityInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityOutput
 type CreateActivityOutput struct {
 	_ struct{} `type:"structure"`
@@ -1582,18 +1486,6 @@ func (s CreateActivityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateActivityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetActivityArn sets the ActivityArn field's value.
-func (s *CreateActivityOutput) SetActivityArn(v string) *CreateActivityOutput {
-	s.ActivityArn = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *CreateActivityOutput) SetCreationDate(v time.Time) *CreateActivityOutput {
-	s.CreationDate = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput
@@ -1672,24 +1564,6 @@ func (s *CreateStateMachineInput) Validate() error {
 	return nil
 }
 
-// SetDefinition sets the Definition field's value.
-func (s *CreateStateMachineInput) SetDefinition(v string) *CreateStateMachineInput {
-	s.Definition = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateStateMachineInput) SetName(v string) *CreateStateMachineInput {
-	s.Name = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateStateMachineInput) SetRoleArn(v string) *CreateStateMachineInput {
-	s.RoleArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineOutput
 type CreateStateMachineOutput struct {
 	_ struct{} `type:"structure"`
@@ -1720,18 +1594,6 @@ func (s CreateStateMachineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStateMachineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *CreateStateMachineOutput) SetCreationDate(v time.Time) *CreateStateMachineOutput {
-	s.CreationDate = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *CreateStateMachineOutput) SetStateMachineArn(v string) *CreateStateMachineOutput {
-	s.StateMachineArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivityInput
@@ -1769,12 +1631,6 @@ func (s *DeleteActivityInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActivityArn sets the ActivityArn field's value.
-func (s *DeleteActivityInput) SetActivityArn(v string) *DeleteActivityInput {
-	s.ActivityArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivityOutput
@@ -1836,12 +1692,6 @@ func (s *DeleteStateMachineInput) Validate() error {
 	return nil
 }
 
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *DeleteStateMachineInput) SetStateMachineArn(v string) *DeleteStateMachineInput {
-	s.StateMachineArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineOutput
 type DeleteStateMachineOutput struct {
 	_ struct{} `type:"structure"`
@@ -1901,12 +1751,6 @@ func (s *DescribeActivityInput) Validate() error {
 	return nil
 }
 
-// SetActivityArn sets the ActivityArn field's value.
-func (s *DescribeActivityInput) SetActivityArn(v string) *DescribeActivityInput {
-	s.ActivityArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivityOutput
 type DescribeActivityOutput struct {
 	_ struct{} `type:"structure"`
@@ -1956,24 +1800,6 @@ func (s DescribeActivityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetActivityArn sets the ActivityArn field's value.
-func (s *DescribeActivityOutput) SetActivityArn(v string) *DescribeActivityOutput {
-	s.ActivityArn = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *DescribeActivityOutput) SetCreationDate(v time.Time) *DescribeActivityOutput {
-	s.CreationDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeActivityOutput) SetName(v string) *DescribeActivityOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionInput
 type DescribeExecutionInput struct {
 	_ struct{} `type:"structure"`
@@ -2009,12 +1835,6 @@ func (s *DescribeExecutionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *DescribeExecutionInput) SetExecutionArn(v string) *DescribeExecutionInput {
-	s.ExecutionArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput
@@ -2088,54 +1908,6 @@ func (s DescribeExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *DescribeExecutionOutput) SetExecutionArn(v string) *DescribeExecutionOutput {
-	s.ExecutionArn = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *DescribeExecutionOutput) SetInput(v string) *DescribeExecutionOutput {
-	s.Input = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeExecutionOutput) SetName(v string) *DescribeExecutionOutput {
-	s.Name = &v
-	return s
-}
-
-// SetOutput sets the Output field's value.
-func (s *DescribeExecutionOutput) SetOutput(v string) *DescribeExecutionOutput {
-	s.Output = &v
-	return s
-}
-
-// SetStartDate sets the StartDate field's value.
-func (s *DescribeExecutionOutput) SetStartDate(v time.Time) *DescribeExecutionOutput {
-	s.StartDate = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *DescribeExecutionOutput) SetStateMachineArn(v string) *DescribeExecutionOutput {
-	s.StateMachineArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeExecutionOutput) SetStatus(v ExecutionStatus) *DescribeExecutionOutput {
-	s.Status = v
-	return s
-}
-
-// SetStopDate sets the StopDate field's value.
-func (s *DescribeExecutionOutput) SetStopDate(v time.Time) *DescribeExecutionOutput {
-	s.StopDate = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionInput
 type DescribeStateMachineForExecutionInput struct {
 	_ struct{} `type:"structure"`
@@ -2172,12 +1944,6 @@ func (s *DescribeStateMachineForExecutionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *DescribeStateMachineForExecutionInput) SetExecutionArn(v string) *DescribeStateMachineForExecutionInput {
-	s.ExecutionArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionOutput
@@ -2229,36 +1995,6 @@ func (s DescribeStateMachineForExecutionOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetDefinition sets the Definition field's value.
-func (s *DescribeStateMachineForExecutionOutput) SetDefinition(v string) *DescribeStateMachineForExecutionOutput {
-	s.Definition = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeStateMachineForExecutionOutput) SetName(v string) *DescribeStateMachineForExecutionOutput {
-	s.Name = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeStateMachineForExecutionOutput) SetRoleArn(v string) *DescribeStateMachineForExecutionOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *DescribeStateMachineForExecutionOutput) SetStateMachineArn(v string) *DescribeStateMachineForExecutionOutput {
-	s.StateMachineArn = &v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *DescribeStateMachineForExecutionOutput) SetUpdateDate(v time.Time) *DescribeStateMachineForExecutionOutput {
-	s.UpdateDate = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineInput
 type DescribeStateMachineInput struct {
 	_ struct{} `type:"structure"`
@@ -2294,12 +2030,6 @@ func (s *DescribeStateMachineInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *DescribeStateMachineInput) SetStateMachineArn(v string) *DescribeStateMachineInput {
-	s.StateMachineArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput
@@ -2366,42 +2096,6 @@ func (s DescribeStateMachineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *DescribeStateMachineOutput) SetCreationDate(v time.Time) *DescribeStateMachineOutput {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *DescribeStateMachineOutput) SetDefinition(v string) *DescribeStateMachineOutput {
-	s.Definition = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeStateMachineOutput) SetName(v string) *DescribeStateMachineOutput {
-	s.Name = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeStateMachineOutput) SetRoleArn(v string) *DescribeStateMachineOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *DescribeStateMachineOutput) SetStateMachineArn(v string) *DescribeStateMachineOutput {
-	s.StateMachineArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeStateMachineOutput) SetStatus(v StateMachineStatus) *DescribeStateMachineOutput {
-	s.Status = v
-	return s
-}
-
 // Contains details about an abort of an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionAbortedEventDetails
 type ExecutionAbortedEventDetails struct {
@@ -2424,18 +2118,6 @@ func (s ExecutionAbortedEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *ExecutionAbortedEventDetails) SetCause(v string) *ExecutionAbortedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *ExecutionAbortedEventDetails) SetError(v string) *ExecutionAbortedEventDetails {
-	s.Error = &v
-	return s
-}
-
 // Contains details about an execution failure event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionFailedEventDetails
 type ExecutionFailedEventDetails struct {
@@ -2456,18 +2138,6 @@ func (s ExecutionFailedEventDetails) String() string {
 // GoString returns the string representation
 func (s ExecutionFailedEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *ExecutionFailedEventDetails) SetCause(v string) *ExecutionFailedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *ExecutionFailedEventDetails) SetError(v string) *ExecutionFailedEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Contains details about an execution.
@@ -2526,42 +2196,6 @@ func (s ExecutionListItem) GoString() string {
 	return s.String()
 }
 
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *ExecutionListItem) SetExecutionArn(v string) *ExecutionListItem {
-	s.ExecutionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ExecutionListItem) SetName(v string) *ExecutionListItem {
-	s.Name = &v
-	return s
-}
-
-// SetStartDate sets the StartDate field's value.
-func (s *ExecutionListItem) SetStartDate(v time.Time) *ExecutionListItem {
-	s.StartDate = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *ExecutionListItem) SetStateMachineArn(v string) *ExecutionListItem {
-	s.StateMachineArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ExecutionListItem) SetStatus(v ExecutionStatus) *ExecutionListItem {
-	s.Status = v
-	return s
-}
-
-// SetStopDate sets the StopDate field's value.
-func (s *ExecutionListItem) SetStopDate(v time.Time) *ExecutionListItem {
-	s.StopDate = &v
-	return s
-}
-
 // Contains details about the start of the execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionStartedEventDetails
 type ExecutionStartedEventDetails struct {
@@ -2585,18 +2219,6 @@ func (s ExecutionStartedEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetInput sets the Input field's value.
-func (s *ExecutionStartedEventDetails) SetInput(v string) *ExecutionStartedEventDetails {
-	s.Input = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *ExecutionStartedEventDetails) SetRoleArn(v string) *ExecutionStartedEventDetails {
-	s.RoleArn = &v
-	return s
-}
-
 // Contains details about the successful termination of the execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionSucceededEventDetails
 type ExecutionSucceededEventDetails struct {
@@ -2614,12 +2236,6 @@ func (s ExecutionSucceededEventDetails) String() string {
 // GoString returns the string representation
 func (s ExecutionSucceededEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetOutput sets the Output field's value.
-func (s *ExecutionSucceededEventDetails) SetOutput(v string) *ExecutionSucceededEventDetails {
-	s.Output = &v
-	return s
 }
 
 // Contains details about the execution timeout which occurred during the execution.
@@ -2642,18 +2258,6 @@ func (s ExecutionTimedOutEventDetails) String() string {
 // GoString returns the string representation
 func (s ExecutionTimedOutEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *ExecutionTimedOutEventDetails) SetCause(v string) *ExecutionTimedOutEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *ExecutionTimedOutEventDetails) SetError(v string) *ExecutionTimedOutEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskInput
@@ -2702,18 +2306,6 @@ func (s *GetActivityTaskInput) Validate() error {
 	return nil
 }
 
-// SetActivityArn sets the ActivityArn field's value.
-func (s *GetActivityTaskInput) SetActivityArn(v string) *GetActivityTaskInput {
-	s.ActivityArn = &v
-	return s
-}
-
-// SetWorkerName sets the WorkerName field's value.
-func (s *GetActivityTaskInput) SetWorkerName(v string) *GetActivityTaskInput {
-	s.WorkerName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskOutput
 type GetActivityTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -2742,18 +2334,6 @@ func (s GetActivityTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetActivityTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInput sets the Input field's value.
-func (s *GetActivityTaskOutput) SetInput(v string) *GetActivityTaskOutput {
-	s.Input = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *GetActivityTaskOutput) SetTaskToken(v string) *GetActivityTaskOutput {
-	s.TaskToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryInput
@@ -2815,30 +2395,6 @@ func (s *GetExecutionHistoryInput) Validate() error {
 	return nil
 }
 
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *GetExecutionHistoryInput) SetExecutionArn(v string) *GetExecutionHistoryInput {
-	s.ExecutionArn = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetExecutionHistoryInput) SetMaxResults(v int64) *GetExecutionHistoryInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetExecutionHistoryInput) SetNextToken(v string) *GetExecutionHistoryInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *GetExecutionHistoryInput) SetReverseOrder(v bool) *GetExecutionHistoryInput {
-	s.ReverseOrder = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryOutput
 type GetExecutionHistoryOutput struct {
 	_ struct{} `type:"structure"`
@@ -2872,18 +2428,6 @@ func (s GetExecutionHistoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetExecutionHistoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvents sets the Events field's value.
-func (s *GetExecutionHistoryOutput) SetEvents(v []HistoryEvent) *GetExecutionHistoryOutput {
-	s.Events = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetExecutionHistoryOutput) SetNextToken(v string) *GetExecutionHistoryOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains details about the events of an execution.
@@ -2983,144 +2527,6 @@ func (s HistoryEvent) GoString() string {
 	return s.String()
 }
 
-// SetActivityFailedEventDetails sets the ActivityFailedEventDetails field's value.
-func (s *HistoryEvent) SetActivityFailedEventDetails(v *ActivityFailedEventDetails) *HistoryEvent {
-	s.ActivityFailedEventDetails = v
-	return s
-}
-
-// SetActivityScheduleFailedEventDetails sets the ActivityScheduleFailedEventDetails field's value.
-func (s *HistoryEvent) SetActivityScheduleFailedEventDetails(v *ActivityScheduleFailedEventDetails) *HistoryEvent {
-	s.ActivityScheduleFailedEventDetails = v
-	return s
-}
-
-// SetActivityScheduledEventDetails sets the ActivityScheduledEventDetails field's value.
-func (s *HistoryEvent) SetActivityScheduledEventDetails(v *ActivityScheduledEventDetails) *HistoryEvent {
-	s.ActivityScheduledEventDetails = v
-	return s
-}
-
-// SetActivityStartedEventDetails sets the ActivityStartedEventDetails field's value.
-func (s *HistoryEvent) SetActivityStartedEventDetails(v *ActivityStartedEventDetails) *HistoryEvent {
-	s.ActivityStartedEventDetails = v
-	return s
-}
-
-// SetActivitySucceededEventDetails sets the ActivitySucceededEventDetails field's value.
-func (s *HistoryEvent) SetActivitySucceededEventDetails(v *ActivitySucceededEventDetails) *HistoryEvent {
-	s.ActivitySucceededEventDetails = v
-	return s
-}
-
-// SetActivityTimedOutEventDetails sets the ActivityTimedOutEventDetails field's value.
-func (s *HistoryEvent) SetActivityTimedOutEventDetails(v *ActivityTimedOutEventDetails) *HistoryEvent {
-	s.ActivityTimedOutEventDetails = v
-	return s
-}
-
-// SetExecutionAbortedEventDetails sets the ExecutionAbortedEventDetails field's value.
-func (s *HistoryEvent) SetExecutionAbortedEventDetails(v *ExecutionAbortedEventDetails) *HistoryEvent {
-	s.ExecutionAbortedEventDetails = v
-	return s
-}
-
-// SetExecutionFailedEventDetails sets the ExecutionFailedEventDetails field's value.
-func (s *HistoryEvent) SetExecutionFailedEventDetails(v *ExecutionFailedEventDetails) *HistoryEvent {
-	s.ExecutionFailedEventDetails = v
-	return s
-}
-
-// SetExecutionStartedEventDetails sets the ExecutionStartedEventDetails field's value.
-func (s *HistoryEvent) SetExecutionStartedEventDetails(v *ExecutionStartedEventDetails) *HistoryEvent {
-	s.ExecutionStartedEventDetails = v
-	return s
-}
-
-// SetExecutionSucceededEventDetails sets the ExecutionSucceededEventDetails field's value.
-func (s *HistoryEvent) SetExecutionSucceededEventDetails(v *ExecutionSucceededEventDetails) *HistoryEvent {
-	s.ExecutionSucceededEventDetails = v
-	return s
-}
-
-// SetExecutionTimedOutEventDetails sets the ExecutionTimedOutEventDetails field's value.
-func (s *HistoryEvent) SetExecutionTimedOutEventDetails(v *ExecutionTimedOutEventDetails) *HistoryEvent {
-	s.ExecutionTimedOutEventDetails = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *HistoryEvent) SetId(v int64) *HistoryEvent {
-	s.Id = &v
-	return s
-}
-
-// SetLambdaFunctionFailedEventDetails sets the LambdaFunctionFailedEventDetails field's value.
-func (s *HistoryEvent) SetLambdaFunctionFailedEventDetails(v *LambdaFunctionFailedEventDetails) *HistoryEvent {
-	s.LambdaFunctionFailedEventDetails = v
-	return s
-}
-
-// SetLambdaFunctionScheduleFailedEventDetails sets the LambdaFunctionScheduleFailedEventDetails field's value.
-func (s *HistoryEvent) SetLambdaFunctionScheduleFailedEventDetails(v *LambdaFunctionScheduleFailedEventDetails) *HistoryEvent {
-	s.LambdaFunctionScheduleFailedEventDetails = v
-	return s
-}
-
-// SetLambdaFunctionScheduledEventDetails sets the LambdaFunctionScheduledEventDetails field's value.
-func (s *HistoryEvent) SetLambdaFunctionScheduledEventDetails(v *LambdaFunctionScheduledEventDetails) *HistoryEvent {
-	s.LambdaFunctionScheduledEventDetails = v
-	return s
-}
-
-// SetLambdaFunctionStartFailedEventDetails sets the LambdaFunctionStartFailedEventDetails field's value.
-func (s *HistoryEvent) SetLambdaFunctionStartFailedEventDetails(v *LambdaFunctionStartFailedEventDetails) *HistoryEvent {
-	s.LambdaFunctionStartFailedEventDetails = v
-	return s
-}
-
-// SetLambdaFunctionSucceededEventDetails sets the LambdaFunctionSucceededEventDetails field's value.
-func (s *HistoryEvent) SetLambdaFunctionSucceededEventDetails(v *LambdaFunctionSucceededEventDetails) *HistoryEvent {
-	s.LambdaFunctionSucceededEventDetails = v
-	return s
-}
-
-// SetLambdaFunctionTimedOutEventDetails sets the LambdaFunctionTimedOutEventDetails field's value.
-func (s *HistoryEvent) SetLambdaFunctionTimedOutEventDetails(v *LambdaFunctionTimedOutEventDetails) *HistoryEvent {
-	s.LambdaFunctionTimedOutEventDetails = v
-	return s
-}
-
-// SetPreviousEventId sets the PreviousEventId field's value.
-func (s *HistoryEvent) SetPreviousEventId(v int64) *HistoryEvent {
-	s.PreviousEventId = &v
-	return s
-}
-
-// SetStateEnteredEventDetails sets the StateEnteredEventDetails field's value.
-func (s *HistoryEvent) SetStateEnteredEventDetails(v *StateEnteredEventDetails) *HistoryEvent {
-	s.StateEnteredEventDetails = v
-	return s
-}
-
-// SetStateExitedEventDetails sets the StateExitedEventDetails field's value.
-func (s *HistoryEvent) SetStateExitedEventDetails(v *StateExitedEventDetails) *HistoryEvent {
-	s.StateExitedEventDetails = v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *HistoryEvent) SetTimestamp(v time.Time) *HistoryEvent {
-	s.Timestamp = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *HistoryEvent) SetType(v HistoryEventType) *HistoryEvent {
-	s.Type = v
-	return s
-}
-
 // Contains details about a lambda function which failed during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionFailedEventDetails
 type LambdaFunctionFailedEventDetails struct {
@@ -3141,18 +2547,6 @@ func (s LambdaFunctionFailedEventDetails) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionFailedEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *LambdaFunctionFailedEventDetails) SetCause(v string) *LambdaFunctionFailedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *LambdaFunctionFailedEventDetails) SetError(v string) *LambdaFunctionFailedEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Contains details about a failed lambda function schedule event which occurred
@@ -3176,18 +2570,6 @@ func (s LambdaFunctionScheduleFailedEventDetails) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionScheduleFailedEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *LambdaFunctionScheduleFailedEventDetails) SetCause(v string) *LambdaFunctionScheduleFailedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *LambdaFunctionScheduleFailedEventDetails) SetError(v string) *LambdaFunctionScheduleFailedEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Contains details about a lambda function scheduled during an execution.
@@ -3217,24 +2599,6 @@ func (s LambdaFunctionScheduledEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetInput sets the Input field's value.
-func (s *LambdaFunctionScheduledEventDetails) SetInput(v string) *LambdaFunctionScheduledEventDetails {
-	s.Input = &v
-	return s
-}
-
-// SetResource sets the Resource field's value.
-func (s *LambdaFunctionScheduledEventDetails) SetResource(v string) *LambdaFunctionScheduledEventDetails {
-	s.Resource = &v
-	return s
-}
-
-// SetTimeoutInSeconds sets the TimeoutInSeconds field's value.
-func (s *LambdaFunctionScheduledEventDetails) SetTimeoutInSeconds(v int64) *LambdaFunctionScheduledEventDetails {
-	s.TimeoutInSeconds = &v
-	return s
-}
-
 // Contains details about a lambda function which failed to start during an
 // execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionStartFailedEventDetails
@@ -3258,18 +2622,6 @@ func (s LambdaFunctionStartFailedEventDetails) GoString() string {
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *LambdaFunctionStartFailedEventDetails) SetCause(v string) *LambdaFunctionStartFailedEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *LambdaFunctionStartFailedEventDetails) SetError(v string) *LambdaFunctionStartFailedEventDetails {
-	s.Error = &v
-	return s
-}
-
 // Contains details about a lambda function which successfully terminated during
 // an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionSucceededEventDetails
@@ -3288,12 +2640,6 @@ func (s LambdaFunctionSucceededEventDetails) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionSucceededEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetOutput sets the Output field's value.
-func (s *LambdaFunctionSucceededEventDetails) SetOutput(v string) *LambdaFunctionSucceededEventDetails {
-	s.Output = &v
-	return s
 }
 
 // Contains details about a lambda function timeout which occurred during an
@@ -3317,18 +2663,6 @@ func (s LambdaFunctionTimedOutEventDetails) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionTimedOutEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *LambdaFunctionTimedOutEventDetails) SetCause(v string) *LambdaFunctionTimedOutEventDetails {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *LambdaFunctionTimedOutEventDetails) SetError(v string) *LambdaFunctionTimedOutEventDetails {
-	s.Error = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivitiesInput
@@ -3375,18 +2709,6 @@ func (s *ListActivitiesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListActivitiesInput) SetMaxResults(v int64) *ListActivitiesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListActivitiesInput) SetNextToken(v string) *ListActivitiesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivitiesOutput
 type ListActivitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3420,18 +2742,6 @@ func (s ListActivitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListActivitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetActivities sets the Activities field's value.
-func (s *ListActivitiesOutput) SetActivities(v []ActivityListItem) *ListActivitiesOutput {
-	s.Activities = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListActivitiesOutput) SetNextToken(v string) *ListActivitiesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsInput
@@ -3494,30 +2804,6 @@ func (s *ListExecutionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListExecutionsInput) SetMaxResults(v int64) *ListExecutionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListExecutionsInput) SetNextToken(v string) *ListExecutionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *ListExecutionsInput) SetStateMachineArn(v string) *ListExecutionsInput {
-	s.StateMachineArn = &v
-	return s
-}
-
-// SetStatusFilter sets the StatusFilter field's value.
-func (s *ListExecutionsInput) SetStatusFilter(v ExecutionStatus) *ListExecutionsInput {
-	s.StatusFilter = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsOutput
 type ListExecutionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3551,18 +2837,6 @@ func (s ListExecutionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListExecutionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutions sets the Executions field's value.
-func (s *ListExecutionsOutput) SetExecutions(v []ExecutionListItem) *ListExecutionsOutput {
-	s.Executions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListExecutionsOutput) SetNextToken(v string) *ListExecutionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachinesInput
@@ -3609,18 +2883,6 @@ func (s *ListStateMachinesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStateMachinesInput) SetMaxResults(v int64) *ListStateMachinesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStateMachinesInput) SetNextToken(v string) *ListStateMachinesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachinesOutput
 type ListStateMachinesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3652,18 +2914,6 @@ func (s ListStateMachinesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStateMachinesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStateMachinesOutput) SetNextToken(v string) *ListStateMachinesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStateMachines sets the StateMachines field's value.
-func (s *ListStateMachinesOutput) SetStateMachines(v []StateMachineListItem) *ListStateMachinesOutput {
-	s.StateMachines = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailureInput
@@ -3708,24 +2958,6 @@ func (s *SendTaskFailureInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCause sets the Cause field's value.
-func (s *SendTaskFailureInput) SetCause(v string) *SendTaskFailureInput {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *SendTaskFailureInput) SetError(v string) *SendTaskFailureInput {
-	s.Error = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *SendTaskFailureInput) SetTaskToken(v string) *SendTaskFailureInput {
-	s.TaskToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailureOutput
@@ -3786,12 +3018,6 @@ func (s *SendTaskHeartbeatInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *SendTaskHeartbeatInput) SetTaskToken(v string) *SendTaskHeartbeatInput {
-	s.TaskToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatOutput
@@ -3861,18 +3087,6 @@ func (s *SendTaskSuccessInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOutput sets the Output field's value.
-func (s *SendTaskSuccessInput) SetOutput(v string) *SendTaskSuccessInput {
-	s.Output = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *SendTaskSuccessInput) SetTaskToken(v string) *SendTaskSuccessInput {
-	s.TaskToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccessOutput
@@ -3977,24 +3191,6 @@ func (s *StartExecutionInput) Validate() error {
 	return nil
 }
 
-// SetInput sets the Input field's value.
-func (s *StartExecutionInput) SetInput(v string) *StartExecutionInput {
-	s.Input = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *StartExecutionInput) SetName(v string) *StartExecutionInput {
-	s.Name = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *StartExecutionInput) SetStateMachineArn(v string) *StartExecutionInput {
-	s.StateMachineArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionOutput
 type StartExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4027,18 +3223,6 @@ func (s StartExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *StartExecutionOutput) SetExecutionArn(v string) *StartExecutionOutput {
-	s.ExecutionArn = &v
-	return s
-}
-
-// SetStartDate sets the StartDate field's value.
-func (s *StartExecutionOutput) SetStartDate(v time.Time) *StartExecutionOutput {
-	s.StartDate = &v
-	return s
-}
-
 // Contains details about a state entered during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateEnteredEventDetails
 type StateEnteredEventDetails struct {
@@ -4061,18 +3245,6 @@ func (s StateEnteredEventDetails) String() string {
 // GoString returns the string representation
 func (s StateEnteredEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetInput sets the Input field's value.
-func (s *StateEnteredEventDetails) SetInput(v string) *StateEnteredEventDetails {
-	s.Input = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *StateEnteredEventDetails) SetName(v string) *StateEnteredEventDetails {
-	s.Name = &v
-	return s
 }
 
 // Contains details about an exit from a state during an execution.
@@ -4109,18 +3281,6 @@ func (s StateExitedEventDetails) String() string {
 // GoString returns the string representation
 func (s StateExitedEventDetails) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *StateExitedEventDetails) SetName(v string) *StateExitedEventDetails {
-	s.Name = &v
-	return s
-}
-
-// SetOutput sets the Output field's value.
-func (s *StateExitedEventDetails) SetOutput(v string) *StateExitedEventDetails {
-	s.Output = &v
-	return s
 }
 
 // Contains details about the state machine.
@@ -4166,24 +3326,6 @@ func (s StateMachineListItem) GoString() string {
 	return s.String()
 }
 
-// SetCreationDate sets the CreationDate field's value.
-func (s *StateMachineListItem) SetCreationDate(v time.Time) *StateMachineListItem {
-	s.CreationDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *StateMachineListItem) SetName(v string) *StateMachineListItem {
-	s.Name = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *StateMachineListItem) SetStateMachineArn(v string) *StateMachineListItem {
-	s.StateMachineArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionInput
 type StopExecutionInput struct {
 	_ struct{} `type:"structure"`
@@ -4227,24 +3369,6 @@ func (s *StopExecutionInput) Validate() error {
 	return nil
 }
 
-// SetCause sets the Cause field's value.
-func (s *StopExecutionInput) SetCause(v string) *StopExecutionInput {
-	s.Cause = &v
-	return s
-}
-
-// SetError sets the Error field's value.
-func (s *StopExecutionInput) SetError(v string) *StopExecutionInput {
-	s.Error = &v
-	return s
-}
-
-// SetExecutionArn sets the ExecutionArn field's value.
-func (s *StopExecutionInput) SetExecutionArn(v string) *StopExecutionInput {
-	s.ExecutionArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionOutput
 type StopExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4270,12 +3394,6 @@ func (s StopExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStopDate sets the StopDate field's value.
-func (s *StopExecutionOutput) SetStopDate(v time.Time) *StopExecutionOutput {
-	s.StopDate = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput
@@ -4327,24 +3445,6 @@ func (s *UpdateStateMachineInput) Validate() error {
 	return nil
 }
 
-// SetDefinition sets the Definition field's value.
-func (s *UpdateStateMachineInput) SetDefinition(v string) *UpdateStateMachineInput {
-	s.Definition = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *UpdateStateMachineInput) SetRoleArn(v string) *UpdateStateMachineInput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetStateMachineArn sets the StateMachineArn field's value.
-func (s *UpdateStateMachineInput) SetStateMachineArn(v string) *UpdateStateMachineInput {
-	s.StateMachineArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineOutput
 type UpdateStateMachineOutput struct {
 	_ struct{} `type:"structure"`
@@ -4370,12 +3470,6 @@ func (s UpdateStateMachineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateStateMachineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *UpdateStateMachineOutput) SetUpdateDate(v time.Time) *UpdateStateMachineOutput {
-	s.UpdateDate = &v
-	return s
 }
 
 type ExecutionStatus string

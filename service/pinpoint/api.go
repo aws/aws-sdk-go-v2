@@ -2972,24 +2972,6 @@ func (s ADMChannelRequest) GoString() string {
 	return s.String()
 }
 
-// SetClientId sets the ClientId field's value.
-func (s *ADMChannelRequest) SetClientId(v string) *ADMChannelRequest {
-	s.ClientId = &v
-	return s
-}
-
-// SetClientSecret sets the ClientSecret field's value.
-func (s *ADMChannelRequest) SetClientSecret(v string) *ADMChannelRequest {
-	s.ClientSecret = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *ADMChannelRequest) SetEnabled(v bool) *ADMChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
 // Amazon Device Messaging channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelResponse
 type ADMChannelResponse struct {
@@ -3034,66 +3016,6 @@ func (s ADMChannelResponse) String() string {
 // GoString returns the string representation
 func (s ADMChannelResponse) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ADMChannelResponse) SetApplicationId(v string) *ADMChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ADMChannelResponse) SetCreationDate(v string) *ADMChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *ADMChannelResponse) SetEnabled(v bool) *ADMChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *ADMChannelResponse) SetHasCredential(v bool) *ADMChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ADMChannelResponse) SetId(v string) *ADMChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *ADMChannelResponse) SetIsArchived(v bool) *ADMChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *ADMChannelResponse) SetLastModifiedBy(v string) *ADMChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *ADMChannelResponse) SetLastModifiedDate(v string) *ADMChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ADMChannelResponse) SetPlatform(v string) *ADMChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ADMChannelResponse) SetVersion(v int64) *ADMChannelResponse {
-	s.Version = &v
-	return s
 }
 
 // ADM Message.
@@ -3176,102 +3098,6 @@ func (s ADMMessage) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *ADMMessage) SetAction(v Action) *ADMMessage {
-	s.Action = v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *ADMMessage) SetBody(v string) *ADMMessage {
-	s.Body = &v
-	return s
-}
-
-// SetConsolidationKey sets the ConsolidationKey field's value.
-func (s *ADMMessage) SetConsolidationKey(v string) *ADMMessage {
-	s.ConsolidationKey = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *ADMMessage) SetData(v map[string]string) *ADMMessage {
-	s.Data = v
-	return s
-}
-
-// SetExpiresAfter sets the ExpiresAfter field's value.
-func (s *ADMMessage) SetExpiresAfter(v string) *ADMMessage {
-	s.ExpiresAfter = &v
-	return s
-}
-
-// SetIconReference sets the IconReference field's value.
-func (s *ADMMessage) SetIconReference(v string) *ADMMessage {
-	s.IconReference = &v
-	return s
-}
-
-// SetImageIconUrl sets the ImageIconUrl field's value.
-func (s *ADMMessage) SetImageIconUrl(v string) *ADMMessage {
-	s.ImageIconUrl = &v
-	return s
-}
-
-// SetImageUrl sets the ImageUrl field's value.
-func (s *ADMMessage) SetImageUrl(v string) *ADMMessage {
-	s.ImageUrl = &v
-	return s
-}
-
-// SetMD5 sets the MD5 field's value.
-func (s *ADMMessage) SetMD5(v string) *ADMMessage {
-	s.MD5 = &v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *ADMMessage) SetRawContent(v string) *ADMMessage {
-	s.RawContent = &v
-	return s
-}
-
-// SetSilentPush sets the SilentPush field's value.
-func (s *ADMMessage) SetSilentPush(v bool) *ADMMessage {
-	s.SilentPush = &v
-	return s
-}
-
-// SetSmallImageIconUrl sets the SmallImageIconUrl field's value.
-func (s *ADMMessage) SetSmallImageIconUrl(v string) *ADMMessage {
-	s.SmallImageIconUrl = &v
-	return s
-}
-
-// SetSound sets the Sound field's value.
-func (s *ADMMessage) SetSound(v string) *ADMMessage {
-	s.Sound = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *ADMMessage) SetSubstitutions(v map[string][]string) *ADMMessage {
-	s.Substitutions = v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *ADMMessage) SetTitle(v string) *ADMMessage {
-	s.Title = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *ADMMessage) SetUrl(v string) *ADMMessage {
-	s.Url = &v
-	return s
-}
-
 // Apple Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSChannelRequest
 type APNSChannelRequest struct {
@@ -3310,54 +3136,6 @@ func (s APNSChannelRequest) String() string {
 // GoString returns the string representation
 func (s APNSChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetBundleId sets the BundleId field's value.
-func (s *APNSChannelRequest) SetBundleId(v string) *APNSChannelRequest {
-	s.BundleId = &v
-	return s
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *APNSChannelRequest) SetCertificate(v string) *APNSChannelRequest {
-	s.Certificate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSChannelRequest) SetDefaultAuthenticationMethod(v string) *APNSChannelRequest {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSChannelRequest) SetEnabled(v bool) *APNSChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *APNSChannelRequest) SetPrivateKey(v string) *APNSChannelRequest {
-	s.PrivateKey = &v
-	return s
-}
-
-// SetTeamId sets the TeamId field's value.
-func (s *APNSChannelRequest) SetTeamId(v string) *APNSChannelRequest {
-	s.TeamId = &v
-	return s
-}
-
-// SetTokenKey sets the TokenKey field's value.
-func (s *APNSChannelRequest) SetTokenKey(v string) *APNSChannelRequest {
-	s.TokenKey = &v
-	return s
-}
-
-// SetTokenKeyId sets the TokenKeyId field's value.
-func (s *APNSChannelRequest) SetTokenKeyId(v string) *APNSChannelRequest {
-	s.TokenKeyId = &v
-	return s
 }
 
 // Apple Distribution Push Notification Service channel definition.
@@ -3410,78 +3188,6 @@ func (s APNSChannelResponse) String() string {
 // GoString returns the string representation
 func (s APNSChannelResponse) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *APNSChannelResponse) SetApplicationId(v string) *APNSChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *APNSChannelResponse) SetCreationDate(v string) *APNSChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSChannelResponse) SetDefaultAuthenticationMethod(v string) *APNSChannelResponse {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSChannelResponse) SetEnabled(v bool) *APNSChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *APNSChannelResponse) SetHasCredential(v bool) *APNSChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetHasTokenKey sets the HasTokenKey field's value.
-func (s *APNSChannelResponse) SetHasTokenKey(v bool) *APNSChannelResponse {
-	s.HasTokenKey = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *APNSChannelResponse) SetId(v string) *APNSChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *APNSChannelResponse) SetIsArchived(v bool) *APNSChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *APNSChannelResponse) SetLastModifiedBy(v string) *APNSChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *APNSChannelResponse) SetLastModifiedDate(v string) *APNSChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *APNSChannelResponse) SetPlatform(v string) *APNSChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *APNSChannelResponse) SetVersion(v int64) *APNSChannelResponse {
-	s.Version = &v
-	return s
 }
 
 // APNS Message.
@@ -3573,108 +3279,6 @@ func (s APNSMessage) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *APNSMessage) SetAction(v Action) *APNSMessage {
-	s.Action = v
-	return s
-}
-
-// SetBadge sets the Badge field's value.
-func (s *APNSMessage) SetBadge(v int64) *APNSMessage {
-	s.Badge = &v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *APNSMessage) SetBody(v string) *APNSMessage {
-	s.Body = &v
-	return s
-}
-
-// SetCategory sets the Category field's value.
-func (s *APNSMessage) SetCategory(v string) *APNSMessage {
-	s.Category = &v
-	return s
-}
-
-// SetCollapseId sets the CollapseId field's value.
-func (s *APNSMessage) SetCollapseId(v string) *APNSMessage {
-	s.CollapseId = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *APNSMessage) SetData(v map[string]string) *APNSMessage {
-	s.Data = v
-	return s
-}
-
-// SetMediaUrl sets the MediaUrl field's value.
-func (s *APNSMessage) SetMediaUrl(v string) *APNSMessage {
-	s.MediaUrl = &v
-	return s
-}
-
-// SetPreferredAuthenticationMethod sets the PreferredAuthenticationMethod field's value.
-func (s *APNSMessage) SetPreferredAuthenticationMethod(v string) *APNSMessage {
-	s.PreferredAuthenticationMethod = &v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *APNSMessage) SetPriority(v string) *APNSMessage {
-	s.Priority = &v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *APNSMessage) SetRawContent(v string) *APNSMessage {
-	s.RawContent = &v
-	return s
-}
-
-// SetSilentPush sets the SilentPush field's value.
-func (s *APNSMessage) SetSilentPush(v bool) *APNSMessage {
-	s.SilentPush = &v
-	return s
-}
-
-// SetSound sets the Sound field's value.
-func (s *APNSMessage) SetSound(v string) *APNSMessage {
-	s.Sound = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *APNSMessage) SetSubstitutions(v map[string][]string) *APNSMessage {
-	s.Substitutions = v
-	return s
-}
-
-// SetThreadId sets the ThreadId field's value.
-func (s *APNSMessage) SetThreadId(v string) *APNSMessage {
-	s.ThreadId = &v
-	return s
-}
-
-// SetTimeToLive sets the TimeToLive field's value.
-func (s *APNSMessage) SetTimeToLive(v int64) *APNSMessage {
-	s.TimeToLive = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *APNSMessage) SetTitle(v string) *APNSMessage {
-	s.Title = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *APNSMessage) SetUrl(v string) *APNSMessage {
-	s.Url = &v
-	return s
-}
-
 // Apple Development Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSSandboxChannelRequest
 type APNSSandboxChannelRequest struct {
@@ -3713,54 +3317,6 @@ func (s APNSSandboxChannelRequest) String() string {
 // GoString returns the string representation
 func (s APNSSandboxChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetBundleId sets the BundleId field's value.
-func (s *APNSSandboxChannelRequest) SetBundleId(v string) *APNSSandboxChannelRequest {
-	s.BundleId = &v
-	return s
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *APNSSandboxChannelRequest) SetCertificate(v string) *APNSSandboxChannelRequest {
-	s.Certificate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSSandboxChannelRequest) SetDefaultAuthenticationMethod(v string) *APNSSandboxChannelRequest {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSSandboxChannelRequest) SetEnabled(v bool) *APNSSandboxChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *APNSSandboxChannelRequest) SetPrivateKey(v string) *APNSSandboxChannelRequest {
-	s.PrivateKey = &v
-	return s
-}
-
-// SetTeamId sets the TeamId field's value.
-func (s *APNSSandboxChannelRequest) SetTeamId(v string) *APNSSandboxChannelRequest {
-	s.TeamId = &v
-	return s
-}
-
-// SetTokenKey sets the TokenKey field's value.
-func (s *APNSSandboxChannelRequest) SetTokenKey(v string) *APNSSandboxChannelRequest {
-	s.TokenKey = &v
-	return s
-}
-
-// SetTokenKeyId sets the TokenKeyId field's value.
-func (s *APNSSandboxChannelRequest) SetTokenKeyId(v string) *APNSSandboxChannelRequest {
-	s.TokenKeyId = &v
-	return s
 }
 
 // Apple Development Push Notification Service channel definition.
@@ -3815,78 +3371,6 @@ func (s APNSSandboxChannelResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *APNSSandboxChannelResponse) SetApplicationId(v string) *APNSSandboxChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *APNSSandboxChannelResponse) SetCreationDate(v string) *APNSSandboxChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSSandboxChannelResponse) SetDefaultAuthenticationMethod(v string) *APNSSandboxChannelResponse {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSSandboxChannelResponse) SetEnabled(v bool) *APNSSandboxChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *APNSSandboxChannelResponse) SetHasCredential(v bool) *APNSSandboxChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetHasTokenKey sets the HasTokenKey field's value.
-func (s *APNSSandboxChannelResponse) SetHasTokenKey(v bool) *APNSSandboxChannelResponse {
-	s.HasTokenKey = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *APNSSandboxChannelResponse) SetId(v string) *APNSSandboxChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *APNSSandboxChannelResponse) SetIsArchived(v bool) *APNSSandboxChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *APNSSandboxChannelResponse) SetLastModifiedBy(v string) *APNSSandboxChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *APNSSandboxChannelResponse) SetLastModifiedDate(v string) *APNSSandboxChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *APNSSandboxChannelResponse) SetPlatform(v string) *APNSSandboxChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *APNSSandboxChannelResponse) SetVersion(v int64) *APNSSandboxChannelResponse {
-	s.Version = &v
-	return s
-}
-
 // Apple VOIP Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelRequest
 type APNSVoipChannelRequest struct {
@@ -3925,54 +3409,6 @@ func (s APNSVoipChannelRequest) String() string {
 // GoString returns the string representation
 func (s APNSVoipChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetBundleId sets the BundleId field's value.
-func (s *APNSVoipChannelRequest) SetBundleId(v string) *APNSVoipChannelRequest {
-	s.BundleId = &v
-	return s
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *APNSVoipChannelRequest) SetCertificate(v string) *APNSVoipChannelRequest {
-	s.Certificate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSVoipChannelRequest) SetDefaultAuthenticationMethod(v string) *APNSVoipChannelRequest {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSVoipChannelRequest) SetEnabled(v bool) *APNSVoipChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *APNSVoipChannelRequest) SetPrivateKey(v string) *APNSVoipChannelRequest {
-	s.PrivateKey = &v
-	return s
-}
-
-// SetTeamId sets the TeamId field's value.
-func (s *APNSVoipChannelRequest) SetTeamId(v string) *APNSVoipChannelRequest {
-	s.TeamId = &v
-	return s
-}
-
-// SetTokenKey sets the TokenKey field's value.
-func (s *APNSVoipChannelRequest) SetTokenKey(v string) *APNSVoipChannelRequest {
-	s.TokenKey = &v
-	return s
-}
-
-// SetTokenKeyId sets the TokenKeyId field's value.
-func (s *APNSVoipChannelRequest) SetTokenKeyId(v string) *APNSVoipChannelRequest {
-	s.TokenKeyId = &v
-	return s
 }
 
 // Apple VOIP Push Notification Service channel definition.
@@ -4027,78 +3463,6 @@ func (s APNSVoipChannelResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *APNSVoipChannelResponse) SetApplicationId(v string) *APNSVoipChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *APNSVoipChannelResponse) SetCreationDate(v string) *APNSVoipChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSVoipChannelResponse) SetDefaultAuthenticationMethod(v string) *APNSVoipChannelResponse {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSVoipChannelResponse) SetEnabled(v bool) *APNSVoipChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *APNSVoipChannelResponse) SetHasCredential(v bool) *APNSVoipChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetHasTokenKey sets the HasTokenKey field's value.
-func (s *APNSVoipChannelResponse) SetHasTokenKey(v bool) *APNSVoipChannelResponse {
-	s.HasTokenKey = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *APNSVoipChannelResponse) SetId(v string) *APNSVoipChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *APNSVoipChannelResponse) SetIsArchived(v bool) *APNSVoipChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *APNSVoipChannelResponse) SetLastModifiedBy(v string) *APNSVoipChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *APNSVoipChannelResponse) SetLastModifiedDate(v string) *APNSVoipChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *APNSVoipChannelResponse) SetPlatform(v string) *APNSVoipChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *APNSVoipChannelResponse) SetVersion(v int64) *APNSVoipChannelResponse {
-	s.Version = &v
-	return s
-}
-
 // Apple VOIP Developer Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelRequest
 type APNSVoipSandboxChannelRequest struct {
@@ -4137,54 +3501,6 @@ func (s APNSVoipSandboxChannelRequest) String() string {
 // GoString returns the string representation
 func (s APNSVoipSandboxChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetBundleId sets the BundleId field's value.
-func (s *APNSVoipSandboxChannelRequest) SetBundleId(v string) *APNSVoipSandboxChannelRequest {
-	s.BundleId = &v
-	return s
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *APNSVoipSandboxChannelRequest) SetCertificate(v string) *APNSVoipSandboxChannelRequest {
-	s.Certificate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSVoipSandboxChannelRequest) SetDefaultAuthenticationMethod(v string) *APNSVoipSandboxChannelRequest {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSVoipSandboxChannelRequest) SetEnabled(v bool) *APNSVoipSandboxChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *APNSVoipSandboxChannelRequest) SetPrivateKey(v string) *APNSVoipSandboxChannelRequest {
-	s.PrivateKey = &v
-	return s
-}
-
-// SetTeamId sets the TeamId field's value.
-func (s *APNSVoipSandboxChannelRequest) SetTeamId(v string) *APNSVoipSandboxChannelRequest {
-	s.TeamId = &v
-	return s
-}
-
-// SetTokenKey sets the TokenKey field's value.
-func (s *APNSVoipSandboxChannelRequest) SetTokenKey(v string) *APNSVoipSandboxChannelRequest {
-	s.TokenKey = &v
-	return s
-}
-
-// SetTokenKeyId sets the TokenKeyId field's value.
-func (s *APNSVoipSandboxChannelRequest) SetTokenKeyId(v string) *APNSVoipSandboxChannelRequest {
-	s.TokenKeyId = &v
-	return s
 }
 
 // Apple VOIP Developer Push Notification Service channel definition.
@@ -4239,78 +3555,6 @@ func (s APNSVoipSandboxChannelResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *APNSVoipSandboxChannelResponse) SetApplicationId(v string) *APNSVoipSandboxChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *APNSVoipSandboxChannelResponse) SetCreationDate(v string) *APNSVoipSandboxChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultAuthenticationMethod sets the DefaultAuthenticationMethod field's value.
-func (s *APNSVoipSandboxChannelResponse) SetDefaultAuthenticationMethod(v string) *APNSVoipSandboxChannelResponse {
-	s.DefaultAuthenticationMethod = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *APNSVoipSandboxChannelResponse) SetEnabled(v bool) *APNSVoipSandboxChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *APNSVoipSandboxChannelResponse) SetHasCredential(v bool) *APNSVoipSandboxChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetHasTokenKey sets the HasTokenKey field's value.
-func (s *APNSVoipSandboxChannelResponse) SetHasTokenKey(v bool) *APNSVoipSandboxChannelResponse {
-	s.HasTokenKey = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *APNSVoipSandboxChannelResponse) SetId(v string) *APNSVoipSandboxChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *APNSVoipSandboxChannelResponse) SetIsArchived(v bool) *APNSVoipSandboxChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *APNSVoipSandboxChannelResponse) SetLastModifiedBy(v string) *APNSVoipSandboxChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *APNSVoipSandboxChannelResponse) SetLastModifiedDate(v string) *APNSVoipSandboxChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *APNSVoipSandboxChannelResponse) SetPlatform(v string) *APNSVoipSandboxChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *APNSVoipSandboxChannelResponse) SetVersion(v int64) *APNSVoipSandboxChannelResponse {
-	s.Version = &v
-	return s
-}
-
 // Activities for campaign.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivitiesResponse
 type ActivitiesResponse struct {
@@ -4328,12 +3572,6 @@ func (s ActivitiesResponse) String() string {
 // GoString returns the string representation
 func (s ActivitiesResponse) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *ActivitiesResponse) SetItem(v []ActivityResponse) *ActivitiesResponse {
-	s.Item = v
-	return s
 }
 
 // Activity definition
@@ -4394,84 +3632,6 @@ func (s ActivityResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ActivityResponse) SetApplicationId(v string) *ActivityResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *ActivityResponse) SetCampaignId(v string) *ActivityResponse {
-	s.CampaignId = &v
-	return s
-}
-
-// SetEnd sets the End field's value.
-func (s *ActivityResponse) SetEnd(v string) *ActivityResponse {
-	s.End = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ActivityResponse) SetId(v string) *ActivityResponse {
-	s.Id = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *ActivityResponse) SetResult(v string) *ActivityResponse {
-	s.Result = &v
-	return s
-}
-
-// SetScheduledStart sets the ScheduledStart field's value.
-func (s *ActivityResponse) SetScheduledStart(v string) *ActivityResponse {
-	s.ScheduledStart = &v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *ActivityResponse) SetStart(v string) *ActivityResponse {
-	s.Start = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ActivityResponse) SetState(v string) *ActivityResponse {
-	s.State = &v
-	return s
-}
-
-// SetSuccessfulEndpointCount sets the SuccessfulEndpointCount field's value.
-func (s *ActivityResponse) SetSuccessfulEndpointCount(v int64) *ActivityResponse {
-	s.SuccessfulEndpointCount = &v
-	return s
-}
-
-// SetTimezonesCompletedCount sets the TimezonesCompletedCount field's value.
-func (s *ActivityResponse) SetTimezonesCompletedCount(v int64) *ActivityResponse {
-	s.TimezonesCompletedCount = &v
-	return s
-}
-
-// SetTimezonesTotalCount sets the TimezonesTotalCount field's value.
-func (s *ActivityResponse) SetTimezonesTotalCount(v int64) *ActivityResponse {
-	s.TimezonesTotalCount = &v
-	return s
-}
-
-// SetTotalEndpointCount sets the TotalEndpointCount field's value.
-func (s *ActivityResponse) SetTotalEndpointCount(v int64) *ActivityResponse {
-	s.TotalEndpointCount = &v
-	return s
-}
-
-// SetTreatmentId sets the TreatmentId field's value.
-func (s *ActivityResponse) SetTreatmentId(v string) *ActivityResponse {
-	s.TreatmentId = &v
-	return s
-}
-
 // Address configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AddressConfiguration
 type AddressConfiguration struct {
@@ -4505,42 +3665,6 @@ func (s AddressConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetBodyOverride sets the BodyOverride field's value.
-func (s *AddressConfiguration) SetBodyOverride(v string) *AddressConfiguration {
-	s.BodyOverride = &v
-	return s
-}
-
-// SetChannelType sets the ChannelType field's value.
-func (s *AddressConfiguration) SetChannelType(v ChannelType) *AddressConfiguration {
-	s.ChannelType = v
-	return s
-}
-
-// SetContext sets the Context field's value.
-func (s *AddressConfiguration) SetContext(v map[string]string) *AddressConfiguration {
-	s.Context = v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *AddressConfiguration) SetRawContent(v string) *AddressConfiguration {
-	s.RawContent = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *AddressConfiguration) SetSubstitutions(v map[string][]string) *AddressConfiguration {
-	s.Substitutions = v
-	return s
-}
-
-// SetTitleOverride sets the TitleOverride field's value.
-func (s *AddressConfiguration) SetTitleOverride(v string) *AddressConfiguration {
-	s.TitleOverride = &v
-	return s
-}
-
 // Application Response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationResponse
 type ApplicationResponse struct {
@@ -4561,18 +3685,6 @@ func (s ApplicationResponse) String() string {
 // GoString returns the string representation
 func (s ApplicationResponse) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *ApplicationResponse) SetId(v string) *ApplicationResponse {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ApplicationResponse) SetName(v string) *ApplicationResponse {
-	s.Name = &v
-	return s
 }
 
 // Application settings.
@@ -4607,30 +3719,6 @@ func (s ApplicationSettingsResource) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ApplicationSettingsResource) SetApplicationId(v string) *ApplicationSettingsResource {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *ApplicationSettingsResource) SetLastModifiedDate(v string) *ApplicationSettingsResource {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetLimits sets the Limits field's value.
-func (s *ApplicationSettingsResource) SetLimits(v *CampaignLimits) *ApplicationSettingsResource {
-	s.Limits = v
-	return s
-}
-
-// SetQuietTime sets the QuietTime field's value.
-func (s *ApplicationSettingsResource) SetQuietTime(v *QuietTime) *ApplicationSettingsResource {
-	s.QuietTime = v
-	return s
-}
-
 // Get Applications Result.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationsResponse
 type ApplicationsResponse struct {
@@ -4652,18 +3740,6 @@ func (s ApplicationsResponse) String() string {
 // GoString returns the string representation
 func (s ApplicationsResponse) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *ApplicationsResponse) SetItem(v []ApplicationResponse) *ApplicationsResponse {
-	s.Item = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ApplicationsResponse) SetNextToken(v string) *ApplicationsResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Custom attibute dimension
@@ -4689,18 +3765,6 @@ func (s AttributeDimension) GoString() string {
 	return s.String()
 }
 
-// SetAttributeType sets the AttributeType field's value.
-func (s *AttributeDimension) SetAttributeType(v AttributeType) *AttributeDimension {
-	s.AttributeType = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *AttributeDimension) SetValues(v []string) *AttributeDimension {
-	s.Values = v
-	return s
-}
-
 // Baidu Cloud Push credentials
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduChannelRequest
 type BaiduChannelRequest struct {
@@ -4724,24 +3788,6 @@ func (s BaiduChannelRequest) String() string {
 // GoString returns the string representation
 func (s BaiduChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetApiKey sets the ApiKey field's value.
-func (s *BaiduChannelRequest) SetApiKey(v string) *BaiduChannelRequest {
-	s.ApiKey = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *BaiduChannelRequest) SetEnabled(v bool) *BaiduChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetSecretKey sets the SecretKey field's value.
-func (s *BaiduChannelRequest) SetSecretKey(v string) *BaiduChannelRequest {
-	s.SecretKey = &v
-	return s
 }
 
 // Baidu Cloud Messaging channel definition
@@ -4791,72 +3837,6 @@ func (s BaiduChannelResponse) String() string {
 // GoString returns the string representation
 func (s BaiduChannelResponse) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *BaiduChannelResponse) SetApplicationId(v string) *BaiduChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *BaiduChannelResponse) SetCreationDate(v string) *BaiduChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetCredential sets the Credential field's value.
-func (s *BaiduChannelResponse) SetCredential(v string) *BaiduChannelResponse {
-	s.Credential = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *BaiduChannelResponse) SetEnabled(v bool) *BaiduChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *BaiduChannelResponse) SetHasCredential(v bool) *BaiduChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *BaiduChannelResponse) SetId(v string) *BaiduChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *BaiduChannelResponse) SetIsArchived(v bool) *BaiduChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *BaiduChannelResponse) SetLastModifiedBy(v string) *BaiduChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *BaiduChannelResponse) SetLastModifiedDate(v string) *BaiduChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *BaiduChannelResponse) SetPlatform(v string) *BaiduChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *BaiduChannelResponse) SetVersion(v int64) *BaiduChannelResponse {
-	s.Version = &v
-	return s
 }
 
 // Baidu Message.
@@ -4926,84 +3906,6 @@ func (s BaiduMessage) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *BaiduMessage) SetAction(v Action) *BaiduMessage {
-	s.Action = v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *BaiduMessage) SetBody(v string) *BaiduMessage {
-	s.Body = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *BaiduMessage) SetData(v map[string]string) *BaiduMessage {
-	s.Data = v
-	return s
-}
-
-// SetIconReference sets the IconReference field's value.
-func (s *BaiduMessage) SetIconReference(v string) *BaiduMessage {
-	s.IconReference = &v
-	return s
-}
-
-// SetImageIconUrl sets the ImageIconUrl field's value.
-func (s *BaiduMessage) SetImageIconUrl(v string) *BaiduMessage {
-	s.ImageIconUrl = &v
-	return s
-}
-
-// SetImageUrl sets the ImageUrl field's value.
-func (s *BaiduMessage) SetImageUrl(v string) *BaiduMessage {
-	s.ImageUrl = &v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *BaiduMessage) SetRawContent(v string) *BaiduMessage {
-	s.RawContent = &v
-	return s
-}
-
-// SetSilentPush sets the SilentPush field's value.
-func (s *BaiduMessage) SetSilentPush(v bool) *BaiduMessage {
-	s.SilentPush = &v
-	return s
-}
-
-// SetSmallImageIconUrl sets the SmallImageIconUrl field's value.
-func (s *BaiduMessage) SetSmallImageIconUrl(v string) *BaiduMessage {
-	s.SmallImageIconUrl = &v
-	return s
-}
-
-// SetSound sets the Sound field's value.
-func (s *BaiduMessage) SetSound(v string) *BaiduMessage {
-	s.Sound = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *BaiduMessage) SetSubstitutions(v map[string][]string) *BaiduMessage {
-	s.Substitutions = v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *BaiduMessage) SetTitle(v string) *BaiduMessage {
-	s.Title = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *BaiduMessage) SetUrl(v string) *BaiduMessage {
-	s.Url = &v
-	return s
-}
-
 // The email message configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEmailMessage
 type CampaignEmailMessage struct {
@@ -5031,30 +3933,6 @@ func (s CampaignEmailMessage) String() string {
 // GoString returns the string representation
 func (s CampaignEmailMessage) GoString() string {
 	return s.String()
-}
-
-// SetBody sets the Body field's value.
-func (s *CampaignEmailMessage) SetBody(v string) *CampaignEmailMessage {
-	s.Body = &v
-	return s
-}
-
-// SetFromAddress sets the FromAddress field's value.
-func (s *CampaignEmailMessage) SetFromAddress(v string) *CampaignEmailMessage {
-	s.FromAddress = &v
-	return s
-}
-
-// SetHtmlBody sets the HtmlBody field's value.
-func (s *CampaignEmailMessage) SetHtmlBody(v string) *CampaignEmailMessage {
-	s.HtmlBody = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *CampaignEmailMessage) SetTitle(v string) *CampaignEmailMessage {
-	s.Title = &v
-	return s
 }
 
 // Campaign Limits are used to limit the number of messages that can be sent
@@ -5086,30 +3964,6 @@ func (s CampaignLimits) String() string {
 // GoString returns the string representation
 func (s CampaignLimits) GoString() string {
 	return s.String()
-}
-
-// SetDaily sets the Daily field's value.
-func (s *CampaignLimits) SetDaily(v int64) *CampaignLimits {
-	s.Daily = &v
-	return s
-}
-
-// SetMaximumDuration sets the MaximumDuration field's value.
-func (s *CampaignLimits) SetMaximumDuration(v int64) *CampaignLimits {
-	s.MaximumDuration = &v
-	return s
-}
-
-// SetMessagesPerSecond sets the MessagesPerSecond field's value.
-func (s *CampaignLimits) SetMessagesPerSecond(v int64) *CampaignLimits {
-	s.MessagesPerSecond = &v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *CampaignLimits) SetTotal(v int64) *CampaignLimits {
-	s.Total = &v
-	return s
 }
 
 // Campaign definition
@@ -5189,120 +4043,6 @@ func (s CampaignResponse) GoString() string {
 	return s.String()
 }
 
-// SetAdditionalTreatments sets the AdditionalTreatments field's value.
-func (s *CampaignResponse) SetAdditionalTreatments(v []TreatmentResource) *CampaignResponse {
-	s.AdditionalTreatments = v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CampaignResponse) SetApplicationId(v string) *CampaignResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *CampaignResponse) SetCreationDate(v string) *CampaignResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefaultState sets the DefaultState field's value.
-func (s *CampaignResponse) SetDefaultState(v *CampaignState) *CampaignResponse {
-	s.DefaultState = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CampaignResponse) SetDescription(v string) *CampaignResponse {
-	s.Description = &v
-	return s
-}
-
-// SetHoldoutPercent sets the HoldoutPercent field's value.
-func (s *CampaignResponse) SetHoldoutPercent(v int64) *CampaignResponse {
-	s.HoldoutPercent = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CampaignResponse) SetId(v string) *CampaignResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsPaused sets the IsPaused field's value.
-func (s *CampaignResponse) SetIsPaused(v bool) *CampaignResponse {
-	s.IsPaused = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *CampaignResponse) SetLastModifiedDate(v string) *CampaignResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetLimits sets the Limits field's value.
-func (s *CampaignResponse) SetLimits(v *CampaignLimits) *CampaignResponse {
-	s.Limits = v
-	return s
-}
-
-// SetMessageConfiguration sets the MessageConfiguration field's value.
-func (s *CampaignResponse) SetMessageConfiguration(v *MessageConfiguration) *CampaignResponse {
-	s.MessageConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CampaignResponse) SetName(v string) *CampaignResponse {
-	s.Name = &v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *CampaignResponse) SetSchedule(v *Schedule) *CampaignResponse {
-	s.Schedule = v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *CampaignResponse) SetSegmentId(v string) *CampaignResponse {
-	s.SegmentId = &v
-	return s
-}
-
-// SetSegmentVersion sets the SegmentVersion field's value.
-func (s *CampaignResponse) SetSegmentVersion(v int64) *CampaignResponse {
-	s.SegmentVersion = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CampaignResponse) SetState(v *CampaignState) *CampaignResponse {
-	s.State = v
-	return s
-}
-
-// SetTreatmentDescription sets the TreatmentDescription field's value.
-func (s *CampaignResponse) SetTreatmentDescription(v string) *CampaignResponse {
-	s.TreatmentDescription = &v
-	return s
-}
-
-// SetTreatmentName sets the TreatmentName field's value.
-func (s *CampaignResponse) SetTreatmentName(v string) *CampaignResponse {
-	s.TreatmentName = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CampaignResponse) SetVersion(v int64) *CampaignResponse {
-	s.Version = &v
-	return s
-}
-
 // SMS message configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignSmsMessage
 type CampaignSmsMessage struct {
@@ -5328,24 +4068,6 @@ func (s CampaignSmsMessage) GoString() string {
 	return s.String()
 }
 
-// SetBody sets the Body field's value.
-func (s *CampaignSmsMessage) SetBody(v string) *CampaignSmsMessage {
-	s.Body = &v
-	return s
-}
-
-// SetMessageType sets the MessageType field's value.
-func (s *CampaignSmsMessage) SetMessageType(v MessageType) *CampaignSmsMessage {
-	s.MessageType = v
-	return s
-}
-
-// SetSenderId sets the SenderId field's value.
-func (s *CampaignSmsMessage) SetSenderId(v string) *CampaignSmsMessage {
-	s.SenderId = &v
-	return s
-}
-
 // State of the Campaign
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignState
 type CampaignState struct {
@@ -5365,12 +4087,6 @@ func (s CampaignState) String() string {
 // GoString returns the string representation
 func (s CampaignState) GoString() string {
 	return s.String()
-}
-
-// SetCampaignStatus sets the CampaignStatus field's value.
-func (s *CampaignState) SetCampaignStatus(v CampaignStatus) *CampaignState {
-	s.CampaignStatus = v
-	return s
 }
 
 // List of available campaigns.
@@ -5394,18 +4110,6 @@ func (s CampaignsResponse) String() string {
 // GoString returns the string representation
 func (s CampaignsResponse) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *CampaignsResponse) SetItem(v []CampaignResponse) *CampaignsResponse {
-	s.Item = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *CampaignsResponse) SetNextToken(v string) *CampaignsResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateAppRequest
@@ -5442,12 +4146,6 @@ func (s *CreateAppInput) Validate() error {
 	return nil
 }
 
-// SetCreateApplicationRequest sets the CreateApplicationRequest field's value.
-func (s *CreateAppInput) SetCreateApplicationRequest(v *CreateApplicationRequest) *CreateAppInput {
-	s.CreateApplicationRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateAppResponse
 type CreateAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
@@ -5475,12 +4173,6 @@ func (s CreateAppOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplicationResponse sets the ApplicationResponse field's value.
-func (s *CreateAppOutput) SetApplicationResponse(v *ApplicationResponse) *CreateAppOutput {
-	s.ApplicationResponse = v
-	return s
-}
-
 // Application Request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApplicationRequest
 type CreateApplicationRequest struct {
@@ -5498,12 +4190,6 @@ func (s CreateApplicationRequest) String() string {
 // GoString returns the string representation
 func (s CreateApplicationRequest) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *CreateApplicationRequest) SetName(v string) *CreateApplicationRequest {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaignRequest
@@ -5547,18 +4233,6 @@ func (s *CreateCampaignInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateCampaignInput) SetApplicationId(v string) *CreateCampaignInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetWriteCampaignRequest sets the WriteCampaignRequest field's value.
-func (s *CreateCampaignInput) SetWriteCampaignRequest(v *WriteCampaignRequest) *CreateCampaignInput {
-	s.WriteCampaignRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaignResponse
 type CreateCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
@@ -5584,12 +4258,6 @@ func (s CreateCampaignOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCampaignOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignResponse sets the CampaignResponse field's value.
-func (s *CreateCampaignOutput) SetCampaignResponse(v *CampaignResponse) *CreateCampaignOutput {
-	s.CampaignResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJobRequest
@@ -5631,18 +4299,6 @@ func (s *CreateImportJobInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateImportJobInput) SetApplicationId(v string) *CreateImportJobInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetImportJobRequest sets the ImportJobRequest field's value.
-func (s *CreateImportJobInput) SetImportJobRequest(v *ImportJobRequest) *CreateImportJobInput {
-	s.ImportJobRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJobResponse
 type CreateImportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobResponse"`
@@ -5666,12 +4322,6 @@ func (s CreateImportJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateImportJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportJobResponse sets the ImportJobResponse field's value.
-func (s *CreateImportJobOutput) SetImportJobResponse(v *ImportJobResponse) *CreateImportJobOutput {
-	s.ImportJobResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegmentRequest
@@ -5715,18 +4365,6 @@ func (s *CreateSegmentInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateSegmentInput) SetApplicationId(v string) *CreateSegmentInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetWriteSegmentRequest sets the WriteSegmentRequest field's value.
-func (s *CreateSegmentInput) SetWriteSegmentRequest(v *WriteSegmentRequest) *CreateSegmentInput {
-	s.WriteSegmentRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegmentResponse
 type CreateSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
@@ -5754,12 +4392,6 @@ func (s CreateSegmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSegmentResponse sets the SegmentResponse field's value.
-func (s *CreateSegmentOutput) SetSegmentResponse(v *SegmentResponse) *CreateSegmentOutput {
-	s.SegmentResponse = v
-	return s
-}
-
 // Default Message across push notification, email, and sms.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultMessage
 type DefaultMessage struct {
@@ -5779,18 +4411,6 @@ func (s DefaultMessage) String() string {
 // GoString returns the string representation
 func (s DefaultMessage) GoString() string {
 	return s.String()
-}
-
-// SetBody sets the Body field's value.
-func (s *DefaultMessage) SetBody(v string) *DefaultMessage {
-	s.Body = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *DefaultMessage) SetSubstitutions(v map[string][]string) *DefaultMessage {
-	s.Substitutions = v
-	return s
 }
 
 // Default Push Notification Message.
@@ -5836,48 +4456,6 @@ func (s DefaultPushNotificationMessage) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *DefaultPushNotificationMessage) SetAction(v Action) *DefaultPushNotificationMessage {
-	s.Action = v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *DefaultPushNotificationMessage) SetBody(v string) *DefaultPushNotificationMessage {
-	s.Body = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *DefaultPushNotificationMessage) SetData(v map[string]string) *DefaultPushNotificationMessage {
-	s.Data = v
-	return s
-}
-
-// SetSilentPush sets the SilentPush field's value.
-func (s *DefaultPushNotificationMessage) SetSilentPush(v bool) *DefaultPushNotificationMessage {
-	s.SilentPush = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *DefaultPushNotificationMessage) SetSubstitutions(v map[string][]string) *DefaultPushNotificationMessage {
-	s.Substitutions = v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *DefaultPushNotificationMessage) SetTitle(v string) *DefaultPushNotificationMessage {
-	s.Title = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *DefaultPushNotificationMessage) SetUrl(v string) *DefaultPushNotificationMessage {
-	s.Url = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannelRequest
 type DeleteAdmChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -5910,12 +4488,6 @@ func (s *DeleteAdmChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteAdmChannelInput) SetApplicationId(v string) *DeleteAdmChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannelResponse
 type DeleteAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
@@ -5941,12 +4513,6 @@ func (s DeleteAdmChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAdmChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetADMChannelResponse sets the ADMChannelResponse field's value.
-func (s *DeleteAdmChannelOutput) SetADMChannelResponse(v *ADMChannelResponse) *DeleteAdmChannelOutput {
-	s.ADMChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannelRequest
@@ -5981,12 +4547,6 @@ func (s *DeleteApnsChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteApnsChannelInput) SetApplicationId(v string) *DeleteApnsChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannelResponse
 type DeleteApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
@@ -6012,12 +4572,6 @@ func (s DeleteApnsChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApnsChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSChannelResponse sets the APNSChannelResponse field's value.
-func (s *DeleteApnsChannelOutput) SetAPNSChannelResponse(v *APNSChannelResponse) *DeleteApnsChannelOutput {
-	s.APNSChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannelRequest
@@ -6052,12 +4606,6 @@ func (s *DeleteApnsSandboxChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteApnsSandboxChannelInput) SetApplicationId(v string) *DeleteApnsSandboxChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannelResponse
 type DeleteApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
@@ -6083,12 +4631,6 @@ func (s DeleteApnsSandboxChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApnsSandboxChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSSandboxChannelResponse sets the APNSSandboxChannelResponse field's value.
-func (s *DeleteApnsSandboxChannelOutput) SetAPNSSandboxChannelResponse(v *APNSSandboxChannelResponse) *DeleteApnsSandboxChannelOutput {
-	s.APNSSandboxChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannelRequest
@@ -6123,12 +4665,6 @@ func (s *DeleteApnsVoipChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteApnsVoipChannelInput) SetApplicationId(v string) *DeleteApnsVoipChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipChannelResponse
 type DeleteApnsVoipChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
@@ -6154,12 +4690,6 @@ func (s DeleteApnsVoipChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApnsVoipChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSVoipChannelResponse sets the APNSVoipChannelResponse field's value.
-func (s *DeleteApnsVoipChannelOutput) SetAPNSVoipChannelResponse(v *APNSVoipChannelResponse) *DeleteApnsVoipChannelOutput {
-	s.APNSVoipChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannelRequest
@@ -6194,12 +4724,6 @@ func (s *DeleteApnsVoipSandboxChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteApnsVoipSandboxChannelInput) SetApplicationId(v string) *DeleteApnsVoipSandboxChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsVoipSandboxChannelResponse
 type DeleteApnsVoipSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
@@ -6225,12 +4749,6 @@ func (s DeleteApnsVoipSandboxChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApnsVoipSandboxChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSVoipSandboxChannelResponse sets the APNSVoipSandboxChannelResponse field's value.
-func (s *DeleteApnsVoipSandboxChannelOutput) SetAPNSVoipSandboxChannelResponse(v *APNSVoipSandboxChannelResponse) *DeleteApnsVoipSandboxChannelOutput {
-	s.APNSVoipSandboxChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAppRequest
@@ -6265,12 +4783,6 @@ func (s *DeleteAppInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteAppInput) SetApplicationId(v string) *DeleteAppInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAppResponse
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
@@ -6296,12 +4808,6 @@ func (s DeleteAppOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAppOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationResponse sets the ApplicationResponse field's value.
-func (s *DeleteAppOutput) SetApplicationResponse(v *ApplicationResponse) *DeleteAppOutput {
-	s.ApplicationResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannelRequest
@@ -6336,12 +4842,6 @@ func (s *DeleteBaiduChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteBaiduChannelInput) SetApplicationId(v string) *DeleteBaiduChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannelResponse
 type DeleteBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
@@ -6367,12 +4867,6 @@ func (s DeleteBaiduChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteBaiduChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBaiduChannelResponse sets the BaiduChannelResponse field's value.
-func (s *DeleteBaiduChannelOutput) SetBaiduChannelResponse(v *BaiduChannelResponse) *DeleteBaiduChannelOutput {
-	s.BaiduChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaignRequest
@@ -6414,18 +4908,6 @@ func (s *DeleteCampaignInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteCampaignInput) SetApplicationId(v string) *DeleteCampaignInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *DeleteCampaignInput) SetCampaignId(v string) *DeleteCampaignInput {
-	s.CampaignId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaignResponse
 type DeleteCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
@@ -6451,12 +4933,6 @@ func (s DeleteCampaignOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCampaignOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignResponse sets the CampaignResponse field's value.
-func (s *DeleteCampaignOutput) SetCampaignResponse(v *CampaignResponse) *DeleteCampaignOutput {
-	s.CampaignResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannelRequest
@@ -6491,12 +4967,6 @@ func (s *DeleteEmailChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteEmailChannelInput) SetApplicationId(v string) *DeleteEmailChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannelResponse
 type DeleteEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
@@ -6522,12 +4992,6 @@ func (s DeleteEmailChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEmailChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEmailChannelResponse sets the EmailChannelResponse field's value.
-func (s *DeleteEmailChannelOutput) SetEmailChannelResponse(v *EmailChannelResponse) *DeleteEmailChannelOutput {
-	s.EmailChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStreamRequest
@@ -6564,12 +5028,6 @@ func (s *DeleteEventStreamInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteEventStreamInput) SetApplicationId(v string) *DeleteEventStreamInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStreamResponse
 type DeleteEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
@@ -6595,12 +5053,6 @@ func (s DeleteEventStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEventStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventStream sets the EventStream field's value.
-func (s *DeleteEventStreamOutput) SetEventStream(v *EventStream) *DeleteEventStreamOutput {
-	s.EventStream = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannelRequest
@@ -6635,12 +5087,6 @@ func (s *DeleteGcmChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteGcmChannelInput) SetApplicationId(v string) *DeleteGcmChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannelResponse
 type DeleteGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
@@ -6666,12 +5112,6 @@ func (s DeleteGcmChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGcmChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGCMChannelResponse sets the GCMChannelResponse field's value.
-func (s *DeleteGcmChannelOutput) SetGCMChannelResponse(v *GCMChannelResponse) *DeleteGcmChannelOutput {
-	s.GCMChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegmentRequest
@@ -6713,18 +5153,6 @@ func (s *DeleteSegmentInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteSegmentInput) SetApplicationId(v string) *DeleteSegmentInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *DeleteSegmentInput) SetSegmentId(v string) *DeleteSegmentInput {
-	s.SegmentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegmentResponse
 type DeleteSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
@@ -6750,12 +5178,6 @@ func (s DeleteSegmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSegmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSegmentResponse sets the SegmentResponse field's value.
-func (s *DeleteSegmentOutput) SetSegmentResponse(v *SegmentResponse) *DeleteSegmentOutput {
-	s.SegmentResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannelRequest
@@ -6790,12 +5212,6 @@ func (s *DeleteSmsChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *DeleteSmsChannelInput) SetApplicationId(v string) *DeleteSmsChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannelResponse
 type DeleteSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
@@ -6821,12 +5237,6 @@ func (s DeleteSmsChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSmsChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSMSChannelResponse sets the SMSChannelResponse field's value.
-func (s *DeleteSmsChannelOutput) SetSMSChannelResponse(v *SMSChannelResponse) *DeleteSmsChannelOutput {
-	s.SMSChannelResponse = v
-	return s
 }
 
 // The message configuration.
@@ -6867,48 +5277,6 @@ func (s DirectMessageConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetADMMessage sets the ADMMessage field's value.
-func (s *DirectMessageConfiguration) SetADMMessage(v *ADMMessage) *DirectMessageConfiguration {
-	s.ADMMessage = v
-	return s
-}
-
-// SetAPNSMessage sets the APNSMessage field's value.
-func (s *DirectMessageConfiguration) SetAPNSMessage(v *APNSMessage) *DirectMessageConfiguration {
-	s.APNSMessage = v
-	return s
-}
-
-// SetBaiduMessage sets the BaiduMessage field's value.
-func (s *DirectMessageConfiguration) SetBaiduMessage(v *BaiduMessage) *DirectMessageConfiguration {
-	s.BaiduMessage = v
-	return s
-}
-
-// SetDefaultMessage sets the DefaultMessage field's value.
-func (s *DirectMessageConfiguration) SetDefaultMessage(v *DefaultMessage) *DirectMessageConfiguration {
-	s.DefaultMessage = v
-	return s
-}
-
-// SetDefaultPushNotificationMessage sets the DefaultPushNotificationMessage field's value.
-func (s *DirectMessageConfiguration) SetDefaultPushNotificationMessage(v *DefaultPushNotificationMessage) *DirectMessageConfiguration {
-	s.DefaultPushNotificationMessage = v
-	return s
-}
-
-// SetGCMMessage sets the GCMMessage field's value.
-func (s *DirectMessageConfiguration) SetGCMMessage(v *GCMMessage) *DirectMessageConfiguration {
-	s.GCMMessage = v
-	return s
-}
-
-// SetSMSMessage sets the SMSMessage field's value.
-func (s *DirectMessageConfiguration) SetSMSMessage(v *SMSMessage) *DirectMessageConfiguration {
-	s.SMSMessage = v
-	return s
-}
-
 // Email Channel Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelRequest
 type EmailChannelRequest struct {
@@ -6936,30 +5304,6 @@ func (s EmailChannelRequest) String() string {
 // GoString returns the string representation
 func (s EmailChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *EmailChannelRequest) SetEnabled(v bool) *EmailChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetFromAddress sets the FromAddress field's value.
-func (s *EmailChannelRequest) SetFromAddress(v string) *EmailChannelRequest {
-	s.FromAddress = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *EmailChannelRequest) SetIdentity(v string) *EmailChannelRequest {
-	s.Identity = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *EmailChannelRequest) SetRoleArn(v string) *EmailChannelRequest {
-	s.RoleArn = &v
-	return s
 }
 
 // Email Channel Response.
@@ -7018,84 +5362,6 @@ func (s EmailChannelResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *EmailChannelResponse) SetApplicationId(v string) *EmailChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *EmailChannelResponse) SetCreationDate(v string) *EmailChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *EmailChannelResponse) SetEnabled(v bool) *EmailChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetFromAddress sets the FromAddress field's value.
-func (s *EmailChannelResponse) SetFromAddress(v string) *EmailChannelResponse {
-	s.FromAddress = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *EmailChannelResponse) SetHasCredential(v bool) *EmailChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *EmailChannelResponse) SetId(v string) *EmailChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *EmailChannelResponse) SetIdentity(v string) *EmailChannelResponse {
-	s.Identity = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *EmailChannelResponse) SetIsArchived(v bool) *EmailChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *EmailChannelResponse) SetLastModifiedBy(v string) *EmailChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *EmailChannelResponse) SetLastModifiedDate(v string) *EmailChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *EmailChannelResponse) SetPlatform(v string) *EmailChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *EmailChannelResponse) SetRoleArn(v string) *EmailChannelResponse {
-	s.RoleArn = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *EmailChannelResponse) SetVersion(v int64) *EmailChannelResponse {
-	s.Version = &v
-	return s
-}
-
 // Endpoint update request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointBatchItem
 type EndpointBatchItem struct {
@@ -7150,78 +5416,6 @@ func (s EndpointBatchItem) GoString() string {
 	return s.String()
 }
 
-// SetAddress sets the Address field's value.
-func (s *EndpointBatchItem) SetAddress(v string) *EndpointBatchItem {
-	s.Address = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *EndpointBatchItem) SetAttributes(v map[string][]string) *EndpointBatchItem {
-	s.Attributes = v
-	return s
-}
-
-// SetChannelType sets the ChannelType field's value.
-func (s *EndpointBatchItem) SetChannelType(v ChannelType) *EndpointBatchItem {
-	s.ChannelType = v
-	return s
-}
-
-// SetDemographic sets the Demographic field's value.
-func (s *EndpointBatchItem) SetDemographic(v *EndpointDemographic) *EndpointBatchItem {
-	s.Demographic = v
-	return s
-}
-
-// SetEffectiveDate sets the EffectiveDate field's value.
-func (s *EndpointBatchItem) SetEffectiveDate(v string) *EndpointBatchItem {
-	s.EffectiveDate = &v
-	return s
-}
-
-// SetEndpointStatus sets the EndpointStatus field's value.
-func (s *EndpointBatchItem) SetEndpointStatus(v string) *EndpointBatchItem {
-	s.EndpointStatus = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *EndpointBatchItem) SetId(v string) *EndpointBatchItem {
-	s.Id = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *EndpointBatchItem) SetLocation(v *EndpointLocation) *EndpointBatchItem {
-	s.Location = v
-	return s
-}
-
-// SetMetrics sets the Metrics field's value.
-func (s *EndpointBatchItem) SetMetrics(v map[string]float64) *EndpointBatchItem {
-	s.Metrics = v
-	return s
-}
-
-// SetOptOut sets the OptOut field's value.
-func (s *EndpointBatchItem) SetOptOut(v string) *EndpointBatchItem {
-	s.OptOut = &v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *EndpointBatchItem) SetRequestId(v string) *EndpointBatchItem {
-	s.RequestId = &v
-	return s
-}
-
-// SetUser sets the User field's value.
-func (s *EndpointBatchItem) SetUser(v *EndpointUser) *EndpointBatchItem {
-	s.User = v
-	return s
-}
-
 // Endpoint batch update request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointBatchRequest
 type EndpointBatchRequest struct {
@@ -7239,12 +5433,6 @@ func (s EndpointBatchRequest) String() string {
 // GoString returns the string representation
 func (s EndpointBatchRequest) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *EndpointBatchRequest) SetItem(v []EndpointBatchItem) *EndpointBatchRequest {
-	s.Item = v
-	return s
 }
 
 // Endpoint demographic data
@@ -7288,54 +5476,6 @@ func (s EndpointDemographic) GoString() string {
 	return s.String()
 }
 
-// SetAppVersion sets the AppVersion field's value.
-func (s *EndpointDemographic) SetAppVersion(v string) *EndpointDemographic {
-	s.AppVersion = &v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *EndpointDemographic) SetLocale(v string) *EndpointDemographic {
-	s.Locale = &v
-	return s
-}
-
-// SetMake sets the Make field's value.
-func (s *EndpointDemographic) SetMake(v string) *EndpointDemographic {
-	s.Make = &v
-	return s
-}
-
-// SetModel sets the Model field's value.
-func (s *EndpointDemographic) SetModel(v string) *EndpointDemographic {
-	s.Model = &v
-	return s
-}
-
-// SetModelVersion sets the ModelVersion field's value.
-func (s *EndpointDemographic) SetModelVersion(v string) *EndpointDemographic {
-	s.ModelVersion = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *EndpointDemographic) SetPlatform(v string) *EndpointDemographic {
-	s.Platform = &v
-	return s
-}
-
-// SetPlatformVersion sets the PlatformVersion field's value.
-func (s *EndpointDemographic) SetPlatformVersion(v string) *EndpointDemographic {
-	s.PlatformVersion = &v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *EndpointDemographic) SetTimezone(v string) *EndpointDemographic {
-	s.Timezone = &v
-	return s
-}
-
 // Endpoint location data
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointLocation
 type EndpointLocation struct {
@@ -7373,42 +5513,6 @@ func (s EndpointLocation) GoString() string {
 	return s.String()
 }
 
-// SetCity sets the City field's value.
-func (s *EndpointLocation) SetCity(v string) *EndpointLocation {
-	s.City = &v
-	return s
-}
-
-// SetCountry sets the Country field's value.
-func (s *EndpointLocation) SetCountry(v string) *EndpointLocation {
-	s.Country = &v
-	return s
-}
-
-// SetLatitude sets the Latitude field's value.
-func (s *EndpointLocation) SetLatitude(v float64) *EndpointLocation {
-	s.Latitude = &v
-	return s
-}
-
-// SetLongitude sets the Longitude field's value.
-func (s *EndpointLocation) SetLongitude(v float64) *EndpointLocation {
-	s.Longitude = &v
-	return s
-}
-
-// SetPostalCode sets the PostalCode field's value.
-func (s *EndpointLocation) SetPostalCode(v string) *EndpointLocation {
-	s.PostalCode = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *EndpointLocation) SetRegion(v string) *EndpointLocation {
-	s.Region = &v
-	return s
-}
-
 // The result from sending a message to an endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointMessageResult
 type EndpointMessageResult struct {
@@ -7438,36 +5542,6 @@ func (s EndpointMessageResult) String() string {
 // GoString returns the string representation
 func (s EndpointMessageResult) GoString() string {
 	return s.String()
-}
-
-// SetAddress sets the Address field's value.
-func (s *EndpointMessageResult) SetAddress(v string) *EndpointMessageResult {
-	s.Address = &v
-	return s
-}
-
-// SetDeliveryStatus sets the DeliveryStatus field's value.
-func (s *EndpointMessageResult) SetDeliveryStatus(v DeliveryStatus) *EndpointMessageResult {
-	s.DeliveryStatus = v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *EndpointMessageResult) SetStatusCode(v int64) *EndpointMessageResult {
-	s.StatusCode = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *EndpointMessageResult) SetStatusMessage(v string) *EndpointMessageResult {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetUpdatedToken sets the UpdatedToken field's value.
-func (s *EndpointMessageResult) SetUpdatedToken(v string) *EndpointMessageResult {
-	s.UpdatedToken = &v
-	return s
 }
 
 // Endpoint update request
@@ -7519,72 +5593,6 @@ func (s EndpointRequest) String() string {
 // GoString returns the string representation
 func (s EndpointRequest) GoString() string {
 	return s.String()
-}
-
-// SetAddress sets the Address field's value.
-func (s *EndpointRequest) SetAddress(v string) *EndpointRequest {
-	s.Address = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *EndpointRequest) SetAttributes(v map[string][]string) *EndpointRequest {
-	s.Attributes = v
-	return s
-}
-
-// SetChannelType sets the ChannelType field's value.
-func (s *EndpointRequest) SetChannelType(v ChannelType) *EndpointRequest {
-	s.ChannelType = v
-	return s
-}
-
-// SetDemographic sets the Demographic field's value.
-func (s *EndpointRequest) SetDemographic(v *EndpointDemographic) *EndpointRequest {
-	s.Demographic = v
-	return s
-}
-
-// SetEffectiveDate sets the EffectiveDate field's value.
-func (s *EndpointRequest) SetEffectiveDate(v string) *EndpointRequest {
-	s.EffectiveDate = &v
-	return s
-}
-
-// SetEndpointStatus sets the EndpointStatus field's value.
-func (s *EndpointRequest) SetEndpointStatus(v string) *EndpointRequest {
-	s.EndpointStatus = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *EndpointRequest) SetLocation(v *EndpointLocation) *EndpointRequest {
-	s.Location = v
-	return s
-}
-
-// SetMetrics sets the Metrics field's value.
-func (s *EndpointRequest) SetMetrics(v map[string]float64) *EndpointRequest {
-	s.Metrics = v
-	return s
-}
-
-// SetOptOut sets the OptOut field's value.
-func (s *EndpointRequest) SetOptOut(v string) *EndpointRequest {
-	s.OptOut = &v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *EndpointRequest) SetRequestId(v string) *EndpointRequest {
-	s.RequestId = &v
-	return s
-}
-
-// SetUser sets the User field's value.
-func (s *EndpointRequest) SetUser(v *EndpointUser) *EndpointRequest {
-	s.User = v
-	return s
 }
 
 // Endpoint response
@@ -7655,96 +5663,6 @@ func (s EndpointResponse) GoString() string {
 	return s.String()
 }
 
-// SetAddress sets the Address field's value.
-func (s *EndpointResponse) SetAddress(v string) *EndpointResponse {
-	s.Address = &v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *EndpointResponse) SetApplicationId(v string) *EndpointResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *EndpointResponse) SetAttributes(v map[string][]string) *EndpointResponse {
-	s.Attributes = v
-	return s
-}
-
-// SetChannelType sets the ChannelType field's value.
-func (s *EndpointResponse) SetChannelType(v ChannelType) *EndpointResponse {
-	s.ChannelType = v
-	return s
-}
-
-// SetCohortId sets the CohortId field's value.
-func (s *EndpointResponse) SetCohortId(v string) *EndpointResponse {
-	s.CohortId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *EndpointResponse) SetCreationDate(v string) *EndpointResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDemographic sets the Demographic field's value.
-func (s *EndpointResponse) SetDemographic(v *EndpointDemographic) *EndpointResponse {
-	s.Demographic = v
-	return s
-}
-
-// SetEffectiveDate sets the EffectiveDate field's value.
-func (s *EndpointResponse) SetEffectiveDate(v string) *EndpointResponse {
-	s.EffectiveDate = &v
-	return s
-}
-
-// SetEndpointStatus sets the EndpointStatus field's value.
-func (s *EndpointResponse) SetEndpointStatus(v string) *EndpointResponse {
-	s.EndpointStatus = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *EndpointResponse) SetId(v string) *EndpointResponse {
-	s.Id = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *EndpointResponse) SetLocation(v *EndpointLocation) *EndpointResponse {
-	s.Location = v
-	return s
-}
-
-// SetMetrics sets the Metrics field's value.
-func (s *EndpointResponse) SetMetrics(v map[string]float64) *EndpointResponse {
-	s.Metrics = v
-	return s
-}
-
-// SetOptOut sets the OptOut field's value.
-func (s *EndpointResponse) SetOptOut(v string) *EndpointResponse {
-	s.OptOut = &v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *EndpointResponse) SetRequestId(v string) *EndpointResponse {
-	s.RequestId = &v
-	return s
-}
-
-// SetUser sets the User field's value.
-func (s *EndpointResponse) SetUser(v *EndpointUser) *EndpointResponse {
-	s.User = v
-	return s
-}
-
 // Endpoint send configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointSendConfiguration
 type EndpointSendConfiguration struct {
@@ -7775,36 +5693,6 @@ func (s EndpointSendConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetBodyOverride sets the BodyOverride field's value.
-func (s *EndpointSendConfiguration) SetBodyOverride(v string) *EndpointSendConfiguration {
-	s.BodyOverride = &v
-	return s
-}
-
-// SetContext sets the Context field's value.
-func (s *EndpointSendConfiguration) SetContext(v map[string]string) *EndpointSendConfiguration {
-	s.Context = v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *EndpointSendConfiguration) SetRawContent(v string) *EndpointSendConfiguration {
-	s.RawContent = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *EndpointSendConfiguration) SetSubstitutions(v map[string][]string) *EndpointSendConfiguration {
-	s.Substitutions = v
-	return s
-}
-
-// SetTitleOverride sets the TitleOverride field's value.
-func (s *EndpointSendConfiguration) SetTitleOverride(v string) *EndpointSendConfiguration {
-	s.TitleOverride = &v
-	return s
-}
-
 // Endpoint user specific custom userAttributes
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointUser
 type EndpointUser struct {
@@ -7824,18 +5712,6 @@ func (s EndpointUser) String() string {
 // GoString returns the string representation
 func (s EndpointUser) GoString() string {
 	return s.String()
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *EndpointUser) SetUserAttributes(v map[string][]string) *EndpointUser {
-	s.UserAttributes = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *EndpointUser) SetUserId(v string) *EndpointUser {
-	s.UserId = &v
-	return s
 }
 
 // Model for an event publishing subscription export.
@@ -7876,42 +5752,6 @@ func (s EventStream) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *EventStream) SetApplicationId(v string) *EventStream {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetDestinationStreamArn sets the DestinationStreamArn field's value.
-func (s *EventStream) SetDestinationStreamArn(v string) *EventStream {
-	s.DestinationStreamArn = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *EventStream) SetExternalId(v string) *EventStream {
-	s.ExternalId = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *EventStream) SetLastModifiedDate(v string) *EventStream {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetLastUpdatedBy sets the LastUpdatedBy field's value.
-func (s *EventStream) SetLastUpdatedBy(v string) *EventStream {
-	s.LastUpdatedBy = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *EventStream) SetRoleArn(v string) *EventStream {
-	s.RoleArn = &v
-	return s
-}
-
 // Google Cloud Messaging credentials
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelRequest
 type GCMChannelRequest struct {
@@ -7932,18 +5772,6 @@ func (s GCMChannelRequest) String() string {
 // GoString returns the string representation
 func (s GCMChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetApiKey sets the ApiKey field's value.
-func (s *GCMChannelRequest) SetApiKey(v string) *GCMChannelRequest {
-	s.ApiKey = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *GCMChannelRequest) SetEnabled(v bool) *GCMChannelRequest {
-	s.Enabled = &v
-	return s
 }
 
 // Google Cloud Messaging channel definition
@@ -7993,72 +5821,6 @@ func (s GCMChannelResponse) String() string {
 // GoString returns the string representation
 func (s GCMChannelResponse) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GCMChannelResponse) SetApplicationId(v string) *GCMChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *GCMChannelResponse) SetCreationDate(v string) *GCMChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetCredential sets the Credential field's value.
-func (s *GCMChannelResponse) SetCredential(v string) *GCMChannelResponse {
-	s.Credential = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *GCMChannelResponse) SetEnabled(v bool) *GCMChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *GCMChannelResponse) SetHasCredential(v bool) *GCMChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GCMChannelResponse) SetId(v string) *GCMChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *GCMChannelResponse) SetIsArchived(v bool) *GCMChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *GCMChannelResponse) SetLastModifiedBy(v string) *GCMChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *GCMChannelResponse) SetLastModifiedDate(v string) *GCMChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *GCMChannelResponse) SetPlatform(v string) *GCMChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GCMChannelResponse) SetVersion(v int64) *GCMChannelResponse {
-	s.Version = &v
-	return s
 }
 
 // GCM Message.
@@ -8146,108 +5908,6 @@ func (s GCMMessage) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *GCMMessage) SetAction(v Action) *GCMMessage {
-	s.Action = v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *GCMMessage) SetBody(v string) *GCMMessage {
-	s.Body = &v
-	return s
-}
-
-// SetCollapseKey sets the CollapseKey field's value.
-func (s *GCMMessage) SetCollapseKey(v string) *GCMMessage {
-	s.CollapseKey = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *GCMMessage) SetData(v map[string]string) *GCMMessage {
-	s.Data = v
-	return s
-}
-
-// SetIconReference sets the IconReference field's value.
-func (s *GCMMessage) SetIconReference(v string) *GCMMessage {
-	s.IconReference = &v
-	return s
-}
-
-// SetImageIconUrl sets the ImageIconUrl field's value.
-func (s *GCMMessage) SetImageIconUrl(v string) *GCMMessage {
-	s.ImageIconUrl = &v
-	return s
-}
-
-// SetImageUrl sets the ImageUrl field's value.
-func (s *GCMMessage) SetImageUrl(v string) *GCMMessage {
-	s.ImageUrl = &v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *GCMMessage) SetPriority(v string) *GCMMessage {
-	s.Priority = &v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *GCMMessage) SetRawContent(v string) *GCMMessage {
-	s.RawContent = &v
-	return s
-}
-
-// SetRestrictedPackageName sets the RestrictedPackageName field's value.
-func (s *GCMMessage) SetRestrictedPackageName(v string) *GCMMessage {
-	s.RestrictedPackageName = &v
-	return s
-}
-
-// SetSilentPush sets the SilentPush field's value.
-func (s *GCMMessage) SetSilentPush(v bool) *GCMMessage {
-	s.SilentPush = &v
-	return s
-}
-
-// SetSmallImageIconUrl sets the SmallImageIconUrl field's value.
-func (s *GCMMessage) SetSmallImageIconUrl(v string) *GCMMessage {
-	s.SmallImageIconUrl = &v
-	return s
-}
-
-// SetSound sets the Sound field's value.
-func (s *GCMMessage) SetSound(v string) *GCMMessage {
-	s.Sound = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *GCMMessage) SetSubstitutions(v map[string][]string) *GCMMessage {
-	s.Substitutions = v
-	return s
-}
-
-// SetTimeToLive sets the TimeToLive field's value.
-func (s *GCMMessage) SetTimeToLive(v int64) *GCMMessage {
-	s.TimeToLive = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *GCMMessage) SetTitle(v string) *GCMMessage {
-	s.Title = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *GCMMessage) SetUrl(v string) *GCMMessage {
-	s.Url = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannelRequest
 type GetAdmChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -8280,12 +5940,6 @@ func (s *GetAdmChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetAdmChannelInput) SetApplicationId(v string) *GetAdmChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannelResponse
 type GetAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
@@ -8311,12 +5965,6 @@ func (s GetAdmChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAdmChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetADMChannelResponse sets the ADMChannelResponse field's value.
-func (s *GetAdmChannelOutput) SetADMChannelResponse(v *ADMChannelResponse) *GetAdmChannelOutput {
-	s.ADMChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannelRequest
@@ -8351,12 +5999,6 @@ func (s *GetApnsChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApnsChannelInput) SetApplicationId(v string) *GetApnsChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannelResponse
 type GetApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
@@ -8382,12 +6024,6 @@ func (s GetApnsChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApnsChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSChannelResponse sets the APNSChannelResponse field's value.
-func (s *GetApnsChannelOutput) SetAPNSChannelResponse(v *APNSChannelResponse) *GetApnsChannelOutput {
-	s.APNSChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannelRequest
@@ -8422,12 +6058,6 @@ func (s *GetApnsSandboxChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApnsSandboxChannelInput) SetApplicationId(v string) *GetApnsSandboxChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannelResponse
 type GetApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
@@ -8453,12 +6083,6 @@ func (s GetApnsSandboxChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApnsSandboxChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSSandboxChannelResponse sets the APNSSandboxChannelResponse field's value.
-func (s *GetApnsSandboxChannelOutput) SetAPNSSandboxChannelResponse(v *APNSSandboxChannelResponse) *GetApnsSandboxChannelOutput {
-	s.APNSSandboxChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannelRequest
@@ -8493,12 +6117,6 @@ func (s *GetApnsVoipChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApnsVoipChannelInput) SetApplicationId(v string) *GetApnsVoipChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipChannelResponse
 type GetApnsVoipChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
@@ -8524,12 +6142,6 @@ func (s GetApnsVoipChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApnsVoipChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSVoipChannelResponse sets the APNSVoipChannelResponse field's value.
-func (s *GetApnsVoipChannelOutput) SetAPNSVoipChannelResponse(v *APNSVoipChannelResponse) *GetApnsVoipChannelOutput {
-	s.APNSVoipChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelRequest
@@ -8564,12 +6176,6 @@ func (s *GetApnsVoipSandboxChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApnsVoipSandboxChannelInput) SetApplicationId(v string) *GetApnsVoipSandboxChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsVoipSandboxChannelResponse
 type GetApnsVoipSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
@@ -8595,12 +6201,6 @@ func (s GetApnsVoipSandboxChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApnsVoipSandboxChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSVoipSandboxChannelResponse sets the APNSVoipSandboxChannelResponse field's value.
-func (s *GetApnsVoipSandboxChannelOutput) SetAPNSVoipSandboxChannelResponse(v *APNSVoipSandboxChannelResponse) *GetApnsVoipSandboxChannelOutput {
-	s.APNSVoipSandboxChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppRequest
@@ -8635,12 +6235,6 @@ func (s *GetAppInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetAppInput) SetApplicationId(v string) *GetAppInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppResponse
 type GetAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
@@ -8666,12 +6260,6 @@ func (s GetAppOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAppOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationResponse sets the ApplicationResponse field's value.
-func (s *GetAppOutput) SetApplicationResponse(v *ApplicationResponse) *GetAppOutput {
-	s.ApplicationResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettingsRequest
@@ -8706,12 +6294,6 @@ func (s *GetApplicationSettingsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApplicationSettingsInput) SetApplicationId(v string) *GetApplicationSettingsInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettingsResponse
 type GetApplicationSettingsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationSettingsResource"`
@@ -8739,12 +6321,6 @@ func (s GetApplicationSettingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplicationSettingsResource sets the ApplicationSettingsResource field's value.
-func (s *GetApplicationSettingsOutput) SetApplicationSettingsResource(v *ApplicationSettingsResource) *GetApplicationSettingsOutput {
-	s.ApplicationSettingsResource = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppsRequest
 type GetAppsInput struct {
 	_ struct{} `type:"structure"`
@@ -8762,18 +6338,6 @@ func (s GetAppsInput) String() string {
 // GoString returns the string representation
 func (s GetAppsInput) GoString() string {
 	return s.String()
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetAppsInput) SetPageSize(v string) *GetAppsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetAppsInput) SetToken(v string) *GetAppsInput {
-	s.Token = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAppsResponse
@@ -8801,12 +6365,6 @@ func (s GetAppsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAppsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationsResponse sets the ApplicationsResponse field's value.
-func (s *GetAppsOutput) SetApplicationsResponse(v *ApplicationsResponse) *GetAppsOutput {
-	s.ApplicationsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannelRequest
@@ -8841,12 +6399,6 @@ func (s *GetBaiduChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetBaiduChannelInput) SetApplicationId(v string) *GetBaiduChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannelResponse
 type GetBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
@@ -8872,12 +6424,6 @@ func (s GetBaiduChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBaiduChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBaiduChannelResponse sets the BaiduChannelResponse field's value.
-func (s *GetBaiduChannelOutput) SetBaiduChannelResponse(v *BaiduChannelResponse) *GetBaiduChannelOutput {
-	s.BaiduChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivitiesRequest
@@ -8923,30 +6469,6 @@ func (s *GetCampaignActivitiesInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetCampaignActivitiesInput) SetApplicationId(v string) *GetCampaignActivitiesInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *GetCampaignActivitiesInput) SetCampaignId(v string) *GetCampaignActivitiesInput {
-	s.CampaignId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetCampaignActivitiesInput) SetPageSize(v string) *GetCampaignActivitiesInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetCampaignActivitiesInput) SetToken(v string) *GetCampaignActivitiesInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivitiesResponse
 type GetCampaignActivitiesOutput struct {
 	_ struct{} `type:"structure" payload:"ActivitiesResponse"`
@@ -8972,12 +6494,6 @@ func (s GetCampaignActivitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCampaignActivitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetActivitiesResponse sets the ActivitiesResponse field's value.
-func (s *GetCampaignActivitiesOutput) SetActivitiesResponse(v *ActivitiesResponse) *GetCampaignActivitiesOutput {
-	s.ActivitiesResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignRequest
@@ -9019,18 +6535,6 @@ func (s *GetCampaignInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetCampaignInput) SetApplicationId(v string) *GetCampaignInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *GetCampaignInput) SetCampaignId(v string) *GetCampaignInput {
-	s.CampaignId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignResponse
 type GetCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
@@ -9056,12 +6560,6 @@ func (s GetCampaignOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCampaignOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignResponse sets the CampaignResponse field's value.
-func (s *GetCampaignOutput) SetCampaignResponse(v *CampaignResponse) *GetCampaignOutput {
-	s.CampaignResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionRequest
@@ -9110,24 +6608,6 @@ func (s *GetCampaignVersionInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetCampaignVersionInput) SetApplicationId(v string) *GetCampaignVersionInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *GetCampaignVersionInput) SetCampaignId(v string) *GetCampaignVersionInput {
-	s.CampaignId = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetCampaignVersionInput) SetVersion(v string) *GetCampaignVersionInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionResponse
 type GetCampaignVersionOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
@@ -9153,12 +6633,6 @@ func (s GetCampaignVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCampaignVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignResponse sets the CampaignResponse field's value.
-func (s *GetCampaignVersionOutput) SetCampaignResponse(v *CampaignResponse) *GetCampaignVersionOutput {
-	s.CampaignResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionsRequest
@@ -9204,30 +6678,6 @@ func (s *GetCampaignVersionsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetCampaignVersionsInput) SetApplicationId(v string) *GetCampaignVersionsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *GetCampaignVersionsInput) SetCampaignId(v string) *GetCampaignVersionsInput {
-	s.CampaignId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetCampaignVersionsInput) SetPageSize(v string) *GetCampaignVersionsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetCampaignVersionsInput) SetToken(v string) *GetCampaignVersionsInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersionsResponse
 type GetCampaignVersionsOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignsResponse"`
@@ -9253,12 +6703,6 @@ func (s GetCampaignVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCampaignVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignsResponse sets the CampaignsResponse field's value.
-func (s *GetCampaignVersionsOutput) SetCampaignsResponse(v *CampaignsResponse) *GetCampaignVersionsOutput {
-	s.CampaignsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignsRequest
@@ -9297,24 +6741,6 @@ func (s *GetCampaignsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetCampaignsInput) SetApplicationId(v string) *GetCampaignsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetCampaignsInput) SetPageSize(v string) *GetCampaignsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetCampaignsInput) SetToken(v string) *GetCampaignsInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignsResponse
 type GetCampaignsOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignsResponse"`
@@ -9340,12 +6766,6 @@ func (s GetCampaignsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCampaignsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignsResponse sets the CampaignsResponse field's value.
-func (s *GetCampaignsOutput) SetCampaignsResponse(v *CampaignsResponse) *GetCampaignsOutput {
-	s.CampaignsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannelRequest
@@ -9380,12 +6800,6 @@ func (s *GetEmailChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetEmailChannelInput) SetApplicationId(v string) *GetEmailChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannelResponse
 type GetEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
@@ -9411,12 +6825,6 @@ func (s GetEmailChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetEmailChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEmailChannelResponse sets the EmailChannelResponse field's value.
-func (s *GetEmailChannelOutput) SetEmailChannelResponse(v *EmailChannelResponse) *GetEmailChannelOutput {
-	s.EmailChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpointRequest
@@ -9458,18 +6866,6 @@ func (s *GetEndpointInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetEndpointInput) SetApplicationId(v string) *GetEndpointInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetEndpointId sets the EndpointId field's value.
-func (s *GetEndpointInput) SetEndpointId(v string) *GetEndpointInput {
-	s.EndpointId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpointResponse
 type GetEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointResponse"`
@@ -9495,12 +6891,6 @@ func (s GetEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpointResponse sets the EndpointResponse field's value.
-func (s *GetEndpointOutput) SetEndpointResponse(v *EndpointResponse) *GetEndpointOutput {
-	s.EndpointResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStreamRequest
@@ -9537,12 +6927,6 @@ func (s *GetEventStreamInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetEventStreamInput) SetApplicationId(v string) *GetEventStreamInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStreamResponse
 type GetEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
@@ -9568,12 +6952,6 @@ func (s GetEventStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetEventStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventStream sets the EventStream field's value.
-func (s *GetEventStreamOutput) SetEventStream(v *EventStream) *GetEventStreamOutput {
-	s.EventStream = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannelRequest
@@ -9608,12 +6986,6 @@ func (s *GetGcmChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetGcmChannelInput) SetApplicationId(v string) *GetGcmChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannelResponse
 type GetGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
@@ -9639,12 +7011,6 @@ func (s GetGcmChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGcmChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGCMChannelResponse sets the GCMChannelResponse field's value.
-func (s *GetGcmChannelOutput) SetGCMChannelResponse(v *GCMChannelResponse) *GetGcmChannelOutput {
-	s.GCMChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobRequest
@@ -9686,18 +7052,6 @@ func (s *GetImportJobInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetImportJobInput) SetApplicationId(v string) *GetImportJobInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *GetImportJobInput) SetJobId(v string) *GetImportJobInput {
-	s.JobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobResponse
 type GetImportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobResponse"`
@@ -9721,12 +7075,6 @@ func (s GetImportJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetImportJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportJobResponse sets the ImportJobResponse field's value.
-func (s *GetImportJobOutput) SetImportJobResponse(v *ImportJobResponse) *GetImportJobOutput {
-	s.ImportJobResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobsRequest
@@ -9765,24 +7113,6 @@ func (s *GetImportJobsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetImportJobsInput) SetApplicationId(v string) *GetImportJobsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetImportJobsInput) SetPageSize(v string) *GetImportJobsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetImportJobsInput) SetToken(v string) *GetImportJobsInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobsResponse
 type GetImportJobsOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobsResponse"`
@@ -9808,12 +7138,6 @@ func (s GetImportJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetImportJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportJobsResponse sets the ImportJobsResponse field's value.
-func (s *GetImportJobsOutput) SetImportJobsResponse(v *ImportJobsResponse) *GetImportJobsOutput {
-	s.ImportJobsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobsRequest
@@ -9859,30 +7183,6 @@ func (s *GetSegmentImportJobsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetSegmentImportJobsInput) SetApplicationId(v string) *GetSegmentImportJobsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetSegmentImportJobsInput) SetPageSize(v string) *GetSegmentImportJobsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *GetSegmentImportJobsInput) SetSegmentId(v string) *GetSegmentImportJobsInput {
-	s.SegmentId = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetSegmentImportJobsInput) SetToken(v string) *GetSegmentImportJobsInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobsResponse
 type GetSegmentImportJobsOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobsResponse"`
@@ -9908,12 +7208,6 @@ func (s GetSegmentImportJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSegmentImportJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImportJobsResponse sets the ImportJobsResponse field's value.
-func (s *GetSegmentImportJobsOutput) SetImportJobsResponse(v *ImportJobsResponse) *GetSegmentImportJobsOutput {
-	s.ImportJobsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentRequest
@@ -9955,18 +7249,6 @@ func (s *GetSegmentInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetSegmentInput) SetApplicationId(v string) *GetSegmentInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *GetSegmentInput) SetSegmentId(v string) *GetSegmentInput {
-	s.SegmentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentResponse
 type GetSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
@@ -9992,12 +7274,6 @@ func (s GetSegmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSegmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSegmentResponse sets the SegmentResponse field's value.
-func (s *GetSegmentOutput) SetSegmentResponse(v *SegmentResponse) *GetSegmentOutput {
-	s.SegmentResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionRequest
@@ -10046,24 +7322,6 @@ func (s *GetSegmentVersionInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetSegmentVersionInput) SetApplicationId(v string) *GetSegmentVersionInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *GetSegmentVersionInput) SetSegmentId(v string) *GetSegmentVersionInput {
-	s.SegmentId = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetSegmentVersionInput) SetVersion(v string) *GetSegmentVersionInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionResponse
 type GetSegmentVersionOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
@@ -10089,12 +7347,6 @@ func (s GetSegmentVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSegmentVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSegmentResponse sets the SegmentResponse field's value.
-func (s *GetSegmentVersionOutput) SetSegmentResponse(v *SegmentResponse) *GetSegmentVersionOutput {
-	s.SegmentResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionsRequest
@@ -10140,30 +7392,6 @@ func (s *GetSegmentVersionsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetSegmentVersionsInput) SetApplicationId(v string) *GetSegmentVersionsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetSegmentVersionsInput) SetPageSize(v string) *GetSegmentVersionsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *GetSegmentVersionsInput) SetSegmentId(v string) *GetSegmentVersionsInput {
-	s.SegmentId = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetSegmentVersionsInput) SetToken(v string) *GetSegmentVersionsInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersionsResponse
 type GetSegmentVersionsOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentsResponse"`
@@ -10189,12 +7417,6 @@ func (s GetSegmentVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSegmentVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSegmentsResponse sets the SegmentsResponse field's value.
-func (s *GetSegmentVersionsOutput) SetSegmentsResponse(v *SegmentsResponse) *GetSegmentVersionsOutput {
-	s.SegmentsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentsRequest
@@ -10233,24 +7455,6 @@ func (s *GetSegmentsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetSegmentsInput) SetApplicationId(v string) *GetSegmentsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetPageSize sets the PageSize field's value.
-func (s *GetSegmentsInput) SetPageSize(v string) *GetSegmentsInput {
-	s.PageSize = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *GetSegmentsInput) SetToken(v string) *GetSegmentsInput {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentsResponse
 type GetSegmentsOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentsResponse"`
@@ -10276,12 +7480,6 @@ func (s GetSegmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSegmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSegmentsResponse sets the SegmentsResponse field's value.
-func (s *GetSegmentsOutput) SetSegmentsResponse(v *SegmentsResponse) *GetSegmentsOutput {
-	s.SegmentsResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannelRequest
@@ -10316,12 +7514,6 @@ func (s *GetSmsChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetSmsChannelInput) SetApplicationId(v string) *GetSmsChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannelResponse
 type GetSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
@@ -10347,12 +7539,6 @@ func (s GetSmsChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSmsChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSMSChannelResponse sets the SMSChannelResponse field's value.
-func (s *GetSmsChannelOutput) SetSMSChannelResponse(v *SMSChannelResponse) *GetSmsChannelOutput {
-	s.SMSChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobRequest
@@ -10403,54 +7589,6 @@ func (s ImportJobRequest) GoString() string {
 	return s.String()
 }
 
-// SetDefineSegment sets the DefineSegment field's value.
-func (s *ImportJobRequest) SetDefineSegment(v bool) *ImportJobRequest {
-	s.DefineSegment = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *ImportJobRequest) SetExternalId(v string) *ImportJobRequest {
-	s.ExternalId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *ImportJobRequest) SetFormat(v Format) *ImportJobRequest {
-	s.Format = v
-	return s
-}
-
-// SetRegisterEndpoints sets the RegisterEndpoints field's value.
-func (s *ImportJobRequest) SetRegisterEndpoints(v bool) *ImportJobRequest {
-	s.RegisterEndpoints = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *ImportJobRequest) SetRoleArn(v string) *ImportJobRequest {
-	s.RoleArn = &v
-	return s
-}
-
-// SetS3Url sets the S3Url field's value.
-func (s *ImportJobRequest) SetS3Url(v string) *ImportJobRequest {
-	s.S3Url = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *ImportJobRequest) SetSegmentId(v string) *ImportJobRequest {
-	s.SegmentId = &v
-	return s
-}
-
-// SetSegmentName sets the SegmentName field's value.
-func (s *ImportJobRequest) SetSegmentName(v string) *ImportJobRequest {
-	s.SegmentName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobResource
 type ImportJobResource struct {
 	_ struct{} `type:"structure"`
@@ -10497,54 +7635,6 @@ func (s ImportJobResource) String() string {
 // GoString returns the string representation
 func (s ImportJobResource) GoString() string {
 	return s.String()
-}
-
-// SetDefineSegment sets the DefineSegment field's value.
-func (s *ImportJobResource) SetDefineSegment(v bool) *ImportJobResource {
-	s.DefineSegment = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *ImportJobResource) SetExternalId(v string) *ImportJobResource {
-	s.ExternalId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *ImportJobResource) SetFormat(v Format) *ImportJobResource {
-	s.Format = v
-	return s
-}
-
-// SetRegisterEndpoints sets the RegisterEndpoints field's value.
-func (s *ImportJobResource) SetRegisterEndpoints(v bool) *ImportJobResource {
-	s.RegisterEndpoints = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *ImportJobResource) SetRoleArn(v string) *ImportJobResource {
-	s.RoleArn = &v
-	return s
-}
-
-// SetS3Url sets the S3Url field's value.
-func (s *ImportJobResource) SetS3Url(v string) *ImportJobResource {
-	s.S3Url = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *ImportJobResource) SetSegmentId(v string) *ImportJobResource {
-	s.SegmentId = &v
-	return s
-}
-
-// SetSegmentName sets the SegmentName field's value.
-func (s *ImportJobResource) SetSegmentName(v string) *ImportJobResource {
-	s.SegmentName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobResponse
@@ -10605,84 +7695,6 @@ func (s ImportJobResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ImportJobResponse) SetApplicationId(v string) *ImportJobResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCompletedPieces sets the CompletedPieces field's value.
-func (s *ImportJobResponse) SetCompletedPieces(v int64) *ImportJobResponse {
-	s.CompletedPieces = &v
-	return s
-}
-
-// SetCompletionDate sets the CompletionDate field's value.
-func (s *ImportJobResponse) SetCompletionDate(v string) *ImportJobResponse {
-	s.CompletionDate = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ImportJobResponse) SetCreationDate(v string) *ImportJobResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *ImportJobResponse) SetDefinition(v *ImportJobResource) *ImportJobResponse {
-	s.Definition = v
-	return s
-}
-
-// SetFailedPieces sets the FailedPieces field's value.
-func (s *ImportJobResponse) SetFailedPieces(v int64) *ImportJobResponse {
-	s.FailedPieces = &v
-	return s
-}
-
-// SetFailures sets the Failures field's value.
-func (s *ImportJobResponse) SetFailures(v []string) *ImportJobResponse {
-	s.Failures = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ImportJobResponse) SetId(v string) *ImportJobResponse {
-	s.Id = &v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *ImportJobResponse) SetJobStatus(v JobStatus) *ImportJobResponse {
-	s.JobStatus = v
-	return s
-}
-
-// SetTotalFailures sets the TotalFailures field's value.
-func (s *ImportJobResponse) SetTotalFailures(v int64) *ImportJobResponse {
-	s.TotalFailures = &v
-	return s
-}
-
-// SetTotalPieces sets the TotalPieces field's value.
-func (s *ImportJobResponse) SetTotalPieces(v int64) *ImportJobResponse {
-	s.TotalPieces = &v
-	return s
-}
-
-// SetTotalProcessed sets the TotalProcessed field's value.
-func (s *ImportJobResponse) SetTotalProcessed(v int64) *ImportJobResponse {
-	s.TotalProcessed = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ImportJobResponse) SetType(v string) *ImportJobResponse {
-	s.Type = &v
-	return s
-}
-
 // Import job list.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobsResponse
 type ImportJobsResponse struct {
@@ -10704,18 +7716,6 @@ func (s ImportJobsResponse) String() string {
 // GoString returns the string representation
 func (s ImportJobsResponse) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *ImportJobsResponse) SetItem(v []ImportJobResponse) *ImportJobsResponse {
-	s.Item = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ImportJobsResponse) SetNextToken(v string) *ImportJobsResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Message
@@ -10776,72 +7776,6 @@ func (s Message) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *Message) SetAction(v Action) *Message {
-	s.Action = v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *Message) SetBody(v string) *Message {
-	s.Body = &v
-	return s
-}
-
-// SetImageIconUrl sets the ImageIconUrl field's value.
-func (s *Message) SetImageIconUrl(v string) *Message {
-	s.ImageIconUrl = &v
-	return s
-}
-
-// SetImageSmallIconUrl sets the ImageSmallIconUrl field's value.
-func (s *Message) SetImageSmallIconUrl(v string) *Message {
-	s.ImageSmallIconUrl = &v
-	return s
-}
-
-// SetImageUrl sets the ImageUrl field's value.
-func (s *Message) SetImageUrl(v string) *Message {
-	s.ImageUrl = &v
-	return s
-}
-
-// SetJsonBody sets the JsonBody field's value.
-func (s *Message) SetJsonBody(v string) *Message {
-	s.JsonBody = &v
-	return s
-}
-
-// SetMediaUrl sets the MediaUrl field's value.
-func (s *Message) SetMediaUrl(v string) *Message {
-	s.MediaUrl = &v
-	return s
-}
-
-// SetRawContent sets the RawContent field's value.
-func (s *Message) SetRawContent(v string) *Message {
-	s.RawContent = &v
-	return s
-}
-
-// SetSilentPush sets the SilentPush field's value.
-func (s *Message) SetSilentPush(v bool) *Message {
-	s.SilentPush = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *Message) SetTitle(v string) *Message {
-	s.Title = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *Message) SetUrl(v string) *Message {
-	s.Url = &v
-	return s
-}
-
 // Simple message object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageBody
 type MessageBody struct {
@@ -10862,18 +7796,6 @@ func (s MessageBody) String() string {
 // GoString returns the string representation
 func (s MessageBody) GoString() string {
 	return s.String()
-}
-
-// SetMessage sets the Message field's value.
-func (s *MessageBody) SetMessage(v string) *MessageBody {
-	s.Message = &v
-	return s
-}
-
-// SetRequestID sets the RequestID field's value.
-func (s *MessageBody) SetRequestID(v string) *MessageBody {
-	s.RequestID = &v
-	return s
 }
 
 // Message configuration for a campaign.
@@ -10917,48 +7839,6 @@ func (s MessageConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetADMMessage sets the ADMMessage field's value.
-func (s *MessageConfiguration) SetADMMessage(v *Message) *MessageConfiguration {
-	s.ADMMessage = v
-	return s
-}
-
-// SetAPNSMessage sets the APNSMessage field's value.
-func (s *MessageConfiguration) SetAPNSMessage(v *Message) *MessageConfiguration {
-	s.APNSMessage = v
-	return s
-}
-
-// SetBaiduMessage sets the BaiduMessage field's value.
-func (s *MessageConfiguration) SetBaiduMessage(v *Message) *MessageConfiguration {
-	s.BaiduMessage = v
-	return s
-}
-
-// SetDefaultMessage sets the DefaultMessage field's value.
-func (s *MessageConfiguration) SetDefaultMessage(v *Message) *MessageConfiguration {
-	s.DefaultMessage = v
-	return s
-}
-
-// SetEmailMessage sets the EmailMessage field's value.
-func (s *MessageConfiguration) SetEmailMessage(v *CampaignEmailMessage) *MessageConfiguration {
-	s.EmailMessage = v
-	return s
-}
-
-// SetGCMMessage sets the GCMMessage field's value.
-func (s *MessageConfiguration) SetGCMMessage(v *Message) *MessageConfiguration {
-	s.GCMMessage = v
-	return s
-}
-
-// SetSMSMessage sets the SMSMessage field's value.
-func (s *MessageConfiguration) SetSMSMessage(v *CampaignSmsMessage) *MessageConfiguration {
-	s.SMSMessage = v
-	return s
-}
-
 // Send message request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageRequest
 type MessageRequest struct {
@@ -10986,30 +7866,6 @@ func (s MessageRequest) String() string {
 // GoString returns the string representation
 func (s MessageRequest) GoString() string {
 	return s.String()
-}
-
-// SetAddresses sets the Addresses field's value.
-func (s *MessageRequest) SetAddresses(v map[string]AddressConfiguration) *MessageRequest {
-	s.Addresses = v
-	return s
-}
-
-// SetContext sets the Context field's value.
-func (s *MessageRequest) SetContext(v map[string]string) *MessageRequest {
-	s.Context = v
-	return s
-}
-
-// SetEndpoints sets the Endpoints field's value.
-func (s *MessageRequest) SetEndpoints(v map[string]EndpointSendConfiguration) *MessageRequest {
-	s.Endpoints = v
-	return s
-}
-
-// SetMessageConfiguration sets the MessageConfiguration field's value.
-func (s *MessageRequest) SetMessageConfiguration(v *DirectMessageConfiguration) *MessageRequest {
-	s.MessageConfiguration = v
-	return s
 }
 
 // Send message response.
@@ -11043,30 +7899,6 @@ func (s MessageResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *MessageResponse) SetApplicationId(v string) *MessageResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetEndpointResult sets the EndpointResult field's value.
-func (s *MessageResponse) SetEndpointResult(v map[string]EndpointMessageResult) *MessageResponse {
-	s.EndpointResult = v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *MessageResponse) SetRequestId(v string) *MessageResponse {
-	s.RequestId = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *MessageResponse) SetResult(v map[string]MessageResult) *MessageResponse {
-	s.Result = v
-	return s
-}
-
 // The result from sending a message to an address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResult
 type MessageResult struct {
@@ -11093,30 +7925,6 @@ func (s MessageResult) String() string {
 // GoString returns the string representation
 func (s MessageResult) GoString() string {
 	return s.String()
-}
-
-// SetDeliveryStatus sets the DeliveryStatus field's value.
-func (s *MessageResult) SetDeliveryStatus(v DeliveryStatus) *MessageResult {
-	s.DeliveryStatus = v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *MessageResult) SetStatusCode(v int64) *MessageResult {
-	s.StatusCode = &v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *MessageResult) SetStatusMessage(v string) *MessageResult {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetUpdatedToken sets the UpdatedToken field's value.
-func (s *MessageResult) SetUpdatedToken(v string) *MessageResult {
-	s.UpdatedToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStreamRequest
@@ -11162,18 +7970,6 @@ func (s *PutEventStreamInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *PutEventStreamInput) SetApplicationId(v string) *PutEventStreamInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetWriteEventStream sets the WriteEventStream field's value.
-func (s *PutEventStreamInput) SetWriteEventStream(v *WriteEventStream) *PutEventStreamInput {
-	s.WriteEventStream = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStreamResponse
 type PutEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
@@ -11201,12 +7997,6 @@ func (s PutEventStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEventStream sets the EventStream field's value.
-func (s *PutEventStreamOutput) SetEventStream(v *EventStream) *PutEventStreamOutput {
-	s.EventStream = v
-	return s
-}
-
 // Quiet Time
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/QuietTime
 type QuietTime struct {
@@ -11227,18 +8017,6 @@ func (s QuietTime) String() string {
 // GoString returns the string representation
 func (s QuietTime) GoString() string {
 	return s.String()
-}
-
-// SetEnd sets the End field's value.
-func (s *QuietTime) SetEnd(v string) *QuietTime {
-	s.End = &v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *QuietTime) SetStart(v string) *QuietTime {
-	s.Start = &v
-	return s
 }
 
 // Define how a segment based on recency of use.
@@ -11266,18 +8044,6 @@ func (s RecencyDimension) GoString() string {
 	return s.String()
 }
 
-// SetDuration sets the Duration field's value.
-func (s *RecencyDimension) SetDuration(v Duration) *RecencyDimension {
-	s.Duration = v
-	return s
-}
-
-// SetRecencyType sets the RecencyType field's value.
-func (s *RecencyDimension) SetRecencyType(v RecencyType) *RecencyDimension {
-	s.RecencyType = v
-	return s
-}
-
 // SMS Channel Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSChannelRequest
 type SMSChannelRequest struct {
@@ -11301,24 +8067,6 @@ func (s SMSChannelRequest) String() string {
 // GoString returns the string representation
 func (s SMSChannelRequest) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *SMSChannelRequest) SetEnabled(v bool) *SMSChannelRequest {
-	s.Enabled = &v
-	return s
-}
-
-// SetSenderId sets the SenderId field's value.
-func (s *SMSChannelRequest) SetSenderId(v string) *SMSChannelRequest {
-	s.SenderId = &v
-	return s
-}
-
-// SetShortCode sets the ShortCode field's value.
-func (s *SMSChannelRequest) SetShortCode(v string) *SMSChannelRequest {
-	s.ShortCode = &v
-	return s
 }
 
 // SMS Channel Response.
@@ -11373,78 +8121,6 @@ func (s SMSChannelResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *SMSChannelResponse) SetApplicationId(v string) *SMSChannelResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *SMSChannelResponse) SetCreationDate(v string) *SMSChannelResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *SMSChannelResponse) SetEnabled(v bool) *SMSChannelResponse {
-	s.Enabled = &v
-	return s
-}
-
-// SetHasCredential sets the HasCredential field's value.
-func (s *SMSChannelResponse) SetHasCredential(v bool) *SMSChannelResponse {
-	s.HasCredential = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *SMSChannelResponse) SetId(v string) *SMSChannelResponse {
-	s.Id = &v
-	return s
-}
-
-// SetIsArchived sets the IsArchived field's value.
-func (s *SMSChannelResponse) SetIsArchived(v bool) *SMSChannelResponse {
-	s.IsArchived = &v
-	return s
-}
-
-// SetLastModifiedBy sets the LastModifiedBy field's value.
-func (s *SMSChannelResponse) SetLastModifiedBy(v string) *SMSChannelResponse {
-	s.LastModifiedBy = &v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *SMSChannelResponse) SetLastModifiedDate(v string) *SMSChannelResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *SMSChannelResponse) SetPlatform(v string) *SMSChannelResponse {
-	s.Platform = &v
-	return s
-}
-
-// SetSenderId sets the SenderId field's value.
-func (s *SMSChannelResponse) SetSenderId(v string) *SMSChannelResponse {
-	s.SenderId = &v
-	return s
-}
-
-// SetShortCode sets the ShortCode field's value.
-func (s *SMSChannelResponse) SetShortCode(v string) *SMSChannelResponse {
-	s.ShortCode = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *SMSChannelResponse) SetVersion(v int64) *SMSChannelResponse {
-	s.Version = &v
-	return s
-}
-
 // SMS Message.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSMessage
 type SMSMessage struct {
@@ -11470,30 +8146,6 @@ func (s SMSMessage) String() string {
 // GoString returns the string representation
 func (s SMSMessage) GoString() string {
 	return s.String()
-}
-
-// SetBody sets the Body field's value.
-func (s *SMSMessage) SetBody(v string) *SMSMessage {
-	s.Body = &v
-	return s
-}
-
-// SetMessageType sets the MessageType field's value.
-func (s *SMSMessage) SetMessageType(v MessageType) *SMSMessage {
-	s.MessageType = v
-	return s
-}
-
-// SetSenderId sets the SenderId field's value.
-func (s *SMSMessage) SetSenderId(v string) *SMSMessage {
-	s.SenderId = &v
-	return s
-}
-
-// SetSubstitutions sets the Substitutions field's value.
-func (s *SMSMessage) SetSubstitutions(v map[string][]string) *SMSMessage {
-	s.Substitutions = v
-	return s
 }
 
 // Shcedule that defines when a campaign is run.
@@ -11533,42 +8185,6 @@ func (s Schedule) GoString() string {
 	return s.String()
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *Schedule) SetEndTime(v string) *Schedule {
-	s.EndTime = &v
-	return s
-}
-
-// SetFrequency sets the Frequency field's value.
-func (s *Schedule) SetFrequency(v Frequency) *Schedule {
-	s.Frequency = v
-	return s
-}
-
-// SetIsLocalTime sets the IsLocalTime field's value.
-func (s *Schedule) SetIsLocalTime(v bool) *Schedule {
-	s.IsLocalTime = &v
-	return s
-}
-
-// SetQuietTime sets the QuietTime field's value.
-func (s *Schedule) SetQuietTime(v *QuietTime) *Schedule {
-	s.QuietTime = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Schedule) SetStartTime(v string) *Schedule {
-	s.StartTime = &v
-	return s
-}
-
-// SetTimezone sets the Timezone field's value.
-func (s *Schedule) SetTimezone(v string) *Schedule {
-	s.Timezone = &v
-	return s
-}
-
 // Segment behavior dimensions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentBehaviors
 type SegmentBehaviors struct {
@@ -11586,12 +8202,6 @@ func (s SegmentBehaviors) String() string {
 // GoString returns the string representation
 func (s SegmentBehaviors) GoString() string {
 	return s.String()
-}
-
-// SetRecency sets the Recency field's value.
-func (s *SegmentBehaviors) SetRecency(v *RecencyDimension) *SegmentBehaviors {
-	s.Recency = v
-	return s
 }
 
 // Segment demographic dimensions
@@ -11628,42 +8238,6 @@ func (s SegmentDemographics) GoString() string {
 	return s.String()
 }
 
-// SetAppVersion sets the AppVersion field's value.
-func (s *SegmentDemographics) SetAppVersion(v *SetDimension) *SegmentDemographics {
-	s.AppVersion = v
-	return s
-}
-
-// SetChannel sets the Channel field's value.
-func (s *SegmentDemographics) SetChannel(v *SetDimension) *SegmentDemographics {
-	s.Channel = v
-	return s
-}
-
-// SetDeviceType sets the DeviceType field's value.
-func (s *SegmentDemographics) SetDeviceType(v *SetDimension) *SegmentDemographics {
-	s.DeviceType = v
-	return s
-}
-
-// SetMake sets the Make field's value.
-func (s *SegmentDemographics) SetMake(v *SetDimension) *SegmentDemographics {
-	s.Make = v
-	return s
-}
-
-// SetModel sets the Model field's value.
-func (s *SegmentDemographics) SetModel(v *SetDimension) *SegmentDemographics {
-	s.Model = v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *SegmentDemographics) SetPlatform(v *SetDimension) *SegmentDemographics {
-	s.Platform = v
-	return s
-}
-
 // Segment dimensions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentDimensions
 type SegmentDimensions struct {
@@ -11693,36 +8267,6 @@ func (s SegmentDimensions) String() string {
 // GoString returns the string representation
 func (s SegmentDimensions) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *SegmentDimensions) SetAttributes(v map[string]AttributeDimension) *SegmentDimensions {
-	s.Attributes = v
-	return s
-}
-
-// SetBehavior sets the Behavior field's value.
-func (s *SegmentDimensions) SetBehavior(v *SegmentBehaviors) *SegmentDimensions {
-	s.Behavior = v
-	return s
-}
-
-// SetDemographic sets the Demographic field's value.
-func (s *SegmentDimensions) SetDemographic(v *SegmentDemographics) *SegmentDimensions {
-	s.Demographic = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *SegmentDimensions) SetLocation(v *SegmentLocation) *SegmentDimensions {
-	s.Location = v
-	return s
-}
-
-// SetUserAttributes sets the UserAttributes field's value.
-func (s *SegmentDimensions) SetUserAttributes(v map[string]AttributeDimension) *SegmentDimensions {
-	s.UserAttributes = v
-	return s
 }
 
 // Segment import definition.
@@ -11762,42 +8306,6 @@ func (s SegmentImportResource) GoString() string {
 	return s.String()
 }
 
-// SetChannelCounts sets the ChannelCounts field's value.
-func (s *SegmentImportResource) SetChannelCounts(v map[string]int64) *SegmentImportResource {
-	s.ChannelCounts = v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *SegmentImportResource) SetExternalId(v string) *SegmentImportResource {
-	s.ExternalId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *SegmentImportResource) SetFormat(v Format) *SegmentImportResource {
-	s.Format = v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *SegmentImportResource) SetRoleArn(v string) *SegmentImportResource {
-	s.RoleArn = &v
-	return s
-}
-
-// SetS3Url sets the S3Url field's value.
-func (s *SegmentImportResource) SetS3Url(v string) *SegmentImportResource {
-	s.S3Url = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *SegmentImportResource) SetSize(v int64) *SegmentImportResource {
-	s.Size = &v
-	return s
-}
-
 // Segment location dimensions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentLocation
 type SegmentLocation struct {
@@ -11815,12 +8323,6 @@ func (s SegmentLocation) String() string {
 // GoString returns the string representation
 func (s SegmentLocation) GoString() string {
 	return s.String()
-}
-
-// SetCountry sets the Country field's value.
-func (s *SegmentLocation) SetCountry(v *SetDimension) *SegmentLocation {
-	s.Country = v
-	return s
 }
 
 // Segment definition.
@@ -11872,60 +8374,6 @@ func (s SegmentResponse) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *SegmentResponse) SetApplicationId(v string) *SegmentResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *SegmentResponse) SetCreationDate(v string) *SegmentResponse {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDimensions sets the Dimensions field's value.
-func (s *SegmentResponse) SetDimensions(v *SegmentDimensions) *SegmentResponse {
-	s.Dimensions = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *SegmentResponse) SetId(v string) *SegmentResponse {
-	s.Id = &v
-	return s
-}
-
-// SetImportDefinition sets the ImportDefinition field's value.
-func (s *SegmentResponse) SetImportDefinition(v *SegmentImportResource) *SegmentResponse {
-	s.ImportDefinition = v
-	return s
-}
-
-// SetLastModifiedDate sets the LastModifiedDate field's value.
-func (s *SegmentResponse) SetLastModifiedDate(v string) *SegmentResponse {
-	s.LastModifiedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *SegmentResponse) SetName(v string) *SegmentResponse {
-	s.Name = &v
-	return s
-}
-
-// SetSegmentType sets the SegmentType field's value.
-func (s *SegmentResponse) SetSegmentType(v SegmentType) *SegmentResponse {
-	s.SegmentType = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *SegmentResponse) SetVersion(v int64) *SegmentResponse {
-	s.Version = &v
-	return s
-}
-
 // Segments in your account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentsResponse
 type SegmentsResponse struct {
@@ -11947,18 +8395,6 @@ func (s SegmentsResponse) String() string {
 // GoString returns the string representation
 func (s SegmentsResponse) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *SegmentsResponse) SetItem(v []SegmentResponse) *SegmentsResponse {
-	s.Item = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *SegmentsResponse) SetNextToken(v string) *SegmentsResponse {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessagesRequest
@@ -12002,18 +8438,6 @@ func (s *SendMessagesInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *SendMessagesInput) SetApplicationId(v string) *SendMessagesInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetMessageRequest sets the MessageRequest field's value.
-func (s *SendMessagesInput) SetMessageRequest(v *MessageRequest) *SendMessagesInput {
-	s.MessageRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessagesResponse
 type SendMessagesOutput struct {
 	_ struct{} `type:"structure" payload:"MessageResponse"`
@@ -12041,12 +8465,6 @@ func (s SendMessagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMessageResponse sets the MessageResponse field's value.
-func (s *SendMessagesOutput) SetMessageResponse(v *MessageResponse) *SendMessagesOutput {
-	s.MessageResponse = v
-	return s
-}
-
 // Send message request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageRequest
 type SendUsersMessageRequest struct {
@@ -12072,24 +8490,6 @@ func (s SendUsersMessageRequest) GoString() string {
 	return s.String()
 }
 
-// SetContext sets the Context field's value.
-func (s *SendUsersMessageRequest) SetContext(v map[string]string) *SendUsersMessageRequest {
-	s.Context = v
-	return s
-}
-
-// SetMessageConfiguration sets the MessageConfiguration field's value.
-func (s *SendUsersMessageRequest) SetMessageConfiguration(v *DirectMessageConfiguration) *SendUsersMessageRequest {
-	s.MessageConfiguration = v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *SendUsersMessageRequest) SetUsers(v map[string]EndpointSendConfiguration) *SendUsersMessageRequest {
-	s.Users = v
-	return s
-}
-
 // User send message response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageResponse
 type SendUsersMessageResponse struct {
@@ -12113,24 +8513,6 @@ func (s SendUsersMessageResponse) String() string {
 // GoString returns the string representation
 func (s SendUsersMessageResponse) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *SendUsersMessageResponse) SetApplicationId(v string) *SendUsersMessageResponse {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *SendUsersMessageResponse) SetRequestId(v string) *SendUsersMessageResponse {
-	s.RequestId = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *SendUsersMessageResponse) SetResult(v map[string]map[string]EndpointMessageResult) *SendUsersMessageResponse {
-	s.Result = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessagesRequest
@@ -12174,18 +8556,6 @@ func (s *SendUsersMessagesInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *SendUsersMessagesInput) SetApplicationId(v string) *SendUsersMessagesInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSendUsersMessageRequest sets the SendUsersMessageRequest field's value.
-func (s *SendUsersMessagesInput) SetSendUsersMessageRequest(v *SendUsersMessageRequest) *SendUsersMessagesInput {
-	s.SendUsersMessageRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessagesResponse
 type SendUsersMessagesOutput struct {
 	_ struct{} `type:"structure" payload:"SendUsersMessageResponse"`
@@ -12213,12 +8583,6 @@ func (s SendUsersMessagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSendUsersMessageResponse sets the SendUsersMessageResponse field's value.
-func (s *SendUsersMessagesOutput) SetSendUsersMessageResponse(v *SendUsersMessageResponse) *SendUsersMessagesOutput {
-	s.SendUsersMessageResponse = v
-	return s
-}
-
 // Dimension specification of a segment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SetDimension
 type SetDimension struct {
@@ -12240,18 +8604,6 @@ func (s SetDimension) String() string {
 // GoString returns the string representation
 func (s SetDimension) GoString() string {
 	return s.String()
-}
-
-// SetDimensionType sets the DimensionType field's value.
-func (s *SetDimension) SetDimensionType(v DimensionType) *SetDimension {
-	s.DimensionType = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *SetDimension) SetValues(v []string) *SetDimension {
-	s.Values = v
-	return s
 }
 
 // Treatment resource
@@ -12289,48 +8641,6 @@ func (s TreatmentResource) String() string {
 // GoString returns the string representation
 func (s TreatmentResource) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *TreatmentResource) SetId(v string) *TreatmentResource {
-	s.Id = &v
-	return s
-}
-
-// SetMessageConfiguration sets the MessageConfiguration field's value.
-func (s *TreatmentResource) SetMessageConfiguration(v *MessageConfiguration) *TreatmentResource {
-	s.MessageConfiguration = v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *TreatmentResource) SetSchedule(v *Schedule) *TreatmentResource {
-	s.Schedule = v
-	return s
-}
-
-// SetSizePercent sets the SizePercent field's value.
-func (s *TreatmentResource) SetSizePercent(v int64) *TreatmentResource {
-	s.SizePercent = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *TreatmentResource) SetState(v *CampaignState) *TreatmentResource {
-	s.State = v
-	return s
-}
-
-// SetTreatmentDescription sets the TreatmentDescription field's value.
-func (s *TreatmentResource) SetTreatmentDescription(v string) *TreatmentResource {
-	s.TreatmentDescription = &v
-	return s
-}
-
-// SetTreatmentName sets the TreatmentName field's value.
-func (s *TreatmentResource) SetTreatmentName(v string) *TreatmentResource {
-	s.TreatmentName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannelRequest
@@ -12374,18 +8684,6 @@ func (s *UpdateAdmChannelInput) Validate() error {
 	return nil
 }
 
-// SetADMChannelRequest sets the ADMChannelRequest field's value.
-func (s *UpdateAdmChannelInput) SetADMChannelRequest(v *ADMChannelRequest) *UpdateAdmChannelInput {
-	s.ADMChannelRequest = v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateAdmChannelInput) SetApplicationId(v string) *UpdateAdmChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannelResponse
 type UpdateAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
@@ -12411,12 +8709,6 @@ func (s UpdateAdmChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAdmChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetADMChannelResponse sets the ADMChannelResponse field's value.
-func (s *UpdateAdmChannelOutput) SetADMChannelResponse(v *ADMChannelResponse) *UpdateAdmChannelOutput {
-	s.ADMChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannelRequest
@@ -12460,18 +8752,6 @@ func (s *UpdateApnsChannelInput) Validate() error {
 	return nil
 }
 
-// SetAPNSChannelRequest sets the APNSChannelRequest field's value.
-func (s *UpdateApnsChannelInput) SetAPNSChannelRequest(v *APNSChannelRequest) *UpdateApnsChannelInput {
-	s.APNSChannelRequest = v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApnsChannelInput) SetApplicationId(v string) *UpdateApnsChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannelResponse
 type UpdateApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
@@ -12497,12 +8777,6 @@ func (s UpdateApnsChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateApnsChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSChannelResponse sets the APNSChannelResponse field's value.
-func (s *UpdateApnsChannelOutput) SetAPNSChannelResponse(v *APNSChannelResponse) *UpdateApnsChannelOutput {
-	s.APNSChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannelRequest
@@ -12546,18 +8820,6 @@ func (s *UpdateApnsSandboxChannelInput) Validate() error {
 	return nil
 }
 
-// SetAPNSSandboxChannelRequest sets the APNSSandboxChannelRequest field's value.
-func (s *UpdateApnsSandboxChannelInput) SetAPNSSandboxChannelRequest(v *APNSSandboxChannelRequest) *UpdateApnsSandboxChannelInput {
-	s.APNSSandboxChannelRequest = v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApnsSandboxChannelInput) SetApplicationId(v string) *UpdateApnsSandboxChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannelResponse
 type UpdateApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
@@ -12583,12 +8845,6 @@ func (s UpdateApnsSandboxChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateApnsSandboxChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSSandboxChannelResponse sets the APNSSandboxChannelResponse field's value.
-func (s *UpdateApnsSandboxChannelOutput) SetAPNSSandboxChannelResponse(v *APNSSandboxChannelResponse) *UpdateApnsSandboxChannelOutput {
-	s.APNSSandboxChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannelRequest
@@ -12632,18 +8888,6 @@ func (s *UpdateApnsVoipChannelInput) Validate() error {
 	return nil
 }
 
-// SetAPNSVoipChannelRequest sets the APNSVoipChannelRequest field's value.
-func (s *UpdateApnsVoipChannelInput) SetAPNSVoipChannelRequest(v *APNSVoipChannelRequest) *UpdateApnsVoipChannelInput {
-	s.APNSVoipChannelRequest = v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApnsVoipChannelInput) SetApplicationId(v string) *UpdateApnsVoipChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipChannelResponse
 type UpdateApnsVoipChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
@@ -12669,12 +8913,6 @@ func (s UpdateApnsVoipChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateApnsVoipChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSVoipChannelResponse sets the APNSVoipChannelResponse field's value.
-func (s *UpdateApnsVoipChannelOutput) SetAPNSVoipChannelResponse(v *APNSVoipChannelResponse) *UpdateApnsVoipChannelOutput {
-	s.APNSVoipChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannelRequest
@@ -12718,18 +8956,6 @@ func (s *UpdateApnsVoipSandboxChannelInput) Validate() error {
 	return nil
 }
 
-// SetAPNSVoipSandboxChannelRequest sets the APNSVoipSandboxChannelRequest field's value.
-func (s *UpdateApnsVoipSandboxChannelInput) SetAPNSVoipSandboxChannelRequest(v *APNSVoipSandboxChannelRequest) *UpdateApnsVoipSandboxChannelInput {
-	s.APNSVoipSandboxChannelRequest = v
-	return s
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApnsVoipSandboxChannelInput) SetApplicationId(v string) *UpdateApnsVoipSandboxChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsVoipSandboxChannelResponse
 type UpdateApnsVoipSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
@@ -12755,12 +8981,6 @@ func (s UpdateApnsVoipSandboxChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateApnsVoipSandboxChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAPNSVoipSandboxChannelResponse sets the APNSVoipSandboxChannelResponse field's value.
-func (s *UpdateApnsVoipSandboxChannelOutput) SetAPNSVoipSandboxChannelResponse(v *APNSVoipSandboxChannelResponse) *UpdateApnsVoipSandboxChannelOutput {
-	s.APNSVoipSandboxChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettingsRequest
@@ -12804,18 +9024,6 @@ func (s *UpdateApplicationSettingsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApplicationSettingsInput) SetApplicationId(v string) *UpdateApplicationSettingsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetWriteApplicationSettingsRequest sets the WriteApplicationSettingsRequest field's value.
-func (s *UpdateApplicationSettingsInput) SetWriteApplicationSettingsRequest(v *WriteApplicationSettingsRequest) *UpdateApplicationSettingsInput {
-	s.WriteApplicationSettingsRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettingsResponse
 type UpdateApplicationSettingsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationSettingsResource"`
@@ -12841,12 +9049,6 @@ func (s UpdateApplicationSettingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateApplicationSettingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationSettingsResource sets the ApplicationSettingsResource field's value.
-func (s *UpdateApplicationSettingsOutput) SetApplicationSettingsResource(v *ApplicationSettingsResource) *UpdateApplicationSettingsOutput {
-	s.ApplicationSettingsResource = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannelRequest
@@ -12890,18 +9092,6 @@ func (s *UpdateBaiduChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateBaiduChannelInput) SetApplicationId(v string) *UpdateBaiduChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetBaiduChannelRequest sets the BaiduChannelRequest field's value.
-func (s *UpdateBaiduChannelInput) SetBaiduChannelRequest(v *BaiduChannelRequest) *UpdateBaiduChannelInput {
-	s.BaiduChannelRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannelResponse
 type UpdateBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
@@ -12927,12 +9117,6 @@ func (s UpdateBaiduChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateBaiduChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBaiduChannelResponse sets the BaiduChannelResponse field's value.
-func (s *UpdateBaiduChannelOutput) SetBaiduChannelResponse(v *BaiduChannelResponse) *UpdateBaiduChannelOutput {
-	s.BaiduChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaignRequest
@@ -12983,24 +9167,6 @@ func (s *UpdateCampaignInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateCampaignInput) SetApplicationId(v string) *UpdateCampaignInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCampaignId sets the CampaignId field's value.
-func (s *UpdateCampaignInput) SetCampaignId(v string) *UpdateCampaignInput {
-	s.CampaignId = &v
-	return s
-}
-
-// SetWriteCampaignRequest sets the WriteCampaignRequest field's value.
-func (s *UpdateCampaignInput) SetWriteCampaignRequest(v *WriteCampaignRequest) *UpdateCampaignInput {
-	s.WriteCampaignRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaignResponse
 type UpdateCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
@@ -13026,12 +9192,6 @@ func (s UpdateCampaignOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateCampaignOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCampaignResponse sets the CampaignResponse field's value.
-func (s *UpdateCampaignOutput) SetCampaignResponse(v *CampaignResponse) *UpdateCampaignOutput {
-	s.CampaignResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannelRequest
@@ -13075,18 +9235,6 @@ func (s *UpdateEmailChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateEmailChannelInput) SetApplicationId(v string) *UpdateEmailChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetEmailChannelRequest sets the EmailChannelRequest field's value.
-func (s *UpdateEmailChannelInput) SetEmailChannelRequest(v *EmailChannelRequest) *UpdateEmailChannelInput {
-	s.EmailChannelRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannelResponse
 type UpdateEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
@@ -13112,12 +9260,6 @@ func (s UpdateEmailChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEmailChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEmailChannelResponse sets the EmailChannelResponse field's value.
-func (s *UpdateEmailChannelOutput) SetEmailChannelResponse(v *EmailChannelResponse) *UpdateEmailChannelOutput {
-	s.EmailChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointRequest
@@ -13168,24 +9310,6 @@ func (s *UpdateEndpointInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateEndpointInput) SetApplicationId(v string) *UpdateEndpointInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetEndpointId sets the EndpointId field's value.
-func (s *UpdateEndpointInput) SetEndpointId(v string) *UpdateEndpointInput {
-	s.EndpointId = &v
-	return s
-}
-
-// SetEndpointRequest sets the EndpointRequest field's value.
-func (s *UpdateEndpointInput) SetEndpointRequest(v *EndpointRequest) *UpdateEndpointInput {
-	s.EndpointRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointResponse
 type UpdateEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"MessageBody"`
@@ -13211,12 +9335,6 @@ func (s UpdateEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageBody sets the MessageBody field's value.
-func (s *UpdateEndpointOutput) SetMessageBody(v *MessageBody) *UpdateEndpointOutput {
-	s.MessageBody = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatchRequest
@@ -13260,18 +9378,6 @@ func (s *UpdateEndpointsBatchInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateEndpointsBatchInput) SetApplicationId(v string) *UpdateEndpointsBatchInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetEndpointBatchRequest sets the EndpointBatchRequest field's value.
-func (s *UpdateEndpointsBatchInput) SetEndpointBatchRequest(v *EndpointBatchRequest) *UpdateEndpointsBatchInput {
-	s.EndpointBatchRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatchResponse
 type UpdateEndpointsBatchOutput struct {
 	_ struct{} `type:"structure" payload:"MessageBody"`
@@ -13297,12 +9403,6 @@ func (s UpdateEndpointsBatchOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEndpointsBatchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessageBody sets the MessageBody field's value.
-func (s *UpdateEndpointsBatchOutput) SetMessageBody(v *MessageBody) *UpdateEndpointsBatchOutput {
-	s.MessageBody = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannelRequest
@@ -13346,18 +9446,6 @@ func (s *UpdateGcmChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateGcmChannelInput) SetApplicationId(v string) *UpdateGcmChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetGCMChannelRequest sets the GCMChannelRequest field's value.
-func (s *UpdateGcmChannelInput) SetGCMChannelRequest(v *GCMChannelRequest) *UpdateGcmChannelInput {
-	s.GCMChannelRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannelResponse
 type UpdateGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
@@ -13383,12 +9471,6 @@ func (s UpdateGcmChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGcmChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGCMChannelResponse sets the GCMChannelResponse field's value.
-func (s *UpdateGcmChannelOutput) SetGCMChannelResponse(v *GCMChannelResponse) *UpdateGcmChannelOutput {
-	s.GCMChannelResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegmentRequest
@@ -13439,24 +9521,6 @@ func (s *UpdateSegmentInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateSegmentInput) SetApplicationId(v string) *UpdateSegmentInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *UpdateSegmentInput) SetSegmentId(v string) *UpdateSegmentInput {
-	s.SegmentId = &v
-	return s
-}
-
-// SetWriteSegmentRequest sets the WriteSegmentRequest field's value.
-func (s *UpdateSegmentInput) SetWriteSegmentRequest(v *WriteSegmentRequest) *UpdateSegmentInput {
-	s.WriteSegmentRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegmentResponse
 type UpdateSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
@@ -13482,12 +9546,6 @@ func (s UpdateSegmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSegmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSegmentResponse sets the SegmentResponse field's value.
-func (s *UpdateSegmentOutput) SetSegmentResponse(v *SegmentResponse) *UpdateSegmentOutput {
-	s.SegmentResponse = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannelRequest
@@ -13531,18 +9589,6 @@ func (s *UpdateSmsChannelInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateSmsChannelInput) SetApplicationId(v string) *UpdateSmsChannelInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSMSChannelRequest sets the SMSChannelRequest field's value.
-func (s *UpdateSmsChannelInput) SetSMSChannelRequest(v *SMSChannelRequest) *UpdateSmsChannelInput {
-	s.SMSChannelRequest = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannelResponse
 type UpdateSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
@@ -13570,12 +9616,6 @@ func (s UpdateSmsChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSMSChannelResponse sets the SMSChannelResponse field's value.
-func (s *UpdateSmsChannelOutput) SetSMSChannelResponse(v *SMSChannelResponse) *UpdateSmsChannelOutput {
-	s.SMSChannelResponse = v
-	return s
-}
-
 // Creating application setting request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest
 type WriteApplicationSettingsRequest struct {
@@ -13600,18 +9640,6 @@ func (s WriteApplicationSettingsRequest) String() string {
 // GoString returns the string representation
 func (s WriteApplicationSettingsRequest) GoString() string {
 	return s.String()
-}
-
-// SetLimits sets the Limits field's value.
-func (s *WriteApplicationSettingsRequest) SetLimits(v *CampaignLimits) *WriteApplicationSettingsRequest {
-	s.Limits = v
-	return s
-}
-
-// SetQuietTime sets the QuietTime field's value.
-func (s *WriteApplicationSettingsRequest) SetQuietTime(v *QuietTime) *WriteApplicationSettingsRequest {
-	s.QuietTime = v
-	return s
 }
 
 // Used to create a campaign.
@@ -13668,78 +9696,6 @@ func (s WriteCampaignRequest) GoString() string {
 	return s.String()
 }
 
-// SetAdditionalTreatments sets the AdditionalTreatments field's value.
-func (s *WriteCampaignRequest) SetAdditionalTreatments(v []WriteTreatmentResource) *WriteCampaignRequest {
-	s.AdditionalTreatments = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *WriteCampaignRequest) SetDescription(v string) *WriteCampaignRequest {
-	s.Description = &v
-	return s
-}
-
-// SetHoldoutPercent sets the HoldoutPercent field's value.
-func (s *WriteCampaignRequest) SetHoldoutPercent(v int64) *WriteCampaignRequest {
-	s.HoldoutPercent = &v
-	return s
-}
-
-// SetIsPaused sets the IsPaused field's value.
-func (s *WriteCampaignRequest) SetIsPaused(v bool) *WriteCampaignRequest {
-	s.IsPaused = &v
-	return s
-}
-
-// SetLimits sets the Limits field's value.
-func (s *WriteCampaignRequest) SetLimits(v *CampaignLimits) *WriteCampaignRequest {
-	s.Limits = v
-	return s
-}
-
-// SetMessageConfiguration sets the MessageConfiguration field's value.
-func (s *WriteCampaignRequest) SetMessageConfiguration(v *MessageConfiguration) *WriteCampaignRequest {
-	s.MessageConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *WriteCampaignRequest) SetName(v string) *WriteCampaignRequest {
-	s.Name = &v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *WriteCampaignRequest) SetSchedule(v *Schedule) *WriteCampaignRequest {
-	s.Schedule = v
-	return s
-}
-
-// SetSegmentId sets the SegmentId field's value.
-func (s *WriteCampaignRequest) SetSegmentId(v string) *WriteCampaignRequest {
-	s.SegmentId = &v
-	return s
-}
-
-// SetSegmentVersion sets the SegmentVersion field's value.
-func (s *WriteCampaignRequest) SetSegmentVersion(v int64) *WriteCampaignRequest {
-	s.SegmentVersion = &v
-	return s
-}
-
-// SetTreatmentDescription sets the TreatmentDescription field's value.
-func (s *WriteCampaignRequest) SetTreatmentDescription(v string) *WriteCampaignRequest {
-	s.TreatmentDescription = &v
-	return s
-}
-
-// SetTreatmentName sets the TreatmentName field's value.
-func (s *WriteCampaignRequest) SetTreatmentName(v string) *WriteCampaignRequest {
-	s.TreatmentName = &v
-	return s
-}
-
 // Request to save an EventStream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteEventStream
 type WriteEventStream struct {
@@ -13765,18 +9721,6 @@ func (s WriteEventStream) GoString() string {
 	return s.String()
 }
 
-// SetDestinationStreamArn sets the DestinationStreamArn field's value.
-func (s *WriteEventStream) SetDestinationStreamArn(v string) *WriteEventStream {
-	s.DestinationStreamArn = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *WriteEventStream) SetRoleArn(v string) *WriteEventStream {
-	s.RoleArn = &v
-	return s
-}
-
 // Segment definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteSegmentRequest
 type WriteSegmentRequest struct {
@@ -13797,18 +9741,6 @@ func (s WriteSegmentRequest) String() string {
 // GoString returns the string representation
 func (s WriteSegmentRequest) GoString() string {
 	return s.String()
-}
-
-// SetDimensions sets the Dimensions field's value.
-func (s *WriteSegmentRequest) SetDimensions(v *SegmentDimensions) *WriteSegmentRequest {
-	s.Dimensions = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *WriteSegmentRequest) SetName(v string) *WriteSegmentRequest {
-	s.Name = &v
-	return s
 }
 
 // Used to create a campaign treatment.
@@ -13840,36 +9772,6 @@ func (s WriteTreatmentResource) String() string {
 // GoString returns the string representation
 func (s WriteTreatmentResource) GoString() string {
 	return s.String()
-}
-
-// SetMessageConfiguration sets the MessageConfiguration field's value.
-func (s *WriteTreatmentResource) SetMessageConfiguration(v *MessageConfiguration) *WriteTreatmentResource {
-	s.MessageConfiguration = v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *WriteTreatmentResource) SetSchedule(v *Schedule) *WriteTreatmentResource {
-	s.Schedule = v
-	return s
-}
-
-// SetSizePercent sets the SizePercent field's value.
-func (s *WriteTreatmentResource) SetSizePercent(v int64) *WriteTreatmentResource {
-	s.SizePercent = &v
-	return s
-}
-
-// SetTreatmentDescription sets the TreatmentDescription field's value.
-func (s *WriteTreatmentResource) SetTreatmentDescription(v string) *WriteTreatmentResource {
-	s.TreatmentDescription = &v
-	return s
-}
-
-// SetTreatmentName sets the TreatmentName field's value.
-func (s *WriteTreatmentResource) SetTreatmentName(v string) *WriteTreatmentResource {
-	s.TreatmentName = &v
-	return s
 }
 
 type Action string

@@ -620,24 +620,6 @@ func (s Alias) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *Alias) SetName(v string) *Alias {
-	s.Name = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *Alias) SetNames(v []string) *Alias {
-	s.Names = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Alias) SetType(v string) *Alias {
-	s.Type = &v
-	return s
-}
-
 // Value of a segment annotation. Has one of three value types: Number, Boolean
 // or String.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AnnotationValue
@@ -662,24 +644,6 @@ func (s AnnotationValue) String() string {
 // GoString returns the string representation
 func (s AnnotationValue) GoString() string {
 	return s.String()
-}
-
-// SetBooleanValue sets the BooleanValue field's value.
-func (s *AnnotationValue) SetBooleanValue(v bool) *AnnotationValue {
-	s.BooleanValue = &v
-	return s
-}
-
-// SetNumberValue sets the NumberValue field's value.
-func (s *AnnotationValue) SetNumberValue(v float64) *AnnotationValue {
-	s.NumberValue = &v
-	return s
-}
-
-// SetStringValue sets the StringValue field's value.
-func (s *AnnotationValue) SetStringValue(v string) *AnnotationValue {
-	s.StringValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BackendConnectionErrors
@@ -707,42 +671,6 @@ func (s BackendConnectionErrors) String() string {
 // GoString returns the string representation
 func (s BackendConnectionErrors) GoString() string {
 	return s.String()
-}
-
-// SetConnectionRefusedCount sets the ConnectionRefusedCount field's value.
-func (s *BackendConnectionErrors) SetConnectionRefusedCount(v int64) *BackendConnectionErrors {
-	s.ConnectionRefusedCount = &v
-	return s
-}
-
-// SetHTTPCode4XXCount sets the HTTPCode4XXCount field's value.
-func (s *BackendConnectionErrors) SetHTTPCode4XXCount(v int64) *BackendConnectionErrors {
-	s.HTTPCode4XXCount = &v
-	return s
-}
-
-// SetHTTPCode5XXCount sets the HTTPCode5XXCount field's value.
-func (s *BackendConnectionErrors) SetHTTPCode5XXCount(v int64) *BackendConnectionErrors {
-	s.HTTPCode5XXCount = &v
-	return s
-}
-
-// SetOtherCount sets the OtherCount field's value.
-func (s *BackendConnectionErrors) SetOtherCount(v int64) *BackendConnectionErrors {
-	s.OtherCount = &v
-	return s
-}
-
-// SetTimeoutCount sets the TimeoutCount field's value.
-func (s *BackendConnectionErrors) SetTimeoutCount(v int64) *BackendConnectionErrors {
-	s.TimeoutCount = &v
-	return s
-}
-
-// SetUnknownHostCount sets the UnknownHostCount field's value.
-func (s *BackendConnectionErrors) SetUnknownHostCount(v int64) *BackendConnectionErrors {
-	s.UnknownHostCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTracesRequest
@@ -782,18 +710,6 @@ func (s *BatchGetTracesInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *BatchGetTracesInput) SetNextToken(v string) *BatchGetTracesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTraceIds sets the TraceIds field's value.
-func (s *BatchGetTracesInput) SetTraceIds(v []string) *BatchGetTracesInput {
-	s.TraceIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTracesResult
 type BatchGetTracesOutput struct {
 	_ struct{} `type:"structure"`
@@ -823,24 +739,6 @@ func (s BatchGetTracesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetTracesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *BatchGetTracesOutput) SetNextToken(v string) *BatchGetTracesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTraces sets the Traces field's value.
-func (s *BatchGetTracesOutput) SetTraces(v []Trace) *BatchGetTracesOutput {
-	s.Traces = v
-	return s
-}
-
-// SetUnprocessedTraceIds sets the UnprocessedTraceIds field's value.
-func (s *BatchGetTracesOutput) SetUnprocessedTraceIds(v []string) *BatchGetTracesOutput {
-	s.UnprocessedTraceIds = v
-	return s
 }
 
 // Information about a connection between two services.
@@ -877,42 +775,6 @@ func (s Edge) GoString() string {
 	return s.String()
 }
 
-// SetAliases sets the Aliases field's value.
-func (s *Edge) SetAliases(v []Alias) *Edge {
-	s.Aliases = v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *Edge) SetEndTime(v time.Time) *Edge {
-	s.EndTime = &v
-	return s
-}
-
-// SetReferenceId sets the ReferenceId field's value.
-func (s *Edge) SetReferenceId(v int64) *Edge {
-	s.ReferenceId = &v
-	return s
-}
-
-// SetResponseTimeHistogram sets the ResponseTimeHistogram field's value.
-func (s *Edge) SetResponseTimeHistogram(v []HistogramEntry) *Edge {
-	s.ResponseTimeHistogram = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Edge) SetStartTime(v time.Time) *Edge {
-	s.StartTime = &v
-	return s
-}
-
-// SetSummaryStatistics sets the SummaryStatistics field's value.
-func (s *Edge) SetSummaryStatistics(v *EdgeStatistics) *Edge {
-	s.SummaryStatistics = v
-	return s
-}
-
 // Response statistics for an edge.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/EdgeStatistics
 type EdgeStatistics struct {
@@ -944,36 +806,6 @@ func (s EdgeStatistics) GoString() string {
 	return s.String()
 }
 
-// SetErrorStatistics sets the ErrorStatistics field's value.
-func (s *EdgeStatistics) SetErrorStatistics(v *ErrorStatistics) *EdgeStatistics {
-	s.ErrorStatistics = v
-	return s
-}
-
-// SetFaultStatistics sets the FaultStatistics field's value.
-func (s *EdgeStatistics) SetFaultStatistics(v *FaultStatistics) *EdgeStatistics {
-	s.FaultStatistics = v
-	return s
-}
-
-// SetOkCount sets the OkCount field's value.
-func (s *EdgeStatistics) SetOkCount(v int64) *EdgeStatistics {
-	s.OkCount = &v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *EdgeStatistics) SetTotalCount(v int64) *EdgeStatistics {
-	s.TotalCount = &v
-	return s
-}
-
-// SetTotalResponseTime sets the TotalResponseTime field's value.
-func (s *EdgeStatistics) SetTotalResponseTime(v float64) *EdgeStatistics {
-	s.TotalResponseTime = &v
-	return s
-}
-
 // Information about requests that failed with a 4xx Client Error status code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorStatistics
 type ErrorStatistics struct {
@@ -1000,24 +832,6 @@ func (s ErrorStatistics) GoString() string {
 	return s.String()
 }
 
-// SetOtherCount sets the OtherCount field's value.
-func (s *ErrorStatistics) SetOtherCount(v int64) *ErrorStatistics {
-	s.OtherCount = &v
-	return s
-}
-
-// SetThrottleCount sets the ThrottleCount field's value.
-func (s *ErrorStatistics) SetThrottleCount(v int64) *ErrorStatistics {
-	s.ThrottleCount = &v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *ErrorStatistics) SetTotalCount(v int64) *ErrorStatistics {
-	s.TotalCount = &v
-	return s
-}
-
 // Information about requests that failed with a 5xx Server Error status code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultStatistics
 type FaultStatistics struct {
@@ -1039,18 +853,6 @@ func (s FaultStatistics) String() string {
 // GoString returns the string representation
 func (s FaultStatistics) GoString() string {
 	return s.String()
-}
-
-// SetOtherCount sets the OtherCount field's value.
-func (s *FaultStatistics) SetOtherCount(v int64) *FaultStatistics {
-	s.OtherCount = &v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *FaultStatistics) SetTotalCount(v int64) *FaultStatistics {
-	s.TotalCount = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraphRequest
@@ -1099,24 +901,6 @@ func (s *GetServiceGraphInput) Validate() error {
 	return nil
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *GetServiceGraphInput) SetEndTime(v time.Time) *GetServiceGraphInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetServiceGraphInput) SetNextToken(v string) *GetServiceGraphInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *GetServiceGraphInput) SetStartTime(v time.Time) *GetServiceGraphInput {
-	s.StartTime = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraphResult
 type GetServiceGraphOutput struct {
 	_ struct{} `type:"structure"`
@@ -1150,30 +934,6 @@ func (s GetServiceGraphOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetServiceGraphOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *GetServiceGraphOutput) SetEndTime(v time.Time) *GetServiceGraphOutput {
-	s.EndTime = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetServiceGraphOutput) SetNextToken(v string) *GetServiceGraphOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServices sets the Services field's value.
-func (s *GetServiceGraphOutput) SetServices(v []Service) *GetServiceGraphOutput {
-	s.Services = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *GetServiceGraphOutput) SetStartTime(v time.Time) *GetServiceGraphOutput {
-	s.StartTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraphRequest
@@ -1213,18 +973,6 @@ func (s *GetTraceGraphInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *GetTraceGraphInput) SetNextToken(v string) *GetTraceGraphInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTraceIds sets the TraceIds field's value.
-func (s *GetTraceGraphInput) SetTraceIds(v []string) *GetTraceGraphInput {
-	s.TraceIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraphResult
 type GetTraceGraphOutput struct {
 	_ struct{} `type:"structure"`
@@ -1251,18 +999,6 @@ func (s GetTraceGraphOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTraceGraphOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetTraceGraphOutput) SetNextToken(v string) *GetTraceGraphOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServices sets the Services field's value.
-func (s *GetTraceGraphOutput) SetServices(v []Service) *GetTraceGraphOutput {
-	s.Services = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesRequest
@@ -1322,36 +1058,6 @@ func (s *GetTraceSummariesInput) Validate() error {
 	return nil
 }
 
-// SetEndTime sets the EndTime field's value.
-func (s *GetTraceSummariesInput) SetEndTime(v time.Time) *GetTraceSummariesInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetFilterExpression sets the FilterExpression field's value.
-func (s *GetTraceSummariesInput) SetFilterExpression(v string) *GetTraceSummariesInput {
-	s.FilterExpression = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetTraceSummariesInput) SetNextToken(v string) *GetTraceSummariesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSampling sets the Sampling field's value.
-func (s *GetTraceSummariesInput) SetSampling(v bool) *GetTraceSummariesInput {
-	s.Sampling = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *GetTraceSummariesInput) SetStartTime(v time.Time) *GetTraceSummariesInput {
-	s.StartTime = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesResult
 type GetTraceSummariesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1388,30 +1094,6 @@ func (s GetTraceSummariesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApproximateTime sets the ApproximateTime field's value.
-func (s *GetTraceSummariesOutput) SetApproximateTime(v time.Time) *GetTraceSummariesOutput {
-	s.ApproximateTime = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetTraceSummariesOutput) SetNextToken(v string) *GetTraceSummariesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTraceSummaries sets the TraceSummaries field's value.
-func (s *GetTraceSummariesOutput) SetTraceSummaries(v []TraceSummary) *GetTraceSummariesOutput {
-	s.TraceSummaries = v
-	return s
-}
-
-// SetTracesProcessedCount sets the TracesProcessedCount field's value.
-func (s *GetTraceSummariesOutput) SetTracesProcessedCount(v int64) *GetTraceSummariesOutput {
-	s.TracesProcessedCount = &v
-	return s
-}
-
 // An entry in a histogram for a statistic. A histogram maps the range of observed
 // values on the X axis, and the prevalence of each value on the Y axis.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/HistogramEntry
@@ -1433,18 +1115,6 @@ func (s HistogramEntry) String() string {
 // GoString returns the string representation
 func (s HistogramEntry) GoString() string {
 	return s.String()
-}
-
-// SetCount sets the Count field's value.
-func (s *HistogramEntry) SetCount(v int64) *HistogramEntry {
-	s.Count = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *HistogramEntry) SetValue(v float64) *HistogramEntry {
-	s.Value = &v
-	return s
 }
 
 // Information about an HTTP request.
@@ -1476,36 +1146,6 @@ func (s Http) String() string {
 // GoString returns the string representation
 func (s Http) GoString() string {
 	return s.String()
-}
-
-// SetClientIp sets the ClientIp field's value.
-func (s *Http) SetClientIp(v string) *Http {
-	s.ClientIp = &v
-	return s
-}
-
-// SetHttpMethod sets the HttpMethod field's value.
-func (s *Http) SetHttpMethod(v string) *Http {
-	s.HttpMethod = &v
-	return s
-}
-
-// SetHttpStatus sets the HttpStatus field's value.
-func (s *Http) SetHttpStatus(v int64) *Http {
-	s.HttpStatus = &v
-	return s
-}
-
-// SetHttpURL sets the HttpURL field's value.
-func (s *Http) SetHttpURL(v string) *Http {
-	s.HttpURL = &v
-	return s
-}
-
-// SetUserAgent sets the UserAgent field's value.
-func (s *Http) SetUserAgent(v string) *Http {
-	s.UserAgent = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecordsRequest
@@ -1551,30 +1191,6 @@ func (s *PutTelemetryRecordsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEC2InstanceId sets the EC2InstanceId field's value.
-func (s *PutTelemetryRecordsInput) SetEC2InstanceId(v string) *PutTelemetryRecordsInput {
-	s.EC2InstanceId = &v
-	return s
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *PutTelemetryRecordsInput) SetHostname(v string) *PutTelemetryRecordsInput {
-	s.Hostname = &v
-	return s
-}
-
-// SetResourceARN sets the ResourceARN field's value.
-func (s *PutTelemetryRecordsInput) SetResourceARN(v string) *PutTelemetryRecordsInput {
-	s.ResourceARN = &v
-	return s
-}
-
-// SetTelemetryRecords sets the TelemetryRecords field's value.
-func (s *PutTelemetryRecordsInput) SetTelemetryRecords(v []TelemetryRecord) *PutTelemetryRecordsInput {
-	s.TelemetryRecords = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecordsResult
@@ -1633,12 +1249,6 @@ func (s *PutTraceSegmentsInput) Validate() error {
 	return nil
 }
 
-// SetTraceSegmentDocuments sets the TraceSegmentDocuments field's value.
-func (s *PutTraceSegmentsInput) SetTraceSegmentDocuments(v []string) *PutTraceSegmentsInput {
-	s.TraceSegmentDocuments = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsResult
 type PutTraceSegmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1664,12 +1274,6 @@ func (s PutTraceSegmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUnprocessedTraceSegments sets the UnprocessedTraceSegments field's value.
-func (s *PutTraceSegmentsOutput) SetUnprocessedTraceSegments(v []UnprocessedTraceSegment) *PutTraceSegmentsOutput {
-	s.UnprocessedTraceSegments = v
-	return s
-}
-
 // A segment from a trace that has been ingested by the X-Ray service. The segment
 // can be compiled from documents uploaded with PutTraceSegments, or an inferred
 // segment for a downstream service, generated from a subsegment sent by the
@@ -1693,18 +1297,6 @@ func (s Segment) String() string {
 // GoString returns the string representation
 func (s Segment) GoString() string {
 	return s.String()
-}
-
-// SetDocument sets the Document field's value.
-func (s *Segment) SetDocument(v string) *Segment {
-	s.Document = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Segment) SetId(v string) *Segment {
-	s.Id = &v
-	return s
 }
 
 // Information about an application that processed requests, users that made
@@ -1776,84 +1368,6 @@ func (s Service) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *Service) SetAccountId(v string) *Service {
-	s.AccountId = &v
-	return s
-}
-
-// SetDurationHistogram sets the DurationHistogram field's value.
-func (s *Service) SetDurationHistogram(v []HistogramEntry) *Service {
-	s.DurationHistogram = v
-	return s
-}
-
-// SetEdges sets the Edges field's value.
-func (s *Service) SetEdges(v []Edge) *Service {
-	s.Edges = v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *Service) SetEndTime(v time.Time) *Service {
-	s.EndTime = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Service) SetName(v string) *Service {
-	s.Name = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *Service) SetNames(v []string) *Service {
-	s.Names = v
-	return s
-}
-
-// SetReferenceId sets the ReferenceId field's value.
-func (s *Service) SetReferenceId(v int64) *Service {
-	s.ReferenceId = &v
-	return s
-}
-
-// SetResponseTimeHistogram sets the ResponseTimeHistogram field's value.
-func (s *Service) SetResponseTimeHistogram(v []HistogramEntry) *Service {
-	s.ResponseTimeHistogram = v
-	return s
-}
-
-// SetRoot sets the Root field's value.
-func (s *Service) SetRoot(v bool) *Service {
-	s.Root = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *Service) SetStartTime(v time.Time) *Service {
-	s.StartTime = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Service) SetState(v string) *Service {
-	s.State = &v
-	return s
-}
-
-// SetSummaryStatistics sets the SummaryStatistics field's value.
-func (s *Service) SetSummaryStatistics(v *ServiceStatistics) *Service {
-	s.SummaryStatistics = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Service) SetType(v string) *Service {
-	s.Type = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ServiceId
 type ServiceId struct {
 	_ struct{} `type:"structure"`
@@ -1875,30 +1389,6 @@ func (s ServiceId) String() string {
 // GoString returns the string representation
 func (s ServiceId) GoString() string {
 	return s.String()
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *ServiceId) SetAccountId(v string) *ServiceId {
-	s.AccountId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ServiceId) SetName(v string) *ServiceId {
-	s.Name = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *ServiceId) SetNames(v []string) *ServiceId {
-	s.Names = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ServiceId) SetType(v string) *ServiceId {
-	s.Type = &v
-	return s
 }
 
 // Response statistics for a service.
@@ -1930,36 +1420,6 @@ func (s ServiceStatistics) String() string {
 // GoString returns the string representation
 func (s ServiceStatistics) GoString() string {
 	return s.String()
-}
-
-// SetErrorStatistics sets the ErrorStatistics field's value.
-func (s *ServiceStatistics) SetErrorStatistics(v *ErrorStatistics) *ServiceStatistics {
-	s.ErrorStatistics = v
-	return s
-}
-
-// SetFaultStatistics sets the FaultStatistics field's value.
-func (s *ServiceStatistics) SetFaultStatistics(v *FaultStatistics) *ServiceStatistics {
-	s.FaultStatistics = v
-	return s
-}
-
-// SetOkCount sets the OkCount field's value.
-func (s *ServiceStatistics) SetOkCount(v int64) *ServiceStatistics {
-	s.OkCount = &v
-	return s
-}
-
-// SetTotalCount sets the TotalCount field's value.
-func (s *ServiceStatistics) SetTotalCount(v int64) *ServiceStatistics {
-	s.TotalCount = &v
-	return s
-}
-
-// SetTotalResponseTime sets the TotalResponseTime field's value.
-func (s *ServiceStatistics) SetTotalResponseTime(v float64) *ServiceStatistics {
-	s.TotalResponseTime = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TelemetryRecord
@@ -2004,42 +1464,6 @@ func (s *TelemetryRecord) Validate() error {
 	return nil
 }
 
-// SetBackendConnectionErrors sets the BackendConnectionErrors field's value.
-func (s *TelemetryRecord) SetBackendConnectionErrors(v *BackendConnectionErrors) *TelemetryRecord {
-	s.BackendConnectionErrors = v
-	return s
-}
-
-// SetSegmentsReceivedCount sets the SegmentsReceivedCount field's value.
-func (s *TelemetryRecord) SetSegmentsReceivedCount(v int64) *TelemetryRecord {
-	s.SegmentsReceivedCount = &v
-	return s
-}
-
-// SetSegmentsRejectedCount sets the SegmentsRejectedCount field's value.
-func (s *TelemetryRecord) SetSegmentsRejectedCount(v int64) *TelemetryRecord {
-	s.SegmentsRejectedCount = &v
-	return s
-}
-
-// SetSegmentsSentCount sets the SegmentsSentCount field's value.
-func (s *TelemetryRecord) SetSegmentsSentCount(v int64) *TelemetryRecord {
-	s.SegmentsSentCount = &v
-	return s
-}
-
-// SetSegmentsSpilloverCount sets the SegmentsSpilloverCount field's value.
-func (s *TelemetryRecord) SetSegmentsSpilloverCount(v int64) *TelemetryRecord {
-	s.SegmentsSpilloverCount = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *TelemetryRecord) SetTimestamp(v time.Time) *TelemetryRecord {
-	s.Timestamp = &v
-	return s
-}
-
 // A collection of segment documents with matching trace IDs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Trace
 type Trace struct {
@@ -2065,24 +1489,6 @@ func (s Trace) String() string {
 // GoString returns the string representation
 func (s Trace) GoString() string {
 	return s.String()
-}
-
-// SetDuration sets the Duration field's value.
-func (s *Trace) SetDuration(v float64) *Trace {
-	s.Duration = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Trace) SetId(v string) *Trace {
-	s.Id = &v
-	return s
-}
-
-// SetSegments sets the Segments field's value.
-func (s *Trace) SetSegments(v []Segment) *Trace {
-	s.Segments = v
-	return s
 }
 
 // Metadata generated from the segment documents in a trace.
@@ -2139,72 +1545,6 @@ func (s TraceSummary) GoString() string {
 	return s.String()
 }
 
-// SetAnnotations sets the Annotations field's value.
-func (s *TraceSummary) SetAnnotations(v map[string][]ValueWithServiceIds) *TraceSummary {
-	s.Annotations = v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *TraceSummary) SetDuration(v float64) *TraceSummary {
-	s.Duration = &v
-	return s
-}
-
-// SetHasError sets the HasError field's value.
-func (s *TraceSummary) SetHasError(v bool) *TraceSummary {
-	s.HasError = &v
-	return s
-}
-
-// SetHasFault sets the HasFault field's value.
-func (s *TraceSummary) SetHasFault(v bool) *TraceSummary {
-	s.HasFault = &v
-	return s
-}
-
-// SetHasThrottle sets the HasThrottle field's value.
-func (s *TraceSummary) SetHasThrottle(v bool) *TraceSummary {
-	s.HasThrottle = &v
-	return s
-}
-
-// SetHttp sets the Http field's value.
-func (s *TraceSummary) SetHttp(v *Http) *TraceSummary {
-	s.Http = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TraceSummary) SetId(v string) *TraceSummary {
-	s.Id = &v
-	return s
-}
-
-// SetIsPartial sets the IsPartial field's value.
-func (s *TraceSummary) SetIsPartial(v bool) *TraceSummary {
-	s.IsPartial = &v
-	return s
-}
-
-// SetResponseTime sets the ResponseTime field's value.
-func (s *TraceSummary) SetResponseTime(v float64) *TraceSummary {
-	s.ResponseTime = &v
-	return s
-}
-
-// SetServiceIds sets the ServiceIds field's value.
-func (s *TraceSummary) SetServiceIds(v []ServiceId) *TraceSummary {
-	s.ServiceIds = v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *TraceSummary) SetUsers(v []TraceUser) *TraceSummary {
-	s.Users = v
-	return s
-}
-
 // Information about a user recorded in segment documents.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceUser
 type TraceUser struct {
@@ -2225,18 +1565,6 @@ func (s TraceUser) String() string {
 // GoString returns the string representation
 func (s TraceUser) GoString() string {
 	return s.String()
-}
-
-// SetServiceIds sets the ServiceIds field's value.
-func (s *TraceUser) SetServiceIds(v []ServiceId) *TraceUser {
-	s.ServiceIds = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *TraceUser) SetUserName(v string) *TraceUser {
-	s.UserName = &v
-	return s
 }
 
 // Information about a segment that failed processing.
@@ -2264,24 +1592,6 @@ func (s UnprocessedTraceSegment) GoString() string {
 	return s.String()
 }
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *UnprocessedTraceSegment) SetErrorCode(v string) *UnprocessedTraceSegment {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UnprocessedTraceSegment) SetId(v string) *UnprocessedTraceSegment {
-	s.Id = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *UnprocessedTraceSegment) SetMessage(v string) *UnprocessedTraceSegment {
-	s.Message = &v
-	return s
-}
-
 // Information about a segment annotation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ValueWithServiceIds
 type ValueWithServiceIds struct {
@@ -2302,16 +1612,4 @@ func (s ValueWithServiceIds) String() string {
 // GoString returns the string representation
 func (s ValueWithServiceIds) GoString() string {
 	return s.String()
-}
-
-// SetAnnotationValue sets the AnnotationValue field's value.
-func (s *ValueWithServiceIds) SetAnnotationValue(v *AnnotationValue) *ValueWithServiceIds {
-	s.AnnotationValue = v
-	return s
-}
-
-// SetServiceIds sets the ServiceIds field's value.
-func (s *ValueWithServiceIds) SetServiceIds(v []ServiceId) *ValueWithServiceIds {
-	s.ServiceIds = v
-	return s
 }

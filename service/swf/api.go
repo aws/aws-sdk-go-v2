@@ -2800,18 +2800,6 @@ func (s ActivityTaskCancelRequestedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetActivityId sets the ActivityId field's value.
-func (s *ActivityTaskCancelRequestedEventAttributes) SetActivityId(v string) *ActivityTaskCancelRequestedEventAttributes {
-	s.ActivityId = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *ActivityTaskCancelRequestedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *ActivityTaskCancelRequestedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
 // Provides the details of the ActivityTaskCanceled event.
 type ActivityTaskCanceledEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2849,30 +2837,6 @@ func (s ActivityTaskCanceledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDetails sets the Details field's value.
-func (s *ActivityTaskCanceledEventAttributes) SetDetails(v string) *ActivityTaskCanceledEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetLatestCancelRequestedEventId sets the LatestCancelRequestedEventId field's value.
-func (s *ActivityTaskCanceledEventAttributes) SetLatestCancelRequestedEventId(v int64) *ActivityTaskCanceledEventAttributes {
-	s.LatestCancelRequestedEventId = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *ActivityTaskCanceledEventAttributes) SetScheduledEventId(v int64) *ActivityTaskCanceledEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ActivityTaskCanceledEventAttributes) SetStartedEventId(v int64) *ActivityTaskCanceledEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
 // Provides the details of the ActivityTaskCompleted event.
 type ActivityTaskCompletedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2903,24 +2867,6 @@ func (s ActivityTaskCompletedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ActivityTaskCompletedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetResult sets the Result field's value.
-func (s *ActivityTaskCompletedEventAttributes) SetResult(v string) *ActivityTaskCompletedEventAttributes {
-	s.Result = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *ActivityTaskCompletedEventAttributes) SetScheduledEventId(v int64) *ActivityTaskCompletedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ActivityTaskCompletedEventAttributes) SetStartedEventId(v int64) *ActivityTaskCompletedEventAttributes {
-	s.StartedEventId = &v
-	return s
 }
 
 // Provides the details of the ActivityTaskFailed event.
@@ -2956,30 +2902,6 @@ func (s ActivityTaskFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ActivityTaskFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDetails sets the Details field's value.
-func (s *ActivityTaskFailedEventAttributes) SetDetails(v string) *ActivityTaskFailedEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *ActivityTaskFailedEventAttributes) SetReason(v string) *ActivityTaskFailedEventAttributes {
-	s.Reason = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *ActivityTaskFailedEventAttributes) SetScheduledEventId(v int64) *ActivityTaskFailedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ActivityTaskFailedEventAttributes) SetStartedEventId(v int64) *ActivityTaskFailedEventAttributes {
-	s.StartedEventId = &v
-	return s
 }
 
 // Provides the details of the ActivityTaskScheduled event.
@@ -3054,72 +2976,6 @@ func (s ActivityTaskScheduledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetActivityId sets the ActivityId field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetActivityId(v string) *ActivityTaskScheduledEventAttributes {
-	s.ActivityId = &v
-	return s
-}
-
-// SetActivityType sets the ActivityType field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetActivityType(v *ActivityType) *ActivityTaskScheduledEventAttributes {
-	s.ActivityType = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetControl(v string) *ActivityTaskScheduledEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetDecisionTaskCompletedEventId(v int64) *ActivityTaskScheduledEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetHeartbeatTimeout sets the HeartbeatTimeout field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetHeartbeatTimeout(v string) *ActivityTaskScheduledEventAttributes {
-	s.HeartbeatTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetInput(v string) *ActivityTaskScheduledEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetScheduleToCloseTimeout sets the ScheduleToCloseTimeout field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetScheduleToCloseTimeout(v string) *ActivityTaskScheduledEventAttributes {
-	s.ScheduleToCloseTimeout = &v
-	return s
-}
-
-// SetScheduleToStartTimeout sets the ScheduleToStartTimeout field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetScheduleToStartTimeout(v string) *ActivityTaskScheduledEventAttributes {
-	s.ScheduleToStartTimeout = &v
-	return s
-}
-
-// SetStartToCloseTimeout sets the StartToCloseTimeout field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetStartToCloseTimeout(v string) *ActivityTaskScheduledEventAttributes {
-	s.StartToCloseTimeout = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetTaskList(v *TaskList) *ActivityTaskScheduledEventAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *ActivityTaskScheduledEventAttributes) SetTaskPriority(v string) *ActivityTaskScheduledEventAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
 // Provides the details of the ActivityTaskStarted event.
 type ActivityTaskStartedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3144,18 +3000,6 @@ func (s ActivityTaskStartedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ActivityTaskStartedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *ActivityTaskStartedEventAttributes) SetIdentity(v string) *ActivityTaskStartedEventAttributes {
-	s.Identity = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *ActivityTaskStartedEventAttributes) SetScheduledEventId(v int64) *ActivityTaskStartedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
 }
 
 // Provides the details of the ActivityTaskTimedOut event.
@@ -3194,30 +3038,6 @@ func (s ActivityTaskTimedOutEventAttributes) String() string {
 // GoString returns the string representation
 func (s ActivityTaskTimedOutEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDetails sets the Details field's value.
-func (s *ActivityTaskTimedOutEventAttributes) SetDetails(v string) *ActivityTaskTimedOutEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *ActivityTaskTimedOutEventAttributes) SetScheduledEventId(v int64) *ActivityTaskTimedOutEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ActivityTaskTimedOutEventAttributes) SetStartedEventId(v int64) *ActivityTaskTimedOutEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTimeoutType sets the TimeoutType field's value.
-func (s *ActivityTaskTimedOutEventAttributes) SetTimeoutType(v ActivityTaskTimeoutType) *ActivityTaskTimedOutEventAttributes {
-	s.TimeoutType = v
-	return s
 }
 
 // Represents an activity type.
@@ -3273,18 +3093,6 @@ func (s *ActivityType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *ActivityType) SetName(v string) *ActivityType {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ActivityType) SetVersion(v string) *ActivityType {
-	s.Version = &v
-	return s
 }
 
 // Configuration settings registered with the activity type.
@@ -3358,42 +3166,6 @@ func (s ActivityTypeConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetDefaultTaskHeartbeatTimeout sets the DefaultTaskHeartbeatTimeout field's value.
-func (s *ActivityTypeConfiguration) SetDefaultTaskHeartbeatTimeout(v string) *ActivityTypeConfiguration {
-	s.DefaultTaskHeartbeatTimeout = &v
-	return s
-}
-
-// SetDefaultTaskList sets the DefaultTaskList field's value.
-func (s *ActivityTypeConfiguration) SetDefaultTaskList(v *TaskList) *ActivityTypeConfiguration {
-	s.DefaultTaskList = v
-	return s
-}
-
-// SetDefaultTaskPriority sets the DefaultTaskPriority field's value.
-func (s *ActivityTypeConfiguration) SetDefaultTaskPriority(v string) *ActivityTypeConfiguration {
-	s.DefaultTaskPriority = &v
-	return s
-}
-
-// SetDefaultTaskScheduleToCloseTimeout sets the DefaultTaskScheduleToCloseTimeout field's value.
-func (s *ActivityTypeConfiguration) SetDefaultTaskScheduleToCloseTimeout(v string) *ActivityTypeConfiguration {
-	s.DefaultTaskScheduleToCloseTimeout = &v
-	return s
-}
-
-// SetDefaultTaskScheduleToStartTimeout sets the DefaultTaskScheduleToStartTimeout field's value.
-func (s *ActivityTypeConfiguration) SetDefaultTaskScheduleToStartTimeout(v string) *ActivityTypeConfiguration {
-	s.DefaultTaskScheduleToStartTimeout = &v
-	return s
-}
-
-// SetDefaultTaskStartToCloseTimeout sets the DefaultTaskStartToCloseTimeout field's value.
-func (s *ActivityTypeConfiguration) SetDefaultTaskStartToCloseTimeout(v string) *ActivityTypeConfiguration {
-	s.DefaultTaskStartToCloseTimeout = &v
-	return s
-}
-
 // Detailed information about an activity type.
 type ActivityTypeInfo struct {
 	_ struct{} `type:"structure"`
@@ -3428,36 +3200,6 @@ func (s ActivityTypeInfo) String() string {
 // GoString returns the string representation
 func (s ActivityTypeInfo) GoString() string {
 	return s.String()
-}
-
-// SetActivityType sets the ActivityType field's value.
-func (s *ActivityTypeInfo) SetActivityType(v *ActivityType) *ActivityTypeInfo {
-	s.ActivityType = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *ActivityTypeInfo) SetCreationDate(v time.Time) *ActivityTypeInfo {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDeprecationDate sets the DeprecationDate field's value.
-func (s *ActivityTypeInfo) SetDeprecationDate(v time.Time) *ActivityTypeInfo {
-	s.DeprecationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ActivityTypeInfo) SetDescription(v string) *ActivityTypeInfo {
-	s.Description = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ActivityTypeInfo) SetStatus(v RegistrationStatus) *ActivityTypeInfo {
-	s.Status = v
-	return s
 }
 
 // Provides the details of the CancelTimer decision.
@@ -3516,12 +3258,6 @@ func (s *CancelTimerDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetTimerId sets the TimerId field's value.
-func (s *CancelTimerDecisionAttributes) SetTimerId(v string) *CancelTimerDecisionAttributes {
-	s.TimerId = &v
-	return s
-}
-
 // Provides the details of the CancelTimerFailed event.
 type CancelTimerFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3561,24 +3297,6 @@ func (s CancelTimerFailedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *CancelTimerFailedEventAttributes) SetCause(v CancelTimerFailedCause) *CancelTimerFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *CancelTimerFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *CancelTimerFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetTimerId sets the TimerId field's value.
-func (s *CancelTimerFailedEventAttributes) SetTimerId(v string) *CancelTimerFailedEventAttributes {
-	s.TimerId = &v
-	return s
-}
-
 // Provides the details of the CancelWorkflowExecution decision.
 //
 // Access Control
@@ -3616,12 +3334,6 @@ func (s CancelWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDetails sets the Details field's value.
-func (s *CancelWorkflowExecutionDecisionAttributes) SetDetails(v string) *CancelWorkflowExecutionDecisionAttributes {
-	s.Details = &v
-	return s
-}
-
 // Provides the details of the CancelWorkflowExecutionFailed event.
 type CancelWorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3654,18 +3366,6 @@ func (s CancelWorkflowExecutionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s CancelWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *CancelWorkflowExecutionFailedEventAttributes) SetCause(v CancelWorkflowExecutionFailedCause) *CancelWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *CancelWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *CancelWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
 }
 
 // Provide details of the ChildWorkflowExecutionCanceled event.
@@ -3711,36 +3411,6 @@ func (s ChildWorkflowExecutionCanceledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDetails sets the Details field's value.
-func (s *ChildWorkflowExecutionCanceledEventAttributes) SetDetails(v string) *ChildWorkflowExecutionCanceledEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ChildWorkflowExecutionCanceledEventAttributes) SetInitiatedEventId(v int64) *ChildWorkflowExecutionCanceledEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ChildWorkflowExecutionCanceledEventAttributes) SetStartedEventId(v int64) *ChildWorkflowExecutionCanceledEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ChildWorkflowExecutionCanceledEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ChildWorkflowExecutionCanceledEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *ChildWorkflowExecutionCanceledEventAttributes) SetWorkflowType(v *WorkflowType) *ChildWorkflowExecutionCanceledEventAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Provides the details of the ChildWorkflowExecutionCompleted event.
 type ChildWorkflowExecutionCompletedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3782,36 +3452,6 @@ func (s ChildWorkflowExecutionCompletedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ChildWorkflowExecutionCompletedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ChildWorkflowExecutionCompletedEventAttributes) SetInitiatedEventId(v int64) *ChildWorkflowExecutionCompletedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *ChildWorkflowExecutionCompletedEventAttributes) SetResult(v string) *ChildWorkflowExecutionCompletedEventAttributes {
-	s.Result = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ChildWorkflowExecutionCompletedEventAttributes) SetStartedEventId(v int64) *ChildWorkflowExecutionCompletedEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ChildWorkflowExecutionCompletedEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ChildWorkflowExecutionCompletedEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *ChildWorkflowExecutionCompletedEventAttributes) SetWorkflowType(v *WorkflowType) *ChildWorkflowExecutionCompletedEventAttributes {
-	s.WorkflowType = v
-	return s
 }
 
 // Provides the details of the ChildWorkflowExecutionFailed event.
@@ -3860,42 +3500,6 @@ func (s ChildWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDetails sets the Details field's value.
-func (s *ChildWorkflowExecutionFailedEventAttributes) SetDetails(v string) *ChildWorkflowExecutionFailedEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ChildWorkflowExecutionFailedEventAttributes) SetInitiatedEventId(v int64) *ChildWorkflowExecutionFailedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *ChildWorkflowExecutionFailedEventAttributes) SetReason(v string) *ChildWorkflowExecutionFailedEventAttributes {
-	s.Reason = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ChildWorkflowExecutionFailedEventAttributes) SetStartedEventId(v int64) *ChildWorkflowExecutionFailedEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ChildWorkflowExecutionFailedEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ChildWorkflowExecutionFailedEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *ChildWorkflowExecutionFailedEventAttributes) SetWorkflowType(v *WorkflowType) *ChildWorkflowExecutionFailedEventAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Provides the details of the ChildWorkflowExecutionStarted event.
 type ChildWorkflowExecutionStartedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3927,24 +3531,6 @@ func (s ChildWorkflowExecutionStartedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ChildWorkflowExecutionStartedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ChildWorkflowExecutionStartedEventAttributes) SetInitiatedEventId(v int64) *ChildWorkflowExecutionStartedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ChildWorkflowExecutionStartedEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ChildWorkflowExecutionStartedEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *ChildWorkflowExecutionStartedEventAttributes) SetWorkflowType(v *WorkflowType) *ChildWorkflowExecutionStartedEventAttributes {
-	s.WorkflowType = v
-	return s
 }
 
 // Provides the details of the ChildWorkflowExecutionTerminated event.
@@ -3985,30 +3571,6 @@ func (s ChildWorkflowExecutionTerminatedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ChildWorkflowExecutionTerminatedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ChildWorkflowExecutionTerminatedEventAttributes) SetInitiatedEventId(v int64) *ChildWorkflowExecutionTerminatedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ChildWorkflowExecutionTerminatedEventAttributes) SetStartedEventId(v int64) *ChildWorkflowExecutionTerminatedEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ChildWorkflowExecutionTerminatedEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ChildWorkflowExecutionTerminatedEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *ChildWorkflowExecutionTerminatedEventAttributes) SetWorkflowType(v *WorkflowType) *ChildWorkflowExecutionTerminatedEventAttributes {
-	s.WorkflowType = v
-	return s
 }
 
 // Provides the details of the ChildWorkflowExecutionTimedOut event.
@@ -4057,36 +3619,6 @@ func (s ChildWorkflowExecutionTimedOutEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetInitiatedEventId(v int64) *ChildWorkflowExecutionTimedOutEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetStartedEventId(v int64) *ChildWorkflowExecutionTimedOutEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTimeoutType sets the TimeoutType field's value.
-func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetTimeoutType(v WorkflowExecutionTimeoutType) *ChildWorkflowExecutionTimedOutEventAttributes {
-	s.TimeoutType = v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ChildWorkflowExecutionTimedOutEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetWorkflowType(v *WorkflowType) *ChildWorkflowExecutionTimedOutEventAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Used to filter the closed workflow executions in visibility APIs by their
 // close status.
 type CloseStatusFilter struct {
@@ -4120,12 +3652,6 @@ func (s *CloseStatusFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStatus sets the Status field's value.
-func (s *CloseStatusFilter) SetStatus(v CloseStatus) *CloseStatusFilter {
-	s.Status = v
-	return s
 }
 
 // Provides the details of the CompleteWorkflowExecution decision.
@@ -4166,12 +3692,6 @@ func (s CompleteWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
 
-// SetResult sets the Result field's value.
-func (s *CompleteWorkflowExecutionDecisionAttributes) SetResult(v string) *CompleteWorkflowExecutionDecisionAttributes {
-	s.Result = &v
-	return s
-}
-
 // Provides the details of the CompleteWorkflowExecutionFailed event.
 type CompleteWorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -4204,18 +3724,6 @@ func (s CompleteWorkflowExecutionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s CompleteWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *CompleteWorkflowExecutionFailedEventAttributes) SetCause(v CompleteWorkflowExecutionFailedCause) *CompleteWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *CompleteWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *CompleteWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
 }
 
 // Provides the details of the ContinueAsNewWorkflowExecution decision.
@@ -4357,60 +3865,6 @@ func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetChildPolicy(v ChildPolicy) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetExecutionStartToCloseTimeout(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetInput(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetLambdaRole(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetTagList(v []string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.TagList = v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetTaskList(v *TaskList) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetTaskPriority(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetTaskStartToCloseTimeout(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.TaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetWorkflowTypeVersion sets the WorkflowTypeVersion field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetWorkflowTypeVersion(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.WorkflowTypeVersion = &v
-	return s
-}
-
 // Provides the details of the ContinueAsNewWorkflowExecutionFailed event.
 type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -4443,18 +3897,6 @@ func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *ContinueAsNewWorkflowExecutionFailedEventAttributes) SetCause(v ContinueAsNewWorkflowExecutionFailedCause) *ContinueAsNewWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *ContinueAsNewWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *ContinueAsNewWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
 }
 
 type CountClosedWorkflowExecutionsInput struct {
@@ -4564,48 +4006,6 @@ func (s *CountClosedWorkflowExecutionsInput) Validate() error {
 	return nil
 }
 
-// SetCloseStatusFilter sets the CloseStatusFilter field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetCloseStatusFilter(v *CloseStatusFilter) *CountClosedWorkflowExecutionsInput {
-	s.CloseStatusFilter = v
-	return s
-}
-
-// SetCloseTimeFilter sets the CloseTimeFilter field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetCloseTimeFilter(v *ExecutionTimeFilter) *CountClosedWorkflowExecutionsInput {
-	s.CloseTimeFilter = v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetDomain(v string) *CountClosedWorkflowExecutionsInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecutionFilter sets the ExecutionFilter field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetExecutionFilter(v *WorkflowExecutionFilter) *CountClosedWorkflowExecutionsInput {
-	s.ExecutionFilter = v
-	return s
-}
-
-// SetStartTimeFilter sets the StartTimeFilter field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetStartTimeFilter(v *ExecutionTimeFilter) *CountClosedWorkflowExecutionsInput {
-	s.StartTimeFilter = v
-	return s
-}
-
-// SetTagFilter sets the TagFilter field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetTagFilter(v *TagFilter) *CountClosedWorkflowExecutionsInput {
-	s.TagFilter = v
-	return s
-}
-
-// SetTypeFilter sets the TypeFilter field's value.
-func (s *CountClosedWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *CountClosedWorkflowExecutionsInput {
-	s.TypeFilter = v
-	return s
-}
-
 type CountOpenWorkflowExecutionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4692,36 +4092,6 @@ func (s *CountOpenWorkflowExecutionsInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *CountOpenWorkflowExecutionsInput) SetDomain(v string) *CountOpenWorkflowExecutionsInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecutionFilter sets the ExecutionFilter field's value.
-func (s *CountOpenWorkflowExecutionsInput) SetExecutionFilter(v *WorkflowExecutionFilter) *CountOpenWorkflowExecutionsInput {
-	s.ExecutionFilter = v
-	return s
-}
-
-// SetStartTimeFilter sets the StartTimeFilter field's value.
-func (s *CountOpenWorkflowExecutionsInput) SetStartTimeFilter(v *ExecutionTimeFilter) *CountOpenWorkflowExecutionsInput {
-	s.StartTimeFilter = v
-	return s
-}
-
-// SetTagFilter sets the TagFilter field's value.
-func (s *CountOpenWorkflowExecutionsInput) SetTagFilter(v *TagFilter) *CountOpenWorkflowExecutionsInput {
-	s.TagFilter = v
-	return s
-}
-
-// SetTypeFilter sets the TypeFilter field's value.
-func (s *CountOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *CountOpenWorkflowExecutionsInput {
-	s.TypeFilter = v
-	return s
-}
-
 // Contains the count of workflow executions returned from CountOpenWorkflowExecutions
 // or CountClosedWorkflowExecutions
 type CountOpenWorkflowExecutionsOutput struct {
@@ -4752,18 +4122,6 @@ func (s CountOpenWorkflowExecutionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CountOpenWorkflowExecutionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCount sets the Count field's value.
-func (s *CountOpenWorkflowExecutionsOutput) SetCount(v int64) *CountOpenWorkflowExecutionsOutput {
-	s.Count = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *CountOpenWorkflowExecutionsOutput) SetTruncated(v bool) *CountOpenWorkflowExecutionsOutput {
-	s.Truncated = &v
-	return s
 }
 
 type CountPendingActivityTasksInput struct {
@@ -4816,18 +4174,6 @@ func (s *CountPendingActivityTasksInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *CountPendingActivityTasksInput) SetDomain(v string) *CountPendingActivityTasksInput {
-	s.Domain = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *CountPendingActivityTasksInput) SetTaskList(v *TaskList) *CountPendingActivityTasksInput {
-	s.TaskList = v
-	return s
-}
-
 type CountPendingDecisionTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4878,18 +4224,6 @@ func (s *CountPendingDecisionTasksInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *CountPendingDecisionTasksInput) SetDomain(v string) *CountPendingDecisionTasksInput {
-	s.Domain = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *CountPendingDecisionTasksInput) SetTaskList(v *TaskList) *CountPendingDecisionTasksInput {
-	s.TaskList = v
-	return s
-}
-
 // Contains the count of tasks in a task list.
 type CountPendingDecisionTasksOutput struct {
 	_ struct{} `type:"structure"`
@@ -4919,18 +4253,6 @@ func (s CountPendingDecisionTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CountPendingDecisionTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCount sets the Count field's value.
-func (s *CountPendingDecisionTasksOutput) SetCount(v int64) *CountPendingDecisionTasksOutput {
-	s.Count = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *CountPendingDecisionTasksOutput) SetTruncated(v bool) *CountPendingDecisionTasksOutput {
-	s.Truncated = &v
-	return s
 }
 
 // Specifies a decision made by the decider. A decision can be one of these
@@ -5234,90 +4556,6 @@ func (s *Decision) Validate() error {
 	return nil
 }
 
-// SetCancelTimerDecisionAttributes sets the CancelTimerDecisionAttributes field's value.
-func (s *Decision) SetCancelTimerDecisionAttributes(v *CancelTimerDecisionAttributes) *Decision {
-	s.CancelTimerDecisionAttributes = v
-	return s
-}
-
-// SetCancelWorkflowExecutionDecisionAttributes sets the CancelWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetCancelWorkflowExecutionDecisionAttributes(v *CancelWorkflowExecutionDecisionAttributes) *Decision {
-	s.CancelWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetCompleteWorkflowExecutionDecisionAttributes sets the CompleteWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetCompleteWorkflowExecutionDecisionAttributes(v *CompleteWorkflowExecutionDecisionAttributes) *Decision {
-	s.CompleteWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetContinueAsNewWorkflowExecutionDecisionAttributes sets the ContinueAsNewWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetContinueAsNewWorkflowExecutionDecisionAttributes(v *ContinueAsNewWorkflowExecutionDecisionAttributes) *Decision {
-	s.ContinueAsNewWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetDecisionType sets the DecisionType field's value.
-func (s *Decision) SetDecisionType(v DecisionType) *Decision {
-	s.DecisionType = v
-	return s
-}
-
-// SetFailWorkflowExecutionDecisionAttributes sets the FailWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetFailWorkflowExecutionDecisionAttributes(v *FailWorkflowExecutionDecisionAttributes) *Decision {
-	s.FailWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetRecordMarkerDecisionAttributes sets the RecordMarkerDecisionAttributes field's value.
-func (s *Decision) SetRecordMarkerDecisionAttributes(v *RecordMarkerDecisionAttributes) *Decision {
-	s.RecordMarkerDecisionAttributes = v
-	return s
-}
-
-// SetRequestCancelActivityTaskDecisionAttributes sets the RequestCancelActivityTaskDecisionAttributes field's value.
-func (s *Decision) SetRequestCancelActivityTaskDecisionAttributes(v *RequestCancelActivityTaskDecisionAttributes) *Decision {
-	s.RequestCancelActivityTaskDecisionAttributes = v
-	return s
-}
-
-// SetRequestCancelExternalWorkflowExecutionDecisionAttributes sets the RequestCancelExternalWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetRequestCancelExternalWorkflowExecutionDecisionAttributes(v *RequestCancelExternalWorkflowExecutionDecisionAttributes) *Decision {
-	s.RequestCancelExternalWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetScheduleActivityTaskDecisionAttributes sets the ScheduleActivityTaskDecisionAttributes field's value.
-func (s *Decision) SetScheduleActivityTaskDecisionAttributes(v *ScheduleActivityTaskDecisionAttributes) *Decision {
-	s.ScheduleActivityTaskDecisionAttributes = v
-	return s
-}
-
-// SetScheduleLambdaFunctionDecisionAttributes sets the ScheduleLambdaFunctionDecisionAttributes field's value.
-func (s *Decision) SetScheduleLambdaFunctionDecisionAttributes(v *ScheduleLambdaFunctionDecisionAttributes) *Decision {
-	s.ScheduleLambdaFunctionDecisionAttributes = v
-	return s
-}
-
-// SetSignalExternalWorkflowExecutionDecisionAttributes sets the SignalExternalWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetSignalExternalWorkflowExecutionDecisionAttributes(v *SignalExternalWorkflowExecutionDecisionAttributes) *Decision {
-	s.SignalExternalWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetStartChildWorkflowExecutionDecisionAttributes sets the StartChildWorkflowExecutionDecisionAttributes field's value.
-func (s *Decision) SetStartChildWorkflowExecutionDecisionAttributes(v *StartChildWorkflowExecutionDecisionAttributes) *Decision {
-	s.StartChildWorkflowExecutionDecisionAttributes = v
-	return s
-}
-
-// SetStartTimerDecisionAttributes sets the StartTimerDecisionAttributes field's value.
-func (s *Decision) SetStartTimerDecisionAttributes(v *StartTimerDecisionAttributes) *Decision {
-	s.StartTimerDecisionAttributes = v
-	return s
-}
-
 // Provides the details of the DecisionTaskCompleted event.
 type DecisionTaskCompletedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -5348,24 +4586,6 @@ func (s DecisionTaskCompletedEventAttributes) String() string {
 // GoString returns the string representation
 func (s DecisionTaskCompletedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetExecutionContext sets the ExecutionContext field's value.
-func (s *DecisionTaskCompletedEventAttributes) SetExecutionContext(v string) *DecisionTaskCompletedEventAttributes {
-	s.ExecutionContext = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *DecisionTaskCompletedEventAttributes) SetScheduledEventId(v int64) *DecisionTaskCompletedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *DecisionTaskCompletedEventAttributes) SetStartedEventId(v int64) *DecisionTaskCompletedEventAttributes {
-	s.StartedEventId = &v
-	return s
 }
 
 // Provides details about the DecisionTaskScheduled event.
@@ -5404,24 +4624,6 @@ func (s DecisionTaskScheduledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetStartToCloseTimeout sets the StartToCloseTimeout field's value.
-func (s *DecisionTaskScheduledEventAttributes) SetStartToCloseTimeout(v string) *DecisionTaskScheduledEventAttributes {
-	s.StartToCloseTimeout = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *DecisionTaskScheduledEventAttributes) SetTaskList(v *TaskList) *DecisionTaskScheduledEventAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *DecisionTaskScheduledEventAttributes) SetTaskPriority(v string) *DecisionTaskScheduledEventAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
 // Provides the details of the DecisionTaskStarted event.
 type DecisionTaskStartedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -5446,18 +4648,6 @@ func (s DecisionTaskStartedEventAttributes) String() string {
 // GoString returns the string representation
 func (s DecisionTaskStartedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *DecisionTaskStartedEventAttributes) SetIdentity(v string) *DecisionTaskStartedEventAttributes {
-	s.Identity = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *DecisionTaskStartedEventAttributes) SetScheduledEventId(v int64) *DecisionTaskStartedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
 }
 
 // Provides the details of the DecisionTaskTimedOut event.
@@ -5492,24 +4682,6 @@ func (s DecisionTaskTimedOutEventAttributes) String() string {
 // GoString returns the string representation
 func (s DecisionTaskTimedOutEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *DecisionTaskTimedOutEventAttributes) SetScheduledEventId(v int64) *DecisionTaskTimedOutEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *DecisionTaskTimedOutEventAttributes) SetStartedEventId(v int64) *DecisionTaskTimedOutEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTimeoutType sets the TimeoutType field's value.
-func (s *DecisionTaskTimedOutEventAttributes) SetTimeoutType(v DecisionTaskTimeoutType) *DecisionTaskTimedOutEventAttributes {
-	s.TimeoutType = v
-	return s
 }
 
 type DeprecateActivityTypeInput struct {
@@ -5560,18 +4732,6 @@ func (s *DeprecateActivityTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActivityType sets the ActivityType field's value.
-func (s *DeprecateActivityTypeInput) SetActivityType(v *ActivityType) *DeprecateActivityTypeInput {
-	s.ActivityType = v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *DeprecateActivityTypeInput) SetDomain(v string) *DeprecateActivityTypeInput {
-	s.Domain = &v
-	return s
 }
 
 type DeprecateActivityTypeOutput struct {
@@ -5629,12 +4789,6 @@ func (s *DeprecateDomainInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeprecateDomainInput) SetName(v string) *DeprecateDomainInput {
-	s.Name = &v
-	return s
 }
 
 type DeprecateDomainOutput struct {
@@ -5706,18 +4860,6 @@ func (s *DeprecateWorkflowTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomain sets the Domain field's value.
-func (s *DeprecateWorkflowTypeInput) SetDomain(v string) *DeprecateWorkflowTypeInput {
-	s.Domain = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *DeprecateWorkflowTypeInput) SetWorkflowType(v *WorkflowType) *DeprecateWorkflowTypeInput {
-	s.WorkflowType = v
-	return s
 }
 
 type DeprecateWorkflowTypeOutput struct {
@@ -5792,18 +4934,6 @@ func (s *DescribeActivityTypeInput) Validate() error {
 	return nil
 }
 
-// SetActivityType sets the ActivityType field's value.
-func (s *DescribeActivityTypeInput) SetActivityType(v *ActivityType) *DescribeActivityTypeInput {
-	s.ActivityType = v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *DescribeActivityTypeInput) SetDomain(v string) *DescribeActivityTypeInput {
-	s.Domain = &v
-	return s
-}
-
 // Detailed information about an activity type.
 type DescribeActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -5846,18 +4976,6 @@ func (s DescribeActivityTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConfiguration sets the Configuration field's value.
-func (s *DescribeActivityTypeOutput) SetConfiguration(v *ActivityTypeConfiguration) *DescribeActivityTypeOutput {
-	s.Configuration = v
-	return s
-}
-
-// SetTypeInfo sets the TypeInfo field's value.
-func (s *DescribeActivityTypeOutput) SetTypeInfo(v *ActivityTypeInfo) *DescribeActivityTypeOutput {
-	s.TypeInfo = v
-	return s
-}
-
 type DescribeDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5894,12 +5012,6 @@ func (s *DescribeDomainInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DescribeDomainInput) SetName(v string) *DescribeDomainInput {
-	s.Name = &v
-	return s
-}
-
 // Contains details of a domain.
 type DescribeDomainOutput struct {
 	_ struct{} `type:"structure"`
@@ -5931,18 +5043,6 @@ func (s DescribeDomainOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDomainOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *DescribeDomainOutput) SetConfiguration(v *DomainConfiguration) *DescribeDomainOutput {
-	s.Configuration = v
-	return s
-}
-
-// SetDomainInfo sets the DomainInfo field's value.
-func (s *DescribeDomainOutput) SetDomainInfo(v *DomainInfo) *DescribeDomainOutput {
-	s.DomainInfo = v
-	return s
 }
 
 type DescribeWorkflowExecutionInput struct {
@@ -5995,18 +5095,6 @@ func (s *DescribeWorkflowExecutionInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *DescribeWorkflowExecutionInput) SetDomain(v string) *DescribeWorkflowExecutionInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecution sets the Execution field's value.
-func (s *DescribeWorkflowExecutionInput) SetExecution(v *WorkflowExecution) *DescribeWorkflowExecutionInput {
-	s.Execution = v
-	return s
-}
-
 // Contains details about a workflow execution.
 type DescribeWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6054,36 +5142,6 @@ func (s DescribeWorkflowExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutionConfiguration sets the ExecutionConfiguration field's value.
-func (s *DescribeWorkflowExecutionOutput) SetExecutionConfiguration(v *WorkflowExecutionConfiguration) *DescribeWorkflowExecutionOutput {
-	s.ExecutionConfiguration = v
-	return s
-}
-
-// SetExecutionInfo sets the ExecutionInfo field's value.
-func (s *DescribeWorkflowExecutionOutput) SetExecutionInfo(v *WorkflowExecutionInfo) *DescribeWorkflowExecutionOutput {
-	s.ExecutionInfo = v
-	return s
-}
-
-// SetLatestActivityTaskTimestamp sets the LatestActivityTaskTimestamp field's value.
-func (s *DescribeWorkflowExecutionOutput) SetLatestActivityTaskTimestamp(v time.Time) *DescribeWorkflowExecutionOutput {
-	s.LatestActivityTaskTimestamp = &v
-	return s
-}
-
-// SetLatestExecutionContext sets the LatestExecutionContext field's value.
-func (s *DescribeWorkflowExecutionOutput) SetLatestExecutionContext(v string) *DescribeWorkflowExecutionOutput {
-	s.LatestExecutionContext = &v
-	return s
-}
-
-// SetOpenCounts sets the OpenCounts field's value.
-func (s *DescribeWorkflowExecutionOutput) SetOpenCounts(v *WorkflowExecutionOpenCounts) *DescribeWorkflowExecutionOutput {
-	s.OpenCounts = v
-	return s
 }
 
 type DescribeWorkflowTypeInput struct {
@@ -6136,18 +5194,6 @@ func (s *DescribeWorkflowTypeInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *DescribeWorkflowTypeInput) SetDomain(v string) *DescribeWorkflowTypeInput {
-	s.Domain = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *DescribeWorkflowTypeInput) SetWorkflowType(v *WorkflowType) *DescribeWorkflowTypeInput {
-	s.WorkflowType = v
-	return s
-}
-
 // Contains details about a workflow type.
 type DescribeWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -6190,18 +5236,6 @@ func (s DescribeWorkflowTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConfiguration sets the Configuration field's value.
-func (s *DescribeWorkflowTypeOutput) SetConfiguration(v *WorkflowTypeConfiguration) *DescribeWorkflowTypeOutput {
-	s.Configuration = v
-	return s
-}
-
-// SetTypeInfo sets the TypeInfo field's value.
-func (s *DescribeWorkflowTypeOutput) SetTypeInfo(v *WorkflowTypeInfo) *DescribeWorkflowTypeOutput {
-	s.TypeInfo = v
-	return s
-}
-
 // Contains the configuration settings of a domain.
 type DomainConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -6220,12 +5254,6 @@ func (s DomainConfiguration) String() string {
 // GoString returns the string representation
 func (s DomainConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetWorkflowExecutionRetentionPeriodInDays sets the WorkflowExecutionRetentionPeriodInDays field's value.
-func (s *DomainConfiguration) SetWorkflowExecutionRetentionPeriodInDays(v string) *DomainConfiguration {
-	s.WorkflowExecutionRetentionPeriodInDays = &v
-	return s
 }
 
 // Contains general information about a domain.
@@ -6261,24 +5289,6 @@ func (s DomainInfo) String() string {
 // GoString returns the string representation
 func (s DomainInfo) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *DomainInfo) SetDescription(v string) *DomainInfo {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DomainInfo) SetName(v string) *DomainInfo {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DomainInfo) SetStatus(v RegistrationStatus) *DomainInfo {
-	s.Status = v
-	return s
 }
 
 // Used to filter the workflow executions in visibility APIs by various time-based
@@ -6322,18 +5332,6 @@ func (s *ExecutionTimeFilter) Validate() error {
 	return nil
 }
 
-// SetLatestDate sets the LatestDate field's value.
-func (s *ExecutionTimeFilter) SetLatestDate(v time.Time) *ExecutionTimeFilter {
-	s.LatestDate = &v
-	return s
-}
-
-// SetOldestDate sets the OldestDate field's value.
-func (s *ExecutionTimeFilter) SetOldestDate(v time.Time) *ExecutionTimeFilter {
-	s.OldestDate = &v
-	return s
-}
-
 // Provides the details of the ExternalWorkflowExecutionCancelRequested event.
 type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -6362,18 +5360,6 @@ func (s ExternalWorkflowExecutionCancelRequestedEventAttributes) GoString() stri
 	return s.String()
 }
 
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ExternalWorkflowExecutionCancelRequestedEventAttributes) SetInitiatedEventId(v int64) *ExternalWorkflowExecutionCancelRequestedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ExternalWorkflowExecutionCancelRequestedEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ExternalWorkflowExecutionCancelRequestedEventAttributes {
-	s.WorkflowExecution = v
-	return s
-}
-
 // Provides the details of the ExternalWorkflowExecutionSignaled event.
 type ExternalWorkflowExecutionSignaledEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -6400,18 +5386,6 @@ func (s ExternalWorkflowExecutionSignaledEventAttributes) String() string {
 // GoString returns the string representation
 func (s ExternalWorkflowExecutionSignaledEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *ExternalWorkflowExecutionSignaledEventAttributes) SetInitiatedEventId(v int64) *ExternalWorkflowExecutionSignaledEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *ExternalWorkflowExecutionSignaledEventAttributes) SetWorkflowExecution(v *WorkflowExecution) *ExternalWorkflowExecutionSignaledEventAttributes {
-	s.WorkflowExecution = v
-	return s
 }
 
 // Provides the details of the FailWorkflowExecution decision.
@@ -6454,18 +5428,6 @@ func (s FailWorkflowExecutionDecisionAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDetails sets the Details field's value.
-func (s *FailWorkflowExecutionDecisionAttributes) SetDetails(v string) *FailWorkflowExecutionDecisionAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *FailWorkflowExecutionDecisionAttributes) SetReason(v string) *FailWorkflowExecutionDecisionAttributes {
-	s.Reason = &v
-	return s
-}
-
 // Provides the details of the FailWorkflowExecutionFailed event.
 type FailWorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -6498,18 +5460,6 @@ func (s FailWorkflowExecutionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s FailWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *FailWorkflowExecutionFailedEventAttributes) SetCause(v FailWorkflowExecutionFailedCause) *FailWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *FailWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *FailWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
 }
 
 type GetWorkflowExecutionHistoryInput struct {
@@ -6583,36 +5533,6 @@ func (s *GetWorkflowExecutionHistoryInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *GetWorkflowExecutionHistoryInput) SetDomain(v string) *GetWorkflowExecutionHistoryInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecution sets the Execution field's value.
-func (s *GetWorkflowExecutionHistoryInput) SetExecution(v *WorkflowExecution) *GetWorkflowExecutionHistoryInput {
-	s.Execution = v
-	return s
-}
-
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *GetWorkflowExecutionHistoryInput) SetMaximumPageSize(v int64) *GetWorkflowExecutionHistoryInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetWorkflowExecutionHistoryInput) SetNextPageToken(v string) *GetWorkflowExecutionHistoryInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *GetWorkflowExecutionHistoryInput) SetReverseOrder(v bool) *GetWorkflowExecutionHistoryInput {
-	s.ReverseOrder = &v
-	return s
-}
-
 // Paginated representation of a workflow history for a workflow execution.
 // This is the up to date, complete and authoritative record of the events related
 // to all tasks and events in the life of the workflow execution.
@@ -6648,18 +5568,6 @@ func (s GetWorkflowExecutionHistoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetWorkflowExecutionHistoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvents sets the Events field's value.
-func (s *GetWorkflowExecutionHistoryOutput) SetEvents(v []HistoryEvent) *GetWorkflowExecutionHistoryOutput {
-	s.Events = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetWorkflowExecutionHistoryOutput) SetNextPageToken(v string) *GetWorkflowExecutionHistoryOutput {
-	s.NextPageToken = &v
-	return s
 }
 
 // Event within a workflow execution. A history event can be one of these types:
@@ -7084,348 +5992,6 @@ func (s HistoryEvent) GoString() string {
 	return s.String()
 }
 
-// SetActivityTaskCancelRequestedEventAttributes sets the ActivityTaskCancelRequestedEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskCancelRequestedEventAttributes(v *ActivityTaskCancelRequestedEventAttributes) *HistoryEvent {
-	s.ActivityTaskCancelRequestedEventAttributes = v
-	return s
-}
-
-// SetActivityTaskCanceledEventAttributes sets the ActivityTaskCanceledEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskCanceledEventAttributes(v *ActivityTaskCanceledEventAttributes) *HistoryEvent {
-	s.ActivityTaskCanceledEventAttributes = v
-	return s
-}
-
-// SetActivityTaskCompletedEventAttributes sets the ActivityTaskCompletedEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskCompletedEventAttributes(v *ActivityTaskCompletedEventAttributes) *HistoryEvent {
-	s.ActivityTaskCompletedEventAttributes = v
-	return s
-}
-
-// SetActivityTaskFailedEventAttributes sets the ActivityTaskFailedEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskFailedEventAttributes(v *ActivityTaskFailedEventAttributes) *HistoryEvent {
-	s.ActivityTaskFailedEventAttributes = v
-	return s
-}
-
-// SetActivityTaskScheduledEventAttributes sets the ActivityTaskScheduledEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskScheduledEventAttributes(v *ActivityTaskScheduledEventAttributes) *HistoryEvent {
-	s.ActivityTaskScheduledEventAttributes = v
-	return s
-}
-
-// SetActivityTaskStartedEventAttributes sets the ActivityTaskStartedEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskStartedEventAttributes(v *ActivityTaskStartedEventAttributes) *HistoryEvent {
-	s.ActivityTaskStartedEventAttributes = v
-	return s
-}
-
-// SetActivityTaskTimedOutEventAttributes sets the ActivityTaskTimedOutEventAttributes field's value.
-func (s *HistoryEvent) SetActivityTaskTimedOutEventAttributes(v *ActivityTaskTimedOutEventAttributes) *HistoryEvent {
-	s.ActivityTaskTimedOutEventAttributes = v
-	return s
-}
-
-// SetCancelTimerFailedEventAttributes sets the CancelTimerFailedEventAttributes field's value.
-func (s *HistoryEvent) SetCancelTimerFailedEventAttributes(v *CancelTimerFailedEventAttributes) *HistoryEvent {
-	s.CancelTimerFailedEventAttributes = v
-	return s
-}
-
-// SetCancelWorkflowExecutionFailedEventAttributes sets the CancelWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetCancelWorkflowExecutionFailedEventAttributes(v *CancelWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.CancelWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetChildWorkflowExecutionCanceledEventAttributes sets the ChildWorkflowExecutionCanceledEventAttributes field's value.
-func (s *HistoryEvent) SetChildWorkflowExecutionCanceledEventAttributes(v *ChildWorkflowExecutionCanceledEventAttributes) *HistoryEvent {
-	s.ChildWorkflowExecutionCanceledEventAttributes = v
-	return s
-}
-
-// SetChildWorkflowExecutionCompletedEventAttributes sets the ChildWorkflowExecutionCompletedEventAttributes field's value.
-func (s *HistoryEvent) SetChildWorkflowExecutionCompletedEventAttributes(v *ChildWorkflowExecutionCompletedEventAttributes) *HistoryEvent {
-	s.ChildWorkflowExecutionCompletedEventAttributes = v
-	return s
-}
-
-// SetChildWorkflowExecutionFailedEventAttributes sets the ChildWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetChildWorkflowExecutionFailedEventAttributes(v *ChildWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.ChildWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetChildWorkflowExecutionStartedEventAttributes sets the ChildWorkflowExecutionStartedEventAttributes field's value.
-func (s *HistoryEvent) SetChildWorkflowExecutionStartedEventAttributes(v *ChildWorkflowExecutionStartedEventAttributes) *HistoryEvent {
-	s.ChildWorkflowExecutionStartedEventAttributes = v
-	return s
-}
-
-// SetChildWorkflowExecutionTerminatedEventAttributes sets the ChildWorkflowExecutionTerminatedEventAttributes field's value.
-func (s *HistoryEvent) SetChildWorkflowExecutionTerminatedEventAttributes(v *ChildWorkflowExecutionTerminatedEventAttributes) *HistoryEvent {
-	s.ChildWorkflowExecutionTerminatedEventAttributes = v
-	return s
-}
-
-// SetChildWorkflowExecutionTimedOutEventAttributes sets the ChildWorkflowExecutionTimedOutEventAttributes field's value.
-func (s *HistoryEvent) SetChildWorkflowExecutionTimedOutEventAttributes(v *ChildWorkflowExecutionTimedOutEventAttributes) *HistoryEvent {
-	s.ChildWorkflowExecutionTimedOutEventAttributes = v
-	return s
-}
-
-// SetCompleteWorkflowExecutionFailedEventAttributes sets the CompleteWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetCompleteWorkflowExecutionFailedEventAttributes(v *CompleteWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.CompleteWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetContinueAsNewWorkflowExecutionFailedEventAttributes sets the ContinueAsNewWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetContinueAsNewWorkflowExecutionFailedEventAttributes(v *ContinueAsNewWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.ContinueAsNewWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventAttributes sets the DecisionTaskCompletedEventAttributes field's value.
-func (s *HistoryEvent) SetDecisionTaskCompletedEventAttributes(v *DecisionTaskCompletedEventAttributes) *HistoryEvent {
-	s.DecisionTaskCompletedEventAttributes = v
-	return s
-}
-
-// SetDecisionTaskScheduledEventAttributes sets the DecisionTaskScheduledEventAttributes field's value.
-func (s *HistoryEvent) SetDecisionTaskScheduledEventAttributes(v *DecisionTaskScheduledEventAttributes) *HistoryEvent {
-	s.DecisionTaskScheduledEventAttributes = v
-	return s
-}
-
-// SetDecisionTaskStartedEventAttributes sets the DecisionTaskStartedEventAttributes field's value.
-func (s *HistoryEvent) SetDecisionTaskStartedEventAttributes(v *DecisionTaskStartedEventAttributes) *HistoryEvent {
-	s.DecisionTaskStartedEventAttributes = v
-	return s
-}
-
-// SetDecisionTaskTimedOutEventAttributes sets the DecisionTaskTimedOutEventAttributes field's value.
-func (s *HistoryEvent) SetDecisionTaskTimedOutEventAttributes(v *DecisionTaskTimedOutEventAttributes) *HistoryEvent {
-	s.DecisionTaskTimedOutEventAttributes = v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *HistoryEvent) SetEventId(v int64) *HistoryEvent {
-	s.EventId = &v
-	return s
-}
-
-// SetEventTimestamp sets the EventTimestamp field's value.
-func (s *HistoryEvent) SetEventTimestamp(v time.Time) *HistoryEvent {
-	s.EventTimestamp = &v
-	return s
-}
-
-// SetEventType sets the EventType field's value.
-func (s *HistoryEvent) SetEventType(v EventType) *HistoryEvent {
-	s.EventType = v
-	return s
-}
-
-// SetExternalWorkflowExecutionCancelRequestedEventAttributes sets the ExternalWorkflowExecutionCancelRequestedEventAttributes field's value.
-func (s *HistoryEvent) SetExternalWorkflowExecutionCancelRequestedEventAttributes(v *ExternalWorkflowExecutionCancelRequestedEventAttributes) *HistoryEvent {
-	s.ExternalWorkflowExecutionCancelRequestedEventAttributes = v
-	return s
-}
-
-// SetExternalWorkflowExecutionSignaledEventAttributes sets the ExternalWorkflowExecutionSignaledEventAttributes field's value.
-func (s *HistoryEvent) SetExternalWorkflowExecutionSignaledEventAttributes(v *ExternalWorkflowExecutionSignaledEventAttributes) *HistoryEvent {
-	s.ExternalWorkflowExecutionSignaledEventAttributes = v
-	return s
-}
-
-// SetFailWorkflowExecutionFailedEventAttributes sets the FailWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetFailWorkflowExecutionFailedEventAttributes(v *FailWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.FailWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetLambdaFunctionCompletedEventAttributes sets the LambdaFunctionCompletedEventAttributes field's value.
-func (s *HistoryEvent) SetLambdaFunctionCompletedEventAttributes(v *LambdaFunctionCompletedEventAttributes) *HistoryEvent {
-	s.LambdaFunctionCompletedEventAttributes = v
-	return s
-}
-
-// SetLambdaFunctionFailedEventAttributes sets the LambdaFunctionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetLambdaFunctionFailedEventAttributes(v *LambdaFunctionFailedEventAttributes) *HistoryEvent {
-	s.LambdaFunctionFailedEventAttributes = v
-	return s
-}
-
-// SetLambdaFunctionScheduledEventAttributes sets the LambdaFunctionScheduledEventAttributes field's value.
-func (s *HistoryEvent) SetLambdaFunctionScheduledEventAttributes(v *LambdaFunctionScheduledEventAttributes) *HistoryEvent {
-	s.LambdaFunctionScheduledEventAttributes = v
-	return s
-}
-
-// SetLambdaFunctionStartedEventAttributes sets the LambdaFunctionStartedEventAttributes field's value.
-func (s *HistoryEvent) SetLambdaFunctionStartedEventAttributes(v *LambdaFunctionStartedEventAttributes) *HistoryEvent {
-	s.LambdaFunctionStartedEventAttributes = v
-	return s
-}
-
-// SetLambdaFunctionTimedOutEventAttributes sets the LambdaFunctionTimedOutEventAttributes field's value.
-func (s *HistoryEvent) SetLambdaFunctionTimedOutEventAttributes(v *LambdaFunctionTimedOutEventAttributes) *HistoryEvent {
-	s.LambdaFunctionTimedOutEventAttributes = v
-	return s
-}
-
-// SetMarkerRecordedEventAttributes sets the MarkerRecordedEventAttributes field's value.
-func (s *HistoryEvent) SetMarkerRecordedEventAttributes(v *MarkerRecordedEventAttributes) *HistoryEvent {
-	s.MarkerRecordedEventAttributes = v
-	return s
-}
-
-// SetRecordMarkerFailedEventAttributes sets the RecordMarkerFailedEventAttributes field's value.
-func (s *HistoryEvent) SetRecordMarkerFailedEventAttributes(v *RecordMarkerFailedEventAttributes) *HistoryEvent {
-	s.RecordMarkerFailedEventAttributes = v
-	return s
-}
-
-// SetRequestCancelActivityTaskFailedEventAttributes sets the RequestCancelActivityTaskFailedEventAttributes field's value.
-func (s *HistoryEvent) SetRequestCancelActivityTaskFailedEventAttributes(v *RequestCancelActivityTaskFailedEventAttributes) *HistoryEvent {
-	s.RequestCancelActivityTaskFailedEventAttributes = v
-	return s
-}
-
-// SetRequestCancelExternalWorkflowExecutionFailedEventAttributes sets the RequestCancelExternalWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetRequestCancelExternalWorkflowExecutionFailedEventAttributes(v *RequestCancelExternalWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.RequestCancelExternalWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetRequestCancelExternalWorkflowExecutionInitiatedEventAttributes sets the RequestCancelExternalWorkflowExecutionInitiatedEventAttributes field's value.
-func (s *HistoryEvent) SetRequestCancelExternalWorkflowExecutionInitiatedEventAttributes(v *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) *HistoryEvent {
-	s.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes = v
-	return s
-}
-
-// SetScheduleActivityTaskFailedEventAttributes sets the ScheduleActivityTaskFailedEventAttributes field's value.
-func (s *HistoryEvent) SetScheduleActivityTaskFailedEventAttributes(v *ScheduleActivityTaskFailedEventAttributes) *HistoryEvent {
-	s.ScheduleActivityTaskFailedEventAttributes = v
-	return s
-}
-
-// SetScheduleLambdaFunctionFailedEventAttributes sets the ScheduleLambdaFunctionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetScheduleLambdaFunctionFailedEventAttributes(v *ScheduleLambdaFunctionFailedEventAttributes) *HistoryEvent {
-	s.ScheduleLambdaFunctionFailedEventAttributes = v
-	return s
-}
-
-// SetSignalExternalWorkflowExecutionFailedEventAttributes sets the SignalExternalWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetSignalExternalWorkflowExecutionFailedEventAttributes(v *SignalExternalWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.SignalExternalWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetSignalExternalWorkflowExecutionInitiatedEventAttributes sets the SignalExternalWorkflowExecutionInitiatedEventAttributes field's value.
-func (s *HistoryEvent) SetSignalExternalWorkflowExecutionInitiatedEventAttributes(v *SignalExternalWorkflowExecutionInitiatedEventAttributes) *HistoryEvent {
-	s.SignalExternalWorkflowExecutionInitiatedEventAttributes = v
-	return s
-}
-
-// SetStartChildWorkflowExecutionFailedEventAttributes sets the StartChildWorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetStartChildWorkflowExecutionFailedEventAttributes(v *StartChildWorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.StartChildWorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetStartChildWorkflowExecutionInitiatedEventAttributes sets the StartChildWorkflowExecutionInitiatedEventAttributes field's value.
-func (s *HistoryEvent) SetStartChildWorkflowExecutionInitiatedEventAttributes(v *StartChildWorkflowExecutionInitiatedEventAttributes) *HistoryEvent {
-	s.StartChildWorkflowExecutionInitiatedEventAttributes = v
-	return s
-}
-
-// SetStartLambdaFunctionFailedEventAttributes sets the StartLambdaFunctionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetStartLambdaFunctionFailedEventAttributes(v *StartLambdaFunctionFailedEventAttributes) *HistoryEvent {
-	s.StartLambdaFunctionFailedEventAttributes = v
-	return s
-}
-
-// SetStartTimerFailedEventAttributes sets the StartTimerFailedEventAttributes field's value.
-func (s *HistoryEvent) SetStartTimerFailedEventAttributes(v *StartTimerFailedEventAttributes) *HistoryEvent {
-	s.StartTimerFailedEventAttributes = v
-	return s
-}
-
-// SetTimerCanceledEventAttributes sets the TimerCanceledEventAttributes field's value.
-func (s *HistoryEvent) SetTimerCanceledEventAttributes(v *TimerCanceledEventAttributes) *HistoryEvent {
-	s.TimerCanceledEventAttributes = v
-	return s
-}
-
-// SetTimerFiredEventAttributes sets the TimerFiredEventAttributes field's value.
-func (s *HistoryEvent) SetTimerFiredEventAttributes(v *TimerFiredEventAttributes) *HistoryEvent {
-	s.TimerFiredEventAttributes = v
-	return s
-}
-
-// SetTimerStartedEventAttributes sets the TimerStartedEventAttributes field's value.
-func (s *HistoryEvent) SetTimerStartedEventAttributes(v *TimerStartedEventAttributes) *HistoryEvent {
-	s.TimerStartedEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionCancelRequestedEventAttributes sets the WorkflowExecutionCancelRequestedEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionCancelRequestedEventAttributes(v *WorkflowExecutionCancelRequestedEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionCancelRequestedEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionCanceledEventAttributes sets the WorkflowExecutionCanceledEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionCanceledEventAttributes(v *WorkflowExecutionCanceledEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionCanceledEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionCompletedEventAttributes sets the WorkflowExecutionCompletedEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionCompletedEventAttributes(v *WorkflowExecutionCompletedEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionCompletedEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionContinuedAsNewEventAttributes sets the WorkflowExecutionContinuedAsNewEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionContinuedAsNewEventAttributes(v *WorkflowExecutionContinuedAsNewEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionContinuedAsNewEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionFailedEventAttributes sets the WorkflowExecutionFailedEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionFailedEventAttributes(v *WorkflowExecutionFailedEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionFailedEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionSignaledEventAttributes sets the WorkflowExecutionSignaledEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionSignaledEventAttributes(v *WorkflowExecutionSignaledEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionSignaledEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionStartedEventAttributes sets the WorkflowExecutionStartedEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionStartedEventAttributes(v *WorkflowExecutionStartedEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionStartedEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionTerminatedEventAttributes sets the WorkflowExecutionTerminatedEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionTerminatedEventAttributes(v *WorkflowExecutionTerminatedEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionTerminatedEventAttributes = v
-	return s
-}
-
-// SetWorkflowExecutionTimedOutEventAttributes sets the WorkflowExecutionTimedOutEventAttributes field's value.
-func (s *HistoryEvent) SetWorkflowExecutionTimedOutEventAttributes(v *WorkflowExecutionTimedOutEventAttributes) *HistoryEvent {
-	s.WorkflowExecutionTimedOutEventAttributes = v
-	return s
-}
-
 // Provides the details of the LambdaFunctionCompleted event. It isn't set for
 // other event types.
 type LambdaFunctionCompletedEventAttributes struct {
@@ -7457,24 +6023,6 @@ func (s LambdaFunctionCompletedEventAttributes) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionCompletedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetResult sets the Result field's value.
-func (s *LambdaFunctionCompletedEventAttributes) SetResult(v string) *LambdaFunctionCompletedEventAttributes {
-	s.Result = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *LambdaFunctionCompletedEventAttributes) SetScheduledEventId(v int64) *LambdaFunctionCompletedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *LambdaFunctionCompletedEventAttributes) SetStartedEventId(v int64) *LambdaFunctionCompletedEventAttributes {
-	s.StartedEventId = &v
-	return s
 }
 
 // Provides the details of the LambdaFunctionFailed event. It isn't set for
@@ -7511,30 +6059,6 @@ func (s LambdaFunctionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDetails sets the Details field's value.
-func (s *LambdaFunctionFailedEventAttributes) SetDetails(v string) *LambdaFunctionFailedEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *LambdaFunctionFailedEventAttributes) SetReason(v string) *LambdaFunctionFailedEventAttributes {
-	s.Reason = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *LambdaFunctionFailedEventAttributes) SetScheduledEventId(v int64) *LambdaFunctionFailedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *LambdaFunctionFailedEventAttributes) SetStartedEventId(v int64) *LambdaFunctionFailedEventAttributes {
-	s.StartedEventId = &v
-	return s
 }
 
 // Provides the details of the LambdaFunctionScheduled event. It isn't set for
@@ -7581,42 +6105,6 @@ func (s LambdaFunctionScheduledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetControl sets the Control field's value.
-func (s *LambdaFunctionScheduledEventAttributes) SetControl(v string) *LambdaFunctionScheduledEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *LambdaFunctionScheduledEventAttributes) SetDecisionTaskCompletedEventId(v int64) *LambdaFunctionScheduledEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *LambdaFunctionScheduledEventAttributes) SetId(v string) *LambdaFunctionScheduledEventAttributes {
-	s.Id = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *LambdaFunctionScheduledEventAttributes) SetInput(v string) *LambdaFunctionScheduledEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *LambdaFunctionScheduledEventAttributes) SetName(v string) *LambdaFunctionScheduledEventAttributes {
-	s.Name = &v
-	return s
-}
-
-// SetStartToCloseTimeout sets the StartToCloseTimeout field's value.
-func (s *LambdaFunctionScheduledEventAttributes) SetStartToCloseTimeout(v string) *LambdaFunctionScheduledEventAttributes {
-	s.StartToCloseTimeout = &v
-	return s
-}
-
 // Provides the details of the LambdaFunctionStarted event. It isn't set for
 // other event types.
 type LambdaFunctionStartedEventAttributes struct {
@@ -7638,12 +6126,6 @@ func (s LambdaFunctionStartedEventAttributes) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionStartedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *LambdaFunctionStartedEventAttributes) SetScheduledEventId(v int64) *LambdaFunctionStartedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
 }
 
 // Provides details of the LambdaFunctionTimedOut event.
@@ -7676,24 +6158,6 @@ func (s LambdaFunctionTimedOutEventAttributes) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionTimedOutEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *LambdaFunctionTimedOutEventAttributes) SetScheduledEventId(v int64) *LambdaFunctionTimedOutEventAttributes {
-	s.ScheduledEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *LambdaFunctionTimedOutEventAttributes) SetStartedEventId(v int64) *LambdaFunctionTimedOutEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTimeoutType sets the TimeoutType field's value.
-func (s *LambdaFunctionTimedOutEventAttributes) SetTimeoutType(v LambdaFunctionTimeoutType) *LambdaFunctionTimedOutEventAttributes {
-	s.TimeoutType = v
-	return s
 }
 
 type ListActivityTypesInput struct {
@@ -7767,42 +6231,6 @@ func (s *ListActivityTypesInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *ListActivityTypesInput) SetDomain(v string) *ListActivityTypesInput {
-	s.Domain = &v
-	return s
-}
-
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *ListActivityTypesInput) SetMaximumPageSize(v int64) *ListActivityTypesInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListActivityTypesInput) SetName(v string) *ListActivityTypesInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListActivityTypesInput) SetNextPageToken(v string) *ListActivityTypesInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListActivityTypesInput) SetRegistrationStatus(v RegistrationStatus) *ListActivityTypesInput {
-	s.RegistrationStatus = v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *ListActivityTypesInput) SetReverseOrder(v bool) *ListActivityTypesInput {
-	s.ReverseOrder = &v
-	return s
-}
-
 // Contains a paginated list of activity type information structures.
 type ListActivityTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -7836,18 +6264,6 @@ func (s ListActivityTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListActivityTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListActivityTypesOutput) SetNextPageToken(v string) *ListActivityTypesOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetTypeInfos sets the TypeInfos field's value.
-func (s *ListActivityTypesOutput) SetTypeInfos(v []ActivityTypeInfo) *ListActivityTypesOutput {
-	s.TypeInfos = v
-	return s
 }
 
 type ListClosedWorkflowExecutionsInput struct {
@@ -7982,66 +6398,6 @@ func (s *ListClosedWorkflowExecutionsInput) Validate() error {
 	return nil
 }
 
-// SetCloseStatusFilter sets the CloseStatusFilter field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetCloseStatusFilter(v *CloseStatusFilter) *ListClosedWorkflowExecutionsInput {
-	s.CloseStatusFilter = v
-	return s
-}
-
-// SetCloseTimeFilter sets the CloseTimeFilter field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetCloseTimeFilter(v *ExecutionTimeFilter) *ListClosedWorkflowExecutionsInput {
-	s.CloseTimeFilter = v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetDomain(v string) *ListClosedWorkflowExecutionsInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecutionFilter sets the ExecutionFilter field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetExecutionFilter(v *WorkflowExecutionFilter) *ListClosedWorkflowExecutionsInput {
-	s.ExecutionFilter = v
-	return s
-}
-
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetMaximumPageSize(v int64) *ListClosedWorkflowExecutionsInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetNextPageToken(v string) *ListClosedWorkflowExecutionsInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetReverseOrder(v bool) *ListClosedWorkflowExecutionsInput {
-	s.ReverseOrder = &v
-	return s
-}
-
-// SetStartTimeFilter sets the StartTimeFilter field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetStartTimeFilter(v *ExecutionTimeFilter) *ListClosedWorkflowExecutionsInput {
-	s.StartTimeFilter = v
-	return s
-}
-
-// SetTagFilter sets the TagFilter field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetTagFilter(v *TagFilter) *ListClosedWorkflowExecutionsInput {
-	s.TagFilter = v
-	return s
-}
-
-// SetTypeFilter sets the TypeFilter field's value.
-func (s *ListClosedWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *ListClosedWorkflowExecutionsInput {
-	s.TypeFilter = v
-	return s
-}
-
 type ListDomainsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8095,30 +6451,6 @@ func (s *ListDomainsInput) Validate() error {
 	return nil
 }
 
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *ListDomainsInput) SetMaximumPageSize(v int64) *ListDomainsInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListDomainsInput) SetNextPageToken(v string) *ListDomainsInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListDomainsInput) SetRegistrationStatus(v RegistrationStatus) *ListDomainsInput {
-	s.RegistrationStatus = v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *ListDomainsInput) SetReverseOrder(v bool) *ListDomainsInput {
-	s.ReverseOrder = &v
-	return s
-}
-
 // Contains a paginated collection of DomainInfo structures.
 type ListDomainsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8152,18 +6484,6 @@ func (s ListDomainsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDomainsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDomainInfos sets the DomainInfos field's value.
-func (s *ListDomainsOutput) SetDomainInfos(v []DomainInfo) *ListDomainsOutput {
-	s.DomainInfos = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListDomainsOutput) SetNextPageToken(v string) *ListDomainsOutput {
-	s.NextPageToken = &v
-	return s
 }
 
 type ListOpenWorkflowExecutionsInput struct {
@@ -8272,54 +6592,6 @@ func (s *ListOpenWorkflowExecutionsInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetDomain(v string) *ListOpenWorkflowExecutionsInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecutionFilter sets the ExecutionFilter field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetExecutionFilter(v *WorkflowExecutionFilter) *ListOpenWorkflowExecutionsInput {
-	s.ExecutionFilter = v
-	return s
-}
-
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetMaximumPageSize(v int64) *ListOpenWorkflowExecutionsInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetNextPageToken(v string) *ListOpenWorkflowExecutionsInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetReverseOrder(v bool) *ListOpenWorkflowExecutionsInput {
-	s.ReverseOrder = &v
-	return s
-}
-
-// SetStartTimeFilter sets the StartTimeFilter field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetStartTimeFilter(v *ExecutionTimeFilter) *ListOpenWorkflowExecutionsInput {
-	s.StartTimeFilter = v
-	return s
-}
-
-// SetTagFilter sets the TagFilter field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetTagFilter(v *TagFilter) *ListOpenWorkflowExecutionsInput {
-	s.TagFilter = v
-	return s
-}
-
-// SetTypeFilter sets the TypeFilter field's value.
-func (s *ListOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *ListOpenWorkflowExecutionsInput {
-	s.TypeFilter = v
-	return s
-}
-
 // Contains a paginated list of information about workflow executions.
 type ListOpenWorkflowExecutionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -8353,18 +6625,6 @@ func (s ListOpenWorkflowExecutionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOpenWorkflowExecutionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutionInfos sets the ExecutionInfos field's value.
-func (s *ListOpenWorkflowExecutionsOutput) SetExecutionInfos(v []WorkflowExecutionInfo) *ListOpenWorkflowExecutionsOutput {
-	s.ExecutionInfos = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListOpenWorkflowExecutionsOutput) SetNextPageToken(v string) *ListOpenWorkflowExecutionsOutput {
-	s.NextPageToken = &v
-	return s
 }
 
 type ListWorkflowTypesInput struct {
@@ -8439,42 +6699,6 @@ func (s *ListWorkflowTypesInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *ListWorkflowTypesInput) SetDomain(v string) *ListWorkflowTypesInput {
-	s.Domain = &v
-	return s
-}
-
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *ListWorkflowTypesInput) SetMaximumPageSize(v int64) *ListWorkflowTypesInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListWorkflowTypesInput) SetName(v string) *ListWorkflowTypesInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListWorkflowTypesInput) SetNextPageToken(v string) *ListWorkflowTypesInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListWorkflowTypesInput) SetRegistrationStatus(v RegistrationStatus) *ListWorkflowTypesInput {
-	s.RegistrationStatus = v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *ListWorkflowTypesInput) SetReverseOrder(v bool) *ListWorkflowTypesInput {
-	s.ReverseOrder = &v
-	return s
-}
-
 // Contains a paginated list of information structures about workflow types.
 type ListWorkflowTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -8510,18 +6734,6 @@ func (s ListWorkflowTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListWorkflowTypesOutput) SetNextPageToken(v string) *ListWorkflowTypesOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetTypeInfos sets the TypeInfos field's value.
-func (s *ListWorkflowTypesOutput) SetTypeInfos(v []WorkflowTypeInfo) *ListWorkflowTypesOutput {
-	s.TypeInfos = v
-	return s
-}
-
 // Provides the details of the MarkerRecorded event.
 type MarkerRecordedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -8551,24 +6763,6 @@ func (s MarkerRecordedEventAttributes) String() string {
 // GoString returns the string representation
 func (s MarkerRecordedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *MarkerRecordedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *MarkerRecordedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *MarkerRecordedEventAttributes) SetDetails(v string) *MarkerRecordedEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetMarkerName sets the MarkerName field's value.
-func (s *MarkerRecordedEventAttributes) SetMarkerName(v string) *MarkerRecordedEventAttributes {
-	s.MarkerName = &v
-	return s
 }
 
 type PollForActivityTaskInput struct {
@@ -8630,24 +6824,6 @@ func (s *PollForActivityTaskInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *PollForActivityTaskInput) SetDomain(v string) *PollForActivityTaskInput {
-	s.Domain = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *PollForActivityTaskInput) SetIdentity(v string) *PollForActivityTaskInput {
-	s.Identity = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *PollForActivityTaskInput) SetTaskList(v *TaskList) *PollForActivityTaskInput {
-	s.TaskList = v
-	return s
-}
-
 // Unit of work sent to an activity worker.
 type PollForActivityTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -8699,42 +6875,6 @@ func (s PollForActivityTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PollForActivityTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetActivityId sets the ActivityId field's value.
-func (s *PollForActivityTaskOutput) SetActivityId(v string) *PollForActivityTaskOutput {
-	s.ActivityId = &v
-	return s
-}
-
-// SetActivityType sets the ActivityType field's value.
-func (s *PollForActivityTaskOutput) SetActivityType(v *ActivityType) *PollForActivityTaskOutput {
-	s.ActivityType = v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *PollForActivityTaskOutput) SetInput(v string) *PollForActivityTaskOutput {
-	s.Input = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *PollForActivityTaskOutput) SetStartedEventId(v int64) *PollForActivityTaskOutput {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *PollForActivityTaskOutput) SetTaskToken(v string) *PollForActivityTaskOutput {
-	s.TaskToken = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *PollForActivityTaskOutput) SetWorkflowExecution(v *WorkflowExecution) *PollForActivityTaskOutput {
-	s.WorkflowExecution = v
-	return s
 }
 
 type PollForDecisionTaskInput struct {
@@ -8822,42 +6962,6 @@ func (s *PollForDecisionTaskInput) Validate() error {
 	return nil
 }
 
-// SetDomain sets the Domain field's value.
-func (s *PollForDecisionTaskInput) SetDomain(v string) *PollForDecisionTaskInput {
-	s.Domain = &v
-	return s
-}
-
-// SetIdentity sets the Identity field's value.
-func (s *PollForDecisionTaskInput) SetIdentity(v string) *PollForDecisionTaskInput {
-	s.Identity = &v
-	return s
-}
-
-// SetMaximumPageSize sets the MaximumPageSize field's value.
-func (s *PollForDecisionTaskInput) SetMaximumPageSize(v int64) *PollForDecisionTaskInput {
-	s.MaximumPageSize = &v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *PollForDecisionTaskInput) SetNextPageToken(v string) *PollForDecisionTaskInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetReverseOrder sets the ReverseOrder field's value.
-func (s *PollForDecisionTaskInput) SetReverseOrder(v bool) *PollForDecisionTaskInput {
-	s.ReverseOrder = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *PollForDecisionTaskInput) SetTaskList(v *TaskList) *PollForDecisionTaskInput {
-	s.TaskList = v
-	return s
-}
-
 // A structure that represents a decision task. Decision tasks are sent to deciders
 // in order for them to make decisions.
 type PollForDecisionTaskOutput struct {
@@ -8923,48 +7027,6 @@ func (s PollForDecisionTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEvents sets the Events field's value.
-func (s *PollForDecisionTaskOutput) SetEvents(v []HistoryEvent) *PollForDecisionTaskOutput {
-	s.Events = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *PollForDecisionTaskOutput) SetNextPageToken(v string) *PollForDecisionTaskOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetPreviousStartedEventId sets the PreviousStartedEventId field's value.
-func (s *PollForDecisionTaskOutput) SetPreviousStartedEventId(v int64) *PollForDecisionTaskOutput {
-	s.PreviousStartedEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *PollForDecisionTaskOutput) SetStartedEventId(v int64) *PollForDecisionTaskOutput {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *PollForDecisionTaskOutput) SetTaskToken(v string) *PollForDecisionTaskOutput {
-	s.TaskToken = &v
-	return s
-}
-
-// SetWorkflowExecution sets the WorkflowExecution field's value.
-func (s *PollForDecisionTaskOutput) SetWorkflowExecution(v *WorkflowExecution) *PollForDecisionTaskOutput {
-	s.WorkflowExecution = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *PollForDecisionTaskOutput) SetWorkflowType(v *WorkflowType) *PollForDecisionTaskOutput {
-	s.WorkflowType = v
-	return s
-}
-
 type RecordActivityTaskHeartbeatInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9008,18 +7070,6 @@ func (s *RecordActivityTaskHeartbeatInput) Validate() error {
 	return nil
 }
 
-// SetDetails sets the Details field's value.
-func (s *RecordActivityTaskHeartbeatInput) SetDetails(v string) *RecordActivityTaskHeartbeatInput {
-	s.Details = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *RecordActivityTaskHeartbeatInput) SetTaskToken(v string) *RecordActivityTaskHeartbeatInput {
-	s.TaskToken = &v
-	return s
-}
-
 // Status information about an activity task.
 type RecordActivityTaskHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
@@ -9045,12 +7095,6 @@ func (s RecordActivityTaskHeartbeatOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RecordActivityTaskHeartbeatOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCancelRequested sets the CancelRequested field's value.
-func (s *RecordActivityTaskHeartbeatOutput) SetCancelRequested(v bool) *RecordActivityTaskHeartbeatOutput {
-	s.CancelRequested = &v
-	return s
 }
 
 // Provides the details of the RecordMarker decision.
@@ -9112,18 +7156,6 @@ func (s *RecordMarkerDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetDetails sets the Details field's value.
-func (s *RecordMarkerDecisionAttributes) SetDetails(v string) *RecordMarkerDecisionAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetMarkerName sets the MarkerName field's value.
-func (s *RecordMarkerDecisionAttributes) SetMarkerName(v string) *RecordMarkerDecisionAttributes {
-	s.MarkerName = &v
-	return s
-}
-
 // Provides the details of the RecordMarkerFailed event.
 type RecordMarkerFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -9161,24 +7193,6 @@ func (s RecordMarkerFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s RecordMarkerFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *RecordMarkerFailedEventAttributes) SetCause(v RecordMarkerFailedCause) *RecordMarkerFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *RecordMarkerFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *RecordMarkerFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetMarkerName sets the MarkerName field's value.
-func (s *RecordMarkerFailedEventAttributes) SetMarkerName(v string) *RecordMarkerFailedEventAttributes {
-	s.MarkerName = &v
-	return s
 }
 
 type RegisterActivityTypeInput struct {
@@ -9312,66 +7326,6 @@ func (s *RegisterActivityTypeInput) Validate() error {
 	return nil
 }
 
-// SetDefaultTaskHeartbeatTimeout sets the DefaultTaskHeartbeatTimeout field's value.
-func (s *RegisterActivityTypeInput) SetDefaultTaskHeartbeatTimeout(v string) *RegisterActivityTypeInput {
-	s.DefaultTaskHeartbeatTimeout = &v
-	return s
-}
-
-// SetDefaultTaskList sets the DefaultTaskList field's value.
-func (s *RegisterActivityTypeInput) SetDefaultTaskList(v *TaskList) *RegisterActivityTypeInput {
-	s.DefaultTaskList = v
-	return s
-}
-
-// SetDefaultTaskPriority sets the DefaultTaskPriority field's value.
-func (s *RegisterActivityTypeInput) SetDefaultTaskPriority(v string) *RegisterActivityTypeInput {
-	s.DefaultTaskPriority = &v
-	return s
-}
-
-// SetDefaultTaskScheduleToCloseTimeout sets the DefaultTaskScheduleToCloseTimeout field's value.
-func (s *RegisterActivityTypeInput) SetDefaultTaskScheduleToCloseTimeout(v string) *RegisterActivityTypeInput {
-	s.DefaultTaskScheduleToCloseTimeout = &v
-	return s
-}
-
-// SetDefaultTaskScheduleToStartTimeout sets the DefaultTaskScheduleToStartTimeout field's value.
-func (s *RegisterActivityTypeInput) SetDefaultTaskScheduleToStartTimeout(v string) *RegisterActivityTypeInput {
-	s.DefaultTaskScheduleToStartTimeout = &v
-	return s
-}
-
-// SetDefaultTaskStartToCloseTimeout sets the DefaultTaskStartToCloseTimeout field's value.
-func (s *RegisterActivityTypeInput) SetDefaultTaskStartToCloseTimeout(v string) *RegisterActivityTypeInput {
-	s.DefaultTaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RegisterActivityTypeInput) SetDescription(v string) *RegisterActivityTypeInput {
-	s.Description = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *RegisterActivityTypeInput) SetDomain(v string) *RegisterActivityTypeInput {
-	s.Domain = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RegisterActivityTypeInput) SetName(v string) *RegisterActivityTypeInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *RegisterActivityTypeInput) SetVersion(v string) *RegisterActivityTypeInput {
-	s.Version = &v
-	return s
-}
-
 type RegisterActivityTypeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9457,24 +7411,6 @@ func (s *RegisterDomainInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *RegisterDomainInput) SetDescription(v string) *RegisterDomainInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RegisterDomainInput) SetName(v string) *RegisterDomainInput {
-	s.Name = &v
-	return s
-}
-
-// SetWorkflowExecutionRetentionPeriodInDays sets the WorkflowExecutionRetentionPeriodInDays field's value.
-func (s *RegisterDomainInput) SetWorkflowExecutionRetentionPeriodInDays(v string) *RegisterDomainInput {
-	s.WorkflowExecutionRetentionPeriodInDays = &v
-	return s
 }
 
 type RegisterDomainOutput struct {
@@ -9643,66 +7579,6 @@ func (s *RegisterWorkflowTypeInput) Validate() error {
 	return nil
 }
 
-// SetDefaultChildPolicy sets the DefaultChildPolicy field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultChildPolicy(v ChildPolicy) *RegisterWorkflowTypeInput {
-	s.DefaultChildPolicy = v
-	return s
-}
-
-// SetDefaultExecutionStartToCloseTimeout sets the DefaultExecutionStartToCloseTimeout field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultExecutionStartToCloseTimeout(v string) *RegisterWorkflowTypeInput {
-	s.DefaultExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetDefaultLambdaRole sets the DefaultLambdaRole field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultLambdaRole(v string) *RegisterWorkflowTypeInput {
-	s.DefaultLambdaRole = &v
-	return s
-}
-
-// SetDefaultTaskList sets the DefaultTaskList field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultTaskList(v *TaskList) *RegisterWorkflowTypeInput {
-	s.DefaultTaskList = v
-	return s
-}
-
-// SetDefaultTaskPriority sets the DefaultTaskPriority field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultTaskPriority(v string) *RegisterWorkflowTypeInput {
-	s.DefaultTaskPriority = &v
-	return s
-}
-
-// SetDefaultTaskStartToCloseTimeout sets the DefaultTaskStartToCloseTimeout field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultTaskStartToCloseTimeout(v string) *RegisterWorkflowTypeInput {
-	s.DefaultTaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RegisterWorkflowTypeInput) SetDescription(v string) *RegisterWorkflowTypeInput {
-	s.Description = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *RegisterWorkflowTypeInput) SetDomain(v string) *RegisterWorkflowTypeInput {
-	s.Domain = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RegisterWorkflowTypeInput) SetName(v string) *RegisterWorkflowTypeInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *RegisterWorkflowTypeInput) SetVersion(v string) *RegisterWorkflowTypeInput {
-	s.Version = &v
-	return s
-}
-
 type RegisterWorkflowTypeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9780,12 +7656,6 @@ func (s *RequestCancelActivityTaskDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetActivityId sets the ActivityId field's value.
-func (s *RequestCancelActivityTaskDecisionAttributes) SetActivityId(v string) *RequestCancelActivityTaskDecisionAttributes {
-	s.ActivityId = &v
-	return s
-}
-
 // Provides the details of the RequestCancelActivityTaskFailed event.
 type RequestCancelActivityTaskFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -9823,24 +7693,6 @@ func (s RequestCancelActivityTaskFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s RequestCancelActivityTaskFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetActivityId sets the ActivityId field's value.
-func (s *RequestCancelActivityTaskFailedEventAttributes) SetActivityId(v string) *RequestCancelActivityTaskFailedEventAttributes {
-	s.ActivityId = &v
-	return s
-}
-
-// SetCause sets the Cause field's value.
-func (s *RequestCancelActivityTaskFailedEventAttributes) SetCause(v RequestCancelActivityTaskFailedCause) *RequestCancelActivityTaskFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *RequestCancelActivityTaskFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *RequestCancelActivityTaskFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecution decision.
@@ -9906,24 +7758,6 @@ func (s *RequestCancelExternalWorkflowExecutionDecisionAttributes) Validate() er
 	return nil
 }
 
-// SetControl sets the Control field's value.
-func (s *RequestCancelExternalWorkflowExecutionDecisionAttributes) SetControl(v string) *RequestCancelExternalWorkflowExecutionDecisionAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *RequestCancelExternalWorkflowExecutionDecisionAttributes) SetRunId(v string) *RequestCancelExternalWorkflowExecutionDecisionAttributes {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *RequestCancelExternalWorkflowExecutionDecisionAttributes) SetWorkflowId(v string) *RequestCancelExternalWorkflowExecutionDecisionAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
 // Provides the details of the RequestCancelExternalWorkflowExecutionFailed
 // event.
 type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
@@ -9980,42 +7814,6 @@ func (s RequestCancelExternalWorkflowExecutionFailedEventAttributes) GoString() 
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetCause(v RequestCancelExternalWorkflowExecutionFailedCause) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetControl(v string) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetInitiatedEventId(v int64) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetRunId(v string) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetWorkflowId(v string) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
 // Provides the details of the RequestCancelExternalWorkflowExecutionInitiated
 // event.
 type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
@@ -10050,30 +7848,6 @@ func (s RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) String()
 // GoString returns the string representation
 func (s RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetControl sets the Control field's value.
-func (s *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) SetControl(v string) *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) SetRunId(v string) *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) SetWorkflowId(v string) *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes {
-	s.WorkflowId = &v
-	return s
 }
 
 type RequestCancelWorkflowExecutionInput struct {
@@ -10125,24 +7899,6 @@ func (s *RequestCancelWorkflowExecutionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomain sets the Domain field's value.
-func (s *RequestCancelWorkflowExecutionInput) SetDomain(v string) *RequestCancelWorkflowExecutionInput {
-	s.Domain = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *RequestCancelWorkflowExecutionInput) SetRunId(v string) *RequestCancelWorkflowExecutionInput {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *RequestCancelWorkflowExecutionInput) SetWorkflowId(v string) *RequestCancelWorkflowExecutionInput {
-	s.WorkflowId = &v
-	return s
 }
 
 type RequestCancelWorkflowExecutionOutput struct {
@@ -10207,18 +7963,6 @@ func (s *RespondActivityTaskCanceledInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetails sets the Details field's value.
-func (s *RespondActivityTaskCanceledInput) SetDetails(v string) *RespondActivityTaskCanceledInput {
-	s.Details = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *RespondActivityTaskCanceledInput) SetTaskToken(v string) *RespondActivityTaskCanceledInput {
-	s.TaskToken = &v
-	return s
 }
 
 type RespondActivityTaskCanceledOutput struct {
@@ -10286,18 +8030,6 @@ func (s *RespondActivityTaskCompletedInput) Validate() error {
 	return nil
 }
 
-// SetResult sets the Result field's value.
-func (s *RespondActivityTaskCompletedInput) SetResult(v string) *RespondActivityTaskCompletedInput {
-	s.Result = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *RespondActivityTaskCompletedInput) SetTaskToken(v string) *RespondActivityTaskCompletedInput {
-	s.TaskToken = &v
-	return s
-}
-
 type RespondActivityTaskCompletedOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10363,24 +8095,6 @@ func (s *RespondActivityTaskFailedInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDetails sets the Details field's value.
-func (s *RespondActivityTaskFailedInput) SetDetails(v string) *RespondActivityTaskFailedInput {
-	s.Details = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *RespondActivityTaskFailedInput) SetReason(v string) *RespondActivityTaskFailedInput {
-	s.Reason = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *RespondActivityTaskFailedInput) SetTaskToken(v string) *RespondActivityTaskFailedInput {
-	s.TaskToken = &v
-	return s
 }
 
 type RespondActivityTaskFailedOutput struct {
@@ -10457,24 +8171,6 @@ func (s *RespondDecisionTaskCompletedInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDecisions sets the Decisions field's value.
-func (s *RespondDecisionTaskCompletedInput) SetDecisions(v []Decision) *RespondDecisionTaskCompletedInput {
-	s.Decisions = v
-	return s
-}
-
-// SetExecutionContext sets the ExecutionContext field's value.
-func (s *RespondDecisionTaskCompletedInput) SetExecutionContext(v string) *RespondDecisionTaskCompletedInput {
-	s.ExecutionContext = &v
-	return s
-}
-
-// SetTaskToken sets the TaskToken field's value.
-func (s *RespondDecisionTaskCompletedInput) SetTaskToken(v string) *RespondDecisionTaskCompletedInput {
-	s.TaskToken = &v
-	return s
 }
 
 type RespondDecisionTaskCompletedOutput struct {
@@ -10664,66 +8360,6 @@ func (s *ScheduleActivityTaskDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetActivityId sets the ActivityId field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetActivityId(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.ActivityId = &v
-	return s
-}
-
-// SetActivityType sets the ActivityType field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetActivityType(v *ActivityType) *ScheduleActivityTaskDecisionAttributes {
-	s.ActivityType = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetControl(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetHeartbeatTimeout sets the HeartbeatTimeout field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetHeartbeatTimeout(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.HeartbeatTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetInput(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetScheduleToCloseTimeout sets the ScheduleToCloseTimeout field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetScheduleToCloseTimeout(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.ScheduleToCloseTimeout = &v
-	return s
-}
-
-// SetScheduleToStartTimeout sets the ScheduleToStartTimeout field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetScheduleToStartTimeout(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.ScheduleToStartTimeout = &v
-	return s
-}
-
-// SetStartToCloseTimeout sets the StartToCloseTimeout field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetStartToCloseTimeout(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.StartToCloseTimeout = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetTaskList(v *TaskList) *ScheduleActivityTaskDecisionAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *ScheduleActivityTaskDecisionAttributes) SetTaskPriority(v string) *ScheduleActivityTaskDecisionAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
 // Provides the details of the ScheduleActivityTaskFailed event.
 type ScheduleActivityTaskFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -10766,30 +8402,6 @@ func (s ScheduleActivityTaskFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ScheduleActivityTaskFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetActivityId sets the ActivityId field's value.
-func (s *ScheduleActivityTaskFailedEventAttributes) SetActivityId(v string) *ScheduleActivityTaskFailedEventAttributes {
-	s.ActivityId = &v
-	return s
-}
-
-// SetActivityType sets the ActivityType field's value.
-func (s *ScheduleActivityTaskFailedEventAttributes) SetActivityType(v *ActivityType) *ScheduleActivityTaskFailedEventAttributes {
-	s.ActivityType = v
-	return s
-}
-
-// SetCause sets the Cause field's value.
-func (s *ScheduleActivityTaskFailedEventAttributes) SetCause(v ScheduleActivityTaskFailedCause) *ScheduleActivityTaskFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *ScheduleActivityTaskFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *ScheduleActivityTaskFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
 }
 
 // Decision attributes specified in scheduleLambdaFunctionDecisionAttributes
@@ -10854,36 +8466,6 @@ func (s *ScheduleLambdaFunctionDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetControl sets the Control field's value.
-func (s *ScheduleLambdaFunctionDecisionAttributes) SetControl(v string) *ScheduleLambdaFunctionDecisionAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ScheduleLambdaFunctionDecisionAttributes) SetId(v string) *ScheduleLambdaFunctionDecisionAttributes {
-	s.Id = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *ScheduleLambdaFunctionDecisionAttributes) SetInput(v string) *ScheduleLambdaFunctionDecisionAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ScheduleLambdaFunctionDecisionAttributes) SetName(v string) *ScheduleLambdaFunctionDecisionAttributes {
-	s.Name = &v
-	return s
-}
-
-// SetStartToCloseTimeout sets the StartToCloseTimeout field's value.
-func (s *ScheduleLambdaFunctionDecisionAttributes) SetStartToCloseTimeout(v string) *ScheduleLambdaFunctionDecisionAttributes {
-	s.StartToCloseTimeout = &v
-	return s
-}
-
 // Provides the details of the ScheduleLambdaFunctionFailed event. It isn't
 // set for other event types.
 type ScheduleLambdaFunctionFailedEventAttributes struct {
@@ -10926,30 +8508,6 @@ func (s ScheduleLambdaFunctionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s ScheduleLambdaFunctionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *ScheduleLambdaFunctionFailedEventAttributes) SetCause(v ScheduleLambdaFunctionFailedCause) *ScheduleLambdaFunctionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *ScheduleLambdaFunctionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *ScheduleLambdaFunctionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ScheduleLambdaFunctionFailedEventAttributes) SetId(v string) *ScheduleLambdaFunctionFailedEventAttributes {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ScheduleLambdaFunctionFailedEventAttributes) SetName(v string) *ScheduleLambdaFunctionFailedEventAttributes {
-	s.Name = &v
-	return s
 }
 
 // Provides the details of the SignalExternalWorkflowExecution decision.
@@ -11032,36 +8590,6 @@ func (s *SignalExternalWorkflowExecutionDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetControl sets the Control field's value.
-func (s *SignalExternalWorkflowExecutionDecisionAttributes) SetControl(v string) *SignalExternalWorkflowExecutionDecisionAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *SignalExternalWorkflowExecutionDecisionAttributes) SetInput(v string) *SignalExternalWorkflowExecutionDecisionAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *SignalExternalWorkflowExecutionDecisionAttributes) SetRunId(v string) *SignalExternalWorkflowExecutionDecisionAttributes {
-	s.RunId = &v
-	return s
-}
-
-// SetSignalName sets the SignalName field's value.
-func (s *SignalExternalWorkflowExecutionDecisionAttributes) SetSignalName(v string) *SignalExternalWorkflowExecutionDecisionAttributes {
-	s.SignalName = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *SignalExternalWorkflowExecutionDecisionAttributes) SetWorkflowId(v string) *SignalExternalWorkflowExecutionDecisionAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
 // Provides the details of the SignalExternalWorkflowExecutionFailed event.
 type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -11118,42 +8646,6 @@ func (s SignalExternalWorkflowExecutionFailedEventAttributes) GoString() string 
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetCause(v SignalExternalWorkflowExecutionFailedCause) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetControl(v string) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetInitiatedEventId(v int64) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetRunId(v string) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetWorkflowId(v string) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
 // Provides the details of the SignalExternalWorkflowExecutionInitiated event.
 type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -11195,42 +8687,6 @@ func (s SignalExternalWorkflowExecutionInitiatedEventAttributes) String() string
 // GoString returns the string representation
 func (s SignalExternalWorkflowExecutionInitiatedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetControl sets the Control field's value.
-func (s *SignalExternalWorkflowExecutionInitiatedEventAttributes) SetControl(v string) *SignalExternalWorkflowExecutionInitiatedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *SignalExternalWorkflowExecutionInitiatedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *SignalExternalWorkflowExecutionInitiatedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *SignalExternalWorkflowExecutionInitiatedEventAttributes) SetInput(v string) *SignalExternalWorkflowExecutionInitiatedEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *SignalExternalWorkflowExecutionInitiatedEventAttributes) SetRunId(v string) *SignalExternalWorkflowExecutionInitiatedEventAttributes {
-	s.RunId = &v
-	return s
-}
-
-// SetSignalName sets the SignalName field's value.
-func (s *SignalExternalWorkflowExecutionInitiatedEventAttributes) SetSignalName(v string) *SignalExternalWorkflowExecutionInitiatedEventAttributes {
-	s.SignalName = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *SignalExternalWorkflowExecutionInitiatedEventAttributes) SetWorkflowId(v string) *SignalExternalWorkflowExecutionInitiatedEventAttributes {
-	s.WorkflowId = &v
-	return s
 }
 
 type SignalWorkflowExecutionInput struct {
@@ -11298,36 +8754,6 @@ func (s *SignalWorkflowExecutionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDomain sets the Domain field's value.
-func (s *SignalWorkflowExecutionInput) SetDomain(v string) *SignalWorkflowExecutionInput {
-	s.Domain = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *SignalWorkflowExecutionInput) SetInput(v string) *SignalWorkflowExecutionInput {
-	s.Input = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *SignalWorkflowExecutionInput) SetRunId(v string) *SignalWorkflowExecutionInput {
-	s.RunId = &v
-	return s
-}
-
-// SetSignalName sets the SignalName field's value.
-func (s *SignalWorkflowExecutionInput) SetSignalName(v string) *SignalWorkflowExecutionInput {
-	s.SignalName = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *SignalWorkflowExecutionInput) SetWorkflowId(v string) *SignalWorkflowExecutionInput {
-	s.WorkflowId = &v
-	return s
 }
 
 type SignalWorkflowExecutionOutput struct {
@@ -11530,72 +8956,6 @@ func (s *StartChildWorkflowExecutionDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetChildPolicy(v ChildPolicy) *StartChildWorkflowExecutionDecisionAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetControl(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetExecutionStartToCloseTimeout(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetInput(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetLambdaRole(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetTagList(v []string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.TagList = v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetTaskList(v *TaskList) *StartChildWorkflowExecutionDecisionAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetTaskPriority(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetTaskStartToCloseTimeout(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.TaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetWorkflowId(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetWorkflowType(v *WorkflowType) *StartChildWorkflowExecutionDecisionAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Provides the details of the StartChildWorkflowExecutionFailed event.
 type StartChildWorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -11654,42 +9014,6 @@ func (s StartChildWorkflowExecutionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s StartChildWorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetCause(v StartChildWorkflowExecutionFailedCause) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetControl(v string) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetInitiatedEventId sets the InitiatedEventId field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetInitiatedEventId(v int64) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.InitiatedEventId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetWorkflowId(v string) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetWorkflowType(v *WorkflowType) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.WorkflowType = v
-	return s
 }
 
 // Provides the details of the StartChildWorkflowExecutionInitiated event.
@@ -11784,78 +9108,6 @@ func (s StartChildWorkflowExecutionInitiatedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetChildPolicy(v ChildPolicy) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetControl sets the Control field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetControl(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetExecutionStartToCloseTimeout(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetInput(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetLambdaRole(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetTagList(v []string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.TagList = v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetTaskList(v *TaskList) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetTaskPriority(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetTaskStartToCloseTimeout(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.TaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetWorkflowId(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.WorkflowId = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetWorkflowType(v *WorkflowType) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Provides the details of the StartLambdaFunctionFailed event. It isn't set
 // for other event types.
 type StartLambdaFunctionFailedEventAttributes struct {
@@ -11887,24 +9139,6 @@ func (s StartLambdaFunctionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s StartLambdaFunctionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *StartLambdaFunctionFailedEventAttributes) SetCause(v StartLambdaFunctionFailedCause) *StartLambdaFunctionFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *StartLambdaFunctionFailedEventAttributes) SetMessage(v string) *StartLambdaFunctionFailedEventAttributes {
-	s.Message = &v
-	return s
-}
-
-// SetScheduledEventId sets the ScheduledEventId field's value.
-func (s *StartLambdaFunctionFailedEventAttributes) SetScheduledEventId(v int64) *StartLambdaFunctionFailedEventAttributes {
-	s.ScheduledEventId = &v
-	return s
 }
 
 // Provides the details of the StartTimer decision.
@@ -11986,24 +9220,6 @@ func (s *StartTimerDecisionAttributes) Validate() error {
 	return nil
 }
 
-// SetControl sets the Control field's value.
-func (s *StartTimerDecisionAttributes) SetControl(v string) *StartTimerDecisionAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetStartToFireTimeout sets the StartToFireTimeout field's value.
-func (s *StartTimerDecisionAttributes) SetStartToFireTimeout(v string) *StartTimerDecisionAttributes {
-	s.StartToFireTimeout = &v
-	return s
-}
-
-// SetTimerId sets the TimerId field's value.
-func (s *StartTimerDecisionAttributes) SetTimerId(v string) *StartTimerDecisionAttributes {
-	s.TimerId = &v
-	return s
-}
-
 // Provides the details of the StartTimerFailed event.
 type StartTimerFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12041,24 +9257,6 @@ func (s StartTimerFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s StartTimerFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetCause sets the Cause field's value.
-func (s *StartTimerFailedEventAttributes) SetCause(v StartTimerFailedCause) *StartTimerFailedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *StartTimerFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *StartTimerFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetTimerId sets the TimerId field's value.
-func (s *StartTimerFailedEventAttributes) SetTimerId(v string) *StartTimerFailedEventAttributes {
-	s.TimerId = &v
-	return s
 }
 
 type StartWorkflowExecutionInput struct {
@@ -12235,72 +9433,6 @@ func (s *StartWorkflowExecutionInput) Validate() error {
 	return nil
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *StartWorkflowExecutionInput) SetChildPolicy(v ChildPolicy) *StartWorkflowExecutionInput {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *StartWorkflowExecutionInput) SetDomain(v string) *StartWorkflowExecutionInput {
-	s.Domain = &v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *StartWorkflowExecutionInput) SetExecutionStartToCloseTimeout(v string) *StartWorkflowExecutionInput {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *StartWorkflowExecutionInput) SetInput(v string) *StartWorkflowExecutionInput {
-	s.Input = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *StartWorkflowExecutionInput) SetLambdaRole(v string) *StartWorkflowExecutionInput {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *StartWorkflowExecutionInput) SetTagList(v []string) *StartWorkflowExecutionInput {
-	s.TagList = v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *StartWorkflowExecutionInput) SetTaskList(v *TaskList) *StartWorkflowExecutionInput {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *StartWorkflowExecutionInput) SetTaskPriority(v string) *StartWorkflowExecutionInput {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *StartWorkflowExecutionInput) SetTaskStartToCloseTimeout(v string) *StartWorkflowExecutionInput {
-	s.TaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *StartWorkflowExecutionInput) SetWorkflowId(v string) *StartWorkflowExecutionInput {
-	s.WorkflowId = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *StartWorkflowExecutionInput) SetWorkflowType(v *WorkflowType) *StartWorkflowExecutionInput {
-	s.WorkflowType = v
-	return s
-}
-
 // Specifies the runId of a workflow execution.
 type StartWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -12325,12 +9457,6 @@ func (s StartWorkflowExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartWorkflowExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRunId sets the RunId field's value.
-func (s *StartWorkflowExecutionOutput) SetRunId(v string) *StartWorkflowExecutionOutput {
-	s.RunId = &v
-	return s
 }
 
 // Used to filter the workflow executions in visibility APIs based on a tag.
@@ -12368,12 +9494,6 @@ func (s *TagFilter) Validate() error {
 	return nil
 }
 
-// SetTag sets the Tag field's value.
-func (s *TagFilter) SetTag(v string) *TagFilter {
-	s.Tag = &v
-	return s
-}
-
 // Represents a task list.
 type TaskList struct {
 	_ struct{} `type:"structure"`
@@ -12409,12 +9529,6 @@ func (s *TaskList) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *TaskList) SetName(v string) *TaskList {
-	s.Name = &v
-	return s
 }
 
 type TerminateWorkflowExecutionInput struct {
@@ -12496,42 +9610,6 @@ func (s *TerminateWorkflowExecutionInput) Validate() error {
 	return nil
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *TerminateWorkflowExecutionInput) SetChildPolicy(v ChildPolicy) *TerminateWorkflowExecutionInput {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *TerminateWorkflowExecutionInput) SetDetails(v string) *TerminateWorkflowExecutionInput {
-	s.Details = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *TerminateWorkflowExecutionInput) SetDomain(v string) *TerminateWorkflowExecutionInput {
-	s.Domain = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *TerminateWorkflowExecutionInput) SetReason(v string) *TerminateWorkflowExecutionInput {
-	s.Reason = &v
-	return s
-}
-
-// SetRunId sets the RunId field's value.
-func (s *TerminateWorkflowExecutionInput) SetRunId(v string) *TerminateWorkflowExecutionInput {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *TerminateWorkflowExecutionInput) SetWorkflowId(v string) *TerminateWorkflowExecutionInput {
-	s.WorkflowId = &v
-	return s
-}
-
 type TerminateWorkflowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12588,24 +9666,6 @@ func (s TimerCanceledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *TimerCanceledEventAttributes) SetDecisionTaskCompletedEventId(v int64) *TimerCanceledEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *TimerCanceledEventAttributes) SetStartedEventId(v int64) *TimerCanceledEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTimerId sets the TimerId field's value.
-func (s *TimerCanceledEventAttributes) SetTimerId(v string) *TimerCanceledEventAttributes {
-	s.TimerId = &v
-	return s
-}
-
 // Provides the details of the TimerFired event.
 type TimerFiredEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12631,18 +9691,6 @@ func (s TimerFiredEventAttributes) String() string {
 // GoString returns the string representation
 func (s TimerFiredEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetStartedEventId sets the StartedEventId field's value.
-func (s *TimerFiredEventAttributes) SetStartedEventId(v int64) *TimerFiredEventAttributes {
-	s.StartedEventId = &v
-	return s
-}
-
-// SetTimerId sets the TimerId field's value.
-func (s *TimerFiredEventAttributes) SetTimerId(v string) *TimerFiredEventAttributes {
-	s.TimerId = &v
-	return s
 }
 
 // Provides the details of the TimerStarted event.
@@ -12683,30 +9731,6 @@ func (s TimerStartedEventAttributes) String() string {
 // GoString returns the string representation
 func (s TimerStartedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetControl sets the Control field's value.
-func (s *TimerStartedEventAttributes) SetControl(v string) *TimerStartedEventAttributes {
-	s.Control = &v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *TimerStartedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *TimerStartedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetStartToFireTimeout sets the StartToFireTimeout field's value.
-func (s *TimerStartedEventAttributes) SetStartToFireTimeout(v string) *TimerStartedEventAttributes {
-	s.StartToFireTimeout = &v
-	return s
-}
-
-// SetTimerId sets the TimerId field's value.
-func (s *TimerStartedEventAttributes) SetTimerId(v string) *TimerStartedEventAttributes {
-	s.TimerId = &v
-	return s
 }
 
 // Represents a workflow execution.
@@ -12758,18 +9782,6 @@ func (s *WorkflowExecution) Validate() error {
 	return nil
 }
 
-// SetRunId sets the RunId field's value.
-func (s *WorkflowExecution) SetRunId(v string) *WorkflowExecution {
-	s.RunId = &v
-	return s
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *WorkflowExecution) SetWorkflowId(v string) *WorkflowExecution {
-	s.WorkflowId = &v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionCancelRequested event.
 type WorkflowExecutionCancelRequestedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12800,24 +9812,6 @@ func (s WorkflowExecutionCancelRequestedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *WorkflowExecutionCancelRequestedEventAttributes) SetCause(v WorkflowExecutionCancelRequestedCause) *WorkflowExecutionCancelRequestedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetExternalInitiatedEventId sets the ExternalInitiatedEventId field's value.
-func (s *WorkflowExecutionCancelRequestedEventAttributes) SetExternalInitiatedEventId(v int64) *WorkflowExecutionCancelRequestedEventAttributes {
-	s.ExternalInitiatedEventId = &v
-	return s
-}
-
-// SetExternalWorkflowExecution sets the ExternalWorkflowExecution field's value.
-func (s *WorkflowExecutionCancelRequestedEventAttributes) SetExternalWorkflowExecution(v *WorkflowExecution) *WorkflowExecutionCancelRequestedEventAttributes {
-	s.ExternalWorkflowExecution = v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionCanceled event.
 type WorkflowExecutionCanceledEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12844,18 +9838,6 @@ func (s WorkflowExecutionCanceledEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *WorkflowExecutionCanceledEventAttributes) SetDecisionTaskCompletedEventId(v int64) *WorkflowExecutionCanceledEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *WorkflowExecutionCanceledEventAttributes) SetDetails(v string) *WorkflowExecutionCanceledEventAttributes {
-	s.Details = &v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionCompleted event.
 type WorkflowExecutionCompletedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -12880,18 +9862,6 @@ func (s WorkflowExecutionCompletedEventAttributes) String() string {
 // GoString returns the string representation
 func (s WorkflowExecutionCompletedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *WorkflowExecutionCompletedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *WorkflowExecutionCompletedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *WorkflowExecutionCompletedEventAttributes) SetResult(v string) *WorkflowExecutionCompletedEventAttributes {
-	s.Result = &v
-	return s
 }
 
 // The configuration settings for a workflow execution including timeout values,
@@ -12961,42 +9931,6 @@ func (s WorkflowExecutionConfiguration) String() string {
 // GoString returns the string representation
 func (s WorkflowExecutionConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionConfiguration) SetChildPolicy(v ChildPolicy) *WorkflowExecutionConfiguration {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *WorkflowExecutionConfiguration) SetExecutionStartToCloseTimeout(v string) *WorkflowExecutionConfiguration {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *WorkflowExecutionConfiguration) SetLambdaRole(v string) *WorkflowExecutionConfiguration {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *WorkflowExecutionConfiguration) SetTaskList(v *TaskList) *WorkflowExecutionConfiguration {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *WorkflowExecutionConfiguration) SetTaskPriority(v string) *WorkflowExecutionConfiguration {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *WorkflowExecutionConfiguration) SetTaskStartToCloseTimeout(v string) *WorkflowExecutionConfiguration {
-	s.TaskStartToCloseTimeout = &v
-	return s
 }
 
 // Provides the details of the WorkflowExecutionContinuedAsNew event.
@@ -13080,72 +10014,6 @@ func (s WorkflowExecutionContinuedAsNewEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetDecisionTaskCompletedEventId(v int64) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetExecutionStartToCloseTimeout(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetInput(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetLambdaRole(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetNewExecutionRunId sets the NewExecutionRunId field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetNewExecutionRunId(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.NewExecutionRunId = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetTagList(v []string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.TagList = v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetTaskList(v *TaskList) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetTaskPriority(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetTaskStartToCloseTimeout(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.TaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetWorkflowType(v *WorkflowType) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionFailed event.
 type WorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -13173,24 +10041,6 @@ func (s WorkflowExecutionFailedEventAttributes) String() string {
 // GoString returns the string representation
 func (s WorkflowExecutionFailedEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetDecisionTaskCompletedEventId sets the DecisionTaskCompletedEventId field's value.
-func (s *WorkflowExecutionFailedEventAttributes) SetDecisionTaskCompletedEventId(v int64) *WorkflowExecutionFailedEventAttributes {
-	s.DecisionTaskCompletedEventId = &v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *WorkflowExecutionFailedEventAttributes) SetDetails(v string) *WorkflowExecutionFailedEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *WorkflowExecutionFailedEventAttributes) SetReason(v string) *WorkflowExecutionFailedEventAttributes {
-	s.Reason = &v
-	return s
 }
 
 // Used to filter the workflow executions in visibility APIs by their workflowId.
@@ -13228,12 +10078,6 @@ func (s *WorkflowExecutionFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetWorkflowId sets the WorkflowId field's value.
-func (s *WorkflowExecutionFilter) SetWorkflowId(v string) *WorkflowExecutionFilter {
-	s.WorkflowId = &v
-	return s
 }
 
 // Contains information about a workflow execution.
@@ -13307,60 +10151,6 @@ func (s WorkflowExecutionInfo) GoString() string {
 	return s.String()
 }
 
-// SetCancelRequested sets the CancelRequested field's value.
-func (s *WorkflowExecutionInfo) SetCancelRequested(v bool) *WorkflowExecutionInfo {
-	s.CancelRequested = &v
-	return s
-}
-
-// SetCloseStatus sets the CloseStatus field's value.
-func (s *WorkflowExecutionInfo) SetCloseStatus(v CloseStatus) *WorkflowExecutionInfo {
-	s.CloseStatus = v
-	return s
-}
-
-// SetCloseTimestamp sets the CloseTimestamp field's value.
-func (s *WorkflowExecutionInfo) SetCloseTimestamp(v time.Time) *WorkflowExecutionInfo {
-	s.CloseTimestamp = &v
-	return s
-}
-
-// SetExecution sets the Execution field's value.
-func (s *WorkflowExecutionInfo) SetExecution(v *WorkflowExecution) *WorkflowExecutionInfo {
-	s.Execution = v
-	return s
-}
-
-// SetExecutionStatus sets the ExecutionStatus field's value.
-func (s *WorkflowExecutionInfo) SetExecutionStatus(v ExecutionStatus) *WorkflowExecutionInfo {
-	s.ExecutionStatus = v
-	return s
-}
-
-// SetParent sets the Parent field's value.
-func (s *WorkflowExecutionInfo) SetParent(v *WorkflowExecution) *WorkflowExecutionInfo {
-	s.Parent = v
-	return s
-}
-
-// SetStartTimestamp sets the StartTimestamp field's value.
-func (s *WorkflowExecutionInfo) SetStartTimestamp(v time.Time) *WorkflowExecutionInfo {
-	s.StartTimestamp = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *WorkflowExecutionInfo) SetTagList(v []string) *WorkflowExecutionInfo {
-	s.TagList = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *WorkflowExecutionInfo) SetWorkflowType(v *WorkflowType) *WorkflowExecutionInfo {
-	s.WorkflowType = v
-	return s
-}
-
 // Contains the counts of open tasks, child workflow executions and timers for
 // a workflow execution.
 type WorkflowExecutionOpenCounts struct {
@@ -13402,36 +10192,6 @@ func (s WorkflowExecutionOpenCounts) GoString() string {
 	return s.String()
 }
 
-// SetOpenActivityTasks sets the OpenActivityTasks field's value.
-func (s *WorkflowExecutionOpenCounts) SetOpenActivityTasks(v int64) *WorkflowExecutionOpenCounts {
-	s.OpenActivityTasks = &v
-	return s
-}
-
-// SetOpenChildWorkflowExecutions sets the OpenChildWorkflowExecutions field's value.
-func (s *WorkflowExecutionOpenCounts) SetOpenChildWorkflowExecutions(v int64) *WorkflowExecutionOpenCounts {
-	s.OpenChildWorkflowExecutions = &v
-	return s
-}
-
-// SetOpenDecisionTasks sets the OpenDecisionTasks field's value.
-func (s *WorkflowExecutionOpenCounts) SetOpenDecisionTasks(v int64) *WorkflowExecutionOpenCounts {
-	s.OpenDecisionTasks = &v
-	return s
-}
-
-// SetOpenLambdaFunctions sets the OpenLambdaFunctions field's value.
-func (s *WorkflowExecutionOpenCounts) SetOpenLambdaFunctions(v int64) *WorkflowExecutionOpenCounts {
-	s.OpenLambdaFunctions = &v
-	return s
-}
-
-// SetOpenTimers sets the OpenTimers field's value.
-func (s *WorkflowExecutionOpenCounts) SetOpenTimers(v int64) *WorkflowExecutionOpenCounts {
-	s.OpenTimers = &v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionSignaled event.
 type WorkflowExecutionSignaledEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -13467,30 +10227,6 @@ func (s WorkflowExecutionSignaledEventAttributes) String() string {
 // GoString returns the string representation
 func (s WorkflowExecutionSignaledEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetExternalInitiatedEventId sets the ExternalInitiatedEventId field's value.
-func (s *WorkflowExecutionSignaledEventAttributes) SetExternalInitiatedEventId(v int64) *WorkflowExecutionSignaledEventAttributes {
-	s.ExternalInitiatedEventId = &v
-	return s
-}
-
-// SetExternalWorkflowExecution sets the ExternalWorkflowExecution field's value.
-func (s *WorkflowExecutionSignaledEventAttributes) SetExternalWorkflowExecution(v *WorkflowExecution) *WorkflowExecutionSignaledEventAttributes {
-	s.ExternalWorkflowExecution = v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *WorkflowExecutionSignaledEventAttributes) SetInput(v string) *WorkflowExecutionSignaledEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetSignalName sets the SignalName field's value.
-func (s *WorkflowExecutionSignaledEventAttributes) SetSignalName(v string) *WorkflowExecutionSignaledEventAttributes {
-	s.SignalName = &v
-	return s
 }
 
 // Provides details of WorkflowExecutionStarted event.
@@ -13578,78 +10314,6 @@ func (s WorkflowExecutionStartedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionStartedEventAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetContinuedExecutionRunId sets the ContinuedExecutionRunId field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetContinuedExecutionRunId(v string) *WorkflowExecutionStartedEventAttributes {
-	s.ContinuedExecutionRunId = &v
-	return s
-}
-
-// SetExecutionStartToCloseTimeout sets the ExecutionStartToCloseTimeout field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetExecutionStartToCloseTimeout(v string) *WorkflowExecutionStartedEventAttributes {
-	s.ExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetInput sets the Input field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetInput(v string) *WorkflowExecutionStartedEventAttributes {
-	s.Input = &v
-	return s
-}
-
-// SetLambdaRole sets the LambdaRole field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetLambdaRole(v string) *WorkflowExecutionStartedEventAttributes {
-	s.LambdaRole = &v
-	return s
-}
-
-// SetParentInitiatedEventId sets the ParentInitiatedEventId field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetParentInitiatedEventId(v int64) *WorkflowExecutionStartedEventAttributes {
-	s.ParentInitiatedEventId = &v
-	return s
-}
-
-// SetParentWorkflowExecution sets the ParentWorkflowExecution field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetParentWorkflowExecution(v *WorkflowExecution) *WorkflowExecutionStartedEventAttributes {
-	s.ParentWorkflowExecution = v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetTagList(v []string) *WorkflowExecutionStartedEventAttributes {
-	s.TagList = v
-	return s
-}
-
-// SetTaskList sets the TaskList field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetTaskList(v *TaskList) *WorkflowExecutionStartedEventAttributes {
-	s.TaskList = v
-	return s
-}
-
-// SetTaskPriority sets the TaskPriority field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetTaskPriority(v string) *WorkflowExecutionStartedEventAttributes {
-	s.TaskPriority = &v
-	return s
-}
-
-// SetTaskStartToCloseTimeout sets the TaskStartToCloseTimeout field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetTaskStartToCloseTimeout(v string) *WorkflowExecutionStartedEventAttributes {
-	s.TaskStartToCloseTimeout = &v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetWorkflowType(v *WorkflowType) *WorkflowExecutionStartedEventAttributes {
-	s.WorkflowType = v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionTerminated event.
 type WorkflowExecutionTerminatedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -13692,30 +10356,6 @@ func (s WorkflowExecutionTerminatedEventAttributes) GoString() string {
 	return s.String()
 }
 
-// SetCause sets the Cause field's value.
-func (s *WorkflowExecutionTerminatedEventAttributes) SetCause(v WorkflowExecutionTerminatedCause) *WorkflowExecutionTerminatedEventAttributes {
-	s.Cause = v
-	return s
-}
-
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionTerminatedEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionTerminatedEventAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *WorkflowExecutionTerminatedEventAttributes) SetDetails(v string) *WorkflowExecutionTerminatedEventAttributes {
-	s.Details = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *WorkflowExecutionTerminatedEventAttributes) SetReason(v string) *WorkflowExecutionTerminatedEventAttributes {
-	s.Reason = &v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionTimedOut event.
 type WorkflowExecutionTimedOutEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -13750,18 +10390,6 @@ func (s WorkflowExecutionTimedOutEventAttributes) String() string {
 // GoString returns the string representation
 func (s WorkflowExecutionTimedOutEventAttributes) GoString() string {
 	return s.String()
-}
-
-// SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionTimedOutEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionTimedOutEventAttributes {
-	s.ChildPolicy = v
-	return s
-}
-
-// SetTimeoutType sets the TimeoutType field's value.
-func (s *WorkflowExecutionTimedOutEventAttributes) SetTimeoutType(v WorkflowExecutionTimeoutType) *WorkflowExecutionTimedOutEventAttributes {
-	s.TimeoutType = v
-	return s
 }
 
 // Represents a workflow type.
@@ -13817,18 +10445,6 @@ func (s *WorkflowType) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *WorkflowType) SetName(v string) *WorkflowType {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *WorkflowType) SetVersion(v string) *WorkflowType {
-	s.Version = &v
-	return s
 }
 
 // The configuration settings of a workflow type.
@@ -13913,42 +10529,6 @@ func (s WorkflowTypeConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetDefaultChildPolicy sets the DefaultChildPolicy field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultChildPolicy(v ChildPolicy) *WorkflowTypeConfiguration {
-	s.DefaultChildPolicy = v
-	return s
-}
-
-// SetDefaultExecutionStartToCloseTimeout sets the DefaultExecutionStartToCloseTimeout field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultExecutionStartToCloseTimeout(v string) *WorkflowTypeConfiguration {
-	s.DefaultExecutionStartToCloseTimeout = &v
-	return s
-}
-
-// SetDefaultLambdaRole sets the DefaultLambdaRole field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultLambdaRole(v string) *WorkflowTypeConfiguration {
-	s.DefaultLambdaRole = &v
-	return s
-}
-
-// SetDefaultTaskList sets the DefaultTaskList field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultTaskList(v *TaskList) *WorkflowTypeConfiguration {
-	s.DefaultTaskList = v
-	return s
-}
-
-// SetDefaultTaskPriority sets the DefaultTaskPriority field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultTaskPriority(v string) *WorkflowTypeConfiguration {
-	s.DefaultTaskPriority = &v
-	return s
-}
-
-// SetDefaultTaskStartToCloseTimeout sets the DefaultTaskStartToCloseTimeout field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultTaskStartToCloseTimeout(v string) *WorkflowTypeConfiguration {
-	s.DefaultTaskStartToCloseTimeout = &v
-	return s
-}
-
 // Used to filter workflow execution query results by type. Each parameter,
 // if specified, defines a rule that must be satisfied by each returned result.
 type WorkflowTypeFilter struct {
@@ -13990,18 +10570,6 @@ func (s *WorkflowTypeFilter) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *WorkflowTypeFilter) SetName(v string) *WorkflowTypeFilter {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *WorkflowTypeFilter) SetVersion(v string) *WorkflowTypeFilter {
-	s.Version = &v
-	return s
-}
-
 // Contains information about a workflow type.
 type WorkflowTypeInfo struct {
 	_ struct{} `type:"structure"`
@@ -14037,36 +10605,6 @@ func (s WorkflowTypeInfo) String() string {
 // GoString returns the string representation
 func (s WorkflowTypeInfo) GoString() string {
 	return s.String()
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *WorkflowTypeInfo) SetCreationDate(v time.Time) *WorkflowTypeInfo {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDeprecationDate sets the DeprecationDate field's value.
-func (s *WorkflowTypeInfo) SetDeprecationDate(v time.Time) *WorkflowTypeInfo {
-	s.DeprecationDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *WorkflowTypeInfo) SetDescription(v string) *WorkflowTypeInfo {
-	s.Description = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *WorkflowTypeInfo) SetStatus(v RegistrationStatus) *WorkflowTypeInfo {
-	s.Status = v
-	return s
-}
-
-// SetWorkflowType sets the WorkflowType field's value.
-func (s *WorkflowTypeInfo) SetWorkflowType(v *WorkflowType) *WorkflowTypeInfo {
-	s.WorkflowType = v
-	return s
 }
 
 type ActivityTaskTimeoutType string

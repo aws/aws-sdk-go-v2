@@ -4212,12 +4212,6 @@ func (s AbortIncompleteMultipartUpload) GoString() string {
 	return s.String()
 }
 
-// SetDaysAfterInitiation sets the DaysAfterInitiation field's value.
-func (s *AbortIncompleteMultipartUpload) SetDaysAfterInitiation(v int64) *AbortIncompleteMultipartUpload {
-	s.DaysAfterInitiation = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadRequest
 type AbortMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
@@ -4273,35 +4267,11 @@ func (s *AbortMultipartUploadInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *AbortMultipartUploadInput) SetBucket(v string) *AbortMultipartUploadInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *AbortMultipartUploadInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *AbortMultipartUploadInput) SetKey(v string) *AbortMultipartUploadInput {
-	s.Key = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *AbortMultipartUploadInput) SetRequestPayer(v RequestPayer) *AbortMultipartUploadInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *AbortMultipartUploadInput) SetUploadId(v string) *AbortMultipartUploadInput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadOutput
@@ -4330,12 +4300,6 @@ func (s AbortMultipartUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *AbortMultipartUploadOutput) SetRequestCharged(v RequestCharged) *AbortMultipartUploadOutput {
-	s.RequestCharged = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccelerateConfiguration
 type AccelerateConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -4352,12 +4316,6 @@ func (s AccelerateConfiguration) String() string {
 // GoString returns the string representation
 func (s AccelerateConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetStatus sets the Status field's value.
-func (s *AccelerateConfiguration) SetStatus(v BucketAccelerateStatus) *AccelerateConfiguration {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlPolicy
@@ -4397,18 +4355,6 @@ func (s *AccessControlPolicy) Validate() error {
 	return nil
 }
 
-// SetGrants sets the Grants field's value.
-func (s *AccessControlPolicy) SetGrants(v []Grant) *AccessControlPolicy {
-	s.Grants = v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *AccessControlPolicy) SetOwner(v *Owner) *AccessControlPolicy {
-	s.Owner = v
-	return s
-}
-
 // Container for information regarding the access control for replicas.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlTranslation
 type AccessControlTranslation struct {
@@ -4441,12 +4387,6 @@ func (s *AccessControlTranslation) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOwner sets the Owner field's value.
-func (s *AccessControlTranslation) SetOwner(v OwnerOverride) *AccessControlTranslation {
-	s.Owner = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsAndOperator
@@ -4485,18 +4425,6 @@ func (s *AnalyticsAndOperator) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *AnalyticsAndOperator) SetPrefix(v string) *AnalyticsAndOperator {
-	s.Prefix = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AnalyticsAndOperator) SetTags(v []Tag) *AnalyticsAndOperator {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsConfiguration
@@ -4558,24 +4486,6 @@ func (s *AnalyticsConfiguration) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *AnalyticsConfiguration) SetFilter(v *AnalyticsFilter) *AnalyticsConfiguration {
-	s.Filter = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *AnalyticsConfiguration) SetId(v string) *AnalyticsConfiguration {
-	s.Id = &v
-	return s
-}
-
-// SetStorageClassAnalysis sets the StorageClassAnalysis field's value.
-func (s *AnalyticsConfiguration) SetStorageClassAnalysis(v *StorageClassAnalysis) *AnalyticsConfiguration {
-	s.StorageClassAnalysis = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsExportDestination
 type AnalyticsExportDestination struct {
 	_ struct{} `type:"structure"`
@@ -4613,12 +4523,6 @@ func (s *AnalyticsExportDestination) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetS3BucketDestination sets the S3BucketDestination field's value.
-func (s *AnalyticsExportDestination) SetS3BucketDestination(v *AnalyticsS3BucketDestination) *AnalyticsExportDestination {
-	s.S3BucketDestination = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsFilter
@@ -4664,24 +4568,6 @@ func (s *AnalyticsFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAnd sets the And field's value.
-func (s *AnalyticsFilter) SetAnd(v *AnalyticsAndOperator) *AnalyticsFilter {
-	s.And = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *AnalyticsFilter) SetPrefix(v string) *AnalyticsFilter {
-	s.Prefix = &v
-	return s
-}
-
-// SetTag sets the Tag field's value.
-func (s *AnalyticsFilter) SetTag(v *Tag) *AnalyticsFilter {
-	s.Tag = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsS3BucketDestination
@@ -4734,35 +4620,11 @@ func (s *AnalyticsS3BucketDestination) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *AnalyticsS3BucketDestination) SetBucket(v string) *AnalyticsS3BucketDestination {
-	s.Bucket = &v
-	return s
-}
-
 func (s *AnalyticsS3BucketDestination) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetBucketAccountId sets the BucketAccountId field's value.
-func (s *AnalyticsS3BucketDestination) SetBucketAccountId(v string) *AnalyticsS3BucketDestination {
-	s.BucketAccountId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *AnalyticsS3BucketDestination) SetFormat(v AnalyticsS3ExportFileFormat) *AnalyticsS3BucketDestination {
-	s.Format = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *AnalyticsS3BucketDestination) SetPrefix(v string) *AnalyticsS3BucketDestination {
-	s.Prefix = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Bucket
@@ -4784,18 +4646,6 @@ func (s Bucket) String() string {
 // GoString returns the string representation
 func (s Bucket) GoString() string {
 	return s.String()
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *Bucket) SetCreationDate(v time.Time) *Bucket {
-	s.CreationDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Bucket) SetName(v string) *Bucket {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLifecycleConfiguration
@@ -4837,12 +4687,6 @@ func (s *BucketLifecycleConfiguration) Validate() error {
 	return nil
 }
 
-// SetRules sets the Rules field's value.
-func (s *BucketLifecycleConfiguration) SetRules(v []LifecycleRule) *BucketLifecycleConfiguration {
-	s.Rules = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLoggingStatus
 type BucketLoggingStatus struct {
 	_ struct{} `type:"structure"`
@@ -4873,12 +4717,6 @@ func (s *BucketLoggingStatus) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLoggingEnabled sets the LoggingEnabled field's value.
-func (s *BucketLoggingStatus) SetLoggingEnabled(v *LoggingEnabled) *BucketLoggingStatus {
-	s.LoggingEnabled = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSConfiguration
@@ -4918,12 +4756,6 @@ func (s *CORSConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCORSRules sets the CORSRules field's value.
-func (s *CORSConfiguration) SetCORSRules(v []CORSRule) *CORSConfiguration {
-	s.CORSRules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSRule
@@ -4982,36 +4814,6 @@ func (s *CORSRule) Validate() error {
 	return nil
 }
 
-// SetAllowedHeaders sets the AllowedHeaders field's value.
-func (s *CORSRule) SetAllowedHeaders(v []string) *CORSRule {
-	s.AllowedHeaders = v
-	return s
-}
-
-// SetAllowedMethods sets the AllowedMethods field's value.
-func (s *CORSRule) SetAllowedMethods(v []string) *CORSRule {
-	s.AllowedMethods = v
-	return s
-}
-
-// SetAllowedOrigins sets the AllowedOrigins field's value.
-func (s *CORSRule) SetAllowedOrigins(v []string) *CORSRule {
-	s.AllowedOrigins = v
-	return s
-}
-
-// SetExposeHeaders sets the ExposeHeaders field's value.
-func (s *CORSRule) SetExposeHeaders(v []string) *CORSRule {
-	s.ExposeHeaders = v
-	return s
-}
-
-// SetMaxAgeSeconds sets the MaxAgeSeconds field's value.
-func (s *CORSRule) SetMaxAgeSeconds(v int64) *CORSRule {
-	s.MaxAgeSeconds = &v
-	return s
-}
-
 // Describes how a CSV-formatted input object is formatted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVInput
 type CSVInput struct {
@@ -5048,42 +4850,6 @@ func (s CSVInput) GoString() string {
 	return s.String()
 }
 
-// SetComments sets the Comments field's value.
-func (s *CSVInput) SetComments(v string) *CSVInput {
-	s.Comments = &v
-	return s
-}
-
-// SetFieldDelimiter sets the FieldDelimiter field's value.
-func (s *CSVInput) SetFieldDelimiter(v string) *CSVInput {
-	s.FieldDelimiter = &v
-	return s
-}
-
-// SetFileHeaderInfo sets the FileHeaderInfo field's value.
-func (s *CSVInput) SetFileHeaderInfo(v FileHeaderInfo) *CSVInput {
-	s.FileHeaderInfo = v
-	return s
-}
-
-// SetQuoteCharacter sets the QuoteCharacter field's value.
-func (s *CSVInput) SetQuoteCharacter(v string) *CSVInput {
-	s.QuoteCharacter = &v
-	return s
-}
-
-// SetQuoteEscapeCharacter sets the QuoteEscapeCharacter field's value.
-func (s *CSVInput) SetQuoteEscapeCharacter(v string) *CSVInput {
-	s.QuoteEscapeCharacter = &v
-	return s
-}
-
-// SetRecordDelimiter sets the RecordDelimiter field's value.
-func (s *CSVInput) SetRecordDelimiter(v string) *CSVInput {
-	s.RecordDelimiter = &v
-	return s
-}
-
 // Describes how CSV-formatted results are formatted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVOutput
 type CSVOutput struct {
@@ -5116,36 +4882,6 @@ func (s CSVOutput) GoString() string {
 	return s.String()
 }
 
-// SetFieldDelimiter sets the FieldDelimiter field's value.
-func (s *CSVOutput) SetFieldDelimiter(v string) *CSVOutput {
-	s.FieldDelimiter = &v
-	return s
-}
-
-// SetQuoteCharacter sets the QuoteCharacter field's value.
-func (s *CSVOutput) SetQuoteCharacter(v string) *CSVOutput {
-	s.QuoteCharacter = &v
-	return s
-}
-
-// SetQuoteEscapeCharacter sets the QuoteEscapeCharacter field's value.
-func (s *CSVOutput) SetQuoteEscapeCharacter(v string) *CSVOutput {
-	s.QuoteEscapeCharacter = &v
-	return s
-}
-
-// SetQuoteFields sets the QuoteFields field's value.
-func (s *CSVOutput) SetQuoteFields(v QuoteFields) *CSVOutput {
-	s.QuoteFields = v
-	return s
-}
-
-// SetRecordDelimiter sets the RecordDelimiter field's value.
-func (s *CSVOutput) SetRecordDelimiter(v string) *CSVOutput {
-	s.RecordDelimiter = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CloudFunctionConfiguration
 type CloudFunctionConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -5174,36 +4910,6 @@ func (s CloudFunctionConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetCloudFunction sets the CloudFunction field's value.
-func (s *CloudFunctionConfiguration) SetCloudFunction(v string) *CloudFunctionConfiguration {
-	s.CloudFunction = &v
-	return s
-}
-
-// SetEvent sets the Event field's value.
-func (s *CloudFunctionConfiguration) SetEvent(v Event) *CloudFunctionConfiguration {
-	s.Event = v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *CloudFunctionConfiguration) SetEvents(v []Event) *CloudFunctionConfiguration {
-	s.Events = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CloudFunctionConfiguration) SetId(v string) *CloudFunctionConfiguration {
-	s.Id = &v
-	return s
-}
-
-// SetInvocationRole sets the InvocationRole field's value.
-func (s *CloudFunctionConfiguration) SetInvocationRole(v string) *CloudFunctionConfiguration {
-	s.InvocationRole = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CommonPrefix
 type CommonPrefix struct {
 	_ struct{} `type:"structure"`
@@ -5219,12 +4925,6 @@ func (s CommonPrefix) String() string {
 // GoString returns the string representation
 func (s CommonPrefix) GoString() string {
 	return s.String()
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *CommonPrefix) SetPrefix(v string) *CommonPrefix {
-	s.Prefix = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadRequest
@@ -5284,41 +4984,11 @@ func (s *CompleteMultipartUploadInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *CompleteMultipartUploadInput) SetBucket(v string) *CompleteMultipartUploadInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *CompleteMultipartUploadInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *CompleteMultipartUploadInput) SetKey(v string) *CompleteMultipartUploadInput {
-	s.Key = &v
-	return s
-}
-
-// SetMultipartUpload sets the MultipartUpload field's value.
-func (s *CompleteMultipartUploadInput) SetMultipartUpload(v *CompletedMultipartUpload) *CompleteMultipartUploadInput {
-	s.MultipartUpload = v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *CompleteMultipartUploadInput) SetRequestPayer(v RequestPayer) *CompleteMultipartUploadInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *CompleteMultipartUploadInput) SetUploadId(v string) *CompleteMultipartUploadInput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadOutput
@@ -5371,65 +5041,11 @@ func (s CompleteMultipartUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *CompleteMultipartUploadOutput) SetBucket(v string) *CompleteMultipartUploadOutput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *CompleteMultipartUploadOutput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetETag sets the ETag field's value.
-func (s *CompleteMultipartUploadOutput) SetETag(v string) *CompleteMultipartUploadOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *CompleteMultipartUploadOutput) SetExpiration(v string) *CompleteMultipartUploadOutput {
-	s.Expiration = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *CompleteMultipartUploadOutput) SetKey(v string) *CompleteMultipartUploadOutput {
-	s.Key = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *CompleteMultipartUploadOutput) SetLocation(v string) *CompleteMultipartUploadOutput {
-	s.Location = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *CompleteMultipartUploadOutput) SetRequestCharged(v RequestCharged) *CompleteMultipartUploadOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *CompleteMultipartUploadOutput) SetSSEKMSKeyId(v string) *CompleteMultipartUploadOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CompleteMultipartUploadOutput) SetServerSideEncryption(v ServerSideEncryption) *CompleteMultipartUploadOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *CompleteMultipartUploadOutput) SetVersionId(v string) *CompleteMultipartUploadOutput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedMultipartUpload
@@ -5447,12 +5063,6 @@ func (s CompletedMultipartUpload) String() string {
 // GoString returns the string representation
 func (s CompletedMultipartUpload) GoString() string {
 	return s.String()
-}
-
-// SetParts sets the Parts field's value.
-func (s *CompletedMultipartUpload) SetParts(v []CompletedPart) *CompletedMultipartUpload {
-	s.Parts = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedPart
@@ -5475,18 +5085,6 @@ func (s CompletedPart) String() string {
 // GoString returns the string representation
 func (s CompletedPart) GoString() string {
 	return s.String()
-}
-
-// SetETag sets the ETag field's value.
-func (s *CompletedPart) SetETag(v string) *CompletedPart {
-	s.ETag = &v
-	return s
-}
-
-// SetPartNumber sets the PartNumber field's value.
-func (s *CompletedPart) SetPartNumber(v int64) *CompletedPart {
-	s.PartNumber = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Condition
@@ -5518,18 +5116,6 @@ func (s Condition) String() string {
 // GoString returns the string representation
 func (s Condition) GoString() string {
 	return s.String()
-}
-
-// SetHttpErrorCodeReturnedEquals sets the HttpErrorCodeReturnedEquals field's value.
-func (s *Condition) SetHttpErrorCodeReturnedEquals(v string) *Condition {
-	s.HttpErrorCodeReturnedEquals = &v
-	return s
-}
-
-// SetKeyPrefixEquals sets the KeyPrefixEquals field's value.
-func (s *Condition) SetKeyPrefixEquals(v string) *Condition {
-	s.KeyPrefixEquals = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectRequest
@@ -5700,95 +5286,11 @@ func (s *CopyObjectInput) Validate() error {
 	return nil
 }
 
-// SetACL sets the ACL field's value.
-func (s *CopyObjectInput) SetACL(v ObjectCannedACL) *CopyObjectInput {
-	s.ACL = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *CopyObjectInput) SetBucket(v string) *CopyObjectInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *CopyObjectInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetCacheControl sets the CacheControl field's value.
-func (s *CopyObjectInput) SetCacheControl(v string) *CopyObjectInput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentDisposition sets the ContentDisposition field's value.
-func (s *CopyObjectInput) SetContentDisposition(v string) *CopyObjectInput {
-	s.ContentDisposition = &v
-	return s
-}
-
-// SetContentEncoding sets the ContentEncoding field's value.
-func (s *CopyObjectInput) SetContentEncoding(v string) *CopyObjectInput {
-	s.ContentEncoding = &v
-	return s
-}
-
-// SetContentLanguage sets the ContentLanguage field's value.
-func (s *CopyObjectInput) SetContentLanguage(v string) *CopyObjectInput {
-	s.ContentLanguage = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *CopyObjectInput) SetContentType(v string) *CopyObjectInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetCopySource sets the CopySource field's value.
-func (s *CopyObjectInput) SetCopySource(v string) *CopyObjectInput {
-	s.CopySource = &v
-	return s
-}
-
-// SetCopySourceIfMatch sets the CopySourceIfMatch field's value.
-func (s *CopyObjectInput) SetCopySourceIfMatch(v string) *CopyObjectInput {
-	s.CopySourceIfMatch = &v
-	return s
-}
-
-// SetCopySourceIfModifiedSince sets the CopySourceIfModifiedSince field's value.
-func (s *CopyObjectInput) SetCopySourceIfModifiedSince(v time.Time) *CopyObjectInput {
-	s.CopySourceIfModifiedSince = &v
-	return s
-}
-
-// SetCopySourceIfNoneMatch sets the CopySourceIfNoneMatch field's value.
-func (s *CopyObjectInput) SetCopySourceIfNoneMatch(v string) *CopyObjectInput {
-	s.CopySourceIfNoneMatch = &v
-	return s
-}
-
-// SetCopySourceIfUnmodifiedSince sets the CopySourceIfUnmodifiedSince field's value.
-func (s *CopyObjectInput) SetCopySourceIfUnmodifiedSince(v time.Time) *CopyObjectInput {
-	s.CopySourceIfUnmodifiedSince = &v
-	return s
-}
-
-// SetCopySourceSSECustomerAlgorithm sets the CopySourceSSECustomerAlgorithm field's value.
-func (s *CopyObjectInput) SetCopySourceSSECustomerAlgorithm(v string) *CopyObjectInput {
-	s.CopySourceSSECustomerAlgorithm = &v
-	return s
-}
-
-// SetCopySourceSSECustomerKey sets the CopySourceSSECustomerKey field's value.
-func (s *CopyObjectInput) SetCopySourceSSECustomerKey(v string) *CopyObjectInput {
-	s.CopySourceSSECustomerKey = &v
-	return s
 }
 
 func (s *CopyObjectInput) getCopySourceSSECustomerKey() (v string) {
@@ -5798,125 +5300,11 @@ func (s *CopyObjectInput) getCopySourceSSECustomerKey() (v string) {
 	return *s.CopySourceSSECustomerKey
 }
 
-// SetCopySourceSSECustomerKeyMD5 sets the CopySourceSSECustomerKeyMD5 field's value.
-func (s *CopyObjectInput) SetCopySourceSSECustomerKeyMD5(v string) *CopyObjectInput {
-	s.CopySourceSSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetExpires sets the Expires field's value.
-func (s *CopyObjectInput) SetExpires(v time.Time) *CopyObjectInput {
-	s.Expires = &v
-	return s
-}
-
-// SetGrantFullControl sets the GrantFullControl field's value.
-func (s *CopyObjectInput) SetGrantFullControl(v string) *CopyObjectInput {
-	s.GrantFullControl = &v
-	return s
-}
-
-// SetGrantRead sets the GrantRead field's value.
-func (s *CopyObjectInput) SetGrantRead(v string) *CopyObjectInput {
-	s.GrantRead = &v
-	return s
-}
-
-// SetGrantReadACP sets the GrantReadACP field's value.
-func (s *CopyObjectInput) SetGrantReadACP(v string) *CopyObjectInput {
-	s.GrantReadACP = &v
-	return s
-}
-
-// SetGrantWriteACP sets the GrantWriteACP field's value.
-func (s *CopyObjectInput) SetGrantWriteACP(v string) *CopyObjectInput {
-	s.GrantWriteACP = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *CopyObjectInput) SetKey(v string) *CopyObjectInput {
-	s.Key = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *CopyObjectInput) SetMetadata(v map[string]string) *CopyObjectInput {
-	s.Metadata = v
-	return s
-}
-
-// SetMetadataDirective sets the MetadataDirective field's value.
-func (s *CopyObjectInput) SetMetadataDirective(v MetadataDirective) *CopyObjectInput {
-	s.MetadataDirective = v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *CopyObjectInput) SetRequestPayer(v RequestPayer) *CopyObjectInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *CopyObjectInput) SetSSECustomerAlgorithm(v string) *CopyObjectInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *CopyObjectInput) SetSSECustomerKey(v string) *CopyObjectInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *CopyObjectInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *CopyObjectInput) SetSSECustomerKeyMD5(v string) *CopyObjectInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *CopyObjectInput) SetSSEKMSKeyId(v string) *CopyObjectInput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CopyObjectInput) SetServerSideEncryption(v ServerSideEncryption) *CopyObjectInput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *CopyObjectInput) SetStorageClass(v StorageClass) *CopyObjectInput {
-	s.StorageClass = v
-	return s
-}
-
-// SetTagging sets the Tagging field's value.
-func (s *CopyObjectInput) SetTagging(v string) *CopyObjectInput {
-	s.Tagging = &v
-	return s
-}
-
-// SetTaggingDirective sets the TaggingDirective field's value.
-func (s *CopyObjectInput) SetTaggingDirective(v TaggingDirective) *CopyObjectInput {
-	s.TaggingDirective = v
-	return s
-}
-
-// SetWebsiteRedirectLocation sets the WebsiteRedirectLocation field's value.
-func (s *CopyObjectInput) SetWebsiteRedirectLocation(v string) *CopyObjectInput {
-	s.WebsiteRedirectLocation = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectOutput
@@ -5973,60 +5361,6 @@ func (s CopyObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCopyObjectResult sets the CopyObjectResult field's value.
-func (s *CopyObjectOutput) SetCopyObjectResult(v *CopyObjectResult) *CopyObjectOutput {
-	s.CopyObjectResult = v
-	return s
-}
-
-// SetCopySourceVersionId sets the CopySourceVersionId field's value.
-func (s *CopyObjectOutput) SetCopySourceVersionId(v string) *CopyObjectOutput {
-	s.CopySourceVersionId = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *CopyObjectOutput) SetExpiration(v string) *CopyObjectOutput {
-	s.Expiration = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *CopyObjectOutput) SetRequestCharged(v RequestCharged) *CopyObjectOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *CopyObjectOutput) SetSSECustomerAlgorithm(v string) *CopyObjectOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *CopyObjectOutput) SetSSECustomerKeyMD5(v string) *CopyObjectOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *CopyObjectOutput) SetSSEKMSKeyId(v string) *CopyObjectOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CopyObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *CopyObjectOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *CopyObjectOutput) SetVersionId(v string) *CopyObjectOutput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectResult
 type CopyObjectResult struct {
 	_ struct{} `type:"structure"`
@@ -6044,18 +5378,6 @@ func (s CopyObjectResult) String() string {
 // GoString returns the string representation
 func (s CopyObjectResult) GoString() string {
 	return s.String()
-}
-
-// SetETag sets the ETag field's value.
-func (s *CopyObjectResult) SetETag(v string) *CopyObjectResult {
-	s.ETag = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *CopyObjectResult) SetLastModified(v time.Time) *CopyObjectResult {
-	s.LastModified = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyPartResult
@@ -6079,18 +5401,6 @@ func (s CopyPartResult) GoString() string {
 	return s.String()
 }
 
-// SetETag sets the ETag field's value.
-func (s *CopyPartResult) SetETag(v string) *CopyPartResult {
-	s.ETag = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *CopyPartResult) SetLastModified(v time.Time) *CopyPartResult {
-	s.LastModified = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration
 type CreateBucketConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -6108,12 +5418,6 @@ func (s CreateBucketConfiguration) String() string {
 // GoString returns the string representation
 func (s CreateBucketConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetLocationConstraint sets the LocationConstraint field's value.
-func (s *CreateBucketConfiguration) SetLocationConstraint(v BucketLocationConstraint) *CreateBucketConfiguration {
-	s.LocationConstraint = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketRequest
@@ -6169,59 +5473,11 @@ func (s *CreateBucketInput) Validate() error {
 	return nil
 }
 
-// SetACL sets the ACL field's value.
-func (s *CreateBucketInput) SetACL(v BucketCannedACL) *CreateBucketInput {
-	s.ACL = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *CreateBucketInput) SetBucket(v string) *CreateBucketInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *CreateBucketInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetCreateBucketConfiguration sets the CreateBucketConfiguration field's value.
-func (s *CreateBucketInput) SetCreateBucketConfiguration(v *CreateBucketConfiguration) *CreateBucketInput {
-	s.CreateBucketConfiguration = v
-	return s
-}
-
-// SetGrantFullControl sets the GrantFullControl field's value.
-func (s *CreateBucketInput) SetGrantFullControl(v string) *CreateBucketInput {
-	s.GrantFullControl = &v
-	return s
-}
-
-// SetGrantRead sets the GrantRead field's value.
-func (s *CreateBucketInput) SetGrantRead(v string) *CreateBucketInput {
-	s.GrantRead = &v
-	return s
-}
-
-// SetGrantReadACP sets the GrantReadACP field's value.
-func (s *CreateBucketInput) SetGrantReadACP(v string) *CreateBucketInput {
-	s.GrantReadACP = &v
-	return s
-}
-
-// SetGrantWrite sets the GrantWrite field's value.
-func (s *CreateBucketInput) SetGrantWrite(v string) *CreateBucketInput {
-	s.GrantWrite = &v
-	return s
-}
-
-// SetGrantWriteACP sets the GrantWriteACP field's value.
-func (s *CreateBucketInput) SetGrantWriteACP(v string) *CreateBucketInput {
-	s.GrantWriteACP = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketOutput
@@ -6246,12 +5502,6 @@ func (s CreateBucketOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateBucketOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLocation sets the Location field's value.
-func (s *CreateBucketOutput) SetLocation(v string) *CreateBucketOutput {
-	s.Location = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadRequest
@@ -6376,18 +5626,6 @@ func (s *CreateMultipartUploadInput) Validate() error {
 	return nil
 }
 
-// SetACL sets the ACL field's value.
-func (s *CreateMultipartUploadInput) SetACL(v ObjectCannedACL) *CreateMultipartUploadInput {
-	s.ACL = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *CreateMultipartUploadInput) SetBucket(v string) *CreateMultipartUploadInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *CreateMultipartUploadInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -6395,137 +5633,11 @@ func (s *CreateMultipartUploadInput) getBucket() (v string) {
 	return *s.Bucket
 }
 
-// SetCacheControl sets the CacheControl field's value.
-func (s *CreateMultipartUploadInput) SetCacheControl(v string) *CreateMultipartUploadInput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentDisposition sets the ContentDisposition field's value.
-func (s *CreateMultipartUploadInput) SetContentDisposition(v string) *CreateMultipartUploadInput {
-	s.ContentDisposition = &v
-	return s
-}
-
-// SetContentEncoding sets the ContentEncoding field's value.
-func (s *CreateMultipartUploadInput) SetContentEncoding(v string) *CreateMultipartUploadInput {
-	s.ContentEncoding = &v
-	return s
-}
-
-// SetContentLanguage sets the ContentLanguage field's value.
-func (s *CreateMultipartUploadInput) SetContentLanguage(v string) *CreateMultipartUploadInput {
-	s.ContentLanguage = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *CreateMultipartUploadInput) SetContentType(v string) *CreateMultipartUploadInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetExpires sets the Expires field's value.
-func (s *CreateMultipartUploadInput) SetExpires(v time.Time) *CreateMultipartUploadInput {
-	s.Expires = &v
-	return s
-}
-
-// SetGrantFullControl sets the GrantFullControl field's value.
-func (s *CreateMultipartUploadInput) SetGrantFullControl(v string) *CreateMultipartUploadInput {
-	s.GrantFullControl = &v
-	return s
-}
-
-// SetGrantRead sets the GrantRead field's value.
-func (s *CreateMultipartUploadInput) SetGrantRead(v string) *CreateMultipartUploadInput {
-	s.GrantRead = &v
-	return s
-}
-
-// SetGrantReadACP sets the GrantReadACP field's value.
-func (s *CreateMultipartUploadInput) SetGrantReadACP(v string) *CreateMultipartUploadInput {
-	s.GrantReadACP = &v
-	return s
-}
-
-// SetGrantWriteACP sets the GrantWriteACP field's value.
-func (s *CreateMultipartUploadInput) SetGrantWriteACP(v string) *CreateMultipartUploadInput {
-	s.GrantWriteACP = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *CreateMultipartUploadInput) SetKey(v string) *CreateMultipartUploadInput {
-	s.Key = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *CreateMultipartUploadInput) SetMetadata(v map[string]string) *CreateMultipartUploadInput {
-	s.Metadata = v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *CreateMultipartUploadInput) SetRequestPayer(v RequestPayer) *CreateMultipartUploadInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *CreateMultipartUploadInput) SetSSECustomerAlgorithm(v string) *CreateMultipartUploadInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *CreateMultipartUploadInput) SetSSECustomerKey(v string) *CreateMultipartUploadInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *CreateMultipartUploadInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *CreateMultipartUploadInput) SetSSECustomerKeyMD5(v string) *CreateMultipartUploadInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *CreateMultipartUploadInput) SetSSEKMSKeyId(v string) *CreateMultipartUploadInput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CreateMultipartUploadInput) SetServerSideEncryption(v ServerSideEncryption) *CreateMultipartUploadInput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *CreateMultipartUploadInput) SetStorageClass(v StorageClass) *CreateMultipartUploadInput {
-	s.StorageClass = v
-	return s
-}
-
-// SetTagging sets the Tagging field's value.
-func (s *CreateMultipartUploadInput) SetTagging(v string) *CreateMultipartUploadInput {
-	s.Tagging = &v
-	return s
-}
-
-// SetWebsiteRedirectLocation sets the WebsiteRedirectLocation field's value.
-func (s *CreateMultipartUploadInput) SetWebsiteRedirectLocation(v string) *CreateMultipartUploadInput {
-	s.WebsiteRedirectLocation = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadOutput
@@ -6588,71 +5700,11 @@ func (s CreateMultipartUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAbortDate sets the AbortDate field's value.
-func (s *CreateMultipartUploadOutput) SetAbortDate(v time.Time) *CreateMultipartUploadOutput {
-	s.AbortDate = &v
-	return s
-}
-
-// SetAbortRuleId sets the AbortRuleId field's value.
-func (s *CreateMultipartUploadOutput) SetAbortRuleId(v string) *CreateMultipartUploadOutput {
-	s.AbortRuleId = &v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *CreateMultipartUploadOutput) SetBucket(v string) *CreateMultipartUploadOutput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *CreateMultipartUploadOutput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *CreateMultipartUploadOutput) SetKey(v string) *CreateMultipartUploadOutput {
-	s.Key = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *CreateMultipartUploadOutput) SetRequestCharged(v RequestCharged) *CreateMultipartUploadOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *CreateMultipartUploadOutput) SetSSECustomerAlgorithm(v string) *CreateMultipartUploadOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *CreateMultipartUploadOutput) SetSSECustomerKeyMD5(v string) *CreateMultipartUploadOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *CreateMultipartUploadOutput) SetSSEKMSKeyId(v string) *CreateMultipartUploadOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CreateMultipartUploadOutput) SetServerSideEncryption(v ServerSideEncryption) *CreateMultipartUploadOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *CreateMultipartUploadOutput) SetUploadId(v string) *CreateMultipartUploadOutput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Delete
@@ -6698,18 +5750,6 @@ func (s *Delete) Validate() error {
 	return nil
 }
 
-// SetObjects sets the Objects field's value.
-func (s *Delete) SetObjects(v []ObjectIdentifier) *Delete {
-	s.Objects = v
-	return s
-}
-
-// SetQuiet sets the Quiet field's value.
-func (s *Delete) SetQuiet(v bool) *Delete {
-	s.Quiet = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfigurationRequest
 type DeleteBucketAnalyticsConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -6753,23 +5793,11 @@ func (s *DeleteBucketAnalyticsConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketAnalyticsConfigurationInput) SetBucket(v string) *DeleteBucketAnalyticsConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketAnalyticsConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteBucketAnalyticsConfigurationInput) SetId(v string) *DeleteBucketAnalyticsConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfigurationOutput
@@ -6824,12 +5852,6 @@ func (s *DeleteBucketCorsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketCorsInput) SetBucket(v string) *DeleteBucketCorsInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *DeleteBucketCorsInput) getBucket() (v string) {
@@ -6896,12 +5918,6 @@ func (s *DeleteBucketEncryptionInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketEncryptionInput) SetBucket(v string) *DeleteBucketEncryptionInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketEncryptionInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -6963,12 +5979,6 @@ func (s *DeleteBucketInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketInput) SetBucket(v string) *DeleteBucketInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -7019,23 +6029,11 @@ func (s *DeleteBucketInventoryConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketInventoryConfigurationInput) SetBucket(v string) *DeleteBucketInventoryConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketInventoryConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteBucketInventoryConfigurationInput) SetId(v string) *DeleteBucketInventoryConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfigurationOutput
@@ -7090,12 +6088,6 @@ func (s *DeleteBucketLifecycleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketLifecycleInput) SetBucket(v string) *DeleteBucketLifecycleInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *DeleteBucketLifecycleInput) getBucket() (v string) {
@@ -7170,23 +6162,11 @@ func (s *DeleteBucketMetricsConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketMetricsConfigurationInput) SetBucket(v string) *DeleteBucketMetricsConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketMetricsConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteBucketMetricsConfigurationInput) SetId(v string) *DeleteBucketMetricsConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfigurationOutput
@@ -7265,12 +6245,6 @@ func (s *DeleteBucketPolicyInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketPolicyInput) SetBucket(v string) *DeleteBucketPolicyInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketPolicyInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -7330,12 +6304,6 @@ func (s *DeleteBucketReplicationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketReplicationInput) SetBucket(v string) *DeleteBucketReplicationInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *DeleteBucketReplicationInput) getBucket() (v string) {
@@ -7399,12 +6367,6 @@ func (s *DeleteBucketTaggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketTaggingInput) SetBucket(v string) *DeleteBucketTaggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketTaggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -7466,12 +6428,6 @@ func (s *DeleteBucketWebsiteInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteBucketWebsiteInput) SetBucket(v string) *DeleteBucketWebsiteInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteBucketWebsiteInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -7531,36 +6487,6 @@ func (s DeleteMarkerEntry) GoString() string {
 	return s.String()
 }
 
-// SetIsLatest sets the IsLatest field's value.
-func (s *DeleteMarkerEntry) SetIsLatest(v bool) *DeleteMarkerEntry {
-	s.IsLatest = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *DeleteMarkerEntry) SetKey(v string) *DeleteMarkerEntry {
-	s.Key = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *DeleteMarkerEntry) SetLastModified(v time.Time) *DeleteMarkerEntry {
-	s.LastModified = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *DeleteMarkerEntry) SetOwner(v *Owner) *DeleteMarkerEntry {
-	s.Owner = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteMarkerEntry) SetVersionId(v string) *DeleteMarkerEntry {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectRequest
 type DeleteObjectInput struct {
 	_ struct{} `type:"structure"`
@@ -7616,41 +6542,11 @@ func (s *DeleteObjectInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteObjectInput) SetBucket(v string) *DeleteObjectInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteObjectInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *DeleteObjectInput) SetKey(v string) *DeleteObjectInput {
-	s.Key = &v
-	return s
-}
-
-// SetMFA sets the MFA field's value.
-func (s *DeleteObjectInput) SetMFA(v string) *DeleteObjectInput {
-	s.MFA = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *DeleteObjectInput) SetRequestPayer(v RequestPayer) *DeleteObjectInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteObjectInput) SetVersionId(v string) *DeleteObjectInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectOutput
@@ -7685,24 +6581,6 @@ func (s DeleteObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeleteMarker sets the DeleteMarker field's value.
-func (s *DeleteObjectOutput) SetDeleteMarker(v bool) *DeleteObjectOutput {
-	s.DeleteMarker = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *DeleteObjectOutput) SetRequestCharged(v RequestCharged) *DeleteObjectOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteObjectOutput) SetVersionId(v string) *DeleteObjectOutput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingRequest
@@ -7750,29 +6628,11 @@ func (s *DeleteObjectTaggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteObjectTaggingInput) SetBucket(v string) *DeleteObjectTaggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteObjectTaggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *DeleteObjectTaggingInput) SetKey(v string) *DeleteObjectTaggingInput {
-	s.Key = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteObjectTaggingInput) SetVersionId(v string) *DeleteObjectTaggingInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingOutput
@@ -7798,12 +6658,6 @@ func (s DeleteObjectTaggingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteObjectTaggingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeleteObjectTaggingOutput) SetVersionId(v string) *DeleteObjectTaggingOutput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectsRequest
@@ -7860,35 +6714,11 @@ func (s *DeleteObjectsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *DeleteObjectsInput) SetBucket(v string) *DeleteObjectsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *DeleteObjectsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetDelete sets the Delete field's value.
-func (s *DeleteObjectsInput) SetDelete(v *Delete) *DeleteObjectsInput {
-	s.Delete = v
-	return s
-}
-
-// SetMFA sets the MFA field's value.
-func (s *DeleteObjectsInput) SetMFA(v string) *DeleteObjectsInput {
-	s.MFA = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *DeleteObjectsInput) SetRequestPayer(v RequestPayer) *DeleteObjectsInput {
-	s.RequestPayer = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectsOutput
@@ -7921,24 +6751,6 @@ func (s DeleteObjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeleted sets the Deleted field's value.
-func (s *DeleteObjectsOutput) SetDeleted(v []DeletedObject) *DeleteObjectsOutput {
-	s.Deleted = v
-	return s
-}
-
-// SetErrors sets the Errors field's value.
-func (s *DeleteObjectsOutput) SetErrors(v []Error) *DeleteObjectsOutput {
-	s.Errors = v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *DeleteObjectsOutput) SetRequestCharged(v RequestCharged) *DeleteObjectsOutput {
-	s.RequestCharged = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletedObject
 type DeletedObject struct {
 	_ struct{} `type:"structure"`
@@ -7960,30 +6772,6 @@ func (s DeletedObject) String() string {
 // GoString returns the string representation
 func (s DeletedObject) GoString() string {
 	return s.String()
-}
-
-// SetDeleteMarker sets the DeleteMarker field's value.
-func (s *DeletedObject) SetDeleteMarker(v bool) *DeletedObject {
-	s.DeleteMarker = &v
-	return s
-}
-
-// SetDeleteMarkerVersionId sets the DeleteMarkerVersionId field's value.
-func (s *DeletedObject) SetDeleteMarkerVersionId(v string) *DeletedObject {
-	s.DeleteMarkerVersionId = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *DeletedObject) SetKey(v string) *DeletedObject {
-	s.Key = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeletedObject) SetVersionId(v string) *DeletedObject {
-	s.VersionId = &v
-	return s
 }
 
 // Container for replication destination information.
@@ -8040,41 +6828,11 @@ func (s *Destination) Validate() error {
 	return nil
 }
 
-// SetAccessControlTranslation sets the AccessControlTranslation field's value.
-func (s *Destination) SetAccessControlTranslation(v *AccessControlTranslation) *Destination {
-	s.AccessControlTranslation = v
-	return s
-}
-
-// SetAccount sets the Account field's value.
-func (s *Destination) SetAccount(v string) *Destination {
-	s.Account = &v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *Destination) SetBucket(v string) *Destination {
-	s.Bucket = &v
-	return s
-}
-
 func (s *Destination) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *Destination) SetEncryptionConfiguration(v *EncryptionConfiguration) *Destination {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *Destination) SetStorageClass(v StorageClass) *Destination {
-	s.StorageClass = v
-	return s
 }
 
 // Describes the server-side encryption that will be applied to the restore
@@ -8121,24 +6879,6 @@ func (s *Encryption) Validate() error {
 	return nil
 }
 
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *Encryption) SetEncryptionType(v ServerSideEncryption) *Encryption {
-	s.EncryptionType = v
-	return s
-}
-
-// SetKMSContext sets the KMSContext field's value.
-func (s *Encryption) SetKMSContext(v string) *Encryption {
-	s.KMSContext = &v
-	return s
-}
-
-// SetKMSKeyId sets the KMSKeyId field's value.
-func (s *Encryption) SetKMSKeyId(v string) *Encryption {
-	s.KMSKeyId = &v
-	return s
-}
-
 // Container for information regarding encryption based configuration for replicas.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration
 type EncryptionConfiguration struct {
@@ -8156,12 +6896,6 @@ func (s EncryptionConfiguration) String() string {
 // GoString returns the string representation
 func (s EncryptionConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetReplicaKmsKeyID sets the ReplicaKmsKeyID field's value.
-func (s *EncryptionConfiguration) SetReplicaKmsKeyID(v string) *EncryptionConfiguration {
-	s.ReplicaKmsKeyID = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Error
@@ -8185,30 +6919,6 @@ func (s Error) String() string {
 // GoString returns the string representation
 func (s Error) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *Error) SetCode(v string) *Error {
-	s.Code = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *Error) SetKey(v string) *Error {
-	s.Key = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Error) SetMessage(v string) *Error {
-	s.Message = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *Error) SetVersionId(v string) *Error {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ErrorDocument
@@ -8248,12 +6958,6 @@ func (s *ErrorDocument) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *ErrorDocument) SetKey(v string) *ErrorDocument {
-	s.Key = &v
-	return s
-}
-
 // Container for key value pair that defines the criteria for the filter rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/FilterRule
 type FilterRule struct {
@@ -8276,18 +6980,6 @@ func (s FilterRule) String() string {
 // GoString returns the string representation
 func (s FilterRule) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *FilterRule) SetName(v FilterRuleName) *FilterRule {
-	s.Name = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *FilterRule) SetValue(v string) *FilterRule {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationRequest
@@ -8324,12 +7016,6 @@ func (s *GetBucketAccelerateConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketAccelerateConfigurationInput) SetBucket(v string) *GetBucketAccelerateConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketAccelerateConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -8360,12 +7046,6 @@ func (s GetBucketAccelerateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketAccelerateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetBucketAccelerateConfigurationOutput) SetStatus(v BucketAccelerateStatus) *GetBucketAccelerateConfigurationOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAclRequest
@@ -8400,12 +7080,6 @@ func (s *GetBucketAclInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketAclInput) SetBucket(v string) *GetBucketAclInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketAclInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -8438,18 +7112,6 @@ func (s GetBucketAclOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketAclOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGrants sets the Grants field's value.
-func (s *GetBucketAclOutput) SetGrants(v []Grant) *GetBucketAclOutput {
-	s.Grants = v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *GetBucketAclOutput) SetOwner(v *Owner) *GetBucketAclOutput {
-	s.Owner = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfigurationRequest
@@ -8495,23 +7157,11 @@ func (s *GetBucketAnalyticsConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketAnalyticsConfigurationInput) SetBucket(v string) *GetBucketAnalyticsConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketAnalyticsConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *GetBucketAnalyticsConfigurationInput) SetId(v string) *GetBucketAnalyticsConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfigurationOutput
@@ -8537,12 +7187,6 @@ func (s GetBucketAnalyticsConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketAnalyticsConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
-func (s *GetBucketAnalyticsConfigurationOutput) SetAnalyticsConfiguration(v *AnalyticsConfiguration) *GetBucketAnalyticsConfigurationOutput {
-	s.AnalyticsConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCorsRequest
@@ -8577,12 +7221,6 @@ func (s *GetBucketCorsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketCorsInput) SetBucket(v string) *GetBucketCorsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketCorsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -8612,12 +7250,6 @@ func (s GetBucketCorsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketCorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCORSRules sets the CORSRules field's value.
-func (s *GetBucketCorsOutput) SetCORSRules(v []CORSRule) *GetBucketCorsOutput {
-	s.CORSRules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryptionRequest
@@ -8655,12 +7287,6 @@ func (s *GetBucketEncryptionInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketEncryptionInput) SetBucket(v string) *GetBucketEncryptionInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketEncryptionInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -8692,12 +7318,6 @@ func (s GetBucketEncryptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketEncryptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServerSideEncryptionConfiguration sets the ServerSideEncryptionConfiguration field's value.
-func (s *GetBucketEncryptionOutput) SetServerSideEncryptionConfiguration(v *ServerSideEncryptionConfiguration) *GetBucketEncryptionOutput {
-	s.ServerSideEncryptionConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationRequest
@@ -8743,23 +7363,11 @@ func (s *GetBucketInventoryConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketInventoryConfigurationInput) SetBucket(v string) *GetBucketInventoryConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketInventoryConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *GetBucketInventoryConfigurationInput) SetId(v string) *GetBucketInventoryConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationOutput
@@ -8785,12 +7393,6 @@ func (s GetBucketInventoryConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketInventoryConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInventoryConfiguration sets the InventoryConfiguration field's value.
-func (s *GetBucketInventoryConfigurationOutput) SetInventoryConfiguration(v *InventoryConfiguration) *GetBucketInventoryConfigurationOutput {
-	s.InventoryConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfigurationRequest
@@ -8825,12 +7427,6 @@ func (s *GetBucketLifecycleConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketLifecycleConfigurationInput) SetBucket(v string) *GetBucketLifecycleConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketLifecycleConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -8860,12 +7456,6 @@ func (s GetBucketLifecycleConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketLifecycleConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRules sets the Rules field's value.
-func (s *GetBucketLifecycleConfigurationOutput) SetRules(v []LifecycleRule) *GetBucketLifecycleConfigurationOutput {
-	s.Rules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleRequest
@@ -8900,12 +7490,6 @@ func (s *GetBucketLifecycleInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketLifecycleInput) SetBucket(v string) *GetBucketLifecycleInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketLifecycleInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -8935,12 +7519,6 @@ func (s GetBucketLifecycleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketLifecycleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRules sets the Rules field's value.
-func (s *GetBucketLifecycleOutput) SetRules(v []Rule) *GetBucketLifecycleOutput {
-	s.Rules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocationRequest
@@ -8975,12 +7553,6 @@ func (s *GetBucketLocationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketLocationInput) SetBucket(v string) *GetBucketLocationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketLocationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -9010,12 +7582,6 @@ func (s GetBucketLocationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketLocationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLocationConstraint sets the LocationConstraint field's value.
-func (s *GetBucketLocationOutput) SetLocationConstraint(v BucketLocationConstraint) *GetBucketLocationOutput {
-	s.LocationConstraint = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLoggingRequest
@@ -9050,12 +7616,6 @@ func (s *GetBucketLoggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketLoggingInput) SetBucket(v string) *GetBucketLoggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketLoggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -9085,12 +7645,6 @@ func (s GetBucketLoggingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketLoggingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLoggingEnabled sets the LoggingEnabled field's value.
-func (s *GetBucketLoggingOutput) SetLoggingEnabled(v *LoggingEnabled) *GetBucketLoggingOutput {
-	s.LoggingEnabled = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfigurationRequest
@@ -9136,23 +7690,11 @@ func (s *GetBucketMetricsConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketMetricsConfigurationInput) SetBucket(v string) *GetBucketMetricsConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketMetricsConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *GetBucketMetricsConfigurationInput) SetId(v string) *GetBucketMetricsConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfigurationOutput
@@ -9178,12 +7720,6 @@ func (s GetBucketMetricsConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketMetricsConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMetricsConfiguration sets the MetricsConfiguration field's value.
-func (s *GetBucketMetricsConfigurationOutput) SetMetricsConfiguration(v *MetricsConfiguration) *GetBucketMetricsConfigurationOutput {
-	s.MetricsConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationInput
@@ -9218,12 +7754,6 @@ func (s *GetBucketNotificationConfigurationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketNotificationConfigurationInput) SetBucket(v string) *GetBucketNotificationConfigurationInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *GetBucketNotificationConfigurationInput) getBucket() (v string) {
@@ -9294,24 +7824,6 @@ func (s GetBucketNotificationConfigurationOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetLambdaFunctionConfigurations sets the LambdaFunctionConfigurations field's value.
-func (s *GetBucketNotificationConfigurationOutput) SetLambdaFunctionConfigurations(v []LambdaFunctionConfiguration) *GetBucketNotificationConfigurationOutput {
-	s.LambdaFunctionConfigurations = v
-	return s
-}
-
-// SetQueueConfigurations sets the QueueConfigurations field's value.
-func (s *GetBucketNotificationConfigurationOutput) SetQueueConfigurations(v []QueueConfiguration) *GetBucketNotificationConfigurationOutput {
-	s.QueueConfigurations = v
-	return s
-}
-
-// SetTopicConfigurations sets the TopicConfigurations field's value.
-func (s *GetBucketNotificationConfigurationOutput) SetTopicConfigurations(v []TopicConfiguration) *GetBucketNotificationConfigurationOutput {
-	s.TopicConfigurations = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationDeprecated
 type GetBucketNotificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -9338,24 +7850,6 @@ func (s GetBucketNotificationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketNotificationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCloudFunctionConfiguration sets the CloudFunctionConfiguration field's value.
-func (s *GetBucketNotificationOutput) SetCloudFunctionConfiguration(v *CloudFunctionConfiguration) *GetBucketNotificationOutput {
-	s.CloudFunctionConfiguration = v
-	return s
-}
-
-// SetQueueConfiguration sets the QueueConfiguration field's value.
-func (s *GetBucketNotificationOutput) SetQueueConfiguration(v *QueueConfigurationDeprecated) *GetBucketNotificationOutput {
-	s.QueueConfiguration = v
-	return s
-}
-
-// SetTopicConfiguration sets the TopicConfiguration field's value.
-func (s *GetBucketNotificationOutput) SetTopicConfiguration(v *TopicConfigurationDeprecated) *GetBucketNotificationOutput {
-	s.TopicConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyRequest
@@ -9390,12 +7884,6 @@ func (s *GetBucketPolicyInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketPolicyInput) SetBucket(v string) *GetBucketPolicyInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetBucketPolicyInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -9428,12 +7916,6 @@ func (s GetBucketPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPolicy sets the Policy field's value.
-func (s *GetBucketPolicyOutput) SetPolicy(v string) *GetBucketPolicyOutput {
-	s.Policy = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplicationRequest
 type GetBucketReplicationInput struct {
 	_ struct{} `type:"structure"`
@@ -9464,12 +7946,6 @@ func (s *GetBucketReplicationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketReplicationInput) SetBucket(v string) *GetBucketReplicationInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *GetBucketReplicationInput) getBucket() (v string) {
@@ -9505,12 +7981,6 @@ func (s GetBucketReplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetReplicationConfiguration sets the ReplicationConfiguration field's value.
-func (s *GetBucketReplicationOutput) SetReplicationConfiguration(v *ReplicationConfiguration) *GetBucketReplicationOutput {
-	s.ReplicationConfiguration = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPaymentRequest
 type GetBucketRequestPaymentInput struct {
 	_ struct{} `type:"structure"`
@@ -9541,12 +8011,6 @@ func (s *GetBucketRequestPaymentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketRequestPaymentInput) SetBucket(v string) *GetBucketRequestPaymentInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *GetBucketRequestPaymentInput) getBucket() (v string) {
@@ -9581,12 +8045,6 @@ func (s GetBucketRequestPaymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPayer sets the Payer field's value.
-func (s *GetBucketRequestPaymentOutput) SetPayer(v Payer) *GetBucketRequestPaymentOutput {
-	s.Payer = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTaggingRequest
 type GetBucketTaggingInput struct {
 	_ struct{} `type:"structure"`
@@ -9617,12 +8075,6 @@ func (s *GetBucketTaggingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketTaggingInput) SetBucket(v string) *GetBucketTaggingInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *GetBucketTaggingInput) getBucket() (v string) {
@@ -9657,12 +8109,6 @@ func (s GetBucketTaggingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTagSet sets the TagSet field's value.
-func (s *GetBucketTaggingOutput) SetTagSet(v []Tag) *GetBucketTaggingOutput {
-	s.TagSet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioningRequest
 type GetBucketVersioningInput struct {
 	_ struct{} `type:"structure"`
@@ -9693,12 +8139,6 @@ func (s *GetBucketVersioningInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketVersioningInput) SetBucket(v string) *GetBucketVersioningInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *GetBucketVersioningInput) getBucket() (v string) {
@@ -9738,18 +8178,6 @@ func (s GetBucketVersioningOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMFADelete sets the MFADelete field's value.
-func (s *GetBucketVersioningOutput) SetMFADelete(v MFADeleteStatus) *GetBucketVersioningOutput {
-	s.MFADelete = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetBucketVersioningOutput) SetStatus(v BucketVersioningStatus) *GetBucketVersioningOutput {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsiteRequest
 type GetBucketWebsiteInput struct {
 	_ struct{} `type:"structure"`
@@ -9780,12 +8208,6 @@ func (s *GetBucketWebsiteInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *GetBucketWebsiteInput) SetBucket(v string) *GetBucketWebsiteInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *GetBucketWebsiteInput) getBucket() (v string) {
@@ -9823,30 +8245,6 @@ func (s GetBucketWebsiteOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBucketWebsiteOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetErrorDocument sets the ErrorDocument field's value.
-func (s *GetBucketWebsiteOutput) SetErrorDocument(v *ErrorDocument) *GetBucketWebsiteOutput {
-	s.ErrorDocument = v
-	return s
-}
-
-// SetIndexDocument sets the IndexDocument field's value.
-func (s *GetBucketWebsiteOutput) SetIndexDocument(v *IndexDocument) *GetBucketWebsiteOutput {
-	s.IndexDocument = v
-	return s
-}
-
-// SetRedirectAllRequestsTo sets the RedirectAllRequestsTo field's value.
-func (s *GetBucketWebsiteOutput) SetRedirectAllRequestsTo(v *RedirectAllRequestsTo) *GetBucketWebsiteOutput {
-	s.RedirectAllRequestsTo = v
-	return s
-}
-
-// SetRoutingRules sets the RoutingRules field's value.
-func (s *GetBucketWebsiteOutput) SetRoutingRules(v []RoutingRule) *GetBucketWebsiteOutput {
-	s.RoutingRules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclRequest
@@ -9900,35 +8298,11 @@ func (s *GetObjectAclInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetObjectAclInput) SetBucket(v string) *GetObjectAclInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetObjectAclInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *GetObjectAclInput) SetKey(v string) *GetObjectAclInput {
-	s.Key = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *GetObjectAclInput) SetRequestPayer(v RequestPayer) *GetObjectAclInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetObjectAclInput) SetVersionId(v string) *GetObjectAclInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclOutput
@@ -9960,24 +8334,6 @@ func (s GetObjectAclOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetObjectAclOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGrants sets the Grants field's value.
-func (s *GetObjectAclOutput) SetGrants(v []Grant) *GetObjectAclOutput {
-	s.Grants = v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *GetObjectAclOutput) SetOwner(v *Owner) *GetObjectAclOutput {
-	s.Owner = v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *GetObjectAclOutput) SetRequestCharged(v RequestCharged) *GetObjectAclOutput {
-	s.RequestCharged = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest
@@ -10089,12 +8445,6 @@ func (s *GetObjectInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetObjectInput) SetBucket(v string) *GetObjectInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetObjectInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -10102,119 +8452,11 @@ func (s *GetObjectInput) getBucket() (v string) {
 	return *s.Bucket
 }
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *GetObjectInput) SetIfMatch(v string) *GetObjectInput {
-	s.IfMatch = &v
-	return s
-}
-
-// SetIfModifiedSince sets the IfModifiedSince field's value.
-func (s *GetObjectInput) SetIfModifiedSince(v time.Time) *GetObjectInput {
-	s.IfModifiedSince = &v
-	return s
-}
-
-// SetIfNoneMatch sets the IfNoneMatch field's value.
-func (s *GetObjectInput) SetIfNoneMatch(v string) *GetObjectInput {
-	s.IfNoneMatch = &v
-	return s
-}
-
-// SetIfUnmodifiedSince sets the IfUnmodifiedSince field's value.
-func (s *GetObjectInput) SetIfUnmodifiedSince(v time.Time) *GetObjectInput {
-	s.IfUnmodifiedSince = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *GetObjectInput) SetKey(v string) *GetObjectInput {
-	s.Key = &v
-	return s
-}
-
-// SetPartNumber sets the PartNumber field's value.
-func (s *GetObjectInput) SetPartNumber(v int64) *GetObjectInput {
-	s.PartNumber = &v
-	return s
-}
-
-// SetRange sets the Range field's value.
-func (s *GetObjectInput) SetRange(v string) *GetObjectInput {
-	s.Range = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *GetObjectInput) SetRequestPayer(v RequestPayer) *GetObjectInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetResponseCacheControl sets the ResponseCacheControl field's value.
-func (s *GetObjectInput) SetResponseCacheControl(v string) *GetObjectInput {
-	s.ResponseCacheControl = &v
-	return s
-}
-
-// SetResponseContentDisposition sets the ResponseContentDisposition field's value.
-func (s *GetObjectInput) SetResponseContentDisposition(v string) *GetObjectInput {
-	s.ResponseContentDisposition = &v
-	return s
-}
-
-// SetResponseContentEncoding sets the ResponseContentEncoding field's value.
-func (s *GetObjectInput) SetResponseContentEncoding(v string) *GetObjectInput {
-	s.ResponseContentEncoding = &v
-	return s
-}
-
-// SetResponseContentLanguage sets the ResponseContentLanguage field's value.
-func (s *GetObjectInput) SetResponseContentLanguage(v string) *GetObjectInput {
-	s.ResponseContentLanguage = &v
-	return s
-}
-
-// SetResponseContentType sets the ResponseContentType field's value.
-func (s *GetObjectInput) SetResponseContentType(v string) *GetObjectInput {
-	s.ResponseContentType = &v
-	return s
-}
-
-// SetResponseExpires sets the ResponseExpires field's value.
-func (s *GetObjectInput) SetResponseExpires(v time.Time) *GetObjectInput {
-	s.ResponseExpires = &v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *GetObjectInput) SetSSECustomerAlgorithm(v string) *GetObjectInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *GetObjectInput) SetSSECustomerKey(v string) *GetObjectInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *GetObjectInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *GetObjectInput) SetSSECustomerKeyMD5(v string) *GetObjectInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetObjectInput) SetVersionId(v string) *GetObjectInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectOutput
@@ -10340,174 +8582,6 @@ func (s GetObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAcceptRanges sets the AcceptRanges field's value.
-func (s *GetObjectOutput) SetAcceptRanges(v string) *GetObjectOutput {
-	s.AcceptRanges = &v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *GetObjectOutput) SetBody(v io.ReadCloser) *GetObjectOutput {
-	s.Body = v
-	return s
-}
-
-// SetCacheControl sets the CacheControl field's value.
-func (s *GetObjectOutput) SetCacheControl(v string) *GetObjectOutput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentDisposition sets the ContentDisposition field's value.
-func (s *GetObjectOutput) SetContentDisposition(v string) *GetObjectOutput {
-	s.ContentDisposition = &v
-	return s
-}
-
-// SetContentEncoding sets the ContentEncoding field's value.
-func (s *GetObjectOutput) SetContentEncoding(v string) *GetObjectOutput {
-	s.ContentEncoding = &v
-	return s
-}
-
-// SetContentLanguage sets the ContentLanguage field's value.
-func (s *GetObjectOutput) SetContentLanguage(v string) *GetObjectOutput {
-	s.ContentLanguage = &v
-	return s
-}
-
-// SetContentLength sets the ContentLength field's value.
-func (s *GetObjectOutput) SetContentLength(v int64) *GetObjectOutput {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentRange sets the ContentRange field's value.
-func (s *GetObjectOutput) SetContentRange(v string) *GetObjectOutput {
-	s.ContentRange = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *GetObjectOutput) SetContentType(v string) *GetObjectOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetDeleteMarker sets the DeleteMarker field's value.
-func (s *GetObjectOutput) SetDeleteMarker(v bool) *GetObjectOutput {
-	s.DeleteMarker = &v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *GetObjectOutput) SetETag(v string) *GetObjectOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *GetObjectOutput) SetExpiration(v string) *GetObjectOutput {
-	s.Expiration = &v
-	return s
-}
-
-// SetExpires sets the Expires field's value.
-func (s *GetObjectOutput) SetExpires(v string) *GetObjectOutput {
-	s.Expires = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *GetObjectOutput) SetLastModified(v time.Time) *GetObjectOutput {
-	s.LastModified = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *GetObjectOutput) SetMetadata(v map[string]string) *GetObjectOutput {
-	s.Metadata = v
-	return s
-}
-
-// SetMissingMeta sets the MissingMeta field's value.
-func (s *GetObjectOutput) SetMissingMeta(v int64) *GetObjectOutput {
-	s.MissingMeta = &v
-	return s
-}
-
-// SetPartsCount sets the PartsCount field's value.
-func (s *GetObjectOutput) SetPartsCount(v int64) *GetObjectOutput {
-	s.PartsCount = &v
-	return s
-}
-
-// SetReplicationStatus sets the ReplicationStatus field's value.
-func (s *GetObjectOutput) SetReplicationStatus(v ReplicationStatus) *GetObjectOutput {
-	s.ReplicationStatus = v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *GetObjectOutput) SetRequestCharged(v RequestCharged) *GetObjectOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetRestore sets the Restore field's value.
-func (s *GetObjectOutput) SetRestore(v string) *GetObjectOutput {
-	s.Restore = &v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *GetObjectOutput) SetSSECustomerAlgorithm(v string) *GetObjectOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *GetObjectOutput) SetSSECustomerKeyMD5(v string) *GetObjectOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *GetObjectOutput) SetSSEKMSKeyId(v string) *GetObjectOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *GetObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *GetObjectOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *GetObjectOutput) SetStorageClass(v StorageClass) *GetObjectOutput {
-	s.StorageClass = v
-	return s
-}
-
-// SetTagCount sets the TagCount field's value.
-func (s *GetObjectOutput) SetTagCount(v int64) *GetObjectOutput {
-	s.TagCount = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetObjectOutput) SetVersionId(v string) *GetObjectOutput {
-	s.VersionId = &v
-	return s
-}
-
-// SetWebsiteRedirectLocation sets the WebsiteRedirectLocation field's value.
-func (s *GetObjectOutput) SetWebsiteRedirectLocation(v string) *GetObjectOutput {
-	s.WebsiteRedirectLocation = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTaggingRequest
 type GetObjectTaggingInput struct {
 	_ struct{} `type:"structure"`
@@ -10552,29 +8626,11 @@ func (s *GetObjectTaggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetObjectTaggingInput) SetBucket(v string) *GetObjectTaggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetObjectTaggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *GetObjectTaggingInput) SetKey(v string) *GetObjectTaggingInput {
-	s.Key = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetObjectTaggingInput) SetVersionId(v string) *GetObjectTaggingInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTaggingOutput
@@ -10602,18 +8658,6 @@ func (s GetObjectTaggingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetObjectTaggingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTagSet sets the TagSet field's value.
-func (s *GetObjectTaggingOutput) SetTagSet(v []Tag) *GetObjectTaggingOutput {
-	s.TagSet = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetObjectTaggingOutput) SetVersionId(v string) *GetObjectTaggingOutput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentRequest
@@ -10664,29 +8708,11 @@ func (s *GetObjectTorrentInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *GetObjectTorrentInput) SetBucket(v string) *GetObjectTorrentInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *GetObjectTorrentInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *GetObjectTorrentInput) SetKey(v string) *GetObjectTorrentInput {
-	s.Key = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *GetObjectTorrentInput) SetRequestPayer(v RequestPayer) *GetObjectTorrentInput {
-	s.RequestPayer = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentOutput
@@ -10715,18 +8741,6 @@ func (s GetObjectTorrentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetObjectTorrentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBody sets the Body field's value.
-func (s *GetObjectTorrentOutput) SetBody(v io.ReadCloser) *GetObjectTorrentOutput {
-	s.Body = v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *GetObjectTorrentOutput) SetRequestCharged(v RequestCharged) *GetObjectTorrentOutput {
-	s.RequestCharged = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GlacierJobParameters
@@ -10762,12 +8776,6 @@ func (s *GlacierJobParameters) Validate() error {
 	return nil
 }
 
-// SetTier sets the Tier field's value.
-func (s *GlacierJobParameters) SetTier(v Tier) *GlacierJobParameters {
-	s.Tier = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Grant
 type Grant struct {
 	_ struct{} `type:"structure"`
@@ -10801,18 +8809,6 @@ func (s *Grant) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGrantee sets the Grantee field's value.
-func (s *Grant) SetGrantee(v *Grantee) *Grant {
-	s.Grantee = v
-	return s
-}
-
-// SetPermission sets the Permission field's value.
-func (s *Grant) SetPermission(v Permission) *Grant {
-	s.Permission = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Grantee
@@ -10860,36 +8856,6 @@ func (s *Grantee) Validate() error {
 	return nil
 }
 
-// SetDisplayName sets the DisplayName field's value.
-func (s *Grantee) SetDisplayName(v string) *Grantee {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEmailAddress sets the EmailAddress field's value.
-func (s *Grantee) SetEmailAddress(v string) *Grantee {
-	s.EmailAddress = &v
-	return s
-}
-
-// SetID sets the ID field's value.
-func (s *Grantee) SetID(v string) *Grantee {
-	s.ID = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Grantee) SetType(v Type) *Grantee {
-	s.Type = v
-	return s
-}
-
-// SetURI sets the URI field's value.
-func (s *Grantee) SetURI(v string) *Grantee {
-	s.URI = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucketRequest
 type HeadBucketInput struct {
 	_ struct{} `type:"structure"`
@@ -10920,12 +8886,6 @@ func (s *HeadBucketInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *HeadBucketInput) SetBucket(v string) *HeadBucketInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *HeadBucketInput) getBucket() (v string) {
@@ -11049,12 +9009,6 @@ func (s *HeadObjectInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *HeadObjectInput) SetBucket(v string) *HeadObjectInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *HeadObjectInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -11062,83 +9016,11 @@ func (s *HeadObjectInput) getBucket() (v string) {
 	return *s.Bucket
 }
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *HeadObjectInput) SetIfMatch(v string) *HeadObjectInput {
-	s.IfMatch = &v
-	return s
-}
-
-// SetIfModifiedSince sets the IfModifiedSince field's value.
-func (s *HeadObjectInput) SetIfModifiedSince(v time.Time) *HeadObjectInput {
-	s.IfModifiedSince = &v
-	return s
-}
-
-// SetIfNoneMatch sets the IfNoneMatch field's value.
-func (s *HeadObjectInput) SetIfNoneMatch(v string) *HeadObjectInput {
-	s.IfNoneMatch = &v
-	return s
-}
-
-// SetIfUnmodifiedSince sets the IfUnmodifiedSince field's value.
-func (s *HeadObjectInput) SetIfUnmodifiedSince(v time.Time) *HeadObjectInput {
-	s.IfUnmodifiedSince = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *HeadObjectInput) SetKey(v string) *HeadObjectInput {
-	s.Key = &v
-	return s
-}
-
-// SetPartNumber sets the PartNumber field's value.
-func (s *HeadObjectInput) SetPartNumber(v int64) *HeadObjectInput {
-	s.PartNumber = &v
-	return s
-}
-
-// SetRange sets the Range field's value.
-func (s *HeadObjectInput) SetRange(v string) *HeadObjectInput {
-	s.Range = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *HeadObjectInput) SetRequestPayer(v RequestPayer) *HeadObjectInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *HeadObjectInput) SetSSECustomerAlgorithm(v string) *HeadObjectInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *HeadObjectInput) SetSSECustomerKey(v string) *HeadObjectInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *HeadObjectInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *HeadObjectInput) SetSSECustomerKeyMD5(v string) *HeadObjectInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *HeadObjectInput) SetVersionId(v string) *HeadObjectInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectOutput
@@ -11255,156 +9137,6 @@ func (s HeadObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAcceptRanges sets the AcceptRanges field's value.
-func (s *HeadObjectOutput) SetAcceptRanges(v string) *HeadObjectOutput {
-	s.AcceptRanges = &v
-	return s
-}
-
-// SetCacheControl sets the CacheControl field's value.
-func (s *HeadObjectOutput) SetCacheControl(v string) *HeadObjectOutput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentDisposition sets the ContentDisposition field's value.
-func (s *HeadObjectOutput) SetContentDisposition(v string) *HeadObjectOutput {
-	s.ContentDisposition = &v
-	return s
-}
-
-// SetContentEncoding sets the ContentEncoding field's value.
-func (s *HeadObjectOutput) SetContentEncoding(v string) *HeadObjectOutput {
-	s.ContentEncoding = &v
-	return s
-}
-
-// SetContentLanguage sets the ContentLanguage field's value.
-func (s *HeadObjectOutput) SetContentLanguage(v string) *HeadObjectOutput {
-	s.ContentLanguage = &v
-	return s
-}
-
-// SetContentLength sets the ContentLength field's value.
-func (s *HeadObjectOutput) SetContentLength(v int64) *HeadObjectOutput {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *HeadObjectOutput) SetContentType(v string) *HeadObjectOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetDeleteMarker sets the DeleteMarker field's value.
-func (s *HeadObjectOutput) SetDeleteMarker(v bool) *HeadObjectOutput {
-	s.DeleteMarker = &v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *HeadObjectOutput) SetETag(v string) *HeadObjectOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *HeadObjectOutput) SetExpiration(v string) *HeadObjectOutput {
-	s.Expiration = &v
-	return s
-}
-
-// SetExpires sets the Expires field's value.
-func (s *HeadObjectOutput) SetExpires(v string) *HeadObjectOutput {
-	s.Expires = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *HeadObjectOutput) SetLastModified(v time.Time) *HeadObjectOutput {
-	s.LastModified = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *HeadObjectOutput) SetMetadata(v map[string]string) *HeadObjectOutput {
-	s.Metadata = v
-	return s
-}
-
-// SetMissingMeta sets the MissingMeta field's value.
-func (s *HeadObjectOutput) SetMissingMeta(v int64) *HeadObjectOutput {
-	s.MissingMeta = &v
-	return s
-}
-
-// SetPartsCount sets the PartsCount field's value.
-func (s *HeadObjectOutput) SetPartsCount(v int64) *HeadObjectOutput {
-	s.PartsCount = &v
-	return s
-}
-
-// SetReplicationStatus sets the ReplicationStatus field's value.
-func (s *HeadObjectOutput) SetReplicationStatus(v ReplicationStatus) *HeadObjectOutput {
-	s.ReplicationStatus = v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *HeadObjectOutput) SetRequestCharged(v RequestCharged) *HeadObjectOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetRestore sets the Restore field's value.
-func (s *HeadObjectOutput) SetRestore(v string) *HeadObjectOutput {
-	s.Restore = &v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *HeadObjectOutput) SetSSECustomerAlgorithm(v string) *HeadObjectOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *HeadObjectOutput) SetSSECustomerKeyMD5(v string) *HeadObjectOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *HeadObjectOutput) SetSSEKMSKeyId(v string) *HeadObjectOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *HeadObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *HeadObjectOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *HeadObjectOutput) SetStorageClass(v StorageClass) *HeadObjectOutput {
-	s.StorageClass = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *HeadObjectOutput) SetVersionId(v string) *HeadObjectOutput {
-	s.VersionId = &v
-	return s
-}
-
-// SetWebsiteRedirectLocation sets the WebsiteRedirectLocation field's value.
-func (s *HeadObjectOutput) SetWebsiteRedirectLocation(v string) *HeadObjectOutput {
-	s.WebsiteRedirectLocation = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IndexDocument
 type IndexDocument struct {
 	_ struct{} `type:"structure"`
@@ -11442,12 +9174,6 @@ func (s *IndexDocument) Validate() error {
 	return nil
 }
 
-// SetSuffix sets the Suffix field's value.
-func (s *IndexDocument) SetSuffix(v string) *IndexDocument {
-	s.Suffix = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Initiator
 type Initiator struct {
 	_ struct{} `type:"structure"`
@@ -11470,18 +9196,6 @@ func (s Initiator) GoString() string {
 	return s.String()
 }
 
-// SetDisplayName sets the DisplayName field's value.
-func (s *Initiator) SetDisplayName(v string) *Initiator {
-	s.DisplayName = &v
-	return s
-}
-
-// SetID sets the ID field's value.
-func (s *Initiator) SetID(v string) *Initiator {
-	s.ID = &v
-	return s
-}
-
 // Describes the serialization format of the object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization
 type InputSerialization struct {
@@ -11499,12 +9213,6 @@ func (s InputSerialization) String() string {
 // GoString returns the string representation
 func (s InputSerialization) GoString() string {
 	return s.String()
-}
-
-// SetCSV sets the CSV field's value.
-func (s *InputSerialization) SetCSV(v *CSVInput) *InputSerialization {
-	s.CSV = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryConfiguration
@@ -11598,48 +9306,6 @@ func (s *InventoryConfiguration) Validate() error {
 	return nil
 }
 
-// SetDestination sets the Destination field's value.
-func (s *InventoryConfiguration) SetDestination(v *InventoryDestination) *InventoryConfiguration {
-	s.Destination = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *InventoryConfiguration) SetFilter(v *InventoryFilter) *InventoryConfiguration {
-	s.Filter = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *InventoryConfiguration) SetId(v string) *InventoryConfiguration {
-	s.Id = &v
-	return s
-}
-
-// SetIncludedObjectVersions sets the IncludedObjectVersions field's value.
-func (s *InventoryConfiguration) SetIncludedObjectVersions(v InventoryIncludedObjectVersions) *InventoryConfiguration {
-	s.IncludedObjectVersions = v
-	return s
-}
-
-// SetIsEnabled sets the IsEnabled field's value.
-func (s *InventoryConfiguration) SetIsEnabled(v bool) *InventoryConfiguration {
-	s.IsEnabled = &v
-	return s
-}
-
-// SetOptionalFields sets the OptionalFields field's value.
-func (s *InventoryConfiguration) SetOptionalFields(v []InventoryOptionalField) *InventoryConfiguration {
-	s.OptionalFields = v
-	return s
-}
-
-// SetSchedule sets the Schedule field's value.
-func (s *InventoryConfiguration) SetSchedule(v *InventorySchedule) *InventoryConfiguration {
-	s.Schedule = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryDestination
 type InventoryDestination struct {
 	_ struct{} `type:"structure"`
@@ -11680,12 +9346,6 @@ func (s *InventoryDestination) Validate() error {
 	return nil
 }
 
-// SetS3BucketDestination sets the S3BucketDestination field's value.
-func (s *InventoryDestination) SetS3BucketDestination(v *InventoryS3BucketDestination) *InventoryDestination {
-	s.S3BucketDestination = v
-	return s
-}
-
 // Contains the type of server-side encryption used to encrypt the inventory
 // results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryEncryption
@@ -11724,18 +9384,6 @@ func (s *InventoryEncryption) Validate() error {
 	return nil
 }
 
-// SetSSEKMS sets the SSEKMS field's value.
-func (s *InventoryEncryption) SetSSEKMS(v *SSEKMS) *InventoryEncryption {
-	s.SSEKMS = v
-	return s
-}
-
-// SetSSES3 sets the SSES3 field's value.
-func (s *InventoryEncryption) SetSSES3(v *SSES3) *InventoryEncryption {
-	s.SSES3 = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryFilter
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
@@ -11768,12 +9416,6 @@ func (s *InventoryFilter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *InventoryFilter) SetPrefix(v string) *InventoryFilter {
-	s.Prefix = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryS3BucketDestination
@@ -11834,41 +9476,11 @@ func (s *InventoryS3BucketDestination) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *InventoryS3BucketDestination) SetAccountId(v string) *InventoryS3BucketDestination {
-	s.AccountId = &v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *InventoryS3BucketDestination) SetBucket(v string) *InventoryS3BucketDestination {
-	s.Bucket = &v
-	return s
-}
-
 func (s *InventoryS3BucketDestination) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *InventoryS3BucketDestination) SetEncryption(v *InventoryEncryption) *InventoryS3BucketDestination {
-	s.Encryption = v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *InventoryS3BucketDestination) SetFormat(v InventoryFormat) *InventoryS3BucketDestination {
-	s.Format = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *InventoryS3BucketDestination) SetPrefix(v string) *InventoryS3BucketDestination {
-	s.Prefix = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventorySchedule
@@ -11904,12 +9516,6 @@ func (s *InventorySchedule) Validate() error {
 	return nil
 }
 
-// SetFrequency sets the Frequency field's value.
-func (s *InventorySchedule) SetFrequency(v InventoryFrequency) *InventorySchedule {
-	s.Frequency = v
-	return s
-}
-
 // Container for object key name prefix and suffix filtering rules.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3KeyFilter
 type KeyFilter struct {
@@ -11928,12 +9534,6 @@ func (s KeyFilter) String() string {
 // GoString returns the string representation
 func (s KeyFilter) GoString() string {
 	return s.String()
-}
-
-// SetFilterRules sets the FilterRules field's value.
-func (s *KeyFilter) SetFilterRules(v []FilterRule) *KeyFilter {
-	s.FilterRules = v
-	return s
 }
 
 // Container for specifying the AWS Lambda notification configuration.
@@ -11987,30 +9587,6 @@ func (s *LambdaFunctionConfiguration) Validate() error {
 	return nil
 }
 
-// SetEvents sets the Events field's value.
-func (s *LambdaFunctionConfiguration) SetEvents(v []Event) *LambdaFunctionConfiguration {
-	s.Events = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *LambdaFunctionConfiguration) SetFilter(v *NotificationConfigurationFilter) *LambdaFunctionConfiguration {
-	s.Filter = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *LambdaFunctionConfiguration) SetId(v string) *LambdaFunctionConfiguration {
-	s.Id = &v
-	return s
-}
-
-// SetLambdaFunctionArn sets the LambdaFunctionArn field's value.
-func (s *LambdaFunctionConfiguration) SetLambdaFunctionArn(v string) *LambdaFunctionConfiguration {
-	s.LambdaFunctionArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleConfiguration
 type LifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -12050,12 +9626,6 @@ func (s *LifecycleConfiguration) Validate() error {
 	return nil
 }
 
-// SetRules sets the Rules field's value.
-func (s *LifecycleConfiguration) SetRules(v []Rule) *LifecycleConfiguration {
-	s.Rules = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleExpiration
 type LifecycleExpiration struct {
 	_ struct{} `type:"structure"`
@@ -12083,24 +9653,6 @@ func (s LifecycleExpiration) String() string {
 // GoString returns the string representation
 func (s LifecycleExpiration) GoString() string {
 	return s.String()
-}
-
-// SetDate sets the Date field's value.
-func (s *LifecycleExpiration) SetDate(v time.Time) *LifecycleExpiration {
-	s.Date = &v
-	return s
-}
-
-// SetDays sets the Days field's value.
-func (s *LifecycleExpiration) SetDays(v int64) *LifecycleExpiration {
-	s.Days = &v
-	return s
-}
-
-// SetExpiredObjectDeleteMarker sets the ExpiredObjectDeleteMarker field's value.
-func (s *LifecycleExpiration) SetExpiredObjectDeleteMarker(v bool) *LifecycleExpiration {
-	s.ExpiredObjectDeleteMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRule
@@ -12170,60 +9722,6 @@ func (s *LifecycleRule) Validate() error {
 	return nil
 }
 
-// SetAbortIncompleteMultipartUpload sets the AbortIncompleteMultipartUpload field's value.
-func (s *LifecycleRule) SetAbortIncompleteMultipartUpload(v *AbortIncompleteMultipartUpload) *LifecycleRule {
-	s.AbortIncompleteMultipartUpload = v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *LifecycleRule) SetExpiration(v *LifecycleExpiration) *LifecycleRule {
-	s.Expiration = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *LifecycleRule) SetFilter(v *LifecycleRuleFilter) *LifecycleRule {
-	s.Filter = v
-	return s
-}
-
-// SetID sets the ID field's value.
-func (s *LifecycleRule) SetID(v string) *LifecycleRule {
-	s.ID = &v
-	return s
-}
-
-// SetNoncurrentVersionExpiration sets the NoncurrentVersionExpiration field's value.
-func (s *LifecycleRule) SetNoncurrentVersionExpiration(v *NoncurrentVersionExpiration) *LifecycleRule {
-	s.NoncurrentVersionExpiration = v
-	return s
-}
-
-// SetNoncurrentVersionTransitions sets the NoncurrentVersionTransitions field's value.
-func (s *LifecycleRule) SetNoncurrentVersionTransitions(v []NoncurrentVersionTransition) *LifecycleRule {
-	s.NoncurrentVersionTransitions = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *LifecycleRule) SetPrefix(v string) *LifecycleRule {
-	s.Prefix = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *LifecycleRule) SetStatus(v ExpirationStatus) *LifecycleRule {
-	s.Status = v
-	return s
-}
-
-// SetTransitions sets the Transitions field's value.
-func (s *LifecycleRule) SetTransitions(v []Transition) *LifecycleRule {
-	s.Transitions = v
-	return s
-}
-
 // This is used in a Lifecycle Rule Filter to apply a logical AND to two or
 // more predicates. The Lifecycle Rule will apply to any object matching all
 // of the predicates configured inside the And operator.
@@ -12263,18 +9761,6 @@ func (s *LifecycleRuleAndOperator) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *LifecycleRuleAndOperator) SetPrefix(v string) *LifecycleRuleAndOperator {
-	s.Prefix = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *LifecycleRuleAndOperator) SetTags(v []Tag) *LifecycleRuleAndOperator {
-	s.Tags = v
-	return s
 }
 
 // The Filter is used to identify objects that a Lifecycle Rule applies to.
@@ -12325,24 +9811,6 @@ func (s *LifecycleRuleFilter) Validate() error {
 	return nil
 }
 
-// SetAnd sets the And field's value.
-func (s *LifecycleRuleFilter) SetAnd(v *LifecycleRuleAndOperator) *LifecycleRuleFilter {
-	s.And = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *LifecycleRuleFilter) SetPrefix(v string) *LifecycleRuleFilter {
-	s.Prefix = &v
-	return s
-}
-
-// SetTag sets the Tag field's value.
-func (s *LifecycleRuleFilter) SetTag(v *Tag) *LifecycleRuleFilter {
-	s.Tag = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurationsRequest
 type ListBucketAnalyticsConfigurationsInput struct {
 	_ struct{} `type:"structure"`
@@ -12381,23 +9849,11 @@ func (s *ListBucketAnalyticsConfigurationsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListBucketAnalyticsConfigurationsInput) SetBucket(v string) *ListBucketAnalyticsConfigurationsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListBucketAnalyticsConfigurationsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListBucketAnalyticsConfigurationsInput) SetContinuationToken(v string) *ListBucketAnalyticsConfigurationsInput {
-	s.ContinuationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurationsOutput
@@ -12436,30 +9892,6 @@ func (s ListBucketAnalyticsConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBucketAnalyticsConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAnalyticsConfigurationList sets the AnalyticsConfigurationList field's value.
-func (s *ListBucketAnalyticsConfigurationsOutput) SetAnalyticsConfigurationList(v []AnalyticsConfiguration) *ListBucketAnalyticsConfigurationsOutput {
-	s.AnalyticsConfigurationList = v
-	return s
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListBucketAnalyticsConfigurationsOutput) SetContinuationToken(v string) *ListBucketAnalyticsConfigurationsOutput {
-	s.ContinuationToken = &v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListBucketAnalyticsConfigurationsOutput) SetIsTruncated(v bool) *ListBucketAnalyticsConfigurationsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetNextContinuationToken sets the NextContinuationToken field's value.
-func (s *ListBucketAnalyticsConfigurationsOutput) SetNextContinuationToken(v string) *ListBucketAnalyticsConfigurationsOutput {
-	s.NextContinuationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurationsRequest
@@ -12502,23 +9934,11 @@ func (s *ListBucketInventoryConfigurationsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListBucketInventoryConfigurationsInput) SetBucket(v string) *ListBucketInventoryConfigurationsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListBucketInventoryConfigurationsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListBucketInventoryConfigurationsInput) SetContinuationToken(v string) *ListBucketInventoryConfigurationsInput {
-	s.ContinuationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurationsOutput
@@ -12557,30 +9977,6 @@ func (s ListBucketInventoryConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBucketInventoryConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListBucketInventoryConfigurationsOutput) SetContinuationToken(v string) *ListBucketInventoryConfigurationsOutput {
-	s.ContinuationToken = &v
-	return s
-}
-
-// SetInventoryConfigurationList sets the InventoryConfigurationList field's value.
-func (s *ListBucketInventoryConfigurationsOutput) SetInventoryConfigurationList(v []InventoryConfiguration) *ListBucketInventoryConfigurationsOutput {
-	s.InventoryConfigurationList = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListBucketInventoryConfigurationsOutput) SetIsTruncated(v bool) *ListBucketInventoryConfigurationsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetNextContinuationToken sets the NextContinuationToken field's value.
-func (s *ListBucketInventoryConfigurationsOutput) SetNextContinuationToken(v string) *ListBucketInventoryConfigurationsOutput {
-	s.NextContinuationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurationsRequest
@@ -12623,23 +10019,11 @@ func (s *ListBucketMetricsConfigurationsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListBucketMetricsConfigurationsInput) SetBucket(v string) *ListBucketMetricsConfigurationsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListBucketMetricsConfigurationsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListBucketMetricsConfigurationsInput) SetContinuationToken(v string) *ListBucketMetricsConfigurationsInput {
-	s.ContinuationToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurationsOutput
@@ -12682,30 +10066,6 @@ func (s ListBucketMetricsConfigurationsOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListBucketMetricsConfigurationsOutput) SetContinuationToken(v string) *ListBucketMetricsConfigurationsOutput {
-	s.ContinuationToken = &v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListBucketMetricsConfigurationsOutput) SetIsTruncated(v bool) *ListBucketMetricsConfigurationsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMetricsConfigurationList sets the MetricsConfigurationList field's value.
-func (s *ListBucketMetricsConfigurationsOutput) SetMetricsConfigurationList(v []MetricsConfiguration) *ListBucketMetricsConfigurationsOutput {
-	s.MetricsConfigurationList = v
-	return s
-}
-
-// SetNextContinuationToken sets the NextContinuationToken field's value.
-func (s *ListBucketMetricsConfigurationsOutput) SetNextContinuationToken(v string) *ListBucketMetricsConfigurationsOutput {
-	s.NextContinuationToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketsInput
 type ListBucketsInput struct {
 	_ struct{} `type:"structure"`
@@ -12745,18 +10105,6 @@ func (s ListBucketsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBucketsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBuckets sets the Buckets field's value.
-func (s *ListBucketsOutput) SetBuckets(v []Bucket) *ListBucketsOutput {
-	s.Buckets = v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ListBucketsOutput) SetOwner(v *Owner) *ListBucketsOutput {
-	s.Owner = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsRequest
@@ -12820,53 +10168,11 @@ func (s *ListMultipartUploadsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListMultipartUploadsInput) SetBucket(v string) *ListMultipartUploadsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListMultipartUploadsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListMultipartUploadsInput) SetDelimiter(v string) *ListMultipartUploadsInput {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListMultipartUploadsInput) SetEncodingType(v EncodingType) *ListMultipartUploadsInput {
-	s.EncodingType = v
-	return s
-}
-
-// SetKeyMarker sets the KeyMarker field's value.
-func (s *ListMultipartUploadsInput) SetKeyMarker(v string) *ListMultipartUploadsInput {
-	s.KeyMarker = &v
-	return s
-}
-
-// SetMaxUploads sets the MaxUploads field's value.
-func (s *ListMultipartUploadsInput) SetMaxUploads(v int64) *ListMultipartUploadsInput {
-	s.MaxUploads = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListMultipartUploadsInput) SetPrefix(v string) *ListMultipartUploadsInput {
-	s.Prefix = &v
-	return s
-}
-
-// SetUploadIdMarker sets the UploadIdMarker field's value.
-func (s *ListMultipartUploadsInput) SetUploadIdMarker(v string) *ListMultipartUploadsInput {
-	s.UploadIdMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsOutput
@@ -12931,83 +10237,11 @@ func (s ListMultipartUploadsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListMultipartUploadsOutput) SetBucket(v string) *ListMultipartUploadsOutput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListMultipartUploadsOutput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListMultipartUploadsOutput) SetCommonPrefixes(v []CommonPrefix) *ListMultipartUploadsOutput {
-	s.CommonPrefixes = v
-	return s
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListMultipartUploadsOutput) SetDelimiter(v string) *ListMultipartUploadsOutput {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListMultipartUploadsOutput) SetEncodingType(v EncodingType) *ListMultipartUploadsOutput {
-	s.EncodingType = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListMultipartUploadsOutput) SetIsTruncated(v bool) *ListMultipartUploadsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetKeyMarker sets the KeyMarker field's value.
-func (s *ListMultipartUploadsOutput) SetKeyMarker(v string) *ListMultipartUploadsOutput {
-	s.KeyMarker = &v
-	return s
-}
-
-// SetMaxUploads sets the MaxUploads field's value.
-func (s *ListMultipartUploadsOutput) SetMaxUploads(v int64) *ListMultipartUploadsOutput {
-	s.MaxUploads = &v
-	return s
-}
-
-// SetNextKeyMarker sets the NextKeyMarker field's value.
-func (s *ListMultipartUploadsOutput) SetNextKeyMarker(v string) *ListMultipartUploadsOutput {
-	s.NextKeyMarker = &v
-	return s
-}
-
-// SetNextUploadIdMarker sets the NextUploadIdMarker field's value.
-func (s *ListMultipartUploadsOutput) SetNextUploadIdMarker(v string) *ListMultipartUploadsOutput {
-	s.NextUploadIdMarker = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListMultipartUploadsOutput) SetPrefix(v string) *ListMultipartUploadsOutput {
-	s.Prefix = &v
-	return s
-}
-
-// SetUploadIdMarker sets the UploadIdMarker field's value.
-func (s *ListMultipartUploadsOutput) SetUploadIdMarker(v string) *ListMultipartUploadsOutput {
-	s.UploadIdMarker = &v
-	return s
-}
-
-// SetUploads sets the Uploads field's value.
-func (s *ListMultipartUploadsOutput) SetUploads(v []MultipartUpload) *ListMultipartUploadsOutput {
-	s.Uploads = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsRequest
@@ -13066,53 +10300,11 @@ func (s *ListObjectVersionsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListObjectVersionsInput) SetBucket(v string) *ListObjectVersionsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListObjectVersionsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListObjectVersionsInput) SetDelimiter(v string) *ListObjectVersionsInput {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectVersionsInput) SetEncodingType(v EncodingType) *ListObjectVersionsInput {
-	s.EncodingType = v
-	return s
-}
-
-// SetKeyMarker sets the KeyMarker field's value.
-func (s *ListObjectVersionsInput) SetKeyMarker(v string) *ListObjectVersionsInput {
-	s.KeyMarker = &v
-	return s
-}
-
-// SetMaxKeys sets the MaxKeys field's value.
-func (s *ListObjectVersionsInput) SetMaxKeys(v int64) *ListObjectVersionsInput {
-	s.MaxKeys = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListObjectVersionsInput) SetPrefix(v string) *ListObjectVersionsInput {
-	s.Prefix = &v
-	return s
-}
-
-// SetVersionIdMarker sets the VersionIdMarker field's value.
-func (s *ListObjectVersionsInput) SetVersionIdMarker(v string) *ListObjectVersionsInput {
-	s.VersionIdMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsOutput
@@ -13170,84 +10362,6 @@ func (s ListObjectVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListObjectVersionsOutput) SetCommonPrefixes(v []CommonPrefix) *ListObjectVersionsOutput {
-	s.CommonPrefixes = v
-	return s
-}
-
-// SetDeleteMarkers sets the DeleteMarkers field's value.
-func (s *ListObjectVersionsOutput) SetDeleteMarkers(v []DeleteMarkerEntry) *ListObjectVersionsOutput {
-	s.DeleteMarkers = v
-	return s
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListObjectVersionsOutput) SetDelimiter(v string) *ListObjectVersionsOutput {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectVersionsOutput) SetEncodingType(v EncodingType) *ListObjectVersionsOutput {
-	s.EncodingType = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListObjectVersionsOutput) SetIsTruncated(v bool) *ListObjectVersionsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetKeyMarker sets the KeyMarker field's value.
-func (s *ListObjectVersionsOutput) SetKeyMarker(v string) *ListObjectVersionsOutput {
-	s.KeyMarker = &v
-	return s
-}
-
-// SetMaxKeys sets the MaxKeys field's value.
-func (s *ListObjectVersionsOutput) SetMaxKeys(v int64) *ListObjectVersionsOutput {
-	s.MaxKeys = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListObjectVersionsOutput) SetName(v string) *ListObjectVersionsOutput {
-	s.Name = &v
-	return s
-}
-
-// SetNextKeyMarker sets the NextKeyMarker field's value.
-func (s *ListObjectVersionsOutput) SetNextKeyMarker(v string) *ListObjectVersionsOutput {
-	s.NextKeyMarker = &v
-	return s
-}
-
-// SetNextVersionIdMarker sets the NextVersionIdMarker field's value.
-func (s *ListObjectVersionsOutput) SetNextVersionIdMarker(v string) *ListObjectVersionsOutput {
-	s.NextVersionIdMarker = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListObjectVersionsOutput) SetPrefix(v string) *ListObjectVersionsOutput {
-	s.Prefix = &v
-	return s
-}
-
-// SetVersionIdMarker sets the VersionIdMarker field's value.
-func (s *ListObjectVersionsOutput) SetVersionIdMarker(v string) *ListObjectVersionsOutput {
-	s.VersionIdMarker = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListObjectVersionsOutput) SetVersions(v []ObjectVersion) *ListObjectVersionsOutput {
-	s.Versions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsRequest
@@ -13308,53 +10422,11 @@ func (s *ListObjectsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListObjectsInput) SetBucket(v string) *ListObjectsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListObjectsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListObjectsInput) SetDelimiter(v string) *ListObjectsInput {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsInput) SetEncodingType(v EncodingType) *ListObjectsInput {
-	s.EncodingType = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListObjectsInput) SetMarker(v string) *ListObjectsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxKeys sets the MaxKeys field's value.
-func (s *ListObjectsInput) SetMaxKeys(v int64) *ListObjectsInput {
-	s.MaxKeys = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListObjectsInput) SetPrefix(v string) *ListObjectsInput {
-	s.Prefix = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *ListObjectsInput) SetRequestPayer(v RequestPayer) *ListObjectsInput {
-	s.RequestPayer = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsOutput
@@ -13407,66 +10479,6 @@ func (s ListObjectsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListObjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListObjectsOutput) SetCommonPrefixes(v []CommonPrefix) *ListObjectsOutput {
-	s.CommonPrefixes = v
-	return s
-}
-
-// SetContents sets the Contents field's value.
-func (s *ListObjectsOutput) SetContents(v []Object) *ListObjectsOutput {
-	s.Contents = v
-	return s
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListObjectsOutput) SetDelimiter(v string) *ListObjectsOutput {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsOutput) SetEncodingType(v EncodingType) *ListObjectsOutput {
-	s.EncodingType = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListObjectsOutput) SetIsTruncated(v bool) *ListObjectsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListObjectsOutput) SetMarker(v string) *ListObjectsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxKeys sets the MaxKeys field's value.
-func (s *ListObjectsOutput) SetMaxKeys(v int64) *ListObjectsOutput {
-	s.MaxKeys = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListObjectsOutput) SetName(v string) *ListObjectsOutput {
-	s.Name = &v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListObjectsOutput) SetNextMarker(v string) *ListObjectsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListObjectsOutput) SetPrefix(v string) *ListObjectsOutput {
-	s.Prefix = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Request
@@ -13535,65 +10547,11 @@ func (s *ListObjectsV2Input) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListObjectsV2Input) SetBucket(v string) *ListObjectsV2Input {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListObjectsV2Input) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListObjectsV2Input) SetContinuationToken(v string) *ListObjectsV2Input {
-	s.ContinuationToken = &v
-	return s
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListObjectsV2Input) SetDelimiter(v string) *ListObjectsV2Input {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsV2Input) SetEncodingType(v EncodingType) *ListObjectsV2Input {
-	s.EncodingType = v
-	return s
-}
-
-// SetFetchOwner sets the FetchOwner field's value.
-func (s *ListObjectsV2Input) SetFetchOwner(v bool) *ListObjectsV2Input {
-	s.FetchOwner = &v
-	return s
-}
-
-// SetMaxKeys sets the MaxKeys field's value.
-func (s *ListObjectsV2Input) SetMaxKeys(v int64) *ListObjectsV2Input {
-	s.MaxKeys = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListObjectsV2Input) SetPrefix(v string) *ListObjectsV2Input {
-	s.Prefix = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *ListObjectsV2Input) SetRequestPayer(v RequestPayer) *ListObjectsV2Input {
-	s.RequestPayer = v
-	return s
-}
-
-// SetStartAfter sets the StartAfter field's value.
-func (s *ListObjectsV2Input) SetStartAfter(v string) *ListObjectsV2Input {
-	s.StartAfter = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Output
@@ -13665,78 +10623,6 @@ func (s ListObjectsV2Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCommonPrefixes sets the CommonPrefixes field's value.
-func (s *ListObjectsV2Output) SetCommonPrefixes(v []CommonPrefix) *ListObjectsV2Output {
-	s.CommonPrefixes = v
-	return s
-}
-
-// SetContents sets the Contents field's value.
-func (s *ListObjectsV2Output) SetContents(v []Object) *ListObjectsV2Output {
-	s.Contents = v
-	return s
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *ListObjectsV2Output) SetContinuationToken(v string) *ListObjectsV2Output {
-	s.ContinuationToken = &v
-	return s
-}
-
-// SetDelimiter sets the Delimiter field's value.
-func (s *ListObjectsV2Output) SetDelimiter(v string) *ListObjectsV2Output {
-	s.Delimiter = &v
-	return s
-}
-
-// SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsV2Output) SetEncodingType(v EncodingType) *ListObjectsV2Output {
-	s.EncodingType = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListObjectsV2Output) SetIsTruncated(v bool) *ListObjectsV2Output {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetKeyCount sets the KeyCount field's value.
-func (s *ListObjectsV2Output) SetKeyCount(v int64) *ListObjectsV2Output {
-	s.KeyCount = &v
-	return s
-}
-
-// SetMaxKeys sets the MaxKeys field's value.
-func (s *ListObjectsV2Output) SetMaxKeys(v int64) *ListObjectsV2Output {
-	s.MaxKeys = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ListObjectsV2Output) SetName(v string) *ListObjectsV2Output {
-	s.Name = &v
-	return s
-}
-
-// SetNextContinuationToken sets the NextContinuationToken field's value.
-func (s *ListObjectsV2Output) SetNextContinuationToken(v string) *ListObjectsV2Output {
-	s.NextContinuationToken = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ListObjectsV2Output) SetPrefix(v string) *ListObjectsV2Output {
-	s.Prefix = &v
-	return s
-}
-
-// SetStartAfter sets the StartAfter field's value.
-func (s *ListObjectsV2Output) SetStartAfter(v string) *ListObjectsV2Output {
-	s.StartAfter = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsRequest
 type ListPartsInput struct {
 	_ struct{} `type:"structure"`
@@ -13801,47 +10687,11 @@ func (s *ListPartsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *ListPartsInput) SetBucket(v string) *ListPartsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListPartsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *ListPartsInput) SetKey(v string) *ListPartsInput {
-	s.Key = &v
-	return s
-}
-
-// SetMaxParts sets the MaxParts field's value.
-func (s *ListPartsInput) SetMaxParts(v int64) *ListPartsInput {
-	s.MaxParts = &v
-	return s
-}
-
-// SetPartNumberMarker sets the PartNumberMarker field's value.
-func (s *ListPartsInput) SetPartNumberMarker(v int64) *ListPartsInput {
-	s.PartNumberMarker = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *ListPartsInput) SetRequestPayer(v RequestPayer) *ListPartsInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *ListPartsInput) SetUploadId(v string) *ListPartsInput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsOutput
@@ -13910,95 +10760,11 @@ func (s ListPartsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAbortDate sets the AbortDate field's value.
-func (s *ListPartsOutput) SetAbortDate(v time.Time) *ListPartsOutput {
-	s.AbortDate = &v
-	return s
-}
-
-// SetAbortRuleId sets the AbortRuleId field's value.
-func (s *ListPartsOutput) SetAbortRuleId(v string) *ListPartsOutput {
-	s.AbortRuleId = &v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *ListPartsOutput) SetBucket(v string) *ListPartsOutput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *ListPartsOutput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetInitiator sets the Initiator field's value.
-func (s *ListPartsOutput) SetInitiator(v *Initiator) *ListPartsOutput {
-	s.Initiator = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListPartsOutput) SetIsTruncated(v bool) *ListPartsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *ListPartsOutput) SetKey(v string) *ListPartsOutput {
-	s.Key = &v
-	return s
-}
-
-// SetMaxParts sets the MaxParts field's value.
-func (s *ListPartsOutput) SetMaxParts(v int64) *ListPartsOutput {
-	s.MaxParts = &v
-	return s
-}
-
-// SetNextPartNumberMarker sets the NextPartNumberMarker field's value.
-func (s *ListPartsOutput) SetNextPartNumberMarker(v int64) *ListPartsOutput {
-	s.NextPartNumberMarker = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ListPartsOutput) SetOwner(v *Owner) *ListPartsOutput {
-	s.Owner = v
-	return s
-}
-
-// SetPartNumberMarker sets the PartNumberMarker field's value.
-func (s *ListPartsOutput) SetPartNumberMarker(v int64) *ListPartsOutput {
-	s.PartNumberMarker = &v
-	return s
-}
-
-// SetParts sets the Parts field's value.
-func (s *ListPartsOutput) SetParts(v []Part) *ListPartsOutput {
-	s.Parts = v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *ListPartsOutput) SetRequestCharged(v RequestCharged) *ListPartsOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *ListPartsOutput) SetStorageClass(v StorageClass) *ListPartsOutput {
-	s.StorageClass = v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *ListPartsOutput) SetUploadId(v string) *ListPartsOutput {
-	s.UploadId = &v
-	return s
 }
 
 // Describes an S3 location that will receive the results of the restore request.
@@ -14081,54 +10847,6 @@ func (s *Location) Validate() error {
 	return nil
 }
 
-// SetAccessControlList sets the AccessControlList field's value.
-func (s *Location) SetAccessControlList(v []Grant) *Location {
-	s.AccessControlList = v
-	return s
-}
-
-// SetBucketName sets the BucketName field's value.
-func (s *Location) SetBucketName(v string) *Location {
-	s.BucketName = &v
-	return s
-}
-
-// SetCannedACL sets the CannedACL field's value.
-func (s *Location) SetCannedACL(v ObjectCannedACL) *Location {
-	s.CannedACL = v
-	return s
-}
-
-// SetEncryption sets the Encryption field's value.
-func (s *Location) SetEncryption(v *Encryption) *Location {
-	s.Encryption = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *Location) SetPrefix(v string) *Location {
-	s.Prefix = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *Location) SetStorageClass(v StorageClass) *Location {
-	s.StorageClass = v
-	return s
-}
-
-// SetTagging sets the Tagging field's value.
-func (s *Location) SetTagging(v *Tagging) *Location {
-	s.Tagging = v
-	return s
-}
-
-// SetUserMetadata sets the UserMetadata field's value.
-func (s *Location) SetUserMetadata(v []MetadataEntry) *Location {
-	s.UserMetadata = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled
 type LoggingEnabled struct {
 	_ struct{} `type:"structure"`
@@ -14175,24 +10893,6 @@ func (s *LoggingEnabled) Validate() error {
 	return nil
 }
 
-// SetTargetBucket sets the TargetBucket field's value.
-func (s *LoggingEnabled) SetTargetBucket(v string) *LoggingEnabled {
-	s.TargetBucket = &v
-	return s
-}
-
-// SetTargetGrants sets the TargetGrants field's value.
-func (s *LoggingEnabled) SetTargetGrants(v []TargetGrant) *LoggingEnabled {
-	s.TargetGrants = v
-	return s
-}
-
-// SetTargetPrefix sets the TargetPrefix field's value.
-func (s *LoggingEnabled) SetTargetPrefix(v string) *LoggingEnabled {
-	s.TargetPrefix = &v
-	return s
-}
-
 // A metadata key-value pair to store with an object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataEntry
 type MetadataEntry struct {
@@ -14211,18 +10911,6 @@ func (s MetadataEntry) String() string {
 // GoString returns the string representation
 func (s MetadataEntry) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *MetadataEntry) SetName(v string) *MetadataEntry {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *MetadataEntry) SetValue(v string) *MetadataEntry {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsAndOperator
@@ -14261,18 +10949,6 @@ func (s *MetricsAndOperator) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *MetricsAndOperator) SetPrefix(v string) *MetricsAndOperator {
-	s.Prefix = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *MetricsAndOperator) SetTags(v []Tag) *MetricsAndOperator {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsConfiguration
@@ -14317,18 +10993,6 @@ func (s *MetricsConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFilter sets the Filter field's value.
-func (s *MetricsConfiguration) SetFilter(v *MetricsFilter) *MetricsConfiguration {
-	s.Filter = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *MetricsConfiguration) SetId(v string) *MetricsConfiguration {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsFilter
@@ -14377,24 +11041,6 @@ func (s *MetricsFilter) Validate() error {
 	return nil
 }
 
-// SetAnd sets the And field's value.
-func (s *MetricsFilter) SetAnd(v *MetricsAndOperator) *MetricsFilter {
-	s.And = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *MetricsFilter) SetPrefix(v string) *MetricsFilter {
-	s.Prefix = &v
-	return s
-}
-
-// SetTag sets the Tag field's value.
-func (s *MetricsFilter) SetTag(v *Tag) *MetricsFilter {
-	s.Tag = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MultipartUpload
 type MultipartUpload struct {
 	_ struct{} `type:"structure"`
@@ -14427,42 +11073,6 @@ func (s MultipartUpload) GoString() string {
 	return s.String()
 }
 
-// SetInitiated sets the Initiated field's value.
-func (s *MultipartUpload) SetInitiated(v time.Time) *MultipartUpload {
-	s.Initiated = &v
-	return s
-}
-
-// SetInitiator sets the Initiator field's value.
-func (s *MultipartUpload) SetInitiator(v *Initiator) *MultipartUpload {
-	s.Initiator = v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *MultipartUpload) SetKey(v string) *MultipartUpload {
-	s.Key = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *MultipartUpload) SetOwner(v *Owner) *MultipartUpload {
-	s.Owner = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *MultipartUpload) SetStorageClass(v StorageClass) *MultipartUpload {
-	s.StorageClass = v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *MultipartUpload) SetUploadId(v string) *MultipartUpload {
-	s.UploadId = &v
-	return s
-}
-
 // Specifies when noncurrent object versions expire. Upon expiration, Amazon
 // S3 permanently deletes the noncurrent object versions. You set this lifecycle
 // configuration action on a bucket that has versioning enabled (or suspended)
@@ -14487,12 +11097,6 @@ func (s NoncurrentVersionExpiration) String() string {
 // GoString returns the string representation
 func (s NoncurrentVersionExpiration) GoString() string {
 	return s.String()
-}
-
-// SetNoncurrentDays sets the NoncurrentDays field's value.
-func (s *NoncurrentVersionExpiration) SetNoncurrentDays(v int64) *NoncurrentVersionExpiration {
-	s.NoncurrentDays = &v
-	return s
 }
 
 // Container for the transition rule that describes when noncurrent objects
@@ -14524,18 +11128,6 @@ func (s NoncurrentVersionTransition) GoString() string {
 	return s.String()
 }
 
-// SetNoncurrentDays sets the NoncurrentDays field's value.
-func (s *NoncurrentVersionTransition) SetNoncurrentDays(v int64) *NoncurrentVersionTransition {
-	s.NoncurrentDays = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *NoncurrentVersionTransition) SetStorageClass(v TransitionStorageClass) *NoncurrentVersionTransition {
-	s.StorageClass = v
-	return s
-}
-
 // Container for object key name filtering rules. For information about key
 // name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter
@@ -14554,12 +11146,6 @@ func (s NotificationConfigurationFilter) String() string {
 // GoString returns the string representation
 func (s NotificationConfigurationFilter) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *NotificationConfigurationFilter) SetKey(v *KeyFilter) *NotificationConfigurationFilter {
-	s.Key = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Object
@@ -14588,42 +11174,6 @@ func (s Object) String() string {
 // GoString returns the string representation
 func (s Object) GoString() string {
 	return s.String()
-}
-
-// SetETag sets the ETag field's value.
-func (s *Object) SetETag(v string) *Object {
-	s.ETag = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *Object) SetKey(v string) *Object {
-	s.Key = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *Object) SetLastModified(v time.Time) *Object {
-	s.LastModified = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *Object) SetOwner(v *Owner) *Object {
-	s.Owner = v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *Object) SetSize(v int64) *Object {
-	s.Size = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *Object) SetStorageClass(v ObjectStorageClass) *Object {
-	s.StorageClass = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectIdentifier
@@ -14666,18 +11216,6 @@ func (s *ObjectIdentifier) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *ObjectIdentifier) SetKey(v string) *ObjectIdentifier {
-	s.Key = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *ObjectIdentifier) SetVersionId(v string) *ObjectIdentifier {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectVersion
 type ObjectVersion struct {
 	_ struct{} `type:"structure"`
@@ -14716,54 +11254,6 @@ func (s ObjectVersion) GoString() string {
 	return s.String()
 }
 
-// SetETag sets the ETag field's value.
-func (s *ObjectVersion) SetETag(v string) *ObjectVersion {
-	s.ETag = &v
-	return s
-}
-
-// SetIsLatest sets the IsLatest field's value.
-func (s *ObjectVersion) SetIsLatest(v bool) *ObjectVersion {
-	s.IsLatest = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *ObjectVersion) SetKey(v string) *ObjectVersion {
-	s.Key = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *ObjectVersion) SetLastModified(v time.Time) *ObjectVersion {
-	s.LastModified = &v
-	return s
-}
-
-// SetOwner sets the Owner field's value.
-func (s *ObjectVersion) SetOwner(v *Owner) *ObjectVersion {
-	s.Owner = v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *ObjectVersion) SetSize(v int64) *ObjectVersion {
-	s.Size = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *ObjectVersion) SetStorageClass(v ObjectVersionStorageClass) *ObjectVersion {
-	s.StorageClass = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *ObjectVersion) SetVersionId(v string) *ObjectVersion {
-	s.VersionId = &v
-	return s
-}
-
 // Describes the location where the restore job's output is stored.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputLocation
 type OutputLocation struct {
@@ -14798,12 +11288,6 @@ func (s *OutputLocation) Validate() error {
 	return nil
 }
 
-// SetS3 sets the S3 field's value.
-func (s *OutputLocation) SetS3(v *Location) *OutputLocation {
-	s.S3 = v
-	return s
-}
-
 // Describes how results of the Select job are serialized.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputSerialization
 type OutputSerialization struct {
@@ -14823,12 +11307,6 @@ func (s OutputSerialization) GoString() string {
 	return s.String()
 }
 
-// SetCSV sets the CSV field's value.
-func (s *OutputSerialization) SetCSV(v *CSVOutput) *OutputSerialization {
-	s.CSV = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Owner
 type Owner struct {
 	_ struct{} `type:"structure"`
@@ -14846,18 +11324,6 @@ func (s Owner) String() string {
 // GoString returns the string representation
 func (s Owner) GoString() string {
 	return s.String()
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *Owner) SetDisplayName(v string) *Owner {
-	s.DisplayName = &v
-	return s
-}
-
-// SetID sets the ID field's value.
-func (s *Owner) SetID(v string) *Owner {
-	s.ID = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Part
@@ -14886,30 +11352,6 @@ func (s Part) String() string {
 // GoString returns the string representation
 func (s Part) GoString() string {
 	return s.String()
-}
-
-// SetETag sets the ETag field's value.
-func (s *Part) SetETag(v string) *Part {
-	s.ETag = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *Part) SetLastModified(v time.Time) *Part {
-	s.LastModified = &v
-	return s
-}
-
-// SetPartNumber sets the PartNumber field's value.
-func (s *Part) SetPartNumber(v int64) *Part {
-	s.PartNumber = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *Part) SetSize(v int64) *Part {
-	s.Size = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfigurationRequest
@@ -14953,18 +11395,6 @@ func (s *PutBucketAccelerateConfigurationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccelerateConfiguration sets the AccelerateConfiguration field's value.
-func (s *PutBucketAccelerateConfigurationInput) SetAccelerateConfiguration(v *AccelerateConfiguration) *PutBucketAccelerateConfigurationInput {
-	s.AccelerateConfiguration = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketAccelerateConfigurationInput) SetBucket(v string) *PutBucketAccelerateConfigurationInput {
-	s.Bucket = &v
-	return s
 }
 
 func (s *PutBucketAccelerateConfigurationInput) getBucket() (v string) {
@@ -15054,59 +11484,11 @@ func (s *PutBucketAclInput) Validate() error {
 	return nil
 }
 
-// SetACL sets the ACL field's value.
-func (s *PutBucketAclInput) SetACL(v BucketCannedACL) *PutBucketAclInput {
-	s.ACL = v
-	return s
-}
-
-// SetAccessControlPolicy sets the AccessControlPolicy field's value.
-func (s *PutBucketAclInput) SetAccessControlPolicy(v *AccessControlPolicy) *PutBucketAclInput {
-	s.AccessControlPolicy = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketAclInput) SetBucket(v string) *PutBucketAclInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketAclInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetGrantFullControl sets the GrantFullControl field's value.
-func (s *PutBucketAclInput) SetGrantFullControl(v string) *PutBucketAclInput {
-	s.GrantFullControl = &v
-	return s
-}
-
-// SetGrantRead sets the GrantRead field's value.
-func (s *PutBucketAclInput) SetGrantRead(v string) *PutBucketAclInput {
-	s.GrantRead = &v
-	return s
-}
-
-// SetGrantReadACP sets the GrantReadACP field's value.
-func (s *PutBucketAclInput) SetGrantReadACP(v string) *PutBucketAclInput {
-	s.GrantReadACP = &v
-	return s
-}
-
-// SetGrantWrite sets the GrantWrite field's value.
-func (s *PutBucketAclInput) SetGrantWrite(v string) *PutBucketAclInput {
-	s.GrantWrite = &v
-	return s
-}
-
-// SetGrantWriteACP sets the GrantWriteACP field's value.
-func (s *PutBucketAclInput) SetGrantWriteACP(v string) *PutBucketAclInput {
-	s.GrantWriteACP = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAclOutput
@@ -15188,29 +11570,11 @@ func (s *PutBucketAnalyticsConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetAnalyticsConfiguration sets the AnalyticsConfiguration field's value.
-func (s *PutBucketAnalyticsConfigurationInput) SetAnalyticsConfiguration(v *AnalyticsConfiguration) *PutBucketAnalyticsConfigurationInput {
-	s.AnalyticsConfiguration = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketAnalyticsConfigurationInput) SetBucket(v string) *PutBucketAnalyticsConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketAnalyticsConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *PutBucketAnalyticsConfigurationInput) SetId(v string) *PutBucketAnalyticsConfigurationInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfigurationOutput
@@ -15279,23 +11643,11 @@ func (s *PutBucketCorsInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketCorsInput) SetBucket(v string) *PutBucketCorsInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketCorsInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetCORSConfiguration sets the CORSConfiguration field's value.
-func (s *PutBucketCorsInput) SetCORSConfiguration(v *CORSConfiguration) *PutBucketCorsInput {
-	s.CORSConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCorsOutput
@@ -15370,23 +11722,11 @@ func (s *PutBucketEncryptionInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketEncryptionInput) SetBucket(v string) *PutBucketEncryptionInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketEncryptionInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetServerSideEncryptionConfiguration sets the ServerSideEncryptionConfiguration field's value.
-func (s *PutBucketEncryptionInput) SetServerSideEncryptionConfiguration(v *ServerSideEncryptionConfiguration) *PutBucketEncryptionInput {
-	s.ServerSideEncryptionConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketEncryptionOutput
@@ -15468,29 +11808,11 @@ func (s *PutBucketInventoryConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketInventoryConfigurationInput) SetBucket(v string) *PutBucketInventoryConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketInventoryConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *PutBucketInventoryConfigurationInput) SetId(v string) *PutBucketInventoryConfigurationInput {
-	s.Id = &v
-	return s
-}
-
-// SetInventoryConfiguration sets the InventoryConfiguration field's value.
-func (s *PutBucketInventoryConfigurationInput) SetInventoryConfiguration(v *InventoryConfiguration) *PutBucketInventoryConfigurationInput {
-	s.InventoryConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfigurationOutput
@@ -15554,23 +11876,11 @@ func (s *PutBucketLifecycleConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketLifecycleConfigurationInput) SetBucket(v string) *PutBucketLifecycleConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketLifecycleConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetLifecycleConfiguration sets the LifecycleConfiguration field's value.
-func (s *PutBucketLifecycleConfigurationInput) SetLifecycleConfiguration(v *BucketLifecycleConfiguration) *PutBucketLifecycleConfigurationInput {
-	s.LifecycleConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationOutput
@@ -15634,23 +11944,11 @@ func (s *PutBucketLifecycleInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketLifecycleInput) SetBucket(v string) *PutBucketLifecycleInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketLifecycleInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetLifecycleConfiguration sets the LifecycleConfiguration field's value.
-func (s *PutBucketLifecycleInput) SetLifecycleConfiguration(v *LifecycleConfiguration) *PutBucketLifecycleInput {
-	s.LifecycleConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleOutput
@@ -15719,23 +12017,11 @@ func (s *PutBucketLoggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketLoggingInput) SetBucket(v string) *PutBucketLoggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketLoggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetBucketLoggingStatus sets the BucketLoggingStatus field's value.
-func (s *PutBucketLoggingInput) SetBucketLoggingStatus(v *BucketLoggingStatus) *PutBucketLoggingInput {
-	s.BucketLoggingStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLoggingOutput
@@ -15817,29 +12103,11 @@ func (s *PutBucketMetricsConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketMetricsConfigurationInput) SetBucket(v string) *PutBucketMetricsConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketMetricsConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetId sets the Id field's value.
-func (s *PutBucketMetricsConfigurationInput) SetId(v string) *PutBucketMetricsConfigurationInput {
-	s.Id = &v
-	return s
-}
-
-// SetMetricsConfiguration sets the MetricsConfiguration field's value.
-func (s *PutBucketMetricsConfigurationInput) SetMetricsConfiguration(v *MetricsConfiguration) *PutBucketMetricsConfigurationInput {
-	s.MetricsConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationOutput
@@ -15911,23 +12179,11 @@ func (s *PutBucketNotificationConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketNotificationConfigurationInput) SetBucket(v string) *PutBucketNotificationConfigurationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketNotificationConfigurationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetNotificationConfiguration sets the NotificationConfiguration field's value.
-func (s *PutBucketNotificationConfigurationInput) SetNotificationConfiguration(v *GetBucketNotificationConfigurationOutput) *PutBucketNotificationConfigurationInput {
-	s.NotificationConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationOutput
@@ -15991,23 +12247,11 @@ func (s *PutBucketNotificationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketNotificationInput) SetBucket(v string) *PutBucketNotificationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketNotificationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetNotificationConfiguration sets the NotificationConfiguration field's value.
-func (s *PutBucketNotificationInput) SetNotificationConfiguration(v *GetBucketNotificationOutput) *PutBucketNotificationInput {
-	s.NotificationConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationOutput
@@ -16077,29 +12321,11 @@ func (s *PutBucketPolicyInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketPolicyInput) SetBucket(v string) *PutBucketPolicyInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketPolicyInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetConfirmRemoveSelfBucketAccess sets the ConfirmRemoveSelfBucketAccess field's value.
-func (s *PutBucketPolicyInput) SetConfirmRemoveSelfBucketAccess(v bool) *PutBucketPolicyInput {
-	s.ConfirmRemoveSelfBucketAccess = &v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *PutBucketPolicyInput) SetPolicy(v string) *PutBucketPolicyInput {
-	s.Policy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicyOutput
@@ -16171,23 +12397,11 @@ func (s *PutBucketReplicationInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketReplicationInput) SetBucket(v string) *PutBucketReplicationInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketReplicationInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetReplicationConfiguration sets the ReplicationConfiguration field's value.
-func (s *PutBucketReplicationInput) SetReplicationConfiguration(v *ReplicationConfiguration) *PutBucketReplicationInput {
-	s.ReplicationConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationOutput
@@ -16256,23 +12470,11 @@ func (s *PutBucketRequestPaymentInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketRequestPaymentInput) SetBucket(v string) *PutBucketRequestPaymentInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketRequestPaymentInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetRequestPaymentConfiguration sets the RequestPaymentConfiguration field's value.
-func (s *PutBucketRequestPaymentInput) SetRequestPaymentConfiguration(v *RequestPaymentConfiguration) *PutBucketRequestPaymentInput {
-	s.RequestPaymentConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPaymentOutput
@@ -16341,23 +12543,11 @@ func (s *PutBucketTaggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketTaggingInput) SetBucket(v string) *PutBucketTaggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketTaggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetTagging sets the Tagging field's value.
-func (s *PutBucketTaggingInput) SetTagging(v *Tagging) *PutBucketTaggingInput {
-	s.Tagging = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTaggingOutput
@@ -16425,29 +12615,11 @@ func (s *PutBucketVersioningInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketVersioningInput) SetBucket(v string) *PutBucketVersioningInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketVersioningInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetMFA sets the MFA field's value.
-func (s *PutBucketVersioningInput) SetMFA(v string) *PutBucketVersioningInput {
-	s.MFA = &v
-	return s
-}
-
-// SetVersioningConfiguration sets the VersioningConfiguration field's value.
-func (s *PutBucketVersioningInput) SetVersioningConfiguration(v *VersioningConfiguration) *PutBucketVersioningInput {
-	s.VersioningConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioningOutput
@@ -16516,23 +12688,11 @@ func (s *PutBucketWebsiteInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutBucketWebsiteInput) SetBucket(v string) *PutBucketWebsiteInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutBucketWebsiteInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetWebsiteConfiguration sets the WebsiteConfiguration field's value.
-func (s *PutBucketWebsiteInput) SetWebsiteConfiguration(v *WebsiteConfiguration) *PutBucketWebsiteInput {
-	s.WebsiteConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteOutput
@@ -16634,77 +12794,11 @@ func (s *PutObjectAclInput) Validate() error {
 	return nil
 }
 
-// SetACL sets the ACL field's value.
-func (s *PutObjectAclInput) SetACL(v ObjectCannedACL) *PutObjectAclInput {
-	s.ACL = v
-	return s
-}
-
-// SetAccessControlPolicy sets the AccessControlPolicy field's value.
-func (s *PutObjectAclInput) SetAccessControlPolicy(v *AccessControlPolicy) *PutObjectAclInput {
-	s.AccessControlPolicy = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *PutObjectAclInput) SetBucket(v string) *PutObjectAclInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutObjectAclInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetGrantFullControl sets the GrantFullControl field's value.
-func (s *PutObjectAclInput) SetGrantFullControl(v string) *PutObjectAclInput {
-	s.GrantFullControl = &v
-	return s
-}
-
-// SetGrantRead sets the GrantRead field's value.
-func (s *PutObjectAclInput) SetGrantRead(v string) *PutObjectAclInput {
-	s.GrantRead = &v
-	return s
-}
-
-// SetGrantReadACP sets the GrantReadACP field's value.
-func (s *PutObjectAclInput) SetGrantReadACP(v string) *PutObjectAclInput {
-	s.GrantReadACP = &v
-	return s
-}
-
-// SetGrantWrite sets the GrantWrite field's value.
-func (s *PutObjectAclInput) SetGrantWrite(v string) *PutObjectAclInput {
-	s.GrantWrite = &v
-	return s
-}
-
-// SetGrantWriteACP sets the GrantWriteACP field's value.
-func (s *PutObjectAclInput) SetGrantWriteACP(v string) *PutObjectAclInput {
-	s.GrantWriteACP = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *PutObjectAclInput) SetKey(v string) *PutObjectAclInput {
-	s.Key = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *PutObjectAclInput) SetRequestPayer(v RequestPayer) *PutObjectAclInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *PutObjectAclInput) SetVersionId(v string) *PutObjectAclInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclOutput
@@ -16731,12 +12825,6 @@ func (s PutObjectAclOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutObjectAclOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *PutObjectAclOutput) SetRequestCharged(v RequestCharged) *PutObjectAclOutput {
-	s.RequestCharged = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRequest
@@ -16875,24 +12963,6 @@ func (s *PutObjectInput) Validate() error {
 	return nil
 }
 
-// SetACL sets the ACL field's value.
-func (s *PutObjectInput) SetACL(v ObjectCannedACL) *PutObjectInput {
-	s.ACL = v
-	return s
-}
-
-// SetBody sets the Body field's value.
-func (s *PutObjectInput) SetBody(v io.ReadSeeker) *PutObjectInput {
-	s.Body = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *PutObjectInput) SetBucket(v string) *PutObjectInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutObjectInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -16900,149 +12970,11 @@ func (s *PutObjectInput) getBucket() (v string) {
 	return *s.Bucket
 }
 
-// SetCacheControl sets the CacheControl field's value.
-func (s *PutObjectInput) SetCacheControl(v string) *PutObjectInput {
-	s.CacheControl = &v
-	return s
-}
-
-// SetContentDisposition sets the ContentDisposition field's value.
-func (s *PutObjectInput) SetContentDisposition(v string) *PutObjectInput {
-	s.ContentDisposition = &v
-	return s
-}
-
-// SetContentEncoding sets the ContentEncoding field's value.
-func (s *PutObjectInput) SetContentEncoding(v string) *PutObjectInput {
-	s.ContentEncoding = &v
-	return s
-}
-
-// SetContentLanguage sets the ContentLanguage field's value.
-func (s *PutObjectInput) SetContentLanguage(v string) *PutObjectInput {
-	s.ContentLanguage = &v
-	return s
-}
-
-// SetContentLength sets the ContentLength field's value.
-func (s *PutObjectInput) SetContentLength(v int64) *PutObjectInput {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentMD5 sets the ContentMD5 field's value.
-func (s *PutObjectInput) SetContentMD5(v string) *PutObjectInput {
-	s.ContentMD5 = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *PutObjectInput) SetContentType(v string) *PutObjectInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetExpires sets the Expires field's value.
-func (s *PutObjectInput) SetExpires(v time.Time) *PutObjectInput {
-	s.Expires = &v
-	return s
-}
-
-// SetGrantFullControl sets the GrantFullControl field's value.
-func (s *PutObjectInput) SetGrantFullControl(v string) *PutObjectInput {
-	s.GrantFullControl = &v
-	return s
-}
-
-// SetGrantRead sets the GrantRead field's value.
-func (s *PutObjectInput) SetGrantRead(v string) *PutObjectInput {
-	s.GrantRead = &v
-	return s
-}
-
-// SetGrantReadACP sets the GrantReadACP field's value.
-func (s *PutObjectInput) SetGrantReadACP(v string) *PutObjectInput {
-	s.GrantReadACP = &v
-	return s
-}
-
-// SetGrantWriteACP sets the GrantWriteACP field's value.
-func (s *PutObjectInput) SetGrantWriteACP(v string) *PutObjectInput {
-	s.GrantWriteACP = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *PutObjectInput) SetKey(v string) *PutObjectInput {
-	s.Key = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *PutObjectInput) SetMetadata(v map[string]string) *PutObjectInput {
-	s.Metadata = v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *PutObjectInput) SetRequestPayer(v RequestPayer) *PutObjectInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *PutObjectInput) SetSSECustomerAlgorithm(v string) *PutObjectInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *PutObjectInput) SetSSECustomerKey(v string) *PutObjectInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *PutObjectInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *PutObjectInput) SetSSECustomerKeyMD5(v string) *PutObjectInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *PutObjectInput) SetSSEKMSKeyId(v string) *PutObjectInput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *PutObjectInput) SetServerSideEncryption(v ServerSideEncryption) *PutObjectInput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *PutObjectInput) SetStorageClass(v StorageClass) *PutObjectInput {
-	s.StorageClass = v
-	return s
-}
-
-// SetTagging sets the Tagging field's value.
-func (s *PutObjectInput) SetTagging(v string) *PutObjectInput {
-	s.Tagging = &v
-	return s
-}
-
-// SetWebsiteRedirectLocation sets the WebsiteRedirectLocation field's value.
-func (s *PutObjectInput) SetWebsiteRedirectLocation(v string) *PutObjectInput {
-	s.WebsiteRedirectLocation = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectOutput
@@ -17097,54 +13029,6 @@ func (s PutObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetETag sets the ETag field's value.
-func (s *PutObjectOutput) SetETag(v string) *PutObjectOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *PutObjectOutput) SetExpiration(v string) *PutObjectOutput {
-	s.Expiration = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *PutObjectOutput) SetRequestCharged(v RequestCharged) *PutObjectOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *PutObjectOutput) SetSSECustomerAlgorithm(v string) *PutObjectOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *PutObjectOutput) SetSSECustomerKeyMD5(v string) *PutObjectOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *PutObjectOutput) SetSSEKMSKeyId(v string) *PutObjectOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *PutObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *PutObjectOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *PutObjectOutput) SetVersionId(v string) *PutObjectOutput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest
@@ -17203,35 +13087,11 @@ func (s *PutObjectTaggingInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PutObjectTaggingInput) SetBucket(v string) *PutObjectTaggingInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *PutObjectTaggingInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *PutObjectTaggingInput) SetKey(v string) *PutObjectTaggingInput {
-	s.Key = &v
-	return s
-}
-
-// SetTagging sets the Tagging field's value.
-func (s *PutObjectTaggingInput) SetTagging(v *Tagging) *PutObjectTaggingInput {
-	s.Tagging = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *PutObjectTaggingInput) SetVersionId(v string) *PutObjectTaggingInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingOutput
@@ -17256,12 +13116,6 @@ func (s PutObjectTaggingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutObjectTaggingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *PutObjectTaggingOutput) SetVersionId(v string) *PutObjectTaggingOutput {
-	s.VersionId = &v
-	return s
 }
 
 // Container for specifying an configuration when you want Amazon S3 to publish
@@ -17316,30 +13170,6 @@ func (s *QueueConfiguration) Validate() error {
 	return nil
 }
 
-// SetEvents sets the Events field's value.
-func (s *QueueConfiguration) SetEvents(v []Event) *QueueConfiguration {
-	s.Events = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *QueueConfiguration) SetFilter(v *NotificationConfigurationFilter) *QueueConfiguration {
-	s.Filter = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *QueueConfiguration) SetId(v string) *QueueConfiguration {
-	s.Id = &v
-	return s
-}
-
-// SetQueueArn sets the QueueArn field's value.
-func (s *QueueConfiguration) SetQueueArn(v string) *QueueConfiguration {
-	s.QueueArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfigurationDeprecated
 type QueueConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
@@ -17364,30 +13194,6 @@ func (s QueueConfigurationDeprecated) String() string {
 // GoString returns the string representation
 func (s QueueConfigurationDeprecated) GoString() string {
 	return s.String()
-}
-
-// SetEvent sets the Event field's value.
-func (s *QueueConfigurationDeprecated) SetEvent(v Event) *QueueConfigurationDeprecated {
-	s.Event = v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *QueueConfigurationDeprecated) SetEvents(v []Event) *QueueConfigurationDeprecated {
-	s.Events = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *QueueConfigurationDeprecated) SetId(v string) *QueueConfigurationDeprecated {
-	s.Id = &v
-	return s
-}
-
-// SetQueue sets the Queue field's value.
-func (s *QueueConfigurationDeprecated) SetQueue(v string) *QueueConfigurationDeprecated {
-	s.Queue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Redirect
@@ -17429,36 +13235,6 @@ func (s Redirect) GoString() string {
 	return s.String()
 }
 
-// SetHostName sets the HostName field's value.
-func (s *Redirect) SetHostName(v string) *Redirect {
-	s.HostName = &v
-	return s
-}
-
-// SetHttpRedirectCode sets the HttpRedirectCode field's value.
-func (s *Redirect) SetHttpRedirectCode(v string) *Redirect {
-	s.HttpRedirectCode = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *Redirect) SetProtocol(v Protocol) *Redirect {
-	s.Protocol = v
-	return s
-}
-
-// SetReplaceKeyPrefixWith sets the ReplaceKeyPrefixWith field's value.
-func (s *Redirect) SetReplaceKeyPrefixWith(v string) *Redirect {
-	s.ReplaceKeyPrefixWith = &v
-	return s
-}
-
-// SetReplaceKeyWith sets the ReplaceKeyWith field's value.
-func (s *Redirect) SetReplaceKeyWith(v string) *Redirect {
-	s.ReplaceKeyWith = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RedirectAllRequestsTo
 type RedirectAllRequestsTo struct {
 	_ struct{} `type:"structure"`
@@ -17495,18 +13271,6 @@ func (s *RedirectAllRequestsTo) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHostName sets the HostName field's value.
-func (s *RedirectAllRequestsTo) SetHostName(v string) *RedirectAllRequestsTo {
-	s.HostName = &v
-	return s
-}
-
-// SetProtocol sets the Protocol field's value.
-func (s *RedirectAllRequestsTo) SetProtocol(v Protocol) *RedirectAllRequestsTo {
-	s.Protocol = v
-	return s
 }
 
 // Container for replication rules. You can add as many as 1,000 rules. Total
@@ -17561,18 +13325,6 @@ func (s *ReplicationConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRole sets the Role field's value.
-func (s *ReplicationConfiguration) SetRole(v string) *ReplicationConfiguration {
-	s.Role = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *ReplicationConfiguration) SetRules(v []ReplicationRule) *ReplicationConfiguration {
-	s.Rules = v
-	return s
 }
 
 // Container for information about a particular replication rule.
@@ -17645,36 +13397,6 @@ func (s *ReplicationRule) Validate() error {
 	return nil
 }
 
-// SetDestination sets the Destination field's value.
-func (s *ReplicationRule) SetDestination(v *Destination) *ReplicationRule {
-	s.Destination = v
-	return s
-}
-
-// SetID sets the ID field's value.
-func (s *ReplicationRule) SetID(v string) *ReplicationRule {
-	s.ID = &v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ReplicationRule) SetPrefix(v string) *ReplicationRule {
-	s.Prefix = &v
-	return s
-}
-
-// SetSourceSelectionCriteria sets the SourceSelectionCriteria field's value.
-func (s *ReplicationRule) SetSourceSelectionCriteria(v *SourceSelectionCriteria) *ReplicationRule {
-	s.SourceSelectionCriteria = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ReplicationRule) SetStatus(v ReplicationRuleStatus) *ReplicationRule {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RequestPaymentConfiguration
 type RequestPaymentConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -17706,12 +13428,6 @@ func (s *RequestPaymentConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPayer sets the Payer field's value.
-func (s *RequestPaymentConfiguration) SetPayer(v Payer) *RequestPaymentConfiguration {
-	s.Payer = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectRequest
@@ -17772,41 +13488,11 @@ func (s *RestoreObjectInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *RestoreObjectInput) SetBucket(v string) *RestoreObjectInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *RestoreObjectInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetKey sets the Key field's value.
-func (s *RestoreObjectInput) SetKey(v string) *RestoreObjectInput {
-	s.Key = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *RestoreObjectInput) SetRequestPayer(v RequestPayer) *RestoreObjectInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetRestoreRequest sets the RestoreRequest field's value.
-func (s *RestoreObjectInput) SetRestoreRequest(v *RestoreRequest) *RestoreObjectInput {
-	s.RestoreRequest = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *RestoreObjectInput) SetVersionId(v string) *RestoreObjectInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectOutput
@@ -17837,18 +13523,6 @@ func (s RestoreObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RestoreObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *RestoreObjectOutput) SetRequestCharged(v RequestCharged) *RestoreObjectOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetRestoreOutputPath sets the RestoreOutputPath field's value.
-func (s *RestoreObjectOutput) SetRestoreOutputPath(v string) *RestoreObjectOutput {
-	s.RestoreOutputPath = &v
-	return s
 }
 
 // Container for restore job parameters.
@@ -17915,48 +13589,6 @@ func (s *RestoreRequest) Validate() error {
 	return nil
 }
 
-// SetDays sets the Days field's value.
-func (s *RestoreRequest) SetDays(v int64) *RestoreRequest {
-	s.Days = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RestoreRequest) SetDescription(v string) *RestoreRequest {
-	s.Description = &v
-	return s
-}
-
-// SetGlacierJobParameters sets the GlacierJobParameters field's value.
-func (s *RestoreRequest) SetGlacierJobParameters(v *GlacierJobParameters) *RestoreRequest {
-	s.GlacierJobParameters = v
-	return s
-}
-
-// SetOutputLocation sets the OutputLocation field's value.
-func (s *RestoreRequest) SetOutputLocation(v *OutputLocation) *RestoreRequest {
-	s.OutputLocation = v
-	return s
-}
-
-// SetSelectParameters sets the SelectParameters field's value.
-func (s *RestoreRequest) SetSelectParameters(v *SelectParameters) *RestoreRequest {
-	s.SelectParameters = v
-	return s
-}
-
-// SetTier sets the Tier field's value.
-func (s *RestoreRequest) SetTier(v Tier) *RestoreRequest {
-	s.Tier = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *RestoreRequest) SetType(v RestoreRequestType) *RestoreRequest {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RoutingRule
 type RoutingRule struct {
 	_ struct{} `type:"structure"`
@@ -17997,18 +13629,6 @@ func (s *RoutingRule) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCondition sets the Condition field's value.
-func (s *RoutingRule) SetCondition(v *Condition) *RoutingRule {
-	s.Condition = v
-	return s
-}
-
-// SetRedirect sets the Redirect field's value.
-func (s *RoutingRule) SetRedirect(v *Redirect) *RoutingRule {
-	s.Redirect = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Rule
@@ -18079,54 +13699,6 @@ func (s *Rule) Validate() error {
 	return nil
 }
 
-// SetAbortIncompleteMultipartUpload sets the AbortIncompleteMultipartUpload field's value.
-func (s *Rule) SetAbortIncompleteMultipartUpload(v *AbortIncompleteMultipartUpload) *Rule {
-	s.AbortIncompleteMultipartUpload = v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *Rule) SetExpiration(v *LifecycleExpiration) *Rule {
-	s.Expiration = v
-	return s
-}
-
-// SetID sets the ID field's value.
-func (s *Rule) SetID(v string) *Rule {
-	s.ID = &v
-	return s
-}
-
-// SetNoncurrentVersionExpiration sets the NoncurrentVersionExpiration field's value.
-func (s *Rule) SetNoncurrentVersionExpiration(v *NoncurrentVersionExpiration) *Rule {
-	s.NoncurrentVersionExpiration = v
-	return s
-}
-
-// SetNoncurrentVersionTransition sets the NoncurrentVersionTransition field's value.
-func (s *Rule) SetNoncurrentVersionTransition(v *NoncurrentVersionTransition) *Rule {
-	s.NoncurrentVersionTransition = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *Rule) SetPrefix(v string) *Rule {
-	s.Prefix = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Rule) SetStatus(v ExpirationStatus) *Rule {
-	s.Status = v
-	return s
-}
-
-// SetTransition sets the Transition field's value.
-func (s *Rule) SetTransition(v *Transition) *Rule {
-	s.Transition = v
-	return s
-}
-
 // Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS
 type SSEKMS struct {
@@ -18161,12 +13733,6 @@ func (s *SSEKMS) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *SSEKMS) SetKeyId(v string) *SSEKMS {
-	s.KeyId = &v
-	return s
 }
 
 // Specifies the use of SSE-S3 to encrypt delievered Inventory reports.
@@ -18246,30 +13812,6 @@ func (s *SelectParameters) Validate() error {
 	return nil
 }
 
-// SetExpression sets the Expression field's value.
-func (s *SelectParameters) SetExpression(v string) *SelectParameters {
-	s.Expression = &v
-	return s
-}
-
-// SetExpressionType sets the ExpressionType field's value.
-func (s *SelectParameters) SetExpressionType(v ExpressionType) *SelectParameters {
-	s.ExpressionType = v
-	return s
-}
-
-// SetInputSerialization sets the InputSerialization field's value.
-func (s *SelectParameters) SetInputSerialization(v *InputSerialization) *SelectParameters {
-	s.InputSerialization = v
-	return s
-}
-
-// SetOutputSerialization sets the OutputSerialization field's value.
-func (s *SelectParameters) SetOutputSerialization(v *OutputSerialization) *SelectParameters {
-	s.OutputSerialization = v
-	return s
-}
-
 // Describes the default server-side encryption to apply to new objects in the
 // bucket. If Put Object request does not specify any server-side encryption,
 // this default encryption will be applied.
@@ -18308,18 +13850,6 @@ func (s *ServerSideEncryptionByDefault) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKMSMasterKeyID sets the KMSMasterKeyID field's value.
-func (s *ServerSideEncryptionByDefault) SetKMSMasterKeyID(v string) *ServerSideEncryptionByDefault {
-	s.KMSMasterKeyID = &v
-	return s
-}
-
-// SetSSEAlgorithm sets the SSEAlgorithm field's value.
-func (s *ServerSideEncryptionByDefault) SetSSEAlgorithm(v ServerSideEncryption) *ServerSideEncryptionByDefault {
-	s.SSEAlgorithm = v
-	return s
 }
 
 // Container for server-side encryption configuration rules. Currently S3 supports
@@ -18366,12 +13896,6 @@ func (s *ServerSideEncryptionConfiguration) Validate() error {
 	return nil
 }
 
-// SetRules sets the Rules field's value.
-func (s *ServerSideEncryptionConfiguration) SetRules(v []ServerSideEncryptionRule) *ServerSideEncryptionConfiguration {
-	s.Rules = v
-	return s
-}
-
 // Container for information about a particular server-side encryption configuration
 // rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule
@@ -18409,12 +13933,6 @@ func (s *ServerSideEncryptionRule) Validate() error {
 	return nil
 }
 
-// SetApplyServerSideEncryptionByDefault sets the ApplyServerSideEncryptionByDefault field's value.
-func (s *ServerSideEncryptionRule) SetApplyServerSideEncryptionByDefault(v *ServerSideEncryptionByDefault) *ServerSideEncryptionRule {
-	s.ApplyServerSideEncryptionByDefault = v
-	return s
-}
-
 // Container for filters that define which source objects should be replicated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria
 type SourceSelectionCriteria struct {
@@ -18447,12 +13965,6 @@ func (s *SourceSelectionCriteria) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSseKmsEncryptedObjects sets the SseKmsEncryptedObjects field's value.
-func (s *SourceSelectionCriteria) SetSseKmsEncryptedObjects(v *SseKmsEncryptedObjects) *SourceSelectionCriteria {
-	s.SseKmsEncryptedObjects = v
-	return s
 }
 
 // Container for filter information of selection of KMS Encrypted S3 objects.
@@ -18490,12 +14002,6 @@ func (s *SseKmsEncryptedObjects) Validate() error {
 	return nil
 }
 
-// SetStatus sets the Status field's value.
-func (s *SseKmsEncryptedObjects) SetStatus(v SseKmsEncryptedObjectsStatus) *SseKmsEncryptedObjects {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysis
 type StorageClassAnalysis struct {
 	_ struct{} `type:"structure"`
@@ -18528,12 +14034,6 @@ func (s *StorageClassAnalysis) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDataExport sets the DataExport field's value.
-func (s *StorageClassAnalysis) SetDataExport(v *StorageClassAnalysisDataExport) *StorageClassAnalysis {
-	s.DataExport = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysisDataExport
@@ -18583,18 +14083,6 @@ func (s *StorageClassAnalysisDataExport) Validate() error {
 	return nil
 }
 
-// SetDestination sets the Destination field's value.
-func (s *StorageClassAnalysisDataExport) SetDestination(v *AnalyticsExportDestination) *StorageClassAnalysisDataExport {
-	s.Destination = v
-	return s
-}
-
-// SetOutputSchemaVersion sets the OutputSchemaVersion field's value.
-func (s *StorageClassAnalysisDataExport) SetOutputSchemaVersion(v StorageClassAnalysisSchemaVersion) *StorageClassAnalysisDataExport {
-	s.OutputSchemaVersion = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -18641,18 +14129,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tagging
 type Tagging struct {
 	_ struct{} `type:"structure"`
@@ -18692,12 +14168,6 @@ func (s *Tagging) Validate() error {
 	return nil
 }
 
-// SetTagSet sets the TagSet field's value.
-func (s *Tagging) SetTagSet(v []Tag) *Tagging {
-	s.TagSet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TargetGrant
 type TargetGrant struct {
 	_ struct{} `type:"structure"`
@@ -18731,18 +14201,6 @@ func (s *TargetGrant) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGrantee sets the Grantee field's value.
-func (s *TargetGrant) SetGrantee(v *Grantee) *TargetGrant {
-	s.Grantee = v
-	return s
-}
-
-// SetPermission sets the Permission field's value.
-func (s *TargetGrant) SetPermission(v BucketLogsPermission) *TargetGrant {
-	s.Permission = v
-	return s
 }
 
 // Container for specifying the configuration when you want Amazon S3 to publish
@@ -18797,30 +14255,6 @@ func (s *TopicConfiguration) Validate() error {
 	return nil
 }
 
-// SetEvents sets the Events field's value.
-func (s *TopicConfiguration) SetEvents(v []Event) *TopicConfiguration {
-	s.Events = v
-	return s
-}
-
-// SetFilter sets the Filter field's value.
-func (s *TopicConfiguration) SetFilter(v *NotificationConfigurationFilter) *TopicConfiguration {
-	s.Filter = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TopicConfiguration) SetId(v string) *TopicConfiguration {
-	s.Id = &v
-	return s
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *TopicConfiguration) SetTopicArn(v string) *TopicConfiguration {
-	s.TopicArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfigurationDeprecated
 type TopicConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
@@ -18849,30 +14283,6 @@ func (s TopicConfigurationDeprecated) GoString() string {
 	return s.String()
 }
 
-// SetEvent sets the Event field's value.
-func (s *TopicConfigurationDeprecated) SetEvent(v Event) *TopicConfigurationDeprecated {
-	s.Event = v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *TopicConfigurationDeprecated) SetEvents(v []Event) *TopicConfigurationDeprecated {
-	s.Events = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *TopicConfigurationDeprecated) SetId(v string) *TopicConfigurationDeprecated {
-	s.Id = &v
-	return s
-}
-
-// SetTopic sets the Topic field's value.
-func (s *TopicConfigurationDeprecated) SetTopic(v string) *TopicConfigurationDeprecated {
-	s.Topic = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Transition
 type Transition struct {
 	_ struct{} `type:"structure"`
@@ -18897,24 +14307,6 @@ func (s Transition) String() string {
 // GoString returns the string representation
 func (s Transition) GoString() string {
 	return s.String()
-}
-
-// SetDate sets the Date field's value.
-func (s *Transition) SetDate(v time.Time) *Transition {
-	s.Date = &v
-	return s
-}
-
-// SetDays sets the Days field's value.
-func (s *Transition) SetDays(v int64) *Transition {
-	s.Days = &v
-	return s
-}
-
-// SetStorageClass sets the StorageClass field's value.
-func (s *Transition) SetStorageClass(v TransitionStorageClass) *Transition {
-	s.StorageClass = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyRequest
@@ -19043,65 +14435,11 @@ func (s *UploadPartCopyInput) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *UploadPartCopyInput) SetBucket(v string) *UploadPartCopyInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *UploadPartCopyInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
 	}
 	return *s.Bucket
-}
-
-// SetCopySource sets the CopySource field's value.
-func (s *UploadPartCopyInput) SetCopySource(v string) *UploadPartCopyInput {
-	s.CopySource = &v
-	return s
-}
-
-// SetCopySourceIfMatch sets the CopySourceIfMatch field's value.
-func (s *UploadPartCopyInput) SetCopySourceIfMatch(v string) *UploadPartCopyInput {
-	s.CopySourceIfMatch = &v
-	return s
-}
-
-// SetCopySourceIfModifiedSince sets the CopySourceIfModifiedSince field's value.
-func (s *UploadPartCopyInput) SetCopySourceIfModifiedSince(v time.Time) *UploadPartCopyInput {
-	s.CopySourceIfModifiedSince = &v
-	return s
-}
-
-// SetCopySourceIfNoneMatch sets the CopySourceIfNoneMatch field's value.
-func (s *UploadPartCopyInput) SetCopySourceIfNoneMatch(v string) *UploadPartCopyInput {
-	s.CopySourceIfNoneMatch = &v
-	return s
-}
-
-// SetCopySourceIfUnmodifiedSince sets the CopySourceIfUnmodifiedSince field's value.
-func (s *UploadPartCopyInput) SetCopySourceIfUnmodifiedSince(v time.Time) *UploadPartCopyInput {
-	s.CopySourceIfUnmodifiedSince = &v
-	return s
-}
-
-// SetCopySourceRange sets the CopySourceRange field's value.
-func (s *UploadPartCopyInput) SetCopySourceRange(v string) *UploadPartCopyInput {
-	s.CopySourceRange = &v
-	return s
-}
-
-// SetCopySourceSSECustomerAlgorithm sets the CopySourceSSECustomerAlgorithm field's value.
-func (s *UploadPartCopyInput) SetCopySourceSSECustomerAlgorithm(v string) *UploadPartCopyInput {
-	s.CopySourceSSECustomerAlgorithm = &v
-	return s
-}
-
-// SetCopySourceSSECustomerKey sets the CopySourceSSECustomerKey field's value.
-func (s *UploadPartCopyInput) SetCopySourceSSECustomerKey(v string) *UploadPartCopyInput {
-	s.CopySourceSSECustomerKey = &v
-	return s
 }
 
 func (s *UploadPartCopyInput) getCopySourceSSECustomerKey() (v string) {
@@ -19111,59 +14449,11 @@ func (s *UploadPartCopyInput) getCopySourceSSECustomerKey() (v string) {
 	return *s.CopySourceSSECustomerKey
 }
 
-// SetCopySourceSSECustomerKeyMD5 sets the CopySourceSSECustomerKeyMD5 field's value.
-func (s *UploadPartCopyInput) SetCopySourceSSECustomerKeyMD5(v string) *UploadPartCopyInput {
-	s.CopySourceSSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *UploadPartCopyInput) SetKey(v string) *UploadPartCopyInput {
-	s.Key = &v
-	return s
-}
-
-// SetPartNumber sets the PartNumber field's value.
-func (s *UploadPartCopyInput) SetPartNumber(v int64) *UploadPartCopyInput {
-	s.PartNumber = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *UploadPartCopyInput) SetRequestPayer(v RequestPayer) *UploadPartCopyInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *UploadPartCopyInput) SetSSECustomerAlgorithm(v string) *UploadPartCopyInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *UploadPartCopyInput) SetSSECustomerKey(v string) *UploadPartCopyInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *UploadPartCopyInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *UploadPartCopyInput) SetSSECustomerKeyMD5(v string) *UploadPartCopyInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *UploadPartCopyInput) SetUploadId(v string) *UploadPartCopyInput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyOutput
@@ -19214,48 +14504,6 @@ func (s UploadPartCopyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UploadPartCopyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCopyPartResult sets the CopyPartResult field's value.
-func (s *UploadPartCopyOutput) SetCopyPartResult(v *CopyPartResult) *UploadPartCopyOutput {
-	s.CopyPartResult = v
-	return s
-}
-
-// SetCopySourceVersionId sets the CopySourceVersionId field's value.
-func (s *UploadPartCopyOutput) SetCopySourceVersionId(v string) *UploadPartCopyOutput {
-	s.CopySourceVersionId = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *UploadPartCopyOutput) SetRequestCharged(v RequestCharged) *UploadPartCopyOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *UploadPartCopyOutput) SetSSECustomerAlgorithm(v string) *UploadPartCopyOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *UploadPartCopyOutput) SetSSECustomerKeyMD5(v string) *UploadPartCopyOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *UploadPartCopyOutput) SetSSEKMSKeyId(v string) *UploadPartCopyOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *UploadPartCopyOutput) SetServerSideEncryption(v ServerSideEncryption) *UploadPartCopyOutput {
-	s.ServerSideEncryption = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartRequest
@@ -19355,18 +14603,6 @@ func (s *UploadPartInput) Validate() error {
 	return nil
 }
 
-// SetBody sets the Body field's value.
-func (s *UploadPartInput) SetBody(v io.ReadSeeker) *UploadPartInput {
-	s.Body = v
-	return s
-}
-
-// SetBucket sets the Bucket field's value.
-func (s *UploadPartInput) SetBucket(v string) *UploadPartInput {
-	s.Bucket = &v
-	return s
-}
-
 func (s *UploadPartInput) getBucket() (v string) {
 	if s.Bucket == nil {
 		return v
@@ -19374,65 +14610,11 @@ func (s *UploadPartInput) getBucket() (v string) {
 	return *s.Bucket
 }
 
-// SetContentLength sets the ContentLength field's value.
-func (s *UploadPartInput) SetContentLength(v int64) *UploadPartInput {
-	s.ContentLength = &v
-	return s
-}
-
-// SetContentMD5 sets the ContentMD5 field's value.
-func (s *UploadPartInput) SetContentMD5(v string) *UploadPartInput {
-	s.ContentMD5 = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *UploadPartInput) SetKey(v string) *UploadPartInput {
-	s.Key = &v
-	return s
-}
-
-// SetPartNumber sets the PartNumber field's value.
-func (s *UploadPartInput) SetPartNumber(v int64) *UploadPartInput {
-	s.PartNumber = &v
-	return s
-}
-
-// SetRequestPayer sets the RequestPayer field's value.
-func (s *UploadPartInput) SetRequestPayer(v RequestPayer) *UploadPartInput {
-	s.RequestPayer = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *UploadPartInput) SetSSECustomerAlgorithm(v string) *UploadPartInput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKey sets the SSECustomerKey field's value.
-func (s *UploadPartInput) SetSSECustomerKey(v string) *UploadPartInput {
-	s.SSECustomerKey = &v
-	return s
-}
-
 func (s *UploadPartInput) getSSECustomerKey() (v string) {
 	if s.SSECustomerKey == nil {
 		return v
 	}
 	return *s.SSECustomerKey
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *UploadPartInput) SetSSECustomerKeyMD5(v string) *UploadPartInput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetUploadId sets the UploadId field's value.
-func (s *UploadPartInput) SetUploadId(v string) *UploadPartInput {
-	s.UploadId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartOutput
@@ -19482,42 +14664,6 @@ func (s UploadPartOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetETag sets the ETag field's value.
-func (s *UploadPartOutput) SetETag(v string) *UploadPartOutput {
-	s.ETag = &v
-	return s
-}
-
-// SetRequestCharged sets the RequestCharged field's value.
-func (s *UploadPartOutput) SetRequestCharged(v RequestCharged) *UploadPartOutput {
-	s.RequestCharged = v
-	return s
-}
-
-// SetSSECustomerAlgorithm sets the SSECustomerAlgorithm field's value.
-func (s *UploadPartOutput) SetSSECustomerAlgorithm(v string) *UploadPartOutput {
-	s.SSECustomerAlgorithm = &v
-	return s
-}
-
-// SetSSECustomerKeyMD5 sets the SSECustomerKeyMD5 field's value.
-func (s *UploadPartOutput) SetSSECustomerKeyMD5(v string) *UploadPartOutput {
-	s.SSECustomerKeyMD5 = &v
-	return s
-}
-
-// SetSSEKMSKeyId sets the SSEKMSKeyId field's value.
-func (s *UploadPartOutput) SetSSEKMSKeyId(v string) *UploadPartOutput {
-	s.SSEKMSKeyId = &v
-	return s
-}
-
-// SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *UploadPartOutput) SetServerSideEncryption(v ServerSideEncryption) *UploadPartOutput {
-	s.ServerSideEncryption = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/VersioningConfiguration
 type VersioningConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -19539,18 +14685,6 @@ func (s VersioningConfiguration) String() string {
 // GoString returns the string representation
 func (s VersioningConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetMFADelete sets the MFADelete field's value.
-func (s *VersioningConfiguration) SetMFADelete(v MFADelete) *VersioningConfiguration {
-	s.MFADelete = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *VersioningConfiguration) SetStatus(v BucketVersioningStatus) *VersioningConfiguration {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WebsiteConfiguration
@@ -19606,30 +14740,6 @@ func (s *WebsiteConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetErrorDocument sets the ErrorDocument field's value.
-func (s *WebsiteConfiguration) SetErrorDocument(v *ErrorDocument) *WebsiteConfiguration {
-	s.ErrorDocument = v
-	return s
-}
-
-// SetIndexDocument sets the IndexDocument field's value.
-func (s *WebsiteConfiguration) SetIndexDocument(v *IndexDocument) *WebsiteConfiguration {
-	s.IndexDocument = v
-	return s
-}
-
-// SetRedirectAllRequestsTo sets the RedirectAllRequestsTo field's value.
-func (s *WebsiteConfiguration) SetRedirectAllRequestsTo(v *RedirectAllRequestsTo) *WebsiteConfiguration {
-	s.RedirectAllRequestsTo = v
-	return s
-}
-
-// SetRoutingRules sets the RoutingRules field's value.
-func (s *WebsiteConfiguration) SetRoutingRules(v []RoutingRule) *WebsiteConfiguration {
-	s.RoutingRules = v
-	return s
 }
 
 type AnalyticsS3ExportFileFormat string

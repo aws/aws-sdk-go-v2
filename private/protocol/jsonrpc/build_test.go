@@ -150,12 +150,6 @@ type InputService1TestShapeInputService1TestCaseOperation1Input struct {
 	Name *string `type:"string"`
 }
 
-// SetName sets the Name field's value.
-func (s *InputService1TestShapeInputService1TestCaseOperation1Input) SetName(v string) *InputService1TestShapeInputService1TestCaseOperation1Input {
-	s.Name = &v
-	return s
-}
-
 type InputService1TestShapeInputService1TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
@@ -274,12 +268,6 @@ type InputService2TestShapeInputService2TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
 	TimeArg *time.Time `type:"timestamp" timestampFormat:"unix"`
-}
-
-// SetTimeArg sets the TimeArg field's value.
-func (s *InputService2TestShapeInputService2TestCaseOperation1Input) SetTimeArg(v time.Time) *InputService2TestShapeInputService2TestCaseOperation1Input {
-	s.TimeArg = &v
-	return s
 }
 
 type InputService2TestShapeInputService2TestCaseOperation1Output struct {
@@ -463,18 +451,6 @@ type InputService3TestShapeInputService3TestCaseOperation2Input struct {
 	BlobMap map[string][]byte `type:"map"`
 }
 
-// SetBlobArg sets the BlobArg field's value.
-func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetBlobArg(v []byte) *InputService3TestShapeInputService3TestCaseOperation2Input {
-	s.BlobArg = v
-	return s
-}
-
-// SetBlobMap sets the BlobMap field's value.
-func (s *InputService3TestShapeInputService3TestCaseOperation2Input) SetBlobMap(v map[string][]byte) *InputService3TestShapeInputService3TestCaseOperation2Input {
-	s.BlobMap = v
-	return s
-}
-
 type InputService3TestShapeInputService3TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
@@ -593,12 +569,6 @@ type InputService4TestShapeInputService4TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
 	ListParam [][]byte `type:"list"`
-}
-
-// SetListParam sets the ListParam field's value.
-func (s *InputService4TestShapeInputService4TestCaseOperation1Input) SetListParam(v [][]byte) *InputService4TestShapeInputService4TestCaseOperation1Input {
-	s.ListParam = v
-	return s
 }
 
 type InputService4TestShapeInputService4TestCaseOperation1Output struct {
@@ -1011,12 +981,6 @@ type InputService5TestShapeInputService5TestCaseOperation6Input struct {
 	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
 }
 
-// SetRecursiveStruct sets the RecursiveStruct field's value.
-func (s *InputService5TestShapeInputService5TestCaseOperation6Input) SetRecursiveStruct(v *InputService5TestShapeRecursiveStructType) *InputService5TestShapeInputService5TestCaseOperation6Input {
-	s.RecursiveStruct = v
-	return s
-}
-
 type InputService5TestShapeInputService5TestCaseOperation6Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1038,30 +1002,6 @@ type InputService5TestShapeRecursiveStructType struct {
 	RecursiveMap map[string]InputService5TestShapeRecursiveStructType `type:"map"`
 
 	RecursiveStruct *InputService5TestShapeRecursiveStructType `type:"structure"`
-}
-
-// SetNoRecurse sets the NoRecurse field's value.
-func (s *InputService5TestShapeRecursiveStructType) SetNoRecurse(v string) *InputService5TestShapeRecursiveStructType {
-	s.NoRecurse = &v
-	return s
-}
-
-// SetRecursiveList sets the RecursiveList field's value.
-func (s *InputService5TestShapeRecursiveStructType) SetRecursiveList(v []InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
-	s.RecursiveList = v
-	return s
-}
-
-// SetRecursiveMap sets the RecursiveMap field's value.
-func (s *InputService5TestShapeRecursiveStructType) SetRecursiveMap(v map[string]InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
-	s.RecursiveMap = v
-	return s
-}
-
-// SetRecursiveStruct sets the RecursiveStruct field's value.
-func (s *InputService5TestShapeRecursiveStructType) SetRecursiveStruct(v *InputService5TestShapeRecursiveStructType) *InputService5TestShapeRecursiveStructType {
-	s.RecursiveStruct = v
-	return s
 }
 
 // InputService6ProtocolTest provides the API operation methods for making requests to
@@ -1171,12 +1111,6 @@ type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
 	Map map[string]string `type:"map"`
-}
-
-// SetMap sets the Map field's value.
-func (s *InputService6TestShapeInputService6TestCaseOperation1Input) SetMap(v map[string]string) *InputService6TestShapeInputService6TestCaseOperation1Input {
-	s.Map = v
-	return s
 }
 
 type InputService6TestShapeInputService6TestCaseOperation1Output struct {
@@ -1355,12 +1289,6 @@ type InputService7TestShapeInputService7TestCaseOperation2Input struct {
 	Token *string `type:"string" idempotencyToken:"true"`
 }
 
-// SetToken sets the Token field's value.
-func (s *InputService7TestShapeInputService7TestCaseOperation2Input) SetToken(v string) *InputService7TestShapeInputService7TestCaseOperation2Input {
-	s.Token = &v
-	return s
-}
-
 type InputService7TestShapeInputService7TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
@@ -1537,18 +1465,6 @@ type InputService8TestShapeInputService8TestCaseOperation2Input struct {
 	FooEnum InputService8TestShapeEnumType `type:"string" enum:"true"`
 
 	ListEnums []InputService8TestShapeEnumType `type:"list"`
-}
-
-// SetFooEnum sets the FooEnum field's value.
-func (s *InputService8TestShapeInputService8TestCaseOperation2Input) SetFooEnum(v InputService8TestShapeEnumType) *InputService8TestShapeInputService8TestCaseOperation2Input {
-	s.FooEnum = v
-	return s
-}
-
-// SetListEnums sets the ListEnums field's value.
-func (s *InputService8TestShapeInputService8TestCaseOperation2Input) SetListEnums(v []InputService8TestShapeEnumType) *InputService8TestShapeInputService8TestCaseOperation2Input {
-	s.ListEnums = v
-	return s
 }
 
 type InputService8TestShapeInputService8TestCaseOperation2Output struct {

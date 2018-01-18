@@ -2576,48 +2576,6 @@ func (s BotAliasMetadata) GoString() string {
 	return s.String()
 }
 
-// SetBotName sets the BotName field's value.
-func (s *BotAliasMetadata) SetBotName(v string) *BotAliasMetadata {
-	s.BotName = &v
-	return s
-}
-
-// SetBotVersion sets the BotVersion field's value.
-func (s *BotAliasMetadata) SetBotVersion(v string) *BotAliasMetadata {
-	s.BotVersion = &v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *BotAliasMetadata) SetChecksum(v string) *BotAliasMetadata {
-	s.Checksum = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *BotAliasMetadata) SetCreatedDate(v time.Time) *BotAliasMetadata {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *BotAliasMetadata) SetDescription(v string) *BotAliasMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *BotAliasMetadata) SetLastUpdatedDate(v time.Time) *BotAliasMetadata {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *BotAliasMetadata) SetName(v string) *BotAliasMetadata {
-	s.Name = &v
-	return s
-}
-
 // Represents an association between an Amazon Lex bot and an external messaging
 // platform.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotChannelAssociation
@@ -2676,60 +2634,6 @@ func (s BotChannelAssociation) GoString() string {
 	return s.String()
 }
 
-// SetBotAlias sets the BotAlias field's value.
-func (s *BotChannelAssociation) SetBotAlias(v string) *BotChannelAssociation {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotConfiguration sets the BotConfiguration field's value.
-func (s *BotChannelAssociation) SetBotConfiguration(v map[string]string) *BotChannelAssociation {
-	s.BotConfiguration = v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *BotChannelAssociation) SetBotName(v string) *BotChannelAssociation {
-	s.BotName = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *BotChannelAssociation) SetCreatedDate(v time.Time) *BotChannelAssociation {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *BotChannelAssociation) SetDescription(v string) *BotChannelAssociation {
-	s.Description = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *BotChannelAssociation) SetFailureReason(v string) *BotChannelAssociation {
-	s.FailureReason = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *BotChannelAssociation) SetName(v string) *BotChannelAssociation {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *BotChannelAssociation) SetStatus(v ChannelStatus) *BotChannelAssociation {
-	s.Status = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *BotChannelAssociation) SetType(v ChannelType) *BotChannelAssociation {
-	s.Type = v
-	return s
-}
-
 // Provides information about a bot. .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotMetadata
 type BotMetadata struct {
@@ -2765,42 +2669,6 @@ func (s BotMetadata) GoString() string {
 	return s.String()
 }
 
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *BotMetadata) SetCreatedDate(v time.Time) *BotMetadata {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *BotMetadata) SetDescription(v string) *BotMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *BotMetadata) SetLastUpdatedDate(v time.Time) *BotMetadata {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *BotMetadata) SetName(v string) *BotMetadata {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *BotMetadata) SetStatus(v Status) *BotMetadata {
-	s.Status = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *BotMetadata) SetVersion(v string) *BotMetadata {
-	s.Version = &v
-	return s
-}
-
 // Provides metadata for a built-in intent.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BuiltinIntentMetadata
 type BuiltinIntentMetadata struct {
@@ -2825,18 +2693,6 @@ func (s BuiltinIntentMetadata) GoString() string {
 	return s.String()
 }
 
-// SetSignature sets the Signature field's value.
-func (s *BuiltinIntentMetadata) SetSignature(v string) *BuiltinIntentMetadata {
-	s.Signature = &v
-	return s
-}
-
-// SetSupportedLocales sets the SupportedLocales field's value.
-func (s *BuiltinIntentMetadata) SetSupportedLocales(v []Locale) *BuiltinIntentMetadata {
-	s.SupportedLocales = v
-	return s
-}
-
 // Provides information about a slot used in a built-in intent.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BuiltinIntentSlot
 type BuiltinIntentSlot struct {
@@ -2854,12 +2710,6 @@ func (s BuiltinIntentSlot) String() string {
 // GoString returns the string representation
 func (s BuiltinIntentSlot) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *BuiltinIntentSlot) SetName(v string) *BuiltinIntentSlot {
-	s.Name = &v
-	return s
 }
 
 // Provides information about a built in slot type.
@@ -2884,18 +2734,6 @@ func (s BuiltinSlotTypeMetadata) String() string {
 // GoString returns the string representation
 func (s BuiltinSlotTypeMetadata) GoString() string {
 	return s.String()
-}
-
-// SetSignature sets the Signature field's value.
-func (s *BuiltinSlotTypeMetadata) SetSignature(v string) *BuiltinSlotTypeMetadata {
-	s.Signature = &v
-	return s
-}
-
-// SetSupportedLocales sets the SupportedLocales field's value.
-func (s *BuiltinSlotTypeMetadata) SetSupportedLocales(v []Locale) *BuiltinSlotTypeMetadata {
-	s.SupportedLocales = v
-	return s
 }
 
 // Specifies a Lambda function that verifies requests to a bot or fulfills the
@@ -2950,18 +2788,6 @@ func (s *CodeHook) Validate() error {
 	return nil
 }
 
-// SetMessageVersion sets the MessageVersion field's value.
-func (s *CodeHook) SetMessageVersion(v string) *CodeHook {
-	s.MessageVersion = &v
-	return s
-}
-
-// SetUri sets the Uri field's value.
-func (s *CodeHook) SetUri(v string) *CodeHook {
-	s.Uri = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersionRequest
 type CreateBotVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -3005,18 +2831,6 @@ func (s *CreateBotVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *CreateBotVersionInput) SetChecksum(v string) *CreateBotVersionInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateBotVersionInput) SetName(v string) *CreateBotVersionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersionResponse
@@ -3116,96 +2930,6 @@ func (s CreateBotVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAbortStatement sets the AbortStatement field's value.
-func (s *CreateBotVersionOutput) SetAbortStatement(v *Statement) *CreateBotVersionOutput {
-	s.AbortStatement = v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *CreateBotVersionOutput) SetChecksum(v string) *CreateBotVersionOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetChildDirected sets the ChildDirected field's value.
-func (s *CreateBotVersionOutput) SetChildDirected(v bool) *CreateBotVersionOutput {
-	s.ChildDirected = &v
-	return s
-}
-
-// SetClarificationPrompt sets the ClarificationPrompt field's value.
-func (s *CreateBotVersionOutput) SetClarificationPrompt(v *Prompt) *CreateBotVersionOutput {
-	s.ClarificationPrompt = v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *CreateBotVersionOutput) SetCreatedDate(v time.Time) *CreateBotVersionOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateBotVersionOutput) SetDescription(v string) *CreateBotVersionOutput {
-	s.Description = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *CreateBotVersionOutput) SetFailureReason(v string) *CreateBotVersionOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetIdleSessionTTLInSeconds sets the IdleSessionTTLInSeconds field's value.
-func (s *CreateBotVersionOutput) SetIdleSessionTTLInSeconds(v int64) *CreateBotVersionOutput {
-	s.IdleSessionTTLInSeconds = &v
-	return s
-}
-
-// SetIntents sets the Intents field's value.
-func (s *CreateBotVersionOutput) SetIntents(v []Intent) *CreateBotVersionOutput {
-	s.Intents = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *CreateBotVersionOutput) SetLastUpdatedDate(v time.Time) *CreateBotVersionOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *CreateBotVersionOutput) SetLocale(v Locale) *CreateBotVersionOutput {
-	s.Locale = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateBotVersionOutput) SetName(v string) *CreateBotVersionOutput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CreateBotVersionOutput) SetStatus(v Status) *CreateBotVersionOutput {
-	s.Status = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateBotVersionOutput) SetVersion(v string) *CreateBotVersionOutput {
-	s.Version = &v
-	return s
-}
-
-// SetVoiceId sets the VoiceId field's value.
-func (s *CreateBotVersionOutput) SetVoiceId(v string) *CreateBotVersionOutput {
-	s.VoiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersionRequest
 type CreateIntentVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -3249,18 +2973,6 @@ func (s *CreateIntentVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *CreateIntentVersionInput) SetChecksum(v string) *CreateIntentVersionInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateIntentVersionInput) SetName(v string) *CreateIntentVersionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersionResponse
@@ -3335,96 +3047,6 @@ func (s CreateIntentVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetChecksum sets the Checksum field's value.
-func (s *CreateIntentVersionOutput) SetChecksum(v string) *CreateIntentVersionOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetConclusionStatement sets the ConclusionStatement field's value.
-func (s *CreateIntentVersionOutput) SetConclusionStatement(v *Statement) *CreateIntentVersionOutput {
-	s.ConclusionStatement = v
-	return s
-}
-
-// SetConfirmationPrompt sets the ConfirmationPrompt field's value.
-func (s *CreateIntentVersionOutput) SetConfirmationPrompt(v *Prompt) *CreateIntentVersionOutput {
-	s.ConfirmationPrompt = v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *CreateIntentVersionOutput) SetCreatedDate(v time.Time) *CreateIntentVersionOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateIntentVersionOutput) SetDescription(v string) *CreateIntentVersionOutput {
-	s.Description = &v
-	return s
-}
-
-// SetDialogCodeHook sets the DialogCodeHook field's value.
-func (s *CreateIntentVersionOutput) SetDialogCodeHook(v *CodeHook) *CreateIntentVersionOutput {
-	s.DialogCodeHook = v
-	return s
-}
-
-// SetFollowUpPrompt sets the FollowUpPrompt field's value.
-func (s *CreateIntentVersionOutput) SetFollowUpPrompt(v *FollowUpPrompt) *CreateIntentVersionOutput {
-	s.FollowUpPrompt = v
-	return s
-}
-
-// SetFulfillmentActivity sets the FulfillmentActivity field's value.
-func (s *CreateIntentVersionOutput) SetFulfillmentActivity(v *FulfillmentActivity) *CreateIntentVersionOutput {
-	s.FulfillmentActivity = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *CreateIntentVersionOutput) SetLastUpdatedDate(v time.Time) *CreateIntentVersionOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateIntentVersionOutput) SetName(v string) *CreateIntentVersionOutput {
-	s.Name = &v
-	return s
-}
-
-// SetParentIntentSignature sets the ParentIntentSignature field's value.
-func (s *CreateIntentVersionOutput) SetParentIntentSignature(v string) *CreateIntentVersionOutput {
-	s.ParentIntentSignature = &v
-	return s
-}
-
-// SetRejectionStatement sets the RejectionStatement field's value.
-func (s *CreateIntentVersionOutput) SetRejectionStatement(v *Statement) *CreateIntentVersionOutput {
-	s.RejectionStatement = v
-	return s
-}
-
-// SetSampleUtterances sets the SampleUtterances field's value.
-func (s *CreateIntentVersionOutput) SetSampleUtterances(v []string) *CreateIntentVersionOutput {
-	s.SampleUtterances = v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *CreateIntentVersionOutput) SetSlots(v []Slot) *CreateIntentVersionOutput {
-	s.Slots = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateIntentVersionOutput) SetVersion(v string) *CreateIntentVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersionRequest
 type CreateSlotTypeVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -3468,18 +3090,6 @@ func (s *CreateSlotTypeVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *CreateSlotTypeVersionInput) SetChecksum(v string) *CreateSlotTypeVersionInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateSlotTypeVersionInput) SetName(v string) *CreateSlotTypeVersionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersionResponse
@@ -3531,54 +3141,6 @@ func (s CreateSlotTypeVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetChecksum sets the Checksum field's value.
-func (s *CreateSlotTypeVersionOutput) SetChecksum(v string) *CreateSlotTypeVersionOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *CreateSlotTypeVersionOutput) SetCreatedDate(v time.Time) *CreateSlotTypeVersionOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateSlotTypeVersionOutput) SetDescription(v string) *CreateSlotTypeVersionOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEnumerationValues sets the EnumerationValues field's value.
-func (s *CreateSlotTypeVersionOutput) SetEnumerationValues(v []EnumerationValue) *CreateSlotTypeVersionOutput {
-	s.EnumerationValues = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *CreateSlotTypeVersionOutput) SetLastUpdatedDate(v time.Time) *CreateSlotTypeVersionOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateSlotTypeVersionOutput) SetName(v string) *CreateSlotTypeVersionOutput {
-	s.Name = &v
-	return s
-}
-
-// SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *CreateSlotTypeVersionOutput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *CreateSlotTypeVersionOutput {
-	s.ValueSelectionStrategy = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateSlotTypeVersionOutput) SetVersion(v string) *CreateSlotTypeVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotAliasRequest
 type DeleteBotAliasInput struct {
 	_ struct{} `type:"structure"`
@@ -3626,18 +3188,6 @@ func (s *DeleteBotAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBotName sets the BotName field's value.
-func (s *DeleteBotAliasInput) SetBotName(v string) *DeleteBotAliasInput {
-	s.BotName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteBotAliasInput) SetName(v string) *DeleteBotAliasInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotAliasOutput
@@ -3724,24 +3274,6 @@ func (s *DeleteBotChannelAssociationInput) Validate() error {
 	return nil
 }
 
-// SetBotAlias sets the BotAlias field's value.
-func (s *DeleteBotChannelAssociationInput) SetBotAlias(v string) *DeleteBotChannelAssociationInput {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *DeleteBotChannelAssociationInput) SetBotName(v string) *DeleteBotChannelAssociationInput {
-	s.BotName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteBotChannelAssociationInput) SetName(v string) *DeleteBotChannelAssociationInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociationOutput
 type DeleteBotChannelAssociationOutput struct {
 	_ struct{} `type:"structure"`
@@ -3799,12 +3331,6 @@ func (s *DeleteBotInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteBotInput) SetName(v string) *DeleteBotInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotOutput
@@ -3879,18 +3405,6 @@ func (s *DeleteBotVersionInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteBotVersionInput) SetName(v string) *DeleteBotVersionInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DeleteBotVersionInput) SetVersion(v string) *DeleteBotVersionInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersionOutput
 type DeleteBotVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -3948,12 +3462,6 @@ func (s *DeleteIntentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteIntentInput) SetName(v string) *DeleteIntentInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentOutput
@@ -4028,18 +3536,6 @@ func (s *DeleteIntentVersionInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteIntentVersionInput) SetName(v string) *DeleteIntentVersionInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DeleteIntentVersionInput) SetVersion(v string) *DeleteIntentVersionInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersionOutput
 type DeleteIntentVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4097,12 +3593,6 @@ func (s *DeleteSlotTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteSlotTypeInput) SetName(v string) *DeleteSlotTypeInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeOutput
@@ -4175,18 +3665,6 @@ func (s *DeleteSlotTypeVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteSlotTypeVersionInput) SetName(v string) *DeleteSlotTypeVersionInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *DeleteSlotTypeVersionInput) SetVersion(v string) *DeleteSlotTypeVersionInput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersionOutput
@@ -4263,18 +3741,6 @@ func (s *DeleteUtterancesInput) Validate() error {
 	return nil
 }
 
-// SetBotName sets the BotName field's value.
-func (s *DeleteUtterancesInput) SetBotName(v string) *DeleteUtterancesInput {
-	s.BotName = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DeleteUtterancesInput) SetUserId(v string) *DeleteUtterancesInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterancesOutput
 type DeleteUtterancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4349,18 +3815,6 @@ func (s *EnumerationValue) Validate() error {
 	return nil
 }
 
-// SetSynonyms sets the Synonyms field's value.
-func (s *EnumerationValue) SetSynonyms(v []string) *EnumerationValue {
-	s.Synonyms = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *EnumerationValue) SetValue(v string) *EnumerationValue {
-	s.Value = &v
-	return s
-}
-
 // A prompt for additional activity after an intent is fulfilled. For example,
 // after the OrderPizza intent is fulfilled, you might prompt the user to find
 // out whether the user wants to order drinks.
@@ -4416,18 +3870,6 @@ func (s *FollowUpPrompt) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPrompt sets the Prompt field's value.
-func (s *FollowUpPrompt) SetPrompt(v *Prompt) *FollowUpPrompt {
-	s.Prompt = v
-	return s
-}
-
-// SetRejectionStatement sets the RejectionStatement field's value.
-func (s *FollowUpPrompt) SetRejectionStatement(v *Statement) *FollowUpPrompt {
-	s.RejectionStatement = v
-	return s
 }
 
 // Describes how the intent is fulfilled after the user provides all of the
@@ -4490,18 +3932,6 @@ func (s *FulfillmentActivity) Validate() error {
 	return nil
 }
 
-// SetCodeHook sets the CodeHook field's value.
-func (s *FulfillmentActivity) SetCodeHook(v *CodeHook) *FulfillmentActivity {
-	s.CodeHook = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *FulfillmentActivity) SetType(v FulfillmentActivityType) *FulfillmentActivity {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliasRequest
 type GetBotAliasInput struct {
 	_ struct{} `type:"structure"`
@@ -4551,18 +3981,6 @@ func (s *GetBotAliasInput) Validate() error {
 	return nil
 }
 
-// SetBotName sets the BotName field's value.
-func (s *GetBotAliasInput) SetBotName(v string) *GetBotAliasInput {
-	s.BotName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotAliasInput) SetName(v string) *GetBotAliasInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliasResponse
 type GetBotAliasOutput struct {
 	_ struct{} `type:"structure"`
@@ -4605,48 +4023,6 @@ func (s GetBotAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBotAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBotName sets the BotName field's value.
-func (s *GetBotAliasOutput) SetBotName(v string) *GetBotAliasOutput {
-	s.BotName = &v
-	return s
-}
-
-// SetBotVersion sets the BotVersion field's value.
-func (s *GetBotAliasOutput) SetBotVersion(v string) *GetBotAliasOutput {
-	s.BotVersion = &v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *GetBotAliasOutput) SetChecksum(v string) *GetBotAliasOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *GetBotAliasOutput) SetCreatedDate(v time.Time) *GetBotAliasOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetBotAliasOutput) SetDescription(v string) *GetBotAliasOutput {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *GetBotAliasOutput) SetLastUpdatedDate(v time.Time) *GetBotAliasOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotAliasOutput) SetName(v string) *GetBotAliasOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliasesRequest
@@ -4707,30 +4083,6 @@ func (s *GetBotAliasesInput) Validate() error {
 	return nil
 }
 
-// SetBotName sets the BotName field's value.
-func (s *GetBotAliasesInput) SetBotName(v string) *GetBotAliasesInput {
-	s.BotName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetBotAliasesInput) SetMaxResults(v int64) *GetBotAliasesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *GetBotAliasesInput) SetNameContains(v string) *GetBotAliasesInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotAliasesInput) SetNextToken(v string) *GetBotAliasesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliasesResponse
 type GetBotAliasesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4760,18 +4112,6 @@ func (s GetBotAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBotAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBotAliases sets the BotAliases field's value.
-func (s *GetBotAliasesOutput) SetBotAliases(v []BotAliasMetadata) *GetBotAliasesOutput {
-	s.BotAliases = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotAliasesOutput) SetNextToken(v string) *GetBotAliasesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociationRequest
@@ -4837,24 +4177,6 @@ func (s *GetBotChannelAssociationInput) Validate() error {
 	return nil
 }
 
-// SetBotAlias sets the BotAlias field's value.
-func (s *GetBotChannelAssociationInput) SetBotAlias(v string) *GetBotChannelAssociationInput {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *GetBotChannelAssociationInput) SetBotName(v string) *GetBotChannelAssociationInput {
-	s.BotName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotChannelAssociationInput) SetName(v string) *GetBotChannelAssociationInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociationResponse
 type GetBotChannelAssociationOutput struct {
 	_ struct{} `type:"structure"`
@@ -4912,60 +4234,6 @@ func (s GetBotChannelAssociationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBotChannelAssociationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBotAlias sets the BotAlias field's value.
-func (s *GetBotChannelAssociationOutput) SetBotAlias(v string) *GetBotChannelAssociationOutput {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotConfiguration sets the BotConfiguration field's value.
-func (s *GetBotChannelAssociationOutput) SetBotConfiguration(v map[string]string) *GetBotChannelAssociationOutput {
-	s.BotConfiguration = v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *GetBotChannelAssociationOutput) SetBotName(v string) *GetBotChannelAssociationOutput {
-	s.BotName = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *GetBotChannelAssociationOutput) SetCreatedDate(v time.Time) *GetBotChannelAssociationOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetBotChannelAssociationOutput) SetDescription(v string) *GetBotChannelAssociationOutput {
-	s.Description = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *GetBotChannelAssociationOutput) SetFailureReason(v string) *GetBotChannelAssociationOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotChannelAssociationOutput) SetName(v string) *GetBotChannelAssociationOutput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetBotChannelAssociationOutput) SetStatus(v ChannelStatus) *GetBotChannelAssociationOutput {
-	s.Status = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *GetBotChannelAssociationOutput) SetType(v ChannelType) *GetBotChannelAssociationOutput {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociationsRequest
@@ -5040,36 +4308,6 @@ func (s *GetBotChannelAssociationsInput) Validate() error {
 	return nil
 }
 
-// SetBotAlias sets the BotAlias field's value.
-func (s *GetBotChannelAssociationsInput) SetBotAlias(v string) *GetBotChannelAssociationsInput {
-	s.BotAlias = &v
-	return s
-}
-
-// SetBotName sets the BotName field's value.
-func (s *GetBotChannelAssociationsInput) SetBotName(v string) *GetBotChannelAssociationsInput {
-	s.BotName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetBotChannelAssociationsInput) SetMaxResults(v int64) *GetBotChannelAssociationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *GetBotChannelAssociationsInput) SetNameContains(v string) *GetBotChannelAssociationsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotChannelAssociationsInput) SetNextToken(v string) *GetBotChannelAssociationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociationsResponse
 type GetBotChannelAssociationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5100,18 +4338,6 @@ func (s GetBotChannelAssociationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBotChannelAssociationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBotChannelAssociations sets the BotChannelAssociations field's value.
-func (s *GetBotChannelAssociationsOutput) SetBotChannelAssociations(v []BotChannelAssociation) *GetBotChannelAssociationsOutput {
-	s.BotChannelAssociations = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotChannelAssociationsOutput) SetNextToken(v string) *GetBotChannelAssociationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotRequest
@@ -5158,18 +4384,6 @@ func (s *GetBotInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotInput) SetName(v string) *GetBotInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersionOrAlias sets the VersionOrAlias field's value.
-func (s *GetBotInput) SetVersionOrAlias(v string) *GetBotInput {
-	s.VersionOrAlias = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotResponse
@@ -5270,96 +4484,6 @@ func (s GetBotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAbortStatement sets the AbortStatement field's value.
-func (s *GetBotOutput) SetAbortStatement(v *Statement) *GetBotOutput {
-	s.AbortStatement = v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *GetBotOutput) SetChecksum(v string) *GetBotOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetChildDirected sets the ChildDirected field's value.
-func (s *GetBotOutput) SetChildDirected(v bool) *GetBotOutput {
-	s.ChildDirected = &v
-	return s
-}
-
-// SetClarificationPrompt sets the ClarificationPrompt field's value.
-func (s *GetBotOutput) SetClarificationPrompt(v *Prompt) *GetBotOutput {
-	s.ClarificationPrompt = v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *GetBotOutput) SetCreatedDate(v time.Time) *GetBotOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetBotOutput) SetDescription(v string) *GetBotOutput {
-	s.Description = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *GetBotOutput) SetFailureReason(v string) *GetBotOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetIdleSessionTTLInSeconds sets the IdleSessionTTLInSeconds field's value.
-func (s *GetBotOutput) SetIdleSessionTTLInSeconds(v int64) *GetBotOutput {
-	s.IdleSessionTTLInSeconds = &v
-	return s
-}
-
-// SetIntents sets the Intents field's value.
-func (s *GetBotOutput) SetIntents(v []Intent) *GetBotOutput {
-	s.Intents = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *GetBotOutput) SetLastUpdatedDate(v time.Time) *GetBotOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *GetBotOutput) SetLocale(v Locale) *GetBotOutput {
-	s.Locale = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotOutput) SetName(v string) *GetBotOutput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetBotOutput) SetStatus(v Status) *GetBotOutput {
-	s.Status = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetBotOutput) SetVersion(v string) *GetBotOutput {
-	s.Version = &v
-	return s
-}
-
-// SetVoiceId sets the VoiceId field's value.
-func (s *GetBotOutput) SetVoiceId(v string) *GetBotOutput {
-	s.VoiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersionsRequest
 type GetBotVersionsInput struct {
 	_ struct{} `type:"structure"`
@@ -5410,24 +4534,6 @@ func (s *GetBotVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetBotVersionsInput) SetMaxResults(v int64) *GetBotVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetBotVersionsInput) SetName(v string) *GetBotVersionsInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotVersionsInput) SetNextToken(v string) *GetBotVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersionsResponse
 type GetBotVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5458,18 +4564,6 @@ func (s GetBotVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBotVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBots sets the Bots field's value.
-func (s *GetBotVersionsOutput) SetBots(v []BotMetadata) *GetBotVersionsOutput {
-	s.Bots = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotVersionsOutput) SetNextToken(v string) *GetBotVersionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotsRequest
@@ -5518,24 +4612,6 @@ func (s *GetBotsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetBotsInput) SetMaxResults(v int64) *GetBotsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *GetBotsInput) SetNameContains(v string) *GetBotsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotsInput) SetNextToken(v string) *GetBotsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotsResponse
 type GetBotsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5563,18 +4639,6 @@ func (s GetBotsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBotsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBots sets the Bots field's value.
-func (s *GetBotsOutput) SetBots(v []BotMetadata) *GetBotsOutput {
-	s.Bots = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBotsOutput) SetNextToken(v string) *GetBotsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntentRequest
@@ -5613,12 +4677,6 @@ func (s *GetBuiltinIntentInput) Validate() error {
 	return nil
 }
 
-// SetSignature sets the Signature field's value.
-func (s *GetBuiltinIntentInput) SetSignature(v string) *GetBuiltinIntentInput {
-	s.Signature = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntentResponse
 type GetBuiltinIntentOutput struct {
 	_ struct{} `type:"structure"`
@@ -5649,24 +4707,6 @@ func (s GetBuiltinIntentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBuiltinIntentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSignature sets the Signature field's value.
-func (s *GetBuiltinIntentOutput) SetSignature(v string) *GetBuiltinIntentOutput {
-	s.Signature = &v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *GetBuiltinIntentOutput) SetSlots(v []BuiltinIntentSlot) *GetBuiltinIntentOutput {
-	s.Slots = v
-	return s
-}
-
-// SetSupportedLocales sets the SupportedLocales field's value.
-func (s *GetBuiltinIntentOutput) SetSupportedLocales(v []Locale) *GetBuiltinIntentOutput {
-	s.SupportedLocales = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntentsRequest
@@ -5715,30 +4755,6 @@ func (s *GetBuiltinIntentsInput) Validate() error {
 	return nil
 }
 
-// SetLocale sets the Locale field's value.
-func (s *GetBuiltinIntentsInput) SetLocale(v Locale) *GetBuiltinIntentsInput {
-	s.Locale = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetBuiltinIntentsInput) SetMaxResults(v int64) *GetBuiltinIntentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBuiltinIntentsInput) SetNextToken(v string) *GetBuiltinIntentsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSignatureContains sets the SignatureContains field's value.
-func (s *GetBuiltinIntentsInput) SetSignatureContains(v string) *GetBuiltinIntentsInput {
-	s.SignatureContains = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntentsResponse
 type GetBuiltinIntentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5768,18 +4784,6 @@ func (s GetBuiltinIntentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBuiltinIntentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIntents sets the Intents field's value.
-func (s *GetBuiltinIntentsOutput) SetIntents(v []BuiltinIntentMetadata) *GetBuiltinIntentsOutput {
-	s.Intents = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBuiltinIntentsOutput) SetNextToken(v string) *GetBuiltinIntentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypesRequest
@@ -5828,30 +4832,6 @@ func (s *GetBuiltinSlotTypesInput) Validate() error {
 	return nil
 }
 
-// SetLocale sets the Locale field's value.
-func (s *GetBuiltinSlotTypesInput) SetLocale(v Locale) *GetBuiltinSlotTypesInput {
-	s.Locale = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetBuiltinSlotTypesInput) SetMaxResults(v int64) *GetBuiltinSlotTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBuiltinSlotTypesInput) SetNextToken(v string) *GetBuiltinSlotTypesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSignatureContains sets the SignatureContains field's value.
-func (s *GetBuiltinSlotTypesInput) SetSignatureContains(v string) *GetBuiltinSlotTypesInput {
-	s.SignatureContains = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypesResponse
 type GetBuiltinSlotTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5880,18 +4860,6 @@ func (s GetBuiltinSlotTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBuiltinSlotTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetBuiltinSlotTypesOutput) SetNextToken(v string) *GetBuiltinSlotTypesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSlotTypes sets the SlotTypes field's value.
-func (s *GetBuiltinSlotTypesOutput) SetSlotTypes(v []BuiltinSlotTypeMetadata) *GetBuiltinSlotTypesOutput {
-	s.SlotTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExportRequest
@@ -5959,30 +4927,6 @@ func (s *GetExportInput) Validate() error {
 	return nil
 }
 
-// SetExportType sets the ExportType field's value.
-func (s *GetExportInput) SetExportType(v ExportType) *GetExportInput {
-	s.ExportType = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetExportInput) SetName(v string) *GetExportInput {
-	s.Name = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *GetExportInput) SetResourceType(v ResourceType) *GetExportInput {
-	s.ResourceType = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetExportInput) SetVersion(v string) *GetExportInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExportResponse
 type GetExportOutput struct {
 	_ struct{} `type:"structure"`
@@ -6036,48 +4980,6 @@ func (s GetExportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetExportStatus sets the ExportStatus field's value.
-func (s *GetExportOutput) SetExportStatus(v ExportStatus) *GetExportOutput {
-	s.ExportStatus = v
-	return s
-}
-
-// SetExportType sets the ExportType field's value.
-func (s *GetExportOutput) SetExportType(v ExportType) *GetExportOutput {
-	s.ExportType = v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *GetExportOutput) SetFailureReason(v string) *GetExportOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetExportOutput) SetName(v string) *GetExportOutput {
-	s.Name = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *GetExportOutput) SetResourceType(v ResourceType) *GetExportOutput {
-	s.ResourceType = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *GetExportOutput) SetUrl(v string) *GetExportOutput {
-	s.Url = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetExportOutput) SetVersion(v string) *GetExportOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentRequest
 type GetIntentInput struct {
 	_ struct{} `type:"structure"`
@@ -6125,18 +5027,6 @@ func (s *GetIntentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *GetIntentInput) SetName(v string) *GetIntentInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetIntentInput) SetVersion(v string) *GetIntentInput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentResponse
@@ -6212,96 +5102,6 @@ func (s GetIntentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetChecksum sets the Checksum field's value.
-func (s *GetIntentOutput) SetChecksum(v string) *GetIntentOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetConclusionStatement sets the ConclusionStatement field's value.
-func (s *GetIntentOutput) SetConclusionStatement(v *Statement) *GetIntentOutput {
-	s.ConclusionStatement = v
-	return s
-}
-
-// SetConfirmationPrompt sets the ConfirmationPrompt field's value.
-func (s *GetIntentOutput) SetConfirmationPrompt(v *Prompt) *GetIntentOutput {
-	s.ConfirmationPrompt = v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *GetIntentOutput) SetCreatedDate(v time.Time) *GetIntentOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetIntentOutput) SetDescription(v string) *GetIntentOutput {
-	s.Description = &v
-	return s
-}
-
-// SetDialogCodeHook sets the DialogCodeHook field's value.
-func (s *GetIntentOutput) SetDialogCodeHook(v *CodeHook) *GetIntentOutput {
-	s.DialogCodeHook = v
-	return s
-}
-
-// SetFollowUpPrompt sets the FollowUpPrompt field's value.
-func (s *GetIntentOutput) SetFollowUpPrompt(v *FollowUpPrompt) *GetIntentOutput {
-	s.FollowUpPrompt = v
-	return s
-}
-
-// SetFulfillmentActivity sets the FulfillmentActivity field's value.
-func (s *GetIntentOutput) SetFulfillmentActivity(v *FulfillmentActivity) *GetIntentOutput {
-	s.FulfillmentActivity = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *GetIntentOutput) SetLastUpdatedDate(v time.Time) *GetIntentOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetIntentOutput) SetName(v string) *GetIntentOutput {
-	s.Name = &v
-	return s
-}
-
-// SetParentIntentSignature sets the ParentIntentSignature field's value.
-func (s *GetIntentOutput) SetParentIntentSignature(v string) *GetIntentOutput {
-	s.ParentIntentSignature = &v
-	return s
-}
-
-// SetRejectionStatement sets the RejectionStatement field's value.
-func (s *GetIntentOutput) SetRejectionStatement(v *Statement) *GetIntentOutput {
-	s.RejectionStatement = v
-	return s
-}
-
-// SetSampleUtterances sets the SampleUtterances field's value.
-func (s *GetIntentOutput) SetSampleUtterances(v []string) *GetIntentOutput {
-	s.SampleUtterances = v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *GetIntentOutput) SetSlots(v []Slot) *GetIntentOutput {
-	s.Slots = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetIntentOutput) SetVersion(v string) *GetIntentOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentVersionsRequest
 type GetIntentVersionsInput struct {
 	_ struct{} `type:"structure"`
@@ -6352,24 +5152,6 @@ func (s *GetIntentVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetIntentVersionsInput) SetMaxResults(v int64) *GetIntentVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetIntentVersionsInput) SetName(v string) *GetIntentVersionsInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetIntentVersionsInput) SetNextToken(v string) *GetIntentVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentVersionsResponse
 type GetIntentVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6400,18 +5182,6 @@ func (s GetIntentVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIntentVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIntents sets the Intents field's value.
-func (s *GetIntentVersionsOutput) SetIntents(v []IntentMetadata) *GetIntentVersionsOutput {
-	s.Intents = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetIntentVersionsOutput) SetNextToken(v string) *GetIntentVersionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentsRequest
@@ -6459,24 +5229,6 @@ func (s *GetIntentsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetIntentsInput) SetMaxResults(v int64) *GetIntentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *GetIntentsInput) SetNameContains(v string) *GetIntentsInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetIntentsInput) SetNextToken(v string) *GetIntentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentsResponse
 type GetIntentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6504,18 +5256,6 @@ func (s GetIntentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIntentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIntents sets the Intents field's value.
-func (s *GetIntentsOutput) SetIntents(v []IntentMetadata) *GetIntentsOutput {
-	s.Intents = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetIntentsOutput) SetNextToken(v string) *GetIntentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeRequest
@@ -6567,18 +5307,6 @@ func (s *GetSlotTypeInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *GetSlotTypeInput) SetName(v string) *GetSlotTypeInput {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetSlotTypeInput) SetVersion(v string) *GetSlotTypeInput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeResponse
 type GetSlotTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -6626,54 +5354,6 @@ func (s GetSlotTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSlotTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *GetSlotTypeOutput) SetChecksum(v string) *GetSlotTypeOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *GetSlotTypeOutput) SetCreatedDate(v time.Time) *GetSlotTypeOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetSlotTypeOutput) SetDescription(v string) *GetSlotTypeOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEnumerationValues sets the EnumerationValues field's value.
-func (s *GetSlotTypeOutput) SetEnumerationValues(v []EnumerationValue) *GetSlotTypeOutput {
-	s.EnumerationValues = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *GetSlotTypeOutput) SetLastUpdatedDate(v time.Time) *GetSlotTypeOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetSlotTypeOutput) SetName(v string) *GetSlotTypeOutput {
-	s.Name = &v
-	return s
-}
-
-// SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *GetSlotTypeOutput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *GetSlotTypeOutput {
-	s.ValueSelectionStrategy = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetSlotTypeOutput) SetVersion(v string) *GetSlotTypeOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeVersionsRequest
@@ -6726,24 +5406,6 @@ func (s *GetSlotTypeVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetSlotTypeVersionsInput) SetMaxResults(v int64) *GetSlotTypeVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetSlotTypeVersionsInput) SetName(v string) *GetSlotTypeVersionsInput {
-	s.Name = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetSlotTypeVersionsInput) SetNextToken(v string) *GetSlotTypeVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeVersionsResponse
 type GetSlotTypeVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6774,18 +5436,6 @@ func (s GetSlotTypeVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSlotTypeVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetSlotTypeVersionsOutput) SetNextToken(v string) *GetSlotTypeVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSlotTypes sets the SlotTypes field's value.
-func (s *GetSlotTypeVersionsOutput) SetSlotTypes(v []SlotTypeMetadata) *GetSlotTypeVersionsOutput {
-	s.SlotTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypesRequest
@@ -6834,24 +5484,6 @@ func (s *GetSlotTypesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetSlotTypesInput) SetMaxResults(v int64) *GetSlotTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNameContains sets the NameContains field's value.
-func (s *GetSlotTypesInput) SetNameContains(v string) *GetSlotTypesInput {
-	s.NameContains = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetSlotTypesInput) SetNextToken(v string) *GetSlotTypesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypesResponse
 type GetSlotTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6880,18 +5512,6 @@ func (s GetSlotTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSlotTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetSlotTypesOutput) SetNextToken(v string) *GetSlotTypesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSlotTypes sets the SlotTypes field's value.
-func (s *GetSlotTypesOutput) SetSlotTypes(v []SlotTypeMetadata) *GetSlotTypesOutput {
-	s.SlotTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesViewRequest
@@ -6953,24 +5573,6 @@ func (s *GetUtterancesViewInput) Validate() error {
 	return nil
 }
 
-// SetBotName sets the BotName field's value.
-func (s *GetUtterancesViewInput) SetBotName(v string) *GetUtterancesViewInput {
-	s.BotName = &v
-	return s
-}
-
-// SetBotVersions sets the BotVersions field's value.
-func (s *GetUtterancesViewInput) SetBotVersions(v []string) *GetUtterancesViewInput {
-	s.BotVersions = v
-	return s
-}
-
-// SetStatusType sets the StatusType field's value.
-func (s *GetUtterancesViewInput) SetStatusType(v StatusType) *GetUtterancesViewInput {
-	s.StatusType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesViewResponse
 type GetUtterancesViewOutput struct {
 	_ struct{} `type:"structure"`
@@ -6999,18 +5601,6 @@ func (s GetUtterancesViewOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUtterancesViewOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBotName sets the BotName field's value.
-func (s *GetUtterancesViewOutput) SetBotName(v string) *GetUtterancesViewOutput {
-	s.BotName = &v
-	return s
-}
-
-// SetUtterances sets the Utterances field's value.
-func (s *GetUtterancesViewOutput) SetUtterances(v []UtteranceList) *GetUtterancesViewOutput {
-	s.Utterances = v
-	return s
 }
 
 // Identifies the specific version of an intent.
@@ -7063,18 +5653,6 @@ func (s *Intent) Validate() error {
 	return nil
 }
 
-// SetIntentName sets the IntentName field's value.
-func (s *Intent) SetIntentName(v string) *Intent {
-	s.IntentName = &v
-	return s
-}
-
-// SetIntentVersion sets the IntentVersion field's value.
-func (s *Intent) SetIntentVersion(v string) *Intent {
-	s.IntentVersion = &v
-	return s
-}
-
 // Provides information about an intent.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/IntentMetadata
 type IntentMetadata struct {
@@ -7105,36 +5683,6 @@ func (s IntentMetadata) String() string {
 // GoString returns the string representation
 func (s IntentMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *IntentMetadata) SetCreatedDate(v time.Time) *IntentMetadata {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *IntentMetadata) SetDescription(v string) *IntentMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *IntentMetadata) SetLastUpdatedDate(v time.Time) *IntentMetadata {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *IntentMetadata) SetName(v string) *IntentMetadata {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *IntentMetadata) SetVersion(v string) *IntentMetadata {
-	s.Version = &v
-	return s
 }
 
 // The message object that provides the message text and its type.
@@ -7181,18 +5729,6 @@ func (s *Message) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetContent sets the Content field's value.
-func (s *Message) SetContent(v string) *Message {
-	s.Content = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *Message) SetContentType(v ContentType) *Message {
-	s.ContentType = v
-	return s
 }
 
 // Obtains information from the user. To define a prompt, provide one or more
@@ -7263,24 +5799,6 @@ func (s *Prompt) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetMaxAttempts sets the MaxAttempts field's value.
-func (s *Prompt) SetMaxAttempts(v int64) *Prompt {
-	s.MaxAttempts = &v
-	return s
-}
-
-// SetMessages sets the Messages field's value.
-func (s *Prompt) SetMessages(v []Message) *Prompt {
-	s.Messages = v
-	return s
-}
-
-// SetResponseCard sets the ResponseCard field's value.
-func (s *Prompt) SetResponseCard(v string) *Prompt {
-	s.ResponseCard = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasRequest
@@ -7358,36 +5876,6 @@ func (s *PutBotAliasInput) Validate() error {
 	return nil
 }
 
-// SetBotName sets the BotName field's value.
-func (s *PutBotAliasInput) SetBotName(v string) *PutBotAliasInput {
-	s.BotName = &v
-	return s
-}
-
-// SetBotVersion sets the BotVersion field's value.
-func (s *PutBotAliasInput) SetBotVersion(v string) *PutBotAliasInput {
-	s.BotVersion = &v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *PutBotAliasInput) SetChecksum(v string) *PutBotAliasInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutBotAliasInput) SetDescription(v string) *PutBotAliasInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutBotAliasInput) SetName(v string) *PutBotAliasInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasResponse
 type PutBotAliasOutput struct {
 	_ struct{} `type:"structure"`
@@ -7430,48 +5918,6 @@ func (s PutBotAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutBotAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBotName sets the BotName field's value.
-func (s *PutBotAliasOutput) SetBotName(v string) *PutBotAliasOutput {
-	s.BotName = &v
-	return s
-}
-
-// SetBotVersion sets the BotVersion field's value.
-func (s *PutBotAliasOutput) SetBotVersion(v string) *PutBotAliasOutput {
-	s.BotVersion = &v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *PutBotAliasOutput) SetChecksum(v string) *PutBotAliasOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *PutBotAliasOutput) SetCreatedDate(v time.Time) *PutBotAliasOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutBotAliasOutput) SetDescription(v string) *PutBotAliasOutput {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *PutBotAliasOutput) SetLastUpdatedDate(v time.Time) *PutBotAliasOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutBotAliasOutput) SetName(v string) *PutBotAliasOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotRequest
@@ -7651,72 +6097,6 @@ func (s *PutBotInput) Validate() error {
 	return nil
 }
 
-// SetAbortStatement sets the AbortStatement field's value.
-func (s *PutBotInput) SetAbortStatement(v *Statement) *PutBotInput {
-	s.AbortStatement = v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *PutBotInput) SetChecksum(v string) *PutBotInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetChildDirected sets the ChildDirected field's value.
-func (s *PutBotInput) SetChildDirected(v bool) *PutBotInput {
-	s.ChildDirected = &v
-	return s
-}
-
-// SetClarificationPrompt sets the ClarificationPrompt field's value.
-func (s *PutBotInput) SetClarificationPrompt(v *Prompt) *PutBotInput {
-	s.ClarificationPrompt = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutBotInput) SetDescription(v string) *PutBotInput {
-	s.Description = &v
-	return s
-}
-
-// SetIdleSessionTTLInSeconds sets the IdleSessionTTLInSeconds field's value.
-func (s *PutBotInput) SetIdleSessionTTLInSeconds(v int64) *PutBotInput {
-	s.IdleSessionTTLInSeconds = &v
-	return s
-}
-
-// SetIntents sets the Intents field's value.
-func (s *PutBotInput) SetIntents(v []Intent) *PutBotInput {
-	s.Intents = v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *PutBotInput) SetLocale(v Locale) *PutBotInput {
-	s.Locale = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutBotInput) SetName(v string) *PutBotInput {
-	s.Name = &v
-	return s
-}
-
-// SetProcessBehavior sets the ProcessBehavior field's value.
-func (s *PutBotInput) SetProcessBehavior(v ProcessBehavior) *PutBotInput {
-	s.ProcessBehavior = v
-	return s
-}
-
-// SetVoiceId sets the VoiceId field's value.
-func (s *PutBotInput) SetVoiceId(v string) *PutBotInput {
-	s.VoiceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotResponse
 type PutBotOutput struct {
 	_ struct{} `type:"structure"`
@@ -7817,96 +6197,6 @@ func (s PutBotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutBotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAbortStatement sets the AbortStatement field's value.
-func (s *PutBotOutput) SetAbortStatement(v *Statement) *PutBotOutput {
-	s.AbortStatement = v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *PutBotOutput) SetChecksum(v string) *PutBotOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetChildDirected sets the ChildDirected field's value.
-func (s *PutBotOutput) SetChildDirected(v bool) *PutBotOutput {
-	s.ChildDirected = &v
-	return s
-}
-
-// SetClarificationPrompt sets the ClarificationPrompt field's value.
-func (s *PutBotOutput) SetClarificationPrompt(v *Prompt) *PutBotOutput {
-	s.ClarificationPrompt = v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *PutBotOutput) SetCreatedDate(v time.Time) *PutBotOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutBotOutput) SetDescription(v string) *PutBotOutput {
-	s.Description = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *PutBotOutput) SetFailureReason(v string) *PutBotOutput {
-	s.FailureReason = &v
-	return s
-}
-
-// SetIdleSessionTTLInSeconds sets the IdleSessionTTLInSeconds field's value.
-func (s *PutBotOutput) SetIdleSessionTTLInSeconds(v int64) *PutBotOutput {
-	s.IdleSessionTTLInSeconds = &v
-	return s
-}
-
-// SetIntents sets the Intents field's value.
-func (s *PutBotOutput) SetIntents(v []Intent) *PutBotOutput {
-	s.Intents = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *PutBotOutput) SetLastUpdatedDate(v time.Time) *PutBotOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *PutBotOutput) SetLocale(v Locale) *PutBotOutput {
-	s.Locale = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutBotOutput) SetName(v string) *PutBotOutput {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *PutBotOutput) SetStatus(v Status) *PutBotOutput {
-	s.Status = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *PutBotOutput) SetVersion(v string) *PutBotOutput {
-	s.Version = &v
-	return s
-}
-
-// SetVoiceId sets the VoiceId field's value.
-func (s *PutBotOutput) SetVoiceId(v string) *PutBotOutput {
-	s.VoiceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentRequest
@@ -8093,78 +6383,6 @@ func (s *PutIntentInput) Validate() error {
 	return nil
 }
 
-// SetChecksum sets the Checksum field's value.
-func (s *PutIntentInput) SetChecksum(v string) *PutIntentInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetConclusionStatement sets the ConclusionStatement field's value.
-func (s *PutIntentInput) SetConclusionStatement(v *Statement) *PutIntentInput {
-	s.ConclusionStatement = v
-	return s
-}
-
-// SetConfirmationPrompt sets the ConfirmationPrompt field's value.
-func (s *PutIntentInput) SetConfirmationPrompt(v *Prompt) *PutIntentInput {
-	s.ConfirmationPrompt = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutIntentInput) SetDescription(v string) *PutIntentInput {
-	s.Description = &v
-	return s
-}
-
-// SetDialogCodeHook sets the DialogCodeHook field's value.
-func (s *PutIntentInput) SetDialogCodeHook(v *CodeHook) *PutIntentInput {
-	s.DialogCodeHook = v
-	return s
-}
-
-// SetFollowUpPrompt sets the FollowUpPrompt field's value.
-func (s *PutIntentInput) SetFollowUpPrompt(v *FollowUpPrompt) *PutIntentInput {
-	s.FollowUpPrompt = v
-	return s
-}
-
-// SetFulfillmentActivity sets the FulfillmentActivity field's value.
-func (s *PutIntentInput) SetFulfillmentActivity(v *FulfillmentActivity) *PutIntentInput {
-	s.FulfillmentActivity = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutIntentInput) SetName(v string) *PutIntentInput {
-	s.Name = &v
-	return s
-}
-
-// SetParentIntentSignature sets the ParentIntentSignature field's value.
-func (s *PutIntentInput) SetParentIntentSignature(v string) *PutIntentInput {
-	s.ParentIntentSignature = &v
-	return s
-}
-
-// SetRejectionStatement sets the RejectionStatement field's value.
-func (s *PutIntentInput) SetRejectionStatement(v *Statement) *PutIntentInput {
-	s.RejectionStatement = v
-	return s
-}
-
-// SetSampleUtterances sets the SampleUtterances field's value.
-func (s *PutIntentInput) SetSampleUtterances(v []string) *PutIntentInput {
-	s.SampleUtterances = v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *PutIntentInput) SetSlots(v []Slot) *PutIntentInput {
-	s.Slots = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentResponse
 type PutIntentOutput struct {
 	_ struct{} `type:"structure"`
@@ -8238,96 +6456,6 @@ func (s PutIntentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutIntentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *PutIntentOutput) SetChecksum(v string) *PutIntentOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetConclusionStatement sets the ConclusionStatement field's value.
-func (s *PutIntentOutput) SetConclusionStatement(v *Statement) *PutIntentOutput {
-	s.ConclusionStatement = v
-	return s
-}
-
-// SetConfirmationPrompt sets the ConfirmationPrompt field's value.
-func (s *PutIntentOutput) SetConfirmationPrompt(v *Prompt) *PutIntentOutput {
-	s.ConfirmationPrompt = v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *PutIntentOutput) SetCreatedDate(v time.Time) *PutIntentOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutIntentOutput) SetDescription(v string) *PutIntentOutput {
-	s.Description = &v
-	return s
-}
-
-// SetDialogCodeHook sets the DialogCodeHook field's value.
-func (s *PutIntentOutput) SetDialogCodeHook(v *CodeHook) *PutIntentOutput {
-	s.DialogCodeHook = v
-	return s
-}
-
-// SetFollowUpPrompt sets the FollowUpPrompt field's value.
-func (s *PutIntentOutput) SetFollowUpPrompt(v *FollowUpPrompt) *PutIntentOutput {
-	s.FollowUpPrompt = v
-	return s
-}
-
-// SetFulfillmentActivity sets the FulfillmentActivity field's value.
-func (s *PutIntentOutput) SetFulfillmentActivity(v *FulfillmentActivity) *PutIntentOutput {
-	s.FulfillmentActivity = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *PutIntentOutput) SetLastUpdatedDate(v time.Time) *PutIntentOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutIntentOutput) SetName(v string) *PutIntentOutput {
-	s.Name = &v
-	return s
-}
-
-// SetParentIntentSignature sets the ParentIntentSignature field's value.
-func (s *PutIntentOutput) SetParentIntentSignature(v string) *PutIntentOutput {
-	s.ParentIntentSignature = &v
-	return s
-}
-
-// SetRejectionStatement sets the RejectionStatement field's value.
-func (s *PutIntentOutput) SetRejectionStatement(v *Statement) *PutIntentOutput {
-	s.RejectionStatement = v
-	return s
-}
-
-// SetSampleUtterances sets the SampleUtterances field's value.
-func (s *PutIntentOutput) SetSampleUtterances(v []string) *PutIntentOutput {
-	s.SampleUtterances = v
-	return s
-}
-
-// SetSlots sets the Slots field's value.
-func (s *PutIntentOutput) SetSlots(v []Slot) *PutIntentOutput {
-	s.Slots = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *PutIntentOutput) SetVersion(v string) *PutIntentOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeRequest
@@ -8424,36 +6552,6 @@ func (s *PutSlotTypeInput) Validate() error {
 	return nil
 }
 
-// SetChecksum sets the Checksum field's value.
-func (s *PutSlotTypeInput) SetChecksum(v string) *PutSlotTypeInput {
-	s.Checksum = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutSlotTypeInput) SetDescription(v string) *PutSlotTypeInput {
-	s.Description = &v
-	return s
-}
-
-// SetEnumerationValues sets the EnumerationValues field's value.
-func (s *PutSlotTypeInput) SetEnumerationValues(v []EnumerationValue) *PutSlotTypeInput {
-	s.EnumerationValues = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutSlotTypeInput) SetName(v string) *PutSlotTypeInput {
-	s.Name = &v
-	return s
-}
-
-// SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *PutSlotTypeInput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *PutSlotTypeInput {
-	s.ValueSelectionStrategy = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeResponse
 type PutSlotTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -8504,54 +6602,6 @@ func (s PutSlotTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetChecksum sets the Checksum field's value.
-func (s *PutSlotTypeOutput) SetChecksum(v string) *PutSlotTypeOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *PutSlotTypeOutput) SetCreatedDate(v time.Time) *PutSlotTypeOutput {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PutSlotTypeOutput) SetDescription(v string) *PutSlotTypeOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEnumerationValues sets the EnumerationValues field's value.
-func (s *PutSlotTypeOutput) SetEnumerationValues(v []EnumerationValue) *PutSlotTypeOutput {
-	s.EnumerationValues = v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *PutSlotTypeOutput) SetLastUpdatedDate(v time.Time) *PutSlotTypeOutput {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PutSlotTypeOutput) SetName(v string) *PutSlotTypeOutput {
-	s.Name = &v
-	return s
-}
-
-// SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *PutSlotTypeOutput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *PutSlotTypeOutput {
-	s.ValueSelectionStrategy = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *PutSlotTypeOutput) SetVersion(v string) *PutSlotTypeOutput {
-	s.Version = &v
-	return s
-}
-
 // Describes the resource that refers to the resource that you are attempting
 // to delete. This object is returned as part of the ResourceInUseException
 // exception.
@@ -8576,18 +6626,6 @@ func (s ResourceReference) String() string {
 // GoString returns the string representation
 func (s ResourceReference) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *ResourceReference) SetName(v string) *ResourceReference {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ResourceReference) SetVersion(v string) *ResourceReference {
-	s.Version = &v
-	return s
 }
 
 // Identifies the version of a specific slot.
@@ -8682,60 +6720,6 @@ func (s *Slot) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *Slot) SetDescription(v string) *Slot {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Slot) SetName(v string) *Slot {
-	s.Name = &v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *Slot) SetPriority(v int64) *Slot {
-	s.Priority = &v
-	return s
-}
-
-// SetResponseCard sets the ResponseCard field's value.
-func (s *Slot) SetResponseCard(v string) *Slot {
-	s.ResponseCard = &v
-	return s
-}
-
-// SetSampleUtterances sets the SampleUtterances field's value.
-func (s *Slot) SetSampleUtterances(v []string) *Slot {
-	s.SampleUtterances = v
-	return s
-}
-
-// SetSlotConstraint sets the SlotConstraint field's value.
-func (s *Slot) SetSlotConstraint(v SlotConstraint) *Slot {
-	s.SlotConstraint = v
-	return s
-}
-
-// SetSlotType sets the SlotType field's value.
-func (s *Slot) SetSlotType(v string) *Slot {
-	s.SlotType = &v
-	return s
-}
-
-// SetSlotTypeVersion sets the SlotTypeVersion field's value.
-func (s *Slot) SetSlotTypeVersion(v string) *Slot {
-	s.SlotTypeVersion = &v
-	return s
-}
-
-// SetValueElicitationPrompt sets the ValueElicitationPrompt field's value.
-func (s *Slot) SetValueElicitationPrompt(v *Prompt) *Slot {
-	s.ValueElicitationPrompt = v
-	return s
-}
-
 // Provides information about a slot type..
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotTypeMetadata
 type SlotTypeMetadata struct {
@@ -8766,36 +6750,6 @@ func (s SlotTypeMetadata) String() string {
 // GoString returns the string representation
 func (s SlotTypeMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *SlotTypeMetadata) SetCreatedDate(v time.Time) *SlotTypeMetadata {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *SlotTypeMetadata) SetDescription(v string) *SlotTypeMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *SlotTypeMetadata) SetLastUpdatedDate(v time.Time) *SlotTypeMetadata {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *SlotTypeMetadata) SetName(v string) *SlotTypeMetadata {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *SlotTypeMetadata) SetVersion(v string) *SlotTypeMetadata {
-	s.Version = &v
-	return s
 }
 
 // A collection of messages that convey information to the user. At runtime,
@@ -8853,18 +6807,6 @@ func (s *Statement) Validate() error {
 	return nil
 }
 
-// SetMessages sets the Messages field's value.
-func (s *Statement) SetMessages(v []Message) *Statement {
-	s.Messages = v
-	return s
-}
-
-// SetResponseCard sets the ResponseCard field's value.
-func (s *Statement) SetResponseCard(v string) *Statement {
-	s.ResponseCard = &v
-	return s
-}
-
 // Provides information about a single utterance that was made to your bot.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UtteranceData
 type UtteranceData struct {
@@ -8897,36 +6839,6 @@ func (s UtteranceData) GoString() string {
 	return s.String()
 }
 
-// SetCount sets the Count field's value.
-func (s *UtteranceData) SetCount(v int64) *UtteranceData {
-	s.Count = &v
-	return s
-}
-
-// SetDistinctUsers sets the DistinctUsers field's value.
-func (s *UtteranceData) SetDistinctUsers(v int64) *UtteranceData {
-	s.DistinctUsers = &v
-	return s
-}
-
-// SetFirstUtteredDate sets the FirstUtteredDate field's value.
-func (s *UtteranceData) SetFirstUtteredDate(v time.Time) *UtteranceData {
-	s.FirstUtteredDate = &v
-	return s
-}
-
-// SetLastUtteredDate sets the LastUtteredDate field's value.
-func (s *UtteranceData) SetLastUtteredDate(v time.Time) *UtteranceData {
-	s.LastUtteredDate = &v
-	return s
-}
-
-// SetUtteranceString sets the UtteranceString field's value.
-func (s *UtteranceData) SetUtteranceString(v string) *UtteranceData {
-	s.UtteranceString = &v
-	return s
-}
-
 // Provides a list of utterances that have been made to a specific version of
 // your bot. The list contains a maximum of 100 utterances.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UtteranceList
@@ -8949,18 +6861,6 @@ func (s UtteranceList) String() string {
 // GoString returns the string representation
 func (s UtteranceList) GoString() string {
 	return s.String()
-}
-
-// SetBotVersion sets the BotVersion field's value.
-func (s *UtteranceList) SetBotVersion(v string) *UtteranceList {
-	s.BotVersion = &v
-	return s
-}
-
-// SetUtterances sets the Utterances field's value.
-func (s *UtteranceList) SetUtterances(v []UtteranceData) *UtteranceList {
-	s.Utterances = v
-	return s
 }
 
 type ChannelStatus string

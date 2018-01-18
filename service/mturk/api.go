@@ -2779,18 +2779,6 @@ func (s *AcceptQualificationRequestInput) Validate() error {
 	return nil
 }
 
-// SetIntegerValue sets the IntegerValue field's value.
-func (s *AcceptQualificationRequestInput) SetIntegerValue(v int64) *AcceptQualificationRequestInput {
-	s.IntegerValue = &v
-	return s
-}
-
-// SetQualificationRequestId sets the QualificationRequestId field's value.
-func (s *AcceptQualificationRequestInput) SetQualificationRequestId(v string) *AcceptQualificationRequestInput {
-	s.QualificationRequestId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequestResponse
 type AcceptQualificationRequestOutput struct {
 	_ struct{} `type:"structure"`
@@ -2857,24 +2845,6 @@ func (s *ApproveAssignmentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *ApproveAssignmentInput) SetAssignmentId(v string) *ApproveAssignmentInput {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetOverrideRejection sets the OverrideRejection field's value.
-func (s *ApproveAssignmentInput) SetOverrideRejection(v bool) *ApproveAssignmentInput {
-	s.OverrideRejection = &v
-	return s
-}
-
-// SetRequesterFeedback sets the RequesterFeedback field's value.
-func (s *ApproveAssignmentInput) SetRequesterFeedback(v string) *ApproveAssignmentInput {
-	s.RequesterFeedback = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignmentResponse
@@ -2971,78 +2941,6 @@ func (s Assignment) GoString() string {
 	return s.String()
 }
 
-// SetAcceptTime sets the AcceptTime field's value.
-func (s *Assignment) SetAcceptTime(v time.Time) *Assignment {
-	s.AcceptTime = &v
-	return s
-}
-
-// SetAnswer sets the Answer field's value.
-func (s *Assignment) SetAnswer(v string) *Assignment {
-	s.Answer = &v
-	return s
-}
-
-// SetApprovalTime sets the ApprovalTime field's value.
-func (s *Assignment) SetApprovalTime(v time.Time) *Assignment {
-	s.ApprovalTime = &v
-	return s
-}
-
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *Assignment) SetAssignmentId(v string) *Assignment {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetAssignmentStatus sets the AssignmentStatus field's value.
-func (s *Assignment) SetAssignmentStatus(v AssignmentStatus) *Assignment {
-	s.AssignmentStatus = v
-	return s
-}
-
-// SetAutoApprovalTime sets the AutoApprovalTime field's value.
-func (s *Assignment) SetAutoApprovalTime(v time.Time) *Assignment {
-	s.AutoApprovalTime = &v
-	return s
-}
-
-// SetDeadline sets the Deadline field's value.
-func (s *Assignment) SetDeadline(v time.Time) *Assignment {
-	s.Deadline = &v
-	return s
-}
-
-// SetHITId sets the HITId field's value.
-func (s *Assignment) SetHITId(v string) *Assignment {
-	s.HITId = &v
-	return s
-}
-
-// SetRejectionTime sets the RejectionTime field's value.
-func (s *Assignment) SetRejectionTime(v time.Time) *Assignment {
-	s.RejectionTime = &v
-	return s
-}
-
-// SetRequesterFeedback sets the RequesterFeedback field's value.
-func (s *Assignment) SetRequesterFeedback(v string) *Assignment {
-	s.RequesterFeedback = &v
-	return s
-}
-
-// SetSubmitTime sets the SubmitTime field's value.
-func (s *Assignment) SetSubmitTime(v time.Time) *Assignment {
-	s.SubmitTime = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *Assignment) SetWorkerId(v string) *Assignment {
-	s.WorkerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorkerRequest
 type AssociateQualificationWithWorkerInput struct {
 	_ struct{} `type:"structure"`
@@ -3101,30 +2999,6 @@ func (s *AssociateQualificationWithWorkerInput) Validate() error {
 	return nil
 }
 
-// SetIntegerValue sets the IntegerValue field's value.
-func (s *AssociateQualificationWithWorkerInput) SetIntegerValue(v int64) *AssociateQualificationWithWorkerInput {
-	s.IntegerValue = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *AssociateQualificationWithWorkerInput) SetQualificationTypeId(v string) *AssociateQualificationWithWorkerInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetSendNotification sets the SendNotification field's value.
-func (s *AssociateQualificationWithWorkerInput) SetSendNotification(v bool) *AssociateQualificationWithWorkerInput {
-	s.SendNotification = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *AssociateQualificationWithWorkerInput) SetWorkerId(v string) *AssociateQualificationWithWorkerInput {
-	s.WorkerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorkerResponse
 type AssociateQualificationWithWorkerOutput struct {
 	_ struct{} `type:"structure"`
@@ -3176,36 +3050,6 @@ func (s BonusPayment) String() string {
 // GoString returns the string representation
 func (s BonusPayment) GoString() string {
 	return s.String()
-}
-
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *BonusPayment) SetAssignmentId(v string) *BonusPayment {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetBonusAmount sets the BonusAmount field's value.
-func (s *BonusPayment) SetBonusAmount(v string) *BonusPayment {
-	s.BonusAmount = &v
-	return s
-}
-
-// SetGrantTime sets the GrantTime field's value.
-func (s *BonusPayment) SetGrantTime(v time.Time) *BonusPayment {
-	s.GrantTime = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *BonusPayment) SetReason(v string) *BonusPayment {
-	s.Reason = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *BonusPayment) SetWorkerId(v string) *BonusPayment {
-	s.WorkerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHITRequest
@@ -3263,24 +3107,6 @@ func (s *CreateAdditionalAssignmentsForHITInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHITId sets the HITId field's value.
-func (s *CreateAdditionalAssignmentsForHITInput) SetHITId(v string) *CreateAdditionalAssignmentsForHITInput {
-	s.HITId = &v
-	return s
-}
-
-// SetNumberOfAdditionalAssignments sets the NumberOfAdditionalAssignments field's value.
-func (s *CreateAdditionalAssignmentsForHITInput) SetNumberOfAdditionalAssignments(v int64) *CreateAdditionalAssignmentsForHITInput {
-	s.NumberOfAdditionalAssignments = &v
-	return s
-}
-
-// SetUniqueRequestToken sets the UniqueRequestToken field's value.
-func (s *CreateAdditionalAssignmentsForHITInput) SetUniqueRequestToken(v string) *CreateAdditionalAssignmentsForHITInput {
-	s.UniqueRequestToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHITResponse
@@ -3490,102 +3316,6 @@ func (s *CreateHITInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentDurationInSeconds sets the AssignmentDurationInSeconds field's value.
-func (s *CreateHITInput) SetAssignmentDurationInSeconds(v int64) *CreateHITInput {
-	s.AssignmentDurationInSeconds = &v
-	return s
-}
-
-// SetAssignmentReviewPolicy sets the AssignmentReviewPolicy field's value.
-func (s *CreateHITInput) SetAssignmentReviewPolicy(v *ReviewPolicy) *CreateHITInput {
-	s.AssignmentReviewPolicy = v
-	return s
-}
-
-// SetAutoApprovalDelayInSeconds sets the AutoApprovalDelayInSeconds field's value.
-func (s *CreateHITInput) SetAutoApprovalDelayInSeconds(v int64) *CreateHITInput {
-	s.AutoApprovalDelayInSeconds = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateHITInput) SetDescription(v string) *CreateHITInput {
-	s.Description = &v
-	return s
-}
-
-// SetHITLayoutId sets the HITLayoutId field's value.
-func (s *CreateHITInput) SetHITLayoutId(v string) *CreateHITInput {
-	s.HITLayoutId = &v
-	return s
-}
-
-// SetHITLayoutParameters sets the HITLayoutParameters field's value.
-func (s *CreateHITInput) SetHITLayoutParameters(v []HITLayoutParameter) *CreateHITInput {
-	s.HITLayoutParameters = v
-	return s
-}
-
-// SetHITReviewPolicy sets the HITReviewPolicy field's value.
-func (s *CreateHITInput) SetHITReviewPolicy(v *ReviewPolicy) *CreateHITInput {
-	s.HITReviewPolicy = v
-	return s
-}
-
-// SetKeywords sets the Keywords field's value.
-func (s *CreateHITInput) SetKeywords(v string) *CreateHITInput {
-	s.Keywords = &v
-	return s
-}
-
-// SetLifetimeInSeconds sets the LifetimeInSeconds field's value.
-func (s *CreateHITInput) SetLifetimeInSeconds(v int64) *CreateHITInput {
-	s.LifetimeInSeconds = &v
-	return s
-}
-
-// SetMaxAssignments sets the MaxAssignments field's value.
-func (s *CreateHITInput) SetMaxAssignments(v int64) *CreateHITInput {
-	s.MaxAssignments = &v
-	return s
-}
-
-// SetQualificationRequirements sets the QualificationRequirements field's value.
-func (s *CreateHITInput) SetQualificationRequirements(v []QualificationRequirement) *CreateHITInput {
-	s.QualificationRequirements = v
-	return s
-}
-
-// SetQuestion sets the Question field's value.
-func (s *CreateHITInput) SetQuestion(v string) *CreateHITInput {
-	s.Question = &v
-	return s
-}
-
-// SetRequesterAnnotation sets the RequesterAnnotation field's value.
-func (s *CreateHITInput) SetRequesterAnnotation(v string) *CreateHITInput {
-	s.RequesterAnnotation = &v
-	return s
-}
-
-// SetReward sets the Reward field's value.
-func (s *CreateHITInput) SetReward(v string) *CreateHITInput {
-	s.Reward = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *CreateHITInput) SetTitle(v string) *CreateHITInput {
-	s.Title = &v
-	return s
-}
-
-// SetUniqueRequestToken sets the UniqueRequestToken field's value.
-func (s *CreateHITInput) SetUniqueRequestToken(v string) *CreateHITInput {
-	s.UniqueRequestToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITResponse
 type CreateHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -3610,12 +3340,6 @@ func (s CreateHITOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHITOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHIT sets the HIT field's value.
-func (s *CreateHITOutput) SetHIT(v *HIT) *CreateHITOutput {
-	s.HIT = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITTypeRequest
@@ -3710,48 +3434,6 @@ func (s *CreateHITTypeInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentDurationInSeconds sets the AssignmentDurationInSeconds field's value.
-func (s *CreateHITTypeInput) SetAssignmentDurationInSeconds(v int64) *CreateHITTypeInput {
-	s.AssignmentDurationInSeconds = &v
-	return s
-}
-
-// SetAutoApprovalDelayInSeconds sets the AutoApprovalDelayInSeconds field's value.
-func (s *CreateHITTypeInput) SetAutoApprovalDelayInSeconds(v int64) *CreateHITTypeInput {
-	s.AutoApprovalDelayInSeconds = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateHITTypeInput) SetDescription(v string) *CreateHITTypeInput {
-	s.Description = &v
-	return s
-}
-
-// SetKeywords sets the Keywords field's value.
-func (s *CreateHITTypeInput) SetKeywords(v string) *CreateHITTypeInput {
-	s.Keywords = &v
-	return s
-}
-
-// SetQualificationRequirements sets the QualificationRequirements field's value.
-func (s *CreateHITTypeInput) SetQualificationRequirements(v []QualificationRequirement) *CreateHITTypeInput {
-	s.QualificationRequirements = v
-	return s
-}
-
-// SetReward sets the Reward field's value.
-func (s *CreateHITTypeInput) SetReward(v string) *CreateHITTypeInput {
-	s.Reward = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *CreateHITTypeInput) SetTitle(v string) *CreateHITTypeInput {
-	s.Title = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITTypeResponse
 type CreateHITTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3775,12 +3457,6 @@ func (s CreateHITTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHITTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHITTypeId sets the HITTypeId field's value.
-func (s *CreateHITTypeOutput) SetHITTypeId(v string) *CreateHITTypeOutput {
-	s.HITTypeId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITTypeRequest
@@ -3913,66 +3589,6 @@ func (s *CreateHITWithHITTypeInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentReviewPolicy sets the AssignmentReviewPolicy field's value.
-func (s *CreateHITWithHITTypeInput) SetAssignmentReviewPolicy(v *ReviewPolicy) *CreateHITWithHITTypeInput {
-	s.AssignmentReviewPolicy = v
-	return s
-}
-
-// SetHITLayoutId sets the HITLayoutId field's value.
-func (s *CreateHITWithHITTypeInput) SetHITLayoutId(v string) *CreateHITWithHITTypeInput {
-	s.HITLayoutId = &v
-	return s
-}
-
-// SetHITLayoutParameters sets the HITLayoutParameters field's value.
-func (s *CreateHITWithHITTypeInput) SetHITLayoutParameters(v []HITLayoutParameter) *CreateHITWithHITTypeInput {
-	s.HITLayoutParameters = v
-	return s
-}
-
-// SetHITReviewPolicy sets the HITReviewPolicy field's value.
-func (s *CreateHITWithHITTypeInput) SetHITReviewPolicy(v *ReviewPolicy) *CreateHITWithHITTypeInput {
-	s.HITReviewPolicy = v
-	return s
-}
-
-// SetHITTypeId sets the HITTypeId field's value.
-func (s *CreateHITWithHITTypeInput) SetHITTypeId(v string) *CreateHITWithHITTypeInput {
-	s.HITTypeId = &v
-	return s
-}
-
-// SetLifetimeInSeconds sets the LifetimeInSeconds field's value.
-func (s *CreateHITWithHITTypeInput) SetLifetimeInSeconds(v int64) *CreateHITWithHITTypeInput {
-	s.LifetimeInSeconds = &v
-	return s
-}
-
-// SetMaxAssignments sets the MaxAssignments field's value.
-func (s *CreateHITWithHITTypeInput) SetMaxAssignments(v int64) *CreateHITWithHITTypeInput {
-	s.MaxAssignments = &v
-	return s
-}
-
-// SetQuestion sets the Question field's value.
-func (s *CreateHITWithHITTypeInput) SetQuestion(v string) *CreateHITWithHITTypeInput {
-	s.Question = &v
-	return s
-}
-
-// SetRequesterAnnotation sets the RequesterAnnotation field's value.
-func (s *CreateHITWithHITTypeInput) SetRequesterAnnotation(v string) *CreateHITWithHITTypeInput {
-	s.RequesterAnnotation = &v
-	return s
-}
-
-// SetUniqueRequestToken sets the UniqueRequestToken field's value.
-func (s *CreateHITWithHITTypeInput) SetUniqueRequestToken(v string) *CreateHITWithHITTypeInput {
-	s.UniqueRequestToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITTypeResponse
 type CreateHITWithHITTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3997,12 +3613,6 @@ func (s CreateHITWithHITTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHITWithHITTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHIT sets the HIT field's value.
-func (s *CreateHITWithHITTypeOutput) SetHIT(v *HIT) *CreateHITWithHITTypeOutput {
-	s.HIT = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationTypeRequest
@@ -4112,66 +3722,6 @@ func (s *CreateQualificationTypeInput) Validate() error {
 	return nil
 }
 
-// SetAnswerKey sets the AnswerKey field's value.
-func (s *CreateQualificationTypeInput) SetAnswerKey(v string) *CreateQualificationTypeInput {
-	s.AnswerKey = &v
-	return s
-}
-
-// SetAutoGranted sets the AutoGranted field's value.
-func (s *CreateQualificationTypeInput) SetAutoGranted(v bool) *CreateQualificationTypeInput {
-	s.AutoGranted = &v
-	return s
-}
-
-// SetAutoGrantedValue sets the AutoGrantedValue field's value.
-func (s *CreateQualificationTypeInput) SetAutoGrantedValue(v int64) *CreateQualificationTypeInput {
-	s.AutoGrantedValue = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateQualificationTypeInput) SetDescription(v string) *CreateQualificationTypeInput {
-	s.Description = &v
-	return s
-}
-
-// SetKeywords sets the Keywords field's value.
-func (s *CreateQualificationTypeInput) SetKeywords(v string) *CreateQualificationTypeInput {
-	s.Keywords = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateQualificationTypeInput) SetName(v string) *CreateQualificationTypeInput {
-	s.Name = &v
-	return s
-}
-
-// SetQualificationTypeStatus sets the QualificationTypeStatus field's value.
-func (s *CreateQualificationTypeInput) SetQualificationTypeStatus(v QualificationTypeStatus) *CreateQualificationTypeInput {
-	s.QualificationTypeStatus = v
-	return s
-}
-
-// SetRetryDelayInSeconds sets the RetryDelayInSeconds field's value.
-func (s *CreateQualificationTypeInput) SetRetryDelayInSeconds(v int64) *CreateQualificationTypeInput {
-	s.RetryDelayInSeconds = &v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *CreateQualificationTypeInput) SetTest(v string) *CreateQualificationTypeInput {
-	s.Test = &v
-	return s
-}
-
-// SetTestDurationInSeconds sets the TestDurationInSeconds field's value.
-func (s *CreateQualificationTypeInput) SetTestDurationInSeconds(v int64) *CreateQualificationTypeInput {
-	s.TestDurationInSeconds = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationTypeResponse
 type CreateQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4195,12 +3745,6 @@ func (s CreateQualificationTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateQualificationTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQualificationType sets the QualificationType field's value.
-func (s *CreateQualificationTypeOutput) SetQualificationType(v *QualificationType) *CreateQualificationTypeOutput {
-	s.QualificationType = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlockRequest
@@ -4248,18 +3792,6 @@ func (s *CreateWorkerBlockInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetReason sets the Reason field's value.
-func (s *CreateWorkerBlockInput) SetReason(v string) *CreateWorkerBlockInput {
-	s.Reason = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *CreateWorkerBlockInput) SetWorkerId(v string) *CreateWorkerBlockInput {
-	s.WorkerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlockResponse
@@ -4321,12 +3853,6 @@ func (s *DeleteHITInput) Validate() error {
 	return nil
 }
 
-// SetHITId sets the HITId field's value.
-func (s *DeleteHITInput) SetHITId(v string) *DeleteHITInput {
-	s.HITId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHITResponse
 type DeleteHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -4384,12 +3910,6 @@ func (s *DeleteQualificationTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *DeleteQualificationTypeInput) SetQualificationTypeId(v string) *DeleteQualificationTypeInput {
-	s.QualificationTypeId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationTypeResponse
@@ -4453,18 +3973,6 @@ func (s *DeleteWorkerBlockInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetReason sets the Reason field's value.
-func (s *DeleteWorkerBlockInput) SetReason(v string) *DeleteWorkerBlockInput {
-	s.Reason = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *DeleteWorkerBlockInput) SetWorkerId(v string) *DeleteWorkerBlockInput {
-	s.WorkerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlockResponse
@@ -4542,24 +4050,6 @@ func (s *DisassociateQualificationFromWorkerInput) Validate() error {
 	return nil
 }
 
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *DisassociateQualificationFromWorkerInput) SetQualificationTypeId(v string) *DisassociateQualificationFromWorkerInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *DisassociateQualificationFromWorkerInput) SetReason(v string) *DisassociateQualificationFromWorkerInput {
-	s.Reason = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *DisassociateQualificationFromWorkerInput) SetWorkerId(v string) *DisassociateQualificationFromWorkerInput {
-	s.WorkerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorkerResponse
 type DisassociateQualificationFromWorkerOutput struct {
 	_ struct{} `type:"structure"`
@@ -4625,18 +4115,6 @@ func (s GetAccountBalanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAvailableBalance sets the AvailableBalance field's value.
-func (s *GetAccountBalanceOutput) SetAvailableBalance(v string) *GetAccountBalanceOutput {
-	s.AvailableBalance = &v
-	return s
-}
-
-// SetOnHoldBalance sets the OnHoldBalance field's value.
-func (s *GetAccountBalanceOutput) SetOnHoldBalance(v string) *GetAccountBalanceOutput {
-	s.OnHoldBalance = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignmentRequest
 type GetAssignmentInput struct {
 	_ struct{} `type:"structure"`
@@ -4674,12 +4152,6 @@ func (s *GetAssignmentInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *GetAssignmentInput) SetAssignmentId(v string) *GetAssignmentInput {
-	s.AssignmentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignmentResponse
 type GetAssignmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -4706,18 +4178,6 @@ func (s GetAssignmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAssignmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssignment sets the Assignment field's value.
-func (s *GetAssignmentOutput) SetAssignment(v *Assignment) *GetAssignmentOutput {
-	s.Assignment = v
-	return s
-}
-
-// SetHIT sets the HIT field's value.
-func (s *GetAssignmentOutput) SetHIT(v *HIT) *GetAssignmentOutput {
-	s.HIT = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURLRequest
@@ -4767,18 +4227,6 @@ func (s *GetFileUploadURLInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *GetFileUploadURLInput) SetAssignmentId(v string) *GetFileUploadURLInput {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetQuestionIdentifier sets the QuestionIdentifier field's value.
-func (s *GetFileUploadURLInput) SetQuestionIdentifier(v string) *GetFileUploadURLInput {
-	s.QuestionIdentifier = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURLResponse
 type GetFileUploadURLOutput struct {
 	_ struct{} `type:"structure"`
@@ -4802,12 +4250,6 @@ func (s GetFileUploadURLOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFileUploadURLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFileUploadURL sets the FileUploadURL field's value.
-func (s *GetFileUploadURLOutput) SetFileUploadURL(v string) *GetFileUploadURLOutput {
-	s.FileUploadURL = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHITRequest
@@ -4847,12 +4289,6 @@ func (s *GetHITInput) Validate() error {
 	return nil
 }
 
-// SetHITId sets the HITId field's value.
-func (s *GetHITInput) SetHITId(v string) *GetHITInput {
-	s.HITId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHITResponse
 type GetHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -4876,12 +4312,6 @@ func (s GetHITOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetHITOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHIT sets the HIT field's value.
-func (s *GetHITOutput) SetHIT(v *HIT) *GetHITOutput {
-	s.HIT = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScoreRequest
@@ -4933,18 +4363,6 @@ func (s *GetQualificationScoreInput) Validate() error {
 	return nil
 }
 
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *GetQualificationScoreInput) SetQualificationTypeId(v string) *GetQualificationScoreInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *GetQualificationScoreInput) SetWorkerId(v string) *GetQualificationScoreInput {
-	s.WorkerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScoreResponse
 type GetQualificationScoreOutput struct {
 	_ struct{} `type:"structure"`
@@ -4969,12 +4387,6 @@ func (s GetQualificationScoreOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetQualificationScoreOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQualification sets the Qualification field's value.
-func (s *GetQualificationScoreOutput) SetQualification(v *Qualification) *GetQualificationScoreOutput {
-	s.Qualification = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationTypeRequest
@@ -5014,12 +4426,6 @@ func (s *GetQualificationTypeInput) Validate() error {
 	return nil
 }
 
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *GetQualificationTypeInput) SetQualificationTypeId(v string) *GetQualificationTypeInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationTypeResponse
 type GetQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -5043,12 +4449,6 @@ func (s GetQualificationTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetQualificationTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQualificationType sets the QualificationType field's value.
-func (s *GetQualificationTypeOutput) SetQualificationType(v *QualificationType) *GetQualificationTypeOutput {
-	s.QualificationType = v
-	return s
 }
 
 // The HIT data structure represents a single HIT, including all the information
@@ -5148,132 +4548,6 @@ func (s HIT) GoString() string {
 	return s.String()
 }
 
-// SetAssignmentDurationInSeconds sets the AssignmentDurationInSeconds field's value.
-func (s *HIT) SetAssignmentDurationInSeconds(v int64) *HIT {
-	s.AssignmentDurationInSeconds = &v
-	return s
-}
-
-// SetAutoApprovalDelayInSeconds sets the AutoApprovalDelayInSeconds field's value.
-func (s *HIT) SetAutoApprovalDelayInSeconds(v int64) *HIT {
-	s.AutoApprovalDelayInSeconds = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *HIT) SetCreationTime(v time.Time) *HIT {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *HIT) SetDescription(v string) *HIT {
-	s.Description = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *HIT) SetExpiration(v time.Time) *HIT {
-	s.Expiration = &v
-	return s
-}
-
-// SetHITGroupId sets the HITGroupId field's value.
-func (s *HIT) SetHITGroupId(v string) *HIT {
-	s.HITGroupId = &v
-	return s
-}
-
-// SetHITId sets the HITId field's value.
-func (s *HIT) SetHITId(v string) *HIT {
-	s.HITId = &v
-	return s
-}
-
-// SetHITLayoutId sets the HITLayoutId field's value.
-func (s *HIT) SetHITLayoutId(v string) *HIT {
-	s.HITLayoutId = &v
-	return s
-}
-
-// SetHITReviewStatus sets the HITReviewStatus field's value.
-func (s *HIT) SetHITReviewStatus(v HITReviewStatus) *HIT {
-	s.HITReviewStatus = v
-	return s
-}
-
-// SetHITStatus sets the HITStatus field's value.
-func (s *HIT) SetHITStatus(v HITStatus) *HIT {
-	s.HITStatus = v
-	return s
-}
-
-// SetHITTypeId sets the HITTypeId field's value.
-func (s *HIT) SetHITTypeId(v string) *HIT {
-	s.HITTypeId = &v
-	return s
-}
-
-// SetKeywords sets the Keywords field's value.
-func (s *HIT) SetKeywords(v string) *HIT {
-	s.Keywords = &v
-	return s
-}
-
-// SetMaxAssignments sets the MaxAssignments field's value.
-func (s *HIT) SetMaxAssignments(v int64) *HIT {
-	s.MaxAssignments = &v
-	return s
-}
-
-// SetNumberOfAssignmentsAvailable sets the NumberOfAssignmentsAvailable field's value.
-func (s *HIT) SetNumberOfAssignmentsAvailable(v int64) *HIT {
-	s.NumberOfAssignmentsAvailable = &v
-	return s
-}
-
-// SetNumberOfAssignmentsCompleted sets the NumberOfAssignmentsCompleted field's value.
-func (s *HIT) SetNumberOfAssignmentsCompleted(v int64) *HIT {
-	s.NumberOfAssignmentsCompleted = &v
-	return s
-}
-
-// SetNumberOfAssignmentsPending sets the NumberOfAssignmentsPending field's value.
-func (s *HIT) SetNumberOfAssignmentsPending(v int64) *HIT {
-	s.NumberOfAssignmentsPending = &v
-	return s
-}
-
-// SetQualificationRequirements sets the QualificationRequirements field's value.
-func (s *HIT) SetQualificationRequirements(v []QualificationRequirement) *HIT {
-	s.QualificationRequirements = v
-	return s
-}
-
-// SetQuestion sets the Question field's value.
-func (s *HIT) SetQuestion(v string) *HIT {
-	s.Question = &v
-	return s
-}
-
-// SetRequesterAnnotation sets the RequesterAnnotation field's value.
-func (s *HIT) SetRequesterAnnotation(v string) *HIT {
-	s.RequesterAnnotation = &v
-	return s
-}
-
-// SetReward sets the Reward field's value.
-func (s *HIT) SetReward(v string) *HIT {
-	s.Reward = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *HIT) SetTitle(v string) *HIT {
-	s.Title = &v
-	return s
-}
-
 // The HITLayoutParameter data structure defines parameter values used with
 // a HITLayout. A HITLayout is a reusable Amazon Mechanical Turk project template
 // used to provide Human Intelligence Task (HIT) question data for CreateHIT.
@@ -5318,18 +4592,6 @@ func (s *HITLayoutParameter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *HITLayoutParameter) SetName(v string) *HITLayoutParameter {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *HITLayoutParameter) SetValue(v string) *HITLayoutParameter {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHITRequest
@@ -5383,30 +4645,6 @@ func (s *ListAssignmentsForHITInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentStatuses sets the AssignmentStatuses field's value.
-func (s *ListAssignmentsForHITInput) SetAssignmentStatuses(v []AssignmentStatus) *ListAssignmentsForHITInput {
-	s.AssignmentStatuses = v
-	return s
-}
-
-// SetHITId sets the HITId field's value.
-func (s *ListAssignmentsForHITInput) SetHITId(v string) *ListAssignmentsForHITInput {
-	s.HITId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAssignmentsForHITInput) SetMaxResults(v int64) *ListAssignmentsForHITInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssignmentsForHITInput) SetNextToken(v string) *ListAssignmentsForHITInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHITResponse
 type ListAssignmentsForHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -5439,24 +4677,6 @@ func (s ListAssignmentsForHITOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAssignmentsForHITOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssignments sets the Assignments field's value.
-func (s *ListAssignmentsForHITOutput) SetAssignments(v []Assignment) *ListAssignmentsForHITOutput {
-	s.Assignments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssignmentsForHITOutput) SetNextToken(v string) *ListAssignmentsForHITOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListAssignmentsForHITOutput) SetNumResults(v int64) *ListAssignmentsForHITOutput {
-	s.NumResults = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPaymentsRequest
@@ -5511,30 +4731,6 @@ func (s *ListBonusPaymentsInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *ListBonusPaymentsInput) SetAssignmentId(v string) *ListBonusPaymentsInput {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetHITId sets the HITId field's value.
-func (s *ListBonusPaymentsInput) SetHITId(v string) *ListBonusPaymentsInput {
-	s.HITId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListBonusPaymentsInput) SetMaxResults(v int64) *ListBonusPaymentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBonusPaymentsInput) SetNextToken(v string) *ListBonusPaymentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPaymentsResponse
 type ListBonusPaymentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5568,24 +4764,6 @@ func (s ListBonusPaymentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBonusPaymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBonusPayments sets the BonusPayments field's value.
-func (s *ListBonusPaymentsOutput) SetBonusPayments(v []BonusPayment) *ListBonusPaymentsOutput {
-	s.BonusPayments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBonusPaymentsOutput) SetNextToken(v string) *ListBonusPaymentsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListBonusPaymentsOutput) SetNumResults(v int64) *ListBonusPaymentsOutput {
-	s.NumResults = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationTypeRequest
@@ -5637,24 +4815,6 @@ func (s *ListHITsForQualificationTypeInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListHITsForQualificationTypeInput) SetMaxResults(v int64) *ListHITsForQualificationTypeInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHITsForQualificationTypeInput) SetNextToken(v string) *ListHITsForQualificationTypeInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *ListHITsForQualificationTypeInput) SetQualificationTypeId(v string) *ListHITsForQualificationTypeInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationTypeResponse
 type ListHITsForQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -5687,24 +4847,6 @@ func (s ListHITsForQualificationTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListHITsForQualificationTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHITs sets the HITs field's value.
-func (s *ListHITsForQualificationTypeOutput) SetHITs(v []HIT) *ListHITsForQualificationTypeOutput {
-	s.HITs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHITsForQualificationTypeOutput) SetNextToken(v string) *ListHITsForQualificationTypeOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListHITsForQualificationTypeOutput) SetNumResults(v int64) *ListHITsForQualificationTypeOutput {
-	s.NumResults = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsRequest
@@ -5743,18 +4885,6 @@ func (s *ListHITsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListHITsInput) SetMaxResults(v int64) *ListHITsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHITsInput) SetNextToken(v string) *ListHITsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsResponse
 type ListHITsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5787,24 +4917,6 @@ func (s ListHITsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListHITsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHITs sets the HITs field's value.
-func (s *ListHITsOutput) SetHITs(v []HIT) *ListHITsOutput {
-	s.HITs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHITsOutput) SetNextToken(v string) *ListHITsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListHITsOutput) SetNumResults(v int64) *ListHITsOutput {
-	s.NumResults = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequestsRequest
@@ -5852,24 +4964,6 @@ func (s *ListQualificationRequestsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListQualificationRequestsInput) SetMaxResults(v int64) *ListQualificationRequestsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQualificationRequestsInput) SetNextToken(v string) *ListQualificationRequestsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *ListQualificationRequestsInput) SetQualificationTypeId(v string) *ListQualificationRequestsInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequestsResponse
 type ListQualificationRequestsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5904,24 +4998,6 @@ func (s ListQualificationRequestsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListQualificationRequestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQualificationRequestsOutput) SetNextToken(v string) *ListQualificationRequestsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListQualificationRequestsOutput) SetNumResults(v int64) *ListQualificationRequestsOutput {
-	s.NumResults = &v
-	return s
-}
-
-// SetQualificationRequests sets the QualificationRequests field's value.
-func (s *ListQualificationRequestsOutput) SetQualificationRequests(v []QualificationRequest) *ListQualificationRequestsOutput {
-	s.QualificationRequests = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypesRequest
@@ -5984,36 +5060,6 @@ func (s *ListQualificationTypesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListQualificationTypesInput) SetMaxResults(v int64) *ListQualificationTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetMustBeOwnedByCaller sets the MustBeOwnedByCaller field's value.
-func (s *ListQualificationTypesInput) SetMustBeOwnedByCaller(v bool) *ListQualificationTypesInput {
-	s.MustBeOwnedByCaller = &v
-	return s
-}
-
-// SetMustBeRequestable sets the MustBeRequestable field's value.
-func (s *ListQualificationTypesInput) SetMustBeRequestable(v bool) *ListQualificationTypesInput {
-	s.MustBeRequestable = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQualificationTypesInput) SetNextToken(v string) *ListQualificationTypesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQuery sets the Query field's value.
-func (s *ListQualificationTypesInput) SetQuery(v string) *ListQualificationTypesInput {
-	s.Query = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypesResponse
 type ListQualificationTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6046,24 +5092,6 @@ func (s ListQualificationTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListQualificationTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQualificationTypesOutput) SetNextToken(v string) *ListQualificationTypesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListQualificationTypesOutput) SetNumResults(v int64) *ListQualificationTypesOutput {
-	s.NumResults = &v
-	return s
-}
-
-// SetQualificationTypes sets the QualificationTypes field's value.
-func (s *ListQualificationTypesOutput) SetQualificationTypes(v []QualificationType) *ListQualificationTypesOutput {
-	s.QualificationTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHITRequest
@@ -6128,42 +5156,6 @@ func (s *ListReviewPolicyResultsForHITInput) Validate() error {
 	return nil
 }
 
-// SetHITId sets the HITId field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetHITId(v string) *ListReviewPolicyResultsForHITInput {
-	s.HITId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetMaxResults(v int64) *ListReviewPolicyResultsForHITInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetNextToken(v string) *ListReviewPolicyResultsForHITInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyLevels sets the PolicyLevels field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetPolicyLevels(v []ReviewPolicyLevel) *ListReviewPolicyResultsForHITInput {
-	s.PolicyLevels = v
-	return s
-}
-
-// SetRetrieveActions sets the RetrieveActions field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetRetrieveActions(v bool) *ListReviewPolicyResultsForHITInput {
-	s.RetrieveActions = &v
-	return s
-}
-
-// SetRetrieveResults sets the RetrieveResults field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetRetrieveResults(v bool) *ListReviewPolicyResultsForHITInput {
-	s.RetrieveResults = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHITResponse
 type ListReviewPolicyResultsForHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -6206,42 +5198,6 @@ func (s ListReviewPolicyResultsForHITOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListReviewPolicyResultsForHITOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssignmentReviewPolicy sets the AssignmentReviewPolicy field's value.
-func (s *ListReviewPolicyResultsForHITOutput) SetAssignmentReviewPolicy(v *ReviewPolicy) *ListReviewPolicyResultsForHITOutput {
-	s.AssignmentReviewPolicy = v
-	return s
-}
-
-// SetAssignmentReviewReport sets the AssignmentReviewReport field's value.
-func (s *ListReviewPolicyResultsForHITOutput) SetAssignmentReviewReport(v *ReviewReport) *ListReviewPolicyResultsForHITOutput {
-	s.AssignmentReviewReport = v
-	return s
-}
-
-// SetHITId sets the HITId field's value.
-func (s *ListReviewPolicyResultsForHITOutput) SetHITId(v string) *ListReviewPolicyResultsForHITOutput {
-	s.HITId = &v
-	return s
-}
-
-// SetHITReviewPolicy sets the HITReviewPolicy field's value.
-func (s *ListReviewPolicyResultsForHITOutput) SetHITReviewPolicy(v *ReviewPolicy) *ListReviewPolicyResultsForHITOutput {
-	s.HITReviewPolicy = v
-	return s
-}
-
-// SetHITReviewReport sets the HITReviewReport field's value.
-func (s *ListReviewPolicyResultsForHITOutput) SetHITReviewReport(v *ReviewReport) *ListReviewPolicyResultsForHITOutput {
-	s.HITReviewReport = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListReviewPolicyResultsForHITOutput) SetNextToken(v string) *ListReviewPolicyResultsForHITOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITsRequest
@@ -6291,30 +5247,6 @@ func (s *ListReviewableHITsInput) Validate() error {
 	return nil
 }
 
-// SetHITTypeId sets the HITTypeId field's value.
-func (s *ListReviewableHITsInput) SetHITTypeId(v string) *ListReviewableHITsInput {
-	s.HITTypeId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListReviewableHITsInput) SetMaxResults(v int64) *ListReviewableHITsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListReviewableHITsInput) SetNextToken(v string) *ListReviewableHITsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListReviewableHITsInput) SetStatus(v ReviewableHITStatus) *ListReviewableHITsInput {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITsResponse
 type ListReviewableHITsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6347,24 +5279,6 @@ func (s ListReviewableHITsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListReviewableHITsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHITs sets the HITs field's value.
-func (s *ListReviewableHITsOutput) SetHITs(v []HIT) *ListReviewableHITsOutput {
-	s.HITs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListReviewableHITsOutput) SetNextToken(v string) *ListReviewableHITsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListReviewableHITsOutput) SetNumResults(v int64) *ListReviewableHITsOutput {
-	s.NumResults = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocksRequest
@@ -6403,18 +5317,6 @@ func (s *ListWorkerBlocksInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListWorkerBlocksInput) SetMaxResults(v int64) *ListWorkerBlocksInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListWorkerBlocksInput) SetNextToken(v string) *ListWorkerBlocksInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocksResponse
 type ListWorkerBlocksOutput struct {
 	_ struct{} `type:"structure"`
@@ -6448,24 +5350,6 @@ func (s ListWorkerBlocksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListWorkerBlocksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListWorkerBlocksOutput) SetNextToken(v string) *ListWorkerBlocksOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListWorkerBlocksOutput) SetNumResults(v int64) *ListWorkerBlocksOutput {
-	s.NumResults = &v
-	return s
-}
-
-// SetWorkerBlocks sets the WorkerBlocks field's value.
-func (s *ListWorkerBlocksOutput) SetWorkerBlocks(v []WorkerBlock) *ListWorkerBlocksOutput {
-	s.WorkerBlocks = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationTypeRequest
@@ -6520,30 +5404,6 @@ func (s *ListWorkersWithQualificationTypeInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListWorkersWithQualificationTypeInput) SetMaxResults(v int64) *ListWorkersWithQualificationTypeInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListWorkersWithQualificationTypeInput) SetNextToken(v string) *ListWorkersWithQualificationTypeInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *ListWorkersWithQualificationTypeInput) SetQualificationTypeId(v string) *ListWorkersWithQualificationTypeInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListWorkersWithQualificationTypeInput) SetStatus(v QualificationStatus) *ListWorkersWithQualificationTypeInput {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationTypeResponse
 type ListWorkersWithQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -6576,24 +5436,6 @@ func (s ListWorkersWithQualificationTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListWorkersWithQualificationTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListWorkersWithQualificationTypeOutput) SetNextToken(v string) *ListWorkersWithQualificationTypeOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNumResults sets the NumResults field's value.
-func (s *ListWorkersWithQualificationTypeOutput) SetNumResults(v int64) *ListWorkersWithQualificationTypeOutput {
-	s.NumResults = &v
-	return s
-}
-
-// SetQualifications sets the Qualifications field's value.
-func (s *ListWorkersWithQualificationTypeOutput) SetQualifications(v []Qualification) *ListWorkersWithQualificationTypeOutput {
-	s.Qualifications = v
-	return s
 }
 
 // The Locale data structure represents a geographical region or location.
@@ -6640,18 +5482,6 @@ func (s *Locale) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCountry sets the Country field's value.
-func (s *Locale) SetCountry(v string) *Locale {
-	s.Country = &v
-	return s
-}
-
-// SetSubdivision sets the Subdivision field's value.
-func (s *Locale) SetSubdivision(v string) *Locale {
-	s.Subdivision = &v
-	return s
 }
 
 // The NotificationSpecification data structure describes a HIT event notification
@@ -6728,30 +5558,6 @@ func (s *NotificationSpecification) Validate() error {
 	return nil
 }
 
-// SetDestination sets the Destination field's value.
-func (s *NotificationSpecification) SetDestination(v string) *NotificationSpecification {
-	s.Destination = &v
-	return s
-}
-
-// SetEventTypes sets the EventTypes field's value.
-func (s *NotificationSpecification) SetEventTypes(v []EventType) *NotificationSpecification {
-	s.EventTypes = v
-	return s
-}
-
-// SetTransport sets the Transport field's value.
-func (s *NotificationSpecification) SetTransport(v NotificationTransport) *NotificationSpecification {
-	s.Transport = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *NotificationSpecification) SetVersion(v string) *NotificationSpecification {
-	s.Version = &v
-	return s
-}
-
 // When MTurk encounters an issue with notifying the Workers you specified,
 // it returns back this object with failure details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkersFailureStatus
@@ -6776,24 +5582,6 @@ func (s NotifyWorkersFailureStatus) String() string {
 // GoString returns the string representation
 func (s NotifyWorkersFailureStatus) GoString() string {
 	return s.String()
-}
-
-// SetNotifyWorkersFailureCode sets the NotifyWorkersFailureCode field's value.
-func (s *NotifyWorkersFailureStatus) SetNotifyWorkersFailureCode(v NotifyWorkersFailureCode) *NotifyWorkersFailureStatus {
-	s.NotifyWorkersFailureCode = v
-	return s
-}
-
-// SetNotifyWorkersFailureMessage sets the NotifyWorkersFailureMessage field's value.
-func (s *NotifyWorkersFailureStatus) SetNotifyWorkersFailureMessage(v string) *NotifyWorkersFailureStatus {
-	s.NotifyWorkersFailureMessage = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *NotifyWorkersFailureStatus) SetWorkerId(v string) *NotifyWorkersFailureStatus {
-	s.WorkerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkersRequest
@@ -6849,24 +5637,6 @@ func (s *NotifyWorkersInput) Validate() error {
 	return nil
 }
 
-// SetMessageText sets the MessageText field's value.
-func (s *NotifyWorkersInput) SetMessageText(v string) *NotifyWorkersInput {
-	s.MessageText = &v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *NotifyWorkersInput) SetSubject(v string) *NotifyWorkersInput {
-	s.Subject = &v
-	return s
-}
-
-// SetWorkerIds sets the WorkerIds field's value.
-func (s *NotifyWorkersInput) SetWorkerIds(v []string) *NotifyWorkersInput {
-	s.WorkerIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkersResponse
 type NotifyWorkersOutput struct {
 	_ struct{} `type:"structure"`
@@ -6891,12 +5661,6 @@ func (s NotifyWorkersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s NotifyWorkersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNotifyWorkersFailureStatuses sets the NotifyWorkersFailureStatuses field's value.
-func (s *NotifyWorkersOutput) SetNotifyWorkersFailureStatuses(v []NotifyWorkersFailureStatus) *NotifyWorkersOutput {
-	s.NotifyWorkersFailureStatuses = v
-	return s
 }
 
 // This data structure is the data type for the AnswerKey parameter of the ScoreMyKnownAnswers/2011-09-01
@@ -6925,18 +5689,6 @@ func (s ParameterMapEntry) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *ParameterMapEntry) SetKey(v string) *ParameterMapEntry {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *ParameterMapEntry) SetValues(v []string) *ParameterMapEntry {
-	s.Values = v
-	return s
-}
-
 // Name of the parameter from the Review policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/PolicyParameter
 type PolicyParameter struct {
@@ -6960,24 +5712,6 @@ func (s PolicyParameter) String() string {
 // GoString returns the string representation
 func (s PolicyParameter) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *PolicyParameter) SetKey(v string) *PolicyParameter {
-	s.Key = &v
-	return s
-}
-
-// SetMapEntries sets the MapEntries field's value.
-func (s *PolicyParameter) SetMapEntries(v []ParameterMapEntry) *PolicyParameter {
-	s.MapEntries = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *PolicyParameter) SetValues(v []string) *PolicyParameter {
-	s.Values = v
-	return s
 }
 
 // The Qualification data structure represents a Qualification assigned to a
@@ -7017,42 +5751,6 @@ func (s Qualification) String() string {
 // GoString returns the string representation
 func (s Qualification) GoString() string {
 	return s.String()
-}
-
-// SetGrantTime sets the GrantTime field's value.
-func (s *Qualification) SetGrantTime(v time.Time) *Qualification {
-	s.GrantTime = &v
-	return s
-}
-
-// SetIntegerValue sets the IntegerValue field's value.
-func (s *Qualification) SetIntegerValue(v int64) *Qualification {
-	s.IntegerValue = &v
-	return s
-}
-
-// SetLocaleValue sets the LocaleValue field's value.
-func (s *Qualification) SetLocaleValue(v *Locale) *Qualification {
-	s.LocaleValue = v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *Qualification) SetQualificationTypeId(v string) *Qualification {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Qualification) SetStatus(v QualificationStatus) *Qualification {
-	s.Status = v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *Qualification) SetWorkerId(v string) *Qualification {
-	s.WorkerId = &v
-	return s
 }
 
 // The QualificationRequest data structure represents a request a Worker has
@@ -7098,42 +5796,6 @@ func (s QualificationRequest) String() string {
 // GoString returns the string representation
 func (s QualificationRequest) GoString() string {
 	return s.String()
-}
-
-// SetAnswer sets the Answer field's value.
-func (s *QualificationRequest) SetAnswer(v string) *QualificationRequest {
-	s.Answer = &v
-	return s
-}
-
-// SetQualificationRequestId sets the QualificationRequestId field's value.
-func (s *QualificationRequest) SetQualificationRequestId(v string) *QualificationRequest {
-	s.QualificationRequestId = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *QualificationRequest) SetQualificationTypeId(v string) *QualificationRequest {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetSubmitTime sets the SubmitTime field's value.
-func (s *QualificationRequest) SetSubmitTime(v time.Time) *QualificationRequest {
-	s.SubmitTime = &v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *QualificationRequest) SetTest(v string) *QualificationRequest {
-	s.Test = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *QualificationRequest) SetWorkerId(v string) *QualificationRequest {
-	s.WorkerId = &v
-	return s
 }
 
 // The QualificationRequirement data structure describes a Qualification that
@@ -7224,36 +5886,6 @@ func (s *QualificationRequirement) Validate() error {
 	return nil
 }
 
-// SetComparator sets the Comparator field's value.
-func (s *QualificationRequirement) SetComparator(v Comparator) *QualificationRequirement {
-	s.Comparator = v
-	return s
-}
-
-// SetIntegerValues sets the IntegerValues field's value.
-func (s *QualificationRequirement) SetIntegerValues(v []int64) *QualificationRequirement {
-	s.IntegerValues = v
-	return s
-}
-
-// SetLocaleValues sets the LocaleValues field's value.
-func (s *QualificationRequirement) SetLocaleValues(v []Locale) *QualificationRequirement {
-	s.LocaleValues = v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *QualificationRequirement) SetQualificationTypeId(v string) *QualificationRequirement {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetRequiredToPreview sets the RequiredToPreview field's value.
-func (s *QualificationRequirement) SetRequiredToPreview(v bool) *QualificationRequirement {
-	s.RequiredToPreview = &v
-	return s
-}
-
 // The QualificationType data structure represents a Qualification type, a description
 // of a property of a Worker that must match the requirements of a HIT for the
 // Worker to be able to accept the HIT. The type also describes how a Worker
@@ -7334,84 +5966,6 @@ func (s QualificationType) GoString() string {
 	return s.String()
 }
 
-// SetAnswerKey sets the AnswerKey field's value.
-func (s *QualificationType) SetAnswerKey(v string) *QualificationType {
-	s.AnswerKey = &v
-	return s
-}
-
-// SetAutoGranted sets the AutoGranted field's value.
-func (s *QualificationType) SetAutoGranted(v bool) *QualificationType {
-	s.AutoGranted = &v
-	return s
-}
-
-// SetAutoGrantedValue sets the AutoGrantedValue field's value.
-func (s *QualificationType) SetAutoGrantedValue(v int64) *QualificationType {
-	s.AutoGrantedValue = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *QualificationType) SetCreationTime(v time.Time) *QualificationType {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *QualificationType) SetDescription(v string) *QualificationType {
-	s.Description = &v
-	return s
-}
-
-// SetIsRequestable sets the IsRequestable field's value.
-func (s *QualificationType) SetIsRequestable(v bool) *QualificationType {
-	s.IsRequestable = &v
-	return s
-}
-
-// SetKeywords sets the Keywords field's value.
-func (s *QualificationType) SetKeywords(v string) *QualificationType {
-	s.Keywords = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *QualificationType) SetName(v string) *QualificationType {
-	s.Name = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *QualificationType) SetQualificationTypeId(v string) *QualificationType {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetQualificationTypeStatus sets the QualificationTypeStatus field's value.
-func (s *QualificationType) SetQualificationTypeStatus(v QualificationTypeStatus) *QualificationType {
-	s.QualificationTypeStatus = v
-	return s
-}
-
-// SetRetryDelayInSeconds sets the RetryDelayInSeconds field's value.
-func (s *QualificationType) SetRetryDelayInSeconds(v int64) *QualificationType {
-	s.RetryDelayInSeconds = &v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *QualificationType) SetTest(v string) *QualificationType {
-	s.Test = &v
-	return s
-}
-
-// SetTestDurationInSeconds sets the TestDurationInSeconds field's value.
-func (s *QualificationType) SetTestDurationInSeconds(v int64) *QualificationType {
-	s.TestDurationInSeconds = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignmentRequest
 type RejectAssignmentInput struct {
 	_ struct{} `type:"structure"`
@@ -7458,18 +6012,6 @@ func (s *RejectAssignmentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *RejectAssignmentInput) SetAssignmentId(v string) *RejectAssignmentInput {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetRequesterFeedback sets the RequesterFeedback field's value.
-func (s *RejectAssignmentInput) SetRequesterFeedback(v string) *RejectAssignmentInput {
-	s.RequesterFeedback = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignmentResponse
@@ -7531,18 +6073,6 @@ func (s *RejectQualificationRequestInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetQualificationRequestId sets the QualificationRequestId field's value.
-func (s *RejectQualificationRequestInput) SetQualificationRequestId(v string) *RejectQualificationRequestInput {
-	s.QualificationRequestId = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *RejectQualificationRequestInput) SetReason(v string) *RejectQualificationRequestInput {
-	s.Reason = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequestResponse
@@ -7611,54 +6141,6 @@ func (s ReviewActionDetail) GoString() string {
 	return s.String()
 }
 
-// SetActionId sets the ActionId field's value.
-func (s *ReviewActionDetail) SetActionId(v string) *ReviewActionDetail {
-	s.ActionId = &v
-	return s
-}
-
-// SetActionName sets the ActionName field's value.
-func (s *ReviewActionDetail) SetActionName(v string) *ReviewActionDetail {
-	s.ActionName = &v
-	return s
-}
-
-// SetCompleteTime sets the CompleteTime field's value.
-func (s *ReviewActionDetail) SetCompleteTime(v time.Time) *ReviewActionDetail {
-	s.CompleteTime = &v
-	return s
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *ReviewActionDetail) SetErrorCode(v string) *ReviewActionDetail {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *ReviewActionDetail) SetResult(v string) *ReviewActionDetail {
-	s.Result = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ReviewActionDetail) SetStatus(v ReviewActionStatus) *ReviewActionDetail {
-	s.Status = v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *ReviewActionDetail) SetTargetId(v string) *ReviewActionDetail {
-	s.TargetId = &v
-	return s
-}
-
-// SetTargetType sets the TargetType field's value.
-func (s *ReviewActionDetail) SetTargetType(v string) *ReviewActionDetail {
-	s.TargetType = &v
-	return s
-}
-
 // HIT Review Policy data structures represent HIT review policies, which you
 // specify when you create a HIT.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ReviewPolicy
@@ -7698,18 +6180,6 @@ func (s *ReviewPolicy) Validate() error {
 	return nil
 }
 
-// SetParameters sets the Parameters field's value.
-func (s *ReviewPolicy) SetParameters(v []PolicyParameter) *ReviewPolicy {
-	s.Parameters = v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *ReviewPolicy) SetPolicyName(v string) *ReviewPolicy {
-	s.PolicyName = &v
-	return s
-}
-
 // Contains both ReviewResult and ReviewAction elements for a particular HIT.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ReviewReport
 type ReviewReport struct {
@@ -7730,18 +6200,6 @@ func (s ReviewReport) String() string {
 // GoString returns the string representation
 func (s ReviewReport) GoString() string {
 	return s.String()
-}
-
-// SetReviewActions sets the ReviewActions field's value.
-func (s *ReviewReport) SetReviewActions(v []ReviewActionDetail) *ReviewReport {
-	s.ReviewActions = v
-	return s
-}
-
-// SetReviewResults sets the ReviewResults field's value.
-func (s *ReviewReport) SetReviewResults(v []ReviewResultDetail) *ReviewReport {
-	s.ReviewResults = v
-	return s
 }
 
 // This data structure is returned multiple times for each result specified
@@ -7785,42 +6243,6 @@ func (s ReviewResultDetail) String() string {
 // GoString returns the string representation
 func (s ReviewResultDetail) GoString() string {
 	return s.String()
-}
-
-// SetActionId sets the ActionId field's value.
-func (s *ReviewResultDetail) SetActionId(v string) *ReviewResultDetail {
-	s.ActionId = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *ReviewResultDetail) SetKey(v string) *ReviewResultDetail {
-	s.Key = &v
-	return s
-}
-
-// SetQuestionId sets the QuestionId field's value.
-func (s *ReviewResultDetail) SetQuestionId(v string) *ReviewResultDetail {
-	s.QuestionId = &v
-	return s
-}
-
-// SetSubjectId sets the SubjectId field's value.
-func (s *ReviewResultDetail) SetSubjectId(v string) *ReviewResultDetail {
-	s.SubjectId = &v
-	return s
-}
-
-// SetSubjectType sets the SubjectType field's value.
-func (s *ReviewResultDetail) SetSubjectType(v string) *ReviewResultDetail {
-	s.SubjectType = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ReviewResultDetail) SetValue(v string) *ReviewResultDetail {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonusRequest
@@ -7904,36 +6326,6 @@ func (s *SendBonusInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentId sets the AssignmentId field's value.
-func (s *SendBonusInput) SetAssignmentId(v string) *SendBonusInput {
-	s.AssignmentId = &v
-	return s
-}
-
-// SetBonusAmount sets the BonusAmount field's value.
-func (s *SendBonusInput) SetBonusAmount(v string) *SendBonusInput {
-	s.BonusAmount = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *SendBonusInput) SetReason(v string) *SendBonusInput {
-	s.Reason = &v
-	return s
-}
-
-// SetUniqueRequestToken sets the UniqueRequestToken field's value.
-func (s *SendBonusInput) SetUniqueRequestToken(v string) *SendBonusInput {
-	s.UniqueRequestToken = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *SendBonusInput) SetWorkerId(v string) *SendBonusInput {
-	s.WorkerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonusResponse
 type SendBonusOutput struct {
 	_ struct{} `type:"structure"`
@@ -8008,18 +6400,6 @@ func (s *SendTestEventNotificationInput) Validate() error {
 	return nil
 }
 
-// SetNotification sets the Notification field's value.
-func (s *SendTestEventNotificationInput) SetNotification(v *NotificationSpecification) *SendTestEventNotificationInput {
-	s.Notification = v
-	return s
-}
-
-// SetTestEventType sets the TestEventType field's value.
-func (s *SendTestEventNotificationInput) SetTestEventType(v EventType) *SendTestEventNotificationInput {
-	s.TestEventType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotificationResponse
 type SendTestEventNotificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -8088,18 +6468,6 @@ func (s *UpdateExpirationForHITInput) Validate() error {
 	return nil
 }
 
-// SetExpireAt sets the ExpireAt field's value.
-func (s *UpdateExpirationForHITInput) SetExpireAt(v time.Time) *UpdateExpirationForHITInput {
-	s.ExpireAt = &v
-	return s
-}
-
-// SetHITId sets the HITId field's value.
-func (s *UpdateExpirationForHITInput) SetHITId(v string) *UpdateExpirationForHITInput {
-	s.HITId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHITResponse
 type UpdateExpirationForHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -8165,18 +6533,6 @@ func (s *UpdateHITReviewStatusInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetHITId sets the HITId field's value.
-func (s *UpdateHITReviewStatusInput) SetHITId(v string) *UpdateHITReviewStatusInput {
-	s.HITId = &v
-	return s
-}
-
-// SetRevert sets the Revert field's value.
-func (s *UpdateHITReviewStatusInput) SetRevert(v bool) *UpdateHITReviewStatusInput {
-	s.Revert = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatusResponse
@@ -8250,18 +6606,6 @@ func (s *UpdateHITTypeOfHITInput) Validate() error {
 	return nil
 }
 
-// SetHITId sets the HITId field's value.
-func (s *UpdateHITTypeOfHITInput) SetHITId(v string) *UpdateHITTypeOfHITInput {
-	s.HITId = &v
-	return s
-}
-
-// SetHITTypeId sets the HITTypeId field's value.
-func (s *UpdateHITTypeOfHITInput) SetHITTypeId(v string) *UpdateHITTypeOfHITInput {
-	s.HITTypeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHITResponse
 type UpdateHITTypeOfHITOutput struct {
 	_ struct{} `type:"structure"`
@@ -8333,24 +6677,6 @@ func (s *UpdateNotificationSettingsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActive sets the Active field's value.
-func (s *UpdateNotificationSettingsInput) SetActive(v bool) *UpdateNotificationSettingsInput {
-	s.Active = &v
-	return s
-}
-
-// SetHITTypeId sets the HITTypeId field's value.
-func (s *UpdateNotificationSettingsInput) SetHITTypeId(v string) *UpdateNotificationSettingsInput {
-	s.HITTypeId = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *UpdateNotificationSettingsInput) SetNotification(v *NotificationSpecification) *UpdateNotificationSettingsInput {
-	s.Notification = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettingsResponse
@@ -8457,60 +6783,6 @@ func (s *UpdateQualificationTypeInput) Validate() error {
 	return nil
 }
 
-// SetAnswerKey sets the AnswerKey field's value.
-func (s *UpdateQualificationTypeInput) SetAnswerKey(v string) *UpdateQualificationTypeInput {
-	s.AnswerKey = &v
-	return s
-}
-
-// SetAutoGranted sets the AutoGranted field's value.
-func (s *UpdateQualificationTypeInput) SetAutoGranted(v bool) *UpdateQualificationTypeInput {
-	s.AutoGranted = &v
-	return s
-}
-
-// SetAutoGrantedValue sets the AutoGrantedValue field's value.
-func (s *UpdateQualificationTypeInput) SetAutoGrantedValue(v int64) *UpdateQualificationTypeInput {
-	s.AutoGrantedValue = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateQualificationTypeInput) SetDescription(v string) *UpdateQualificationTypeInput {
-	s.Description = &v
-	return s
-}
-
-// SetQualificationTypeId sets the QualificationTypeId field's value.
-func (s *UpdateQualificationTypeInput) SetQualificationTypeId(v string) *UpdateQualificationTypeInput {
-	s.QualificationTypeId = &v
-	return s
-}
-
-// SetQualificationTypeStatus sets the QualificationTypeStatus field's value.
-func (s *UpdateQualificationTypeInput) SetQualificationTypeStatus(v QualificationTypeStatus) *UpdateQualificationTypeInput {
-	s.QualificationTypeStatus = v
-	return s
-}
-
-// SetRetryDelayInSeconds sets the RetryDelayInSeconds field's value.
-func (s *UpdateQualificationTypeInput) SetRetryDelayInSeconds(v int64) *UpdateQualificationTypeInput {
-	s.RetryDelayInSeconds = &v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *UpdateQualificationTypeInput) SetTest(v string) *UpdateQualificationTypeInput {
-	s.Test = &v
-	return s
-}
-
-// SetTestDurationInSeconds sets the TestDurationInSeconds field's value.
-func (s *UpdateQualificationTypeInput) SetTestDurationInSeconds(v int64) *UpdateQualificationTypeInput {
-	s.TestDurationInSeconds = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationTypeResponse
 type UpdateQualificationTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -8536,12 +6808,6 @@ func (s UpdateQualificationTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetQualificationType sets the QualificationType field's value.
-func (s *UpdateQualificationTypeOutput) SetQualificationType(v *QualificationType) *UpdateQualificationTypeOutput {
-	s.QualificationType = v
-	return s
-}
-
 // The WorkerBlock data structure represents a Worker who has been blocked.
 // It has two elements: the WorkerId and the Reason for the block.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/WorkerBlock
@@ -8563,18 +6829,6 @@ func (s WorkerBlock) String() string {
 // GoString returns the string representation
 func (s WorkerBlock) GoString() string {
 	return s.String()
-}
-
-// SetReason sets the Reason field's value.
-func (s *WorkerBlock) SetReason(v string) *WorkerBlock {
-	s.Reason = &v
-	return s
-}
-
-// SetWorkerId sets the WorkerId field's value.
-func (s *WorkerBlock) SetWorkerId(v string) *WorkerBlock {
-	s.WorkerId = &v
-	return s
 }
 
 type AssignmentStatus string

@@ -650,12 +650,6 @@ func (s *BatchDetectDominantLanguageInput) Validate() error {
 	return nil
 }
 
-// SetTextList sets the TextList field's value.
-func (s *BatchDetectDominantLanguageInput) SetTextList(v []string) *BatchDetectDominantLanguageInput {
-	s.TextList = v
-	return s
-}
-
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguageItemResult
@@ -678,18 +672,6 @@ func (s BatchDetectDominantLanguageItemResult) String() string {
 // GoString returns the string representation
 func (s BatchDetectDominantLanguageItemResult) GoString() string {
 	return s.String()
-}
-
-// SetIndex sets the Index field's value.
-func (s *BatchDetectDominantLanguageItemResult) SetIndex(v int64) *BatchDetectDominantLanguageItemResult {
-	s.Index = &v
-	return s
-}
-
-// SetLanguages sets the Languages field's value.
-func (s *BatchDetectDominantLanguageItemResult) SetLanguages(v []DominantLanguage) *BatchDetectDominantLanguageItemResult {
-	s.Languages = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguageResponse
@@ -728,18 +710,6 @@ func (s BatchDetectDominantLanguageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchDetectDominantLanguageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetErrorList sets the ErrorList field's value.
-func (s *BatchDetectDominantLanguageOutput) SetErrorList(v []BatchItemError) *BatchDetectDominantLanguageOutput {
-	s.ErrorList = v
-	return s
-}
-
-// SetResultList sets the ResultList field's value.
-func (s *BatchDetectDominantLanguageOutput) SetResultList(v []BatchDetectDominantLanguageItemResult) *BatchDetectDominantLanguageOutput {
-	s.ResultList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntitiesRequest
@@ -790,18 +760,6 @@ func (s *BatchDetectEntitiesInput) Validate() error {
 	return nil
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *BatchDetectEntitiesInput) SetLanguageCode(v string) *BatchDetectEntitiesInput {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetTextList sets the TextList field's value.
-func (s *BatchDetectEntitiesInput) SetTextList(v []string) *BatchDetectEntitiesInput {
-	s.TextList = v
-	return s
-}
-
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntitiesItemResult
@@ -823,18 +781,6 @@ func (s BatchDetectEntitiesItemResult) String() string {
 // GoString returns the string representation
 func (s BatchDetectEntitiesItemResult) GoString() string {
 	return s.String()
-}
-
-// SetEntities sets the Entities field's value.
-func (s *BatchDetectEntitiesItemResult) SetEntities(v []Entity) *BatchDetectEntitiesItemResult {
-	s.Entities = v
-	return s
-}
-
-// SetIndex sets the Index field's value.
-func (s *BatchDetectEntitiesItemResult) SetIndex(v int64) *BatchDetectEntitiesItemResult {
-	s.Index = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntitiesResponse
@@ -873,18 +819,6 @@ func (s BatchDetectEntitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchDetectEntitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetErrorList sets the ErrorList field's value.
-func (s *BatchDetectEntitiesOutput) SetErrorList(v []BatchItemError) *BatchDetectEntitiesOutput {
-	s.ErrorList = v
-	return s
-}
-
-// SetResultList sets the ResultList field's value.
-func (s *BatchDetectEntitiesOutput) SetResultList(v []BatchDetectEntitiesItemResult) *BatchDetectEntitiesOutput {
-	s.ResultList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectKeyPhrasesRequest
@@ -935,18 +869,6 @@ func (s *BatchDetectKeyPhrasesInput) Validate() error {
 	return nil
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *BatchDetectKeyPhrasesInput) SetLanguageCode(v string) *BatchDetectKeyPhrasesInput {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetTextList sets the TextList field's value.
-func (s *BatchDetectKeyPhrasesInput) SetTextList(v []string) *BatchDetectKeyPhrasesInput {
-	s.TextList = v
-	return s
-}
-
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectKeyPhrasesItemResult
@@ -968,18 +890,6 @@ func (s BatchDetectKeyPhrasesItemResult) String() string {
 // GoString returns the string representation
 func (s BatchDetectKeyPhrasesItemResult) GoString() string {
 	return s.String()
-}
-
-// SetIndex sets the Index field's value.
-func (s *BatchDetectKeyPhrasesItemResult) SetIndex(v int64) *BatchDetectKeyPhrasesItemResult {
-	s.Index = &v
-	return s
-}
-
-// SetKeyPhrases sets the KeyPhrases field's value.
-func (s *BatchDetectKeyPhrasesItemResult) SetKeyPhrases(v []KeyPhrase) *BatchDetectKeyPhrasesItemResult {
-	s.KeyPhrases = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectKeyPhrasesResponse
@@ -1018,18 +928,6 @@ func (s BatchDetectKeyPhrasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchDetectKeyPhrasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetErrorList sets the ErrorList field's value.
-func (s *BatchDetectKeyPhrasesOutput) SetErrorList(v []BatchItemError) *BatchDetectKeyPhrasesOutput {
-	s.ErrorList = v
-	return s
-}
-
-// SetResultList sets the ResultList field's value.
-func (s *BatchDetectKeyPhrasesOutput) SetResultList(v []BatchDetectKeyPhrasesItemResult) *BatchDetectKeyPhrasesOutput {
-	s.ResultList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSentimentRequest
@@ -1080,18 +978,6 @@ func (s *BatchDetectSentimentInput) Validate() error {
 	return nil
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *BatchDetectSentimentInput) SetLanguageCode(v string) *BatchDetectSentimentInput {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetTextList sets the TextList field's value.
-func (s *BatchDetectSentimentInput) SetTextList(v []string) *BatchDetectSentimentInput {
-	s.TextList = v
-	return s
-}
-
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSentimentItemResult
@@ -1117,24 +1003,6 @@ func (s BatchDetectSentimentItemResult) String() string {
 // GoString returns the string representation
 func (s BatchDetectSentimentItemResult) GoString() string {
 	return s.String()
-}
-
-// SetIndex sets the Index field's value.
-func (s *BatchDetectSentimentItemResult) SetIndex(v int64) *BatchDetectSentimentItemResult {
-	s.Index = &v
-	return s
-}
-
-// SetSentiment sets the Sentiment field's value.
-func (s *BatchDetectSentimentItemResult) SetSentiment(v SentimentType) *BatchDetectSentimentItemResult {
-	s.Sentiment = v
-	return s
-}
-
-// SetSentimentScore sets the SentimentScore field's value.
-func (s *BatchDetectSentimentItemResult) SetSentimentScore(v *SentimentScore) *BatchDetectSentimentItemResult {
-	s.SentimentScore = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSentimentResponse
@@ -1175,18 +1043,6 @@ func (s BatchDetectSentimentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetErrorList sets the ErrorList field's value.
-func (s *BatchDetectSentimentOutput) SetErrorList(v []BatchItemError) *BatchDetectSentimentOutput {
-	s.ErrorList = v
-	return s
-}
-
-// SetResultList sets the ResultList field's value.
-func (s *BatchDetectSentimentOutput) SetResultList(v []BatchDetectSentimentItemResult) *BatchDetectSentimentOutput {
-	s.ResultList = v
-	return s
-}
-
 // Describes an error that occurred while processing a document in a batch.
 // The operation returns on BatchItemError object for each document that contained
 // an error.
@@ -1212,24 +1068,6 @@ func (s BatchItemError) String() string {
 // GoString returns the string representation
 func (s BatchItemError) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *BatchItemError) SetErrorCode(v string) *BatchItemError {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *BatchItemError) SetErrorMessage(v string) *BatchItemError {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetIndex sets the Index field's value.
-func (s *BatchItemError) SetIndex(v int64) *BatchItemError {
-	s.Index = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTopicsDetectionJobRequest
@@ -1269,12 +1107,6 @@ func (s *DescribeTopicsDetectionJobInput) Validate() error {
 	return nil
 }
 
-// SetJobId sets the JobId field's value.
-func (s *DescribeTopicsDetectionJobInput) SetJobId(v string) *DescribeTopicsDetectionJobInput {
-	s.JobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTopicsDetectionJobResponse
 type DescribeTopicsDetectionJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -1298,12 +1130,6 @@ func (s DescribeTopicsDetectionJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTopicsDetectionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTopicsDetectionJobProperties sets the TopicsDetectionJobProperties field's value.
-func (s *DescribeTopicsDetectionJobOutput) SetTopicsDetectionJobProperties(v *TopicsDetectionJobProperties) *DescribeTopicsDetectionJobOutput {
-	s.TopicsDetectionJobProperties = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectDominantLanguageRequest
@@ -1344,12 +1170,6 @@ func (s *DetectDominantLanguageInput) Validate() error {
 	return nil
 }
 
-// SetText sets the Text field's value.
-func (s *DetectDominantLanguageInput) SetText(v string) *DetectDominantLanguageInput {
-	s.Text = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectDominantLanguageResponse
 type DetectDominantLanguageOutput struct {
 	_ struct{} `type:"structure"`
@@ -1377,12 +1197,6 @@ func (s DetectDominantLanguageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetectDominantLanguageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLanguages sets the Languages field's value.
-func (s *DetectDominantLanguageOutput) SetLanguages(v []DominantLanguage) *DetectDominantLanguageOutput {
-	s.Languages = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesRequest
@@ -1435,18 +1249,6 @@ func (s *DetectEntitiesInput) Validate() error {
 	return nil
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *DetectEntitiesInput) SetLanguageCode(v LanguageCode) *DetectEntitiesInput {
-	s.LanguageCode = v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *DetectEntitiesInput) SetText(v string) *DetectEntitiesInput {
-	s.Text = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesResponse
 type DetectEntitiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1473,12 +1275,6 @@ func (s DetectEntitiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetectEntitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEntities sets the Entities field's value.
-func (s *DetectEntitiesOutput) SetEntities(v []Entity) *DetectEntitiesOutput {
-	s.Entities = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectKeyPhrasesRequest
@@ -1532,18 +1328,6 @@ func (s *DetectKeyPhrasesInput) Validate() error {
 	return nil
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *DetectKeyPhrasesInput) SetLanguageCode(v LanguageCode) *DetectKeyPhrasesInput {
-	s.LanguageCode = v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *DetectKeyPhrasesInput) SetText(v string) *DetectKeyPhrasesInput {
-	s.Text = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectKeyPhrasesResponse
 type DetectKeyPhrasesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1570,12 +1354,6 @@ func (s DetectKeyPhrasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DetectKeyPhrasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyPhrases sets the KeyPhrases field's value.
-func (s *DetectKeyPhrasesOutput) SetKeyPhrases(v []KeyPhrase) *DetectKeyPhrasesOutput {
-	s.KeyPhrases = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSentimentRequest
@@ -1629,18 +1407,6 @@ func (s *DetectSentimentInput) Validate() error {
 	return nil
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *DetectSentimentInput) SetLanguageCode(v LanguageCode) *DetectSentimentInput {
-	s.LanguageCode = v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *DetectSentimentInput) SetText(v string) *DetectSentimentInput {
-	s.Text = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSentimentResponse
 type DetectSentimentOutput struct {
 	_ struct{} `type:"structure"`
@@ -1670,18 +1436,6 @@ func (s DetectSentimentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSentiment sets the Sentiment field's value.
-func (s *DetectSentimentOutput) SetSentiment(v SentimentType) *DetectSentimentOutput {
-	s.Sentiment = v
-	return s
-}
-
-// SetSentimentScore sets the SentimentScore field's value.
-func (s *DetectSentimentOutput) SetSentimentScore(v *SentimentScore) *DetectSentimentOutput {
-	s.SentimentScore = v
-	return s
-}
-
 // Returns the code for the dominant language in the input text and the level
 // of confidence that Amazon Comprehend has in the accuracy of the detection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguage
@@ -1704,18 +1458,6 @@ func (s DominantLanguage) String() string {
 // GoString returns the string representation
 func (s DominantLanguage) GoString() string {
 	return s.String()
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *DominantLanguage) SetLanguageCode(v string) *DominantLanguage {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetScore sets the Score field's value.
-func (s *DominantLanguage) SetScore(v float64) *DominantLanguage {
-	s.Score = &v
-	return s
 }
 
 // Provides information about an entity.
@@ -1755,36 +1497,6 @@ func (s Entity) String() string {
 // GoString returns the string representation
 func (s Entity) GoString() string {
 	return s.String()
-}
-
-// SetBeginOffset sets the BeginOffset field's value.
-func (s *Entity) SetBeginOffset(v int64) *Entity {
-	s.BeginOffset = &v
-	return s
-}
-
-// SetEndOffset sets the EndOffset field's value.
-func (s *Entity) SetEndOffset(v int64) *Entity {
-	s.EndOffset = &v
-	return s
-}
-
-// SetScore sets the Score field's value.
-func (s *Entity) SetScore(v float64) *Entity {
-	s.Score = &v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *Entity) SetText(v string) *Entity {
-	s.Text = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Entity) SetType(v EntityType) *Entity {
-	s.Type = v
-	return s
 }
 
 // The input properties for a topic detection job.
@@ -1839,18 +1551,6 @@ func (s *InputDataConfig) Validate() error {
 	return nil
 }
 
-// SetInputFormat sets the InputFormat field's value.
-func (s *InputDataConfig) SetInputFormat(v InputFormat) *InputDataConfig {
-	s.InputFormat = v
-	return s
-}
-
-// SetS3Uri sets the S3Uri field's value.
-func (s *InputDataConfig) SetS3Uri(v string) *InputDataConfig {
-	s.S3Uri = &v
-	return s
-}
-
 // Describes a key noun phrase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrase
 type KeyPhrase struct {
@@ -1885,30 +1585,6 @@ func (s KeyPhrase) String() string {
 // GoString returns the string representation
 func (s KeyPhrase) GoString() string {
 	return s.String()
-}
-
-// SetBeginOffset sets the BeginOffset field's value.
-func (s *KeyPhrase) SetBeginOffset(v int64) *KeyPhrase {
-	s.BeginOffset = &v
-	return s
-}
-
-// SetEndOffset sets the EndOffset field's value.
-func (s *KeyPhrase) SetEndOffset(v int64) *KeyPhrase {
-	s.EndOffset = &v
-	return s
-}
-
-// SetScore sets the Score field's value.
-func (s *KeyPhrase) SetScore(v float64) *KeyPhrase {
-	s.Score = &v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *KeyPhrase) SetText(v string) *KeyPhrase {
-	s.Text = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTopicsDetectionJobsRequest
@@ -1958,24 +1634,6 @@ func (s *ListTopicsDetectionJobsInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListTopicsDetectionJobsInput) SetFilter(v *TopicsDetectionJobFilter) *ListTopicsDetectionJobsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTopicsDetectionJobsInput) SetMaxResults(v int64) *ListTopicsDetectionJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTopicsDetectionJobsInput) SetNextToken(v string) *ListTopicsDetectionJobsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTopicsDetectionJobsResponse
 type ListTopicsDetectionJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2002,18 +1660,6 @@ func (s ListTopicsDetectionJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTopicsDetectionJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTopicsDetectionJobsOutput) SetNextToken(v string) *ListTopicsDetectionJobsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTopicsDetectionJobPropertiesList sets the TopicsDetectionJobPropertiesList field's value.
-func (s *ListTopicsDetectionJobsOutput) SetTopicsDetectionJobPropertiesList(v []TopicsDetectionJobProperties) *ListTopicsDetectionJobsOutput {
-	s.TopicsDetectionJobPropertiesList = v
-	return s
 }
 
 // Provides configuration parameters for the output of topic detection jobs.
@@ -2057,12 +1703,6 @@ func (s *OutputDataConfig) Validate() error {
 	return nil
 }
 
-// SetS3Uri sets the S3Uri field's value.
-func (s *OutputDataConfig) SetS3Uri(v string) *OutputDataConfig {
-	s.S3Uri = &v
-	return s
-}
-
 // Describes the level of confidence that Amazon Comprehend has in the accuracy
 // of its detection of sentiments.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentScore
@@ -2094,30 +1734,6 @@ func (s SentimentScore) String() string {
 // GoString returns the string representation
 func (s SentimentScore) GoString() string {
 	return s.String()
-}
-
-// SetMixed sets the Mixed field's value.
-func (s *SentimentScore) SetMixed(v float64) *SentimentScore {
-	s.Mixed = &v
-	return s
-}
-
-// SetNegative sets the Negative field's value.
-func (s *SentimentScore) SetNegative(v float64) *SentimentScore {
-	s.Negative = &v
-	return s
-}
-
-// SetNeutral sets the Neutral field's value.
-func (s *SentimentScore) SetNeutral(v float64) *SentimentScore {
-	s.Neutral = &v
-	return s
-}
-
-// SetPositive sets the Positive field's value.
-func (s *SentimentScore) SetPositive(v float64) *SentimentScore {
-	s.Positive = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJobRequest
@@ -2202,42 +1818,6 @@ func (s *StartTopicsDetectionJobInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartTopicsDetectionJobInput) SetClientRequestToken(v string) *StartTopicsDetectionJobInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDataAccessRoleArn sets the DataAccessRoleArn field's value.
-func (s *StartTopicsDetectionJobInput) SetDataAccessRoleArn(v string) *StartTopicsDetectionJobInput {
-	s.DataAccessRoleArn = &v
-	return s
-}
-
-// SetInputDataConfig sets the InputDataConfig field's value.
-func (s *StartTopicsDetectionJobInput) SetInputDataConfig(v *InputDataConfig) *StartTopicsDetectionJobInput {
-	s.InputDataConfig = v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *StartTopicsDetectionJobInput) SetJobName(v string) *StartTopicsDetectionJobInput {
-	s.JobName = &v
-	return s
-}
-
-// SetNumberOfTopics sets the NumberOfTopics field's value.
-func (s *StartTopicsDetectionJobInput) SetNumberOfTopics(v int64) *StartTopicsDetectionJobInput {
-	s.NumberOfTopics = &v
-	return s
-}
-
-// SetOutputDataConfig sets the OutputDataConfig field's value.
-func (s *StartTopicsDetectionJobInput) SetOutputDataConfig(v *OutputDataConfig) *StartTopicsDetectionJobInput {
-	s.OutputDataConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJobResponse
 type StartTopicsDetectionJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -2274,18 +1854,6 @@ func (s StartTopicsDetectionJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartTopicsDetectionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *StartTopicsDetectionJobOutput) SetJobId(v string) *StartTopicsDetectionJobOutput {
-	s.JobId = &v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *StartTopicsDetectionJobOutput) SetJobStatus(v JobStatus) *StartTopicsDetectionJobOutput {
-	s.JobStatus = v
-	return s
 }
 
 // Provides information for filtering topic detection jobs. For more information,
@@ -2334,30 +1902,6 @@ func (s *TopicsDetectionJobFilter) Validate() error {
 	return nil
 }
 
-// SetJobName sets the JobName field's value.
-func (s *TopicsDetectionJobFilter) SetJobName(v string) *TopicsDetectionJobFilter {
-	s.JobName = &v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *TopicsDetectionJobFilter) SetJobStatus(v JobStatus) *TopicsDetectionJobFilter {
-	s.JobStatus = v
-	return s
-}
-
-// SetSubmitTimeAfter sets the SubmitTimeAfter field's value.
-func (s *TopicsDetectionJobFilter) SetSubmitTimeAfter(v time.Time) *TopicsDetectionJobFilter {
-	s.SubmitTimeAfter = &v
-	return s
-}
-
-// SetSubmitTimeBefore sets the SubmitTimeBefore field's value.
-func (s *TopicsDetectionJobFilter) SetSubmitTimeBefore(v time.Time) *TopicsDetectionJobFilter {
-	s.SubmitTimeBefore = &v
-	return s
-}
-
 // Provides information about a topic detection job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TopicsDetectionJobProperties
 type TopicsDetectionJobProperties struct {
@@ -2403,60 +1947,6 @@ func (s TopicsDetectionJobProperties) String() string {
 // GoString returns the string representation
 func (s TopicsDetectionJobProperties) GoString() string {
 	return s.String()
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *TopicsDetectionJobProperties) SetEndTime(v time.Time) *TopicsDetectionJobProperties {
-	s.EndTime = &v
-	return s
-}
-
-// SetInputDataConfig sets the InputDataConfig field's value.
-func (s *TopicsDetectionJobProperties) SetInputDataConfig(v *InputDataConfig) *TopicsDetectionJobProperties {
-	s.InputDataConfig = v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *TopicsDetectionJobProperties) SetJobId(v string) *TopicsDetectionJobProperties {
-	s.JobId = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *TopicsDetectionJobProperties) SetJobName(v string) *TopicsDetectionJobProperties {
-	s.JobName = &v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *TopicsDetectionJobProperties) SetJobStatus(v JobStatus) *TopicsDetectionJobProperties {
-	s.JobStatus = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *TopicsDetectionJobProperties) SetMessage(v string) *TopicsDetectionJobProperties {
-	s.Message = &v
-	return s
-}
-
-// SetNumberOfTopics sets the NumberOfTopics field's value.
-func (s *TopicsDetectionJobProperties) SetNumberOfTopics(v int64) *TopicsDetectionJobProperties {
-	s.NumberOfTopics = &v
-	return s
-}
-
-// SetOutputDataConfig sets the OutputDataConfig field's value.
-func (s *TopicsDetectionJobProperties) SetOutputDataConfig(v *OutputDataConfig) *TopicsDetectionJobProperties {
-	s.OutputDataConfig = v
-	return s
-}
-
-// SetSubmitTime sets the SubmitTime field's value.
-func (s *TopicsDetectionJobProperties) SetSubmitTime(v time.Time) *TopicsDetectionJobProperties {
-	s.SubmitTime = &v
-	return s
 }
 
 type EntityType string

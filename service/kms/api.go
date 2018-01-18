@@ -2361,24 +2361,6 @@ func (s AliasListEntry) GoString() string {
 	return s.String()
 }
 
-// SetAliasArn sets the AliasArn field's value.
-func (s *AliasListEntry) SetAliasArn(v string) *AliasListEntry {
-	s.AliasArn = &v
-	return s
-}
-
-// SetAliasName sets the AliasName field's value.
-func (s *AliasListEntry) SetAliasName(v string) *AliasListEntry {
-	s.AliasName = &v
-	return s
-}
-
-// SetTargetKeyId sets the TargetKeyId field's value.
-func (s *AliasListEntry) SetTargetKeyId(v string) *AliasListEntry {
-	s.TargetKeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletionRequest
 type CancelKeyDeletionInput struct {
 	_ struct{} `type:"structure"`
@@ -2427,12 +2409,6 @@ func (s *CancelKeyDeletionInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *CancelKeyDeletionInput) SetKeyId(v string) *CancelKeyDeletionInput {
-	s.KeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletionResponse
 type CancelKeyDeletionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2456,12 +2432,6 @@ func (s CancelKeyDeletionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelKeyDeletionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *CancelKeyDeletionOutput) SetKeyId(v string) *CancelKeyDeletionOutput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasRequest
@@ -2524,18 +2494,6 @@ func (s *CreateAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAliasName sets the AliasName field's value.
-func (s *CreateAliasInput) SetAliasName(v string) *CreateAliasInput {
-	s.AliasName = &v
-	return s
-}
-
-// SetTargetKeyId sets the TargetKeyId field's value.
-func (s *CreateAliasInput) SetTargetKeyId(v string) *CreateAliasInput {
-	s.TargetKeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasOutput
@@ -2681,48 +2639,6 @@ func (s *CreateGrantInput) Validate() error {
 	return nil
 }
 
-// SetConstraints sets the Constraints field's value.
-func (s *CreateGrantInput) SetConstraints(v *GrantConstraints) *CreateGrantInput {
-	s.Constraints = v
-	return s
-}
-
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *CreateGrantInput) SetGrantTokens(v []string) *CreateGrantInput {
-	s.GrantTokens = v
-	return s
-}
-
-// SetGranteePrincipal sets the GranteePrincipal field's value.
-func (s *CreateGrantInput) SetGranteePrincipal(v string) *CreateGrantInput {
-	s.GranteePrincipal = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *CreateGrantInput) SetKeyId(v string) *CreateGrantInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGrantInput) SetName(v string) *CreateGrantInput {
-	s.Name = &v
-	return s
-}
-
-// SetOperations sets the Operations field's value.
-func (s *CreateGrantInput) SetOperations(v []GrantOperation) *CreateGrantInput {
-	s.Operations = v
-	return s
-}
-
-// SetRetiringPrincipal sets the RetiringPrincipal field's value.
-func (s *CreateGrantInput) SetRetiringPrincipal(v string) *CreateGrantInput {
-	s.RetiringPrincipal = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantResponse
 type CreateGrantOutput struct {
 	_ struct{} `type:"structure"`
@@ -2754,18 +2670,6 @@ func (s CreateGrantOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGrantOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGrantId sets the GrantId field's value.
-func (s *CreateGrantOutput) SetGrantId(v string) *CreateGrantOutput {
-	s.GrantId = &v
-	return s
-}
-
-// SetGrantToken sets the GrantToken field's value.
-func (s *CreateGrantOutput) SetGrantToken(v string) *CreateGrantOutput {
-	s.GrantToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyRequest
@@ -2875,42 +2779,6 @@ func (s *CreateKeyInput) Validate() error {
 	return nil
 }
 
-// SetBypassPolicyLockoutSafetyCheck sets the BypassPolicyLockoutSafetyCheck field's value.
-func (s *CreateKeyInput) SetBypassPolicyLockoutSafetyCheck(v bool) *CreateKeyInput {
-	s.BypassPolicyLockoutSafetyCheck = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateKeyInput) SetDescription(v string) *CreateKeyInput {
-	s.Description = &v
-	return s
-}
-
-// SetKeyUsage sets the KeyUsage field's value.
-func (s *CreateKeyInput) SetKeyUsage(v KeyUsageType) *CreateKeyInput {
-	s.KeyUsage = v
-	return s
-}
-
-// SetOrigin sets the Origin field's value.
-func (s *CreateKeyInput) SetOrigin(v OriginType) *CreateKeyInput {
-	s.Origin = v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *CreateKeyInput) SetPolicy(v string) *CreateKeyInput {
-	s.Policy = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateKeyInput) SetTags(v []Tag) *CreateKeyInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyResponse
 type CreateKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -2934,12 +2802,6 @@ func (s CreateKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyMetadata sets the KeyMetadata field's value.
-func (s *CreateKeyOutput) SetKeyMetadata(v *KeyMetadata) *CreateKeyOutput {
-	s.KeyMetadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest
@@ -2992,24 +2854,6 @@ func (s *DecryptInput) Validate() error {
 	return nil
 }
 
-// SetCiphertextBlob sets the CiphertextBlob field's value.
-func (s *DecryptInput) SetCiphertextBlob(v []byte) *DecryptInput {
-	s.CiphertextBlob = v
-	return s
-}
-
-// SetEncryptionContext sets the EncryptionContext field's value.
-func (s *DecryptInput) SetEncryptionContext(v map[string]string) *DecryptInput {
-	s.EncryptionContext = v
-	return s
-}
-
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *DecryptInput) SetGrantTokens(v []string) *DecryptInput {
-	s.GrantTokens = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptResponse
 type DecryptOutput struct {
 	_ struct{} `type:"structure"`
@@ -3040,18 +2884,6 @@ func (s DecryptOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DecryptOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *DecryptOutput) SetKeyId(v string) *DecryptOutput {
-	s.KeyId = &v
-	return s
-}
-
-// SetPlaintext sets the Plaintext field's value.
-func (s *DecryptOutput) SetPlaintext(v []byte) *DecryptOutput {
-	s.Plaintext = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAliasRequest
@@ -3090,12 +2922,6 @@ func (s *DeleteAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAliasName sets the AliasName field's value.
-func (s *DeleteAliasInput) SetAliasName(v string) *DeleteAliasInput {
-	s.AliasName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAliasOutput
@@ -3166,12 +2992,6 @@ func (s *DeleteImportedKeyMaterialInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *DeleteImportedKeyMaterialInput) SetKeyId(v string) *DeleteImportedKeyMaterialInput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterialOutput
@@ -3256,18 +3076,6 @@ func (s *DescribeKeyInput) Validate() error {
 	return nil
 }
 
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *DescribeKeyInput) SetGrantTokens(v []string) *DescribeKeyInput {
-	s.GrantTokens = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *DescribeKeyInput) SetKeyId(v string) *DescribeKeyInput {
-	s.KeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKeyResponse
 type DescribeKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -3291,12 +3099,6 @@ func (s DescribeKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyMetadata sets the KeyMetadata field's value.
-func (s *DescribeKeyOutput) SetKeyMetadata(v *KeyMetadata) *DescribeKeyOutput {
-	s.KeyMetadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRequest
@@ -3344,12 +3146,6 @@ func (s *DisableKeyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *DisableKeyInput) SetKeyId(v string) *DisableKeyInput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyOutput
@@ -3421,12 +3217,6 @@ func (s *DisableKeyRotationInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *DisableKeyRotationInput) SetKeyId(v string) *DisableKeyRotationInput {
-	s.KeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationOutput
 type DisableKeyRotationOutput struct {
 	_ struct{} `type:"structure"`
@@ -3496,12 +3286,6 @@ func (s *EnableKeyInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *EnableKeyInput) SetKeyId(v string) *EnableKeyInput {
-	s.KeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyOutput
 type EnableKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -3569,12 +3353,6 @@ func (s *EnableKeyRotationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *EnableKeyRotationInput) SetKeyId(v string) *EnableKeyRotationInput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationOutput
@@ -3679,30 +3457,6 @@ func (s *EncryptInput) Validate() error {
 	return nil
 }
 
-// SetEncryptionContext sets the EncryptionContext field's value.
-func (s *EncryptInput) SetEncryptionContext(v map[string]string) *EncryptInput {
-	s.EncryptionContext = v
-	return s
-}
-
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *EncryptInput) SetGrantTokens(v []string) *EncryptInput {
-	s.GrantTokens = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *EncryptInput) SetKeyId(v string) *EncryptInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetPlaintext sets the Plaintext field's value.
-func (s *EncryptInput) SetPlaintext(v []byte) *EncryptInput {
-	s.Plaintext = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptResponse
 type EncryptOutput struct {
 	_ struct{} `type:"structure"`
@@ -3732,18 +3486,6 @@ func (s EncryptOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EncryptOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCiphertextBlob sets the CiphertextBlob field's value.
-func (s *EncryptOutput) SetCiphertextBlob(v []byte) *EncryptOutput {
-	s.CiphertextBlob = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *EncryptOutput) SetKeyId(v string) *EncryptOutput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyRequest
@@ -3826,36 +3568,6 @@ func (s *GenerateDataKeyInput) Validate() error {
 	return nil
 }
 
-// SetEncryptionContext sets the EncryptionContext field's value.
-func (s *GenerateDataKeyInput) SetEncryptionContext(v map[string]string) *GenerateDataKeyInput {
-	s.EncryptionContext = v
-	return s
-}
-
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *GenerateDataKeyInput) SetGrantTokens(v []string) *GenerateDataKeyInput {
-	s.GrantTokens = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *GenerateDataKeyInput) SetKeyId(v string) *GenerateDataKeyInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetKeySpec sets the KeySpec field's value.
-func (s *GenerateDataKeyInput) SetKeySpec(v DataKeySpec) *GenerateDataKeyInput {
-	s.KeySpec = v
-	return s
-}
-
-// SetNumberOfBytes sets the NumberOfBytes field's value.
-func (s *GenerateDataKeyInput) SetNumberOfBytes(v int64) *GenerateDataKeyInput {
-	s.NumberOfBytes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyResponse
 type GenerateDataKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -3893,24 +3605,6 @@ func (s GenerateDataKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GenerateDataKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCiphertextBlob sets the CiphertextBlob field's value.
-func (s *GenerateDataKeyOutput) SetCiphertextBlob(v []byte) *GenerateDataKeyOutput {
-	s.CiphertextBlob = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *GenerateDataKeyOutput) SetKeyId(v string) *GenerateDataKeyOutput {
-	s.KeyId = &v
-	return s
-}
-
-// SetPlaintext sets the Plaintext field's value.
-func (s *GenerateDataKeyOutput) SetPlaintext(v []byte) *GenerateDataKeyOutput {
-	s.Plaintext = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextRequest
@@ -3993,36 +3687,6 @@ func (s *GenerateDataKeyWithoutPlaintextInput) Validate() error {
 	return nil
 }
 
-// SetEncryptionContext sets the EncryptionContext field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetEncryptionContext(v map[string]string) *GenerateDataKeyWithoutPlaintextInput {
-	s.EncryptionContext = v
-	return s
-}
-
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetGrantTokens(v []string) *GenerateDataKeyWithoutPlaintextInput {
-	s.GrantTokens = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetKeyId(v string) *GenerateDataKeyWithoutPlaintextInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetKeySpec sets the KeySpec field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetKeySpec(v DataKeySpec) *GenerateDataKeyWithoutPlaintextInput {
-	s.KeySpec = v
-	return s
-}
-
-// SetNumberOfBytes sets the NumberOfBytes field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetNumberOfBytes(v int64) *GenerateDataKeyWithoutPlaintextInput {
-	s.NumberOfBytes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextResponse
 type GenerateDataKeyWithoutPlaintextOutput struct {
 	_ struct{} `type:"structure"`
@@ -4053,18 +3717,6 @@ func (s GenerateDataKeyWithoutPlaintextOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GenerateDataKeyWithoutPlaintextOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCiphertextBlob sets the CiphertextBlob field's value.
-func (s *GenerateDataKeyWithoutPlaintextOutput) SetCiphertextBlob(v []byte) *GenerateDataKeyWithoutPlaintextOutput {
-	s.CiphertextBlob = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *GenerateDataKeyWithoutPlaintextOutput) SetKeyId(v string) *GenerateDataKeyWithoutPlaintextOutput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomRequest
@@ -4098,12 +3750,6 @@ func (s *GenerateRandomInput) Validate() error {
 	return nil
 }
 
-// SetNumberOfBytes sets the NumberOfBytes field's value.
-func (s *GenerateRandomInput) SetNumberOfBytes(v int64) *GenerateRandomInput {
-	s.NumberOfBytes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse
 type GenerateRandomOutput struct {
 	_ struct{} `type:"structure"`
@@ -4130,12 +3776,6 @@ func (s GenerateRandomOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GenerateRandomOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPlaintext sets the Plaintext field's value.
-func (s *GenerateRandomOutput) SetPlaintext(v []byte) *GenerateRandomOutput {
-	s.Plaintext = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyRequest
@@ -4198,18 +3838,6 @@ func (s *GetKeyPolicyInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *GetKeyPolicyInput) SetKeyId(v string) *GetKeyPolicyInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetKeyPolicyInput) SetPolicyName(v string) *GetKeyPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyResponse
 type GetKeyPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4233,12 +3861,6 @@ func (s GetKeyPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetKeyPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *GetKeyPolicyOutput) SetPolicy(v string) *GetKeyPolicyOutput {
-	s.Policy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusRequest
@@ -4289,12 +3911,6 @@ func (s *GetKeyRotationStatusInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *GetKeyRotationStatusInput) SetKeyId(v string) *GetKeyRotationStatusInput {
-	s.KeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusResponse
 type GetKeyRotationStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -4318,12 +3934,6 @@ func (s GetKeyRotationStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetKeyRotationStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeyRotationEnabled sets the KeyRotationEnabled field's value.
-func (s *GetKeyRotationStatusOutput) SetKeyRotationEnabled(v bool) *GetKeyRotationStatusOutput {
-	s.KeyRotationEnabled = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImportRequest
@@ -4394,24 +4004,6 @@ func (s *GetParametersForImportInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *GetParametersForImportInput) SetKeyId(v string) *GetParametersForImportInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetWrappingAlgorithm sets the WrappingAlgorithm field's value.
-func (s *GetParametersForImportInput) SetWrappingAlgorithm(v AlgorithmSpec) *GetParametersForImportInput {
-	s.WrappingAlgorithm = v
-	return s
-}
-
-// SetWrappingKeySpec sets the WrappingKeySpec field's value.
-func (s *GetParametersForImportInput) SetWrappingKeySpec(v WrappingKeySpec) *GetParametersForImportInput {
-	s.WrappingKeySpec = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImportResponse
 type GetParametersForImportOutput struct {
 	_ struct{} `type:"structure"`
@@ -4454,30 +4046,6 @@ func (s GetParametersForImportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetImportToken sets the ImportToken field's value.
-func (s *GetParametersForImportOutput) SetImportToken(v []byte) *GetParametersForImportOutput {
-	s.ImportToken = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *GetParametersForImportOutput) SetKeyId(v string) *GetParametersForImportOutput {
-	s.KeyId = &v
-	return s
-}
-
-// SetParametersValidTo sets the ParametersValidTo field's value.
-func (s *GetParametersForImportOutput) SetParametersValidTo(v time.Time) *GetParametersForImportOutput {
-	s.ParametersValidTo = &v
-	return s
-}
-
-// SetPublicKey sets the PublicKey field's value.
-func (s *GetParametersForImportOutput) SetPublicKey(v []byte) *GetParametersForImportOutput {
-	s.PublicKey = v
-	return s
-}
-
 // A structure that you can use to allow certain operations in the grant only
 // when the desired encryption context is present. For more information about
 // encryption context, see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
@@ -4517,18 +4085,6 @@ func (s GrantConstraints) String() string {
 // GoString returns the string representation
 func (s GrantConstraints) GoString() string {
 	return s.String()
-}
-
-// SetEncryptionContextEquals sets the EncryptionContextEquals field's value.
-func (s *GrantConstraints) SetEncryptionContextEquals(v map[string]string) *GrantConstraints {
-	s.EncryptionContextEquals = v
-	return s
-}
-
-// SetEncryptionContextSubset sets the EncryptionContextSubset field's value.
-func (s *GrantConstraints) SetEncryptionContextSubset(v map[string]string) *GrantConstraints {
-	s.EncryptionContextSubset = v
-	return s
 }
 
 // Contains information about an entry in a list of grants.
@@ -4575,60 +4131,6 @@ func (s GrantListEntry) String() string {
 // GoString returns the string representation
 func (s GrantListEntry) GoString() string {
 	return s.String()
-}
-
-// SetConstraints sets the Constraints field's value.
-func (s *GrantListEntry) SetConstraints(v *GrantConstraints) *GrantListEntry {
-	s.Constraints = v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *GrantListEntry) SetCreationDate(v time.Time) *GrantListEntry {
-	s.CreationDate = &v
-	return s
-}
-
-// SetGrantId sets the GrantId field's value.
-func (s *GrantListEntry) SetGrantId(v string) *GrantListEntry {
-	s.GrantId = &v
-	return s
-}
-
-// SetGranteePrincipal sets the GranteePrincipal field's value.
-func (s *GrantListEntry) SetGranteePrincipal(v string) *GrantListEntry {
-	s.GranteePrincipal = &v
-	return s
-}
-
-// SetIssuingAccount sets the IssuingAccount field's value.
-func (s *GrantListEntry) SetIssuingAccount(v string) *GrantListEntry {
-	s.IssuingAccount = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *GrantListEntry) SetKeyId(v string) *GrantListEntry {
-	s.KeyId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GrantListEntry) SetName(v string) *GrantListEntry {
-	s.Name = &v
-	return s
-}
-
-// SetOperations sets the Operations field's value.
-func (s *GrantListEntry) SetOperations(v []GrantOperation) *GrantListEntry {
-	s.Operations = v
-	return s
-}
-
-// SetRetiringPrincipal sets the RetiringPrincipal field's value.
-func (s *GrantListEntry) SetRetiringPrincipal(v string) *GrantListEntry {
-	s.RetiringPrincipal = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialRequest
@@ -4722,36 +4224,6 @@ func (s *ImportKeyMaterialInput) Validate() error {
 	return nil
 }
 
-// SetEncryptedKeyMaterial sets the EncryptedKeyMaterial field's value.
-func (s *ImportKeyMaterialInput) SetEncryptedKeyMaterial(v []byte) *ImportKeyMaterialInput {
-	s.EncryptedKeyMaterial = v
-	return s
-}
-
-// SetExpirationModel sets the ExpirationModel field's value.
-func (s *ImportKeyMaterialInput) SetExpirationModel(v ExpirationModelType) *ImportKeyMaterialInput {
-	s.ExpirationModel = v
-	return s
-}
-
-// SetImportToken sets the ImportToken field's value.
-func (s *ImportKeyMaterialInput) SetImportToken(v []byte) *ImportKeyMaterialInput {
-	s.ImportToken = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *ImportKeyMaterialInput) SetKeyId(v string) *ImportKeyMaterialInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetValidTo sets the ValidTo field's value.
-func (s *ImportKeyMaterialInput) SetValidTo(v time.Time) *ImportKeyMaterialInput {
-	s.ValidTo = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialResponse
 type ImportKeyMaterialOutput struct {
 	_ struct{} `type:"structure"`
@@ -4794,18 +4266,6 @@ func (s KeyListEntry) String() string {
 // GoString returns the string representation
 func (s KeyListEntry) GoString() string {
 	return s.String()
-}
-
-// SetKeyArn sets the KeyArn field's value.
-func (s *KeyListEntry) SetKeyArn(v string) *KeyListEntry {
-	s.KeyArn = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *KeyListEntry) SetKeyId(v string) *KeyListEntry {
-	s.KeyId = &v
-	return s
 }
 
 // Contains metadata about a customer master key (CMK).
@@ -4887,84 +4347,6 @@ func (s KeyMetadata) GoString() string {
 	return s.String()
 }
 
-// SetAWSAccountId sets the AWSAccountId field's value.
-func (s *KeyMetadata) SetAWSAccountId(v string) *KeyMetadata {
-	s.AWSAccountId = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *KeyMetadata) SetArn(v string) *KeyMetadata {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *KeyMetadata) SetCreationDate(v time.Time) *KeyMetadata {
-	s.CreationDate = &v
-	return s
-}
-
-// SetDeletionDate sets the DeletionDate field's value.
-func (s *KeyMetadata) SetDeletionDate(v time.Time) *KeyMetadata {
-	s.DeletionDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *KeyMetadata) SetDescription(v string) *KeyMetadata {
-	s.Description = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *KeyMetadata) SetEnabled(v bool) *KeyMetadata {
-	s.Enabled = &v
-	return s
-}
-
-// SetExpirationModel sets the ExpirationModel field's value.
-func (s *KeyMetadata) SetExpirationModel(v ExpirationModelType) *KeyMetadata {
-	s.ExpirationModel = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *KeyMetadata) SetKeyId(v string) *KeyMetadata {
-	s.KeyId = &v
-	return s
-}
-
-// SetKeyManager sets the KeyManager field's value.
-func (s *KeyMetadata) SetKeyManager(v KeyManagerType) *KeyMetadata {
-	s.KeyManager = v
-	return s
-}
-
-// SetKeyState sets the KeyState field's value.
-func (s *KeyMetadata) SetKeyState(v KeyState) *KeyMetadata {
-	s.KeyState = v
-	return s
-}
-
-// SetKeyUsage sets the KeyUsage field's value.
-func (s *KeyMetadata) SetKeyUsage(v KeyUsageType) *KeyMetadata {
-	s.KeyUsage = v
-	return s
-}
-
-// SetOrigin sets the Origin field's value.
-func (s *KeyMetadata) SetOrigin(v OriginType) *KeyMetadata {
-	s.Origin = v
-	return s
-}
-
-// SetValidTo sets the ValidTo field's value.
-func (s *KeyMetadata) SetValidTo(v time.Time) *KeyMetadata {
-	s.ValidTo = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesRequest
 type ListAliasesInput struct {
 	_ struct{} `type:"structure"`
@@ -5009,18 +4391,6 @@ func (s *ListAliasesInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListAliasesInput) SetLimit(v int64) *ListAliasesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAliasesInput) SetMarker(v string) *ListAliasesInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5054,24 +4424,6 @@ func (s ListAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []AliasListEntry) *ListAliasesOutput {
-	s.Aliases = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListAliasesOutput) SetNextMarker(v string) *ListAliasesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *ListAliasesOutput) SetTruncated(v bool) *ListAliasesOutput {
-	s.Truncated = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsRequest
@@ -5139,24 +4491,6 @@ func (s *ListGrantsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *ListGrantsInput) SetKeyId(v string) *ListGrantsInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListGrantsInput) SetLimit(v int64) *ListGrantsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGrantsInput) SetMarker(v string) *ListGrantsInput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesRequest
@@ -5227,24 +4561,6 @@ func (s *ListKeyPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *ListKeyPoliciesInput) SetKeyId(v string) *ListKeyPoliciesInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListKeyPoliciesInput) SetLimit(v int64) *ListKeyPoliciesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListKeyPoliciesInput) SetMarker(v string) *ListKeyPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse
 type ListKeyPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5279,24 +4595,6 @@ func (s ListKeyPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListKeyPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListKeyPoliciesOutput) SetNextMarker(v string) *ListKeyPoliciesOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *ListKeyPoliciesOutput) SetPolicyNames(v []string) *ListKeyPoliciesOutput {
-	s.PolicyNames = v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *ListKeyPoliciesOutput) SetTruncated(v bool) *ListKeyPoliciesOutput {
-	s.Truncated = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysRequest
@@ -5343,18 +4641,6 @@ func (s *ListKeysInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListKeysInput) SetLimit(v int64) *ListKeysInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListKeysInput) SetMarker(v string) *ListKeysInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse
 type ListKeysOutput struct {
 	_ struct{} `type:"structure"`
@@ -5388,24 +4674,6 @@ func (s ListKeysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetKeys sets the Keys field's value.
-func (s *ListKeysOutput) SetKeys(v []KeyListEntry) *ListKeysOutput {
-	s.Keys = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListKeysOutput) SetNextMarker(v string) *ListKeysOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *ListKeysOutput) SetTruncated(v bool) *ListKeysOutput {
-	s.Truncated = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsRequest
@@ -5477,24 +4745,6 @@ func (s *ListResourceTagsInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *ListResourceTagsInput) SetKeyId(v string) *ListResourceTagsInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListResourceTagsInput) SetLimit(v int64) *ListResourceTagsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListResourceTagsInput) SetMarker(v string) *ListResourceTagsInput {
-	s.Marker = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsResponse
 type ListResourceTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5530,24 +4780,6 @@ func (s ListResourceTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourceTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListResourceTagsOutput) SetNextMarker(v string) *ListResourceTagsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListResourceTagsOutput) SetTags(v []Tag) *ListResourceTagsOutput {
-	s.Tags = v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *ListResourceTagsOutput) SetTruncated(v bool) *ListResourceTagsOutput {
-	s.Truncated = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrantsRequest
@@ -5613,24 +4845,6 @@ func (s *ListRetirableGrantsInput) Validate() error {
 	return nil
 }
 
-// SetLimit sets the Limit field's value.
-func (s *ListRetirableGrantsInput) SetLimit(v int64) *ListRetirableGrantsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListRetirableGrantsInput) SetMarker(v string) *ListRetirableGrantsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetRetiringPrincipal sets the RetiringPrincipal field's value.
-func (s *ListRetirableGrantsInput) SetRetiringPrincipal(v string) *ListRetirableGrantsInput {
-	s.RetiringPrincipal = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsOutput
 type ListRetirableGrantsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5664,24 +4878,6 @@ func (s ListRetirableGrantsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRetirableGrantsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGrants sets the Grants field's value.
-func (s *ListRetirableGrantsOutput) SetGrants(v []GrantListEntry) *ListRetirableGrantsOutput {
-	s.Grants = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListRetirableGrantsOutput) SetNextMarker(v string) *ListRetirableGrantsOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *ListRetirableGrantsOutput) SetTruncated(v bool) *ListRetirableGrantsOutput {
-	s.Truncated = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyRequest
@@ -5789,30 +4985,6 @@ func (s *PutKeyPolicyInput) Validate() error {
 	return nil
 }
 
-// SetBypassPolicyLockoutSafetyCheck sets the BypassPolicyLockoutSafetyCheck field's value.
-func (s *PutKeyPolicyInput) SetBypassPolicyLockoutSafetyCheck(v bool) *PutKeyPolicyInput {
-	s.BypassPolicyLockoutSafetyCheck = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *PutKeyPolicyInput) SetKeyId(v string) *PutKeyPolicyInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *PutKeyPolicyInput) SetPolicy(v string) *PutKeyPolicyInput {
-	s.Policy = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *PutKeyPolicyInput) SetPolicyName(v string) *PutKeyPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyOutput
 type PutKeyPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -5916,36 +5088,6 @@ func (s *ReEncryptInput) Validate() error {
 	return nil
 }
 
-// SetCiphertextBlob sets the CiphertextBlob field's value.
-func (s *ReEncryptInput) SetCiphertextBlob(v []byte) *ReEncryptInput {
-	s.CiphertextBlob = v
-	return s
-}
-
-// SetDestinationEncryptionContext sets the DestinationEncryptionContext field's value.
-func (s *ReEncryptInput) SetDestinationEncryptionContext(v map[string]string) *ReEncryptInput {
-	s.DestinationEncryptionContext = v
-	return s
-}
-
-// SetDestinationKeyId sets the DestinationKeyId field's value.
-func (s *ReEncryptInput) SetDestinationKeyId(v string) *ReEncryptInput {
-	s.DestinationKeyId = &v
-	return s
-}
-
-// SetGrantTokens sets the GrantTokens field's value.
-func (s *ReEncryptInput) SetGrantTokens(v []string) *ReEncryptInput {
-	s.GrantTokens = v
-	return s
-}
-
-// SetSourceEncryptionContext sets the SourceEncryptionContext field's value.
-func (s *ReEncryptInput) SetSourceEncryptionContext(v map[string]string) *ReEncryptInput {
-	s.SourceEncryptionContext = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptResponse
 type ReEncryptOutput struct {
 	_ struct{} `type:"structure"`
@@ -5978,24 +5120,6 @@ func (s ReEncryptOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReEncryptOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCiphertextBlob sets the CiphertextBlob field's value.
-func (s *ReEncryptOutput) SetCiphertextBlob(v []byte) *ReEncryptOutput {
-	s.CiphertextBlob = v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *ReEncryptOutput) SetKeyId(v string) *ReEncryptOutput {
-	s.KeyId = &v
-	return s
-}
-
-// SetSourceKeyId sets the SourceKeyId field's value.
-func (s *ReEncryptOutput) SetSourceKeyId(v string) *ReEncryptOutput {
-	s.SourceKeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrantRequest
@@ -6044,24 +5168,6 @@ func (s *RetireGrantInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGrantId sets the GrantId field's value.
-func (s *RetireGrantInput) SetGrantId(v string) *RetireGrantInput {
-	s.GrantId = &v
-	return s
-}
-
-// SetGrantToken sets the GrantToken field's value.
-func (s *RetireGrantInput) SetGrantToken(v string) *RetireGrantInput {
-	s.GrantToken = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *RetireGrantInput) SetKeyId(v string) *RetireGrantInput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrantOutput
@@ -6146,18 +5252,6 @@ func (s *RevokeGrantInput) Validate() error {
 	return nil
 }
 
-// SetGrantId sets the GrantId field's value.
-func (s *RevokeGrantInput) SetGrantId(v string) *RevokeGrantInput {
-	s.GrantId = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *RevokeGrantInput) SetKeyId(v string) *RevokeGrantInput {
-	s.KeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantOutput
 type RevokeGrantOutput struct {
 	_ struct{} `type:"structure"`
@@ -6237,18 +5331,6 @@ func (s *ScheduleKeyDeletionInput) Validate() error {
 	return nil
 }
 
-// SetKeyId sets the KeyId field's value.
-func (s *ScheduleKeyDeletionInput) SetKeyId(v string) *ScheduleKeyDeletionInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetPendingWindowInDays sets the PendingWindowInDays field's value.
-func (s *ScheduleKeyDeletionInput) SetPendingWindowInDays(v int64) *ScheduleKeyDeletionInput {
-	s.PendingWindowInDays = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletionResponse
 type ScheduleKeyDeletionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6276,18 +5358,6 @@ func (s ScheduleKeyDeletionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ScheduleKeyDeletionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletionDate sets the DeletionDate field's value.
-func (s *ScheduleKeyDeletionOutput) SetDeletionDate(v time.Time) *ScheduleKeyDeletionOutput {
-	s.DeletionDate = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *ScheduleKeyDeletionOutput) SetKeyId(v string) *ScheduleKeyDeletionOutput {
-	s.KeyId = &v
-	return s
 }
 
 // A key-value pair. A tag consists of a tag key and a tag value. Tag keys and
@@ -6340,18 +5410,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetTagKey sets the TagKey field's value.
-func (s *Tag) SetTagKey(v string) *Tag {
-	s.TagKey = &v
-	return s
-}
-
-// SetTagValue sets the TagValue field's value.
-func (s *Tag) SetTagValue(v string) *Tag {
-	s.TagValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResourceRequest
@@ -6415,18 +5473,6 @@ func (s *TagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *TagResourceInput) SetKeyId(v string) *TagResourceInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResourceOutput
@@ -6505,18 +5551,6 @@ func (s *UntagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *UntagResourceInput) SetKeyId(v string) *UntagResourceInput {
-	s.KeyId = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResourceOutput
@@ -6604,18 +5638,6 @@ func (s *UpdateAliasInput) Validate() error {
 	return nil
 }
 
-// SetAliasName sets the AliasName field's value.
-func (s *UpdateAliasInput) SetAliasName(v string) *UpdateAliasInput {
-	s.AliasName = &v
-	return s
-}
-
-// SetTargetKeyId sets the TargetKeyId field's value.
-func (s *UpdateAliasInput) SetTargetKeyId(v string) *UpdateAliasInput {
-	s.TargetKeyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasOutput
 type UpdateAliasOutput struct {
 	_ struct{} `type:"structure"`
@@ -6692,18 +5714,6 @@ func (s *UpdateKeyDescriptionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateKeyDescriptionInput) SetDescription(v string) *UpdateKeyDescriptionInput {
-	s.Description = &v
-	return s
-}
-
-// SetKeyId sets the KeyId field's value.
-func (s *UpdateKeyDescriptionInput) SetKeyId(v string) *UpdateKeyDescriptionInput {
-	s.KeyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescriptionOutput

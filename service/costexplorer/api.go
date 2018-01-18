@@ -263,18 +263,6 @@ func (s *DateInterval) Validate() error {
 	return nil
 }
 
-// SetEnd sets the End field's value.
-func (s *DateInterval) SetEnd(v string) *DateInterval {
-	s.End = &v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *DateInterval) SetStart(v string) *DateInterval {
-	s.Start = &v
-	return s
-}
-
 // The metadata that you can use to filter and group your results. You can use
 // GetDimensionValues to find specific values.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DimensionValues
@@ -300,18 +288,6 @@ func (s DimensionValues) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *DimensionValues) SetKey(v Dimension) *DimensionValues {
-	s.Key = v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *DimensionValues) SetValues(v []string) *DimensionValues {
-	s.Values = v
-	return s
-}
-
 // The metadata of a specific type that you can use to filter and group your
 // results. You can use GetDimensionValues to find specific values.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DimensionValuesWithAttributes
@@ -333,18 +309,6 @@ func (s DimensionValuesWithAttributes) String() string {
 // GoString returns the string representation
 func (s DimensionValuesWithAttributes) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *DimensionValuesWithAttributes) SetAttributes(v map[string]string) *DimensionValuesWithAttributes {
-	s.Attributes = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *DimensionValuesWithAttributes) SetValue(v string) *DimensionValuesWithAttributes {
-	s.Value = &v
-	return s
 }
 
 // Use Expression to filter by cost or by usage. There are two patterns:
@@ -407,36 +371,6 @@ func (s Expression) String() string {
 // GoString returns the string representation
 func (s Expression) GoString() string {
 	return s.String()
-}
-
-// SetAnd sets the And field's value.
-func (s *Expression) SetAnd(v []Expression) *Expression {
-	s.And = v
-	return s
-}
-
-// SetDimensions sets the Dimensions field's value.
-func (s *Expression) SetDimensions(v *DimensionValues) *Expression {
-	s.Dimensions = v
-	return s
-}
-
-// SetNot sets the Not field's value.
-func (s *Expression) SetNot(v *Expression) *Expression {
-	s.Not = v
-	return s
-}
-
-// SetOr sets the Or field's value.
-func (s *Expression) SetOr(v []Expression) *Expression {
-	s.Or = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Expression) SetTags(v *TagValues) *Expression {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageRequest
@@ -512,42 +446,6 @@ func (s *GetCostAndUsageInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *GetCostAndUsageInput) SetFilter(v *Expression) *GetCostAndUsageInput {
-	s.Filter = v
-	return s
-}
-
-// SetGranularity sets the Granularity field's value.
-func (s *GetCostAndUsageInput) SetGranularity(v Granularity) *GetCostAndUsageInput {
-	s.Granularity = v
-	return s
-}
-
-// SetGroupBy sets the GroupBy field's value.
-func (s *GetCostAndUsageInput) SetGroupBy(v []GroupDefinition) *GetCostAndUsageInput {
-	s.GroupBy = v
-	return s
-}
-
-// SetMetrics sets the Metrics field's value.
-func (s *GetCostAndUsageInput) SetMetrics(v []string) *GetCostAndUsageInput {
-	s.Metrics = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetCostAndUsageInput) SetNextPageToken(v string) *GetCostAndUsageInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *GetCostAndUsageInput) SetTimePeriod(v *DateInterval) *GetCostAndUsageInput {
-	s.TimePeriod = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageResponse
 type GetCostAndUsageOutput struct {
 	_ struct{} `type:"structure"`
@@ -579,24 +477,6 @@ func (s GetCostAndUsageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCostAndUsageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupDefinitions sets the GroupDefinitions field's value.
-func (s *GetCostAndUsageOutput) SetGroupDefinitions(v []GroupDefinition) *GetCostAndUsageOutput {
-	s.GroupDefinitions = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetCostAndUsageOutput) SetNextPageToken(v string) *GetCostAndUsageOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetResultsByTime sets the ResultsByTime field's value.
-func (s *GetCostAndUsageOutput) SetResultsByTime(v []ResultByTime) *GetCostAndUsageOutput {
-	s.ResultsByTime = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetDimensionValuesRequest
@@ -714,36 +594,6 @@ func (s *GetDimensionValuesInput) Validate() error {
 	return nil
 }
 
-// SetContext sets the Context field's value.
-func (s *GetDimensionValuesInput) SetContext(v Context) *GetDimensionValuesInput {
-	s.Context = v
-	return s
-}
-
-// SetDimension sets the Dimension field's value.
-func (s *GetDimensionValuesInput) SetDimension(v Dimension) *GetDimensionValuesInput {
-	s.Dimension = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetDimensionValuesInput) SetNextPageToken(v string) *GetDimensionValuesInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetSearchString sets the SearchString field's value.
-func (s *GetDimensionValuesInput) SetSearchString(v string) *GetDimensionValuesInput {
-	s.SearchString = &v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *GetDimensionValuesInput) SetTimePeriod(v *DateInterval) *GetDimensionValuesInput {
-	s.TimePeriod = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetDimensionValuesResponse
 type GetDimensionValuesOutput struct {
 	_ struct{} `type:"structure"`
@@ -836,30 +686,6 @@ func (s GetDimensionValuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDimensionValues sets the DimensionValues field's value.
-func (s *GetDimensionValuesOutput) SetDimensionValues(v []DimensionValuesWithAttributes) *GetDimensionValuesOutput {
-	s.DimensionValues = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetDimensionValuesOutput) SetNextPageToken(v string) *GetDimensionValuesOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetReturnSize sets the ReturnSize field's value.
-func (s *GetDimensionValuesOutput) SetReturnSize(v int64) *GetDimensionValuesOutput {
-	s.ReturnSize = &v
-	return s
-}
-
-// SetTotalSize sets the TotalSize field's value.
-func (s *GetDimensionValuesOutput) SetTotalSize(v int64) *GetDimensionValuesOutput {
-	s.TotalSize = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationUtilizationRequest
 type GetReservationUtilizationInput struct {
 	_ struct{} `type:"structure"`
@@ -923,36 +749,6 @@ func (s *GetReservationUtilizationInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *GetReservationUtilizationInput) SetFilter(v *Expression) *GetReservationUtilizationInput {
-	s.Filter = v
-	return s
-}
-
-// SetGranularity sets the Granularity field's value.
-func (s *GetReservationUtilizationInput) SetGranularity(v Granularity) *GetReservationUtilizationInput {
-	s.Granularity = v
-	return s
-}
-
-// SetGroupBy sets the GroupBy field's value.
-func (s *GetReservationUtilizationInput) SetGroupBy(v []GroupDefinition) *GetReservationUtilizationInput {
-	s.GroupBy = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetReservationUtilizationInput) SetNextPageToken(v string) *GetReservationUtilizationInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *GetReservationUtilizationInput) SetTimePeriod(v *DateInterval) *GetReservationUtilizationInput {
-	s.TimePeriod = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationUtilizationResponse
 type GetReservationUtilizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -986,24 +782,6 @@ func (s GetReservationUtilizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetReservationUtilizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetReservationUtilizationOutput) SetNextPageToken(v string) *GetReservationUtilizationOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *GetReservationUtilizationOutput) SetTotal(v *ReservationAggregates) *GetReservationUtilizationOutput {
-	s.Total = v
-	return s
-}
-
-// SetUtilizationsByTime sets the UtilizationsByTime field's value.
-func (s *GetReservationUtilizationOutput) SetUtilizationsByTime(v []UtilizationByTime) *GetReservationUtilizationOutput {
-	s.UtilizationsByTime = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetTagsRequest
@@ -1059,30 +837,6 @@ func (s *GetTagsInput) Validate() error {
 	return nil
 }
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetTagsInput) SetNextPageToken(v string) *GetTagsInput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetSearchString sets the SearchString field's value.
-func (s *GetTagsInput) SetSearchString(v string) *GetTagsInput {
-	s.SearchString = &v
-	return s
-}
-
-// SetTagKey sets the TagKey field's value.
-func (s *GetTagsInput) SetTagKey(v string) *GetTagsInput {
-	s.TagKey = &v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *GetTagsInput) SetTimePeriod(v *DateInterval) *GetTagsInput {
-	s.TimePeriod = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetTagsResponse
 type GetTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1125,30 +879,6 @@ func (s GetTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *GetTagsOutput) SetNextPageToken(v string) *GetTagsOutput {
-	s.NextPageToken = &v
-	return s
-}
-
-// SetReturnSize sets the ReturnSize field's value.
-func (s *GetTagsOutput) SetReturnSize(v int64) *GetTagsOutput {
-	s.ReturnSize = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *GetTagsOutput) SetTags(v []string) *GetTagsOutput {
-	s.Tags = v
-	return s
-}
-
-// SetTotalSize sets the TotalSize field's value.
-func (s *GetTagsOutput) SetTotalSize(v int64) *GetTagsOutput {
-	s.TotalSize = &v
-	return s
-}
-
 // One level of grouped data within the results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Group
 type Group struct {
@@ -1169,18 +899,6 @@ func (s Group) String() string {
 // GoString returns the string representation
 func (s Group) GoString() string {
 	return s.String()
-}
-
-// SetKeys sets the Keys field's value.
-func (s *Group) SetKeys(v []string) *Group {
-	s.Keys = v
-	return s
-}
-
-// SetMetrics sets the Metrics field's value.
-func (s *Group) SetMetrics(v map[string]MetricValue) *Group {
-	s.Metrics = v
-	return s
 }
 
 // Represents a group when you specify a group by criteria, or in the response
@@ -1206,18 +924,6 @@ func (s GroupDefinition) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *GroupDefinition) SetKey(v string) *GroupDefinition {
-	s.Key = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *GroupDefinition) SetType(v GroupDefinitionType) *GroupDefinition {
-	s.Type = v
-	return s
-}
-
 // The aggregated value for a metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/MetricValue
 type MetricValue struct {
@@ -1238,18 +944,6 @@ func (s MetricValue) String() string {
 // GoString returns the string representation
 func (s MetricValue) GoString() string {
 	return s.String()
-}
-
-// SetAmount sets the Amount field's value.
-func (s *MetricValue) SetAmount(v string) *MetricValue {
-	s.Amount = &v
-	return s
-}
-
-// SetUnit sets the Unit field's value.
-func (s *MetricValue) SetUnit(v string) *MetricValue {
-	s.Unit = &v
-	return s
 }
 
 // The aggregated numbers for your RI usage.
@@ -1280,30 +974,6 @@ func (s ReservationAggregates) GoString() string {
 	return s.String()
 }
 
-// SetPurchasedHours sets the PurchasedHours field's value.
-func (s *ReservationAggregates) SetPurchasedHours(v string) *ReservationAggregates {
-	s.PurchasedHours = &v
-	return s
-}
-
-// SetTotalActualHours sets the TotalActualHours field's value.
-func (s *ReservationAggregates) SetTotalActualHours(v string) *ReservationAggregates {
-	s.TotalActualHours = &v
-	return s
-}
-
-// SetUnusedHours sets the UnusedHours field's value.
-func (s *ReservationAggregates) SetUnusedHours(v string) *ReservationAggregates {
-	s.UnusedHours = &v
-	return s
-}
-
-// SetUtilizationPercentage sets the UtilizationPercentage field's value.
-func (s *ReservationAggregates) SetUtilizationPercentage(v string) *ReservationAggregates {
-	s.UtilizationPercentage = &v
-	return s
-}
-
 // A group of RIs that share a set of attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationUtilizationGroup
 type ReservationUtilizationGroup struct {
@@ -1330,30 +1000,6 @@ func (s ReservationUtilizationGroup) String() string {
 // GoString returns the string representation
 func (s ReservationUtilizationGroup) GoString() string {
 	return s.String()
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *ReservationUtilizationGroup) SetAttributes(v map[string]string) *ReservationUtilizationGroup {
-	s.Attributes = v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *ReservationUtilizationGroup) SetKey(v string) *ReservationUtilizationGroup {
-	s.Key = &v
-	return s
-}
-
-// SetUtilization sets the Utilization field's value.
-func (s *ReservationUtilizationGroup) SetUtilization(v *ReservationAggregates) *ReservationUtilizationGroup {
-	s.Utilization = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ReservationUtilizationGroup) SetValue(v string) *ReservationUtilizationGroup {
-	s.Value = &v
-	return s
 }
 
 // The result that is associated with a time period.
@@ -1384,30 +1030,6 @@ func (s ResultByTime) GoString() string {
 	return s.String()
 }
 
-// SetEstimated sets the Estimated field's value.
-func (s *ResultByTime) SetEstimated(v bool) *ResultByTime {
-	s.Estimated = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ResultByTime) SetGroups(v []Group) *ResultByTime {
-	s.Groups = v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *ResultByTime) SetTimePeriod(v *DateInterval) *ResultByTime {
-	s.TimePeriod = v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *ResultByTime) SetTotal(v map[string]MetricValue) *ResultByTime {
-	s.Total = v
-	return s
-}
-
 // The values that are available for a tag.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagValues
 type TagValues struct {
@@ -1428,18 +1050,6 @@ func (s TagValues) String() string {
 // GoString returns the string representation
 func (s TagValues) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *TagValues) SetKey(v string) *TagValues {
-	s.Key = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *TagValues) SetValues(v []string) *TagValues {
-	s.Values = v
-	return s
 }
 
 // The amount of utilization, in hours.
@@ -1465,24 +1075,6 @@ func (s UtilizationByTime) String() string {
 // GoString returns the string representation
 func (s UtilizationByTime) GoString() string {
 	return s.String()
-}
-
-// SetGroups sets the Groups field's value.
-func (s *UtilizationByTime) SetGroups(v []ReservationUtilizationGroup) *UtilizationByTime {
-	s.Groups = v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *UtilizationByTime) SetTimePeriod(v *DateInterval) *UtilizationByTime {
-	s.TimePeriod = v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *UtilizationByTime) SetTotal(v *ReservationAggregates) *UtilizationByTime {
-	s.Total = v
-	return s
 }
 
 type Context string

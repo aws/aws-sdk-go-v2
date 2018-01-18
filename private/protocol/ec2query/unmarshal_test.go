@@ -171,54 +171,6 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) SDKRespon
 	return s.responseMetadata
 }
 
-// SetChar sets the Char field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetChar(v string) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.Char = &v
-	return s
-}
-
-// SetDouble sets the Double field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetDouble(v float64) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.Double = &v
-	return s
-}
-
-// SetFalseBool sets the FalseBool field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetFalseBool(v bool) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.FalseBool = &v
-	return s
-}
-
-// SetFloat sets the Float field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetFloat(v float64) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.Float = &v
-	return s
-}
-
-// SetLong sets the Long field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetLong(v int64) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.Long = &v
-	return s
-}
-
-// SetNum sets the Num field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetNum(v int64) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.Num = &v
-	return s
-}
-
-// SetStr sets the Str field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetStr(v string) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.Str = &v
-	return s
-}
-
-// SetTrueBool sets the TrueBool field's value.
-func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetTrueBool(v bool) *OutputService1TestShapeOutputService1TestCaseOperation1Output {
-	s.TrueBool = &v
-	return s
-}
-
 // OutputService2ProtocolTest provides the API operation methods for making requests to
 // . See this package's package overview docs
 // for details on the service.
@@ -334,12 +286,6 @@ type OutputService2TestShapeOutputService2TestCaseOperation1Output struct {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s OutputService2TestShapeOutputService2TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBlob sets the Blob field's value.
-func (s *OutputService2TestShapeOutputService2TestCaseOperation1Output) SetBlob(v []byte) *OutputService2TestShapeOutputService2TestCaseOperation1Output {
-	s.Blob = v
-	return s
 }
 
 // OutputService3ProtocolTest provides the API operation methods for making requests to
@@ -458,12 +404,6 @@ func (s OutputService3TestShapeOutputService3TestCaseOperation1Output) SDKRespon
 	return s.responseMetadata
 }
 
-// SetListMember sets the ListMember field's value.
-func (s *OutputService3TestShapeOutputService3TestCaseOperation1Output) SetListMember(v []string) *OutputService3TestShapeOutputService3TestCaseOperation1Output {
-	s.ListMember = v
-	return s
-}
-
 // OutputService4ProtocolTest provides the API operation methods for making requests to
 // . See this package's package overview docs
 // for details on the service.
@@ -578,12 +518,6 @@ type OutputService4TestShapeOutputService4TestCaseOperation1Output struct {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s OutputService4TestShapeOutputService4TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetListMember sets the ListMember field's value.
-func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) SetListMember(v []string) *OutputService4TestShapeOutputService4TestCaseOperation1Output {
-	s.ListMember = v
-	return s
 }
 
 // OutputService5ProtocolTest provides the API operation methods for making requests to
@@ -702,12 +636,6 @@ func (s OutputService5TestShapeOutputService5TestCaseOperation1Output) SDKRespon
 	return s.responseMetadata
 }
 
-// SetListMember sets the ListMember field's value.
-func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetListMember(v []string) *OutputService5TestShapeOutputService5TestCaseOperation1Output {
-	s.ListMember = v
-	return s
-}
-
 // OutputService6ProtocolTest provides the API operation methods for making requests to
 // . See this package's package overview docs
 // for details on the service.
@@ -824,22 +752,10 @@ func (s OutputService6TestShapeOutputService6TestCaseOperation1Output) SDKRespon
 	return s.responseMetadata
 }
 
-// SetMap sets the Map field's value.
-func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetMap(v map[string]OutputService6TestShapeStructureType) *OutputService6TestShapeOutputService6TestCaseOperation1Output {
-	s.Map = v
-	return s
-}
-
 type OutputService6TestShapeStructureType struct {
 	_ struct{} `type:"structure"`
 
 	Foo *string `locationName:"foo" type:"string"`
-}
-
-// SetFoo sets the Foo field's value.
-func (s *OutputService6TestShapeStructureType) SetFoo(v string) *OutputService6TestShapeStructureType {
-	s.Foo = &v
-	return s
 }
 
 // OutputService7ProtocolTest provides the API operation methods for making requests to
@@ -958,12 +874,6 @@ func (s OutputService7TestShapeOutputService7TestCaseOperation1Output) SDKRespon
 	return s.responseMetadata
 }
 
-// SetMap sets the Map field's value.
-func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetMap(v map[string]string) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
-	s.Map = v
-	return s
-}
-
 // OutputService8ProtocolTest provides the API operation methods for making requests to
 // . See this package's package overview docs
 // for details on the service.
@@ -1078,12 +988,6 @@ type OutputService8TestShapeOutputService8TestCaseOperation1Output struct {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s OutputService8TestShapeOutputService8TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMap sets the Map field's value.
-func (s *OutputService8TestShapeOutputService8TestCaseOperation1Output) SetMap(v map[string]string) *OutputService8TestShapeOutputService8TestCaseOperation1Output {
-	s.Map = v
-	return s
 }
 
 // OutputService9ProtocolTest provides the API operation methods for making requests to
@@ -1202,12 +1106,6 @@ func (s OutputService9TestShapeOutputService9TestCaseOperation1Output) SDKRespon
 	return s.responseMetadata
 }
 
-// SetFoo sets the Foo field's value.
-func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetFoo(v string) *OutputService9TestShapeOutputService9TestCaseOperation1Output {
-	s.Foo = &v
-	return s
-}
-
 // OutputService10ProtocolTest provides the API operation methods for making requests to
 // . See this package's package overview docs
 // for details on the service.
@@ -1324,18 +1222,6 @@ type OutputService10TestShapeOutputService10TestCaseOperation1Output struct {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s OutputService10TestShapeOutputService10TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFooEnum sets the FooEnum field's value.
-func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetFooEnum(v OutputService10TestShapeEC2EnumType) *OutputService10TestShapeOutputService10TestCaseOperation1Output {
-	s.FooEnum = v
-	return s
-}
-
-// SetListEnums sets the ListEnums field's value.
-func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetListEnums(v []OutputService10TestShapeEC2EnumType) *OutputService10TestShapeOutputService10TestCaseOperation1Output {
-	s.ListEnums = v
-	return s
 }
 
 type OutputService10TestShapeEC2EnumType string

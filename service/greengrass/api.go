@@ -3702,18 +3702,6 @@ func (s *AssociateRoleToGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *AssociateRoleToGroupInput) SetGroupId(v string) *AssociateRoleToGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *AssociateRoleToGroupInput) SetRoleArn(v string) *AssociateRoleToGroupInput {
-	s.RoleArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupResponse
 type AssociateRoleToGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3739,12 +3727,6 @@ func (s AssociateRoleToGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *AssociateRoleToGroupOutput) SetAssociatedAt(v string) *AssociateRoleToGroupOutput {
-	s.AssociatedAt = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountRequest
 type AssociateServiceRoleToAccountInput struct {
 	_ struct{} `type:"structure"`
@@ -3761,12 +3743,6 @@ func (s AssociateServiceRoleToAccountInput) String() string {
 // GoString returns the string representation
 func (s AssociateServiceRoleToAccountInput) GoString() string {
 	return s.String()
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *AssociateServiceRoleToAccountInput) SetRoleArn(v string) *AssociateServiceRoleToAccountInput {
-	s.RoleArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountResponse
@@ -3792,12 +3768,6 @@ func (s AssociateServiceRoleToAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateServiceRoleToAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *AssociateServiceRoleToAccountOutput) SetAssociatedAt(v string) *AssociateServiceRoleToAccountOutput {
-	s.AssociatedAt = &v
-	return s
 }
 
 // Connectivity Info
@@ -3826,30 +3796,6 @@ func (s ConnectivityInfo) String() string {
 // GoString returns the string representation
 func (s ConnectivityInfo) GoString() string {
 	return s.String()
-}
-
-// SetHostAddress sets the HostAddress field's value.
-func (s *ConnectivityInfo) SetHostAddress(v string) *ConnectivityInfo {
-	s.HostAddress = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ConnectivityInfo) SetId(v string) *ConnectivityInfo {
-	s.Id = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *ConnectivityInfo) SetMetadata(v string) *ConnectivityInfo {
-	s.Metadata = &v
-	return s
-}
-
-// SetPortNumber sets the PortNumber field's value.
-func (s *ConnectivityInfo) SetPortNumber(v int64) *ConnectivityInfo {
-	s.PortNumber = &v
-	return s
 }
 
 // Information on the core
@@ -3881,30 +3827,6 @@ func (s Core) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Core) SetCertificateArn(v string) *Core {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Core) SetId(v string) *Core {
-	s.Id = &v
-	return s
-}
-
-// SetSyncShadow sets the SyncShadow field's value.
-func (s *Core) SetSyncShadow(v bool) *Core {
-	s.SyncShadow = &v
-	return s
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *Core) SetThingArn(v string) *Core {
-	s.ThingArn = &v
-	return s
-}
-
 // Information on core definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CoreDefinitionVersion
 type CoreDefinitionVersion struct {
@@ -3922,12 +3844,6 @@ func (s CoreDefinitionVersion) String() string {
 // GoString returns the string representation
 func (s CoreDefinitionVersion) GoString() string {
 	return s.String()
-}
-
-// SetCores sets the Cores field's value.
-func (s *CoreDefinitionVersion) SetCores(v []Core) *CoreDefinitionVersion {
-	s.Cores = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionRequest
@@ -3950,24 +3866,6 @@ func (s CreateCoreDefinitionInput) String() string {
 // GoString returns the string representation
 func (s CreateCoreDefinitionInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateCoreDefinitionInput) SetAmznClientToken(v string) *CreateCoreDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateCoreDefinitionInput) SetInitialVersion(v *CoreDefinitionVersion) *CreateCoreDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateCoreDefinitionInput) SetName(v string) *CreateCoreDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionResponse
@@ -4006,48 +3904,6 @@ func (s CreateCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateCoreDefinitionOutput) SetArn(v string) *CreateCoreDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateCoreDefinitionOutput) SetCreationTimestamp(v string) *CreateCoreDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateCoreDefinitionOutput) SetId(v string) *CreateCoreDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateCoreDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateCoreDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateCoreDefinitionOutput) SetLatestVersion(v string) *CreateCoreDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateCoreDefinitionOutput) SetLatestVersionArn(v string) *CreateCoreDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateCoreDefinitionOutput) SetName(v string) *CreateCoreDefinitionOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersionRequest
 type CreateCoreDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -4084,24 +3940,6 @@ func (s *CreateCoreDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateCoreDefinitionVersionInput) SetAmznClientToken(v string) *CreateCoreDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *CreateCoreDefinitionVersionInput) SetCoreDefinitionId(v string) *CreateCoreDefinitionVersionInput {
-	s.CoreDefinitionId = &v
-	return s
-}
-
-// SetCores sets the Cores field's value.
-func (s *CreateCoreDefinitionVersionInput) SetCores(v []Core) *CreateCoreDefinitionVersionInput {
-	s.Cores = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersionResponse
 type CreateCoreDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4130,30 +3968,6 @@ func (s CreateCoreDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCoreDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetArn(v string) *CreateCoreDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateCoreDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetId(v string) *CreateCoreDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetVersion(v string) *CreateCoreDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Information on Deployment
@@ -4201,36 +4015,6 @@ func (s *CreateDeploymentInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateDeploymentInput) SetAmznClientToken(v string) *CreateDeploymentInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *CreateDeploymentInput) SetDeploymentId(v string) *CreateDeploymentInput {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *CreateDeploymentInput) SetDeploymentType(v DeploymentType) *CreateDeploymentInput {
-	s.DeploymentType = v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *CreateDeploymentInput) SetGroupId(v string) *CreateDeploymentInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupVersionId sets the GroupVersionId field's value.
-func (s *CreateDeploymentInput) SetGroupVersionId(v string) *CreateDeploymentInput {
-	s.GroupVersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeploymentResponse
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
@@ -4259,18 +4043,6 @@ func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentArn sets the DeploymentArn field's value.
-func (s *CreateDeploymentOutput) SetDeploymentArn(v string) *CreateDeploymentOutput {
-	s.DeploymentArn = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *CreateDeploymentOutput) SetDeploymentId(v string) *CreateDeploymentOutput {
-	s.DeploymentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionRequest
 type CreateDeviceDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -4291,24 +4063,6 @@ func (s CreateDeviceDefinitionInput) String() string {
 // GoString returns the string representation
 func (s CreateDeviceDefinitionInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateDeviceDefinitionInput) SetAmznClientToken(v string) *CreateDeviceDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateDeviceDefinitionInput) SetInitialVersion(v *DeviceDefinitionVersion) *CreateDeviceDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateDeviceDefinitionInput) SetName(v string) *CreateDeviceDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionResponse
@@ -4347,48 +4101,6 @@ func (s CreateDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateDeviceDefinitionOutput) SetArn(v string) *CreateDeviceDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateDeviceDefinitionOutput) SetCreationTimestamp(v string) *CreateDeviceDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateDeviceDefinitionOutput) SetId(v string) *CreateDeviceDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateDeviceDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateDeviceDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateDeviceDefinitionOutput) SetLatestVersion(v string) *CreateDeviceDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateDeviceDefinitionOutput) SetLatestVersionArn(v string) *CreateDeviceDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateDeviceDefinitionOutput) SetName(v string) *CreateDeviceDefinitionOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersionRequest
 type CreateDeviceDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -4425,24 +4137,6 @@ func (s *CreateDeviceDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetAmznClientToken(v string) *CreateDeviceDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetDeviceDefinitionId(v string) *CreateDeviceDefinitionVersionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
-
-// SetDevices sets the Devices field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetDevices(v []Device) *CreateDeviceDefinitionVersionInput {
-	s.Devices = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersionResponse
 type CreateDeviceDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4473,30 +4167,6 @@ func (s CreateDeviceDefinitionVersionOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetArn(v string) *CreateDeviceDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateDeviceDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetId(v string) *CreateDeviceDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetVersion(v string) *CreateDeviceDefinitionVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionRequest
 type CreateFunctionDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -4517,24 +4187,6 @@ func (s CreateFunctionDefinitionInput) String() string {
 // GoString returns the string representation
 func (s CreateFunctionDefinitionInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateFunctionDefinitionInput) SetAmznClientToken(v string) *CreateFunctionDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateFunctionDefinitionInput) SetInitialVersion(v *FunctionDefinitionVersion) *CreateFunctionDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFunctionDefinitionInput) SetName(v string) *CreateFunctionDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionResponse
@@ -4573,48 +4225,6 @@ func (s CreateFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateFunctionDefinitionOutput) SetArn(v string) *CreateFunctionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateFunctionDefinitionOutput) SetCreationTimestamp(v string) *CreateFunctionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateFunctionDefinitionOutput) SetId(v string) *CreateFunctionDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateFunctionDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateFunctionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateFunctionDefinitionOutput) SetLatestVersion(v string) *CreateFunctionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateFunctionDefinitionOutput) SetLatestVersionArn(v string) *CreateFunctionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFunctionDefinitionOutput) SetName(v string) *CreateFunctionDefinitionOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersionRequest
 type CreateFunctionDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -4651,24 +4261,6 @@ func (s *CreateFunctionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetAmznClientToken(v string) *CreateFunctionDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetFunctionDefinitionId(v string) *CreateFunctionDefinitionVersionInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
-
-// SetFunctions sets the Functions field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetFunctions(v []Function) *CreateFunctionDefinitionVersionInput {
-	s.Functions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersionResponse
 type CreateFunctionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4697,30 +4289,6 @@ func (s CreateFunctionDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateFunctionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetArn(v string) *CreateFunctionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateFunctionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetId(v string) *CreateFunctionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetVersion(v string) *CreateFunctionDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthorityRequest
@@ -4757,18 +4325,6 @@ func (s *CreateGroupCertificateAuthorityInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateGroupCertificateAuthorityInput) SetAmznClientToken(v string) *CreateGroupCertificateAuthorityInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *CreateGroupCertificateAuthorityInput) SetGroupId(v string) *CreateGroupCertificateAuthorityInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthorityResponse
 type CreateGroupCertificateAuthorityOutput struct {
 	_ struct{} `type:"structure"`
@@ -4794,12 +4350,6 @@ func (s CreateGroupCertificateAuthorityOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
-func (s *CreateGroupCertificateAuthorityOutput) SetGroupCertificateAuthorityArn(v string) *CreateGroupCertificateAuthorityOutput {
-	s.GroupCertificateAuthorityArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupRequest
 type CreateGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -4820,24 +4370,6 @@ func (s CreateGroupInput) String() string {
 // GoString returns the string representation
 func (s CreateGroupInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateGroupInput) SetAmznClientToken(v string) *CreateGroupInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateGroupInput) SetInitialVersion(v *GroupVersion) *CreateGroupInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGroupInput) SetName(v string) *CreateGroupInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupResponse
@@ -4874,48 +4406,6 @@ func (s CreateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateGroupOutput) SetArn(v string) *CreateGroupOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateGroupOutput) SetCreationTimestamp(v string) *CreateGroupOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateGroupOutput) SetId(v string) *CreateGroupOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateGroupOutput) SetLastUpdatedTimestamp(v string) *CreateGroupOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateGroupOutput) SetLatestVersion(v string) *CreateGroupOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateGroupOutput) SetLatestVersionArn(v string) *CreateGroupOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGroupOutput) SetName(v string) *CreateGroupOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersionRequest
@@ -4964,54 +4454,6 @@ func (s *CreateGroupVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateGroupVersionInput) SetAmznClientToken(v string) *CreateGroupVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetCoreDefinitionVersionArn sets the CoreDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetCoreDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.CoreDefinitionVersionArn = &v
-	return s
-}
-
-// SetDeviceDefinitionVersionArn sets the DeviceDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetDeviceDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.DeviceDefinitionVersionArn = &v
-	return s
-}
-
-// SetFunctionDefinitionVersionArn sets the FunctionDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetFunctionDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.FunctionDefinitionVersionArn = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *CreateGroupVersionInput) SetGroupId(v string) *CreateGroupVersionInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetLoggerDefinitionVersionArn sets the LoggerDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetLoggerDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.LoggerDefinitionVersionArn = &v
-	return s
-}
-
-// SetResourceDefinitionVersionArn sets the ResourceDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetResourceDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.ResourceDefinitionVersionArn = &v
-	return s
-}
-
-// SetSubscriptionDefinitionVersionArn sets the SubscriptionDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetSubscriptionDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.SubscriptionDefinitionVersionArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersionResponse
 type CreateGroupVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -5042,30 +4484,6 @@ func (s CreateGroupVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateGroupVersionOutput) SetArn(v string) *CreateGroupVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateGroupVersionOutput) SetCreationTimestamp(v string) *CreateGroupVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateGroupVersionOutput) SetId(v string) *CreateGroupVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateGroupVersionOutput) SetVersion(v string) *CreateGroupVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionRequest
 type CreateLoggerDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -5086,24 +4504,6 @@ func (s CreateLoggerDefinitionInput) String() string {
 // GoString returns the string representation
 func (s CreateLoggerDefinitionInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateLoggerDefinitionInput) SetAmznClientToken(v string) *CreateLoggerDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateLoggerDefinitionInput) SetInitialVersion(v *LoggerDefinitionVersion) *CreateLoggerDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateLoggerDefinitionInput) SetName(v string) *CreateLoggerDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionResponse
@@ -5142,48 +4542,6 @@ func (s CreateLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateLoggerDefinitionOutput) SetArn(v string) *CreateLoggerDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateLoggerDefinitionOutput) SetCreationTimestamp(v string) *CreateLoggerDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateLoggerDefinitionOutput) SetId(v string) *CreateLoggerDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateLoggerDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateLoggerDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateLoggerDefinitionOutput) SetLatestVersion(v string) *CreateLoggerDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateLoggerDefinitionOutput) SetLatestVersionArn(v string) *CreateLoggerDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateLoggerDefinitionOutput) SetName(v string) *CreateLoggerDefinitionOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersionRequest
 type CreateLoggerDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -5220,24 +4578,6 @@ func (s *CreateLoggerDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetAmznClientToken(v string) *CreateLoggerDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetLoggerDefinitionId(v string) *CreateLoggerDefinitionVersionInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
-
-// SetLoggers sets the Loggers field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetLoggers(v []Logger) *CreateLoggerDefinitionVersionInput {
-	s.Loggers = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersionResponse
 type CreateLoggerDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -5268,30 +4608,6 @@ func (s CreateLoggerDefinitionVersionOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetArn(v string) *CreateLoggerDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateLoggerDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetId(v string) *CreateLoggerDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetVersion(v string) *CreateLoggerDefinitionVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionRequest
 type CreateResourceDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -5312,24 +4628,6 @@ func (s CreateResourceDefinitionInput) String() string {
 // GoString returns the string representation
 func (s CreateResourceDefinitionInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateResourceDefinitionInput) SetAmznClientToken(v string) *CreateResourceDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateResourceDefinitionInput) SetInitialVersion(v *ResourceDefinitionVersion) *CreateResourceDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateResourceDefinitionInput) SetName(v string) *CreateResourceDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionResponse
@@ -5368,48 +4666,6 @@ func (s CreateResourceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateResourceDefinitionOutput) SetArn(v string) *CreateResourceDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateResourceDefinitionOutput) SetCreationTimestamp(v string) *CreateResourceDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateResourceDefinitionOutput) SetId(v string) *CreateResourceDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateResourceDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateResourceDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateResourceDefinitionOutput) SetLatestVersion(v string) *CreateResourceDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateResourceDefinitionOutput) SetLatestVersionArn(v string) *CreateResourceDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateResourceDefinitionOutput) SetName(v string) *CreateResourceDefinitionOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersionRequest
 type CreateResourceDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -5446,24 +4702,6 @@ func (s *CreateResourceDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateResourceDefinitionVersionInput) SetAmznClientToken(v string) *CreateResourceDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetResourceDefinitionId sets the ResourceDefinitionId field's value.
-func (s *CreateResourceDefinitionVersionInput) SetResourceDefinitionId(v string) *CreateResourceDefinitionVersionInput {
-	s.ResourceDefinitionId = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *CreateResourceDefinitionVersionInput) SetResources(v []Resource) *CreateResourceDefinitionVersionInput {
-	s.Resources = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersionResponse
 type CreateResourceDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -5492,30 +4730,6 @@ func (s CreateResourceDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateResourceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateResourceDefinitionVersionOutput) SetArn(v string) *CreateResourceDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateResourceDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateResourceDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateResourceDefinitionVersionOutput) SetId(v string) *CreateResourceDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateResourceDefinitionVersionOutput) SetVersion(v string) *CreateResourceDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Request for the CreateSoftwareUpdateJob API
@@ -5556,48 +4770,6 @@ func (s CreateSoftwareUpdateJobInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateSoftwareUpdateJobInput) SetAmznClientToken(v string) *CreateSoftwareUpdateJobInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetS3UrlSignerRole sets the S3UrlSignerRole field's value.
-func (s *CreateSoftwareUpdateJobInput) SetS3UrlSignerRole(v string) *CreateSoftwareUpdateJobInput {
-	s.S3UrlSignerRole = &v
-	return s
-}
-
-// SetSoftwareToUpdate sets the SoftwareToUpdate field's value.
-func (s *CreateSoftwareUpdateJobInput) SetSoftwareToUpdate(v SoftwareToUpdate) *CreateSoftwareUpdateJobInput {
-	s.SoftwareToUpdate = v
-	return s
-}
-
-// SetUpdateAgentLogLevel sets the UpdateAgentLogLevel field's value.
-func (s *CreateSoftwareUpdateJobInput) SetUpdateAgentLogLevel(v UpdateAgentLogLevel) *CreateSoftwareUpdateJobInput {
-	s.UpdateAgentLogLevel = v
-	return s
-}
-
-// SetUpdateTargets sets the UpdateTargets field's value.
-func (s *CreateSoftwareUpdateJobInput) SetUpdateTargets(v []string) *CreateSoftwareUpdateJobInput {
-	s.UpdateTargets = v
-	return s
-}
-
-// SetUpdateTargetsArchitecture sets the UpdateTargetsArchitecture field's value.
-func (s *CreateSoftwareUpdateJobInput) SetUpdateTargetsArchitecture(v UpdateTargetsArchitecture) *CreateSoftwareUpdateJobInput {
-	s.UpdateTargetsArchitecture = v
-	return s
-}
-
-// SetUpdateTargetsOperatingSystem sets the UpdateTargetsOperatingSystem field's value.
-func (s *CreateSoftwareUpdateJobInput) SetUpdateTargetsOperatingSystem(v UpdateTargetsOperatingSystem) *CreateSoftwareUpdateJobInput {
-	s.UpdateTargetsOperatingSystem = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse
 type CreateSoftwareUpdateJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -5626,18 +4798,6 @@ func (s CreateSoftwareUpdateJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIotJobArn sets the IotJobArn field's value.
-func (s *CreateSoftwareUpdateJobOutput) SetIotJobArn(v string) *CreateSoftwareUpdateJobOutput {
-	s.IotJobArn = &v
-	return s
-}
-
-// SetIotJobId sets the IotJobId field's value.
-func (s *CreateSoftwareUpdateJobOutput) SetIotJobId(v string) *CreateSoftwareUpdateJobOutput {
-	s.IotJobId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionRequest
 type CreateSubscriptionDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -5658,24 +4818,6 @@ func (s CreateSubscriptionDefinitionInput) String() string {
 // GoString returns the string representation
 func (s CreateSubscriptionDefinitionInput) GoString() string {
 	return s.String()
-}
-
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateSubscriptionDefinitionInput) SetAmznClientToken(v string) *CreateSubscriptionDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateSubscriptionDefinitionInput) SetInitialVersion(v *SubscriptionDefinitionVersion) *CreateSubscriptionDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateSubscriptionDefinitionInput) SetName(v string) *CreateSubscriptionDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionResponse
@@ -5714,48 +4856,6 @@ func (s CreateSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetArn(v string) *CreateSubscriptionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetCreationTimestamp(v string) *CreateSubscriptionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetId(v string) *CreateSubscriptionDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateSubscriptionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetLatestVersion(v string) *CreateSubscriptionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetLatestVersionArn(v string) *CreateSubscriptionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetName(v string) *CreateSubscriptionDefinitionOutput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersionRequest
 type CreateSubscriptionDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
@@ -5792,24 +4892,6 @@ func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetAmznClientToken(v string) *CreateSubscriptionDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionId(v string) *CreateSubscriptionDefinitionVersionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
-}
-
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptions(v []Subscription) *CreateSubscriptionDefinitionVersionInput {
-	s.Subscriptions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersionResponse
 type CreateSubscriptionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -5838,30 +4920,6 @@ func (s CreateSubscriptionDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSubscriptionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetArn(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetId(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetVersion(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Information on the Definition
@@ -5901,48 +4959,6 @@ func (s DefinitionInformation) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *DefinitionInformation) SetArn(v string) *DefinitionInformation {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *DefinitionInformation) SetCreationTimestamp(v string) *DefinitionInformation {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DefinitionInformation) SetId(v string) *DefinitionInformation {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *DefinitionInformation) SetLastUpdatedTimestamp(v string) *DefinitionInformation {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *DefinitionInformation) SetLatestVersion(v string) *DefinitionInformation {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *DefinitionInformation) SetLatestVersionArn(v string) *DefinitionInformation {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DefinitionInformation) SetName(v string) *DefinitionInformation {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionRequest
 type DeleteCoreDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -5973,12 +4989,6 @@ func (s *DeleteCoreDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *DeleteCoreDefinitionInput) SetCoreDefinitionId(v string) *DeleteCoreDefinitionInput {
-	s.CoreDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionResponse
@@ -6035,12 +5045,6 @@ func (s *DeleteDeviceDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *DeleteDeviceDefinitionInput) SetDeviceDefinitionId(v string) *DeleteDeviceDefinitionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinitionResponse
 type DeleteDeviceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6093,12 +5097,6 @@ func (s *DeleteFunctionDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *DeleteFunctionDefinitionInput) SetFunctionDefinitionId(v string) *DeleteFunctionDefinitionInput {
-	s.FunctionDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinitionResponse
@@ -6155,12 +5153,6 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DeleteGroupInput) SetGroupId(v string) *DeleteGroupInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroupResponse
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6213,12 +5205,6 @@ func (s *DeleteLoggerDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *DeleteLoggerDefinitionInput) SetLoggerDefinitionId(v string) *DeleteLoggerDefinitionInput {
-	s.LoggerDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinitionResponse
@@ -6275,12 +5261,6 @@ func (s *DeleteResourceDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetResourceDefinitionId sets the ResourceDefinitionId field's value.
-func (s *DeleteResourceDefinitionInput) SetResourceDefinitionId(v string) *DeleteResourceDefinitionInput {
-	s.ResourceDefinitionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinitionResponse
 type DeleteResourceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -6333,12 +5313,6 @@ func (s *DeleteSubscriptionDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *DeleteSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *DeleteSubscriptionDefinitionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinitionResponse
@@ -6394,36 +5368,6 @@ func (s Deployment) GoString() string {
 	return s.String()
 }
 
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Deployment) SetCreatedAt(v string) *Deployment {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDeploymentArn sets the DeploymentArn field's value.
-func (s *Deployment) SetDeploymentArn(v string) *Deployment {
-	s.DeploymentArn = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *Deployment) SetDeploymentId(v string) *Deployment {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *Deployment) SetDeploymentType(v DeploymentType) *Deployment {
-	s.DeploymentType = v
-	return s
-}
-
-// SetGroupArn sets the GroupArn field's value.
-func (s *Deployment) SetGroupArn(v string) *Deployment {
-	s.GroupArn = &v
-	return s
-}
-
 // Information on a Device
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Device
 type Device struct {
@@ -6453,30 +5397,6 @@ func (s Device) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Device) SetCertificateArn(v string) *Device {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Device) SetId(v string) *Device {
-	s.Id = &v
-	return s
-}
-
-// SetSyncShadow sets the SyncShadow field's value.
-func (s *Device) SetSyncShadow(v bool) *Device {
-	s.SyncShadow = &v
-	return s
-}
-
-// SetThingArn sets the ThingArn field's value.
-func (s *Device) SetThingArn(v string) *Device {
-	s.ThingArn = &v
-	return s
-}
-
 // Information on device definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeviceDefinitionVersion
 type DeviceDefinitionVersion struct {
@@ -6494,12 +5414,6 @@ func (s DeviceDefinitionVersion) String() string {
 // GoString returns the string representation
 func (s DeviceDefinitionVersion) GoString() string {
 	return s.String()
-}
-
-// SetDevices sets the Devices field's value.
-func (s *DeviceDefinitionVersion) SetDevices(v []Device) *DeviceDefinitionVersion {
-	s.Devices = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroupRequest
@@ -6534,12 +5448,6 @@ func (s *DisassociateRoleFromGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DisassociateRoleFromGroupInput) SetGroupId(v string) *DisassociateRoleFromGroupInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroupResponse
 type DisassociateRoleFromGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -6563,12 +5471,6 @@ func (s DisassociateRoleFromGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateRoleFromGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDisassociatedAt sets the DisassociatedAt field's value.
-func (s *DisassociateRoleFromGroupOutput) SetDisassociatedAt(v string) *DisassociateRoleFromGroupOutput {
-	s.DisassociatedAt = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountRequest
@@ -6611,12 +5513,6 @@ func (s DisassociateServiceRoleFromAccountOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetDisassociatedAt sets the DisassociatedAt field's value.
-func (s *DisassociateServiceRoleFromAccountOutput) SetDisassociatedAt(v string) *DisassociateServiceRoleFromAccountOutput {
-	s.DisassociatedAt = &v
-	return s
-}
-
 // ErrorDetail
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ErrorDetail
 type ErrorDetail struct {
@@ -6637,18 +5533,6 @@ func (s ErrorDetail) String() string {
 // GoString returns the string representation
 func (s ErrorDetail) GoString() string {
 	return s.String()
-}
-
-// SetDetailedErrorCode sets the DetailedErrorCode field's value.
-func (s *ErrorDetail) SetDetailedErrorCode(v string) *ErrorDetail {
-	s.DetailedErrorCode = &v
-	return s
-}
-
-// SetDetailedErrorMessage sets the DetailedErrorMessage field's value.
-func (s *ErrorDetail) SetDetailedErrorMessage(v string) *ErrorDetail {
-	s.DetailedErrorMessage = &v
-	return s
 }
 
 // Information on function
@@ -6674,24 +5558,6 @@ func (s Function) String() string {
 // GoString returns the string representation
 func (s Function) GoString() string {
 	return s.String()
-}
-
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *Function) SetFunctionArn(v string) *Function {
-	s.FunctionArn = &v
-	return s
-}
-
-// SetFunctionConfiguration sets the FunctionConfiguration field's value.
-func (s *Function) SetFunctionConfiguration(v *FunctionConfiguration) *Function {
-	s.FunctionConfiguration = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Function) SetId(v string) *Function {
-	s.Id = &v
-	return s
 }
 
 // Configuration of the function
@@ -6730,42 +5596,6 @@ func (s FunctionConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetEnvironment sets the Environment field's value.
-func (s *FunctionConfiguration) SetEnvironment(v *FunctionConfigurationEnvironment) *FunctionConfiguration {
-	s.Environment = v
-	return s
-}
-
-// SetExecArgs sets the ExecArgs field's value.
-func (s *FunctionConfiguration) SetExecArgs(v string) *FunctionConfiguration {
-	s.ExecArgs = &v
-	return s
-}
-
-// SetExecutable sets the Executable field's value.
-func (s *FunctionConfiguration) SetExecutable(v string) *FunctionConfiguration {
-	s.Executable = &v
-	return s
-}
-
-// SetMemorySize sets the MemorySize field's value.
-func (s *FunctionConfiguration) SetMemorySize(v int64) *FunctionConfiguration {
-	s.MemorySize = &v
-	return s
-}
-
-// SetPinned sets the Pinned field's value.
-func (s *FunctionConfiguration) SetPinned(v bool) *FunctionConfiguration {
-	s.Pinned = &v
-	return s
-}
-
-// SetTimeout sets the Timeout field's value.
-func (s *FunctionConfiguration) SetTimeout(v int64) *FunctionConfiguration {
-	s.Timeout = &v
-	return s
-}
-
 // Environment of the function configuration
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfigurationEnvironment
 type FunctionConfigurationEnvironment struct {
@@ -6790,24 +5620,6 @@ func (s FunctionConfigurationEnvironment) GoString() string {
 	return s.String()
 }
 
-// SetAccessSysfs sets the AccessSysfs field's value.
-func (s *FunctionConfigurationEnvironment) SetAccessSysfs(v bool) *FunctionConfigurationEnvironment {
-	s.AccessSysfs = &v
-	return s
-}
-
-// SetResourceAccessPolicies sets the ResourceAccessPolicies field's value.
-func (s *FunctionConfigurationEnvironment) SetResourceAccessPolicies(v []ResourceAccessPolicy) *FunctionConfigurationEnvironment {
-	s.ResourceAccessPolicies = v
-	return s
-}
-
-// SetVariables sets the Variables field's value.
-func (s *FunctionConfigurationEnvironment) SetVariables(v map[string]string) *FunctionConfigurationEnvironment {
-	s.Variables = v
-	return s
-}
-
 // Information on the function definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefinitionVersion
 type FunctionDefinitionVersion struct {
@@ -6825,12 +5637,6 @@ func (s FunctionDefinitionVersion) String() string {
 // GoString returns the string representation
 func (s FunctionDefinitionVersion) GoString() string {
 	return s.String()
-}
-
-// SetFunctions sets the Functions field's value.
-func (s *FunctionDefinitionVersion) SetFunctions(v []Function) *FunctionDefinitionVersion {
-	s.Functions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRoleRequest
@@ -6865,12 +5671,6 @@ func (s *GetAssociatedRoleInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetAssociatedRoleInput) SetGroupId(v string) *GetAssociatedRoleInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRoleResponse
 type GetAssociatedRoleOutput struct {
 	_ struct{} `type:"structure"`
@@ -6897,18 +5697,6 @@ func (s GetAssociatedRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAssociatedRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *GetAssociatedRoleOutput) SetAssociatedAt(v string) *GetAssociatedRoleOutput {
-	s.AssociatedAt = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *GetAssociatedRoleOutput) SetRoleArn(v string) *GetAssociatedRoleOutput {
-	s.RoleArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoRequest
@@ -6943,12 +5731,6 @@ func (s *GetConnectivityInfoInput) Validate() error {
 	return nil
 }
 
-// SetThingName sets the ThingName field's value.
-func (s *GetConnectivityInfoInput) SetThingName(v string) *GetConnectivityInfoInput {
-	s.ThingName = &v
-	return s
-}
-
 // connectivity info response
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoResponse
 type GetConnectivityInfoOutput struct {
@@ -6976,18 +5758,6 @@ func (s GetConnectivityInfoOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetConnectivityInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConnectivityInfo sets the ConnectivityInfo field's value.
-func (s *GetConnectivityInfoOutput) SetConnectivityInfo(v []ConnectivityInfo) *GetConnectivityInfoOutput {
-	s.ConnectivityInfo = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *GetConnectivityInfoOutput) SetMessage(v string) *GetConnectivityInfoOutput {
-	s.Message = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionRequest
@@ -7020,12 +5790,6 @@ func (s *GetCoreDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *GetCoreDefinitionInput) SetCoreDefinitionId(v string) *GetCoreDefinitionInput {
-	s.CoreDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionResponse
@@ -7062,48 +5826,6 @@ func (s GetCoreDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetCoreDefinitionOutput) SetArn(v string) *GetCoreDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetCoreDefinitionOutput) SetCreationTimestamp(v string) *GetCoreDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetCoreDefinitionOutput) SetId(v string) *GetCoreDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetCoreDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetCoreDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetCoreDefinitionOutput) SetLatestVersion(v string) *GetCoreDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetCoreDefinitionOutput) SetLatestVersionArn(v string) *GetCoreDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetCoreDefinitionOutput) SetName(v string) *GetCoreDefinitionOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersionRequest
@@ -7145,18 +5867,6 @@ func (s *GetCoreDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *GetCoreDefinitionVersionInput) SetCoreDefinitionId(v string) *GetCoreDefinitionVersionInput {
-	s.CoreDefinitionId = &v
-	return s
-}
-
-// SetCoreDefinitionVersionId sets the CoreDefinitionVersionId field's value.
-func (s *GetCoreDefinitionVersionInput) SetCoreDefinitionVersionId(v string) *GetCoreDefinitionVersionInput {
-	s.CoreDefinitionVersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersionResponse
 type GetCoreDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7192,36 +5902,6 @@ func (s GetCoreDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCoreDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetCoreDefinitionVersionOutput) SetArn(v string) *GetCoreDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetCoreDefinitionVersionOutput) SetCreationTimestamp(v string) *GetCoreDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetCoreDefinitionVersionOutput) SetDefinition(v *CoreDefinitionVersion) *GetCoreDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetCoreDefinitionVersionOutput) SetId(v string) *GetCoreDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetCoreDefinitionVersionOutput) SetVersion(v string) *GetCoreDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatusRequest
@@ -7263,18 +5943,6 @@ func (s *GetDeploymentStatusInput) Validate() error {
 	return nil
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *GetDeploymentStatusInput) SetDeploymentId(v string) *GetDeploymentStatusInput {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *GetDeploymentStatusInput) SetGroupId(v string) *GetDeploymentStatusInput {
-	s.GroupId = &v
-	return s
-}
-
 // The response body contains the status of a deployment for a group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatusResponse
 type GetDeploymentStatusOutput struct {
@@ -7313,36 +5981,6 @@ func (s GetDeploymentStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentStatus sets the DeploymentStatus field's value.
-func (s *GetDeploymentStatusOutput) SetDeploymentStatus(v string) *GetDeploymentStatusOutput {
-	s.DeploymentStatus = &v
-	return s
-}
-
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *GetDeploymentStatusOutput) SetDeploymentType(v DeploymentType) *GetDeploymentStatusOutput {
-	s.DeploymentType = v
-	return s
-}
-
-// SetErrorDetails sets the ErrorDetails field's value.
-func (s *GetDeploymentStatusOutput) SetErrorDetails(v []ErrorDetail) *GetDeploymentStatusOutput {
-	s.ErrorDetails = v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *GetDeploymentStatusOutput) SetErrorMessage(v string) *GetDeploymentStatusOutput {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *GetDeploymentStatusOutput) SetUpdatedAt(v string) *GetDeploymentStatusOutput {
-	s.UpdatedAt = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionRequest
 type GetDeviceDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -7373,12 +6011,6 @@ func (s *GetDeviceDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *GetDeviceDefinitionInput) SetDeviceDefinitionId(v string) *GetDeviceDefinitionInput {
-	s.DeviceDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionResponse
@@ -7415,48 +6047,6 @@ func (s GetDeviceDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetDeviceDefinitionOutput) SetArn(v string) *GetDeviceDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetDeviceDefinitionOutput) SetCreationTimestamp(v string) *GetDeviceDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetDeviceDefinitionOutput) SetId(v string) *GetDeviceDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetDeviceDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetDeviceDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetDeviceDefinitionOutput) SetLatestVersion(v string) *GetDeviceDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetDeviceDefinitionOutput) SetLatestVersionArn(v string) *GetDeviceDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetDeviceDefinitionOutput) SetName(v string) *GetDeviceDefinitionOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersionRequest
@@ -7498,18 +6088,6 @@ func (s *GetDeviceDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *GetDeviceDefinitionVersionInput) SetDeviceDefinitionId(v string) *GetDeviceDefinitionVersionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
-
-// SetDeviceDefinitionVersionId sets the DeviceDefinitionVersionId field's value.
-func (s *GetDeviceDefinitionVersionInput) SetDeviceDefinitionVersionId(v string) *GetDeviceDefinitionVersionInput {
-	s.DeviceDefinitionVersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersionResponse
 type GetDeviceDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7547,36 +6125,6 @@ func (s GetDeviceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetArn(v string) *GetDeviceDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetCreationTimestamp(v string) *GetDeviceDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetDefinition(v *DeviceDefinitionVersion) *GetDeviceDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetId(v string) *GetDeviceDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetVersion(v string) *GetDeviceDefinitionVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionRequest
 type GetFunctionDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -7607,12 +6155,6 @@ func (s *GetFunctionDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *GetFunctionDefinitionInput) SetFunctionDefinitionId(v string) *GetFunctionDefinitionInput {
-	s.FunctionDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionResponse
@@ -7649,48 +6191,6 @@ func (s GetFunctionDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetFunctionDefinitionOutput) SetArn(v string) *GetFunctionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetFunctionDefinitionOutput) SetCreationTimestamp(v string) *GetFunctionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetFunctionDefinitionOutput) SetId(v string) *GetFunctionDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetFunctionDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetFunctionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetFunctionDefinitionOutput) SetLatestVersion(v string) *GetFunctionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetFunctionDefinitionOutput) SetLatestVersionArn(v string) *GetFunctionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetFunctionDefinitionOutput) SetName(v string) *GetFunctionDefinitionOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionRequest
@@ -7732,18 +6232,6 @@ func (s *GetFunctionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *GetFunctionDefinitionVersionInput) SetFunctionDefinitionId(v string) *GetFunctionDefinitionVersionInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
-
-// SetFunctionDefinitionVersionId sets the FunctionDefinitionVersionId field's value.
-func (s *GetFunctionDefinitionVersionInput) SetFunctionDefinitionVersionId(v string) *GetFunctionDefinitionVersionInput {
-	s.FunctionDefinitionVersionId = &v
-	return s
-}
-
 // Function definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionResponse
 type GetFunctionDefinitionVersionOutput struct {
@@ -7780,36 +6268,6 @@ func (s GetFunctionDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFunctionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetArn(v string) *GetFunctionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetCreationTimestamp(v string) *GetFunctionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetDefinition(v *FunctionDefinitionVersion) *GetFunctionDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetId(v string) *GetFunctionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetVersion(v string) *GetFunctionDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityRequest
@@ -7851,18 +6309,6 @@ func (s *GetGroupCertificateAuthorityInput) Validate() error {
 	return nil
 }
 
-// SetCertificateAuthorityId sets the CertificateAuthorityId field's value.
-func (s *GetGroupCertificateAuthorityInput) SetCertificateAuthorityId(v string) *GetGroupCertificateAuthorityInput {
-	s.CertificateAuthorityId = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupCertificateAuthorityInput) SetGroupId(v string) *GetGroupCertificateAuthorityInput {
-	s.GroupId = &v
-	return s
-}
-
 // Certificate authority for the group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityResponse
 type GetGroupCertificateAuthorityOutput struct {
@@ -7893,24 +6339,6 @@ func (s GetGroupCertificateAuthorityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupCertificateAuthorityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
-func (s *GetGroupCertificateAuthorityOutput) SetGroupCertificateAuthorityArn(v string) *GetGroupCertificateAuthorityOutput {
-	s.GroupCertificateAuthorityArn = &v
-	return s
-}
-
-// SetGroupCertificateAuthorityId sets the GroupCertificateAuthorityId field's value.
-func (s *GetGroupCertificateAuthorityOutput) SetGroupCertificateAuthorityId(v string) *GetGroupCertificateAuthorityOutput {
-	s.GroupCertificateAuthorityId = &v
-	return s
-}
-
-// SetPemEncodedCertificate sets the PemEncodedCertificate field's value.
-func (s *GetGroupCertificateAuthorityOutput) SetPemEncodedCertificate(v string) *GetGroupCertificateAuthorityOutput {
-	s.PemEncodedCertificate = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfigurationRequest
@@ -7945,12 +6373,6 @@ func (s *GetGroupCertificateConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupCertificateConfigurationInput) SetGroupId(v string) *GetGroupCertificateConfigurationInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfigurationResponse
 type GetGroupCertificateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -7977,24 +6399,6 @@ func (s GetGroupCertificateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupCertificateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateAuthorityExpiryInMilliseconds sets the CertificateAuthorityExpiryInMilliseconds field's value.
-func (s *GetGroupCertificateConfigurationOutput) SetCertificateAuthorityExpiryInMilliseconds(v string) *GetGroupCertificateConfigurationOutput {
-	s.CertificateAuthorityExpiryInMilliseconds = &v
-	return s
-}
-
-// SetCertificateExpiryInMilliseconds sets the CertificateExpiryInMilliseconds field's value.
-func (s *GetGroupCertificateConfigurationOutput) SetCertificateExpiryInMilliseconds(v string) *GetGroupCertificateConfigurationOutput {
-	s.CertificateExpiryInMilliseconds = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupCertificateConfigurationOutput) SetGroupId(v string) *GetGroupCertificateConfigurationOutput {
-	s.GroupId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupRequest
@@ -8027,12 +6431,6 @@ func (s *GetGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupInput) SetGroupId(v string) *GetGroupInput {
-	s.GroupId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupResponse
@@ -8069,48 +6467,6 @@ func (s GetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetGroupOutput) SetArn(v string) *GetGroupOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetGroupOutput) SetCreationTimestamp(v string) *GetGroupOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetGroupOutput) SetId(v string) *GetGroupOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetGroupOutput) SetLastUpdatedTimestamp(v string) *GetGroupOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetGroupOutput) SetLatestVersion(v string) *GetGroupOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetGroupOutput) SetLatestVersionArn(v string) *GetGroupOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetGroupOutput) SetName(v string) *GetGroupOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionRequest
@@ -8152,18 +6508,6 @@ func (s *GetGroupVersionInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupVersionInput) SetGroupId(v string) *GetGroupVersionInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupVersionId sets the GroupVersionId field's value.
-func (s *GetGroupVersionInput) SetGroupVersionId(v string) *GetGroupVersionInput {
-	s.GroupVersionId = &v
-	return s
-}
-
 // Information on the group version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionResponse
 type GetGroupVersionOutput struct {
@@ -8202,36 +6546,6 @@ func (s GetGroupVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetGroupVersionOutput) SetArn(v string) *GetGroupVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetGroupVersionOutput) SetCreationTimestamp(v string) *GetGroupVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetGroupVersionOutput) SetDefinition(v *GroupVersion) *GetGroupVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetGroupVersionOutput) SetId(v string) *GetGroupVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetGroupVersionOutput) SetVersion(v string) *GetGroupVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionRequest
 type GetLoggerDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -8262,12 +6576,6 @@ func (s *GetLoggerDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *GetLoggerDefinitionInput) SetLoggerDefinitionId(v string) *GetLoggerDefinitionInput {
-	s.LoggerDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionResponse
@@ -8304,48 +6612,6 @@ func (s GetLoggerDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetLoggerDefinitionOutput) SetArn(v string) *GetLoggerDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetLoggerDefinitionOutput) SetCreationTimestamp(v string) *GetLoggerDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetLoggerDefinitionOutput) SetId(v string) *GetLoggerDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetLoggerDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetLoggerDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetLoggerDefinitionOutput) SetLatestVersion(v string) *GetLoggerDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetLoggerDefinitionOutput) SetLatestVersionArn(v string) *GetLoggerDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetLoggerDefinitionOutput) SetName(v string) *GetLoggerDefinitionOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersionRequest
@@ -8387,18 +6653,6 @@ func (s *GetLoggerDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *GetLoggerDefinitionVersionInput) SetLoggerDefinitionId(v string) *GetLoggerDefinitionVersionInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
-
-// SetLoggerDefinitionVersionId sets the LoggerDefinitionVersionId field's value.
-func (s *GetLoggerDefinitionVersionInput) SetLoggerDefinitionVersionId(v string) *GetLoggerDefinitionVersionInput {
-	s.LoggerDefinitionVersionId = &v
-	return s
-}
-
 // Information on logger definition version response
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersionResponse
 type GetLoggerDefinitionVersionOutput struct {
@@ -8437,36 +6691,6 @@ func (s GetLoggerDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetArn(v string) *GetLoggerDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetCreationTimestamp(v string) *GetLoggerDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetDefinition(v *LoggerDefinitionVersion) *GetLoggerDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetId(v string) *GetLoggerDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetVersion(v string) *GetLoggerDefinitionVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionRequest
 type GetResourceDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -8497,12 +6721,6 @@ func (s *GetResourceDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceDefinitionId sets the ResourceDefinitionId field's value.
-func (s *GetResourceDefinitionInput) SetResourceDefinitionId(v string) *GetResourceDefinitionInput {
-	s.ResourceDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionResponse
@@ -8539,48 +6757,6 @@ func (s GetResourceDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetResourceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetResourceDefinitionOutput) SetArn(v string) *GetResourceDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetResourceDefinitionOutput) SetCreationTimestamp(v string) *GetResourceDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetResourceDefinitionOutput) SetId(v string) *GetResourceDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetResourceDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetResourceDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetResourceDefinitionOutput) SetLatestVersion(v string) *GetResourceDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetResourceDefinitionOutput) SetLatestVersionArn(v string) *GetResourceDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetResourceDefinitionOutput) SetName(v string) *GetResourceDefinitionOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionRequest
@@ -8622,18 +6798,6 @@ func (s *GetResourceDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetResourceDefinitionId sets the ResourceDefinitionId field's value.
-func (s *GetResourceDefinitionVersionInput) SetResourceDefinitionId(v string) *GetResourceDefinitionVersionInput {
-	s.ResourceDefinitionId = &v
-	return s
-}
-
-// SetResourceDefinitionVersionId sets the ResourceDefinitionVersionId field's value.
-func (s *GetResourceDefinitionVersionInput) SetResourceDefinitionVersionId(v string) *GetResourceDefinitionVersionInput {
-	s.ResourceDefinitionVersionId = &v
-	return s
-}
-
 // Information on resource definition version response
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionResponse
 type GetResourceDefinitionVersionOutput struct {
@@ -8670,36 +6834,6 @@ func (s GetResourceDefinitionVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetResourceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetResourceDefinitionVersionOutput) SetArn(v string) *GetResourceDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetResourceDefinitionVersionOutput) SetCreationTimestamp(v string) *GetResourceDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetResourceDefinitionVersionOutput) SetDefinition(v *ResourceDefinitionVersion) *GetResourceDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetResourceDefinitionVersionOutput) SetId(v string) *GetResourceDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetResourceDefinitionVersionOutput) SetVersion(v string) *GetResourceDefinitionVersionOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountRequest
@@ -8745,18 +6879,6 @@ func (s GetServiceRoleForAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *GetServiceRoleForAccountOutput) SetAssociatedAt(v string) *GetServiceRoleForAccountOutput {
-	s.AssociatedAt = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *GetServiceRoleForAccountOutput) SetRoleArn(v string) *GetServiceRoleForAccountOutput {
-	s.RoleArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionRequest
 type GetSubscriptionDefinitionInput struct {
 	_ struct{} `type:"structure"`
@@ -8787,12 +6909,6 @@ func (s *GetSubscriptionDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *GetSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *GetSubscriptionDefinitionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionResponse
@@ -8829,48 +6945,6 @@ func (s GetSubscriptionDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *GetSubscriptionDefinitionOutput) SetArn(v string) *GetSubscriptionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetSubscriptionDefinitionOutput) SetCreationTimestamp(v string) *GetSubscriptionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetSubscriptionDefinitionOutput) SetId(v string) *GetSubscriptionDefinitionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetSubscriptionDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetSubscriptionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetSubscriptionDefinitionOutput) SetLatestVersion(v string) *GetSubscriptionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetSubscriptionDefinitionOutput) SetLatestVersionArn(v string) *GetSubscriptionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetSubscriptionDefinitionOutput) SetName(v string) *GetSubscriptionDefinitionOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersionRequest
@@ -8912,18 +6986,6 @@ func (s *GetSubscriptionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *GetSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionId(v string) *GetSubscriptionDefinitionVersionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
-}
-
-// SetSubscriptionDefinitionVersionId sets the SubscriptionDefinitionVersionId field's value.
-func (s *GetSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionVersionId(v string) *GetSubscriptionDefinitionVersionInput {
-	s.SubscriptionDefinitionVersionId = &v
-	return s
-}
-
 // Information on the Subscription Definition Version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersionResponse
 type GetSubscriptionDefinitionVersionOutput struct {
@@ -8962,36 +7024,6 @@ func (s GetSubscriptionDefinitionVersionOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetArn(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetCreationTimestamp(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetDefinition(v *SubscriptionDefinitionVersion) *GetSubscriptionDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetId(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetVersion(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.Version = &v
-	return s
-}
-
 // Information on group certificate authority properties
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupCertificateAuthorityProperties
 type GroupCertificateAuthorityProperties struct {
@@ -9012,18 +7044,6 @@ func (s GroupCertificateAuthorityProperties) String() string {
 // GoString returns the string representation
 func (s GroupCertificateAuthorityProperties) GoString() string {
 	return s.String()
-}
-
-// SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
-func (s *GroupCertificateAuthorityProperties) SetGroupCertificateAuthorityArn(v string) *GroupCertificateAuthorityProperties {
-	s.GroupCertificateAuthorityArn = &v
-	return s
-}
-
-// SetGroupCertificateAuthorityId sets the GroupCertificateAuthorityId field's value.
-func (s *GroupCertificateAuthorityProperties) SetGroupCertificateAuthorityId(v string) *GroupCertificateAuthorityProperties {
-	s.GroupCertificateAuthorityId = &v
-	return s
 }
 
 // Information on the group
@@ -9063,48 +7083,6 @@ func (s GroupInformation) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *GroupInformation) SetArn(v string) *GroupInformation {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GroupInformation) SetCreationTimestamp(v string) *GroupInformation {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *GroupInformation) SetId(v string) *GroupInformation {
-	s.Id = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GroupInformation) SetLastUpdatedTimestamp(v string) *GroupInformation {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GroupInformation) SetLatestVersion(v string) *GroupInformation {
-	s.LatestVersion = &v
-	return s
-}
-
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GroupInformation) SetLatestVersionArn(v string) *GroupInformation {
-	s.LatestVersionArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GroupInformation) SetName(v string) *GroupInformation {
-	s.Name = &v
-	return s
-}
-
 // Group owner related settings for local resources.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupOwnerSetting
 type GroupOwnerSetting struct {
@@ -9125,18 +7103,6 @@ func (s GroupOwnerSetting) String() string {
 // GoString returns the string representation
 func (s GroupOwnerSetting) GoString() string {
 	return s.String()
-}
-
-// SetAutoAddGroupOwner sets the AutoAddGroupOwner field's value.
-func (s *GroupOwnerSetting) SetAutoAddGroupOwner(v bool) *GroupOwnerSetting {
-	s.AutoAddGroupOwner = &v
-	return s
-}
-
-// SetGroupOwner sets the GroupOwner field's value.
-func (s *GroupOwnerSetting) SetGroupOwner(v string) *GroupOwnerSetting {
-	s.GroupOwner = &v
-	return s
 }
 
 // Information on group version
@@ -9171,42 +7137,6 @@ func (s GroupVersion) String() string {
 // GoString returns the string representation
 func (s GroupVersion) GoString() string {
 	return s.String()
-}
-
-// SetCoreDefinitionVersionArn sets the CoreDefinitionVersionArn field's value.
-func (s *GroupVersion) SetCoreDefinitionVersionArn(v string) *GroupVersion {
-	s.CoreDefinitionVersionArn = &v
-	return s
-}
-
-// SetDeviceDefinitionVersionArn sets the DeviceDefinitionVersionArn field's value.
-func (s *GroupVersion) SetDeviceDefinitionVersionArn(v string) *GroupVersion {
-	s.DeviceDefinitionVersionArn = &v
-	return s
-}
-
-// SetFunctionDefinitionVersionArn sets the FunctionDefinitionVersionArn field's value.
-func (s *GroupVersion) SetFunctionDefinitionVersionArn(v string) *GroupVersion {
-	s.FunctionDefinitionVersionArn = &v
-	return s
-}
-
-// SetLoggerDefinitionVersionArn sets the LoggerDefinitionVersionArn field's value.
-func (s *GroupVersion) SetLoggerDefinitionVersionArn(v string) *GroupVersion {
-	s.LoggerDefinitionVersionArn = &v
-	return s
-}
-
-// SetResourceDefinitionVersionArn sets the ResourceDefinitionVersionArn field's value.
-func (s *GroupVersion) SetResourceDefinitionVersionArn(v string) *GroupVersion {
-	s.ResourceDefinitionVersionArn = &v
-	return s
-}
-
-// SetSubscriptionDefinitionVersionArn sets the SubscriptionDefinitionVersionArn field's value.
-func (s *GroupVersion) SetSubscriptionDefinitionVersionArn(v string) *GroupVersion {
-	s.SubscriptionDefinitionVersionArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersionsRequest
@@ -9245,24 +7175,6 @@ func (s *ListCoreDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *ListCoreDefinitionVersionsInput) SetCoreDefinitionId(v string) *ListCoreDefinitionVersionsInput {
-	s.CoreDefinitionId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCoreDefinitionVersionsInput) SetMaxResults(v string) *ListCoreDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionVersionsInput) SetNextToken(v string) *ListCoreDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersionsResponse
 type ListCoreDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9289,18 +7201,6 @@ func (s ListCoreDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionVersionsOutput) SetNextToken(v string) *ListCoreDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListCoreDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListCoreDefinitionVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionsRequest
 type ListCoreDefinitionsInput struct {
 	_ struct{} `type:"structure"`
@@ -9318,18 +7218,6 @@ func (s ListCoreDefinitionsInput) String() string {
 // GoString returns the string representation
 func (s ListCoreDefinitionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCoreDefinitionsInput) SetMaxResults(v string) *ListCoreDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionsInput) SetNextToken(v string) *ListCoreDefinitionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionsResponse
@@ -9356,18 +7244,6 @@ func (s ListCoreDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCoreDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDefinitions sets the Definitions field's value.
-func (s *ListCoreDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListCoreDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionsOutput) SetNextToken(v string) *ListCoreDefinitionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeploymentsRequest
@@ -9406,24 +7282,6 @@ func (s *ListDeploymentsInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListDeploymentsInput) SetGroupId(v string) *ListDeploymentsInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDeploymentsInput) SetMaxResults(v string) *ListDeploymentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentsInput) SetNextToken(v string) *ListDeploymentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeploymentsResponse
 type ListDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9451,18 +7309,6 @@ func (s ListDeploymentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeployments sets the Deployments field's value.
-func (s *ListDeploymentsOutput) SetDeployments(v []Deployment) *ListDeploymentsOutput {
-	s.Deployments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentsOutput) SetNextToken(v string) *ListDeploymentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersionsRequest
@@ -9501,24 +7347,6 @@ func (s *ListDeviceDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *ListDeviceDefinitionVersionsInput) SetDeviceDefinitionId(v string) *ListDeviceDefinitionVersionsInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDeviceDefinitionVersionsInput) SetMaxResults(v string) *ListDeviceDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionVersionsInput) SetNextToken(v string) *ListDeviceDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersionsResponse
 type ListDeviceDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9545,18 +7373,6 @@ func (s ListDeviceDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionVersionsOutput) SetNextToken(v string) *ListDeviceDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListDeviceDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListDeviceDefinitionVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionsRequest
 type ListDeviceDefinitionsInput struct {
 	_ struct{} `type:"structure"`
@@ -9574,18 +7390,6 @@ func (s ListDeviceDefinitionsInput) String() string {
 // GoString returns the string representation
 func (s ListDeviceDefinitionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDeviceDefinitionsInput) SetMaxResults(v string) *ListDeviceDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionsInput) SetNextToken(v string) *ListDeviceDefinitionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionsResponse
@@ -9612,18 +7416,6 @@ func (s ListDeviceDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeviceDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDefinitions sets the Definitions field's value.
-func (s *ListDeviceDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListDeviceDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionsOutput) SetNextToken(v string) *ListDeviceDefinitionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersionsRequest
@@ -9662,24 +7454,6 @@ func (s *ListFunctionDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *ListFunctionDefinitionVersionsInput) SetFunctionDefinitionId(v string) *ListFunctionDefinitionVersionsInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFunctionDefinitionVersionsInput) SetMaxResults(v string) *ListFunctionDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionVersionsInput) SetNextToken(v string) *ListFunctionDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersionsResponse
 type ListFunctionDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9706,18 +7480,6 @@ func (s ListFunctionDefinitionVersionsOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionVersionsOutput) SetNextToken(v string) *ListFunctionDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListFunctionDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListFunctionDefinitionVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionsRequest
 type ListFunctionDefinitionsInput struct {
 	_ struct{} `type:"structure"`
@@ -9735,18 +7497,6 @@ func (s ListFunctionDefinitionsInput) String() string {
 // GoString returns the string representation
 func (s ListFunctionDefinitionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFunctionDefinitionsInput) SetMaxResults(v string) *ListFunctionDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionsInput) SetNextToken(v string) *ListFunctionDefinitionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionsResponse
@@ -9773,18 +7523,6 @@ func (s ListFunctionDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFunctionDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDefinitions sets the Definitions field's value.
-func (s *ListFunctionDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListFunctionDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionsOutput) SetNextToken(v string) *ListFunctionDefinitionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthoritiesRequest
@@ -9819,12 +7557,6 @@ func (s *ListGroupCertificateAuthoritiesInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListGroupCertificateAuthoritiesInput) SetGroupId(v string) *ListGroupCertificateAuthoritiesInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthoritiesResponse
 type ListGroupCertificateAuthoritiesOutput struct {
 	_ struct{} `type:"structure"`
@@ -9848,12 +7580,6 @@ func (s ListGroupCertificateAuthoritiesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupCertificateAuthoritiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupCertificateAuthorities sets the GroupCertificateAuthorities field's value.
-func (s *ListGroupCertificateAuthoritiesOutput) SetGroupCertificateAuthorities(v []GroupCertificateAuthorityProperties) *ListGroupCertificateAuthoritiesOutput {
-	s.GroupCertificateAuthorities = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersionsRequest
@@ -9892,24 +7618,6 @@ func (s *ListGroupVersionsInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListGroupVersionsInput) SetGroupId(v string) *ListGroupVersionsInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupVersionsInput) SetMaxResults(v string) *ListGroupVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupVersionsInput) SetNextToken(v string) *ListGroupVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersionsResponse
 type ListGroupVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9936,18 +7644,6 @@ func (s ListGroupVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupVersionsOutput) SetNextToken(v string) *ListGroupVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListGroupVersionsOutput) SetVersions(v []VersionInformation) *ListGroupVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupsRequest
 type ListGroupsInput struct {
 	_ struct{} `type:"structure"`
@@ -9965,18 +7661,6 @@ func (s ListGroupsInput) String() string {
 // GoString returns the string representation
 func (s ListGroupsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupsInput) SetMaxResults(v string) *ListGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsInput) SetNextToken(v string) *ListGroupsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupsResponse
@@ -10006,18 +7690,6 @@ func (s ListGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []GroupInformation) *ListGroupsOutput {
-	s.Groups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsOutput) SetNextToken(v string) *ListGroupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersionsRequest
@@ -10056,24 +7728,6 @@ func (s *ListLoggerDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *ListLoggerDefinitionVersionsInput) SetLoggerDefinitionId(v string) *ListLoggerDefinitionVersionsInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListLoggerDefinitionVersionsInput) SetMaxResults(v string) *ListLoggerDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionVersionsInput) SetNextToken(v string) *ListLoggerDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersionsResponse
 type ListLoggerDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10100,18 +7754,6 @@ func (s ListLoggerDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionVersionsOutput) SetNextToken(v string) *ListLoggerDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListLoggerDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListLoggerDefinitionVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionsRequest
 type ListLoggerDefinitionsInput struct {
 	_ struct{} `type:"structure"`
@@ -10129,18 +7771,6 @@ func (s ListLoggerDefinitionsInput) String() string {
 // GoString returns the string representation
 func (s ListLoggerDefinitionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListLoggerDefinitionsInput) SetMaxResults(v string) *ListLoggerDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionsInput) SetNextToken(v string) *ListLoggerDefinitionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionsResponse
@@ -10167,18 +7797,6 @@ func (s ListLoggerDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListLoggerDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDefinitions sets the Definitions field's value.
-func (s *ListLoggerDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListLoggerDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionsOutput) SetNextToken(v string) *ListLoggerDefinitionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersionsRequest
@@ -10217,24 +7835,6 @@ func (s *ListResourceDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResourceDefinitionVersionsInput) SetMaxResults(v string) *ListResourceDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceDefinitionVersionsInput) SetNextToken(v string) *ListResourceDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceDefinitionId sets the ResourceDefinitionId field's value.
-func (s *ListResourceDefinitionVersionsInput) SetResourceDefinitionId(v string) *ListResourceDefinitionVersionsInput {
-	s.ResourceDefinitionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersionsResponse
 type ListResourceDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10261,18 +7861,6 @@ func (s ListResourceDefinitionVersionsOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceDefinitionVersionsOutput) SetNextToken(v string) *ListResourceDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListResourceDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListResourceDefinitionVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionsRequest
 type ListResourceDefinitionsInput struct {
 	_ struct{} `type:"structure"`
@@ -10290,18 +7878,6 @@ func (s ListResourceDefinitionsInput) String() string {
 // GoString returns the string representation
 func (s ListResourceDefinitionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResourceDefinitionsInput) SetMaxResults(v string) *ListResourceDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceDefinitionsInput) SetNextToken(v string) *ListResourceDefinitionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionsResponse
@@ -10328,18 +7904,6 @@ func (s ListResourceDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourceDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDefinitions sets the Definitions field's value.
-func (s *ListResourceDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListResourceDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResourceDefinitionsOutput) SetNextToken(v string) *ListResourceDefinitionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersionsRequest
@@ -10378,24 +7942,6 @@ func (s *ListSubscriptionDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListSubscriptionDefinitionVersionsInput) SetMaxResults(v string) *ListSubscriptionDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionVersionsInput) SetNextToken(v string) *ListSubscriptionDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *ListSubscriptionDefinitionVersionsInput) SetSubscriptionDefinitionId(v string) *ListSubscriptionDefinitionVersionsInput {
-	s.SubscriptionDefinitionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersionsResponse
 type ListSubscriptionDefinitionVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10422,18 +7968,6 @@ func (s ListSubscriptionDefinitionVersionsOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionVersionsOutput) SetNextToken(v string) *ListSubscriptionDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListSubscriptionDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListSubscriptionDefinitionVersionsOutput {
-	s.Versions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionsRequest
 type ListSubscriptionDefinitionsInput struct {
 	_ struct{} `type:"structure"`
@@ -10451,18 +7985,6 @@ func (s ListSubscriptionDefinitionsInput) String() string {
 // GoString returns the string representation
 func (s ListSubscriptionDefinitionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListSubscriptionDefinitionsInput) SetMaxResults(v string) *ListSubscriptionDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionsInput) SetNextToken(v string) *ListSubscriptionDefinitionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionsResponse
@@ -10491,18 +8013,6 @@ func (s ListSubscriptionDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefinitions sets the Definitions field's value.
-func (s *ListSubscriptionDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListSubscriptionDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionsOutput) SetNextToken(v string) *ListSubscriptionDefinitionsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Attributes that define the Local Device Resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalDeviceResourceData
 type LocalDeviceResourceData struct {
@@ -10523,18 +8033,6 @@ func (s LocalDeviceResourceData) String() string {
 // GoString returns the string representation
 func (s LocalDeviceResourceData) GoString() string {
 	return s.String()
-}
-
-// SetGroupOwnerSetting sets the GroupOwnerSetting field's value.
-func (s *LocalDeviceResourceData) SetGroupOwnerSetting(v *GroupOwnerSetting) *LocalDeviceResourceData {
-	s.GroupOwnerSetting = v
-	return s
-}
-
-// SetSourcePath sets the SourcePath field's value.
-func (s *LocalDeviceResourceData) SetSourcePath(v string) *LocalDeviceResourceData {
-	s.SourcePath = &v
-	return s
 }
 
 // Attributes that define the Local Volume Resource.
@@ -10560,24 +8058,6 @@ func (s LocalVolumeResourceData) String() string {
 // GoString returns the string representation
 func (s LocalVolumeResourceData) GoString() string {
 	return s.String()
-}
-
-// SetDestinationPath sets the DestinationPath field's value.
-func (s *LocalVolumeResourceData) SetDestinationPath(v string) *LocalVolumeResourceData {
-	s.DestinationPath = &v
-	return s
-}
-
-// SetGroupOwnerSetting sets the GroupOwnerSetting field's value.
-func (s *LocalVolumeResourceData) SetGroupOwnerSetting(v *GroupOwnerSetting) *LocalVolumeResourceData {
-	s.GroupOwnerSetting = v
-	return s
-}
-
-// SetSourcePath sets the SourcePath field's value.
-func (s *LocalVolumeResourceData) SetSourcePath(v string) *LocalVolumeResourceData {
-	s.SourcePath = &v
-	return s
 }
 
 // Information on the Logger
@@ -10612,36 +8092,6 @@ func (s Logger) GoString() string {
 	return s.String()
 }
 
-// SetComponent sets the Component field's value.
-func (s *Logger) SetComponent(v LoggerComponent) *Logger {
-	s.Component = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Logger) SetId(v string) *Logger {
-	s.Id = &v
-	return s
-}
-
-// SetLevel sets the Level field's value.
-func (s *Logger) SetLevel(v LoggerLevel) *Logger {
-	s.Level = v
-	return s
-}
-
-// SetSpace sets the Space field's value.
-func (s *Logger) SetSpace(v int64) *Logger {
-	s.Space = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Logger) SetType(v LoggerType) *Logger {
-	s.Type = v
-	return s
-}
-
 // Information on logger definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LoggerDefinitionVersion
 type LoggerDefinitionVersion struct {
@@ -10659,12 +8109,6 @@ func (s LoggerDefinitionVersion) String() string {
 // GoString returns the string representation
 func (s LoggerDefinitionVersion) GoString() string {
 	return s.String()
-}
-
-// SetLoggers sets the Loggers field's value.
-func (s *LoggerDefinitionVersion) SetLoggers(v []Logger) *LoggerDefinitionVersion {
-	s.Loggers = v
-	return s
 }
 
 // Information needed to perform a reset of a group's deployments.
@@ -10705,24 +8149,6 @@ func (s *ResetDeploymentsInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *ResetDeploymentsInput) SetAmznClientToken(v string) *ResetDeploymentsInput {
-	s.AmznClientToken = &v
-	return s
-}
-
-// SetForce sets the Force field's value.
-func (s *ResetDeploymentsInput) SetForce(v bool) *ResetDeploymentsInput {
-	s.Force = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *ResetDeploymentsInput) SetGroupId(v string) *ResetDeploymentsInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsResponse
 type ResetDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -10751,18 +8177,6 @@ func (s ResetDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentArn sets the DeploymentArn field's value.
-func (s *ResetDeploymentsOutput) SetDeploymentArn(v string) *ResetDeploymentsOutput {
-	s.DeploymentArn = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *ResetDeploymentsOutput) SetDeploymentId(v string) *ResetDeploymentsOutput {
-	s.DeploymentId = &v
-	return s
-}
-
 // Information on the resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Resource
 type Resource struct {
@@ -10788,24 +8202,6 @@ func (s Resource) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *Resource) SetId(v string) *Resource {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Resource) SetName(v string) *Resource {
-	s.Name = &v
-	return s
-}
-
-// SetResourceDataContainer sets the ResourceDataContainer field's value.
-func (s *Resource) SetResourceDataContainer(v *ResourceDataContainer) *Resource {
-	s.ResourceDataContainer = v
-	return s
-}
-
 // Policy for the function to access a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceAccessPolicy
 type ResourceAccessPolicy struct {
@@ -10826,18 +8222,6 @@ func (s ResourceAccessPolicy) String() string {
 // GoString returns the string representation
 func (s ResourceAccessPolicy) GoString() string {
 	return s.String()
-}
-
-// SetPermission sets the Permission field's value.
-func (s *ResourceAccessPolicy) SetPermission(v Permission) *ResourceAccessPolicy {
-	s.Permission = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ResourceAccessPolicy) SetResourceId(v string) *ResourceAccessPolicy {
-	s.ResourceId = &v
-	return s
 }
 
 // A container of data for all resource types.
@@ -10862,18 +8246,6 @@ func (s ResourceDataContainer) GoString() string {
 	return s.String()
 }
 
-// SetLocalDeviceResourceData sets the LocalDeviceResourceData field's value.
-func (s *ResourceDataContainer) SetLocalDeviceResourceData(v *LocalDeviceResourceData) *ResourceDataContainer {
-	s.LocalDeviceResourceData = v
-	return s
-}
-
-// SetLocalVolumeResourceData sets the LocalVolumeResourceData field's value.
-func (s *ResourceDataContainer) SetLocalVolumeResourceData(v *LocalVolumeResourceData) *ResourceDataContainer {
-	s.LocalVolumeResourceData = v
-	return s
-}
-
 // Information on resource definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDefinitionVersion
 type ResourceDefinitionVersion struct {
@@ -10891,12 +8263,6 @@ func (s ResourceDefinitionVersion) String() string {
 // GoString returns the string representation
 func (s ResourceDefinitionVersion) GoString() string {
 	return s.String()
-}
-
-// SetResources sets the Resources field's value.
-func (s *ResourceDefinitionVersion) SetResources(v []Resource) *ResourceDefinitionVersion {
-	s.Resources = v
-	return s
 }
 
 // Information on subscription
@@ -10927,30 +8293,6 @@ func (s Subscription) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *Subscription) SetId(v string) *Subscription {
-	s.Id = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *Subscription) SetSource(v string) *Subscription {
-	s.Source = &v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *Subscription) SetSubject(v string) *Subscription {
-	s.Subject = &v
-	return s
-}
-
-// SetTarget sets the Target field's value.
-func (s *Subscription) SetTarget(v string) *Subscription {
-	s.Target = &v
-	return s
-}
-
 // Information on subscription definition version
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SubscriptionDefinitionVersion
 type SubscriptionDefinitionVersion struct {
@@ -10968,12 +8310,6 @@ func (s SubscriptionDefinitionVersion) String() string {
 // GoString returns the string representation
 func (s SubscriptionDefinitionVersion) GoString() string {
 	return s.String()
-}
-
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *SubscriptionDefinitionVersion) SetSubscriptions(v []Subscription) *SubscriptionDefinitionVersion {
-	s.Subscriptions = v
-	return s
 }
 
 // Information on connectivity info
@@ -11012,18 +8348,6 @@ func (s *UpdateConnectivityInfoInput) Validate() error {
 	return nil
 }
 
-// SetConnectivityInfo sets the ConnectivityInfo field's value.
-func (s *UpdateConnectivityInfoInput) SetConnectivityInfo(v []ConnectivityInfo) *UpdateConnectivityInfoInput {
-	s.ConnectivityInfo = v
-	return s
-}
-
-// SetThingName sets the ThingName field's value.
-func (s *UpdateConnectivityInfoInput) SetThingName(v string) *UpdateConnectivityInfoInput {
-	s.ThingName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfoResponse
 type UpdateConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
@@ -11050,18 +8374,6 @@ func (s UpdateConnectivityInfoOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateConnectivityInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMessage sets the Message field's value.
-func (s *UpdateConnectivityInfoOutput) SetMessage(v string) *UpdateConnectivityInfoOutput {
-	s.Message = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *UpdateConnectivityInfoOutput) SetVersion(v string) *UpdateConnectivityInfoOutput {
-	s.Version = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionRequest
@@ -11096,18 +8408,6 @@ func (s *UpdateCoreDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *UpdateCoreDefinitionInput) SetCoreDefinitionId(v string) *UpdateCoreDefinitionInput {
-	s.CoreDefinitionId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateCoreDefinitionInput) SetName(v string) *UpdateCoreDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionResponse
@@ -11166,18 +8466,6 @@ func (s *UpdateDeviceDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *UpdateDeviceDefinitionInput) SetDeviceDefinitionId(v string) *UpdateDeviceDefinitionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateDeviceDefinitionInput) SetName(v string) *UpdateDeviceDefinitionInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinitionResponse
 type UpdateDeviceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -11232,18 +8520,6 @@ func (s *UpdateFunctionDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *UpdateFunctionDefinitionInput) SetFunctionDefinitionId(v string) *UpdateFunctionDefinitionInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateFunctionDefinitionInput) SetName(v string) *UpdateFunctionDefinitionInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinitionResponse
@@ -11303,18 +8579,6 @@ func (s *UpdateGroupCertificateConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetCertificateExpiryInMilliseconds sets the CertificateExpiryInMilliseconds field's value.
-func (s *UpdateGroupCertificateConfigurationInput) SetCertificateExpiryInMilliseconds(v string) *UpdateGroupCertificateConfigurationInput {
-	s.CertificateExpiryInMilliseconds = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateGroupCertificateConfigurationInput) SetGroupId(v string) *UpdateGroupCertificateConfigurationInput {
-	s.GroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfigurationResponse
 type UpdateGroupCertificateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -11341,24 +8605,6 @@ func (s UpdateGroupCertificateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupCertificateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateAuthorityExpiryInMilliseconds sets the CertificateAuthorityExpiryInMilliseconds field's value.
-func (s *UpdateGroupCertificateConfigurationOutput) SetCertificateAuthorityExpiryInMilliseconds(v string) *UpdateGroupCertificateConfigurationOutput {
-	s.CertificateAuthorityExpiryInMilliseconds = &v
-	return s
-}
-
-// SetCertificateExpiryInMilliseconds sets the CertificateExpiryInMilliseconds field's value.
-func (s *UpdateGroupCertificateConfigurationOutput) SetCertificateExpiryInMilliseconds(v string) *UpdateGroupCertificateConfigurationOutput {
-	s.CertificateExpiryInMilliseconds = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateGroupCertificateConfigurationOutput) SetGroupId(v string) *UpdateGroupCertificateConfigurationOutput {
-	s.GroupId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupRequest
@@ -11393,18 +8639,6 @@ func (s *UpdateGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateGroupInput) SetGroupId(v string) *UpdateGroupInput {
-	s.GroupId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateGroupInput) SetName(v string) *UpdateGroupInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupResponse
@@ -11463,18 +8697,6 @@ func (s *UpdateLoggerDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *UpdateLoggerDefinitionInput) SetLoggerDefinitionId(v string) *UpdateLoggerDefinitionInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateLoggerDefinitionInput) SetName(v string) *UpdateLoggerDefinitionInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinitionResponse
 type UpdateLoggerDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -11529,18 +8751,6 @@ func (s *UpdateResourceDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateResourceDefinitionInput) SetName(v string) *UpdateResourceDefinitionInput {
-	s.Name = &v
-	return s
-}
-
-// SetResourceDefinitionId sets the ResourceDefinitionId field's value.
-func (s *UpdateResourceDefinitionInput) SetResourceDefinitionId(v string) *UpdateResourceDefinitionInput {
-	s.ResourceDefinitionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinitionResponse
@@ -11599,18 +8809,6 @@ func (s *UpdateSubscriptionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *UpdateSubscriptionDefinitionInput) SetName(v string) *UpdateSubscriptionDefinitionInput {
-	s.Name = &v
-	return s
-}
-
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *UpdateSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *UpdateSubscriptionDefinitionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinitionResponse
 type UpdateSubscriptionDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -11659,30 +8857,6 @@ func (s VersionInformation) String() string {
 // GoString returns the string representation
 func (s VersionInformation) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *VersionInformation) SetArn(v string) *VersionInformation {
-	s.Arn = &v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *VersionInformation) SetCreationTimestamp(v string) *VersionInformation {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *VersionInformation) SetId(v string) *VersionInformation {
-	s.Id = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *VersionInformation) SetVersion(v string) *VersionInformation {
-	s.Version = &v
-	return s
 }
 
 type DeploymentType string

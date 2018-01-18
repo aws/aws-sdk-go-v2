@@ -864,18 +864,6 @@ func (s BrokerInstance) GoString() string {
 	return s.String()
 }
 
-// SetConsoleURL sets the ConsoleURL field's value.
-func (s *BrokerInstance) SetConsoleURL(v string) *BrokerInstance {
-	s.ConsoleURL = &v
-	return s
-}
-
-// SetEndpoints sets the Endpoints field's value.
-func (s *BrokerInstance) SetEndpoints(v []string) *BrokerInstance {
-	s.Endpoints = v
-	return s
-}
-
 // The Amazon Resource Name (ARN) of the broker.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerSummary
 type BrokerSummary struct {
@@ -915,42 +903,6 @@ func (s BrokerSummary) String() string {
 // GoString returns the string representation
 func (s BrokerSummary) GoString() string {
 	return s.String()
-}
-
-// SetBrokerArn sets the BrokerArn field's value.
-func (s *BrokerSummary) SetBrokerArn(v string) *BrokerSummary {
-	s.BrokerArn = &v
-	return s
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *BrokerSummary) SetBrokerId(v string) *BrokerSummary {
-	s.BrokerId = &v
-	return s
-}
-
-// SetBrokerName sets the BrokerName field's value.
-func (s *BrokerSummary) SetBrokerName(v string) *BrokerSummary {
-	s.BrokerName = &v
-	return s
-}
-
-// SetBrokerState sets the BrokerState field's value.
-func (s *BrokerSummary) SetBrokerState(v BrokerState) *BrokerSummary {
-	s.BrokerState = v
-	return s
-}
-
-// SetDeploymentMode sets the DeploymentMode field's value.
-func (s *BrokerSummary) SetDeploymentMode(v DeploymentMode) *BrokerSummary {
-	s.DeploymentMode = v
-	return s
-}
-
-// SetHostInstanceType sets the HostInstanceType field's value.
-func (s *BrokerSummary) SetHostInstanceType(v string) *BrokerSummary {
-	s.HostInstanceType = &v
-	return s
 }
 
 // Returns information about all configurations.
@@ -993,48 +945,6 @@ func (s Configuration) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Configuration) SetArn(v string) *Configuration {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Configuration) SetDescription(v string) *Configuration {
-	s.Description = &v
-	return s
-}
-
-// SetEngineType sets the EngineType field's value.
-func (s *Configuration) SetEngineType(v EngineType) *Configuration {
-	s.EngineType = v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *Configuration) SetEngineVersion(v string) *Configuration {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Configuration) SetId(v string) *Configuration {
-	s.Id = &v
-	return s
-}
-
-// SetLatestRevision sets the LatestRevision field's value.
-func (s *Configuration) SetLatestRevision(v *ConfigurationRevision) *Configuration {
-	s.LatestRevision = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Configuration) SetName(v string) *Configuration {
-	s.Name = &v
-	return s
-}
-
 // A list of information about the configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationId
 type ConfigurationId struct {
@@ -1057,18 +967,6 @@ func (s ConfigurationId) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *ConfigurationId) SetId(v string) *ConfigurationId {
-	s.Id = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *ConfigurationId) SetRevision(v int64) *ConfigurationId {
-	s.Revision = &v
-	return s
-}
-
 // Returns information about the specified configuration revision.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationRevision
 type ConfigurationRevision struct {
@@ -1089,18 +987,6 @@ func (s ConfigurationRevision) String() string {
 // GoString returns the string representation
 func (s ConfigurationRevision) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *ConfigurationRevision) SetDescription(v string) *ConfigurationRevision {
-	s.Description = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *ConfigurationRevision) SetRevision(v int64) *ConfigurationRevision {
-	s.Revision = &v
-	return s
 }
 
 // Broker configuration information
@@ -1126,24 +1012,6 @@ func (s Configurations) String() string {
 // GoString returns the string representation
 func (s Configurations) GoString() string {
 	return s.String()
-}
-
-// SetCurrent sets the Current field's value.
-func (s *Configurations) SetCurrent(v *ConfigurationId) *Configurations {
-	s.Current = v
-	return s
-}
-
-// SetHistory sets the History field's value.
-func (s *Configurations) SetHistory(v []ConfigurationId) *Configurations {
-	s.History = v
-	return s
-}
-
-// SetPending sets the Pending field's value.
-func (s *Configurations) SetPending(v *ConfigurationId) *Configurations {
-	s.Pending = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerRequest
@@ -1194,84 +1062,6 @@ func (s CreateBrokerInput) GoString() string {
 	return s.String()
 }
 
-// SetAutoMinorVersionUpgrade sets the AutoMinorVersionUpgrade field's value.
-func (s *CreateBrokerInput) SetAutoMinorVersionUpgrade(v bool) *CreateBrokerInput {
-	s.AutoMinorVersionUpgrade = &v
-	return s
-}
-
-// SetBrokerName sets the BrokerName field's value.
-func (s *CreateBrokerInput) SetBrokerName(v string) *CreateBrokerInput {
-	s.BrokerName = &v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *CreateBrokerInput) SetConfiguration(v *ConfigurationId) *CreateBrokerInput {
-	s.Configuration = v
-	return s
-}
-
-// SetCreatorRequestId sets the CreatorRequestId field's value.
-func (s *CreateBrokerInput) SetCreatorRequestId(v string) *CreateBrokerInput {
-	s.CreatorRequestId = &v
-	return s
-}
-
-// SetDeploymentMode sets the DeploymentMode field's value.
-func (s *CreateBrokerInput) SetDeploymentMode(v DeploymentMode) *CreateBrokerInput {
-	s.DeploymentMode = v
-	return s
-}
-
-// SetEngineType sets the EngineType field's value.
-func (s *CreateBrokerInput) SetEngineType(v EngineType) *CreateBrokerInput {
-	s.EngineType = v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *CreateBrokerInput) SetEngineVersion(v string) *CreateBrokerInput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetHostInstanceType sets the HostInstanceType field's value.
-func (s *CreateBrokerInput) SetHostInstanceType(v string) *CreateBrokerInput {
-	s.HostInstanceType = &v
-	return s
-}
-
-// SetMaintenanceWindowStartTime sets the MaintenanceWindowStartTime field's value.
-func (s *CreateBrokerInput) SetMaintenanceWindowStartTime(v *WeeklyStartTime) *CreateBrokerInput {
-	s.MaintenanceWindowStartTime = v
-	return s
-}
-
-// SetPubliclyAccessible sets the PubliclyAccessible field's value.
-func (s *CreateBrokerInput) SetPubliclyAccessible(v bool) *CreateBrokerInput {
-	s.PubliclyAccessible = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *CreateBrokerInput) SetSecurityGroups(v []string) *CreateBrokerInput {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateBrokerInput) SetSubnetIds(v []string) *CreateBrokerInput {
-	s.SubnetIds = v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *CreateBrokerInput) SetUsers(v []User) *CreateBrokerInput {
-	s.Users = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerResponse
 type CreateBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -1298,18 +1088,6 @@ func (s CreateBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBrokerArn sets the BrokerArn field's value.
-func (s *CreateBrokerOutput) SetBrokerArn(v string) *CreateBrokerOutput {
-	s.BrokerArn = &v
-	return s
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *CreateBrokerOutput) SetBrokerId(v string) *CreateBrokerOutput {
-	s.BrokerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationRequest
 type CreateConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -1330,24 +1108,6 @@ func (s CreateConfigurationInput) String() string {
 // GoString returns the string representation
 func (s CreateConfigurationInput) GoString() string {
 	return s.String()
-}
-
-// SetEngineType sets the EngineType field's value.
-func (s *CreateConfigurationInput) SetEngineType(v EngineType) *CreateConfigurationInput {
-	s.EngineType = v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *CreateConfigurationInput) SetEngineVersion(v string) *CreateConfigurationInput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateConfigurationInput) SetName(v string) *CreateConfigurationInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationResponse
@@ -1379,30 +1139,6 @@ func (s CreateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *CreateConfigurationOutput) SetArn(v string) *CreateConfigurationOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateConfigurationOutput) SetId(v string) *CreateConfigurationOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLatestRevision sets the LatestRevision field's value.
-func (s *CreateConfigurationOutput) SetLatestRevision(v *ConfigurationRevision) *CreateConfigurationOutput {
-	s.LatestRevision = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateConfigurationOutput) SetName(v string) *CreateConfigurationOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserRequest
@@ -1448,36 +1184,6 @@ func (s *CreateUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *CreateUserInput) SetBrokerId(v string) *CreateUserInput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetConsoleAccess sets the ConsoleAccess field's value.
-func (s *CreateUserInput) SetConsoleAccess(v bool) *CreateUserInput {
-	s.ConsoleAccess = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *CreateUserInput) SetGroups(v []string) *CreateUserInput {
-	s.Groups = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *CreateUserInput) SetPassword(v string) *CreateUserInput {
-	s.Password = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *CreateUserInput) SetUsername(v string) *CreateUserInput {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserResponse
@@ -1534,12 +1240,6 @@ func (s *DeleteBrokerInput) Validate() error {
 	return nil
 }
 
-// SetBrokerId sets the BrokerId field's value.
-func (s *DeleteBrokerInput) SetBrokerId(v string) *DeleteBrokerInput {
-	s.BrokerId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteBrokerResponse
 type DeleteBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -1562,12 +1262,6 @@ func (s DeleteBrokerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *DeleteBrokerOutput) SetBrokerId(v string) *DeleteBrokerOutput {
-	s.BrokerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUserRequest
@@ -1607,18 +1301,6 @@ func (s *DeleteUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *DeleteUserInput) SetBrokerId(v string) *DeleteUserInput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *DeleteUserInput) SetUsername(v string) *DeleteUserInput {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUserResponse
@@ -1673,12 +1355,6 @@ func (s *DescribeBrokerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *DescribeBrokerInput) SetBrokerId(v string) *DescribeBrokerInput {
-	s.BrokerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerResponse
@@ -1744,102 +1420,6 @@ func (s DescribeBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAutoMinorVersionUpgrade sets the AutoMinorVersionUpgrade field's value.
-func (s *DescribeBrokerOutput) SetAutoMinorVersionUpgrade(v bool) *DescribeBrokerOutput {
-	s.AutoMinorVersionUpgrade = &v
-	return s
-}
-
-// SetBrokerArn sets the BrokerArn field's value.
-func (s *DescribeBrokerOutput) SetBrokerArn(v string) *DescribeBrokerOutput {
-	s.BrokerArn = &v
-	return s
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *DescribeBrokerOutput) SetBrokerId(v string) *DescribeBrokerOutput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetBrokerInstances sets the BrokerInstances field's value.
-func (s *DescribeBrokerOutput) SetBrokerInstances(v []BrokerInstance) *DescribeBrokerOutput {
-	s.BrokerInstances = v
-	return s
-}
-
-// SetBrokerName sets the BrokerName field's value.
-func (s *DescribeBrokerOutput) SetBrokerName(v string) *DescribeBrokerOutput {
-	s.BrokerName = &v
-	return s
-}
-
-// SetBrokerState sets the BrokerState field's value.
-func (s *DescribeBrokerOutput) SetBrokerState(v BrokerState) *DescribeBrokerOutput {
-	s.BrokerState = v
-	return s
-}
-
-// SetConfigurations sets the Configurations field's value.
-func (s *DescribeBrokerOutput) SetConfigurations(v *Configurations) *DescribeBrokerOutput {
-	s.Configurations = v
-	return s
-}
-
-// SetDeploymentMode sets the DeploymentMode field's value.
-func (s *DescribeBrokerOutput) SetDeploymentMode(v DeploymentMode) *DescribeBrokerOutput {
-	s.DeploymentMode = v
-	return s
-}
-
-// SetEngineType sets the EngineType field's value.
-func (s *DescribeBrokerOutput) SetEngineType(v EngineType) *DescribeBrokerOutput {
-	s.EngineType = v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *DescribeBrokerOutput) SetEngineVersion(v string) *DescribeBrokerOutput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetHostInstanceType sets the HostInstanceType field's value.
-func (s *DescribeBrokerOutput) SetHostInstanceType(v string) *DescribeBrokerOutput {
-	s.HostInstanceType = &v
-	return s
-}
-
-// SetMaintenanceWindowStartTime sets the MaintenanceWindowStartTime field's value.
-func (s *DescribeBrokerOutput) SetMaintenanceWindowStartTime(v *WeeklyStartTime) *DescribeBrokerOutput {
-	s.MaintenanceWindowStartTime = v
-	return s
-}
-
-// SetPubliclyAccessible sets the PubliclyAccessible field's value.
-func (s *DescribeBrokerOutput) SetPubliclyAccessible(v bool) *DescribeBrokerOutput {
-	s.PubliclyAccessible = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *DescribeBrokerOutput) SetSecurityGroups(v []string) *DescribeBrokerOutput {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *DescribeBrokerOutput) SetSubnetIds(v []string) *DescribeBrokerOutput {
-	s.SubnetIds = v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *DescribeBrokerOutput) SetUsers(v []UserSummary) *DescribeBrokerOutput {
-	s.Users = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRequest
 type DescribeConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -1870,12 +1450,6 @@ func (s *DescribeConfigurationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *DescribeConfigurationInput) SetConfigurationId(v string) *DescribeConfigurationInput {
-	s.ConfigurationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationResponse
@@ -1914,48 +1488,6 @@ func (s DescribeConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *DescribeConfigurationOutput) SetArn(v string) *DescribeConfigurationOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeConfigurationOutput) SetDescription(v string) *DescribeConfigurationOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEngineType sets the EngineType field's value.
-func (s *DescribeConfigurationOutput) SetEngineType(v EngineType) *DescribeConfigurationOutput {
-	s.EngineType = v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *DescribeConfigurationOutput) SetEngineVersion(v string) *DescribeConfigurationOutput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeConfigurationOutput) SetId(v string) *DescribeConfigurationOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLatestRevision sets the LatestRevision field's value.
-func (s *DescribeConfigurationOutput) SetLatestRevision(v *ConfigurationRevision) *DescribeConfigurationOutput {
-	s.LatestRevision = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeConfigurationOutput) SetName(v string) *DescribeConfigurationOutput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRevisionRequest
@@ -1997,18 +1529,6 @@ func (s *DescribeConfigurationRevisionInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *DescribeConfigurationRevisionInput) SetConfigurationId(v string) *DescribeConfigurationRevisionInput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetConfigurationRevision sets the ConfigurationRevision field's value.
-func (s *DescribeConfigurationRevisionInput) SetConfigurationRevision(v string) *DescribeConfigurationRevisionInput {
-	s.ConfigurationRevision = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRevisionResponse
 type DescribeConfigurationRevisionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2035,24 +1555,6 @@ func (s DescribeConfigurationRevisionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConfigurationRevisionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *DescribeConfigurationRevisionOutput) SetConfigurationId(v string) *DescribeConfigurationRevisionOutput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *DescribeConfigurationRevisionOutput) SetData(v string) *DescribeConfigurationRevisionOutput {
-	s.Data = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeConfigurationRevisionOutput) SetDescription(v string) *DescribeConfigurationRevisionOutput {
-	s.Description = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUserRequest
@@ -2094,18 +1596,6 @@ func (s *DescribeUserInput) Validate() error {
 	return nil
 }
 
-// SetBrokerId sets the BrokerId field's value.
-func (s *DescribeUserInput) SetBrokerId(v string) *DescribeUserInput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *DescribeUserInput) SetUsername(v string) *DescribeUserInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUserResponse
 type DescribeUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -2140,36 +1630,6 @@ func (s DescribeUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBrokerId sets the BrokerId field's value.
-func (s *DescribeUserOutput) SetBrokerId(v string) *DescribeUserOutput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetConsoleAccess sets the ConsoleAccess field's value.
-func (s *DescribeUserOutput) SetConsoleAccess(v bool) *DescribeUserOutput {
-	s.ConsoleAccess = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *DescribeUserOutput) SetGroups(v []string) *DescribeUserOutput {
-	s.Groups = v
-	return s
-}
-
-// SetPending sets the Pending field's value.
-func (s *DescribeUserOutput) SetPending(v *UserPendingChanges) *DescribeUserOutput {
-	s.Pending = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *DescribeUserOutput) SetUsername(v string) *DescribeUserOutput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListBrokersRequest
 type ListBrokersInput struct {
 	_ struct{} `type:"structure"`
@@ -2202,18 +1662,6 @@ func (s *ListBrokersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListBrokersInput) SetMaxResults(v int64) *ListBrokersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBrokersInput) SetNextToken(v string) *ListBrokersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListBrokersResponse
 type ListBrokersOutput struct {
 	_ struct{} `type:"structure"`
@@ -2238,18 +1686,6 @@ func (s ListBrokersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBrokersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBrokerSummaries sets the BrokerSummaries field's value.
-func (s *ListBrokersOutput) SetBrokerSummaries(v []BrokerSummary) *ListBrokersOutput {
-	s.BrokerSummaries = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBrokersOutput) SetNextToken(v string) *ListBrokersOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisionsRequest
@@ -2291,24 +1727,6 @@ func (s *ListConfigurationRevisionsInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *ListConfigurationRevisionsInput) SetConfigurationId(v string) *ListConfigurationRevisionsInput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListConfigurationRevisionsInput) SetMaxResults(v int64) *ListConfigurationRevisionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListConfigurationRevisionsInput) SetNextToken(v string) *ListConfigurationRevisionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisionsResponse
 type ListConfigurationRevisionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2337,30 +1755,6 @@ func (s ListConfigurationRevisionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListConfigurationRevisionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *ListConfigurationRevisionsOutput) SetConfigurationId(v string) *ListConfigurationRevisionsOutput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListConfigurationRevisionsOutput) SetMaxResults(v int64) *ListConfigurationRevisionsOutput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListConfigurationRevisionsOutput) SetNextToken(v string) *ListConfigurationRevisionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRevisions sets the Revisions field's value.
-func (s *ListConfigurationRevisionsOutput) SetRevisions(v []ConfigurationRevision) *ListConfigurationRevisionsOutput {
-	s.Revisions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationsRequest
@@ -2395,18 +1789,6 @@ func (s *ListConfigurationsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListConfigurationsInput) SetMaxResults(v int64) *ListConfigurationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListConfigurationsInput) SetNextToken(v string) *ListConfigurationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationsResponse
 type ListConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2433,24 +1815,6 @@ func (s ListConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurations sets the Configurations field's value.
-func (s *ListConfigurationsOutput) SetConfigurations(v []Configuration) *ListConfigurationsOutput {
-	s.Configurations = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListConfigurationsOutput) SetMaxResults(v int64) *ListConfigurationsOutput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListConfigurationsOutput) SetNextToken(v string) *ListConfigurationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsersRequest
@@ -2492,24 +1856,6 @@ func (s *ListUsersInput) Validate() error {
 	return nil
 }
 
-// SetBrokerId sets the BrokerId field's value.
-func (s *ListUsersInput) SetBrokerId(v string) *ListUsersInput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUsersInput) SetMaxResults(v int64) *ListUsersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUsersInput) SetNextToken(v string) *ListUsersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsersResponse
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
@@ -2538,30 +1884,6 @@ func (s ListUsersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *ListUsersOutput) SetBrokerId(v string) *ListUsersOutput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListUsersOutput) SetMaxResults(v int64) *ListUsersOutput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUsersOutput) SetNextToken(v string) *ListUsersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *ListUsersOutput) SetUsers(v []UserSummary) *ListUsersOutput {
-	s.Users = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/RebootBrokerRequest
@@ -2594,12 +1916,6 @@ func (s *RebootBrokerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *RebootBrokerInput) SetBrokerId(v string) *RebootBrokerInput {
-	s.BrokerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/RebootBrokerResponse
@@ -2656,24 +1972,6 @@ func (s SanitizationWarning) GoString() string {
 	return s.String()
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *SanitizationWarning) SetAttributeName(v string) *SanitizationWarning {
-	s.AttributeName = &v
-	return s
-}
-
-// SetElementName sets the ElementName field's value.
-func (s *SanitizationWarning) SetElementName(v string) *SanitizationWarning {
-	s.ElementName = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *SanitizationWarning) SetReason(v SanitizationWarningReason) *SanitizationWarning {
-	s.Reason = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest
 type UpdateBrokerInput struct {
 	_ struct{} `type:"structure"`
@@ -2709,18 +2007,6 @@ func (s *UpdateBrokerInput) Validate() error {
 	return nil
 }
 
-// SetBrokerId sets the BrokerId field's value.
-func (s *UpdateBrokerInput) SetBrokerId(v string) *UpdateBrokerInput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *UpdateBrokerInput) SetConfiguration(v *ConfigurationId) *UpdateBrokerInput {
-	s.Configuration = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse
 type UpdateBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -2746,18 +2032,6 @@ func (s UpdateBrokerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *UpdateBrokerOutput) SetBrokerId(v string) *UpdateBrokerOutput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *UpdateBrokerOutput) SetConfiguration(v *ConfigurationId) *UpdateBrokerOutput {
-	s.Configuration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateConfigurationRequest
@@ -2796,24 +2070,6 @@ func (s *UpdateConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationId sets the ConfigurationId field's value.
-func (s *UpdateConfigurationInput) SetConfigurationId(v string) *UpdateConfigurationInput {
-	s.ConfigurationId = &v
-	return s
-}
-
-// SetData sets the Data field's value.
-func (s *UpdateConfigurationInput) SetData(v string) *UpdateConfigurationInput {
-	s.Data = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateConfigurationInput) SetDescription(v string) *UpdateConfigurationInput {
-	s.Description = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateConfigurationResponse
 type UpdateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2845,36 +2101,6 @@ func (s UpdateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArn sets the Arn field's value.
-func (s *UpdateConfigurationOutput) SetArn(v string) *UpdateConfigurationOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *UpdateConfigurationOutput) SetId(v string) *UpdateConfigurationOutput {
-	s.Id = &v
-	return s
-}
-
-// SetLatestRevision sets the LatestRevision field's value.
-func (s *UpdateConfigurationOutput) SetLatestRevision(v *ConfigurationRevision) *UpdateConfigurationOutput {
-	s.LatestRevision = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateConfigurationOutput) SetName(v string) *UpdateConfigurationOutput {
-	s.Name = &v
-	return s
-}
-
-// SetWarnings sets the Warnings field's value.
-func (s *UpdateConfigurationOutput) SetWarnings(v []SanitizationWarning) *UpdateConfigurationOutput {
-	s.Warnings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserRequest
@@ -2920,36 +2146,6 @@ func (s *UpdateUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBrokerId sets the BrokerId field's value.
-func (s *UpdateUserInput) SetBrokerId(v string) *UpdateUserInput {
-	s.BrokerId = &v
-	return s
-}
-
-// SetConsoleAccess sets the ConsoleAccess field's value.
-func (s *UpdateUserInput) SetConsoleAccess(v bool) *UpdateUserInput {
-	s.ConsoleAccess = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *UpdateUserInput) SetGroups(v []string) *UpdateUserInput {
-	s.Groups = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *UpdateUserInput) SetPassword(v string) *UpdateUserInput {
-	s.Password = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *UpdateUserInput) SetUsername(v string) *UpdateUserInput {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserResponse
@@ -3008,30 +2204,6 @@ func (s User) GoString() string {
 	return s.String()
 }
 
-// SetConsoleAccess sets the ConsoleAccess field's value.
-func (s *User) SetConsoleAccess(v bool) *User {
-	s.ConsoleAccess = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *User) SetGroups(v []string) *User {
-	s.Groups = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *User) SetPassword(v string) *User {
-	s.Password = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *User) SetUsername(v string) *User {
-	s.Username = &v
-	return s
-}
-
 // Returns information about the status of the changes pending for the ActiveMQ
 // user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserPendingChanges
@@ -3061,24 +2233,6 @@ func (s UserPendingChanges) GoString() string {
 	return s.String()
 }
 
-// SetConsoleAccess sets the ConsoleAccess field's value.
-func (s *UserPendingChanges) SetConsoleAccess(v bool) *UserPendingChanges {
-	s.ConsoleAccess = &v
-	return s
-}
-
-// SetGroups sets the Groups field's value.
-func (s *UserPendingChanges) SetGroups(v []string) *UserPendingChanges {
-	s.Groups = v
-	return s
-}
-
-// SetPendingChange sets the PendingChange field's value.
-func (s *UserPendingChanges) SetPendingChange(v ChangeType) *UserPendingChanges {
-	s.PendingChange = v
-	return s
-}
-
 // Returns a list of all ActiveMQ users.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserSummary
 type UserSummary struct {
@@ -3102,18 +2256,6 @@ func (s UserSummary) String() string {
 // GoString returns the string representation
 func (s UserSummary) GoString() string {
 	return s.String()
-}
-
-// SetPendingChange sets the PendingChange field's value.
-func (s *UserSummary) SetPendingChange(v ChangeType) *UserSummary {
-	s.PendingChange = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *UserSummary) SetUsername(v string) *UserSummary {
-	s.Username = &v
-	return s
 }
 
 // The scheduled time period relative to UTC during which Amazon MQ begins to
@@ -3142,24 +2284,6 @@ func (s WeeklyStartTime) String() string {
 // GoString returns the string representation
 func (s WeeklyStartTime) GoString() string {
 	return s.String()
-}
-
-// SetDayOfWeek sets the DayOfWeek field's value.
-func (s *WeeklyStartTime) SetDayOfWeek(v DayOfWeek) *WeeklyStartTime {
-	s.DayOfWeek = v
-	return s
-}
-
-// SetTimeOfDay sets the TimeOfDay field's value.
-func (s *WeeklyStartTime) SetTimeOfDay(v string) *WeeklyStartTime {
-	s.TimeOfDay = &v
-	return s
-}
-
-// SetTimeZone sets the TimeZone field's value.
-func (s *WeeklyStartTime) SetTimeZone(v string) *WeeklyStartTime {
-	s.TimeZone = &v
-	return s
 }
 
 // The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED,

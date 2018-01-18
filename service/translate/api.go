@@ -133,24 +133,6 @@ func (s *TextInput) Validate() error {
 	return nil
 }
 
-// SetSourceLanguageCode sets the SourceLanguageCode field's value.
-func (s *TextInput) SetSourceLanguageCode(v string) *TextInput {
-	s.SourceLanguageCode = &v
-	return s
-}
-
-// SetTargetLanguageCode sets the TargetLanguageCode field's value.
-func (s *TextInput) SetTargetLanguageCode(v string) *TextInput {
-	s.TargetLanguageCode = &v
-	return s
-}
-
-// SetText sets the Text field's value.
-func (s *TextInput) SetText(v string) *TextInput {
-	s.Text = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TextResponse
 type TextOutput struct {
 	_ struct{} `type:"structure"`
@@ -186,22 +168,4 @@ func (s TextOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TextOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSourceLanguageCode sets the SourceLanguageCode field's value.
-func (s *TextOutput) SetSourceLanguageCode(v string) *TextOutput {
-	s.SourceLanguageCode = &v
-	return s
-}
-
-// SetTargetLanguageCode sets the TargetLanguageCode field's value.
-func (s *TextOutput) SetTargetLanguageCode(v string) *TextOutput {
-	s.TargetLanguageCode = &v
-	return s
-}
-
-// SetTranslatedText sets the TranslatedText field's value.
-func (s *TextOutput) SetTranslatedText(v string) *TextOutput {
-	s.TranslatedText = &v
-	return s
 }

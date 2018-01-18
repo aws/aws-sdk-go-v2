@@ -476,24 +476,6 @@ func (s ApplicationPolicyStatement) GoString() string {
 	return s.String()
 }
 
-// SetActions sets the Actions field's value.
-func (s *ApplicationPolicyStatement) SetActions(v []string) *ApplicationPolicyStatement {
-	s.Actions = v
-	return s
-}
-
-// SetPrincipals sets the Principals field's value.
-func (s *ApplicationPolicyStatement) SetPrincipals(v []string) *ApplicationPolicyStatement {
-	s.Principals = v
-	return s
-}
-
-// SetStatementId sets the StatementId field's value.
-func (s *ApplicationPolicyStatement) SetStatementId(v string) *ApplicationPolicyStatement {
-	s.StatementId = &v
-	return s
-}
-
 // Summary of details about the application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationSummary
 type ApplicationSummary struct {
@@ -531,48 +513,6 @@ func (s ApplicationSummary) String() string {
 // GoString returns the string representation
 func (s ApplicationSummary) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ApplicationSummary) SetApplicationId(v string) *ApplicationSummary {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetAuthor sets the Author field's value.
-func (s *ApplicationSummary) SetAuthor(v string) *ApplicationSummary {
-	s.Author = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *ApplicationSummary) SetCreationTime(v string) *ApplicationSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ApplicationSummary) SetDescription(v string) *ApplicationSummary {
-	s.Description = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *ApplicationSummary) SetLabels(v []string) *ApplicationSummary {
-	s.Labels = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ApplicationSummary) SetName(v string) *ApplicationSummary {
-	s.Name = &v
-	return s
-}
-
-// SetSpdxLicenseId sets the SpdxLicenseId field's value.
-func (s *ApplicationSummary) SetSpdxLicenseId(v string) *ApplicationSummary {
-	s.SpdxLicenseId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationRequest
@@ -616,84 +556,6 @@ func (s CreateApplicationInput) GoString() string {
 	return s.String()
 }
 
-// SetAuthor sets the Author field's value.
-func (s *CreateApplicationInput) SetAuthor(v string) *CreateApplicationInput {
-	s.Author = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateApplicationInput) SetDescription(v string) *CreateApplicationInput {
-	s.Description = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *CreateApplicationInput) SetLabels(v []string) *CreateApplicationInput {
-	s.Labels = v
-	return s
-}
-
-// SetLicenseBody sets the LicenseBody field's value.
-func (s *CreateApplicationInput) SetLicenseBody(v string) *CreateApplicationInput {
-	s.LicenseBody = &v
-	return s
-}
-
-// SetLicenseUrl sets the LicenseUrl field's value.
-func (s *CreateApplicationInput) SetLicenseUrl(v string) *CreateApplicationInput {
-	s.LicenseUrl = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateApplicationInput) SetName(v string) *CreateApplicationInput {
-	s.Name = &v
-	return s
-}
-
-// SetReadmeBody sets the ReadmeBody field's value.
-func (s *CreateApplicationInput) SetReadmeBody(v string) *CreateApplicationInput {
-	s.ReadmeBody = &v
-	return s
-}
-
-// SetReadmeUrl sets the ReadmeUrl field's value.
-func (s *CreateApplicationInput) SetReadmeUrl(v string) *CreateApplicationInput {
-	s.ReadmeUrl = &v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *CreateApplicationInput) SetSemanticVersion(v string) *CreateApplicationInput {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetSourceCodeUrl sets the SourceCodeUrl field's value.
-func (s *CreateApplicationInput) SetSourceCodeUrl(v string) *CreateApplicationInput {
-	s.SourceCodeUrl = &v
-	return s
-}
-
-// SetSpdxLicenseId sets the SpdxLicenseId field's value.
-func (s *CreateApplicationInput) SetSpdxLicenseId(v string) *CreateApplicationInput {
-	s.SpdxLicenseId = &v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *CreateApplicationInput) SetTemplateBody(v string) *CreateApplicationInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateUrl sets the TemplateUrl field's value.
-func (s *CreateApplicationInput) SetTemplateUrl(v string) *CreateApplicationInput {
-	s.TemplateUrl = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationResponse
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
@@ -735,66 +597,6 @@ func (s CreateApplicationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateApplicationOutput) SetApplicationId(v string) *CreateApplicationOutput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetAuthor sets the Author field's value.
-func (s *CreateApplicationOutput) SetAuthor(v string) *CreateApplicationOutput {
-	s.Author = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *CreateApplicationOutput) SetCreationTime(v string) *CreateApplicationOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateApplicationOutput) SetDescription(v string) *CreateApplicationOutput {
-	s.Description = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *CreateApplicationOutput) SetLabels(v []string) *CreateApplicationOutput {
-	s.Labels = v
-	return s
-}
-
-// SetLicenseUrl sets the LicenseUrl field's value.
-func (s *CreateApplicationOutput) SetLicenseUrl(v string) *CreateApplicationOutput {
-	s.LicenseUrl = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateApplicationOutput) SetName(v string) *CreateApplicationOutput {
-	s.Name = &v
-	return s
-}
-
-// SetReadmeUrl sets the ReadmeUrl field's value.
-func (s *CreateApplicationOutput) SetReadmeUrl(v string) *CreateApplicationOutput {
-	s.ReadmeUrl = &v
-	return s
-}
-
-// SetSpdxLicenseId sets the SpdxLicenseId field's value.
-func (s *CreateApplicationOutput) SetSpdxLicenseId(v string) *CreateApplicationOutput {
-	s.SpdxLicenseId = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *CreateApplicationOutput) SetVersion(v *Version) *CreateApplicationOutput {
-	s.Version = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionRequest
@@ -842,36 +644,6 @@ func (s *CreateApplicationVersionInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateApplicationVersionInput) SetApplicationId(v string) *CreateApplicationVersionInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *CreateApplicationVersionInput) SetSemanticVersion(v string) *CreateApplicationVersionInput {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetSourceCodeUrl sets the SourceCodeUrl field's value.
-func (s *CreateApplicationVersionInput) SetSourceCodeUrl(v string) *CreateApplicationVersionInput {
-	s.SourceCodeUrl = &v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *CreateApplicationVersionInput) SetTemplateBody(v string) *CreateApplicationVersionInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateUrl sets the TemplateUrl field's value.
-func (s *CreateApplicationVersionInput) SetTemplateUrl(v string) *CreateApplicationVersionInput {
-	s.TemplateUrl = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionResponse
 type CreateApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -904,42 +676,6 @@ func (s CreateApplicationVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateApplicationVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateApplicationVersionOutput) SetApplicationId(v string) *CreateApplicationVersionOutput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *CreateApplicationVersionOutput) SetCreationTime(v string) *CreateApplicationVersionOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetParameterDefinitions sets the ParameterDefinitions field's value.
-func (s *CreateApplicationVersionOutput) SetParameterDefinitions(v []ParameterDefinition) *CreateApplicationVersionOutput {
-	s.ParameterDefinitions = v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *CreateApplicationVersionOutput) SetSemanticVersion(v string) *CreateApplicationVersionOutput {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetSourceCodeUrl sets the SourceCodeUrl field's value.
-func (s *CreateApplicationVersionOutput) SetSourceCodeUrl(v string) *CreateApplicationVersionOutput {
-	s.SourceCodeUrl = &v
-	return s
-}
-
-// SetTemplateUrl sets the TemplateUrl field's value.
-func (s *CreateApplicationVersionOutput) SetTemplateUrl(v string) *CreateApplicationVersionOutput {
-	s.TemplateUrl = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetRequest
@@ -980,30 +716,6 @@ func (s *CreateCloudFormationChangeSetInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateCloudFormationChangeSetInput) SetApplicationId(v string) *CreateCloudFormationChangeSetInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetParameterOverrides sets the ParameterOverrides field's value.
-func (s *CreateCloudFormationChangeSetInput) SetParameterOverrides(v []ParameterValue) *CreateCloudFormationChangeSetInput {
-	s.ParameterOverrides = v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *CreateCloudFormationChangeSetInput) SetSemanticVersion(v string) *CreateCloudFormationChangeSetInput {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *CreateCloudFormationChangeSetInput) SetStackName(v string) *CreateCloudFormationChangeSetInput {
-	s.StackName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetResponse
 type CreateCloudFormationChangeSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -1032,30 +744,6 @@ func (s CreateCloudFormationChangeSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCloudFormationChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateCloudFormationChangeSetOutput) SetApplicationId(v string) *CreateCloudFormationChangeSetOutput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetChangeSetId sets the ChangeSetId field's value.
-func (s *CreateCloudFormationChangeSetOutput) SetChangeSetId(v string) *CreateCloudFormationChangeSetOutput {
-	s.ChangeSetId = &v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *CreateCloudFormationChangeSetOutput) SetSemanticVersion(v string) *CreateCloudFormationChangeSetOutput {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateCloudFormationChangeSetOutput) SetStackId(v string) *CreateCloudFormationChangeSetOutput {
-	s.StackId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationRequest
@@ -1090,18 +778,6 @@ func (s *GetApplicationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApplicationInput) SetApplicationId(v string) *GetApplicationInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *GetApplicationInput) SetSemanticVersion(v string) *GetApplicationInput {
-	s.SemanticVersion = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationResponse
@@ -1147,66 +823,6 @@ func (s GetApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApplicationOutput) SetApplicationId(v string) *GetApplicationOutput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetAuthor sets the Author field's value.
-func (s *GetApplicationOutput) SetAuthor(v string) *GetApplicationOutput {
-	s.Author = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *GetApplicationOutput) SetCreationTime(v string) *GetApplicationOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetApplicationOutput) SetDescription(v string) *GetApplicationOutput {
-	s.Description = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *GetApplicationOutput) SetLabels(v []string) *GetApplicationOutput {
-	s.Labels = v
-	return s
-}
-
-// SetLicenseUrl sets the LicenseUrl field's value.
-func (s *GetApplicationOutput) SetLicenseUrl(v string) *GetApplicationOutput {
-	s.LicenseUrl = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetApplicationOutput) SetName(v string) *GetApplicationOutput {
-	s.Name = &v
-	return s
-}
-
-// SetReadmeUrl sets the ReadmeUrl field's value.
-func (s *GetApplicationOutput) SetReadmeUrl(v string) *GetApplicationOutput {
-	s.ReadmeUrl = &v
-	return s
-}
-
-// SetSpdxLicenseId sets the SpdxLicenseId field's value.
-func (s *GetApplicationOutput) SetSpdxLicenseId(v string) *GetApplicationOutput {
-	s.SpdxLicenseId = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetApplicationOutput) SetVersion(v *Version) *GetApplicationOutput {
-	s.Version = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationPolicyRequest
 type GetApplicationPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -1239,12 +855,6 @@ func (s *GetApplicationPolicyInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *GetApplicationPolicyInput) SetApplicationId(v string) *GetApplicationPolicyInput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationPolicyResponse
 type GetApplicationPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -1267,12 +877,6 @@ func (s GetApplicationPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApplicationPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatements sets the Statements field's value.
-func (s *GetApplicationPolicyOutput) SetStatements(v []ApplicationPolicyStatement) *GetApplicationPolicyOutput {
-	s.Statements = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationVersionsRequest
@@ -1314,24 +918,6 @@ func (s *ListApplicationVersionsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ListApplicationVersionsInput) SetApplicationId(v string) *ListApplicationVersionsInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListApplicationVersionsInput) SetMaxItems(v int64) *ListApplicationVersionsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationVersionsInput) SetNextToken(v string) *ListApplicationVersionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationVersionsResponse
 type ListApplicationVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1356,18 +942,6 @@ func (s ListApplicationVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListApplicationVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationVersionsOutput) SetNextToken(v string) *ListApplicationVersionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListApplicationVersionsOutput) SetVersions(v []VersionSummary) *ListApplicationVersionsOutput {
-	s.Versions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationsRequest
@@ -1402,18 +976,6 @@ func (s *ListApplicationsInput) Validate() error {
 	return nil
 }
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListApplicationsInput) SetMaxItems(v int64) *ListApplicationsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationsInput) SetNextToken(v string) *ListApplicationsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationsResponse
 type ListApplicationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1438,18 +1000,6 @@ func (s ListApplicationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplications sets the Applications field's value.
-func (s *ListApplicationsOutput) SetApplications(v []ApplicationSummary) *ListApplicationsOutput {
-	s.Applications = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationsOutput) SetNextToken(v string) *ListApplicationsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Parameters supported by the application.
@@ -1536,84 +1086,6 @@ func (s ParameterDefinition) GoString() string {
 	return s.String()
 }
 
-// SetAllowedPattern sets the AllowedPattern field's value.
-func (s *ParameterDefinition) SetAllowedPattern(v string) *ParameterDefinition {
-	s.AllowedPattern = &v
-	return s
-}
-
-// SetAllowedValues sets the AllowedValues field's value.
-func (s *ParameterDefinition) SetAllowedValues(v []string) *ParameterDefinition {
-	s.AllowedValues = v
-	return s
-}
-
-// SetConstraintDescription sets the ConstraintDescription field's value.
-func (s *ParameterDefinition) SetConstraintDescription(v string) *ParameterDefinition {
-	s.ConstraintDescription = &v
-	return s
-}
-
-// SetDefaultValue sets the DefaultValue field's value.
-func (s *ParameterDefinition) SetDefaultValue(v string) *ParameterDefinition {
-	s.DefaultValue = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ParameterDefinition) SetDescription(v string) *ParameterDefinition {
-	s.Description = &v
-	return s
-}
-
-// SetMaxLength sets the MaxLength field's value.
-func (s *ParameterDefinition) SetMaxLength(v int64) *ParameterDefinition {
-	s.MaxLength = &v
-	return s
-}
-
-// SetMaxValue sets the MaxValue field's value.
-func (s *ParameterDefinition) SetMaxValue(v int64) *ParameterDefinition {
-	s.MaxValue = &v
-	return s
-}
-
-// SetMinLength sets the MinLength field's value.
-func (s *ParameterDefinition) SetMinLength(v int64) *ParameterDefinition {
-	s.MinLength = &v
-	return s
-}
-
-// SetMinValue sets the MinValue field's value.
-func (s *ParameterDefinition) SetMinValue(v int64) *ParameterDefinition {
-	s.MinValue = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ParameterDefinition) SetName(v string) *ParameterDefinition {
-	s.Name = &v
-	return s
-}
-
-// SetNoEcho sets the NoEcho field's value.
-func (s *ParameterDefinition) SetNoEcho(v bool) *ParameterDefinition {
-	s.NoEcho = &v
-	return s
-}
-
-// SetReferencedByResources sets the ReferencedByResources field's value.
-func (s *ParameterDefinition) SetReferencedByResources(v []string) *ParameterDefinition {
-	s.ReferencedByResources = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ParameterDefinition) SetType(v string) *ParameterDefinition {
-	s.Type = &v
-	return s
-}
-
 // Parameter value of the application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ParameterValue
 type ParameterValue struct {
@@ -1636,18 +1108,6 @@ func (s ParameterValue) String() string {
 // GoString returns the string representation
 func (s ParameterValue) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *ParameterValue) SetName(v string) *ParameterValue {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ParameterValue) SetValue(v string) *ParameterValue {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/PutApplicationPolicyRequest
@@ -1684,18 +1144,6 @@ func (s *PutApplicationPolicyInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *PutApplicationPolicyInput) SetApplicationId(v string) *PutApplicationPolicyInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetStatements sets the Statements field's value.
-func (s *PutApplicationPolicyInput) SetStatements(v []ApplicationPolicyStatement) *PutApplicationPolicyInput {
-	s.Statements = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/PutApplicationPolicyResponse
 type PutApplicationPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -1718,12 +1166,6 @@ func (s PutApplicationPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutApplicationPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatements sets the Statements field's value.
-func (s *PutApplicationPolicyOutput) SetStatements(v []ApplicationPolicyStatement) *PutApplicationPolicyOutput {
-	s.Statements = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UpdateApplicationRequest
@@ -1766,42 +1208,6 @@ func (s *UpdateApplicationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApplicationInput) SetApplicationId(v string) *UpdateApplicationInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetAuthor sets the Author field's value.
-func (s *UpdateApplicationInput) SetAuthor(v string) *UpdateApplicationInput {
-	s.Author = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateApplicationInput) SetDescription(v string) *UpdateApplicationInput {
-	s.Description = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *UpdateApplicationInput) SetLabels(v []string) *UpdateApplicationInput {
-	s.Labels = v
-	return s
-}
-
-// SetReadmeBody sets the ReadmeBody field's value.
-func (s *UpdateApplicationInput) SetReadmeBody(v string) *UpdateApplicationInput {
-	s.ReadmeBody = &v
-	return s
-}
-
-// SetReadmeUrl sets the ReadmeUrl field's value.
-func (s *UpdateApplicationInput) SetReadmeUrl(v string) *UpdateApplicationInput {
-	s.ReadmeUrl = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UpdateApplicationResponse
@@ -1847,66 +1253,6 @@ func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *UpdateApplicationOutput) SetApplicationId(v string) *UpdateApplicationOutput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetAuthor sets the Author field's value.
-func (s *UpdateApplicationOutput) SetAuthor(v string) *UpdateApplicationOutput {
-	s.Author = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *UpdateApplicationOutput) SetCreationTime(v string) *UpdateApplicationOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateApplicationOutput) SetDescription(v string) *UpdateApplicationOutput {
-	s.Description = &v
-	return s
-}
-
-// SetLabels sets the Labels field's value.
-func (s *UpdateApplicationOutput) SetLabels(v []string) *UpdateApplicationOutput {
-	s.Labels = v
-	return s
-}
-
-// SetLicenseUrl sets the LicenseUrl field's value.
-func (s *UpdateApplicationOutput) SetLicenseUrl(v string) *UpdateApplicationOutput {
-	s.LicenseUrl = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateApplicationOutput) SetName(v string) *UpdateApplicationOutput {
-	s.Name = &v
-	return s
-}
-
-// SetReadmeUrl sets the ReadmeUrl field's value.
-func (s *UpdateApplicationOutput) SetReadmeUrl(v string) *UpdateApplicationOutput {
-	s.ReadmeUrl = &v
-	return s
-}
-
-// SetSpdxLicenseId sets the SpdxLicenseId field's value.
-func (s *UpdateApplicationOutput) SetSpdxLicenseId(v string) *UpdateApplicationOutput {
-	s.SpdxLicenseId = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *UpdateApplicationOutput) SetVersion(v *Version) *UpdateApplicationOutput {
-	s.Version = v
-	return s
-}
-
 // Application version details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Version
 type Version struct {
@@ -1941,42 +1287,6 @@ func (s Version) GoString() string {
 	return s.String()
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *Version) SetApplicationId(v string) *Version {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *Version) SetCreationTime(v string) *Version {
-	s.CreationTime = &v
-	return s
-}
-
-// SetParameterDefinitions sets the ParameterDefinitions field's value.
-func (s *Version) SetParameterDefinitions(v []ParameterDefinition) *Version {
-	s.ParameterDefinitions = v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *Version) SetSemanticVersion(v string) *Version {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetSourceCodeUrl sets the SourceCodeUrl field's value.
-func (s *Version) SetSourceCodeUrl(v string) *Version {
-	s.SourceCodeUrl = &v
-	return s
-}
-
-// SetTemplateUrl sets the TemplateUrl field's value.
-func (s *Version) SetTemplateUrl(v string) *Version {
-	s.TemplateUrl = &v
-	return s
-}
-
 // Application version summary.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/VersionSummary
 type VersionSummary struct {
@@ -2003,28 +1313,4 @@ func (s VersionSummary) String() string {
 // GoString returns the string representation
 func (s VersionSummary) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *VersionSummary) SetApplicationId(v string) *VersionSummary {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *VersionSummary) SetCreationTime(v string) *VersionSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetSemanticVersion sets the SemanticVersion field's value.
-func (s *VersionSummary) SetSemanticVersion(v string) *VersionSummary {
-	s.SemanticVersion = &v
-	return s
-}
-
-// SetSourceCodeUrl sets the SourceCodeUrl field's value.
-func (s *VersionSummary) SetSourceCodeUrl(v string) *VersionSummary {
-	s.SourceCodeUrl = &v
-	return s
 }

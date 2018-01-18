@@ -915,60 +915,6 @@ func (s AacSettings) GoString() string {
 	return s.String()
 }
 
-// SetBitrate sets the Bitrate field's value.
-func (s *AacSettings) SetBitrate(v float64) *AacSettings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *AacSettings) SetCodingMode(v AacCodingMode) *AacSettings {
-	s.CodingMode = v
-	return s
-}
-
-// SetInputType sets the InputType field's value.
-func (s *AacSettings) SetInputType(v AacInputType) *AacSettings {
-	s.InputType = v
-	return s
-}
-
-// SetProfile sets the Profile field's value.
-func (s *AacSettings) SetProfile(v AacProfile) *AacSettings {
-	s.Profile = v
-	return s
-}
-
-// SetRateControlMode sets the RateControlMode field's value.
-func (s *AacSettings) SetRateControlMode(v AacRateControlMode) *AacSettings {
-	s.RateControlMode = v
-	return s
-}
-
-// SetRawFormat sets the RawFormat field's value.
-func (s *AacSettings) SetRawFormat(v AacRawFormat) *AacSettings {
-	s.RawFormat = v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *AacSettings) SetSampleRate(v float64) *AacSettings {
-	s.SampleRate = &v
-	return s
-}
-
-// SetSpec sets the Spec field's value.
-func (s *AacSettings) SetSpec(v AacSpec) *AacSettings {
-	s.Spec = v
-	return s
-}
-
-// SetVbrQuality sets the VbrQuality field's value.
-func (s *AacSettings) SetVbrQuality(v AacVbrQuality) *AacSettings {
-	s.VbrQuality = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Ac3Settings
 type Ac3Settings struct {
 	_ struct{} `type:"structure"`
@@ -1011,48 +957,6 @@ func (s Ac3Settings) GoString() string {
 	return s.String()
 }
 
-// SetBitrate sets the Bitrate field's value.
-func (s *Ac3Settings) SetBitrate(v float64) *Ac3Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBitstreamMode sets the BitstreamMode field's value.
-func (s *Ac3Settings) SetBitstreamMode(v Ac3BitstreamMode) *Ac3Settings {
-	s.BitstreamMode = v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *Ac3Settings) SetCodingMode(v Ac3CodingMode) *Ac3Settings {
-	s.CodingMode = v
-	return s
-}
-
-// SetDialnorm sets the Dialnorm field's value.
-func (s *Ac3Settings) SetDialnorm(v int64) *Ac3Settings {
-	s.Dialnorm = &v
-	return s
-}
-
-// SetDrcProfile sets the DrcProfile field's value.
-func (s *Ac3Settings) SetDrcProfile(v Ac3DrcProfile) *Ac3Settings {
-	s.DrcProfile = v
-	return s
-}
-
-// SetLfeFilter sets the LfeFilter field's value.
-func (s *Ac3Settings) SetLfeFilter(v Ac3LfeFilter) *Ac3Settings {
-	s.LfeFilter = v
-	return s
-}
-
-// SetMetadataControl sets the MetadataControl field's value.
-func (s *Ac3Settings) SetMetadataControl(v Ac3MetadataControl) *Ac3Settings {
-	s.MetadataControl = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveContainerSettings
 type ArchiveContainerSettings struct {
 	_ struct{} `type:"structure"`
@@ -1068,12 +972,6 @@ func (s ArchiveContainerSettings) String() string {
 // GoString returns the string representation
 func (s ArchiveContainerSettings) GoString() string {
 	return s.String()
-}
-
-// SetM2tsSettings sets the M2tsSettings field's value.
-func (s *ArchiveContainerSettings) SetM2tsSettings(v *M2tsSettings) *ArchiveContainerSettings {
-	s.M2tsSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveGroupSettings
@@ -1100,18 +998,6 @@ func (s ArchiveGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetDestination sets the Destination field's value.
-func (s *ArchiveGroupSettings) SetDestination(v *OutputLocationRef) *ArchiveGroupSettings {
-	s.Destination = v
-	return s
-}
-
-// SetRolloverInterval sets the RolloverInterval field's value.
-func (s *ArchiveGroupSettings) SetRolloverInterval(v int64) *ArchiveGroupSettings {
-	s.RolloverInterval = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveOutputSettings
 type ArchiveOutputSettings struct {
 	_ struct{} `type:"structure"`
@@ -1136,24 +1022,6 @@ func (s ArchiveOutputSettings) String() string {
 // GoString returns the string representation
 func (s ArchiveOutputSettings) GoString() string {
 	return s.String()
-}
-
-// SetContainerSettings sets the ContainerSettings field's value.
-func (s *ArchiveOutputSettings) SetContainerSettings(v *ArchiveContainerSettings) *ArchiveOutputSettings {
-	s.ContainerSettings = v
-	return s
-}
-
-// SetExtension sets the Extension field's value.
-func (s *ArchiveOutputSettings) SetExtension(v string) *ArchiveOutputSettings {
-	s.Extension = &v
-	return s
-}
-
-// SetNameModifier sets the NameModifier field's value.
-func (s *ArchiveOutputSettings) SetNameModifier(v string) *ArchiveOutputSettings {
-	s.NameModifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AribDestinationSettings
@@ -1208,18 +1076,6 @@ func (s AudioChannelMapping) GoString() string {
 	return s.String()
 }
 
-// SetInputChannelLevels sets the InputChannelLevels field's value.
-func (s *AudioChannelMapping) SetInputChannelLevels(v []InputChannelLevel) *AudioChannelMapping {
-	s.InputChannelLevels = v
-	return s
-}
-
-// SetOutputChannel sets the OutputChannel field's value.
-func (s *AudioChannelMapping) SetOutputChannel(v int64) *AudioChannelMapping {
-	s.OutputChannel = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioCodecSettings
 type AudioCodecSettings struct {
 	_ struct{} `type:"structure"`
@@ -1243,36 +1099,6 @@ func (s AudioCodecSettings) String() string {
 // GoString returns the string representation
 func (s AudioCodecSettings) GoString() string {
 	return s.String()
-}
-
-// SetAacSettings sets the AacSettings field's value.
-func (s *AudioCodecSettings) SetAacSettings(v *AacSettings) *AudioCodecSettings {
-	s.AacSettings = v
-	return s
-}
-
-// SetAc3Settings sets the Ac3Settings field's value.
-func (s *AudioCodecSettings) SetAc3Settings(v *Ac3Settings) *AudioCodecSettings {
-	s.Ac3Settings = v
-	return s
-}
-
-// SetEac3Settings sets the Eac3Settings field's value.
-func (s *AudioCodecSettings) SetEac3Settings(v *Eac3Settings) *AudioCodecSettings {
-	s.Eac3Settings = v
-	return s
-}
-
-// SetMp2Settings sets the Mp2Settings field's value.
-func (s *AudioCodecSettings) SetMp2Settings(v *Mp2Settings) *AudioCodecSettings {
-	s.Mp2Settings = v
-	return s
-}
-
-// SetPassThroughSettings sets the PassThroughSettings field's value.
-func (s *AudioCodecSettings) SetPassThroughSettings(v *PassThroughSettings) *AudioCodecSettings {
-	s.PassThroughSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioDescription
@@ -1334,66 +1160,6 @@ func (s AudioDescription) GoString() string {
 	return s.String()
 }
 
-// SetAudioNormalizationSettings sets the AudioNormalizationSettings field's value.
-func (s *AudioDescription) SetAudioNormalizationSettings(v *AudioNormalizationSettings) *AudioDescription {
-	s.AudioNormalizationSettings = v
-	return s
-}
-
-// SetAudioSelectorName sets the AudioSelectorName field's value.
-func (s *AudioDescription) SetAudioSelectorName(v string) *AudioDescription {
-	s.AudioSelectorName = &v
-	return s
-}
-
-// SetAudioType sets the AudioType field's value.
-func (s *AudioDescription) SetAudioType(v AudioType) *AudioDescription {
-	s.AudioType = v
-	return s
-}
-
-// SetAudioTypeControl sets the AudioTypeControl field's value.
-func (s *AudioDescription) SetAudioTypeControl(v AudioDescriptionAudioTypeControl) *AudioDescription {
-	s.AudioTypeControl = v
-	return s
-}
-
-// SetCodecSettings sets the CodecSettings field's value.
-func (s *AudioDescription) SetCodecSettings(v *AudioCodecSettings) *AudioDescription {
-	s.CodecSettings = v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *AudioDescription) SetLanguageCode(v string) *AudioDescription {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetLanguageCodeControl sets the LanguageCodeControl field's value.
-func (s *AudioDescription) SetLanguageCodeControl(v AudioDescriptionLanguageCodeControl) *AudioDescription {
-	s.LanguageCodeControl = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AudioDescription) SetName(v string) *AudioDescription {
-	s.Name = &v
-	return s
-}
-
-// SetRemixSettings sets the RemixSettings field's value.
-func (s *AudioDescription) SetRemixSettings(v *RemixSettings) *AudioDescription {
-	s.RemixSettings = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *AudioDescription) SetStreamName(v string) *AudioDescription {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioLanguageSelection
 type AudioLanguageSelection struct {
 	_ struct{} `type:"structure"`
@@ -1418,18 +1184,6 @@ func (s AudioLanguageSelection) String() string {
 // GoString returns the string representation
 func (s AudioLanguageSelection) GoString() string {
 	return s.String()
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *AudioLanguageSelection) SetLanguageCode(v string) *AudioLanguageSelection {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetLanguageSelectionPolicy sets the LanguageSelectionPolicy field's value.
-func (s *AudioLanguageSelection) SetLanguageSelectionPolicy(v AudioLanguageSelectionPolicy) *AudioLanguageSelection {
-	s.LanguageSelectionPolicy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioNormalizationSettings
@@ -1459,24 +1213,6 @@ func (s AudioNormalizationSettings) String() string {
 // GoString returns the string representation
 func (s AudioNormalizationSettings) GoString() string {
 	return s.String()
-}
-
-// SetAlgorithm sets the Algorithm field's value.
-func (s *AudioNormalizationSettings) SetAlgorithm(v AudioNormalizationAlgorithm) *AudioNormalizationSettings {
-	s.Algorithm = v
-	return s
-}
-
-// SetAlgorithmControl sets the AlgorithmControl field's value.
-func (s *AudioNormalizationSettings) SetAlgorithmControl(v AudioNormalizationAlgorithmControl) *AudioNormalizationSettings {
-	s.AlgorithmControl = v
-	return s
-}
-
-// SetTargetLkfs sets the TargetLkfs field's value.
-func (s *AudioNormalizationSettings) SetTargetLkfs(v float64) *AudioNormalizationSettings {
-	s.TargetLkfs = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioOnlyHlsSettings
@@ -1519,24 +1255,6 @@ func (s AudioOnlyHlsSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioGroupId sets the AudioGroupId field's value.
-func (s *AudioOnlyHlsSettings) SetAudioGroupId(v string) *AudioOnlyHlsSettings {
-	s.AudioGroupId = &v
-	return s
-}
-
-// SetAudioOnlyImage sets the AudioOnlyImage field's value.
-func (s *AudioOnlyHlsSettings) SetAudioOnlyImage(v *InputLocation) *AudioOnlyHlsSettings {
-	s.AudioOnlyImage = v
-	return s
-}
-
-// SetAudioTrackType sets the AudioTrackType field's value.
-func (s *AudioOnlyHlsSettings) SetAudioTrackType(v AudioOnlyHlsTrackType) *AudioOnlyHlsSettings {
-	s.AudioTrackType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioPidSelection
 type AudioPidSelection struct {
 	_ struct{} `type:"structure"`
@@ -1553,12 +1271,6 @@ func (s AudioPidSelection) String() string {
 // GoString returns the string representation
 func (s AudioPidSelection) GoString() string {
 	return s.String()
-}
-
-// SetPid sets the Pid field's value.
-func (s *AudioPidSelection) SetPid(v int64) *AudioPidSelection {
-	s.Pid = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelector
@@ -1583,18 +1295,6 @@ func (s AudioSelector) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *AudioSelector) SetName(v string) *AudioSelector {
-	s.Name = &v
-	return s
-}
-
-// SetSelectorSettings sets the SelectorSettings field's value.
-func (s *AudioSelector) SetSelectorSettings(v *AudioSelectorSettings) *AudioSelector {
-	s.SelectorSettings = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelectorSettings
 type AudioSelectorSettings struct {
 	_ struct{} `type:"structure"`
@@ -1612,18 +1312,6 @@ func (s AudioSelectorSettings) String() string {
 // GoString returns the string representation
 func (s AudioSelectorSettings) GoString() string {
 	return s.String()
-}
-
-// SetAudioLanguageSelection sets the AudioLanguageSelection field's value.
-func (s *AudioSelectorSettings) SetAudioLanguageSelection(v *AudioLanguageSelection) *AudioSelectorSettings {
-	s.AudioLanguageSelection = v
-	return s
-}
-
-// SetAudioPidSelection sets the AudioPidSelection field's value.
-func (s *AudioSelectorSettings) SetAudioPidSelection(v *AudioPidSelection) *AudioSelectorSettings {
-	s.AudioPidSelection = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailBlanking
@@ -1649,18 +1337,6 @@ func (s AvailBlanking) GoString() string {
 	return s.String()
 }
 
-// SetAvailBlankingImage sets the AvailBlankingImage field's value.
-func (s *AvailBlanking) SetAvailBlankingImage(v *InputLocation) *AvailBlanking {
-	s.AvailBlankingImage = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *AvailBlanking) SetState(v AvailBlankingState) *AvailBlanking {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailConfiguration
 type AvailConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -1677,12 +1353,6 @@ func (s AvailConfiguration) String() string {
 // GoString returns the string representation
 func (s AvailConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetAvailSettings sets the AvailSettings field's value.
-func (s *AvailConfiguration) SetAvailSettings(v *AvailSettings) *AvailConfiguration {
-	s.AvailSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailSettings
@@ -1702,18 +1372,6 @@ func (s AvailSettings) String() string {
 // GoString returns the string representation
 func (s AvailSettings) GoString() string {
 	return s.String()
-}
-
-// SetScte35SpliceInsert sets the Scte35SpliceInsert field's value.
-func (s *AvailSettings) SetScte35SpliceInsert(v *Scte35SpliceInsert) *AvailSettings {
-	s.Scte35SpliceInsert = v
-	return s
-}
-
-// SetScte35TimeSignalApos sets the Scte35TimeSignalApos field's value.
-func (s *AvailSettings) SetScte35TimeSignalApos(v *Scte35TimeSignalApos) *AvailSettings {
-	s.Scte35TimeSignalApos = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BlackoutSlate
@@ -1752,36 +1410,6 @@ func (s BlackoutSlate) String() string {
 // GoString returns the string representation
 func (s BlackoutSlate) GoString() string {
 	return s.String()
-}
-
-// SetBlackoutSlateImage sets the BlackoutSlateImage field's value.
-func (s *BlackoutSlate) SetBlackoutSlateImage(v *InputLocation) *BlackoutSlate {
-	s.BlackoutSlateImage = v
-	return s
-}
-
-// SetNetworkEndBlackout sets the NetworkEndBlackout field's value.
-func (s *BlackoutSlate) SetNetworkEndBlackout(v BlackoutSlateNetworkEndBlackout) *BlackoutSlate {
-	s.NetworkEndBlackout = v
-	return s
-}
-
-// SetNetworkEndBlackoutImage sets the NetworkEndBlackoutImage field's value.
-func (s *BlackoutSlate) SetNetworkEndBlackoutImage(v *InputLocation) *BlackoutSlate {
-	s.NetworkEndBlackoutImage = v
-	return s
-}
-
-// SetNetworkId sets the NetworkId field's value.
-func (s *BlackoutSlate) SetNetworkId(v string) *BlackoutSlate {
-	s.NetworkId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *BlackoutSlate) SetState(v BlackoutSlateState) *BlackoutSlate {
-	s.State = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BurnInDestinationSettings
@@ -1892,108 +1520,6 @@ func (s BurnInDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetAlignment sets the Alignment field's value.
-func (s *BurnInDestinationSettings) SetAlignment(v BurnInAlignment) *BurnInDestinationSettings {
-	s.Alignment = v
-	return s
-}
-
-// SetBackgroundColor sets the BackgroundColor field's value.
-func (s *BurnInDestinationSettings) SetBackgroundColor(v BurnInBackgroundColor) *BurnInDestinationSettings {
-	s.BackgroundColor = v
-	return s
-}
-
-// SetBackgroundOpacity sets the BackgroundOpacity field's value.
-func (s *BurnInDestinationSettings) SetBackgroundOpacity(v int64) *BurnInDestinationSettings {
-	s.BackgroundOpacity = &v
-	return s
-}
-
-// SetFont sets the Font field's value.
-func (s *BurnInDestinationSettings) SetFont(v *InputLocation) *BurnInDestinationSettings {
-	s.Font = v
-	return s
-}
-
-// SetFontColor sets the FontColor field's value.
-func (s *BurnInDestinationSettings) SetFontColor(v BurnInFontColor) *BurnInDestinationSettings {
-	s.FontColor = v
-	return s
-}
-
-// SetFontOpacity sets the FontOpacity field's value.
-func (s *BurnInDestinationSettings) SetFontOpacity(v int64) *BurnInDestinationSettings {
-	s.FontOpacity = &v
-	return s
-}
-
-// SetFontResolution sets the FontResolution field's value.
-func (s *BurnInDestinationSettings) SetFontResolution(v int64) *BurnInDestinationSettings {
-	s.FontResolution = &v
-	return s
-}
-
-// SetFontSize sets the FontSize field's value.
-func (s *BurnInDestinationSettings) SetFontSize(v string) *BurnInDestinationSettings {
-	s.FontSize = &v
-	return s
-}
-
-// SetOutlineColor sets the OutlineColor field's value.
-func (s *BurnInDestinationSettings) SetOutlineColor(v BurnInOutlineColor) *BurnInDestinationSettings {
-	s.OutlineColor = v
-	return s
-}
-
-// SetOutlineSize sets the OutlineSize field's value.
-func (s *BurnInDestinationSettings) SetOutlineSize(v int64) *BurnInDestinationSettings {
-	s.OutlineSize = &v
-	return s
-}
-
-// SetShadowColor sets the ShadowColor field's value.
-func (s *BurnInDestinationSettings) SetShadowColor(v BurnInShadowColor) *BurnInDestinationSettings {
-	s.ShadowColor = v
-	return s
-}
-
-// SetShadowOpacity sets the ShadowOpacity field's value.
-func (s *BurnInDestinationSettings) SetShadowOpacity(v int64) *BurnInDestinationSettings {
-	s.ShadowOpacity = &v
-	return s
-}
-
-// SetShadowXOffset sets the ShadowXOffset field's value.
-func (s *BurnInDestinationSettings) SetShadowXOffset(v int64) *BurnInDestinationSettings {
-	s.ShadowXOffset = &v
-	return s
-}
-
-// SetShadowYOffset sets the ShadowYOffset field's value.
-func (s *BurnInDestinationSettings) SetShadowYOffset(v int64) *BurnInDestinationSettings {
-	s.ShadowYOffset = &v
-	return s
-}
-
-// SetTeletextGridControl sets the TeletextGridControl field's value.
-func (s *BurnInDestinationSettings) SetTeletextGridControl(v BurnInTeletextGridControl) *BurnInDestinationSettings {
-	s.TeletextGridControl = v
-	return s
-}
-
-// SetXPosition sets the XPosition field's value.
-func (s *BurnInDestinationSettings) SetXPosition(v int64) *BurnInDestinationSettings {
-	s.XPosition = &v
-	return s
-}
-
-// SetYPosition sets the YPosition field's value.
-func (s *BurnInDestinationSettings) SetYPosition(v int64) *BurnInDestinationSettings {
-	s.YPosition = &v
-	return s
-}
-
 // Output groups for this Live Event. Output groups contain information about
 // where streams should be distributed.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDescription
@@ -2028,36 +1554,6 @@ func (s CaptionDescription) String() string {
 // GoString returns the string representation
 func (s CaptionDescription) GoString() string {
 	return s.String()
-}
-
-// SetCaptionSelectorName sets the CaptionSelectorName field's value.
-func (s *CaptionDescription) SetCaptionSelectorName(v string) *CaptionDescription {
-	s.CaptionSelectorName = &v
-	return s
-}
-
-// SetDestinationSettings sets the DestinationSettings field's value.
-func (s *CaptionDescription) SetDestinationSettings(v *CaptionDestinationSettings) *CaptionDescription {
-	s.DestinationSettings = v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *CaptionDescription) SetLanguageCode(v string) *CaptionDescription {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetLanguageDescription sets the LanguageDescription field's value.
-func (s *CaptionDescription) SetLanguageDescription(v string) *CaptionDescription {
-	s.LanguageDescription = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CaptionDescription) SetName(v string) *CaptionDescription {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDestinationSettings
@@ -2097,72 +1593,6 @@ func (s CaptionDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetAribDestinationSettings sets the AribDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetAribDestinationSettings(v *AribDestinationSettings) *CaptionDestinationSettings {
-	s.AribDestinationSettings = v
-	return s
-}
-
-// SetBurnInDestinationSettings sets the BurnInDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetBurnInDestinationSettings(v *BurnInDestinationSettings) *CaptionDestinationSettings {
-	s.BurnInDestinationSettings = v
-	return s
-}
-
-// SetDvbSubDestinationSettings sets the DvbSubDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetDvbSubDestinationSettings(v *DvbSubDestinationSettings) *CaptionDestinationSettings {
-	s.DvbSubDestinationSettings = v
-	return s
-}
-
-// SetEmbeddedDestinationSettings sets the EmbeddedDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetEmbeddedDestinationSettings(v *EmbeddedDestinationSettings) *CaptionDestinationSettings {
-	s.EmbeddedDestinationSettings = v
-	return s
-}
-
-// SetEmbeddedPlusScte20DestinationSettings sets the EmbeddedPlusScte20DestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetEmbeddedPlusScte20DestinationSettings(v *EmbeddedPlusScte20DestinationSettings) *CaptionDestinationSettings {
-	s.EmbeddedPlusScte20DestinationSettings = v
-	return s
-}
-
-// SetScte20PlusEmbeddedDestinationSettings sets the Scte20PlusEmbeddedDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetScte20PlusEmbeddedDestinationSettings(v *Scte20PlusEmbeddedDestinationSettings) *CaptionDestinationSettings {
-	s.Scte20PlusEmbeddedDestinationSettings = v
-	return s
-}
-
-// SetScte27DestinationSettings sets the Scte27DestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetScte27DestinationSettings(v *Scte27DestinationSettings) *CaptionDestinationSettings {
-	s.Scte27DestinationSettings = v
-	return s
-}
-
-// SetSmpteTtDestinationSettings sets the SmpteTtDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetSmpteTtDestinationSettings(v *SmpteTtDestinationSettings) *CaptionDestinationSettings {
-	s.SmpteTtDestinationSettings = v
-	return s
-}
-
-// SetTeletextDestinationSettings sets the TeletextDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetTeletextDestinationSettings(v *TeletextDestinationSettings) *CaptionDestinationSettings {
-	s.TeletextDestinationSettings = v
-	return s
-}
-
-// SetTtmlDestinationSettings sets the TtmlDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetTtmlDestinationSettings(v *TtmlDestinationSettings) *CaptionDestinationSettings {
-	s.TtmlDestinationSettings = v
-	return s
-}
-
-// SetWebvttDestinationSettings sets the WebvttDestinationSettings field's value.
-func (s *CaptionDestinationSettings) SetWebvttDestinationSettings(v *WebvttDestinationSettings) *CaptionDestinationSettings {
-	s.WebvttDestinationSettings = v
-	return s
-}
-
 // Maps a caption channel to an ISO 693-2 language code (http://www.loc.gov/standards/iso639-2),
 // with an optional description.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionLanguageMapping
@@ -2188,24 +1618,6 @@ func (s CaptionLanguageMapping) String() string {
 // GoString returns the string representation
 func (s CaptionLanguageMapping) GoString() string {
 	return s.String()
-}
-
-// SetCaptionChannel sets the CaptionChannel field's value.
-func (s *CaptionLanguageMapping) SetCaptionChannel(v int64) *CaptionLanguageMapping {
-	s.CaptionChannel = &v
-	return s
-}
-
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *CaptionLanguageMapping) SetLanguageCode(v string) *CaptionLanguageMapping {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetLanguageDescription sets the LanguageDescription field's value.
-func (s *CaptionLanguageMapping) SetLanguageDescription(v string) *CaptionLanguageMapping {
-	s.LanguageDescription = &v
-	return s
 }
 
 // Output groups for this Live Event. Output groups contain information about
@@ -2237,24 +1649,6 @@ func (s CaptionSelector) GoString() string {
 	return s.String()
 }
 
-// SetLanguageCode sets the LanguageCode field's value.
-func (s *CaptionSelector) SetLanguageCode(v string) *CaptionSelector {
-	s.LanguageCode = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CaptionSelector) SetName(v string) *CaptionSelector {
-	s.Name = &v
-	return s
-}
-
-// SetSelectorSettings sets the SelectorSettings field's value.
-func (s *CaptionSelector) SetSelectorSettings(v *CaptionSelectorSettings) *CaptionSelector {
-	s.SelectorSettings = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionSelectorSettings
 type CaptionSelectorSettings struct {
 	_ struct{} `type:"structure"`
@@ -2280,42 +1674,6 @@ func (s CaptionSelectorSettings) String() string {
 // GoString returns the string representation
 func (s CaptionSelectorSettings) GoString() string {
 	return s.String()
-}
-
-// SetAribSourceSettings sets the AribSourceSettings field's value.
-func (s *CaptionSelectorSettings) SetAribSourceSettings(v *AribSourceSettings) *CaptionSelectorSettings {
-	s.AribSourceSettings = v
-	return s
-}
-
-// SetDvbSubSourceSettings sets the DvbSubSourceSettings field's value.
-func (s *CaptionSelectorSettings) SetDvbSubSourceSettings(v *DvbSubSourceSettings) *CaptionSelectorSettings {
-	s.DvbSubSourceSettings = v
-	return s
-}
-
-// SetEmbeddedSourceSettings sets the EmbeddedSourceSettings field's value.
-func (s *CaptionSelectorSettings) SetEmbeddedSourceSettings(v *EmbeddedSourceSettings) *CaptionSelectorSettings {
-	s.EmbeddedSourceSettings = v
-	return s
-}
-
-// SetScte20SourceSettings sets the Scte20SourceSettings field's value.
-func (s *CaptionSelectorSettings) SetScte20SourceSettings(v *Scte20SourceSettings) *CaptionSelectorSettings {
-	s.Scte20SourceSettings = v
-	return s
-}
-
-// SetScte27SourceSettings sets the Scte27SourceSettings field's value.
-func (s *CaptionSelectorSettings) SetScte27SourceSettings(v *Scte27SourceSettings) *CaptionSelectorSettings {
-	s.Scte27SourceSettings = v
-	return s
-}
-
-// SetTeletextSourceSettings sets the TeletextSourceSettings field's value.
-func (s *CaptionSelectorSettings) SetTeletextSourceSettings(v *TeletextSourceSettings) *CaptionSelectorSettings {
-	s.TeletextSourceSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel
@@ -2363,66 +1721,6 @@ func (s Channel) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Channel) SetArn(v string) *Channel {
-	s.Arn = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *Channel) SetDestinations(v []OutputDestination) *Channel {
-	s.Destinations = v
-	return s
-}
-
-// SetEgressEndpoints sets the EgressEndpoints field's value.
-func (s *Channel) SetEgressEndpoints(v []ChannelEgressEndpoint) *Channel {
-	s.EgressEndpoints = v
-	return s
-}
-
-// SetEncoderSettings sets the EncoderSettings field's value.
-func (s *Channel) SetEncoderSettings(v *EncoderSettings) *Channel {
-	s.EncoderSettings = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Channel) SetId(v string) *Channel {
-	s.Id = &v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *Channel) SetInputAttachments(v []InputAttachment) *Channel {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Channel) SetName(v string) *Channel {
-	s.Name = &v
-	return s
-}
-
-// SetPipelinesRunningCount sets the PipelinesRunningCount field's value.
-func (s *Channel) SetPipelinesRunningCount(v int64) *Channel {
-	s.PipelinesRunningCount = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *Channel) SetRoleArn(v string) *Channel {
-	s.RoleArn = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Channel) SetState(v ChannelState) *Channel {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelEgressEndpoint
 type ChannelEgressEndpoint struct {
 	_ struct{} `type:"structure"`
@@ -2439,12 +1737,6 @@ func (s ChannelEgressEndpoint) String() string {
 // GoString returns the string representation
 func (s ChannelEgressEndpoint) GoString() string {
 	return s.String()
-}
-
-// SetSourceIp sets the SourceIp field's value.
-func (s *ChannelEgressEndpoint) SetSourceIp(v string) *ChannelEgressEndpoint {
-	s.SourceIp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary
@@ -2490,60 +1782,6 @@ func (s ChannelSummary) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *ChannelSummary) SetArn(v string) *ChannelSummary {
-	s.Arn = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *ChannelSummary) SetDestinations(v []OutputDestination) *ChannelSummary {
-	s.Destinations = v
-	return s
-}
-
-// SetEgressEndpoints sets the EgressEndpoints field's value.
-func (s *ChannelSummary) SetEgressEndpoints(v []ChannelEgressEndpoint) *ChannelSummary {
-	s.EgressEndpoints = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ChannelSummary) SetId(v string) *ChannelSummary {
-	s.Id = &v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *ChannelSummary) SetInputAttachments(v []InputAttachment) *ChannelSummary {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ChannelSummary) SetName(v string) *ChannelSummary {
-	s.Name = &v
-	return s
-}
-
-// SetPipelinesRunningCount sets the PipelinesRunningCount field's value.
-func (s *ChannelSummary) SetPipelinesRunningCount(v int64) *ChannelSummary {
-	s.PipelinesRunningCount = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *ChannelSummary) SetRoleArn(v string) *ChannelSummary {
-	s.RoleArn = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ChannelSummary) SetState(v ChannelState) *ChannelSummary {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest
 type CreateChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -2573,48 +1811,6 @@ func (s CreateChannelInput) GoString() string {
 	return s.String()
 }
 
-// SetDestinations sets the Destinations field's value.
-func (s *CreateChannelInput) SetDestinations(v []OutputDestination) *CreateChannelInput {
-	s.Destinations = v
-	return s
-}
-
-// SetEncoderSettings sets the EncoderSettings field's value.
-func (s *CreateChannelInput) SetEncoderSettings(v *EncoderSettings) *CreateChannelInput {
-	s.EncoderSettings = v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *CreateChannelInput) SetInputAttachments(v []InputAttachment) *CreateChannelInput {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateChannelInput) SetName(v string) *CreateChannelInput {
-	s.Name = &v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *CreateChannelInput) SetRequestId(v string) *CreateChannelInput {
-	s.RequestId = &v
-	return s
-}
-
-// SetReserved sets the Reserved field's value.
-func (s *CreateChannelInput) SetReserved(v string) *CreateChannelInput {
-	s.Reserved = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *CreateChannelInput) SetRoleArn(v string) *CreateChannelInput {
-	s.RoleArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelResponse
 type CreateChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -2637,12 +1833,6 @@ func (s CreateChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChannel sets the Channel field's value.
-func (s *CreateChannelOutput) SetChannel(v *Channel) *CreateChannelOutput {
-	s.Channel = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest
@@ -2672,42 +1862,6 @@ func (s CreateInputInput) GoString() string {
 	return s.String()
 }
 
-// SetDestinations sets the Destinations field's value.
-func (s *CreateInputInput) SetDestinations(v []InputDestinationRequest) *CreateInputInput {
-	s.Destinations = v
-	return s
-}
-
-// SetInputSecurityGroups sets the InputSecurityGroups field's value.
-func (s *CreateInputInput) SetInputSecurityGroups(v []string) *CreateInputInput {
-	s.InputSecurityGroups = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateInputInput) SetName(v string) *CreateInputInput {
-	s.Name = &v
-	return s
-}
-
-// SetRequestId sets the RequestId field's value.
-func (s *CreateInputInput) SetRequestId(v string) *CreateInputInput {
-	s.RequestId = &v
-	return s
-}
-
-// SetSources sets the Sources field's value.
-func (s *CreateInputInput) SetSources(v []InputSourceRequest) *CreateInputInput {
-	s.Sources = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateInputInput) SetType(v InputType) *CreateInputInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputResponse
 type CreateInputOutput struct {
 	_ struct{} `type:"structure"`
@@ -2732,12 +1886,6 @@ func (s CreateInputOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInput sets the Input field's value.
-func (s *CreateInputOutput) SetInput(v *Input) *CreateInputOutput {
-	s.Input = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputSecurityGroupRequest
 type CreateInputSecurityGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -2753,12 +1901,6 @@ func (s CreateInputSecurityGroupInput) String() string {
 // GoString returns the string representation
 func (s CreateInputSecurityGroupInput) GoString() string {
 	return s.String()
-}
-
-// SetWhitelistRules sets the WhitelistRules field's value.
-func (s *CreateInputSecurityGroupInput) SetWhitelistRules(v []InputWhitelistRuleCidr) *CreateInputSecurityGroupInput {
-	s.WhitelistRules = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputSecurityGroupResponse
@@ -2784,12 +1926,6 @@ func (s CreateInputSecurityGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateInputSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSecurityGroup sets the SecurityGroup field's value.
-func (s *CreateInputSecurityGroupOutput) SetSecurityGroup(v *InputSecurityGroup) *CreateInputSecurityGroupOutput {
-	s.SecurityGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelRequest
@@ -2822,12 +1958,6 @@ func (s *DeleteChannelInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *DeleteChannelInput) SetChannelId(v string) *DeleteChannelInput {
-	s.ChannelId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse
@@ -2872,66 +2002,6 @@ func (s DeleteChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DeleteChannelOutput) SetArn(v string) *DeleteChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *DeleteChannelOutput) SetDestinations(v []OutputDestination) *DeleteChannelOutput {
-	s.Destinations = v
-	return s
-}
-
-// SetEgressEndpoints sets the EgressEndpoints field's value.
-func (s *DeleteChannelOutput) SetEgressEndpoints(v []ChannelEgressEndpoint) *DeleteChannelOutput {
-	s.EgressEndpoints = v
-	return s
-}
-
-// SetEncoderSettings sets the EncoderSettings field's value.
-func (s *DeleteChannelOutput) SetEncoderSettings(v *EncoderSettings) *DeleteChannelOutput {
-	s.EncoderSettings = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteChannelOutput) SetId(v string) *DeleteChannelOutput {
-	s.Id = &v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *DeleteChannelOutput) SetInputAttachments(v []InputAttachment) *DeleteChannelOutput {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteChannelOutput) SetName(v string) *DeleteChannelOutput {
-	s.Name = &v
-	return s
-}
-
-// SetPipelinesRunningCount sets the PipelinesRunningCount field's value.
-func (s *DeleteChannelOutput) SetPipelinesRunningCount(v int64) *DeleteChannelOutput {
-	s.PipelinesRunningCount = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DeleteChannelOutput) SetRoleArn(v string) *DeleteChannelOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DeleteChannelOutput) SetState(v ChannelState) *DeleteChannelOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteInputRequest
 type DeleteInputInput struct {
 	_ struct{} `type:"structure"`
@@ -2962,12 +2032,6 @@ func (s *DeleteInputInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInputId sets the InputId field's value.
-func (s *DeleteInputInput) SetInputId(v string) *DeleteInputInput {
-	s.InputId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteInputResponse
@@ -3024,12 +2088,6 @@ func (s *DeleteInputSecurityGroupInput) Validate() error {
 	return nil
 }
 
-// SetInputSecurityGroupId sets the InputSecurityGroupId field's value.
-func (s *DeleteInputSecurityGroupInput) SetInputSecurityGroupId(v string) *DeleteInputSecurityGroupInput {
-	s.InputSecurityGroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteInputSecurityGroupResponse
 type DeleteInputSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3084,12 +2142,6 @@ func (s *DescribeChannelInput) Validate() error {
 	return nil
 }
 
-// SetChannelId sets the ChannelId field's value.
-func (s *DescribeChannelInput) SetChannelId(v string) *DescribeChannelInput {
-	s.ChannelId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse
 type DescribeChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -3132,66 +2184,6 @@ func (s DescribeChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DescribeChannelOutput) SetArn(v string) *DescribeChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *DescribeChannelOutput) SetDestinations(v []OutputDestination) *DescribeChannelOutput {
-	s.Destinations = v
-	return s
-}
-
-// SetEgressEndpoints sets the EgressEndpoints field's value.
-func (s *DescribeChannelOutput) SetEgressEndpoints(v []ChannelEgressEndpoint) *DescribeChannelOutput {
-	s.EgressEndpoints = v
-	return s
-}
-
-// SetEncoderSettings sets the EncoderSettings field's value.
-func (s *DescribeChannelOutput) SetEncoderSettings(v *EncoderSettings) *DescribeChannelOutput {
-	s.EncoderSettings = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeChannelOutput) SetId(v string) *DescribeChannelOutput {
-	s.Id = &v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *DescribeChannelOutput) SetInputAttachments(v []InputAttachment) *DescribeChannelOutput {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeChannelOutput) SetName(v string) *DescribeChannelOutput {
-	s.Name = &v
-	return s
-}
-
-// SetPipelinesRunningCount sets the PipelinesRunningCount field's value.
-func (s *DescribeChannelOutput) SetPipelinesRunningCount(v int64) *DescribeChannelOutput {
-	s.PipelinesRunningCount = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *DescribeChannelOutput) SetRoleArn(v string) *DescribeChannelOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeChannelOutput) SetState(v ChannelState) *DescribeChannelOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputRequest
 type DescribeInputInput struct {
 	_ struct{} `type:"structure"`
@@ -3222,12 +2214,6 @@ func (s *DescribeInputInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInputId sets the InputId field's value.
-func (s *DescribeInputInput) SetInputId(v string) *DescribeInputInput {
-	s.InputId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputResponse
@@ -3270,60 +2256,6 @@ func (s DescribeInputOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DescribeInputOutput) SetArn(v string) *DescribeInputOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetAttachedChannels sets the AttachedChannels field's value.
-func (s *DescribeInputOutput) SetAttachedChannels(v []string) *DescribeInputOutput {
-	s.AttachedChannels = v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *DescribeInputOutput) SetDestinations(v []InputDestination) *DescribeInputOutput {
-	s.Destinations = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeInputOutput) SetId(v string) *DescribeInputOutput {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DescribeInputOutput) SetName(v string) *DescribeInputOutput {
-	s.Name = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *DescribeInputOutput) SetSecurityGroups(v []string) *DescribeInputOutput {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSources sets the Sources field's value.
-func (s *DescribeInputOutput) SetSources(v []InputSource) *DescribeInputOutput {
-	s.Sources = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *DescribeInputOutput) SetState(v InputState) *DescribeInputOutput {
-	s.State = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DescribeInputOutput) SetType(v InputType) *DescribeInputOutput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputSecurityGroupRequest
 type DescribeInputSecurityGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -3356,12 +2288,6 @@ func (s *DescribeInputSecurityGroupInput) Validate() error {
 	return nil
 }
 
-// SetInputSecurityGroupId sets the InputSecurityGroupId field's value.
-func (s *DescribeInputSecurityGroupInput) SetInputSecurityGroupId(v string) *DescribeInputSecurityGroupInput {
-	s.InputSecurityGroupId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputSecurityGroupResponse
 type DescribeInputSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3390,24 +2316,6 @@ func (s DescribeInputSecurityGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *DescribeInputSecurityGroupOutput) SetArn(v string) *DescribeInputSecurityGroupOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DescribeInputSecurityGroupOutput) SetId(v string) *DescribeInputSecurityGroupOutput {
-	s.Id = &v
-	return s
-}
-
-// SetWhitelistRules sets the WhitelistRules field's value.
-func (s *DescribeInputSecurityGroupOutput) SetWhitelistRules(v []InputWhitelistRule) *DescribeInputSecurityGroupOutput {
-	s.WhitelistRules = v
-	return s
-}
-
 // DVB Network Information Table (NIT)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbNitSettings
 type DvbNitSettings struct {
@@ -3433,24 +2341,6 @@ func (s DvbNitSettings) String() string {
 // GoString returns the string representation
 func (s DvbNitSettings) GoString() string {
 	return s.String()
-}
-
-// SetNetworkId sets the NetworkId field's value.
-func (s *DvbNitSettings) SetNetworkId(v int64) *DvbNitSettings {
-	s.NetworkId = &v
-	return s
-}
-
-// SetNetworkName sets the NetworkName field's value.
-func (s *DvbNitSettings) SetNetworkName(v string) *DvbNitSettings {
-	s.NetworkName = &v
-	return s
-}
-
-// SetRepInterval sets the RepInterval field's value.
-func (s *DvbNitSettings) SetRepInterval(v int64) *DvbNitSettings {
-	s.RepInterval = &v
-	return s
 }
 
 // DVB Service Description Table (SDT)
@@ -3487,30 +2377,6 @@ func (s DvbSdtSettings) String() string {
 // GoString returns the string representation
 func (s DvbSdtSettings) GoString() string {
 	return s.String()
-}
-
-// SetOutputSdt sets the OutputSdt field's value.
-func (s *DvbSdtSettings) SetOutputSdt(v DvbSdtOutputSdt) *DvbSdtSettings {
-	s.OutputSdt = v
-	return s
-}
-
-// SetRepInterval sets the RepInterval field's value.
-func (s *DvbSdtSettings) SetRepInterval(v int64) *DvbSdtSettings {
-	s.RepInterval = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *DvbSdtSettings) SetServiceName(v string) *DvbSdtSettings {
-	s.ServiceName = &v
-	return s
-}
-
-// SetServiceProviderName sets the ServiceProviderName field's value.
-func (s *DvbSdtSettings) SetServiceProviderName(v string) *DvbSdtSettings {
-	s.ServiceProviderName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSubDestinationSettings
@@ -3627,108 +2493,6 @@ func (s DvbSubDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetAlignment sets the Alignment field's value.
-func (s *DvbSubDestinationSettings) SetAlignment(v DvbSubDestinationAlignment) *DvbSubDestinationSettings {
-	s.Alignment = v
-	return s
-}
-
-// SetBackgroundColor sets the BackgroundColor field's value.
-func (s *DvbSubDestinationSettings) SetBackgroundColor(v DvbSubDestinationBackgroundColor) *DvbSubDestinationSettings {
-	s.BackgroundColor = v
-	return s
-}
-
-// SetBackgroundOpacity sets the BackgroundOpacity field's value.
-func (s *DvbSubDestinationSettings) SetBackgroundOpacity(v int64) *DvbSubDestinationSettings {
-	s.BackgroundOpacity = &v
-	return s
-}
-
-// SetFont sets the Font field's value.
-func (s *DvbSubDestinationSettings) SetFont(v *InputLocation) *DvbSubDestinationSettings {
-	s.Font = v
-	return s
-}
-
-// SetFontColor sets the FontColor field's value.
-func (s *DvbSubDestinationSettings) SetFontColor(v DvbSubDestinationFontColor) *DvbSubDestinationSettings {
-	s.FontColor = v
-	return s
-}
-
-// SetFontOpacity sets the FontOpacity field's value.
-func (s *DvbSubDestinationSettings) SetFontOpacity(v int64) *DvbSubDestinationSettings {
-	s.FontOpacity = &v
-	return s
-}
-
-// SetFontResolution sets the FontResolution field's value.
-func (s *DvbSubDestinationSettings) SetFontResolution(v int64) *DvbSubDestinationSettings {
-	s.FontResolution = &v
-	return s
-}
-
-// SetFontSize sets the FontSize field's value.
-func (s *DvbSubDestinationSettings) SetFontSize(v string) *DvbSubDestinationSettings {
-	s.FontSize = &v
-	return s
-}
-
-// SetOutlineColor sets the OutlineColor field's value.
-func (s *DvbSubDestinationSettings) SetOutlineColor(v DvbSubDestinationOutlineColor) *DvbSubDestinationSettings {
-	s.OutlineColor = v
-	return s
-}
-
-// SetOutlineSize sets the OutlineSize field's value.
-func (s *DvbSubDestinationSettings) SetOutlineSize(v int64) *DvbSubDestinationSettings {
-	s.OutlineSize = &v
-	return s
-}
-
-// SetShadowColor sets the ShadowColor field's value.
-func (s *DvbSubDestinationSettings) SetShadowColor(v DvbSubDestinationShadowColor) *DvbSubDestinationSettings {
-	s.ShadowColor = v
-	return s
-}
-
-// SetShadowOpacity sets the ShadowOpacity field's value.
-func (s *DvbSubDestinationSettings) SetShadowOpacity(v int64) *DvbSubDestinationSettings {
-	s.ShadowOpacity = &v
-	return s
-}
-
-// SetShadowXOffset sets the ShadowXOffset field's value.
-func (s *DvbSubDestinationSettings) SetShadowXOffset(v int64) *DvbSubDestinationSettings {
-	s.ShadowXOffset = &v
-	return s
-}
-
-// SetShadowYOffset sets the ShadowYOffset field's value.
-func (s *DvbSubDestinationSettings) SetShadowYOffset(v int64) *DvbSubDestinationSettings {
-	s.ShadowYOffset = &v
-	return s
-}
-
-// SetTeletextGridControl sets the TeletextGridControl field's value.
-func (s *DvbSubDestinationSettings) SetTeletextGridControl(v DvbSubDestinationTeletextGridControl) *DvbSubDestinationSettings {
-	s.TeletextGridControl = v
-	return s
-}
-
-// SetXPosition sets the XPosition field's value.
-func (s *DvbSubDestinationSettings) SetXPosition(v int64) *DvbSubDestinationSettings {
-	s.XPosition = &v
-	return s
-}
-
-// SetYPosition sets the YPosition field's value.
-func (s *DvbSubDestinationSettings) SetYPosition(v int64) *DvbSubDestinationSettings {
-	s.YPosition = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbSubSourceSettings
 type DvbSubSourceSettings struct {
 	_ struct{} `type:"structure"`
@@ -3749,12 +2513,6 @@ func (s DvbSubSourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetPid sets the Pid field's value.
-func (s *DvbSubSourceSettings) SetPid(v int64) *DvbSubSourceSettings {
-	s.Pid = &v
-	return s
-}
-
 // DVB Time and Date Table (SDT)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DvbTdtSettings
 type DvbTdtSettings struct {
@@ -3773,12 +2531,6 @@ func (s DvbTdtSettings) String() string {
 // GoString returns the string representation
 func (s DvbTdtSettings) GoString() string {
 	return s.String()
-}
-
-// SetRepInterval sets the RepInterval field's value.
-func (s *DvbTdtSettings) SetRepInterval(v int64) *DvbTdtSettings {
-	s.RepInterval = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Eac3Settings
@@ -3869,126 +2621,6 @@ func (s Eac3Settings) GoString() string {
 	return s.String()
 }
 
-// SetAttenuationControl sets the AttenuationControl field's value.
-func (s *Eac3Settings) SetAttenuationControl(v Eac3AttenuationControl) *Eac3Settings {
-	s.AttenuationControl = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *Eac3Settings) SetBitrate(v float64) *Eac3Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBitstreamMode sets the BitstreamMode field's value.
-func (s *Eac3Settings) SetBitstreamMode(v Eac3BitstreamMode) *Eac3Settings {
-	s.BitstreamMode = v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *Eac3Settings) SetCodingMode(v Eac3CodingMode) *Eac3Settings {
-	s.CodingMode = v
-	return s
-}
-
-// SetDcFilter sets the DcFilter field's value.
-func (s *Eac3Settings) SetDcFilter(v Eac3DcFilter) *Eac3Settings {
-	s.DcFilter = v
-	return s
-}
-
-// SetDialnorm sets the Dialnorm field's value.
-func (s *Eac3Settings) SetDialnorm(v int64) *Eac3Settings {
-	s.Dialnorm = &v
-	return s
-}
-
-// SetDrcLine sets the DrcLine field's value.
-func (s *Eac3Settings) SetDrcLine(v Eac3DrcLine) *Eac3Settings {
-	s.DrcLine = v
-	return s
-}
-
-// SetDrcRf sets the DrcRf field's value.
-func (s *Eac3Settings) SetDrcRf(v Eac3DrcRf) *Eac3Settings {
-	s.DrcRf = v
-	return s
-}
-
-// SetLfeControl sets the LfeControl field's value.
-func (s *Eac3Settings) SetLfeControl(v Eac3LfeControl) *Eac3Settings {
-	s.LfeControl = v
-	return s
-}
-
-// SetLfeFilter sets the LfeFilter field's value.
-func (s *Eac3Settings) SetLfeFilter(v Eac3LfeFilter) *Eac3Settings {
-	s.LfeFilter = v
-	return s
-}
-
-// SetLoRoCenterMixLevel sets the LoRoCenterMixLevel field's value.
-func (s *Eac3Settings) SetLoRoCenterMixLevel(v float64) *Eac3Settings {
-	s.LoRoCenterMixLevel = &v
-	return s
-}
-
-// SetLoRoSurroundMixLevel sets the LoRoSurroundMixLevel field's value.
-func (s *Eac3Settings) SetLoRoSurroundMixLevel(v float64) *Eac3Settings {
-	s.LoRoSurroundMixLevel = &v
-	return s
-}
-
-// SetLtRtCenterMixLevel sets the LtRtCenterMixLevel field's value.
-func (s *Eac3Settings) SetLtRtCenterMixLevel(v float64) *Eac3Settings {
-	s.LtRtCenterMixLevel = &v
-	return s
-}
-
-// SetLtRtSurroundMixLevel sets the LtRtSurroundMixLevel field's value.
-func (s *Eac3Settings) SetLtRtSurroundMixLevel(v float64) *Eac3Settings {
-	s.LtRtSurroundMixLevel = &v
-	return s
-}
-
-// SetMetadataControl sets the MetadataControl field's value.
-func (s *Eac3Settings) SetMetadataControl(v Eac3MetadataControl) *Eac3Settings {
-	s.MetadataControl = v
-	return s
-}
-
-// SetPassthroughControl sets the PassthroughControl field's value.
-func (s *Eac3Settings) SetPassthroughControl(v Eac3PassthroughControl) *Eac3Settings {
-	s.PassthroughControl = v
-	return s
-}
-
-// SetPhaseControl sets the PhaseControl field's value.
-func (s *Eac3Settings) SetPhaseControl(v Eac3PhaseControl) *Eac3Settings {
-	s.PhaseControl = v
-	return s
-}
-
-// SetStereoDownmix sets the StereoDownmix field's value.
-func (s *Eac3Settings) SetStereoDownmix(v Eac3StereoDownmix) *Eac3Settings {
-	s.StereoDownmix = v
-	return s
-}
-
-// SetSurroundExMode sets the SurroundExMode field's value.
-func (s *Eac3Settings) SetSurroundExMode(v Eac3SurroundExMode) *Eac3Settings {
-	s.SurroundExMode = v
-	return s
-}
-
-// SetSurroundMode sets the SurroundMode field's value.
-func (s *Eac3Settings) SetSurroundMode(v Eac3SurroundMode) *Eac3Settings {
-	s.SurroundMode = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings
 type EmbeddedDestinationSettings struct {
 	_ struct{} `type:"structure"`
@@ -4050,30 +2682,6 @@ func (s EmbeddedSourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetConvert608To708 sets the Convert608To708 field's value.
-func (s *EmbeddedSourceSettings) SetConvert608To708(v EmbeddedConvert608To708) *EmbeddedSourceSettings {
-	s.Convert608To708 = v
-	return s
-}
-
-// SetScte20Detection sets the Scte20Detection field's value.
-func (s *EmbeddedSourceSettings) SetScte20Detection(v EmbeddedScte20Detection) *EmbeddedSourceSettings {
-	s.Scte20Detection = v
-	return s
-}
-
-// SetSource608ChannelNumber sets the Source608ChannelNumber field's value.
-func (s *EmbeddedSourceSettings) SetSource608ChannelNumber(v int64) *EmbeddedSourceSettings {
-	s.Source608ChannelNumber = &v
-	return s
-}
-
-// SetSource608TrackNumber sets the Source608TrackNumber field's value.
-func (s *EmbeddedSourceSettings) SetSource608TrackNumber(v int64) *EmbeddedSourceSettings {
-	s.Source608TrackNumber = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EncoderSettings
 type EncoderSettings struct {
 	_ struct{} `type:"structure"`
@@ -4113,60 +2721,6 @@ func (s EncoderSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioDescriptions sets the AudioDescriptions field's value.
-func (s *EncoderSettings) SetAudioDescriptions(v []AudioDescription) *EncoderSettings {
-	s.AudioDescriptions = v
-	return s
-}
-
-// SetAvailBlanking sets the AvailBlanking field's value.
-func (s *EncoderSettings) SetAvailBlanking(v *AvailBlanking) *EncoderSettings {
-	s.AvailBlanking = v
-	return s
-}
-
-// SetAvailConfiguration sets the AvailConfiguration field's value.
-func (s *EncoderSettings) SetAvailConfiguration(v *AvailConfiguration) *EncoderSettings {
-	s.AvailConfiguration = v
-	return s
-}
-
-// SetBlackoutSlate sets the BlackoutSlate field's value.
-func (s *EncoderSettings) SetBlackoutSlate(v *BlackoutSlate) *EncoderSettings {
-	s.BlackoutSlate = v
-	return s
-}
-
-// SetCaptionDescriptions sets the CaptionDescriptions field's value.
-func (s *EncoderSettings) SetCaptionDescriptions(v []CaptionDescription) *EncoderSettings {
-	s.CaptionDescriptions = v
-	return s
-}
-
-// SetGlobalConfiguration sets the GlobalConfiguration field's value.
-func (s *EncoderSettings) SetGlobalConfiguration(v *GlobalConfiguration) *EncoderSettings {
-	s.GlobalConfiguration = v
-	return s
-}
-
-// SetOutputGroups sets the OutputGroups field's value.
-func (s *EncoderSettings) SetOutputGroups(v []OutputGroup) *EncoderSettings {
-	s.OutputGroups = v
-	return s
-}
-
-// SetTimecodeConfig sets the TimecodeConfig field's value.
-func (s *EncoderSettings) SetTimecodeConfig(v *TimecodeConfig) *EncoderSettings {
-	s.TimecodeConfig = v
-	return s
-}
-
-// SetVideoDescriptions sets the VideoDescriptions field's value.
-func (s *EncoderSettings) SetVideoDescriptions(v []VideoDescription) *EncoderSettings {
-	s.VideoDescriptions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FecOutputSettings
 type FecOutputSettings struct {
 	_ struct{} `type:"structure"`
@@ -4196,24 +2750,6 @@ func (s FecOutputSettings) String() string {
 // GoString returns the string representation
 func (s FecOutputSettings) GoString() string {
 	return s.String()
-}
-
-// SetColumnDepth sets the ColumnDepth field's value.
-func (s *FecOutputSettings) SetColumnDepth(v int64) *FecOutputSettings {
-	s.ColumnDepth = &v
-	return s
-}
-
-// SetIncludeFec sets the IncludeFec field's value.
-func (s *FecOutputSettings) SetIncludeFec(v FecOutputIncludeFec) *FecOutputSettings {
-	s.IncludeFec = v
-	return s
-}
-
-// SetRowLength sets the RowLength field's value.
-func (s *FecOutputSettings) SetRowLength(v int64) *FecOutputSettings {
-	s.RowLength = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GlobalConfiguration
@@ -4254,36 +2790,6 @@ func (s GlobalConfiguration) String() string {
 // GoString returns the string representation
 func (s GlobalConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetInitialAudioGain sets the InitialAudioGain field's value.
-func (s *GlobalConfiguration) SetInitialAudioGain(v int64) *GlobalConfiguration {
-	s.InitialAudioGain = &v
-	return s
-}
-
-// SetInputEndAction sets the InputEndAction field's value.
-func (s *GlobalConfiguration) SetInputEndAction(v GlobalConfigurationInputEndAction) *GlobalConfiguration {
-	s.InputEndAction = v
-	return s
-}
-
-// SetInputLossBehavior sets the InputLossBehavior field's value.
-func (s *GlobalConfiguration) SetInputLossBehavior(v *InputLossBehavior) *GlobalConfiguration {
-	s.InputLossBehavior = v
-	return s
-}
-
-// SetOutputTimingSource sets the OutputTimingSource field's value.
-func (s *GlobalConfiguration) SetOutputTimingSource(v GlobalConfigurationOutputTimingSource) *GlobalConfiguration {
-	s.OutputTimingSource = v
-	return s
-}
-
-// SetSupportLowFramerateInputs sets the SupportLowFramerateInputs field's value.
-func (s *GlobalConfiguration) SetSupportLowFramerateInputs(v GlobalConfigurationLowFramerateInputs) *GlobalConfiguration {
-	s.SupportLowFramerateInputs = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264Settings
@@ -4445,216 +2951,6 @@ func (s H264Settings) GoString() string {
 	return s.String()
 }
 
-// SetAdaptiveQuantization sets the AdaptiveQuantization field's value.
-func (s *H264Settings) SetAdaptiveQuantization(v H264AdaptiveQuantization) *H264Settings {
-	s.AdaptiveQuantization = v
-	return s
-}
-
-// SetAfdSignaling sets the AfdSignaling field's value.
-func (s *H264Settings) SetAfdSignaling(v AfdSignaling) *H264Settings {
-	s.AfdSignaling = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *H264Settings) SetBitrate(v int64) *H264Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBufFillPct sets the BufFillPct field's value.
-func (s *H264Settings) SetBufFillPct(v int64) *H264Settings {
-	s.BufFillPct = &v
-	return s
-}
-
-// SetBufSize sets the BufSize field's value.
-func (s *H264Settings) SetBufSize(v int64) *H264Settings {
-	s.BufSize = &v
-	return s
-}
-
-// SetColorMetadata sets the ColorMetadata field's value.
-func (s *H264Settings) SetColorMetadata(v H264ColorMetadata) *H264Settings {
-	s.ColorMetadata = v
-	return s
-}
-
-// SetEntropyEncoding sets the EntropyEncoding field's value.
-func (s *H264Settings) SetEntropyEncoding(v H264EntropyEncoding) *H264Settings {
-	s.EntropyEncoding = v
-	return s
-}
-
-// SetFixedAfd sets the FixedAfd field's value.
-func (s *H264Settings) SetFixedAfd(v FixedAfd) *H264Settings {
-	s.FixedAfd = v
-	return s
-}
-
-// SetFlickerAq sets the FlickerAq field's value.
-func (s *H264Settings) SetFlickerAq(v H264FlickerAq) *H264Settings {
-	s.FlickerAq = v
-	return s
-}
-
-// SetFramerateControl sets the FramerateControl field's value.
-func (s *H264Settings) SetFramerateControl(v H264FramerateControl) *H264Settings {
-	s.FramerateControl = v
-	return s
-}
-
-// SetFramerateDenominator sets the FramerateDenominator field's value.
-func (s *H264Settings) SetFramerateDenominator(v int64) *H264Settings {
-	s.FramerateDenominator = &v
-	return s
-}
-
-// SetFramerateNumerator sets the FramerateNumerator field's value.
-func (s *H264Settings) SetFramerateNumerator(v int64) *H264Settings {
-	s.FramerateNumerator = &v
-	return s
-}
-
-// SetGopBReference sets the GopBReference field's value.
-func (s *H264Settings) SetGopBReference(v H264GopBReference) *H264Settings {
-	s.GopBReference = v
-	return s
-}
-
-// SetGopClosedCadence sets the GopClosedCadence field's value.
-func (s *H264Settings) SetGopClosedCadence(v int64) *H264Settings {
-	s.GopClosedCadence = &v
-	return s
-}
-
-// SetGopNumBFrames sets the GopNumBFrames field's value.
-func (s *H264Settings) SetGopNumBFrames(v int64) *H264Settings {
-	s.GopNumBFrames = &v
-	return s
-}
-
-// SetGopSize sets the GopSize field's value.
-func (s *H264Settings) SetGopSize(v float64) *H264Settings {
-	s.GopSize = &v
-	return s
-}
-
-// SetGopSizeUnits sets the GopSizeUnits field's value.
-func (s *H264Settings) SetGopSizeUnits(v H264GopSizeUnits) *H264Settings {
-	s.GopSizeUnits = v
-	return s
-}
-
-// SetLevel sets the Level field's value.
-func (s *H264Settings) SetLevel(v H264Level) *H264Settings {
-	s.Level = v
-	return s
-}
-
-// SetLookAheadRateControl sets the LookAheadRateControl field's value.
-func (s *H264Settings) SetLookAheadRateControl(v H264LookAheadRateControl) *H264Settings {
-	s.LookAheadRateControl = v
-	return s
-}
-
-// SetMaxBitrate sets the MaxBitrate field's value.
-func (s *H264Settings) SetMaxBitrate(v int64) *H264Settings {
-	s.MaxBitrate = &v
-	return s
-}
-
-// SetMinIInterval sets the MinIInterval field's value.
-func (s *H264Settings) SetMinIInterval(v int64) *H264Settings {
-	s.MinIInterval = &v
-	return s
-}
-
-// SetNumRefFrames sets the NumRefFrames field's value.
-func (s *H264Settings) SetNumRefFrames(v int64) *H264Settings {
-	s.NumRefFrames = &v
-	return s
-}
-
-// SetParControl sets the ParControl field's value.
-func (s *H264Settings) SetParControl(v H264ParControl) *H264Settings {
-	s.ParControl = v
-	return s
-}
-
-// SetParDenominator sets the ParDenominator field's value.
-func (s *H264Settings) SetParDenominator(v int64) *H264Settings {
-	s.ParDenominator = &v
-	return s
-}
-
-// SetParNumerator sets the ParNumerator field's value.
-func (s *H264Settings) SetParNumerator(v int64) *H264Settings {
-	s.ParNumerator = &v
-	return s
-}
-
-// SetProfile sets the Profile field's value.
-func (s *H264Settings) SetProfile(v H264Profile) *H264Settings {
-	s.Profile = v
-	return s
-}
-
-// SetRateControlMode sets the RateControlMode field's value.
-func (s *H264Settings) SetRateControlMode(v H264RateControlMode) *H264Settings {
-	s.RateControlMode = v
-	return s
-}
-
-// SetScanType sets the ScanType field's value.
-func (s *H264Settings) SetScanType(v H264ScanType) *H264Settings {
-	s.ScanType = v
-	return s
-}
-
-// SetSceneChangeDetect sets the SceneChangeDetect field's value.
-func (s *H264Settings) SetSceneChangeDetect(v H264SceneChangeDetect) *H264Settings {
-	s.SceneChangeDetect = v
-	return s
-}
-
-// SetSlices sets the Slices field's value.
-func (s *H264Settings) SetSlices(v int64) *H264Settings {
-	s.Slices = &v
-	return s
-}
-
-// SetSoftness sets the Softness field's value.
-func (s *H264Settings) SetSoftness(v int64) *H264Settings {
-	s.Softness = &v
-	return s
-}
-
-// SetSpatialAq sets the SpatialAq field's value.
-func (s *H264Settings) SetSpatialAq(v H264SpatialAq) *H264Settings {
-	s.SpatialAq = v
-	return s
-}
-
-// SetSyntax sets the Syntax field's value.
-func (s *H264Settings) SetSyntax(v H264Syntax) *H264Settings {
-	s.Syntax = v
-	return s
-}
-
-// SetTemporalAq sets the TemporalAq field's value.
-func (s *H264Settings) SetTemporalAq(v H264TemporalAq) *H264Settings {
-	s.TemporalAq = v
-	return s
-}
-
-// SetTimecodeInsertion sets the TimecodeInsertion field's value.
-func (s *H264Settings) SetTimecodeInsertion(v H264TimecodeInsertionBehavior) *H264Settings {
-	s.TimecodeInsertion = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsAkamaiSettings
 type HlsAkamaiSettings struct {
 	_ struct{} `type:"structure"`
@@ -4695,48 +2991,6 @@ func (s HlsAkamaiSettings) GoString() string {
 	return s.String()
 }
 
-// SetConnectionRetryInterval sets the ConnectionRetryInterval field's value.
-func (s *HlsAkamaiSettings) SetConnectionRetryInterval(v int64) *HlsAkamaiSettings {
-	s.ConnectionRetryInterval = &v
-	return s
-}
-
-// SetFilecacheDuration sets the FilecacheDuration field's value.
-func (s *HlsAkamaiSettings) SetFilecacheDuration(v int64) *HlsAkamaiSettings {
-	s.FilecacheDuration = &v
-	return s
-}
-
-// SetHttpTransferMode sets the HttpTransferMode field's value.
-func (s *HlsAkamaiSettings) SetHttpTransferMode(v HlsAkamaiHttpTransferMode) *HlsAkamaiSettings {
-	s.HttpTransferMode = v
-	return s
-}
-
-// SetNumRetries sets the NumRetries field's value.
-func (s *HlsAkamaiSettings) SetNumRetries(v int64) *HlsAkamaiSettings {
-	s.NumRetries = &v
-	return s
-}
-
-// SetRestartDelay sets the RestartDelay field's value.
-func (s *HlsAkamaiSettings) SetRestartDelay(v int64) *HlsAkamaiSettings {
-	s.RestartDelay = &v
-	return s
-}
-
-// SetSalt sets the Salt field's value.
-func (s *HlsAkamaiSettings) SetSalt(v string) *HlsAkamaiSettings {
-	s.Salt = &v
-	return s
-}
-
-// SetToken sets the Token field's value.
-func (s *HlsAkamaiSettings) SetToken(v string) *HlsAkamaiSettings {
-	s.Token = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsBasicPutSettings
 type HlsBasicPutSettings struct {
 	_ struct{} `type:"structure"`
@@ -4767,30 +3021,6 @@ func (s HlsBasicPutSettings) GoString() string {
 	return s.String()
 }
 
-// SetConnectionRetryInterval sets the ConnectionRetryInterval field's value.
-func (s *HlsBasicPutSettings) SetConnectionRetryInterval(v int64) *HlsBasicPutSettings {
-	s.ConnectionRetryInterval = &v
-	return s
-}
-
-// SetFilecacheDuration sets the FilecacheDuration field's value.
-func (s *HlsBasicPutSettings) SetFilecacheDuration(v int64) *HlsBasicPutSettings {
-	s.FilecacheDuration = &v
-	return s
-}
-
-// SetNumRetries sets the NumRetries field's value.
-func (s *HlsBasicPutSettings) SetNumRetries(v int64) *HlsBasicPutSettings {
-	s.NumRetries = &v
-	return s
-}
-
-// SetRestartDelay sets the RestartDelay field's value.
-func (s *HlsBasicPutSettings) SetRestartDelay(v int64) *HlsBasicPutSettings {
-	s.RestartDelay = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsCdnSettings
 type HlsCdnSettings struct {
 	_ struct{} `type:"structure"`
@@ -4812,30 +3042,6 @@ func (s HlsCdnSettings) String() string {
 // GoString returns the string representation
 func (s HlsCdnSettings) GoString() string {
 	return s.String()
-}
-
-// SetHlsAkamaiSettings sets the HlsAkamaiSettings field's value.
-func (s *HlsCdnSettings) SetHlsAkamaiSettings(v *HlsAkamaiSettings) *HlsCdnSettings {
-	s.HlsAkamaiSettings = v
-	return s
-}
-
-// SetHlsBasicPutSettings sets the HlsBasicPutSettings field's value.
-func (s *HlsCdnSettings) SetHlsBasicPutSettings(v *HlsBasicPutSettings) *HlsCdnSettings {
-	s.HlsBasicPutSettings = v
-	return s
-}
-
-// SetHlsMediaStoreSettings sets the HlsMediaStoreSettings field's value.
-func (s *HlsCdnSettings) SetHlsMediaStoreSettings(v *HlsMediaStoreSettings) *HlsCdnSettings {
-	s.HlsMediaStoreSettings = v
-	return s
-}
-
-// SetHlsWebdavSettings sets the HlsWebdavSettings field's value.
-func (s *HlsCdnSettings) SetHlsWebdavSettings(v *HlsWebdavSettings) *HlsCdnSettings {
-	s.HlsWebdavSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsGroupSettings
@@ -5007,216 +3213,6 @@ func (s HlsGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetAdMarkers sets the AdMarkers field's value.
-func (s *HlsGroupSettings) SetAdMarkers(v []HlsAdMarkers) *HlsGroupSettings {
-	s.AdMarkers = v
-	return s
-}
-
-// SetBaseUrlContent sets the BaseUrlContent field's value.
-func (s *HlsGroupSettings) SetBaseUrlContent(v string) *HlsGroupSettings {
-	s.BaseUrlContent = &v
-	return s
-}
-
-// SetBaseUrlManifest sets the BaseUrlManifest field's value.
-func (s *HlsGroupSettings) SetBaseUrlManifest(v string) *HlsGroupSettings {
-	s.BaseUrlManifest = &v
-	return s
-}
-
-// SetCaptionLanguageMappings sets the CaptionLanguageMappings field's value.
-func (s *HlsGroupSettings) SetCaptionLanguageMappings(v []CaptionLanguageMapping) *HlsGroupSettings {
-	s.CaptionLanguageMappings = v
-	return s
-}
-
-// SetCaptionLanguageSetting sets the CaptionLanguageSetting field's value.
-func (s *HlsGroupSettings) SetCaptionLanguageSetting(v HlsCaptionLanguageSetting) *HlsGroupSettings {
-	s.CaptionLanguageSetting = v
-	return s
-}
-
-// SetClientCache sets the ClientCache field's value.
-func (s *HlsGroupSettings) SetClientCache(v HlsClientCache) *HlsGroupSettings {
-	s.ClientCache = v
-	return s
-}
-
-// SetCodecSpecification sets the CodecSpecification field's value.
-func (s *HlsGroupSettings) SetCodecSpecification(v HlsCodecSpecification) *HlsGroupSettings {
-	s.CodecSpecification = v
-	return s
-}
-
-// SetConstantIv sets the ConstantIv field's value.
-func (s *HlsGroupSettings) SetConstantIv(v string) *HlsGroupSettings {
-	s.ConstantIv = &v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *HlsGroupSettings) SetDestination(v *OutputLocationRef) *HlsGroupSettings {
-	s.Destination = v
-	return s
-}
-
-// SetDirectoryStructure sets the DirectoryStructure field's value.
-func (s *HlsGroupSettings) SetDirectoryStructure(v HlsDirectoryStructure) *HlsGroupSettings {
-	s.DirectoryStructure = v
-	return s
-}
-
-// SetEncryptionType sets the EncryptionType field's value.
-func (s *HlsGroupSettings) SetEncryptionType(v HlsEncryptionType) *HlsGroupSettings {
-	s.EncryptionType = v
-	return s
-}
-
-// SetHlsCdnSettings sets the HlsCdnSettings field's value.
-func (s *HlsGroupSettings) SetHlsCdnSettings(v *HlsCdnSettings) *HlsGroupSettings {
-	s.HlsCdnSettings = v
-	return s
-}
-
-// SetIndexNSegments sets the IndexNSegments field's value.
-func (s *HlsGroupSettings) SetIndexNSegments(v int64) *HlsGroupSettings {
-	s.IndexNSegments = &v
-	return s
-}
-
-// SetInputLossAction sets the InputLossAction field's value.
-func (s *HlsGroupSettings) SetInputLossAction(v InputLossActionForHlsOut) *HlsGroupSettings {
-	s.InputLossAction = v
-	return s
-}
-
-// SetIvInManifest sets the IvInManifest field's value.
-func (s *HlsGroupSettings) SetIvInManifest(v HlsIvInManifest) *HlsGroupSettings {
-	s.IvInManifest = v
-	return s
-}
-
-// SetIvSource sets the IvSource field's value.
-func (s *HlsGroupSettings) SetIvSource(v HlsIvSource) *HlsGroupSettings {
-	s.IvSource = v
-	return s
-}
-
-// SetKeepSegments sets the KeepSegments field's value.
-func (s *HlsGroupSettings) SetKeepSegments(v int64) *HlsGroupSettings {
-	s.KeepSegments = &v
-	return s
-}
-
-// SetKeyFormat sets the KeyFormat field's value.
-func (s *HlsGroupSettings) SetKeyFormat(v string) *HlsGroupSettings {
-	s.KeyFormat = &v
-	return s
-}
-
-// SetKeyFormatVersions sets the KeyFormatVersions field's value.
-func (s *HlsGroupSettings) SetKeyFormatVersions(v string) *HlsGroupSettings {
-	s.KeyFormatVersions = &v
-	return s
-}
-
-// SetKeyProviderSettings sets the KeyProviderSettings field's value.
-func (s *HlsGroupSettings) SetKeyProviderSettings(v *KeyProviderSettings) *HlsGroupSettings {
-	s.KeyProviderSettings = v
-	return s
-}
-
-// SetManifestCompression sets the ManifestCompression field's value.
-func (s *HlsGroupSettings) SetManifestCompression(v HlsManifestCompression) *HlsGroupSettings {
-	s.ManifestCompression = v
-	return s
-}
-
-// SetManifestDurationFormat sets the ManifestDurationFormat field's value.
-func (s *HlsGroupSettings) SetManifestDurationFormat(v HlsManifestDurationFormat) *HlsGroupSettings {
-	s.ManifestDurationFormat = v
-	return s
-}
-
-// SetMinSegmentLength sets the MinSegmentLength field's value.
-func (s *HlsGroupSettings) SetMinSegmentLength(v int64) *HlsGroupSettings {
-	s.MinSegmentLength = &v
-	return s
-}
-
-// SetMode sets the Mode field's value.
-func (s *HlsGroupSettings) SetMode(v HlsMode) *HlsGroupSettings {
-	s.Mode = v
-	return s
-}
-
-// SetOutputSelection sets the OutputSelection field's value.
-func (s *HlsGroupSettings) SetOutputSelection(v HlsOutputSelection) *HlsGroupSettings {
-	s.OutputSelection = v
-	return s
-}
-
-// SetProgramDateTime sets the ProgramDateTime field's value.
-func (s *HlsGroupSettings) SetProgramDateTime(v HlsProgramDateTime) *HlsGroupSettings {
-	s.ProgramDateTime = v
-	return s
-}
-
-// SetProgramDateTimePeriod sets the ProgramDateTimePeriod field's value.
-func (s *HlsGroupSettings) SetProgramDateTimePeriod(v int64) *HlsGroupSettings {
-	s.ProgramDateTimePeriod = &v
-	return s
-}
-
-// SetSegmentLength sets the SegmentLength field's value.
-func (s *HlsGroupSettings) SetSegmentLength(v int64) *HlsGroupSettings {
-	s.SegmentLength = &v
-	return s
-}
-
-// SetSegmentationMode sets the SegmentationMode field's value.
-func (s *HlsGroupSettings) SetSegmentationMode(v HlsSegmentationMode) *HlsGroupSettings {
-	s.SegmentationMode = v
-	return s
-}
-
-// SetSegmentsPerSubdirectory sets the SegmentsPerSubdirectory field's value.
-func (s *HlsGroupSettings) SetSegmentsPerSubdirectory(v int64) *HlsGroupSettings {
-	s.SegmentsPerSubdirectory = &v
-	return s
-}
-
-// SetStreamInfResolution sets the StreamInfResolution field's value.
-func (s *HlsGroupSettings) SetStreamInfResolution(v HlsStreamInfResolution) *HlsGroupSettings {
-	s.StreamInfResolution = v
-	return s
-}
-
-// SetTimedMetadataId3Frame sets the TimedMetadataId3Frame field's value.
-func (s *HlsGroupSettings) SetTimedMetadataId3Frame(v HlsTimedMetadataId3Frame) *HlsGroupSettings {
-	s.TimedMetadataId3Frame = v
-	return s
-}
-
-// SetTimedMetadataId3Period sets the TimedMetadataId3Period field's value.
-func (s *HlsGroupSettings) SetTimedMetadataId3Period(v int64) *HlsGroupSettings {
-	s.TimedMetadataId3Period = &v
-	return s
-}
-
-// SetTimestampDeltaMilliseconds sets the TimestampDeltaMilliseconds field's value.
-func (s *HlsGroupSettings) SetTimestampDeltaMilliseconds(v int64) *HlsGroupSettings {
-	s.TimestampDeltaMilliseconds = &v
-	return s
-}
-
-// SetTsFileMode sets the TsFileMode field's value.
-func (s *HlsGroupSettings) SetTsFileMode(v HlsTsFileMode) *HlsGroupSettings {
-	s.TsFileMode = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsInputSettings
 type HlsInputSettings struct {
 	_ struct{} `type:"structure"`
@@ -5249,30 +3245,6 @@ func (s HlsInputSettings) String() string {
 // GoString returns the string representation
 func (s HlsInputSettings) GoString() string {
 	return s.String()
-}
-
-// SetBandwidth sets the Bandwidth field's value.
-func (s *HlsInputSettings) SetBandwidth(v int64) *HlsInputSettings {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetBufferSegments sets the BufferSegments field's value.
-func (s *HlsInputSettings) SetBufferSegments(v int64) *HlsInputSettings {
-	s.BufferSegments = &v
-	return s
-}
-
-// SetRetries sets the Retries field's value.
-func (s *HlsInputSettings) SetRetries(v int64) *HlsInputSettings {
-	s.Retries = &v
-	return s
-}
-
-// SetRetryInterval sets the RetryInterval field's value.
-func (s *HlsInputSettings) SetRetryInterval(v int64) *HlsInputSettings {
-	s.RetryInterval = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsMediaStoreSettings
@@ -5309,36 +3281,6 @@ func (s HlsMediaStoreSettings) GoString() string {
 	return s.String()
 }
 
-// SetConnectionRetryInterval sets the ConnectionRetryInterval field's value.
-func (s *HlsMediaStoreSettings) SetConnectionRetryInterval(v int64) *HlsMediaStoreSettings {
-	s.ConnectionRetryInterval = &v
-	return s
-}
-
-// SetFilecacheDuration sets the FilecacheDuration field's value.
-func (s *HlsMediaStoreSettings) SetFilecacheDuration(v int64) *HlsMediaStoreSettings {
-	s.FilecacheDuration = &v
-	return s
-}
-
-// SetMediaStoreStorageClass sets the MediaStoreStorageClass field's value.
-func (s *HlsMediaStoreSettings) SetMediaStoreStorageClass(v HlsMediaStoreStorageClass) *HlsMediaStoreSettings {
-	s.MediaStoreStorageClass = v
-	return s
-}
-
-// SetNumRetries sets the NumRetries field's value.
-func (s *HlsMediaStoreSettings) SetNumRetries(v int64) *HlsMediaStoreSettings {
-	s.NumRetries = &v
-	return s
-}
-
-// SetRestartDelay sets the RestartDelay field's value.
-func (s *HlsMediaStoreSettings) SetRestartDelay(v int64) *HlsMediaStoreSettings {
-	s.RestartDelay = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsOutputSettings
 type HlsOutputSettings struct {
 	_ struct{} `type:"structure"`
@@ -5365,24 +3307,6 @@ func (s HlsOutputSettings) GoString() string {
 	return s.String()
 }
 
-// SetHlsSettings sets the HlsSettings field's value.
-func (s *HlsOutputSettings) SetHlsSettings(v *HlsSettings) *HlsOutputSettings {
-	s.HlsSettings = v
-	return s
-}
-
-// SetNameModifier sets the NameModifier field's value.
-func (s *HlsOutputSettings) SetNameModifier(v string) *HlsOutputSettings {
-	s.NameModifier = &v
-	return s
-}
-
-// SetSegmentModifier sets the SegmentModifier field's value.
-func (s *HlsOutputSettings) SetSegmentModifier(v string) *HlsOutputSettings {
-	s.SegmentModifier = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsSettings
 type HlsSettings struct {
 	_ struct{} `type:"structure"`
@@ -5400,18 +3324,6 @@ func (s HlsSettings) String() string {
 // GoString returns the string representation
 func (s HlsSettings) GoString() string {
 	return s.String()
-}
-
-// SetAudioOnlyHlsSettings sets the AudioOnlyHlsSettings field's value.
-func (s *HlsSettings) SetAudioOnlyHlsSettings(v *AudioOnlyHlsSettings) *HlsSettings {
-	s.AudioOnlyHlsSettings = v
-	return s
-}
-
-// SetStandardHlsSettings sets the StandardHlsSettings field's value.
-func (s *HlsSettings) SetStandardHlsSettings(v *StandardHlsSettings) *HlsSettings {
-	s.StandardHlsSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsWebdavSettings
@@ -5445,36 +3357,6 @@ func (s HlsWebdavSettings) String() string {
 // GoString returns the string representation
 func (s HlsWebdavSettings) GoString() string {
 	return s.String()
-}
-
-// SetConnectionRetryInterval sets the ConnectionRetryInterval field's value.
-func (s *HlsWebdavSettings) SetConnectionRetryInterval(v int64) *HlsWebdavSettings {
-	s.ConnectionRetryInterval = &v
-	return s
-}
-
-// SetFilecacheDuration sets the FilecacheDuration field's value.
-func (s *HlsWebdavSettings) SetFilecacheDuration(v int64) *HlsWebdavSettings {
-	s.FilecacheDuration = &v
-	return s
-}
-
-// SetHttpTransferMode sets the HttpTransferMode field's value.
-func (s *HlsWebdavSettings) SetHttpTransferMode(v HlsWebdavHttpTransferMode) *HlsWebdavSettings {
-	s.HttpTransferMode = v
-	return s
-}
-
-// SetNumRetries sets the NumRetries field's value.
-func (s *HlsWebdavSettings) SetNumRetries(v int64) *HlsWebdavSettings {
-	s.NumRetries = &v
-	return s
-}
-
-// SetRestartDelay sets the RestartDelay field's value.
-func (s *HlsWebdavSettings) SetRestartDelay(v int64) *HlsWebdavSettings {
-	s.RestartDelay = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input
@@ -5518,60 +3400,6 @@ func (s Input) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Input) SetArn(v string) *Input {
-	s.Arn = &v
-	return s
-}
-
-// SetAttachedChannels sets the AttachedChannels field's value.
-func (s *Input) SetAttachedChannels(v []string) *Input {
-	s.AttachedChannels = v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *Input) SetDestinations(v []InputDestination) *Input {
-	s.Destinations = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Input) SetId(v string) *Input {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Input) SetName(v string) *Input {
-	s.Name = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *Input) SetSecurityGroups(v []string) *Input {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetSources sets the Sources field's value.
-func (s *Input) SetSources(v []InputSource) *Input {
-	s.Sources = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Input) SetState(v InputState) *Input {
-	s.State = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Input) SetType(v InputType) *Input {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment
 type InputAttachment struct {
 	_ struct{} `type:"structure"`
@@ -5591,18 +3419,6 @@ func (s InputAttachment) String() string {
 // GoString returns the string representation
 func (s InputAttachment) GoString() string {
 	return s.String()
-}
-
-// SetInputId sets the InputId field's value.
-func (s *InputAttachment) SetInputId(v string) *InputAttachment {
-	s.InputId = &v
-	return s
-}
-
-// SetInputSettings sets the InputSettings field's value.
-func (s *InputAttachment) SetInputSettings(v *InputSettings) *InputAttachment {
-	s.InputSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputChannelLevel
@@ -5625,18 +3441,6 @@ func (s InputChannelLevel) String() string {
 // GoString returns the string representation
 func (s InputChannelLevel) GoString() string {
 	return s.String()
-}
-
-// SetGain sets the Gain field's value.
-func (s *InputChannelLevel) SetGain(v int64) *InputChannelLevel {
-	s.Gain = &v
-	return s
-}
-
-// SetInputChannel sets the InputChannel field's value.
-func (s *InputChannelLevel) SetInputChannel(v int64) *InputChannelLevel {
-	s.InputChannel = &v
-	return s
 }
 
 // Settings for a PUSH type input
@@ -5665,24 +3469,6 @@ func (s InputDestination) GoString() string {
 	return s.String()
 }
 
-// SetIp sets the Ip field's value.
-func (s *InputDestination) SetIp(v string) *InputDestination {
-	s.Ip = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *InputDestination) SetPort(v string) *InputDestination {
-	s.Port = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *InputDestination) SetUrl(v string) *InputDestination {
-	s.Url = &v
-	return s
-}
-
 // Endpoint settings for a PUSH type input
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDestinationRequest
 type InputDestinationRequest struct {
@@ -5700,12 +3486,6 @@ func (s InputDestinationRequest) String() string {
 // GoString returns the string representation
 func (s InputDestinationRequest) GoString() string {
 	return s.String()
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *InputDestinationRequest) SetStreamName(v string) *InputDestinationRequest {
-	s.StreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputLocation
@@ -5735,24 +3515,6 @@ func (s InputLocation) String() string {
 // GoString returns the string representation
 func (s InputLocation) GoString() string {
 	return s.String()
-}
-
-// SetPasswordParam sets the PasswordParam field's value.
-func (s *InputLocation) SetPasswordParam(v string) *InputLocation {
-	s.PasswordParam = &v
-	return s
-}
-
-// SetUri sets the Uri field's value.
-func (s *InputLocation) SetUri(v string) *InputLocation {
-	s.Uri = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *InputLocation) SetUsername(v string) *InputLocation {
-	s.Username = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputLossBehavior
@@ -5793,36 +3555,6 @@ func (s InputLossBehavior) GoString() string {
 	return s.String()
 }
 
-// SetBlackFrameMsec sets the BlackFrameMsec field's value.
-func (s *InputLossBehavior) SetBlackFrameMsec(v int64) *InputLossBehavior {
-	s.BlackFrameMsec = &v
-	return s
-}
-
-// SetInputLossImageColor sets the InputLossImageColor field's value.
-func (s *InputLossBehavior) SetInputLossImageColor(v string) *InputLossBehavior {
-	s.InputLossImageColor = &v
-	return s
-}
-
-// SetInputLossImageSlate sets the InputLossImageSlate field's value.
-func (s *InputLossBehavior) SetInputLossImageSlate(v *InputLocation) *InputLossBehavior {
-	s.InputLossImageSlate = v
-	return s
-}
-
-// SetInputLossImageType sets the InputLossImageType field's value.
-func (s *InputLossBehavior) SetInputLossImageType(v InputLossImageType) *InputLossBehavior {
-	s.InputLossImageType = v
-	return s
-}
-
-// SetRepeatFrameMsec sets the RepeatFrameMsec field's value.
-func (s *InputLossBehavior) SetRepeatFrameMsec(v int64) *InputLossBehavior {
-	s.RepeatFrameMsec = &v
-	return s
-}
-
 // An Input Security Group
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSecurityGroup
 type InputSecurityGroup struct {
@@ -5846,24 +3578,6 @@ func (s InputSecurityGroup) String() string {
 // GoString returns the string representation
 func (s InputSecurityGroup) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *InputSecurityGroup) SetArn(v string) *InputSecurityGroup {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *InputSecurityGroup) SetId(v string) *InputSecurityGroup {
-	s.Id = &v
-	return s
-}
-
-// SetWhitelistRules sets the WhitelistRules field's value.
-func (s *InputSecurityGroup) SetWhitelistRules(v []InputWhitelistRule) *InputSecurityGroup {
-	s.WhitelistRules = v
-	return s
 }
 
 // Live Event input parameters. There can be multiple inputs in a single Live
@@ -5914,60 +3628,6 @@ func (s InputSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioSelectors sets the AudioSelectors field's value.
-func (s *InputSettings) SetAudioSelectors(v []AudioSelector) *InputSettings {
-	s.AudioSelectors = v
-	return s
-}
-
-// SetCaptionSelectors sets the CaptionSelectors field's value.
-func (s *InputSettings) SetCaptionSelectors(v []CaptionSelector) *InputSettings {
-	s.CaptionSelectors = v
-	return s
-}
-
-// SetDeblockFilter sets the DeblockFilter field's value.
-func (s *InputSettings) SetDeblockFilter(v InputDeblockFilter) *InputSettings {
-	s.DeblockFilter = v
-	return s
-}
-
-// SetDenoiseFilter sets the DenoiseFilter field's value.
-func (s *InputSettings) SetDenoiseFilter(v InputDenoiseFilter) *InputSettings {
-	s.DenoiseFilter = v
-	return s
-}
-
-// SetFilterStrength sets the FilterStrength field's value.
-func (s *InputSettings) SetFilterStrength(v int64) *InputSettings {
-	s.FilterStrength = &v
-	return s
-}
-
-// SetInputFilter sets the InputFilter field's value.
-func (s *InputSettings) SetInputFilter(v InputFilter) *InputSettings {
-	s.InputFilter = v
-	return s
-}
-
-// SetNetworkInputSettings sets the NetworkInputSettings field's value.
-func (s *InputSettings) SetNetworkInputSettings(v *NetworkInputSettings) *InputSettings {
-	s.NetworkInputSettings = v
-	return s
-}
-
-// SetSourceEndBehavior sets the SourceEndBehavior field's value.
-func (s *InputSettings) SetSourceEndBehavior(v InputSourceEndBehavior) *InputSettings {
-	s.SourceEndBehavior = v
-	return s
-}
-
-// SetVideoSelector sets the VideoSelector field's value.
-func (s *InputSettings) SetVideoSelector(v *VideoSelector) *InputSettings {
-	s.VideoSelector = v
-	return s
-}
-
 // Settings for a PULL type input
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSource
 type InputSource struct {
@@ -5991,24 +3651,6 @@ func (s InputSource) String() string {
 // GoString returns the string representation
 func (s InputSource) GoString() string {
 	return s.String()
-}
-
-// SetPasswordParam sets the PasswordParam field's value.
-func (s *InputSource) SetPasswordParam(v string) *InputSource {
-	s.PasswordParam = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *InputSource) SetUrl(v string) *InputSource {
-	s.Url = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *InputSource) SetUsername(v string) *InputSource {
-	s.Username = &v
-	return s
 }
 
 // Settings for for a PULL type input
@@ -6036,24 +3678,6 @@ func (s InputSourceRequest) GoString() string {
 	return s.String()
 }
 
-// SetPasswordParam sets the PasswordParam field's value.
-func (s *InputSourceRequest) SetPasswordParam(v string) *InputSourceRequest {
-	s.PasswordParam = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *InputSourceRequest) SetUrl(v string) *InputSourceRequest {
-	s.Url = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *InputSourceRequest) SetUsername(v string) *InputSourceRequest {
-	s.Username = &v
-	return s
-}
-
 // Whitelist rule
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputWhitelistRule
 type InputWhitelistRule struct {
@@ -6071,12 +3695,6 @@ func (s InputWhitelistRule) String() string {
 // GoString returns the string representation
 func (s InputWhitelistRule) GoString() string {
 	return s.String()
-}
-
-// SetCidr sets the Cidr field's value.
-func (s *InputWhitelistRule) SetCidr(v string) *InputWhitelistRule {
-	s.Cidr = &v
-	return s
 }
 
 // An IPv4 CIDR to whitelist.
@@ -6098,12 +3716,6 @@ func (s InputWhitelistRuleCidr) GoString() string {
 	return s.String()
 }
 
-// SetCidr sets the Cidr field's value.
-func (s *InputWhitelistRuleCidr) SetCidr(v string) *InputWhitelistRuleCidr {
-	s.Cidr = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/KeyProviderSettings
 type KeyProviderSettings struct {
 	_ struct{} `type:"structure"`
@@ -6119,12 +3731,6 @@ func (s KeyProviderSettings) String() string {
 // GoString returns the string representation
 func (s KeyProviderSettings) GoString() string {
 	return s.String()
-}
-
-// SetStaticKeySettings sets the StaticKeySettings field's value.
-func (s *KeyProviderSettings) SetStaticKeySettings(v *StaticKeySettings) *KeyProviderSettings {
-	s.StaticKeySettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannelsRequest
@@ -6159,18 +3765,6 @@ func (s *ListChannelsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListChannelsInput) SetMaxResults(v int64) *ListChannelsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChannelsInput) SetNextToken(v string) *ListChannelsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannelsResponse
 type ListChannelsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6195,18 +3789,6 @@ func (s ListChannelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListChannelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChannels sets the Channels field's value.
-func (s *ListChannelsOutput) SetChannels(v []ChannelSummary) *ListChannelsOutput {
-	s.Channels = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChannelsOutput) SetNextToken(v string) *ListChannelsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputSecurityGroupsRequest
@@ -6241,18 +3823,6 @@ func (s *ListInputSecurityGroupsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListInputSecurityGroupsInput) SetMaxResults(v int64) *ListInputSecurityGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInputSecurityGroupsInput) SetNextToken(v string) *ListInputSecurityGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputSecurityGroupsResponse
 type ListInputSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6277,18 +3847,6 @@ func (s ListInputSecurityGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInputSecurityGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInputSecurityGroups sets the InputSecurityGroups field's value.
-func (s *ListInputSecurityGroupsOutput) SetInputSecurityGroups(v []InputSecurityGroup) *ListInputSecurityGroupsOutput {
-	s.InputSecurityGroups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInputSecurityGroupsOutput) SetNextToken(v string) *ListInputSecurityGroupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputsRequest
@@ -6323,18 +3881,6 @@ func (s *ListInputsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListInputsInput) SetMaxResults(v int64) *ListInputsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInputsInput) SetNextToken(v string) *ListInputsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputsResponse
 type ListInputsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6359,18 +3905,6 @@ func (s ListInputsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInputsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInputs sets the Inputs field's value.
-func (s *ListInputsOutput) SetInputs(v []Input) *ListInputsOutput {
-	s.Inputs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListInputsOutput) SetNextToken(v string) *ListInputsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/M2tsSettings
@@ -6611,282 +4145,6 @@ func (s M2tsSettings) GoString() string {
 	return s.String()
 }
 
-// SetAbsentInputAudioBehavior sets the AbsentInputAudioBehavior field's value.
-func (s *M2tsSettings) SetAbsentInputAudioBehavior(v M2tsAbsentInputAudioBehavior) *M2tsSettings {
-	s.AbsentInputAudioBehavior = v
-	return s
-}
-
-// SetArib sets the Arib field's value.
-func (s *M2tsSettings) SetArib(v M2tsArib) *M2tsSettings {
-	s.Arib = v
-	return s
-}
-
-// SetAribCaptionsPid sets the AribCaptionsPid field's value.
-func (s *M2tsSettings) SetAribCaptionsPid(v string) *M2tsSettings {
-	s.AribCaptionsPid = &v
-	return s
-}
-
-// SetAribCaptionsPidControl sets the AribCaptionsPidControl field's value.
-func (s *M2tsSettings) SetAribCaptionsPidControl(v M2tsAribCaptionsPidControl) *M2tsSettings {
-	s.AribCaptionsPidControl = v
-	return s
-}
-
-// SetAudioBufferModel sets the AudioBufferModel field's value.
-func (s *M2tsSettings) SetAudioBufferModel(v M2tsAudioBufferModel) *M2tsSettings {
-	s.AudioBufferModel = v
-	return s
-}
-
-// SetAudioFramesPerPes sets the AudioFramesPerPes field's value.
-func (s *M2tsSettings) SetAudioFramesPerPes(v int64) *M2tsSettings {
-	s.AudioFramesPerPes = &v
-	return s
-}
-
-// SetAudioPids sets the AudioPids field's value.
-func (s *M2tsSettings) SetAudioPids(v string) *M2tsSettings {
-	s.AudioPids = &v
-	return s
-}
-
-// SetAudioStreamType sets the AudioStreamType field's value.
-func (s *M2tsSettings) SetAudioStreamType(v M2tsAudioStreamType) *M2tsSettings {
-	s.AudioStreamType = v
-	return s
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *M2tsSettings) SetBitrate(v int64) *M2tsSettings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetBufferModel sets the BufferModel field's value.
-func (s *M2tsSettings) SetBufferModel(v M2tsBufferModel) *M2tsSettings {
-	s.BufferModel = v
-	return s
-}
-
-// SetCcDescriptor sets the CcDescriptor field's value.
-func (s *M2tsSettings) SetCcDescriptor(v M2tsCcDescriptor) *M2tsSettings {
-	s.CcDescriptor = v
-	return s
-}
-
-// SetDvbNitSettings sets the DvbNitSettings field's value.
-func (s *M2tsSettings) SetDvbNitSettings(v *DvbNitSettings) *M2tsSettings {
-	s.DvbNitSettings = v
-	return s
-}
-
-// SetDvbSdtSettings sets the DvbSdtSettings field's value.
-func (s *M2tsSettings) SetDvbSdtSettings(v *DvbSdtSettings) *M2tsSettings {
-	s.DvbSdtSettings = v
-	return s
-}
-
-// SetDvbSubPids sets the DvbSubPids field's value.
-func (s *M2tsSettings) SetDvbSubPids(v string) *M2tsSettings {
-	s.DvbSubPids = &v
-	return s
-}
-
-// SetDvbTdtSettings sets the DvbTdtSettings field's value.
-func (s *M2tsSettings) SetDvbTdtSettings(v *DvbTdtSettings) *M2tsSettings {
-	s.DvbTdtSettings = v
-	return s
-}
-
-// SetDvbTeletextPid sets the DvbTeletextPid field's value.
-func (s *M2tsSettings) SetDvbTeletextPid(v string) *M2tsSettings {
-	s.DvbTeletextPid = &v
-	return s
-}
-
-// SetEbif sets the Ebif field's value.
-func (s *M2tsSettings) SetEbif(v M2tsEbifControl) *M2tsSettings {
-	s.Ebif = v
-	return s
-}
-
-// SetEbpAudioInterval sets the EbpAudioInterval field's value.
-func (s *M2tsSettings) SetEbpAudioInterval(v M2tsAudioInterval) *M2tsSettings {
-	s.EbpAudioInterval = v
-	return s
-}
-
-// SetEbpLookaheadMs sets the EbpLookaheadMs field's value.
-func (s *M2tsSettings) SetEbpLookaheadMs(v int64) *M2tsSettings {
-	s.EbpLookaheadMs = &v
-	return s
-}
-
-// SetEbpPlacement sets the EbpPlacement field's value.
-func (s *M2tsSettings) SetEbpPlacement(v M2tsEbpPlacement) *M2tsSettings {
-	s.EbpPlacement = v
-	return s
-}
-
-// SetEcmPid sets the EcmPid field's value.
-func (s *M2tsSettings) SetEcmPid(v string) *M2tsSettings {
-	s.EcmPid = &v
-	return s
-}
-
-// SetEsRateInPes sets the EsRateInPes field's value.
-func (s *M2tsSettings) SetEsRateInPes(v M2tsEsRateInPes) *M2tsSettings {
-	s.EsRateInPes = v
-	return s
-}
-
-// SetEtvPlatformPid sets the EtvPlatformPid field's value.
-func (s *M2tsSettings) SetEtvPlatformPid(v string) *M2tsSettings {
-	s.EtvPlatformPid = &v
-	return s
-}
-
-// SetEtvSignalPid sets the EtvSignalPid field's value.
-func (s *M2tsSettings) SetEtvSignalPid(v string) *M2tsSettings {
-	s.EtvSignalPid = &v
-	return s
-}
-
-// SetFragmentTime sets the FragmentTime field's value.
-func (s *M2tsSettings) SetFragmentTime(v float64) *M2tsSettings {
-	s.FragmentTime = &v
-	return s
-}
-
-// SetKlv sets the Klv field's value.
-func (s *M2tsSettings) SetKlv(v M2tsKlv) *M2tsSettings {
-	s.Klv = v
-	return s
-}
-
-// SetKlvDataPids sets the KlvDataPids field's value.
-func (s *M2tsSettings) SetKlvDataPids(v string) *M2tsSettings {
-	s.KlvDataPids = &v
-	return s
-}
-
-// SetNullPacketBitrate sets the NullPacketBitrate field's value.
-func (s *M2tsSettings) SetNullPacketBitrate(v float64) *M2tsSettings {
-	s.NullPacketBitrate = &v
-	return s
-}
-
-// SetPatInterval sets the PatInterval field's value.
-func (s *M2tsSettings) SetPatInterval(v int64) *M2tsSettings {
-	s.PatInterval = &v
-	return s
-}
-
-// SetPcrControl sets the PcrControl field's value.
-func (s *M2tsSettings) SetPcrControl(v M2tsPcrControl) *M2tsSettings {
-	s.PcrControl = v
-	return s
-}
-
-// SetPcrPeriod sets the PcrPeriod field's value.
-func (s *M2tsSettings) SetPcrPeriod(v int64) *M2tsSettings {
-	s.PcrPeriod = &v
-	return s
-}
-
-// SetPcrPid sets the PcrPid field's value.
-func (s *M2tsSettings) SetPcrPid(v string) *M2tsSettings {
-	s.PcrPid = &v
-	return s
-}
-
-// SetPmtInterval sets the PmtInterval field's value.
-func (s *M2tsSettings) SetPmtInterval(v int64) *M2tsSettings {
-	s.PmtInterval = &v
-	return s
-}
-
-// SetPmtPid sets the PmtPid field's value.
-func (s *M2tsSettings) SetPmtPid(v string) *M2tsSettings {
-	s.PmtPid = &v
-	return s
-}
-
-// SetProgramNum sets the ProgramNum field's value.
-func (s *M2tsSettings) SetProgramNum(v int64) *M2tsSettings {
-	s.ProgramNum = &v
-	return s
-}
-
-// SetRateMode sets the RateMode field's value.
-func (s *M2tsSettings) SetRateMode(v M2tsRateMode) *M2tsSettings {
-	s.RateMode = v
-	return s
-}
-
-// SetScte27Pids sets the Scte27Pids field's value.
-func (s *M2tsSettings) SetScte27Pids(v string) *M2tsSettings {
-	s.Scte27Pids = &v
-	return s
-}
-
-// SetScte35Control sets the Scte35Control field's value.
-func (s *M2tsSettings) SetScte35Control(v M2tsScte35Control) *M2tsSettings {
-	s.Scte35Control = v
-	return s
-}
-
-// SetScte35Pid sets the Scte35Pid field's value.
-func (s *M2tsSettings) SetScte35Pid(v string) *M2tsSettings {
-	s.Scte35Pid = &v
-	return s
-}
-
-// SetSegmentationMarkers sets the SegmentationMarkers field's value.
-func (s *M2tsSettings) SetSegmentationMarkers(v M2tsSegmentationMarkers) *M2tsSettings {
-	s.SegmentationMarkers = v
-	return s
-}
-
-// SetSegmentationStyle sets the SegmentationStyle field's value.
-func (s *M2tsSettings) SetSegmentationStyle(v M2tsSegmentationStyle) *M2tsSettings {
-	s.SegmentationStyle = v
-	return s
-}
-
-// SetSegmentationTime sets the SegmentationTime field's value.
-func (s *M2tsSettings) SetSegmentationTime(v float64) *M2tsSettings {
-	s.SegmentationTime = &v
-	return s
-}
-
-// SetTimedMetadataBehavior sets the TimedMetadataBehavior field's value.
-func (s *M2tsSettings) SetTimedMetadataBehavior(v M2tsTimedMetadataBehavior) *M2tsSettings {
-	s.TimedMetadataBehavior = v
-	return s
-}
-
-// SetTimedMetadataPid sets the TimedMetadataPid field's value.
-func (s *M2tsSettings) SetTimedMetadataPid(v string) *M2tsSettings {
-	s.TimedMetadataPid = &v
-	return s
-}
-
-// SetTransportStreamId sets the TransportStreamId field's value.
-func (s *M2tsSettings) SetTransportStreamId(v int64) *M2tsSettings {
-	s.TransportStreamId = &v
-	return s
-}
-
-// SetVideoPid sets the VideoPid field's value.
-func (s *M2tsSettings) SetVideoPid(v string) *M2tsSettings {
-	s.VideoPid = &v
-	return s
-}
-
 // Settings information for the .m3u8 container
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/M3u8Settings
 type M3u8Settings struct {
@@ -6964,96 +4222,6 @@ func (s M3u8Settings) GoString() string {
 	return s.String()
 }
 
-// SetAudioFramesPerPes sets the AudioFramesPerPes field's value.
-func (s *M3u8Settings) SetAudioFramesPerPes(v int64) *M3u8Settings {
-	s.AudioFramesPerPes = &v
-	return s
-}
-
-// SetAudioPids sets the AudioPids field's value.
-func (s *M3u8Settings) SetAudioPids(v string) *M3u8Settings {
-	s.AudioPids = &v
-	return s
-}
-
-// SetEcmPid sets the EcmPid field's value.
-func (s *M3u8Settings) SetEcmPid(v string) *M3u8Settings {
-	s.EcmPid = &v
-	return s
-}
-
-// SetPatInterval sets the PatInterval field's value.
-func (s *M3u8Settings) SetPatInterval(v int64) *M3u8Settings {
-	s.PatInterval = &v
-	return s
-}
-
-// SetPcrControl sets the PcrControl field's value.
-func (s *M3u8Settings) SetPcrControl(v M3u8PcrControl) *M3u8Settings {
-	s.PcrControl = v
-	return s
-}
-
-// SetPcrPeriod sets the PcrPeriod field's value.
-func (s *M3u8Settings) SetPcrPeriod(v int64) *M3u8Settings {
-	s.PcrPeriod = &v
-	return s
-}
-
-// SetPcrPid sets the PcrPid field's value.
-func (s *M3u8Settings) SetPcrPid(v string) *M3u8Settings {
-	s.PcrPid = &v
-	return s
-}
-
-// SetPmtInterval sets the PmtInterval field's value.
-func (s *M3u8Settings) SetPmtInterval(v int64) *M3u8Settings {
-	s.PmtInterval = &v
-	return s
-}
-
-// SetPmtPid sets the PmtPid field's value.
-func (s *M3u8Settings) SetPmtPid(v string) *M3u8Settings {
-	s.PmtPid = &v
-	return s
-}
-
-// SetProgramNum sets the ProgramNum field's value.
-func (s *M3u8Settings) SetProgramNum(v int64) *M3u8Settings {
-	s.ProgramNum = &v
-	return s
-}
-
-// SetScte35Behavior sets the Scte35Behavior field's value.
-func (s *M3u8Settings) SetScte35Behavior(v M3u8Scte35Behavior) *M3u8Settings {
-	s.Scte35Behavior = v
-	return s
-}
-
-// SetScte35Pid sets the Scte35Pid field's value.
-func (s *M3u8Settings) SetScte35Pid(v string) *M3u8Settings {
-	s.Scte35Pid = &v
-	return s
-}
-
-// SetTimedMetadataBehavior sets the TimedMetadataBehavior field's value.
-func (s *M3u8Settings) SetTimedMetadataBehavior(v M3u8TimedMetadataBehavior) *M3u8Settings {
-	s.TimedMetadataBehavior = v
-	return s
-}
-
-// SetTransportStreamId sets the TransportStreamId field's value.
-func (s *M3u8Settings) SetTransportStreamId(v int64) *M3u8Settings {
-	s.TransportStreamId = &v
-	return s
-}
-
-// SetVideoPid sets the VideoPid field's value.
-func (s *M3u8Settings) SetVideoPid(v string) *M3u8Settings {
-	s.VideoPid = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Mp2Settings
 type Mp2Settings struct {
 	_ struct{} `type:"structure"`
@@ -7077,24 +4245,6 @@ func (s Mp2Settings) String() string {
 // GoString returns the string representation
 func (s Mp2Settings) GoString() string {
 	return s.String()
-}
-
-// SetBitrate sets the Bitrate field's value.
-func (s *Mp2Settings) SetBitrate(v float64) *Mp2Settings {
-	s.Bitrate = &v
-	return s
-}
-
-// SetCodingMode sets the CodingMode field's value.
-func (s *Mp2Settings) SetCodingMode(v Mp2CodingMode) *Mp2Settings {
-	s.CodingMode = v
-	return s
-}
-
-// SetSampleRate sets the SampleRate field's value.
-func (s *Mp2Settings) SetSampleRate(v float64) *Mp2Settings {
-	s.SampleRate = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MsSmoothGroupSettings
@@ -7200,120 +4350,6 @@ func (s MsSmoothGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetAcquisitionPointId sets the AcquisitionPointId field's value.
-func (s *MsSmoothGroupSettings) SetAcquisitionPointId(v string) *MsSmoothGroupSettings {
-	s.AcquisitionPointId = &v
-	return s
-}
-
-// SetAudioOnlyTimecodeControl sets the AudioOnlyTimecodeControl field's value.
-func (s *MsSmoothGroupSettings) SetAudioOnlyTimecodeControl(v SmoothGroupAudioOnlyTimecodeControl) *MsSmoothGroupSettings {
-	s.AudioOnlyTimecodeControl = v
-	return s
-}
-
-// SetCertificateMode sets the CertificateMode field's value.
-func (s *MsSmoothGroupSettings) SetCertificateMode(v SmoothGroupCertificateMode) *MsSmoothGroupSettings {
-	s.CertificateMode = v
-	return s
-}
-
-// SetConnectionRetryInterval sets the ConnectionRetryInterval field's value.
-func (s *MsSmoothGroupSettings) SetConnectionRetryInterval(v int64) *MsSmoothGroupSettings {
-	s.ConnectionRetryInterval = &v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *MsSmoothGroupSettings) SetDestination(v *OutputLocationRef) *MsSmoothGroupSettings {
-	s.Destination = v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *MsSmoothGroupSettings) SetEventId(v string) *MsSmoothGroupSettings {
-	s.EventId = &v
-	return s
-}
-
-// SetEventIdMode sets the EventIdMode field's value.
-func (s *MsSmoothGroupSettings) SetEventIdMode(v SmoothGroupEventIdMode) *MsSmoothGroupSettings {
-	s.EventIdMode = v
-	return s
-}
-
-// SetEventStopBehavior sets the EventStopBehavior field's value.
-func (s *MsSmoothGroupSettings) SetEventStopBehavior(v SmoothGroupEventStopBehavior) *MsSmoothGroupSettings {
-	s.EventStopBehavior = v
-	return s
-}
-
-// SetFilecacheDuration sets the FilecacheDuration field's value.
-func (s *MsSmoothGroupSettings) SetFilecacheDuration(v int64) *MsSmoothGroupSettings {
-	s.FilecacheDuration = &v
-	return s
-}
-
-// SetFragmentLength sets the FragmentLength field's value.
-func (s *MsSmoothGroupSettings) SetFragmentLength(v int64) *MsSmoothGroupSettings {
-	s.FragmentLength = &v
-	return s
-}
-
-// SetInputLossAction sets the InputLossAction field's value.
-func (s *MsSmoothGroupSettings) SetInputLossAction(v InputLossActionForMsSmoothOut) *MsSmoothGroupSettings {
-	s.InputLossAction = v
-	return s
-}
-
-// SetNumRetries sets the NumRetries field's value.
-func (s *MsSmoothGroupSettings) SetNumRetries(v int64) *MsSmoothGroupSettings {
-	s.NumRetries = &v
-	return s
-}
-
-// SetRestartDelay sets the RestartDelay field's value.
-func (s *MsSmoothGroupSettings) SetRestartDelay(v int64) *MsSmoothGroupSettings {
-	s.RestartDelay = &v
-	return s
-}
-
-// SetSegmentationMode sets the SegmentationMode field's value.
-func (s *MsSmoothGroupSettings) SetSegmentationMode(v SmoothGroupSegmentationMode) *MsSmoothGroupSettings {
-	s.SegmentationMode = v
-	return s
-}
-
-// SetSendDelayMs sets the SendDelayMs field's value.
-func (s *MsSmoothGroupSettings) SetSendDelayMs(v int64) *MsSmoothGroupSettings {
-	s.SendDelayMs = &v
-	return s
-}
-
-// SetSparseTrackType sets the SparseTrackType field's value.
-func (s *MsSmoothGroupSettings) SetSparseTrackType(v SmoothGroupSparseTrackType) *MsSmoothGroupSettings {
-	s.SparseTrackType = v
-	return s
-}
-
-// SetStreamManifestBehavior sets the StreamManifestBehavior field's value.
-func (s *MsSmoothGroupSettings) SetStreamManifestBehavior(v SmoothGroupStreamManifestBehavior) *MsSmoothGroupSettings {
-	s.StreamManifestBehavior = v
-	return s
-}
-
-// SetTimestampOffset sets the TimestampOffset field's value.
-func (s *MsSmoothGroupSettings) SetTimestampOffset(v string) *MsSmoothGroupSettings {
-	s.TimestampOffset = &v
-	return s
-}
-
-// SetTimestampOffsetMode sets the TimestampOffsetMode field's value.
-func (s *MsSmoothGroupSettings) SetTimestampOffsetMode(v SmoothGroupTimestampOffsetMode) *MsSmoothGroupSettings {
-	s.TimestampOffsetMode = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MsSmoothOutputSettings
 type MsSmoothOutputSettings struct {
 	_ struct{} `type:"structure"`
@@ -7331,12 +4367,6 @@ func (s MsSmoothOutputSettings) String() string {
 // GoString returns the string representation
 func (s MsSmoothOutputSettings) GoString() string {
 	return s.String()
-}
-
-// SetNameModifier sets the NameModifier field's value.
-func (s *MsSmoothOutputSettings) SetNameModifier(v string) *MsSmoothOutputSettings {
-	s.NameModifier = &v
-	return s
 }
 
 // Network source to transcode. Must be accessible to the Elemental Live node
@@ -7365,18 +4395,6 @@ func (s NetworkInputSettings) String() string {
 // GoString returns the string representation
 func (s NetworkInputSettings) GoString() string {
 	return s.String()
-}
-
-// SetHlsInputSettings sets the HlsInputSettings field's value.
-func (s *NetworkInputSettings) SetHlsInputSettings(v *HlsInputSettings) *NetworkInputSettings {
-	s.HlsInputSettings = v
-	return s
-}
-
-// SetServerValidation sets the ServerValidation field's value.
-func (s *NetworkInputSettings) SetServerValidation(v NetworkInputServerValidation) *NetworkInputSettings {
-	s.ServerValidation = v
-	return s
 }
 
 // Output settings. There can be multiple outputs within a group.
@@ -7410,36 +4428,6 @@ func (s Output) GoString() string {
 	return s.String()
 }
 
-// SetAudioDescriptionNames sets the AudioDescriptionNames field's value.
-func (s *Output) SetAudioDescriptionNames(v []string) *Output {
-	s.AudioDescriptionNames = v
-	return s
-}
-
-// SetCaptionDescriptionNames sets the CaptionDescriptionNames field's value.
-func (s *Output) SetCaptionDescriptionNames(v []string) *Output {
-	s.CaptionDescriptionNames = v
-	return s
-}
-
-// SetOutputName sets the OutputName field's value.
-func (s *Output) SetOutputName(v string) *Output {
-	s.OutputName = &v
-	return s
-}
-
-// SetOutputSettings sets the OutputSettings field's value.
-func (s *Output) SetOutputSettings(v *OutputSettings) *Output {
-	s.OutputSettings = v
-	return s
-}
-
-// SetVideoDescriptionName sets the VideoDescriptionName field's value.
-func (s *Output) SetVideoDescriptionName(v string) *Output {
-	s.VideoDescriptionName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestination
 type OutputDestination struct {
 	_ struct{} `type:"structure"`
@@ -7459,18 +4447,6 @@ func (s OutputDestination) String() string {
 // GoString returns the string representation
 func (s OutputDestination) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *OutputDestination) SetId(v string) *OutputDestination {
-	s.Id = &v
-	return s
-}
-
-// SetSettings sets the Settings field's value.
-func (s *OutputDestination) SetSettings(v []OutputDestinationSettings) *OutputDestination {
-	s.Settings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputDestinationSettings
@@ -7495,24 +4471,6 @@ func (s OutputDestinationSettings) String() string {
 // GoString returns the string representation
 func (s OutputDestinationSettings) GoString() string {
 	return s.String()
-}
-
-// SetPasswordParam sets the PasswordParam field's value.
-func (s *OutputDestinationSettings) SetPasswordParam(v string) *OutputDestinationSettings {
-	s.PasswordParam = &v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *OutputDestinationSettings) SetUrl(v string) *OutputDestinationSettings {
-	s.Url = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *OutputDestinationSettings) SetUsername(v string) *OutputDestinationSettings {
-	s.Username = &v
-	return s
 }
 
 // Output groups for this Live Event. Output groups contain information about
@@ -7541,24 +4499,6 @@ func (s OutputGroup) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *OutputGroup) SetName(v string) *OutputGroup {
-	s.Name = &v
-	return s
-}
-
-// SetOutputGroupSettings sets the OutputGroupSettings field's value.
-func (s *OutputGroup) SetOutputGroupSettings(v *OutputGroupSettings) *OutputGroup {
-	s.OutputGroupSettings = v
-	return s
-}
-
-// SetOutputs sets the Outputs field's value.
-func (s *OutputGroup) SetOutputs(v []Output) *OutputGroup {
-	s.Outputs = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings
 type OutputGroupSettings struct {
 	_ struct{} `type:"structure"`
@@ -7582,30 +4522,6 @@ func (s OutputGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetArchiveGroupSettings sets the ArchiveGroupSettings field's value.
-func (s *OutputGroupSettings) SetArchiveGroupSettings(v *ArchiveGroupSettings) *OutputGroupSettings {
-	s.ArchiveGroupSettings = v
-	return s
-}
-
-// SetHlsGroupSettings sets the HlsGroupSettings field's value.
-func (s *OutputGroupSettings) SetHlsGroupSettings(v *HlsGroupSettings) *OutputGroupSettings {
-	s.HlsGroupSettings = v
-	return s
-}
-
-// SetMsSmoothGroupSettings sets the MsSmoothGroupSettings field's value.
-func (s *OutputGroupSettings) SetMsSmoothGroupSettings(v *MsSmoothGroupSettings) *OutputGroupSettings {
-	s.MsSmoothGroupSettings = v
-	return s
-}
-
-// SetUdpGroupSettings sets the UdpGroupSettings field's value.
-func (s *OutputGroupSettings) SetUdpGroupSettings(v *UdpGroupSettings) *OutputGroupSettings {
-	s.UdpGroupSettings = v
-	return s
-}
-
 // Reference to an OutputDestination ID defined in the channel
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputLocationRef
 type OutputLocationRef struct {
@@ -7622,12 +4538,6 @@ func (s OutputLocationRef) String() string {
 // GoString returns the string representation
 func (s OutputLocationRef) GoString() string {
 	return s.String()
-}
-
-// SetDestinationRefId sets the DestinationRefId field's value.
-func (s *OutputLocationRef) SetDestinationRefId(v string) *OutputLocationRef {
-	s.DestinationRefId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings
@@ -7651,30 +4561,6 @@ func (s OutputSettings) String() string {
 // GoString returns the string representation
 func (s OutputSettings) GoString() string {
 	return s.String()
-}
-
-// SetArchiveOutputSettings sets the ArchiveOutputSettings field's value.
-func (s *OutputSettings) SetArchiveOutputSettings(v *ArchiveOutputSettings) *OutputSettings {
-	s.ArchiveOutputSettings = v
-	return s
-}
-
-// SetHlsOutputSettings sets the HlsOutputSettings field's value.
-func (s *OutputSettings) SetHlsOutputSettings(v *HlsOutputSettings) *OutputSettings {
-	s.HlsOutputSettings = v
-	return s
-}
-
-// SetMsSmoothOutputSettings sets the MsSmoothOutputSettings field's value.
-func (s *OutputSettings) SetMsSmoothOutputSettings(v *MsSmoothOutputSettings) *OutputSettings {
-	s.MsSmoothOutputSettings = v
-	return s
-}
-
-// SetUdpOutputSettings sets the UdpOutputSettings field's value.
-func (s *OutputSettings) SetUdpOutputSettings(v *UdpOutputSettings) *OutputSettings {
-	s.UdpOutputSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PassThroughSettings
@@ -7716,24 +4602,6 @@ func (s RemixSettings) GoString() string {
 	return s.String()
 }
 
-// SetChannelMappings sets the ChannelMappings field's value.
-func (s *RemixSettings) SetChannelMappings(v []AudioChannelMapping) *RemixSettings {
-	s.ChannelMappings = v
-	return s
-}
-
-// SetChannelsIn sets the ChannelsIn field's value.
-func (s *RemixSettings) SetChannelsIn(v int64) *RemixSettings {
-	s.ChannelsIn = &v
-	return s
-}
-
-// SetChannelsOut sets the ChannelsOut field's value.
-func (s *RemixSettings) SetChannelsOut(v int64) *RemixSettings {
-	s.ChannelsOut = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte20PlusEmbeddedDestinationSettings
 type Scte20PlusEmbeddedDestinationSettings struct {
 	_ struct{} `type:"structure"`
@@ -7771,18 +4639,6 @@ func (s Scte20SourceSettings) String() string {
 // GoString returns the string representation
 func (s Scte20SourceSettings) GoString() string {
 	return s.String()
-}
-
-// SetConvert608To708 sets the Convert608To708 field's value.
-func (s *Scte20SourceSettings) SetConvert608To708(v Scte20Convert608To708) *Scte20SourceSettings {
-	s.Convert608To708 = v
-	return s
-}
-
-// SetSource608ChannelNumber sets the Source608ChannelNumber field's value.
-func (s *Scte20SourceSettings) SetSource608ChannelNumber(v int64) *Scte20SourceSettings {
-	s.Source608ChannelNumber = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte27DestinationSettings
@@ -7824,12 +4680,6 @@ func (s Scte27SourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetPid sets the Pid field's value.
-func (s *Scte27SourceSettings) SetPid(v int64) *Scte27SourceSettings {
-	s.Pid = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35SpliceInsert
 type Scte35SpliceInsert struct {
 	_ struct{} `type:"structure"`
@@ -7858,24 +4708,6 @@ func (s Scte35SpliceInsert) GoString() string {
 	return s.String()
 }
 
-// SetAdAvailOffset sets the AdAvailOffset field's value.
-func (s *Scte35SpliceInsert) SetAdAvailOffset(v int64) *Scte35SpliceInsert {
-	s.AdAvailOffset = &v
-	return s
-}
-
-// SetNoRegionalBlackoutFlag sets the NoRegionalBlackoutFlag field's value.
-func (s *Scte35SpliceInsert) SetNoRegionalBlackoutFlag(v Scte35SpliceInsertNoRegionalBlackoutBehavior) *Scte35SpliceInsert {
-	s.NoRegionalBlackoutFlag = v
-	return s
-}
-
-// SetWebDeliveryAllowedFlag sets the WebDeliveryAllowedFlag field's value.
-func (s *Scte35SpliceInsert) SetWebDeliveryAllowedFlag(v Scte35SpliceInsertWebDeliveryAllowedBehavior) *Scte35SpliceInsert {
-	s.WebDeliveryAllowedFlag = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Scte35TimeSignalApos
 type Scte35TimeSignalApos struct {
 	_ struct{} `type:"structure"`
@@ -7902,24 +4734,6 @@ func (s Scte35TimeSignalApos) String() string {
 // GoString returns the string representation
 func (s Scte35TimeSignalApos) GoString() string {
 	return s.String()
-}
-
-// SetAdAvailOffset sets the AdAvailOffset field's value.
-func (s *Scte35TimeSignalApos) SetAdAvailOffset(v int64) *Scte35TimeSignalApos {
-	s.AdAvailOffset = &v
-	return s
-}
-
-// SetNoRegionalBlackoutFlag sets the NoRegionalBlackoutFlag field's value.
-func (s *Scte35TimeSignalApos) SetNoRegionalBlackoutFlag(v Scte35AposNoRegionalBlackoutBehavior) *Scte35TimeSignalApos {
-	s.NoRegionalBlackoutFlag = v
-	return s
-}
-
-// SetWebDeliveryAllowedFlag sets the WebDeliveryAllowedFlag field's value.
-func (s *Scte35TimeSignalApos) SetWebDeliveryAllowedFlag(v Scte35AposWebDeliveryAllowedBehavior) *Scte35TimeSignalApos {
-	s.WebDeliveryAllowedFlag = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SmpteTtDestinationSettings
@@ -7959,18 +4773,6 @@ func (s StandardHlsSettings) GoString() string {
 	return s.String()
 }
 
-// SetAudioRenditionSets sets the AudioRenditionSets field's value.
-func (s *StandardHlsSettings) SetAudioRenditionSets(v string) *StandardHlsSettings {
-	s.AudioRenditionSets = &v
-	return s
-}
-
-// SetM3u8Settings sets the M3u8Settings field's value.
-func (s *StandardHlsSettings) SetM3u8Settings(v *M3u8Settings) *StandardHlsSettings {
-	s.M3u8Settings = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelRequest
 type StartChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -8001,12 +4803,6 @@ func (s *StartChannelInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *StartChannelInput) SetChannelId(v string) *StartChannelInput {
-	s.ChannelId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse
@@ -8051,66 +4847,6 @@ func (s StartChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *StartChannelOutput) SetArn(v string) *StartChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *StartChannelOutput) SetDestinations(v []OutputDestination) *StartChannelOutput {
-	s.Destinations = v
-	return s
-}
-
-// SetEgressEndpoints sets the EgressEndpoints field's value.
-func (s *StartChannelOutput) SetEgressEndpoints(v []ChannelEgressEndpoint) *StartChannelOutput {
-	s.EgressEndpoints = v
-	return s
-}
-
-// SetEncoderSettings sets the EncoderSettings field's value.
-func (s *StartChannelOutput) SetEncoderSettings(v *EncoderSettings) *StartChannelOutput {
-	s.EncoderSettings = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *StartChannelOutput) SetId(v string) *StartChannelOutput {
-	s.Id = &v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *StartChannelOutput) SetInputAttachments(v []InputAttachment) *StartChannelOutput {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *StartChannelOutput) SetName(v string) *StartChannelOutput {
-	s.Name = &v
-	return s
-}
-
-// SetPipelinesRunningCount sets the PipelinesRunningCount field's value.
-func (s *StartChannelOutput) SetPipelinesRunningCount(v int64) *StartChannelOutput {
-	s.PipelinesRunningCount = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *StartChannelOutput) SetRoleArn(v string) *StartChannelOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *StartChannelOutput) SetState(v ChannelState) *StartChannelOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticKeySettings
 type StaticKeySettings struct {
 	_ struct{} `type:"structure"`
@@ -8130,18 +4866,6 @@ func (s StaticKeySettings) String() string {
 // GoString returns the string representation
 func (s StaticKeySettings) GoString() string {
 	return s.String()
-}
-
-// SetKeyProviderServer sets the KeyProviderServer field's value.
-func (s *StaticKeySettings) SetKeyProviderServer(v *InputLocation) *StaticKeySettings {
-	s.KeyProviderServer = v
-	return s
-}
-
-// SetStaticKeyValue sets the StaticKeyValue field's value.
-func (s *StaticKeySettings) SetStaticKeyValue(v string) *StaticKeySettings {
-	s.StaticKeyValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelRequest
@@ -8174,12 +4898,6 @@ func (s *StopChannelInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChannelId sets the ChannelId field's value.
-func (s *StopChannelInput) SetChannelId(v string) *StopChannelInput {
-	s.ChannelId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse
@@ -8224,66 +4942,6 @@ func (s StopChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *StopChannelOutput) SetArn(v string) *StopChannelOutput {
-	s.Arn = &v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *StopChannelOutput) SetDestinations(v []OutputDestination) *StopChannelOutput {
-	s.Destinations = v
-	return s
-}
-
-// SetEgressEndpoints sets the EgressEndpoints field's value.
-func (s *StopChannelOutput) SetEgressEndpoints(v []ChannelEgressEndpoint) *StopChannelOutput {
-	s.EgressEndpoints = v
-	return s
-}
-
-// SetEncoderSettings sets the EncoderSettings field's value.
-func (s *StopChannelOutput) SetEncoderSettings(v *EncoderSettings) *StopChannelOutput {
-	s.EncoderSettings = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *StopChannelOutput) SetId(v string) *StopChannelOutput {
-	s.Id = &v
-	return s
-}
-
-// SetInputAttachments sets the InputAttachments field's value.
-func (s *StopChannelOutput) SetInputAttachments(v []InputAttachment) *StopChannelOutput {
-	s.InputAttachments = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *StopChannelOutput) SetName(v string) *StopChannelOutput {
-	s.Name = &v
-	return s
-}
-
-// SetPipelinesRunningCount sets the PipelinesRunningCount field's value.
-func (s *StopChannelOutput) SetPipelinesRunningCount(v int64) *StopChannelOutput {
-	s.PipelinesRunningCount = &v
-	return s
-}
-
-// SetRoleArn sets the RoleArn field's value.
-func (s *StopChannelOutput) SetRoleArn(v string) *StopChannelOutput {
-	s.RoleArn = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *StopChannelOutput) SetState(v ChannelState) *StopChannelOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextDestinationSettings
 type TeletextDestinationSettings struct {
 	_ struct{} `type:"structure"`
@@ -8319,12 +4977,6 @@ func (s TeletextSourceSettings) GoString() string {
 	return s.String()
 }
 
-// SetPageNumber sets the PageNumber field's value.
-func (s *TeletextSourceSettings) SetPageNumber(v string) *TeletextSourceSettings {
-	s.PageNumber = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TimecodeConfig
 type TimecodeConfig struct {
 	_ struct{} `type:"structure"`
@@ -8354,18 +5006,6 @@ func (s TimecodeConfig) GoString() string {
 	return s.String()
 }
 
-// SetSource sets the Source field's value.
-func (s *TimecodeConfig) SetSource(v TimecodeConfigSource) *TimecodeConfig {
-	s.Source = v
-	return s
-}
-
-// SetSyncThreshold sets the SyncThreshold field's value.
-func (s *TimecodeConfig) SetSyncThreshold(v int64) *TimecodeConfig {
-	s.SyncThreshold = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TtmlDestinationSettings
 type TtmlDestinationSettings struct {
 	_ struct{} `type:"structure"`
@@ -8386,12 +5026,6 @@ func (s TtmlDestinationSettings) GoString() string {
 	return s.String()
 }
 
-// SetStyleControl sets the StyleControl field's value.
-func (s *TtmlDestinationSettings) SetStyleControl(v TtmlDestinationStyleControl) *TtmlDestinationSettings {
-	s.StyleControl = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpContainerSettings
 type UdpContainerSettings struct {
 	_ struct{} `type:"structure"`
@@ -8407,12 +5041,6 @@ func (s UdpContainerSettings) String() string {
 // GoString returns the string representation
 func (s UdpContainerSettings) GoString() string {
 	return s.String()
-}
-
-// SetM2tsSettings sets the M2tsSettings field's value.
-func (s *UdpContainerSettings) SetM2tsSettings(v *M2tsSettings) *UdpContainerSettings {
-	s.M2tsSettings = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpGroupSettings
@@ -8445,24 +5073,6 @@ func (s UdpGroupSettings) GoString() string {
 	return s.String()
 }
 
-// SetInputLossAction sets the InputLossAction field's value.
-func (s *UdpGroupSettings) SetInputLossAction(v InputLossActionForUdpOut) *UdpGroupSettings {
-	s.InputLossAction = v
-	return s
-}
-
-// SetTimedMetadataId3Frame sets the TimedMetadataId3Frame field's value.
-func (s *UdpGroupSettings) SetTimedMetadataId3Frame(v UdpTimedMetadataId3Frame) *UdpGroupSettings {
-	s.TimedMetadataId3Frame = v
-	return s
-}
-
-// SetTimedMetadataId3Period sets the TimedMetadataId3Period field's value.
-func (s *UdpGroupSettings) SetTimedMetadataId3Period(v int64) *UdpGroupSettings {
-	s.TimedMetadataId3Period = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UdpOutputSettings
 type UdpOutputSettings struct {
 	_ struct{} `type:"structure"`
@@ -8493,30 +5103,6 @@ func (s UdpOutputSettings) GoString() string {
 	return s.String()
 }
 
-// SetBufferMsec sets the BufferMsec field's value.
-func (s *UdpOutputSettings) SetBufferMsec(v int64) *UdpOutputSettings {
-	s.BufferMsec = &v
-	return s
-}
-
-// SetContainerSettings sets the ContainerSettings field's value.
-func (s *UdpOutputSettings) SetContainerSettings(v *UdpContainerSettings) *UdpOutputSettings {
-	s.ContainerSettings = v
-	return s
-}
-
-// SetDestination sets the Destination field's value.
-func (s *UdpOutputSettings) SetDestination(v *OutputLocationRef) *UdpOutputSettings {
-	s.Destination = v
-	return s
-}
-
-// SetFecOutputSettings sets the FecOutputSettings field's value.
-func (s *UdpOutputSettings) SetFecOutputSettings(v *FecOutputSettings) *UdpOutputSettings {
-	s.FecOutputSettings = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ValidationError
 type ValidationError struct {
 	_ struct{} `type:"structure"`
@@ -8536,18 +5122,6 @@ func (s ValidationError) GoString() string {
 	return s.String()
 }
 
-// SetElementPath sets the ElementPath field's value.
-func (s *ValidationError) SetElementPath(v string) *ValidationError {
-	s.ElementPath = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *ValidationError) SetErrorMessage(v string) *ValidationError {
-	s.ErrorMessage = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoCodecSettings
 type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
@@ -8563,12 +5137,6 @@ func (s VideoCodecSettings) String() string {
 // GoString returns the string representation
 func (s VideoCodecSettings) GoString() string {
 	return s.String()
-}
-
-// SetH264Settings sets the H264Settings field's value.
-func (s *VideoCodecSettings) SetH264Settings(v *H264Settings) *VideoCodecSettings {
-	s.H264Settings = v
-	return s
 }
 
 // Video settings for this stream.
@@ -8619,48 +5187,6 @@ func (s VideoDescription) GoString() string {
 	return s.String()
 }
 
-// SetCodecSettings sets the CodecSettings field's value.
-func (s *VideoDescription) SetCodecSettings(v *VideoCodecSettings) *VideoDescription {
-	s.CodecSettings = v
-	return s
-}
-
-// SetHeight sets the Height field's value.
-func (s *VideoDescription) SetHeight(v int64) *VideoDescription {
-	s.Height = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *VideoDescription) SetName(v string) *VideoDescription {
-	s.Name = &v
-	return s
-}
-
-// SetRespondToAfd sets the RespondToAfd field's value.
-func (s *VideoDescription) SetRespondToAfd(v VideoDescriptionRespondToAfd) *VideoDescription {
-	s.RespondToAfd = v
-	return s
-}
-
-// SetScalingBehavior sets the ScalingBehavior field's value.
-func (s *VideoDescription) SetScalingBehavior(v VideoDescriptionScalingBehavior) *VideoDescription {
-	s.ScalingBehavior = v
-	return s
-}
-
-// SetSharpness sets the Sharpness field's value.
-func (s *VideoDescription) SetSharpness(v int64) *VideoDescription {
-	s.Sharpness = &v
-	return s
-}
-
-// SetWidth sets the Width field's value.
-func (s *VideoDescription) SetWidth(v int64) *VideoDescription {
-	s.Width = &v
-	return s
-}
-
 // Specifies a particular video stream within an input source. An input may
 // have only a single video selector.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelector
@@ -8695,24 +5221,6 @@ func (s VideoSelector) GoString() string {
 	return s.String()
 }
 
-// SetColorSpace sets the ColorSpace field's value.
-func (s *VideoSelector) SetColorSpace(v VideoSelectorColorSpace) *VideoSelector {
-	s.ColorSpace = v
-	return s
-}
-
-// SetColorSpaceUsage sets the ColorSpaceUsage field's value.
-func (s *VideoSelector) SetColorSpaceUsage(v VideoSelectorColorSpaceUsage) *VideoSelector {
-	s.ColorSpaceUsage = v
-	return s
-}
-
-// SetSelectorSettings sets the SelectorSettings field's value.
-func (s *VideoSelector) SetSelectorSettings(v *VideoSelectorSettings) *VideoSelector {
-	s.SelectorSettings = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorPid
 type VideoSelectorPid struct {
 	_ struct{} `type:"structure"`
@@ -8729,12 +5237,6 @@ func (s VideoSelectorPid) String() string {
 // GoString returns the string representation
 func (s VideoSelectorPid) GoString() string {
 	return s.String()
-}
-
-// SetPid sets the Pid field's value.
-func (s *VideoSelectorPid) SetPid(v int64) *VideoSelectorPid {
-	s.Pid = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorProgramId
@@ -8757,12 +5259,6 @@ func (s VideoSelectorProgramId) GoString() string {
 	return s.String()
 }
 
-// SetProgramId sets the ProgramId field's value.
-func (s *VideoSelectorProgramId) SetProgramId(v int64) *VideoSelectorProgramId {
-	s.ProgramId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoSelectorSettings
 type VideoSelectorSettings struct {
 	_ struct{} `type:"structure"`
@@ -8780,18 +5276,6 @@ func (s VideoSelectorSettings) String() string {
 // GoString returns the string representation
 func (s VideoSelectorSettings) GoString() string {
 	return s.String()
-}
-
-// SetVideoSelectorPid sets the VideoSelectorPid field's value.
-func (s *VideoSelectorSettings) SetVideoSelectorPid(v *VideoSelectorPid) *VideoSelectorSettings {
-	s.VideoSelectorPid = v
-	return s
-}
-
-// SetVideoSelectorProgramId sets the VideoSelectorProgramId field's value.
-func (s *VideoSelectorSettings) SetVideoSelectorProgramId(v *VideoSelectorProgramId) *VideoSelectorSettings {
-	s.VideoSelectorProgramId = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttDestinationSettings

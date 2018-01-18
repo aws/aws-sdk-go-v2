@@ -1869,36 +1869,6 @@ func (s AccountLimit) GoString() string {
 	return s.String()
 }
 
-// SetCodeSizeUnzipped sets the CodeSizeUnzipped field's value.
-func (s *AccountLimit) SetCodeSizeUnzipped(v int64) *AccountLimit {
-	s.CodeSizeUnzipped = &v
-	return s
-}
-
-// SetCodeSizeZipped sets the CodeSizeZipped field's value.
-func (s *AccountLimit) SetCodeSizeZipped(v int64) *AccountLimit {
-	s.CodeSizeZipped = &v
-	return s
-}
-
-// SetConcurrentExecutions sets the ConcurrentExecutions field's value.
-func (s *AccountLimit) SetConcurrentExecutions(v int64) *AccountLimit {
-	s.ConcurrentExecutions = &v
-	return s
-}
-
-// SetTotalCodeSize sets the TotalCodeSize field's value.
-func (s *AccountLimit) SetTotalCodeSize(v int64) *AccountLimit {
-	s.TotalCodeSize = &v
-	return s
-}
-
-// SetUnreservedConcurrentExecutions sets the UnreservedConcurrentExecutions field's value.
-func (s *AccountLimit) SetUnreservedConcurrentExecutions(v int64) *AccountLimit {
-	s.UnreservedConcurrentExecutions = &v
-	return s
-}
-
 // Provides code size usage and function count associated with the current account
 // and region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountUsage
@@ -1920,18 +1890,6 @@ func (s AccountUsage) String() string {
 // GoString returns the string representation
 func (s AccountUsage) GoString() string {
 	return s.String()
-}
-
-// SetFunctionCount sets the FunctionCount field's value.
-func (s *AccountUsage) SetFunctionCount(v int64) *AccountUsage {
-	s.FunctionCount = &v
-	return s
-}
-
-// SetTotalCodeSize sets the TotalCodeSize field's value.
-func (s *AccountUsage) SetTotalCodeSize(v int64) *AccountUsage {
-	s.TotalCodeSize = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest
@@ -2061,54 +2019,6 @@ func (s *AddPermissionInput) Validate() error {
 	return nil
 }
 
-// SetAction sets the Action field's value.
-func (s *AddPermissionInput) SetAction(v string) *AddPermissionInput {
-	s.Action = &v
-	return s
-}
-
-// SetEventSourceToken sets the EventSourceToken field's value.
-func (s *AddPermissionInput) SetEventSourceToken(v string) *AddPermissionInput {
-	s.EventSourceToken = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *AddPermissionInput) SetFunctionName(v string) *AddPermissionInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetPrincipal sets the Principal field's value.
-func (s *AddPermissionInput) SetPrincipal(v string) *AddPermissionInput {
-	s.Principal = &v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *AddPermissionInput) SetQualifier(v string) *AddPermissionInput {
-	s.Qualifier = &v
-	return s
-}
-
-// SetSourceAccount sets the SourceAccount field's value.
-func (s *AddPermissionInput) SetSourceAccount(v string) *AddPermissionInput {
-	s.SourceAccount = &v
-	return s
-}
-
-// SetSourceArn sets the SourceArn field's value.
-func (s *AddPermissionInput) SetSourceArn(v string) *AddPermissionInput {
-	s.SourceArn = &v
-	return s
-}
-
-// SetStatementId sets the StatementId field's value.
-func (s *AddPermissionInput) SetStatementId(v string) *AddPermissionInput {
-	s.StatementId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionResponse
 type AddPermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2136,12 +2046,6 @@ func (s AddPermissionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStatement sets the Statement field's value.
-func (s *AddPermissionOutput) SetStatement(v string) *AddPermissionOutput {
-	s.Statement = &v
-	return s
-}
-
 // The parent object that implements what percentage of traffic will invoke
 // each function version. For more information, see lambda-traffic-shifting-using-aliases.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration
@@ -2162,12 +2066,6 @@ func (s AliasRoutingConfiguration) String() string {
 // GoString returns the string representation
 func (s AliasRoutingConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetAdditionalVersionWeights sets the AdditionalVersionWeights field's value.
-func (s *AliasRoutingConfiguration) SetAdditionalVersionWeights(v map[string]float64) *AliasRoutingConfiguration {
-	s.AdditionalVersionWeights = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest
@@ -2239,36 +2137,6 @@ func (s *CreateAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateAliasInput) SetDescription(v string) *CreateAliasInput {
-	s.Description = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *CreateAliasInput) SetFunctionName(v string) *CreateAliasInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetFunctionVersion sets the FunctionVersion field's value.
-func (s *CreateAliasInput) SetFunctionVersion(v string) *CreateAliasInput {
-	s.FunctionVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateAliasInput) SetName(v string) *CreateAliasInput {
-	s.Name = &v
-	return s
-}
-
-// SetRoutingConfig sets the RoutingConfig field's value.
-func (s *CreateAliasInput) SetRoutingConfig(v *AliasRoutingConfiguration) *CreateAliasInput {
-	s.RoutingConfig = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest
@@ -2363,42 +2231,6 @@ func (s *CreateEventSourceMappingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBatchSize sets the BatchSize field's value.
-func (s *CreateEventSourceMappingInput) SetBatchSize(v int64) *CreateEventSourceMappingInput {
-	s.BatchSize = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *CreateEventSourceMappingInput) SetEnabled(v bool) *CreateEventSourceMappingInput {
-	s.Enabled = &v
-	return s
-}
-
-// SetEventSourceArn sets the EventSourceArn field's value.
-func (s *CreateEventSourceMappingInput) SetEventSourceArn(v string) *CreateEventSourceMappingInput {
-	s.EventSourceArn = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *CreateEventSourceMappingInput) SetFunctionName(v string) *CreateEventSourceMappingInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetStartingPosition sets the StartingPosition field's value.
-func (s *CreateEventSourceMappingInput) SetStartingPosition(v EventSourcePosition) *CreateEventSourceMappingInput {
-	s.StartingPosition = v
-	return s
-}
-
-// SetStartingPositionTimestamp sets the StartingPositionTimestamp field's value.
-func (s *CreateEventSourceMappingInput) SetStartingPositionTimestamp(v time.Time) *CreateEventSourceMappingInput {
-	s.StartingPositionTimestamp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest
@@ -2549,96 +2381,6 @@ func (s *CreateFunctionInput) Validate() error {
 	return nil
 }
 
-// SetCode sets the Code field's value.
-func (s *CreateFunctionInput) SetCode(v *FunctionCode) *CreateFunctionInput {
-	s.Code = v
-	return s
-}
-
-// SetDeadLetterConfig sets the DeadLetterConfig field's value.
-func (s *CreateFunctionInput) SetDeadLetterConfig(v *DeadLetterConfig) *CreateFunctionInput {
-	s.DeadLetterConfig = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateFunctionInput) SetDescription(v string) *CreateFunctionInput {
-	s.Description = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *CreateFunctionInput) SetEnvironment(v *Environment) *CreateFunctionInput {
-	s.Environment = v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *CreateFunctionInput) SetFunctionName(v string) *CreateFunctionInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetHandler sets the Handler field's value.
-func (s *CreateFunctionInput) SetHandler(v string) *CreateFunctionInput {
-	s.Handler = &v
-	return s
-}
-
-// SetKMSKeyArn sets the KMSKeyArn field's value.
-func (s *CreateFunctionInput) SetKMSKeyArn(v string) *CreateFunctionInput {
-	s.KMSKeyArn = &v
-	return s
-}
-
-// SetMemorySize sets the MemorySize field's value.
-func (s *CreateFunctionInput) SetMemorySize(v int64) *CreateFunctionInput {
-	s.MemorySize = &v
-	return s
-}
-
-// SetPublish sets the Publish field's value.
-func (s *CreateFunctionInput) SetPublish(v bool) *CreateFunctionInput {
-	s.Publish = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *CreateFunctionInput) SetRole(v string) *CreateFunctionInput {
-	s.Role = &v
-	return s
-}
-
-// SetRuntime sets the Runtime field's value.
-func (s *CreateFunctionInput) SetRuntime(v Runtime) *CreateFunctionInput {
-	s.Runtime = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateFunctionInput) SetTags(v map[string]string) *CreateFunctionInput {
-	s.Tags = v
-	return s
-}
-
-// SetTimeout sets the Timeout field's value.
-func (s *CreateFunctionInput) SetTimeout(v int64) *CreateFunctionInput {
-	s.Timeout = &v
-	return s
-}
-
-// SetTracingConfig sets the TracingConfig field's value.
-func (s *CreateFunctionInput) SetTracingConfig(v *TracingConfig) *CreateFunctionInput {
-	s.TracingConfig = v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *CreateFunctionInput) SetVpcConfig(v *VpcConfig) *CreateFunctionInput {
-	s.VpcConfig = v
-	return s
-}
-
 // The parent object that contains the target ARN (Amazon Resource Name) of
 // an Amazon SQS queue or Amazon SNS topic.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig
@@ -2658,12 +2400,6 @@ func (s DeadLetterConfig) String() string {
 // GoString returns the string representation
 func (s DeadLetterConfig) GoString() string {
 	return s.String()
-}
-
-// SetTargetArn sets the TargetArn field's value.
-func (s *DeadLetterConfig) SetTargetArn(v string) *DeadLetterConfig {
-	s.TargetArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasRequest
@@ -2716,18 +2452,6 @@ func (s *DeleteAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *DeleteAliasInput) SetFunctionName(v string) *DeleteAliasInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteAliasInput) SetName(v string) *DeleteAliasInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasOutput
@@ -2786,12 +2510,6 @@ func (s *DeleteEventSourceMappingInput) Validate() error {
 	return nil
 }
 
-// SetUUID sets the UUID field's value.
-func (s *DeleteEventSourceMappingInput) SetUUID(v string) *DeleteEventSourceMappingInput {
-	s.UUID = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest
 type DeleteFunctionConcurrencyInput struct {
 	_ struct{} `type:"structure"`
@@ -2827,12 +2545,6 @@ func (s *DeleteFunctionConcurrencyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *DeleteFunctionConcurrencyInput) SetFunctionName(v string) *DeleteFunctionConcurrencyInput {
-	s.FunctionName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyOutput
@@ -2921,18 +2633,6 @@ func (s *DeleteFunctionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *DeleteFunctionInput) SetFunctionName(v string) *DeleteFunctionInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *DeleteFunctionInput) SetQualifier(v string) *DeleteFunctionInput {
-	s.Qualifier = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionOutput
 type DeleteFunctionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2974,12 +2674,6 @@ func (s Environment) GoString() string {
 	return s.String()
 }
 
-// SetVariables sets the Variables field's value.
-func (s *Environment) SetVariables(v map[string]string) *Environment {
-	s.Variables = v
-	return s
-}
-
 // The parent object that contains error information associated with your configuration
 // settings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentError
@@ -3001,18 +2695,6 @@ func (s EnvironmentError) String() string {
 // GoString returns the string representation
 func (s EnvironmentError) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *EnvironmentError) SetErrorCode(v string) *EnvironmentError {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *EnvironmentError) SetMessage(v string) *EnvironmentError {
-	s.Message = &v
-	return s
 }
 
 // The parent object returned that contains your environment's configuration
@@ -3038,18 +2720,6 @@ func (s EnvironmentResponse) String() string {
 // GoString returns the string representation
 func (s EnvironmentResponse) GoString() string {
 	return s.String()
-}
-
-// SetError sets the Error field's value.
-func (s *EnvironmentResponse) SetError(v *EnvironmentError) *EnvironmentResponse {
-	s.Error = v
-	return s
-}
-
-// SetVariables sets the Variables field's value.
-func (s *EnvironmentResponse) SetVariables(v map[string]string) *EnvironmentResponse {
-	s.Variables = v
-	return s
 }
 
 // The code for the Lambda function.
@@ -3108,30 +2778,6 @@ func (s *FunctionCode) Validate() error {
 	return nil
 }
 
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *FunctionCode) SetS3Bucket(v string) *FunctionCode {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Key sets the S3Key field's value.
-func (s *FunctionCode) SetS3Key(v string) *FunctionCode {
-	s.S3Key = &v
-	return s
-}
-
-// SetS3ObjectVersion sets the S3ObjectVersion field's value.
-func (s *FunctionCode) SetS3ObjectVersion(v string) *FunctionCode {
-	s.S3ObjectVersion = &v
-	return s
-}
-
-// SetZipFile sets the ZipFile field's value.
-func (s *FunctionCode) SetZipFile(v []byte) *FunctionCode {
-	s.ZipFile = v
-	return s
-}
-
 // The object for the Lambda function location.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation
 type FunctionCodeLocation struct {
@@ -3153,18 +2799,6 @@ func (s FunctionCodeLocation) String() string {
 // GoString returns the string representation
 func (s FunctionCodeLocation) GoString() string {
 	return s.String()
-}
-
-// SetLocation sets the Location field's value.
-func (s *FunctionCodeLocation) SetLocation(v string) *FunctionCodeLocation {
-	s.Location = &v
-	return s
-}
-
-// SetRepositoryType sets the RepositoryType field's value.
-func (s *FunctionCodeLocation) SetRepositoryType(v string) *FunctionCodeLocation {
-	s.RepositoryType = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest
@@ -3210,18 +2844,6 @@ func (s GetAccountSettingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAccountSettingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccountLimit sets the AccountLimit field's value.
-func (s *GetAccountSettingsOutput) SetAccountLimit(v *AccountLimit) *GetAccountSettingsOutput {
-	s.AccountLimit = v
-	return s
-}
-
-// SetAccountUsage sets the AccountUsage field's value.
-func (s *GetAccountSettingsOutput) SetAccountUsage(v *AccountUsage) *GetAccountSettingsOutput {
-	s.AccountUsage = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasRequest
@@ -3277,18 +2899,6 @@ func (s *GetAliasInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *GetAliasInput) SetFunctionName(v string) *GetAliasInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetAliasInput) SetName(v string) *GetAliasInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest
 type GetEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
@@ -3321,12 +2931,6 @@ func (s *GetEventSourceMappingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUUID sets the UUID field's value.
-func (s *GetEventSourceMappingInput) SetUUID(v string) *GetEventSourceMappingInput {
-	s.UUID = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest
@@ -3386,18 +2990,6 @@ func (s *GetFunctionConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *GetFunctionConfigurationInput) SetFunctionName(v string) *GetFunctionConfigurationInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *GetFunctionConfigurationInput) SetQualifier(v string) *GetFunctionConfigurationInput {
-	s.Qualifier = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRequest
 type GetFunctionInput struct {
 	_ struct{} `type:"structure"`
@@ -3453,18 +3045,6 @@ func (s *GetFunctionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *GetFunctionInput) SetFunctionName(v string) *GetFunctionInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *GetFunctionInput) SetQualifier(v string) *GetFunctionInput {
-	s.Qualifier = &v
-	return s
-}
-
 // This response contains the object for the Lambda function location (see FunctionCodeLocation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse
 type GetFunctionOutput struct {
@@ -3498,30 +3078,6 @@ func (s GetFunctionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFunctionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCode sets the Code field's value.
-func (s *GetFunctionOutput) SetCode(v *FunctionCodeLocation) *GetFunctionOutput {
-	s.Code = v
-	return s
-}
-
-// SetConcurrency sets the Concurrency field's value.
-func (s *GetFunctionOutput) SetConcurrency(v *PutFunctionConcurrencyOutput) *GetFunctionOutput {
-	s.Concurrency = v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *GetFunctionOutput) SetConfiguration(v *UpdateFunctionConfigurationOutput) *GetFunctionOutput {
-	s.Configuration = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *GetFunctionOutput) SetTags(v map[string]string) *GetFunctionOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyRequest
@@ -3579,18 +3135,6 @@ func (s *GetPolicyInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *GetPolicyInput) SetFunctionName(v string) *GetPolicyInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *GetPolicyInput) SetQualifier(v string) *GetPolicyInput {
-	s.Qualifier = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyResponse
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -3616,12 +3160,6 @@ func (s GetPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *GetPolicyOutput) SetPolicy(v string) *GetPolicyOutput {
-	s.Policy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncRequest
@@ -3672,18 +3210,6 @@ func (s *InvokeAsyncInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *InvokeAsyncInput) SetFunctionName(v string) *InvokeAsyncInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetInvokeArgs sets the InvokeArgs field's value.
-func (s *InvokeAsyncInput) SetInvokeArgs(v io.ReadSeeker) *InvokeAsyncInput {
-	s.InvokeArgs = v
-	return s
-}
-
 // Upon success, it returns empty response. Otherwise, throws an exception.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncResponse
 type InvokeAsyncOutput struct {
@@ -3708,12 +3234,6 @@ func (s InvokeAsyncOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InvokeAsyncOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *InvokeAsyncOutput) SetStatus(v int64) *InvokeAsyncOutput {
-	s.Status = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest
@@ -3800,42 +3320,6 @@ func (s *InvokeInput) Validate() error {
 	return nil
 }
 
-// SetClientContext sets the ClientContext field's value.
-func (s *InvokeInput) SetClientContext(v string) *InvokeInput {
-	s.ClientContext = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *InvokeInput) SetFunctionName(v string) *InvokeInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetInvocationType sets the InvocationType field's value.
-func (s *InvokeInput) SetInvocationType(v InvocationType) *InvokeInput {
-	s.InvocationType = v
-	return s
-}
-
-// SetLogType sets the LogType field's value.
-func (s *InvokeInput) SetLogType(v LogType) *InvokeInput {
-	s.LogType = v
-	return s
-}
-
-// SetPayload sets the Payload field's value.
-func (s *InvokeInput) SetPayload(v []byte) *InvokeInput {
-	s.Payload = v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *InvokeInput) SetQualifier(v string) *InvokeInput {
-	s.Qualifier = &v
-	return s
-}
-
 // Upon success, returns an empty response. Otherwise, throws an exception.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse
 type InvokeOutput struct {
@@ -3888,36 +3372,6 @@ func (s InvokeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InvokeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExecutedVersion sets the ExecutedVersion field's value.
-func (s *InvokeOutput) SetExecutedVersion(v string) *InvokeOutput {
-	s.ExecutedVersion = &v
-	return s
-}
-
-// SetFunctionError sets the FunctionError field's value.
-func (s *InvokeOutput) SetFunctionError(v string) *InvokeOutput {
-	s.FunctionError = &v
-	return s
-}
-
-// SetLogResult sets the LogResult field's value.
-func (s *InvokeOutput) SetLogResult(v string) *InvokeOutput {
-	s.LogResult = &v
-	return s
-}
-
-// SetPayload sets the Payload field's value.
-func (s *InvokeOutput) SetPayload(v []byte) *InvokeOutput {
-	s.Payload = v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *InvokeOutput) SetStatusCode(v int64) *InvokeOutput {
-	s.StatusCode = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesRequest
@@ -3978,30 +3432,6 @@ func (s *ListAliasesInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *ListAliasesInput) SetFunctionName(v string) *ListAliasesInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetFunctionVersion sets the FunctionVersion field's value.
-func (s *ListAliasesInput) SetFunctionVersion(v string) *ListAliasesInput {
-	s.FunctionVersion = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAliasesInput) SetMarker(v string) *ListAliasesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListAliasesInput) SetMaxItems(v int64) *ListAliasesInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesResponse
 type ListAliasesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4028,18 +3458,6 @@ func (s ListAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAliases sets the Aliases field's value.
-func (s *ListAliasesOutput) SetAliases(v []UpdateAliasOutput) *ListAliasesOutput {
-	s.Aliases = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListAliasesOutput) SetNextMarker(v string) *ListAliasesOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest
@@ -4098,30 +3516,6 @@ func (s *ListEventSourceMappingsInput) Validate() error {
 	return nil
 }
 
-// SetEventSourceArn sets the EventSourceArn field's value.
-func (s *ListEventSourceMappingsInput) SetEventSourceArn(v string) *ListEventSourceMappingsInput {
-	s.EventSourceArn = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *ListEventSourceMappingsInput) SetFunctionName(v string) *ListEventSourceMappingsInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListEventSourceMappingsInput) SetMarker(v string) *ListEventSourceMappingsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListEventSourceMappingsInput) SetMaxItems(v int64) *ListEventSourceMappingsInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains a list of event sources (see EventSourceMappingConfiguration)
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsResponse
 type ListEventSourceMappingsOutput struct {
@@ -4149,18 +3543,6 @@ func (s ListEventSourceMappingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListEventSourceMappingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventSourceMappings sets the EventSourceMappings field's value.
-func (s *ListEventSourceMappingsOutput) SetEventSourceMappings(v []UpdateEventSourceMappingOutput) *ListEventSourceMappingsOutput {
-	s.EventSourceMappings = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListEventSourceMappingsOutput) SetNextMarker(v string) *ListEventSourceMappingsOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest
@@ -4220,30 +3602,6 @@ func (s *ListFunctionsInput) Validate() error {
 	return nil
 }
 
-// SetFunctionVersion sets the FunctionVersion field's value.
-func (s *ListFunctionsInput) SetFunctionVersion(v FunctionVersion) *ListFunctionsInput {
-	s.FunctionVersion = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListFunctionsInput) SetMarker(v string) *ListFunctionsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMasterRegion sets the MasterRegion field's value.
-func (s *ListFunctionsInput) SetMasterRegion(v string) *ListFunctionsInput {
-	s.MasterRegion = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListFunctionsInput) SetMaxItems(v int64) *ListFunctionsInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains a list of AWS Lambda function configurations (see FunctionConfiguration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsResponse
 type ListFunctionsOutput struct {
@@ -4271,18 +3629,6 @@ func (s ListFunctionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFunctionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFunctions sets the Functions field's value.
-func (s *ListFunctionsOutput) SetFunctions(v []UpdateFunctionConfigurationOutput) *ListFunctionsOutput {
-	s.Functions = v
-	return s
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListFunctionsOutput) SetNextMarker(v string) *ListFunctionsOutput {
-	s.NextMarker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest
@@ -4319,12 +3665,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetResource sets the Resource field's value.
-func (s *ListTagsInput) SetResource(v string) *ListTagsInput {
-	s.Resource = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsResponse
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4348,12 +3688,6 @@ func (s ListTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v map[string]string) *ListTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest
@@ -4409,24 +3743,6 @@ func (s *ListVersionsByFunctionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *ListVersionsByFunctionInput) SetFunctionName(v string) *ListVersionsByFunctionInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListVersionsByFunctionInput) SetMarker(v string) *ListVersionsByFunctionInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListVersionsByFunctionInput) SetMaxItems(v int64) *ListVersionsByFunctionInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionResponse
 type ListVersionsByFunctionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4453,18 +3769,6 @@ func (s ListVersionsByFunctionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListVersionsByFunctionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextMarker sets the NextMarker field's value.
-func (s *ListVersionsByFunctionOutput) SetNextMarker(v string) *ListVersionsByFunctionOutput {
-	s.NextMarker = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListVersionsByFunctionOutput) SetVersions(v []UpdateFunctionConfigurationOutput) *ListVersionsByFunctionOutput {
-	s.Versions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersionRequest
@@ -4520,24 +3824,6 @@ func (s *PublishVersionInput) Validate() error {
 	return nil
 }
 
-// SetCodeSha256 sets the CodeSha256 field's value.
-func (s *PublishVersionInput) SetCodeSha256(v string) *PublishVersionInput {
-	s.CodeSha256 = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PublishVersionInput) SetDescription(v string) *PublishVersionInput {
-	s.Description = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *PublishVersionInput) SetFunctionName(v string) *PublishVersionInput {
-	s.FunctionName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest
 type PutFunctionConcurrencyInput struct {
 	_ struct{} `type:"structure"`
@@ -4584,18 +3870,6 @@ func (s *PutFunctionConcurrencyInput) Validate() error {
 	return nil
 }
 
-// SetFunctionName sets the FunctionName field's value.
-func (s *PutFunctionConcurrencyInput) SetFunctionName(v string) *PutFunctionConcurrencyInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetReservedConcurrentExecutions sets the ReservedConcurrentExecutions field's value.
-func (s *PutFunctionConcurrencyInput) SetReservedConcurrentExecutions(v int64) *PutFunctionConcurrencyInput {
-	s.ReservedConcurrentExecutions = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency
 type PutFunctionConcurrencyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4619,12 +3893,6 @@ func (s PutFunctionConcurrencyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutFunctionConcurrencyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReservedConcurrentExecutions sets the ReservedConcurrentExecutions field's value.
-func (s *PutFunctionConcurrencyOutput) SetReservedConcurrentExecutions(v int64) *PutFunctionConcurrencyOutput {
-	s.ReservedConcurrentExecutions = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest
@@ -4689,24 +3957,6 @@ func (s *RemovePermissionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *RemovePermissionInput) SetFunctionName(v string) *RemovePermissionInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetQualifier sets the Qualifier field's value.
-func (s *RemovePermissionInput) SetQualifier(v string) *RemovePermissionInput {
-	s.Qualifier = &v
-	return s
-}
-
-// SetStatementId sets the StatementId field's value.
-func (s *RemovePermissionInput) SetStatementId(v string) *RemovePermissionInput {
-	s.StatementId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionOutput
@@ -4774,18 +4024,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResource sets the Resource field's value.
-func (s *TagResourceInput) SetResource(v string) *TagResourceInput {
-	s.Resource = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4831,12 +4069,6 @@ func (s TracingConfig) GoString() string {
 	return s.String()
 }
 
-// SetMode sets the Mode field's value.
-func (s *TracingConfig) SetMode(v TracingMode) *TracingConfig {
-	s.Mode = v
-	return s
-}
-
 // Parent object of the tracing information associated with your Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfigResponse
 type TracingConfigResponse struct {
@@ -4854,12 +4086,6 @@ func (s TracingConfigResponse) String() string {
 // GoString returns the string representation
 func (s TracingConfigResponse) GoString() string {
 	return s.String()
-}
-
-// SetMode sets the Mode field's value.
-func (s *TracingConfigResponse) SetMode(v TracingMode) *TracingConfigResponse {
-	s.Mode = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceRequest
@@ -4903,18 +4129,6 @@ func (s *UntagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResource sets the Resource field's value.
-func (s *UntagResourceInput) SetResource(v string) *UntagResourceInput {
-	s.Resource = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceOutput
@@ -5005,36 +4219,6 @@ func (s *UpdateAliasInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateAliasInput) SetDescription(v string) *UpdateAliasInput {
-	s.Description = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *UpdateAliasInput) SetFunctionName(v string) *UpdateAliasInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetFunctionVersion sets the FunctionVersion field's value.
-func (s *UpdateAliasInput) SetFunctionVersion(v string) *UpdateAliasInput {
-	s.FunctionVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateAliasInput) SetName(v string) *UpdateAliasInput {
-	s.Name = &v
-	return s
-}
-
-// SetRoutingConfig sets the RoutingConfig field's value.
-func (s *UpdateAliasInput) SetRoutingConfig(v *AliasRoutingConfiguration) *UpdateAliasInput {
-	s.RoutingConfig = v
-	return s
-}
-
 // Provides configuration information about a Lambda function version alias.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasOutput
 type UpdateAliasOutput struct {
@@ -5075,36 +4259,6 @@ func (s UpdateAliasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateAliasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAliasArn sets the AliasArn field's value.
-func (s *UpdateAliasOutput) SetAliasArn(v string) *UpdateAliasOutput {
-	s.AliasArn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateAliasOutput) SetDescription(v string) *UpdateAliasOutput {
-	s.Description = &v
-	return s
-}
-
-// SetFunctionVersion sets the FunctionVersion field's value.
-func (s *UpdateAliasOutput) SetFunctionVersion(v string) *UpdateAliasOutput {
-	s.FunctionVersion = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateAliasOutput) SetName(v string) *UpdateAliasOutput {
-	s.Name = &v
-	return s
-}
-
-// SetRoutingConfig sets the RoutingConfig field's value.
-func (s *UpdateAliasOutput) SetRoutingConfig(v *AliasRoutingConfiguration) *UpdateAliasOutput {
-	s.RoutingConfig = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest
@@ -5172,30 +4326,6 @@ func (s *UpdateEventSourceMappingInput) Validate() error {
 	return nil
 }
 
-// SetBatchSize sets the BatchSize field's value.
-func (s *UpdateEventSourceMappingInput) SetBatchSize(v int64) *UpdateEventSourceMappingInput {
-	s.BatchSize = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *UpdateEventSourceMappingInput) SetEnabled(v bool) *UpdateEventSourceMappingInput {
-	s.Enabled = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *UpdateEventSourceMappingInput) SetFunctionName(v string) *UpdateEventSourceMappingInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetUUID sets the UUID field's value.
-func (s *UpdateEventSourceMappingInput) SetUUID(v string) *UpdateEventSourceMappingInput {
-	s.UUID = &v
-	return s
-}
-
 // Describes mapping between an Amazon Kinesis stream and a Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingOutput
 type UpdateEventSourceMappingOutput struct {
@@ -5246,54 +4376,6 @@ func (s UpdateEventSourceMappingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEventSourceMappingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBatchSize sets the BatchSize field's value.
-func (s *UpdateEventSourceMappingOutput) SetBatchSize(v int64) *UpdateEventSourceMappingOutput {
-	s.BatchSize = &v
-	return s
-}
-
-// SetEventSourceArn sets the EventSourceArn field's value.
-func (s *UpdateEventSourceMappingOutput) SetEventSourceArn(v string) *UpdateEventSourceMappingOutput {
-	s.EventSourceArn = &v
-	return s
-}
-
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *UpdateEventSourceMappingOutput) SetFunctionArn(v string) *UpdateEventSourceMappingOutput {
-	s.FunctionArn = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *UpdateEventSourceMappingOutput) SetLastModified(v time.Time) *UpdateEventSourceMappingOutput {
-	s.LastModified = &v
-	return s
-}
-
-// SetLastProcessingResult sets the LastProcessingResult field's value.
-func (s *UpdateEventSourceMappingOutput) SetLastProcessingResult(v string) *UpdateEventSourceMappingOutput {
-	s.LastProcessingResult = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *UpdateEventSourceMappingOutput) SetState(v string) *UpdateEventSourceMappingOutput {
-	s.State = &v
-	return s
-}
-
-// SetStateTransitionReason sets the StateTransitionReason field's value.
-func (s *UpdateEventSourceMappingOutput) SetStateTransitionReason(v string) *UpdateEventSourceMappingOutput {
-	s.StateTransitionReason = &v
-	return s
-}
-
-// SetUUID sets the UUID field's value.
-func (s *UpdateEventSourceMappingOutput) SetUUID(v string) *UpdateEventSourceMappingOutput {
-	s.UUID = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest
@@ -5379,48 +4461,6 @@ func (s *UpdateFunctionCodeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDryRun sets the DryRun field's value.
-func (s *UpdateFunctionCodeInput) SetDryRun(v bool) *UpdateFunctionCodeInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *UpdateFunctionCodeInput) SetFunctionName(v string) *UpdateFunctionCodeInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetPublish sets the Publish field's value.
-func (s *UpdateFunctionCodeInput) SetPublish(v bool) *UpdateFunctionCodeInput {
-	s.Publish = &v
-	return s
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *UpdateFunctionCodeInput) SetS3Bucket(v string) *UpdateFunctionCodeInput {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3Key sets the S3Key field's value.
-func (s *UpdateFunctionCodeInput) SetS3Key(v string) *UpdateFunctionCodeInput {
-	s.S3Key = &v
-	return s
-}
-
-// SetS3ObjectVersion sets the S3ObjectVersion field's value.
-func (s *UpdateFunctionCodeInput) SetS3ObjectVersion(v string) *UpdateFunctionCodeInput {
-	s.S3ObjectVersion = &v
-	return s
-}
-
-// SetZipFile sets the ZipFile field's value.
-func (s *UpdateFunctionCodeInput) SetZipFile(v []byte) *UpdateFunctionCodeInput {
-	s.ZipFile = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest
@@ -5533,78 +4573,6 @@ func (s *UpdateFunctionConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetDeadLetterConfig sets the DeadLetterConfig field's value.
-func (s *UpdateFunctionConfigurationInput) SetDeadLetterConfig(v *DeadLetterConfig) *UpdateFunctionConfigurationInput {
-	s.DeadLetterConfig = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateFunctionConfigurationInput) SetDescription(v string) *UpdateFunctionConfigurationInput {
-	s.Description = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *UpdateFunctionConfigurationInput) SetEnvironment(v *Environment) *UpdateFunctionConfigurationInput {
-	s.Environment = v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *UpdateFunctionConfigurationInput) SetFunctionName(v string) *UpdateFunctionConfigurationInput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetHandler sets the Handler field's value.
-func (s *UpdateFunctionConfigurationInput) SetHandler(v string) *UpdateFunctionConfigurationInput {
-	s.Handler = &v
-	return s
-}
-
-// SetKMSKeyArn sets the KMSKeyArn field's value.
-func (s *UpdateFunctionConfigurationInput) SetKMSKeyArn(v string) *UpdateFunctionConfigurationInput {
-	s.KMSKeyArn = &v
-	return s
-}
-
-// SetMemorySize sets the MemorySize field's value.
-func (s *UpdateFunctionConfigurationInput) SetMemorySize(v int64) *UpdateFunctionConfigurationInput {
-	s.MemorySize = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *UpdateFunctionConfigurationInput) SetRole(v string) *UpdateFunctionConfigurationInput {
-	s.Role = &v
-	return s
-}
-
-// SetRuntime sets the Runtime field's value.
-func (s *UpdateFunctionConfigurationInput) SetRuntime(v Runtime) *UpdateFunctionConfigurationInput {
-	s.Runtime = v
-	return s
-}
-
-// SetTimeout sets the Timeout field's value.
-func (s *UpdateFunctionConfigurationInput) SetTimeout(v int64) *UpdateFunctionConfigurationInput {
-	s.Timeout = &v
-	return s
-}
-
-// SetTracingConfig sets the TracingConfig field's value.
-func (s *UpdateFunctionConfigurationInput) SetTracingConfig(v *TracingConfig) *UpdateFunctionConfigurationInput {
-	s.TracingConfig = v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *UpdateFunctionConfigurationInput) SetVpcConfig(v *VpcConfig) *UpdateFunctionConfigurationInput {
-	s.VpcConfig = v
-	return s
-}
-
 // A complex type that describes function metadata.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeOutput
 type UpdateFunctionConfigurationOutput struct {
@@ -5694,114 +4662,6 @@ func (s UpdateFunctionConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCodeSha256 sets the CodeSha256 field's value.
-func (s *UpdateFunctionConfigurationOutput) SetCodeSha256(v string) *UpdateFunctionConfigurationOutput {
-	s.CodeSha256 = &v
-	return s
-}
-
-// SetCodeSize sets the CodeSize field's value.
-func (s *UpdateFunctionConfigurationOutput) SetCodeSize(v int64) *UpdateFunctionConfigurationOutput {
-	s.CodeSize = &v
-	return s
-}
-
-// SetDeadLetterConfig sets the DeadLetterConfig field's value.
-func (s *UpdateFunctionConfigurationOutput) SetDeadLetterConfig(v *DeadLetterConfig) *UpdateFunctionConfigurationOutput {
-	s.DeadLetterConfig = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateFunctionConfigurationOutput) SetDescription(v string) *UpdateFunctionConfigurationOutput {
-	s.Description = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *UpdateFunctionConfigurationOutput) SetEnvironment(v *EnvironmentResponse) *UpdateFunctionConfigurationOutput {
-	s.Environment = v
-	return s
-}
-
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *UpdateFunctionConfigurationOutput) SetFunctionArn(v string) *UpdateFunctionConfigurationOutput {
-	s.FunctionArn = &v
-	return s
-}
-
-// SetFunctionName sets the FunctionName field's value.
-func (s *UpdateFunctionConfigurationOutput) SetFunctionName(v string) *UpdateFunctionConfigurationOutput {
-	s.FunctionName = &v
-	return s
-}
-
-// SetHandler sets the Handler field's value.
-func (s *UpdateFunctionConfigurationOutput) SetHandler(v string) *UpdateFunctionConfigurationOutput {
-	s.Handler = &v
-	return s
-}
-
-// SetKMSKeyArn sets the KMSKeyArn field's value.
-func (s *UpdateFunctionConfigurationOutput) SetKMSKeyArn(v string) *UpdateFunctionConfigurationOutput {
-	s.KMSKeyArn = &v
-	return s
-}
-
-// SetLastModified sets the LastModified field's value.
-func (s *UpdateFunctionConfigurationOutput) SetLastModified(v string) *UpdateFunctionConfigurationOutput {
-	s.LastModified = &v
-	return s
-}
-
-// SetMasterArn sets the MasterArn field's value.
-func (s *UpdateFunctionConfigurationOutput) SetMasterArn(v string) *UpdateFunctionConfigurationOutput {
-	s.MasterArn = &v
-	return s
-}
-
-// SetMemorySize sets the MemorySize field's value.
-func (s *UpdateFunctionConfigurationOutput) SetMemorySize(v int64) *UpdateFunctionConfigurationOutput {
-	s.MemorySize = &v
-	return s
-}
-
-// SetRole sets the Role field's value.
-func (s *UpdateFunctionConfigurationOutput) SetRole(v string) *UpdateFunctionConfigurationOutput {
-	s.Role = &v
-	return s
-}
-
-// SetRuntime sets the Runtime field's value.
-func (s *UpdateFunctionConfigurationOutput) SetRuntime(v Runtime) *UpdateFunctionConfigurationOutput {
-	s.Runtime = v
-	return s
-}
-
-// SetTimeout sets the Timeout field's value.
-func (s *UpdateFunctionConfigurationOutput) SetTimeout(v int64) *UpdateFunctionConfigurationOutput {
-	s.Timeout = &v
-	return s
-}
-
-// SetTracingConfig sets the TracingConfig field's value.
-func (s *UpdateFunctionConfigurationOutput) SetTracingConfig(v *TracingConfigResponse) *UpdateFunctionConfigurationOutput {
-	s.TracingConfig = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *UpdateFunctionConfigurationOutput) SetVersion(v string) *UpdateFunctionConfigurationOutput {
-	s.Version = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *UpdateFunctionConfigurationOutput) SetVpcConfig(v *VpcConfigResponse) *UpdateFunctionConfigurationOutput {
-	s.VpcConfig = v
-	return s
-}
-
 // If your Lambda function accesses resources in a VPC, you provide this parameter
 // identifying the list of security group IDs and subnet IDs. These must belong
 // to the same VPC. You must provide at least one security group and one subnet
@@ -5827,18 +4687,6 @@ func (s VpcConfig) GoString() string {
 	return s.String()
 }
 
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfig) SetSecurityGroupIds(v []string) *VpcConfig {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcConfig) SetSubnetIds(v []string) *VpcConfig {
-	s.SubnetIds = v
-	return s
-}
-
 // VPC configuration associated with your Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse
 type VpcConfigResponse struct {
@@ -5862,24 +4710,6 @@ func (s VpcConfigResponse) String() string {
 // GoString returns the string representation
 func (s VpcConfigResponse) GoString() string {
 	return s.String()
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfigResponse) SetSecurityGroupIds(v []string) *VpcConfigResponse {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcConfigResponse) SetSubnetIds(v []string) *VpcConfigResponse {
-	s.SubnetIds = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *VpcConfigResponse) SetVpcId(v string) *VpcConfigResponse {
-	s.VpcId = &v
-	return s
 }
 
 type EventSourcePosition string

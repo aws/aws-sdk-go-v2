@@ -599,42 +599,6 @@ func (s BundleDetails) GoString() string {
 	return s.String()
 }
 
-// SetAvailablePlatforms sets the AvailablePlatforms field's value.
-func (s *BundleDetails) SetAvailablePlatforms(v []Platform) *BundleDetails {
-	s.AvailablePlatforms = v
-	return s
-}
-
-// SetBundleId sets the BundleId field's value.
-func (s *BundleDetails) SetBundleId(v string) *BundleDetails {
-	s.BundleId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *BundleDetails) SetDescription(v string) *BundleDetails {
-	s.Description = &v
-	return s
-}
-
-// SetIconUrl sets the IconUrl field's value.
-func (s *BundleDetails) SetIconUrl(v string) *BundleDetails {
-	s.IconUrl = &v
-	return s
-}
-
-// SetTitle sets the Title field's value.
-func (s *BundleDetails) SetTitle(v string) *BundleDetails {
-	s.Title = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *BundleDetails) SetVersion(v string) *BundleDetails {
-	s.Version = &v
-	return s
-}
-
 // Request structure used to request a project be created.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProjectRequest
 type CreateProjectInput struct {
@@ -666,30 +630,6 @@ func (s CreateProjectInput) GoString() string {
 	return s.String()
 }
 
-// SetContents sets the Contents field's value.
-func (s *CreateProjectInput) SetContents(v []byte) *CreateProjectInput {
-	s.Contents = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *CreateProjectInput) SetRegion(v string) *CreateProjectInput {
-	s.Region = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateProjectInput) SetSnapshotId(v string) *CreateProjectInput {
-	s.SnapshotId = &v
-	return s
-}
-
 // Result structure used in response to a request to create a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProjectResult
 type CreateProjectOutput struct {
@@ -714,12 +654,6 @@ func (s CreateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetails sets the Details field's value.
-func (s *CreateProjectOutput) SetDetails(v *ProjectDetails) *CreateProjectOutput {
-	s.Details = v
-	return s
 }
 
 // Request structure used to request a project be deleted.
@@ -757,12 +691,6 @@ func (s *DeleteProjectInput) Validate() error {
 	return nil
 }
 
-// SetProjectId sets the ProjectId field's value.
-func (s *DeleteProjectInput) SetProjectId(v string) *DeleteProjectInput {
-	s.ProjectId = &v
-	return s
-}
-
 // Result structure used in response to request to delete a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProjectResult
 type DeleteProjectOutput struct {
@@ -791,18 +719,6 @@ func (s DeleteProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletedResources sets the DeletedResources field's value.
-func (s *DeleteProjectOutput) SetDeletedResources(v []Resource) *DeleteProjectOutput {
-	s.DeletedResources = v
-	return s
-}
-
-// SetOrphanedResources sets the OrphanedResources field's value.
-func (s *DeleteProjectOutput) SetOrphanedResources(v []Resource) *DeleteProjectOutput {
-	s.OrphanedResources = v
-	return s
 }
 
 // Request structure to request the details of a specific bundle.
@@ -840,12 +756,6 @@ func (s *DescribeBundleInput) Validate() error {
 	return nil
 }
 
-// SetBundleId sets the BundleId field's value.
-func (s *DescribeBundleInput) SetBundleId(v string) *DescribeBundleInput {
-	s.BundleId = &v
-	return s
-}
-
 // Result structure contains the details of the bundle.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundleResult
 type DescribeBundleOutput struct {
@@ -870,12 +780,6 @@ func (s DescribeBundleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBundleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetails sets the Details field's value.
-func (s *DescribeBundleOutput) SetDetails(v *BundleDetails) *DescribeBundleOutput {
-	s.Details = v
-	return s
 }
 
 // Request structure used to request details about a project.
@@ -918,18 +822,6 @@ func (s *DescribeProjectInput) Validate() error {
 	return nil
 }
 
-// SetProjectId sets the ProjectId field's value.
-func (s *DescribeProjectInput) SetProjectId(v string) *DescribeProjectInput {
-	s.ProjectId = &v
-	return s
-}
-
-// SetSyncFromResources sets the SyncFromResources field's value.
-func (s *DescribeProjectInput) SetSyncFromResources(v bool) *DescribeProjectInput {
-	s.SyncFromResources = &v
-	return s
-}
-
 // Result structure used for requests of project details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProjectResult
 type DescribeProjectOutput struct {
@@ -954,12 +846,6 @@ func (s DescribeProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetails sets the Details field's value.
-func (s *DescribeProjectOutput) SetDetails(v *ProjectDetails) *DescribeProjectOutput {
-	s.Details = v
-	return s
 }
 
 // Request structure used to request generation of custom SDK and tool packages
@@ -1004,24 +890,6 @@ func (s *ExportBundleInput) Validate() error {
 	return nil
 }
 
-// SetBundleId sets the BundleId field's value.
-func (s *ExportBundleInput) SetBundleId(v string) *ExportBundleInput {
-	s.BundleId = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ExportBundleInput) SetPlatform(v Platform) *ExportBundleInput {
-	s.Platform = v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ExportBundleInput) SetProjectId(v string) *ExportBundleInput {
-	s.ProjectId = &v
-	return s
-}
-
 // Result structure which contains link to download custom-generated SDK and
 // tool packages used to integrate mobile web or app clients with backed AWS
 // resources.
@@ -1050,12 +918,6 @@ func (s ExportBundleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ExportBundleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDownloadUrl sets the DownloadUrl field's value.
-func (s *ExportBundleOutput) SetDownloadUrl(v string) *ExportBundleOutput {
-	s.DownloadUrl = &v
-	return s
 }
 
 // Request structure used in requests to export project configuration details.
@@ -1091,12 +953,6 @@ func (s *ExportProjectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ExportProjectInput) SetProjectId(v string) *ExportProjectInput {
-	s.ProjectId = &v
-	return s
 }
 
 // Result structure used for requests to export project configuration details.
@@ -1137,24 +993,6 @@ func (s ExportProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDownloadUrl sets the DownloadUrl field's value.
-func (s *ExportProjectOutput) SetDownloadUrl(v string) *ExportProjectOutput {
-	s.DownloadUrl = &v
-	return s
-}
-
-// SetShareUrl sets the ShareUrl field's value.
-func (s *ExportProjectOutput) SetShareUrl(v string) *ExportProjectOutput {
-	s.ShareUrl = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *ExportProjectOutput) SetSnapshotId(v string) *ExportProjectOutput {
-	s.SnapshotId = &v
-	return s
-}
-
 // Request structure to request all available bundles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundlesRequest
 type ListBundlesInput struct {
@@ -1177,18 +1015,6 @@ func (s ListBundlesInput) String() string {
 // GoString returns the string representation
 func (s ListBundlesInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListBundlesInput) SetMaxResults(v int64) *ListBundlesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBundlesInput) SetNextToken(v string) *ListBundlesInput {
-	s.NextToken = &v
-	return s
 }
 
 // Result structure contains a list of all available bundles with details.
@@ -1221,18 +1047,6 @@ func (s ListBundlesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBundleList sets the BundleList field's value.
-func (s *ListBundlesOutput) SetBundleList(v []BundleDetails) *ListBundlesOutput {
-	s.BundleList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListBundlesOutput) SetNextToken(v string) *ListBundlesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Request structure used to request projects list in AWS Mobile Hub.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjectsRequest
 type ListProjectsInput struct {
@@ -1255,18 +1069,6 @@ func (s ListProjectsInput) String() string {
 // GoString returns the string representation
 func (s ListProjectsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListProjectsInput) SetMaxResults(v int64) *ListProjectsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Result structure used for requests to list projects in AWS Mobile Hub.
@@ -1298,18 +1100,6 @@ func (s ListProjectsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []ProjectSummary) *ListProjectsOutput {
-	s.Projects = v
-	return s
 }
 
 // Detailed information about an AWS Mobile Hub project.
@@ -1352,54 +1142,6 @@ func (s ProjectDetails) GoString() string {
 	return s.String()
 }
 
-// SetConsoleUrl sets the ConsoleUrl field's value.
-func (s *ProjectDetails) SetConsoleUrl(v string) *ProjectDetails {
-	s.ConsoleUrl = &v
-	return s
-}
-
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *ProjectDetails) SetCreatedDate(v time.Time) *ProjectDetails {
-	s.CreatedDate = &v
-	return s
-}
-
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *ProjectDetails) SetLastUpdatedDate(v time.Time) *ProjectDetails {
-	s.LastUpdatedDate = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProjectDetails) SetName(v string) *ProjectDetails {
-	s.Name = &v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ProjectDetails) SetProjectId(v string) *ProjectDetails {
-	s.ProjectId = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *ProjectDetails) SetRegion(v string) *ProjectDetails {
-	s.Region = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *ProjectDetails) SetResources(v []Resource) *ProjectDetails {
-	s.Resources = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ProjectDetails) SetState(v ProjectState) *ProjectDetails {
-	s.State = v
-	return s
-}
-
 // Summary information about an AWS Mobile Hub project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ProjectSummary
 type ProjectSummary struct {
@@ -1420,18 +1162,6 @@ func (s ProjectSummary) String() string {
 // GoString returns the string representation
 func (s ProjectSummary) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *ProjectSummary) SetName(v string) *ProjectSummary {
-	s.Name = &v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *ProjectSummary) SetProjectId(v string) *ProjectSummary {
-	s.ProjectId = &v
-	return s
 }
 
 // Information about an instance of an AWS resource associated with a project.
@@ -1464,36 +1194,6 @@ func (s Resource) String() string {
 // GoString returns the string representation
 func (s Resource) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Resource) SetArn(v string) *Resource {
-	s.Arn = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *Resource) SetAttributes(v map[string]string) *Resource {
-	s.Attributes = v
-	return s
-}
-
-// SetFeature sets the Feature field's value.
-func (s *Resource) SetFeature(v string) *Resource {
-	s.Feature = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Resource) SetName(v string) *Resource {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Resource) SetType(v string) *Resource {
-	s.Type = &v
-	return s
 }
 
 // Request structure used for requests to update project configuration.
@@ -1536,18 +1236,6 @@ func (s *UpdateProjectInput) Validate() error {
 	return nil
 }
 
-// SetContents sets the Contents field's value.
-func (s *UpdateProjectInput) SetContents(v []byte) *UpdateProjectInput {
-	s.Contents = v
-	return s
-}
-
-// SetProjectId sets the ProjectId field's value.
-func (s *UpdateProjectInput) SetProjectId(v string) *UpdateProjectInput {
-	s.ProjectId = &v
-	return s
-}
-
 // Result structure used for requests to updated project configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProjectResult
 type UpdateProjectOutput struct {
@@ -1572,12 +1260,6 @@ func (s UpdateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetails sets the Details field's value.
-func (s *UpdateProjectOutput) SetDetails(v *ProjectDetails) *UpdateProjectOutput {
-	s.Details = v
-	return s
 }
 
 // Developer desktop or target mobile app or website platform.

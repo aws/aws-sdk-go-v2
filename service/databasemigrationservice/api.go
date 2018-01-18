@@ -2888,24 +2888,6 @@ func (s AccountQuota) GoString() string {
 	return s.String()
 }
 
-// SetAccountQuotaName sets the AccountQuotaName field's value.
-func (s *AccountQuota) SetAccountQuotaName(v string) *AccountQuota {
-	s.AccountQuotaName = &v
-	return s
-}
-
-// SetMax sets the Max field's value.
-func (s *AccountQuota) SetMax(v int64) *AccountQuota {
-	s.Max = &v
-	return s
-}
-
-// SetUsed sets the Used field's value.
-func (s *AccountQuota) SetUsed(v int64) *AccountQuota {
-	s.Used = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResourceMessage
 type AddTagsToResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -2951,18 +2933,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *AddTagsToResourceInput) SetResourceArn(v string) *AddTagsToResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsToResourceInput) SetTags(v []Tag) *AddTagsToResourceInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResourceResponse
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3001,12 +2971,6 @@ func (s AvailabilityZone) String() string {
 // GoString returns the string representation
 func (s AvailabilityZone) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *AvailabilityZone) SetName(v string) *AvailabilityZone {
-	s.Name = &v
-	return s
 }
 
 // The SSL certificate that can be used to encrypt connections between the endpoints
@@ -3059,66 +3023,6 @@ func (s Certificate) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Certificate) SetCertificateArn(v string) *Certificate {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateCreationDate sets the CertificateCreationDate field's value.
-func (s *Certificate) SetCertificateCreationDate(v time.Time) *Certificate {
-	s.CertificateCreationDate = &v
-	return s
-}
-
-// SetCertificateIdentifier sets the CertificateIdentifier field's value.
-func (s *Certificate) SetCertificateIdentifier(v string) *Certificate {
-	s.CertificateIdentifier = &v
-	return s
-}
-
-// SetCertificateOwner sets the CertificateOwner field's value.
-func (s *Certificate) SetCertificateOwner(v string) *Certificate {
-	s.CertificateOwner = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *Certificate) SetCertificatePem(v string) *Certificate {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetCertificateWallet sets the CertificateWallet field's value.
-func (s *Certificate) SetCertificateWallet(v []byte) *Certificate {
-	s.CertificateWallet = v
-	return s
-}
-
-// SetKeyLength sets the KeyLength field's value.
-func (s *Certificate) SetKeyLength(v int64) *Certificate {
-	s.KeyLength = &v
-	return s
-}
-
-// SetSigningAlgorithm sets the SigningAlgorithm field's value.
-func (s *Certificate) SetSigningAlgorithm(v string) *Certificate {
-	s.SigningAlgorithm = &v
-	return s
-}
-
-// SetValidFromDate sets the ValidFromDate field's value.
-func (s *Certificate) SetValidFromDate(v time.Time) *Certificate {
-	s.ValidFromDate = &v
-	return s
-}
-
-// SetValidToDate sets the ValidToDate field's value.
-func (s *Certificate) SetValidToDate(v time.Time) *Certificate {
-	s.ValidToDate = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Connection
 type Connection struct {
 	_ struct{} `type:"structure"`
@@ -3153,42 +3057,6 @@ func (s Connection) String() string {
 // GoString returns the string representation
 func (s Connection) GoString() string {
 	return s.String()
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *Connection) SetEndpointArn(v string) *Connection {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetEndpointIdentifier sets the EndpointIdentifier field's value.
-func (s *Connection) SetEndpointIdentifier(v string) *Connection {
-	s.EndpointIdentifier = &v
-	return s
-}
-
-// SetLastFailureMessage sets the LastFailureMessage field's value.
-func (s *Connection) SetLastFailureMessage(v string) *Connection {
-	s.LastFailureMessage = &v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *Connection) SetReplicationInstanceArn(v string) *Connection {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
-// SetReplicationInstanceIdentifier sets the ReplicationInstanceIdentifier field's value.
-func (s *Connection) SetReplicationInstanceIdentifier(v string) *Connection {
-	s.ReplicationInstanceIdentifier = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Connection) SetStatus(v string) *Connection {
-	s.Status = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage
@@ -3306,102 +3174,6 @@ func (s *CreateEndpointInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CreateEndpointInput) SetCertificateArn(v string) *CreateEndpointInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDatabaseName sets the DatabaseName field's value.
-func (s *CreateEndpointInput) SetDatabaseName(v string) *CreateEndpointInput {
-	s.DatabaseName = &v
-	return s
-}
-
-// SetDynamoDbSettings sets the DynamoDbSettings field's value.
-func (s *CreateEndpointInput) SetDynamoDbSettings(v *DynamoDbSettings) *CreateEndpointInput {
-	s.DynamoDbSettings = v
-	return s
-}
-
-// SetEndpointIdentifier sets the EndpointIdentifier field's value.
-func (s *CreateEndpointInput) SetEndpointIdentifier(v string) *CreateEndpointInput {
-	s.EndpointIdentifier = &v
-	return s
-}
-
-// SetEndpointType sets the EndpointType field's value.
-func (s *CreateEndpointInput) SetEndpointType(v ReplicationEndpointTypeValue) *CreateEndpointInput {
-	s.EndpointType = v
-	return s
-}
-
-// SetEngineName sets the EngineName field's value.
-func (s *CreateEndpointInput) SetEngineName(v string) *CreateEndpointInput {
-	s.EngineName = &v
-	return s
-}
-
-// SetExtraConnectionAttributes sets the ExtraConnectionAttributes field's value.
-func (s *CreateEndpointInput) SetExtraConnectionAttributes(v string) *CreateEndpointInput {
-	s.ExtraConnectionAttributes = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateEndpointInput) SetKmsKeyId(v string) *CreateEndpointInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetMongoDbSettings sets the MongoDbSettings field's value.
-func (s *CreateEndpointInput) SetMongoDbSettings(v *MongoDbSettings) *CreateEndpointInput {
-	s.MongoDbSettings = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *CreateEndpointInput) SetPassword(v string) *CreateEndpointInput {
-	s.Password = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *CreateEndpointInput) SetPort(v int64) *CreateEndpointInput {
-	s.Port = &v
-	return s
-}
-
-// SetS3Settings sets the S3Settings field's value.
-func (s *CreateEndpointInput) SetS3Settings(v *S3Settings) *CreateEndpointInput {
-	s.S3Settings = v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *CreateEndpointInput) SetServerName(v string) *CreateEndpointInput {
-	s.ServerName = &v
-	return s
-}
-
-// SetSslMode sets the SslMode field's value.
-func (s *CreateEndpointInput) SetSslMode(v DmsSslModeValue) *CreateEndpointInput {
-	s.SslMode = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateEndpointInput) SetTags(v []Tag) *CreateEndpointInput {
-	s.Tags = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *CreateEndpointInput) SetUsername(v string) *CreateEndpointInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointResponse
 type CreateEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -3425,12 +3197,6 @@ func (s CreateEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *CreateEndpointOutput) SetEndpoint(v *Endpoint) *CreateEndpointOutput {
-	s.Endpoint = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEventSubscriptionMessage
@@ -3508,48 +3274,6 @@ func (s *CreateEventSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *CreateEventSubscriptionInput) SetEnabled(v bool) *CreateEventSubscriptionInput {
-	s.Enabled = &v
-	return s
-}
-
-// SetEventCategories sets the EventCategories field's value.
-func (s *CreateEventSubscriptionInput) SetEventCategories(v []string) *CreateEventSubscriptionInput {
-	s.EventCategories = v
-	return s
-}
-
-// SetSnsTopicArn sets the SnsTopicArn field's value.
-func (s *CreateEventSubscriptionInput) SetSnsTopicArn(v string) *CreateEventSubscriptionInput {
-	s.SnsTopicArn = &v
-	return s
-}
-
-// SetSourceIds sets the SourceIds field's value.
-func (s *CreateEventSubscriptionInput) SetSourceIds(v []string) *CreateEventSubscriptionInput {
-	s.SourceIds = v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *CreateEventSubscriptionInput) SetSourceType(v string) *CreateEventSubscriptionInput {
-	s.SourceType = &v
-	return s
-}
-
-// SetSubscriptionName sets the SubscriptionName field's value.
-func (s *CreateEventSubscriptionInput) SetSubscriptionName(v string) *CreateEventSubscriptionInput {
-	s.SubscriptionName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateEventSubscriptionInput) SetTags(v []Tag) *CreateEventSubscriptionInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEventSubscriptionResponse
 type CreateEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -3573,12 +3297,6 @@ func (s CreateEventSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventSubscription sets the EventSubscription field's value.
-func (s *CreateEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *CreateEventSubscriptionOutput {
-	s.EventSubscription = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage
@@ -3699,84 +3417,6 @@ func (s *CreateReplicationInstanceInput) Validate() error {
 	return nil
 }
 
-// SetAllocatedStorage sets the AllocatedStorage field's value.
-func (s *CreateReplicationInstanceInput) SetAllocatedStorage(v int64) *CreateReplicationInstanceInput {
-	s.AllocatedStorage = &v
-	return s
-}
-
-// SetAutoMinorVersionUpgrade sets the AutoMinorVersionUpgrade field's value.
-func (s *CreateReplicationInstanceInput) SetAutoMinorVersionUpgrade(v bool) *CreateReplicationInstanceInput {
-	s.AutoMinorVersionUpgrade = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateReplicationInstanceInput) SetAvailabilityZone(v string) *CreateReplicationInstanceInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *CreateReplicationInstanceInput) SetEngineVersion(v string) *CreateReplicationInstanceInput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *CreateReplicationInstanceInput) SetKmsKeyId(v string) *CreateReplicationInstanceInput {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetMultiAZ sets the MultiAZ field's value.
-func (s *CreateReplicationInstanceInput) SetMultiAZ(v bool) *CreateReplicationInstanceInput {
-	s.MultiAZ = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *CreateReplicationInstanceInput) SetPreferredMaintenanceWindow(v string) *CreateReplicationInstanceInput {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetPubliclyAccessible sets the PubliclyAccessible field's value.
-func (s *CreateReplicationInstanceInput) SetPubliclyAccessible(v bool) *CreateReplicationInstanceInput {
-	s.PubliclyAccessible = &v
-	return s
-}
-
-// SetReplicationInstanceClass sets the ReplicationInstanceClass field's value.
-func (s *CreateReplicationInstanceInput) SetReplicationInstanceClass(v string) *CreateReplicationInstanceInput {
-	s.ReplicationInstanceClass = &v
-	return s
-}
-
-// SetReplicationInstanceIdentifier sets the ReplicationInstanceIdentifier field's value.
-func (s *CreateReplicationInstanceInput) SetReplicationInstanceIdentifier(v string) *CreateReplicationInstanceInput {
-	s.ReplicationInstanceIdentifier = &v
-	return s
-}
-
-// SetReplicationSubnetGroupIdentifier sets the ReplicationSubnetGroupIdentifier field's value.
-func (s *CreateReplicationInstanceInput) SetReplicationSubnetGroupIdentifier(v string) *CreateReplicationInstanceInput {
-	s.ReplicationSubnetGroupIdentifier = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateReplicationInstanceInput) SetTags(v []Tag) *CreateReplicationInstanceInput {
-	s.Tags = v
-	return s
-}
-
-// SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *CreateReplicationInstanceInput) SetVpcSecurityGroupIds(v []string) *CreateReplicationInstanceInput {
-	s.VpcSecurityGroupIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceResponse
 type CreateReplicationInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3800,12 +3440,6 @@ func (s CreateReplicationInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationInstance sets the ReplicationInstance field's value.
-func (s *CreateReplicationInstanceOutput) SetReplicationInstance(v *ReplicationInstance) *CreateReplicationInstanceOutput {
-	s.ReplicationInstance = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroupMessage
@@ -3869,30 +3503,6 @@ func (s *CreateReplicationSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// SetReplicationSubnetGroupDescription sets the ReplicationSubnetGroupDescription field's value.
-func (s *CreateReplicationSubnetGroupInput) SetReplicationSubnetGroupDescription(v string) *CreateReplicationSubnetGroupInput {
-	s.ReplicationSubnetGroupDescription = &v
-	return s
-}
-
-// SetReplicationSubnetGroupIdentifier sets the ReplicationSubnetGroupIdentifier field's value.
-func (s *CreateReplicationSubnetGroupInput) SetReplicationSubnetGroupIdentifier(v string) *CreateReplicationSubnetGroupInput {
-	s.ReplicationSubnetGroupIdentifier = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateReplicationSubnetGroupInput) SetSubnetIds(v []string) *CreateReplicationSubnetGroupInput {
-	s.SubnetIds = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateReplicationSubnetGroupInput) SetTags(v []Tag) *CreateReplicationSubnetGroupInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroupResponse
 type CreateReplicationSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3916,12 +3526,6 @@ func (s CreateReplicationSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationSubnetGroup sets the ReplicationSubnetGroup field's value.
-func (s *CreateReplicationSubnetGroupOutput) SetReplicationSubnetGroup(v *ReplicationSubnetGroup) *CreateReplicationSubnetGroupOutput {
-	s.ReplicationSubnetGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTaskMessage
@@ -4025,60 +3629,6 @@ func (s *CreateReplicationTaskInput) Validate() error {
 	return nil
 }
 
-// SetCdcStartTime sets the CdcStartTime field's value.
-func (s *CreateReplicationTaskInput) SetCdcStartTime(v time.Time) *CreateReplicationTaskInput {
-	s.CdcStartTime = &v
-	return s
-}
-
-// SetMigrationType sets the MigrationType field's value.
-func (s *CreateReplicationTaskInput) SetMigrationType(v MigrationTypeValue) *CreateReplicationTaskInput {
-	s.MigrationType = v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *CreateReplicationTaskInput) SetReplicationInstanceArn(v string) *CreateReplicationTaskInput {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
-// SetReplicationTaskIdentifier sets the ReplicationTaskIdentifier field's value.
-func (s *CreateReplicationTaskInput) SetReplicationTaskIdentifier(v string) *CreateReplicationTaskInput {
-	s.ReplicationTaskIdentifier = &v
-	return s
-}
-
-// SetReplicationTaskSettings sets the ReplicationTaskSettings field's value.
-func (s *CreateReplicationTaskInput) SetReplicationTaskSettings(v string) *CreateReplicationTaskInput {
-	s.ReplicationTaskSettings = &v
-	return s
-}
-
-// SetSourceEndpointArn sets the SourceEndpointArn field's value.
-func (s *CreateReplicationTaskInput) SetSourceEndpointArn(v string) *CreateReplicationTaskInput {
-	s.SourceEndpointArn = &v
-	return s
-}
-
-// SetTableMappings sets the TableMappings field's value.
-func (s *CreateReplicationTaskInput) SetTableMappings(v string) *CreateReplicationTaskInput {
-	s.TableMappings = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateReplicationTaskInput) SetTags(v []Tag) *CreateReplicationTaskInput {
-	s.Tags = v
-	return s
-}
-
-// SetTargetEndpointArn sets the TargetEndpointArn field's value.
-func (s *CreateReplicationTaskInput) SetTargetEndpointArn(v string) *CreateReplicationTaskInput {
-	s.TargetEndpointArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTaskResponse
 type CreateReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -4102,12 +3652,6 @@ func (s CreateReplicationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateReplicationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTask sets the ReplicationTask field's value.
-func (s *CreateReplicationTaskOutput) SetReplicationTask(v *ReplicationTask) *CreateReplicationTaskOutput {
-	s.ReplicationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificateMessage
@@ -4144,12 +3688,6 @@ func (s *DeleteCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *DeleteCertificateInput) SetCertificateArn(v string) *DeleteCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificateResponse
 type DeleteCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -4173,12 +3711,6 @@ func (s DeleteCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *DeleteCertificateOutput) SetCertificate(v *Certificate) *DeleteCertificateOutput {
-	s.Certificate = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpointMessage
@@ -4215,12 +3747,6 @@ func (s *DeleteEndpointInput) Validate() error {
 	return nil
 }
 
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *DeleteEndpointInput) SetEndpointArn(v string) *DeleteEndpointInput {
-	s.EndpointArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpointResponse
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -4244,12 +3770,6 @@ func (s DeleteEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *DeleteEndpointOutput) SetEndpoint(v *Endpoint) *DeleteEndpointOutput {
-	s.Endpoint = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEventSubscriptionMessage
@@ -4286,12 +3806,6 @@ func (s *DeleteEventSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetSubscriptionName sets the SubscriptionName field's value.
-func (s *DeleteEventSubscriptionInput) SetSubscriptionName(v string) *DeleteEventSubscriptionInput {
-	s.SubscriptionName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEventSubscriptionResponse
 type DeleteEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -4315,12 +3829,6 @@ func (s DeleteEventSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventSubscription sets the EventSubscription field's value.
-func (s *DeleteEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *DeleteEventSubscriptionOutput {
-	s.EventSubscription = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstanceMessage
@@ -4357,12 +3865,6 @@ func (s *DeleteReplicationInstanceInput) Validate() error {
 	return nil
 }
 
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *DeleteReplicationInstanceInput) SetReplicationInstanceArn(v string) *DeleteReplicationInstanceInput {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstanceResponse
 type DeleteReplicationInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4386,12 +3888,6 @@ func (s DeleteReplicationInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationInstance sets the ReplicationInstance field's value.
-func (s *DeleteReplicationInstanceOutput) SetReplicationInstance(v *ReplicationInstance) *DeleteReplicationInstanceOutput {
-	s.ReplicationInstance = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroupMessage
@@ -4426,12 +3922,6 @@ func (s *DeleteReplicationSubnetGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetReplicationSubnetGroupIdentifier sets the ReplicationSubnetGroupIdentifier field's value.
-func (s *DeleteReplicationSubnetGroupInput) SetReplicationSubnetGroupIdentifier(v string) *DeleteReplicationSubnetGroupInput {
-	s.ReplicationSubnetGroupIdentifier = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroupResponse
@@ -4490,12 +3980,6 @@ func (s *DeleteReplicationTaskInput) Validate() error {
 	return nil
 }
 
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *DeleteReplicationTaskInput) SetReplicationTaskArn(v string) *DeleteReplicationTaskInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskResponse
 type DeleteReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -4519,12 +4003,6 @@ func (s DeleteReplicationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteReplicationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTask sets the ReplicationTask field's value.
-func (s *DeleteReplicationTaskOutput) SetReplicationTask(v *ReplicationTask) *DeleteReplicationTaskOutput {
-	s.ReplicationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributesMessage
@@ -4565,12 +4043,6 @@ func (s DescribeAccountAttributesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccountQuotas sets the AccountQuotas field's value.
-func (s *DescribeAccountAttributesOutput) SetAccountQuotas(v []AccountQuota) *DescribeAccountAttributesOutput {
-	s.AccountQuotas = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificatesMessage
@@ -4620,24 +4092,6 @@ func (s *DescribeCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeCertificatesInput) SetFilters(v []Filter) *DescribeCertificatesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeCertificatesInput) SetMarker(v string) *DescribeCertificatesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeCertificatesInput) SetMaxRecords(v int64) *DescribeCertificatesInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificatesResponse
 type DescribeCertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4665,18 +4119,6 @@ func (s DescribeCertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificates sets the Certificates field's value.
-func (s *DescribeCertificatesOutput) SetCertificates(v []Certificate) *DescribeCertificatesOutput {
-	s.Certificates = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeCertificatesOutput) SetMarker(v string) *DescribeCertificatesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnectionsMessage
@@ -4730,24 +4172,6 @@ func (s *DescribeConnectionsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeConnectionsInput) SetFilters(v []Filter) *DescribeConnectionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeConnectionsInput) SetMarker(v string) *DescribeConnectionsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeConnectionsInput) SetMaxRecords(v int64) *DescribeConnectionsInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnectionsResponse
 type DescribeConnectionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4776,18 +4200,6 @@ func (s DescribeConnectionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConnections sets the Connections field's value.
-func (s *DescribeConnectionsOutput) SetConnections(v []Connection) *DescribeConnectionsOutput {
-	s.Connections = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeConnectionsOutput) SetMarker(v string) *DescribeConnectionsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypesMessage
@@ -4841,24 +4253,6 @@ func (s *DescribeEndpointTypesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeEndpointTypesInput) SetFilters(v []Filter) *DescribeEndpointTypesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEndpointTypesInput) SetMarker(v string) *DescribeEndpointTypesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeEndpointTypesInput) SetMaxRecords(v int64) *DescribeEndpointTypesInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypesResponse
 type DescribeEndpointTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4887,18 +4281,6 @@ func (s DescribeEndpointTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEndpointTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEndpointTypesOutput) SetMarker(v string) *DescribeEndpointTypesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetSupportedEndpointTypes sets the SupportedEndpointTypes field's value.
-func (s *DescribeEndpointTypesOutput) SetSupportedEndpointTypes(v []SupportedEndpointType) *DescribeEndpointTypesOutput {
-	s.SupportedEndpointTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointsMessage
@@ -4952,24 +4334,6 @@ func (s *DescribeEndpointsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeEndpointsInput) SetFilters(v []Filter) *DescribeEndpointsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEndpointsInput) SetMarker(v string) *DescribeEndpointsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeEndpointsInput) SetMaxRecords(v int64) *DescribeEndpointsInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointsResponse
 type DescribeEndpointsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4998,18 +4362,6 @@ func (s DescribeEndpointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpoints sets the Endpoints field's value.
-func (s *DescribeEndpointsOutput) SetEndpoints(v []Endpoint) *DescribeEndpointsOutput {
-	s.Endpoints = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEndpointsOutput) SetMarker(v string) *DescribeEndpointsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategoriesMessage
@@ -5052,18 +4404,6 @@ func (s *DescribeEventCategoriesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeEventCategoriesInput) SetFilters(v []Filter) *DescribeEventCategoriesInput {
-	s.Filters = v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *DescribeEventCategoriesInput) SetSourceType(v string) *DescribeEventCategoriesInput {
-	s.SourceType = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategoriesResponse
 type DescribeEventCategoriesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5087,12 +4427,6 @@ func (s DescribeEventCategoriesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventCategoriesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventCategoryGroupList sets the EventCategoryGroupList field's value.
-func (s *DescribeEventCategoriesOutput) SetEventCategoryGroupList(v []EventCategoryGroup) *DescribeEventCategoriesOutput {
-	s.EventCategoryGroupList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventSubscriptionsMessage
@@ -5147,30 +4481,6 @@ func (s *DescribeEventSubscriptionsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeEventSubscriptionsInput) SetFilters(v []Filter) *DescribeEventSubscriptionsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEventSubscriptionsInput) SetMarker(v string) *DescribeEventSubscriptionsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeEventSubscriptionsInput) SetMaxRecords(v int64) *DescribeEventSubscriptionsInput {
-	s.MaxRecords = &v
-	return s
-}
-
-// SetSubscriptionName sets the SubscriptionName field's value.
-func (s *DescribeEventSubscriptionsInput) SetSubscriptionName(v string) *DescribeEventSubscriptionsInput {
-	s.SubscriptionName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventSubscriptionsResponse
 type DescribeEventSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5199,18 +4509,6 @@ func (s DescribeEventSubscriptionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventSubscriptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventSubscriptionsList sets the EventSubscriptionsList field's value.
-func (s *DescribeEventSubscriptionsOutput) SetEventSubscriptionsList(v []EventSubscription) *DescribeEventSubscriptionsOutput {
-	s.EventSubscriptionsList = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEventSubscriptionsOutput) SetMarker(v string) *DescribeEventSubscriptionsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventsMessage
@@ -5284,60 +4582,6 @@ func (s *DescribeEventsInput) Validate() error {
 	return nil
 }
 
-// SetDuration sets the Duration field's value.
-func (s *DescribeEventsInput) SetDuration(v int64) *DescribeEventsInput {
-	s.Duration = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *DescribeEventsInput) SetEndTime(v time.Time) *DescribeEventsInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetEventCategories sets the EventCategories field's value.
-func (s *DescribeEventsInput) SetEventCategories(v []string) *DescribeEventsInput {
-	s.EventCategories = v
-	return s
-}
-
-// SetFilters sets the Filters field's value.
-func (s *DescribeEventsInput) SetFilters(v []Filter) *DescribeEventsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEventsInput) SetMarker(v string) *DescribeEventsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeEventsInput) SetMaxRecords(v int64) *DescribeEventsInput {
-	s.MaxRecords = &v
-	return s
-}
-
-// SetSourceIdentifier sets the SourceIdentifier field's value.
-func (s *DescribeEventsInput) SetSourceIdentifier(v string) *DescribeEventsInput {
-	s.SourceIdentifier = &v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
-	s.SourceType = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
-	s.StartTime = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventsResponse
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5366,18 +4610,6 @@ func (s DescribeEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
-	s.Events = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeEventsOutput) SetMarker(v string) *DescribeEventsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstancesMessage
@@ -5409,18 +4641,6 @@ func (s DescribeOrderableReplicationInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetMarker sets the Marker field's value.
-func (s *DescribeOrderableReplicationInstancesInput) SetMarker(v string) *DescribeOrderableReplicationInstancesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeOrderableReplicationInstancesInput) SetMaxRecords(v int64) *DescribeOrderableReplicationInstancesInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstancesResponse
 type DescribeOrderableReplicationInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5449,18 +4669,6 @@ func (s DescribeOrderableReplicationInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeOrderableReplicationInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeOrderableReplicationInstancesOutput) SetMarker(v string) *DescribeOrderableReplicationInstancesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetOrderableReplicationInstances sets the OrderableReplicationInstances field's value.
-func (s *DescribeOrderableReplicationInstancesOutput) SetOrderableReplicationInstances(v []OrderableReplicationInstance) *DescribeOrderableReplicationInstancesOutput {
-	s.OrderableReplicationInstances = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatusMessage
@@ -5497,12 +4705,6 @@ func (s *DescribeRefreshSchemasStatusInput) Validate() error {
 	return nil
 }
 
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *DescribeRefreshSchemasStatusInput) SetEndpointArn(v string) *DescribeRefreshSchemasStatusInput {
-	s.EndpointArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatusResponse
 type DescribeRefreshSchemasStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -5526,12 +4728,6 @@ func (s DescribeRefreshSchemasStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRefreshSchemasStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRefreshSchemasStatus sets the RefreshSchemasStatus field's value.
-func (s *DescribeRefreshSchemasStatusOutput) SetRefreshSchemasStatus(v *RefreshSchemasStatus) *DescribeRefreshSchemasStatusOutput {
-	s.RefreshSchemasStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstancesMessage
@@ -5586,24 +4782,6 @@ func (s *DescribeReplicationInstancesInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeReplicationInstancesInput) SetFilters(v []Filter) *DescribeReplicationInstancesInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationInstancesInput) SetMarker(v string) *DescribeReplicationInstancesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeReplicationInstancesInput) SetMaxRecords(v int64) *DescribeReplicationInstancesInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstancesResponse
 type DescribeReplicationInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -5632,18 +4810,6 @@ func (s DescribeReplicationInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReplicationInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationInstancesOutput) SetMarker(v string) *DescribeReplicationInstancesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetReplicationInstances sets the ReplicationInstances field's value.
-func (s *DescribeReplicationInstancesOutput) SetReplicationInstances(v []ReplicationInstance) *DescribeReplicationInstancesOutput {
-	s.ReplicationInstances = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroupsMessage
@@ -5695,24 +4861,6 @@ func (s *DescribeReplicationSubnetGroupsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeReplicationSubnetGroupsInput) SetFilters(v []Filter) *DescribeReplicationSubnetGroupsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationSubnetGroupsInput) SetMarker(v string) *DescribeReplicationSubnetGroupsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeReplicationSubnetGroupsInput) SetMaxRecords(v int64) *DescribeReplicationSubnetGroupsInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroupsResponse
 type DescribeReplicationSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5741,18 +4889,6 @@ func (s DescribeReplicationSubnetGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReplicationSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationSubnetGroupsOutput) SetMarker(v string) *DescribeReplicationSubnetGroupsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetReplicationSubnetGroups sets the ReplicationSubnetGroups field's value.
-func (s *DescribeReplicationSubnetGroupsOutput) SetReplicationSubnetGroups(v []ReplicationSubnetGroup) *DescribeReplicationSubnetGroupsOutput {
-	s.ReplicationSubnetGroups = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentResultsMessage
@@ -5789,24 +4925,6 @@ func (s DescribeReplicationTaskAssessmentResultsInput) GoString() string {
 	return s.String()
 }
 
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationTaskAssessmentResultsInput) SetMarker(v string) *DescribeReplicationTaskAssessmentResultsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeReplicationTaskAssessmentResultsInput) SetMaxRecords(v int64) *DescribeReplicationTaskAssessmentResultsInput {
-	s.MaxRecords = &v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *DescribeReplicationTaskAssessmentResultsInput) SetReplicationTaskArn(v string) *DescribeReplicationTaskAssessmentResultsInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTaskAssessmentResultsResponse
 type DescribeReplicationTaskAssessmentResultsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5838,24 +4956,6 @@ func (s DescribeReplicationTaskAssessmentResultsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReplicationTaskAssessmentResultsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBucketName sets the BucketName field's value.
-func (s *DescribeReplicationTaskAssessmentResultsOutput) SetBucketName(v string) *DescribeReplicationTaskAssessmentResultsOutput {
-	s.BucketName = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationTaskAssessmentResultsOutput) SetMarker(v string) *DescribeReplicationTaskAssessmentResultsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetReplicationTaskAssessmentResults sets the ReplicationTaskAssessmentResults field's value.
-func (s *DescribeReplicationTaskAssessmentResultsOutput) SetReplicationTaskAssessmentResults(v []ReplicationTaskAssessmentResult) *DescribeReplicationTaskAssessmentResultsOutput {
-	s.ReplicationTaskAssessmentResults = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasksMessage
@@ -5910,24 +5010,6 @@ func (s *DescribeReplicationTasksInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeReplicationTasksInput) SetFilters(v []Filter) *DescribeReplicationTasksInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationTasksInput) SetMarker(v string) *DescribeReplicationTasksInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeReplicationTasksInput) SetMaxRecords(v int64) *DescribeReplicationTasksInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasksResponse
 type DescribeReplicationTasksOutput struct {
 	_ struct{} `type:"structure"`
@@ -5956,18 +5038,6 @@ func (s DescribeReplicationTasksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeReplicationTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeReplicationTasksOutput) SetMarker(v string) *DescribeReplicationTasksOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetReplicationTasks sets the ReplicationTasks field's value.
-func (s *DescribeReplicationTasksOutput) SetReplicationTasks(v []ReplicationTask) *DescribeReplicationTasksOutput {
-	s.ReplicationTasks = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemasMessage
@@ -6018,24 +5088,6 @@ func (s *DescribeSchemasInput) Validate() error {
 	return nil
 }
 
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *DescribeSchemasInput) SetEndpointArn(v string) *DescribeSchemasInput {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeSchemasInput) SetMarker(v string) *DescribeSchemasInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeSchemasInput) SetMaxRecords(v int64) *DescribeSchemasInput {
-	s.MaxRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemasResponse
 type DescribeSchemasOutput struct {
 	_ struct{} `type:"structure"`
@@ -6064,18 +5116,6 @@ func (s DescribeSchemasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSchemasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeSchemasOutput) SetMarker(v string) *DescribeSchemasOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetSchemas sets the Schemas field's value.
-func (s *DescribeSchemasOutput) SetSchemas(v []string) *DescribeSchemasOutput {
-	s.Schemas = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatisticsMessage
@@ -6141,30 +5181,6 @@ func (s *DescribeTableStatisticsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeTableStatisticsInput) SetFilters(v []Filter) *DescribeTableStatisticsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTableStatisticsInput) SetMarker(v string) *DescribeTableStatisticsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxRecords sets the MaxRecords field's value.
-func (s *DescribeTableStatisticsInput) SetMaxRecords(v int64) *DescribeTableStatisticsInput {
-	s.MaxRecords = &v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *DescribeTableStatisticsInput) SetReplicationTaskArn(v string) *DescribeTableStatisticsInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatisticsResponse
 type DescribeTableStatisticsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6196,24 +5212,6 @@ func (s DescribeTableStatisticsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTableStatisticsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMarker sets the Marker field's value.
-func (s *DescribeTableStatisticsOutput) SetMarker(v string) *DescribeTableStatisticsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *DescribeTableStatisticsOutput) SetReplicationTaskArn(v string) *DescribeTableStatisticsOutput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
-// SetTableStatistics sets the TableStatistics field's value.
-func (s *DescribeTableStatisticsOutput) SetTableStatistics(v []TableStatistics) *DescribeTableStatisticsOutput {
-	s.TableStatistics = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DynamoDbSettings
@@ -6248,12 +5246,6 @@ func (s *DynamoDbSettings) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetServiceAccessRoleArn sets the ServiceAccessRoleArn field's value.
-func (s *DynamoDbSettings) SetServiceAccessRoleArn(v string) *DynamoDbSettings {
-	s.ServiceAccessRoleArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint
@@ -6339,108 +5331,6 @@ func (s Endpoint) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Endpoint) SetCertificateArn(v string) *Endpoint {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDatabaseName sets the DatabaseName field's value.
-func (s *Endpoint) SetDatabaseName(v string) *Endpoint {
-	s.DatabaseName = &v
-	return s
-}
-
-// SetDynamoDbSettings sets the DynamoDbSettings field's value.
-func (s *Endpoint) SetDynamoDbSettings(v *DynamoDbSettings) *Endpoint {
-	s.DynamoDbSettings = v
-	return s
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *Endpoint) SetEndpointArn(v string) *Endpoint {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetEndpointIdentifier sets the EndpointIdentifier field's value.
-func (s *Endpoint) SetEndpointIdentifier(v string) *Endpoint {
-	s.EndpointIdentifier = &v
-	return s
-}
-
-// SetEndpointType sets the EndpointType field's value.
-func (s *Endpoint) SetEndpointType(v ReplicationEndpointTypeValue) *Endpoint {
-	s.EndpointType = v
-	return s
-}
-
-// SetEngineName sets the EngineName field's value.
-func (s *Endpoint) SetEngineName(v string) *Endpoint {
-	s.EngineName = &v
-	return s
-}
-
-// SetExternalId sets the ExternalId field's value.
-func (s *Endpoint) SetExternalId(v string) *Endpoint {
-	s.ExternalId = &v
-	return s
-}
-
-// SetExtraConnectionAttributes sets the ExtraConnectionAttributes field's value.
-func (s *Endpoint) SetExtraConnectionAttributes(v string) *Endpoint {
-	s.ExtraConnectionAttributes = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *Endpoint) SetKmsKeyId(v string) *Endpoint {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetMongoDbSettings sets the MongoDbSettings field's value.
-func (s *Endpoint) SetMongoDbSettings(v *MongoDbSettings) *Endpoint {
-	s.MongoDbSettings = v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *Endpoint) SetPort(v int64) *Endpoint {
-	s.Port = &v
-	return s
-}
-
-// SetS3Settings sets the S3Settings field's value.
-func (s *Endpoint) SetS3Settings(v *S3Settings) *Endpoint {
-	s.S3Settings = v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *Endpoint) SetServerName(v string) *Endpoint {
-	s.ServerName = &v
-	return s
-}
-
-// SetSslMode sets the SslMode field's value.
-func (s *Endpoint) SetSslMode(v DmsSslModeValue) *Endpoint {
-	s.SslMode = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Endpoint) SetStatus(v string) *Endpoint {
-	s.Status = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *Endpoint) SetUsername(v string) *Endpoint {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Event
 type Event struct {
 	_ struct{} `type:"structure"`
@@ -6477,36 +5367,6 @@ func (s Event) GoString() string {
 	return s.String()
 }
 
-// SetDate sets the Date field's value.
-func (s *Event) SetDate(v time.Time) *Event {
-	s.Date = &v
-	return s
-}
-
-// SetEventCategories sets the EventCategories field's value.
-func (s *Event) SetEventCategories(v []string) *Event {
-	s.EventCategories = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Event) SetMessage(v string) *Event {
-	s.Message = &v
-	return s
-}
-
-// SetSourceIdentifier sets the SourceIdentifier field's value.
-func (s *Event) SetSourceIdentifier(v string) *Event {
-	s.SourceIdentifier = &v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v SourceType) *Event {
-	s.SourceType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EventCategoryGroup
 type EventCategoryGroup struct {
 	_ struct{} `type:"structure"`
@@ -6529,18 +5389,6 @@ func (s EventCategoryGroup) String() string {
 // GoString returns the string representation
 func (s EventCategoryGroup) GoString() string {
 	return s.String()
-}
-
-// SetEventCategories sets the EventCategories field's value.
-func (s *EventCategoryGroup) SetEventCategories(v []string) *EventCategoryGroup {
-	s.EventCategories = v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *EventCategoryGroup) SetSourceType(v string) *EventCategoryGroup {
-	s.SourceType = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/EventSubscription
@@ -6597,60 +5445,6 @@ func (s EventSubscription) GoString() string {
 	return s.String()
 }
 
-// SetCustSubscriptionId sets the CustSubscriptionId field's value.
-func (s *EventSubscription) SetCustSubscriptionId(v string) *EventSubscription {
-	s.CustSubscriptionId = &v
-	return s
-}
-
-// SetCustomerAwsId sets the CustomerAwsId field's value.
-func (s *EventSubscription) SetCustomerAwsId(v string) *EventSubscription {
-	s.CustomerAwsId = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *EventSubscription) SetEnabled(v bool) *EventSubscription {
-	s.Enabled = &v
-	return s
-}
-
-// SetEventCategoriesList sets the EventCategoriesList field's value.
-func (s *EventSubscription) SetEventCategoriesList(v []string) *EventSubscription {
-	s.EventCategoriesList = v
-	return s
-}
-
-// SetSnsTopicArn sets the SnsTopicArn field's value.
-func (s *EventSubscription) SetSnsTopicArn(v string) *EventSubscription {
-	s.SnsTopicArn = &v
-	return s
-}
-
-// SetSourceIdsList sets the SourceIdsList field's value.
-func (s *EventSubscription) SetSourceIdsList(v []string) *EventSubscription {
-	s.SourceIdsList = v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *EventSubscription) SetSourceType(v string) *EventSubscription {
-	s.SourceType = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *EventSubscription) SetStatus(v string) *EventSubscription {
-	s.Status = &v
-	return s
-}
-
-// SetSubscriptionCreationTime sets the SubscriptionCreationTime field's value.
-func (s *EventSubscription) SetSubscriptionCreationTime(v string) *EventSubscription {
-	s.SubscriptionCreationTime = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
@@ -6692,18 +5486,6 @@ func (s *Filter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *Filter) SetName(v string) *Filter {
-	s.Name = &v
-	return s
-}
-
-// SetValues sets the Values field's value.
-func (s *Filter) SetValues(v []string) *Filter {
-	s.Values = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificateMessage
@@ -6752,30 +5534,6 @@ func (s *ImportCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateIdentifier sets the CertificateIdentifier field's value.
-func (s *ImportCertificateInput) SetCertificateIdentifier(v string) *ImportCertificateInput {
-	s.CertificateIdentifier = &v
-	return s
-}
-
-// SetCertificatePem sets the CertificatePem field's value.
-func (s *ImportCertificateInput) SetCertificatePem(v string) *ImportCertificateInput {
-	s.CertificatePem = &v
-	return s
-}
-
-// SetCertificateWallet sets the CertificateWallet field's value.
-func (s *ImportCertificateInput) SetCertificateWallet(v []byte) *ImportCertificateInput {
-	s.CertificateWallet = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ImportCertificateInput) SetTags(v []Tag) *ImportCertificateInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificateResponse
 type ImportCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -6799,12 +5557,6 @@ func (s ImportCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ImportCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *ImportCertificateOutput) SetCertificate(v *Certificate) *ImportCertificateOutput {
-	s.Certificate = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResourceMessage
@@ -6842,12 +5594,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsForResourceInput) SetResourceArn(v string) *ListTagsForResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6871,12 +5617,6 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTagList sets the TagList field's value.
-func (s *ListTagsForResourceOutput) SetTagList(v []Tag) *ListTagsForResourceOutput {
-	s.TagList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage
@@ -6977,96 +5717,6 @@ func (s *ModifyEndpointInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ModifyEndpointInput) SetCertificateArn(v string) *ModifyEndpointInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDatabaseName sets the DatabaseName field's value.
-func (s *ModifyEndpointInput) SetDatabaseName(v string) *ModifyEndpointInput {
-	s.DatabaseName = &v
-	return s
-}
-
-// SetDynamoDbSettings sets the DynamoDbSettings field's value.
-func (s *ModifyEndpointInput) SetDynamoDbSettings(v *DynamoDbSettings) *ModifyEndpointInput {
-	s.DynamoDbSettings = v
-	return s
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *ModifyEndpointInput) SetEndpointArn(v string) *ModifyEndpointInput {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetEndpointIdentifier sets the EndpointIdentifier field's value.
-func (s *ModifyEndpointInput) SetEndpointIdentifier(v string) *ModifyEndpointInput {
-	s.EndpointIdentifier = &v
-	return s
-}
-
-// SetEndpointType sets the EndpointType field's value.
-func (s *ModifyEndpointInput) SetEndpointType(v ReplicationEndpointTypeValue) *ModifyEndpointInput {
-	s.EndpointType = v
-	return s
-}
-
-// SetEngineName sets the EngineName field's value.
-func (s *ModifyEndpointInput) SetEngineName(v string) *ModifyEndpointInput {
-	s.EngineName = &v
-	return s
-}
-
-// SetExtraConnectionAttributes sets the ExtraConnectionAttributes field's value.
-func (s *ModifyEndpointInput) SetExtraConnectionAttributes(v string) *ModifyEndpointInput {
-	s.ExtraConnectionAttributes = &v
-	return s
-}
-
-// SetMongoDbSettings sets the MongoDbSettings field's value.
-func (s *ModifyEndpointInput) SetMongoDbSettings(v *MongoDbSettings) *ModifyEndpointInput {
-	s.MongoDbSettings = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *ModifyEndpointInput) SetPassword(v string) *ModifyEndpointInput {
-	s.Password = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *ModifyEndpointInput) SetPort(v int64) *ModifyEndpointInput {
-	s.Port = &v
-	return s
-}
-
-// SetS3Settings sets the S3Settings field's value.
-func (s *ModifyEndpointInput) SetS3Settings(v *S3Settings) *ModifyEndpointInput {
-	s.S3Settings = v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *ModifyEndpointInput) SetServerName(v string) *ModifyEndpointInput {
-	s.ServerName = &v
-	return s
-}
-
-// SetSslMode sets the SslMode field's value.
-func (s *ModifyEndpointInput) SetSslMode(v DmsSslModeValue) *ModifyEndpointInput {
-	s.SslMode = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *ModifyEndpointInput) SetUsername(v string) *ModifyEndpointInput {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointResponse
 type ModifyEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -7090,12 +5740,6 @@ func (s ModifyEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *ModifyEndpointOutput) SetEndpoint(v *Endpoint) *ModifyEndpointOutput {
-	s.Endpoint = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscriptionMessage
@@ -7150,36 +5794,6 @@ func (s *ModifyEventSubscriptionInput) Validate() error {
 	return nil
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *ModifyEventSubscriptionInput) SetEnabled(v bool) *ModifyEventSubscriptionInput {
-	s.Enabled = &v
-	return s
-}
-
-// SetEventCategories sets the EventCategories field's value.
-func (s *ModifyEventSubscriptionInput) SetEventCategories(v []string) *ModifyEventSubscriptionInput {
-	s.EventCategories = v
-	return s
-}
-
-// SetSnsTopicArn sets the SnsTopicArn field's value.
-func (s *ModifyEventSubscriptionInput) SetSnsTopicArn(v string) *ModifyEventSubscriptionInput {
-	s.SnsTopicArn = &v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *ModifyEventSubscriptionInput) SetSourceType(v string) *ModifyEventSubscriptionInput {
-	s.SourceType = &v
-	return s
-}
-
-// SetSubscriptionName sets the SubscriptionName field's value.
-func (s *ModifyEventSubscriptionInput) SetSubscriptionName(v string) *ModifyEventSubscriptionInput {
-	s.SubscriptionName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscriptionResponse
 type ModifyEventSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -7203,12 +5817,6 @@ func (s ModifyEventSubscriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyEventSubscriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEventSubscription sets the EventSubscription field's value.
-func (s *ModifyEventSubscriptionOutput) SetEventSubscription(v *EventSubscription) *ModifyEventSubscriptionOutput {
-	s.EventSubscription = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstanceMessage
@@ -7309,72 +5917,6 @@ func (s *ModifyReplicationInstanceInput) Validate() error {
 	return nil
 }
 
-// SetAllocatedStorage sets the AllocatedStorage field's value.
-func (s *ModifyReplicationInstanceInput) SetAllocatedStorage(v int64) *ModifyReplicationInstanceInput {
-	s.AllocatedStorage = &v
-	return s
-}
-
-// SetAllowMajorVersionUpgrade sets the AllowMajorVersionUpgrade field's value.
-func (s *ModifyReplicationInstanceInput) SetAllowMajorVersionUpgrade(v bool) *ModifyReplicationInstanceInput {
-	s.AllowMajorVersionUpgrade = &v
-	return s
-}
-
-// SetApplyImmediately sets the ApplyImmediately field's value.
-func (s *ModifyReplicationInstanceInput) SetApplyImmediately(v bool) *ModifyReplicationInstanceInput {
-	s.ApplyImmediately = &v
-	return s
-}
-
-// SetAutoMinorVersionUpgrade sets the AutoMinorVersionUpgrade field's value.
-func (s *ModifyReplicationInstanceInput) SetAutoMinorVersionUpgrade(v bool) *ModifyReplicationInstanceInput {
-	s.AutoMinorVersionUpgrade = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *ModifyReplicationInstanceInput) SetEngineVersion(v string) *ModifyReplicationInstanceInput {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetMultiAZ sets the MultiAZ field's value.
-func (s *ModifyReplicationInstanceInput) SetMultiAZ(v bool) *ModifyReplicationInstanceInput {
-	s.MultiAZ = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *ModifyReplicationInstanceInput) SetPreferredMaintenanceWindow(v string) *ModifyReplicationInstanceInput {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *ModifyReplicationInstanceInput) SetReplicationInstanceArn(v string) *ModifyReplicationInstanceInput {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
-// SetReplicationInstanceClass sets the ReplicationInstanceClass field's value.
-func (s *ModifyReplicationInstanceInput) SetReplicationInstanceClass(v string) *ModifyReplicationInstanceInput {
-	s.ReplicationInstanceClass = &v
-	return s
-}
-
-// SetReplicationInstanceIdentifier sets the ReplicationInstanceIdentifier field's value.
-func (s *ModifyReplicationInstanceInput) SetReplicationInstanceIdentifier(v string) *ModifyReplicationInstanceInput {
-	s.ReplicationInstanceIdentifier = &v
-	return s
-}
-
-// SetVpcSecurityGroupIds sets the VpcSecurityGroupIds field's value.
-func (s *ModifyReplicationInstanceInput) SetVpcSecurityGroupIds(v []string) *ModifyReplicationInstanceInput {
-	s.VpcSecurityGroupIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstanceResponse
 type ModifyReplicationInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -7398,12 +5940,6 @@ func (s ModifyReplicationInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationInstance sets the ReplicationInstance field's value.
-func (s *ModifyReplicationInstanceOutput) SetReplicationInstance(v *ReplicationInstance) *ModifyReplicationInstanceOutput {
-	s.ReplicationInstance = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroupMessage
@@ -7452,24 +5988,6 @@ func (s *ModifyReplicationSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// SetReplicationSubnetGroupDescription sets the ReplicationSubnetGroupDescription field's value.
-func (s *ModifyReplicationSubnetGroupInput) SetReplicationSubnetGroupDescription(v string) *ModifyReplicationSubnetGroupInput {
-	s.ReplicationSubnetGroupDescription = &v
-	return s
-}
-
-// SetReplicationSubnetGroupIdentifier sets the ReplicationSubnetGroupIdentifier field's value.
-func (s *ModifyReplicationSubnetGroupInput) SetReplicationSubnetGroupIdentifier(v string) *ModifyReplicationSubnetGroupInput {
-	s.ReplicationSubnetGroupIdentifier = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *ModifyReplicationSubnetGroupInput) SetSubnetIds(v []string) *ModifyReplicationSubnetGroupInput {
-	s.SubnetIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroupResponse
 type ModifyReplicationSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -7493,12 +6011,6 @@ func (s ModifyReplicationSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationSubnetGroup sets the ReplicationSubnetGroup field's value.
-func (s *ModifyReplicationSubnetGroupOutput) SetReplicationSubnetGroup(v *ReplicationSubnetGroup) *ModifyReplicationSubnetGroupOutput {
-	s.ReplicationSubnetGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTaskMessage
@@ -7564,42 +6076,6 @@ func (s *ModifyReplicationTaskInput) Validate() error {
 	return nil
 }
 
-// SetCdcStartTime sets the CdcStartTime field's value.
-func (s *ModifyReplicationTaskInput) SetCdcStartTime(v time.Time) *ModifyReplicationTaskInput {
-	s.CdcStartTime = &v
-	return s
-}
-
-// SetMigrationType sets the MigrationType field's value.
-func (s *ModifyReplicationTaskInput) SetMigrationType(v MigrationTypeValue) *ModifyReplicationTaskInput {
-	s.MigrationType = v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *ModifyReplicationTaskInput) SetReplicationTaskArn(v string) *ModifyReplicationTaskInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
-// SetReplicationTaskIdentifier sets the ReplicationTaskIdentifier field's value.
-func (s *ModifyReplicationTaskInput) SetReplicationTaskIdentifier(v string) *ModifyReplicationTaskInput {
-	s.ReplicationTaskIdentifier = &v
-	return s
-}
-
-// SetReplicationTaskSettings sets the ReplicationTaskSettings field's value.
-func (s *ModifyReplicationTaskInput) SetReplicationTaskSettings(v string) *ModifyReplicationTaskInput {
-	s.ReplicationTaskSettings = &v
-	return s
-}
-
-// SetTableMappings sets the TableMappings field's value.
-func (s *ModifyReplicationTaskInput) SetTableMappings(v string) *ModifyReplicationTaskInput {
-	s.TableMappings = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTaskResponse
 type ModifyReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -7623,12 +6099,6 @@ func (s ModifyReplicationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyReplicationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTask sets the ReplicationTask field's value.
-func (s *ModifyReplicationTaskOutput) SetReplicationTask(v *ReplicationTask) *ModifyReplicationTaskOutput {
-	s.ReplicationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MongoDbSettings
@@ -7702,72 +6172,6 @@ func (s MongoDbSettings) GoString() string {
 	return s.String()
 }
 
-// SetAuthMechanism sets the AuthMechanism field's value.
-func (s *MongoDbSettings) SetAuthMechanism(v AuthMechanismValue) *MongoDbSettings {
-	s.AuthMechanism = v
-	return s
-}
-
-// SetAuthSource sets the AuthSource field's value.
-func (s *MongoDbSettings) SetAuthSource(v string) *MongoDbSettings {
-	s.AuthSource = &v
-	return s
-}
-
-// SetAuthType sets the AuthType field's value.
-func (s *MongoDbSettings) SetAuthType(v AuthTypeValue) *MongoDbSettings {
-	s.AuthType = v
-	return s
-}
-
-// SetDatabaseName sets the DatabaseName field's value.
-func (s *MongoDbSettings) SetDatabaseName(v string) *MongoDbSettings {
-	s.DatabaseName = &v
-	return s
-}
-
-// SetDocsToInvestigate sets the DocsToInvestigate field's value.
-func (s *MongoDbSettings) SetDocsToInvestigate(v string) *MongoDbSettings {
-	s.DocsToInvestigate = &v
-	return s
-}
-
-// SetExtractDocId sets the ExtractDocId field's value.
-func (s *MongoDbSettings) SetExtractDocId(v string) *MongoDbSettings {
-	s.ExtractDocId = &v
-	return s
-}
-
-// SetNestingLevel sets the NestingLevel field's value.
-func (s *MongoDbSettings) SetNestingLevel(v NestingLevelValue) *MongoDbSettings {
-	s.NestingLevel = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *MongoDbSettings) SetPassword(v string) *MongoDbSettings {
-	s.Password = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *MongoDbSettings) SetPort(v int64) *MongoDbSettings {
-	s.Port = &v
-	return s
-}
-
-// SetServerName sets the ServerName field's value.
-func (s *MongoDbSettings) SetServerName(v string) *MongoDbSettings {
-	s.ServerName = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *MongoDbSettings) SetUsername(v string) *MongoDbSettings {
-	s.Username = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OrderableReplicationInstance
 type OrderableReplicationInstance struct {
 	_ struct{} `type:"structure"`
@@ -7809,48 +6213,6 @@ func (s OrderableReplicationInstance) String() string {
 // GoString returns the string representation
 func (s OrderableReplicationInstance) GoString() string {
 	return s.String()
-}
-
-// SetDefaultAllocatedStorage sets the DefaultAllocatedStorage field's value.
-func (s *OrderableReplicationInstance) SetDefaultAllocatedStorage(v int64) *OrderableReplicationInstance {
-	s.DefaultAllocatedStorage = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *OrderableReplicationInstance) SetEngineVersion(v string) *OrderableReplicationInstance {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetIncludedAllocatedStorage sets the IncludedAllocatedStorage field's value.
-func (s *OrderableReplicationInstance) SetIncludedAllocatedStorage(v int64) *OrderableReplicationInstance {
-	s.IncludedAllocatedStorage = &v
-	return s
-}
-
-// SetMaxAllocatedStorage sets the MaxAllocatedStorage field's value.
-func (s *OrderableReplicationInstance) SetMaxAllocatedStorage(v int64) *OrderableReplicationInstance {
-	s.MaxAllocatedStorage = &v
-	return s
-}
-
-// SetMinAllocatedStorage sets the MinAllocatedStorage field's value.
-func (s *OrderableReplicationInstance) SetMinAllocatedStorage(v int64) *OrderableReplicationInstance {
-	s.MinAllocatedStorage = &v
-	return s
-}
-
-// SetReplicationInstanceClass sets the ReplicationInstanceClass field's value.
-func (s *OrderableReplicationInstance) SetReplicationInstanceClass(v string) *OrderableReplicationInstance {
-	s.ReplicationInstanceClass = &v
-	return s
-}
-
-// SetStorageType sets the StorageType field's value.
-func (s *OrderableReplicationInstance) SetStorageType(v string) *OrderableReplicationInstance {
-	s.StorageType = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasMessage
@@ -7896,18 +6258,6 @@ func (s *RefreshSchemasInput) Validate() error {
 	return nil
 }
 
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *RefreshSchemasInput) SetEndpointArn(v string) *RefreshSchemasInput {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *RefreshSchemasInput) SetReplicationInstanceArn(v string) *RefreshSchemasInput {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasResponse
 type RefreshSchemasOutput struct {
 	_ struct{} `type:"structure"`
@@ -7931,12 +6281,6 @@ func (s RefreshSchemasOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RefreshSchemasOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRefreshSchemasStatus sets the RefreshSchemasStatus field's value.
-func (s *RefreshSchemasOutput) SetRefreshSchemasStatus(v *RefreshSchemasStatus) *RefreshSchemasOutput {
-	s.RefreshSchemasStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasStatus
@@ -7967,36 +6311,6 @@ func (s RefreshSchemasStatus) String() string {
 // GoString returns the string representation
 func (s RefreshSchemasStatus) GoString() string {
 	return s.String()
-}
-
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *RefreshSchemasStatus) SetEndpointArn(v string) *RefreshSchemasStatus {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetLastFailureMessage sets the LastFailureMessage field's value.
-func (s *RefreshSchemasStatus) SetLastFailureMessage(v string) *RefreshSchemasStatus {
-	s.LastFailureMessage = &v
-	return s
-}
-
-// SetLastRefreshDate sets the LastRefreshDate field's value.
-func (s *RefreshSchemasStatus) SetLastRefreshDate(v time.Time) *RefreshSchemasStatus {
-	s.LastRefreshDate = &v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *RefreshSchemasStatus) SetReplicationInstanceArn(v string) *RefreshSchemasStatus {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *RefreshSchemasStatus) SetStatus(v RefreshSchemasStatusTypeValue) *RefreshSchemasStatus {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTablesMessage
@@ -8042,18 +6356,6 @@ func (s *ReloadTablesInput) Validate() error {
 	return nil
 }
 
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *ReloadTablesInput) SetReplicationTaskArn(v string) *ReloadTablesInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
-// SetTablesToReload sets the TablesToReload field's value.
-func (s *ReloadTablesInput) SetTablesToReload(v []TableToReload) *ReloadTablesInput {
-	s.TablesToReload = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTablesResponse
 type ReloadTablesOutput struct {
 	_ struct{} `type:"structure"`
@@ -8077,12 +6379,6 @@ func (s ReloadTablesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReloadTablesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *ReloadTablesOutput) SetReplicationTaskArn(v string) *ReloadTablesOutput {
-	s.ReplicationTaskArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceMessage
@@ -8127,18 +6423,6 @@ func (s *RemoveTagsFromResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *RemoveTagsFromResourceInput) SetResourceArn(v string) *RemoveTagsFromResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *RemoveTagsFromResourceInput) SetTagKeys(v []string) *RemoveTagsFromResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceResponse
@@ -8264,132 +6548,6 @@ func (s ReplicationInstance) GoString() string {
 	return s.String()
 }
 
-// SetAllocatedStorage sets the AllocatedStorage field's value.
-func (s *ReplicationInstance) SetAllocatedStorage(v int64) *ReplicationInstance {
-	s.AllocatedStorage = &v
-	return s
-}
-
-// SetAutoMinorVersionUpgrade sets the AutoMinorVersionUpgrade field's value.
-func (s *ReplicationInstance) SetAutoMinorVersionUpgrade(v bool) *ReplicationInstance {
-	s.AutoMinorVersionUpgrade = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ReplicationInstance) SetAvailabilityZone(v string) *ReplicationInstance {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *ReplicationInstance) SetEngineVersion(v string) *ReplicationInstance {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetInstanceCreateTime sets the InstanceCreateTime field's value.
-func (s *ReplicationInstance) SetInstanceCreateTime(v time.Time) *ReplicationInstance {
-	s.InstanceCreateTime = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *ReplicationInstance) SetKmsKeyId(v string) *ReplicationInstance {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetMultiAZ sets the MultiAZ field's value.
-func (s *ReplicationInstance) SetMultiAZ(v bool) *ReplicationInstance {
-	s.MultiAZ = &v
-	return s
-}
-
-// SetPendingModifiedValues sets the PendingModifiedValues field's value.
-func (s *ReplicationInstance) SetPendingModifiedValues(v *ReplicationPendingModifiedValues) *ReplicationInstance {
-	s.PendingModifiedValues = v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *ReplicationInstance) SetPreferredMaintenanceWindow(v string) *ReplicationInstance {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetPubliclyAccessible sets the PubliclyAccessible field's value.
-func (s *ReplicationInstance) SetPubliclyAccessible(v bool) *ReplicationInstance {
-	s.PubliclyAccessible = &v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *ReplicationInstance) SetReplicationInstanceArn(v string) *ReplicationInstance {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
-// SetReplicationInstanceClass sets the ReplicationInstanceClass field's value.
-func (s *ReplicationInstance) SetReplicationInstanceClass(v string) *ReplicationInstance {
-	s.ReplicationInstanceClass = &v
-	return s
-}
-
-// SetReplicationInstanceIdentifier sets the ReplicationInstanceIdentifier field's value.
-func (s *ReplicationInstance) SetReplicationInstanceIdentifier(v string) *ReplicationInstance {
-	s.ReplicationInstanceIdentifier = &v
-	return s
-}
-
-// SetReplicationInstancePrivateIpAddress sets the ReplicationInstancePrivateIpAddress field's value.
-func (s *ReplicationInstance) SetReplicationInstancePrivateIpAddress(v string) *ReplicationInstance {
-	s.ReplicationInstancePrivateIpAddress = &v
-	return s
-}
-
-// SetReplicationInstancePrivateIpAddresses sets the ReplicationInstancePrivateIpAddresses field's value.
-func (s *ReplicationInstance) SetReplicationInstancePrivateIpAddresses(v []string) *ReplicationInstance {
-	s.ReplicationInstancePrivateIpAddresses = v
-	return s
-}
-
-// SetReplicationInstancePublicIpAddress sets the ReplicationInstancePublicIpAddress field's value.
-func (s *ReplicationInstance) SetReplicationInstancePublicIpAddress(v string) *ReplicationInstance {
-	s.ReplicationInstancePublicIpAddress = &v
-	return s
-}
-
-// SetReplicationInstancePublicIpAddresses sets the ReplicationInstancePublicIpAddresses field's value.
-func (s *ReplicationInstance) SetReplicationInstancePublicIpAddresses(v []string) *ReplicationInstance {
-	s.ReplicationInstancePublicIpAddresses = v
-	return s
-}
-
-// SetReplicationInstanceStatus sets the ReplicationInstanceStatus field's value.
-func (s *ReplicationInstance) SetReplicationInstanceStatus(v string) *ReplicationInstance {
-	s.ReplicationInstanceStatus = &v
-	return s
-}
-
-// SetReplicationSubnetGroup sets the ReplicationSubnetGroup field's value.
-func (s *ReplicationInstance) SetReplicationSubnetGroup(v *ReplicationSubnetGroup) *ReplicationInstance {
-	s.ReplicationSubnetGroup = v
-	return s
-}
-
-// SetSecondaryAvailabilityZone sets the SecondaryAvailabilityZone field's value.
-func (s *ReplicationInstance) SetSecondaryAvailabilityZone(v string) *ReplicationInstance {
-	s.SecondaryAvailabilityZone = &v
-	return s
-}
-
-// SetVpcSecurityGroups sets the VpcSecurityGroups field's value.
-func (s *ReplicationInstance) SetVpcSecurityGroups(v []VpcSecurityGroupMembership) *ReplicationInstance {
-	s.VpcSecurityGroups = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationPendingModifiedValues
 type ReplicationPendingModifiedValues struct {
 	_ struct{} `type:"structure"`
@@ -8422,30 +6580,6 @@ func (s ReplicationPendingModifiedValues) GoString() string {
 	return s.String()
 }
 
-// SetAllocatedStorage sets the AllocatedStorage field's value.
-func (s *ReplicationPendingModifiedValues) SetAllocatedStorage(v int64) *ReplicationPendingModifiedValues {
-	s.AllocatedStorage = &v
-	return s
-}
-
-// SetEngineVersion sets the EngineVersion field's value.
-func (s *ReplicationPendingModifiedValues) SetEngineVersion(v string) *ReplicationPendingModifiedValues {
-	s.EngineVersion = &v
-	return s
-}
-
-// SetMultiAZ sets the MultiAZ field's value.
-func (s *ReplicationPendingModifiedValues) SetMultiAZ(v bool) *ReplicationPendingModifiedValues {
-	s.MultiAZ = &v
-	return s
-}
-
-// SetReplicationInstanceClass sets the ReplicationInstanceClass field's value.
-func (s *ReplicationPendingModifiedValues) SetReplicationInstanceClass(v string) *ReplicationPendingModifiedValues {
-	s.ReplicationInstanceClass = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroup
 type ReplicationSubnetGroup struct {
 	_ struct{} `type:"structure"`
@@ -8474,36 +6608,6 @@ func (s ReplicationSubnetGroup) String() string {
 // GoString returns the string representation
 func (s ReplicationSubnetGroup) GoString() string {
 	return s.String()
-}
-
-// SetReplicationSubnetGroupDescription sets the ReplicationSubnetGroupDescription field's value.
-func (s *ReplicationSubnetGroup) SetReplicationSubnetGroupDescription(v string) *ReplicationSubnetGroup {
-	s.ReplicationSubnetGroupDescription = &v
-	return s
-}
-
-// SetReplicationSubnetGroupIdentifier sets the ReplicationSubnetGroupIdentifier field's value.
-func (s *ReplicationSubnetGroup) SetReplicationSubnetGroupIdentifier(v string) *ReplicationSubnetGroup {
-	s.ReplicationSubnetGroupIdentifier = &v
-	return s
-}
-
-// SetSubnetGroupStatus sets the SubnetGroupStatus field's value.
-func (s *ReplicationSubnetGroup) SetSubnetGroupStatus(v string) *ReplicationSubnetGroup {
-	s.SubnetGroupStatus = &v
-	return s
-}
-
-// SetSubnets sets the Subnets field's value.
-func (s *ReplicationSubnetGroup) SetSubnets(v []Subnet) *ReplicationSubnetGroup {
-	s.Subnets = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *ReplicationSubnetGroup) SetVpcId(v string) *ReplicationSubnetGroup {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTask
@@ -8572,90 +6676,6 @@ func (s ReplicationTask) GoString() string {
 	return s.String()
 }
 
-// SetLastFailureMessage sets the LastFailureMessage field's value.
-func (s *ReplicationTask) SetLastFailureMessage(v string) *ReplicationTask {
-	s.LastFailureMessage = &v
-	return s
-}
-
-// SetMigrationType sets the MigrationType field's value.
-func (s *ReplicationTask) SetMigrationType(v MigrationTypeValue) *ReplicationTask {
-	s.MigrationType = v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *ReplicationTask) SetReplicationInstanceArn(v string) *ReplicationTask {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *ReplicationTask) SetReplicationTaskArn(v string) *ReplicationTask {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
-// SetReplicationTaskCreationDate sets the ReplicationTaskCreationDate field's value.
-func (s *ReplicationTask) SetReplicationTaskCreationDate(v time.Time) *ReplicationTask {
-	s.ReplicationTaskCreationDate = &v
-	return s
-}
-
-// SetReplicationTaskIdentifier sets the ReplicationTaskIdentifier field's value.
-func (s *ReplicationTask) SetReplicationTaskIdentifier(v string) *ReplicationTask {
-	s.ReplicationTaskIdentifier = &v
-	return s
-}
-
-// SetReplicationTaskSettings sets the ReplicationTaskSettings field's value.
-func (s *ReplicationTask) SetReplicationTaskSettings(v string) *ReplicationTask {
-	s.ReplicationTaskSettings = &v
-	return s
-}
-
-// SetReplicationTaskStartDate sets the ReplicationTaskStartDate field's value.
-func (s *ReplicationTask) SetReplicationTaskStartDate(v time.Time) *ReplicationTask {
-	s.ReplicationTaskStartDate = &v
-	return s
-}
-
-// SetReplicationTaskStats sets the ReplicationTaskStats field's value.
-func (s *ReplicationTask) SetReplicationTaskStats(v *ReplicationTaskStats) *ReplicationTask {
-	s.ReplicationTaskStats = v
-	return s
-}
-
-// SetSourceEndpointArn sets the SourceEndpointArn field's value.
-func (s *ReplicationTask) SetSourceEndpointArn(v string) *ReplicationTask {
-	s.SourceEndpointArn = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ReplicationTask) SetStatus(v string) *ReplicationTask {
-	s.Status = &v
-	return s
-}
-
-// SetStopReason sets the StopReason field's value.
-func (s *ReplicationTask) SetStopReason(v string) *ReplicationTask {
-	s.StopReason = &v
-	return s
-}
-
-// SetTableMappings sets the TableMappings field's value.
-func (s *ReplicationTask) SetTableMappings(v string) *ReplicationTask {
-	s.TableMappings = &v
-	return s
-}
-
-// SetTargetEndpointArn sets the TargetEndpointArn field's value.
-func (s *ReplicationTask) SetTargetEndpointArn(v string) *ReplicationTask {
-	s.TargetEndpointArn = &v
-	return s
-}
-
 // The task assessment report in JSON format.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskAssessmentResult
 type ReplicationTaskAssessmentResult struct {
@@ -8694,48 +6714,6 @@ func (s ReplicationTaskAssessmentResult) GoString() string {
 	return s.String()
 }
 
-// SetAssessmentResults sets the AssessmentResults field's value.
-func (s *ReplicationTaskAssessmentResult) SetAssessmentResults(v string) *ReplicationTaskAssessmentResult {
-	s.AssessmentResults = &v
-	return s
-}
-
-// SetAssessmentResultsFile sets the AssessmentResultsFile field's value.
-func (s *ReplicationTaskAssessmentResult) SetAssessmentResultsFile(v string) *ReplicationTaskAssessmentResult {
-	s.AssessmentResultsFile = &v
-	return s
-}
-
-// SetAssessmentStatus sets the AssessmentStatus field's value.
-func (s *ReplicationTaskAssessmentResult) SetAssessmentStatus(v string) *ReplicationTaskAssessmentResult {
-	s.AssessmentStatus = &v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *ReplicationTaskAssessmentResult) SetReplicationTaskArn(v string) *ReplicationTaskAssessmentResult {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
-// SetReplicationTaskIdentifier sets the ReplicationTaskIdentifier field's value.
-func (s *ReplicationTaskAssessmentResult) SetReplicationTaskIdentifier(v string) *ReplicationTaskAssessmentResult {
-	s.ReplicationTaskIdentifier = &v
-	return s
-}
-
-// SetReplicationTaskLastAssessmentDate sets the ReplicationTaskLastAssessmentDate field's value.
-func (s *ReplicationTaskAssessmentResult) SetReplicationTaskLastAssessmentDate(v time.Time) *ReplicationTaskAssessmentResult {
-	s.ReplicationTaskLastAssessmentDate = &v
-	return s
-}
-
-// SetS3ObjectUrl sets the S3ObjectUrl field's value.
-func (s *ReplicationTaskAssessmentResult) SetS3ObjectUrl(v string) *ReplicationTaskAssessmentResult {
-	s.S3ObjectUrl = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskStats
 type ReplicationTaskStats struct {
 	_ struct{} `type:"structure"`
@@ -8767,42 +6745,6 @@ func (s ReplicationTaskStats) String() string {
 // GoString returns the string representation
 func (s ReplicationTaskStats) GoString() string {
 	return s.String()
-}
-
-// SetElapsedTimeMillis sets the ElapsedTimeMillis field's value.
-func (s *ReplicationTaskStats) SetElapsedTimeMillis(v int64) *ReplicationTaskStats {
-	s.ElapsedTimeMillis = &v
-	return s
-}
-
-// SetFullLoadProgressPercent sets the FullLoadProgressPercent field's value.
-func (s *ReplicationTaskStats) SetFullLoadProgressPercent(v int64) *ReplicationTaskStats {
-	s.FullLoadProgressPercent = &v
-	return s
-}
-
-// SetTablesErrored sets the TablesErrored field's value.
-func (s *ReplicationTaskStats) SetTablesErrored(v int64) *ReplicationTaskStats {
-	s.TablesErrored = &v
-	return s
-}
-
-// SetTablesLoaded sets the TablesLoaded field's value.
-func (s *ReplicationTaskStats) SetTablesLoaded(v int64) *ReplicationTaskStats {
-	s.TablesLoaded = &v
-	return s
-}
-
-// SetTablesLoading sets the TablesLoading field's value.
-func (s *ReplicationTaskStats) SetTablesLoading(v int64) *ReplicationTaskStats {
-	s.TablesLoading = &v
-	return s
-}
-
-// SetTablesQueued sets the TablesQueued field's value.
-func (s *ReplicationTaskStats) SetTablesQueued(v int64) *ReplicationTaskStats {
-	s.TablesQueued = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings
@@ -8846,48 +6788,6 @@ func (s S3Settings) GoString() string {
 	return s.String()
 }
 
-// SetBucketFolder sets the BucketFolder field's value.
-func (s *S3Settings) SetBucketFolder(v string) *S3Settings {
-	s.BucketFolder = &v
-	return s
-}
-
-// SetBucketName sets the BucketName field's value.
-func (s *S3Settings) SetBucketName(v string) *S3Settings {
-	s.BucketName = &v
-	return s
-}
-
-// SetCompressionType sets the CompressionType field's value.
-func (s *S3Settings) SetCompressionType(v CompressionTypeValue) *S3Settings {
-	s.CompressionType = v
-	return s
-}
-
-// SetCsvDelimiter sets the CsvDelimiter field's value.
-func (s *S3Settings) SetCsvDelimiter(v string) *S3Settings {
-	s.CsvDelimiter = &v
-	return s
-}
-
-// SetCsvRowDelimiter sets the CsvRowDelimiter field's value.
-func (s *S3Settings) SetCsvRowDelimiter(v string) *S3Settings {
-	s.CsvRowDelimiter = &v
-	return s
-}
-
-// SetExternalTableDefinition sets the ExternalTableDefinition field's value.
-func (s *S3Settings) SetExternalTableDefinition(v string) *S3Settings {
-	s.ExternalTableDefinition = &v
-	return s
-}
-
-// SetServiceAccessRoleArn sets the ServiceAccessRoleArn field's value.
-func (s *S3Settings) SetServiceAccessRoleArn(v string) *S3Settings {
-	s.ServiceAccessRoleArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentMessage
 type StartReplicationTaskAssessmentInput struct {
 	_ struct{} `type:"structure"`
@@ -8922,12 +6822,6 @@ func (s *StartReplicationTaskAssessmentInput) Validate() error {
 	return nil
 }
 
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *StartReplicationTaskAssessmentInput) SetReplicationTaskArn(v string) *StartReplicationTaskAssessmentInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessmentResponse
 type StartReplicationTaskAssessmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -8951,12 +6845,6 @@ func (s StartReplicationTaskAssessmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartReplicationTaskAssessmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTask sets the ReplicationTask field's value.
-func (s *StartReplicationTaskAssessmentOutput) SetReplicationTask(v *ReplicationTask) *StartReplicationTaskAssessmentOutput {
-	s.ReplicationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskMessage
@@ -9004,24 +6892,6 @@ func (s *StartReplicationTaskInput) Validate() error {
 	return nil
 }
 
-// SetCdcStartTime sets the CdcStartTime field's value.
-func (s *StartReplicationTaskInput) SetCdcStartTime(v time.Time) *StartReplicationTaskInput {
-	s.CdcStartTime = &v
-	return s
-}
-
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *StartReplicationTaskInput) SetReplicationTaskArn(v string) *StartReplicationTaskInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
-// SetStartReplicationTaskType sets the StartReplicationTaskType field's value.
-func (s *StartReplicationTaskInput) SetStartReplicationTaskType(v StartReplicationTaskTypeValue) *StartReplicationTaskInput {
-	s.StartReplicationTaskType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskResponse
 type StartReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -9045,12 +6915,6 @@ func (s StartReplicationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartReplicationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTask sets the ReplicationTask field's value.
-func (s *StartReplicationTaskOutput) SetReplicationTask(v *ReplicationTask) *StartReplicationTaskOutput {
-	s.ReplicationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTaskMessage
@@ -9087,12 +6951,6 @@ func (s *StopReplicationTaskInput) Validate() error {
 	return nil
 }
 
-// SetReplicationTaskArn sets the ReplicationTaskArn field's value.
-func (s *StopReplicationTaskInput) SetReplicationTaskArn(v string) *StopReplicationTaskInput {
-	s.ReplicationTaskArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTaskResponse
 type StopReplicationTaskOutput struct {
 	_ struct{} `type:"structure"`
@@ -9116,12 +6974,6 @@ func (s StopReplicationTaskOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopReplicationTaskOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReplicationTask sets the ReplicationTask field's value.
-func (s *StopReplicationTaskOutput) SetReplicationTask(v *ReplicationTask) *StopReplicationTaskOutput {
-	s.ReplicationTask = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Subnet
@@ -9148,24 +7000,6 @@ func (s Subnet) GoString() string {
 	return s.String()
 }
 
-// SetSubnetAvailabilityZone sets the SubnetAvailabilityZone field's value.
-func (s *Subnet) SetSubnetAvailabilityZone(v *AvailabilityZone) *Subnet {
-	s.SubnetAvailabilityZone = v
-	return s
-}
-
-// SetSubnetIdentifier sets the SubnetIdentifier field's value.
-func (s *Subnet) SetSubnetIdentifier(v string) *Subnet {
-	s.SubnetIdentifier = &v
-	return s
-}
-
-// SetSubnetStatus sets the SubnetStatus field's value.
-func (s *Subnet) SetSubnetStatus(v string) *Subnet {
-	s.SubnetStatus = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SupportedEndpointType
 type SupportedEndpointType struct {
 	_ struct{} `type:"structure"`
@@ -9190,24 +7024,6 @@ func (s SupportedEndpointType) String() string {
 // GoString returns the string representation
 func (s SupportedEndpointType) GoString() string {
 	return s.String()
-}
-
-// SetEndpointType sets the EndpointType field's value.
-func (s *SupportedEndpointType) SetEndpointType(v ReplicationEndpointTypeValue) *SupportedEndpointType {
-	s.EndpointType = v
-	return s
-}
-
-// SetEngineName sets the EngineName field's value.
-func (s *SupportedEndpointType) SetEngineName(v string) *SupportedEndpointType {
-	s.EngineName = &v
-	return s
-}
-
-// SetSupportsCDC sets the SupportsCDC field's value.
-func (s *SupportedEndpointType) SetSupportsCDC(v bool) *SupportedEndpointType {
-	s.SupportsCDC = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics
@@ -9300,96 +7116,6 @@ func (s TableStatistics) GoString() string {
 	return s.String()
 }
 
-// SetDdls sets the Ddls field's value.
-func (s *TableStatistics) SetDdls(v int64) *TableStatistics {
-	s.Ddls = &v
-	return s
-}
-
-// SetDeletes sets the Deletes field's value.
-func (s *TableStatistics) SetDeletes(v int64) *TableStatistics {
-	s.Deletes = &v
-	return s
-}
-
-// SetFullLoadCondtnlChkFailedRows sets the FullLoadCondtnlChkFailedRows field's value.
-func (s *TableStatistics) SetFullLoadCondtnlChkFailedRows(v int64) *TableStatistics {
-	s.FullLoadCondtnlChkFailedRows = &v
-	return s
-}
-
-// SetFullLoadErrorRows sets the FullLoadErrorRows field's value.
-func (s *TableStatistics) SetFullLoadErrorRows(v int64) *TableStatistics {
-	s.FullLoadErrorRows = &v
-	return s
-}
-
-// SetFullLoadRows sets the FullLoadRows field's value.
-func (s *TableStatistics) SetFullLoadRows(v int64) *TableStatistics {
-	s.FullLoadRows = &v
-	return s
-}
-
-// SetInserts sets the Inserts field's value.
-func (s *TableStatistics) SetInserts(v int64) *TableStatistics {
-	s.Inserts = &v
-	return s
-}
-
-// SetLastUpdateTime sets the LastUpdateTime field's value.
-func (s *TableStatistics) SetLastUpdateTime(v time.Time) *TableStatistics {
-	s.LastUpdateTime = &v
-	return s
-}
-
-// SetSchemaName sets the SchemaName field's value.
-func (s *TableStatistics) SetSchemaName(v string) *TableStatistics {
-	s.SchemaName = &v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *TableStatistics) SetTableName(v string) *TableStatistics {
-	s.TableName = &v
-	return s
-}
-
-// SetTableState sets the TableState field's value.
-func (s *TableStatistics) SetTableState(v string) *TableStatistics {
-	s.TableState = &v
-	return s
-}
-
-// SetUpdates sets the Updates field's value.
-func (s *TableStatistics) SetUpdates(v int64) *TableStatistics {
-	s.Updates = &v
-	return s
-}
-
-// SetValidationFailedRecords sets the ValidationFailedRecords field's value.
-func (s *TableStatistics) SetValidationFailedRecords(v int64) *TableStatistics {
-	s.ValidationFailedRecords = &v
-	return s
-}
-
-// SetValidationPendingRecords sets the ValidationPendingRecords field's value.
-func (s *TableStatistics) SetValidationPendingRecords(v int64) *TableStatistics {
-	s.ValidationPendingRecords = &v
-	return s
-}
-
-// SetValidationState sets the ValidationState field's value.
-func (s *TableStatistics) SetValidationState(v string) *TableStatistics {
-	s.ValidationState = &v
-	return s
-}
-
-// SetValidationSuspendedRecords sets the ValidationSuspendedRecords field's value.
-func (s *TableStatistics) SetValidationSuspendedRecords(v int64) *TableStatistics {
-	s.ValidationSuspendedRecords = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableToReload
 type TableToReload struct {
 	_ struct{} `type:"structure"`
@@ -9409,18 +7135,6 @@ func (s TableToReload) String() string {
 // GoString returns the string representation
 func (s TableToReload) GoString() string {
 	return s.String()
-}
-
-// SetSchemaName sets the SchemaName field's value.
-func (s *TableToReload) SetSchemaName(v string) *TableToReload {
-	s.SchemaName = &v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *TableToReload) SetTableName(v string) *TableToReload {
-	s.TableName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Tag
@@ -9448,18 +7162,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnectionMessage
@@ -9505,18 +7207,6 @@ func (s *TestConnectionInput) Validate() error {
 	return nil
 }
 
-// SetEndpointArn sets the EndpointArn field's value.
-func (s *TestConnectionInput) SetEndpointArn(v string) *TestConnectionInput {
-	s.EndpointArn = &v
-	return s
-}
-
-// SetReplicationInstanceArn sets the ReplicationInstanceArn field's value.
-func (s *TestConnectionInput) SetReplicationInstanceArn(v string) *TestConnectionInput {
-	s.ReplicationInstanceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnectionResponse
 type TestConnectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -9542,12 +7232,6 @@ func (s TestConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConnection sets the Connection field's value.
-func (s *TestConnectionOutput) SetConnection(v *Connection) *TestConnectionOutput {
-	s.Connection = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
@@ -9567,18 +7251,6 @@ func (s VpcSecurityGroupMembership) String() string {
 // GoString returns the string representation
 func (s VpcSecurityGroupMembership) GoString() string {
 	return s.String()
-}
-
-// SetStatus sets the Status field's value.
-func (s *VpcSecurityGroupMembership) SetStatus(v string) *VpcSecurityGroupMembership {
-	s.Status = &v
-	return s
-}
-
-// SetVpcSecurityGroupId sets the VpcSecurityGroupId field's value.
-func (s *VpcSecurityGroupMembership) SetVpcSecurityGroupId(v string) *VpcSecurityGroupMembership {
-	s.VpcSecurityGroupId = &v
-	return s
 }
 
 type AuthMechanismValue string

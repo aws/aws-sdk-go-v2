@@ -130,24 +130,6 @@ func (s *GetMediaInput) Validate() error {
 	return nil
 }
 
-// SetStartSelector sets the StartSelector field's value.
-func (s *GetMediaInput) SetStartSelector(v *StartSelector) *GetMediaInput {
-	s.StartSelector = v
-	return s
-}
-
-// SetStreamARN sets the StreamARN field's value.
-func (s *GetMediaInput) SetStreamARN(v string) *GetMediaInput {
-	s.StreamARN = &v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *GetMediaInput) SetStreamName(v string) *GetMediaInput {
-	s.StreamName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/GetMediaOutput
 type GetMediaOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -220,18 +202,6 @@ func (s GetMediaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMediaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *GetMediaOutput) SetContentType(v string) *GetMediaOutput {
-	s.ContentType = &v
-	return s
-}
-
-// SetPayload sets the Payload field's value.
-func (s *GetMediaOutput) SetPayload(v io.ReadCloser) *GetMediaOutput {
-	s.Payload = v
-	return s
 }
 
 // Identifies the chunk on the Kinesis video stream where you want the GetMedia
@@ -315,30 +285,6 @@ func (s *StartSelector) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAfterFragmentNumber sets the AfterFragmentNumber field's value.
-func (s *StartSelector) SetAfterFragmentNumber(v string) *StartSelector {
-	s.AfterFragmentNumber = &v
-	return s
-}
-
-// SetContinuationToken sets the ContinuationToken field's value.
-func (s *StartSelector) SetContinuationToken(v string) *StartSelector {
-	s.ContinuationToken = &v
-	return s
-}
-
-// SetStartSelectorType sets the StartSelectorType field's value.
-func (s *StartSelector) SetStartSelectorType(v StartSelectorType) *StartSelector {
-	s.StartSelectorType = v
-	return s
-}
-
-// SetStartTimestamp sets the StartTimestamp field's value.
-func (s *StartSelector) SetStartTimestamp(v time.Time) *StartSelector {
-	s.StartTimestamp = &v
-	return s
 }
 
 type StartSelectorType string

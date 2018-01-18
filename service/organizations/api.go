@@ -3275,12 +3275,6 @@ func (s *AcceptHandshakeInput) Validate() error {
 	return nil
 }
 
-// SetHandshakeId sets the HandshakeId field's value.
-func (s *AcceptHandshakeInput) SetHandshakeId(v string) *AcceptHandshakeInput {
-	s.HandshakeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeResponse
 type AcceptHandshakeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3304,12 +3298,6 @@ func (s AcceptHandshakeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AcceptHandshakeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshake sets the Handshake field's value.
-func (s *AcceptHandshakeOutput) SetHandshake(v *Handshake) *AcceptHandshakeOutput {
-	s.Handshake = v
-	return s
 }
 
 // Contains information about an AWS account that is a member of an organization.
@@ -3361,48 +3349,6 @@ func (s Account) String() string {
 // GoString returns the string representation
 func (s Account) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Account) SetArn(v string) *Account {
-	s.Arn = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *Account) SetEmail(v string) *Account {
-	s.Email = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Account) SetId(v string) *Account {
-	s.Id = &v
-	return s
-}
-
-// SetJoinedMethod sets the JoinedMethod field's value.
-func (s *Account) SetJoinedMethod(v AccountJoinedMethod) *Account {
-	s.JoinedMethod = v
-	return s
-}
-
-// SetJoinedTimestamp sets the JoinedTimestamp field's value.
-func (s *Account) SetJoinedTimestamp(v time.Time) *Account {
-	s.JoinedTimestamp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Account) SetName(v string) *Account {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Account) SetStatus(v AccountStatus) *Account {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyRequest
@@ -3467,18 +3413,6 @@ func (s *AttachPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyId sets the PolicyId field's value.
-func (s *AttachPolicyInput) SetPolicyId(v string) *AttachPolicyInput {
-	s.PolicyId = &v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *AttachPolicyInput) SetTargetId(v string) *AttachPolicyInput {
-	s.TargetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicyOutput
 type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -3539,12 +3473,6 @@ func (s *CancelHandshakeInput) Validate() error {
 	return nil
 }
 
-// SetHandshakeId sets the HandshakeId field's value.
-func (s *CancelHandshakeInput) SetHandshakeId(v string) *CancelHandshakeInput {
-	s.HandshakeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeResponse
 type CancelHandshakeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3568,12 +3496,6 @@ func (s CancelHandshakeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelHandshakeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshake sets the Handshake field's value.
-func (s *CancelHandshakeOutput) SetHandshake(v *Handshake) *CancelHandshakeOutput {
-	s.Handshake = v
-	return s
 }
 
 // Contains a list of child entities, either OUs or accounts.
@@ -3606,18 +3528,6 @@ func (s Child) String() string {
 // GoString returns the string representation
 func (s Child) GoString() string {
 	return s.String()
-}
-
-// SetId sets the Id field's value.
-func (s *Child) SetId(v string) *Child {
-	s.Id = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Child) SetType(v ChildType) *Child {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountRequest
@@ -3707,30 +3617,6 @@ func (s *CreateAccountInput) Validate() error {
 	return nil
 }
 
-// SetAccountName sets the AccountName field's value.
-func (s *CreateAccountInput) SetAccountName(v string) *CreateAccountInput {
-	s.AccountName = &v
-	return s
-}
-
-// SetEmail sets the Email field's value.
-func (s *CreateAccountInput) SetEmail(v string) *CreateAccountInput {
-	s.Email = &v
-	return s
-}
-
-// SetIamUserAccessToBilling sets the IamUserAccessToBilling field's value.
-func (s *CreateAccountInput) SetIamUserAccessToBilling(v IAMUserAccessToBilling) *CreateAccountInput {
-	s.IamUserAccessToBilling = v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *CreateAccountInput) SetRoleName(v string) *CreateAccountInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountResponse
 type CreateAccountOutput struct {
 	_ struct{} `type:"structure"`
@@ -3758,12 +3644,6 @@ func (s CreateAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreateAccountStatus sets the CreateAccountStatus field's value.
-func (s *CreateAccountOutput) SetCreateAccountStatus(v *CreateAccountStatus) *CreateAccountOutput {
-	s.CreateAccountStatus = v
-	return s
 }
 
 // Contains the status about a CreateAccount request to create an AWS account
@@ -3828,48 +3708,6 @@ func (s CreateAccountStatus) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *CreateAccountStatus) SetAccountId(v string) *CreateAccountStatus {
-	s.AccountId = &v
-	return s
-}
-
-// SetAccountName sets the AccountName field's value.
-func (s *CreateAccountStatus) SetAccountName(v string) *CreateAccountStatus {
-	s.AccountName = &v
-	return s
-}
-
-// SetCompletedTimestamp sets the CompletedTimestamp field's value.
-func (s *CreateAccountStatus) SetCompletedTimestamp(v time.Time) *CreateAccountStatus {
-	s.CompletedTimestamp = &v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *CreateAccountStatus) SetFailureReason(v CreateAccountFailureReason) *CreateAccountStatus {
-	s.FailureReason = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *CreateAccountStatus) SetId(v string) *CreateAccountStatus {
-	s.Id = &v
-	return s
-}
-
-// SetRequestedTimestamp sets the RequestedTimestamp field's value.
-func (s *CreateAccountStatus) SetRequestedTimestamp(v time.Time) *CreateAccountStatus {
-	s.RequestedTimestamp = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CreateAccountStatus) SetState(v CreateAccountState) *CreateAccountStatus {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationRequest
 type CreateOrganizationInput struct {
 	_ struct{} `type:"structure"`
@@ -3900,12 +3738,6 @@ func (s CreateOrganizationInput) GoString() string {
 	return s.String()
 }
 
-// SetFeatureSet sets the FeatureSet field's value.
-func (s *CreateOrganizationInput) SetFeatureSet(v OrganizationFeatureSet) *CreateOrganizationInput {
-	s.FeatureSet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationResponse
 type CreateOrganizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -3929,12 +3761,6 @@ func (s CreateOrganizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOrganization sets the Organization field's value.
-func (s *CreateOrganizationOutput) SetOrganization(v *Organization) *CreateOrganizationOutput {
-	s.Organization = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitRequest
@@ -3995,18 +3821,6 @@ func (s *CreateOrganizationalUnitInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateOrganizationalUnitInput) SetName(v string) *CreateOrganizationalUnitInput {
-	s.Name = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *CreateOrganizationalUnitInput) SetParentId(v string) *CreateOrganizationalUnitInput {
-	s.ParentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnitResponse
 type CreateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
@@ -4030,12 +3844,6 @@ func (s CreateOrganizationalUnitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOrganizationalUnit sets the OrganizationalUnit field's value.
-func (s *CreateOrganizationalUnitOutput) SetOrganizationalUnit(v *OrganizationalUnit) *CreateOrganizationalUnitOutput {
-	s.OrganizationalUnit = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest
@@ -4117,30 +3925,6 @@ func (s *CreatePolicyInput) Validate() error {
 	return nil
 }
 
-// SetContent sets the Content field's value.
-func (s *CreatePolicyInput) SetContent(v string) *CreatePolicyInput {
-	s.Content = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreatePolicyInput) SetDescription(v string) *CreatePolicyInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreatePolicyInput) SetName(v string) *CreatePolicyInput {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreatePolicyInput) SetType(v PolicyType) *CreatePolicyInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyResponse
 type CreatePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4164,12 +3948,6 @@ func (s CreatePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *CreatePolicyOutput) SetPolicy(v *Policy) *CreatePolicyOutput {
-	s.Policy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeRequest
@@ -4210,12 +3988,6 @@ func (s *DeclineHandshakeInput) Validate() error {
 	return nil
 }
 
-// SetHandshakeId sets the HandshakeId field's value.
-func (s *DeclineHandshakeInput) SetHandshakeId(v string) *DeclineHandshakeInput {
-	s.HandshakeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeResponse
 type DeclineHandshakeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4240,12 +4012,6 @@ func (s DeclineHandshakeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeclineHandshakeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshake sets the Handshake field's value.
-func (s *DeclineHandshakeOutput) SetHandshake(v *Handshake) *DeclineHandshakeOutput {
-	s.Handshake = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationInput
@@ -4325,12 +4091,6 @@ func (s *DeleteOrganizationalUnitInput) Validate() error {
 	return nil
 }
 
-// SetOrganizationalUnitId sets the OrganizationalUnitId field's value.
-func (s *DeleteOrganizationalUnitInput) SetOrganizationalUnitId(v string) *DeleteOrganizationalUnitInput {
-	s.OrganizationalUnitId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnitOutput
 type DeleteOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
@@ -4389,12 +4149,6 @@ func (s *DeletePolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyId sets the PolicyId field's value.
-func (s *DeletePolicyInput) SetPolicyId(v string) *DeletePolicyInput {
-	s.PolicyId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicyOutput
@@ -4457,12 +4211,6 @@ func (s *DescribeAccountInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *DescribeAccountInput) SetAccountId(v string) *DescribeAccountInput {
-	s.AccountId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccountResponse
 type DescribeAccountOutput struct {
 	_ struct{} `type:"structure"`
@@ -4486,12 +4234,6 @@ func (s DescribeAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccount sets the Account field's value.
-func (s *DescribeAccountOutput) SetAccount(v *Account) *DescribeAccountOutput {
-	s.Account = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusRequest
@@ -4534,12 +4276,6 @@ func (s *DescribeCreateAccountStatusInput) Validate() error {
 	return nil
 }
 
-// SetCreateAccountRequestId sets the CreateAccountRequestId field's value.
-func (s *DescribeCreateAccountStatusInput) SetCreateAccountRequestId(v string) *DescribeCreateAccountStatusInput {
-	s.CreateAccountRequestId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatusResponse
 type DescribeCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -4563,12 +4299,6 @@ func (s DescribeCreateAccountStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCreateAccountStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreateAccountStatus sets the CreateAccountStatus field's value.
-func (s *DescribeCreateAccountStatusOutput) SetCreateAccountStatus(v *CreateAccountStatus) *DescribeCreateAccountStatusOutput {
-	s.CreateAccountStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeRequest
@@ -4610,12 +4340,6 @@ func (s *DescribeHandshakeInput) Validate() error {
 	return nil
 }
 
-// SetHandshakeId sets the HandshakeId field's value.
-func (s *DescribeHandshakeInput) SetHandshakeId(v string) *DescribeHandshakeInput {
-	s.HandshakeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeResponse
 type DescribeHandshakeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4639,12 +4363,6 @@ func (s DescribeHandshakeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeHandshakeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshake sets the Handshake field's value.
-func (s *DescribeHandshakeOutput) SetHandshake(v *Handshake) *DescribeHandshakeOutput {
-	s.Handshake = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationInput
@@ -4687,12 +4405,6 @@ func (s DescribeOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetOrganization sets the Organization field's value.
-func (s *DescribeOrganizationOutput) SetOrganization(v *Organization) *DescribeOrganizationOutput {
-	s.Organization = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnitRequest
 type DescribeOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
@@ -4733,12 +4445,6 @@ func (s *DescribeOrganizationalUnitInput) Validate() error {
 	return nil
 }
 
-// SetOrganizationalUnitId sets the OrganizationalUnitId field's value.
-func (s *DescribeOrganizationalUnitInput) SetOrganizationalUnitId(v string) *DescribeOrganizationalUnitInput {
-	s.OrganizationalUnitId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnitResponse
 type DescribeOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
@@ -4762,12 +4468,6 @@ func (s DescribeOrganizationalUnitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOrganizationalUnit sets the OrganizationalUnit field's value.
-func (s *DescribeOrganizationalUnitOutput) SetOrganizationalUnit(v *OrganizationalUnit) *DescribeOrganizationalUnitOutput {
-	s.OrganizationalUnit = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicyRequest
@@ -4808,12 +4508,6 @@ func (s *DescribePolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyId sets the PolicyId field's value.
-func (s *DescribePolicyInput) SetPolicyId(v string) *DescribePolicyInput {
-	s.PolicyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicyResponse
 type DescribePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4837,12 +4531,6 @@ func (s DescribePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *DescribePolicyOutput) SetPolicy(v *Policy) *DescribePolicyOutput {
-	s.Policy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyRequest
@@ -4907,18 +4595,6 @@ func (s *DetachPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyId sets the PolicyId field's value.
-func (s *DetachPolicyInput) SetPolicyId(v string) *DetachPolicyInput {
-	s.PolicyId = &v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *DetachPolicyInput) SetTargetId(v string) *DetachPolicyInput {
-	s.TargetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicyOutput
 type DetachPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -4978,12 +4654,6 @@ func (s *DisableAWSServiceAccessInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetServicePrincipal sets the ServicePrincipal field's value.
-func (s *DisableAWSServiceAccessInput) SetServicePrincipal(v string) *DisableAWSServiceAccessInput {
-	s.ServicePrincipal = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisableAWSServiceAccessOutput
@@ -5054,18 +4724,6 @@ func (s *DisablePolicyTypeInput) Validate() error {
 	return nil
 }
 
-// SetPolicyType sets the PolicyType field's value.
-func (s *DisablePolicyTypeInput) SetPolicyType(v PolicyType) *DisablePolicyTypeInput {
-	s.PolicyType = v
-	return s
-}
-
-// SetRootId sets the RootId field's value.
-func (s *DisablePolicyTypeInput) SetRootId(v string) *DisablePolicyTypeInput {
-	s.RootId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeResponse
 type DisablePolicyTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -5089,12 +4747,6 @@ func (s DisablePolicyTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisablePolicyTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRoot sets the Root field's value.
-func (s *DisablePolicyTypeOutput) SetRoot(v *Root) *DisablePolicyTypeOutput {
-	s.Root = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessRequest
@@ -5134,12 +4786,6 @@ func (s *EnableAWSServiceAccessInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetServicePrincipal sets the ServicePrincipal field's value.
-func (s *EnableAWSServiceAccessInput) SetServicePrincipal(v string) *EnableAWSServiceAccessInput {
-	s.ServicePrincipal = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAWSServiceAccessOutput
@@ -5205,12 +4851,6 @@ func (s EnableAllFeaturesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHandshake sets the Handshake field's value.
-func (s *EnableAllFeaturesOutput) SetHandshake(v *Handshake) *EnableAllFeaturesOutput {
-	s.Handshake = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest
 type EnablePolicyTypeInput struct {
 	_ struct{} `type:"structure"`
@@ -5257,18 +4897,6 @@ func (s *EnablePolicyTypeInput) Validate() error {
 	return nil
 }
 
-// SetPolicyType sets the PolicyType field's value.
-func (s *EnablePolicyTypeInput) SetPolicyType(v PolicyType) *EnablePolicyTypeInput {
-	s.PolicyType = v
-	return s
-}
-
-// SetRootId sets the RootId field's value.
-func (s *EnablePolicyTypeInput) SetRootId(v string) *EnablePolicyTypeInput {
-	s.RootId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeResponse
 type EnablePolicyTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -5294,12 +4922,6 @@ func (s EnablePolicyTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetRoot sets the Root field's value.
-func (s *EnablePolicyTypeOutput) SetRoot(v *Root) *EnablePolicyTypeOutput {
-	s.Root = v
-	return s
-}
-
 // A structure that contains details of a service principal that is enabled
 // to integrate with AWS Organizations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnabledServicePrincipal
@@ -5323,18 +4945,6 @@ func (s EnabledServicePrincipal) String() string {
 // GoString returns the string representation
 func (s EnabledServicePrincipal) GoString() string {
 	return s.String()
-}
-
-// SetDateEnabled sets the DateEnabled field's value.
-func (s *EnabledServicePrincipal) SetDateEnabled(v time.Time) *EnabledServicePrincipal {
-	s.DateEnabled = &v
-	return s
-}
-
-// SetServicePrincipal sets the ServicePrincipal field's value.
-func (s *EnabledServicePrincipal) SetServicePrincipal(v string) *EnabledServicePrincipal {
-	s.ServicePrincipal = &v
-	return s
 }
 
 // Contains information that must be exchanged to securely establish a relationship
@@ -5432,54 +5042,6 @@ func (s Handshake) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *Handshake) SetAction(v ActionType) *Handshake {
-	s.Action = v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *Handshake) SetArn(v string) *Handshake {
-	s.Arn = &v
-	return s
-}
-
-// SetExpirationTimestamp sets the ExpirationTimestamp field's value.
-func (s *Handshake) SetExpirationTimestamp(v time.Time) *Handshake {
-	s.ExpirationTimestamp = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Handshake) SetId(v string) *Handshake {
-	s.Id = &v
-	return s
-}
-
-// SetParties sets the Parties field's value.
-func (s *Handshake) SetParties(v []HandshakeParty) *Handshake {
-	s.Parties = v
-	return s
-}
-
-// SetRequestedTimestamp sets the RequestedTimestamp field's value.
-func (s *Handshake) SetRequestedTimestamp(v time.Time) *Handshake {
-	s.RequestedTimestamp = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *Handshake) SetResources(v []HandshakeResource) *Handshake {
-	s.Resources = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Handshake) SetState(v HandshakeState) *Handshake {
-	s.State = v
-	return s
-}
-
 // Specifies the criteria that are used to select the handshakes for the operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeFilter
 type HandshakeFilter struct {
@@ -5508,18 +5070,6 @@ func (s HandshakeFilter) String() string {
 // GoString returns the string representation
 func (s HandshakeFilter) GoString() string {
 	return s.String()
-}
-
-// SetActionType sets the ActionType field's value.
-func (s *HandshakeFilter) SetActionType(v ActionType) *HandshakeFilter {
-	s.ActionType = v
-	return s
-}
-
-// SetParentHandshakeId sets the ParentHandshakeId field's value.
-func (s *HandshakeFilter) SetParentHandshakeId(v string) *HandshakeFilter {
-	s.ParentHandshakeId = &v
-	return s
 }
 
 // Identifies a participant in a handshake.
@@ -5571,18 +5121,6 @@ func (s *HandshakeParty) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *HandshakeParty) SetId(v string) *HandshakeParty {
-	s.Id = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *HandshakeParty) SetType(v HandshakePartyType) *HandshakeParty {
-	s.Type = v
-	return s
-}
-
 // Contains additional data that is needed to process a handshake.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeResource
 type HandshakeResource struct {
@@ -5624,24 +5162,6 @@ func (s HandshakeResource) String() string {
 // GoString returns the string representation
 func (s HandshakeResource) GoString() string {
 	return s.String()
-}
-
-// SetResources sets the Resources field's value.
-func (s *HandshakeResource) SetResources(v []HandshakeResource) *HandshakeResource {
-	s.Resources = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *HandshakeResource) SetType(v HandshakeResourceType) *HandshakeResource {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *HandshakeResource) SetValue(v string) *HandshakeResource {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationRequest
@@ -5701,18 +5221,6 @@ func (s *InviteAccountToOrganizationInput) Validate() error {
 	return nil
 }
 
-// SetNotes sets the Notes field's value.
-func (s *InviteAccountToOrganizationInput) SetNotes(v string) *InviteAccountToOrganizationInput {
-	s.Notes = &v
-	return s
-}
-
-// SetTarget sets the Target field's value.
-func (s *InviteAccountToOrganizationInput) SetTarget(v *HandshakeParty) *InviteAccountToOrganizationInput {
-	s.Target = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganizationResponse
 type InviteAccountToOrganizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -5737,12 +5245,6 @@ func (s InviteAccountToOrganizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InviteAccountToOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshake sets the Handshake field's value.
-func (s *InviteAccountToOrganizationOutput) SetHandshake(v *Handshake) *InviteAccountToOrganizationOutput {
-	s.Handshake = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganizationInput
@@ -5827,18 +5329,6 @@ func (s *ListAWSServiceAccessForOrganizationInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAWSServiceAccessForOrganizationInput) SetMaxResults(v int64) *ListAWSServiceAccessForOrganizationInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAWSServiceAccessForOrganizationInput) SetNextToken(v string) *ListAWSServiceAccessForOrganizationInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationResponse
 type ListAWSServiceAccessForOrganizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -5871,18 +5361,6 @@ func (s ListAWSServiceAccessForOrganizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAWSServiceAccessForOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEnabledServicePrincipals sets the EnabledServicePrincipals field's value.
-func (s *ListAWSServiceAccessForOrganizationOutput) SetEnabledServicePrincipals(v []EnabledServicePrincipal) *ListAWSServiceAccessForOrganizationOutput {
-	s.EnabledServicePrincipals = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAWSServiceAccessForOrganizationOutput) SetNextToken(v string) *ListAWSServiceAccessForOrganizationOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest
@@ -5940,24 +5418,6 @@ func (s *ListAccountsForParentInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAccountsForParentInput) SetMaxResults(v int64) *ListAccountsForParentInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAccountsForParentInput) SetNextToken(v string) *ListAccountsForParentInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *ListAccountsForParentInput) SetParentId(v string) *ListAccountsForParentInput {
-	s.ParentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentResponse
 type ListAccountsForParentOutput struct {
 	_ struct{} `type:"structure"`
@@ -5988,18 +5448,6 @@ func (s ListAccountsForParentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAccountsForParentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccounts sets the Accounts field's value.
-func (s *ListAccountsForParentOutput) SetAccounts(v []Account) *ListAccountsForParentOutput {
-	s.Accounts = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAccountsForParentOutput) SetNextToken(v string) *ListAccountsForParentOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsRequest
@@ -6047,18 +5495,6 @@ func (s *ListAccountsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListAccountsInput) SetMaxResults(v int64) *ListAccountsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAccountsInput) SetNextToken(v string) *ListAccountsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsResponse
 type ListAccountsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6089,18 +5525,6 @@ func (s ListAccountsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAccountsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccounts sets the Accounts field's value.
-func (s *ListAccountsOutput) SetAccounts(v []Account) *ListAccountsOutput {
-	s.Accounts = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAccountsOutput) SetNextToken(v string) *ListAccountsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenRequest
@@ -6177,30 +5601,6 @@ func (s *ListChildrenInput) Validate() error {
 	return nil
 }
 
-// SetChildType sets the ChildType field's value.
-func (s *ListChildrenInput) SetChildType(v ChildType) *ListChildrenInput {
-	s.ChildType = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListChildrenInput) SetMaxResults(v int64) *ListChildrenInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChildrenInput) SetNextToken(v string) *ListChildrenInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *ListChildrenInput) SetParentId(v string) *ListChildrenInput {
-	s.ParentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenResponse
 type ListChildrenOutput struct {
 	_ struct{} `type:"structure"`
@@ -6231,18 +5631,6 @@ func (s ListChildrenOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListChildrenOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetChildren sets the Children field's value.
-func (s *ListChildrenOutput) SetChildren(v []Child) *ListChildrenOutput {
-	s.Children = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChildrenOutput) SetNextToken(v string) *ListChildrenOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusRequest
@@ -6294,24 +5682,6 @@ func (s *ListCreateAccountStatusInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCreateAccountStatusInput) SetMaxResults(v int64) *ListCreateAccountStatusInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCreateAccountStatusInput) SetNextToken(v string) *ListCreateAccountStatusInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStates sets the States field's value.
-func (s *ListCreateAccountStatusInput) SetStates(v []CreateAccountState) *ListCreateAccountStatusInput {
-	s.States = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusResponse
 type ListCreateAccountStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -6344,18 +5714,6 @@ func (s ListCreateAccountStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCreateAccountStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreateAccountStatuses sets the CreateAccountStatuses field's value.
-func (s *ListCreateAccountStatusOutput) SetCreateAccountStatuses(v []CreateAccountStatus) *ListCreateAccountStatusOutput {
-	s.CreateAccountStatuses = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCreateAccountStatusOutput) SetNextToken(v string) *ListCreateAccountStatusOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountRequest
@@ -6411,24 +5769,6 @@ func (s *ListHandshakesForAccountInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListHandshakesForAccountInput) SetFilter(v *HandshakeFilter) *ListHandshakesForAccountInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListHandshakesForAccountInput) SetMaxResults(v int64) *ListHandshakesForAccountInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHandshakesForAccountInput) SetNextToken(v string) *ListHandshakesForAccountInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountResponse
 type ListHandshakesForAccountOutput struct {
 	_ struct{} `type:"structure"`
@@ -6460,18 +5800,6 @@ func (s ListHandshakesForAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListHandshakesForAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshakes sets the Handshakes field's value.
-func (s *ListHandshakesForAccountOutput) SetHandshakes(v []Handshake) *ListHandshakesForAccountOutput {
-	s.Handshakes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHandshakesForAccountOutput) SetNextToken(v string) *ListHandshakesForAccountOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationRequest
@@ -6527,24 +5855,6 @@ func (s *ListHandshakesForOrganizationInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListHandshakesForOrganizationInput) SetFilter(v *HandshakeFilter) *ListHandshakesForOrganizationInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListHandshakesForOrganizationInput) SetMaxResults(v int64) *ListHandshakesForOrganizationInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHandshakesForOrganizationInput) SetNextToken(v string) *ListHandshakesForOrganizationInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationResponse
 type ListHandshakesForOrganizationOutput struct {
 	_ struct{} `type:"structure"`
@@ -6576,18 +5886,6 @@ func (s ListHandshakesForOrganizationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListHandshakesForOrganizationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHandshakes sets the Handshakes field's value.
-func (s *ListHandshakesForOrganizationOutput) SetHandshakes(v []Handshake) *ListHandshakesForOrganizationOutput {
-	s.Handshakes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListHandshakesForOrganizationOutput) SetNextToken(v string) *ListHandshakesForOrganizationOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentRequest
@@ -6656,24 +5954,6 @@ func (s *ListOrganizationalUnitsForParentInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListOrganizationalUnitsForParentInput) SetMaxResults(v int64) *ListOrganizationalUnitsForParentInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOrganizationalUnitsForParentInput) SetNextToken(v string) *ListOrganizationalUnitsForParentInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *ListOrganizationalUnitsForParentInput) SetParentId(v string) *ListOrganizationalUnitsForParentInput {
-	s.ParentId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentResponse
 type ListOrganizationalUnitsForParentOutput struct {
 	_ struct{} `type:"structure"`
@@ -6704,18 +5984,6 @@ func (s ListOrganizationalUnitsForParentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOrganizationalUnitsForParentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOrganizationalUnitsForParentOutput) SetNextToken(v string) *ListOrganizationalUnitsForParentOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOrganizationalUnits sets the OrganizationalUnits field's value.
-func (s *ListOrganizationalUnitsForParentOutput) SetOrganizationalUnits(v []OrganizationalUnit) *ListOrganizationalUnitsForParentOutput {
-	s.OrganizationalUnits = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsRequest
@@ -6783,24 +6051,6 @@ func (s *ListParentsInput) Validate() error {
 	return nil
 }
 
-// SetChildId sets the ChildId field's value.
-func (s *ListParentsInput) SetChildId(v string) *ListParentsInput {
-	s.ChildId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListParentsInput) SetMaxResults(v int64) *ListParentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListParentsInput) SetNextToken(v string) *ListParentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsResponse
 type ListParentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6831,18 +6081,6 @@ func (s ListParentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListParentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListParentsOutput) SetNextToken(v string) *ListParentsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParents sets the Parents field's value.
-func (s *ListParentsOutput) SetParents(v []Parent) *ListParentsOutput {
-	s.Parents = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetRequest
@@ -6921,30 +6159,6 @@ func (s *ListPoliciesForTargetInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListPoliciesForTargetInput) SetFilter(v PolicyType) *ListPoliciesForTargetInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPoliciesForTargetInput) SetMaxResults(v int64) *ListPoliciesForTargetInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPoliciesForTargetInput) SetNextToken(v string) *ListPoliciesForTargetInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *ListPoliciesForTargetInput) SetTargetId(v string) *ListPoliciesForTargetInput {
-	s.TargetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetResponse
 type ListPoliciesForTargetOutput struct {
 	_ struct{} `type:"structure"`
@@ -6975,18 +6189,6 @@ func (s ListPoliciesForTargetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPoliciesForTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPoliciesForTargetOutput) SetNextToken(v string) *ListPoliciesForTargetOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ListPoliciesForTargetOutput) SetPolicies(v []PolicySummary) *ListPoliciesForTargetOutput {
-	s.Policies = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesRequest
@@ -7042,24 +6244,6 @@ func (s *ListPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ListPoliciesInput) SetFilter(v PolicyType) *ListPoliciesInput {
-	s.Filter = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListPoliciesInput) SetMaxResults(v int64) *ListPoliciesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPoliciesInput) SetNextToken(v string) *ListPoliciesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesResponse
 type ListPoliciesOutput struct {
 	_ struct{} `type:"structure"`
@@ -7092,18 +6276,6 @@ func (s ListPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListPoliciesOutput) SetNextToken(v string) *ListPoliciesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ListPoliciesOutput) SetPolicies(v []PolicySummary) *ListPoliciesOutput {
-	s.Policies = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsRequest
@@ -7151,18 +6323,6 @@ func (s *ListRootsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListRootsInput) SetMaxResults(v int64) *ListRootsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRootsInput) SetNextToken(v string) *ListRootsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsResponse
 type ListRootsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7193,18 +6353,6 @@ func (s ListRootsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRootsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRootsOutput) SetNextToken(v string) *ListRootsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRoots sets the Roots field's value.
-func (s *ListRootsOutput) SetRoots(v []Root) *ListRootsOutput {
-	s.Roots = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyRequest
@@ -7264,24 +6412,6 @@ func (s *ListTargetsForPolicyInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTargetsForPolicyInput) SetMaxResults(v int64) *ListTargetsForPolicyInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTargetsForPolicyInput) SetNextToken(v string) *ListTargetsForPolicyInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPolicyId sets the PolicyId field's value.
-func (s *ListTargetsForPolicyInput) SetPolicyId(v string) *ListTargetsForPolicyInput {
-	s.PolicyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyResponse
 type ListTargetsForPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -7313,18 +6443,6 @@ func (s ListTargetsForPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTargetsForPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTargetsForPolicyOutput) SetNextToken(v string) *ListTargetsForPolicyOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTargets sets the Targets field's value.
-func (s *ListTargetsForPolicyOutput) SetTargets(v []PolicyTargetSummary) *ListTargetsForPolicyOutput {
-	s.Targets = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountRequest
@@ -7404,24 +6522,6 @@ func (s *MoveAccountInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *MoveAccountInput) SetAccountId(v string) *MoveAccountInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetDestinationParentId sets the DestinationParentId field's value.
-func (s *MoveAccountInput) SetDestinationParentId(v string) *MoveAccountInput {
-	s.DestinationParentId = &v
-	return s
-}
-
-// SetSourceParentId sets the SourceParentId field's value.
-func (s *MoveAccountInput) SetSourceParentId(v string) *MoveAccountInput {
-	s.SourceParentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccountOutput
@@ -7509,48 +6609,6 @@ func (s Organization) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Organization) SetArn(v string) *Organization {
-	s.Arn = &v
-	return s
-}
-
-// SetAvailablePolicyTypes sets the AvailablePolicyTypes field's value.
-func (s *Organization) SetAvailablePolicyTypes(v []PolicyTypeSummary) *Organization {
-	s.AvailablePolicyTypes = v
-	return s
-}
-
-// SetFeatureSet sets the FeatureSet field's value.
-func (s *Organization) SetFeatureSet(v OrganizationFeatureSet) *Organization {
-	s.FeatureSet = v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Organization) SetId(v string) *Organization {
-	s.Id = &v
-	return s
-}
-
-// SetMasterAccountArn sets the MasterAccountArn field's value.
-func (s *Organization) SetMasterAccountArn(v string) *Organization {
-	s.MasterAccountArn = &v
-	return s
-}
-
-// SetMasterAccountEmail sets the MasterAccountEmail field's value.
-func (s *Organization) SetMasterAccountEmail(v string) *Organization {
-	s.MasterAccountEmail = &v
-	return s
-}
-
-// SetMasterAccountId sets the MasterAccountId field's value.
-func (s *Organization) SetMasterAccountId(v string) *Organization {
-	s.MasterAccountId = &v
-	return s
-}
-
 // Contains details about an organizational unit (OU). An OU is a container
 // of AWS accounts within a root of an organization. Policies that are attached
 // to an OU apply to all accounts contained in that OU and in any child OUs.
@@ -7591,24 +6649,6 @@ func (s OrganizationalUnit) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *OrganizationalUnit) SetArn(v string) *OrganizationalUnit {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *OrganizationalUnit) SetId(v string) *OrganizationalUnit {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *OrganizationalUnit) SetName(v string) *OrganizationalUnit {
-	s.Name = &v
-	return s
-}
-
 // Contains information about either a root or an organizational unit (OU) that
 // can contain OUs or accounts in an organization.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Parent
@@ -7643,18 +6683,6 @@ func (s Parent) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *Parent) SetId(v string) *Parent {
-	s.Id = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Parent) SetType(v ParentType) *Parent {
-	s.Type = v
-	return s
-}
-
 // Contains rules to be applied to the affected accounts. Policies can be attached
 // directly to accounts, or to roots and OUs to affect all accounts in those
 // hierarchies.
@@ -7677,18 +6705,6 @@ func (s Policy) String() string {
 // GoString returns the string representation
 func (s Policy) GoString() string {
 	return s.String()
-}
-
-// SetContent sets the Content field's value.
-func (s *Policy) SetContent(v string) *Policy {
-	s.Content = &v
-	return s
-}
-
-// SetPolicySummary sets the PolicySummary field's value.
-func (s *Policy) SetPolicySummary(v *PolicySummary) *Policy {
-	s.PolicySummary = v
-	return s
 }
 
 // Contains information about a policy, but does not include the content. To
@@ -7737,42 +6753,6 @@ func (s PolicySummary) String() string {
 // GoString returns the string representation
 func (s PolicySummary) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *PolicySummary) SetArn(v string) *PolicySummary {
-	s.Arn = &v
-	return s
-}
-
-// SetAwsManaged sets the AwsManaged field's value.
-func (s *PolicySummary) SetAwsManaged(v bool) *PolicySummary {
-	s.AwsManaged = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *PolicySummary) SetDescription(v string) *PolicySummary {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *PolicySummary) SetId(v string) *PolicySummary {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PolicySummary) SetName(v string) *PolicySummary {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *PolicySummary) SetType(v PolicyType) *PolicySummary {
-	s.Type = v
-	return s
 }
 
 // Contains information about a root, OU, or account that a policy is attached
@@ -7825,30 +6805,6 @@ func (s PolicyTargetSummary) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *PolicyTargetSummary) SetArn(v string) *PolicyTargetSummary {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *PolicyTargetSummary) SetName(v string) *PolicyTargetSummary {
-	s.Name = &v
-	return s
-}
-
-// SetTargetId sets the TargetId field's value.
-func (s *PolicyTargetSummary) SetTargetId(v string) *PolicyTargetSummary {
-	s.TargetId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *PolicyTargetSummary) SetType(v TargetType) *PolicyTargetSummary {
-	s.Type = v
-	return s
-}
-
 // Contains information about a policy type and its status in the associated
 // root.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeSummary
@@ -7872,18 +6828,6 @@ func (s PolicyTypeSummary) String() string {
 // GoString returns the string representation
 func (s PolicyTypeSummary) GoString() string {
 	return s.String()
-}
-
-// SetStatus sets the Status field's value.
-func (s *PolicyTypeSummary) SetStatus(v PolicyTypeStatus) *PolicyTypeSummary {
-	s.Status = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *PolicyTypeSummary) SetType(v PolicyType) *PolicyTypeSummary {
-	s.Type = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationRequest
@@ -7922,12 +6866,6 @@ func (s *RemoveAccountFromOrganizationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *RemoveAccountFromOrganizationInput) SetAccountId(v string) *RemoveAccountFromOrganizationInput {
-	s.AccountId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganizationOutput
@@ -7996,30 +6934,6 @@ func (s Root) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Root) SetArn(v string) *Root {
-	s.Arn = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Root) SetId(v string) *Root {
-	s.Id = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Root) SetName(v string) *Root {
-	s.Name = &v
-	return s
-}
-
-// SetPolicyTypes sets the PolicyTypes field's value.
-func (s *Root) SetPolicyTypes(v []PolicyTypeSummary) *Root {
-	s.PolicyTypes = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnitRequest
 type UpdateOrganizationalUnitInput struct {
 	_ struct{} `type:"structure"`
@@ -8070,18 +6984,6 @@ func (s *UpdateOrganizationalUnitInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *UpdateOrganizationalUnitInput) SetName(v string) *UpdateOrganizationalUnitInput {
-	s.Name = &v
-	return s
-}
-
-// SetOrganizationalUnitId sets the OrganizationalUnitId field's value.
-func (s *UpdateOrganizationalUnitInput) SetOrganizationalUnitId(v string) *UpdateOrganizationalUnitInput {
-	s.OrganizationalUnitId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnitResponse
 type UpdateOrganizationalUnitOutput struct {
 	_ struct{} `type:"structure"`
@@ -8106,12 +7008,6 @@ func (s UpdateOrganizationalUnitOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateOrganizationalUnitOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOrganizationalUnit sets the OrganizationalUnit field's value.
-func (s *UpdateOrganizationalUnitOutput) SetOrganizationalUnit(v *OrganizationalUnit) *UpdateOrganizationalUnitOutput {
-	s.OrganizationalUnit = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyRequest
@@ -8173,30 +7069,6 @@ func (s *UpdatePolicyInput) Validate() error {
 	return nil
 }
 
-// SetContent sets the Content field's value.
-func (s *UpdatePolicyInput) SetContent(v string) *UpdatePolicyInput {
-	s.Content = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdatePolicyInput) SetDescription(v string) *UpdatePolicyInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdatePolicyInput) SetName(v string) *UpdatePolicyInput {
-	s.Name = &v
-	return s
-}
-
-// SetPolicyId sets the PolicyId field's value.
-func (s *UpdatePolicyInput) SetPolicyId(v string) *UpdatePolicyInput {
-	s.PolicyId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyResponse
 type UpdatePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -8221,12 +7093,6 @@ func (s UpdatePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *UpdatePolicyOutput) SetPolicy(v *Policy) *UpdatePolicyOutput {
-	s.Policy = v
-	return s
 }
 
 type AccessDeniedForDependencyExceptionReason string

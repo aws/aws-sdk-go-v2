@@ -864,12 +864,6 @@ func (s ArrayProperties) GoString() string {
 	return s.String()
 }
 
-// SetSize sets the Size field's value.
-func (s *ArrayProperties) SetSize(v int64) *ArrayProperties {
-	s.Size = &v
-	return s
-}
-
 // An object representing the array properties of a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesDetail
 type ArrayPropertiesDetail struct {
@@ -897,24 +891,6 @@ func (s ArrayPropertiesDetail) GoString() string {
 	return s.String()
 }
 
-// SetIndex sets the Index field's value.
-func (s *ArrayPropertiesDetail) SetIndex(v int64) *ArrayPropertiesDetail {
-	s.Index = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *ArrayPropertiesDetail) SetSize(v int64) *ArrayPropertiesDetail {
-	s.Size = &v
-	return s
-}
-
-// SetStatusSummary sets the StatusSummary field's value.
-func (s *ArrayPropertiesDetail) SetStatusSummary(v map[string]int64) *ArrayPropertiesDetail {
-	s.StatusSummary = v
-	return s
-}
-
 // An object representing the array properties of a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesSummary
 type ArrayPropertiesSummary struct {
@@ -936,18 +912,6 @@ func (s ArrayPropertiesSummary) String() string {
 // GoString returns the string representation
 func (s ArrayPropertiesSummary) GoString() string {
 	return s.String()
-}
-
-// SetIndex sets the Index field's value.
-func (s *ArrayPropertiesSummary) SetIndex(v int64) *ArrayPropertiesSummary {
-	s.Index = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *ArrayPropertiesSummary) SetSize(v int64) *ArrayPropertiesSummary {
-	s.Size = &v
-	return s
 }
 
 // An object representing the details of a container that is part of a job attempt.
@@ -987,36 +951,6 @@ func (s AttemptContainerDetail) GoString() string {
 	return s.String()
 }
 
-// SetContainerInstanceArn sets the ContainerInstanceArn field's value.
-func (s *AttemptContainerDetail) SetContainerInstanceArn(v string) *AttemptContainerDetail {
-	s.ContainerInstanceArn = &v
-	return s
-}
-
-// SetExitCode sets the ExitCode field's value.
-func (s *AttemptContainerDetail) SetExitCode(v int64) *AttemptContainerDetail {
-	s.ExitCode = &v
-	return s
-}
-
-// SetLogStreamName sets the LogStreamName field's value.
-func (s *AttemptContainerDetail) SetLogStreamName(v string) *AttemptContainerDetail {
-	s.LogStreamName = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *AttemptContainerDetail) SetReason(v string) *AttemptContainerDetail {
-	s.Reason = &v
-	return s
-}
-
-// SetTaskArn sets the TaskArn field's value.
-func (s *AttemptContainerDetail) SetTaskArn(v string) *AttemptContainerDetail {
-	s.TaskArn = &v
-	return s
-}
-
 // An object representing a job attempt.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptDetail
 type AttemptDetail struct {
@@ -1046,30 +980,6 @@ func (s AttemptDetail) String() string {
 // GoString returns the string representation
 func (s AttemptDetail) GoString() string {
 	return s.String()
-}
-
-// SetContainer sets the Container field's value.
-func (s *AttemptDetail) SetContainer(v *AttemptContainerDetail) *AttemptDetail {
-	s.Container = v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *AttemptDetail) SetStartedAt(v int64) *AttemptDetail {
-	s.StartedAt = &v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *AttemptDetail) SetStatusReason(v string) *AttemptDetail {
-	s.StatusReason = &v
-	return s
-}
-
-// SetStoppedAt sets the StoppedAt field's value.
-func (s *AttemptDetail) SetStoppedAt(v int64) *AttemptDetail {
-	s.StoppedAt = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobRequest
@@ -1115,18 +1025,6 @@ func (s *CancelJobInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetJobId sets the JobId field's value.
-func (s *CancelJobInput) SetJobId(v string) *CancelJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *CancelJobInput) SetReason(v string) *CancelJobInput {
-	s.Reason = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobResponse
@@ -1205,60 +1103,6 @@ func (s ComputeEnvironmentDetail) GoString() string {
 	return s.String()
 }
 
-// SetComputeEnvironmentArn sets the ComputeEnvironmentArn field's value.
-func (s *ComputeEnvironmentDetail) SetComputeEnvironmentArn(v string) *ComputeEnvironmentDetail {
-	s.ComputeEnvironmentArn = &v
-	return s
-}
-
-// SetComputeEnvironmentName sets the ComputeEnvironmentName field's value.
-func (s *ComputeEnvironmentDetail) SetComputeEnvironmentName(v string) *ComputeEnvironmentDetail {
-	s.ComputeEnvironmentName = &v
-	return s
-}
-
-// SetComputeResources sets the ComputeResources field's value.
-func (s *ComputeEnvironmentDetail) SetComputeResources(v *ComputeResource) *ComputeEnvironmentDetail {
-	s.ComputeResources = v
-	return s
-}
-
-// SetEcsClusterArn sets the EcsClusterArn field's value.
-func (s *ComputeEnvironmentDetail) SetEcsClusterArn(v string) *ComputeEnvironmentDetail {
-	s.EcsClusterArn = &v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *ComputeEnvironmentDetail) SetServiceRole(v string) *ComputeEnvironmentDetail {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ComputeEnvironmentDetail) SetState(v CEState) *ComputeEnvironmentDetail {
-	s.State = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ComputeEnvironmentDetail) SetStatus(v CEStatus) *ComputeEnvironmentDetail {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *ComputeEnvironmentDetail) SetStatusReason(v string) *ComputeEnvironmentDetail {
-	s.StatusReason = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ComputeEnvironmentDetail) SetType(v CEType) *ComputeEnvironmentDetail {
-	s.Type = v
-	return s
-}
-
 // The order in which compute environments are tried for job placement within
 // a queue. Compute environments are tried in ascending order. For example,
 // if two compute environments are associated with a job queue, the compute
@@ -1304,18 +1148,6 @@ func (s *ComputeEnvironmentOrder) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComputeEnvironment sets the ComputeEnvironment field's value.
-func (s *ComputeEnvironmentOrder) SetComputeEnvironment(v string) *ComputeEnvironmentOrder {
-	s.ComputeEnvironment = &v
-	return s
-}
-
-// SetOrder sets the Order field's value.
-func (s *ComputeEnvironmentOrder) SetOrder(v int64) *ComputeEnvironmentOrder {
-	s.Order = &v
-	return s
 }
 
 // An object representing an AWS Batch compute resource.
@@ -1439,84 +1271,6 @@ func (s *ComputeResource) Validate() error {
 	return nil
 }
 
-// SetBidPercentage sets the BidPercentage field's value.
-func (s *ComputeResource) SetBidPercentage(v int64) *ComputeResource {
-	s.BidPercentage = &v
-	return s
-}
-
-// SetDesiredvCpus sets the DesiredvCpus field's value.
-func (s *ComputeResource) SetDesiredvCpus(v int64) *ComputeResource {
-	s.DesiredvCpus = &v
-	return s
-}
-
-// SetEc2KeyPair sets the Ec2KeyPair field's value.
-func (s *ComputeResource) SetEc2KeyPair(v string) *ComputeResource {
-	s.Ec2KeyPair = &v
-	return s
-}
-
-// SetImageId sets the ImageId field's value.
-func (s *ComputeResource) SetImageId(v string) *ComputeResource {
-	s.ImageId = &v
-	return s
-}
-
-// SetInstanceRole sets the InstanceRole field's value.
-func (s *ComputeResource) SetInstanceRole(v string) *ComputeResource {
-	s.InstanceRole = &v
-	return s
-}
-
-// SetInstanceTypes sets the InstanceTypes field's value.
-func (s *ComputeResource) SetInstanceTypes(v []string) *ComputeResource {
-	s.InstanceTypes = v
-	return s
-}
-
-// SetMaxvCpus sets the MaxvCpus field's value.
-func (s *ComputeResource) SetMaxvCpus(v int64) *ComputeResource {
-	s.MaxvCpus = &v
-	return s
-}
-
-// SetMinvCpus sets the MinvCpus field's value.
-func (s *ComputeResource) SetMinvCpus(v int64) *ComputeResource {
-	s.MinvCpus = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *ComputeResource) SetSecurityGroupIds(v []string) *ComputeResource {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSpotIamFleetRole sets the SpotIamFleetRole field's value.
-func (s *ComputeResource) SetSpotIamFleetRole(v string) *ComputeResource {
-	s.SpotIamFleetRole = &v
-	return s
-}
-
-// SetSubnets sets the Subnets field's value.
-func (s *ComputeResource) SetSubnets(v []string) *ComputeResource {
-	s.Subnets = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ComputeResource) SetTags(v map[string]string) *ComputeResource {
-	s.Tags = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ComputeResource) SetType(v CRType) *ComputeResource {
-	s.Type = v
-	return s
-}
-
 // An object representing the attributes of a compute environment that can be
 // updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate
@@ -1541,24 +1295,6 @@ func (s ComputeResourceUpdate) String() string {
 // GoString returns the string representation
 func (s ComputeResourceUpdate) GoString() string {
 	return s.String()
-}
-
-// SetDesiredvCpus sets the DesiredvCpus field's value.
-func (s *ComputeResourceUpdate) SetDesiredvCpus(v int64) *ComputeResourceUpdate {
-	s.DesiredvCpus = &v
-	return s
-}
-
-// SetMaxvCpus sets the MaxvCpus field's value.
-func (s *ComputeResourceUpdate) SetMaxvCpus(v int64) *ComputeResourceUpdate {
-	s.MaxvCpus = &v
-	return s
-}
-
-// SetMinvCpus sets the MinvCpus field's value.
-func (s *ComputeResourceUpdate) SetMinvCpus(v int64) *ComputeResourceUpdate {
-	s.MinvCpus = &v
-	return s
 }
 
 // An object representing the details of a container that is part of a job.
@@ -1639,108 +1375,6 @@ func (s ContainerDetail) GoString() string {
 	return s.String()
 }
 
-// SetCommand sets the Command field's value.
-func (s *ContainerDetail) SetCommand(v []string) *ContainerDetail {
-	s.Command = v
-	return s
-}
-
-// SetContainerInstanceArn sets the ContainerInstanceArn field's value.
-func (s *ContainerDetail) SetContainerInstanceArn(v string) *ContainerDetail {
-	s.ContainerInstanceArn = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *ContainerDetail) SetEnvironment(v []KeyValuePair) *ContainerDetail {
-	s.Environment = v
-	return s
-}
-
-// SetExitCode sets the ExitCode field's value.
-func (s *ContainerDetail) SetExitCode(v int64) *ContainerDetail {
-	s.ExitCode = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ContainerDetail) SetImage(v string) *ContainerDetail {
-	s.Image = &v
-	return s
-}
-
-// SetJobRoleArn sets the JobRoleArn field's value.
-func (s *ContainerDetail) SetJobRoleArn(v string) *ContainerDetail {
-	s.JobRoleArn = &v
-	return s
-}
-
-// SetLogStreamName sets the LogStreamName field's value.
-func (s *ContainerDetail) SetLogStreamName(v string) *ContainerDetail {
-	s.LogStreamName = &v
-	return s
-}
-
-// SetMemory sets the Memory field's value.
-func (s *ContainerDetail) SetMemory(v int64) *ContainerDetail {
-	s.Memory = &v
-	return s
-}
-
-// SetMountPoints sets the MountPoints field's value.
-func (s *ContainerDetail) SetMountPoints(v []MountPoint) *ContainerDetail {
-	s.MountPoints = v
-	return s
-}
-
-// SetPrivileged sets the Privileged field's value.
-func (s *ContainerDetail) SetPrivileged(v bool) *ContainerDetail {
-	s.Privileged = &v
-	return s
-}
-
-// SetReadonlyRootFilesystem sets the ReadonlyRootFilesystem field's value.
-func (s *ContainerDetail) SetReadonlyRootFilesystem(v bool) *ContainerDetail {
-	s.ReadonlyRootFilesystem = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *ContainerDetail) SetReason(v string) *ContainerDetail {
-	s.Reason = &v
-	return s
-}
-
-// SetTaskArn sets the TaskArn field's value.
-func (s *ContainerDetail) SetTaskArn(v string) *ContainerDetail {
-	s.TaskArn = &v
-	return s
-}
-
-// SetUlimits sets the Ulimits field's value.
-func (s *ContainerDetail) SetUlimits(v []Ulimit) *ContainerDetail {
-	s.Ulimits = v
-	return s
-}
-
-// SetUser sets the User field's value.
-func (s *ContainerDetail) SetUser(v string) *ContainerDetail {
-	s.User = &v
-	return s
-}
-
-// SetVcpus sets the Vcpus field's value.
-func (s *ContainerDetail) SetVcpus(v int64) *ContainerDetail {
-	s.Vcpus = &v
-	return s
-}
-
-// SetVolumes sets the Volumes field's value.
-func (s *ContainerDetail) SetVolumes(v []Volume) *ContainerDetail {
-	s.Volumes = v
-	return s
-}
-
 // The overrides that should be sent to a container.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides
 type ContainerOverrides struct {
@@ -1775,30 +1409,6 @@ func (s ContainerOverrides) String() string {
 // GoString returns the string representation
 func (s ContainerOverrides) GoString() string {
 	return s.String()
-}
-
-// SetCommand sets the Command field's value.
-func (s *ContainerOverrides) SetCommand(v []string) *ContainerOverrides {
-	s.Command = v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *ContainerOverrides) SetEnvironment(v []KeyValuePair) *ContainerOverrides {
-	s.Environment = v
-	return s
-}
-
-// SetMemory sets the Memory field's value.
-func (s *ContainerOverrides) SetMemory(v int64) *ContainerOverrides {
-	s.Memory = &v
-	return s
-}
-
-// SetVcpus sets the Vcpus field's value.
-func (s *ContainerOverrides) SetVcpus(v int64) *ContainerOverrides {
-	s.Vcpus = &v
-	return s
 }
 
 // Container properties are used in job definitions to describe the container
@@ -1951,78 +1561,6 @@ func (s *ContainerProperties) Validate() error {
 	return nil
 }
 
-// SetCommand sets the Command field's value.
-func (s *ContainerProperties) SetCommand(v []string) *ContainerProperties {
-	s.Command = v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *ContainerProperties) SetEnvironment(v []KeyValuePair) *ContainerProperties {
-	s.Environment = v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *ContainerProperties) SetImage(v string) *ContainerProperties {
-	s.Image = &v
-	return s
-}
-
-// SetJobRoleArn sets the JobRoleArn field's value.
-func (s *ContainerProperties) SetJobRoleArn(v string) *ContainerProperties {
-	s.JobRoleArn = &v
-	return s
-}
-
-// SetMemory sets the Memory field's value.
-func (s *ContainerProperties) SetMemory(v int64) *ContainerProperties {
-	s.Memory = &v
-	return s
-}
-
-// SetMountPoints sets the MountPoints field's value.
-func (s *ContainerProperties) SetMountPoints(v []MountPoint) *ContainerProperties {
-	s.MountPoints = v
-	return s
-}
-
-// SetPrivileged sets the Privileged field's value.
-func (s *ContainerProperties) SetPrivileged(v bool) *ContainerProperties {
-	s.Privileged = &v
-	return s
-}
-
-// SetReadonlyRootFilesystem sets the ReadonlyRootFilesystem field's value.
-func (s *ContainerProperties) SetReadonlyRootFilesystem(v bool) *ContainerProperties {
-	s.ReadonlyRootFilesystem = &v
-	return s
-}
-
-// SetUlimits sets the Ulimits field's value.
-func (s *ContainerProperties) SetUlimits(v []Ulimit) *ContainerProperties {
-	s.Ulimits = v
-	return s
-}
-
-// SetUser sets the User field's value.
-func (s *ContainerProperties) SetUser(v string) *ContainerProperties {
-	s.User = &v
-	return s
-}
-
-// SetVcpus sets the Vcpus field's value.
-func (s *ContainerProperties) SetVcpus(v int64) *ContainerProperties {
-	s.Vcpus = &v
-	return s
-}
-
-// SetVolumes sets the Volumes field's value.
-func (s *ContainerProperties) SetVolumes(v []Volume) *ContainerProperties {
-	s.Volumes = v
-	return s
-}
-
 // An object representing summary details of a container within a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerSummary
 type ContainerSummary struct {
@@ -2044,18 +1582,6 @@ func (s ContainerSummary) String() string {
 // GoString returns the string representation
 func (s ContainerSummary) GoString() string {
 	return s.String()
-}
-
-// SetExitCode sets the ExitCode field's value.
-func (s *ContainerSummary) SetExitCode(v int64) *ContainerSummary {
-	s.ExitCode = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *ContainerSummary) SetReason(v string) *ContainerSummary {
-	s.Reason = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest
@@ -2135,36 +1661,6 @@ func (s *CreateComputeEnvironmentInput) Validate() error {
 	return nil
 }
 
-// SetComputeEnvironmentName sets the ComputeEnvironmentName field's value.
-func (s *CreateComputeEnvironmentInput) SetComputeEnvironmentName(v string) *CreateComputeEnvironmentInput {
-	s.ComputeEnvironmentName = &v
-	return s
-}
-
-// SetComputeResources sets the ComputeResources field's value.
-func (s *CreateComputeEnvironmentInput) SetComputeResources(v *ComputeResource) *CreateComputeEnvironmentInput {
-	s.ComputeResources = v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *CreateComputeEnvironmentInput) SetServiceRole(v string) *CreateComputeEnvironmentInput {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CreateComputeEnvironmentInput) SetState(v CEState) *CreateComputeEnvironmentInput {
-	s.State = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateComputeEnvironmentInput) SetType(v CEType) *CreateComputeEnvironmentInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentResponse
 type CreateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -2191,18 +1687,6 @@ func (s CreateComputeEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComputeEnvironmentArn sets the ComputeEnvironmentArn field's value.
-func (s *CreateComputeEnvironmentOutput) SetComputeEnvironmentArn(v string) *CreateComputeEnvironmentOutput {
-	s.ComputeEnvironmentArn = &v
-	return s
-}
-
-// SetComputeEnvironmentName sets the ComputeEnvironmentName field's value.
-func (s *CreateComputeEnvironmentOutput) SetComputeEnvironmentName(v string) *CreateComputeEnvironmentOutput {
-	s.ComputeEnvironmentName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest
@@ -2276,30 +1760,6 @@ func (s *CreateJobQueueInput) Validate() error {
 	return nil
 }
 
-// SetComputeEnvironmentOrder sets the ComputeEnvironmentOrder field's value.
-func (s *CreateJobQueueInput) SetComputeEnvironmentOrder(v []ComputeEnvironmentOrder) *CreateJobQueueInput {
-	s.ComputeEnvironmentOrder = v
-	return s
-}
-
-// SetJobQueueName sets the JobQueueName field's value.
-func (s *CreateJobQueueInput) SetJobQueueName(v string) *CreateJobQueueInput {
-	s.JobQueueName = &v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *CreateJobQueueInput) SetPriority(v int64) *CreateJobQueueInput {
-	s.Priority = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *CreateJobQueueInput) SetState(v JQState) *CreateJobQueueInput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueResponse
 type CreateJobQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -2330,18 +1790,6 @@ func (s CreateJobQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateJobQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobQueueArn sets the JobQueueArn field's value.
-func (s *CreateJobQueueOutput) SetJobQueueArn(v string) *CreateJobQueueOutput {
-	s.JobQueueArn = &v
-	return s
-}
-
-// SetJobQueueName sets the JobQueueName field's value.
-func (s *CreateJobQueueOutput) SetJobQueueName(v string) *CreateJobQueueOutput {
-	s.JobQueueName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentRequest
@@ -2376,12 +1824,6 @@ func (s *DeleteComputeEnvironmentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComputeEnvironment sets the ComputeEnvironment field's value.
-func (s *DeleteComputeEnvironmentInput) SetComputeEnvironment(v string) *DeleteComputeEnvironmentInput {
-	s.ComputeEnvironment = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentResponse
@@ -2440,12 +1882,6 @@ func (s *DeleteJobQueueInput) Validate() error {
 	return nil
 }
 
-// SetJobQueue sets the JobQueue field's value.
-func (s *DeleteJobQueueInput) SetJobQueue(v string) *DeleteJobQueueInput {
-	s.JobQueue = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueResponse
 type DeleteJobQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -2501,12 +1937,6 @@ func (s *DeregisterJobDefinitionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetJobDefinition sets the JobDefinition field's value.
-func (s *DeregisterJobDefinitionInput) SetJobDefinition(v string) *DeregisterJobDefinitionInput {
-	s.JobDefinition = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionResponse
@@ -2570,24 +2000,6 @@ func (s DescribeComputeEnvironmentsInput) GoString() string {
 	return s.String()
 }
 
-// SetComputeEnvironments sets the ComputeEnvironments field's value.
-func (s *DescribeComputeEnvironmentsInput) SetComputeEnvironments(v []string) *DescribeComputeEnvironmentsInput {
-	s.ComputeEnvironments = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeComputeEnvironmentsInput) SetMaxResults(v int64) *DescribeComputeEnvironmentsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeComputeEnvironmentsInput) SetNextToken(v string) *DescribeComputeEnvironmentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsResponse
 type DescribeComputeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2617,18 +2029,6 @@ func (s DescribeComputeEnvironmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeComputeEnvironmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComputeEnvironments sets the ComputeEnvironments field's value.
-func (s *DescribeComputeEnvironmentsOutput) SetComputeEnvironments(v []ComputeEnvironmentDetail) *DescribeComputeEnvironmentsOutput {
-	s.ComputeEnvironments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeComputeEnvironmentsOutput) SetNextToken(v string) *DescribeComputeEnvironmentsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitionsRequest
@@ -2675,36 +2075,6 @@ func (s DescribeJobDefinitionsInput) GoString() string {
 	return s.String()
 }
 
-// SetJobDefinitionName sets the JobDefinitionName field's value.
-func (s *DescribeJobDefinitionsInput) SetJobDefinitionName(v string) *DescribeJobDefinitionsInput {
-	s.JobDefinitionName = &v
-	return s
-}
-
-// SetJobDefinitions sets the JobDefinitions field's value.
-func (s *DescribeJobDefinitionsInput) SetJobDefinitions(v []string) *DescribeJobDefinitionsInput {
-	s.JobDefinitions = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeJobDefinitionsInput) SetMaxResults(v int64) *DescribeJobDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeJobDefinitionsInput) SetNextToken(v string) *DescribeJobDefinitionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeJobDefinitionsInput) SetStatus(v string) *DescribeJobDefinitionsInput {
-	s.Status = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitionsResponse
 type DescribeJobDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2734,18 +2104,6 @@ func (s DescribeJobDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobDefinitions sets the JobDefinitions field's value.
-func (s *DescribeJobDefinitionsOutput) SetJobDefinitions(v []JobDefinition) *DescribeJobDefinitionsOutput {
-	s.JobDefinitions = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeJobDefinitionsOutput) SetNextToken(v string) *DescribeJobDefinitionsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueuesRequest
@@ -2786,24 +2144,6 @@ func (s DescribeJobQueuesInput) GoString() string {
 	return s.String()
 }
 
-// SetJobQueues sets the JobQueues field's value.
-func (s *DescribeJobQueuesInput) SetJobQueues(v []string) *DescribeJobQueuesInput {
-	s.JobQueues = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeJobQueuesInput) SetMaxResults(v int64) *DescribeJobQueuesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeJobQueuesInput) SetNextToken(v string) *DescribeJobQueuesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueuesResponse
 type DescribeJobQueuesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2833,18 +2173,6 @@ func (s DescribeJobQueuesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobQueuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobQueues sets the JobQueues field's value.
-func (s *DescribeJobQueuesOutput) SetJobQueues(v []JobQueueDetail) *DescribeJobQueuesOutput {
-	s.JobQueues = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeJobQueuesOutput) SetNextToken(v string) *DescribeJobQueuesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsRequest
@@ -2881,12 +2209,6 @@ func (s *DescribeJobsInput) Validate() error {
 	return nil
 }
 
-// SetJobs sets the Jobs field's value.
-func (s *DescribeJobsInput) SetJobs(v []string) *DescribeJobsInput {
-	s.Jobs = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsResponse
 type DescribeJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2910,12 +2232,6 @@ func (s DescribeJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobs sets the Jobs field's value.
-func (s *DescribeJobsOutput) SetJobs(v []JobDetail) *DescribeJobsOutput {
-	s.Jobs = v
-	return s
 }
 
 // The contents of the host parameter determine whether your data volume persists
@@ -2945,12 +2261,6 @@ func (s Host) String() string {
 // GoString returns the string representation
 func (s Host) GoString() string {
 	return s.String()
-}
-
-// SetSourcePath sets the SourcePath field's value.
-func (s *Host) SetSourcePath(v string) *Host {
-	s.SourcePath = &v
-	return s
 }
 
 // An object representing an AWS Batch job definition.
@@ -3005,54 +2315,6 @@ func (s JobDefinition) GoString() string {
 	return s.String()
 }
 
-// SetContainerProperties sets the ContainerProperties field's value.
-func (s *JobDefinition) SetContainerProperties(v *ContainerProperties) *JobDefinition {
-	s.ContainerProperties = v
-	return s
-}
-
-// SetJobDefinitionArn sets the JobDefinitionArn field's value.
-func (s *JobDefinition) SetJobDefinitionArn(v string) *JobDefinition {
-	s.JobDefinitionArn = &v
-	return s
-}
-
-// SetJobDefinitionName sets the JobDefinitionName field's value.
-func (s *JobDefinition) SetJobDefinitionName(v string) *JobDefinition {
-	s.JobDefinitionName = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *JobDefinition) SetParameters(v map[string]string) *JobDefinition {
-	s.Parameters = v
-	return s
-}
-
-// SetRetryStrategy sets the RetryStrategy field's value.
-func (s *JobDefinition) SetRetryStrategy(v *RetryStrategy) *JobDefinition {
-	s.RetryStrategy = v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *JobDefinition) SetRevision(v int64) *JobDefinition {
-	s.Revision = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobDefinition) SetStatus(v string) *JobDefinition {
-	s.Status = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *JobDefinition) SetType(v string) *JobDefinition {
-	s.Type = &v
-	return s
-}
-
 // An object representing an AWS Batch job dependency.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDependency
 type JobDependency struct {
@@ -3073,18 +2335,6 @@ func (s JobDependency) String() string {
 // GoString returns the string representation
 func (s JobDependency) GoString() string {
 	return s.String()
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobDependency) SetJobId(v string) *JobDependency {
-	s.JobId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *JobDependency) SetType(v ArrayJobDependency) *JobDependency {
-	s.Type = v
-	return s
 }
 
 // An object representing an AWS Batch job.
@@ -3169,96 +2419,6 @@ func (s JobDetail) GoString() string {
 	return s.String()
 }
 
-// SetArrayProperties sets the ArrayProperties field's value.
-func (s *JobDetail) SetArrayProperties(v *ArrayPropertiesDetail) *JobDetail {
-	s.ArrayProperties = v
-	return s
-}
-
-// SetAttempts sets the Attempts field's value.
-func (s *JobDetail) SetAttempts(v []AttemptDetail) *JobDetail {
-	s.Attempts = v
-	return s
-}
-
-// SetContainer sets the Container field's value.
-func (s *JobDetail) SetContainer(v *ContainerDetail) *JobDetail {
-	s.Container = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *JobDetail) SetCreatedAt(v int64) *JobDetail {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDependsOn sets the DependsOn field's value.
-func (s *JobDetail) SetDependsOn(v []JobDependency) *JobDetail {
-	s.DependsOn = v
-	return s
-}
-
-// SetJobDefinition sets the JobDefinition field's value.
-func (s *JobDetail) SetJobDefinition(v string) *JobDetail {
-	s.JobDefinition = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobDetail) SetJobId(v string) *JobDetail {
-	s.JobId = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *JobDetail) SetJobName(v string) *JobDetail {
-	s.JobName = &v
-	return s
-}
-
-// SetJobQueue sets the JobQueue field's value.
-func (s *JobDetail) SetJobQueue(v string) *JobDetail {
-	s.JobQueue = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *JobDetail) SetParameters(v map[string]string) *JobDetail {
-	s.Parameters = v
-	return s
-}
-
-// SetRetryStrategy sets the RetryStrategy field's value.
-func (s *JobDetail) SetRetryStrategy(v *RetryStrategy) *JobDetail {
-	s.RetryStrategy = v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *JobDetail) SetStartedAt(v int64) *JobDetail {
-	s.StartedAt = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobDetail) SetStatus(v JobStatus) *JobDetail {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *JobDetail) SetStatusReason(v string) *JobDetail {
-	s.StatusReason = &v
-	return s
-}
-
-// SetStoppedAt sets the StoppedAt field's value.
-func (s *JobDetail) SetStoppedAt(v int64) *JobDetail {
-	s.StoppedAt = &v
-	return s
-}
-
 // An object representing the details of an AWS Batch job queue.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobQueueDetail
 type JobQueueDetail struct {
@@ -3307,48 +2467,6 @@ func (s JobQueueDetail) String() string {
 // GoString returns the string representation
 func (s JobQueueDetail) GoString() string {
 	return s.String()
-}
-
-// SetComputeEnvironmentOrder sets the ComputeEnvironmentOrder field's value.
-func (s *JobQueueDetail) SetComputeEnvironmentOrder(v []ComputeEnvironmentOrder) *JobQueueDetail {
-	s.ComputeEnvironmentOrder = v
-	return s
-}
-
-// SetJobQueueArn sets the JobQueueArn field's value.
-func (s *JobQueueDetail) SetJobQueueArn(v string) *JobQueueDetail {
-	s.JobQueueArn = &v
-	return s
-}
-
-// SetJobQueueName sets the JobQueueName field's value.
-func (s *JobQueueDetail) SetJobQueueName(v string) *JobQueueDetail {
-	s.JobQueueName = &v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *JobQueueDetail) SetPriority(v int64) *JobQueueDetail {
-	s.Priority = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *JobQueueDetail) SetState(v JQState) *JobQueueDetail {
-	s.State = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobQueueDetail) SetStatus(v JQStatus) *JobQueueDetail {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *JobQueueDetail) SetStatusReason(v string) *JobQueueDetail {
-	s.StatusReason = &v
-	return s
 }
 
 // An object representing summary details of a job.
@@ -3405,60 +2523,6 @@ func (s JobSummary) GoString() string {
 	return s.String()
 }
 
-// SetArrayProperties sets the ArrayProperties field's value.
-func (s *JobSummary) SetArrayProperties(v *ArrayPropertiesSummary) *JobSummary {
-	s.ArrayProperties = v
-	return s
-}
-
-// SetContainer sets the Container field's value.
-func (s *JobSummary) SetContainer(v *ContainerSummary) *JobSummary {
-	s.Container = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *JobSummary) SetCreatedAt(v int64) *JobSummary {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobSummary) SetJobId(v string) *JobSummary {
-	s.JobId = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *JobSummary) SetJobName(v string) *JobSummary {
-	s.JobName = &v
-	return s
-}
-
-// SetStartedAt sets the StartedAt field's value.
-func (s *JobSummary) SetStartedAt(v int64) *JobSummary {
-	s.StartedAt = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *JobSummary) SetStatus(v JobStatus) *JobSummary {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *JobSummary) SetStatusReason(v string) *JobSummary {
-	s.StatusReason = &v
-	return s
-}
-
-// SetStoppedAt sets the StoppedAt field's value.
-func (s *JobSummary) SetStoppedAt(v int64) *JobSummary {
-	s.StoppedAt = &v
-	return s
-}
-
 // A key-value pair object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/KeyValuePair
 type KeyValuePair struct {
@@ -3481,18 +2545,6 @@ func (s KeyValuePair) String() string {
 // GoString returns the string representation
 func (s KeyValuePair) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *KeyValuePair) SetName(v string) *KeyValuePair {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *KeyValuePair) SetValue(v string) *KeyValuePair {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest
@@ -3540,36 +2592,6 @@ func (s ListJobsInput) GoString() string {
 	return s.String()
 }
 
-// SetArrayJobId sets the ArrayJobId field's value.
-func (s *ListJobsInput) SetArrayJobId(v string) *ListJobsInput {
-	s.ArrayJobId = &v
-	return s
-}
-
-// SetJobQueue sets the JobQueue field's value.
-func (s *ListJobsInput) SetJobQueue(v string) *ListJobsInput {
-	s.JobQueue = &v
-	return s
-}
-
-// SetJobStatus sets the JobStatus field's value.
-func (s *ListJobsInput) SetJobStatus(v JobStatus) *ListJobsInput {
-	s.JobStatus = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListJobsInput) SetMaxResults(v int64) *ListJobsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsResponse
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3603,18 +2625,6 @@ func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJobSummaryList sets the JobSummaryList field's value.
-func (s *ListJobsOutput) SetJobSummaryList(v []JobSummary) *ListJobsOutput {
-	s.JobSummaryList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsOutput) SetNextToken(v string) *ListJobsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Details on a Docker volume mount point that is used in a job's container
 // properties.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/MountPoint
@@ -3640,24 +2650,6 @@ func (s MountPoint) String() string {
 // GoString returns the string representation
 func (s MountPoint) GoString() string {
 	return s.String()
-}
-
-// SetContainerPath sets the ContainerPath field's value.
-func (s *MountPoint) SetContainerPath(v string) *MountPoint {
-	s.ContainerPath = &v
-	return s
-}
-
-// SetReadOnly sets the ReadOnly field's value.
-func (s *MountPoint) SetReadOnly(v bool) *MountPoint {
-	s.ReadOnly = &v
-	return s
-}
-
-// SetSourceVolume sets the SourceVolume field's value.
-func (s *MountPoint) SetSourceVolume(v string) *MountPoint {
-	s.SourceVolume = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest
@@ -3722,36 +2714,6 @@ func (s *RegisterJobDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetContainerProperties sets the ContainerProperties field's value.
-func (s *RegisterJobDefinitionInput) SetContainerProperties(v *ContainerProperties) *RegisterJobDefinitionInput {
-	s.ContainerProperties = v
-	return s
-}
-
-// SetJobDefinitionName sets the JobDefinitionName field's value.
-func (s *RegisterJobDefinitionInput) SetJobDefinitionName(v string) *RegisterJobDefinitionInput {
-	s.JobDefinitionName = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *RegisterJobDefinitionInput) SetParameters(v map[string]string) *RegisterJobDefinitionInput {
-	s.Parameters = v
-	return s
-}
-
-// SetRetryStrategy sets the RetryStrategy field's value.
-func (s *RegisterJobDefinitionInput) SetRetryStrategy(v *RetryStrategy) *RegisterJobDefinitionInput {
-	s.RetryStrategy = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *RegisterJobDefinitionInput) SetType(v JobDefinitionType) *RegisterJobDefinitionInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionResponse
 type RegisterJobDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -3789,24 +2751,6 @@ func (s RegisterJobDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJobDefinitionArn sets the JobDefinitionArn field's value.
-func (s *RegisterJobDefinitionOutput) SetJobDefinitionArn(v string) *RegisterJobDefinitionOutput {
-	s.JobDefinitionArn = &v
-	return s
-}
-
-// SetJobDefinitionName sets the JobDefinitionName field's value.
-func (s *RegisterJobDefinitionOutput) SetJobDefinitionName(v string) *RegisterJobDefinitionOutput {
-	s.JobDefinitionName = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *RegisterJobDefinitionOutput) SetRevision(v int64) *RegisterJobDefinitionOutput {
-	s.Revision = &v
-	return s
-}
-
 // The retry strategy associated with a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RetryStrategy
 type RetryStrategy struct {
@@ -3826,12 +2770,6 @@ func (s RetryStrategy) String() string {
 // GoString returns the string representation
 func (s RetryStrategy) GoString() string {
 	return s.String()
-}
-
-// SetAttempts sets the Attempts field's value.
-func (s *RetryStrategy) SetAttempts(v int64) *RetryStrategy {
-	s.Attempts = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest
@@ -3925,54 +2863,6 @@ func (s *SubmitJobInput) Validate() error {
 	return nil
 }
 
-// SetArrayProperties sets the ArrayProperties field's value.
-func (s *SubmitJobInput) SetArrayProperties(v *ArrayProperties) *SubmitJobInput {
-	s.ArrayProperties = v
-	return s
-}
-
-// SetContainerOverrides sets the ContainerOverrides field's value.
-func (s *SubmitJobInput) SetContainerOverrides(v *ContainerOverrides) *SubmitJobInput {
-	s.ContainerOverrides = v
-	return s
-}
-
-// SetDependsOn sets the DependsOn field's value.
-func (s *SubmitJobInput) SetDependsOn(v []JobDependency) *SubmitJobInput {
-	s.DependsOn = v
-	return s
-}
-
-// SetJobDefinition sets the JobDefinition field's value.
-func (s *SubmitJobInput) SetJobDefinition(v string) *SubmitJobInput {
-	s.JobDefinition = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *SubmitJobInput) SetJobName(v string) *SubmitJobInput {
-	s.JobName = &v
-	return s
-}
-
-// SetJobQueue sets the JobQueue field's value.
-func (s *SubmitJobInput) SetJobQueue(v string) *SubmitJobInput {
-	s.JobQueue = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *SubmitJobInput) SetParameters(v map[string]string) *SubmitJobInput {
-	s.Parameters = v
-	return s
-}
-
-// SetRetryStrategy sets the RetryStrategy field's value.
-func (s *SubmitJobInput) SetRetryStrategy(v *RetryStrategy) *SubmitJobInput {
-	s.RetryStrategy = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobResponse
 type SubmitJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -4003,18 +2893,6 @@ func (s SubmitJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SubmitJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobId sets the JobId field's value.
-func (s *SubmitJobOutput) SetJobId(v string) *SubmitJobOutput {
-	s.JobId = &v
-	return s
-}
-
-// SetJobName sets the JobName field's value.
-func (s *SubmitJobOutput) SetJobName(v string) *SubmitJobOutput {
-	s.JobName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobRequest
@@ -4060,18 +2938,6 @@ func (s *TerminateJobInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetJobId sets the JobId field's value.
-func (s *TerminateJobInput) SetJobId(v string) *TerminateJobInput {
-	s.JobId = &v
-	return s
-}
-
-// SetReason sets the Reason field's value.
-func (s *TerminateJobInput) SetReason(v string) *TerminateJobInput {
-	s.Reason = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobResponse
@@ -4149,24 +3015,6 @@ func (s *Ulimit) Validate() error {
 	return nil
 }
 
-// SetHardLimit sets the HardLimit field's value.
-func (s *Ulimit) SetHardLimit(v int64) *Ulimit {
-	s.HardLimit = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Ulimit) SetName(v string) *Ulimit {
-	s.Name = &v
-	return s
-}
-
-// SetSoftLimit sets the SoftLimit field's value.
-func (s *Ulimit) SetSoftLimit(v int64) *Ulimit {
-	s.SoftLimit = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest
 type UpdateComputeEnvironmentInput struct {
 	_ struct{} `type:"structure"`
@@ -4225,30 +3073,6 @@ func (s *UpdateComputeEnvironmentInput) Validate() error {
 	return nil
 }
 
-// SetComputeEnvironment sets the ComputeEnvironment field's value.
-func (s *UpdateComputeEnvironmentInput) SetComputeEnvironment(v string) *UpdateComputeEnvironmentInput {
-	s.ComputeEnvironment = &v
-	return s
-}
-
-// SetComputeResources sets the ComputeResources field's value.
-func (s *UpdateComputeEnvironmentInput) SetComputeResources(v *ComputeResourceUpdate) *UpdateComputeEnvironmentInput {
-	s.ComputeResources = v
-	return s
-}
-
-// SetServiceRole sets the ServiceRole field's value.
-func (s *UpdateComputeEnvironmentInput) SetServiceRole(v string) *UpdateComputeEnvironmentInput {
-	s.ServiceRole = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *UpdateComputeEnvironmentInput) SetState(v CEState) *UpdateComputeEnvironmentInput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentResponse
 type UpdateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -4275,18 +3099,6 @@ func (s UpdateComputeEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComputeEnvironmentArn sets the ComputeEnvironmentArn field's value.
-func (s *UpdateComputeEnvironmentOutput) SetComputeEnvironmentArn(v string) *UpdateComputeEnvironmentOutput {
-	s.ComputeEnvironmentArn = &v
-	return s
-}
-
-// SetComputeEnvironmentName sets the ComputeEnvironmentName field's value.
-func (s *UpdateComputeEnvironmentOutput) SetComputeEnvironmentName(v string) *UpdateComputeEnvironmentOutput {
-	s.ComputeEnvironmentName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueRequest
@@ -4345,30 +3157,6 @@ func (s *UpdateJobQueueInput) Validate() error {
 	return nil
 }
 
-// SetComputeEnvironmentOrder sets the ComputeEnvironmentOrder field's value.
-func (s *UpdateJobQueueInput) SetComputeEnvironmentOrder(v []ComputeEnvironmentOrder) *UpdateJobQueueInput {
-	s.ComputeEnvironmentOrder = v
-	return s
-}
-
-// SetJobQueue sets the JobQueue field's value.
-func (s *UpdateJobQueueInput) SetJobQueue(v string) *UpdateJobQueueInput {
-	s.JobQueue = &v
-	return s
-}
-
-// SetPriority sets the Priority field's value.
-func (s *UpdateJobQueueInput) SetPriority(v int64) *UpdateJobQueueInput {
-	s.Priority = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *UpdateJobQueueInput) SetState(v JQState) *UpdateJobQueueInput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueResponse
 type UpdateJobQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -4397,18 +3185,6 @@ func (s UpdateJobQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJobQueueArn sets the JobQueueArn field's value.
-func (s *UpdateJobQueueOutput) SetJobQueueArn(v string) *UpdateJobQueueOutput {
-	s.JobQueueArn = &v
-	return s
-}
-
-// SetJobQueueName sets the JobQueueName field's value.
-func (s *UpdateJobQueueOutput) SetJobQueueName(v string) *UpdateJobQueueOutput {
-	s.JobQueueName = &v
-	return s
-}
-
 // A data volume used in a job's container properties.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Volume
 type Volume struct {
@@ -4435,18 +3211,6 @@ func (s Volume) String() string {
 // GoString returns the string representation
 func (s Volume) GoString() string {
 	return s.String()
-}
-
-// SetHost sets the Host field's value.
-func (s *Volume) SetHost(v *Host) *Volume {
-	s.Host = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Volume) SetName(v string) *Volume {
-	s.Name = &v
-	return s
 }
 
 type ArrayJobDependency string

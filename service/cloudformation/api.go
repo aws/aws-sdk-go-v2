@@ -2610,18 +2610,6 @@ func (s AccountGateResult) GoString() string {
 	return s.String()
 }
 
-// SetStatus sets the Status field's value.
-func (s *AccountGateResult) SetStatus(v AccountGateStatus) *AccountGateResult {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *AccountGateResult) SetStatusReason(v string) *AccountGateResult {
-	s.StatusReason = &v
-	return s
-}
-
 // The AccountLimit data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountLimit
 type AccountLimit struct {
@@ -2642,18 +2630,6 @@ func (s AccountLimit) String() string {
 // GoString returns the string representation
 func (s AccountLimit) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *AccountLimit) SetName(v string) *AccountLimit {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *AccountLimit) SetValue(v int64) *AccountLimit {
-	s.Value = &v
-	return s
 }
 
 // The input for the CancelUpdateStack action.
@@ -2701,18 +2677,6 @@ func (s *CancelUpdateStackInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CancelUpdateStackInput) SetClientRequestToken(v string) *CancelUpdateStackInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *CancelUpdateStackInput) SetStackName(v string) *CancelUpdateStackInput {
-	s.StackName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStackOutput
 type CancelUpdateStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -2758,18 +2722,6 @@ func (s Change) String() string {
 // GoString returns the string representation
 func (s Change) GoString() string {
 	return s.String()
-}
-
-// SetResourceChange sets the ResourceChange field's value.
-func (s *Change) SetResourceChange(v *ResourceChange) *Change {
-	s.ResourceChange = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Change) SetType(v ChangeType) *Change {
-	s.Type = v
-	return s
 }
 
 // The ChangeSetSummary structure describes a change set, its status, and the
@@ -2820,60 +2772,6 @@ func (s ChangeSetSummary) String() string {
 // GoString returns the string representation
 func (s ChangeSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetChangeSetId sets the ChangeSetId field's value.
-func (s *ChangeSetSummary) SetChangeSetId(v string) *ChangeSetSummary {
-	s.ChangeSetId = &v
-	return s
-}
-
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *ChangeSetSummary) SetChangeSetName(v string) *ChangeSetSummary {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *ChangeSetSummary) SetCreationTime(v time.Time) *ChangeSetSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ChangeSetSummary) SetDescription(v string) *ChangeSetSummary {
-	s.Description = &v
-	return s
-}
-
-// SetExecutionStatus sets the ExecutionStatus field's value.
-func (s *ChangeSetSummary) SetExecutionStatus(v ExecutionStatus) *ChangeSetSummary {
-	s.ExecutionStatus = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *ChangeSetSummary) SetStackId(v string) *ChangeSetSummary {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *ChangeSetSummary) SetStackName(v string) *ChangeSetSummary {
-	s.StackName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ChangeSetSummary) SetStatus(v ChangeSetStatus) *ChangeSetSummary {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *ChangeSetSummary) SetStatusReason(v string) *ChangeSetSummary {
-	s.StatusReason = &v
-	return s
 }
 
 // The input for the ContinueUpdateRollback action.
@@ -2978,30 +2876,6 @@ func (s *ContinueUpdateRollbackInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *ContinueUpdateRollbackInput) SetClientRequestToken(v string) *ContinueUpdateRollbackInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetResourcesToSkip sets the ResourcesToSkip field's value.
-func (s *ContinueUpdateRollbackInput) SetResourcesToSkip(v []string) *ContinueUpdateRollbackInput {
-	s.ResourcesToSkip = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ContinueUpdateRollbackInput) SetRoleARN(v string) *ContinueUpdateRollbackInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *ContinueUpdateRollbackInput) SetStackName(v string) *ContinueUpdateRollbackInput {
-	s.StackName = &v
-	return s
 }
 
 // The output for a ContinueUpdateRollback action.
@@ -3224,96 +3098,6 @@ func (s *CreateChangeSetInput) Validate() error {
 	return nil
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *CreateChangeSetInput) SetCapabilities(v []Capability) *CreateChangeSetInput {
-	s.Capabilities = v
-	return s
-}
-
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *CreateChangeSetInput) SetChangeSetName(v string) *CreateChangeSetInput {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetChangeSetType sets the ChangeSetType field's value.
-func (s *CreateChangeSetInput) SetChangeSetType(v ChangeSetType) *CreateChangeSetInput {
-	s.ChangeSetType = v
-	return s
-}
-
-// SetClientToken sets the ClientToken field's value.
-func (s *CreateChangeSetInput) SetClientToken(v string) *CreateChangeSetInput {
-	s.ClientToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateChangeSetInput) SetDescription(v string) *CreateChangeSetInput {
-	s.Description = &v
-	return s
-}
-
-// SetNotificationARNs sets the NotificationARNs field's value.
-func (s *CreateChangeSetInput) SetNotificationARNs(v []string) *CreateChangeSetInput {
-	s.NotificationARNs = v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *CreateChangeSetInput) SetParameters(v []Parameter) *CreateChangeSetInput {
-	s.Parameters = v
-	return s
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *CreateChangeSetInput) SetResourceTypes(v []string) *CreateChangeSetInput {
-	s.ResourceTypes = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *CreateChangeSetInput) SetRoleARN(v string) *CreateChangeSetInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetRollbackConfiguration sets the RollbackConfiguration field's value.
-func (s *CreateChangeSetInput) SetRollbackConfiguration(v *RollbackConfiguration) *CreateChangeSetInput {
-	s.RollbackConfiguration = v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *CreateChangeSetInput) SetStackName(v string) *CreateChangeSetInput {
-	s.StackName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateChangeSetInput) SetTags(v []Tag) *CreateChangeSetInput {
-	s.Tags = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *CreateChangeSetInput) SetTemplateBody(v string) *CreateChangeSetInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *CreateChangeSetInput) SetTemplateURL(v string) *CreateChangeSetInput {
-	s.TemplateURL = &v
-	return s
-}
-
-// SetUsePreviousTemplate sets the UsePreviousTemplate field's value.
-func (s *CreateChangeSetInput) SetUsePreviousTemplate(v bool) *CreateChangeSetInput {
-	s.UsePreviousTemplate = &v
-	return s
-}
-
 // The output for the CreateChangeSet action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetOutput
 type CreateChangeSetOutput struct {
@@ -3341,18 +3125,6 @@ func (s CreateChangeSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetId sets the Id field's value.
-func (s *CreateChangeSetOutput) SetId(v string) *CreateChangeSetOutput {
-	s.Id = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateChangeSetOutput) SetStackId(v string) *CreateChangeSetOutput {
-	s.StackId = &v
-	return s
 }
 
 // The input for CreateStack action.
@@ -3579,108 +3351,6 @@ func (s *CreateStackInput) Validate() error {
 	return nil
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *CreateStackInput) SetCapabilities(v []Capability) *CreateStackInput {
-	s.Capabilities = v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateStackInput) SetClientRequestToken(v string) *CreateStackInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDisableRollback sets the DisableRollback field's value.
-func (s *CreateStackInput) SetDisableRollback(v bool) *CreateStackInput {
-	s.DisableRollback = &v
-	return s
-}
-
-// SetEnableTerminationProtection sets the EnableTerminationProtection field's value.
-func (s *CreateStackInput) SetEnableTerminationProtection(v bool) *CreateStackInput {
-	s.EnableTerminationProtection = &v
-	return s
-}
-
-// SetNotificationARNs sets the NotificationARNs field's value.
-func (s *CreateStackInput) SetNotificationARNs(v []string) *CreateStackInput {
-	s.NotificationARNs = v
-	return s
-}
-
-// SetOnFailure sets the OnFailure field's value.
-func (s *CreateStackInput) SetOnFailure(v OnFailure) *CreateStackInput {
-	s.OnFailure = v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *CreateStackInput) SetParameters(v []Parameter) *CreateStackInput {
-	s.Parameters = v
-	return s
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *CreateStackInput) SetResourceTypes(v []string) *CreateStackInput {
-	s.ResourceTypes = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *CreateStackInput) SetRoleARN(v string) *CreateStackInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetRollbackConfiguration sets the RollbackConfiguration field's value.
-func (s *CreateStackInput) SetRollbackConfiguration(v *RollbackConfiguration) *CreateStackInput {
-	s.RollbackConfiguration = v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *CreateStackInput) SetStackName(v string) *CreateStackInput {
-	s.StackName = &v
-	return s
-}
-
-// SetStackPolicyBody sets the StackPolicyBody field's value.
-func (s *CreateStackInput) SetStackPolicyBody(v string) *CreateStackInput {
-	s.StackPolicyBody = &v
-	return s
-}
-
-// SetStackPolicyURL sets the StackPolicyURL field's value.
-func (s *CreateStackInput) SetStackPolicyURL(v string) *CreateStackInput {
-	s.StackPolicyURL = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateStackInput) SetTags(v []Tag) *CreateStackInput {
-	s.Tags = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *CreateStackInput) SetTemplateBody(v string) *CreateStackInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *CreateStackInput) SetTemplateURL(v string) *CreateStackInput {
-	s.TemplateURL = &v
-	return s
-}
-
-// SetTimeoutInMinutes sets the TimeoutInMinutes field's value.
-func (s *CreateStackInput) SetTimeoutInMinutes(v int64) *CreateStackInput {
-	s.TimeoutInMinutes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstancesInput
 type CreateStackInstancesInput struct {
 	_ struct{} `type:"structure"`
@@ -3793,42 +3463,6 @@ func (s *CreateStackInstancesInput) Validate() error {
 	return nil
 }
 
-// SetAccounts sets the Accounts field's value.
-func (s *CreateStackInstancesInput) SetAccounts(v []string) *CreateStackInstancesInput {
-	s.Accounts = v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *CreateStackInstancesInput) SetOperationId(v string) *CreateStackInstancesInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetOperationPreferences sets the OperationPreferences field's value.
-func (s *CreateStackInstancesInput) SetOperationPreferences(v *StackSetOperationPreferences) *CreateStackInstancesInput {
-	s.OperationPreferences = v
-	return s
-}
-
-// SetParameterOverrides sets the ParameterOverrides field's value.
-func (s *CreateStackInstancesInput) SetParameterOverrides(v []Parameter) *CreateStackInstancesInput {
-	s.ParameterOverrides = v
-	return s
-}
-
-// SetRegions sets the Regions field's value.
-func (s *CreateStackInstancesInput) SetRegions(v []string) *CreateStackInstancesInput {
-	s.Regions = v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *CreateStackInstancesInput) SetStackSetName(v string) *CreateStackInstancesInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstancesOutput
 type CreateStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3852,12 +3486,6 @@ func (s CreateStackInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStackInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *CreateStackInstancesOutput) SetOperationId(v string) *CreateStackInstancesOutput {
-	s.OperationId = &v
-	return s
 }
 
 // The output for a CreateStack action.
@@ -3884,12 +3512,6 @@ func (s CreateStackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateStackOutput) SetStackId(v string) *CreateStackOutput {
-	s.StackId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetInput
@@ -4030,54 +3652,6 @@ func (s *CreateStackSetInput) Validate() error {
 	return nil
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *CreateStackSetInput) SetCapabilities(v []Capability) *CreateStackSetInput {
-	s.Capabilities = v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateStackSetInput) SetClientRequestToken(v string) *CreateStackSetInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateStackSetInput) SetDescription(v string) *CreateStackSetInput {
-	s.Description = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *CreateStackSetInput) SetParameters(v []Parameter) *CreateStackSetInput {
-	s.Parameters = v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *CreateStackSetInput) SetStackSetName(v string) *CreateStackSetInput {
-	s.StackSetName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateStackSetInput) SetTags(v []Tag) *CreateStackSetInput {
-	s.Tags = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *CreateStackSetInput) SetTemplateBody(v string) *CreateStackSetInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *CreateStackSetInput) SetTemplateURL(v string) *CreateStackSetInput {
-	s.TemplateURL = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetOutput
 type CreateStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4101,12 +3675,6 @@ func (s CreateStackSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStackSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackSetId sets the StackSetId field's value.
-func (s *CreateStackSetOutput) SetStackSetId(v string) *CreateStackSetOutput {
-	s.StackSetId = &v
-	return s
 }
 
 // The input for the DeleteChangeSet action.
@@ -4153,18 +3721,6 @@ func (s *DeleteChangeSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *DeleteChangeSetInput) SetChangeSetName(v string) *DeleteChangeSetInput {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DeleteChangeSetInput) SetStackName(v string) *DeleteChangeSetInput {
-	s.StackName = &v
-	return s
 }
 
 // The output for the DeleteChangeSet action.
@@ -4265,30 +3821,6 @@ func (s *DeleteStackInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *DeleteStackInput) SetClientRequestToken(v string) *DeleteStackInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetRetainResources sets the RetainResources field's value.
-func (s *DeleteStackInput) SetRetainResources(v []string) *DeleteStackInput {
-	s.RetainResources = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *DeleteStackInput) SetRoleARN(v string) *DeleteStackInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DeleteStackInput) SetStackName(v string) *DeleteStackInput {
-	s.StackName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstancesInput
 type DeleteStackInstancesInput struct {
 	_ struct{} `type:"structure"`
@@ -4379,42 +3911,6 @@ func (s *DeleteStackInstancesInput) Validate() error {
 	return nil
 }
 
-// SetAccounts sets the Accounts field's value.
-func (s *DeleteStackInstancesInput) SetAccounts(v []string) *DeleteStackInstancesInput {
-	s.Accounts = v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *DeleteStackInstancesInput) SetOperationId(v string) *DeleteStackInstancesInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetOperationPreferences sets the OperationPreferences field's value.
-func (s *DeleteStackInstancesInput) SetOperationPreferences(v *StackSetOperationPreferences) *DeleteStackInstancesInput {
-	s.OperationPreferences = v
-	return s
-}
-
-// SetRegions sets the Regions field's value.
-func (s *DeleteStackInstancesInput) SetRegions(v []string) *DeleteStackInstancesInput {
-	s.Regions = v
-	return s
-}
-
-// SetRetainStacks sets the RetainStacks field's value.
-func (s *DeleteStackInstancesInput) SetRetainStacks(v bool) *DeleteStackInstancesInput {
-	s.RetainStacks = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *DeleteStackInstancesInput) SetStackSetName(v string) *DeleteStackInstancesInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstancesOutput
 type DeleteStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4438,12 +3934,6 @@ func (s DeleteStackInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteStackInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *DeleteStackInstancesOutput) SetOperationId(v string) *DeleteStackInstancesOutput {
-	s.OperationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackOutput
@@ -4503,12 +3993,6 @@ func (s *DeleteStackSetInput) Validate() error {
 	return nil
 }
 
-// SetStackSetName sets the StackSetName field's value.
-func (s *DeleteStackSetInput) SetStackSetName(v string) *DeleteStackSetInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSetOutput
 type DeleteStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4563,12 +4047,6 @@ func (s *DescribeAccountLimitsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeAccountLimitsInput) SetNextToken(v string) *DescribeAccountLimitsInput {
-	s.NextToken = &v
-	return s
-}
-
 // The output for the DescribeAccountLimits action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimitsOutput
 type DescribeAccountLimitsOutput struct {
@@ -4598,18 +4076,6 @@ func (s DescribeAccountLimitsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAccountLimitsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccountLimits sets the AccountLimits field's value.
-func (s *DescribeAccountLimitsOutput) SetAccountLimits(v []AccountLimit) *DescribeAccountLimitsOutput {
-	s.AccountLimits = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeAccountLimitsOutput) SetNextToken(v string) *DescribeAccountLimitsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // The input for the DescribeChangeSet action.
@@ -4663,24 +4129,6 @@ func (s *DescribeChangeSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *DescribeChangeSetInput) SetChangeSetName(v string) *DescribeChangeSetInput {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeChangeSetInput) SetNextToken(v string) *DescribeChangeSetInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeChangeSetInput) SetStackName(v string) *DescribeChangeSetInput {
-	s.StackName = &v
-	return s
 }
 
 // The output for the DescribeChangeSet action.
@@ -4769,102 +4217,6 @@ func (s DescribeChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *DescribeChangeSetOutput) SetCapabilities(v []Capability) *DescribeChangeSetOutput {
-	s.Capabilities = v
-	return s
-}
-
-// SetChangeSetId sets the ChangeSetId field's value.
-func (s *DescribeChangeSetOutput) SetChangeSetId(v string) *DescribeChangeSetOutput {
-	s.ChangeSetId = &v
-	return s
-}
-
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *DescribeChangeSetOutput) SetChangeSetName(v string) *DescribeChangeSetOutput {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetChanges sets the Changes field's value.
-func (s *DescribeChangeSetOutput) SetChanges(v []Change) *DescribeChangeSetOutput {
-	s.Changes = v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *DescribeChangeSetOutput) SetCreationTime(v time.Time) *DescribeChangeSetOutput {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DescribeChangeSetOutput) SetDescription(v string) *DescribeChangeSetOutput {
-	s.Description = &v
-	return s
-}
-
-// SetExecutionStatus sets the ExecutionStatus field's value.
-func (s *DescribeChangeSetOutput) SetExecutionStatus(v ExecutionStatus) *DescribeChangeSetOutput {
-	s.ExecutionStatus = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeChangeSetOutput) SetNextToken(v string) *DescribeChangeSetOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNotificationARNs sets the NotificationARNs field's value.
-func (s *DescribeChangeSetOutput) SetNotificationARNs(v []string) *DescribeChangeSetOutput {
-	s.NotificationARNs = v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *DescribeChangeSetOutput) SetParameters(v []Parameter) *DescribeChangeSetOutput {
-	s.Parameters = v
-	return s
-}
-
-// SetRollbackConfiguration sets the RollbackConfiguration field's value.
-func (s *DescribeChangeSetOutput) SetRollbackConfiguration(v *RollbackConfiguration) *DescribeChangeSetOutput {
-	s.RollbackConfiguration = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeChangeSetOutput) SetStackId(v string) *DescribeChangeSetOutput {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeChangeSetOutput) SetStackName(v string) *DescribeChangeSetOutput {
-	s.StackName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DescribeChangeSetOutput) SetStatus(v ChangeSetStatus) *DescribeChangeSetOutput {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *DescribeChangeSetOutput) SetStatusReason(v string) *DescribeChangeSetOutput {
-	s.StatusReason = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *DescribeChangeSetOutput) SetTags(v []Tag) *DescribeChangeSetOutput {
-	s.Tags = v
-	return s
-}
-
 // The input for DescribeStackEvents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsInput
 type DescribeStackEventsInput struct {
@@ -4908,18 +4260,6 @@ func (s *DescribeStackEventsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStackEventsInput) SetNextToken(v string) *DescribeStackEventsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeStackEventsInput) SetStackName(v string) *DescribeStackEventsInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for a DescribeStackEvents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsOutput
 type DescribeStackEventsOutput struct {
@@ -4948,18 +4288,6 @@ func (s DescribeStackEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStackEventsOutput) SetNextToken(v string) *DescribeStackEventsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackEvents sets the StackEvents field's value.
-func (s *DescribeStackEventsOutput) SetStackEvents(v []StackEvent) *DescribeStackEventsOutput {
-	s.StackEvents = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceInput
@@ -5015,24 +4343,6 @@ func (s *DescribeStackInstanceInput) Validate() error {
 	return nil
 }
 
-// SetStackInstanceAccount sets the StackInstanceAccount field's value.
-func (s *DescribeStackInstanceInput) SetStackInstanceAccount(v string) *DescribeStackInstanceInput {
-	s.StackInstanceAccount = &v
-	return s
-}
-
-// SetStackInstanceRegion sets the StackInstanceRegion field's value.
-func (s *DescribeStackInstanceInput) SetStackInstanceRegion(v string) *DescribeStackInstanceInput {
-	s.StackInstanceRegion = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *DescribeStackInstanceInput) SetStackSetName(v string) *DescribeStackInstanceInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceOutput
 type DescribeStackInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -5056,12 +4366,6 @@ func (s DescribeStackInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackInstance sets the StackInstance field's value.
-func (s *DescribeStackInstanceOutput) SetStackInstance(v *StackInstance) *DescribeStackInstanceOutput {
-	s.StackInstance = v
-	return s
 }
 
 // The input for DescribeStackResource action.
@@ -5118,18 +4422,6 @@ func (s *DescribeStackResourceInput) Validate() error {
 	return nil
 }
 
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *DescribeStackResourceInput) SetLogicalResourceId(v string) *DescribeStackResourceInput {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeStackResourceInput) SetStackName(v string) *DescribeStackResourceInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for a DescribeStackResource action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceOutput
 type DescribeStackResourceOutput struct {
@@ -5155,12 +4447,6 @@ func (s DescribeStackResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackResourceDetail sets the StackResourceDetail field's value.
-func (s *DescribeStackResourceOutput) SetStackResourceDetail(v *StackResourceDetail) *DescribeStackResourceOutput {
-	s.StackResourceDetail = v
-	return s
 }
 
 // The input for DescribeStackResources action.
@@ -5212,24 +4498,6 @@ func (s DescribeStackResourcesInput) GoString() string {
 	return s.String()
 }
 
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *DescribeStackResourcesInput) SetLogicalResourceId(v string) *DescribeStackResourcesInput {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetPhysicalResourceId sets the PhysicalResourceId field's value.
-func (s *DescribeStackResourcesInput) SetPhysicalResourceId(v string) *DescribeStackResourcesInput {
-	s.PhysicalResourceId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeStackResourcesInput) SetStackName(v string) *DescribeStackResourcesInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for a DescribeStackResources action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesOutput
 type DescribeStackResourcesOutput struct {
@@ -5254,12 +4522,6 @@ func (s DescribeStackResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackResources sets the StackResources field's value.
-func (s *DescribeStackResourcesOutput) SetStackResources(v []StackResource) *DescribeStackResourcesOutput {
-	s.StackResources = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetInput
@@ -5294,12 +4556,6 @@ func (s *DescribeStackSetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *DescribeStackSetInput) SetStackSetName(v string) *DescribeStackSetInput {
-	s.StackSetName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperationInput
@@ -5348,18 +4604,6 @@ func (s *DescribeStackSetOperationInput) Validate() error {
 	return nil
 }
 
-// SetOperationId sets the OperationId field's value.
-func (s *DescribeStackSetOperationInput) SetOperationId(v string) *DescribeStackSetOperationInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *DescribeStackSetOperationInput) SetStackSetName(v string) *DescribeStackSetOperationInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperationOutput
 type DescribeStackSetOperationOutput struct {
 	_ struct{} `type:"structure"`
@@ -5385,12 +4629,6 @@ func (s DescribeStackSetOperationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStackSetOperation sets the StackSetOperation field's value.
-func (s *DescribeStackSetOperationOutput) SetStackSetOperation(v *StackSetOperation) *DescribeStackSetOperationOutput {
-	s.StackSetOperation = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOutput
 type DescribeStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5414,12 +4652,6 @@ func (s DescribeStackSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackSet sets the StackSet field's value.
-func (s *DescribeStackSetOutput) SetStackSet(v *StackSet) *DescribeStackSetOutput {
-	s.StackSet = v
-	return s
 }
 
 // The input for DescribeStacks action.
@@ -5465,18 +4697,6 @@ func (s *DescribeStacksInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStacksInput) SetNextToken(v string) *DescribeStacksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeStacksInput) SetStackName(v string) *DescribeStacksInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for a DescribeStacks action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacksOutput
 type DescribeStacksOutput struct {
@@ -5505,18 +4725,6 @@ func (s DescribeStacksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStacksOutput) SetNextToken(v string) *DescribeStacksOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStacks sets the Stacks field's value.
-func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
-	s.Stacks = v
-	return s
 }
 
 // The input for an EstimateTemplateCost action.
@@ -5572,24 +4780,6 @@ func (s *EstimateTemplateCostInput) Validate() error {
 	return nil
 }
 
-// SetParameters sets the Parameters field's value.
-func (s *EstimateTemplateCostInput) SetParameters(v []Parameter) *EstimateTemplateCostInput {
-	s.Parameters = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *EstimateTemplateCostInput) SetTemplateBody(v string) *EstimateTemplateCostInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *EstimateTemplateCostInput) SetTemplateURL(v string) *EstimateTemplateCostInput {
-	s.TemplateURL = &v
-	return s
-}
-
 // The output for a EstimateTemplateCost action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCostOutput
 type EstimateTemplateCostOutput struct {
@@ -5615,12 +4805,6 @@ func (s EstimateTemplateCostOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s EstimateTemplateCostOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUrl sets the Url field's value.
-func (s *EstimateTemplateCostOutput) SetUrl(v string) *EstimateTemplateCostOutput {
-	s.Url = &v
-	return s
 }
 
 // The input for the ExecuteChangeSet action.
@@ -5679,24 +4863,6 @@ func (s *ExecuteChangeSetInput) Validate() error {
 	return nil
 }
 
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *ExecuteChangeSetInput) SetChangeSetName(v string) *ExecuteChangeSetInput {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *ExecuteChangeSetInput) SetClientRequestToken(v string) *ExecuteChangeSetInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *ExecuteChangeSetInput) SetStackName(v string) *ExecuteChangeSetInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for the ExecuteChangeSet action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetOutput
 type ExecuteChangeSetOutput struct {
@@ -5748,24 +4914,6 @@ func (s Export) GoString() string {
 	return s.String()
 }
 
-// SetExportingStackId sets the ExportingStackId field's value.
-func (s *Export) SetExportingStackId(v string) *Export {
-	s.ExportingStackId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Export) SetName(v string) *Export {
-	s.Name = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Export) SetValue(v string) *Export {
-	s.Value = &v
-	return s
-}
-
 // The input for the GetStackPolicy action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyInput
 type GetStackPolicyInput struct {
@@ -5802,12 +4950,6 @@ func (s *GetStackPolicyInput) Validate() error {
 	return nil
 }
 
-// SetStackName sets the StackName field's value.
-func (s *GetStackPolicyInput) SetStackName(v string) *GetStackPolicyInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for the GetStackPolicy action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyOutput
 type GetStackPolicyOutput struct {
@@ -5834,12 +4976,6 @@ func (s GetStackPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetStackPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackPolicyBody sets the StackPolicyBody field's value.
-func (s *GetStackPolicyOutput) SetStackPolicyBody(v string) *GetStackPolicyOutput {
-	s.StackPolicyBody = &v
-	return s
 }
 
 // The input for a GetTemplate action.
@@ -5896,24 +5032,6 @@ func (s *GetTemplateInput) Validate() error {
 	return nil
 }
 
-// SetChangeSetName sets the ChangeSetName field's value.
-func (s *GetTemplateInput) SetChangeSetName(v string) *GetTemplateInput {
-	s.ChangeSetName = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *GetTemplateInput) SetStackName(v string) *GetTemplateInput {
-	s.StackName = &v
-	return s
-}
-
-// SetTemplateStage sets the TemplateStage field's value.
-func (s *GetTemplateInput) SetTemplateStage(v TemplateStage) *GetTemplateInput {
-	s.TemplateStage = v
-	return s
-}
-
 // The output for GetTemplate action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateOutput
 type GetTemplateOutput struct {
@@ -5949,18 +5067,6 @@ func (s GetTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStagesAvailable sets the StagesAvailable field's value.
-func (s *GetTemplateOutput) SetStagesAvailable(v []TemplateStage) *GetTemplateOutput {
-	s.StagesAvailable = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *GetTemplateOutput) SetTemplateBody(v string) *GetTemplateOutput {
-	s.TemplateBody = &v
-	return s
 }
 
 // The input for the GetTemplateSummary action.
@@ -6031,30 +5137,6 @@ func (s *GetTemplateSummaryInput) Validate() error {
 	return nil
 }
 
-// SetStackName sets the StackName field's value.
-func (s *GetTemplateSummaryInput) SetStackName(v string) *GetTemplateSummaryInput {
-	s.StackName = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *GetTemplateSummaryInput) SetStackSetName(v string) *GetTemplateSummaryInput {
-	s.StackSetName = &v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *GetTemplateSummaryInput) SetTemplateBody(v string) *GetTemplateSummaryInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *GetTemplateSummaryInput) SetTemplateURL(v string) *GetTemplateSummaryInput {
-	s.TemplateURL = &v
-	return s
-}
-
 // The output for the GetTemplateSummary action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryOutput
 type GetTemplateSummaryOutput struct {
@@ -6113,54 +5195,6 @@ func (s GetTemplateSummaryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *GetTemplateSummaryOutput) SetCapabilities(v []Capability) *GetTemplateSummaryOutput {
-	s.Capabilities = v
-	return s
-}
-
-// SetCapabilitiesReason sets the CapabilitiesReason field's value.
-func (s *GetTemplateSummaryOutput) SetCapabilitiesReason(v string) *GetTemplateSummaryOutput {
-	s.CapabilitiesReason = &v
-	return s
-}
-
-// SetDeclaredTransforms sets the DeclaredTransforms field's value.
-func (s *GetTemplateSummaryOutput) SetDeclaredTransforms(v []string) *GetTemplateSummaryOutput {
-	s.DeclaredTransforms = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GetTemplateSummaryOutput) SetDescription(v string) *GetTemplateSummaryOutput {
-	s.Description = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *GetTemplateSummaryOutput) SetMetadata(v string) *GetTemplateSummaryOutput {
-	s.Metadata = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *GetTemplateSummaryOutput) SetParameters(v []ParameterDeclaration) *GetTemplateSummaryOutput {
-	s.Parameters = v
-	return s
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *GetTemplateSummaryOutput) SetResourceTypes(v []string) *GetTemplateSummaryOutput {
-	s.ResourceTypes = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *GetTemplateSummaryOutput) SetVersion(v string) *GetTemplateSummaryOutput {
-	s.Version = &v
-	return s
-}
-
 // The input for the ListChangeSets action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsInput
 type ListChangeSetsInput struct {
@@ -6207,18 +5241,6 @@ func (s *ListChangeSetsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListChangeSetsInput) SetNextToken(v string) *ListChangeSetsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *ListChangeSetsInput) SetStackName(v string) *ListChangeSetsInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for the ListChangeSets action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsOutput
 type ListChangeSetsOutput struct {
@@ -6248,18 +5270,6 @@ func (s ListChangeSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListChangeSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListChangeSetsOutput) SetNextToken(v string) *ListChangeSetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSummaries sets the Summaries field's value.
-func (s *ListChangeSetsOutput) SetSummaries(v []ChangeSetSummary) *ListChangeSetsOutput {
-	s.Summaries = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsInput
@@ -6294,12 +5304,6 @@ func (s *ListExportsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListExportsInput) SetNextToken(v string) *ListExportsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsOutput
 type ListExportsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6327,18 +5331,6 @@ func (s ListExportsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListExportsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExports sets the Exports field's value.
-func (s *ListExportsOutput) SetExports(v []Export) *ListExportsOutput {
-	s.Exports = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListExportsOutput) SetNextToken(v string) *ListExportsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsInput
@@ -6383,18 +5375,6 @@ func (s *ListImportsInput) Validate() error {
 	return nil
 }
 
-// SetExportName sets the ExportName field's value.
-func (s *ListImportsInput) SetExportName(v string) *ListImportsInput {
-	s.ExportName = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListImportsInput) SetNextToken(v string) *ListImportsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsOutput
 type ListImportsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6422,18 +5402,6 @@ func (s ListImportsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListImportsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImports sets the Imports field's value.
-func (s *ListImportsOutput) SetImports(v []string) *ListImportsOutput {
-	s.Imports = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListImportsOutput) SetNextToken(v string) *ListImportsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesInput
@@ -6496,36 +5464,6 @@ func (s *ListStackInstancesInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStackInstancesInput) SetMaxResults(v int64) *ListStackInstancesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackInstancesInput) SetNextToken(v string) *ListStackInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackInstanceAccount sets the StackInstanceAccount field's value.
-func (s *ListStackInstancesInput) SetStackInstanceAccount(v string) *ListStackInstancesInput {
-	s.StackInstanceAccount = &v
-	return s
-}
-
-// SetStackInstanceRegion sets the StackInstanceRegion field's value.
-func (s *ListStackInstancesInput) SetStackInstanceRegion(v string) *ListStackInstancesInput {
-	s.StackInstanceRegion = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *ListStackInstancesInput) SetStackSetName(v string) *ListStackInstancesInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesOutput
 type ListStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -6556,18 +5494,6 @@ func (s ListStackInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStackInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackInstancesOutput) SetNextToken(v string) *ListStackInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSummaries sets the Summaries field's value.
-func (s *ListStackInstancesOutput) SetSummaries(v []StackInstanceSummary) *ListStackInstancesOutput {
-	s.Summaries = v
-	return s
 }
 
 // The input for the ListStackResource action.
@@ -6620,18 +5546,6 @@ func (s *ListStackResourcesInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackResourcesInput) SetNextToken(v string) *ListStackResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *ListStackResourcesInput) SetStackName(v string) *ListStackResourcesInput {
-	s.StackName = &v
-	return s
-}
-
 // The output for a ListStackResources action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResourcesOutput
 type ListStackResourcesOutput struct {
@@ -6660,18 +5574,6 @@ func (s ListStackResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStackResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackResourcesOutput) SetNextToken(v string) *ListStackResourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackResourceSummaries sets the StackResourceSummaries field's value.
-func (s *ListStackResourcesOutput) SetStackResourceSummaries(v []StackResourceSummary) *ListStackResourcesOutput {
-	s.StackResourceSummaries = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsInput
@@ -6740,30 +5642,6 @@ func (s *ListStackSetOperationResultsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStackSetOperationResultsInput) SetMaxResults(v int64) *ListStackSetOperationResultsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackSetOperationResultsInput) SetNextToken(v string) *ListStackSetOperationResultsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *ListStackSetOperationResultsInput) SetOperationId(v string) *ListStackSetOperationResultsInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *ListStackSetOperationResultsInput) SetStackSetName(v string) *ListStackSetOperationResultsInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResultsOutput
 type ListStackSetOperationResultsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6795,18 +5673,6 @@ func (s ListStackSetOperationResultsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStackSetOperationResultsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackSetOperationResultsOutput) SetNextToken(v string) *ListStackSetOperationResultsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSummaries sets the Summaries field's value.
-func (s *ListStackSetOperationResultsOutput) SetSummaries(v []StackSetOperationResultSummary) *ListStackSetOperationResultsOutput {
-	s.Summaries = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationsInput
@@ -6863,24 +5729,6 @@ func (s *ListStackSetOperationsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStackSetOperationsInput) SetMaxResults(v int64) *ListStackSetOperationsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackSetOperationsInput) SetNextToken(v string) *ListStackSetOperationsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *ListStackSetOperationsInput) SetStackSetName(v string) *ListStackSetOperationsInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationsOutput
 type ListStackSetOperationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -6911,18 +5759,6 @@ func (s ListStackSetOperationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStackSetOperationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackSetOperationsOutput) SetNextToken(v string) *ListStackSetOperationsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSummaries sets the Summaries field's value.
-func (s *ListStackSetOperationsOutput) SetSummaries(v []StackSetOperationSummary) *ListStackSetOperationsOutput {
-	s.Summaries = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetsInput
@@ -6972,24 +5808,6 @@ func (s *ListStackSetsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListStackSetsInput) SetMaxResults(v int64) *ListStackSetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackSetsInput) SetNextToken(v string) *ListStackSetsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ListStackSetsInput) SetStatus(v StackSetStatus) *ListStackSetsInput {
-	s.Status = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetsOutput
 type ListStackSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7020,18 +5838,6 @@ func (s ListStackSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStackSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListStackSetsOutput) SetNextToken(v string) *ListStackSetsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSummaries sets the Summaries field's value.
-func (s *ListStackSetsOutput) SetSummaries(v []StackSetSummary) *ListStackSetsOutput {
-	s.Summaries = v
-	return s
 }
 
 // The input for ListStacks action.
@@ -7071,18 +5877,6 @@ func (s *ListStacksInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListStacksInput) SetNextToken(v string) *ListStacksInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackStatusFilter sets the StackStatusFilter field's value.
-func (s *ListStacksInput) SetStackStatusFilter(v []StackStatus) *ListStacksInput {
-	s.StackStatusFilter = v
-	return s
-}
-
 // The output for ListStacks action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacksOutput
 type ListStacksOutput struct {
@@ -7114,18 +5908,6 @@ func (s ListStacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListStacksOutput) SetNextToken(v string) *ListStacksOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackSummaries sets the StackSummaries field's value.
-func (s *ListStacksOutput) SetStackSummaries(v []StackSummary) *ListStacksOutput {
-	s.StackSummaries = v
-	return s
-}
-
 // The Output data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Output
 type Output struct {
@@ -7152,30 +5934,6 @@ func (s Output) String() string {
 // GoString returns the string representation
 func (s Output) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *Output) SetDescription(v string) *Output {
-	s.Description = &v
-	return s
-}
-
-// SetExportName sets the ExportName field's value.
-func (s *Output) SetExportName(v string) *Output {
-	s.ExportName = &v
-	return s
-}
-
-// SetOutputKey sets the OutputKey field's value.
-func (s *Output) SetOutputKey(v string) *Output {
-	s.OutputKey = &v
-	return s
-}
-
-// SetOutputValue sets the OutputValue field's value.
-func (s *Output) SetOutputValue(v string) *Output {
-	s.OutputValue = &v
-	return s
 }
 
 // The Parameter data type.
@@ -7212,30 +5970,6 @@ func (s Parameter) GoString() string {
 	return s.String()
 }
 
-// SetParameterKey sets the ParameterKey field's value.
-func (s *Parameter) SetParameterKey(v string) *Parameter {
-	s.ParameterKey = &v
-	return s
-}
-
-// SetParameterValue sets the ParameterValue field's value.
-func (s *Parameter) SetParameterValue(v string) *Parameter {
-	s.ParameterValue = &v
-	return s
-}
-
-// SetResolvedValue sets the ResolvedValue field's value.
-func (s *Parameter) SetResolvedValue(v string) *Parameter {
-	s.ResolvedValue = &v
-	return s
-}
-
-// SetUsePreviousValue sets the UsePreviousValue field's value.
-func (s *Parameter) SetUsePreviousValue(v bool) *Parameter {
-	s.UsePreviousValue = &v
-	return s
-}
-
 // A set of criteria that AWS CloudFormation uses to validate parameter values.
 // Although other constraints might be defined in the stack template, AWS CloudFormation
 // returns only the AllowedValues property.
@@ -7255,12 +5989,6 @@ func (s ParameterConstraints) String() string {
 // GoString returns the string representation
 func (s ParameterConstraints) GoString() string {
 	return s.String()
-}
-
-// SetAllowedValues sets the AllowedValues field's value.
-func (s *ParameterConstraints) SetAllowedValues(v []string) *ParameterConstraints {
-	s.AllowedValues = v
-	return s
 }
 
 // The ParameterDeclaration data type.
@@ -7296,42 +6024,6 @@ func (s ParameterDeclaration) String() string {
 // GoString returns the string representation
 func (s ParameterDeclaration) GoString() string {
 	return s.String()
-}
-
-// SetDefaultValue sets the DefaultValue field's value.
-func (s *ParameterDeclaration) SetDefaultValue(v string) *ParameterDeclaration {
-	s.DefaultValue = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ParameterDeclaration) SetDescription(v string) *ParameterDeclaration {
-	s.Description = &v
-	return s
-}
-
-// SetNoEcho sets the NoEcho field's value.
-func (s *ParameterDeclaration) SetNoEcho(v bool) *ParameterDeclaration {
-	s.NoEcho = &v
-	return s
-}
-
-// SetParameterConstraints sets the ParameterConstraints field's value.
-func (s *ParameterDeclaration) SetParameterConstraints(v *ParameterConstraints) *ParameterDeclaration {
-	s.ParameterConstraints = v
-	return s
-}
-
-// SetParameterKey sets the ParameterKey field's value.
-func (s *ParameterDeclaration) SetParameterKey(v string) *ParameterDeclaration {
-	s.ParameterKey = &v
-	return s
-}
-
-// SetParameterType sets the ParameterType field's value.
-func (s *ParameterDeclaration) SetParameterType(v string) *ParameterDeclaration {
-	s.ParameterType = &v
-	return s
 }
 
 // The ResourceChange structure describes the resource and the action that AWS
@@ -7385,48 +6077,6 @@ func (s ResourceChange) String() string {
 // GoString returns the string representation
 func (s ResourceChange) GoString() string {
 	return s.String()
-}
-
-// SetAction sets the Action field's value.
-func (s *ResourceChange) SetAction(v ChangeAction) *ResourceChange {
-	s.Action = v
-	return s
-}
-
-// SetDetails sets the Details field's value.
-func (s *ResourceChange) SetDetails(v []ResourceChangeDetail) *ResourceChange {
-	s.Details = v
-	return s
-}
-
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *ResourceChange) SetLogicalResourceId(v string) *ResourceChange {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetPhysicalResourceId sets the PhysicalResourceId field's value.
-func (s *ResourceChange) SetPhysicalResourceId(v string) *ResourceChange {
-	s.PhysicalResourceId = &v
-	return s
-}
-
-// SetReplacement sets the Replacement field's value.
-func (s *ResourceChange) SetReplacement(v Replacement) *ResourceChange {
-	s.Replacement = v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ResourceChange) SetResourceType(v string) *ResourceChange {
-	s.ResourceType = &v
-	return s
-}
-
-// SetScope sets the Scope field's value.
-func (s *ResourceChange) SetScope(v []ResourceAttribute) *ResourceChange {
-	s.Scope = v
-	return s
 }
 
 // For a resource with Modify as the action, the ResourceChange structure describes
@@ -7499,30 +6149,6 @@ func (s ResourceChangeDetail) GoString() string {
 	return s.String()
 }
 
-// SetCausingEntity sets the CausingEntity field's value.
-func (s *ResourceChangeDetail) SetCausingEntity(v string) *ResourceChangeDetail {
-	s.CausingEntity = &v
-	return s
-}
-
-// SetChangeSource sets the ChangeSource field's value.
-func (s *ResourceChangeDetail) SetChangeSource(v ChangeSource) *ResourceChangeDetail {
-	s.ChangeSource = v
-	return s
-}
-
-// SetEvaluation sets the Evaluation field's value.
-func (s *ResourceChangeDetail) SetEvaluation(v EvaluationType) *ResourceChangeDetail {
-	s.Evaluation = v
-	return s
-}
-
-// SetTarget sets the Target field's value.
-func (s *ResourceChangeDetail) SetTarget(v *ResourceTargetDefinition) *ResourceChangeDetail {
-	s.Target = v
-	return s
-}
-
 // The field that AWS CloudFormation will change, such as the name of a resource's
 // property, and whether the resource will be recreated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition
@@ -7553,24 +6179,6 @@ func (s ResourceTargetDefinition) String() string {
 // GoString returns the string representation
 func (s ResourceTargetDefinition) GoString() string {
 	return s.String()
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *ResourceTargetDefinition) SetAttribute(v ResourceAttribute) *ResourceTargetDefinition {
-	s.Attribute = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ResourceTargetDefinition) SetName(v string) *ResourceTargetDefinition {
-	s.Name = &v
-	return s
-}
-
-// SetRequiresRecreation sets the RequiresRecreation field's value.
-func (s *ResourceTargetDefinition) SetRequiresRecreation(v RequiresRecreation) *ResourceTargetDefinition {
-	s.RequiresRecreation = v
-	return s
 }
 
 // Structure containing the rollback triggers for AWS CloudFormation to monitor
@@ -7674,18 +6282,6 @@ func (s *RollbackConfiguration) Validate() error {
 	return nil
 }
 
-// SetMonitoringTimeInMinutes sets the MonitoringTimeInMinutes field's value.
-func (s *RollbackConfiguration) SetMonitoringTimeInMinutes(v int64) *RollbackConfiguration {
-	s.MonitoringTimeInMinutes = &v
-	return s
-}
-
-// SetRollbackTriggers sets the RollbackTriggers field's value.
-func (s *RollbackConfiguration) SetRollbackTriggers(v []RollbackTrigger) *RollbackConfiguration {
-	s.RollbackTriggers = v
-	return s
-}
-
 // A rollback trigger AWS CloudFormation monitors during creation and updating
 // of stacks. If any of the alarms you specify goes to ALERT state during the
 // stack operation or within the specified monitoring period afterwards, CloudFormation
@@ -7733,18 +6329,6 @@ func (s *RollbackTrigger) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *RollbackTrigger) SetArn(v string) *RollbackTrigger {
-	s.Arn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *RollbackTrigger) SetType(v string) *RollbackTrigger {
-	s.Type = &v
-	return s
 }
 
 // The input for the SetStackPolicy action.
@@ -7798,24 +6382,6 @@ func (s *SetStackPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStackName sets the StackName field's value.
-func (s *SetStackPolicyInput) SetStackName(v string) *SetStackPolicyInput {
-	s.StackName = &v
-	return s
-}
-
-// SetStackPolicyBody sets the StackPolicyBody field's value.
-func (s *SetStackPolicyInput) SetStackPolicyBody(v string) *SetStackPolicyInput {
-	s.StackPolicyBody = &v
-	return s
-}
-
-// SetStackPolicyURL sets the StackPolicyURL field's value.
-func (s *SetStackPolicyInput) SetStackPolicyURL(v string) *SetStackPolicyInput {
-	s.StackPolicyURL = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicyOutput
@@ -7911,30 +6477,6 @@ func (s *SignalResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *SignalResourceInput) SetLogicalResourceId(v string) *SignalResourceInput {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *SignalResourceInput) SetStackName(v string) *SignalResourceInput {
-	s.StackName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SignalResourceInput) SetStatus(v ResourceSignalStatus) *SignalResourceInput {
-	s.Status = v
-	return s
-}
-
-// SetUniqueId sets the UniqueId field's value.
-func (s *SignalResourceInput) SetUniqueId(v string) *SignalResourceInput {
-	s.UniqueId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResourceOutput
@@ -8067,132 +6609,6 @@ func (s Stack) GoString() string {
 	return s.String()
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *Stack) SetCapabilities(v []Capability) *Stack {
-	s.Capabilities = v
-	return s
-}
-
-// SetChangeSetId sets the ChangeSetId field's value.
-func (s *Stack) SetChangeSetId(v string) *Stack {
-	s.ChangeSetId = &v
-	return s
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *Stack) SetCreationTime(v time.Time) *Stack {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDeletionTime sets the DeletionTime field's value.
-func (s *Stack) SetDeletionTime(v time.Time) *Stack {
-	s.DeletionTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Stack) SetDescription(v string) *Stack {
-	s.Description = &v
-	return s
-}
-
-// SetDisableRollback sets the DisableRollback field's value.
-func (s *Stack) SetDisableRollback(v bool) *Stack {
-	s.DisableRollback = &v
-	return s
-}
-
-// SetEnableTerminationProtection sets the EnableTerminationProtection field's value.
-func (s *Stack) SetEnableTerminationProtection(v bool) *Stack {
-	s.EnableTerminationProtection = &v
-	return s
-}
-
-// SetLastUpdatedTime sets the LastUpdatedTime field's value.
-func (s *Stack) SetLastUpdatedTime(v time.Time) *Stack {
-	s.LastUpdatedTime = &v
-	return s
-}
-
-// SetNotificationARNs sets the NotificationARNs field's value.
-func (s *Stack) SetNotificationARNs(v []string) *Stack {
-	s.NotificationARNs = v
-	return s
-}
-
-// SetOutputs sets the Outputs field's value.
-func (s *Stack) SetOutputs(v []Output) *Stack {
-	s.Outputs = v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *Stack) SetParameters(v []Parameter) *Stack {
-	s.Parameters = v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *Stack) SetParentId(v string) *Stack {
-	s.ParentId = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *Stack) SetRoleARN(v string) *Stack {
-	s.RoleARN = &v
-	return s
-}
-
-// SetRollbackConfiguration sets the RollbackConfiguration field's value.
-func (s *Stack) SetRollbackConfiguration(v *RollbackConfiguration) *Stack {
-	s.RollbackConfiguration = v
-	return s
-}
-
-// SetRootId sets the RootId field's value.
-func (s *Stack) SetRootId(v string) *Stack {
-	s.RootId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *Stack) SetStackId(v string) *Stack {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *Stack) SetStackName(v string) *Stack {
-	s.StackName = &v
-	return s
-}
-
-// SetStackStatus sets the StackStatus field's value.
-func (s *Stack) SetStackStatus(v StackStatus) *Stack {
-	s.StackStatus = v
-	return s
-}
-
-// SetStackStatusReason sets the StackStatusReason field's value.
-func (s *Stack) SetStackStatusReason(v string) *Stack {
-	s.StackStatusReason = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *Stack) SetTags(v []Tag) *Stack {
-	s.Tags = v
-	return s
-}
-
-// SetTimeoutInMinutes sets the TimeoutInMinutes field's value.
-func (s *Stack) SetTimeoutInMinutes(v int64) *Stack {
-	s.TimeoutInMinutes = &v
-	return s
-}
-
 // The StackEvent data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent
 type StackEvent struct {
@@ -8264,72 +6680,6 @@ func (s StackEvent) GoString() string {
 	return s.String()
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StackEvent) SetClientRequestToken(v string) *StackEvent {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetEventId sets the EventId field's value.
-func (s *StackEvent) SetEventId(v string) *StackEvent {
-	s.EventId = &v
-	return s
-}
-
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *StackEvent) SetLogicalResourceId(v string) *StackEvent {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetPhysicalResourceId sets the PhysicalResourceId field's value.
-func (s *StackEvent) SetPhysicalResourceId(v string) *StackEvent {
-	s.PhysicalResourceId = &v
-	return s
-}
-
-// SetResourceProperties sets the ResourceProperties field's value.
-func (s *StackEvent) SetResourceProperties(v string) *StackEvent {
-	s.ResourceProperties = &v
-	return s
-}
-
-// SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackEvent) SetResourceStatus(v ResourceStatus) *StackEvent {
-	s.ResourceStatus = v
-	return s
-}
-
-// SetResourceStatusReason sets the ResourceStatusReason field's value.
-func (s *StackEvent) SetResourceStatusReason(v string) *StackEvent {
-	s.ResourceStatusReason = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *StackEvent) SetResourceType(v string) *StackEvent {
-	s.ResourceType = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackEvent) SetStackId(v string) *StackEvent {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *StackEvent) SetStackName(v string) *StackEvent {
-	s.StackName = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *StackEvent) SetTimestamp(v time.Time) *StackEvent {
-	s.Timestamp = &v
-	return s
-}
-
 // An AWS CloudFormation stack, in a specific account and region, that's part
 // of a stack set operation. A stack instance is a reference to an attempted
 // or actual stack in a given account within a given region. A stack instance
@@ -8393,48 +6743,6 @@ func (s StackInstance) GoString() string {
 	return s.String()
 }
 
-// SetAccount sets the Account field's value.
-func (s *StackInstance) SetAccount(v string) *StackInstance {
-	s.Account = &v
-	return s
-}
-
-// SetParameterOverrides sets the ParameterOverrides field's value.
-func (s *StackInstance) SetParameterOverrides(v []Parameter) *StackInstance {
-	s.ParameterOverrides = v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *StackInstance) SetRegion(v string) *StackInstance {
-	s.Region = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackInstance) SetStackId(v string) *StackInstance {
-	s.StackId = &v
-	return s
-}
-
-// SetStackSetId sets the StackSetId field's value.
-func (s *StackInstance) SetStackSetId(v string) *StackInstance {
-	s.StackSetId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackInstance) SetStatus(v StackInstanceStatus) *StackInstance {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *StackInstance) SetStatusReason(v string) *StackInstance {
-	s.StatusReason = &v
-	return s
-}
-
 // The structure that contains summary information about a stack instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceSummary
 type StackInstanceSummary struct {
@@ -8485,42 +6793,6 @@ func (s StackInstanceSummary) String() string {
 // GoString returns the string representation
 func (s StackInstanceSummary) GoString() string {
 	return s.String()
-}
-
-// SetAccount sets the Account field's value.
-func (s *StackInstanceSummary) SetAccount(v string) *StackInstanceSummary {
-	s.Account = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *StackInstanceSummary) SetRegion(v string) *StackInstanceSummary {
-	s.Region = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackInstanceSummary) SetStackId(v string) *StackInstanceSummary {
-	s.StackId = &v
-	return s
-}
-
-// SetStackSetId sets the StackSetId field's value.
-func (s *StackInstanceSummary) SetStackSetId(v string) *StackInstanceSummary {
-	s.StackSetId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackInstanceSummary) SetStatus(v StackInstanceStatus) *StackInstanceSummary {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *StackInstanceSummary) SetStatusReason(v string) *StackInstanceSummary {
-	s.StatusReason = &v
-	return s
 }
 
 // The StackResource data type.
@@ -8575,60 +6847,6 @@ func (s StackResource) String() string {
 // GoString returns the string representation
 func (s StackResource) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *StackResource) SetDescription(v string) *StackResource {
-	s.Description = &v
-	return s
-}
-
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *StackResource) SetLogicalResourceId(v string) *StackResource {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetPhysicalResourceId sets the PhysicalResourceId field's value.
-func (s *StackResource) SetPhysicalResourceId(v string) *StackResource {
-	s.PhysicalResourceId = &v
-	return s
-}
-
-// SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackResource) SetResourceStatus(v ResourceStatus) *StackResource {
-	s.ResourceStatus = v
-	return s
-}
-
-// SetResourceStatusReason sets the ResourceStatusReason field's value.
-func (s *StackResource) SetResourceStatusReason(v string) *StackResource {
-	s.ResourceStatusReason = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *StackResource) SetResourceType(v string) *StackResource {
-	s.ResourceType = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackResource) SetStackId(v string) *StackResource {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *StackResource) SetStackName(v string) *StackResource {
-	s.StackName = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *StackResource) SetTimestamp(v time.Time) *StackResource {
-	s.Timestamp = &v
-	return s
 }
 
 // Contains detailed information about the specified stack resource.
@@ -8690,66 +6908,6 @@ func (s StackResourceDetail) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *StackResourceDetail) SetDescription(v string) *StackResourceDetail {
-	s.Description = &v
-	return s
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *StackResourceDetail) SetLastUpdatedTimestamp(v time.Time) *StackResourceDetail {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *StackResourceDetail) SetLogicalResourceId(v string) *StackResourceDetail {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *StackResourceDetail) SetMetadata(v string) *StackResourceDetail {
-	s.Metadata = &v
-	return s
-}
-
-// SetPhysicalResourceId sets the PhysicalResourceId field's value.
-func (s *StackResourceDetail) SetPhysicalResourceId(v string) *StackResourceDetail {
-	s.PhysicalResourceId = &v
-	return s
-}
-
-// SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackResourceDetail) SetResourceStatus(v ResourceStatus) *StackResourceDetail {
-	s.ResourceStatus = v
-	return s
-}
-
-// SetResourceStatusReason sets the ResourceStatusReason field's value.
-func (s *StackResourceDetail) SetResourceStatusReason(v string) *StackResourceDetail {
-	s.ResourceStatusReason = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *StackResourceDetail) SetResourceType(v string) *StackResourceDetail {
-	s.ResourceType = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackResourceDetail) SetStackId(v string) *StackResourceDetail {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *StackResourceDetail) SetStackName(v string) *StackResourceDetail {
-	s.StackName = &v
-	return s
-}
-
 // Contains high-level information about the specified stack resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary
 type StackResourceSummary struct {
@@ -8793,42 +6951,6 @@ func (s StackResourceSummary) String() string {
 // GoString returns the string representation
 func (s StackResourceSummary) GoString() string {
 	return s.String()
-}
-
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *StackResourceSummary) SetLastUpdatedTimestamp(v time.Time) *StackResourceSummary {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
-
-// SetLogicalResourceId sets the LogicalResourceId field's value.
-func (s *StackResourceSummary) SetLogicalResourceId(v string) *StackResourceSummary {
-	s.LogicalResourceId = &v
-	return s
-}
-
-// SetPhysicalResourceId sets the PhysicalResourceId field's value.
-func (s *StackResourceSummary) SetPhysicalResourceId(v string) *StackResourceSummary {
-	s.PhysicalResourceId = &v
-	return s
-}
-
-// SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackResourceSummary) SetResourceStatus(v ResourceStatus) *StackResourceSummary {
-	s.ResourceStatus = v
-	return s
-}
-
-// SetResourceStatusReason sets the ResourceStatusReason field's value.
-func (s *StackResourceSummary) SetResourceStatusReason(v string) *StackResourceSummary {
-	s.ResourceStatusReason = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *StackResourceSummary) SetResourceType(v string) *StackResourceSummary {
-	s.ResourceType = &v
-	return s
 }
 
 // A structure that contains information about a stack set. A stack set enables
@@ -8879,54 +7001,6 @@ func (s StackSet) String() string {
 // GoString returns the string representation
 func (s StackSet) GoString() string {
 	return s.String()
-}
-
-// SetCapabilities sets the Capabilities field's value.
-func (s *StackSet) SetCapabilities(v []Capability) *StackSet {
-	s.Capabilities = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *StackSet) SetDescription(v string) *StackSet {
-	s.Description = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *StackSet) SetParameters(v []Parameter) *StackSet {
-	s.Parameters = v
-	return s
-}
-
-// SetStackSetId sets the StackSetId field's value.
-func (s *StackSet) SetStackSetId(v string) *StackSet {
-	s.StackSetId = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *StackSet) SetStackSetName(v string) *StackSet {
-	s.StackSetName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackSet) SetStatus(v StackSetStatus) *StackSet {
-	s.Status = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *StackSet) SetTags(v []Tag) *StackSet {
-	s.Tags = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *StackSet) SetTemplateBody(v string) *StackSet {
-	s.TemplateBody = &v
-	return s
 }
 
 // The structure that contains information about a stack set operation.
@@ -8997,54 +7071,6 @@ func (s StackSetOperation) String() string {
 // GoString returns the string representation
 func (s StackSetOperation) GoString() string {
 	return s.String()
-}
-
-// SetAction sets the Action field's value.
-func (s *StackSetOperation) SetAction(v StackSetOperationAction) *StackSetOperation {
-	s.Action = v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *StackSetOperation) SetCreationTimestamp(v time.Time) *StackSetOperation {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetEndTimestamp sets the EndTimestamp field's value.
-func (s *StackSetOperation) SetEndTimestamp(v time.Time) *StackSetOperation {
-	s.EndTimestamp = &v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *StackSetOperation) SetOperationId(v string) *StackSetOperation {
-	s.OperationId = &v
-	return s
-}
-
-// SetOperationPreferences sets the OperationPreferences field's value.
-func (s *StackSetOperation) SetOperationPreferences(v *StackSetOperationPreferences) *StackSetOperation {
-	s.OperationPreferences = v
-	return s
-}
-
-// SetRetainStacks sets the RetainStacks field's value.
-func (s *StackSetOperation) SetRetainStacks(v bool) *StackSetOperation {
-	s.RetainStacks = &v
-	return s
-}
-
-// SetStackSetId sets the StackSetId field's value.
-func (s *StackSetOperation) SetStackSetId(v string) *StackSetOperation {
-	s.StackSetId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackSetOperation) SetStatus(v StackSetOperationStatus) *StackSetOperation {
-	s.Status = v
-	return s
 }
 
 // The user-specified preferences for how AWS CloudFormation performs a stack
@@ -9135,36 +7161,6 @@ func (s *StackSetOperationPreferences) Validate() error {
 	return nil
 }
 
-// SetFailureToleranceCount sets the FailureToleranceCount field's value.
-func (s *StackSetOperationPreferences) SetFailureToleranceCount(v int64) *StackSetOperationPreferences {
-	s.FailureToleranceCount = &v
-	return s
-}
-
-// SetFailureTolerancePercentage sets the FailureTolerancePercentage field's value.
-func (s *StackSetOperationPreferences) SetFailureTolerancePercentage(v int64) *StackSetOperationPreferences {
-	s.FailureTolerancePercentage = &v
-	return s
-}
-
-// SetMaxConcurrentCount sets the MaxConcurrentCount field's value.
-func (s *StackSetOperationPreferences) SetMaxConcurrentCount(v int64) *StackSetOperationPreferences {
-	s.MaxConcurrentCount = &v
-	return s
-}
-
-// SetMaxConcurrentPercentage sets the MaxConcurrentPercentage field's value.
-func (s *StackSetOperationPreferences) SetMaxConcurrentPercentage(v int64) *StackSetOperationPreferences {
-	s.MaxConcurrentPercentage = &v
-	return s
-}
-
-// SetRegionOrder sets the RegionOrder field's value.
-func (s *StackSetOperationPreferences) SetRegionOrder(v []string) *StackSetOperationPreferences {
-	s.RegionOrder = v
-	return s
-}
-
 // The structure that contains information about a specified operation's results
 // for a given account in a given region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary
@@ -9216,36 +7212,6 @@ func (s StackSetOperationResultSummary) String() string {
 // GoString returns the string representation
 func (s StackSetOperationResultSummary) GoString() string {
 	return s.String()
-}
-
-// SetAccount sets the Account field's value.
-func (s *StackSetOperationResultSummary) SetAccount(v string) *StackSetOperationResultSummary {
-	s.Account = &v
-	return s
-}
-
-// SetAccountGateResult sets the AccountGateResult field's value.
-func (s *StackSetOperationResultSummary) SetAccountGateResult(v *AccountGateResult) *StackSetOperationResultSummary {
-	s.AccountGateResult = v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *StackSetOperationResultSummary) SetRegion(v string) *StackSetOperationResultSummary {
-	s.Region = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackSetOperationResultSummary) SetStatus(v StackSetOperationResultStatus) *StackSetOperationResultSummary {
-	s.Status = v
-	return s
-}
-
-// SetStatusReason sets the StatusReason field's value.
-func (s *StackSetOperationResultSummary) SetStatusReason(v string) *StackSetOperationResultSummary {
-	s.StatusReason = &v
-	return s
 }
 
 // The structures that contain summary information about the specified operation.
@@ -9306,36 +7272,6 @@ func (s StackSetOperationSummary) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *StackSetOperationSummary) SetAction(v StackSetOperationAction) *StackSetOperationSummary {
-	s.Action = v
-	return s
-}
-
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *StackSetOperationSummary) SetCreationTimestamp(v time.Time) *StackSetOperationSummary {
-	s.CreationTimestamp = &v
-	return s
-}
-
-// SetEndTimestamp sets the EndTimestamp field's value.
-func (s *StackSetOperationSummary) SetEndTimestamp(v time.Time) *StackSetOperationSummary {
-	s.EndTimestamp = &v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *StackSetOperationSummary) SetOperationId(v string) *StackSetOperationSummary {
-	s.OperationId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackSetOperationSummary) SetStatus(v StackSetOperationStatus) *StackSetOperationSummary {
-	s.Status = v
-	return s
-}
-
 // The structures that contain summary information about the specified stack
 // set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary
@@ -9364,30 +7300,6 @@ func (s StackSetSummary) String() string {
 // GoString returns the string representation
 func (s StackSetSummary) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *StackSetSummary) SetDescription(v string) *StackSetSummary {
-	s.Description = &v
-	return s
-}
-
-// SetStackSetId sets the StackSetId field's value.
-func (s *StackSetSummary) SetStackSetId(v string) *StackSetSummary {
-	s.StackSetId = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *StackSetSummary) SetStackSetName(v string) *StackSetSummary {
-	s.StackSetName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *StackSetSummary) SetStatus(v StackSetStatus) *StackSetSummary {
-	s.Status = v
-	return s
 }
 
 // The StackSummary Data Type
@@ -9452,66 +7364,6 @@ func (s StackSummary) GoString() string {
 	return s.String()
 }
 
-// SetCreationTime sets the CreationTime field's value.
-func (s *StackSummary) SetCreationTime(v time.Time) *StackSummary {
-	s.CreationTime = &v
-	return s
-}
-
-// SetDeletionTime sets the DeletionTime field's value.
-func (s *StackSummary) SetDeletionTime(v time.Time) *StackSummary {
-	s.DeletionTime = &v
-	return s
-}
-
-// SetLastUpdatedTime sets the LastUpdatedTime field's value.
-func (s *StackSummary) SetLastUpdatedTime(v time.Time) *StackSummary {
-	s.LastUpdatedTime = &v
-	return s
-}
-
-// SetParentId sets the ParentId field's value.
-func (s *StackSummary) SetParentId(v string) *StackSummary {
-	s.ParentId = &v
-	return s
-}
-
-// SetRootId sets the RootId field's value.
-func (s *StackSummary) SetRootId(v string) *StackSummary {
-	s.RootId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackSummary) SetStackId(v string) *StackSummary {
-	s.StackId = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *StackSummary) SetStackName(v string) *StackSummary {
-	s.StackName = &v
-	return s
-}
-
-// SetStackStatus sets the StackStatus field's value.
-func (s *StackSummary) SetStackStatus(v StackStatus) *StackSummary {
-	s.StackStatus = v
-	return s
-}
-
-// SetStackStatusReason sets the StackStatusReason field's value.
-func (s *StackSummary) SetStackStatusReason(v string) *StackSummary {
-	s.StackStatusReason = &v
-	return s
-}
-
-// SetTemplateDescription sets the TemplateDescription field's value.
-func (s *StackSummary) SetTemplateDescription(v string) *StackSummary {
-	s.TemplateDescription = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationInput
 type StopStackSetOperationInput struct {
 	_ struct{} `type:"structure"`
@@ -9557,18 +7409,6 @@ func (s *StopStackSetOperationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *StopStackSetOperationInput) SetOperationId(v string) *StopStackSetOperationInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *StopStackSetOperationInput) SetStackSetName(v string) *StopStackSetOperationInput {
-	s.StackSetName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperationOutput
@@ -9647,18 +7487,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // The TemplateParameter data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateParameter
 type TemplateParameter struct {
@@ -9686,30 +7514,6 @@ func (s TemplateParameter) String() string {
 // GoString returns the string representation
 func (s TemplateParameter) GoString() string {
 	return s.String()
-}
-
-// SetDefaultValue sets the DefaultValue field's value.
-func (s *TemplateParameter) SetDefaultValue(v string) *TemplateParameter {
-	s.DefaultValue = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *TemplateParameter) SetDescription(v string) *TemplateParameter {
-	s.Description = &v
-	return s
-}
-
-// SetNoEcho sets the NoEcho field's value.
-func (s *TemplateParameter) SetNoEcho(v bool) *TemplateParameter {
-	s.NoEcho = &v
-	return s
-}
-
-// SetParameterKey sets the ParameterKey field's value.
-func (s *TemplateParameter) SetParameterKey(v string) *TemplateParameter {
-	s.ParameterKey = &v
-	return s
 }
 
 // The input for an UpdateStack action.
@@ -9935,102 +7739,6 @@ func (s *UpdateStackInput) Validate() error {
 	return nil
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *UpdateStackInput) SetCapabilities(v []Capability) *UpdateStackInput {
-	s.Capabilities = v
-	return s
-}
-
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *UpdateStackInput) SetClientRequestToken(v string) *UpdateStackInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetNotificationARNs sets the NotificationARNs field's value.
-func (s *UpdateStackInput) SetNotificationARNs(v []string) *UpdateStackInput {
-	s.NotificationARNs = v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *UpdateStackInput) SetParameters(v []Parameter) *UpdateStackInput {
-	s.Parameters = v
-	return s
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *UpdateStackInput) SetResourceTypes(v []string) *UpdateStackInput {
-	s.ResourceTypes = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *UpdateStackInput) SetRoleARN(v string) *UpdateStackInput {
-	s.RoleARN = &v
-	return s
-}
-
-// SetRollbackConfiguration sets the RollbackConfiguration field's value.
-func (s *UpdateStackInput) SetRollbackConfiguration(v *RollbackConfiguration) *UpdateStackInput {
-	s.RollbackConfiguration = v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *UpdateStackInput) SetStackName(v string) *UpdateStackInput {
-	s.StackName = &v
-	return s
-}
-
-// SetStackPolicyBody sets the StackPolicyBody field's value.
-func (s *UpdateStackInput) SetStackPolicyBody(v string) *UpdateStackInput {
-	s.StackPolicyBody = &v
-	return s
-}
-
-// SetStackPolicyDuringUpdateBody sets the StackPolicyDuringUpdateBody field's value.
-func (s *UpdateStackInput) SetStackPolicyDuringUpdateBody(v string) *UpdateStackInput {
-	s.StackPolicyDuringUpdateBody = &v
-	return s
-}
-
-// SetStackPolicyDuringUpdateURL sets the StackPolicyDuringUpdateURL field's value.
-func (s *UpdateStackInput) SetStackPolicyDuringUpdateURL(v string) *UpdateStackInput {
-	s.StackPolicyDuringUpdateURL = &v
-	return s
-}
-
-// SetStackPolicyURL sets the StackPolicyURL field's value.
-func (s *UpdateStackInput) SetStackPolicyURL(v string) *UpdateStackInput {
-	s.StackPolicyURL = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *UpdateStackInput) SetTags(v []Tag) *UpdateStackInput {
-	s.Tags = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *UpdateStackInput) SetTemplateBody(v string) *UpdateStackInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *UpdateStackInput) SetTemplateURL(v string) *UpdateStackInput {
-	s.TemplateURL = &v
-	return s
-}
-
-// SetUsePreviousTemplate sets the UsePreviousTemplate field's value.
-func (s *UpdateStackInput) SetUsePreviousTemplate(v bool) *UpdateStackInput {
-	s.UsePreviousTemplate = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInstancesInput
 type UpdateStackInstancesInput struct {
 	_ struct{} `type:"structure"`
@@ -10146,42 +7854,6 @@ func (s *UpdateStackInstancesInput) Validate() error {
 	return nil
 }
 
-// SetAccounts sets the Accounts field's value.
-func (s *UpdateStackInstancesInput) SetAccounts(v []string) *UpdateStackInstancesInput {
-	s.Accounts = v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *UpdateStackInstancesInput) SetOperationId(v string) *UpdateStackInstancesInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetOperationPreferences sets the OperationPreferences field's value.
-func (s *UpdateStackInstancesInput) SetOperationPreferences(v *StackSetOperationPreferences) *UpdateStackInstancesInput {
-	s.OperationPreferences = v
-	return s
-}
-
-// SetParameterOverrides sets the ParameterOverrides field's value.
-func (s *UpdateStackInstancesInput) SetParameterOverrides(v []Parameter) *UpdateStackInstancesInput {
-	s.ParameterOverrides = v
-	return s
-}
-
-// SetRegions sets the Regions field's value.
-func (s *UpdateStackInstancesInput) SetRegions(v []string) *UpdateStackInstancesInput {
-	s.Regions = v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *UpdateStackInstancesInput) SetStackSetName(v string) *UpdateStackInstancesInput {
-	s.StackSetName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInstancesOutput
 type UpdateStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -10205,12 +7877,6 @@ func (s UpdateStackInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateStackInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *UpdateStackInstancesOutput) SetOperationId(v string) *UpdateStackInstancesOutput {
-	s.OperationId = &v
-	return s
 }
 
 // The output for an UpdateStack action.
@@ -10237,12 +7903,6 @@ func (s UpdateStackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackId sets the StackId field's value.
-func (s *UpdateStackOutput) SetStackId(v string) *UpdateStackOutput {
-	s.StackId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetInput
@@ -10415,66 +8075,6 @@ func (s *UpdateStackSetInput) Validate() error {
 	return nil
 }
 
-// SetCapabilities sets the Capabilities field's value.
-func (s *UpdateStackSetInput) SetCapabilities(v []Capability) *UpdateStackSetInput {
-	s.Capabilities = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateStackSetInput) SetDescription(v string) *UpdateStackSetInput {
-	s.Description = &v
-	return s
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *UpdateStackSetInput) SetOperationId(v string) *UpdateStackSetInput {
-	s.OperationId = &v
-	return s
-}
-
-// SetOperationPreferences sets the OperationPreferences field's value.
-func (s *UpdateStackSetInput) SetOperationPreferences(v *StackSetOperationPreferences) *UpdateStackSetInput {
-	s.OperationPreferences = v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *UpdateStackSetInput) SetParameters(v []Parameter) *UpdateStackSetInput {
-	s.Parameters = v
-	return s
-}
-
-// SetStackSetName sets the StackSetName field's value.
-func (s *UpdateStackSetInput) SetStackSetName(v string) *UpdateStackSetInput {
-	s.StackSetName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *UpdateStackSetInput) SetTags(v []Tag) *UpdateStackSetInput {
-	s.Tags = v
-	return s
-}
-
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *UpdateStackSetInput) SetTemplateBody(v string) *UpdateStackSetInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *UpdateStackSetInput) SetTemplateURL(v string) *UpdateStackSetInput {
-	s.TemplateURL = &v
-	return s
-}
-
-// SetUsePreviousTemplate sets the UsePreviousTemplate field's value.
-func (s *UpdateStackSetInput) SetUsePreviousTemplate(v bool) *UpdateStackSetInput {
-	s.UsePreviousTemplate = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetOutput
 type UpdateStackSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -10498,12 +8098,6 @@ func (s UpdateStackSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateStackSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOperationId sets the OperationId field's value.
-func (s *UpdateStackSetOutput) SetOperationId(v string) *UpdateStackSetOutput {
-	s.OperationId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtectionInput
@@ -10553,18 +8147,6 @@ func (s *UpdateTerminationProtectionInput) Validate() error {
 	return nil
 }
 
-// SetEnableTerminationProtection sets the EnableTerminationProtection field's value.
-func (s *UpdateTerminationProtectionInput) SetEnableTerminationProtection(v bool) *UpdateTerminationProtectionInput {
-	s.EnableTerminationProtection = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *UpdateTerminationProtectionInput) SetStackName(v string) *UpdateTerminationProtectionInput {
-	s.StackName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtectionOutput
 type UpdateTerminationProtectionOutput struct {
 	_ struct{} `type:"structure"`
@@ -10588,12 +8170,6 @@ func (s UpdateTerminationProtectionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTerminationProtectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackId sets the StackId field's value.
-func (s *UpdateTerminationProtectionOutput) SetStackId(v string) *UpdateTerminationProtectionOutput {
-	s.StackId = &v
-	return s
 }
 
 // The input for ValidateTemplate action.
@@ -10646,18 +8222,6 @@ func (s *ValidateTemplateInput) Validate() error {
 	return nil
 }
 
-// SetTemplateBody sets the TemplateBody field's value.
-func (s *ValidateTemplateInput) SetTemplateBody(v string) *ValidateTemplateInput {
-	s.TemplateBody = &v
-	return s
-}
-
-// SetTemplateURL sets the TemplateURL field's value.
-func (s *ValidateTemplateInput) SetTemplateURL(v string) *ValidateTemplateInput {
-	s.TemplateURL = &v
-	return s
-}
-
 // The output for ValidateTemplate action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplateOutput
 type ValidateTemplateOutput struct {
@@ -10702,36 +8266,6 @@ func (s ValidateTemplateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ValidateTemplateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCapabilities sets the Capabilities field's value.
-func (s *ValidateTemplateOutput) SetCapabilities(v []Capability) *ValidateTemplateOutput {
-	s.Capabilities = v
-	return s
-}
-
-// SetCapabilitiesReason sets the CapabilitiesReason field's value.
-func (s *ValidateTemplateOutput) SetCapabilitiesReason(v string) *ValidateTemplateOutput {
-	s.CapabilitiesReason = &v
-	return s
-}
-
-// SetDeclaredTransforms sets the DeclaredTransforms field's value.
-func (s *ValidateTemplateOutput) SetDeclaredTransforms(v []string) *ValidateTemplateOutput {
-	s.DeclaredTransforms = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ValidateTemplateOutput) SetDescription(v string) *ValidateTemplateOutput {
-	s.Description = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *ValidateTemplateOutput) SetParameters(v []TemplateParameter) *ValidateTemplateOutput {
-	s.Parameters = v
-	return s
 }
 
 type AccountGateStatus string

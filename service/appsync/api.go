@@ -1312,24 +1312,6 @@ func (s ApiKey) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *ApiKey) SetDescription(v string) *ApiKey {
-	s.Description = &v
-	return s
-}
-
-// SetExpires sets the Expires field's value.
-func (s *ApiKey) SetExpires(v int64) *ApiKey {
-	s.Expires = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *ApiKey) SetId(v string) *ApiKey {
-	s.Id = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKeyRequest
 type CreateApiKeyInput struct {
 	_ struct{} `type:"structure"`
@@ -1367,18 +1349,6 @@ func (s *CreateApiKeyInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *CreateApiKeyInput) SetApiId(v string) *CreateApiKeyInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateApiKeyInput) SetDescription(v string) *CreateApiKeyInput {
-	s.Description = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKeyResponse
 type CreateApiKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -1402,12 +1372,6 @@ func (s CreateApiKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateApiKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApiKey sets the ApiKey field's value.
-func (s *CreateApiKeyOutput) SetApiKey(v *ApiKey) *CreateApiKeyOutput {
-	s.ApiKey = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest
@@ -1492,54 +1456,6 @@ func (s *CreateDataSourceInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *CreateDataSourceInput) SetApiId(v string) *CreateDataSourceInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateDataSourceInput) SetDescription(v string) *CreateDataSourceInput {
-	s.Description = &v
-	return s
-}
-
-// SetDynamodbConfig sets the DynamodbConfig field's value.
-func (s *CreateDataSourceInput) SetDynamodbConfig(v *DynamodbDataSourceConfig) *CreateDataSourceInput {
-	s.DynamodbConfig = v
-	return s
-}
-
-// SetElasticsearchConfig sets the ElasticsearchConfig field's value.
-func (s *CreateDataSourceInput) SetElasticsearchConfig(v *ElasticsearchDataSourceConfig) *CreateDataSourceInput {
-	s.ElasticsearchConfig = v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *CreateDataSourceInput) SetLambdaConfig(v *LambdaDataSourceConfig) *CreateDataSourceInput {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateDataSourceInput) SetName(v string) *CreateDataSourceInput {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *CreateDataSourceInput) SetServiceRoleArn(v string) *CreateDataSourceInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateDataSourceInput) SetType(v DataSourceType) *CreateDataSourceInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceResponse
 type CreateDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1563,12 +1479,6 @@ func (s CreateDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDataSource sets the DataSource field's value.
-func (s *CreateDataSourceOutput) SetDataSource(v *DataSource) *CreateDataSourceOutput {
-	s.DataSource = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest
@@ -1621,24 +1531,6 @@ func (s *CreateGraphqlApiInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationType sets the AuthenticationType field's value.
-func (s *CreateGraphqlApiInput) SetAuthenticationType(v AuthenticationType) *CreateGraphqlApiInput {
-	s.AuthenticationType = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateGraphqlApiInput) SetName(v string) *CreateGraphqlApiInput {
-	s.Name = &v
-	return s
-}
-
-// SetUserPoolConfig sets the UserPoolConfig field's value.
-func (s *CreateGraphqlApiInput) SetUserPoolConfig(v *UserPoolConfig) *CreateGraphqlApiInput {
-	s.UserPoolConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiResponse
 type CreateGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -1662,12 +1554,6 @@ func (s CreateGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGraphqlApi sets the GraphqlApi field's value.
-func (s *CreateGraphqlApiOutput) SetGraphqlApi(v *GraphqlApi) *CreateGraphqlApiOutput {
-	s.GraphqlApi = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest
@@ -1747,42 +1633,6 @@ func (s *CreateResolverInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *CreateResolverInput) SetApiId(v string) *CreateResolverInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDataSourceName sets the DataSourceName field's value.
-func (s *CreateResolverInput) SetDataSourceName(v string) *CreateResolverInput {
-	s.DataSourceName = &v
-	return s
-}
-
-// SetFieldName sets the FieldName field's value.
-func (s *CreateResolverInput) SetFieldName(v string) *CreateResolverInput {
-	s.FieldName = &v
-	return s
-}
-
-// SetRequestMappingTemplate sets the RequestMappingTemplate field's value.
-func (s *CreateResolverInput) SetRequestMappingTemplate(v string) *CreateResolverInput {
-	s.RequestMappingTemplate = &v
-	return s
-}
-
-// SetResponseMappingTemplate sets the ResponseMappingTemplate field's value.
-func (s *CreateResolverInput) SetResponseMappingTemplate(v string) *CreateResolverInput {
-	s.ResponseMappingTemplate = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *CreateResolverInput) SetTypeName(v string) *CreateResolverInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverResponse
 type CreateResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -1806,12 +1656,6 @@ func (s CreateResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResolver sets the Resolver field's value.
-func (s *CreateResolverOutput) SetResolver(v *Resolver) *CreateResolverOutput {
-	s.Resolver = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateTypeRequest
@@ -1867,24 +1711,6 @@ func (s *CreateTypeInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *CreateTypeInput) SetApiId(v string) *CreateTypeInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *CreateTypeInput) SetDefinition(v string) *CreateTypeInput {
-	s.Definition = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *CreateTypeInput) SetFormat(v TypeDefinitionFormat) *CreateTypeInput {
-	s.Format = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateTypeResponse
 type CreateTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -1908,12 +1734,6 @@ func (s CreateTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetType sets the Type field's value.
-func (s *CreateTypeOutput) SetType(v *Type) *CreateTypeOutput {
-	s.Type = v
-	return s
 }
 
 // Describes a data source.
@@ -1957,54 +1777,6 @@ func (s DataSource) GoString() string {
 	return s.String()
 }
 
-// SetDataSourceArn sets the DataSourceArn field's value.
-func (s *DataSource) SetDataSourceArn(v string) *DataSource {
-	s.DataSourceArn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DataSource) SetDescription(v string) *DataSource {
-	s.Description = &v
-	return s
-}
-
-// SetDynamodbConfig sets the DynamodbConfig field's value.
-func (s *DataSource) SetDynamodbConfig(v *DynamodbDataSourceConfig) *DataSource {
-	s.DynamodbConfig = v
-	return s
-}
-
-// SetElasticsearchConfig sets the ElasticsearchConfig field's value.
-func (s *DataSource) SetElasticsearchConfig(v *ElasticsearchDataSourceConfig) *DataSource {
-	s.ElasticsearchConfig = v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *DataSource) SetLambdaConfig(v *LambdaDataSourceConfig) *DataSource {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DataSource) SetName(v string) *DataSource {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *DataSource) SetServiceRoleArn(v string) *DataSource {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DataSource) SetType(v DataSourceType) *DataSource {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiKeyRequest
 type DeleteApiKeyInput struct {
 	_ struct{} `type:"structure"`
@@ -2046,18 +1818,6 @@ func (s *DeleteApiKeyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApiId sets the ApiId field's value.
-func (s *DeleteApiKeyInput) SetApiId(v string) *DeleteApiKeyInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *DeleteApiKeyInput) SetId(v string) *DeleteApiKeyInput {
-	s.Id = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiKeyResponse
@@ -2125,18 +1885,6 @@ func (s *DeleteDataSourceInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *DeleteDataSourceInput) SetApiId(v string) *DeleteDataSourceInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteDataSourceInput) SetName(v string) *DeleteDataSourceInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteDataSourceResponse
 type DeleteDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2191,12 +1939,6 @@ func (s *DeleteGraphqlApiInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApiId sets the ApiId field's value.
-func (s *DeleteGraphqlApiInput) SetApiId(v string) *DeleteGraphqlApiInput {
-	s.ApiId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteGraphqlApiResponse
@@ -2273,24 +2015,6 @@ func (s *DeleteResolverInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *DeleteResolverInput) SetApiId(v string) *DeleteResolverInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetFieldName sets the FieldName field's value.
-func (s *DeleteResolverInput) SetFieldName(v string) *DeleteResolverInput {
-	s.FieldName = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *DeleteResolverInput) SetTypeName(v string) *DeleteResolverInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteResolverResponse
 type DeleteResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -2354,18 +2078,6 @@ func (s *DeleteTypeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApiId sets the ApiId field's value.
-func (s *DeleteTypeInput) SetApiId(v string) *DeleteTypeInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *DeleteTypeInput) SetTypeName(v string) *DeleteTypeInput {
-	s.TypeName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteTypeResponse
@@ -2437,24 +2149,6 @@ func (s *DynamodbDataSourceConfig) Validate() error {
 	return nil
 }
 
-// SetAwsRegion sets the AwsRegion field's value.
-func (s *DynamodbDataSourceConfig) SetAwsRegion(v string) *DynamodbDataSourceConfig {
-	s.AwsRegion = &v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *DynamodbDataSourceConfig) SetTableName(v string) *DynamodbDataSourceConfig {
-	s.TableName = &v
-	return s
-}
-
-// SetUseCallerCredentials sets the UseCallerCredentials field's value.
-func (s *DynamodbDataSourceConfig) SetUseCallerCredentials(v bool) *DynamodbDataSourceConfig {
-	s.UseCallerCredentials = &v
-	return s
-}
-
 // Describes an Elasticsearch data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ElasticsearchDataSourceConfig
 type ElasticsearchDataSourceConfig struct {
@@ -2497,18 +2191,6 @@ func (s *ElasticsearchDataSourceConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAwsRegion sets the AwsRegion field's value.
-func (s *ElasticsearchDataSourceConfig) SetAwsRegion(v string) *ElasticsearchDataSourceConfig {
-	s.AwsRegion = &v
-	return s
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *ElasticsearchDataSourceConfig) SetEndpoint(v string) *ElasticsearchDataSourceConfig {
-	s.Endpoint = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceRequest
@@ -2554,18 +2236,6 @@ func (s *GetDataSourceInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GetDataSourceInput) SetApiId(v string) *GetDataSourceInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GetDataSourceInput) SetName(v string) *GetDataSourceInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceResponse
 type GetDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2589,12 +2259,6 @@ func (s GetDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDataSource sets the DataSource field's value.
-func (s *GetDataSourceOutput) SetDataSource(v *DataSource) *GetDataSourceOutput {
-	s.DataSource = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiRequest
@@ -2631,12 +2295,6 @@ func (s *GetGraphqlApiInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GetGraphqlApiInput) SetApiId(v string) *GetGraphqlApiInput {
-	s.ApiId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiResponse
 type GetGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -2660,12 +2318,6 @@ func (s GetGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGraphqlApi sets the GraphqlApi field's value.
-func (s *GetGraphqlApiOutput) SetGraphqlApi(v *GraphqlApi) *GetGraphqlApiOutput {
-	s.GraphqlApi = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetIntrospectionSchemaRequest
@@ -2710,18 +2362,6 @@ func (s *GetIntrospectionSchemaInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GetIntrospectionSchemaInput) SetApiId(v string) *GetIntrospectionSchemaInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *GetIntrospectionSchemaInput) SetFormat(v OutputType) *GetIntrospectionSchemaInput {
-	s.Format = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetIntrospectionSchemaResponse
 type GetIntrospectionSchemaOutput struct {
 	_ struct{} `type:"structure" payload:"Schema"`
@@ -2747,12 +2387,6 @@ func (s GetIntrospectionSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIntrospectionSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSchema sets the Schema field's value.
-func (s *GetIntrospectionSchemaOutput) SetSchema(v []byte) *GetIntrospectionSchemaOutput {
-	s.Schema = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolverRequest
@@ -2807,24 +2441,6 @@ func (s *GetResolverInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GetResolverInput) SetApiId(v string) *GetResolverInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetFieldName sets the FieldName field's value.
-func (s *GetResolverInput) SetFieldName(v string) *GetResolverInput {
-	s.FieldName = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *GetResolverInput) SetTypeName(v string) *GetResolverInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolverResponse
 type GetResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -2848,12 +2464,6 @@ func (s GetResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResolver sets the Resolver field's value.
-func (s *GetResolverOutput) SetResolver(v *Resolver) *GetResolverOutput {
-	s.Resolver = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatusRequest
@@ -2890,12 +2500,6 @@ func (s *GetSchemaCreationStatusInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GetSchemaCreationStatusInput) SetApiId(v string) *GetSchemaCreationStatusInput {
-	s.ApiId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatusResponse
 type GetSchemaCreationStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -2923,18 +2527,6 @@ func (s GetSchemaCreationStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSchemaCreationStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDetails sets the Details field's value.
-func (s *GetSchemaCreationStatusOutput) SetDetails(v string) *GetSchemaCreationStatusOutput {
-	s.Details = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetSchemaCreationStatusOutput) SetStatus(v SchemaStatus) *GetSchemaCreationStatusOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetTypeRequest
@@ -2988,24 +2580,6 @@ func (s *GetTypeInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GetTypeInput) SetApiId(v string) *GetTypeInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *GetTypeInput) SetFormat(v TypeDefinitionFormat) *GetTypeInput {
-	s.Format = v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *GetTypeInput) SetTypeName(v string) *GetTypeInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetTypeResponse
 type GetTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3029,12 +2603,6 @@ func (s GetTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetType sets the Type field's value.
-func (s *GetTypeOutput) SetType(v *Type) *GetTypeOutput {
-	s.Type = v
-	return s
 }
 
 // Describes a GraphQL API.
@@ -3071,42 +2639,6 @@ func (s GraphqlApi) GoString() string {
 	return s.String()
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *GraphqlApi) SetApiId(v string) *GraphqlApi {
-	s.ApiId = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *GraphqlApi) SetArn(v string) *GraphqlApi {
-	s.Arn = &v
-	return s
-}
-
-// SetAuthenticationType sets the AuthenticationType field's value.
-func (s *GraphqlApi) SetAuthenticationType(v AuthenticationType) *GraphqlApi {
-	s.AuthenticationType = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *GraphqlApi) SetName(v string) *GraphqlApi {
-	s.Name = &v
-	return s
-}
-
-// SetUris sets the Uris field's value.
-func (s *GraphqlApi) SetUris(v map[string]string) *GraphqlApi {
-	s.Uris = v
-	return s
-}
-
-// SetUserPoolConfig sets the UserPoolConfig field's value.
-func (s *GraphqlApi) SetUserPoolConfig(v *UserPoolConfig) *GraphqlApi {
-	s.UserPoolConfig = v
-	return s
-}
-
 // Describes a Lambda data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaDataSourceConfig
 type LambdaDataSourceConfig struct {
@@ -3140,12 +2672,6 @@ func (s *LambdaDataSourceConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLambdaFunctionArn sets the LambdaFunctionArn field's value.
-func (s *LambdaDataSourceConfig) SetLambdaFunctionArn(v string) *LambdaDataSourceConfig {
-	s.LambdaFunctionArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApiKeysRequest
@@ -3189,24 +2715,6 @@ func (s *ListApiKeysInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *ListApiKeysInput) SetApiId(v string) *ListApiKeysInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListApiKeysInput) SetMaxResults(v int64) *ListApiKeysInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApiKeysInput) SetNextToken(v string) *ListApiKeysInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApiKeysResponse
 type ListApiKeysOutput struct {
 	_ struct{} `type:"structure"`
@@ -3234,18 +2742,6 @@ func (s ListApiKeysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListApiKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApiKeys sets the ApiKeys field's value.
-func (s *ListApiKeysOutput) SetApiKeys(v []ApiKey) *ListApiKeysOutput {
-	s.ApiKeys = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApiKeysOutput) SetNextToken(v string) *ListApiKeysOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSourcesRequest
@@ -3289,24 +2785,6 @@ func (s *ListDataSourcesInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *ListDataSourcesInput) SetApiId(v string) *ListDataSourcesInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDataSourcesInput) SetMaxResults(v int64) *ListDataSourcesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDataSourcesInput) SetNextToken(v string) *ListDataSourcesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSourcesResponse
 type ListDataSourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3336,18 +2814,6 @@ func (s ListDataSourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDataSources sets the DataSources field's value.
-func (s *ListDataSourcesOutput) SetDataSources(v []DataSource) *ListDataSourcesOutput {
-	s.DataSources = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDataSourcesOutput) SetNextToken(v string) *ListDataSourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApisRequest
 type ListGraphqlApisInput struct {
 	_ struct{} `type:"structure"`
@@ -3368,18 +2834,6 @@ func (s ListGraphqlApisInput) String() string {
 // GoString returns the string representation
 func (s ListGraphqlApisInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGraphqlApisInput) SetMaxResults(v int64) *ListGraphqlApisInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGraphqlApisInput) SetNextToken(v string) *ListGraphqlApisInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApisResponse
@@ -3409,18 +2863,6 @@ func (s ListGraphqlApisOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGraphqlApisOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGraphqlApis sets the GraphqlApis field's value.
-func (s *ListGraphqlApisOutput) SetGraphqlApis(v []GraphqlApi) *ListGraphqlApisOutput {
-	s.GraphqlApis = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGraphqlApisOutput) SetNextToken(v string) *ListGraphqlApisOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversRequest
@@ -3473,30 +2915,6 @@ func (s *ListResolversInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *ListResolversInput) SetApiId(v string) *ListResolversInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListResolversInput) SetMaxResults(v int64) *ListResolversInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResolversInput) SetNextToken(v string) *ListResolversInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *ListResolversInput) SetTypeName(v string) *ListResolversInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversResponse
 type ListResolversOutput struct {
 	_ struct{} `type:"structure"`
@@ -3524,18 +2942,6 @@ func (s ListResolversOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResolversOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListResolversOutput) SetNextToken(v string) *ListResolversOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResolvers sets the Resolvers field's value.
-func (s *ListResolversOutput) SetResolvers(v []Resolver) *ListResolversOutput {
-	s.Resolvers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTypesRequest
@@ -3587,30 +2993,6 @@ func (s *ListTypesInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *ListTypesInput) SetApiId(v string) *ListTypesInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *ListTypesInput) SetFormat(v TypeDefinitionFormat) *ListTypesInput {
-	s.Format = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTypesInput) SetMaxResults(v int64) *ListTypesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTypesInput) SetNextToken(v string) *ListTypesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTypesResponse
 type ListTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3638,18 +3020,6 @@ func (s ListTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTypesOutput) SetNextToken(v string) *ListTypesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTypes sets the Types field's value.
-func (s *ListTypesOutput) SetTypes(v []Type) *ListTypesOutput {
-	s.Types = v
-	return s
 }
 
 // Describes a resolver.
@@ -3684,42 +3054,6 @@ func (s Resolver) String() string {
 // GoString returns the string representation
 func (s Resolver) GoString() string {
 	return s.String()
-}
-
-// SetDataSourceName sets the DataSourceName field's value.
-func (s *Resolver) SetDataSourceName(v string) *Resolver {
-	s.DataSourceName = &v
-	return s
-}
-
-// SetFieldName sets the FieldName field's value.
-func (s *Resolver) SetFieldName(v string) *Resolver {
-	s.FieldName = &v
-	return s
-}
-
-// SetRequestMappingTemplate sets the RequestMappingTemplate field's value.
-func (s *Resolver) SetRequestMappingTemplate(v string) *Resolver {
-	s.RequestMappingTemplate = &v
-	return s
-}
-
-// SetResolverArn sets the ResolverArn field's value.
-func (s *Resolver) SetResolverArn(v string) *Resolver {
-	s.ResolverArn = &v
-	return s
-}
-
-// SetResponseMappingTemplate sets the ResponseMappingTemplate field's value.
-func (s *Resolver) SetResponseMappingTemplate(v string) *Resolver {
-	s.ResponseMappingTemplate = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *Resolver) SetTypeName(v string) *Resolver {
-	s.TypeName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreationRequest
@@ -3767,18 +3101,6 @@ func (s *StartSchemaCreationInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *StartSchemaCreationInput) SetApiId(v string) *StartSchemaCreationInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *StartSchemaCreationInput) SetDefinition(v []byte) *StartSchemaCreationInput {
-	s.Definition = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreationResponse
 type StartSchemaCreationOutput struct {
 	_ struct{} `type:"structure"`
@@ -3803,12 +3125,6 @@ func (s StartSchemaCreationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartSchemaCreationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStatus sets the Status field's value.
-func (s *StartSchemaCreationOutput) SetStatus(v SchemaStatus) *StartSchemaCreationOutput {
-	s.Status = v
-	return s
 }
 
 // Describes a type.
@@ -3840,36 +3156,6 @@ func (s Type) String() string {
 // GoString returns the string representation
 func (s Type) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Type) SetArn(v string) *Type {
-	s.Arn = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *Type) SetDefinition(v string) *Type {
-	s.Definition = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Type) SetDescription(v string) *Type {
-	s.Description = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *Type) SetFormat(v TypeDefinitionFormat) *Type {
-	s.Format = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Type) SetName(v string) *Type {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest
@@ -3953,54 +3239,6 @@ func (s *UpdateDataSourceInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *UpdateDataSourceInput) SetApiId(v string) *UpdateDataSourceInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateDataSourceInput) SetDescription(v string) *UpdateDataSourceInput {
-	s.Description = &v
-	return s
-}
-
-// SetDynamodbConfig sets the DynamodbConfig field's value.
-func (s *UpdateDataSourceInput) SetDynamodbConfig(v *DynamodbDataSourceConfig) *UpdateDataSourceInput {
-	s.DynamodbConfig = v
-	return s
-}
-
-// SetElasticsearchConfig sets the ElasticsearchConfig field's value.
-func (s *UpdateDataSourceInput) SetElasticsearchConfig(v *ElasticsearchDataSourceConfig) *UpdateDataSourceInput {
-	s.ElasticsearchConfig = v
-	return s
-}
-
-// SetLambdaConfig sets the LambdaConfig field's value.
-func (s *UpdateDataSourceInput) SetLambdaConfig(v *LambdaDataSourceConfig) *UpdateDataSourceInput {
-	s.LambdaConfig = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateDataSourceInput) SetName(v string) *UpdateDataSourceInput {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *UpdateDataSourceInput) SetServiceRoleArn(v string) *UpdateDataSourceInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *UpdateDataSourceInput) SetType(v DataSourceType) *UpdateDataSourceInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceResponse
 type UpdateDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4024,12 +3262,6 @@ func (s UpdateDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDataSource sets the DataSource field's value.
-func (s *UpdateDataSourceOutput) SetDataSource(v *DataSource) *UpdateDataSourceOutput {
-	s.DataSource = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest
@@ -4086,30 +3318,6 @@ func (s *UpdateGraphqlApiInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *UpdateGraphqlApiInput) SetApiId(v string) *UpdateGraphqlApiInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetAuthenticationType sets the AuthenticationType field's value.
-func (s *UpdateGraphqlApiInput) SetAuthenticationType(v AuthenticationType) *UpdateGraphqlApiInput {
-	s.AuthenticationType = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateGraphqlApiInput) SetName(v string) *UpdateGraphqlApiInput {
-	s.Name = &v
-	return s
-}
-
-// SetUserPoolConfig sets the UserPoolConfig field's value.
-func (s *UpdateGraphqlApiInput) SetUserPoolConfig(v *UserPoolConfig) *UpdateGraphqlApiInput {
-	s.UserPoolConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiResponse
 type UpdateGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -4133,12 +3341,6 @@ func (s UpdateGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGraphqlApi sets the GraphqlApi field's value.
-func (s *UpdateGraphqlApiOutput) SetGraphqlApi(v *GraphqlApi) *UpdateGraphqlApiOutput {
-	s.GraphqlApi = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest
@@ -4214,42 +3416,6 @@ func (s *UpdateResolverInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *UpdateResolverInput) SetApiId(v string) *UpdateResolverInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDataSourceName sets the DataSourceName field's value.
-func (s *UpdateResolverInput) SetDataSourceName(v string) *UpdateResolverInput {
-	s.DataSourceName = &v
-	return s
-}
-
-// SetFieldName sets the FieldName field's value.
-func (s *UpdateResolverInput) SetFieldName(v string) *UpdateResolverInput {
-	s.FieldName = &v
-	return s
-}
-
-// SetRequestMappingTemplate sets the RequestMappingTemplate field's value.
-func (s *UpdateResolverInput) SetRequestMappingTemplate(v string) *UpdateResolverInput {
-	s.RequestMappingTemplate = &v
-	return s
-}
-
-// SetResponseMappingTemplate sets the ResponseMappingTemplate field's value.
-func (s *UpdateResolverInput) SetResponseMappingTemplate(v string) *UpdateResolverInput {
-	s.ResponseMappingTemplate = &v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *UpdateResolverInput) SetTypeName(v string) *UpdateResolverInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverResponse
 type UpdateResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -4273,12 +3439,6 @@ func (s UpdateResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResolver sets the Resolver field's value.
-func (s *UpdateResolverOutput) SetResolver(v *Resolver) *UpdateResolverOutput {
-	s.Resolver = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateTypeRequest
@@ -4335,30 +3495,6 @@ func (s *UpdateTypeInput) Validate() error {
 	return nil
 }
 
-// SetApiId sets the ApiId field's value.
-func (s *UpdateTypeInput) SetApiId(v string) *UpdateTypeInput {
-	s.ApiId = &v
-	return s
-}
-
-// SetDefinition sets the Definition field's value.
-func (s *UpdateTypeInput) SetDefinition(v string) *UpdateTypeInput {
-	s.Definition = &v
-	return s
-}
-
-// SetFormat sets the Format field's value.
-func (s *UpdateTypeInput) SetFormat(v TypeDefinitionFormat) *UpdateTypeInput {
-	s.Format = v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *UpdateTypeInput) SetTypeName(v string) *UpdateTypeInput {
-	s.TypeName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateTypeResponse
 type UpdateTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4382,12 +3518,6 @@ func (s UpdateTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetType sets the Type field's value.
-func (s *UpdateTypeOutput) SetType(v *Type) *UpdateTypeOutput {
-	s.Type = v
-	return s
 }
 
 // Describes an Amazon Cognito User Pool configuration.
@@ -4446,30 +3576,6 @@ func (s *UserPoolConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAppIdClientRegex sets the AppIdClientRegex field's value.
-func (s *UserPoolConfig) SetAppIdClientRegex(v string) *UserPoolConfig {
-	s.AppIdClientRegex = &v
-	return s
-}
-
-// SetAwsRegion sets the AwsRegion field's value.
-func (s *UserPoolConfig) SetAwsRegion(v string) *UserPoolConfig {
-	s.AwsRegion = &v
-	return s
-}
-
-// SetDefaultAction sets the DefaultAction field's value.
-func (s *UserPoolConfig) SetDefaultAction(v DefaultAction) *UserPoolConfig {
-	s.DefaultAction = v
-	return s
-}
-
-// SetUserPoolId sets the UserPoolId field's value.
-func (s *UserPoolConfig) SetUserPoolId(v string) *UserPoolConfig {
-	s.UserPoolId = &v
-	return s
 }
 
 type AuthenticationType string

@@ -352,12 +352,6 @@ func (s AttributeValue) GoString() string {
 	return s.String()
 }
 
-// SetValue sets the Value field's value.
-func (s *AttributeValue) SetValue(v string) *AttributeValue {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/DescribeServicesRequest
 type DescribeServicesInput struct {
 	_ struct{} `type:"structure"`
@@ -403,30 +397,6 @@ func (s *DescribeServicesInput) Validate() error {
 	return nil
 }
 
-// SetFormatVersion sets the FormatVersion field's value.
-func (s *DescribeServicesInput) SetFormatVersion(v string) *DescribeServicesInput {
-	s.FormatVersion = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeServicesInput) SetMaxResults(v int64) *DescribeServicesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeServicesInput) SetNextToken(v string) *DescribeServicesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceCode sets the ServiceCode field's value.
-func (s *DescribeServicesInput) SetServiceCode(v string) *DescribeServicesInput {
-	s.ServiceCode = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/DescribeServicesResponse
 type DescribeServicesOutput struct {
 	_ struct{} `type:"structure"`
@@ -456,24 +426,6 @@ func (s DescribeServicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeServicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFormatVersion sets the FormatVersion field's value.
-func (s *DescribeServicesOutput) SetFormatVersion(v string) *DescribeServicesOutput {
-	s.FormatVersion = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeServicesOutput) SetNextToken(v string) *DescribeServicesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServices sets the Services field's value.
-func (s *DescribeServicesOutput) SetServices(v []Service) *DescribeServicesOutput {
-	s.Services = v
-	return s
 }
 
 // The constraints that you want all returned products to match.
@@ -543,24 +495,6 @@ func (s *Filter) Validate() error {
 	return nil
 }
 
-// SetField sets the Field field's value.
-func (s *Filter) SetField(v string) *Filter {
-	s.Field = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Filter) SetType(v FilterType) *Filter {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Filter) SetValue(v string) *Filter {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetAttributeValuesRequest
 type GetAttributeValuesInput struct {
 	_ struct{} `type:"structure"`
@@ -616,30 +550,6 @@ func (s *GetAttributeValuesInput) Validate() error {
 	return nil
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *GetAttributeValuesInput) SetAttributeName(v string) *GetAttributeValuesInput {
-	s.AttributeName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetAttributeValuesInput) SetMaxResults(v int64) *GetAttributeValuesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetAttributeValuesInput) SetNextToken(v string) *GetAttributeValuesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceCode sets the ServiceCode field's value.
-func (s *GetAttributeValuesInput) SetServiceCode(v string) *GetAttributeValuesInput {
-	s.ServiceCode = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetAttributeValuesResponse
 type GetAttributeValuesOutput struct {
 	_ struct{} `type:"structure"`
@@ -667,18 +577,6 @@ func (s GetAttributeValuesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAttributeValuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributeValues sets the AttributeValues field's value.
-func (s *GetAttributeValuesOutput) SetAttributeValues(v []AttributeValue) *GetAttributeValuesOutput {
-	s.AttributeValues = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetAttributeValuesOutput) SetNextToken(v string) *GetAttributeValuesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetProductsRequest
@@ -735,36 +633,6 @@ func (s *GetProductsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *GetProductsInput) SetFilters(v []Filter) *GetProductsInput {
-	s.Filters = v
-	return s
-}
-
-// SetFormatVersion sets the FormatVersion field's value.
-func (s *GetProductsInput) SetFormatVersion(v string) *GetProductsInput {
-	s.FormatVersion = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetProductsInput) SetMaxResults(v int64) *GetProductsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetProductsInput) SetNextToken(v string) *GetProductsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetServiceCode sets the ServiceCode field's value.
-func (s *GetProductsInput) SetServiceCode(v string) *GetProductsInput {
-	s.ServiceCode = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/GetProductsResponse
 type GetProductsOutput struct {
 	_ struct{} `type:"structure"`
@@ -797,24 +665,6 @@ func (s GetProductsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFormatVersion sets the FormatVersion field's value.
-func (s *GetProductsOutput) SetFormatVersion(v string) *GetProductsOutput {
-	s.FormatVersion = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetProductsOutput) SetNextToken(v string) *GetProductsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetPriceList sets the PriceList field's value.
-func (s *GetProductsOutput) SetPriceList(v []aws.JSONValue) *GetProductsOutput {
-	s.PriceList = v
-	return s
-}
-
 // The metadata for a service, such as the service code and available attribute
 // names.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/Service
@@ -836,18 +686,6 @@ func (s Service) String() string {
 // GoString returns the string representation
 func (s Service) GoString() string {
 	return s.String()
-}
-
-// SetAttributeNames sets the AttributeNames field's value.
-func (s *Service) SetAttributeNames(v []string) *Service {
-	s.AttributeNames = v
-	return s
-}
-
-// SetServiceCode sets the ServiceCode field's value.
-func (s *Service) SetServiceCode(v string) *Service {
-	s.ServiceCode = &v
-	return s
 }
 
 type FilterType string

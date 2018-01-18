@@ -740,18 +740,6 @@ func (s *AddTagsToCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *AddTagsToCertificateInput) SetCertificateArn(v string) *AddTagsToCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsToCertificateInput) SetTags(v []Tag) *AddTagsToCertificateInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateOutput
 type AddTagsToCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -892,144 +880,6 @@ func (s CertificateDetail) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CertificateDetail) SetCertificateArn(v string) *CertificateDetail {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *CertificateDetail) SetCreatedAt(v time.Time) *CertificateDetail {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *CertificateDetail) SetDomainName(v string) *CertificateDetail {
-	s.DomainName = &v
-	return s
-}
-
-// SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *CertificateDetail) SetDomainValidationOptions(v []DomainValidation) *CertificateDetail {
-	s.DomainValidationOptions = v
-	return s
-}
-
-// SetExtendedKeyUsages sets the ExtendedKeyUsages field's value.
-func (s *CertificateDetail) SetExtendedKeyUsages(v []ExtendedKeyUsage) *CertificateDetail {
-	s.ExtendedKeyUsages = v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *CertificateDetail) SetFailureReason(v FailureReason) *CertificateDetail {
-	s.FailureReason = v
-	return s
-}
-
-// SetImportedAt sets the ImportedAt field's value.
-func (s *CertificateDetail) SetImportedAt(v time.Time) *CertificateDetail {
-	s.ImportedAt = &v
-	return s
-}
-
-// SetInUseBy sets the InUseBy field's value.
-func (s *CertificateDetail) SetInUseBy(v []string) *CertificateDetail {
-	s.InUseBy = v
-	return s
-}
-
-// SetIssuedAt sets the IssuedAt field's value.
-func (s *CertificateDetail) SetIssuedAt(v time.Time) *CertificateDetail {
-	s.IssuedAt = &v
-	return s
-}
-
-// SetIssuer sets the Issuer field's value.
-func (s *CertificateDetail) SetIssuer(v string) *CertificateDetail {
-	s.Issuer = &v
-	return s
-}
-
-// SetKeyAlgorithm sets the KeyAlgorithm field's value.
-func (s *CertificateDetail) SetKeyAlgorithm(v KeyAlgorithm) *CertificateDetail {
-	s.KeyAlgorithm = v
-	return s
-}
-
-// SetKeyUsages sets the KeyUsages field's value.
-func (s *CertificateDetail) SetKeyUsages(v []KeyUsage) *CertificateDetail {
-	s.KeyUsages = v
-	return s
-}
-
-// SetNotAfter sets the NotAfter field's value.
-func (s *CertificateDetail) SetNotAfter(v time.Time) *CertificateDetail {
-	s.NotAfter = &v
-	return s
-}
-
-// SetNotBefore sets the NotBefore field's value.
-func (s *CertificateDetail) SetNotBefore(v time.Time) *CertificateDetail {
-	s.NotBefore = &v
-	return s
-}
-
-// SetRenewalSummary sets the RenewalSummary field's value.
-func (s *CertificateDetail) SetRenewalSummary(v *RenewalSummary) *CertificateDetail {
-	s.RenewalSummary = v
-	return s
-}
-
-// SetRevocationReason sets the RevocationReason field's value.
-func (s *CertificateDetail) SetRevocationReason(v RevocationReason) *CertificateDetail {
-	s.RevocationReason = v
-	return s
-}
-
-// SetRevokedAt sets the RevokedAt field's value.
-func (s *CertificateDetail) SetRevokedAt(v time.Time) *CertificateDetail {
-	s.RevokedAt = &v
-	return s
-}
-
-// SetSerial sets the Serial field's value.
-func (s *CertificateDetail) SetSerial(v string) *CertificateDetail {
-	s.Serial = &v
-	return s
-}
-
-// SetSignatureAlgorithm sets the SignatureAlgorithm field's value.
-func (s *CertificateDetail) SetSignatureAlgorithm(v string) *CertificateDetail {
-	s.SignatureAlgorithm = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CertificateDetail) SetStatus(v CertificateStatus) *CertificateDetail {
-	s.Status = v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *CertificateDetail) SetSubject(v string) *CertificateDetail {
-	s.Subject = &v
-	return s
-}
-
-// SetSubjectAlternativeNames sets the SubjectAlternativeNames field's value.
-func (s *CertificateDetail) SetSubjectAlternativeNames(v []string) *CertificateDetail {
-	s.SubjectAlternativeNames = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CertificateDetail) SetType(v CertificateType) *CertificateDetail {
-	s.Type = v
-	return s
-}
-
 // This structure is returned in the response object of ListCertificates action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary
 type CertificateSummary struct {
@@ -1056,18 +906,6 @@ func (s CertificateSummary) String() string {
 // GoString returns the string representation
 func (s CertificateSummary) GoString() string {
 	return s.String()
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CertificateSummary) SetCertificateArn(v string) *CertificateSummary {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *CertificateSummary) SetDomainName(v string) *CertificateSummary {
-	s.DomainName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateRequest
@@ -1111,12 +949,6 @@ func (s *DeleteCertificateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *DeleteCertificateInput) SetCertificateArn(v string) *DeleteCertificateInput {
-	s.CertificateArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateOutput
@@ -1184,12 +1016,6 @@ func (s *DescribeCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *DescribeCertificateInput) SetCertificateArn(v string) *DescribeCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateResponse
 type DescribeCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1213,12 +1039,6 @@ func (s DescribeCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *DescribeCertificateOutput) SetCertificate(v *CertificateDetail) *DescribeCertificateOutput {
-	s.Certificate = v
-	return s
 }
 
 // Contains information about the validation of each domain name in the certificate.
@@ -1264,42 +1084,6 @@ func (s DomainValidation) String() string {
 // GoString returns the string representation
 func (s DomainValidation) GoString() string {
 	return s.String()
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *DomainValidation) SetDomainName(v string) *DomainValidation {
-	s.DomainName = &v
-	return s
-}
-
-// SetResourceRecord sets the ResourceRecord field's value.
-func (s *DomainValidation) SetResourceRecord(v *ResourceRecord) *DomainValidation {
-	s.ResourceRecord = v
-	return s
-}
-
-// SetValidationDomain sets the ValidationDomain field's value.
-func (s *DomainValidation) SetValidationDomain(v string) *DomainValidation {
-	s.ValidationDomain = &v
-	return s
-}
-
-// SetValidationEmails sets the ValidationEmails field's value.
-func (s *DomainValidation) SetValidationEmails(v []string) *DomainValidation {
-	s.ValidationEmails = v
-	return s
-}
-
-// SetValidationMethod sets the ValidationMethod field's value.
-func (s *DomainValidation) SetValidationMethod(v ValidationMethod) *DomainValidation {
-	s.ValidationMethod = v
-	return s
-}
-
-// SetValidationStatus sets the ValidationStatus field's value.
-func (s *DomainValidation) SetValidationStatus(v DomainStatus) *DomainValidation {
-	s.ValidationStatus = v
-	return s
 }
 
 // Contains information about the domain names that you want ACM to use to send
@@ -1368,18 +1152,6 @@ func (s *DomainValidationOption) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DomainValidationOption) SetDomainName(v string) *DomainValidationOption {
-	s.DomainName = &v
-	return s
-}
-
-// SetValidationDomain sets the ValidationDomain field's value.
-func (s *DomainValidationOption) SetValidationDomain(v string) *DomainValidationOption {
-	s.ValidationDomain = &v
-	return s
-}
-
 // The Extended Key Usage X.509 v3 extension defines one or more purposes for
 // which the public key can be used. This is in addition to or in place of the
 // basic purposes specified by the Key Usage extension.
@@ -1424,18 +1196,6 @@ func (s ExtendedKeyUsage) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *ExtendedKeyUsage) SetName(v ExtendedKeyUsageName) *ExtendedKeyUsage {
-	s.Name = v
-	return s
-}
-
-// SetOID sets the OID field's value.
-func (s *ExtendedKeyUsage) SetOID(v string) *ExtendedKeyUsage {
-	s.OID = &v
-	return s
-}
-
 // This structure can be used in the ListCertificates action to filter the output
 // of the certificate list.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters
@@ -1460,24 +1220,6 @@ func (s Filters) String() string {
 // GoString returns the string representation
 func (s Filters) GoString() string {
 	return s.String()
-}
-
-// SetExtendedKeyUsage sets the ExtendedKeyUsage field's value.
-func (s *Filters) SetExtendedKeyUsage(v []ExtendedKeyUsageName) *Filters {
-	s.ExtendedKeyUsage = v
-	return s
-}
-
-// SetKeyTypes sets the KeyTypes field's value.
-func (s *Filters) SetKeyTypes(v []KeyAlgorithm) *Filters {
-	s.KeyTypes = v
-	return s
-}
-
-// SetKeyUsage sets the KeyUsage field's value.
-func (s *Filters) SetKeyUsage(v []KeyUsageName) *Filters {
-	s.KeyUsage = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateRequest
@@ -1522,12 +1264,6 @@ func (s *GetCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *GetCertificateInput) SetCertificateArn(v string) *GetCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateResponse
 type GetCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1556,18 +1292,6 @@ func (s GetCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *GetCertificateOutput) SetCertificate(v string) *GetCertificateOutput {
-	s.Certificate = &v
-	return s
-}
-
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *GetCertificateOutput) SetCertificateChain(v string) *GetCertificateOutput {
-	s.CertificateChain = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest
@@ -1639,30 +1363,6 @@ func (s *ImportCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificate sets the Certificate field's value.
-func (s *ImportCertificateInput) SetCertificate(v []byte) *ImportCertificateInput {
-	s.Certificate = v
-	return s
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ImportCertificateInput) SetCertificateArn(v string) *ImportCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *ImportCertificateInput) SetCertificateChain(v []byte) *ImportCertificateInput {
-	s.CertificateChain = v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *ImportCertificateInput) SetPrivateKey(v []byte) *ImportCertificateInput {
-	s.PrivateKey = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateResponse
 type ImportCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1689,12 +1389,6 @@ func (s ImportCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ImportCertificateOutput) SetCertificateArn(v string) *ImportCertificateOutput {
-	s.CertificateArn = &v
-	return s
-}
-
 // The Key Usage X.509 v3 extension defines the purpose of the public key contained
 // in the certificate.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/KeyUsage
@@ -1713,12 +1407,6 @@ func (s KeyUsage) String() string {
 // GoString returns the string representation
 func (s KeyUsage) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *KeyUsage) SetName(v KeyUsageName) *KeyUsage {
-	s.Name = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesRequest
@@ -1776,30 +1464,6 @@ func (s *ListCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetCertificateStatuses sets the CertificateStatuses field's value.
-func (s *ListCertificatesInput) SetCertificateStatuses(v []CertificateStatus) *ListCertificatesInput {
-	s.CertificateStatuses = v
-	return s
-}
-
-// SetIncludes sets the Includes field's value.
-func (s *ListCertificatesInput) SetIncludes(v *Filters) *ListCertificatesInput {
-	s.Includes = v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListCertificatesInput) SetMaxItems(v int64) *ListCertificatesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCertificatesInput) SetNextToken(v string) *ListCertificatesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesResponse
 type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1827,18 +1491,6 @@ func (s ListCertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateSummaryList sets the CertificateSummaryList field's value.
-func (s *ListCertificatesOutput) SetCertificateSummaryList(v []CertificateSummary) *ListCertificatesOutput {
-	s.CertificateSummaryList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCertificatesOutput) SetNextToken(v string) *ListCertificatesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateRequest
@@ -1884,12 +1536,6 @@ func (s *ListTagsForCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ListTagsForCertificateInput) SetCertificateArn(v string) *ListTagsForCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateResponse
 type ListTagsForCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1913,12 +1559,6 @@ func (s ListTagsForCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForCertificateOutput) SetTags(v []Tag) *ListTagsForCertificateOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificateRequest
@@ -1983,18 +1623,6 @@ func (s *RemoveTagsFromCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *RemoveTagsFromCertificateInput) SetCertificateArn(v string) *RemoveTagsFromCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *RemoveTagsFromCertificateInput) SetTags(v []Tag) *RemoveTagsFromCertificateInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificateOutput
 type RemoveTagsFromCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -2048,18 +1676,6 @@ func (s RenewalSummary) String() string {
 // GoString returns the string representation
 func (s RenewalSummary) GoString() string {
 	return s.String()
-}
-
-// SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *RenewalSummary) SetDomainValidationOptions(v []DomainValidation) *RenewalSummary {
-	s.DomainValidationOptions = v
-	return s
-}
-
-// SetRenewalStatus sets the RenewalStatus field's value.
-func (s *RenewalSummary) SetRenewalStatus(v RenewalStatus) *RenewalSummary {
-	s.RenewalStatus = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest
@@ -2161,36 +1777,6 @@ func (s *RequestCertificateInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *RequestCertificateInput) SetDomainName(v string) *RequestCertificateInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *RequestCertificateInput) SetDomainValidationOptions(v []DomainValidationOption) *RequestCertificateInput {
-	s.DomainValidationOptions = v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *RequestCertificateInput) SetIdempotencyToken(v string) *RequestCertificateInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetSubjectAlternativeNames sets the SubjectAlternativeNames field's value.
-func (s *RequestCertificateInput) SetSubjectAlternativeNames(v []string) *RequestCertificateInput {
-	s.SubjectAlternativeNames = v
-	return s
-}
-
-// SetValidationMethod sets the ValidationMethod field's value.
-func (s *RequestCertificateInput) SetValidationMethod(v ValidationMethod) *RequestCertificateInput {
-	s.ValidationMethod = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateResponse
 type RequestCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -2217,12 +1803,6 @@ func (s RequestCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RequestCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *RequestCertificateOutput) SetCertificateArn(v string) *RequestCertificateOutput {
-	s.CertificateArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailRequest
@@ -2308,24 +1888,6 @@ func (s *ResendValidationEmailInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ResendValidationEmailInput) SetCertificateArn(v string) *ResendValidationEmailInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *ResendValidationEmailInput) SetDomain(v string) *ResendValidationEmailInput {
-	s.Domain = &v
-	return s
-}
-
-// SetValidationDomain sets the ValidationDomain field's value.
-func (s *ResendValidationEmailInput) SetValidationDomain(v string) *ResendValidationEmailInput {
-	s.ValidationDomain = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailOutput
 type ResendValidationEmailOutput struct {
 	_ struct{} `type:"structure"`
@@ -2382,24 +1944,6 @@ func (s ResourceRecord) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *ResourceRecord) SetName(v string) *ResourceRecord {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ResourceRecord) SetType(v RecordType) *ResourceRecord {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ResourceRecord) SetValue(v string) *ResourceRecord {
-	s.Value = &v
-	return s
-}
-
 // A key-value pair that identifies or specifies metadata about an ACM resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Tag
 type Tag struct {
@@ -2439,18 +1983,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 type CertificateStatus string
