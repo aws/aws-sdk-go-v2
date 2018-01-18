@@ -9,8 +9,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -24,11 +22,20 @@ type mockClient struct {
 }
 type MockInput struct{}
 type MockOutput struct {
-	States []*MockState
+	States []MockState
 }
 type MockState struct {
-	State *string
+	StatePtr *string
+	State    StateType
 }
+
+type StateType string
+
+const (
+	StateTypeStopping StateType = "stopping"
+	StateTypePending  StateType = "pending"
+	StateTypeRunning  StateType = "running"
+)
 
 func (c *mockClient) MockRequest(input *MockInput) (*aws.Request, *MockOutput) {
 	op := &aws.Operation{
@@ -66,21 +73,21 @@ func TestWaiterPathAll(t *testing.T) {
 	reqNum := 0
 	resps := []*MockOutput{
 		{ // Request 1
-			States: []*MockState{
-				{State: aws.String("pending")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypePending},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 2
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 3
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("running")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypeRunning},
 			},
 		},
 	}
@@ -91,7 +98,7 @@ func TestWaiterPathAll(t *testing.T) {
 	})
 	svc.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
 		if reqNum >= len(resps) {
-			assert.Fail(t, "too many polling requests made")
+			t.Fatal("too many polling requests made")
 			return
 		}
 		r.Data = resps[reqNum]
@@ -114,9 +121,15 @@ func TestWaiterPathAll(t *testing.T) {
 	}
 
 	err := w.WaitWithContext(aws.BackgroundContext())
-	assert.NoError(t, err)
-	assert.Equal(t, 3, numBuiltReq)
-	assert.Equal(t, 3, reqNum)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := 3, numBuiltReq; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := 3, reqNum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 }
 
 func TestWaiterPath(t *testing.T) {
@@ -130,21 +143,21 @@ func TestWaiterPath(t *testing.T) {
 	reqNum := 0
 	resps := []*MockOutput{
 		{ // Request 1
-			States: []*MockState{
-				{State: aws.String("pending")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypePending},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 2
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 3
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("running")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypeRunning},
 			},
 		},
 	}
@@ -155,7 +168,7 @@ func TestWaiterPath(t *testing.T) {
 	})
 	svc.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
 		if reqNum >= len(resps) {
-			assert.Fail(t, "too many polling requests made")
+			t.Fatalf("too many polling requests made")
 			return
 		}
 		r.Data = resps[reqNum]
@@ -178,9 +191,15 @@ func TestWaiterPath(t *testing.T) {
 	}
 
 	err := w.WaitWithContext(aws.BackgroundContext())
-	assert.NoError(t, err)
-	assert.Equal(t, 3, numBuiltReq)
-	assert.Equal(t, 3, reqNum)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := 3, numBuiltReq; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := 3, reqNum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 }
 
 func TestWaiterFailure(t *testing.T) {
@@ -194,21 +213,21 @@ func TestWaiterFailure(t *testing.T) {
 	reqNum := 0
 	resps := []*MockOutput{
 		{ // Request 1
-			States: []*MockState{
-				{State: aws.String("pending")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypePending},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 2
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 3
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("stopping")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypeStopping},
 			},
 		},
 	}
@@ -219,7 +238,7 @@ func TestWaiterFailure(t *testing.T) {
 	})
 	svc.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
 		if reqNum >= len(resps) {
-			assert.Fail(t, "too many polling requests made")
+			t.Fatalf("too many polling requests made")
 			return
 		}
 		r.Data = resps[reqNum]
@@ -248,11 +267,21 @@ func TestWaiterFailure(t *testing.T) {
 	}
 
 	err := w.WaitWithContext(aws.BackgroundContext()).(awserr.Error)
-	assert.Error(t, err)
-	assert.Equal(t, aws.WaiterResourceNotReadyErrorCode, err.Code())
-	assert.Equal(t, "failed waiting for successful resource state", err.Message())
-	assert.Equal(t, 3, numBuiltReq)
-	assert.Equal(t, 3, reqNum)
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := aws.WaiterResourceNotReadyErrorCode, err.Code(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "failed waiting for successful resource state", err.Message(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := 3, numBuiltReq; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := 3, reqNum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 }
 
 func TestWaiterError(t *testing.T) {
@@ -266,9 +295,9 @@ func TestWaiterError(t *testing.T) {
 	reqNum := 0
 	resps := []*MockOutput{
 		{ // Request 1
-			States: []*MockState{
-				{State: aws.String("pending")},
-				{State: aws.String("pending")},
+			States: []MockState{
+				{State: StateTypePending},
+				{State: StateTypePending},
 			},
 		},
 		{ // Request 1, error case retry
@@ -276,9 +305,9 @@ func TestWaiterError(t *testing.T) {
 		{ // Request 2, error case failure
 		},
 		{ // Request 3
-			States: []*MockState{
-				{State: aws.String("running")},
-				{State: aws.String("running")},
+			States: []MockState{
+				{State: StateTypeRunning},
+				{State: StateTypeRunning},
 			},
 		},
 	}
@@ -303,7 +332,7 @@ func TestWaiterError(t *testing.T) {
 	})
 	svc.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
 		if reqNum >= len(resps) {
-			assert.Fail(t, "too many polling requests made")
+			t.Fatalf("too many polling requests made")
 			return
 		}
 		r.Data = resps[reqNum]
@@ -401,8 +430,12 @@ func TestWaiterStatus(t *testing.T) {
 	}
 
 	err := w.WaitWithContext(aws.BackgroundContext())
-	assert.NoError(t, err)
-	assert.Equal(t, 3, reqNum)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := 3, reqNum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 }
 
 func TestWaiter_ApplyOptions(t *testing.T) {
