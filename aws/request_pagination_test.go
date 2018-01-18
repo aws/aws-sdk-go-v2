@@ -559,7 +559,7 @@ func TestPagination_Standalone(t *testing.T) {
 					// Setup handlers for testing
 					r.Handlers.Clear()
 					r.Handlers.Build.PushBack(func(req *aws.Request) {
-						if e, a := len(c), i+1; a > e {
+						if e, a := len(c), i; a >= e {
 							t.Fatalf("expect no more than %d requests, got %d", e, a)
 						}
 						in := req.Params.(*testPageInput)
