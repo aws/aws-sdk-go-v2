@@ -194,9 +194,9 @@ func (c EnvConfig) GetCredentialsEndpoint() (string, error) {
 	return c.CredentialsEndpoint, nil
 }
 
-// GetContainerCredentailsEndpointPath returns the container credentails endpoint
+// GetContainerCredentialsEndpointPath returns the container credentails endpoint
 // path string if set.
-func (c EnvConfig) GetContainerCredentailsEndpointPath() (string, error) {
+func (c EnvConfig) GetContainerCredentialsEndpointPath() (string, error) {
 	return c.ContainerCredentialsEndpointPath, nil
 }
 

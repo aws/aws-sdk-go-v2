@@ -9,11 +9,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
+var _ SharedConfigProfileProvider = (*EnvConfig)(nil)
+var _ SharedConfigFilesProvider = (*EnvConfig)(nil)
 var _ CustomCABundleProvider = (*EnvConfig)(nil)
 var _ RegionProvider = (*EnvConfig)(nil)
 var _ CredentialsValueProvider = (*EnvConfig)(nil)
-var _ SharedConfigProfileProvider = (*EnvConfig)(nil)
-var _ SharedConfigFilesProvider = (*EnvConfig)(nil)
+var _ CredentialsEndpointProvider = (*EnvConfig)(nil)
+var _ ContainerCredentialsEndpointPathProvider = (*EnvConfig)(nil)
 
 func TestNewEnvConfig_Creds(t *testing.T) {
 	env := awstesting.StashEnv()
