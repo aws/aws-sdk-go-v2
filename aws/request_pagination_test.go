@@ -513,152 +513,93 @@ func TestPaginationWithContextNilInput(t *testing.T) {
 
 func TestPagination_Standalone(t *testing.T) {
 	type testPageInput struct {
-		NextToken string
-	}
-	type testPageOutput struct {
-		Value     string
-		NextToken *string
-	}
-
-	expect := []struct {
-		Value, PrevToken, NextToken string
-	}{
-		{"FirstValue", "InitalToken", "FirstToken"},
-		{"SecondValue", "FirstToken", "SecondToken"},
-		{"ThirdValue", "SecondToken", ""},
-	}
-	input := testPageInput{
-		NextToken: expect[0].PrevToken,
-	}
-
-	c := awstesting.NewClient(unit.Config())
-	i := 0
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			r := c.NewRequest(
-				&aws.Operation{
-					Name: "Operation",
-					Paginator: &aws.Paginator{
-						InputTokens:  []string{"NextToken"},
-						OutputTokens: []string{"NextToken"},
-					},
-				},
-				&input, &testPageOutput{},
-			)
-			// Setup handlers for testing
-			r.Handlers.Clear()
-			r.Handlers.Build.PushBack(func(req *aws.Request) {
-				in := req.Params.(*testPageInput)
-				if e, a := expect[i].PrevToken, in.NextToken; e != a {
-					t.Errorf("%d, expect NextToken input %q, got %q", i, e, a)
-				}
-			})
-			r.Handlers.Unmarshal.PushBack(func(req *aws.Request) {
-				out := &testPageOutput{
-					Value: expect[i].Value,
-				}
-				if len(expect[i].NextToken) > 0 {
-					out.NextToken = aws.String(expect[i].NextToken)
-				}
-				req.Data = out
-			})
-			return r, nil
-		},
-	}
-
-	for p.Next() {
-		data := p.Page().(*testPageOutput)
-
-		if e, a := expect[i].Value, data.Value; e != a {
-			t.Errorf("%d, expect Value to be %q, got %q", i, e, a)
-		}
-		if e, a := expect[i].NextToken, aws.StringValue(data.NextToken); e != a {
-			t.Errorf("%d, expect NextToken to be %q, got %q", i, e, a)
-		}
-
-		i++
-	}
-	if e, a := len(expect), i; e != a {
-		t.Errorf("expected to process %d pages, did %d", e, a)
-	}
-	if err := p.Err(); err != nil {
-		t.Fatalf("%d, expected no error, got %v", i, err)
-	}
-}
-
-func TestPagination_Standalone_Pointers(t *testing.T) {
-	type testPageInput struct {
 		NextToken *string
 	}
 	type testPageOutput struct {
 		Value     *string
 		NextToken *string
 	}
-
-	expect := []struct {
+	type testCase struct {
 		Value, PrevToken, NextToken *string
-	}{
-		{aws.String("FirstValue"), aws.String("InitalToken"), aws.String("FirstToken")},
-		{aws.String("SecondValue"), aws.String("FirstToken"), aws.String("SecondToken")},
-		{aws.String("ThirdValue"), aws.String("SecondToken"), nil},
-	}
-	input := testPageInput{
-		NextToken: expect[0].PrevToken,
 	}
 
-	c := awstesting.NewClient(unit.Config())
-	i := 0
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			r := c.NewRequest(
-				&aws.Operation{
-					Name: "Operation",
-					Paginator: &aws.Paginator{
-						InputTokens:  []string{"NextToken"},
-						OutputTokens: []string{"NextToken"},
-					},
-				},
-				&input, &testPageOutput{},
-			)
-			// Setup handlers for testing
-			r.Handlers.Clear()
-			r.Handlers.Build.PushBack(func(req *aws.Request) {
-				in := req.Params.(*testPageInput)
-				if e, a := aws.StringValue(expect[i].PrevToken), aws.StringValue(in.NextToken); e != a {
-					t.Errorf("%d, expect NextToken input %q, got %q", i, e, a)
-				}
-			})
-			r.Handlers.Unmarshal.PushBack(func(req *aws.Request) {
-				out := &testPageOutput{
-					Value: expect[i].Value,
-				}
-				if expect[i].NextToken != nil {
-					next := *expect[i].NextToken
-					out.NextToken = aws.String(next)
-				}
-				req.Data = out
-			})
-			return r, nil
+	cases := map[string][]testCase{
+		"nil NextToken": {
+			testCase{aws.String("FirstValue"), aws.String("InitalToken"), aws.String("FirstToken")},
+			testCase{aws.String("SecondValue"), aws.String("FirstToken"), aws.String("SecondToken")},
+			testCase{aws.String("ThirdValue"), aws.String("SecondToken"), nil},
+		},
+		"zero NextToken": {
+			testCase{aws.String("FirstValue"), aws.String("InitalToken"), aws.String("FirstToken")},
+			testCase{aws.String("SecondValue"), aws.String("FirstToken"), aws.String("SecondToken")},
+			testCase{aws.String("ThirdValue"), aws.String("SecondToken"), aws.String("")},
 		},
 	}
 
-	for p.Next() {
-		data := p.Page().(*testPageOutput)
+	for cName, c := range cases {
+		t.Run(cName, func(t *testing.T) {
+			input := testPageInput{
+				NextToken: c[0].PrevToken,
+			}
 
-		if e, a := expect[i].Value, data.Value; e != a {
-			t.Errorf("%d, expect Value to be %q, got %q", i, e, a)
-		}
-		if e, a := aws.StringValue(expect[i].NextToken), aws.StringValue(data.NextToken); e != a {
-			t.Errorf("%d, expect NextToken to be %q, got %q", i, e, a)
-		}
+			svc := awstesting.NewClient(unit.Config())
+			i := 0
+			p := aws.Pagination{
+				NewRequest: func() (*aws.Request, error) {
+					r := svc.NewRequest(
+						&aws.Operation{
+							Name: "Operation",
+							Paginator: &aws.Paginator{
+								InputTokens:  []string{"NextToken"},
+								OutputTokens: []string{"NextToken"},
+							},
+						},
+						&input, &testPageOutput{},
+					)
+					// Setup handlers for testing
+					r.Handlers.Clear()
+					r.Handlers.Build.PushBack(func(req *aws.Request) {
+						if e, a := len(c), i; a >= e {
+							t.Fatalf("expect no more than %d requests, got %d", e, a)
+						}
+						in := req.Params.(*testPageInput)
+						if e, a := aws.StringValue(c[i].PrevToken), aws.StringValue(in.NextToken); e != a {
+							t.Errorf("%d, expect NextToken input %q, got %q", i, e, a)
+						}
+					})
+					r.Handlers.Unmarshal.PushBack(func(req *aws.Request) {
+						out := &testPageOutput{
+							Value: c[i].Value,
+						}
+						if c[i].NextToken != nil {
+							next := *c[i].NextToken
+							out.NextToken = aws.String(next)
+						}
+						req.Data = out
+					})
+					return r, nil
+				},
+			}
 
-		i++
-	}
-	if e, a := len(expect), i; e != a {
-		t.Errorf("expected to process %d pages, did %d", e, a)
-	}
-	if err := p.Err(); err != nil {
-		t.Fatalf("%d, expected no error, got %v", i, err)
+			for p.Next() {
+				data := p.Page().(*testPageOutput)
+
+				if e, a := aws.StringValue(c[i].Value), aws.StringValue(data.Value); e != a {
+					t.Errorf("%d, expect Value to be %q, got %q", i, e, a)
+				}
+				if e, a := aws.StringValue(c[i].NextToken), aws.StringValue(data.NextToken); e != a {
+					t.Errorf("%d, expect NextToken to be %q, got %q", i, e, a)
+				}
+
+				i++
+			}
+			if e, a := len(c), i; e != a {
+				t.Errorf("expected to process %d pages, did %d", e, a)
+			}
+			if err := p.Err(); err != nil {
+				t.Fatalf("%d, expected no error, got %v", i, err)
+			}
+		})
 	}
 }
 
