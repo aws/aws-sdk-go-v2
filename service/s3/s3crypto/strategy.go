@@ -8,14 +8,13 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 // SaveStrategy is how the data's metadata wants to be saved
 type SaveStrategy interface {
-	Save(Envelope, *request.Request) error
+	Save(Envelope, *aws.Request) error
 }
 
 // S3SaveStrategy will save the metadata to a separate instruction file in S3
@@ -25,7 +24,7 @@ type S3SaveStrategy struct {
 }
 
 // Save will save the envelope contents to s3.
-func (strat S3SaveStrategy) Save(env Envelope, req *request.Request) error {
+func (strat S3SaveStrategy) Save(env Envelope, req *aws.Request) error {
 	input := req.Params.(*s3.PutObjectInput)
 	b, err := json.Marshal(env)
 	if err != nil {
@@ -43,8 +42,7 @@ func (strat S3SaveStrategy) Save(env Envelope, req *request.Request) error {
 		instInput.Key = aws.String(*input.Key + strat.InstructionFileSuffix)
 	}
 
-	putReq := strat.Client.PutObjectRequest(&instInput)
-	_, err = putReq.Send()
+	_, err = strat.Client.PutObjectRequest(&instInput).Send()
 	return err
 }
 
@@ -53,7 +51,7 @@ func (strat S3SaveStrategy) Save(env Envelope, req *request.Request) error {
 type HeaderV2SaveStrategy struct{}
 
 // Save will save the envelope to the request's header.
-func (strat HeaderV2SaveStrategy) Save(env Envelope, req *request.Request) error {
+func (strat HeaderV2SaveStrategy) Save(env Envelope, req *aws.Request) error {
 	input := req.Params.(*s3.PutObjectInput)
 	if input.Metadata == nil {
 		input.Metadata = map[string]string{}
@@ -64,15 +62,18 @@ func (strat HeaderV2SaveStrategy) Save(env Envelope, req *request.Request) error
 	input.Metadata[http.CanonicalHeaderKey(matDescHeader)] = env.MatDesc
 	input.Metadata[http.CanonicalHeaderKey(wrapAlgorithmHeader)] = env.WrapAlg
 	input.Metadata[http.CanonicalHeaderKey(cekAlgorithmHeader)] = env.CEKAlg
-	input.Metadata[http.CanonicalHeaderKey(tagLengthHeader)] = env.TagLen
 	input.Metadata[http.CanonicalHeaderKey(unencryptedMD5Header)] = env.UnencryptedMD5
 	input.Metadata[http.CanonicalHeaderKey(unencryptedContentLengthHeader)] = env.UnencryptedContentLen
+
+	if len(env.TagLen) > 0 {
+		input.Metadata[http.CanonicalHeaderKey(tagLengthHeader)] = env.TagLen
+	}
 	return nil
 }
 
 // LoadStrategy ...
 type LoadStrategy interface {
-	Load(*request.Request) (Envelope, error)
+	Load(*aws.Request) (Envelope, error)
 }
 
 // S3LoadStrategy will load the instruction file from s3
@@ -82,23 +83,22 @@ type S3LoadStrategy struct {
 }
 
 // Load from a given instruction file suffix
-func (load S3LoadStrategy) Load(req *request.Request) (Envelope, error) {
+func (load S3LoadStrategy) Load(req *aws.Request) (Envelope, error) {
 	env := Envelope{}
 	if load.InstructionFileSuffix == "" {
 		load.InstructionFileSuffix = DefaultInstructionKeySuffix
 	}
 
 	input := req.Params.(*s3.GetObjectInput)
-	getReq := load.Client.GetObjectRequest(&s3.GetObjectInput{
+	out, err := load.Client.GetObjectRequest(&s3.GetObjectInput{
 		Key:    aws.String(strings.Join([]string{*input.Key, load.InstructionFileSuffix}, "")),
 		Bucket: input.Bucket,
-	})
-	resp, err := getReq.Send()
+	}).Send()
 	if err != nil {
 		return env, err
 	}
 
-	b, err := ioutil.ReadAll(resp.Body)
+	b, err := ioutil.ReadAll(out.Body)
 	if err != nil {
 		return env, err
 	}
@@ -110,7 +110,7 @@ func (load S3LoadStrategy) Load(req *request.Request) (Envelope, error) {
 type HeaderV2LoadStrategy struct{}
 
 // Load from a given object's header
-func (load HeaderV2LoadStrategy) Load(req *request.Request) (Envelope, error) {
+func (load HeaderV2LoadStrategy) Load(req *aws.Request) (Envelope, error) {
 	env := Envelope{}
 	env.CipherKey = req.HTTPResponse.Header.Get(strings.Join([]string{metaHeader, keyV2Header}, "-"))
 	env.IV = req.HTTPResponse.Header.Get(strings.Join([]string{metaHeader, ivHeader}, "-"))
@@ -128,7 +128,7 @@ type defaultV2LoadStrategy struct {
 	suffix string
 }
 
-func (load defaultV2LoadStrategy) Load(req *request.Request) (Envelope, error) {
+func (load defaultV2LoadStrategy) Load(req *aws.Request) (Envelope, error) {
 	if value := req.HTTPResponse.Header.Get(strings.Join([]string{metaHeader, keyV2Header}, "-")); value != "" {
 		strat := HeaderV2LoadStrategy{}
 		return strat.Load(req)
