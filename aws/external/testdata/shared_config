@@ -5,6 +5,11 @@ s3 =
 
 region = default_region
 
+[profile exampleProfile]
+region = us-west-2
+aws_access_key_id = AKID
+aws_secret_access_key = SECRET
+
 [profile alt_profile_name]
 region = alt_profile_name_region
 
